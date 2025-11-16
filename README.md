@@ -1,25 +1,25 @@
-# @tenerife/ui
+# @tenerife.music/ui
 
 **Tenerife.Music UI Component Library** - A hybrid design system built on shadcn/ui primitives with Tenerife branding.
 
-[![npm version](https://img.shields.io/npm/v/@tenerife/ui)](https://www.npmjs.com/package/@tenerife/ui)
+[![npm version](https://img.shields.io/npm/v/@tenerife.music/ui)](https://www.npmjs.com/package/@tenerife.music/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📦 Installation
 
 ```bash
-npm install @tenerife/ui
+npm install @tenerife.music/ui
 # or
-pnpm add @tenerife/ui
+pnpm add @tenerife.music/ui
 # or
-yarn add @tenerife/ui
+yarn add @tenerife.music/ui
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { Button, Card, EventCard } from '@tenerife/ui';
-import '@tenerife/ui/styles'; // Import styles
+import { Button, Card, EventCard } from '@tenerife.music/ui';
+import '@tenerife.music/ui/styles'; // Import styles
 
 function App() {
   return (
@@ -81,7 +81,7 @@ document.documentElement.setAttribute('data-mode', 'day'); // or 'night'
 ### Basic Components
 
 ```tsx
-import { Button, Input, Card } from '@tenerife/ui';
+import { Button, Input, Card } from '@tenerife.music/ui';
 
 <Button variant="default">Click me</Button>
 <Input placeholder="Enter text..." />
@@ -91,7 +91,7 @@ import { Button, Input, Card } from '@tenerife/ui';
 ### Complex Components
 
 ```tsx
-import { EventCard, VenueCard, SearchBar } from '@tenerife/ui';
+import { EventCard, VenueCard, SearchBar } from '@tenerife.music/ui';
 
 <EventCard event={eventData} />
 <VenueCard venue={venueData} />
@@ -101,7 +101,7 @@ import { EventCard, VenueCard, SearchBar } from '@tenerife/ui';
 ### Forms
 
 ```tsx
-import { FormInput, FormSelect } from '@tenerife/ui';
+import { FormInput, FormSelect } from '@tenerife.music/ui';
 import { useForm } from 'react-hook-form';
 
 const { register } = useForm();
@@ -187,7 +187,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Version:** 1.0.0  
+**Version:** 0.0.1  
 **Last Updated:** 2025-01-29
 
 

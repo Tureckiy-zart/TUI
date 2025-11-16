@@ -103,7 +103,7 @@ git status
 git add .
 
 # Create initial commit
-git commit -m "feat: initial release of @tenerife/ui v1.0.0
+git commit -m "feat: initial release of @tenerife.music/ui v0.0.1
 
 - 74 React components extracted from Tenerife.Music monorepo
 - Full TypeScript support
@@ -160,10 +160,10 @@ pnpm lint
 
 ```bash
 # Tag the initial release
-git tag -a v1.0.0 -m "Release version 1.0.0"
+git tag -a v0.0.1 -m "Release version 0.0.1"
 
 # Push tags
-git push origin v1.0.0
+git push origin v0.0.1
 ```
 
 ## Verification Checklist

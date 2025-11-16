@@ -1,6 +1,6 @@
 # Publishing Guide
 
-This guide explains how to publish the `@tenerife/ui` package to npm.
+This guide explains how to publish the `@tenerife.music/ui` package to npm.
 
 ## Prerequisites
 
@@ -65,8 +65,8 @@ npm publish
 ### 5. Verify Publication
 
 Check that your package is available on npm:
-- Visit: https://www.npmjs.com/package/@tenerife/ui
-- Or check via CLI: `npm view @tenerife/ui`
+- Visit: https://www.npmjs.com/package/@tenerife.music/ui
+- Or check via CLI: `npm view @tenerife.music/ui`
 
 ## Package Configuration
 
@@ -79,9 +79,9 @@ The package is configured with:
   - Styles: `dist/styles.css` (CSS file)
 
 - **Exports**:
-  - `@tenerife/ui` - Main package export
-  - `@tenerife/ui/styles` - CSS styles
-  - `@tenerife/ui/tailwind.config` - Tailwind configuration
+  - `@tenerife.music/ui` - Main package export
+  - `@tenerife.music/ui/styles` - CSS styles
+  - `@tenerife.music/ui/tailwind.config` - Tailwind configuration
 
 - **Peer Dependencies**: React 18+ or 19+
 
@@ -92,14 +92,14 @@ The package is configured with:
 Users can install the package with:
 
 ```bash
-npm install @tenerife/ui
+npm install @tenerife.music/ui
 ```
 
 Then import components:
 
 ```tsx
-import { Button, Card } from '@tenerife/ui';
-import '@tenerife/ui/styles';
+import { Button, Card } from '@tenerife.music/ui';
+import '@tenerife.music/ui/styles';
 ```
 
 ## Troubleshooting

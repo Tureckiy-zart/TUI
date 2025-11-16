@@ -1,6 +1,6 @@
 # ✅ Ready for Migration!
 
-This folder contains all the files needed for the standalone `@tenerife/ui` repository.
+This folder contains all the files needed for the standalone `@tenerife.music/ui` repository.
 
 ## 📦 What's Included
 
@@ -49,7 +49,7 @@ pnpm lint
 
 ```bash
 git add .
-git commit -m "feat: initial release of @tenerife/ui v1.0.0
+git commit -m "feat: initial release of @tenerife.music/ui v0.0.1
 
 - 74 React components extracted from Tenerife.Music monorepo
 - Full TypeScript support
@@ -64,8 +64,8 @@ git push -u origin main
 5. **Create release tag:**
 
 ```bash
-git tag -a v1.0.0 -m "Release version 1.0.0"
-git push origin v1.0.0
+git tag -a v0.0.1 -m "Release version 0.0.1"
+git push origin v0.0.1
 ```
 
 ## ✅ Verification
@@ -84,7 +84,7 @@ After migration, verify everything works:
 
 ## 📝 Notes
 
-- The package is configured for version `1.0.0`
+- The package is configured for version `0.0.1`
 - All dependencies are listed in `package.json`
 - `.gitignore` is configured to exclude build artifacts
 - Storybook is ready to use (20 stories included)
