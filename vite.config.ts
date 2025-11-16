@@ -1,0 +1,76 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+      exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts']
+    })
+  ],
+  esbuild: {
+    banner: '"use client";',
+    sourcemap: false // Disable esbuild sourcemaps to avoid resolution warnings
+  },
+  build: {
+    sourcemap: false, // Disable sourcemaps to avoid resolution warnings
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'TenerifeUICore',
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`
+    },
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        '@radix-ui/react-dropdown-menu',
+        '@radix-ui/react-dialog',
+        '@radix-ui/react-navigation-menu',
+        '@radix-ui/react-toast',
+        '@radix-ui/react-label',
+        '@radix-ui/react-slot',
+        '@radix-ui/react-tooltip',
+        '@radix-ui/react-popover',
+        '@radix-ui/react-select',
+        '@radix-ui/react-checkbox',
+        '@radix-ui/react-radio-group',
+        '@radix-ui/react-switch',
+        '@radix-ui/react-tabs',
+        '@radix-ui/react-accordion',
+        '@radix-ui/react-collapsible',
+        '@radix-ui/react-separator',
+        '@radix-ui/react-progress',
+        '@radix-ui/react-avatar',
+        '@radix-ui/react-badge',
+        '@radix-ui/react-calendar',
+        'class-variance-authority',
+        'clsx',
+        'lucide-react',
+        'tailwind-merge',
+        'zustand',
+        'framer-motion',
+        'react-hook-form',
+        '@hookform/resolvers',
+        'zod'
+      ],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'react/jsx-runtime'
+        }
+      }
+    },
+    cssCodeSplit: false
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
+    }
+  }
+});

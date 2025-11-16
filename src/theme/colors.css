@@ -1,0 +1,70 @@
+:root {
+  /* Light theme (day) - Tenerife branding */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+  
+  /* Tenerife Music specific colors (day mode) */
+  --tm-primary: 173 100% 37%; /* #00bfa6 - Tenerife brand primary */
+  --tm-primary-foreground: 0 0% 100%;
+  --tm-secondary: 0 0% 95.7%; /* #f4f4f5 */
+  --tm-secondary-foreground: 0 0% 6.7%; /* #111827 */
+  --tm-accent: 0 0% 89.8%; /* #e5e7eb */
+  --tm-accent-foreground: 0 0% 6.7%; /* #111827 */
+}
+
+html[data-mode="day"],
+[data-theme="day"] {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  --tm-primary: 173 100% 37%; /* #00bfa6 */
+}
+
+html[data-mode="night"],
+[data-theme="night"] {
+  /* Dark theme (night) - Tenerife branding */
+  --background: 240 10% 3.9%; /* #0b0b10 */
+  --foreground: 0 0% 89.8%; /* #e5e7eb */
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 89.8%;
+  --popover: 240 10% 5.1%; /* #0e1016 */
+  --popover-foreground: 0 0% 89.8%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+  
+  /* Tenerife Music specific colors (night mode) */
+  --tm-primary: 259 70% 67%; /* #7b5eff - night accent */
+  --tm-primary-foreground: 0 0% 100%;
+  --tm-secondary: 240 3.7% 15.9%;
+  --tm-secondary-foreground: 0 0% 98%;
+  --tm-accent: 240 3.7% 15.9%;
+  --tm-accent-foreground: 0 0% 98%;
+}
