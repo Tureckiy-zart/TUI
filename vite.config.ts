@@ -12,16 +12,28 @@ export default defineConfig({
     })
   ],
   esbuild: {
-    banner: '"use client";',
+    banner: {
+      js: '"use client";',
+    },
     sourcemap: false // Disable esbuild sourcemaps to avoid resolution warnings
   },
   build: {
     sourcemap: false, // Disable sourcemaps to avoid resolution warnings
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'TenerifeUICore',
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        preset: resolve(__dirname, 'src/preset.ts'),
+        'tokens/index': resolve(__dirname, 'src/tokens/index.ts'),
+        'theme/index': resolve(__dirname, 'src/theme/index.ts'),
+      },
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`
+      fileName: (format, entryName) => {
+        const ext = format === 'es' ? 'mjs' : 'cjs';
+        if (entryName === 'index') {
+          return `index.${ext}`;
+        }
+        return `${entryName}.${ext}`;
+      }
     },
     rollupOptions: {
       external: [
@@ -56,7 +68,8 @@ export default defineConfig({
         'framer-motion',
         'react-hook-form',
         '@hookform/resolvers',
-        'zod'
+        'zod',
+        'tailwindcss'
       ],
       output: {
         globals: {

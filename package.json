@@ -118,6 +118,20 @@
       "require": "./dist/index.cjs"
     },
     "./styles": "./dist/styles.css",
-    "./tailwind.config": "./tailwind.config.ts"
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "import": "./dist/preset.mjs",
+      "require": "./dist/preset.cjs"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens/index.mjs",
+      "require": "./dist/tokens/index.cjs"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.mjs",
+      "require": "./dist/theme/index.cjs"
+    }
   }
 }
