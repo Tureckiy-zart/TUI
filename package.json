@@ -34,7 +34,7 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "clean": "rimraf dist",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit --project tsconfig.vite.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "test": "jest",
     "test:watch": "jest --watch",

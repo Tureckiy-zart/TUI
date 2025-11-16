@@ -19,11 +19,11 @@
     },
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src"
   },
   "include": [
-    "src/**/*",
-    "vite.config.ts"
+    "src/**/*"
   ],
   "exclude": [
     "dist",
