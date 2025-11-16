@@ -7,19 +7,17 @@ import { borderRadius } from './tokens/radius';
  * This preset can be imported and used in your application's tailwind.config.ts:
  * 
  * @example
- * ```ts
  * import type { Config } from "tailwindcss";
  * import preset from "@tenerife.music/ui/preset";
  * 
  * const config: Config = {
- *   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+ *   content: ["./src/**\/*.{js,ts,jsx,tsx}"],
  *   presets: [preset],
  * };
  * 
  * export default config;
- * ```
  */
-const preset: Config = {
+const preset: Partial<Config> = {
   darkMode: ["class", '[data-mode="night"]'],
   theme: {
     extend: {
@@ -58,7 +56,12 @@ const preset: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
-        ...borderRadius,
+        none: borderRadius.none,
+        DEFAULT: borderRadius.DEFAULT,
+        xl: borderRadius.xl,
+        '2xl': borderRadius['2xl'],
+        '3xl': borderRadius['3xl'],
+        full: borderRadius.full,
       },
       keyframes: {
         'accordion-down': {
