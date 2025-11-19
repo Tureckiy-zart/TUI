@@ -64,6 +64,9 @@ export * from './components/feedback/Alert';
 export * from './components/feedback/Progress';
 export * from './components/feedback/Skeleton';
 
+// Image components
+export * from './components/image/Image';
+
 // Navigation components
 export * from './components/navigation/Breadcrumbs';
 export * from './components/navigation/Pagination';
