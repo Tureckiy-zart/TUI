@@ -21,20 +21,31 @@ export interface EventCardEvent {
 interface EventCardProps {
   event?: EventCardEvent;
   className?: string;
-  featured?: boolean;
-  showImage?: boolean;
+  featured: boolean;
+  showImage: boolean;
   getTicketsLabel: string;
+  trendingBadgeText: string;
 }
 
 export const EventCard: React.FC<EventCardProps> = ({
   event,
   className,
-  featured = false,
-  showImage = true,
-  getTicketsLabel
+  featured,
+  showImage,
+  getTicketsLabel,
+  trendingBadgeText
 }) => {
+  if (typeof featured !== 'boolean') {
+    throw new Error('EventCard: "featured" prop is required and must be a boolean');
+  }
+  if (typeof showImage !== 'boolean') {
+    throw new Error('EventCard: "showImage" prop is required and must be a boolean');
+  }
   if (!getTicketsLabel || getTicketsLabel.trim() === '') {
     throw new Error('EventCard: "getTicketsLabel" prop is required and cannot be empty');
+  }
+  if (!trendingBadgeText || trendingBadgeText.trim() === '') {
+    throw new Error('EventCard: "trendingBadgeText" prop is required and cannot be empty');
   }
 
   // Safe string extraction - throw error if required fields are missing
@@ -85,7 +96,7 @@ export const EventCard: React.FC<EventCardProps> = ({
       {featured && (
         <div className="absolute top-3 right-3 z-10">
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-lg">
-            🔥 Trending
+            {trendingBadgeText}
           </span>
         </div>
       )}

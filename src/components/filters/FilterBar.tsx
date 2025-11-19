@@ -27,6 +27,9 @@ export interface FilterBarProps {
   allCategoriesLabel: string;
   dateRangeLabel: string;
   anyDateLabel: string;
+  dateSelectDateRangeLabel: string;
+  dateClearLabel: string;
+  dateCloseLabel: string;
   sortByLabel: string;
   sortAscLabel: string;
   sortDescLabel: string;
@@ -37,6 +40,8 @@ export interface FilterBarProps {
   priceMaxLabel: string;
   priceAnyLabel: string;
   priceClearLabel: string;
+  priceMinAriaLabel: string;
+  priceMaxAriaLabel: string;
   onFiltersChange?: (filters: any) => void;
 }
 
@@ -56,6 +61,9 @@ export function FilterBar({
   allCategoriesLabel,
   dateRangeLabel,
   anyDateLabel,
+  dateSelectDateRangeLabel,
+  dateClearLabel,
+  dateCloseLabel,
   sortByLabel,
   sortAscLabel,
   sortDescLabel,
@@ -66,6 +74,8 @@ export function FilterBar({
   priceMaxLabel,
   priceAnyLabel,
   priceClearLabel,
+  priceMinAriaLabel,
+  priceMaxAriaLabel,
   onFiltersChange,
 }: FilterBarProps) {
   if (!sortOptions || sortOptions.length === 0) {
@@ -91,6 +101,15 @@ export function FilterBar({
   }
   if (!anyDateLabel || anyDateLabel.trim() === '') {
     throw new Error('FilterBar: "anyDateLabel" prop is required and cannot be empty');
+  }
+  if (!dateSelectDateRangeLabel || dateSelectDateRangeLabel.trim() === '') {
+    throw new Error('FilterBar: "dateSelectDateRangeLabel" prop is required and cannot be empty');
+  }
+  if (!dateClearLabel || dateClearLabel.trim() === '') {
+    throw new Error('FilterBar: "dateClearLabel" prop is required and cannot be empty');
+  }
+  if (!dateCloseLabel || dateCloseLabel.trim() === '') {
+    throw new Error('FilterBar: "dateCloseLabel" prop is required and cannot be empty');
   }
   if (!sortByLabel || sortByLabel.trim() === '') {
     throw new Error('FilterBar: "sortByLabel" prop is required and cannot be empty');
@@ -121,6 +140,12 @@ export function FilterBar({
   }
   if (!priceClearLabel || priceClearLabel.trim() === '') {
     throw new Error('FilterBar: "priceClearLabel" prop is required and cannot be empty');
+  }
+  if (!priceMinAriaLabel || priceMinAriaLabel.trim() === '') {
+    throw new Error('FilterBar: "priceMinAriaLabel" prop is required and cannot be empty');
+  }
+  if (!priceMaxAriaLabel || priceMaxAriaLabel.trim() === '') {
+    throw new Error('FilterBar: "priceMaxAriaLabel" prop is required and cannot be empty');
   }
   const {
     search,
@@ -217,6 +242,9 @@ export function FilterBar({
               }}
               onChange={handleDateRangeChange}
               placeholder={anyDateLabel}
+              selectDateRangeLabel={dateSelectDateRangeLabel}
+              clearLabel={dateClearLabel}
+              closeLabel={dateCloseLabel}
             />
           </div>
         )}
@@ -234,6 +262,8 @@ export function FilterBar({
             maxLabel={priceMaxLabel}
             anyPriceLabel={priceAnyLabel}
             clearLabel={priceClearLabel}
+            minAriaLabel={priceMinAriaLabel}
+            maxAriaLabel={priceMaxAriaLabel}
           />
         )}
 

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { TooltipWrapper, Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './Tooltip';
-import { Button } from '../../primitives/Button';
-import { Badge } from '../../primitives/Badge';
-import { Input } from '../../primitives/Input';
-import { Label } from '../../primitives/Label';
+import { Button } from '../primitives/Button';
+import { Badge } from '../primitives/Badge';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 import { Info, HelpCircle, AlertCircle } from 'lucide-react';
 
 const meta: Meta<typeof TooltipWrapper> = {
