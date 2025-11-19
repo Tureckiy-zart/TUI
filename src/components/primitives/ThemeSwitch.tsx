@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
 import type { Mode } from "@/tokens/colors";
 import { applyDocumentMode } from "../../theme/applyMode";
@@ -133,17 +132,32 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     });
   };
 
+  const sizeClasses = {
+    sm: "h-8 w-8",
+    md: "h-10 w-10",
+    lg: "h-12 w-12",
+  };
+
+  const variantClasses = {
+    default: "bg-primary text-primary-foreground hover:bg-primary/90",
+    outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+    ghost: "hover:bg-accent hover:text-accent-foreground",
+  };
+
   return (
-    <Button
+    <button
       onClick={toggleMode}
-      variant={variant}
-      size={size === "sm" ? "sm" : size === "lg" ? "lg" : "default"}
-      className={cn(size === "sm" ? "h-8 w-8" : size === "lg" ? "h-12 w-12" : "h-10 w-10", className)}
+      className={cn(
+        "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        sizeClasses[size],
+        variantClasses[variant],
+        className,
+      )}
       aria-label={`Switch to ${mode === "night" ? "day" : "night"} theme`}
       type="button"
     >
       {mode === "night" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-    </Button>
+    </button>
   );
 };
 

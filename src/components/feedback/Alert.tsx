@@ -1,5 +1,4 @@
 import React from 'react';
-import { Heading, Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface AlertProps {
@@ -29,10 +28,10 @@ export const Alert: React.FC<AlertProps> = ({
       className
     )}>
       {title && (
-        <Heading level={4} className="font-semibold mb-2">{title}</Heading>
+        <h4 className="font-semibold mb-2">{title}</h4>
       )}
       {description && (
-        <Text size="sm">{description}</Text>
+        <p className="text-sm">{description}</p>
       )}
     </div>
   );

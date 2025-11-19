@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Button } from '@/components/primitives/Button';
-import { Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface ConsentBannerProps {
@@ -15,7 +14,7 @@ export const ConsentBanner: React.FC<ConsentBannerProps> = ({ className }) => {
       "bg-blue-500 text-white p-4 rounded-lg",
       className
     )}>
-      <Text className="mb-2">We use cookies to improve your experience.</Text>
+      <p className="mb-2">We use cookies to improve your experience.</p>
       <Button>Accept</Button>
     </div>
   );

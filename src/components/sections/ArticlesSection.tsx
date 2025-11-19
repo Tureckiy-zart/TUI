@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Link } from '@/components/primitives/Link';
-import { Heading, Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface Article {
@@ -15,19 +14,15 @@ interface Article {
 
 interface ArticlesSectionProps {
   articles: Article[];
-  readMoreLabel: string;
+  readMoreLabel?: string;
   className?: string;
 }
 
 export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
   articles,
-  readMoreLabel,
+  readMoreLabel = "Read more",
   className
 }) => {
-  if (!readMoreLabel || readMoreLabel.trim() === '') {
-    throw new Error('ArticlesSection: "readMoreLabel" prop is required and cannot be empty');
-  }
-
   return (
     <div className={cn("space-y-6", className)}>
       {articles.map((article) => (
@@ -36,7 +31,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
             <div className="w-full h-48 bg-muted rounded-md mb-4" />
           )}
           <div className="space-y-2">
-            <Heading level={2} className="text-xl font-semibold">
+            <h2 className="text-xl font-semibold">
               <Link 
                 href={`/news/${article.slug}`}
                 variant="ghost"
@@ -45,12 +40,12 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
               >
                 {article.title}
               </Link>
-            </Heading>
+            </h2>
             {article.description && (
-              <Text color="muted">{article.description}</Text>
+              <p className="text-muted-foreground">{article.description}</p>
             )}
             {article.date && (
-              <Text size="sm" color="muted">{article.date}</Text>
+              <p className="text-sm text-muted-foreground">{article.date}</p>
             )}
             <Link 
               href={`/news/${article.slug}`}

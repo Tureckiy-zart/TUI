@@ -1,8 +1,6 @@
 "use client";
 
 import React from 'react';
-import { Heading, Text } from '@/components/primitives/Typography';
-import { Card, CardContent } from '@/components/primitives/Card';
 import { cn } from '@/lib/utils';
 
 interface UserManagementProps {
@@ -11,11 +9,12 @@ interface UserManagementProps {
 
 export const UserManagement: React.FC<UserManagementProps> = ({ className }) => {
   return (
-    <Card className={cn("shadow-md", className)}>
-      <CardContent className="p-6">
-        <Heading level={2} className="mb-4">User Management</Heading>
-        <Text color="muted">User management content</Text>
-      </CardContent>
-    </Card>
+    <div className={cn(
+      "bg-white dark:bg-gray-800 rounded-lg shadow-md p-6",
+      className
+    )}>
+      <h2 className="text-2xl font-bold mb-4">User Management</h2>
+      <p className="text-gray-600 dark:text-gray-300">User management content</p>
+    </div>
   );
 };

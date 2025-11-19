@@ -1,8 +1,6 @@
 "use client";
 
 import React from 'react';
-import { Label } from '@/components/primitives/Label';
-import { Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface FormSelectProps {
@@ -23,24 +21,20 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   label,
   placeholder,
   options = [],
-  value,
+  value = "",
   onChange,
   error,
   className
 }) => {
-  // value is optional - if undefined/null, use empty string (uncontrolled select)
-  // If provided (even empty string), use it (controlled select)
-  const selectValue = value ?? '';
-
   return (
     <div className={cn("space-y-2", className)}>
       {label && (
-        <Label htmlFor={id} className="block">{label}</Label>
+        <label className="block text-sm font-medium">{label}</label>
       )}
       <select
         id={id}
         name={name}
-        value={selectValue}
+        value={value}
         onChange={(e) => onChange?.(e.target.value)}
         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800"
       >
@@ -54,7 +48,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         ))}
       </select>
       {error && (
-        <Text size="sm" color="destructive">{error}</Text>
+        <p className="text-sm text-red-500">{error}</p>
       )}
     </div>
   );
