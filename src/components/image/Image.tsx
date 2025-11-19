@@ -104,29 +104,93 @@ const ImageComponent = React.forwardRef<HTMLDivElement, ImageProps>(
     const [hasError, setHasError] = useState(false);
     const [currentSrc, setCurrentSrc] = useState(src);
     const fallbackAttemptedRef = useRef(false);
+    // Track loading ID to prevent race conditions when src changes rapidly
+    const loadingIdRef = useRef(0);
+    // Track if component is mounted to prevent state updates after unmount
+    const isMountedRef = useRef(true);
+    // Ref to track the image element
+    const imgRef = useRef<HTMLImageElement | null>(null);
+
+    // Normalize src: treat empty string as undefined
+    const normalizedSrc = src && src.trim() !== '' ? src : undefined;
+    const normalizedFallbackSrc = fallbackSrc && fallbackSrc.trim() !== '' ? fallbackSrc : undefined;
+
+    // Prevent fallback loop: if fallback is same as src, ignore it
+    const effectiveFallbackSrc = normalizedFallbackSrc && normalizedFallbackSrc !== normalizedSrc 
+      ? normalizedFallbackSrc 
+      : undefined;
 
     const handleLoad = useCallback(
       (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         const img = event.currentTarget;
+        const currentLoadingId = loadingIdRef.current;
+        
+        // Only process if component is still mounted and this is still the current image
+        if (!isMountedRef.current || !imgRef.current || img !== imgRef.current) {
+          return;
+        }
+
         setIsLoaded(true);
+        
         if (onLoadingComplete) {
-          onLoadingComplete({
-            naturalWidth: img.naturalWidth,
-            naturalHeight: img.naturalHeight,
-          });
+          try {
+            // Validate dimensions - 0x0 might indicate a problem
+            const width = img.naturalWidth;
+            const height = img.naturalHeight;
+            
+            // Double-check loading ID hasn't changed (race condition protection)
+            if (loadingIdRef.current !== currentLoadingId) {
+              return;
+            }
+            
+            if (width === 0 || height === 0) {
+              // Image loaded but has invalid dimensions - treat as error
+              setHasError(true);
+              setIsLoaded(false);
+              if (onError) {
+                try {
+                  onError(event as any);
+                } catch (callbackError) {
+                  console.error('Error in onError callback:', callbackError);
+                }
+              }
+              return;
+            }
+
+            onLoadingComplete({
+              naturalWidth: width,
+              naturalHeight: height,
+            });
+          } catch (callbackError) {
+            console.error('Error in onLoadingComplete callback:', callbackError);
+          }
         }
       },
-      [onLoadingComplete]
+      [onLoadingComplete, onError]
     );
 
     const handleError = useCallback(
       (error: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        const img = error.currentTarget;
+        const currentLoadingId = loadingIdRef.current;
+        
+        // Only process if component is still mounted and this is still the current image
+        if (!isMountedRef.current || !imgRef.current || img !== imgRef.current) {
+          return;
+        }
+
+        // Double-check loading ID hasn't changed (race condition protection)
+        if (loadingIdRef.current !== currentLoadingId) {
+          return;
+        }
+
         // If we have a fallback and haven't tried it yet, switch to fallback
-        if (fallbackSrc && !fallbackAttemptedRef.current && currentSrc !== fallbackSrc) {
+        if (effectiveFallbackSrc && !fallbackAttemptedRef.current && currentSrc !== effectiveFallbackSrc) {
           fallbackAttemptedRef.current = true;
-          setCurrentSrc(fallbackSrc);
+          setCurrentSrc(effectiveFallbackSrc);
           setHasError(false);
           setIsLoaded(false); // Reset loaded state when switching to fallback
+          loadingIdRef.current += 1; // Increment loading ID for fallback
           // Don't call onError yet, let it try the fallback first
           return;
         }
@@ -134,22 +198,36 @@ const ImageComponent = React.forwardRef<HTMLDivElement, ImageProps>(
         // If we've already tried fallback or don't have one, mark as error
         setHasError(true);
         setIsLoaded(false); // Ensure loaded state is false on error
+        
         if (onError) {
-          onError(error);
+          try {
+            onError(error);
+          } catch (callbackError) {
+            console.error('Error in onError callback:', callbackError);
+          }
         }
       },
-      [fallbackSrc, currentSrc, onError]
+      [effectiveFallbackSrc, currentSrc, onError]
     );
 
     // Reset states when src changes
     React.useEffect(() => {
-      if (src !== currentSrc) {
-        setCurrentSrc(src || undefined);
+      if (normalizedSrc !== currentSrc) {
+        setCurrentSrc(normalizedSrc);
         setIsLoaded(false);
         setHasError(false);
         fallbackAttemptedRef.current = false;
+        loadingIdRef.current += 1; // Increment loading ID to invalidate pending callbacks
       }
-    }, [src, currentSrc]);
+    }, [normalizedSrc, currentSrc]);
+
+    // Cleanup on unmount
+    React.useEffect(() => {
+      isMountedRef.current = true;
+      return () => {
+        isMountedRef.current = false;
+      };
+    }, []);
 
     // Build wrapper classes
     const wrapperClasses = cn(
@@ -185,14 +263,18 @@ const ImageComponent = React.forwardRef<HTMLDivElement, ImageProps>(
       (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         handleLoad(event);
         if (onLoad) {
-          onLoad(event);
+          try {
+            onLoad(event);
+          } catch (callbackError) {
+            console.error('Error in onLoad callback:', callbackError);
+          }
         }
       },
       [handleLoad, onLoad]
     );
 
     // Don't render image if no src is provided (unless fallback exists)
-    const hasValidSrc = currentSrc || fallbackSrc;
+    const hasValidSrc = currentSrc || effectiveFallbackSrc;
 
     return (
       <div ref={ref} className={wrapperClasses}>
@@ -202,6 +284,7 @@ const ImageComponent = React.forwardRef<HTMLDivElement, ImageProps>(
         {hasValidSrc ? (
           <img
             {...imgProps}
+            ref={imgRef}
             src={currentSrc}
             alt={alt}
             className={imageClasses}
