@@ -8,15 +8,11 @@ export interface LanguageOption {
   label: string;
 }
 
-const defaultLanguages: LanguageOption[] = [
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-  { code: 'ru', label: 'Русский' },
-];
-
 interface LanguageSelectorProps {
+  ariaLabel: string;
+  dataTestId: string;
   className?: string;
-  languages?: LanguageOption[];
+  languages: LanguageOption[];
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
@@ -24,21 +20,36 @@ interface LanguageSelectorProps {
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
+  ariaLabel,
+  dataTestId,
   className,
-  languages = defaultLanguages,
+  languages,
   value,
   defaultValue,
   disabled,
   onLanguageChange,
 }) => {
-  const options = useMemo(() => (languages.length > 0 ? languages : defaultLanguages), [languages]);
+  if (!ariaLabel || ariaLabel.trim() === '') {
+    throw new Error('LanguageSelector: "ariaLabel" prop is required and cannot be empty');
+  }
+  if (!dataTestId || dataTestId.trim() === '') {
+    throw new Error('LanguageSelector: "dataTestId" prop is required and cannot be empty');
+  }
+  if (!languages || languages.length === 0) {
+    throw new Error('LanguageSelector: "languages" prop is required and cannot be empty');
+  }
+  
+  const options = useMemo(() => languages, [languages]);
 
-  const getInitialValue = () => {
+  const getInitialValue = (): string => {
     if (value !== undefined) return value;
     if (defaultValue && options.some((option) => option.code === defaultValue)) {
       return defaultValue;
     }
-    return options[0]?.code ?? 'en';
+    if (options.length === 0) {
+      throw new Error('LanguageSelector: languages array must contain at least one option');
+    }
+    return options[0]!.code;
   };
 
   const [internalValue, setInternalValue] = useState<string>(getInitialValue);
@@ -67,8 +78,8 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         disabled && 'opacity-70 cursor-not-allowed',
         className,
       )}
-      aria-label="Language selector"
-      data-testid="language-selector"
+      aria-label={ariaLabel}
+      data-testid={dataTestId}
     >
       {options.map(({ code, label }) => (
         <option key={code} value={code}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Heading, Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface TimelineItem {
@@ -28,12 +29,12 @@ export const Timeline: React.FC<TimelineProps> = ({
             )}
           </div>
           <div className="ml-4 flex-1">
-            <h3 className="font-medium text-foreground">{item.title}</h3>
-            <p className="text-sm text-muted-foreground">{item.date}</p>
+            <Heading level={3} className="font-medium">{item.title}</Heading>
+            <Text size="sm" color="muted">{item.date}</Text>
             {item.description && (
-              <p className="text-sm text-muted-foreground mt-1">
+              <Text size="sm" color="muted" className="mt-1">
                 {item.description}
-              </p>
+              </Text>
             )}
           </div>
         </div>

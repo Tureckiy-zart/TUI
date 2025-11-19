@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@/components/primitives/Button';
+import React from 'react';
+import { Button } from '../primitives/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
 import { SimpleModal } from './SimpleModal';
-import { useState } from 'react';
 
 const meta: Meta<typeof SimpleModal> = {
   title: 'Components/SimpleModal',

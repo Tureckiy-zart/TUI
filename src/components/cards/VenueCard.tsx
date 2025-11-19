@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from '@/components/primitives/Link';
 import { Card, CardContent } from '@/components/primitives/Card';
+import { Heading, Text } from '@/components/primitives/Typography';
 import { cn } from '@/lib/utils';
 
 interface VenueCardProps {
@@ -26,26 +27,64 @@ interface VenueCardProps {
     events_count?: number;
   };
   className?: string;
-  featured?: boolean;
-  showImage?: boolean;
+  featured: boolean;
+  showImage: boolean;
+  eventsLabel: string;
+  popularBadgeText: string;
+  capacityLabel: string;
 }
 
 export const VenueCard: React.FC<VenueCardProps> = ({
   venue,
   className,
-  featured = false,
-  showImage = true
+  featured,
+  showImage,
+  eventsLabel,
+  popularBadgeText,
+  capacityLabel
 }) => {
+  if (typeof featured !== 'boolean') {
+    throw new Error('VenueCard: "featured" prop is required and must be a boolean');
+  }
+  if (typeof showImage !== 'boolean') {
+    throw new Error('VenueCard: "showImage" prop is required and must be a boolean');
+  }
+  if (!eventsLabel || eventsLabel.trim() === '') {
+    throw new Error('VenueCard: "eventsLabel" prop is required and cannot be empty');
+  }
+  if (!popularBadgeText || popularBadgeText.trim() === '') {
+    throw new Error('VenueCard: "popularBadgeText" prop is required and cannot be empty');
+  }
+  if (!capacityLabel || capacityLabel.trim() === '') {
+    throw new Error('VenueCard: "capacityLabel" prop is required and cannot be empty');
+  }
+
   const name = typeof venue?.name === 'string' 
     ? venue.name 
-    : venue?.name?.en || "Sample Venue";
+    : venue?.name?.en;
+  if (!name || name.trim() === '') {
+    throw new Error('VenueCard: venue.name is required and cannot be empty');
+  }
+
   const description = typeof venue?.description === 'string'
     ? venue.description
-    : venue?.description?.en || "Sample venue description";
+    : venue?.description?.en;
+  if (!description || description.trim() === '') {
+    throw new Error('VenueCard: venue.description is required and cannot be empty');
+  }
+
   const location = typeof venue?.location === 'string' 
     ? venue.location 
-    : venue?.address || "Tenerife, Spain";
-  const capacity = venue?.capacity || "500";
+    : venue?.address;
+  if (!location || location.trim() === '') {
+    throw new Error('VenueCard: venue.location or venue.address is required and cannot be empty');
+  }
+
+  const capacity = venue?.capacity;
+  if (!capacity || capacity.trim() === '') {
+    throw new Error('VenueCard: venue.capacity is required and cannot be empty');
+  }
+
   const image = venue?.image;
   const eventsCount = venue?.events_count || 0;
 
@@ -58,7 +97,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       {featured && (
         <div className="absolute top-3 right-3 z-10">
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-500 to-orange-500 text-white shadow-lg">
-            ⭐ Popular
+            {popularBadgeText}
           </span>
         </div>
       )}
@@ -83,7 +122,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       )}
       
       <CardContent className="p-4">
-        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+        <Heading level={3} className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
           {venue?.slug ? (
             <Link href={`/venues/${venue.slug}`} variant="ghost" size="none">
               {name}
@@ -91,15 +130,15 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           ) : (
             name
           )}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">{description}</p>
+        </Heading>
+        <Text size="sm" color="muted" className="mb-3 line-clamp-2">{description}</Text>
         <div className="flex flex-col gap-2 mb-3">
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span className="line-clamp-1">{location}</span>
+            <Text size="xs" color="muted" className="line-clamp-1">{location}</Text>
           </div>
         </div>
         <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
@@ -109,15 +148,15 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                <span>{eventsCount} events</span>
+                <Text size="xs" color="primary" weight="medium">{eventsCount} {eventsLabel}</Text>
               </div>
             )}
-            {capacity !== "500" && (
+            {capacity && (
               <div className="flex items-center gap-1 text-gray-500">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span>Cap: {capacity}</span>
+                <Text size="xs" color="muted">{capacityLabel} {capacity}</Text>
               </div>
             )}
           </div>

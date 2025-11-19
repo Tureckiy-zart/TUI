@@ -14,7 +14,10 @@ export interface DateRange {
 export interface DateRangePickerProps {
   value: DateRange;
   onChange: (range: DateRange) => void;
-  placeholder?: string;
+  placeholder: string;
+  selectDateRangeLabel: string;
+  clearLabel: string;
+  closeLabel: string;
   className?: string;
   disabled?: boolean;
 }
@@ -22,10 +25,25 @@ export interface DateRangePickerProps {
 export function DateRangePicker({
   value,
   onChange,
-  placeholder = "Pick a date range",
+  placeholder,
+  selectDateRangeLabel,
+  clearLabel,
+  closeLabel,
   className,
   disabled = false,
 }: DateRangePickerProps) {
+  if (!placeholder || placeholder.trim() === '') {
+    throw new Error('DateRangePicker: "placeholder" prop is required and cannot be empty');
+  }
+  if (!selectDateRangeLabel || selectDateRangeLabel.trim() === '') {
+    throw new Error('DateRangePicker: "selectDateRangeLabel" prop is required and cannot be empty');
+  }
+  if (!clearLabel || clearLabel.trim() === '') {
+    throw new Error('DateRangePicker: "clearLabel" prop is required and cannot be empty');
+  }
+  if (!closeLabel || closeLabel.trim() === '') {
+    throw new Error('DateRangePicker: "closeLabel" prop is required and cannot be empty');
+  }
   const [isOpen, setIsOpen] = React.useState(false);
 
   const formatDateRange = (range: DateRange) => {
@@ -81,7 +99,7 @@ export function DateRangePicker({
       {isOpen && (
         <div className="absolute top-full left-0 z-50 mt-1 w-full rounded-md border bg-popover p-3 shadow-lg">
           <div className="space-y-2">
-            <div className="text-sm font-medium">Select Date Range</div>
+            <div className="text-sm font-medium">{selectDateRangeLabel}</div>
             <div className="grid grid-cols-7 gap-1 text-xs">
               {/* Calendar header */}
               {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
@@ -123,14 +141,14 @@ export function DateRangePicker({
                 size="sm"
                 onClick={clearRange}
               >
-                Clear
+                {clearLabel}
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setIsOpen(false)}
               >
-                Close
+                {closeLabel}
               </Button>
             </div>
           </div>

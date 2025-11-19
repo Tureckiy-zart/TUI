@@ -13,22 +13,69 @@ export interface PriceRange {
 export interface PriceRangeSliderProps {
   value: PriceRange;
   onChange: (range: PriceRange) => void;
-  min?: number;
-  max?: number;
-  step?: number;
-  currency?: string;
+  min: number;
+  max: number;
+  step: number;
+  currency: string;
+  priceRangeLabel: string;
+  minLabel: string;
+  maxLabel: string;
+  anyPriceLabel: string;
+  clearLabel: string;
+  minAriaLabel: string;
+  maxAriaLabel: string;
   className?: string;
 }
 
 export function PriceRangeSlider({
   value,
   onChange,
-  min = 0,
-  max = 1000,
-  step = 10,
-  currency = "€",
+  min,
+  max,
+  step,
+  currency,
+  priceRangeLabel,
+  minLabel,
+  maxLabel,
+  anyPriceLabel,
+  clearLabel,
+  minAriaLabel,
+  maxAriaLabel,
   className,
 }: PriceRangeSliderProps) {
+  if (typeof min !== 'number' || isNaN(min)) {
+    throw new Error('PriceRangeSlider: "min" prop is required and must be a number');
+  }
+  if (typeof max !== 'number' || isNaN(max)) {
+    throw new Error('PriceRangeSlider: "max" prop is required and must be a number');
+  }
+  if (typeof step !== 'number' || isNaN(step) || step <= 0) {
+    throw new Error('PriceRangeSlider: "step" prop is required and must be a positive number');
+  }
+  if (!currency || currency.trim() === '') {
+    throw new Error('PriceRangeSlider: "currency" prop is required and cannot be empty');
+  }
+  if (!priceRangeLabel || priceRangeLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "priceRangeLabel" prop is required and cannot be empty');
+  }
+  if (!minLabel || minLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "minLabel" prop is required and cannot be empty');
+  }
+  if (!maxLabel || maxLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "maxLabel" prop is required and cannot be empty');
+  }
+  if (!anyPriceLabel || anyPriceLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "anyPriceLabel" prop is required and cannot be empty');
+  }
+  if (!clearLabel || clearLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "clearLabel" prop is required and cannot be empty');
+  }
+  if (!minAriaLabel || minAriaLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "minAriaLabel" prop is required and cannot be empty');
+  }
+  if (!maxAriaLabel || maxAriaLabel.trim() === '') {
+    throw new Error('PriceRangeSlider: "maxAriaLabel" prop is required and cannot be empty');
+  }
   // Generate unique IDs for each instance to avoid duplicates
   const minPriceId = React.useId();
   const maxPriceId = React.useId();
@@ -93,11 +140,11 @@ export function PriceRangeSlider({
   return (
     <div className={cn("space-y-4", className)}>
       <div className="space-y-2">
-        <Label>Price Range</Label>
+        <Label>{priceRangeLabel}</Label>
         <div className="flex items-center space-x-2">
           <div className="flex-1">
             <Label htmlFor={minPriceId} className="text-xs text-muted-foreground">
-              Min
+              {minLabel}
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
@@ -119,7 +166,7 @@ export function PriceRangeSlider({
           </div>
           <div className="flex-1">
             <Label htmlFor={maxPriceId} className="text-xs text-muted-foreground">
-              Max
+              {maxLabel}
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
@@ -155,7 +202,7 @@ export function PriceRangeSlider({
             value={minSliderValue}
             onChange={(e) => handleSliderChange('min', parseInt(e.target.value))}
             className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer slider-thumb"
-            aria-label="Minimum price"
+            aria-label={minAriaLabel}
           />
           <input
             type="range"
@@ -167,7 +214,7 @@ export function PriceRangeSlider({
             value={maxSliderValue}
             onChange={(e) => handleSliderChange('max', parseInt(e.target.value))}
             className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer slider-thumb"
-            aria-label="Maximum price"
+            aria-label={maxAriaLabel}
           />
           <div className="h-2 bg-muted rounded-full">
             <div
@@ -189,14 +236,14 @@ export function PriceRangeSlider({
         <span className="text-sm text-muted-foreground">
           {value.min !== null || value.max !== null
             ? `${currency}${value.min || min} - ${currency}${value.max || max}`
-            : "Any price"}
+            : anyPriceLabel}
         </span>
         <button
           type="button"
           onClick={clearRange}
           className="text-xs text-muted-foreground hover:text-foreground"
         >
-          Clear
+          {clearLabel}
         </button>
       </div>
     </div>

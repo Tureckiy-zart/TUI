@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { Toast } from './Toast';
 import { ToastProvider, useToast } from './ToastProvider';
-import { Button } from '@/components/primitives/Button';
+import { Button } from '../primitives/Button';
 
 // Wrapper component for stories
 function ToastDemo() {

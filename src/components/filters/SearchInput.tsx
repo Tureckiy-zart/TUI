@@ -11,7 +11,7 @@ export interface SearchInputProps
   value: string;
   onChange: (value: string) => void;
   onClear?: () => void;
-  placeholder?: string;
+  placeholder: string;
   showClearButton?: boolean;
   debounceMs?: number;
 }
@@ -20,7 +20,7 @@ export function SearchInput({
   value,
   onChange,
   onClear,
-  placeholder = "Search...",
+  placeholder,
   showClearButton = true,
   debounceMs = 300,
   className,
@@ -28,6 +28,9 @@ export function SearchInput({
   name,
   ...props
 }: SearchInputProps) {
+  if (!placeholder || placeholder.trim() === '') {
+    throw new Error('SearchInput: "placeholder" prop is required and cannot be empty');
+  }
   // Generate unique ID if not provided
   const inputId = id || React.useId();
   const inputName = name || `search-input-${inputId}`;

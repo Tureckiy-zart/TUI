@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { Heading, Text, Code, Blockquote } from './Typography';
 
 const meta: Meta<typeof Heading> = {

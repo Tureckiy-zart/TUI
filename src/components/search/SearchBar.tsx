@@ -2,10 +2,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { SearchInput } from '@/components/filters/SearchInput';
+import { Button } from '@/components/primitives/Button';
 import { cn } from '@/lib/utils';
 
 interface SearchBarProps {
-  placeholder?: string;
+  placeholder: string;
   className?: string;
   onSearch?: (query: string) => void;
   suggestions?: string[];
@@ -13,12 +14,15 @@ interface SearchBarProps {
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({ 
-  placeholder = "Search artists, venues...", 
+  placeholder, 
   className,
   onSearch,
   suggestions = [],
   onSuggestionSelect
 }) => {
+  if (!placeholder || placeholder.trim() === '') {
+    throw new Error('SearchBar: "placeholder" prop is required and cannot be empty');
+  }
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -115,19 +119,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       {isFocused && filteredSuggestions.length > 0 && (
         <div className="absolute z-50 w-full mt-1 bg-popover border rounded-md shadow-lg max-h-60 overflow-auto">
           {filteredSuggestions.map((suggestion, index) => (
-            <button
+            <Button
               key={suggestion}
               type="button"
+              variant="ghost"
               onClick={() => handleSuggestionClick(suggestion)}
               className={cn(
-                "w-full text-left px-4 py-2 text-sm transition-colors",
-                "hover:bg-accent hover:text-accent-foreground",
-                "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+                "w-full justify-start px-4 py-2 text-sm",
                 index === selectedIndex && "bg-accent text-accent-foreground"
               )}
             >
               {suggestion}
-            </button>
+            </Button>
           ))}
         </div>
       )}
