@@ -148,7 +148,7 @@ export interface FilterSelectProps {
   value: string;
   onValueChange: (value: string) => void;
   options: FilterOption[];
-  placeholder: string;
+  placeholder?: string;
   label?: string;
   className?: string;
 }
@@ -157,14 +157,10 @@ export function FilterSelect({
   value,
   onValueChange,
   options,
-  placeholder,
+  placeholder = "Select option...",
   label,
   className,
 }: FilterSelectProps) {
-  if (!placeholder || placeholder.trim() === '') {
-    throw new Error('FilterSelect: "placeholder" prop is required and cannot be empty');
-  }
-  
   // Filter out options with empty values to prevent Radix UI Select error
   const validOptions = options.filter(option => option.value !== "" && option.value != null);
   

@@ -15,11 +15,10 @@ export interface ConfirmDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  title: string;
-  description: string;
-  confirmText: string;
-  cancelText: string;
-  loadingText?: string;
+  title?: string;
+  description?: string;
+  confirmText?: string;
+  cancelText?: string;
   variant?: "default" | "destructive";
   isLoading?: boolean;
 }
@@ -28,27 +27,13 @@ export function ConfirmDialog({
   isOpen,
   onClose,
   onConfirm,
-  title,
-  description,
-  confirmText,
-  cancelText,
-  loadingText,
+  title = "Confirm Action",
+  description = "Are you sure you want to proceed? This action cannot be undone.",
+  confirmText = "Confirm",
+  cancelText = "Cancel",
   variant = "default",
   isLoading = false,
 }: ConfirmDialogProps) {
-  if (!title || title.trim() === '') {
-    throw new Error('ConfirmDialog: "title" prop is required and cannot be empty');
-  }
-  if (!description || description.trim() === '') {
-    throw new Error('ConfirmDialog: "description" prop is required and cannot be empty');
-  }
-  if (!confirmText || confirmText.trim() === '') {
-    throw new Error('ConfirmDialog: "confirmText" prop is required and cannot be empty');
-  }
-  if (!cancelText || cancelText.trim() === '') {
-    throw new Error('ConfirmDialog: "cancelText" prop is required and cannot be empty');
-  }
-
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -70,7 +55,7 @@ export function ConfirmDialog({
             onClick={handleConfirm}
             disabled={isLoading}
           >
-            {isLoading ? (loadingText || confirmText) : confirmText}
+            {isLoading ? "Loading..." : confirmText}
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -84,9 +69,6 @@ export function useConfirmDialog() {
     isOpen: boolean;
     title?: string;
     description?: string;
-    confirmText?: string;
-    cancelText?: string;
-    loadingText?: string;
     onConfirm?: () => void;
     variant?: "default" | "destructive";
   }>({
@@ -95,11 +77,8 @@ export function useConfirmDialog() {
 
   const showConfirm = React.useCallback(
     (options: {
-      title: string;
-      description: string;
-      confirmText: string;
-      cancelText: string;
-      loadingText?: string;
+      title?: string;
+      description?: string;
       onConfirm: () => void;
       variant?: "default" | "destructive";
     }) => {
@@ -123,11 +102,8 @@ export function useConfirmDialog() {
         isOpen={state.isOpen}
         onClose={hideConfirm}
         onConfirm={state.onConfirm || (() => {})}
-        title={state.title || ''}
-        description={state.description || ''}
-        confirmText={state.confirmText || ''}
-        cancelText={state.cancelText || ''}
-        loadingText={state.loadingText}
+        title={state.title}
+        description={state.description}
         variant={state.variant}
       />
     ),

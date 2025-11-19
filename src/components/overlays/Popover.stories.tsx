@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import { PopoverWrapper, Popover, PopoverTrigger, PopoverContent } from './Popover';
-import { Button } from '../../primitives/Button';
-import { Input } from '../../primitives/Input';
-import { Label } from '../../primitives/Label';
-import { Badge } from '../../primitives/Badge';
-import { Card, CardContent, CardHeader, CardTitle } from '../../primitives/Card';
+import { Button } from '@/components/primitives/Button';
+import { Input } from '@/components/primitives/Input';
+import { Label } from '@/components/primitives/Label';
+import { Badge } from '@/components/primitives/Badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/primitives/Card';
 import { Settings, User, Bell, HelpCircle } from 'lucide-react';
 
 const meta: Meta<typeof PopoverWrapper> = {

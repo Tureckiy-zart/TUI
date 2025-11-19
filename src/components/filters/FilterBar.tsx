@@ -19,24 +19,7 @@ export interface FilterBarProps {
   showPriceRange?: boolean;
   showSorting?: boolean;
   categories?: Array<{ value: string; label: string; count?: number }>;
-  sortOptions: Array<{ value: string; label: string }>;
-  searchPlaceholder: string;
-  filtersLabel: string;
-  clearAllLabel: string;
-  categoryLabel: string;
-  allCategoriesLabel: string;
-  dateRangeLabel: string;
-  anyDateLabel: string;
-  sortByLabel: string;
-  sortAscLabel: string;
-  sortDescLabel: string;
-  sortByPlaceholder: string;
-  activeFiltersLabel: string;
-  priceRangeLabel: string;
-  priceMinLabel: string;
-  priceMaxLabel: string;
-  priceAnyLabel: string;
-  priceClearLabel: string;
+  sortOptions?: Array<{ value: string; label: string }>;
   onFiltersChange?: (filters: any) => void;
 }
 
@@ -48,80 +31,13 @@ export function FilterBar({
   showPriceRange = true,
   showSorting = true,
   categories = [],
-  sortOptions,
-  searchPlaceholder,
-  filtersLabel,
-  clearAllLabel,
-  categoryLabel,
-  allCategoriesLabel,
-  dateRangeLabel,
-  anyDateLabel,
-  sortByLabel,
-  sortAscLabel,
-  sortDescLabel,
-  sortByPlaceholder,
-  activeFiltersLabel,
-  priceRangeLabel,
-  priceMinLabel,
-  priceMaxLabel,
-  priceAnyLabel,
-  priceClearLabel,
+  sortOptions = [
+    { value: "date", label: "Date" },
+    { value: "name", label: "Name" },
+    { value: "price", label: "Price" },
+  ],
   onFiltersChange,
 }: FilterBarProps) {
-  if (!sortOptions || sortOptions.length === 0) {
-    throw new Error('FilterBar: "sortOptions" prop is required and cannot be empty');
-  }
-  if (!searchPlaceholder || searchPlaceholder.trim() === '') {
-    throw new Error('FilterBar: "searchPlaceholder" prop is required and cannot be empty');
-  }
-  if (!filtersLabel || filtersLabel.trim() === '') {
-    throw new Error('FilterBar: "filtersLabel" prop is required and cannot be empty');
-  }
-  if (!clearAllLabel || clearAllLabel.trim() === '') {
-    throw new Error('FilterBar: "clearAllLabel" prop is required and cannot be empty');
-  }
-  if (!categoryLabel || categoryLabel.trim() === '') {
-    throw new Error('FilterBar: "categoryLabel" prop is required and cannot be empty');
-  }
-  if (!allCategoriesLabel || allCategoriesLabel.trim() === '') {
-    throw new Error('FilterBar: "allCategoriesLabel" prop is required and cannot be empty');
-  }
-  if (!dateRangeLabel || dateRangeLabel.trim() === '') {
-    throw new Error('FilterBar: "dateRangeLabel" prop is required and cannot be empty');
-  }
-  if (!anyDateLabel || anyDateLabel.trim() === '') {
-    throw new Error('FilterBar: "anyDateLabel" prop is required and cannot be empty');
-  }
-  if (!sortByLabel || sortByLabel.trim() === '') {
-    throw new Error('FilterBar: "sortByLabel" prop is required and cannot be empty');
-  }
-  if (!sortAscLabel || sortAscLabel.trim() === '') {
-    throw new Error('FilterBar: "sortAscLabel" prop is required and cannot be empty');
-  }
-  if (!sortDescLabel || sortDescLabel.trim() === '') {
-    throw new Error('FilterBar: "sortDescLabel" prop is required and cannot be empty');
-  }
-  if (!sortByPlaceholder || sortByPlaceholder.trim() === '') {
-    throw new Error('FilterBar: "sortByPlaceholder" prop is required and cannot be empty');
-  }
-  if (!activeFiltersLabel || activeFiltersLabel.trim() === '') {
-    throw new Error('FilterBar: "activeFiltersLabel" prop is required and cannot be empty');
-  }
-  if (!priceRangeLabel || priceRangeLabel.trim() === '') {
-    throw new Error('FilterBar: "priceRangeLabel" prop is required and cannot be empty');
-  }
-  if (!priceMinLabel || priceMinLabel.trim() === '') {
-    throw new Error('FilterBar: "priceMinLabel" prop is required and cannot be empty');
-  }
-  if (!priceMaxLabel || priceMaxLabel.trim() === '') {
-    throw new Error('FilterBar: "priceMaxLabel" prop is required and cannot be empty');
-  }
-  if (!priceAnyLabel || priceAnyLabel.trim() === '') {
-    throw new Error('FilterBar: "priceAnyLabel" prop is required and cannot be empty');
-  }
-  if (!priceClearLabel || priceClearLabel.trim() === '') {
-    throw new Error('FilterBar: "priceClearLabel" prop is required and cannot be empty');
-  }
   const {
     search,
     category,
@@ -169,7 +85,7 @@ export function FilterBar({
             <SearchInput
               value={search}
               onChange={setSearch}
-              placeholder={searchPlaceholder}
+              placeholder="Search events, venues, artists..."
             />
           </div>
         )}
@@ -178,7 +94,7 @@ export function FilterBar({
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="gap-1">
               <Filter className="h-3 w-3" />
-              {getFilterSummary().length} {filtersLabel}
+              {getFilterSummary().length} filters
             </Badge>
             <Button
               variant="outline"
@@ -187,7 +103,7 @@ export function FilterBar({
               className="gap-1"
             >
               <X className="h-3 w-3" />
-              {clearAllLabel}
+              Clear all
             </Button>
           </div>
         )}
@@ -200,15 +116,15 @@ export function FilterBar({
             value={category}
             onValueChange={setCategory}
             options={categories}
-            label={categoryLabel}
-            placeholder={allCategoriesLabel}
+            label="Category"
+            placeholder="All categories"
           />
         )}
 
         {showDateRange && (
           <div className="space-y-2">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              {dateRangeLabel}
+              Date Range
             </label>
             <DateRangePicker
               value={{
@@ -216,7 +132,7 @@ export function FilterBar({
                 to: dateRange.end || undefined,
               }}
               onChange={handleDateRangeChange}
-              placeholder={anyDateLabel}
+              placeholder="Any date"
             />
           </div>
         )}
@@ -229,18 +145,13 @@ export function FilterBar({
             max={500}
             step={10}
             currency="€"
-            priceRangeLabel={priceRangeLabel}
-            minLabel={priceMinLabel}
-            maxLabel={priceMaxLabel}
-            anyPriceLabel={priceAnyLabel}
-            clearLabel={priceClearLabel}
           />
         )}
 
         {showSorting && (
           <div className="space-y-2">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              {sortByLabel}
+              Sort by
             </label>
             <FilterSelect
               value={`${sortBy}-${sortOrder}`}
@@ -252,14 +163,14 @@ export function FilterBar({
               }}
               options={sortOptions.map(option => ({
                 value: `${option.value}-asc`,
-                label: `${option.label} ${sortAscLabel}`,
+                label: `${option.label} (A-Z)`,
               })).concat(
                 sortOptions.map(option => ({
                   value: `${option.value}-desc`,
-                  label: `${option.label} ${sortDescLabel}`,
+                  label: `${option.label} (Z-A)`,
                 }))
               )}
-              placeholder={sortByPlaceholder}
+              placeholder="Sort by..."
             />
           </div>
         )}
@@ -268,7 +179,7 @@ export function FilterBar({
       {/* Active Filters Summary */}
       {hasActiveFilters && (
         <div className="bg-muted/50 rounded-lg p-3">
-          <div className="text-sm font-medium mb-2">{activeFiltersLabel}</div>
+          <div className="text-sm font-medium mb-2">Active Filters:</div>
           <div className="flex flex-wrap gap-2">
             {getFilterSummary().map((filter, index) => (
               <Badge key={index} variant="outline" className="text-xs">
