@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { createContext, type ReactNode,useContext } from "react";
+import { createContext, type ReactNode, useContext } from "react";
 
 import { useModalManager } from "@/hooks/useModal";
 

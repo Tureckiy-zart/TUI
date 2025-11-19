@@ -99,4 +99,4 @@ export function PopoverWrapper({
   );
 }
 
-export { Popover, PopoverAnchor, PopoverContent, popoverContentVariants,PopoverTrigger };
+export { Popover, PopoverAnchor, PopoverContent, popoverContentVariants, PopoverTrigger };

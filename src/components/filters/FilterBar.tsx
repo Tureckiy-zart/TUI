@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter,X } from "lucide-react";
+import { Filter, X } from "lucide-react";
 import * as React from "react";
 
 import { Badge } from "@/components/primitives/Badge";

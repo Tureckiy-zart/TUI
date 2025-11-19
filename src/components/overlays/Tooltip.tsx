@@ -89,4 +89,4 @@ export function TooltipWrapper({
   );
 }
 
-export { Tooltip, TooltipContent, tooltipContentVariants,TooltipProvider, TooltipTrigger };
+export { Tooltip, TooltipContent, tooltipContentVariants, TooltipProvider, TooltipTrigger };

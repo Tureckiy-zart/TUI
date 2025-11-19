@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { SearchInput } from "@/components/filters/SearchInput";
 import { Button } from "@/components/primitives/Button";
