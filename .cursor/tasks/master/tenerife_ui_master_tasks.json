@@ -1,0 +1,1328 @@
+{
+  "project": "Tenerife UI Library Master Task",
+  "version": "1.0",
+  "timezone": "Europe/London",
+  "layers": [
+    {
+      "layer": "1. Foundation Layer",
+      "tasks": [
+        {
+          "id": "F0",
+          "title": "Create base token files",
+          "purpose": "Establish a dedicated tokens folder containing separate files for colours, typography, radii, shadows, spacing and transitions. This meta-task ensures that all visual values are stored in one place and can be centrally managed.",
+          "inputs": [
+            "design_system.md",
+            "components_redesign.md"
+          ],
+          "outputs": [
+            "src/tokens/colors.ts",
+            "src/tokens/typography.ts",
+            "src/tokens/spacing.ts",
+            "src/tokens/shadows.ts",
+            "src/tokens/radius.ts",
+            "src/tokens/motion.ts"
+          ],
+          "acceptance_criteria": [
+            "A /src/tokens directory exists with separate files for colours, typography, spacing, shadows, radii and motion.",
+            "Each file exports CSS variable definitions and TypeScript objects reflecting the design tokens.",
+            "No component imports static values; they import from these token files.",
+            "Editing a token value updates all consuming styles across the library."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F1",
+          "title": "Implement color palette tokens",
+          "purpose": "Define the complete color palette as design tokens based on the Design System's color palette section. This includes primary midnight blues, accent purples, secondary refined cyan, surface colors for dark/light themes, and semantic colors. Tokens must use CSS custom properties and integrate into the Tailwind theme.",
+          "inputs": [
+            "design_system.md: colour palette section"
+          ],
+          "outputs": [
+            "src/tokens/colors.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "All color tokens from the Design System\u2019s primary, accent, secondary, surface, and semantic colors are defined with exact values from the source\u3010524020591353274\u2020L44-L79\u3011.",
+            "CSS variables follow naming conventions (e.g., --primary-50 to --primary-950, --accent-50, etc.) as specified in the design system\u3010524020591353274\u2020L44-L79\u3011.",
+            "Tailwind config extends the theme colors using these variables.",
+            "Dark and light surface tokens are both included."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F2",
+          "title": "Implement typography system tokens",
+          "purpose": "Define font families, type scale, font weights, line heights, letter spacing, and predefined text styles as design tokens based on the Design System\u2019s typography section. Include Inter as primary font, optional Satoshi, and Clash Display for headings, and implement a fluid type scale using clamp().",
+          "inputs": [
+            "design_system.md: typography system section"
+          ],
+          "outputs": [
+            "src/tokens/typography.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "Font family variables include Inter (default) and optional alternatives such as Satoshi and Clash Display\u3010524020591353274\u2020L360-L409\u3011.",
+            "Type scale variables use clamp() with the exact values from the design system for text-xs through text-6xl\u3010524020591353274\u2020L428-L444\u3011.",
+            "Font weight tokens (light to extra\u2011bold) match the specification\u3010524020591353274\u2020L445-L454\u3011.",
+            "Line height and letter spacing tokens are defined as specified\u3010524020591353274\u2020L469-L487\u3011.",
+            "Tailwind config extends typography utilities using these tokens."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F3",
+          "title": "Implement spacing system tokens",
+          "purpose": "Define the 8\u2011px based spacing system, including base unit, spacing scale, semantic spacing, component internal spacing, and layout spacing as tokens.",
+          "inputs": [
+            "design_system.md: spacing system section"
+          ],
+          "outputs": [
+            "src/tokens/spacing.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "Spacing scale variables for space\u20110 through space\u201196 match the values defined in the design system\u3010524020591353274\u2020L692-L742\u3011.",
+            "Semantic spacing tokens (xs through 5xl) map to the appropriate scale values\u3010524020591353274\u2020L745-L758\u3011.",
+            "Component internal spacing tokens (padding for buttons, cards, inputs, etc.) are defined exactly as specified\u3010524020591353274\u2020L760-L789\u3011.",
+            "Layout spacing tokens for container widths, section padding, grid gaps, and stack gaps are created\u3010524020591353274\u2020L791-L822\u3011.",
+            "Tokens are exported and integrated into Tailwind config."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F4",
+          "title": "Implement shadow and glow system tokens",
+          "purpose": "Define elevation shadows, colored shadows, glow effects, and focus shadows as tokens. Map default, hover, and active states to specific shadow levels for components.",
+          "inputs": [
+            "design_system.md: shadow system section"
+          ],
+          "outputs": [
+            "src/tokens/shadows.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "Elevation levels (none, xs, sm, md, lg, xl, 2xl) are defined exactly as in the design system\u3010524020591353274\u2020L935-L974\u3011.",
+            "Colored shadow tokens for primary and accent colours include sm, md, and lg variants\u3010524020591353274\u2020L976-L1006\u3011.",
+            "Glow effect tokens (subtle and medium) for primary and accent colors are defined\u3010524020591353274\u2020L1008-L1024\u3011.",
+            "Focus shadow tokens for accessibility are included\u3010524020591353274\u2020L1032-L1046\u3011.",
+            "Shadow mapping table for components is documented for later reference\u3010524020591353274\u2020L1048-L1062\u3011."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F5",
+          "title": "Implement border radius system tokens",
+          "purpose": "Define corner radius tokens and component-specific standards in accordance with the design system.",
+          "inputs": [
+            "design_system.md: border radius system section"
+          ],
+          "outputs": [
+            "src/tokens/radius.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "Radius scale variables from none through 3xl and full are defined exactly as specified\u3010524020591353274\u2020L1252-L1263\u3011.",
+            "Component standards map card, button, modal, badge, avatar, etc., to the correct radius token\u3010524020591353274\u2020L1265-L1282\u3011.",
+            "Consistency guidelines (matching parent radius, corner variations) are documented for developers\u3010524020591353274\u2020L1284-L1319\u3011."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F6",
+          "title": "Implement motion and transition tokens",
+          "purpose": "Create timing and easing tokens for animations and transitions using the durations and philosophy defined in the design system.",
+          "inputs": [
+            "design_system.md: motion & transition system section"
+          ],
+          "outputs": [
+            "src/tokens/motion.ts",
+            "tailwind.config.js"
+          ],
+          "acceptance_criteria": [
+            "Duration tokens (instant through slowest) are defined according to the design system\u3010524020591353274\u2020L1392-L1404\u3011.",
+            "Easing functions (standard, ease-out, ease-in-out) are defined as specified in the design system.",
+            "Motion tokens include guidelines for reduced motion respecting user preferences."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "F7",
+          "title": "Configure Tailwind CSS and theme integration",
+          "purpose": "Integrate color, typography, spacing, shadow, radius, and motion tokens into Tailwind\u2019s configuration. Provide dark and light theme support using CSS variables.",
+          "inputs": [
+            "tokens generated by tasks F1\u2013F6"
+          ],
+          "outputs": [
+            "tailwind.config.js",
+            "postcss.config.js"
+          ],
+          "acceptance_criteria": [
+            "Tailwind config extends colors, spacing, typography, shadows, borderRadius, and animation durations using the defined tokens.",
+            "Dark and light theme classes are defined and switch properly using CSS variables for surface colors\u3010524020591353274\u2020L101-117\u3011.",
+            "Config includes plugin to generate fluid type scale from typography tokens.",
+            "All design tokens are exposed as CSS variables for use in components.",
+            "Tailwind config uses CSS variables exclusively; no raw Tailwind colour or spacing values appear in component code."
+          ],
+          "dependencies": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "F8",
+          "title": "Establish theme system",
+          "purpose": "Create a theme provider (e.g., React context) to handle dark and light themes. Implement logic to switch between themes and persist user preference. Provide a utility hook for components.",
+          "inputs": [
+            "tokens from F1\u2013F6",
+            "tailwind.config.js"
+          ],
+          "outputs": [
+            "src/theme/ThemeProvider.tsx",
+            "src/theme/useTheme.ts"
+          ],
+          "acceptance_criteria": [
+            "Theme provider toggles between dark and light surface tokens defined in the design system\u3010524020591353274\u2020L101-L117\u3011.",
+            "User preference is stored (e.g., in localStorage) and applied on load.",
+            "Components can consume current theme via the hook.",
+            "Switching theme updates CSS variables without page reload.",
+            "Theme provider supports switching among multiple themes defined under /themes and propagates token overrides globally."
+          ],
+          "dependencies": [
+            "F7"
+          ]
+        },
+        {
+          "id": "F9",
+          "title": "Create theme override files",
+          "purpose": "Provide a mechanism to override the default tokens via a single theme file. Support multiple themes (default, dark, brand-specific) stored under /themes.",
+          "inputs": [
+            "tokens from F0-F6"
+          ],
+          "outputs": [
+            "src/themes/default.ts",
+            "src/themes/dark.ts",
+            "src/themes/brand.ts"
+          ],
+          "acceptance_criteria": [
+            "Themes export overrides for tokens (e.g., colours, shadows) while preserving the same keys.",
+            "Theme loader can switch between themes dynamically, and editing a theme file changes the look of all components.",
+            "At least one brand-specific theme file demonstrates token overrides (e.g., accent colours)."
+          ],
+          "dependencies": [
+            "F8"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "2. Core Components Layer",
+      "tasks": [
+        {
+          "id": "C0",
+          "title": "Enforce token-driven component architecture",
+          "purpose": "Define coding guidelines ensuring that all components use token-derived CSS variables through Tailwind classes. Components must be fully controlled via props with no internal state and may not reference raw Tailwind colours, spacing, radii or shadows.",
+          "inputs": [
+            "tokens from Foundation layer",
+            "theme system"
+          ],
+          "outputs": [
+            "CONTRIBUTING.md section on component guidelines"
+          ],
+          "acceptance_criteria": [
+            "Documentation clearly states that components must import tokens instead of static values.",
+            "Guidelines specify that components are purely presentational and controlled via props.",
+            "Design review checklists enforce these rules for each component PR."
+          ],
+          "dependencies": [
+            "F0",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C1",
+          "title": "Create Button component",
+          "purpose": "Implement a reusable Button component following the redesign specifications. Support seven variants (primary, secondary, accent, outline, ghost, link, destructive) and five sizes. Include optional icons, loading state, and full ARIA support.",
+          "inputs": [
+            "components_redesign.md: Button section",
+            "tokens from F1\u2013F6"
+          ],
+          "outputs": [
+            "src/components/Button.tsx",
+            "src/components/Button.stories.tsx",
+            "src/components/Button.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Button supports all variants with visual styles matching the redesign (primary uses primary-500 background and colored shadows\u3010770088508010025\u2020L73-L100\u3011, secondary uses elevated surfaces with subtle shadows\u3010770088508010025\u2020L103-L110\u3011, accent uses accent colours and glow\u3010770088508010025\u2020L112-L118\u3011, outline and ghost use transparent backgrounds with appropriate borders\u3010770088508010025\u2020L121-L137\u3011, link uses underline on hover\u3010770088508010025\u2020L139-L145\u3011, destructive uses error colours\u3010770088508010025\u2020L148-L156\u3011).",
+            "Five sizes (xs, sm, md, lg, xl) map to the spacing and typography tokens defined in F3 and F2\u3010770088508010025\u2020L158-L167\u3011.",
+            "Button exposes loading state with spinner and properly disables interactions.",
+            "Icon slots allow left or right icons and align correctly.",
+            "ARIA attributes ensure accessibility; keyboard navigation is supported.",
+            "Stories demonstrate each variant and size; unit tests verify rendering and state transitions.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C2",
+          "title": "Create Input component",
+          "purpose": "Build a modular Input component with default, filled, and outline variants, three size options, floating label animation, icon support, and validation states.",
+          "inputs": [
+            "components_redesign.md: Input/FormInput section",
+            "tokens from foundation layer"
+          ],
+          "outputs": [
+            "src/components/Input.tsx",
+            "src/components/Input.stories.tsx",
+            "src/components/Input.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Default variant uses surface-elevated1 background, border-primary, inner shadow, and primary-coloured focus shadow\u3010770088508010025\u2020L939-L947\u3011.",
+            "Filled variant hides border until focus and uses surface-elevated2 background\u3010770088508010025\u2020L951-L959\u3011.",
+            "Outline variant uses transparent background and border-primary with glow on focus\u3010770088508010025\u2020L959-L966\u3011.",
+            "Size tokens (sm, md, lg) use heights and padding matching the specification\u3010770088508010025\u2020L970-L974\u3011.",
+            "Validation states (success, error, warning, disabled) change border and shadow colours as defined\u3010770088508010025\u2020L976-L1016\u3011.",
+            "Floating label transitions use proper classes for peer selectors\u3010770088508010025\u2020L1022-L1047\u3011.",
+            "Component supports left/right icons and helper text.",
+            "Stories show each variant, state, and size; unit tests cover focus, blur, and validation transitions.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C3",
+          "title": "Create FormInput component",
+          "purpose": "Compose Input with Label and optional helper text into a FormInput component that manages floating labels and validation messages.",
+          "inputs": [
+            "components_redesign.md: Input/FormInput section",
+            "C2"
+          ],
+          "outputs": [
+            "src/components/FormInput.tsx",
+            "FormInput.stories.tsx",
+            "FormInput.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "FormInput uses the Input component internally and renders a label element associated via htmlFor attribute, using proper ARIA attributes.",
+            "Floating label is animated in sync with input focus and content state\u3010770088508010025\u2020L1022-L1033\u3011.",
+            "Displays helper text below input; error/success messages update aria\u2011describedby accordingly.",
+            "Stories show label positioning, error and success states; tests verify accessibility.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "C2"
+          ]
+        },
+        {
+          "id": "C4",
+          "title": "Create Select component",
+          "purpose": "Implement a custom Select component with searchable options, accessible keyboard navigation, and three variants (default, filled, outline) matching Input styles.",
+          "inputs": [
+            "components_redesign.md: Input and Select guidelines",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Select.tsx",
+            "Select.stories.tsx",
+            "Select.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Select supports default, filled, and outline appearances consistent with Input styles.",
+            "Dropdown list is keyboard navigable and ARIA roles are correctly applied.",
+            "Searchable input filters options.",
+            "Variants and sizes map to spacing and typography tokens.",
+            "Stories demonstrate variant and size combinations; tests verify accessibility and option selection.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "C2",
+            "C3"
+          ]
+        },
+        {
+          "id": "C5",
+          "title": "Create Textarea component",
+          "purpose": "Implement a Textarea component with auto\u2011resizing, default/filled/outline variants, sizes matching Input, and validation states.",
+          "inputs": [
+            "components_redesign.md",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Textarea.tsx",
+            "Textarea.stories.tsx",
+            "Textarea.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Textarea shares styles with Input variants and sizes.",
+            "Auto\u2011resizes based on content and respects min/max rows.",
+            "Validation and disabled states apply correct colours and shadows.",
+            "Stories show typical use cases; tests cover resizing and state transitions.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "C2"
+          ]
+        },
+        {
+          "id": "C6",
+          "title": "Create Label component",
+          "purpose": "Implement a simple Label component for form controls with required indicator and helper text support.",
+          "inputs": [
+            "components_redesign.md",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Label.tsx",
+            "Label.stories.tsx",
+            "Label.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Label uses typography tokens for size and weight (e.g., medium weight for UI labels\u3010524020591353274\u2020L456-L461\u3011).",
+            "Component accepts htmlFor prop to associate with input.",
+            "Required state adds an asterisk with appropriate ARIA label.",
+            "Helper text may be rendered below.",
+            "Stories demonstrate required and optional labels; tests verify association.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "C7",
+          "title": "Create Card (base) component",
+          "purpose": "Develop the Card component with variants (default, elevated, glass, outline) and support for images, content, actions, and shadows.",
+          "inputs": [
+            "components_redesign.md: Card section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Card.tsx",
+            "Card.stories.tsx",
+            "Card.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Card variants render surfaces using surface elevation tokens and appropriate shadows: default (surface-elevated1 with shadow-sm), elevated (shadow-md), glass (surface-glass with backdrop blur and border), outline (transparent background with border).",
+            "Card supports optional image slot with fixed aspect ratio and gradient overlay, respecting border radius guidelines\u3010524020591353274\u2020L1291-L1300\u3011.",
+            "Content area uses spacing tokens for padding.",
+            "Optional footer slot allows actions aligned to bottom.",
+            "Stories cover all variants and states; tests verify responsive behaviour.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C8",
+          "title": "Create Section component",
+          "purpose": "Implement a Section wrapper that applies responsive vertical and horizontal padding, background colours, and container constraints based on the layout guide.",
+          "inputs": [
+            "layout_and_brand_guide.md: section construction principles",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Section.tsx",
+            "Section.stories.tsx",
+            "Section.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Section implements the anatomy described in the layout guide: an outer <section> element with vertical padding and background, containing a centred max\u2011width container with internal spacing\u3010462526369540812\u2020L269-L289\u3011.",
+            "Padding values adapt across breakpoints according to hero, content, and footer standards\u3010462526369540812\u2020L82-L99\u3011.",
+            "Component supports optional background image or gradient overlay.",
+            "Stories demonstrate hero and content sections; tests verify responsive paddings.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F3",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C9",
+          "title": "Create GridLayout component",
+          "purpose": "Provide a flexible GridLayout component for arranging items in responsive columns with configurable gaps and auto\u2011fit behaviour.",
+          "inputs": [
+            "layout_and_brand_guide.md: grid system",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/GridLayout.tsx",
+            "GridLayout.stories.tsx",
+            "GridLayout.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Grid supports specifying number of columns at different breakpoints and uses grid\u2011gap tokens defined in F3 (grid-gap-sm, md, lg)\u3010524020591353274\u2020L811-L815\u3011.",
+            "Supports auto\u2011fit and auto\u2011fill modes for masonry and card grids.",
+            "Allows per\u2011item className override while maintaining consistent spacing.",
+            "Stories show typical layouts like three\u2011column card grids; tests verify responsiveness.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F3",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "C10",
+          "title": "Create Badge component",
+          "purpose": "Implement the Badge/Tag component with variants and sizes as defined in the redesign specs.",
+          "inputs": [
+            "components_redesign.md: Tag/Badge section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Badge.tsx",
+            "Badge.stories.tsx",
+            "Badge.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Badge supports variants: default, primary, accent, outline, and subtle with corresponding background, text, and ring colours\u3010770088508010025\u2020L3906-L3925\u3011.",
+            "Size options xs, sm, and md map to spacing and radius tokens\u3010770088508010025\u2020L3926-L3930\u3011.",
+            "Accepts optional icon and children.",
+            "Stories display all variants and sizes; tests verify correct classes.",
+            "Component uses only Tailwind classes that reference CSS variables derived from tokens; no raw colours, spacing or radii are used.",
+            "Component is fully controlled via props with zero internal state."
+          ],
+          "dependencies": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "3. Advanced Components Layer",
+      "tasks": [
+        {
+          "id": "A1",
+          "title": "Create EventCard component",
+          "purpose": "Develop the EventCard component using the base Card and Badge components. Support featured variant, size options, premium image treatment, metadata icons, and click handling.",
+          "inputs": [
+            "components_redesign.md: EventCard section",
+            "C7",
+            "C10",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/EventCard.tsx",
+            "EventCard.stories.tsx",
+            "EventCard.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "EventCard utilises the Card base and applies variant 'elevated' or 'default' depending on the featured prop\u3010770088508010025\u2020L3534-L3538\u3011.",
+            "Supports compact, default, and large size configurations mapping typography and padding as specified\u3010770088508010025\u2020L3510-L3529\u3011.",
+            "Image slot enforces 16:9 aspect ratio with gradient overlay and zoom on hover\u3010770088508010025\u2020L3428-L3431\u3011.",
+            "Genre badge uses Badge component with appropriate variant (primary or accent)\u3010770088508010025\u2020L3556-L3561\u3011.",
+            "Metadata icons for date, location, price, and attendees use Lucide icons and align horizontally\u3010770088508010025\u2020L3556-L3603\u3011.",
+            "Featured variant adds accent ring and accent\u2011coloured shadows\u3010770088508010025\u2020L3546-L3552\u3011.",
+            "Click handler invokes callback with event ID when card is clicked.",
+            "Stories show all sizes and states; tests cover click handling and featured styling.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C7",
+            "C10",
+            "F4"
+          ]
+        },
+        {
+          "id": "A2",
+          "title": "Create VenueCard component",
+          "purpose": "Implement VenueCard similar to EventCard but tailored for venue information (capacity, rating/reviews).",
+          "inputs": [
+            "components_redesign.md: VenueCard section",
+            "C7",
+            "C10"
+          ],
+          "outputs": [
+            "src/components/VenueCard.tsx",
+            "VenueCard.stories.tsx",
+            "VenueCard.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "VenueCard extends the Card base and accepts venue data (id, title, description, image, location, capacity, rating).",
+            "Displays rating stars and capacity metadata instead of price and attendees as specified in the redesign\u3010770088508010025\u2020L3417-L3424\u3011.",
+            "Supports featured variant with accent glow.",
+            "Size options mirror EventCard.",
+            "Stories show default and featured venues; tests verify rating rendering.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "A1"
+          ]
+        },
+        {
+          "id": "A3",
+          "title": "Create SearchBar component",
+          "purpose": "Develop the premium SearchBar with pill shape, glass-morphism effect, and clear/focus interactions.",
+          "inputs": [
+            "components_redesign.md: SearchBar section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/SearchBar.tsx",
+            "SearchBar.stories.tsx",
+            "SearchBar.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "SearchBar uses glass surface with backdrop blur and border as specified\u3010770088508010025\u2020L3851-L3863\u3011.",
+            "Component has a left search icon and a right clear button that appears when there is value\u3010770088508010025\u2020L3866-L3871\u3011.",
+            "Focus state enlarges shadow and border; transition lasts 300ms as per motion tokens\u3010770088508010025\u2020L3859-L3863\u3011.",
+            "Keyboard shortcut (Cmd+K) focuses the search input.",
+            "Stories demonstrate default, focused, and filled states; tests cover typing, clearing, and keyboard shortcuts.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "A4",
+          "title": "Create Navigation components",
+          "purpose": "Implement top navigation bar and navigation link components using glass surfaces and interactive underline animations.",
+          "inputs": [
+            "components_redesign.md: Navigation section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Navigation.tsx",
+            "Navigation.stories.tsx",
+            "Navigation.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Navigation bar is sticky at the top with glass backdrop, border, and subtle shadow\u3010770088508010025\u2020L3878-L3887\u3011.",
+            "Navigation links use underline animations for active and hover states\u3010770088508010025\u2020L3890-L3902\u3011.",
+            "Menu is responsive: horizontal on desktop, collapsible on mobile with appropriate spacing as per layout guide\u3010462526369540812\u2020L144-L151\u3011.",
+            "ARIA roles and keyboard navigation are implemented.",
+            "Stories show desktop and mobile variants; tests verify active link styling and accessibility.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C1",
+            "C8",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "A5",
+          "title": "Create Hero components (full and half height)",
+          "purpose": "Provide reusable Hero components for full-height and half-height sections with gradient overlays, background images, and call-to-action buttons.",
+          "inputs": [
+            "layout_and_brand_guide.md: Hero sections",
+            "C1",
+            "C8"
+          ],
+          "outputs": [
+            "src/components/HeroFull.tsx",
+            "src/components/HeroHalf.tsx",
+            "Hero.stories.tsx",
+            "Hero.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Full-height hero implements the layout described: background image/video with 90% dark gradient overlay, centre\u2011aligned content, call-to-action buttons, and scroll indicator\u3010462526369540812\u2020L294-L333\u3011.",
+            "Half-height hero aligns content to the bottom, uses gradient overlay, and displays event details as described\u3010462526369540812\u2020L336-L368\u3011.",
+            "Component props allow custom headline, subheadline, background image, CTAs, and optional indicators.",
+            "Stories display both hero types; tests verify responsive behaviour and overlay application.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C1",
+            "C8",
+            "F4"
+          ]
+        },
+        {
+          "id": "A6",
+          "title": "Create Feature component",
+          "purpose": "Build an alternating feature section component that supports image and text content with configurable ordering.",
+          "inputs": [
+            "layout_and_brand_guide.md: Feature Section",
+            "C1",
+            "C8",
+            "C9"
+          ],
+          "outputs": [
+            "src/components/FeatureSection.tsx",
+            "FeatureSection.stories.tsx",
+            "FeatureSection.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Feature component renders a section with an image and text side by side, switching order on alternate rows as illustrated\u3010462526369540812\u2020L397-L438\u3011.",
+            "Uses grid layout with gap tokens and responsive behaviour.",
+            "Props allow specifying title, description, image, CTA, and reversed order.",
+            "Stories show default and reversed layouts; tests verify correct ordering and spacing.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C8",
+            "C9"
+          ]
+        },
+        {
+          "id": "A7",
+          "title": "Create CTA component",
+          "purpose": "Develop a generic call\u2011to\u2011action component for section footers with title, description, and two buttons.",
+          "inputs": [
+            "layout_and_brand_guide.md",
+            "C1",
+            "C8"
+          ],
+          "outputs": [
+            "src/components/CTA.tsx",
+            "CTA.stories.tsx",
+            "CTA.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "CTA component uses Section for outer wrapper and centres content with generous spacing in accordance with the whitespace philosophy\u3010462526369540812\u2020L154-L164\u3011.",
+            "Includes a headline, subheadline, primary and secondary button props.",
+            "Supports optional background colour or gradient.",
+            "Stories show various CTAs; tests verify alignment and spacing.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C1",
+            "C8"
+          ]
+        },
+        {
+          "id": "A8",
+          "title": "Create Modal component",
+          "purpose": "Implement accessible modal/dialog component with backdrop, panel, animations, and focus management.",
+          "inputs": [
+            "components_redesign.md: Modal section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Modal.tsx",
+            "Modal.stories.tsx",
+            "Modal.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Backdrop uses semi\u2011transparent black with blur; panel uses surface-elevated2 background, rounded-2xl radius, and shadow-2xl\u3010770088508010025\u2020L3944-L3948\u3011.",
+            "Modal opens with fade and scale animation from 95% to 100%\u3010770088508010025\u2020L3948-L3949\u3011.",
+            "Focus is trapped inside modal and returns to trigger after close.",
+            "Supports ARIA roles (dialog) and accessible labels.",
+            "Stories demonstrate default and long-content modals; tests cover keyboard navigation and closing.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "A9",
+          "title": "Create Dropdown component",
+          "purpose": "Implement an accessible dropdown menu with panel styling, keyboard navigation, and animation.",
+          "inputs": [
+            "components_redesign.md: Dropdown section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Dropdown.tsx",
+            "Dropdown.stories.tsx",
+            "Dropdown.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Dropdown panel uses surface-elevated2 background, border, rounded-md radius, and shadow-lg\u3010770088508010025\u2020L3950-L3954\u3011.",
+            "Dropdown items have padding defined by spacing tokens and highlight on hover with background change\u3010770088508010025\u2020L3952-L3955\u3011.",
+            "Keyboard navigation (arrow keys, enter, escape) is fully supported and ARIA roles are applied.",
+            "Stories demonstrate basic dropdown and nested menu; tests verify selection and accessibility.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "C4",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "A10",
+          "title": "Create Avatar component",
+          "purpose": "Implement Avatar component supporting multiple sizes, circular shape, and optional status indicator.",
+          "inputs": [
+            "components_redesign.md: Avatar section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Avatar.tsx",
+            "Avatar.stories.tsx",
+            "Avatar.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Avatar supports sizes 6, 8, 10, 12, 16, 20 (rem units), with height and width classes per specification\u3010770088508010025\u2020L3962-L3965\u3011.",
+            "Uses full border radius to create a circular shape\u3010524020591353274\u2020L1262-L1263\u3011.",
+            "Status indicator is positioned absolutely at the bottom right; its size scales with avatar.",
+            "Stories show avatars with and without status; tests verify sizes and indicator alignment.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "F5"
+          ]
+        },
+        {
+          "id": "A11",
+          "title": "Create Skeleton Loader component",
+          "purpose": "Implement a skeleton loader using gradient shimmer animation for loading states.",
+          "inputs": [
+            "components_redesign.md: Skeleton Loader section",
+            "tokens"
+          ],
+          "outputs": [
+            "src/components/Skeleton.tsx",
+            "Skeleton.stories.tsx",
+            "Skeleton.test.tsx"
+          ],
+          "acceptance_criteria": [
+            "Skeleton uses gradient from surface-elevated1 to surface-elevated2 and back with animation defined in the redesign\u3010770088508010025\u2020L3970-L3985\u3011.",
+            "Animation uses keyframes (shimmer) and runs infinitely with 2s duration as specified\u3010770088508010025\u2020L3970-L3985\u3011.",
+            "Component accepts width, height, and border radius props.",
+            "Stories show rectangular and circular skeletons; tests verify animation and sizing.",
+            "All Tailwind classes reference CSS variables; no static colours, spacing or radii are specified.",
+            "Component exposes all state via props and remains stateless internally."
+          ],
+          "dependencies": [
+            "F6"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "4. Quality & Delivery Layer",
+      "tasks": [
+        {
+          "id": "Q1",
+          "title": "Configure Storybook",
+          "purpose": "Set up Storybook for the component library and write stories for all components and their variants.",
+          "inputs": [
+            "All component implementations"
+          ],
+          "outputs": [
+            ".storybook/config files",
+            "stories for each component"
+          ],
+          "acceptance_criteria": [
+            "Storybook is installed and configured with Tailwind and theme provider.",
+            "Stories exist for each component showing all variants and states, using the layout guide to demonstrate spacing and content hierarchy\u3010462526369540812\u2020L100-L121\u3011.",
+            "Storybook runs locally without errors and supports dark and light themes.",
+            "Storybook includes accessibility addon for a11y checks."
+          ],
+          "dependencies": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "A7",
+            "A8",
+            "A9",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "id": "Q2",
+          "title": "Write unit and integration tests",
+          "purpose": "Implement unit and integration tests for all components using Jest and React Testing Library.",
+          "inputs": [
+            "Component implementations",
+            "acceptance criteria of each component"
+          ],
+          "outputs": [
+            "__tests__ directory",
+            "coverage reports"
+          ],
+          "acceptance_criteria": [
+            "Tests cover rendering of all variants, sizes, and states for each component.",
+            "Interactions such as hover, focus, click, and keyboard navigation are tested.",
+            "Snapshot tests ensure consistent markup.",
+            "Test coverage \u2265 80%."
+          ],
+          "dependencies": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "A7",
+            "A8",
+            "A9",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "id": "Q3",
+          "title": "Perform accessibility audits",
+          "purpose": "Ensure all components comply with WCAG 2.1 AA using automated tooling and manual checks.",
+          "inputs": [
+            "design_system.md: accessibility standards",
+            "stories"
+          ],
+          "outputs": [
+            "a11y audit reports"
+          ],
+          "acceptance_criteria": [
+            "Colour contrast ratios meet minimum values (4.5:1 for normal text, 3:1 for large text) as defined\u3010524020591353274\u2020L3116-L3133\u3011.",
+            "All interactive elements have visible focus indicators using tokens\u3010524020591353274\u2020L3141-L3161\u3011.",
+            "Touch targets meet minimum size (44\u00d744 px)\u3010524020591353274\u2020L3178-L3189\u3011.",
+            "Semantic HTML and ARIA labels are used appropriately\u3010524020591353274\u2020L3197-L3272\u3011.",
+            "Reduced motion preferences are respected\u3010524020591353274\u2020L3274-L3287\u3011.",
+            "All issues found via Storybook a11y addon are resolved."
+          ],
+          "dependencies": [
+            "Q1"
+          ]
+        },
+        {
+          "id": "Q4",
+          "title": "Write component documentation",
+          "purpose": "Produce comprehensive MDX documentation for each component including purpose, props, usage examples, and design references.",
+          "inputs": [
+            "components_redesign.md",
+            "layout_and_brand_guide.md",
+            "design_system.md"
+          ],
+          "outputs": [
+            "docs/components/*.mdx"
+          ],
+          "acceptance_criteria": [
+            "Each component has a standalone MDX page with description, API table, examples, and accessibility notes.",
+            "Documentation references relevant design file sections using citations so developers can trace rationale.",
+            "Examples demonstrate correct usage of design tokens and layout patterns.",
+            "Docs include admonitions for DOs and DON'Ts where applicable (e.g., whitespace philosophy\u3010462526369540812\u2020L154-L164\u3011)."
+          ],
+          "dependencies": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "A7",
+            "A8",
+            "A9",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "id": "Q5",
+          "title": "Add JSDoc comments",
+          "purpose": "Annotate all functions, hooks, and components with JSDoc comments to generate API documentation automatically.",
+          "inputs": [
+            "source code"
+          ],
+          "outputs": [
+            "typedoc generated docs"
+          ],
+          "acceptance_criteria": [
+            "All exported functions and components include @param and @returns annotations.",
+            "Types are documented for props, tokens, and theme utilities.",
+            "API docs can be generated using Typedoc without warnings."
+          ],
+          "dependencies": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "A7",
+            "A8",
+            "A9",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "id": "Q6",
+          "title": "Generate API documentation",
+          "purpose": "Use Typedoc or similar tool to produce API documentation site from JSDoc comments and publish it with Storybook.",
+          "inputs": [
+            "JSDoc comments",
+            "tailwind config"
+          ],
+          "outputs": [
+            "docs/api"
+          ],
+          "acceptance_criteria": [
+            "API documentation builds without errors and lists all exported modules.",
+            "Docs are accessible via Storybook or separate site.",
+            "Versioning is included for each release."
+          ],
+          "dependencies": [
+            "Q5"
+          ]
+        },
+        {
+          "id": "Q7",
+          "title": "Document theme switching",
+          "purpose": "Write documentation explaining how to override the default theme via /themes files and how to integrate the theme provider in consuming projects.",
+          "inputs": [
+            "theme files",
+            "ThemeProvider"
+          ],
+          "outputs": [
+            "docs/theming.md"
+          ],
+          "acceptance_criteria": [
+            "The documentation describes how to create a new theme file by overriding tokens and where to place it in /themes.",
+            "Instructions explain how to wrap applications with ThemeProvider and switch themes at runtime.",
+            "Examples show that editing one theme file changes the appearance of all components across Storybook."
+          ],
+          "dependencies": [
+            "F9",
+            "Q4"
+          ]
+        },
+        {
+          "id": "Q8",
+          "title": "Add multi-theme compilation tests",
+          "purpose": "Ensure that all components compile and render correctly under each defined theme (default, dark, brand-specific).",
+          "inputs": [
+            "theme files",
+            "component stories"
+          ],
+          "outputs": [
+            "tests/theme.test.ts"
+          ],
+          "acceptance_criteria": [
+            "Test suite mounts every component under each theme and verifies there are no styling errors or missing variables.",
+            "Snapshots confirm that themes correctly override colours, shadows, and other tokens.",
+            "Tests fail if any component uses raw values not covered by the tokens."
+          ],
+          "dependencies": [
+            "F9",
+            "Q1",
+            "Q2"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "5. Publishing Layer",
+      "tasks": [
+        {
+          "id": "P1",
+          "title": "Configure package metadata",
+          "purpose": "Set up package.json with name '@tenerife/ui', description, author, repository, license, and publishConfig.",
+          "inputs": [
+            "project requirements"
+          ],
+          "outputs": [
+            "package.json"
+          ],
+          "acceptance_criteria": [
+            "package.json contains correct name, version, description, author, license, repository, and keywords.",
+            "publishConfig sets the registry to npm and access to public.",
+            "Dependencies and peerDependencies are declared appropriately."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "P2",
+          "title": "Implement build system",
+          "purpose": "Set up build scripts using Vite or TSup to compile TypeScript/React components into ESM and CJS outputs and generate CSS files.",
+          "inputs": [
+            "tailwind.config.js",
+            "source code"
+          ],
+          "outputs": [
+            "dist/"
+          ],
+          "acceptance_criteria": [
+            "Build outputs include ES modules and CommonJS modules with type declarations.",
+            "Generated CSS includes Tailwind styles and design tokens.",
+            "Build runs without errors and passes tests."
+          ],
+          "dependencies": [
+            "P1",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "A7",
+            "A8",
+            "A9",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "id": "P3",
+          "title": "Implement semantic versioning and release process",
+          "purpose": "Define and automate semantic versioning (major/minor/patch) based on commit messages (Conventional Commits). Use standard-version or similar tool.",
+          "inputs": [
+            "package.json"
+          ],
+          "outputs": [
+            "CHANGELOG.md",
+            "release tags"
+          ],
+          "acceptance_criteria": [
+            "Commit message guidelines are documented (feat:, fix:, chore: etc.).",
+            "Release script bumps version, generates changelog, and creates git tag.",
+            "Pre\u2011release versions (alpha, beta) are supported for pre\u2011release builds."
+          ],
+          "dependencies": [
+            "P1"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "6. CI/CD Layer",
+      "tasks": [
+        {
+          "id": "CI1",
+          "title": "Set up continuous integration pipeline",
+          "purpose": "Configure GitHub Actions to run linting, type checking, unit tests, and Storybook build on every pull request.",
+          "inputs": [
+            "source code",
+            "package.json",
+            "test suites"
+          ],
+          "outputs": [
+            ".github/workflows/ci.yml"
+          ],
+          "acceptance_criteria": [
+            "Workflow runs ESLint, Prettier, TypeScript check, Jest tests, and build tasks.",
+            "All tasks pass before merging; PR is blocked on failure.",
+            "Workflow caches dependencies to speed up builds."
+          ],
+          "dependencies": [
+            "P2",
+            "Q1",
+            "Q2"
+          ]
+        },
+        {
+          "id": "CI2",
+          "title": "Deploy Storybook automatically",
+          "purpose": "Create a CI step to deploy Storybook to GitHub Pages or Vercel on every main branch update.",
+          "inputs": [
+            "Storybook build",
+            "GitHub Pages/Vercel config"
+          ],
+          "outputs": [
+            "deployed Storybook"
+          ],
+          "acceptance_criteria": [
+            "Storybook build runs after tests succeed.",
+            "Deployment is atomic and updates version with commit hash.",
+            "URL is documented in repository README."
+          ],
+          "dependencies": [
+            "Q1"
+          ]
+        },
+        {
+          "id": "CI3",
+          "title": "Automate npm publishing",
+          "purpose": "Configure CI to publish the package to npm on new version tags with two\u2011factor authentication and release notes.",
+          "inputs": [
+            "dist folder",
+            "npm credentials"
+          ],
+          "outputs": [
+            "published package"
+          ],
+          "acceptance_criteria": [
+            "Workflow triggers on version tags and publishes package to npm with correct version.",
+            "2FA or npm token is securely stored in GitHub Secrets.",
+            "Release notes from changelog are included in GitHub release."
+          ],
+          "dependencies": [
+            "P3",
+            "P2"
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "7. Maintenance Layer",
+      "tasks": [
+        {
+          "id": "M1",
+          "title": "Enable automated dependency updates",
+          "purpose": "Set up Dependabot (or similar) to automatically open pull requests for dependency updates with semantic version labels.",
+          "inputs": [
+            "package.json",
+            "GitHub configuration"
+          ],
+          "outputs": [
+            ".github/dependabot.yml",
+            "update PRs"
+          ],
+          "acceptance_criteria": [
+            "Dependabot configuration file specifies update frequency and security alerts.",
+            "Update PRs run CI pipeline and use semantic versioning for patch updates.",
+            "Team reviews and merges updates regularly."
+          ],
+          "dependencies": [
+            "CI1"
+          ]
+        },
+        {
+          "id": "M2",
+          "title": "Create issue and pull request templates",
+          "purpose": "Provide clear templates for bug reports, feature requests, and pull requests to standardise contributions.",
+          "inputs": [
+            "repository requirements"
+          ],
+          "outputs": [
+            ".github/ISSUE_TEMPLATE/*.md",
+            ".github/PULL_REQUEST_TEMPLATE.md"
+          ],
+          "acceptance_criteria": [
+            "Issue templates include sections for summary, reproduction steps, expected vs actual behaviour, and screenshots.",
+            "PR template includes checklist for tests, documentation, and changelog updates.",
+            "Templates guide contributors to reference relevant design documents."
+          ],
+          "dependencies": []
+        },
+        {
+          "id": "M3",
+          "title": "Define versioning and maintenance policy",
+          "purpose": "Document the versioning policy (semantic versioning), release cadence, and support window for the UI library.",
+          "inputs": [
+            "project charter"
+          ],
+          "outputs": [
+            "MAINTENANCE.md"
+          ],
+          "acceptance_criteria": [
+            "MAINTENANCE.md explains semantic versioning rules (major for breaking changes, minor for features, patch for fixes).",
+            "Defines minimum supported Node and React versions.",
+            "Specifies maintenance schedule for dependencies and guidelines for deprecating components."
+          ],
+          "dependencies": [
+            "P3"
+          ]
+        }
+      ]
+    }
+  ],
+  "architecture_overview": {
+    "description": "This UI library follows a universal, token-driven architecture. All visual values (colours, typography, spacing, radii, shadows, transitions) are defined as tokens in dedicated files under a tokens folder. Components reference these tokens via CSS variables and never hardcode raw Tailwind classes or static values. A theme system allows overriding the entire design by editing a single file under the /themes directory. Components are fully controlled: they maintain no internal state and expose all data via props. This design ensures the library works in any project, supports multiple themes (default, dark, brand-specific), and maintains complete separation between style tokens and business logic."
+  },
+  "global_acceptance_criteria": [
+    "Changing values in a single theme override file propagates through the entire library without editing component code.",
+    "No component contains raw values or direct Tailwind colours; tokens fully control visual appearance.",
+    "The library is autonomous and works in any project via ThemeProvider.",
+    "Components are stateless and controlled via props only."
+  ]
+}
