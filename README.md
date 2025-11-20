@@ -1,191 +1,173 @@
-# @tenerife.music/ui
+🚀 Tenerife UI — Premium Design System & Component Library
+🎯 О проекте
 
-**Tenerife.Music UI Component Library** - A hybrid design system built on shadcn/ui primitives with Tenerife branding.
+Tenerife UI — это премиальная дизайн-система и библиотека UI-компонентов, созданная для экосистемы Tenerife Music.
+Она построена для обеспечения единого визуального стиля, высокой гибкости, консистентности и максимального качества пользовательского интерфейса.
 
-[![npm version](https://img.shields.io/npm/v/@tenerife.music/ui)](https://www.npmjs.com/package/@tenerife.music/ui)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Это независимый UI-пакет, который станет:
 
-## 📦 Installation
+основой для всех продуктов Tenerife Music
 
-```bash
-npm install @tenerife.music/ui
-# or
-pnpm add @tenerife.music/ui
-# or
-yarn add @tenerife.music/ui
-```
+эталоном премиального nightlife-дизайна
 
-## 🚀 Quick Start
+современной библиотекой компонентов для React + Tailwind
 
-```tsx
-import { Button, Card, EventCard } from "@tenerife.music/ui";
-import "@tenerife.music/ui/styles"; // Import styles
+фундаментом для быстрой разработки
 
-function App() {
-  return (
-    <div>
-      <Button variant="default">Click me</Button>
-      <Card>
-        <CardHeader>Title</CardHeader>
-        <CardContent>Content</CardContent>
-      </Card>
-    </div>
-  );
-}
-```
+✨ Что включает Tenerife UI
 
-## 📚 Documentation
+Основные результаты перенесены из глубокого аудита Abacus и включают:
 
-Full documentation available at: [Tenerife UI Documentation](https://github.com/tenerife-music/tenerife-ui)
+1. Полная премиальная дизайн-система
 
-## 🎨 Features
+Новая цветовая палитра (Midnight Blue, Electric Purple)
 
-- **74+ Components**: Primitives, Layout, Forms, Feedback, Navigation, and more
-- **Day/Night Themes**: Automatic theme switching support
-- **TypeScript**: Full type safety with TypeScript
-- **Tailwind CSS**: Built with Tailwind CSS for styling
-- **shadcn/ui Based**: Built on top of shadcn/ui primitives
-- **Accessible**: ARIA-compliant components via Radix UI
-- **Tree-shakeable**: Import only what you need
+Dark mode как основной режим
 
-## 🏗️ Architecture
+Типографика Inter + Clash Display
 
-### Hybrid Design Approach
+8 уровней теней (включая premium glow)
 
-1. **Base Primitives**: shadcn/ui components (Button, Input, Card, etc.)
-2. **Tenerife Primitives**: Re-exported with Tenerife branding
-3. **Complex Components**: Higher-level components (EventCard, VenueCard, etc.)
+Spacing system (8px grid)
 
-### Component Categories
+Border-radius scale
 
-- **Primitives**: Button, Input, Card, Badge, Label, etc.
-- **Layout**: Navbar, Footer, Container, Section, Grid, Flex
-- **Forms**: FormInput, FormSelect, FormTextarea
-- **Feedback**: Alert, Progress, Skeleton, Toast
-- **Navigation**: Breadcrumbs, Pagination, Tabs
-- **Data**: Table, List, Timeline
-- **Cards**: EventCard, VenueCard
-- **Modals**: Modal, Dialog, ConfirmDialog
+Motion & transitions
 
-## 🎨 Theming
+Premium эффекты: glass, blur, neon accents
 
-The library supports day/night themes:
+2. Полный редизайн всех компонентов
 
-```tsx
-// Set theme
-document.documentElement.setAttribute("data-mode", "day"); // or 'night'
-```
+71 улучшенный компонент, включая:
 
-## 📖 Usage Examples
+Buttons (7 вариантов)
 
-### Basic Components
+Inputs + Floating labels
 
-```tsx
-import { Button, Input, Card } from '@tenerife.music/ui';
+Form controls
 
-<Button variant="default">Click me</Button>
-<Input placeholder="Enter text..." />
-<Card>Card content</Card>
-```
+Cards (EventCard, VenueCard)
 
-### Complex Components
+Navigation
 
-```tsx
-import { EventCard, VenueCard, SearchBar } from '@tenerife.music/ui';
+Search bar
 
-<EventCard event={eventData} />
-<VenueCard venue={venueData} />
-<SearchBar onSearch={handleSearch} />
-```
+Grid system
 
-### Forms
+Sections
 
-```tsx
-import { FormInput, FormSelect } from '@tenerife.music/ui';
-import { useForm } from 'react-hook-form';
+Badges/Tags
 
-const { register } = useForm();
+Avatars, Skeleton, Dropdowns, Modals
 
-<FormInput {...register('name')} label="Name" />
-<FormSelect {...register('category')} options={options} />
-```
+Все компоненты стандартизированы под:
 
-## 🧪 Development
+Tailwind
 
-### Prerequisites
+TypeScript
 
-- Node.js 18+
-- pnpm (recommended) or npm
+CVA (class-variance-authority)
 
-### Setup
+Accessibility (WCAG 2.1 AA)
 
-```bash
-# Clone repository
-git clone https://github.com/tenerife-music/tenerife-ui.git
-cd tenerife-ui
+📚 Содержимое проекта
 
-# Install dependencies
-pnpm install
+В проект добавляются ключевые документы:
 
-# Start Storybook
-pnpm storybook
+design_system.md — полная система дизайна (16k+ слов)
 
-# Build
-pnpm build
+components_redesign.md — код и структура компонентов
 
-# Test
-pnpm test
-```
+layout_and_brand_guide.md — правила построения интерфейсов + бренд-гайд
 
-### Scripts
+ui_ux_audit_report.md — анализ текущего состояния UI
 
-- `pnpm build` - Build the library
-- `pnpm dev` - Watch mode for development
-- `pnpm test` - Run tests
-- `pnpm test:coverage` - Run tests with coverage
-- `pnpm storybook` - Start Storybook
-- `pnpm lint` - Lint code
-- `pnpm typecheck` - Type check
+technical_analysis.md — технический аудит библиотеки
 
-## 📦 Publishing
+README.md — объяснение архитектуры
 
-This package is published to npm. To publish a new version:
+component_examples.md — компоненты с примерами использования
 
-```bash
-# Update version
-npm version patch|minor|major
+QUICK_REFERENCE.md — быстрый старт
 
-# Publish
-npm publish
-```
+EXECUTIVE_SUMMARY.md — документ для инвесторов/партнёров
 
-## 🤝 Contributing
+🔥 Цель Tenerife UI
 
-Contributions are welcome! Please read our contributing guidelines first.
+Создать:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+✔ единую, мощную, премиальную UI-библиотеку
+✔ на современном стеке React + Tailwind
+✔ совместимую с Next.js и roadmap Tenerife Music
+✔ визуально сопоставимую с Tidal / Apple Music / Spotify for Artists
+🧱 Текущий статус
 
-## 📄 License
+Проект инициирован
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Дизайн-система — готова
 
-## 🔗 Links
+Компонентная библиотека — в фазе переноса
 
-- [Documentation](https://github.com/tenerife-music/tenerife-ui)
-- [Issues](https://github.com/tenerife-music/tenerife-ui/issues)
-- [Changelog](CHANGELOG.md)
+Документация — структурирована
 
-## 🙏 Acknowledgments
+Архитектура — определена
 
-- [shadcn/ui](https://ui.shadcn.com/) - Base component primitives
-- [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+🚀 Первые шаги
 
----
+Создать структуру src/components
 
-**Version:** 0.0.1  
-**Last Updated:** 2025-01-29
+Начать перенос компонентов:
+
+Button
+
+Card
+
+Input
+
+Section
+
+Перенести design tokens в tailwind.config.js
+
+Подключить Inter + Clash Display
+
+Настроить Storybook (опционально)
+
+Привязать документацию к проекту
+
+🎨 Философия дизайна
+
+Tenerife UI следует принципам:
+
+Premium minimalism
+
+Nightlife intelligence aesthetic
+
+Clarity & hierarchy
+
+Smooth motion
+
+Subtle depth
+
+Glass surfaces
+
+Consistent spacing
+
+Accessible by design
+
+🌙 Почему это важно
+
+Эта UI-библиотека станет фундаментом всего визуала Tenerife Music:
+
+web-платформы
+
+мобильных интерфейсов
+
+внутренних панелей
+
+dashboards
+
+лендингов
+
+маркетинговых материалов
+
+Это — основа бренда.

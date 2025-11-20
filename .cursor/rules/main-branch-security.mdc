@@ -1,0 +1,143 @@
+---
+alwaysApply: true
+title: Main Branch Security & Git Workflow
+version: 1.0
+status: Active
+owner: Cursor AI
+last_updated: 2024-12-19
+---
+
+# 🔒 Main Branch Security & Git Workflow Rules
+
+This rule file defines Git workflow standards and branch protection rules for the UI library project.
+
+---
+
+## 📋 Part 1: Protected Branches
+
+### Protected Branch List
+
+**ALWAYS** protect these branches:
+
+- `main` - Production-ready code
+- `dev` - Development integration branch
+
+### Protection Rules
+
+**NEVER** commit directly to protected branches:
+
+- ❌ **NEVER** commit directly to `main`
+- ❌ **NEVER** commit directly to `dev`
+- ❌ **NEVER** force push to protected branches
+- ❌ **NEVER** delete protected branches
+
+---
+
+## 🌿 Part 2: Branch Workflow
+
+### Feature Branch Workflow
+
+**ALWAYS** follow this workflow:
+
+1. **Create feature branch** from `dev`:
+   ```bash
+   git checkout dev
+   git pull origin dev
+   git checkout -b feature/component-name
+   ```
+
+2. **Work on feature branch**:
+   - Make commits
+   - Push to remote
+   - Create Pull Request
+
+3. **Merge via Pull Request**:
+   - Create PR to `dev` branch
+   - Get code review approval
+   - Merge PR (no direct commits)
+
+### Branch Naming Conventions
+
+**ALWAYS** use these naming patterns:
+
+- `feature/component-name` - New component or feature
+- `fix/issue-description` - Bug fixes
+- `docs/documentation-update` - Documentation updates
+- `refactor/component-name` - Code refactoring
+- `test/test-description` - Test additions/updates
+
+---
+
+## 🔄 Part 3: Pull Request Workflow
+
+### PR Requirements
+
+**ALWAYS** ensure PRs include:
+
+- [ ] Clear description of changes
+- [ ] Reference to related issue (if applicable)
+- [ ] All tests passing
+- [ ] No TypeScript errors
+- [ ] Linting passes
+- [ ] Storybook builds successfully (if UI changes)
+- [ ] Code review approval
+
+### PR Process
+
+**ALWAYS** follow this process:
+
+1. Create feature branch
+2. Make changes and commit
+3. Push branch to remote
+4. Create Pull Request to `dev`
+5. Wait for code review
+6. Address review comments
+7. Merge after approval
+
+---
+
+## 🚫 Part 4: What NOT to Do
+
+- ❌ **NEVER** commit directly to `main` or `dev`
+- ❌ **NEVER** force push to protected branches
+- ❌ **NEVER** skip Pull Request process
+- ❌ **NEVER** merge PRs without review
+- ❌ **NEVER** delete protected branches
+- ❌ **NEVER** bypass branch protection rules
+
+---
+
+## ✅ Part 5: What TO Do
+
+- ✅ **ALWAYS** create feature branches from `dev`
+- ✅ **ALWAYS** use Pull Request workflow
+- ✅ **ALWAYS** get code review before merging
+- ✅ **ALWAYS** ensure tests pass before merging
+- ✅ **ALWAYS** follow branch naming conventions
+- ✅ **ALWAYS** protect `main` and `dev` branches
+
+---
+
+## 📋 Git Workflow Checklist
+
+Before committing:
+
+- [ ] On feature branch (not `main` or `dev`)
+- [ ] Branch name follows convention
+- [ ] Changes are tested
+- [ ] No TypeScript errors
+- [ ] Linting passes
+
+Before creating PR:
+
+- [ ] All tests passing
+- [ ] No TypeScript errors
+- [ ] Linting passes
+- [ ] Storybook builds (if UI changes)
+- [ ] PR description is clear
+
+---
+
+**Status:** ✅ Active Rule  
+**Priority:** CRITICAL  
+**Date Created:** 2024-12-19

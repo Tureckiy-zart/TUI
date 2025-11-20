@@ -1,0 +1,176 @@
+{
+  "project": {
+    "name": "Tenerife.Music UI Component Library",
+    "version": "0.0.7",
+    "description": "Tenerife.Music UI Component Library - A hybrid design system built on shadcn/ui primitives with Tenerife branding",
+    "status": "In Development",
+    "lastUpdated": "2024-12-19"
+  },
+  "library": {
+    "type": "React Component Library",
+    "framework": "React",
+    "language": "TypeScript (strict mode)",
+    "styling": "Tailwind CSS + CSS Modules",
+    "testing": "Jest + React Testing Library",
+    "documentation": "Storybook 8.x",
+    "build": "Vite",
+    "publishing": "npm"
+  },
+  "components": {
+    "structure": {
+      "basePath": "src/components",
+      "fileStructure": [
+        "{ComponentName}.tsx",
+        "{ComponentName}.types.ts",
+        "{ComponentName}.test.tsx",
+        "{ComponentName}.stories.tsx",
+        "index.ts"
+      ],
+      "barrelExport": "src/index.ts"
+    },
+    "categories": {
+      "Primitive": [],
+      "Layout": [],
+      "Form": [],
+      "Navigation": [],
+      "Feedback": [],
+      "Data": [],
+      "Modal": [],
+      "Overlay": []
+    },
+    "totalComponents": 0,
+    "targetComponents": [
+      "Button",
+      "Input",
+      "Modal",
+      "Card",
+      "Select",
+      "Checkbox",
+      "Radio",
+      "Switch",
+      "Tabs",
+      "Dropdown"
+    ]
+  },
+  "storybook": {
+    "enabled": true,
+    "version": "8.x",
+    "addons": [
+      "@storybook/addon-docs",
+      "@storybook/addon-controls",
+      "@storybook/addon-actions",
+      "@storybook/addon-a11y",
+      "@storybook/addon-viewport",
+      "@storybook/addon-interactions"
+    ],
+    "deployment": "GitHub Pages / Netlify / Vercel",
+    "url": "TODO: Add Storybook URL"
+  },
+  "testing": {
+    "framework": "Jest",
+    "library": "React Testing Library",
+    "coverage": {
+      "threshold": {
+        "statements": 80,
+        "branches": 75,
+        "functions": 80,
+        "lines": 80
+      }
+    },
+    "accessibility": {
+      "tool": "jest-axe",
+      "required": true
+    },
+    "visualRegression": {
+      "tool": "Chromatic / Percy",
+      "enabled": false
+    }
+  },
+  "npm": {
+    "packageName": "@tenerife.music/ui",
+    "scope": "@tenerife.music",
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "versioning": "semantic",
+    "files": ["dist", "README.md", "CHANGELOG.md", "LICENSE"]
+  },
+  "build": {
+    "output": "dist",
+    "formats": ["cjs", "esm"],
+    "types": true,
+    "sourcemaps": true
+  },
+  "ci": {
+    "provider": "GitHub Actions",
+    "workflows": ["test.yml", "build.yml", "publish.yml"],
+    "triggers": {
+      "pull_request": ["test", "lint", "build"],
+      "push_main": ["test", "lint", "build"],
+      "release": ["test", "build", "publish"]
+    }
+  },
+  "quality": {
+    "eslint": "0 errors, 0 warnings",
+    "typescript": "strict mode",
+    "accessibility": "WCAG 2.1 AA",
+    "performance": "optimized components",
+    "coverage": "80%+"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "changelog": "docs/CHANGELOG.md",
+    "contributing": "CONTRIBUTING.md",
+    "api": "docs/API.md",
+    "examples": "docs/examples/"
+  },
+  "progressTracking": {
+    "canonicalFile": "docs/PROJECT_PROGRESS.md",
+    "notes": "Progress updates write target: docs/PROJECT_PROGRESS.md"
+  },
+  "keyFiles": {
+    "packageJson": "package.json",
+    "tsconfig": "tsconfig.json",
+    "componentsIndex": "src/index.ts",
+    "storybookConfig": ".storybook/main.ts",
+    "testConfig": "jest.config.cjs"
+  },
+  "development": {
+    "scripts": {
+      "dev": "vite build --watch",
+      "build": "vite build",
+      "test": "jest",
+      "test:coverage": "jest --coverage",
+      "lint": "eslint . --ext .ts,.tsx --fix",
+      "typecheck": "tsc --noEmit && tsc --noEmit --project tsconfig.vite.json",
+      "storybook": "storybook dev -p 6006",
+      "build:storybook": "storybook build"
+    }
+  },
+  "policies": {
+    "componentDevelopment": {
+      "policy": "TDD",
+      "description": "Always write tests before implementation",
+      "enforcement": [
+        "Tests must pass before component is marked complete",
+        "80%+ coverage required",
+        "Accessibility tests required"
+      ]
+    },
+    "versioning": {
+      "policy": "semantic",
+      "description": "Use semantic versioning (MAJOR.MINOR.PATCH)",
+      "enforcement": ["MAJOR for breaking changes", "MINOR for new features", "PATCH for bug fixes"]
+    },
+    "publishing": {
+      "policy": "pre-publish-checks",
+      "description": "Run all checks before publishing",
+      "enforcement": [
+        "All tests must pass",
+        "Build must succeed",
+        "Linting must pass",
+        "TypeScript must compile",
+        "Changelog must be updated"
+      ]
+    }
+  }
+}

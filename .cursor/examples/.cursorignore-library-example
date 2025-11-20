@@ -1,0 +1,144 @@
+# ===========================================
+# CURSOR OPTIMIZATION - UI LIBRARY FILTERING
+# ===========================================
+# This file optimizes Cursor's context understanding
+# by excluding unnecessary files and focusing on relevant code
+
+# ===========================================
+# DEPENDENCIES & PACKAGE MANAGERS
+# ===========================================
+node_modules/
+.pnpm-store/
+.npm/
+.yarn-integrity
+
+# ===========================================
+# BUILD OUTPUTS & ARTIFACTS
+# ===========================================
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.turbo/
+
+# ===========================================
+# STORYBOOK BUILD FILES
+# ===========================================
+storybook-static/
+.storybook-build/
+
+# ===========================================
+# TEST COVERAGE & REPORTS
+# ===========================================
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+playwright-report/
+
+# ===========================================
+# ENVIRONMENT & CONFIG FILES
+# ===========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ===========================================
+# EDITOR & IDE FILES
+# ===========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===========================================
+# OS GENERATED FILES
+# ===========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===========================================
+# LARGE DATA FILES (TOKEN OPTIMIZATION)
+# ===========================================
+*.csv
+*.json.bak
+*.sql
+*.dump
+*.tgz
+*.zip
+*.tar.gz
+
+# ===========================================
+# GENERATED & AUTO-GENERATED FILES
+# ===========================================
+*.generated.*
+*.auto.*
+*.old.*
+*.backup.*
+
+# ===========================================
+# NPM PACKAGE FILES
+# ===========================================
+*.tgz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ===========================================
+# ARCHIVE & OLD DOCUMENTATION
+# ===========================================
+docs/archive/
+docs/old/
+*.old.md
+
+# ===========================================
+# TEMPORARY FILES
+# ===========================================
+tmp/
+temp/
+.tmp/
+.temp/
+
+# ===========================================
+# CURSOR SPECIFIC EXCLUSIONS
+# ===========================================
+# Exclude large cursor configuration files that are not essential
+# .cursor/logs/
+# .cursor/reports/auto_docs/
+# .cursor/stages/
+
+# ===========================================
+# LIBRARY SPECIFIC EXCLUSIONS
+# ===========================================
+# Exclude visual regression test artifacts
+.chromatic/
+.percy/
+
+# Exclude build artifacts
+*.map
+*.min.js
+*.min.css
+
+# ===========================================
+# OPTIMIZATION NOTES
+# ===========================================
+# This configuration reduces token usage by:
+# - Excluding build artifacts and dependencies
+# - Filtering out large data files
+# - Removing old/archive documentation
+# - Focusing on source code and current documentation
+# - Excluding Storybook build files
+# - Excluding npm package files
+# 
+# Expected token reduction: 50-70%
+# Expected performance improvement: 20-30%
+
