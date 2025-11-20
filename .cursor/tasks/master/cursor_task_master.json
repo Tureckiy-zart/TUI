@@ -1,0 +1,497 @@
+{
+  "version": "1.0",
+  "project": {
+    "id": "TENERIFE_UI_LIBRARY",
+    "name": "Tenerife.Music UI Component Library",
+    "description": "Main master task file for Tenerife.Music UI component library. Controls all roadmap stages (1-8) for component development, Storybook integration, testing, documentation, npm publishing, CI/CD, and maintenance.",
+    "priority": "critical",
+    "project_start_date": "2024-12-19",
+    "reference_files": {
+      "canonical_progress": "docs/PROJECT_PROGRESS.md",
+      "unfinished_tasks": "docs/UNFINISHED_TASKS.md",
+      "architecture": "docs/architecture/",
+      "guides": "docs/guides/",
+      "components": "src/components/"
+    },
+    "global_guidelines": [
+      "Always read docs/PROJECT_PROGRESS.md first - it is the canonical source of truth",
+      "Use docs/UNFINISHED_TASKS.md to track remaining work",
+      "Execute tasks sequentially unless explicitly parallel",
+      "Update docs/PROJECT_PROGRESS.md after each completed stage",
+      "Follow component structure: ComponentName.tsx, ComponentName.types.ts, ComponentName.test.tsx, ComponentName.stories.tsx",
+      "TypeScript strict mode required",
+      "Always write tests before implementation (TDD)",
+      "Always create Storybook stories for components",
+      "Always ensure accessibility compliance (WCAG AA)",
+      "Follow Git Workflow rules from .cursor/rules/main-branch-security.mdc",
+      "Follow component rules from .cursor/rules/library-rules.mdc",
+      "Follow npm publishing rules from .cursor/rules/npm-publishing.mdc"
+    ],
+    "date_handling_rules": {
+      "strict": true,
+      "description": "Cursor must use real project dates. Forbidden to generate artificial dates. Forbidden to automatically set update date unless user explicitly requests.",
+      "conditions": [
+        "If date is required - use current system date",
+        "If historical date is required - ask user if unknown",
+        "If file had incorrect date - replace with TODO:DATE_CONFIRMATION"
+      ]
+    },
+    "tracking": {
+      "progress_file": "docs/PROJECT_PROGRESS.md",
+      "unfinished_tasks_file": "docs/UNFINISHED_TASKS.md",
+      "reality_status_file": ".cursor/reports/PROJECT_REALITY_STATUS.json",
+      "schema": [
+        "## Task ID",
+        "- Status: [pending | in_progress | completed]",
+        "- Date updated: YYYY-MM-DD (real dates only)",
+        "- Notes: Summary of progress"
+      ]
+    }
+  },
+  "current_active_task": {
+    "id": "LIBRARY_STAGE_01_SETUP",
+    "title": "Stage 1 — Project Setup & Infrastructure",
+    "status": "pending",
+    "progress": 0,
+    "priority": "critical",
+    "description": "Initialize UI library project structure, configure TypeScript, ESLint, Prettier, and set up component structure"
+  },
+  "completed_stages": [],
+  "pending_stages": [
+    {
+      "id": "LIBRARY_STAGE_01_SETUP",
+      "title": "Stage 1 — Project Setup & Infrastructure",
+      "stage": 1,
+      "priority": "critical",
+      "status": "pending",
+      "objectives": ["Infrastructure", "Configuration", "Structure"],
+      "description": "Initialize UI library project structure, configure TypeScript, ESLint, Prettier, and set up component structure",
+      "subtasks": [
+        {
+          "name": "Create project structure: src/components/, src/utils/, docs/",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Initialize TypeScript configuration with strict mode",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up ESLint and Prettier configuration",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure package.json with library metadata",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up build configuration (Vite)",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Create component structure template",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "folders": ["src/components", "src/utils", "docs"],
+        "configs": ["tsconfig.json", "eslint.config.mjs", "prettier.config.js"],
+        "verification": "Project builds successfully, TypeScript compiles without errors"
+      },
+      "success_condition": "Project structure created, TypeScript compiles, build works, linting passes.",
+      "depends_on": [],
+      "reference_files": ["docs/PROJECT_PROGRESS.md"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_02_COMPONENTS",
+      "title": "Stage 2 — Component Development",
+      "stage": 2,
+      "priority": "high",
+      "status": "pending",
+      "objectives": ["Components", "Development", "Quality"],
+      "description": "Develop base components for the library following component structure and rules",
+      "subtasks": [
+        {
+          "name": "Create Button component with variants and sizes",
+          "type": "component",
+          "status": "pending"
+        },
+        {
+          "name": "Create Input component with validation",
+          "type": "component",
+          "status": "pending"
+        },
+        {
+          "name": "Create Modal component with accessibility",
+          "type": "component",
+          "status": "pending"
+        },
+        {
+          "name": "Create Card component",
+          "type": "component",
+          "status": "pending"
+        },
+        {
+          "name": "Set up barrel exports (index.ts)",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "components": ["Button", "Input", "Modal", "Card"],
+        "structure": "Each component has .tsx, .types.ts, .test.tsx files",
+        "verification": "Components render correctly, types work, exports work"
+      },
+      "success_condition": "Base components implemented, typed correctly, exported properly.",
+      "depends_on": ["LIBRARY_STAGE_01_SETUP"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md", ".cursor/rules/library-rules.mdc"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_03_STORYBOOK",
+      "title": "Stage 3 — Storybook Integration",
+      "stage": 3,
+      "priority": "high",
+      "status": "pending",
+      "objectives": ["Documentation", "Storybook", "Examples"],
+      "description": "Integrate Storybook, create stories for all components, configure addons",
+      "subtasks": [
+        {
+          "name": "Install and configure Storybook",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure Storybook addons (docs, controls, a11y, viewport)",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Create stories for Button component",
+          "type": "storybook",
+          "status": "pending"
+        },
+        {
+          "name": "Create stories for Input component",
+          "type": "storybook",
+          "status": "pending"
+        },
+        {
+          "name": "Create stories for Modal component",
+          "type": "storybook",
+          "status": "pending"
+        },
+        {
+          "name": "Create stories for Card component",
+          "type": "storybook",
+          "status": "pending"
+        },
+        {
+          "name": "Configure Storybook build and deployment",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "stories": [
+          "Button.stories.tsx",
+          "Input.stories.tsx",
+          "Modal.stories.tsx",
+          "Card.stories.tsx"
+        ],
+        "addons": ["@storybook/addon-docs", "@storybook/addon-controls", "@storybook/addon-a11y"],
+        "verification": "Storybook builds successfully, all stories render, controls work"
+      },
+      "success_condition": "Storybook integrated, all components have stories, addons configured, Storybook builds.",
+      "depends_on": ["LIBRARY_STAGE_02_COMPONENTS"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md", ".cursor/rules/storybook-rules.mdc"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_04_TESTING",
+      "title": "Stage 4 — Testing & Quality",
+      "stage": 4,
+      "priority": "high",
+      "status": "pending",
+      "objectives": ["Testing", "Quality", "Coverage"],
+      "description": "Set up testing infrastructure, write unit tests, accessibility tests, achieve 80%+ coverage",
+      "subtasks": [
+        {
+          "name": "Set up Jest testing framework",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure React Testing Library",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up jest-axe for accessibility testing",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Write unit tests for Button component (80%+ coverage)",
+          "type": "testing",
+          "status": "pending"
+        },
+        {
+          "name": "Write unit tests for Input component (80%+ coverage)",
+          "type": "testing",
+          "status": "pending"
+        },
+        {
+          "name": "Write unit tests for Modal component (80%+ coverage)",
+          "type": "testing",
+          "status": "pending"
+        },
+        {
+          "name": "Write unit tests for Card component (80%+ coverage)",
+          "type": "testing",
+          "status": "pending"
+        },
+        {
+          "name": "Write accessibility tests for all components",
+          "type": "testing",
+          "status": "pending"
+        },
+        {
+          "name": "Configure coverage reporting (80%+ threshold)",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "tests": ["Button.test.tsx", "Input.test.tsx", "Modal.test.tsx", "Card.test.tsx"],
+        "coverage": "80%+ statements, branches, functions, lines",
+        "a11y_tests": "All components pass a11y tests",
+        "verification": "All tests passing, coverage meets threshold"
+      },
+      "success_condition": "Testing infrastructure set up, all components tested, 80%+ coverage achieved, accessibility tests passing.",
+      "depends_on": ["LIBRARY_STAGE_02_COMPONENTS"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md", ".cursor/rules/testing-rules.mdc"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_05_DOCUMENTATION",
+      "title": "Stage 5 — Documentation",
+      "stage": 5,
+      "priority": "medium",
+      "status": "pending",
+      "objectives": ["Documentation", "API Reference", "Examples"],
+      "description": "Create comprehensive documentation: README, API reference, usage examples, migration guides",
+      "subtasks": [
+        {
+          "name": "Create main README.md with installation and usage",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Create API reference documentation",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Create usage examples for each component",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Create migration guide (if applicable)",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Add JSDoc comments to all components",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Create CONTRIBUTING.md guide",
+          "type": "docs",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "docs": ["README.md", "API.md", "CONTRIBUTING.md"],
+        "jsdoc": "All components have JSDoc comments",
+        "examples": "Usage examples for all components",
+        "verification": "Documentation complete, examples work"
+      },
+      "success_condition": "Documentation complete, API reference generated, examples work, JSDoc comments added.",
+      "depends_on": ["LIBRARY_STAGE_02_COMPONENTS"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_06_NPM",
+      "title": "Stage 6 — npm Publishing Setup",
+      "stage": 6,
+      "priority": "high",
+      "status": "pending",
+      "objectives": ["npm", "Publishing", "Versioning"],
+      "description": "Set up npm publishing workflow, configure package.json, set up semantic versioning, create changelog",
+      "subtasks": [
+        {
+          "name": "Configure package.json for npm publishing",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up build output (dist/) configuration",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure .npmignore or files field",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up semantic versioning workflow",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Create CHANGELOG.md template",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up pre-publish scripts (test, build, lint)",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Test npm publish locally (npm pack)",
+          "type": "testing",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "package_json": "Configured with correct fields (main, module, types, files)",
+        "build": "dist/ folder with compiled files",
+        "changelog": "CHANGELOG.md template created",
+        "scripts": "pre-publish checks configured",
+        "verification": "npm pack works, package structure correct"
+      },
+      "success_condition": "package.json configured, build outputs correct files, npm pack works, pre-publish checks pass.",
+      "depends_on": ["LIBRARY_STAGE_02_COMPONENTS", "LIBRARY_STAGE_04_TESTING"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md", ".cursor/rules/npm-publishing.mdc"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_07_CICD",
+      "title": "Stage 7 — CI/CD & Automation",
+      "stage": 7,
+      "priority": "medium",
+      "status": "pending",
+      "objectives": ["CI/CD", "Automation", "Quality"],
+      "description": "Set up CI/CD pipeline, automate testing, linting, building, and publishing",
+      "subtasks": [
+        {
+          "name": "Set up GitHub Actions workflow",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure automated testing on PR",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure automated linting on PR",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure automated build on PR",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up automated Storybook deployment",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Configure automated npm publish on release",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up automated changelog generation",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "ci": "GitHub Actions workflow configured",
+        "automation": "Tests, lint, build run on PR",
+        "deployment": "Storybook deployed automatically",
+        "publishing": "npm publish automated on release",
+        "verification": "CI/CD pipeline works end-to-end"
+      },
+      "success_condition": "CI/CD pipeline set up, all checks automated, Storybook deploys, npm publishes on release.",
+      "depends_on": ["LIBRARY_STAGE_06_NPM"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md", "docs/devops/"],
+      "completion_date": null
+    },
+    {
+      "id": "LIBRARY_STAGE_08_MAINTENANCE",
+      "title": "Stage 8 — Maintenance & Updates",
+      "stage": 8,
+      "priority": "low",
+      "status": "pending",
+      "objectives": ["Maintenance", "Updates", "Support"],
+      "description": "Maintain library, update dependencies, handle issues, ensure backward compatibility",
+      "subtasks": [
+        {
+          "name": "Set up dependency update workflow (Dependabot/Renovate)",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Create issue templates for bug reports and feature requests",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Set up versioning strategy for breaking changes",
+          "type": "infra",
+          "status": "pending"
+        },
+        {
+          "name": "Document backward compatibility policy",
+          "type": "docs",
+          "status": "pending"
+        },
+        {
+          "name": "Set up release notes generation",
+          "type": "infra",
+          "status": "pending"
+        }
+      ],
+      "expected_results": {
+        "dependencies": "Automated dependency updates",
+        "issues": "Issue templates created",
+        "versioning": "Versioning strategy documented",
+        "compatibility": "Backward compatibility policy documented",
+        "verification": "Maintenance workflow established"
+      },
+      "success_condition": "Dependency updates automated, issue templates created, versioning strategy documented, maintenance workflow established.",
+      "depends_on": ["LIBRARY_STAGE_07_CICD"],
+      "reference_files": ["docs/PROJECT_PROGRESS.md"],
+      "completion_date": null
+    }
+  ],
+  "notes": "Master Task file for Tenerife.Music UI Component Library. Adapt stages and subtasks based on specific library requirements."
+}
+

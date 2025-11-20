@@ -1,0 +1,403 @@
+---
+alwaysApply: true
+title: Storybook Rules
+version: 1.0
+status: Active
+owner: Cursor AI
+last_updated: TODO:DATE_CONFIRMATION
+---
+
+# 📚 Storybook Rules
+
+This rule file defines standards for Storybook documentation, including story structure, controls, args, and addons configuration.
+
+---
+
+## 📋 Part 1: Story Structure
+
+### Story File Organization
+
+**ALWAYS** create stories for each component:
+
+```
+src/
+├── components/
+│   ├── Button/
+│   │   ├── Button.tsx
+│   │   ├── Button.stories.tsx  # Storybook stories
+│   │   └── index.ts
+```
+
+### Story File Naming
+
+- **Format**: `{ComponentName}.stories.tsx`
+- **Location**: Same directory as component
+- **Example**: `Button.stories.tsx` for `Button.tsx`
+
+---
+
+## 📝 Part 2: Story Template
+
+### Basic Story Structure
+
+**ALWAYS** use this template:
+
+```typescript
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./Button";
+import type { ButtonProps } from "./Button.types";
+
+const meta: Meta<typeof Button> = {
+  title: "Components/Button",
+  component: Button,
+  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component: "Button component for user interactions",
+      },
+    },
+  },
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "outline"],
+      description: "Button variant style",
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Button size",
+    },
+    disabled: {
+      control: "boolean",
+      description: "Disable button interaction",
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+export const Primary: Story = {
+  args: {
+    variant: "primary",
+    children: "Button",
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+    children: "Button",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: "Disabled Button",
+  },
+};
+```
+
+---
+
+## 🎛️ Part 3: Controls and Args
+
+### Controls Configuration
+
+**ALWAYS** configure controls for all props:
+
+```typescript
+argTypes: {
+  variant: {
+    control: 'select',
+    options: ['primary', 'secondary', 'outline'],
+    description: 'Button variant style',
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'primary' },
+    },
+  },
+  onClick: {
+    action: 'clicked',
+    description: 'Click handler function',
+  },
+}
+```
+
+### Control Types
+
+- **`select`**: For enum/union types
+- **`boolean`**: For boolean props
+- **`text`**: For string props
+- **`number`**: For number props
+- **`color`**: For color props
+- **`date`**: For date props
+- **`object`**: For object props
+- **`array`**: For array props
+
+---
+
+## 📖 Part 4: Documentation
+
+### Component Documentation
+
+**ALWAYS** include component description:
+
+```typescript
+parameters: {
+  docs: {
+    description: {
+      component: `
+        Button component for user interactions.
+
+        Supports multiple variants and sizes.
+
+        **Accessibility**: Fully keyboard accessible with ARIA support.
+      `,
+    },
+  },
+}
+```
+
+### Story Documentation
+
+**ALWAYS** document each story:
+
+```typescript
+export const Primary: Story = {
+  args: {
+    variant: "primary",
+    children: "Button",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Primary button variant for main actions",
+      },
+    },
+  },
+};
+```
+
+---
+
+## 🎨 Part 5: Story Variants
+
+### Required Stories
+
+**ALWAYS** create stories for:
+
+- Default state
+- All variants
+- All sizes
+- Disabled state
+- Loading state (if applicable)
+- Error state (if applicable)
+- Edge cases
+
+### Story Examples
+
+```typescript
+export const AllVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem' }}>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+    </div>
+  ),
+};
+
+export const AllSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+    </div>
+  ),
+};
+```
+
+---
+
+## 🔧 Part 6: Addons Configuration
+
+### Required Addons
+
+**ALWAYS** configure these addons:
+
+- **`@storybook/addon-docs`**: Auto-generated documentation
+- **`@storybook/addon-controls`**: Interactive controls
+- **`@storybook/addon-actions`**: Action logging
+- **`@storybook/addon-a11y`**: Accessibility testing
+- **`@storybook/addon-viewport`**: Responsive testing
+
+### Addons Configuration
+
+```typescript
+// .storybook/main.ts
+export default {
+  addons: [
+    "@storybook/addon-docs",
+    "@storybook/addon-controls",
+    "@storybook/addon-actions",
+    "@storybook/addon-a11y",
+    "@storybook/addon-viewport",
+  ],
+};
+```
+
+---
+
+## ♿ Part 7: Accessibility Testing
+
+### a11y Addon
+
+**ALWAYS** use a11y addon for accessibility:
+
+```typescript
+export const Accessible: Story = {
+  args: {
+    variant: "primary",
+    children: "Accessible Button",
+  },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: "color-contrast",
+            enabled: true,
+          },
+        ],
+      },
+    },
+  },
+};
+```
+
+### Accessibility Checklist
+
+- [ ] All stories pass a11y checks
+- [ ] Keyboard navigation tested
+- [ ] Screen reader tested
+- [ ] Color contrast verified
+- [ ] ARIA attributes present
+
+---
+
+## 📐 Part 8: Layout and Viewport
+
+### Layout Configuration
+
+**ALWAYS** set appropriate layout:
+
+```typescript
+parameters: {
+  layout: 'centered', // or 'padded', 'fullscreen'
+}
+```
+
+### Viewport Configuration
+
+**ALWAYS** test responsive behavior:
+
+```typescript
+parameters: {
+  viewport: {
+    viewports: {
+      mobile: {
+        name: 'Mobile',
+        styles: {
+          width: '375px',
+          height: '667px',
+        },
+      },
+    },
+  },
+}
+```
+
+---
+
+## 🎭 Part 9: Decorators
+
+### Global Decorators
+
+**ALWAYS** use decorators for consistent setup:
+
+```typescript
+// .storybook/preview.ts
+export const decorators = [
+  (Story) => (
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
+];
+```
+
+### Story-Level Decorators
+
+```typescript
+export const Themed: Story = {
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '2rem', background: '#f0f0f0' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+```
+
+---
+
+## 🚫 What NOT to Do
+
+- ❌ **NEVER** skip story creation for components
+- ❌ **NEVER** skip controls configuration
+- ❌ **NEVER** skip documentation
+- ❌ **NEVER** skip accessibility testing
+- ❌ **NEVER** use inline styles in stories (use decorators)
+- ❌ **NEVER** skip variant stories
+
+---
+
+## ✅ What TO Do
+
+- ✅ **ALWAYS** create stories for all components
+- ✅ **ALWAYS** configure controls for all props
+- ✅ **ALWAYS** document components and stories
+- ✅ **ALWAYS** test accessibility
+- ✅ **ALWAYS** create variant stories
+- ✅ **ALWAYS** use decorators for consistent setup
+- ✅ **ALWAYS** test responsive behavior
+
+---
+
+## 📋 Story Creation Checklist
+
+Before marking story as complete:
+
+- [ ] Story file created (`{Component}.stories.tsx`)
+- [ ] Meta configuration added
+- [ ] Controls configured for all props
+- [ ] Default story created
+- [ ] Variant stories created
+- [ ] Documentation added
+- [ ] Accessibility tested
+- [ ] Responsive behavior tested
+- [ ] Storybook builds successfully
+- [ ] No console warnings/errors
+
+---
+
+**Status:** ✅ Active Rule  
+**Priority:** CRITICAL  
+**Date Created:** TODO:DATE_CONFIRMATION

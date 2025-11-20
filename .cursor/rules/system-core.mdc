@@ -1,0 +1,189 @@
+---
+alwaysApply: true
+title: System Core & Master Task Rules
+version: 1.0
+status: Active
+owner: Cursor AI
+last_updated: 2024-12-19
+---
+
+# 🏛️ System Core & Master Task Rules
+
+This rule file defines the Master Task system, critical file protection, and project structure validation for the UI library.
+
+---
+
+## 📋 Part 1: Master Task System
+
+### Master Task File
+
+**ALWAYS** use Master Task file for project management:
+
+- **Location**: `.cursor/tasks/master/cursor_task_master.json`
+- **Purpose**: Controls all roadmap stages and project progress
+- **Status**: CRITICAL - Never delete or modify without explicit user request
+
+### Master Task Protection
+
+**NEVER** delete or modify Master Task file:
+
+- ❌ **NEVER** delete `.cursor/tasks/master/cursor_task_master.json`
+- ❌ **NEVER** modify Master Task without user approval
+- ❌ **NEVER** skip Master Task expansion when requested
+
+### Master Task Expansion
+
+**ALWAYS** expand Master Task when requested:
+
+1. Read `.cursor/tasks/master/cursor_task_master.json`
+2. Identify current active stage
+3. Expand stage into subtasks
+4. Execute subtasks sequentially
+5. Update progress after completion
+
+---
+
+## 🔒 Part 2: Critical File Protection
+
+### Protected Files
+
+**ALWAYS** protect these critical files:
+
+- `.cursor/tasks/master/cursor_task_master.json` - Master Task file
+- `.env` - Environment variables (if exists)
+- `.env.local` - Local environment variables (if exists)
+- `package.json` - Project dependencies and scripts
+
+### Protection Rules
+
+**NEVER** perform these actions without explicit user request:
+
+- ❌ **NEVER** delete protected files
+- ❌ **NEVER** modify `.env` files without user approval
+- ❌ **NEVER** delete `package.json`
+- ❌ **NEVER** modify Master Task structure without approval
+
+---
+
+## 📁 Part 3: File Naming Conventions
+
+### Component Files
+
+**ALWAYS** follow these naming conventions:
+
+- **Components**: `{ComponentName}.tsx` (PascalCase)
+- **Types**: `{ComponentName}.types.ts` (PascalCase)
+- **Tests**: `{ComponentName}.test.tsx` (PascalCase)
+- **Stories**: `{ComponentName}.stories.tsx` (PascalCase)
+- **Index**: `index.ts` (lowercase)
+
+### Configuration Files
+
+**ALWAYS** use standard naming:
+
+- `package.json` - npm configuration
+- `tsconfig.json` - TypeScript configuration
+- `vite.config.ts` - Vite configuration
+- `.cursorignore` - Cursor ignore rules
+- `.gitignore` - Git ignore rules
+
+---
+
+## 📊 Part 4: Project Structure Validation
+
+### Required Directories
+
+**ALWAYS** ensure these directories exist:
+
+- `src/components/` - Component source files
+- `src/hooks/` - Custom React hooks
+- `src/lib/` - Utility functions
+- `src/theme/` - Theme configuration
+- `src/tokens/` - Design tokens
+- `.cursor/rules/` - Cursor rules
+- `.cursor/templates/` - Report templates
+- `docs/` - Documentation
+
+### Structure Validation
+
+**ALWAYS** validate structure before major changes:
+
+- [ ] Component structure follows conventions
+- [ ] Barrel exports exist (`index.ts` files)
+- [ ] Tests are in correct locations
+- [ ] Stories are in correct locations
+- [ ] Documentation structure is correct
+
+---
+
+## 🔄 Part 5: Progress Tracking
+
+### Canonical Progress File
+
+**ALWAYS** use canonical progress file:
+
+- **Location**: `docs/PROJECT_PROGRESS.md`
+- **Purpose**: Single source of truth for project progress
+- **Usage**: Read first, update after changes
+
+### Progress Update Rules
+
+**ALWAYS** update progress after:
+
+- Component completion
+- Stage completion
+- Major feature addition
+- Bug fix completion
+
+**NEVER** update progress without:
+
+- Actual completion of work
+- User confirmation (for major updates)
+- Verification of changes
+
+---
+
+## 🚫 Part 6: What NOT to Do
+
+- ❌ **NEVER** delete Master Task file
+- ❌ **NEVER** modify `.env` files without approval
+- ❌ **NEVER** skip structure validation
+- ❌ **NEVER** ignore file naming conventions
+- ❌ **NEVER** modify protected files without user request
+- ❌ **NEVER** skip progress updates
+
+---
+
+## ✅ Part 7: What TO Do
+
+- ✅ **ALWAYS** protect critical files
+- ✅ **ALWAYS** follow file naming conventions
+- ✅ **ALWAYS** validate project structure
+- ✅ **ALWAYS** use Master Task for project management
+- ✅ **ALWAYS** update progress after completion
+- ✅ **ALWAYS** read canonical progress file first
+
+---
+
+## 📋 Master Task Checklist
+
+Before expanding Master Task:
+
+- [ ] Read `.cursor/tasks/master/cursor_task_master.json`
+- [ ] Identify current active stage
+- [ ] Read `docs/PROJECT_PROGRESS.md`
+- [ ] Understand stage objectives
+- [ ] Plan subtask execution
+
+After completing stage:
+
+- [ ] Update Master Task status
+- [ ] Update `docs/PROJECT_PROGRESS.md`
+- [ ] Verify all subtasks completed
+- [ ] Check success conditions met
+
+---
+
+**Status:** ✅ Active Rule  
+**Priority:** CRITICAL  
+**Date Created:** 2024-12-19
