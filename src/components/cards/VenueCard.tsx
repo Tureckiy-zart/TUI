@@ -148,7 +148,13 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         </Text>
         <div className="mb-3 flex flex-col gap-2">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -186,7 +192,13 @@ export const VenueCard: React.FC<VenueCardProps> = ({
             )}
             {capacity && (
               <div className="flex items-center gap-1 text-muted-foreground">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
