@@ -22,7 +22,7 @@ type Story = StoryObj<typeof PopoverWrapper>;
 export const Default: Story = {
   args: {
     content: (
-      <div className="space-y-2">
+      <div className="space-y-sm">
         <h4 className="font-medium leading-none">Settings</h4>
         <p className="text-sm text-muted-foreground">Configure your application settings here.</p>
       </div>
@@ -35,20 +35,20 @@ export const WithForm: Story = {
   render: () => (
     <PopoverWrapper
       content={
-        <div className="w-80 space-y-4">
-          <div className="space-y-2">
+        <div className="w-80 space-y-md">
+          <div className="space-y-sm">
             <h4 className="font-medium leading-none">User Profile</h4>
             <p className="text-sm text-muted-foreground">Update your profile information.</p>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <Label htmlFor="name">Name</Label>
             <Input id="name" placeholder="Enter your name" />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="Enter your email" />
           </div>
-          <div className="flex justify-end space-x-2">
+          <div className="flex justify-end space-x-sm">
             <Button variant="outline" size="sm">
               Cancel
             </Button>
@@ -58,7 +58,7 @@ export const WithForm: Story = {
       }
     >
       <Button variant="outline">
-        <User className="mr-2 h-4 w-4" />
+        <User className="mr-sm h-4 w-4" />
         Edit Profile
       </Button>
     </PopoverWrapper>
@@ -67,11 +67,11 @@ export const WithForm: Story = {
 
 export const DifferentVariants: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex gap-md">
       <PopoverWrapper
         variant="default"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Default Popover</h4>
             <p className="text-sm text-muted-foreground">This is a default popover.</p>
           </div>
@@ -83,7 +83,7 @@ export const DifferentVariants: Story = {
       <PopoverWrapper
         variant="success"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Success Popover</h4>
             <p className="text-sm text-muted-foreground">This is a success popover.</p>
           </div>
@@ -95,7 +95,7 @@ export const DifferentVariants: Story = {
       <PopoverWrapper
         variant="warning"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Warning Popover</h4>
             <p className="text-sm text-muted-foreground">This is a warning popover.</p>
           </div>
@@ -107,7 +107,7 @@ export const DifferentVariants: Story = {
       <PopoverWrapper
         variant="destructive"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Error Popover</h4>
             <p className="text-sm text-muted-foreground">This is an error popover.</p>
           </div>
@@ -121,11 +121,11 @@ export const DifferentVariants: Story = {
 
 export const DifferentSizes: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex gap-md">
       <PopoverWrapper
         size="sm"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Small Popover</h4>
             <p className="text-sm text-muted-foreground">Compact content.</p>
           </div>
@@ -137,7 +137,7 @@ export const DifferentSizes: Story = {
       <PopoverWrapper
         size="md"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Medium Popover</h4>
             <p className="text-sm text-muted-foreground">Standard sized content with more space.</p>
           </div>
@@ -149,12 +149,12 @@ export const DifferentSizes: Story = {
       <PopoverWrapper
         size="lg"
         content={
-          <div className="space-y-4">
+          <div className="space-y-md">
             <h4 className="font-medium">Large Popover</h4>
             <p className="text-sm text-muted-foreground">
               Large popover with plenty of space for complex content.
             </p>
-            <div className="space-y-2">
+            <div className="space-y-sm">
               <Badge>Feature</Badge>
               <Badge variant="secondary">New</Badge>
             </div>
@@ -169,11 +169,11 @@ export const DifferentSizes: Story = {
 
 export const DifferentPositions: Story = {
   render: () => (
-    <div className="grid grid-cols-2 gap-8 p-8">
+    <div className="grid grid-cols-2 gap-xl p-xl">
       <PopoverWrapper
         side="top"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Top Popover</h4>
             <p className="text-sm text-muted-foreground">This appears above the trigger.</p>
           </div>
@@ -185,7 +185,7 @@ export const DifferentPositions: Story = {
       <PopoverWrapper
         side="right"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Right Popover</h4>
             <p className="text-sm text-muted-foreground">This appears to the right.</p>
           </div>
@@ -197,7 +197,7 @@ export const DifferentPositions: Story = {
       <PopoverWrapper
         side="bottom"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Bottom Popover</h4>
             <p className="text-sm text-muted-foreground">This appears below the trigger.</p>
           </div>
@@ -209,7 +209,7 @@ export const DifferentPositions: Story = {
       <PopoverWrapper
         side="left"
         content={
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <h4 className="font-medium">Left Popover</h4>
             <p className="text-sm text-muted-foreground">This appears to the left.</p>
           </div>
@@ -226,13 +226,13 @@ export const WithCardContent: Story = {
     <PopoverWrapper
       content={
         <Card className="w-80">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2">
+          <CardHeader className="pb-sm">
+            <CardTitle className="flex items-center gap-sm">
               <Settings className="h-4 w-4" />
               Quick Settings
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-sm">
             <div className="flex items-center justify-between">
               <span className="text-sm">Notifications</span>
               <Badge variant="secondary">On</Badge>
@@ -250,7 +250,7 @@ export const WithCardContent: Story = {
       }
     >
       <Button variant="outline">
-        <Settings className="mr-2 h-4 w-4" />
+        <Settings className="mr-sm h-4 w-4" />
         Settings
       </Button>
     </PopoverWrapper>
@@ -261,33 +261,33 @@ export const NotificationsMenu: Story = {
   render: () => (
     <PopoverWrapper
       content={
-        <div className="w-80 space-y-3">
-          <div className="space-y-2">
+        <div className="w-80 space-y-sm">
+          <div className="space-y-sm">
             <h4 className="font-medium">Notifications</h4>
             <p className="text-sm text-muted-foreground">You have 3 new notifications.</p>
           </div>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
-              <Bell className="mt-0.5 h-4 w-4 text-blue-500" />
-              <div className="space-y-1">
+          <div className="space-y-sm">
+            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
+              <Bell className="mt-0.5 h-4 w-4 text-info" />
+              <div className="space-y-xs">
                 <p className="text-sm font-medium">New message</p>
                 <p className="text-xs text-muted-foreground">
                   You received a new message from John.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
-              <Bell className="mt-0.5 h-4 w-4 text-green-500" />
-              <div className="space-y-1">
+            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
+              <Bell className="mt-0.5 h-4 w-4 text-success" />
+              <div className="space-y-xs">
                 <p className="text-sm font-medium">Task completed</p>
                 <p className="text-xs text-muted-foreground">
                   Your task "Update documentation" is done.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
-              <Bell className="mt-0.5 h-4 w-4 text-yellow-500" />
-              <div className="space-y-1">
+            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
+              <Bell className="mt-0.5 h-4 w-4 text-warning" />
+              <div className="space-y-xs">
                 <p className="text-sm font-medium">Reminder</p>
                 <p className="text-xs text-muted-foreground">
                   Don't forget about the team meeting at 3 PM.

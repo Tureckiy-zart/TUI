@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 // Enhanced toast variants using shadcn/ui patterns with Tenerife branding
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between space-x-2 overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  "group pointer-events-auto relative flex w-full items-center justify-between space-x-sm overflow-hidden rounded-md border p-md pr-lg shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
   {
     variants: {
       type: {
@@ -70,18 +70,18 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
 
     return (
       <div ref={ref} className={cn(toastVariants({ type, className }))} {...props}>
-        <div className="flex flex-1 items-start space-x-3">
+        <div className="flex flex-1 items-start space-x-sm">
           <Icon className={cn(toastIconVariants({ type: toast.type }))} />
-          <div className="flex-1 space-y-1">
+          <div className="flex-1 space-y-xs">
             {toast.title && <div className="text-sm font-semibold">{toast.title}</div>}
             {toast.description && <div className="text-sm opacity-90">{toast.description}</div>}
             {toast.action && (
-              <div className="mt-2">
+              <div className="mt-sm">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={toast.action.onClick}
-                  className="h-8 px-2 text-xs"
+                  className="h-8 px-xs text-xs"
                 >
                   {toast.action.label}
                 </Button>
@@ -92,7 +92,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-1 top-1 h-6 w-6 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
+          className="absolute right-xs top-xs h-6 w-6 rounded-md p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
           onClick={() => onDismiss(toast.id)}
         >
           <X className="h-4 w-4" />

@@ -14,7 +14,7 @@ const linkVariants = cva(
         default: "text-primary hover:text-primary/80 underline-offset-4 hover:underline",
         destructive:
           "text-destructive hover:text-destructive/80 underline-offset-4 hover:underline",
-        ghost: "text-foreground hover:text-accent-foreground hover:bg-accent rounded-md px-3 py-2",
+        ghost: "text-foreground hover:text-accent-foreground hover:bg-accent rounded-md px-sm py-sm",
         secondary: "text-secondary-foreground underline-offset-4 hover:underline",
         button: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md",
         "button-outline":
@@ -23,8 +23,8 @@ const linkVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 px-3",
+        default: "h-10 px-md py-sm",
+        sm: "h-9 px-sm",
         lg: "h-11 px-8",
         icon: "h-10 w-10",
         none: "h-auto px-0 py-0",

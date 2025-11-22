@@ -35,7 +35,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   const textareaValue = value ?? "";
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("space-y-sm", className)}>
       {label && (
         <Label htmlFor={id} className="block">
           {label}
@@ -47,7 +47,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         placeholder={placeholder}
         value={textareaValue}
         onChange={(e) => onChange?.(e.target.value)}
-        className="w-full rounded-md border border-input bg-background px-3 py-2"
+        className="w-full rounded-md border border-input bg-background px-sm py-sm"
         rows={rows}
         {...rest}
       />

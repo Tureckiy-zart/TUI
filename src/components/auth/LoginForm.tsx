@@ -40,7 +40,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   }
 
   return (
-    <div className={cn("space-y-4", className)}>
+    <div className={cn("space-y-md", className)}>
       <FormInput label={emailLabel} placeholder={emailPlaceholder} />
       <FormInput label={passwordLabel} placeholder={passwordPlaceholder} />
       <Button className="w-full">{loginButtonText}</Button>

@@ -29,7 +29,7 @@ export const Table = <T extends Record<string, unknown>>({
             {columns.map((column) => (
               <th
                 key={String(column.key)}
-                className="p-3 text-left font-medium text-muted-foreground"
+                className="p-sm text-left font-medium text-muted-foreground"
               >
                 {column.title}
               </th>
@@ -40,7 +40,7 @@ export const Table = <T extends Record<string, unknown>>({
           {data.map((item) => (
             <tr key={String(item[rowKey])} className="border-b hover:bg-muted/50">
               {columns.map((column) => (
-                <td key={String(column.key)} className="p-3">
+                <td key={String(column.key)} className="p-sm">
                   {column.render ? column.render(item[column.key], item) : String(item[column.key])}
                 </td>
               ))}

@@ -17,14 +17,14 @@ interface TimelineProps {
 
 export const Timeline: React.FC<TimelineProps> = ({ items, className }) => {
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("space-y-lg", className)}>
       {items.map((item, index) => (
         <div key={item.id} className="relative flex">
           <div className="flex flex-col items-center">
             <div className="h-3 w-3 rounded-full border-2 border-background bg-primary" />
-            {index < items.length - 1 && <div className="mt-2 h-12 w-px bg-border" />}
+            {index < items.length - 1 && <div className="mt-sm h-12 w-px bg-border" />}
           </div>
-          <div className="ml-4 flex-1">
+          <div className="ml-md flex-1">
             <Heading level={3} className="font-medium">
               {item.title}
             </Heading>
@@ -32,7 +32,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className }) => {
               {item.date}
             </Text>
             {item.description && (
-              <Text size="sm" color="muted" className="mt-1">
+              <Text size="sm" color="muted" className="mt-xs">
                 {item.description}
               </Text>
             )}

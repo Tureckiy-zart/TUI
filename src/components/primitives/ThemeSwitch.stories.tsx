@@ -54,7 +54,7 @@ export const Ghost: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-md">
       <ThemeSwitch variant="default" />
       <ThemeSwitch variant="outline" />
       <ThemeSwitch variant="ghost" />

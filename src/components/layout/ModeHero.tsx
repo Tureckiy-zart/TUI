@@ -42,24 +42,24 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
       )}
     >
       <div className="mx-auto max-w-4xl text-center">
-        <Heading level={1} className="mb-4 text-4xl font-bold">
+        <Heading level={1} className="mb-md text-4xl font-bold">
           Tenerife Music Platform
         </Heading>
         <Text size="xl" className="mb-8">
           Discover amazing music events in Tenerife
         </Text>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-lg md:grid-cols-2">
           <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <Heading level={3} className="mb-2 text-2xl font-semibold">
+            <CardContent className="p-lg">
+              <Heading level={3} className="mb-sm text-2xl font-semibold">
                 {dayLabel}
               </Heading>
               <Text className="text-white/80">{dayDescription}</Text>
             </CardContent>
           </Card>
           <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <Heading level={3} className="mb-2 text-2xl font-semibold">
+            <CardContent className="p-lg">
+              <Heading level={3} className="mb-sm text-2xl font-semibold">
                 {nightLabel}
               </Heading>
               <Text className="text-white/80">{nightDescription}</Text>

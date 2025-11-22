@@ -13,7 +13,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ className, left, right, children }) => {
   return (
-    <nav className={cn("flex w-full items-center justify-between px-4 py-3", className)}>
+    <nav className={cn("flex w-full items-center justify-between px-md py-sm", className)}>
       {left && <div className="flex items-center">{left}</div>}
 
       {children && <div className="flex items-center">{children}</div>}

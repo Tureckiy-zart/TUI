@@ -48,7 +48,7 @@ export const WithLongContent: Story = {
 
 export const DifferentVariants: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex gap-md">
       <TooltipWrapper content="Default tooltip" variant="default">
         <Button variant="default">Default</Button>
       </TooltipWrapper>
@@ -74,7 +74,7 @@ export const DifferentVariants: Story = {
 
 export const DifferentPositions: Story = {
   render: () => (
-    <div className="grid grid-cols-2 gap-8 p-8">
+    <div className="grid grid-cols-2 gap-xl p-xl">
       <TooltipWrapper content="Top tooltip" side="top">
         <Button>Top</Button>
       </TooltipWrapper>
@@ -96,9 +96,9 @@ export const DifferentPositions: Story = {
 
 export const WithFormElements: Story = {
   render: () => (
-    <div className="w-80 space-y-4">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
+    <div className="w-80 space-y-md">
+      <div className="space-y-sm">
+        <div className="flex items-center gap-sm">
           <Label htmlFor="email">Email</Label>
           <TooltipWrapper content="We'll never share your email with anyone else." variant="info">
             <Info className="h-4 w-4 text-muted-foreground" />
@@ -107,8 +107,8 @@ export const WithFormElements: Story = {
         <Input id="email" type="email" placeholder="Enter your email" />
       </div>
 
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
+      <div className="space-y-sm">
+        <div className="flex items-center gap-sm">
           <Label htmlFor="password">Password</Label>
           <TooltipWrapper content="Password must be at least 8 characters long" variant="warning">
             <HelpCircle className="h-4 w-4 text-muted-foreground" />
@@ -117,11 +117,11 @@ export const WithFormElements: Story = {
         <Input id="password" type="password" placeholder="Enter your password" />
       </div>
 
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
+      <div className="space-y-sm">
+        <div className="flex items-center gap-sm">
           <Label htmlFor="confirm-password">Confirm Password</Label>
           <TooltipWrapper content="Passwords do not match" variant="destructive">
-            <AlertCircle className="h-4 w-4 text-red-500" />
+            <AlertCircle className="h-4 w-4 text-destructive" />
           </TooltipWrapper>
         </div>
         <Input id="confirm-password" type="password" placeholder="Confirm your password" />
@@ -132,7 +132,7 @@ export const WithFormElements: Story = {
 
 export const WithBadges: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex gap-md">
       <TooltipWrapper content="This feature is currently in development" variant="warning">
         <Badge variant="secondary">Beta</Badge>
       </TooltipWrapper>
@@ -150,7 +150,7 @@ export const WithBadges: Story = {
 
 export const CustomDelay: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex gap-md">
       <TooltipWrapper content="Fast tooltip (200ms delay)" delayDuration={200}>
         <Button>Fast Tooltip</Button>
       </TooltipWrapper>

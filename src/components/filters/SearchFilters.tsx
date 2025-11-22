@@ -105,10 +105,10 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   }
 
   return (
-    <div className={cn("rounded-lg bg-background p-6 shadow-lg", className)}>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className={cn("rounded-lg bg-background p-lg shadow-lg", className)}>
+      <div className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <label className="mb-2 block text-sm font-medium">{searchLabel}</label>
+          <label className="mb-sm block text-sm font-medium">{searchLabel}</label>
           <SearchInput
             placeholder={searchPlaceholder}
             value={searchValue}
@@ -117,7 +117,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium">{dateLabel}</label>
+          <label className="mb-sm block text-sm font-medium">{dateLabel}</label>
           <DateRangePicker
             value={dateValue}
             onChange={onDateChange}
@@ -129,7 +129,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium">{genreLabel}</label>
+          <label className="mb-sm block text-sm font-medium">{genreLabel}</label>
           <FilterSelect
             placeholder={genrePlaceholder}
             value={genreValue}
@@ -139,7 +139,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium">{venueLabel}</label>
+          <label className="mb-sm block text-sm font-medium">{venueLabel}</label>
           <FilterSelect
             placeholder={venuePlaceholder}
             value={venueValue}

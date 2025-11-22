@@ -61,7 +61,7 @@ export const WithoutTitle: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="space-y-md">
       <Alert variant="success" title="Success" description="Operation completed successfully!" />
       <Alert variant="error" title="Error" description="Something went wrong. Please try again." />
       <Alert

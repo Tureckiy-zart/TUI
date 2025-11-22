@@ -139,10 +139,10 @@ export function PriceRangeSlider({
   const maxSliderValue = value.max || max;
 
   return (
-    <div className={cn("space-y-4", className)}>
-      <div className="space-y-2">
+    <div className={cn("space-y-md", className)}>
+      <div className="space-y-sm">
         <Label>{priceRangeLabel}</Label>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-sm">
           <div className="flex-1">
             <Label htmlFor={minPriceId} className="text-xs text-muted-foreground">
               {minLabel}
@@ -191,7 +191,7 @@ export function PriceRangeSlider({
       </div>
 
       {/* Slider */}
-      <div className="space-y-2">
+      <div className="space-y-sm">
         <div className="relative">
           <input
             type="range"

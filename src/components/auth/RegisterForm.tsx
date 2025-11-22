@@ -50,7 +50,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   }
 
   return (
-    <div className={cn("space-y-4", className)}>
+    <div className={cn("space-y-md", className)}>
       <FormInput label={nameLabel} placeholder={namePlaceholder} />
       <FormInput label={emailLabel} placeholder={emailPlaceholder} />
       <FormInput label={passwordLabel} placeholder={passwordPlaceholder} />

@@ -30,14 +30,14 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("space-y-lg", className)}>
       {articles.map((article) => (
         <article
           key={article.slug}
-          className="rounded-lg border p-6 transition-shadow hover:shadow-md"
+          className="rounded-lg border p-lg transition-shadow hover:shadow-md"
         >
-          {article.image && <div className="mb-4 h-48 w-full rounded-md bg-muted" />}
-          <div className="space-y-2">
+          {article.image && <div className="mb-md h-48 w-full rounded-md bg-muted" />}
+          <div className="space-y-sm">
             <Heading level={2} className="text-xl font-semibold">
               <Link
                 href={`/news/${article.slug}`}
