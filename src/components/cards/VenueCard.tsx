@@ -94,14 +94,14 @@ export const VenueCard: React.FC<VenueCardProps> = ({
     >
       {featured && (
         <div className="absolute right-3 top-3 z-10">
-          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-500 to-orange-500 px-2.5 py-0.5 text-xs font-semibold text-white shadow-lg">
+          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground shadow-lg">
             {popularBadgeText}
           </span>
         </div>
       )}
 
       {showImage && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800">
+        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
           {image ? (
             <img
               src={image}
@@ -111,10 +111,11 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <svg
-                className="h-16 w-16 text-gray-400 dark:text-gray-600"
+                className="h-16 w-16 text-muted"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -146,8 +147,8 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           {description}
         </Text>
         <div className="mb-3 flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs text-gray-500">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -166,7 +167,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
             </Text>
           </div>
         </div>
-        <div className="border-t border-gray-200 pt-3 dark:border-gray-700">
+        <div className="border-t border-border pt-3">
           <div className="flex items-center justify-between text-xs">
             {eventsCount > 0 && (
               <div className="flex items-center gap-1 font-medium text-primary">
@@ -184,8 +185,8 @@ export const VenueCard: React.FC<VenueCardProps> = ({
               </div>
             )}
             {capacity && (
-              <div className="flex items-center gap-1 text-gray-500">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

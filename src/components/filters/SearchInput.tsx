@@ -5,6 +5,7 @@ import * as React from "react";
 
 import { Button } from "@/components/primitives/Button";
 import { Input } from "@/components/primitives/Input";
+import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "@/lib/utils";
 
 export interface SearchInputProps
@@ -39,24 +40,19 @@ export function SearchInput({
   }
 
   const [localValue, setLocalValue] = React.useState(value);
-  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const debouncedValue = useDebounce(localValue, debounceMs);
 
   React.useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
+  React.useEffect(() => {
+    onChange(debouncedValue);
+  }, [debouncedValue, onChange]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setLocalValue(newValue);
-
-    // Debounce the onChange call
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      onChange(newValue);
-    }, debounceMs);
   };
 
   const handleClear = () => {
@@ -65,17 +61,9 @@ export function SearchInput({
     onClear?.();
   };
 
-  React.useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div className={cn("relative", className)}>
-      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
       <Input
         {...props}
         id={inputId}
@@ -92,8 +80,9 @@ export function SearchInput({
           size="icon"
           className="absolute right-1 top-1/2 h-6 w-6 -translate-y-1/2"
           onClick={handleClear}
+          aria-label="Clear search"
         >
-          <X className="h-3 w-3" />
+          <X className="h-3 w-3" aria-hidden="true" />
         </Button>
       )}
     </div>

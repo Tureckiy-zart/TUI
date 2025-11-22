@@ -12,14 +12,13 @@ interface Event {
   [key: string]: unknown;
 }
 
-interface TrendingSectionProps {
+interface TrendingSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   events: Event[];
   limit: number;
   loading: boolean;
   title: string;
   loadingText: string;
   contentText: string;
-  className?: string;
 }
 
 export const TrendingSection: React.FC<TrendingSectionProps> = ({
@@ -30,6 +29,7 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
   loadingText,
   contentText,
   className,
+  ...rest
 }) => {
   if (!Array.isArray(events)) {
     throw new Error('TrendingSection: "events" prop is required and must be an array');
@@ -51,7 +51,7 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
   }
 
   return (
-    <Card className={cn("shadow-md", className)}>
+    <Card className={cn("shadow-md", className)} {...rest}>
       <CardContent className="p-6">
         <Heading level={2} className="mb-4">
           {title}

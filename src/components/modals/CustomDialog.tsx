@@ -11,13 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
-interface CustomDialogProps {
+interface CustomDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   description?: string;
   children: React.ReactNode;
-  className?: string;
 }
 
 export const CustomDialog: React.FC<CustomDialogProps> = ({
@@ -27,10 +26,11 @@ export const CustomDialog: React.FC<CustomDialogProps> = ({
   description,
   children,
   className,
+  ...rest
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className={cn("max-w-md", className)}>
+      <DialogContent className={cn("max-w-md", className)} {...rest}>
         {(title || description) && (
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}

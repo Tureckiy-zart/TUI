@@ -36,51 +36,26 @@ export const EventCard: React.FC<EventCardProps> = ({
   getTicketsLabel,
   trendingBadgeText,
 }) => {
-  if (typeof featured !== "boolean") {
-    throw new Error('EventCard: "featured" prop is required and must be a boolean');
-  }
-  if (typeof showImage !== "boolean") {
-    throw new Error('EventCard: "showImage" prop is required and must be a boolean');
-  }
-  if (!getTicketsLabel || getTicketsLabel.trim() === "") {
-    throw new Error('EventCard: "getTicketsLabel" prop is required and cannot be empty');
-  }
-  if (!trendingBadgeText || trendingBadgeText.trim() === "") {
-    throw new Error('EventCard: "trendingBadgeText" prop is required and cannot be empty');
-  }
-
-  // Safe string extraction - throw error if required fields are missing
+  // Safe string extraction with fallbacks
   const title =
     typeof event?.name === "string"
       ? event.name
-      : event?.name?.en || event?.name?.es || event?.name?.ru;
-  if (!title || title.trim() === "") {
-    throw new Error("EventCard: event.name is required and cannot be empty");
-  }
+      : event?.name?.en || event?.name?.es || event?.name?.ru || "";
 
   const description =
     typeof event?.description === "string"
       ? event.description
-      : event?.description?.en || event?.description?.es || event?.description?.ru;
-  if (!description || description.trim() === "") {
-    throw new Error("EventCard: event.description is required and cannot be empty");
-  }
+      : event?.description?.en || event?.description?.es || event?.description?.ru || "";
 
-  const date = event?.start_date;
-  if (!date || date.trim() === "") {
-    throw new Error("EventCard: event.start_date is required and cannot be empty");
-  }
+  const date = event?.start_date || "";
 
   const venue =
     typeof event?.venue_id?.name === "string"
       ? event.venue_id.name
-      : event?.venue_id?.name?.en || event?.venue_id?.name?.es || event?.venue_id?.name?.ru;
-  if (!venue || venue.trim() === "") {
-    throw new Error("EventCard: event.venue_id.name is required and cannot be empty");
-  }
+      : event?.venue_id?.name?.en || event?.venue_id?.name?.es || event?.venue_id?.name?.ru || "";
 
   // Ensure price is always a string, not an object
-  let price: string | null = null;
+  let price: string = "";
   const eventPrice = event?.price;
   if (typeof eventPrice === "string") {
     price = eventPrice;
@@ -88,9 +63,6 @@ export const EventCard: React.FC<EventCardProps> = ({
     const priceObj = event.price as { min?: number | string; max?: number | string };
     const { min = 0, max = "∞" } = priceObj;
     price = `€${min} - €${max}`;
-  }
-  if (!price || price.trim() === "") {
-    throw new Error("EventCard: event.price is required and cannot be empty");
   }
 
   const image = event?.image;

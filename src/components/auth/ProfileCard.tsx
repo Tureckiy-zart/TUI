@@ -24,7 +24,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
   return (
     <Card className={cn("shadow-md", className)}>
       <CardContent className="p-4">
-        {avatar && <div className="mb-4 h-16 w-16 rounded-full bg-gray-200 dark:bg-gray-700" />}
+        {avatar && <div className="mb-4 h-16 w-16 rounded-full bg-muted" />}
         <Heading level={3} className="mb-2 text-lg font-semibold">
           {name}
         </Heading>

@@ -75,7 +75,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       onChange={handleChange}
       disabled={disabled}
       className={cn(
-        "rounded-md border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800",
+        "rounded-md border border-input bg-background px-3 py-2 text-sm",
         disabled && "cursor-not-allowed opacity-70",
         className,
       )}
