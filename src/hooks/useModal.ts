@@ -2,13 +2,13 @@ import { useCallback, useState } from "react";
 
 export interface ModalState {
   isOpen: boolean;
-  data?: any;
+  data?: unknown;
 }
 
 export interface UseModalReturn {
   isOpen: boolean;
-  data: any;
-  open: (data?: any) => void;
+  data: unknown;
+  open: (data?: unknown) => void;
   close: () => void;
   toggle: () => void;
 }
@@ -19,7 +19,7 @@ export function useModal(initialState: boolean = false): UseModalReturn {
     data: undefined,
   });
 
-  const open = useCallback((data?: any) => {
+  const open = useCallback((data?: unknown) => {
     setState({
       isOpen: true,
       data,
@@ -53,7 +53,7 @@ export function useModal(initialState: boolean = false): UseModalReturn {
 export function useModalManager() {
   const [modals, setModals] = useState<Record<string, ModalState>>({});
 
-  const openModal = useCallback((modalId: string, data?: any) => {
+  const openModal = useCallback((modalId: string, data?: unknown) => {
     setModals((prev) => ({
       ...prev,
       [modalId]: {

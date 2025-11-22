@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface TableColumn<T> {
   key: keyof T;
   title: string;
-  render?: (value: any, item: T) => React.ReactNode;
+  render?: (value: T[keyof T], item: T) => React.ReactNode;
 }
 
 interface TableProps<T> {
@@ -15,7 +15,7 @@ interface TableProps<T> {
   className?: string;
 }
 
-export const Table = <T extends Record<string, any>>({
+export const Table = <T extends Record<string, unknown>>({
   data,
   columns,
   rowKey,
@@ -38,7 +38,7 @@ export const Table = <T extends Record<string, any>>({
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={String(item[rowKey])} className="hover:bg-muted/50 border-b">
+            <tr key={String(item[rowKey])} className="border-b hover:bg-muted/50">
               {columns.map((column) => (
                 <td key={String(column.key)} className="p-3">
                   {column.render ? column.render(item[column.key], item) : String(item[column.key])}

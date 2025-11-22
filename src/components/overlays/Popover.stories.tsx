@@ -267,7 +267,7 @@ export const NotificationsMenu: Story = {
             <p className="text-sm text-muted-foreground">You have 3 new notifications.</p>
           </div>
           <div className="space-y-2">
-            <div className="bg-muted/50 flex items-start gap-3 rounded-md p-2">
+            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
               <Bell className="mt-0.5 h-4 w-4 text-blue-500" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">New message</p>
@@ -276,7 +276,7 @@ export const NotificationsMenu: Story = {
                 </p>
               </div>
             </div>
-            <div className="bg-muted/50 flex items-start gap-3 rounded-md p-2">
+            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
               <Bell className="mt-0.5 h-4 w-4 text-green-500" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">Task completed</p>
@@ -285,7 +285,7 @@ export const NotificationsMenu: Story = {
                 </p>
               </div>
             </div>
-            <div className="bg-muted/50 flex items-start gap-3 rounded-md p-2">
+            <div className="flex items-start gap-3 rounded-md bg-muted/50 p-2">
               <Bell className="mt-0.5 h-4 w-4 text-yellow-500" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">Reminder</p>

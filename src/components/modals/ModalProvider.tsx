@@ -6,11 +6,11 @@ import { createContext, type ReactNode, useContext } from "react";
 import { useModalManager } from "@/hooks/useModal";
 
 interface ModalContextType {
-  openModal: (modalId: string, data?: any) => void;
+  openModal: (modalId: string, data?: unknown) => void;
   closeModal: (modalId: string) => void;
   toggleModal: (modalId: string) => void;
   isModalOpen: (modalId: string) => boolean;
-  getModalData: (modalId: string) => any;
+  getModalData: (modalId: string) => unknown;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);

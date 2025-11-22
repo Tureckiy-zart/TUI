@@ -154,7 +154,7 @@ const ImageComponent = React.forwardRef<HTMLDivElement, ImageProps>(
                 return;
               }
               try {
-                onError(event as any);
+                onError(event as React.SyntheticEvent<HTMLImageElement, Event>);
               } catch (callbackError) {
                 console.error("Error in onError callback:", callbackError);
               }

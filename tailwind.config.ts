@@ -1,4 +1,10 @@
 import type { Config } from "tailwindcss";
+import { tailwindThemeColors } from "./src/tokens/colors";
+import { tailwindTypographyConfig } from "./src/tokens/typography";
+import { tailwindSpacingConfig } from "./src/tokens/spacing";
+import { tailwindShadowConfig } from "./src/tokens/shadows";
+import { tailwindRadiusConfig } from "./src/tokens/radius";
+import { tailwindMotionConfig } from "./src/tokens/motion";
 
 const config: Config = {
   darkMode: ["class", '[data-mode="night"]'],
@@ -6,55 +12,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
-        muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
-        },
-        popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--tm-primary))",
-          foreground: "hsl(var(--tm-primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--tm-secondary))",
-          foreground: "hsl(var(--tm-secondary-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--tm-accent))",
-          foreground: "hsl(var(--tm-accent-foreground))",
-        },
-        destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
-        },
+        // Token-based colors from tokens/colors
+        ...tailwindThemeColors,
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
+      // Token-based typography from tokens/typography
+      fontFamily: tailwindTypographyConfig.fontFamily,
+      fontSize: tailwindTypographyConfig.fontSize,
+      fontWeight: tailwindTypographyConfig.fontWeight,
+      lineHeight: tailwindTypographyConfig.lineHeight,
+      letterSpacing: tailwindTypographyConfig.letterSpacing,
+      // Token-based spacing from tokens/spacing
+      spacing: tailwindSpacingConfig.spacing,
+      // Token-based shadows from tokens/shadows
+      boxShadow: tailwindShadowConfig.boxShadow,
+      ringWidth: tailwindShadowConfig.ringWidth,
+      ringColor: tailwindShadowConfig.ringColor,
+      // Token-based border radius from tokens/radius
+      borderRadius: tailwindRadiusConfig.borderRadius,
+      // Token-based motion from tokens/motion
+      transitionDuration: tailwindMotionConfig.transitionDuration,
+      transitionTimingFunction: tailwindMotionConfig.transitionTimingFunction,
+      transitionProperty: tailwindMotionConfig.transitionProperty,
+      keyframes: tailwindMotionConfig.keyframes,
+      animation: tailwindMotionConfig.animation,
     },
   },
   plugins: [],

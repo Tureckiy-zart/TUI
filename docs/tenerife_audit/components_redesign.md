@@ -3845,7 +3845,7 @@ const badgeVariants = cva(
 }
 
 .skeleton {
-  @apply from-surface-elevated1 via-surface-elevated2 to-surface-elevated1 bg-gradient-to-r;
+  @apply bg-gradient-to-r from-surface-elevated1 via-surface-elevated2 to-surface-elevated1;
   background-size: 1000px 100%;
   animation: shimmer 2s infinite linear;
 }

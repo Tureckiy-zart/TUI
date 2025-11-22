@@ -44,7 +44,14 @@ export interface FilterBarProps {
   priceClearLabel: string;
   priceMinAriaLabel: string;
   priceMaxAriaLabel: string;
-  onFiltersChange?: (filters: any) => void;
+  onFiltersChange?: (filters: {
+    search: string;
+    category: string;
+    dateRange: { start: Date | null; end: Date | null };
+    priceRange: { min: number | null; max: number | null };
+    sortBy: string;
+    sortOrder: "asc" | "desc";
+  }) => void;
 }
 
 export function FilterBar({
@@ -292,7 +299,7 @@ export function FilterBar({
 
       {/* Active Filters Summary */}
       {hasActiveFilters && (
-        <div className="bg-muted/50 rounded-lg p-3">
+        <div className="rounded-lg bg-muted/50 p-3">
           <div className="mb-2 text-sm font-medium">{activeFiltersLabel}</div>
           <div className="flex flex-wrap gap-2">
             {getFilterSummary().map((filter, index) => (

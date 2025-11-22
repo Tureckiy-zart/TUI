@@ -7,16 +7,13 @@ import { Label } from "@/components/primitives/Label";
 import { Text } from "@/components/primitives/Typography";
 import { cn } from "@/lib/utils";
 
-interface FormInputProps {
-  id?: string;
-  name?: string;
+interface FormInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "className"> {
   label?: string;
-  type?: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: (value: string) => void;
   error?: string;
   helperText?: string;
+  value?: string;
+  onChange?: (value: string) => void;
   className?: string;
 }
 
@@ -31,6 +28,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   error,
   helperText,
   className,
+  ...rest
 }) => {
   // value is optional - if undefined/null, use empty string (uncontrolled input)
   // If provided (even empty string), use it (controlled input)
@@ -50,6 +48,7 @@ export const FormInput: React.FC<FormInputProps> = ({
         placeholder={placeholder}
         value={inputValue}
         onChange={(e) => onChange?.(e.target.value)}
+        {...rest}
       />
       {helperText && !error && (
         <Text size="sm" color="muted">

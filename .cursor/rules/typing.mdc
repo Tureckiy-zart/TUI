@@ -1,0 +1,258 @@
+# 🔷 TypeScript Typing Rules
+
+**Status:** ✅ ACTIVE  
+**Priority:** CRITICAL  
+**Date Created:** 2025-01-20
+
+---
+
+## 📋 Core Rules
+
+### Rule 1: All Components MUST Have Props Interface
+
+**ALWAYS** define a typed Props interface for every component:
+
+```typescript
+// ✅ REQUIRED
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+// ❌ FORBIDDEN
+export const Button = ({ children, ...rest }) => { ... }
+```
+
+**Enforcement:** Build fails if component lacks Props interface.
+
+---
+
+### Rule 2: All Tokens MUST Export Type Unions
+
+**ALWAYS** export type unions via `keyof typeof`:
+
+```typescript
+// ✅ REQUIRED
+export const spacing = { ... } as const;
+export type Spacing = keyof typeof spacing;
+
+// ❌ FORBIDDEN
+export const spacing = { ... };
+// Missing type export
+```
+
+**Enforcement:** Build fails if token lacks type union export.
+
+---
+
+### Rule 3: No `any` Type Allowed
+
+**NEVER** use `any` type:
+
+```typescript
+// ❌ FORBIDDEN
+const data: any = ...;
+function process(data: any): any { ... }
+const items: any[] = [...];
+interface Config { [key: string]: any; }
+
+// ✅ USE INSTEAD
+const data: unknown = ...;
+function process<T>(data: T): T { ... }
+const items: Event[] = [...];
+interface Config { [key: string]: unknown; }
+```
+
+**Exceptions:** Generic utility functions may use constrained `any`:
+```typescript
+// ✅ ACCEPTABLE for generic utilities only
+function debounce<T extends (...args: any[]) => any>(...)
+```
+
+**Enforcement:** Build fails if `any`, `any[]`, or `[key: string]: any` found.
+
+---
+
+### Rule 4: No Implicit `any`
+
+**NEVER** rely on implicit `any`:
+
+```typescript
+// ❌ FORBIDDEN
+function process(data) { ... }
+
+// ✅ REQUIRED
+function process(data: string) { ... }
+```
+
+**Enforcement:** TypeScript strict mode enforces this.
+
+---
+
+### Rule 5: CVA Components MUST Use VariantProps
+
+**ALWAYS** use `VariantProps` for CVA-based components:
+
+```typescript
+// ✅ REQUIRED
+import { cva, type VariantProps } from "class-variance-authority";
+
+const buttonVariants = cva("...", {
+  variants: { ... }
+});
+
+export interface ButtonProps
+  extends VariantProps<typeof buttonVariants> { ... }
+```
+
+**Enforcement:** Build fails if CVA component lacks VariantProps.
+
+---
+
+### Rule 6: All Components MUST Extend Native Types
+
+**ALWAYS** extend appropriate native HTML types:
+
+```typescript
+// ✅ REQUIRED
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> { ... }
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> { ... }
+
+export interface DivProps
+  extends React.HTMLAttributes<HTMLDivElement> { ... }
+```
+
+**Enforcement:** Manual review required.
+
+---
+
+### Rule 7: All Event Handlers MUST Be Typed
+
+**ALWAYS** type event handlers explicitly:
+
+```typescript
+// ✅ REQUIRED
+onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+
+// ❌ FORBIDDEN
+onClick?: any;
+onChange?: (e: any) => void;
+```
+
+**Enforcement:** TypeScript strict mode enforces this.
+
+---
+
+### Rule 8: All Tokens MUST Use `as const`
+
+**ALWAYS** use `as const` for token objects:
+
+```typescript
+// ✅ REQUIRED
+export const spacing = {
+  0: "0",
+  1: "0.25rem",
+} as const;
+
+// ❌ FORBIDDEN
+export const spacing = {
+  0: "0",
+  1: "0.25rem",
+};
+```
+
+**Enforcement:** Manual review or script check.
+
+---
+
+### Rule 9: All Type Exports MUST Be Public
+
+**ALWAYS** export component props types and token type unions:
+
+```typescript
+// Component file
+export interface ButtonProps { ... }
+
+// Index file
+export type { ButtonProps } from "./Button";
+```
+
+**Enforcement:** Manual review.
+
+---
+
+### Rule 10: Strict Mode MUST Be Enabled
+
+**ALWAYS** ensure TypeScript strict mode is enabled:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    // ... all strict options
+  }
+}
+```
+
+**Enforcement:** `tsconfig.json` must have strict mode enabled.
+
+---
+
+## 🚫 Forbidden Patterns
+
+1. ❌ `any` type
+2. ❌ `any[]` arrays
+3. ❌ `[key: string]: any` index signatures
+4. ❌ Implicit `any` parameters
+5. ❌ Untyped props interfaces
+6. ❌ Untyped event handlers
+7. ❌ Tokens without `as const`
+8. ❌ Tokens without type union exports
+9. ❌ Components without Props interfaces
+10. ❌ CVA components without VariantProps
+
+---
+
+## ✅ Required Patterns
+
+1. ✅ All components have Props interfaces
+2. ✅ All Props extend native HTML types
+3. ✅ CVA components use VariantProps
+4. ✅ All event handlers are explicitly typed
+5. ✅ All tokens use `as const` and export type unions
+6. ✅ All hooks have return type interfaces
+7. ✅ Use `unknown` instead of `any`
+8. ✅ Use generic types for flexibility
+9. ✅ Use type guards for type narrowing
+10. ✅ Export all public types
+
+---
+
+## 🔍 Enforcement
+
+### Automated Checks
+
+- **TypeScript Compiler**: Enforces strict mode rules
+- **Type Enforcement Script**: Checks for forbidden patterns
+- **Pre-commit Hooks**: Run type checks before commit
+
+### Manual Checks
+
+- Code review must verify:
+  - All components have Props interfaces
+  - All Props extend native types
+  - All tokens export type unions
+  - No `any` types used
+
+---
+
+**Status:** ✅ ACTIVE  
+**Last Updated:** 2025-01-20

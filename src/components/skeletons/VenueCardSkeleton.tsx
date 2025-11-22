@@ -11,7 +11,7 @@ interface VenueCardSkeletonProps {
 
 export const VenueCardSkeleton: React.FC<VenueCardSkeletonProps> = ({ className }) => {
   return (
-    <div className={cn("rounded-lg bg-white p-4 shadow-md dark:bg-gray-800", className)}>
+    <div className={cn("rounded-lg bg-background p-4 shadow-md", className)}>
       <Skeleton className="mb-4 h-48 w-full" />
       <Skeleton className="mb-2 h-6 w-3/4" />
       <Skeleton className="mb-2 h-4 w-full" />

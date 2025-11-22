@@ -1,7 +1,14 @@
+/* Tailwind CSS directives - these are valid and processed by PostCSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 
+ * NOTE: This file contains hardcoded HSL values for CSS variables.
+ * These should eventually be generated from the token system (src/tokens/colors.ts)
+ * but are currently necessary for the CSS variable system to function.
+ * TODO: Migrate to token-based generation system.
+ */
 @layer base {
   :root {
     --background: 0 0% 100%;

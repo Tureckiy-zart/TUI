@@ -614,7 +614,7 @@ Every section follows this structure:
     <div className="mx-auto max-w-7xl px-4">
       <header className="mb-12 flex items-end justify-between">
         <div>
-          <h2 className="font-display mb-4 text-5xl font-bold">Featured Events</h2>
+          <h2 className="mb-4 font-display text-5xl font-bold">Featured Events</h2>
           <p className="text-lg text-gray-400">Handpicked by our experts</p>
         </div>
         <a href="/events" className="btn-ghost">
@@ -630,7 +630,7 @@ Every section follows this structure:
   <section className="bg-midnight-900/50 py-24">
     <div className="mx-auto max-w-7xl px-4">
       <header className="mb-12">
-        <h2 className="font-display mb-4 text-5xl font-bold">Browse by Genre</h2>
+        <h2 className="mb-4 font-display text-5xl font-bold">Browse by Genre</h2>
       </header>
 
       <div className="scrollbar-hide flex gap-4 overflow-x-auto pb-4">{/* Category pills */}</div>
@@ -641,7 +641,7 @@ Every section follows this structure:
   <section className="py-24">
     <div className="mx-auto max-w-7xl px-4">
       <header className="mb-12">
-        <h2 className="font-display mb-4 text-5xl font-bold">Trending This Week</h2>
+        <h2 className="mb-4 font-display text-5xl font-bold">Trending This Week</h2>
         <p className="text-lg text-gray-400">Most popular events right now</p>
       </header>
 
@@ -653,7 +653,7 @@ Every section follows this structure:
   <section className="bg-midnight-900/50 py-24">
     <div className="mx-auto max-w-7xl px-4">
       <header className="mb-12">
-        <h2 className="font-display mb-4 text-5xl font-bold">Top Venues</h2>
+        <h2 className="mb-4 font-display text-5xl font-bold">Top Venues</h2>
       </header>
 
       <div className="space-y-32">{/* Alternating image-text layouts */}</div>
@@ -663,7 +663,7 @@ Every section follows this structure:
   {/* 6. Newsletter CTA */}
   <section className="py-24">
     <div className="mx-auto max-w-4xl px-4 text-center">
-      <h2 className="font-display mb-8 text-4xl font-bold">Never Miss a Beat</h2>
+      <h2 className="mb-8 font-display text-4xl font-bold">Never Miss a Beat</h2>
       <p className="mb-8 text-xl text-gray-400">Get weekly updates on the hottest events</p>
       <form className="mx-auto flex max-w-md gap-4">
         <input type="email" placeholder="your@email.com" className="input flex-1" />
@@ -693,7 +693,7 @@ Every section follows this structure:
   {/* Page Header */}
   <section className="from-midnight-900 to-midnight-950 bg-gradient-to-b pb-12 pt-32">
     <div className="mx-auto max-w-7xl px-4">
-      <h1 className="font-display mb-8 text-6xl font-bold">All Events</h1>
+      <h1 className="mb-8 font-display text-6xl font-bold">All Events</h1>
 
       {/* Search Bar */}
       <div className="relative max-w-2xl">
@@ -854,7 +854,7 @@ Every section follows this structure:
   {/* Similar Events */}
   <section className="bg-midnight-900/50 py-16">
     <div className="mx-auto max-w-7xl px-4">
-      <h2 className="font-display mb-8 text-4xl font-bold">Similar Events</h2>
+      <h2 className="mb-8 font-display text-4xl font-bold">Similar Events</h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">{/* Event cards */}</div>
     </div>
   </section>
@@ -938,7 +938,7 @@ Every section follows this structure:
         {/* Page Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="font-display mb-2 text-4xl font-bold">Dashboard</h1>
+            <h1 className="mb-2 font-display text-4xl font-bold">Dashboard</h1>
             <p className="text-gray-400">Welcome back, João</p>
           </div>
           <button className="btn-primary">Create Event</button>

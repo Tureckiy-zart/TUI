@@ -3,22 +3,50 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+
+    /* Strict Type-Checking Options */
     "strict": true,
-    "jsx": "react-jsx",
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": false,
+
+    /* Module Resolution */
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": true,
+
+    /* Emit */
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    /* Interop Constraints */
+    "skipLibCheck": true,
+    "isolatedModules": true,
+
+    /* Paths */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "declaration": true,
-    "declarationMap": true,
+
+    /* Output */
     "outDir": "dist",
     "rootDir": "src"
   },

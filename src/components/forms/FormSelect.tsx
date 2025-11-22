@@ -45,7 +45,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         name={name}
         value={selectValue}
         onChange={(e) => onChange?.(e.target.value)}
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 dark:border-gray-600 dark:bg-gray-800"
+        className="w-full rounded-md border border-input bg-background px-3 py-2"
       >
         {placeholder && (
           <option value="" disabled>

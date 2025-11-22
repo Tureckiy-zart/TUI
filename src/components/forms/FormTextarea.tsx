@@ -6,15 +6,15 @@ import { Label } from "@/components/primitives/Label";
 import { Text } from "@/components/primitives/Typography";
 import { cn } from "@/lib/utils";
 
-interface FormTextareaProps {
-  id?: string;
-  name?: string;
+interface FormTextareaProps
+  extends Omit<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    "value" | "onChange" | "className"
+  > {
   label?: string;
-  placeholder?: string;
+  error?: string;
   value?: string;
   onChange?: (value: string) => void;
-  error?: string;
-  rows?: number;
   className?: string;
 }
 
@@ -28,6 +28,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   error,
   rows = 4,
   className,
+  ...rest
 }) => {
   // value is optional - if undefined/null, use empty string (uncontrolled textarea)
   // If provided (even empty string), use it (controlled textarea)
@@ -46,8 +47,9 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         placeholder={placeholder}
         value={textareaValue}
         onChange={(e) => onChange?.(e.target.value)}
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 dark:border-gray-600 dark:bg-gray-800"
+        className="w-full rounded-md border border-input bg-background px-3 py-2"
         rows={rows}
+        {...rest}
       />
       {error && (
         <Text size="sm" color="destructive">

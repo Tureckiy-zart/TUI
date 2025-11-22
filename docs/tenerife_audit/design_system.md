@@ -1274,13 +1274,13 @@ module.exports = {
 **Button:**
 
 ```html
-<button class="bg-primary-500 shadow-primary-sm rounded-sm px-6 py-3 text-white">Book Now</button>
+<button class="rounded-sm bg-primary-500 px-6 py-3 text-white shadow-primary-sm">Book Now</button>
 ```
 
 **Card:**
 
 ```html
-<div class="bg-surface-elevated1 rounded-lg p-6 shadow-md">
+<div class="rounded-lg bg-surface-elevated1 p-6 shadow-md">
   <img src="event.jpg" class="mb-4 rounded-lg" alt="Event" />
   <h3>Event Title</h3>
 </div>
@@ -1291,7 +1291,7 @@ module.exports = {
 ```html
 <input
   type="search"
-  class="bg-surface-elevated1 border-border-primary rounded-full border px-6 py-3"
+  class="border-border-primary rounded-full border bg-surface-elevated1 px-6 py-3"
   placeholder="Search events..."
 />
 ```
@@ -1299,7 +1299,7 @@ module.exports = {
 **Badge:**
 
 ```html
-<span class="bg-accent-500 rounded-full px-3 py-1 text-xs font-semibold text-white">
+<span class="rounded-full bg-accent-500 px-3 py-1 text-xs font-semibold text-white">
   Featured
 </span>
 ```
@@ -2046,7 +2046,7 @@ module.exports = {
     <h3 class="heading-5">Sunset Beach Party</h3>
 
     <!-- Meta info -->
-    <div class="text-text-tertiary flex items-center gap-4 text-sm">
+    <div class="flex items-center gap-4 text-sm text-text-tertiary">
       <span class="flex items-center gap-1">
         <svg><!-- Location icon --></svg>
         Playa de las Américas
@@ -2058,7 +2058,7 @@ module.exports = {
     </div>
 
     <!-- Description -->
-    <p class="body-sm text-text-secondary line-clamp-2">
+    <p class="body-sm line-clamp-2 text-text-secondary">
       Experience the best sunset party with international DJs...
     </p>
 
@@ -2666,7 +2666,7 @@ npm install lucide-vue-next
 
 ```html
 <div class="flex items-center gap-3">
-  <svg class="text-text-tertiary h-5 w-5" stroke-width="1.5">
+  <svg class="h-5 w-5 text-text-tertiary" stroke-width="1.5">
     <!-- Location icon -->
   </svg>
   <span class="body-sm">Playa de las Américas</span>
@@ -2677,8 +2677,8 @@ npm install lucide-vue-next
 
 ```html
 <div class="space-y-4 text-center">
-  <div class="bg-primary-500/10 inline-flex h-16 w-16 items-center justify-center rounded-full">
-    <svg class="text-primary-500 h-8 w-8" stroke-width="1.5">
+  <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10">
+    <svg class="h-8 w-8 text-primary-500" stroke-width="1.5">
       <!-- Icon -->
     </svg>
   </div>
@@ -3766,13 +3766,13 @@ export default function EventCard({ event, featured = false }) {
     <div
       className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
         featured
-          ? "from-surface-elevated1 to-surface-elevated2 border-accent-500/20 shadow-accent-sm hover:shadow-accent-md border bg-gradient-to-br hover:-translate-y-2"
-          : "bg-surface-elevated1 border-border-secondary border shadow-sm hover:-translate-y-1 hover:shadow-md"
+          ? "border border-accent-500/20 bg-gradient-to-br from-surface-elevated1 to-surface-elevated2 shadow-accent-sm hover:-translate-y-2 hover:shadow-accent-md"
+          : "border-border-secondary border bg-surface-elevated1 shadow-sm hover:-translate-y-1 hover:shadow-md"
       } `}
     >
       {/* Featured indicator */}
       {featured && (
-        <div className="from-primary-500 to-accent-500 absolute left-0 right-0 top-0 h-1 bg-gradient-to-r" />
+        <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary-500 to-accent-500" />
       )}
 
       {/* Image */}
@@ -3790,7 +3790,7 @@ export default function EventCard({ event, featured = false }) {
         {/* Featured badge */}
         {featured && (
           <div className="absolute right-4 top-4">
-            <span className="bg-accent-500/15 text-accent-400 border-accent-500/30 shadow-glow-accent inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest">
+            <span className="inline-flex items-center rounded-full border border-accent-500/30 bg-accent-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-400 shadow-glow-accent">
               Featured
             </span>
           </div>
@@ -3800,15 +3800,15 @@ export default function EventCard({ event, featured = false }) {
       {/* Content */}
       <div className="space-y-3 p-6">
         {/* Genre badge */}
-        <span className="bg-primary-500/15 text-primary-400 border-primary-500/30 inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+        <span className="inline-flex items-center rounded-full border border-primary-500/30 bg-primary-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-400">
           {event.genre}
         </span>
 
         {/* Title */}
-        <h3 className="text-text-primary line-clamp-2 text-xl font-bold">{event.title}</h3>
+        <h3 className="line-clamp-2 text-xl font-bold text-text-primary">{event.title}</h3>
 
         {/* Meta info */}
-        <div className="text-text-tertiary flex flex-wrap items-center gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-text-tertiary">
           <span className="flex items-center gap-1.5">
             <MapPin className="h-4 w-4" />
             {event.location}
@@ -3824,10 +3824,10 @@ export default function EventCard({ event, featured = false }) {
         </div>
 
         {/* Description */}
-        <p className="text-text-secondary line-clamp-2 text-sm">{event.description}</p>
+        <p className="line-clamp-2 text-sm text-text-secondary">{event.description}</p>
 
         {/* CTA */}
-        <button className="bg-primary-500 shadow-primary-sm hover:bg-primary-600 hover:shadow-primary-md focus-visible:ring-3 focus-visible:ring-primary-500/50 w-full rounded-sm px-6 py-3 font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none active:translate-y-0">
+        <button className="focus-visible:ring-3 focus-visible:ring-primary-500/50 w-full rounded-sm bg-primary-500 px-6 py-3 font-semibold text-white shadow-primary-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-primary-md focus-visible:outline-none active:translate-y-0">
           View Details
         </button>
       </div>
@@ -3851,7 +3851,7 @@ export default function Hero() {
       <div className="container relative z-10 py-24 md:py-32">
         <div className="animate-fade-in mx-auto max-w-4xl space-y-8 text-center">
           {/* Overline */}
-          <p className="text-text-tertiary text-xs font-semibold uppercase tracking-widest">
+          <p className="text-xs font-semibold uppercase tracking-widest text-text-tertiary">
             Tenerife Nightlife Intelligence
           </p>
 
@@ -3862,7 +3862,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="text-text-secondary mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
             Find the best events, clubs, and experiences across the island. Your intelligent guide
             to Tenerife's vibrant nightlife scene.
           </p>
@@ -3870,13 +3870,13 @@ export default function Hero() {
           {/* Search bar */}
           <div className="mx-auto max-w-2xl">
             <div className="glass flex items-center gap-2 rounded-full p-2 shadow-lg">
-              <Search className="text-text-tertiary ml-4 h-5 w-5" />
+              <Search className="ml-4 h-5 w-5 text-text-tertiary" />
               <input
                 type="search"
                 placeholder="Search events, venues, genres..."
-                className="text-text-primary placeholder:text-text-tertiary flex-1 border-none bg-transparent px-4 py-3 outline-none"
+                className="flex-1 border-none bg-transparent px-4 py-3 text-text-primary outline-none placeholder:text-text-tertiary"
               />
-              <button className="bg-primary-500 hover:bg-primary-600 rounded-full px-8 py-3 font-semibold text-white transition-colors duration-200">
+              <button className="rounded-full bg-primary-500 px-8 py-3 font-semibold text-white transition-colors duration-200 hover:bg-primary-600">
                 Search
               </button>
             </div>
@@ -3884,12 +3884,12 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button className="bg-accent-500 shadow-accent-sm hover:shadow-accent-md flex items-center gap-2 rounded-lg px-8 py-4 font-bold text-white transition-all duration-200 hover:-translate-y-1">
+            <button className="flex items-center gap-2 rounded-lg bg-accent-500 px-8 py-4 font-bold text-white shadow-accent-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-accent-md">
               Explore Events
               <ArrowRight className="h-5 w-5" />
             </button>
 
-            <button className="text-text-primary border-primary-500 hover:bg-primary-500 rounded-lg border-2 bg-transparent px-8 py-4 font-semibold transition-all duration-200 hover:text-white">
+            <button className="rounded-lg border-2 border-primary-500 bg-transparent px-8 py-4 font-semibold text-text-primary transition-all duration-200 hover:bg-primary-500 hover:text-white">
               Learn More
             </button>
           </div>
@@ -3919,10 +3919,10 @@ export default function Navbar() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="from-primary-500 to-accent-500 shadow-glow-primary flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 shadow-glow-primary">
               <span className="text-xl font-bold text-white">TM</span>
             </div>
-            <span className="text-text-primary text-xl font-bold">Tenerife Music</span>
+            <span className="text-xl font-bold text-text-primary">Tenerife Music</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -3935,17 +3935,17 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-4 md:flex">
-            <button className="text-text-secondary hover:text-text-primary px-4 py-2 transition-colors">
+            <button className="px-4 py-2 text-text-secondary transition-colors hover:text-text-primary">
               Sign In
             </button>
-            <button className="bg-primary-500 shadow-primary-sm hover:bg-primary-600 hover:shadow-primary-md rounded-sm px-6 py-2 font-semibold text-white transition-all duration-200 hover:-translate-y-0.5">
+            <button className="rounded-sm bg-primary-500 px-6 py-2 font-semibold text-white shadow-primary-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-primary-md">
               Get Started
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="text-text-primary p-2 md:hidden"
+            className="p-2 text-text-primary md:hidden"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -3961,10 +3961,10 @@ export default function Navbar() {
             <MobileNavLink href="/artists">Artists</MobileNavLink>
             <MobileNavLink href="/about">About</MobileNavLink>
             <div className="space-y-2 pt-4">
-              <button className="text-text-secondary hover:bg-surface-elevated1 w-full rounded-md px-4 py-2 transition-colors">
+              <button className="w-full rounded-md px-4 py-2 text-text-secondary transition-colors hover:bg-surface-elevated1">
                 Sign In
               </button>
-              <button className="bg-primary-500 shadow-primary-sm w-full rounded-sm px-4 py-2 font-semibold text-white">
+              <button className="w-full rounded-sm bg-primary-500 px-4 py-2 font-semibold text-white shadow-primary-sm">
                 Get Started
               </button>
             </div>
@@ -3979,7 +3979,7 @@ function NavLink({ href, children }) {
   return (
     <Link
       href={href}
-      className="text-text-secondary hover:text-text-primary after:bg-primary-500 relative text-base font-medium transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-all hover:after:w-full"
+      className="relative text-base font-medium text-text-secondary transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-500 after:transition-all hover:text-text-primary hover:after:w-full"
     >
       {children}
     </Link>
@@ -3990,7 +3990,7 @@ function MobileNavLink({ href, children }) {
   return (
     <Link
       href={href}
-      className="text-text-secondary hover:text-text-primary hover:bg-surface-elevated1 block rounded-md px-4 py-2 transition-colors"
+      className="block rounded-md px-4 py-2 text-text-secondary transition-colors hover:bg-surface-elevated1 hover:text-text-primary"
     >
       {children}
     </Link>
