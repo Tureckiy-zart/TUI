@@ -1,400 +1,225 @@
-🚀 Tenerife UI — Premium Design System & Component Library
-🎯 О проекте
+🌴 Tenerife UI — Premium React Component Library
+Elegant. Token-driven. Fully Typed. Built for Luxury Interfaces.
+<p align="center"> <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" /> </p> <p align="center"> <strong> A high-end, fully tokenized design system crafted for modern React apps.<br/> Built with Tailwind, CVA, TypeScript and a luxury-first aesthetic. </strong> </p> <p align="center"> <img src="https://img.shields.io/badge/React-18+-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge"/> <img src="https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Design%20Tokens-Complete-purple?style=for-the-badge"/> <img src="https://img.shields.io/badge/CVA-Variants-success?style=for-the-badge"/> </p>
+🚀 Quick Start
+npm install @tenerife/ui
+# or
+pnpm add @tenerife/ui
 
-Tenerife UI — это премиальная дизайн-система и библиотека UI-компонентов, созданная для экосистемы Tenerife Music.
-Она построена для обеспечения единого визуального стиля, высокой гибкости, консистентности и максимального качества пользовательского интерфейса.
 
-Это независимый UI-пакет, который станет:
+Use a component:
 
-основой для всех продуктов Tenerife Music
+import { Button } from "@tenerife/ui";
 
-эталоном премиального nightlife-дизайна
-
-современной библиотекой компонентов для React + Tailwind
-
-фундаментом для быстрой разработки
-
-✨ Что включает Tenerife UI
-
-Основные результаты перенесены из глубокого аудита Abacus и включают:
-
-1. Полная премиальная дизайн-система
-
-Новая цветовая палитра (Midnight Blue, Electric Purple)
-
-Dark mode как основной режим
-
-Типографика Inter + Clash Display
-
-8 уровней теней (включая premium glow)
-
-Spacing system (8px grid)
-
-Border-radius scale
-
-Motion & transitions
-
-Premium эффекты: glass, blur, neon accents
-
-2. Полный редизайн всех компонентов
-
-71 улучшенный компонент, включая:
-
-Buttons (7 вариантов)
-
-Inputs + Floating labels
-
-Form controls
-
-Cards (EventCard, VenueCard)
-
-Navigation
-
-Search bar
-
-Grid system
-
-Sections
-
-Badges/Tags
-
-Avatars, Skeleton, Dropdowns, Modals
-
-Все компоненты стандартизированы под:
-
-Tailwind
-
-TypeScript
-
-CVA (class-variance-authority)
-
-Accessibility (WCAG 2.1 AA)
-
-## 📚 Структура документации
-
-Вся документация организована в директории `docs/`:
-
-### Основная документация для разработчиков
-
-- **[INSTALLATION.md](docs/INSTALLATION.md)** — Установка и настройка
-- **[QUICK_START.md](docs/QUICK_START.md)** — Быстрый старт
-- **[USAGE.md](docs/USAGE.md)** — Руководство по использованию
-- **[TOKENS_GUIDE.md](docs/TOKENS_GUIDE.md)** — Руководство по токенам
-- **[THEME_GUIDE.md](docs/THEME_GUIDE.md)** — Руководство по темам
-- **[COMPONENT_EXAMPLES.md](docs/COMPONENT_EXAMPLES.md)** — Примеры компонентов
-
-### Внутренняя документация
-
-- **[STRUCTURE_OF_WORK.md](docs/structure/STRUCTURE_OF_WORK.md)** — Архитектура и структура проекта
-- **[PROJECT_PROGRESS.md](docs/PROJECT_PROGRESS.md)** — Трекинг выполнения задач
-- **[reports/](docs/reports/)** — Отчёты о выполнении задач и аудитах
-
-🔥 Цель Tenerife UI
-
-Создать:
-
-✔ единую, мощную, премиальную UI-библиотеку
-✔ на современном стеке React + Tailwind
-✔ совместимую с Next.js и roadmap Tenerife Music
-✔ визуально сопоставимую с Tidal / Apple Music / Spotify for Artists
-🧱 Текущий статус
-
-- ✅ **Проект инициирован** — Структура создана
-- ✅ **Дизайн-система** — Полностью готова с токенами
-- ✅ **Компонентная библиотека** — 71 компонент реализован
-- ✅ **Документация** — Полная документация создана
-- ✅ **Архитектура** — Определена и задокументирована
-- ✅ **Токены** — Все токены реализованы (colors, spacing, typography, shadows, radius, motion)
-- ✅ **Тема** — ThemeProvider и система тем реализована
-- ✅ **TypeScript** — Полная типизация всех компонентов
-
-🎨 Философия дизайна
-
-Tenerife UI следует принципам:
-
-Premium minimalism
-
-Nightlife intelligence aesthetic
-
-Clarity & hierarchy
-
-Smooth motion
-
-Subtle depth
-
-Glass surfaces
-
-Consistent spacing
-
-Accessible by design
-
-🌙 Почему это важно
-
-Эта UI-библиотека станет фундаментом всего визуала Tenerife Music:
-
-web-платформы
-
-мобильных интерфейсов
-
-внутренних панелей
-
-dashboards
-
-лендингов
-
-маркетинговых материалов
-
-Это — основа бренда.
-
----
-
-## 📦 Установка
-
-### npm
-
-```bash
-npm install @tenerife.music/ui
-npm install -D tailwindcss postcss autoprefixer
-```
-
-### pnpm
-
-```bash
-pnpm add @tenerife.music/ui
-pnpm add -D tailwindcss postcss autoprefixer
-```
-
-### yarn
-
-```bash
-yarn add @tenerife.music/ui
-yarn add -D tailwindcss postcss autoprefixer
-```
-
-**Требования:**
-
-- React: `^18 || ^19`
-- React DOM: `^18 || ^19`
-
----
-
-## ⚡ Быстрый старт
-
-### 1. Подключите Tailwind preset
-
-Создайте `tailwind.config.ts`:
-
-```typescript
-import type { Config } from "tailwindcss";
-import preset from "@tenerife.music/ui/preset";
-
-const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@tenerife.music/ui/dist/**/*.{js,ts,jsx,tsx}",
-  ],
-  presets: [preset],
-};
-
-export default config;
-```
-
-### 2. Подключите стили
-
-В корневом файле вашего приложения (например, `src/main.tsx` или `app/layout.tsx`):
-
-```typescript
-import "@tenerife.music/ui/styles";
-```
-
-### 3. Используйте компоненты
-
-```tsx
-import { ThemeProvider, Button } from "@tenerife.music/ui";
-
-function App() {
-  return (
-    <ThemeProvider defaultMode="night">
-      <Button variant="default">Нажми меня</Button>
-    </ThemeProvider>
-  );
+export function Demo() {
+  return <Button variant="primary">Book Now</Button>;
 }
-```
 
-**Готово!** 🎉
+🎨 Tenerife UI Design Philosophy
 
----
+Tenerife UI создана для:
 
-## 📖 Документация
+luxury проектов
 
-Полная документация доступна в директории `docs/`. Выберите нужный раздел для подробного изучения:
+продвинутых приложений
 
-### 🚀 Начало работы
+маркетплейсов
 
-- **[📦 Установка](docs/INSTALLATION.md)** — Полное руководство по установке библиотеки
-  - Установка через npm, pnpm, yarn
-  - Настройка workspace для монорепозиториев
-  - Подробные инструкции для Next.js (App Router & Pages Router), Vite, Create React App, Remix
-  - Настройка Tailwind CSS и PostCSS
-  - Устранение проблем и проверка установки
+платформ с глубокой эстетикой
 
-- **[⚡ Быстрый старт](docs/QUICK_START.md)** — Начните работу за 30 секунд
-  - Минимальная настройка за 4 шага
-  - Первый компонент и пример использования
-  - Первое использование темы и переключение режимов
-  - Полный пример приложения
-  - Примеры для разных фреймворков
+темных и светлых тем
 
-### 📚 Основные руководства
+брендированных интерфейсов
 
-- **[📖 Руководство по использованию](docs/USAGE.md)** — Полное руководство по использованию библиотеки
-  - Импорт компонентов из библиотеки
-  - Подключение Tailwind preset и глобальных стилей
-  - Настройка ThemeProvider с параметрами
-  - Использование useTheme hook
-  - Импорт и использование токенов
-  - Импорт и использование темы
-  - Примеры для разных фреймворков (Next.js, Vite, CRA, Remix)
-  - Использование Tailwind классов
-  - TypeScript типы
+Это библиотека не «ещё одна коллекция кнопок».
+Это — архитектурно правильная, премиальная, коммерческая дизайн-система.
 
-- **[🎨 Руководство по токенам](docs/TOKENS_GUIDE.md)** — Подробное описание всех дизайн-токенов
-  - **Цветовые токены:** Primary (Midnight Blues), Accent (Purples), Secondary (Refined Cyan), Semantic colors, Surface colors, Text colors
-  - **Spacing токены:** Базовые значения (8px grid), семантические значения (xs..5xl), layout spacing
-  - **Типографика:** Font families (Inter, Clash Display), fluid type scale, font weights, line heights, letter spacing
-  - **Shadows:** Elevation shadows, colored shadows (primary/accent), glow effects, focus rings
-  - **Border Radius:** Радиусы (none..full), компонент-специфичные стандарты
-  - **Motion:** Durations, easings, transitions, keyframes, animations, reduced motion support
-  - Примеры использования в TypeScript, Tailwind, styled-components, CSS Modules
+🧩 Component Overview
+UI Primitives
 
-- **[🎨 Руководство по темам](docs/THEME_GUIDE.md)** — Работа с темами и кастомизация
-  - ThemeProvider: настройка и все параметры
-  - useTheme hook: доступ к режиму, теме и функциям управления
-  - Режимы: Day (дневной) и Night (ночной) режимы, автоматическое определение системной темы
-  - Темы: Default, Dark, Brand темы и переключение между ними
-  - Сохранение настроек в localStorage
-  - Кастомизация: создание собственных тем с переопределением токенов
-  - Программное применение режимов и тем
-  - HTML атрибуты и CSS селекторы
-  - Полные примеры использования
+Button
 
-### 📦 Примеры и компоненты
+Input / Textarea / Select
 
-- **[📦 Примеры компонентов](docs/COMPONENT_EXAMPLES.md)** — Примеры использования всех компонентов
-  - **Button:** Все варианты (default, destructive, outline, secondary, ghost, link), размеры, состояния, с иконками
-  - **Input:** Базовое использование, различные типы, состояние ошибки
-  - **Card:** Базовая карточка, EventCard с полным примером
-  - **Modal:** SimpleModal и CustomDialog (Radix UI) с примерами
-  - **Layout компоненты:** Container, Section, Grid, Flex с вариантами использования
-  - **Skeleton:** EventCardSkeleton, VenueCardSkeleton, базовый Skeleton
-  - Комбинированные примеры: формы с валидацией, карточки с модальными окнами, списки с скелетонами
-  - Полный пример страницы с использованием всех компонентов
+Label
 
-### 🔍 Дополнительная информация
+Card
 
-- **[📊 Отчёты проекта](docs/reports/)** — Отчёты о выполнении задач и аудитах
-- **[🏗️ Структура проекта](docs/structure/STRUCTURE_OF_WORK.md)** — Архитектура и структура проекта
-- **[📋 Прогресс проекта](docs/PROJECT_PROGRESS.md)** — Трекинг выполнения задач
+Badge
 
----
+Overlays
 
-## 💻 Пример использования
+Modal
 
-Минимальный пример приложения:
+Tooltip
 
-```tsx
-import {
-  ThemeProvider,
-  Button,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@tenerife.music/ui";
+Popover
 
-function App() {
+Toast
+
+Search & Filters
+
+SearchBar
+
+FilterBar
+
+FilterSelect
+
+Layout
+
+Grid
+
+Section
+
+Navbar
+
+Hero / ModeHero
+
+Data
+
+Table
+
+List
+
+Complex
+
+VenueCard
+
+EventCard
+
+CTA Blocks
+
+📦 Core System Overview (DO NOT REMOVE)
+
+Ключевой системный блок.
+Не удалять, не переносить, не изменять структуру.
+
+🏗 Installation
+npm install @tenerife/ui
+
+import { ThemeProvider } from "@tenerife/ui";
+
+export default function App() {
   return (
-    <ThemeProvider defaultMode="night" enableSystem={true}>
-      <div className="container mx-auto p-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Добро пожаловать в Tenerife UI</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Это ваш первый компонент из библиотеки Tenerife UI.
-            </p>
-            <div className="flex gap-2">
-              <Button variant="default">Primary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="secondary">Secondary</Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    <ThemeProvider>
+      <YourApp />
     </ThemeProvider>
   );
 }
 
-export default App;
-```
+🎨 Design Tokens System
+Цвета
 
----
+100+ токенов
 
-## 🔧 Технические детали
+Полные оттеночные шкалы
 
-### Зависимости
+surface tokens
 
-**Peer Dependencies:**
+semantic + text tokens
 
-- React: `^18 || ^19`
-- React DOM: `^18 || ^19`
+day/night mode
 
-**Основные зависимости:**
+Типографика
 
-- Tailwind CSS
-- Radix UI компоненты
-- Class Variance Authority (CVA)
-- Framer Motion
-- Lucide React
+fluid clamp scale
 
-### Поддерживаемые фреймворки
+13 стилей
 
-- ✅ Next.js (App Router & Pages Router)
-- ✅ Vite (React)
-- ✅ Create React App
-- ✅ Remix
+9 весов
 
-### Браузеры
+6 line-heights
 
-Поддержка всех современных браузеров с поддержкой CSS Variables и ES Modules.
+6 tracking options
 
----
+Spacing
 
-## 📚 Дополнительные ресурсы
+scale 0–96
 
-- **[GitHub Repository](https://github.com/Tureckiy-zart/tenerife-ui)** — Исходный код
-- **[Issues](https://github.com/Tureckiy-zart/tenerife-ui/issues)** — Сообщить о проблеме или предложить улучшение
-- **[Структура проекта](docs/structure/STRUCTURE_OF_WORK.md)** — Архитектура и структура проекта
-- **[Прогресс проекта](docs/PROJECT_PROGRESS.md)** — Статус выполнения задач
+semantic tokens
 
----
+layout tokens
 
-## 💡 Нужна помощь?
+Shadows
 
-1. Начните с [Быстрого старта](docs/QUICK_START.md) — работающий пример за 30 секунд
-2. Изучите [Примеры компонентов](docs/COMPONENT_EXAMPLES.md) — готовые примеры использования
-3. Ознакомьтесь с [Руководством по использованию](docs/USAGE.md) — полное руководство
-4. Используйте [Руководство по токенам](docs/TOKENS_GUIDE.md) — работа с дизайн-токенами
-5. Настройте [Темы](docs/THEME_GUIDE.md) — кастомизация и переключение тем
+elevation 1–5
 
----
+colored shadows
 
-## 📄 Лицензия
+glow
 
-MIT License — подробности в файле [LICENSE](LICENSE)
+focus rings
 
----
+Radius
 
-**Версия:** 0.0.7  
-**Последнее обновление:** 2024-12-19
+none → 3xl
+
+full-radius
+
+Motion
+
+easing
+
+durations
+
+transitions
+
+⚙️ How Tenerife UI Works
+★ Token-first architecture
+
+Никаких raw стилей.
+Всё — через токены.
+
+★ Tailwind + CSS Variables
+
+Цвета, spacing, shadows, radius — генерируются автоматически.
+
+★ CVA для вариативности
+
+Компоненты имеют единый Variant API.
+
+★ Strict TypeScript
+
+Идеальный DX и подсказки.
+
+★ Theme Engine
+
+Instant day/night mode.
+
+🧱 Folder Structure
+src/
+  components/
+  tokens/
+  theme/
+  layouts/
+  overlays/
+  search/
+  data/
+
+📸 Component Preview
+
+(Добавить скриншоты/видео позже)
+
+🔧 Development
+pnpm install
+pnpm dev
+pnpm storybook
+
+🛠 Contributing
+
+Before contributing, please read:
+
+TYPING_STANDARD.md
+
+STRUCTURE_OF_WORK.md
+
+COMPONENT_GUIDELINES.md
+
+📜 License
+
+MIT — Commercial-friendly.
+
+🎤 Author’s Note
+
+Tenerife UI — это мой личный подход к созданию коммерческой, красивой и премиальной UI-системы.
+Если ты строишь интерфейсы с эстетикой “дорого, стильно и технологично” — ты дома
