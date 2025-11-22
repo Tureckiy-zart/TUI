@@ -17,10 +17,10 @@ export const Alert: React.FC<AlertProps> = ({
   className,
 }) => {
   const variantClasses = {
-    success: "bg-green-50 border-green-200 text-green-800",
-    error: "bg-red-50 border-red-200 text-red-800",
-    warning: "bg-yellow-50 border-yellow-200 text-yellow-800",
-    info: "bg-blue-50 border-blue-200 text-blue-800",
+    success: "bg-success/10 border-success/20 text-success-foreground",
+    error: "bg-error/10 border-error/20 text-error-foreground",
+    warning: "bg-warning/10 border-warning/20 text-warning-foreground",
+    info: "bg-info/10 border-info/20 text-info-foreground",
   };
 
   return (

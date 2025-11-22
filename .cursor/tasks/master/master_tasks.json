@@ -30,15 +30,15 @@
           "title": "Audit existing components for token compliance",
           "purpose": "Perform a comprehensive review of every component in the current library to ensure they use design tokens for colours, typography, spacing, radii, shadows and motion. Identify any direct Tailwind values or hard coded styles and document a plan for migrating those components to a fully token‑driven implementation.",
           "inputs": ["src/components/**/*", "tokens defined in Foundation Layer"],
-          "outputs": [],
+          "outputs": ["docs/reports/U0_TOKEN_COMPLIANCE_AUDIT.md", ".cursor/tasks/migration/U0_MIGRATION_*.md"],
           "acceptance_criteria": [
             "Every component file has been inspected for raw Tailwind classes and static values.",
             "The audit report lists all components which violate token usage guidelines, detailing which tokens should replace hard coded values.",
-            "For each violation, propose a concrete migration step (e.g., replace ‘bg‑slate‑900’ with ‘bg‑[color:var(--tm-surface-base)]’).",
+            "For each violation, propose a concrete migration step (e.g., replace 'bg‑slate‑900' with 'bg‑[color:var(--tm-surface-base)]').",
             "A separate issue is filed for each component requiring refactoring, linked back to this audit task."
           ],
           "dependencies": ["G0"],
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "U1",

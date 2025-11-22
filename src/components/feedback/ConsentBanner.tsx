@@ -25,7 +25,7 @@ export const ConsentBanner: React.FC<ConsentBannerProps> = ({
   }
 
   return (
-    <div className={cn("rounded-lg bg-blue-500 p-4 text-white", className)}>
+    <div className={cn("rounded-lg bg-primary p-md text-primary-foreground", className)}>
       <Text className="mb-2">{message}</Text>
       <Button>{acceptLabel}</Button>
     </div>

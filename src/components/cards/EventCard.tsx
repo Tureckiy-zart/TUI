@@ -70,31 +70,31 @@ export const EventCard: React.FC<EventCardProps> = ({
   return (
     <Card
       className={cn(
-        "animate-fade-in-up group relative overflow-hidden border-transparent shadow-md transition-all duration-300 hover:border-primary/20 hover:shadow-xl",
+        "animate-fade-in-up group relative overflow-hidden border-transparent shadow-elevation-md transition-all duration-normal hover:border-primary/20 hover:shadow-elevation-xl",
         featured && "ring-2 ring-primary/50",
         className,
       )}
     >
       {featured && (
         <div className="absolute right-3 top-3 z-10">
-          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-orange-500 to-purple-600 px-2.5 py-0.5 text-xs font-semibold text-white shadow-lg">
+          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white shadow-elevation-lg">
             {trendingBadgeText}
           </span>
         </div>
       )}
 
       {showImage && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800">
+        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
           {image ? (
             <img
               src={image}
               alt={title}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="h-full w-full object-cover transition-transform duration-slow group-hover:scale-110"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <svg
-                className="h-16 w-16 text-gray-400 dark:text-gray-600"
+                className="h-16 w-16 text-muted-foreground"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -108,14 +108,14 @@ export const EventCard: React.FC<EventCardProps> = ({
               </svg>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-normal group-hover:opacity-100" />
         </div>
       )}
 
-      <CardContent className="p-4">
+      <CardContent className="p-md">
         <Heading
           level={3}
-          className="mb-2 line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
+          className="mb-xs line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
         >
           {event?.slug ? (
             <Link href={`/events/${event.slug}`} variant="ghost" size="none">
@@ -125,11 +125,11 @@ export const EventCard: React.FC<EventCardProps> = ({
             title
           )}
         </Heading>
-        <Text size="sm" color="muted" className="mb-3 line-clamp-2">
+        <Text size="sm" color="muted" className="mb-sm line-clamp-2">
           {description}
         </Text>
-        <div className="mb-3 flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs text-gray-500">
+        <div className="mb-sm flex flex-col gap-xs">
+          <div className="flex items-center gap-xs text-xs text-muted-foreground">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
@@ -142,7 +142,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {date}
             </Text>
           </div>
-          <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div className="flex items-center gap-xs text-xs text-muted-foreground">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
@@ -162,16 +162,16 @@ export const EventCard: React.FC<EventCardProps> = ({
             </Text>
           </div>
         </div>
-        <div className="border-t border-gray-200 pt-3 dark:border-gray-700">
+        <div className="border-t border-border pt-sm">
           {event?.ticket_url ? (
             <Link
               href={event.ticket_url}
-              className="inline-flex w-full transform items-center justify-center bg-gradient-to-r from-orange-500 to-purple-600 px-4 py-2 font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 hover:from-orange-600 hover:to-purple-700 hover:shadow-lg"
+              className="inline-flex w-full transform items-center justify-center bg-gradient-to-r from-accent-500 to-primary-600 px-md py-xs font-semibold text-white shadow-elevation-md transition-all duration-normal hover:scale-105 hover:from-accent-600 hover:to-primary-700 hover:shadow-elevation-lg"
               target="_blank"
               rel="noopener noreferrer"
             >
               {getTicketsLabel}
-              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="ml-xs h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -185,7 +185,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               <Text
                 size="lg"
                 weight="bold"
-                className="bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-accent-500 to-primary-600 bg-clip-text text-transparent"
               >
                 {price}
               </Text>

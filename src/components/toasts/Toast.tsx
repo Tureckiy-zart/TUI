@@ -15,13 +15,10 @@ const toastVariants = cva(
     variants: {
       type: {
         default: "border bg-background text-foreground",
-        success:
-          "border-green-200 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-950 dark:text-green-100",
-        error:
-          "border-red-200 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950 dark:text-red-100",
-        warning:
-          "border-yellow-200 bg-yellow-50 text-yellow-900 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-100",
-        info: "border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-100",
+        success: "border-success/20 bg-success/10 text-success-foreground",
+        error: "border-error/20 bg-error/10 text-error-foreground",
+        warning: "border-warning/20 bg-warning/10 text-warning-foreground",
+        info: "border-info/20 bg-info/10 text-info-foreground",
       },
     },
     defaultVariants: {
@@ -34,10 +31,10 @@ const toastIconVariants = cva("h-4 w-4 flex-shrink-0", {
   variants: {
     type: {
       default: "text-foreground",
-      success: "text-green-600 dark:text-green-400",
-      error: "text-red-600 dark:text-red-400",
-      warning: "text-yellow-600 dark:text-yellow-400",
-      info: "text-blue-600 dark:text-blue-400",
+      success: "text-success",
+      error: "text-error",
+      warning: "text-warning",
+      info: "text-info",
     },
   },
   defaultVariants: {
