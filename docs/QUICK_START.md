@@ -116,7 +116,15 @@ export default function App() {
 Минимальное работающее приложение:
 
 ```tsx
-import { ThemeProvider, useTheme, Button, Card, CardHeader, CardTitle, CardContent } from "@tenerife.music/ui";
+import {
+  ThemeProvider,
+  useTheme,
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@tenerife.music/ui";
 
 function ThemeToggle() {
   const { mode, toggleMode } = useTheme();
@@ -244,4 +252,3 @@ export default App;
 
 **Версия документа:** 1.0  
 **Последнее обновление:** 2024-12-19
-

@@ -85,6 +85,7 @@ function ButtonWithIcons() {
 ```
 
 **Props:**
+
 - `variant`: `"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"`
 - `size`: `"sm" | "default" | "lg" | "icon"`
 - `disabled`: `boolean`
@@ -160,6 +161,7 @@ function InputWithError() {
 ```
 
 **Props:**
+
 - Все стандартные HTML input props
 - `type`: `"text" | "email" | "password" | "number" | ...`
 - `placeholder`: `string`
@@ -172,7 +174,14 @@ function InputWithError() {
 ### Базовая карточка
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@tenerife.music/ui";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@tenerife.music/ui";
 import { Button } from "@tenerife.music/ui";
 
 function CardExample() {
@@ -220,6 +229,7 @@ function EventCardExample() {
 ```
 
 **Props EventCard:**
+
 - `event`: `EventCardEvent` - Объект события
 - `featured`: `boolean` - Отображать как featured
 - `showImage`: `boolean` - Показывать изображение
@@ -242,11 +252,7 @@ function SimpleModalExample() {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-      <SimpleModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="Modal Title"
-      >
+      <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
         <p>Modal content goes here</p>
         <Button onClick={() => setIsOpen(false)}>Close</Button>
       </SimpleModal>
@@ -259,7 +265,13 @@ function SimpleModalExample() {
 
 ```tsx
 import { CustomDialog, Button } from "@tenerife.music/ui";
-import { DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@tenerife.music/ui";
+import {
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@tenerife.music/ui";
 
 function CustomDialogExample() {
   return (
@@ -280,6 +292,7 @@ function CustomDialogExample() {
 ```
 
 **Props SimpleModal:**
+
 - `isOpen`: `boolean` - Открыто ли модальное окно
 - `onClose`: `() => void` - Функция закрытия
 - `title`: `string` - Заголовок (опционально)
@@ -305,6 +318,7 @@ function ContainerExample() {
 ```
 
 **Props:**
+
 - `size`: `"sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "full"`
 - `padding`: `"none" | "sm" | "md" | "lg" | "xl"`
 
@@ -324,6 +338,7 @@ function SectionExample() {
 ```
 
 **Props:**
+
 - `padding`: `"none" | "sm" | "md" | "lg" | "xl"`
 - `background`: `"default" | "muted" | "card"`
 - `as`: `keyof JSX.IntrinsicElements` - HTML элемент
@@ -345,6 +360,7 @@ function GridExample() {
 ```
 
 **Props:**
+
 - `cols`: `number` - Количество колонок
 - `gap`: `number` - Отступ между элементами
 - `className`: `string` - Дополнительные классы
@@ -366,6 +382,7 @@ function FlexExample() {
 ```
 
 **Props:**
+
 - `direction`: `"row" | "column"`
 - `gap`: `number` - Отступ между элементами
 - `align`: `"start" | "center" | "end" | "stretch"`
@@ -423,6 +440,7 @@ function SkeletonExample() {
 ```
 
 **Props Skeleton:**
+
 - `className`: `string` - Дополнительные классы для настройки размера и формы
 
 ---
@@ -464,7 +482,15 @@ function FormExample() {
 ### Карточка с модальным окном
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, SimpleModal } from "@tenerife.music/ui";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+  Button,
+  SimpleModal,
+} from "@tenerife.music/ui";
 import { useState } from "react";
 
 function CardWithModal() {
@@ -484,11 +510,7 @@ function CardWithModal() {
         </CardFooter>
       </Card>
 
-      <SimpleModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="Event Details"
-      >
+      <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Event Details">
         <p>Detailed event information</p>
         <Button onClick={() => setIsOpen(false)}>Close</Button>
       </SimpleModal>
@@ -521,7 +543,7 @@ function EventList() {
   return (
     <Container>
       <Section>
-        <h2 className="text-3xl font-bold mb-8">Events</h2>
+        <h2 className="mb-8 text-3xl font-bold">Events</h2>
         <div className="grid grid-cols-3 gap-6">
           {loading ? (
             <>
@@ -572,8 +594,8 @@ function ExamplePage() {
     <ThemeProvider defaultMode="night" enableSystem={true}>
       <Container>
         <Section padding="xl">
-          <h1 className="text-5xl font-bold mb-8">Welcome to Tenerife UI</h1>
-          
+          <h1 className="mb-8 text-5xl font-bold">Welcome to Tenerife UI</h1>
+
           <Grid cols={3} gap={6}>
             <Card>
               <CardHeader>
@@ -583,7 +605,7 @@ function ExamplePage() {
                 <p>Feature description</p>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Feature 2</CardTitle>
@@ -592,7 +614,7 @@ function ExamplePage() {
                 <p>Feature description</p>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Feature 3</CardTitle>
@@ -602,10 +624,10 @@ function ExamplePage() {
               </CardContent>
             </Card>
           </Grid>
-          
+
           <Section padding="lg" background="muted" className="mt-12">
-            <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-            <div className="space-y-4 max-w-md">
+            <h2 className="mb-4 text-3xl font-bold">Contact Us</h2>
+            <div className="max-w-md space-y-4">
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" placeholder="Your name" />
@@ -636,4 +658,3 @@ function ExamplePage() {
 
 **Версия документа:** 1.0  
 **Последнее обновление:** 2024-12-19
-

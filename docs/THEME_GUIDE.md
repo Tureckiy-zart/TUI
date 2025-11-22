@@ -36,12 +36,12 @@ function App() {
 ```typescript
 interface ThemeProviderProps {
   children: React.ReactNode;
-  defaultMode?: "day" | "night";        // Режим по умолчанию
+  defaultMode?: "day" | "night"; // Режим по умолчанию
   defaultTheme?: "default" | "dark" | "brand"; // Тема по умолчанию
-  storageKey?: string;                   // Ключ для localStorage режима (default: "tm_mode")
-  themeStorageKey?: string;              // Ключ для localStorage темы (default: "tm_theme")
-  attribute?: string;                    // HTML атрибут для режима (default: "data-mode")
-  enableSystem?: boolean;                // Использовать системную тему (default: true)
+  storageKey?: string; // Ключ для localStorage режима (default: "tm_mode")
+  themeStorageKey?: string; // Ключ для localStorage темы (default: "tm_theme")
+  attribute?: string; // HTML атрибут для режима (default: "data-mode")
+  enableSystem?: boolean; // Использовать системную тему (default: true)
 }
 ```
 
@@ -95,26 +95,16 @@ function ThemeControls() {
     <div>
       <p>Текущий режим: {mode}</p>
       <p>Текущая тема: {theme}</p>
-      
-      <button onClick={toggleMode}>
-        Переключить режим (сейчас: {mode})
-      </button>
-      
-      <button onClick={() => setMode("night")}>
-        Ночной режим
-      </button>
-      
-      <button onClick={() => setMode("day")}>
-        Дневной режим
-      </button>
-      
-      <button onClick={() => setTheme("brand")}>
-        Брендовая тема
-      </button>
-      
-      <button onClick={() => setTheme("default")}>
-        Тема по умолчанию
-      </button>
+
+      <button onClick={toggleMode}>Переключить режим (сейчас: {mode})</button>
+
+      <button onClick={() => setMode("night")}>Ночной режим</button>
+
+      <button onClick={() => setMode("day")}>Дневной режим</button>
+
+      <button onClick={() => setTheme("brand")}>Брендовая тема</button>
+
+      <button onClick={() => setTheme("default")}>Тема по умолчанию</button>
     </div>
   );
 }
@@ -143,10 +133,11 @@ import { ThemeProvider } from "@tenerife.music/ui";
 
 <ThemeProvider defaultMode="day">
   <YourApp />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 **Характеристики:**
+
 - Светлый фон
 - Темный текст
 - Более яркие цвета
@@ -161,10 +152,11 @@ import { ThemeProvider } from "@tenerife.music/ui";
 
 <ThemeProvider defaultMode="night">
   <YourApp />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 **Характеристики:**
+
 - Темный фон
 - Светлый текст
 - Приглушенные цвета
@@ -182,17 +174,11 @@ function ModeToggle() {
 
   return (
     <div>
-      <button onClick={toggleMode}>
-        {mode === "night" ? "☀️ День" : "🌙 Ночь"}
-      </button>
-      
-      <button onClick={() => setMode("day")}>
-        День
-      </button>
-      
-      <button onClick={() => setMode("night")}>
-        Ночь
-      </button>
+      <button onClick={toggleMode}>{mode === "night" ? "☀️ День" : "🌙 Ночь"}</button>
+
+      <button onClick={() => setMode("day")}>День</button>
+
+      <button onClick={() => setMode("night")}>Ночь</button>
     </div>
   );
 }
@@ -226,6 +212,7 @@ function ModeToggle() {
 ```
 
 **Характеристики:**
+
 - Стандартная цветовая палитра
 - Primary: Midnight Blue
 - Accent: Purple
@@ -242,6 +229,7 @@ function ModeToggle() {
 ```
 
 **Характеристики:**
+
 - Более глубокие темные цвета
 - Усиленный контраст
 - Альтернативная цветовая палитра
@@ -257,6 +245,7 @@ function ModeToggle() {
 ```
 
 **Характеристики:**
+
 - Усиленные брендовые цвета
 - Больше акцентов на primary и accent
 - Оптимизирована для брендинга
@@ -294,10 +283,7 @@ ThemeProvider автоматически сохраняет настройки �
 ### Настройка ключей хранения
 
 ```tsx
-<ThemeProvider
-  storageKey="my_app_mode"
-  themeStorageKey="my_app_theme"
->
+<ThemeProvider storageKey="my_app_mode" themeStorageKey="my_app_theme">
   <YourApp />
 </ThemeProvider>
 ```
@@ -316,30 +302,30 @@ import type { ThemeOverride } from "@tenerife.music/ui/tokens";
 const customTheme: ThemeOverride = {
   name: "custom",
   description: "Custom theme with brand colors",
-  
+
   // Переопределение primary цветов
   primaryColors: {
     500: "210 70% 50%", // Кастомный primary
     600: "210 70% 45%",
   },
-  
+
   // Переопределение accent цветов
   accentColors: {
     500: "280 80% 60%", // Кастомный accent
   },
-  
+
   // Переопределение базовых цветов для day режима
   baseColorsDay: {
     background: "0 0% 100%",
     foreground: "210 10% 10%",
   },
-  
+
   // Переопределение базовых цветов для night режима
   baseColorsNight: {
     background: "240 10% 5%",
     foreground: "0 0% 95%",
   },
-  
+
   // Переопределение semantic цветов
   semanticColorsDay: {
     success: "142 76% 40%",
@@ -435,7 +421,15 @@ ThemeProvider автоматически устанавливает HTML атр�
 ### Полный пример приложения с переключателем темы
 
 ```tsx
-import { ThemeProvider, useTheme, Button, Card, CardHeader, CardTitle, CardContent } from "@tenerife.music/ui";
+import {
+  ThemeProvider,
+  useTheme,
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@tenerife.music/ui";
 
 function ThemeToggleButton() {
   const { mode, toggleMode } = useTheme();
@@ -529,7 +523,7 @@ function Component() {
 
 <ThemeProvider>
   <Component />
-</ThemeProvider>
+</ThemeProvider>;
 
 // ❌ Неправильно
 function Component() {
@@ -583,4 +577,3 @@ ThemeProvider автоматически сохраняет настройки �
 
 **Версия документа:** 1.0  
 **Последнее обновление:** 2024-12-19
-

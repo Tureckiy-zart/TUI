@@ -84,6 +84,7 @@ export default config;
 ```
 
 Preset включает:
+
 - Цветовую палитру (primary, accent, secondary, semantic colors)
 - Типографику (fontFamily, fontSize, fontWeight, lineHeight, letterSpacing)
 - Spacing систему (8px grid)
@@ -485,4 +486,3 @@ const buttonProps: ButtonProps = {
 
 **Версия документа:** 1.0  
 **Последнее обновление:** 2024-12-19
-

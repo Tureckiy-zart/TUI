@@ -172,6 +172,7 @@ yarn add -D tailwindcss postcss autoprefixer
 ```
 
 **Требования:**
+
 - React: `^18 || ^19`
 - React DOM: `^18 || ^19`
 
@@ -302,7 +303,14 @@ function App() {
 Минимальный пример приложения:
 
 ```tsx
-import { ThemeProvider, Button, Card, CardHeader, CardTitle, CardContent } from "@tenerife.music/ui";
+import {
+  ThemeProvider,
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@tenerife.music/ui";
 
 function App() {
   return (
@@ -338,10 +346,12 @@ export default App;
 ### Зависимости
 
 **Peer Dependencies:**
+
 - React: `^18 || ^19`
 - React DOM: `^18 || ^19`
 
 **Основные зависимости:**
+
 - Tailwind CSS
 - Radix UI компоненты
 - Class Variance Authority (CVA)

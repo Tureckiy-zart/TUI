@@ -49,10 +49,7 @@ yarn add @tenerife.music/ui
 
 ```json
 {
-  "workspaces": [
-    "packages/*",
-    "tenerife-ui"
-  ],
+  "workspaces": ["packages/*", "tenerife-ui"],
   "dependencies": {
     "@tenerife.music/ui": "workspace:*"
   }
@@ -65,8 +62,8 @@ yarn add @tenerife.music/ui
 
 ```yaml
 packages:
-  - 'packages/*'
-  - 'tenerife-ui'
+  - "packages/*"
+  - "tenerife-ui"
 ```
 
 В `package.json`:
@@ -91,10 +88,7 @@ pnpm install
 
 ```json
 {
-  "workspaces": [
-    "packages/*",
-    "tenerife-ui"
-  ],
+  "workspaces": ["packages/*", "tenerife-ui"],
   "dependencies": {
     "@tenerife.music/ui": "workspace:*"
   }
@@ -326,9 +320,7 @@ export default {
 import "@tenerife.music/ui/styles";
 import stylesheet from "~/tailwind.css";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: stylesheet }];
 ```
 
 ---
@@ -391,4 +383,3 @@ export default function App() {
 
 **Версия документа:** 1.0  
 **Последнее обновление:** 2024-12-19
-
