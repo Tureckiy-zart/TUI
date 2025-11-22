@@ -14,6 +14,7 @@ This document provides instructions for validating npm package configuration and
 ### Verify NPM Scope Access
 
 1. **Check if package exists on npm**:
+
    ```bash
    npm info @tenerife.music/ui
    ```
@@ -37,11 +38,13 @@ This document provides instructions for validating npm package configuration and
 **Issue**: Cannot publish to scope `@tenerife.music`
 
 **Solutions**:
+
 1. Create npm organization at https://www.npmjs.com/org/create
 2. Use personal scope (e.g., `@tureckiy-zart/ui`)
 3. Publish as unscoped package (e.g., `tenerife-ui`)
 
 **Note**: Changing package scope requires updating:
+
 - `package.json` name field
 - Import paths in documentation
 - Package installation instructions
@@ -120,6 +123,7 @@ npm access ls-packages @tenerife.music
 ### Token Security
 
 **Best Practices**:
+
 - Use **Automation tokens** for CI/CD (not personal tokens)
 - Store tokens in GitHub Secrets (never in code)
 - Rotate tokens periodically
@@ -127,6 +131,7 @@ npm access ls-packages @tenerife.music
 - Monitor token usage
 
 **Token Types**:
+
 - **Automation**: For CI/CD pipelines (recommended)
 - **Granular Access**: Fine-grained permissions (requires npm CLI 9.5.0+)
 - **Classic**: Legacy token type (not recommended)
@@ -140,12 +145,14 @@ The workflow uses the built-in `GITHUB_TOKEN` which is automatically provided by
 **No setup required** - The token is available in all workflows as `secrets.GITHUB_TOKEN`.
 
 **Permissions**:
+
 - Create GitHub Releases
 - Create git tags
 - Push to repository
 - Create releases
 
 **Limitations**:
+
 - Automatically created per workflow run
 - Limited to repository scope
 - Expires when workflow completes
@@ -155,6 +162,7 @@ The workflow uses the built-in `GITHUB_TOKEN` which is automatically provided by
 The token is automatically available in workflows. No manual setup needed.
 
 To verify it's being used:
+
 1. Check workflow logs for "Creating release" messages
 2. Verify GitHub Releases are created
 3. Check git tags are created
@@ -209,6 +217,7 @@ Before first release, verify:
 **Cause**: Invalid or missing NPM_TOKEN
 
 **Solutions**:
+
 1. Verify token exists in GitHub Secrets
 2. Check token hasn't expired
 3. Verify token has publish permissions
@@ -219,6 +228,7 @@ Before first release, verify:
 **Cause**: Scope ownership or permissions issue
 
 **Solutions**:
+
 1. Verify you own/control `@tenerife.music` scope
 2. Check npm organization membership
 3. Verify package name matches scope
@@ -229,6 +239,7 @@ Before first release, verify:
 **Cause**: GITHUB_TOKEN permissions
 
 **Solutions**:
+
 1. Verify repository has Actions enabled
 2. Check workflow permissions in repository settings
 3. Ensure workflow has `contents: write` permission
@@ -239,6 +250,7 @@ Before first release, verify:
 **Cause**: No conventional commits or semantic-release configuration
 
 **Solutions**:
+
 1. Verify commits follow conventional commit format
 2. Check `release.config.cjs` exists and is valid
 3. Verify semantic-release can detect changes
@@ -286,4 +298,3 @@ After validating npm scope and setting up tokens:
 - GitHub Actions Secrets: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 - Semantic Release Documentation: https://semantic-release.gitbook.io/
 - Conventional Commits: https://www.conventionalcommits.org/
-

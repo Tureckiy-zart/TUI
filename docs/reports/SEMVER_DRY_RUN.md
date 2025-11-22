@@ -149,16 +149,19 @@ Commits must follow [Conventional Commits](https://www.conventionalcommits.org/)
 ### Examples
 
 **Minor version bump**:
+
 ```
 feat: add new Button component
 ```
 
 **Patch version bump**:
+
 ```
 fix: resolve modal z-index issue
 ```
 
 **Major version bump**:
+
 ```
 feat: redesign API
 
@@ -166,6 +169,7 @@ BREAKING CHANGE: Button props API changed
 ```
 
 **No version bump**:
+
 ```
 docs: update README
 chore: update dependencies
@@ -206,6 +210,7 @@ Releases are automatically created when:
 ### Manual Testing
 
 1. Create a test conventional commit:
+
    ```bash
    git commit -m "feat: test release trigger"
    ```
@@ -251,12 +256,14 @@ Releases are automatically created when:
 ### Issue: No release created
 
 **Possible causes**:
+
 - No conventional commits found
 - Already released version exists
 - Not on `main` branch
 - Workflow didn't run
 
 **Solutions**:
+
 - Verify commit messages follow conventional format
 - Check semantic-release logs in GitHub Actions
 - Ensure workflow runs on `main` branch
@@ -264,11 +271,13 @@ Releases are automatically created when:
 ### Issue: Release fails
 
 **Possible causes**:
+
 - Missing NPM_TOKEN
 - npm publish fails
 - GitHub Release fails
 
 **Solutions**:
+
 - Verify NPM_TOKEN exists in GitHub Secrets
 - Check npm scope permissions
 - Review workflow logs for specific errors
@@ -279,4 +288,3 @@ Releases are automatically created when:
 - Conventional Commits: https://www.conventionalcommits.org/
 - npm Publishing: https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry
 - GitHub Actions: https://docs.github.com/en/actions
-

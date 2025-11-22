@@ -36,6 +36,7 @@ module.exports = { ... }
 ```
 
 **Validation**:
+
 - ✅ Uses CommonJS format (required for `.cjs` extension)
 - ✅ Compatible with `package.json` `"type": "module"`
 - ✅ Correct export syntax
@@ -47,10 +48,11 @@ module.exports = { ... }
 ### 2. Branch Configuration
 
 ```javascript
-branches: ["main"]
+branches: ["main"];
 ```
 
 **Validation**:
+
 - ✅ Branches array present
 - ✅ `main` branch configured
 - ✅ Matches GitHub Actions workflow trigger (`on.push.branches: ["main"]`)
@@ -59,6 +61,7 @@ branches: ["main"]
 **Status**: ✅ **PASSED**
 
 **Analysis**:
+
 - Releases will only trigger on `main` branch
 - Matches workflow configuration
 - Prevents releases from feature branches
@@ -68,10 +71,11 @@ branches: ["main"]
 #### Plugin 1: Commit Analyzer
 
 ```javascript
-["@semantic-release/commit-analyzer", { preset: "conventionalcommits" }]
+["@semantic-release/commit-analyzer", { preset: "conventionalcommits" }];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/commit-analyzer`
 - ✅ Preset configured: `conventionalcommits`
 - ✅ Plugin order: First (required - analyzes commits first)
@@ -83,10 +87,11 @@ branches: ["main"]
 #### Plugin 2: Release Notes Generator
 
 ```javascript
-["@semantic-release/release-notes-generator", { preset: "conventionalcommits" }]
+["@semantic-release/release-notes-generator", { preset: "conventionalcommits" }];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/release-notes-generator`
 - ✅ Preset configured: `conventionalcommits`
 - ✅ Plugin order: Second (generates notes after analysis)
@@ -98,10 +103,11 @@ branches: ["main"]
 #### Plugin 3: Changelog
 
 ```javascript
-["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }]
+["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/changelog`
 - ✅ Changelog file: `CHANGELOG.md` (root level)
 - ✅ Plugin order: Third (updates changelog after notes generation)
@@ -115,32 +121,36 @@ branches: ["main"]
 #### Plugin 4: NPM Publisher
 
 ```javascript
-["@semantic-release/npm", { npmPublish: true }]
+["@semantic-release/npm", { npmPublish: true }];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/npm`
 - ✅ `npmPublish: true` (publishes to npm registry)
 - ✅ Plugin order: Fourth (publishes after changelog update)
 
 **Status**: ✅ **PASSED**
 
-**Function**: 
+**Function**:
+
 - Publishes package to npm registry
 - Updates package.json version
 - Requires NPM_TOKEN environment variable
 
 **Configuration**:
+
 - ✅ `npmPublish: true` explicitly set
 - ✅ Will publish to npm automatically
 
 #### Plugin 5: GitHub Release
 
 ```javascript
-["@semantic-release/github", { assets: ["storybook-static/**/*"] }]
+["@semantic-release/github", { assets: ["storybook-static/**/*"] }];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/github`
 - ✅ Assets configured: `["storybook-static/**/*"]`
 - ✅ Plugin order: Fifth (creates release after npm publish)
@@ -148,12 +158,14 @@ branches: ["main"]
 **Status**: ✅ **PASSED**
 
 **Function**:
+
 - Creates GitHub Release
 - Attaches Storybook build artifacts
 - Generates release notes
 - Creates git tags
 
 **Assets Configuration**:
+
 - ✅ Assets pattern: `storybook-static/**/*`
 - ✅ Matches Storybook build output directory
 - ✅ Will include Storybook static files in GitHub Release
@@ -163,13 +175,17 @@ branches: ["main"]
 #### Plugin 6: Git Commit
 
 ```javascript
-["@semantic-release/git", {
-  assets: ["CHANGELOG.md", "package.json"],
-  message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-}]
+[
+  "@semantic-release/git",
+  {
+    assets: ["CHANGELOG.md", "package.json"],
+    message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
+  },
+];
 ```
 
 **Validation**:
+
 - ✅ Plugin name correct: `@semantic-release/git`
 - ✅ Assets configured: `["CHANGELOG.md", "package.json"]`
 - ✅ Commit message includes `[skip ci]` (prevents workflow loop)
@@ -178,17 +194,20 @@ branches: ["main"]
 **Status**: ✅ **PASSED**
 
 **Function**:
+
 - Commits updated CHANGELOG.md
 - Commits updated package.json (version bump)
 - Creates commit with release notes
 - Prevents CI loop with `[skip ci]`
 
 **Assets Configuration**:
+
 - ✅ Files to commit: `CHANGELOG.md`, `package.json`
 - ✅ Matches files that get updated during release
 - ✅ Commit message uses template variables
 
 **Commit Message Analysis**:
+
 - ✅ Type: `chore(release)`
 - ✅ Includes version: `${nextRelease.version}`
 - ✅ Includes `[skip ci]` tag (prevents workflow re-trigger)
@@ -253,23 +272,23 @@ branches: ["main"]
 
 ### Package.json Compatibility
 
-| Setting | package.json | release.config.cjs | Compatible |
-|---------|--------------|-------------------|------------|
-| Type | `"type": "module"` | CommonJS (`.cjs`) | ✅ Yes |
-| Package Name | `@tenerife.music/ui` | N/A | ✅ Yes |
-| Version | `0.0.0` | Managed by semantic-release | ✅ Yes |
-| Changelog | `CHANGELOG.md` | `CHANGELOG.md` | ✅ Yes |
+| Setting      | package.json         | release.config.cjs          | Compatible |
+| ------------ | -------------------- | --------------------------- | ---------- |
+| Type         | `"type": "module"`   | CommonJS (`.cjs`)           | ✅ Yes     |
+| Package Name | `@tenerife.music/ui` | N/A                         | ✅ Yes     |
+| Version      | `0.0.0`              | Managed by semantic-release | ✅ Yes     |
+| Changelog    | `CHANGELOG.md`       | `CHANGELOG.md`              | ✅ Yes     |
 
 **Status**: ✅ **FULLY COMPATIBLE**
 
 ### Workflow Compatibility
 
-| Setting | release.yml | release.config.cjs | Compatible |
-|---------|-------------|-------------------|------------|
-| Branch | `main` | `["main"]` | ✅ Yes |
-| Node Version | `18` | N/A | ✅ Yes |
-| Package Manager | `pnpm` | N/A | ✅ Yes |
-| Build Command | `pnpm build` | N/A | ✅ Yes |
+| Setting         | release.yml  | release.config.cjs | Compatible |
+| --------------- | ------------ | ------------------ | ---------- |
+| Branch          | `main`       | `["main"]`         | ✅ Yes     |
+| Node Version    | `18`         | N/A                | ✅ Yes     |
+| Package Manager | `pnpm`       | N/A                | ✅ Yes     |
+| Build Command   | `pnpm build` | N/A                | ✅ Yes     |
 
 **Status**: ✅ **FULLY COMPATIBLE**
 
@@ -282,9 +301,11 @@ branches: ["main"]
 ### Recommendations
 
 1. **Add release branches** (optional):
+
    ```javascript
-   branches: ["main", { name: "beta", prerelease: true }]
+   branches: ["main", { name: "beta", prerelease: true }];
    ```
+
    - **Current**: Single `main` branch
    - **Impact**: No beta releases possible
    - **Priority**: Low (optional feature)
@@ -301,6 +322,7 @@ branches: ["main"]
      presetConfig: { ... }
    }]
    ```
+
    - **Current**: Default conventional commits preset
    - **Impact**: Standard release notes format
    - **Priority**: Low (optional customization)
@@ -310,6 +332,7 @@ branches: ["main"]
 **Overall**: ✅ **EXCELLENT** - Configuration follows best practices
 
 **Strengths**:
+
 - ✅ All required plugins present
 - ✅ Correct plugin order
 - ✅ Proper asset configuration
@@ -318,6 +341,7 @@ branches: ["main"]
 - ✅ Matches workflow configuration
 
 **Areas for Enhancement** (optional):
+
 - ⚠️ Could add beta release branch
 - ⚠️ Could add custom release notes template
 - ⚠️ Could add notification hooks
@@ -347,6 +371,7 @@ branches: ["main"]
 **Overall Status**: ✅ **PASSED** (100% - 20/20 checks)
 
 **Summary**:
+
 - **Syntax**: ✅ Valid
 - **Structure**: ✅ Correct
 - **Configuration**: ✅ Optimal
@@ -376,4 +401,3 @@ branches: ["main"]
 - Package Configuration: `package.json`
 - Workflow Configuration: `.github/workflows/release.yml`
 - Dry-Run Report: `docs/reports/SEMVER_DRY_RUN.md`
-

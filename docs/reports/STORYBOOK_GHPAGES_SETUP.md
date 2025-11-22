@@ -34,6 +34,7 @@ permissions:
 ```
 
 These permissions allow the workflow to:
+
 - Write to repository contents (for git operations)
 - Write to GitHub Pages
 - Use OIDC tokens for authentication
@@ -43,10 +44,12 @@ These permissions allow the workflow to:
 After enabling GitHub Pages, you can trigger the first deployment in one of two ways:
 
 **Option A: Automatic Deployment**
+
 - Push any changes to the `main` branch
 - The workflow will automatically build and deploy Storybook
 
 **Option B: Manual Deployment**
+
 - Go to **Actions** tab in GitHub
 - Select the **"Deploy Storybook to GitHub Pages"** workflow
 - Click **"Run workflow"** → Select branch `main` → Click **"Run workflow"**
@@ -70,6 +73,7 @@ After successful deployment, your Storybook will be available at:
 ### Trigger Events
 
 The workflow triggers automatically on:
+
 - **Push to `main` branch**: Every commit to main triggers a new deployment
 - **Manual trigger**: You can manually run the workflow from the Actions tab
 
@@ -96,6 +100,7 @@ The workflow triggers automatically on:
 **Issue**: Workflow doesn't appear in Actions tab
 
 **Solution**:
+
 - Verify `.github/workflows/storybook-deploy.yml` exists and is committed
 - Check that file is in the `main` branch (not in a feature branch)
 
@@ -104,6 +109,7 @@ The workflow triggers automatically on:
 **Issue**: Workflow fails at "Build Storybook" step
 
 **Solution**:
+
 - Check Storybook configuration is valid
 - Verify all dependencies are in `package.json`
 - Review workflow logs in Actions tab for specific error messages
@@ -113,6 +119,7 @@ The workflow triggers automatically on:
 **Issue**: Deployment step fails with permission errors
 
 **Solution**:
+
 - Verify GitHub Pages is enabled (Settings → Pages → Source = GitHub Actions)
 - Check repository permissions allow GitHub Actions to deploy Pages
 - Ensure workflow permissions are set correctly (already configured in workflow file)
@@ -122,6 +129,7 @@ The workflow triggers automatically on:
 **Issue**: Site returns 404 after deployment completes
 
 **Solution**:
+
 - Wait 5-10 minutes for GitHub Pages propagation
 - Verify the deployment succeeded in Actions tab
 - Check Settings → Pages shows deployment status
@@ -132,6 +140,7 @@ The workflow triggers automatically on:
 If you want to use a custom domain (e.g., `storybook.tenerife.music`):
 
 1. Create a `CNAME` file in the repository root (in the `main` branch):
+
    ```
    storybook.tenerife.music
    ```
@@ -173,7 +182,7 @@ After successful setup:
 ## Support
 
 For issues with GitHub Pages or GitHub Actions:
+
 - GitHub Actions documentation: https://docs.github.com/en/actions
 - GitHub Pages documentation: https://docs.github.com/en/pages
 - Workflow file: `.github/workflows/storybook-deploy.yml`
-

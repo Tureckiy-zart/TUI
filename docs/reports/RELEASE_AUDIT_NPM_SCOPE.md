@@ -17,6 +17,7 @@ This audit validates npm scope access, package name, and token configuration for
 ```
 
 **Validation**:
+
 - ✅ Scoped package format correct
 - ✅ Scope: `@tenerife.music`
 - ✅ Package name: `ui`
@@ -29,6 +30,7 @@ This audit validates npm scope access, package name, and token configuration for
 **Format**: `@tenerife.music/ui`
 
 **Components**:
+
 - ✅ Scope prefix: `@` (required for scoped packages)
 - ✅ Scope name: `tenerife.music` (contains dot - valid)
 - ✅ Separator: `/` (required)
@@ -45,17 +47,22 @@ This audit validates npm scope access, package name, and token configuration for
 **Scope**: `@tenerife.music`
 
 **Verification Steps** (Manual):
+
 1. Check if npm organization exists:
+
    ```bash
    npm view @tenerife.music/ui
    ```
+
    - Returns package info if exists
    - Returns 404 if doesn't exist (acceptable for first publish)
 
 2. Check organization access:
+
    ```bash
    npm access ls-packages @tenerife.music
    ```
+
    - Lists packages under scope
    - Requires authentication
 
@@ -63,6 +70,7 @@ This audit validates npm scope access, package name, and token configuration for
    ```bash
    npm whoami --registry=https://registry.npmjs.org/
    ```
+
    - Verifies authentication
    - Shows npm username
 
@@ -85,6 +93,7 @@ This audit validates npm scope access, package name, and token configuration for
 **Expected Format**: `npm_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 **Validation**:
+
 - ✅ Should start with `npm_` prefix
 - ✅ Length: 40+ characters
 - ✅ Format: Base64-like string
@@ -96,12 +105,14 @@ This audit validates npm scope access, package name, and token configuration for
 **Recommended Type**: Automation Token
 
 **Characteristics**:
+
 - ✅ Designed for CI/CD use
 - ✅ Doesn't expire automatically
 - ✅ Can publish packages
 - ✅ Security best practice
 
 **Alternative Types**:
+
 - Granular Access Token (npm CLI 9.5.0+)
 - Classic Token (legacy, not recommended)
 
@@ -110,11 +121,13 @@ This audit validates npm scope access, package name, and token configuration for
 ### Token Permissions
 
 **Required Permissions**:
+
 - ✅ Read packages
 - ✅ Publish packages
 - ✅ Access to `@tenerife.music` scope
 
 **Validation**:
+
 - ⚠️ Cannot automatically verify permissions
 - ⚠️ Requires manual token testing
 
@@ -130,6 +143,7 @@ env:
 ```
 
 **Validation**:
+
 - ✅ Secret reference correct
 - ✅ Environment variable name matches: `NPM_TOKEN`
 - ✅ Syntax correct: `${{ secrets.NPM_TOKEN }}`
@@ -140,6 +154,7 @@ env:
 ### Token Usage
 
 **Semantic-release Plugin**:
+
 - Plugin: `@semantic-release/npm`
 - Uses `NPM_TOKEN` environment variable
 - Authenticates with npm registry
@@ -158,6 +173,7 @@ env:
 ```
 
 **Validation**:
+
 - ✅ `publishConfig` present
 - ✅ `access` set to `"public"`
 - ✅ Required for scoped packages
@@ -167,6 +183,7 @@ env:
 ### Publishing Process
 
 **Automatic Publishing**:
+
 1. Semantic-release analyzes commits
 2. Determines version bump
 3. Builds package (`pnpm build`)
@@ -239,12 +256,14 @@ npm publish --dry-run
 ### Issue: Cannot Publish to Scope
 
 **Possible Causes**:
+
 - Organization doesn't exist
 - User not member of organization
 - Token doesn't have scope access
 - Token expired or invalid
 
 **Solutions**:
+
 1. Create npm organization at https://www.npmjs.com/org/create
 2. Add user to organization with publish permissions
 3. Regenerate token with correct permissions
@@ -253,12 +272,14 @@ npm publish --dry-run
 ### Issue: Token Authentication Fails
 
 **Possible Causes**:
+
 - Invalid token format
 - Token expired
 - Token doesn't have required permissions
 - Token revoked
 
 **Solutions**:
+
 1. Verify token starts with `npm_`
 2. Check token hasn't expired
 3. Verify token permissions in npm settings
@@ -267,11 +288,13 @@ npm publish --dry-run
 ### Issue: Package Already Exists
 
 **Possible Causes**:
+
 - Package published manually
 - Different version exists
 - Package name conflict
 
 **Solutions**:
+
 1. Check existing package on npm
 2. Verify version to publish
 3. Use different package name if needed
@@ -303,12 +326,14 @@ npm publish --dry-run
 **Overall Status**: ⚠️ **PARTIAL** - Manual verification required
 
 **Automated Checks**: ✅ **PASSED** (4/4)
+
 - Package name format: ✅
 - Scope format: ✅
 - Workflow configuration: ✅
 - publishConfig: ✅
 
 **Manual Checks**: ⚠️ **PENDING** (5/5)
+
 - NPM scope access: ⚠️
 - Token format: ⚠️
 - Token permissions: ⚠️
@@ -338,4 +363,3 @@ npm publish --dry-run
 - Workflow Configuration: `.github/workflows/release.yml`
 - Package Configuration: `package.json`
 - Secrets Validation: `docs/reports/RELEASE_AUDIT_SECRETS.md`
-

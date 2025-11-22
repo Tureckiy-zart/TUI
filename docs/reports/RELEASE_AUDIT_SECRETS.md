@@ -14,18 +14,21 @@ This audit validates the presence and configuration of required GitHub Secrets f
 
 **Status**: ⚠️ **CANNOT VERIFY AUTOMATICALLY** (Manual verification required)
 
-**Purpose**: 
+**Purpose**:
+
 - Authenticate with npm registry
 - Publish package to npm
 - Required for `@semantic-release/npm` plugin
 
 **Expected Configuration**:
+
 - **Secret Name**: `NPM_TOKEN` (must be exact)
 - **Type**: Automation Token (recommended)
 - **Format**: Starts with `npm_` (e.g., `npm_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`)
 - **Permissions**: Read and Publish access to `@tenerife.music/ui` package
 
 **Verification Steps** (Manual):
+
 1. Go to GitHub repository: `https://github.com/Tureckiy-zart/tenerife-ui`
 2. Navigate to: **Settings** → **Secrets and variables** → **Actions**
 3. Check if `NPM_TOKEN` exists in the list
@@ -33,11 +36,13 @@ This audit validates the presence and configuration of required GitHub Secrets f
 5. Verify token is of type "Automation" or "Classic"
 
 **Current Status**:
+
 - ⚠️ Cannot automatically verify presence
 - ✅ Referenced correctly in workflow (`.github/workflows/release.yml` line 34)
 - ✅ Environment variable name matches (`NPM_TOKEN`)
 
 **Validation Checklist**:
+
 - [ ] Secret exists in GitHub repository settings
 - [ ] Secret name is exactly `NPM_TOKEN` (case-sensitive)
 - [ ] Token starts with `npm_` prefix
@@ -50,24 +55,28 @@ This audit validates the presence and configuration of required GitHub Secrets f
 **Status**: ✅ **AUTOMATICALLY PROVIDED**
 
 **Purpose**:
+
 - Create GitHub Releases
 - Create git tags
 - Push to repository
 - Required for `@semantic-release/github` plugin
 
 **Configuration**:
+
 - **Source**: Automatically provided by GitHub Actions
 - **Format**: Automatically generated per workflow run
 - **Permissions**: Repository-scoped permissions
 - **Lifespan**: Expires when workflow completes
 
 **Verification**:
+
 - ✅ Automatically available in all GitHub Actions workflows
 - ✅ Referenced correctly in workflow (`.github/workflows/release.yml` line 33)
 - ✅ Environment variable name matches (`GITHUB_TOKEN`)
 - ✅ No manual setup required
 
 **Validation Checklist**:
+
 - [x] Automatically provided by GitHub Actions
 - [x] Referenced correctly in workflow
 - [x] No manual configuration needed
@@ -86,6 +95,7 @@ This audit validates the presence and configuration of required GitHub Secrets f
 ```
 
 **Analysis**:
+
 - ✅ `GITHUB_TOKEN` reference syntax correct
 - ✅ `NPM_TOKEN` reference syntax correct
 - ✅ No whitespace in secret references
@@ -129,11 +139,13 @@ This audit validates the presence and configuration of required GitHub Secrets f
 ### Issue: Workflow fails with "NPM_TOKEN not found"
 
 **Possible Causes**:
+
 - Secret not created in GitHub repository
 - Secret name misspelled (case-sensitive)
 - Secret deleted or expired
 
 **Solutions**:
+
 1. Verify secret exists: Settings → Secrets and variables → Actions
 2. Check secret name matches exactly: `NPM_TOKEN`
 3. Recreate secret if missing
@@ -142,11 +154,13 @@ This audit validates the presence and configuration of required GitHub Secrets f
 ### Issue: npm publish fails with "Unauthorized"
 
 **Possible Causes**:
+
 - Invalid NPM_TOKEN
 - Token doesn't have publish permissions
 - Token doesn't have access to `@tenerife.music` scope
 
 **Solutions**:
+
 1. Verify token format starts with `npm_`
 2. Check npm token permissions in npmjs.com settings
 3. Verify scope access for `@tenerife.music`
@@ -155,11 +169,13 @@ This audit validates the presence and configuration of required GitHub Secrets f
 ### Issue: GitHub Release fails
 
 **Possible Causes**:
+
 - GITHUB_TOKEN missing (should not happen - auto-provided)
 - Insufficient repository permissions
 - Repository is archived or private without access
 
 **Solutions**:
+
 1. Verify Actions are enabled in repository
 2. Check workflow permissions in repository settings
 3. Ensure repository is accessible
@@ -189,6 +205,7 @@ This audit validates the presence and configuration of required GitHub Secrets f
    - Test token manually if possible
 
 2. **Token Testing**:
+
    ```bash
    # Test npm authentication (requires token)
    export NPM_TOKEN=your_token_here
@@ -222,12 +239,14 @@ This audit validates the presence and configuration of required GitHub Secrets f
 **Overall Status**: ⚠️ **PARTIAL** - Manual verification required
 
 **Automated Checks**: ✅ **PASSED** (4/4)
+
 - Workflow syntax: ✅
 - Secret references: ✅
 - Environment variables: ✅
 - GITHUB_TOKEN: ✅
 
 **Manual Checks**: ⚠️ **PENDING** (5/5)
+
 - NPM_TOKEN presence: ⚠️
 - NPM_TOKEN format: ⚠️
 - NPM_TOKEN permissions: ⚠️
@@ -239,4 +258,3 @@ This audit validates the presence and configuration of required GitHub Secrets f
 - NPM Token Setup: `docs/reports/SEMVER_NPM_VALIDATION.md`
 - Workflow Configuration: `.github/workflows/release.yml`
 - Release Configuration: `release.config.cjs`
-

@@ -5,6 +5,7 @@ This document provides instructions for validating Storybook build locally befor
 ## Purpose
 
 Running a dry-run validation ensures that:
+
 - Storybook builds successfully without errors
 - Build output directory exists and contains expected files
 - Static files are correctly generated
@@ -30,6 +31,7 @@ pnpm install --frozen-lockfile
 **Expected output**: Dependencies installed successfully without errors
 
 **Verification**:
+
 - Check `node_modules/` directory exists
 - Verify no errors in terminal output
 - Confirm pnpm lockfile is used
@@ -45,6 +47,7 @@ pnpm build-storybook
 **Expected output**: Build completes successfully with message like "Storybook built successfully"
 
 **Verification checklist**:
+
 - [ ] Build completes without errors
 - [ ] No TypeScript errors
 - [ ] No build warnings (or acceptable warnings only)
@@ -59,6 +62,7 @@ ls -la storybook-static
 ```
 
 **Expected structure**:
+
 ```
 storybook-static/
 ├── index.html
@@ -72,6 +76,7 @@ storybook-static/
 ```
 
 **Verification checklist**:
+
 - [ ] `storybook-static/` directory exists
 - [ ] `index.html` file exists (main entry point)
 - [ ] `iframe.html` file exists (iframe entry point)
@@ -89,6 +94,7 @@ du -sh storybook-static
 **Expected size**: Typically 5-50 MB depending on number of stories and components
 
 **Verification**:
+
 - [ ] Output size is reasonable (not suspiciously small or large)
 - [ ] No obvious missing files
 
@@ -121,6 +127,7 @@ python3 -m http.server 8080
 ```
 
 **Verification checklist**:
+
 - [ ] Server starts successfully
 - [ ] Storybook loads at `http://localhost:8080` (or configured port)
 - [ ] No console errors in browser
@@ -135,6 +142,7 @@ python3 -m http.server 8080
 Navigate to key stories and verify they work:
 
 **Expected stories to check**:
+
 - Button component stories
 - Input component stories
 - Modal component stories
@@ -142,6 +150,7 @@ Navigate to key stories and verify they work:
 - Other major components
 
 **Verification checklist**:
+
 - [ ] Stories load without errors
 - [ ] Components render correctly
 - [ ] Controls/args work as expected
@@ -153,16 +162,19 @@ Navigate to key stories and verify they work:
 Open browser DevTools and check for errors:
 
 **Check for**:
+
 - JavaScript errors (red errors in console)
 - 404 errors for missing assets
 - CSS loading errors
 - Network errors
 
 **Acceptable**:
+
 - Warnings (yellow messages) are usually acceptable
 - Info messages are acceptable
 
 **Not acceptable**:
+
 - Critical errors that prevent Storybook from loading
 - Missing asset files (404 errors)
 - JavaScript runtime errors
@@ -170,6 +182,7 @@ Open browser DevTools and check for errors:
 ## Expected Build Time
 
 **Typical build times**:
+
 - First build: 2-5 minutes
 - Subsequent builds: 1-3 minutes
 - CI/CD builds: 2-5 minutes (similar to local)
@@ -181,6 +194,7 @@ Open browser DevTools and check for errors:
 **Symptoms**: Build stops with TypeScript compilation errors
 
 **Solutions**:
+
 1. Run type checking separately: `pnpm typecheck`
 2. Fix TypeScript errors
 3. Ensure all dependencies are installed
@@ -191,6 +205,7 @@ Open browser DevTools and check for errors:
 **Symptoms**: `storybook-static/` directory doesn't exist after build
 
 **Solutions**:
+
 1. Check Storybook configuration in `.storybook/` directory
 2. Verify `outputDir` setting in Storybook config (should be `storybook-static`)
 3. Check for build errors in terminal output
@@ -201,6 +216,7 @@ Open browser DevTools and check for errors:
 **Symptoms**: Some assets (images, fonts, etc.) are missing in build output
 
 **Solutions**:
+
 1. Check asset paths in stories/components
 2. Verify static assets are in correct directories
 3. Check Storybook `staticDirs` configuration
@@ -211,6 +227,7 @@ Open browser DevTools and check for errors:
 **Symptoms**: Storybook loads but stories show errors or don't render
 
 **Solutions**:
+
 1. Check browser console for specific errors
 2. Verify all component dependencies are installed
 3. Check story file syntax (`.stories.tsx` files)
@@ -222,6 +239,7 @@ Open browser DevTools and check for errors:
 **Symptoms**: Build process hangs or takes > 10 minutes
 
 **Solutions**:
+
 1. Check for infinite loops in components
 2. Verify no blocking operations in component code
 3. Check Storybook configuration for performance issues
@@ -273,4 +291,3 @@ pnpm validate:storybook
 - Storybook build documentation: https://storybook.js.org/docs/react/sharing/publish-storybook
 - GitHub Actions workflow: `.github/workflows/storybook-deploy.yml`
 - Setup guide: `docs/reports/STORYBOOK_GHPAGES_SETUP.md`
-
