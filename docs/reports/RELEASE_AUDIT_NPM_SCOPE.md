@@ -67,6 +67,7 @@ This audit validates npm scope access, package name, and token configuration for
    - Requires authentication
 
 3. Verify publish access:
+
    ```bash
    npm whoami --registry=https://registry.npmjs.org/
    ```

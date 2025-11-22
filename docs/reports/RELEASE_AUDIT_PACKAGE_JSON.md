@@ -337,6 +337,7 @@ This audit validates the package.json configuration for semantic-release compati
    - **Priority**: Low (optional)
 
 2. **Add repository directory** (optional):
+
    ```json
    "repository": {
      "type": "git",

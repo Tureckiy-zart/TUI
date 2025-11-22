@@ -316,6 +316,7 @@ branches: ["main"];
    - **Priority**: Low (optional enhancement)
 
 3. **Add custom release notes template** (optional):
+
    ```javascript
    ["@semantic-release/release-notes-generator", {
      preset: "conventionalcommits",
