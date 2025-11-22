@@ -26,16 +26,16 @@ const ModalWithState = () => {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        className="rounded-md bg-primary px-md py-sm text-primary-foreground hover:bg-primary/90"
       >
         Open Modal
       </button>
       <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Demo Modal">
         <p>This is a demo modal content.</p>
-        <div className="mt-4 flex justify-end">
+        <div className="mt-md flex justify-end">
           <button
             onClick={() => setIsOpen(false)}
-            className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+            className="rounded-md bg-primary px-md py-sm text-primary-foreground hover:bg-primary/90"
           >
             Close
           </button>
@@ -57,16 +57,16 @@ export const WithoutTitle: Story = {
       <div>
         <button
           onClick={() => setIsOpen(true)}
-          className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className="rounded-md bg-primary px-md py-sm text-primary-foreground hover:bg-primary/90"
         >
           Open Modal Without Title
         </button>
         <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <p>This modal doesn't have a title.</p>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-md flex justify-end">
             <button
               onClick={() => setIsOpen(false)}
-              className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+              className="rounded-md bg-primary px-md py-sm text-primary-foreground hover:bg-primary/90"
             >
               Close
             </button>

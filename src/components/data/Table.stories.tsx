@@ -43,12 +43,12 @@ export const WithCustomRender: Story = {
         title: "Role",
         render: (value) => (
           <span
-            className={`rounded px-2 py-1 text-xs ${
+            className={`rounded px-sm py-xs text-xs ${
               value === "Admin"
-                ? "bg-red-100 text-red-800"
+                ? "bg-error/20 text-error-foreground"
                 : value === "Moderator"
-                  ? "bg-yellow-100 text-yellow-800"
-                  : "bg-green-100 text-green-800"
+                  ? "bg-warning/20 text-warning-foreground"
+                  : "bg-success/20 text-success-foreground"
             }`}
           >
             {value}

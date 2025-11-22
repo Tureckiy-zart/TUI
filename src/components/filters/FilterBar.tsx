@@ -195,9 +195,9 @@ export function FilterBar({
   };
 
   return (
-    <div className={cn("space-y-4", className)}>
+    <div className={cn("space-y-md", className)}>
       {/* Search and Active Filters */}
-      <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="flex flex-col gap-md sm:flex-row">
         {showSearch && (
           <div className="flex-1">
             <SearchInput value={search} onChange={setSearch} placeholder={searchPlaceholder} />
@@ -205,12 +205,12 @@ export function FilterBar({
         )}
 
         {hasActiveFilters && (
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="gap-1">
+          <div className="flex items-center gap-sm">
+            <Badge variant="secondary" className="gap-xs">
               <Filter className="h-3 w-3" />
               {getFilterSummary().length} {filtersLabel}
             </Badge>
-            <Button variant="outline" size="sm" onClick={clearAllFilters} className="gap-1">
+            <Button variant="outline" size="sm" onClick={clearAllFilters} className="gap-xs">
               <X className="h-3 w-3" />
               {clearAllLabel}
             </Button>
@@ -219,7 +219,7 @@ export function FilterBar({
       </div>
 
       {/* Filter Controls */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-4">
         {showCategory && categories.length > 0 && (
           <FilterSelect
             value={category}
@@ -231,7 +231,7 @@ export function FilterBar({
         )}
 
         {showDateRange && (
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               {dateRangeLabel}
             </label>
@@ -268,7 +268,7 @@ export function FilterBar({
         )}
 
         {showSorting && (
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               {sortByLabel}
             </label>
@@ -299,9 +299,9 @@ export function FilterBar({
 
       {/* Active Filters Summary */}
       {hasActiveFilters && (
-        <div className="rounded-lg bg-muted/50 p-3">
-          <div className="mb-2 text-sm font-medium">{activeFiltersLabel}</div>
-          <div className="flex flex-wrap gap-2">
+        <div className="rounded-lg bg-muted/50 p-sm">
+          <div className="mb-sm text-sm font-medium">{activeFiltersLabel}</div>
+          <div className="flex flex-wrap gap-sm">
             {getFilterSummary().map((filter, index) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {filter}
@@ -316,5 +316,5 @@ export function FilterBar({
 
 // Compact version for mobile
 export function FilterBarCompact({ className, ...props }: FilterBarProps) {
-  return <FilterBar className={cn("space-y-2", className)} {...props} />;
+  return <FilterBar className={cn("space-y-sm", className)} {...props} />;
 }

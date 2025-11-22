@@ -124,7 +124,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               variant="ghost"
               onClick={() => handleSuggestionClick(suggestion)}
               className={cn(
-                "w-full justify-start px-4 py-2 text-sm",
+                "w-full justify-start px-md py-sm text-sm",
                 index === selectedIndex && "bg-accent text-accent-foreground",
               )}
             >

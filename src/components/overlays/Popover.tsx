@@ -11,7 +11,7 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const popoverContentVariants = cva(
-  "z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+  "z-50 w-72 rounded-md border bg-popover p-md text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
   {
     variants: {
       variant: {
@@ -22,10 +22,10 @@ const popoverContentVariants = cva(
         info: "border-info/50 text-info-foreground bg-info/10",
       },
       size: {
-        sm: "w-48 p-3",
-        md: "w-72 p-4",
-        lg: "w-96 p-6",
-        xl: "w-[32rem] p-8",
+        sm: "w-48 p-sm",
+        md: "w-72 p-md",
+        lg: "w-96 p-lg",
+        xl: "w-[32rem] p-xl",
       },
     },
     defaultVariants: {

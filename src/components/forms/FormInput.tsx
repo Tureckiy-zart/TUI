@@ -35,7 +35,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   const inputValue = value ?? "";
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("space-y-sm", className)}>
       {label && (
         <Label htmlFor={id} className="block">
           {label}

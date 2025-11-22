@@ -47,11 +47,11 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <nav className={cn("flex items-center space-x-1", className)}>
+    <nav className={cn("flex items-center space-x-xs", className)}>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded-md border border-input bg-background p-2 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-md border border-input bg-background p-sm hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
@@ -59,12 +59,12 @@ export const Pagination: React.FC<PaginationProps> = ({
       {getVisiblePages().map((page, index) => (
         <React.Fragment key={index}>
           {page === "..." ? (
-            <span className="px-3 py-2 text-muted-foreground">...</span>
+            <span className="px-sm py-sm text-muted-foreground">...</span>
           ) : (
             <button
               onClick={() => onPageChange(page as number)}
               className={cn(
-                "rounded-md border px-3 py-2 transition-colors",
+                "rounded-md border px-sm py-sm transition-colors",
                 page === currentPage
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-input bg-background hover:bg-accent",
@@ -79,7 +79,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded-md border border-input bg-background p-2 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-md border border-input bg-background p-sm hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
       >
         <ChevronRight className="h-4 w-4" />
       </button>

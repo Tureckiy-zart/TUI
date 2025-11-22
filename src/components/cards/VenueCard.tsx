@@ -93,8 +93,8 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       )}
     >
       {featured && (
-        <div className="absolute right-3 top-3 z-10">
-          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground shadow-lg">
+        <div className="absolute right-sm top-sm z-10">
+          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-xs py-xs text-xs font-semibold text-primary-foreground shadow-lg">
             {popularBadgeText}
           </span>
         </div>
@@ -130,10 +130,10 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         </div>
       )}
 
-      <CardContent className="p-4">
+      <CardContent className="p-md">
         <Heading
           level={3}
-          className="mb-2 line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
+          className="mb-sm line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
         >
           {venue?.slug ? (
             <Link href={`/venues/${venue.slug}`} variant="ghost" size="none">
@@ -143,11 +143,11 @@ export const VenueCard: React.FC<VenueCardProps> = ({
             name
           )}
         </Heading>
-        <Text size="sm" color="muted" className="mb-3 line-clamp-2">
+        <Text size="sm" color="muted" className="mb-sm line-clamp-2">
           {description}
         </Text>
-        <div className="mb-3 flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="mb-sm flex flex-col gap-sm">
+          <div className="flex items-center gap-sm text-xs text-muted-foreground">
             <svg
               className="h-4 w-4"
               fill="none"
@@ -173,10 +173,10 @@ export const VenueCard: React.FC<VenueCardProps> = ({
             </Text>
           </div>
         </div>
-        <div className="border-t border-border pt-3">
+        <div className="border-t border-border pt-sm">
           <div className="flex items-center justify-between text-xs">
             {eventsCount > 0 && (
-              <div className="flex items-center gap-1 font-medium text-primary">
+              <div className="flex items-center gap-xs font-medium text-primary">
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -191,7 +191,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
               </div>
             )}
             {capacity && (
-              <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="flex items-center gap-xs text-muted-foreground">
                 <svg
                   className="h-4 w-4"
                   fill="none"

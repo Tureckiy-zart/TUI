@@ -93,18 +93,18 @@ export function DateRangePicker({
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
       >
-        <CalendarIcon className="mr-2 h-4 w-4" />
+        <CalendarIcon className="mr-sm h-4 w-4" />
         {formatDateRange(value)}
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-md border bg-popover p-3 shadow-lg">
-          <div className="space-y-2">
+        <div className="absolute left-0 top-full z-50 mt-xs w-full rounded-md border bg-popover p-sm shadow-lg">
+          <div className="space-y-sm">
             <div className="text-sm font-medium">{selectDateRangeLabel}</div>
-            <div className="grid grid-cols-7 gap-1 text-xs">
+            <div className="grid grid-cols-7 gap-xs text-xs">
               {/* Calendar header */}
               {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
-                <div key={day} className="p-2 text-center font-medium text-muted-foreground">
+                <div key={day} className="p-sm text-center font-medium text-muted-foreground">
                   {day}
                 </div>
               ))}
@@ -134,7 +134,7 @@ export function DateRangePicker({
               })}
             </div>
 
-            <div className="flex justify-between pt-2">
+            <div className="flex justify-between pt-sm">
               <Button variant="outline" size="sm" onClick={clearRange}>
                 {clearLabel}
               </Button>

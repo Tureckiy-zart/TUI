@@ -9,10 +9,10 @@ function ToastDemo() {
   const { toast, success, error, warning, info } = useToast();
 
   return (
-    <div className="space-y-4 p-4">
+    <div className="space-y-md p-md">
       <h2 className="text-lg font-semibold">Toast Examples</h2>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-sm">
         <Button
           onClick={() =>
             toast({
@@ -139,7 +139,7 @@ export const Default: Story = {
 export const Success: Story = {
   render: () => (
     <ToastProvider position="top-center">
-      <div className="p-4">
+      <div className="p-md">
         <Button
           onClick={() => {
             const { success } = useToast();
@@ -159,7 +159,7 @@ export const Success: Story = {
 export const Error: Story = {
   render: () => (
     <ToastProvider position="top-center">
-      <div className="p-4">
+      <div className="p-md">
         <Button
           onClick={() => {
             const { error } = useToast();
@@ -179,7 +179,7 @@ export const Error: Story = {
 export const Warning: Story = {
   render: () => (
     <ToastProvider position="top-center">
-      <div className="p-4">
+      <div className="p-md">
         <Button
           onClick={() => {
             const { warning } = useToast();
@@ -199,7 +199,7 @@ export const Warning: Story = {
 export const Info: Story = {
   render: () => (
     <ToastProvider position="top-center">
-      <div className="p-4">
+      <div className="p-md">
         <Button
           onClick={() => {
             const { info } = useToast();
@@ -219,7 +219,7 @@ export const Info: Story = {
 export const WithAction: Story = {
   render: () => (
     <ToastProvider position="top-center">
-      <div className="p-4">
+      <div className="p-md">
         <Button
           onClick={() => {
             const { success } = useToast();
@@ -242,7 +242,7 @@ export const WithAction: Story = {
 
 export const DifferentPositions: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="space-y-md">
       <h3 className="text-lg font-semibold">Different Toast Positions</h3>
 
       {(
@@ -256,7 +256,7 @@ export const DifferentPositions: Story = {
         ] as const
       ).map((position) => (
         <ToastProvider key={position} position={position}>
-          <div className="p-4">
+          <div className="p-md">
             <Button
               onClick={() => {
                 const { info } = useToast();

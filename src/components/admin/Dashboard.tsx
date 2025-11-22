@@ -22,8 +22,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ title, content, className 
 
   return (
     <Card className={cn("shadow-md", className)}>
-      <CardContent className="p-6">
-        <Heading level={2} className="mb-4">
+      <CardContent className="p-lg">
+        <Heading level={2} className="mb-md">
           {title}
         </Heading>
         <Text color="muted">{content}</Text>

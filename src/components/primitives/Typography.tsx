@@ -71,7 +71,7 @@ export const Text: React.FC<TextProps> = ({
 
 export const Paragraph: React.FC<TextProps> = ({ className, children, ...props }) => {
   return (
-    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
+    <p className={cn("leading-7 [&:not(:first-child)]:mt-lg", className)}>
       <Text {...props}>{children}</Text>
     </p>
   );
@@ -92,7 +92,7 @@ export const Code: React.FC<TypographyProps> = ({ className, children }) => {
 
 export const Blockquote: React.FC<TypographyProps> = ({ className, children }) => {
   return (
-    <blockquote className={cn("mt-6 border-l-2 pl-6 italic", className)}>{children}</blockquote>
+    <blockquote className={cn("mt-lg border-l-2 pl-lg italic", className)}>{children}</blockquote>
   );
 };
 

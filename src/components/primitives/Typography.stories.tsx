@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Headings: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="space-y-md">
       <Heading level={1}>Heading 1</Heading>
       <Heading level={2}>Heading 2</Heading>
       <Heading level={3}>Heading 3</Heading>
@@ -29,7 +29,7 @@ export const Headings: Story = {
 
 export const TextVariants: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="space-y-md">
       <Text size="xs">Extra Small Text</Text>
       <Text size="sm">Small Text</Text>
       <Text size="base">Base Text</Text>
@@ -41,7 +41,7 @@ export const TextVariants: Story = {
 
 export const TextWeights: Story = {
   render: () => (
-    <div className="space-y-2">
+    <div className="space-y-sm">
       <Text weight="normal">Normal Weight</Text>
       <Text weight="medium">Medium Weight</Text>
       <Text weight="semibold">Semibold Weight</Text>
@@ -52,7 +52,7 @@ export const TextWeights: Story = {
 
 export const TextColors: Story = {
   render: () => (
-    <div className="space-y-2">
+    <div className="space-y-sm">
       <Text color="default">Default Color</Text>
       <Text color="muted">Muted Color</Text>
       <Text color="primary">Primary Color</Text>
@@ -65,7 +65,7 @@ export const ParagraphExample: Story = {
   render: () => {
     const Paragraph = Text; // Use Text component as paragraph
     return (
-      <div className="space-y-4">
+      <div className="space-y-md">
         <Paragraph>
           This is a paragraph with normal text. It demonstrates how the Paragraph component renders
           text with proper spacing and line height for readability.
@@ -78,7 +78,7 @@ export const ParagraphExample: Story = {
 
 export const CodeExample: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="space-y-md">
       <Text>
         Here's some inline <Code>code</Code> within a paragraph.
       </Text>

@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const containerVariants = cva("mx-auto px-4", {
+const containerVariants = cva("mx-auto px-md", {
   variants: {
     size: {
       sm: "max-w-sm",
@@ -20,10 +20,10 @@ const containerVariants = cva("mx-auto px-4", {
     },
     padding: {
       none: "px-0",
-      sm: "px-2",
-      md: "px-4",
-      lg: "px-6",
-      xl: "px-8",
+      sm: "px-sm",
+      md: "px-md",
+      lg: "px-lg",
+      xl: "px-xl",
     },
   },
   defaultVariants: {

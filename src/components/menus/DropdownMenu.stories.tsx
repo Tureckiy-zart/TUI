@@ -68,20 +68,20 @@ export const WithIcons: Story = {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <span className="mr-2">📝</span>
+          <span className="mr-sm">📝</span>
           Edit
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <span className="mr-2">📋</span>
+          <span className="mr-sm">📋</span>
           Copy
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <span className="mr-2">🔗</span>
+          <span className="mr-sm">🔗</span>
           Share
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive">
-          <span className="mr-2">🗑️</span>
+          <span className="mr-sm">🗑️</span>
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

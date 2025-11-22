@@ -37,7 +37,7 @@ export const Default: Story = {
             <ModalTitle>Modal Title</ModalTitle>
             <ModalDescription>This is a description of what the modal does.</ModalDescription>
           </ModalHeader>
-          <div className="py-4">
+          <div className="py-md">
             <p>Modal content goes here...</p>
           </div>
           <ModalFooter>
@@ -65,7 +65,7 @@ export const WithoutTrigger: Story = {
               <ModalTitle>Controlled Modal</ModalTitle>
               <ModalDescription>This modal is controlled programmatically.</ModalDescription>
             </ModalHeader>
-            <div className="py-4">
+            <div className="py-md">
               <p>You can control this modal from outside.</p>
             </div>
             <ModalFooter>
@@ -94,11 +94,11 @@ export const LargeModal: Story = {
             <ModalTitle>Large Modal</ModalTitle>
             <ModalDescription>This is a larger modal with more content.</ModalDescription>
           </ModalHeader>
-          <div className="space-y-4 py-4">
+          <div className="space-y-md py-md">
             <p>This modal has more space for content.</p>
             <p>You can put forms, tables, or other complex content here.</p>
-            <div className="rounded-md bg-muted p-4">
-              <h4 className="mb-2 font-semibold">Example Content</h4>
+            <div className="rounded-md bg-muted p-md">
+              <h4 className="mb-sm font-semibold">Example Content</h4>
               <p className="text-sm text-muted-foreground">
                 This is an example of how you might structure content in a larger modal.
               </p>

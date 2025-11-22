@@ -19,10 +19,10 @@ export const Section: React.FC<SectionProps> = ({
 }) => {
   const paddingClasses = {
     none: "",
-    sm: "py-4",
-    md: "py-8",
-    lg: "py-12",
-    xl: "py-16",
+    sm: "py-md",
+    md: "py-xl",
+    lg: "py-3xl",
+    xl: "py-4xl",
   };
 
   const backgroundClasses = {

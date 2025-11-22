@@ -48,20 +48,20 @@ export const Interactive: Story = {
     const [progress, setProgress] = useState(45);
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-md">
         <div>
-          <label className="mb-2 block text-sm font-medium">Progress: {progress}%</label>
+          <label className="mb-sm block text-sm font-medium">Progress: {progress}%</label>
           <Progress value={progress} />
-          <div className="mt-2 flex gap-2">
+          <div className="mt-sm flex gap-sm">
             <button
               onClick={() => setProgress(Math.max(0, progress - 10))}
-              className="rounded bg-secondary px-3 py-1 text-sm text-secondary-foreground hover:bg-secondary/80"
+              className="rounded bg-secondary px-sm py-xs text-sm text-secondary-foreground hover:bg-secondary/80"
             >
               -10%
             </button>
             <button
               onClick={() => setProgress(Math.min(100, progress + 10))}
-              className="rounded bg-secondary px-3 py-1 text-sm text-secondary-foreground hover:bg-secondary/80"
+              className="rounded bg-secondary px-sm py-xs text-sm text-secondary-foreground hover:bg-secondary/80"
             >
               +10%
             </button>

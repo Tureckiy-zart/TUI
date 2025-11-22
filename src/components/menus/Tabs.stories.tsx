@@ -21,16 +21,16 @@ export const Default: Story = {
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
       </TabsList>
-      <TabsContent value="account" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="account" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Account Settings</h3>
           <p className="text-sm text-muted-foreground">
             Make changes to your account here. Click save when you're done.
           </p>
         </div>
       </TabsContent>
-      <TabsContent value="password" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="password" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Password Settings</h3>
           <p className="text-sm text-muted-foreground">
             Change your password here. After saving, you'll be logged out.
@@ -50,32 +50,32 @@ export const MultipleTabs: Story = {
         <TabsTrigger value="reports">Reports</TabsTrigger>
         <TabsTrigger value="notifications">Notifications</TabsTrigger>
       </TabsList>
-      <TabsContent value="overview" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="overview" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Overview</h3>
           <p className="text-sm text-muted-foreground">
             Get a summary of your account activity and performance.
           </p>
         </div>
       </TabsContent>
-      <TabsContent value="analytics" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="analytics" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Analytics</h3>
           <p className="text-sm text-muted-foreground">
             View detailed analytics and insights about your data.
           </p>
         </div>
       </TabsContent>
-      <TabsContent value="reports" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="reports" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Reports</h3>
           <p className="text-sm text-muted-foreground">
             Generate and download reports for your account.
           </p>
         </div>
       </TabsContent>
-      <TabsContent value="notifications" className="mt-4">
-        <div className="space-y-2">
+      <TabsContent value="notifications" className="mt-md">
+        <div className="space-y-sm">
           <h3 className="text-lg font-medium">Notifications</h3>
           <p className="text-sm text-muted-foreground">
             Manage your notification preferences and settings.
