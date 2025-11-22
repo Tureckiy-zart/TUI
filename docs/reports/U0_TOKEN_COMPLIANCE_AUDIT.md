@@ -41,6 +41,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 #### Components with Color Violations:
 
 ##### `src/components/toasts/Toast.tsx` (8 violations)
+
 - **Line 19:** `border-green-200 bg-green-50 text-green-900` → Use semantic tokens: `border-success/20 bg-success/10 text-success-foreground`
 - **Line 19:** `dark:border-green-800 dark:bg-green-950 dark:text-green-100` → Use semantic tokens
 - **Line 21:** `border-red-200 bg-red-50 text-red-900` → Use semantic tokens: `border-error/20 bg-error/10 text-error-foreground`
@@ -55,6 +56,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 - **Line 40:** `text-blue-600 dark:text-blue-400` → Use: `text-info`
 
 **Migration Steps:**
+
 1. Replace all `green-*` colors with `success` semantic tokens
 2. Replace all `red-*` colors with `error` semantic tokens
 3. Replace all `yellow-*` colors with `warning` semantic tokens
@@ -62,14 +64,17 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 5. Remove dark mode variants (tokens handle this automatically)
 
 ##### `src/components/ui/toast.tsx` (1 violation)
+
 - **Line 79:** `group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600` → Use: `group-[.destructive]:text-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive`
 
 ##### `src/components/overlays/Popover.stories.tsx` (3 violations)
+
 - **Line 271:** `text-blue-500` → Use: `text-info` or `text-primary`
 - **Line 280:** `text-green-500` → Use: `text-success`
 - **Line 289:** `text-yellow-500` → Use: `text-warning`
 
 ##### `src/components/cards/EventCard.tsx` (5 violations)
+
 - **Line 80:** `bg-gradient-to-r from-orange-500 to-purple-600` → Use: `bg-gradient-to-r from-accent-500 to-primary-600`
 - **Line 87:** `from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800` → Use: `from-surface-elevated1 to-surface-elevated2`
 - **Line 97:** `text-gray-400 dark:text-gray-600` → Use: `text-muted-foreground`
@@ -81,28 +86,34 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 - **Line 188:** `from-orange-500 to-purple-600` → Use: `from-accent-500 to-primary-600`
 
 ##### `src/components/overlays/Tooltip.stories.tsx` (1 violation)
+
 - **Line 124:** `text-red-500` → Use: `text-error` or `text-destructive`
 
 ##### `src/components/overlays/Popover.tsx` (3 violations)
+
 - **Line 20:** `border-yellow-500/50 text-yellow-700 bg-yellow-50` → Use: `border-warning/50 text-warning-foreground bg-warning/10`
 - **Line 21:** `border-green-500/50 text-green-700 bg-green-50` → Use: `border-success/50 text-success-foreground bg-success/10`
 - **Line 22:** `border-blue-500/50 text-blue-700 bg-blue-50` → Use: `border-info/50 text-info-foreground bg-info/10`
 
 ##### `src/components/overlays/Tooltip.tsx` (3 violations)
+
 - **Line 20:** `border-yellow-500/50 text-yellow-700 bg-yellow-50` → Use: `border-warning/50 text-warning-foreground bg-warning/10`
 - **Line 21:** `border-green-500/50 text-green-700 bg-green-50` → Use: `border-success/50 text-success-foreground bg-success/10`
 - **Line 22:** `border-blue-500/50 text-blue-700 bg-blue-50` → Use: `border-info/50 text-info-foreground bg-info/10`
 
 ##### `src/components/feedback/ConsentBanner.tsx` (1 violation)
+
 - **Line 28:** `bg-blue-500` → Use: `bg-primary` or `bg-info`
 
 ##### `src/components/feedback/Alert.tsx` (4 violations)
+
 - **Line 20:** `bg-green-50 border-green-200 text-green-800` → Use: `bg-success/10 border-success/20 text-success-foreground`
 - **Line 21:** `bg-red-50 border-red-200 text-red-800` → Use: `bg-error/10 border-error/20 text-error-foreground`
 - **Line 22:** `bg-yellow-50 border-yellow-200 text-yellow-800` → Use: `bg-warning/10 border-warning/20 text-warning-foreground`
 - **Line 23:** `bg-blue-50 border-blue-200 text-blue-800` → Use: `bg-info/10 border-info/20 text-info-foreground`
 
 ##### `src/components/data/Table.stories.tsx` (3 violations)
+
 - **Line 48:** `bg-red-100 text-red-800` → Use: `bg-error/20 text-error-foreground`
 - **Line 50:** `bg-yellow-100 text-yellow-800` → Use: `bg-warning/20 text-warning-foreground`
 - **Line 51:** `bg-green-100 text-green-800` → Use: `bg-success/20 text-success-foreground`
@@ -115,6 +126,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 **Impact:** Breaks layout consistency, prevents responsive spacing system
 
 #### Common Patterns Found:
+
 - `p-*`, `px-*`, `py-*`, `pt-*`, `pb-*`, `pl-*`, `pr-*` (padding)
 - `m-*`, `mx-*`, `my-*`, `mt-*`, `mb-*`, `ml-*`, `mr-*` (margin)
 - `gap-*`, `space-x-*`, `space-y-*` (gaps)
@@ -174,7 +186,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
    - Line 303: `mb-2` → Use: `mb-space-xs`
    - Line 304: `gap-2` → Use: `gap-space-xs`
 
-*Note: Full list of spacing violations is extensive. See individual component migration tasks for complete details.*
+_Note: Full list of spacing violations is extensive. See individual component migration tasks for complete details._
 
 ---
 
@@ -184,6 +196,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 **Impact:** Breaks visual consistency, prevents theme-based radius customization
 
 #### Common Patterns Found:
+
 - `rounded-*` (none, sm, md, lg, xl, 2xl, 3xl, full)
 
 #### Components with Radius Violations:
@@ -212,7 +225,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
    - Line 22: `rounded-md` → Use: `rounded-radius-md`
    - Line 23: `rounded-md` → Use: `rounded-radius-md`
 
-*Note: Most components use `rounded-md`, `rounded-lg`, `rounded-full` which should be replaced with radius tokens.*
+_Note: Most components use `rounded-md`, `rounded-lg`, `rounded-full` which should be replaced with radius tokens._
 
 ---
 
@@ -222,6 +235,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 **Impact:** Breaks elevation consistency, prevents theme-based shadow customization
 
 #### Common Patterns Found:
+
 - `shadow-*` (none, sm, md, lg, xl, 2xl)
 
 #### Components with Shadow Violations:
@@ -251,7 +265,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
    - Line 15: `shadow-sm` → Use: `shadow-elevation-sm`
    - Line 16: `shadow-sm` → Use: `shadow-elevation-sm`
 
-*Note: Most components use `shadow-sm`, `shadow-md`, `shadow-lg` which should be replaced with elevation shadow tokens.*
+_Note: Most components use `shadow-sm`, `shadow-md`, `shadow-lg` which should be replaced with elevation shadow tokens._
 
 ---
 
@@ -261,6 +275,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 **Impact:** Minor - most text sizes are acceptable, but should use token system for consistency
 
 #### Common Patterns Found:
+
 - `text-*` (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl)
 
 #### Components with Typography Violations:
@@ -268,6 +283,7 @@ This audit identified **713 violations** of token usage guidelines across **92 c
 Most components use `text-sm`, `text-xs`, `text-lg` which are acceptable but should ideally use typography tokens for consistency.
 
 **Key Components:**
+
 - `src/components/ui/button.tsx` - Uses `text-sm`, `text-xs`
 - `src/components/ui/input.tsx` - Uses `text-base`, `text-sm`, `md:text-sm`
 - `src/components/primitives/Typography.tsx` - Defines text size variants (should use tokens)
@@ -275,6 +291,7 @@ Most components use `text-sm`, `text-xs`, `text-lg` which are acceptable but sho
 - `src/components/toasts/Toast.tsx` - Uses `text-sm`, `text-xs`
 
 **Migration Recommendation:**
+
 - Replace `text-*` with typography token classes where available
 - Ensure all text sizes use the fluid type scale from tokens
 
@@ -286,6 +303,7 @@ Most components use `text-sm`, `text-xs`, `text-lg` which are acceptable but sho
 **Impact:** Minor - font weights are mostly acceptable, but should use token system
 
 #### Common Patterns Found:
+
 - `font-*` (thin, extralight, light, normal, medium, semibold, bold, extrabold, black)
 
 #### Components with Font Weight Violations:
@@ -293,11 +311,13 @@ Most components use `text-sm`, `text-xs`, `text-lg` which are acceptable but sho
 Most components use `font-medium`, `font-semibold`, `font-bold` which are acceptable but should use typography tokens.
 
 **Key Components:**
+
 - `src/components/ui/button.tsx` - Uses `font-medium`
 - `src/components/cards/EventCard.tsx` - Uses `font-semibold`, `font-bold`
 - `src/components/primitives/Typography.tsx` - Defines font weight variants (should use tokens)
 
 **Migration Recommendation:**
+
 - Replace `font-*` with typography token classes where available
 - Ensure all font weights use the typography token system
 
@@ -309,6 +329,7 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
 **Impact:** Minor - durations are mostly acceptable, but should use motion tokens
 
 #### Common Patterns Found:
+
 - `duration-*` (200, 300, 500)
 - `ease-*` (linear, in, out, in-out)
 
@@ -336,6 +357,7 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
    - Line 17: `duration-300` → Use: `duration-normal`
 
 **Migration Recommendation:**
+
 - Replace all `duration-*` with motion token classes
 - Use semantic duration names: `duration-fast`, `duration-normal`, `duration-slow`
 
@@ -344,17 +366,20 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
 ## Migration Strategy
 
 ### Phase 1: High Priority (Colors)
+
 1. Migrate all color violations to semantic tokens
 2. Focus on: Toast, Alert, Popover, Tooltip, EventCard, ConsentBanner, Table
 3. **Estimated Impact:** 31 violations fixed
 
 ### Phase 2: Medium Priority (Spacing, Radius, Shadows)
+
 1. Migrate spacing violations to spacing tokens
 2. Migrate radius violations to radius tokens
 3. Migrate shadow violations to shadow tokens
 4. **Estimated Impact:** 465 violations fixed
 
 ### Phase 3: Low Priority (Typography, Font Weights, Animation)
+
 1. Migrate typography violations to typography tokens
 2. Migrate font weight violations to typography tokens
 3. Migrate animation violations to motion tokens
@@ -365,6 +390,7 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
 ## Component Priority List
 
 ### Critical Components (High Priority)
+
 1. `src/components/toasts/Toast.tsx` - 8 color violations
 2. `src/components/feedback/Alert.tsx` - 4 color violations
 3. `src/components/cards/EventCard.tsx` - 5 color violations + 13 spacing violations
@@ -372,12 +398,14 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
 5. `src/components/overlays/Tooltip.tsx` - 3 color violations
 
 ### High-Impact Components (Medium Priority)
+
 1. `src/components/filters/FilterBar.tsx` - 8 spacing violations
 2. `src/components/ui/dialog.tsx` - Multiple violations across categories
 3. `src/components/ui/toast.tsx` - Multiple violations
 4. `src/components/image/Image.tsx` - 8 radius + 6 shadow violations
 
 ### Standard Components (Low Priority)
+
 - All other components with typography, font weight, or animation violations
 
 ---
@@ -405,4 +433,3 @@ Most components use `font-medium`, `font-semibold`, `font-bold` which are accept
 **Report Generated:** 2025-01-20  
 **Auditor:** U0 Token Compliance Audit  
 **Version:** 1.0
-

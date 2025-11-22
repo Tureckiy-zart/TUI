@@ -38,6 +38,7 @@
 ### Step 1: Replace Radius Variants
 
 **Before:**
+
 ```typescript
 const radiusVariants = {
   none: "rounded-none",
@@ -52,6 +53,7 @@ const radiusVariants = {
 ```
 
 **After:**
+
 ```typescript
 const radiusVariants = {
   none: "rounded-radius-none",
@@ -68,6 +70,7 @@ const radiusVariants = {
 ### Step 2: Replace Shadow Variants
 
 **Before:**
+
 ```typescript
 const shadowVariants = {
   none: "shadow-none",
@@ -80,6 +83,7 @@ const shadowVariants = {
 ```
 
 **After:**
+
 ```typescript
 const shadowVariants = {
   none: "shadow-elevation-none",
@@ -96,6 +100,7 @@ const shadowVariants = {
 ## Related Tokens
 
 ### Border Radius (from `src/tokens/radius.ts`)
+
 - `--tm-radius-none` / `radius-none`
 - `--tm-radius-sm` / `radius-sm`
 - `--tm-radius-md` / `radius-md`
@@ -106,6 +111,7 @@ const shadowVariants = {
 - `--tm-radius-full` / `radius-full`
 
 ### Shadows (from `src/tokens/shadows.ts`)
+
 - `--tm-shadow-elevation-none` / `shadow-elevation-none`
 - `--tm-shadow-elevation-sm` / `shadow-elevation-sm`
 - `--tm-shadow-elevation-md` / `shadow-elevation-md`
@@ -130,4 +136,3 @@ const shadowVariants = {
 - This component defines variant objects that are used throughout the codebase
 - Ensure all variants use token-based classes
 - Test all combinations of radius and shadow variants
-

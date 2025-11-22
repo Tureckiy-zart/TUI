@@ -23,6 +23,7 @@
 ### Step 1: Replace variantClasses Object
 
 **Before:**
+
 ```typescript
 const variantClasses = {
   success: "bg-green-50 border-green-200 text-green-800",
@@ -33,6 +34,7 @@ const variantClasses = {
 ```
 
 **After:**
+
 ```typescript
 const variantClasses = {
   success: "bg-success/10 border-success/20 text-success-foreground",
@@ -88,4 +90,3 @@ const variantClasses = {
 - Use opacity modifiers (`/10` for backgrounds, `/20` for borders) for subtle styling
 - Semantic tokens automatically adapt to theme changes
 - No dark mode variants needed - tokens handle this automatically
-

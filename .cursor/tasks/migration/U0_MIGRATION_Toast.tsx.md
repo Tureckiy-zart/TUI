@@ -31,11 +31,13 @@
 ### Step 1: Replace Success Colors
 
 **Before:**
+
 ```typescript
 success: "border-green-200 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-950 dark:text-green-100",
 ```
 
 **After:**
+
 ```typescript
 success: "border-success/20 bg-success/10 text-success-foreground",
 ```
@@ -45,11 +47,13 @@ success: "border-success/20 bg-success/10 text-success-foreground",
 ### Step 2: Replace Error Colors
 
 **Before:**
+
 ```typescript
 error: "border-red-200 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950 dark:text-red-100",
 ```
 
 **After:**
+
 ```typescript
 error: "border-error/20 bg-error/10 text-error-foreground",
 ```
@@ -59,11 +63,13 @@ error: "border-error/20 bg-error/10 text-error-foreground",
 ### Step 3: Replace Warning Colors
 
 **Before:**
+
 ```typescript
 warning: "border-yellow-200 bg-yellow-50 text-yellow-900 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-100",
 ```
 
 **After:**
+
 ```typescript
 warning: "border-warning/20 bg-warning/10 text-warning-foreground",
 ```
@@ -73,11 +79,13 @@ warning: "border-warning/20 bg-warning/10 text-warning-foreground",
 ### Step 4: Replace Info Colors
 
 **Before:**
+
 ```typescript
 info: "border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-100",
 ```
 
 **After:**
+
 ```typescript
 info: "border-info/20 bg-info/10 text-info-foreground",
 ```
@@ -87,6 +95,7 @@ info: "border-info/20 bg-info/10 text-info-foreground",
 ### Step 5: Replace Icon Colors
 
 **Before:**
+
 ```typescript
 success: "text-green-600 dark:text-green-400",
 error: "text-red-600 dark:text-red-400",
@@ -95,6 +104,7 @@ info: "text-blue-600 dark:text-blue-400",
 ```
 
 **After:**
+
 ```typescript
 success: "text-success",
 error: "text-error",
@@ -150,4 +160,3 @@ info: "text-info",
 - Remove all `dark:` variants - tokens handle dark mode automatically
 - Use opacity modifiers (`/20`, `/10`) for subtle backgrounds and borders
 - Semantic tokens automatically adapt to theme changes
-

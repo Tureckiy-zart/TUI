@@ -70,14 +70,14 @@ export const EventCard: React.FC<EventCardProps> = ({
   return (
     <Card
       className={cn(
-        "animate-fade-in-up group relative overflow-hidden border-transparent shadow-elevation-md transition-all duration-normal hover:border-primary/20 hover:shadow-elevation-xl",
+        "animate-fade-in-up shadow-elevation-md hover:shadow-elevation-xl group relative overflow-hidden border-transparent transition-all duration-normal hover:border-primary/20",
         featured && "ring-2 ring-primary/50",
         className,
       )}
     >
       {featured && (
         <div className="absolute right-3 top-3 z-10">
-          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white shadow-elevation-lg">
+          <span className="shadow-elevation-lg inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white">
             {trendingBadgeText}
           </span>
         </div>
@@ -166,7 +166,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           {event?.ticket_url ? (
             <Link
               href={event.ticket_url}
-              className="inline-flex w-full transform items-center justify-center bg-gradient-to-r from-accent-500 to-primary-600 px-md py-xs font-semibold text-white shadow-elevation-md transition-all duration-normal hover:scale-105 hover:from-accent-600 hover:to-primary-700 hover:shadow-elevation-lg"
+              className="shadow-elevation-md hover:shadow-elevation-lg inline-flex w-full transform items-center justify-center bg-gradient-to-r from-accent-500 to-primary-600 px-md py-xs font-semibold text-white transition-all duration-normal hover:scale-105 hover:from-accent-600 hover:to-primary-700"
               target="_blank"
               rel="noopener noreferrer"
             >

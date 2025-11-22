@@ -20,11 +20,13 @@
 ### Step 1: Replace Background Color
 
 **Before:**
+
 ```typescript
 <div className={cn("rounded-lg bg-blue-500 p-4 text-white", className)}>
 ```
 
 **After:**
+
 ```typescript
 <div className={cn("rounded-lg bg-primary p-space-md text-primary-foreground", className)}>
 ```
@@ -36,13 +38,16 @@
 ## Related Tokens
 
 ### Colors
+
 - `--tm-primary` / `primary` token
 - `--tm-primary-foreground` / `primary-foreground` token
 
 ### Spacing
+
 - `--tm-space-md` / `space-md` token (for `p-4`)
 
 ### Radius
+
 - `--tm-radius-lg` / `radius-lg` token (for `rounded-lg`)
 
 ---
@@ -61,4 +66,3 @@
 - Use `bg-primary` for primary actions/banners
 - Use `bg-info` if this is informational content
 - Remove hardcoded `text-white` - use `text-primary-foreground` for proper contrast
-

@@ -22,6 +22,7 @@
 ### Step 1: Replace variantClasses Object
 
 **Before:**
+
 ```typescript
 warning: "border-yellow-500/50 text-yellow-700 bg-yellow-50",
 success: "border-green-500/50 text-green-700 bg-green-50",
@@ -29,6 +30,7 @@ info: "border-blue-500/50 text-blue-700 bg-blue-50",
 ```
 
 **After:**
+
 ```typescript
 warning: "border-warning/50 text-warning-foreground bg-warning/10",
 success: "border-success/50 text-success-foreground bg-success/10",
@@ -42,6 +44,7 @@ info: "border-info/50 text-info-foreground bg-info/10",
 ## Related Tokens
 
 ### Semantic Colors
+
 - `--tm-semantic-warning` / `warning` token
 - `--tm-semantic-warning-foreground` / `warning-foreground` token
 - `--tm-semantic-success` / `success` token
@@ -65,4 +68,3 @@ info: "border-info/50 text-info-foreground bg-info/10",
 
 - Use opacity modifiers (`/50` for borders, `/10` for backgrounds)
 - Semantic tokens automatically adapt to theme changes
-

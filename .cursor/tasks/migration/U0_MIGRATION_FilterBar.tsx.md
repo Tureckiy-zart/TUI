@@ -31,6 +31,7 @@
 Replace all hardcoded spacing values with spacing tokens:
 
 **Before:**
+
 ```typescript
 <div className={cn("space-y-4", className)}>
 <div className="flex flex-col gap-4 sm:flex-row">
@@ -44,6 +45,7 @@ Replace all hardcoded spacing values with spacing tokens:
 ```
 
 **After:**
+
 ```typescript
 <div className={cn("space-y-space-md", className)}>
 <div className="flex flex-col gap-space-md sm:flex-row">
@@ -61,11 +63,13 @@ Replace all hardcoded spacing values with spacing tokens:
 ## Related Tokens
 
 ### Spacing (from `src/tokens/spacing.ts`)
+
 - `--tm-space-xs` / `space-xs` (0.5rem / 8px)
 - `--tm-space-sm` / `space-sm` (0.75rem / 12px)
 - `--tm-space-md` / `space-md` (1rem / 16px)
 
 ### Tailwind Classes Available
+
 - `space-y-space-xs`, `space-y-space-sm`, `space-y-space-md`
 - `gap-space-xs`, `gap-space-sm`, `gap-space-md`
 - `p-space-xs`, `p-space-sm`, `p-space-md`
@@ -90,4 +94,3 @@ Replace all hardcoded spacing values with spacing tokens:
 - Replace `p-*` with `p-space-*`
 - Replace `mb-*` with `mb-space-*`
 - Use semantic spacing tokens for consistent layout rhythm
-
