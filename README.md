@@ -1,6 +1,8 @@
 🌴 Tenerife UI — Premium React Component Library
 Elegant. Token-driven. Fully Typed. Built for Luxury Interfaces.
 
+![Release](https://img.shields.io/github/v/release/Tureckiy-zart/tenerife-ui?style=for-the-badge)
+
 <p align="center"> <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" /> </p> <p align="center"> <strong> A high-end, fully tokenized design system crafted for modern React apps.<br/> Built with Tailwind, CVA, TypeScript and a luxury-first aesthetic. </strong> </p> <p align="center"> <img src="https://img.shields.io/badge/React-18+-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge"/> <img src="https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Design%20Tokens-Complete-purple?style=for-the-badge"/> <img src="https://img.shields.io/badge/CVA-Variants-success?style=for-the-badge"/> </p>
 🚀 Quick Start
 npm install @tenerife/ui
@@ -197,6 +199,8 @@ search/
 data/
 
 📸 Component Preview
+
+[![Storybook](https://img.shields.io/badge/Storybook-Open-success?style=for-the-badge)](https://Tureckiy-zart.github.io/tenerife-ui/)
 
 (Добавить скриншоты/видео позже)
 

@@ -1,6 +1,6 @@
 {
   "name": "@tenerife.music/ui",
-  "version": "0.0.7",
+  "version": "0.0.0",
   "private": false,
   "type": "module",
   "description": "Tenerife.Music UI Component Library - A hybrid design system built on shadcn/ui primitives with Tenerife branding",
@@ -30,6 +30,9 @@
     "dist",
     "stories"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
@@ -52,6 +55,7 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run clean && npm run build && npm run typecheck",
     "validate": "npm run typecheck && npm run lint:check && npm run format:check",
+    "commitlint": "commitlint",
     "prepare": "husky"
   },
   "peerDependencies": {
@@ -90,7 +94,15 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/eslintrc": "^3.3.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.2",
+    "@semantic-release/npm": "^13.1.2",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",
     "@storybook/addon-links": "^8.0.0",
@@ -109,6 +121,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.0.0",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-react": "^7.37.2",
@@ -123,6 +136,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "rimraf": "^6.0.1",
+    "semantic-release": "^25.0.2",
     "storybook": "^8.0.0",
     "tailwindcss": "^3.0.0",
     "ts-jest": "^29.4.5",
