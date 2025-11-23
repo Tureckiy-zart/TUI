@@ -5,9 +5,8 @@
  * Provides async loading support for dynamic themes.
  */
 
-import { getAllThemes,loadTheme, themeExists } from "./registry";
-import type { ThemeSchema } from "./schema";
-import { validateThemeSchema } from "./schema";
+import { getAllThemes, loadTheme, themeExists } from "./registry";
+import { type ThemeSchema,validateThemeSchema } from "./schema";
 
 /**
  * Theme loader options

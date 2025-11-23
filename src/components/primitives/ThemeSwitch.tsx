@@ -5,8 +5,8 @@ import React from "react";
 
 import { Button } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/theme";
 import { applyDocumentMode } from "@/theme/applyMode";
+import { ThemeContext } from "@/theme/ThemeProvider";
 import type { Mode } from "@/tokens/colors";
 
 interface ThemeSwitchProps {
@@ -118,13 +118,9 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   size = "md",
   variant = "primary",
 }) => {
-  // Try to use ThemeProvider context if available
-  let themeContext: ReturnType<typeof useTheme> | null = null;
-  try {
-    themeContext = useTheme();
-  } catch {
-    // ThemeProvider not available, use standalone mode
-  }
+  // Use ThemeProvider context if available (must call hook unconditionally)
+  // React.useContext returns undefined if context is not available
+  const themeContext = React.useContext(ThemeContext);
 
   const [mode, setMode] = React.useState<Mode>(() => {
     if (themeContext) {

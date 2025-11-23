@@ -24,7 +24,7 @@ interface ThemeContextValue {
   toggleMode: () => void;
 }
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
+export const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
 
 /**
  * Theme Provider Props
