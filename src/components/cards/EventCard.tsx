@@ -84,7 +84,7 @@ export const EventCard: React.FC<EventCardProps> = ({
       )}
 
       {showImage && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+        <div className="relative h-[var(--spacing-3xl)] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
           {image ? (
             <img
               src={image}

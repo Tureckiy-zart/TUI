@@ -6,8 +6,8 @@ import React from "react";
 import { Button } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
 import type { Mode } from "@/tokens/colors";
-
-import { applyDocumentMode } from "../../theme/applyMode";
+import { useTheme } from "@/theme";
+import { applyDocumentMode } from "@/theme/applyMode";
 
 interface ThemeSwitchProps {
   className?: string;
@@ -118,21 +118,45 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   size = "md",
   variant = "primary",
 }) => {
-  const [mode, setMode] = React.useState<Mode>(() => getInitialMode());
+  // Try to use ThemeProvider context if available
+  let themeContext: ReturnType<typeof useTheme> | null = null;
+  try {
+    themeContext = useTheme();
+  } catch {
+    // ThemeProvider not available, use standalone mode
+  }
+
+  const [mode, setMode] = React.useState<Mode>(() => {
+    if (themeContext) {
+      return themeContext.mode;
+    }
+    return getInitialMode();
+  });
 
   React.useEffect(() => {
-    const resolvedMode = getInitialMode();
-    setMode(resolvedMode);
-    persistMode(resolvedMode);
-    debugModeSnapshot(`initial:${resolvedMode}`);
-  }, []);
+    if (themeContext) {
+      setMode(themeContext.mode);
+    } else {
+      const resolvedMode = getInitialMode();
+      setMode(resolvedMode);
+      persistMode(resolvedMode);
+      debugModeSnapshot(`initial:${resolvedMode}`);
+    }
+  }, [themeContext]);
 
   const toggleMode = () => {
-    setMode((current) => {
-      const nextMode: Mode = current === "night" ? "day" : "night";
-      persistMode(nextMode);
-      return nextMode;
-    });
+    if (themeContext) {
+      // Use ThemeProvider's toggleMode
+      themeContext.toggleMode();
+      setMode(themeContext.mode === "night" ? "day" : "night");
+    } else {
+      // Standalone mode
+      setMode((current) => {
+        const nextMode: Mode = current === "night" ? "day" : "night";
+        persistMode(nextMode);
+        return nextMode;
+      });
+    }
   };
 
   let buttonSize: "xs" | "sm" | "md" | "lg" | "xl" = "md";
@@ -147,7 +171,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
       variant={variant}
       size={buttonSize}
       className={cn(className)}
-      aria-label={`Switch to ${mode === "night" ? "day" : "night"} theme`}
+      aria-label={`Switch to ${mode === "night" ? "day" : "night"} mode`}
       type="button"
     >
       {mode === "night" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

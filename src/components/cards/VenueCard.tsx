@@ -101,7 +101,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       )}
 
       {showImage && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
+        <div className="relative h-[var(--spacing-3xl)] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
           {image ? (
             <img
               src={image}

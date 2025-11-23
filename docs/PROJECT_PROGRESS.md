@@ -2,7 +2,7 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-**Last Updated:** 2025-11-23
+**Last Updated:** 2025-11-23 (U3 Theme Scaffolding CLI completed)
 
 ---
 
@@ -171,7 +171,7 @@ This file tracks the completion status of all tasks and subtasks in the Master T
 - **Reports:**
   - `docs/reports/U2_COMPLETION_REPORT.md` - Complete standardization report with migration guide
 - **Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
-- **Next Steps:** U3 - Implement theme scaffolding CLI (unlocked)
+- **Next Steps:** ✅ U3 - Theme Scaffolding CLI (completed 2025-11-23)
 
 ---
 
@@ -867,6 +867,82 @@ All typing enforcement tasks completed:
   - ✅ RELEASE_PIPELINE_HARDENING - Ready to unlock (add caching, permissions, validation)
   - ✅ AUTOMATED_TAGGED_DOCS_DEPLOY - Ready to unlock (release pipeline working)
   - 💡 API Stability Layer - Suggested for future consideration
+
+---
+
+### U3 - Theme Scaffolding CLI (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-11-23
+- **Branch:** feature/U3-theme-scaffolding-cli
+- **Summary:** Complete Theme Scaffolding CLI system implemented with theme schema validation, registry management, dynamic theme loading, CLI tools for theme creation, token validation, and Storybook integration. All components can now switch themes seamlessly without code changes.
+- **Key Deliverables:**
+  - ✅ Theme Schema (`src/theme/schema.ts`) - Strict TypeScript schema with validation
+  - ✅ Theme Registry (`src/theme/registry.ts`) - Centralized theme management with dynamic imports
+  - ✅ Theme Loader (`src/theme/loader.ts`) - Safe theme loading with error handling and fallback
+  - ✅ ThemeSwitch Refactoring - Multi-theme support with ThemeProvider integration
+  - ✅ Theme CLI (`scripts/theme-cli.ts`) - Automated theme creation tool
+  - ✅ Token Validation (`scripts/theme-validate.ts`) - Theme validation against base tokens
+  - ✅ Storybook Showcase (`src/components/primitives/ThemeShowcase.stories.tsx`) - Complete theme demonstration
+- **Files Created:**
+  - ✅ `src/theme/schema.ts` (200+ lines)
+  - ✅ `src/theme/registry.ts` (160+ lines)
+  - ✅ `src/theme/loader.ts` (150+ lines)
+  - ✅ `scripts/theme-cli.ts` (330+ lines)
+  - ✅ `scripts/theme-validate.ts` (200+ lines)
+  - ✅ `src/components/primitives/ThemeShowcase.stories.tsx` (250+ lines)
+- **Files Modified:**
+  - ✅ `src/theme/index.ts` - Added schema, registry, loader exports
+  - ✅ `src/components/primitives/ThemeSwitch.tsx` - Refactored for multi-theme support
+  - ✅ `package.json` - Added CLI scripts (`theme:create`, `theme:validate`) and tsx dependency
+- **CLI Commands:**
+  - `pnpm ui theme:create <name>` - Create new theme with auto-registration
+  - `pnpm ui theme:validate` - Validate all themes against base tokens
+- **Features:**
+  - Theme schema validation with TypeScript strict types
+  - Theme registry with dynamic imports and metadata
+  - Safe theme loading with fallback support
+  - Automated theme creation via CLI
+  - Token validation system
+  - Storybook theme showcase with all themes
+  - Multi-theme support in ThemeSwitch component
+- **Validation Results:**
+  - ✅ TypeScript: 0 errors
+  - ✅ ESLint: 0 errors
+  - ✅ All themes validated successfully
+- **Output:** `docs/reports/U3_COMPLETION_REPORT.md`
+- **Next Steps:** U4 - Component Section System (unlocked)
+
+---
+
+### U3.1 - Fix Before Close (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-11-23
+- **Branch:** feature/U3-api-standardization
+- **Summary:** All critical and high priority issues from FULL_CODE_REVIEW_REPORT.md resolved. Fixed token violations, semantic variants, incorrect story colors, and prepared library for Theme CLI integration.
+- **Key Fixes:**
+  - ✅ ModeHero.tsx - Replaced hardcoded colors with tokens (from-blue-500/to-purple-600 → from-primary/to-accent)
+  - ✅ Toast.tsx - Replaced semantic variants with canonical variants (success→accent, error→destructive, warning→secondary, info→primary)
+  - ✅ Popover.stories.tsx - Replaced semantic colors (text-info→text-primary, text-success→text-accent, text-warning→text-secondary)
+  - ✅ Table.stories.tsx - Replaced semantic colors (bg-error→bg-destructive, bg-warning→bg-secondary, bg-success→bg-accent)
+  - ✅ Numeric sizes - Replaced h-48/h-16 with token-based spacing (h-[var(--spacing-3xl)], h-[var(--spacing-md)])
+- **Files Modified:**
+  - ✅ `src/components/layout/ModeHero.tsx`
+  - ✅ `src/components/toasts/Toast.tsx`
+  - ✅ `src/components/overlays/Popover.stories.tsx`
+  - ✅ `src/components/data/Table.stories.tsx`
+  - ✅ `src/components/cards/EventCard.tsx`
+  - ✅ `src/components/cards/VenueCard.tsx`
+  - ✅ `src/components/sections/ArticlesSection.tsx`
+  - ✅ `src/components/auth/ProfileCard.tsx`
+- **Validation Results:**
+  - ✅ TypeScript: 0 errors
+  - ✅ ESLint: 0 errors
+  - ✅ Storybook: Builds successfully
+  - ✅ Token Compliance: 100% (0 violations)
+- **Output:** `docs/reports/U3.1_FIX_REPORT.md`
+- **Next Steps:** ✅ U3 - Theme Scaffolding CLI (completed)
 
 ---
 

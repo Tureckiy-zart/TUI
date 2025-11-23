@@ -15,10 +15,16 @@ const toastVariants = cva(
     variants: {
       type: {
         default: "border bg-background text-foreground",
-        success: "border-success/20 bg-success/10 text-success-foreground",
-        error: "border-error/20 bg-error/10 text-error-foreground",
-        warning: "border-warning/20 bg-warning/10 text-warning-foreground",
-        info: "border-info/20 bg-info/10 text-info-foreground",
+        // Map semantic variants to canonical variants
+        success: "border-accent/20 bg-accent/10 text-accent-foreground",
+        error: "border-destructive/20 bg-destructive/10 text-destructive-foreground",
+        warning: "border-secondary/20 bg-secondary/10 text-secondary-foreground",
+        info: "border-primary/20 bg-primary/10 text-primary-foreground",
+        // Canonical variants (for future use)
+        primary: "border-primary/20 bg-primary/10 text-primary-foreground",
+        accent: "border-accent/20 bg-accent/10 text-accent-foreground",
+        destructive: "border-destructive/20 bg-destructive/10 text-destructive-foreground",
+        secondary: "border-secondary/20 bg-secondary/10 text-secondary-foreground",
       },
     },
     defaultVariants: {
@@ -31,10 +37,16 @@ const toastIconVariants = cva("h-4 w-4 flex-shrink-0", {
   variants: {
     type: {
       default: "text-foreground",
-      success: "text-success",
-      error: "text-error",
-      warning: "text-warning",
-      info: "text-info",
+      // Map semantic variants to canonical variants
+      success: "text-accent",
+      error: "text-destructive",
+      warning: "text-secondary",
+      info: "text-primary",
+      // Canonical variants (for future use)
+      primary: "text-primary",
+      accent: "text-accent",
+      destructive: "text-destructive",
+      secondary: "text-secondary",
     },
   },
   defaultVariants: {
