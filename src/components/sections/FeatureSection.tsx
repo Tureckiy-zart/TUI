@@ -75,17 +75,9 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
           </header>
         )}
 
-        <div
-          className={cn(
-            "grid gap-lg",
-            gridCols[columns],
-          )}
-        >
+        <div className={cn("grid gap-lg", gridCols[columns])}>
           {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="transition-shadow hover:shadow-md"
-            >
+            <Card key={index} className="transition-shadow hover:shadow-md">
               <CardContent className="p-lg">
                 <div className="space-y-md">
                   {/* Icon */}
@@ -113,5 +105,3 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
 };
 
 FeatureSection.displayName = "FeatureSection";
-
-

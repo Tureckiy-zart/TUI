@@ -59,7 +59,8 @@ type Story = StoryObj<typeof HeroSection>;
 export const Default: Story = {
   args: {
     title: "Welcome to Tenerife UI",
-    description: "A beautiful, accessible, and theme-aware component library built with React and TypeScript.",
+    description:
+      "A beautiful, accessible, and theme-aware component library built with React and TypeScript.",
     actions: (
       <>
         <Button variant="primary">Get Started</Button>
@@ -73,7 +74,8 @@ export const FullWidth: Story = {
   args: {
     variant: "full-width",
     title: "Build Amazing Interfaces",
-    description: "Create beautiful, responsive user interfaces with our comprehensive component library.",
+    description:
+      "Create beautiful, responsive user interfaces with our comprehensive component library.",
     actions: (
       <>
         <Button variant="primary" size="lg">
@@ -91,7 +93,8 @@ export const Split: Story = {
   args: {
     variant: "split",
     title: "Premium Design System",
-    description: "A complete design system with tokens, themes, and components that work seamlessly together.",
+    description:
+      "A complete design system with tokens, themes, and components that work seamlessly together.",
     actions: (
       <>
         <Button variant="primary">Explore Components</Button>
@@ -99,7 +102,7 @@ export const Split: Story = {
       </>
     ),
     media: (
-      <div className="aspect-video w-full rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+      <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
         <span className="text-4xl">🎨</span>
       </div>
     ),
@@ -119,7 +122,7 @@ export const WithMedia: Story = {
       </>
     ),
     media: (
-      <div className="aspect-video w-full max-w-2xl rounded-xl bg-gradient-to-br from-primary/30 via-accent/30 to-secondary/30 flex items-center justify-center">
+      <div className="flex aspect-video w-full max-w-2xl items-center justify-center rounded-xl bg-gradient-to-br from-primary/30 via-accent/30 to-secondary/30">
         <span className="text-6xl">✨</span>
       </div>
     ),
@@ -153,7 +156,7 @@ export const CardBackground: Story = {
       </>
     ),
     media: (
-      <div className="aspect-square w-full rounded-lg bg-primary/10 flex items-center justify-center">
+      <div className="flex aspect-square w-full items-center justify-center rounded-lg bg-primary/10">
         <span className="text-5xl">♿</span>
       </div>
     ),
@@ -170,7 +173,8 @@ export const Minimal: Story = {
 export const LongContent: Story = {
   args: {
     variant: "split",
-    title: "This is a Very Long Hero Title That Should Still Look Good and Be Readable Across All Screen Sizes",
+    title:
+      "This is a Very Long Hero Title That Should Still Look Good and Be Readable Across All Screen Sizes",
     description:
       "This is a longer description that demonstrates how the component handles extended text content. It should wrap nicely and maintain good readability. The typography should scale appropriately and the layout should remain balanced even with more content.",
     actions: (
@@ -181,7 +185,7 @@ export const LongContent: Story = {
       </>
     ),
     media: (
-      <div className="aspect-video w-full rounded-lg bg-muted flex items-center justify-center">
+      <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-muted">
         <span className="text-3xl text-muted-foreground">Media Content</span>
       </div>
     ),
@@ -192,7 +196,8 @@ export const ResponsiveExample: Story = {
   args: {
     variant: "split",
     title: "Responsive by Default",
-    description: "This hero section adapts beautifully to all screen sizes, from mobile to desktop.",
+    description:
+      "This hero section adapts beautifully to all screen sizes, from mobile to desktop.",
     actions: (
       <>
         <Button variant="primary" size="lg">
@@ -201,8 +206,8 @@ export const ResponsiveExample: Story = {
       </>
     ),
     media: (
-      <div className="aspect-video w-full rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-        <div className="text-center space-y-2">
+      <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
+        <div className="space-y-2 text-center">
           <div className="text-4xl">📱</div>
           <div className="text-sm text-muted-foreground">Responsive Design</div>
         </div>
@@ -237,5 +242,3 @@ export const ResponsiveExample: Story = {
     },
   },
 };
-
-

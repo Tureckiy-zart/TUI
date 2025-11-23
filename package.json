@@ -57,6 +57,7 @@
     "validate": "npm run typecheck && npm run lint:check && npm run format:check",
     "theme:create": "tsx scripts/theme-cli.ts create",
     "theme:validate": "tsx scripts/theme-validate.ts",
+    "ui:check": "tsx scripts/check-ui-consistency.ts",
     "commitlint": "commitlint",
     "prepare": "husky"
   },

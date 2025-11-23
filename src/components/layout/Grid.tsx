@@ -39,6 +39,21 @@ const gridVariants = cva("grid", {
       20: "gap-4xl",
       24: "gap-5xl",
     },
+    align: {
+      start: "items-start",
+      end: "items-end",
+      center: "items-center",
+      baseline: "items-baseline",
+      stretch: "items-stretch",
+    },
+    justify: {
+      start: "justify-start",
+      end: "justify-end",
+      center: "justify-center",
+      between: "justify-between",
+      around: "justify-around",
+      evenly: "justify-evenly",
+    },
     flow: {
       row: "grid-flow-row",
       col: "grid-flow-col",
@@ -51,20 +66,59 @@ const gridVariants = cva("grid", {
     cols: 1,
     rows: "none",
     gap: 0,
+    align: "stretch",
+    justify: "start",
     flow: "row",
   },
 });
 
+type ColumnValue = 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
+
 export interface GridProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof gridVariants> {}
+    VariantProps<typeof gridVariants> {
+  /**
+   * Number of columns for medium breakpoint (768px+)
+   */
+  md?: ColumnValue;
+  /**
+   * Number of columns for large breakpoint (1024px+)
+   */
+  lg?: ColumnValue;
+  /**
+   * Number of columns for extra large breakpoint (1280px+)
+   */
+  xl?: ColumnValue;
+}
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  ({ className, cols, rows, gap, flow, ...props }, ref) => {
+  ({ className, cols, md, lg, xl, rows, gap, align, justify, flow, ...props }, ref) => {
+    // Build responsive column classes
+    const baseColsClass = cols ? `grid-cols-${cols}` : "grid-cols-1";
+    const responsiveCols = [
+      baseColsClass,
+      md && `md:grid-cols-${md}`,
+      lg && `lg:grid-cols-${lg}`,
+      xl && `xl:grid-cols-${xl}`,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    // Get base grid classes - use cols only if no responsive props provided
+    const hasResponsiveProps = md || lg || xl;
+    const baseClasses = gridVariants({
+      cols: hasResponsiveProps ? undefined : cols,
+      rows,
+      gap,
+      align,
+      justify,
+      flow,
+    });
+
     return (
       <div
         ref={ref}
-        className={cn(gridVariants({ cols, rows, gap, flow, className }))}
+        className={cn(baseClasses, hasResponsiveProps && responsiveCols, className)}
         {...props}
       />
     );

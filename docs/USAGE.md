@@ -22,7 +22,13 @@ import { Button, Input, Label, Badge, Link } from "@tenerife.music/ui";
 import { Container, Section, Grid, Flex, Stack } from "@tenerife.music/ui";
 
 // Section компоненты (премиум секции)
-import { HeroSection, FeatureSection, CTASection, ArticlesSection, TrendingSection } from "@tenerife.music/ui";
+import {
+  HeroSection,
+  FeatureSection,
+  CTASection,
+  ArticlesSection,
+  TrendingSection,
+} from "@tenerife.music/ui";
 
 // Modal компоненты
 import { Modal, SimpleModal, CustomDialog, ConfirmDialog } from "@tenerife.music/ui";

@@ -190,7 +190,8 @@ export const AllButtonVariants: Story = {
 export const LongContent: Story = {
   args: {
     layout: "split",
-    headline: "This is a Very Long Headline That Demonstrates How the Component Handles Extended Text Content",
+    headline:
+      "This is a Very Long Headline That Demonstrates How the Component Handles Extended Text Content",
     description:
       "This is a longer description that shows how the component handles extended text. It should wrap nicely and maintain good readability across all screen sizes. The layout should remain balanced and visually appealing even with more content.",
     primaryAction: {
@@ -288,5 +289,3 @@ export const MultipleCTAs: Story = {
     </div>
   ),
 };
-
-

@@ -11,9 +11,7 @@ describe("CTASection component", () => {
   });
 
   it("should render with description", () => {
-    render(
-      <CTASection headline="Get Started" description="Join us today" />,
-    );
+    render(<CTASection headline="Get Started" description="Join us today" />);
     expect(screen.getByText("Join us today")).toBeInTheDocument();
   });
 
@@ -59,10 +57,7 @@ describe("CTASection component", () => {
 
   it("should render primary action as link when href provided", () => {
     render(
-      <CTASection
-        headline="Get Started"
-        primaryAction={{ label: "Sign Up", href: "/signup" }}
-      />,
+      <CTASection headline="Get Started" primaryAction={{ label: "Sign Up", href: "/signup" }} />,
     );
     const link = screen.getByRole("link", { name: /sign up/i });
     expect(link).toBeInTheDocument();
@@ -88,17 +83,13 @@ describe("CTASection component", () => {
   });
 
   it("should apply split layout", () => {
-    const { container } = render(
-      <CTASection headline="Get Started" layout="split" />,
-    );
+    const { container } = render(<CTASection headline="Get Started" layout="split" />);
     const grid = container.querySelector(".grid");
     expect(grid).toHaveClass("md:grid-cols-2");
   });
 
   it("should apply custom className", () => {
-    const { container } = render(
-      <CTASection headline="Get Started" className="custom-class" />,
-    );
+    const { container } = render(<CTASection headline="Get Started" className="custom-class" />);
     expect(container.querySelector("section")).toHaveClass("custom-class");
   });
 
@@ -116,10 +107,7 @@ describe("CTASection component", () => {
 
   it("should apply default primary variant to primary action", () => {
     render(
-      <CTASection
-        headline="Get Started"
-        primaryAction={{ label: "Sign Up", onClick: () => {} }}
-      />,
+      <CTASection headline="Get Started" primaryAction={{ label: "Sign Up", onClick: () => {} }} />,
     );
     const button = screen.getByRole("button", { name: /sign up/i });
     expect(button).toHaveClass("bg-primary");
@@ -254,5 +242,3 @@ describe("CTASection component", () => {
     expect(screen.getByText(longHeadline)).toBeInTheDocument();
   });
 });
-
-

@@ -35,22 +35,13 @@ describe("FeatureSection component", () => {
   });
 
   it("should render with description", () => {
-    render(
-      <FeatureSection
-        features={sampleFeatures}
-        description="Our key features"
-      />,
-    );
+    render(<FeatureSection features={sampleFeatures} description="Our key features" />);
     expect(screen.getByText("Our key features")).toBeInTheDocument();
   });
 
   it("should render with title and description", () => {
     render(
-      <FeatureSection
-        features={sampleFeatures}
-        title="Features"
-        description="Our key features"
-      />,
+      <FeatureSection features={sampleFeatures} title="Features" description="Our key features" />,
     );
     expect(screen.getByText("Features")).toBeInTheDocument();
     expect(screen.getByText("Our key features")).toBeInTheDocument();
@@ -78,27 +69,21 @@ describe("FeatureSection component", () => {
   });
 
   it("should apply 1 column layout", () => {
-    const { container } = render(
-      <FeatureSection features={sampleFeatures} columns={1} />,
-    );
+    const { container } = render(<FeatureSection features={sampleFeatures} columns={1} />);
     const grid = container.querySelector(".grid");
     expect(grid).toHaveClass("grid-cols-1");
     expect(grid).not.toHaveClass("md:grid-cols-2");
   });
 
   it("should apply 2 column layout", () => {
-    const { container } = render(
-      <FeatureSection features={sampleFeatures} columns={2} />,
-    );
+    const { container } = render(<FeatureSection features={sampleFeatures} columns={2} />);
     const grid = container.querySelector(".grid");
     expect(grid).toHaveClass("md:grid-cols-2");
     expect(grid).not.toHaveClass("lg:grid-cols-3");
   });
 
   it("should apply 4 column layout", () => {
-    const { container } = render(
-      <FeatureSection features={sampleFeatures} columns={4} />,
-    );
+    const { container } = render(<FeatureSection features={sampleFeatures} columns={4} />);
     const grid = container.querySelector(".grid");
     expect(grid).toHaveClass("lg:grid-cols-4");
   });
@@ -133,9 +118,7 @@ describe("FeatureSection component", () => {
   });
 
   it("should use semantic HTML", () => {
-    const { container } = render(
-      <FeatureSection features={sampleFeatures} title="Features" />,
-    );
+    const { container } = render(<FeatureSection features={sampleFeatures} title="Features" />);
     expect(container.querySelector("section")).toBeInTheDocument();
     expect(container.querySelector("header")).toBeInTheDocument();
     expect(container.querySelector("h2")).toBeInTheDocument();
@@ -163,9 +146,7 @@ describe("FeatureSection component", () => {
   });
 
   it("should center header content when title/description present", () => {
-    const { container } = render(
-      <FeatureSection features={sampleFeatures} title="Features" />,
-    );
+    const { container } = render(<FeatureSection features={sampleFeatures} title="Features" />);
     const header = container.querySelector("header");
     expect(header).toHaveClass("text-center");
   });
@@ -194,5 +175,3 @@ describe("FeatureSection component", () => {
     expect(iconContainers.length).toBe(sampleFeatures.length);
   });
 });
-
-

@@ -17,22 +17,12 @@ describe("HeroSection component", () => {
   });
 
   it("should render with actions", () => {
-    render(
-      <HeroSection
-        title="Test Title"
-        actions={<Button>Click Me</Button>}
-      />,
-    );
+    render(<HeroSection title="Test Title" actions={<Button>Click Me</Button>} />);
     expect(screen.getByRole("button", { name: /click me/i })).toBeInTheDocument();
   });
 
   it("should render with media", () => {
-    render(
-      <HeroSection
-        title="Test Title"
-        media={<div data-testid="media">Media Content</div>}
-      />,
-    );
+    render(<HeroSection title="Test Title" media={<div data-testid="media">Media Content</div>} />);
     expect(screen.getByTestId("media")).toBeInTheDocument();
   });
 
@@ -50,21 +40,15 @@ describe("HeroSection component", () => {
   });
 
   it("should apply background variants", () => {
-    const { container: container1 } = render(
-      <HeroSection title="Test" background="muted" />,
-    );
+    const { container: container1 } = render(<HeroSection title="Test" background="muted" />);
     expect(container1.querySelector("section")).toHaveClass("bg-muted");
 
-    const { container: container2 } = render(
-      <HeroSection title="Test" background="card" />,
-    );
+    const { container: container2 } = render(<HeroSection title="Test" background="card" />);
     expect(container2.querySelector("section")).toHaveClass("bg-card");
   });
 
   it("should apply custom className", () => {
-    const { container } = render(
-      <HeroSection title="Test" className="custom-class" />,
-    );
+    const { container } = render(<HeroSection title="Test" className="custom-class" />);
     expect(container.querySelector("section")).toHaveClass("custom-class");
   });
 
@@ -82,9 +66,7 @@ describe("HeroSection component", () => {
   });
 
   it("should center content in full-width variant", () => {
-    const { container } = render(
-      <HeroSection title="Test Title" variant="full-width" />,
-    );
+    const { container } = render(<HeroSection title="Test Title" variant="full-width" />);
     const contentDiv = container.querySelector(".flex.flex-col.items-center");
     expect(contentDiv).toBeInTheDocument();
   });
@@ -140,9 +122,7 @@ describe("HeroSection component", () => {
   });
 
   it("should apply responsive classes", () => {
-    const { container } = render(
-      <HeroSection title="Test" variant="full-width" />,
-    );
+    const { container } = render(<HeroSection title="Test" variant="full-width" />);
     const heading = container.querySelector("h1");
     expect(heading).toHaveClass("text-4xl", "md:text-5xl", "lg:text-6xl");
   });
@@ -153,5 +133,3 @@ describe("HeroSection component", () => {
     expect(section).toHaveClass("transition-colors");
   });
 });
-
-

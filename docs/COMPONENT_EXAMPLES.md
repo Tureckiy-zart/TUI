@@ -733,7 +733,7 @@ function HeroWithMedia() {
       description="Используйте наши компоненты для быстрой разработки"
       actions={<Button variant="primary">Начать</Button>}
       media={
-        <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
+        <div className="flex aspect-video items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
           <span className="text-4xl">🎨</span>
         </div>
       }
@@ -768,18 +768,18 @@ function FeatureExample() {
     {
       icon: "🚀",
       title: "Быстрая производительность",
-      description: "Оптимизированные компоненты для скорости"
+      description: "Оптимизированные компоненты для скорости",
     },
     {
       icon: "🎨",
       title: "Красивый дизайн",
-      description: "Современные и чистые интерфейсы"
+      description: "Современные и чистые интерфейсы",
     },
     {
       icon: "♿",
       title: "Доступность",
-      description: "Соответствие стандартам WCAG AA"
-    }
+      description: "Соответствие стандартам WCAG AA",
+    },
   ];
 
   return (
@@ -803,7 +803,7 @@ function FeatureColumns() {
     { icon: "⭐", title: "Функция 1", description: "Описание" },
     { icon: "⭐", title: "Функция 2", description: "Описание" },
     { icon: "⭐", title: "Функция 3", description: "Описание" },
-    { icon: "⭐", title: "Функция 4", description: "Описание" }
+    { icon: "⭐", title: "Функция 4", description: "Описание" },
   ];
 
   return (
@@ -835,18 +835,18 @@ function FeatureWithIcons() {
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Молниеносная скорость",
-      description: "Оптимизировано для производительности"
+      description: "Оптимизировано для производительности",
     },
     {
       icon: <Shield className="h-6 w-6" />,
       title: "Безопасность",
-      description: "Построено с учетом лучших практик безопасности"
+      description: "Построено с учетом лучших практик безопасности",
     },
     {
       icon: <Code className="h-6 w-6" />,
       title: "TypeScript",
-      description: "Полная поддержка TypeScript"
-    }
+      description: "Полная поддержка TypeScript",
+    },
   ];
 
   return <FeatureSection features={features} />;
@@ -882,11 +882,11 @@ function CTAExample() {
       description="Присоединяйтесь к тысячам разработчиков"
       primaryAction={{
         label: "Начать",
-        onClick: () => console.log("Начать")
+        onClick: () => console.log("Начать"),
       }}
       secondaryAction={{
         label: "Узнать больше",
-        onClick: () => console.log("Узнать больше")
+        onClick: () => console.log("Узнать больше"),
       }}
     />
   );
@@ -933,12 +933,12 @@ function CTAWithLinks() {
       primaryAction={{
         label: "Просмотреть компоненты",
         href: "/components",
-        variant: "primary"
+        variant: "primary",
       }}
       secondaryAction={{
         label: "Читать документацию",
         href: "/docs",
-        variant: "outline"
+        variant: "outline",
       }}
     />
   );
@@ -958,12 +958,12 @@ function CTAVariants() {
       primaryAction={{
         label: "Основное действие",
         onClick: () => {},
-        variant: "primary"
+        variant: "primary",
       }}
       secondaryAction={{
         label: "Акцентное действие",
         onClick: () => {},
-        variant: "accent"
+        variant: "accent",
       }}
     />
   );
@@ -982,7 +982,7 @@ function CTAPrimaryOnly() {
       description="Начните создавать удивительные приложения сегодня"
       primaryAction={{
         label: "Начать",
-        onClick: () => {}
+        onClick: () => {},
       }}
     />
   );

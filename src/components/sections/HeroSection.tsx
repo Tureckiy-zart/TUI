@@ -50,11 +50,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section
-      className={cn(
-        "w-full transition-colors",
-        backgroundClasses[background],
-        className,
-      )}
+      className={cn("w-full transition-colors", backgroundClasses[background], className)}
       aria-label="Hero section"
     >
       <div
@@ -66,20 +62,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         )}
       >
         {/* Content Area */}
-        <div
-          className={cn(
-            "flex flex-col",
-            isSplit ? "space-y-md" : "max-w-3xl space-y-lg",
-          )}
-        >
+        <div className={cn("flex flex-col", isSplit ? "space-y-md" : "max-w-3xl space-y-lg")}>
           <header className="space-y-md">
             <Heading
               level={1}
               className={cn(
                 "font-bold tracking-tight",
-                isSplit
-                  ? "text-3xl md:text-4xl lg:text-5xl"
-                  : "text-4xl md:text-5xl lg:text-6xl",
+                isSplit ? "text-3xl md:text-4xl lg:text-5xl" : "text-4xl md:text-5xl lg:text-6xl",
               )}
             >
               {title}
@@ -88,9 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Text
                 size={isSplit ? "lg" : "xl"}
                 variant="muted"
-                className={cn(
-                  isSplit ? "max-w-none" : "mx-auto max-w-2xl",
-                )}
+                className={cn(isSplit ? "max-w-none" : "mx-auto max-w-2xl")}
               >
                 {description}
               </Text>
@@ -99,10 +86,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           {actions && (
             <div
-              className={cn(
-                "flex flex-wrap gap-md",
-                isSplit ? "justify-start" : "justify-center",
-              )}
+              className={cn("flex flex-wrap gap-md", isSplit ? "justify-start" : "justify-center")}
             >
               {actions}
             </div>
@@ -117,9 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               isSplit ? "order-first md:order-last" : "mt-lg",
             )}
           >
-            <div className="w-full max-w-full overflow-hidden rounded-lg">
-              {media}
-            </div>
+            <div className="w-full max-w-full overflow-hidden rounded-lg">{media}</div>
           </div>
         )}
       </div>
@@ -128,5 +110,3 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 };
 
 HeroSection.displayName = "HeroSection";
-
-

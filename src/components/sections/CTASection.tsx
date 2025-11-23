@@ -78,10 +78,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
 
   return (
     <section
-      className={cn(
-        "w-full bg-muted py-xl transition-colors",
-        className,
-      )}
+      className={cn("w-full bg-muted py-xl transition-colors", className)}
       aria-label="Call to action section"
     >
       <div className="container mx-auto px-lg">
@@ -107,9 +104,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
               <Text
                 size={isCentered ? "lg" : "md"}
                 variant="muted"
-                className={cn(
-                  isCentered ? "max-w-2xl" : "max-w-none",
-                )}
+                className={cn(isCentered ? "max-w-2xl" : "max-w-none")}
               >
                 {description}
               </Text>
@@ -135,5 +130,3 @@ export const CTASection: React.FC<CTASectionProps> = ({
 };
 
 CTASection.displayName = "CTASection";
-
-
