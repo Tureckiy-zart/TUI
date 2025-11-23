@@ -648,6 +648,363 @@ function ExamplePage() {
 
 ---
 
+## Premium Layout Sections (Премиум секции макета)
+
+### HeroSection (Герой-секция)
+
+Герой-секция для главных заголовков страниц с поддержкой различных вариантов макета.
+
+#### Базовое использование
+
+```tsx
+import { HeroSection, Button } from "@tenerife.music/ui";
+
+function HeroExample() {
+  return (
+    <HeroSection
+      title="Добро пожаловать в Tenerife UI"
+      description="Современная библиотека компонентов для создания красивых интерфейсов"
+      actions={
+        <>
+          <Button variant="primary">Начать</Button>
+          <Button variant="outline">Узнать больше</Button>
+        </>
+      }
+    />
+  );
+}
+```
+
+#### Варианты макета
+
+```tsx
+import { HeroSection, Button } from "@tenerife.music/ui";
+
+function HeroVariants() {
+  return (
+    <>
+      {/* Полная ширина (по умолчанию) */}
+      <HeroSection
+        variant="full-width"
+        title="Заголовок"
+        description="Описание"
+        actions={<Button>Действие</Button>}
+      />
+
+      {/* Разделенный макет */}
+      <HeroSection
+        variant="split"
+        title="Заголовок"
+        description="Описание"
+        actions={<Button>Действие</Button>}
+        media={<img src="/hero.jpg" alt="Hero" />}
+      />
+    </>
+  );
+}
+```
+
+#### Варианты фона
+
+```tsx
+import { HeroSection } from "@tenerife.music/ui";
+
+function HeroBackgrounds() {
+  return (
+    <>
+      <HeroSection title="По умолчанию" background="default" />
+      <HeroSection title="Приглушенный" background="muted" />
+      <HeroSection title="Карточка" background="card" />
+    </>
+  );
+}
+```
+
+#### С медиа-контентом
+
+```tsx
+import { HeroSection, Button } from "@tenerife.music/ui";
+
+function HeroWithMedia() {
+  return (
+    <HeroSection
+      variant="split"
+      title="Создавайте удивительные интерфейсы"
+      description="Используйте наши компоненты для быстрой разработки"
+      actions={<Button variant="primary">Начать</Button>}
+      media={
+        <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
+          <span className="text-4xl">🎨</span>
+        </div>
+      }
+    />
+  );
+}
+```
+
+**Props:**
+
+- `variant`: `"full-width" | "split"` - Вариант макета
+- `title`: `React.ReactNode` - Заголовок
+- `description`: `React.ReactNode` - Описание (опционально)
+- `actions`: `React.ReactNode` - Кнопки действий (опционально)
+- `media`: `React.ReactNode` - Медиа-контент (опционально)
+- `background`: `"default" | "muted" | "card"` - Вариант фона
+- `className`: `string` - Дополнительные CSS классы
+
+---
+
+### FeatureSection (Секция функций)
+
+Секция для отображения функций в адаптивной сетке.
+
+#### Базовое использование
+
+```tsx
+import { FeatureSection } from "@tenerife.music/ui";
+
+function FeatureExample() {
+  const features = [
+    {
+      icon: "🚀",
+      title: "Быстрая производительность",
+      description: "Оптимизированные компоненты для скорости"
+    },
+    {
+      icon: "🎨",
+      title: "Красивый дизайн",
+      description: "Современные и чистые интерфейсы"
+    },
+    {
+      icon: "♿",
+      title: "Доступность",
+      description: "Соответствие стандартам WCAG AA"
+    }
+  ];
+
+  return (
+    <FeatureSection
+      title="Функции"
+      description="Все что нужно для создания современных приложений"
+      features={features}
+      columns={3}
+    />
+  );
+}
+```
+
+#### Различные конфигурации колонок
+
+```tsx
+import { FeatureSection } from "@tenerife.music/ui";
+
+function FeatureColumns() {
+  const features = [
+    { icon: "⭐", title: "Функция 1", description: "Описание" },
+    { icon: "⭐", title: "Функция 2", description: "Описание" },
+    { icon: "⭐", title: "Функция 3", description: "Описание" },
+    { icon: "⭐", title: "Функция 4", description: "Описание" }
+  ];
+
+  return (
+    <>
+      {/* 1 колонка */}
+      <FeatureSection features={features} columns={1} />
+
+      {/* 2 колонки */}
+      <FeatureSection features={features} columns={2} />
+
+      {/* 3 колонки (по умолчанию) */}
+      <FeatureSection features={features} columns={3} />
+
+      {/* 4 колонки */}
+      <FeatureSection features={features} columns={4} />
+    </>
+  );
+}
+```
+
+#### С кастомными иконками
+
+```tsx
+import { FeatureSection } from "@tenerife.music/ui";
+import { Zap, Shield, Code } from "lucide-react";
+
+function FeatureWithIcons() {
+  const features = [
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Молниеносная скорость",
+      description: "Оптимизировано для производительности"
+    },
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: "Безопасность",
+      description: "Построено с учетом лучших практик безопасности"
+    },
+    {
+      icon: <Code className="h-6 w-6" />,
+      title: "TypeScript",
+      description: "Полная поддержка TypeScript"
+    }
+  ];
+
+  return <FeatureSection features={features} />;
+}
+```
+
+**Props:**
+
+- `features`: `FeatureItem[]` - Массив функций
+  - `icon`: `React.ReactNode` - Иконка
+  - `title`: `string` - Заголовок
+  - `description`: `string` - Описание
+- `title`: `string` - Заголовок секции (опционально)
+- `description`: `string` - Описание секции (опционально)
+- `columns`: `1 | 2 | 3 | 4` - Количество колонок (по умолчанию 3)
+- `className`: `string` - Дополнительные CSS классы
+
+---
+
+### CTASection (Секция призыва к действию)
+
+Секция для призыва к действию с гибкими кнопками действий.
+
+#### Базовое использование
+
+```tsx
+import { CTASection } from "@tenerife.music/ui";
+
+function CTAExample() {
+  return (
+    <CTASection
+      headline="Готовы начать?"
+      description="Присоединяйтесь к тысячам разработчиков"
+      primaryAction={{
+        label: "Начать",
+        onClick: () => console.log("Начать")
+      }}
+      secondaryAction={{
+        label: "Узнать больше",
+        onClick: () => console.log("Узнать больше")
+      }}
+    />
+  );
+}
+```
+
+#### Варианты макета
+
+```tsx
+import { CTASection } from "@tenerife.music/ui";
+
+function CTALayouts() {
+  return (
+    <>
+      {/* Центрированный (по умолчанию) */}
+      <CTASection
+        layout="centered"
+        headline="Центрированный CTA"
+        primaryAction={{ label: "Действие", onClick: () => {} }}
+      />
+
+      {/* Разделенный */}
+      <CTASection
+        layout="split"
+        headline="Разделенный CTA"
+        description="Контент слева, действия справа"
+        primaryAction={{ label: "Действие", onClick: () => {} }}
+      />
+    </>
+  );
+}
+```
+
+#### С ссылками
+
+```tsx
+import { CTASection } from "@tenerife.music/ui";
+
+function CTAWithLinks() {
+  return (
+    <CTASection
+      headline="Изучите наши компоненты"
+      description="Просмотрите библиотеку компонентов"
+      primaryAction={{
+        label: "Просмотреть компоненты",
+        href: "/components",
+        variant: "primary"
+      }}
+      secondaryAction={{
+        label: "Читать документацию",
+        href: "/docs",
+        variant: "outline"
+      }}
+    />
+  );
+}
+```
+
+#### Различные варианты кнопок
+
+```tsx
+import { CTASection } from "@tenerife.music/ui";
+
+function CTAVariants() {
+  return (
+    <CTASection
+      headline="Выберите свой стиль"
+      description="Настройте варианты кнопок под ваш бренд"
+      primaryAction={{
+        label: "Основное действие",
+        onClick: () => {},
+        variant: "primary"
+      }}
+      secondaryAction={{
+        label: "Акцентное действие",
+        onClick: () => {},
+        variant: "accent"
+      }}
+    />
+  );
+}
+```
+
+#### Только основное действие
+
+```tsx
+import { CTASection } from "@tenerife.music/ui";
+
+function CTAPrimaryOnly() {
+  return (
+    <CTASection
+      headline="Готовы начать?"
+      description="Начните создавать удивительные приложения сегодня"
+      primaryAction={{
+        label: "Начать",
+        onClick: () => {}
+      }}
+    />
+  );
+}
+```
+
+**Props:**
+
+- `headline`: `React.ReactNode` - Заголовок
+- `description`: `React.ReactNode` - Описание (опционально)
+- `primaryAction`: `object` - Основное действие (опционально)
+  - `label`: `string` - Текст кнопки
+  - `onClick`: `() => void` - Обработчик клика (если используется кнопка)
+  - `href`: `string` - Ссылка (если используется ссылка)
+  - `variant`: `ButtonProps["variant"]` - Вариант кнопки
+- `secondaryAction`: `object` - Вторичное действие (опционально)
+  - Те же свойства, что и `primaryAction`
+- `layout`: `"centered" | "split"` - Вариант макета
+- `className`: `string` - Дополнительные CSS классы
+
+---
+
 ## Следующие шаги
 
 - [Руководство по использованию](./USAGE.md) - Полное руководство по использованию
@@ -656,5 +1013,5 @@ function ExamplePage() {
 
 ---
 
-**Версия документа:** 1.0  
-**Последнее обновление:** 2024-12-19
+**Версия документа:** 1.1  
+**Последнее обновление:** 2025-01-20

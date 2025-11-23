@@ -99,6 +99,9 @@ export * from "./components/search/SearchBar";
 
 // Section components
 export * from "./components/sections/ArticlesSection";
+export * from "./components/sections/CTASection";
+export * from "./components/sections/FeatureSection";
+export * from "./components/sections/HeroSection";
 export * from "./components/sections/TrendingSection";
 
 // Icon components
