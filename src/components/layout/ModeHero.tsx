@@ -37,7 +37,7 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white",
+        "rounded-lg bg-gradient-to-r from-primary to-accent p-lg text-primary-foreground",
         className,
       )}
     >

@@ -15,13 +15,16 @@ const popoverContentVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-popover text-popover-foreground border-border",
+        primary: "bg-popover text-popover-foreground border-border",
+        secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
+        accent: "border-accent/50 text-accent-foreground bg-accent/10",
+        outline: "bg-background text-foreground border-border",
+        ghost: "bg-transparent text-foreground border-transparent",
+        link: "bg-transparent text-primary border-transparent",
         destructive: "border-destructive/50 text-destructive bg-destructive/10",
-        warning: "border-warning/50 text-warning-foreground bg-warning/10",
-        success: "border-success/50 text-success-foreground bg-success/10",
-        info: "border-info/50 text-info-foreground bg-info/10",
       },
       size: {
+        xs: "w-40 p-xs",
         sm: "w-48 p-sm",
         md: "w-72 p-md",
         lg: "w-96 p-lg",
@@ -29,7 +32,7 @@ const popoverContentVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "md",
     },
   },

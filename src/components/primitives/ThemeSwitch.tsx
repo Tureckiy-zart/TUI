@@ -5,14 +5,14 @@ import React from "react";
 
 import { Button } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
+import { applyDocumentMode } from "@/theme/applyMode";
+import { ThemeContext } from "@/theme/ThemeProvider";
 import type { Mode } from "@/tokens/colors";
-
-import { applyDocumentMode } from "../../theme/applyMode";
 
 interface ThemeSwitchProps {
   className?: string;
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "outline" | "ghost";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
 }
 
 const MODE_COOKIE = "tm_mode";
@@ -116,43 +116,58 @@ function persistMode(nextMode: Mode) {
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   className,
   size = "md",
-  variant = "default",
+  variant = "primary",
 }) => {
-  const [mode, setMode] = React.useState<Mode>(() => getInitialMode());
+  // Use ThemeProvider context if available (must call hook unconditionally)
+  // React.useContext returns undefined if context is not available
+  const themeContext = React.useContext(ThemeContext);
+
+  const [mode, setMode] = React.useState<Mode>(() => {
+    if (themeContext) {
+      return themeContext.mode;
+    }
+    return getInitialMode();
+  });
 
   React.useEffect(() => {
-    const resolvedMode = getInitialMode();
-    setMode(resolvedMode);
-    persistMode(resolvedMode);
-    debugModeSnapshot(`initial:${resolvedMode}`);
-  }, []);
+    if (themeContext) {
+      setMode(themeContext.mode);
+    } else {
+      const resolvedMode = getInitialMode();
+      setMode(resolvedMode);
+      persistMode(resolvedMode);
+      debugModeSnapshot(`initial:${resolvedMode}`);
+    }
+  }, [themeContext]);
 
   const toggleMode = () => {
-    setMode((current) => {
-      const nextMode: Mode = current === "night" ? "day" : "night";
-      persistMode(nextMode);
-      return nextMode;
-    });
+    if (themeContext) {
+      // Use ThemeProvider's toggleMode
+      themeContext.toggleMode();
+      setMode(themeContext.mode === "night" ? "day" : "night");
+    } else {
+      // Standalone mode
+      setMode((current) => {
+        const nextMode: Mode = current === "night" ? "day" : "night";
+        persistMode(nextMode);
+        return nextMode;
+      });
+    }
   };
+
+  let buttonSize: "xs" | "sm" | "md" | "lg" | "xl" = "md";
+  if (size === "xs") buttonSize = "xs";
+  else if (size === "sm") buttonSize = "sm";
+  else if (size === "lg") buttonSize = "lg";
+  else if (size === "xl") buttonSize = "xl";
 
   return (
     <Button
       onClick={toggleMode}
       variant={variant}
-      size={(() => {
-        if (size === "sm") return "sm";
-        if (size === "lg") return "lg";
-        return "default";
-      })()}
-      className={cn(
-        (() => {
-          if (size === "sm") return "h-8 w-8";
-          if (size === "lg") return "h-12 w-12";
-          return "h-10 w-10";
-        })(),
-        className,
-      )}
-      aria-label={`Switch to ${mode === "night" ? "day" : "night"} theme`}
+      size={buttonSize}
+      className={cn(className)}
+      aria-label={`Switch to ${mode === "night" ? "day" : "night"} mode`}
       type="button"
     >
       {mode === "night" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

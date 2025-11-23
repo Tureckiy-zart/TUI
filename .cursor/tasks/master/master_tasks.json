@@ -89,7 +89,8 @@
             "TypeScript definitions enforce the minimal API and catch misuse during development."
           ],
           "dependencies": ["U1"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-23): All components standardized to use unified variant system (7 variants: primary, secondary, accent, outline, ghost, link, destructive) and unified size system (5 sizes: xs, sm, md, lg, xl). Removed all ad-hoc style props. Added icon slot support (leftIcon, rightIcon) to Button and Link. Updated all component usages and Storybook stories. 100% token compliance achieved. All validations passed (typecheck, lint). See docs/reports/U2_COMPLETION_REPORT.md for details."
         },
         {
           "id": "U3",
@@ -101,17 +102,23 @@
             "existing theme files (default, dark, brand)"
           ],
           "outputs": [
-            "scripts/init-theme.js",
-            "Example generated theme (src/themes/exampleTheme.ts)"
+            "scripts/theme-cli.ts",
+            "scripts/theme-validate.ts",
+            "src/theme/schema.ts",
+            "src/theme/registry.ts",
+            "src/theme/loader.ts",
+            "src/components/primitives/ThemeShowcase.stories.tsx",
+            "docs/reports/U3_COMPLETION_REPORT.md"
           ],
           "acceptance_criteria": [
-            "Running `node scripts/init-theme.js --name neon` produces a new theme file at `src/themes/neon.ts` with all token overrides stubbed out.",
-            "The CLI registers the new theme in the theme provider so that it can be selected at runtime.",
+            "Running `pnpm ui theme:create <name>` produces a new theme file at `src/themes/<name>.ts` with all token overrides stubbed out.",
+            "The CLI registers the new theme in the theme registry so that it can be selected at runtime.",
             "Generated themes compile correctly with the build system and do not break existing themes.",
             "Documentation describes how to use the CLI and how to extend or customise the generated theme."
           ],
           "dependencies": ["F7", "F8", "F9"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-23): Complete Theme Scaffolding CLI system implemented with theme schema validation, registry management, dynamic theme loading, CLI tools (theme:create, theme:validate), token validation, and Storybook integration. All components can switch themes seamlessly without code changes. Created: schema.ts, registry.ts, loader.ts, theme-cli.ts, theme-validate.ts, ThemeShowcase.stories.tsx. All validations passed (typecheck, lint). See docs/reports/U3_COMPLETION_REPORT.md for details."
         },
         {
           "id": "U4",

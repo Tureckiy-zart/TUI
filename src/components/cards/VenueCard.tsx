@@ -101,7 +101,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       )}
 
       {showImage && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
+        <div className="relative h-[var(--spacing-3xl)] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
           {image ? (
             <img
               src={image}
@@ -136,14 +136,14 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           className="mb-sm line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
         >
           {venue?.slug ? (
-            <Link href={`/venues/${venue.slug}`} variant="ghost" size="none">
+            <Link href={`/venues/${venue.slug}`} variant="ghost">
               {name}
             </Link>
           ) : (
             name
           )}
         </Heading>
-        <Text size="sm" color="muted" className="mb-sm line-clamp-2">
+        <Text size="sm" variant="muted" className="mb-sm line-clamp-2">
           {description}
         </Text>
         <div className="mb-sm flex flex-col gap-sm">
@@ -168,7 +168,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <Text size="xs" color="muted" className="line-clamp-1">
+            <Text size="xs" variant="muted" className="line-clamp-1">
               {location}
             </Text>
           </div>
@@ -185,7 +185,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                     d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
                   />
                 </svg>
-                <Text size="xs" color="primary" weight="medium">
+                <Text size="xs" variant="primary" weight="medium">
                   {eventsCount} {eventsLabel}
                 </Text>
               </div>
@@ -206,7 +206,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <Text size="xs" color="muted">
+                <Text size="xs" variant="muted">
                   {capacityLabel} {capacity}
                 </Text>
               </div>

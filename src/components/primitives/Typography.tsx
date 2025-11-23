@@ -13,9 +13,17 @@ interface HeadingProps extends TypographyProps {
 }
 
 interface TextProps extends TypographyProps {
-  size?: "xs" | "sm" | "base" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   weight?: "normal" | "medium" | "semibold" | "bold";
-  color?: "default" | "muted" | "primary" | "destructive";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "outline"
+    | "ghost"
+    | "link"
+    | "destructive"
+    | "muted";
 }
 
 export const Heading: React.FC<HeadingProps> = ({ className, children, as, level = 1 }) => {
@@ -27,7 +35,7 @@ export const Heading: React.FC<HeadingProps> = ({ className, children, as, level
     3: "text-2xl font-bold tracking-tight",
     4: "text-xl font-semibold tracking-tight",
     5: "text-lg font-semibold tracking-tight",
-    6: "text-base font-semibold tracking-tight",
+    6: "text-md font-semibold tracking-tight",
   };
 
   return <Component className={cn(sizeClasses[level], className)}>{children}</Component>;
@@ -36,14 +44,14 @@ export const Heading: React.FC<HeadingProps> = ({ className, children, as, level
 export const Text: React.FC<TextProps> = ({
   className,
   children,
-  size = "base",
+  size = "md",
   weight = "normal",
-  color = "default",
+  variant,
 }) => {
   const sizeClasses = {
     xs: "text-xs",
     sm: "text-sm",
-    base: "text-base",
+    md: "text-base",
     lg: "text-lg",
     xl: "text-xl",
   };
@@ -55,15 +63,26 @@ export const Text: React.FC<TextProps> = ({
     bold: "font-bold",
   };
 
-  const colorClasses = {
-    default: "text-foreground",
-    muted: "text-muted-foreground",
+  const variantClasses = {
     primary: "text-primary",
+    secondary: "text-secondary-foreground",
+    accent: "text-accent-foreground",
+    outline: "text-foreground",
+    ghost: "text-foreground",
+    link: "text-primary hover:underline",
     destructive: "text-destructive",
+    muted: "text-muted-foreground",
   };
 
   return (
-    <span className={cn(sizeClasses[size], weightClasses[weight], colorClasses[color], className)}>
+    <span
+      className={cn(
+        sizeClasses[size],
+        weightClasses[weight],
+        variant && variantClasses[variant],
+        className,
+      )}
+    >
       {children}
     </span>
   );

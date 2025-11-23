@@ -49,24 +49,24 @@ export const WithLongContent: Story = {
 export const DifferentVariants: Story = {
   render: () => (
     <div className="flex gap-md">
-      <TooltipWrapper content="Default tooltip" variant="default">
-        <Button variant="default">Default</Button>
+      <TooltipWrapper content="Primary tooltip" variant="primary">
+        <Button variant="primary">Primary</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="Success tooltip" variant="success">
-        <Button variant="outline">Success</Button>
+      <TooltipWrapper content="Accent tooltip" variant="accent">
+        <Button variant="outline">Accent</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="Warning tooltip" variant="warning">
-        <Button variant="outline">Warning</Button>
+      <TooltipWrapper content="Secondary tooltip" variant="secondary">
+        <Button variant="outline">Secondary</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="Error tooltip" variant="destructive">
-        <Button variant="outline">Error</Button>
+      <TooltipWrapper content="Destructive tooltip" variant="destructive">
+        <Button variant="outline">Destructive</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="Info tooltip" variant="info">
-        <Button variant="outline">Info</Button>
+      <TooltipWrapper content="Outline tooltip" variant="outline">
+        <Button variant="outline">Outline</Button>
       </TooltipWrapper>
     </div>
   ),
@@ -100,7 +100,10 @@ export const WithFormElements: Story = {
       <div className="space-y-sm">
         <div className="flex items-center gap-sm">
           <Label htmlFor="email">Email</Label>
-          <TooltipWrapper content="We'll never share your email with anyone else." variant="info">
+          <TooltipWrapper
+            content="We'll never share your email with anyone else."
+            variant="primary"
+          >
             <Info className="h-4 w-4 text-muted-foreground" />
           </TooltipWrapper>
         </div>
@@ -110,7 +113,7 @@ export const WithFormElements: Story = {
       <div className="space-y-sm">
         <div className="flex items-center gap-sm">
           <Label htmlFor="password">Password</Label>
-          <TooltipWrapper content="Password must be at least 8 characters long" variant="warning">
+          <TooltipWrapper content="Password must be at least 8 characters long" variant="secondary">
             <HelpCircle className="h-4 w-4 text-muted-foreground" />
           </TooltipWrapper>
         </div>
@@ -133,11 +136,11 @@ export const WithFormElements: Story = {
 export const WithBadges: Story = {
   render: () => (
     <div className="flex gap-md">
-      <TooltipWrapper content="This feature is currently in development" variant="warning">
+      <TooltipWrapper content="This feature is currently in development" variant="secondary">
         <Badge variant="secondary">Beta</Badge>
       </TooltipWrapper>
 
-      <TooltipWrapper content="This feature is available for premium users" variant="info">
+      <TooltipWrapper content="This feature is available for premium users" variant="primary">
         <Badge variant="outline">Premium</Badge>
       </TooltipWrapper>
 

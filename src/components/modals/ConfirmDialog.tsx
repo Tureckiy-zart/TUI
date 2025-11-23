@@ -22,7 +22,7 @@ export interface ConfirmDialogProps {
   confirmText: string;
   cancelText: string;
   loadingText?: string;
-  variant?: "default" | "destructive";
+  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
   isLoading?: boolean;
 }
 
@@ -35,7 +35,7 @@ export function ConfirmDialog({
   confirmText,
   cancelText,
   loadingText,
-  variant = "default",
+  variant = "primary",
   isLoading = false,
 }: ConfirmDialogProps) {
   if (!title || title.trim() === "") {
@@ -86,7 +86,7 @@ export function useConfirmDialog() {
     cancelText?: string;
     loadingText?: string;
     onConfirm?: () => void;
-    variant?: "default" | "destructive";
+    variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
   }>({
     isOpen: false,
   });
@@ -99,7 +99,7 @@ export function useConfirmDialog() {
       cancelText: string;
       loadingText?: string;
       onConfirm: () => void;
-      variant?: "default" | "destructive";
+      variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
     }) => {
       setState({
         isOpen: true,

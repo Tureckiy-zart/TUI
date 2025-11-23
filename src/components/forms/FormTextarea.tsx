@@ -52,7 +52,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         {...rest}
       />
       {error && (
-        <Text size="sm" color="destructive">
+        <Text size="sm" variant="destructive">
           {error}
         </Text>
       )}

@@ -24,11 +24,13 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
   return (
     <Card className={cn("shadow-md", className)}>
       <CardContent className="p-md">
-        {avatar && <div className="mb-md h-16 w-16 rounded-full bg-muted" />}
+        {avatar && (
+          <div className="mb-md h-[var(--spacing-md)] w-[var(--spacing-md)] rounded-full bg-muted" />
+        )}
         <Heading level={3} className="mb-sm text-lg font-semibold">
           {name}
         </Heading>
-        <Text color="muted">{email}</Text>
+        <Text variant="muted">{email}</Text>
       </CardContent>
     </Card>
   );

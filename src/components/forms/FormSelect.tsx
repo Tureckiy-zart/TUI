@@ -59,7 +59,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         ))}
       </select>
       {error && (
-        <Text size="sm" color="destructive">
+        <Text size="sm" variant="destructive">
           {error}
         </Text>
       )}

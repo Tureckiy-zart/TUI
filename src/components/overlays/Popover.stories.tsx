@@ -69,51 +69,51 @@ export const DifferentVariants: Story = {
   render: () => (
     <div className="flex gap-md">
       <PopoverWrapper
-        variant="default"
+        variant="primary"
         content={
           <div className="space-y-sm">
-            <h4 className="font-medium">Default Popover</h4>
-            <p className="text-sm text-muted-foreground">This is a default popover.</p>
+            <h4 className="font-medium">Primary Popover</h4>
+            <p className="text-sm text-muted-foreground">This is a primary popover.</p>
           </div>
         }
       >
-        <Button variant="default">Default</Button>
+        <Button variant="primary">Primary</Button>
       </PopoverWrapper>
 
       <PopoverWrapper
-        variant="success"
+        variant="accent"
         content={
           <div className="space-y-sm">
-            <h4 className="font-medium">Success Popover</h4>
-            <p className="text-sm text-muted-foreground">This is a success popover.</p>
+            <h4 className="font-medium">Accent Popover</h4>
+            <p className="text-sm text-muted-foreground">This is an accent popover.</p>
           </div>
         }
       >
-        <Button variant="outline">Success</Button>
+        <Button variant="outline">Accent</Button>
       </PopoverWrapper>
 
       <PopoverWrapper
-        variant="warning"
+        variant="secondary"
         content={
           <div className="space-y-sm">
-            <h4 className="font-medium">Warning Popover</h4>
-            <p className="text-sm text-muted-foreground">This is a warning popover.</p>
+            <h4 className="font-medium">Secondary Popover</h4>
+            <p className="text-sm text-muted-foreground">This is a secondary popover.</p>
           </div>
         }
       >
-        <Button variant="outline">Warning</Button>
+        <Button variant="outline">Secondary</Button>
       </PopoverWrapper>
 
       <PopoverWrapper
         variant="destructive"
         content={
           <div className="space-y-sm">
-            <h4 className="font-medium">Error Popover</h4>
-            <p className="text-sm text-muted-foreground">This is an error popover.</p>
+            <h4 className="font-medium">Destructive Popover</h4>
+            <p className="text-sm text-muted-foreground">This is a destructive popover.</p>
           </div>
         }
       >
-        <Button variant="outline">Error</Button>
+        <Button variant="outline">Destructive</Button>
       </PopoverWrapper>
     </div>
   ),
@@ -268,7 +268,7 @@ export const NotificationsMenu: Story = {
           </div>
           <div className="space-y-sm">
             <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
-              <Bell className="mt-0.5 h-4 w-4 text-info" />
+              <Bell className="mt-0.5 h-4 w-4 text-primary" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">New message</p>
                 <p className="text-xs text-muted-foreground">
@@ -277,7 +277,7 @@ export const NotificationsMenu: Story = {
               </div>
             </div>
             <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
-              <Bell className="mt-0.5 h-4 w-4 text-success" />
+              <Bell className="mt-0.5 h-4 w-4 text-accent" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">Task completed</p>
                 <p className="text-xs text-muted-foreground">
@@ -286,7 +286,7 @@ export const NotificationsMenu: Story = {
               </div>
             </div>
             <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
-              <Bell className="mt-0.5 h-4 w-4 text-warning" />
+              <Bell className="mt-0.5 h-4 w-4 text-secondary" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">Reminder</p>
                 <p className="text-xs text-muted-foreground">

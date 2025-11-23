@@ -51,12 +51,12 @@ export const FormInput: React.FC<FormInputProps> = ({
         {...rest}
       />
       {helperText && !error && (
-        <Text size="sm" color="muted">
+        <Text size="sm" variant="muted">
           {helperText}
         </Text>
       )}
       {error && (
-        <Text size="sm" color="destructive">
+        <Text size="sm" variant="destructive">
           {error}
         </Text>
       )}

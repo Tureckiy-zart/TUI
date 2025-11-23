@@ -12,7 +12,8 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["success", "error", "warning", "info"],
+      options: ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"],
+      description: "Alert variant style",
     },
   },
 };
@@ -20,41 +21,65 @@ const meta: Meta<typeof Alert> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Success: Story = {
+export const Primary: Story = {
   args: {
-    variant: "success",
-    title: "Success!",
-    description: "Operation completed successfully!",
-  },
-};
-
-export const Error: Story = {
-  args: {
-    variant: "error",
-    title: "Error",
-    description: "Something went wrong. Please try again.",
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    variant: "warning",
-    title: "Warning",
-    description: "Please review your input before proceeding.",
-  },
-};
-
-export const Info: Story = {
-  args: {
-    variant: "info",
+    variant: "primary",
     title: "Information",
     description: "Here's some useful information for you.",
   },
 };
 
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+    title: "Secondary",
+    description: "This is a secondary alert.",
+  },
+};
+
+export const Accent: Story = {
+  args: {
+    variant: "accent",
+    title: "Success!",
+    description: "Operation completed successfully!",
+  },
+};
+
+export const Destructive: Story = {
+  args: {
+    variant: "destructive",
+    title: "Error",
+    description: "Something went wrong. Please try again.",
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    variant: "outline",
+    title: "Warning",
+    description: "Please review your input before proceeding.",
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    variant: "ghost",
+    title: "Ghost Alert",
+    description: "This is a ghost variant alert.",
+  },
+};
+
+export const Link: Story = {
+  args: {
+    variant: "link",
+    title: "Link Alert",
+    description: "This is a link variant alert.",
+  },
+};
+
 export const WithoutTitle: Story = {
   args: {
-    variant: "info",
+    variant: "primary",
     description: "This alert doesn't have a title.",
   },
 };
@@ -62,14 +87,17 @@ export const WithoutTitle: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="space-y-md">
-      <Alert variant="success" title="Success" description="Operation completed successfully!" />
-      <Alert variant="error" title="Error" description="Something went wrong. Please try again." />
+      <Alert variant="primary" title="Primary" description="Primary alert variant." />
+      <Alert variant="secondary" title="Secondary" description="Secondary alert variant." />
+      <Alert variant="accent" title="Accent" description="Accent alert variant (success)." />
+      <Alert variant="outline" title="Outline" description="Outline alert variant." />
+      <Alert variant="ghost" title="Ghost" description="Ghost alert variant." />
+      <Alert variant="link" title="Link" description="Link alert variant." />
       <Alert
-        variant="warning"
-        title="Warning"
-        description="Please review your input before proceeding."
+        variant="destructive"
+        title="Destructive"
+        description="Destructive alert variant (error)."
       />
-      <Alert variant="info" title="Info" description="Here\'s some useful information for you." />
     </div>
   ),
 };

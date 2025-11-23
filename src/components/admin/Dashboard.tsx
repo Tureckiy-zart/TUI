@@ -26,7 +26,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ title, content, className 
         <Heading level={2} className="mb-md">
           {title}
         </Heading>
-        <Text color="muted">{content}</Text>
+        <Text variant="muted">{content}</Text>
       </CardContent>
     </Card>
   );

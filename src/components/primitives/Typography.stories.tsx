@@ -27,12 +27,12 @@ export const Headings: Story = {
   ),
 };
 
-export const TextVariants: Story = {
+export const TextSizes: Story = {
   render: () => (
     <div className="space-y-md">
       <Text size="xs">Extra Small Text</Text>
       <Text size="sm">Small Text</Text>
-      <Text size="base">Base Text</Text>
+      <Text size="md">Medium Text</Text>
       <Text size="lg">Large Text</Text>
       <Text size="xl">Extra Large Text</Text>
     </div>
@@ -50,13 +50,15 @@ export const TextWeights: Story = {
   ),
 };
 
-export const TextColors: Story = {
+export const TextVariants: Story = {
   render: () => (
     <div className="space-y-sm">
-      <Text color="default">Default Color</Text>
-      <Text color="muted">Muted Color</Text>
-      <Text color="primary">Primary Color</Text>
-      <Text color="destructive">Destructive Color</Text>
+      <Text variant="muted">Muted Variant</Text>
+      <Text variant="primary">Primary Variant</Text>
+      <Text variant="secondary">Secondary Variant</Text>
+      <Text variant="accent">Accent Variant</Text>
+      <Text variant="destructive">Destructive Variant</Text>
+      <Text variant="link">Link Variant</Text>
     </div>
   ),
 };

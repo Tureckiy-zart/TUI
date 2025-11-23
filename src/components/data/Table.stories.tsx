@@ -45,10 +45,10 @@ export const WithCustomRender: Story = {
           <span
             className={`rounded px-sm py-xs text-xs ${
               value === "Admin"
-                ? "bg-error/20 text-error-foreground"
+                ? "bg-destructive/20 text-destructive-foreground"
                 : value === "Moderator"
-                  ? "bg-warning/20 text-warning-foreground"
-                  : "bg-success/20 text-success-foreground"
+                  ? "bg-secondary/20 text-secondary-foreground"
+                  : "bg-accent/20 text-accent-foreground"
             }`}
           >
             {value}
