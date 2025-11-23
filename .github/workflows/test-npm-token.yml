@@ -52,7 +52,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Testing npm authentication with dry-run publish..."
-          
+
           # Verify token format
           if [[ ! "$NPM_TOKEN" =~ ^npm_ ]]; then
             echo "❌ ERROR: NPM_TOKEN format is incorrect"
@@ -60,7 +60,7 @@ jobs:
             echo "Current token starts with: ${NPM_TOKEN:0:10}..."
             exit 1
           fi
-          
+
           # Test authentication using dry-run publish (works with granular tokens)
           # Granular tokens don't support npm whoami, so we use publish --dry-run instead
           if npm publish --dry-run --access public; then
