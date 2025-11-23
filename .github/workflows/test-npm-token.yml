@@ -40,10 +40,10 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Testing npm authentication..."
-          
+
           # Configure npm to use token
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-          
+
           # Test whoami
           if npm whoami --registry=https://registry.npmjs.org/; then
             USERNAME=$(npm whoami --registry=https://registry.npmjs.org/)
@@ -62,13 +62,13 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Verifying package scope access..."
-          
+
           # Configure npm to use token
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-          
+
           # Extract scope from package.json
           SCOPE=$(node -p "require('./package.json').name.split('/')[0].replace('@', '')")
-          
+
           if [ -n "$SCOPE" ] && [ "$SCOPE" != "null" ]; then
             echo "Checking access to scope: @$SCOPE"
             
@@ -90,7 +90,7 @@ jobs:
         run: |
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           echo "Package name: $PACKAGE_NAME"
-          
+
           # Check if package exists
           if npm info "$PACKAGE_NAME" > /dev/null 2>&1; then
             echo "✅ Package exists on npm"
@@ -121,4 +121,3 @@ jobs:
           echo "  2. Push to main branch"
           echo "  3. Monitor release workflow in Actions tab"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-

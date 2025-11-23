@@ -28,7 +28,7 @@
 **After:**
 
 ```typescript
-<div className={cn("rounded-lg bg-primary p-space-md text-primary-foreground", className)}>
+<div className={cn("rounded-lg bg-primary p-md text-primary-foreground", className)}>
 ```
 
 **Token Used:** `--tm-primary` / `primary` token

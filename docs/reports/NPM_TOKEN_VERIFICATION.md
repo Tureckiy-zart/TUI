@@ -21,6 +21,7 @@
 ### Шаг 2: Проверьте формат токена
 
 Токен должен:
+
 - Начинаться с `npm_` (например: `npm_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`)
 - Быть типа "Automation Token" (рекомендуется для CI/CD)
 - Иметь права "Read and Publish"
@@ -34,6 +35,7 @@
 3. Дождитесь завершения и проверьте результаты
 
 Workflow проверит:
+
 - ✅ Наличие NPM_TOKEN в secrets
 - ✅ Аутентификацию в npm
 - ✅ Доступ к scope `@tenerife.music`
@@ -75,11 +77,13 @@ bash .cursor/scripts/verify_npm_token.sh
 Если все проверки пройдены:
 
 1. Сделайте conventional commit:
+
    ```bash
    git commit -m "feat: test npm token configuration"
    ```
 
 2. Запушьте в main:
+
    ```bash
    git push origin main
    ```
@@ -96,12 +100,14 @@ bash .cursor/scripts/verify_npm_token.sh
 ### Проблема: "NPM_TOKEN not found"
 
 **Решение:**
+
 - Проверьте, что секрет добавлен в GitHub Secrets
 - Убедитесь, что имя точно `NPM_TOKEN` (регистр важен)
 
 ### Проблема: "Unauthorized" при публикации
 
 **Решение:**
+
 - Проверьте, что токен не истек
 - Убедитесь, что токен имеет права "Publish"
 - Проверьте доступ к scope `@tenerife.music`
@@ -109,6 +115,7 @@ bash .cursor/scripts/verify_npm_token.sh
 ### Проблема: "Cannot publish to scope"
 
 **Решение:**
+
 - Создайте npm organization: https://www.npmjs.com/org/create
 - Или используйте личный scope (например, `@tureckiy-zart/ui`)
 - Или опубликуйте как unscoped package
@@ -118,4 +125,3 @@ bash .cursor/scripts/verify_npm_token.sh
 - Полная документация: `docs/reports/SEMVER_NPM_VALIDATION.md`
 - Workflow конфигурация: `.github/workflows/release.yml`
 - Release конфигурация: `release.config.cjs`
-
