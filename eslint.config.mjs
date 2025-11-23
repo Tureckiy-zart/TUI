@@ -12,6 +12,7 @@ export default [
       "node_modules/**",
       "build/**",
       "coverage/**",
+      ".storybook/**",
       "**/*.stories.tsx",
       "**/*.test.tsx",
       "**/*.test.ts",
