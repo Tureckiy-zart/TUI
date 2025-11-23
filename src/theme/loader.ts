@@ -6,7 +6,7 @@
  */
 
 import { getAllThemes, loadTheme, themeExists } from "./registry";
-import { type ThemeSchema,validateThemeSchema } from "./schema";
+import { type ThemeSchema, validateThemeSchema } from "./schema";
 
 /**
  * Theme loader options
