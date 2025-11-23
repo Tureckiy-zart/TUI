@@ -28,7 +28,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
         <Heading level={3} className="mb-sm text-lg font-semibold">
           {name}
         </Heading>
-        <Text color="muted">{email}</Text>
+        <Text variant="muted">{email}</Text>
       </CardContent>
     </Card>
   );

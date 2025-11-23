@@ -11,8 +11,8 @@ import { applyDocumentMode } from "../../theme/applyMode";
 
 interface ThemeSwitchProps {
   className?: string;
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "outline" | "ghost";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
 }
 
 const MODE_COOKIE = "tm_mode";
@@ -116,7 +116,7 @@ function persistMode(nextMode: Mode) {
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   className,
   size = "md",
-  variant = "default",
+  variant = "primary",
 }) => {
   const [mode, setMode] = React.useState<Mode>(() => getInitialMode());
 
@@ -135,23 +135,18 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     });
   };
 
+  let buttonSize: "xs" | "sm" | "md" | "lg" | "xl" = "md";
+  if (size === "xs") buttonSize = "xs";
+  else if (size === "sm") buttonSize = "sm";
+  else if (size === "lg") buttonSize = "lg";
+  else if (size === "xl") buttonSize = "xl";
+
   return (
     <Button
       onClick={toggleMode}
       variant={variant}
-      size={(() => {
-        if (size === "sm") return "sm";
-        if (size === "lg") return "lg";
-        return "default";
-      })()}
-      className={cn(
-        (() => {
-          if (size === "sm") return "h-8 w-8";
-          if (size === "lg") return "h-12 w-12";
-          return "h-10 w-10";
-        })(),
-        className,
-      )}
+      size={buttonSize}
+      className={cn(className)}
       aria-label={`Switch to ${mode === "night" ? "day" : "night"} theme`}
       type="button"
     >

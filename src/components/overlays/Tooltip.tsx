@@ -11,19 +11,21 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 const tooltipContentVariants = cva(
-  "z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+  "z-50 overflow-hidden rounded-md border bg-popover px-sm py-xs text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
   {
     variants: {
       variant: {
-        default: "bg-popover text-popover-foreground border-border",
+        primary: "bg-popover text-popover-foreground border-border",
+        secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
+        accent: "border-accent/50 text-accent-foreground bg-accent/10",
+        outline: "bg-background text-foreground border-border",
+        ghost: "bg-transparent text-foreground border-transparent",
+        link: "bg-transparent text-primary border-transparent",
         destructive: "border-destructive/50 text-destructive bg-destructive/10",
-        warning: "border-warning/50 text-warning-foreground bg-warning/10",
-        success: "border-success/50 text-success-foreground bg-success/10",
-        info: "border-info/50 text-info-foreground bg-info/10",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
     },
   },
 );

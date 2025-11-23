@@ -42,22 +42,20 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
               <Link
                 href={`/news/${article.slug}`}
                 variant="ghost"
-                size="none"
                 className="hover:text-primary"
               >
                 {article.title}
               </Link>
             </Heading>
-            {article.description && <Text color="muted">{article.description}</Text>}
+            {article.description && <Text variant="muted">{article.description}</Text>}
             {article.date && (
-              <Text size="sm" color="muted">
+              <Text size="sm" variant="muted">
                 {article.date}
               </Text>
             )}
             <Link
               href={`/news/${article.slug}`}
-              variant="default"
-              size="none"
+              variant="primary"
               className="inline-flex items-center"
             >
               {readMoreLabel} →

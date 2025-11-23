@@ -57,9 +57,9 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
           {title}
         </Heading>
         {loading ? (
-          <Text color="muted">{loadingText}</Text>
+          <Text variant="muted">{loadingText}</Text>
         ) : (
-          <Text color="muted">{contentText}</Text>
+          <Text variant="muted">{contentText}</Text>
         )}
       </CardContent>
     </Card>

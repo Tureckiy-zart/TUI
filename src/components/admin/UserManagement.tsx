@@ -26,7 +26,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ title, content, 
         <Heading level={2} className="mb-md">
           {title}
         </Heading>
-        <Text color="muted">{content}</Text>
+        <Text variant="muted">{content}</Text>
       </CardContent>
     </Card>
   );
