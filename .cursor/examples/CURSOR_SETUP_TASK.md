@@ -59,7 +59,7 @@
 │   └── logs/
 ├── tasks/                        # Master Task система
 │   ├── master/
-│   │   └── cursor_task_master.json
+│   │   └── master_tasks.json
 │   └── stage_tracker.json
 ├── stages/                       # Стадии разработки
 │   └── CHANGELOG.md
@@ -93,7 +93,7 @@
 **Ключевые правила:**
 
 - Master Task expansion и Waterflow структура
-- Защита `cursor_task_master.json` от удаления
+- Защита `master_tasks.json` от удаления
 - Защита `.env` файлов
 - File naming conventions
 
@@ -219,7 +219,7 @@
 }
 ```
 
-**См. пример:** `.cursor/tasks/master/cursor_task_master.json` (создать)
+**См. пример:** `.cursor/tasks/master/master_tasks.json` (создать)
 
 ---
 
@@ -306,7 +306,7 @@ mkdir -p .cursor/{rules,templates,reports/{current/stages,logs},tasks/master,sta
 
 ### Шаг 4: Создать Master Task файл
 
-Создать `.cursor/tasks/master/cursor_task_master.json` с адаптированными стадиями для библиотеки.
+Создать `.cursor/tasks/master/master_tasks.json` с адаптированными стадиями для библиотеки.
 
 ### Шаг 5: Создать шаблоны
 
@@ -398,7 +398,7 @@ mkdir -p .cursor/{rules,templates,reports/{current/stages,logs},tasks/master,sta
 
 **Конфигурации:**
 
-- `.cursor/tasks/master/cursor_task_master_library_example.json` - Пример Master Task для библиотеки
+- `.cursor/tasks/master/master_tasks_library_example.json` - Пример Master Task для библиотеки
 - `.cursor/project-config-library-example.json` - Пример конфигурации проекта
 - `.cursorignore-library-example` - Пример .cursorignore для библиотеки
 

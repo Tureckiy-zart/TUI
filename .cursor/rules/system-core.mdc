@@ -19,7 +19,7 @@ This rule file defines the Master Task system, critical file protection, and pro
 
 **ALWAYS** use Master Task file for project management:
 
-- **Location**: `.cursor/tasks/master/cursor_task_master.json`
+- **Location**: `.cursor/tasks/master/master_tasks.json`
 - **Purpose**: Controls all roadmap stages and project progress
 - **Status**: CRITICAL - Never delete or modify without explicit user request
 
@@ -27,7 +27,7 @@ This rule file defines the Master Task system, critical file protection, and pro
 
 **NEVER** delete or modify Master Task file:
 
-- ❌ **NEVER** delete `.cursor/tasks/master/cursor_task_master.json`
+- ❌ **NEVER** delete `.cursor/tasks/master/master_tasks.json`
 - ❌ **NEVER** modify Master Task without user approval
 - ❌ **NEVER** skip Master Task expansion when requested
 
@@ -35,7 +35,7 @@ This rule file defines the Master Task system, critical file protection, and pro
 
 **ALWAYS** expand Master Task when requested:
 
-1. Read `.cursor/tasks/master/cursor_task_master.json`
+1. Read `.cursor/tasks/master/master_tasks.json`
 2. Identify current active stage
 3. Expand stage into subtasks
 4. Execute subtasks sequentially
@@ -49,7 +49,7 @@ This rule file defines the Master Task system, critical file protection, and pro
 
 **ALWAYS** protect these critical files:
 
-- `.cursor/tasks/master/cursor_task_master.json` - Master Task file
+- `.cursor/tasks/master/master_tasks.json` - Master Task file
 - `.env` - Environment variables (if exists)
 - `.env.local` - Local environment variables (if exists)
 - `package.json` - Project dependencies and scripts
@@ -169,7 +169,7 @@ This rule file defines the Master Task system, critical file protection, and pro
 
 Before expanding Master Task:
 
-- [ ] Read `.cursor/tasks/master/cursor_task_master.json`
+- [ ] Read `.cursor/tasks/master/master_tasks.json`
 - [ ] Identify current active stage
 - [ ] Read `docs/PROJECT_PROGRESS.md`
 - [ ] Understand stage objectives

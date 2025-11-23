@@ -34,7 +34,7 @@ library-setup/
 │   ├── RELEASE_TEMPLATE.md          # Шаблон релиза
 │   └── STORYBOOK_TEMPLATE.md        # Шаблон Storybook stories
 ├── tasks/master/                      # Master Task система
-│   └── cursor_task_master_library_example.json # Пример Master Task (переименовать в cursor_task_master.json)
+│   └── master_tasks_library_example.json # Пример Master Task (переименовать в master_tasks.json)
 └── examples/                          # Примеры конфигураций
     ├── CURSOR_SETUP_TASK.md          # Основной документ задания (читать первым!)
     ├── project-config-library-example.json # Конфигурация проекта (переименовать в project-config.json)
@@ -78,7 +78,7 @@ library-setup/
 
 Из этой папки скопировать:
 
-- `tasks/master/cursor_task_master_library_example.json` → `.cursor/tasks/master/cursor_task_master.json` (переименовать и адаптировать)
+- `tasks/master/master_tasks_library_example.json` → `.cursor/tasks/master/master_tasks.json` (переименовать и адаптировать)
 
 ### Шаг 5: Создать конфигурацию проекта
 

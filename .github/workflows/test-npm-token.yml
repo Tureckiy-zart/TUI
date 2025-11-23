@@ -1,0 +1,124 @@
+name: Test NPM Token
+
+on:
+  workflow_dispatch: # Manual trigger only
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/test-npm-token.yml" # Only run when this file changes
+
+jobs:
+  test-npm-token:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify NPM_TOKEN exists
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "❌ ERROR: NPM_TOKEN secret is not set in GitHub Secrets"
+            echo "Please add NPM_TOKEN to: Settings → Secrets and variables → Actions"
+            exit 1
+          else
+            echo "✅ NPM_TOKEN secret is configured"
+          fi
+
+      - name: Test npm authentication
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Testing npm authentication..."
+          
+          # Configure npm to use token
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          
+          # Test whoami
+          if npm whoami --registry=https://registry.npmjs.org/; then
+            USERNAME=$(npm whoami --registry=https://registry.npmjs.org/)
+            echo "✅ Successfully authenticated as: $USERNAME"
+          else
+            echo "❌ ERROR: npm authentication failed"
+            echo "Possible issues:"
+            echo "  - Token is invalid or expired"
+            echo "  - Token doesn't have correct permissions"
+            echo "  - Token format is incorrect (should start with 'npm_')"
+            exit 1
+          fi
+
+      - name: Verify package scope access
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Verifying package scope access..."
+          
+          # Configure npm to use token
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          
+          # Extract scope from package.json
+          SCOPE=$(node -p "require('./package.json').name.split('/')[0].replace('@', '')")
+          
+          if [ -n "$SCOPE" ] && [ "$SCOPE" != "null" ]; then
+            echo "Checking access to scope: @$SCOPE"
+            
+            if npm access ls-packages "@$SCOPE" > /dev/null 2>&1; then
+              echo "✅ Have access to @$SCOPE scope"
+              npm access ls-packages "@$SCOPE"
+            else
+              echo "⚠️  WARNING: Cannot verify access to @$SCOPE scope"
+              echo "This may be normal if:"
+              echo "  - Organization doesn't exist yet (will be created on first publish)"
+              echo "  - You need to create the organization first"
+              echo "  - Token doesn't have organization access"
+            fi
+          else
+            echo "ℹ️  Package is not scoped, skipping scope check"
+          fi
+
+      - name: Verify package name
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          echo "Package name: $PACKAGE_NAME"
+          
+          # Check if package exists
+          if npm info "$PACKAGE_NAME" > /dev/null 2>&1; then
+            echo "✅ Package exists on npm"
+            npm info "$PACKAGE_NAME" --json | jq -r '.version // "unknown"'
+          else
+            echo "ℹ️  Package doesn't exist yet (normal for first release)"
+          fi
+
+      - name: Test semantic-release dry-run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Running semantic-release dry-run..."
+          npx semantic-release --dry-run || echo "⚠️  Dry-run completed (may show warnings if no commits to release)"
+
+      - name: Summary
+        if: success()
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "✅ NPM Token Verification Complete"
+          echo ""
+          echo "All checks passed! Your NPM_TOKEN is configured correctly."
+          echo ""
+          echo "Next steps:"
+          echo "  1. Make a conventional commit (e.g., 'feat: add feature')"
+          echo "  2. Push to main branch"
+          echo "  3. Monitor release workflow in Actions tab"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+

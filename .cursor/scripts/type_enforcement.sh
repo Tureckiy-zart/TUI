@@ -16,7 +16,7 @@ ERRORS=0
 
 # Check 1: Ensure TypeScript strict mode is enabled
 echo "📋 Check 1: TypeScript strict mode..."
-if ! grep -q '"strict":\s*true' tsconfig.json; then
+if ! grep -E -q '"strict":\s*true' tsconfig.json; then
   echo -e "${RED}❌ FAIL: TypeScript strict mode not enabled${NC}"
   ERRORS=$((ERRORS + 1))
 else
@@ -36,24 +36,24 @@ fi
 # Check 3: Check for forbidden 'any' types (excluding generic utilities)
 echo "📋 Check 3: Checking for 'any' types..."
 # Exclude generic utility functions that use constrained any
-ANY_COUNT=$(grep -r ":\s*any[^[]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | grep -v "any\[\]" | wc -l || true)
+ANY_COUNT=$(grep -E -r ":\s*any[^[]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | grep -v "any\[\]" | wc -l || true)
 # Allow any[] only in generic utility function constraints
-ANY_ARRAY_COUNT=$(grep -r ":\s*any\[\]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | wc -l || true)
-ANY_INDEX_COUNT=$(grep -r "\[key:\s*string\]:\s*any" src --include="*.ts" --include="*.tsx" | wc -l || true)
+ANY_ARRAY_COUNT=$(grep -E -r ":\s*any\[\]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | wc -l || true)
+ANY_INDEX_COUNT=$(grep -E -r "\[key:\s*string\]:\s*any" src --include="*.ts" --include="*.tsx" | wc -l || true)
 
 if [ "$ANY_COUNT" -gt 0 ] || [ "$ANY_ARRAY_COUNT" -gt 0 ] || [ "$ANY_INDEX_COUNT" -gt 0 ]; then
   echo -e "${RED}❌ FAIL: Found forbidden 'any' types${NC}"
   if [ "$ANY_COUNT" -gt 0 ]; then
     echo -e "${YELLOW}  Found $ANY_COUNT 'any' type(s)${NC}"
-    grep -r ":\s*any" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | grep -v "any[]" | head -5
+    grep -E -r ":\s*any[^[]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | grep -v "any\[\]" | head -5
   fi
   if [ "$ANY_ARRAY_COUNT" -gt 0 ]; then
     echo -e "${YELLOW}  Found $ANY_ARRAY_COUNT 'any[]' type(s)${NC}"
-    grep -r ":\s*any\[\]" src --include="*.ts" --include="*.tsx" | head -5
+    grep -E -r ":\s*any\[\]" src --include="*.ts" --include="*.tsx" | grep -v "T extends" | head -5
   fi
   if [ "$ANY_INDEX_COUNT" -gt 0 ]; then
     echo -e "${YELLOW}  Found $ANY_INDEX_COUNT '[key: string]: any' type(s)${NC}"
-    grep -r "\[key:\s*string\]:\s*any" src --include="*.ts" --include="*.tsx" | head -5
+    grep -E -r "\[key:\s*string\]:\s*any" src --include="*.ts" --include="*.tsx" | head -5
   fi
   ERRORS=$((ERRORS + 1))
 else
