@@ -4,10 +4,7 @@
   "priority": "P0",
   "type": "critical_unplanned_work",
   "description": "Rewrite the public API surface of @tenerife-ui to ensure clean, stable, domain-agnostic exports. Based on audit report: .cursor/reports/UI_LIB_PUBLIC_API.md",
-  "target_files": [
-    "src/index.ts",
-    "docs/public-api.md"
-  ],
+  "target_files": ["src/index.ts", "docs/public-api.md"],
   "subtasks": [
     {
       "id": "D1.1",
@@ -159,4 +156,3 @@
     "docs/public-api.md exists and documents all exports"
   ]
 }
-

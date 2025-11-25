@@ -144,11 +144,7 @@
         "Test venue card rendering with various data",
         "Test articles section with various data"
       ],
-      "acceptance_criteria": [
-        "All tests pass",
-        "No regressions",
-        "New adapter patterns covered"
-      ],
+      "acceptance_criteria": ["All tests pass", "No regressions", "New adapter patterns covered"],
       "status": "pending"
     },
     {
@@ -208,4 +204,3 @@
     "Integration report created"
   ]
 }
-

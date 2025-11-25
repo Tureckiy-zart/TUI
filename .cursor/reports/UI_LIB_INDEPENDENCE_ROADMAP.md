@@ -14,6 +14,7 @@ This roadmap outlines the steps needed to transform `tenerife-ui` from a Tenerif
 ## Current State Assessment
 
 ### Strengths
+
 - ✅ 100% TypeScript with strict mode
 - ✅ Complete design token system (F0-F9)
 - ✅ Theme system with day/night modes
@@ -23,6 +24,7 @@ This roadmap outlines the steps needed to transform `tenerife-ui` from a Tenerif
 - ✅ No Next.js direct dependencies
 
 ### Weaknesses
+
 - ❌ 4 domain-specific interfaces
 - ❌ 5 hardcoded routes
 - ❌ 1 external store reference
@@ -49,9 +51,7 @@ These changes are required before npm publish to prevent broken imports.
 // In actual usage, these should be imported from apps/web/src/stores/useFiltersStore
 
 // REMOVE console.warn:
-console.warn(
-  "useFilterManager: This is a mock implementation..."
-);
+console.warn("useFilterManager: This is a mock implementation...");
 ```
 
 **Effort:** 30 minutes
@@ -96,11 +96,13 @@ These changes enable components to work with any URL structure.
 **File:** `src/components/cards/EventCard.tsx`
 
 **Current:**
+
 ```typescript
 <Link href={`/events/${event.slug}`} variant="ghost">
 ```
 
 **Proposed:**
+
 ```typescript
 interface EventCardProps {
   // Add new prop
@@ -133,6 +135,7 @@ interface EventCardProps {
 **File:** `src/components/sections/ArticlesSection.tsx`
 
 **Current:**
+
 ```typescript
 interface Article {
   slug: string;
@@ -141,9 +144,10 @@ interface Article {
 ```
 
 **Proposed:**
+
 ```typescript
 interface Article {
-  href: string;  // Replace slug with full href
+  href: string; // Replace slug with full href
   // ...
 }
 ```
@@ -161,6 +165,7 @@ Simplify interfaces to accept pre-processed data.
 #### 3.1 EventCard Interface Simplification
 
 **Current (Complex):**
+
 ```typescript
 export interface EventCardEvent {
   _id?: string;
@@ -172,6 +177,7 @@ export interface EventCardEvent {
 ```
 
 **Proposed (Simple):**
+
 ```typescript
 export interface EventCardProps {
   title: string;
@@ -217,17 +223,20 @@ Move language-specific logic out of components.
 #### 4.1 Remove Inline Multilingual Fallbacks
 
 **Current:**
+
 ```typescript
 const title = event?.name?.en || event?.name?.es || event?.name?.ru || "";
 ```
 
 **Proposed:**
+
 ```typescript
 // Consumer provides pre-localized string
 const title = props.title;
 ```
 
 **Files Affected:**
+
 - `EventCard.tsx` (3 instances)
 - `VenueCard.tsx` (2 instances)
 
@@ -244,7 +253,7 @@ import { EventCard } from '@tenerife.music/ui';
 
 function EventList({ events }) {
   const { locale } = useLocale();
-  
+
   return events.map(event => (
     <EventCard
       key={event.id}
@@ -269,14 +278,14 @@ Improve naming for better reusability.
 
 #### 5.1 Consider Generic Component Names
 
-| Current | Proposed Alternative |
-|---------|---------------------|
-| `EventCard` | Keep (with generic interface) |
-| `VenueCard` | Keep (with generic interface) |
-| `EventCardSkeleton` | `ContentCardSkeleton` |
-| `VenueCardSkeleton` | `ContentCardSkeleton` |
-| `TrendingSection` | `ItemListSection` |
-| `ArticlesSection` | `ArticleListSection` |
+| Current             | Proposed Alternative          |
+| ------------------- | ----------------------------- |
+| `EventCard`         | Keep (with generic interface) |
+| `VenueCard`         | Keep (with generic interface) |
+| `EventCardSkeleton` | `ContentCardSkeleton`         |
+| `VenueCardSkeleton` | `ContentCardSkeleton`         |
+| `TrendingSection`   | `ItemListSection`             |
+| `ArticlesSection`   | `ArticleListSection`          |
 
 **Decision:** Keep current names, document as "Recipes" category
 
@@ -285,6 +294,7 @@ Improve naming for better reusability.
 #### 5.2 Create "Recipes" Documentation
 
 Document that these components are **examples/recipes** that can be:
+
 1. Used directly with proper props
 2. Copied and modified
 3. Used as reference for custom implementations
@@ -302,6 +312,7 @@ Make FilterBar fully configurable.
 #### 6.1 Make Currency Configurable
 
 **Current:**
+
 ```typescript
 <PriceRangeSlider
   currency="€"  // Hardcoded
@@ -310,6 +321,7 @@ Make FilterBar fully configurable.
 ```
 
 **Proposed:**
+
 ```typescript
 interface FilterBarProps {
   // Add new prop
@@ -345,14 +357,14 @@ interface FilterBarProps {
 
 ## Timeline Summary
 
-| Phase | Priority | Effort | Week |
-|-------|----------|--------|------|
-| Phase 1: Critical Fixes | CRITICAL | 1 hour | 1 |
-| Phase 2: Route Decoupling | HIGH | 2.5 hours | 1-2 |
-| Phase 3: Interface Refactoring | HIGH | 7 hours | 2-3 |
-| Phase 4: Multilingual Extraction | MEDIUM | 3 hours | 3 |
-| Phase 5: Naming/Organization | LOW | 2 hours | 4 |
-| Phase 6: FilterBar | MEDIUM | 2.5 hours | 4 |
+| Phase                            | Priority | Effort    | Week |
+| -------------------------------- | -------- | --------- | ---- |
+| Phase 1: Critical Fixes          | CRITICAL | 1 hour    | 1    |
+| Phase 2: Route Decoupling        | HIGH     | 2.5 hours | 1-2  |
+| Phase 3: Interface Refactoring   | HIGH     | 7 hours   | 2-3  |
+| Phase 4: Multilingual Extraction | MEDIUM   | 3 hours   | 3    |
+| Phase 5: Naming/Organization     | LOW      | 2 hours   | 4    |
+| Phase 6: FilterBar               | MEDIUM   | 2.5 hours | 4    |
 
 **Total Effort:** ~18 hours
 
@@ -376,13 +388,13 @@ After completing all phases:
 
 ### Version 1.x → 2.0
 
-| Change | Migration |
-|--------|-----------|
-| `EventCardEvent` → `EventCardProps` | Flatten nested objects |
-| `VenueCardProps.venue` → flat props | Flatten nested object |
-| `Article.slug` → `Article.href` | Provide full URL |
-| Remove `EventCardSkeletonUI` alias | Use `EventCardSkeleton` |
-| Remove `VenueCardSkeletonUI` alias | Use `VenueCardSkeleton` |
+| Change                              | Migration               |
+| ----------------------------------- | ----------------------- |
+| `EventCardEvent` → `EventCardProps` | Flatten nested objects  |
+| `VenueCardProps.venue` → flat props | Flatten nested object   |
+| `Article.slug` → `Article.href`     | Provide full URL        |
+| Remove `EventCardSkeletonUI` alias  | Use `EventCardSkeleton` |
+| Remove `VenueCardSkeletonUI` alias  | Use `VenueCardSkeleton` |
 
 ### Deprecation Strategy
 
@@ -424,4 +436,3 @@ grep -r "/news/" src/ --include="*.tsx" | grep -v stories
 
 **Report Generated:** 2025-11-25  
 **Status:** Complete
-

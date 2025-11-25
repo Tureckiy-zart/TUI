@@ -8,6 +8,7 @@
 ## Overview
 
 This report audits the public API surface of `tenerife-ui` to identify:
+
 - What is exported vs. what should be exported
 - Deep exports that leak internal structure
 - Missing exports
@@ -21,32 +22,32 @@ This report audits the public API surface of `tenerife-ui` to identify:
 
 ### Export Categories
 
-| Category | Count | Status |
-|----------|-------|--------|
-| Design Tokens | 7 modules | ✅ Good |
-| Primitive Components | 9 components | ✅ Good |
-| Theme Utilities | 1 module | ✅ Good |
-| Layout Components | 8 components | ✅ Good |
-| Modal Components | 5 components | ✅ Good |
-| Menu Components | 3 components | ✅ Good |
-| Filter Components | 6 components | ⚠️ Has coupling |
-| Toast Components | 2 components | ✅ Good |
-| Overlay Components | 3 components | ✅ Good |
-| Feedback Components | 3 components | ✅ Good |
-| Image Components | 1 component | ✅ Good |
-| Navigation Components | 2 components | ✅ Good |
-| Data Components | 3 components | ✅ Good |
-| Card Components | 2 components | ⚠️ Domain-coupled |
-| Form Components | 3 components | ✅ Good |
-| Auth Components | 3 components | ⚠️ Generic wrappers |
-| Admin Components | 2 components | ⚠️ Generic wrappers |
-| Search Components | 1 component | ✅ Good |
-| Section Components | 5 components | ⚠️ Some coupling |
-| Icon Components | 1 component | ✅ Good |
-| Control Components | 1 component | ✅ Good |
-| Skeleton Components | 2 components | ⚠️ Domain naming |
-| Hooks | 1 hook | ✅ Good |
-| Utilities | 1 module | ✅ Good |
+| Category              | Count        | Status              |
+| --------------------- | ------------ | ------------------- |
+| Design Tokens         | 7 modules    | ✅ Good             |
+| Primitive Components  | 9 components | ✅ Good             |
+| Theme Utilities       | 1 module     | ✅ Good             |
+| Layout Components     | 8 components | ✅ Good             |
+| Modal Components      | 5 components | ✅ Good             |
+| Menu Components       | 3 components | ✅ Good             |
+| Filter Components     | 6 components | ⚠️ Has coupling     |
+| Toast Components      | 2 components | ✅ Good             |
+| Overlay Components    | 3 components | ✅ Good             |
+| Feedback Components   | 3 components | ✅ Good             |
+| Image Components      | 1 component  | ✅ Good             |
+| Navigation Components | 2 components | ✅ Good             |
+| Data Components       | 3 components | ✅ Good             |
+| Card Components       | 2 components | ⚠️ Domain-coupled   |
+| Form Components       | 3 components | ✅ Good             |
+| Auth Components       | 3 components | ⚠️ Generic wrappers |
+| Admin Components      | 2 components | ⚠️ Generic wrappers |
+| Search Components     | 1 component  | ✅ Good             |
+| Section Components    | 5 components | ⚠️ Some coupling    |
+| Icon Components       | 1 component  | ✅ Good             |
+| Control Components    | 1 component  | ✅ Good             |
+| Skeleton Components   | 2 components | ⚠️ Domain naming    |
+| Hooks                 | 1 hook       | ✅ Good             |
+| Utilities             | 1 module     | ✅ Good             |
 
 **Total Exports:** ~70 components/modules
 
@@ -61,6 +62,7 @@ export * from "./tokens";
 ```
 
 **Exports:**
+
 - `colors` - Color palette tokens
 - `css-variables` - CSS variable definitions
 - `motion` - Animation/transition tokens
@@ -90,6 +92,7 @@ export * from "./components/primitives/Typography";
 **Status:** ✅ Clean, fully independent
 
 **Types Exported:**
+
 - `ButtonProps`, `buttonVariants`
 - `LinkProps`, `linkVariants`
 - `TextProps`, `HeadingProps`
@@ -107,6 +110,7 @@ export * from "./components/cards/VenueCard";
 ```
 
 **Exported Types:**
+
 - `EventCardEvent` - ⚠️ Domain-specific
 - `EventCardProps`
 - `VenueCardProps` with embedded `venue` interface
@@ -121,6 +125,7 @@ export * from "./components/sections/TrendingSection";
 ```
 
 **Exported Types:**
+
 - `Article` interface (internal, not explicitly exported)
 - `Event` interface (internal, not explicitly exported)
 
@@ -137,7 +142,8 @@ export { EventCardSkeleton as EventCardSkeletonUI } from "./components/skeletons
 export { VenueCardSkeleton as VenueCardSkeletonUI } from "./components/skeletons/VenueCardSkeleton";
 ```
 
-**Issue:** 
+**Issue:**
+
 - Domain-specific naming (`EventCard`, `VenueCard`)
 - Duplicate exports with `UI` suffix (unnecessary)
 
@@ -155,9 +161,11 @@ export * from "./components/filters/SearchInput";
 ```
 
 **Not Exported (Internal):**
+
 - `types.ts` - Contains `FilterOption`, `FilterState`, `useFilterManager`
 
-**Issue:** 
+**Issue:**
+
 - `FilterOption` and `FilterState` types are useful but not exported
 - `useFilterManager` mock is used internally but not exported
 
@@ -186,6 +194,7 @@ export type { FilterOption, FilterState } from "./components/filters/types";
 ```
 
 **Entry Points:**
+
 1. `.` - Main entry (all components)
 2. `./styles` - CSS styles
 3. `./preset` - Tailwind preset
@@ -200,26 +209,26 @@ export type { FilterOption, FilterState } from "./components/filters/types";
 
 ### Missing Type Exports
 
-| Component | Missing Type | Should Export |
-|-----------|-------------|---------------|
-| `FilterSelect` | `FilterOption` | Yes |
-| `FilterBar` | `FilterState` | Yes |
-| `EventCard` | (rename to generic) | Refactor needed |
-| `VenueCard` | (rename to generic) | Refactor needed |
-| `ArticlesSection` | `Article` | Yes, or refactor |
-| `TrendingSection` | `Event` | Yes, or rename |
+| Component         | Missing Type        | Should Export    |
+| ----------------- | ------------------- | ---------------- |
+| `FilterSelect`    | `FilterOption`      | Yes              |
+| `FilterBar`       | `FilterState`       | Yes              |
+| `EventCard`       | (rename to generic) | Refactor needed  |
+| `VenueCard`       | (rename to generic) | Refactor needed  |
+| `ArticlesSection` | `Article`           | Yes, or refactor |
+| `TrendingSection` | `Event`             | Yes, or rename   |
 
 ### Well-Exported Types
 
-| Component | Exported Types |
-|-----------|---------------|
-| `Button` | `ButtonProps`, `buttonVariants` |
-| `Link` | `LinkProps`, `linkVariants` |
-| `Typography` | `TextProps`, `HeadingProps` |
-| `Alert` | `AlertProps` |
-| `Modal` | `ModalProps` |
-| `Tooltip` | `TooltipProps` |
-| `Popover` | `PopoverProps` |
+| Component    | Exported Types                  |
+| ------------ | ------------------------------- |
+| `Button`     | `ButtonProps`, `buttonVariants` |
+| `Link`       | `LinkProps`, `linkVariants`     |
+| `Typography` | `TextProps`, `HeadingProps`     |
+| `Alert`      | `AlertProps`                    |
+| `Modal`      | `ModalProps`                    |
+| `Tooltip`    | `TooltipProps`                  |
+| `Popover`    | `PopoverProps`                  |
 
 ---
 
@@ -284,6 +293,7 @@ Create a separate entry point for domain-coupled components:
 ```
 
 This would contain:
+
 - `EventCard`
 - `VenueCard`
 - `ArticlesSection`
@@ -294,6 +304,7 @@ This would contain:
 ### 4. Document Public API
 
 Create `docs/API.md` with:
+
 - All exported components
 - All exported types
 - All exported utilities
@@ -324,13 +335,13 @@ Create `docs/API.md` with:
 
 ## Summary
 
-| Metric | Value |
-|--------|-------|
-| Total Exports | ~70 |
-| Clean Exports | ~55 (78%) |
-| Coupled Exports | ~10 (14%) |
-| Missing Type Exports | 5 |
-| Duplicate Exports | 2 |
+| Metric               | Value     |
+| -------------------- | --------- |
+| Total Exports        | ~70       |
+| Clean Exports        | ~55 (78%) |
+| Coupled Exports      | ~10 (14%) |
+| Missing Type Exports | 5         |
+| Duplicate Exports    | 2         |
 
 **Overall API Health:** 78% - Good, with identified improvements needed.
 
@@ -338,4 +349,3 @@ Create `docs/API.md` with:
 
 **Report Generated:** 2025-11-25  
 **Status:** Complete
-

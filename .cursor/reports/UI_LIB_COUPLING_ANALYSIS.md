@@ -12,14 +12,14 @@ The `tenerife-ui` library has **moderate coupling** to the main Tenerife project
 
 ### Coupling Statistics
 
-| Category | Count | Severity |
-|----------|-------|----------|
-| Domain-specific types | 4 interfaces | HIGH |
-| Hardcoded routes | 5 instances | HIGH |
-| External store references | 3 instances | CRITICAL |
-| Multilingual fallback logic | 3 components | MEDIUM |
-| Currency hardcoding | 2 instances | LOW |
-| "use client" directives | 46 files | LOW (design choice) |
+| Category                    | Count        | Severity            |
+| --------------------------- | ------------ | ------------------- |
+| Domain-specific types       | 4 interfaces | HIGH                |
+| Hardcoded routes            | 5 instances  | HIGH                |
+| External store references   | 3 instances  | CRITICAL            |
+| Multilingual fallback logic | 3 components | MEDIUM              |
+| Currency hardcoding         | 2 instances  | LOW                 |
+| "use client" directives     | 46 files     | LOW (design choice) |
 
 ---
 
@@ -44,6 +44,7 @@ export interface EventCardEvent {
 ```
 
 **Issues:**
+
 - `_id` suggests MongoDB document structure
 - `venue_id` is a nested object with multilingual name (Tenerife data model)
 - `{ en, es, ru }` multilingual structure is Tenerife-specific
@@ -80,6 +81,7 @@ interface VenueCardProps {
 ```
 
 **Issues:**
+
 - `_id` MongoDB field naming
 - `coordinates` assumes mapping integration
 - `events_count` assumes relationship with events
@@ -102,6 +104,7 @@ interface Event {
 ```
 
 **Issues:**
+
 - Uses index signature `[key: string]: unknown` - allows any props
 - "Event" naming is domain-specific
 
@@ -124,6 +127,7 @@ interface Article {
 ```
 
 **Issues:**
+
 - Hardcodes `/news/` route path
 - "Article" naming may conflict with other projects
 
@@ -133,13 +137,13 @@ interface Article {
 
 ## 2. Hardcoded Routes
 
-| File | Line | Route | Purpose |
-|------|------|-------|---------|
-| `src/components/cards/EventCard.tsx` | 121 | `/events/${event.slug}` | Event detail link |
-| `src/components/cards/VenueCard.tsx` | 139 | `/venues/${venue.slug}` | Venue detail link |
-| `src/components/sections/ArticlesSection.tsx` | 44 | `/news/${article.slug}` | Article title link |
-| `src/components/sections/ArticlesSection.tsx` | 55 | `/news/${article.slug}` | Read more link |
-| `src/components/navigation/Breadcrumbs.stories.tsx` | 21 | `/events/classical` | Story example |
+| File                                                | Line | Route                   | Purpose            |
+| --------------------------------------------------- | ---- | ----------------------- | ------------------ |
+| `src/components/cards/EventCard.tsx`                | 121  | `/events/${event.slug}` | Event detail link  |
+| `src/components/cards/VenueCard.tsx`                | 139  | `/venues/${venue.slug}` | Venue detail link  |
+| `src/components/sections/ArticlesSection.tsx`       | 44   | `/news/${article.slug}` | Article title link |
+| `src/components/sections/ArticlesSection.tsx`       | 55   | `/news/${article.slug}` | Read more link     |
+| `src/components/navigation/Breadcrumbs.stories.tsx` | 21   | `/events/classical`     | Story example      |
 
 **Impact:** Components cannot be used in projects with different URL structures.
 
@@ -166,6 +170,7 @@ export const useFilterManager = () => {
 ```
 
 **Issues:**
+
 - References path in main Tenerife project (`apps/web/src/stores/useFiltersStore`)
 - Mock implementation produces console warnings
 - FilterBar component depends on this mock
@@ -186,6 +191,7 @@ const title =
 ```
 
 **Issues:**
+
 - Hardcodes `en`, `es`, `ru` language codes
 - Logic should be in consuming application, not library
 - Present in EventCard (3 instances) and VenueCard (2 instances)
@@ -209,7 +215,7 @@ price = `€${min} - €${max}`;
 **File:** `src/components/filters/FilterBar.tsx:259`
 
 ```typescript
-currency="€"
+currency = "€";
 ```
 
 **Note:** `PriceRangeSlider` accepts `currency` as prop, but FilterBar hardcodes euro.
@@ -231,7 +237,7 @@ currency="€"
 ### 6.2 No Direct Next.js Imports
 
 - ✅ No `next/link` imports
-- ✅ No `next/image` imports  
+- ✅ No `next/image` imports
 - ✅ No `next/router` imports
 - Library uses native `<a>` tags with `href` props
 
@@ -263,24 +269,26 @@ These components work standalone without any modifications:
 
 ### Heavily Coupled (Require Refactoring)
 
-| Component | Issues | Refactoring Effort |
-|-----------|--------|-------------------|
-| `EventCard` | Domain types, routes, multilingual logic, price formatting | HIGH |
-| `VenueCard` | Domain types, routes, multilingual logic | HIGH |
-| `ArticlesSection` | Routes, domain types | MEDIUM |
-| `TrendingSection` | Domain types (minimal) | LOW |
-| `FilterBar` | External store reference, currency hardcode | MEDIUM |
-| `EventCardSkeleton` | Naming only | LOW |
-| `VenueCardSkeleton` | Naming only | LOW |
+| Component           | Issues                                                     | Refactoring Effort |
+| ------------------- | ---------------------------------------------------------- | ------------------ |
+| `EventCard`         | Domain types, routes, multilingual logic, price formatting | HIGH               |
+| `VenueCard`         | Domain types, routes, multilingual logic                   | HIGH               |
+| `ArticlesSection`   | Routes, domain types                                       | MEDIUM             |
+| `TrendingSection`   | Domain types (minimal)                                     | LOW                |
+| `FilterBar`         | External store reference, currency hardcode                | MEDIUM             |
+| `EventCardSkeleton` | Naming only                                                | LOW                |
+| `VenueCardSkeleton` | Naming only                                                | LOW                |
 
 ---
 
 ## 8. Summary by Severity
 
 ### CRITICAL (1 issue)
+
 - External store reference in `filters/types.ts`
 
 ### HIGH (6 issues)
+
 - `EventCardEvent` domain-specific interface
 - `VenueCard.venue` domain-specific interface
 - Hardcoded `/events/` route
@@ -289,12 +297,14 @@ These components work standalone without any modifications:
 - Multilingual fallback logic embedded in components
 
 ### MEDIUM (4 issues)
+
 - `Event` interface in TrendingSection
 - `Article` interface in ArticlesSection
 - Multilingual `{ en, es, ru }` structure assumption
 - FilterBar using mock hook
 
 ### LOW (3 issues)
+
 - Currency hardcoding in EventCard
 - "use client" directives (design choice)
 - Domain-specific component naming (EventCard, VenueCard)
@@ -320,4 +330,3 @@ These components work standalone without any modifications:
 **Report Generated:** 2025-11-25  
 **Auditor:** AI Assistant  
 **Status:** Complete
-

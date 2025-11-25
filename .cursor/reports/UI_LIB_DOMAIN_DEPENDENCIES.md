@@ -19,27 +19,27 @@ This report catalogs all interfaces, types, and data structures that embed Tener
 
 ```typescript
 export interface EventCardEvent {
-  _id?: string;                                          // MongoDB ID
-  slug?: string;                                         // URL slug
-  name?: { en?: string; es?: string; ru?: string };      // Multilingual
-  start_date?: string;                                   // Event timing
-  ticket_url?: string;                                   // Ticket integration
-  venue_id?: { name?: { en?: string; es?: string; ru?: string } };  // Nested venue
+  _id?: string; // MongoDB ID
+  slug?: string; // URL slug
+  name?: { en?: string; es?: string; ru?: string }; // Multilingual
+  start_date?: string; // Event timing
+  ticket_url?: string; // Ticket integration
+  venue_id?: { name?: { en?: string; es?: string; ru?: string } }; // Nested venue
   description?: { en?: string; es?: string; ru?: string }; // Multilingual
-  price?: string;                                        // Price as string
-  image?: string;                                        // Image URL
+  price?: string; // Price as string
+  image?: string; // Image URL
 }
 ```
 
 ### Domain-Specific Fields
 
-| Field | Issue | Recommendation |
-|-------|-------|----------------|
-| `_id` | MongoDB naming convention | Use `id: string` |
-| `name.{en,es,ru}` | Hardcoded languages | Use `name: string` (pre-localized) |
-| `venue_id.name` | Nested object with multilingual | Use `venueName: string` |
-| `description.{en,es,ru}` | Hardcoded languages | Use `description: string` |
-| `ticket_url` | Assumes ticket system | Keep but make optional |
+| Field                    | Issue                           | Recommendation                     |
+| ------------------------ | ------------------------------- | ---------------------------------- |
+| `_id`                    | MongoDB naming convention       | Use `id: string`                   |
+| `name.{en,es,ru}`        | Hardcoded languages             | Use `name: string` (pre-localized) |
+| `venue_id.name`          | Nested object with multilingual | Use `venueName: string`            |
+| `description.{en,es,ru}` | Hardcoded languages             | Use `description: string`          |
+| `ticket_url`             | Assumes ticket system           | Keep but make optional             |
 
 ### Usage in Component
 
@@ -118,13 +118,13 @@ interface VenueCardProps {
 
 ### Domain-Specific Fields
 
-| Field | Issue | Recommendation |
-|-------|-------|----------------|
-| `_id` | MongoDB naming | Use `id: string` |
-| `name.{en,es,ru}` | Hardcoded languages | Use `name: string` |
-| `description.{en,es,ru}` | Hardcoded languages | Use `description: string` |
-| `coordinates` | Assumes map integration | Remove or make optional |
-| `events_count` | Assumes event relationship | Keep but document |
+| Field                    | Issue                      | Recommendation            |
+| ------------------------ | -------------------------- | ------------------------- |
+| `_id`                    | MongoDB naming             | Use `id: string`          |
+| `name.{en,es,ru}`        | Hardcoded languages        | Use `name: string`        |
+| `description.{en,es,ru}` | Hardcoded languages        | Use `description: string` |
+| `coordinates`            | Assumes map integration    | Remove or make optional   |
+| `events_count`           | Assumes event relationship | Keep but document         |
 
 ### Proposed Generic Interface
 
@@ -176,6 +176,7 @@ interface Event {
 ### Assessment
 
 This interface is **minimally coupled**:
+
 - Uses standard `id` instead of `_id`
 - Uses simple `title: string` instead of multilingual object
 - Index signature allows extension
@@ -224,7 +225,7 @@ interface ArticleItem {
   description?: string;
   date?: string;
   imageUrl?: string;
-  href: string;  // Full URL instead of building from slug
+  href: string; // Full URL instead of building from slug
 }
 ```
 
@@ -294,14 +295,15 @@ export interface FilterOption {
 
 ### Occurrences
 
-| File | Field |
-|------|-------|
+| File            | Field                                  |
+| --------------- | -------------------------------------- |
 | `EventCard.tsx` | `name`, `description`, `venue_id.name` |
-| `VenueCard.tsx` | `name`, `description` |
+| `VenueCard.tsx` | `name`, `description`                  |
 
 ### Problem
 
 This pattern:
+
 1. Hardcodes supported languages
 2. Embeds localization logic in UI library
 3. Prevents use in projects with different language sets
@@ -330,14 +332,15 @@ name: string  // Consumer provides already-localized string
 
 ### Occurrences
 
-| File | Fields |
-|------|--------|
-| `EventCard.tsx` | `_id`, `venue_id` |
+| File            | Fields                |
+| --------------- | --------------------- |
+| `EventCard.tsx` | `_id`, `venue_id`     |
 | `VenueCard.tsx` | `_id`, `events_count` |
 
 ### Problem
 
 This naming convention:
+
 1. Assumes MongoDB as database
 2. Uses snake_case (inconsistent with TypeScript conventions)
 3. Exposes internal data model
@@ -364,14 +367,14 @@ eventsCount?: number;
 
 ### Types Requiring Refactoring
 
-| Interface | Coupling Level | Effort |
-|-----------|---------------|--------|
-| `EventCardEvent` | HIGH | 2-3 hours |
-| `VenueCardProps.venue` | HIGH | 2-3 hours |
-| `Event` (TrendingSection) | LOW | 30 min |
-| `Article` | MEDIUM | 1 hour |
-| `FilterState` | NONE | N/A |
-| `FilterOption` | NONE | N/A |
+| Interface                 | Coupling Level | Effort    |
+| ------------------------- | -------------- | --------- |
+| `EventCardEvent`          | HIGH           | 2-3 hours |
+| `VenueCardProps.venue`    | HIGH           | 2-3 hours |
+| `Event` (TrendingSection) | LOW            | 30 min    |
+| `Article`                 | MEDIUM         | 1 hour    |
+| `FilterState`             | NONE           | N/A       |
+| `FilterOption`            | NONE           | N/A       |
 
 ### Migration Strategy
 
@@ -384,4 +387,3 @@ eventsCount?: number;
 
 **Report Generated:** 2025-11-25  
 **Status:** Complete
-

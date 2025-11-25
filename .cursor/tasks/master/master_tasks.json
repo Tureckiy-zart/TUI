@@ -353,14 +353,8 @@
           "purpose": "Rewrite the public API surface of @tenerife-ui to ensure clean, stable, domain-agnostic exports. Remove deep import leaks, add missing type exports, remove duplicates, and document the final API.",
           "has_subtasks": true,
           "subtasks_file": ".cursor/tasks/subtasks/UI_LIB_PHASE_1_PUBLIC_API_REWRITE.subtasks.json",
-          "inputs": [
-            "src/index.ts",
-            ".cursor/reports/UI_LIB_PUBLIC_API.md"
-          ],
-          "outputs": [
-            "Refactored src/index.ts",
-            "docs/public-api.md"
-          ],
+          "inputs": ["src/index.ts", ".cursor/reports/UI_LIB_PUBLIC_API.md"],
+          "outputs": ["Refactored src/index.ts", "docs/public-api.md"],
           "acceptance_criteria": [
             "No internal paths are imported externally",
             "index.ts is the only export root",
@@ -384,10 +378,7 @@
             "src/components/sections/ArticlesSection.tsx",
             ".cursor/reports/UI_LIB_DOMAIN_DEPENDENCIES.md"
           ],
-          "outputs": [
-            "Refactored component interfaces",
-            "docs/domain-decoupling-report.md"
-          ],
+          "outputs": ["Refactored component interfaces", "docs/domain-decoupling-report.md"],
           "acceptance_criteria": [
             "No UI component accepts domain models directly",
             "All props are fully generic and flat",
@@ -410,10 +401,7 @@
             "src/components/sections/ArticlesSection.tsx",
             ".cursor/reports/UI_LIB_ROUTE_HARDCODING.md"
           ],
-          "outputs": [
-            "Components with href props",
-            "docs/route-decoupling.md"
-          ],
+          "outputs": ["Components with href props", "docs/route-decoupling.md"],
           "acceptance_criteria": [
             "No hardcoded routes remain in UI library components",
             "All linkable components accept href prop",
@@ -434,10 +422,7 @@
             "src/components/cards/VenueCard.tsx",
             ".cursor/reports/UI_LIB_COUPLING_ANALYSIS.md"
           ],
-          "outputs": [
-            "Components with simple string props",
-            "docs/i18n-removal.md"
-          ],
+          "outputs": ["Components with simple string props", "docs/i18n-removal.md"],
           "acceptance_criteria": [
             "No multilingual structures remain in components",
             "All text props use simple strings",
@@ -453,14 +438,8 @@
           "purpose": "Redesign all component props to follow a unified, consistent, domain-agnostic structure with standardized naming conventions.",
           "has_subtasks": true,
           "subtasks_file": ".cursor/tasks/subtasks/UI_LIB_PHASE_5_PROPS_REDESIGN.subtasks.json",
-          "inputs": [
-            "All card and section components",
-            "Previous phases outputs"
-          ],
-          "outputs": [
-            "Standardized component props",
-            "docs/props-guidelines.md"
-          ],
+          "inputs": ["All card and section components", "Previous phases outputs"],
+          "outputs": ["Standardized component props", "docs/props-guidelines.md"],
           "acceptance_criteria": [
             "Props guidelines document created",
             "All components follow unified prop naming (imageUrl not image, href not slug)",
@@ -478,10 +457,7 @@
           "has_subtasks": true,
           "subtasks_file": ".cursor/tasks/subtasks/UI_LIB_PHASE_6_ADAPTER_LAYER.subtasks.json",
           "target_project": "TENERIFE_MUSIC_V_2.0",
-          "inputs": [
-            "Domain models from main project",
-            "New UI component prop interfaces"
-          ],
+          "inputs": ["Domain models from main project", "New UI component prop interfaces"],
           "outputs": [
             "apps/web/src/adapters/ui/eventToCardProps.ts",
             "apps/web/src/adapters/ui/venueToCardProps.ts",
@@ -505,14 +481,8 @@
           "has_subtasks": true,
           "subtasks_file": ".cursor/tasks/subtasks/UI_LIB_PHASE_7_FRONTEND_INTEGRATION.subtasks.json",
           "target_project": "TENERIFE_MUSIC_V_2.0",
-          "inputs": [
-            "Adapter layer from D6",
-            "New UI component interfaces from D1-D5"
-          ],
-          "outputs": [
-            "Updated frontend component usages",
-            "docs/ui-integration-report.md"
-          ],
+          "inputs": ["Adapter layer from D6", "New UI component interfaces from D1-D5"],
+          "outputs": ["Updated frontend component usages", "docs/ui-integration-report.md"],
           "acceptance_criteria": [
             "All frontend usages updated to use adapters",
             "No domain data passed directly to UI components",

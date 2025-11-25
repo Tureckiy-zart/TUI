@@ -81,15 +81,15 @@ Master Task V3.1 defines **71 tasks** across **9 layers** to build a universal, 
 
 ### Tasks
 
-| ID     | Title                              | Dependencies | Status  |
-| ------ | ---------------------------------- | ------------ | ------- |
-| **D1** | Public API Rewrite                 | None         | pending |
-| **D2** | Domain Decoupling                  | D1           | pending |
-| **D3** | Route Decoupling                   | D2           | pending |
-| **D4** | I18n Removal                       | D3           | pending |
-| **D5** | Props Redesign                     | D4           | pending |
-| **D6** | Adapter Layer (Main Project)       | D5           | pending |
-| **D7** | Frontend Integration               | D6           | pending |
+| ID     | Title                        | Dependencies | Status  |
+| ------ | ---------------------------- | ------------ | ------- |
+| **D1** | Public API Rewrite           | None         | pending |
+| **D2** | Domain Decoupling            | D1           | pending |
+| **D3** | Route Decoupling             | D2           | pending |
+| **D4** | I18n Removal                 | D3           | pending |
+| **D5** | Props Redesign               | D4           | pending |
+| **D6** | Adapter Layer (Main Project) | D5           | pending |
+| **D7** | Frontend Integration         | D6           | pending |
 
 ### Dependency Chain
 
@@ -118,6 +118,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 ### Outputs
 
 **Phase 1-5 (UI Library):**
+
 - Refactored `src/index.ts` with clean public API
 - Domain-agnostic component interfaces
 - `docs/public-api.md`
@@ -127,6 +128,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 - `docs/props-guidelines.md`
 
 **Phase 6-7 (Main Project):**
+
 - `apps/web/src/adapters/ui/` adapter layer
 - Updated frontend component usages
 - `docs/ui-integration-report.md`

@@ -13,12 +13,12 @@ This report identifies all instances where URL paths are hardcoded in components
 
 ## Hardcoded Routes Summary
 
-| Component | Route Pattern | Line | Count |
-|-----------|--------------|------|-------|
-| `EventCard` | `/events/${slug}` | 121 | 1 |
-| `VenueCard` | `/venues/${slug}` | 139 | 1 |
-| `ArticlesSection` | `/news/${slug}` | 44, 55 | 2 |
-| `Breadcrumbs.stories` | `/events/classical` | 21 | 1 |
+| Component             | Route Pattern       | Line   | Count |
+| --------------------- | ------------------- | ------ | ----- |
+| `EventCard`           | `/events/${slug}`   | 121    | 1     |
+| `VenueCard`           | `/venues/${slug}`   | 139    | 1     |
+| `ArticlesSection`     | `/news/${slug}`     | 44, 55 | 2     |
+| `Breadcrumbs.stories` | `/events/classical` | 21     | 1     |
 
 **Total:** 5 hardcoded route instances
 
@@ -98,7 +98,7 @@ Accept `href` prop:
 ```typescript
 interface VenueCardProps {
   // ... existing props
-  href?: string;  // Full URL instead of building from slug
+  href?: string; // Full URL instead of building from slug
 }
 ```
 
@@ -196,12 +196,12 @@ This is in a Storybook story file, not production code.
 
 ### Affected Components
 
-| Component | Independence Level |
-|-----------|-------------------|
-| EventCard | ❌ Cannot work standalone |
-| VenueCard | ❌ Cannot work standalone |
-| ArticlesSection | ❌ Cannot work standalone |
-| All other components | ✅ Independent |
+| Component            | Independence Level        |
+| -------------------- | ------------------------- |
+| EventCard            | ❌ Cannot work standalone |
+| VenueCard            | ❌ Cannot work standalone |
+| ArticlesSection      | ❌ Cannot work standalone |
+| All other components | ✅ Independent            |
 
 ---
 
@@ -243,6 +243,7 @@ This is in a Storybook story file, not production code.
 ### Recommendation
 
 **Option A (`href` prop)** is preferred because:
+
 - Simplest API
 - Most flexible
 - Consumer has full control
@@ -279,7 +280,7 @@ This is in a Storybook story file, not production code.
   venueName="Central Park"
   price="$25 - $75"
   imageUrl="/images/summer-concert.jpg"
-  href="/events/summer-concert"  // Consumer controls URL
+  href="/events/summer-concert" // Consumer controls URL
   ticketUrl="https://tickets.example.com/123"
   featured={true}
   showImage={true}
@@ -292,14 +293,13 @@ This is in a Storybook story file, not production code.
 
 ## Priority
 
-| Fix | Priority | Effort |
-|-----|----------|--------|
-| EventCard `href` prop | HIGH | 1 hour |
-| VenueCard `href` prop | HIGH | 1 hour |
-| ArticlesSection `href` in Article | MEDIUM | 30 min |
+| Fix                               | Priority | Effort |
+| --------------------------------- | -------- | ------ |
+| EventCard `href` prop             | HIGH     | 1 hour |
+| VenueCard `href` prop             | HIGH     | 1 hour |
+| ArticlesSection `href` in Article | MEDIUM   | 30 min |
 
 ---
 
 **Report Generated:** 2025-11-25  
 **Status:** Complete
-
