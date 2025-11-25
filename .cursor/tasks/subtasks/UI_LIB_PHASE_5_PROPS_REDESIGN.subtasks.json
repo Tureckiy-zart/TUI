@@ -1,0 +1,251 @@
+{
+  "parent_task": "D5",
+  "parent_title": "Props Redesign",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Redesign all component props to follow a unified, consistent, domain-agnostic structure. Establish naming conventions and standard patterns across all components.",
+  "target_files": [
+    "src/components/cards/EventCard.tsx",
+    "src/components/cards/VenueCard.tsx",
+    "src/components/sections/TrendingSection.tsx",
+    "src/components/sections/ArticlesSection.tsx",
+    "docs/props-guidelines.md"
+  ],
+  "subtasks": [
+    {
+      "id": "D5.1",
+      "title": "Create Props Guidelines document",
+      "steps": [
+        "Create docs/props-guidelines.md",
+        "Define naming conventions for all prop types",
+        "Define required vs optional prop patterns",
+        "Define standard prop names for common use cases",
+        "Document TypeScript patterns for props"
+      ],
+      "naming_conventions": {
+        "text_content": {
+          "title": "Main heading text",
+          "description": "Secondary descriptive text",
+          "label": "Short text for UI elements"
+        },
+        "urls_and_links": {
+          "href": "Navigation URL (NOT slug + base path)",
+          "imageUrl": "Image source URL (NOT image)",
+          "ticketUrl": "External ticket URL",
+          "websiteUrl": "External website URL"
+        },
+        "display_strings": {
+          "date": "Pre-formatted date string",
+          "price": "Pre-formatted price with currency",
+          "location": "Pre-formatted location/address"
+        },
+        "booleans": {
+          "featured": "Highlight/feature state",
+          "showImage": "Control image visibility",
+          "disabled": "Disabled state",
+          "loading": "Loading state"
+        },
+        "callbacks": {
+          "onClick": "Click handler",
+          "onClose": "Close handler",
+          "onChange": "Value change handler"
+        }
+      },
+      "acceptance_criteria": [
+        "docs/props-guidelines.md exists",
+        "Naming conventions documented",
+        "Examples provided for each convention"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.2",
+      "title": "Apply consistent naming to EventCard props",
+      "steps": [
+        "Rename image to imageUrl",
+        "Ensure href is used (not slug)",
+        "Ensure title is used (not name)",
+        "Ensure description is simple string",
+        "Ensure date is pre-formatted string",
+        "Ensure price is pre-formatted string with currency",
+        "Add JSDoc comments to each prop"
+      ],
+      "final_interface": {
+        "EventCardProps": {
+          "/** Main event title (pre-localized) */": "title: string",
+          "/** Event description (pre-localized) */": "description?: string",
+          "/** Pre-formatted date/time string */": "date?: string",
+          "/** Venue name (pre-localized) */": "venueName?: string",
+          "/** Pre-formatted price string with currency */": "price?: string",
+          "/** Event image URL */": "imageUrl?: string",
+          "/** Link URL for event details page */": "href?: string",
+          "/** External ticket purchase URL */": "ticketUrl?: string",
+          "/** Feature/highlight this card */": "featured?: boolean",
+          "/** Show image section */": "showImage?: boolean",
+          "/** Label for Get Tickets button */": "getTicketsLabel: string",
+          "/** Badge text for featured events */": "featuredBadgeText?: string",
+          "/** Additional CSS classes */": "className?: string"
+        }
+      },
+      "acceptance_criteria": [
+        "All props follow naming conventions",
+        "JSDoc comments on all props",
+        "TypeScript types correct"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.3",
+      "title": "Apply consistent naming to VenueCard props",
+      "steps": [
+        "Ensure name is used for title (consistent with venue context)",
+        "Rename image to imageUrl",
+        "Ensure href is used (not slug)",
+        "Ensure description is simple string",
+        "Ensure location is pre-formatted string",
+        "Ensure capacity is pre-formatted string",
+        "Add JSDoc comments to each prop"
+      ],
+      "final_interface": {
+        "VenueCardProps": {
+          "/** Venue name (pre-localized) */": "name: string",
+          "/** Venue description (pre-localized) */": "description?: string",
+          "/** Pre-formatted location/address */": "location?: string",
+          "/** Pre-formatted capacity string */": "capacity?: string",
+          "/** Venue image URL */": "imageUrl?: string",
+          "/** Link URL for venue details page */": "href?: string",
+          "/** Number of events at venue */": "eventsCount?: number",
+          "/** Feature/highlight this card */": "featured?: boolean",
+          "/** Show image section */": "showImage?: boolean",
+          "/** Label for events count */": "eventsLabel: string",
+          "/** Badge text for popular venues */": "popularBadgeText?: string",
+          "/** Label for capacity display */": "capacityLabel: string",
+          "/** Additional CSS classes */": "className?: string"
+        }
+      },
+      "acceptance_criteria": [
+        "All props follow naming conventions",
+        "JSDoc comments on all props",
+        "TypeScript types correct"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.4",
+      "title": "Apply consistent naming to ArticleItem props",
+      "steps": [
+        "Ensure title is used for main text",
+        "Rename image to imageUrl",
+        "Ensure href is required (not slug)",
+        "Ensure description is simple string",
+        "Ensure date is pre-formatted string",
+        "Add JSDoc comments to each prop"
+      ],
+      "final_interface": {
+        "ArticleItemProps": {
+          "/** Article title (pre-localized) */": "title: string",
+          "/** Article excerpt (pre-localized) */": "description?: string",
+          "/** Pre-formatted publication date */": "date?: string",
+          "/** Article image URL */": "imageUrl?: string",
+          "/** Link URL for article details page */": "href: string"
+        }
+      },
+      "acceptance_criteria": [
+        "All props follow naming conventions",
+        "href is required",
+        "imageUrl naming used"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.5",
+      "title": "Apply consistent naming to TrendingItem props",
+      "steps": [
+        "Ensure id is used for unique identifier",
+        "Ensure title is used for main text",
+        "Add optional imageUrl prop",
+        "Add optional href prop",
+        "Add optional description prop",
+        "Remove generic index signature if present"
+      ],
+      "final_interface": {
+        "TrendingItemProps": {
+          "/** Unique identifier */": "id: string",
+          "/** Item title (pre-localized) */": "title: string",
+          "/** Item description (pre-localized) */": "description?: string",
+          "/** Item image URL */": "imageUrl?: string",
+          "/** Link URL for item details page */": "href?: string"
+        }
+      },
+      "acceptance_criteria": [
+        "All props follow naming conventions",
+        "No generic index signature",
+        "Interface is specific and typed"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.6",
+      "title": "Ensure all linkable components require href",
+      "steps": [
+        "Audit all components that render links",
+        "Ensure EventCard.href controls title link",
+        "Ensure VenueCard.href controls name link",
+        "Ensure ArticleItem.href is required",
+        "Document which components are linkable",
+        "Add TypeScript strictness for required href when linkable"
+      ],
+      "acceptance_criteria": [
+        "All linkable components accept href",
+        "href behavior documented",
+        "TypeScript enforces correct usage"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.7",
+      "title": "Update all Storybook stories with new prop names",
+      "steps": [
+        "Update EventCard.stories.tsx with final prop structure",
+        "Update VenueCard.stories.tsx with final prop structure",
+        "Update ArticlesSection.stories.tsx with final prop structure",
+        "Update TrendingSection.stories.tsx with final prop structure",
+        "Ensure all stories use imageUrl (not image)",
+        "Ensure all stories use href (not slug)",
+        "Verify all stories render correctly"
+      ],
+      "acceptance_criteria": [
+        "All stories use consistent prop names",
+        "Stories demonstrate proper prop usage",
+        "No legacy prop names in stories"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D5.8",
+      "title": "Run TypeScript strict validation",
+      "steps": [
+        "Run npm run typecheck",
+        "Fix any TypeScript errors from prop changes",
+        "Ensure all components export their prop types",
+        "Verify strict mode catches prop misuse",
+        "Run npm run build to ensure dist/ is correct"
+      ],
+      "acceptance_criteria": [
+        "npm run typecheck passes",
+        "npm run build passes",
+        "All prop types exported",
+        "Strict mode enforced"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "Props guidelines document created",
+    "All components follow unified prop naming",
+    "All linkable components expect href",
+    "All card components expose title, imageUrl, description consistently",
+    "Storybook stories updated with new props"
+  ]
+}
+

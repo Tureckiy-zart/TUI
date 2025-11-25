@@ -1,0 +1,232 @@
+{
+  "parent_task": "D2",
+  "parent_title": "Domain Decoupling",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Eliminate all Tenerife domain model coupling in UI components. Replace domain-specific interfaces with generic, UI-only data structures. Based on audit report: .cursor/reports/UI_LIB_DOMAIN_DEPENDENCIES.md",
+  "target_files": [
+    "src/components/cards/EventCard.tsx",
+    "src/components/cards/VenueCard.tsx",
+    "src/components/sections/TrendingSection.tsx",
+    "src/components/sections/ArticlesSection.tsx",
+    "docs/domain-decoupling-report.md"
+  ],
+  "subtasks": [
+    {
+      "id": "D2.1",
+      "title": "Refactor EventCardEvent interface to flat EventCardProps",
+      "steps": [
+        "Create new flat EventCardProps interface in EventCard.tsx",
+        "Replace _id with no direct equivalent (consumer uses React key)",
+        "Replace name.{en,es,ru} multilingual object with title: string",
+        "Replace description.{en,es,ru} with description?: string",
+        "Replace venue_id.name.{en,es,ru} with venueName?: string",
+        "Replace start_date with date?: string (pre-formatted)",
+        "Replace price with price?: string (pre-formatted with currency)",
+        "Replace image with imageUrl?: string",
+        "Add href?: string for external link control",
+        "Keep ticket_url as ticketUrl?: string",
+        "Keep featured, showImage, getTicketsLabel, featuredBadgeText props"
+      ],
+      "new_interface": {
+        "EventCardProps": {
+          "title": "string (required, pre-localized)",
+          "description": "string | undefined (pre-localized)",
+          "date": "string | undefined (pre-formatted display string)",
+          "venueName": "string | undefined (pre-localized)",
+          "price": "string | undefined (pre-formatted with currency)",
+          "imageUrl": "string | undefined",
+          "href": "string | undefined (full URL)",
+          "ticketUrl": "string | undefined",
+          "featured": "boolean | undefined",
+          "showImage": "boolean | undefined",
+          "getTicketsLabel": "string (required)",
+          "featuredBadgeText": "string | undefined",
+          "className": "string | undefined"
+        }
+      },
+      "acceptance_criteria": [
+        "EventCardEvent interface removed or deprecated",
+        "EventCardProps is flat without nested objects",
+        "No multilingual {en,es,ru} pattern in interface",
+        "No MongoDB _id or venue_id naming"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.2",
+      "title": "Update EventCard component implementation",
+      "steps": [
+        "Update component to use new EventCardProps",
+        "Remove multilingual fallback logic (lines 41-55)",
+        "Use props directly: title, description, venueName, date, price",
+        "Update imageUrl usage (was event.image)",
+        "Update ticketUrl usage (was event.ticket_url)",
+        "Update all conditional rendering to use new props",
+        "Ensure TypeScript strict mode passes"
+      ],
+      "acceptance_criteria": [
+        "Component uses flat props directly",
+        "No fallback logic for multilingual objects",
+        "TypeScript compilation succeeds",
+        "Component renders correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.3",
+      "title": "Refactor VenueCardProps.venue to flat props",
+      "steps": [
+        "Remove nested venue object from VenueCardProps",
+        "Add name: string (required, pre-localized)",
+        "Add description?: string (pre-localized)",
+        "Add location?: string (pre-formatted address)",
+        "Add capacity?: string (pre-formatted)",
+        "Add imageUrl?: string",
+        "Add href?: string for external link control",
+        "Add eventsCount?: number",
+        "Remove _id, slug, coordinates from interface",
+        "Keep featured, showImage, eventsLabel, popularBadgeText, capacityLabel"
+      ],
+      "new_interface": {
+        "VenueCardProps": {
+          "name": "string (required, pre-localized)",
+          "description": "string | undefined (pre-localized)",
+          "location": "string | undefined (pre-formatted)",
+          "capacity": "string | undefined",
+          "imageUrl": "string | undefined",
+          "href": "string | undefined (full URL)",
+          "eventsCount": "number | undefined",
+          "featured": "boolean | undefined",
+          "showImage": "boolean | undefined",
+          "eventsLabel": "string (required)",
+          "popularBadgeText": "string | undefined",
+          "capacityLabel": "string (required)",
+          "className": "string | undefined"
+        }
+      },
+      "acceptance_criteria": [
+        "VenueCardProps has no nested venue object",
+        "All props are flat",
+        "No MongoDB naming (_id, events_count)",
+        "No multilingual pattern"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.4",
+      "title": "Update VenueCard component implementation",
+      "steps": [
+        "Update component to use new flat VenueCardProps",
+        "Remove multilingual fallback logic for name and description",
+        "Use props directly: name, description, location, capacity",
+        "Update imageUrl usage",
+        "Update all conditional rendering to use new props",
+        "Ensure TypeScript strict mode passes"
+      ],
+      "acceptance_criteria": [
+        "Component uses flat props directly",
+        "No venue.* nested access",
+        "TypeScript compilation succeeds",
+        "Component renders correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.5",
+      "title": "Refactor TrendingSection Event interface",
+      "steps": [
+        "Rename Event interface to TrendingItem",
+        "Keep id: string and title: string",
+        "Add optional props for flexibility: description?, imageUrl?, href?",
+        "Remove index signature [key: string]: unknown or make it safer",
+        "Update component to use TrendingItem",
+        "Export TrendingItem type if needed externally"
+      ],
+      "new_interface": {
+        "TrendingItem": {
+          "id": "string (required)",
+          "title": "string (required)",
+          "description": "string | undefined",
+          "imageUrl": "string | undefined",
+          "href": "string | undefined"
+        }
+      },
+      "acceptance_criteria": [
+        "Event interface renamed to TrendingItem",
+        "No domain-specific naming",
+        "Component uses new interface"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.6",
+      "title": "Refactor Article interface in ArticlesSection",
+      "steps": [
+        "Rename Article interface to ArticleItem for consistency",
+        "Replace slug: string with href: string (full URL)",
+        "Keep title: string, description?: string, date?: string",
+        "Rename image to imageUrl for consistency",
+        "Export ArticleItem type if needed externally"
+      ],
+      "new_interface": {
+        "ArticleItem": {
+          "title": "string (required)",
+          "description": "string | undefined",
+          "date": "string | undefined (pre-formatted)",
+          "imageUrl": "string | undefined",
+          "href": "string (required, full URL)"
+        }
+      },
+      "acceptance_criteria": [
+        "slug replaced with href",
+        "Interface renamed to ArticleItem",
+        "Consistent naming with other components"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.7",
+      "title": "Update all Storybook stories",
+      "steps": [
+        "Update EventCard.stories.tsx with new flat props",
+        "Update VenueCard.stories.tsx with new flat props",
+        "Update TrendingSection.stories.tsx with TrendingItem",
+        "Update ArticlesSection.stories.tsx with ArticleItem and href",
+        "Verify all stories render correctly",
+        "Add example stories showing various configurations"
+      ],
+      "acceptance_criteria": [
+        "All stories use new interfaces",
+        "Stories render without errors",
+        "Stories demonstrate proper prop usage"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D2.8",
+      "title": "Create domain decoupling documentation",
+      "steps": [
+        "Create docs/domain-decoupling-report.md",
+        "Document old vs new interface changes",
+        "Provide migration examples for each component",
+        "Document breaking changes",
+        "Add adapter pattern examples for consumer projects"
+      ],
+      "acceptance_criteria": [
+        "docs/domain-decoupling-report.md exists",
+        "Migration path documented",
+        "Breaking changes clearly listed"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "No UI component accepts domain models directly",
+    "All props are fully generic and flat",
+    "No multilingual {en,es,ru} patterns in interfaces",
+    "No MongoDB naming conventions (_id, venue_id)",
+    "Decoupling report created with migration guide"
+  ]
+}
+

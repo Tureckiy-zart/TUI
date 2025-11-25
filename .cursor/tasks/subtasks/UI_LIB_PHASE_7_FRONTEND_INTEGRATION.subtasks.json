@@ -1,0 +1,211 @@
+{
+  "parent_task": "D7",
+  "parent_title": "Frontend Integration",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Integrate new UI-library API and adapter layer across all frontend usage sites in the main Tenerife project. Replace direct domain model usage with adapter output.",
+  "target_project": "TENERIFE_MUSIC_V_2.0 (main project)",
+  "note": "This phase is executed in the MAIN PROJECT after UI library and adapters are ready",
+  "subtasks": [
+    {
+      "id": "D7.1",
+      "title": "Inventory all UI component usages",
+      "steps": [
+        "Search for all EventCard imports: grep -r 'EventCard' apps/web/src/",
+        "Search for all VenueCard imports: grep -r 'VenueCard' apps/web/src/",
+        "Search for all ArticlesSection imports: grep -r 'ArticlesSection' apps/web/src/",
+        "Search for all TrendingSection imports: grep -r 'TrendingSection' apps/web/src/",
+        "Create inventory spreadsheet/list of all usage locations",
+        "Identify pages/components that pass domain models directly",
+        "Prioritize high-traffic pages for migration"
+      ],
+      "acceptance_criteria": [
+        "Complete inventory of UI component usages",
+        "Each usage location documented",
+        "Migration priority assigned"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.2",
+      "title": "Update EventCard usages with adapter",
+      "steps": [
+        "For each EventCard usage location:",
+        "Import eventToCardProps from @/adapters/ui",
+        "Import useLocale or get current locale",
+        "Replace <EventCard event={event} /> with:",
+        "<EventCard {...eventToCardProps(event, locale)} />",
+        "Remove any direct event.* property access in parent",
+        "Verify component renders correctly",
+        "Test all event card variations (featured, non-featured, etc.)"
+      ],
+      "migration_pattern": {
+        "before": "<EventCard\n  event={event}\n  featured={event.featured}\n  showImage={true}\n  getTicketsLabel={t('getTickets')}\n/>",
+        "after": "<EventCard\n  {...eventToCardProps(event, locale)}\n  featured={event.featured}\n  showImage={true}\n  getTicketsLabel={t('getTickets')}\n/>"
+      },
+      "acceptance_criteria": [
+        "All EventCard usages updated",
+        "Domain event object not passed directly",
+        "Components render correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.3",
+      "title": "Update VenueCard usages with adapter",
+      "steps": [
+        "For each VenueCard usage location:",
+        "Import venueToCardProps from @/adapters/ui",
+        "Import useLocale or get current locale",
+        "Replace <VenueCard venue={venue} /> with:",
+        "<VenueCard {...venueToCardProps(venue, locale)} />",
+        "Remove any direct venue.* property access in parent",
+        "Verify component renders correctly"
+      ],
+      "migration_pattern": {
+        "before": "<VenueCard\n  venue={venue}\n  featured={venue.featured}\n  eventsLabel={t('events')}\n/>",
+        "after": "<VenueCard\n  {...venueToCardProps(venue, locale)}\n  featured={venue.featured}\n  eventsLabel={t('events')}\n/>"
+      },
+      "acceptance_criteria": [
+        "All VenueCard usages updated",
+        "Domain venue object not passed directly",
+        "Components render correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.4",
+      "title": "Update ArticlesSection usages with adapter",
+      "steps": [
+        "For each ArticlesSection usage location:",
+        "Import articleToItemProps from @/adapters/ui",
+        "Map articles array through adapter:",
+        "articles={articles.map(a => articleToItemProps(a, locale))}",
+        "Remove any direct article.slug access",
+        "Verify component renders correctly"
+      ],
+      "migration_pattern": {
+        "before": "<ArticlesSection\n  articles={articles}\n  readMoreLabel={t('readMore')}\n/>",
+        "after": "<ArticlesSection\n  articles={articles.map(a => articleToItemProps(a, locale))}\n  readMoreLabel={t('readMore')}\n/>"
+      },
+      "acceptance_criteria": [
+        "All ArticlesSection usages updated",
+        "Articles mapped through adapter",
+        "href used instead of slug"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.5",
+      "title": "Normalize imports to new public API",
+      "steps": [
+        "Find all @tenerife-ui imports in frontend",
+        "Verify all imports use the main entry point",
+        "Update any deep imports to use public API",
+        "Ensure tree-shaking works correctly",
+        "Remove any deprecated import patterns"
+      ],
+      "import_normalization": {
+        "correct": "import { EventCard, VenueCard, Button } from '@tenerife-ui';",
+        "incorrect": "import { EventCard } from '@tenerife-ui/components/cards/EventCard';"
+      },
+      "acceptance_criteria": [
+        "All imports use @tenerife-ui main entry",
+        "No deep imports to internal paths",
+        "Bundle size optimized"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.6",
+      "title": "Run full strict TypeScript check",
+      "steps": [
+        "Run npm run typecheck in main project",
+        "Fix any TypeScript errors from prop changes",
+        "Verify no domain types leak to UI components",
+        "Check for any unused domain type imports",
+        "Verify all adapter return types match component props"
+      ],
+      "acceptance_criteria": [
+        "npm run typecheck passes with zero errors",
+        "No type errors related to UI components",
+        "Type safety maintained"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.7",
+      "title": "Run integration tests",
+      "steps": [
+        "Run existing test suite",
+        "Fix any failing tests due to prop changes",
+        "Add new tests for adapter integration if needed",
+        "Test event card rendering with various data",
+        "Test venue card rendering with various data",
+        "Test articles section with various data"
+      ],
+      "acceptance_criteria": [
+        "All tests pass",
+        "No regressions",
+        "New adapter patterns covered"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.8",
+      "title": "Visual QA and browser testing",
+      "steps": [
+        "Test EventCard rendering in browser",
+        "Test VenueCard rendering in browser",
+        "Test ArticlesSection rendering in browser",
+        "Verify responsive behavior",
+        "Test with different locales",
+        "Compare before/after screenshots",
+        "Fix any visual regressions"
+      ],
+      "acceptance_criteria": [
+        "Components render correctly",
+        "No visual regressions",
+        "Responsive design works",
+        "Localization works correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D7.9",
+      "title": "Create integration report",
+      "steps": [
+        "Create docs/ui-integration-report.md in main project",
+        "Document all migrated component usages",
+        "Document any edge cases encountered",
+        "Document performance impact if any",
+        "Create mapping coverage summary",
+        "Add before/after code examples",
+        "Document lessons learned"
+      ],
+      "report_sections": [
+        "Executive Summary",
+        "Migration Scope",
+        "Component Coverage",
+        "Adapter Usage Statistics",
+        "Performance Impact",
+        "Issues and Resolutions",
+        "Recommendations"
+      ],
+      "acceptance_criteria": [
+        "docs/ui-integration-report.md exists",
+        "Complete migration documented",
+        "Coverage metrics included"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "All frontend usages updated to use adapters",
+    "No domain data passed directly to UI components",
+    "All imports use new @tenerife-ui public API",
+    "Full typecheck passes",
+    "Integration report created"
+  ]
+}
+

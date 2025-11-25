@@ -1,0 +1,162 @@
+{
+  "parent_task": "D1",
+  "parent_title": "Public API Rewrite",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Rewrite the public API surface of @tenerife-ui to ensure clean, stable, domain-agnostic exports. Based on audit report: .cursor/reports/UI_LIB_PUBLIC_API.md",
+  "target_files": [
+    "src/index.ts",
+    "docs/public-api.md"
+  ],
+  "subtasks": [
+    {
+      "id": "D1.1",
+      "title": "Audit and document current export structure",
+      "steps": [
+        "Scan all existing exports in src/index.ts (~70 exports)",
+        "Categorize exports by type: components, types, utilities, tokens, hooks",
+        "Identify export categories: primitives (9), layout (8), modals (5), menus (3), filters (6), etc.",
+        "Document current export structure in temporary audit file"
+      ],
+      "acceptance_criteria": [
+        "Complete inventory of all exports exists",
+        "Each export categorized by functionality",
+        "Baseline established for refactoring"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.2",
+      "title": "Add missing type exports",
+      "steps": [
+        "Add FilterOption type export from ./components/filters/types",
+        "Add FilterState type export from ./components/filters/types",
+        "Verify all component prop types are exported (ButtonProps, LinkProps, etc.)",
+        "Add any other missing interface exports identified in audit"
+      ],
+      "acceptance_criteria": [
+        "FilterOption type is importable: import { FilterOption } from '@tenerife-ui'",
+        "FilterState type is importable: import { FilterState } from '@tenerife-ui'",
+        "No TypeScript errors when importing types externally"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.3",
+      "title": "Remove duplicate and unnecessary exports",
+      "steps": [
+        "Remove EventCardSkeletonUI alias export (line ~117)",
+        "Remove VenueCardSkeletonUI alias export (line ~118)",
+        "Verify no other duplicate or aliased exports exist",
+        "Document removed exports for changelog"
+      ],
+      "acceptance_criteria": [
+        "No duplicate exports in index.ts",
+        "Only canonical component names exported",
+        "Breaking changes documented"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.4",
+      "title": "Organize exports into logical namespaces",
+      "steps": [
+        "Group design tokens exports (colors, typography, spacing, shadows, radius, motion)",
+        "Group primitive components (Button, Input, Card, Badge, Link, Typography, Label, Divider, ThemeSwitch)",
+        "Group layout components (Container, Flex, Grid, Stack, Section, Navbar, Footer, PageLayout)",
+        "Group modal/overlay components (Modal, SimpleModal, CustomDialog, ConfirmDialog, Tooltip, Popover)",
+        "Group form components (FormInput, FormSelect, FormTextarea)",
+        "Group feedback components (Alert, Progress, Toast, Skeleton)",
+        "Group card components (EventCard, VenueCard, skeletons)",
+        "Group section components (HeroSection, FeatureSection, CTASection, ArticlesSection, TrendingSection)",
+        "Group filter components (FilterBar, SearchFilters, DateRangePicker, PriceRangeSlider, FilterSelect, SearchInput)",
+        "Group navigation components (Breadcrumbs, Pagination, Tabs, DropdownMenu)",
+        "Add section comments for each group"
+      ],
+      "acceptance_criteria": [
+        "All exports organized into logical groups with comments",
+        "Easy to find related components",
+        "Clean, maintainable export structure"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.5",
+      "title": "Remove all default exports",
+      "steps": [
+        "Scan all component files for 'export default' statements",
+        "Convert any default exports to named exports",
+        "Update all internal imports to use named imports",
+        "Verify no default exports remain in any component file"
+      ],
+      "acceptance_criteria": [
+        "Zero default exports in component files",
+        "All imports use named import syntax",
+        "Tree-shaking optimized"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.6",
+      "title": "Prevent deep import leaks",
+      "steps": [
+        "Ensure src/index.ts is the only public entry point",
+        "Verify package.json exports field restricts access to internal paths",
+        "Add internal barrel exports where needed (components/index.ts, etc.)",
+        "Test that deep imports like '@tenerife-ui/components/Button' fail"
+      ],
+      "acceptance_criteria": [
+        "Only src/index.ts exposes public API",
+        "Deep imports to internal paths are blocked",
+        "package.json exports field properly configured"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.7",
+      "title": "Create public API documentation",
+      "steps": [
+        "Create docs/public-api.md with complete API reference",
+        "Document all exported components with brief descriptions",
+        "Document all exported types with their purposes",
+        "Document all exported utilities and hooks",
+        "Add usage examples for each entry point (main, /styles, /preset, /tokens, /theme)",
+        "Add tree-shaking recommendations"
+      ],
+      "acceptance_criteria": [
+        "docs/public-api.md exists and is comprehensive",
+        "All ~70 exports documented",
+        "Entry points explained",
+        "Examples provided for common imports"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D1.8",
+      "title": "Verify and test final public API",
+      "steps": [
+        "Run TypeScript compilation to verify exports",
+        "Test imports from consuming project perspective",
+        "Verify all exports work correctly in Storybook",
+        "Run build to ensure dist/ exports match source",
+        "Document any breaking changes in CHANGELOG"
+      ],
+      "acceptance_criteria": [
+        "npm run build succeeds",
+        "npm run typecheck succeeds",
+        "No internal paths importable externally",
+        "index.ts is the only export root",
+        "docs/public-api.md exists and is complete"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "No internal paths are imported externally",
+    "index.ts is the only export root",
+    "All types properly exported",
+    "No duplicate exports",
+    "docs/public-api.md exists and documents all exports"
+  ]
+}
+

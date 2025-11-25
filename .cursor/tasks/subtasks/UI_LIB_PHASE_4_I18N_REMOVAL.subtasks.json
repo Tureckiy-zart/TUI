@@ -1,0 +1,174 @@
+{
+  "parent_task": "D4",
+  "parent_title": "I18n Removal",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Remove multilingual Tenerife-specific object patterns (name.en, name.es, name.ru) from UI components. Components should accept pre-localized strings. Based on audit report: .cursor/reports/UI_LIB_COUPLING_ANALYSIS.md",
+  "target_files": [
+    "src/components/cards/EventCard.tsx",
+    "src/components/cards/VenueCard.tsx",
+    "docs/i18n-removal.md"
+  ],
+  "multilingual_patterns_found": [
+    {
+      "file": "src/components/cards/EventCard.tsx",
+      "lines": "41-55",
+      "patterns": [
+        "event?.name?.en || event?.name?.es || event?.name?.ru",
+        "event?.description?.en || event?.description?.es",
+        "event?.venue_id?.name?.en || event?.venue_id?.name?.es"
+      ],
+      "count": 3
+    },
+    {
+      "file": "src/components/cards/VenueCard.tsx",
+      "patterns": [
+        "venue?.name?.en || venue?.name?.es || venue?.name?.ru",
+        "venue?.description?.en || venue?.description?.es"
+      ],
+      "count": 2
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "D4.1",
+      "title": "Remove multilingual fallback logic from EventCard",
+      "steps": [
+        "Locate multilingual extraction logic at lines 41-55",
+        "Remove: const title = event?.name?.en || event?.name?.es || event?.name?.ru || ''",
+        "Replace with: const title = props.title",
+        "Remove: const description = event?.description?.en || event?.description?.es || ''",
+        "Replace with: const description = props.description",
+        "Remove: const venue = event?.venue_id?.name?.en || event?.venue_id?.name?.es || ''",
+        "Replace with: const venueName = props.venueName",
+        "Update all usages to use new prop names"
+      ],
+      "before_code": "const title = typeof event?.name === 'string' ? event.name : event?.name?.en || event?.name?.es || event?.name?.ru || '';",
+      "after_code": "const { title, description, venueName, date, price, imageUrl, href } = props;",
+      "acceptance_criteria": [
+        "No multilingual fallback logic in EventCard",
+        "Component uses props directly",
+        "TypeScript compilation succeeds"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D4.2",
+      "title": "Remove multilingual fallback logic from VenueCard",
+      "steps": [
+        "Locate multilingual extraction logic in VenueCard",
+        "Remove: const name = venue?.name?.en || venue?.name?.es || venue?.name?.ru || ''",
+        "Replace with: const name = props.name",
+        "Remove: const description = venue?.description?.en || venue?.description?.es || ''",
+        "Replace with: const description = props.description",
+        "Update all usages to use new prop names"
+      ],
+      "before_code": "const name = typeof venue?.name === 'string' ? venue.name : venue?.name?.en || venue?.name?.es || venue?.name?.ru || '';",
+      "after_code": "const { name, description, location, capacity, imageUrl, href } = props;",
+      "acceptance_criteria": [
+        "No multilingual fallback logic in VenueCard",
+        "Component uses props directly",
+        "TypeScript compilation succeeds"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D4.3",
+      "title": "Remove multilingual type patterns from interfaces",
+      "steps": [
+        "Remove { en?: string; es?: string; ru?: string } type pattern from EventCardEvent",
+        "Remove { en?: string; es?: string; ru?: string } type pattern from VenueCardProps.venue",
+        "Replace with simple string types in new interfaces",
+        "Ensure no multilingual patterns remain in any interface"
+      ],
+      "type_pattern_to_remove": "{ en?: string; es?: string; ru?: string }",
+      "type_pattern_replacement": "string",
+      "acceptance_criteria": [
+        "No multilingual object types in any interface",
+        "All text props are simple strings",
+        "TypeScript compilation succeeds"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D4.4",
+      "title": "Update all Storybook stories with pre-localized strings",
+      "steps": [
+        "Update EventCard.stories.tsx: use simple strings for title, description, venueName",
+        "Update VenueCard.stories.tsx: use simple strings for name, description",
+        "Remove any multilingual object examples from stories",
+        "Add comments explaining that consumers handle localization"
+      ],
+      "example_story_data": {
+        "EventCard": {
+          "title": "Summer Music Festival",
+          "description": "A three-day outdoor music festival",
+          "venueName": "Central Park"
+        },
+        "VenueCard": {
+          "name": "Madison Square Garden",
+          "description": "World-famous indoor arena"
+        }
+      },
+      "acceptance_criteria": [
+        "All stories use simple string props",
+        "No multilingual objects in story data",
+        "Stories render correctly"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D4.5",
+      "title": "Verify no multilingual patterns remain",
+      "steps": [
+        "Run grep search: grep -r '.en ||' src/ --include='*.tsx'",
+        "Run grep search: grep -r '.es ||' src/ --include='*.tsx'",
+        "Run grep search: grep -r '.ru ||' src/ --include='*.tsx'",
+        "Run grep search: grep -r 'en?: string' src/ --include='*.ts'",
+        "Verify zero results in component files",
+        "Document verification results"
+      ],
+      "acceptance_criteria": [
+        "Zero multilingual fallback patterns in components",
+        "Zero multilingual type patterns in interfaces",
+        "Library is language-agnostic"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D4.6",
+      "title": "Create i18n removal documentation",
+      "steps": [
+        "Create docs/i18n-removal.md",
+        "Document the problem: hardcoded language codes prevent flexibility",
+        "Document the solution: pre-localized strings",
+        "Show consumer-side localization patterns",
+        "Provide code examples for common i18n libraries (react-intl, next-intl, i18next)"
+      ],
+      "documentation_sections": [
+        "Problem: Hardcoded Language Fallbacks",
+        "Solution: Pre-Localized Strings",
+        "Consumer-Side Localization",
+        "Integration Examples",
+        "Best Practices"
+      ],
+      "consumer_example": {
+        "description": "Consumer localizes data before passing to component",
+        "code": "const locale = useLocale();\n<EventCard\n  title={event.name[locale]}\n  description={event.description[locale]}\n  venueName={event.venue.name[locale]}\n/>"
+      },
+      "acceptance_criteria": [
+        "docs/i18n-removal.md exists",
+        "Consumer localization patterns documented",
+        "Integration examples provided"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "No multilingual structures remain in components",
+    "All text props use simple strings",
+    "Components are language-agnostic",
+    "Documentation shows consumer-side localization"
+  ]
+}
+

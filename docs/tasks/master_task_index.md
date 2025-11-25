@@ -1,7 +1,7 @@
 # 📋 Master Task V3 - Complete Index
 
-**Version:** 3.0  
-**Last Updated:** 2025-11-20  
+**Version:** 3.1  
+**Last Updated:** 2025-11-25  
 **Purpose:** Navigation and reference guide for all Master Task V3 layers and tasks
 
 ---
@@ -10,6 +10,7 @@
 
 - [Overview](#overview)
 - [Layer 0: Orientation & Upgrade Layer](#layer-0-orientation--upgrade-layer)
+- [Critical Decoupling Layer (P0)](#critical-decoupling-layer-p0)
 - [Layer 1: Foundation Layer](#layer-1-foundation-layer)
 - [Layer 2: Core Components Layer](#layer-2-core-components-layer)
 - [Layer 3: Advanced Components Layer](#layer-3-advanced-components-layer)
@@ -24,7 +25,9 @@
 
 ## Overview
 
-Master Task V3 defines **64 tasks** across **8 layers** to build a universal, theme-driven UI component library. All tasks follow a strict dependency chain and must be executed in the correct order.
+Master Task V3.1 defines **71 tasks** across **9 layers** to build a universal, theme-driven UI component library. All tasks follow a strict dependency chain and must be executed in the correct order.
+
+**NEW: Critical Decoupling Layer (P0)** - Added 7 critical tasks for full UI library independence from Tenerife domain.
 
 **Key Principles:**
 
@@ -66,6 +69,77 @@ Master Task V3 defines **64 tasks** across **8 layers** to build a universal, th
 - [Design System](../tenerife_audit/design_system.md) (missing)
 - [Components Redesign](../tenerife_audit/components_redesign.md) (missing)
 - [Layout and Brand Guide](../tenerife_audit/layout_and_brand_guide.md) (missing)
+
+---
+
+## Critical Decoupling Layer (P0)
+
+**Priority:** P0 - CRITICAL  
+**Type:** Unplanned Critical Work  
+**Branch:** `feature/ui-lib-full-decoupling`  
+**Purpose:** Full 7-phase architectural refactor to remove domain coupling, multilingual logic, route hardcoding, redesign props, rewrite public API, create adapter layer, and integrate consumer-side mapping.
+
+### Tasks
+
+| ID     | Title                              | Dependencies | Status  |
+| ------ | ---------------------------------- | ------------ | ------- |
+| **D1** | Public API Rewrite                 | None         | pending |
+| **D2** | Domain Decoupling                  | D1           | pending |
+| **D3** | Route Decoupling                   | D2           | pending |
+| **D4** | I18n Removal                       | D3           | pending |
+| **D5** | Props Redesign                     | D4           | pending |
+| **D6** | Adapter Layer (Main Project)       | D5           | pending |
+| **D7** | Frontend Integration               | D6           | pending |
+
+### Dependency Chain
+
+```
+D1 → D2 → D3 → D4 → D5 → D6 → D7
+```
+
+### Key Documentation
+
+- [UI_LIB_PUBLIC_API.md](../../.cursor/reports/UI_LIB_PUBLIC_API.md)
+- [UI_LIB_DOMAIN_DEPENDENCIES.md](../../.cursor/reports/UI_LIB_DOMAIN_DEPENDENCIES.md)
+- [UI_LIB_ROUTE_HARDCODING.md](../../.cursor/reports/UI_LIB_ROUTE_HARDCODING.md)
+- [UI_LIB_COUPLING_ANALYSIS.md](../../.cursor/reports/UI_LIB_COUPLING_ANALYSIS.md)
+- [UI_LIB_INDEPENDENCE_ROADMAP.md](../../.cursor/reports/UI_LIB_INDEPENDENCE_ROADMAP.md)
+
+### Subtask Files
+
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_1_PUBLIC_API_REWRITE.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_2_DOMAIN_DECOUPLING.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_3_ROUTE_DECOUPLING.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_4_I18N_REMOVAL.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_5_PROPS_REDESIGN.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_6_ADAPTER_LAYER.subtasks.json`
+- `.cursor/tasks/subtasks/UI_LIB_PHASE_7_FRONTEND_INTEGRATION.subtasks.json`
+
+### Outputs
+
+**Phase 1-5 (UI Library):**
+- Refactored `src/index.ts` with clean public API
+- Domain-agnostic component interfaces
+- `docs/public-api.md`
+- `docs/domain-decoupling-report.md`
+- `docs/route-decoupling.md`
+- `docs/i18n-removal.md`
+- `docs/props-guidelines.md`
+
+**Phase 6-7 (Main Project):**
+- `apps/web/src/adapters/ui/` adapter layer
+- Updated frontend component usages
+- `docs/ui-integration-report.md`
+
+### Completion Criteria
+
+- [ ] All 7 subtask files generated
+- [ ] No internal paths importable externally
+- [ ] No domain types in UI components
+- [ ] No hardcoded routes in UI components
+- [ ] No multilingual patterns in UI components
+- [ ] Adapter layer isolates domain from UI
+- [ ] Full typecheck passes in both projects
 
 ---
 
@@ -247,8 +321,10 @@ Master Task V3 defines **64 tasks** across **8 layers** to build a universal, th
 ### Critical Path (Must Execute First)
 
 ```
-G0 → U0 → [F0-F9] → C0 → C1-C10 → A1-A11 → Q1-Q8 → P1-P3 → CI1-CI3 → M1-M3
+G0 → U0 → [D1-D7] → [F0-F9] → C0 → C1-C10 → A1-A11 → Q1-Q8 → P1-P3 → CI1-CI3 → M1-M3
 ```
+
+**Note:** The Critical Decoupling Layer (D1-D7) is now P0 priority and must be completed before continuing with other layers.
 
 ### Parallel Execution Opportunities
 
@@ -320,7 +396,7 @@ G0 → U0 → [F0-F9] → C0 → C1-C10 → A1-A11 → Q1-Q8 → P1-P3 → CI1-C
 
 ---
 
-**Last Updated:** 2025-11-20  
-**Master Task Version:** 3.0  
-**Total Tasks:** 64  
-**Total Layers:** 8
+**Last Updated:** 2025-11-25  
+**Master Task Version:** 3.1  
+**Total Tasks:** 71  
+**Total Layers:** 9 (including Critical Decoupling Layer)

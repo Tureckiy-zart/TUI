@@ -1,0 +1,168 @@
+{
+  "parent_task": "D3",
+  "parent_title": "Route Decoupling",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Remove all hardcoded Tenerife routes from UI components and replace with generic href props. Based on audit report: .cursor/reports/UI_LIB_ROUTE_HARDCODING.md",
+  "target_files": [
+    "src/components/cards/EventCard.tsx",
+    "src/components/cards/VenueCard.tsx",
+    "src/components/sections/ArticlesSection.tsx",
+    "docs/route-decoupling.md"
+  ],
+  "hardcoded_routes_found": [
+    {
+      "file": "src/components/cards/EventCard.tsx",
+      "line": 121,
+      "pattern": "/events/${event.slug}",
+      "count": 1
+    },
+    {
+      "file": "src/components/cards/VenueCard.tsx",
+      "line": 139,
+      "pattern": "/venues/${venue.slug}",
+      "count": 1
+    },
+    {
+      "file": "src/components/sections/ArticlesSection.tsx",
+      "lines": [44, 55],
+      "pattern": "/news/${article.slug}",
+      "count": 2
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "D3.1",
+      "title": "Add href prop to EventCard and remove hardcoded route",
+      "steps": [
+        "Add href?: string to EventCardProps interface",
+        "Locate Link component at line ~121 in EventCard.tsx",
+        "Replace `/events/${event.slug}` with href prop",
+        "Make href required when component is linkable (title clickable)",
+        "Handle case when href is not provided (render as text, not link)",
+        "Update TypeScript types to reflect required/optional status"
+      ],
+      "before_code": "<Link href={`/events/${event.slug}`} variant=\"ghost\">{title}</Link>",
+      "after_code": "{href ? (<Link href={href} variant=\"ghost\">{title}</Link>) : (<span>{title}</span>)}",
+      "acceptance_criteria": [
+        "No /events/ route in EventCard.tsx",
+        "href prop controls link destination",
+        "TypeScript types updated",
+        "Component gracefully handles missing href"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D3.2",
+      "title": "Add href prop to VenueCard and remove hardcoded route",
+      "steps": [
+        "Add href?: string to VenueCardProps interface",
+        "Locate Link component at line ~139 in VenueCard.tsx",
+        "Replace `/venues/${venue.slug}` with href prop",
+        "Make href required when component is linkable (name clickable)",
+        "Handle case when href is not provided (render as text, not link)",
+        "Update TypeScript types to reflect required/optional status"
+      ],
+      "before_code": "<Link href={`/venues/${venue.slug}`} variant=\"ghost\">{name}</Link>",
+      "after_code": "{href ? (<Link href={href} variant=\"ghost\">{name}</Link>) : (<span>{name}</span>)}",
+      "acceptance_criteria": [
+        "No /venues/ route in VenueCard.tsx",
+        "href prop controls link destination",
+        "TypeScript types updated",
+        "Component gracefully handles missing href"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D3.3",
+      "title": "Update ArticlesSection to use href from Article interface",
+      "steps": [
+        "Update Article/ArticleItem interface: replace slug with href: string",
+        "Locate first Link at line ~44 (title link)",
+        "Replace `/news/${article.slug}` with article.href",
+        "Locate second Link at line ~55 (read more link)",
+        "Replace `/news/${article.slug}` with article.href",
+        "Make href required in ArticleItem interface"
+      ],
+      "before_code": "<Link href={`/news/${article.slug}`}>",
+      "after_code": "<Link href={article.href}>",
+      "acceptance_criteria": [
+        "No /news/ route in ArticlesSection.tsx",
+        "ArticleItem.href is required string",
+        "Both links use article.href",
+        "TypeScript compilation succeeds"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D3.4",
+      "title": "Update Storybook stories with href examples",
+      "steps": [
+        "Update EventCard.stories.tsx: add href prop to all stories",
+        "Update VenueCard.stories.tsx: add href prop to all stories",
+        "Update ArticlesSection.stories.tsx: add href to article items",
+        "Show examples of various URL patterns (relative, absolute, hash)",
+        "Verify all stories render correctly"
+      ],
+      "example_story_data": {
+        "EventCard": "href: '/events/summer-concert-2024'",
+        "VenueCard": "href: '/venues/central-park-amphitheater'",
+        "ArticleItem": "href: '/blog/music-festival-guide'"
+      },
+      "acceptance_criteria": [
+        "All stories include href prop",
+        "Stories demonstrate flexible URL usage",
+        "No hardcoded routes in story examples"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D3.5",
+      "title": "Verify no hardcoded routes remain",
+      "steps": [
+        "Run grep search: grep -r '/events/' src/ --include='*.tsx' | grep -v stories",
+        "Run grep search: grep -r '/venues/' src/ --include='*.tsx' | grep -v stories",
+        "Run grep search: grep -r '/news/' src/ --include='*.tsx' | grep -v stories",
+        "Verify only story files contain example routes",
+        "Document verification results"
+      ],
+      "acceptance_criteria": [
+        "Zero hardcoded routes in non-story component files",
+        "Only example routes exist in story files"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D3.6",
+      "title": "Create route decoupling documentation",
+      "steps": [
+        "Create docs/route-decoupling.md",
+        "Document the problem: hardcoded routes prevent reusability",
+        "Document the solution: href prop pattern",
+        "Provide migration examples for each component",
+        "Show how consumers should generate URLs",
+        "Document URL builder pattern for complex routing needs"
+      ],
+      "documentation_sections": [
+        "Problem: Hardcoded Routes",
+        "Solution: href Prop Pattern",
+        "Migration Guide",
+        "Consumer URL Generation Examples",
+        "Advanced: URL Builder Functions"
+      ],
+      "acceptance_criteria": [
+        "docs/route-decoupling.md exists",
+        "Migration path clear for consumers",
+        "Examples cover common routing scenarios"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "No hardcoded routes remain in UI library components",
+    "All linkable components accept href prop",
+    "Components work with any URL structure",
+    "Documentation explains migration and usage"
+  ]
+}
+

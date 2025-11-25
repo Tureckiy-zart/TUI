@@ -1,0 +1,203 @@
+{
+  "parent_task": "D6",
+  "parent_title": "Adapter Layer",
+  "priority": "P0",
+  "type": "critical_unplanned_work",
+  "description": "Create full adapter layer in main Tenerife project (NOT UI-lib) to map domain models to UI component props. This isolates domain logic from UI components.",
+  "target_project": "TENERIFE_MUSIC_V_2.0 (main project)",
+  "target_directory": "apps/web/src/adapters/ui/",
+  "note": "This phase is executed in the MAIN PROJECT, not the UI library",
+  "target_files": [
+    "apps/web/src/adapters/ui/index.ts",
+    "apps/web/src/adapters/ui/eventToCardProps.ts",
+    "apps/web/src/adapters/ui/venueToCardProps.ts",
+    "apps/web/src/adapters/ui/articleToItemProps.ts",
+    "apps/web/src/adapters/ui/tagToChipProps.ts",
+    "apps/web/src/adapters/ui/formatters.ts",
+    "apps/web/src/adapters/ui/__tests__/adapters.test.ts"
+  ],
+  "subtasks": [
+    {
+      "id": "D6.1",
+      "title": "Create adapters directory structure",
+      "steps": [
+        "Create apps/web/src/adapters/ directory",
+        "Create apps/web/src/adapters/ui/ subdirectory",
+        "Create apps/web/src/adapters/ui/index.ts barrel export",
+        "Add adapters directory to tsconfig paths if needed"
+      ],
+      "acceptance_criteria": [
+        "Directory structure exists",
+        "Barrel export file created",
+        "TypeScript recognizes path"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.2",
+      "title": "Create formatters utility module",
+      "steps": [
+        "Create apps/web/src/adapters/ui/formatters.ts",
+        "Implement formatDate(date: Date | string, locale: string): string",
+        "Implement formatPrice(price: number, currency: string, locale: string): string",
+        "Implement formatPriceRange(min: number, max: number, currency: string, locale: string): string",
+        "Implement formatLocation(address: string, city: string, region?: string): string",
+        "Add JSDoc documentation for each formatter",
+        "Export all formatters"
+      ],
+      "example_code": {
+        "formatDate": "export function formatDate(date: Date | string, locale: string): string {\n  const d = typeof date === 'string' ? new Date(date) : date;\n  return new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeStyle: 'short' }).format(d);\n}",
+        "formatPrice": "export function formatPrice(price: number, currency: string, locale: string): string {\n  return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(price);\n}"
+      },
+      "acceptance_criteria": [
+        "All formatters implemented",
+        "Locale-aware formatting",
+        "JSDoc documentation complete"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.3",
+      "title": "Implement eventToCardProps adapter",
+      "steps": [
+        "Create apps/web/src/adapters/ui/eventToCardProps.ts",
+        "Import Event domain type from models",
+        "Import EventCardProps from @tenerife-ui",
+        "Implement eventToCardProps(event: Event, locale: string): EventCardProps",
+        "Extract localized title: event.name[locale]",
+        "Extract localized description: event.description[locale]",
+        "Extract localized venue name: event.venue?.name[locale]",
+        "Format date using formatDate(event.start_date, locale)",
+        "Format price using formatPriceRange if min/max, else formatPrice",
+        "Build href: /events/${event.slug}",
+        "Map ticket_url to ticketUrl",
+        "Add JSDoc documentation"
+      ],
+      "function_signature": "export function eventToCardProps(\n  event: Event,\n  locale: string,\n  options?: { basePath?: string; currency?: string }\n): EventCardProps",
+      "acceptance_criteria": [
+        "Function maps all Event fields to EventCardProps",
+        "Localization handled correctly",
+        "Date and price formatted",
+        "URL built from slug",
+        "TypeScript return type matches EventCardProps"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.4",
+      "title": "Implement venueToCardProps adapter",
+      "steps": [
+        "Create apps/web/src/adapters/ui/venueToCardProps.ts",
+        "Import Venue domain type from models",
+        "Import VenueCardProps from @tenerife-ui",
+        "Implement venueToCardProps(venue: Venue, locale: string): VenueCardProps",
+        "Extract localized name: venue.name[locale]",
+        "Extract localized description: venue.description[locale]",
+        "Format location using formatLocation(venue.address, venue.city, venue.region)",
+        "Map capacity to string",
+        "Build href: /venues/${venue.slug}",
+        "Map events_count to eventsCount",
+        "Add JSDoc documentation"
+      ],
+      "function_signature": "export function venueToCardProps(\n  venue: Venue,\n  locale: string,\n  options?: { basePath?: string }\n): VenueCardProps",
+      "acceptance_criteria": [
+        "Function maps all Venue fields to VenueCardProps",
+        "Localization handled correctly",
+        "Location formatted",
+        "URL built from slug",
+        "TypeScript return type matches VenueCardProps"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.5",
+      "title": "Implement articleToItemProps adapter",
+      "steps": [
+        "Create apps/web/src/adapters/ui/articleToItemProps.ts",
+        "Import Article domain type from models",
+        "Import ArticleItemProps from @tenerife-ui",
+        "Implement articleToItemProps(article: Article, locale: string): ArticleItemProps",
+        "Extract localized title: article.title[locale]",
+        "Extract localized description: article.excerpt[locale]",
+        "Format date using formatDate(article.published_at, locale)",
+        "Build href: /news/${article.slug}",
+        "Map image to imageUrl",
+        "Add JSDoc documentation"
+      ],
+      "function_signature": "export function articleToItemProps(\n  article: Article,\n  locale: string,\n  options?: { basePath?: string }\n): ArticleItemProps",
+      "acceptance_criteria": [
+        "Function maps all Article fields to ArticleItemProps",
+        "Localization handled correctly",
+        "Date formatted",
+        "URL built from slug",
+        "TypeScript return type matches ArticleItemProps"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.6",
+      "title": "Implement tagToChipProps adapter",
+      "steps": [
+        "Create apps/web/src/adapters/ui/tagToChipProps.ts",
+        "Import Tag/Category domain type from models",
+        "Implement tagToChipProps(tag: Tag, locale: string): ChipProps",
+        "Extract localized label: tag.name[locale]",
+        "Map tag.slug to value",
+        "Optionally map tag.color to variant",
+        "Add JSDoc documentation"
+      ],
+      "function_signature": "export function tagToChipProps(\n  tag: Tag,\n  locale: string\n): { label: string; value: string; variant?: string }",
+      "acceptance_criteria": [
+        "Function maps Tag fields to chip/badge props",
+        "Localization handled correctly",
+        "Consistent with other adapters"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.7",
+      "title": "Create barrel export for adapters",
+      "steps": [
+        "Update apps/web/src/adapters/ui/index.ts",
+        "Export all adapter functions",
+        "Export all formatter functions",
+        "Export any shared types",
+        "Add module documentation"
+      ],
+      "barrel_export": "// Adapters\nexport { eventToCardProps } from './eventToCardProps';\nexport { venueToCardProps } from './venueToCardProps';\nexport { articleToItemProps } from './articleToItemProps';\nexport { tagToChipProps } from './tagToChipProps';\n\n// Formatters\nexport * from './formatters';",
+      "acceptance_criteria": [
+        "All adapters exported from index.ts",
+        "Clean import: import { eventToCardProps } from '@/adapters/ui'"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "D6.8",
+      "title": "Write type tests for adapters",
+      "steps": [
+        "Create apps/web/src/adapters/ui/__tests__/adapters.test.ts",
+        "Test that eventToCardProps returns EventCardProps type",
+        "Test that venueToCardProps returns VenueCardProps type",
+        "Test that articleToItemProps returns ArticleItemProps type",
+        "Test that domain types do NOT leak into UI component usage",
+        "Add type-level assertions using TypeScript",
+        "Run tests to verify type safety"
+      ],
+      "type_test_example": "// Type test: Domain type should not be assignable to UI prop\n// @ts-expect-error - Event should not be directly assignable to EventCardProps\nconst badProps: EventCardProps = event;\n\n// This should work\nconst goodProps: EventCardProps = eventToCardProps(event, 'en');",
+      "acceptance_criteria": [
+        "Type tests pass",
+        "Domain types cannot leak to UI components",
+        "Adapter output types match UI prop types exactly"
+      ],
+      "status": "pending"
+    }
+  ],
+  "completion_criteria": [
+    "Adapter layer exists in apps/web/src/adapters/ui/",
+    "All domain → UI transformations implemented",
+    "No domain types pass directly into UI components",
+    "Type tests verify isolation",
+    "All adapters documented with JSDoc"
+  ]
+}
+
