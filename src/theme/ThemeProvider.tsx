@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { minimalBrand,neonBrand } from "@/themes";
+import { minimalBrand, neonBrand } from "@/themes";
 import {
   applyBrandOverrides,
   getActiveBrand,

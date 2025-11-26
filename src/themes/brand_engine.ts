@@ -368,8 +368,8 @@ export function applyBrandOverrides(brand: BrandPackage, mode: Mode): void {
   }
 
   const root = document.documentElement;
-  const {namespace} = brand;
-  const {overrides} = theme;
+  const { namespace } = brand;
+  const { overrides } = theme;
 
   // Remove previous brand variables (cleanup)
   // This ensures namespace isolation - previous brand's variables are removed
@@ -526,7 +526,7 @@ export function applyBrandOverrides(brand: BrandPackage, mode: Mode): void {
     }
 
     if (overrides.radius.componentRadius) {
-      const {componentRadius} = overrides.radius;
+      const { componentRadius } = overrides.radius;
       if (componentRadius.button) {
         Object.entries(componentRadius.button).forEach(([key, value]) => {
           root.style.setProperty(`--brand-${namespace}-radius-button-${key}`, value);
@@ -566,7 +566,7 @@ export function removeBrandOverrides(namespace: string): void {
   const root = document.documentElement;
 
   // Remove all CSS variables with brand namespace prefix
-  const {style} = root;
+  const { style } = root;
   const propsToRemove: string[] = [];
 
   // Collect all properties that start with --brand-{namespace}-
