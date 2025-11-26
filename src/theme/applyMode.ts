@@ -1,6 +1,12 @@
 "use client";
 
 import { getTheme } from "@/themes";
+import {
+  loadBrand,
+  getActiveBrand,
+  applyBrandOverrides,
+  removeBrandOverrides,
+} from "@/themes/brand_engine";
 import type { ThemeOverride } from "@/themes/types";
 import {
   accentColors as baseAccentColors,
@@ -287,15 +293,35 @@ function updateCSSVariablesFromTokens(mode: Mode) {
 /**
  * Apply theme and mode to document
  * Updates DOM attributes, classes, and CSS variables from tokens with theme overrides
+ * Also applies brand overrides if a brand is specified
  */
 export async function applyDocumentTheme(
   mode: Mode,
   themeName: "default" | "dark" | "brand" = "default",
+  brandId: string | null = null,
 ) {
   if (typeof document === "undefined") return;
 
   // Load theme override
   await loadThemeOverride(themeName);
+
+  // Handle brand switching
+  const currentBrand = getActiveBrand();
+  
+  // If switching brands, remove previous brand overrides
+  if (currentBrand && (!brandId || currentBrand.id !== brandId)) {
+    removeBrandOverrides(currentBrand.namespace);
+  }
+
+  // Apply new brand if specified
+  if (brandId) {
+    try {
+      const brand = await loadBrand(brandId);
+      applyBrandOverrides(brand, mode);
+    } catch (error) {
+      console.warn(`Failed to apply brand "${brandId}":`, error);
+    }
+  }
 
   const { documentElement: root, body } = document;
 
@@ -320,6 +346,11 @@ export async function applyDocumentTheme(
   if (body) {
     body.dataset.mode = mode;
     body.dataset.theme = themeName;
+    if (brandId) {
+      body.dataset.brand = brandId;
+    } else {
+      body.removeAttribute("data-brand");
+    }
     body.style.backgroundColor = `hsl(${background})`;
     body.style.color = `hsl(${foreground})`;
   }
@@ -329,17 +360,18 @@ export async function applyDocumentTheme(
  * Apply mode to document (backward compatible)
  * Updates DOM attributes, classes, and CSS variables from tokens
  */
-export function applyDocumentMode(mode: Mode) {
-  // Use current theme from DOM or default
+export async function applyDocumentMode(mode: Mode) {
+  // Use current theme and brand from DOM or default
   if (typeof document !== "undefined") {
     const root = document.documentElement;
     const currentTheme = (root.getAttribute(THEME_ATTRIBUTE) || "default") as
       | "default"
       | "dark"
       | "brand";
-    applyDocumentTheme(mode, currentTheme);
+    const currentBrand = root.getAttribute("data-brand") || null;
+    await applyDocumentTheme(mode, currentTheme, currentBrand);
   } else {
-    applyDocumentTheme(mode, "default");
+    await applyDocumentTheme(mode, "default", null);
   }
 }
 
@@ -396,6 +428,53 @@ export function persistTheme(theme: "default" | "dark" | "brand", storageKey: st
 
   try {
     localStorage.setItem(storageKey, theme);
+  } catch {
+    // localStorage access can fail in private mode
+  }
+}
+
+/**
+ * Get initial brand from various sources
+ */
+export function getInitialBrand(
+  defaultBrand: string | null = null,
+  storageKey: string = "tm_brand",
+): string | null {
+  if (typeof window === "undefined") return defaultBrand;
+
+  const root = document.documentElement;
+
+  // Check DOM attribute
+  const attr = root.getAttribute("data-brand");
+  if (attr) {
+    return attr;
+  }
+
+  // Check localStorage
+  try {
+    const stored = localStorage.getItem(storageKey);
+    if (stored) {
+      return stored;
+    }
+  } catch {
+    // localStorage access can fail in private mode
+  }
+
+  return defaultBrand;
+}
+
+/**
+ * Persist brand to localStorage
+ */
+export function persistBrand(brandId: string | null, storageKey: string = "tm_brand") {
+  if (typeof window === "undefined") return;
+
+  try {
+    if (brandId) {
+      localStorage.setItem(storageKey, brandId);
+    } else {
+      localStorage.removeItem(storageKey);
+    }
   } catch {
     // localStorage access can fail in private mode
   }
