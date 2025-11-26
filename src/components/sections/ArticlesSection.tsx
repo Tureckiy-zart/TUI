@@ -6,16 +6,26 @@ import { Link } from "@/components/primitives/Link";
 import { Heading, Text } from "@/components/primitives/Typography";
 import { cn } from "@/lib/utils";
 
-interface Article {
-  slug: string;
+/**
+ * Item interface for ArticlesSection component.
+ * Domain-agnostic interface for displaying article items.
+ */
+export interface ArticleItem {
+  /** Article title (pre-localized string) */
   title: string;
+  /** Article description (optional, pre-localized string) */
   description?: string;
+  /** Publication date display string (pre-formatted, optional) */
   date?: string;
-  image?: string;
+  /** Image URL (optional) */
+  imageUrl?: string;
+  /** Full URL for article details page */
+  href: string;
 }
 
 interface ArticlesSectionProps {
-  articles: Article[];
+  /** Array of article items to display */
+  articles: ArticleItem[];
   readMoreLabel: string;
   className?: string;
 }
@@ -31,17 +41,17 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
 
   return (
     <div className={cn("space-y-lg", className)}>
-      {articles.map((article) => (
+      {articles.map((article, index) => (
         <article
-          key={article.slug}
+          key={article.href || index}
           className="rounded-lg border p-lg transition-shadow hover:shadow-md"
         >
-          {article.image && (
+          {article.imageUrl && (
             <div className="mb-md h-[var(--spacing-3xl)] w-full rounded-md bg-muted" />
           )}
           <div className="space-y-sm">
             <Heading level={2} className="text-xl font-semibold">
-              <Link href={`/news/${article.slug}`} variant="ghost" className="hover:text-primary">
+              <Link href={article.href} variant="ghost" className="hover:text-primary">
                 {article.title}
               </Link>
             </Heading>
@@ -51,11 +61,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
                 {article.date}
               </Text>
             )}
-            <Link
-              href={`/news/${article.slug}`}
-              variant="primary"
-              className="inline-flex items-center"
-            >
+            <Link href={article.href} variant="primary" className="inline-flex items-center">
               {readMoreLabel} →
             </Link>
           </div>

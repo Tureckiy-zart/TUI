@@ -20,7 +20,7 @@
         "Each export categorized by functionality",
         "Baseline established for refactoring"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.2",
@@ -36,7 +36,7 @@
         "FilterState type is importable: import { FilterState } from '@tenerife-ui'",
         "No TypeScript errors when importing types externally"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.3",
@@ -52,7 +52,7 @@
         "Only canonical component names exported",
         "Breaking changes documented"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.4",
@@ -75,7 +75,7 @@
         "Easy to find related components",
         "Clean, maintainable export structure"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.5",
@@ -91,7 +91,7 @@
         "All imports use named import syntax",
         "Tree-shaking optimized"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.6",
@@ -107,7 +107,7 @@
         "Deep imports to internal paths are blocked",
         "package.json exports field properly configured"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D1.7",
@@ -145,7 +145,7 @@
         "index.ts is the only export root",
         "docs/public-api.md exists and is complete"
       ],
-      "status": "pending"
+      "status": "completed"
     }
   ],
   "completion_criteria": [

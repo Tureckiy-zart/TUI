@@ -6,14 +6,26 @@ import { Card, CardContent } from "@/components/primitives/Card";
 import { Heading, Text } from "@/components/primitives/Typography";
 import { cn } from "@/lib/utils";
 
-interface Event {
+/**
+ * Item interface for TrendingSection component.
+ * Domain-agnostic interface for displaying trending items.
+ */
+export interface TrendingItem {
+  /** Unique identifier for the item */
   id: string;
+  /** Item title (pre-localized string) */
   title: string;
-  [key: string]: unknown;
+  /** Item description (optional, pre-localized string) */
+  description?: string;
+  /** Image URL (optional) */
+  imageUrl?: string;
+  /** Link URL for item details page (optional) */
+  href?: string;
 }
 
 interface TrendingSectionProps extends React.HTMLAttributes<HTMLDivElement> {
-  events: Event[];
+  /** Array of trending items to display */
+  events: TrendingItem[];
   limit: number;
   loading: boolean;
   title: string;

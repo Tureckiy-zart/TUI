@@ -51,7 +51,7 @@
         "No multilingual {en,es,ru} pattern in interface",
         "No MongoDB _id or venue_id naming"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.2",
@@ -71,7 +71,7 @@
         "TypeScript compilation succeeds",
         "Component renders correctly"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.3",
@@ -111,7 +111,7 @@
         "No MongoDB naming (_id, events_count)",
         "No multilingual pattern"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.4",
@@ -130,7 +130,7 @@
         "TypeScript compilation succeeds",
         "Component renders correctly"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.5",
@@ -157,7 +157,7 @@
         "No domain-specific naming",
         "Component uses new interface"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.6",
@@ -183,7 +183,7 @@
         "Interface renamed to ArticleItem",
         "Consistent naming with other components"
       ],
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": "D2.7",
@@ -218,7 +218,7 @@
         "Migration path documented",
         "Breaking changes clearly listed"
       ],
-      "status": "pending"
+      "status": "completed"
     }
   ],
   "completion_criteria": [

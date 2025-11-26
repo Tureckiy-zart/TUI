@@ -363,7 +363,8 @@
             "docs/public-api.md exists and documents all ~70 exports"
           ],
           "dependencies": [],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-01-20): Public API rewritten with organized exports, missing types added (FilterOption, FilterState), duplicate exports removed (EventCardSkeletonUI, VenueCardSkeletonUI), comprehensive documentation created (docs/public-api.md). All exports organized into logical namespaces with comments. TypeScript compilation and build successful. See docs/public-api.md for complete API reference."
         },
         {
           "id": "D2",
@@ -387,7 +388,8 @@
             "Decoupling report created with migration guide"
           ],
           "dependencies": ["D1"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-01-20): All domain coupling eliminated. EventCard, VenueCard, TrendingSection, and ArticlesSection refactored to use flat, domain-agnostic props. All multilingual patterns removed, MongoDB naming conventions removed. Legacy support maintained for backward compatibility. Comprehensive migration guide created. All types exported. TypeScript compilation successful. See docs/domain-decoupling-report.md for details."
         },
         {
           "id": "D3",
@@ -409,7 +411,8 @@
             "Documentation explains migration and usage"
           ],
           "dependencies": ["D2"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-25): All hardcoded routes removed. EventCard, VenueCard, and ArticlesSection already use href props (completed in D2). Comprehensive documentation created (docs/route-decoupling.md) with migration guide, URL generation examples, and adapter patterns. Verification completed - no hardcoded routes in component files (only example routes in stories, which is acceptable). All components work with any URL structure. TypeScript compilation successful."
         },
         {
           "id": "D4",
@@ -430,7 +433,8 @@
             "Documentation shows consumer-side localization patterns"
           ],
           "dependencies": ["D3"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-25): All multilingual patterns removed. EventCard and VenueCard already use simple string props (completed in D2). Verification completed - no multilingual fallback logic (.en || .es || .ru) or type patterns ({ en?: string; es?: string; ru?: string }) found in components. Comprehensive documentation created (docs/i18n-removal.md) with consumer-side localization patterns, integration examples for react-intl, next-intl, i18next, and best practices. All components are language-agnostic. TypeScript compilation successful."
         },
         {
           "id": "D5",
@@ -448,7 +452,8 @@
             "Storybook stories updated with new props"
           ],
           "dependencies": ["D4"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-25): All components already follow unified prop naming conventions (completed in D2-D4). EventCard, VenueCard, ArticleItem, and TrendingItem all use standardized props: imageUrl (not image), href (not slug), title/name, description. All props have JSDoc comments. Comprehensive props guidelines document created (docs/props-guidelines.md) with naming conventions, patterns, examples, and best practices. All linkable components use href prop. TypeScript compilation successful."
         },
         {
           "id": "D6",

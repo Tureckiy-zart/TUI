@@ -1,10 +1,10 @@
 ---
 alwaysApply: true
 title: Task Lifecycle & Automation Rules
-version: 1.0
+version: 1.1
 status: Active
 owner: Cursor AI
-last_updated: 2024-12-19
+last_updated: 2025-11-25
 ---
 
 # 🔄 Task Lifecycle & Automation Rules
@@ -85,8 +85,25 @@ This rule file defines task completion workflow, component completion automation
 ## Task ID
 
 - Status: [pending | in_progress | completed]
-- Date updated: YYYY-MM-DD
+- Date updated: YYYY-MM-DD (CURRENT ACTUAL DATE)
 - Notes: Summary of progress
+```
+
+### Date Rules for Progress Updates
+
+**CRITICAL**: **ALWAYS** use **current actual date** when updating progress:
+
+- ✅ **ALWAYS** get current date using: `date +"%Y-%m-%d"` command
+- ✅ **ALWAYS** use system's current date (today's date)
+- ❌ **NEVER** use hardcoded dates from examples (like `2025-01-20`)
+- ❌ **NEVER** copy dates from old code or documentation
+- ❌ **NEVER** use dates from previous file versions
+
+**Date Format**: `YYYY-MM-DD` (e.g., `2025-11-25`)
+
+**How to get current date:**
+```bash
+date +"%Y-%m-%d"  # Returns current date in YYYY-MM-DD format
 ```
 
 ### Progress Update Rules
@@ -94,15 +111,18 @@ This rule file defines task completion workflow, component completion automation
 **ALWAYS** update progress:
 
 - After component completion
+- After component completion
 - After stage completion
 - After major feature addition
 - After bug fix completion
+- **With current actual date** (not hardcoded dates)
 
 **NEVER** update progress:
 
 - Without actual completion
-- With artificial dates
+- With artificial dates (like `2025-01-20` or old dates)
 - Without user confirmation (for major updates)
+- Using dates from examples or old code
 
 ---
 
@@ -192,7 +212,9 @@ This rule file defines task completion workflow, component completion automation
 
 - ❌ **NEVER** mark task complete without verification
 - ❌ **NEVER** skip progress updates
-- ❌ **NEVER** use artificial dates
+- ❌ **NEVER** use artificial dates (like `2025-01-20` or old dates)
+- ❌ **NEVER** copy dates from examples or old code
+- ❌ **NEVER** use hardcoded dates without checking current date
 - ❌ **NEVER** skip automated checks
 - ❌ **NEVER** skip component checklist
 - ❌ **NEVER** skip synchronization
@@ -204,6 +226,7 @@ This rule file defines task completion workflow, component completion automation
 - ✅ **ALWAYS** follow task lifecycle
 - ✅ **ALWAYS** verify component completion
 - ✅ **ALWAYS** update progress files
+- ✅ **ALWAYS** use current actual date (`date +"%Y-%m-%d"`)
 - ✅ **ALWAYS** run automated checks
 - ✅ **ALWAYS** create reports when needed
 - ✅ **ALWAYS** synchronize files
@@ -220,14 +243,16 @@ Before marking task complete:
 - [ ] Documentation updated
 - [ ] Progress files updated
 - [ ] Reports created (if needed)
+- [ ] **Current date obtained using `date +"%Y-%m-%d"`**
 
 After task completion:
 
 - [ ] Update Master Task status
-- [ ] Update progress file
-- [ ] Create reports (if needed)
-- [ ] Update documentation
+- [ ] Update progress file **with current actual date**
+- [ ] Create reports (if needed) **with current actual date**
+- [ ] Update documentation **with current actual date**
 - [ ] Verify synchronization
+- [ ] **Verify all dates are current (not hardcoded)**
 
 ---
 

@@ -7,82 +7,63 @@ import { Link } from "@/components/primitives/Link";
 import { Heading, Text } from "@/components/primitives/Typography";
 import { cn } from "@/lib/utils";
 
-interface VenueCardProps {
-  venue?: {
-    _id?: string;
-    slug?: string;
-    name?: { en?: string; es?: string; ru?: string };
-    description?: { en?: string; es?: string; ru?: string };
-    location?: string;
-    address?: string;
-    city?: string;
-    region?: string;
-    capacity?: string;
-    image?: string;
-    coordinates?: {
-      lat: number;
-      lng: number;
-    };
-    type?: string;
-    website?: string;
-    events_count?: number;
-  };
-  className?: string;
-  featured: boolean;
-  showImage: boolean;
+/**
+ * Props for VenueCard component.
+ * All props are flat and domain-agnostic. Consumer should provide pre-localized strings.
+ */
+export interface VenueCardProps {
+  /** Venue name (pre-localized string, required) */
+  name: string;
+  /** Venue description (pre-localized string, optional) */
+  description?: string;
+  /** Location display string (pre-formatted address, optional) */
+  location?: string;
+  /** Capacity display string (pre-formatted, optional) */
+  capacity?: string;
+  /** Image URL (optional) */
+  imageUrl?: string;
+  /** Link URL for venue details page (optional) */
+  href?: string;
+  /** Number of associated events (optional) */
+  eventsCount?: number;
+  /** Whether this is a featured venue */
+  featured?: boolean;
+  /** Show image section */
+  showImage?: boolean;
+  /** Label for events count (required) */
   eventsLabel: string;
-  popularBadgeText: string;
+  /** Badge text for popular venues (optional) */
+  popularBadgeText?: string;
+  /** Label for capacity (required) */
   capacityLabel: string;
+  /** Additional CSS classes */
+  className?: string;
 }
 
 export const VenueCard: React.FC<VenueCardProps> = ({
-  venue,
-  className,
-  featured,
-  showImage,
+  name,
+  description,
+  location,
+  capacity,
+  imageUrl,
+  href,
+  eventsCount = 0,
+  featured = false,
+  showImage = true,
   eventsLabel,
   popularBadgeText,
   capacityLabel,
+  className,
 }) => {
-  if (typeof featured !== "boolean") {
-    throw new Error('VenueCard: "featured" prop is required and must be a boolean');
-  }
-  if (typeof showImage !== "boolean") {
-    throw new Error('VenueCard: "showImage" prop is required and must be a boolean');
+  if (!name || name.trim() === "") {
+    throw new Error('VenueCard: "name" prop is required and cannot be empty');
   }
   if (!eventsLabel || eventsLabel.trim() === "") {
     throw new Error('VenueCard: "eventsLabel" prop is required and cannot be empty');
   }
-  if (!popularBadgeText || popularBadgeText.trim() === "") {
-    throw new Error('VenueCard: "popularBadgeText" prop is required and cannot be empty');
-  }
   if (!capacityLabel || capacityLabel.trim() === "") {
     throw new Error('VenueCard: "capacityLabel" prop is required and cannot be empty');
   }
-
-  const name = typeof venue?.name === "string" ? venue.name : venue?.name?.en;
-  if (!name || name.trim() === "") {
-    throw new Error("VenueCard: venue.name is required and cannot be empty");
-  }
-
-  const description =
-    typeof venue?.description === "string" ? venue.description : venue?.description?.en;
-  if (!description || description.trim() === "") {
-    throw new Error("VenueCard: venue.description is required and cannot be empty");
-  }
-
-  const location = typeof venue?.location === "string" ? venue.location : venue?.address;
-  if (!location || location.trim() === "") {
-    throw new Error("VenueCard: venue.location or venue.address is required and cannot be empty");
-  }
-
-  const capacity = venue?.capacity;
-  if (!capacity || capacity.trim() === "") {
-    throw new Error("VenueCard: venue.capacity is required and cannot be empty");
-  }
-
-  const image = venue?.image;
-  const eventsCount = venue?.events_count || 0;
 
   return (
     <Card
@@ -92,7 +73,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         className,
       )}
     >
-      {featured && (
+      {featured && popularBadgeText && (
         <div className="absolute right-sm top-sm z-10">
           <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-xs py-xs text-xs font-semibold text-primary-foreground shadow-lg">
             {popularBadgeText}
@@ -102,9 +83,9 @@ export const VenueCard: React.FC<VenueCardProps> = ({
 
       {showImage && (
         <div className="relative h-[var(--spacing-3xl)] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
-          {image ? (
+          {imageUrl ? (
             <img
-              src={image}
+              src={imageUrl}
               alt={name}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
@@ -135,44 +116,48 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           level={3}
           className="mb-sm line-clamp-2 text-lg font-bold transition-colors group-hover:text-primary"
         >
-          {venue?.slug ? (
-            <Link href={`/venues/${venue.slug}`} variant="ghost">
+          {href ? (
+            <Link href={href} variant="ghost">
               {name}
             </Link>
           ) : (
             name
           )}
         </Heading>
-        <Text size="sm" variant="muted" className="mb-sm line-clamp-2">
-          {description}
-        </Text>
-        <div className="mb-sm flex flex-col gap-sm">
-          <div className="flex items-center gap-sm text-xs text-muted-foreground">
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            <Text size="xs" variant="muted" className="line-clamp-1">
-              {location}
-            </Text>
+        {description && (
+          <Text size="sm" variant="muted" className="mb-sm line-clamp-2">
+            {description}
+          </Text>
+        )}
+        {location && (
+          <div className="mb-sm flex flex-col gap-sm">
+            <div className="flex items-center gap-sm text-xs text-muted-foreground">
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <Text size="xs" variant="muted" className="line-clamp-1">
+                {location}
+              </Text>
+            </div>
           </div>
-        </div>
+        )}
         <div className="border-t border-border pt-sm">
           <div className="flex items-center justify-between text-xs">
             {eventsCount > 0 && (

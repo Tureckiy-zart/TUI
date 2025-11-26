@@ -1,10 +1,10 @@
 ---
 alwaysApply: true
 title: User Preferences & Language Rules
-version: 1.0
+version: 1.1
 status: Active
 owner: Cursor AI
-last_updated: 2024-12-19
+last_updated: 2025-11-25
 ---
 
 # 👤 User Preferences & Language Rules
@@ -144,6 +144,77 @@ This rule file defines user preferences, language processing rules, and communic
 
 ---
 
+## 📅 Part 8: Date and Time Rules
+
+### Date Format
+
+**ALWAYS** use ISO 8601 date format: `YYYY-MM-DD`
+
+- **Format**: `2025-11-25` (not `2025-01-20` or any other date)
+- **Timezone**: Use system date/time (current actual date)
+- **Examples**: 
+  - ✅ `2025-11-25` (correct - current date)
+  - ❌ `2025-01-20` (wrong - old date)
+  - ❌ `2024-12-19` (wrong - old date)
+
+### Date Usage Rules
+
+**ALWAYS** follow these rules when working with dates:
+
+1. **When updating progress files:**
+   - Use **current actual date** from system
+   - **NEVER** use hardcoded dates from examples or old code
+   - **NEVER** copy dates from other files without checking
+
+2. **When creating reports:**
+   - Use **current actual date** for "Date Created" or "Last Updated"
+   - Format: `YYYY-MM-DD`
+
+3. **When updating documentation:**
+   - Update "Last Updated" field with **current actual date**
+   - Format: `YYYY-MM-DD`
+
+4. **When updating task status:**
+   - Use **current actual date** for completion dates
+   - Format: `YYYY-MM-DD`
+
+### How to Get Current Date
+
+**ALWAYS** get current date using one of these methods:
+
+1. **Terminal command**: `date +"%Y-%m-%d"` (returns current date in YYYY-MM-DD format)
+2. **System date**: Use actual current date, not dates from examples
+3. **Verify**: If unsure, run `date +"%Y-%m-%d"` to get current date
+
+### Date Examples
+
+**Correct usage:**
+```markdown
+**Last Updated:** 2025-11-25 (D2 Domain Decoupling completed)
+**Date Completed:** 2025-11-25
+```
+
+**Incorrect usage:**
+```markdown
+**Last Updated:** 2025-01-20 (wrong - old date)
+**Date Completed:** 2024-12-19 (wrong - old date)
+```
+
+### Critical Rule
+
+**NEVER** use dates from:
+- ❌ Examples in documentation
+- ❌ Old code comments
+- ❌ Previous file versions
+- ❌ Hardcoded dates in templates
+
+**ALWAYS** use:
+- ✅ Current system date
+- ✅ Date from `date +"%Y-%m-%d"` command
+- ✅ Actual current date when updating files
+
+---
+
 ## 📋 Communication Checklist
 
 Before responding:
@@ -153,6 +224,7 @@ Before responding:
 - [ ] Gather necessary context
 - [ ] Read relevant files
 - [ ] Plan response structure
+- [ ] **Get current date using `date +"%Y-%m-%d"` if updating dates**
 
 When providing code:
 
@@ -161,9 +233,11 @@ When providing code:
 - [ ] Reference file paths
 - [ ] Explain changes
 - [ ] Consider edge cases
+- [ ] **Use current actual date, not hardcoded dates**
 
 ---
 
 **Status:** ✅ Active Rule  
-**Priority:** MEDIUM  
+**Priority:** HIGH  
+**Last Updated:** 2025-11-25  
 
