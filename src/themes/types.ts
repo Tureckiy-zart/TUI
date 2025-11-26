@@ -5,13 +5,13 @@
  */
 
 import type {
-  BaseColorTokens,
   ColorScale,
+  ColorTokens,
   SemanticColors,
   SurfaceColors,
   TextColors,
 } from "@/tokens/colors";
-import type { type BorderRadius, componentRadius } from "@/tokens/radius";
+import { type BorderRadius,componentRadius } from "@/tokens/radius";
 import type {
   accentColoredShadows,
   elevationShadows,
@@ -19,14 +19,14 @@ import type {
   glowEffects,
   primaryColoredShadows,
 } from "@/tokens/shadows";
-import type { type SemanticSpacing } from "@/tokens/spacing";
+import type { SemanticSpacing } from "@/tokens/spacing";
 import type {
-  type FontFamily,
-  type FontSize,
-  type FontWeight,
-  type LetterSpacing,
-  type LineHeight,
-  type TextStyle,
+  FontFamily,
+  FontSize,
+  FontWeight,
+  LetterSpacing,
+  LineHeight,
+  TextStyle,
 } from "@/tokens/typography";
 
 /**
@@ -185,14 +185,16 @@ export interface ThemeOverride {
   secondaryColors?: Partial<ColorScale>;
 
   /**
-   * Override base colors (for day mode)
+   * Override base and related color tokens (for day mode)
+   * Uses ColorTokens to allow primary/accent overrides in addition to base colors.
    */
-  baseColorsDay?: Partial<BaseColorTokens>;
+  baseColorsDay?: Partial<ColorTokens>;
 
   /**
-   * Override base colors (for night mode)
+   * Override base and related color tokens (for night mode)
+   * Uses ColorTokens to allow primary/accent overrides in addition to base colors.
    */
-  baseColorsNight?: Partial<BaseColorTokens>;
+  baseColorsNight?: Partial<ColorTokens>;
 
   /**
    * Override surface colors (for day mode)
