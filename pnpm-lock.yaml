@@ -111,6 +111,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.3.1
         version: 3.3.1
+      '@rollup/rollup-darwin-x64':
+        specifier: ^4.53.3
+        version: 4.53.3
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@25.0.2(typescript@5.9.3))
@@ -1710,6 +1713,11 @@ packages:
 
   '@rollup/rollup-darwin-x64@4.53.2':
     resolution: {integrity: sha512-e6XqVmXlHrBlG56obu9gDRPW3O3hLxpwHpLsBJvuI8qqnsrtSZ9ERoWUXtPOkY8c78WghyPHZdmPhHLWNdAGEw==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rollup/rollup-darwin-x64@4.53.3':
+    resolution: {integrity: sha512-DZ8N4CSNfl965CmPktJ8oBnfYr3F8dTTNBQkRlffnUarJ2ohudQD17sZBa097J8xhQ26AwhHJ5mvUyQW8ddTsQ==}
     cpu: [x64]
     os: [darwin]
 
@@ -7881,6 +7889,8 @@ snapshots:
 
   '@rollup/rollup-darwin-x64@4.53.2':
     optional: true
+
+  '@rollup/rollup-darwin-x64@4.53.3': {}
 
   '@rollup/rollup-freebsd-arm64@4.53.2':
     optional: true

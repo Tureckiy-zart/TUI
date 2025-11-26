@@ -9,6 +9,13 @@ export { darkTheme } from "./dark";
 export { defaultTheme } from "./default";
 export * from "./types";
 
+// Export brand packages
+export { minimalBrand } from "./minimal";
+export { neonBrand } from "./neon";
+
+// Export brand engine
+export * from "./brand_engine";
+
 /**
  * All available themes
  */

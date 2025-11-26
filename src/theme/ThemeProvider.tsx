@@ -2,13 +2,24 @@
 
 import React from "react";
 
+import { minimalBrand, neonBrand } from "@/themes";
+import {
+  applyBrandOverrides,
+  getActiveBrand,
+  loadBrand,
+  registerBrand,
+  removeBrandOverrides,
+  setActiveBrand,
+} from "@/themes/brand_engine";
 import type { ThemeName } from "@/themes/types";
 import type { Mode } from "@/tokens/colors";
 
 import {
   applyDocumentTheme,
+  getInitialBrand,
   getInitialMode,
   getInitialTheme,
+  persistBrand,
   persistMode,
   persistTheme,
 } from "./applyMode";
@@ -19,8 +30,10 @@ import {
 interface ThemeContextValue {
   mode: Mode;
   theme: ThemeName;
+  brand: string | null;
   setMode: (mode: Mode) => void;
   setTheme: (theme: ThemeName) => void;
+  setBrand: (brandId: string | null) => Promise<void>;
   toggleMode: () => void;
 }
 
@@ -33,8 +46,10 @@ interface ThemeProviderProps {
   children: React.ReactNode;
   defaultMode?: Mode;
   defaultTheme?: ThemeName;
+  defaultBrand?: string | null;
   storageKey?: string;
   themeStorageKey?: string;
+  brandStorageKey?: string;
   attribute?: string;
   enableSystem?: boolean;
 }
@@ -42,18 +57,37 @@ interface ThemeProviderProps {
 /**
  * Theme Provider
  *
- * Provides theme context and manages theme mode (day/night) and theme overrides (default/dark/brand).
- * Uses tokens for all theme values and persists mode and theme in localStorage.
+ * Provides theme context and manages theme mode (day/night), theme overrides (default/dark/brand),
+ * and brand packages. Uses tokens for all theme values and persists mode, theme, and brand in localStorage.
  */
 export function ThemeProvider({
   children,
   defaultMode = "day",
   defaultTheme = "default",
+  defaultBrand = null,
   storageKey = "tm_mode",
   themeStorageKey = "tm_theme",
+  brandStorageKey = "tm_brand",
   attribute = "data-mode",
   enableSystem = true,
 }: ThemeProviderProps) {
+  // Register default brands on mount
+  React.useEffect(() => {
+    // Register neon brand
+    try {
+      registerBrand(neonBrand);
+    } catch (error) {
+      console.warn("Failed to register neon brand:", error);
+    }
+
+    // Register minimal brand
+    try {
+      registerBrand(minimalBrand);
+    } catch (error) {
+      console.warn("Failed to register minimal brand:", error);
+    }
+  }, []);
+
   const [mode, setModeState] = React.useState<Mode>(() => {
     if (typeof window === "undefined") return defaultMode;
 
@@ -88,24 +122,59 @@ export function ThemeProvider({
     return getInitialTheme(defaultTheme, themeStorageKey);
   });
 
+  const [brand, setBrandState] = React.useState<string | null>(() => {
+    if (typeof window === "undefined") return defaultBrand;
+    return getInitialBrand(defaultBrand, brandStorageKey);
+  });
+
   // Apply mode to document and persist
   const setMode = React.useCallback(
     (newMode: Mode) => {
       setModeState(newMode);
-      applyDocumentTheme(newMode, theme);
+      applyDocumentTheme(newMode, theme, brand);
       persistMode(newMode, storageKey);
     },
-    [theme, storageKey],
+    [theme, brand, storageKey],
   );
 
   // Apply theme to document and persist
   const setTheme = React.useCallback(
     async (newTheme: ThemeName) => {
       setThemeState(newTheme);
-      await applyDocumentTheme(mode, newTheme);
+      await applyDocumentTheme(mode, newTheme, brand);
       persistTheme(newTheme, themeStorageKey);
     },
-    [mode, themeStorageKey],
+    [mode, brand, themeStorageKey],
+  );
+
+  // Set brand and apply overrides
+  const setBrand = React.useCallback(
+    async (brandId: string | null) => {
+      // Remove previous brand overrides if switching
+      const currentBrand = getActiveBrand();
+      if (currentBrand) {
+        removeBrandOverrides(currentBrand.namespace);
+      }
+
+      setBrandState(brandId);
+      persistBrand(brandId, brandStorageKey);
+
+      if (brandId) {
+        try {
+          const loadedBrand = await loadBrand(brandId);
+          applyBrandOverrides(loadedBrand, mode);
+        } catch (error) {
+          console.error(`Failed to load brand "${brandId}":`, error);
+          setActiveBrand(null);
+        }
+      } else {
+        setActiveBrand(null);
+      }
+
+      // Reapply theme to ensure consistency
+      await applyDocumentTheme(mode, theme, brandId);
+    },
+    [mode, theme, brandStorageKey],
   );
 
   // Toggle between day and night
@@ -117,12 +186,23 @@ export function ThemeProvider({
   React.useEffect(() => {
     const initialMode = getInitialMode(defaultMode, storageKey, enableSystem);
     const initialTheme = getInitialTheme(defaultTheme, themeStorageKey);
+    const initialBrand = getInitialBrand(defaultBrand, brandStorageKey);
     setModeState(initialMode);
     setThemeState(initialTheme);
-    applyDocumentTheme(initialMode, initialTheme);
+    setBrandState(initialBrand);
+    applyDocumentTheme(initialMode, initialTheme, initialBrand);
     persistMode(initialMode, storageKey);
     persistTheme(initialTheme, themeStorageKey);
-  }, [defaultMode, defaultTheme, storageKey, themeStorageKey, enableSystem]);
+    persistBrand(initialBrand, brandStorageKey);
+  }, [
+    defaultMode,
+    defaultTheme,
+    defaultBrand,
+    storageKey,
+    themeStorageKey,
+    brandStorageKey,
+    enableSystem,
+  ]);
 
   // Listen for system preference changes if enabled
   React.useEffect(() => {
@@ -145,21 +225,23 @@ export function ThemeProvider({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [enableSystem, storageKey, setMode]);
 
-  // Update CSS variables when mode or theme changes
+  // Update CSS variables when mode, theme, or brand changes
   // CSS variables are updated by applyDocumentTheme
   React.useEffect(() => {
-    applyDocumentTheme(mode, theme);
-  }, [mode, theme]);
+    applyDocumentTheme(mode, theme, brand);
+  }, [mode, theme, brand]);
 
   const value = React.useMemo(
     () => ({
       mode,
       theme,
+      brand,
       setMode,
       setTheme,
+      setBrand,
       toggleMode,
     }),
-    [mode, theme, setMode, setTheme, toggleMode],
+    [mode, theme, brand, setMode, setTheme, setBrand, toggleMode],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
@@ -172,7 +254,7 @@ export function ThemeProvider({
  *
  * @example
  * ```tsx
- * const { mode, theme, setMode, setTheme, toggleMode } = useTheme();
+ * const { mode, theme, brand, setMode, setTheme, setBrand, toggleMode } = useTheme();
  * ```
  */
 export function useTheme(): ThemeContextValue {
