@@ -1,4 +1,15 @@
 #!/bin/sh
-# Pre-commit hook disabled - using pre-push hook instead
-# All checks are performed before push, not before each commit
-exit 0
+. "$(dirname "$0")/_/husky.sh"
+
+# Защита от рекурсивного вызова
+if [ -n "$SKIP_PRE_COMMIT" ]; then
+  exit 0
+fi
+
+echo "🔧 PRE-COMMIT: Running auto-fixes on staged files..."
+
+# Запускаем lint-staged для автофикса измененных файлов
+# lint-staged автоматически добавит исправленные файлы в staging area
+pnpm lint-staged
+
+echo "✅ Pre-commit auto-fixes completed!"

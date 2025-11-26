@@ -6,50 +6,68 @@ if [ -n "$SKIP_PRE_PUSH" ]; then
   exit 0
 fi
 
-echo "🚀 PRE-PUSH: Running checks and auto-fixes before push..."
+echo "🔍 PRE-PUSH: Running essential CI/CD checks..."
+echo ""
 
-echo "🧹 Running Prettier (format)..."
-npm run precommit:format
-
-echo "🔧 Running ESLint autofix..."
-npm run precommit:lint
-
-# Проверяем, были ли изменения после форматирования/исправления
-CHANGED_FILES=$(git diff --name-only)
-if [ -n "$CHANGED_FILES" ]; then
-  echo "✅ Code was auto-fixed. Staging changes..."
-  git add -A
-  
-  # Проверяем, есть ли что коммитить
-  if [ -n "$(git diff --cached --name-only)" ]; then
-    echo "💾 Committing auto-fixes..."
-    git commit -m "chore: auto-fix formatting and linting issues [skip ci]"
-    
-    echo "🔍 Running ESLint strict check on fixed code..."
-    if ! npm run lint:strict; then
-      echo ""
-      echo "❌ ESLint still found errors or warnings after auto-fix."
-      echo "💡 Please fix remaining issues manually, then commit and push again."
-      echo ""
-      exit 1
-    fi
-    
-    echo ""
-    echo "✅ Auto-fixes committed successfully!"
-    echo "📝 Please run 'git push' again to push the fixes along with your changes."
-    echo ""
-    exit 1
-  fi
-fi
-
-echo "🔍 Running ESLint strict check (no warnings allowed)..."
-if ! npm run lint:strict; then
+# 1. TypeScript type checking
+echo "📘 TypeScript type check..."
+if ! pnpm run typecheck; then
   echo ""
-  echo "❌ ESLint found errors or warnings."
-  echo "💡 Run 'npm run lint:fix' to auto-fix issues, then commit and push again."
+  echo "❌ TypeScript type check failed."
+  echo "💡 Fix type errors before pushing."
   echo ""
   exit 1
 fi
+echo "✅ TypeScript check passed"
+echo ""
+
+# 2. Prettier format check
+echo "💅 Prettier format check..."
+if ! pnpm run format:check; then
+  echo ""
+  echo "❌ Prettier found formatting issues."
+  echo "💡 Run 'pnpm lint:fix' to auto-fix formatting, then commit and push again."
+  echo ""
+  exit 1
+fi
+echo "✅ Prettier check passed"
+echo ""
+
+# 3. ESLint strict check
+echo "🔍 ESLint strict check (no warnings allowed)..."
+if ! pnpm run lint:strict; then
+  echo ""
+  echo "❌ ESLint found errors or warnings."
+  echo "💡 Run 'pnpm lint:fix' to auto-fix issues, then commit and push again."
+  echo ""
+  exit 1
+fi
+echo "✅ ESLint check passed"
+echo ""
+
+# 4. Build check (ensure code compiles)
+echo "🏗️  Build check..."
+if ! pnpm run build; then
+  echo ""
+  echo "❌ Build failed."
+  echo "💡 Fix build errors before pushing."
+  echo ""
+  exit 1
+fi
+echo "✅ Build check passed"
+echo ""
+
+# 5. Unit tests (catch errors like missing jest-axe)
+echo "🧪 Running unit tests..."
+if ! pnpm test; then
+  echo ""
+  echo "❌ Unit tests failed."
+  echo "💡 Fix failing tests before pushing."
+  echo ""
+  exit 1
+fi
+echo "✅ Unit tests passed"
+echo ""
 
 echo "✅ All checks passed! Pushing..."
 exit 0

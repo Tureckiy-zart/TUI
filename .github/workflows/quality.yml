@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+      - "feature/**"
   pull_request:
     branches:
       - main
@@ -30,6 +31,21 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint Check
+        run: ./scripts/lint-ci.sh
+        continue-on-error: false
+
+      - name: Upload lint artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-artifacts
+          path: |
+            artifacts/lint-report.md
+            artifacts/prettier.log
+            artifacts/prettier-diff.log
+          retention-days: 7
 
       - name: Run lint checks
         run: pnpm lint:check
