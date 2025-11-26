@@ -42,6 +42,7 @@ export * from "./theme/applyMode";
 // LAYOUT COMPONENTS
 // ============================================================================
 // Layout primitives and containers
+export * from "./components/layout/Box";
 export * from "./components/layout/Container";
 export * from "./components/layout/Flex";
 export * from "./components/layout/Footer";

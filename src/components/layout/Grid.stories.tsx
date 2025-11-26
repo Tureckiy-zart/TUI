@@ -11,7 +11,7 @@ const meta: Meta<typeof Grid> = {
     docs: {
       description: {
         component:
-          "Grid component for creating responsive layouts using CSS Grid. Supports token-based gaps, responsive columns, and alignment options.",
+          "Token-driven CSS Grid container component with support for columns, rows, gap, alignment, and responsive layout using CSS variables. All spacing uses token system via CSS variables.",
       },
     },
   },
@@ -51,11 +51,10 @@ const meta: Meta<typeof Grid> = {
       },
     },
     gap: {
-      control: { type: "select" },
-      options: [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24],
-      description: "Gap between grid items (uses token spacing)",
+      control: { type: "text" },
+      description: "Gap between grid items (uses spacing tokens via CSS variables)",
       table: {
-        type: { summary: "number" },
+        type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
         defaultValue: { summary: 0 },
       },
     },
@@ -134,7 +133,7 @@ export const TokenBasedGaps: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Gap: xs (1)</h3>
+        <h3 className="mb-sm text-lg font-semibold">Gap: xs (1) - uses CSS variables</h3>
         <Grid cols={3} gap={1}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
@@ -142,7 +141,7 @@ export const TokenBasedGaps: Story = {
         </Grid>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Gap: md (4)</h3>
+        <h3 className="mb-sm text-lg font-semibold">Gap: md (4) - uses CSS variables</h3>
         <Grid cols={3} gap={4}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
@@ -150,7 +149,7 @@ export const TokenBasedGaps: Story = {
         </Grid>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Gap: xl (8)</h3>
+        <h3 className="mb-sm text-lg font-semibold">Gap: xl (8) - uses CSS variables</h3>
         <Grid cols={3} gap={8}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
@@ -158,8 +157,8 @@ export const TokenBasedGaps: Story = {
         </Grid>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Gap: 3xl (16)</h3>
-        <Grid cols={3} gap={16}>
+        <h3 className="mb-sm text-lg font-semibold">Gap: semantic lg - uses CSS variables</h3>
+        <Grid cols={3} gap="lg">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -170,7 +169,8 @@ export const TokenBasedGaps: Story = {
   parameters: {
     docs: {
       description: {
-        story: "All gaps use token-based spacing values for consistent layout rhythm.",
+        story:
+          "All gaps use token-based spacing values via CSS variables for consistent layout rhythm.",
       },
     },
   },
