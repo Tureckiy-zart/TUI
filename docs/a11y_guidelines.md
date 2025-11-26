@@ -9,27 +9,27 @@ These guidelines describe the patterns every Tenerife UI component **must** foll
 
 ## 1. Semantic Roles & Naming
 
-| Component type | Required element/role | Notes |
-| --- | --- | --- |
-| Buttons & icon buttons | Native `<button>` or role="button" with `tabIndex={0}` | Icon-only buttons **must** set `aria-label` or render `sr-only` text. |
-| Links | `<a>` with valid `href` | Use `rel="noopener noreferrer"` for external targets. |
-| Pagination | `<nav aria-label="Pagination">` + buttons with `aria-label` and `aria-current="page"` | Ellipses should be `aria-hidden`. |
-| Breadcrumbs | `<nav aria-label="Breadcrumb">` → ordered list `<ol>` and `<li>` | Last crumb must expose `aria-current="page"`. |
-| Dialogs/Modals | `<div role="dialog" aria-modal="true">` or Radix Dialog | Link `aria-labelledby` + `aria-describedby`; trap focus and close on Escape. |
-| Tooltips/Popovers | Radix primitives with `role="tooltip"` | Do **not** trap focus; tooltips are hover/focus only, popovers follow menu-button patterns. |
-| Menus | Radix primitives (`@radix-ui/react-dropdown-menu`, `@radix-ui/react-navigation-menu`) | If building custom navigation, follow [WAI-ARIA menu button design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/). |
+| Component type         | Required element/role                                                                 | Notes                                                                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Buttons & icon buttons | Native `<button>` or role="button" with `tabIndex={0}`                                | Icon-only buttons **must** set `aria-label` or render `sr-only` text.                                                               |
+| Links                  | `<a>` with valid `href`                                                               | Use `rel="noopener noreferrer"` for external targets.                                                                               |
+| Pagination             | `<nav aria-label="Pagination">` + buttons with `aria-label` and `aria-current="page"` | Ellipses should be `aria-hidden`.                                                                                                   |
+| Breadcrumbs            | `<nav aria-label="Breadcrumb">` → ordered list `<ol>` and `<li>`                      | Last crumb must expose `aria-current="page"`.                                                                                       |
+| Dialogs/Modals         | `<div role="dialog" aria-modal="true">` or Radix Dialog                               | Link `aria-labelledby` + `aria-describedby`; trap focus and close on Escape.                                                        |
+| Tooltips/Popovers      | Radix primitives with `role="tooltip"`                                                | Do **not** trap focus; tooltips are hover/focus only, popovers follow menu-button patterns.                                         |
+| Menus                  | Radix primitives (`@radix-ui/react-dropdown-menu`, `@radix-ui/react-navigation-menu`) | If building custom navigation, follow [WAI-ARIA menu button design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/). |
 
 ---
 
 ## 2. Keyboard Interaction Patterns
 
-| Pattern | Keys | Implementation notes |
-| --- | --- | --- |
-| Activation | `Enter` or `Space` | Buttons, pagination controls, icon toggles. |
-| Escape | `Escape` | Close dialogs, popovers, tooltips with close affordance. |
-| Roving focus lists (Tabs, Menus) | `ArrowLeft/Right` or `ArrowUp/Down`, `Home/End` | Already handled by Radix; expose `aria-controls` when building custom widgets. |
-| Pagination tab order | `Tab` to previous → page numbers → next | Focus order must match visual order; use the shared focus ring utility. |
-| Modal focus trap | First focusable element → cycle with `Shift+Tab`/`Tab` | Radix Dialog inside `SimpleModal` enforces this automatically. |
+| Pattern                          | Keys                                                   | Implementation notes                                                           |
+| -------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Activation                       | `Enter` or `Space`                                     | Buttons, pagination controls, icon toggles.                                    |
+| Escape                           | `Escape`                                               | Close dialogs, popovers, tooltips with close affordance.                       |
+| Roving focus lists (Tabs, Menus) | `ArrowLeft/Right` or `ArrowUp/Down`, `Home/End`        | Already handled by Radix; expose `aria-controls` when building custom widgets. |
+| Pagination tab order             | `Tab` to previous → page numbers → next                | Focus order must match visual order; use the shared focus ring utility.        |
+| Modal focus trap                 | First focusable element → cycle with `Shift+Tab`/`Tab` | Radix Dialog inside `SimpleModal` enforces this automatically.                 |
 
 **Testing:** Simulate the patterns above with `@testing-library/user-event` (see `Pagination.a11y.test.tsx` and `SimpleModal.a11y.test.tsx` for examples).
 
@@ -105,4 +105,3 @@ Before shipping a component, ensure:
 ---
 
 Following these guidelines keeps Tenerife UI compliant with WCAG 2.1 AA while giving engineers a repeatable workflow for future components. Direct questions or requested updates to the Upgrade Layer maintainers.
-

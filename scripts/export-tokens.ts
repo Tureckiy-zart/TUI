@@ -182,7 +182,9 @@ function buildColorTokens() {
     if (typeof value === "string") {
       // Check if it's a direct HSL value (format: "H S% L%" or "H S% L% / opacity")
       // Match pattern like "0 0% 89.8%" or "240 10% 3.9%"
-      const hslMatch = value.match(/^(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%(\s*\/\s*[\d.]+)?$/);
+      const hslMatch = value.match(
+        /^(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%(\s*\/\s*[\d.]+)?$/,
+      );
       if (hslMatch) {
         dayColors[key] = hslToHex(`hsl(${value})`);
       } else if (value.includes("hsl(var(") || value.includes("var(--")) {
@@ -198,7 +200,9 @@ function buildColorTokens() {
 
   Object.entries(colors.baseColors.night).forEach(([key, value]) => {
     if (typeof value === "string") {
-      const hslMatch = value.match(/^(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%(\s*\/\s*[\d.]+)?$/);
+      const hslMatch = value.match(
+        /^(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%(\s*\/\s*[\d.]+)?$/,
+      );
       if (hslMatch) {
         nightColors[key] = hslToHex(`hsl(${value})`);
       } else if (value.includes("hsl(var(") || value.includes("var(--")) {
@@ -285,19 +289,19 @@ function buildSpacingTokens() {
   // Layout spacing
   spacingTokens.layout = {
     section: Object.fromEntries(
-      Object.entries(spacing.layoutSpacing.section).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(spacing.layoutSpacing.section).map(([k, v]) => [k, toPxString(v)]),
     ),
     container: Object.fromEntries(
-      Object.entries(spacing.layoutSpacing.container).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(spacing.layoutSpacing.container).map(([k, v]) => [k, toPxString(v)]),
     ),
     grid: Object.fromEntries(
-      Object.entries(spacing.layoutSpacing.grid).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(spacing.layoutSpacing.grid).map(([k, v]) => [k, toPxString(v)]),
     ),
     stack: Object.fromEntries(
-      Object.entries(spacing.layoutSpacing.stack).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(spacing.layoutSpacing.stack).map(([k, v]) => [k, toPxString(v)]),
     ),
     component: Object.fromEntries(
-      Object.entries(spacing.layoutSpacing.component).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(spacing.layoutSpacing.component).map(([k, v]) => [k, toPxString(v)]),
     ),
   };
 
@@ -383,46 +387,46 @@ function buildRadiusTokens() {
       Object.entries(radius.componentRadius.button).map(([k, v]) => [
         k,
         v === "9999px" ? v : toPxString(v),
-      ])
+      ]),
     ),
     card: Object.fromEntries(
-      Object.entries(radius.componentRadius.card).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(radius.componentRadius.card).map(([k, v]) => [k, toPxString(v)]),
     ),
     input: Object.fromEntries(
-      Object.entries(radius.componentRadius.input).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(radius.componentRadius.input).map(([k, v]) => [k, toPxString(v)]),
     ),
     badge: Object.fromEntries(
       Object.entries(radius.componentRadius.badge).map(([k, v]) => [
         k,
         v === "9999px" ? v : toPxString(v),
-      ])
+      ]),
     ),
     avatar: Object.fromEntries(
       Object.entries(radius.componentRadius.avatar).map(([k, v]) => [
         k,
         v === "9999px" ? v : toPxString(v),
-      ])
+      ]),
     ),
     modal: Object.fromEntries(
-      Object.entries(radius.componentRadius.modal).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(radius.componentRadius.modal).map(([k, v]) => [k, toPxString(v)]),
     ),
     tooltip: Object.fromEntries(
-      Object.entries(radius.componentRadius.tooltip).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(radius.componentRadius.tooltip).map(([k, v]) => [k, toPxString(v)]),
     ),
     toast: Object.fromEntries(
-      Object.entries(radius.componentRadius.toast).map(([k, v]) => [k, toPxString(v)])
+      Object.entries(radius.componentRadius.toast).map(([k, v]) => [k, toPxString(v)]),
     ),
     chip: Object.fromEntries(
       Object.entries(radius.componentRadius.chip).map(([k, v]) => [
         k,
         v === "9999px" ? v : toPxString(v),
-      ])
+      ]),
     ),
     image: Object.fromEntries(
       Object.entries(radius.componentRadius.image).map(([k, v]) => [
         k,
         v === "9999px" ? v : toPxString(v),
-      ])
+      ]),
     ),
   };
 
@@ -524,7 +528,7 @@ function buildFigmaTokens() {
 
   const flattenSpacing = (
     spacing: Record<string, any>,
-    prefix: string = ""
+    prefix: string = "",
   ): Record<string, any> => {
     const result: Record<string, any> = {};
     Object.entries(spacing).forEach(([key, value]) => {
@@ -640,4 +644,3 @@ function main() {
 
 // Run if executed directly
 main();
-

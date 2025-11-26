@@ -182,6 +182,7 @@ If you prefer to import tokens manually:
 **Problem:** Script reports "Token validation failed"
 
 **Solution:**
+
 - Check for TypeScript errors in `src/tokens/` files
 - Run `pnpm typecheck` to identify compilation issues
 - Fix errors in token files before re-running export
@@ -191,6 +192,7 @@ If you prefer to import tokens manually:
 **Problem:** Colors appear different than expected
 
 **Solution:**
+
 - Verify HSL values in source token files
 - Check color conversion in generated JSON
 - Ensure design tool color space settings match (sRGB)
@@ -200,6 +202,7 @@ If you prefer to import tokens manually:
 **Problem:** Figma Tokens plugin can't import `tokens.fig`
 
 **Solution:**
+
 - Verify JSON syntax is valid (use JSON validator)
 - Check that `$themes` array is present
 - Ensure token structure follows Figma Tokens schema
@@ -210,6 +213,7 @@ If you prefer to import tokens manually:
 **Problem:** Design tokens don't match codebase
 
 **Solution:**
+
 - Run `pnpm tokens:export` to regenerate files
 - Verify source token files haven't changed
 - Re-import tokens into design tools
@@ -235,6 +239,3 @@ For issues or questions:
 2. Review token source files in `src/tokens/`
 3. Run export with verbose output for debugging
 4. Open an issue in the project repository
-
-
-

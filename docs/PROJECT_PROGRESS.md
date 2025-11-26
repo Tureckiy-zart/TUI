@@ -2,7 +2,6 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-
 **Last Updated:** 2025-11-26 (U6 Accessibility & testing delivered)
 
 ---

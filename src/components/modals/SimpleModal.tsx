@@ -48,7 +48,7 @@ export const SimpleModal: React.FC<SimpleModalProps> = ({
           aria-labelledby={title ? titleId : undefined}
           aria-describedby={description ? descriptionId : undefined}
           className={cn(
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-card shadow-elevation-xl focus:outline-none",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 shadow-elevation-xl fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-card focus:outline-none",
             className,
           )}
           {...rest}

@@ -6,17 +6,11 @@ import { pathToFileURL } from "node:url";
 
 const MIN_CONTRAST = 4.5;
 
-const moduleUrl = pathToFileURL(
-  path.resolve(process.cwd(), "src/tokens/colors.ts"),
-).href;
+const moduleUrl = pathToFileURL(path.resolve(process.cwd(), "src/tokens/colors.ts")).href;
 
-const {
-  textColors,
-  surfaceColors,
-  semanticColors,
-  primaryColors,
-  accentColors,
-} = await import(moduleUrl);
+const { textColors, surfaceColors, semanticColors, primaryColors, accentColors } = await import(
+  moduleUrl
+);
 
 const contrastPairs = [
   // Day mode text vs surfaces
@@ -120,7 +114,9 @@ if (failedPairs.length > 0) {
   }
   process.exitCode = 1;
 } else {
-  console.log(`✅ All ${contrastPairs.length} token pairs meet WCAG AA (${MIN_CONTRAST}:1) contrast.`);
+  console.log(
+    `✅ All ${contrastPairs.length} token pairs meet WCAG AA (${MIN_CONTRAST}:1) contrast.`,
+  );
 }
 
 function parseHsl(value) {
@@ -166,4 +162,3 @@ function getContrastRatio(foreground, background) {
   const [lighter, darker] = l1 >= l2 ? [l1, l2] : [l2, l1];
   return (lighter + 0.05) / (darker + 0.05);
 }
-

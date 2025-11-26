@@ -43,4 +43,3 @@ describe("SimpleModal accessibility", () => {
     expect(results).toHaveNoViolations();
   });
 });
-

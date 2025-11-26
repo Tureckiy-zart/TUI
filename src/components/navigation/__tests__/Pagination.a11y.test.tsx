@@ -10,7 +10,12 @@ describe("Pagination accessibility", () => {
 
   it("exposes aria metadata and passes axe checks", async () => {
     const { container } = render(
-      <Pagination currentPage={2} totalPages={5} onPageChange={() => {}} ariaLabel="Results pages" />,
+      <Pagination
+        currentPage={2}
+        totalPages={5}
+        onPageChange={() => {}}
+        ariaLabel="Results pages"
+      />,
     );
 
     const nav = screen.getByRole("navigation", { name: /results pages/i });
@@ -40,4 +45,3 @@ describe("Pagination accessibility", () => {
     expect(onPageChange).toHaveBeenNthCalledWith(2, 1);
   });
 });
-

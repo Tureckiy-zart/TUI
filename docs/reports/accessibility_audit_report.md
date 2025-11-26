@@ -17,17 +17,17 @@
 
 ## 2. Summary of Findings
 
-| ID | Category | Severity | Components / Areas | Status |
-| --- | --- | --- | --- | --- |
-| F-01 | Dialog semantics & focus | High | `src/components/modals/SimpleModal.tsx` | ❌ Open |
-| F-02 | Pagination roles & announcements | High | `src/components/navigation/Pagination.tsx` | ❌ Open |
-| F-03 | Breadcrumb semantics | Medium | `src/components/navigation/Breadcrumbs.tsx` | ❌ Open |
-| F-04 | Icon-only affordances | Medium | `src/components/cards/EventCard.tsx`, `src/components/cards/VenueCard.tsx`, section CTAs | ❌ Open |
-| F-05 | Landmark labeling | Medium | `src/components/layout/Navbar.tsx`, `sections/*` wrappers | ❌ Open |
-| F-06 | Focus-visible consistency | Medium | Custom overlays, icon buttons, pagination items | ❌ Open |
-| F-07 | Automated testing gaps | High | Jest suite + CI | ❌ Open |
-| F-08 | Contrast validation tooling | High | Token palette usage | ❌ Open |
-| F-09 | Accessibility guidelines | Medium | Documentation gap | ❌ Open |
+| ID   | Category                         | Severity | Components / Areas                                                                       | Status  |
+| ---- | -------------------------------- | -------- | ---------------------------------------------------------------------------------------- | ------- |
+| F-01 | Dialog semantics & focus         | High     | `src/components/modals/SimpleModal.tsx`                                                  | ❌ Open |
+| F-02 | Pagination roles & announcements | High     | `src/components/navigation/Pagination.tsx`                                               | ❌ Open |
+| F-03 | Breadcrumb semantics             | Medium   | `src/components/navigation/Breadcrumbs.tsx`                                              | ❌ Open |
+| F-04 | Icon-only affordances            | Medium   | `src/components/cards/EventCard.tsx`, `src/components/cards/VenueCard.tsx`, section CTAs | ❌ Open |
+| F-05 | Landmark labeling                | Medium   | `src/components/layout/Navbar.tsx`, `sections/*` wrappers                                | ❌ Open |
+| F-06 | Focus-visible consistency        | Medium   | Custom overlays, icon buttons, pagination items                                          | ❌ Open |
+| F-07 | Automated testing gaps           | High     | Jest suite + CI                                                                          | ❌ Open |
+| F-08 | Contrast validation tooling      | High     | Token palette usage                                                                      | ❌ Open |
+| F-09 | Accessibility guidelines         | Medium   | Documentation gap                                                                        | ❌ Open |
 
 ---
 
@@ -120,4 +120,3 @@ src/components/navigation/Breadcrumbs.tsx
 
 **Status:** Audit completed, remediation pending (tracked under U6).  
 **Owner:** Upgrade Layer – Accessibility & Testing stream.
-

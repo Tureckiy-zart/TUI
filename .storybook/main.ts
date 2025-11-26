@@ -21,7 +21,8 @@ const config = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop: { parent?: { fileName: string } }) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (prop: { parent?: { fileName: string } }) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
   async viteFinal(config: any) {

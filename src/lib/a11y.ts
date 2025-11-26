@@ -15,4 +15,3 @@ export const interactiveButtonBase = {
   type: "button" as const,
   role: "button" as const,
 };
-
