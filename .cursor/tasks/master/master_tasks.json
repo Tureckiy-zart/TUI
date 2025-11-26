@@ -170,7 +170,8 @@
             "Documentation explains how designers can import the tokens into their tools and how the export script integrates with CI."
           ],
           "dependencies": ["F0", "F1", "F2", "F3", "F4", "F5", "F6"],
-          "status": "pending"
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-26): Added scripts/export-tokens.ts with HSL→hex/rem→px conversions, created design-tokens/ outputs (tokens.json + tokens.fig), wired pnpm tokens:export command, and documented usage in docs/design_tokens_export.md. Running the script now validates token modules and regenerates both exports without manual edits."
         },
         {
           "id": "U6",

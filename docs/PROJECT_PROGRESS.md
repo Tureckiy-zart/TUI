@@ -2,7 +2,7 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-**Last Updated:** 2025-11-25 (D2 Domain Decoupling completed, deprecated code removed)
+**Last Updated:** 2025-11-26 (U5 Token export system delivered)
 
 ---
 
@@ -172,6 +172,24 @@ This file tracks the completion status of all tasks and subtasks in the Master T
   - `docs/reports/U2_COMPLETION_REPORT.md` - Complete standardization report with migration guide
 - **Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
 - **Next Steps:** ✅ U3 - Theme Scaffolding CLI (completed 2025-11-23)
+
+---
+
+### U5 - Export Tokens for Design Tools (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-11-26
+- **Summary:** Delivered a full token export pipeline that converts the TypeScript source tokens into designer-friendly assets and documentation. Added `scripts/export-tokens.ts`, created the `design-tokens/` output directory, and generated both JSON (`tokens.json`) and Figma Tokens (`tokens.fig`) artifacts derived exclusively from the canonical token files.
+- **Key Deliverables:**
+  - ✅ `scripts/export-tokens.ts` script with HSL→hex and rem→px normalization plus validation safeguards
+  - ✅ `design-tokens/tokens.json` grouped by colors, spacing, typography, radius, shadows, and motion
+  - ✅ `design-tokens/tokens.fig` following the Tokens Studio schema with day/night themes
+  - ✅ `docs/design_tokens_export.md` instructions covering regeneration flow and Figma import guidance
+  - ✅ `package.json` `tokens:export` script (`npx tsx scripts/export-tokens.ts`)
+- **Validation Status:**
+  - ✅ `pnpm tokens:export` regenerates both files without manual edits
+  - ✅ TypeScript + ESLint: no new issues (`scripts/export-tokens.ts`, `package.json`)
+- **Notes:** Designers can now pull fresh tokens by importing `tokens.fig` via the Figma Tokens plugin; developers run `pnpm tokens:export` whenever token sources change.
 
 ---
 

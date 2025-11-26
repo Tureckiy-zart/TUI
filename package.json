@@ -58,6 +58,7 @@
     "theme:create": "tsx scripts/theme-cli.ts create",
     "theme:validate": "tsx scripts/theme-validate.ts",
     "ui:check": "tsx scripts/check-ui-consistency.ts",
+    "tokens:export": "npx tsx scripts/export-tokens.ts",
     "commitlint": "commitlint",
     "prepare": "husky"
   },
