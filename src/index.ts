@@ -15,6 +15,7 @@ export type { FilterOption, FilterState } from "./components/filters/types";
 export type { EventCardProps } from "./components/cards/EventCard";
 export type { VenueCardProps } from "./components/cards/VenueCard";
 // Section component types
+export type { SectionBuilderConfig, SectionBuilderProps } from "./components/SectionBuilder";
 export type { ArticleItem } from "./components/sections/ArticlesSection";
 export type { TrendingItem } from "./components/sections/TrendingSection";
 
@@ -133,6 +134,7 @@ export * from "./components/cards/VenueCard";
 // SECTION COMPONENTS
 // ============================================================================
 // High-level section layouts
+export * from "./components/SectionBuilder";
 export * from "./components/sections/ArticlesSection";
 export * from "./components/sections/CTASection";
 export * from "./components/sections/FeatureSection";

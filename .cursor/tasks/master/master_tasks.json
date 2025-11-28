@@ -233,7 +233,7 @@
             "All primitives support theming and respond correctly to theme changes."
           ],
           "dependencies": ["F3", "F7", "F8"],
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "U9",
@@ -254,7 +254,7 @@
             "Documentation includes at least three examples of custom sections built with SectionBuilder, such as hero, feature grid and testimonial section."
           ],
           "dependencies": ["U8", "C0", "U4"],
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "U10",
