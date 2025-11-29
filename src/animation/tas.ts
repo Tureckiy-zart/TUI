@@ -129,6 +129,59 @@ export function createSpring(
 }
 
 /**
+ * Convert CSS easing string to Framer Motion easing format
+ * Framer Motion accepts: arrays [x1, y1, x2, y2] for cubic-bezier or predefined strings
+ */
+function convertEasingToFramerMotion(easing: string): string | number[] {
+  // Handle predefined Framer Motion easing strings
+  const framerMotionEasings: Record<string, string> = {
+    linear: "linear",
+    "ease-in": "easeIn",
+    "ease-out": "easeOut",
+    "ease-in-out": "easeInOut",
+    ease: "ease",
+  };
+
+  // Check if it's a predefined easing
+  const mappedEasing = framerMotionEasings[easing];
+  if (mappedEasing) {
+    return mappedEasing;
+  }
+
+  // Parse cubic-bezier string: "cubic-bezier(0, 0, 0.2, 1)" -> [0, 0, 0.2, 1]
+  const cubicBezierMatch = easing.match(/cubic-bezier\(([^)]+)\)/);
+  if (cubicBezierMatch && cubicBezierMatch[1]) {
+    const values = cubicBezierMatch[1]
+      .split(",")
+      .map((v) => parseFloat(v.trim()))
+      .filter((v) => !isNaN(v));
+    if (values.length === 4) {
+      return values;
+    }
+  }
+
+  // Fallback: try to map common CSS easings to Framer Motion equivalents
+  // If we can't convert it, return as-is (Framer Motion might handle it)
+  return easing;
+}
+
+/**
+ * Parse CSS duration string to seconds
+ * Returns undefined if invalid
+ */
+function parseDurationString(durationStr: string): number | undefined {
+  const match = durationStr.match(/(\d+(?:\.\d+)?)(ms|s)/);
+  if (!match || !match[1]) {
+    return undefined;
+  }
+  const value = parseFloat(match[1]);
+  if (isNaN(value) || value < 0) {
+    return undefined;
+  }
+  return match[2] === "s" ? value : value / 1000;
+}
+
+/**
  * Get animation configuration with reduced motion support
  * Returns config object that respects user preferences
  */
@@ -158,23 +211,34 @@ export function getAnimationConfig(
   }
 
   // If spring is specified, return spring config
+  // IMPORTANT: Springs don't use duration or ease - remove them explicitly
   if (spring) {
-    if (typeof spring === "string") {
-      return createSpring(spring, undefined, reduceMotionOverride) as {
-        duration?: number | string;
-        ease?: string | number[];
-        delay?: number;
-        type?: "tween" | "spring";
-        [key: string]: unknown;
-      };
-    }
-    return createSpring(undefined, spring as Partial<SpringConfig>, reduceMotionOverride) as {
+    const springConfig =
+      typeof spring === "string"
+        ? createSpring(spring, undefined, reduceMotionOverride)
+        : createSpring(undefined, spring as Partial<SpringConfig>, reduceMotionOverride);
+
+    const result: {
       duration?: number | string;
       ease?: string | number[];
       delay?: number;
       type?: "tween" | "spring";
       [key: string]: unknown;
+    } = {
+      ...springConfig,
     };
+
+    // Explicitly remove duration and ease - springs don't use them
+    // This prevents framer-motion from receiving invalid duration values
+    delete result.duration;
+    delete result.ease;
+
+    // Add delay if valid
+    if (delay !== undefined && !isNaN(delay) && delay >= 0) {
+      result.delay = delay / 1000; // Convert ms to seconds
+    }
+
+    return result;
   }
 
   // Return tween config
@@ -188,41 +252,52 @@ export function getAnimationConfig(
   };
 
   if (duration) {
+    let parsedDuration: number | undefined;
+
     if (typeof duration === "string") {
       // Parse CSS duration (e.g., "300ms" -> 0.3)
-      const match = duration.match(/(\d+(?:\.\d+)?)(ms|s)/);
-      if (match && match[1]) {
-        const value = parseFloat(match[1]);
-        configObj.duration = match[2] === "s" ? value : value / 1000;
-      } else {
-        configObj.duration = duration;
+      // Only accept if it's a valid CSS duration string format
+      const parsed = parseDurationString(duration);
+      if (parsed !== undefined) {
+        parsedDuration = parsed;
       }
+      // If parsed is undefined, don't set parsedDuration - don't pass invalid strings to framer-motion
     } else if (typeof duration === "number") {
-      configObj.duration = duration / 1000; // Convert ms to seconds
+      if (!isNaN(duration) && duration >= 0) {
+        parsedDuration = duration / 1000; // Convert ms to seconds
+      }
     } else {
+      // Duration token (e.g., "normal", "fast")
       const durationValue = durations[duration as keyof typeof durations];
       if (durationValue && typeof durationValue === "string") {
-        const match = durationValue.match(/(\d+(?:\.\d+)?)(ms|s)/);
-        if (match && match[1]) {
-          const value = parseFloat(match[1]);
-          configObj.duration = match[2] === "s" ? value : value / 1000;
+        const parsed = parseDurationString(durationValue);
+        if (parsed !== undefined) {
+          parsedDuration = parsed;
         }
       }
+    }
+
+    // Only set duration if it's valid (number and non-negative)
+    if (parsedDuration !== undefined && parsedDuration >= 0 && !isNaN(parsedDuration)) {
+      configObj.duration = parsedDuration;
     }
   }
 
   if (easing) {
     if (typeof easing === "string") {
-      configObj.ease = easing;
+      // Convert CSS easing to Framer Motion format
+      configObj.ease = convertEasingToFramerMotion(easing);
     } else {
       const easingValue = easings[easing];
       if (easingValue) {
-        configObj.ease = easingValue;
+        // Convert CSS easing to Framer Motion format
+        configObj.ease = convertEasingToFramerMotion(easingValue);
       }
     }
   }
 
-  if (delay !== undefined) {
+  // Only add delay if it's valid (non-negative, not NaN)
+  if (delay !== undefined && !isNaN(delay) && delay >= 0) {
     configObj.delay = delay / 1000; // Convert ms to seconds
   }
 
@@ -256,13 +331,31 @@ export function cssTransitionToMotionTransition(
   let duration: number | undefined;
   if (match && match[1]) {
     const value = parseFloat(match[1]);
-    duration = match[2] === "s" ? value : value / 1000;
+    if (!isNaN(value) && value >= 0) {
+      duration = match[2] === "s" ? value : value / 1000;
+    }
+  }
+
+  // If duration is still undefined, use default from durations.normal
+  if (duration === undefined) {
+    const defaultMatch = durations.normal.match(/(\d+(?:\.\d+)?)(ms|s)/);
+    if (defaultMatch && defaultMatch[1]) {
+      const value = parseFloat(defaultMatch[1]);
+      if (!isNaN(value) && value >= 0) {
+        duration = defaultMatch[2] === "s" ? value : value / 1000;
+      }
+    }
+  }
+
+  // Ensure duration is always valid
+  if (duration === undefined || isNaN(duration) || duration < 0) {
+    duration = 0.3; // Default to 300ms (0.3 seconds)
   }
 
   return {
     type: "tween" as const,
     duration,
-    ease: easingPart,
+    ease: convertEasingToFramerMotion(easingPart),
   };
 }
 

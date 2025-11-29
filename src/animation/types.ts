@@ -23,12 +23,12 @@ export interface AnimationProps {
   /**
    * Animate to this state (Framer Motion)
    */
-  animate?: string | object;
+  animate?: string | object | false;
 
   /**
    * Exit animation state (Framer Motion)
    */
-  exit?: string | object;
+  exit?: string | object | false;
 
   /**
    * Transition configuration
@@ -102,4 +102,38 @@ export interface PresetConfig {
   ease?: string | number[];
   spring?: Spring | SpringConfig;
   reducedMotion?: boolean | "auto";
+}
+
+/**
+ * Component animation configuration
+ * Allows components to accept animation presets as props
+ */
+export interface ComponentAnimationConfig {
+  /**
+   * Animation preset for initial mount/entrance
+   * Can be a preset name string or AnimationProps object
+   */
+  animation?:
+    | "fadeIn"
+    | "fadeInUp"
+    | "fadeInDown"
+    | "fadeInLeft"
+    | "fadeInRight"
+    | "slideInUp"
+    | "slideInDown"
+    | "slideInLeft"
+    | "slideInRight"
+    | "scaleIn"
+    | AnimationProps;
+
+  /**
+   * Animation preset for hover state
+   * Can be a preset name string or AnimationProps object
+   */
+  hoverAnimation?: "hoverLift" | "hoverScale" | "tapScale" | AnimationProps;
+
+  /**
+   * Custom animation props (overrides preset names)
+   */
+  animationProps?: AnimationProps;
 }

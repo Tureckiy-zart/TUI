@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence } from "framer-motion";
 import { createContext, type ReactNode, useContext } from "react";
 
 import { type Toast, useToastManager } from "@/hooks/useToast";
@@ -52,9 +53,11 @@ export function ToastProvider({
     <ToastContext.Provider value={{ toast, dismiss, dismissAll, updateToast }}>
       {children}
       <ToastViewport position={position} positionClasses={positionClasses[position]}>
-        {visibleToasts.map((toast) => (
-          <ToastComponent key={toast.id} toast={toast} onDismiss={dismiss} />
-        ))}
+        <AnimatePresence mode="popLayout">
+          {visibleToasts.map((toast) => (
+            <ToastComponent key={toast.id} toast={toast} onDismiss={dismiss} />
+          ))}
+        </AnimatePresence>
       </ToastViewport>
     </ToastContext.Provider>
   );

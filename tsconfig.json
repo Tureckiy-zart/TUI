@@ -55,7 +55,6 @@
     "dist",
     "node_modules",
     "storybook-static",
-    "**/*.stories.tsx",
     "**/*.test.tsx",
     "**/*.test.ts",
     ".storybook"

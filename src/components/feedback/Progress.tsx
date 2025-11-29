@@ -14,7 +14,7 @@ export const Progress: React.FC<ProgressProps> = ({ value, max = 100, className 
   return (
     <div className={cn("h-2 w-full rounded-full bg-secondary", className)}>
       <div
-        className="h-2 rounded-full bg-primary transition-all duration-300"
+        className="h-2 rounded-full bg-primary transition-[width] duration-normal"
         style={{ width: `${percentage}%` }}
       />
     </div>

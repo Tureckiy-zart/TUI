@@ -3,9 +3,9 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist-storybook",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "types": ["node", "vite/client"]
   },
-  "include": [".storybook/**/*"],
+  "include": [".storybook/**/*", "src/**/*.stories.tsx"],
   "exclude": ["node_modules", "dist"]
 }

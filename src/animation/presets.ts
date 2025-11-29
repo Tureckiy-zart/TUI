@@ -238,6 +238,42 @@ export const slidePresets = {
       }),
     };
   },
+
+  /**
+   * Slide out to left
+   */
+  slideOutLeft: (config?: PresetConfig & { distance?: number }): AnimationProps => {
+    const reduceMotion = shouldReduceMotion(config?.reducedMotion);
+    const distance = config?.distance || 100;
+    return {
+      initial: { x: 0, opacity: 1 },
+      exit: reduceMotion ? {} : { x: -distance, opacity: 0 },
+      transition: getAnimationConfig({
+        duration: config?.duration || "fast",
+        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
+        delay: config?.delay,
+        reduceMotion: config?.reducedMotion,
+      }),
+    };
+  },
+
+  /**
+   * Slide out to right
+   */
+  slideOutRight: (config?: PresetConfig & { distance?: number }): AnimationProps => {
+    const reduceMotion = shouldReduceMotion(config?.reducedMotion);
+    const distance = config?.distance || 100;
+    return {
+      initial: { x: 0, opacity: 1 },
+      exit: reduceMotion ? {} : { x: distance, opacity: 0 },
+      transition: getAnimationConfig({
+        duration: config?.duration || "fast",
+        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
+        delay: config?.delay,
+        reduceMotion: config?.reducedMotion,
+      }),
+    };
+  },
 };
 
 /**
@@ -417,12 +453,79 @@ export function revealOnScroll(
 }
 
 /**
+ * Hover animation presets
+ */
+export const hoverPresets = {
+  /**
+   * Lift up on hover (combines scale and y translation)
+   */
+  hoverLift: (config?: PresetConfig & { scale?: number; y?: number }): AnimationProps => {
+    const reduceMotion = shouldReduceMotion(config?.reducedMotion);
+    const scale = config?.scale || 1.05;
+    // Default y offset: -5px (negative for upward movement)
+    // Convert to rem: -5px = -0.3125rem (approximately -0.3rem)
+    const y = config?.y ?? -5;
+
+    return {
+      whileHover: reduceMotion
+        ? {}
+        : {
+            scale,
+            y,
+          },
+      transition: getAnimationConfig({
+        duration: config?.duration || "fast",
+        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
+        spring: config?.spring || "gentle",
+        reduceMotion: config?.reducedMotion,
+      }),
+    };
+  },
+
+  /**
+   * Scale up on hover
+   */
+  hoverScale: (config?: PresetConfig & { scale?: number }): AnimationProps => {
+    const reduceMotion = shouldReduceMotion(config?.reducedMotion);
+    const scale = config?.scale || 1.05;
+
+    return {
+      whileHover: reduceMotion ? {} : { scale },
+      transition: getAnimationConfig({
+        duration: config?.duration || "fast",
+        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
+        spring: config?.spring || "gentle",
+        reduceMotion: config?.reducedMotion,
+      }),
+    };
+  },
+
+  /**
+   * Scale down on tap
+   */
+  tapScale: (config?: PresetConfig & { scale?: number }): AnimationProps => {
+    const reduceMotion = shouldReduceMotion(config?.reducedMotion);
+    const scale = config?.scale || 0.95;
+
+    return {
+      whileTap: reduceMotion ? {} : { scale },
+      transition: getAnimationConfig({
+        duration: config?.duration || "fast",
+        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
+        reduceMotion: config?.reducedMotion,
+      }),
+    };
+  },
+};
+
+/**
  * Export all presets
  */
 export const presets = {
   fade: fadePresets,
   slide: slidePresets,
   scale: scalePresets,
+  hover: hoverPresets,
   stagger: createStagger,
   reveal: revealOnScroll,
 };

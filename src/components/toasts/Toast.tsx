@@ -1,16 +1,18 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import * as React from "react";
 
+import { fadePresets, slidePresets } from "@/animation/presets";
 import { Button } from "@/components/primitives/Button";
 import { type Toast as ToastType } from "@/hooks/useToast";
 import { cn } from "@/lib/utils";
 
 // Enhanced toast variants using shadcn/ui patterns with Tenerife branding
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between space-x-sm overflow-hidden rounded-md border p-md pr-lg shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  "group pointer-events-auto relative flex w-full items-center justify-between space-x-sm overflow-hidden rounded-md border p-md pr-lg shadow-lg transition-[transform,border-color,box-shadow] data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none",
   {
     variants: {
       type: {
@@ -80,8 +82,30 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ className, toast, onDismiss, type = toast.type, ...props }, ref) => {
     const Icon = getToastIcon(toast.type);
 
+    // Combine fade and slide presets for toast animation
+    // Slide in from top on mobile, from bottom on desktop
+    const slideInFromTop = {
+      ...fadePresets.fadeIn({ duration: "normal" }),
+      ...slidePresets.slideInDown({ distance: 100, duration: "normal" }),
+    };
+
+    // Slide out to right for exit animation
+    const slideOutRight = {
+      ...fadePresets.fadeOut({ duration: "fast" }),
+      ...slidePresets.slideOutRight({ distance: 100, duration: "fast" }),
+    };
+
     return (
-      <div ref={ref} className={cn(toastVariants({ type, className }))} {...props}>
+      <motion.div
+        ref={ref}
+        className={cn(toastVariants({ type, className }))}
+        initial={slideInFromTop.initial as any}
+        animate={slideInFromTop.animate as any}
+        exit={slideOutRight.exit as any}
+        transition={slideInFromTop.transition as any}
+        layout
+        {...(props as any)}
+      >
         <div className="flex flex-1 items-start space-x-sm">
           <Icon className={cn(toastIconVariants({ type: toast.type }))} />
           <div className="flex-1 space-y-xs">
@@ -109,7 +133,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         >
           <X className="h-4 w-4" />
         </Button>
-      </div>
+      </motion.div>
     );
   },
 );
