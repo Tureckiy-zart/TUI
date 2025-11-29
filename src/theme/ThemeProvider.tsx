@@ -31,10 +31,14 @@ interface ThemeContextValue {
   mode: Mode;
   theme: ThemeName;
   brand: string | null;
+  reduceMotion: boolean;
+  enableAnimations: boolean;
   setMode: (mode: Mode) => void;
   setTheme: (theme: ThemeName) => void;
   setBrand: (brandId: string | null) => Promise<void>;
   toggleMode: () => void;
+  setReduceMotion: (reduce: boolean) => void;
+  setEnableAnimations: (enable: boolean) => void;
 }
 
 export const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
@@ -52,6 +56,14 @@ interface ThemeProviderProps {
   brandStorageKey?: string;
   attribute?: string;
   enableSystem?: boolean;
+  /**
+   * Override reduced motion preference
+   */
+  reduceMotion?: boolean;
+  /**
+   * Global animation toggle
+   */
+  enableAnimations?: boolean;
 }
 
 /**
@@ -60,6 +72,19 @@ interface ThemeProviderProps {
  * Provides theme context and manages theme mode (day/night), theme overrides (default/dark/brand),
  * and brand packages. Uses tokens for all theme values and persists mode, theme, and brand in localStorage.
  */
+/**
+ * Check if user prefers reduced motion
+ */
+function getInitialReduceMotion(override?: boolean): boolean {
+  if (override !== undefined) return override;
+  if (typeof window === "undefined") return false;
+  try {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {
+    return false;
+  }
+}
+
 export function ThemeProvider({
   children,
   defaultMode = "day",
@@ -70,6 +95,8 @@ export function ThemeProvider({
   brandStorageKey = "tm_brand",
   attribute = "data-mode",
   enableSystem = true,
+  reduceMotion: reduceMotionOverride,
+  enableAnimations: enableAnimationsOverride = true,
 }: ThemeProviderProps) {
   // Register default brands on mount
   React.useEffect(() => {
@@ -127,6 +154,14 @@ export function ThemeProvider({
     return getInitialBrand(defaultBrand, brandStorageKey);
   });
 
+  const [reduceMotion, setReduceMotionState] = React.useState<boolean>(() => {
+    return getInitialReduceMotion(reduceMotionOverride);
+  });
+
+  const [enableAnimations, setEnableAnimationsState] = React.useState<boolean>(() => {
+    return enableAnimationsOverride;
+  });
+
   // Apply mode to document and persist
   const setMode = React.useCallback(
     (newMode: Mode) => {
@@ -182,6 +217,66 @@ export function ThemeProvider({
     setMode(mode === "night" ? "day" : "night");
   }, [mode, setMode]);
 
+  // Set reduce motion preference
+  const setReduceMotion = React.useCallback((reduce: boolean) => {
+    setReduceMotionState(reduce);
+    // Store in localStorage for persistence
+    try {
+      localStorage.setItem("tm_reduce_motion", reduce ? "true" : "false");
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, []);
+
+  // Set enable animations
+  const setEnableAnimations = React.useCallback((enable: boolean) => {
+    setEnableAnimationsState(enable);
+    // Store in localStorage for persistence
+    try {
+      localStorage.setItem("tm_enable_animations", enable ? "true" : "false");
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, []);
+
+  // Listen for system reduced motion preference changes
+  React.useEffect(() => {
+    if (reduceMotionOverride !== undefined) return; // Don't listen if override is set
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      setReduceMotionState(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [reduceMotionOverride]);
+
+  // Initialize reduce motion and enable animations from localStorage
+  React.useEffect(() => {
+    if (reduceMotionOverride === undefined) {
+      try {
+        const storedReduceMotion = localStorage.getItem("tm_reduce_motion");
+        if (storedReduceMotion === "true" || storedReduceMotion === "false") {
+          setReduceMotionState(storedReduceMotion === "true");
+        }
+      } catch {
+        // Ignore localStorage errors
+      }
+    }
+
+    if (enableAnimationsOverride === undefined) {
+      try {
+        const storedEnableAnimations = localStorage.getItem("tm_enable_animations");
+        if (storedEnableAnimations === "true" || storedEnableAnimations === "false") {
+          setEnableAnimationsState(storedEnableAnimations === "true");
+        }
+      } catch {
+        // Ignore localStorage errors
+      }
+    }
+  }, [reduceMotionOverride, enableAnimationsOverride]);
+
   // Initialize theme on mount
   React.useEffect(() => {
     const initialMode = getInitialMode(defaultMode, storageKey, enableSystem);
@@ -236,12 +331,31 @@ export function ThemeProvider({
       mode,
       theme,
       brand,
+      reduceMotion: reduceMotionOverride !== undefined ? reduceMotionOverride : reduceMotion,
+      enableAnimations:
+        enableAnimationsOverride !== undefined ? enableAnimationsOverride : enableAnimations,
       setMode,
       setTheme,
       setBrand,
       toggleMode,
+      setReduceMotion,
+      setEnableAnimations,
     }),
-    [mode, theme, brand, setMode, setTheme, setBrand, toggleMode],
+    [
+      mode,
+      theme,
+      brand,
+      reduceMotion,
+      enableAnimations,
+      reduceMotionOverride,
+      enableAnimationsOverride,
+      setMode,
+      setTheme,
+      setBrand,
+      toggleMode,
+      setReduceMotion,
+      setEnableAnimations,
+    ],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

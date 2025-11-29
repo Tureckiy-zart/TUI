@@ -258,6 +258,33 @@
         },
         {
           "id": "U10",
+          "title": "Implement Tenerife Animation System",
+          "purpose": "Introduce a unified animation system (TAS) that provides consistent motion primitives: transitions, springs, micro-interactions, and reveal effects. Integrate motion tokens and expose a typed API for components and layouts. Ensure animations respond to theme/brand changes and can be disabled globally for accessibility.",
+          "inputs": [
+            "src/tokens/motion.ts",
+            "src/components/layout/**/*",
+            "src/theme/ThemeProvider.tsx"
+          ],
+          "outputs": [
+            "src/animation/tas.ts",
+            "src/animation/presets.ts",
+            "src/animation/types.ts",
+            "src/animation/TAS.stories.tsx",
+            "docs/reviews/U10_IMPLEMENT_TENERIFE_ANIMATION_SYSTEM_code_review.md"
+          ],
+          "acceptance_criteria": [
+            "Motion tokens are fully integrated",
+            "All animations use token-driven durations/easings",
+            "Animations respond to brand/theme switches",
+            "Global reduce-motion toggle works across all primitives",
+            "Storybook shows full range of animations and presets"
+          ],
+          "dependencies": ["F9", "U8", "U9"],
+          "status": "completed",
+          "progress_notes": "✅ COMPLETED (2025-11-29): Tenerife Animation System (TAS) successfully implemented with unified animation API, reusable presets, layout primitive integration, global motion controls, and comprehensive accessibility support. All animations are token-driven and respect prefers-reduced-motion. Code review approved for production. See docs/reviews/U10_IMPLEMENT_TENERIFE_ANIMATION_SYSTEM_code_review.md for details."
+        },
+        {
+          "id": "U10_FIGMA",
           "title": "Integrate Figma token sync",
           "purpose": "Provide a script or GitHub action to synchronise design tokens between the codebase and Figma.  This ensures that designers and developers work off the same token values and that updates flow in both directions.",
           "has_subtasks": true,

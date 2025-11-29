@@ -3,11 +3,14 @@
  *
  * Token-driven flexbox container component with support for direction, wrap,
  * alignment, justification, and responsive gap using CSS variables.
+ * Supports animation props via Framer Motion when provided.
  */
 
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
 import * as React from "react";
 
+import type { AnimationProps } from "@/animation/types";
 import { getSpacingCSSVar, isResponsiveValue, type ResponsiveValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
@@ -57,9 +60,27 @@ const flexVariants = cva("flex", {
   },
 });
 
+/**
+ * Check if component has animation props
+ */
+function hasAnimationProps(props: Partial<AnimationProps>): boolean {
+  return !!(
+    props.initial !== undefined ||
+    props.animate !== undefined ||
+    props.exit !== undefined ||
+    props.transition !== undefined ||
+    props.whileHover !== undefined ||
+    props.whileFocus !== undefined ||
+    props.whileTap !== undefined ||
+    props.whileDrag !== undefined ||
+    props.whileInView !== undefined
+  );
+}
+
 export interface FlexProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    Omit<VariantProps<typeof flexVariants>, "direction" | "wrap" | "justify" | "align"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
+    Omit<VariantProps<typeof flexVariants>, "direction" | "wrap" | "justify" | "align">,
+    AnimationProps {
   /**
    * Flex direction
    */
@@ -140,7 +161,30 @@ function getBaseValue<T>(value: ResponsiveValue<T> | T | undefined): T | undefin
 }
 
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ className, direction, wrap, justify, align, gap, style, ...props }, ref) => {
+  (
+    {
+      className,
+      direction,
+      wrap,
+      justify,
+      align,
+      gap,
+      style,
+      // Animation props
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+      viewport,
+      ...props
+    },
+    ref,
+  ) => {
     // Get base values for CVA (for direction, wrap, align, justify)
     const directionValue = getBaseValue(direction) as
       | "row"
@@ -180,22 +224,58 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
       ...style,
     };
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          flexVariants({
-            direction: directionValue,
-            wrap: wrapValue,
-            justify: justifyValue,
-            align: alignValue,
-          }),
-          className,
-        )}
-        style={mergedStyle}
-        {...props}
-      />
+    // Check if we need to use motion component
+    const hasAnimations = hasAnimationProps({
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+    });
+
+    // Animation props for motion component
+    const animationProps = hasAnimations
+      ? {
+          initial,
+          animate,
+          exit,
+          transition,
+          whileHover,
+          whileFocus,
+          whileTap,
+          whileDrag,
+          whileInView,
+          viewport,
+        }
+      : {};
+
+    const baseClassName = cn(
+      flexVariants({
+        direction: directionValue,
+        wrap: wrapValue,
+        justify: justifyValue,
+        align: alignValue,
+      }),
+      className,
     );
+
+    if (hasAnimations) {
+      return (
+        <motion.div
+          ref={ref}
+          className={baseClassName}
+          style={mergedStyle}
+          {...animationProps}
+          {...props}
+        />
+      );
+    }
+
+    return <div ref={ref} className={baseClassName} style={mergedStyle} {...props} />;
   },
 );
 
