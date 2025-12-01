@@ -5,9 +5,12 @@
  * presets, theme variations, and before/after comparisons.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import { getAnimationConfig } from "@/animation/tas";
+import { Box } from "@/components/layout/Box";
 import { Button } from "@/components/primitives/Button";
 import { Heading, Text } from "@/components/primitives/Typography";
+import * as React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { SectionBuilder } from "./SectionBuilder";
 import {
@@ -17,7 +20,6 @@ import {
   type FeatureItem,
   type TestimonialItem,
 } from "./SectionBuilder.presets";
-import type { SectionBuilderConfig } from "./SectionBuilder.types";
 
 const meta: Meta<typeof SectionBuilder> = {
   title: "Components/SectionBuilder",
@@ -508,9 +510,14 @@ export const BeforeAfterComparison: Story = {
                   </div>
                 ),
               },
-              background: { type: "surface", variant: "card" },
+              background: { type: "surface", variant: "elevated1" },
               spacing: { paddingY: "xl", paddingX: "lg" },
             })}
+            layout={
+              {
+                type: "split",
+              } as any
+            }
           />
         </div>
       </div>
@@ -616,14 +623,48 @@ export const GridLayoutCustomItems: Story = {
         },
         gap: "lg",
         items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"],
-        itemRenderer: (item, index) => (
-          <div
-            key={index}
-            className="rounded-lg border bg-card p-4 text-center shadow-sm transition-shadow hover:shadow-md"
-          >
-            {typeof item === "string" ? item : item}
-          </div>
-        ),
+        itemRenderer: (item, index) => {
+          let content: React.ReactNode;
+          if (typeof item === "string") {
+            content = item;
+          } else if (
+            typeof item === "object" &&
+            item !== null &&
+            !React.isValidElement(item) &&
+            "content" in item
+          ) {
+            content = (item as { content: React.ReactNode }).content;
+          } else if (
+            typeof item === "object" &&
+            item !== null &&
+            !React.isValidElement(item) &&
+            "type" in item
+          ) {
+            // StructuredSlot - extract content
+            const slot = item as { type: string; content?: React.ReactNode };
+            content = slot.content || item;
+          } else {
+            content = item;
+          }
+          return (
+            <Box
+              key={index}
+              p="md"
+              radius="lg"
+              bg="card"
+              className="border text-center shadow-sm"
+              whileHover={{
+                boxShadow: "var(--shadow-md)",
+              }}
+              transition={getAnimationConfig({
+                duration: "fast",
+                easing: "ease-out",
+              })}
+            >
+              {content}
+            </Box>
+          );
+        },
       },
       background: {
         type: "surface",
@@ -675,6 +716,81 @@ export const StackedLayoutHorizontal: Story = {
         paddingY: "lg",
         paddingX: "lg",
       },
+    },
+  },
+};
+
+/**
+ * Animation Props Example
+ * Demonstrates using animation props for entrance and hover animations
+ */
+export const WithAnimationProps: Story = {
+  args: {
+    config: {
+      layout: {
+        type: "grid",
+        columns: 3,
+        gap: "md",
+        items: [
+          {
+            type: "text",
+            content: "Card 1",
+            typography: { level: 3 },
+          },
+          {
+            type: "text",
+            content: "Card 2",
+            typography: { level: 3 },
+          },
+          {
+            type: "text",
+            content: "Card 3",
+            typography: { level: 3 },
+          },
+        ],
+        itemRenderer: (item, index) => {
+          let content: React.ReactNode;
+          if (typeof item === "string") {
+            content = item;
+          } else if (
+            typeof item === "object" &&
+            item !== null &&
+            !React.isValidElement(item) &&
+            "content" in item
+          ) {
+            content = (item as { content: React.ReactNode }).content;
+          } else if (
+            typeof item === "object" &&
+            item !== null &&
+            !React.isValidElement(item) &&
+            "type" in item
+          ) {
+            // StructuredSlot - extract content
+            const slot = item as { type: string; content?: React.ReactNode };
+            content = slot.content || item;
+          } else {
+            content = item;
+          }
+          return (
+            <Box key={index} p="md" radius="lg" bg="card" className="border text-center shadow-sm">
+              {content}
+            </Box>
+          );
+        },
+      },
+      background: {
+        type: "surface",
+        variant: "elevated1",
+      },
+      spacing: {
+        paddingY: "xl",
+        paddingX: "lg",
+      },
+    },
+    // Animation props example
+    animation: {
+      animation: "fadeInUp",
+      hoverAnimation: "hoverLift",
     },
   },
 };

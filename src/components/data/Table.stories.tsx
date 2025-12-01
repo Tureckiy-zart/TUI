@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Table } from "./Table";
 
 const meta: Meta<typeof Table> = {
@@ -41,7 +40,7 @@ export const WithCustomRender: Story = {
       {
         key: "role",
         title: "Role",
-        render: (value) => (
+        render: (value: unknown) => (
           <span
             className={`rounded px-sm py-xs text-xs ${
               value === "Admin"
@@ -51,7 +50,7 @@ export const WithCustomRender: Story = {
                   : "bg-accent/20 text-accent-foreground"
             }`}
           >
-            {value}
+            {String(value)}
           </span>
         ),
       },

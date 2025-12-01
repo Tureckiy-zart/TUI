@@ -1,7 +1,9 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
 import * as React from "react";
 
+import { fadePresets, scalePresets } from "@/animation/presets";
 import { cn } from "@/lib/utils";
 
 const Popover = PopoverPrimitive.Root;
@@ -11,7 +13,7 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const popoverContentVariants = cva(
-  "z-50 w-72 rounded-md border bg-popover p-md text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+  "z-50 w-72 rounded-md border bg-popover p-md text-popover-foreground shadow-md outline-none",
   {
     variants: {
       variant: {
@@ -42,17 +44,34 @@ const PopoverContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &
     VariantProps<typeof popoverContentVariants>
->(({ className, variant, size, align = "center", sideOffset = 4, ...props }, ref) => (
-  <PopoverPrimitive.Portal>
-    <PopoverPrimitive.Content
-      ref={ref}
-      align={align}
-      sideOffset={sideOffset}
-      className={cn(popoverContentVariants({ variant, size, className }))}
-      {...props}
-    />
-  </PopoverPrimitive.Portal>
-));
+>(({ className, variant, size, align = "center", sideOffset = 4, ...props }, ref) => {
+  // Combine fade and scale presets for popover animation
+  const fadeScaleIn = {
+    ...fadePresets.fadeIn({ duration: "normal" }),
+    ...scalePresets.scaleIn({ scale: 0.95, duration: "normal" }),
+  };
+
+  const fadeScaleOut = {
+    ...fadePresets.fadeOut({ duration: "fast" }),
+    ...scalePresets.scaleOut({ scale: 0.95, duration: "fast" }),
+  };
+
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Content ref={ref} align={align} sideOffset={sideOffset} {...props} asChild>
+        <motion.div
+          className={cn(popoverContentVariants({ variant, size, className }))}
+          initial={fadeScaleIn.initial as any}
+          animate={fadeScaleIn.animate as any}
+          exit={fadeScaleOut.exit as any}
+          transition={fadeScaleIn.transition as any}
+        >
+          {props.children}
+        </motion.div>
+      </PopoverPrimitive.Content>
+    </PopoverPrimitive.Portal>
+  );
+});
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
 export interface PopoverProps {

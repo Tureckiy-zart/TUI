@@ -3,11 +3,14 @@
  *
  * Token-driven stack layout component with support for vertical/horizontal
  * direction, spacing, alignment, and responsive props using CSS variables.
+ * Supports animation props via Framer Motion when provided.
  */
 
 import { cva, type VariantProps } from "class-variance-authority";
+import { type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
 
+import type { AnimationProps } from "@/animation/types";
 import { getSpacingCSSVar, isResponsiveValue, type ResponsiveValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
@@ -93,9 +96,27 @@ function getSpacingCSSValue(
   return getSpacingCSSVar(value as string | number);
 }
 
+/**
+ * Check if component has animation props
+ */
+function hasAnimationProps(props: Partial<AnimationProps>): boolean {
+  return !!(
+    props.initial !== undefined ||
+    props.animate !== undefined ||
+    props.exit !== undefined ||
+    props.transition !== undefined ||
+    props.whileHover !== undefined ||
+    props.whileFocus !== undefined ||
+    props.whileTap !== undefined ||
+    props.whileDrag !== undefined ||
+    props.whileInView !== undefined
+  );
+}
+
 export interface StackProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    Omit<VariantProps<typeof stackVariants>, "align" | "justify"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
+    Omit<VariantProps<typeof stackVariants>, "align" | "justify">,
+    AnimationProps {
   /**
    * Stack direction
    */
@@ -118,7 +139,29 @@ export interface StackProps
 }
 
 const Stack = React.forwardRef<HTMLDivElement, StackProps>(
-  ({ className, direction, spacing, align, justify, style, ...props }, ref) => {
+  (
+    {
+      className,
+      direction,
+      spacing,
+      align,
+      justify,
+      style,
+      // Animation props
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+      viewport,
+      ...props
+    },
+    ref,
+  ) => {
     // Get base values for CVA
     const directionValue = getBaseValue(direction) as "vertical" | "horizontal" | undefined;
     const alignValue = getBaseValue(align) as "start" | "end" | "center" | "stretch" | undefined;
@@ -153,20 +196,78 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
       ...style,
     };
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          stackVariants({
-            align: alignValue,
-            justify: justifyValue,
-          }),
-          className,
-        )}
-        style={mergedStyle}
-        {...props}
-      />
+    // Check if we need to use motion component
+    const hasAnimations = hasAnimationProps({
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+    });
+
+    // Animation props for motion component
+    const animationProps = hasAnimations
+      ? {
+          initial,
+          animate,
+          exit,
+          transition,
+          whileHover,
+          whileFocus,
+          whileTap,
+          whileDrag,
+          whileInView,
+          viewport,
+        }
+      : {};
+
+    const baseClassName = cn(
+      stackVariants({
+        align: alignValue,
+        justify: justifyValue,
+      }),
+      className,
     );
+
+    if (hasAnimations) {
+      // Exclude conflicting handlers from props to avoid conflict with Framer Motion
+      const {
+        onDrag: _onDrag,
+        onDragStart: _onDragStart,
+        onDragEnd: _onDragEnd,
+        onAnimationStart: _onAnimationStart,
+        onAnimationEnd: _onAnimationEnd,
+        onAnimationIteration: _onAnimationIteration,
+        ...restProps
+      } = props;
+
+      // Type restProps to exclude conflicting handlers (animation props are already destructured above)
+      const safeProps = restProps as Omit<
+        React.HTMLAttributes<HTMLDivElement>,
+        | "onDrag"
+        | "onDragStart"
+        | "onDragEnd"
+        | "onAnimationStart"
+        | "onAnimationEnd"
+        | "onAnimationIteration"
+      >;
+
+      return (
+        <motion.div
+          ref={ref}
+          className={baseClassName}
+          style={mergedStyle}
+          {...(animationProps as Partial<HTMLMotionProps<"div">>)}
+          {...safeProps}
+        />
+      );
+    }
+
+    return <div ref={ref} className={baseClassName} style={mergedStyle} {...props} />;
   },
 );
 

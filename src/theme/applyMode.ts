@@ -23,6 +23,7 @@ import {
   type TextColors,
   textColors as baseTextColors,
 } from "@/tokens/colors";
+import { motionCSSVariables } from "@/tokens/motion";
 
 const MODE_ATTRIBUTE = "data-mode";
 const THEME_ATTRIBUTE = "data-theme-name";
@@ -288,6 +289,11 @@ function updateCSSVariablesFromTokens(mode: Mode) {
   // Destructive colors (from merged semantic error)
   root.style.setProperty("--destructive", semantic.error);
   root.style.setProperty("--destructive-foreground", semantic.errorForeground);
+
+  // Motion CSS variables (from motion tokens)
+  Object.entries(motionCSSVariables).forEach(([key, value]) => {
+    root.style.setProperty(key, value);
+  });
 }
 
 /**

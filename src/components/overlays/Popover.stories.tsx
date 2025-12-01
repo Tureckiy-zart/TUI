@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { PopoverWrapper, Popover, PopoverTrigger, PopoverContent } from "./Popover";
+import { PopoverWrapper } from "./Popover";
 import { Button } from "../primitives/Button";
 import { Input } from "../primitives/Input";
 import { Label } from "../primitives/Label";
 import { Badge } from "../primitives/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../primitives/Card";
-import { Settings, User, Bell, HelpCircle } from "lucide-react";
+import { Settings, User, Bell } from "lucide-react";
 
 const meta: Meta<typeof PopoverWrapper> = {
   title: "Components/Overlays/Popover",

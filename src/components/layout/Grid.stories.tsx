@@ -23,7 +23,7 @@ const meta: Meta<typeof Grid> = {
       description: "Number of columns (base breakpoint)",
       table: {
         type: { summary: "number | 'none'" },
-        defaultValue: { summary: 1 },
+        defaultValue: { summary: "1" },
       },
     },
     md: {
@@ -55,7 +55,7 @@ const meta: Meta<typeof Grid> = {
       description: "Gap between grid items (uses spacing tokens via CSS variables)",
       table: {
         type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
-        defaultValue: { summary: 0 },
+        defaultValue: { summary: "0" },
       },
     },
     align: {
@@ -223,46 +223,40 @@ export const WithEventCards: Story = {
     children: (
       <>
         <EventCard
-          event={{
-            name: { en: "Jazz Night" },
-            start_date: "2024-02-15",
-            venue_id: { name: { en: "Blue Note" } },
-            description: { en: "An evening of smooth jazz" },
-            price: "25",
-            image: "https://via.placeholder.com/400x300",
-          }}
+          title="Jazz Night"
+          date="2024-02-15"
+          venueName="Blue Note"
+          description="An evening of smooth jazz"
+          price="€25"
+          imageUrl="https://via.placeholder.com/400x300"
           featured={false}
           showImage={true}
           getTicketsLabel="Get Tickets"
-          trendingBadgeText="Trending"
+          featuredBadgeText="Trending"
         />
         <EventCard
-          event={{
-            name: { en: "Rock Concert" },
-            start_date: "2024-02-20",
-            venue_id: { name: { en: "Rock Arena" } },
-            description: { en: "High energy rock performance" },
-            price: "45",
-            image: "https://via.placeholder.com/400x300",
-          }}
+          title="Rock Concert"
+          date="2024-02-20"
+          venueName="Rock Arena"
+          description="High energy rock performance"
+          price="€45"
+          imageUrl="https://via.placeholder.com/400x300"
           featured={true}
           showImage={true}
           getTicketsLabel="Get Tickets"
-          trendingBadgeText="Trending"
+          featuredBadgeText="Trending"
         />
         <EventCard
-          event={{
-            name: { en: "Classical Evening" },
-            start_date: "2024-02-25",
-            venue_id: { name: { en: "Symphony Hall" } },
-            description: { en: "Elegant classical music performance" },
-            price: "60",
-            image: "https://via.placeholder.com/400x300",
-          }}
+          title="Classical Evening"
+          date="2024-02-25"
+          venueName="Symphony Hall"
+          description="Elegant classical music performance"
+          price="€60"
+          imageUrl="https://via.placeholder.com/400x300"
           featured={false}
           showImage={true}
           getTicketsLabel="Get Tickets"
-          trendingBadgeText="Trending"
+          featuredBadgeText="Trending"
         />
       </>
     ),
@@ -286,16 +280,12 @@ export const WithVenueCards: Story = {
     children: (
       <>
         <VenueCard
-          venue={{
-            name: { en: "Blue Note Jazz Club" },
-            description: { en: "Intimate jazz venue in the heart of the city" },
-            location: "Downtown",
-            address: "123 Music Street",
-            city: "Tenerife",
-            capacity: "200",
-            image: "https://via.placeholder.com/400x300",
-            events_count: 15,
-          }}
+          name="Blue Note Jazz Club"
+          description="Intimate jazz venue in the heart of the city"
+          location="123 Music Street, Downtown, Tenerife"
+          capacity="200"
+          imageUrl="https://via.placeholder.com/400x300"
+          eventsCount={15}
           featured={false}
           showImage={true}
           eventsLabel="Events"
@@ -303,16 +293,12 @@ export const WithVenueCards: Story = {
           capacityLabel="Capacity"
         />
         <VenueCard
-          venue={{
-            name: { en: "Rock Arena" },
-            description: { en: "Large venue for rock concerts and festivals" },
-            location: "Entertainment District",
-            address: "456 Rock Boulevard",
-            city: "Tenerife",
-            capacity: "5000",
-            image: "https://via.placeholder.com/400x300",
-            events_count: 32,
-          }}
+          name="Rock Arena"
+          description="Large venue for rock concerts and festivals"
+          location="456 Rock Boulevard, Entertainment District, Tenerife"
+          capacity="5000"
+          imageUrl="https://via.placeholder.com/400x300"
+          eventsCount={32}
           featured={true}
           showImage={true}
           eventsLabel="Events"
@@ -320,16 +306,12 @@ export const WithVenueCards: Story = {
           capacityLabel="Capacity"
         />
         <VenueCard
-          venue={{
-            name: { en: "Symphony Hall" },
-            description: { en: "Elegant classical music venue" },
-            location: "Cultural Quarter",
-            address: "789 Classical Avenue",
-            city: "Tenerife",
-            capacity: "800",
-            image: "https://via.placeholder.com/400x300",
-            events_count: 8,
-          }}
+          name="Symphony Hall"
+          description="Elegant classical music venue"
+          location="789 Classical Avenue, Cultural Quarter, Tenerife"
+          capacity="800"
+          imageUrl="https://via.placeholder.com/400x300"
+          eventsCount={8}
           featured={false}
           showImage={true}
           eventsLabel="Events"

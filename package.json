@@ -64,6 +64,7 @@
     "ui:check": "tsx scripts/check-ui-consistency.ts",
     "tokens:export": "npx tsx scripts/export-tokens.ts",
     "commitlint": "commitlint",
+    "ci:local": "./scripts/ci-local.sh",
     "prepare": "husky"
   },
   "peerDependencies": {

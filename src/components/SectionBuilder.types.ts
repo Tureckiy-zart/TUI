@@ -8,6 +8,8 @@
 
 import type * as React from "react";
 
+import type { ComponentAnimationConfig } from "@/animation/types";
+
 import type {
   ResponsiveAlignment,
   ResponsiveColor,
@@ -353,4 +355,8 @@ export interface SectionBuilderProps
    * Custom style for section wrapper
    */
   style?: React.CSSProperties;
+  /**
+   * Animation configuration for entrance and hover animations
+   */
+  animation?: ComponentAnimationConfig;
 }

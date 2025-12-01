@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Toast } from "./Toast";
 import { ToastProvider, useToast } from "./ToastProvider";
 import { Button } from "../primitives/Button";
@@ -16,7 +15,7 @@ function ToastDemo() {
         <Button
           onClick={() =>
             toast({
-              type: "default",
+              type: "info",
               title: "Default Toast",
               description: "This is a default toast message.",
             })

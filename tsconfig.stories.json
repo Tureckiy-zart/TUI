@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "types": ["node", "vite/client", "@storybook/react"]
+  },
+  "include": ["src/**/*.stories.tsx", "src/**/*.stories.ts"],
+  "exclude": ["node_modules", "dist"]
+}

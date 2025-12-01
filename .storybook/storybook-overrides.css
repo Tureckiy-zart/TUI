@@ -1,0 +1,24 @@
+/* Storybook-specific CSS overrides to ensure proper text contrast */
+
+/* Force dark text color for elements with text-gray-900 class */
+/* This overrides inherited styles from body that may cause contrast issues */
+.text-gray-900,
+.text-gray-900 * {
+  color: #111827 !important; /* Dark gray-900 color for maximum contrast */
+}
+
+/* Ensure headings with text-gray-900 also get dark color */
+h1.text-gray-900,
+h2.text-gray-900,
+h3.text-gray-900,
+h4.text-gray-900,
+h5.text-gray-900,
+h6.text-gray-900 {
+  color: #111827 !important;
+}
+
+/* Override any Storybook-specific body styles that might interfere */
+.sb-main-padded .text-gray-900,
+.sb-main-centered .text-gray-900 {
+  color: #111827 !important;
+}

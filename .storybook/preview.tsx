@@ -1,7 +1,9 @@
 import "../src/styles/globals.css";
 import "../src/theme/global.css";
+import "./storybook-overrides.css";
 
 import type { Preview } from "@storybook/react";
+import React from "react";
 
 import { ThemeProvider } from "../src/theme/ThemeProvider";
 

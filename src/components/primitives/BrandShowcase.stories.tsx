@@ -6,7 +6,6 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { ThemeProvider, useTheme } from "@/theme";
 import { getAllBrands } from "@/themes/brand_engine";
 import { Button } from "./Button";
@@ -173,7 +172,6 @@ export const BrandSwitching: Story = {
   render: () => {
     const BrandSwitcher = () => {
       const { brand, setBrand, mode } = useTheme();
-      const availableBrands = [null, ...getAllBrands().map((b) => b.id)];
 
       return (
         <div className="space-y-lg">

@@ -13,6 +13,7 @@
 
 import * as React from "react";
 
+import { resolveComponentAnimations } from "@/animation/utils";
 import { Box } from "@/components/layout/Box";
 import { Flex } from "@/components/layout/Flex";
 import { Grid } from "@/components/layout/Grid";
@@ -439,6 +440,7 @@ export const SectionBuilder = React.forwardRef<HTMLElement, SectionBuilderProps>
       style,
       as: Component = "section",
       "aria-label": ariaLabel,
+      animation,
       ...props
     },
     ref,
@@ -476,6 +478,9 @@ export const SectionBuilder = React.forwardRef<HTMLElement, SectionBuilderProps>
 
     // Resolve spacing
     const spacingProps = resolveSpacing(spacing);
+
+    // Resolve animation props
+    const animationProps = resolveComponentAnimations(animation);
 
     // Resolve radius
     const radiusStyle = radiusValue
@@ -528,6 +533,7 @@ export const SectionBuilder = React.forwardRef<HTMLElement, SectionBuilderProps>
         <Box
           bg={bgResolution.bg}
           {...spacingProps}
+          {...animationProps}
           className="relative w-full"
           style={bgResolution.style}
         >

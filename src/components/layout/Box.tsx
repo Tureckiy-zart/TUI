@@ -4,10 +4,13 @@
  * Token-driven base container component with support for padding, margin,
  * background, radius, and responsive props. All styling uses CSS variables
  * from the token system.
+ * Supports animation props via Framer Motion when provided.
  */
 
+import { type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
 
+import type { AnimationProps } from "@/animation/types";
 import {
   getColorCSSVar,
   getRadiusCSSVar,
@@ -28,7 +31,9 @@ import type {
 /**
  * Box component props
  */
-export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BoxProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
+    AnimationProps {
   /**
    * Padding (all sides)
    */
@@ -171,6 +176,23 @@ function getCSSValue<T>(
 }
 
 /**
+ * Check if component has animation props
+ */
+function hasAnimationProps(props: BoxProps): boolean {
+  return !!(
+    props.initial !== undefined ||
+    props.animate !== undefined ||
+    props.exit !== undefined ||
+    props.transition !== undefined ||
+    props.whileHover !== undefined ||
+    props.whileFocus !== undefined ||
+    props.whileTap !== undefined ||
+    props.whileDrag !== undefined ||
+    props.whileInView !== undefined
+  );
+}
+
+/**
  * Box component
  */
 const Box = React.forwardRef<HTMLDivElement, BoxProps>(
@@ -195,6 +217,17 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       as: Component = "div",
       className,
       style,
+      // Animation props
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+      viewport,
       ...props
     },
     ref,
@@ -254,9 +287,72 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       ...style,
     };
 
-    // Type-safe component rendering
-    // When using 'as' prop, we need to handle the polymorphic component type
-    // Cast to any to avoid complex union type issues with polymorphic components
+    // Check if we need to use motion component
+    const hasAnimations = hasAnimationProps({
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+    } as BoxProps);
+
+    // Animation props for motion component
+    const animationProps = hasAnimations
+      ? {
+          initial,
+          animate,
+          exit,
+          transition,
+          whileHover,
+          whileFocus,
+          whileTap,
+          whileDrag,
+          whileInView,
+          viewport,
+        }
+      : {};
+
+    // Use motion.div if animations are present and Component is 'div', otherwise use regular element
+    // Note: motion components only support standard HTML elements, so 'as' prop is ignored when using animations
+    if (hasAnimations && Component === "div") {
+      // Exclude conflicting handlers from props to avoid conflict with Framer Motion
+      const {
+        onDrag: _onDrag,
+        onDragStart: _onDragStart,
+        onDragEnd: _onDragEnd,
+        onAnimationStart: _onAnimationStart,
+        onAnimationEnd: _onAnimationEnd,
+        onAnimationIteration: _onAnimationIteration,
+        ...restProps
+      } = props;
+
+      // Type restProps to exclude conflicting handlers (animation props are already destructured above)
+      const safeProps = restProps as Omit<
+        React.HTMLAttributes<HTMLDivElement>,
+        | "onDrag"
+        | "onDragStart"
+        | "onDragEnd"
+        | "onAnimationStart"
+        | "onAnimationEnd"
+        | "onAnimationIteration"
+      >;
+
+      return (
+        <motion.div
+          ref={ref}
+          className={className}
+          style={mergedStyle}
+          {...(animationProps as Partial<HTMLMotionProps<"div">>)}
+          {...safeProps}
+        />
+      );
+    }
+
+    // Regular component rendering without animations
     const ComponentAny = Component as any;
     return <ComponentAny ref={ref} className={className} style={mergedStyle} {...props} />;
   },

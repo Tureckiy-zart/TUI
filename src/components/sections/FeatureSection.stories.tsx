@@ -33,7 +33,7 @@ const meta: Meta<typeof FeatureSection> = {
       description: "Number of columns in the grid",
       table: {
         type: { summary: "number" },
-        defaultValue: { summary: 3 },
+        defaultValue: { summary: "3" },
       },
     },
   },

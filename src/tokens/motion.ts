@@ -248,6 +248,69 @@ export const animations = {
 } as const;
 
 /**
+ * Spring Configuration Tokens
+ * For Framer Motion spring animations
+ * Based on Material Design motion principles
+ */
+export const springs = {
+  // Gentle spring (subtle, smooth)
+  gentle: {
+    type: "spring" as const,
+    stiffness: 120,
+    damping: 14,
+    mass: 1,
+  },
+
+  // Default spring (balanced)
+  default: {
+    type: "spring" as const,
+    stiffness: 300,
+    damping: 30,
+    mass: 1,
+  },
+
+  // Wobbly spring (bouncy, playful)
+  wobbly: {
+    type: "spring" as const,
+    stiffness: 180,
+    damping: 12,
+    mass: 1,
+  },
+
+  // Stiff spring (quick, precise)
+  stiff: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 30,
+    mass: 1,
+  },
+
+  // Slow spring (smooth, deliberate)
+  slow: {
+    type: "spring" as const,
+    stiffness: 200,
+    damping: 25,
+    mass: 1,
+  },
+
+  // Bouncy spring (energetic, fun)
+  bouncy: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 10,
+    mass: 1,
+  },
+
+  // No bounce (damped, controlled)
+  noBounce: {
+    type: "spring" as const,
+    stiffness: 300,
+    damping: 35,
+    mass: 1,
+  },
+} as const;
+
+/**
  * Reduced Motion Support
  * Respects prefers-reduced-motion media query
  */
@@ -266,6 +329,14 @@ export const reducedMotion = {
 
   // Utility class to disable animations
   disableAnimations: "animation: none !important; transition: none !important;",
+
+  // Reduced motion spring (instant, no animation)
+  spring: {
+    type: "spring" as const,
+    stiffness: 1000,
+    damping: 100,
+    mass: 1,
+  },
 } as const;
 
 /**
@@ -281,6 +352,15 @@ export const motionCSSVariables = {
   "--duration-slower": durations.slower,
   "--duration-slowest": durations.slowest,
 
+  // Additional granular durations
+  "--duration-75": durations["75"],
+  "--duration-100": durations["100"],
+  "--duration-200": durations["200"],
+  "--duration-250": durations["250"],
+  "--duration-400": durations["400"],
+  "--duration-600": durations["600"],
+  "--duration-800": durations["800"],
+
   // Easings
   "--ease-linear": easings.linear,
   "--ease-in": easings["ease-in"],
@@ -288,12 +368,26 @@ export const motionCSSVariables = {
   "--ease-in-out": easings["ease-in-out"],
   "--ease-bounce": easings.bounce,
   "--ease-elastic": easings.elastic,
+  "--ease-out-cubic": easings["ease-out-cubic"],
+  "--ease-in-cubic": easings["ease-in-cubic"],
+  "--ease-in-out-cubic": easings["ease-in-out-cubic"],
 
   // Transitions
   "--transition-fast": transitions.fast,
   "--transition-normal": transitions.normal,
   "--transition-slow": transitions.slow,
   "--transition-default": transitions.DEFAULT,
+  "--transition-fast-in": transitions["fast-in"],
+  "--transition-fast-out": transitions["fast-out"],
+  "--transition-fast-in-out": transitions["fast-in-out"],
+  "--transition-normal-in": transitions["normal-in"],
+  "--transition-normal-out": transitions["normal-out"],
+  "--transition-normal-in-out": transitions["normal-in-out"],
+  "--transition-slow-in": transitions["slow-in"],
+  "--transition-slow-out": transitions["slow-out"],
+  "--transition-slow-in-out": transitions["slow-in-out"],
+  "--transition-bounce": transitions.bounce,
+  "--transition-elastic": transitions.elastic,
 } as const;
 
 /**
@@ -344,3 +438,4 @@ export type Easing = keyof typeof easings;
 export type Transition = keyof typeof transitions;
 export type Keyframe = keyof typeof keyframes;
 export type Animation = keyof typeof animations;
+export type Spring = keyof typeof springs;

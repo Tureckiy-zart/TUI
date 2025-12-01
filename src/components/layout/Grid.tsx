@@ -3,11 +3,14 @@
  *
  * Token-driven CSS Grid container component with support for columns, rows,
  * gap, alignment, and responsive layout using CSS variables.
+ * Supports animation props via Framer Motion when provided.
  */
 
 import { cva, type VariantProps } from "class-variance-authority";
+import { type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
 
+import type { AnimationProps } from "@/animation/types";
 import { getSpacingCSSVar, isResponsiveValue, type ResponsiveValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
@@ -127,12 +130,27 @@ function getGapCSSValue(
   return getSpacingCSSVar(value as string | number);
 }
 
+/**
+ * Check if component has animation props
+ */
+function hasAnimationProps(props: Partial<AnimationProps>): boolean {
+  return !!(
+    props.initial !== undefined ||
+    props.animate !== undefined ||
+    props.exit !== undefined ||
+    props.transition !== undefined ||
+    props.whileHover !== undefined ||
+    props.whileFocus !== undefined ||
+    props.whileTap !== undefined ||
+    props.whileDrag !== undefined ||
+    props.whileInView !== undefined
+  );
+}
+
 export interface GridProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    Omit<
-      VariantProps<typeof gridVariants>,
-      "cols" | "rows" | "gap" | "align" | "justify" | "flow"
-    > {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
+    Omit<VariantProps<typeof gridVariants>, "cols" | "rows" | "gap" | "align" | "justify" | "flow">,
+    AnimationProps {
   /**
    * Number of columns (base breakpoint)
    */
@@ -180,7 +198,34 @@ export interface GridProps
 }
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  ({ className, cols, md, lg, xl, rows, gap, align, justify, flow, style, ...props }, ref) => {
+  (
+    {
+      className,
+      cols,
+      md,
+      lg,
+      xl,
+      rows,
+      gap,
+      align,
+      justify,
+      flow,
+      style,
+      // Animation props
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+      viewport,
+      ...props
+    },
+    ref,
+  ) => {
     // Get base values for CVA
     const colsValue = getBaseValue(cols) as ColumnValue | undefined;
     const rowsValue = getBaseValue(rows) as 1 | 2 | 3 | 4 | 5 | 6 | "none" | undefined;
@@ -243,14 +288,72 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       flow: flowValue,
     });
 
-    return (
-      <div
-        ref={ref}
-        className={cn(baseClasses, hasResponsiveProps && responsiveCols, className)}
-        style={mergedStyle}
-        {...props}
-      />
-    );
+    // Check if we need to use motion component
+    const hasAnimations = hasAnimationProps({
+      initial,
+      animate,
+      exit,
+      transition,
+      whileHover,
+      whileFocus,
+      whileTap,
+      whileDrag,
+      whileInView,
+    });
+
+    // Animation props for motion component
+    const animationProps = hasAnimations
+      ? {
+          initial,
+          animate,
+          exit,
+          transition,
+          whileHover,
+          whileFocus,
+          whileTap,
+          whileDrag,
+          whileInView,
+          viewport,
+        }
+      : {};
+
+    const baseClassName = cn(baseClasses, hasResponsiveProps && responsiveCols, className);
+
+    if (hasAnimations) {
+      // Exclude conflicting handlers from props to avoid conflict with Framer Motion
+      const {
+        onDrag: _onDrag,
+        onDragStart: _onDragStart,
+        onDragEnd: _onDragEnd,
+        onAnimationStart: _onAnimationStart,
+        onAnimationEnd: _onAnimationEnd,
+        onAnimationIteration: _onAnimationIteration,
+        ...restProps
+      } = props;
+
+      // Type restProps to exclude conflicting handlers (animation props are already destructured above)
+      const safeProps = restProps as Omit<
+        React.HTMLAttributes<HTMLDivElement>,
+        | "onDrag"
+        | "onDragStart"
+        | "onDragEnd"
+        | "onAnimationStart"
+        | "onAnimationEnd"
+        | "onAnimationIteration"
+      >;
+
+      return (
+        <motion.div
+          ref={ref}
+          className={baseClassName}
+          style={mergedStyle}
+          {...(animationProps as Partial<HTMLMotionProps<"div">>)}
+          {...safeProps}
+        />
+      );
+    }
+
+    return <div ref={ref} className={baseClassName} style={mergedStyle} {...props} />;
   },
 );
 

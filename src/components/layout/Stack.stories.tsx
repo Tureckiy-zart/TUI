@@ -161,7 +161,7 @@ export const TokenBasedSpacing: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Layout Stack Token: md</h3>
-        <Stack spacing="stack-md">
+        <Stack spacing="md">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -169,7 +169,7 @@ export const TokenBasedSpacing: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Layout Stack Token: lg</h3>
-        <Stack spacing="stack-lg">
+        <Stack spacing="lg">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
