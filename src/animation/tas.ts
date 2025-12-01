@@ -270,29 +270,22 @@ export function getAnimationConfig(
   if (duration) {
     let parsedDuration: number | undefined;
 
+    // Handle string duration (token or CSS value)
     if (typeof duration === "string") {
       // CRITICAL: Check if it's a Duration token FIRST (e.g., "normal", "fast", "slow")
-      // Duration tokens are string literals that map to CSS duration strings in the durations object
-      // We must check token lookup BEFORE attempting to parse as CSS duration string
-      if (duration in durations) {
-        // This is a Duration token - look up its CSS duration string value
-        const durationValue = durations[duration as keyof typeof durations];
-        if (durationValue && typeof durationValue === "string") {
-          // Parse the CSS duration string (e.g., "300ms" -> 0.3)
-          parsedDuration = parseDurationString(durationValue);
-          // If parsing fails, fallback to undefined (will use default)
-          if (parsedDuration === undefined) {
-            // Log warning in development
-            if (process.env.NODE_ENV === "development") {
-              console.warn(
-                `[TAS] Failed to parse duration token "${duration}" value "${durationValue}". Using default timing.`,
-              );
-            }
-          }
-        }
-      } else {
-        // Not a Duration token - treat as CSS duration string (e.g., "300ms", "0.5s")
-        parsedDuration = parseDurationString(duration);
+      // Duration tokens are string literals that map to CSS duration strings
+      const durationValue =
+        duration in durations ? durations[duration as keyof typeof durations] : duration;
+      parsedDuration = parseDurationString(durationValue);
+      // Log warning if token lookup failed in development
+      if (
+        parsedDuration === undefined &&
+        duration in durations &&
+        process.env.NODE_ENV === "development"
+      ) {
+        console.warn(
+          `[TAS] Failed to parse duration token "${duration}" value "${durationValue}". Using default timing.`,
+        );
       }
     } else if (typeof duration === "number") {
       // Duration is already a number (assumed to be in milliseconds)
@@ -301,7 +294,6 @@ export function getAnimationConfig(
       }
     } else {
       // Duration is a Duration token type (TypeScript type, not string literal)
-      // This branch handles cases where TypeScript knows it's a Duration type
       const durationValue = durations[duration as keyof typeof durations];
       if (durationValue && typeof durationValue === "string") {
         parsedDuration = parseDurationString(durationValue);
