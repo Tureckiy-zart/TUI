@@ -7,6 +7,9 @@ import tseslint from "typescript-eslint";
 
 export default [
   {
+    // =====================================================================
+    //  GLOBAL IGNORE LIST
+    // =====================================================================
     ignores: [
       "dist/**",
       "node_modules/**",
@@ -18,14 +21,22 @@ export default [
       "**/*.stories.ts",
       "**/*.stories.js",
       "**/*.stories.jsx",
-      "**/*.test.tsx",
-      "**/*.test.ts",
       "*.config.{ts,js,mjs,cjs}",
       "vite.config.ts",
       "tailwind.config.ts",
       "jest.config.*",
       "jest.setup.js",
       "scripts/**",
+
+      // =================================================================
+      //  🧪 FULL TESTS EXCLUSION — исключить тесты из линтинга полностью
+      // =================================================================
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/__tests__/**",
+      "**/tests/**",
     ],
   },
   {
