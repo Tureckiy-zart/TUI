@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Stack Primitive Component
  *

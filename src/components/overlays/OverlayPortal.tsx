@@ -23,6 +23,10 @@ export function OverlayPortal({ children, container, className, style }: Overlay
     return null;
   }
 
+  if (typeof document === "undefined") {
+    return null;
+  }
+
   const targetContainer = container || document.body;
 
   return createPortal(

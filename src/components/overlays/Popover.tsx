@@ -1,3 +1,5 @@
+"use client";
+
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "framer-motion";

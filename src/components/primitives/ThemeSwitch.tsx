@@ -70,17 +70,19 @@ function getInitialMode(): Mode {
     return themeAttr;
   }
 
-  try {
-    const storedMode = window.localStorage.getItem(MODE_STORAGE_KEY);
-    if (storedMode === "day" || storedMode === "night") {
-      return storedMode;
-    }
+  if (typeof window !== "undefined") {
+    try {
+      const storedMode = window.localStorage.getItem(MODE_STORAGE_KEY);
+      if (storedMode === "day" || storedMode === "night") {
+        return storedMode;
+      }
 
-    const legacyTheme = window.localStorage.getItem(LEGACY_STORAGE_KEY);
-    if (legacyTheme === "dark") return "night";
-    if (legacyTheme === "light") return "day";
-  } catch {
-    // Access to localStorage can throw in private mode – ignore and fall back.
+      const legacyTheme = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (legacyTheme === "dark") return "night";
+      if (legacyTheme === "light") return "day";
+    } catch {
+      // Access to localStorage can throw in private mode – ignore and fall back.
+    }
   }
 
   const cookieMode = readCookieValue(MODE_COOKIE);
@@ -97,13 +99,17 @@ function getInitialMode(): Mode {
 }
 
 function persistMode(nextMode: Mode) {
+  if (typeof document === "undefined") return;
+
   applyDocumentMode(nextMode);
 
-  try {
-    window.localStorage.setItem(MODE_STORAGE_KEY, nextMode);
-    window.localStorage.setItem(LEGACY_STORAGE_KEY, nextMode === "night" ? "dark" : "light");
-  } catch {
-    // Safe to ignore localStorage write errors.
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.setItem(MODE_STORAGE_KEY, nextMode);
+      window.localStorage.setItem(LEGACY_STORAGE_KEY, nextMode === "night" ? "dark" : "light");
+    } catch {
+      // Safe to ignore localStorage write errors.
+    }
   }
 
   const expiry = new Date();

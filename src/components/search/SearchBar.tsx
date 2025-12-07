@@ -44,7 +44,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const handleBlur = (_e: React.FocusEvent) => {
     // Delay to allow click on suggestion
     setTimeout(() => {
-      if (!searchRef.current?.contains(document.activeElement)) {
+      if (typeof document !== "undefined" && !searchRef.current?.contains(document.activeElement)) {
         setIsFocused(false);
         setSelectedIndex(-1);
       }
@@ -84,6 +84,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   // Close suggestions when clicking outside
   useEffect(() => {
+    if (typeof document === "undefined") return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsFocused(false);

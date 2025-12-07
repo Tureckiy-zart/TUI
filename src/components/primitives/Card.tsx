@@ -1,3 +1,5 @@
+"use client";
+
 // Re-export shadcn/ui Card components with Tenerife branding
 export {
   Card,
