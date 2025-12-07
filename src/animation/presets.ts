@@ -4,7 +4,7 @@
  * Reusable animation presets for common UI patterns.
  * All presets use motion tokens and respect reduced motion preferences.
  */
-
+"use client";
 import { createRevealConfig, createSpring, getAnimationConfig, shouldReduceMotion } from "./tas";
 import type { AnimationProps, PresetConfig, Spring, SpringConfig } from "./types";
 

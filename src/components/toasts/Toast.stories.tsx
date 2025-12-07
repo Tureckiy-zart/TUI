@@ -1,3 +1,4 @@
+"use client";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Toast } from "./Toast";
 import { ToastProvider, useToast } from "./ToastProvider";

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * SectionBuilder Component
  *
@@ -8,8 +10,6 @@
  * All styling uses design tokens - no raw CSS values or hardcoded styles.
  * Fully theme-aware and brand-compliant.
  */
-
-"use client";
 
 import * as React from "react";
 

@@ -4,7 +4,7 @@
  * Demonstrates all available brand themes in Storybook.
  * Shows how components look with different brand configurations side-by-side.
  */
-
+"use client";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider, useTheme } from "@/theme";
 import { getAllBrands } from "@/themes/brand_engine";

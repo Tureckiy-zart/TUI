@@ -3,7 +3,7 @@
  *
  * Comprehensive stories demonstrating all TAS features, presets, and accessibility.
  */
-
+"use client";
 import type { Meta, StoryObj } from "@storybook/react";
 import { AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState } from "react";
