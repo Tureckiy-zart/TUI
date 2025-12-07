@@ -1,6 +1,6 @@
 {
   "name": "@tenerife.music/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "type": "module",
   "description": "Tenerife.Music UI Component Library - A hybrid design system built on shadcn/ui primitives with Tenerife branding",
