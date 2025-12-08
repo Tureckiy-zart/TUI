@@ -13,11 +13,15 @@ export * from "./tokens";
 export type { FilterOption, FilterState } from "./components/filters/types";
 // Card component types
 export type { EventCardProps } from "./components/cards/EventCard";
+// Backward compatibility: EventCardEvent is an alias for EventCardProps
+export type { EventCardProps as EventCardEvent } from "./components/cards/EventCard";
 export type { VenueCardProps } from "./components/cards/VenueCard";
 // Section component types
 export type { SectionBuilderConfig, SectionBuilderProps } from "./components/SectionBuilder";
 export type { ArticleItem } from "./components/sections/ArticlesSection";
 export type { TrendingItem } from "./components/sections/TrendingSection";
+// Control component types
+export type { LanguageOption } from "./components/controls/LanguageSelector";
 
 // ============================================================================
 // PRIMITIVE COMPONENTS
