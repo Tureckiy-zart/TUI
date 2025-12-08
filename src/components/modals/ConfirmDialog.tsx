@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "@/components/primitives/Button";
+import { Button, type ButtonProps } from "@/components/primitives/Button";
 
 import {
   Modal,
@@ -22,7 +22,7 @@ export interface ConfirmDialogProps {
   confirmText: string;
   cancelText: string;
   loadingText?: string;
-  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
+  variant?: ButtonProps["variant"];
   isLoading?: boolean;
 }
 
@@ -86,7 +86,7 @@ export function useConfirmDialog() {
     cancelText?: string;
     loadingText?: string;
     onConfirm?: () => void;
-    variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
+    variant?: ButtonProps["variant"];
   }>({
     isOpen: false,
   });
@@ -99,7 +99,7 @@ export function useConfirmDialog() {
       cancelText: string;
       loadingText?: string;
       onConfirm: () => void;
-      variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
+      variant?: ButtonProps["variant"];
     }) => {
       setState({
         isOpen: true,

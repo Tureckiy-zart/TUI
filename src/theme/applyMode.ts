@@ -12,6 +12,8 @@ import {
   accentColors as baseAccentColors,
   baseColors as baseBaseColors,
   type BaseColorTokens,
+  type ChartColors,
+  chartColors as baseChartColors,
   type ColorScale,
   type Mode,
   primaryColors as basePrimaryColors,
@@ -153,6 +155,11 @@ function getMergedTokens(_mode: Mode) {
     night: mergeObject(baseTextColors.night, override?.textColorsNight),
   };
 
+  const chartColors: Record<Mode, ChartColors> = {
+    day: baseChartColors.day,
+    night: baseChartColors.night,
+  };
+
   return {
     primaryColors,
     accentColors,
@@ -161,6 +168,7 @@ function getMergedTokens(_mode: Mode) {
     surfaceColors,
     semanticColors,
     textColors,
+    chartColors,
   };
 }
 
@@ -182,6 +190,7 @@ function updateCSSVariablesFromTokens(mode: Mode) {
     surfaceColors,
     semanticColors,
     textColors,
+    chartColors,
   } = tokens;
 
   // Base colors (from merged tokens)
@@ -223,6 +232,14 @@ function updateCSSVariablesFromTokens(mode: Mode) {
   root.style.setProperty("--text-tertiary", text.tertiary);
   root.style.setProperty("--text-muted", text.muted);
   root.style.setProperty("--text-inverse", text.inverse);
+
+  // Chart colors (from merged tokens)
+  const chart = chartColors[mode];
+  root.style.setProperty("--chart-1", chart.chart1);
+  root.style.setProperty("--chart-2", chart.chart2);
+  root.style.setProperty("--chart-3", chart.chart3);
+  root.style.setProperty("--chart-4", chart.chart4);
+  root.style.setProperty("--chart-5", chart.chart5);
 
   // Primary color scale (from merged tokens)
   root.style.setProperty("--primary-50", primaryColors[50]);

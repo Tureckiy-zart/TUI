@@ -4,7 +4,7 @@ import React from "react";
 
 import { Input } from "@/components/primitives/Input";
 import { Label } from "@/components/primitives/Label";
-import { Text } from "@/components/primitives/Typography";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 interface FormInputProps
@@ -51,12 +51,12 @@ export const FormInput: React.FC<FormInputProps> = ({
         {...rest}
       />
       {helperText && !error && (
-        <Text size="sm" variant="muted">
+        <Text size="sm" muted>
           {helperText}
         </Text>
       )}
       {error && (
-        <Text size="sm" variant="destructive">
+        <Text size="sm" className="text-destructive">
           {error}
         </Text>
       )}

@@ -5,13 +5,13 @@
  * Shows how components look with different theme configurations.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { ThemeProvider } from "@/theme";
 import { getAllThemes } from "@/theme/registry";
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { Badge } from "./Badge";
 import { Button } from "./Button";
 import { Card, CardContent, CardHeader, CardTitle } from "./Card";
-import { Badge } from "./Badge";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const meta: Meta<typeof ThemeProvider> = {
@@ -50,7 +50,7 @@ export const DefaultTheme: Story = {
         </div>
         <div className="flex flex-wrap gap-md">
           <Button variant="primary">Primary</Button>
-          <Button variant="accent">Accent</Button>
+          <Button variant="secondary">Secondary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="destructive">Destructive</Button>
           <Button variant="outline">Outline</Button>
@@ -92,7 +92,7 @@ export const DarkTheme: Story = {
         </div>
         <div className="flex flex-wrap gap-md">
           <Button variant="primary">Primary</Button>
-          <Button variant="accent">Accent</Button>
+          <Button variant="secondary">Secondary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="destructive">Destructive</Button>
           <Button variant="outline">Outline</Button>
@@ -132,7 +132,7 @@ export const BrandTheme: Story = {
         </div>
         <div className="flex flex-wrap gap-md">
           <Button variant="primary">Primary</Button>
-          <Button variant="accent">Accent</Button>
+          <Button variant="secondary">Secondary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="destructive">Destructive</Button>
           <Button variant="outline">Outline</Button>
@@ -186,8 +186,8 @@ export const AllThemesComparison: Story = {
                   <Button variant="primary" size="sm">
                     Primary
                   </Button>
-                  <Button variant="accent" size="sm">
-                    Accent
+                  <Button variant="secondary" size="sm">
+                    Secondary
                   </Button>
                   <Button variant="secondary" size="sm">
                     Secondary
@@ -253,7 +253,7 @@ export const ThemeSwitching: Story = {
             <CardContent>
               <div className="flex flex-wrap gap-md">
                 <Button variant="primary">Primary Button</Button>
-                <Button variant="accent">Accent Button</Button>
+                <Button variant="secondary">Secondary Button</Button>
                 <Button variant="secondary">Secondary Button</Button>
                 <Button variant="destructive">Destructive Button</Button>
               </div>

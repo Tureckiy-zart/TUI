@@ -68,7 +68,7 @@ export const FadePresets: Story = {
       minWidth: "150px",
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
@@ -183,7 +183,7 @@ export const SlidePresets: Story = {
                     textAlign: "center",
                     width: "100%",
                     border: "1px solid hsl(var(--border))",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    boxShadow: "var(--shadow-sm)",
                   }}
                 >
                   <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
@@ -222,7 +222,7 @@ export const ScalePresets: Story = {
       minWidth: "150px",
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
@@ -284,7 +284,7 @@ export const LayoutPrimitives: Story = {
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
@@ -398,7 +398,7 @@ export const SpringAnimations: Story = {
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
@@ -495,7 +495,7 @@ export const RevealOnScroll: Story = {
             alignItems: "center",
             justifyContent: "center",
             border: "1px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <Stack spacing={3} align="center">
@@ -609,7 +609,7 @@ export const ReducedMotion: Story = {
             textAlign: "center",
             width: "100%",
             border: "2px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <Text className="text-lg font-bold text-white">
@@ -631,7 +631,7 @@ export const ReducedMotion: Story = {
             width: "100%",
             textAlign: "center",
             border: "1px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <Text className="text-base font-semibold text-gray-900">
@@ -669,7 +669,7 @@ export const CustomTransitions: Story = {
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
@@ -727,7 +727,7 @@ export const InteractiveAnimations: Story = {
       textAlign: "center" as const,
       minWidth: "150px",
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (

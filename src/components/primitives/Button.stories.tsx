@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
     docs: {
       description: {
         component:
-          "Button component for user interactions. Supports 7 variants and 5 sizes with icon slot support.",
+          "Button component for user interactions. Supports 5 variants and 4 sizes with icon slot support.",
       },
     },
   },
@@ -18,7 +18,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"],
+      options: ["primary", "secondary", "outline", "ghost", "destructive"],
       description: "Button variant style",
       table: {
         type: { summary: "string" },
@@ -27,7 +27,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: { type: "select" },
-      options: ["xs", "sm", "md", "lg", "xl", "icon"],
+      options: ["sm", "md", "lg", "icon"],
       description: "Button size",
       table: {
         type: { summary: "string" },
@@ -66,13 +66,6 @@ export const Secondary: Story = {
   },
 };
 
-export const Accent: Story = {
-  args: {
-    variant: "accent",
-    children: "Accent Button",
-  },
-};
-
 export const Outline: Story = {
   args: {
     variant: "outline",
@@ -84,13 +77,6 @@ export const Ghost: Story = {
   args: {
     variant: "ghost",
     children: "Ghost Button",
-  },
-};
-
-export const Link: Story = {
-  args: {
-    variant: "link",
-    children: "Link Button",
   },
 };
 
@@ -106,20 +92,11 @@ export const AllVariants: Story = {
     <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
-      <Button variant="accent">Accent</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
       <Button variant="destructive">Destructive</Button>
     </div>
   ),
-};
-
-export const ExtraSmall: Story = {
-  args: {
-    size: "xs",
-    children: "Extra Small",
-  },
 };
 
 export const Small: Story = {
@@ -143,13 +120,6 @@ export const Large: Story = {
   },
 };
 
-export const ExtraLarge: Story = {
-  args: {
-    size: "xl",
-    children: "Extra Large",
-  },
-};
-
 export const IconSize: Story = {
   args: {
     size: "icon",
@@ -160,11 +130,9 @@ export const IconSize: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
-      <Button size="xs">Extra Small</Button>
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
-      <Button size="xl">Extra Large</Button>
       <Button size="icon">🚀</Button>
     </div>
   ),
@@ -208,17 +176,11 @@ export const DisabledVariants: Story = {
       <Button variant="secondary" disabled>
         Secondary
       </Button>
-      <Button variant="accent" disabled>
-        Accent
-      </Button>
       <Button variant="outline" disabled>
         Outline
       </Button>
       <Button variant="ghost" disabled>
         Ghost
-      </Button>
-      <Button variant="link" disabled>
-        Link
       </Button>
       <Button variant="destructive" disabled>
         Destructive

@@ -3,7 +3,7 @@
 import React from "react";
 
 import { Label } from "@/components/primitives/Label";
-import { Text } from "@/components/primitives/Typography";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 interface FormSelectProps {
@@ -59,7 +59,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         ))}
       </select>
       {error && (
-        <Text size="sm" variant="destructive">
+        <Text size="sm" className="text-destructive">
           {error}
         </Text>
       )}

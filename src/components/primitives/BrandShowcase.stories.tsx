@@ -5,12 +5,12 @@
  * Shows how components look with different brand configurations side-by-side.
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider, useTheme } from "@/theme";
 import { getAllBrands } from "@/themes/brand_engine";
-import { Button } from "./Button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./Card";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./Badge";
+import { Button } from "./Button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const meta: Meta<typeof ThemeProvider> = {
@@ -62,8 +62,8 @@ function BrandShowcaseColumn({
             <Button variant="primary" size="sm">
               Primary
             </Button>
-            <Button variant="accent" size="sm">
-              Accent
+            <Button variant="secondary" size="sm">
+              Secondary
             </Button>
             <Button variant="secondary" size="sm">
               Secondary
@@ -212,7 +212,7 @@ export const BrandSwitching: Story = {
                 <div className="text-xs font-medium text-muted-foreground">Buttons</div>
                 <div className="flex flex-wrap gap-sm">
                   <Button variant="primary">Primary Button</Button>
-                  <Button variant="accent">Accent Button</Button>
+                  <Button variant="secondary">Secondary Button</Button>
                   <Button variant="secondary">Secondary Button</Button>
                   <Button variant="destructive">Destructive Button</Button>
                 </div>
@@ -369,8 +369,8 @@ export const BrandComponentsShowcase: Story = {
                 <Button variant="primary" size="sm">
                   Primary
                 </Button>
-                <Button variant="accent" size="sm">
-                  Accent
+                <Button variant="secondary" size="sm">
+                  Secondary
                 </Button>
                 <Button variant="secondary" size="sm">
                   Secondary

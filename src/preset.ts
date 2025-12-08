@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
+import { durations, easings } from "./tokens/motion";
 import { borderRadius } from "./tokens/radius";
+import { tailwindShadowConfig } from "./tokens/shadows";
+import { tailwindSpacingConfig } from "./tokens/spacing";
 
 /**
  * Tailwind CSS preset for Tenerife.Music UI
@@ -49,16 +52,18 @@ const preset: Partial<Config> = {
           foreground: "hsl(var(--tm-accent-foreground))",
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: borderRadius.lg,
+        md: borderRadius.md,
+        sm: borderRadius.sm,
         none: borderRadius.none,
         DEFAULT: borderRadius.DEFAULT,
+        base: borderRadius.base,
+        xs: borderRadius.xs,
         xl: borderRadius.xl,
         "2xl": borderRadius["2xl"],
         "3xl": borderRadius["3xl"],
@@ -75,9 +80,13 @@ const preset: Partial<Config> = {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down": `accordion-down ${durations.fast} ${easings["ease-out"]}`,
+        "accordion-up": `accordion-up ${durations.fast} ${easings["ease-out"]}`,
       },
+      spacing: tailwindSpacingConfig.spacing,
+      boxShadow: tailwindShadowConfig.boxShadow,
+      ringWidth: tailwindShadowConfig.ringWidth,
+      ringColor: tailwindShadowConfig.ringColor,
     },
   },
   plugins: [],
