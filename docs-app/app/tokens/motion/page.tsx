@@ -2,6 +2,7 @@
 
 // Motion tokens are exported from the library
 import {
+  MOTION_TOKENS,
   motionV2Durations,
   motionV2Easings,
   motionV2Fade,
@@ -22,8 +23,8 @@ export default function MotionPage() {
       >
         <div className="space-y-6">
           <div>
-            <h3 className="mb-4 text-xl font-semibold">Durations</h3>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <h3 className="mb-md text-xl font-semibold">Durations</h3>
+            <div className="grid grid-cols-2 gap-md md:grid-cols-4">
               {Object.entries(motionV2Durations).map(([key, value]) => (
                 <TokenCard
                   key={key}
@@ -32,7 +33,7 @@ export default function MotionPage() {
                   preview={
                     <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                       <div
-                        className="h-full rounded-full bg-primary transition-all"
+                        className={`h-full rounded-full bg-primary ${MOTION_TOKENS.transition.all}`}
                         style={{
                           width: "100%",
                           transitionDuration: typeof value === "string" ? value : String(value),
@@ -46,8 +47,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xl font-semibold">Easings</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <h3 className="mb-md text-xl font-semibold">Easings</h3>
+            <div className="grid grid-cols-1 gap-md md:grid-cols-3">
               {Object.entries(motionV2Easings).map(([key, value]) => (
                 <TokenCard
                   key={key}
@@ -71,8 +72,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xl font-semibold">Transitions</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="mb-md text-xl font-semibold">Transitions</h3>
+            <div className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(motionV2Transitions).map(([key, value]) => (
                 <TokenCard
                   key={key}
@@ -91,7 +92,7 @@ export default function MotionPage() {
 
           <div>
             <h3 className="mb-4 text-xl font-semibold">Fade Animations</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-md md:grid-cols-2">
               <TokenCard
                 name="fade-in"
                 value={JSON.stringify(motionV2Fade.in, null, 2)}
@@ -108,8 +109,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xl font-semibold">Scale Animations</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <h3 className="mb-md text-xl font-semibold">Scale Animations</h3>
+            <div className="grid grid-cols-1 gap-md md:grid-cols-2">
               <TokenCard
                 name="scale-in"
                 value={JSON.stringify(motionV2Scale.in, null, 2)}
@@ -132,8 +133,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xl font-semibold">Slide Animations</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="mb-md text-xl font-semibold">Slide Animations</h3>
+            <div className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(motionV2Slide).map(([direction, animations]) => (
                 <div key={direction} className="space-y-2">
                   <h4 className="font-medium capitalize">{direction}</h4>

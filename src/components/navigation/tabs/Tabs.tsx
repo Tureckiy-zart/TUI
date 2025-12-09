@@ -11,6 +11,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 
 // ============================================================================
@@ -39,7 +40,7 @@ const tabsListVariants = cva(
 );
 
 const tabsTriggerVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} transition-colors disabled:pointer-events-none disabled:opacity-50 relative`,
+  `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} ${MOTION_TOKENS.transition.colors} disabled:pointer-events-none disabled:opacity-50 relative`,
   {
     variants: {
       size: {

@@ -14,8 +14,7 @@ import { cn } from "@/lib/utils";
 import { POPOVER_TOKENS } from "@/tokens/components/popover";
 
 import { Portal } from "../../overlays/Portal";
-import type { Placement } from "../../overlays/utils/positioning";
-import { usePositioning } from "../../overlays/utils/positioning";
+import { type Placement, usePositioning } from "../../overlays/utils/positioning";
 import { usePopoverContext } from "./PopoverRoot";
 
 export const popoverContentVariants = cva(

@@ -74,15 +74,12 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
           className,
         )}
         onClick={handleSort}
-        aria-sort={
-          sortDirection === "asc"
-            ? "ascending"
-            : sortDirection === "desc"
-              ? "descending"
-              : sortable
-                ? "none"
-                : undefined
-        }
+        aria-sort={(() => {
+          if (sortDirection === "asc") return "ascending";
+          if (sortDirection === "desc") return "descending";
+          if (sortable) return "none";
+          return undefined;
+        })()}
         role="columnheader"
         {...props}
       >

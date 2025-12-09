@@ -8,22 +8,22 @@ import { cn } from "@/lib/utils";
 import { BUTTON_TOKENS } from "@/tokens/components/button";
 
 const buttonVariants = cva(
-  `inline-flex items-center justify-center ${BUTTON_TOKENS.gap} whitespace-nowrap ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.fontSize.md} font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:${BUTTON_TOKENS.iconSize} [&_svg]:shrink-0`,
+  `inline-flex items-center justify-center ${BUTTON_TOKENS.gap} whitespace-nowrap ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.fontSize.md} font-medium ${BUTTON_TOKENS.transition.colors} focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:${BUTTON_TOKENS.iconSize} [&_svg]:shrink-0`,
   {
     variants: {
       variant: {
-        primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-        secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-        accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-        outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        destructive: `bg-destructive text-destructive-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-destructive/90`,
+        primary: `${BUTTON_TOKENS.variant.primary.background} ${BUTTON_TOKENS.variant.primary.text} ${BUTTON_TOKENS.shadow.primary} ${BUTTON_TOKENS.variant.primary.hover}`,
+        secondary: `${BUTTON_TOKENS.variant.secondary.background} ${BUTTON_TOKENS.variant.secondary.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.secondary.hover}`,
+        accent: `${BUTTON_TOKENS.variant.accent.background} ${BUTTON_TOKENS.variant.accent.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.accent.hover}`,
+        outline: `${BUTTON_TOKENS.variant.outline.border} ${BUTTON_TOKENS.variant.outline.background} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.outline.hover.background} ${BUTTON_TOKENS.variant.outline.hover.text}`,
+        ghost: `${BUTTON_TOKENS.variant.ghost.hover.background} ${BUTTON_TOKENS.variant.ghost.hover.text}`,
+        destructive: `${BUTTON_TOKENS.variant.destructive.background} ${BUTTON_TOKENS.variant.destructive.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.destructive.hover}`,
       },
       size: {
         sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.padding.vertical.sm} ${BUTTON_TOKENS.fontSize.sm}`,
         md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.md} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.md}`,
         lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.lg}`,
-        icon: `${BUTTON_TOKENS.height.icon} w-9`,
+        icon: `${BUTTON_TOKENS.height.icon} ${BUTTON_TOKENS.width.icon}`,
       },
     },
     defaultVariants: {

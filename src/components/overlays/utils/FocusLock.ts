@@ -102,18 +102,18 @@ export function useFocusLock({
 
       const isShiftTab = event.shiftKey;
 
-      if (isShiftTab) {
-        // Shift+Tab: focus previous element or wrap to last
-        if (document.activeElement === firstElement) {
-          event.preventDefault();
-          lastElement?.focus();
-        }
-      } else {
-        // Tab: focus next element or wrap to first
-        if (document.activeElement === lastElement) {
-          event.preventDefault();
-          firstElement?.focus();
-        }
+      if (isShiftTab && document.activeElement === firstElement) {
+        // Shift+Tab: wrap to last
+        event.preventDefault();
+        lastElement?.focus();
+      } else if (!isShiftTab && document.activeElement === lastElement) {
+        // Tab: wrap to first
+        event.preventDefault();
+        firstElement?.focus();
+      } else if (!isShiftTab) {
+        // Tab: focus next element
+        const nextElement = getNextElement(document.activeElement as HTMLElement);
+        nextElement?.focus();
       }
     }
 

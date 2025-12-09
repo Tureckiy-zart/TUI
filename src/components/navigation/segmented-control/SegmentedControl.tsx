@@ -11,6 +11,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 
 // ============================================================================
@@ -18,7 +19,7 @@ import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 // ============================================================================
 
 const segmentedControlRootVariants = cva(
-  `inline-flex items-center ${NAVIGATION_TOKENS.spacing.listGap.xs} ${NAVIGATION_TOKENS.radius.default} ${NAVIGATION_TOKENS.shadow.sm} p-1 bg-muted`,
+  `inline-flex items-center ${NAVIGATION_TOKENS.spacing.listGap.xs} ${NAVIGATION_TOKENS.radius.default} ${NAVIGATION_TOKENS.shadow.sm} ${NAVIGATION_TOKENS.container.padding.xs} ${NAVIGATION_TOKENS.container.background.muted}`,
   {
     variants: {
       orientation: {
@@ -39,7 +40,7 @@ const segmentedControlRootVariants = cva(
 );
 
 const segmentedControlItemVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} transition-all disabled:pointer-events-none disabled:opacity-50 relative`,
+  `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} ${MOTION_TOKENS.transition.all} disabled:pointer-events-none disabled:opacity-50 relative`,
   {
     variants: {
       size: {

@@ -63,7 +63,7 @@ function TableRoot<T extends Record<string, unknown>>({
   data: _data,
   columns: _columns,
   rowKey: _rowKey,
-  sortable = false,
+  sortable: _sortable = false,
   expandable = false,
   renderExpandableContent,
   loading: _loading = false,

@@ -59,15 +59,13 @@ export function HoverCardRoot({
         } else {
           setOpen(true);
         }
-      } else {
+      } else if (closeDelay > 0) {
         // Close with delay
-        if (closeDelay > 0) {
-          closeTimeoutRef.current = setTimeout(() => {
-            setOpen(false);
-          }, closeDelay);
-        } else {
+        closeTimeoutRef.current = setTimeout(() => {
           setOpen(false);
-        }
+        }, closeDelay);
+      } else {
+        setOpen(false);
       }
     },
     [openDelay, closeDelay],

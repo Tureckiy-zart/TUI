@@ -157,6 +157,27 @@ export const NAVIGATION_TOKENS = {
     ring: "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2",
     ringOffset: "focus-visible:ring-offset-2",
   } as const,
+
+  /**
+   * Container background tokens
+   * For segmented control and tab container backgrounds
+   */
+  container: {
+    background: {
+      muted: "bg-muted", // Muted background for container
+    } as const,
+    padding: {
+      xs: "p-xs", // 4px padding
+      sm: "p-sm", // 8px padding
+    } as const,
+  } as const,
+
+  /**
+   * Border color tokens
+   */
+  border: {
+    muted: "border-muted-foreground", // Muted border color
+  } as const,
 } as const;
 
 /**

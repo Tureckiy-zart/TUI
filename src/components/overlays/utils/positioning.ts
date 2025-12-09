@@ -154,16 +154,7 @@ export function usePositioning({
     floating.refs.setFloating(content);
 
     setIsPositioned(true);
-  }, [
-    mounted,
-    enabled,
-    anchorRef,
-    contentRef,
-    floating.refs.setReference,
-    floating.refs.setFloating,
-    placement,
-    offsetValue,
-  ]);
+  }, [mounted, enabled, anchorRef, contentRef, floating.refs, placement, offsetValue]);
 
   // Build position styles
   const position: React.CSSProperties = React.useMemo(() => {

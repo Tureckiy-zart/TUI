@@ -38,7 +38,7 @@ export interface DataListRootProps extends React.HTMLAttributes<HTMLDListElement
  * ```
  */
 const DataListRoot = React.forwardRef<HTMLDListElement, DataListRootProps>(
-  ({ labelWidth = "md", className, children, ...props }, ref) => {
+  ({ labelWidth: _labelWidth = "md", className, children, ...props }, ref) => {
     return (
       <dl ref={ref} className={cn(DATA_TOKENS.dataList.spacing.gap, className)} {...props}>
         {children}

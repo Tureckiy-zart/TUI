@@ -39,7 +39,11 @@ export interface DisplayProps
 
 const Display = React.forwardRef<HTMLElement, DisplayProps>(
   ({ className, size, weight, muted, as = "h1", children, ...props }, ref) => {
-    const Component = as === "h1" ? "h1" : as === "h2" ? "h2" : "div";
+    const Component = (() => {
+      if (as === "h1") return "h1";
+      if (as === "h2") return "h2";
+      return "div";
+    })();
 
     return (
       <Component

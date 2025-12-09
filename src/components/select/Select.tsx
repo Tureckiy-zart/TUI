@@ -334,7 +334,11 @@ export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerPr
             selectTriggerVariants({
               variant: effectiveVariant,
               size: effectiveSize,
-              state: context.disabled ? "disabled" : context.open ? "open" : "closed",
+              state: (() => {
+                if (context.disabled) return "disabled";
+                if (context.open) return "open";
+                return "closed";
+              })(),
             }),
             className,
           )}
@@ -570,7 +574,11 @@ export const SelectOption = React.forwardRef<HTMLDivElement, SelectOptionProps>(
         className={cn(
           selectOptionVariants({
             size: effectiveSize,
-            state: isSelected ? "selected" : disabled || context.disabled ? "disabled" : "default",
+            state: (() => {
+              if (isSelected) return "selected";
+              if (disabled || context.disabled) return "disabled";
+              return "default";
+            })(),
           }),
           className,
         )}

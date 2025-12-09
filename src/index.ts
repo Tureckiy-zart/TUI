@@ -18,55 +18,55 @@ export {
 // UI COMPONENTS
 // ============================================================================
 // Button component (CVA-based, token-driven)
-export { Button, buttonVariants, type ButtonProps } from "./components/ui/button";
+export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
 
 // Text component (CVA-based, token-driven)
 export {
   Text,
-  textVariants,
   type TextProps,
   type TextSize,
+  textVariants,
   type TextWeight,
 } from "./components/ui/text";
 
 // Alert component (CVA-based, token-driven)
-export { Alert, alertVariants, type AlertProps } from "./components/ui/alert";
+export { Alert, type AlertProps, alertVariants } from "./components/ui/alert";
 
 // Typography components (CVA-based, token-driven)
-export { Body, bodyVariants, type BodyProps } from "./components/ui/body";
-export { Caption, captionVariants, type CaptionProps } from "./components/ui/caption";
-export { Code, codeVariants, type CodeProps } from "./components/ui/code";
-export { Display, displayVariants, type DisplayProps } from "./components/ui/display";
-export { Heading, headingVariants, type HeadingProps } from "./components/ui/heading";
-export { Lead, leadVariants, type LeadProps } from "./components/ui/lead";
+export { Body, type BodyProps, bodyVariants } from "./components/ui/body";
+export { Caption, type CaptionProps, captionVariants } from "./components/ui/caption";
+export { Code, type CodeProps, codeVariants } from "./components/ui/code";
+export { Display, type DisplayProps, displayVariants } from "./components/ui/display";
+export { Heading, type HeadingProps, headingVariants } from "./components/ui/heading";
+export { Lead, type LeadProps, leadVariants } from "./components/ui/lead";
 
 // Form components (CVA-based, token-driven)
-export { Checkbox, checkboxVariants, type CheckboxProps } from "./components/checkbox";
-export { Input, inputVariants, type InputProps } from "./components/input";
+export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/checkbox";
+export { Input, type InputProps, inputVariants } from "./components/input";
 export {
   Radio,
   RadioGroup,
-  radioVariants,
   type RadioGroupProps,
   type RadioProps,
+  radioVariants,
 } from "./components/radio";
 export {
   Select,
   SelectListbox,
+  type SelectListboxProps,
   selectListboxVariants,
   SelectOption,
+  type SelectOptionProps,
   selectOptionVariants,
   SelectRoot,
-  SelectTrigger,
-  selectTriggerVariants,
-  type SelectListboxProps,
-  type SelectOptionProps,
   type SelectRootProps,
   type SelectSize,
+  SelectTrigger,
   type SelectTriggerProps,
+  selectTriggerVariants,
   type SelectVariant,
 } from "./components/select";
-export { Textarea, textareaVariants, type TextareaProps } from "./components/textarea";
+export { Textarea, type TextareaProps, textareaVariants } from "./components/textarea";
 export {
   Field,
   type FieldControlProps,
@@ -75,7 +75,7 @@ export {
   type FieldLabelProps,
   type FieldProps,
 } from "./components/ui/field";
-export { Label, labelVariants, type LabelProps } from "./components/ui/label";
+export { Label, type LabelProps, labelVariants } from "./components/ui/label";
 
 // ============================================================================
 // LAYOUT PRIMITIVES
@@ -83,20 +83,20 @@ export { Label, labelVariants, type LabelProps } from "./components/ui/label";
 // Layout primitives (token-based, no raw values)
 export {
   Box,
-  Column,
-  Flex,
-  Grid,
-  Row,
-  Stack,
-  Surface,
-  surfaceVariants,
   type BoxProps,
+  Column,
   type ColumnProps,
+  Flex,
   type FlexProps,
+  Grid,
   type GridProps,
+  Row,
   type RowProps,
+  Stack,
   type StackProps,
+  Surface,
   type SurfaceProps,
+  surfaceVariants,
 } from "./components/layout";
 
 // ============================================================================
@@ -106,16 +106,16 @@ export {
 export {
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
-  Surface as ContainerSurface,
-  surfaceVariants as containerSurfaceVariants,
-  Section,
   type CardBodyProps,
+  CardFooter,
   type CardFooterProps,
+  CardHeader,
   type CardHeaderProps,
   type CardProps,
+  Surface as ContainerSurface,
   type SurfaceProps as ContainerSurfaceProps,
+  surfaceVariants as containerSurfaceVariants,
+  Section,
   type SectionProps,
 } from "./components/containers";
 
@@ -125,42 +125,42 @@ export {
 // Overlay components (Portal, Backdrop, Modal, Dialog, Toast)
 export {
   Backdrop,
+  type BackdropProps,
   Dialog,
   DialogBody,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  modalVariants,
-  Portal,
-  Toast,
-  ToastProvider,
-  ToastViewport,
-  useToast,
-  type BackdropProps,
   type DialogBodyProps,
+  DialogDescription,
   type DialogDescriptionProps,
+  DialogFooter,
   type DialogFooterProps,
+  DialogHeader,
   type DialogHeaderProps,
   type DialogProps,
+  DialogRoot,
+  DialogTitle,
   type DialogTitleProps,
+  Modal,
+  ModalBody,
   type ModalBodyProps,
+  ModalFooter,
   type ModalFooterProps,
+  ModalHeader,
   type ModalHeaderProps,
   type ModalProps,
+  modalVariants,
+  Portal,
   type PortalProps,
+  Toast,
   type ToastAction,
   type ToastData,
   type ToastOptions,
   type ToastPosition,
   type ToastProps,
+  ToastProvider,
   type ToastProviderProps,
+  ToastViewport,
   type ToastViewportProps,
+  useToast,
 } from "./components/overlays";
 
 // ============================================================================
@@ -168,29 +168,29 @@ export {
 // ============================================================================
 // Notification Center components (Provider, Panel, Trigger, List, Item, etc.)
 export {
+  type GroupByFunction,
   NotificationCenter,
   NotificationCenterDismissAll,
-  NotificationCenterGroupHeader,
-  NotificationCenterItem,
-  NotificationCenterList,
-  NotificationCenterPanel,
-  NotificationCenterProvider,
-  NotificationCenterTrigger,
-  useNotificationCenter,
-  useNotificationCenterContext,
-  type GroupByFunction,
   type NotificationCenterDismissAllProps,
+  NotificationCenterGroupHeader,
   type NotificationCenterGroupHeaderProps,
+  NotificationCenterItem,
   type NotificationCenterItemProps,
+  NotificationCenterList,
   type NotificationCenterListProps,
+  NotificationCenterPanel,
   type NotificationCenterPanelProps,
+  NotificationCenterProvider,
   type NotificationCenterProviderProps,
+  NotificationCenterTrigger,
   type NotificationCenterTriggerProps,
   type NotificationChannel,
   type NotificationContextType,
   type NotificationData,
   type NotificationOptions,
   type NotificationVariant,
+  useNotificationCenter,
+  useNotificationCenterContext,
 } from "./components/notifications";
 
 // ============================================================================
@@ -199,63 +199,63 @@ export {
 // Menu components (Popover, DropdownMenu, HoverCard, ContextMenu)
 export {
   ContextMenuContent,
+  type ContextMenuContentProps,
   ContextMenuGroup,
+  type ContextMenuGroupProps,
   ContextMenuItem,
+  type ContextMenuItemProps,
   ContextMenuLabel,
+  type ContextMenuLabelProps,
   // ContextMenu
   ContextMenuRoot,
+  type ContextMenuRootProps,
   ContextMenuSeparator,
+  type ContextMenuSeparatorProps,
   ContextMenuTrigger,
+  type ContextMenuTriggerProps,
   DropdownMenuCheckItem,
+  type DropdownMenuCheckItemProps,
   DropdownMenuContent,
+  type DropdownMenuContentProps,
   DropdownMenuGroup,
+  type DropdownMenuGroupProps,
   DropdownMenuItem,
+  type DropdownMenuItemProps,
   DropdownMenuLabel,
+  type DropdownMenuLabelProps,
   DropdownMenuRadioGroup,
+  type DropdownMenuRadioGroupProps,
   DropdownMenuRadioItem,
+  type DropdownMenuRadioItemProps,
   // DropdownMenu
   DropdownMenuRoot,
+  type DropdownMenuRootProps,
   DropdownMenuSeparator,
+  type DropdownMenuSeparatorProps,
   DropdownMenuSub,
   DropdownMenuSubContent,
+  type DropdownMenuSubContentProps,
+  type DropdownMenuSubProps,
   DropdownMenuSubTrigger,
+  type DropdownMenuSubTriggerProps,
   DropdownMenuTrigger,
+  type DropdownMenuTriggerProps,
   HoverCardContent,
+  type HoverCardContentProps,
   // HoverCard
   HoverCardRoot,
+  type HoverCardRootProps,
   HoverCardTrigger,
+  type HoverCardTriggerProps,
   PopoverArrow,
+  type PopoverArrowProps,
   PopoverContent,
+  type PopoverContentProps,
   popoverContentVariants,
   // Popover
   PopoverRoot,
-  PopoverTrigger,
-  type ContextMenuContentProps,
-  type ContextMenuGroupProps,
-  type ContextMenuItemProps,
-  type ContextMenuLabelProps,
-  type ContextMenuRootProps,
-  type ContextMenuSeparatorProps,
-  type ContextMenuTriggerProps,
-  type DropdownMenuCheckItemProps,
-  type DropdownMenuContentProps,
-  type DropdownMenuGroupProps,
-  type DropdownMenuItemProps,
-  type DropdownMenuLabelProps,
-  type DropdownMenuRadioGroupProps,
-  type DropdownMenuRadioItemProps,
-  type DropdownMenuRootProps,
-  type DropdownMenuSeparatorProps,
-  type DropdownMenuSubContentProps,
-  type DropdownMenuSubProps,
-  type DropdownMenuSubTriggerProps,
-  type DropdownMenuTriggerProps,
-  type HoverCardContentProps,
-  type HoverCardRootProps,
-  type HoverCardTriggerProps,
-  type PopoverArrowProps,
-  type PopoverContentProps,
   type PopoverRootProps,
+  PopoverTrigger,
   type PopoverTriggerProps,
 } from "./components/menus";
 
@@ -266,52 +266,52 @@ export {
 export {
   DataList,
   DataListItem,
+  type DataListItemProps,
   DataListLabel,
+  type DataListLabelProps,
   DataListRoot,
+  type DataListRootProps,
   DataListValue,
+  type DataListValueProps,
   EmptyState,
   EmptyStateAction,
-  EmptyStateDescription,
-  EmptyStateIcon,
-  EmptyStateTitle,
-  Skeleton,
-  skeletonVariants,
-  Table,
-  TableBody,
-  TableCell,
-  TableEmpty,
-  TableExpandableContent,
-  TableHead,
-  TableHeader,
-  TableLoadingState,
-  TableRoot,
-  TableRow,
-  TableSortIcon,
-  useTableContext,
-  type DataListItemProps,
-  type DataListLabelProps,
-  type DataListRootProps,
-  type DataListValueProps,
   type EmptyStateActionProps,
+  EmptyStateDescription,
   type EmptyStateDescriptionProps,
+  EmptyStateIcon,
   type EmptyStateIconProps,
   type EmptyStateProps,
+  EmptyStateTitle,
   type EmptyStateTitleProps,
+  Skeleton,
   type SkeletonProps,
+  skeletonVariants,
   type SortDirection,
   type SortState,
+  Table,
+  TableBody,
   type TableBodyProps,
+  TableCell,
   type TableCellProps,
   type TableColumn,
   type TableContextValue,
+  TableEmpty,
   type TableEmptyProps,
+  TableExpandableContent,
   type TableExpandableContentProps,
+  TableHead,
+  TableHeader,
   type TableHeaderProps,
   type TableHeadProps,
+  TableLoadingState,
   type TableLoadingStateProps,
+  TableRoot,
   type TableRootProps,
+  TableRow,
   type TableRowProps,
+  TableSortIcon,
   type TableSortIconProps,
+  useTableContext,
 } from "./components/data";
 
 // ============================================================================
@@ -319,43 +319,43 @@ export {
 // ============================================================================
 // Navigation components (Tabs, SegmentedControl, Breadcrumbs, Pagination, Stepper)
 export {
-  Breadcrumbs,
-  Pagination,
-  SegmentedControl,
-  segmentedControlItemVariants,
-  segmentedControlRootVariants,
-  Stepper,
-  Tabs,
-  tabsListVariants,
-  tabsTriggerVariants,
   type BreadcrumbItem,
+  Breadcrumbs,
   type BreadcrumbsItemProps,
   type BreadcrumbsRootProps,
   type BreadcrumbsSeparatorProps,
+  Pagination,
   type PaginationEllipsisProps,
   type PaginationItemProps,
   type PaginationNextProps,
   type PaginationPrevProps,
   type PaginationRootProps,
+  SegmentedControl,
   type SegmentedControlItemProps,
+  segmentedControlItemVariants,
   type SegmentedControlRootProps,
+  segmentedControlRootVariants,
+  Stepper,
   type StepperContentProps,
   type StepperIndicatorProps,
   type StepperItemProps,
   type StepperLabelProps,
   type StepperRootProps,
   type StepperStep,
+  Tabs,
   type TabsContentProps,
   type TabsListProps,
+  tabsListVariants,
   type TabsRootProps,
   type TabsTriggerProps,
+  tabsTriggerVariants,
 } from "./components/navigation";
 
 // ============================================================================
 // ICON SYSTEM
 // ============================================================================
 // Icon component and icon registry
-export { Icon, iconVariants, type IconProps } from "./components/icon";
+export { Icon, type IconProps, iconVariants } from "./components/icon";
 
 // Icon registry exports (tree-shakeable)
 export {
@@ -363,13 +363,13 @@ export {
   IconChevronDown,
   IconChevronRight,
   IconClose,
+  type IconProps as IconComponentProps,
   IconError,
   IconInfo,
   IconMenu,
+  type IconName,
   ICONS_MAP,
   IconSearch,
   IconSuccess,
   IconWarning,
-  type IconProps as IconComponentProps,
-  type IconName,
 } from "./icons";

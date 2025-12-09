@@ -34,20 +34,30 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 // Mock IntersectionObserver
+
 global.IntersectionObserver = class IntersectionObserver {
+  // eslint-disable-next-line no-empty-function
   constructor() {}
+  // eslint-disable-next-line no-empty-function
   disconnect() {}
+  // eslint-disable-next-line no-empty-function
   observe() {}
   takeRecords() {
     return [];
   }
+  // eslint-disable-next-line no-empty-function
   unobserve() {}
 } as any;
 
 // Mock ResizeObserver
+
 global.ResizeObserver = class ResizeObserver {
+  // eslint-disable-next-line no-empty-function
   constructor() {}
+  // eslint-disable-next-line no-empty-function
   disconnect() {}
+  // eslint-disable-next-line no-empty-function
   observe() {}
+  // eslint-disable-next-line no-empty-function
   unobserve() {}
 } as any;

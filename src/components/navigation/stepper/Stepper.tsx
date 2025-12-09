@@ -316,7 +316,7 @@ const StepperIndicator = React.forwardRef<HTMLDivElement, StepperIndicatorProps>
         ref={ref}
         className={cn(
           baseClasses,
-          `${NAVIGATION_TOKENS.states.default.border} border-muted-foreground ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text}`,
+          `${NAVIGATION_TOKENS.states.default.border} ${NAVIGATION_TOKENS.border.muted} ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text}`,
           disabled && NAVIGATION_TOKENS.states.disabled.text,
           className,
         )}

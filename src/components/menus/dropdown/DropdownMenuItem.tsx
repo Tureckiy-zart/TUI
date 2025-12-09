@@ -69,9 +69,10 @@ export const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuIte
 
     // Register item on mount
     React.useEffect(() => {
-      registerItem(itemIdRef.current);
+      const itemId = itemIdRef.current;
+      registerItem(itemId);
       return () => {
-        unregisterItem(itemIdRef.current);
+        unregisterItem(itemId);
       };
     }, [registerItem, unregisterItem]);
 

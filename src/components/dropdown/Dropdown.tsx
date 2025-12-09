@@ -252,7 +252,11 @@ export const DropdownTrigger = React.forwardRef<HTMLButtonElement, DropdownTrigg
     );
 
     // Determine trigger state
-    const triggerState = context.disabled ? "disabled" : context.open ? "open" : "closed";
+    const triggerState = (() => {
+      if (context.disabled) return "disabled";
+      if (context.open) return "open";
+      return "closed";
+    })();
 
     if (asChild && React.isValidElement(children)) {
       return React.cloneElement(children, {
@@ -512,7 +516,11 @@ export const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(
 
     // Determine item state
     const isItemDisabled = disabled || context.disabled;
-    const itemState = isItemDisabled ? "disabled" : selected ? "selected" : "default";
+    const itemState = (() => {
+      if (isItemDisabled) return "disabled";
+      if (selected) return "selected";
+      return "default";
+    })();
 
     return (
       <div

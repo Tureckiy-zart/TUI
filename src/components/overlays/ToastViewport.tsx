@@ -41,10 +41,10 @@ export interface ToastViewportProps {
 
 const positionClasses: Record<ToastPosition, string> = {
   "top-left": `fixed top-md left-md z-[100] flex flex-col gap-sm`,
-  "top-center": `fixed top-md left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-sm`,
+  "top-center": `fixed top-md inset-x-0 z-[100] flex flex-col items-center gap-sm`,
   "top-right": `fixed top-md right-md z-[100] flex flex-col gap-sm`,
   "bottom-left": `fixed bottom-md left-md z-[100] flex flex-col-reverse gap-sm`,
-  "bottom-center": `fixed bottom-md left-1/2 -translate-x-1/2 z-[100] flex flex-col-reverse gap-sm`,
+  "bottom-center": `fixed bottom-md inset-x-0 z-[100] flex flex-col-reverse items-center gap-sm`,
   "bottom-right": `fixed bottom-md right-md z-[100] flex flex-col-reverse gap-sm`,
 };
 

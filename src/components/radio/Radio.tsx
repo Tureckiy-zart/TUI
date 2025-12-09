@@ -22,8 +22,8 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { RADIO_TOKENS } from "@/tokens/components/radio";
 
-import { radioVariants } from "./radio-variants";
 import type { RadioProps } from "./Radio.types";
+import { radioVariants } from "./radio-variants";
 import { RadioGroupContext } from "./RadioGroup";
 
 /**
@@ -66,11 +66,11 @@ const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
 
     // Internal state for standalone uncontrolled mode
     const [uncontrolledChecked, setUncontrolledChecked] = React.useState(false);
-    const finalChecked = isControlled
-      ? controlledChecked
-      : isGroupControlled
-        ? checkedInGroup
-        : uncontrolledChecked;
+    const finalChecked = (() => {
+      if (isControlled) return controlledChecked;
+      if (isGroupControlled) return checkedInGroup;
+      return uncontrolledChecked;
+    })();
 
     // Effective size (from context or prop)
     const effectiveSize = size || radioGroupContext?.size || "md";

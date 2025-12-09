@@ -19,6 +19,7 @@ export default [
       "storybook-static/**",
       ".next/**",
       "docs-app/.next/**",
+      "docs-app/**", // Documentation app - allow demo code
       "docs/**",
       "**/*.stories.tsx",
       "**/*.stories.ts",

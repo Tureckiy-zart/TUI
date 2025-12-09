@@ -62,27 +62,29 @@ export function NotificationCenterProvider({
     (options: NotificationOptions): string => {
       const id = Math.random().toString(36).substr(2, 9);
       const timestamp = Date.now();
+      const getChannelFromVariant = (variant?: string): NotificationChannel => {
+        if (variant === "danger") return "error";
+        if (variant === "success") return "success";
+        if (variant === "warning") return "warning";
+        if (variant === "system") return "system";
+        if (variant === "log") return "log";
+        return "info";
+      };
+
+      const getVariantFromChannel = (channel: NotificationChannel): string => {
+        if (channel === "error") return "danger";
+        if (channel === "success") return "success";
+        return "default";
+      };
+
       const channel: NotificationChannel =
-        options.channel ||
-        (options.variant === "danger"
-          ? "error"
-          : options.variant === "success"
-            ? "success"
-            : options.variant === "warning"
-              ? "warning"
-              : options.variant === "system"
-                ? "system"
-                : options.variant === "log"
-                  ? "log"
-                  : "info");
+        options.channel || getChannelFromVariant(options.variant);
 
       const notification: NotificationData = {
         id,
         ...options,
         channel,
-        variant:
-          options.variant ||
-          (channel === "error" ? "danger" : channel === "success" ? "success" : "default"),
+        variant: options.variant || getVariantFromChannel(channel),
         timestamp,
         read: false,
         persistent: options.persistent ?? false,

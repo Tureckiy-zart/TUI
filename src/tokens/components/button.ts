@@ -60,6 +60,13 @@ export const BUTTON_TOKENS = {
   iconSize: "size-4", // 16px (1rem) - maps to spacing[4]
 
   /**
+   * Width tokens
+   */
+  width: {
+    icon: "w-9", // 36px width for icon buttons
+  } as const,
+
+  /**
    * Font sizes by button size
    * Maps to foundation typography fontSize tokens
    */
@@ -76,6 +83,54 @@ export const BUTTON_TOKENS = {
   shadow: {
     default: "shadow-sm", // Maps to elevationShadows.sm
     primary: "shadow", // Maps to elevationShadows.xs (primary variant uses shadow)
+  } as const,
+
+  /**
+   * Color tokens for button variants
+   * Uses semantic color tokens that map to CSS variables
+   */
+  variant: {
+    primary: {
+      background: "bg-primary", // Primary background using CSS var
+      text: "text-primary-foreground", // Primary text using CSS var
+      hover: "hover:bg-primary/90", // Primary hover using CSS var
+    } as const,
+    secondary: {
+      background: "bg-secondary", // Secondary background using CSS var
+      text: "text-secondary-foreground", // Secondary text using CSS var
+      hover: "hover:bg-secondary/80", // Secondary hover using CSS var
+    } as const,
+    accent: {
+      background: "bg-accent", // Accent background using CSS var
+      text: "text-accent-foreground", // Accent text using CSS var
+      hover: "hover:bg-accent/90", // Accent hover using CSS var
+    } as const,
+    outline: {
+      border: "border border-input", // Input border using CSS var
+      background: "bg-background", // Background using CSS var
+      hover: {
+        background: "hover:bg-accent", // Accent hover using CSS var
+        text: "hover:text-accent-foreground", // Accent text using CSS var
+      } as const,
+    } as const,
+    ghost: {
+      hover: {
+        background: "hover:bg-accent", // Accent hover using CSS var
+        text: "hover:text-accent-foreground", // Accent text using CSS var
+      } as const,
+    } as const,
+    destructive: {
+      background: "bg-destructive", // Destructive background using CSS var
+      text: "text-destructive-foreground", // Destructive text using CSS var
+      hover: "hover:bg-destructive/90", // Destructive hover using CSS var
+    } as const,
+  } as const,
+
+  /**
+   * Transition tokens
+   */
+  transition: {
+    colors: "transition-colors", // Color transition using motion tokens
   } as const,
 } as const;
 
