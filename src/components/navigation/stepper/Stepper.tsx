@@ -11,6 +11,8 @@ import { Check } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { ICON_TOKENS } from "@/tokens/components/icon";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 
 // ============================================================================
@@ -267,14 +269,15 @@ const StepperIndicator = React.forwardRef<HTMLDivElement, StepperIndicatorProps>
     { className, index, isActive, isCompleted, disabled, icon, showNumber = true, ...props },
     ref,
   ) => {
-    const size = "h-8 w-8"; // Fixed size for indicators
     const baseClasses = cn(
-      size,
+      NAVIGATION_TOKENS.sizes.sm.height,
+      NAVIGATION_TOKENS.sizes.sm.width,
       "flex items-center justify-center",
       NAVIGATION_TOKENS.radius.full,
       NAVIGATION_TOKENS.typography.fontWeight.medium,
       NAVIGATION_TOKENS.sizes.sm.fontSize,
-      "border-2 transition-colors",
+      "border-2",
+      MOTION_TOKENS.transition.colors,
     );
 
     if (isCompleted) {
@@ -358,7 +361,7 @@ const StepperLabel = React.forwardRef<HTMLDivElement, StepperLabelProps>(
             className={cn(
               NAVIGATION_TOKENS.typography.sm,
               NAVIGATION_TOKENS.states.default.text,
-              "text-muted-foreground",
+              ICON_TOKENS.colors.muted,
             )}
           >
             {description}
@@ -380,7 +383,11 @@ const StepperContent = React.forwardRef<HTMLDivElement, StepperContentProps>(
     }
 
     return (
-      <div ref={ref} className={cn("mt-4", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn(NAVIGATION_TOKENS.spacing.content.marginTop, className)}
+        {...props}
+      >
         {children}
       </div>
     );

@@ -11,6 +11,7 @@ import { ChevronRight } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 
 // ============================================================================
@@ -114,7 +115,7 @@ const BreadcrumbsRoot = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(
                     className={cn(
                       NAVIGATION_TOKENS.states.default.text,
                       NAVIGATION_TOKENS.states.hover.text,
-                      "transition-colors",
+                      MOTION_TOKENS.transition.colors,
                     )}
                   >
                     {item.label}

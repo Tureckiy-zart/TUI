@@ -29,6 +29,14 @@ export const TOAST_TOKENS = {
   } as const,
 
   /**
+   * Width tokens for toast layout
+   * Maps to width utilities
+   */
+  width: {
+    full: "w-full", // Full width (100%)
+  } as const,
+
+  /**
    * Border radius for toasts
    * Maps to componentRadius.toast
    */
@@ -84,6 +92,66 @@ export const TOAST_TOKENS = {
       right: "right-md", // 16px - maps to semanticSpacing.md
       bottom: "bottom-md", // 16px - maps to semanticSpacing.md
       left: "left-md", // 16px - maps to semanticSpacing.md
+    } as const,
+  } as const,
+
+  /**
+   * Content layout tokens
+   * For toast content container
+   */
+  content: {
+    layout: "flex flex-1 items-start", // Content container layout
+    gap: "gap-sm", // Gap between content elements - maps to spacing.gap
+    verticalSpacing: "space-y-xs", // Vertical spacing between title and description (4px)
+  } as const,
+
+  /**
+   * Title typography tokens
+   * Maps to TEXT_TOKENS for font sizing and weight
+   */
+  title: {
+    fontSize: "text-sm", // Maps to TEXT_TOKENS.fontSize.sm
+    fontWeight: "font-semibold", // Maps to TEXT_TOKENS.fontWeight.semibold
+  } as const,
+
+  /**
+   * Description typography tokens
+   * Maps to TEXT_TOKENS for font sizing
+   */
+  description: {
+    fontSize: "text-sm", // Maps to TEXT_TOKENS.fontSize.sm
+    opacity: "opacity-90", // Description text opacity (90%)
+  } as const,
+
+  /**
+   * Action button tokens
+   * For toast action button sizing
+   */
+  action: {
+    height: "h-8", // Action button height (32px)
+    padding: "px-xs", // Action button horizontal padding
+    fontSize: "text-xs", // Maps to TEXT_TOKENS.fontSize.xs
+  } as const,
+
+  /**
+   * Dismiss button tokens
+   * For toast dismiss button styling
+   */
+  dismiss: {
+    position: "absolute right-xs top-xs", // Dismiss button positioning
+    size: "h-6 w-6", // Dismiss button size (24px)
+    radius: "rounded-md", // Dismiss button border radius (6px)
+    padding: "p-xs", // Dismiss button padding
+    transition: "transition-opacity", // Maps to MOTION_TOKENS.transition.opacity
+    colors: {
+      default: "text-foreground/50", // Default text color with 50% opacity
+      hover: "hover:text-foreground", // Hover text color
+    } as const,
+    states: {
+      default: "opacity-0", // Default opacity (hidden)
+      groupHover: "group-hover:opacity-100", // Visible on group hover
+      focus: "focus:opacity-100", // Visible on focus
+      focusRing: "focus:outline-none focus:ring-1", // Focus ring styling
     } as const,
   } as const,
 } as const;

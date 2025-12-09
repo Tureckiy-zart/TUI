@@ -24,6 +24,7 @@ export const NAVIGATION_TOKENS = {
   sizes: {
     sm: {
       height: "h-8", // 32px (2rem)
+      width: "w-8", // 32px (2rem) - for square indicators
       padding: {
         horizontal: "px-sm", // 8px (0.5rem) - maps to semanticSpacing.sm
         vertical: "py-xs", // 4px (0.25rem) - maps to semanticSpacing.xs
@@ -77,6 +78,9 @@ export const NAVIGATION_TOKENS = {
       md: "gap-md", // 16px (1rem)
       lg: "gap-lg", // 24px (1.5rem)
     },
+    content: {
+      marginTop: "mt-md", // 16px (1rem) - spacing above content sections
+    } as const,
   } as const,
 
   /**

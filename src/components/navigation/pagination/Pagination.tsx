@@ -12,6 +12,8 @@ import * as React from "react";
 
 import { focusRing } from "@/lib/a11y";
 import { cn } from "@/lib/utils";
+import { ICON_TOKENS } from "@/tokens/components/icon";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
 
 // ============================================================================
@@ -226,7 +228,8 @@ const PaginationItem = React.forwardRef<HTMLButtonElement, PaginationItemProps>(
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
           NAVIGATION_TOKENS.typography.fontWeight.medium,
-          "border transition-colors",
+          "border",
+          MOTION_TOKENS.transition.colors,
           isCurrent
             ? `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border} ${NAVIGATION_TOKENS.shadow.sm}`
             : `${NAVIGATION_TOKENS.states.default.border} border-input ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
@@ -262,7 +265,8 @@ const PaginationPrev = React.forwardRef<HTMLButtonElement, PaginationPrevProps>(
           NAVIGATION_TOKENS.sizes.md.padding.vertical,
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
-          "border border-input transition-colors",
+          "border border-input",
+          MOTION_TOKENS.transition.colors,
           `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
@@ -297,7 +301,8 @@ const PaginationNext = React.forwardRef<HTMLButtonElement, PaginationNextProps>(
           NAVIGATION_TOKENS.sizes.md.padding.vertical,
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
-          "border border-input transition-colors",
+          "border border-input",
+          MOTION_TOKENS.transition.colors,
           `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
@@ -325,7 +330,7 @@ const PaginationEllipsis = React.forwardRef<HTMLSpanElement, PaginationEllipsisP
           NAVIGATION_TOKENS.sizes.md.padding.horizontal,
           NAVIGATION_TOKENS.sizes.md.padding.vertical,
           NAVIGATION_TOKENS.states.default.text,
-          "text-muted-foreground",
+          ICON_TOKENS.colors.muted,
           className,
         )}
         aria-hidden="true"

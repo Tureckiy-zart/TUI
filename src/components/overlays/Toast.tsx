@@ -14,12 +14,13 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { useSwipe } from "@/theme/motion/gestures";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TOAST_TOKENS } from "@/tokens/components/toast";
 
 import { Button } from "../ui/button";
 
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between gap-sm overflow-hidden border transition-all",
+  `group pointer-events-auto relative flex items-center justify-between overflow-hidden border ${TOAST_TOKENS.width.full} ${TOAST_TOKENS.spacing.gap} ${MOTION_TOKENS.transition.all}`,
   {
     variants: {
       variant: {
@@ -117,17 +118,31 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         aria-live={ariaLive}
         {...props}
       >
-        <div className="flex flex-1 items-start gap-sm">
-          <div className="flex-1 space-y-xs">
-            {toast.title && <div className="text-sm font-semibold">{toast.title}</div>}
-            {toast.description && <div className="text-sm opacity-90">{toast.description}</div>}
+        <div className={cn(TOAST_TOKENS.content.layout, TOAST_TOKENS.content.gap)}>
+          <div className={cn("flex-1", TOAST_TOKENS.content.verticalSpacing)}>
+            {toast.title && (
+              <div className={cn(TOAST_TOKENS.title.fontSize, TOAST_TOKENS.title.fontWeight)}>
+                {toast.title}
+              </div>
+            )}
+            {toast.description && (
+              <div
+                className={cn(TOAST_TOKENS.description.fontSize, TOAST_TOKENS.description.opacity)}
+              >
+                {toast.description}
+              </div>
+            )}
             {toast.action && (
               <div className="mt-sm">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={toast.action.onClick}
-                  className="h-8 px-xs text-xs"
+                  className={cn(
+                    TOAST_TOKENS.action.height,
+                    TOAST_TOKENS.action.padding,
+                    TOAST_TOKENS.action.fontSize,
+                  )}
                 >
                   {toast.action.label}
                 </Button>
@@ -138,7 +153,19 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-xs top-xs h-6 w-6 rounded-md p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
+          className={cn(
+            TOAST_TOKENS.dismiss.position,
+            TOAST_TOKENS.dismiss.size,
+            TOAST_TOKENS.dismiss.radius,
+            TOAST_TOKENS.dismiss.padding,
+            TOAST_TOKENS.dismiss.colors.default,
+            TOAST_TOKENS.dismiss.states.default,
+            MOTION_TOKENS.transition.opacity,
+            TOAST_TOKENS.dismiss.colors.hover,
+            TOAST_TOKENS.dismiss.states.groupHover,
+            TOAST_TOKENS.dismiss.states.focus,
+            TOAST_TOKENS.dismiss.states.focusRing,
+          )}
           onClick={() => onDismiss(toast.id)}
           aria-label="Dismiss toast"
         >

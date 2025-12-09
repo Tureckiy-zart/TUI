@@ -89,9 +89,16 @@
             },
             {
               "id": "L2",
-              "title": "Legacy Migration Phase 2 — Overlays & Navigation",
-              "status": "done",
+              "title": "Overlays & Navigation Migration",
+              "status": "completed",
+              "historic_notes": "Initial L2 fixes were partially completed earlier. This stage includes the full audit and multiple correction passes.",
+              "real_progress_notes": "All required L2 corrections fully completed. Modal, Dialog and Toast have been migrated to 100% token-driven architecture: motion, spacing, position, layout, surface structure, typography and container logic are now defined in tokens. All remaining hardcoded utilities in L2 overlays were removed. Navigation components are now fully motion-compliant: Breadcrumbs, Pagination, Stepper and PaginationEllipsis no longer use raw transition classes. Additional enhancements were implemented: Stepper indicator size extracted to NAVIGATION_TOKENS.sizes.sm, Stepper content spacing extracted to NAVIGATION_TOKENS.spacing.content.marginTop, and all muted-foreground text replaced with ICON_TOKENS.colors.muted. All checks (TypeScript, ESLint, Build) pass successfully. L2 components are now stable and ready to support L3 Card migration.",
               "progress": "100%",
+              "next_steps": [
+                "Optional: unify long-term NAVIGATION_TOKENS structure (sizes, radius, spacing) for future animation presets.",
+                "Optional: expand OVERLAY_TOKENS.modal.spacing.body if future components require vertical resizing.",
+                "Proceed with L3_S1 (Card Audit), as L2 is now stable and no blockers remain."
+              ],
               "completed_date": "2025-12-09",
               "description": "Migrate all interactive layers such as Modal, Drawer, Popover, Tooltip, Dropdown and Tabs. These components require correct keyboard handling, ARIA implementation, focus traps and token-based styling.",
               "completion_notes": "Phase 2 validation completed successfully. All six overlay and navigation components (Modal, Drawer, Popover, Tooltip, Dropdown, Tabs) have been fully migrated and validated. All components meet requirements for CVA architecture, token-based styling, accessibility, keyboard navigation, portal rendering, and comprehensive test coverage. Zero type or lint errors related to L2 components.",

@@ -12,6 +12,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { OVERLAY_TOKENS } from "@/tokens/components/overlay";
 
 import { Backdrop } from "./Backdrop";
@@ -20,7 +21,7 @@ import { useFocusLock } from "./utils/FocusLock";
 import { useScrollLock } from "./utils/ScrollLock";
 
 const modalVariants = cva(
-  "fixed left-[50%] top-[50%] z-50 flex translate-x-[-50%] translate-y-[-50%] flex-col bg-background border border-border transform transition-all",
+  `fixed z-50 flex flex-col transform ${OVERLAY_TOKENS.modal.surface.primary.bg} ${OVERLAY_TOKENS.modal.surface.primary.border} ${OVERLAY_TOKENS.modal.position.center} ${MOTION_TOKENS.transition.all}`,
   {
     variants: {
       size: {
@@ -159,10 +160,7 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalProps>(
 
     return (
       <Portal>
-        <div
-          className="fixed inset-0 z-40 flex items-center justify-center"
-          onClick={handleBackdropClick}
-        >
+        <div className={OVERLAY_TOKENS.modal.container.layout} onClick={handleBackdropClick}>
           <Backdrop variant={backdropVariant} isVisible={open} />
           <div
             ref={contentRef}
@@ -193,7 +191,18 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn("mb-md flex flex-col gap-xs", className)} {...props} />;
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex flex-col",
+          OVERLAY_TOKENS.modal.spacing.header.marginBottom,
+          OVERLAY_TOKENS.modal.spacing.header.gap,
+          className,
+        )}
+        {...props}
+      />
+    );
   },
 );
 
@@ -206,7 +215,13 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn("flex-1", className)} {...props} />;
+    return (
+      <div
+        ref={ref}
+        className={cn(OVERLAY_TOKENS.modal.spacing.body.layout, className)}
+        {...props}
+      />
+    );
   },
 );
 
@@ -222,7 +237,12 @@ const ModalFooter = React.forwardRef<HTMLDivElement, ModalFooterProps>(
     return (
       <div
         ref={ref}
-        className={cn("mt-md flex flex-col-reverse gap-sm sm:flex-row sm:justify-end", className)}
+        className={cn(
+          "flex flex-col-reverse sm:flex-row sm:justify-end",
+          OVERLAY_TOKENS.modal.spacing.footer.marginTop,
+          OVERLAY_TOKENS.modal.spacing.footer.gap,
+          className,
+        )}
         {...props}
       />
     );

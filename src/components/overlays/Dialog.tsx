@@ -11,6 +11,9 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { ICON_TOKENS } from "@/tokens/components/icon";
+import { OVERLAY_TOKENS } from "@/tokens/components/overlay";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import { Row } from "../layout/Row";
 import { Heading } from "../ui/heading";
@@ -72,7 +75,18 @@ export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn("mb-md flex flex-col gap-xs", className)} {...props} />;
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex flex-col",
+          OVERLAY_TOKENS.modal.spacing.header.marginBottom,
+          OVERLAY_TOKENS.modal.spacing.header.gap,
+          className,
+        )}
+        {...props}
+      />
+    );
   },
 );
 
@@ -118,7 +132,7 @@ const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescripti
       <p
         ref={ref}
         id={descriptionId}
-        className={cn("text-sm text-muted-foreground", className)}
+        className={cn(TEXT_TOKENS.fontSize.sm, ICON_TOKENS.colors.muted, className)}
         {...props}
       >
         {children}
@@ -136,7 +150,13 @@ export interface DialogBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn("flex-1", className)} {...props} />;
+    return (
+      <div
+        ref={ref}
+        className={cn(OVERLAY_TOKENS.modal.spacing.body.layout, className)}
+        {...props}
+      />
+    );
   },
 );
 
@@ -149,7 +169,15 @@ export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
   ({ className, ...props }, ref) => {
-    return <Row ref={ref} justify="end" gap="sm" className={cn("mt-md", className)} {...props} />;
+    return (
+      <Row
+        ref={ref}
+        justify="end"
+        gap="sm"
+        className={cn(OVERLAY_TOKENS.modal.spacing.footer.marginTop, className)}
+        {...props}
+      />
+    );
   },
 );
 

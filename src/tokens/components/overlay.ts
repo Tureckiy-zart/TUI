@@ -93,6 +93,13 @@ export const OVERLAY_TOKENS = {
       } as const,
     } as const,
     /**
+     * Modal container tokens
+     * For backdrop container positioning and layout
+     */
+    container: {
+      layout: "fixed inset-0 z-40 flex items-center justify-center", // Container for backdrop and modal content
+    } as const,
+    /**
      * Modal position tokens
      * For centering and positioning modal content
      */
@@ -115,6 +122,9 @@ export const OVERLAY_TOKENS = {
       header: {
         marginBottom: "mb-md", // 16px - spacing below header
         gap: "gap-xs", // 4px - gap between header elements
+      } as const,
+      body: {
+        layout: "flex-1", // Layout utility for body to take remaining space
       } as const,
       footer: {
         marginTop: "mt-md", // 16px - spacing above footer
