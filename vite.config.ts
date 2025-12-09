@@ -1,14 +1,15 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
 import { resolve } from "path";
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
       insertTypesEntry: true,
-      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts"],
+      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts", "**/test/**", "src/test/**"],
+      logLevel: "error", // Only show errors, suppress sourcemap warnings
     }),
   ],
   esbuild: {
@@ -20,6 +21,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, "src/index.ts"),
+        styles: resolve(__dirname, "src/styles.ts"),
         preset: resolve(__dirname, "src/preset.ts"),
         "tokens/index": resolve(__dirname, "src/tokens/index.ts"),
         "theme/index": resolve(__dirname, "src/theme/index.ts"),
@@ -63,7 +65,6 @@ export default defineConfig({
         "lucide-react",
         "tailwind-merge",
         "zustand",
-        "framer-motion",
         "react-hook-form",
         "@hookform/resolvers",
         "zod",
@@ -76,10 +77,14 @@ export default defineConfig({
           "react/jsx-runtime": "react/jsx-runtime",
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "style.css") {
+          // CSS from styles entry point should be named styles.css
+          // Use names array (Rollup 4+) or fallback to pattern matching
+          const fileName = assetInfo.names?.[0];
+          if (fileName === "style.css" || fileName?.endsWith("styles.css")) {
             return "styles.css";
           }
-          return assetInfo.name || "assets/[name][extname]";
+          // Default pattern for other assets
+          return "assets/[name]-[hash][extname]";
         },
       },
     },

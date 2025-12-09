@@ -1,0 +1,34 @@
+---
+title: NotificationCenterList
+description: Documentation for NotificationCenterList component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterListAPI } from "@/generated/api/notification-center-list.api";
+
+# NotificationCenterList
+
+Documentation for NotificationCenterList component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterList } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterList>Example</NotificationCenterList>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterListAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Children to render (notification items) |
+| `"aria-label"` | `string` | No | - | ARIA label for the list |
+

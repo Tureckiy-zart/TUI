@@ -1,0 +1,33 @@
+---
+title: EmptyStateAction
+description: Documentation for EmptyStateAction component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { EmptyStateActionAPI } from "@/generated/api/empty-state-action.api";
+
+# EmptyStateAction
+
+Documentation for EmptyStateAction component.
+
+## Examples
+
+<LiveExample>
+{`import { EmptyStateAction } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <EmptyStateAction>Example</EmptyStateAction>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={EmptyStateActionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Action button or link (typically Button component) |
+

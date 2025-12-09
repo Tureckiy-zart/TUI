@@ -1,0 +1,34 @@
+---
+title: List
+description: Documentation for List component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ListAPI } from "@/generated/api/list.api";
+
+# List
+
+Documentation for List component.
+
+## Examples
+
+<LiveExample>
+{`import { List } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <List>Example</List>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ListAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | `ListItem[]` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

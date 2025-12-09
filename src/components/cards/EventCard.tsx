@@ -7,7 +7,8 @@ import { resolveComponentAnimations } from "@/animation/utils";
 import { Box } from "@/components/layout/Box";
 import { Card, CardContent } from "@/components/primitives/Card";
 import { Link } from "@/components/primitives/Link";
-import { Heading, Text } from "@/components/primitives/Typography";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 /**

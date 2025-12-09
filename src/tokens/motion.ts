@@ -397,11 +397,11 @@ export const motionCSSVariables = {
 export const tailwindMotionConfig = {
   transitionDuration: {
     ...durations,
-  } as Record<string, string>,
+  },
 
   transitionTimingFunction: {
     ...easings,
-  } as Record<string, string>,
+  },
 
   transitionProperty: {
     DEFAULT:
@@ -416,7 +416,7 @@ export const tailwindMotionConfig = {
 
   keyframes: {
     ...keyframes,
-  } as Record<string, any>,
+  } as Record<string, Record<string, Record<string, string | number>>>,
 
   animation: {
     ...animations,
@@ -427,7 +427,7 @@ export const tailwindMotionConfig = {
     bounce: animations.bounce,
     ping: animations.ping,
     shake: animations.shake,
-  } as Record<string, string>,
+  },
 } as const;
 
 /**
@@ -439,3 +439,9 @@ export type Transition = keyof typeof transitions;
 export type Keyframe = keyof typeof keyframes;
 export type Animation = keyof typeof animations;
 export type Spring = keyof typeof springs;
+
+/**
+ * Motion V2 Exports
+ * CSS-only motion system with gesture support
+ */
+export * from "./motion/v2";

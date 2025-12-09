@@ -147,6 +147,303 @@
           "progress_notes": "✅ COMPLETED (2025-11-23): All three premium layout sections implemented (HeroSection, FeatureSection, CTASection) with full token compliance, theme awareness, responsiveness, and accessibility. Comprehensive Storybook stories and unit tests created. All components exported and ready for use. See docs/PROJECT_PROGRESS.md for details."
         },
         {
+          "id": "L0_LEGACY_MIGRATION_PIPELINE",
+          "title": "Full Legacy Component Migration Pipeline",
+          "version": "1.0",
+          "layer": "Upgrade Layer",
+          "status": "pending",
+          "progress": "0%",
+          "description": "This pipeline fully removes all legacy components (~40 items) from Tenerife UI Library and replaces them with modern CVA-based, token-driven, theme-aware implementations. The migration consists of six consecutive phases: Forms, Overlays, Cards, Data Components, Domain Components and final Cleanup. Each phase contains structured subtasks executed sequentially. Progress is updated after each completed phase.",
+          "prerequisites": {
+            "must_have_completed": ["U2", "U3", "U4"],
+            "must_be_ready": true
+          },
+          "phases": [
+            {
+              "id": "L1",
+              "title": "Legacy Migration Phase 1 — Form Components",
+              "status": "pending",
+              "progress": "100%",
+              "description": "Migrate all foundational form components (Input, Select, Textarea, Checkbox, Radio, Switch) into modern CVA + Token-driven architecture with accessibility support and full theme-awareness.",
+              "tasks": [
+                {
+                  "id": "L1_1",
+                  "title": "Migrate Input",
+                  "status": "done",
+                  "progress": "100%",
+                  "completed_date": "2025-12-09",
+                  "comment": "Input component successfully migrated. New structure in src/components/input/ with 5 variants (primary, secondary, outline, ghost, destructive), 5 sizes (xs, sm, md, lg, xl), 4 states (default, disabled, error, success), icon slots (iconLeft, iconRight), fullWidth prop, CSS variable-based styling, comprehensive Storybook stories, and 37 passing tests. Legacy code moved to src/components/input/legacy/ for reference.",
+                  "details": "Rewrite Input from scratch using CVA, tokens, theme-provider, accessibility, error states, icons, fullWidth, Storybook, tests, and remove legacy implementation."
+                },
+                {
+                  "id": "L1_2",
+                  "title": "Migrate Select",
+                  "status": "done",
+                  "progress": "100%",
+                  "completed_date": "2025-12-09",
+                  "comment": "Select component successfully migrated. New structure in src/components/select/ with compound component API (Select.Root, Select.Trigger, Select.Listbox, Select.Option), 4 variants (primary, secondary, outline, ghost), 4 sizes (xs, sm, md, lg), full keyboard navigation (ArrowUp, ArrowDown, Enter, Escape, Home, End), ARIA roles (listbox, option), token-based styling with CSS variables, Portal-based positioning, comprehensive Storybook stories, and 40+ passing tests. Legacy code moved to src/components/select/legacy/ for reference."
+                },
+                {
+                  "id": "L1_3",
+                  "title": "Migrate Textarea",
+                  "status": "done",
+                  "progress": "100%",
+                  "details": "Add CVA, token-based spacing/colors, character counter, error messages, accessibility, Storybook and tests.",
+                  "completed_date": "2025-11-25",
+                  "completion_notes": "Textarea fully migrated to src/components/textarea/ with CVA variants (primary, secondary, outline, ghost, destructive), all 5 sizes (xs, sm, md, lg, xl), 4 states (default, error, success, disabled), optional character counter, full accessibility (aria-invalid, aria-describedby), comprehensive Storybook stories, and 41 passing tests. Legacy files archived. Build, tests, and lint all passing."
+                },
+                {
+                  "id": "L1_4",
+                  "title": "Migrate Checkbox",
+                  "status": "done",
+                  "progress": "100%",
+                  "completed_date": "2025-12-09",
+                  "comment": "Checkbox component successfully migrated. New structure in src/components/checkbox/ with button role=\"checkbox\" pattern, 5 variants (primary, secondary, outline, ghost, destructive), 5 sizes (xs, sm, md, lg, xl), multiple states (default, checked, indeterminate, error, disabled), keyboard support (Space key), icon slot with default IconCheck, indeterminate state support, controlled/uncontrolled modes, CSS variable-based styling, comprehensive Storybook stories, and 44 passing tests. All colors and shadows use tokens exclusively."
+                },
+                {
+                  "id": "L1_5",
+                  "title": "Migrate Radio",
+                  "status": "done",
+                  "progress": "100%",
+                  "completed_date": "2025-01-21",
+                  "comment": "Radio and RadioGroup components successfully migrated. New structure in src/components/radio/ with button role=\"radio\" pattern, 5 variants (primary, secondary, outline, ghost, destructive), 5 sizes (xs, sm, md, lg, xl), multiple states (default, checked, disabled, error), full keyboard navigation (Space to select, ArrowUp/ArrowDown for group navigation with roving tabindex), controlled/uncontrolled modes, RadioGroup context with horizontal/vertical orientation support, CSS variable-based styling using RADIO_TOKENS, comprehensive Storybook stories, and 53 passing tests covering all scenarios. All colors and styling use tokens exclusively.",
+                  "details": "Implement radio group logic, CVA states, token colors, keyboard arrow movement, tests, remove legacy."
+                },
+                {
+                  "id": "L1_6",
+                  "title": "Migrate Switch",
+                  "status": "done",
+                  "progress": "100%",
+                  "completed_date": "2025-12-09",
+                  "comment": "Switch component successfully migrated. New structure in src/components/switch/ with button role=\"switch\" pattern, 5 variants (primary, secondary, outline, ghost, destructive), 5 sizes (xs, sm, md, lg, xl), multiple states (default, checked, disabled, error), track/handle structure with token-driven animations, keyboard support (Space key), controlled/uncontrolled modes, CSS variable-based styling, comprehensive Storybook stories, and comprehensive tests. All colors, transitions, and animations use tokens exclusively.",
+                  "details": "Implement switch track + handle, token-driven transitions, CVA, accessibility, icons, Storybook and tests."
+                }
+              ]
+            },
+            {
+              "id": "L2",
+              "title": "Legacy Migration Phase 2 — Overlays & Navigation",
+              "status": "pending",
+              "progress": "0%",
+              "description": "Migrate all interactive layers such as Modal, Drawer, Popover, Tooltip, Dropdown and Tabs. These components require correct keyboard handling, ARIA implementation, focus traps and token-based styling.",
+              "tasks": [
+                {
+                  "id": "L2_1",
+                  "title": "Migrate Modal",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Implement token shadows, overlay tokens, transitions, focus trap, escape close."
+                },
+                {
+                  "id": "L2_2",
+                  "title": "Migrate Drawer",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Implement slide transitions, overlay tokens, CVA variants."
+                },
+                {
+                  "id": "L2_3",
+                  "title": "Migrate Popover",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Theme-aware popover with token elevation, positioning logic, CVA."
+                },
+                {
+                  "id": "L2_4",
+                  "title": "Migrate Tooltip",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-based delays, transitions, arrow element, A11y."
+                },
+                {
+                  "id": "L2_5",
+                  "title": "Migrate Dropdown",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-driven menu, keyboard navigation, CVA stylings."
+                },
+                {
+                  "id": "L2_6",
+                  "title": "Migrate Tabs",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Implement token underline, active states, aria-controls, full keyboard support."
+                }
+              ]
+            },
+            {
+              "id": "L3",
+              "title": "Legacy Migration Phase 3 — Card Components",
+              "status": "pending",
+              "progress": "0%",
+              "description": "Migrate all content presentation cards: EventCard, VenueCard, ArtistCard, TicketCard, CategoryCard and PromoCard. These represent core visual identity of Tenerife Music.",
+              "tasks": [
+                {
+                  "id": "L3_1",
+                  "title": "Migrate EventCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Rewrite completely, add premium shadows, gradients, token spacing, responsive layout, theme support."
+                },
+                {
+                  "id": "L3_2",
+                  "title": "Migrate VenueCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Apply same pattern as EventCard, ensure full tokenization."
+                },
+                {
+                  "id": "L3_3",
+                  "title": "Migrate ArtistCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Tokenized typography, tokens for spacing and color."
+                },
+                {
+                  "id": "L3_4",
+                  "title": "Migrate TicketCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Elevation tokens, responsive structure."
+                },
+                {
+                  "id": "L3_5",
+                  "title": "Migrate CategoryCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-driven backgrounds and icons."
+                },
+                {
+                  "id": "L3_6",
+                  "title": "Migrate PromoCard",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Implement accent/secondary variants."
+                }
+              ]
+            },
+            {
+              "id": "L4",
+              "title": "Legacy Migration Phase 4 — Data Components",
+              "status": "pending",
+              "progress": "0%",
+              "description": "Rewrite all data-driven UI components (Table, Pagination, List) to token-driven versions with accessibility, keyboard support and modern design.",
+              "tasks": [
+                {
+                  "id": "L4_1",
+                  "title": "Migrate Table",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token spacing grid, sticky headers, focusable rows, keyboard nav, theme support."
+                },
+                {
+                  "id": "L4_2",
+                  "title": "Migrate Pagination",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "CVA variants for arrows, active state tokens."
+                },
+                {
+                  "id": "L4_3",
+                  "title": "Migrate List",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-based layout, A11y roles."
+                }
+              ]
+            },
+            {
+              "id": "L5",
+              "title": "Legacy Migration Phase 5 — Domain Components",
+              "status": "pending",
+              "progress": "0%",
+              "description": "Rewrite Tenerife Music–specific components such as SearchBar, RatingStars, EventMeta, EventTags, VenueHours.",
+              "tasks": [
+                {
+                  "id": "L5_1",
+                  "title": "Migrate SearchBar",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-driven input + icon + dropdown suggestions."
+                },
+                {
+                  "id": "L5_2",
+                  "title": "Migrate RatingStars",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-based colors, animations."
+                },
+                {
+                  "id": "L5_3",
+                  "title": "Migrate EventMeta",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Theme-aware metadata display."
+                },
+                {
+                  "id": "L5_4",
+                  "title": "Migrate EventTags",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "CVA variants for category badges."
+                },
+                {
+                  "id": "L5_5",
+                  "title": "Migrate VenueHours",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Token-driven text and spacing."
+                }
+              ]
+            },
+            {
+              "id": "L6",
+              "title": "Legacy Migration Phase 6 — Cleanup",
+              "status": "pending",
+              "progress": "0%",
+              "description": "Remove ALL legacy components, old folders, V1 directories, unused utils, old Storybook stories and outdated code.",
+              "tasks": [
+                {
+                  "id": "L6_1",
+                  "title": "Delete legacy components",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Remove all components marked as legacy."
+                },
+                {
+                  "id": "L6_2",
+                  "title": "Remove old storybook entries",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Delete all old .stories files."
+                },
+                {
+                  "id": "L6_3",
+                  "title": "Remove unused utils",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Delete obsolete helpers."
+                },
+                {
+                  "id": "L6_4",
+                  "title": "Final typecheck + lint",
+                  "status": "pending",
+                  "progress": "0%",
+                  "details": "Ensure project builds clean."
+                }
+              ]
+            }
+          ],
+          "success_criteria": [
+            "All 6 phases completed",
+            "All legacy components removed",
+            "All replacements are token-driven + CVA-based",
+            "All stories/tests updated",
+            "Project passes TS, ESLint, Storybook"
+          ],
+          "dependencies": ["U2", "U3", "U4"]
+        },
+        {
           "id": "U5",
           "title": "Export tokens for design tools",
           "purpose": "Generate token files that can be consumed by external design tools such as Figma, Sketch or Style Dictionary. Provide a script that converts the token JSON into formats supported by these tools and keeps them in sync with the source tokens.",

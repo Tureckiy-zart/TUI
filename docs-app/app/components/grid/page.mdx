@@ -1,0 +1,38 @@
+---
+title: Grid
+description: Documentation for Grid component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { GridAPI } from "@/generated/api/grid.api";
+
+# Grid
+
+Documentation for Grid component.
+
+## Examples
+
+<LiveExample>
+{`import { Grid } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Grid>Example</Grid>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={GridAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `cols` | `ResponsiveColumns` | No | - | Number of columns (1-6, 12, or none) |
+| `rows` | `ResponsiveRows` | No | - | Number of rows (1-6 or none) |
+| `gap` | `ResponsiveSpacing` | No | - | Gap between grid items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl) |
+| `flow` | `ResponsiveFlow` | No | - | Grid flow direction |
+| `align` | `ResponsiveAlignment` | No | - | Align items |
+| `justify` | `ResponsiveJustify` | No | - | Justify content |
+

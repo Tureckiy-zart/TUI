@@ -1,0 +1,35 @@
+---
+title: Dashboard
+description: Documentation for Dashboard component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DashboardAPI } from "@/generated/api/dashboard.api";
+
+# Dashboard
+
+Documentation for Dashboard component.
+
+## Examples
+
+<LiveExample>
+{`import { Dashboard } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Dashboard>Example</Dashboard>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DashboardAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | `string` | Yes | - | - |
+| `content` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

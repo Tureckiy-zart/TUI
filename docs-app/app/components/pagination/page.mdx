@@ -1,0 +1,44 @@
+---
+title: Pagination
+description: Documentation for Pagination component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PaginationAPI } from "@/generated/api/pagination.api";
+
+# Pagination
+
+Documentation for Pagination component.
+
+## Examples
+
+<LiveExample>
+{`import { Pagination } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Pagination>Example</Pagination>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PaginationAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `currentPage` | `number` | Yes | - | Current active page (1-indexed) |
+| `totalPages` | `number` | Yes | - | Total number of pages |
+| `onPageChange` | `(page: number) => void` | Yes | - | Callback when page changes |
+| `delta` | `number` | No | 2 | Number of pages to show on each side of current page
+    @default 2 |
+| `ariaLabel` | `string` | No | Pagination | ARIA label for the navigation element
+    @default "Pagination" |
+| `page` | `number | "..."` | Yes | - | Page number (or "..." for ellipsis) |
+| `isCurrent` | `boolean` | No | - | Whether this is the current page |
+| `disabled` | `boolean` | No | - | Whether this item is disabled |
+| `disabled` | `boolean` | No | - | Whether previous button is disabled |
+| `disabled` | `boolean` | No | - | Whether next button is disabled |
+

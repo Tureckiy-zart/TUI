@@ -1,0 +1,55 @@
+---
+title: Stepper
+description: Documentation for Stepper component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { StepperAPI } from "@/generated/api/stepper.api";
+
+# Stepper
+
+Documentation for Stepper component.
+
+## Examples
+
+<LiveExample>
+{`import { Stepper } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Stepper>Example</Stepper>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={StepperAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `steps` | `StepperStep[]` | Yes | - | Array of steps |
+| `activeStep` | `number` | Yes | - | Current active step index (0-indexed) |
+| `orientation` | `"horizontal" | "vertical"` | No | horizontal | Orientation of the stepper
+    @default "horizontal" |
+| `showNumbers` | `boolean` | No | true | Whether to show step numbers
+    @default true |
+| `step` | `StepperStep` | Yes | - | Step data |
+| `index` | `number` | Yes | - | Step index (0-indexed) |
+| `isActive` | `boolean` | Yes | - | Whether this is the active step |
+| `isCompleted` | `boolean` | Yes | - | Whether this step is completed |
+| `showNumber` | `boolean` | No | true | Whether to show step number |
+| `index` | `number` | Yes | - | Step index |
+| `isActive` | `boolean` | Yes | - | Whether this is the active step |
+| `isCompleted` | `boolean` | Yes | - | Whether this step is completed |
+| `disabled` | `boolean` | No | - | Whether this step is disabled |
+| `icon` | `ReactNode` | No | - | Custom icon |
+| `showNumber` | `boolean` | No | true | Whether to show step number |
+| `label` | `string` | Yes | - | Step label text |
+| `description` | `string` | No | - | Optional description |
+| `isActive` | `boolean` | Yes | - | Whether this is the active step |
+| `stepIndex` | `number` | Yes | - | Step index this content belongs to |
+| `isActive` | `boolean` | Yes | - | Whether this content should be visible |
+| `orientation` | `"horizontal" | "vertical"` | No | horizontal | - |
+

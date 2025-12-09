@@ -1,0 +1,41 @@
+---
+title: PopoverContent
+description: Popover Content Component
+ 
+  Content container for popover with positioning, animations, and Surface integration.
+  Uses POPOVER_TOKENS for styling and positioning helper for placement.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PopoverContentAPI } from "@/generated/api/popover-content.api";
+
+# PopoverContent
+
+Popover Content Component
+ 
+  Content container for popover with positioning, animations, and Surface integration.
+  Uses POPOVER_TOKENS for styling and positioning helper for placement.
+
+## Examples
+
+<LiveExample>
+{`import { PopoverContent } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <PopoverContent>Example</PopoverContent>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PopoverContentAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `placement` | `Placement` | No | bottom | Placement preference |
+| `offset` | `number` | No | 4 | Offset between trigger and content (in pixels) |
+| `closeOnInteractOutside` | `boolean` | No | true | Whether to close on outside click |
+

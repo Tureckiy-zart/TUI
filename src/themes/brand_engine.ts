@@ -184,12 +184,20 @@ export function registerBrand(
     console.warn(`Brand "${brand.id}" validation warnings:`, validation.warnings.join(", "));
   }
 
-  // Check for duplicate ID
+  // Check if brand is already registered with the same ID and namespace
+  // If so, skip registration (idempotent behavior for tests)
+  const existingEntry = brandRegistry.get(brand.id);
+  if (existingEntry && existingEntry.brand.namespace === brand.namespace) {
+    // Brand is already registered with same ID and namespace - skip silently
+    return;
+  }
+
+  // Check for duplicate ID with different namespace (this is an error)
   if (brandRegistry.has(brand.id)) {
     throw new Error(`Brand "${brand.id}" is already registered`);
   }
 
-  // Check for duplicate namespace
+  // Check for duplicate namespace with different ID (this is an error)
   const existingBrand = Array.from(brandRegistry.values()).find(
     (entry) => entry.brand.namespace === brand.namespace,
   );
@@ -336,6 +344,19 @@ export function setActiveBrand(brand: BrandPackage | null): void {
  * Clear active brand
  */
 export function clearActiveBrand(): void {
+  activeBrand = null;
+  activeNamespace = null;
+}
+
+/**
+ * Clear brand registry
+ * This function is primarily for testing purposes to reset the brand registry between tests
+ *
+ * @internal
+ */
+export function clearBrandRegistry(): void {
+  brandRegistry.clear();
+  brandCache.clear();
   activeBrand = null;
   activeNamespace = null;
 }

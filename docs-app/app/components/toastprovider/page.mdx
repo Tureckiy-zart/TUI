@@ -1,0 +1,38 @@
+---
+title: ToastProvider
+description: Documentation for ToastProvider component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ToastProviderAPI } from "@/generated/api/toast-provider.api";
+
+# ToastProvider
+
+Documentation for ToastProvider component.
+
+## Examples
+
+<LiveExample>
+{`import { ToastProvider } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ToastProvider>Example</ToastProvider>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ToastProviderAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | - |
+| `position` | `| "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"` | No | top-right | - |
+| `maxToasts` | `number` | No | 5 | - |
+| `children` | `ReactNode` | Yes | - | - |
+| `position` | `string` | Yes | top-right | - |
+| `positionClasses` | `string` | Yes | - | - |
+

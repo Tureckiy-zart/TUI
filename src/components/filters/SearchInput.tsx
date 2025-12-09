@@ -3,13 +3,13 @@
 import { Search, X } from "lucide-react";
 import * as React from "react";
 
+import { Input } from "@/components/input";
 import { Button } from "@/components/primitives/Button";
-import { Input } from "@/components/primitives/Input";
 import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "@/lib/utils";
 
 export interface SearchInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "size"> {
   value: string;
   onChange: (value: string) => void;
   onClear?: () => void;
@@ -68,13 +68,16 @@ export function SearchInput({
         aria-hidden="true"
       />
       <Input
-        {...props}
         id={inputId}
         name={inputName}
         value={localValue}
         onChange={handleInputChange}
         placeholder={placeholder}
         className="pl-10 pr-10"
+        // Filter out props that don't exist in InputProps
+        {...(Object.fromEntries(
+          Object.entries(props).filter(([key]) => !["height", "width", "size"].includes(key)),
+        ) as Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "value" | "onChange">)}
       />
       {showClearButton && localValue && (
         <Button

@@ -1,0 +1,33 @@
+---
+title: Display
+description: Documentation for Display component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DisplayAPI } from "@/generated/api/display.api";
+
+# Display
+
+Documentation for Display component.
+
+## Examples
+
+<LiveExample>
+{`import { Display } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Display>Example</Display>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DisplayAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `"h1" | "h2" | "div"` | No | h1 | - |
+

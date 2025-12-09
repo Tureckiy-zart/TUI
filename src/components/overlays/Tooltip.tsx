@@ -2,10 +2,8 @@
 
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
 import * as React from "react";
 
-import { fadePresets, scalePresets } from "@/animation/presets";
 import { cn } from "@/lib/utils";
 
 const TooltipProvider = TooltipPrimitive.Provider;
@@ -39,28 +37,14 @@ const TooltipContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> &
     VariantProps<typeof tooltipContentVariants>
 >(({ className, variant, sideOffset = 4, ...props }, ref) => {
-  // Combine fade and scale presets for tooltip animation
-  const fadeScaleIn = {
-    ...fadePresets.fadeIn({ duration: "normal" }),
-    ...scalePresets.scaleIn({ scale: 0.95, duration: "normal" }),
-  };
-
-  const fadeScaleOut = {
-    ...fadePresets.fadeOut({ duration: "fast" }),
-    ...scalePresets.scaleOut({ scale: 0.95, duration: "fast" }),
-  };
-
   return (
-    <TooltipPrimitive.Content ref={ref} sideOffset={sideOffset} {...props} asChild>
-      <motion.div
-        className={cn(tooltipContentVariants({ variant, className }))}
-        initial={fadeScaleIn.initial as any}
-        animate={fadeScaleIn.animate as any}
-        exit={fadeScaleOut.exit as any}
-        transition={fadeScaleIn.transition as any}
-      >
-        {props.children}
-      </motion.div>
+    <TooltipPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(tooltipContentVariants({ variant }), "tm-motion-fade-scale", className)}
+      {...props}
+    >
+      {props.children}
     </TooltipPrimitive.Content>
   );
 });

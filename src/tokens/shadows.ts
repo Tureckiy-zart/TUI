@@ -238,7 +238,7 @@ export const tailwindShadowConfig = {
     "focus-ring": focusRings.default,
     "focus-primary": focusRings["focus-primary"],
     "focus-accent": focusRings["focus-accent"],
-  } as Record<string, string>,
+  },
 
   // Ring width (for focus rings using ring utilities)
   ringWidth: {
@@ -255,7 +255,7 @@ export const tailwindShadowConfig = {
     accent: "hsl(var(--accent-500) / 0.3)",
     "focus-primary": "hsl(var(--primary-500) / 0.3)",
     "focus-accent": "hsl(var(--accent-500) / 0.3)",
-  } as Record<string, string>,
+  },
 } as const;
 
 /**

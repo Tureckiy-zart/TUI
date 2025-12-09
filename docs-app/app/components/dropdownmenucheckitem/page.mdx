@@ -1,0 +1,39 @@
+---
+title: DropdownMenuCheckItem
+description: DropdownMenu CheckItem Component
+ 
+  Menu item with checkbox indicator.
+  Uses MENU_TOKENS for styling.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DropdownMenuCheckItemAPI } from "@/generated/api/dropdown-menu-check-item.api";
+
+# DropdownMenuCheckItem
+
+DropdownMenu CheckItem Component
+ 
+  Menu item with checkbox indicator.
+  Uses MENU_TOKENS for styling.
+
+## Examples
+
+<LiveExample>
+{`import { DropdownMenuCheckItem } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DropdownMenuCheckItem>Example</DropdownMenuCheckItem>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DropdownMenuCheckItemAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `checked` | `boolean` | No | false | Whether the item is checked |
+

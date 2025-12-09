@@ -1,4 +1,5 @@
 export * from "./colors";
+export * from "./components";
 export * from "./css-variables";
 export * from "./motion";
 export * from "./radius";

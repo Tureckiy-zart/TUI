@@ -1,7 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe } from "jest-axe";
 import React from "react";
+import { vi } from "vitest";
+import { axe } from "vitest-axe";
 
 import { Pagination } from "../Pagination";
 
@@ -29,7 +30,7 @@ describe("Pagination accessibility", () => {
   });
 
   it("allows keyboard users to move between pages", async () => {
-    const onPageChange = jest.fn();
+    const onPageChange = vi.fn();
     const user = userEvent.setup();
     render(<Pagination currentPage={2} totalPages={4} onPageChange={onPageChange} />);
 

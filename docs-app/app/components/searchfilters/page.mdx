@@ -1,0 +1,54 @@
+---
+title: SearchFilters
+description: Documentation for SearchFilters component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { SearchFiltersAPI } from "@/generated/api/search-filters.api";
+
+# SearchFilters
+
+Documentation for SearchFilters component.
+
+## Examples
+
+<LiveExample>
+{`import { SearchFilters } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <SearchFilters>Example</SearchFilters>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={SearchFiltersAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `searchLabel` | `string` | Yes | - | - |
+| `searchPlaceholder` | `string` | Yes | - | - |
+| `searchValue` | `string` | Yes | - | - |
+| `onSearchChange` | `(query: string) => void` | Yes | - | - |
+| `dateLabel` | `string` | Yes | - | - |
+| `datePlaceholder` | `string` | Yes | - | - |
+| `dateSelectDateRangeLabel` | `string` | Yes | - | - |
+| `dateClearLabel` | `string` | Yes | - | - |
+| `dateCloseLabel` | `string` | Yes | - | - |
+| `dateValue` | `DateRange` | Yes | - | - |
+| `onDateChange` | `(range: DateRange) => void` | Yes | - | - |
+| `genreLabel` | `string` | Yes | - | - |
+| `genrePlaceholder` | `string` | Yes | - | - |
+| `genreOptions` | `FilterOption[]` | Yes | - | - |
+| `genreValue` | `string` | Yes | - | - |
+| `onGenreChange` | `(genre: string) => void` | Yes | - | - |
+| `venueLabel` | `string` | Yes | - | - |
+| `venuePlaceholder` | `string` | Yes | - | - |
+| `venueOptions` | `FilterOption[]` | Yes | - | - |
+| `venueValue` | `string` | Yes | - | - |
+| `onVenueChange` | `(venue: string) => void` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

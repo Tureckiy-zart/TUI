@@ -1,0 +1,39 @@
+---
+title: DropdownMenuLabel
+description: DropdownMenu Label Component
+ 
+  Label/section header for menu items.
+  Uses MENU_TOKENS for styling.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DropdownMenuLabelAPI } from "@/generated/api/dropdown-menu-label.api";
+
+# DropdownMenuLabel
+
+DropdownMenu Label Component
+ 
+  Label/section header for menu items.
+  Uses MENU_TOKENS for styling.
+
+## Examples
+
+<LiveExample>
+{`import { DropdownMenuLabel } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DropdownMenuLabel>Example</DropdownMenuLabel>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DropdownMenuLabelAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `inset` | `boolean` | No | false | Whether label has inset padding (for nested items) |
+

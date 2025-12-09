@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import { FormInput } from "@/components/forms/FormInput";
+import { Input } from "@/components/input";
 import { Button } from "@/components/primitives/Button";
+import { Field } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 
 interface LoginFormProps {
@@ -41,8 +42,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
   return (
     <div className={cn("space-y-md", className)}>
-      <FormInput label={emailLabel} placeholder={emailPlaceholder} />
-      <FormInput label={passwordLabel} placeholder={passwordPlaceholder} />
+      <Field>
+        <Field.Label>{emailLabel}</Field.Label>
+        <Field.Control>
+          <Input placeholder={emailPlaceholder} type="email" />
+        </Field.Control>
+      </Field>
+      <Field>
+        <Field.Label>{passwordLabel}</Field.Label>
+        <Field.Control>
+          <Input placeholder={passwordPlaceholder} type="password" />
+        </Field.Control>
+      </Field>
       <Button className="w-full">{loginButtonText}</Button>
     </div>
   );

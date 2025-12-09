@@ -1,0 +1,43 @@
+---
+title: Tabs
+description: Documentation for Tabs component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { TabsAPI } from "@/generated/api/tabs.api";
+
+# Tabs
+
+Documentation for Tabs component.
+
+## Examples
+
+<LiveExample>
+{`import { Tabs } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Tabs>Example</Tabs>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={TabsAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `string` | No | - | Controlled value for the active tab |
+| `defaultValue` | `string` | No | - | Default value for uncontrolled usage |
+| `onValueChange` | `(value: string) => void` | No | - | Callback when the active tab changes |
+| `orientation` | `"horizontal" | "vertical"` | No | horizontal | Orientation of the tabs
+    @default "horizontal" |
+| `gap` | `"xs" | "sm" | "md" | "lg"` | No | - | Gap between tab items |
+| `value` | `string` | Yes | - | Value of this tab (must be unique) |
+| `disabled` | `boolean` | No | - | Whether this tab is disabled |
+| `value` | `string` | Yes | - | Value of the tab this content belongs to |
+| `forceMount` | `boolean` | No | - | Force mount the content (useful for SSR) |
+| `onSizeChange` | `(size: "sm" | "md" | "lg") => void` | No | - | - |
+

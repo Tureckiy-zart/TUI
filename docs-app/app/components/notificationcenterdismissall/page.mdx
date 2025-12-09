@@ -1,0 +1,34 @@
+---
+title: NotificationCenterDismissAll
+description: Documentation for NotificationCenterDismissAll component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterDismissAllAPI } from "@/generated/api/notification-center-dismiss-all.api";
+
+# NotificationCenterDismissAll
+
+Documentation for NotificationCenterDismissAll component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterDismissAll } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterDismissAll>Example</NotificationCenterDismissAll>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterDismissAllAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `confirm` | `boolean` | No | false | Show confirmation before clearing |
+| `confirmMessage` | `string` | No | Clear all notifications? | Confirmation message |
+

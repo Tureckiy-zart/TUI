@@ -1,0 +1,44 @@
+---
+title: TooltipWrapper
+description: Documentation for TooltipWrapper component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { TooltipWrapperAPI } from "@/generated/api/tooltip-wrapper.api";
+
+# TooltipWrapper
+
+Documentation for TooltipWrapper component.
+
+## Examples
+
+<LiveExample>
+{`import { TooltipWrapper } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <TooltipWrapper>Example</TooltipWrapper>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={TooltipWrapperAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | - |
+| `content` | `ReactNode` | Yes | - | - |
+| `variant` | `VariantProps<typeof tooltipContentVariants>["variant"]` | No | primary | - |
+| `side` | `"top" | "right" | "bottom" | "left"` | No | top | - |
+| `align` | `"start" | "center" | "end"` | No | center | - |
+| `sideOffset` | `number` | No | 4 | - |
+| `alignOffset` | `number` | No | - | - |
+| `delayDuration` | `number` | No | 400 | - |
+| `skipDelayDuration` | `number` | No | 300 | - |
+| `disableHoverableContent` | `boolean` | No | false | - |
+| `open` | `boolean` | No | - | - |
+| `onOpenChange` | `(open: boolean) => void` | No | - | - |
+

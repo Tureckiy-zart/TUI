@@ -1,0 +1,37 @@
+---
+title: ContextMenuTrigger
+description: ContextMenu Trigger Component
+ 
+  Trigger element that opens context menu on right-click.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ContextMenuTriggerAPI } from "@/generated/api/context-menu-trigger.api";
+
+# ContextMenuTrigger
+
+ContextMenu Trigger Component
+ 
+  Trigger element that opens context menu on right-click.
+
+## Examples
+
+<LiveExample>
+{`import { ContextMenuTrigger } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ContextMenuTrigger>Example</ContextMenuTrigger>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ContextMenuTriggerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `asChild` | `boolean` | No | false | Render as child element (composition pattern) |
+

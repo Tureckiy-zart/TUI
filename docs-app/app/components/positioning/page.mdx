@@ -1,0 +1,40 @@
+---
+title: Positioning
+description: Positioning Helper
+ 
+  SSR-safe positioning utility for popovers, menus, and tooltips.
+  Uses @floating-ui/react-dom for positioning calculations with collision detection.
+ 
+  All DOM operations are performed in useEffect/useLayoutEffect to ensure SSR safety.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PositioningAPI } from "@/generated/api/positioning.api";
+
+# Positioning
+
+Positioning Helper
+ 
+  SSR-safe positioning utility for popovers, menus, and tooltips.
+  Uses @floating-ui/react-dom for positioning calculations with collision detection.
+ 
+  All DOM operations are performed in useEffect/useLayoutEffect to ensure SSR safety.
+
+## Examples
+
+<LiveExample>
+{`import { Positioning } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Positioning>Example</Positioning>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PositioningAPI} />
+
+## Props
+
+No props available.

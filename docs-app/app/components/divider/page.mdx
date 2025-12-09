@@ -1,0 +1,34 @@
+---
+title: Divider
+description: Documentation for Divider component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DividerAPI } from "@/generated/api/divider.api";
+
+# Divider
+
+Documentation for Divider component.
+
+## Examples
+
+<LiveExample>
+{`import { Divider } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Divider>Example</Divider>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DividerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `orientation` | `"horizontal" | "vertical"` | No | horizontal | - |
+| `variant` | `"solid" | "dashed" | "dotted"` | No | solid | - |
+

@@ -1,0 +1,38 @@
+---
+title: FilterSelect
+description: Documentation for FilterSelect component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { FilterSelectAPI } from "@/generated/api/filter-select.api";
+
+# FilterSelect
+
+Documentation for FilterSelect component.
+
+## Examples
+
+<LiveExample>
+{`import { FilterSelect } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <FilterSelect>Example</FilterSelect>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={FilterSelectAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `string` | Yes | - | - |
+| `onValueChange` | `(value: string) => void` | Yes | - | - |
+| `options` | `FilterOption[]` | Yes | - | - |
+| `placeholder` | `string` | Yes | - | - |
+| `label` | `string` | No | - | - |
+| `className` | `string` | No | - | - |
+

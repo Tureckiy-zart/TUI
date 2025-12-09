@@ -1,0 +1,38 @@
+---
+title: LoginForm
+description: Documentation for LoginForm component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { LoginFormAPI } from "@/generated/api/login-form.api";
+
+# LoginForm
+
+Documentation for LoginForm component.
+
+## Examples
+
+<LiveExample>
+{`import { LoginForm } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <LoginForm>Example</LoginForm>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={LoginFormAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `emailLabel` | `string` | Yes | - | - |
+| `emailPlaceholder` | `string` | Yes | - | - |
+| `passwordLabel` | `string` | Yes | - | - |
+| `passwordPlaceholder` | `string` | Yes | - | - |
+| `loginButtonText` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

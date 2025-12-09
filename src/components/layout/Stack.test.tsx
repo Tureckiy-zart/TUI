@@ -1,6 +1,6 @@
-import React from "react";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
+import React from "react";
 import { Stack } from "./Stack";
 
 describe("Stack component", () => {
@@ -43,8 +43,8 @@ describe("Stack component", () => {
         <div>Item 2</div>
       </Stack>,
     );
-    const stack = container.firstChild as HTMLElement;
-    expect(stack).toHaveStyle({ flexDirection: "row" });
+    const stack = container.firstChild;
+    expect(stack).toHaveClass("flex-row");
   });
 
   it("should apply align items classes", () => {
@@ -89,7 +89,7 @@ describe("Stack component", () => {
     const stack = container.firstChild as HTMLElement;
     expect(stack).toHaveStyle({
       gap: "var(--spacing-4)",
-      color: "red",
+      color: "rgb(255, 0, 0)", // Browser normalizes "red" to rgb(255, 0, 0)
     });
   });
 

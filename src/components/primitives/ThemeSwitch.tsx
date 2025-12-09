@@ -5,9 +5,9 @@ import React from "react";
 
 import { Button, type ButtonProps } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
+import type { Mode } from "@/theme";
 import { applyDocumentMode } from "@/theme/applyMode";
 import { ThemeContext } from "@/theme/ThemeProvider";
-import type { Mode } from "@/tokens/colors";
 
 interface ThemeSwitchProps {
   className?: string;

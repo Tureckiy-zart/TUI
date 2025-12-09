@@ -89,7 +89,7 @@ export const Destructive: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+    <div className="flex flex-wrap gap-md">
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>
@@ -129,7 +129,7 @@ export const IconSize: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
+    <div className="flex flex-wrap items-center gap-md">
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
@@ -169,7 +169,7 @@ export const Disabled: Story = {
 
 export const DisabledVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+    <div className="flex flex-wrap gap-md">
       <Button variant="primary" disabled>
         Primary
       </Button>

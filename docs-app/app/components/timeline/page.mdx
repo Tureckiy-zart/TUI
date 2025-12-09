@@ -1,0 +1,34 @@
+---
+title: Timeline
+description: Documentation for Timeline component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { TimelineAPI } from "@/generated/api/timeline.api";
+
+# Timeline
+
+Documentation for Timeline component.
+
+## Examples
+
+<LiveExample>
+{`import { Timeline } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Timeline>Example</Timeline>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={TimelineAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | `TimelineItem[]` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

@@ -1,0 +1,35 @@
+---
+title: Progress
+description: Documentation for Progress component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ProgressAPI } from "@/generated/api/progress.api";
+
+# Progress
+
+Documentation for Progress component.
+
+## Examples
+
+<LiveExample>
+{`import { Progress } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Progress>Example</Progress>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ProgressAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `number` | Yes | - | - |
+| `max` | `number` | No | 100 | - |
+| `className` | `string` | No | - | - |
+

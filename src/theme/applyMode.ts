@@ -290,8 +290,8 @@ function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--tm-accent", "0 0% 89.8%");
     root.style.setProperty("--tm-accent-foreground", "0 0% 6.7%");
   } else {
-    // Night mode: Use accent color (purple) as primary
-    root.style.setProperty("--tm-primary", accentColors[500]);
+    // Night mode: Use darker accent color (purple) as primary for better contrast
+    root.style.setProperty("--tm-primary", accentColors[600]); // Use 600 instead of 500 for better contrast
     root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
     root.style.setProperty("--tm-secondary", "240 10% 7%");
     root.style.setProperty("--tm-secondary-foreground", "0 0% 89.8%");

@@ -1,0 +1,34 @@
+---
+title: DataListItem
+description: Documentation for DataListItem component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DataListItemAPI } from "@/generated/api/data-list-item.api";
+
+# DataListItem
+
+Documentation for DataListItem component.
+
+## Examples
+
+<LiveExample>
+{`import { DataListItem } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DataListItem>Example</DataListItem>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DataListItemAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `padding` | `"sm" | "md" | "lg"` | No | md | Row padding
+    @default "md" |
+

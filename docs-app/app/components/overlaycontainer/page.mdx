@@ -1,0 +1,43 @@
+---
+title: OverlayContainer
+description: Documentation for OverlayContainer component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { OverlayContainerAPI } from "@/generated/api/overlay-container.api";
+
+# OverlayContainer
+
+Documentation for OverlayContainer component.
+
+## Examples
+
+<LiveExample>
+{`import { OverlayContainer } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <OverlayContainer>Example</OverlayContainer>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={OverlayContainerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | - |
+| `container` | `Element | null` | No | - | - |
+| `className` | `string` | No | - | - |
+| `style` | `CSSProperties` | No | - | - |
+| `onClick` | `() => void` | No | - | - |
+| `className` | `string` | No | - | - |
+| `style` | `CSSProperties` | No | - | - |
+| `children` | `ReactNode` | Yes | - | - |
+| `className` | `string` | No | - | - |
+| `style` | `CSSProperties` | No | - | - |
+| `position` | `| "center" | "top" | "bottom" | ... (9 total)` | No | center | - |
+

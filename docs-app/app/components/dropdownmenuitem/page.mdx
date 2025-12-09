@@ -1,0 +1,43 @@
+---
+title: DropdownMenuItem
+description: DropdownMenu Item Component
+ 
+  Menu item with keyboard navigation support (roving tabindex).
+  Uses MENU_TOKENS for styling.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DropdownMenuItemAPI } from "@/generated/api/dropdown-menu-item.api";
+
+# DropdownMenuItem
+
+DropdownMenu Item Component
+ 
+  Menu item with keyboard navigation support (roving tabindex).
+  Uses MENU_TOKENS for styling.
+
+## Examples
+
+<LiveExample>
+{`import { DropdownMenuItem } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DropdownMenuItem>Example</DropdownMenuItem>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DropdownMenuItemAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `disabled` | `boolean` | No | false | Whether the item is disabled |
+| `selected` | `boolean` | No | false | Whether the item is selected |
+| `onSelect` | `(event: Event) => void` | No | - | Callback when item is selected
+    Receives native Event (not SyntheticEvent) |
+| `inset` | `boolean` | No | false | Whether item has inset padding (for nested items) |
+

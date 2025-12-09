@@ -1,6 +1,6 @@
-import React from "react";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
+import React from "react";
 import { Box } from "./Box";
 
 describe("Box component", () => {
@@ -111,7 +111,7 @@ describe("Box component", () => {
     const box = container.firstChild as HTMLElement;
     expect(box).toHaveStyle({
       padding: "var(--spacing-4)",
-      color: "red",
+      color: "rgb(255, 0, 0)", // Browser normalizes "red" to rgb(255, 0, 0)
     });
   });
 

@@ -1,0 +1,42 @@
+---
+title: ConfirmDialog
+description: Documentation for ConfirmDialog component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ConfirmDialogAPI } from "@/generated/api/confirm-dialog.api";
+
+# ConfirmDialog
+
+Documentation for ConfirmDialog component.
+
+## Examples
+
+<LiveExample>
+{`import { ConfirmDialog } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ConfirmDialog>Example</ConfirmDialog>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ConfirmDialogAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `isOpen` | `boolean` | Yes | - | - |
+| `onClose` | `() => void` | Yes | - | - |
+| `onConfirm` | `() => void` | Yes | - | - |
+| `title` | `string` | Yes | - | - |
+| `description` | `string` | Yes | - | - |
+| `confirmText` | `string` | Yes | - | - |
+| `cancelText` | `string` | Yes | - | - |
+| `loadingText` | `string` | No | - | - |
+| `variant` | `ButtonProps["variant"]` | No | primary | - |
+| `isLoading` | `boolean` | No | false | - |
+

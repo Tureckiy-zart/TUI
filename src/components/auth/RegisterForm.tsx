@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import { FormInput } from "@/components/forms/FormInput";
+import { Input } from "@/components/input";
 import { Button } from "@/components/primitives/Button";
+import { Field } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 
 interface RegisterFormProps {
@@ -51,9 +52,24 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
   return (
     <div className={cn("space-y-md", className)}>
-      <FormInput label={nameLabel} placeholder={namePlaceholder} />
-      <FormInput label={emailLabel} placeholder={emailPlaceholder} />
-      <FormInput label={passwordLabel} placeholder={passwordPlaceholder} />
+      <Field>
+        <Field.Label>{nameLabel}</Field.Label>
+        <Field.Control>
+          <Input placeholder={namePlaceholder} type="text" />
+        </Field.Control>
+      </Field>
+      <Field>
+        <Field.Label>{emailLabel}</Field.Label>
+        <Field.Control>
+          <Input placeholder={emailPlaceholder} type="email" />
+        </Field.Control>
+      </Field>
+      <Field>
+        <Field.Label>{passwordLabel}</Field.Label>
+        <Field.Control>
+          <Input placeholder={passwordPlaceholder} type="password" />
+        </Field.Control>
+      </Field>
       <Button className="w-full">{registerButtonText}</Button>
     </div>
   );

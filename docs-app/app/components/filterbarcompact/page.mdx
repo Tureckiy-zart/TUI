@@ -1,0 +1,63 @@
+---
+title: FilterBarCompact
+description: Documentation for FilterBarCompact component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { FilterBarCompactAPI } from "@/generated/api/filter-bar-compact.api";
+
+# FilterBarCompact
+
+Documentation for FilterBarCompact component.
+
+## Examples
+
+<LiveExample>
+{`import { FilterBarCompact } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <FilterBarCompact>Example</FilterBarCompact>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={FilterBarCompactAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `className` | `string` | No | - | - |
+| `showSearch` | `boolean` | No | true | - |
+| `showCategory` | `boolean` | No | true | - |
+| `showDateRange` | `boolean` | No | true | - |
+| `showPriceRange` | `boolean` | No | true | - |
+| `showSorting` | `boolean` | No | true | - |
+| `categories` | `Array<&#123; value: string; label: string; count?: number &#125;>` | No | [] | - |
+| `sortOptions` | `Array<&#123; value: string; label: string &#125;>` | Yes | - | - |
+| `searchPlaceholder` | `string` | Yes | - | - |
+| `filtersLabel` | `string` | Yes | - | - |
+| `clearAllLabel` | `string` | Yes | - | - |
+| `categoryLabel` | `string` | Yes | - | - |
+| `allCategoriesLabel` | `string` | Yes | - | - |
+| `dateRangeLabel` | `string` | Yes | - | - |
+| `anyDateLabel` | `string` | Yes | - | - |
+| `dateSelectDateRangeLabel` | `string` | Yes | - | - |
+| `dateClearLabel` | `string` | Yes | - | - |
+| `dateCloseLabel` | `string` | Yes | - | - |
+| `sortByLabel` | `string` | Yes | - | - |
+| `sortAscLabel` | `string` | Yes | - | - |
+| `sortDescLabel` | `string` | Yes | - | - |
+| `sortByPlaceholder` | `string` | Yes | - | - |
+| `activeFiltersLabel` | `string` | Yes | - | - |
+| `priceRangeLabel` | `string` | Yes | - | - |
+| `priceMinLabel` | `string` | Yes | - | - |
+| `priceMaxLabel` | `string` | Yes | - | - |
+| `priceAnyLabel` | `string` | Yes | - | - |
+| `priceClearLabel` | `string` | Yes | - | - |
+| `priceMinAriaLabel` | `string` | Yes | - | - |
+| `priceMaxAriaLabel` | `string` | Yes | - | - |
+| `onFiltersChange` | `function` | No | - | - |
+

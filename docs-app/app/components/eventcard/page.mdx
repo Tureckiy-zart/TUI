@@ -1,0 +1,46 @@
+---
+title: EventCard
+description: Documentation for EventCard component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { EventCardAPI } from "@/generated/api/event-card.api";
+
+# EventCard
+
+Documentation for EventCard component.
+
+## Examples
+
+<LiveExample>
+{`import { EventCard } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <EventCard>Example</EventCard>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={EventCardAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | `string` | Yes | - | Event title (pre-localized string) |
+| `description` | `string` | No | - | Event description (pre-localized string, optional) |
+| `date` | `string` | No | - | Event date/time display string (pre-formatted, optional) |
+| `venueName` | `string` | No | - | Venue name (pre-localized string, optional) |
+| `price` | `string` | No | - | Price display string with currency (e.g., "€20 - €50", optional) |
+| `imageUrl` | `string` | No | - | Image URL (optional) |
+| `href` | `string` | No | - | Link URL for event details page (optional) |
+| `ticketUrl` | `string` | No | - | External ticket purchase URL (optional) |
+| `featured` | `boolean` | No | false | Whether this is a featured event |
+| `showImage` | `boolean` | No | true | Show image section |
+| `getTicketsLabel` | `string` | Yes | - | Label for "Get Tickets" button (required) |
+| `featuredBadgeText` | `string` | No | - | Badge text for featured events (optional) |
+| `className` | `string` | No | - | Additional CSS classes |
+| `animation` | `ComponentAnimationConfig` | No | - | Animation configuration for entrance and hover animations |
+

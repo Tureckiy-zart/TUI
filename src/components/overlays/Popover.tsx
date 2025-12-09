@@ -2,10 +2,8 @@
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
 import * as React from "react";
 
-import { fadePresets, scalePresets } from "@/animation/presets";
 import { cn } from "@/lib/utils";
 
 const Popover = PopoverPrimitive.Root;
@@ -47,29 +45,16 @@ const PopoverContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &
     VariantProps<typeof popoverContentVariants>
 >(({ className, variant, size, align = "center", sideOffset = 4, ...props }, ref) => {
-  // Combine fade and scale presets for popover animation
-  const fadeScaleIn = {
-    ...fadePresets.fadeIn({ duration: "normal" }),
-    ...scalePresets.scaleIn({ scale: 0.95, duration: "normal" }),
-  };
-
-  const fadeScaleOut = {
-    ...fadePresets.fadeOut({ duration: "fast" }),
-    ...scalePresets.scaleOut({ scale: 0.95, duration: "fast" }),
-  };
-
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content ref={ref} align={align} sideOffset={sideOffset} {...props} asChild>
-        <motion.div
-          className={cn(popoverContentVariants({ variant, size, className }))}
-          initial={fadeScaleIn.initial as any}
-          animate={fadeScaleIn.animate as any}
-          exit={fadeScaleOut.exit as any}
-          transition={fadeScaleIn.transition as any}
-        >
-          {props.children}
-        </motion.div>
+      <PopoverPrimitive.Content
+        ref={ref}
+        align={align}
+        sideOffset={sideOffset}
+        className={cn(popoverContentVariants({ variant, size }), "tm-motion-fade-scale", className)}
+        {...props}
+      >
+        {props.children}
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   );

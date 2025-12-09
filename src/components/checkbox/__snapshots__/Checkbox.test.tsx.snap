@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox > Snapshot > matches snapshot for outline variant 1`] = `
+<button
+  aria-checked="false"
+  aria-disabled="false"
+  aria-invalid="false"
+  aria-label="Snapshot test"
+  class="inline-flex items-center justify-center border transition-all duration-200 ease-in-out focus-visible:outline-none disabled:cursor-not-allowed shadow-sm focus-visible:shadow-[var(--focus-ring-default)] w-4.5 h-4.5 rounded-md border-[hsl(var(--input))] bg-transparent text-[hsl(var(--foreground))]"
+  role="checkbox"
+  type="button"
+/>
+`;

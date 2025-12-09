@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Alert > Snapshot > matches snapshot for default variant 1`] = `
+<div
+  class="rounded-lg border p-md bg-muted border-border text-foreground"
+  role="alert"
+>
+  Default Alert
+</div>
+`;
+
+exports[`Alert > Snapshot > matches snapshot for destructive variant 1`] = `
+<div
+  class="rounded-lg border p-md bg-destructive/10 border-destructive/20 text-destructive-foreground"
+  role="alert"
+>
+  Destructive Alert
+</div>
+`;
+
+exports[`Alert > Snapshot > matches snapshot for primary variant 1`] = `
+<div
+  class="rounded-lg border p-md bg-primary/10 border-primary/20 text-primary-foreground"
+  role="alert"
+>
+  Primary Alert
+</div>
+`;

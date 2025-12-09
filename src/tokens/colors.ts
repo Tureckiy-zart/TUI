@@ -146,9 +146,9 @@ export const semanticColors: Record<Mode, SemanticColors> = {
     error: "0 62.8% 30.6%", // Darker red
     errorForeground: "0 0% 98%",
     warning: "38 92% 60%", // Brighter orange
-    warningForeground: "0 0% 9%",
+    warningForeground: "0 0% 100%", // Light foreground for dark theme readability
     info: "199 89% 55%", // Brighter blue
-    infoForeground: "0 0% 9%",
+    infoForeground: "0 0% 100%", // Light foreground for dark theme readability
   },
 };
 
@@ -509,6 +509,8 @@ export const tailwindThemeColors = {
     secondary: `hsl(var(--text-secondary))`,
     tertiary: `hsl(var(--text-tertiary))`,
     muted: `hsl(var(--text-muted))`,
+    destructive: `hsl(var(--destructive))`,
+    accent: `hsl(var(--tm-accent))`,
     inverse: `hsl(var(--text-inverse))`,
   },
 

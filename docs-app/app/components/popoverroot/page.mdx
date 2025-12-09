@@ -1,0 +1,43 @@
+---
+title: PopoverRoot
+description: Popover Root Component
+ 
+  Root component for Popover that manages open/close state.
+  Supports both controlled and uncontrolled modes.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PopoverRootAPI } from "@/generated/api/popover-root.api";
+
+# PopoverRoot
+
+Popover Root Component
+ 
+  Root component for Popover that manages open/close state.
+  Supports both controlled and uncontrolled modes.
+
+## Examples
+
+<LiveExample>
+{`import { PopoverRoot } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <PopoverRoot>Example</PopoverRoot>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PopoverRootAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `open` | `boolean` | No | - | Whether the popover is open (controlled mode) |
+| `onOpenChange` | `(open: boolean) => void` | No | - | Callback when open state changes |
+| `defaultOpen` | `boolean` | No | false | Default open state (uncontrolled mode) |
+| `modal` | `boolean` | No | - | Whether the popover is modal (blocks interaction with other elements) |
+| `children` | `ReactNode` | Yes | - | Children |
+

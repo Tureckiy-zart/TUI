@@ -1,0 +1,35 @@
+---
+title: Row
+description: Documentation for Row component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { RowAPI } from "@/generated/api/row.api";
+
+# Row
+
+Documentation for Row component.
+
+## Examples
+
+<LiveExample>
+{`import { Row } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Row>Example</Row>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={RowAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `gap` | `ResponsiveSpacing` | No | - | Gap between row items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl) |
+| `align` | `"start" | "end" | "center" | "baseline" | "stretch"` | No | - | Align items |
+| `justify` | `"start" | "end" | "center" | "between" | "around" | "evenly"` | No | - | Justify content |
+

@@ -13,61 +13,14 @@ export type Spring = SpringToken;
 
 /**
  * Animation props for layout primitives
+ * Returns CSS class names for Motion Tokens V2 animations
  */
 export interface AnimationProps {
   /**
-   * Initial animation state (Framer Motion)
+   * CSS class name for the animation
+   * Maps to tm-motion-* utility classes
    */
-  initial?: string | object | false;
-
-  /**
-   * Animate to this state (Framer Motion)
-   */
-  animate?: string | object | false;
-
-  /**
-   * Exit animation state (Framer Motion)
-   */
-  exit?: string | object | false;
-
-  /**
-   * Transition configuration
-   */
-  transition?: string | object | Spring;
-
-  /**
-   * Animation on hover
-   */
-  whileHover?: object;
-
-  /**
-   * Animation on focus
-   */
-  whileFocus?: object;
-
-  /**
-   * Animation on tap
-   */
-  whileTap?: object;
-
-  /**
-   * Animation on drag
-   */
-  whileDrag?: object;
-
-  /**
-   * Animation on in view (Intersection Observer)
-   */
-  whileInView?: object;
-
-  /**
-   * Viewport options for whileInView
-   */
-  viewport?: {
-    once?: boolean;
-    margin?: string;
-    amount?: number;
-  };
+  className?: string;
 }
 
 /**
@@ -111,7 +64,7 @@ export interface PresetConfig {
 export interface ComponentAnimationConfig {
   /**
    * Animation preset for initial mount/entrance
-   * Can be a preset name string or AnimationProps object
+   * Can be a preset name string or CSS class name
    */
   animation?:
     | "fadeIn"
@@ -124,16 +77,16 @@ export interface ComponentAnimationConfig {
     | "slideInLeft"
     | "slideInRight"
     | "scaleIn"
-    | AnimationProps;
+    | string;
 
   /**
    * Animation preset for hover state
-   * Can be a preset name string or AnimationProps object
+   * Can be a preset name string or CSS class name
    */
-  hoverAnimation?: "hoverLift" | "hoverScale" | "tapScale" | AnimationProps;
+  hoverAnimation?: "hoverLift" | "hoverScale" | "tapScale" | string;
 
   /**
-   * Custom animation props (overrides preset names)
+   * Custom animation class name (overrides preset names)
    */
   animationProps?: AnimationProps;
 }

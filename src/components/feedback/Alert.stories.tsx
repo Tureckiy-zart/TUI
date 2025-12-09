@@ -11,8 +11,12 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["default", "success", "warning", "danger", "info"],
-      description: "Alert variant style",
+      options: ["default", "primary", "secondary", "accent", "destructive"],
+      description: "Alert variant style (canonical variants per Freeze API)",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "default" },
+      },
     },
   },
 };
@@ -27,31 +31,31 @@ export const Default: Story = {
   },
 };
 
-export const Success: Story = {
+export const Primary: Story = {
   args: {
-    variant: "success",
-    children: "Operation completed successfully!",
+    variant: "primary",
+    children: "Here's some useful information for you.",
   },
 };
 
-export const Warning: Story = {
+export const Secondary: Story = {
   args: {
-    variant: "warning",
+    variant: "secondary",
     children: "Please review your input before proceeding.",
   },
 };
 
-export const Danger: Story = {
+export const Accent: Story = {
   args: {
-    variant: "danger",
-    children: "Something went wrong. Please try again.",
+    variant: "accent",
+    children: "Operation completed successfully!",
   },
 };
 
-export const Info: Story = {
+export const Destructive: Story = {
   args: {
-    variant: "info",
-    children: "Here's some useful information for you.",
+    variant: "destructive",
+    children: "Something went wrong. Please try again.",
   },
 };
 
@@ -59,10 +63,10 @@ export const AllVariants: Story = {
   render: () => (
     <div className="space-y-md">
       <Alert variant="default">Default alert variant.</Alert>
-      <Alert variant="success">Success alert variant.</Alert>
-      <Alert variant="warning">Warning alert variant.</Alert>
-      <Alert variant="danger">Danger alert variant.</Alert>
-      <Alert variant="info">Info alert variant.</Alert>
+      <Alert variant="primary">Primary alert variant.</Alert>
+      <Alert variant="secondary">Secondary alert variant.</Alert>
+      <Alert variant="accent">Accent alert variant.</Alert>
+      <Alert variant="destructive">Destructive alert variant.</Alert>
     </div>
   ),
 };

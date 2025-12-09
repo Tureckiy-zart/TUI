@@ -1,0 +1,40 @@
+---
+title: Breadcrumbs
+description: Documentation for Breadcrumbs component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { BreadcrumbsAPI } from "@/generated/api/breadcrumbs.api";
+
+# Breadcrumbs
+
+Documentation for Breadcrumbs component.
+
+## Examples
+
+<LiveExample>
+{`import { Breadcrumbs } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Breadcrumbs>Example</Breadcrumbs>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={BreadcrumbsAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | `BreadcrumbItem[]` | Yes | - | Array of breadcrumb items |
+| `separator` | `ReactNode` | No | ChevronRight icon | Custom separator component or string
+    @default ChevronRight icon |
+| `ariaLabel` | `string` | No | Breadcrumb | ARIA label for the navigation element
+    @default "Breadcrumb" |
+| `isLast` | `boolean` | No | - | Whether this is the last item (current page) |
+| `disabled` | `boolean` | No | - | Whether this item is disabled |
+| `children` | `ReactNode` | No | - | Custom separator content |
+

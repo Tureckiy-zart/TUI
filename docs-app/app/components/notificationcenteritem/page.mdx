@@ -1,0 +1,36 @@
+---
+title: NotificationCenterItem
+description: Documentation for NotificationCenterItem component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterItemAPI } from "@/generated/api/notification-center-item.api";
+
+# NotificationCenterItem
+
+Documentation for NotificationCenterItem component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterItem } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterItem>Example</NotificationCenterItem>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterItemAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `notification` | `NotificationData` | Yes | - | Notification data |
+| `onDismiss` | `(id: string) => void` | No | - | Callback when notification is dismissed |
+| `onClick` | `(id: string) => void` | No | - | Callback when notification is clicked |
+| `expandable` | `boolean` | No | false | Show expandable details |
+
