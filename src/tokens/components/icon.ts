@@ -19,13 +19,17 @@
 export const ICON_TOKENS = {
   /**
    * Icon sizes
-   * Maps to Tailwind size utilities: h-3 w-3, h-4 w-4, h-5 w-5, h-6 w-6
+   * Maps to Tailwind size utilities for consistent icon sizing
    */
   sizes: {
+    xs: "h-2.5 w-2.5", // 10px (0.625rem) - extra small icons
     sm: "h-3 w-3", // 12px (0.75rem) - maps to spacing[3]
-    md: "h-4 w-4", // 16px (1rem) - maps to spacing[4]
+    md: "h-4 w-4", // 16px (1rem) - maps to spacing[4] (default)
     lg: "h-5 w-5", // 20px (1.25rem) - maps to spacing[5]
     xl: "h-6 w-6", // 24px (1.5rem) - maps to spacing[6]
+    "2xl": "h-8 w-8", // 32px (2rem) - maps to spacing[8]
+    "3xl": "h-10 w-10", // 40px (2.5rem) - maps to spacing[10]
+    "4xl": "h-12 w-12", // 48px (3rem) - maps to spacing[12]
   } as const,
 
   /**

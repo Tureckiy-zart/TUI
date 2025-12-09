@@ -18,10 +18,10 @@ const skeletonVariants = cva(
   {
     variants: {
       variant: {
-        text: `${DATA_TOKENS.skeleton.height.text} ${DATA_TOKENS.skeleton.radius.text} w-full`,
-        inline: `${DATA_TOKENS.skeleton.height.inline} ${DATA_TOKENS.skeleton.radius.inline} inline-block`,
-        block: `${DATA_TOKENS.skeleton.height.block} ${DATA_TOKENS.skeleton.radius.block} w-full`,
-        card: `${DATA_TOKENS.skeleton.height.card} ${DATA_TOKENS.skeleton.radius.card} w-full`,
+        text: `${DATA_TOKENS.skeleton.height.text} ${DATA_TOKENS.skeleton.radius.text} ${DATA_TOKENS.skeleton.width.full}`,
+        inline: `${DATA_TOKENS.skeleton.height.inline} ${DATA_TOKENS.skeleton.radius.inline} ${DATA_TOKENS.skeleton.width.inline}`,
+        block: `${DATA_TOKENS.skeleton.height.block} ${DATA_TOKENS.skeleton.radius.block} ${DATA_TOKENS.skeleton.width.full}`,
+        card: `${DATA_TOKENS.skeleton.height.card} ${DATA_TOKENS.skeleton.radius.card} ${DATA_TOKENS.skeleton.width.full}`,
         circle: `${DATA_TOKENS.skeleton.height.circle} ${DATA_TOKENS.skeleton.radius.circle}`,
       },
     },

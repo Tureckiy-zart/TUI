@@ -86,6 +86,41 @@ export const INPUT_TOKENS = {
   shadow: "shadow-sm", // Maps to elevationShadows.sm
 
   /**
+   * File input tokens
+   * Styling for file input elements
+   */
+  file: {
+    text: "text-[hsl(var(--foreground))]", // File input text color using CSS var
+  } as const,
+
+  /**
+   * Select listbox tokens
+   * Styling for select dropdown container
+   */
+  selectListbox: {
+    border: "border border-[hsl(var(--border))]", // Border color using CSS var
+    background: "bg-[hsl(var(--popover))]", // Background using CSS var
+    text: "text-[hsl(var(--popover-foreground))]", // Text color using CSS var
+    radius: "rounded-md", // Radius token (6px)
+    shadow: "shadow-md", // Shadow token
+  } as const,
+
+  /**
+   * Select option tokens
+   * Styling for select option items
+   */
+  selectOption: {
+    focus: {
+      background: "focus:bg-[hsl(var(--accent))]", // Focus background using CSS var
+      text: "focus:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
+    } as const,
+    selected: {
+      background: "bg-[hsl(var(--accent))]", // Selected background using CSS var
+      text: "text-[hsl(var(--accent-foreground))]", // Selected text using CSS var
+    } as const,
+  } as const,
+
+  /**
    * Variant-based tokens
    * Border, background, and text colors for different variants
    * All use CSS variable references for theme support
@@ -149,11 +184,19 @@ export const INPUT_TOKENS = {
 
   /**
    * Icon tokens
-   * Size and spacing for icons within inputs
+   * Size, spacing, and color for icons within inputs
    */
   icon: {
     size: "size-4", // 16px (1rem) - maps to spacing[4]
     gap: "gap-sm", // 8px (0.5rem) - maps to semanticSpacing.sm
+    paddingLeft: "pl-lg", // 24px (1.5rem) - padding when icon on left
+    paddingRight: "pr-lg", // 24px (1.5rem) - padding when icon on right
+    color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
+    position: {
+      left: "left-0", // Position left
+      right: "right-0", // Position right
+      top: "top-0", // Position top
+    },
   } as const,
 
   /**
@@ -166,11 +209,28 @@ export const INPUT_TOKENS = {
   } as const,
 
   /**
+   * Width tokens
+   * Common width utilities
+   */
+  width: {
+    full: "w-full", // Full width (100%)
+  } as const,
+
+  /**
    * Message tokens
-   * Spacing for helper text and error messages
+   * Spacing, positioning, and styling for helper text and error messages
    */
   message: {
     spacing: "space-y-sm", // 8px (0.5rem) - spacing between control and message
+    position: {
+      bottom: "bottom-sm", // 8px (0.5rem) - bottom position for character counter
+      right: "right-sm", // 8px (0.5rem) - right position for character counter
+    },
+    color: {
+      default: "text-[hsl(var(--muted-foreground))]", // Default message color
+      error: "text-[hsl(var(--destructive))]", // Error message color
+      success: "text-[hsl(var(--semantic-success))]", // Success message color
+    },
   } as const,
 
   /**

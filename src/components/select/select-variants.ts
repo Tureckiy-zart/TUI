@@ -3,6 +3,8 @@
 import { cva } from "class-variance-authority";
 
 import { INPUT_TOKENS } from "@/tokens/components/input";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 /**
  * Select Variants
@@ -18,7 +20,7 @@ import { INPUT_TOKENS } from "@/tokens/components/input";
  * Button element that opens/closes the dropdown
  */
 export const selectTriggerVariants = cva(
-  `flex w-full items-center justify-between ${INPUT_TOKENS.shadow} transition-colors disabled:cursor-not-allowed focus-visible:outline-none`,
+  `flex ${INPUT_TOKENS.width.full} items-center justify-between ${INPUT_TOKENS.shadow} ${MOTION_TOKENS.transition.colors} disabled:cursor-not-allowed focus-visible:outline-none`,
   {
     variants: {
       variant: {
@@ -34,7 +36,7 @@ export const selectTriggerVariants = cva(
         lg: `${INPUT_TOKENS.size.lg.height} ${INPUT_TOKENS.size.lg.padding.horizontal} ${INPUT_TOKENS.size.lg.padding.vertical} ${INPUT_TOKENS.size.lg.radius} ${INPUT_TOKENS.size.lg.fontSize}`,
       },
       state: {
-        open: "ring-2 ring-[hsl(var(--ring))] ring-offset-2",
+        open: INPUT_TOKENS.state.border.focus,
         closed: "",
         disabled: `${INPUT_TOKENS.state.border.disabled} ${INPUT_TOKENS.state.background.disabled} ${INPUT_TOKENS.state.text.disabled}`,
       },
@@ -52,14 +54,14 @@ export const selectTriggerVariants = cva(
  * Container for the dropdown options
  */
 export const selectListboxVariants = cva(
-  `relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--popover))] text-[hsl(var(--popover-foreground))] shadow-md transition-colors`,
+  `relative z-50 min-w-[8rem] overflow-hidden ${INPUT_TOKENS.selectListbox.radius} ${INPUT_TOKENS.selectListbox.border} ${INPUT_TOKENS.selectListbox.background} ${INPUT_TOKENS.selectListbox.text} ${INPUT_TOKENS.selectListbox.shadow} ${MOTION_TOKENS.transition.colors}`,
   {
     variants: {
       size: {
-        xs: "text-xs",
-        sm: "text-sm",
-        md: "text-sm",
-        lg: "text-base",
+        xs: TEXT_TOKENS.fontSize.xs,
+        sm: TEXT_TOKENS.fontSize.sm,
+        md: TEXT_TOKENS.fontSize.sm,
+        lg: TEXT_TOKENS.fontSize.md,
       },
     },
     defaultVariants: {
@@ -73,17 +75,17 @@ export const selectListboxVariants = cva(
  * Individual option item in the listbox
  */
 export const selectOptionVariants = cva(
-  `relative flex w-full cursor-default select-none items-center outline-none transition-colors focus:bg-[hsl(var(--accent))] focus:text-[hsl(var(--accent-foreground))] data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+  `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors} ${INPUT_TOKENS.selectOption.focus.background} ${INPUT_TOKENS.selectOption.focus.text} data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
   {
     variants: {
       size: {
-        xs: "px-xs py-xs text-xs",
-        sm: "px-sm py-xs text-sm",
-        md: "px-sm py-xs text-sm",
-        lg: "px-md py-sm text-base",
+        xs: `${INPUT_TOKENS.size.xs.padding.horizontal} ${INPUT_TOKENS.size.xs.padding.vertical} ${INPUT_TOKENS.size.xs.fontSize}`,
+        sm: `${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.fontSize}`,
+        md: `${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.fontSize}`,
+        lg: `${INPUT_TOKENS.size.md.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.md.fontSize}`,
       },
       state: {
-        selected: "bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]",
+        selected: `${INPUT_TOKENS.selectOption.selected.background} ${INPUT_TOKENS.selectOption.selected.text}`,
         default: "",
         disabled: "pointer-events-none opacity-50",
       },

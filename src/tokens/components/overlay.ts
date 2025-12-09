@@ -70,14 +70,21 @@ export const OVERLAY_TOKENS = {
     } as const,
     /**
      * Modal surface tokens by variant
-     * Note: primary and tinted are defined in SURFACE_TOKENS.modal.surface
-     * Only secondary and bare are defined here in OVERLAY_TOKENS
+     * Token-based styling for all modal surface variants
      */
     surface: {
+      primary: {
+        bg: "bg-background", // Maps to SURFACE_TOKENS.variant.flat.bg
+        border: "border border-border", // Maps to SURFACE_TOKENS.variant.flat.border
+      } as const,
       secondary: {
         bg: "bg-card", // Maps to elevated surface
         border: "border border-border", // Maps to border
         shadow: "shadow-sm", // Maps to elevation shadow
+      } as const,
+      tinted: {
+        bg: "bg-muted/50", // Maps to SURFACE_TOKENS.variant.subtle.bg
+        border: "border border-border/50", // Maps to SURFACE_TOKENS.variant.subtle.border
       } as const,
       bare: {
         bg: "bg-transparent", // No background
@@ -100,6 +107,20 @@ export const OVERLAY_TOKENS = {
       appear: "tm-motion-fade-scale", // Maps to OVERLAY_TOKENS.animation.enter.combined
       disappear: "tm-motion-fade-scale-out", // Maps to OVERLAY_TOKENS.animation.exit.combined
     } as const,
+    /**
+     * Modal section spacing tokens
+     * For header, body, and footer spacing
+     */
+    spacing: {
+      header: {
+        marginBottom: "mb-md", // 16px - spacing below header
+        gap: "gap-xs", // 4px - gap between header elements
+      } as const,
+      footer: {
+        marginTop: "mt-md", // 16px - spacing above footer
+        gap: "gap-sm", // 8px - gap between footer elements
+      } as const,
+    } as const,
   } as const,
 
   /**
@@ -121,6 +142,78 @@ export const OVERLAY_TOKENS = {
       keyframes: "tm-motion-fade-out", // Motion V2 fade out
       scale: "tm-motion-scale-out", // Motion V2 scale out
       combined: "tm-motion-fade-scale-out", // Motion V2 fade + scale out
+    } as const,
+  } as const,
+
+  /**
+   * Drawer tokens by size variant
+   * Maps to foundation tokens for spacing, radius, and shadows
+   */
+  drawer: {
+    width: {
+      sm: "w-64", // 256px
+      md: "w-80", // 320px
+      lg: "w-96", // 384px
+    } as const,
+    height: {
+      sm: "h-64", // 256px
+      md: "h-80", // 320px
+      lg: "h-96", // 384px
+    } as const,
+    radius: {
+      left: {
+        sm: "rounded-r-md", // Right radius for left drawer
+        md: "rounded-r-lg",
+        lg: "rounded-r-xl",
+      } as const,
+      right: {
+        sm: "rounded-l-md", // Left radius for right drawer
+        md: "rounded-l-lg",
+        lg: "rounded-l-xl",
+      } as const,
+      bottom: {
+        sm: "rounded-t-md", // Top radius for bottom drawer
+        md: "rounded-t-lg",
+        lg: "rounded-t-xl",
+      } as const,
+    } as const,
+    padding: {
+      sm: "p-md", // 16px
+      md: "p-lg", // 24px
+      lg: "p-xl", // 32px
+    } as const,
+    shadow: {
+      sm: "shadow-md", // Maps to elevationShadows.md
+      md: "shadow-lg", // Maps to elevationShadows.lg
+      lg: "shadow-xl", // Maps to elevationShadows.xl
+    } as const,
+    animation: {
+      left: {
+        enter: "tm-motion-slide-right-in", // Slide in from left
+        exit: "tm-motion-slide-right-out", // Slide out to left
+      } as const,
+      right: {
+        enter: "tm-motion-slide-left-in", // Slide in from right
+        exit: "tm-motion-slide-left-out", // Slide out to right
+      } as const,
+      bottom: {
+        enter: "tm-motion-slide-up-in", // Slide in from bottom
+        exit: "tm-motion-slide-up-out", // Slide out to bottom
+      } as const,
+    } as const,
+    /**
+     * Drawer section spacing tokens
+     * For header, body, and footer spacing
+     */
+    spacing: {
+      header: {
+        marginBottom: "mb-md", // 16px - spacing below header
+        gap: "gap-xs", // 4px - gap between header elements
+      } as const,
+      footer: {
+        marginTop: "mt-md", // 16px - spacing above footer
+        gap: "gap-sm", // 8px - gap between footer elements
+      } as const,
     } as const,
   } as const,
 } as const;

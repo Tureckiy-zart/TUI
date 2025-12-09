@@ -50,10 +50,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const ariaInvalidValue = isError ? true : ariaInvalid;
 
     // Generate unique ID for aria-describedby if error/success state
+    const inputId = React.useId();
     const [describedById] = React.useState(() => {
       if (ariaDescribedBy) return ariaDescribedBy;
       if (state === "error" || state === "success") {
-        return `input-${React.useId()}-message`;
+        return `input-${inputId}-message`;
       }
       return undefined;
     });
@@ -62,20 +63,22 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputClasses = cn(
       inputVariants({ variant, size, state, fullWidth }),
       // Add padding for icons if present
-      iconLeft && "pl-8",
-      iconRight && "pr-8",
+      iconLeft && INPUT_TOKENS.icon.paddingLeft,
+      iconRight && INPUT_TOKENS.icon.paddingRight,
       className,
     );
 
     // If icons are present, wrap in container
     if (iconLeft || iconRight) {
       return (
-        <div className={cn("relative", fullWidth !== false && "w-full")}>
+        <div className={cn("relative", fullWidth !== false && INPUT_TOKENS.width.full)}>
           {iconLeft && (
             <span
               className={cn(
-                "absolute left-0 top-0 flex h-full items-center pl-3 text-[hsl(var(--muted-foreground))]",
+                "absolute left-0 top-0 flex h-full items-center",
+                INPUT_TOKENS.icon.paddingLeft,
                 INPUT_TOKENS.icon.size,
+                INPUT_TOKENS.icon.color,
               )}
             >
               {iconLeft}
@@ -93,8 +96,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {iconRight && (
             <span
               className={cn(
-                "absolute right-0 top-0 flex h-full items-center pr-3 text-[hsl(var(--muted-foreground))]",
+                "absolute right-0 top-0 flex h-full items-center",
+                INPUT_TOKENS.icon.paddingRight,
                 INPUT_TOKENS.icon.size,
+                INPUT_TOKENS.icon.color,
               )}
             >
               {iconRight}
@@ -122,4 +127,3 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 export { Input };
-

@@ -3,6 +3,7 @@
 import { cva } from "class-variance-authority";
 
 import { CHECKBOX_TOKENS } from "@/tokens/components/checkbox";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 
 /**
  * Checkbox Variants
@@ -13,7 +14,7 @@ import { CHECKBOX_TOKENS } from "@/tokens/components/checkbox";
  * All styling uses token-based values with CSS variable references.
  */
 export const checkboxVariants = cva(
-  `inline-flex items-center justify-center border transition-all duration-200 ease-in-out focus-visible:outline-none disabled:cursor-not-allowed ${CHECKBOX_TOKENS.shadow}`,
+  `inline-flex items-center justify-center border ${MOTION_TOKENS.transition.all} ${MOTION_TOKENS.duration["200"]} ${MOTION_TOKENS.easing["in-out"]} focus-visible:outline-none disabled:cursor-not-allowed ${CHECKBOX_TOKENS.shadow}`,
   {
     variants: {
       variant: {

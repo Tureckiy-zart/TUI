@@ -22,6 +22,16 @@ export const POPOVER_TOKENS = {
    * Maps to foundation spacing, radius, and shadow tokens
    */
   content: {
+    border: {
+      default: "border", // Border utility
+      color: "border-border", // Border color using token
+    } as const,
+    background: {
+      default: "bg-popover", // Background using token
+    } as const,
+    text: {
+      default: "text-popover-foreground", // Text color using token
+    } as const,
     padding: {
       sm: "p-sm", // 8px - maps to semanticSpacing.sm
       md: "p-md", // 16px - maps to semanticSpacing.md
@@ -40,6 +50,7 @@ export const POPOVER_TOKENS = {
       sm: "w-48", // 192px - maps to spacing[48]
       md: "w-72", // 288px - maps to spacing[72]
       lg: "w-96", // 384px - maps to spacing[96]
+      xl: "w-[32rem]", // 512px - custom large size
     } as const,
   } as const,
 

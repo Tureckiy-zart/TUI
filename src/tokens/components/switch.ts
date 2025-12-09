@@ -88,6 +88,15 @@ export const SWITCH_TOKENS = {
       radius: "rounded-full", // Fully rounded
       translate: "translate-x-8", // Distance to move when checked (64px - 28px - 4px padding = 32px)
     },
+    /**
+     * Handle positioning tokens
+     * For absolute positioning within the track
+     */
+    position: {
+      left: "left-xs", // 4px (0.125rem) - small offset from track edge
+      top: "top-1/2", // Center vertically (50%)
+      center: "-translate-y-1/2", // Center vertically using transform
+    } as const,
   } as const,
 
   /**

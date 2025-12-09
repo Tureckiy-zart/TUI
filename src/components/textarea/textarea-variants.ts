@@ -3,6 +3,7 @@
 import { cva } from "class-variance-authority";
 
 import { INPUT_TOKENS } from "@/tokens/components/input";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 
 /**
  * Textarea Variants
@@ -13,7 +14,7 @@ import { INPUT_TOKENS } from "@/tokens/components/input";
  * All styling uses token-based values with CSS variable references.
  */
 export const textareaVariants = cva(
-  `flex min-h-[80px] ${INPUT_TOKENS.shadow} transition-colors disabled:cursor-not-allowed focus-visible:outline-none resize-y`,
+  `flex min-h-[80px] ${INPUT_TOKENS.shadow} ${MOTION_TOKENS.transition.colors} disabled:cursor-not-allowed focus-visible:outline-none resize-y`,
   {
     variants: {
       variant: {
@@ -37,7 +38,7 @@ export const textareaVariants = cva(
         disabled: `${INPUT_TOKENS.state.border.disabled} ${INPUT_TOKENS.state.background.disabled} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.text.disabled}`,
       },
       fullWidth: {
-        true: "w-full",
+        true: INPUT_TOKENS.width.full,
         false: "",
       },
     },

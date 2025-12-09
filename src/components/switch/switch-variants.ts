@@ -55,7 +55,7 @@ export const switchTrackVariants = cva(
  * The handle is positioned absolutely within the track and slides on toggle.
  */
 export const switchHandleVariants = cva(
-  `absolute left-0.5 top-1/2 -translate-y-1/2 ${SWITCH_TOKENS.transition.handle}`,
+  `absolute ${SWITCH_TOKENS.handle.position.left} ${SWITCH_TOKENS.handle.position.top} ${SWITCH_TOKENS.handle.position.center} ${SWITCH_TOKENS.transition.handle}`,
   {
     variants: {
       size: {

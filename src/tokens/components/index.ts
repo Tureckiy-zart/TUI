@@ -129,6 +129,18 @@ export {
   type PopoverContentWidth,
 } from "./popover";
 
+// Dropdown tokens
+export {
+  DROPDOWN_TOKENS,
+  type DropdownItemSize,
+  type DropdownMenuSize,
+  type DropdownTriggerSize,
+  type DropdownVariant,
+} from "./dropdown";
+
+// Tooltip tokens
+export { TOOLTIP_TOKENS, type TooltipContentRadius, type TooltipContentShadow } from "./tooltip";
+
 // Data tokens
 export {
   DATA_TOKENS,
@@ -147,3 +159,13 @@ export {
 
 // Icon tokens
 export { ICON_TOKENS, type IconColor, type IconSize, type IconStroke } from "./icon";
+
+// Motion tokens
+export {
+  MOTION_TOKENS,
+  type MotionAnimation,
+  type MotionDuration,
+  type MotionEasing,
+  type MotionTransition,
+  type MotionTransitionPreset,
+} from "./motion";

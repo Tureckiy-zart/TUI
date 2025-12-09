@@ -143,6 +143,14 @@ export const DATA_TOKENS = {
       default: "bg-muted", // Default skeleton background
       subtle: "bg-muted/50", // Subtle skeleton background
     } as const,
+
+    /**
+     * Width tokens for skeleton variants
+     */
+    width: {
+      full: "w-full", // Full width (100%)
+      inline: "inline-block", // Inline block display
+    } as const,
   },
 
   /**

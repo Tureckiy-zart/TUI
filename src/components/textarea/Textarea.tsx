@@ -3,6 +3,8 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { INPUT_TOKENS } from "@/tokens/components/input";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import type { TextareaProps } from "./Textarea.types";
 import { textareaVariants } from "./textarea-variants";
@@ -51,10 +53,11 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const ariaInvalidValue = isError ? true : ariaInvalid;
 
     // Generate unique ID for aria-describedby if error/success state
+    const generatedId = React.useId();
     const [describedById] = React.useState(() => {
       if (ariaDescribedBy) return ariaDescribedBy;
       if (state === "error" || state === "success") {
-        return `textarea-${React.useId()}-message`;
+        return `textarea-${generatedId}-message`;
       }
       return undefined;
     });
@@ -72,7 +75,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     // If character counter is needed, wrap in container
     if (shouldShowCounter) {
       return (
-        <div className={cn("relative", fullWidth !== false && "w-full")}>
+        <div className={cn("relative", fullWidth !== false && INPUT_TOKENS.width.full)}>
           <textarea
             className={textareaClasses}
             ref={ref}
@@ -86,8 +89,12 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
           <div
             className={cn(
-              "absolute bottom-2 right-2 text-xs text-[hsl(var(--muted-foreground))]",
-              currentLength > maxLength && "text-[hsl(var(--destructive))]",
+              "absolute",
+              INPUT_TOKENS.message.position.bottom,
+              INPUT_TOKENS.message.position.right,
+              TEXT_TOKENS.fontSize.xs,
+              INPUT_TOKENS.message.color.default,
+              currentLength > maxLength && INPUT_TOKENS.message.color.error,
             )}
           >
             {currentLength} / {maxLength}

@@ -3,6 +3,8 @@
 import { cva } from "class-variance-authority";
 
 import { INPUT_TOKENS } from "@/tokens/components/input";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 /**
  * Input Variants
@@ -13,7 +15,7 @@ import { INPUT_TOKENS } from "@/tokens/components/input";
  * All styling uses token-based values with CSS variable references.
  */
 export const inputVariants = cva(
-  `flex ${INPUT_TOKENS.shadow} transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[hsl(var(--foreground))] disabled:cursor-not-allowed focus-visible:outline-none`,
+  `flex ${INPUT_TOKENS.shadow} ${MOTION_TOKENS.transition.colors} file:border-0 file:bg-transparent ${TEXT_TOKENS.fontSize.sm} file:font-medium ${INPUT_TOKENS.file.text} disabled:cursor-not-allowed focus-visible:outline-none`,
   {
     variants: {
       variant: {
@@ -37,7 +39,7 @@ export const inputVariants = cva(
         disabled: `${INPUT_TOKENS.state.border.disabled} ${INPUT_TOKENS.state.background.disabled} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.text.disabled}`,
       },
       fullWidth: {
-        true: "w-full",
+        true: INPUT_TOKENS.width.full,
         false: "",
       },
     },
@@ -49,4 +51,3 @@ export const inputVariants = cva(
     },
   },
 );
-
