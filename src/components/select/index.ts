@@ -1,12 +1,6 @@
 "use client";
 
-export {
-  Select,
-  SelectListbox,
-  SelectOption,
-  SelectRoot,
-  SelectTrigger,
-} from "./Select";
+export { Select, SelectListbox, SelectOption, SelectRoot, SelectTrigger } from "./Select";
 export type {
   SelectListboxProps,
   SelectOptionProps,
@@ -16,7 +10,11 @@ export type {
   SelectTriggerProps,
   SelectVariant,
 } from "./Select.types";
-export { selectListboxVariants, selectOptionVariants,selectTriggerVariants } from "./select-variants";
+export {
+  selectListboxVariants,
+  selectOptionVariants,
+  selectTriggerVariants,
+} from "./select-variants";
 
 // Legacy exports for backward compatibility
 export type { SelectProps as LegacySelectProps } from "./legacy/select";

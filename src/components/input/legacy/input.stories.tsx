@@ -134,4 +134,3 @@ export const Password: Story = {
     placeholder: "Enter password",
   },
 };
-

@@ -324,7 +324,7 @@ function extractCVADefaults(sourceFile: any): Record<string, string> {
         }
 
         const fullName = prefix ? `${prefix}.${propName}` : propName;
-        const {initializer} = prop;
+        const { initializer } = prop;
 
         // Handle nested objects
         if (ts.isObjectLiteralExpression(initializer)) {

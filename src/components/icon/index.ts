@@ -2,4 +2,4 @@
  * Icon Component Exports
  */
 
-export { Icon, type IconProps,iconVariants } from "./Icon";
+export { Icon, type IconProps, iconVariants } from "./Icon";

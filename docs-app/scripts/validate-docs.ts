@@ -98,10 +98,10 @@ function isValidLink(link: string, basePath: string): boolean {
 
     // Check for page.tsx, page.mdx, or directory with page file
     if (
-      fs.existsSync(`${appPath  }/page.tsx`) ||
-      fs.existsSync(`${appPath  }/page.mdx`) ||
-      fs.existsSync(`${appPath  }.tsx`) ||
-      fs.existsSync(`${appPath  }.mdx`) ||
+      fs.existsSync(`${appPath}/page.tsx`) ||
+      fs.existsSync(`${appPath}/page.mdx`) ||
+      fs.existsSync(`${appPath}.tsx`) ||
+      fs.existsSync(`${appPath}.mdx`) ||
       (fs.existsSync(appPath) && fs.statSync(appPath).isDirectory())
     ) {
       return true;
@@ -114,10 +114,10 @@ function isValidLink(link: string, basePath: string): boolean {
     if (fullPath.startsWith(docsPath)) {
       return (
         fs.existsSync(fullPath) ||
-        fs.existsSync(`${fullPath  }/page.tsx`) ||
-        fs.existsSync(`${fullPath  }/page.mdx`) ||
-        fs.existsSync(`${fullPath  }.tsx`) ||
-        fs.existsSync(`${fullPath  }.mdx`)
+        fs.existsSync(`${fullPath}/page.tsx`) ||
+        fs.existsSync(`${fullPath}/page.mdx`) ||
+        fs.existsSync(`${fullPath}.tsx`) ||
+        fs.existsSync(`${fullPath}.mdx`)
       );
     }
   }
@@ -135,7 +135,7 @@ function main() {
   console.log(`Found ${files.length} documentation files`);
 
   let errors = 0;
-  const warnings = 0;
+  const _warnings = 0;
 
   for (const file of files) {
     const links = extractLinks(file);

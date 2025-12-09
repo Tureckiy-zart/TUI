@@ -2,12 +2,12 @@
 
 // Motion tokens are exported from the library
 import {
-    motionV2Durations,
-    motionV2Easings,
-    motionV2Fade,
-    motionV2Scale,
-    motionV2Slide,
-    motionV2Transitions,
+  motionV2Durations,
+  motionV2Easings,
+  motionV2Fade,
+  motionV2Scale,
+  motionV2Slide,
+  motionV2Transitions,
 } from "@tenerife.music/ui";
 
 import { TokenCard, TokenExplorer } from "@/components/docs/TokenExplorer";
@@ -22,17 +22,17 @@ export default function MotionPage() {
       >
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-4">Durations</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Durations</h3>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {Object.entries(motionV2Durations).map(([key, value]) => (
                 <TokenCard
                   key={key}
                   name={`duration-${key}`}
                   value={value}
                   preview={
-                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                       <div
-                        className="h-full bg-primary rounded-full transition-all"
+                        className="h-full rounded-full bg-primary transition-all"
                         style={{
                           width: "100%",
                           transitionDuration: typeof value === "string" ? value : String(value),
@@ -46,17 +46,17 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Easings</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Easings</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {Object.entries(motionV2Easings).map(([key, value]) => (
                 <TokenCard
                   key={key}
                   name={`easing-${key}`}
                   value={value}
                   preview={
-                    <div className="w-full h-20 bg-muted rounded flex items-end">
+                    <div className="flex h-20 w-full items-end rounded bg-muted">
                       <div
-                        className="w-4 bg-primary rounded-t"
+                        className="w-4 rounded-t bg-primary"
                         style={{
                           height: "80%",
                           transition: "height 1s",
@@ -71,8 +71,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Transitions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Transitions</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(motionV2Transitions).map(([key, value]) => (
                 <TokenCard
                   key={key}
@@ -80,7 +80,7 @@ export default function MotionPage() {
                   value={value}
                   preview={
                     <div
-                      className="w-full h-full bg-primary rounded cursor-pointer hover:scale-105"
+                      className="h-full w-full cursor-pointer rounded bg-primary hover:scale-105"
                       style={{ transition: value }}
                     />
                   }
@@ -90,37 +90,31 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Fade Animations</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Fade Animations</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <TokenCard
                 name="fade-in"
                 value={JSON.stringify(motionV2Fade.in, null, 2)}
-                preview={
-                  <div className="w-full h-full bg-primary rounded opacity-0">
-                    Fade In
-                  </div>
-                }
+                preview={<div className="h-full w-full rounded bg-primary opacity-0">Fade In</div>}
               />
               <TokenCard
                 name="fade-out"
                 value={JSON.stringify(motionV2Fade.out, null, 2)}
                 preview={
-                  <div className="w-full h-full bg-primary rounded opacity-100">
-                    Fade Out
-                  </div>
+                  <div className="h-full w-full rounded bg-primary opacity-100">Fade Out</div>
                 }
               />
             </div>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Scale Animations</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Scale Animations</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <TokenCard
                 name="scale-in"
                 value={JSON.stringify(motionV2Scale.in, null, 2)}
                 preview={
-                  <div className="w-full h-full bg-primary rounded flex items-center justify-center">
+                  <div className="flex h-full w-full items-center justify-center rounded bg-primary">
                     Scale In
                   </div>
                 }
@@ -129,7 +123,7 @@ export default function MotionPage() {
                 name="scale-out"
                 value={JSON.stringify(motionV2Scale.out, null, 2)}
                 preview={
-                  <div className="w-full h-full bg-primary rounded flex items-center justify-center">
+                  <div className="flex h-full w-full items-center justify-center rounded bg-primary">
                     Scale Out
                   </div>
                 }
@@ -138,8 +132,8 @@ export default function MotionPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Slide Animations</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <h3 className="mb-4 text-xl font-semibold">Slide Animations</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(motionV2Slide).map(([direction, animations]) => (
                 <div key={direction} className="space-y-2">
                   <h4 className="font-medium capitalize">{direction}</h4>
@@ -147,7 +141,7 @@ export default function MotionPage() {
                     name={`slide-${direction}`}
                     value={JSON.stringify(animations, null, 2)}
                     preview={
-                      <div className="w-full h-full bg-primary rounded flex items-center justify-center">
+                      <div className="flex h-full w-full items-center justify-center rounded bg-primary">
                         Slide {direction}
                       </div>
                     }

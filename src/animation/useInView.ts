@@ -66,7 +66,7 @@ export function useInView(options: UseInViewOptions = {}): UseInViewReturn {
         if (!entry) {
           return;
         }
-        const {isIntersecting} = entry;
+        const { isIntersecting } = entry;
         setIsInView(isIntersecting);
 
         if (isIntersecting && once) {

@@ -40,25 +40,25 @@ function validateAndSanitizeApiMeta(componentName: string, apiMeta: ComponentAPI
 
     // Truncate extremely long type strings (safety limit: 500 chars)
     if (type.length > 500) {
-      type = `${type.substring(0, 497)  }...`;
+      type = `${type.substring(0, 497)}...`;
     }
 
     // Ensure description is a string and not too long
-    let {description} = prop;
+    let { description } = prop;
     if (description && typeof description !== "string") {
       description = String(description);
     }
     if (description && description.length > 1000) {
-      description = `${description.substring(0, 997)  }...`;
+      description = `${description.substring(0, 997)}...`;
     }
 
     // Ensure defaultValue is a string and not too long
-    let {defaultValue} = prop;
+    let { defaultValue } = prop;
     if (defaultValue && typeof defaultValue !== "string") {
       defaultValue = String(defaultValue);
     }
     if (defaultValue && defaultValue.length > 200) {
-      defaultValue = `${defaultValue.substring(0, 197)  }...`;
+      defaultValue = `${defaultValue.substring(0, 197)}...`;
     }
 
     return {
@@ -75,18 +75,18 @@ function validateAndSanitizeApiMeta(componentName: string, apiMeta: ComponentAPI
       ...variant,
       options: variant.options.map((opt) => {
         const optStr = String(opt);
-        return optStr.length > 100 ? `${optStr.substring(0, 97)  }...` : optStr;
+        return optStr.length > 100 ? `${optStr.substring(0, 97)}...` : optStr;
       }),
     };
   });
 
   // Ensure description is safe
-  let {description} = apiMeta;
+  let { description } = apiMeta;
   if (description && typeof description !== "string") {
     description = String(description);
   }
   if (description && description.length > 2000) {
-    description = `${description.substring(0, 1997)  }...`;
+    description = `${description.substring(0, 1997)}...`;
   }
 
   return {

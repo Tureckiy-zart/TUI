@@ -73,7 +73,7 @@ export function sanitizeType(rawType: string | unknown, options: SanitizeOptions
 
   // Final length check
   if (result.length > opts.maxStringLength) {
-    return `${result.substring(0, opts.maxStringLength - 3)  }...`;
+    return `${result.substring(0, opts.maxStringLength - 3)}...`;
   }
 
   return result;
@@ -167,7 +167,7 @@ function sanitizeTypeRecursive(
 
     // Final length check before returning
     if (normalized.length > options.maxStringLength) {
-      return `${normalized.substring(0, options.maxStringLength - 3)  }...`;
+      return `${normalized.substring(0, options.maxStringLength - 3)}...`;
     }
 
     return normalized;
@@ -368,7 +368,7 @@ function sanitizeFunction(
         const args = type.substring(1, endParen);
         // Recursively sanitize arguments
         const sanitizedArgs = sanitizeTypeRecursive(args, options, depth + 1, visited);
-        return `(${sanitizedArgs.length > 100 ? `${sanitizedArgs.substring(0, 97)  }...` : sanitizedArgs}) => ...`;
+        return `(${sanitizedArgs.length > 100 ? `${sanitizedArgs.substring(0, 97)}...` : sanitizedArgs}) => ...`;
       }
     }
     return "function";
@@ -390,13 +390,13 @@ function sanitizeFunction(
 
   // Truncate if too long
   if (simplifiedArgs.length > 150) {
-    simplifiedArgs = `${simplifiedArgs.substring(0, 147)  }...`;
+    simplifiedArgs = `${simplifiedArgs.substring(0, 147)}...`;
   }
 
   // Recursively sanitize return type
   let simplifiedReturn = sanitizeTypeRecursive(returnPart, options, depth + 1, visited);
   if (simplifiedReturn.length > 100) {
-    simplifiedReturn = `${simplifiedReturn.substring(0, 97)  }...`;
+    simplifiedReturn = `${simplifiedReturn.substring(0, 97)}...`;
   }
 
   const result = `${simplifiedArgs} => ${simplifiedReturn}`;

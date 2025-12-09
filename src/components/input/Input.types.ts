@@ -47,4 +47,3 @@ export interface InputProps
    */
   iconRight?: React.ReactNode;
 }
-

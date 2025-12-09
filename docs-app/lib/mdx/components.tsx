@@ -6,4 +6,4 @@
 export { APITable } from "@/components/docs/APITable";
 export { CodeBlock } from "@/components/docs/CodeBlock";
 export { LiveExample } from "@/components/docs/LiveExample";
-export { CopyButton,TokenCard, TokenExplorer } from "@/components/docs/TokenExplorer";
+export { CopyButton, TokenCard, TokenExplorer } from "@/components/docs/TokenExplorer";
