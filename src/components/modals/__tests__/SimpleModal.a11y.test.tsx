@@ -1,6 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React from "react";
 import { vi } from "vitest";
 import { axe } from "vitest-axe";
 
@@ -41,6 +40,6 @@ describe("SimpleModal accessibility", () => {
     );
 
     const results = await axe(document.body);
-    expect(results).toHaveNoViolations();
+    expect(results).toHaveNoViolations() as any;
   });
 });

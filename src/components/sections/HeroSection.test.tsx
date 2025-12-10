@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 import { HeroSection } from "./HeroSection";
 
 describe("HeroSection component", () => {
@@ -34,7 +33,6 @@ describe("HeroSection component", () => {
 
   it("should apply split variant", () => {
     const { container } = render(<HeroSection title="Test Title" variant="split" />);
-    const section = container.querySelector("section");
     const innerDiv = container.querySelector(".grid");
     expect(innerDiv).toHaveClass("md:grid-cols-2");
   });

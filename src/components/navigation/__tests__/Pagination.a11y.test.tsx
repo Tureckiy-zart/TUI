@@ -1,6 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React from "react";
 import { vi } from "vitest";
 import { axe } from "vitest-axe";
 
@@ -26,7 +25,7 @@ describe("Pagination accessibility", () => {
     expect(currentPage).toHaveAttribute("aria-current", "page");
 
     const results = await axe(container);
-    expect(results).toHaveNoViolations();
+    (expect(results) as any).toHaveNoViolations();
   });
 
   it("allows keyboard users to move between pages", async () => {

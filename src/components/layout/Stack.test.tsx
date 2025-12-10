@@ -124,7 +124,7 @@ describe("Stack component", () => {
   });
 
   it("should use layout stack spacing tokens", () => {
-    const { container } = render(<Stack spacing="stack-md">Content</Stack>);
+    const { container } = render(<Stack spacing={"stack-md" as any}>Content</Stack>);
     const stack = container.firstChild as HTMLElement;
     expect(stack).toHaveStyle({ gap: "var(--layout-stack-md)" });
   });

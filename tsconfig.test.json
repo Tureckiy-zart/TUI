@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "verbatimModuleSyntax": false,
-    "types": ["vitest/globals", "@testing-library/jest-dom/vitest", "node"],
+    "types": ["vitest/globals", "@testing-library/jest-dom/vitest", "vitest-axe", "node"],
     "jsx": "react-jsx",
     "skipLibCheck": true
   },
