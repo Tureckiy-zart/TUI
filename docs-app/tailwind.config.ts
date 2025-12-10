@@ -1,4 +1,7 @@
-import preset from "@tenerife.music/ui/preset";
+// Use direct import from source to avoid requiring build in CI
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - Direct import from source for CI compatibility
+import preset from "../src/preset";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
