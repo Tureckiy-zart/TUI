@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2025-12-10
+
+### Fixed
+
+- Fixed TypeScript errors in vitest.config.ts caused by Vite@5 + Vitest@4 type mismatch
+- Replaced vitest/config defineConfig with vite defineConfig for better compatibility
+- Fixed jest-dom matchers type errors in test files
+- Removed unused React imports from test files
+- Fixed type assertions for layout spacing tokens (grid-md, stack-md)
+- Fixed type assertion for toHaveNoViolations matcher from vitest-axe
+- Fixed tagName type errors in Box.test.tsx
+- Added tsconfig.vitest.json for proper test type checking
+- Removed test files from tsconfig.json exclude
+
+### Changed
+
+- Updated vitest configuration to use vite defineConfig instead of vitest/config
+- Improved TypeScript type checking for test files
+
+## [1.0.3] - 2025-12-10
+
 ### Added
 
 - **L3 Card Layer Complete**: Full migration of card components to token-driven architecture
