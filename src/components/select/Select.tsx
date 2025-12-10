@@ -36,8 +36,8 @@ interface SelectContextValue {
   itemIds: string[];
   registerItem: (id: string) => void;
   unregisterItem: (id: string) => void;
-  options: Map<string, { label?: string; children?: React.ReactNode }>;
-  registerOption: (value: string, label?: string, children?: React.ReactNode) => void;
+  options: Map<string, { label: string }>;
+  registerOption: (value: string, label: string) => void;
   unregisterOption: (value: string) => void;
 }
 
@@ -73,9 +73,7 @@ export function SelectRoot({
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
   const [focusedIndex, setFocusedIndex] = React.useState<number | null>(null);
   const [itemIds, setItemIds] = React.useState<string[]>([]);
-  const [options, setOptions] = React.useState<
-    Map<string, { label?: string; children?: React.ReactNode }>
-  >(new Map());
+  const [options, setOptions] = React.useState<Map<string, { label: string }>>(new Map());
 
   const triggerIdRef = React.useRef(`select-trigger-${Math.random().toString(36).substr(2, 9)}`);
   const listboxIdRef = React.useRef(`select-listbox-${Math.random().toString(36).substr(2, 9)}`);
@@ -124,22 +122,27 @@ export function SelectRoot({
     setItemIds((prev) => prev.filter((itemId) => itemId !== id));
   }, []);
 
-  const registerOption = React.useCallback(
-    (value: string, label?: string, children?: React.ReactNode) => {
-      setOptions((prev) => {
-        const newMap = new Map(prev);
-        newMap.set(value, { label, children });
-        return newMap;
-      });
-    },
-    [],
-  );
+  const registerOption = React.useCallback((value: string, label: string) => {
+    setOptions((prev) => {
+      const existing = prev.get(value);
+      // Если ничего не поменялось — не создаём новый Map
+      if (existing && existing.label === label) {
+        return prev;
+      }
+      const next = new Map(prev);
+      next.set(value, { label });
+      return next;
+    });
+  }, []);
 
   const unregisterOption = React.useCallback((value: string) => {
     setOptions((prev) => {
-      const newMap = new Map(prev);
-      newMap.delete(value);
-      return newMap;
+      if (!prev.has(value)) {
+        return prev;
+      }
+      const next = new Map(prev);
+      next.delete(value);
+      return next;
     });
   }, []);
 
@@ -234,39 +237,25 @@ export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerPr
       }
     }, [listboxId, open]);
 
-    // Position listbox relative to trigger
+    // Position listbox relative to trigger and handle all event listeners
     React.useEffect(() => {
       if (!open || !triggerRef.current || !listboxRef.current) {
         return;
       }
 
-      const trigger = triggerRef.current;
       const listbox = listboxRef.current as HTMLDivElement;
 
       const updatePosition = () => {
-        const triggerRect = trigger.getBoundingClientRect();
+        if (!triggerRef.current || !listboxRef.current) {
+          return;
+        }
+        const triggerRect = triggerRef.current.getBoundingClientRect();
         listbox.style.position = "fixed";
         listbox.style.top = `${triggerRect.bottom + 4}px`;
         listbox.style.left = `${triggerRect.left}px`;
         listbox.style.width = `${triggerRect.width}px`;
         listbox.style.minWidth = `${triggerRect.width}px`;
       };
-
-      updatePosition();
-      window.addEventListener("scroll", updatePosition, true);
-      window.addEventListener("resize", updatePosition);
-
-      return () => {
-        window.removeEventListener("scroll", updatePosition, true);
-        window.removeEventListener("resize", updatePosition);
-      };
-    }, [open]);
-
-    // Close on outside click
-    React.useEffect(() => {
-      if (!open) {
-        return;
-      }
 
       const handleClickOutside = (event: MouseEvent) => {
         const target = event.target as Node;
@@ -280,8 +269,18 @@ export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerPr
         }
       };
 
+      // Initial position
+      updatePosition();
+
+      // Add all event listeners
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
       document.addEventListener("mousedown", handleClickOutside);
+
+      // Cleanup all listeners on unmount or when dependencies change
       return () => {
+        window.removeEventListener("scroll", updatePosition, true);
+        window.removeEventListener("resize", updatePosition);
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [open, onOpenChange]);
@@ -327,22 +326,8 @@ export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerPr
       if (!context.value) {
         return placeholder;
       }
-      // Try to find label from registered options
       const option = context.options.get(context.value);
-      if (option) {
-        // Priority: label > children text > value
-        if (option.label) {
-          return option.label;
-        }
-        // Extract text from children
-        if (option.children) {
-          const extractedText = extractTextFromNode(option.children);
-          if (extractedText) {
-            return extractedText;
-          }
-        }
-      }
-      return context.value;
+      return option?.label ?? placeholder;
     }, [context.value, context.options, placeholder]);
 
     return (
@@ -400,15 +385,56 @@ export const SelectListbox = React.forwardRef<HTMLDivElement, SelectListboxProps
     React.useImperativeHandle(ref, () => listboxRef.current as HTMLDivElement, []);
 
     const effectiveSize = size ?? context.size;
+    const isOpen = context.open;
+
+    // Get array of option IDs for focus management
+    const optionIds = React.useMemo(() => {
+      return context.itemIds.filter((id) => {
+        const element = document.getElementById(id);
+        return element && !element.hasAttribute("aria-disabled");
+      });
+    }, [context.itemIds]);
+
+    // Auto-set focusedIndex to 0 when listbox opens
+    React.useEffect(() => {
+      if (
+        context.open &&
+        (context.focusedIndex === null || context.focusedIndex === -1) &&
+        optionIds.length > 0
+      ) {
+        context.setFocusedIndex(0);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [context.open, context.focusedIndex, optionIds.length]);
+
+    // Automatically focus the highlighted option when open or focusedIndex changes
+    React.useLayoutEffect(() => {
+      if (!context.open) return;
+      const currentIndex = context.focusedIndex ?? -1;
+      if (currentIndex < 0 || currentIndex >= optionIds.length) return;
+
+      const id = optionIds[currentIndex];
+      if (!id) return;
+
+      const element = document.getElementById(id);
+      if (element) {
+        // Temporarily make element focusable if it's not already
+        const needsTabIndex = element.getAttribute("tabindex") === "-1";
+        if (needsTabIndex) {
+          element.setAttribute("tabindex", "0");
+        }
+        element.focus();
+      }
+    }, [context.open, context.focusedIndex, optionIds]);
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
-        const focusableItems = context.itemIds.filter((id) => {
-          const element = document.getElementById(id);
-          return element && !element.hasAttribute("aria-disabled");
-        });
+        if (!isOpen) {
+          onKeyDown?.(event);
+          return;
+        }
 
-        if (focusableItems.length === 0) {
+        if (optionIds.length === 0) {
           onKeyDown?.(event);
           return;
         }
@@ -418,43 +444,44 @@ export const SelectListbox = React.forwardRef<HTMLDivElement, SelectListboxProps
         switch (event.key) {
           case "ArrowDown":
             event.preventDefault();
-            newIndex = (newIndex + 1) % focusableItems.length;
+            newIndex = Math.min(newIndex + 1, optionIds.length - 1);
             context.setFocusedIndex(newIndex);
-            const nextItemId = focusableItems[newIndex];
-            if (nextItemId) {
-              document.getElementById(nextItemId)?.focus();
-            }
             break;
 
           case "ArrowUp":
             event.preventDefault();
-            newIndex = newIndex <= 0 ? focusableItems.length - 1 : newIndex - 1;
+            newIndex = Math.max(newIndex - 1, 0);
             context.setFocusedIndex(newIndex);
-            const prevItemId = focusableItems[newIndex];
-            if (prevItemId) {
-              document.getElementById(prevItemId)?.focus();
-            }
             break;
 
           case "Home":
             event.preventDefault();
             newIndex = 0;
             context.setFocusedIndex(newIndex);
-            const firstItemId = focusableItems[newIndex];
-            if (firstItemId) {
-              document.getElementById(firstItemId)?.focus();
-            }
             break;
 
           case "End":
             event.preventDefault();
-            newIndex = focusableItems.length - 1;
+            newIndex = optionIds.length - 1;
             context.setFocusedIndex(newIndex);
-            const lastItemId = focusableItems[newIndex];
-            if (lastItemId) {
-              document.getElementById(lastItemId)?.focus();
+            break;
+
+          case "Enter": {
+            event.preventDefault();
+            const currentIndex = context.focusedIndex ?? 0;
+            const focusedItemId = optionIds[currentIndex];
+            if (focusedItemId) {
+              const element = document.getElementById(focusedItemId);
+              if (element && element.hasAttribute("data-value")) {
+                const value = element.getAttribute("data-value");
+                if (value) {
+                  context.onValueChange(value);
+                  context.onOpenChange(false);
+                }
+              }
             }
             break;
+          }
 
           case "Escape":
             event.preventDefault();
@@ -475,20 +502,31 @@ export const SelectListbox = React.forwardRef<HTMLDivElement, SelectListboxProps
             break;
         }
       },
-      [context, onKeyDown],
+      [isOpen, context, onKeyDown, optionIds],
     );
 
-    if (!context.open) {
-      return null;
-    }
+    // Ensure Portal DOM node is cleaned up on unmount
+    React.useEffect(() => {
+      return () => {
+        // Cleanup: Remove portal DOM node if it still exists
+        if (typeof document !== "undefined") {
+          const portalNode = document.getElementById(context.listboxId);
+          if (portalNode && portalNode.parentNode) {
+            portalNode.parentNode.removeChild(portalNode);
+          }
+        }
+      };
+    }, [context.listboxId]);
 
     return (
       <Portal>
         <div
           ref={listboxRef}
-          id={context.listboxId}
-          role="listbox"
-          aria-labelledby={context.triggerId}
+          id={isOpen ? context.listboxId : undefined}
+          role={isOpen ? "listbox" : undefined}
+          aria-labelledby={isOpen ? context.triggerId : undefined}
+          aria-hidden={!isOpen ? "true" : undefined}
+          hidden={!isOpen}
           className={cn(selectListboxVariants({ size: effectiveSize }), className)}
           onKeyDown={handleKeyDown}
           {...props}
@@ -525,23 +563,66 @@ export const SelectOption = React.forwardRef<HTMLDivElement, SelectOptionProps>(
       return () => {
         context.unregisterItem(optionId);
       };
-    }, [context]);
+      // Мы специально запускаем эффект только один раз на маунт/анмаунт.
+      // registerItem / unregisterItem — стабильные (useCallback с пустыми deps),
+      // поэтому игнорировать их в зависимостях безопасно.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    // Register option with label/children for trigger display
-    React.useEffect(() => {
-      context.registerOption(value, label, children);
+    // Store stable references to register/unregister functions to avoid dependency cycles
+    // Functions are stable (useCallback with []), so we can safely update refs synchronously
+    const registerOptionRef = React.useRef(context.registerOption);
+    const unregisterOptionRef = React.useRef(context.unregisterOption);
+    // Update refs synchronously on each render (safe because functions are stable)
+    registerOptionRef.current = context.registerOption;
+    unregisterOptionRef.current = context.unregisterOption;
+
+    // Register option with resolved label for trigger display
+    // Use useLayoutEffect to register before paint, ensuring Trigger sees options immediately
+    React.useLayoutEffect(() => {
+      // Extract label text: label → extractTextFromNode(children) → value
+      const resolvedLabel =
+        typeof label === "string" ? label : extractTextFromNode(children) || String(value);
+
+      registerOptionRef.current(value, resolvedLabel);
+
       return () => {
-        context.unregisterOption(value);
+        unregisterOptionRef.current(value);
       };
-    }, [context, value, label, children]);
+    }, [value, label, children]);
 
-    // Get item index
-    const itemIndex = React.useMemo(() => {
-      return context.itemIds.indexOf(optionIdRef.current);
-    }, [context.itemIds]);
+    // Get item index in the full list
+    // const itemIndex = React.useMemo(() => {
+    //   return context.itemIds.indexOf(optionIdRef.current);
+    // }, [context.itemIds]);
 
-    // Check if item is focused
-    const isFocused = context.focusedIndex === itemIndex;
+    // Get filtered index (excluding disabled items) for focus comparison
+    // We need to match the filtering logic in SelectListbox
+    // Calculate by counting non-disabled items before this one in context.itemIds
+    const filteredIndex = React.useMemo(() => {
+      if (disabled || context.disabled) return -1;
+
+      const itemIndex = context.itemIds.indexOf(optionIdRef.current);
+      if (itemIndex < 0) return -1;
+
+      // Count non-disabled items before this one
+      // Match the filtering logic in SelectListbox: filter by element existence and aria-disabled
+      let count = 0;
+      for (let i = 0; i < itemIndex; i++) {
+        const id = context.itemIds[i];
+        if (!id) continue;
+        const element = document.getElementById(id);
+        // Only count if element exists and is not disabled
+        if (element && !element.hasAttribute("aria-disabled")) {
+          count++;
+        }
+      }
+      return count;
+    }, [context.itemIds, disabled, context.disabled]);
+
+    // Check if item is focused (focusedIndex corresponds to filtered array)
+    const isFocused =
+      context.focusedIndex !== null && context.focusedIndex === filteredIndex && filteredIndex >= 0;
     const isSelected = context.value === value;
 
     const effectiveSize = size ?? context.size;
@@ -578,24 +659,31 @@ export const SelectOption = React.forwardRef<HTMLDivElement, SelectOptionProps>(
 
     // Focus on mount if this is the selected item and listbox just opened
     React.useEffect(() => {
-      if (isSelected && context.open && optionRef.current) {
-        // Small delay to ensure listbox is rendered
-        setTimeout(() => {
-          optionRef.current?.focus();
-          context.setFocusedIndex(itemIndex);
-        }, 0);
+      if (isSelected && context.open && optionRef.current && !disabled && !context.disabled) {
+        // Use queueMicrotask instead of setTimeout to avoid timer leaks
+        // and ensure it runs after DOM updates but before next frame
+        queueMicrotask(() => {
+          if (optionRef.current) {
+            optionRef.current.focus();
+            context.setFocusedIndex(filteredIndex);
+          }
+        });
       }
-    }, [context.open, isSelected, itemIndex, context]);
+    }, [context.open, isSelected, filteredIndex, disabled, context]);
+
+    // Check if item is active (focused/highlighted)
+    const isActive = isFocused;
 
     return (
       <div
         ref={optionRef}
         id={optionIdRef.current}
         role="option"
-        tabIndex={isFocused ? 0 : -1}
-        aria-selected={isSelected}
+        tabIndex={isActive ? 0 : -1}
+        aria-selected={isActive ? "true" : "false"}
         aria-disabled={disabled || context.disabled}
         data-disabled={disabled || context.disabled}
+        data-value={value}
         className={cn(
           selectOptionVariants({
             size: effectiveSize,
@@ -609,7 +697,11 @@ export const SelectOption = React.forwardRef<HTMLDivElement, SelectOptionProps>(
         )}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        onFocus={() => context.setFocusedIndex(itemIndex)}
+        onFocus={() => {
+          if (!disabled && !context.disabled) {
+            context.setFocusedIndex(filteredIndex);
+          }
+        }}
         {...props}
       >
         {label ?? children ?? value}

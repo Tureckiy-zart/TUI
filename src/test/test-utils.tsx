@@ -5,13 +5,22 @@
  * Provides render helpers, userEvent setup, theme-aware rendering, and accessibility testing utilities.
  */
 
-import { render, type RenderOptions } from "@testing-library/react";
+import { cleanup, render, type RenderOptions } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { AxeResults } from "axe-core";
 import type { ReactElement } from "react";
+import { afterEach } from "vitest";
 import { axe } from "vitest-axe";
 
 import { ThemeProvider, type ThemeProviderProps } from "@/theme";
+
+/**
+ * Global cleanup after each test to prevent memory leaks
+ * This ensures event listeners, timers, and DOM nodes are properly cleaned up
+ */
+afterEach(() => {
+  cleanup();
+});
 
 /**
  * Re-export render from @testing-library/react for convenience
