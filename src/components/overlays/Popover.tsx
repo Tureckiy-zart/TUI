@@ -2,11 +2,10 @@
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
 import * as React from "react";
 
-import { fadePresets, scalePresets } from "@/animation/presets";
 import { cn } from "@/lib/utils";
+import { POPOVER_TOKENS } from "@/tokens/components/popover";
 
 const Popover = PopoverPrimitive.Root;
 
@@ -15,11 +14,11 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const popoverContentVariants = cva(
-  "z-50 w-72 rounded-md border bg-popover p-md text-popover-foreground shadow-md outline-none",
+  `z-50 ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} outline-none ${POPOVER_TOKENS.content.radius.md} ${POPOVER_TOKENS.content.shadow.md}`,
   {
     variants: {
       variant: {
-        primary: "bg-popover text-popover-foreground border-border",
+        primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
         secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
         accent: "border-accent/50 text-accent-foreground bg-accent/10",
         outline: "bg-background text-foreground border-border",
@@ -28,11 +27,11 @@ const popoverContentVariants = cva(
         destructive: "border-destructive/50 text-destructive bg-destructive/10",
       },
       size: {
-        xs: "w-40 p-xs",
-        sm: "w-48 p-sm",
-        md: "w-72 p-md",
-        lg: "w-96 p-lg",
-        xl: "w-[32rem] p-xl",
+        xs: `${POPOVER_TOKENS.content.width.xs} ${POPOVER_TOKENS.content.padding.sm}`,
+        sm: `${POPOVER_TOKENS.content.width.sm} ${POPOVER_TOKENS.content.padding.sm}`,
+        md: `${POPOVER_TOKENS.content.width.md} ${POPOVER_TOKENS.content.padding.md}`,
+        lg: `${POPOVER_TOKENS.content.width.lg} ${POPOVER_TOKENS.content.padding.lg}`,
+        xl: `${POPOVER_TOKENS.content.width.xl} ${POPOVER_TOKENS.content.padding.lg}`,
       },
     },
     defaultVariants: {
@@ -47,29 +46,16 @@ const PopoverContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &
     VariantProps<typeof popoverContentVariants>
 >(({ className, variant, size, align = "center", sideOffset = 4, ...props }, ref) => {
-  // Combine fade and scale presets for popover animation
-  const fadeScaleIn = {
-    ...fadePresets.fadeIn({ duration: "normal" }),
-    ...scalePresets.scaleIn({ scale: 0.95, duration: "normal" }),
-  };
-
-  const fadeScaleOut = {
-    ...fadePresets.fadeOut({ duration: "fast" }),
-    ...scalePresets.scaleOut({ scale: 0.95, duration: "fast" }),
-  };
-
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content ref={ref} align={align} sideOffset={sideOffset} {...props} asChild>
-        <motion.div
-          className={cn(popoverContentVariants({ variant, size, className }))}
-          initial={fadeScaleIn.initial as any}
-          animate={fadeScaleIn.animate as any}
-          exit={fadeScaleOut.exit as any}
-          transition={fadeScaleIn.transition as any}
-        >
-          {props.children}
-        </motion.div>
+      <PopoverPrimitive.Content
+        ref={ref}
+        align={align}
+        sideOffset={sideOffset}
+        className={cn(popoverContentVariants({ variant, size }), "tm-motion-fade-scale", className)}
+        {...props}
+      >
+        {props.children}
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   );

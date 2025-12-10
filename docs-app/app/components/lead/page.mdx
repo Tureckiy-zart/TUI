@@ -1,0 +1,33 @@
+---
+title: Lead
+description: Documentation for Lead component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { LeadAPI } from "@/generated/api/lead.api";
+
+# Lead
+
+Documentation for Lead component.
+
+## Examples
+
+<LiveExample>
+{`import { Lead } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Lead>Example</Lead>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={LeadAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `"p" | "span" | "div"` | No | p | - |
+

@@ -369,6 +369,10 @@ export const tailwindTypographyConfig = {
       fontSize.sm[0],
       { lineHeight: fontSize.sm[1].lineHeight, letterSpacing: fontSize.sm[1].letterSpacing },
     ] as [string, { lineHeight: string; letterSpacing: string }],
+    md: [
+      fontSize.base[0],
+      { lineHeight: fontSize.base[1].lineHeight, letterSpacing: fontSize.base[1].letterSpacing },
+    ] as [string, { lineHeight: string; letterSpacing: string }],
     base: [
       fontSize.base[0],
       { lineHeight: fontSize.base[1].lineHeight, letterSpacing: fontSize.base[1].letterSpacing },
@@ -438,10 +442,53 @@ export const tailwindTypographyConfig = {
       },
     ] as [string, { lineHeight: string; letterSpacing: string }],
   },
-  fontWeight: { ...fontWeight } as Record<string, string>,
-  lineHeight: { ...lineHeight } as Record<string, string>,
-  letterSpacing: { ...letterSpacing } as Record<string, string>,
-};
+  fontWeight: { ...fontWeight },
+  lineHeight: { ...lineHeight },
+  letterSpacing: { ...letterSpacing },
+} as const;
+
+/**
+ * Canonical Typography Types
+ * Restricted to canonical values for component APIs
+ */
+
+/**
+ * Canonical font weight tokens
+ * Only these four weights should be used in typography components
+ */
+export type CanonicalFontWeight = "normal" | "medium" | "semibold" | "bold";
+
+/**
+ * Canonical font size scale tokens
+ * Used for typography components
+ */
+export type CanonicalFontSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+
+/**
+ * Canonical line height tokens
+ * Used for typography components
+ */
+export type CanonicalLineHeight = "tight" | "normal" | "loose";
+
+/**
+ * Canonical letter spacing (tracking) tokens
+ * Used for typography components
+ */
+export type CanonicalLetterSpacing = "tight" | "normal" | "wide";
+
+/**
+ * Canonical text color tokens
+ * Semantic text colors for typography components
+ */
+export type CanonicalTextColor = "primary" | "secondary" | "muted" | "destructive" | "accent";
+
+/**
+ * Font size mapping for md (maps to base)
+ */
+export const fontSizeWithMd = {
+  ...fontSize,
+  md: fontSize.base,
+} as const;
 
 /**
  * Type Exports

@@ -3,7 +3,7 @@
 import React from "react";
 
 import { Button } from "@/components/primitives/Button";
-import { Text } from "@/components/primitives/Typography";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 interface ConsentBannerProps {

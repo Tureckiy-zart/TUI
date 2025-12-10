@@ -1,0 +1,33 @@
+---
+title: DataListValue
+description: Documentation for DataListValue component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DataListValueAPI } from "@/generated/api/data-list-value.api";
+
+# DataListValue
+
+Documentation for DataListValue component.
+
+## Examples
+
+<LiveExample>
+{`import { DataListValue } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DataListValue>Example</DataListValue>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DataListValueAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Value content |
+

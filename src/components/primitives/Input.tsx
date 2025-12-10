@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-// Re-export shadcn/ui Input with Tenerife branding
-export { Input } from "@/components/ui/input";
+// Re-export Input with Tenerife branding
+import { Input as InputComponent } from "@/components/input";
 
-import { Input as InputComponent } from "@/components/ui/input";
+export { Input } from "@/components/input";
 export type InputProps = React.ComponentProps<typeof InputComponent>;

@@ -3,86 +3,26 @@
 /**
  * Flex Primitive Component
  *
- * Token-driven flexbox container component with support for direction, wrap,
- * alignment, justification, and responsive gap using CSS variables.
- * Supports animation props via Framer Motion when provided.
+ * Token-driven flexbox container with full control over direction, wrap,
+ * grow, shrink, basis, alignment, and spacing. Uses Box internally.
+ * All spacing values use tokens only.
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
-import { type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
 
-import type { AnimationProps } from "@/animation/types";
-import { getSpacingCSSVar, isResponsiveValue, type ResponsiveValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
+import { Box, type BoxProps } from "./Box";
 import type {
   ResponsiveAlignment,
   ResponsiveFlexDirection,
   ResponsiveFlexWrap,
   ResponsiveJustify,
   ResponsiveSpacing,
-  SpacingValue,
 } from "./layout.types";
 
-const flexVariants = cva("flex", {
-  variants: {
-    direction: {
-      row: "flex-row",
-      "row-reverse": "flex-row-reverse",
-      column: "flex-col",
-      "column-reverse": "flex-col-reverse",
-    },
-    wrap: {
-      nowrap: "flex-nowrap",
-      wrap: "flex-wrap",
-      "wrap-reverse": "flex-wrap-reverse",
-    },
-    justify: {
-      start: "justify-start",
-      end: "justify-end",
-      center: "justify-center",
-      between: "justify-between",
-      around: "justify-around",
-      evenly: "justify-evenly",
-    },
-    align: {
-      start: "items-start",
-      end: "items-end",
-      center: "items-center",
-      baseline: "items-baseline",
-      stretch: "items-stretch",
-    },
-  },
-  defaultVariants: {
-    direction: "row",
-    wrap: "nowrap",
-    justify: "start",
-    align: "start",
-  },
-});
-
-/**
- * Check if component has animation props
- */
-function hasAnimationProps(props: Partial<AnimationProps>): boolean {
-  return !!(
-    props.initial !== undefined ||
-    props.animate !== undefined ||
-    props.exit !== undefined ||
-    props.transition !== undefined ||
-    props.whileHover !== undefined ||
-    props.whileFocus !== undefined ||
-    props.whileTap !== undefined ||
-    props.whileDrag !== undefined ||
-    props.whileInView !== undefined
-  );
-}
-
 export interface FlexProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
-    Omit<VariantProps<typeof flexVariants>, "direction" | "wrap" | "justify" | "align">,
-    AnimationProps {
+  extends Omit<BoxProps, "display" | "flexDirection" | "align" | "justify"> {
   /**
    * Flex direction
    */
@@ -94,9 +34,20 @@ export interface FlexProps
   wrap?: ResponsiveFlexWrap;
 
   /**
-   * Justify content
+   * Flex grow (0 or 1, or use Tailwind flex-grow-*)
    */
-  justify?: ResponsiveJustify;
+  grow?: 0 | 1 | boolean;
+
+  /**
+   * Flex shrink (0 or 1, or use Tailwind flex-shrink-*)
+   */
+  shrink?: 0 | 1 | boolean;
+
+  /**
+   * Flex basis (CSS value or Tailwind class)
+   * Note: For token-based approach, use spacing tokens via className
+   */
+  basis?: string;
 
   /**
    * Align items
@@ -104,205 +55,176 @@ export interface FlexProps
   align?: ResponsiveAlignment;
 
   /**
-   * Gap between flex items (uses spacing tokens via CSS variables)
+   * Justify content
+   */
+  justify?: ResponsiveJustify;
+
+  /**
+   * Gap between flex items - token-based
    */
   gap?: ResponsiveSpacing;
 }
 
 /**
- * Get CSS value from responsive or simple value
+ * Get base value from responsive value
  */
-function getCSSValue(
-  value: ResponsiveValue<SpacingValue> | undefined,
-  defaultValue?: string,
-): string | undefined {
-  if (value === undefined || value === null) {
-    return defaultValue;
-  }
-
-  if (isResponsiveValue(value)) {
-    // For responsive values, use the base value or first available breakpoint
-    let baseValue: SpacingValue | undefined;
-
-    if (value.base !== undefined) {
-      baseValue = value.base;
-    } else if (value.sm !== undefined) {
-      baseValue = value.sm;
-    } else if (value.md !== undefined) {
-      baseValue = value.md;
-    }
-
-    if (baseValue !== undefined) {
-      return getSpacingCSSVar(baseValue as string | number);
-    }
-    return defaultValue;
-  }
-
-  // Handle 0 explicitly (since 0 is falsy but valid)
-  if (value === 0) {
-    return getSpacingCSSVar(0);
-  }
-
-  return getSpacingCSSVar(value as string | number);
-}
-
-/**
- * Get base value for CVA variants (non-responsive)
- */
-function getBaseValue<T>(value: ResponsiveValue<T> | T | undefined): T | undefined {
+function getBaseValue<T>(
+  value:
+    | ResponsiveFlexDirection
+    | ResponsiveFlexWrap
+    | ResponsiveAlignment
+    | ResponsiveJustify
+    | T
+    | undefined,
+): T | undefined {
   if (value === undefined || value === null) {
     return undefined;
   }
 
-  if (isResponsiveValue(value)) {
-    return value.base || value.sm || value.md || value.lg || value.xl || value["2xl"] || undefined;
+  // Check if it's a responsive value object
+  if (typeof value === "object" && !Array.isArray(value) && value !== null) {
+    if ("base" in value && value.base !== undefined) {
+      return value.base as T;
+    }
+    if ("sm" in value && value.sm !== undefined) {
+      return value.sm as T;
+    }
+    if ("md" in value && value.md !== undefined) {
+      return value.md as T;
+    }
+    if ("lg" in value && value.lg !== undefined) {
+      return value.lg as T;
+    }
   }
 
-  // At this point, value is T (not ResponsiveValue<T>)
   return value as T;
 }
 
+/**
+ * Convert flex direction to Tailwind class
+ */
+function flexDirectionToClass(
+  value: "row" | "column" | "row-reverse" | "column-reverse" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "row") return "flex-row";
+  if (value === "column") return "flex-col";
+  if (value === "row-reverse") return "flex-row-reverse";
+  if (value === "column-reverse") return "flex-col-reverse";
+  return undefined;
+}
+
+/**
+ * Convert flex wrap to Tailwind class
+ */
+function flexWrapToClass(
+  value: "nowrap" | "wrap" | "wrap-reverse" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "nowrap") return "flex-nowrap";
+  if (value === "wrap") return "flex-wrap";
+  if (value === "wrap-reverse") return "flex-wrap-reverse";
+  return undefined;
+}
+
+/**
+ * Convert align to Tailwind class
+ */
+function alignToClass(
+  value: "start" | "end" | "center" | "baseline" | "stretch" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "start") return "items-start";
+  if (value === "end") return "items-end";
+  if (value === "center") return "items-center";
+  if (value === "baseline") return "items-baseline";
+  if (value === "stretch") return "items-stretch";
+  return undefined;
+}
+
+/**
+ * Convert justify to Tailwind class
+ */
+function justifyToClass(
+  value: "start" | "end" | "center" | "between" | "around" | "evenly" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "start") return "justify-start";
+  if (value === "end") return "justify-end";
+  if (value === "center") return "justify-center";
+  if (value === "between") return "justify-between";
+  if (value === "around") return "justify-around";
+  if (value === "evenly") return "justify-evenly";
+  return undefined;
+}
+
+/**
+ * Convert grow to Tailwind class
+ */
+function growToClass(value: 0 | 1 | boolean | undefined): string | undefined {
+  if (value === undefined || value === false || value === 0) return undefined;
+  if (value === true || value === 1) return "grow";
+  return undefined;
+}
+
+/**
+ * Convert shrink to Tailwind class
+ */
+function shrinkToClass(value: 0 | 1 | boolean | undefined): string | undefined {
+  if (value === undefined || value === false || value === 0) return undefined;
+  if (value === true || value === 1) return "shrink";
+  return undefined;
+}
+
+/**
+ * Flex component
+ */
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   (
-    {
-      className,
-      direction,
-      wrap,
-      justify,
-      align,
-      gap,
-      style,
-      // Animation props
-      initial,
-      animate,
-      exit,
-      transition,
-      whileHover,
-      whileFocus,
-      whileTap,
-      whileDrag,
-      whileInView,
-      viewport,
-      ...props
-    },
+    { direction, wrap, grow, shrink, basis, align, justify, gap, className, style, ...props },
     ref,
   ) => {
-    // Get base values for CVA (for direction, wrap, align, justify)
-    const directionValue = getBaseValue(direction) as
-      | "row"
-      | "column"
-      | "row-reverse"
-      | "column-reverse"
-      | undefined;
+    // Get base values
+    const directionValue = getBaseValue<"row" | "column" | "row-reverse" | "column-reverse">(
+      direction,
+    );
+    const wrapValue = getBaseValue<"nowrap" | "wrap" | "wrap-reverse">(wrap);
+    const alignValue = getBaseValue<"start" | "end" | "center" | "baseline" | "stretch">(align);
+    const justifyValue = getBaseValue<"start" | "end" | "center" | "between" | "around" | "evenly">(
+      justify,
+    );
 
-    const wrapValue = getBaseValue(wrap) as "nowrap" | "wrap" | "wrap-reverse" | undefined;
-    const justifyValue = getBaseValue(justify) as
-      | "start"
-      | "end"
-      | "center"
-      | "between"
-      | "around"
-      | "evenly"
-      | undefined;
-
-    const alignValue = getBaseValue(align) as
-      | "start"
-      | "end"
-      | "center"
-      | "baseline"
-      | "stretch"
-      | undefined;
-
-    // Build inline styles for gap (using CSS variables)
-    const inlineStyles: React.CSSProperties = {};
-
-    if (gap !== undefined) {
-      inlineStyles.gap = getCSSValue(gap, "0");
-    }
-
-    // Merge with provided style
-    const mergedStyle: React.CSSProperties = {
-      ...inlineStyles,
-      ...style,
-    };
-
-    // Check if we need to use motion component
-    const hasAnimations = hasAnimationProps({
-      initial,
-      animate,
-      exit,
-      transition,
-      whileHover,
-      whileFocus,
-      whileTap,
-      whileDrag,
-      whileInView,
-    });
-
-    // Animation props for motion component
-    const animationProps = hasAnimations
-      ? {
-          initial,
-          animate,
-          exit,
-          transition,
-          whileHover,
-          whileFocus,
-          whileTap,
-          whileDrag,
-          whileInView,
-          viewport,
-        }
-      : {};
-
-    const baseClassName = cn(
-      flexVariants({
-        direction: directionValue,
-        wrap: wrapValue,
-        justify: justifyValue,
-        align: alignValue,
-      }),
+    // Build additional classes
+    const flexClasses = cn(
+      flexDirectionToClass(directionValue),
+      flexWrapToClass(wrapValue),
+      growToClass(grow),
+      shrinkToClass(shrink),
+      alignToClass(alignValue),
+      justifyToClass(justifyValue),
       className,
     );
 
-    if (hasAnimations) {
-      // Exclude conflicting handlers from props to avoid conflict with Framer Motion
-      const {
-        onDrag: _onDrag,
-        onDragStart: _onDragStart,
-        onDragEnd: _onDragEnd,
-        onAnimationStart: _onAnimationStart,
-        onAnimationEnd: _onAnimationEnd,
-        onAnimationIteration: _onAnimationIteration,
-        ...restProps
-      } = props;
+    // Handle basis via style if provided (not token-based, but needed for flexibility)
+    const flexStyle: React.CSSProperties = {
+      ...(basis ? { flexBasis: basis } : {}),
+      ...style,
+    };
 
-      // Type restProps to exclude conflicting handlers (animation props are already destructured above)
-      const safeProps = restProps as Omit<
-        React.HTMLAttributes<HTMLDivElement>,
-        | "onDrag"
-        | "onDragStart"
-        | "onDragEnd"
-        | "onAnimationStart"
-        | "onAnimationEnd"
-        | "onAnimationIteration"
-      >;
-
-      return (
-        <motion.div
-          ref={ref}
-          className={baseClassName}
-          style={mergedStyle}
-          {...(animationProps as Partial<HTMLMotionProps<"div">>)}
-          {...safeProps}
-        />
-      );
-    }
-
-    return <div ref={ref} className={baseClassName} style={mergedStyle} {...props} />;
+    return (
+      <Box
+        ref={ref}
+        display="flex"
+        flexDirection={directionValue}
+        gap={gap}
+        className={flexClasses}
+        style={Object.keys(flexStyle).length > 0 ? flexStyle : undefined}
+        {...props}
+      />
+    );
   },
 );
 
 Flex.displayName = "Flex";
 
-export { Flex, flexVariants };
+export { Flex };

@@ -1,6 +1,6 @@
-import React from "react";
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { render } from "@testing-library/react";
+import React from "react";
 import { Box } from "./Box";
 
 describe("Box component", () => {
@@ -10,7 +10,7 @@ describe("Box component", () => {
         <div>Content</div>
       </Box>,
     );
-    const box = container.firstChild;
+    const box = container.firstChild as HTMLElement;
     expect(box).toBeInTheDocument();
     expect(box?.tagName).toBe("DIV");
   });
@@ -92,7 +92,7 @@ describe("Box component", () => {
 
   it("should render as different HTML element", () => {
     const { container } = render(<Box as="section">Content</Box>);
-    const box = container.firstChild;
+    const box = container.firstChild as HTMLElement;
     expect(box?.tagName).toBe("SECTION");
   });
 
@@ -111,7 +111,7 @@ describe("Box component", () => {
     const box = container.firstChild as HTMLElement;
     expect(box).toHaveStyle({
       padding: "var(--spacing-4)",
-      color: "red",
+      color: "rgb(255, 0, 0)", // Browser normalizes "red" to rgb(255, 0, 0)
     });
   });
 
@@ -140,7 +140,7 @@ describe("Box component", () => {
   });
 
   it("should handle layout spacing tokens", () => {
-    const { container } = render(<Box p="grid-md">Content</Box>);
+    const { container } = render(<Box p={"grid-md" as any}>Content</Box>);
     const box = container.firstChild as HTMLElement;
     expect(box).toHaveStyle({ padding: "var(--layout-grid-md)" });
   });

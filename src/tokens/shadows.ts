@@ -9,18 +9,42 @@
  */
 
 /**
+ * Shadow Base Tokens
+ * Base values for shadow generation
+ */
+export const shadowBase = {
+  black: "0 0 0", // Black color for shadows (rgb format)
+  overlay: "0 0 0", // Black color for overlays (rgba format)
+} as const;
+
+/**
+ * Shadow Opacity Tokens
+ * Opacity values for different shadow intensities
+ */
+export const shadowOpacity = {
+  xs: "0.05",
+  sm: "0.1",
+  md: "0.1",
+  lg: "0.1",
+  xl: "0.1",
+  "2xl": "0.25",
+  overlay: "0.5",
+  backdrop: "0.5",
+} as const;
+
+/**
  * Elevation Shadow Tokens
  * Used for component depth and elevation hierarchy
  * Values: none, xs, sm, md, lg, xl, 2xl
  */
 export const elevationShadows = {
   none: "none",
-  xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-  sm: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-  md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-  lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-  xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-  "2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+  xs: `0 1px 2px 0 rgb(${shadowBase.black} / ${shadowOpacity.xs})`,
+  sm: `0 1px 3px 0 rgb(${shadowBase.black} / ${shadowOpacity.sm}), 0 1px 2px -1px rgb(${shadowBase.black} / ${shadowOpacity.sm})`,
+  md: `0 4px 6px -1px rgb(${shadowBase.black} / ${shadowOpacity.md}), 0 2px 4px -2px rgb(${shadowBase.black} / ${shadowOpacity.md})`,
+  lg: `0 10px 15px -3px rgb(${shadowBase.black} / ${shadowOpacity.lg}), 0 4px 6px -4px rgb(${shadowBase.black} / ${shadowOpacity.lg})`,
+  xl: `0 20px 25px -5px rgb(${shadowBase.black} / ${shadowOpacity.xl}), 0 8px 10px -6px rgb(${shadowBase.black} / ${shadowOpacity.xl})`,
+  "2xl": `0 25px 50px -12px rgb(${shadowBase.black} / ${shadowOpacity["2xl"]})`,
 } as const;
 
 /**
@@ -153,7 +177,7 @@ export const componentShadowMapping = {
   },
   modal: {
     default: elevationShadows.xl,
-    backdrop: "rgba(0, 0, 0, 0.5)",
+    backdrop: `rgba(${shadowBase.overlay}, ${shadowOpacity.backdrop})`,
   },
   dropdown: {
     default: elevationShadows.md,
@@ -164,8 +188,8 @@ export const componentShadowMapping = {
   },
   toast: {
     default: elevationShadows.lg,
-    success: "0 10px 15px -3px hsl(var(--success) / 0.3)",
-    error: "0 10px 15px -3px hsl(var(--error) / 0.3)",
+    success: "0 10px 15px -3px hsl(var(--semantic-success) / 0.3)",
+    error: "0 10px 15px -3px hsl(var(--semantic-error) / 0.3)",
   },
 } as const;
 
@@ -214,7 +238,7 @@ export const tailwindShadowConfig = {
     "focus-ring": focusRings.default,
     "focus-primary": focusRings["focus-primary"],
     "focus-accent": focusRings["focus-accent"],
-  } as Record<string, string>,
+  },
 
   // Ring width (for focus rings using ring utilities)
   ringWidth: {
@@ -231,7 +255,7 @@ export const tailwindShadowConfig = {
     accent: "hsl(var(--accent-500) / 0.3)",
     "focus-primary": "hsl(var(--primary-500) / 0.3)",
     "focus-accent": "hsl(var(--accent-500) / 0.3)",
-  } as Record<string, string>,
+  },
 } as const;
 
 /**

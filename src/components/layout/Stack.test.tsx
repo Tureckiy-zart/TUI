@@ -1,6 +1,6 @@
-import React from "react";
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { render } from "@testing-library/react";
+import React from "react";
 import { Stack } from "./Stack";
 
 describe("Stack component", () => {
@@ -43,8 +43,8 @@ describe("Stack component", () => {
         <div>Item 2</div>
       </Stack>,
     );
-    const stack = container.firstChild as HTMLElement;
-    expect(stack).toHaveStyle({ flexDirection: "row" });
+    const stack = container.firstChild;
+    expect(stack).toHaveClass("flex-row");
   });
 
   it("should apply align items classes", () => {
@@ -89,7 +89,7 @@ describe("Stack component", () => {
     const stack = container.firstChild as HTMLElement;
     expect(stack).toHaveStyle({
       gap: "var(--spacing-4)",
-      color: "red",
+      color: "rgb(255, 0, 0)", // Browser normalizes "red" to rgb(255, 0, 0)
     });
   });
 
@@ -124,7 +124,7 @@ describe("Stack component", () => {
   });
 
   it("should use layout stack spacing tokens", () => {
-    const { container } = render(<Stack spacing="stack-md">Content</Stack>);
+    const { container } = render(<Stack spacing={"stack-md" as any}>Content</Stack>);
     const stack = container.firstChild as HTMLElement;
     expect(stack).toHaveStyle({ gap: "var(--layout-stack-md)" });
   });

@@ -1,0 +1,36 @@
+---
+title: Navbar
+description: Documentation for Navbar component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NavbarAPI } from "@/generated/api/navbar.api";
+
+# Navbar
+
+Documentation for Navbar component.
+
+## Examples
+
+<LiveExample>
+{`import { Navbar } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Navbar>Example</Navbar>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NavbarAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `left` | `ReactNode` | No | - | - |
+| `right` | `ReactNode` | No | - | - |
+| `children` | `ReactNode` | No | - | - |
+| `ariaLabel` | `string` | No | Primary navigation | - |
+

@@ -1,0 +1,146 @@
+// AUTO-GENERATED, DO NOT EDIT
+import type { ComponentAPI } from "@/lib/autodocs/types";
+
+export const StepperAPI = {
+  name: "Stepper",
+  props: [
+    {
+      name: "steps",
+      type: "StepperStep[]",
+      required: true,
+      description: "Array of steps",
+    },
+    {
+      name: "activeStep",
+      type: "number",
+      required: true,
+      description: "Current active step index (0-indexed)",
+    },
+    {
+      name: "orientation",
+      type: '"horizontal" | "vertical"',
+      required: false,
+      description: 'Orientation of the stepper\n    @default "horizontal"',
+      defaultValue: "horizontal",
+    },
+    {
+      name: "showNumbers",
+      type: "boolean",
+      required: false,
+      description: "Whether to show step numbers\n    @default true",
+      defaultValue: "true",
+    },
+    {
+      name: "step",
+      type: "StepperStep",
+      required: true,
+      description: "Step data",
+    },
+    {
+      name: "index",
+      type: "number",
+      required: true,
+      description: "Step index (0-indexed)",
+    },
+    {
+      name: "isActive",
+      type: "boolean",
+      required: true,
+      description: "Whether this is the active step",
+    },
+    {
+      name: "isCompleted",
+      type: "boolean",
+      required: true,
+      description: "Whether this step is completed",
+    },
+    {
+      name: "showNumber",
+      type: "boolean",
+      required: false,
+      description: "Whether to show step number",
+      defaultValue: "true",
+    },
+    {
+      name: "index",
+      type: "number",
+      required: true,
+      description: "Step index",
+    },
+    {
+      name: "isActive",
+      type: "boolean",
+      required: true,
+      description: "Whether this is the active step",
+    },
+    {
+      name: "isCompleted",
+      type: "boolean",
+      required: true,
+      description: "Whether this step is completed",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      required: false,
+      description: "Whether this step is disabled",
+    },
+    {
+      name: "icon",
+      type: "ReactNode",
+      required: false,
+      description: "Custom icon",
+    },
+    {
+      name: "showNumber",
+      type: "boolean",
+      required: false,
+      description: "Whether to show step number",
+      defaultValue: "true",
+    },
+    {
+      name: "label",
+      type: "string",
+      required: true,
+      description: "Step label text",
+    },
+    {
+      name: "description",
+      type: "string",
+      required: false,
+      description: "Optional description",
+    },
+    {
+      name: "isActive",
+      type: "boolean",
+      required: true,
+      description: "Whether this is the active step",
+    },
+    {
+      name: "stepIndex",
+      type: "number",
+      required: true,
+      description: "Step index this content belongs to",
+    },
+    {
+      name: "isActive",
+      type: "boolean",
+      required: true,
+      description: "Whether this content should be visible",
+    },
+    {
+      name: "orientation",
+      type: '"horizontal" | "vertical"',
+      required: false,
+      defaultValue: "horizontal",
+    },
+  ],
+  variants: [],
+  examples: [],
+  imports: [
+    'import { Check } from "lucide-react";',
+    'import * as React from "react";',
+    'import { cn } from "@/lib/utils";',
+    'import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";',
+  ],
+} as const satisfies ComponentAPI;

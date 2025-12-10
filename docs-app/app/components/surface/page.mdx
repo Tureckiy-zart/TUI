@@ -1,0 +1,34 @@
+---
+title: Surface
+description: Documentation for Surface component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { SurfaceAPI } from "@/generated/api/surface.api";
+
+# Surface
+
+Documentation for Surface component.
+
+## Examples
+
+<LiveExample>
+{`import { Surface } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Surface>Example</Surface>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={SurfaceAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `SurfaceVariant` | No | flat | Surface variant |
+| `radius` | `BoxProps["radius"]` | No | - | Border radius - token-based |
+

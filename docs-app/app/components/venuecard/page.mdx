@@ -1,0 +1,46 @@
+---
+title: VenueCard
+description: Documentation for VenueCard component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { VenueCardAPI } from "@/generated/api/venue-card.api";
+
+# VenueCard
+
+Documentation for VenueCard component.
+
+## Examples
+
+<LiveExample>
+{`import { VenueCard } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <VenueCard>Example</VenueCard>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={VenueCardAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `name` | `string` | Yes | - | Venue name (pre-localized string, required) |
+| `description` | `string` | No | - | Venue description (pre-localized string, optional) |
+| `location` | `string` | No | - | Location display string (pre-formatted address, optional) |
+| `capacity` | `string` | No | - | Capacity display string (pre-formatted, optional) |
+| `imageUrl` | `string` | No | - | Image URL (optional) |
+| `href` | `string` | No | - | Link URL for venue details page (optional) |
+| `eventsCount` | `number` | No | 0 | Number of associated events (optional) |
+| `featured` | `boolean` | No | false | Whether this is a featured venue |
+| `showImage` | `boolean` | No | true | Show image section |
+| `eventsLabel` | `string` | Yes | - | Label for events count (required) |
+| `popularBadgeText` | `string` | No | - | Badge text for popular venues (optional) |
+| `capacityLabel` | `string` | Yes | - | Label for capacity (required) |
+| `className` | `string` | No | - | Additional CSS classes |
+| `animation` | `ComponentAnimationConfig` | No | - | Animation configuration for entrance and hover animations |
+

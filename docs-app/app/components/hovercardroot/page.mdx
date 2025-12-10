@@ -1,0 +1,42 @@
+---
+title: HoverCardRoot
+description: HoverCard Root Component
+ 
+  Root component for HoverCard that manages open/close state with hover/focus behavior.
+  Opens on hover/focus and closes on mouseleave/blur with delay.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { HoverCardRootAPI } from "@/generated/api/hover-card-root.api";
+
+# HoverCardRoot
+
+HoverCard Root Component
+ 
+  Root component for HoverCard that manages open/close state with hover/focus behavior.
+  Opens on hover/focus and closes on mouseleave/blur with delay.
+
+## Examples
+
+<LiveExample>
+{`import { HoverCardRoot } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <HoverCardRoot>Example</HoverCardRoot>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={HoverCardRootAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `openDelay` | `number` | No | 0 | Delay before opening (in milliseconds)
+    @default 0 |
+| `closeDelay` | `number` | No | 300 | Delay before closing (in milliseconds)
+    @default 300 |
+

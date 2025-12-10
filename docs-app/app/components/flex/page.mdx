@@ -1,0 +1,41 @@
+---
+title: Flex
+description: Documentation for Flex component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { FlexAPI } from "@/generated/api/flex.api";
+
+# Flex
+
+Documentation for Flex component.
+
+## Examples
+
+<LiveExample>
+{`import { Flex } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Flex>Example</Flex>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={FlexAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `direction` | `ResponsiveFlexDirection` | No | - | Flex direction |
+| `wrap` | `ResponsiveFlexWrap` | No | - | Flex wrap |
+| `grow` | `0 | 1 | boolean` | No | - | Flex grow (0 or 1, or use Tailwind flex-grow-) |
+| `shrink` | `0 | 1 | boolean` | No | - | Flex shrink (0 or 1, or use Tailwind flex-shrink-) |
+| `basis` | `string` | No | - | Flex basis (CSS value or Tailwind class)
+    Note: For token-based approach, use spacing tokens via className |
+| `align` | `ResponsiveAlignment` | No | - | Align items |
+| `justify` | `ResponsiveJustify` | No | - | Justify content |
+| `gap` | `ResponsiveSpacing` | No | - | Gap between flex items - token-based |
+

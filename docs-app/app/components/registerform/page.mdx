@@ -1,0 +1,40 @@
+---
+title: RegisterForm
+description: Documentation for RegisterForm component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { RegisterFormAPI } from "@/generated/api/register-form.api";
+
+# RegisterForm
+
+Documentation for RegisterForm component.
+
+## Examples
+
+<LiveExample>
+{`import { RegisterForm } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <RegisterForm>Example</RegisterForm>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={RegisterFormAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `nameLabel` | `string` | Yes | - | - |
+| `namePlaceholder` | `string` | Yes | - | - |
+| `emailLabel` | `string` | Yes | - | - |
+| `emailPlaceholder` | `string` | Yes | - | - |
+| `passwordLabel` | `string` | Yes | - | - |
+| `passwordPlaceholder` | `string` | Yes | - | - |
+| `registerButtonText` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

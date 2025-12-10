@@ -1,5 +1,5 @@
+import { Alert } from "@/components/ui/alert";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Alert } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
   title: "Components/Alert",
@@ -11,92 +11,62 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"],
-      description: "Alert variant style",
+      options: ["default", "primary", "secondary", "accent", "destructive"],
+      description: "Alert variant style (canonical variants per Freeze API)",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "default" },
+      },
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Alert>;
+
+export const Default: Story = {
+  args: {
+    variant: "default",
+    children: "This is a default alert message.",
+  },
+};
 
 export const Primary: Story = {
   args: {
     variant: "primary",
-    title: "Information",
-    description: "Here's some useful information for you.",
+    children: "Here's some useful information for you.",
   },
 };
 
 export const Secondary: Story = {
   args: {
     variant: "secondary",
-    title: "Secondary",
-    description: "This is a secondary alert.",
+    children: "Please review your input before proceeding.",
   },
 };
 
 export const Accent: Story = {
   args: {
     variant: "accent",
-    title: "Success!",
-    description: "Operation completed successfully!",
+    children: "Operation completed successfully!",
   },
 };
 
 export const Destructive: Story = {
   args: {
     variant: "destructive",
-    title: "Error",
-    description: "Something went wrong. Please try again.",
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    title: "Warning",
-    description: "Please review your input before proceeding.",
-  },
-};
-
-export const Ghost: Story = {
-  args: {
-    variant: "ghost",
-    title: "Ghost Alert",
-    description: "This is a ghost variant alert.",
-  },
-};
-
-export const Link: Story = {
-  args: {
-    variant: "link",
-    title: "Link Alert",
-    description: "This is a link variant alert.",
-  },
-};
-
-export const WithoutTitle: Story = {
-  args: {
-    variant: "primary",
-    description: "This alert doesn't have a title.",
+    children: "Something went wrong. Please try again.",
   },
 };
 
 export const AllVariants: Story = {
   render: () => (
     <div className="space-y-md">
-      <Alert variant="primary" title="Primary" description="Primary alert variant." />
-      <Alert variant="secondary" title="Secondary" description="Secondary alert variant." />
-      <Alert variant="accent" title="Accent" description="Accent alert variant (success)." />
-      <Alert variant="outline" title="Outline" description="Outline alert variant." />
-      <Alert variant="ghost" title="Ghost" description="Ghost alert variant." />
-      <Alert variant="link" title="Link" description="Link alert variant." />
-      <Alert
-        variant="destructive"
-        title="Destructive"
-        description="Destructive alert variant (error)."
-      />
+      <Alert variant="default">Default alert variant.</Alert>
+      <Alert variant="primary">Primary alert variant.</Alert>
+      <Alert variant="secondary">Secondary alert variant.</Alert>
+      <Alert variant="accent">Accent alert variant.</Alert>
+      <Alert variant="destructive">Destructive alert variant.</Alert>
     </div>
   ),
 };

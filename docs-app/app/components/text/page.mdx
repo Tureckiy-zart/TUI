@@ -1,0 +1,33 @@
+---
+title: Text
+description: Documentation for Text component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { TextAPI } from "@/generated/api/text.api";
+
+# Text
+
+Documentation for Text component.
+
+## Examples
+
+<LiveExample>
+{`import { Text } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Text>Example</Text>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={TextAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `| "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive" | "muted"` | No | - | @deprecated Use muted prop or semantic text colors instead |
+

@@ -1,0 +1,33 @@
+---
+title: Body
+description: Documentation for Body component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { BodyAPI } from "@/generated/api/body.api";
+
+# Body
+
+Documentation for Body component.
+
+## Examples
+
+<LiveExample>
+{`import { Body } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Body>Example</Body>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={BodyAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `"p" | "span" | "div"` | No | p | - |
+

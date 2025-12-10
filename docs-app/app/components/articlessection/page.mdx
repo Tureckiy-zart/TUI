@@ -1,0 +1,35 @@
+---
+title: ArticlesSection
+description: Documentation for ArticlesSection component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ArticlesSectionAPI } from "@/generated/api/articles-section.api";
+
+# ArticlesSection
+
+Documentation for ArticlesSection component.
+
+## Examples
+
+<LiveExample>
+{`import { ArticlesSection } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ArticlesSection>Example</ArticlesSection>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ArticlesSectionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `articles` | `ArticleItem[]` | Yes | - | Array of article items to display |
+| `readMoreLabel` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

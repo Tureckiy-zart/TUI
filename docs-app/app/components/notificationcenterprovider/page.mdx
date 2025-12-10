@@ -1,0 +1,35 @@
+---
+title: NotificationCenterProvider
+description: Documentation for NotificationCenterProvider component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterProviderAPI } from "@/generated/api/notification-center-provider.api";
+
+# NotificationCenterProvider
+
+Documentation for NotificationCenterProvider component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterProvider } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterProvider>Example</NotificationCenterProvider>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterProviderAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Children to render |
+| `maxHistory` | `number` | No | 100 | Maximum number of notifications to keep in history |
+| `persistent` | `boolean` | No | true | Enable persistent history (in-memory, can be extended to localStorage) |
+

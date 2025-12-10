@@ -82,7 +82,7 @@ export const Destructive: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+    <div className="flex flex-wrap gap-md">
       <Badge variant="primary">Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="accent">Accent</Badge>
@@ -96,7 +96,7 @@ export const AllVariants: Story = {
 
 export const WithIcons: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+    <div className="flex flex-wrap gap-md">
       <Badge variant="primary">🚀 New</Badge>
       <Badge variant="accent">✅ Success</Badge>
       <Badge variant="destructive">⚠️ Error</Badge>

@@ -3,16 +3,16 @@
 import { Moon, Sun } from "lucide-react";
 import React from "react";
 
-import { Button } from "@/components/primitives/Button";
+import { Button, type ButtonProps } from "@/components/primitives/Button";
 import { cn } from "@/lib/utils";
+import type { Mode } from "@/theme";
 import { applyDocumentMode } from "@/theme/applyMode";
 import { ThemeContext } from "@/theme/ThemeProvider";
-import type { Mode } from "@/tokens/colors";
 
 interface ThemeSwitchProps {
   className?: string;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive";
+  size?: ButtonProps["size"];
+  variant?: ButtonProps["variant"];
 }
 
 const MODE_COOKIE = "tm_mode";
@@ -161,11 +161,10 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     }
   };
 
-  let buttonSize: "xs" | "sm" | "md" | "lg" | "xl" = "md";
-  if (size === "xs") buttonSize = "xs";
-  else if (size === "sm") buttonSize = "sm";
+  let buttonSize: ButtonProps["size"] = "md";
+  if (size === "sm") buttonSize = "sm";
   else if (size === "lg") buttonSize = "lg";
-  else if (size === "xl") buttonSize = "xl";
+  else if (size === "icon") buttonSize = "icon";
 
   return (
     <Button

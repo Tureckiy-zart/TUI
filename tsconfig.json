@@ -51,12 +51,5 @@
     "rootDir": "src"
   },
   "include": ["src/**/*"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "storybook-static",
-    "**/*.test.tsx",
-    "**/*.test.ts",
-    ".storybook"
-  ]
+  "exclude": ["dist", "node_modules", "storybook-static", ".storybook"]
 }

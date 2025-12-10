@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input > Snapshot > matches snapshot for outline variant 1`] = `
+<input
+  class="flex shadow-sm transition-colors file:border-0 file:bg-transparent file:font-medium disabled:cursor-not-allowed focus-visible:outline-none h-9 px-sm py-xs rounded-md text-base md:text-sm border-[hsl(var(--input))] bg-transparent text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus-visible:shadow-[var(--focus-ring-default)] w-full"
+  placeholder="Snapshot test"
+  type="text"
+/>
+`;

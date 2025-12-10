@@ -1,0 +1,36 @@
+---
+title: ProfileCard
+description: Documentation for ProfileCard component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ProfileCardAPI } from "@/generated/api/profile-card.api";
+
+# ProfileCard
+
+Documentation for ProfileCard component.
+
+## Examples
+
+<LiveExample>
+{`import { ProfileCard } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ProfileCard>Example</ProfileCard>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ProfileCardAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `name` | `string` | Yes | - | - |
+| `email` | `string` | Yes | - | - |
+| `avatar` | `string` | No | - | - |
+| `className` | `string` | No | - | - |
+

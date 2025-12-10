@@ -1,0 +1,33 @@
+---
+title: Code
+description: Documentation for Code component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { CodeAPI } from "@/generated/api/code.api";
+
+# Code
+
+Documentation for Code component.
+
+## Examples
+
+<LiveExample>
+{`import { Code } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Code>Example</Code>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={CodeAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `"code" | "pre"` | No | - | - |
+

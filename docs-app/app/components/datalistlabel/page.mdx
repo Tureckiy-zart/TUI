@@ -1,0 +1,33 @@
+---
+title: DataListLabel
+description: Documentation for DataListLabel component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DataListLabelAPI } from "@/generated/api/data-list-label.api";
+
+# DataListLabel
+
+Documentation for DataListLabel component.
+
+## Examples
+
+<LiveExample>
+{`import { DataListLabel } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DataListLabel>Example</DataListLabel>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DataListLabelAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Label text |
+

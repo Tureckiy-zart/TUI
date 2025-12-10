@@ -1,0 +1,36 @@
+---
+title: Portal
+description: Documentation for Portal component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PortalAPI } from "@/generated/api/portal.api";
+
+# Portal
+
+Documentation for Portal component.
+
+## Examples
+
+<LiveExample>
+{`import { Portal } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Portal>Example</Portal>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PortalAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Children to portal |
+| `container` | `Element | null` | No | - | Container element to portal into (defaults to document.body) |
+| `className` | `string` | No | - | Additional CSS classes |
+| `style` | `CSSProperties` | No | - | Additional inline styles |
+

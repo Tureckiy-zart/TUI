@@ -1,0 +1,35 @@
+---
+title: ThemeSwitch
+description: Documentation for ThemeSwitch component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ThemeSwitchAPI } from "@/generated/api/theme-switch.api";
+
+# ThemeSwitch
+
+Documentation for ThemeSwitch component.
+
+## Examples
+
+<LiveExample>
+{`import { ThemeSwitch } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ThemeSwitch>Example</ThemeSwitch>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ThemeSwitchAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `className` | `string` | No | - | - |
+| `size` | `ButtonProps["size"]` | No | md | - |
+| `variant` | `ButtonProps["variant"]` | No | primary | - |
+

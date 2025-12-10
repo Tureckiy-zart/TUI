@@ -3,7 +3,8 @@
 import React from "react";
 
 import { Card, CardContent } from "@/components/primitives/Card";
-import { Heading, Text } from "@/components/primitives/Typography";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 export interface FeatureItem {

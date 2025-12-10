@@ -1,0 +1,38 @@
+---
+title: CTASection
+description: Documentation for CTASection component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { CTASectionAPI } from "@/generated/api/cta-section.api";
+
+# CTASection
+
+Documentation for CTASection component.
+
+## Examples
+
+<LiveExample>
+{`import { CTASection } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <CTASection>Example</CTASection>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={CTASectionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `headline` | `ReactNode` | Yes | - | - |
+| `description` | `ReactNode` | No | - | - |
+| `primaryAction` | `&#123; label: string; onClick?: () => void; href?: string; variant?: ButtonProps["variant"]; &#125;` | No | - | - |
+| `secondaryAction` | `&#123; label: string; onClick?: () => void; href?: string; variant?: ButtonProps["variant"]; &#125;` | No | - | - |
+| `layout` | `"centered" | "split"` | No | centered | - |
+| `className` | `string` | No | - | - |
+

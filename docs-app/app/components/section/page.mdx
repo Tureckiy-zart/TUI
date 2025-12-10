@@ -1,0 +1,37 @@
+---
+title: Section
+description: Documentation for Section component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { SectionAPI } from "@/generated/api/section.api";
+
+# Section
+
+Documentation for Section component.
+
+## Examples
+
+<LiveExample>
+{`import { Section } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Section>Example</Section>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={SectionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `className` | `string` | No | - | - |
+| `children` | `ReactNode` | Yes | - | - |
+| `padding` | `"none" | "sm" | "md" | "lg" | "xl"` | No | md | - |
+| `background` | `"default" | "muted" | "card"` | No | default | - |
+| `as` | `keyof JSX.IntrinsicElements` | No | section | - |
+

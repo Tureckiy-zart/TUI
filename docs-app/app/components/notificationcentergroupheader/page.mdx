@@ -1,0 +1,36 @@
+---
+title: NotificationCenterGroupHeader
+description: Documentation for NotificationCenterGroupHeader component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterGroupHeaderAPI } from "@/generated/api/notification-center-group-header.api";
+
+# NotificationCenterGroupHeader
+
+Documentation for NotificationCenterGroupHeader component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterGroupHeader } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterGroupHeader>Example</NotificationCenterGroupHeader>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterGroupHeaderAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `string` | Yes | - | Group label text |
+| `collapsed` | `boolean` | No | false | Whether the group is collapsed |
+| `onToggleCollapse` | `() => void` | No | - | Callback when collapse/expand is toggled |
+| `collapsible` | `boolean` | No | false | Show collapse/expand button |
+

@@ -1,0 +1,35 @@
+---
+title: Stack
+description: Documentation for Stack component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { StackAPI } from "@/generated/api/stack.api";
+
+# Stack
+
+Documentation for Stack component.
+
+## Examples
+
+<LiveExample>
+{`import { Stack } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Stack>Example</Stack>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={StackAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `gap` | `ResponsiveSpacing` | No | - | Gap between stack items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl) |
+| `align` | `"start" | "end" | "center" | "baseline" | "stretch"` | No | - | Align items |
+| `justify` | `"start" | "end" | "center" | "between" | "around" | "evenly"` | No | - | Justify content |
+

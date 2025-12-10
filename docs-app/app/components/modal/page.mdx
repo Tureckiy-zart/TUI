@@ -1,0 +1,39 @@
+---
+title: Modal
+description: Documentation for Modal component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ModalAPI } from "@/generated/api/modal.api";
+
+# Modal
+
+Documentation for Modal component.
+
+## Examples
+
+<LiveExample>
+{`import { Modal } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Modal>Example</Modal>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ModalAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `open` | `boolean` | Yes | - | Whether modal is open |
+| `onClose` | `() => void` | Yes | - | Callback when modal should close |
+| `size` | `"sm" | "md" | "lg" | "fullscreen"` | No | md | Modal size variant |
+| `backdropVariant` | `"default" | "blurred" | "transparent"` | No | default | Backdrop variant |
+| `closeOnBackdropClick` | `boolean` | No | true | Whether to close on backdrop click |
+| `closeOnEscape` | `boolean` | No | true | Whether to close on escape key |
+| `returnFocusRef` | `React.RefObject<HTMLElement>` | No | - | Element to return focus to when modal closes |
+

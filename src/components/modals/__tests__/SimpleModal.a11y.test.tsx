@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe } from "jest-axe";
-import React from "react";
+import { vi } from "vitest";
+import { axe } from "vitest-axe";
 
 import { SimpleModal } from "../SimpleModal";
 
@@ -9,7 +9,7 @@ describe("SimpleModal accessibility", () => {
   afterEach(() => cleanup());
 
   it("announces dialog semantics and closes via keyboard controls", async () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     const user = userEvent.setup();
 
     render(
@@ -40,6 +40,6 @@ describe("SimpleModal accessibility", () => {
     );
 
     const results = await axe(document.body);
-    expect(results).toHaveNoViolations();
+    (expect(results) as any).toHaveNoViolations();
   });
 });

@@ -1,0 +1,37 @@
+---
+title: SearchBar
+description: Documentation for SearchBar component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { SearchBarAPI } from "@/generated/api/search-bar.api";
+
+# SearchBar
+
+Documentation for SearchBar component.
+
+## Examples
+
+<LiveExample>
+{`import { SearchBar } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <SearchBar>Example</SearchBar>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={SearchBarAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `placeholder` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+| `onSearch` | `(query: string) => void` | No | - | - |
+| `suggestions` | `string[]` | No | [] | - |
+| `onSuggestionSelect` | `(suggestion: string) => void` | No | - | - |
+

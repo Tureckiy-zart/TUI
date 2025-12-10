@@ -1,0 +1,38 @@
+---
+title: SegmentedControl
+description: Documentation for SegmentedControl component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { SegmentedControlAPI } from "@/generated/api/segmented-control.api";
+
+# SegmentedControl
+
+Documentation for SegmentedControl component.
+
+## Examples
+
+<LiveExample>
+{`import { SegmentedControl } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <SegmentedControl>Example</SegmentedControl>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={SegmentedControlAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `string` | No | - | Controlled value |
+| `defaultValue` | `string` | No | - | Default value for uncontrolled usage |
+| `onValueChange` | `(value: string) => void` | No | - | Callback when value changes |
+| `name` | `string` | No | - | Name for the radio group |
+| `value` | `string` | Yes | - | Value of this item |
+| `disabled` | `boolean` | No | - | Whether this item is disabled |
+

@@ -18,7 +18,8 @@ import { Box } from "@/components/layout/Box";
 import { Flex } from "@/components/layout/Flex";
 import { Grid } from "@/components/layout/Grid";
 import { Stack } from "@/components/layout/Stack";
-import { Heading, Text } from "@/components/primitives/Typography";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { getRadiusCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
@@ -326,16 +327,14 @@ function resolveGridLayout(config: Extract<LayoutConfig, { type: "grid" }>): Rea
 function resolveStackedLayout(
   config: Extract<LayoutConfig, { type: "stacked" }>,
 ): React.ReactElement {
-  const {
-    direction = "vertical",
-    gap = "md",
-    align = "stretch",
-    justify = "start",
-    items,
-  } = config;
+  const { gap = "md", align = "stretch", justify = "start", items } = config;
 
   return (
-    <Stack direction={direction} spacing={gap} align={align} justify={justify}>
+    <Stack
+      gap={gap}
+      align={align as "start" | "end" | "center" | "baseline" | "stretch"}
+      justify={justify as "start" | "end" | "center" | "between" | "around" | "evenly"}
+    >
       {items.map((item, index) => (
         <React.Fragment key={index}>{resolveSlot(item)}</React.Fragment>
       ))}

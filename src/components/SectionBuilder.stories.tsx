@@ -5,12 +5,12 @@
  * presets, theme variations, and before/after comparisons.
  */
 
-import { getAnimationConfig } from "@/animation/tas";
 import { Box } from "@/components/layout/Box";
 import { Button } from "@/components/primitives/Button";
-import { Heading, Text } from "@/components/primitives/Typography";
-import * as React from "react";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 
 import { SectionBuilder } from "./SectionBuilder";
 import {
@@ -652,14 +652,7 @@ export const GridLayoutCustomItems: Story = {
               p="md"
               radius="lg"
               bg="card"
-              className="border text-center shadow-sm"
-              whileHover={{
-                boxShadow: "var(--shadow-md)",
-              }}
-              transition={getAnimationConfig({
-                duration: "fast",
-                easing: "ease-out",
-              })}
+              className="tm-motion-hover-lift border text-center shadow-sm"
             >
               {content}
             </Box>

@@ -1,0 +1,55 @@
+---
+title: Box
+description: Documentation for Box component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { BoxAPI } from "@/generated/api/box.api";
+
+# Box
+
+Documentation for Box component.
+
+## Examples
+
+<LiveExample>
+{`import { Box } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Box>Example</Box>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={BoxAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `keyof JSX.IntrinsicElements` | No | div | Render as different HTML element |
+| `p` | `ResponsiveSpacing` | No | - | Padding (all sides) - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl) |
+| `px` | `ResponsiveSpacing` | No | - | Padding horizontal (left + right) |
+| `py` | `ResponsiveSpacing` | No | - | Padding vertical (top + bottom) |
+| `pt` | `ResponsiveSpacing` | No | - | Padding top |
+| `pr` | `ResponsiveSpacing` | No | - | Padding right |
+| `pb` | `ResponsiveSpacing` | No | - | Padding bottom |
+| `pl` | `ResponsiveSpacing` | No | - | Padding left |
+| `m` | `ResponsiveSpacing` | No | - | Margin (all sides) - token-based |
+| `mx` | `ResponsiveSpacing` | No | - | Margin horizontal (left + right) |
+| `my` | `ResponsiveSpacing` | No | - | Margin vertical (top + bottom) |
+| `mt` | `ResponsiveSpacing` | No | - | Margin top |
+| `mr` | `ResponsiveSpacing` | No | - | Margin right |
+| `mb` | `ResponsiveSpacing` | No | - | Margin bottom |
+| `ml` | `ResponsiveSpacing` | No | - | Margin left |
+| `display` | `DisplayValue` | No | - | Display type |
+| `flexDirection` | `FlexDirectionValue` | No | - | Flex direction (when display is flex) |
+| `radius` | `ResponsiveRadius` | No | - | Border radius - token-based (none, xs, sm, md, lg, xl, 2xl, 3xl, full) |
+| `shadow` | `ShadowValue` | No | - | Shadow - token-based (none, xs, sm, md, lg, xl, 2xl) |
+| `bg` | `ResponsiveColor` | No | - | Background color - token-based |
+| `gap` | `ResponsiveSpacing` | No | - | Gap (for flex/grid layouts) - token-based |
+| `align` | `"start" | "end" | "center" | "baseline" | "stretch"` | No | - | Align items (for flex/grid layouts) |
+| `justify` | `"start" | "end" | "center" | "between" | "around" | "evenly"` | No | - | Justify content (for flex/grid layouts) |
+

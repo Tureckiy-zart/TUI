@@ -145,10 +145,39 @@ export const semanticColors: Record<Mode, SemanticColors> = {
     successForeground: "0 0% 100%",
     error: "0 62.8% 30.6%", // Darker red
     errorForeground: "0 0% 98%",
-    warning: "38 92% 60%", // Brighter orange
-    warningForeground: "0 0% 9%",
-    info: "199 89% 55%", // Brighter blue
-    infoForeground: "0 0% 9%",
+    warning: "38 92% 33%", // Darker orange for WCAG AA contrast with white text
+    warningForeground: "0 0% 100%", // Light foreground for dark theme readability
+    info: "199 89% 35%", // Darker blue for WCAG AA contrast with white text
+    infoForeground: "0 0% 100%", // Light foreground for dark theme readability
+  },
+};
+
+/**
+ * Chart color tokens
+ * Used for data visualization (charts, graphs)
+ */
+export type ChartColors = {
+  chart1: string;
+  chart2: string;
+  chart3: string;
+  chart4: string;
+  chart5: string;
+};
+
+export const chartColors: Record<Mode, ChartColors> = {
+  day: {
+    chart1: "12 76% 61%", // Orange-red
+    chart2: "173 58% 39%", // Teal-cyan
+    chart3: "197 37% 24%", // Dark blue
+    chart4: "43 74% 66%", // Yellow
+    chart5: "27 87% 67%", // Orange
+  },
+  night: {
+    chart1: "220 70% 50%", // Blue
+    chart2: "160 60% 45%", // Teal
+    chart3: "30 80% 55%", // Orange
+    chart4: "280 65% 60%", // Purple
+    chart5: "340 75% 55%", // Pink
   },
 };
 
@@ -279,11 +308,11 @@ export const cssVariableColorTokens: Record<Mode, ColorTokens> = {
     accentForeground: "hsl(var(--tm-accent-foreground))",
     destructive: `hsl(${semanticColors.day.error})`,
     destructiveForeground: semanticColors.day.errorForeground,
-    chart1: "hsl(12, 76%, 61%)",
-    chart2: "hsl(173, 58%, 39%)",
-    chart3: "hsl(197, 37%, 24%)",
-    chart4: "hsl(43, 74%, 66%)",
-    chart5: "hsl(27, 87%, 67%)",
+    chart1: `hsl(${chartColors.day.chart1})`,
+    chart2: `hsl(${chartColors.day.chart2})`,
+    chart3: `hsl(${chartColors.day.chart3})`,
+    chart4: `hsl(${chartColors.day.chart4})`,
+    chart5: `hsl(${chartColors.day.chart5})`,
   },
   night: {
     ...baseColors.night,
@@ -297,11 +326,11 @@ export const cssVariableColorTokens: Record<Mode, ColorTokens> = {
     accentForeground: "hsl(var(--tm-accent-foreground))",
     destructive: `hsl(${semanticColors.night.error})`,
     destructiveForeground: semanticColors.night.errorForeground,
-    chart1: "hsl(220, 70%, 50%)",
-    chart2: "hsl(160, 60%, 45%)",
-    chart3: "hsl(30, 80%, 55%)",
-    chart4: "hsl(280, 65%, 60%)",
-    chart5: "hsl(340, 75%, 55%)",
+    chart1: `hsl(${chartColors.night.chart1})`,
+    chart2: `hsl(${chartColors.night.chart2})`,
+    chart3: `hsl(${chartColors.night.chart3})`,
+    chart4: `hsl(${chartColors.night.chart4})`,
+    chart5: `hsl(${chartColors.night.chart5})`,
   },
 };
 
@@ -349,30 +378,17 @@ export const colorCSSVariables = {
   "--secondary-900": secondaryColors[900],
   "--secondary-950": secondaryColors[950],
 
-  // Surface colors (mode-dependent, will be set by theme)
-  "--surface-base": surfaceColors.day.base,
-  "--surface-elevated1": surfaceColors.day.elevated1,
-  "--surface-elevated2": surfaceColors.day.elevated2,
-  "--surface-elevated3": surfaceColors.day.elevated3,
-  "--surface-overlay": surfaceColors.day.overlay,
-  "--surface-glass": surfaceColors.day.glass,
+  // Surface colors (mode-dependent, set dynamically by theme system)
+  // Note: These are set via updateCSSVariablesFromTokens() in applyMode.ts
 
-  // Semantic colors (mode-dependent)
-  "--semantic-success": semanticColors.day.success,
-  "--semantic-success-foreground": semanticColors.day.successForeground,
-  "--semantic-error": semanticColors.day.error,
-  "--semantic-error-foreground": semanticColors.day.errorForeground,
-  "--semantic-warning": semanticColors.day.warning,
-  "--semantic-warning-foreground": semanticColors.day.warningForeground,
-  "--semantic-info": semanticColors.day.info,
-  "--semantic-info-foreground": semanticColors.day.infoForeground,
+  // Semantic colors (mode-dependent, set dynamically by theme system)
+  // Note: These are set via updateCSSVariablesFromTokens() in applyMode.ts
 
-  // Text colors (mode-dependent)
-  "--text-primary": textColors.day.primary,
-  "--text-secondary": textColors.day.secondary,
-  "--text-tertiary": textColors.day.tertiary,
-  "--text-muted": textColors.day.muted,
-  "--text-inverse": textColors.day.inverse,
+  // Text colors (mode-dependent, set dynamically by theme system)
+  // Note: These are set via updateCSSVariablesFromTokens() in applyMode.ts
+
+  // Chart colors (mode-dependent, set dynamically by theme system)
+  // Note: These are set via updateCSSVariablesFromTokens() in applyMode.ts
 } as const;
 
 /**
@@ -493,6 +509,8 @@ export const tailwindThemeColors = {
     secondary: `hsl(var(--text-secondary))`,
     tertiary: `hsl(var(--text-tertiary))`,
     muted: `hsl(var(--text-muted))`,
+    destructive: `hsl(var(--destructive))`,
+    accent: `hsl(var(--tm-accent))`,
     inverse: `hsl(var(--text-inverse))`,
   },
 
@@ -501,12 +519,12 @@ export const tailwindThemeColors = {
   input: "hsl(var(--input))",
   ring: "hsl(var(--ring))",
 
-  // Chart colors
+  // Chart colors (using CSS variables)
   chart: {
-    1: "hsl(var(--chart-1))",
-    2: "hsl(var(--chart-2))",
-    3: "hsl(var(--chart-3))",
-    4: "hsl(var(--chart-4))",
-    5: "hsl(var(--chart-5))",
+    1: `hsl(var(--chart-1))`,
+    2: `hsl(var(--chart-2))`,
+    3: `hsl(var(--chart-3))`,
+    4: `hsl(var(--chart-4))`,
+    5: `hsl(var(--chart-5))`,
   },
 } as const;

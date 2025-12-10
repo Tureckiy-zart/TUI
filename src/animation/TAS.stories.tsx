@@ -5,18 +5,20 @@
  */
 "use client";
 import type { Meta, StoryObj } from "@storybook/react";
-import { AnimatePresence, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Box } from "@/components/layout/Box";
 import { Flex } from "@/components/layout/Flex";
 import { Grid } from "@/components/layout/Grid";
 import { Stack } from "@/components/layout/Stack";
 import { Button } from "@/components/primitives/Button";
-import { Heading, Text } from "@/components/primitives/Typography";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
 
 import { fadePresets, hoverPresets, revealOnScroll, scalePresets, slidePresets } from "./presets";
-import { createSpring, createTransition, shouldReduceMotion } from "./tas";
+import { createTransition, shouldReduceMotion } from "./tas";
+import { useInView } from "./useInView";
 
 const meta: Meta = {
   title: "Animation/TAS",
@@ -27,11 +29,11 @@ const meta: Meta = {
       description: {
         component: `
           Tenerife Animation System (TAS) provides a unified animation API with:
-          - Token-driven motion primitives
+          - Token-driven motion primitives (CSS Motion Tokens V2)
           - Reusable animation presets
           - Accessibility-first design (respects prefers-reduced-motion)
           - Integration with layout primitives
-          - Spring and transition animations
+          - CSS-only animations (no JavaScript required)
         `,
       },
     },
@@ -68,27 +70,25 @@ export const FadePresets: Story = {
       minWidth: "150px",
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
         <Heading className="text-gray-900">Fade Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {animations.map((animation) => (
-            <Stack key={animation.id} spacing={3} align="center">
-              <AnimatePresence mode="wait">
-                <Box
-                  key={keys[animation.id]}
-                  p={6}
-                  bg="card"
-                  radius="lg"
-                  {...animation.preset}
-                  style={boxStyle}
-                >
-                  <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
-                </Box>
-              </AnimatePresence>
+            <Stack key={animation.id} gap={3} align="center">
+              <Box
+                key={keys[animation.id]}
+                p={6}
+                bg="card"
+                radius="lg"
+                className={cn(animation.preset.className)}
+                style={boxStyle}
+              >
+                <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
+              </Box>
               <Button
                 onClick={() =>
                   setKeys((prev) => ({
@@ -104,26 +104,24 @@ export const FadePresets: Story = {
             </Stack>
           ))}
         </Grid>
-        <Stack spacing={3} align="center">
+        <Stack gap={3} align="center">
           <Button onClick={() => setShow(!show)} variant="outline">
             Toggle Fade Out
           </Button>
           {show && (
-            <AnimatePresence mode="wait">
-              <Box
-                key={keys.fadeOut}
-                p={6}
-                bg="destructive"
-                radius="lg"
-                {...fadePresets.fadeOut()}
-                style={{
-                  ...boxStyle,
-                  minWidth: "200px",
-                }}
-              >
-                <Text className="text-lg font-bold text-white">Fade Out</Text>
-              </Box>
-            </AnimatePresence>
+            <Box
+              key={keys.fadeOut}
+              p={6}
+              bg="destructive"
+              radius="lg"
+              className={cn(fadePresets.fadeOut().className)}
+              style={{
+                ...boxStyle,
+                minWidth: "200px",
+              }}
+            >
+              <Text className="text-lg font-bold text-white">Fade Out</Text>
+            </Box>
           )}
         </Stack>
       </Stack>
@@ -167,28 +165,26 @@ export const SlidePresets: Story = {
     ];
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading className="text-gray-900">Slide Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {animations.map((animation) => (
-            <Stack key={animation.id} spacing={3} align="center">
-              <AnimatePresence mode="wait">
-                <Box
-                  key={keys[animation.id]}
-                  p={6}
-                  bg="card"
-                  radius="lg"
-                  {...animation.preset}
-                  style={{
-                    textAlign: "center",
-                    width: "100%",
-                    border: "1px solid hsl(var(--border))",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-                  }}
-                >
-                  <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
-                </Box>
-              </AnimatePresence>
+            <Stack key={animation.id} gap={3} align="center">
+              <Box
+                key={keys[animation.id]}
+                p={6}
+                bg="card"
+                radius="lg"
+                className={cn(animation.preset.className)}
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  border: "1px solid hsl(var(--border))",
+                  boxShadow: "var(--shadow-sm)",
+                }}
+              >
+                <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
+              </Box>
               <Button
                 onClick={() =>
                   setKeys((prev) => ({
@@ -222,26 +218,24 @@ export const ScalePresets: Story = {
       minWidth: "150px",
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
         <Heading className="text-gray-900">Scale Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
-          <Stack spacing={3} align="center">
-            <AnimatePresence mode="wait">
-              <Box
-                key={keys.scaleIn}
-                p={6}
-                bg="card"
-                radius="lg"
-                {...scalePresets.scaleIn()}
-                style={boxStyle}
-              >
-                <Text className="text-base font-semibold text-gray-900">Scale In</Text>
-              </Box>
-            </AnimatePresence>
+          <Stack gap={3} align="center">
+            <Box
+              key={keys.scaleIn}
+              p={6}
+              bg="card"
+              radius="lg"
+              className={cn(scalePresets.scaleIn().className)}
+              style={boxStyle}
+            >
+              <Text className="text-base font-semibold text-gray-900">Scale In</Text>
+            </Box>
             <Button
               onClick={() => setKeys((prev) => ({ ...prev, scaleIn: prev.scaleIn + 1 }))}
               variant="outline"
@@ -254,7 +248,7 @@ export const ScalePresets: Story = {
             p={6}
             bg="card"
             radius="lg"
-            {...scalePresets.scaleUp()}
+            className={cn(scalePresets.scaleUp().className)}
             style={{ ...boxStyle, cursor: "pointer" }}
           >
             <Text className="text-base font-semibold text-gray-900">Hover to Scale Up</Text>
@@ -263,7 +257,7 @@ export const ScalePresets: Story = {
             p={6}
             bg="card"
             radius="lg"
-            {...scalePresets.scaleDown()}
+            className={cn(scalePresets.scaleDown().className)}
             style={{ ...boxStyle, cursor: "pointer" }}
           >
             <Text className="text-base font-semibold text-gray-900">Tap to Scale Down</Text>
@@ -284,93 +278,90 @@ export const LayoutPrimitives: Story = {
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
-        <Stack spacing={3} align="center">
+      <Stack gap={6} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
+        <Stack gap={3} align="center">
           <Heading className="text-gray-900">Layout Primitives with Animations</Heading>
           <Button onClick={() => setKey((prev) => prev + 1)} variant="outline" size="sm">
             Replay All Animations
           </Button>
         </Stack>
 
-        <AnimatePresence mode="wait">
-          <Box
-            key={`box-${key}`}
-            p={6}
-            bg="card"
-            radius="lg"
-            {...fadePresets.fadeIn({ delay: 0 })}
-            style={boxStyle}
-          >
-            <Text className="text-lg font-bold text-gray-900">Animated Box</Text>
+        <Box
+          key={`box-${key}`}
+          p={6}
+          bg="card"
+          radius="lg"
+          className={cn(fadePresets.fadeIn().className)}
+          style={boxStyle}
+        >
+          <Text className="text-lg font-bold text-gray-900">Animated Box</Text>
+        </Box>
+
+        <Flex
+          key={`flex-${key}`}
+          gap={4}
+          justify="center"
+          wrap="wrap"
+          className={cn(slidePresets.slideInLeft().className)}
+        >
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Flex Item 1</Text>
           </Box>
-        </AnimatePresence>
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Flex Item 2</Text>
+          </Box>
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Flex Item 3</Text>
+          </Box>
+        </Flex>
 
-        <AnimatePresence mode="wait">
-          <Flex
-            key={`flex-${key}`}
-            gap={4}
-            justify="center"
-            wrap="wrap"
-            {...slidePresets.slideInLeft({ delay: 100 })}
+        <Grid
+          key={`grid-${key}`}
+          cols={3}
+          gap={4}
+          className={cn(slidePresets.slideInUp().className)}
+        >
+          <Box
+            p={4}
+            bg="muted"
+            radius="md"
+            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
           >
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Flex Item 1</Text>
-            </Box>
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Flex Item 2</Text>
-            </Box>
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Flex Item 3</Text>
-            </Box>
-          </Flex>
-        </AnimatePresence>
+            <Text className="text-base font-bold text-gray-900">Grid 1</Text>
+          </Box>
+          <Box
+            p={4}
+            bg="muted"
+            radius="md"
+            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
+          >
+            <Text className="text-base font-bold text-gray-900">Grid 2</Text>
+          </Box>
+          <Box
+            p={4}
+            bg="muted"
+            radius="md"
+            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
+          >
+            <Text className="text-base font-bold text-gray-900">Grid 3</Text>
+          </Box>
+        </Grid>
 
-        <AnimatePresence mode="wait">
-          <Grid key={`grid-${key}`} cols={3} gap={4} {...slidePresets.slideInUp({ delay: 200 })}>
-            <Box
-              p={4}
-              bg="muted"
-              radius="md"
-              style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
-            >
-              <Text className="text-base font-bold text-gray-900">Grid 1</Text>
-            </Box>
-            <Box
-              p={4}
-              bg="muted"
-              radius="md"
-              style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
-            >
-              <Text className="text-base font-bold text-gray-900">Grid 2</Text>
-            </Box>
-            <Box
-              p={4}
-              bg="muted"
-              radius="md"
-              style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
-            >
-              <Text className="text-base font-bold text-gray-900">Grid 3</Text>
-            </Box>
-          </Grid>
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          <Stack key={`stack-${key}`} spacing={3} {...fadePresets.fadeIn({ delay: 300 })}>
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Stack Item 1</Text>
-            </Box>
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Stack Item 2</Text>
-            </Box>
-            <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
-              <Text className="text-base font-bold text-gray-900">Stack Item 3</Text>
-            </Box>
-          </Stack>
-        </AnimatePresence>
+        <Stack key={`stack-${key}`} gap={3} className={cn(fadePresets.fadeIn().className)}>
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Stack Item 1</Text>
+          </Box>
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Stack Item 2</Text>
+          </Box>
+          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+            <Text className="text-base font-bold text-gray-900">Stack Item 3</Text>
+          </Box>
+        </Stack>
       </Stack>
     );
   },
@@ -378,6 +369,8 @@ export const LayoutPrimitives: Story = {
 
 /**
  * Spring Animations
+ * Note: Spring animations are not directly supported in CSS-only approach.
+ * This story demonstrates scale animations as an alternative.
  */
 export const SpringAnimations: Story = {
   render: () => {
@@ -388,49 +381,43 @@ export const SpringAnimations: Story = {
       bouncy: 0,
     });
 
-    const springs = [
-      { id: "gentle" as const, label: "Gentle Spring", spring: createSpring("gentle") },
-      { id: "wobbly" as const, label: "Wobbly Spring", spring: createSpring("wobbly") },
-      { id: "stiff" as const, label: "Stiff Spring", spring: createSpring("stiff") },
-      { id: "bouncy" as const, label: "Bouncy Spring", spring: createSpring("bouncy") },
+    const animations = [
+      { id: "gentle" as const, label: "Gentle Scale", preset: scalePresets.scaleIn() },
+      { id: "wobbly" as const, label: "Scale In", preset: scalePresets.scaleIn() },
+      { id: "stiff" as const, label: "Scale In", preset: scalePresets.scaleIn() },
+      { id: "bouncy" as const, label: "Scale In", preset: scalePresets.scaleIn() },
     ];
 
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
-        <Heading className="text-gray-900">Spring Animations</Heading>
+      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+        <Heading className="text-gray-900">Scale Animations</Heading>
         <Text className="text-base font-medium text-gray-900">
-          Different spring configurations for natural motion
+          CSS-based scale animations (spring animations require JavaScript)
         </Text>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
-          {springs.map((springConfig) => (
-            <Stack key={springConfig.id} spacing={3} align="center">
-              <AnimatePresence mode="wait">
-                <Box
-                  key={keys[springConfig.id]}
-                  p={6}
-                  bg="card"
-                  radius="lg"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={springConfig.spring}
-                  style={boxStyle}
-                >
-                  <Text className="text-base font-semibold text-gray-900">
-                    {springConfig.label}
-                  </Text>
-                </Box>
-              </AnimatePresence>
+          {animations.map((animation) => (
+            <Stack key={animation.id} gap={3} align="center">
+              <Box
+                key={keys[animation.id]}
+                p={6}
+                bg="card"
+                radius="lg"
+                className={cn(animation.preset.className)}
+                style={boxStyle}
+              >
+                <Text className="text-base font-semibold text-gray-900">{animation.label}</Text>
+              </Box>
               <Button
                 onClick={() =>
                   setKeys((prev) => ({
                     ...prev,
-                    [springConfig.id]: prev[springConfig.id] + 1,
+                    [animation.id]: prev[animation.id] + 1,
                   }))
                 }
                 variant="outline"
@@ -468,8 +455,7 @@ export const RevealOnScroll: Story = {
       keyValue: number;
       manualTriggerValue: number;
     }) => {
-      const ref = useRef(null);
-      const isInView = useInView(ref, { once: false, margin: "-100px" });
+      const { ref, isInView } = useInView({ once: false, margin: "-100px" });
 
       const animationConfig = revealOnScroll({
         direction: item.direction,
@@ -481,24 +467,22 @@ export const RevealOnScroll: Story = {
 
       return (
         <Box
-          ref={ref}
+          ref={ref as React.Ref<HTMLDivElement>}
           key={`item-${item.id}-${keyValue}-${manualTriggerValue}`}
           p={6}
           bg="card"
           radius="lg"
-          initial={animationConfig.initial}
-          animate={shouldAnimate ? animationConfig.animate : undefined}
-          transition={animationConfig.transition}
+          className={cn(shouldAnimate ? animationConfig.className : "")}
           style={{
             minHeight: "200px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             border: "1px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
-          <Stack spacing={3} align="center">
+          <Stack gap={3} align="center">
             <Text className="text-lg font-bold text-gray-900">
               Item {item.id + 1} - {item.direction === "up" ? "Slide Up" : "Slide Down"}
             </Text>
@@ -524,8 +508,8 @@ export const RevealOnScroll: Story = {
     };
 
     return (
-      <Stack spacing={8} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
-        <Stack spacing={4} align="center">
+      <Stack gap={8} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
+        <Stack gap={4} align="center">
           <Heading className="text-gray-900">Reveal on Scroll Animations</Heading>
           <Text className="text-base font-medium text-gray-900">
             Elements animate when they enter the viewport during scrolling. Use buttons below to
@@ -599,7 +583,7 @@ export const ReducedMotion: Story = {
   render: () => {
     const prefersReducedMotion = shouldReduceMotion();
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "600px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "600px", width: "100%" }}>
         <Heading className="text-gray-900">Reduced Motion Support</Heading>
         <Box
           p={6}
@@ -609,7 +593,7 @@ export const ReducedMotion: Story = {
             textAlign: "center",
             width: "100%",
             border: "2px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <Text className="text-lg font-bold text-white">
@@ -626,12 +610,12 @@ export const ReducedMotion: Story = {
           p={6}
           bg="card"
           radius="lg"
-          {...fadePresets.fadeIn()}
+          className={cn(fadePresets.fadeIn().className)}
           style={{
             width: "100%",
             textAlign: "center",
             border: "1px solid hsl(var(--border))",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <Text className="text-base font-semibold text-gray-900">
@@ -669,34 +653,30 @@ export const CustomTransitions: Story = {
     const boxStyle = {
       textAlign: "center" as const,
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading className="text-gray-900">Custom Transitions</Heading>
         <Text className="text-base font-medium text-gray-900">
           Using TAS transition helpers with motion tokens
         </Text>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {transitions.map((transitionConfig) => (
-            <Stack key={transitionConfig.id} spacing={3} align="center">
-              <AnimatePresence mode="wait">
-                <Box
-                  key={keys[transitionConfig.id]}
-                  p={6}
-                  bg="card"
-                  radius="lg"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={transitionConfig.transition}
-                  style={boxStyle}
-                >
-                  <Text className="text-base font-semibold text-gray-900">
-                    {transitionConfig.label}
-                  </Text>
-                </Box>
-              </AnimatePresence>
+            <Stack key={transitionConfig.id} gap={3} align="center">
+              <Box
+                key={keys[transitionConfig.id]}
+                p={6}
+                bg="card"
+                radius="lg"
+                className={cn(fadePresets.fadeInLeft().className)}
+                style={boxStyle}
+              >
+                <Text className="text-base font-semibold text-gray-900">
+                  {transitionConfig.label}
+                </Text>
+              </Box>
               <Button
                 onClick={() =>
                   setKeys((prev) => ({
@@ -727,11 +707,11 @@ export const InteractiveAnimations: Story = {
       textAlign: "center" as const,
       minWidth: "150px",
       border: "1px solid hsl(var(--border))",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      boxShadow: "var(--shadow-sm)",
     };
 
     return (
-      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading className="text-gray-900">Interactive Animations</Heading>
         <Text className="text-base font-medium text-gray-900">
           Hover, focus, and tap interactions
@@ -741,8 +721,7 @@ export const InteractiveAnimations: Story = {
             p={6}
             bg="card"
             radius="lg"
-            {...hoverPresets.hoverLift()}
-            {...hoverPresets.tapScale()}
+            className={cn(hoverPresets.hoverLift().className, hoverPresets.tapScale().className)}
             style={boxStyle}
           >
             <Text className="text-base font-semibold text-gray-900">Hover & Tap</Text>
@@ -751,8 +730,10 @@ export const InteractiveAnimations: Story = {
             p={6}
             bg="card"
             radius="lg"
-            whileFocus={{ scale: 1.05, outline: "2px solid hsl(var(--ring))" }}
-            transition={createSpring("gentle")}
+            className={cn(
+              "transition-transform focus:scale-105 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-ring",
+              hoverPresets.hoverScale().className,
+            )}
             style={boxStyle}
             tabIndex={0}
           >

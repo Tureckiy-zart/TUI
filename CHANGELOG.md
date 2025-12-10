@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **L3 Card Layer Complete**: Full migration of card components to token-driven architecture
+  - CardBase component with CVA variant system
+  - DOMAIN_TOKENS for domain-specific card styling
+  - Six domain card components: EventCard, VenueCard, ArtistCard, TicketCard, PromoCard, CategoryCard
+  - All cards use token-based styling with zero hardcoded Tailwind visual classes
+  - Motion compliance with MOTION_TOKENS and DOMAIN_TOKENS.motion
+  - Comprehensive Storybook stories for all card variants
+
+### Changed
+
+- Card components now use CardBase as base component for consistent layout
+- All card styling migrated from hardcoded classes to DOMAIN_TOKENS
+- Badge positioning now uses DOMAIN_TOKENS.badges.position tokens
+
+### Removed
+
+- Legacy EventCard.tsx and VenueCard.tsx files (replaced with new token-driven implementations)
+
 ## [0.0.1] - 2025-01-29
 
 ### Added

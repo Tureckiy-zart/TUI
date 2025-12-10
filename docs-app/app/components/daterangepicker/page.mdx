@@ -1,0 +1,40 @@
+---
+title: DateRangePicker
+description: Documentation for DateRangePicker component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DateRangePickerAPI } from "@/generated/api/date-range-picker.api";
+
+# DateRangePicker
+
+Documentation for DateRangePicker component.
+
+## Examples
+
+<LiveExample>
+{`import { DateRangePicker } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DateRangePicker>Example</DateRangePicker>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DateRangePickerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `DateRange` | Yes | - | - |
+| `onChange` | `(range: DateRange) => void` | Yes | - | - |
+| `placeholder` | `string` | Yes | - | - |
+| `selectDateRangeLabel` | `string` | Yes | - | - |
+| `clearLabel` | `string` | Yes | - | - |
+| `closeLabel` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+| `disabled` | `boolean` | No | false | - |
+

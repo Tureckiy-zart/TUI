@@ -1,0 +1,44 @@
+---
+title: PopoverWrapper
+description: Documentation for PopoverWrapper component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PopoverWrapperAPI } from "@/generated/api/popover-wrapper.api";
+
+# PopoverWrapper
+
+Documentation for PopoverWrapper component.
+
+## Examples
+
+<LiveExample>
+{`import { PopoverWrapper } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <PopoverWrapper>Example</PopoverWrapper>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PopoverWrapperAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | - |
+| `content` | `ReactNode` | Yes | - | - |
+| `variant` | `VariantProps<typeof popoverContentVariants>["variant"]` | No | primary | - |
+| `size` | `VariantProps<typeof popoverContentVariants>["size"]` | No | md | - |
+| `side` | `"top" | "right" | "bottom" | "left"` | No | bottom | - |
+| `align` | `"start" | "center" | "end"` | No | center | - |
+| `sideOffset` | `number` | No | 4 | - |
+| `alignOffset` | `number` | No | - | - |
+| `open` | `boolean` | No | - | - |
+| `onOpenChange` | `(open: boolean) => void` | No | - | - |
+| `modal` | `boolean` | No | true | - |
+| `closeOnInteractOutside` | `boolean` | No | true | - |
+

@@ -1,0 +1,37 @@
+---
+title: FeatureSection
+description: Documentation for FeatureSection component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { FeatureSectionAPI } from "@/generated/api/feature-section.api";
+
+# FeatureSection
+
+Documentation for FeatureSection component.
+
+## Examples
+
+<LiveExample>
+{`import { FeatureSection } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <FeatureSection>Example</FeatureSection>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={FeatureSectionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `features` | `FeatureItem[]` | Yes | - | - |
+| `title` | `string` | No | - | - |
+| `description` | `string` | No | - | - |
+| `columns` | `1 | 2 | 3 | 4` | No | 3 | - |
+| `className` | `string` | No | - | - |
+

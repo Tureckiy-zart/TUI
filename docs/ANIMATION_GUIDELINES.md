@@ -24,9 +24,9 @@
 
 Tenerife UI Library uses a **unified animation system** that combines:
 
-- **TAS (Tenerife Animation System)** - Token-driven Framer Motion presets for complex animations
+- **TAS (Tenerife Animation System)** - Token-driven CSS animation presets using Motion Tokens V2
 - **Tailwind CSS Transitions** - Simple, performant CSS transitions for basic property changes
-- **Motion Tokens** - Design system tokens for durations, easings, and springs
+- **Motion Tokens V2** - Design system tokens for durations, easings, and CSS keyframes
 
 ### Core Principles
 
@@ -40,39 +40,39 @@ Tenerife UI Library uses a **unified animation system** that combines:
 
 ## 🎨 When to Use Each Approach
 
-### Use TAS (Framer Motion) for:
+### Use TAS (CSS Motion Tokens V2) for:
 
-✅ **Complex animations**
+✅ **Entrance animations**
 
-- Spring physics
-- Staggered animations
-- Sequence animations
-- Scroll-triggered animations (`whileInView`)
+- Fade in/out
+- Slide in/out
+- Scale in/out
+- Combined animations (fade + slide, fade + scale)
 
 ✅ **Interactive animations**
 
-- Drag interactions
-- Hover with physics
-- Tap feedback with springs
+- Hover effects (lift, scale)
+- Tap feedback (scale down)
+- Focus states
 
 ✅ **Layout animations**
 
 - Using layout primitives (Box, Flex, Grid, Stack)
-- Exit animations (with `AnimatePresence`)
+- Exit animations (with state-based class toggling)
 
-✅ **Dynamic animations**
+✅ **Scroll-triggered animations**
 
-- Animations that depend on state
-- Conditional animations
-- Programmatic control
+- Using `useInView` hook with Intersection Observer
+- Reveal on scroll animations
 
 **Example:**
 
 ```tsx
 import { Box } from "@/components/layout/Box";
 import { fadePresets, hoverPresets } from "@/animation/presets";
+import { cn } from "@/lib/utils";
 
-<Box {...fadePresets.fadeIn({ delay: 100 })} {...hoverPresets.hoverLift()}>
+<Box className={cn(fadePresets.fadeIn().className, hoverPresets.hoverLift().className)}>
   Content
 </Box>;
 ```
@@ -144,7 +144,7 @@ import { fadePresets, hoverPresets } from "@/animation/presets";
 </div>
 
 // ✅ Good: TAS presets
-<Box {...fadePresets.fadeIn()} {...scalePresets.scaleIn()}>
+<Box className={cn(fadePresets.fadeIn().className, scalePresets.scaleIn().className)}>
   Content
 </Box>
 ```
@@ -240,10 +240,10 @@ TAS provides reusable animation presets in `src/animation/presets.ts`.
 import { fadePresets } from "@/animation/presets";
 
 // Fade in
-<Box {...fadePresets.fadeIn()}>Content</Box>
+<Box className={fadePresets.fadeIn().className}>Content</Box>
 
 // Fade in from direction
-<Box {...fadePresets.fadeInUp()}>Content</Box>
+<Box className={fadePresets.fadeInUp().className}>Content</Box>
 <Box {...fadePresets.fadeInDown()}>Content</Box>
 <Box {...fadePresets.fadeInLeft()}>Content</Box>
 <Box {...fadePresets.fadeInRight()}>Content</Box>
@@ -335,7 +335,7 @@ import { createStagger } from "@/animation/presets";
 // Stagger children animations
 <Box transition={createStagger(0.1, 0, { spring: "gentle" })}>
   {items.map((item) => (
-    <Box key={item.id} {...fadePresets.fadeIn()}>
+    <Box key={item.id} className={fadePresets.fadeIn().className}>
       {item.content}
     </Box>
   ))}
@@ -376,10 +376,10 @@ import { Box, Flex } from "@/components/layout";
 import { fadePresets, slidePresets } from "@/animation/presets";
 
 // Single element
-<Box {...fadePresets.fadeIn()}>Content</Box>
+<Box className={fadePresets.fadeIn().className}>Content</Box>
 
 // Container with children
-<Flex gap={4} {...slidePresets.slideInLeft({ delay: 100 })}>
+<Flex gap={4} className={slidePresets.slideInLeft().className}>
   <Box>Item 1</Box>
   <Box>Item 2</Box>
 </Flex>
@@ -526,7 +526,9 @@ TAS automatically respects `prefers-reduced-motion` preference. All presets chec
 
 ```tsx
 // TAS automatically handles reduced motion
-<Box {...fadePresets.fadeIn()}>{/* Animation disabled if prefers-reduced-motion is enabled */}</Box>
+<Box className={fadePresets.fadeIn().className}>
+  {/* Animation disabled if prefers-reduced-motion is enabled */}
+</Box>
 ```
 
 ### Manual Override
@@ -626,7 +628,7 @@ className = "transition-all";
 
 ```tsx
 // ✅ Good: TAS preset
-<Box {...fadePresets.fadeIn()}>
+<Box className={fadePresets.fadeIn().className}>
 
 // ❌ Bad: Tailwind animation utilities
 <div className="animate-in fade-in-0">
@@ -636,7 +638,7 @@ className = "transition-all";
 
 ```tsx
 // ✅ Good: Automatic support
-<Box {...fadePresets.fadeIn()}>
+<Box className={fadePresets.fadeIn().className}>
 
 // ❌ Bad: Hardcoded animation
 <div style={{ animation: "fadeIn 300ms" }}>
@@ -646,7 +648,13 @@ className = "transition-all";
 
 ```tsx
 // ✅ Good: Combine presets
-<Box {...fadePresets.fadeIn()} {...hoverPresets.hoverLift()} {...hoverPresets.tapScale()}>
+<Box
+  className={cn(
+    fadePresets.fadeIn().className,
+    hoverPresets.hoverLift().className,
+    hoverPresets.tapScale().className,
+  )}
+>
   Content
 </Box>
 ```
@@ -696,7 +704,7 @@ import { fadePresets, createStagger } from "@/animation/presets";
 
 <Stack spacing={4} transition={createStagger(0.1, 0)}>
   {items.map((item) => (
-    <Box key={item.id} {...fadePresets.fadeIn()}>
+    <Box key={item.id} className={fadePresets.fadeIn().className}>
       {item.content}
     </Box>
   ))}
@@ -750,23 +758,31 @@ import { hoverPresets } from "@/animation/presets";
 import { Box } from "@/components/layout/Box";
 import { fadePresets } from "@/animation/presets";
 
-<Box {...fadePresets.fadeIn()}>Content fades in on mount</Box>;
+<Box className={fadePresets.fadeIn().className}>Content fades in on mount</Box>;
 ```
 
-### Exit Animation with AnimatePresence
+### Exit Animation with State-Based Class Toggling
 
 ```tsx
-import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Box } from "@/components/layout/Box";
 import { fadePresets } from "@/animation/presets";
+import { cn } from "@/lib/utils";
 
-<AnimatePresence>
-  {isVisible && (
-    <Box {...fadePresets.fadeIn()} {...fadePresets.fadeOut()}>
+const [isVisible, setIsVisible] = useState(true);
+
+{
+  isVisible && (
+    <Box
+      className={cn(isVisible ? fadePresets.fadeIn().className : fadePresets.fadeOut().className)}
+      onAnimationEnd={() => {
+        // Handle animation end if needed
+      }}
+    >
       Content with exit animation
     </Box>
-  )}
-</AnimatePresence>;
+  );
+}
 ```
 
 ---
@@ -774,9 +790,10 @@ import { fadePresets } from "@/animation/presets";
 ## 📖 Additional Resources
 
 - [TAS Storybook Stories](../../src/animation/TAS.stories.tsx) - Interactive examples
-- [Motion Tokens](../../src/tokens/motion.ts) - Token definitions
+- [Motion Tokens V2](../../src/tokens/motion/v2.ts) - CSS Motion Tokens V2 definitions
 - [Animation Presets](../../src/animation/presets.ts) - Preset implementations
-- [TAS Core](../../src/animation/tas.ts) - Core animation engine
+- [TAS Core](../../src/animation/tas.ts) - Core animation utilities
+- [useInView Hook](../../src/animation/useInView.ts) - Intersection Observer hook for scroll animations
 
 ---
 
@@ -841,14 +858,14 @@ className = "transition-[border-color,box-shadow]";
 
 ```tsx
 // ✅ Good
-<Box {...fadePresets.fadeIn()}>
+<Box className={fadePresets.fadeIn().className}>
 ```
 
 ✅ **ALWAYS** respect reduced motion
 
 ```tsx
 // ✅ Good (automatic with TAS)
-<Box {...fadePresets.fadeIn()}>
+<Box className={fadePresets.fadeIn().className}>
 ```
 
 ✅ **ALWAYS** use `transform` for position/scale animations

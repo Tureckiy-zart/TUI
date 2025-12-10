@@ -1,0 +1,33 @@
+---
+title: Label
+description: Documentation for Label component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { LabelAPI } from "@/generated/api/label.api";
+
+# Label
+
+Documentation for Label component.
+
+## Examples
+
+<LiveExample>
+{`import { Label } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Label>Example</Label>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={LabelAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `required` | `boolean` | No | - | Whether the field is required (shows asterisk) |
+

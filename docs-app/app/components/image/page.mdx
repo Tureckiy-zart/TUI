@@ -1,0 +1,41 @@
+---
+title: Image
+description: Documentation for Image component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ImageAPI } from "@/generated/api/image.api";
+
+# Image
+
+Documentation for Image component.
+
+## Examples
+
+<LiveExample>
+{`import { Image } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Image>Example</Image>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ImageAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `className` | `string` | No | - | Custom className for the image element itself |
+| `wrapperClassName` | `string` | No | - | Custom className for the wrapper div container |
+| `radius` | `ImageRadius` | No | none | Border radius for the image container |
+| `shadow` | `ImageShadow` | No | none | Shadow for the image container |
+| `aspectRatio` | `ImageAspectRatio` | No | - | Aspect ratio for the image container (e.g., 'square', 'video', 'photo', 'wide', or custom like '16/9', '4/3') |
+| `fallbackSrc` | `string` | No | - | Fallback image source if the main image fails to load |
+| `showSkeleton` | `boolean` | No | false | Whether to show a skeleton loader while the image is loading |
+| `fill` | `boolean` | No | - | Whether the image should fill its container (uses absolute positioning) |
+| `onLoadingComplete` | `(result: &#123; naturalWidth: number; naturalHeight: number &#125;) => void` | No | - | Callback fired when the image has finished loading |
+

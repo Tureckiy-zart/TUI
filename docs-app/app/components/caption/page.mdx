@@ -1,0 +1,33 @@
+---
+title: Caption
+description: Documentation for Caption component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { CaptionAPI } from "@/generated/api/caption.api";
+
+# Caption
+
+Documentation for Caption component.
+
+## Examples
+
+<LiveExample>
+{`import { Caption } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Caption>Example</Caption>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={CaptionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `as` | `"span" | "p" | "div"` | No | span | - |
+

@@ -1,0 +1,40 @@
+---
+title: ContextMenuContent
+description: ContextMenu Content Component
+ 
+  Content container for context menu.
+  Uses cursor position for initial placement.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ContextMenuContentAPI } from "@/generated/api/context-menu-content.api";
+
+# ContextMenuContent
+
+ContextMenu Content Component
+ 
+  Content container for context menu.
+  Uses cursor position for initial placement.
+
+## Examples
+
+<LiveExample>
+{`import { ContextMenuContent } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ContextMenuContent>Example</ContextMenuContent>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ContextMenuContentAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `placement` | `Placement` | No | bottom-start | Placement preference (if position is not set) |
+| `offset` | `number` | No | 4 | Offset between trigger and content (in pixels) |
+

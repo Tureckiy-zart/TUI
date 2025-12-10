@@ -2,17 +2,21 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "verbatimModuleSyntax": false,
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": ["vitest/globals", "@testing-library/jest-dom/vitest", "vitest-axe", "node"],
+    "jsx": "react-jsx",
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/**/*.spec.ts",
     "src/**/*.spec.tsx",
-    "jest.setup.js"
+    "src/test/setup.ts",
+    "vitest.config.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.json"
+    }
   ]
 }

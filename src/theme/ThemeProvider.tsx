@@ -46,7 +46,7 @@ export const ThemeContext = React.createContext<ThemeContextValue | undefined>(u
 /**
  * Theme Provider Props
  */
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   children: React.ReactNode;
   defaultMode?: Mode;
   defaultTheme?: ThemeName;

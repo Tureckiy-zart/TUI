@@ -179,7 +179,7 @@ export const tailwindRadiusConfig = {
     toast: componentRadius.toast.md,
     chip: componentRadius.chip.md,
     image: componentRadius.image.md,
-  } as Record<string, string>,
+  },
 } as const;
 
 /**

@@ -1,0 +1,38 @@
+---
+title: DropdownMenuRadioGroup
+description: DropdownMenu RadioGroup Component
+ 
+  Radio group container for radio menu items.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { DropdownMenuRadioGroupAPI } from "@/generated/api/dropdown-menu-radio-group.api";
+
+# DropdownMenuRadioGroup
+
+DropdownMenu RadioGroup Component
+ 
+  Radio group container for radio menu items.
+
+## Examples
+
+<LiveExample>
+{`import { DropdownMenuRadioGroup } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <DropdownMenuRadioGroup>Example</DropdownMenuRadioGroup>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={DropdownMenuRadioGroupAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `string` | No | - | Selected value |
+| `onValueChange` | `(value: string) => void` | No | - | Callback when value changes |
+

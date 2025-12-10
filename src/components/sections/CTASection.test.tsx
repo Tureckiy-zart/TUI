@@ -1,6 +1,5 @@
-import React from "react";
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import { CTASection } from "./CTASection";
 
 describe("CTASection component", () => {
@@ -16,7 +15,7 @@ describe("CTASection component", () => {
   });
 
   it("should render with primary action button", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(
       <CTASection
         headline="Get Started"
@@ -30,7 +29,7 @@ describe("CTASection component", () => {
   });
 
   it("should render with secondary action button", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(
       <CTASection
         headline="Get Started"

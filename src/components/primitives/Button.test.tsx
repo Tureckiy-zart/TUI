@@ -1,6 +1,5 @@
-import React from "react";
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import { Button } from "./Button";
 
 describe("Button component", () => {
@@ -18,7 +17,7 @@ describe("Button component", () => {
   });
 
   it("should handle onClick events", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click</Button>);
     const button = screen.getByRole("button");
     button.click();

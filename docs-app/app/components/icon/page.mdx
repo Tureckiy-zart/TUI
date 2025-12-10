@@ -1,0 +1,35 @@
+---
+title: Icon
+description: Documentation for Icon component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { IconAPI } from "@/generated/api/icon.api";
+
+# Icon
+
+Documentation for Icon component.
+
+## Examples
+
+<LiveExample>
+{`import { Icon } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Icon>Example</Icon>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={IconAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `name` | `IconName` | Yes | - | Icon name from registry |
+| `asChild` | `boolean` | No | false | Render as child element (composition pattern)
+    Uses Radix UI Slot for composition |
+

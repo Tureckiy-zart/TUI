@@ -86,15 +86,10 @@ export function resolveComponentAnimations(config?: ComponentAnimationConfig): A
 
   // Merge all animation props
   // Priority: customProps > hoverAnimation > animation
+  // Note: whileHover, whileTap, transition are not part of AnimationProps (CSS-only animations)
   return {
     ...animation,
     ...hoverAnimation,
     ...customProps,
-    // Merge whileHover if present in multiple sources
-    whileHover: hoverAnimation?.whileHover || customProps.whileHover || animation?.whileHover,
-    // Merge whileTap if present
-    whileTap: hoverAnimation?.whileTap || customProps.whileTap || animation?.whileTap,
-    // Merge transition if present (customProps takes priority)
-    transition: customProps.transition || hoverAnimation?.transition || animation?.transition,
   };
 }

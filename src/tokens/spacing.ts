@@ -244,7 +244,7 @@ export const tailwindSpacingConfig = {
     "4xl": semanticSpacing["4xl"],
     "5xl": semanticSpacing["5xl"],
     none: semanticSpacing.none,
-  } as Record<string, string>,
+  },
 } as const;
 
 /**

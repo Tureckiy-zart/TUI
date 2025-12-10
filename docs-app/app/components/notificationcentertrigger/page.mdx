@@ -1,0 +1,34 @@
+---
+title: NotificationCenterTrigger
+description: Documentation for NotificationCenterTrigger component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { NotificationCenterTriggerAPI } from "@/generated/api/notification-center-trigger.api";
+
+# NotificationCenterTrigger
+
+Documentation for NotificationCenterTrigger component.
+
+## Examples
+
+<LiveExample>
+{`import { NotificationCenterTrigger } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <NotificationCenterTrigger>Example</NotificationCenterTrigger>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={NotificationCenterTriggerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `onClick` | `() => void` | No | - | Callback when trigger is clicked |
+| `showBadge` | `boolean` | No | true | Show unread badge |
+

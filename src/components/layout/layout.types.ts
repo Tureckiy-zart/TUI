@@ -87,6 +87,24 @@ export type FlowValue = "row" | "col" | "dense" | "row-dense" | "col-dense";
 export type StackDirectionValue = "vertical" | "horizontal";
 
 /**
+ * Shadow token values (elevation shadows)
+ */
+export type ShadowValue = "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+
+/**
+ * Display type values
+ */
+export type DisplayValue =
+  | "block"
+  | "inline"
+  | "inline-block"
+  | "flex"
+  | "grid"
+  | "inline-flex"
+  | "inline-grid"
+  | "none";
+
+/**
  * Responsive spacing prop type
  */
 export type ResponsiveSpacing = ResponsiveValue<SpacingValue>;
@@ -140,3 +158,13 @@ export type ResponsiveFlow = ResponsiveValue<FlowValue>;
  * Responsive stack direction prop type
  */
 export type ResponsiveStackDirection = ResponsiveValue<StackDirectionValue>;
+
+/**
+ * Responsive shadow prop type
+ */
+export type ResponsiveShadow = ResponsiveValue<ShadowValue>;
+
+/**
+ * Surface variant values
+ */
+export type SurfaceVariant = "flat" | "raised" | "sunken";

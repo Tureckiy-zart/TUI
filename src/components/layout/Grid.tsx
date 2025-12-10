@@ -3,185 +3,69 @@
 /**
  * Grid Primitive Component
  *
- * Token-driven CSS Grid container component with support for columns, rows,
- * gap, alignment, and responsive layout using CSS variables.
- * Supports animation props via Framer Motion when provided.
+ * Token-driven CSS Grid container with support for columns, rows, gap,
+ * flow, and alignment. Uses Box internally. All spacing values use tokens only.
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
-import { type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
 
-import type { AnimationProps } from "@/animation/types";
-import { getSpacingCSSVar, isResponsiveValue, type ResponsiveValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
+import { Box, type BoxProps } from "./Box";
 import type {
-  ColumnValue,
   ResponsiveAlignment,
   ResponsiveColumns,
   ResponsiveFlow,
   ResponsiveJustify,
   ResponsiveRows,
   ResponsiveSpacing,
-  SpacingValue,
 } from "./layout.types";
 
-const gridVariants = cva("grid", {
-  variants: {
-    cols: {
-      1: "grid-cols-1",
-      2: "grid-cols-2",
-      3: "grid-cols-3",
-      4: "grid-cols-4",
-      5: "grid-cols-5",
-      6: "grid-cols-6",
-      12: "grid-cols-12",
-      none: "grid-cols-none",
-    },
-    rows: {
-      1: "grid-rows-1",
-      2: "grid-rows-2",
-      3: "grid-rows-3",
-      4: "grid-rows-4",
-      5: "grid-rows-5",
-      6: "grid-rows-6",
-      none: "grid-rows-none",
-    },
-    align: {
-      start: "items-start",
-      end: "items-end",
-      center: "items-center",
-      baseline: "items-baseline",
-      stretch: "items-stretch",
-    },
-    justify: {
-      start: "justify-start",
-      end: "justify-end",
-      center: "justify-center",
-      between: "justify-between",
-      around: "justify-around",
-      evenly: "justify-evenly",
-    },
-    flow: {
-      row: "grid-flow-row",
-      col: "grid-flow-col",
-      dense: "grid-flow-dense",
-      "row-dense": "grid-flow-row-dense",
-      "col-dense": "grid-flow-col-dense",
-    },
-  },
-  defaultVariants: {
-    cols: 1,
-    rows: "none",
-    align: "stretch",
-    justify: "start",
-    flow: "row",
-  },
-});
-
-/**
- * Get base value for CVA variants (non-responsive)
- */
-function getBaseValue<T>(value: ResponsiveValue<T> | T | undefined): T | undefined {
-  if (value === undefined || value === null) {
-    return undefined;
-  }
-
-  if (isResponsiveValue(value)) {
-    return value.base || value.sm || value.md || value.lg || value.xl || value["2xl"] || undefined;
-  }
-
-  // At this point, value is T (not ResponsiveValue<T>)
-  return value as T;
-}
-
-/**
- * Get CSS value from responsive or simple spacing value
- */
-function getGapCSSValue(
-  value: ResponsiveValue<SpacingValue> | undefined,
-  defaultValue?: string,
-): string | undefined {
-  if (value === undefined || value === null) {
-    return defaultValue;
-  }
-
-  if (isResponsiveValue(value)) {
-    let baseValue: SpacingValue | undefined;
-
-    if (value.base !== undefined) {
-      baseValue = value.base;
-    } else if (value.sm !== undefined) {
-      baseValue = value.sm;
-    } else if (value.md !== undefined) {
-      baseValue = value.md;
-    }
-
-    if (baseValue !== undefined) {
-      return getSpacingCSSVar(baseValue as string | number);
-    }
-    return defaultValue;
-  }
-
-  // Handle 0 explicitly (since 0 is falsy but valid)
-  if (value === 0) {
-    return getSpacingCSSVar(0);
-  }
-
-  return getSpacingCSSVar(value as string | number);
-}
-
-/**
- * Check if component has animation props
- */
-function hasAnimationProps(props: Partial<AnimationProps>): boolean {
-  return !!(
-    props.initial !== undefined ||
-    props.animate !== undefined ||
-    props.exit !== undefined ||
-    props.transition !== undefined ||
-    props.whileHover !== undefined ||
-    props.whileFocus !== undefined ||
-    props.whileTap !== undefined ||
-    props.whileDrag !== undefined ||
-    props.whileInView !== undefined
-  );
-}
-
-export interface GridProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof AnimationProps>,
-    Omit<VariantProps<typeof gridVariants>, "cols" | "rows" | "gap" | "align" | "justify" | "flow">,
-    AnimationProps {
+export interface GridProps extends Omit<BoxProps, "display" | "align" | "justify"> {
   /**
-   * Number of columns (base breakpoint)
+   * Number of columns (1-6, 12, or none)
    */
   cols?: ResponsiveColumns;
 
   /**
-   * Number of columns for medium breakpoint (768px+)
+   * Number of columns at sm breakpoint
    */
-  md?: ColumnValue;
+  sm?: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
 
   /**
-   * Number of columns for large breakpoint (1024px+)
+   * Number of columns at md breakpoint
    */
-  lg?: ColumnValue;
+  md?: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
 
   /**
-   * Number of columns for extra large breakpoint (1280px+)
+   * Number of columns at lg breakpoint
    */
-  xl?: ColumnValue;
+  lg?: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
 
   /**
-   * Number of rows
+   * Number of columns at xl breakpoint
+   */
+  xl?: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
+
+  /**
+   * Number of columns at 2xl breakpoint
+   */
+  "2xl"?: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none";
+
+  /**
+   * Number of rows (1-6 or none)
    */
   rows?: ResponsiveRows;
 
   /**
-   * Gap between grid items (uses spacing tokens via CSS variables)
+   * Gap between grid items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
    */
   gap?: ResponsiveSpacing;
+
+  /**
+   * Grid flow direction
+   */
+  flow?: ResponsiveFlow;
 
   /**
    * Align items
@@ -192,173 +76,198 @@ export interface GridProps
    * Justify content
    */
   justify?: ResponsiveJustify;
-
-  /**
-   * Grid flow
-   */
-  flow?: ResponsiveFlow;
 }
 
+/**
+ * Get base value from responsive value
+ */
+function getBaseValue<T>(
+  value:
+    | ResponsiveColumns
+    | ResponsiveRows
+    | ResponsiveFlow
+    | ResponsiveAlignment
+    | ResponsiveJustify
+    | T
+    | undefined,
+): T | undefined {
+  if (value === undefined || value === null) {
+    return undefined;
+  }
+
+  // Check if it's a responsive value object
+  if (typeof value === "object" && !Array.isArray(value) && value !== null) {
+    if ("base" in value && value.base !== undefined) {
+      return value.base as T;
+    }
+    if ("sm" in value && value.sm !== undefined) {
+      return value.sm as T;
+    }
+    if ("md" in value && value.md !== undefined) {
+      return value.md as T;
+    }
+    if ("lg" in value && value.lg !== undefined) {
+      return value.lg as T;
+    }
+  }
+
+  return value as T;
+}
+
+/**
+ * Convert columns to Tailwind class
+ */
+function colsToClass(value: 1 | 2 | 3 | 4 | 5 | 6 | 12 | "none" | undefined): string | undefined {
+  if (!value) return undefined;
+  if (value === "none") return "grid-cols-none";
+  return `grid-cols-${value}`;
+}
+
+/**
+ * Convert rows to Tailwind class
+ */
+function rowsToClass(value: 1 | 2 | 3 | 4 | 5 | 6 | "none" | undefined): string | undefined {
+  if (!value || value === "none") return undefined;
+  return `grid-rows-${value}`;
+}
+
+/**
+ * Convert flow to Tailwind class
+ */
+function flowToClass(
+  value: "row" | "col" | "dense" | "row-dense" | "col-dense" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "row") return "grid-flow-row";
+  if (value === "col") return "grid-flow-col";
+  if (value === "dense") return "grid-flow-dense";
+  if (value === "row-dense") return "grid-flow-row-dense";
+  if (value === "col-dense") return "grid-flow-col-dense";
+  return undefined;
+}
+
+/**
+ * Convert align to Tailwind class
+ */
+function alignToClass(
+  value: "start" | "end" | "center" | "baseline" | "stretch" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "start") return "items-start";
+  if (value === "end") return "items-end";
+  if (value === "center") return "items-center";
+  if (value === "baseline") return "items-baseline";
+  if (value === "stretch") return "items-stretch";
+  return undefined;
+}
+
+/**
+ * Convert justify to Tailwind class
+ */
+function justifyToClass(
+  value: "start" | "end" | "center" | "between" | "around" | "evenly" | undefined,
+): string | undefined {
+  if (!value) return undefined;
+  if (value === "start") return "justify-start";
+  if (value === "end") return "justify-end";
+  if (value === "center") return "justify-center";
+  if (value === "between") return "justify-between";
+  if (value === "around") return "justify-around";
+  if (value === "evenly") return "justify-evenly";
+  return undefined;
+}
+
+/**
+ * Grid component
+ */
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
   (
-    {
-      className,
-      cols,
-      md,
-      lg,
-      xl,
-      rows,
-      gap,
-      align,
-      justify,
-      flow,
-      style,
-      // Animation props
-      initial,
-      animate,
-      exit,
-      transition,
-      whileHover,
-      whileFocus,
-      whileTap,
-      whileDrag,
-      whileInView,
-      viewport,
-      ...props
-    },
+    { cols, sm, md, lg, xl, "2xl": xl2, rows, gap, flow, align, justify, className, ...props },
     ref,
   ) => {
-    // Get base values for CVA
-    const colsValue = getBaseValue(cols) as ColumnValue | undefined;
-    const rowsValue = getBaseValue(rows) as 1 | 2 | 3 | 4 | 5 | 6 | "none" | undefined;
-    const alignValue = getBaseValue(align) as
-      | "start"
-      | "end"
-      | "center"
-      | "baseline"
-      | "stretch"
-      | undefined;
-
-    const justifyValue = getBaseValue(justify) as
-      | "start"
-      | "end"
-      | "center"
-      | "between"
-      | "around"
-      | "evenly"
-      | undefined;
-
-    const flowValue = getBaseValue(flow) as
-      | "row"
-      | "col"
-      | "dense"
-      | "row-dense"
-      | "col-dense"
-      | undefined;
-
-    // Build responsive column classes (legacy support for md/lg/xl props)
-    const hasResponsiveProps = md || lg || xl;
-    const baseColsClass = colsValue ? `grid-cols-${colsValue}` : "grid-cols-1";
-    const responsiveCols = [
-      baseColsClass,
-      md && `md:grid-cols-${md}`,
-      lg && `lg:grid-cols-${lg}`,
-      xl && `xl:grid-cols-${xl}`,
-    ]
-      .filter(Boolean)
-      .join(" ");
-
-    // Build inline styles for gap (using CSS variables)
-    const inlineStyles: React.CSSProperties = {};
-
-    if (gap !== undefined) {
-      inlineStyles.gap = getGapCSSValue(gap, "0");
+    // Handle responsive columns: if md/lg/xl are provided directly, build responsive cols object
+    let colsValue: ResponsiveColumns | undefined = cols;
+    if (sm || md || lg || xl || xl2) {
+      // If cols is a simple value, use it as base
+      if (cols !== undefined && typeof cols !== "object") {
+        colsValue = {
+          base: cols,
+          ...(sm && { sm }),
+          ...(md && { md }),
+          ...(lg && { lg }),
+          ...(xl && { xl }),
+          ...(xl2 && { "2xl": xl2 }),
+        } as ResponsiveColumns;
+      } else if (cols === undefined) {
+        // If cols is not provided, use responsive props directly
+        colsValue = {
+          ...(sm && { sm }),
+          ...(md && { md }),
+          ...(lg && { lg }),
+          ...(xl && { xl }),
+          ...(xl2 && { "2xl": xl2 }),
+        } as ResponsiveColumns;
+      } else {
+        // If cols is already a responsive object, merge with direct props
+        colsValue = {
+          ...cols,
+          ...(sm && { sm }),
+          ...(md && { md }),
+          ...(lg && { lg }),
+          ...(xl && { xl }),
+          ...(xl2 && { "2xl": xl2 }),
+        } as ResponsiveColumns;
+      }
     }
 
-    // Merge with provided style
-    const mergedStyle: React.CSSProperties = {
-      ...inlineStyles,
-      ...style,
-    };
+    // Get base values
+    const baseColsValue = getBaseValue<1 | 2 | 3 | 4 | 5 | 6 | 12 | "none">(colsValue);
+    const rowsValue = getBaseValue<1 | 2 | 3 | 4 | 5 | 6 | "none">(rows);
+    const flowValue = getBaseValue<"row" | "col" | "dense" | "row-dense" | "col-dense">(flow);
+    const alignValue = getBaseValue<"start" | "end" | "center" | "baseline" | "stretch">(align);
+    const justifyValue = getBaseValue<"start" | "end" | "center" | "between" | "around" | "evenly">(
+      justify,
+    );
 
-    // Get base grid classes - use cols only if no responsive props provided
-    const baseClasses = gridVariants({
-      cols: hasResponsiveProps ? undefined : colsValue,
-      rows: rowsValue,
-      align: alignValue,
-      justify: justifyValue,
-      flow: flowValue,
-    });
-
-    // Check if we need to use motion component
-    const hasAnimations = hasAnimationProps({
-      initial,
-      animate,
-      exit,
-      transition,
-      whileHover,
-      whileFocus,
-      whileTap,
-      whileDrag,
-      whileInView,
-    });
-
-    // Animation props for motion component
-    const animationProps = hasAnimations
-      ? {
-          initial,
-          animate,
-          exit,
-          transition,
-          whileHover,
-          whileFocus,
-          whileTap,
-          whileDrag,
-          whileInView,
-          viewport,
-        }
-      : {};
-
-    const baseClassName = cn(baseClasses, hasResponsiveProps && responsiveCols, className);
-
-    if (hasAnimations) {
-      // Exclude conflicting handlers from props to avoid conflict with Framer Motion
-      const {
-        onDrag: _onDrag,
-        onDragStart: _onDragStart,
-        onDragEnd: _onDragEnd,
-        onAnimationStart: _onAnimationStart,
-        onAnimationEnd: _onAnimationEnd,
-        onAnimationIteration: _onAnimationIteration,
-        ...restProps
-      } = props;
-
-      // Type restProps to exclude conflicting handlers (animation props are already destructured above)
-      const safeProps = restProps as Omit<
-        React.HTMLAttributes<HTMLDivElement>,
-        | "onDrag"
-        | "onDragStart"
-        | "onDragEnd"
-        | "onAnimationStart"
-        | "onAnimationEnd"
-        | "onAnimationIteration"
-      >;
-
-      return (
-        <motion.div
-          ref={ref}
-          className={baseClassName}
-          style={mergedStyle}
-          {...(animationProps as Partial<HTMLMotionProps<"div">>)}
-          {...safeProps}
-        />
-      );
+    // Build responsive column classes
+    const responsiveColClasses: string[] = [];
+    if (typeof colsValue === "object" && colsValue !== null && !Array.isArray(colsValue)) {
+      if (colsValue.base !== undefined) {
+        responsiveColClasses.push(colsToClass(colsValue.base) || "");
+      }
+      if (colsValue.sm !== undefined) {
+        responsiveColClasses.push(`sm:${colsToClass(colsValue.sm) || ""}`);
+      }
+      if (colsValue.md !== undefined) {
+        responsiveColClasses.push(`md:${colsToClass(colsValue.md) || ""}`);
+      }
+      if (colsValue.lg !== undefined) {
+        responsiveColClasses.push(`lg:${colsToClass(colsValue.lg) || ""}`);
+      }
+      if (colsValue.xl !== undefined) {
+        responsiveColClasses.push(`xl:${colsToClass(colsValue.xl) || ""}`);
+      }
+      if (colsValue["2xl"] !== undefined) {
+        responsiveColClasses.push(`2xl:${colsToClass(colsValue["2xl"]) || ""}`);
+      }
+    } else if (baseColsValue !== undefined) {
+      responsiveColClasses.push(colsToClass(baseColsValue) || "");
     }
 
-    return <div ref={ref} className={baseClassName} style={mergedStyle} {...props} />;
+    // Build grid classes
+    const gridClasses = cn(
+      responsiveColClasses,
+      rowsToClass(rowsValue),
+      flowToClass(flowValue),
+      alignToClass(alignValue),
+      justifyToClass(justifyValue),
+      className,
+    );
+
+    return <Box ref={ref} display="grid" gap={gap} className={gridClasses} {...props} />;
   },
 );
 
 Grid.displayName = "Grid";
 
-export { Grid, gridVariants };
+export { Grid };

@@ -1,0 +1,40 @@
+---
+title: LanguageSelector
+description: Documentation for LanguageSelector component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { LanguageSelectorAPI } from "@/generated/api/language-selector.api";
+
+# LanguageSelector
+
+Documentation for LanguageSelector component.
+
+## Examples
+
+<LiveExample>
+{`import { LanguageSelector } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <LanguageSelector>Example</LanguageSelector>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={LanguageSelectorAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `ariaLabel` | `string` | Yes | - | - |
+| `dataTestId` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+| `languages` | `LanguageOption[]` | Yes | - | - |
+| `value` | `string` | No | - | - |
+| `defaultValue` | `string` | No | - | - |
+| `disabled` | `boolean` | No | - | - |
+| `onLanguageChange` | `(language: string) => void` | No | - | - |
+

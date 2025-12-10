@@ -1,0 +1,35 @@
+---
+title: Backdrop
+description: Documentation for Backdrop component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { BackdropAPI } from "@/generated/api/backdrop.api";
+
+# Backdrop
+
+Documentation for Backdrop component.
+
+## Examples
+
+<LiveExample>
+{`import { Backdrop } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Backdrop>Example</Backdrop>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={BackdropAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `"default" | "blurred" | "transparent"` | No | default | Backdrop variant |
+| `isVisible` | `boolean` | No | true | Whether backdrop is visible (for animation) |
+| `onClick` | `(event: React.MouseEvent<HTMLElement>) => void` | No | - | Click handler for backdrop dismiss |
+

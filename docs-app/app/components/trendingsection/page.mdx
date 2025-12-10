@@ -1,0 +1,38 @@
+---
+title: TrendingSection
+description: Documentation for TrendingSection component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { TrendingSectionAPI } from "@/generated/api/trending-section.api";
+
+# TrendingSection
+
+Documentation for TrendingSection component.
+
+## Examples
+
+<LiveExample>
+{`import { TrendingSection } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <TrendingSection>Example</TrendingSection>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={TrendingSectionAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `events` | `TrendingItem[]` | Yes | - | Array of trending items to display |
+| `limit` | `number` | Yes | - | - |
+| `loading` | `boolean` | Yes | - | - |
+| `title` | `string` | Yes | - | - |
+| `loadingText` | `string` | Yes | - | - |
+| `contentText` | `string` | Yes | - | - |
+

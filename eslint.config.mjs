@@ -17,6 +17,10 @@ export default [
       "coverage/**",
       ".storybook/**",
       "storybook-static/**",
+      ".next/**",
+      "docs-app/.next/**",
+      "docs-app/**", // Documentation app - allow demo code
+      "docs/**",
       "**/*.stories.tsx",
       "**/*.stories.ts",
       "**/*.stories.js",
@@ -27,6 +31,8 @@ export default [
       "jest.config.*",
       "jest.setup.js",
       "scripts/**",
+      "src/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
+      "**/legacy/**", // Legacy files are excluded from token compliance
 
       // =================================================================
       //  🧪 FULL TESTS EXCLUSION — исключить тесты из линтинга полностью
@@ -245,6 +251,65 @@ export default [
       "react/react-in-jsx-scope": "off", // React 17+ не требует import
       "react/jsx-key": "warn",
       "react/display-name": "warn",
+
+      // ═══════════════════════════════════════════════════════════
+      // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES
+      // ═══════════════════════════════════════════════════════════
+
+      // Forbid hardcoded hex color codes
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "Literal[value=/^#[0-9a-fA-F]{3,6}$/]",
+          message:
+            "Hex color codes are forbidden. Use token-based CSS variables (hsl(var(--token))) instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\b(bg|text|border)-(gray|blue|red|green|yellow|purple|pink|indigo|white|black|slate|zinc|neutral|stone|primary|secondary|accent|destructive|muted|card|popover|background|foreground)(-\\d+)?\\b/]",
+          message:
+            "Hardcoded Tailwind color utilities are forbidden. Use token-based CSS variables instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\b(p|m|gap|left|right|top|bottom|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|space-x|space-y)-(0|1|2|3|4|5|6|8|10|12|16|20|24|32|40|48|64|96)\\b/]",
+          message:
+            "Numeric spacing classes are forbidden. Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.) instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/\\brounded-(none|sm|md|lg|xl|2xl|3xl|full)\\b/]",
+          message:
+            "Hardcoded radius classes are forbidden. Use radius tokens through component token system instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\b(h|w|min-h|min-w|max-h|max-w)-(0|1|2|3|4|5|6|8|10|12|16|20|24|32|40|48|64|96|full|screen)\\b/]",
+          message:
+            "Numeric size classes are forbidden. Use size tokens through component token system instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\btext-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)\\b/]",
+          message:
+            "Hardcoded typography size classes are forbidden. Use TYPOGRAPHY_TOKENS or component typography tokens instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\btransition-(all|colors|opacity|transform|none)\\b/]",
+          message:
+            "Hardcoded transition utilities are forbidden. Use MOTION_TOKENS for transitions instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/\\bduration-(75|100|150|200|300|500|700|1000)\\b/]",
+          message:
+            "Hardcoded duration utilities are forbidden. Use MOTION_TOKENS for durations instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/hsl\\(var\\(--[^)]+\\)\\)/]",
+          message:
+            "Direct CSS variable usage in className is forbidden. Use token references instead of direct hsl(var(--*)).",
+        },
+      ],
     },
   },
   // Prettier integration (disables conflicting ESLint rules)

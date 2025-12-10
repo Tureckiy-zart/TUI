@@ -2,11 +2,10 @@
 
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
 import * as React from "react";
 
-import { fadePresets, scalePresets } from "@/animation/presets";
 import { cn } from "@/lib/utils";
+import { TOOLTIP_TOKENS } from "@/tokens/components/tooltip";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -15,11 +14,11 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 const tooltipContentVariants = cva(
-  "z-50 overflow-hidden rounded-md border bg-popover px-sm py-xs text-sm text-popover-foreground shadow-md",
+  `z-50 overflow-hidden ${TOOLTIP_TOKENS.content.border.default} ${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
   {
     variants: {
       variant: {
-        primary: "bg-popover text-popover-foreground border-border",
+        primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
         secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
         accent: "border-accent/50 text-accent-foreground bg-accent/10",
         outline: "bg-background text-foreground border-border",
@@ -39,28 +38,14 @@ const TooltipContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> &
     VariantProps<typeof tooltipContentVariants>
 >(({ className, variant, sideOffset = 4, ...props }, ref) => {
-  // Combine fade and scale presets for tooltip animation
-  const fadeScaleIn = {
-    ...fadePresets.fadeIn({ duration: "normal" }),
-    ...scalePresets.scaleIn({ scale: 0.95, duration: "normal" }),
-  };
-
-  const fadeScaleOut = {
-    ...fadePresets.fadeOut({ duration: "fast" }),
-    ...scalePresets.scaleOut({ scale: 0.95, duration: "fast" }),
-  };
-
   return (
-    <TooltipPrimitive.Content ref={ref} sideOffset={sideOffset} {...props} asChild>
-      <motion.div
-        className={cn(tooltipContentVariants({ variant, className }))}
-        initial={fadeScaleIn.initial as any}
-        animate={fadeScaleIn.animate as any}
-        exit={fadeScaleOut.exit as any}
-        transition={fadeScaleIn.transition as any}
-      >
-        {props.children}
-      </motion.div>
+    <TooltipPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(tooltipContentVariants({ variant }), "tm-motion-fade-scale", className)}
+      {...props}
+    >
+      {props.children}
     </TooltipPrimitive.Content>
   );
 });

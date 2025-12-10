@@ -1,0 +1,35 @@
+---
+title: Button
+description: Documentation for Button component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ButtonAPI } from "@/generated/api/button.api";
+
+# Button
+
+Documentation for Button component.
+
+## Examples
+
+<LiveExample>
+{`import { Button } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <Button>Example</Button>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ButtonAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `asChild` | `boolean` | No | false | - |
+| `leftIcon` | `ReactNode` | No | - | - |
+| `rightIcon` | `ReactNode` | No | - | - |
+

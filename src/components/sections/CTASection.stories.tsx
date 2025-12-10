@@ -131,9 +131,9 @@ export const DifferentVariants: Story = {
       variant: "primary",
     },
     secondaryAction: {
-      label: "Accent Action",
-      onClick: () => console.log("Accent clicked"),
-      variant: "accent",
+      label: "Secondary Action",
+      onClick: () => console.log("Secondary clicked"),
+      variant: "secondary",
     },
   },
 };
@@ -170,12 +170,12 @@ export const AllButtonVariants: Story = {
         }}
       />
       <CTASection
-        headline="Accent + Secondary"
+        headline="Secondary + Outline"
         description="Alternative styling"
         primaryAction={{
-          label: "Accent",
+          label: "Secondary",
           onClick: () => {},
-          variant: "accent",
+          variant: "secondary",
         }}
         secondaryAction={{
           label: "Secondary",

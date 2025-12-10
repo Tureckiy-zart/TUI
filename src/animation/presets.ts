@@ -2,11 +2,11 @@
  * Tenerife Animation System Presets
  *
  * Reusable animation presets for common UI patterns.
- * All presets use motion tokens and respect reduced motion preferences.
+ * All presets use CSS Motion Tokens V2 and respect reduced motion preferences.
  */
 "use client";
-import { createRevealConfig, createSpring, getAnimationConfig, shouldReduceMotion } from "./tas";
-import type { AnimationProps, PresetConfig, Spring, SpringConfig } from "./types";
+import { shouldReduceMotion } from "./tas";
+import type { AnimationProps, PresetConfig } from "./types";
 
 /**
  * Fade animation presets
@@ -18,14 +18,7 @@ export const fadePresets = {
   fadeIn: (config?: PresetConfig): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
     return {
-      initial: reduceMotion ? {} : { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-in",
     };
   },
 
@@ -35,14 +28,7 @@ export const fadePresets = {
   fadeOut: (config?: PresetConfig): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
     return {
-      initial: reduceMotion ? {} : { opacity: 1 },
-      animate: { opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-out",
     };
   },
 
@@ -51,17 +37,8 @@ export const fadePresets = {
    */
   fadeInUp: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 20;
     return {
-      initial: reduceMotion ? {} : { opacity: 0, y: distance },
-      animate: { opacity: 1, y: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring,
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-up",
     };
   },
 
@@ -70,17 +47,8 @@ export const fadePresets = {
    */
   fadeInDown: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 20;
     return {
-      initial: reduceMotion ? {} : { opacity: 0, y: -distance },
-      animate: { opacity: 1, y: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring,
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-down",
     };
   },
 
@@ -89,17 +57,8 @@ export const fadePresets = {
    */
   fadeInLeft: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 20;
     return {
-      initial: reduceMotion ? {} : { opacity: 0, x: -distance },
-      animate: { opacity: 1, x: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring,
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-left",
     };
   },
 
@@ -108,17 +67,8 @@ export const fadePresets = {
    */
   fadeInRight: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 20;
     return {
-      initial: reduceMotion ? {} : { opacity: 0, x: distance },
-      animate: { opacity: 1, x: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring,
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-right",
     };
   },
 };
@@ -132,17 +82,8 @@ export const slidePresets = {
    */
   slideInUp: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: reduceMotion ? {} : { y: distance, opacity: 0 },
-      animate: { y: 0, opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-slide-up",
     };
   },
 
@@ -151,17 +92,8 @@ export const slidePresets = {
    */
   slideInDown: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: reduceMotion ? {} : { y: -distance, opacity: 0 },
-      animate: { y: 0, opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-slide-down",
     };
   },
 
@@ -170,17 +102,8 @@ export const slidePresets = {
    */
   slideInLeft: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: reduceMotion ? {} : { x: -distance, opacity: 0 },
-      animate: { x: 0, opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-slide-left",
     };
   },
 
@@ -189,17 +112,8 @@ export const slidePresets = {
    */
   slideInRight: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: reduceMotion ? {} : { x: distance, opacity: 0 },
-      animate: { x: 0, opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-slide-right",
     };
   },
 
@@ -208,16 +122,8 @@ export const slidePresets = {
    */
   slideOutUp: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: { y: 0, opacity: 1 },
-      exit: reduceMotion ? {} : { y: -distance, opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-up-out",
     };
   },
 
@@ -226,16 +132,8 @@ export const slidePresets = {
    */
   slideOutDown: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: { y: 0, opacity: 1 },
-      exit: reduceMotion ? {} : { y: distance, opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-down-out",
     };
   },
 
@@ -244,16 +142,8 @@ export const slidePresets = {
    */
   slideOutLeft: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: { x: 0, opacity: 1 },
-      exit: reduceMotion ? {} : { x: -distance, opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-left-out",
     };
   },
 
@@ -262,16 +152,8 @@ export const slidePresets = {
    */
   slideOutRight: (config?: PresetConfig & { distance?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const distance = config?.distance || 100;
     return {
-      initial: { x: 0, opacity: 1 },
-      exit: reduceMotion ? {} : { x: distance, opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-fade-slide-right-out",
     };
   },
 };
@@ -285,17 +167,8 @@ export const scalePresets = {
    */
   scaleIn: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 0.95;
     return {
-      initial: reduceMotion ? {} : { scale, opacity: 0 },
-      animate: { scale: 1, opacity: 1 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "normal",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-scale-in",
     };
   },
 
@@ -304,16 +177,8 @@ export const scalePresets = {
    */
   scaleOut: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 0.95;
     return {
-      initial: { scale: 1, opacity: 1 },
-      exit: reduceMotion ? {} : { scale, opacity: 0 },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-in",
-        delay: config?.delay,
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-scale-out",
     };
   },
 
@@ -322,15 +187,8 @@ export const scalePresets = {
    */
   scaleUp: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 1.05;
     return {
-      whileHover: reduceMotion ? {} : { scale },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-hover-scale",
     };
   },
 
@@ -339,67 +197,35 @@ export const scalePresets = {
    */
   scaleDown: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 0.95;
     return {
-      whileTap: reduceMotion ? {} : { scale },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-tap-scale",
     };
   },
 };
 
 /**
  * Stagger animation helper
- * Creates staggered animations for children elements
+ * Note: Stagger animations are not directly supported in CSS-only approach.
+ * This function is kept for API compatibility but returns empty className.
+ * For stagger effects, apply animation classes to child elements with CSS delays.
  */
 export function createStagger(
-  staggerChildren: number = 0.1,
-  delayChildren: number = 0,
+  _staggerChildren: number = 0.1,
+  _delayChildren: number = 0,
   config?: PresetConfig,
-): {
-  transition: {
-    staggerChildren: number;
-    delayChildren: number;
-  } & SpringConfig;
-} {
+): AnimationProps {
   const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-  if (reduceMotion) {
-    return {
-      transition: {
-        staggerChildren: 0,
-        delayChildren: 0,
-        ...createSpring("noBounce"),
-      },
-    };
-  }
-
-  const springConfig = config?.spring;
-  let springName: Spring | undefined;
-  if (typeof springConfig === "string") {
-    springName = springConfig;
-  } else if (springConfig) {
-    springName = undefined;
-  } else {
-    springName = "gentle";
-  }
-  const springPartial =
-    typeof springConfig === "object" && springConfig !== null ? springConfig : undefined;
-
+  // Stagger animations require JavaScript timing, not supported in CSS-only
+  // Return empty className - implement stagger via CSS nth-child selectors if needed
   return {
-    transition: {
-      staggerChildren,
-      delayChildren,
-      ...createSpring(springName, springPartial),
-    },
+    className: reduceMotion ? "" : "",
   };
 }
 
 /**
  * Reveal on scroll preset
  * Uses Intersection Observer for scroll-triggered animations
+ * Returns CSS class that should be applied when element is in view
  */
 export function revealOnScroll(
   config?: PresetConfig & {
@@ -410,46 +236,29 @@ export function revealOnScroll(
     distance?: number;
   },
 ): AnimationProps {
-  const { direction = "up", distance = 20, ...revealOptions } = config || {};
+  const { direction = "up" } = config || {};
+  const reduceMotion = shouldReduceMotion(config?.reducedMotion);
 
-  const baseConfig = createRevealConfig({
-    threshold: revealOptions.threshold,
-    rootMargin: revealOptions.rootMargin,
-    triggerOnce: revealOptions.triggerOnce,
-    reduceMotion: config?.reducedMotion,
-  });
+  if (reduceMotion) {
+    return { className: "" };
+  }
 
-  // Override initial/animate based on direction
+  // Map direction to CSS class
   if (direction === "up") {
-    return {
-      ...fadePresets.fadeInUp({ ...config, distance }),
-      ...baseConfig,
-    };
+    return fadePresets.fadeInUp(config);
   }
   if (direction === "down") {
-    return {
-      ...fadePresets.fadeInDown({ ...config, distance }),
-      ...baseConfig,
-    };
+    return fadePresets.fadeInDown(config);
   }
   if (direction === "left") {
-    return {
-      ...fadePresets.fadeInLeft({ ...config, distance }),
-      ...baseConfig,
-    };
+    return fadePresets.fadeInLeft(config);
   }
   if (direction === "right") {
-    return {
-      ...fadePresets.fadeInRight({ ...config, distance }),
-      ...baseConfig,
-    };
+    return fadePresets.fadeInRight(config);
   }
 
   // Default to fade
-  return {
-    ...fadePresets.fadeIn(config),
-    ...baseConfig,
-  };
+  return fadePresets.fadeIn(config);
 }
 
 /**
@@ -461,24 +270,8 @@ export const hoverPresets = {
    */
   hoverLift: (config?: PresetConfig & { scale?: number; y?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 1.05;
-    // Default y offset: -5px (negative for upward movement)
-    // Convert to rem: -5px = -0.3125rem (approximately -0.3rem)
-    const y = config?.y ?? -5;
-
     return {
-      whileHover: reduceMotion
-        ? {}
-        : {
-            scale,
-            y,
-          },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-hover-lift",
     };
   },
 
@@ -487,16 +280,8 @@ export const hoverPresets = {
    */
   hoverScale: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 1.05;
-
     return {
-      whileHover: reduceMotion ? {} : { scale },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        spring: config?.spring || "gentle",
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-hover-scale",
     };
   },
 
@@ -505,15 +290,8 @@ export const hoverPresets = {
    */
   tapScale: (config?: PresetConfig & { scale?: number }): AnimationProps => {
     const reduceMotion = shouldReduceMotion(config?.reducedMotion);
-    const scale = config?.scale || 0.95;
-
     return {
-      whileTap: reduceMotion ? {} : { scale },
-      transition: getAnimationConfig({
-        duration: config?.duration || "fast",
-        easing: typeof config?.ease === "string" ? config.ease : "ease-out",
-        reduceMotion: config?.reducedMotion,
-      }),
+      className: reduceMotion ? "" : "tm-motion-tap-scale",
     };
   },
 };

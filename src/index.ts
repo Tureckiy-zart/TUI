@@ -6,201 +6,397 @@
 // All design tokens (colors, typography, spacing, shadows, radius, motion)
 export * from "./tokens";
 
-// ============================================================================
-// TYPE EXPORTS
-// ============================================================================
-// Filter component types
-export type { FilterOption, FilterState } from "./components/filters/types";
-// Card component types
-export type { EventCardProps } from "./components/cards/EventCard";
-export type { VenueCardProps } from "./components/cards/VenueCard";
-// Section component types
-export type { SectionBuilderConfig, SectionBuilderProps } from "./components/SectionBuilder";
-export type { ArticleItem } from "./components/sections/ArticlesSection";
-export type { TrendingItem } from "./components/sections/TrendingSection";
+// Icon tokens
+export {
+  ICON_TOKENS,
+  type IconColor,
+  type IconSize,
+  type IconStroke,
+} from "./tokens/components/icon";
 
 // ============================================================================
-// PRIMITIVE COMPONENTS
+// UI COMPONENTS
 // ============================================================================
-// Base UI components (re-exported from shadcn/ui with Tenerife branding)
-export * from "./components/primitives/Badge";
-export * from "./components/primitives/Button";
-export * from "./components/primitives/Card";
-export * from "./components/primitives/Divider";
-export * from "./components/primitives/Input";
-export * from "./components/primitives/Label";
-export * from "./components/primitives/Link";
-export * from "./components/primitives/ThemeSwitch";
-export * from "./components/primitives/Typography";
+// Button component (CVA-based, token-driven)
+export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
+
+// Text component (CVA-based, token-driven)
+export {
+  Text,
+  type TextProps,
+  type TextSize,
+  textVariants,
+  type TextWeight,
+} from "./components/ui/text";
+
+// Alert component (CVA-based, token-driven)
+export { Alert, type AlertProps, alertVariants } from "./components/ui/alert";
+
+// Typography components (CVA-based, token-driven)
+export { Body, type BodyProps, bodyVariants } from "./components/ui/body";
+export { Caption, type CaptionProps, captionVariants } from "./components/ui/caption";
+export { Code, type CodeProps, codeVariants } from "./components/ui/code";
+export { Display, type DisplayProps, displayVariants } from "./components/ui/display";
+export { Heading, type HeadingProps, headingVariants } from "./components/ui/heading";
+export { Lead, type LeadProps, leadVariants } from "./components/ui/lead";
+
+// Form components (CVA-based, token-driven)
+export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/checkbox";
+export { Input, type InputProps, inputVariants } from "./components/input";
+export {
+  Radio,
+  RadioGroup,
+  type RadioGroupProps,
+  type RadioProps,
+  radioVariants,
+} from "./components/radio";
+export {
+  Select,
+  SelectListbox,
+  type SelectListboxProps,
+  selectListboxVariants,
+  SelectOption,
+  type SelectOptionProps,
+  selectOptionVariants,
+  SelectRoot,
+  type SelectRootProps,
+  type SelectSize,
+  SelectTrigger,
+  type SelectTriggerProps,
+  selectTriggerVariants,
+  type SelectVariant,
+} from "./components/select";
+export { Textarea, type TextareaProps, textareaVariants } from "./components/textarea";
+export {
+  Field,
+  type FieldControlProps,
+  type FieldDescriptionProps,
+  type FieldErrorProps,
+  type FieldLabelProps,
+  type FieldProps,
+} from "./components/ui/field";
+export { Label, type LabelProps, labelVariants } from "./components/ui/label";
 
 // ============================================================================
-// THEME SYSTEM
+// LAYOUT PRIMITIVES
 // ============================================================================
-// Theme utilities and providers
-export * from "./theme/applyMode";
+// Layout primitives (token-based, no raw values)
+export {
+  Box,
+  type BoxProps,
+  Column,
+  type ColumnProps,
+  Flex,
+  type FlexProps,
+  Grid,
+  type GridProps,
+  Row,
+  type RowProps,
+  Stack,
+  type StackProps,
+  Surface,
+  type SurfaceProps,
+  surfaceVariants,
+} from "./components/layout";
 
 // ============================================================================
-// LAYOUT COMPONENTS
+// CONTAINER COMPONENTS
 // ============================================================================
-// Layout primitives and containers
-export * from "./components/layout/Box";
-export * from "./components/layout/Container";
-export * from "./components/layout/Flex";
-export * from "./components/layout/Footer";
-export * from "./components/layout/Grid";
-export * from "./components/layout/ModeHero";
-export * from "./components/layout/Navbar";
-export * from "./components/layout/Section";
-export * from "./components/layout/Stack";
+// Container components (token-driven: Surface, Card, Section)
+export {
+  Card,
+  CardBody,
+  type CardBodyProps,
+  CardFooter,
+  type CardFooterProps,
+  CardHeader,
+  type CardHeaderProps,
+  type CardProps,
+  Surface as ContainerSurface,
+  type SurfaceProps as ContainerSurfaceProps,
+  surfaceVariants as containerSurfaceVariants,
+  Section,
+  type SectionProps,
+} from "./components/containers";
 
 // ============================================================================
-// MODAL & OVERLAY COMPONENTS
+// OVERLAY SYSTEM
 // ============================================================================
-// Modal dialogs and overlays
-export * from "./components/modals/ConfirmDialog";
-export * from "./components/modals/CustomDialog";
-export * from "./components/modals/Modal";
-export * from "./components/modals/ModalProvider";
-export * from "./components/modals/SimpleModal";
-export * from "./components/overlays/OverlayPortal";
-export * from "./components/overlays/Popover";
-export * from "./components/overlays/Tooltip";
+// Overlay components (Portal, Backdrop, Modal, Dialog, Toast)
+export {
+  Backdrop,
+  type BackdropProps,
+  Dialog,
+  DialogBody,
+  type DialogBodyProps,
+  DialogDescription,
+  type DialogDescriptionProps,
+  DialogFooter,
+  type DialogFooterProps,
+  DialogHeader,
+  type DialogHeaderProps,
+  type DialogProps,
+  DialogRoot,
+  DialogTitle,
+  type DialogTitleProps,
+  Modal,
+  ModalBody,
+  type ModalBodyProps,
+  ModalFooter,
+  type ModalFooterProps,
+  ModalHeader,
+  type ModalHeaderProps,
+  type ModalProps,
+  modalVariants,
+  Portal,
+  type PortalProps,
+  Toast,
+  type ToastAction,
+  type ToastData,
+  type ToastOptions,
+  type ToastPosition,
+  type ToastProps,
+  ToastProvider,
+  type ToastProviderProps,
+  ToastViewport,
+  type ToastViewportProps,
+  useToast,
+} from "./components/overlays";
 
 // ============================================================================
-// MENU COMPONENTS
+// NOTIFICATION SYSTEM
 // ============================================================================
-// Navigation menus and tabs
-export * from "./components/menus/DropdownMenu";
-export * from "./components/menus/NavigationMenu";
-export * from "./components/menus/Tabs";
+// Notification Center components (Provider, Panel, Trigger, List, Item, etc.)
+export {
+  type GroupByFunction,
+  NotificationCenter,
+  NotificationCenterDismissAll,
+  type NotificationCenterDismissAllProps,
+  NotificationCenterGroupHeader,
+  type NotificationCenterGroupHeaderProps,
+  NotificationCenterItem,
+  type NotificationCenterItemProps,
+  NotificationCenterList,
+  type NotificationCenterListProps,
+  NotificationCenterPanel,
+  type NotificationCenterPanelProps,
+  NotificationCenterProvider,
+  type NotificationCenterProviderProps,
+  NotificationCenterTrigger,
+  type NotificationCenterTriggerProps,
+  type NotificationChannel,
+  type NotificationContextType,
+  type NotificationData,
+  type NotificationOptions,
+  type NotificationVariant,
+  useNotificationCenter,
+  useNotificationCenterContext,
+} from "./components/notifications";
 
 // ============================================================================
-// FILTER COMPONENTS
+// MENU SYSTEM
 // ============================================================================
-// Filter and search components
-export * from "./components/filters/DateRangePicker";
-export * from "./components/filters/FilterBar";
-export * from "./components/filters/FilterSelect";
-export * from "./components/filters/PriceRangeSlider";
-export * from "./components/filters/SearchFilters";
-export * from "./components/filters/SearchInput";
-
-// ============================================================================
-// FORM COMPONENTS
-// ============================================================================
-// Form inputs and controls
-export * from "./components/forms/FormInput";
-export * from "./components/forms/FormSelect";
-export * from "./components/forms/FormTextarea";
-
-// ============================================================================
-// FEEDBACK COMPONENTS
-// ============================================================================
-// User feedback and status indicators
-export * from "./components/feedback/Alert";
-export * from "./components/feedback/Progress";
-export * from "./components/feedback/Skeleton";
-
-// ============================================================================
-// TOAST COMPONENTS
-// ============================================================================
-// Toast notifications
-export * from "./components/toasts/Toast";
-export * from "./components/toasts/ToastProvider";
-
-// ============================================================================
-// NAVIGATION COMPONENTS
-// ============================================================================
-// Navigation helpers
-export * from "./components/navigation/Breadcrumbs";
-export * from "./components/navigation/Pagination";
+// Menu components (Popover, DropdownMenu, HoverCard, ContextMenu)
+export {
+  ContextMenuContent,
+  type ContextMenuContentProps,
+  ContextMenuGroup,
+  type ContextMenuGroupProps,
+  ContextMenuItem,
+  type ContextMenuItemProps,
+  ContextMenuLabel,
+  type ContextMenuLabelProps,
+  // ContextMenu
+  ContextMenuRoot,
+  type ContextMenuRootProps,
+  ContextMenuSeparator,
+  type ContextMenuSeparatorProps,
+  ContextMenuTrigger,
+  type ContextMenuTriggerProps,
+  DropdownMenuCheckItem,
+  type DropdownMenuCheckItemProps,
+  DropdownMenuContent,
+  type DropdownMenuContentProps,
+  DropdownMenuGroup,
+  type DropdownMenuGroupProps,
+  DropdownMenuItem,
+  type DropdownMenuItemProps,
+  DropdownMenuLabel,
+  type DropdownMenuLabelProps,
+  DropdownMenuRadioGroup,
+  type DropdownMenuRadioGroupProps,
+  DropdownMenuRadioItem,
+  type DropdownMenuRadioItemProps,
+  // DropdownMenu
+  DropdownMenuRoot,
+  type DropdownMenuRootProps,
+  DropdownMenuSeparator,
+  type DropdownMenuSeparatorProps,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  type DropdownMenuSubContentProps,
+  type DropdownMenuSubProps,
+  DropdownMenuSubTrigger,
+  type DropdownMenuSubTriggerProps,
+  DropdownMenuTrigger,
+  type DropdownMenuTriggerProps,
+  HoverCardContent,
+  type HoverCardContentProps,
+  // HoverCard
+  HoverCardRoot,
+  type HoverCardRootProps,
+  HoverCardTrigger,
+  type HoverCardTriggerProps,
+  PopoverArrow,
+  type PopoverArrowProps,
+  PopoverContent,
+  type PopoverContentProps,
+  popoverContentVariants,
+  // Popover
+  PopoverRoot,
+  type PopoverRootProps,
+  PopoverTrigger,
+  type PopoverTriggerProps,
+} from "./components/menus";
 
 // ============================================================================
 // DATA DISPLAY COMPONENTS
 // ============================================================================
-// Data visualization components
-export * from "./components/data/List";
-export * from "./components/data/Table";
-export * from "./components/data/Timeline";
+// Data components (Table, DataList, Skeleton, EmptyState)
+export {
+  DataList,
+  DataListItem,
+  type DataListItemProps,
+  DataListLabel,
+  type DataListLabelProps,
+  DataListRoot,
+  type DataListRootProps,
+  DataListValue,
+  type DataListValueProps,
+  EmptyState,
+  EmptyStateAction,
+  type EmptyStateActionProps,
+  EmptyStateDescription,
+  type EmptyStateDescriptionProps,
+  EmptyStateIcon,
+  type EmptyStateIconProps,
+  type EmptyStateProps,
+  EmptyStateTitle,
+  type EmptyStateTitleProps,
+  Skeleton,
+  type SkeletonProps,
+  skeletonVariants,
+  type SortDirection,
+  type SortState,
+  Table,
+  TableBody,
+  type TableBodyProps,
+  TableCell,
+  type TableCellProps,
+  type TableColumn,
+  type TableContextValue,
+  TableEmpty,
+  type TableEmptyProps,
+  TableExpandableContent,
+  type TableExpandableContentProps,
+  TableHead,
+  TableHeader,
+  type TableHeaderProps,
+  type TableHeadProps,
+  TableLoadingState,
+  type TableLoadingStateProps,
+  TableRoot,
+  type TableRootProps,
+  TableRow,
+  type TableRowProps,
+  TableSortIcon,
+  type TableSortIconProps,
+  useTableContext,
+} from "./components/data";
 
 // ============================================================================
-// CARD COMPONENTS
+// NAVIGATION SYSTEM
 // ============================================================================
-// Card components for displaying content
-export * from "./components/cards/EventCard";
-export * from "./components/cards/VenueCard";
+// Navigation components (Tabs, SegmentedControl, Breadcrumbs, Pagination, Stepper)
+export {
+  type BreadcrumbItem,
+  Breadcrumbs,
+  type BreadcrumbsItemProps,
+  type BreadcrumbsRootProps,
+  type BreadcrumbsSeparatorProps,
+  Pagination,
+  type PaginationEllipsisProps,
+  type PaginationItemProps,
+  type PaginationNextProps,
+  type PaginationPrevProps,
+  type PaginationRootProps,
+  SegmentedControl,
+  type SegmentedControlItemProps,
+  segmentedControlItemVariants,
+  type SegmentedControlRootProps,
+  segmentedControlRootVariants,
+  Stepper,
+  type StepperContentProps,
+  type StepperIndicatorProps,
+  type StepperItemProps,
+  type StepperLabelProps,
+  type StepperRootProps,
+  type StepperStep,
+  Tabs,
+  type TabsContentProps,
+  type TabsListProps,
+  tabsListVariants,
+  type TabsRootProps,
+  type TabsTriggerProps,
+  tabsTriggerVariants,
+} from "./components/navigation";
 
 // ============================================================================
-// SECTION COMPONENTS
+// ICON SYSTEM
 // ============================================================================
-// High-level section layouts
-export * from "./components/SectionBuilder";
-export * from "./components/sections/ArticlesSection";
-export * from "./components/sections/CTASection";
-export * from "./components/sections/FeatureSection";
-export * from "./components/sections/HeroSection";
-export * from "./components/sections/TrendingSection";
+// Icon component and icon registry
+export { Icon, type IconProps, iconVariants } from "./components/icon";
+
+// Icon registry exports (tree-shakeable)
+export {
+  IconArrowRight,
+  IconCalendar,
+  IconCheck,
+  IconChevronDown,
+  IconChevronRight,
+  IconClose,
+  type IconProps as IconComponentProps,
+  IconError,
+  IconInfo,
+  IconLocation,
+  IconMenu,
+  type IconName,
+  ICONS_MAP,
+  IconSearch,
+  IconSuccess,
+  IconWarning,
+} from "./icons";
 
 // ============================================================================
-// SKELETON COMPONENTS
+// DOMAIN COMPONENTS
 // ============================================================================
-// Loading skeleton components
-export * from "./components/skeletons/EventCardSkeleton";
-export * from "./components/skeletons/VenueCardSkeleton";
-
-// ============================================================================
-// SEARCH COMPONENTS
-// ============================================================================
-// Search interface components
-export * from "./components/search/SearchBar";
-
-// ============================================================================
-// IMAGE COMPONENTS
-// ============================================================================
-// Image display components
-export * from "./components/image/Image";
-
-// ============================================================================
-// ICON COMPONENTS
-// ============================================================================
-// Icon components
-export * from "./components/icons/TrendingIcon";
-
-// ============================================================================
-// CONTROL COMPONENTS
-// ============================================================================
-// UI control components
-export * from "./components/controls/LanguageSelector";
-
-// ============================================================================
-// AUTH COMPONENTS
-// ============================================================================
-// Authentication-related components
-export * from "./components/auth/LoginForm";
-export * from "./components/auth/ProfileCard";
-export * from "./components/auth/RegisterForm";
-
-// ============================================================================
-// ADMIN COMPONENTS
-// ============================================================================
-// Admin interface components
-export * from "./components/admin/Dashboard";
-export * from "./components/admin/UserManagement";
-
-// ============================================================================
-// HOOKS
-// ============================================================================
-// React hooks
-export * from "./hooks/useModal";
-
-// ============================================================================
-// UTILITIES
-// ============================================================================
-// Utility functions
-export * from "./lib/utils";
-
-// ============================================================================
-// STYLES
-// ============================================================================
-// Global CSS styles (imported for side effects)
-import "./theme/global.css";
+// Domain-specific card components (EventCard, VenueCard, TicketCard, etc.)
+export type { ArtistCardProps } from "./components/cards/ArtistCard";
+export { ArtistCard } from "./components/cards/ArtistCard";
+export type {
+  ArtistCardSize,
+  ArtistCardVariant,
+} from "./components/cards/ArtistCard/ArtistCard.types";
+export type { EventCardProps } from "./components/cards/EventCard";
+export { EventCard } from "./components/cards/EventCard";
+export type { EventCardSize, EventCardVariant } from "./components/cards/EventCard/EventCard.types";
+export type { PromoCardProps } from "./components/cards/PromoCard";
+export { PromoCard } from "./components/cards/PromoCard";
+export type { PromoCardSize, PromoCardVariant } from "./components/cards/PromoCard/PromoCard.types";
+export type { TicketCardProps } from "./components/cards/TicketCard";
+export { TicketCard } from "./components/cards/TicketCard";
+export type {
+  TicketAvailability,
+  TicketCardSize,
+  TicketCardVariant,
+} from "./components/cards/TicketCard/TicketCard.types";

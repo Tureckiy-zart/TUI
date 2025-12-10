@@ -1,11 +1,9 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import * as React from "react";
 
-import { fadePresets, slidePresets } from "@/animation/presets";
 import { Button } from "@/components/primitives/Button";
 import { type Toast as ToastType } from "@/hooks/useToast";
 import { cn } from "@/lib/utils";
@@ -82,29 +80,11 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ className, toast, onDismiss, type = toast.type, ...props }, ref) => {
     const Icon = getToastIcon(toast.type);
 
-    // Combine fade and slide presets for toast animation
-    // Slide in from top on mobile, from bottom on desktop
-    const slideInFromTop = {
-      ...fadePresets.fadeIn({ duration: "normal" }),
-      ...slidePresets.slideInDown({ distance: 100, duration: "normal" }),
-    };
-
-    // Slide out to right for exit animation
-    const slideOutRight = {
-      ...fadePresets.fadeOut({ duration: "fast" }),
-      ...slidePresets.slideOutRight({ distance: 100, duration: "fast" }),
-    };
-
     return (
-      <motion.div
+      <div
         ref={ref}
-        className={cn(toastVariants({ type, className }))}
-        initial={slideInFromTop.initial as any}
-        animate={slideInFromTop.animate as any}
-        exit={slideOutRight.exit as any}
-        transition={slideInFromTop.transition as any}
-        layout
-        {...(props as any)}
+        className={cn(toastVariants({ type }), "tm-motion-fade-slide-down", className)}
+        {...props}
       >
         <div className="flex flex-1 items-start space-x-sm">
           <Icon className={cn(toastIconVariants({ type: toast.type }))} />
@@ -133,7 +113,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         >
           <X className="h-4 w-4" />
         </Button>
-      </motion.div>
+      </div>
     );
   },
 );

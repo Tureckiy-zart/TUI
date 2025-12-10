@@ -1,0 +1,35 @@
+---
+title: ConsentBanner
+description: Documentation for ConsentBanner component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { ConsentBannerAPI } from "@/generated/api/consent-banner.api";
+
+# ConsentBanner
+
+Documentation for ConsentBanner component.
+
+## Examples
+
+<LiveExample>
+{`import { ConsentBanner } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <ConsentBanner>Example</ConsentBanner>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={ConsentBannerAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `className` | `string` | No | - | - |
+| `message` | `string` | Yes | - | - |
+| `acceptLabel` | `string` | Yes | - | - |
+

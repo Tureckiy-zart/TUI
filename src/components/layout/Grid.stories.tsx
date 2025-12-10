@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid } from "./Grid";
 import { EventCard } from "../cards/EventCard";
-import { VenueCard } from "../cards/VenueCard";
+import { VenueCard } from "../cards/VenueCard/VenueCard";
+import { Grid } from "./Grid";
 
 const meta: Meta<typeof Grid> = {
   title: "Layout/Grid",
@@ -24,30 +24,6 @@ const meta: Meta<typeof Grid> = {
       table: {
         type: { summary: "number | 'none'" },
         defaultValue: { summary: "1" },
-      },
-    },
-    md: {
-      control: { type: "select" },
-      options: [1, 2, 3, 4, 5, 6, 12, "none"],
-      description: "Number of columns for medium breakpoint (768px+)",
-      table: {
-        type: { summary: "number | 'none'" },
-      },
-    },
-    lg: {
-      control: { type: "select" },
-      options: [1, 2, 3, 4, 5, 6, 12, "none"],
-      description: "Number of columns for large breakpoint (1024px+)",
-      table: {
-        type: { summary: "number | 'none'" },
-      },
-    },
-    xl: {
-      control: { type: "select" },
-      options: [1, 2, 3, 4, 5, 6, 12, "none"],
-      description: "Number of columns for extra large breakpoint (1280px+)",
-      table: {
-        type: { summary: "number | 'none'" },
       },
     },
     gap: {

@@ -1,0 +1,46 @@
+---
+title: PriceRangeSlider
+description: Documentation for PriceRangeSlider component.
+---
+
+import { APITable } from "@/components/docs/APITable";
+import { LiveExample } from "@/components/docs/LiveExample";
+import { PriceRangeSliderAPI } from "@/generated/api/price-range-slider.api";
+
+# PriceRangeSlider
+
+Documentation for PriceRangeSlider component.
+
+## Examples
+
+<LiveExample>
+{`import { PriceRangeSlider } from '@tenerife.music/ui';
+
+export default function Example() {
+  return <PriceRangeSlider>Example</PriceRangeSlider>;
+}`}
+</LiveExample>
+
+## API
+
+<APITable data={PriceRangeSliderAPI} />
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `value` | `PriceRange` | Yes | - | - |
+| `onChange` | `(range: PriceRange) => void` | Yes | - | - |
+| `min` | `number` | Yes | - | - |
+| `max` | `number` | Yes | - | - |
+| `step` | `number` | Yes | - | - |
+| `currency` | `string` | Yes | - | - |
+| `priceRangeLabel` | `string` | Yes | - | - |
+| `minLabel` | `string` | Yes | - | - |
+| `maxLabel` | `string` | Yes | - | - |
+| `anyPriceLabel` | `string` | Yes | - | - |
+| `clearLabel` | `string` | Yes | - | - |
+| `minAriaLabel` | `string` | Yes | - | - |
+| `maxAriaLabel` | `string` | Yes | - | - |
+| `className` | `string` | No | - | - |
+

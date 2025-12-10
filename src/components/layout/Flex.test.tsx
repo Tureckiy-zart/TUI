@@ -1,6 +1,6 @@
-import React from "react";
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { render } from "@testing-library/react";
+import React from "react";
 import { Flex } from "./Flex";
 
 describe("Flex component", () => {
@@ -90,7 +90,7 @@ describe("Flex component", () => {
     const flex = container.firstChild as HTMLElement;
     expect(flex).toHaveStyle({
       gap: "var(--spacing-4)",
-      color: "red",
+      color: "rgb(255, 0, 0)", // Browser normalizes "red" to rgb(255, 0, 0)
     });
   });
 

@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd docs-app && npm install && npm run docs:build",
+  "outputDirectory": "docs-app/.next",
+  "installCommand": "cd docs-app && npm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}
