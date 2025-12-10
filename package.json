@@ -57,7 +57,7 @@
     "precommit:lint": "eslint . --ext .ts,.tsx --fix --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**'",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:a11y": "vitest run --testPathPattern=a11y\\.test",
+    "test:a11y": "vitest run a11y.test",
     "a11y:contrast": "tsx scripts/a11y-contrast-check.js",
     "ci:a11y": "pnpm test:a11y && pnpm a11y:contrast",
     "storybook": "storybook dev -p 6006",
