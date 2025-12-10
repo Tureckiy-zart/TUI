@@ -3,7 +3,12 @@
   "version": "1.0.3",
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css",
+    "./dist/styles.css",
+    "./dist/styles.mjs",
+    "./dist/styles.cjs"
+  ],
   "description": "Tenerife.Music UI Component Library - A hybrid design system built on shadcn/ui primitives with Tenerife branding",
   "keywords": [
     "react",
