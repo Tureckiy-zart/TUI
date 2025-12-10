@@ -1,8 +1,8 @@
-import React from "react";
-import "@testing-library/jest-dom";
+import { Button } from "@/components/ui/button";
+import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
+import React from "react";
 import { HeroSection } from "./HeroSection";
-import { Button } from "@/components/primitives/Button";
 
 describe("HeroSection component", () => {
   it("should render hero section with title", () => {

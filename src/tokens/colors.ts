@@ -145,9 +145,9 @@ export const semanticColors: Record<Mode, SemanticColors> = {
     successForeground: "0 0% 100%",
     error: "0 62.8% 30.6%", // Darker red
     errorForeground: "0 0% 98%",
-    warning: "38 92% 60%", // Brighter orange
+    warning: "38 92% 33%", // Darker orange for WCAG AA contrast with white text
     warningForeground: "0 0% 100%", // Light foreground for dark theme readability
-    info: "199 89% 55%", // Brighter blue
+    info: "199 89% 35%", // Darker blue for WCAG AA contrast with white text
     infoForeground: "0 0% 100%", // Light foreground for dark theme readability
   },
 };

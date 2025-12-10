@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 // Import custom matchers (extension point for future custom matchers)
 import "./custom-matchers";
 
