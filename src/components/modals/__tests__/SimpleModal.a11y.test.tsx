@@ -40,6 +40,6 @@ describe("SimpleModal accessibility", () => {
     );
 
     const results = await axe(document.body);
-    expect(results).toHaveNoViolations() as any;
+    (expect(results) as any).toHaveNoViolations();
   });
 });
