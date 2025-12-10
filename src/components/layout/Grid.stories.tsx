@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EventCard } from "../cards/EventCard";
-import { VenueCard } from "../cards/VenueCard";
+import { VenueCard } from "../cards/VenueCard/VenueCard";
 import { Grid } from "./Grid";
 
 const meta: Meta<typeof Grid> = {

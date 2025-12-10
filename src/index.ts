@@ -359,6 +359,8 @@ export { Icon, type IconProps, iconVariants } from "./components/icon";
 
 // Icon registry exports (tree-shakeable)
 export {
+  IconArrowRight,
+  IconCalendar,
   IconCheck,
   IconChevronDown,
   IconChevronRight,
@@ -366,6 +368,7 @@ export {
   type IconProps as IconComponentProps,
   IconError,
   IconInfo,
+  IconLocation,
   IconMenu,
   type IconName,
   ICONS_MAP,
@@ -373,3 +376,27 @@ export {
   IconSuccess,
   IconWarning,
 } from "./icons";
+
+// ============================================================================
+// DOMAIN COMPONENTS
+// ============================================================================
+// Domain-specific card components (EventCard, VenueCard, TicketCard, etc.)
+export type { ArtistCardProps } from "./components/cards/ArtistCard";
+export { ArtistCard } from "./components/cards/ArtistCard";
+export type {
+  ArtistCardSize,
+  ArtistCardVariant,
+} from "./components/cards/ArtistCard/ArtistCard.types";
+export type { EventCardProps } from "./components/cards/EventCard";
+export { EventCard } from "./components/cards/EventCard";
+export type { EventCardSize, EventCardVariant } from "./components/cards/EventCard/EventCard.types";
+export type { PromoCardProps } from "./components/cards/PromoCard";
+export { PromoCard } from "./components/cards/PromoCard";
+export type { PromoCardSize, PromoCardVariant } from "./components/cards/PromoCard/PromoCard.types";
+export type { TicketCardProps } from "./components/cards/TicketCard";
+export { TicketCard } from "./components/cards/TicketCard";
+export type {
+  TicketAvailability,
+  TicketCardSize,
+  TicketCardVariant,
+} from "./components/cards/TicketCard/TicketCard.types";

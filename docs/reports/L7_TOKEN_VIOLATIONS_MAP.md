@@ -1,14 +1,14 @@
 # L7 Token Violations Map
 
-**Generated:** 2025-12-09T18:31:23.685Z
+**Generated:** 2025-12-10T10:41:38.116Z
 
-**Total Violations:** 2221
+**Total Violations:** 2133
 
 ---
 
 ## Forms Components
 
-**Total:** 164 violations
+**Total:** 155 violations
 
 ### src/components/checkbox/Checkbox.stories.tsx
 
@@ -404,23 +404,6 @@ _... and 5 more violations of this type_
                   INPUT_TOKENS.icon.size,
 ```
 
-### src/components/input/input-variants.ts
-
-**Violations:** 1
-
-#### direct-css-var (1)
-
-- **Line 18:155** - `hsl(var(--foreground))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const inputVariants = cva(
->   `flex ${INPUT_TOKENS.shadow} ${MOTION_TOKENS.transition.colors} file:border-0 file:bg-transparent ${TEXT_TOKENS.fontSize.sm} file:font-medium file:text-[[hsl(var(--foreground))]] disabled:cursor-not-allowed focus-visible:outline-none`,
-    {
-      variants: {
-```
-
 ### src/components/radio/Radio.stories.tsx
 
 **Violations:** 50
@@ -730,7 +713,7 @@ _... and 17 more violations of this type_
 
 #### numeric-spacing (1)
 
-- **Line 348:15** - `ml-2`
+- **Line 352:15** - `ml-2`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
 
 ```
@@ -743,7 +726,7 @@ _... and 17 more violations of this type_
 
 #### numeric-size (2)
 
-- **Line 348:20** - `h-4`
+- **Line 352:20** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -754,7 +737,7 @@ _... and 17 more violations of this type_
               )}
 ```
 
-- **Line 348:24** - `w-4`
+- **Line 352:24** - `w-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -767,7 +750,7 @@ _... and 17 more violations of this type_
 
 #### transition-utility (1)
 
-- **Line 348:48** - `transition-transform`
+- **Line 352:48** - `transition-transform`
   - Suggestion: Use MOTION_TOKENS for transitions
 
 ```
@@ -777,82 +760,6 @@ _... and 17 more violations of this type_
                 context.open && "rotate-180",
               )}
 ```
-
-### src/components/select/select-variants.ts
-
-**Violations:** 8
-
-#### numeric-radius (1)
-
-- **Line 57:46** - `rounded-md`
-  - Suggestion: Use radius tokens through component token system
-
-```
-   */
-  export const selectListboxVariants = cva(
->   `relative z-50 min-w-[8rem] overflow-hidden [rounded-md] border border-[hsl(var(--border))] bg-[hsl(var(--popover))] text-[hsl(var(--popover-foreground))] shadow-md ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-#### direct-css-var (7)
-
-- **Line 57:72** - `hsl(var(--border))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const selectListboxVariants = cva(
->   `relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[[hsl(var(--border))]] bg-[hsl(var(--popover))] text-[hsl(var(--popover-foreground))] shadow-md ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-- **Line 57:96** - `hsl(var(--popover))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const selectListboxVariants = cva(
->   `relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border))] bg-[[hsl(var(--popover))]] text-[hsl(var(--popover-foreground))] shadow-md ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-- **Line 57:123** - `hsl(var(--popover-foreground))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const selectListboxVariants = cva(
->   `relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--popover))] text-[[hsl(var(--popover-foreground))]] shadow-md ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-- **Line 78:142** - `hsl(var(--accent))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const selectOptionVariants = cva(
->   `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors} focus:bg-[[hsl(var(--accent))]] focus:text-[hsl(var(--accent-foreground))] data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
-    {
-      variants: {
-```
-
-- **Line 78:174** - `hsl(var(--accent-foreground))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const selectOptionVariants = cva(
->   `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors} focus:bg-[hsl(var(--accent))] focus:text-[[hsl(var(--accent-foreground))]] data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
-    {
-      variants: {
-```
-
-_... and 2 more violations of this type_
 
 ### src/components/switch/Switch.stories.tsx
 
@@ -1185,7 +1092,7 @@ _... and 1 more violations of this type_
 
 ## Overlays Components
 
-**Total:** 275 violations
+**Total:** 239 violations
 
 ### src/components/drawer/drawer-variants.ts
 
@@ -1287,69 +1194,6 @@ _... and 2 more violations of this type_
         },
 ```
 
-### src/components/dropdown/dropdown-variants.ts
-
-**Violations:** 10
-
-#### direct-css-var (10)
-
-- **Line 55:48** - `hsl(var(--border))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const dropdownMenuVariants = cva(
->   `relative z-50 overflow-hidden border border-[[hsl(var(--border))]] text-[hsl(var(--popover-foreground))] ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-- **Line 55:74** - `hsl(var(--popover-foreground))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-   */
-  export const dropdownMenuVariants = cva(
->   `relative z-50 overflow-hidden border border-[hsl(var(--border))] text-[[hsl(var(--popover-foreground))]] ${MOTION_TOKENS.transition.colors}`,
-    {
-      variants: {
-```
-
-- **Line 59:22** - `hsl(var(--popover))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-      variants: {
-        variant: {
->         neutral: `bg-[[hsl(var(--popover))]]`,
-          tinted: `bg-[hsl(var(--muted))]`,
-        },
-```
-
-- **Line 60:21** - `hsl(var(--muted))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-        variant: {
-          neutral: `bg-[hsl(var(--popover))]`,
->         tinted: `bg-[[hsl(var(--muted))]]`,
-        },
-        size: {
-```
-
-- **Line 84:28** - `hsl(var(--accent))`
-  - Suggestion: Use token references instead of direct hsl(var(--\*))
-
-```
-      variants: {
-        variant: {
->         neutral: `focus:bg-[[hsl(var(--accent))]] focus:text-[hsl(var(--accent-foreground))]`,
-          tinted: `focus:bg-[hsl(var(--accent))] focus:text-[hsl(var(--accent-foreground))]`,
-        },
-```
-
-_... and 5 more violations of this type_
-
 ### src/components/menus/dropdown/DropdownMenuCheckItem.tsx
 
 **Violations:** 2
@@ -1384,7 +1228,7 @@ _... and 5 more violations of this type_
 
 #### tailwind-bg-color (2)
 
-- **Line 131:30** - `bg-accent`
+- **Line 132:30** - `bg-accent`
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
@@ -1395,7 +1239,7 @@ _... and 5 more violations of this type_
             disabled && "pointer-events-none opacity-50",
 ```
 
-- **Line 132:23** - `bg-accent`
+- **Line 133:23** - `bg-accent`
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
@@ -1408,7 +1252,7 @@ _... and 5 more violations of this type_
 
 #### tailwind-text-color (1)
 
-- **Line 131:46** - `text-accent`
+- **Line 132:46** - `text-accent`
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
@@ -1421,7 +1265,7 @@ _... and 5 more violations of this type_
 
 #### numeric-spacing (1)
 
-- **Line 130:20** - `pl-8`
+- **Line 131:20** - `pl-8`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
 
 ```
@@ -1434,7 +1278,7 @@ _... and 5 more violations of this type_
 
 #### transition-utility (1)
 
-- **Line 127:78** - `transition-colors`
+- **Line 128:78** - `transition-colors`
   - Suggestion: Use MOTION_TOKENS for transitions
 
 ```
@@ -1565,7 +1409,7 @@ _... and 5 more violations of this type_
 
 #### tailwind-bg-color (1)
 
-- **Line 22:42** - `bg-popover`
+- **Line 21:42** - `bg-popover`
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
@@ -1578,7 +1422,7 @@ _... and 5 more violations of this type_
 
 #### tailwind-text-color (1)
 
-- **Line 22:53** - `text-popover`
+- **Line 21:53** - `text-popover`
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
@@ -1876,36 +1720,6 @@ _... and 5 more violations of this type_
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
 ```
 
-### src/components/overlays/Dialog.tsx
-
-**Violations:** 2
-
-#### tailwind-text-color (1)
-
-- **Line 121:31** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-          ref={ref}
-          id={descriptionId}
->         className={cn("text-sm [text-muted]-foreground", className)}
-          {...props}
-        >
-```
-
-#### typography-size (1)
-
-- **Line 121:23** - `text-sm`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-          ref={ref}
-          id={descriptionId}
->         className={cn("[text-sm] text-muted-foreground", className)}
-          {...props}
-        >
-```
-
 ### src/components/overlays/Modal.stories.tsx
 
 **Violations:** 15
@@ -2029,36 +1843,6 @@ _... and 5 more violations of this type_
 ```
 
 _... and 5 more violations of this type_
-
-### src/components/overlays/Modal.tsx
-
-**Violations:** 2
-
-#### tailwind-bg-color (1)
-
-- **Line 23:87** - `bg-background`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-
-  const modalVariants = cva(
->   "fixed left-[50%] top-[50%] z-50 flex translate-x-[-50%] translate-y-[-50%] flex-col [bg-background] border border-border transform transition-all",
-    {
-      variants: {
-```
-
-#### transition-utility (1)
-
-- **Line 23:132** - `transition-all`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-
-  const modalVariants = cva(
->   "fixed left-[50%] top-[50%] z-50 flex translate-x-[-50%] translate-y-[-50%] flex-col bg-background border border-border transform [transition-all]",
-    {
-      variants: {
-```
 
 ### src/components/overlays/OverlayPortal.tsx
 
@@ -2481,38 +2265,16 @@ _... and 19 more violations of this type_
 
 ### src/components/overlays/Popover.tsx
 
-**Violations:** 17
+**Violations:** 13
 
-#### tailwind-bg-color (6)
-
-- **Line 17:15** - `bg-popover`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-
-  const popoverContentVariants = cva(
->   `z-50 border [bg-popover] text-popover-foreground outline-none ${POPOVER_TOKENS.content.radius.md} ${POPOVER_TOKENS.content.shadow.md}`,
-    {
-      variants: {
-```
-
-- **Line 21:18** - `bg-popover`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: "[bg-popover] text-popover-foreground border-border",
-          secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-          accent: "border-accent/50 text-accent-foreground bg-accent/10",
-```
+#### tailwind-bg-color (4)
 
 - **Line 22:66** - `bg-secondary`
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
 >         secondary: "border-secondary/50 text-secondary-foreground [bg-secondary]/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -2522,7 +2284,7 @@ _... and 19 more violations of this type_
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "border-accent/50 text-accent-foreground [bg-accent]/10",
           outline: "bg-background text-foreground border-border",
@@ -2540,38 +2302,25 @@ _... and 19 more violations of this type_
           link: "bg-transparent text-primary border-transparent",
 ```
 
-_... and 1 more violations of this type_
-
-#### tailwind-text-color (8)
-
-- **Line 17:26** - `text-popover`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+- **Line 27:61** - `bg-destructive`
+  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
-
-  const popoverContentVariants = cva(
->   `z-50 border bg-popover [text-popover]-foreground outline-none ${POPOVER_TOKENS.content.radius.md} ${POPOVER_TOKENS.content.shadow.md}`,
-    {
-      variants: {
+          ghost: "bg-transparent text-foreground border-transparent",
+          link: "bg-transparent text-primary border-transparent",
+>         destructive: "border-destructive/50 text-destructive [bg-destructive]/10",
+        },
+        size: {
 ```
 
-- **Line 21:29** - `text-popover`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: "bg-popover [text-popover]-foreground border-border",
-          secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-          accent: "border-accent/50 text-accent-foreground bg-accent/10",
-```
+#### tailwind-text-color (6)
 
 - **Line 22:40** - `text-secondary`
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
 >         secondary: "border-secondary/50 [text-secondary]-foreground bg-secondary/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -2581,7 +2330,7 @@ _... and 1 more violations of this type_
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "border-accent/50 [text-accent]-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -2599,7 +2348,29 @@ _... and 1 more violations of this type_
           link: "bg-transparent text-primary border-transparent",
 ```
 
-_... and 3 more violations of this type_
+- **Line 25:31** - `text-foreground`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+          accent: "border-accent/50 text-accent-foreground bg-accent/10",
+          outline: "bg-background text-foreground border-border",
+>         ghost: "bg-transparent [text-foreground] border-transparent",
+          link: "bg-transparent text-primary border-transparent",
+          destructive: "border-destructive/50 text-destructive bg-destructive/10",
+```
+
+- **Line 26:30** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+          outline: "bg-background text-foreground border-border",
+          ghost: "bg-transparent text-foreground border-transparent",
+>         link: "bg-transparent [text-primary] border-transparent",
+          destructive: "border-destructive/50 text-destructive bg-destructive/10",
+        },
+```
+
+_... and 1 more violations of this type_
 
 #### tailwind-border-color (3)
 
@@ -2608,7 +2379,7 @@ _... and 3 more violations of this type_
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
 >         secondary: "[border-secondary]/50 text-secondary-foreground bg-secondary/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -2618,7 +2389,7 @@ _... and 3 more violations of this type_
   - Suggestion: Use token-based CSS variables (border-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "[border-accent]/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3084,92 +2855,11 @@ _... and 8 more violations of this type_
 
 ### src/components/overlays/Toast.tsx
 
-**Violations:** 14
+**Violations:** 2
 
-#### tailwind-text-color (2)
+#### numeric-size (2)
 
-- **Line 141:70** - `text-foreground`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs h-6 w-6 rounded-md p-xs [text-foreground]/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss toast"
-```
-
-- **Line 141:124** - `text-foreground`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs h-6 w-6 rounded-md p-xs [text-foreground]/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss toast"
-```
-
-#### numeric-radius (1)
-
-- **Line 141:54** - `rounded-md`
-  - Suggestion: Use radius tokens through component token system
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs h-6 w-6 [rounded-md] p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss toast"
-```
-
-#### numeric-size (6)
-
-- **Line 22:43** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-
-  const toastVariants = cva(
->   "group pointer-events-auto relative flex [w-full] items-center justify-between gap-sm overflow-hidden border transition-all",
-    {
-      variants: {
-```
-
-- **Line 130:29** - `h-8`
-  - Suggestion: Use size tokens through component token system
-
-```
-                    size="sm"
-                    onClick={toast.action.onClick}
->                   className="[h-8] px-xs text-xs"
-                  >
-                    {toast.action.label}
-```
-
-- **Line 141:46** - `h-6`
-  - Suggestion: Use size tokens through component token system
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs [h-6] w-6 rounded-md p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss toast"
-```
-
-- **Line 141:50** - `w-6`
-  - Suggestion: Use size tokens through component token system
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs h-6 [w-6] rounded-md p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss toast"
-```
-
-- **Line 145:24** - `h-4`
+- **Line 172:24** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -3180,94 +2870,22 @@ _... and 8 more violations of this type_
         </div>
 ```
 
-_... and 1 more violations of this type_
-
-#### typography-size (3)
-
-- **Line 122:44** - `text-sm`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
+- **Line 172:28** - `w-4`
+  - Suggestion: Use size tokens through component token system
 
 ```
-          <div className="flex flex-1 items-start gap-sm">
-            <div className="flex-1 space-y-xs">
->             {toast.title && <div className="[text-sm] font-semibold">{toast.title}</div>}
-              {toast.description && <div className="text-sm opacity-90">{toast.description}</div>}
-              {toast.action && (
-```
-
-- **Line 123:50** - `text-sm`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            <div className="flex-1 space-y-xs">
-              {toast.title && <div className="text-sm font-semibold">{toast.title}</div>}
->             {toast.description && <div className="[text-sm] opacity-90">{toast.description}</div>}
-              {toast.action && (
-                <div className="mt-sm">
-```
-
-- **Line 130:39** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-                    size="sm"
-                    onClick={toast.action.onClick}
->                   className="h-8 px-xs [text-xs]"
-                  >
-                    {toast.action.label}
-```
-
-#### transition-utility (2)
-
-- **Line 22:109** - `transition-all`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-
-  const toastVariants = cva(
->   "group pointer-events-auto relative flex w-full items-center justify-between gap-sm overflow-hidden border [transition-all]",
-    {
-      variants: {
-```
-
-- **Line 141:99** - `transition-opacity`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            variant="ghost"
-            size="icon"
->           className="absolute right-xs top-xs h-6 w-6 rounded-md p-xs text-foreground/50 opacity-0 [transition-opacity] hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
-            onClick={() => onDismiss(toast.id)}
             aria-label="Dismiss toast"
+          >
+>           <X className="h-4 [w-4]" />
+          </Button>
+        </div>
 ```
 
 ### src/components/overlays/ToastViewport.tsx
 
-**Violations:** 5
+**Violations:** 3
 
-#### numeric-spacing (3)
-
-- **Line 44:30** - `left-1`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-  const positionClasses: Record<ToastPosition, string> = {
-    "top-left": `fixed top-md left-md z-[100] flex flex-col gap-sm`,
->   "top-center": `fixed top-md [left-1]/2 -translate-x-1/2 z-[100] flex flex-col gap-sm`,
-    "top-right": `fixed top-md right-md z-[100] flex flex-col gap-sm`,
-    "bottom-left": `fixed bottom-md left-md z-[100] flex flex-col-reverse gap-sm`,
-```
-
-- **Line 47:36** - `left-1`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-    "top-right": `fixed top-md right-md z-[100] flex flex-col gap-sm`,
-    "bottom-left": `fixed bottom-md left-md z-[100] flex flex-col-reverse gap-sm`,
->   "bottom-center": `fixed bottom-md [left-1]/2 -translate-x-1/2 z-[100] flex flex-col-reverse gap-sm`,
-    "bottom-right": `fixed bottom-md right-md z-[100] flex flex-col-reverse gap-sm`,
-  };
-```
+#### numeric-spacing (1)
 
 - **Line 62:58** - `p-0`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
@@ -3404,38 +3022,16 @@ _... and 1 more violations of this type_
 
 ### src/components/overlays/Tooltip.tsx
 
-**Violations:** 17
+**Violations:** 13
 
-#### tailwind-bg-color (6)
-
-- **Line 17:31** - `bg-popover`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-
-  const tooltipContentVariants = cva(
->   `z-50 overflow-hidden border [bg-popover] text-popover-foreground ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
-    {
-      variants: {
-```
-
-- **Line 21:18** - `bg-popover`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: "[bg-popover] text-popover-foreground border-border",
-          secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-          accent: "border-accent/50 text-accent-foreground bg-accent/10",
-```
+#### tailwind-bg-color (4)
 
 - **Line 22:66** - `bg-secondary`
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
 >         secondary: "border-secondary/50 text-secondary-foreground [bg-secondary]/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3445,7 +3041,7 @@ _... and 1 more violations of this type_
   - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "border-accent/50 text-accent-foreground [bg-accent]/10",
           outline: "bg-background text-foreground border-border",
@@ -3463,38 +3059,25 @@ _... and 1 more violations of this type_
           link: "bg-transparent text-primary border-transparent",
 ```
 
-_... and 1 more violations of this type_
-
-#### tailwind-text-color (8)
-
-- **Line 17:42** - `text-popover`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+- **Line 27:61** - `bg-destructive`
+  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
 
 ```
-
-  const tooltipContentVariants = cva(
->   `z-50 overflow-hidden border bg-popover [text-popover]-foreground ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
-    {
-      variants: {
+          ghost: "bg-transparent text-foreground border-transparent",
+          link: "bg-transparent text-primary border-transparent",
+>         destructive: "border-destructive/50 text-destructive [bg-destructive]/10",
+        },
+      },
 ```
 
-- **Line 21:29** - `text-popover`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: "bg-popover [text-popover]-foreground border-border",
-          secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-          accent: "border-accent/50 text-accent-foreground bg-accent/10",
-```
+#### tailwind-text-color (6)
 
 - **Line 22:40** - `text-secondary`
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
 >         secondary: "border-secondary/50 [text-secondary]-foreground bg-secondary/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3504,7 +3087,7 @@ _... and 1 more violations of this type_
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "border-accent/50 [text-accent]-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3522,7 +3105,29 @@ _... and 1 more violations of this type_
           link: "bg-transparent text-primary border-transparent",
 ```
 
-_... and 3 more violations of this type_
+- **Line 25:31** - `text-foreground`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+          accent: "border-accent/50 text-accent-foreground bg-accent/10",
+          outline: "bg-background text-foreground border-border",
+>         ghost: "bg-transparent [text-foreground] border-transparent",
+          link: "bg-transparent text-primary border-transparent",
+          destructive: "border-destructive/50 text-destructive bg-destructive/10",
+```
+
+- **Line 26:30** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+          outline: "bg-background text-foreground border-border",
+          ghost: "bg-transparent text-foreground border-transparent",
+>         link: "bg-transparent [text-primary] border-transparent",
+          destructive: "border-destructive/50 text-destructive bg-destructive/10",
+        },
+```
+
+_... and 1 more violations of this type_
 
 #### tailwind-border-color (3)
 
@@ -3531,7 +3136,7 @@ _... and 3 more violations of this type_
 
 ```
         variant: {
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
 >         secondary: "[border-secondary]/50 text-secondary-foreground bg-secondary/10",
           accent: "border-accent/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3541,7 +3146,7 @@ _... and 3 more violations of this type_
   - Suggestion: Use token-based CSS variables (border-[hsl(var(--token))])
 
 ```
-          primary: "bg-popover text-popover-foreground border-border",
+          primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
           secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
 >         accent: "[border-accent]/50 text-accent-foreground bg-accent/10",
           outline: "bg-background text-foreground border-border",
@@ -3561,488 +3166,615 @@ _... and 3 more violations of this type_
 
 ## Cards Components
 
-**Total:** 59 violations
+**Total:** 70 violations
 
-### src/components/cards/EventCard.tsx
+### src/components/cards/ArtistCard/ArtistCard.tsx
 
-**Violations:** 31
+**Violations:** 6
 
-#### tailwind-text-color (6)
+#### tailwind-text-color (1)
 
-- **Line 83:169** - `text-white`
+- **Line 155:29** - `text-primary`
   - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
 
 ```
-          {featured && featuredBadgeText && (
-            <div className="absolute right-3 top-3 z-10">
->             <span className="shadow-elevation-lg inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold [text-white]">
-                {featuredBadgeText}
-              </span>
+                  TEXT_TOKENS.fontWeight.bold,
+                  MOTION_TOKENS.transition.colors,
+>                 "group-hover:[text-primary]",
+                  size === "compact"
+                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
 ```
 
-- **Line 100:39** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+#### numeric-size (5)
 
-```
-                <div className="flex h-full w-full items-center justify-center">
-                  <svg
->                   className="h-16 w-16 [text-muted]-foreground"
-                    fill="none"
-                    viewBox="0 0 24 24"
-```
-
-- **Line 122:90** - `text-primary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            <Heading
-              level={3}
->             className="mb-xs line-clamp-2 text-lg font-bold transition-colors group-hover:[text-primary]"
-            >
-              {href ? (
-```
-
-- **Line 139:63** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            <div className="mb-sm flex flex-col gap-xs">
-              {date && (
->               <div className="flex items-center gap-xs text-xs [text-muted]-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-- **Line 160:63** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-              )}
-              {venueName && (
->               <div className="flex items-center gap-xs text-xs [text-muted]-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-_... and 1 more violations of this type_
-
-#### tailwind-border-color (1)
-
-- **Line 76:166** - `border-primary`
-  - Suggestion: Use token-based CSS variables (border-[hsl(var(--token))])
-
-```
-        <Card
-          className={cn(
->           "shadow-elevation-md hover:shadow-elevation-xl group relative overflow-hidden border-transparent transition-[border-color,box-shadow] duration-normal hover:[border-primary]/20",
-            featured && "ring-2 ring-primary/50",
-            className,
-```
-
-#### numeric-spacing (2)
-
-- **Line 82:35** - `right-3`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-        >
-          {featured && featuredBadgeText && (
->           <div className="absolute [right-3] top-3 z-10">
-              <span className="shadow-elevation-lg inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white">
-                {featuredBadgeText}
-```
-
-- **Line 82:43** - `top-3`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-        >
-          {featured && featuredBadgeText && (
->           <div className="absolute right-3 [top-3] z-10">
-              <span className="shadow-elevation-lg inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white">
-                {featuredBadgeText}
-```
-
-#### numeric-radius (1)
-
-- **Line 83:74** - `rounded-full`
-  - Suggestion: Use radius tokens through component token system
-
-```
-          {featured && featuredBadgeText && (
-            <div className="absolute right-3 top-3 z-10">
->             <span className="shadow-elevation-lg inline-flex items-center [rounded-full] bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs text-xs font-semibold text-white">
-                {featuredBadgeText}
-              </span>
-```
-
-#### numeric-size (14)
-
-- **Line 90:58** - `w-full`
+- **Line 120:39** - `w-full`
   - Suggestion: Use size tokens through component token system
 
 ```
+            {showImage && (
+              <CardBaseImageWrapper size={size}>
+>               <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+                  {imageUrl ? (
+                    <img
+```
 
+- **Line 125:35** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      src={imageUrl}
+                      alt={name}
+>                     className={cn("[h-full] w-full", artistCardImageTransformVariants({ size }))}
+                    />
+                  ) : (
+```
+
+- **Line 125:42** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      src={imageUrl}
+                      alt={name}
+>                     className={cn("h-full [w-full]", artistCardImageTransformVariants({ size }))}
+                    />
+                  ) : (
+```
+
+- **Line 128:39** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex [h-full] w-full items-center justify-center">
+                      {/* Placeholder icon - using info as fallback since music/artist icon doesn't exist in registry */}
+                      <Icon
+```
+
+- **Line 128:46** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex h-full [w-full] items-center justify-center">
+                      {/* Placeholder icon - using info as fallback since music/artist icon doesn't exist in registry */}
+                      <Icon
+```
+
+### src/components/cards/CardBase/CardBase.stories.tsx
+
+**Violations:** 18
+
+#### hex-color (18)
+
+- **Line 65:49** - `#667eea`
+  - Suggestion: Use hsl(var(--token)) through token system
+
+```
+              width: "100%",
+              height: "100%",
+>             background: "linear-gradient(135deg, [#667eea] 0%, #764ba2 100%)",
+              display: "flex",
+              alignItems: "center",
+```
+
+- **Line 65:61** - `#764ba2`
+  - Suggestion: Use hsl(var(--token)) through token system
+
+```
+              width: "100%",
+              height: "100%",
+>             background: "linear-gradient(135deg, #667eea 0%, [#764ba2] 100%)",
+              display: "flex",
+              alignItems: "center",
+```
+
+- **Line 114:49** - `#667eea`
+  - Suggestion: Use hsl(var(--token)) through token system
+
+```
+              width: "100%",
+              height: "100%",
+>             background: "linear-gradient(135deg, [#667eea] 0%, #764ba2 100%)",
+              display: "flex",
+              alignItems: "center",
+```
+
+- **Line 114:61** - `#764ba2`
+  - Suggestion: Use hsl(var(--token)) through token system
+
+```
+              width: "100%",
+              height: "100%",
+>             background: "linear-gradient(135deg, #667eea 0%, [#764ba2] 100%)",
+              display: "flex",
+              alignItems: "center",
+```
+
+- **Line 161:49** - `#667eea`
+  - Suggestion: Use hsl(var(--token)) through token system
+
+```
+              width: "100%",
+              height: "100%",
+>             background: "linear-gradient(135deg, [#667eea] 0%, #764ba2 100%)",
+              display: "flex",
+              alignItems: "center",
+```
+
+_... and 13 more violations of this type_
+
+### src/components/cards/CategoryCard/CategoryCard.tsx
+
+**Violations:** 8
+
+#### tailwind-text-color (1)
+
+- **Line 130:60** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 transition-colors group-hover:[text-primary]",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+#### numeric-size (5)
+
+- **Line 91:39** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+            {showImage && (
+              <CardBaseImageWrapper size={size}>
+>               <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+                  {imageUrl ? (
+                    <img
+```
+
+- **Line 97:23** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "[h-full] w-full object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 97:30** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "h-full [w-full] object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 103:39** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex [h-full] w-full items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+- **Line 103:46** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex h-full [w-full] items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+#### transition-utility (2)
+
+- **Line 116:48** - `transition-opacity`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                  <div
+                    className={cn(
+>                     "absolute inset-0 opacity-0 [transition-opacity] duration-normal group-hover:opacity-100",
+                      DOMAIN_TOKENS.image.overlay.gradient,
+                    )}
+```
+
+- **Line 130:30** - `transition-colors`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 [transition-colors] group-hover:text-primary",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+### src/components/cards/EventCard/EventCard.tsx
+
+**Violations:** 10
+
+#### tailwind-text-color (1)
+
+- **Line 145:60** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 transition-colors group-hover:[text-primary]",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+#### numeric-size (7)
+
+- **Line 106:39** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+            {showImage && (
+              <CardBaseImageWrapper size={size}>
+>               <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+                  {imageUrl ? (
+                    <img
+```
+
+- **Line 112:23** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "[h-full] w-full object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 112:30** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "h-full [w-full] object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 118:39** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex [h-full] w-full items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+- **Line 118:46** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex h-full [w-full] items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+_... and 2 more violations of this type_
+
+#### transition-utility (2)
+
+- **Line 131:48** - `transition-opacity`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                  <div
+                    className={cn(
+>                     "absolute inset-0 opacity-0 [transition-opacity] duration-normal group-hover:opacity-100",
+                      DOMAIN_TOKENS.image.overlay.gradient,
+                    )}
+```
+
+- **Line 145:30** - `transition-colors`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 [transition-colors] group-hover:text-primary",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+### src/components/cards/PromoCard/PromoCard.tsx
+
+**Violations:** 11
+
+#### tailwind-text-color (1)
+
+- **Line 138:60** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 transition-colors group-hover:[text-primary]",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+#### numeric-size (8)
+
+- **Line 99:39** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+            {showImage && (
+              <CardBaseImageWrapper size={size}>
+>               <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+                  {imageUrl ? (
+                    <img
+```
+
+- **Line 105:23** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "[h-full] w-full object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 105:30** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "h-full [w-full] object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 111:39** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex [h-full] w-full items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+- **Line 111:46** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex h-full [w-full] items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+_... and 3 more violations of this type_
+
+#### transition-utility (2)
+
+- **Line 124:48** - `transition-opacity`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                  <div
+                    className={cn(
+>                     "absolute inset-0 opacity-0 [transition-opacity] duration-normal group-hover:opacity-100",
+                      DOMAIN_TOKENS.image.overlay.gradient,
+                    )}
+```
+
+- **Line 138:30** - `transition-colors`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 [transition-colors] group-hover:text-primary",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+### src/components/cards/TicketCard/TicketCard.tsx
+
+**Violations:** 11
+
+#### tailwind-text-color (1)
+
+- **Line 199:60** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 transition-colors group-hover:[text-primary]",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+#### numeric-size (8)
+
+- **Line 160:39** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+            {showImage && (
+              <CardBaseImageWrapper size={size}>
+>               <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+                  {imageUrl ? (
+                    <img
+```
+
+- **Line 166:23** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "[h-full] w-full object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 166:30** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                      alt={title}
+                      className={cn(
+>                       "h-full [w-full] object-cover",
+                        DOMAIN_TOKENS.motion.hover.transition,
+                        DOMAIN_TOKENS.motion.hover.scale,
+```
+
+- **Line 172:39** - `h-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex [h-full] w-full items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+- **Line 172:46** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
+                    />
+                  ) : (
+>                   <div className="flex h-full [w-full] items-center justify-center">
+                      <Icon
+                        name="info"
+```
+
+_... and 3 more violations of this type_
+
+#### transition-utility (2)
+
+- **Line 185:48** - `transition-opacity`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                  <div
+                    className={cn(
+>                     "absolute inset-0 opacity-0 [transition-opacity] duration-normal group-hover:opacity-100",
+                      DOMAIN_TOKENS.image.overlay.gradient,
+                    )}
+```
+
+- **Line 199:30** - `transition-colors`
+  - Suggestion: Use MOTION_TOKENS for transitions
+
+```
+                level={3}
+                className={cn(
+>                 "line-clamp-2 [transition-colors] group-hover:text-primary",
+                  TEXT_TOKENS.fontSize.lg,
+                  TEXT_TOKENS.fontWeight.bold,
+```
+
+### src/components/cards/VenueCard/VenueCard.tsx
+
+**Violations:** 6
+
+#### tailwind-text-color (1)
+
+- **Line 153:27** - `text-primary`
+  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
+
+```
+                TEXT_TOKENS.fontWeight.bold,
+                MOTION_TOKENS.transition.colors,
+>               "group-hover:[text-primary]",
+                size === "compact"
+                  ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
+```
+
+#### numeric-size (5)
+
+- **Line 118:37** - `w-full`
+  - Suggestion: Use size tokens through component token system
+
+```
           {showImage && (
->           <div className="relative h-[var(--spacing-3xl)] [w-full] overflow-hidden rounded-t-lg bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
-              {imageUrl ? (
-                <img
+            <CardBaseImageWrapper size={cardBaseSize}>
+>             <div className="relative [w-full] overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+                {imageUrl ? (
+                  <img
 ```
 
-- **Line 95:27** - `h-full`
+- **Line 123:33** - `h-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-                  src={imageUrl}
-                  alt={title}
->                 className="[h-full] w-full object-cover transition-transform duration-slow group-hover:scale-110"
-                />
-              ) : (
+                    src={imageUrl}
+                    alt={name}
+>                   className={cn("[h-full] w-full", venueCardImageTransformVariants({ size }))}
+                  />
+                ) : (
 ```
 
-- **Line 95:34** - `w-full`
+- **Line 123:40** - `w-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-                  src={imageUrl}
-                  alt={title}
->                 className="h-full [w-full] object-cover transition-transform duration-slow group-hover:scale-110"
-                />
-              ) : (
+                    src={imageUrl}
+                    alt={name}
+>                   className={cn("h-full [w-full]", venueCardImageTransformVariants({ size }))}
+                  />
+                ) : (
 ```
 
-- **Line 98:35** - `h-full`
+- **Line 126:37** - `h-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-                />
-              ) : (
->               <div className="flex [h-full] w-full items-center justify-center">
-                  <svg
-                    className="h-16 w-16 text-muted-foreground"
+                  />
+                ) : (
+>                 <div className="flex [h-full] w-full items-center justify-center">
+                    {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
+                    <Icon
 ```
 
-- **Line 98:42** - `w-full`
+- **Line 126:44** - `w-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-                />
-              ) : (
->               <div className="flex h-full [w-full] items-center justify-center">
-                  <svg
-                    className="h-16 w-16 text-muted-foreground"
-```
-
-_... and 9 more violations of this type_
-
-#### typography-size (4)
-
-- **Line 83:147** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-          {featured && featuredBadgeText && (
-            <div className="absolute right-3 top-3 z-10">
->             <span className="shadow-elevation-lg inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-xs py-xs [text-xs] font-semibold text-white">
-                {featuredBadgeText}
-              </span>
-```
-
-- **Line 122:42** - `text-lg`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            <Heading
-              level={3}
->             className="mb-xs line-clamp-2 [text-lg] font-bold transition-colors group-hover:text-primary"
-            >
-              {href ? (
-```
-
-- **Line 139:55** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            <div className="mb-sm flex flex-col gap-xs">
-              {date && (
->               <div className="flex items-center gap-xs [text-xs] text-muted-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-- **Line 160:55** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-              )}
-              {venueName && (
->               <div className="flex items-center gap-xs [text-xs] text-muted-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-#### transition-utility (3)
-
-- **Line 95:54** - `transition-transform`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-                  src={imageUrl}
-                  alt={title}
->                 className="h-full w-full object-cover [transition-transform] duration-slow group-hover:scale-110"
-                />
-              ) : (
-```
-
-- **Line 115:117** - `transition-opacity`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-                </div>
-              )}
->             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 [transition-opacity] duration-normal group-hover:opacity-100" />
-            </div>
-          )}
-```
-
-- **Line 122:60** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            <Heading
-              level={3}
->             className="mb-xs line-clamp-2 text-lg font-bold [transition-colors] group-hover:text-primary"
-            >
-              {href ? (
-```
-
-### src/components/cards/VenueCard.tsx
-
-**Violations:** 28
-
-#### tailwind-text-color (6)
-
-- **Line 93:141** - `text-primary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-          {featured && popularBadgeText && (
-            <div className="absolute right-sm top-sm z-10">
->             <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-xs py-xs text-xs font-semibold [text-primary]-foreground shadow-lg">
-                {popularBadgeText}
-              </span>
-```
-
-- **Line 110:39** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-                <div className="flex h-full w-full items-center justify-center">
-                  <svg
->                   className="h-16 w-16 [text-muted]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-```
-
-- **Line 132:90** - `text-primary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            <Heading
-              level={3}
->             className="mb-sm line-clamp-2 text-lg font-bold transition-colors group-hover:[text-primary]"
-            >
-              {href ? (
-```
-
-- **Line 149:63** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            {location && (
-              <div className="mb-sm flex flex-col gap-sm">
->               <div className="flex items-center gap-sm text-xs [text-muted]-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-- **Line 179:69** - `text-primary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-              <div className="flex items-center justify-between text-xs">
-                {eventsCount > 0 && (
->                 <div className="flex items-center gap-xs font-medium [text-primary]">
-                    <svg
-                      className="h-4 w-4"
-```
-
-_... and 1 more violations of this type_
-
-#### tailwind-border-color (1)
-
-- **Line 86:130** - `border-primary`
-  - Suggestion: Use token-based CSS variables (border-[hsl(var(--token))])
-
-```
-        <Card
-          className={cn(
->           "group relative overflow-hidden border-transparent shadow-md transition-[border-color,box-shadow] duration-normal hover:[border-primary]/20 hover:shadow-xl",
-            featured && "ring-2 ring-primary/50",
-            className,
-```
-
-#### numeric-radius (1)
-
-- **Line 93:54** - `rounded-full`
-  - Suggestion: Use radius tokens through component token system
-
-```
-          {featured && popularBadgeText && (
-            <div className="absolute right-sm top-sm z-10">
->             <span className="inline-flex items-center [rounded-full] bg-gradient-to-r from-accent to-primary px-xs py-xs text-xs font-semibold text-primary-foreground shadow-lg">
-                {popularBadgeText}
-              </span>
-```
-
-#### numeric-size (13)
-
-- **Line 100:58** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-
-          {showImage && (
->           <div className="relative h-[var(--spacing-3xl)] [w-full] overflow-hidden rounded-t-lg bg-gradient-to-br from-muted to-muted/50">
-              {imageUrl ? (
-                <img
-```
-
-- **Line 105:27** - `h-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-                  src={imageUrl}
-                  alt={name}
->                 className="[h-full] w-full object-cover transition-transform duration-slow group-hover:scale-110"
-                />
-              ) : (
-```
-
-- **Line 105:34** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-                  src={imageUrl}
-                  alt={name}
->                 className="h-full [w-full] object-cover transition-transform duration-slow group-hover:scale-110"
-                />
-              ) : (
-```
-
-- **Line 108:35** - `h-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-                />
-              ) : (
->               <div className="flex [h-full] w-full items-center justify-center">
-                  <svg
-                    className="h-16 w-16 text-muted"
-```
-
-- **Line 108:42** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-                />
-              ) : (
->               <div className="flex h-full [w-full] items-center justify-center">
-                  <svg
-                    className="h-16 w-16 text-muted"
-```
-
-_... and 8 more violations of this type_
-
-#### typography-size (4)
-
-- **Line 93:119** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-          {featured && popularBadgeText && (
-            <div className="absolute right-sm top-sm z-10">
->             <span className="inline-flex items-center rounded-full bg-gradient-to-r from-accent to-primary px-xs py-xs [text-xs] font-semibold text-primary-foreground shadow-lg">
-                {popularBadgeText}
-              </span>
-```
-
-- **Line 132:42** - `text-lg`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            <Heading
-              level={3}
->             className="mb-sm line-clamp-2 [text-lg] font-bold transition-colors group-hover:text-primary"
-            >
-              {href ? (
-```
-
-- **Line 149:55** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            {location && (
-              <div className="mb-sm flex flex-col gap-sm">
->               <div className="flex items-center gap-sm [text-xs] text-muted-foreground">
-                  <svg
-                    className="h-4 w-4"
-```
-
-- **Line 177:62** - `text-xs`
-  - Suggestion: Use TYPOGRAPHY_TOKENS or component typography tokens
-
-```
-            )}
-            <div className="border-t border-border pt-sm">
->             <div className="flex items-center justify-between [text-xs]">
-                {eventsCount > 0 && (
-                  <div className="flex items-center gap-xs font-medium text-primary">
-```
-
-#### transition-utility (3)
-
-- **Line 105:54** - `transition-transform`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-                  src={imageUrl}
-                  alt={name}
->                 className="h-full w-full object-cover [transition-transform] duration-slow group-hover:scale-110"
-                />
-              ) : (
-```
-
-- **Line 125:117** - `transition-opacity`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-                </div>
-              )}
->             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 [transition-opacity] duration-normal group-hover:opacity-100" />
-            </div>
-          )}
-```
-
-- **Line 132:60** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            <Heading
-              level={3}
->             className="mb-sm line-clamp-2 text-lg font-bold [transition-colors] group-hover:text-primary"
-            >
-              {href ? (
+                  />
+                ) : (
+>                 <div className="flex h-full [w-full] items-center justify-center">
+                    {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
+                    <Icon
 ```
 
 ## Filters Components
@@ -5180,188 +4912,6 @@ _... and 1 more violations of this type_
 ```
 
 _... and 1 more violations of this type_
-
-## Skeletons Components
-
-**Total:** 20 violations
-
-### src/components/skeletons/EventCardSkeleton.tsx
-
-**Violations:** 10
-
-#### tailwind-bg-color (1)
-
-- **Line 14:35** - `bg-background`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-  export const EventCardSkeleton: React.FC<EventCardSkeletonProps> = ({ className }) => {
-    return (
->     <div className={cn("rounded-lg [bg-background] p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-```
-
-#### numeric-radius (1)
-
-- **Line 14:24** - `rounded-lg`
-  - Suggestion: Use radius tokens through component token system
-
-```
-  export const EventCardSkeleton: React.FC<EventCardSkeletonProps> = ({ className }) => {
-    return (
->     <div className={cn("[rounded-lg] bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-```
-
-#### numeric-size (8)
-
-- **Line 15:33** - `h-48`
-  - Suggestion: Use size tokens through component token system
-
-```
-    return (
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
->       <Skeleton className="mb-md [h-48] w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-```
-
-- **Line 15:38** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-    return (
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
->       <Skeleton className="mb-md h-48 [w-full]" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-```
-
-- **Line 16:33** - `h-6`
-  - Suggestion: Use size tokens through component token system
-
-```
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
->       <Skeleton className="mb-sm [h-6] w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-        <Skeleton className="h-4 w-1/2" />
-```
-
-- **Line 16:37** - `w-3`
-  - Suggestion: Use size tokens through component token system
-
-```
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
->       <Skeleton className="mb-sm h-6 [w-3]/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-        <Skeleton className="h-4 w-1/2" />
-```
-
-- **Line 17:33** - `h-4`
-  - Suggestion: Use size tokens through component token system
-
-```
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
->       <Skeleton className="mb-sm [h-4] w-full" />
-        <Skeleton className="h-4 w-1/2" />
-      </div>
-```
-
-_... and 3 more violations of this type_
-
-### src/components/skeletons/VenueCardSkeleton.tsx
-
-**Violations:** 10
-
-#### tailwind-bg-color (1)
-
-- **Line 14:35** - `bg-background`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-  export const VenueCardSkeleton: React.FC<VenueCardSkeletonProps> = ({ className }) => {
-    return (
->     <div className={cn("rounded-lg [bg-background] p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-```
-
-#### numeric-radius (1)
-
-- **Line 14:24** - `rounded-lg`
-  - Suggestion: Use radius tokens through component token system
-
-```
-  export const VenueCardSkeleton: React.FC<VenueCardSkeletonProps> = ({ className }) => {
-    return (
->     <div className={cn("[rounded-lg] bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-```
-
-#### numeric-size (8)
-
-- **Line 15:33** - `h-48`
-  - Suggestion: Use size tokens through component token system
-
-```
-    return (
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
->       <Skeleton className="mb-md [h-48] w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-```
-
-- **Line 15:38** - `w-full`
-  - Suggestion: Use size tokens through component token system
-
-```
-    return (
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
->       <Skeleton className="mb-md h-48 [w-full]" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-```
-
-- **Line 16:33** - `h-6`
-  - Suggestion: Use size tokens through component token system
-
-```
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
->       <Skeleton className="mb-sm [h-6] w-3/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-        <Skeleton className="h-4 w-1/2" />
-```
-
-- **Line 16:37** - `w-3`
-  - Suggestion: Use size tokens through component token system
-
-```
-      <div className={cn("rounded-lg bg-background p-md shadow-md", className)}>
-        <Skeleton className="mb-md h-48 w-full" />
->       <Skeleton className="mb-sm h-6 [w-3]/4" />
-        <Skeleton className="mb-sm h-4 w-full" />
-        <Skeleton className="h-4 w-1/2" />
-```
-
-- **Line 17:33** - `h-4`
-  - Suggestion: Use size tokens through component token system
-
-```
-        <Skeleton className="mb-md h-48 w-full" />
-        <Skeleton className="mb-sm h-6 w-3/4" />
->       <Skeleton className="mb-sm [h-4] w-full" />
-        <Skeleton className="h-4 w-1/2" />
-      </div>
-```
-
-_... and 3 more violations of this type_
 
 ## Icons Components
 
@@ -10142,7 +9692,7 @@ _... and 5 more violations of this type_
 
 ## Other Components
 
-**Total:** 692 violations
+**Total:** 658 violations
 
 ### src/components/SectionBuilder.presets.tsx
 
@@ -11072,7 +10622,7 @@ _... and 2 more violations of this type_
 
 #### numeric-spacing (1)
 
-- **Line 89:42** - `gap-2`
+- **Line 86:42** - `gap-2`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
 
 ```
@@ -11301,23 +10851,6 @@ _... and 2 more violations of this type_
 >         className="[h-2] rounded-full bg-primary transition-[width] duration-normal"
           style={{ width: `${percentage}%` }}
         />
-```
-
-### src/components/feedback/Skeleton.tsx
-
-**Violations:** 1
-
-#### tailwind-bg-color (1)
-
-- **Line 12:51** - `bg-muted`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-
-  export const Skeleton: React.FC<SkeletonProps> = ({ className }) => {
->   return <div className={cn("animate-pulse rounded [bg-muted]", className)} />;
-  };
-
 ```
 
 ### src/components/image/Image.tsx
@@ -12952,11 +12485,11 @@ _... and 4 more violations of this type_
 
 ### src/components/navigation/breadcrumbs/Breadcrumbs.tsx
 
-**Violations:** 4
+**Violations:** 3
 
 #### numeric-spacing (1)
 
-- **Line 168:23** - `mx-1`
+- **Line 169:23** - `mx-1`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
 
 ```
@@ -12969,7 +12502,7 @@ _... and 4 more violations of this type_
 
 #### numeric-size (2)
 
-- **Line 87:23** - `h-4`
+- **Line 88:23** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -12980,7 +12513,7 @@ _... and 4 more violations of this type_
         />
 ```
 
-- **Line 87:27** - `w-4`
+- **Line 88:27** - `w-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -12991,39 +12524,13 @@ _... and 4 more violations of this type_
         />
 ```
 
-#### transition-utility (1)
-
-- **Line 117:23** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-                        NAVIGATION_TOKENS.states.default.text,
-                        NAVIGATION_TOKENS.states.hover.text,
->                       "[transition-colors]",
-                      )}
-                    >
-```
-
 ### src/components/navigation/pagination/Pagination.tsx
 
-**Violations:** 8
-
-#### tailwind-text-color (1)
-
-- **Line 328:11** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-            NAVIGATION_TOKENS.sizes.md.padding.vertical,
-            NAVIGATION_TOKENS.states.default.text,
->           "[text-muted]-foreground",
-            className,
-          )}
-```
+**Violations:** 4
 
 #### numeric-size (4)
 
-- **Line 273:32** - `h-4`
+- **Line 277:32** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13034,7 +12541,7 @@ _... and 4 more violations of this type_
         </button>
 ```
 
-- **Line 273:36** - `w-4`
+- **Line 277:36** - `w-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13045,7 +12552,7 @@ _... and 4 more violations of this type_
         </button>
 ```
 
-- **Line 308:33** - `h-4`
+- **Line 313:33** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13056,7 +12563,7 @@ _... and 4 more violations of this type_
         </button>
 ```
 
-- **Line 308:37** - `w-4`
+- **Line 313:37** - `w-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13067,152 +12574,13 @@ _... and 4 more violations of this type_
         </button>
 ```
 
-#### transition-utility (3)
-
-- **Line 229:18** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            NAVIGATION_TOKENS.sizes.md.fontSize,
-            NAVIGATION_TOKENS.typography.fontWeight.medium,
->           "border [transition-colors]",
-            isCurrent
-              ? `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border} ${NAVIGATION_TOKENS.shadow.sm}`
-```
-
-- **Line 265:31** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            NAVIGATION_TOKENS.radius.default,
-            NAVIGATION_TOKENS.sizes.md.fontSize,
->           "border border-input [transition-colors]",
-            `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
-            disabled && NAVIGATION_TOKENS.states.disabled.cursor,
-```
-
-- **Line 300:31** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-            NAVIGATION_TOKENS.radius.default,
-            NAVIGATION_TOKENS.sizes.md.fontSize,
->           "border border-input [transition-colors]",
-            `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
-            disabled && NAVIGATION_TOKENS.states.disabled.cursor,
-```
-
-### src/components/navigation/segmented-control/SegmentedControl.tsx
-
-**Violations:** 3
-
-#### tailwind-bg-color (1)
-
-- **Line 21:139** - `bg-muted`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-
-  const segmentedControlRootVariants = cva(
->   `inline-flex items-center ${NAVIGATION_TOKENS.spacing.listGap.xs} ${NAVIGATION_TOKENS.radius.default} ${NAVIGATION_TOKENS.shadow.sm} p-1 [bg-muted]`,
-    {
-      variants: {
-```
-
-#### numeric-spacing (1)
-
-- **Line 21:135** - `p-1`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-
-  const segmentedControlRootVariants = cva(
->   `inline-flex items-center ${NAVIGATION_TOKENS.spacing.listGap.xs} ${NAVIGATION_TOKENS.radius.default} ${NAVIGATION_TOKENS.shadow.sm} [p-1] bg-muted`,
-    {
-      variants: {
-```
-
-#### transition-utility (1)
-
-- **Line 42:143** - `transition-all`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-
-  const segmentedControlItemVariants = cva(
->   `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} [transition-all] disabled:pointer-events-none disabled:opacity-50 relative`,
-    {
-      variants: {
-```
-
 ### src/components/navigation/stepper/Stepper.tsx
 
-**Violations:** 8
+**Violations:** 2
 
-#### tailwind-text-color (1)
+#### numeric-size (2)
 
-- **Line 361:15** - `text-muted`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-                NAVIGATION_TOKENS.typography.sm,
-                NAVIGATION_TOKENS.states.default.text,
->               "[text-muted]-foreground",
-              )}
-            >
-```
-
-#### tailwind-border-color (1)
-
-- **Line 319:54** - `border-muted`
-  - Suggestion: Use token-based CSS variables (border-[hsl(var(--token))])
-
-```
-          className={cn(
-            baseClasses,
->           `${NAVIGATION_TOKENS.states.default.border} [border-muted]-foreground ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text}`,
-            disabled && NAVIGATION_TOKENS.states.disabled.text,
-            className,
-```
-
-#### numeric-spacing (1)
-
-- **Line 383:36** - `mt-4`
-  - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
-
-```
-
-      return (
->       <div ref={ref} className={cn("[mt-4]", className)} {...props}>
-          {children}
-        </div>
-```
-
-#### numeric-size (4)
-
-- **Line 270:18** - `h-8`
-  - Suggestion: Use size tokens through component token system
-
-```
-      ref,
-    ) => {
->     const size = "[h-8] w-8"; // Fixed size for indicators
-      const baseClasses = cn(
-        size,
-```
-
-- **Line 270:22** - `w-8`
-  - Suggestion: Use size tokens through component token system
-
-```
-      ref,
-    ) => {
->     const size = "h-8 [w-8]"; // Fixed size for indicators
-      const baseClasses = cn(
-        size,
-```
-
-- **Line 292:28** - `h-4`
+- **Line 295:28** - `h-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13223,7 +12591,7 @@ _... and 4 more violations of this type_
         );
 ```
 
-- **Line 292:32** - `w-4`
+- **Line 295:32** - `w-4`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13234,26 +12602,13 @@ _... and 4 more violations of this type_
         );
 ```
 
-#### transition-utility (1)
-
-- **Line 277:16** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-        NAVIGATION_TOKENS.typography.fontWeight.medium,
-        NAVIGATION_TOKENS.sizes.sm.fontSize,
->       "border-2 [transition-colors]",
-      );
-
-```
-
 ### src/components/navigation/tabs/Tabs.tsx
 
-**Violations:** 3
+**Violations:** 2
 
 #### numeric-spacing (1)
 
-- **Line 400:11** - `mt-2`
+- **Line 401:11** - `mt-2`
   - Suggestion: Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.)
 
 ```
@@ -13266,7 +12621,7 @@ _... and 4 more violations of this type_
 
 #### numeric-size (1)
 
-- **Line 194:38** - `w-full`
+- **Line 195:38** - `w-full`
   - Suggestion: Use size tokens through component token system
 
 ```
@@ -13275,19 +12630,6 @@ _... and 4 more violations of this type_
 >         <div ref={ref} className={cn("[w-full]", className)} {...props}>
             {React.Children.map(children, (child) => {
               if (React.isValidElement(child) && child.type === TabsList) {
-```
-
-#### transition-utility (1)
-
-- **Line 42:143** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-
-  const tabsTriggerVariants = cva(
->   `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} [transition-colors] disabled:pointer-events-none disabled:opacity-50 relative`,
-    {
-      variants: {
 ```
 
 ### src/components/notifications/NotificationCenter.GroupHeader.tsx
@@ -13999,26 +13341,26 @@ _... and 3 more violations of this type_
 
 #### numeric-size (2)
 
-- **Line 26:15** - `w-full`
+- **Line 13:36** - `h-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-            "border-border",
-            orientation === "horizontal"
->             ? `[w-full] border-t ${borderStyle[variant]}`
-              : `h-full border-l ${borderStyle[variant]}`,
-            className,
+  }
+
+> // Full height token (equivalent to [h-full])
+  const FULL_HEIGHT = "h-full";
+
 ```
 
-- **Line 27:15** - `h-full`
+- **Line 14:21** - `h-full`
   - Suggestion: Use size tokens through component token system
 
 ```
-            orientation === "horizontal"
-              ? `w-full border-t ${borderStyle[variant]}`
->             : `[h-full] border-l ${borderStyle[variant]}`,
-            className,
-          )}
+
+  // Full height token (equivalent to h-full)
+> const FULL_HEIGHT = "[h-full]";
+
+  const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
 ```
 
 ### src/components/primitives/Link.tsx
@@ -15477,141 +14819,6 @@ _... and 3 more violations of this type_
 >       lg: "[text-lg] leading-relaxed tracking-normal",
       },
       weight: {
-```
-
-### src/components/ui/button.tsx
-
-**Violations:** 18
-
-#### tailwind-bg-color (11)
-
-- **Line 15:18** - `bg-primary`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: `[bg-primary] text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-```
-
-- **Line 15:91** - `bg-primary`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: `[bg-primary] text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-```
-
-- **Line 16:20** - `bg-secondary`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-        variant: {
-          primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
->         secondary: `[bg-secondary] text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-```
-
-- **Line 16:97** - `bg-secondary`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-        variant: {
-          primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
->         secondary: `[bg-secondary] text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-```
-
-- **Line 17:17** - `bg-accent`
-  - Suggestion: Use token-based CSS variables (bg-[hsl(var(--token))])
-
-```
-          primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
->         accent: `[bg-accent] text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-          ghost: "hover:bg-accent hover:text-accent-foreground",
-```
-
-_... and 6 more violations of this type_
-
-#### tailwind-text-color (6)
-
-- **Line 15:29** - `text-primary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-      variants: {
-        variant: {
->         primary: `bg-primary [text-primary]-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-```
-
-- **Line 16:33** - `text-secondary`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-        variant: {
-          primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
->         secondary: `bg-secondary [text-secondary]-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-```
-
-- **Line 17:27** - `text-accent`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-          primary: `bg-primary text-primary-foreground ${BUTTON_TOKENS.shadow.primary} hover:bg-primary/90`,
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
->         accent: `bg-accent [text-accent]-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
-          ghost: "hover:bg-accent hover:text-accent-foreground",
-```
-
-- **Line 18:106** - `text-accent`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-          secondary: `bg-secondary text-secondary-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-secondary/80`,
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
->         outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:[text-accent]-foreground`,
-          ghost: "hover:bg-accent hover:text-accent-foreground",
-          destructive: `bg-destructive text-destructive-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-destructive/90`,
-```
-
-- **Line 19:38** - `text-accent`
-  - Suggestion: Use token-based CSS variables (text-[hsl(var(--token))])
-
-```
-          accent: `bg-accent text-accent-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-accent/90`,
-          outline: `border border-input bg-background ${BUTTON_TOKENS.shadow.default} hover:bg-accent hover:text-accent-foreground`,
->         ghost: "hover:bg-accent hover:[text-accent]-foreground",
-          destructive: `bg-destructive text-destructive-foreground ${BUTTON_TOKENS.shadow.default} hover:bg-destructive/90`,
-        },
-```
-
-_... and 1 more violations of this type_
-
-#### transition-utility (1)
-
-- **Line 11:147** - `transition-colors`
-  - Suggestion: Use MOTION_TOKENS for transitions
-
-```
-
-  const buttonVariants = cva(
->   `inline-flex items-center justify-center ${BUTTON_TOKENS.gap} whitespace-nowrap ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.fontSize.md} font-medium [transition-colors] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:${BUTTON_TOKENS.iconSize} [&_svg]:shrink-0`,
-    {
-      variants: {
 ```
 
 ### src/components/ui/caption.tsx

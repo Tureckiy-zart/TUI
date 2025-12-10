@@ -1,0 +1,489 @@
+{
+  "L3_S2": "fail",
+  "L3_S3": "pass",
+  "L3_S4": "fail",
+  "L3_S5": "fail",
+  "L3_S6": "fail",
+  "L3_S7": "fail",
+  "L3_S8": "fail",
+  "L3_S9": "fail",
+  "L3_S10": "fail",
+  "L3_S11": "pass",
+  "L3_S12": "pass",
+  "issues": [
+    {
+      "stage": "L3_S2",
+      "severity": "critical",
+      "file": "src/tokens/components/domain.ts",
+      "issue": "Hardcoded Tailwind utility values instead of referencing primitives",
+      "details": [
+        {
+          "line": 147,
+          "value": "h-4 w-4",
+          "location": "metadata.icon.sizeSm",
+          "should_reference": "ICON_TOKENS.sizes.md"
+        },
+        {
+          "line": 170,
+          "value": "px-xs py-xs",
+          "location": "badges.size.sm",
+          "should_reference": "SPACING_TOKENS semanticSpacing.xs"
+        },
+        {
+          "line": 171,
+          "value": "px-sm py-xs",
+          "location": "badges.size.md",
+          "should_reference": "SPACING_TOKENS semanticSpacing.sm and xs"
+        },
+        {
+          "line": 179,
+          "value": "right-md top-md",
+          "location": "badges.position.default",
+          "should_reference": "SPACING_TOKENS semanticSpacing.md"
+        },
+        {
+          "line": 180,
+          "value": "right-sm top-sm",
+          "location": "badges.position.compact",
+          "should_reference": "SPACING_TOKENS semanticSpacing.sm"
+        },
+        {
+          "line": 260,
+          "value": "h-48",
+          "location": "skeleton.image.height",
+          "should_reference": "DATA_TOKENS.skeleton.height.card (but note: DATA_TOKENS has h-32, not h-48)"
+        },
+        {
+          "line": 275,
+          "value": "w-3/4",
+          "location": "skeleton.content.width.threeQuarters",
+          "should_reference": "Primitive width token or DATA_TOKENS equivalent"
+        },
+        {
+          "line": 276,
+          "value": "w-1/2",
+          "location": "skeleton.content.width.half",
+          "should_reference": "Primitive width token or DATA_TOKENS equivalent"
+        },
+        {
+          "line": 285,
+          "value": "w-20",
+          "location": "skeleton.badge.width",
+          "should_reference": "SPACING_TOKENS or DATA_TOKENS equivalent"
+        },
+        {
+          "line": 286,
+          "value": "h-6",
+          "location": "skeleton.badge.height",
+          "should_reference": "DATA_TOKENS.skeleton.height.text (h-4) or appropriate primitive"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S3",
+      "severity": "info",
+      "file": "src/components/cards/CardBase/CardBase.variants.ts",
+      "issue": "Minor: Uses hardcoded structural classes 'flex flex-col' and 'flex'",
+      "details": [
+        {
+          "line": 65,
+          "value": "flex flex-col",
+          "location": "cardBaseContentVariants base classes",
+          "note": "Structural layout classes may be acceptable, but consider tokenization for consistency"
+        },
+        {
+          "line": 87,
+          "value": "flex",
+          "location": "cardBaseFooterVariants base classes",
+          "note": "Structural layout class may be acceptable"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S4",
+      "severity": "high",
+      "file": "src/components/cards/EventCard/EventCard.tsx",
+      "issue": "Hardcoded spacing utilities and inline SVG instead of Icon component",
+      "details": [
+        {
+          "line": 154,
+          "value": "mb-xs",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 171,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 118,
+          "value": "Inline <svg> element",
+          "location": "Placeholder icon for missing image",
+          "should_use": "Icon component from @/components/icon/Icon"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S5",
+      "severity": "high",
+      "file": "src/components/cards/VenueCard/VenueCard.tsx",
+      "issue": "Hardcoded spacing utilities",
+      "details": [
+        {
+          "line": 154,
+          "value": "mb-xs, mb-sm",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 171,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S6",
+      "severity": "high",
+      "file": "src/components/cards/ArtistCard/ArtistCard.tsx",
+      "issue": "Hardcoded spacing utilities",
+      "details": [
+        {
+          "line": 155,
+          "value": "mb-xs, mb-sm",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 172,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 185,
+          "value": "mb-xs, mb-sm",
+          "location": "Text genres className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S7",
+      "severity": "high",
+      "file": "src/components/cards/TicketCard/TicketCard.tsx",
+      "issue": "Hardcoded spacing utilities, inline SVG, and hardcoded positioning classes",
+      "details": [
+        {
+          "line": 93,
+          "value": "top-xl",
+          "location": "getVipBadgePosition helper function",
+          "should_use": "DOMAIN_TOKENS.badges.position or spacing token"
+        },
+        {
+          "line": 94,
+          "value": "top-2xl",
+          "location": "getVipBadgePosition helper function",
+          "should_use": "DOMAIN_TOKENS.badges.position or spacing token"
+        },
+        {
+          "line": 101,
+          "value": "top-2xl",
+          "location": "getDiscountBadgePosition helper function",
+          "should_use": "DOMAIN_TOKENS.badges.position or spacing token"
+        },
+        {
+          "line": 102,
+          "value": "top-3xl",
+          "location": "getDiscountBadgePosition helper function",
+          "should_use": "DOMAIN_TOKENS.badges.position or spacing token"
+        },
+        {
+          "line": 208,
+          "value": "mb-xs",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 225,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 172,
+          "value": "Inline <svg> element",
+          "location": "Placeholder icon for missing image",
+          "should_use": "Icon component from @/components/icon/Icon"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S8",
+      "severity": "high",
+      "file": "src/components/cards/PromoCard/PromoCard.tsx",
+      "issue": "Hardcoded spacing utilities and inline SVG",
+      "details": [
+        {
+          "line": 147,
+          "value": "mb-xs",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 164,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 111,
+          "value": "Inline <svg> element",
+          "location": "Placeholder icon for missing image",
+          "should_use": "Icon component from @/components/icon/Icon"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S9",
+      "severity": "high",
+      "file": "src/components/cards/CategoryCard/CategoryCard.tsx",
+      "issue": "Hardcoded spacing utilities and inline SVG",
+      "details": [
+        {
+          "line": 139,
+          "value": "mb-xs",
+          "location": "Heading className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 156,
+          "value": "mb-xs, mb-sm",
+          "location": "Text description className conditional spacing",
+          "should_use": "DOMAIN_TOKENS.layout or spacing token"
+        },
+        {
+          "line": 103,
+          "value": "Inline <svg> element",
+          "location": "Placeholder icon for missing image",
+          "should_use": "Icon component from @/components/icon/Icon"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S10",
+      "severity": "critical",
+      "file": "src/tokens/components/domain.ts",
+      "issue": "DOMAIN_TOKENS.skeleton contains hardcoded values that should reference primitives",
+      "details": [
+        {
+          "line": 260,
+          "value": "h-48",
+          "location": "skeleton.image.height",
+          "note": "DOMAIN_TOKENS references DATA_TOKENS.skeleton.height.card but DATA_TOKENS has h-32, not h-48. Mismatch or incorrect reference."
+        },
+        {
+          "line": 275,
+          "value": "w-3/4",
+          "location": "skeleton.content.width.threeQuarters",
+          "should_reference": "Primitive width token"
+        },
+        {
+          "line": 276,
+          "value": "w-1/2",
+          "location": "skeleton.content.width.half",
+          "should_reference": "Primitive width token"
+        },
+        {
+          "line": 285,
+          "value": "w-20",
+          "location": "skeleton.badge.width",
+          "should_reference": "SPACING_TOKENS or DATA_TOKENS equivalent"
+        },
+        {
+          "line": 286,
+          "value": "h-6",
+          "location": "skeleton.badge.height",
+          "note": "Comment says it maps to DATA_TOKENS.skeleton.height.text (h-4) but value is h-6. Mismatch."
+        }
+      ]
+    }
+  ],
+  "recommended_fixes": [
+    {
+      "stage": "L3_S2",
+      "priority": "critical",
+      "fixes": [
+        {
+          "action": "Replace hardcoded Tailwind utilities with primitive token references",
+          "file": "src/tokens/components/domain.ts",
+          "changes": [
+            "Replace metadata.icon.sizeSm 'h-4 w-4' with ICON_TOKENS.sizes.md reference",
+            "Replace badges.size values with SPACING_TOKENS references",
+            "Replace badges.position values with SPACING_TOKENS references",
+            "Fix skeleton.image.height: either change to h-32 to match DATA_TOKENS or update DATA_TOKENS",
+            "Replace skeleton.content.width values with primitive width tokens",
+            "Replace skeleton.badge dimensions with appropriate token references",
+            "Fix skeleton.badge.height mismatch: h-6 vs comment saying h-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S3",
+      "priority": "low",
+      "fixes": [
+        {
+          "action": "Consider tokenizing structural layout classes for consistency",
+          "file": "src/components/cards/CardBase/CardBase.variants.ts",
+          "note": "This is optional - structural classes like 'flex' may be acceptable as-is"
+        }
+      ]
+    },
+    {
+      "stage": "L3_S4",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing with DOMAIN_TOKENS",
+          "file": "src/components/cards/EventCard/EventCard.tsx",
+          "changes": [
+            "Create spacing token variants in EventCard.variants.ts for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 154, 171) with token-based variants",
+            "Replace inline <svg> placeholder (line 118) with Icon component"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S5",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing with DOMAIN_TOKENS",
+          "file": "src/components/cards/VenueCard/VenueCard.tsx",
+          "changes": [
+            "Create spacing token variants in VenueCard.variants.ts for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 154, 171) with token-based variants"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S6",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing with DOMAIN_TOKENS",
+          "file": "src/components/cards/ArtistCard/ArtistCard.tsx",
+          "changes": [
+            "Create spacing token variants in ArtistCard.variants.ts for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 155, 172, 185) with token-based variants"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S7",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing, positioning, and inline SVG",
+          "file": "src/components/cards/TicketCard/TicketCard.tsx",
+          "changes": [
+            "Add badge positioning tokens to DOMAIN_TOKENS.badges.position for multi-badge scenarios (top-xl, top-2xl, top-3xl)",
+            "Replace hardcoded top-* classes in getVipBadgePosition and getDiscountBadgePosition helpers",
+            "Create spacing token variants for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 208, 225) with token-based variants",
+            "Replace inline <svg> placeholder (line 172) with Icon component"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S8",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing and inline SVG",
+          "file": "src/components/cards/PromoCard/PromoCard.tsx",
+          "changes": [
+            "Create spacing token variants in PromoCard.variants.ts for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 147, 164) with token-based variants",
+            "Replace inline <svg> placeholder (line 111) with Icon component"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S9",
+      "priority": "high",
+      "fixes": [
+        {
+          "action": "Replace hardcoded spacing and inline SVG",
+          "file": "src/components/cards/CategoryCard/CategoryCard.tsx",
+          "changes": [
+            "Create spacing token variants in CategoryCard.variants.ts for mb-xs/mb-sm patterns",
+            "Replace inline conditional spacing (lines 139, 156) with token-based variants",
+            "Replace inline <svg> placeholder (line 103) with Icon component"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "L3_S10",
+      "priority": "critical",
+      "fixes": [
+        {
+          "action": "Fix DOMAIN_TOKENS.skeleton hardcoded values",
+          "file": "src/tokens/components/domain.ts",
+          "changes": [
+            "Resolve skeleton.image.height mismatch: h-48 vs DATA_TOKENS.skeleton.height.card (h-32)",
+            "Create or reference primitive width tokens for skeleton.content.width values",
+            "Fix skeleton.badge.height: h-6 vs comment reference to h-4",
+            "Ensure all skeleton values properly reference primitives or DATA_TOKENS"
+          ]
+        }
+      ]
+    }
+  ],
+  "validation_summary": {
+    "total_stages": 11,
+    "passed": 3,
+    "failed": 8,
+    "pass_rate": "27.3%",
+    "critical_issues": 2,
+    "high_priority_issues": 6,
+    "low_priority_issues": 1
+  },
+  "build_status": {
+    "typescript": "pass",
+    "lint": "pass",
+    "storybook_build": "pass",
+    "all_stories_exist": true,
+    "no_hardcoded_utilities_in_stories": true
+  },
+  "file_structure": {
+    "all_required_files_exist": true,
+    "cardbase_structure": "complete",
+    "eventcard_structure": "complete",
+    "venuecard_structure": "complete",
+    "artistcard_structure": "complete",
+    "ticketcard_structure": "complete",
+    "promocard_structure": "complete",
+    "categorycard_structure": "complete",
+    "skeleton_files": "complete"
+  },
+  "token_usage": {
+    "cardbase_uses_domain_tokens": true,
+    "cardbase_uses_motion_tokens": true,
+    "all_cards_use_cardbase": true,
+    "all_cards_use_domain_tokens": true,
+    "hardcoded_spacing_found": true,
+    "hardcoded_positioning_found": true,
+    "inline_svgs_found": true
+  }
+}
