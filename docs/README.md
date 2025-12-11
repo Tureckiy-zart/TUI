@@ -1,6 +1,6 @@
 # 📚 Tenerife UI Documentation
 
-**Last Updated:** 2025-11-20  
+**Last Updated:** 2025-11-25  
 **Purpose:** Central documentation hub for the Tenerife UI component library
 
 ---
@@ -11,16 +11,103 @@ This directory contains all project documentation organized into logical section
 
 ```
 docs/
-├── tenerife_audit/          # Design system and audit documentation
-├── structure/               # Architecture and structure documentation
-├── reports/                 # Audit reports and changelog
-├── tasks/                   # Task management and indexes
+├── guides/                  # User guides and tutorials
+├── reference/               # API reference and technical documentation
+├── reports/                 # Current and historical reports
+│   └── current/            # Active and recent reports
+├── archive/                 # Archived documentation
+│   └── reports/            # Historical reports by category
+├── migration/               # Migration guides and documentation
+├── tenerife_audit/         # Design system and audit documentation
+├── structure/              # Architecture and structure documentation
+├── tasks/                  # Task management and indexes
+├── reviews/                # Code review documentation
+├── review/                 # Review documentation
+├── core/                   # Core context documentation
+├── ui/                     # UI-specific documentation
+├── PROJECT_PROGRESS.md     # Project progress tracker
 └── README.md               # This file
 ```
 
 ---
 
 ## 📂 Directory Overview
+
+### `/guides`
+
+User guides, tutorials, and best practices:
+
+- `GETTING_STARTED.md` - Getting started guide
+- `QUICK_START.md` - Quick start tutorial
+- `INSTALLATION.md` - Installation instructions
+- `USAGE.md` - Usage guide
+- `THEME_GUIDE.md` - Theme system guide
+- `TOKENS_GUIDE.md` - Design tokens guide
+- `COMPONENT_EXAMPLES.md` - Component usage examples
+- `ANIMATION_GUIDELINES.md` - Animation guidelines
+- `a11y_guidelines.md` - Accessibility guidelines
+- `TUI_TESTING_GUIDE.md` - Testing guide
+- `GRID.md` - Grid system documentation
+- `props-guidelines.md` - Props guidelines
+
+**Status:** ✅ All guides organized and up to date.
+
+---
+
+### `/reference`
+
+API reference and technical documentation:
+
+- `public-api.md` - Complete public API reference
+- `UI_INTEGRATION.md` - UI integration guide
+- `UI_COMPONENTS_INVENTORY.md` - Components inventory
+- `design_tokens_export.md` - Design tokens export documentation
+- `token-map-overview.md` - Token mapping overview
+
+**Status:** ✅ Reference documentation organized.
+
+---
+
+### `/reports`
+
+Audit reports, changelog, and project reports:
+
+- `current/` - Active and recent reports
+  - `TUI_200_DOCS_V3_*.md` - Documentation v3 audit reports
+  - `D6_ADAPTER_LAYER_COMPLETE_REPORT.md` - Adapter layer report
+- Historical reports (various audit and completion reports)
+
+**Status:** ✅ Reports organized with current reports in `current/` subdirectory.
+
+---
+
+### `/archive/reports`
+
+Archived historical reports organized by category:
+
+- `foundation/` - Foundation Layer reports (F0-F9, L0)
+- `layer1/` - Layer 1 reports (L1)
+- `layer2/` - Layer 2 reports (L2)
+- `layer3/` - Layer 3 reports (L3)
+- `tasks/` - Task completion reports (U0-U13)
+- `other/` - Other historical reports (code reviews, audits, etc.)
+
+**Status:** ✅ Historical reports archived and organized.
+
+---
+
+### `/migration`
+
+Migration guides and refactoring documentation:
+
+- `route-decoupling.md` - Route decoupling migration guide
+- `i18n-removal.md` - I18n removal migration guide
+- `domain-decoupling-report.md` - Domain decoupling report
+- `EVENTCARD_EVENT_TO_PROPS_MIGRATION.md` - EventCard migration guide
+
+**Status:** ✅ Migration documentation organized.
+
+---
 
 ### `/tenerife_audit`
 
@@ -44,21 +131,9 @@ Design system specifications and audit documentation:
 Architecture and structural documentation:
 
 - `STRUCTURE_OF_WORK.md` - Complete architecture and work sequence guide
+- `TYPING_STANDARD.md` - Typing standards
 
-**Status:** ✅ File exists and is up to date.
-
----
-
-### `/reports`
-
-Audit reports, changelog, and project reports:
-
-- `PROJECT_AUDIT_REPORT.md` - Complete project audit report
-- `PATH_RESOLUTION_REPORT.md` - Path resolution audit report
-- `AUDIT_REPORT.md` - Component audit report (created by task U0)
-- `CHANGELOG.md` - Version history and changelog
-
-**Status:** ✅ Files exist (except AUDIT_REPORT.md which will be created by task U0).
+**Status:** ✅ Files exist and are up to date.
 
 ---
 
@@ -72,20 +147,70 @@ Task management and navigation:
 
 ---
 
+### `/reviews` and `/review`
+
+Code review documentation:
+
+- `reviews/` - Code review reports
+- `review/` - Review documentation and plans
+
+**Status:** ✅ Review documentation organized.
+
+---
+
+### `/core`
+
+Core context documentation:
+
+- `TENERIFEUI_CORECONTEXT_GPT.md` - Core context for GPT
+- `TENERIFEUI_CORECONTEXT_v1.0.md` - Core context v1.0
+
+**Status:** ✅ Core documentation available.
+
+---
+
 ## 🔗 Quick Links
+
+### Getting Started
+
+- [Getting Started Guide](guides/GETTING_STARTED.md) - Start here for new users
+- [Quick Start](guides/QUICK_START.md) - Quick start tutorial
+- [Installation Guide](guides/INSTALLATION.md) - Installation instructions
+- [Usage Guide](guides/USAGE.md) - How to use the library
 
 ### Essential Documentation
 
 - [Master Task Index](tasks/master_task_index.md) - Complete task reference
 - [Structure of Work](structure/STRUCTURE_OF_WORK.md) - Architecture guide
-- [Project Progress](../PROJECT_PROGRESS.md) - Task completion tracking
-- [Publishing Guide](PUBLISHING.md) - npm publishing instructions
+- [Project Progress](PROJECT_PROGRESS.md) - Task completion tracking
+
+### Guides
+
+- [Theme Guide](guides/THEME_GUIDE.md) - Theme system documentation
+- [Tokens Guide](guides/TOKENS_GUIDE.md) - Design tokens guide
+- [Component Examples](guides/COMPONENT_EXAMPLES.md) - Component usage examples
+- [Animation Guidelines](guides/ANIMATION_GUIDELINES.md) - Animation best practices
+- [Accessibility Guidelines](guides/a11y_guidelines.md) - A11y best practices
+- [Testing Guide](guides/TUI_TESTING_GUIDE.md) - Testing documentation
+
+### Reference
+
+- [Public API Reference](reference/public-api.md) - Complete API documentation
+- [UI Integration Guide](reference/UI_INTEGRATION.md) - Integration guide
+- [Components Inventory](reference/UI_COMPONENTS_INVENTORY.md) - Components list
 
 ### Reports
 
+- [Current Reports](reports/current/) - Active and recent reports
 - [Project Audit Report](reports/PROJECT_AUDIT_REPORT.md)
 - [Path Resolution Report](reports/PATH_RESOLUTION_REPORT.md)
 - [Changelog](reports/CHANGELOG.md)
+
+### Migration
+
+- [Route Decoupling](migration/route-decoupling.md) - Route decoupling guide
+- [I18n Removal](migration/i18n-removal.md) - I18n removal guide
+- [Domain Decoupling](migration/domain-decoupling-report.md) - Domain decoupling report
 
 ### Redirects
 
@@ -127,11 +252,17 @@ The following critical documentation files are missing and must be created or ob
 
 ### Where Files Belong
 
+- **User guides and tutorials** → `guides/`
+- **API reference and technical docs** → `reference/`
+- **Current reports** → `reports/current/`
+- **Historical reports** → `archive/reports/`
+- **Migration guides** → `migration/`
 - **Design specifications** → `tenerife_audit/`
 - **Architecture docs** → `structure/`
-- **Reports and changelogs** → `reports/`
 - **Task indexes** → `tasks/`
-- **Root-level guides** → `docs/` (root)
+- **Code reviews** → `reviews/` or `review/`
+- **Core context** → `core/`
+- **UI-specific docs** → `ui/`
 
 ### Naming Conventions
 
@@ -218,6 +349,6 @@ For questions about documentation:
 
 ---
 
-**Last Updated:** 2025-11-20  
-**Documentation Version:** 1.0  
+**Last Updated:** 2025-12-11  
+**Documentation Version:** 2.0  
 **Master Task Version:** 3.0

@@ -1,21 +1,21 @@
-# ⚡ Быстрый старт Tenerife UI
+# ⚡ Quick Start Tenerife UI
 
-Начните работу с Tenerife UI за 30 секунд.
+Get started with Tenerife UI in 30 seconds.
 
 ---
 
-## Установка (30 секунд)
+## Installation (30 seconds)
 
-### 1. Установите библиотеку
+### 1. Install the library
 
 ```bash
 npm install @tenerife.music/ui
 npm install -D tailwindcss postcss autoprefixer
 ```
 
-### 2. Подключите Tailwind preset
+### 2. Connect Tailwind preset
 
-Создайте `tailwind.config.ts`:
+Create `tailwind.config.ts`:
 
 ```typescript
 import type { Config } from "tailwindcss";
@@ -32,15 +32,15 @@ const config: Config = {
 export default config;
 ```
 
-### 3. Подключите стили
+### 3. Import styles
 
-В корневом файле вашего приложения (например, `src/main.tsx` или `app/layout.tsx`):
+In your application's root file (e.g., `src/main.tsx` or `app/layout.tsx`):
 
 ```typescript
 import "@tenerife.music/ui/styles";
 ```
 
-### 4. Используйте ThemeProvider
+### 4. Use ThemeProvider
 
 ```tsx
 import { ThemeProvider, Button } from "@tenerife.music/ui";
@@ -48,19 +48,19 @@ import { ThemeProvider, Button } from "@tenerife.music/ui";
 function App() {
   return (
     <ThemeProvider defaultMode="night">
-      <Button>Нажми меня</Button>
+      <Button>Click me</Button>
     </ThemeProvider>
   );
 }
 ```
 
-**Готово!** 🎉
+**Done!** 🎉
 
 ---
 
-## Первый компонент
+## First Component
 
-Минимальный пример использования Button:
+Minimal example using Button:
 
 ```tsx
 import { ThemeProvider, Button } from "@tenerife.music/ui";
@@ -80,9 +80,9 @@ export default function App() {
 
 ---
 
-## Первое использование темы
+## First Theme Usage
 
-Пример переключения режима:
+Example of mode switching:
 
 ```tsx
 import { ThemeProvider, useTheme, Button } from "@tenerife.music/ui";
@@ -92,7 +92,7 @@ function ThemeToggle() {
 
   return (
     <Button onClick={toggleMode} variant="outline">
-      {mode === "night" ? "☀️ День" : "🌙 Ночь"}
+      {mode === "night" ? "☀️ Day" : "🌙 Night"}
     </Button>
   );
 }
@@ -102,7 +102,7 @@ export default function App() {
     <ThemeProvider defaultMode="night" enableSystem={true}>
       <div className="container mx-auto p-4">
         <ThemeToggle />
-        <h1 className="text-4xl font-bold">Добро пожаловать!</h1>
+        <h1 className="text-4xl font-bold">Welcome!</h1>
       </div>
     </ThemeProvider>
   );
@@ -111,9 +111,9 @@ export default function App() {
 
 ---
 
-## Полный пример приложения
+## Complete Application Example
 
-Минимальное работающее приложение:
+Minimal working application:
 
 ```tsx
 import {
@@ -131,7 +131,7 @@ function ThemeToggle() {
 
   return (
     <Button onClick={toggleMode} variant="outline">
-      {mode === "night" ? "☀️ День" : "🌙 Ночь"}
+      {mode === "night" ? "☀️ Day" : "🌙 Night"}
     </Button>
   );
 }
@@ -146,11 +146,11 @@ export default function App() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Добро пожаловать в Tenerife UI</CardTitle>
+            <CardTitle>Welcome to Tenerife UI</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">
-              Это ваш первый компонент из библиотеки Tenerife UI.
+              This is your first component from the Tenerife UI library.
             </p>
             <div className="flex gap-2">
               <Button variant="default">Primary</Button>
@@ -167,7 +167,7 @@ export default function App() {
 
 ---
 
-## Для разных фреймворков
+## For Different Frameworks
 
 ### Next.js (App Router)
 
@@ -238,17 +238,18 @@ export default App;
 
 ---
 
-## Следующие шаги
+## Next Steps
 
-Теперь, когда вы освоили основы:
+Now that you've mastered the basics:
 
-- [Полная инструкция по установке](./INSTALLATION.md) - Подробные инструкции для всех фреймворков
-- [Руководство по использованию](./USAGE.md) - Полные примеры использования всех компонентов
-- [Руководство по токенам](./TOKENS_GUIDE.md) - Работа с дизайн-токенами
-- [Руководство по темам](./THEME_GUIDE.md) - Настройка и кастомизация тем
-- [Примеры компонентов](./COMPONENT_EXAMPLES.md) - Примеры использования всех компонентов
+- **[Complete Guide](./GETTING_STARTED.md)** — comprehensive guide for installation, setup, and usage of the library
+- [Full Installation Guide](./INSTALLATION.md) — detailed instructions for all frameworks
+- [Usage Guide](./USAGE.md) — complete examples of using all components
+- [Tokens Guide](./TOKENS_GUIDE.md) — working with design tokens
+- [Theme Guide](./THEME_GUIDE.md) — theme setup and customization
+- [Component Examples](./COMPONENT_EXAMPLES.md) — examples of using all components
 
 ---
 
-**Версия документа:** 1.0  
-**Последнее обновление:** 2024-12-19
+**Document Version:** 1.0  
+**Last Updated:** 2024-12-19
