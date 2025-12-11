@@ -603,7 +603,7 @@ const buttonStyle = {
 ### Использование в Tailwind
 
 ```tsx
-<button className="rounded-md bg-primary px-6 py-4 text-primary-foreground shadow-md transition-all duration-normal ease-out hover:bg-primary/90 hover:shadow-lg">
+<button className="bg-primary text-primary-foreground duration-normal hover:bg-primary/90 rounded-md px-6 py-4 shadow-md transition-all ease-out hover:shadow-lg">
   Button
 </button>
 ```
@@ -667,4 +667,4 @@ const shadowValue: ElevationShadow = "lg"; // ✅
 ---
 
 **Версия документа:** 1.0  
-**Последнее обновление:** 2024-12-19
+**Последнее обновление:** 2025-12-11

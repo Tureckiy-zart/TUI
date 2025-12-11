@@ -48,3 +48,5 @@ export interface ArtistCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Animation configuration for entrance and hover animations */
   animation?: ComponentAnimationConfig;
 }
+
+

@@ -48,3 +48,5 @@ export interface VenueCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Animation configuration for entrance and hover animations */
   animation?: ComponentAnimationConfig;
 }
+
+

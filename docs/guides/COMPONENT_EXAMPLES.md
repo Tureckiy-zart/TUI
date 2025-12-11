@@ -154,7 +154,7 @@ function InputWithError() {
         placeholder="example@email.com"
         className="border-destructive"
       />
-      <p className="text-sm text-destructive">Invalid email address</p>
+      <p className="text-destructive text-sm">Invalid email address</p>
     </div>
   );
 }
@@ -208,21 +208,19 @@ function CardExample() {
 import { EventCard } from "@tenerife.music/ui";
 
 function EventCardExample() {
-  const event = {
-    name: { en: "Summer Festival" },
-    start_date: "2024-07-15",
-    venue_id: { name: { en: "Beach Club" } },
-    price: "€25 - €50",
-    image: "/event-image.jpg",
-  };
-
   return (
     <EventCard
-      event={event}
+      title="Summer Music Festival"
+      description="A fantastic music festival with top artists"
+      date="July 15, 2024 at 7:00 PM"
+      venueName="Beach Club"
+      price="€25 - €50"
+      imageUrl="/event-image.jpg"
+      href="/events/summer-festival"
       featured={true}
       showImage={true}
       getTicketsLabel="Get Tickets"
-      trendingBadgeText="Trending"
+      featuredBadgeText="Featured"
     />
   );
 }
@@ -230,97 +228,104 @@ function EventCardExample() {
 
 **Props EventCard:**
 
-- `event`: `EventCardEvent` - Объект события
-- `featured`: `boolean` - Отображать как featured
-- `showImage`: `boolean` - Показывать изображение
-- `getTicketsLabel`: `string` - Текст кнопки
-- `trendingBadgeText`: `string` - Текст бейджа
+- `title`: `string` - Название события (обязательно, pre-localized)
+- `description`: `string` - Описание события (опционально, pre-localized)
+- `date`: `string` - Дата и время (опционально, pre-formatted)
+- `venueName`: `string` - Название места проведения (опционально, pre-localized)
+- `price`: `string` - Цена с валютой (опционально, pre-formatted, например "€25 - €50")
+- `imageUrl`: `string` - URL изображения (опционально)
+- `href`: `string` - Ссылка на страницу события (опционально)
+- `ticketUrl`: `string` - Ссылка на покупку билетов (опционально)
+- `featured`: `boolean` - Отображать как featured (опционально, по умолчанию false)
+- `showImage`: `boolean` - Показывать изображение (опционально, по умолчанию true)
+- `getTicketsLabel`: `string` - Текст кнопки "Get Tickets" (обязательно)
+- `featuredBadgeText`: `string` - Текст бейджа для featured событий (опционально)
+- `size`: `"default" | "compact"` - Размер карточки (опционально)
+- `variant`: `"default" | "featured"` - Вариант стиля (опционально)
 
 ---
 
 ## Modal (Модальное окно)
 
-### SimpleModal
+### Modal
 
 ```tsx
-import { SimpleModal, Button } from "@tenerife.music/ui";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "@tenerife.music/ui";
 import { useState } from "react";
 
-function SimpleModalExample() {
+function ModalExample() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-      <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
-        <p>Modal content goes here</p>
-        <Button onClick={() => setIsOpen(false)}>Close</Button>
-      </SimpleModal>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} size="md">
+        <ModalHeader>
+          <h2>Modal Title</h2>
+        </ModalHeader>
+        <ModalBody>
+          <p>Modal content goes here</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button variant="outline" onClick={() => setIsOpen(false)}>
+            Close
+          </Button>
+          <Button onClick={() => setIsOpen(false)}>Confirm</Button>
+        </ModalFooter>
+      </Modal>
     </>
   );
 }
 ```
 
-### CustomDialog (Radix UI Dialog)
+### Dialog (Radix UI Dialog)
 
 ```tsx
-import { CustomDialog, Button } from "@tenerife.music/ui";
 import {
+  DialogRoot,
   DialogTrigger,
-  DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
+  DialogBody,
+  DialogFooter,
+  Button,
 } from "@tenerife.music/ui";
 
-function CustomDialogExample() {
+function DialogExample() {
   return (
-    <CustomDialog>
+    <DialogRoot>
       <DialogTrigger asChild>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
+      <Dialog>
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
-          <DialogDescription>Dialog description</DialogDescription>
         </DialogHeader>
-        <p>Dialog content goes here</p>
-      </DialogContent>
-    </CustomDialog>
+        <DialogBody>
+          <p>Dialog content goes here</p>
+        </DialogBody>
+        <DialogFooter>
+          <Button variant="outline">Cancel</Button>
+          <Button>Confirm</Button>
+        </DialogFooter>
+      </Dialog>
+    </DialogRoot>
   );
 }
 ```
 
-**Props SimpleModal:**
+**Props Modal:**
 
-- `isOpen`: `boolean` - Открыто ли модальное окно
+- `open`: `boolean` - Открыто ли модальное окно
 - `onClose`: `() => void` - Функция закрытия
-- `title`: `string` - Заголовок (опционально)
-- `children`: `React.ReactNode` - Содержимое
+- `size`: `"sm" | "md" | "lg" | "fullscreen"` - Размер модального окна
+- `backdropVariant`: `"default" | "blurred" | "transparent"` - Вариант фона
+- `closeOnBackdropClick`: `boolean` - Закрывать при клике на фон
+- `closeOnEscape`: `boolean` - Закрывать при нажатии Escape
 
 ---
 
 ## Layout компоненты
-
-### Container
-
-```tsx
-import { Container } from "@tenerife.music/ui";
-
-function ContainerExample() {
-  return (
-    <Container size="xl" padding="lg">
-      <h1>Container Content</h1>
-      <p>This content is constrained to a maximum width</p>
-    </Container>
-  );
-}
-```
-
-**Props:**
-
-- `size`: `"sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "full"`
-- `padding`: `"none" | "sm" | "md" | "lg" | "xl"`
 
 ### Section
 
@@ -392,36 +397,23 @@ function FlexExample() {
 
 ## Skeleton (Загрузка)
 
-### EventCardSkeleton
+### Skeleton для карточек событий
 
 ```tsx
-import { EventCardSkeleton } from "@tenerife.music/ui";
+import { Skeleton, Grid } from "@tenerife.music/ui";
 
 function EventCardSkeletonExample() {
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <EventCardSkeleton />
-      <EventCardSkeleton />
-      <EventCardSkeleton />
-    </div>
+    <Grid cols={1} md={2} lg={3} gap={4}>
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-64 w-full" />
+    </Grid>
   );
 }
 ```
 
-### VenueCardSkeleton
-
-```tsx
-import { VenueCardSkeleton } from "@tenerife.music/ui";
-
-function VenueCardSkeletonExample() {
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      <VenueCardSkeleton />
-      <VenueCardSkeleton />
-    </div>
-  );
-}
-```
+> **Примечание:** Специализированные компоненты `EventCardSkeleton` и `VenueCardSkeleton` существуют в кодовой базе, но в настоящее время не экспортируются из основного пакета. Используйте базовый компонент `Skeleton` с соответствующими классами для создания скелетонов карточек.
 
 ### Базовый Skeleton
 
@@ -522,7 +514,7 @@ function CardWithModal() {
 ### Список событий с скелетонами
 
 ```tsx
-import { EventCard, EventCardSkeleton, Container, Section } from "@tenerife.music/ui";
+import { EventCard, Section, Grid } from "@tenerife.music/ui";
 import { useState, useEffect } from "react";
 
 function EventList() {
@@ -533,39 +525,48 @@ function EventList() {
     // Загрузка данных
     setTimeout(() => {
       setEvents([
-        { name: { en: "Event 1" }, start_date: "2024-07-15", price: "€25" },
-        { name: { en: "Event 2" }, start_date: "2024-07-20", price: "€30" },
+        {
+          title: "Event 1",
+          date: "July 15, 2024 at 7:00 PM",
+          price: "€25",
+          getTicketsLabel: "Get Tickets",
+        },
+        {
+          title: "Event 2",
+          date: "July 20, 2024 at 8:00 PM",
+          price: "€30",
+          getTicketsLabel: "Get Tickets",
+        },
       ]);
       setLoading(false);
     }, 2000);
   }, []);
 
   return (
-    <Container>
-      <Section>
-        <h2 className="mb-8 text-3xl font-bold">Events</h2>
-        <div className="grid grid-cols-3 gap-6">
-          {loading ? (
-            <>
-              <EventCardSkeleton />
-              <EventCardSkeleton />
-              <EventCardSkeleton />
-            </>
-          ) : (
-            events.map((event, index) => (
-              <EventCard
-                key={index}
-                event={event}
-                featured={index === 0}
-                showImage={true}
-                getTicketsLabel="Get Tickets"
-                trendingBadgeText="Trending"
-              />
-            ))
-          )}
-        </div>
-      </Section>
-    </Container>
+    <Section>
+      <h2 className="mb-8 text-3xl font-bold">Events</h2>
+      <Grid cols={1} md={2} lg={3} gap={6}>
+        {loading ? (
+          <>
+            <Skeleton className="h-64 w-full" />
+            <Skeleton className="h-64 w-full" />
+            <Skeleton className="h-64 w-full" />
+          </>
+        ) : (
+          events.map((event, index) => (
+            <EventCard
+              key={index}
+              title={event.title}
+              date={event.date}
+              price={event.price}
+              featured={index === 0}
+              showImage={true}
+              getTicketsLabel={event.getTicketsLabel}
+            />
+          ))
+        )}
+      </Grid>
+    </Section>
   );
 }
 ```
@@ -577,7 +578,6 @@ function EventList() {
 ```tsx
 import {
   ThemeProvider,
-  Container,
   Section,
   Grid,
   Card,
@@ -592,8 +592,7 @@ import {
 function ExamplePage() {
   return (
     <ThemeProvider defaultMode="night" enableSystem={true}>
-      <Container>
-        <Section padding="xl">
+      <Section>
           <h1 className="mb-8 text-5xl font-bold">Welcome to Tenerife UI</h1>
 
           <Grid cols={3} gap={6}>
@@ -640,7 +639,7 @@ function ExamplePage() {
             </div>
           </Section>
         </Section>
-      </Container>
+      </Section>
     </ThemeProvider>
   );
 }
@@ -650,7 +649,11 @@ function ExamplePage() {
 
 ## Premium Layout Sections (Премиум секции макета)
 
+> **Примечание:** Компоненты `HeroSection`, `FeatureSection` и `CTASection` существуют в кодовой базе, но в настоящее время не экспортируются из основного пакета `@tenerife.music/ui`. Они могут быть доступны в будущих версиях или через другие entry points.
+
 ### HeroSection (Герой-секция)
+
+> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
 
 Герой-секция для главных заголовков страниц с поддержкой различных вариантов макета.
 
@@ -733,7 +736,7 @@ function HeroWithMedia() {
       description="Используйте наши компоненты для быстрой разработки"
       actions={<Button variant="primary">Начать</Button>}
       media={
-        <div className="flex aspect-video items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
+        <div className="from-primary/20 to-accent/20 flex aspect-video items-center justify-center rounded-lg bg-gradient-to-br">
           <span className="text-4xl">🎨</span>
         </div>
       }
@@ -755,6 +758,8 @@ function HeroWithMedia() {
 ---
 
 ### FeatureSection (Секция функций)
+
+> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
 
 Секция для отображения функций в адаптивной сетке.
 
@@ -867,6 +872,8 @@ function FeatureWithIcons() {
 ---
 
 ### CTASection (Секция призыва к действию)
+
+> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
 
 Секция для призыва к действию с гибкими кнопками действий.
 
@@ -1010,8 +1017,16 @@ function CTAPrimaryOnly() {
 - [Руководство по использованию](./USAGE.md) - Полное руководство по использованию
 - [Руководство по токенам](./TOKENS_GUIDE.md) - Работа с токенами
 - [Руководство по темам](./THEME_GUIDE.md) - Настройка тем
+- [Typography Guide](./TYPOGRAPHY_GUIDE.md) - Компоненты типографики
+- [Icon Guide](./ICON_GUIDE.md) - Система иконок
+- [Menu System Guide](./MENU_SYSTEM_GUIDE.md) - Система меню
+- [NotificationCenter Guide](./NOTIFICATION_CENTER_GUIDE.md) - Система уведомлений
+- [DataList Guide](./DATALIST_GUIDE.md) - Компонент DataList
+- [Layout Primitives Guide](./LAYOUT_PRIMITIVES_GUIDE.md) - Layout компоненты
+- [Navigation Components Guide](./NAVIGATION_COMPONENTS_GUIDE.md) - Навигационные компоненты
+- [Field Guide](./FIELD_GUIDE.md) - Компонент Field для форм
 
 ---
 
 **Версия документа:** 1.1  
-**Последнее обновление:** 2025-01-20
+**Последнее обновление:** 2025-12-11

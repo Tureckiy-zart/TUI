@@ -18,3 +18,5 @@ export {
   artistCardMetadataVariants,
   artistCardVariants,
 } from "./ArtistCard.variants";
+
+

@@ -19,28 +19,26 @@ import { Button, Input, Card, Modal } from "@tenerife.music/ui";
 import { Button, Input, Label, Badge, Link } from "@tenerife.music/ui";
 
 // Layout компоненты
-import { Container, Section, Grid, Flex, Stack } from "@tenerife.music/ui";
-
-// Section компоненты (премиум секции)
-import {
-  HeroSection,
-  FeatureSection,
-  CTASection,
-  ArticlesSection,
-  TrendingSection,
-} from "@tenerife.music/ui";
+import { Section, Grid, Flex, Stack, Box, Column, Row } from "@tenerife.music/ui";
 
 // Modal компоненты
-import { Modal, SimpleModal, CustomDialog, ConfirmDialog } from "@tenerife.music/ui";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Dialog, DialogRoot } from "@tenerife.music/ui";
 
 // Card компоненты
-import { Card, EventCard, VenueCard } from "@tenerife.music/ui";
+import { Card, CardHeader, CardTitle, CardContent, EventCard } from "@tenerife.music/ui";
 
 // Form компоненты
-import { FormInput, FormSelect, FormTextarea } from "@tenerife.music/ui";
+import {
+  Input,
+  SelectRoot,
+  SelectTrigger,
+  SelectListbox,
+  SelectOption,
+  Textarea,
+} from "@tenerife.music/ui";
 
-// Filter компоненты
-import { SearchInput, FilterBar, DateRangePicker } from "@tenerife.music/ui";
+// Filter компоненты (если доступны)
+// Примечание: Некоторые компоненты фильтров могут быть доступны через другие entry points
 
 // Feedback компоненты
 import { Alert, Progress, Skeleton } from "@tenerife.music/ui";
@@ -488,10 +486,18 @@ const buttonProps: ButtonProps = {
 
 - [Руководство по токенам](./TOKENS_GUIDE.md) - Подробное описание всех токенов
 - [Руководство по темам](./THEME_GUIDE.md) - Настройка и кастомизация тем
+- [Typography Guide](./TYPOGRAPHY_GUIDE.md) - Компоненты типографики
+- [Icon Guide](./ICON_GUIDE.md) - Система иконок
+- [Menu System Guide](./MENU_SYSTEM_GUIDE.md) - Система меню
+- [NotificationCenter Guide](./NOTIFICATION_CENTER_GUIDE.md) - Система уведомлений
+- [DataList Guide](./DATALIST_GUIDE.md) - Компонент DataList
+- [Layout Primitives Guide](./LAYOUT_PRIMITIVES_GUIDE.md) - Layout компоненты
+- [Navigation Components Guide](./NAVIGATION_COMPONENTS_GUIDE.md) - Навигационные компоненты
+- [Field Guide](./FIELD_GUIDE.md) - Компонент Field для форм
 - [Примеры компонентов](./COMPONENT_EXAMPLES.md) - Примеры использования компонентов
 - [Быстрый старт](./QUICK_START.md) - Быстрое начало работы
 
 ---
 
 **Версия документа:** 1.0  
-**Последнее обновление:** 2024-12-19
+**Последнее обновление:** 2025-12-11

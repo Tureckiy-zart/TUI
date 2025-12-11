@@ -49,10 +49,19 @@ Comprehensive guide for installing, setting up, and using the Tenerife UI compon
 
 ### Links to Additional Resources
 
+- **[Master Guide](./MASTER_GUIDE.md)** — полный индекс всех гайдов и документации
 - [Quick Start](./QUICK_START.md) — get started in 30 seconds
 - [API Reference](./public-api.md) — complete API documentation
 - [Tokens Guide](./TOKENS_GUIDE.md) — working with design tokens
 - [Theme Guide](./THEME_GUIDE.md) — theme setup and customization
+- [Typography Guide](./TYPOGRAPHY_GUIDE.md) — typography components
+- [Icon Guide](./ICON_GUIDE.md) — icon system
+- [Menu System Guide](./MENU_SYSTEM_GUIDE.md) — dropdown menus, context menus, popovers
+- [NotificationCenter Guide](./NOTIFICATION_CENTER_GUIDE.md) — notification system
+- [DataList Guide](./DATALIST_GUIDE.md) — data list component
+- [Layout Primitives Guide](./LAYOUT_PRIMITIVES_GUIDE.md) — layout components
+- [Navigation Components Guide](./NAVIGATION_COMPONENTS_GUIDE.md) — navigation components
+- [Field Guide](./FIELD_GUIDE.md) — form field component
 - [Storybook](https://Tureckiy-zart.github.io/tenerife-ui/) — interactive component examples
 
 ---
@@ -839,7 +848,7 @@ function ModalExample() {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open Modal</Button>
-      <Modal open={open} onOpenChange={setOpen}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <ModalHeader>
           <h2>Modal Title</h2>
         </ModalHeader>
@@ -1096,18 +1105,25 @@ function EventCardExample() {
 
 #### VenueCard
 
+> ⚠️ **Примечание:** Компонент `VenueCard` существует в кодовой базе, но в настоящее время не экспортируется из основного пакета `@tenerife.music/ui`.
+
 ```tsx
-import { VenueCard } from "@tenerife.music/ui";
+// Пример использования (если компонент будет экспортирован в будущем)
+// import { VenueCard } from "@tenerife.music/ui";
 
 function VenueCardExample() {
   return (
     <VenueCard
       name="Venue Name"
-      address="123 Main St"
-      capacity={500}
+      description="A beautiful venue for events"
+      location="123 Main St, New York, NY"
+      capacity="5,000 seats"
       imageUrl="/venue-image.jpg"
+      href="/venues/venue-name"
+      eventsLabel="Events"
+      capacityLabel="Capacity"
       variant="default"
-      size="md"
+      size="default"
     />
   );
 }
@@ -1385,7 +1401,7 @@ function ConfirmDialog() {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Delete Item</Button>
-      <Modal open={open} onOpenChange={setOpen}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <ModalHeader>
           <h2>Confirm Deletion</h2>
         </ModalHeader>
@@ -1512,22 +1528,17 @@ function SortableTable() {
 import { EventCard } from "@tenerife.music/ui";
 
 function EventCardExample() {
-  const event = {
-    title: "Summer Music Festival",
-    date: new Date("2024-07-15"),
-    venue: "Central Park",
-    imageUrl: "/event-image.jpg",
-    description: "A fantastic music festival with top artists",
-  };
-
   return (
     <EventCard
-      title={event.title}
-      date={event.date}
-      venue={event.venue}
-      imageUrl={event.imageUrl}
+      title="Summer Music Festival"
+      description="A fantastic music festival with top artists"
+      date="July 15, 2024 at 7:00 PM"
+      venueName="Central Park"
+      imageUrl="/event-image.jpg"
+      href="/events/summer-festival"
+      getTicketsLabel="Get Tickets"
       variant="default"
-      size="md"
+      size="default"
     />
   );
 }
@@ -1752,6 +1763,19 @@ Complete API documentation:
 - [Usage Guide](./USAGE.md) — usage examples
 - [Tokens Guide](./TOKENS_GUIDE.md) — working with design tokens
 - [Theme Guide](./THEME_GUIDE.md) — theme setup and customization
+- [Typography Guide](./TYPOGRAPHY_GUIDE.md) — typography components (Text, Heading, Display, etc.)
+- [Icon Guide](./ICON_GUIDE.md) — icon system and usage
+- [Menu System Guide](./MENU_SYSTEM_GUIDE.md) — dropdown menus, context menus, popovers, hover cards
+- [NotificationCenter Guide](./NOTIFICATION_CENTER_GUIDE.md) — notification system
+- [DataList Guide](./DATALIST_GUIDE.md) — data list component for key-value pairs
+- [Layout Primitives Guide](./LAYOUT_PRIMITIVES_GUIDE.md) — Box, Flex, Grid, Stack, Surface
+- [Navigation Components Guide](./NAVIGATION_COMPONENTS_GUIDE.md) — SegmentedControl, Stepper, Tabs
+- [Field Guide](./FIELD_GUIDE.md) — form field component
+- [Grid Guide](./GRID.md) — Grid component detailed guide
+- [Animation Guidelines](./ANIMATION_GUIDELINES.md) — animation best practices
+- [Accessibility Guidelines](./a11y_guidelines.md) — accessibility best practices
+- [Testing Guide](./TUI_TESTING_GUIDE.md) — testing documentation
+- [Props Guidelines](./props-guidelines.md) — component props standards
 
 ### Community and Support
 

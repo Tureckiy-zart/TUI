@@ -31,3 +31,5 @@ export const IconCalendar: React.FC<IconProps> = ({
 };
 
 IconCalendar.displayName = "IconCalendar";
+
+
