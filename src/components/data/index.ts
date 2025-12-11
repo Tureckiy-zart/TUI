@@ -5,7 +5,7 @@
  */
 
 // Skeleton
-export { Skeleton, type SkeletonProps,skeletonVariants } from "./skeleton";
+export { Skeleton, type SkeletonProps, skeletonVariants } from "./skeleton";
 
 // EmptyState
 export {
