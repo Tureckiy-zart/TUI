@@ -31,7 +31,7 @@ export {
   type BreadcrumbsItemProps,
   type BreadcrumbsRootProps,
   type BreadcrumbsSeparatorProps,
-} from "./breadcrumbs";
+} from "./breadcrumbs/index";
 
 // Pagination
 export {
@@ -41,7 +41,7 @@ export {
   type PaginationNextProps,
   type PaginationPrevProps,
   type PaginationRootProps,
-} from "./pagination";
+} from "./pagination/index";
 
 // Stepper
 export {

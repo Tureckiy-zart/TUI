@@ -5,7 +5,7 @@
  */
 
 // Skeleton
-export { Skeleton, type SkeletonProps, skeletonVariants } from "./skeleton";
+export { Skeleton, type SkeletonProps,skeletonVariants } from "./skeleton";
 
 // EmptyState
 export {
@@ -62,4 +62,4 @@ export {
   TableSortIcon,
   type TableSortIconProps,
   useTableContext,
-} from "./table";
+} from "./table/index";
