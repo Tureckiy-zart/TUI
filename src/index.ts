@@ -18,7 +18,7 @@ export {
 // UI COMPONENTS
 // ============================================================================
 // Button component (CVA-based, token-driven)
-export { Button, type ButtonProps,buttonVariants } from "./components/ui/button";
+export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
 
 // Text component (CVA-based, token-driven)
 export {
@@ -30,19 +30,19 @@ export {
 } from "./components/ui/text";
 
 // Alert component (CVA-based, token-driven)
-export { Alert, type AlertProps,alertVariants } from "./components/ui/alert";
+export { Alert, type AlertProps, alertVariants } from "./components/ui/alert";
 
 // Typography components (CVA-based, token-driven)
-export { Body, type BodyProps,bodyVariants } from "./components/ui/body";
-export { Caption, type CaptionProps,captionVariants } from "./components/ui/caption";
-export { Code, type CodeProps,codeVariants } from "./components/ui/code";
-export { Display, type DisplayProps,displayVariants } from "./components/ui/display";
-export { Heading, type HeadingProps,headingVariants } from "./components/ui/heading";
-export { Lead, type LeadProps,leadVariants } from "./components/ui/lead";
+export { Body, type BodyProps, bodyVariants } from "./components/ui/body";
+export { Caption, type CaptionProps, captionVariants } from "./components/ui/caption";
+export { Code, type CodeProps, codeVariants } from "./components/ui/code";
+export { Display, type DisplayProps, displayVariants } from "./components/ui/display";
+export { Heading, type HeadingProps, headingVariants } from "./components/ui/heading";
+export { Lead, type LeadProps, leadVariants } from "./components/ui/lead";
 
 // Form components (CVA-based, token-driven)
-export { Checkbox, type CheckboxProps,checkboxVariants } from "./components/checkbox";
-export { Input, type InputProps,inputVariants } from "./components/input";
+export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/checkbox";
+export { Input, type InputProps, inputVariants } from "./components/input";
 export {
   Radio,
   RadioGroup,
@@ -66,7 +66,7 @@ export {
   selectTriggerVariants,
   type SelectVariant,
 } from "./components/select";
-export { Textarea, type TextareaProps,textareaVariants } from "./components/textarea";
+export { Textarea, type TextareaProps, textareaVariants } from "./components/textarea";
 export {
   Field,
   type FieldControlProps,
@@ -75,7 +75,7 @@ export {
   type FieldLabelProps,
   type FieldProps,
 } from "./components/ui/field";
-export { Label, type LabelProps,labelVariants } from "./components/ui/label";
+export { Label, type LabelProps, labelVariants } from "./components/ui/label";
 
 // ============================================================================
 // LAYOUT PRIMITIVES
@@ -357,7 +357,7 @@ export {
 // ICON SYSTEM
 // ============================================================================
 // Icon component and icon registry
-export { Icon, type IconProps,iconVariants } from "./components/icon";
+export { Icon, type IconProps, iconVariants } from "./components/icon";
 
 // Icon registry exports (tree-shakeable)
 export {
