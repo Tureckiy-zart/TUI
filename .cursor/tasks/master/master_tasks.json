@@ -423,11 +423,14 @@
               "id": "L4",
               "title": "Data Components Migration",
               "description": "Full migration of all data-driven components (table, list, badges, pagination, empty states, skeletons) into unified, token-driven, CVA-based, TAS-enabled architecture.",
+              "status": "completed",
               "subtasks": [
                 {
                   "id": "L4_S1",
                   "title": "Audit of existing data components",
-                  "status": "pending",
+                  "status": "completed",
+                  "progress": "100%",
+                  "completed_date": "2025-12-12",
                   "steps": [
                     "Scan src/components/data/**/* for legacy code, hardcoded Tailwind, missing tokens.",
                     "Identify incomplete components: Table, List, Pagination, Badge, EmptyState.",
@@ -439,7 +442,9 @@
                 {
                   "id": "L4_S2",
                   "title": "Define Data Token Structure",
-                  "status": "pending",
+                  "status": "completed",
+                  "progress": "100%",
+                  "completed_date": "2025-12-12",
                   "steps": [
                     "Extend DATA_TOKENS with: rowHeight, cellPadding, borderColor, stripedBackgrounds.",
                     "Add tokens for EmptyState (icon size, spacing, text style).",
@@ -451,7 +456,9 @@
                 {
                   "id": "L4_S3",
                   "title": "Create DataBase Primitive",
-                  "status": "pending",
+                  "status": "completed",
+                  "progress": "100%",
+                  "completed_date": "2025-12-12",
                   "steps": [
                     "Implement <DataContainer /> primitive with tokens for spacing and layout.",
                     "Create CVA variants for data density: compact, normal, spacious.",
@@ -463,7 +470,9 @@
                 {
                   "id": "L4_S4",
                   "title": "Table Migration",
-                  "status": "pending",
+                  "status": "completed",
+                  "progress": "100%",
+                  "completed_date": "2025-12-12",
                   "steps": [
                     "Implement fully token-driven Table using <Table>, <TableHead>, <TableRow>, <TableCell> primitives.",
                     "Add CVA variants: bordered, striped, clean, interactive.",
@@ -476,7 +485,9 @@
                 {
                   "id": "L4_S5",
                   "title": "List & ListItem Migration",
-                  "status": "pending",
+                  "status": "completed",
+                  "progress": "100%",
+                  "completed_date": "2025-12-12",
                   "steps": [
                     "Refactor List and ListItem using DataBase.",
                     "Add tokens for list spacing, divider colors, hover states.",
