@@ -276,6 +276,96 @@ When requesting new components, Cursor should:
 
 ---
 
+## 🛡️ Guard Prompt (AI Enforcement)
+
+### TENERIFE UI — ARCHITECTURE LOCK (GUARD PROMPT)
+
+**You are working inside the `@tenerife.music/ui` repository.**
+
+⚠️ **UI FOUNDATION ARCHITECTURE IS LOCKED.**
+
+### Foundation Components (Read-Only)
+
+The following components are canonical and **MUST NOT** be recreated, duplicated, or replaced:
+
+- **Modal** (Radix Dialog wrapper)
+- **Tabs** (Radix Tabs wrapper)
+- **Select** (Radix Select wrapper)
+- **ContextMenu** (Radix ContextMenu wrapper)
+- **Toast** (Radix Toast wrapper)
+
+**You MUST treat these components as immutable.**
+
+**You may ONLY:**
+
+- Fix bugs
+- Improve typing
+- Improve documentation
+- Improve token usage
+
+**You MUST NEVER:**
+
+- Create new foundation components
+- Suggest alternative implementations
+- Create `Simple*`, `Basic*`, `Legacy*`, `V2*`, or duplicate variants
+- Reimplement behavior handled by Radix
+
+### Extension Rules
+
+If new behavior or UX is required:
+
+- Create an **EXTENSION component**
+- **EXTENSION** must compose an existing foundation component
+- **EXTENSION** must **NOT** be named after a foundation component
+- **EXTENSION** must live outside foundation folders
+
+**Valid examples:**
+
+- ✅ `ConfirmDialog` (uses Modal)
+- ✅ `NotificationCenter` (uses Toast)
+- ✅ `MultiSelect` (uses Select)
+
+**Invalid examples:**
+
+- ❌ `SimpleModal`
+- ❌ `CustomTabs`
+- ❌ `AdvancedSelect`
+- ❌ `ModalV2`
+
+### Radix Rule
+
+All behavior-heavy components **MUST** delegate behavior to Radix.
+
+**You MUST NOT implement:**
+
+- Custom focus management
+- Custom keyboard navigation
+- Custom ARIA attributes
+- Custom portal or scroll locking
+
+### Token Rule
+
+All visual props **MUST** use token unions.
+
+**String or number-based visual props are forbidden.**
+
+### Storybook Rule
+
+Storybook **MUST** reflect architecture truth:
+
+- One foundation component per category
+- Extensions must be clearly labeled
+
+### Enforcement
+
+**If a request would violate these rules:**
+
+**YOU MUST REFUSE and explain why.**
+
+**This is non-negotiable.**
+
+---
+
 ## 🚫 What Is Forbidden
 
 ### Forbidden Actions

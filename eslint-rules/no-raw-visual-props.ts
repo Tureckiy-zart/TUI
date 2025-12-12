@@ -310,6 +310,10 @@ export default createRule<Options, MessageIds>({
         if (filePath.includes("animation/types.ts") && propName === "animation") {
           return;
         }
+        // ComponentAnimationConfig.hoverAnimation is a documented exception (allows string for custom CSS classes)
+        if (filePath.includes("animation/types.ts") && propName === "hoverAnimation") {
+          return;
+        }
       }
 
       // Check if this is a visual prop
