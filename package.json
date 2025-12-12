@@ -39,6 +39,7 @@
     "access": "public"
   },
   "scripts": {
+    "storybook": "storybook dev -p 6006",
     "format": "prettier . --write",
     "lint:fix": "./scripts/lint-local.sh",
     "typecheck": "tsc --noEmit && tsc --noEmit --project tsconfig.vite.json",
@@ -60,7 +61,6 @@
     "test:coverage": "vitest run --coverage",
     "test:a11y": "vitest run a11y.test",
     "a11y:contrast": "tsx scripts/a11y-contrast-check.js",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "preview": "vite preview",
     "prepublishOnly": "npm run clean && npm run build && npm run typecheck",

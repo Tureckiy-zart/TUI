@@ -281,40 +281,47 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
     const gapValue = getBaseValue<SpacingValue>(gap);
 
     // Build inline styles with CSS variables
+    // Convert spacing values to strings (numeric keys like 0, 1, 2 are valid but need string conversion)
     const inlineStyles: React.CSSProperties = {
-      ...(pValue !== undefined && { padding: getSpacingCSSVar(pValue) }),
+      ...(pValue !== undefined && { padding: getSpacingCSSVar(String(pValue)) }),
       ...(!p &&
         pxValue !== undefined && {
-          paddingLeft: getSpacingCSSVar(pxValue),
-          paddingRight: getSpacingCSSVar(pxValue),
+          paddingLeft: getSpacingCSSVar(String(pxValue)),
+          paddingRight: getSpacingCSSVar(String(pxValue)),
         }),
       ...(!p &&
         pyValue !== undefined && {
-          paddingTop: getSpacingCSSVar(pyValue),
-          paddingBottom: getSpacingCSSVar(pyValue),
+          paddingTop: getSpacingCSSVar(String(pyValue)),
+          paddingBottom: getSpacingCSSVar(String(pyValue)),
         }),
-      ...(!p && !py && ptValue !== undefined && { paddingTop: getSpacingCSSVar(ptValue) }),
-      ...(!p && !px && prValue !== undefined && { paddingRight: getSpacingCSSVar(prValue) }),
-      ...(!p && !py && pbValue !== undefined && { paddingBottom: getSpacingCSSVar(pbValue) }),
-      ...(!p && !px && plValue !== undefined && { paddingLeft: getSpacingCSSVar(plValue) }),
-      ...(mValue !== undefined && { margin: getSpacingCSSVar(mValue) }),
+      ...(!p && !py && ptValue !== undefined && { paddingTop: getSpacingCSSVar(String(ptValue)) }),
+      ...(!p &&
+        !px &&
+        prValue !== undefined && { paddingRight: getSpacingCSSVar(String(prValue)) }),
+      ...(!p &&
+        !py &&
+        pbValue !== undefined && { paddingBottom: getSpacingCSSVar(String(pbValue)) }),
+      ...(!p && !px && plValue !== undefined && { paddingLeft: getSpacingCSSVar(String(plValue)) }),
+      ...(mValue !== undefined && { margin: getSpacingCSSVar(String(mValue)) }),
       ...(!m &&
         mxValue !== undefined && {
-          marginLeft: getSpacingCSSVar(mxValue),
-          marginRight: getSpacingCSSVar(mxValue),
+          marginLeft: getSpacingCSSVar(String(mxValue)),
+          marginRight: getSpacingCSSVar(String(mxValue)),
         }),
       ...(!m &&
         myValue !== undefined && {
-          marginTop: getSpacingCSSVar(myValue),
-          marginBottom: getSpacingCSSVar(myValue),
+          marginTop: getSpacingCSSVar(String(myValue)),
+          marginBottom: getSpacingCSSVar(String(myValue)),
         }),
-      ...(!m && !my && mtValue !== undefined && { marginTop: getSpacingCSSVar(mtValue) }),
-      ...(!m && !mx && mrValue !== undefined && { marginRight: getSpacingCSSVar(mrValue) }),
-      ...(!m && !my && mbValue !== undefined && { marginBottom: getSpacingCSSVar(mbValue) }),
-      ...(!m && !mx && mlValue !== undefined && { marginLeft: getSpacingCSSVar(mlValue) }),
+      ...(!m && !my && mtValue !== undefined && { marginTop: getSpacingCSSVar(String(mtValue)) }),
+      ...(!m && !mx && mrValue !== undefined && { marginRight: getSpacingCSSVar(String(mrValue)) }),
+      ...(!m &&
+        !my &&
+        mbValue !== undefined && { marginBottom: getSpacingCSSVar(String(mbValue)) }),
+      ...(!m && !mx && mlValue !== undefined && { marginLeft: getSpacingCSSVar(String(mlValue)) }),
       ...(radiusValue !== undefined && { borderRadius: getRadiusCSSVar(radiusValue) }),
       ...(bgValue !== undefined && { backgroundColor: getColorCSSVar(bgValue) }),
-      ...(gapValue !== undefined && { gap: getSpacingCSSVar(gapValue) }),
+      ...(gapValue !== undefined && { gap: getSpacingCSSVar(String(gapValue)) }),
       ...style,
     };
 

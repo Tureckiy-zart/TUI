@@ -4,47 +4,35 @@
  * Common types used across Box, Flex, Grid, and Stack components.
  */
 
-import type { ResponsiveValue } from "@/lib/responsive-props";
+import type {
+  ColorToken,
+  RadiusToken,
+  ResponsiveColor as ResponsiveColorToken,
+  ResponsiveRadius as ResponsiveRadiusToken,
+  ResponsiveShadow as ResponsiveShadowToken,
+  ResponsiveSpace,
+  ShadowToken,
+  SpacingToken,
+} from "@/tokens/types";
+import type { Responsive } from "@/types/responsive";
 
 /**
  * Spacing token values
- * Supports numeric keys (0-96) and semantic keys (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
+ * Only token key strings are allowed (no numbers)
+ * Supports base spacing keys, semantic keys (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl), and layout keys
  */
-export type SpacingValue =
-  | number
-  | keyof typeof import("@/tokens/spacing").spacing
-  | keyof typeof import("@/tokens/spacing").semanticSpacing;
+export type SpacingValue = SpacingToken;
 
 /**
  * Border radius token values
  */
-export type RadiusValue = keyof typeof import("@/tokens/radius").borderRadius;
+export type RadiusValue = RadiusToken;
 
 /**
  * Color token values
- * Supports CSS variable names (e.g., "background", "primary", "card")
+ * Only semantic color tokens are allowed (no raw strings)
  */
-export type ColorValue =
-  | "background"
-  | "foreground"
-  | "card"
-  | "card-foreground"
-  | "popover"
-  | "popover-foreground"
-  | "primary"
-  | "primary-foreground"
-  | "secondary"
-  | "secondary-foreground"
-  | "muted"
-  | "muted-foreground"
-  | "accent"
-  | "accent-foreground"
-  | "destructive"
-  | "destructive-foreground"
-  | "border"
-  | "input"
-  | "ring"
-  | string; // Allow custom CSS variable names
+export type ColorValue = ColorToken;
 
 /**
  * Alignment values for flexbox/grid
@@ -87,9 +75,9 @@ export type FlowValue = "row" | "col" | "dense" | "row-dense" | "col-dense";
 export type StackDirectionValue = "vertical" | "horizontal";
 
 /**
- * Shadow token values (elevation shadows)
+ * Shadow token values
  */
-export type ShadowValue = "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+export type ShadowValue = ShadowToken;
 
 /**
  * Display type values
@@ -107,62 +95,62 @@ export type DisplayValue =
 /**
  * Responsive spacing prop type
  */
-export type ResponsiveSpacing = ResponsiveValue<SpacingValue>;
+export type ResponsiveSpacing = ResponsiveSpace;
 
 /**
  * Responsive radius prop type
  */
-export type ResponsiveRadius = ResponsiveValue<RadiusValue>;
+export type ResponsiveRadius = ResponsiveRadiusToken;
 
 /**
  * Responsive color prop type
  */
-export type ResponsiveColor = ResponsiveValue<ColorValue>;
+export type ResponsiveColor = ResponsiveColorToken;
 
 /**
  * Responsive alignment prop type
  */
-export type ResponsiveAlignment = ResponsiveValue<AlignmentValue>;
+export type ResponsiveAlignment = Responsive<AlignmentValue>;
 
 /**
  * Responsive justify prop type
  */
-export type ResponsiveJustify = ResponsiveValue<JustifyValue>;
+export type ResponsiveJustify = Responsive<JustifyValue>;
 
 /**
  * Responsive direction prop type
  */
-export type ResponsiveFlexDirection = ResponsiveValue<FlexDirectionValue>;
+export type ResponsiveFlexDirection = Responsive<FlexDirectionValue>;
 
 /**
  * Responsive wrap prop type
  */
-export type ResponsiveFlexWrap = ResponsiveValue<FlexWrapValue>;
+export type ResponsiveFlexWrap = Responsive<FlexWrapValue>;
 
 /**
  * Responsive column prop type
  */
-export type ResponsiveColumns = ResponsiveValue<ColumnValue>;
+export type ResponsiveColumns = Responsive<ColumnValue>;
 
 /**
  * Responsive row prop type
  */
-export type ResponsiveRows = ResponsiveValue<RowValue>;
+export type ResponsiveRows = Responsive<RowValue>;
 
 /**
  * Responsive flow prop type
  */
-export type ResponsiveFlow = ResponsiveValue<FlowValue>;
+export type ResponsiveFlow = Responsive<FlowValue>;
 
 /**
  * Responsive stack direction prop type
  */
-export type ResponsiveStackDirection = ResponsiveValue<StackDirectionValue>;
+export type ResponsiveStackDirection = Responsive<StackDirectionValue>;
 
 /**
  * Responsive shadow prop type
  */
-export type ResponsiveShadow = ResponsiveValue<ShadowValue>;
+export type ResponsiveShadow = ResponsiveShadowToken;
 
 /**
  * Surface variant values

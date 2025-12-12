@@ -270,7 +270,6 @@ import { Container, Flex, Grid, Stack, Section } from "@tenerife.music/ui";
 ### Modal Components
 
 - `Modal` - Main modal component
-- `SimpleModal` - Simplified modal wrapper
 - `CustomDialog` - Customizable dialog
 - `ConfirmDialog` - Confirmation dialog
 - `ModalProvider` - Modal context provider

@@ -4,8 +4,10 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { getBaseValue, getDurationMs, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { TOOLTIP_TOKENS } from "@/tokens/components/tooltip";
+import type { ResponsiveAlignOffset, ResponsiveDelay, ResponsiveSideOffset } from "@/tokens/types";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -35,13 +37,31 @@ const tooltipContentVariants = cva(
 
 const TooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> &
-    VariantProps<typeof tooltipContentVariants>
->(({ className, variant, sideOffset = 4, ...props }, ref) => {
+  Omit<
+    React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
+    "sideOffset" | "alignOffset"
+  > &
+    VariantProps<typeof tooltipContentVariants> & {
+      sideOffset?: ResponsiveSideOffset;
+      alignOffset?: ResponsiveAlignOffset;
+    }
+>(({ className, variant, sideOffset, alignOffset, ...props }, ref) => {
+  // Resolve offset tokens to pixels
+  const sideOffsetPx = React.useMemo(() => {
+    const baseOffset = getBaseValue(sideOffset);
+    return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+  }, [sideOffset]);
+
+  const alignOffsetPx = React.useMemo(() => {
+    const baseOffset = getBaseValue(alignOffset);
+    return baseOffset ? getSpacingPx(baseOffset) : undefined;
+  }, [alignOffset]);
+
   return (
     <TooltipPrimitive.Content
       ref={ref}
-      sideOffset={sideOffset}
+      sideOffset={sideOffsetPx}
+      alignOffset={alignOffsetPx}
       className={cn(tooltipContentVariants({ variant }), "tm-motion-fade-scale", className)}
       {...props}
     >
@@ -57,10 +77,26 @@ export interface TooltipProps {
   variant?: VariantProps<typeof tooltipContentVariants>["variant"];
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
-  sideOffset?: number;
-  alignOffset?: number;
-  delayDuration?: number;
-  skipDelayDuration?: number;
+  /**
+   * Side offset - token-based
+   * Uses spacing tokens for positioning offsets
+   */
+  sideOffset?: ResponsiveSideOffset;
+  /**
+   * Alignment offset - token-based
+   * Uses spacing tokens for positioning offsets
+   */
+  alignOffset?: ResponsiveAlignOffset;
+  /**
+   * Delay duration - token-based
+   * Uses motion duration tokens
+   */
+  delayDuration?: ResponsiveDelay;
+  /**
+   * Skip delay duration - token-based
+   * Uses motion duration tokens
+   */
+  skipDelayDuration?: ResponsiveDelay;
   disableHoverableContent?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -74,14 +110,25 @@ export function TooltipWrapper({
   align = "center",
   sideOffset,
   alignOffset,
-  delayDuration = 400,
-  skipDelayDuration = 300,
+  delayDuration,
+  skipDelayDuration,
   disableHoverableContent: _disableHoverableContent = false,
   open,
   onOpenChange,
 }: TooltipProps) {
+  // Resolve delay tokens to milliseconds
+  const delayDurationMs = React.useMemo(() => {
+    const baseDelay = getBaseValue(delayDuration);
+    return baseDelay ? getDurationMs(baseDelay) : 400; // Default 400ms
+  }, [delayDuration]);
+
+  const skipDelayDurationMs = React.useMemo(() => {
+    const baseDelay = getBaseValue(skipDelayDuration);
+    return baseDelay ? getDurationMs(baseDelay) : 300; // Default 300ms
+  }, [skipDelayDuration]);
+
   return (
-    <TooltipProvider delayDuration={delayDuration} skipDelayDuration={skipDelayDuration}>
+    <TooltipProvider delayDuration={delayDurationMs} skipDelayDuration={skipDelayDurationMs}>
       <Tooltip open={open} onOpenChange={onOpenChange}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent

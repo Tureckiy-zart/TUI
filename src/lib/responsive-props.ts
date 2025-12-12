@@ -5,6 +5,15 @@
  * Supports CSS custom properties with media queries for efficient responsive styling.
  */
 
+import { durations } from "@/tokens/motion";
+import type {
+  DelayToken,
+  MotionDurationToken,
+  ResponsiveDelay,
+  SpacingToken,
+} from "@/tokens/types";
+import type { Responsive } from "@/types/responsive";
+
 /**
  * Breakpoint values matching Tailwind defaults
  */
@@ -16,35 +25,20 @@ export const breakpoints = {
   "2xl": "1536px",
 } as const;
 
-export type Breakpoint = keyof typeof breakpoints;
-
-/**
- * Responsive value type - can be a single value or an object with breakpoint keys
- */
-export type ResponsiveValue<T> =
-  | T
-  | {
-      base?: T;
-      sm?: T;
-      md?: T;
-      lg?: T;
-      xl?: T;
-      "2xl"?: T;
-    };
+// Re-export types for convenience
+export type { Breakpoint, Responsive } from "@/types/responsive";
 
 /**
  * Check if a value is a responsive object
  */
-export function isResponsiveValue<T>(
-  value: ResponsiveValue<T>,
-): value is Exclude<ResponsiveValue<T>, T> {
+export function isResponsiveValue<T>(value: Responsive<T>): value is Exclude<Responsive<T>, T> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 /**
  * Get base value from responsive value
  */
-export function getBaseValue<T>(value: ResponsiveValue<T> | undefined): T | undefined {
+export function getBaseValue<T>(value: Responsive<T> | undefined): T | undefined {
   if (value === undefined || value === null) {
     return undefined;
   }
@@ -53,24 +47,15 @@ export function getBaseValue<T>(value: ResponsiveValue<T> | undefined): T | unde
     return value.base;
   }
 
-  // At this point, value is T (not ResponsiveValue<T>)
+  // At this point, value is T (not Responsive<T>)
   return value as T;
 }
 
 /**
  * Convert spacing token key to CSS variable name
+ * Only accepts string keys (numeric keys like "0", "1", "2" are valid as strings)
  */
-export function getSpacingCSSVar(key: string | number): string {
-  // Handle numeric keys (0, 1, 2, etc.) - map directly to --spacing-N
-  if (typeof key === "number") {
-    // Special case: handle decimal numbers (e.g., 0.5 -> 0-5)
-    if (key % 1 !== 0) {
-      const str = key.toString().replace(".", "-");
-      return `var(--spacing-${str})`;
-    }
-    return `var(--spacing-${key})`;
-  }
-
+export function getSpacingCSSVar(key: string): string {
   // Handle semantic keys (xs, sm, md, etc.)
   if (key === "none") {
     return `var(--spacing-none)`;
@@ -90,7 +75,14 @@ export function getSpacingCSSVar(key: string | number): string {
     }
   }
 
-  // Default: assume it's a semantic spacing token
+  // Handle numeric string keys (0, 1, 2, 0.5, etc.) - map directly to --spacing-N
+  // Special case: handle decimal numbers (e.g., "0.5" -> "0-5")
+  if (key.includes(".")) {
+    const normalizedKey = key.replace(".", "-");
+    return `var(--spacing-${normalizedKey})`;
+  }
+
+  // Default: assume it's a base spacing token or semantic spacing token
   return `var(--spacing-${key})`;
 }
 
@@ -125,7 +117,7 @@ export function getColorCSSVar(key: string): string {
  */
 export function getResponsiveCSSVars<T>(
   propName: string,
-  value: ResponsiveValue<T>,
+  value: Responsive<T>,
   tokenMapper: (val: T) => string,
 ): Record<string, string> {
   const vars: Record<string, string> = {};
@@ -171,7 +163,7 @@ export function getResponsiveCSSVars<T>(
  */
 export function getResponsiveStyles<T>(
   propName: string,
-  value: ResponsiveValue<T>,
+  value: Responsive<T>,
   tokenMapper: (val: T) => string,
   cssProperty: string,
 ): React.CSSProperties {
@@ -206,7 +198,7 @@ export function getResponsiveStyles<T>(
  */
 export function getResponsiveSpacingClass(
   prop: string,
-  value: ResponsiveValue<string | number>,
+  value: Responsive<string | number>,
 ): string {
   if (!isResponsiveValue(value)) {
     // Simple value - return Tailwind class if applicable
@@ -244,4 +236,101 @@ export function getResponsiveSpacingClass(
   }
 
   return classes.join(" ");
+}
+
+/**
+ * Convert motion duration token to milliseconds (number)
+ * Used for setTimeout, delayDuration, etc.
+ */
+export function getDurationMs(token: MotionDurationToken): number {
+  const duration = durations[token];
+  if (!duration) {
+    return 0;
+  }
+  // Parse "150ms" -> 150
+  const match = duration.match(/^(\d+(?:\.\d+)?)ms$/);
+  if (match && match[1]) {
+    return Number.parseFloat(match[1]);
+  }
+  // Fallback: try to parse as number
+  return Number.parseFloat(duration) || 0;
+}
+
+/**
+ * Convert ResponsiveDelay to milliseconds (number)
+ * Used for setTimeout, delayDuration, etc.
+ * For responsive objects, uses base value or first available breakpoint value.
+ */
+export function getDelayMs(
+  delay: ResponsiveDelay | undefined,
+  defaultValue: number = 5000,
+): number {
+  if (delay === undefined || delay === null) {
+    return defaultValue;
+  }
+
+  // If it's a string token, convert directly
+  if (typeof delay === "string") {
+    return getDurationMs(delay as DelayToken);
+  }
+
+  // If it's a responsive object, get base value or first available
+  if (isResponsiveValue(delay)) {
+    const baseValue = delay.base;
+    if (baseValue !== undefined) {
+      return getDurationMs(baseValue);
+    }
+    // Try to get first available breakpoint value
+    const firstValue = delay.sm || delay.md || delay.lg || delay.xl || delay["2xl"];
+    if (firstValue !== undefined) {
+      return getDurationMs(firstValue);
+    }
+  }
+
+  return defaultValue;
+}
+
+/**
+ * Convert spacing token to pixels (number)
+ * Note: This is a simplified conversion. For complex spacing tokens,
+ * you may need to resolve CSS variables at runtime.
+ * For offset values, prefer using simple numeric spacing tokens.
+ */
+export function getSpacingPx(token: SpacingToken): number {
+  // Convert token to string for pattern matching
+  const tokenStr = String(token);
+
+  // Handle numeric string keys (0, 1, 2, etc.)
+  const numericMatch = tokenStr.match(/^(\d+(?:\.\d+)?)$/);
+  if (numericMatch && numericMatch[1]) {
+    // Assume 1 unit = 4px (Tailwind default)
+    return Number.parseFloat(numericMatch[1]) * 4;
+  }
+
+  // Handle semantic spacing tokens (xs, sm, md, etc.)
+  // These map to specific pixel values
+  const semanticMap: Partial<Record<string, number>> = {
+    none: 0,
+    xs: 4, // 0.25rem = 4px
+    sm: 8, // 0.5rem = 8px
+    md: 16, // 1rem = 16px
+    lg: 24, // 1.5rem = 24px
+    xl: 32, // 2rem = 32px
+    "2xl": 48, // 3rem = 48px
+    "3xl": 64, // 4rem = 64px
+  };
+
+  const semanticValue = semanticMap[tokenStr];
+  if (semanticValue !== undefined) {
+    return semanticValue;
+  }
+
+  // Fallback: try to extract number from token name
+  const numberMatch = tokenStr.match(/(\d+(?:\.\d+)?)/);
+  if (numberMatch && numberMatch[1]) {
+    return Number.parseFloat(numberMatch[1]) * 4;
+  }
+
+  // Default fallback
+  return 4;
 }

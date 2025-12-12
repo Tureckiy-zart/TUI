@@ -37,7 +37,7 @@ export const Default: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Dialog</Button>
-        <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogHeader>
             <DialogTitle>Dialog Title</DialogTitle>
             <DialogDescription>This is a description of what the dialog does.</DialogDescription>
@@ -64,7 +64,7 @@ export const Confirmation: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Delete Item</Button>
-        <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogHeader>
             <DialogTitle>Delete Item</DialogTitle>
             <DialogDescription>
@@ -97,7 +97,7 @@ export const FormDialog: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Form Dialog</Button>
-        <Dialog open={open} onClose={() => setOpen(false)} size="lg">
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogHeader>
             <DialogTitle>Create New Item</DialogTitle>
             <DialogDescription>Fill out the form below to create a new item.</DialogDescription>
@@ -141,7 +141,7 @@ export const LongContent: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Dialog with Long Content</Button>
-        <Dialog open={open} onClose={() => setOpen(false)} size="lg">
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogHeader>
             <DialogTitle>Terms and Conditions</DialogTitle>
             <DialogDescription>

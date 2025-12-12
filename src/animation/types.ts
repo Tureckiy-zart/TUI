@@ -5,6 +5,7 @@
  */
 
 import type { Spring as SpringToken } from "@/tokens/motion";
+import type { ResponsiveAnimationPreset, ResponsiveDelay, ResponsiveMotion } from "@/tokens/types";
 
 /**
  * Spring type re-exported for convenience
@@ -27,9 +28,17 @@ export interface AnimationProps {
  * Transition configuration
  */
 export interface TransitionConfig {
-  duration?: number | string;
+  /**
+   * Transition duration - token-based
+   * Uses motion duration tokens
+   */
+  duration?: ResponsiveMotion;
   ease?: string | number[];
-  delay?: number;
+  /**
+   * Transition delay - token-based
+   * Uses motion duration tokens
+   */
+  delay?: ResponsiveDelay;
   type?: "tween" | "spring" | "inertia" | "keyframes";
   [key: string]: unknown;
 }
@@ -50,8 +59,16 @@ export interface SpringConfig {
  * Animation preset configuration
  */
 export interface PresetConfig {
-  duration?: number | string;
-  delay?: number;
+  /**
+   * Animation duration - token-based
+   * Uses motion duration tokens
+   */
+  duration?: ResponsiveMotion;
+  /**
+   * Animation delay - token-based
+   * Uses motion duration tokens
+   */
+  delay?: ResponsiveDelay;
   ease?: string | number[];
   spring?: Spring | SpringConfig;
   reducedMotion?: boolean | "auto";
@@ -63,21 +80,10 @@ export interface PresetConfig {
  */
 export interface ComponentAnimationConfig {
   /**
-   * Animation preset for initial mount/entrance
-   * Can be a preset name string or CSS class name
+   * Animation preset for initial mount/entrance - token-based
+   * Uses predefined animation preset tokens
    */
-  animation?:
-    | "fadeIn"
-    | "fadeInUp"
-    | "fadeInDown"
-    | "fadeInLeft"
-    | "fadeInRight"
-    | "slideInUp"
-    | "slideInDown"
-    | "slideInLeft"
-    | "slideInRight"
-    | "scaleIn"
-    | string;
+  animation?: ResponsiveAnimationPreset | string; // Allow string for custom CSS classes
 
   /**
    * Animation preset for hover state

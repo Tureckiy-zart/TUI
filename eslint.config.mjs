@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
+import tenerifeUiArchitecture from "./eslint-rules/loader.mjs";
 
 export default [
   {
@@ -31,6 +32,7 @@ export default [
       "jest.config.*",
       "jest.setup.js",
       "scripts/**",
+      "eslint-rules/**", // ESLint rule files - configuration, not source code
       "src/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
       "**/legacy/**", // Legacy files are excluded from token compliance
 
@@ -54,6 +56,7 @@ export default [
       "simple-import-sort": simpleImportSort,
       "unused-imports": unusedImports,
       "@typescript-eslint": tseslint.plugin,
+      "tenerife-ui-architecture": tenerifeUiArchitecture,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -251,6 +254,13 @@ export default [
       "react/react-in-jsx-scope": "off", // React 17+ не требует import
       "react/jsx-key": "warn",
       "react/display-name": "warn",
+
+      // ═══════════════════════════════════════════════════════════
+      // ARCHITECTURE ENFORCEMENT - TOKEN-DRIVEN TYPING
+      // ═══════════════════════════════════════════════════════════
+
+      // Enforce token-driven typing for visual props
+      "tenerife-ui-architecture/no-raw-visual-props": "error",
 
       // ═══════════════════════════════════════════════════════════
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES

@@ -4,6 +4,8 @@
  * TypeScript interfaces and types for DataList component.
  */
 
+import type { ResponsiveSpacing } from "../../layout/layout.types";
+
 /**
  * DataList Root component props
  */
@@ -20,10 +22,13 @@ export interface DataListRootProps extends React.HTMLAttributes<HTMLDListElement
  */
 export interface DataListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Row padding
+   * Row padding - token-based
+   * Accepts spacing tokens (xs, sm, md, lg, xl, etc.) or responsive object
    * @default "md"
+   * @example padding="sm"
+   * @example padding={{ base: "sm", md: "lg" }}
    */
-  padding?: "sm" | "md" | "lg";
+  padding?: ResponsiveSpacing;
 }
 
 /**

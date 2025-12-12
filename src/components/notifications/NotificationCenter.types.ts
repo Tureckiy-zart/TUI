@@ -4,6 +4,8 @@
  * Type definitions for Notification Center components.
  */
 
+import type { ResponsiveDelay } from "@/tokens/types";
+
 import type { ToastAction } from "../overlays/Toast";
 
 /**
@@ -33,7 +35,11 @@ export interface NotificationData {
   variant?: NotificationVariant;
   channel?: NotificationChannel;
   action?: ToastAction;
-  duration?: number;
+  /**
+   * Notification duration - token-based
+   * Uses motion duration tokens
+   */
+  duration?: ResponsiveDelay;
   persistent?: boolean;
   timestamp: number;
   read?: boolean;
@@ -48,7 +54,11 @@ export interface NotificationOptions {
   variant?: NotificationVariant;
   channel?: NotificationChannel;
   action?: ToastAction;
-  duration?: number;
+  /**
+   * Notification duration - token-based
+   * Uses motion duration tokens
+   */
+  duration?: ResponsiveDelay;
   persistent?: boolean;
 }
 

@@ -29,9 +29,9 @@ These guidelines describe the patterns every Tenerife UI component **must** foll
 | Escape                           | `Escape`                                               | Close dialogs, popovers, tooltips with close affordance.                       |
 | Roving focus lists (Tabs, Menus) | `ArrowLeft/Right` or `ArrowUp/Down`, `Home/End`        | Already handled by Radix; expose `aria-controls` when building custom widgets. |
 | Pagination tab order             | `Tab` to previous → page numbers → next                | Focus order must match visual order; use the shared focus ring utility.        |
-| Modal focus trap                 | First focusable element → cycle with `Shift+Tab`/`Tab` | Radix Dialog inside `SimpleModal` enforces this automatically.                 |
+| Modal focus trap                 | First focusable element → cycle with `Shift+Tab`/`Tab` | Radix Dialog inside `Modal` enforces this automatically.                       |
 
-**Testing:** Simulate the patterns above with `@testing-library/user-event` (see `Pagination.a11y.test.tsx` and `SimpleModal.a11y.test.tsx` for examples).
+**Testing:** Simulate the patterns above with `@testing-library/user-event` (see `Pagination.a11y.test.tsx` for examples).
 
 ---
 

@@ -9,6 +9,7 @@
 import type * as React from "react";
 
 import type { ComponentAnimationConfig } from "@/animation/types";
+import type { ResponsiveAspectRatio } from "@/tokens/types";
 
 import type {
   ResponsiveAlignment,
@@ -90,7 +91,14 @@ export interface MediaSlotConfig {
   content: React.ReactNode;
   position?: "left" | "right" | "top" | "bottom" | "center";
   className?: string;
-  aspectRatio?: string;
+  /**
+   * Aspect ratio - token-based
+   * Accepts predefined tokens (square, video, photo, wide) or semantic CSS values (auto, 1/1, 4/3, 16/9, etc.)
+   * @example aspectRatio="video" // Uses predefined token
+   * @example aspectRatio="16/9" // Semantic CSS value
+   * @example aspectRatio={{ base: "square", md: "video" }} // Responsive
+   */
+  aspectRatio?: ResponsiveAspectRatio;
 }
 
 /**

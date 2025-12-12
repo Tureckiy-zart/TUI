@@ -1,724 +1,495 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { cva } from "class-variance-authority";
+import { Check, ChevronDown } from "lucide-react";
 import * as React from "react";
 
-import { Portal } from "@/components/overlays/Portal";
+import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
-
+import { SELECT_TOKENS } from "@/tokens/components/select";
 import type {
-  SelectListboxProps,
-  SelectOptionProps,
-  SelectRootProps,
-  SelectTriggerProps,
-} from "./Select.types";
-import {
-  selectListboxVariants,
-  selectOptionVariants,
-  selectTriggerVariants,
-} from "./select-variants";
+  ResponsiveAlignOffset,
+  ResponsiveSelectSize,
+  ResponsiveSelectWidth,
+  ResponsiveSideOffset,
+  SelectSizeToken,
+  SelectVariantToken,
+  SelectWidthToken,
+} from "@/tokens/types";
 
-/**
- * Select Context
- */
-interface SelectContextValue {
-  value: string | undefined;
-  onValueChange: (value: string) => void;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  disabled: boolean;
-  triggerId: string;
-  listboxId: string;
-  variant: SelectRootProps["variant"];
-  size: SelectRootProps["size"];
-  focusedIndex: number | null;
-  setFocusedIndex: (index: number | null) => void;
-  itemIds: string[];
-  registerItem: (id: string) => void;
-  unregisterItem: (id: string) => void;
-  options: Map<string, { label: string }>;
-  registerOption: (value: string, label: string) => void;
-  unregisterOption: (value: string) => void;
-}
+// ============================================================================
+// CVA VARIANTS
+// ============================================================================
 
-const SelectContext = React.createContext<SelectContextValue | null>(null);
-
-function useSelectContext(): SelectContextValue {
-  const context = React.useContext(SelectContext);
-  if (!context) {
-    throw new Error("Select components must be used within SelectRoot");
-  }
-  return context;
-}
-
-/**
- * Select Root Component
- * Manages state and provides context for all Select sub-components
- */
-export function SelectRoot({
-  value: controlledValue,
-  defaultValue,
-  onValueChange,
-  disabled = false,
-  open: controlledOpen,
-  onOpenChange,
-  defaultOpen = false,
-  children,
-  variant = "outline",
-  size = "md",
-}: SelectRootProps & { variant?: SelectRootProps["variant"]; size?: SelectRootProps["size"] }) {
-  const [uncontrolledValue, setUncontrolledValue] = React.useState<string | undefined>(
-    defaultValue,
-  );
-  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
-  const [focusedIndex, setFocusedIndex] = React.useState<number | null>(null);
-  const [itemIds, setItemIds] = React.useState<string[]>([]);
-  const [options, setOptions] = React.useState<Map<string, { label: string }>>(new Map());
-
-  const triggerIdRef = React.useRef(`select-trigger-${Math.random().toString(36).substr(2, 9)}`);
-  const listboxIdRef = React.useRef(`select-listbox-${Math.random().toString(36).substr(2, 9)}`);
-
-  const isValueControlled = controlledValue !== undefined;
-  const value = isValueControlled ? controlledValue : uncontrolledValue;
-
-  const isOpenControlled = controlledOpen !== undefined;
-  const open = isOpenControlled ? controlledOpen : uncontrolledOpen;
-
-  const handleValueChange = React.useCallback(
-    (newValue: string) => {
-      if (!isValueControlled) {
-        setUncontrolledValue(newValue);
-      }
-      onValueChange?.(newValue);
-      // Close listbox after selection
-      if (!isOpenControlled) {
-        setUncontrolledOpen(false);
-      } else {
-        onOpenChange?.(false);
-      }
-    },
-    [isValueControlled, isOpenControlled, onValueChange, onOpenChange],
-  );
-
-  const handleOpenChange = React.useCallback(
-    (newOpen: boolean) => {
-      if (!isOpenControlled) {
-        setUncontrolledOpen(newOpen);
-      }
-      onOpenChange?.(newOpen);
-      // Reset focus when closing
-      if (!newOpen) {
-        setFocusedIndex(null);
-      }
-    },
-    [isOpenControlled, onOpenChange],
-  );
-
-  const registerItem = React.useCallback((id: string) => {
-    setItemIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
-  }, []);
-
-  const unregisterItem = React.useCallback((id: string) => {
-    setItemIds((prev) => prev.filter((itemId) => itemId !== id));
-  }, []);
-
-  const registerOption = React.useCallback((value: string, label: string) => {
-    setOptions((prev) => {
-      const existing = prev.get(value);
-      // Если ничего не поменялось — не создаём новый Map
-      if (existing && existing.label === label) {
-        return prev;
-      }
-      const next = new Map(prev);
-      next.set(value, { label });
-      return next;
-    });
-  }, []);
-
-  const unregisterOption = React.useCallback((value: string) => {
-    setOptions((prev) => {
-      if (!prev.has(value)) {
-        return prev;
-      }
-      const next = new Map(prev);
-      next.delete(value);
-      return next;
-    });
-  }, []);
-
-  const contextValue = React.useMemo<SelectContextValue>(
-    () => ({
-      value,
-      onValueChange: handleValueChange,
-      open,
-      onOpenChange: handleOpenChange,
-      disabled,
-      triggerId: triggerIdRef.current,
-      listboxId: listboxIdRef.current,
-      variant,
-      size,
-      focusedIndex,
-      setFocusedIndex,
-      itemIds,
-      registerItem,
-      unregisterItem,
-      options,
-      registerOption,
-      unregisterOption,
-    }),
-    [
-      value,
-      handleValueChange,
-      open,
-      handleOpenChange,
-      disabled,
-      variant,
-      size,
-      focusedIndex,
-      itemIds,
-      registerItem,
-      unregisterItem,
-      options,
-      registerOption,
-      unregisterOption,
-    ],
-  );
-
-  return <SelectContext.Provider value={contextValue}>{children}</SelectContext.Provider>;
-}
-
-SelectRoot.displayName = "SelectRoot";
-
-/**
- * Helper function to extract text from React.ReactNode
- * Extracts text content from various React node types (string, number, array, element)
- */
-function extractTextFromNode(node: React.ReactNode): string {
-  if (typeof node === "string") {
-    return node;
-  }
-  if (typeof node === "number") {
-    return String(node);
-  }
-  if (Array.isArray(node)) {
-    return node.map(extractTextFromNode).join("");
-  }
-  if (React.isValidElement(node)) {
-    const props = node.props as { children?: React.ReactNode };
-    if (props.children) {
-      return extractTextFromNode(props.children);
-    }
-  }
-  return "";
-}
-
-/**
- * Select Trigger Component
- * Button that opens/closes the dropdown and displays the selected value
- */
-export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, variant, size, placeholder = "Select an option...", ...props }, ref) => {
-    const context = useSelectContext();
-    const { open, onOpenChange, listboxId } = context;
-    const triggerRef = React.useRef<HTMLButtonElement>(null);
-    const listboxRef = React.useRef<HTMLDivElement | null>(null);
-
-    // Combine refs
-    React.useImperativeHandle(ref, () => triggerRef.current as HTMLButtonElement, []);
-
-    // Get listbox element for positioning
-    React.useEffect(() => {
-      if (typeof document === "undefined") {
-        return;
-      }
-      const listbox = document.getElementById(listboxId);
-      if (listbox && listbox instanceof HTMLDivElement) {
-        listboxRef.current = listbox;
-      }
-    }, [listboxId, open]);
-
-    // Position listbox relative to trigger and handle all event listeners
-    React.useEffect(() => {
-      if (!open || !triggerRef.current || !listboxRef.current) {
-        return;
-      }
-
-      const listbox = listboxRef.current as HTMLDivElement;
-
-      const updatePosition = () => {
-        if (!triggerRef.current || !listboxRef.current) {
-          return;
-        }
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        listbox.style.position = "fixed";
-        listbox.style.top = `${triggerRect.bottom + 4}px`;
-        listbox.style.left = `${triggerRect.left}px`;
-        listbox.style.width = `${triggerRect.width}px`;
-        listbox.style.minWidth = `${triggerRect.width}px`;
-      };
-
-      const handleClickOutside = (event: MouseEvent) => {
-        const target = event.target as Node;
-        if (
-          triggerRef.current &&
-          !triggerRef.current.contains(target) &&
-          listboxRef.current &&
-          !listboxRef.current.contains(target)
-        ) {
-          onOpenChange(false);
-        }
-      };
-
-      // Initial position
-      updatePosition();
-
-      // Add all event listeners
-      window.addEventListener("scroll", updatePosition, true);
-      window.addEventListener("resize", updatePosition);
-      document.addEventListener("mousedown", handleClickOutside);
-
-      // Cleanup all listeners on unmount or when dependencies change
-      return () => {
-        window.removeEventListener("scroll", updatePosition, true);
-        window.removeEventListener("resize", updatePosition);
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [open, onOpenChange]);
-
-    const effectiveVariant = variant ?? context.variant;
-    const effectiveSize = size ?? context.size;
-
-    const handleClick = React.useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (context.disabled) {
-          event.preventDefault();
-          return;
-        }
-        context.onOpenChange(!context.open);
-        props.onClick?.(event);
+const selectTriggerVariants = cva(
+  `flex items-center justify-between outline-none ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1`,
+  {
+    variants: {
+      size: {
+        xs: `${SELECT_TOKENS.trigger.height.xs} ${SELECT_TOKENS.trigger.padding.horizontal.xs} ${SELECT_TOKENS.trigger.padding.vertical.xs} ${SELECT_TOKENS.trigger.radius.xs} ${SELECT_TOKENS.trigger.fontSize.xs}`,
+        sm: `${SELECT_TOKENS.trigger.height.sm} ${SELECT_TOKENS.trigger.padding.horizontal.sm} ${SELECT_TOKENS.trigger.padding.vertical.sm} ${SELECT_TOKENS.trigger.radius.sm} ${SELECT_TOKENS.trigger.fontSize.sm}`,
+        md: `${SELECT_TOKENS.trigger.height.md} ${SELECT_TOKENS.trigger.padding.horizontal.md} ${SELECT_TOKENS.trigger.padding.vertical.md} ${SELECT_TOKENS.trigger.radius.md} ${SELECT_TOKENS.trigger.fontSize.md}`,
+        lg: `${SELECT_TOKENS.trigger.height.lg} ${SELECT_TOKENS.trigger.padding.horizontal.lg} ${SELECT_TOKENS.trigger.padding.vertical.lg} ${SELECT_TOKENS.trigger.radius.lg} ${SELECT_TOKENS.trigger.fontSize.lg}`,
+        xl: `${SELECT_TOKENS.trigger.height.xl} ${SELECT_TOKENS.trigger.padding.horizontal.xl} ${SELECT_TOKENS.trigger.padding.vertical.xl} ${SELECT_TOKENS.trigger.radius.xl} ${SELECT_TOKENS.trigger.fontSize.xl}`,
       },
-      [context, props],
-    );
-
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (context.disabled) {
-          return;
-        }
-
-        if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
-          event.preventDefault();
-          if (!context.open) {
-            context.onOpenChange(true);
-          }
-        } else if (event.key === "Escape" && context.open) {
-          event.preventDefault();
-          context.onOpenChange(false);
-        }
-
-        props.onKeyDown?.(event);
+      variant: {
+        primary: `${SELECT_TOKENS.variant.primary.border} ${SELECT_TOKENS.variant.primary.background} ${SELECT_TOKENS.variant.primary.text} ${SELECT_TOKENS.variant.primary.focus}`,
+        secondary: `${SELECT_TOKENS.variant.secondary.border} ${SELECT_TOKENS.variant.secondary.background} ${SELECT_TOKENS.variant.secondary.text} ${SELECT_TOKENS.variant.secondary.focus}`,
+        outline: `${SELECT_TOKENS.variant.outline.border} ${SELECT_TOKENS.variant.outline.background} ${SELECT_TOKENS.variant.outline.text} ${SELECT_TOKENS.variant.outline.focus}`,
+        ghost: `${SELECT_TOKENS.variant.ghost.border} ${SELECT_TOKENS.variant.ghost.background} ${SELECT_TOKENS.variant.ghost.text} ${SELECT_TOKENS.variant.ghost.focus}`,
+        destructive: `${SELECT_TOKENS.variant.destructive.border} ${SELECT_TOKENS.variant.destructive.background} ${SELECT_TOKENS.variant.destructive.text} ${SELECT_TOKENS.variant.destructive.focus}`,
       },
-      [context, props],
-    );
+      // State is managed by Radix via data-state attributes
+      // We use compound variants to handle Radix's data-state
+      // Note: state prop removed - use Radix's data-state instead
+      width: {
+        auto: SELECT_TOKENS.width.auto,
+        full: SELECT_TOKENS.width.full,
+        sm: SELECT_TOKENS.width.sm,
+        md: SELECT_TOKENS.width.md,
+        lg: SELECT_TOKENS.width.lg,
+        xl: SELECT_TOKENS.width.xl,
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      variant: "outline",
+      width: "full",
+    },
+  },
+);
 
-    // Find selected option label
-    const selectedLabel = React.useMemo(() => {
-      if (!context.value) {
-        return placeholder;
-      }
-      const option = context.options.get(context.value);
-      return option?.label ?? placeholder;
-    }, [context.value, context.options, placeholder]);
+const selectContentVariants = cva(
+  `relative z-50 ${SELECT_TOKENS.content.maxHeight} ${SELECT_TOKENS.content.minWidth} overflow-hidden ${SELECT_TOKENS.content.border} ${SELECT_TOKENS.content.background} ${SELECT_TOKENS.content.text} ${SELECT_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[8px] data-[side=left]:slide-in-from-right-[8px] data-[side=right]:slide-in-from-left-[8px] data-[side=top]:slide-in-from-bottom-[8px]`,
+  {
+    variants: {
+      size: {
+        xs: `${SELECT_TOKENS.content.padding.xs} ${SELECT_TOKENS.content.radius.xs}`,
+        sm: `${SELECT_TOKENS.content.padding.sm} ${SELECT_TOKENS.content.radius.sm}`,
+        md: `${SELECT_TOKENS.content.padding.md} ${SELECT_TOKENS.content.radius.md}`,
+        lg: `${SELECT_TOKENS.content.padding.lg} ${SELECT_TOKENS.content.radius.lg}`,
+        xl: `${SELECT_TOKENS.content.padding.xl} ${SELECT_TOKENS.content.radius.xl}`,
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+const selectItemVariants = cva(
+  `relative flex ${SELECT_TOKENS.width.full} cursor-default select-none items-center outline-none ${SELECT_TOKENS.item.focus.background} ${SELECT_TOKENS.item.focus.text} ${SELECT_TOKENS.item.disabled.pointerEvents} data-[disabled]:opacity-50`,
+  {
+    variants: {
+      size: {
+        xs: `${SELECT_TOKENS.item.padding.horizontal.xs} ${SELECT_TOKENS.item.padding.vertical.xs} ${SELECT_TOKENS.item.radius.xs} ${SELECT_TOKENS.item.fontSize.xs}`,
+        sm: `${SELECT_TOKENS.item.padding.horizontal.sm} ${SELECT_TOKENS.item.padding.vertical.sm} ${SELECT_TOKENS.item.radius.sm} ${SELECT_TOKENS.item.fontSize.sm}`,
+        md: `${SELECT_TOKENS.item.padding.horizontal.md} ${SELECT_TOKENS.item.padding.vertical.md} ${SELECT_TOKENS.item.radius.md} ${SELECT_TOKENS.item.fontSize.md}`,
+        lg: `${SELECT_TOKENS.item.padding.horizontal.lg} ${SELECT_TOKENS.item.padding.vertical.lg} ${SELECT_TOKENS.item.radius.lg} ${SELECT_TOKENS.item.fontSize.lg}`,
+        xl: `${SELECT_TOKENS.item.padding.horizontal.xl} ${SELECT_TOKENS.item.padding.vertical.xl} ${SELECT_TOKENS.item.radius.xl} ${SELECT_TOKENS.item.fontSize.xl}`,
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+// ============================================================================
+// SELECT ROOT
+// ============================================================================
+
+export interface SelectRootProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {}
+
+/**
+ * Select Root component
+ * Radix Root is a context provider, not a DOM element, so it doesn't accept refs
+ */
+const SelectRoot: React.FC<SelectRootProps> = ({ children, ...props }) => {
+  return <SelectPrimitive.Root {...props}>{children}</SelectPrimitive.Root>;
+};
+SelectRoot.displayName = SelectPrimitive.Root.displayName;
+
+// ============================================================================
+// SELECT TRIGGER
+// ============================================================================
+
+export interface SelectTriggerProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
+    "size" | "variant" | "width"
+  > {
+  /**
+   * Size variant - token-based
+   */
+  size?: ResponsiveSelectSize;
+  /**
+   * Visual variant - token-based
+   */
+  variant?: SelectVariantToken;
+  /**
+   * Width - token-based
+   */
+  width?: ResponsiveSelectWidth;
+}
+
+const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
+  ({ className, size, variant, width, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
+    const baseVariant = variant ?? "outline";
+    const baseWidth = getBaseValue(width) ?? "full";
 
     return (
-      <>
-        <button
-          ref={triggerRef}
-          type="button"
-          id={context.triggerId}
-          disabled={context.disabled}
-          aria-haspopup="listbox"
-          aria-expanded={context.open}
-          aria-controls={context.open ? context.listboxId : undefined}
+      <SelectPrimitive.Trigger
+        ref={ref}
+        className={cn(
+          selectTriggerVariants({
+            size: baseSize as SelectSizeToken,
+            variant: baseVariant,
+            width: baseWidth as SelectWidthToken,
+          }),
+          // Radix provides data-state attributes automatically
+          // Add state-based styling via data attributes
+          "data-[state=open]:border-[hsl(var(--ring))]",
+          "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
+
+// ============================================================================
+// SELECT VALUE
+// ============================================================================
+
+export interface SelectValueProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value> {}
+
+const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(
+  ({ className, ...props }, ref) => {
+    return <SelectPrimitive.Value ref={ref} className={cn("truncate", className)} {...props} />;
+  },
+);
+SelectValue.displayName = SelectPrimitive.Value.displayName;
+
+// ============================================================================
+// SELECT ICON
+// ============================================================================
+
+export interface SelectIconProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Icon> {}
+
+const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <SelectPrimitive.Icon ref={ref} asChild {...props}>
+        <ChevronDown
           className={cn(
-            selectTriggerVariants({
-              variant: effectiveVariant,
-              size: effectiveSize,
-              state: (() => {
-                if (context.disabled) return "disabled";
-                if (context.open) return "open";
-                return "closed";
-              })(),
-            }),
+            SELECT_TOKENS.trigger.icon.size,
+            SELECT_TOKENS.trigger.icon.color,
+            "shrink-0 opacity-50 transition-transform duration-200 data-[state=open]:rotate-180",
             className,
           )}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          {...props}
-        >
-          <span className="truncate">{selectedLabel}</span>
-          <ChevronDown
-            className={cn(
-              "ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform",
-              context.open && "rotate-180",
-            )}
-            aria-hidden="true"
-          />
-        </button>
-      </>
+        />
+      </SelectPrimitive.Icon>
     );
   },
 );
+SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 
-SelectTrigger.displayName = "SelectTrigger";
+// ============================================================================
+// SELECT CONTENT
+// ============================================================================
 
-/**
- * Select Listbox Component
- * Container for options with keyboard navigation
- */
-export const SelectListbox = React.forwardRef<HTMLDivElement, SelectListboxProps>(
-  ({ className, size, children, onKeyDown, ...props }, ref) => {
-    const context = useSelectContext();
-    const listboxRef = React.useRef<HTMLDivElement>(null);
+export interface SelectContentProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
+    "size" | "sideOffset" | "alignOffset"
+  > {
+  /**
+   * Size variant - token-based
+   */
+  size?: ResponsiveSelectSize;
+  /**
+   * Side offset - token-based
+   */
+  sideOffset?: ResponsiveSideOffset;
+  /**
+   * Alignment offset - token-based
+   */
+  alignOffset?: ResponsiveAlignOffset;
+}
 
-    // Combine refs
-    React.useImperativeHandle(ref, () => listboxRef.current as HTMLDivElement, []);
+const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
+  ({ className, size, sideOffset, alignOffset, position = "popper", ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
 
-    const effectiveSize = size ?? context.size;
-    const isOpen = context.open;
+    // Resolve offset tokens to pixels
+    const sideOffsetPx = React.useMemo(() => {
+      const baseOffset = getBaseValue(sideOffset);
+      return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+    }, [sideOffset]);
 
-    // Get array of option IDs for focus management
-    const optionIds = React.useMemo(() => {
-      return context.itemIds.filter((id) => {
-        const element = document.getElementById(id);
-        return element && !element.hasAttribute("aria-disabled");
-      });
-    }, [context.itemIds]);
-
-    // Auto-set focusedIndex to 0 when listbox opens
-    React.useEffect(() => {
-      if (
-        context.open &&
-        (context.focusedIndex === null || context.focusedIndex === -1) &&
-        optionIds.length > 0
-      ) {
-        context.setFocusedIndex(0);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [context.open, context.focusedIndex, optionIds.length]);
-
-    // Automatically focus the highlighted option when open or focusedIndex changes
-    React.useLayoutEffect(() => {
-      if (!context.open) return;
-      const currentIndex = context.focusedIndex ?? -1;
-      if (currentIndex < 0 || currentIndex >= optionIds.length) return;
-
-      const id = optionIds[currentIndex];
-      if (!id) return;
-
-      const element = document.getElementById(id);
-      if (element) {
-        // Temporarily make element focusable if it's not already
-        const needsTabIndex = element.getAttribute("tabindex") === "-1";
-        if (needsTabIndex) {
-          element.setAttribute("tabindex", "0");
-        }
-        element.focus();
-      }
-    }, [context.open, context.focusedIndex, optionIds]);
-
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (!isOpen) {
-          onKeyDown?.(event);
-          return;
-        }
-
-        if (optionIds.length === 0) {
-          onKeyDown?.(event);
-          return;
-        }
-
-        let newIndex = context.focusedIndex ?? 0;
-
-        switch (event.key) {
-          case "ArrowDown":
-            event.preventDefault();
-            newIndex = Math.min(newIndex + 1, optionIds.length - 1);
-            context.setFocusedIndex(newIndex);
-            break;
-
-          case "ArrowUp":
-            event.preventDefault();
-            newIndex = Math.max(newIndex - 1, 0);
-            context.setFocusedIndex(newIndex);
-            break;
-
-          case "Home":
-            event.preventDefault();
-            newIndex = 0;
-            context.setFocusedIndex(newIndex);
-            break;
-
-          case "End":
-            event.preventDefault();
-            newIndex = optionIds.length - 1;
-            context.setFocusedIndex(newIndex);
-            break;
-
-          case "Enter": {
-            event.preventDefault();
-            const currentIndex = context.focusedIndex ?? 0;
-            const focusedItemId = optionIds[currentIndex];
-            if (focusedItemId) {
-              const element = document.getElementById(focusedItemId);
-              if (element && element.hasAttribute("data-value")) {
-                const value = element.getAttribute("data-value");
-                if (value) {
-                  context.onValueChange(value);
-                  context.onOpenChange(false);
-                }
-              }
-            }
-            break;
-          }
-
-          case "Escape":
-            event.preventDefault();
-            context.onOpenChange(false);
-            // Return focus to trigger
-            const trigger = document.getElementById(context.triggerId);
-            trigger?.focus();
-            break;
-
-          case "Tab":
-            // Close on Tab
-            event.preventDefault();
-            context.onOpenChange(false);
-            break;
-
-          default:
-            onKeyDown?.(event);
-            break;
-        }
-      },
-      [isOpen, context, onKeyDown, optionIds],
-    );
-
-    // Ensure Portal DOM node is cleaned up on unmount
-    React.useEffect(() => {
-      return () => {
-        // Cleanup: Remove portal DOM node if it still exists
-        if (typeof document !== "undefined") {
-          const portalNode = document.getElementById(context.listboxId);
-          if (portalNode && portalNode.parentNode) {
-            portalNode.parentNode.removeChild(portalNode);
-          }
-        }
-      };
-    }, [context.listboxId]);
+    const alignOffsetPx = React.useMemo(() => {
+      const baseOffset = getBaseValue(alignOffset);
+      return baseOffset ? getSpacingPx(baseOffset) : undefined;
+    }, [alignOffset]);
 
     return (
-      <Portal>
-        <div
-          ref={listboxRef}
-          id={isOpen ? context.listboxId : undefined}
-          role={isOpen ? "listbox" : undefined}
-          aria-labelledby={isOpen ? context.triggerId : undefined}
-          aria-hidden={!isOpen ? "true" : undefined}
-          hidden={!isOpen}
-          className={cn(selectListboxVariants({ size: effectiveSize }), className)}
-          onKeyDown={handleKeyDown}
+      <SelectPrimitive.Portal>
+        <SelectPrimitive.Content
+          ref={ref}
+          position={position}
+          sideOffset={sideOffsetPx}
+          alignOffset={alignOffsetPx}
+          className={cn(
+            selectContentVariants({
+              size: baseSize as SelectSizeToken,
+            }),
+            position === "popper" &&
+              "data-[side=bottom]:translate-y-[4px] data-[side=left]:-translate-x-[4px] data-[side=right]:translate-x-[4px] data-[side=top]:-translate-y-[4px]",
+            className,
+          )}
           {...props}
         >
-          {children}
-        </div>
-      </Portal>
+          {props.children}
+        </SelectPrimitive.Content>
+      </SelectPrimitive.Portal>
     );
   },
 );
+SelectContent.displayName = SelectPrimitive.Content.displayName;
 
-SelectListbox.displayName = "SelectListbox";
+// ============================================================================
+// SELECT VIEWPORT
+// ============================================================================
 
-/**
- * Select Option Component
- * Individual option in the listbox
- */
-export const SelectOption = React.forwardRef<HTMLDivElement, SelectOptionProps>(
-  (
-    { className, value, label, disabled = false, size, children, onClick, onKeyDown, ...props },
-    ref,
-  ) => {
-    const context = useSelectContext();
-    const optionRef = React.useRef<HTMLDivElement>(null);
-    const optionIdRef = React.useRef(`select-option-${Math.random().toString(36).substr(2, 9)}`);
+export interface SelectViewportProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport> {}
 
-    // Combine refs
-    React.useImperativeHandle(ref, () => optionRef.current as HTMLDivElement, []);
-
-    // Register item
-    React.useEffect(() => {
-      const optionId = optionIdRef.current;
-      context.registerItem(optionId);
-      return () => {
-        context.unregisterItem(optionId);
-      };
-      // Мы специально запускаем эффект только один раз на маунт/анмаунт.
-      // registerItem / unregisterItem — стабильные (useCallback с пустыми deps),
-      // поэтому игнорировать их в зависимостях безопасно.
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    // Store stable references to register/unregister functions to avoid dependency cycles
-    // Functions are stable (useCallback with []), so we can safely update refs synchronously
-    const registerOptionRef = React.useRef(context.registerOption);
-    const unregisterOptionRef = React.useRef(context.unregisterOption);
-    // Update refs synchronously on each render (safe because functions are stable)
-    registerOptionRef.current = context.registerOption;
-    unregisterOptionRef.current = context.unregisterOption;
-
-    // Register option with resolved label for trigger display
-    // Use useLayoutEffect to register before paint, ensuring Trigger sees options immediately
-    React.useLayoutEffect(() => {
-      // Extract label text: label → extractTextFromNode(children) → value
-      const resolvedLabel =
-        typeof label === "string" ? label : extractTextFromNode(children) || String(value);
-
-      registerOptionRef.current(value, resolvedLabel);
-
-      return () => {
-        unregisterOptionRef.current(value);
-      };
-    }, [value, label, children]);
-
-    // Get item index in the full list
-    // const itemIndex = React.useMemo(() => {
-    //   return context.itemIds.indexOf(optionIdRef.current);
-    // }, [context.itemIds]);
-
-    // Get filtered index (excluding disabled items) for focus comparison
-    // We need to match the filtering logic in SelectListbox
-    // Calculate by counting non-disabled items before this one in context.itemIds
-    const filteredIndex = React.useMemo(() => {
-      if (disabled || context.disabled) return -1;
-
-      const itemIndex = context.itemIds.indexOf(optionIdRef.current);
-      if (itemIndex < 0) return -1;
-
-      // Count non-disabled items before this one
-      // Match the filtering logic in SelectListbox: filter by element existence and aria-disabled
-      let count = 0;
-      for (let i = 0; i < itemIndex; i++) {
-        const id = context.itemIds[i];
-        if (!id) continue;
-        const element = document.getElementById(id);
-        // Only count if element exists and is not disabled
-        if (element && !element.hasAttribute("aria-disabled")) {
-          count++;
-        }
-      }
-      return count;
-    }, [context.itemIds, disabled, context.disabled]);
-
-    // Check if item is focused (focusedIndex corresponds to filtered array)
-    const isFocused =
-      context.focusedIndex !== null && context.focusedIndex === filteredIndex && filteredIndex >= 0;
-    const isSelected = context.value === value;
-
-    const effectiveSize = size ?? context.size;
-
-    const handleClick = React.useCallback(
-      (event: React.MouseEvent<HTMLDivElement>) => {
-        if (disabled || context.disabled) {
-          event.preventDefault();
-          return;
-        }
-
-        context.onValueChange(value);
-        onClick?.(event);
-      },
-      [disabled, context, value, onClick],
-    );
-
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (disabled || context.disabled) {
-          return;
-        }
-
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          context.onValueChange(value);
-          return;
-        }
-
-        onKeyDown?.(event);
-      },
-      [disabled, context, value, onKeyDown],
-    );
-
-    // Focus on mount if this is the selected item and listbox just opened
-    React.useEffect(() => {
-      if (isSelected && context.open && optionRef.current && !disabled && !context.disabled) {
-        // Use queueMicrotask instead of setTimeout to avoid timer leaks
-        // and ensure it runs after DOM updates but before next frame
-        queueMicrotask(() => {
-          if (optionRef.current) {
-            optionRef.current.focus();
-            context.setFocusedIndex(filteredIndex);
-          }
-        });
-      }
-    }, [context.open, isSelected, filteredIndex, disabled, context]);
-
-    // Check if item is active (focused/highlighted)
-    const isActive = isFocused;
-
+const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
+  ({ className, ...props }, ref) => {
     return (
-      <div
-        ref={optionRef}
-        id={optionIdRef.current}
-        role="option"
-        tabIndex={isActive ? 0 : -1}
-        aria-selected={isActive ? "true" : "false"}
-        aria-disabled={disabled || context.disabled}
-        data-disabled={disabled || context.disabled}
-        data-value={value}
+      <SelectPrimitive.Viewport
+        ref={ref}
         className={cn(
-          selectOptionVariants({
-            size: effectiveSize,
-            state: (() => {
-              if (isSelected) return "selected";
-              if (disabled || context.disabled) return "disabled";
-              return "default";
-            })(),
+          SELECT_TOKENS.content.padding.md,
+          "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+SelectViewport.displayName = SelectPrimitive.Viewport.displayName;
+
+// ============================================================================
+// SELECT ITEM
+// ============================================================================
+
+export interface SelectItemProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
+  /**
+   * Size variant - token-based
+   */
+  size?: ResponsiveSelectSize;
+}
+
+const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
+  ({ className, size, children, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
+
+    return (
+      <SelectPrimitive.Item
+        ref={ref}
+        className={cn(
+          selectItemVariants({
+            size: baseSize as SelectSizeToken,
           }),
           className,
         )}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        onFocus={() => {
-          if (!disabled && !context.disabled) {
-            context.setFocusedIndex(filteredIndex);
-          }
-        }}
         {...props}
       >
-        {label ?? children ?? value}
-      </div>
+        <span
+          className={cn(
+            "absolute left-sm flex items-center justify-center",
+            SELECT_TOKENS.item.indicator.size,
+          )}
+        >
+          <SelectPrimitive.ItemIndicator>
+            <Check className={cn(SELECT_TOKENS.item.indicator.size)} />
+          </SelectPrimitive.ItemIndicator>
+        </span>
+        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      </SelectPrimitive.Item>
     );
   },
 );
+SelectItem.displayName = SelectPrimitive.Item.displayName;
 
-SelectOption.displayName = "SelectOption";
+// ============================================================================
+// SELECT ITEM TEXT
+// ============================================================================
 
-/**
- * Select Component (Compound)
- * Main export that combines all sub-components
- */
+export interface SelectItemTextProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemText> {}
+
+const SelectItemText = React.forwardRef<HTMLSpanElement, SelectItemTextProps>(
+  ({ className, ...props }, ref) => {
+    return <SelectPrimitive.ItemText ref={ref} className={className} {...props} />;
+  },
+);
+SelectItemText.displayName = SelectPrimitive.ItemText.displayName;
+
+// ============================================================================
+// SELECT ITEM INDICATOR
+// ============================================================================
+
+export interface SelectItemIndicatorProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator> {}
+
+const SelectItemIndicator = React.forwardRef<HTMLSpanElement, SelectItemIndicatorProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <SelectPrimitive.ItemIndicator ref={ref} className={className} {...props}>
+        <Check className={cn(SELECT_TOKENS.item.indicator.size)} />
+      </SelectPrimitive.ItemIndicator>
+    );
+  },
+);
+SelectItemIndicator.displayName = SelectPrimitive.ItemIndicator.displayName;
+
+// ============================================================================
+// SELECT SEPARATOR
+// ============================================================================
+
+export interface SelectSeparatorProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> {
+  /**
+   * Size variant - token-based
+   */
+  size?: ResponsiveSelectSize;
+}
+
+const SelectSeparator = React.forwardRef<HTMLDivElement, SelectSeparatorProps>(
+  ({ className, size, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
+    const marginHorizontal =
+      baseSize === "xs" || baseSize === "sm" || baseSize === "md"
+        ? SELECT_TOKENS.separator.margin.horizontal.md
+        : SELECT_TOKENS.separator.margin.horizontal.lg;
+    const marginVertical =
+      baseSize === "xs" || baseSize === "sm" || baseSize === "md"
+        ? SELECT_TOKENS.separator.margin.vertical.md
+        : SELECT_TOKENS.separator.margin.vertical.lg;
+
+    return (
+      <SelectPrimitive.Separator
+        ref={ref}
+        className={cn(
+          marginHorizontal,
+          marginVertical,
+          SELECT_TOKENS.separator.height,
+          SELECT_TOKENS.separator.background,
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
+
+// ============================================================================
+// SELECT GROUP
+// ============================================================================
+
+export interface SelectGroupProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group> {}
+
+const SelectGroup = React.forwardRef<HTMLDivElement, SelectGroupProps>(
+  ({ className, ...props }, ref) => {
+    return <SelectPrimitive.Group ref={ref} className={className} {...props} />;
+  },
+);
+SelectGroup.displayName = SelectPrimitive.Group.displayName;
+
+// ============================================================================
+// SELECT LABEL
+// ============================================================================
+
+export interface SelectLabelProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label> {
+  /**
+   * Size variant - token-based
+   */
+  size?: ResponsiveSelectSize;
+}
+
+const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(
+  ({ className, size, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
+    const paddingHorizontal = SELECT_TOKENS.label.padding.horizontal[baseSize as SelectSizeToken];
+    const paddingVertical = SELECT_TOKENS.label.padding.vertical[baseSize as SelectSizeToken];
+    const fontSize = SELECT_TOKENS.label.fontSize[baseSize as SelectSizeToken];
+
+    return (
+      <SelectPrimitive.Label
+        ref={ref}
+        className={cn(
+          paddingHorizontal,
+          paddingVertical,
+          fontSize,
+          SELECT_TOKENS.label.fontWeight,
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+SelectLabel.displayName = SelectPrimitive.Label.displayName;
+
+// ============================================================================
+// INDIVIDUAL EXPORTS
+// ============================================================================
+
+export {
+  SelectContent,
+  SelectGroup,
+  SelectIcon,
+  SelectItem,
+  SelectItemIndicator,
+  SelectItemText,
+  SelectLabel,
+  SelectRoot,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+  SelectViewport,
+};
+
+// ============================================================================
+// COMPOUND COMPONENT EXPORT
+// ============================================================================
+
 export const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
-  Listbox: SelectListbox,
-  Option: SelectOption,
+  Value: SelectValue,
+  Icon: SelectIcon,
+  Content: SelectContent,
+  Viewport: SelectViewport,
+  Item: SelectItem,
+  ItemText: SelectItemText,
+  ItemIndicator: SelectItemIndicator,
+  Separator: SelectSeparator,
+  Group: SelectGroup,
+  Label: SelectLabel,
 };

@@ -1,130 +1,44 @@
 "use client";
 
-import type { VariantProps } from "class-variance-authority";
+import type {
+  SelectSizeToken,
+  SelectStateToken,
+  SelectVariantToken,
+  SelectWidthToken,
+} from "@/tokens/types";
 
-import { selectTriggerVariants } from "./select-variants";
-
-/**
- * Select Variant Props
- */
-export type SelectVariant = VariantProps<typeof selectTriggerVariants>["variant"];
-export type SelectSize = VariantProps<typeof selectTriggerVariants>["size"];
-
-/**
- * Select Option Data
- */
-export interface SelectOption {
-  value: string;
-  label: string;
-  disabled?: boolean;
-}
-
-/**
- * Select Root Props
- */
-export interface SelectRootProps {
-  /**
-   * Current value (controlled mode)
-   */
-  value?: string;
-
-  /**
-   * Default value (uncontrolled mode)
-   */
-  defaultValue?: string;
-
-  /**
-   * Callback when value changes
-   */
-  onValueChange?: (value: string) => void;
-
-  /**
-   * Whether the select is disabled
-   */
-  disabled?: boolean;
-
-  /**
-   * Whether the select is open (controlled mode)
-   */
-  open?: boolean;
-
-  /**
-   * Callback when open state changes
-   */
-  onOpenChange?: (open: boolean) => void;
-
-  /**
-   * Default open state (uncontrolled mode)
-   */
-  defaultOpen?: boolean;
-
-  /**
-   * Variant style (applies to trigger)
-   */
-  variant?: SelectVariant;
-
-  /**
-   * Size (applies to trigger, listbox, and options)
-   */
-  size?: SelectSize;
-
-  /**
-   * Children
-   */
-  children: React.ReactNode;
-}
+// Re-export types from Select.tsx for convenience
+export type {
+  SelectContentProps,
+  SelectGroupProps,
+  SelectIconProps,
+  SelectItemIndicatorProps,
+  SelectItemProps,
+  SelectItemTextProps,
+  SelectLabelProps,
+  SelectRootProps,
+  SelectSeparatorProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectViewportProps,
+} from "./Select";
 
 /**
- * Select Trigger Props
+ * Select size token type
  */
-export interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * Variant style
-   */
-  variant?: SelectVariant;
-
-  /**
-   * Size
-   */
-  size?: SelectSize;
-
-  /**
-   * Placeholder text when no value is selected
-   */
-  placeholder?: string;
-}
+export type SelectSize = SelectSizeToken;
 
 /**
- * Select Listbox Props
+ * Select variant token type
  */
-export interface SelectListboxProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Size (should match trigger size)
-   */
-  size?: SelectSize;
-}
+export type SelectVariant = SelectVariantToken;
 
 /**
- * Select Option Props
+ * Select width token type
  */
-export interface SelectOptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Option value
-   */
-  value: string;
+export type SelectWidth = SelectWidthToken;
 
-  /**
-   * Option label
-   */
-  label?: string;
-
-  /**
-   * Whether the option is disabled
-   */
-  disabled?: boolean;
-
-  /**
-   * Size (should match trigger size)
-   */
-  size?: SelectSize;
-}
+/**
+ * Select state token type
+ */
+export type SelectState = SelectStateToken;

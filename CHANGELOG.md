@@ -161,7 +161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Navigation**: Breadcrumbs, Pagination, Tabs, NavigationMenu, DropdownMenu
 - **Data**: Table, List, Timeline
 - **Cards**: EventCard, VenueCard
-- **Modals**: Modal, Dialog, ConfirmDialog, ModalProvider, CustomDialog, SimpleModal
+- **Modals**: Modal, Dialog, ConfirmDialog, ModalProvider, CustomDialog
 - **Overlays**: Tooltip, Popover, OverlayPortal
 - **Filters**: SearchInput, FilterSelect, DateRangePicker, PriceRangeSlider, FilterBar, SearchFilters
 - **Search**: SearchBar

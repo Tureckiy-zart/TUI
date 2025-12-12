@@ -9,8 +9,10 @@
 
 import * as React from "react";
 
+import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { MENU_TOKENS } from "@/tokens/components/menu";
+import type { ResponsiveAlignOffset } from "@/tokens/types";
 
 import { Portal } from "../../overlays/Portal";
 import { type Placement, usePositioning } from "../../overlays/utils/positioning";
@@ -24,20 +26,27 @@ export interface ContextMenuContentProps extends React.HTMLAttributes<HTMLDivEle
   placement?: Placement;
 
   /**
-   * Offset between trigger and content (in pixels)
+   * Offset between trigger and content - token-based
+   * Uses spacing tokens for positioning offsets
    */
-  offset?: number;
+  offset?: ResponsiveAlignOffset;
 }
 
 /**
  * ContextMenu Content component
  */
 export const ContextMenuContent = React.forwardRef<HTMLDivElement, ContextMenuContentProps>(
-  ({ className, placement = "bottom-start", offset = 4, children, ...props }, ref) => {
+  ({ className, placement = "bottom-start", offset, children, ...props }, ref) => {
     const { open, onOpenChange, triggerId, contentId } = usePopoverContext();
     const { position: cursorPosition } = useContextMenuContext();
     const contentRef = React.useRef<HTMLDivElement>(null);
     const virtualAnchorRef = React.useRef<HTMLElement | null>(null);
+
+    // Resolve offset token to pixels
+    const offsetPx = React.useMemo(() => {
+      const baseOffset = getBaseValue(offset);
+      return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+    }, [offset]);
 
     // Combine refs
     React.useImperativeHandle(ref, () => contentRef.current as HTMLDivElement, []);
@@ -72,7 +81,7 @@ export const ContextMenuContent = React.forwardRef<HTMLDivElement, ContextMenuCo
       anchorRef: virtualAnchorRef,
       contentRef,
       placement,
-      offset,
+      offset: offsetPx,
       enabled: open && !!cursorPosition,
     });
 

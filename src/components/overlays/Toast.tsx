@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { useSwipe } from "@/theme/motion/gestures";
 import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TOAST_TOKENS } from "@/tokens/components/toast";
+import type { ResponsiveDelay } from "@/tokens/types";
 
 import { Button } from "../ui/button";
 
@@ -48,7 +49,11 @@ export interface ToastData {
   description?: string;
   variant?: "default" | "success" | "info" | "warning" | "danger";
   action?: ToastAction;
-  duration?: number;
+  /**
+   * Toast duration - token-based
+   * Uses motion duration tokens
+   */
+  duration?: ResponsiveDelay;
 }
 
 export interface ToastProps

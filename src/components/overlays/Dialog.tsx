@@ -16,10 +16,10 @@ import { OVERLAY_TOKENS } from "@/tokens/components/overlay";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import { Row } from "../layout/Row";
+import { Modal } from "../modal";
 import { Heading } from "../ui/heading";
-import { Modal, type ModalProps } from "./Modal";
 
-export interface DialogProps extends Omit<ModalProps, "role" | "aria-modal"> {
+export interface DialogProps extends React.ComponentPropsWithoutRef<typeof Modal.Root> {
   /**
    * ID for the dialog title (for aria-labelledby)
    */
@@ -33,22 +33,20 @@ export interface DialogProps extends Omit<ModalProps, "role" | "aria-modal"> {
 
 /**
  * Dialog Root - Main dialog wrapper
+ *
+ * **Note:** This component is a semantic wrapper over Modal.Root and Modal.Content.
+ * It provides Dialog-specific subcomponents but uses the new Radix-based Modal internally.
  */
-const DialogRoot = React.forwardRef<HTMLDivElement, DialogProps>(
-  ({ titleId, descriptionId, children, ...props }, ref) => {
-    const titleIdRef = React.useId();
-    const descriptionIdRef = React.useId();
+const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, ...props }) => {
+  const titleIdRef = React.useId();
+  const descriptionIdRef = React.useId();
 
-    const finalTitleId = titleId || titleIdRef;
-    const finalDescriptionId = descriptionId || descriptionIdRef;
+  const finalTitleId = titleId || titleIdRef;
+  const finalDescriptionId = descriptionId || descriptionIdRef;
 
-    return (
-      <Modal
-        ref={ref}
-        {...props}
-        aria-labelledby={finalTitleId}
-        aria-describedby={finalDescriptionId}
-      >
+  return (
+    <Modal.Root {...props}>
+      <Modal.Content>
         {React.Children.map(children, (child) => {
           if (React.isValidElement(child)) {
             return React.cloneElement(child as React.ReactElement<any>, {
@@ -58,10 +56,11 @@ const DialogRoot = React.forwardRef<HTMLDivElement, DialogProps>(
           }
           return child;
         })}
-      </Modal>
-    );
-  },
-);
+        <Modal.Close />
+      </Modal.Content>
+    </Modal.Root>
+  );
+};
 
 DialogRoot.displayName = "DialogRoot";
 

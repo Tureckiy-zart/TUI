@@ -444,4 +444,22 @@ export type Spring = keyof typeof springs;
  * Motion V2 Exports
  * CSS-only motion system with gesture support
  */
-export * from "./motion/v2";
+export type {
+  MotionV2CombinedType,
+  MotionV2Duration,
+  MotionV2Easing,
+  MotionV2SlideDirection,
+  MotionV2Transition,
+} from "./motion/v2";
+
+export {
+  motionV2Combined,
+  motionV2CSSVariables,
+  motionV2Durations,
+  motionV2Easings,
+  motionV2Fade,
+  motionV2Scale,
+  motionV2Slide,
+  motionV2TailwindConfig,
+  motionV2Transitions,
+} from "./motion/v2";

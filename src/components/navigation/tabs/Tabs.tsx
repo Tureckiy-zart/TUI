@@ -3,424 +3,335 @@
 /**
  * Tabs Component
  *
- * Token-driven tabs component with full keyboard navigation and accessibility support.
- * Follows ARIA tabs pattern with roving tabindex.
+ * Radix-based tabs component with token-driven styling.
+ * All behavior (keyboard navigation, focus management, a11y) is handled by Radix.
+ * Tenerife UI provides visual styling through tokens only.
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cva } from "class-variance-authority";
 import * as React from "react";
 
+import { getBaseValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
-import { MOTION_TOKENS } from "@/tokens/components/motion";
-import { NAVIGATION_TOKENS } from "@/tokens/components/navigation";
+import { TABS_TOKENS } from "@/tokens/components/tabs";
+import type {
+  ResponsiveTabsSize,
+  TabsSizeToken,
+  TabsToneToken,
+  TabsVariantToken,
+} from "@/tokens/types";
 
 // ============================================================================
-// Variants
+// CVA VARIANTS
 // ============================================================================
 
 const tabsListVariants = cva(
-  `inline-flex items-center justify-center ${NAVIGATION_TOKENS.spacing.listGap.md} ${NAVIGATION_TOKENS.typography.default} ${NAVIGATION_TOKENS.shadow.sm}`,
+  `inline-flex items-center justify-center outline-none data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col`,
   {
     variants: {
-      orientation: {
-        horizontal: "flex-row",
-        vertical: "flex-col",
-      },
       size: {
-        sm: `${NAVIGATION_TOKENS.sizes.sm.fontSize}`,
-        md: `${NAVIGATION_TOKENS.sizes.md.fontSize}`,
-        lg: `${NAVIGATION_TOKENS.sizes.lg.fontSize}`,
+        sm: `${TABS_TOKENS.size.sm.list.gap} ${TABS_TOKENS.size.sm.list.padding}`,
+        md: `${TABS_TOKENS.size.md.list.gap} ${TABS_TOKENS.size.md.list.padding}`,
+        lg: `${TABS_TOKENS.size.lg.list.gap} ${TABS_TOKENS.size.lg.list.padding}`,
+      },
+      variant: {
+        underline: "",
+        pill: "",
+        segmented: `${TABS_TOKENS.variant.segmented.list.background} ${TABS_TOKENS.variant.segmented.list.padding} ${TABS_TOKENS.variant.segmented.list.radius}`,
       },
     },
     defaultVariants: {
-      orientation: "horizontal",
       size: "md",
+      variant: "underline",
     },
   },
 );
 
 const tabsTriggerVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap ${NAVIGATION_TOKENS.typography.fontWeight.medium} ${NAVIGATION_TOKENS.focus.ring} ${MOTION_TOKENS.transition.colors} disabled:pointer-events-none disabled:opacity-50 relative`,
+  `inline-flex items-center justify-center whitespace-nowrap outline-none ${TABS_TOKENS.transition.colors} ${TABS_TOKENS.focus.ring} ${TABS_TOKENS.disabled.opacity} ${TABS_TOKENS.disabled.pointerEvents} ${TABS_TOKENS.disabled.cursor} relative`,
   {
     variants: {
       size: {
-        sm: `${NAVIGATION_TOKENS.sizes.sm.height} ${NAVIGATION_TOKENS.sizes.sm.padding.horizontal} ${NAVIGATION_TOKENS.sizes.sm.padding.vertical} ${NAVIGATION_TOKENS.sizes.sm.fontSize}`,
-        md: `${NAVIGATION_TOKENS.sizes.md.height} ${NAVIGATION_TOKENS.sizes.md.padding.horizontal} ${NAVIGATION_TOKENS.sizes.md.padding.vertical} ${NAVIGATION_TOKENS.sizes.md.fontSize}`,
-        lg: `${NAVIGATION_TOKENS.sizes.lg.height} ${NAVIGATION_TOKENS.sizes.lg.padding.horizontal} ${NAVIGATION_TOKENS.sizes.lg.padding.vertical} ${NAVIGATION_TOKENS.sizes.lg.fontSize}`,
+        sm: `${TABS_TOKENS.size.sm.trigger.height} ${TABS_TOKENS.size.sm.trigger.padding.horizontal} ${TABS_TOKENS.size.sm.trigger.padding.vertical} ${TABS_TOKENS.size.sm.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
+        md: `${TABS_TOKENS.size.md.trigger.height} ${TABS_TOKENS.size.md.trigger.padding.horizontal} ${TABS_TOKENS.size.md.trigger.padding.vertical} ${TABS_TOKENS.size.md.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
+        lg: `${TABS_TOKENS.size.lg.trigger.height} ${TABS_TOKENS.size.lg.trigger.padding.horizontal} ${TABS_TOKENS.size.lg.trigger.padding.vertical} ${TABS_TOKENS.size.lg.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
       },
-      state: {
-        default: `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
-        selected: `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.shadow.sm}`,
+      variant: {
+        underline: cn(
+          TABS_TOKENS.variant.underline.trigger.default.background,
+          TABS_TOKENS.variant.underline.trigger.default.text,
+          TABS_TOKENS.variant.underline.trigger.default.border,
+          TABS_TOKENS.variant.underline.trigger.hover.background,
+          TABS_TOKENS.variant.underline.trigger.hover.text,
+          TABS_TOKENS.variant.underline.trigger.active.border,
+        ),
+        pill: cn(
+          TABS_TOKENS.variant.pill.trigger.default.background,
+          TABS_TOKENS.variant.pill.trigger.default.text,
+          TABS_TOKENS.variant.pill.trigger.default.border,
+          TABS_TOKENS.variant.pill.trigger.default.radius,
+          TABS_TOKENS.variant.pill.trigger.hover.background,
+          TABS_TOKENS.variant.pill.trigger.hover.text,
+          TABS_TOKENS.variant.pill.trigger.active.background,
+          TABS_TOKENS.variant.pill.trigger.active.text,
+          TABS_TOKENS.variant.pill.trigger.active.radius,
+        ),
+        segmented: cn(
+          TABS_TOKENS.variant.segmented.trigger.default.background,
+          TABS_TOKENS.variant.segmented.trigger.default.text,
+          TABS_TOKENS.variant.segmented.trigger.default.border,
+          TABS_TOKENS.variant.segmented.trigger.hover.background,
+          TABS_TOKENS.variant.segmented.trigger.hover.text,
+          TABS_TOKENS.variant.segmented.trigger.active.background,
+          TABS_TOKENS.variant.segmented.trigger.active.text,
+          TABS_TOKENS.variant.segmented.trigger.active.border,
+          TABS_TOKENS.variant.segmented.trigger.active.shadow,
+        ),
+      },
+      tone: {
+        neutral: "",
+        primary: "",
       },
     },
+    compoundVariants: [
+      // Underline variant with indicator (CSS-based)
+      {
+        variant: "underline",
+        className: cn(
+          "after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0",
+          TABS_TOKENS.variant.underline.indicator.height,
+          TABS_TOKENS.variant.underline.indicator.background,
+          TABS_TOKENS.variant.underline.indicator.position,
+          TABS_TOKENS.variant.underline.indicator.transition,
+          "after:scale-x-0 data-[state=active]:after:scale-x-100",
+        ),
+      },
+      // Tone-based active states for underline - override default active states
+      {
+        variant: "underline",
+        tone: "primary",
+        className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.border} after:${TABS_TOKENS.tone.primary.indicator.background}`,
+      },
+      {
+        variant: "underline",
+        tone: "neutral",
+        className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.border} after:${TABS_TOKENS.tone.neutral.indicator.background}`,
+      },
+      // Tone-based active states for pill - override default active states
+      {
+        variant: "pill",
+        tone: "primary",
+        className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.background} data-[state=active]:${TABS_TOKENS.tone.primary.active.text}`,
+      },
+      {
+        variant: "pill",
+        tone: "neutral",
+        className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.background} data-[state=active]:${TABS_TOKENS.tone.neutral.active.text}`,
+      },
+    ],
     defaultVariants: {
       size: "md",
-      state: "default",
+      variant: "underline",
+      tone: "primary",
     },
   },
 );
 
+const tabsContentVariants = cva(`outline-none`, {
+  variants: {
+    size: {
+      sm: `${TABS_TOKENS.size.sm.content.padding} ${TABS_TOKENS.size.sm.content.marginTop}`,
+      md: `${TABS_TOKENS.size.md.content.padding} ${TABS_TOKENS.size.md.content.marginTop}`,
+      lg: `${TABS_TOKENS.size.lg.content.padding} ${TABS_TOKENS.size.lg.content.marginTop}`,
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
 // ============================================================================
-// Types
+// TABS ROOT
 // ============================================================================
 
-export interface TabsRootProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Controlled value for the active tab
-   */
-  value?: string;
+export interface TabsRootProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {}
 
-  /**
-   * Default value for uncontrolled usage
-   */
-  defaultValue?: string;
+/**
+ * Tabs Root component
+ * Radix Root is a context provider, not a DOM element, so it doesn't accept refs
+ */
+const TabsRoot: React.FC<TabsRootProps> = ({ children, ...props }) => {
+  return <TabsPrimitive.Root {...props}>{children}</TabsPrimitive.Root>;
+};
+TabsRoot.displayName = TabsPrimitive.Root.displayName;
 
-  /**
-   * Callback when the active tab changes
-   */
-  onValueChange?: (value: string) => void;
-
-  /**
-   * Orientation of the tabs
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
-}
+// ============================================================================
+// TABS LIST
+// ============================================================================
 
 export interface TabsListProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "role">,
-    VariantProps<typeof tabsListVariants> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>, "size" | "variant"> {
   /**
-   * Gap between tab items
+   * Size variant - token-based
    */
-  gap?: "xs" | "sm" | "md" | "lg";
+  size?: ResponsiveTabsSize;
+  /**
+   * Visual variant - token-based
+   */
+  variant?: TabsVariantToken;
 }
+
+const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
+  ({ className, size, variant, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
+    const baseVariant = variant ?? "underline";
+
+    return (
+      <TabsPrimitive.List
+        ref={ref}
+        className={cn(
+          tabsListVariants({
+            size: baseSize as TabsSizeToken,
+            variant: baseVariant,
+          }),
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+TabsList.displayName = TabsPrimitive.List.displayName;
+
+// ============================================================================
+// TABS TRIGGER
+// ============================================================================
 
 export interface TabsTriggerProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "role">,
-    VariantProps<typeof tabsTriggerVariants> {
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
+    "size" | "variant" | "tone"
+  > {
   /**
-   * Value of this tab (must be unique)
+   * Size variant - token-based (inherited from context if not provided)
    */
-  value: string;
-
+  size?: ResponsiveTabsSize;
   /**
-   * Whether this tab is disabled
+   * Visual variant - token-based (inherited from context if not provided)
    */
-  disabled?: boolean;
+  variant?: TabsVariantToken;
+  /**
+   * Tone - token-based (inherited from context if not provided)
+   */
+  tone?: TabsToneToken;
+  /**
+   * Leading icon - semantic prop
+   */
+  leadingIcon?: React.ReactNode;
+  /**
+   * Trailing icon - semantic prop
+   */
+  trailingIcon?: React.ReactNode;
+  /**
+   * Icon - semantic prop (for backward compatibility, maps to leadingIcon)
+   */
+  icon?: React.ReactNode;
 }
 
-export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Value of the tab this content belongs to
-   */
-  value: string;
-
-  /**
-   * Force mount the content (useful for SSR)
-   */
-  forceMount?: boolean;
-}
-
-// ============================================================================
-// Context
-// ============================================================================
-
-interface TabsContextValue {
-  value: string;
-  onValueChange: (value: string) => void;
-  orientation: "horizontal" | "vertical";
-  size: "sm" | "md" | "lg";
-}
-
-const TabsContext = React.createContext<TabsContextValue | undefined>(undefined);
-
-function useTabsContext() {
-  const context = React.useContext(TabsContext);
-  if (!context) {
-    throw new Error("Tabs components must be used within Tabs.Root");
-  }
-  return context;
-}
-
-// ============================================================================
-// Components
-// ============================================================================
-
-/**
- * Tabs.Root - Container component that manages tab state
- */
-const TabsRoot = React.forwardRef<HTMLDivElement, TabsRootProps>(
+const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   (
-    {
-      value: controlledValue,
-      defaultValue,
-      onValueChange,
-      orientation = "horizontal",
-      className,
-      children,
-      ...props
-    },
+    { className, size, variant, tone, leadingIcon, trailingIcon, icon, children, ...props },
     ref,
   ) => {
-    const [internalValue, setInternalValue] = React.useState(defaultValue || "");
-    const isControlled = controlledValue !== undefined;
-    const value = isControlled ? controlledValue : internalValue;
+    const baseSize = getBaseValue(size) ?? "md";
+    const baseVariant = variant ?? "underline";
+    const baseTone = tone ?? "primary";
 
-    const handleValueChange = React.useCallback(
-      (newValue: string) => {
-        if (!isControlled) {
-          setInternalValue(newValue);
-        }
-        onValueChange?.(newValue);
-      },
-      [isControlled, onValueChange],
-    );
-
-    // Infer size from first TabsList if available
-    const [size, setSize] = React.useState<"sm" | "md" | "lg">("md");
-
-    const contextValue = React.useMemo<TabsContextValue>(
-      () => ({
-        value,
-        onValueChange: handleValueChange,
-        orientation,
-        size,
-      }),
-      [value, handleValueChange, orientation, size],
-    );
+    // Use icon prop if provided, otherwise use leadingIcon
+    const effectiveLeadingIcon = icon ?? leadingIcon;
 
     return (
-      <TabsContext.Provider value={contextValue}>
-        <div ref={ref} className={cn("w-full", className)} {...props}>
-          {React.Children.map(children, (child) => {
-            if (React.isValidElement(child) && child.type === TabsList) {
-              const childProps = child.props as TabsListPropsInternal;
-              return React.cloneElement(child as React.ReactElement<TabsListPropsInternal>, {
-                ...childProps,
-                onSizeChange: setSize,
-              });
-            }
-            return child;
-          })}
-        </div>
-      </TabsContext.Provider>
-    );
-  },
-);
-TabsRoot.displayName = "Tabs.Root";
-
-/**
- * Tabs.List - Container for tab triggers
- */
-interface TabsListPropsInternal extends TabsListProps {
-  onSizeChange?: (size: "sm" | "md" | "lg") => void;
-}
-
-const TabsList = React.forwardRef<HTMLDivElement, TabsListPropsInternal>(
-  ({ className, orientation, size = "md", onSizeChange, children, ...props }, ref) => {
-    const context = React.useContext(TabsContext);
-    const effectiveOrientation = orientation || context?.orientation || "horizontal";
-    const effectiveSize = size || context?.size || "md";
-
-    React.useEffect(() => {
-      onSizeChange?.(effectiveSize);
-    }, [effectiveSize, onSizeChange]);
-
-    return (
-      <div
+      <TabsPrimitive.Trigger
         ref={ref}
-        role="tablist"
-        aria-orientation={effectiveOrientation}
         className={cn(
-          tabsListVariants({ orientation: effectiveOrientation, size: effectiveSize }),
+          tabsTriggerVariants({
+            size: baseSize as TabsSizeToken,
+            variant: baseVariant,
+            tone: baseTone,
+          }),
           className,
         )}
         {...props}
       >
-        {children}
-      </div>
-    );
-  },
-);
-TabsList.displayName = "Tabs.List";
-
-/**
- * Tabs.Trigger - Individual tab button
- */
-interface TabsTriggerPropsInternal extends TabsTriggerProps {}
-
-const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerPropsInternal>(
-  ({ className, value, disabled, size, children, ...props }, ref) => {
-    const context = useTabsContext();
-    const isSelected = context.value === value;
-    const effectiveSize = size || context.size || "md";
-
-    const triggerRef = React.useRef<HTMLButtonElement>(null);
-    React.useImperativeHandle(ref, () => triggerRef.current!);
-
-    // Roving tabindex: only selected tab is focusable
-    const tabIndex = isSelected ? 0 : -1;
-
-    // Keyboard navigation
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (disabled) return;
-
-        const triggers = Array.from(
-          triggerRef.current?.parentElement?.querySelectorAll<HTMLButtonElement>(
-            '[role="tab"]:not([disabled])',
-          ) || [],
-        );
-        const currentIndex = triggers.findIndex((t) => t === triggerRef.current);
-
-        let nextIndex = currentIndex;
-
-        if (context.orientation === "horizontal") {
-          if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            nextIndex = currentIndex > 0 ? currentIndex - 1 : triggers.length - 1;
-          } else if (event.key === "ArrowRight") {
-            event.preventDefault();
-            nextIndex = currentIndex < triggers.length - 1 ? currentIndex + 1 : 0;
-          }
-        } else if (event.key === "ArrowUp") {
-          event.preventDefault();
-          nextIndex = currentIndex > 0 ? currentIndex - 1 : triggers.length - 1;
-        } else if (event.key === "ArrowDown") {
-          event.preventDefault();
-          nextIndex = currentIndex < triggers.length - 1 ? currentIndex + 1 : 0;
-        }
-
-        if (event.key === "Home") {
-          event.preventDefault();
-          nextIndex = 0;
-        } else if (event.key === "End") {
-          event.preventDefault();
-          nextIndex = triggers.length - 1;
-        }
-
-        const nextTrigger = triggers[nextIndex];
-        if (nextIndex !== currentIndex && nextTrigger) {
-          nextTrigger.focus();
-          const nextValue = nextTrigger.getAttribute("data-value");
-          if (nextValue) {
-            context.onValueChange(nextValue);
-          }
-        }
-      },
-      [disabled, context],
-    );
-
-    // Generate unique ID for aria-controls
-    const triggerId = React.useMemo(() => {
-      if (typeof document !== "undefined") {
-        return `tabs-trigger-${value}-${Math.random().toString(36).substr(2, 9)}`;
-      }
-      return `tabs-trigger-${value}`;
-    }, [value]);
-    const contentId = React.useMemo(() => `tabs-content-${value}`, [value]);
-
-    return (
-      <button
-        ref={triggerRef}
-        type="button"
-        role="tab"
-        id={triggerId}
-        aria-selected={isSelected}
-        aria-controls={contentId}
-        tabIndex={tabIndex}
-        disabled={disabled}
-        data-value={value}
-        className={cn(
-          tabsTriggerVariants({ size: effectiveSize, state: isSelected ? "selected" : "default" }),
-          className,
-        )}
-        onKeyDown={handleKeyDown}
-        onClick={() => !disabled && context.onValueChange(value)}
-        {...props}
-      >
-        {children}
-        {isSelected && (
+        {effectiveLeadingIcon && (
           <span
             className={cn(
-              NAVIGATION_TOKENS.indicator.height,
-              NAVIGATION_TOKENS.indicator.background,
-              NAVIGATION_TOKENS.indicator.radius,
-              NAVIGATION_TOKENS.indicator.transition,
-              NAVIGATION_TOKENS.indicator.position,
+              TABS_TOKENS.trigger.icon.size,
+              TABS_TOKENS.trigger.icon.color,
+              TABS_TOKENS.trigger.icon.gap,
             )}
-            aria-hidden="true"
-          />
+          >
+            {effectiveLeadingIcon}
+          </span>
         )}
-      </button>
+        {children}
+        {trailingIcon && (
+          <span
+            className={cn(
+              TABS_TOKENS.trigger.icon.size,
+              TABS_TOKENS.trigger.icon.color,
+              TABS_TOKENS.trigger.icon.gap,
+            )}
+          >
+            {trailingIcon}
+          </span>
+        )}
+      </TabsPrimitive.Trigger>
     );
   },
 );
-TabsTrigger.displayName = "Tabs.Trigger";
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
-/**
- * Tabs.Content - Content panel for each tab
- */
+// ============================================================================
+// TABS CONTENT
+// ============================================================================
+
+export interface TabsContentProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>, "size"> {
+  /**
+   * Size variant - token-based (for padding)
+   */
+  size?: ResponsiveTabsSize;
+}
 
 const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
-  ({ className, value, forceMount, children, ...props }, ref) => {
-    const context = useTabsContext();
-    const isSelected = context.value === value;
-
-    // Generate IDs before any conditional returns
-    const contentId = React.useMemo(() => {
-      if (typeof document !== "undefined") {
-        return `tabs-content-${value}-${Math.random().toString(36).substr(2, 9)}`;
-      }
-      return `tabs-content-${value}`;
-    }, [value]);
-    const triggerId = React.useMemo(() => `tabs-trigger-${value}`, [value]);
-
-    // SSR safety: don't render content on server if not force mounted
-    const [mounted, setMounted] = React.useState(forceMount || false);
-
-    React.useEffect(() => {
-      if (typeof document !== "undefined") {
-        setMounted(true);
-      }
-    }, []);
-
-    if (!mounted && !forceMount && !isSelected) {
-      return null;
-    }
+  ({ className, size, ...props }, ref) => {
+    const baseSize = getBaseValue(size) ?? "md";
 
     return (
-      <div
+      <TabsPrimitive.Content
         ref={ref}
-        role="tabpanel"
-        id={contentId}
-        aria-labelledby={triggerId}
-        hidden={!isSelected}
         className={cn(
-          "mt-2",
-          isSelected ? "block" : "hidden",
-          NAVIGATION_TOKENS.focus.ring,
+          tabsContentVariants({
+            size: baseSize as TabsSizeToken,
+          }),
           className,
         )}
         {...props}
-      >
-        {children}
-      </div>
+      />
     );
   },
 );
-TabsContent.displayName = "Tabs.Content";
+TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 // ============================================================================
-// Exports
+// COMPOUND COMPONENT EXPORT
 // ============================================================================
 
-export const Tabs = Object.assign(TabsRoot, {
+export const Tabs = {
   Root: TabsRoot,
   List: TabsList,
   Trigger: TabsTrigger,
   Content: TabsContent,
-});
-
-export { tabsListVariants, tabsTriggerVariants };
+};

@@ -11,18 +11,8 @@ export { Portal, type PortalProps } from "./Portal";
 // Backdrop
 export { Backdrop, type BackdropProps } from "./Backdrop";
 
-// Modal
-export {
-  Modal,
-  ModalBody,
-  type ModalBodyProps,
-  ModalFooter,
-  type ModalFooterProps,
-  ModalHeader,
-  type ModalHeaderProps,
-  type ModalProps,
-  modalVariants,
-} from "./Modal";
+// Modal - New Radix-based implementation is in src/components/modal/
+// Legacy Modal implementations have been removed
 
 // Dialog
 export {

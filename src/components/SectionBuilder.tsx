@@ -20,9 +20,10 @@ import { Grid } from "@/components/layout/Grid";
 import { Stack } from "@/components/layout/Stack";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
-import { getRadiusCSSVar } from "@/lib/responsive-props";
+import { getBaseValue, getRadiusCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
+import type { ResponsiveColor } from "./layout/layout.types";
 import type {
   BackgroundConfig,
   LayoutConfig,
@@ -38,7 +39,7 @@ import type {
  * Returns object with bg prop and optional style for surface colors
  */
 function resolveBackground(background: BackgroundConfig | undefined): {
-  bg?: string;
+  bg?: ResponsiveColor;
   style?: React.CSSProperties;
 } {
   if (!background || background.type === "none") {
@@ -78,15 +79,10 @@ function resolveBackground(background: BackgroundConfig | undefined): {
   }
 
   if (background.type === "color") {
-    // ResponsiveColor is already a ColorValue or ResponsiveValue<ColorValue>
+    // ResponsiveColor is already Responsive<ColorToken>
     // Box component handles the conversion via getColorCSSVar
-    if (typeof background.value === "string") {
-      return { bg: background.value };
-    }
-    // For responsive values, use base value
-    const bgValue =
-      background.value.base || background.value.sm || background.value.md || "background";
-    return { bg: bgValue };
+    // Return the ResponsiveColor directly - Box.bg accepts ResponsiveColor
+    return { bg: background.value };
   }
 
   return {};
@@ -191,8 +187,14 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
 
     if (slot.type === "media") {
       const { content, className, aspectRatio } = slot;
+      // Get base value from responsive aspect ratio
+      const aspectRatioValue = getBaseValue(aspectRatio);
+
       return (
-        <div className={cn("w-full", className)} style={aspectRatio ? { aspectRatio } : undefined}>
+        <div
+          className={cn("w-full", className)}
+          style={aspectRatioValue ? { aspectRatio: String(aspectRatioValue) } : undefined}
+        >
           {content}
         </div>
       );

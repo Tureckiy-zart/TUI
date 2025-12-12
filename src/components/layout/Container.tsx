@@ -11,14 +11,19 @@ import * as React from "react";
 
 import { getBaseValue, getSpacingCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
+import type {
+  ContainerMaxWidthToken,
+  ResponsiveContainerMaxWidth,
+  SpacingToken,
+} from "@/tokens/types";
 
 import type { ResponsiveSpacing, SpacingValue } from "./layout.types";
 
 /**
- * Container max-width size mapping to spacing tokens
- * Maps common container sizes to appropriate spacing-based max-width values
+ * Container max-width size mapping to CSS values
+ * Maps container size tokens to CSS values
  */
-const containerMaxWidthMap: Record<string, string> = {
+const containerMaxWidthMap: Record<ContainerMaxWidthToken, string> = {
   sm: "var(--spacing-96)", // 24rem (384px)
   md: "28rem", // 448px - between spacing[96] and spacing[96] + spacing[8]
   lg: "32rem", // 512px
@@ -33,42 +38,31 @@ const containerMaxWidthMap: Record<string, string> = {
 };
 
 /**
- * Convert max-width value to CSS value
- * Supports spacing tokens, container size keys, or direct CSS values
+ * Convert max-width token to CSS value
+ * Only accepts token unions (ContainerMaxWidthToken or SpacingToken)
  */
-function getMaxWidthValue(value: string | SpacingValue): string {
-  // If it's a container size key (sm, md, lg, etc.)
-  const mappedValue =
-    typeof value === "string" && value in containerMaxWidthMap
-      ? containerMaxWidthMap[value]
-      : undefined;
-  if (mappedValue) {
-    return mappedValue;
-  }
+function getMaxWidthValue(value: ContainerMaxWidthToken | SpacingToken): string {
+  // Convert to string to handle numeric keys
+  const stringValue = String(value);
 
-  // If it's already a CSS value (includes "px", "rem", "%", etc.)
-  if (
-    typeof value === "string" &&
-    (value.includes("px") ||
-      value.includes("rem") ||
-      value.includes("em") ||
-      value.includes("%") ||
-      value.includes("vw") ||
-      value.includes("calc"))
-  ) {
-    return value;
+  // If it's a container size token (sm, md, lg, etc.)
+  if (stringValue in containerMaxWidthMap) {
+    return containerMaxWidthMap[stringValue as ContainerMaxWidthToken];
   }
 
   // Otherwise, treat as spacing token
-  return getSpacingCSSVar(value as SpacingValue);
+  return getSpacingCSSVar(stringValue);
 }
 
 export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Maximum width of the container
-   * Supports: spacing tokens, container sizes (sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, full), or CSS values
+   * Token-based: accepts container size tokens (sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, full) or spacing tokens
+   * @example maxWidth="lg" // 32rem (512px)
+   * @example maxWidth={{ base: "md", lg: "xl" }} // Responsive
+   * @example maxWidth="96" // Uses spacing token
    */
-  maxWidth?: string | ResponsiveSpacing;
+  maxWidth?: ResponsiveContainerMaxWidth;
 
   /**
    * Padding (horizontal) - token-based
@@ -91,7 +85,7 @@ const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ maxWidth, padding, center = true, className, style, ...props }, ref) => {
     // Get base values for CSS variables
     const maxWidthValue = maxWidth
-      ? getBaseValue<string | SpacingValue>(maxWidth as ResponsiveSpacing)
+      ? getBaseValue<ContainerMaxWidthToken | SpacingToken>(maxWidth)
       : undefined;
     const paddingValue = getBaseValue<SpacingValue>(
       (padding || "container-md") as ResponsiveSpacing,
@@ -100,7 +94,7 @@ const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
     // Build inline styles
     const inlineStyles: React.CSSProperties = {
       ...(maxWidthValue !== undefined && {
-        maxWidth: getMaxWidthValue(maxWidthValue as string | SpacingValue),
+        maxWidth: getMaxWidthValue(maxWidthValue),
       }),
       ...(center && {
         marginLeft: "auto",
@@ -112,8 +106,8 @@ const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
       }),
       // Padding handled via CSS-layer class, but can be overridden with inline style
       ...(paddingValue !== undefined && {
-        paddingLeft: getSpacingCSSVar(paddingValue),
-        paddingRight: getSpacingCSSVar(paddingValue),
+        paddingLeft: getSpacingCSSVar(String(paddingValue)),
+        paddingRight: getSpacingCSSVar(String(paddingValue)),
       }),
       ...style,
     };

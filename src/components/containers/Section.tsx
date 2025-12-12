@@ -12,23 +12,26 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { SECTION_TOKENS } from "@/tokens/components/section";
 
 import type { ResponsiveSpacing } from "../layout/layout.types";
 import { Stack, type StackProps } from "../layout/Stack";
 
 export interface SectionProps extends Omit<StackProps, "py" | "gap"> {
   /**
-   * Vertical padding - token-based (sm, md, lg, xl)
-   * Maps to SECTION_TOKENS.padding
+   * Vertical padding - token-based
+   * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
+   * @example padding="md"
+   * @example padding={{ base: "sm", lg: "xl" }}
    */
-  padding?: "sm" | "md" | "lg" | "xl";
+  padding?: ResponsiveSpacing;
 
   /**
-   * Gap spacing for content blocks - token-based (sm, md, lg, xl)
-   * Maps to SECTION_TOKENS.spacing
+   * Gap spacing for content blocks - token-based
+   * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
+   * @example gap="md"
+   * @example gap={{ base: "sm", lg: "xl" }}
    */
-  gap?: "sm" | "md" | "lg" | "xl";
+  gap?: ResponsiveSpacing;
 
   /**
    * Render as different HTML element
@@ -41,21 +44,12 @@ export interface SectionProps extends Omit<StackProps, "py" | "gap"> {
  */
 const Section = React.forwardRef<HTMLDivElement, SectionProps>(
   ({ padding = "md", gap, className, as, ...props }, ref) => {
-    // Get padding token and convert to py prop
-    const paddingToken = SECTION_TOKENS.padding[padding];
-    const pyValue = paddingToken.replace("py-", "") as ResponsiveSpacing;
-
-    // Get gap token if provided
-    const gapValue = gap
-      ? (SECTION_TOKENS.spacing[gap].replace("gap-", "") as ResponsiveSpacing)
-      : undefined;
-
     return (
       <Stack
         ref={ref}
         as={as ?? "section"}
-        py={pyValue}
-        gap={gapValue}
+        py={padding}
+        gap={gap}
         className={cn("w-full", className)}
         {...props}
       />

@@ -1,6 +1,6 @@
 # 📊 Cursor Rules Matrix — UI Component Library
 
-**Last Updated:** 2024-12-19  
+**Last Updated:** 2025-12-12  
 **Rule Version:** 1.0  
 **Status:** Active
 
@@ -14,16 +14,17 @@ This matrix provides a comprehensive overview of all Cursor rules for UI compone
 
 ## 📋 Rules Overview
 
-| Rule File                           | Category         | Priority | Status | Last Updated | Dependencies               |
-| ----------------------------------- | ---------------- | -------- | ------ | ------------ | -------------------------- |
-| `main-branch-security.mdc`          | Security         | CRITICAL | Active | 2024-12-19   | None (source of truth)     |
-| `system-core.mdc`                   | System Core      | CRITICAL | Active | 2024-12-19   | None                       |
-| `library-rules.mdc`                 | Architecture     | CRITICAL | Active | 2024-12-19   | None                       |
-| `npm-publishing.mdc`                | Publishing       | CRITICAL | Active | 2024-12-19   | `library-rules.mdc`        |
-| `storybook-rules.mdc`               | Documentation    | HIGH     | Active | 2024-12-19   | `library-rules.mdc`        |
-| `testing-rules.mdc`                 | Quality          | HIGH     | Active | 2024-12-19   | `library-rules.mdc`        |
-| `task-lifecycle-and-automation.mdc` | Automation       | MEDIUM   | Active | 2024-12-19   | `docs/PROJECT_PROGRESS.md` |
-| `user-rules.mdc`                    | User Preferences | MEDIUM   | Active | 2024-12-19   | `main-branch-security.mdc` |
+| Rule File                             | Category         | Priority | Status | Last Updated | Dependencies                      |
+| ------------------------------------- | ---------------- | -------- | ------ | ------------ | --------------------------------- |
+| `main-branch-security.mdc`            | Security         | CRITICAL | Active | 2024-12-19   | None (source of truth)            |
+| `system-core.mdc`                     | System Core      | CRITICAL | Active | 2024-12-19   | None                              |
+| `library-rules.mdc`                   | Architecture     | CRITICAL | Active | 2024-12-19   | None                              |
+| `tui-self-governing-architecture.mdc` | Architecture     | CRITICAL | Active | 2025-12-12   | `library-rules.mdc`, `typing.mdc` |
+| `npm-publishing.mdc`                  | Publishing       | CRITICAL | Active | 2024-12-19   | `library-rules.mdc`               |
+| `storybook-rules.mdc`                 | Documentation    | HIGH     | Active | 2024-12-19   | `library-rules.mdc`               |
+| `testing-rules.mdc`                   | Quality          | HIGH     | Active | 2024-12-19   | `library-rules.mdc`               |
+| `task-lifecycle-and-automation.mdc`   | Automation       | MEDIUM   | Active | 2024-12-19   | `docs/PROJECT_PROGRESS.md`        |
+| `user-rules.mdc`                      | User Preferences | MEDIUM   | Active | 2024-12-19   | `main-branch-security.mdc`        |
 
 ---
 
@@ -39,7 +40,9 @@ This matrix provides a comprehensive overview of all Cursor rules for UI compone
 ### Component Development Rules
 
 - **Source of Truth:** `library-rules.mdc`
+- **Architecture Guard:** `tui-self-governing-architecture.mdc`
 - **References:**
+  - `tui-self-governing-architecture.mdc` → Enforces token-driven design system
   - `storybook-rules.mdc` → References `library-rules.mdc`
   - `testing-rules.mdc` → References `library-rules.mdc`
   - `npm-publishing.mdc` → References `library-rules.mdc`
@@ -99,7 +102,15 @@ This matrix provides a comprehensive overview of all Cursor rules for UI compone
    - Accessibility requirements
    - **Priority:** CRITICAL
 
-2. **npm Publishing Rules** (`npm-publishing.mdc`)
+2. **TUI Self-Governing Architecture** (`tui-self-governing-architecture.mdc`)
+   - Token-driven design system enforcement
+   - Token Union + Responsive<T> patterns
+   - Visual prop tokenization rules
+   - Architecture guard for future work
+   - **Priority:** CRITICAL
+   - **Layer:** META / ARCHITECTURE GUARD
+
+3. **npm Publishing Rules** (`npm-publishing.mdc`)
    - Semantic versioning
    - Changelog generation
    - npm publish workflow
@@ -154,6 +165,7 @@ When conflicts occur, rules are resolved in this order:
 
 3. **CRITICAL Architecture Rules**
    - `library-rules.mdc` (component structure, exports, types)
+   - `tui-self-governing-architecture.mdc` (token-driven design system enforcement)
    - `npm-publishing.mdc` (versioning, publishing)
 
 4. **HIGH Priority Rules**
@@ -177,19 +189,25 @@ When conflicts occur, rules are resolved in this order:
    - Styling guidelines
    - Accessibility requirements
 
-2. **npm-publishing.mdc**
+2. **tui-self-governing-architecture.mdc**
+   - Token-driven design system enforcement
+   - Token Union + Responsive<T> patterns
+   - Visual prop tokenization rules
+   - Architecture guard for future work
+
+3. **npm-publishing.mdc**
    - Semantic versioning
    - Changelog generation
    - npm publish workflow
    - Pre-publish checks
 
-3. **storybook-rules.mdc**
+4. **storybook-rules.mdc**
    - Story structure
    - Controls and args
    - Documentation standards
    - Addons configuration
 
-4. **testing-rules.mdc**
+5. **testing-rules.mdc**
    - Unit tests
    - Snapshot tests
    - Accessibility tests
@@ -248,6 +266,7 @@ When conflicts occur, rules are resolved in this order:
 - **Security:** `.cursor/rules/main-branch-security.mdc`
 - **System Core:** `.cursor/rules/system-core.mdc`
 - **Component Development:** `.cursor/rules/library-rules.mdc`
+- **Architecture Guard:** `.cursor/rules/tui-self-governing-architecture.mdc`
 - **npm Publishing:** `.cursor/rules/npm-publishing.mdc`
 - **Storybook:** `.cursor/rules/storybook-rules.mdc`
 - **Testing:** `.cursor/rules/testing-rules.mdc`
@@ -272,6 +291,13 @@ When conflicts occur, rules are resolved in this order:
 - `testing-rules.mdc` (testing requirements)
 - `storybook-rules.mdc` (documentation)
 
+### tui-self-governing-architecture.mdc references:
+
+- `library-rules.mdc` (component structure)
+- `typing.mdc` (TypeScript typing standards)
+- Token types: `src/tokens/types/index.ts`
+- Responsive types: `src/types/responsive.ts`
+
 ### npm-publishing.mdc references:
 
 - `library-rules.mdc` (component structure)
@@ -289,6 +315,6 @@ When conflicts occur, rules are resolved in this order:
 
 ---
 
-**Last Updated:** 2024-12-19  
-**Next Review:** 2025-01-19  
+**Last Updated:** 2025-12-12  
+**Next Review:** 2026-01-12  
 **Version:** 1.0

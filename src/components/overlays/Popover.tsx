@@ -4,8 +4,10 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { POPOVER_TOKENS } from "@/tokens/components/popover";
+import type { ResponsiveAlignOffset, ResponsiveSideOffset } from "@/tokens/types";
 
 const Popover = PopoverPrimitive.Root;
 
@@ -43,15 +45,33 @@ const popoverContentVariants = cva(
 
 const PopoverContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &
-    VariantProps<typeof popoverContentVariants>
->(({ className, variant, size, align = "center", sideOffset = 4, ...props }, ref) => {
+  Omit<
+    React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>,
+    "sideOffset" | "alignOffset"
+  > &
+    VariantProps<typeof popoverContentVariants> & {
+      sideOffset?: ResponsiveSideOffset;
+      alignOffset?: ResponsiveAlignOffset;
+    }
+>(({ className, variant, size, align = "center", sideOffset, alignOffset, ...props }, ref) => {
+  // Resolve offset tokens to pixels
+  const sideOffsetPx = React.useMemo(() => {
+    const baseOffset = getBaseValue(sideOffset);
+    return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+  }, [sideOffset]);
+
+  const alignOffsetPx = React.useMemo(() => {
+    const baseOffset = getBaseValue(alignOffset);
+    return baseOffset ? getSpacingPx(baseOffset) : undefined;
+  }, [alignOffset]);
+
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
         ref={ref}
         align={align}
-        sideOffset={sideOffset}
+        sideOffset={sideOffsetPx}
+        alignOffset={alignOffsetPx}
         className={cn(popoverContentVariants({ variant, size }), "tm-motion-fade-scale", className)}
         {...props}
       >
@@ -69,8 +89,16 @@ export interface PopoverProps {
   size?: VariantProps<typeof popoverContentVariants>["size"];
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
-  sideOffset?: number;
-  alignOffset?: number;
+  /**
+   * Side offset - token-based
+   * Uses spacing tokens for positioning offsets
+   */
+  sideOffset?: ResponsiveSideOffset;
+  /**
+   * Alignment offset - token-based
+   * Uses spacing tokens for positioning offsets
+   */
+  alignOffset?: ResponsiveAlignOffset;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   modal?: boolean;

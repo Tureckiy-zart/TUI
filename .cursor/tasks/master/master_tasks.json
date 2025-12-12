@@ -1525,6 +1525,32 @@
           "progress_notes": "✅ COMPLETED (2025-11-25): All components already follow unified prop naming conventions (completed in D2-D4). EventCard, VenueCard, ArticleItem, and TrendingItem all use standardized props: imageUrl (not image), href (not slug), title/name, description. All props have JSDoc comments. Comprehensive props guidelines document created (docs/props-guidelines.md) with naming conventions, patterns, examples, and best practices. All linkable components use href prop. TypeScript compilation successful."
         },
         {
+          "id": "TUI_TYPES_STATUS_AND_CONFIG_SNAPSHOT",
+          "title": "Type System Status and Config Snapshot",
+          "layer": "CRITICAL / TYPE SYSTEM",
+          "purpose": "Produce an authoritative snapshot of the current TypeScript/type-export state of @tenerife.music/ui, explicitly list what is already done, what is broken or missing, and consolidate all relevant build/type configuration files into a single verification document.",
+          "inputs": [
+            "src/index.ts",
+            "tsup.config.ts",
+            "package.json",
+            "tsconfig.json",
+            "dist/index.d.ts"
+          ],
+          "outputs": ["docs/reports/TUI_TYPES_AND_CONFIG_SNAPSHOT.md"],
+          "acceptance_criteria": [
+            "Clear, explicit list of completed type-related work.",
+            "Clear, explicit list of remaining or broken items.",
+            "All relevant configs consolidated into a single markdown file.",
+            "Next steps are unambiguous and ordered."
+          ],
+          "dependencies": [],
+          "status": "completed",
+          "progress": "100%",
+          "completed_date": "2025-12-12",
+          "progress_notes": "✅ COMPLETED (2025-12-12): Comprehensive type system snapshot created. All export * patterns eliminated and replaced with explicit exports. Fixed barrel leaks in tokens/index.ts (9 exports), src/index.ts (main entry), menus/index.ts (4 exports), theme/index.ts (7 exports), animation/index.ts (3 exports), themes/index.ts (2 exports), and nested export in motion.ts. All types now explicitly exported. NotificationVariant conflict resolved. componentShadowMapping export added. Build and typecheck passing. Type system ready for Music project consumption.",
+          "comment": "TUI_TYPES_STATUS_AND_CONFIG_SNAPSHOT успешно завершена. Создан comprehensive snapshot системы типов в docs/reports/TUI_TYPES_AND_CONFIG_SNAPSHOT.md. Все export * паттерны заменены на явные экспорты. Исправлены barrel leaks во всех критических файлах. Все типы экспортируются явно. Конфликт NotificationVariant разрешен. Добавлен экспорт componentShadowMapping. Build и typecheck проходят успешно. Система типов готова к использованию в Music проекте."
+        },
+        {
           "id": "D6",
           "title": "Adapter Layer (Main Project)",
           "purpose": "Create full adapter layer in main Tenerife project (NOT UI-lib) to map domain models to UI component props. Includes eventToCardProps, venueToCardProps, articleToItemProps, tagToChipProps.",

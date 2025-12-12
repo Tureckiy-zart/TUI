@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import type { ResponsiveDelay } from "@/tokens/types";
 import { TooltipWrapper, TooltipProvider } from "./Tooltip";
 import { Button } from "../primitives/Button";
 import { Badge } from "../primitives/Badge";
@@ -147,15 +148,15 @@ export const WithBadges: Story = {
 export const CustomDelay: Story = {
   render: () => (
     <div className="flex gap-md">
-      <TooltipWrapper content="Fast tooltip (200ms delay)" delayDuration={200}>
+      <TooltipWrapper content="Fast tooltip (200ms delay)" delayDuration={200 as ResponsiveDelay}>
         <Button>Fast Tooltip</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="Slow tooltip (1000ms delay)" delayDuration={1000}>
+      <TooltipWrapper content="Slow tooltip (1000ms delay)" delayDuration={1000 as ResponsiveDelay}>
         <Button>Slow Tooltip</Button>
       </TooltipWrapper>
 
-      <TooltipWrapper content="No delay tooltip" delayDuration={0}>
+      <TooltipWrapper content="No delay tooltip" delayDuration={0 as ResponsiveDelay}>
         <Button>No Delay</Button>
       </TooltipWrapper>
     </div>

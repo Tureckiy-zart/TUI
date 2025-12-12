@@ -481,7 +481,7 @@ import {
   CardContent,
   CardFooter,
   Button,
-  SimpleModal,
+  Modal,
 } from "@tenerife.music/ui";
 import { useState } from "react";
 
@@ -502,10 +502,20 @@ function CardWithModal() {
         </CardFooter>
       </Card>
 
-      <SimpleModal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Event Details">
-        <p>Detailed event information</p>
-        <Button onClick={() => setIsOpen(false)}>Close</Button>
-      </SimpleModal>
+      <Modal.Root open={isOpen} onOpenChange={setIsOpen}>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>Event Details</Modal.Title>
+          </Modal.Header>
+          <div className="py-4">
+            <p>Detailed event information</p>
+          </div>
+          <Modal.Footer>
+            <Button onClick={() => setIsOpen(false)}>Close</Button>
+          </Modal.Footer>
+          <Modal.Close />
+        </Modal.Content>
+      </Modal.Root>
     </>
   );
 }

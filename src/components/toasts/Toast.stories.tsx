@@ -1,8 +1,9 @@
 "use client";
+import type { ResponsiveDelay } from "@/tokens/types";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../primitives/Button";
 import { Toast } from "./Toast";
 import { ToastProvider, useToast } from "./ToastProvider";
-import { Button } from "../primitives/Button";
 
 // Wrapper component for stories
 function ToastDemo() {
@@ -90,7 +91,7 @@ function ToastDemo() {
               type: "success",
               title: "Long Duration Toast",
               description: "This toast will stay visible for 10 seconds.",
-              duration: 10000,
+              duration: 10000 as ResponsiveDelay,
             })
           }
         >
@@ -103,7 +104,7 @@ function ToastDemo() {
               type: "info",
               title: "Persistent Toast",
               description: "This toast will not auto-dismiss.",
-              duration: 0,
+              duration: 0 as ResponsiveDelay,
             })
           }
         >

@@ -10,8 +10,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { POPOVER_TOKENS } from "@/tokens/components/popover";
+import type { ResponsiveAlignOffset } from "@/tokens/types";
 
 import { Portal } from "../../overlays/Portal";
 import { type Placement, usePositioning } from "../../overlays/utils/positioning";
@@ -43,9 +45,10 @@ export interface PopoverContentProps
   placement?: Placement;
 
   /**
-   * Offset between trigger and content (in pixels)
+   * Offset between trigger and content - token-based
+   * Uses spacing tokens for positioning offsets
    */
-  offset?: number;
+  offset?: ResponsiveAlignOffset;
 
   /**
    * Whether to close on outside click
@@ -62,7 +65,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
       className,
       size = "md",
       placement = "bottom",
-      offset = 4,
+      offset,
       closeOnInteractOutside = true,
       children,
       ...props
@@ -72,6 +75,12 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
     const { open, onOpenChange, triggerId, contentId } = usePopoverContext();
     const contentRef = React.useRef<HTMLDivElement>(null);
     const triggerRef = React.useRef<HTMLElement | null>(null);
+
+    // Resolve offset token to pixels
+    const offsetPx = React.useMemo(() => {
+      const baseOffset = getBaseValue(offset);
+      return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+    }, [offset]);
 
     // Combine refs
     React.useImperativeHandle(ref, () => contentRef.current as HTMLDivElement, []);
@@ -92,7 +101,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
       anchorRef: triggerRef,
       contentRef,
       placement,
-      offset,
+      offset: offsetPx,
       enabled: open,
     });
 

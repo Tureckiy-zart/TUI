@@ -8,16 +8,14 @@
 
 import * as React from "react";
 
+import { getBaseValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { DATA_TOKENS } from "@/tokens/components/data";
 
-export interface DataListItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Row padding
-   * @default "md"
-   */
-  padding?: "sm" | "md" | "lg";
-}
+import type { SpacingValue } from "../../layout/layout.types";
+import type { DataListItemProps as DataListItemPropsType } from "./DataList.types";
+
+export interface DataListItemProps extends DataListItemPropsType {}
 
 /**
  * DataList Item component
@@ -26,7 +24,14 @@ export interface DataListItemProps extends React.HTMLAttributes<HTMLDivElement> 
  */
 const DataListItem = React.forwardRef<HTMLDivElement, DataListItemProps>(
   ({ padding = "md", className, children, ...props }, ref) => {
-    const paddingClass = DATA_TOKENS.dataList.rowPadding[padding];
+    // Get base value from responsive spacing
+    const paddingValue = getBaseValue<SpacingValue>(padding);
+    // Map to allowed keys (sm, md, lg) - default to md if not in allowed set
+    const paddingKey =
+      paddingValue && ["sm", "md", "lg"].includes(String(paddingValue))
+        ? (String(paddingValue) as "sm" | "md" | "lg")
+        : "md";
+    const paddingClass = DATA_TOKENS.dataList.rowPadding[paddingKey];
 
     return (
       <div

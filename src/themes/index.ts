@@ -2,20 +2,62 @@
  * Theme Overrides Export
  *
  * Exports all theme configurations and utilities.
+ * All exports are explicit to avoid barrel leaks.
  */
 
+// ============================================================================
+// THEMES
+// ============================================================================
 export { brandTheme } from "./brand";
 export { darkTheme } from "./dark";
 export { defaultTheme } from "./default";
-export * from "./types";
 
-// Export brand packages
+// ============================================================================
+// TYPES
+// ============================================================================
+export type {
+  BrandOverride,
+  BrandPackage,
+  BrandTheme,
+  BrandValidationResult,
+  RadiusOverrides,
+  ShadowOverrides,
+  SpacingOverrides,
+  ThemeName,
+  ThemeOverride,
+  TypographyOverrides,
+} from "./types";
+
+// ============================================================================
+// BRAND PACKAGES
+// ============================================================================
 export { minimalBrand } from "./minimal";
 export { neonBrand } from "./neon";
 
-// Export brand engine
-export * from "./brand_engine";
+// ============================================================================
+// BRAND ENGINE
+// ============================================================================
+export {
+  applyBrandOverrides,
+  brandExists,
+  clearActiveBrand,
+  clearBrandRegistry,
+  getActiveBrand,
+  getActiveBrandNamespace,
+  getAllBrandIds,
+  getAllBrands,
+  getBrand,
+  getBrandTheme,
+  loadBrand,
+  registerBrand,
+  removeBrandOverrides,
+  setActiveBrand,
+  validateBrand,
+} from "./brand_engine";
 
+// ============================================================================
+// THEME LOADERS
+// ============================================================================
 /**
  * All available themes
  */

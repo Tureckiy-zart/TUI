@@ -10,7 +10,9 @@
 
 import * as React from "react";
 
+import { getSpacingCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
+import type { FlexBasisToken, ResponsiveFlexBasis } from "@/tokens/types";
 
 import { Box, type BoxProps } from "./Box";
 import type {
@@ -44,10 +46,13 @@ export interface FlexProps
   shrink?: 0 | 1 | boolean;
 
   /**
-   * Flex basis (CSS value or Tailwind class)
-   * Note: For token-based approach, use spacing tokens via className
+   * Flex basis - token-based
+   * Accepts spacing tokens (xs, sm, md, lg, etc.) or semantic CSS values (auto, 0, 100%, fit-content, max-content, min-content)
+   * @example basis="md" // Uses spacing token
+   * @example basis="auto" // Semantic CSS value
+   * @example basis={{ base: "sm", md: "lg" }} // Responsive
    */
-  basis?: string;
+  basis?: ResponsiveFlexBasis;
 
   /**
    * Align items
@@ -66,14 +71,15 @@ export interface FlexProps
 }
 
 /**
- * Get base value from responsive value
+ * Get base value from responsive value (local helper for flex-specific types)
  */
-function getBaseValue<T>(
+function getFlexBaseValue<T>(
   value:
     | ResponsiveFlexDirection
     | ResponsiveFlexWrap
     | ResponsiveAlignment
     | ResponsiveJustify
+    | ResponsiveFlexBasis
     | T
     | undefined,
 ): T | undefined {
@@ -185,14 +191,15 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
     ref,
   ) => {
     // Get base values
-    const directionValue = getBaseValue<"row" | "column" | "row-reverse" | "column-reverse">(
+    const directionValue = getFlexBaseValue<"row" | "column" | "row-reverse" | "column-reverse">(
       direction,
     );
-    const wrapValue = getBaseValue<"nowrap" | "wrap" | "wrap-reverse">(wrap);
-    const alignValue = getBaseValue<"start" | "end" | "center" | "baseline" | "stretch">(align);
-    const justifyValue = getBaseValue<"start" | "end" | "center" | "between" | "around" | "evenly">(
-      justify,
-    );
+    const wrapValue = getFlexBaseValue<"nowrap" | "wrap" | "wrap-reverse">(wrap);
+    const alignValue = getFlexBaseValue<"start" | "end" | "center" | "baseline" | "stretch">(align);
+    const justifyValue = getFlexBaseValue<
+      "start" | "end" | "center" | "between" | "around" | "evenly"
+    >(justify);
+    const basisValue = getFlexBaseValue<FlexBasisToken>(basis);
 
     // Build additional classes
     const flexClasses = cn(
@@ -205,9 +212,26 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
       className,
     );
 
-    // Handle basis via style if provided (not token-based, but needed for flexibility)
+    // Convert basis token to CSS value
+    const flexBasisCSS = (() => {
+      if (!basisValue) return undefined;
+
+      // Convert to string first (basisValue could be string or number from union)
+      const basisString = String(basisValue);
+
+      // Check if it's a semantic CSS value (auto, 0, 100%, etc.)
+      const semanticValues = ["auto", "0", "100%", "fit-content", "max-content", "min-content"];
+      if (semanticValues.includes(basisString)) {
+        return basisString;
+      }
+
+      // Otherwise, treat as spacing token
+      return getSpacingCSSVar(basisString);
+    })();
+
+    // Handle basis via style if provided
     const flexStyle: React.CSSProperties = {
-      ...(basis ? { flexBasis: basis } : {}),
+      ...(flexBasisCSS ? { flexBasis: flexBasisCSS } : {}),
       ...style,
     };
 

@@ -20,6 +20,9 @@ import {
 } from "@floating-ui/react-dom";
 import * as React from "react";
 
+import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
+import type { ResponsiveAlignOffset } from "@/tokens/types";
+
 /**
  * Positioning options
  */
@@ -41,10 +44,11 @@ export interface UsePositioningOptions {
   placement?: Placement;
 
   /**
-   * Offset between anchor and content (in pixels)
+   * Offset between anchor and content - token-based
+   * Uses spacing tokens for positioning offsets
    * @default 4
    */
-  offset?: number;
+  offset?: ResponsiveAlignOffset | number; // Allow number for backward compatibility
 
   /**
    * Whether positioning is enabled
@@ -95,13 +99,22 @@ export function usePositioning({
   anchorRef,
   contentRef,
   placement = "bottom",
-  offset: offsetValue = 4,
+  offset: offsetValue,
   enabled = true,
   flip: enableFlip = true,
   shift: enableShift = true,
 }: UsePositioningOptions): PositionState {
   const [isPositioned, setIsPositioned] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+
+  // Resolve offset token to pixels
+  const offsetPx = React.useMemo(() => {
+    if (typeof offsetValue === "number") {
+      return offsetValue; // Backward compatibility
+    }
+    const baseOffset = getBaseValue(offsetValue);
+    return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+  }, [offsetValue]);
 
   // SSR-safe: only initialize on client
   React.useEffect(() => {
@@ -110,7 +123,7 @@ export function usePositioning({
 
   // Configure floating-ui middleware
   const middleware = React.useMemo(() => {
-    const middlewareArray = [offset(offsetValue)];
+    const middlewareArray = [offset(offsetPx)];
 
     if (enableFlip) {
       middlewareArray.push(flip());
@@ -121,7 +134,7 @@ export function usePositioning({
     }
 
     return middlewareArray;
-  }, [offsetValue, enableFlip, enableShift]);
+  }, [offsetPx, enableFlip, enableShift]);
 
   // Use floating-ui hook with refs
   const floating: UseFloatingReturn = useFloating({
@@ -154,7 +167,7 @@ export function usePositioning({
     floating.refs.setFloating(content);
 
     setIsPositioned(true);
-  }, [mounted, enabled, anchorRef, contentRef, floating.refs, placement, offsetValue]);
+  }, [mounted, enabled, anchorRef, contentRef, floating.refs, placement, offsetPx]);
 
   // Build position styles
   const position: React.CSSProperties = React.useMemo(() => {

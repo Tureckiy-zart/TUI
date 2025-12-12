@@ -9,10 +9,8 @@ export {
   Tabs,
   type TabsContentProps,
   type TabsListProps,
-  tabsListVariants,
   type TabsRootProps,
   type TabsTriggerProps,
-  tabsTriggerVariants,
 } from "./tabs";
 
 // SegmentedControl

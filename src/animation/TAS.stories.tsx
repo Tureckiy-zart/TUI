@@ -587,7 +587,7 @@ export const ReducedMotion: Story = {
         <Heading className="text-gray-900">Reduced Motion Support</Heading>
         <Box
           p={6}
-          bg={prefersReducedMotion ? "destructive" : "success"}
+          bg={prefersReducedMotion ? "destructive" : "semantic-success"}
           radius="lg"
           style={{
             textAlign: "center",

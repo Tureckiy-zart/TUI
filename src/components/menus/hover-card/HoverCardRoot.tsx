@@ -9,34 +9,50 @@
 
 import * as React from "react";
 
+import { getBaseValue, getDurationMs } from "@/lib/responsive-props";
+import type { ResponsiveDelay } from "@/tokens/types";
+
 import { PopoverRoot, type PopoverRootProps } from "../popover/PopoverRoot";
 
 export interface HoverCardRootProps extends Omit<PopoverRootProps, "open" | "onOpenChange"> {
   /**
-   * Delay before opening (in milliseconds)
+   * Delay before opening - token-based
+   * Uses motion duration tokens
    * @default 0
    */
-  openDelay?: number;
+  openDelay?: ResponsiveDelay;
 
   /**
-   * Delay before closing (in milliseconds)
+   * Delay before closing - token-based
+   * Uses motion duration tokens
    * @default 300
    */
-  closeDelay?: number;
+  closeDelay?: ResponsiveDelay;
 }
 
 /**
  * HoverCard Root component
  */
 export function HoverCardRoot({
-  openDelay = 0,
-  closeDelay = 300,
+  openDelay,
+  closeDelay,
   defaultOpen = false,
   ...props
 }: HoverCardRootProps) {
   const [open, setOpen] = React.useState(defaultOpen);
   const openTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  // Resolve delay tokens to milliseconds
+  const openDelayMs = React.useMemo(() => {
+    const baseDelay = getBaseValue(openDelay);
+    return baseDelay ? getDurationMs(baseDelay) : 0;
+  }, [openDelay]);
+
+  const closeDelayMs = React.useMemo(() => {
+    const baseDelay = getBaseValue(closeDelay);
+    return baseDelay ? getDurationMs(baseDelay) : 300; // Default 300ms
+  }, [closeDelay]);
 
   const handleOpenChange = React.useCallback(
     (newOpen: boolean) => {
@@ -52,23 +68,23 @@ export function HoverCardRoot({
 
       if (newOpen) {
         // Open with delay
-        if (openDelay > 0) {
+        if (openDelayMs > 0) {
           openTimeoutRef.current = setTimeout(() => {
             setOpen(true);
-          }, openDelay);
+          }, openDelayMs);
         } else {
           setOpen(true);
         }
-      } else if (closeDelay > 0) {
+      } else if (closeDelayMs > 0) {
         // Close with delay
         closeTimeoutRef.current = setTimeout(() => {
           setOpen(false);
-        }, closeDelay);
+        }, closeDelayMs);
       } else {
         setOpen(false);
       }
     },
-    [openDelay, closeDelay],
+    [openDelayMs, closeDelayMs],
   );
 
   // Cleanup timeouts on unmount

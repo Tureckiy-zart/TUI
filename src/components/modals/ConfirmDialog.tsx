@@ -2,16 +2,8 @@
 
 import * as React from "react";
 
+import { Modal } from "@/components/modal";
 import { Button, type ButtonProps } from "@/components/primitives/Button";
-
-import {
-  Modal,
-  ModalContent,
-  ModalDescription,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from "./Modal";
 
 export interface ConfirmDialogProps {
   isOpen: boolean;
@@ -57,22 +49,23 @@ export function ConfirmDialog({
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent>
-        <ModalHeader>
-          <ModalTitle>{title}</ModalTitle>
-          <ModalDescription>{description}</ModalDescription>
-        </ModalHeader>
-        <ModalFooter>
+    <Modal.Root open={isOpen} onOpenChange={onClose}>
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+          <Modal.Description>{description}</Modal.Description>
+        </Modal.Header>
+        <Modal.Footer>
           <Button variant="outline" onClick={onClose} disabled={isLoading}>
             {cancelText}
           </Button>
           <Button variant={variant} onClick={handleConfirm} disabled={isLoading}>
             {isLoading ? loadingText || confirmText : confirmText}
           </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </Modal.Footer>
+        <Modal.Close />
+      </Modal.Content>
+    </Modal.Root>
   );
 }
 

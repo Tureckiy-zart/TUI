@@ -47,9 +47,8 @@
     },
 
     /* Output */
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "dist"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "eslint-rules/**/*"],
   "exclude": ["dist", "node_modules", "storybook-static", ".storybook"]
 }
