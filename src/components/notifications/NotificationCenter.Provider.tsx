@@ -10,6 +10,8 @@
 
 import * as React from "react";
 
+import { getDelayMs } from "@/lib/responsive-props";
+
 import type {
   GroupByFunction,
   NotificationChannel,
@@ -89,8 +91,10 @@ export function NotificationCenterProvider({
         timestamp,
         read: false,
         persistent: options.persistent ?? false,
-        duration: options.duration ?? (options.persistent ? 0 : 5000),
+        duration: options.duration,
       };
+
+      const durationMs = getDelayMs(options.duration, options.persistent ? 0 : 5000);
 
       setNotifications((prev) => [...prev, notification]);
 
@@ -103,10 +107,10 @@ export function NotificationCenterProvider({
       }
 
       // Auto-dismiss after duration (if not persistent)
-      if (notification.duration && notification.duration > 0) {
+      if (durationMs > 0) {
         setTimeout(() => {
           setNotifications((prev) => prev.filter((n) => n.id !== id));
-        }, notification.duration);
+        }, durationMs);
       }
 
       return id;

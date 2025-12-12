@@ -6,8 +6,6 @@
  * All color values use CSS variables for theme-aware styling.
  */
 
-import { MOTION_TOKENS } from "./motion";
-
 // Foundation tokens are referenced in comments for documentation
 // All color values use CSS variable references for theme support
 

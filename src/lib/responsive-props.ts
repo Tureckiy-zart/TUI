@@ -6,7 +6,12 @@
  */
 
 import { durations } from "@/tokens/motion";
-import type { MotionDurationToken, SpacingToken } from "@/tokens/types";
+import type {
+  DelayToken,
+  MotionDurationToken,
+  ResponsiveDelay,
+  SpacingToken,
+} from "@/tokens/types";
 import type { Responsive } from "@/types/responsive";
 
 /**
@@ -249,6 +254,40 @@ export function getDurationMs(token: MotionDurationToken): number {
   }
   // Fallback: try to parse as number
   return Number.parseFloat(duration) || 0;
+}
+
+/**
+ * Convert ResponsiveDelay to milliseconds (number)
+ * Used for setTimeout, delayDuration, etc.
+ * For responsive objects, uses base value or first available breakpoint value.
+ */
+export function getDelayMs(
+  delay: ResponsiveDelay | undefined,
+  defaultValue: number = 5000,
+): number {
+  if (delay === undefined || delay === null) {
+    return defaultValue;
+  }
+
+  // If it's a string token, convert directly
+  if (typeof delay === "string") {
+    return getDurationMs(delay as DelayToken);
+  }
+
+  // If it's a responsive object, get base value or first available
+  if (isResponsiveValue(delay)) {
+    const baseValue = delay.base;
+    if (baseValue !== undefined) {
+      return getDurationMs(baseValue);
+    }
+    // Try to get first available breakpoint value
+    const firstValue = delay.sm || delay.md || delay.lg || delay.xl || delay["2xl"];
+    if (firstValue !== undefined) {
+      return getDurationMs(firstValue);
+    }
+  }
+
+  return defaultValue;
 }
 
 /**

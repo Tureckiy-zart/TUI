@@ -301,13 +301,15 @@ export default createRule<Options, MessageIds>({
 
       // Check if file is excluded (for documented exceptions)
       const filePath = context.getFilename();
-      if (filePath.includes("Table.types.ts") && propName === "width") {
+      if (isExcludedFile(filePath)) {
         // TableColumn.width is a documented exception
-        return;
-      }
-      // ComponentAnimationConfig.animation is a documented exception (allows ResponsiveAnimationPreset | string for custom CSS)
-      if (filePath.includes("animation/types.ts") && propName === "animation") {
-        return;
+        if (filePath.includes("Table.types.ts") && propName === "width") {
+          return;
+        }
+        // ComponentAnimationConfig.animation is a documented exception (allows ResponsiveAnimationPreset | string for custom CSS)
+        if (filePath.includes("animation/types.ts") && propName === "animation") {
+          return;
+        }
       }
 
       // Check if this is a visual prop

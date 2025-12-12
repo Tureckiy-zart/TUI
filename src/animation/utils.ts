@@ -4,6 +4,8 @@
  * Helper functions for working with animation props in components
  */
 
+import { getBaseValue } from "@/lib/responsive-props";
+
 import { fadePresets, hoverPresets, scalePresets, slidePresets } from "./presets";
 import type { AnimationProps, ComponentAnimationConfig } from "./types";
 
@@ -15,9 +17,17 @@ function resolveAnimationPreset(
 ): AnimationProps | undefined {
   if (!preset) return undefined;
 
-  // If already AnimationProps, return as-is
-  if (typeof preset === "object") {
-    return preset;
+  // If it's a string (preset name or custom CSS class), handle it below
+  if (typeof preset === "string") {
+    // Continue to switch statement
+  } else {
+    // If it's a responsive object, get base value
+    const baseValue = getBaseValue(preset);
+    if (baseValue && typeof baseValue === "string") {
+      // Recursively resolve the base value
+      return resolveAnimationPreset(baseValue);
+    }
+    return undefined;
   }
 
   // Map preset names to actual presets

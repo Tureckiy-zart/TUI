@@ -10,6 +10,7 @@
 
 import * as React from "react";
 
+import { getDelayMs } from "@/lib/responsive-props";
 import type { ResponsiveDelay } from "@/tokens/types";
 
 import { Toast, type ToastAction, type ToastData } from "./Toast";
@@ -120,10 +121,11 @@ export function ToastProvider({
   const toast = React.useCallback(
     (options: ToastOptions): string => {
       const id = Math.random().toString(36).substr(2, 9);
+      const durationMs = getDelayMs(options.duration, 5000);
       const newToast: ToastData = {
         id,
         ...options,
-        duration: options.duration ?? 5000,
+        duration: options.duration,
       };
 
       setToasts((prev) => {
@@ -142,10 +144,10 @@ export function ToastProvider({
       });
 
       // Auto-dismiss after duration
-      if (newToast.duration && newToast.duration > 0) {
+      if (durationMs > 0) {
         setTimeout(() => {
           dismiss(id);
-        }, newToast.duration);
+        }, durationMs);
       }
 
       return id;

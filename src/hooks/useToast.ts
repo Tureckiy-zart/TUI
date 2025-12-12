@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 
+import { getDelayMs } from "@/lib/responsive-props";
 import type { ResponsiveDelay } from "@/tokens/types";
 
 export type ToastType = "success" | "error" | "warning" | "info";
@@ -39,19 +40,19 @@ export function useToast(): UseToastReturn {
   const toast = useCallback(
     (toastData: Omit<Toast, "id">) => {
       const id = Math.random().toString(36).substr(2, 9);
+      const durationMs = getDelayMs(toastData.duration, 5000);
       const newToast: Toast = {
         id,
-        duration: 5000, // Default 5 seconds
         ...toastData,
       };
 
       setToasts((prev) => [...prev, newToast]);
 
       // Auto dismiss after duration
-      if (newToast.duration && newToast.duration > 0) {
+      if (durationMs > 0) {
         setTimeout(() => {
           dismiss(id);
-        }, newToast.duration);
+        }, durationMs);
       }
 
       return id;
@@ -82,19 +83,19 @@ export function useToastManager() {
   const toast = useCallback(
     (toastData: Omit<Toast, "id">) => {
       const id = Math.random().toString(36).substr(2, 9);
+      const durationMs = getDelayMs(toastData.duration, 5000);
       const newToast: Toast = {
         id,
-        duration: 5000,
         ...toastData,
       };
 
       setToasts((prev) => [...prev, newToast]);
 
       // Auto dismiss after duration
-      if (newToast.duration && newToast.duration > 0) {
+      if (durationMs > 0) {
         setTimeout(() => {
           dismiss(id);
-        }, newToast.duration);
+        }, durationMs);
       }
 
       return id;
