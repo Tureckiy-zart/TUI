@@ -1,4 +1,6 @@
 "use client";
+
+import * as React from "react";
 import { Input } from "@/components/input";
 import { Select } from "@/components/select";
 import { Textarea } from "@/components/textarea";
@@ -40,7 +42,7 @@ export const BasicInput: Story = {
   ),
 };
 
-export const WithDescription: Story = {
+export const InputWithDescription: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="desc-input">Username</Field.Label>
@@ -52,7 +54,7 @@ export const WithDescription: Story = {
   ),
 };
 
-export const WithError: Story = {
+export const InputWithError: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="error-input">Email Address</Field.Label>
@@ -89,22 +91,211 @@ export const TextareaField: Story = {
   ),
 };
 
-export const SelectField: Story = {
+/**
+ * Default Field with Select using default tokens and basic options
+ */
+export const Default: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="select-field">Country</Field.Label>
       <Field.Control>
         <Select.Root>
-          <Select.Trigger id="select-field" placeholder="Select a country" />
-          <Select.Listbox>
-            <Select.Option value="us">United States</Select.Option>
-            <Select.Option value="uk">United Kingdom</Select.Option>
-            <Select.Option value="ca">Canada</Select.Option>
-          </Select.Listbox>
+          <Select.Trigger id="select-field">
+            <Select.Value placeholder="Select a country" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="us">United States</Select.Item>
+              <Select.Item value="uk">United Kingdom</Select.Item>
+              <Select.Item value="ca">Canada</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
         </Select.Root>
       </Field.Control>
     </Field>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Field with Select using default tokens and basic options.",
+      },
+    },
+  },
+};
+
+/**
+ * Field with Select and Label for accessibility
+ */
+export const WithLabel: Story = {
+  render: () => (
+    <Field className="w-64">
+      <Field.Label htmlFor="select-with-label">Country</Field.Label>
+      <Field.Control>
+        <Select.Root>
+          <Select.Trigger id="select-with-label">
+            <Select.Value placeholder="Select a country" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="us">United States</Select.Item>
+              <Select.Item value="uk">United Kingdom</Select.Item>
+              <Select.Item value="ca">Canada</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>
+      </Field.Control>
+    </Field>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Field label correctly associated with Select Trigger for accessibility using htmlFor and id.",
+      },
+    },
+  },
+};
+
+/**
+ * Field with Select and description/helper text
+ */
+export const WithDescription: Story = {
+  render: () => (
+    <Field className="w-64">
+      <Field.Label htmlFor="select-with-desc">Country</Field.Label>
+      <Field.Control>
+        <Select.Root>
+          <Select.Trigger id="select-with-desc">
+            <Select.Value placeholder="Select a country" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="us">United States</Select.Item>
+              <Select.Item value="uk">United Kingdom</Select.Item>
+              <Select.Item value="ca">Canada</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>
+      </Field.Control>
+      <Field.Description>Choose your country of residence</Field.Description>
+    </Field>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Field description/helper text displayed below Select control.",
+      },
+    },
+  },
+};
+
+/**
+ * Field with Select and error state
+ */
+export const WithError: Story = {
+  render: () => (
+    <Field className="w-64">
+      <Field.Label htmlFor="select-with-error">Country</Field.Label>
+      <Field.Control>
+        <Select.Root>
+          <Select.Trigger id="select-with-error" variant="destructive">
+            <Select.Value placeholder="Select a country" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="us">United States</Select.Item>
+              <Select.Item value="uk">United Kingdom</Select.Item>
+              <Select.Item value="ca">Canada</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>
+      </Field.Control>
+      <Field.Error>Please select a valid country</Field.Error>
+    </Field>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Field error state combined with Select using destructive variant.",
+      },
+    },
+  },
+};
+
+/**
+ * Disabled Field with disabled Select
+ */
+export const Disabled: Story = {
+  render: () => (
+    <Field className="w-64">
+      <Field.Label htmlFor="select-disabled">Country</Field.Label>
+      <Field.Control>
+        <Select.Root disabled defaultValue="us">
+          <Select.Trigger id="select-disabled">
+            <Select.Value placeholder="Select a country" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="us">United States</Select.Item>
+              <Select.Item value="uk">United Kingdom</Select.Item>
+              <Select.Item value="ca">Canada</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>
+      </Field.Control>
+      <Field.Description>This field is disabled</Field.Description>
+    </Field>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Disabled Field with disabled Select. Select cannot be opened or changed.",
+      },
+    },
+  },
+};
+
+/**
+ * Controlled Select inside Field
+ */
+export const Controlled: Story = {
+  render: () => {
+    const [value, setValue] = React.useState<string | undefined>("us");
+
+    return (
+      <Field className="w-64">
+        <Field.Label htmlFor="select-controlled">Country</Field.Label>
+        <Field.Control>
+          <Select.Root value={value} onValueChange={setValue}>
+            <Select.Trigger id="select-controlled">
+              <Select.Value placeholder="Select a country" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Viewport>
+                <Select.Item value="us">United States</Select.Item>
+                <Select.Item value="uk">United Kingdom</Select.Item>
+                <Select.Item value="ca">Canada</Select.Item>
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Root>
+        </Field.Control>
+        <Field.Description>Selected: {value ?? "none"}</Field.Description>
+      </Field>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Controlled Select inside Field using value and onValueChange props.",
+      },
+    },
+  },
 };
 
 export const CompleteForm: Story = {
@@ -133,12 +324,17 @@ export const CompleteForm: Story = {
         <Field.Label htmlFor="form-country">Country</Field.Label>
         <Field.Control>
           <Select.Root>
-            <Select.Trigger id="form-country" placeholder="Select a country" />
-            <Select.Listbox>
-              <Select.Option value="us">United States</Select.Option>
-              <Select.Option value="uk">United Kingdom</Select.Option>
-              <Select.Option value="ca">Canada</Select.Option>
-            </Select.Listbox>
+            <Select.Trigger id="form-country">
+              <Select.Value placeholder="Select a country" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Viewport>
+                <Select.Item value="us">United States</Select.Item>
+                <Select.Item value="uk">United Kingdom</Select.Item>
+                <Select.Item value="ca">Canada</Select.Item>
+              </Select.Viewport>
+            </Select.Content>
           </Select.Root>
         </Field.Control>
       </Field>
