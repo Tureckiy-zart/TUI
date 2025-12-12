@@ -6,7 +6,7 @@
 
 import type { ResponsiveDelay } from "@/tokens/types";
 
-import type { ToastAction } from "../overlays/Toast";
+import type { ToastActionData } from "../overlays/Toast";
 
 /**
  * Notification channel types
@@ -34,7 +34,7 @@ export interface NotificationData {
   description?: string;
   variant?: NotificationVariant;
   channel?: NotificationChannel;
-  action?: ToastAction;
+  action?: ToastActionData;
   /**
    * Notification duration - token-based
    * Uses motion duration tokens
@@ -53,7 +53,7 @@ export interface NotificationOptions {
   description?: string;
   variant?: NotificationVariant;
   channel?: NotificationChannel;
-  action?: ToastAction;
+  action?: ToastActionData;
   /**
    * Notification duration - token-based
    * Uses motion duration tokens

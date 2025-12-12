@@ -317,14 +317,16 @@
 
 ---
 
-### 14. Modal Компоненты (Legacy)
+### 14. Modal Компоненты
 
-**Количество:** 5 компонентов
+**Количество:** 4 компонента
 
-- `Modal` - базовый модальный компонент
-- `CustomDialog` - кастомный диалог
-- `ConfirmDialog` - диалог подтверждения
+- `Modal` - базовый модальный компонент (Foundation - Radix Dialog wrapper)
+- `Dialog` - диалог расширение (использует Modal внутри)
+- `ConfirmDialog` - диалог подтверждения (использует Modal внутри)
 - `ModalProvider` - провайдер модалок
+
+**Примечание:** `CustomDialog` был удален как legacy компонент. Используйте `Modal` (foundation) или `Dialog`/`ConfirmDialog` (extensions).
 
 ---
 

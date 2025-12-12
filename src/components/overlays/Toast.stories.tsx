@@ -4,14 +4,14 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ToastProvider, useToast } from "./ToastProvider";
 
 const meta: Meta<typeof ToastProvider> = {
-  title: "Overlays/Toast",
+  title: "UI/Foundation/Toast",
   component: ToastProvider,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Token-driven toast notification system with Context API. Supports variants: success, info, warning, danger. Uses CSS animations with motion tokens.",
+          "🔒 FOUNDATION COMPONENT - Radix-based toast notification system with token-driven styling. All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal) is handled by Radix Toast primitives. Supports variants: default, success, info, warning, danger. Uses CSS animations with motion tokens and Radix data attributes.",
       },
     },
   },

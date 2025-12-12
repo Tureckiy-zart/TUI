@@ -3,16 +3,21 @@
 /**
  * ToastViewport Component
  *
- * Fixed positioning container for toast notifications.
- * Supports position variants (top-right, bottom-left, etc.).
- * Uses Portal for rendering outside DOM hierarchy.
+ * 🔒 FOUNDATION COMPONENT - ARCHITECTURE LOCKED
+ *
+ * Radix-based toast viewport with token-driven positioning.
+ * Radix Toast.Viewport handles portal rendering internally.
+ * Tenerife UI provides visual styling and positioning through tokens only.
+ *
+ * This component is locked as a foundation component per TUI_ARCHITECTURE_LOCK.md.
+ * DO NOT reimplement portal logic - Radix handles this internally.
  */
 
+import * as ToastPrimitives from "@radix-ui/react-toast";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-
-import { Portal } from "./Portal";
+import { TOAST_TOKENS } from "@/tokens/components/toast";
 
 export type ToastPosition =
   | "top-left"
@@ -22,60 +27,45 @@ export type ToastPosition =
   | "bottom-center"
   | "bottom-right";
 
-export interface ToastViewportProps {
+export interface ToastViewportProps
+  extends React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport> {
   /**
    * Position of toast viewport
    */
   position?: ToastPosition;
-
-  /**
-   * Children to render in viewport
-   */
-  children: React.ReactNode;
-
-  /**
-   * Additional CSS classes
-   */
-  className?: string;
 }
 
+/**
+ * Position classes mapping
+ * Uses token-driven spacing for positioning
+ */
 const positionClasses: Record<ToastPosition, string> = {
-  "top-left": `fixed top-md left-md z-[100] flex flex-col gap-sm`,
-  "top-center": `fixed top-md inset-x-0 z-[100] flex flex-col items-center gap-sm`,
-  "top-right": `fixed top-md right-md z-[100] flex flex-col gap-sm`,
-  "bottom-left": `fixed bottom-md left-md z-[100] flex flex-col-reverse gap-sm`,
-  "bottom-center": `fixed bottom-md inset-x-0 z-[100] flex flex-col-reverse items-center gap-sm`,
-  "bottom-right": `fixed bottom-md right-md z-[100] flex flex-col-reverse gap-sm`,
+  "top-left": `fixed ${TOAST_TOKENS.position.spacing.top} ${TOAST_TOKENS.position.spacing.left} z-[100] flex flex-col ${TOAST_TOKENS.spacing.gap}`,
+  "top-center": `fixed ${TOAST_TOKENS.position.spacing.top} inset-x-0 z-[100] flex flex-col items-center ${TOAST_TOKENS.spacing.gap}`,
+  "top-right": `fixed ${TOAST_TOKENS.position.spacing.top} ${TOAST_TOKENS.position.spacing.right} z-[100] flex flex-col ${TOAST_TOKENS.spacing.gap}`,
+  "bottom-left": `fixed ${TOAST_TOKENS.position.spacing.bottom} ${TOAST_TOKENS.position.spacing.left} z-[100] flex flex-col-reverse ${TOAST_TOKENS.spacing.gap}`,
+  "bottom-center": `fixed ${TOAST_TOKENS.position.spacing.bottom} inset-x-0 z-[100] flex flex-col-reverse items-center ${TOAST_TOKENS.spacing.gap}`,
+  "bottom-right": `fixed ${TOAST_TOKENS.position.spacing.bottom} ${TOAST_TOKENS.position.spacing.right} z-[100] flex flex-col-reverse ${TOAST_TOKENS.spacing.gap}`,
 };
 
 /**
- * ToastViewport component - container for toast notifications
+ * ToastViewport component
+ * Wrapper around Radix Toast.Viewport with token-based positioning.
+ * Radix handles portal rendering internally - no custom Portal needed.
  */
-export const ToastViewport = React.forwardRef<HTMLDivElement, ToastViewportProps>(
-  ({ position = "top-right", children, className }, ref) => {
+export const ToastViewport = React.forwardRef<HTMLOListElement, ToastViewportProps>(
+  ({ position = "top-right", className, ...props }, ref) => {
     return (
-      <Portal>
-        <div
-          ref={ref}
-          className={cn(
-            positionClasses[position],
-            "max-h-screen w-full max-w-md overflow-hidden p-0",
-            className,
-          )}
-          style={{ pointerEvents: "none" }}
-          aria-live="polite"
-          aria-label="Notifications"
-        >
-          <div
-            className="pointer-events-auto flex flex-col gap-sm"
-            style={{ pointerEvents: "auto" }}
-          >
-            {children}
-          </div>
-        </div>
-      </Portal>
+      <ToastPrimitives.Viewport
+        ref={ref}
+        className={cn(
+          positionClasses[position],
+          "max-h-screen w-full max-w-md overflow-hidden p-0",
+          className,
+        )}
+        {...props}
+      />
     );
   },
 );
-
-ToastViewport.displayName = "ToastViewport";
+ToastViewport.displayName = ToastPrimitives.Viewport.displayName;

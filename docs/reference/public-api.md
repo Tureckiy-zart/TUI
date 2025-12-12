@@ -269,9 +269,9 @@ import { Container, Flex, Grid, Stack, Section } from "@tenerife.music/ui";
 
 ### Modal Components
 
-- `Modal` - Main modal component
-- `CustomDialog` - Customizable dialog
-- `ConfirmDialog` - Confirmation dialog
+- `Modal` - Foundation modal component (Radix Dialog wrapper)
+- `ConfirmDialog` - Confirmation dialog extension (uses Modal internally)
+- `Dialog` - Dialog extension component (uses Modal internally)
 - `ModalProvider` - Modal context provider
 
 ### Overlay Components

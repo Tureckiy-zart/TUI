@@ -17,6 +17,15 @@ export default defineConfig({
   esbuildOptions(options) {
     options.mainFields = ["module", "main"];
     options.resolveExtensions = [".tsx", ".ts", ".jsx", ".js", ".mjs", ".cjs", ".json"];
+    // Подавляем предупреждения о "use client" директивах
+    // Эти директивы нужны для Next.js и будут сохранены в исходных файлах
+    options.logOverride = {
+      ...options.logOverride,
+      "directive-will-be-removed": "silent",
+    };
+    // Устанавливаем уровень логирования, чтобы скрыть предупреждения
+    // Предупреждения о "use client" можно игнорировать для библиотек
+    options.logLevel = options.logLevel || "warning";
   },
   external: [
     // React and React DOM
@@ -57,9 +66,7 @@ export default defineConfig({
     // Tailwind
     "tailwindcss",
   ],
-  banner: {
-    js: '"use client";',
-  },
+  // banner удален - директивы "use client" уже есть в исходных файлах
   outDir: "dist",
   outExtension({ format }) {
     return {

@@ -32,7 +32,19 @@ export {
 } from "./Dialog";
 
 // Toast
-export { Toast, type ToastAction, type ToastData, type ToastProps } from "./Toast";
+export {
+  Toast,
+  ToastAction,
+  type ToastActionData,
+  ToastClose,
+  type ToastData,
+  ToastDescription,
+  type ToastProps,
+  ToastRoot,
+  type ToastRootProps,
+  ToastTitle,
+  toastVariants,
+} from "./Toast";
 export {
   type ToastOptions,
   ToastProvider,

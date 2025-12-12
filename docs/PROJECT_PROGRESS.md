@@ -2,9 +2,36 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-**Last Updated:** 2025-12-12 (L4 Data Components Migration - 5 subtasks completed)
+## 🔒 UI Foundation Lock Status
 
----
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2025-12-12  
+**Reference:** [Architecture Lock Document](./architecture/TUI_ARCHITECTURE_LOCK.md)
+
+### Locked Foundation Components
+
+The following components are **locked** and **immutable** as part of the UI Foundation Layer:
+
+1. **Modal** - `src/components/modal/Modal.tsx` (Radix Dialog wrapper)
+2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx` (Radix Tabs wrapper)
+3. **Select** - `src/components/select/Select.tsx` (Radix Select wrapper)
+4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx` (Radix ContextMenu wrapper)
+5. **Toast** - `src/components/overlays/Toast.tsx` (Radix Toast wrapper)
+
+### Foundation Rules
+
+- ✅ **ONE FOUNDATION PER CATEGORY** - Exactly one foundation component per category
+- ✅ **FOUNDATION COMPONENTS ARE IMMUTABLE** - No breaking changes, no deletion, no renaming
+- ✅ **NO NEW FOUNDATION COMPONENTS** - Foundation layer is closed
+- ✅ **EXTENSIONS MUST USE FOUNDATION** - All extensions must compose foundation components internally
+
+### Known Extensions
+
+- **Dialog** - Uses Modal internally (`src/components/overlays/Dialog.tsx`)
+- **ConfirmDialog** - Uses Modal internally (`src/components/modals/ConfirmDialog.tsx`)
+- **NotificationCenter** - Uses Toast internally (`src/components/notifications/NotificationCenter.tsx`)
+
+**Note:** After this lock, foundation work pauses and future changes happen in extensions only.
 
 ## Audit Layer
 

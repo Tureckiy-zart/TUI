@@ -14,6 +14,8 @@ This document **formally locks** the UI foundation architecture of `@tenerife.mu
 
 **This is a binding architectural contract.** Any violation of these rules is considered an architectural breach.
 
+> 🔒 **Final Foundation Lock:** For the authoritative, definitive Foundation lock document, see **[FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)**. The Final Foundation Lock document is the **single source of truth** for the locked Foundation layer and officially closes the Foundation architecture phase.
+
 ---
 
 ## 🎯 Architecture Overview
@@ -158,10 +160,11 @@ The following components are **locked** and **immutable**:
    - These names **cannot** be used for extensions
    - These names **cannot** be modified
 
-2. **No prefixes allowed**
-   - ❌ `SimpleModal`, `BasicTabs`, `OldSelect`, `LegacyToast`
-   - ❌ `ModalV2`, `TabsV2`, `SelectV2`
-   - ❌ `NewModal`, `NewTabs`, `NewSelect`
+2. **No prefixes allowed for foundation components**
+   - ❌ `SimpleModal`, `BasicModal`, `OldSelect`, `LegacyToast` (foundation duplicates)
+   - ❌ `ModalV2`, `TabsV2`, `SelectV2` (foundation duplicates)
+   - ❌ `NewModal`, `NewTabs`, `NewSelect` (foundation duplicates)
+   - ⚠️ **Note:** `Basic*` naming is **allowed** for internal components within a component family (e.g., `BasicButton` inside a button family), but **never** for global foundation components (Modal, Tabs, Select, ContextMenu, Toast)
 
 3. **No suffixes allowed**
    - ❌ `ModalBasic`, `TabsSimple`, `SelectOld`
@@ -307,8 +310,13 @@ The following components are canonical and **MUST NOT** be recreated, duplicated
 
 - Create new foundation components
 - Suggest alternative implementations
-- Create `Simple*`, `Basic*`, `Legacy*`, `V2*`, or duplicate variants
+- Create `Simple*`, `Basic*`, `Legacy*`, `V2*`, or duplicate variants **for foundation components** (Modal, Tabs, Select, ContextMenu, Toast)
 - Reimplement behavior handled by Radix
+
+**Note on Basic* naming:**
+- ❌ **FORBIDDEN:** `BasicModal`, `BasicTabs`, `BasicSelect` (these duplicate foundation components)
+- ✅ **ALLOWED:** `BasicButton`, `BasicCard`, `BasicInput` (these are internal to a component family and do not duplicate foundation)
+- The key distinction: Basic* is acceptable when it's clearly internal to a single family and does not duplicate a foundation component
 
 ### Extension Rules
 
@@ -327,10 +335,13 @@ If new behavior or UX is required:
 
 **Invalid examples:**
 
-- ❌ `SimpleModal`
-- ❌ `CustomTabs`
-- ❌ `AdvancedSelect`
-- ❌ `ModalV2`
+- ❌ `SimpleModal` (duplicates foundation Modal)
+- ❌ `BasicModal` (duplicates foundation Modal)
+- ❌ `CustomTabs` (duplicates foundation Tabs)
+- ❌ `AdvancedSelect` (duplicates foundation Select)
+- ❌ `ModalV2` (duplicates foundation Modal)
+
+**Note:** `Basic*` naming is acceptable for internal components within a component family (e.g., `BasicButton` as an internal variant), but never for global foundation components.
 
 ### Radix Rule
 
@@ -552,6 +563,7 @@ The architecture lock fails if:
 
 ## 📖 Related Documents
 
+- **[Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md)** - 🔒 **Authoritative Foundation lock document** (single source of truth)
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** - Radix UI and Token Union rules
 - **[Component Guidelines](../structure/COMPONENT_GUIDELINES.md)** - Component development guidelines
 - **[Cursor UI Rules](./CURSOR_UI_RULES.md)** - Cursor AI development rules

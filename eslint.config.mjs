@@ -22,6 +22,7 @@ export default [
       "docs-app/.next/**",
       "docs-app/**", // Documentation app - allow demo code
       "docs/**",
+      ".cursor/**", // Cursor IDE configuration files
       "**/*.stories.tsx",
       "**/*.stories.ts",
       "**/*.stories.js",

@@ -43,7 +43,7 @@ echo ""
 
 # === ESLINT CHECK ===
 echo "📋 Running ESLint (strict mode, max-warnings=0)..."
-if ESLINT_OUTPUT=$(pnpm eslint . --max-warnings=0 --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' 2>&1); then
+if ESLINT_OUTPUT=$(pnpm eslint . --max-warnings=0 --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**' 2>&1); then
   # ESLint passed
   {
     echo "## ESLINT ERRORS"

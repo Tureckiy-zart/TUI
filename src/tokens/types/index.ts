@@ -7,6 +7,7 @@
  */
 
 import type { Responsive } from "@/types/responsive";
+import type { CONTEXT_MENU_TOKENS } from "../components/context-menu";
 import type { MODAL_TOKENS } from "../components/modal";
 import type { SELECT_TOKENS } from "../components/select";
 import type { TABS_TOKENS } from "../components/tabs";
@@ -449,3 +450,32 @@ export type ResponsiveModalWidth = Responsive<ModalWidthToken>;
  * Responsive modal height type
  */
 export type ResponsiveModalHeight = Responsive<ModalHeightToken>;
+
+// ============================================================================
+// CONTEXT MENU TOKENS
+// ============================================================================
+
+/**
+ * ContextMenu size token keys
+ */
+export type ContextMenuSizeToken = keyof typeof CONTEXT_MENU_TOKENS.size;
+
+/**
+ * ContextMenu width token keys
+ */
+export type ContextMenuWidthToken = keyof typeof CONTEXT_MENU_TOKENS.width;
+
+/**
+ * ContextMenu item tone token keys
+ */
+export type ContextMenuItemToneToken = keyof typeof CONTEXT_MENU_TOKENS.item.tone;
+
+/**
+ * Responsive context menu size type
+ */
+export type ResponsiveContextMenuSize = Responsive<ContextMenuSizeToken>;
+
+/**
+ * Responsive context menu width type
+ */
+export type ResponsiveContextMenuWidth = Responsive<ContextMenuWidthToken>;

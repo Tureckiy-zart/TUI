@@ -72,17 +72,18 @@ export default function App() {
 
 ## 📚 Documentation
 
-| Document                                                              | Description                                            |
-| --------------------------------------------------------------------- | ------------------------------------------------------ |
-| **[Complete Guide](./docs/GETTING_STARTED.md)**                       | Comprehensive guide for installation, setup, and usage |
-| [Quick Start](./docs/QUICK_START.md)                                  | Get started in 30 seconds                              |
-| [API Reference](./docs/public-api.md)                                 | Complete API documentation for all components          |
-| [Tokens Guide](./docs/TOKENS_GUIDE.md)                                | Working with design tokens                             |
-| [Theme Guide](./docs/THEME_GUIDE.md)                                  | Theme setup and customization                          |
-| **[Architecture Lock](./docs/architecture/TUI_ARCHITECTURE_LOCK.md)** | 🔒 Foundation architecture lock and rules              |
-| [Storybook](https://Tureckiy-zart.github.io/tenerife-ui/)             | Interactive examples of all components                 |
+| Document                                                                  | Description                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **[Complete Guide](./docs/GETTING_STARTED.md)**                           | Comprehensive guide for installation, setup, and usage        |
+| [Quick Start](./docs/QUICK_START.md)                                      | Get started in 30 seconds                                     |
+| [API Reference](./docs/public-api.md)                                     | Complete API documentation for all components                 |
+| [Tokens Guide](./docs/TOKENS_GUIDE.md)                                    | Working with design tokens                                    |
+| [Theme Guide](./docs/THEME_GUIDE.md)                                      | Theme setup and customization                                 |
+| **[Architecture Lock](./docs/architecture/TUI_ARCHITECTURE_LOCK.md)**     | 🔒 Foundation architecture lock and rules                     |
+| **[Final Foundation Lock](./docs/architecture/FINAL_FOUNDATION_LOCK.md)** | 🔒 **Authoritative Foundation lock** (single source of truth) |
+| [Storybook](https://Tureckiy-zart.github.io/tenerife-ui/)                 | Interactive examples of all components                        |
 
-> 🔒 **Architecture Lock:** The UI foundation architecture is **locked** and **immutable**. See [Architecture Lock](./docs/architecture/TUI_ARCHITECTURE_LOCK.md) for details on foundation components, extension rules, and development guidelines.
+> 🔒 **Architecture Lock:** The UI foundation architecture is **locked** and **immutable**. See [Final Foundation Lock](./docs/architecture/FINAL_FOUNDATION_LOCK.md) for the authoritative Foundation lock document (single source of truth), or [Architecture Lock](./docs/architecture/TUI_ARCHITECTURE_LOCK.md) for detailed architecture rules and guidelines.
 
 ---
 

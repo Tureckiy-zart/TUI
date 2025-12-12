@@ -487,23 +487,8 @@ export {
 // ============================================================================
 // MENU SYSTEM
 // ============================================================================
-// Menu components (Popover, DropdownMenu, HoverCard, ContextMenu)
+// Menu components (Popover, DropdownMenu, HoverCard)
 export {
-  ContextMenuContent,
-  type ContextMenuContentProps,
-  ContextMenuGroup,
-  type ContextMenuGroupProps,
-  ContextMenuItem,
-  type ContextMenuItemProps,
-  ContextMenuLabel,
-  type ContextMenuLabelProps,
-  // ContextMenu
-  ContextMenuRoot,
-  type ContextMenuRootProps,
-  ContextMenuSeparator,
-  type ContextMenuSeparatorProps,
-  ContextMenuTrigger,
-  type ContextMenuTriggerProps,
   DropdownMenuCheckItem,
   type DropdownMenuCheckItemProps,
   DropdownMenuContent,
@@ -549,6 +534,35 @@ export {
   PopoverTrigger,
   type PopoverTriggerProps,
 } from "./components/menus";
+
+// ContextMenu components
+export {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  type ContextMenuCheckboxItemProps,
+  ContextMenuContent,
+  type ContextMenuContentProps,
+  ContextMenuItem,
+  type ContextMenuItemProps,
+  ContextMenuLabel,
+  type ContextMenuLabelProps,
+  ContextMenuRadioGroup,
+  type ContextMenuRadioGroupProps,
+  ContextMenuRadioItem,
+  type ContextMenuRadioItemProps,
+  ContextMenuRoot,
+  type ContextMenuRootProps,
+  ContextMenuSeparator,
+  type ContextMenuSeparatorProps,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  type ContextMenuSubContentProps,
+  type ContextMenuSubProps,
+  ContextMenuSubTrigger,
+  type ContextMenuSubTriggerProps,
+  ContextMenuTrigger,
+  type ContextMenuTriggerProps,
+} from "./components/context-menu";
 
 // ============================================================================
 // DATA DISPLAY COMPONENTS

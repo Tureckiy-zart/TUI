@@ -6,7 +6,7 @@ import * as React from "react";
 import { Select } from "./Select";
 
 const meta: Meta<typeof Select.Root> = {
-  title: "UI/Select",
+  title: "UI/Foundation/Select",
   component: Select.Root,
   parameters: {
     layout: "centered",

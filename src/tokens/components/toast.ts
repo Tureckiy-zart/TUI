@@ -66,8 +66,9 @@ export const TOAST_TOKENS = {
 
   /**
    * Animation tokens for toast enter/exit animations
-   * Maps to Motion V2 utility classes
+   * Maps to Motion V2 utility classes and Radix data attributes
    * Uses CSS-only animations from motion/v2.ts
+   * Radix Toast provides data-[state=open] and data-[state=closed] attributes
    */
   animation: {
     enter: {
@@ -79,6 +80,25 @@ export const TOAST_TOKENS = {
       slideOutRight: "tm-motion-fade-slide-left-out", // Motion V2 fade + slide left out
       fadeOut: "tm-motion-fade-out", // Motion V2 fade out
       combined: "tm-motion-fade-slide-left-out", // Motion V2 fade + slide left out
+    } as const,
+    /**
+     * Radix Toast data attribute classes
+     * These are applied automatically by Radix based on toast state
+     */
+    radix: {
+      /**
+       * Base classes for Radix Toast Root
+       * Includes swipe handling and state-based animations
+       */
+      root: "data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out",
+      /**
+       * State-based animation classes
+       */
+      state: {
+        open: "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+        closed:
+          "data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full",
+      } as const,
     } as const,
   } as const,
 

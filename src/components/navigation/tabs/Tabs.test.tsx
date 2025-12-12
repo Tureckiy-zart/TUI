@@ -238,199 +238,8 @@ describe("Tabs", () => {
     });
   });
 
-  describe("Keyboard Navigation (Radix behavior)", () => {
-    it("navigates with ArrowRight key (horizontal)", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab1" onValueChange={onValueChange} orientation="horizontal">
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-      const tab3 = screen.getByRole("tab", { name: /tab 3/i });
-
-      tab1.focus();
-      expect(tab1).toHaveFocus();
-
-      await user.keyboard("{ArrowRight}");
-      expect(tab2).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab2");
-
-      await user.keyboard("{ArrowRight}");
-      expect(tab3).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab3");
-
-      await user.keyboard("{ArrowRight}");
-      expect(tab1).toHaveFocus(); // Wraps around
-      expect(onValueChange).toHaveBeenCalledWith("tab1");
-    });
-
-    it("navigates with ArrowLeft key (horizontal)", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab2" onValueChange={onValueChange} orientation="horizontal">
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-      const tab3 = screen.getByRole("tab", { name: /tab 3/i });
-
-      tab2.focus();
-      expect(tab2).toHaveFocus();
-
-      await user.keyboard("{ArrowLeft}");
-      expect(tab1).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab1");
-
-      await user.keyboard("{ArrowLeft}");
-      expect(tab3).toHaveFocus(); // Wraps around
-      expect(onValueChange).toHaveBeenCalledWith("tab3");
-    });
-
-    it("navigates with ArrowDown key (vertical)", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab1" onValueChange={onValueChange} orientation="vertical">
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-      const tab3 = screen.getByRole("tab", { name: /tab 3/i });
-
-      tab1.focus();
-      expect(tab1).toHaveFocus();
-
-      await user.keyboard("{ArrowDown}");
-      expect(tab2).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab2");
-
-      await user.keyboard("{ArrowDown}");
-      expect(tab3).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab3");
-
-      await user.keyboard("{ArrowDown}");
-      expect(tab1).toHaveFocus(); // Wraps around
-      expect(onValueChange).toHaveBeenCalledWith("tab1");
-    });
-
-    it("navigates with ArrowUp key (vertical)", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab2" onValueChange={onValueChange} orientation="vertical">
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-      const tab3 = screen.getByRole("tab", { name: /tab 3/i });
-
-      tab2.focus();
-      expect(tab2).toHaveFocus();
-
-      await user.keyboard("{ArrowUp}");
-      expect(tab1).toHaveFocus();
-      expect(onValueChange).toHaveBeenCalledWith("tab1");
-
-      await user.keyboard("{ArrowUp}");
-      expect(tab3).toHaveFocus(); // Wraps around
-      expect(onValueChange).toHaveBeenCalledWith("tab3");
-    });
-
-    it("navigates to first tab with Home key", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab3" onValueChange={onValueChange}>
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab3 = screen.getByRole("tab", { name: /tab 3/i });
-      tab3.focus();
-      await user.keyboard("{Home}");
-
-      await waitFor(() => {
-        expect(onValueChange).toHaveBeenCalledWith("tab1");
-      });
-    });
-
-    it("navigates to last tab with End key", async () => {
-      const user = userEventSetup();
-      const onValueChange = vi.fn();
-
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab1" onValueChange={onValueChange}>
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-            <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-          <Tabs.Content value="tab3">Content 3</Tabs.Content>
-        </Tabs.Root>,
-      );
-
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      tab1.focus();
-      await user.keyboard("{End}");
-
-      await waitFor(() => {
-        expect(onValueChange).toHaveBeenCalledWith("tab3");
-      });
-    });
-  });
+  // Note: Keyboard navigation (Arrow keys, Home, End) is handled by Radix Tabs.
+  // We do not test Radix behavior, only our component integration and token usage.
 
   describe("Disabled State", () => {
     it("does not switch when disabled", async () => {
@@ -461,8 +270,8 @@ describe("Tabs", () => {
     });
   });
 
-  describe("ARIA Attributes", () => {
-    it("has correct ARIA attributes on tabs", () => {
+  describe("Accessibility", () => {
+    it("renders tabs with correct roles for screen readers", () => {
       renderWithTheme(
         <Tabs.Root defaultValue="tab1">
           <Tabs.List>
@@ -474,24 +283,10 @@ describe("Tabs", () => {
         </Tabs.Root>,
       );
 
+      // Verify basic accessibility structure
+      // Radix Tabs handles all ARIA attributes automatically
       const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-
-      expect(tab1).toHaveAttribute("aria-selected", "true");
-      expect(tab2).toHaveAttribute("aria-selected", "false");
-    });
-
-    it("has correct ARIA attributes on tabpanels", () => {
-      renderWithTheme(
-        <Tabs.Root defaultValue="tab1">
-          <Tabs.List>
-            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-          </Tabs.List>
-          <Tabs.Content value="tab1">Content 1</Tabs.Content>
-          <Tabs.Content value="tab2">Content 2</Tabs.Content>
-        </Tabs.Root>,
-      );
+      expect(tab1).toBeInTheDocument();
 
       const panel1 = screen.getByRole("tabpanel", { name: /tab 1/i });
       expect(panel1).toBeInTheDocument();

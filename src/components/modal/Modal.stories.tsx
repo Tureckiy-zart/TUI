@@ -6,7 +6,7 @@ import * as React from "react";
 import { Modal } from "./Modal";
 
 const meta: Meta<typeof Modal.Root> = {
-  title: "UI/Modal",
+  title: "UI/Foundation/Modal",
   component: Modal.Root,
   parameters: {
     layout: "centered",

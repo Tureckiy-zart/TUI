@@ -27,7 +27,7 @@ fi
 
 # === ESLINT AUTO-FIX ===
 echo -e "${YELLOW}📋 Running ESLint auto-fix...${NC}"
-if pnpm eslint . --ext .ts,.tsx --fix --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**'; then
+if pnpm eslint . --ext .ts,.tsx --fix --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**'; then
   echo -e "${GREEN}✅ ESLint auto-fix completed${NC}"
 else
   echo -e "${RED}❌ ESLint auto-fix failed${NC}"

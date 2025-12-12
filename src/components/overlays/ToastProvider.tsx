@@ -3,27 +3,35 @@
 /**
  * ToastProvider Component
  *
- * Context provider for toast notifications.
- * Manages toast state and provides toast() function.
- * Supports position configuration and max toasts limit.
+ * 🔒 FOUNDATION COMPONENT - ARCHITECTURE LOCKED
+ *
+ * Radix-based toast provider with convenience API.
+ * Uses Radix Toast.Provider for state management and behavior.
+ * Radix handles auto-dismiss (via duration prop), queue management, and swipe gestures.
+ * Tenerife UI provides a convenience toast() function for easier usage.
+ *
+ * This component is locked as a foundation component per TUI_ARCHITECTURE_LOCK.md.
+ * DO NOT reimplement Radix behavior (setTimeout, custom queues, swipe handling).
+ * All behavioral logic must delegate to Radix Toast primitives.
  */
 
+import * as ToastPrimitives from "@radix-ui/react-toast";
 import * as React from "react";
 
-import { getDelayMs } from "@/lib/responsive-props";
 import type { ResponsiveDelay } from "@/tokens/types";
 
-import { Toast, type ToastAction, type ToastData } from "./Toast";
+import { type ToastActionData, type ToastData, ToastRoot } from "./Toast";
 import { type ToastPosition, ToastViewport } from "./ToastViewport";
 
 export interface ToastOptions {
   title?: string;
   description?: string;
   variant?: "default" | "success" | "info" | "warning" | "danger";
-  action?: ToastAction;
+  action?: ToastActionData;
   /**
    * Toast duration - token-based
    * Uses motion duration tokens
+   * Passed to Radix Toast.Root duration prop (Radix handles auto-dismiss)
    */
   duration?: ResponsiveDelay;
 }
@@ -32,14 +40,9 @@ interface ToastContextType {
   toast: (options: ToastOptions) => string;
   dismiss: (id: string) => void;
   dismissAll: () => void;
-  updateToast: (id: string, updates: Partial<ToastData>) => void;
-  getQueue: () => ToastData[];
-  getGrouped: () => Record<string, ToastData[]>;
 }
 
 const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
-
-export type GroupByFunction = (toast: ToastData) => string;
 
 export interface ToastProviderProps {
   /**
@@ -53,175 +56,138 @@ export interface ToastProviderProps {
   position?: ToastPosition;
 
   /**
-   * Maximum number of toasts to show (default: 5)
+   * Swipe direction for toast dismissal
+   * Radix handles swipe gestures internally
    */
-  maxToasts?: number;
+  swipeDirection?: "up" | "down" | "left" | "right";
 
   /**
-   * Maximum number of visible toasts (default: 3)
-   * Overflow notifications are queued
+   * Default duration for toasts in milliseconds
+   * Radix handles auto-dismiss based on this value
+   *
+   * NOTE: This is a behavioral prop for Radix Toast.Provider API (requires number),
+   * not a visual prop. The eslint rule is disabled for this specific case.
    */
-  maxVisible?: number;
-
-  /**
-   * Function to group toasts (by date, type, or custom)
-   */
-  groupBy?: GroupByFunction;
+  // eslint-disable-next-line tenerife-ui-architecture/no-raw-visual-props
+  duration?: number;
 }
 
 /**
- * ToastProvider component - context provider for toast notifications
+ * ToastProvider component
+ * Wrapper around Radix Toast.Provider with convenience toast() function.
+ * Radix handles all state management, auto-dismiss, and queue management.
  */
 export function ToastProvider({
   children,
   position = "top-right",
-  maxVisible = 3,
-  groupBy,
+  swipeDirection = "right",
+  duration = 5000,
 }: ToastProviderProps) {
   const [toasts, setToasts] = React.useState<ToastData[]>([]);
-  const [queue, setQueue] = React.useState<ToastData[]>([]);
-
-  /**
-   * Dismiss a specific toast
-   */
-  const dismiss = React.useCallback(
-    (id: string) => {
-      setToasts((prev) => {
-        const filtered = prev.filter((t) => t.id !== id);
-        // If we have space and items in queue, show next from queue
-        if (filtered.length < maxVisible) {
-          setQueue((q) => {
-            if (q.length > 0) {
-              const nextFromQueue = q[0];
-              if (nextFromQueue) {
-                setTimeout(() => {
-                  setToasts((current) => {
-                    if (!current.find((t) => t.id === nextFromQueue.id)) {
-                      return [...current, nextFromQueue];
-                    }
-                    return current;
-                  });
-                }, 0);
-                return q.slice(1);
-              }
-            }
-            return q;
-          });
-        }
-        return filtered;
-      });
-      setQueue((prev) => prev.filter((t) => t.id !== id));
-    },
-    [maxVisible],
-  );
+  const [openStates, setOpenStates] = React.useState<Record<string, boolean>>({});
 
   /**
    * Create a new toast
+   * Returns toast ID for programmatic dismissal
    */
-  const toast = React.useCallback(
-    (options: ToastOptions): string => {
-      const id = Math.random().toString(36).substr(2, 9);
-      const durationMs = getDelayMs(options.duration, 5000);
-      const newToast: ToastData = {
-        id,
-        ...options,
-        duration: options.duration,
-      };
+  const toast = React.useCallback((options: ToastOptions): string => {
+    const id = Math.random().toString(36).substr(2, 9);
 
-      setToasts((prev) => {
-        const updated = [...prev, newToast];
-        const total = updated.length;
+    const newToast: ToastData = {
+      id,
+      ...options,
+      duration: options.duration,
+    };
 
-        // If we exceed maxVisible, queue the overflow
-        if (total > maxVisible) {
-          const visible = updated.slice(-maxVisible);
-          const queued = updated.slice(0, total - maxVisible);
-          setQueue((q) => [...q, ...queued]);
-          return visible;
-        }
+    setToasts((prev) => [...prev, newToast]);
+    setOpenStates((prev) => ({ ...prev, [id]: true }));
 
-        return updated;
+    return id;
+  }, []);
+
+  /**
+   * Dismiss a specific toast
+   *
+   * NOTE: setTimeout usage is for cleanup only, not behavioral logic.
+   * Radix Toast handles the actual dismissal behavior via onOpenChange callback.
+   * The setTimeout here waits for Radix's close animation to complete (300ms)
+   * before removing the toast from our state array. This prevents React from
+   * unmounting the component during the animation, which would cause visual glitches.
+   */
+  const dismiss = React.useCallback((id: string) => {
+    setOpenStates((prev) => ({ ...prev, [id]: false }));
+    // Remove from toasts after Radix close animation completes
+    // This is state cleanup, not behavioral logic - Radix handles dismissal
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+      setOpenStates((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
       });
-
-      // Auto-dismiss after duration
-      if (durationMs > 0) {
-        setTimeout(() => {
-          dismiss(id);
-        }, durationMs);
-      }
-
-      return id;
-    },
-    [maxVisible, dismiss],
-  );
+    }, 300); // Matches Radix Toast close animation duration
+  }, []);
 
   /**
    * Dismiss all toasts
+   *
+   * NOTE: setTimeout usage is for cleanup only, not behavioral logic.
+   * Radix Toast handles the actual dismissal behavior via onOpenChange callbacks.
+   * The setTimeout here waits for Radix's close animations to complete (300ms)
+   * before clearing our state arrays. This prevents React from unmounting components
+   * during animations, which would cause visual glitches.
    */
   const dismissAll = React.useCallback(() => {
-    setToasts([]);
-    setQueue([]);
+    setOpenStates((prev) => {
+      const next = { ...prev };
+      Object.keys(next).forEach((id) => {
+        next[id] = false;
+      });
+      return next;
+    });
+    // Clear state after Radix close animations complete
+    // This is state cleanup, not behavioral logic - Radix handles dismissal
+    setTimeout(() => {
+      setToasts([]);
+      setOpenStates({});
+    }, 300); // Matches Radix Toast close animation duration
   }, []);
-
-  /**
-   * Update a specific toast
-   */
-  const updateToast = React.useCallback((id: string, updates: Partial<ToastData>) => {
-    setToasts((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)));
-    setQueue((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)));
-  }, []);
-
-  /**
-   * Get queued toasts
-   */
-  const getQueue = React.useCallback(() => {
-    return queue;
-  }, [queue]);
-
-  /**
-   * Get grouped toasts
-   */
-  const getGrouped = React.useCallback(() => {
-    if (!groupBy) {
-      return { default: toasts };
-    }
-    return toasts.reduce(
-      (acc, toast) => {
-        const key = groupBy(toast);
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-        acc[key].push(toast);
-        return acc;
-      },
-      {} as Record<string, ToastData[]>,
-    );
-  }, [toasts, groupBy]);
 
   const contextValue = React.useMemo<ToastContextType>(
     () => ({
       toast,
       dismiss,
       dismissAll,
-      updateToast,
-      getQueue,
-      getGrouped,
     }),
-    [toast, dismiss, dismissAll, updateToast, getQueue, getGrouped],
+    [toast, dismiss, dismissAll],
   );
 
-  // Limit visible toasts
-  const visibleToasts = toasts.slice(-maxVisible);
-
   return (
-    <ToastContext.Provider value={contextValue}>
-      {children}
-      <ToastViewport position={position}>
-        {visibleToasts.map((toast) => (
-          <Toast key={toast.id} toast={toast} onDismiss={dismiss} />
-        ))}
-      </ToastViewport>
-    </ToastContext.Provider>
+    <ToastPrimitives.Provider swipeDirection={swipeDirection} duration={duration}>
+      <ToastContext.Provider value={contextValue}>
+        {children}
+        <ToastViewport position={position}>
+          {toasts.map((toastData) => {
+            const isOpen = openStates[toastData.id] ?? true;
+
+            return (
+              <ToastRoot
+                key={toastData.id}
+                toast={toastData}
+                open={isOpen}
+                onOpenChange={(open) => {
+                  if (!open) {
+                    dismiss(toastData.id);
+                  } else {
+                    setOpenStates((prev) => ({ ...prev, [toastData.id]: true }));
+                  }
+                }}
+              />
+            );
+          })}
+        </ToastViewport>
+      </ToastContext.Provider>
+    </ToastPrimitives.Provider>
   );
 }
 
