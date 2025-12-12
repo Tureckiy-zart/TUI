@@ -61,3 +61,13 @@ global.ResizeObserver = class ResizeObserver {
   // eslint-disable-next-line no-empty-function
   unobserve() {}
 } as any;
+
+// Mock PointerEvent methods for Radix UI components
+// Radix UI uses hasPointerCapture which is not available in jsdom
+if (typeof Element !== "undefined") {
+  Element.prototype.hasPointerCapture = vi.fn(() => false);
+  Element.prototype.setPointerCapture = vi.fn();
+  Element.prototype.releasePointerCapture = vi.fn();
+  // Mock scrollIntoView for Radix UI Select and other components
+  Element.prototype.scrollIntoView = vi.fn();
+}
