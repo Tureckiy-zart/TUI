@@ -102,6 +102,84 @@ export const venueCardImageTransformVariants = cva(
 );
 
 /**
+ * VenueCard Image Placeholder Variants
+ *
+ * CVA-based variant system for image placeholder gradient.
+ * Uses DOMAIN_TOKENS.image.placeholder for styling.
+ */
+export const venueCardImagePlaceholderVariants = cva(
+  `relative overflow-hidden ${DOMAIN_TOKENS.image.placeholder.gradient}`,
+  {
+    variants: {
+      size: {
+        default: "",
+        compact: "",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * VenueCard Title Variants
+ *
+ * CVA-based variant system for card title.
+ * Uses TEXT_TOKENS and DOMAIN_TOKENS.text for styling.
+ */
+export const venueCardTitleVariants = cva(
+  `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.fontWeight.bold} ${MOTION_TOKENS.transition.colors} ${DOMAIN_TOKENS.text.hover.primary} ${DOMAIN_TOKENS.text.lineClamp.two}`,
+  {
+    variants: {
+      size: {
+        default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
+        compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * VenueCard Description Variants
+ *
+ * CVA-based variant system for card description.
+ * Uses DOMAIN_TOKENS.text.lineClamp for text truncation.
+ */
+export const venueCardDescriptionVariants = cva(`${DOMAIN_TOKENS.text.lineClamp.two}`, {
+  variants: {
+    size: {
+      default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
+      compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+/**
+ * VenueCard Location Text Variants
+ *
+ * CVA-based variant system for location text.
+ * Uses DOMAIN_TOKENS.text.lineClamp for single line truncation.
+ */
+export const venueCardLocationTextVariants = cva(`${DOMAIN_TOKENS.text.lineClamp.one}`, {
+  variants: {
+    size: {
+      default: "",
+      compact: "",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+/**
  * VenueCard Metadata Row Variants
  *
  * CVA-based variant system for metadata display rows.

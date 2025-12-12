@@ -2,7 +2,7 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-**Last Updated:** 2025-12-12 (L4_EVENT_CARD completed)
+**Last Updated:** 2025-12-12 (L4_VENUE_CARD completed)
 
 ---
 
@@ -1776,6 +1776,55 @@ _No tasks in progress currently._
 - **Next Steps:**
   - Component is ready for use
   - Consider implementing recommendations from code review
+
+---
+
+### L4_VENUE_CARD - VenueCard Component Refactoring
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully refactored VenueCard component to use domain tokens and CVA architecture. All hardcoded visual Tailwind classes removed and replaced with token-based values. Component now fully complies with L4 requirements.
+- **Scope:**
+  - Refactored existing VenueCard component in `src/components/cards/VenueCard/`
+  - Added missing tokens to DOMAIN_TOKENS
+  - Created new CVA variants for all visual elements
+  - Removed all hardcoded visual Tailwind classes
+  - Ensured full token coverage for Image, Title, and Location blocks
+- **Key Achievements:**
+  - ✅ All hardcoded visual classes removed:
+    - `bg-gradient-to-br from-muted to-muted/50` → `DOMAIN_TOKENS.image.placeholder.gradient`
+    - `group-hover:text-primary` → `DOMAIN_TOKENS.text.hover.primary`
+    - `line-clamp-2` → `DOMAIN_TOKENS.text.lineClamp.two`
+    - `line-clamp-1` → `DOMAIN_TOKENS.text.lineClamp.one`
+  - ✅ New CVA variants created:
+    - `venueCardImagePlaceholderVariants` - Image placeholder styling
+    - `venueCardTitleVariants` - Title with hover and line clamp
+    - `venueCardDescriptionVariants` - Description with line clamp
+    - `venueCardLocationTextVariants` - Location text with line clamp
+  - ✅ Full token coverage achieved for all visual values
+  - ✅ Semantic typography tokens used throughout
+  - ✅ All blocks (Image, Title, Location) use tokens
+- **Files Modified:**
+  - `src/tokens/components/domain.ts` - Added image.placeholder, text.hover, text.lineClamp tokens
+  - `src/components/cards/VenueCard/VenueCard.variants.ts` - Added new CVA variants
+  - `src/components/cards/VenueCard/VenueCard.tsx` - Refactored to use tokens and variants
+  - `src/components/cards/VenueCard/index.ts` - Updated exports
+- **Code Review:**
+  - `docs/reviews/L4_VENUE_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Status: ✅ APPROVED
+  - All requirements met: No hardcoded classes, Full CVA, Complete token coverage
+- **Verification:**
+  - ✅ TypeScript: PASSED
+  - ✅ ESLint: PASSED
+  - ✅ No linter errors
+  - ✅ No hardcoded visual classes found
+- **Token Additions:**
+  - `DOMAIN_TOKENS.image.placeholder.gradient` - Placeholder gradient for images
+  - `DOMAIN_TOKENS.text.hover.primary` - Hover state for primary text
+  - `DOMAIN_TOKENS.text.lineClamp.{one|two|three}` - Line clamp utilities
+- **Next Steps:**
+  - Component is ready for use
+  - Maintains consistency with other domain card components
 
 ---
 

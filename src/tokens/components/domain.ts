@@ -166,7 +166,7 @@ export const DOMAIN_TOKENS = {
 
   /**
    * Image tokens for card media
-   * Defines aspect ratio, radius, and overlay styles
+   * Defines aspect ratio, radius, overlay styles, and placeholder gradients
    */
   image: {
     /**
@@ -188,6 +188,38 @@ export const DOMAIN_TOKENS = {
      */
     overlay: {
       gradient: "bg-gradient-to-t from-black/60 via-transparent to-transparent", // Gradient overlay for image hover states
+    } as const,
+
+    /**
+     * Placeholder gradient tokens for image placeholders
+     * Used when no image URL is provided
+     */
+    placeholder: {
+      gradient: "bg-gradient-to-br from-muted to-muted/50", // Placeholder gradient background
+    } as const,
+  } as const,
+
+  /**
+   * Text tokens for card text elements
+   * Defines hover states and line clamping for titles and descriptions
+   */
+  text: {
+    /**
+     * Hover state tokens for text elements
+     * Used for interactive text elements like titles
+     */
+    hover: {
+      primary: "group-hover:text-primary", // Hover state for primary text color
+    } as const,
+
+    /**
+     * Line clamp tokens for text truncation
+     * Used for limiting text to specific number of lines
+     */
+    lineClamp: {
+      one: "line-clamp-1", // Single line clamp
+      two: "line-clamp-2", // Two line clamp
+      three: "line-clamp-3", // Three line clamp
     } as const,
   } as const,
 
@@ -405,6 +437,7 @@ export const DOMAIN_TOKENS = {
 export type DomainCardSurface = typeof DOMAIN_TOKENS.surface;
 export type DomainCardLayout = typeof DOMAIN_TOKENS.layout;
 export type DomainCardImage = typeof DOMAIN_TOKENS.image;
+export type DomainCardText = typeof DOMAIN_TOKENS.text;
 export type DomainCardMetadata = typeof DOMAIN_TOKENS.metadata;
 export type DomainCardBadge = typeof DOMAIN_TOKENS.badges;
 export type DomainCardPriceCapacity = typeof DOMAIN_TOKENS.priceCapacity;
