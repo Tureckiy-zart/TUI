@@ -676,9 +676,6 @@ export type {
   ArtistCardSize,
   ArtistCardVariant,
 } from "./components/cards/ArtistCard/ArtistCard.types";
-export type { EventCardProps } from "./components/cards/EventCard";
-export { EventCard } from "./components/cards/EventCard";
-export type { EventCardSize, EventCardVariant } from "./components/cards/EventCard/EventCard.types";
 export type { PromoCardProps } from "./components/cards/PromoCard";
 export { PromoCard } from "./components/cards/PromoCard";
 export type { PromoCardSize, PromoCardVariant } from "./components/cards/PromoCard/PromoCard.types";
@@ -689,3 +686,10 @@ export type {
   TicketCardSize,
   TicketCardVariant,
 } from "./components/cards/TicketCard/TicketCard.types";
+export type { EventCardProps } from "./components/domain/EventCard";
+export type {
+  EventCardLayout,
+  EventCardSize,
+  EventCardVariant,
+} from "./components/domain/EventCard";
+export { EventCard } from "./components/domain/EventCard";

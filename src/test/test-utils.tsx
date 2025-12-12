@@ -31,13 +31,18 @@ export { render };
  * Re-export userEvent.setup() for convenience
  * Use this to get a userEvent instance for interaction testing
  *
+ * Configured with pointer events support for Radix UI components
+ *
  * @example
  * ```tsx
  * const user = userEvent.setup();
  * await user.click(button);
  * ```
  */
-export const userEventSetup = () => userEvent.setup();
+export const userEventSetup = () =>
+  userEvent.setup({
+    pointerEventsCheck: 0, // Disable pointer events check for Radix UI compatibility
+  });
 
 /**
  * Render options for renderWithTheme

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EventCard } from "../cards/EventCard";
+import { EventCard } from "../domain/EventCard";
 import { VenueCard } from "../cards/VenueCard/VenueCard";
 import { Grid } from "./Grid";
 
