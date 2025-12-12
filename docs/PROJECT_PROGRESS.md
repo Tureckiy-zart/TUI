@@ -2,7 +2,7 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
-**Last Updated:** 2025-12-12 (TUI_ALL_FINAL_POLISH_AND_DOCS_SYNC completed)
+**Last Updated:** 2025-12-12 (STORYBOOK_SOURCEMAP_SANITIZE completed)
 
 ---
 
@@ -757,6 +757,35 @@ All typing enforcement tasks completed:
   - Color Violations Fixed: ~10
   - Total Violations Removed: ~210+
 - **Next Steps:** U1 task is now 100% complete. Ready to unlock U2 (UI Polish / Visual Improvements)
+
+### STORYBOOK_SOURCEMAP_SANITIZE - Sanitize Storybook build by disabling sourcemaps
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Disabled sourcemaps in Storybook Vite pipeline to eliminate "Can't resolve original location of error" warnings. Configured Vite build, esbuild, and TypeScript to disable sourcemap generation for Storybook only. This is a tooling-level change that does NOT affect library build sourcemaps.
+- **Files Modified:**
+  - ✅ `.storybook/main.ts` - Added sourcemap disabling in viteFinal hook (build, esbuild, optimizeDeps)
+  - ✅ `tsconfig.storybook.json` - Disabled sourceMap and declarationMap for Storybook
+  - ✅ `docs/architecture/TOOLING_DECISIONS.md` - Documented decision and rationale
+- **Key Accomplishments:**
+  - Sourcemaps disabled in Vite build configuration
+  - Sourcemaps disabled in esbuild configuration
+  - Sourcemaps disabled in optimizeDeps configuration
+  - TypeScript sourcemaps disabled for Storybook
+  - Defensive overrides prevent environment variables from re-enabling sourcemaps
+  - Comprehensive documentation added
+- **Impact:**
+  - ✅ Significantly reduced console noise from sourcemap warnings
+  - ✅ No impact on library build sourcemaps (configured in tsup.config.ts)
+  - ✅ No impact on component functionality
+  - ✅ No impact on Storybook stories or documentation
+- **Validation Status:**
+  - ✅ Storybook builds successfully
+  - ✅ Stories render correctly
+  - ✅ No runtime errors introduced
+- **Next Steps:** Continue with UI-layer tasks without Storybook console noise
+
+---
 
 ### DEPLOY_STORYBOOK_TO_GITHUB_PAGES - Enable automatic Storybook deployment to GitHub Pages
 

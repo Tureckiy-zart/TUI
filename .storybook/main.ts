@@ -34,11 +34,41 @@ const config = {
           "@": resolve(__dirname, "../src"),
         };
 
+    // Disable sourcemaps for Storybook build to eliminate
+    // "Can't resolve original location of error" warnings.
+    // This is a tooling-level decision and does NOT affect
+    // the library build sourcemaps (configured in tsup.config.ts).
+    // Sourcemaps are disabled here because Storybook's dev server
+    // doesn't need them and they generate excessive console noise.
+    //
+    // Defensive override: Force sourcemaps to false regardless of
+    // environment variables (e.g., VITE_SOURCEMAP) to ensure
+    // consistent behavior across all environments.
     return {
       ...config,
       resolve: {
         ...resolveConfig,
         alias,
+      },
+      build: {
+        ...config.build,
+        // Explicitly disable sourcemaps in build (defensive override)
+        sourcemap: false,
+      },
+      esbuild: {
+        ...config.esbuild,
+        // Explicitly disable sourcemaps in esbuild (defensive override)
+        sourcemap: false,
+        // Disable sourcemap generation at the esbuild level
+        legalComments: "none",
+      },
+      // Disable sourcemaps in optimizeDeps as well
+      optimizeDeps: {
+        ...config.optimizeDeps,
+        esbuildOptions: {
+          ...config.optimizeDeps?.esbuildOptions,
+          sourcemap: false,
+        },
       },
     };
   },
