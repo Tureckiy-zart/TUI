@@ -164,6 +164,8 @@
     "tsx": "^4.19.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0",
+    "@typescript-eslint/utils": "^8.47.0",
+    "@typescript-eslint/types": "^8.47.0",
     "vite": "^5.0.0",
     "vitest": "^4.0.15",
     "vitest-axe": "^0.1.0"
