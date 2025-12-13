@@ -1,35 +1,27 @@
 /**
- * Input Component Tokens
+ * Textarea Component Tokens
  *
- * Component-level design tokens for Input component.
- * Maps foundation tokens (spacing, typography, radius, shadows) to input-specific usage.
+ * Component-level design tokens for Textarea component.
+ * Maps foundation tokens (spacing, typography, radius, shadows) to textarea-specific usage.
  * All color values use CSS variables for theme-aware styling.
+ *
+ * Note: This token domain maintains semantic separation from INPUT_TOKENS to allow
+ * independent evolution. Values are currently identical to INPUT_TOKENS but may diverge
+ * in the future without affecting Input component.
  */
 
 // Foundation tokens are referenced in comments for documentation
 // All color values use CSS variable references for theme support
 
 /**
- * Input Component Tokens
+ * Textarea Component Tokens
  *
- * Defines spacing, sizing, typography, and visual tokens for Input component.
+ * Defines spacing, sizing, typography, and visual tokens for Textarea component.
  * All colors use CSS variable references (hsl(var(--token))) for theme-aware styling.
  */
-export const INPUT_TOKENS = {
+export const TEXTAREA_TOKENS = {
   /**
-   * Input heights by size
-   * Supports xs, sm, md, lg, xl sizes
-   */
-  height: {
-    xs: "h-7", // 28px (1.75rem)
-    sm: "h-8", // 32px (2rem)
-    md: "h-9", // 36px (2.25rem) - default
-    lg: "h-10", // 40px (2.5rem)
-    xl: "h-11", // 44px (2.75rem)
-  } as const,
-
-  /**
-   * Input padding by size
+   * Textarea padding by size
    * Horizontal and vertical padding values
    */
   padding: {
@@ -84,14 +76,6 @@ export const INPUT_TOKENS = {
    * Maps to foundation elevation shadow tokens
    */
   shadow: "shadow-sm", // Maps to elevationShadows.sm
-
-  /**
-   * File input tokens
-   * Styling for file input elements
-   */
-  file: {
-    text: "text-[hsl(var(--foreground))]", // File input text color using CSS var
-  } as const,
 
   /**
    * Variant-based tokens
@@ -156,32 +140,6 @@ export const INPUT_TOKENS = {
   } as const,
 
   /**
-   * Icon tokens
-   * Size, spacing, and color for icons within inputs
-   */
-  icon: {
-    size: "size-4", // 16px (1rem) - maps to spacing[4]
-    gap: "gap-sm", // 8px (0.5rem) - maps to semanticSpacing.sm
-    paddingLeft: "pl-lg", // 24px (1.5rem) - padding when icon on left
-    paddingRight: "pr-lg", // 24px (1.5rem) - padding when icon on right
-    color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
-    position: {
-      left: "left-0", // Position left
-      right: "right-0", // Position right
-      top: "top-0", // Position top
-    },
-  } as const,
-
-  /**
-   * Label tokens
-   * Spacing and styling for labels
-   */
-  label: {
-    spacing: "space-y-sm", // 8px (0.5rem) - spacing between label and control
-    requiredMark: "text-destructive", // Color for required asterisk
-  } as const,
-
-  /**
    * Width tokens
    * Common width utilities
    */
@@ -212,7 +170,6 @@ export const INPUT_TOKENS = {
    */
   size: {
     xs: {
-      height: "h-7",
       padding: {
         horizontal: "px-xs",
         vertical: "py-xs",
@@ -222,7 +179,6 @@ export const INPUT_TOKENS = {
       shadow: "shadow-sm",
     },
     sm: {
-      height: "h-8",
       padding: {
         horizontal: "px-sm",
         vertical: "py-xs",
@@ -232,7 +188,6 @@ export const INPUT_TOKENS = {
       shadow: "shadow-sm",
     },
     md: {
-      height: "h-9",
       padding: {
         horizontal: "px-sm",
         vertical: "py-xs",
@@ -243,7 +198,6 @@ export const INPUT_TOKENS = {
       shadow: "shadow-sm",
     },
     lg: {
-      height: "h-10",
       padding: {
         horizontal: "px-md",
         vertical: "py-sm",
@@ -253,7 +207,6 @@ export const INPUT_TOKENS = {
       shadow: "shadow-sm",
     },
     xl: {
-      height: "h-11",
       padding: {
         horizontal: "px-lg",
         vertical: "py-md",
@@ -266,12 +219,12 @@ export const INPUT_TOKENS = {
 } as const;
 
 /**
- * Type exports for Input tokens
+ * Type exports for Textarea tokens
  */
-export type InputHeight = keyof typeof INPUT_TOKENS.height;
-export type InputPaddingHorizontal = keyof typeof INPUT_TOKENS.padding.horizontal;
-export type InputPaddingVertical = keyof typeof INPUT_TOKENS.padding.vertical;
-export type InputRadius = keyof typeof INPUT_TOKENS.radius;
-export type InputFontSize = keyof typeof INPUT_TOKENS.fontSize;
-export type InputSize = keyof typeof INPUT_TOKENS.size;
-export type InputState = keyof typeof INPUT_TOKENS.state.border;
+export type TextareaPaddingHorizontal = keyof typeof TEXTAREA_TOKENS.padding.horizontal;
+export type TextareaPaddingVertical = keyof typeof TEXTAREA_TOKENS.padding.vertical;
+export type TextareaRadius = keyof typeof TEXTAREA_TOKENS.radius;
+export type TextareaFontSize = keyof typeof TEXTAREA_TOKENS.fontSize;
+export type TextareaSize = keyof typeof TEXTAREA_TOKENS.size;
+export type TextareaState = keyof typeof TEXTAREA_TOKENS.state.border;
+export type TextareaVariant = keyof typeof TEXTAREA_TOKENS.variant;

@@ -117,6 +117,14 @@ export const DROPDOWN_TOKENS = {
   } as const,
 
   /**
+   * Width tokens
+   * Common width utilities
+   */
+  width: {
+    full: "w-full", // Full width (100%)
+  } as const,
+
+  /**
    * Item tokens by size
    * Individual menu item
    */

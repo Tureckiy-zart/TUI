@@ -1,4 +1,4 @@
-# 🌴 Tenerife UI
+# 🌴 TUI
 
 **Premium React Component Library**  
 Elegant. Token-driven. Fully Typed. Built for Luxury Interfaces.
@@ -10,15 +10,15 @@ Elegant. Token-driven. Fully Typed. Built for Luxury Interfaces.
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" alt="Tenerife UI Banner" />
+  <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" alt="TUI Banner" />
 </p>
 
 <p align="center">
-  <strong>A high-quality, fully tokenized design system for modern React applications.<br/>
-  Built with Tailwind, CVA, TypeScript with a luxury-first aesthetic.</strong>
+  <strong>A production-grade, token-driven design infrastructure for modern React applications.<br/>
+  Built on Radix UI behavioral foundation with token-driven styling, CVA variants, and strict TypeScript.</strong>
 </p>
 
-> ⚠️ **Important:** The library is under active development. The API may change between versions. Use at your own risk. Thorough testing is recommended before using in production.
+> ⚠️ **Note:** The library is under active development. The Foundation layer is locked and stable, but Extension components may evolve. Thorough testing is recommended before production use.
 
 ---
 
@@ -51,7 +51,7 @@ export default function App() {
 }
 ```
 
-**Done!** 🎉 You can now use Tenerife UI components.
+TUI components are now available in your application.
 
 > 📖 **Need help?** See the [Complete Guide](./docs/GETTING_STARTED.md) for detailed installation and setup instructions.
 
@@ -59,14 +59,16 @@ export default function App() {
 
 ## ✨ Key Features
 
-- 🎨 **Token-driven architecture** — all styles through design tokens, no raw values
+- 🎨 **Token-driven architecture** — all visual properties controlled through design tokens, no hardcoded values
+- 🏛️ **Radix UI foundation** — Foundation components delegate behavior to Radix UI primitives for accessibility and interaction
+- 🔒 **Locked Foundation layer** — immutable Foundation components (Modal, Tabs, Select, ContextMenu, Toast) ensure stability
+- 🧩 **Extension composability** — build domain-specific components by composing Foundation components
 - 🌓 **Day/Night modes** — automatic theme switching with system settings support
-- 🎯 **TypeScript-first** — full typing for all components and API
-- ♿ **Accessibility** — WCAG AA compliance out of the box, full keyboard and screen reader support
+- 🎯 **TypeScript-first** — full typing for all components, props, and APIs
+- ♿ **Accessibility** — WCAG AA compliance through Radix UI behavioral foundation
 - 📦 **Tree-shakeable** — bundle size optimization through named imports
-- 🎭 **CVA variants** — unified Variant API for all components
-- 🎨 **Tailwind CSS** — full integration with Tailwind preset
-- 🚀 **Production-ready** — tested and ready for production use
+- 🎭 **CVA + token unions** — unified, type-safe Variant API with semantic token mapping
+- 🚀 **Production-grade** — tested, documented, and ready for production use
 
 ---
 
@@ -225,7 +227,7 @@ function ContactForm() {
         <CardTitle>Contact Us</CardTitle>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form>
           <Field>
             <FieldLabel>Email</FieldLabel>
             <FieldControl asChild>
@@ -249,77 +251,75 @@ function ContactForm() {
 
 ## 🧩 Components
 
-### Primitives
+TUI follows a two-layer architecture: **Foundation** (locked, immutable) and **Extensions** (composable, flexible).
 
-Basic UI components for building interfaces:
+### Foundation Layer (Locked)
 
-- **Button** — buttons with various variants (default, outline, destructive, ghost, link)
+The Foundation layer consists of five immutable components that serve as the sole canonical foundation for their categories. All behavior is delegated to Radix UI primitives, and styling is token-driven.
+
+**Foundation Components:**
+
+- **Modal** (Radix Dialog) — Sole modal foundation with compound component API (`Modal.Root`, `Modal.Content`, `Modal.Header`, etc.)
+- **Tabs** (Radix Tabs) — Sole tabs foundation for tab-based navigation
+- **Select** (Radix Select) — Sole select foundation for dropdown selection
+- **ContextMenu** (Radix ContextMenu) — Sole context menu foundation for right-click menus
+- **Toast** (Radix Toast) — Sole toast foundation for notifications
+
+> 🔒 **Foundation Lock:** These components are **locked** and **immutable**. See [Final Foundation Lock](./docs/architecture/FINAL_FOUNDATION_LOCK.md) for complete architecture rules.
+
+### Extension Layer
+
+Extensions are composable components that build upon Foundation components or provide domain-specific functionality.
+
+**Primitives:**
+
+- **Button** — buttons with token-driven variants (default, outline, destructive, ghost, link)
 - **Input** — text input fields with state support (success, error, warning)
 - **Textarea** — multi-line text input
 - **Label** — form field labels
-- **Card** — cards with variants (default, elevated, glass, outline)
+- **Card** — cards with token-driven variants (default, elevated, glass, outline)
 - **Badge** — badges for labels and statuses
 - **Text / Heading** — typography components
 
-### Forms
-
-Components for creating forms:
+**Forms:**
 
 - **Checkbox** — checkboxes with state support
 - **Radio / RadioGroup** — radio buttons and groups
-- **Select** — dropdown lists with search
 - **Field** — form field wrapper with validation
 - **FormInput / FormSelect / FormTextarea** — specialized form components
 
-### Layout
+**Layout:**
 
-Components for structuring layouts:
-
-- **Flex** — flexbox container with direction, alignment, and gap settings
+- **Flex** — flexbox container with token-driven spacing and alignment
 - **Grid** — responsive grid with breakpoint support
-- **Stack** — vertical/horizontal element placement
-- **Section** — sections with responsive padding
+- **Stack** — vertical/horizontal element placement with token spacing
+- **Section** — sections with token-driven responsive padding
 - **Container** — containers with width constraints
 
-### Overlays
+**Overlays:**
 
-Components for modal windows and popup elements:
-
-- **Modal** — modal windows with variants
-- **Dialog** — dialog windows (DialogRoot, DialogTrigger, DialogContent)
-- **Toast** — notifications with ToastProvider system
 - **Popover** — popup tooltips
 - **Tooltip** — tooltips for elements
 
-### Navigation
+**Navigation:**
 
-Components for interface navigation:
-
-- **Tabs** — tabs with keyboard support
 - **Breadcrumbs** — breadcrumb navigation
 - **Pagination** — pagination with settings
 - **Stepper** — step-by-step forms
 - **SegmentedControl** — segmented control
 
-### Data
-
-Components for displaying data:
+**Data:**
 
 - **Table** — tables with sorting and filtering
 - **DataList** — data lists (DataListRoot, DataListItem, DataListLabel, DataListValue)
 - **Skeleton** — loading state skeletons
 - **EmptyState** — empty states with actions
 
-### Notifications
+**Notifications:**
 
-Notification system:
+- **NotificationCenter** — notification center with grouping (uses Toast Foundation internally)
 
-- **NotificationCenter** — notification center with grouping
-- **Toast** — popup notifications
-
-### Domain Components
-
-Specialized components for specific domains:
+**Domain Components:**
 
 - **EventCard** — event cards with variants and sizes
 - **VenueCard** — venue cards
@@ -333,7 +333,7 @@ Specialized components for specific domains:
 
 ## 🎨 Design Tokens
 
-Tenerife UI uses a fully tokenized design system:
+TUI uses a fully tokenized design system:
 
 ### Colors
 
@@ -381,32 +381,46 @@ Tenerife UI uses a fully tokenized design system:
 
 ---
 
-## ⚙️ How Tenerife UI Works
+## ⚙️ Architecture
 
-### Token-first Architecture
+### Token-Driven System
 
-No raw styles. Everything through tokens. This ensures consistency and easy customization.
+TUI uses a fully token-driven architecture. All visual properties are controlled through design tokens—no hardcoded values, no raw CSS. Components accept token unions (e.g., `variant: "default" | "outline" | "destructive"`) that map to semantic design tokens.
 
-### Tailwind + CSS Variables
+### Radix UI Behavioral Foundation
 
-Colors, spacing, shadows, radius — all generated automatically through Tailwind preset and CSS variables.
+Foundation components delegate all behavior to Radix UI primitives:
 
-### CVA for Variability
+- Focus management
+- Keyboard navigation
+- ARIA attributes
+- Portal rendering
+- Scroll locking
 
-All components use Class Variance Authority (CVA) for a unified Variant API:
+Foundation components are thin wrappers that provide token-driven styling while Radix handles all accessibility and interaction behavior.
+
+### CVA + Token Unions
+
+All components use Class Variance Authority (CVA) with token unions for a unified, type-safe Variant API:
 
 ```tsx
 <Button variant="default" size="md">Click me</Button>
 <Button variant="outline" size="lg">Click me</Button>
 ```
 
-### Strict TypeScript
+Variants map to semantic design tokens, ensuring consistency across the system.
 
-Full typing for all components, props, and API ensures excellent developer experience with autocomplete and type checking.
+### Tailwind Integration
 
-### Theme Engine
+Design tokens are automatically converted to Tailwind classes and CSS variables through the Tailwind preset. Colors, spacing, shadows, radius—all generated from token definitions.
 
-Instant switching between day/night modes with support for user system settings.
+### TypeScript-First
+
+Full typing for all components, props, and APIs ensures type safety and excellent developer experience with autocomplete and compile-time checks.
+
+### Theme System
+
+Instant switching between day/night modes with system preference detection. All tokens are theme-aware and automatically adapt to the selected theme.
 
 ---
 
@@ -506,9 +520,7 @@ Use in commercial projects is permitted without restrictions.
 
 ## 🎤 From the Author
 
-Tenerife UI is my personal approach to creating a commercial, beautiful, and premium UI system.
-
-If you're building interfaces with a "luxury, stylish, and technological" aesthetic — you're home. 🏠
+TUI is a production-grade design infrastructure for building premium React applications. Built with a token-driven architecture, Radix UI behavioral foundation, and strict TypeScript, it provides the foundation for luxury, stylish, and technologically sophisticated interfaces.
 
 ---
 

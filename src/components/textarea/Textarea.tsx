@@ -3,8 +3,8 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { INPUT_TOKENS } from "@/tokens/components/input";
 import { TEXT_TOKENS } from "@/tokens/components/text";
+import { TEXTAREA_TOKENS } from "@/tokens/components/textarea";
 
 import type { TextareaProps } from "./Textarea.types";
 import { textareaVariants } from "./textarea-variants";
@@ -75,7 +75,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     // If character counter is needed, wrap in container
     if (shouldShowCounter) {
       return (
-        <div className={cn("relative", fullWidth !== false && INPUT_TOKENS.width.full)}>
+        <div className={cn("relative", fullWidth !== false && TEXTAREA_TOKENS.width.full)}>
           <textarea
             className={textareaClasses}
             ref={ref}
@@ -90,11 +90,11 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           <div
             className={cn(
               "absolute",
-              INPUT_TOKENS.message.position.bottom,
-              INPUT_TOKENS.message.position.right,
+              TEXTAREA_TOKENS.message.position.bottom,
+              TEXTAREA_TOKENS.message.position.right,
               TEXT_TOKENS.fontSize.xs,
-              INPUT_TOKENS.message.color.default,
-              currentLength > maxLength && INPUT_TOKENS.message.color.error,
+              TEXTAREA_TOKENS.message.color.default,
+              currentLength > maxLength && TEXTAREA_TOKENS.message.color.error,
             )}
           >
             {currentLength} / {maxLength}
