@@ -16,6 +16,7 @@ import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { DOMAIN_TOKENS } from "@/tokens/components/domain";
 import { ICON_TOKENS } from "@/tokens/components/icon";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import type { CategoryCardProps } from "./CategoryCard.types";
@@ -88,7 +89,12 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={size}>
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden",
+                  DOMAIN_TOKENS.image.placeholder.gradient,
+                )}
+              >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
@@ -103,9 +109,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                   <div className="flex h-full w-full items-center justify-center">
                     <Icon
                       name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
+                      className={cn(ICON_TOKENS.sizes["4xl"], ICON_TOKENS.colors.muted)}
                       aria-hidden="true"
                     />
                   </div>
@@ -113,7 +117,9 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                 {/* Image Overlay on Hover */}
                 <div
                   className={cn(
-                    "absolute inset-0 opacity-0 transition-opacity duration-normal group-hover:opacity-100",
+                    "absolute inset-0 opacity-0 group-hover:opacity-100",
+                    MOTION_TOKENS.transition.opacity,
+                    MOTION_TOKENS.duration.normal,
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
@@ -127,7 +133,9 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
             <Heading
               level={3}
               className={cn(
-                "line-clamp-2 transition-colors group-hover:text-primary",
+                DOMAIN_TOKENS.text.lineClamp.two,
+                MOTION_TOKENS.transition.colors,
+                DOMAIN_TOKENS.text.hover.primary,
                 TEXT_TOKENS.fontSize.lg,
                 TEXT_TOKENS.fontWeight.bold,
                 DOMAIN_TOKENS.spacing.section.titleToSubtitle,
@@ -148,7 +156,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                 size="sm"
                 variant="muted"
                 className={cn(
-                  "line-clamp-2",
+                  DOMAIN_TOKENS.text.lineClamp.two,
                   size === "compact"
                     ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
                     : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,

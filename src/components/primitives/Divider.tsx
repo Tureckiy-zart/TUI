@@ -3,15 +3,12 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { DIVIDER_TOKENS } from "@/tokens/components/divider";
 
 export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   orientation?: "horizontal" | "vertical";
   variant?: "solid" | "dashed" | "dotted";
 }
-
-// Full height token (equivalent to h-full)
-const FULL_HEIGHT = "h-full";
 
 const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
   ({ className, orientation = "horizontal", variant = "solid", ...props }, ref) => {
@@ -27,8 +24,8 @@ const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
         className={cn(
           "border-border",
           orientation === "horizontal"
-            ? `${INPUT_TOKENS.width.full} border-t ${borderStyle[variant]}`
-            : `${FULL_HEIGHT} border-l ${borderStyle[variant]}`,
+            ? `${DIVIDER_TOKENS.width.full} border-t ${borderStyle[variant]}`
+            : `${DIVIDER_TOKENS.height.full} border-l ${borderStyle[variant]}`,
           className,
         )}
         {...props}

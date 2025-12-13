@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import type { TableRowProps } from "./Table.types";
 
@@ -34,11 +34,11 @@ const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
       <tr
         ref={ref}
         className={cn(
-          DATA_TOKENS.table.colors.border,
-          "border-b",
-          DATA_TOKENS.table.colors.rowHover,
-          selected && DATA_TOKENS.table.colors.rowSelected,
-          expandable && "cursor-pointer",
+          TABLE_TOKENS.colors.border,
+          TABLE_TOKENS.border.bottom,
+          TABLE_TOKENS.colors.rowHover,
+          selected && TABLE_TOKENS.colors.rowSelected,
+          expandable && TABLE_TOKENS.expandable.cursor,
           className,
         )}
         aria-expanded={expandable ? expanded : undefined}

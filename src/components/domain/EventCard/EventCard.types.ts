@@ -1,20 +1,33 @@
+import * as React from "react";
+
 import type { ComponentAnimationConfig } from "@/animation/types";
 
 /**
  * EventCard Size Variant
+ * Controls padding, spacing, and overall card dimensions
  */
 export type EventCardSize = "default" | "compact";
 
 /**
+ * EventCard Layout Variant
+ * Controls card layout orientation
+ */
+export type EventCardLayout = "vertical";
+
+/**
  * EventCard Style Variant
+ * Controls visual appearance and featured state
  */
 export type EventCardVariant = "default" | "featured";
 
 /**
  * Props for EventCard component.
  * All props are flat and domain-agnostic. Consumer should provide pre-localized strings.
+ *
+ * Component uses CARD_TOKENS and DOMAIN_TOKENS for all styling.
+ * All visual values come from tokens - no hardcoded Tailwind classes.
  */
-export interface EventCardProps {
+export interface EventCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Event title (pre-localized string) */
   title: string;
   /** Event description (pre-localized string, optional) */
@@ -41,6 +54,8 @@ export interface EventCardProps {
   featuredBadgeText?: string;
   /** Size variant - controls padding and spacing */
   size?: EventCardSize;
+  /** Layout variant - controls card layout orientation */
+  layout?: EventCardLayout;
   /** Style variant - controls visual appearance */
   variant?: EventCardVariant;
   /** Additional CSS classes */

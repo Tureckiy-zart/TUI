@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { EMPTY_STATE_TOKENS } from "@/tokens/components/empty-state";
 
 export interface EmptyStateTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   /**
@@ -27,9 +27,9 @@ const EmptyStateTitle = React.forwardRef<HTMLHeadingElement, EmptyStateTitleProp
       <h3
         ref={ref}
         className={cn(
-          DATA_TOKENS.emptyState.typography.title.fontSize,
-          DATA_TOKENS.emptyState.typography.title.fontWeight,
-          "text-foreground",
+          EMPTY_STATE_TOKENS.typography.title.fontSize,
+          EMPTY_STATE_TOKENS.typography.title.fontWeight,
+          EMPTY_STATE_TOKENS.typography.title.color,
           className,
         )}
         {...props}

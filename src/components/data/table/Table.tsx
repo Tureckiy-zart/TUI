@@ -4,13 +4,13 @@
  * Table Root Component
  *
  * Token-driven table component with sorting, expandable rows, loading, and empty states.
- * Uses DATA_TOKENS for all styling.
+ * Uses TABLE_TOKENS for all styling.
  */
 
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import type { SortState, TableContextValue, TableRootProps } from "./Table.types";
 import { TableBody } from "./TableBody";
@@ -110,12 +110,12 @@ function TableRoot<T extends Record<string, unknown>>({
 
   return (
     <TableContext.Provider value={contextValue}>
-      <div className="overflow-x-auto">
+      <div className={TABLE_TOKENS.layout.overflow}>
         <table
           className={cn(
-            "w-full border-collapse",
-            DATA_TOKENS.table.radius.default,
-            DATA_TOKENS.table.shadow.subtle,
+            TABLE_TOKENS.layout.table,
+            TABLE_TOKENS.radius.default,
+            TABLE_TOKENS.shadow.subtle,
             className,
           )}
           role="table"

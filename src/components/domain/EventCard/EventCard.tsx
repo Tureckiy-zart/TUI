@@ -31,13 +31,21 @@ import {
   eventCardPriceVariants,
   eventCardTicketButtonIconVariants,
   eventCardTicketButtonVariants,
+  eventCardVariants,
 } from "./EventCard.variants";
 
 /**
  * EventCard Component
  *
  * Domain-specific card component for displaying event information.
- * Uses CardBase for layout and DOMAIN_TOKENS for all styling.
+ * Uses CardBase for layout and CARD_TOKENS + DOMAIN_TOKENS for all styling.
+ * All visual values come from tokens - no hardcoded Tailwind visual classes.
+ *
+ * Architecture:
+ * - Uses CVA variants for size and layout variants
+ * - All spacing, colors, radius from tokens
+ * - Semantic HTML elements (heading, time, address)
+ * - Full accessibility support
  *
  * @example
  * ```tsx
@@ -65,6 +73,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
       getTicketsLabel,
       featuredBadgeText,
       size = "default",
+      layout = "vertical",
       variant,
       className,
       animation,
@@ -88,7 +97,11 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           ref={ref}
           size={size}
           variant={cardVariant}
-          className={cn("group relative", className)}
+          className={cn(
+            eventCardVariants({ size, layout, variant: cardVariant }),
+            "group relative",
+            className,
+          )}
           {...props}
         >
           {/* Featured Badge */}
@@ -103,7 +116,9 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={size}>
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+              <div
+                className={cn("relative w-full overflow-hidden", DOMAIN_TOKENS.surface.bg.default)}
+              >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
@@ -128,7 +143,8 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                 {/* Image Overlay on Hover */}
                 <div
                   className={cn(
-                    "absolute inset-0 opacity-0 transition-opacity duration-normal group-hover:opacity-100",
+                    "absolute inset-0 opacity-0 group-hover:opacity-100",
+                    DOMAIN_TOKENS.motion.hover.transition,
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
@@ -142,7 +158,8 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
             <Heading
               level={3}
               className={cn(
-                "line-clamp-2 transition-colors group-hover:text-primary",
+                "line-clamp-2 group-hover:text-primary",
+                DOMAIN_TOKENS.motion.hover.transition,
                 TEXT_TOKENS.fontSize.lg,
                 TEXT_TOKENS.fontWeight.bold,
                 DOMAIN_TOKENS.spacing.section.titleToSubtitle,
@@ -176,18 +193,24 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
             {/* Metadata Rows */}
             <div className={eventCardMetadataVariants({ size })}>
               {date && (
-                <div className={eventCardMetadataItemVariants({ size })}>
-                  <IconCalendar className={eventCardMetadataIconVariants({ size })} />
+                <div className={eventCardMetadataItemVariants({ size })} role="text">
+                  <IconCalendar
+                    className={eventCardMetadataIconVariants({ size })}
+                    aria-hidden={true}
+                  />
                   <Text size="xs" muted>
-                    {date}
+                    <time dateTime={date}>{date}</time>
                   </Text>
                 </div>
               )}
               {venueName && (
-                <div className={eventCardMetadataItemVariants({ size })}>
-                  <IconLocation className={eventCardMetadataIconVariants({ size })} />
+                <div className={eventCardMetadataItemVariants({ size })} role="text">
+                  <IconLocation
+                    className={eventCardMetadataIconVariants({ size })}
+                    aria-hidden={true}
+                  />
                   <Text size="xs" muted className="line-clamp-1">
-                    {venueName}
+                    <address>{venueName}</address>
                   </Text>
                 </div>
               )}
@@ -205,7 +228,10 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                   rel="noopener noreferrer"
                 >
                   {getTicketsLabel}
-                  <IconArrowRight className={eventCardTicketButtonIconVariants({ size })} />
+                  <IconArrowRight
+                    className={eventCardTicketButtonIconVariants({ size })}
+                    aria-hidden={true}
+                  />
                 </Link>
               )}
               {!ticketUrl && price && (

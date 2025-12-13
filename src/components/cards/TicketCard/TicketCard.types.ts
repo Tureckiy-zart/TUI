@@ -22,6 +22,8 @@ export type TicketAvailability = "available" | "sold_out" | "available_soon";
 export interface TicketCardProps {
   /** Ticket type/name (pre-localized string) */
   title: string;
+  /** Event date (Date object, ISO string, or timestamp) */
+  date?: string | Date | number;
   /** Ticket description (pre-localized string, optional) */
   description?: string;
   /** Price display string with currency (e.g., "€20", optional) */

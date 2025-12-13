@@ -9,6 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import type { TableExpandableContentProps } from "./Table.types";
 
@@ -25,14 +26,23 @@ const TableExpandableContent = React.forwardRef<HTMLTableCellElement, TableExpan
         ref={ref}
         colSpan={colSpan}
         className={cn(
-          "p-0",
-          "overflow-hidden transition-all duration-normal ease-in-out",
-          expanded ? "max-h-[100vh] opacity-100" : "max-h-0 opacity-0",
+          TABLE_TOKENS.expandable.container,
+          TABLE_TOKENS.expandable.transition,
+          expanded ? TABLE_TOKENS.expandable.expanded : TABLE_TOKENS.expandable.collapsed,
           className,
         )}
         {...props}
       >
-        <div className={cn("p-md", expanded ? "block" : "hidden")}>{children}</div>
+        <div
+          className={cn(
+            TABLE_TOKENS.expandable.padding,
+            expanded
+              ? TABLE_TOKENS.expandable.content.expanded
+              : TABLE_TOKENS.expandable.content.collapsed,
+          )}
+        >
+          {children}
+        </div>
       </td>
     );
   },

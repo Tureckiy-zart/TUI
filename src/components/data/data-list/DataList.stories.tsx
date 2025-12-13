@@ -11,7 +11,7 @@ const meta: Meta<typeof DataListRoot> = {
     docs: {
       description: {
         component:
-          "Mobile-first data list component for displaying key-value pairs. Uses semantic HTML (dl/dt/dd) and DATA_TOKENS for spacing.",
+          "Mobile-first data list component for displaying key-value pairs. Uses semantic HTML (dl/dt/dd) and DATA_LIST_TOKENS for spacing.",
       },
     },
   },

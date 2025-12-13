@@ -4,6 +4,7 @@ import { cva } from "class-variance-authority";
 
 import { DOMAIN_TOKENS } from "@/tokens/components/domain";
 import { ICON_TOKENS } from "@/tokens/components/icon";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 /**
@@ -11,8 +12,29 @@ import { TEXT_TOKENS } from "@/tokens/components/text";
  *
  * CVA-based variant system for TicketCard component.
  * Supports size variants (default, compact) and style variants (default, featured).
- * All styling uses token-based values from DOMAIN_TOKENS and ICON_TOKENS.
+ * All styling uses token-based values from DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, and MOTION_TOKENS.
  */
+
+/**
+ * Base TicketCard variant
+ * Uses CardBase for layout, so this variant is primarily for TicketCard-specific styling
+ */
+export const ticketCardVariants = cva("group relative", {
+  variants: {
+    size: {
+      default: "",
+      compact: "",
+    },
+    variant: {
+      default: "",
+      featured: "",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+    variant: "default",
+  },
+});
 
 /**
  * Badge positioning variant
@@ -24,7 +46,7 @@ export const ticketCardBadgeVariants = cva(
   {
     variants: {
       size: {
-        default: DOMAIN_TOKENS.badges.position.default, // Default positioning - maps to semanticSpacing.md (12px)
+        default: DOMAIN_TOKENS.badges.position.default, // Default positioning - maps to semanticSpacing.md (16px)
         compact: DOMAIN_TOKENS.badges.position.compact, // Compact positioning - maps to semanticSpacing.sm (8px)
       },
     },
@@ -40,7 +62,7 @@ export const ticketCardBadgeVariants = cva(
  */
 export const ticketCardBadgeSurfaceVariants = cva(
   // Base classes - flex layout, items center, badge styling
-  `inline-flex items-center ${DOMAIN_TOKENS.badges.radius} ${DOMAIN_TOKENS.badges.shadow} ${DOMAIN_TOKENS.badges.size.sm} ${DOMAIN_TOKENS.badges.text.color} ${TEXT_TOKENS.fontSize.xs} font-semibold`,
+  `inline-flex items-center ${DOMAIN_TOKENS.badges.radius} ${DOMAIN_TOKENS.badges.shadow} ${DOMAIN_TOKENS.badges.size.sm} ${DOMAIN_TOKENS.badges.text.color} ${TEXT_TOKENS.fontSize.xs} ${TEXT_TOKENS.fontWeight.semibold}`,
   {
     variants: {
       variant: {
@@ -55,6 +77,66 @@ export const ticketCardBadgeSurfaceVariants = cva(
     },
   },
 );
+
+/**
+ * TicketCard Title Variants
+ *
+ * CVA-based variant system for card title.
+ * Uses TEXT_TOKENS and DOMAIN_TOKENS.text for styling.
+ */
+export const ticketCardTitleVariants = cva(
+  `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.fontWeight.bold} ${MOTION_TOKENS.transition.colors} ${DOMAIN_TOKENS.text.hover.primary} ${DOMAIN_TOKENS.text.lineClamp.two}`,
+  {
+    variants: {
+      size: {
+        default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
+        compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * TicketCard Date Variants
+ *
+ * CVA-based variant system for date display.
+ * Uses TEXT_TOKENS and DOMAIN_TOKENS.metadata for styling.
+ */
+export const ticketCardDateVariants = cva(
+  `${DOMAIN_TOKENS.metadata.text.secondary} ${TEXT_TOKENS.fontSize.sm} ${MOTION_TOKENS.transition.colors}`,
+  {
+    variants: {
+      size: {
+        default: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
+        compact: `${DOMAIN_TOKENS.spacing.section.titleToSubtitle} ${TEXT_TOKENS.fontSize.xs}`,
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * TicketCard Description Variants
+ *
+ * CVA-based variant system for card description.
+ * Uses DOMAIN_TOKENS.text.lineClamp for text truncation.
+ */
+export const ticketCardDescriptionVariants = cva(`${DOMAIN_TOKENS.text.lineClamp.two}`, {
+  variants: {
+    size: {
+      default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
+      compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
 
 /**
  * Price/Capacity container variant
@@ -82,7 +164,7 @@ export const ticketCardPriceCapacityContainerVariants = cva(
  */
 export const ticketCardPriceVariants = cva(
   // Base classes - price text color
-  `${DOMAIN_TOKENS.priceCapacity.text.primary} font-bold`,
+  `${DOMAIN_TOKENS.priceCapacity.text.primary} ${TEXT_TOKENS.fontWeight.bold}`,
   {
     variants: {
       size: {
@@ -122,7 +204,7 @@ export const ticketCardCapacityVariants = cva(
  */
 export const ticketCardAvailabilityVariants = cva(
   // Base classes - availability indicator styling
-  `inline-flex items-center ${DOMAIN_TOKENS.metadata.spacing.horizontal} ${TEXT_TOKENS.fontSize.xs} font-medium`,
+  `inline-flex items-center ${DOMAIN_TOKENS.metadata.spacing.horizontal} ${TEXT_TOKENS.fontSize.xs} ${TEXT_TOKENS.fontWeight.medium}`,
   {
     variants: {
       availability: {
@@ -163,7 +245,7 @@ export const ticketCardFooterVariants = cva(
  */
 export const ticketCardPurchaseButtonVariants = cva(
   // Base classes - flex layout, badge gradient, motion
-  `inline-flex items-center justify-center ${DOMAIN_TOKENS.badges.surface.featured} ${DOMAIN_TOKENS.badges.text.color} ${DOMAIN_TOKENS.badges.shadow} ${DOMAIN_TOKENS.motion.hover.transition} font-semibold transform`,
+  `inline-flex items-center justify-center ${DOMAIN_TOKENS.badges.surface.featured} ${DOMAIN_TOKENS.badges.text.color} ${DOMAIN_TOKENS.badges.shadow} ${DOMAIN_TOKENS.motion.hover.transition} ${TEXT_TOKENS.fontWeight.semibold} transform`,
   {
     variants: {
       size: {
@@ -189,6 +271,48 @@ export const ticketCardPurchaseButtonVariants = cva(
 export const ticketCardPurchaseButtonIconVariants = cva(
   // Base classes - icon size and spacing
   `${ICON_TOKENS.sizes.md} ${DOMAIN_TOKENS.spacing.button.iconMarginLeft}`,
+  {
+    variants: {
+      size: {
+        default: "",
+        compact: "",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * TicketCard Image Overlay Variants
+ *
+ * CVA-based variant system for image overlay on hover.
+ * Uses DOMAIN_TOKENS.image.overlay and MOTION_TOKENS.
+ */
+export const ticketCardImageOverlayVariants = cva(
+  `absolute inset-0 ${DOMAIN_TOKENS.image.overlay.gradient} opacity-0 ${MOTION_TOKENS.transition.opacity} ${MOTION_TOKENS.duration.normal} group-hover:opacity-100`,
+  {
+    variants: {
+      size: {
+        default: "",
+        compact: "",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+/**
+ * TicketCard Image Transform Variants
+ *
+ * CVA-based variant system for image scale on hover.
+ * Uses DOMAIN_TOKENS.motion.hover and MOTION_TOKENS.
+ */
+export const ticketCardImageTransformVariants = cva(
+  `object-cover ${MOTION_TOKENS.transition.transform} ${MOTION_TOKENS.duration.slow} ${DOMAIN_TOKENS.motion.hover.scale}`,
   {
     variants: {
       size: {

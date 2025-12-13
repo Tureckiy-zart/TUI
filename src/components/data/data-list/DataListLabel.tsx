@@ -9,6 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { DATA_LIST_TOKENS } from "@/tokens/components/data-list";
 
 export interface DataListLabelProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -28,8 +29,9 @@ const DataListLabel = React.forwardRef<HTMLElement, DataListLabelProps>(
       <dt
         ref={ref}
         className={cn(
-          "mb-1 font-semibold text-foreground md:mb-0",
-          "md:w-32", // Default md width from tokens
+          DATA_LIST_TOKENS.label.mobile,
+          DATA_LIST_TOKENS.label.desktop,
+          DATA_LIST_TOKENS.labelWidth.md,
           className,
         )}
         {...props}

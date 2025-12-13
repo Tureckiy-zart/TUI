@@ -1,7 +1,7 @@
-# 📚 Tenerife UI Documentation
+# 📚 TUI Documentation
 
-**Last Updated:** 2025-11-25  
-**Purpose:** Central documentation hub for the Tenerife UI component library
+**Last Updated:** 2025-12-12  
+**Purpose:** Central documentation hub for the TUI component library
 
 ---
 
@@ -113,16 +113,15 @@ Migration guides and refactoring documentation:
 
 Design system specifications and audit documentation:
 
-- `design_system.md` - Complete design system specifications (color, typography, spacing, shadows, radius, motion)
-- `components_redesign.md` - Component redesign specifications and guidelines
+**Note:** The following files are referenced in some documentation but do not currently exist:
+- `design_system.md` - Design system specifications (if needed, see [Tokens Guide](./guides/TOKENS_GUIDE.md))
+- `components_redesign.md` - Component redesign specifications
 - `layout_and_brand_guide.md` - Layout principles and brand guidelines
 - `ui_ux_audit_report.md` - UI/UX audit findings
 - `technical_analysis.md` - Technical analysis documentation
-- `component_examples.md` - Component usage examples
 - `component_comparison_matrix.md` - Component comparison matrix
-- `EXECUTIVE_SUMMARY.md` - Executive summary
 
-**Status:** ⚠️ Most files are missing and need to be created or obtained.
+**Status:** ⚠️ These files are not present in the repository. For component examples, see [Component Examples](./guides/COMPONENT_EXAMPLES.md).
 
 ---
 
@@ -180,6 +179,8 @@ Core context documentation:
 
 ### Essential Documentation
 
+- [Final Foundation Lock](architecture/FINAL_FOUNDATION_LOCK.md) - 🔒 **Authoritative Foundation lock** (single source of truth)
+- [Architecture Lock](architecture/TUI_ARCHITECTURE_LOCK.md) - Foundation architecture lock and rules
 - [Master Task Index](tasks/master_task_index.md) - Complete task reference
 - [Structure of Work](structure/STRUCTURE_OF_WORK.md) - Architecture guide
 - [Project Progress](PROJECT_PROGRESS.md) - Task completion tracking
@@ -218,33 +219,27 @@ If you're looking for a file that was moved, check [redirect_map.json](redirect_
 
 ---
 
-## 📋 Missing Documentation
+## 📋 Architecture Overview
 
-The following critical documentation files are missing and must be created or obtained before executing Master Task V3:
+TUI follows a two-layer architecture:
 
-### 🔴 Critical Blockers
+### Foundation Layer (Locked)
 
-1. **`tenerife_audit/design_system.md`**
-   - Required for: Foundation Layer (F0-F9)
-   - Contains: Color palette, typography, spacing, shadows, radius, motion specifications
-   - Blocks: All Foundation Layer tasks
+The Foundation layer consists of five immutable components that serve as the sole canonical foundation for their categories:
 
-2. **`tenerife_audit/components_redesign.md`**
-   - Required for: Core Components Layer (C0-C11)
-   - Contains: Component specifications and redesign guidelines
-   - Blocks: All component development tasks
+- **Modal** (Radix Dialog) - `src/components/modal/`
+- **Tabs** (Radix Tabs) - `src/components/navigation/tabs/`
+- **Select** (Radix Select) - `src/components/select/`
+- **ContextMenu** (Radix ContextMenu) - `src/components/menus/context-menu/`
+- **Toast** (Radix Toast) - `src/components/overlays/`
 
-3. **`tenerife_audit/layout_and_brand_guide.md`**
-   - Required for: Advanced Components Layer (A5-A7)
-   - Contains: Layout principles and brand guidelines
-   - Blocks: Layout component development
+Foundation components are **locked** and **immutable**. All behavior is delegated to Radix UI primitives, and styling is token-driven.
 
-### 🟡 Expected Outputs
+See [Final Foundation Lock](architecture/FINAL_FOUNDATION_LOCK.md) for complete architecture rules.
 
-4. **`reports/AUDIT_REPORT.md`**
-   - Will be created by: Task U0
-   - Contains: Component token compliance audit
-   - Status: Expected to be created during task execution
+### Extension Layer
+
+Extension components are composable and may use Foundation components internally. They provide domain-specific functionality and can be created, modified, or deleted without affecting the Foundation layer.
 
 ---
 
@@ -349,6 +344,6 @@ For questions about documentation:
 
 ---
 
-**Last Updated:** 2025-12-11  
-**Documentation Version:** 2.0  
+**Last Updated:** 2025-12-12  
+**Documentation Version:** 2.1  
 **Master Task Version:** 3.0

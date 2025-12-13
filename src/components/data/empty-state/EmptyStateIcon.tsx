@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { EMPTY_STATE_TOKENS } from "@/tokens/components/empty-state";
 
 export interface EmptyStateIconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -29,16 +29,12 @@ export interface EmptyStateIconProps extends React.HTMLAttributes<HTMLDivElement
  */
 const EmptyStateIcon = React.forwardRef<HTMLDivElement, EmptyStateIconProps>(
   ({ children, size = "md", className, ...props }, ref) => {
-    const iconSizeClass = DATA_TOKENS.emptyState.iconSize[size];
+    const iconSizeClass = EMPTY_STATE_TOKENS.icon.size[size];
 
     return (
       <div
         ref={ref}
-        className={cn(
-          "flex items-center justify-center text-muted-foreground",
-          iconSizeClass,
-          className,
-        )}
+        className={cn(EMPTY_STATE_TOKENS.icon.container, iconSizeClass, className)}
         {...props}
       >
         {children}

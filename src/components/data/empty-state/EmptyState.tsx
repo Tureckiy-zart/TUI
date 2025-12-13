@@ -4,13 +4,14 @@
  * EmptyState Component
  *
  * Token-driven empty state component for displaying empty or no-data states.
- * Uses DATA_TOKENS for all spacing and sizing.
+ * Uses EMPTY_STATE_TOKENS for all spacing and sizing.
  * Integrates with Surface and Stack components.
  */
 
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { EMPTY_STATE_TOKENS } from "@/tokens/components/empty-state";
 
 import { Surface } from "../../containers/Surface";
 import { Stack } from "../../layout/Stack";
@@ -52,7 +53,7 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
         variant="flat"
         radius="xl"
         p="lg"
-        className={cn("text-center", className)}
+        className={cn(EMPTY_STATE_TOKENS.alignment.center, className)}
         id={emptyStateId}
         {...props}
       >

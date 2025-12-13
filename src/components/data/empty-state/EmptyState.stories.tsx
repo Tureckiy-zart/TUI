@@ -19,7 +19,7 @@ const meta: Meta<typeof EmptyState> = {
     docs: {
       description: {
         component:
-          "Token-driven empty state component for displaying empty or no-data states. Uses DATA_TOKENS for all spacing and sizing.",
+          "Token-driven empty state component for displaying empty or no-data states. Uses EMPTY_STATE_TOKENS for all spacing and sizing.",
       },
     },
   },

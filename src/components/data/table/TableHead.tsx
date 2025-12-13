@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import { useTableContext } from "./Table";
 import type { TableHeadProps } from "./Table.types";
@@ -47,9 +47,9 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
       });
     }, [sortable, columnKey, sortState, setSortState]);
 
-    const paddingClass = DATA_TOKENS.table.padding.header[size];
-    const typographyClass = DATA_TOKENS.table.typography.header.fontSize;
-    const fontWeightClass = DATA_TOKENS.table.typography.header.fontWeight;
+    const paddingClass = TABLE_TOKENS.padding.header[size];
+    const typographyClass = TABLE_TOKENS.typography.header.fontSize;
+    const fontWeightClass = TABLE_TOKENS.typography.header.fontWeight;
 
     const alignmentClasses = {
       left: "text-left",
@@ -68,9 +68,10 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
           typographyClass,
           fontWeightClass,
           alignmentClasses[align],
-          DATA_TOKENS.table.colors.border,
-          "border-b",
-          sortable && "cursor-pointer select-none hover:bg-muted/50",
+          TABLE_TOKENS.colors.border,
+          TABLE_TOKENS.border.bottom,
+          sortable && TABLE_TOKENS.sortable.cursor,
+          sortable && TABLE_TOKENS.sortable.hover,
           className,
         )}
         onClick={handleSort}
@@ -83,7 +84,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
         role="columnheader"
         {...props}
       >
-        <div className="flex items-center gap-2">
+        <div className={cn(TABLE_TOKENS.sortable.container, TABLE_TOKENS.sortable.gap)}>
           {children}
           {sortable && <TableSortIcon direction={sortDirection} />}
         </div>

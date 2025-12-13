@@ -2,6 +2,7 @@
 
 import { cva } from "class-variance-authority";
 
+import { ARTIST_TOKENS } from "@/tokens/components/artist";
 import { DOMAIN_TOKENS } from "@/tokens/components/domain";
 import { ICON_TOKENS } from "@/tokens/components/icon";
 import { MOTION_TOKENS } from "@/tokens/components/motion";
@@ -205,11 +206,11 @@ export const artistCardGenresVariants = cva(
 
 /**
  * Footer border variant
- * Uses DOMAIN_TOKENS for border and spacing
+ * Uses ARTIST_TOKENS for border and DOMAIN_TOKENS for spacing
  */
 export const artistCardFooterBorderVariants = cva(
-  // Base classes - border top, spacing
-  "border-t border-border",
+  // Base classes - border top from ARTIST_TOKENS, spacing from DOMAIN_TOKENS
+  ARTIST_TOKENS.footer.border.top,
   {
     variants: {
       size: {

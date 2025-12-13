@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { EMPTY_STATE_TOKENS } from "@/tokens/components/empty-state";
 
 export interface EmptyStateDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
@@ -27,9 +27,10 @@ const EmptyStateDescription = React.forwardRef<HTMLParagraphElement, EmptyStateD
       <p
         ref={ref}
         className={cn(
-          DATA_TOKENS.emptyState.typography.description.fontSize,
-          DATA_TOKENS.emptyState.typography.description.fontWeight,
-          "max-w-md text-muted-foreground",
+          EMPTY_STATE_TOKENS.typography.description.fontSize,
+          EMPTY_STATE_TOKENS.typography.description.fontWeight,
+          EMPTY_STATE_TOKENS.typography.description.color,
+          EMPTY_STATE_TOKENS.typography.description.maxWidth,
           className,
         )}
         {...props}

@@ -15,10 +15,9 @@ import { Link } from "@/components/primitives/Link";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { IconArrowRight } from "@/icons";
-import { cn } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { DOMAIN_TOKENS } from "@/tokens/components/domain";
 import { ICON_TOKENS } from "@/tokens/components/icon";
-import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import type { TicketCardProps } from "./TicketCard.types";
 import {
@@ -26,23 +25,31 @@ import {
   ticketCardBadgeSurfaceVariants,
   ticketCardBadgeVariants,
   ticketCardCapacityVariants,
+  ticketCardDateVariants,
+  ticketCardDescriptionVariants,
   ticketCardFooterVariants,
+  ticketCardImageOverlayVariants,
+  ticketCardImageTransformVariants,
   ticketCardPriceCapacityContainerVariants,
   ticketCardPriceVariants,
   ticketCardPurchaseButtonIconVariants,
   ticketCardPurchaseButtonVariants,
+  ticketCardTitleVariants,
+  ticketCardVariants,
 } from "./TicketCard.variants";
 
 /**
  * TicketCard Component
  *
- * Domain-specific card component for displaying ticket information.
+ * Domain-specific card component for displaying ticket information for Event/Artist/Venue context.
  * Uses CardBase for layout and DOMAIN_TOKENS for all styling.
+ * Supports date display, price, capacity, availability status, and badges.
  *
  * @example
  * ```tsx
  * <TicketCard
  *   title="VIP Ticket"
+ *   date={new Date("2024-12-25")}
  *   price="€50"
  *   capacity="10 tickets left"
  *   purchaseLabel="Buy Now"
@@ -53,6 +60,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
   (
     {
       title,
+      date,
       description,
       price,
       capacity,
@@ -118,13 +126,26 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
     const availabilityLabel = getAvailabilityLabel();
 
+    // Format date for display and ISO string for datetime attribute
+    const formattedDate = date ? formatDate(date) : null;
+    const dateTimeValue = (() => {
+      if (!date) return null;
+      if (typeof date === "string") {
+        return new Date(date).toISOString();
+      }
+      if (date instanceof Date) {
+        return date.toISOString();
+      }
+      return new Date(date).toISOString();
+    })();
+
     return (
       <Box {...animationProps}>
         <CardBase
           ref={ref}
           size={size}
           variant={cardVariant}
-          className={cn("group relative", className)}
+          className={cn(ticketCardVariants({ size, variant: cardVariant }), className)}
           {...props}
         >
           {/* Featured Badge */}
@@ -157,16 +178,17 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={size}>
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden",
+                  DOMAIN_TOKENS.image.placeholder.gradient,
+                )}
+              >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
                     alt={title}
-                    className={cn(
-                      "h-full w-full object-cover",
-                      DOMAIN_TOKENS.motion.hover.transition,
-                      DOMAIN_TOKENS.motion.hover.scale,
-                    )}
+                    className={cn("h-full w-full", ticketCardImageTransformVariants({ size }))}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
@@ -180,12 +202,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
-                <div
-                  className={cn(
-                    "absolute inset-0 opacity-0 transition-opacity duration-normal group-hover:opacity-100",
-                    DOMAIN_TOKENS.image.overlay.gradient,
-                  )}
-                />
+                <div className={ticketCardImageOverlayVariants({ size })} />
               </div>
             </CardBaseImageWrapper>
           )}
@@ -193,15 +210,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading
-              level={3}
-              className={cn(
-                "line-clamp-2 transition-colors group-hover:text-primary",
-                TEXT_TOKENS.fontSize.lg,
-                TEXT_TOKENS.fontWeight.bold,
-                DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-              )}
-            >
+            <Heading level={3} className={ticketCardTitleVariants({ size })}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -211,18 +220,16 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
               )}
             </Heading>
 
+            {/* Date - Semantic time element */}
+            {formattedDate && dateTimeValue && (
+              <time dateTime={dateTimeValue} className={ticketCardDateVariants({ size })}>
+                {formattedDate}
+              </time>
+            )}
+
             {/* Description */}
             {description && (
-              <Text
-                size="sm"
-                variant="muted"
-                className={cn(
-                  "line-clamp-2",
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="sm" variant="muted" className={ticketCardDescriptionVariants({ size })}>
                 {description}
               </Text>
             )}
@@ -231,13 +238,21 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
             {(price || capacity) && (
               <div className={ticketCardPriceCapacityContainerVariants({ size })}>
                 {price && (
-                  <Text size={size === "compact" ? "md" : "lg"} weight="bold">
-                    <span className={ticketCardPriceVariants({ size })}>{price}</span>
+                  <Text
+                    size={size === "compact" ? "md" : "lg"}
+                    weight="bold"
+                    className={ticketCardPriceVariants({ size })}
+                  >
+                    {price}
                   </Text>
                 )}
                 {capacity && (
-                  <Text size={size === "compact" ? "xs" : "sm"}>
-                    <span className={ticketCardCapacityVariants({ size })}>{capacity}</span>
+                  <Text
+                    size={size === "compact" ? "xs" : "sm"}
+                    variant="muted"
+                    className={ticketCardCapacityVariants({ size })}
+                  >
+                    {capacity}
                   </Text>
                 )}
               </div>

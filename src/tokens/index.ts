@@ -39,6 +39,7 @@ export {
 // Component tokens (already has explicit exports)
 export {
   ALERT_TOKENS,
+  ARTIST_TOKENS,
   BUTTON_TOKENS,
   CARD_TOKENS,
   CHECKBOX_TOKENS,
@@ -62,6 +63,10 @@ export {
   TOAST_TOKENS,
   TOOLTIP_TOKENS,
   type AlertVariant,
+  type ArtistCardFooterBorder,
+  type ArtistCardImageContainer,
+  type ArtistCardImagePlaceholder,
+  type ArtistCardImageSizing,
   type ButtonFontSize,
   type ButtonHeight,
   type ButtonPaddingHorizontal,
@@ -215,8 +220,8 @@ export type {
 } from "./motion/v2";
 
 export {
-  motionV2Combined,
   motionV2CSSVariables,
+  motionV2Combined,
   motionV2Durations,
   motionV2Easings,
   motionV2Fade,

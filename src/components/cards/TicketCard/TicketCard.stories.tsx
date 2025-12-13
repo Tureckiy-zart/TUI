@@ -40,6 +40,10 @@ const meta: Meta<typeof TicketCard> = {
       control: { type: "text" },
       description: "Ticket type/name (pre-localized string)",
     },
+    date: {
+      control: { type: "date" },
+      description: "Event date (Date object, ISO string, or timestamp)",
+    },
     description: {
       control: { type: "text" },
       description: "Ticket description (pre-localized string, optional)",
@@ -114,6 +118,24 @@ type Story = StoryObj<typeof TicketCard>;
 export const Default: Story = {
   args: {
     title: "General Admission",
+    description: "Standard ticket with full event access.",
+    price: "€25",
+    capacity: "150 tickets left",
+    purchaseLabel: "Buy Now",
+    size: "default",
+    variant: "default",
+    availability: "available",
+  },
+};
+
+/**
+ * With Date
+ * TicketCard with event date display
+ */
+export const WithDate: Story = {
+  args: {
+    title: "General Admission",
+    date: new Date("2024-12-25T20:00:00"),
     description: "Standard ticket with full event access.",
     price: "€25",
     capacity: "150 tickets left",

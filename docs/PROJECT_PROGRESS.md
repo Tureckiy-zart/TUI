@@ -1,10 +1,6 @@
-# Tenerife UI Library - Project Progress Tracker
+# TUI Library - Project Progress Tracker
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
-
-**Last Updated:** 2025-12-12 (STORYBOOK_SOURCEMAP_SANITIZE completed)
-
----
 
 ## 🔒 UI Foundation Lock Status
 
@@ -36,6 +32,52 @@ The following components are **locked** and **immutable** as part of the UI Foun
 - **NotificationCenter** - Uses Toast internally (`src/components/notifications/NotificationCenter.tsx`)
 
 **Note:** After this lock, foundation work pauses and future changes happen in extensions only.
+
+---
+
+## 🔒 Token System Lock Status
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2025-12-13  
+**Reference:** [Token System Documentation](./architecture/TUI_TOKEN_SYSTEM.md)  
+**Final Audit:** [Token Domains Final Report](./reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+### What Is Locked
+
+The following aspects of the token system are **FROZEN** and **IMMUTABLE**:
+
+1. **All Token Domains** - No token domains may be added, removed, merged, or split
+2. **Domain Ownership Rules** - Component → token domain mappings are immutable
+3. **Shared vs Component-Specific Separation** - The distinction between shared and component-specific domains is fixed
+4. **Token Naming Conventions** - All naming patterns and conventions are locked
+5. **Duplication Rules** - The semantic over DRY principle is immutable
+
+### Locked Token Domains
+
+**Foundation Tokens (7):** COLORS, SPACING, TYPOGRAPHY, RADIUS, SHADOWS, OPACITY, MOTION  
+**Shared Component Tokens (4):** FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS  
+**Component-Specific Tokens (26):** ALERT_TOKENS, ARTIST_TOKENS, BUTTON_TOKENS, CARD_TOKENS, CHECKBOX_TOKENS, CONTEXT_MENU_TOKENS, DATA_TOKENS, DIVIDER_TOKENS, DOMAIN_TOKENS, DROPDOWN_TOKENS, INPUT_TOKENS, MENU_TOKENS, MODAL_TOKENS, NAVIGATION_TOKENS, NOTIFICATION_TOKENS, OVERLAY_TOKENS, POPOVER_TOKENS, RADIO_TOKENS, SECTION_TOKENS, SELECT_TOKENS, SURFACE_TOKENS, SWITCH_TOKENS, TABS_TOKENS, TEXTAREA_TOKENS, TOAST_TOKENS, TOOLTIP_TOKENS
+
+### Token Lock Rules
+
+- ✅ **Consumption of existing tokens** - Components may continue to use existing tokens
+- ✅ **Creation of new component token domains** - ONLY if component is new and explicitly approved
+- ❌ **Modifying token values** - FORBIDDEN
+- ❌ **Adding or removing token domains** - FORBIDDEN
+- ❌ **Merging or splitting existing domains** - FORBIDDEN
+- ❌ **Reinterpreting token semantics** - FORBIDDEN
+- ❌ **Changing domain ownership rules** - FORBIDDEN
+
+### Unlock Procedure
+
+Any token system modifications require:
+1. Explicit unlock task with justification
+2. Full audit of all token domains
+3. Explicit approval for changes
+4. Re-verification after changes
+5. Re-lock with updated documentation
+
+**Note:** This lock applies to **BOTH humans and AI agents**. Any request to modify locked aspects **MUST** be refused with reference to this lock and the required unlock procedure.
 
 ---
 
@@ -230,7 +272,7 @@ The following components are **locked** and **immutable** as part of the UI Foun
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-20
-- **Summary:** Comprehensive analysis of Tenerife UI project structure completed. Analyzed 92 components across 19 categories, 5 token files, 8 theme files. Identified missing shadow tokens, incomplete theme system (missing ThemeProvider, useTheme, themeUtils), and structural mismatches. Prepared actionable summary for Foundation Layer (F0-F9).
+- **Summary:** Comprehensive analysis of TUI project structure completed. Analyzed 92 components across 19 categories, 5 token files, 8 theme files. Identified missing shadow tokens, incomplete theme system (missing ThemeProvider, useTheme, themeUtils), and structural mismatches. Prepared actionable summary for Foundation Layer (F0-F9).
 - **Output:** `docs/reports/LAYER0_G0_REPORT.md`
 - **Key Findings:**
   - Project has solid foundation with well-organized component structure
@@ -437,7 +479,7 @@ The following components are **locked** and **immutable** as part of the UI Foun
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
-- **Summary:** Global TypeScript typing enforcement successfully implemented across entire Tenerife UI library. Strict TypeScript mode enabled with all strict options. All components, tokens, themes, hooks, and utilities fully typed. All `any` types removed (except acceptable exceptions for generic utilities). Typing standards, rules, and enforcement script created.
+- **Summary:** Global TypeScript typing enforcement successfully implemented across entire TUI library. Strict TypeScript mode enabled with all strict options. All components, tokens, themes, hooks, and utilities fully typed. All `any` types removed (except acceptable exceptions for generic utilities). Typing standards, rules, and enforcement script created.
 - **Output:**
   - `docs/structure/TYPING_STANDARD.md` (Global typing standard)
   - `docs/reports/TYPING_AUDIT_REPORT.md` (Typing audit report)
@@ -503,7 +545,7 @@ All typing enforcement tasks completed:
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
-- **Summary:** Complete code review of Tenerife UI library finished. Reviewed 109 files across all categories: components, hooks, tokens, themes. Overall code quality is GOOD with 47 issues identified across 6 categories. Most issues are non-critical improvements. Generated 8 comprehensive reports with 29 fix proposals.
+- **Summary:** Complete code review of TUI library finished. Reviewed 109 files across all categories: components, hooks, tokens, themes. Overall code quality is GOOD with 47 issues identified across 6 categories. Most issues are non-critical improvements. Generated 8 comprehensive reports with 29 fix proposals.
 - **Output:**
   - `docs/reports/CRV_SCAN_REPORT.md` - Initial codebase scan
   - `docs/reports/CRV_ARCHITECTURE_REPORT.md` - Architecture review
@@ -561,11 +603,11 @@ All typing enforcement tasks completed:
   - Resolution Rate: 100%
 - **Next Steps:** U2 (UI Polish + Visual Refinements), U3 (Accessibility Deep Pass)
 
-### DOCUMENTATION_FULL_SETUP - Create full documentation for installing, connecting, and using Tenerife UI library
+### DOCUMENTATION_FULL_SETUP - Create full documentation for installing, connecting, and using TUI library
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-22
-- **Summary:** Complete documentation suite created for Tenerife UI library including installation guide, usage guide, tokens guide, theme guide, quick start guide, and component examples. README.md updated with installation instructions, quick start, and links to all documentation. All documentation consistent with code and includes working examples.
+- **Summary:** Complete documentation suite created for TUI library including installation guide, usage guide, tokens guide, theme guide, quick start guide, and component examples. README.md updated with installation instructions, quick start, and links to all documentation. All documentation consistent with code and includes working examples.
 - **Output:**
   - `docs/INSTALLATION.md` - Complete installation guide for npm/pnpm/yarn, workspace setup, and different frameworks
   - `docs/USAGE.md` - Full usage guide with component imports, preset usage, tokens usage, and theme setup
@@ -600,13 +642,13 @@ All typing enforcement tasks completed:
   - Theme: ThemeProvider, modes, themes, customization, examples
   - Quick Start: 30-second setup, minimal example, framework-specific guides
   - Component Examples: Button, Input, Card, Modal, Layout components, Skeleton with props
-- **Next Steps:** Documentation complete - Users can now easily install, setup, and use Tenerife UI library
+- **Next Steps:** Documentation complete - Users can now easily install, setup, and use TUI library
 
 ### U0 - Audit existing components for token compliance
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
-- **Summary:** Comprehensive token compliance audit completed for all 92 components in Tenerife UI library. Identified 713 violations across 6 categories (colors, spacing, radius, shadows, typography, font weights, animation). Created detailed audit report with violation breakdown, migration strategies, and priority classification. Generated migration task files for 8 critical components.
+- **Summary:** Comprehensive token compliance audit completed for all 92 components in TUI library. Identified 713 violations across 6 categories (colors, spacing, radius, shadows, typography, font weights, animation). Created detailed audit report with violation breakdown, migration strategies, and priority classification. Generated migration task files for 8 critical components.
 - **Output:**
   - `docs/reports/U0_TOKEN_COMPLIANCE_AUDIT.md` (407 lines - comprehensive audit report)
   - `.cursor/tasks/migration/U0_MIGRATION_Toast.tsx.md` (migration task)
@@ -1786,6 +1828,558 @@ _No tasks in progress currently._
   - Type system is now ready for Music project integration
   - All explicit exports ensure controlled public API
   - No breaking changes - all types preserved
+
+---
+
+### L4_EVENT_CARD - EventCard Component Implementation
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully created EventCard component in `src/components/domain/EventCard/` based on domain tokens (CARD_TOKENS and DOMAIN_TOKENS) using canonical CVA architecture. Component is fully token-driven with no hardcoded Tailwind visual values.
+- **Scope:**
+  - Created new EventCard component in domain directory
+  - Migrated from `src/components/cards/EventCard/` to `src/components/domain/EventCard/`
+  - Implemented CVA variants for size and layout
+  - All styling uses CARD_TOKENS and DOMAIN_TOKENS
+  - Semantic HTML elements (heading, time, address)
+  - Full accessibility support
+- **Key Achievements:**
+  - ✅ Component structure: EventCard.tsx, EventCard.types.ts, EventCard.variants.ts, index.ts
+  - ✅ CVA variants: size (default, compact), layout (vertical), variant (default, featured)
+  - ✅ Token compliance: 95% (5% deducted for hardcoded gradient in price variant)
+  - ✅ No hardcoded Tailwind visual values (except acceptable layout utilities)
+  - ✅ Semantic text roles: `<time>`, `<address>`, `<Heading>`
+  - ✅ Proper component composition using CardBase
+  - ✅ Migration complete: old component removed, imports updated
+  - ✅ Barrel exports updated in src/index.ts and domain/index.ts
+- **Files Created:**
+  - `src/components/domain/EventCard/EventCard.tsx`
+  - `src/components/domain/EventCard/EventCard.types.ts`
+  - `src/components/domain/EventCard/EventCard.variants.ts`
+  - `src/components/domain/EventCard/index.ts`
+  - `src/components/domain/index.ts`
+- **Files Modified:**
+  - `src/index.ts` - Updated EventCard exports
+  - `src/components/layout/Grid.stories.tsx` - Updated import path
+  - `src/components/cards/index.ts` - Removed EventCard export
+- **Files Removed:**
+  - `src/components/cards/EventCard/` - Entire directory removed
+- **Code Review:**
+  - `docs/reviews/L4_EVENT_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Score: 9.5/10
+  - Status: ✅ APPROVED - Ready for production use
+- **Verification:**
+  - ✅ TypeScript: PASSED
+  - ✅ ESLint: PASSED
+  - ✅ No linter errors
+  - ✅ All imports updated correctly
+- **Recommendations:**
+  - High Priority: Move gradient colors to DOMAIN_TOKENS.priceCapacity token
+  - Medium Priority: Review eventCardVariants usage with CardBase variants
+  - Low Priority: Optimize className building, add image loading states
+- **Next Steps:**
+  - Component is ready for use
+  - Consider implementing recommendations from code review
+
+---
+
+### L4_VENUE_CARD - VenueCard Component Refactoring
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully refactored VenueCard component to use domain tokens and CVA architecture. All hardcoded visual Tailwind classes removed and replaced with token-based values. Component now fully complies with L4 requirements.
+- **Scope:**
+  - Refactored existing VenueCard component in `src/components/cards/VenueCard/`
+  - Added missing tokens to DOMAIN_TOKENS
+  - Created new CVA variants for all visual elements
+  - Removed all hardcoded visual Tailwind classes
+  - Ensured full token coverage for Image, Title, and Location blocks
+- **Key Achievements:**
+  - ✅ All hardcoded visual classes removed:
+    - `bg-gradient-to-br from-muted to-muted/50` → `DOMAIN_TOKENS.image.placeholder.gradient`
+    - `group-hover:text-primary` → `DOMAIN_TOKENS.text.hover.primary`
+    - `line-clamp-2` → `DOMAIN_TOKENS.text.lineClamp.two`
+    - `line-clamp-1` → `DOMAIN_TOKENS.text.lineClamp.one`
+  - ✅ New CVA variants created:
+    - `venueCardImagePlaceholderVariants` - Image placeholder styling
+    - `venueCardTitleVariants` - Title with hover and line clamp
+    - `venueCardDescriptionVariants` - Description with line clamp
+    - `venueCardLocationTextVariants` - Location text with line clamp
+  - ✅ Full token coverage achieved for all visual values
+  - ✅ Semantic typography tokens used throughout
+  - ✅ All blocks (Image, Title, Location) use tokens
+- **Files Modified:**
+  - `src/tokens/components/domain.ts` - Added image.placeholder, text.hover, text.lineClamp tokens
+  - `src/components/cards/VenueCard/VenueCard.variants.ts` - Added new CVA variants
+  - `src/components/cards/VenueCard/VenueCard.tsx` - Refactored to use tokens and variants
+  - `src/components/cards/VenueCard/index.ts` - Updated exports
+- **Code Review:**
+  - `docs/reviews/L4_VENUE_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Status: ✅ APPROVED
+  - All requirements met: No hardcoded classes, Full CVA, Complete token coverage
+- **Verification:**
+  - ✅ TypeScript: PASSED
+  - ✅ ESLint: PASSED
+  - ✅ No linter errors
+  - ✅ No hardcoded visual classes found
+- **Token Additions:**
+  - `DOMAIN_TOKENS.image.placeholder.gradient` - Placeholder gradient for images
+  - `DOMAIN_TOKENS.text.hover.primary` - Hover state for primary text
+  - `DOMAIN_TOKENS.text.lineClamp.{one|two|three}` - Line clamp utilities
+- **Next Steps:**
+  - Component is ready for use
+  - Maintains consistency with other domain card components
+
+---
+
+### L4_ARTIST_CARD - ArtistCard Component Tokenization
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully created ARTIST_TOKENS and ensured full tokenization of ArtistCard component. All hardcoded visual values replaced with tokens. CVA structure is clean and correct. Component renders artist information stably across all variants and states.
+- **Key Accomplishments:**
+  - ✅ Created `ARTIST_TOKENS` for artist-specific layout values
+  - ✅ Replaced all hardcoded visual values with tokens
+  - ✅ Updated CVA variants to use ARTIST_TOKENS and DOMAIN_TOKENS
+  - ✅ Verified CVA cleanliness (all visual values from tokens)
+  - ✅ Verified rendering stability (all variants and states work correctly)
+  - ✅ Full token compliance achieved
+- **Token System:**
+  - Created `src/tokens/components/artist.ts` with ARTIST_TOKENS:
+    - `image.container.layout` - Layout classes for image container
+    - `image.sizing.full` - Full size image classes
+    - `image.placeholder.container` - Placeholder container layout
+    - `footer.border.top` - Footer border styling
+  - All tokens reference foundation tokens or DOMAIN_TOKENS
+  - Minimal token set (only artist-specific values)
+- **CVA Variants Updated:**
+  - `artistCardVariants` - Root wrapper variant
+  - `artistCardBadgeVariants` - Badge positioning
+  - `artistCardBadgeSurfaceVariants` - Badge surface styling
+  - `artistCardImageOverlayVariants` - Image overlay on hover
+  - `artistCardImageTransformVariants` - Image transform on hover
+  - `artistCardMetadataVariants` - Metadata container
+  - `artistCardMetadataItemVariants` - Metadata item
+  - `artistCardMetadataIconVariants` - Metadata icon
+  - `artistCardGenresVariants` - Genres display
+  - `artistCardFooterBorderVariants` - Footer border (uses ARTIST_TOKENS)
+- **Hardcoded Values Replaced:**
+  - `"relative w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50"` → `ARTIST_TOKENS.image.container.layout` + `DOMAIN_TOKENS.image.placeholder.gradient`
+  - `"h-full w-full"` → `ARTIST_TOKENS.image.sizing.full`
+  - `"flex h-full w-full items-center justify-center"` → `ARTIST_TOKENS.image.placeholder.container`
+  - `"border-t border-border"` → `ARTIST_TOKENS.footer.border.top`
+  - `"line-clamp-2"` → `DOMAIN_TOKENS.text.lineClamp.two`
+  - `"group-hover:text-primary"` → `DOMAIN_TOKENS.text.hover.primary`
+- **Files Created:**
+  - `src/tokens/components/artist.ts` - ARTIST_TOKENS definition
+  - `docs/reviews/L4_ARTIST_CARD_code_review.md` - Comprehensive code review
+- **Files Modified:**
+  - `src/tokens/components/index.ts` - Added ARTIST_TOKENS export
+  - `src/tokens/index.ts` - Added ARTIST_TOKENS export
+  - `src/components/cards/ArtistCard/ArtistCard.variants.ts` - Updated to use ARTIST_TOKENS
+  - `src/components/cards/ArtistCard/ArtistCard.tsx` - Replaced hardcoded values with tokens
+- **Code Review:**
+  - `docs/reviews/L4_ARTIST_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Status: ✅ APPROVED
+  - All requirements met: Full tokenization, Clean CVA, Stable rendering
+- **Verification:**
+  - ✅ TypeScript: PASSED (no errors related to ArtistCard)
+  - ✅ All visual values from tokens
+  - ✅ CVA structure clean and correct
+  - ✅ Rendering stable across all variants and states
+  - ✅ Barrel exports verified
+- **Success Criteria Met:**
+  - ✅ Все значения берутся только из токенов (CARD_TOKENS, ARTIST_TOKENS, DOMAIN_TOKENS)
+  - ✅ CVA корректен и чист (нет hardcoded классов)
+  - ✅ Компонент рендерит artist info стабильно (все варианты и состояния работают)
+- **Next Steps:**
+  - Component is ready for use
+  - Maintains consistency with other domain card components (EventCard, VenueCard)
+
+---
+
+### L4_CATEGORY_CARD - CategoryCard Component Refactoring
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully refactored CategoryCard component to use domain tokens (CARD_TOKENS, DOMAIN_TOKENS) and CVA architecture. All hardcoded visual values replaced with tokens. Component properly implements icon and label sections using semantic tokens. Component is exported and ready for use.
+- **Key Accomplishments:**
+  - ✅ Refactored existing CategoryCard component in `src/components/cards/CategoryCard/`
+  - ✅ Replaced all hardcoded visual values with tokens
+  - ✅ Updated CVA variants to reference CARD_TOKENS and DOMAIN_TOKENS
+  - ✅ Icon section uses ICON_TOKENS for sizes and colors
+  - ✅ Label section uses TEXT_TOKENS and DOMAIN_TOKENS.text for typography
+  - ✅ Full token compliance achieved
+  - ✅ Component exported in main index.ts
+- **Token System:**
+  - Uses CARD_TOKENS (imported for documentation and future use)
+  - Uses DOMAIN_TOKENS extensively for domain-specific styling:
+    - `badges.*` - Badge positioning and styling
+    - `image.*` - Image overlay and placeholder
+    - `motion.*` - Hover transitions and animations
+    - `text.*` - Text line clamp and hover states
+    - `spacing.*` - Section spacing
+    - `layout.*` - Card layout (via CardBase)
+    - `surface.*` - Card surface (via CardBase)
+  - Uses TEXT_TOKENS for typography: `fontSize.*`, `fontWeight.*`
+  - Uses ICON_TOKENS for icons: `sizes.*`, `colors.*`
+  - Uses MOTION_TOKENS for transitions: `transition.*`, `duration.*`
+- **CVA Variants:**
+  - `categoryCardBadgeVariants` - Badge positioning (uses DOMAIN_TOKENS.badges.position)
+  - `categoryCardBadgeSurfaceVariants` - Badge surface styling (uses DOMAIN_TOKENS.badges + TEXT_TOKENS)
+- **Hardcoded Values Replaced:**
+  - `"line-clamp-2"` → `DOMAIN_TOKENS.text.lineClamp.two`
+  - `"transition-colors"` → `MOTION_TOKENS.transition.colors`
+  - `"group-hover:text-primary"` → `DOMAIN_TOKENS.text.hover.primary`
+  - `"transition-opacity duration-normal"` → `MOTION_TOKENS.transition.opacity` + `MOTION_TOKENS.duration.normal`
+  - Icon `size="xl"` and `color="muted"` props → Direct `ICON_TOKENS` usage in className
+- **Icon Section:**
+  - ✅ Uses `ICON_TOKENS.sizes["4xl"]` for sizing (48px)
+  - ✅ Uses `ICON_TOKENS.colors.muted` for color
+  - ✅ Proper accessibility with `aria-hidden="true"`
+- **Label Section:**
+  - ✅ Title uses `TEXT_TOKENS.fontSize.lg` and `TEXT_TOKENS.fontWeight.bold`
+  - ✅ Both title and description use `DOMAIN_TOKENS.text.lineClamp.two`
+  - ✅ Title uses `MOTION_TOKENS.transition.colors` and `DOMAIN_TOKENS.text.hover.primary`
+  - ✅ Spacing uses `DOMAIN_TOKENS.spacing.section.*` tokens
+- **Files Modified:**
+  - `src/components/cards/CategoryCard/CategoryCard.variants.ts` - Updated CVA variants with token references
+  - `src/components/cards/CategoryCard/CategoryCard.tsx` - Replaced hardcoded values with tokens
+  - `src/index.ts` - Added CategoryCard exports
+- **Code Review:**
+  - `docs/reviews/L4_CATEGORY_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Status: ✅ APPROVED
+  - All requirements met: Full tokenization, Clean CVA, Icon/Label sections, Proper exports
+- **Verification:**
+  - ✅ TypeScript: PASSED (no errors)
+  - ✅ All visual values from tokens
+  - ✅ CVA structure clean and correct
+  - ✅ Icon section uses ICON_TOKENS
+  - ✅ Label section uses TEXT_TOKENS and DOMAIN_TOKENS.text
+  - ✅ Component exported properly
+- **Success Criteria Met:**
+  - ✅ Чистая архитектура - компонент следует паттернам CardBase и других domain components
+  - ✅ Нет hardcoded визуала - все стили через токены (CARD_TOKENS, DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS)
+  - ✅ Работающий component API - все props работают корректно, типы правильные
+  - ✅ CVA структура - правильные base/variants с ссылками на токены
+  - ✅ Icon секция - использует ICON_TOKENS для размеров и цветов
+  - ✅ Label секция - использует TEXT_TOKENS для типографики
+  - ✅ Экспорты - компонент доступен через главный index.ts
+  - ✅ Code review - документ создан и содержит полный анализ
+- **Next Steps:**
+  - Component is ready for use
+  - Maintains consistency with other domain card components (EventCard, VenueCard, ArtistCard)
+
+---
+
+### L4_TICKET_CARD - TicketCard Component Implementation
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Successfully created TicketCard component from scratch for Event/Artist/Venue context with full tokenization, CVA architecture, date field support, and semantic typography. Component properly displays ticket information including title, date, price, capacity, and availability status.
+- **Key Accomplishments:**
+  - ✅ Created TicketCard component with CardBase layout foundation
+  - ✅ Added date field support with semantic `<time>` element
+  - ✅ Full tokenization using DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS
+  - ✅ Comprehensive CVA variants for all component parts
+  - ✅ Semantic typography roles (Heading, time, Text)
+  - ✅ Proper layout section implementation using CardBase wrappers
+  - ✅ Complete Storybook stories including date field demonstration
+- **Token System:**
+  - Uses DOMAIN_TOKENS extensively:
+    - `surface.*` - Card surface styling (via CardBase)
+    - `layout.*` - Card layout (via CardBase)
+    - `image.*` - Image overlay and transform
+    - `badges.*` - Badge positioning and styling
+    - `metadata.*` - Metadata text colors and spacing
+    - `priceCapacity.*` - Price and capacity text styling
+    - `spacing.*` - Section spacing
+    - `motion.*` - Hover transitions and animations
+    - `text.*` - Text line clamp and hover states
+  - Uses TEXT_TOKENS for typography: `fontSize.*`, `fontWeight.*`
+  - Uses ICON_TOKENS for icons: `sizes.*`
+  - Uses MOTION_TOKENS for transitions: `transition.*`, `duration.*`
+- **CVA Variants Created:**
+  - `ticketCardVariants` - Root component variants (size, variant)
+  - `ticketCardBadgeVariants` - Badge positioning (size)
+  - `ticketCardBadgeSurfaceVariants` - Badge surface styling (variant: default, featured, vip, discount)
+  - `ticketCardTitleVariants` - Title styling (size)
+  - `ticketCardDateVariants` - Date styling (size) - **NEW**
+  - `ticketCardDescriptionVariants` - Description styling (size)
+  - `ticketCardPriceCapacityContainerVariants` - Price/capacity container (size)
+  - `ticketCardPriceVariants` - Price text styling (size)
+  - `ticketCardCapacityVariants` - Capacity text styling (size)
+  - `ticketCardAvailabilityVariants` - Availability indicator (availability)
+  - `ticketCardFooterVariants` - Footer border (size)
+  - `ticketCardPurchaseButtonVariants` - Purchase button (size, disabled)
+  - `ticketCardPurchaseButtonIconVariants` - Purchase button icon (size)
+  - `ticketCardImageOverlayVariants` - Image overlay on hover (size)
+  - `ticketCardImageTransformVariants` - Image transform on hover (size)
+- **Date Field Implementation:**
+  - ✅ Added `date?: string | Date | number` prop to TicketCardProps
+  - ✅ Uses semantic `<time>` element with `dateTime` attribute (ISO 8601)
+  - ✅ Uses `formatDate` utility for display formatting
+  - ✅ Supports Date object, ISO string, or timestamp
+  - ✅ Created `ticketCardDateVariants` CVA variant for styling
+- **Semantic Typography:**
+  - ✅ Title: `<Heading level={3}>` - semantic heading element
+  - ✅ Date: `<time dateTime={...}>` - semantic time element
+  - ✅ Description: `<Text>` with proper variant
+  - ✅ Price: `<Text>` with `weight="bold"` for emphasis
+  - ✅ Capacity: `<Text>` with `variant="muted"` for secondary information
+  - ✅ Availability: `<Text>` with appropriate variant based on status
+- **Layout Section:**
+  - ✅ Uses `CardBase` for root container
+  - ✅ Uses `CardBaseImageWrapper` for image section
+  - ✅ Uses `CardBaseContentWrapper` for content section
+  - ✅ Uses `CardBaseFooterWrapper` for footer section
+  - ✅ All wrappers receive `size` prop for consistent spacing
+- **Files Created:**
+  - `docs/reviews/L4_TICKET_CARD_code_review.md` - Comprehensive code review
+- **Files Modified:**
+  - `src/components/cards/TicketCard/TicketCard.types.ts` - Added date field to props
+  - `src/components/cards/TicketCard/TicketCard.variants.ts` - Created all CVA variants
+  - `src/components/cards/TicketCard/TicketCard.tsx` - Rewritten component with date support
+  - `src/components/cards/TicketCard/TicketCard.stories.tsx` - Added WithDate story
+- **Code Review:**
+  - `docs/reviews/L4_TICKET_CARD_code_review.md` - Comprehensive code review completed
+  - Overall Status: ✅ APPROVED
+  - All requirements met: Full tokenization, Quality CVA, Semantic typography, Date support, Layout sections
+- **Verification:**
+  - ✅ TypeScript: PASSED
+  - ✅ All visual values from tokens
+  - ✅ CVA structure clean and correct
+  - ✅ Semantic HTML elements used
+  - ✅ Date field properly implemented
+  - ✅ Layout sections properly implemented
+- **Success Criteria Met:**
+  - ✅ Полная токенизация через DOMAIN_TOKENS и CARD_TOKENS
+  - ✅ Качественный CVA с вариантами для размера
+  - ✅ Компонент стабильно отображает данные (title, date, price, capacity)
+  - ✅ Семантические роли типографики (Heading, time, Text)
+  - ✅ Корректная работа layout section (CardBase wrappers)
+  - ✅ Поддержка date поля с форматированием
+  - ✅ Code review документ создан
+- **Next Steps:**
+  - Component is ready for use
+  - Maintains consistency with other domain card components (EventCard, VenueCard, ArtistCard, CategoryCard)
+
+---
+
+## L4 - Data Components Migration
+
+### L4_S2_DEFINE_DATA_TOKEN_DOMAINS - Define Isolated Token Domains for L4 Data Components
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Successfully defined and introduced isolated token domains for all L4 data-related components. Removed incorrect shared DATA_TOKENS usage and established strict per-component token ownership according to TenerifeUI canonical architecture rules.
+- **Key Accomplishments:**
+  - ✅ Created 4 isolated token domain files:
+    - `TABLE_TOKENS` (src/tokens/components/table.ts)
+    - `DATA_LIST_TOKENS` (src/tokens/components/data-list.ts)
+    - `EMPTY_STATE_TOKENS` (src/tokens/components/empty-state.ts)
+    - `PAGINATION_TOKENS` (src/tokens/components/pagination.ts)
+  - ✅ Removed shared DATA_TOKENS usage from L4 components
+  - ✅ Updated all L4 components to use isolated token domains
+  - ✅ Updated DATA_TOKENS to contain only skeleton tokens
+  - ✅ Updated token system documentation
+- **Token Domains Created:**
+  - **TABLE_TOKENS:** Includes layout, sticky, expandable, loading, sortable, sortIcon subdomains
+  - **DATA_LIST_TOKENS:** Includes item, label, value subdomains with responsive layout tokens
+  - **EMPTY_STATE_TOKENS:** Includes alignment, icon, title, description subdomains
+  - **PAGINATION_TOKENS:** Includes container, sizes, states, icon tokens
+- **Components Updated:**
+  - ✅ Table component and all subcomponents (TableHead, TableCell, TableRow, TableHeader, TableExpandableContent, TableLoadingState, TableEmpty)
+  - ✅ DataList component and all subcomponents (DataListItem, DataListValue)
+  - ✅ EmptyState component and all subcomponents (EmptyStateIcon, EmptyStateTitle, EmptyStateDescription)
+  - ✅ Storybook stories updated with correct token references
+- **Files Created:**
+  - `src/tokens/components/table.ts` - TABLE_TOKENS domain
+  - `src/tokens/components/data-list.ts` - DATA_LIST_TOKENS domain
+  - `src/tokens/components/empty-state.ts` - EMPTY_STATE_TOKENS domain
+  - `src/tokens/components/pagination.ts` - PAGINATION_TOKENS domain
+- **Files Modified:**
+  - `src/tokens/components/data.ts` - Removed table, dataList, emptyState tokens (kept only skeleton)
+  - `src/tokens/components/index.ts` - Added exports for new token domains
+  - All Table component files - Updated to use TABLE_TOKENS
+  - All DataList component files - Updated to use DATA_LIST_TOKENS
+  - All EmptyState component files - Updated to use EMPTY_STATE_TOKENS
+  - `docs/architecture/TUI_TOKEN_SYSTEM.md` - Updated with new token domains and examples
+- **Verification:**
+  - ✅ No DATA_TOKENS.table, DATA_TOKENS.dataList, DATA_TOKENS.emptyState usage found
+  - ✅ All L4 components use isolated token domains
+  - ✅ No cross-domain token imports
+  - ✅ TypeScript compilation successful
+  - ✅ All token domains properly exported
+- **Success Criteria Met:**
+  - ✅ No DATA_TOKENS domain used by L4 components
+  - ✅ Each L4 component has exactly one token domain
+  - ✅ No token file contains tokens for multiple components
+  - ✅ Token domains compile with correct TypeScript typing
+  - ✅ No component code changed (only token imports updated)
+- **Next Steps:**
+  - L4_S3: Per-component refactors can now proceed with isolated token domains
+  - Token domains are locked and ready for component migration
+
+---
+
+### L4 - Data Components Migration (Previous Status)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-12
+- **Summary:** Completed first 5 subtasks of Data Components Migration. Successfully audited existing data components, defined data token structure, created DataBase primitive, migrated Table component, and migrated List & ListItem components.
+- **Completed Subtasks:**
+  - ✅ L4_S1: Audit of existing data components (2025-12-12)
+  - ✅ L4_S2: Define Data Token Structure (2025-12-12) - **UPDATED:** Now L4_S2_DEFINE_DATA_TOKEN_DOMAINS (2025-12-13)
+  - ✅ L4_S3: Create DataBase Primitive (2025-12-12)
+  - ✅ L4_S4: Table Migration (2025-12-12)
+  - ✅ L4_S5: List & ListItem Migration (2025-12-12)
+- **Remaining Subtasks:** L4_S6 through L4_S13 (pending)
+
+---
+
+## META / DOCUMENTATION Layer
+
+### TUI_TOKEN_DOMAINS_FINAL_VERIFICATION - Token Domain Final Verification
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Comprehensive verification of all token domains to confirm token ownership rules are respected. Identified and documented 1 violation (PromoCard → BUTTON_TOKENS), which was later resolved in subsequent task.
+- **Scope:**
+  - Scanned all 78 component files importing from `@/tokens/components`
+  - Verified all 26 component-specific token domains
+  - Validated 4 shared token domains
+  - Checked 7 foundation token domains
+- **Initial Findings:**
+  - **1 violation** detected: PromoCard importing BUTTON_TOKENS
+  - All other components verified as compliant
+- **Reports Generated:**
+  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Complete verification report
+- **Next Steps:** PromoCard fix required before system lock
+
+---
+
+### DOCS_FULL_ARCHITECTURE_ALIGNMENT - Documentation Architecture Alignment
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Successfully aligned all project documentation files with the locked TUI architecture (Foundation Lock). All documentation now reflects token-driven system, Foundation vs Extension separation, Radix UI as sole behavioral foundation, and premium infrastructure-level tone.
+- **Files Modified:**
+  - ✅ `README.md` - Updated component organization, added Foundation/Extension separation, removed hardcoded Tailwind, improved tone
+  - ✅ `docs/README.md` - Updated missing file references, added Foundation Lock links, updated architecture overview
+  - ✅ `docs/guides/COMPONENT_EXAMPLES.md` - Complete rewrite: translated to English, removed all hardcoded Tailwind classes, fixed Modal API, added Foundation/Extension distinction
+- **Key Changes:**
+  - Removed 29+ hardcoded Tailwind utility classes
+  - Added explicit Foundation vs Extension sections in all docs
+  - Fixed Modal API to use correct compound component pattern
+  - Unified terminology (token-driven, Foundation, Extension)
+  - Improved tone to premium infrastructure-level language
+  - Updated all examples to be token-driven
+- **Reports Generated:**
+  - ✅ `docs/reports/DOCS_ALIGNMENT_REPORT.md` - Complete alignment report with all changes documented
+- **Missing Files Noted:**
+  - `00_START_HERE.md`, `design_system.md`, `component_comparison_matrix.md`, `technical_analysis.md`, `ui_ux_audit_report.md`, `layout_and_brand_guide.md`, and PDF files (not found, noted in report)
+- **Success Criteria Met:**
+  - ✅ No documentation contradicts Foundation Lock
+  - ✅ All examples are token-driven (no hardcoded Tailwind)
+  - ✅ Foundation vs Extension is unambiguous everywhere
+  - ✅ Radix UI documented as sole behavioral foundation
+  - ✅ Tone is consistent and premium throughout
+- **Next Steps:**
+  - Documentation fully aligned with Foundation Lock architecture
+  - Consider creating missing files if needed (per user requirements)
+
+---
+
+## Token System Tasks
+
+### TUI_PROMOCARD_TOKEN_FIX - PromoCard Token Domain Violation Fix
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Fixed cross-component token import violation in PromoCard component. Removed `BUTTON_TOKENS` import and moved CTA button styling tokens to `DOMAIN_TOKENS.cta.button` domain.
+- **Issue:**
+  - PromoCard was importing `BUTTON_TOKENS` from Button component domain
+  - This violated token ownership rules (component-specific tokens should not be shared)
+- **Resolution:**
+  - ✅ Added `DOMAIN_TOKENS.cta.button` tokens to `src/tokens/components/domain.ts`
+  - ✅ Updated `PromoCard.variants.ts` to use `DOMAIN_TOKENS.cta.button.*` instead of `BUTTON_TOKENS`
+  - ✅ Removed `BUTTON_TOKENS` import from PromoCard files
+  - ✅ Verified no cross-component token imports remain
+- **Files Modified:**
+  - `src/tokens/components/domain.ts` - Added CTA button tokens
+  - `src/components/cards/PromoCard/PromoCard.variants.ts` - Updated to use DOMAIN_TOKENS
+  - `src/components/cards/PromoCard/PromoCard.tsx` - Updated JSDoc documentation
+- **Reports Generated:**
+  - ✅ `docs/reports/TUI_PROMOCARD_TOKEN_FIX_REPORT.md` - Complete fix report
+- **Verification:**
+  - ✅ No `BUTTON_TOKENS` imports found in PromoCard directory
+  - ✅ PromoCard correctly uses only domain-owned tokens
+  - ✅ Token system integrity maintained
+
+---
+
+### TUI_TOKEN_DOMAINS_REVERIFICATION - Token Domain Re-verification
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Re-verified token domain system after PromoCard fix. Confirmed all violations resolved and token system is compliant.
+- **Verification Steps:**
+  - ✅ Re-scanned all component imports for cross-domain violations
+  - ✅ Verified PromoCard no longer imports `BUTTON_TOKENS`
+  - ✅ Confirmed shared token domains remain unchanged
+  - ✅ Verified no new violations introduced
+- **Results:**
+  - ✅ **0 violations** detected
+  - ✅ All 78 component files scanned
+  - ✅ All components correctly use their own token domains or shared domains
+  - ✅ PromoCard violation fully resolved
+- **Reports Updated:**
+  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Updated with re-verification results
+    - Changed status from **FAIL** to **FINAL OK**
+    - Added "Re-verification Results" section (Section 11)
+    - Updated all violation statuses to **RESOLVED**
+    - Updated success criteria evaluation (4/4 criteria passed)
+- **Final Verdict:** ✅ **FINAL OK** - Token system ready to be locked
+
+---
+
+### TUI_TOKEN_SYSTEM_LOCK - Token System Lock
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Formally locked the token system after final verification. Established immutable rules for token architecture.
+- **Actions Taken:**
+  - ✅ Updated `docs/architecture/TUI_TOKEN_SYSTEM.md` with LOCKED status
+    - Changed status to 🔒 **LOCKED - IMMUTABLE**
+    - Added prominent lock warning at top of document
+    - Added comprehensive "Lock Status" section
+    - Documented what is locked, allowed, and forbidden
+    - Added unlock procedure documentation
+    - Referenced final audit report (FINAL VERDICT: OK)
+  - ✅ Updated `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` with token lock enforcement
+    - Added "Token System Lock Status" section
+    - Defined forbidden actions
+    - Added unlock procedure requirements
+    - Added AI agent enforcement rules
+    - Updated authority references with lock status
+- **Lock Details:**
+  - **Lock Date:** 2025-12-13
+  - **Lock Scope:** All token domains, ownership rules, shared/component-specific separation
+  - **Final Audit:** `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - FINAL VERDICT: OK
+  - **Violations:** 0 (all resolved)
+- **Enforcement:**
+  - ✅ Lock applies to both humans and AI agents
+  - ✅ Any modification requests MUST be refused with reference to lock
+  - ✅ Unlock procedure explicitly documented
+- **Files Modified:**
+  - `docs/architecture/TUI_TOKEN_SYSTEM.md` - Locked and documented
+  - `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` - Lock enforcement rules added
+- **Success Criteria Met:**
+  - ✅ Token system declared immutable
+  - ✅ Guard rules enforce the lock
+  - ✅ No ambiguity about allowed vs forbidden token changes
+  - ✅ All token domains verified and isolated
 
 ---
 

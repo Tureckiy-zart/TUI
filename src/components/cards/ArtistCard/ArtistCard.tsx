@@ -16,6 +16,7 @@ import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { DOMAIN_TOKENS } from "@/tokens";
+import { ARTIST_TOKENS } from "@/tokens/components/artist";
 import { ICON_TOKENS } from "@/tokens/components/icon";
 import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TEXT_TOKENS } from "@/tokens/components/text";
@@ -117,15 +118,23 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={size}>
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+              <div
+                className={cn(
+                  ARTIST_TOKENS.image.container.layout,
+                  DOMAIN_TOKENS.image.placeholder.gradient,
+                )}
+              >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
                     alt={name}
-                    className={cn("h-full w-full", artistCardImageTransformVariants({ size }))}
+                    className={cn(
+                      ARTIST_TOKENS.image.sizing.full,
+                      artistCardImageTransformVariants({ size }),
+                    )}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
+                  <div className={ARTIST_TOKENS.image.placeholder.container}>
                     {/* Placeholder icon - using info as fallback since music/artist icon doesn't exist in registry */}
                     <Icon
                       name="info"
@@ -148,11 +157,11 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
             <Heading
               level={3}
               className={cn(
-                "line-clamp-2",
+                DOMAIN_TOKENS.text.lineClamp.two,
                 TEXT_TOKENS.fontSize.lg,
                 TEXT_TOKENS.fontWeight.bold,
                 MOTION_TOKENS.transition.colors,
-                "group-hover:text-primary",
+                DOMAIN_TOKENS.text.hover.primary,
                 size === "compact"
                   ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
                   : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
@@ -173,7 +182,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                 size="sm"
                 variant="muted"
                 className={cn(
-                  "line-clamp-2",
+                  DOMAIN_TOKENS.text.lineClamp.two,
                   size === "compact"
                     ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
                     : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,

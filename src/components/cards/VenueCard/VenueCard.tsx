@@ -17,16 +17,19 @@ import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { DOMAIN_TOKENS } from "@/tokens/components/domain";
 import { ICON_TOKENS } from "@/tokens/components/icon";
-import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 import type { VenueCardProps } from "./VenueCard.types";
 import {
   venueCardBadgeVariants,
+  venueCardDescriptionVariants,
   venueCardFooterBorderVariants,
   venueCardImageOverlayVariants,
+  venueCardImagePlaceholderVariants,
   venueCardImageTransformVariants,
+  venueCardLocationTextVariants,
   venueCardMetadataRowVariants,
+  venueCardTitleVariants,
   venueCardVariants,
 } from "./VenueCard.variants";
 
@@ -34,7 +37,7 @@ import {
  * VenueCard Component
  *
  * Token-driven venue card component using CardBase layout foundation.
- * All visual styling uses DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, and MOTION_TOKENS.
+ * All visual styling uses DOMAIN_TOKENS, TEXT_TOKENS, and ICON_TOKENS.
  *
  * @example
  * ```tsx
@@ -115,7 +118,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         {/* Image Section */}
         {showImage && (
           <CardBaseImageWrapper size={cardBaseSize}>
-            <div className="relative w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+            <div className={cn("w-full", venueCardImagePlaceholderVariants({ size }))}>
               {imageUrl ? (
                 <img
                   src={imageUrl}
@@ -143,19 +146,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         {/* Content Section */}
         <CardBaseContentWrapper size={cardBaseSize}>
           {/* Title */}
-          <Heading
-            level={3}
-            className={cn(
-              "line-clamp-2",
-              TEXT_TOKENS.fontSize.lg,
-              TEXT_TOKENS.fontWeight.bold,
-              MOTION_TOKENS.transition.colors,
-              "group-hover:text-primary",
-              size === "compact"
-                ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-            )}
-          >
+          <Heading level={3} className={venueCardTitleVariants({ size })}>
             {href ? (
               <Link href={href} variant="ghost">
                 {name}
@@ -167,16 +158,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
 
           {/* Description */}
           {description && (
-            <Text
-              size="sm"
-              variant="muted"
-              className={cn(
-                "line-clamp-2",
-                size === "compact"
-                  ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                  : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-              )}
-            >
+            <Text size="sm" variant="muted" className={venueCardDescriptionVariants({ size })}>
               {description}
             </Text>
           )}
@@ -192,7 +174,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   className={ICON_TOKENS.sizes.sm}
                   aria-hidden="true"
                 />
-                <Text size="xs" variant="muted" className="line-clamp-1">
+                <Text size="xs" variant="muted" className={venueCardLocationTextVariants({ size })}>
                   {location}
                 </Text>
               </div>

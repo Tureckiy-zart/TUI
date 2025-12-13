@@ -3,7 +3,6 @@
 import { cva } from "class-variance-authority";
 
 import { DROPDOWN_TOKENS } from "@/tokens/components/dropdown";
-import { INPUT_TOKENS } from "@/tokens/components/input";
 import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 import { OPACITY_TOKENS } from "@/tokens/opacity";
@@ -77,7 +76,7 @@ export const dropdownMenuVariants = cva(
  * Individual menu item
  */
 export const dropdownItemVariants = cva(
-  `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors}`,
+  `relative flex ${DROPDOWN_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors}`,
   {
     variants: {
       variant: {

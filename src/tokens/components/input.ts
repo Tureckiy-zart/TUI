@@ -94,33 +94,6 @@ export const INPUT_TOKENS = {
   } as const,
 
   /**
-   * Select listbox tokens
-   * Styling for select dropdown container
-   */
-  selectListbox: {
-    border: "border border-[hsl(var(--border))]", // Border color using CSS var
-    background: "bg-[hsl(var(--popover))]", // Background using CSS var
-    text: "text-[hsl(var(--popover-foreground))]", // Text color using CSS var
-    radius: "rounded-md", // Radius token (6px)
-    shadow: "shadow-md", // Shadow token
-  } as const,
-
-  /**
-   * Select option tokens
-   * Styling for select option items
-   */
-  selectOption: {
-    focus: {
-      background: "focus:bg-[hsl(var(--accent))]", // Focus background using CSS var
-      text: "focus:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
-    } as const,
-    selected: {
-      background: "bg-[hsl(var(--accent))]", // Selected background using CSS var
-      text: "text-[hsl(var(--accent-foreground))]", // Selected text using CSS var
-    } as const,
-  } as const,
-
-  /**
    * Variant-based tokens
    * Border, background, and text colors for different variants
    * All use CSS variable references for theme support

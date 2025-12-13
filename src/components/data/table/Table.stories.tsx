@@ -24,7 +24,7 @@ const meta: Meta<typeof Table> = {
     docs: {
       description: {
         component:
-          "Token-driven table component with sorting, expandable rows, loading, and empty states. Uses DATA_TOKENS for all styling.",
+          "Token-driven table component with sorting, expandable rows, loading, and empty states. Uses TABLE_TOKENS for all styling.",
       },
     },
   },

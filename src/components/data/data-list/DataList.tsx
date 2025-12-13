@@ -4,13 +4,13 @@
  * DataList Root Component
  *
  * Mobile-first data list component for displaying key-value pairs.
- * Uses Stack for vertical layout and DATA_TOKENS for spacing.
+ * Uses Stack for vertical layout and DATA_LIST_TOKENS for spacing.
  */
 
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { DATA_LIST_TOKENS } from "@/tokens/components/data-list";
 
 import { DataListItem } from "./DataListItem";
 import { DataListLabel } from "./DataListLabel";
@@ -40,7 +40,7 @@ export interface DataListRootProps extends React.HTMLAttributes<HTMLDListElement
 const DataListRoot = React.forwardRef<HTMLDListElement, DataListRootProps>(
   ({ labelWidth: _labelWidth = "md", className, children, ...props }, ref) => {
     return (
-      <dl ref={ref} className={cn(DATA_TOKENS.dataList.spacing.gap, className)} {...props}>
+      <dl ref={ref} className={cn(DATA_LIST_TOKENS.spacing.gap, className)} {...props}>
         {children}
       </dl>
     );

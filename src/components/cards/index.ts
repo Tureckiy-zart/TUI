@@ -30,8 +30,6 @@ export type {
   CategoryCardSize,
   CategoryCardVariant,
 } from "./CategoryCard/CategoryCard.types";
-export { EventCard } from "./EventCard";
-export type { EventCardProps, EventCardSize, EventCardVariant } from "./EventCard/EventCard.types";
 export { PromoCard } from "./PromoCard";
 export type { PromoCardProps, PromoCardSize, PromoCardVariant } from "./PromoCard/PromoCard.types";
 export { TicketCard } from "./TicketCard";

@@ -10,7 +10,7 @@ import * as React from "react";
 
 import { getBaseValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { DATA_LIST_TOKENS } from "@/tokens/components/data-list";
 
 import type { SpacingValue } from "../../layout/layout.types";
 import type { DataListItemProps as DataListItemPropsType } from "./DataList.types";
@@ -31,14 +31,16 @@ const DataListItem = React.forwardRef<HTMLDivElement, DataListItemProps>(
       paddingValue && ["sm", "md", "lg"].includes(String(paddingValue))
         ? (String(paddingValue) as "sm" | "md" | "lg")
         : "md";
-    const paddingClass = DATA_TOKENS.dataList.rowPadding[paddingKey];
+    const paddingClass = DATA_LIST_TOKENS.rowPadding[paddingKey];
 
     return (
       <div
         ref={ref}
         className={cn(
           paddingClass,
-          "flex flex-col border-b border-border last:border-0 md:flex-row md:items-center",
+          DATA_LIST_TOKENS.item.layout.mobile,
+          DATA_LIST_TOKENS.item.layout.desktop,
+          DATA_LIST_TOKENS.item.border,
           className,
         )}
         {...props}

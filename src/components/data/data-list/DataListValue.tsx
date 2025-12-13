@@ -9,6 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { DATA_LIST_TOKENS } from "@/tokens/components/data-list";
 
 export interface DataListValueProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -24,7 +25,11 @@ export interface DataListValueProps extends React.HTMLAttributes<HTMLElement> {
 const DataListValue = React.forwardRef<HTMLElement, DataListValueProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <dd ref={ref} className={cn("flex-1 text-muted-foreground", className)} {...props}>
+      <dd
+        ref={ref}
+        className={cn(DATA_LIST_TOKENS.value.flex, DATA_LIST_TOKENS.value.color, className)}
+        {...props}
+      >
         {children}
       </dd>
     );

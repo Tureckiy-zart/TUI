@@ -4,21 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { SELECT_TOKENS } from "@/tokens/components/select";
 
 const selectVariants = cva(
-  `flex w-full appearance-none ${INPUT_TOKENS.shadow} transition-colors disabled:cursor-not-allowed focus-visible:outline-none [&>option]:bg-background [&>option]:text-foreground`,
+  `flex w-full appearance-none transition-colors disabled:cursor-not-allowed focus-visible:outline-none [&>option]:bg-background [&>option]:text-foreground`,
   {
     variants: {
       size: {
-        sm: `${INPUT_TOKENS.size.sm.height} ${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.radius} ${INPUT_TOKENS.size.sm.fontSize}`,
-        md: `${INPUT_TOKENS.size.md.height} ${INPUT_TOKENS.size.md.padding.horizontal} ${INPUT_TOKENS.size.md.padding.vertical} ${INPUT_TOKENS.size.md.radius} ${INPUT_TOKENS.size.md.fontSize} ${INPUT_TOKENS.size.md.fontSizeResponsive}`,
-        lg: `${INPUT_TOKENS.size.lg.height} ${INPUT_TOKENS.size.lg.padding.horizontal} ${INPUT_TOKENS.size.lg.padding.vertical} ${INPUT_TOKENS.size.lg.radius} ${INPUT_TOKENS.size.lg.fontSize}`,
+        sm: `${SELECT_TOKENS.trigger.height.sm} ${SELECT_TOKENS.trigger.padding.horizontal.sm} ${SELECT_TOKENS.trigger.padding.vertical.sm} ${SELECT_TOKENS.trigger.radius.sm} ${SELECT_TOKENS.trigger.fontSize.sm}`,
+        md: `${SELECT_TOKENS.trigger.height.md} ${SELECT_TOKENS.trigger.padding.horizontal.md} ${SELECT_TOKENS.trigger.padding.vertical.md} ${SELECT_TOKENS.trigger.radius.md} ${SELECT_TOKENS.trigger.fontSize.md}`,
+        lg: `${SELECT_TOKENS.trigger.height.lg} ${SELECT_TOKENS.trigger.padding.horizontal.lg} ${SELECT_TOKENS.trigger.padding.vertical.lg} ${SELECT_TOKENS.trigger.radius.lg} ${SELECT_TOKENS.trigger.fontSize.lg}`,
       },
       state: {
-        default: `${INPUT_TOKENS.state.border.default} ${INPUT_TOKENS.state.background.default} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.border.focus}`,
-        error: `${INPUT_TOKENS.state.border.error} ${INPUT_TOKENS.state.background.default} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.border.focus}`,
-        disabled: `${INPUT_TOKENS.state.border.disabled} ${INPUT_TOKENS.state.background.disabled} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.text.disabled}`,
+        default: `${SELECT_TOKENS.state.default.border} ${SELECT_TOKENS.state.default.background} ${SELECT_TOKENS.state.default.text}`,
+        error: `${SELECT_TOKENS.state.default.border} ${SELECT_TOKENS.state.default.background} ${SELECT_TOKENS.state.default.text}`,
+        disabled: `${SELECT_TOKENS.state.disabled.border} ${SELECT_TOKENS.state.disabled.background} ${SELECT_TOKENS.state.disabled.text}`,
       },
       fullWidth: {
         true: "w-full",

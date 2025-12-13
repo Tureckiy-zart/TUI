@@ -17,12 +17,14 @@ export type { TableHeaderProps };
 /**
  * Table Header component
  */
+import { TABLE_TOKENS } from "@/tokens/components/table";
+
 const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
   ({ sticky = false, className, ...props }, ref) => {
     return (
       <thead
         ref={ref}
-        className={cn(sticky && "sticky top-0 z-10 bg-background", className)}
+        className={cn(sticky && TABLE_TOKENS.sticky.header, className)}
         role="rowgroup"
         {...props}
       />

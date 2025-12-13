@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { FORM_TOKENS } from "@/tokens/components/form";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 const labelVariants = cva(
@@ -25,7 +25,7 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, required, children, ...props }, ref) => (
     <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props}>
       {children}
-      {required && <span className={cn(INPUT_TOKENS.label.requiredMark, "ml-xs")}>*</span>}
+      {required && <span className={cn(FORM_TOKENS.label.requiredMark, "ml-xs")}>*</span>}
     </LabelPrimitive.Root>
   ),
 );

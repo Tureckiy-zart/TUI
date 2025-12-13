@@ -9,6 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import type { TableSortIconProps } from "./Table.types";
 
@@ -24,9 +25,9 @@ const TableSortIcon = React.forwardRef<HTMLSpanElement, TableSortIconProps>(
       <span
         ref={ref}
         className={cn(
-          "inline-flex size-4 items-center text-muted-foreground transition-transform",
-          direction === "desc" && "rotate-180",
-          !direction && "opacity-30",
+          TABLE_TOKENS.sortable.icon.base,
+          direction === "desc" && TABLE_TOKENS.sortable.icon.rotated,
+          !direction && TABLE_TOKENS.sortable.icon.inactive,
           className,
         )}
         aria-hidden="true"

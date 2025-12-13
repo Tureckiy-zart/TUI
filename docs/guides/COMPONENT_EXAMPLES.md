@@ -1,123 +1,239 @@
-# 📦 Примеры компонентов Tenerife UI
+# Component Examples
 
-Примеры использования всех компонентов библиотеки Tenerife UI.
+Usage examples for TUI components, demonstrating token-driven styling and Foundation/Extension architecture.
 
 ---
 
-## Button (Кнопка)
+## Foundation Components
 
-### Все варианты
+Foundation components are locked and immutable. They delegate all behavior to Radix UI primitives and use token-driven styling.
+
+### Modal (Foundation)
+
+Modal is the sole modal foundation, built on Radix Dialog. All modal-like components must use Modal internally.
+
+```tsx
+import { Modal, Button } from "@tenerife.music/ui";
+import { useState } from "react";
+
+function ModalExample() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal.Root open={open} onOpenChange={setOpen}>
+        <Modal.Trigger asChild>
+          <Button>Open</Button>
+        </Modal.Trigger>
+        <Modal.Content size="md">
+          <Modal.Header>
+            <Modal.Title>Modal Title</Modal.Title>
+            <Modal.Description>Modal description</Modal.Description>
+          </Modal.Header>
+          <div>Modal content goes here</div>
+          <Modal.Footer>
+            <Button variant="outline" onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setOpen(false)}>Confirm</Button>
+          </Modal.Footer>
+          <Modal.Close />
+        </Modal.Content>
+      </Modal.Root>
+    </>
+  );
+}
+```
+
+**Modal API:**
+- `Modal.Root` - Root container (Radix Dialog.Root)
+- `Modal.Trigger` - Trigger button
+- `Modal.Content` - Content container with token-driven `size` prop
+- `Modal.Header` - Header section
+- `Modal.Title` - Title (Radix Dialog.Title)
+- `Modal.Description` - Description (Radix Dialog.Description)
+- `Modal.Footer` - Footer section
+- `Modal.Close` - Close button (Radix Dialog.Close)
+
+**Props:**
+- `size`: Token union (`"sm" | "md" | "lg" | "xl" | "fullscreen"`) - Maps to spacing tokens
+- All Radix Dialog props pass through for behavior
+
+### Tabs (Foundation)
+
+Tabs is the sole tabs foundation, built on Radix Tabs.
+
+```tsx
+import { Tabs } from "@tenerife.music/ui";
+
+function TabsExample() {
+  return (
+    <Tabs.Root defaultValue="tab1">
+      <Tabs.List>
+        <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+        <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+        <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="tab1">Content for tab 1</Tabs.Content>
+      <Tabs.Content value="tab2">Content for tab 2</Tabs.Content>
+      <Tabs.Content value="tab3">Content for tab 3</Tabs.Content>
+    </Tabs.Root>
+  );
+}
+```
+
+### Select (Foundation)
+
+Select is the sole select foundation, built on Radix Select.
+
+```tsx
+import { Select } from "@tenerife.music/ui";
+
+function SelectExample() {
+  return (
+    <Select.Root>
+      <Select.Trigger>
+        <Select.Value placeholder="Select an option" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="option1">Option 1</Select.Item>
+        <Select.Item value="option2">Option 2</Select.Item>
+        <Select.Item value="option3">Option 3</Select.Item>
+      </Select.Content>
+    </Select.Root>
+  );
+}
+```
+
+### ContextMenu (Foundation)
+
+ContextMenu is the sole context menu foundation, built on Radix ContextMenu.
+
+```tsx
+import { ContextMenu } from "@tenerife.music/ui";
+
+function ContextMenuExample() {
+  return (
+    <ContextMenu.Root>
+      <ContextMenu.Trigger>
+        Right-click here
+      </ContextMenu.Trigger>
+      <ContextMenu.Content>
+        <ContextMenu.Item>Copy</ContextMenu.Item>
+        <ContextMenu.Item>Paste</ContextMenu.Item>
+        <ContextMenu.Separator />
+        <ContextMenu.Item>Delete</ContextMenu.Item>
+      </ContextMenu.Content>
+    </ContextMenu.Root>
+  );
+}
+```
+
+### Toast (Foundation)
+
+Toast is the sole toast foundation, built on Radix Toast.
+
+```tsx
+import { Toast, ToastProvider, useToast } from "@tenerife.music/ui";
+import { Button } from "@tenerife.music/ui";
+
+function ToastExample() {
+  const { toast } = useToast();
+
+  return (
+    <ToastProvider>
+      <Button
+        onClick={() => {
+          toast({
+            title: "Toast Title",
+            description: "Toast description",
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toast.Viewport />
+    </ToastProvider>
+  );
+}
+```
+
+---
+
+## Extension Components
+
+Extension components are composable and may use Foundation components internally.
+
+### Button
+
+Button uses token-driven variants through CVA.
 
 ```tsx
 import { Button } from "@tenerife.music/ui";
 
 function ButtonExamples() {
   return (
-    <div className="flex flex-wrap gap-2">
-      <Button variant="default">Primary</Button>
-      <Button variant="destructive">Delete</Button>
+    <>
+      <Button variant="default">Default</Button>
+      <Button variant="destructive">Destructive</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="link">Link</Button>
-    </div>
+    </>
   );
 }
 ```
 
-### Размеры
+**Sizes (token-driven):**
 
 ```tsx
 import { Button } from "@tenerife.music/ui";
 
 function ButtonSizes() {
   return (
-    <div className="flex items-center gap-2">
+    <>
       <Button size="sm">Small</Button>
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
       <Button size="icon">🔍</Button>
-    </div>
-  );
-}
-```
-
-### Состояния
-
-```tsx
-import { Button } from "@tenerife.music/ui";
-
-function ButtonStates() {
-  return (
-    <div className="flex gap-2">
-      <Button>Normal</Button>
-      <Button disabled>Disabled</Button>
-      <Button variant="destructive">Delete</Button>
-    </div>
-  );
-}
-```
-
-### С иконками
-
-```tsx
-import { Button } from "@tenerife.music/ui";
-import { Search, Plus, Trash2 } from "lucide-react";
-
-function ButtonWithIcons() {
-  return (
-    <div className="flex gap-2">
-      <Button>
-        <Search className="mr-2 h-4 w-4" />
-        Search
-      </Button>
-      <Button variant="outline">
-        <Plus className="mr-2 h-4 w-4" />
-        Add
-      </Button>
-      <Button variant="destructive">
-        <Trash2 className="mr-2 h-4 w-4" />
-        Delete
-      </Button>
-    </div>
+    </>
   );
 }
 ```
 
 **Props:**
-
-- `variant`: `"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"`
-- `size`: `"sm" | "default" | "lg" | "icon"`
+- `variant`: Token union (`"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"`)
+- `size`: Token union (`"sm" | "default" | "lg" | "icon"`)
 - `disabled`: `boolean`
-- `asChild`: `boolean` - Использовать как Slot (Radix UI)
+- `asChild`: `boolean` - Use as Radix UI Slot
 
----
+### Input
 
-## Input (Поле ввода)
-
-### Базовое использование
+Input fields with token-driven state variants.
 
 ```tsx
 import { Input, Label } from "@tenerife.music/ui";
 
 function InputExample() {
   return (
-    <div className="space-y-2">
+    <>
       <Label htmlFor="email">Email</Label>
       <Input id="email" type="email" placeholder="example@email.com" />
-    </div>
+    </>
   );
 }
 ```
 
-### Различные типы
+**Input Types:**
 
 ```tsx
 import { Input, Label } from "@tenerife.music/ui";
 
 function InputTypes() {
   return (
-    <div className="space-y-4">
+    <>
       <div>
         <Label htmlFor="text">Text</Label>
         <Input id="text" type="text" placeholder="Enter text" />
@@ -130,48 +246,20 @@ function InputTypes() {
         <Label htmlFor="password">Password</Label>
         <Input id="password" type="password" placeholder="Password" />
       </div>
-      <div>
-        <Label htmlFor="number">Number</Label>
-        <Input id="number" type="number" placeholder="123" />
-      </div>
-    </div>
-  );
-}
-```
-
-### С состоянием ошибки
-
-```tsx
-import { Input, Label } from "@tenerife.music/ui";
-
-function InputWithError() {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor="email">Email</Label>
-      <Input
-        id="email"
-        type="email"
-        placeholder="example@email.com"
-        className="border-destructive"
-      />
-      <p className="text-sm text-destructive">Invalid email address</p>
-    </div>
+    </>
   );
 }
 ```
 
 **Props:**
-
-- Все стандартные HTML input props
+- All standard HTML input props
 - `type`: `"text" | "email" | "password" | "number" | ...`
 - `placeholder`: `string`
 - `disabled`: `boolean`
 
----
+### Card
 
-## Card (Карточка)
-
-### Базовая карточка
+Card component with token-driven variants.
 
 ```tsx
 import {
@@ -181,18 +269,18 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
+  Button,
 } from "@tenerife.music/ui";
-import { Button } from "@tenerife.music/ui";
 
 function CardExample() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card description goes here</CardDescription>
+        <CardDescription>Card description</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card content goes here</p>
+        <p>Card content</p>
       </CardContent>
       <CardFooter>
         <Button>Action</Button>
@@ -202,132 +290,98 @@ function CardExample() {
 }
 ```
 
-### EventCard
+**Card Variants (token-driven):**
 
 ```tsx
-import { EventCard } from "@tenerife.music/ui";
+import { Card } from "@tenerife.music/ui";
 
-function EventCardExample() {
-  return (
-    <EventCard
-      title="Summer Music Festival"
-      description="A fantastic music festival with top artists"
-      date="July 15, 2024 at 7:00 PM"
-      venueName="Beach Club"
-      price="€25 - €50"
-      imageUrl="/event-image.jpg"
-      href="/events/summer-festival"
-      featured={true}
-      showImage={true}
-      getTicketsLabel="Get Tickets"
-      featuredBadgeText="Featured"
-    />
-  );
-}
-```
-
-**Props EventCard:**
-
-- `title`: `string` - Название события (обязательно, pre-localized)
-- `description`: `string` - Описание события (опционально, pre-localized)
-- `date`: `string` - Дата и время (опционально, pre-formatted)
-- `venueName`: `string` - Название места проведения (опционально, pre-localized)
-- `price`: `string` - Цена с валютой (опционально, pre-formatted, например "€25 - €50")
-- `imageUrl`: `string` - URL изображения (опционально)
-- `href`: `string` - Ссылка на страницу события (опционально)
-- `ticketUrl`: `string` - Ссылка на покупку билетов (опционально)
-- `featured`: `boolean` - Отображать как featured (опционально, по умолчанию false)
-- `showImage`: `boolean` - Показывать изображение (опционально, по умолчанию true)
-- `getTicketsLabel`: `string` - Текст кнопки "Get Tickets" (обязательно)
-- `featuredBadgeText`: `string` - Текст бейджа для featured событий (опционально)
-- `size`: `"default" | "compact"` - Размер карточки (опционально)
-- `variant`: `"default" | "featured"` - Вариант стиля (опционально)
-
----
-
-## Modal (Модальное окно)
-
-### Modal
-
-```tsx
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "@tenerife.music/ui";
-import { useState } from "react";
-
-function ModalExample() {
-  const [isOpen, setIsOpen] = useState(false);
-
+function CardVariants() {
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} size="md">
-        <ModalHeader>
-          <h2>Modal Title</h2>
-        </ModalHeader>
-        <ModalBody>
-          <p>Modal content goes here</p>
-        </ModalBody>
-        <ModalFooter>
-          <Button variant="outline" onClick={() => setIsOpen(false)}>
-            Close
-          </Button>
-          <Button onClick={() => setIsOpen(false)}>Confirm</Button>
-        </ModalFooter>
-      </Modal>
+      <Card variant="default">Default</Card>
+      <Card variant="elevated">Elevated</Card>
+      <Card variant="glass">Glass</Card>
+      <Card variant="outline">Outline</Card>
     </>
   );
 }
 ```
 
-### Dialog (Radix UI Dialog)
+### Field
+
+Form field wrapper with validation, using token-driven spacing.
 
 ```tsx
 import {
-  DialogRoot,
-  DialogTrigger,
-  DialogHeader,
-  DialogTitle,
-  DialogBody,
-  DialogFooter,
+  Field,
+  FieldLabel,
+  FieldControl,
+  FieldError,
+  Input,
   Button,
 } from "@tenerife.music/ui";
 
-function DialogExample() {
+function FieldExample() {
   return (
-    <DialogRoot>
-      <DialogTrigger asChild>
-        <Button>Open Dialog</Button>
-      </DialogTrigger>
-      <Dialog>
-        <DialogHeader>
-          <DialogTitle>Dialog Title</DialogTitle>
-        </DialogHeader>
-        <DialogBody>
-          <p>Dialog content goes here</p>
-        </DialogBody>
-        <DialogFooter>
-          <Button variant="outline">Cancel</Button>
-          <Button>Confirm</Button>
-        </DialogFooter>
-      </Dialog>
-    </DialogRoot>
+    <Field>
+      <FieldLabel>Email</FieldLabel>
+      <FieldControl asChild>
+        <Input type="email" placeholder="example@email.com" />
+      </FieldControl>
+      <FieldError>Email is required</FieldError>
+    </Field>
   );
 }
 ```
 
-**Props Modal:**
+### Layout Components
 
-- `open`: `boolean` - Открыто ли модальное окно
-- `onClose`: `() => void` - Функция закрытия
-- `size`: `"sm" | "md" | "lg" | "fullscreen"` - Размер модального окна
-- `backdropVariant`: `"default" | "blurred" | "transparent"` - Вариант фона
-- `closeOnBackdropClick`: `boolean` - Закрывать при клике на фон
-- `closeOnEscape`: `boolean` - Закрывать при нажатии Escape
+Layout components use token-driven spacing and sizing.
 
----
+#### Flex
 
-## Layout компоненты
+```tsx
+import { Flex } from "@tenerife.music/ui";
 
-### Section
+function FlexExample() {
+  return (
+    <Flex direction="row" gap="md" align="center" justify="between">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </Flex>
+  );
+}
+```
+
+**Props:**
+- `direction`: `"row" | "column"`
+- `gap`: Token union (`"xs" | "sm" | "md" | "lg" | "xl" | ...`) - Maps to spacing tokens
+- `align`: `"start" | "center" | "end" | "stretch"`
+- `justify`: `"start" | "center" | "end" | "between" | "around"`
+
+#### Grid
+
+```tsx
+import { Grid } from "@tenerife.music/ui";
+
+function GridExample() {
+  return (
+    <Grid cols={3} gap="md">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </Grid>
+  );
+}
+```
+
+**Props:**
+- `cols`: `number` - Number of columns
+- `gap`: Token union - Maps to spacing tokens
+- Responsive breakpoint props available
+
+#### Section
 
 ```tsx
 import { Section } from "@tenerife.music/ui";
@@ -343,135 +397,73 @@ function SectionExample() {
 ```
 
 **Props:**
+- `padding`: Token union (`"none" | "sm" | "md" | "lg" | "xl"`) - Maps to spacing tokens
+- `background`: Token union (`"default" | "muted" | "card"`) - Maps to surface tokens
 
-- `padding`: `"none" | "sm" | "md" | "lg" | "xl"`
-- `background`: `"default" | "muted" | "card"`
-- `as`: `keyof JSX.IntrinsicElements` - HTML элемент
+### Skeleton
 
-### Grid
-
-```tsx
-import { Grid } from "@tenerife.music/ui";
-
-function GridExample() {
-  return (
-    <Grid cols={3} gap={4}>
-      <div className="bg-card p-4">Item 1</div>
-      <div className="bg-card p-4">Item 2</div>
-      <div className="bg-card p-4">Item 3</div>
-    </Grid>
-  );
-}
-```
-
-**Props:**
-
-- `cols`: `number` - Количество колонок
-- `gap`: `number` - Отступ между элементами
-- `className`: `string` - Дополнительные классы
-
-### Flex
-
-```tsx
-import { Flex } from "@tenerife.music/ui";
-
-function FlexExample() {
-  return (
-    <Flex direction="row" gap={4} align="center" justify="between">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </Flex>
-  );
-}
-```
-
-**Props:**
-
-- `direction`: `"row" | "column"`
-- `gap`: `number` - Отступ между элементами
-- `align`: `"start" | "center" | "end" | "stretch"`
-- `justify`: `"start" | "center" | "end" | "between" | "around"`
-
----
-
-## Skeleton (Загрузка)
-
-### Skeleton для карточек событий
-
-```tsx
-import { Skeleton, Grid } from "@tenerife.music/ui";
-
-function EventCardSkeletonExample() {
-  return (
-    <Grid cols={1} md={2} lg={3} gap={4}>
-      <Skeleton className="h-64 w-full" />
-      <Skeleton className="h-64 w-full" />
-      <Skeleton className="h-64 w-full" />
-    </Grid>
-  );
-}
-```
-
-> **Примечание:** Специализированные компоненты `EventCardSkeleton` и `VenueCardSkeleton` существуют в кодовой базе, но в настоящее время не экспортируются из основного пакета. Используйте базовый компонент `Skeleton` с соответствующими классами для создания скелетонов карточек.
-
-### Базовый Skeleton
+Loading state skeleton with token-driven sizing.
 
 ```tsx
 import { Skeleton } from "@tenerife.music/ui";
 
 function SkeletonExample() {
   return (
-    <div className="space-y-2">
-      <Skeleton className="h-12 w-full" />
-      <Skeleton className="h-4 w-3/4" />
-      <Skeleton className="h-4 w-1/2" />
-    </div>
+    <>
+      <Skeleton height="md" width="full" />
+      <Skeleton height="sm" width="3/4" />
+      <Skeleton height="sm" width="1/2" />
+    </>
   );
 }
 ```
 
-**Props Skeleton:**
-
-- `className`: `string` - Дополнительные классы для настройки размера и формы
-
 ---
 
-## Комбинированные примеры
+## Combined Examples
 
-### Форма с валидацией
+### Form with Validation
 
 ```tsx
-import { Input, Label, Button, Card, CardHeader, CardTitle, CardContent } from "@tenerife.music/ui";
-import { useState } from "react";
+import {
+  Field,
+  FieldLabel,
+  FieldControl,
+  FieldError,
+  Input,
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@tenerife.music/ui";
 
-function FormExample() {
-  const [email, setEmail] = useState("");
-
+function ContactForm() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Contact Form</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-          />
-        </div>
-        <Button type="submit">Submit</Button>
+      <CardContent>
+        <form>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl asChild>
+              <Input type="email" placeholder="your@email.com" />
+            </FieldControl>
+            <FieldError>Email is required</FieldError>
+          </Field>
+          <Button type="submit" variant="default">
+            Submit
+          </Button>
+        </form>
       </CardContent>
     </Card>
   );
 }
 ```
 
-### Карточка с модальным окном
+### Card with Modal
 
 ```tsx
 import {
@@ -486,7 +478,7 @@ import {
 import { useState } from "react";
 
 function CardWithModal() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -495,23 +487,21 @@ function CardWithModal() {
           <CardTitle>Event Card</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Event description goes here</p>
+          <p>Event description</p>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => setIsOpen(true)}>View Details</Button>
+          <Button onClick={() => setOpen(true)}>View Details</Button>
         </CardFooter>
       </Card>
 
-      <Modal.Root open={isOpen} onOpenChange={setIsOpen}>
+      <Modal.Root open={open} onOpenChange={setOpen}>
         <Modal.Content>
           <Modal.Header>
             <Modal.Title>Event Details</Modal.Title>
           </Modal.Header>
-          <div className="py-4">
-            <p>Detailed event information</p>
-          </div>
+          <div>Detailed event information</div>
           <Modal.Footer>
-            <Button onClick={() => setIsOpen(false)}>Close</Button>
+            <Button onClick={() => setOpen(false)}>Close</Button>
           </Modal.Footer>
           <Modal.Close />
         </Modal.Content>
@@ -521,522 +511,29 @@ function CardWithModal() {
 }
 ```
 
-### Список событий с скелетонами
+---
 
-```tsx
-import { EventCard, Section, Grid } from "@tenerife.music/ui";
-import { useState, useEffect } from "react";
+## Token-Driven Styling
 
-function EventList() {
-  const [loading, setLoading] = useState(true);
-  const [events, setEvents] = useState([]);
+All components use token-driven styling. Visual properties are controlled through token unions that map to semantic design tokens:
 
-  useEffect(() => {
-    // Загрузка данных
-    setTimeout(() => {
-      setEvents([
-        {
-          title: "Event 1",
-          date: "July 15, 2024 at 7:00 PM",
-          price: "€25",
-          getTicketsLabel: "Get Tickets",
-        },
-        {
-          title: "Event 2",
-          date: "July 20, 2024 at 8:00 PM",
-          price: "€30",
-          getTicketsLabel: "Get Tickets",
-        },
-      ]);
-      setLoading(false);
-    }, 2000);
-  }, []);
+- **Spacing**: `"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | ...` → Maps to spacing tokens
+- **Colors**: Semantic color tokens (`bg-primary`, `text-primary-foreground`)
+- **Sizes**: Token unions that map to typography or spacing tokens
+- **Variants**: CVA variants that use token unions
 
-  return (
-    <Section>
-      <h2 className="mb-8 text-3xl font-bold">Events</h2>
-      <Grid cols={1} md={2} lg={3} gap={6}>
-        {loading ? (
-          <>
-            <Skeleton className="h-64 w-full" />
-            <Skeleton className="h-64 w-full" />
-            <Skeleton className="h-64 w-full" />
-          </>
-        ) : (
-          events.map((event, index) => (
-            <EventCard
-              key={index}
-              title={event.title}
-              date={event.date}
-              price={event.price}
-              featured={index === 0}
-              showImage={true}
-              getTicketsLabel={event.getTicketsLabel}
-            />
-          ))
-        )}
-      </Grid>
-    </Section>
-  );
-}
-```
+No hardcoded values. Everything through tokens.
 
 ---
 
-## Полный пример страницы
+## Next Steps
 
-```tsx
-import {
-  ThemeProvider,
-  Section,
-  Grid,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Button,
-  Input,
-  Label,
-} from "@tenerife.music/ui";
-
-function ExamplePage() {
-  return (
-    <ThemeProvider defaultMode="night" enableSystem={true}>
-      <Section>
-          <h1 className="mb-8 text-5xl font-bold">Welcome to Tenerife UI</h1>
-
-          <Grid cols={3} gap={6}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Feature 1</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Feature description</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Feature 2</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Feature description</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Feature 3</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Feature description</p>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Section padding="lg" background="muted" className="mt-12">
-            <h2 className="mb-4 text-3xl font-bold">Contact Us</h2>
-            <div className="max-w-md space-y-4">
-              <div>
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Your name" />
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="your@email.com" />
-              </div>
-              <Button>Send Message</Button>
-            </div>
-          </Section>
-        </Section>
-      </Section>
-    </ThemeProvider>
-  );
-}
-```
+- [Usage Guide](./USAGE.md) - Complete usage guide
+- [Tokens Guide](./TOKENS_GUIDE.md) - Working with tokens
+- [Theme Guide](./THEME_GUIDE.md) - Theme setup
+- [Architecture Lock](../architecture/FINAL_FOUNDATION_LOCK.md) - Foundation architecture
 
 ---
 
-## Premium Layout Sections (Премиум секции макета)
-
-> **Примечание:** Компоненты `HeroSection`, `FeatureSection` и `CTASection` существуют в кодовой базе, но в настоящее время не экспортируются из основного пакета `@tenerife.music/ui`. Они могут быть доступны в будущих версиях или через другие entry points.
-
-### HeroSection (Герой-секция)
-
-> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
-
-Герой-секция для главных заголовков страниц с поддержкой различных вариантов макета.
-
-#### Базовое использование
-
-```tsx
-import { HeroSection, Button } from "@tenerife.music/ui";
-
-function HeroExample() {
-  return (
-    <HeroSection
-      title="Добро пожаловать в Tenerife UI"
-      description="Современная библиотека компонентов для создания красивых интерфейсов"
-      actions={
-        <>
-          <Button variant="primary">Начать</Button>
-          <Button variant="outline">Узнать больше</Button>
-        </>
-      }
-    />
-  );
-}
-```
-
-#### Варианты макета
-
-```tsx
-import { HeroSection, Button } from "@tenerife.music/ui";
-
-function HeroVariants() {
-  return (
-    <>
-      {/* Полная ширина (по умолчанию) */}
-      <HeroSection
-        variant="full-width"
-        title="Заголовок"
-        description="Описание"
-        actions={<Button>Действие</Button>}
-      />
-
-      {/* Разделенный макет */}
-      <HeroSection
-        variant="split"
-        title="Заголовок"
-        description="Описание"
-        actions={<Button>Действие</Button>}
-        media={<img src="/hero.jpg" alt="Hero" />}
-      />
-    </>
-  );
-}
-```
-
-#### Варианты фона
-
-```tsx
-import { HeroSection } from "@tenerife.music/ui";
-
-function HeroBackgrounds() {
-  return (
-    <>
-      <HeroSection title="По умолчанию" background="default" />
-      <HeroSection title="Приглушенный" background="muted" />
-      <HeroSection title="Карточка" background="card" />
-    </>
-  );
-}
-```
-
-#### С медиа-контентом
-
-```tsx
-import { HeroSection, Button } from "@tenerife.music/ui";
-
-function HeroWithMedia() {
-  return (
-    <HeroSection
-      variant="split"
-      title="Создавайте удивительные интерфейсы"
-      description="Используйте наши компоненты для быстрой разработки"
-      actions={<Button variant="primary">Начать</Button>}
-      media={
-        <div className="flex aspect-video items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
-          <span className="text-4xl">🎨</span>
-        </div>
-      }
-    />
-  );
-}
-```
-
-**Props:**
-
-- `variant`: `"full-width" | "split"` - Вариант макета
-- `title`: `React.ReactNode` - Заголовок
-- `description`: `React.ReactNode` - Описание (опционально)
-- `actions`: `React.ReactNode` - Кнопки действий (опционально)
-- `media`: `React.ReactNode` - Медиа-контент (опционально)
-- `background`: `"default" | "muted" | "card"` - Вариант фона
-- `className`: `string` - Дополнительные CSS классы
-
----
-
-### FeatureSection (Секция функций)
-
-> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
-
-Секция для отображения функций в адаптивной сетке.
-
-#### Базовое использование
-
-```tsx
-import { FeatureSection } from "@tenerife.music/ui";
-
-function FeatureExample() {
-  const features = [
-    {
-      icon: "🚀",
-      title: "Быстрая производительность",
-      description: "Оптимизированные компоненты для скорости",
-    },
-    {
-      icon: "🎨",
-      title: "Красивый дизайн",
-      description: "Современные и чистые интерфейсы",
-    },
-    {
-      icon: "♿",
-      title: "Доступность",
-      description: "Соответствие стандартам WCAG AA",
-    },
-  ];
-
-  return (
-    <FeatureSection
-      title="Функции"
-      description="Все что нужно для создания современных приложений"
-      features={features}
-      columns={3}
-    />
-  );
-}
-```
-
-#### Различные конфигурации колонок
-
-```tsx
-import { FeatureSection } from "@tenerife.music/ui";
-
-function FeatureColumns() {
-  const features = [
-    { icon: "⭐", title: "Функция 1", description: "Описание" },
-    { icon: "⭐", title: "Функция 2", description: "Описание" },
-    { icon: "⭐", title: "Функция 3", description: "Описание" },
-    { icon: "⭐", title: "Функция 4", description: "Описание" },
-  ];
-
-  return (
-    <>
-      {/* 1 колонка */}
-      <FeatureSection features={features} columns={1} />
-
-      {/* 2 колонки */}
-      <FeatureSection features={features} columns={2} />
-
-      {/* 3 колонки (по умолчанию) */}
-      <FeatureSection features={features} columns={3} />
-
-      {/* 4 колонки */}
-      <FeatureSection features={features} columns={4} />
-    </>
-  );
-}
-```
-
-#### С кастомными иконками
-
-```tsx
-import { FeatureSection } from "@tenerife.music/ui";
-import { Zap, Shield, Code } from "lucide-react";
-
-function FeatureWithIcons() {
-  const features = [
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "Молниеносная скорость",
-      description: "Оптимизировано для производительности",
-    },
-    {
-      icon: <Shield className="h-6 w-6" />,
-      title: "Безопасность",
-      description: "Построено с учетом лучших практик безопасности",
-    },
-    {
-      icon: <Code className="h-6 w-6" />,
-      title: "TypeScript",
-      description: "Полная поддержка TypeScript",
-    },
-  ];
-
-  return <FeatureSection features={features} />;
-}
-```
-
-**Props:**
-
-- `features`: `FeatureItem[]` - Массив функций
-  - `icon`: `React.ReactNode` - Иконка
-  - `title`: `string` - Заголовок
-  - `description`: `string` - Описание
-- `title`: `string` - Заголовок секции (опционально)
-- `description`: `string` - Описание секции (опционально)
-- `columns`: `1 | 2 | 3 | 4` - Количество колонок (по умолчанию 3)
-- `className`: `string` - Дополнительные CSS классы
-
----
-
-### CTASection (Секция призыва к действию)
-
-> ⚠️ **Внимание:** Этот компонент не экспортируется из `@tenerife.music/ui` в текущей версии.
-
-Секция для призыва к действию с гибкими кнопками действий.
-
-#### Базовое использование
-
-```tsx
-import { CTASection } from "@tenerife.music/ui";
-
-function CTAExample() {
-  return (
-    <CTASection
-      headline="Готовы начать?"
-      description="Присоединяйтесь к тысячам разработчиков"
-      primaryAction={{
-        label: "Начать",
-        onClick: () => console.log("Начать"),
-      }}
-      secondaryAction={{
-        label: "Узнать больше",
-        onClick: () => console.log("Узнать больше"),
-      }}
-    />
-  );
-}
-```
-
-#### Варианты макета
-
-```tsx
-import { CTASection } from "@tenerife.music/ui";
-
-function CTALayouts() {
-  return (
-    <>
-      {/* Центрированный (по умолчанию) */}
-      <CTASection
-        layout="centered"
-        headline="Центрированный CTA"
-        primaryAction={{ label: "Действие", onClick: () => {} }}
-      />
-
-      {/* Разделенный */}
-      <CTASection
-        layout="split"
-        headline="Разделенный CTA"
-        description="Контент слева, действия справа"
-        primaryAction={{ label: "Действие", onClick: () => {} }}
-      />
-    </>
-  );
-}
-```
-
-#### С ссылками
-
-```tsx
-import { CTASection } from "@tenerife.music/ui";
-
-function CTAWithLinks() {
-  return (
-    <CTASection
-      headline="Изучите наши компоненты"
-      description="Просмотрите библиотеку компонентов"
-      primaryAction={{
-        label: "Просмотреть компоненты",
-        href: "/components",
-        variant: "primary",
-      }}
-      secondaryAction={{
-        label: "Читать документацию",
-        href: "/docs",
-        variant: "outline",
-      }}
-    />
-  );
-}
-```
-
-#### Различные варианты кнопок
-
-```tsx
-import { CTASection } from "@tenerife.music/ui";
-
-function CTAVariants() {
-  return (
-    <CTASection
-      headline="Выберите свой стиль"
-      description="Настройте варианты кнопок под ваш бренд"
-      primaryAction={{
-        label: "Основное действие",
-        onClick: () => {},
-        variant: "primary",
-      }}
-      secondaryAction={{
-        label: "Акцентное действие",
-        onClick: () => {},
-        variant: "accent",
-      }}
-    />
-  );
-}
-```
-
-#### Только основное действие
-
-```tsx
-import { CTASection } from "@tenerife.music/ui";
-
-function CTAPrimaryOnly() {
-  return (
-    <CTASection
-      headline="Готовы начать?"
-      description="Начните создавать удивительные приложения сегодня"
-      primaryAction={{
-        label: "Начать",
-        onClick: () => {},
-      }}
-    />
-  );
-}
-```
-
-**Props:**
-
-- `headline`: `React.ReactNode` - Заголовок
-- `description`: `React.ReactNode` - Описание (опционально)
-- `primaryAction`: `object` - Основное действие (опционально)
-  - `label`: `string` - Текст кнопки
-  - `onClick`: `() => void` - Обработчик клика (если используется кнопка)
-  - `href`: `string` - Ссылка (если используется ссылка)
-  - `variant`: `ButtonProps["variant"]` - Вариант кнопки
-- `secondaryAction`: `object` - Вторичное действие (опционально)
-  - Те же свойства, что и `primaryAction`
-- `layout`: `"centered" | "split"` - Вариант макета
-- `className`: `string` - Дополнительные CSS классы
-
----
-
-## Следующие шаги
-
-- [Руководство по использованию](./USAGE.md) - Полное руководство по использованию
-- [Руководство по токенам](./TOKENS_GUIDE.md) - Работа с токенами
-- [Руководство по темам](./THEME_GUIDE.md) - Настройка тем
-- [Typography Guide](./TYPOGRAPHY_GUIDE.md) - Компоненты типографики
-- [Icon Guide](./ICON_GUIDE.md) - Система иконок
-- [Menu System Guide](./MENU_SYSTEM_GUIDE.md) - Система меню
-- [NotificationCenter Guide](./NOTIFICATION_CENTER_GUIDE.md) - Система уведомлений
-- [DataList Guide](./DATALIST_GUIDE.md) - Компонент DataList
-- [Layout Primitives Guide](./LAYOUT_PRIMITIVES_GUIDE.md) - Layout компоненты
-- [Navigation Components Guide](./NAVIGATION_COMPONENTS_GUIDE.md) - Навигационные компоненты
-- [Field Guide](./FIELD_GUIDE.md) - Компонент Field для форм
-
----
-
-**Версия документа:** 1.1  
-**Последнее обновление:** 2025-12-11
+**Document Version:** 2.0  
+**Last Updated:** 2025-12-12

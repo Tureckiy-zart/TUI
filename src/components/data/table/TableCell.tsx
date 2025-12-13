@@ -9,7 +9,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { DATA_TOKENS } from "@/tokens/components/data";
+import { TABLE_TOKENS } from "@/tokens/components/table";
 
 import type { TableCellProps } from "./Table.types";
 
@@ -20,9 +20,9 @@ export type { TableCellProps };
  */
 const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
   ({ align = "left", size = "md", className, ...props }, ref) => {
-    const paddingClass = DATA_TOKENS.table.padding.cell[size];
-    const typographyClass = DATA_TOKENS.table.typography.cell.fontSize;
-    const fontWeightClass = DATA_TOKENS.table.typography.cell.fontWeight;
+    const paddingClass = TABLE_TOKENS.padding.cell[size];
+    const typographyClass = TABLE_TOKENS.typography.cell.fontSize;
+    const fontWeightClass = TABLE_TOKENS.typography.cell.fontWeight;
 
     const alignmentClasses = {
       left: "text-left",

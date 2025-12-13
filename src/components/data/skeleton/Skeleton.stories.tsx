@@ -11,7 +11,7 @@ const meta: Meta<typeof Skeleton> = {
     docs: {
       description: {
         component:
-          "Token-driven skeleton loading component with multiple variants. Uses DATA_TOKENS for all sizing and styling.",
+          "Token-driven skeleton loading component with multiple variants. Uses DATA_TOKENS.skeleton for all sizing and styling.",
       },
     },
   },

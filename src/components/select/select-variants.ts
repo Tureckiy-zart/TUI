@@ -2,8 +2,8 @@
 
 import { cva } from "class-variance-authority";
 
-import { INPUT_TOKENS } from "@/tokens/components/input";
 import { MOTION_TOKENS } from "@/tokens/components/motion";
+import { SELECT_TOKENS } from "@/tokens/components/select";
 import { TEXT_TOKENS } from "@/tokens/components/text";
 
 /**
@@ -20,25 +20,25 @@ import { TEXT_TOKENS } from "@/tokens/components/text";
  * Button element that opens/closes the dropdown
  */
 export const selectTriggerVariants = cva(
-  `flex ${INPUT_TOKENS.width.full} items-center justify-between ${INPUT_TOKENS.shadow} ${MOTION_TOKENS.transition.colors} disabled:cursor-not-allowed focus-visible:outline-none`,
+  `flex ${SELECT_TOKENS.width.full} items-center justify-between ${MOTION_TOKENS.transition.colors} disabled:cursor-not-allowed focus-visible:outline-none`,
   {
     variants: {
       variant: {
-        primary: `${INPUT_TOKENS.variant.primary.border} ${INPUT_TOKENS.variant.primary.background} ${INPUT_TOKENS.variant.primary.text} ${INPUT_TOKENS.variant.primary.focus}`,
-        secondary: `${INPUT_TOKENS.variant.secondary.border} ${INPUT_TOKENS.variant.secondary.background} ${INPUT_TOKENS.variant.secondary.text} ${INPUT_TOKENS.variant.secondary.focus}`,
-        outline: `${INPUT_TOKENS.variant.outline.border} ${INPUT_TOKENS.variant.outline.background} ${INPUT_TOKENS.variant.outline.text} ${INPUT_TOKENS.variant.outline.focus}`,
-        ghost: `${INPUT_TOKENS.variant.ghost.border} ${INPUT_TOKENS.variant.ghost.background} ${INPUT_TOKENS.variant.ghost.text} ${INPUT_TOKENS.variant.ghost.focus}`,
+        primary: `${SELECT_TOKENS.variant.primary.border} ${SELECT_TOKENS.variant.primary.background} ${SELECT_TOKENS.variant.primary.text} ${SELECT_TOKENS.variant.primary.focus}`,
+        secondary: `${SELECT_TOKENS.variant.secondary.border} ${SELECT_TOKENS.variant.secondary.background} ${SELECT_TOKENS.variant.secondary.text} ${SELECT_TOKENS.variant.secondary.focus}`,
+        outline: `${SELECT_TOKENS.variant.outline.border} ${SELECT_TOKENS.variant.outline.background} ${SELECT_TOKENS.variant.outline.text} ${SELECT_TOKENS.variant.outline.focus}`,
+        ghost: `${SELECT_TOKENS.variant.ghost.border} ${SELECT_TOKENS.variant.ghost.background} ${SELECT_TOKENS.variant.ghost.text} ${SELECT_TOKENS.variant.ghost.focus}`,
       },
       size: {
-        xs: `${INPUT_TOKENS.size.xs.height} ${INPUT_TOKENS.size.xs.padding.horizontal} ${INPUT_TOKENS.size.xs.padding.vertical} ${INPUT_TOKENS.size.xs.radius} ${INPUT_TOKENS.size.xs.fontSize}`,
-        sm: `${INPUT_TOKENS.size.sm.height} ${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.radius} ${INPUT_TOKENS.size.sm.fontSize}`,
-        md: `${INPUT_TOKENS.size.md.height} ${INPUT_TOKENS.size.md.padding.horizontal} ${INPUT_TOKENS.size.md.padding.vertical} ${INPUT_TOKENS.size.md.radius} ${INPUT_TOKENS.size.md.fontSize} ${INPUT_TOKENS.size.md.fontSizeResponsive}`,
-        lg: `${INPUT_TOKENS.size.lg.height} ${INPUT_TOKENS.size.lg.padding.horizontal} ${INPUT_TOKENS.size.lg.padding.vertical} ${INPUT_TOKENS.size.lg.radius} ${INPUT_TOKENS.size.lg.fontSize}`,
+        xs: `${SELECT_TOKENS.trigger.height.xs} ${SELECT_TOKENS.trigger.padding.horizontal.xs} ${SELECT_TOKENS.trigger.padding.vertical.xs} ${SELECT_TOKENS.trigger.radius.xs} ${SELECT_TOKENS.trigger.fontSize.xs}`,
+        sm: `${SELECT_TOKENS.trigger.height.sm} ${SELECT_TOKENS.trigger.padding.horizontal.sm} ${SELECT_TOKENS.trigger.padding.vertical.sm} ${SELECT_TOKENS.trigger.radius.sm} ${SELECT_TOKENS.trigger.fontSize.sm}`,
+        md: `${SELECT_TOKENS.trigger.height.md} ${SELECT_TOKENS.trigger.padding.horizontal.md} ${SELECT_TOKENS.trigger.padding.vertical.md} ${SELECT_TOKENS.trigger.radius.md} ${SELECT_TOKENS.trigger.fontSize.md}`,
+        lg: `${SELECT_TOKENS.trigger.height.lg} ${SELECT_TOKENS.trigger.padding.horizontal.lg} ${SELECT_TOKENS.trigger.padding.vertical.lg} ${SELECT_TOKENS.trigger.radius.lg} ${SELECT_TOKENS.trigger.fontSize.lg}`,
       },
       state: {
-        open: INPUT_TOKENS.state.border.focus,
-        closed: "",
-        disabled: `${INPUT_TOKENS.state.border.disabled} ${INPUT_TOKENS.state.background.disabled} ${INPUT_TOKENS.state.text.disabled}`,
+        open: SELECT_TOKENS.state.open.focus,
+        closed: SELECT_TOKENS.state.closed.border,
+        disabled: `${SELECT_TOKENS.state.disabled.border} ${SELECT_TOKENS.state.disabled.background} ${SELECT_TOKENS.state.disabled.text}`,
       },
     },
     defaultVariants: {
@@ -54,7 +54,7 @@ export const selectTriggerVariants = cva(
  * Container for the dropdown options
  */
 export const selectListboxVariants = cva(
-  `relative z-50 min-w-[8rem] overflow-hidden ${INPUT_TOKENS.selectListbox.radius} ${INPUT_TOKENS.selectListbox.border} ${INPUT_TOKENS.selectListbox.background} ${INPUT_TOKENS.selectListbox.text} ${INPUT_TOKENS.selectListbox.shadow} ${MOTION_TOKENS.transition.colors}`,
+  `relative z-50 min-w-[8rem] overflow-hidden ${SELECT_TOKENS.content.radius.md} ${SELECT_TOKENS.content.border} ${SELECT_TOKENS.content.background} ${SELECT_TOKENS.content.text} ${SELECT_TOKENS.content.shadow} ${MOTION_TOKENS.transition.colors}`,
   {
     variants: {
       size: {
@@ -75,19 +75,19 @@ export const selectListboxVariants = cva(
  * Individual option item in the listbox
  */
 export const selectOptionVariants = cva(
-  `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors} ${INPUT_TOKENS.selectOption.focus.background} ${INPUT_TOKENS.selectOption.focus.text} data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+  `relative flex ${SELECT_TOKENS.width.full} cursor-default select-none items-center outline-none ${MOTION_TOKENS.transition.colors} ${SELECT_TOKENS.item.focus.background} ${SELECT_TOKENS.item.focus.text} ${SELECT_TOKENS.item.disabled.pointerEvents} data-[disabled]:opacity-50`,
   {
     variants: {
       size: {
-        xs: `${INPUT_TOKENS.size.xs.padding.horizontal} ${INPUT_TOKENS.size.xs.padding.vertical} ${INPUT_TOKENS.size.xs.fontSize}`,
-        sm: `${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.fontSize}`,
-        md: `${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.fontSize}`,
-        lg: `${INPUT_TOKENS.size.md.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.md.fontSize}`,
+        xs: `${SELECT_TOKENS.item.padding.horizontal.xs} ${SELECT_TOKENS.item.padding.vertical.xs} ${SELECT_TOKENS.item.fontSize.xs}`,
+        sm: `${SELECT_TOKENS.item.padding.horizontal.sm} ${SELECT_TOKENS.item.padding.vertical.sm} ${SELECT_TOKENS.item.fontSize.sm}`,
+        md: `${SELECT_TOKENS.item.padding.horizontal.md} ${SELECT_TOKENS.item.padding.vertical.md} ${SELECT_TOKENS.item.fontSize.md}`,
+        lg: `${SELECT_TOKENS.item.padding.horizontal.lg} ${SELECT_TOKENS.item.padding.vertical.lg} ${SELECT_TOKENS.item.fontSize.lg}`,
       },
       state: {
-        selected: `${INPUT_TOKENS.selectOption.selected.background} ${INPUT_TOKENS.selectOption.selected.text}`,
+        selected: `${SELECT_TOKENS.item.selected.background} ${SELECT_TOKENS.item.selected.text}`,
         default: "",
-        disabled: "pointer-events-none opacity-50",
+        disabled: `${SELECT_TOKENS.item.disabled.pointerEvents} ${SELECT_TOKENS.item.disabled.opacity}`,
       },
     },
     defaultVariants: {
