@@ -12,7 +12,7 @@ const meta: Meta<typeof PromoCard> = {
     docs: {
       description: {
         component:
-          "PromoCard is a domain-specific card component for displaying promotional content. Uses CardBase for layout and DOMAIN_TOKENS for all styling. CTA button uses BUTTON_TOKENS. Supports size variants (default, compact) and style variants (default, featured).",
+          "PromoCard is a domain-specific card component for displaying promotional content. Uses CardBase for layout and DOMAIN_TOKENS for all styling, including CTA button tokens. Supports size variants (default, compact) and style variants (default, featured).",
       },
     },
   },

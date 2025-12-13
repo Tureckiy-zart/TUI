@@ -1,8 +1,11 @@
 # TUI Token System - Canonical Documentation
 
 **Date:** 2025-12-13  
-**Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
+**Status:** 🔒 **LOCKED** - IMMUTABLE  
+**Lock Date:** 2025-12-13  
 **Authority:** This document defines the canonical rules and structure for the TUI design token system.
+
+> ⚠️ **SYSTEM LOCKED**: This token system is **FROZEN** and **IMMUTABLE**. Any modifications require an explicit UNLOCK + AUDIT workflow. See [Lock Status](#lock-status) section below.
 
 ---
 
@@ -420,9 +423,80 @@ Consider implementing:
 
 ---
 
+## 🔒 Lock Status
+
+### System Lock Information
+
+**Lock Date:** 2025-12-13  
+**Lock Status:** ✅ **LOCKED** - Token system is **FROZEN** and **IMMUTABLE**  
+**Final Audit:** [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+### What Is Locked
+
+The following aspects of the token system are **FROZEN** and **MUST NOT** be modified:
+
+1. **All Token Domains** - No token domains may be added, removed, merged, or split
+2. **Domain Ownership Rules** - Component → token domain mappings are immutable
+3. **Shared vs Component-Specific Separation** - The distinction between shared and component-specific domains is fixed
+4. **Token Naming Conventions** - All naming patterns and conventions are locked
+5. **Duplication Rules** - The semantic over DRY principle is immutable
+
+### What Is Allowed After Lock
+
+The following actions are **PERMITTED** after the lock:
+
+- ✅ **Consumption of existing tokens** - Components may continue to use existing tokens
+- ✅ **Creation of new component token domains** - ONLY if:
+  - The component is new (not existing)
+  - The creation is explicitly approved via proper workflow
+  - No existing domains are modified
+- ✅ **Documentation updates** - Clarifications and documentation improvements (no semantic changes)
+
+### What Is Forbidden After Lock
+
+The following actions are **PROHIBITED** after the lock:
+
+- ❌ **Modifying token values** - No changes to existing token values
+- ❌ **Adding or removing token domains** - Domain structure is frozen
+- ❌ **Merging or splitting existing domains** - Domain boundaries are immutable
+- ❌ **Reinterpreting token semantics** - Token meanings are locked
+- ❌ **Cross-domain token dependencies** - Ownership rules cannot change
+- ❌ **Changes to shared vs component-specific classification** - The distinction is locked
+
+### Unlock Procedure
+
+If token system modifications are required, the following procedure **MUST** be followed:
+
+1. **Create Unlock Task** - Define explicit requirements and justification
+2. **Perform Full Audit** - Complete audit of all token domains and component usage
+3. **Get Approval** - Receive explicit approval for unlock and modifications
+4. **Apply Changes** - Make approved changes with full verification
+5. **Re-verify** - Complete verification to ensure no violations introduced
+6. **Re-lock** - Re-apply lock with updated documentation
+
+**⚠️ CRITICAL**: This lock applies to **BOTH humans and AI agents**. Any request to modify locked aspects of the token system **MUST** be refused with reference to this lock and the required unlock procedure.
+
+### Lock Verification
+
+- ✅ **Final Audit**: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)
+  - Final Verdict: **FINAL OK**
+  - Violations Found: **0**
+  - Date: 2025-12-13
+- ✅ **All Token Domains**: Verified and isolated
+- ✅ **Component Ownership**: All mappings verified
+- ✅ **Shared Domains**: All validated and correctly classified
+
+---
+
 ## Changelog
 
-### 2025-12-13
+### 2025-12-13 - System Locked
+- 🔒 **TOKEN SYSTEM LOCKED** - System frozen and immutable
+- Final verification completed with 0 violations
+- Lock date: 2025-12-13
+- Reference: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)
+
+### 2025-12-13 - Initial Documentation
 - Initial canonical documentation created
 - Documented token domain rules and ownership
 - Defined violation patterns and refactoring guidelines
@@ -430,4 +504,5 @@ Consider implementing:
 ---
 
 **Last Updated:** 2025-12-13  
+**Lock Status:** 🔒 **LOCKED**  
 **Maintained By:** TUI Design System Team

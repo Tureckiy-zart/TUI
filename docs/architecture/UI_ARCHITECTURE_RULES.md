@@ -1,10 +1,13 @@
 # UI Architecture Rules: Radix UI and Token Union Canon
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-12  
+**Last Updated:** 2025-12-13  
 **Status:** ✅ ACTIVE  
 **Layer:** ARCHITECTURE / GOVERNANCE  
 **Priority:** CRITICAL
+
+> ⚠️ **TOKEN SYSTEM LOCKED**: The token system is **LOCKED** and **IMMUTABLE** as of 2025-12-13. All token domains, ownership rules, and semantic classifications are frozen. See [Token System Lock](#-token-system-lock-status) section below.
 
 ---
 
@@ -181,6 +184,8 @@ export interface PopoverContentProps {
 **Rule:** All public visual and layout props **MUST** use Token Union types, optionally wrapped in `Responsive<T>`.
 
 **Mandatory Pattern:** `prop?: TokenUnion | Responsive<TokenUnion>`
+
+**⚠️ IMPORTANT:** The token system is **LOCKED** (see [Token System Lock Status](#-token-system-lock-status) section). All token domains are immutable. Token modifications require explicit unlock procedure.
 
 ### Token Union Types
 
@@ -722,8 +727,10 @@ Before marking a component as complete, verify:
 - [ ] No Radix types appear in public Props interfaces
 - [ ] IntelliSense works for all visual props
 - [ ] TypeScript compilation passes with no errors
-- [ ] All token unions are defined in `src/tokens/types/index.ts`
+- [ ] All token unions use existing locked tokens from `src/tokens/types/index.ts`
 - [ ] Component follows established patterns from examples
+- [ ] No new token types created (token system is locked)
+- [ ] Component uses only existing token domains (no cross-domain violations)
 
 ---
 
@@ -737,6 +744,9 @@ Before marking a component as complete, verify:
 - ❌ **NEVER** weaken the design system for convenience
 - ❌ **NEVER** skip tokenization for "simple" props
 - ❌ **NEVER** use `any` type for visual props
+- ❌ **NEVER** modify token values or domains (token system is locked)
+- ❌ **NEVER** create new token union types without unlock procedure
+- ❌ **NEVER** import tokens from another component's domain (cross-domain violation)
 
 ---
 
@@ -746,10 +756,12 @@ Before marking a component as complete, verify:
 - ✅ **ALWAYS** use `Responsive<T>` for responsive props
 - ✅ **ALWAYS** use Radix internally for behavior only
 - ✅ **ALWAYS** convert tokens to Radix-compatible values
-- ✅ **ALWAYS** define token unions in `src/tokens/types/index.ts`
+- ✅ **ALWAYS** use existing locked token unions from `src/tokens/types/index.ts`
 - ✅ **ALWAYS** validate IntelliSense works for visual props
 - ✅ **ALWAYS** export only Tenerife UI wrappers
 - ✅ **ALWAYS** prefer breaking changes over weakening the design system
+- ✅ **ALWAYS** respect token system lock (use existing tokens only)
+- ✅ **ALWAYS** follow token domain ownership rules (no cross-component token imports)
 
 ---
 
@@ -764,20 +776,75 @@ These rules are successfully implemented when:
 - ✅ TypeScript compilation passes with no errors
 - ✅ Future components automatically follow these patterns
 - ✅ Breaking changes are preferred over weakening the design system
+- ✅ Token system lock is respected (existing tokens only)
+- ✅ No cross-component token domain violations
+- ✅ All components use locked token domains correctly
+
+---
+
+## 🔒 Token System Lock Status
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2025-12-13  
+**Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
+**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+The **Token System** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
+
+### What Is Locked in Token System
+
+1. **All Token Domains** - No token domains may be added, removed, merged, or split
+2. **Domain Ownership Rules** - Component → token domain mappings are immutable
+3. **Shared vs Component-Specific Separation** - The distinction is fixed
+4. **Token Naming Conventions** - All naming patterns are locked
+5. **Duplication Rules** - Semantic over DRY principle is immutable
+
+### Impact on Token Union Rules
+
+This lock **strengthens** the Token Union rules defined in this document:
+
+- ✅ **Consumption of existing tokens** - Components MUST use existing token unions
+- ✅ **Token union types are stable** - All token union types in `src/tokens/types/index.ts` are locked
+- ❌ **No new token types** - New token union types cannot be added without unlock procedure
+- ❌ **No token value changes** - Token values cannot be modified
+- ❌ **No token domain changes** - Token domain structure is immutable
+
+### Token System Unlock Procedure
+
+Any token system modifications require:
+1. Explicit unlock task with justification
+2. Full audit of all token domains
+3. Explicit approval for changes
+4. Re-verification after changes
+5. Re-lock with updated documentation
+
+**Note:** Token system lock applies to **BOTH humans and AI agents**. Any request to modify locked token aspects **MUST** be refused with reference to the token lock.
+
+**For component development:** When creating new components, use existing token unions only. If a new token type is needed, this requires token system unlock procedure first.
 
 ---
 
 ## 📖 Additional Resources
 
-- **Token Types:** `src/tokens/types/index.ts`
+- **Token Types:** `src/tokens/types/index.ts` (🔒 **LOCKED**)
+- **Token System:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md) (🔒 **LOCKED**)
 - **Responsive Types:** `src/types/responsive.ts`
 - **Responsive Utilities:** `src/lib/responsive-props.ts`
+- **Foundation Lock:** [Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md) (🔒 **LOCKED**)
+- **Architecture Lock:** [Architecture Lock](./TUI_ARCHITECTURE_LOCK.md) (🔒 **LOCKED**)
 - **Component Rules:** `docs/architecture/CURSOR_UI_RULES.md`
 - **Linting Rules:** `docs/architecture/LINTING_RULES.md`
 
 ---
 
 ## 🔄 Version History
+
+- **v1.1** (2025-12-13): Token System Lock Integration
+  - Added Token System Lock Status section
+  - Documented token system immutability and its impact on Token Union rules
+  - Added token system unlock procedure documentation
+  - Updated Additional Resources with locked documents references
+  - Added warning about token system lock at document top
 
 - **v1.0** (2025-12-12): Initial architectural rules definition
   - Established Radix UI boundaries
@@ -788,6 +855,6 @@ These rules are successfully implemented when:
 ---
 
 **Status:** ✅ ACTIVE  
-**Version:** 1.0  
-**Last Updated:** 2025-12-12  
+**Version:** 1.1  
+**Last Updated:** 2025-12-13  
 **Priority:** CRITICAL

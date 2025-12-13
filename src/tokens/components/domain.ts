@@ -429,6 +429,88 @@ export const DOMAIN_TOKENS = {
       height: "h-6", // References spacing[6] (1.5rem / 24px) via Tailwind
     } as const,
   } as const,
+
+  /**
+   * CTA (Call-to-Action) button tokens for domain card components
+   * Provides PromoCard-specific CTA button styling tokens
+   * These tokens are semantically owned by domain card components, not by the Button component
+   * References foundation tokens (spacing, typography, radius, shadows, motion) for consistency
+   */
+  cta: {
+    /**
+     * CTA button styling tokens
+     * Used by PromoCard and other domain card components for CTA button elements
+     */
+    button: {
+      /**
+       * Button heights by size
+       * Maps to Tailwind height utilities: h-8, h-9
+       */
+      height: {
+        sm: "h-8", // 32px (2rem) - compact size
+        md: "h-9", // 36px (2.25rem) - default size
+      } as const,
+
+      /**
+       * Button padding by size
+       * Horizontal and vertical padding values
+       * References semanticSpacing tokens
+       */
+      padding: {
+        horizontal: {
+          sm: "px-sm", // 8px (0.5rem) - maps to semanticSpacing.sm
+          md: "px-md", // 16px (1rem) - maps to semanticSpacing.md
+        },
+        vertical: {
+          sm: "py-xs", // 4px (0.25rem) - maps to semanticSpacing.xs
+        },
+      } as const,
+
+      /**
+       * Border radius for CTA buttons
+       * References borderRadius.md (6px / 0.375rem)
+       * Using Tailwind class "rounded-md" which maps to borderRadius.md
+       */
+      radius: "rounded-md", // References borderRadius.md via Tailwind
+
+      /**
+       * Font sizes by button size
+       * Maps to foundation typography fontSize tokens
+       */
+      fontSize: {
+        sm: "text-xs", // Maps to fontSize.xs[0]
+        md: "text-sm", // Maps to fontSize.sm[0]
+      } as const,
+
+      /**
+       * Shadow tokens for CTA buttons
+       * Maps to foundation elevation shadow tokens
+       */
+      shadow: {
+        primary: "shadow", // Maps to elevationShadows.xs (primary variant uses shadow)
+      } as const,
+
+      /**
+       * Color tokens for CTA button variants
+       * Uses semantic color tokens that map to CSS variables
+       */
+      variant: {
+        primary: {
+          background: "bg-primary", // Primary background using CSS var
+          text: "text-primary-foreground", // Primary text using CSS var
+          hover: "hover:bg-primary/90", // Primary hover using CSS var
+        } as const,
+      } as const,
+
+      /**
+       * Transition tokens for CTA buttons
+       * References MOTION_TOKENS for transitions
+       */
+      transition: {
+        colors: "transition-colors", // Color transition using motion tokens
+      } as const,
+    } as const,
+  } as const,
 } as const;
 
 /**
@@ -444,3 +526,4 @@ export type DomainCardPriceCapacity = typeof DOMAIN_TOKENS.priceCapacity;
 export type DomainCardMotion = typeof DOMAIN_TOKENS.motion;
 export type DomainCardSkeleton = typeof DOMAIN_TOKENS.skeleton;
 export type DomainCardSkeletonContentWidth = typeof DOMAIN_TOKENS.skeleton.content.width;
+export type DomainCardCta = typeof DOMAIN_TOKENS.cta;

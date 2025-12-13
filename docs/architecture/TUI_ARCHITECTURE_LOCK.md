@@ -1,7 +1,8 @@
 # 🔒 Tenerife UI Architecture Lock
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-12  
+**Last Updated:** 2025-12-13  
 **Status:** ✅ LOCKED  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -128,6 +129,11 @@ The following components are **locked** and **immutable**:
    - Extensions can be **created, modified, or deleted** freely
    - Changes to extensions **do not affect** foundation components
    - Extensions are **not part of the stable API**
+
+6. **TOKEN USAGE**
+   - ✅ Extensions may use existing tokens
+   - ✅ Extensions may consume locked token domains
+   - ⚠️ **RESTRICTED:** New token domains require token system unlock procedure
 
 ### Extension Examples
 
@@ -304,7 +310,7 @@ The following components are canonical and **MUST NOT** be recreated, duplicated
 - Fix bugs
 - Improve typing
 - Improve documentation
-- Improve token usage
+- Improve token usage (within existing tokens)
 
 **You MUST NEVER:**
 
@@ -312,6 +318,9 @@ The following components are canonical and **MUST NOT** be recreated, duplicated
 - Suggest alternative implementations
 - Create `Simple*`, `Basic*`, `Legacy*`, `V2*`, or duplicate variants **for foundation components** (Modal, Tabs, Select, ContextMenu, Toast)
 - Reimplement behavior handled by Radix
+- Modify token values or domains (token system is locked)
+- Add or remove token domains
+- Change token ownership rules
 
 **Note on Basic* naming:**
 - ❌ **FORBIDDEN:** `BasicModal`, `BasicTabs`, `BasicSelect` (these duplicate foundation components)
@@ -343,6 +352,17 @@ If new behavior or UX is required:
 
 **Note:** `Basic*` naming is acceptable for internal components within a component family (e.g., `BasicButton` as an internal variant), but never for global foundation components.
 
+### Token System Lock
+
+**Token System is LOCKED and IMMUTABLE.**
+
+If token modifications are needed:
+
+- Token system modifications require explicit **UNLOCK + AUDIT** workflow
+- Reference: `docs/architecture/TUI_TOKEN_SYSTEM.md`
+- Reference: `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md`
+- All token changes require full audit and explicit approval
+
 ### Radix Rule
 
 All behavior-heavy components **MUST** delegate behavior to Radix.
@@ -359,6 +379,24 @@ All behavior-heavy components **MUST** delegate behavior to Radix.
 All visual props **MUST** use token unions.
 
 **String or number-based visual props are forbidden.**
+
+### Token System Lock
+
+**THE TOKEN SYSTEM IS LOCKED AND IMMUTABLE AS PART OF THE FOUNDATION ARCHITECTURE.**
+
+- ✅ **ALLOWED:** Consumption of existing tokens by components
+- ✅ **ALLOWED:** Creation of new component token domains ONLY for new components with explicit approval
+- ❌ **FORBIDDEN:** Modifying token values in any domain
+- ❌ **FORBIDDEN:** Adding or removing token domains
+- ❌ **FORBIDDEN:** Merging or splitting existing domains
+- ❌ **FORBIDDEN:** Reinterpreting token semantics
+- ❌ **FORBIDDEN:** Changing domain ownership rules
+
+**Token System Lock Date:** 2025-12-13  
+**Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
+**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+**Any token system modifications require explicit unlock procedure with full audit.**
 
 ### Storybook Rule
 
@@ -412,6 +450,14 @@ Storybook **MUST** reflect architecture truth:
    - ❌ Placing extensions in `src/components/modal/`
    - ❌ Placing extensions in `src/components/navigation/tabs/`
    - ❌ Placing extensions in foundation component folders
+
+7. **Token System Modifications**
+   - ❌ Modifying token values in any domain
+   - ❌ Adding or removing token domains
+   - ❌ Merging or splitting existing domains
+   - ❌ Reinterpreting token semantics
+   - ❌ Changing domain ownership rules
+   - ❌ Creating new token domains without explicit unlock procedure
 
 ### Forbidden Patterns
 
@@ -561,16 +607,57 @@ The architecture lock fails if:
 
 ---
 
+## 🔒 Token System Lock Status
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2025-12-13  
+**Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
+**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+The **Token System** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
+
+### What Is Locked in Token System
+
+1. **All Token Domains** - No token domains may be added, removed, merged, or split
+2. **Domain Ownership Rules** - Component → token domain mappings are immutable
+3. **Shared vs Component-Specific Separation** - The distinction is fixed
+4. **Token Naming Conventions** - All naming patterns are locked
+5. **Duplication Rules** - Semantic over DRY principle is immutable
+
+### Token System Unlock Procedure
+
+Any token system modifications require:
+1. Explicit unlock task with justification
+2. Full audit of all token domains
+3. Explicit approval for changes
+4. Re-verification after changes
+5. Re-lock with updated documentation
+
+**Note:** Token system lock applies to **BOTH humans and AI agents**. Any request to modify locked token aspects **MUST** be refused with reference to the token lock.
+
+---
+
 ## 📖 Related Documents
 
 - **[Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md)** - 🔒 **Authoritative Foundation lock document** (single source of truth)
+- **[Token System](./TUI_TOKEN_SYSTEM.md)** - 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** - Radix UI and Token Union rules
 - **[Component Guidelines](../structure/COMPONENT_GUIDELINES.md)** - Component development guidelines
 - **[Cursor UI Rules](./CURSOR_UI_RULES.md)** - Cursor AI development rules
+- **[Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)** - Final token domain verification (FINAL VERDICT: OK)
 
 ---
 
 ## 🔄 Version History
+
+- **v1.1** (2025-12-13): Token System Lock Integration
+  - Added Token System Lock Status section
+  - Documented token system immutability as part of Foundation architecture
+  - Updated Token Rule section with lock information
+  - Added token system modifications to Forbidden Actions
+  - Updated Guard Prompt to include token system lock enforcement
+  - Added token system unlock procedure documentation
+  - Updated related documents section with token system references
 
 - **v1.0** (2025-12-12): Initial Architecture Lock
   - Locked foundation components (Modal, Tabs, Select, ContextMenu, Toast)
@@ -585,14 +672,19 @@ The architecture lock fails if:
 
 **After this lock, the UI foundation architecture is considered complete and immutable.**
 
-All future work must occur in the **extension layer**. Foundation components are **read-only** except for bug fixes. New functionality must be built as **extensions** that compose foundation components.
+All future work must occur in the **extension layer**. Foundation components are **read-only** except for bug fixes. The **Token system is locked** and immutable - all token modifications require explicit unlock procedure with full audit.
+
+New functionality must be built as **extensions** that compose foundation components and use existing locked tokens.
 
 **This is a binding architectural contract. Violations are considered architectural breaches.**
+
+**The Foundation architecture phase is closed. The Token system is locked.**
 
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-12  
+**Last Updated:** 2025-12-13  
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable)

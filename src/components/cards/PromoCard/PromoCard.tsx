@@ -33,7 +33,7 @@ import {
  *
  * Domain-specific card component for displaying promotional content.
  * Uses CardBase for layout and DOMAIN_TOKENS for all styling.
- * CTA button uses BUTTON_TOKENS for styling.
+ * CTA button uses DOMAIN_TOKENS.cta.button tokens for styling.
  *
  * @example
  * ```tsx

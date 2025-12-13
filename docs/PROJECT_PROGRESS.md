@@ -33,6 +33,54 @@ The following components are **locked** and **immutable** as part of the UI Foun
 
 **Note:** After this lock, foundation work pauses and future changes happen in extensions only.
 
+---
+
+## 🔒 Token System Lock Status
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2025-12-13  
+**Reference:** [Token System Documentation](./architecture/TUI_TOKEN_SYSTEM.md)  
+**Final Audit:** [Token Domains Final Report](./reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+
+### What Is Locked
+
+The following aspects of the token system are **FROZEN** and **IMMUTABLE**:
+
+1. **All Token Domains** - No token domains may be added, removed, merged, or split
+2. **Domain Ownership Rules** - Component → token domain mappings are immutable
+3. **Shared vs Component-Specific Separation** - The distinction between shared and component-specific domains is fixed
+4. **Token Naming Conventions** - All naming patterns and conventions are locked
+5. **Duplication Rules** - The semantic over DRY principle is immutable
+
+### Locked Token Domains
+
+**Foundation Tokens (7):** COLORS, SPACING, TYPOGRAPHY, RADIUS, SHADOWS, OPACITY, MOTION  
+**Shared Component Tokens (4):** FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS  
+**Component-Specific Tokens (26):** ALERT_TOKENS, ARTIST_TOKENS, BUTTON_TOKENS, CARD_TOKENS, CHECKBOX_TOKENS, CONTEXT_MENU_TOKENS, DATA_TOKENS, DIVIDER_TOKENS, DOMAIN_TOKENS, DROPDOWN_TOKENS, INPUT_TOKENS, MENU_TOKENS, MODAL_TOKENS, NAVIGATION_TOKENS, NOTIFICATION_TOKENS, OVERLAY_TOKENS, POPOVER_TOKENS, RADIO_TOKENS, SECTION_TOKENS, SELECT_TOKENS, SURFACE_TOKENS, SWITCH_TOKENS, TABS_TOKENS, TEXTAREA_TOKENS, TOAST_TOKENS, TOOLTIP_TOKENS
+
+### Token Lock Rules
+
+- ✅ **Consumption of existing tokens** - Components may continue to use existing tokens
+- ✅ **Creation of new component token domains** - ONLY if component is new and explicitly approved
+- ❌ **Modifying token values** - FORBIDDEN
+- ❌ **Adding or removing token domains** - FORBIDDEN
+- ❌ **Merging or splitting existing domains** - FORBIDDEN
+- ❌ **Reinterpreting token semantics** - FORBIDDEN
+- ❌ **Changing domain ownership rules** - FORBIDDEN
+
+### Unlock Procedure
+
+Any token system modifications require:
+1. Explicit unlock task with justification
+2. Full audit of all token domains
+3. Explicit approval for changes
+4. Re-verification after changes
+5. Re-lock with updated documentation
+
+**Note:** This lock applies to **BOTH humans and AI agents**. Any request to modify locked aspects **MUST** be refused with reference to this lock and the required unlock procedure.
+
+---
+
 ## Audit Layer
 
 ### FULL_REVIEW_PIPELINE - Full Code Review, API Audit, Architecture Consistency Validation
@@ -2135,6 +2183,25 @@ _No tasks in progress currently._
 
 ## META / DOCUMENTATION Layer
 
+### TUI_TOKEN_DOMAINS_FINAL_VERIFICATION - Token Domain Final Verification
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Comprehensive verification of all token domains to confirm token ownership rules are respected. Identified and documented 1 violation (PromoCard → BUTTON_TOKENS), which was later resolved in subsequent task.
+- **Scope:**
+  - Scanned all 78 component files importing from `@/tokens/components`
+  - Verified all 26 component-specific token domains
+  - Validated 4 shared token domains
+  - Checked 7 foundation token domains
+- **Initial Findings:**
+  - **1 violation** detected: PromoCard importing BUTTON_TOKENS
+  - All other components verified as compliant
+- **Reports Generated:**
+  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Complete verification report
+- **Next Steps:** PromoCard fix required before system lock
+
+---
+
 ### DOCS_FULL_ARCHITECTURE_ALIGNMENT - Documentation Architecture Alignment
 
 - **Status:** ✅ completed
@@ -2164,6 +2231,98 @@ _No tasks in progress currently._
 - **Next Steps:**
   - Documentation fully aligned with Foundation Lock architecture
   - Consider creating missing files if needed (per user requirements)
+
+---
+
+## Token System Tasks
+
+### TUI_PROMOCARD_TOKEN_FIX - PromoCard Token Domain Violation Fix
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Fixed cross-component token import violation in PromoCard component. Removed `BUTTON_TOKENS` import and moved CTA button styling tokens to `DOMAIN_TOKENS.cta.button` domain.
+- **Issue:**
+  - PromoCard was importing `BUTTON_TOKENS` from Button component domain
+  - This violated token ownership rules (component-specific tokens should not be shared)
+- **Resolution:**
+  - ✅ Added `DOMAIN_TOKENS.cta.button` tokens to `src/tokens/components/domain.ts`
+  - ✅ Updated `PromoCard.variants.ts` to use `DOMAIN_TOKENS.cta.button.*` instead of `BUTTON_TOKENS`
+  - ✅ Removed `BUTTON_TOKENS` import from PromoCard files
+  - ✅ Verified no cross-component token imports remain
+- **Files Modified:**
+  - `src/tokens/components/domain.ts` - Added CTA button tokens
+  - `src/components/cards/PromoCard/PromoCard.variants.ts` - Updated to use DOMAIN_TOKENS
+  - `src/components/cards/PromoCard/PromoCard.tsx` - Updated JSDoc documentation
+- **Reports Generated:**
+  - ✅ `docs/reports/TUI_PROMOCARD_TOKEN_FIX_REPORT.md` - Complete fix report
+- **Verification:**
+  - ✅ No `BUTTON_TOKENS` imports found in PromoCard directory
+  - ✅ PromoCard correctly uses only domain-owned tokens
+  - ✅ Token system integrity maintained
+
+---
+
+### TUI_TOKEN_DOMAINS_REVERIFICATION - Token Domain Re-verification
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Re-verified token domain system after PromoCard fix. Confirmed all violations resolved and token system is compliant.
+- **Verification Steps:**
+  - ✅ Re-scanned all component imports for cross-domain violations
+  - ✅ Verified PromoCard no longer imports `BUTTON_TOKENS`
+  - ✅ Confirmed shared token domains remain unchanged
+  - ✅ Verified no new violations introduced
+- **Results:**
+  - ✅ **0 violations** detected
+  - ✅ All 78 component files scanned
+  - ✅ All components correctly use their own token domains or shared domains
+  - ✅ PromoCard violation fully resolved
+- **Reports Updated:**
+  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Updated with re-verification results
+    - Changed status from **FAIL** to **FINAL OK**
+    - Added "Re-verification Results" section (Section 11)
+    - Updated all violation statuses to **RESOLVED**
+    - Updated success criteria evaluation (4/4 criteria passed)
+- **Final Verdict:** ✅ **FINAL OK** - Token system ready to be locked
+
+---
+
+### TUI_TOKEN_SYSTEM_LOCK - Token System Lock
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-13
+- **Summary:** Formally locked the token system after final verification. Established immutable rules for token architecture.
+- **Actions Taken:**
+  - ✅ Updated `docs/architecture/TUI_TOKEN_SYSTEM.md` with LOCKED status
+    - Changed status to 🔒 **LOCKED - IMMUTABLE**
+    - Added prominent lock warning at top of document
+    - Added comprehensive "Lock Status" section
+    - Documented what is locked, allowed, and forbidden
+    - Added unlock procedure documentation
+    - Referenced final audit report (FINAL VERDICT: OK)
+  - ✅ Updated `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` with token lock enforcement
+    - Added "Token System Lock Status" section
+    - Defined forbidden actions
+    - Added unlock procedure requirements
+    - Added AI agent enforcement rules
+    - Updated authority references with lock status
+- **Lock Details:**
+  - **Lock Date:** 2025-12-13
+  - **Lock Scope:** All token domains, ownership rules, shared/component-specific separation
+  - **Final Audit:** `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - FINAL VERDICT: OK
+  - **Violations:** 0 (all resolved)
+- **Enforcement:**
+  - ✅ Lock applies to both humans and AI agents
+  - ✅ Any modification requests MUST be refused with reference to lock
+  - ✅ Unlock procedure explicitly documented
+- **Files Modified:**
+  - `docs/architecture/TUI_TOKEN_SYSTEM.md` - Locked and documented
+  - `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` - Lock enforcement rules added
+- **Success Criteria Met:**
+  - ✅ Token system declared immutable
+  - ✅ Guard rules enforce the lock
+  - ✅ No ambiguity about allowed vs forbidden token changes
+  - ✅ All token domains verified and isolated
 
 ---
 
