@@ -29,9 +29,15 @@
 - Token domain MUST NOT contain tokens for other components
 - Token reuse based on visual similarity is FORBIDDEN
 - Token duplication is ALLOWED when semantics differ
-- Shared tokens ONLY for true shared design intent (FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS)
-- Foundation tokens for basic utilities (spacing, typography, colors, radius, shadows, motion, opacity)
 - DRY principle DOES NOT apply to tokens
+
+### Real Token Domains (Verified)
+**Foundation:** spacing, typography, colors, radius, shadows, motion, opacity  
+**Shared:** FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS  
+**Component:** INPUT_TOKENS, SELECT_TOKENS, TEXTAREA_TOKENS, DROPDOWN_TOKENS, TABS_TOKENS
+
+### Audit Status
+All token boundary violations fixed per `docs/reports/TUI_TOKEN_SYSTEM_AUDIT.md`
 
 ## Refactor Rules
 - One task = one component only
