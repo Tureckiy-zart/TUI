@@ -28,6 +28,10 @@ export const TEXT_TOKENS = {
     md: "text-base", // Maps to fontSize.base[0]
     lg: "text-lg", // Maps to fontSize.lg[0]
     xl: "text-xl", // Maps to fontSize.xl[0]
+    "2xl": "text-2xl", // Maps to fontSize.2xl[0]
+    "3xl": "text-3xl", // Maps to fontSize.3xl[0]
+    "4xl": "text-4xl", // Maps to fontSize.4xl[0]
+    "5xl": "text-5xl", // Maps to fontSize.5xl[0]
   } as const,
 
   /**
@@ -48,6 +52,7 @@ export const TEXT_TOKENS = {
   lineHeight: {
     none: "leading-none", // Maps to lineHeight.none
     tight: "leading-tight", // Maps to lineHeight.tight
+    snug: "leading-snug", // Maps to lineHeight.snug
     normal: "leading-normal", // Maps to lineHeight.normal
     relaxed: "leading-relaxed", // Maps to lineHeight.relaxed
     loose: "leading-loose", // Maps to lineHeight.loose

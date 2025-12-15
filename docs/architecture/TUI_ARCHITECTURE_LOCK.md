@@ -565,6 +565,8 @@ Before considering the architecture lock complete, verify:
 
 ## 📊 Architecture Lock Status
 
+### Foundation Layer (LOCKED)
+
 | Component   | Status    | Locked Date | Notes                                                    |
 | ----------- | --------- | ----------- | -------------------------------------------------------- |
 | Modal       | ✅ LOCKED | 2025-12-12  | Radix Dialog wrapper. Sole modal foundation.             |
@@ -576,6 +578,26 @@ Before considering the architecture lock complete, verify:
 **Foundation Layer Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-12  
 **Next Review:** Never (foundation is immutable)
+
+### Extension Layer (LOCKED COMPONENTS)
+
+The following Extension Layer components are **LOCKED** and **IMMUTABLE** after completing their audit and locking procedures:
+
+| Component | Status    | Locked Date | Notes                                    |
+| --------- | --------- | ----------- | ---------------------------------------- |
+| Button    | ✅ LOCKED | 2025-12-15  | Extension component. Locked after audit. |
+| Text      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Heading   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Body      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Caption   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Code      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Display   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Lead      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Input     | ✅ LOCKED | 2025-12-15  | Form component. Locked after standardization, code review, and storybook taxonomy fix. |
+
+**Extension Layer Locked Components Status:** ✅ **ACTIVE**  
+**Lock Date:** 2025-12-15  
+**Reference:** [Text / Typography Lock](../locks/TUI_TEXT_LOCK.md)
 
 ---
 

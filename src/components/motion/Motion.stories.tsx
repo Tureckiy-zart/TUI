@@ -10,7 +10,7 @@ import * as React from "react";
 import { useReducedMotion } from "@/theme/motion/useReducedMotion";
 
 const meta: Meta = {
-  title: "Motion/Motion V2",
+  title: "Components/Motion",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

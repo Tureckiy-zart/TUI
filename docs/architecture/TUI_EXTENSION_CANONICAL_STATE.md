@@ -92,9 +92,13 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
 
 The following components are **ALLOWED** for use. They are exported via `src/index.ts` and form the Extension Layer.
 
+**Note:** Some Extension components may be **LOCKED** after completing their audit and locking procedures. Locked Extension components are immutable and cannot be modified without explicit unlock approval.
+
 ### Visual Components
 
 1. **Button** - `src/components/ui/button.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Button`, `ButtonProps`, `buttonVariants`
 
 2. **Alert** - `src/components/ui/alert.tsx`
@@ -110,24 +114,38 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 ### Typography Components
 
 5. **Text** - `src/components/ui/text.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Text`, `TextProps`, `TextSize`, `TextWeight`, `textVariants`
 
 6. **Body** - `src/components/ui/body.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Body`, `BodyProps`, `bodyVariants`
 
 7. **Caption** - `src/components/ui/caption.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Caption`, `CaptionProps`, `captionVariants`
 
 8. **Code** - `src/components/ui/code.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Code`, `CodeProps`, `codeVariants`
 
 9. **Display** - `src/components/ui/display.tsx`
+   - **Status:** ✅ **LOCKED** (2025-12-15)
+   - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Display`, `DisplayProps`, `displayVariants`
 
 10. **Heading** - `src/components/ui/heading.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Heading`, `HeadingProps`, `headingVariants`
 
 11. **Lead** - `src/components/ui/lead.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Lead`, `LeadProps`, `leadVariants`
 
 12. **Label** - `src/components/ui/label.tsx`
@@ -139,7 +157,9 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Checkbox`, `CheckboxProps`, `checkboxVariants`
 
 14. **Input** - `src/components/input/Input.tsx`
-    - Exports: `Input`, `InputProps`, `inputVariants`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - Exports: `Input`, `InputProps`, `InputSize`, `InputVariant`, `inputVariants`
 
 15. **Radio** - `src/components/radio/Radio.tsx`
     - Exports: `Radio`, `RadioProps`, `radioVariants`, `RadioGroup`, `RadioGroupProps`
@@ -155,29 +175,91 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 ### Layout Components
 
+**Status:** ✅ **LOCKED** (2025-12-15)  
+**Reference:** [Layout Lock](../locks/TUI_LAYOUT_LOCK.md)
+
+**Layout Hierarchy:**
+- **Box** → Lowest-level primitive (spacing, visual properties only)
+- **Stack** → Primary layout composition primitive (vertical/horizontal flows)
+  - **Column** → Semantic alias for Stack (vertical)
+  - **Row** → Semantic alias for Stack (horizontal)
+- **Container** → Width constraint specialization
+- **Flex** → Advanced flexbox extension of Box
+- **Grid** → CSS Grid extension of Box
+- **Surface** → Surface elevation variant extension of Box
+
 19. **Box** - `src/components/layout/Box.tsx`
-    - Exports: `Box`, `BoxProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Lowest-level layout primitive - pure, generic container
+    - **Responsibility:** Spacing (padding/margin), visual properties (radius, shadow, background), element rendering (via `as` prop)
+    - **Does NOT provide:** Layout composition semantics (display, flexDirection, gap, alignment)
+    - **Use for:** Base container with styling only
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Box`, `BoxProps`
 
 20. **Column** - `src/components/layout/Column.tsx`
-    - Exports: `Column`, `ColumnProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Semantic alias for Stack with vertical direction
+    - **Responsibility:** Provides explicit vertical layout API
+    - **Implementation:** Alias for `Stack` (shares implementation)
+    - **Use for:** Semantic clarity when vertical layout intent is important
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Column`, `ColumnProps`
 
 21. **Container** - `src/components/layout/Container.tsx`
-    - Exports: `Container`, `ContainerProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Specialized primitive for width constraint and horizontal padding
+    - **Responsibility:** Width constraint (maxWidth), horizontal padding, centering
+    - **Does NOT provide:** Layout composition behaviors (flex, grid, alignment)
+    - **Use for:** Constraining content width and providing horizontal padding
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Container`, `ContainerProps`
 
 22. **Flex** - `src/components/layout/Flex.tsx`
-    - Exports: `Flex`, `FlexProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Advanced flexbox container extension of Box
+    - **Responsibility:** Full control over flexbox properties (direction, wrap, grow, shrink, basis, alignment, spacing)
+    - **Uses:** Box internally as base container
+    - **Use for:** Advanced flexbox control beyond Stack capabilities
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Flex`, `FlexProps`
 
 23. **Grid** - `src/components/layout/Grid.tsx`
-    - Exports: `Grid`, `GridProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** CSS Grid container extension of Box
+    - **Responsibility:** Full control over grid layout properties (columns, rows, gap, flow, alignment)
+    - **Uses:** Box internally as base container
+    - **Use for:** Two-dimensional layouts requiring precise row/column control
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Grid`, `GridProps`
 
 24. **Row** - `src/components/layout/Row.tsx`
-    - Exports: `Row`, `RowProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Semantic alias for Stack with horizontal direction
+    - **Responsibility:** Provides explicit horizontal layout API
+    - **Implementation:** Alias for `Stack(direction="horizontal")` (shares implementation)
+    - **Use for:** Semantic clarity when horizontal layout intent is important
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Row`, `RowProps`
 
 25. **Stack** - `src/components/layout/Stack.tsx`
-    - Exports: `Stack`, `StackProps`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Primary layout composition primitive for vertical and horizontal flows
+    - **Responsibility:** Layout composition with semantic spacing (`spacing` prop), direction control, alignment
+    - **Uses:** Box internally as base container
+    - **API:** `spacing` is canonical prop (preferred), `gap` is deprecated alias for backward compatibility
+    - **Use for:** One-dimensional layouts (vertical or horizontal) with spacing between items
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Stack`, `StackProps`
 
 26. **Surface** - `src/components/layout/Surface.tsx`
-    - Exports: `Surface`, `SurfaceProps`, `surfaceVariants`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Role:** Surface elevation variant component extension of Box
+    - **Responsibility:** Provides surface elevation variants (flat, raised, sunken) with token-based styling
+    - **Uses:** Box internally as base container, CVA for variant management
+    - **Use for:** Semantic elevation variants
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Exports:** `Surface`, `SurfaceProps`, `surfaceVariants`
 
 ### Container Components
 
@@ -659,7 +741,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 **Status:** FINAL  
 **Version:** 1.0  
-**Last Updated:** 2025-12-13
+**Last Updated:** 2025-12-15
 
 This document is **FINAL**. Any changes to this canonical state require explicit architectural review and approval. This document serves as the definitive law for UI component usage in the Extension Layer.
 

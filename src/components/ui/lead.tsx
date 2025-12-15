@@ -4,12 +4,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 const leadVariants = cva("font-sans text-foreground", {
   variants: {
     size: {
-      lg: "text-lg leading-normal tracking-normal",
-      xl: "text-xl leading-normal tracking-normal",
+      lg: `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.lineHeight.normal} ${TEXT_TOKENS.letterSpacing.normal}`,
+      xl: `${TEXT_TOKENS.fontSize.xl} ${TEXT_TOKENS.lineHeight.normal} ${TEXT_TOKENS.letterSpacing.normal}`,
     },
     muted: {
       true: "text-muted-foreground",

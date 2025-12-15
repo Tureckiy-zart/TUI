@@ -1,7 +1,7 @@
 # 📐 Layout Primitives Guide
 
-**Last Updated:** 2025-12-11  
-**Version:** 1.0
+**Last Updated:** 2025-12-15  
+**Version:** 2.0
 
 Полное руководство по использованию Layout Primitives в Tenerife UI.
 
@@ -11,21 +11,35 @@
 
 Layout Primitives — это набор базовых компонентов для создания layout'ов. Все компоненты token-driven, используют только token-based значения и не содержат raw numeric values.
 
+### Иерархия компонентов
+
+```
+Box (базовый примитив)
+  ├── Stack (основной композиционный примитив)
+  │   ├── Column (семантический алиас для вертикального Stack)
+  │   └── Row (семантический алиас для горизонтального Stack)
+  ├── Container (специализация для ограничения ширины)
+  ├── Flex (расширенный flexbox)
+  ├── Grid (CSS Grid)
+  └── Surface (варианты поверхности)
+```
+
 ### Доступные компоненты
 
-- `Box` - Базовый контейнер с padding, margin, display, flex, grid
-- `Flex` - Flexbox контейнер
+- `Box` - Базовый контейнер (spacing, visual properties)
+- `Stack` - Основной композиционный примитив (вертикальный/горизонтальный)
+- `Column` - Семантический алиас для вертикального Stack
+- `Row` - Семантический алиас для горизонтального Stack
+- `Container` - Ограничение ширины и горизонтальный padding
+- `Flex` - Расширенный flexbox контейнер
 - `Grid` - CSS Grid контейнер
-- `Stack` - Вертикальный стек
-- `Column` - Колонка (для Grid)
-- `Row` - Строка (для Grid)
 - `Surface` - Поверхность с вариантами стиля
 
 ---
 
 ## Box Component
 
-Базовый контейнер с поддержкой padding, margin, display, flex, grid, radius и shadow.
+Box — это базовый примитив, чистый контейнер для spacing (padding/margin) и визуальных свойств (radius, shadow, background). Box НЕ предоставляет layout-семантики (display, flexDirection, gap, alignment). Для композиции layout используйте Stack, Flex или Grid.
 
 ### Базовое использование
 
@@ -61,22 +75,19 @@ function BoxSpacing() {
 }
 ```
 
-### Display и Flex
+### Визуальные свойства
 
 ```tsx
 import { Box } from "@tenerife.music/ui";
 
-function BoxDisplay() {
+function BoxVisual() {
   return (
     <div>
-      <Box display="flex" gap="md" align="center">
-        <Box>Item 1</Box>
-        <Box>Item 2</Box>
+      <Box bg="card" radius="lg" shadow="md" p="md">
+        Card с фоном, скруглением и тенью
       </Box>
-      <Box display="grid" cols={3} gap="md">
-        <Box>Grid Item 1</Box>
-        <Box>Grid Item 2</Box>
-        <Box>Grid Item 3</Box>
+      <Box bg="muted" radius="sm" p="sm">
+        Muted background
       </Box>
     </div>
   );
@@ -90,7 +101,7 @@ import { Box } from "@tenerife.music/ui";
 
 function BoxResponsive() {
   return (
-    <Box p={{ base: "sm", md: "md", lg: "lg" }} display={{ base: "block", md: "flex" }}>
+    <Box p={{ base: "sm", md: "md", lg: "lg" }}>
       Responsive Box
     </Box>
   );
@@ -101,12 +112,12 @@ function BoxResponsive() {
 
 - `p`, `px`, `py`, `pt`, `pr`, `pb`, `pl` - Padding (token-based)
 - `m`, `mx`, `my`, `mt`, `mr`, `mb`, `ml` - Margin (token-based)
-- `display` - Display mode (flex, grid, block, etc.)
-- `gap` - Gap для flex/grid
-- `bg` - Background color
-- `radius` - Border radius
-- `shadow` - Shadow
+- `bg` - Background color (token-based)
+- `radius` - Border radius (token-based)
+- `shadow` - Shadow (token-based)
 - `as` - HTML элемент для рендеринга
+
+**Важно:** Box НЕ поддерживает `display`, `flexDirection`, `gap`, `align`, `justify`. Используйте Stack, Flex или Grid для layout композиции.
 
 ---
 
@@ -231,16 +242,16 @@ function ResponsiveGrid() {
 
 ## Stack Component
 
-Вертикальный стек для последовательного размещения элементов.
+Stack — основной композиционный примитив для вертикальных и горизонтальных потоков. Использует Box внутри как базовый контейнер.
 
-### Базовое использование
+### Базовое использование (вертикальный)
 
 ```tsx
 import { Stack } from "@tenerife.music/ui";
 
 function StackExample() {
   return (
-    <Stack direction="vertical" gap={4}>
+    <Stack direction="vertical" spacing="md">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -256,7 +267,7 @@ import { Stack } from "@tenerife.music/ui";
 
 function HorizontalStack() {
   return (
-    <Stack direction="horizontal" gap={4}>
+    <Stack direction="horizontal" spacing="lg" align="center">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -265,54 +276,129 @@ function HorizontalStack() {
 }
 ```
 
+### Выравнивание
+
+```tsx
+import { Stack } from "@tenerife.music/ui";
+
+function StackAlignment() {
+  return (
+    <div>
+      <Stack direction="horizontal" spacing="md" align="start">
+        <div>Start</div>
+      </Stack>
+      <Stack direction="horizontal" spacing="md" align="center">
+        <div>Center</div>
+      </Stack>
+      <Stack direction="horizontal" spacing="md" justify="between">
+        <div>Between</div>
+        <div>Between</div>
+      </Stack>
+    </div>
+  );
+}
+```
+
 **Props:**
 
-- `direction`: `"vertical" | "horizontal"` - Направление
-- `gap`: `number` - Отступ между элементами (token-based)
+- `direction`: `"vertical" | "horizontal"` - Направление (по умолчанию: "vertical")
+- `spacing`: `string | number` - Отступ между элементами (token-based, canonical prop)
+- `gap`: `string | number` - Deprecated, используйте `spacing`
+- `align`: `"start" | "end" | "center" | "baseline" | "stretch"` - Выравнивание
+- `justify`: `"start" | "end" | "center" | "between" | "around" | "evenly"` - Распределение
 
 ---
 
 ## Column и Row
 
-Компоненты для работы с Grid layout.
+Column и Row — семантические алиасы для Stack, которые делают код более читаемым.
 
-### Column
+### Column (вертикальный Stack)
+
+Column — это семантический алиас для `Stack(direction="vertical")`.
 
 ```tsx
-import { Grid, Column } from "@tenerife.music/ui";
+import { Column } from "@tenerife.music/ui";
 
 function ColumnExample() {
   return (
-    <Grid cols={12} gap={4}>
-      <Column span={8}>Main content</Column>
-      <Column span={4}>Sidebar</Column>
-    </Grid>
+    <Column spacing="md">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </Column>
   );
 }
 ```
 
-### Row
+### Row (горизонтальный Stack)
+
+Row — это семантический алиас для `Stack(direction="horizontal")`.
 
 ```tsx
-import { Grid, Row } from "@tenerife.music/ui";
+import { Row } from "@tenerife.music/ui";
 
 function RowExample() {
   return (
-    <Grid cols={12} gap={4}>
-      <Row>
-        <Column span={6}>Left</Column>
-        <Column span={6}>Right</Column>
-      </Row>
-    </Grid>
+    <Row spacing="md" align="center">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </Row>
   );
 }
 ```
+
+**Когда использовать:**
+
+- **Column/Row**: Когда направление layout'а фиксировано и важна семантическая ясность
+- **Stack**: Когда направление может меняться динамически или предпочитаете более общий API
+
+---
+
+## Container Component
+
+Container — специализированный примитив для ограничения ширины контента и горизонтального padding. НЕ предоставляет layout-поведения (flex, grid, alignment).
+
+### Базовое использование
+
+```tsx
+import { Container } from "@tenerife.music/ui";
+
+function ContainerExample() {
+  return (
+    <Container maxWidth="lg" padding="md">
+      <div>Контент с ограниченной шириной</div>
+    </Container>
+  );
+}
+```
+
+### Responsive Container
+
+```tsx
+import { Container } from "@tenerife.music/ui";
+
+function ResponsiveContainer() {
+  return (
+    <Container maxWidth={{ base: "md", lg: "xl" }} padding={{ base: "sm", md: "md" }}>
+      Responsive container
+    </Container>
+  );
+}
+```
+
+**Props:**
+
+- `maxWidth`: `string` - Максимальная ширина (token-based)
+- `padding`: `string` - Горизонтальный padding (token-based)
+- `center`: `boolean` - Центрирование (по умолчанию: true)
 
 ---
 
 ## Surface Component
 
-Поверхность с вариантами стиля (card, elevated, etc.).
+Surface — компонент-расширение Box для вариантов поверхности (flat, raised, sunken). Использует Box внутри как базовый контейнер.
 
 ### Базовое использование
 
@@ -321,7 +407,7 @@ import { Surface } from "@tenerife.music/ui";
 
 function SurfaceExample() {
   return (
-    <Surface variant="card" p="md" radius="md">
+    <Surface variant="raised" p="md" radius="md">
       Card surface
     </Surface>
   );
@@ -335,10 +421,10 @@ import { Surface } from "@tenerife.music/ui";
 
 function SurfaceVariants() {
   return (
-    <div className="space-y-4">
-      <Surface variant="default">Default</Surface>
-      <Surface variant="card">Card</Surface>
-      <Surface variant="elevated">Elevated</Surface>
+    <div>
+      <Surface variant="flat" p="md">Flat</Surface>
+      <Surface variant="raised" p="md">Raised</Surface>
+      <Surface variant="sunken" p="md">Sunken</Surface>
     </div>
   );
 }
@@ -346,8 +432,9 @@ function SurfaceVariants() {
 
 **Props:**
 
-- `variant`: `"default" | "card" | "elevated"` - Вариант стиля
-- Все props от Box компонента
+- `variant`: `"flat" | "raised" | "sunken"` - Вариант стиля
+- `radius`: `string` - Border radius (token-based)
+- Все props от Box компонента (кроме `bg`, `shadow` - управляются через variant)
 
 ---
 
@@ -410,30 +497,65 @@ function PageLayout() {
 
 ```tsx
 // ✅ Правильно
-<Box p="md" gap={4}>
+<Box p="md">
+<Stack spacing="md">
 
 // ❌ Неправильно
-<Box p={16} gap={32}>
+<Box p={16}>
+<Stack spacing={32}>
 ```
 
-### 2. Комбинируйте компоненты
+### 2. Используйте правильные компоненты для layout
 
 ```tsx
-// ✅ Правильно - композиция
-<Stack direction="vertical" gap={4}>
+// ✅ Правильно - Stack для композиции
+<Stack direction="vertical" spacing="md">
   <Box p="md">Item 1</Box>
   <Box p="md">Item 2</Box>
 </Stack>
+
+// ❌ Неправильно - Box не поддерживает layout props
+<Box display="flex" gap="md">  // ❌ display и gap удалены из Box
 ```
 
-### 3. Используйте responsive props
+### 3. Комбинируйте компоненты
+
+```tsx
+// ✅ Правильно - композиция
+<Container maxWidth="lg">
+  <Stack direction="vertical" spacing="lg">
+    <Box p="md">Item 1</Box>
+    <Box p="md">Item 2</Box>
+  </Stack>
+</Container>
+```
+
+### 4. Используйте responsive props
 
 ```tsx
 // ✅ Правильно - responsive
 <Box p={{ base: "sm", md: "md", lg: "lg" }}>
+<Stack spacing={{ base: "sm", md: "md" }}>
 
 // ❌ Неправильно - фиксированные значения
 <Box p="md" className="md:p-lg lg:p-xl">
+```
+
+### 5. Выбирайте правильный компонент
+
+```tsx
+// ✅ Для простых вертикальных/горизонтальных layout'ов
+<Stack direction="vertical" spacing="md">
+<Row spacing="md">  // Семантический алиас
+
+// ✅ Для расширенного flexbox контроля
+<Flex direction="row" wrap="wrap" gap="md">
+
+// ✅ Для двухмерных layout'ов
+<Grid cols={3} gap="md">
+
+// ✅ Для ограничения ширины
+<Container maxWidth="lg">
 ```
 
 ---

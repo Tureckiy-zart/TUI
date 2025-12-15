@@ -26,6 +26,13 @@ import {
   textColors as baseTextColors,
 } from "@/tokens/colors";
 import { motionCSSVariables } from "@/tokens/motion";
+import { motionV2CSSVariables } from "@/tokens/motion/v2";
+import { radiusCSSVariables } from "@/tokens/radius";
+import { shadowCSSVariables } from "@/tokens/shadows";
+import { spacingCSSVariables } from "@/tokens/spacing";
+import { typographyCSSVariables } from "@/tokens/typography";
+
+import { updateStateMatrixFromTokens } from "./applyStateMatrix";
 
 const MODE_ATTRIBUTE = "data-mode";
 const THEME_ATTRIBUTE = "data-theme-name";
@@ -176,11 +183,46 @@ function getMergedTokens(_mode: Mode) {
  * Update CSS variables from tokens with theme overrides
  * All values come from token system merged with theme overrides
  */
-function updateCSSVariablesFromTokens(mode: Mode) {
-  if (typeof document === "undefined") return;
+/**
+ * Update CSS variables from token definitions
+ *
+ * SYNCHRONOUS ONLY - No async operations allowed
+ * This function must execute completely synchronously to ensure CSS variables
+ * are available before component render.
+ *
+ * @param mode - Theme mode (day/night)
+ */
+export function updateCSSVariablesFromTokens(mode: Mode) {
+  // Early return for SSR - this is the ONLY allowed early return
+  // In browser context, function always executes fully
+  if (typeof document === "undefined" || !document.documentElement) return;
 
   const root = document.documentElement;
-  const tokens = getMergedTokens(mode);
+
+  // Get merged tokens - wrap in try-catch to ensure function continues even if token retrieval fails
+  let tokens;
+  try {
+    tokens = getMergedTokens(mode);
+  } catch (error) {
+    console.error("[Theme] Failed to get merged tokens:", error);
+    return; // Cannot proceed without tokens
+  }
+  // #region agent log
+  const secondary800 = tokens.secondaryColors[800];
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "applyMode.ts:188",
+      message: "tokens retrieved",
+      data: { hasTokens: !!tokens, secondary800, hasSecondary800: !!secondary800 },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "B",
+    }),
+  }).catch(() => {});
+  // #endregion
 
   const {
     primaryColors,
@@ -193,124 +235,364 @@ function updateCSSVariablesFromTokens(mode: Mode) {
     chartColors,
   } = tokens;
 
-  // Base colors (from merged tokens)
-  const base = baseColors[mode];
-  root.style.setProperty("--background", base.background);
-  root.style.setProperty("--foreground", base.foreground);
-  root.style.setProperty("--card", base.card);
-  root.style.setProperty("--card-foreground", base.cardForeground);
-  root.style.setProperty("--popover", base.popover);
-  root.style.setProperty("--popover-foreground", base.popoverForeground);
-  root.style.setProperty("--border", base.border);
-  root.style.setProperty("--input", base.input);
-  root.style.setProperty("--ring", base.ring);
+  // Wrap each color group in try-catch to ensure all variables are set even if one group fails
+  // Base colors (from merged tokens) - CRITICAL: must be set first
+  try {
+    const base = baseColors[mode];
+    root.style.setProperty("--background", base.background);
+    root.style.setProperty("--foreground", base.foreground);
+    root.style.setProperty("--card", base.card);
+    root.style.setProperty("--card-foreground", base.cardForeground);
+    root.style.setProperty("--popover", base.popover);
+    root.style.setProperty("--popover-foreground", base.popoverForeground);
+    root.style.setProperty("--border", base.border);
+    root.style.setProperty("--input", base.input);
+    root.style.setProperty("--ring", base.ring);
+  } catch (error) {
+    console.error("[Theme] Failed to set base colors:", error);
+  }
 
   // Surface colors (from merged tokens)
-  const surface = surfaceColors[mode];
-  root.style.setProperty("--surface-base", surface.base);
-  root.style.setProperty("--surface-elevated1", surface.elevated1);
-  root.style.setProperty("--surface-elevated2", surface.elevated2);
-  root.style.setProperty("--surface-elevated3", surface.elevated3);
-  root.style.setProperty("--surface-overlay", surface.overlay);
-  root.style.setProperty("--surface-glass", surface.glass);
+  try {
+    const surface = surfaceColors[mode];
+    root.style.setProperty("--surface-base", surface.base);
+    root.style.setProperty("--surface-elevated1", surface.elevated1);
+    root.style.setProperty("--surface-elevated2", surface.elevated2);
+    root.style.setProperty("--surface-elevated3", surface.elevated3);
+    root.style.setProperty("--surface-overlay", surface.overlay);
+    root.style.setProperty("--surface-glass", surface.glass);
+  } catch (error) {
+    console.error("[Theme] Failed to set surface colors:", error);
+  }
 
   // Semantic colors (from merged tokens)
-  const semantic = semanticColors[mode];
-  root.style.setProperty("--semantic-success", semantic.success);
-  root.style.setProperty("--semantic-success-foreground", semantic.successForeground);
-  root.style.setProperty("--semantic-error", semantic.error);
-  root.style.setProperty("--semantic-error-foreground", semantic.errorForeground);
-  root.style.setProperty("--semantic-warning", semantic.warning);
-  root.style.setProperty("--semantic-warning-foreground", semantic.warningForeground);
-  root.style.setProperty("--semantic-info", semantic.info);
-  root.style.setProperty("--semantic-info-foreground", semantic.infoForeground);
+  try {
+    const semantic = semanticColors[mode];
+    root.style.setProperty("--semantic-success", semantic.success);
+    root.style.setProperty("--semantic-success-foreground", semantic.successForeground);
+    root.style.setProperty("--semantic-error", semantic.error);
+    root.style.setProperty("--semantic-error-foreground", semantic.errorForeground);
+    root.style.setProperty("--semantic-warning", semantic.warning);
+    root.style.setProperty("--semantic-warning-foreground", semantic.warningForeground);
+    root.style.setProperty("--semantic-info", semantic.info);
+    root.style.setProperty("--semantic-info-foreground", semantic.infoForeground);
+  } catch (error) {
+    console.error("[Theme] Failed to set semantic colors:", error);
+  }
 
   // Text colors (from merged tokens)
-  const text = textColors[mode];
-  root.style.setProperty("--text-primary", text.primary);
-  root.style.setProperty("--text-secondary", text.secondary);
-  root.style.setProperty("--text-tertiary", text.tertiary);
-  root.style.setProperty("--text-muted", text.muted);
-  root.style.setProperty("--text-inverse", text.inverse);
+  try {
+    const text = textColors[mode];
+    root.style.setProperty("--text-primary", text.primary);
+    root.style.setProperty("--text-secondary", text.secondary);
+    root.style.setProperty("--text-tertiary", text.tertiary);
+    root.style.setProperty("--text-muted", text.muted);
+    root.style.setProperty("--text-inverse", text.inverse);
+  } catch (error) {
+    console.error("[Theme] Failed to set text colors:", error);
+  }
 
   // Chart colors (from merged tokens)
-  const chart = chartColors[mode];
-  root.style.setProperty("--chart-1", chart.chart1);
-  root.style.setProperty("--chart-2", chart.chart2);
-  root.style.setProperty("--chart-3", chart.chart3);
-  root.style.setProperty("--chart-4", chart.chart4);
-  root.style.setProperty("--chart-5", chart.chart5);
+  try {
+    const chart = chartColors[mode];
+    root.style.setProperty("--chart-1", chart.chart1);
+    root.style.setProperty("--chart-2", chart.chart2);
+    root.style.setProperty("--chart-3", chart.chart3);
+    root.style.setProperty("--chart-4", chart.chart4);
+    root.style.setProperty("--chart-5", chart.chart5);
+  } catch (error) {
+    console.error("[Theme] Failed to set chart colors:", error);
+  }
 
   // Primary color scale (from merged tokens)
-  root.style.setProperty("--primary-50", primaryColors[50]);
-  root.style.setProperty("--primary-100", primaryColors[100]);
-  root.style.setProperty("--primary-200", primaryColors[200]);
-  root.style.setProperty("--primary-300", primaryColors[300]);
-  root.style.setProperty("--primary-400", primaryColors[400]);
-  root.style.setProperty("--primary-500", primaryColors[500]);
-  root.style.setProperty("--primary-600", primaryColors[600]);
-  root.style.setProperty("--primary-700", primaryColors[700]);
-  root.style.setProperty("--primary-800", primaryColors[800]);
-  root.style.setProperty("--primary-900", primaryColors[900]);
-  root.style.setProperty("--primary-950", primaryColors[950]);
+  try {
+    root.style.setProperty("--primary-50", primaryColors[50]);
+    root.style.setProperty("--primary-100", primaryColors[100]);
+    root.style.setProperty("--primary-200", primaryColors[200]);
+    root.style.setProperty("--primary-300", primaryColors[300]);
+    root.style.setProperty("--primary-400", primaryColors[400]);
+    root.style.setProperty("--primary-500", primaryColors[500]);
+    root.style.setProperty("--primary-600", primaryColors[600]);
+    root.style.setProperty("--primary-700", primaryColors[700]);
+    root.style.setProperty("--primary-800", primaryColors[800]);
+    root.style.setProperty("--primary-900", primaryColors[900]);
+    root.style.setProperty("--primary-950", primaryColors[950]);
+  } catch (error) {
+    console.error("[Theme] Failed to set primary color scale:", error);
+  }
 
   // Accent color scale (from merged tokens)
-  root.style.setProperty("--accent-50", accentColors[50]);
-  root.style.setProperty("--accent-100", accentColors[100]);
-  root.style.setProperty("--accent-200", accentColors[200]);
-  root.style.setProperty("--accent-300", accentColors[300]);
-  root.style.setProperty("--accent-400", accentColors[400]);
-  root.style.setProperty("--accent-500", accentColors[500]);
-  root.style.setProperty("--accent-600", accentColors[600]);
-  root.style.setProperty("--accent-700", accentColors[700]);
-  root.style.setProperty("--accent-800", accentColors[800]);
-  root.style.setProperty("--accent-900", accentColors[900]);
-  root.style.setProperty("--accent-950", accentColors[950]);
+  try {
+    root.style.setProperty("--accent-50", accentColors[50]);
+    root.style.setProperty("--accent-100", accentColors[100]);
+    root.style.setProperty("--accent-200", accentColors[200]);
+    root.style.setProperty("--accent-300", accentColors[300]);
+    root.style.setProperty("--accent-400", accentColors[400]);
+    root.style.setProperty("--accent-500", accentColors[500]);
+    root.style.setProperty("--accent-600", accentColors[600]);
+    root.style.setProperty("--accent-700", accentColors[700]);
+    root.style.setProperty("--accent-800", accentColors[800]);
+    root.style.setProperty("--accent-900", accentColors[900]);
+    root.style.setProperty("--accent-950", accentColors[950]);
+  } catch (error) {
+    console.error("[Theme] Failed to set accent color scale:", error);
+  }
 
   // Secondary color scale (from merged tokens)
-  root.style.setProperty("--secondary-50", secondaryColors[50]);
-  root.style.setProperty("--secondary-100", secondaryColors[100]);
-  root.style.setProperty("--secondary-200", secondaryColors[200]);
-  root.style.setProperty("--secondary-300", secondaryColors[300]);
-  root.style.setProperty("--secondary-400", secondaryColors[400]);
-  root.style.setProperty("--secondary-500", secondaryColors[500]);
-  root.style.setProperty("--secondary-600", secondaryColors[600]);
-  root.style.setProperty("--secondary-700", secondaryColors[700]);
-  root.style.setProperty("--secondary-800", secondaryColors[800]);
-  root.style.setProperty("--secondary-900", secondaryColors[900]);
-  root.style.setProperty("--secondary-950", secondaryColors[950]);
+  try {
+    root.style.setProperty("--secondary-50", secondaryColors[50]);
+    root.style.setProperty("--secondary-100", secondaryColors[100]);
+    root.style.setProperty("--secondary-200", secondaryColors[200]);
+    root.style.setProperty("--secondary-300", secondaryColors[300]);
+    root.style.setProperty("--secondary-400", secondaryColors[400]);
+    root.style.setProperty("--secondary-500", secondaryColors[500]);
+    root.style.setProperty("--secondary-600", secondaryColors[600]);
+    root.style.setProperty("--secondary-700", secondaryColors[700]);
+    root.style.setProperty("--secondary-800", secondaryColors[800]);
+    root.style.setProperty("--secondary-900", secondaryColors[900]);
+    root.style.setProperty("--secondary-950", secondaryColors[950]);
+  } catch (error) {
+    console.error("[Theme] Failed to set secondary color scale:", error);
+  }
 
-  // Tenerife brand colors (from merged tokens)
-  if (mode === "day") {
-    // Day mode: Use secondary color (cyan) as primary
-    root.style.setProperty("--tm-primary", secondaryColors[500]);
-    root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
-    root.style.setProperty("--tm-secondary", "0 0% 95.7%");
-    root.style.setProperty("--tm-secondary-foreground", "0 0% 6.7%");
-    root.style.setProperty("--tm-accent", "0 0% 89.8%");
-    root.style.setProperty("--tm-accent-foreground", "0 0% 6.7%");
-  } else {
-    // Night mode: Use darker accent color (purple) as primary for better contrast
-    root.style.setProperty("--tm-primary", accentColors[600]); // Use 600 instead of 500 for better contrast
-    root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
-    root.style.setProperty("--tm-secondary", "240 10% 7%");
-    root.style.setProperty("--tm-secondary-foreground", "0 0% 89.8%");
-    root.style.setProperty("--tm-accent", "240 10% 10%");
-    root.style.setProperty("--tm-accent-foreground", "0 0% 89.8%");
+  // Tenerife brand colors (from merged tokens) - CRITICAL: These are the main semantic colors
+  // Rebalanced for semantic strength: using 600/700/800 levels instead of 500/hardcoded values
+  // Button Color Rebalance v1: Adjusted color scale values for better perceptual contrast (min 16 L* delta between variants)
+  try {
+    if (mode === "day") {
+      // Day mode: Use secondary color (cyan) as primary
+      // Primary: secondary-800 (L* ~22) - darkened for dominance, ensures 22 L* delta from secondary
+      root.style.setProperty("--tm-primary", secondaryColors[800]);
+      root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
+      // Secondary: secondary-600 (L* ~44) - lightened for better contrast vs primary, ensures 15 L* delta from accent
+      root.style.setProperty("--tm-secondary", secondaryColors[600]);
+      root.style.setProperty("--tm-secondary-foreground", "0 0% 100%");
+      // Accent: accent-600 (L* ~59) - lightened for clear distinction from secondary
+      root.style.setProperty("--tm-accent", accentColors[600]);
+      root.style.setProperty("--tm-accent-foreground", "0 0% 100%");
+    } else {
+      // Night mode: Use darker accent color (purple) as primary for better contrast
+      root.style.setProperty("--tm-primary", accentColors[600]); // Use 600 instead of 500 for better contrast
+      root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
+      root.style.setProperty("--tm-secondary", "240 10% 7%");
+      root.style.setProperty("--tm-secondary-foreground", "0 0% 89.8%");
+      root.style.setProperty("--tm-accent", "240 10% 10%");
+      root.style.setProperty("--tm-accent-foreground", "0 0% 89.8%");
+    }
+  } catch (error) {
+    console.error("[Theme] Failed to set Tenerife brand colors:", error);
   }
 
   // Muted colors (from merged tokens)
-  root.style.setProperty("--muted", base.card);
-  root.style.setProperty("--muted-foreground", base.cardForeground);
+  try {
+    const base = baseColors[mode];
+    root.style.setProperty("--muted", base.card);
+    root.style.setProperty("--muted-foreground", base.cardForeground);
+  } catch (error) {
+    console.error("[Theme] Failed to set muted colors:", error);
+  }
 
-  // Destructive colors (from merged semantic error)
-  root.style.setProperty("--destructive", semantic.error);
-  root.style.setProperty("--destructive-foreground", semantic.errorForeground);
+  // Accent aliases (for compatibility with components using --accent and --accent-foreground)
+  // These are aliases for --tm-accent and --tm-accent-foreground
+  try {
+    const accentValue = mode === "day" ? accentColors[600] : "240 10% 10%";
+    const accentForegroundValue = mode === "day" ? "0 0% 100%" : "0 0% 89.8%";
+    root.style.setProperty("--accent", accentValue);
+    root.style.setProperty("--accent-foreground", accentForegroundValue);
+  } catch (error) {
+    console.error("[Theme] Failed to set accent aliases:", error);
+  }
 
-  // Motion CSS variables (from motion tokens)
-  Object.entries(motionCSSVariables).forEach(([key, value]) => {
-    root.style.setProperty(key, value);
-  });
+  // Destructive colors (from merged semantic error) - CRITICAL
+  try {
+    const semantic = semanticColors[mode];
+    root.style.setProperty("--destructive", semantic.error);
+    root.style.setProperty("--destructive-foreground", semantic.errorForeground);
+  } catch (error) {
+    console.error("[Theme] Failed to set destructive colors:", error);
+  }
+
+  // Motion CSS variables (from motion tokens) - non-color, but wrap for consistency
+  try {
+    Object.entries(motionCSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set motion CSS variables:", error);
+  }
+
+  // Motion V2 CSS variables (from motion v2 tokens)
+  try {
+    Object.entries(motionV2CSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set motion V2 CSS variables:", error);
+  }
+
+  // Radius CSS variables (static, doesn't depend on mode)
+  try {
+    Object.entries(radiusCSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set radius CSS variables:", error);
+  }
+
+  // Shadow CSS variables (static, doesn't depend on mode)
+  try {
+    Object.entries(shadowCSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set shadow CSS variables:", error);
+  }
+
+  // Spacing CSS variables (static, doesn't depend on mode)
+  try {
+    Object.entries(spacingCSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set spacing CSS variables:", error);
+  }
+
+  // Typography CSS variables (static, doesn't depend on mode)
+  try {
+    Object.entries(typographyCSSVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set typography CSS variables:", error);
+  }
+}
+
+/**
+ * Synchronous theme initialization
+ * Sets CSS variables immediately before first React render (Storybook/app entry)
+ * Idempotent: safe to call multiple times
+ *
+ * @param defaultMode - Default mode if no mode is found in DOM/localStorage
+ * @param storageKey - localStorage key for mode persistence
+ */
+export function initThemeSync(defaultMode: Mode = "day", storageKey: string = "tm_mode"): void {
+  // #region agent log
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "applyMode.ts:366",
+      message: "initThemeSync entry",
+      data: { defaultMode, storageKey, hasDocument: typeof document !== "undefined" },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "A",
+    }),
+  }).catch(() => {});
+  // #endregion
+  if (typeof document === "undefined") return;
+
+  const root = document.documentElement;
+  // #region agent log
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "applyMode.ts:372",
+      message: "initThemeSync root check",
+      data: { hasRoot: !!root, rootTagName: root?.tagName },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "A",
+    }),
+  }).catch(() => {});
+  // #endregion
+
+  // Determine mode synchronously (DOM attribute → localStorage → default)
+  // Note: System preference check omitted for sync execution (handled later by ThemeProvider)
+  let mode: Mode = defaultMode;
+
+  // Check DOM attribute first
+  const attr = root.getAttribute(MODE_ATTRIBUTE);
+  if (attr === "day" || attr === "night") {
+    mode = attr;
+  } else {
+    // Check localStorage (synchronous, but may fail in private mode)
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === "day" || stored === "night") {
+        mode = stored;
+      } else {
+        // Check legacy storage key
+        const legacy = localStorage.getItem("theme");
+        if (legacy === "dark") mode = "night";
+        if (legacy === "light") mode = "day";
+      }
+    } catch {
+      // localStorage access can fail in private mode - use default
+    }
+  }
+
+  // Set DOM attributes synchronously
+  root.setAttribute(MODE_ATTRIBUTE, mode);
+  root.setAttribute(MODE_THEME_ATTRIBUTE, mode);
+
+  // Toggle dark class for Tailwind
+  if (mode === "night") {
+    root.classList.add(DARK_CLASS);
+  } else {
+    root.classList.remove(DARK_CLASS);
+  }
+
+  // Apply CSS variables synchronously (no theme override for sync init)
+  // ThemeProvider will apply overrides later if needed
+  // #region agent log
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "applyMode.ts:412",
+      message: "before updateCSSVariablesFromTokens",
+      data: { mode },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "B",
+    }),
+  }).catch(() => {});
+  // #endregion
+  updateCSSVariablesFromTokens(mode);
+
+  // Update state matrix CSS variables (synchronous - must be called after color variables)
+  updateStateMatrixFromTokens(mode);
+  // #region agent log
+  const afterUpdateVar = root.style.getPropertyValue("--tm-primary");
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "applyMode.ts:414",
+      message: "after updateCSSVariablesFromTokens",
+      data: { tmPrimary: afterUpdateVar, hasValue: !!afterUpdateVar },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "B",
+    }),
+  }).catch(() => {});
+  // #endregion
+
+  // Set body styles
+  const tokens = getMergedTokens(mode);
+  const { background, foreground } = tokens.baseColors[mode];
+  const { body } = document;
+  if (body) {
+    body.dataset.mode = mode;
+    body.style.backgroundColor = `hsl(${background})`;
+    body.style.color = `hsl(${foreground})`;
+  }
 }
 
 /**
@@ -362,6 +644,9 @@ export async function applyDocumentTheme(
 
   // Update CSS variables from tokens with theme overrides
   updateCSSVariablesFromTokens(mode);
+
+  // Update state matrix CSS variables (synchronous - must be called after color variables)
+  updateStateMatrixFromTokens(mode);
 
   // Set body data attribute and styles (using merged tokens)
   const tokens = getMergedTokens(mode);

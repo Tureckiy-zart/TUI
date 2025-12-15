@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import prettierConfig from "eslint-config-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -267,6 +270,9 @@ export default [
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES
       // ═══════════════════════════════════════════════════════════
 
+      // Enforce token-based color utilities (for UI files only - see override below)
+      "tenerife-ui-architecture/no-raw-tailwind-colors": "off", // Disabled globally, enabled for UI files only
+
       // Forbid hardcoded hex color codes
       "no-restricted-syntax": [
         "error",
@@ -323,6 +329,73 @@ export default [
       ],
     },
   },
-  // Prettier integration (disables conflicting ESLint rules)
+  {
+    // ═══════════════════════════════════════════════════════════
+    // UI FILES - STRICT COLOR ENFORCEMENT
+    // ═══════════════════════════════════════════════════════════
+    // Apply stricter rules for UI component files
+    name: "ui-files",
+    files: [
+      "src/components/ui/**/*.{ts,tsx}",
+      "src/utils/createTokenCVA.ts",
+      "src/lib/token-cva.ts",
+    ],
+    rules: {
+      // Enable strict color enforcement for UI files
+      "tenerife-ui-architecture/no-raw-tailwind-colors": "error",
+
+      // Disable the generic color check from no-restricted-syntax for UI files
+      // (we use the more precise no-raw-tailwind-colors rule instead)
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "Literal[value=/^#[0-9a-fA-F]{3,6}$/]",
+          message:
+            "Hex color codes are forbidden. Use token-based CSS variables (hsl(var(--token))) instead.",
+        },
+        // Note: Color pattern removed - handled by no-raw-tailwind-colors
+        {
+          selector:
+            "TemplateElement[value.raw=/\\b(p|m|gap|left|right|top|bottom|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|space-x|space-y)-(0|1|2|3|4|5|6|8|10|12|16|20|24|32|40|48|64|96)\\b/]",
+          message:
+            "Numeric spacing classes are forbidden. Use semantic spacing tokens (px-sm, py-md, gap-lg, etc.) instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/\\brounded-(none|sm|md|lg|xl|2xl|3xl|full)\\b/]",
+          message:
+            "Hardcoded radius classes are forbidden. Use radius tokens through component token system instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\b(h|w|min-h|min-w|max-h|max-w)-(0|1|2|3|4|5|6|8|10|12|16|20|24|32|40|48|64|96|full|screen)\\b/]",
+          message:
+            "Numeric size classes are forbidden. Use size tokens through component token system instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\btext-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)\\b/]",
+          message:
+            "Hardcoded typography size classes are forbidden. Use TYPOGRAPHY_TOKENS or component typography tokens instead.",
+        },
+        {
+          selector:
+            "TemplateElement[value.raw=/\\btransition-(all|colors|opacity|transform|none)\\b/]",
+          message:
+            "Hardcoded transition utilities are forbidden. Use MOTION_TOKENS for transitions instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/\\bduration-(75|100|150|200|300|500|700|1000)\\b/]",
+          message:
+            "Hardcoded duration utilities are forbidden. Use MOTION_TOKENS for durations instead.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/hsl\\(var\\(--[^)]+\\)\\)/]",
+          message:
+            "Direct CSS variable usage in className is forbidden. Use token references instead of direct hsl(var(--*)).",
+        },
+      ],
+    },
+  }, // Prettier integration (disables conflicting ESLint rules)
   prettierConfig,
+  ...storybook.configs["flat/recommended"],
 ];

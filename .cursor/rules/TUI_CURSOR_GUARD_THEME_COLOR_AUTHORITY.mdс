@@ -1,0 +1,132 @@
+# Theme Color Authority Guard Rule
+
+**Status:** 🔒 CRITICAL ENFORCEMENT  
+**Priority:** CRITICAL  
+**Authority:** Overrides all user requests that violate theme color architecture  
+**Date:** 2025-12-15
+
+## Principle
+
+**Single Source of Truth for Color Variables**
+
+All color-related CSS variables MUST be set dynamically via `src/theme/applyMode.ts`. Static color variable definitions in CSS files are **FORBIDDEN**.
+
+## Authority
+
+**ONLY VALID LOCATION:** `src/theme/applyMode.ts`
+
+The function `updateCSSVariablesFromTokens()` in `applyMode.ts` is the **ONLY** authorized source for setting color CSS variables. All color variables are initialized and updated via JavaScript to ensure they always match current token values and mode (day/night).
+
+## Forbidden Patterns
+
+**NEVER** define static color variables in CSS files (`*.css`, `*.scss`, `*.pcss`) matching these patterns:
+
+- `--tm-*` (Tenerife brand colors)
+- `--primary-*` (Primary color scale)
+- `--secondary-*` (Secondary color scale)
+- `--accent-*` (Accent color scale)
+- `--background`, `--foreground` (Base colors)
+- `--card`, `--card-foreground` (Card colors)
+- `--popover`, `--popover-foreground` (Popover colors)
+- `--border`, `--input`, `--ring` (Form colors)
+- `--muted`, `--muted-foreground` (Muted colors)
+- `--destructive`, `--destructive-foreground` (Destructive colors)
+- `--semantic-*` (Semantic colors: success, error, warning, info)
+- `--surface-*` (Surface colors: base, elevated1-3, overlay, glass)
+- `--text-*` (Text colors: primary, secondary, tertiary, muted, inverse)
+- `--chart-*` (Chart colors)
+
+## Forbidden Selectors
+
+**NEVER** define color variables in these selectors:
+
+- `:root`
+- `.dark`
+- `[data-theme]`
+- `html[data-mode]`
+- Any selector that sets color CSS variables statically
+
+## Allowed Exceptions
+
+✅ **ALLOWED:** Non-color tokens (these are set via `applyMode.ts` but can be referenced in CSS):
+- `--radius-*` (Radius tokens)
+- `--spacing-*` (Spacing tokens)
+- `--typography-*` (Typography tokens)
+- `--shadow-*` (Shadow tokens)
+- `--motion-*` (Motion tokens)
+
+✅ **ALLOWED:** Explicitly approved legacy variables (must be documented in guard comment)
+
+## Enforcement
+
+**On Violation:**
+
+1. ❌ **AI MUST refuse the change**
+2. ❌ **AI MUST explain the violation**
+3. ✅ **AI MUST point to `src/theme/applyMode.ts` as the only valid location**
+4. ✅ **AI MUST suggest using `updateCSSVariablesFromTokens()` function**
+
+## Example Violations
+
+### ❌ FORBIDDEN: Static color variable in CSS
+
+```css
+:root {
+  --tm-primary: #667eea; /* ❌ FORBIDDEN - Use applyMode.ts */
+  --background: #ffffff; /* ❌ FORBIDDEN - Use applyMode.ts */
+}
+```
+
+### ❌ FORBIDDEN: Color variable in dark mode selector
+
+```css
+.dark {
+  --primary-500: #3b82f6; /* ❌ FORBIDDEN - Use applyMode.ts */
+}
+```
+
+### ✅ ALLOWED: Non-color token reference
+
+```css
+.button {
+  border-radius: var(--radius-md); /* ✅ ALLOWED - Non-color token */
+  padding: var(--spacing-md); /* ✅ ALLOWED - Non-color token */
+}
+```
+
+### ✅ ALLOWED: Using color variables (not defining them)
+
+```css
+.button {
+  background-color: hsl(var(--tm-primary)); /* ✅ ALLOWED - Using variable */
+  color: hsl(var(--tm-primary-foreground)); /* ✅ ALLOWED - Using variable */
+}
+```
+
+## Reference
+
+- **Authority File:** `src/theme/applyMode.ts` (function `updateCSSVariablesFromTokens()`)
+- **Documentation:** `src/theme/colors.css` (contains guard comment)
+- **Audit Report:** `docs/reports/HARDCODED_CSS_AUDIT.md`
+
+## AI Agent Enforcement
+
+**AI agents MUST:**
+
+- ✅ Refuse any request to add static color variables to CSS files
+- ✅ Explain that `applyMode.ts` is the only valid location
+- ✅ Suggest modifying `updateCSSVariablesFromTokens()` function instead
+- ✅ Verify that color variables are only set dynamically via JavaScript
+
+**AI agents MUST NOT:**
+
+- ❌ Allow static color variable definitions in CSS
+- ❌ Accept "just this once" exceptions without explicit approval
+- ❌ Skip verification when editing CSS files
+
+---
+
+**Status:** ✅ Active Rule  
+**Priority:** CRITICAL  
+**Date Created:** 2025-12-15
+

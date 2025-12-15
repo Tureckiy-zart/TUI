@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Body > Snapshot > matches snapshot for default variant 1`] = `
+<p
+  class="font-sans text-foreground text-base leading-relaxed tracking-normal font-normal"
+>
+  Default Body
+</p>
+`;
+
+exports[`Body > Snapshot > matches snapshot for muted variant 1`] = `
+<p
+  class="font-sans text-base leading-relaxed tracking-normal font-normal text-muted-foreground"
+>
+  Muted Body
+</p>
+`;

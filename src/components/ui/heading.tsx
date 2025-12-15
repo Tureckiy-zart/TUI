@@ -4,150 +4,134 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TEXT_TOKENS } from "@/tokens/components/text";
+
+/**
+ * Heading level configuration
+ *
+ * Defines typography settings for each heading level (h1-h6).
+ * Format: [fontSize, defaultWeight, lineHeight, letterSpacing]
+ *
+ * Default weights are semantic: bold for h1-h2 (primary headings),
+ * semibold for h3-h4 (section headings), medium for h5-h6 (subsection headings).
+ * These defaults can be overridden via the weight prop using compound variants.
+ */
+const levelConfig = {
+  1: [
+    TEXT_TOKENS.fontSize["5xl"],
+    TEXT_TOKENS.fontWeight.bold,
+    TEXT_TOKENS.lineHeight.tight,
+    TEXT_TOKENS.letterSpacing.tight,
+  ],
+  2: [
+    TEXT_TOKENS.fontSize["4xl"],
+    TEXT_TOKENS.fontWeight.bold,
+    TEXT_TOKENS.lineHeight.tight,
+    TEXT_TOKENS.letterSpacing.tight,
+  ],
+  3: [
+    TEXT_TOKENS.fontSize["3xl"],
+    TEXT_TOKENS.fontWeight.semibold,
+    TEXT_TOKENS.lineHeight.snug,
+    TEXT_TOKENS.letterSpacing.normal,
+  ],
+  4: [
+    TEXT_TOKENS.fontSize["2xl"],
+    TEXT_TOKENS.fontWeight.semibold,
+    TEXT_TOKENS.lineHeight.snug,
+    TEXT_TOKENS.letterSpacing.normal,
+  ],
+  5: [
+    TEXT_TOKENS.fontSize.xl,
+    TEXT_TOKENS.fontWeight.medium,
+    TEXT_TOKENS.lineHeight.normal,
+    TEXT_TOKENS.letterSpacing.normal,
+  ],
+  6: [
+    TEXT_TOKENS.fontSize.lg,
+    TEXT_TOKENS.fontWeight.medium,
+    TEXT_TOKENS.lineHeight.normal,
+    TEXT_TOKENS.letterSpacing.normal,
+  ],
+} as const;
+
+/**
+ * Generate level variants from configuration
+ *
+ * Creates base variants for each heading level with default weight, line height,
+ * and letter spacing. The weight can be overridden via compound variants when
+ * the weight prop is explicitly provided.
+ */
+const levelVariants = Object.entries(levelConfig).reduce(
+  (acc, [level, [fontSize, defaultWeight, lineHeight, letterSpacing]]) => {
+    acc[Number(level) as keyof typeof levelConfig] =
+      `${fontSize} ${defaultWeight} ${lineHeight} ${letterSpacing}`;
+    return acc;
+  },
+  {} as Record<1 | 2 | 3 | 4 | 5 | 6, string>,
+);
+
+/**
+ * Generate compound variants for weight override
+ *
+ * Creates compound variants for all combinations of level (1-6) and weight (normal, medium, semibold, bold).
+ * These variants override the default weight from levelConfig when a weight prop is provided.
+ *
+ * This approach simplifies maintenance: instead of 24 explicit compound variants, we generate
+ * them programmatically, making it easier to add new levels or weights in the future.
+ *
+ * @returns Array of compound variant configurations
+ */
+const generateWeightVariants = (): Array<{
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  weight: "normal" | "medium" | "semibold" | "bold";
+  class: string;
+}> => {
+  const weights: Array<"normal" | "medium" | "semibold" | "bold"> = [
+    "normal",
+    "medium",
+    "semibold",
+    "bold",
+  ];
+  const levels: Array<1 | 2 | 3 | 4 | 5 | 6> = [1, 2, 3, 4, 5, 6];
+  const variants: Array<{
+    level: 1 | 2 | 3 | 4 | 5 | 6;
+    weight: "normal" | "medium" | "semibold" | "bold";
+    class: string;
+  }> = [];
+
+  // Generate variants for all level + weight combinations
+  // Each variant includes fontSize, lineHeight, and letterSpacing from levelConfig,
+  // but uses the specified weight instead of the default
+  for (const level of levels) {
+    const [fontSize, , lineHeight, letterSpacing] = levelConfig[level];
+    for (const weight of weights) {
+      variants.push({
+        level,
+        weight,
+        class: `${fontSize} ${TEXT_TOKENS.fontWeight[weight]} ${lineHeight} ${letterSpacing}`,
+      });
+    }
+  }
+
+  return variants;
+};
 
 const headingVariants = cva("font-display text-foreground", {
   variants: {
-    level: {
-      1: "text-5xl font-bold leading-tight tracking-tight",
-      2: "text-4xl font-bold leading-tight tracking-tight",
-      3: "text-3xl font-semibold leading-snug tracking-normal",
-      4: "text-2xl font-semibold leading-snug tracking-normal",
-      5: "text-xl font-medium leading-normal tracking-normal",
-      6: "text-lg font-medium leading-normal tracking-normal",
-    },
+    level: levelVariants,
     weight: {
-      normal: "font-normal",
-      medium: "font-medium",
-      semibold: "font-semibold",
-      bold: "font-bold",
+      normal: TEXT_TOKENS.fontWeight.normal,
+      medium: TEXT_TOKENS.fontWeight.medium,
+      semibold: TEXT_TOKENS.fontWeight.semibold,
+      bold: TEXT_TOKENS.fontWeight.bold,
     },
     muted: {
       true: "text-muted-foreground",
       false: "",
     },
   },
-  compoundVariants: [
-    {
-      level: 1,
-      weight: "normal",
-      class: "text-5xl font-normal",
-    },
-    {
-      level: 1,
-      weight: "medium",
-      class: "text-5xl font-medium",
-    },
-    {
-      level: 1,
-      weight: "semibold",
-      class: "text-5xl font-semibold",
-    },
-    {
-      level: 1,
-      weight: "bold",
-      class: "text-5xl font-bold",
-    },
-    {
-      level: 2,
-      weight: "normal",
-      class: "text-4xl font-normal",
-    },
-    {
-      level: 2,
-      weight: "medium",
-      class: "text-4xl font-medium",
-    },
-    {
-      level: 2,
-      weight: "semibold",
-      class: "text-4xl font-semibold",
-    },
-    {
-      level: 2,
-      weight: "bold",
-      class: "text-4xl font-bold",
-    },
-    {
-      level: 3,
-      weight: "normal",
-      class: "text-3xl font-normal",
-    },
-    {
-      level: 3,
-      weight: "medium",
-      class: "text-3xl font-medium",
-    },
-    {
-      level: 3,
-      weight: "semibold",
-      class: "text-3xl font-semibold",
-    },
-    {
-      level: 3,
-      weight: "bold",
-      class: "text-3xl font-bold",
-    },
-    {
-      level: 4,
-      weight: "normal",
-      class: "text-2xl font-normal",
-    },
-    {
-      level: 4,
-      weight: "medium",
-      class: "text-2xl font-medium",
-    },
-    {
-      level: 4,
-      weight: "semibold",
-      class: "text-2xl font-semibold",
-    },
-    {
-      level: 4,
-      weight: "bold",
-      class: "text-2xl font-bold",
-    },
-    {
-      level: 5,
-      weight: "normal",
-      class: "text-xl font-normal",
-    },
-    {
-      level: 5,
-      weight: "medium",
-      class: "text-xl font-medium",
-    },
-    {
-      level: 5,
-      weight: "semibold",
-      class: "text-xl font-semibold",
-    },
-    {
-      level: 5,
-      weight: "bold",
-      class: "text-xl font-bold",
-    },
-    {
-      level: 6,
-      weight: "normal",
-      class: "text-lg font-normal",
-    },
-    {
-      level: 6,
-      weight: "medium",
-      class: "text-lg font-medium",
-    },
-    {
-      level: 6,
-      weight: "semibold",
-      class: "text-lg font-semibold",
-    },
-    {
-      level: 6,
-      weight: "bold",
-      class: "text-lg font-bold",
-    },
-  ],
+  compoundVariants: generateWeightVariants(),
   defaultVariants: {
     level: 1,
     muted: false,

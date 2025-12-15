@@ -3,47 +3,34 @@
 /**
  * Row Primitive Component
  *
- * Token-driven horizontal layout component (flex row). Uses Box internally
- * with flex display and row direction. All spacing uses token-based values.
+ * Row is a semantic alias for Stack with horizontal direction.
+ * It provides a more explicit API for horizontal layouts.
+ * Uses Stack internally with direction="horizontal".
+ *
+ * All spacing uses token-based values only.
+ *
+ * @example
+ * ```tsx
+ * <Row spacing="md" align="center">
+ *   <Box>Item 1</Box>
+ *   <Box>Item 2</Box>
+ * </Row>
+ * ```
  */
 
 import * as React from "react";
 
-import { Box, type BoxProps } from "./Box";
-import type { ResponsiveSpacing } from "./layout.types";
+import { Stack, type StackProps } from "./Stack";
 
-export interface RowProps extends Omit<BoxProps, "display" | "flexDirection"> {
-  /**
-   * Gap between row items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
-   */
-  gap?: ResponsiveSpacing;
-
-  /**
-   * Align items
-   */
-  align?: "start" | "end" | "center" | "baseline" | "stretch";
-
-  /**
-   * Justify content
-   */
-  justify?: "start" | "end" | "center" | "between" | "around" | "evenly";
+export interface RowProps extends Omit<StackProps, "direction"> {
+  // Row inherits all Stack props except direction (always horizontal)
 }
 
 /**
- * Row component - horizontal layout using flex row
+ * Row component - semantic alias for Stack with horizontal direction
  */
-const Row = React.forwardRef<HTMLDivElement, RowProps>(({ gap, align, justify, ...props }, ref) => {
-  return (
-    <Box
-      ref={ref}
-      display="flex"
-      flexDirection="row"
-      gap={gap}
-      align={align}
-      justify={justify}
-      {...props}
-    />
-  );
+const Row = React.forwardRef<HTMLDivElement, RowProps>((props, ref) => {
+  return <Stack ref={ref} direction="horizontal" {...props} />;
 });
 
 Row.displayName = "Row";

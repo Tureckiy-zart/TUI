@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { Portal } from "./Portal";
 
 const meta: Meta<typeof Portal> = {
-  title: "Overlays/Portal",
+  title: "Components/Overlays/Portal",
   component: Portal,
   parameters: {
     layout: "centered",

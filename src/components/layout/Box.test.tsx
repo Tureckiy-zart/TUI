@@ -144,4 +144,71 @@ describe("Box component", () => {
     const box = container.firstChild as HTMLElement;
     expect(box).toHaveStyle({ padding: "var(--layout-grid-md)" });
   });
+
+  describe("Layout props removal", () => {
+    it("should NOT have display prop in BoxProps interface", () => {
+      // TypeScript type check - display should not be in BoxProps
+      // This is verified by TypeScript compilation
+      const boxProps: React.ComponentProps<typeof Box> = {
+        p: "md",
+        bg: "background",
+      };
+      expect(boxProps).toBeDefined();
+      // @ts-expect-error - display should not exist
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _display = boxProps.display;
+    });
+
+    it("should NOT have flexDirection prop in BoxProps interface", () => {
+      const boxProps: React.ComponentProps<typeof Box> = {
+        p: "md",
+      };
+      // @ts-expect-error - flexDirection should not exist
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _flexDirection = boxProps.flexDirection;
+    });
+
+    it("should NOT have gap prop in BoxProps interface", () => {
+      const boxProps: React.ComponentProps<typeof Box> = {
+        p: "md",
+      };
+      // @ts-expect-error - gap should not exist
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _gap = boxProps.gap;
+    });
+
+    it("should NOT have align prop in BoxProps interface", () => {
+      const boxProps: React.ComponentProps<typeof Box> = {
+        p: "md",
+      };
+      // @ts-expect-error - align should not exist
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _align = boxProps.align;
+    });
+
+    it("should NOT have justify prop in BoxProps interface", () => {
+      const boxProps: React.ComponentProps<typeof Box> = {
+        p: "md",
+      };
+      // @ts-expect-error - justify should not exist
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _justify = boxProps.justify;
+    });
+
+    it("should only accept spacing and visual props", () => {
+      const { container } = render(
+        <Box p="md" m="sm" bg="background" radius="lg" shadow="md">
+          Content
+        </Box>,
+      );
+      const box = container.firstChild as HTMLElement;
+      expect(box).toHaveStyle({
+        padding: "var(--spacing-md)",
+        margin: "var(--spacing-sm)",
+        backgroundColor: "var(--background)",
+        borderRadius: "var(--radius-lg)",
+      });
+      expect(box).toHaveClass("shadow-md");
+    });
+  });
 });

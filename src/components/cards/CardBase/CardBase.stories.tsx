@@ -56,39 +56,26 @@ export const Default: Story = {
     variant: "default",
   },
   render: (args) => (
-    <CardBase {...args} style={{ width: "400px" }}>
+    <CardBase {...args} className="w-[400px]">
       <CardBaseImageWrapper>
         <div
+          className="flex h-full w-full items-center justify-center text-2xl"
           style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontSize: "24px",
+            background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+            color: `hsl(var(--tm-primary-foreground))`,
           }}
         >
           Image
         </div>
       </CardBaseImageWrapper>
       <CardBaseContentWrapper>
-        <h3 style={{ margin: 0, fontWeight: "bold" }}>Card Title</h3>
-        <p style={{ margin: 0, opacity: 0.7 }}>
+        <h3 className="m-0 font-bold">Card Title</h3>
+        <p className="m-0 opacity-70">
           Card content goes here. This is a description or body text.
         </p>
       </CardBaseContentWrapper>
       <CardBaseFooterWrapper>
-        <button
-          style={{
-            padding: "8px 16px",
-            border: "1px solid currentColor",
-            borderRadius: "6px",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+        <button className="cursor-pointer rounded-md border border-current bg-transparent px-4 py-2">
           Action
         </button>
       </CardBaseFooterWrapper>
@@ -105,37 +92,24 @@ export const Compact: Story = {
     variant: "default",
   },
   render: (args) => (
-    <CardBase {...args} style={{ width: "400px" }}>
+    <CardBase {...args} className="w-[400px]">
       <CardBaseImageWrapper>
         <div
+          className="flex h-full w-full items-center justify-center text-2xl"
           style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontSize: "24px",
+            background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+            color: `hsl(var(--tm-primary-foreground))`,
           }}
         >
           Image
         </div>
       </CardBaseImageWrapper>
       <CardBaseContentWrapper>
-        <h3 style={{ margin: 0, fontWeight: "bold" }}>Compact Card</h3>
-        <p style={{ margin: 0, opacity: 0.7 }}>Compact size variant.</p>
+        <h3 className="m-0 font-bold">Compact Card</h3>
+        <p className="m-0 opacity-70">Compact size variant.</p>
       </CardBaseContentWrapper>
       <CardBaseFooterWrapper>
-        <button
-          style={{
-            padding: "8px 16px",
-            border: "1px solid currentColor",
-            borderRadius: "6px",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+        <button className="cursor-pointer rounded-md border border-current bg-transparent px-4 py-2">
           Action
         </button>
       </CardBaseFooterWrapper>
@@ -152,37 +126,24 @@ export const Featured: Story = {
     variant: "featured",
   },
   render: (args) => (
-    <CardBase {...args} style={{ width: "400px" }}>
+    <CardBase {...args} className="w-[400px]">
       <CardBaseImageWrapper>
         <div
+          className="flex h-full w-full items-center justify-center text-2xl"
           style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontSize: "24px",
+            background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+            color: `hsl(var(--tm-primary-foreground))`,
           }}
         >
           Image
         </div>
       </CardBaseImageWrapper>
       <CardBaseContentWrapper>
-        <h3 style={{ margin: 0, fontWeight: "bold" }}>Featured Card</h3>
-        <p style={{ margin: 0, opacity: 0.7 }}>Featured variant with gradient.</p>
+        <h3 className="m-0 font-bold">Featured Card</h3>
+        <p className="m-0 opacity-70">Featured variant with gradient.</p>
       </CardBaseContentWrapper>
       <CardBaseFooterWrapper>
-        <button
-          style={{
-            padding: "8px 16px",
-            border: "1px solid currentColor",
-            borderRadius: "6px",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+        <button className="cursor-pointer rounded-md border border-current bg-transparent px-4 py-2">
           Action
         </button>
       </CardBaseFooterWrapper>
@@ -199,37 +160,24 @@ export const CompactFeatured: Story = {
     variant: "featured",
   },
   render: (args) => (
-    <CardBase {...args} style={{ width: "400px" }}>
+    <CardBase {...args} className="w-[400px]">
       <CardBaseImageWrapper>
         <div
+          className="flex h-full w-full items-center justify-center text-2xl"
           style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontSize: "24px",
+            background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+            color: `hsl(var(--tm-primary-foreground))`,
           }}
         >
           Image
         </div>
       </CardBaseImageWrapper>
       <CardBaseContentWrapper>
-        <h3 style={{ margin: 0, fontWeight: "bold" }}>Compact Featured</h3>
-        <p style={{ margin: 0, opacity: 0.7 }}>Compact size with featured variant.</p>
+        <h3 className="m-0 font-bold">Compact Featured</h3>
+        <p className="m-0 opacity-70">Compact size with featured variant.</p>
       </CardBaseContentWrapper>
       <CardBaseFooterWrapper>
-        <button
-          style={{
-            padding: "8px 16px",
-            border: "1px solid currentColor",
-            borderRadius: "6px",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+        <button className="cursor-pointer rounded-md border border-current bg-transparent px-4 py-2">
           Action
         </button>
       </CardBaseFooterWrapper>
@@ -242,92 +190,76 @@ export const CompactFeatured: Story = {
  */
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", maxWidth: "1200px" }}>
-      <CardBase size="default" variant="default" style={{ width: "300px" }}>
+    <div className="flex max-w-[1200px] flex-wrap gap-6">
+      <CardBase size="default" variant="default" className="w-[300px]">
         <CardBaseImageWrapper>
           <div
+            className="flex h-full w-full items-center justify-center"
             style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
+              background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+              color: `hsl(var(--tm-primary-foreground))`,
             }}
           >
             Image
           </div>
         </CardBaseImageWrapper>
         <CardBaseContentWrapper>
-          <h3 style={{ margin: 0, fontWeight: "bold" }}>Default</h3>
-          <p style={{ margin: 0, opacity: 0.7 }}>Default size and variant.</p>
+          <h3 className="m-0 font-bold">Default</h3>
+          <p className="m-0 opacity-70">Default size and variant.</p>
         </CardBaseContentWrapper>
       </CardBase>
 
-      <CardBase size="compact" variant="default" style={{ width: "300px" }}>
+      <CardBase size="compact" variant="default" className="w-[300px]">
         <CardBaseImageWrapper>
           <div
+            className="flex h-full w-full items-center justify-center"
             style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
+              background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+              color: `hsl(var(--tm-primary-foreground))`,
             }}
           >
             Image
           </div>
         </CardBaseImageWrapper>
         <CardBaseContentWrapper>
-          <h3 style={{ margin: 0, fontWeight: "bold" }}>Compact</h3>
-          <p style={{ margin: 0, opacity: 0.7 }}>Compact size variant.</p>
+          <h3 className="m-0 font-bold">Compact</h3>
+          <p className="m-0 opacity-70">Compact size variant.</p>
         </CardBaseContentWrapper>
       </CardBase>
 
-      <CardBase size="default" variant="featured" style={{ width: "300px" }}>
+      <CardBase size="default" variant="featured" className="w-[300px]">
         <CardBaseImageWrapper>
           <div
+            className="flex h-full w-full items-center justify-center"
             style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
+              background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+              color: `hsl(var(--tm-primary-foreground))`,
             }}
           >
             Image
           </div>
         </CardBaseImageWrapper>
         <CardBaseContentWrapper>
-          <h3 style={{ margin: 0, fontWeight: "bold" }}>Featured</h3>
-          <p style={{ margin: 0, opacity: 0.7 }}>Featured variant.</p>
+          <h3 className="m-0 font-bold">Featured</h3>
+          <p className="m-0 opacity-70">Featured variant.</p>
         </CardBaseContentWrapper>
       </CardBase>
 
-      <CardBase size="compact" variant="featured" style={{ width: "300px" }}>
+      <CardBase size="compact" variant="featured" className="w-[300px]">
         <CardBaseImageWrapper>
           <div
+            className="flex h-full w-full items-center justify-center"
             style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
+              background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+              color: `hsl(var(--tm-primary-foreground))`,
             }}
           >
             Image
           </div>
         </CardBaseImageWrapper>
         <CardBaseContentWrapper>
-          <h3 style={{ margin: 0, fontWeight: "bold" }}>Compact Featured</h3>
-          <p style={{ margin: 0, opacity: 0.7 }}>Compact + Featured.</p>
+          <h3 className="m-0 font-bold">Compact Featured</h3>
+          <p className="m-0 opacity-70">Compact + Featured.</p>
         </CardBaseContentWrapper>
       </CardBase>
     </div>
@@ -339,59 +271,33 @@ export const AllVariants: Story = {
  */
 export const LayoutWrappers: Story = {
   render: () => (
-    <CardBase style={{ width: "400px" }}>
+    <CardBase className="w-[400px]">
       <CardBaseImageWrapper>
         <div
+          className="flex h-full w-full items-center justify-center text-xl font-bold"
           style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontSize: "20px",
-            fontWeight: "bold",
+            background: `linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)`,
+            color: `hsl(var(--tm-primary-foreground))`,
           }}
         >
           ImageWrapper
         </div>
       </CardBaseImageWrapper>
       <CardBaseContentWrapper>
-        <h3 style={{ margin: 0, fontWeight: "bold" }}>ContentWrapper</h3>
-        <p style={{ margin: 0, opacity: 0.7 }}>
-          This is the content area. It uses flex column layout.
-        </p>
-        <p style={{ margin: 0, opacity: 0.7 }}>Multiple paragraphs can be added here.</p>
+        <h3 className="m-0 font-bold">ContentWrapper</h3>
+        <p className="m-0 opacity-70">This is the content area. It uses flex column layout.</p>
+        <p className="m-0 opacity-70">Multiple paragraphs can be added here.</p>
       </CardBaseContentWrapper>
       <CardBaseFooterWrapper>
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            width: "100%",
-            justifyContent: "flex-end",
-          }}
-        >
-          <button
-            style={{
-              padding: "8px 16px",
-              border: "1px solid currentColor",
-              borderRadius: "6px",
-              background: "transparent",
-              cursor: "pointer",
-            }}
-          >
+        <div className="flex w-full justify-end gap-2">
+          <button className="cursor-pointer rounded-md border border-current bg-transparent px-4 py-2">
             Cancel
           </button>
           <button
+            className="cursor-pointer rounded-md border-none px-4 py-2"
             style={{
-              padding: "8px 16px",
-              border: "none",
-              borderRadius: "6px",
               background: "currentColor",
-              color: "white",
-              cursor: "pointer",
+              color: `hsl(var(--tm-primary-foreground))`,
             }}
           >
             Confirm

@@ -1,21 +1,21 @@
 "use client";
 
-import * as React from "react";
 import { Input } from "@/components/input";
 import { Select } from "@/components/select";
 import { Textarea } from "@/components/textarea";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 import { Field } from "./field";
 
 const meta: Meta<typeof Field> = {
-  title: "UI/Field",
+  title: "Compositions/Field",
   component: Field,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Field API provides a composable structure for form fields with label, control, description, and error message. Uses Stack and Text primitives with token-based spacing.",
+          "**COMPOSITION** - Field API provides a composable structure for form fields with label, control, description, and error message. This is a composition that combines multiple components (Label, Input, Textarea, Select, etc.) into a reusable form field pattern. Uses Stack and Text primitives with token-based spacing.",
       },
     },
   },
@@ -31,7 +31,7 @@ const meta: Meta<typeof Field> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const BasicInput: Story = {
+export const Basic: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="basic-input">Email Address</Field.Label>
@@ -42,7 +42,7 @@ export const BasicInput: Story = {
   ),
 };
 
-export const InputWithDescription: Story = {
+export const WithDescription: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="desc-input">Username</Field.Label>
@@ -52,9 +52,16 @@ export const InputWithDescription: Story = {
       <Field.Description>Choose a unique username for your account</Field.Description>
     </Field>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Field with description/helper text displayed below Input control.",
+      },
+    },
+  },
 };
 
-export const InputWithError: Story = {
+export const WithError: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="error-input">Email Address</Field.Label>
@@ -64,6 +71,13 @@ export const InputWithError: Story = {
       <Field.Error>Please enter a valid email address</Field.Error>
     </Field>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Field error state combined with Input using error state.",
+      },
+    },
+  },
 };
 
 export const RequiredField: Story = {
@@ -79,7 +93,7 @@ export const RequiredField: Story = {
   ),
 };
 
-export const TextareaField: Story = {
+export const WithTextarea: Story = {
   render: () => (
     <Field className="w-64">
       <Field.Label htmlFor="textarea-field">Message</Field.Label>
@@ -153,74 +167,6 @@ export const WithLabel: Story = {
       description: {
         story:
           "Field label correctly associated with Select Trigger for accessibility using htmlFor and id.",
-      },
-    },
-  },
-};
-
-/**
- * Field with Select and description/helper text
- */
-export const WithDescription: Story = {
-  render: () => (
-    <Field className="w-64">
-      <Field.Label htmlFor="select-with-desc">Country</Field.Label>
-      <Field.Control>
-        <Select.Root>
-          <Select.Trigger id="select-with-desc">
-            <Select.Value placeholder="Select a country" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Item value="us">United States</Select.Item>
-              <Select.Item value="uk">United Kingdom</Select.Item>
-              <Select.Item value="ca">Canada</Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>
-      </Field.Control>
-      <Field.Description>Choose your country of residence</Field.Description>
-    </Field>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: "Field description/helper text displayed below Select control.",
-      },
-    },
-  },
-};
-
-/**
- * Field with Select and error state
- */
-export const WithError: Story = {
-  render: () => (
-    <Field className="w-64">
-      <Field.Label htmlFor="select-with-error">Country</Field.Label>
-      <Field.Control>
-        <Select.Root>
-          <Select.Trigger id="select-with-error" variant="destructive">
-            <Select.Value placeholder="Select a country" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Item value="us">United States</Select.Item>
-              <Select.Item value="uk">United Kingdom</Select.Item>
-              <Select.Item value="ca">Canada</Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>
-      </Field.Control>
-      <Field.Error>Please select a valid country</Field.Error>
-    </Field>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: "Field error state combined with Select using destructive variant.",
       },
     },
   },

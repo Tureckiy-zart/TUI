@@ -11,7 +11,7 @@ const meta: Meta<typeof Grid> = {
     docs: {
       description: {
         component:
-          "Token-driven CSS Grid container component with support for columns, rows, gap, alignment, and responsive layout using CSS variables. All spacing uses token system via CSS variables.",
+          "Grid is a CSS Grid container extension of Box. It provides full control over grid layout properties (columns, rows, gap, flow, alignment). Uses Box internally as the base container. Use Grid for two-dimensional layouts that require precise control over both rows and columns.",
       },
     },
   },

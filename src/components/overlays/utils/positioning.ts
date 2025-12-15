@@ -113,7 +113,7 @@ export function usePositioning({
       return offsetValue; // Backward compatibility
     }
     const baseOffset = getBaseValue(offsetValue);
-    return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+    return baseOffset ? getSpacingPx(baseOffset) : getSpacingPx(1); // Default 4px (spacing[1])
   }, [offsetValue]);
 
   // SSR-safe: only initialize on client
@@ -130,7 +130,7 @@ export function usePositioning({
     }
 
     if (enableShift) {
-      middlewareArray.push(shift({ padding: 8 }));
+      middlewareArray.push(shift({ padding: getSpacingPx(2) }));
     }
 
     return middlewareArray;

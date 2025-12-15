@@ -3,14 +3,28 @@
 /**
  * Flex Primitive Component
  *
- * Token-driven flexbox container with full control over direction, wrap,
- * grow, shrink, basis, alignment, and spacing. Uses Box internally.
+ * Flex is an advanced flexbox container extension of Box. It provides full control
+ * over flexbox properties (direction, wrap, grow, shrink, basis, alignment, spacing).
+ * Uses Box internally as the base container.
+ *
+ * Use Flex when you need advanced flexbox control beyond what Stack provides.
+ * For simple vertical/horizontal layouts, prefer Stack.
+ *
  * All spacing values use tokens only.
+ *
+ * @example
+ * ```tsx
+ * // Advanced flexbox with wrap and grow
+ * <Flex direction="row" wrap="wrap" gap="md" grow={1}>
+ *   <Box>Item 1</Box>
+ *   <Box>Item 2</Box>
+ * </Flex>
+ * ```
  */
 
 import * as React from "react";
 
-import { getSpacingCSSVar } from "@/lib/responsive-props";
+import { getBaseValue, getSpacingCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import type { FlexBasisToken, ResponsiveFlexBasis } from "@/tokens/types";
 
@@ -21,6 +35,7 @@ import type {
   ResponsiveFlexWrap,
   ResponsiveJustify,
   ResponsiveSpacing,
+  SpacingValue,
 } from "./layout.types";
 
 export interface FlexProps
@@ -201,8 +216,12 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
     >(justify);
     const basisValue = getFlexBaseValue<FlexBasisToken>(basis);
 
+    // Get gap base value for inline style
+    const gapBaseValue = getBaseValue<SpacingValue>(gap);
+
     // Build additional classes
     const flexClasses = cn(
+      "flex",
       flexDirectionToClass(directionValue),
       flexWrapToClass(wrapValue),
       growToClass(grow),
@@ -229,18 +248,16 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
       return getSpacingCSSVar(basisString);
     })();
 
-    // Handle basis via style if provided
+    // Handle basis and gap via style if provided
     const flexStyle: React.CSSProperties = {
       ...(flexBasisCSS ? { flexBasis: flexBasisCSS } : {}),
+      ...(gapBaseValue !== undefined && { gap: getSpacingCSSVar(String(gapBaseValue)) }),
       ...style,
     };
 
     return (
       <Box
         ref={ref}
-        display="flex"
-        flexDirection={directionValue}
-        gap={gap}
         className={flexClasses}
         style={Object.keys(flexStyle).length > 0 ? flexStyle : undefined}
         {...props}

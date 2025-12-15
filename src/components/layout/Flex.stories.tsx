@@ -9,7 +9,7 @@ const meta: Meta<typeof Flex> = {
     docs: {
       description: {
         component:
-          "Token-driven flexbox container component with support for direction, wrap, alignment, justification, and responsive gap using CSS variables.",
+          "Flex is an advanced flexbox container extension of Box. It provides full control over flexbox properties (direction, wrap, grow, shrink, basis, alignment, spacing). Uses Box internally as the base container. Use Flex when you need advanced flexbox control beyond what Stack provides.",
       },
     },
   },

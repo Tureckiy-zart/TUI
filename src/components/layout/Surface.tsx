@@ -3,8 +3,20 @@
 /**
  * Surface Primitive Component
  *
- * Variant component for surface elevation (flat, raised, sunken).
- * Uses CVA for variants and token-based background, border, and shadow only.
+ * Surface is a variant component extension of Box. It provides surface elevation
+ * variants (flat, raised, sunken) with token-based styling.
+ * Uses Box internally as the base container and CVA for variant management.
+ *
+ * Use Surface when you need semantic elevation variants. For custom styling,
+ * use Box directly with bg, shadow, and radius props.
+ *
+ * @example
+ * ```tsx
+ * // Surface with elevation variant
+ * <Surface variant="raised" radius="lg" p="md">
+ *   Content
+ * </Surface>
+ * ```
  */
 
 import { cva } from "class-variance-authority";

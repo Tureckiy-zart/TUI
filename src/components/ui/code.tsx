@@ -4,12 +4,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { CODE_TOKENS } from "@/tokens/components/code";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 const codeVariants = cva("font-mono text-foreground", {
   variants: {
     variant: {
-      inline: "rounded bg-muted px-xs py-0.5 text-sm font-semibold",
-      block: "block rounded-md bg-muted p-md text-sm font-semibold",
+      inline: `${CODE_TOKENS.radius.inline} ${CODE_TOKENS.background.muted} ${CODE_TOKENS.padding.inline} ${TEXT_TOKENS.fontSize.sm} ${TEXT_TOKENS.fontWeight.semibold}`,
+      block: `block ${CODE_TOKENS.radius.block} ${CODE_TOKENS.background.muted} ${CODE_TOKENS.padding.block} ${TEXT_TOKENS.fontSize.sm} ${TEXT_TOKENS.fontWeight.semibold}`,
     },
     muted: {
       true: "text-muted-foreground",

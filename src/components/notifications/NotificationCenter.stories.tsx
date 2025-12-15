@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { NotificationCenter, NotificationCenterProvider, useNotificationCenter } from "./";
 
 const meta: Meta<typeof NotificationCenterProvider> = {
-  title: "Notifications/NotificationCenter",
+  title: "UI/Extensions/NotificationCenter",
   component: NotificationCenterProvider,
   parameters: {
     layout: "centered",

@@ -109,7 +109,7 @@ describe("CTASection component", () => {
       <CTASection headline="Get Started" primaryAction={{ label: "Sign Up", onClick: () => {} }} />,
     );
     const button = screen.getByRole("button", { name: /sign up/i });
-    expect(button).toHaveClass("bg-primary");
+    expect(button).toHaveClass("bg-[hsl(var(--button-primary-base-bg))]");
   });
 
   it("should apply custom variant to primary action", () => {
@@ -150,7 +150,7 @@ describe("CTASection component", () => {
       />,
     );
     const button = screen.getByRole("button", { name: /learn more/i });
-    expect(button).toHaveClass("hover:bg-accent");
+    expect(button).toHaveClass("hover:bg-[hsl(var(--button-ghost-hover-bg))]");
   });
 
   it("should handle ReactNode headline", () => {

@@ -3,7 +3,7 @@ import plugin from "tailwindcss/plugin";
 
 import { tailwindThemeColors } from "./tokens/colors";
 import { tailwindMotionConfig } from "./tokens/motion";
-import { motionV2CSSVariables, motionV2TailwindConfig } from "./tokens/motion/v2";
+import { motionV2TailwindConfig } from "./tokens/motion/v2";
 import { tailwindRadiusConfig } from "./tokens/radius";
 import { tailwindShadowConfig } from "./tokens/shadows";
 import { tailwindSpacingConfig } from "./tokens/spacing";
@@ -68,13 +68,10 @@ const preset: Partial<Config> = {
     },
   },
   plugins: [
-    plugin(({ addUtilities, addBase }) => {
-      // Add CSS variables to root
-      addBase({
-        ":root": {
-          ...motionV2CSSVariables,
-        },
-      });
+    plugin(({ addUtilities }) => {
+      // NOTE: CSS variables (including motionV2CSSVariables) are set dynamically
+      // by updateCSSVariablesFromTokens() in src/theme/applyMode.ts
+      // This ensures a single source of truth for all CSS variables
 
       // Motion V2 utility classes
       addUtilities({

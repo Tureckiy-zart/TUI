@@ -4,65 +4,20 @@
 @tailwind utilities;
 
 /* 
- * NOTE: CSS variables are initialized here with token values from src/tokens/colors.ts
- * These values are synchronized with baseColors.day and baseColors.night tokens.
- * Dynamic updates are handled by updateCSSVariablesFromTokens() in src/theme/applyMode.ts
+ * NOTE: ALL CSS variables (colors, spacing, typography, shadows, radius, motion)
+ * are set dynamically by updateCSSVariablesFromTokens() in src/theme/applyMode.ts
+ * from token values in src/tokens/.
+ * 
+ * This ensures a single source of truth for all CSS variables and prevents
+ * conflicts between static CSS definitions and dynamic token-driven updates.
+ * 
+ * All variables are initialized and updated via JavaScript to ensure they always
+ * match the current token values and mode (day/night where applicable).
+ * 
+ * Static variable definitions have been removed to prevent conflicts.
  */
 @layer base {
-  :root {
-    /* Base colors from tokens/colors.ts baseColors.day */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-
-    /* Semantic colors from tokens/colors.ts semanticColors.day */
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --destructive: 0 80% 40%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Tenerife Music custom colors from tokens/colors.ts */
-    --tm-primary: 173 100% 37%;
-    --tm-primary-foreground: 0 0% 100%;
-    --tm-secondary: 0 0% 95.7%;
-    --tm-secondary-foreground: 0 0% 6.7%;
-    --tm-accent: 0 0% 89.8%;
-    --tm-accent-foreground: 0 0% 6.7%;
-  }
-
-  .dark {
-    /* Base colors from tokens/colors.ts baseColors.night */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 89.8%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 89.8%;
-    --popover: 240 10% 5.1%;
-    --popover-foreground: 0 0% 89.8%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    /* Semantic colors from tokens/colors.ts semanticColors.night */
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    /* Tenerife Music custom colors for dark mode */
-    --tm-primary: 259 70% 67%;
-    --tm-primary-foreground: 0 0% 100%;
-    --tm-secondary: 240 3.7% 15.9%;
-    --tm-secondary-foreground: 0 0% 98%;
-    --tm-accent: 240 3.7% 15.9%;
-    --tm-accent-foreground: 0 0% 98%;
-  }
+  /* All CSS variables are set dynamically via applyMode.ts */
 }
 
 @layer base {
@@ -81,7 +36,7 @@
   }
 
   .tm-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    width: var(--spacing-1-5);
   }
 
   .tm-scrollbar::-webkit-scrollbar-track {
@@ -90,7 +45,7 @@
 
   .tm-scrollbar::-webkit-scrollbar-thumb {
     background-color: hsl(var(--muted-foreground));
-    border-radius: 3px;
+    border-radius: var(--radius-xs);
   }
 
   .tm-scrollbar::-webkit-scrollbar-thumb:hover {
