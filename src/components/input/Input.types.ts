@@ -3,8 +3,7 @@
 import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import type { InputSize } from "@/tokens/components/input";
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS, type InputSize } from "@/tokens/components/input";
 import type { Responsive } from "@/types/responsive";
 
 import { inputVariants } from "./input-variants";

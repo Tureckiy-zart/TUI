@@ -85,6 +85,7 @@ function getInitialReduceMotion(override?: boolean): boolean {
   }
 }
 
+// eslint-disable-next-line max-lines-per-function
 export function ThemeProvider({
   children,
   defaultMode = "day",
