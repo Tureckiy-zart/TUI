@@ -59,7 +59,7 @@ export const accentColors: ColorScale = {
   200: "280 60% 85%",
   300: "280 55% 75%",
   400: "280 50% 65%",
-  500: "280 70% 60%", // Adjusted for better scale progression
+  500: "280 65% 72%", // Adjusted for WCAG AA contrast (4.5:1) with dark text in night mode
   600: "259 65% 59%", // Default accent - lightened for better contrast vs secondary (L* ~59, was 52, 15 delta from secondary-600)
   700: "259 60% 44%", // Active state - rebalanced for semantic strength (L* ~44, 12 delta from secondary-700)
   800: "259 55% 38%", // Adjusted for proper progression
@@ -203,7 +203,7 @@ export const textColors: Record<Mode, TextColors> = {
     primary: "0 0% 9%", // Almost black (neutral-900 equivalent)
     secondary: "0 0% 45%", // Medium gray
     tertiary: "0 0% 65%", // Light gray
-    muted: "0 0% 52%", // Muted gray - rebalanced to neutral-600 equivalent for semantic strength
+    muted: "0 0% 42%", // Muted gray - adjusted for WCAG AA contrast (4.5:1) on surface.elevated2
     inverse: "0 0% 100%", // White (for dark backgrounds)
   },
   night: {
