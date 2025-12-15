@@ -1,21 +1,25 @@
-import { resolve } from "path";
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from "node:url";
+import { resolve, dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const config = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
     "@storybook/addon-onboarding",
     "@storybook/addon-a11y",
+    "@storybook/addon-docs",
   ],
+
   framework: {
     name: "@storybook/react-vite",
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
+
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",
@@ -25,6 +29,7 @@ const config = {
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
+
   async viteFinal(config: any) {
     const resolveConfig = config.resolve ?? {};
     const alias = Array.isArray(resolveConfig.alias)

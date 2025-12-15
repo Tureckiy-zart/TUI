@@ -7,14 +7,14 @@ import { Lead } from "@/components/ui/lead";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Heading> = {
-  title: "Components/Typography",
+  title: "Compositions/Typography",
   component: Heading,
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          "Complete typography system for Tenerife UI. Includes Heading, Display, Body, Lead, Caption, and Code components. All components use token-based styling and support dark/light mode.",
+          "**COMPOSITION** - Complete typography system showcase for Tenerife UI. This is a composition that demonstrates all typography components (Heading, Display, Body, Lead, Caption, and Code) working together. Individual typography components are available under `Components/Typography/`. All components use token-based styling and support dark/light mode.",
       },
     },
   },

@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Caption > Snapshot > matches snapshot for default variant 1`] = `
+<span
+  class="font-sans text-xs leading-tight tracking-wide font-normal text-muted-foreground"
+>
+  Default Caption
+</span>
+`;
+
+exports[`Caption > Snapshot > matches snapshot for non-muted variant 1`] = `
+<span
+  class="font-sans text-foreground text-xs leading-tight tracking-wide font-normal"
+>
+  Non-Muted Caption
+</span>
+`;

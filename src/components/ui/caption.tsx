@@ -4,23 +4,43 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
-const captionVariants = cva("font-sans text-foreground", {
-  variants: {
-    weight: {
-      normal: "font-normal",
-      medium: "font-medium",
+/**
+ * Caption component variants
+ *
+ * Note: fontSize, lineHeight, and letterSpacing are intentionally fixed in the base class
+ * rather than variants, as Caption always uses a consistent small size (xs) with tight
+ * line height and wide letter spacing. This design decision ensures caption text maintains
+ * its distinctive appearance across all use cases.
+ */
+const captionVariants = cva(
+  [
+    "font-sans",
+    "text-foreground",
+    TEXT_TOKENS.fontSize.xs,
+    TEXT_TOKENS.lineHeight.tight,
+    TEXT_TOKENS.letterSpacing.wide,
+  ]
+    .filter(Boolean)
+    .join(" "),
+  {
+    variants: {
+      weight: {
+        normal: TEXT_TOKENS.fontWeight.normal,
+        medium: TEXT_TOKENS.fontWeight.medium,
+      },
+      muted: {
+        true: "text-muted-foreground",
+        false: "",
+      },
     },
-    muted: {
-      true: "text-muted-foreground",
-      false: "",
+    defaultVariants: {
+      weight: "normal",
+      muted: true,
     },
   },
-  defaultVariants: {
-    weight: "normal",
-    muted: true,
-  },
-});
+);
 
 export interface CaptionProps
   extends React.HTMLAttributes<HTMLSpanElement>,
@@ -35,11 +55,7 @@ const Caption = React.forwardRef<HTMLElement, CaptionProps>(
     return (
       <Component
         ref={ref as any}
-        className={cn(
-          "text-xs leading-tight tracking-wide",
-          captionVariants({ weight, muted }),
-          className,
-        )}
+        className={cn(captionVariants({ weight, muted }), className)}
         {...props}
       >
         {children}

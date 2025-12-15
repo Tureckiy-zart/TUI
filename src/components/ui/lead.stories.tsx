@@ -1,3 +1,4 @@
+import { Heading } from "@/components/ui/heading";
 import { Lead } from "@/components/ui/lead";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -73,7 +74,7 @@ export const MutedStates: Story = {
 export const SubtitleExample: Story = {
   render: () => (
     <div className="space-y-lg">
-      <h1 className="text-4xl font-bold">Main Heading</h1>
+      <Heading level={1}>Main Heading</Heading>
       <Lead size="lg">
         This is a subtitle that provides additional context or description for the main heading. It
         uses the Lead component with default muted styling.

@@ -14,7 +14,12 @@ const meta: Meta<typeof Input> = {
     docs: {
       description: {
         component:
-          "Input component for text input fields. Supports 5 variants, 5 sizes, 4 states (default, disabled, error, success), icon slots, and full accessibility with token-driven styling using CSS variables.",
+          "Input component for text input fields. Supports 5 variants, 5 sizes, 4 states (default, disabled, error, success), icon slots, and full accessibility with token-driven styling using CSS variables.\n\n" +
+          "**Token-Driven API:** Variant and size props use token-derived union types (`InputVariant`, `InputSize`) that are automatically synchronized with `INPUT_TOKENS`. This ensures type safety and prevents drift between prop types and token definitions.\n\n" +
+          "**Responsive Support:** The `variant` and `size` props support `Responsive<T>` type, allowing responsive values:\n" +
+          '- Single value: `variant="outline"` or `size="md"`\n' +
+          '- Responsive object: `variant={{ base: "outline", md: "primary" }}` or `size={{ base: "sm", lg: "xl" }}`\n\n' +
+          "**Note:** After standardization, the visual output and DOM structure remain unchanged. Only the TypeScript types have been updated to use token-derived unions with Responsive support.",
       },
     },
   },
@@ -23,18 +28,20 @@ const meta: Meta<typeof Input> = {
     variant: {
       control: { type: "select" },
       options: ["primary", "secondary", "outline", "ghost", "destructive"],
-      description: "Input variant style",
+      description:
+        "Input variant style. Token-derived type (`InputVariant`) synchronized with `INPUT_TOKENS.variant`. Supports `Responsive<InputVariant>` for responsive values.",
       table: {
-        type: { summary: "string" },
+        type: { summary: "Responsive<InputVariant>" },
         defaultValue: { summary: "outline" },
       },
     },
     size: {
       control: { type: "select" },
       options: ["xs", "sm", "md", "lg", "xl"],
-      description: "Input size",
+      description:
+        "Input size. Token-derived type (`InputSize`) synchronized with `INPUT_TOKENS.size`. Supports `Responsive<InputSize>` for responsive values.",
       table: {
-        type: { summary: "string" },
+        type: { summary: "Responsive<InputSize>" },
         defaultValue: { summary: "md" },
       },
     },
@@ -103,7 +110,7 @@ export const AllVariants: Story = {
   ),
 };
 
-export const AllStates: Story = {
+export const States: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
       <Input state="default" placeholder="Default state" />
@@ -112,6 +119,13 @@ export const AllStates: Story = {
       <Input state="disabled" placeholder="Disabled state" disabled />
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All available input states: default, error, success, and disabled.",
+      },
+    },
+  },
 };
 
 export const WithIcons: Story = {
@@ -179,6 +193,57 @@ export const FullWidth: Story = {
       <Input fullWidth placeholder="Full width input" />
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Input with full width enabled (default behavior).",
+      },
+    },
+  },
+};
+
+export const ResponsiveVariant: Story = {
+  render: () => (
+    <div className="flex w-64 flex-col gap-md">
+      <div className="text-sm text-muted-foreground">
+        Resize the viewport to see variant change: outline (base) → primary (md breakpoint)
+      </div>
+      <Input variant={{ base: "outline", md: "primary" }} placeholder="Responsive variant input" />
+      <Input variant="outline" placeholder="Static variant (for comparison)" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Input with responsive variant. The variant changes from 'outline' on base breakpoint to 'primary' on md breakpoint and above. " +
+          "This demonstrates the `Responsive<InputVariant>` type support. Note: Currently, only the base value is applied (CVA limitation), " +
+          "but the API accepts responsive objects for future implementation.",
+      },
+    },
+  },
+};
+
+export const ResponsiveSize: Story = {
+  render: () => (
+    <div className="flex w-64 flex-col gap-md">
+      <div className="text-sm text-muted-foreground">
+        Resize the viewport to see size change: sm (base) → lg (md breakpoint)
+      </div>
+      <Input size={{ base: "sm", md: "lg" }} placeholder="Responsive size input" />
+      <Input size="md" placeholder="Static size (for comparison)" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Input with responsive size. The size changes from 'sm' on base breakpoint to 'lg' on md breakpoint and above. " +
+          "This demonstrates the `Responsive<InputSize>` type support. Note: Currently, only the base value is applied (CVA limitation), " +
+          "but the API accepts responsive objects for future implementation.",
+      },
+    },
+  },
 };
 
 export const NotFullWidth: Story = {

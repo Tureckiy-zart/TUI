@@ -20,6 +20,14 @@
 - REQUIRED: Independent token domains, verify in `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md` ALLOWED section
 - FORBIDDEN: Use components not in ALLOWED section, reimplement Foundation behavior
 
+### Extension Layer (LOCKED COMPONENTS)
+- 🔒 **LOCKED Extension Components**: Button, Text, Heading, Body, Caption, Code, Display, Lead
+- NEVER modify locked Extension components (Button, Text/Typography system)
+- NEVER replace/extend/create alternatives to locked Extension components
+- ALWAYS use locked Extension components as-is
+- Locked Extension components require explicit unlock procedure for modifications
+- Reference: `docs/locks/TUI_TEXT_LOCK.md` for Text/Typography lock details
+
 ### Product Layer (RESTRICTED)
 - NEVER use/export product components in UI library or Extension layer
 
@@ -64,8 +72,10 @@
 
 ### Real Token Domains (Verified - LOCKED)
 **Foundation:** spacing, typography, colors, radius, shadows, motion, opacity  
-**Shared:** FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS  
-**Component:** INPUT_TOKENS, SELECT_TOKENS, TEXTAREA_TOKENS, DROPDOWN_TOKENS, TABS_TOKENS, BUTTON_TOKENS, CARD_TOKENS, DOMAIN_TOKENS, and all other component-specific domains
+**Shared:** FORM_TOKENS, TEXT_TOKENS (🔒 LOCKED via Text/Typography lock), ICON_TOKENS, MOTION_TOKENS  
+**Component:** INPUT_TOKENS, SELECT_TOKENS, TEXTAREA_TOKENS, DROPDOWN_TOKENS, TABS_TOKENS, BUTTON_TOKENS, CODE_TOKENS (🔒 LOCKED via Text/Typography lock), CARD_TOKENS, DOMAIN_TOKENS, and all other component-specific domains
+
+**Note:** TEXT_TOKENS and CODE_TOKENS are locked as part of the Text / Typography component lock. Modifications require unlock procedure. Reference: `docs/locks/TUI_TEXT_LOCK.md`
 
 ### Audit Status
 - ✅ All token boundary violations fixed per `docs/reports/TUI_TOKEN_SYSTEM_AUDIT.md`

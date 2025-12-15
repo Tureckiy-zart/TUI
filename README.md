@@ -3,7 +3,7 @@
 **Token-driven UI architecture for long-living React products**
 Strict. Predictable. Built for system-level consistency.
 
-![Release](https://img.shields.io/github/v/release/Tureckiy-zart/tenerife-ui?style=for-the-badge)
+![Release](https://img.shields.io/github/v/tag/Tureckiy-zart/tenerife-ui?style=for-the-badge&sort=semver)
 ![React](https://img.shields.io/badge/React-18+-blue?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)

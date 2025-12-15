@@ -5,12 +5,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Icon } from "./Icon";
 
 const meta: Meta = {
-  title: "Components/Icon/Gallery",
+  title: "Compositions/IconGallery",
   parameters: {
     layout: "padded",
     docs: {
       description: {
-        component: "Visual catalog of all available icons in the icon registry.",
+        component:
+          "**COMPOSITION** - Visual catalog of all available icons in the icon registry. This is a composition that showcases all icons. The individual Icon component is available under `Components/Icon`.",
       },
     },
   },

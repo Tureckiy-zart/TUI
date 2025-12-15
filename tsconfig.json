@@ -49,6 +49,6 @@
     /* Output */
     "outDir": "dist"
   },
-  "include": ["src/**/*", "eslint-rules/**/*"],
+  "include": ["src/**/*", "eslint-rules/**/*", "tailwind.safelist.ts", "tailwind.config.ts"],
   "exclude": ["dist", "node_modules", "storybook-static", ".storybook"]
 }

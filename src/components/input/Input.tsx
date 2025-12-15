@@ -2,6 +2,7 @@
 
 import * as React from "react";
 
+import { getBaseValue } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 import { INPUT_TOKENS } from "@/tokens/components/input";
 
@@ -59,9 +60,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return undefined;
     });
 
+    // Extract base values from Responsive props for CVA
+    const baseVariant = getBaseValue(variant);
+    const baseSize = getBaseValue(size);
+
     // Compute input classes
     const inputClasses = cn(
-      inputVariants({ variant, size, state, fullWidth }),
+      inputVariants({ variant: baseVariant, size: baseSize, state, fullWidth }),
       // Add padding for icons if present
       iconLeft && INPUT_TOKENS.icon.paddingLeft,
       iconRight && INPUT_TOKENS.icon.paddingRight,

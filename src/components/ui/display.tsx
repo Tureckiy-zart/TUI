@@ -4,20 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 const displayVariants = cva("font-display text-foreground", {
   variants: {
     size: {
-      xl: "text-xl leading-normal tracking-normal",
-      "2xl": "text-2xl leading-tight tracking-tight",
-      "3xl": "text-3xl leading-tight tracking-tight",
-      "4xl": "text-4xl leading-none tracking-tight",
+      xl: `${TEXT_TOKENS.fontSize.xl} ${TEXT_TOKENS.lineHeight.normal} ${TEXT_TOKENS.letterSpacing.normal}`,
+      "2xl": `${TEXT_TOKENS.fontSize["2xl"]} ${TEXT_TOKENS.lineHeight.tight} ${TEXT_TOKENS.letterSpacing.tight}`,
+      "3xl": `${TEXT_TOKENS.fontSize["3xl"]} ${TEXT_TOKENS.lineHeight.tight} ${TEXT_TOKENS.letterSpacing.tight}`,
+      "4xl": `${TEXT_TOKENS.fontSize["4xl"]} ${TEXT_TOKENS.lineHeight.none} ${TEXT_TOKENS.letterSpacing.tight}`,
     },
     weight: {
-      normal: "font-normal",
-      medium: "font-medium",
-      semibold: "font-semibold",
-      bold: "font-bold",
+      normal: TEXT_TOKENS.fontWeight.normal,
+      medium: TEXT_TOKENS.fontWeight.medium,
+      semibold: TEXT_TOKENS.fontWeight.semibold,
+      bold: TEXT_TOKENS.fontWeight.bold,
     },
     muted: {
       true: "text-muted-foreground",

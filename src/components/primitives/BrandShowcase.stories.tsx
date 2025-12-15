@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Car
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const meta: Meta<typeof ThemeProvider> = {
-  title: "Theme/Brand Showcase",
+  title: "Examples/BrandShowcase",
   component: ThemeProvider,
   parameters: {
     layout: "padded",

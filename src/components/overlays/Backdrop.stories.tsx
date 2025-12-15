@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { Backdrop } from "./Backdrop";
 
 const meta: Meta<typeof Backdrop> = {
-  title: "Overlays/Backdrop",
+  title: "Components/Overlays/Backdrop",
   component: Backdrop,
   parameters: {
     layout: "centered",

@@ -53,7 +53,8 @@ describe("Button", () => {
     it("renders ghost variant", () => {
       const { container } = renderWithTheme(<Button variant="ghost">Ghost</Button>);
       const button = container.querySelector("button");
-      expect(button).toHaveClass("hover:bg-accent");
+      // Ghost variant uses hover:bg-muted (not hover:bg-accent) per BUTTON_TOKENS
+      expect(button).toHaveClass("hover:bg-muted");
     });
 
     it("renders destructive variant", () => {

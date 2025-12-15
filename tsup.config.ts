@@ -1,3 +1,8 @@
+import autoprefixer from "autoprefixer";
+import { readFileSync, writeFileSync } from "fs";
+import { join } from "path";
+import postcss from "postcss";
+import tailwindcss from "tailwindcss";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -75,4 +80,51 @@ export default defineConfig({
   },
   treeshake: true,
   minify: false,
+  /**
+   * PostCSS Processing Hook
+   *
+   * This hook processes CSS files through PostCSS after the build completes.
+   * Since tsup uses esbuild which doesn't support PostCSS natively, we need
+   * to process CSS files manually after the build.
+   *
+   * What this does:
+   * 1. Reads the generated CSS file from dist/
+   * 2. Processes it through PostCSS with Tailwind CSS and Autoprefixer
+   * 3. Writes the processed CSS back to the same file
+   *
+   * This ensures:
+   * - Tailwind directives (@tailwind base, components, utilities) are processed
+   * - All Tailwind utility classes are generated
+   * - Vendor prefixes are added via Autoprefixer
+   * - The final CSS is production-ready
+   */
+  async onSuccess() {
+    // List of CSS files to process through PostCSS
+    const cssFiles = ["dist/styles.css"];
+
+    for (const cssFile of cssFiles) {
+      try {
+        const cssPath = join(process.cwd(), cssFile);
+        const css = readFileSync(cssPath, "utf-8");
+
+        // Process CSS through PostCSS with Tailwind and Autoprefixer
+        // This matches the configuration in postcss.config.mjs
+        const result = await postcss([
+          tailwindcss({
+            config: "./tailwind.config.ts",
+          }),
+          autoprefixer(),
+        ]).process(css, {
+          from: cssPath,
+          to: cssPath,
+        });
+
+        // Write the processed CSS back to the file
+        writeFileSync(cssPath, result.css);
+      } catch (error) {
+        console.error(`Error processing ${cssFile}:`, error);
+        throw error;
+      }
+    }
+  },
 });

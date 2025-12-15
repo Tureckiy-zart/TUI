@@ -36,11 +36,15 @@ Foundation tokens are semantically neutral and can be used across all components
 Shared tokens are semantically neutral tokens used across multiple components. They are defined in `src/tokens/components/`:
 
 - **`TEXT_TOKENS`** - Typography utilities (fontSize, fontWeight, lineHeight, letterSpacing)
+  - **Status:** ✅ **LOCKED** (2025-12-15) - Locked via Text / Typography component lock
+  - **Reference:** [Text / Typography Lock](../locks/TUI_TEXT_LOCK.md)
 - **`ICON_TOKENS`** - Icon sizing and styling
 - **`MOTION_TOKENS`** - Animation and transition utilities
 - **`FORM_TOKENS`** - Shared form semantics (label, required mark, field spacing)
 
 **Rule:** Shared tokens can be imported by any component that needs them.
+
+**Note:** `TEXT_TOKENS` is locked as part of the Text / Typography component lock. Modifications require unlock procedure.
 
 ### 3. Component-Specific Tokens
 
@@ -50,6 +54,9 @@ Each component has its own token domain in `src/tokens/components/`:
 - **`SELECT_TOKENS`** - Select component tokens only
 - **`TEXTAREA_TOKENS`** - Textarea component tokens only
 - **`BUTTON_TOKENS`** - Button component tokens only
+- **`CODE_TOKENS`** - Code component tokens only
+  - **Status:** ✅ **LOCKED** (2025-12-15) - Locked via Text / Typography component lock
+  - **Reference:** [Text / Typography Lock](../locks/TUI_TEXT_LOCK.md)
 - **`TABLE_TOKENS`** - Table component tokens only
 - **`DATA_LIST_TOKENS`** - DataList component tokens only
 - **`EMPTY_STATE_TOKENS`** - EmptyState component tokens only
@@ -57,6 +64,8 @@ Each component has its own token domain in `src/tokens/components/`:
 - etc.
 
 **Rule:** Component-specific tokens can ONLY be imported by their owning component.
+
+**Note:** `CODE_TOKENS` is locked as part of the Text / Typography component lock. Modifications require unlock procedure.
 
 ---
 

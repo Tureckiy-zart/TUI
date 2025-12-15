@@ -9,15 +9,25 @@ const meta: Meta<typeof Stack> = {
     docs: {
       description: {
         component:
-          "Token-driven stack layout component with support for vertical/horizontal direction, spacing, alignment, and responsive props using CSS variables.",
+          "Stack is the primary layout composition primitive for vertical and horizontal flows. It provides semantic spacing between items and handles flexbox layout composition. Uses Box internally as the base container. The `spacing` prop is canonical (preferred), `gap` is deprecated but kept for backward compatibility.",
       },
     },
   },
   tags: ["autodocs"],
   argTypes: {
+    spacing: {
+      control: { type: "text" },
+      description: "Spacing between stack items (canonical prop, uses spacing tokens)",
+      table: {
+        type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
+      },
+    },
     gap: {
       control: { type: "text" },
-      description: "Gap between stack items (uses spacing tokens)",
+      description: "Gap between stack items (deprecated, use spacing instead)",
+      table: {
+        type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
+      },
     },
     align: {
       control: { type: "select" },
@@ -49,7 +59,8 @@ export const Default: Story = {
 
 export const Vertical: Story = {
   args: {
-    gap: 4,
+    direction: "vertical",
+    spacing: "md",
     children: (
       <>
         <div className="rounded-md border bg-card p-md">Item 1</div>
@@ -58,11 +69,19 @@ export const Vertical: Story = {
       </>
     ),
   },
+  parameters: {
+    docs: {
+      description: {
+        story: "Vertical stack (default direction) with semantic spacing",
+      },
+    },
+  },
 };
 
 export const Horizontal: Story = {
   args: {
-    gap: 4,
+    direction: "horizontal",
+    spacing: "md",
     children: (
       <>
         <div className="rounded-md border bg-card p-md">Item 1</div>
@@ -70,6 +89,13 @@ export const Horizontal: Story = {
         <div className="rounded-md border bg-card p-md">Item 3</div>
       </>
     ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Horizontal stack with semantic spacing",
+      },
+    },
   },
 };
 
@@ -78,7 +104,7 @@ export const SpacingVariants: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: xs (1)</h3>
-        <Stack gap={1}>
+        <Stack spacing={1}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -86,7 +112,7 @@ export const SpacingVariants: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: md (4)</h3>
-        <Stack gap={4}>
+        <Stack spacing={4}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -94,7 +120,7 @@ export const SpacingVariants: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: xl (8)</h3>
-        <Stack gap={8}>
+        <Stack spacing={8}>
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -102,7 +128,7 @@ export const SpacingVariants: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: semantic lg</h3>
-        <Stack gap="lg">
+        <Stack spacing="lg">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -113,7 +139,8 @@ export const SpacingVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Different spacing values using token system via CSS variables",
+        story:
+          "Different spacing values using token system via CSS variables. Uses canonical `spacing` prop.",
       },
     },
   },
@@ -124,7 +151,7 @@ export const Alignment: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Start</h3>
-        <Stack align="start" gap={4}>
+        <Stack direction="horizontal" align="start" spacing="md">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -132,7 +159,7 @@ export const Alignment: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Center</h3>
-        <Stack align="center" gap={4}>
+        <Stack direction="horizontal" align="center" spacing="md">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -140,29 +167,36 @@ export const Alignment: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Justify: Between</h3>
-        <Stack justify="between" gap={4} className="h-32">
+        <Stack direction="horizontal" justify="between" spacing="md" className="h-32">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
         </Stack>
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Alignment options for Stack items using align and justify props",
+      },
+    },
+  },
 };
 
 export const TokenBasedSpacing: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Layout Stack Token: md</h3>
-        <Stack gap="md">
+        <h3 className="mb-sm text-lg font-semibold">Spacing Token: md</h3>
+        <Stack spacing="md">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
         </Stack>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Layout Stack Token: lg</h3>
-        <Stack gap="lg">
+        <h3 className="mb-sm text-lg font-semibold">Spacing Token: lg</h3>
+        <Stack spacing="lg">
           <div className="rounded-md border bg-card p-md">Item 1</div>
           <div className="rounded-md border bg-card p-md">Item 2</div>
           <div className="rounded-md border bg-card p-md">Item 3</div>
@@ -173,7 +207,36 @@ export const TokenBasedSpacing: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Using layout-specific stack spacing tokens",
+        story: "Using semantic spacing tokens with canonical `spacing` prop",
+      },
+    },
+  },
+};
+
+export const SpacingVsGap: Story = {
+  render: () => (
+    <div className="space-y-lg">
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Using spacing (canonical)</h3>
+        <Stack spacing="md">
+          <div className="rounded-md border bg-card p-md">Item 1</div>
+          <div className="rounded-md border bg-card p-md">Item 2</div>
+        </Stack>
+      </div>
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Using gap (deprecated, backward compatible)</h3>
+        <Stack gap="md">
+          <div className="rounded-md border bg-card p-md">Item 1</div>
+          <div className="rounded-md border bg-card p-md">Item 2</div>
+        </Stack>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Both `spacing` (canonical) and `gap` (deprecated) work, but prefer `spacing` for new code",
       },
     },
   },
@@ -181,7 +244,8 @@ export const TokenBasedSpacing: Story = {
 
 export const AllProps: Story = {
   args: {
-    gap: 6,
+    direction: "horizontal",
+    spacing: "lg",
     align: "center",
     justify: "between",
     children: (

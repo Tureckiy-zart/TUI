@@ -100,56 +100,56 @@ export const transitions = {
 export const keyframes = {
   // Fade animations
   fadeIn: {
-    from: { opacity: 0 },
-    to: { opacity: 1 },
+    from: { opacity: "0" },
+    to: { opacity: "1" },
   },
   fadeOut: {
-    from: { opacity: 1 },
-    to: { opacity: 0 },
+    from: { opacity: "1" },
+    to: { opacity: "0" },
   },
 
   // Slide animations
   slideInUp: {
-    from: { transform: "translateY(100%)", opacity: 0 },
-    to: { transform: "translateY(0)", opacity: 1 },
+    from: { transform: "translateY(100%)", opacity: "0" },
+    to: { transform: "translateY(0)", opacity: "1" },
   },
   slideInDown: {
-    from: { transform: "translateY(-100%)", opacity: 0 },
-    to: { transform: "translateY(0)", opacity: 1 },
+    from: { transform: "translateY(-100%)", opacity: "0" },
+    to: { transform: "translateY(0)", opacity: "1" },
   },
   slideInLeft: {
-    from: { transform: "translateX(-100%)", opacity: 0 },
-    to: { transform: "translateX(0)", opacity: 1 },
+    from: { transform: "translateX(-100%)", opacity: "0" },
+    to: { transform: "translateX(0)", opacity: "1" },
   },
   slideInRight: {
-    from: { transform: "translateX(100%)", opacity: 0 },
-    to: { transform: "translateX(0)", opacity: 1 },
+    from: { transform: "translateX(100%)", opacity: "0" },
+    to: { transform: "translateX(0)", opacity: "1" },
   },
   slideOutUp: {
-    from: { transform: "translateY(0)", opacity: 1 },
-    to: { transform: "translateY(-100%)", opacity: 0 },
+    from: { transform: "translateY(0)", opacity: "1" },
+    to: { transform: "translateY(-100%)", opacity: "0" },
   },
   slideOutDown: {
-    from: { transform: "translateY(0)", opacity: 1 },
-    to: { transform: "translateY(100%)", opacity: 0 },
+    from: { transform: "translateY(0)", opacity: "1" },
+    to: { transform: "translateY(100%)", opacity: "0" },
   },
   slideOutLeft: {
-    from: { transform: "translateX(0)", opacity: 1 },
-    to: { transform: "translateX(-100%)", opacity: 0 },
+    from: { transform: "translateX(0)", opacity: "1" },
+    to: { transform: "translateX(-100%)", opacity: "0" },
   },
   slideOutRight: {
-    from: { transform: "translateX(0)", opacity: 1 },
-    to: { transform: "translateX(100%)", opacity: 0 },
+    from: { transform: "translateX(0)", opacity: "1" },
+    to: { transform: "translateX(100%)", opacity: "0" },
   },
 
   // Scale animations
   scaleIn: {
-    from: { transform: "scale(0.95)", opacity: 0 },
-    to: { transform: "scale(1)", opacity: 1 },
+    from: { transform: "scale(0.95)", opacity: "0" },
+    to: { transform: "scale(1)", opacity: "1" },
   },
   scaleOut: {
-    from: { transform: "scale(1)", opacity: 1 },
-    to: { transform: "scale(0.95)", opacity: 0 },
+    from: { transform: "scale(1)", opacity: "1" },
+    to: { transform: "scale(0.95)", opacity: "0" },
   },
   scaleUp: {
     from: { transform: "scale(1)" },
@@ -172,8 +172,8 @@ export const keyframes = {
 
   // Pulse and bounce
   pulse: {
-    "0%, 100%": { opacity: 1 },
-    "50%": { opacity: 0.5 },
+    "0%, 100%": { opacity: "1" },
+    "50%": { opacity: "0.5" },
   },
   bounce: {
     "0%, 100%": {
@@ -197,7 +197,7 @@ export const keyframes = {
   ping: {
     "75%, 100%": {
       transform: "scale(2)",
-      opacity: 0,
+      opacity: "0",
     },
   },
 
@@ -416,7 +416,7 @@ export const tailwindMotionConfig = {
 
   keyframes: {
     ...keyframes,
-  } as Record<string, Record<string, Record<string, string | number>>>,
+  },
 
   animation: {
     ...animations,

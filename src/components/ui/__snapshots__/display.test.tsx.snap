@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Display > Snapshot > matches snapshot for default variant 1`] = `
+<h1
+  class="font-display text-foreground text-4xl leading-none tracking-tight font-bold"
+>
+  Default Display
+</h1>
+`;
+
+exports[`Display > Snapshot > matches snapshot for muted variant 1`] = `
+<h1
+  class="font-display text-3xl leading-tight tracking-tight font-bold text-muted-foreground"
+>
+  Muted Display
+</h1>
+`;

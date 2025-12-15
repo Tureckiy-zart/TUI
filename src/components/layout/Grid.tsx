@@ -3,12 +3,29 @@
 /**
  * Grid Primitive Component
  *
- * Token-driven CSS Grid container with support for columns, rows, gap,
- * flow, and alignment. Uses Box internally. All spacing values use tokens only.
+ * Grid is a CSS Grid container extension of Box. It provides full control
+ * over grid layout properties (columns, rows, gap, flow, alignment).
+ * Uses Box internally as the base container.
+ *
+ * Use Grid for two-dimensional layouts that require precise control over
+ * both rows and columns. For one-dimensional layouts, prefer Stack or Flex.
+ *
+ * All spacing values use tokens only.
+ *
+ * @example
+ * ```tsx
+ * // CSS Grid layout
+ * <Grid cols={3} gap="md" align="center">
+ *   <Box>Item 1</Box>
+ *   <Box>Item 2</Box>
+ *   <Box>Item 3</Box>
+ * </Grid>
+ * ```
  */
 
 import * as React from "react";
 
+import { getBaseValue as getBaseValueUtil, getSpacingCSSVar } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
 
 import { Box, type BoxProps } from "./Box";
@@ -19,6 +36,7 @@ import type {
   ResponsiveJustify,
   ResponsiveRows,
   ResponsiveSpacing,
+  SpacingValue,
 } from "./layout.types";
 
 export interface GridProps extends Omit<BoxProps, "display" | "align" | "justify"> {
@@ -182,7 +200,22 @@ function justifyToClass(
  */
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
   (
-    { cols, sm, md, lg, xl, "2xl": xl2, rows, gap, flow, align, justify, className, ...props },
+    {
+      cols,
+      sm,
+      md,
+      lg,
+      xl,
+      "2xl": xl2,
+      rows,
+      gap,
+      flow,
+      align,
+      justify,
+      className,
+      style,
+      ...props
+    },
     ref,
   ) => {
     // Handle responsive columns: if md/lg/xl are provided directly, build responsive cols object
@@ -264,7 +297,23 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       className,
     );
 
-    return <Box ref={ref} display="grid" gap={gap} className={gridClasses} {...props} />;
+    // Get gap base value for inline style (use utility function for spacing)
+    const gapBaseValue = gap ? getBaseValueUtil<SpacingValue>(gap) : undefined;
+
+    // Handle gap via inline style
+    const gridStyle: React.CSSProperties = {
+      ...(gapBaseValue !== undefined && { gap: getSpacingCSSVar(String(gapBaseValue)) }),
+      ...style,
+    };
+
+    return (
+      <Box
+        ref={ref}
+        className={cn("grid", gridClasses)}
+        style={Object.keys(gridStyle).length > 0 ? gridStyle : undefined}
+        {...props}
+      />
+    );
   },
 );
 

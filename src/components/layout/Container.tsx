@@ -3,8 +3,21 @@
 /**
  * Container Layout Primitive Component
  *
- * Token-driven container component for constraining content width and centering.
- * Uses CSS-layer class .tm-container with token-based padding and max-width.
+ * Container is a specialized layout primitive with a single, focused responsibility:
+ * width constraint and horizontal padding. It does NOT provide layout composition
+ * behaviors (flex, grid, alignment). For layout composition, use Stack, Flex, or Grid.
+ *
+ * Container uses CSS-layer class .tm-container with token-based padding and max-width.
+ *
+ * @example
+ * ```tsx
+ * // Basic container with width constraint
+ * <Container maxWidth="lg" padding="md">
+ *   <Stack spacing="md">
+ *     <Box>Content</Box>
+ *   </Stack>
+ * </Container>
+ * ```
  */
 
 import * as React from "react";
@@ -79,7 +92,7 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Container component - layout primitive for constraining content width
+ * Container component - specialized primitive for width constraint and horizontal padding only
  */
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ maxWidth, padding, center = true, className, style, ...props }, ref) => {

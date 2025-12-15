@@ -9,7 +9,7 @@ const meta: Meta<typeof Box> = {
     docs: {
       description: {
         component:
-          "Token-driven base container component with support for padding, margin, background, radius, and responsive props. All styling uses CSS variables from the token system.",
+          "Box is the lowest-level layout primitive - a pure, generic container component. It provides token-based styling for spacing (padding/margin), visual properties (radius, shadow, background), and element rendering (via `as` prop). Box does NOT provide layout composition semantics (display, flexDirection, gap, alignment). For layout composition, use Stack, Flex, or Grid components.",
       },
     },
   },

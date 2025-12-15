@@ -4,18 +4,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { TEXT_TOKENS } from "@/tokens/components/text";
 
 const bodyVariants = cva("font-sans text-foreground", {
   variants: {
     size: {
-      md: "text-md leading-relaxed tracking-normal",
-      lg: "text-lg leading-relaxed tracking-normal",
+      md: `${TEXT_TOKENS.fontSize.md} ${TEXT_TOKENS.lineHeight.relaxed} ${TEXT_TOKENS.letterSpacing.normal}`,
+      lg: `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.lineHeight.relaxed} ${TEXT_TOKENS.letterSpacing.normal}`,
     },
     weight: {
-      normal: "font-normal",
-      medium: "font-medium",
-      semibold: "font-semibold",
-      bold: "font-bold",
+      normal: TEXT_TOKENS.fontWeight.normal,
+      medium: TEXT_TOKENS.fontWeight.medium,
+      semibold: TEXT_TOKENS.fontWeight.semibold,
+      bold: TEXT_TOKENS.fontWeight.bold,
     },
     muted: {
       true: "text-muted-foreground",

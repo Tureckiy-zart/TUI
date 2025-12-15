@@ -151,13 +151,18 @@ export default config;
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: {
+      // Явно указываем путь к конфигурации для надежности
+      config: "./tailwind.config.ts",
+    },
     autoprefixer: {},
   },
 };
 
 export default config;
 ```
+
+> **Примечание:** Явное указание пути к `tailwind.config.ts` рекомендуется для обеспечения консистентности во всех окружениях. Подробнее см. [PostCSS Configuration Guide](./POSTCSS_CONFIG.md).
 
 4. В `app/globals.css` или `app/layout.tsx` импортируйте стили:
 
@@ -198,11 +203,16 @@ export default config;
 ```javascript
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: {
+      // Явно указываем путь к конфигурации для надежности
+      config: "./tailwind.config.ts",
+    },
     autoprefixer: {},
   },
 };
 ```
+
+> **Примечание:** Явное указание пути к `tailwind.config.ts` рекомендуется для обеспечения консистентности во всех окружениях. Подробнее см. [PostCSS Configuration Guide](./POSTCSS_CONFIG.md).
 
 4. В `pages/_app.tsx` импортируйте стили:
 
@@ -237,16 +247,24 @@ const config: Config = {
 export default config;
 ```
 
-3. Создайте файл `postcss.config.js`:
+3. Создайте файл `postcss.config.mjs`:
 
 ```javascript
-export default {
+/** @type {import('postcss-load-config').Config} */
+const config = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: {
+      // Явно указываем путь к конфигурации для надежности
+      config: "./tailwind.config.ts",
+    },
     autoprefixer: {},
   },
 };
+
+export default config;
 ```
+
+> **Примечание:** Явное указание пути к `tailwind.config.ts` рекомендуется для обеспечения консистентности во всех окружениях. Подробнее см. [PostCSS Configuration Guide](./POSTCSS_CONFIG.md).
 
 4. В `src/main.tsx` или `src/index.css` импортируйте стили:
 
@@ -303,16 +321,24 @@ const config: Config = {
 export default config;
 ```
 
-3. Создайте файл `postcss.config.js`:
+3. Создайте файл `postcss.config.mjs`:
 
 ```javascript
-export default {
+/** @type {import('postcss-load-config').Config} */
+const config = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: {
+      // Явно указываем путь к конфигурации для надежности
+      config: "./tailwind.config.ts",
+    },
     autoprefixer: {},
   },
 };
+
+export default config;
 ```
+
+> **Примечание:** Явное указание пути к `tailwind.config.ts` рекомендуется для обеспечения консистентности во всех окружениях. Подробнее см. [PostCSS Configuration Guide](./POSTCSS_CONFIG.md).
 
 4. В `app/root.tsx` импортируйте стили:
 

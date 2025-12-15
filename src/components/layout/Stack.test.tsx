@@ -128,4 +128,29 @@ describe("Stack component", () => {
     const stack = container.firstChild as HTMLElement;
     expect(stack).toHaveStyle({ gap: "var(--layout-stack-md)" });
   });
+
+  describe("Spacing API normalization", () => {
+    it("should use spacing as canonical prop", () => {
+      const { container } = render(<Stack spacing="md">Content</Stack>);
+      const stack = container.firstChild as HTMLElement;
+      expect(stack).toHaveStyle({ gap: "var(--spacing-md)" });
+    });
+
+    it("should support gap prop for backward compatibility", () => {
+      const { container } = render(<Stack gap="md">Content</Stack>);
+      const stack = container.firstChild as HTMLElement;
+      expect(stack).toHaveStyle({ gap: "var(--spacing-md)" });
+    });
+
+    it("should prefer spacing over gap when both provided", () => {
+      const { container } = render(
+        <Stack spacing="lg" gap="sm">
+          Content
+        </Stack>,
+      );
+      const stack = container.firstChild as HTMLElement;
+      // spacing should take precedence
+      expect(stack).toHaveStyle({ gap: "var(--spacing-lg)" });
+    });
+  });
 });

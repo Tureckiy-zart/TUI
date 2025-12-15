@@ -284,6 +284,202 @@ describe("Input", () => {
     });
   });
 
+  describe("Responsive Props", () => {
+    describe("Responsive variant", () => {
+      it("renders with variant as Responsive object with base value", () => {
+        const { container } = renderWithTheme(
+          <Input variant={{ base: "outline" }} placeholder="Responsive variant base" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("renders with variant as Responsive object with base and breakpoints", () => {
+        const { container } = renderWithTheme(
+          <Input
+            variant={{ base: "outline", md: "primary", lg: "secondary" }}
+            placeholder="Responsive variant full"
+          />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("resolves base value from Responsive variant object", () => {
+        const { container } = renderWithTheme(
+          <Input variant={{ base: "primary", md: "outline" }} placeholder="Base variant" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        // Component should render without errors, using base value for CVA
+      });
+
+      it("handles variant Responsive object without base (uses undefined)", () => {
+        const { container } = renderWithTheme(
+          <Input variant={{ md: "primary" } as any} placeholder="No base variant" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        // Should fallback to default variant when base is undefined
+      });
+    });
+
+    describe("Responsive size", () => {
+      it("renders with size as Responsive object with base value", () => {
+        const { container } = renderWithTheme(
+          <Input size={{ base: "md" }} placeholder="Responsive size base" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("renders with size as Responsive object with base and breakpoints", () => {
+        const { container } = renderWithTheme(
+          <Input size={{ base: "sm", md: "lg", xl: "xl" }} placeholder="Responsive size full" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("resolves base value from Responsive size object", () => {
+        const { container } = renderWithTheme(
+          <Input size={{ base: "sm", md: "lg" }} placeholder="Base size" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        // Component should render without errors, using base value for CVA
+      });
+
+      it("handles size Responsive object without base (uses undefined)", () => {
+        const { container } = renderWithTheme(
+          <Input size={{ md: "lg" } as any} placeholder="No base size" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        // Should fallback to default size when base is undefined
+      });
+    });
+
+    describe("Mixed scalar and responsive usage", () => {
+      it("renders with scalar variant and responsive size", () => {
+        const { container } = renderWithTheme(
+          <Input variant="outline" size={{ base: "sm", md: "lg" }} placeholder="Mixed 1" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("renders with responsive variant and scalar size", () => {
+        const { container } = renderWithTheme(
+          <Input variant={{ base: "primary", md: "secondary" }} size="md" placeholder="Mixed 2" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("renders with both responsive variant and responsive size", () => {
+        const { container } = renderWithTheme(
+          <Input
+            variant={{ base: "outline", md: "primary" }}
+            size={{ base: "sm", lg: "xl" }}
+            placeholder="Both responsive"
+          />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("renders with scalar variant and scalar size (backward compatibility)", () => {
+        const { container } = renderWithTheme(
+          <Input variant="outline" size="md" placeholder="Both scalar" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+    });
+
+    describe("Backward compatibility", () => {
+      it("string variant still works (backward compatibility)", () => {
+        const { container } = renderWithTheme(
+          <Input variant="primary" placeholder="String variant" />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("string size still works (backward compatibility)", () => {
+        const { container } = renderWithTheme(<Input size="lg" placeholder="String size" />);
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+      });
+
+      it("all string variants still work", () => {
+        const variants = ["primary", "secondary", "outline", "ghost", "destructive"] as const;
+        variants.forEach((variant) => {
+          const { container } = renderWithTheme(
+            <Input variant={variant} placeholder={`String ${variant}`} />,
+          );
+          const input = container.querySelector("input");
+          expect(input).toBeInTheDocument();
+        });
+      });
+
+      it("all string sizes still work", () => {
+        const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+        sizes.forEach((size) => {
+          const { container } = renderWithTheme(
+            <Input size={size} placeholder={`String ${size}`} />,
+          );
+          const input = container.querySelector("input");
+          expect(input).toBeInTheDocument();
+        });
+      });
+    });
+
+    describe("Responsive props with state and fullWidth", () => {
+      it("renders responsive variant with error state", () => {
+        const { container } = renderWithTheme(
+          <Input
+            variant={{ base: "outline", md: "primary" }}
+            state="error"
+            placeholder="Responsive with error"
+          />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveAttribute("aria-invalid", "true");
+      });
+
+      it("renders responsive size with fullWidth", () => {
+        const { container } = renderWithTheme(
+          <Input
+            size={{ base: "sm", md: "lg" }}
+            fullWidth={true}
+            placeholder="Responsive size fullWidth"
+          />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveClass("w-full");
+      });
+
+      it("renders responsive props with icons", () => {
+        const { container } = renderWithTheme(
+          <Input
+            variant={{ base: "outline", md: "primary" }}
+            size={{ base: "sm", md: "lg" }}
+            iconLeft={<Icon name="search" size="sm" />}
+            placeholder="Responsive with icons"
+          />,
+        );
+        const input = container.querySelector("input");
+        expect(input).toBeInTheDocument();
+        const wrapper = container.querySelector("div.relative");
+        expect(wrapper).toBeInTheDocument();
+      });
+    });
+  });
+
   describe("Snapshot", () => {
     it("matches snapshot for outline variant", () => {
       const { container } = renderWithTheme(
