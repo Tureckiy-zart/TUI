@@ -17,7 +17,7 @@ describe("Button", () => {
       const { container } = renderWithTheme(<Button>Default Button</Button>);
       const button = container.querySelector("button");
       expect(button).toBeInTheDocument();
-      expect(button).toHaveClass("bg-primary");
+      expect(button).toHaveClass("bg-[hsl(var(--button-primary-base-bg))]");
     });
   });
 
@@ -25,7 +25,7 @@ describe("Button", () => {
     it("renders primary variant", () => {
       const { container } = renderWithTheme(<Button variant="primary">Primary</Button>);
       const button = container.querySelector("button");
-      expect(button).toHaveClass("bg-primary");
+      expect(button).toHaveClass("bg-[hsl(var(--button-primary-base-bg))]");
       expect(button).toHaveClass("text-primary-foreground");
     });
 
@@ -53,8 +53,8 @@ describe("Button", () => {
     it("renders ghost variant", () => {
       const { container } = renderWithTheme(<Button variant="ghost">Ghost</Button>);
       const button = container.querySelector("button");
-      // Ghost variant uses hover:bg-muted (not hover:bg-accent) per BUTTON_TOKENS
-      expect(button).toHaveClass("hover:bg-muted");
+      // Ghost variant uses State Matrix CSS variables
+      expect(button).toHaveClass("hover:bg-[hsl(var(--button-ghost-hover-bg))]");
     });
 
     it("renders destructive variant", () => {
