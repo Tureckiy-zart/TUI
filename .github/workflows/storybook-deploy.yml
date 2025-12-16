@@ -1,28 +1,17 @@
-name: Deploy Storybook to GitHub Pages
+name: Storybook CI
 
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  deployments: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  deploy:
+  storybook:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install pnpm
@@ -30,7 +19,7 @@ jobs:
         with:
           version: 10.18.2
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -41,21 +30,3 @@ jobs:
 
       - name: Build Storybook
         run: pnpm build-storybook
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          # Enabling Pages may require elevated permissions (admin). If you hit
-          # "Resource not accessible by integration", create a PAT and store it
-          # as repo secret PAGES_TOKEN (needs rights to manage Pages).
-          token: ${{ secrets.PAGES_TOKEN || github.token }}
-          enablement: true
-
-      - name: Upload Storybook artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: storybook-static
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
