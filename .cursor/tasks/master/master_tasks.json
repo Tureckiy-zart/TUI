@@ -1804,6 +1804,51 @@
           ],
           "dependencies": ["F8"],
           "status": "completed"
+        },  
+        {
+          "id": "FND_LOCK_INTERACTION_AUTHORITY",
+          "title": "Lock Interaction Authority (FOUNDATION)",
+          "purpose": "Establish and lock a single canonical contract for interactive states across all UI components. Button is the reference implementation. The outcome is: documented authority chain + guard rules + Storybook iframe verification + automated repo audit checks.",
+          "layer": "1. Foundation Layer",
+          "version": "1.1",
+          "inputs": [
+            "docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md (if exists: validate and normalize)",
+            "docs/architecture/INTERACTION_AUTHORITY_AUDIT.md (if exists: validate and normalize)",
+            "docs/architecture/INTERACTION_AUTHORITY_GUARD_LAYER.md (if exists: validate and normalize)",
+            "src/components/ui/button.tsx",
+            "src/tokens/components/button.ts",
+            ".storybook/preview.tsx",
+            "button.stories.tsx"
+          ],
+          "outputs": [
+            "docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md",
+            "docs/architecture/INTERACTION_AUTHORITY_AUDIT.md",
+            "docs/architecture/INTERACTION_AUTHORITY_GUARD_LAYER.md",
+            "docs/architecture/INTERACTION_AUTHORITY_HOVER_VERIFICATION.md",
+            "scripts/verify-interaction-authority.mjs",
+            "artifacts/interaction-authority-report.md"
+          ],
+          "acceptance_criteria": [
+            "Canonical docs exist: INTERACTION_AUTHORITY_CONTRACT.md, INTERACTION_AUTHORITY_AUDIT.md, INTERACTION_AUTHORITY_GUARD_LAYER.md, INTERACTION_AUTHORITY_HOVER_VERIFICATION.md",
+            "Contract contains strict priority order: disabled > loading > active > hover > focus-visible > base",
+            "Docs explicitly require iframe-only verification; manager context declared invalid",
+            "Repo audit script exists and produces artifacts/interaction-authority-report.md",
+            "Audit script can fail on violations (exit code 1) and provides file hints",
+            "Button is documented as the reference implementation (no behavioral refactor)",
+            "FINAL_FOUNDATION_LOCK.md marks Interaction Authority as LOCKED",
+            "Master task tracker marks this task as completed/locked"
+          ],
+          "prerequisites": {
+            "must_have_completed": [
+              "FND_LOCK_COLOR_AUTHORITY",
+              "FND_LOCK_STATE_AUTHORITY"
+            ],
+            "must_be_ready": true
+          },
+          "dependencies": [],
+          "status": "completed",
+          "completed_date": "2025-12-16",
+          "completion_notes": "Interaction Authority locked. All canonical documents normalized and validated. Automated verification script created. Button component verified as reference implementation. Lock status added to FINAL_FOUNDATION_LOCK.md."
         }
       ]
     },

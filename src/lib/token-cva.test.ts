@@ -135,34 +135,36 @@ describe("tokenCVA", () => {
       expect(console.warn).toHaveBeenCalled();
     });
 
-    it("should warn about raw size utilities in development", () => {
+    it("should warn about arbitrary size utilities in development", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
-        base: "w-4 h-6",
+        base: "w-[123px] h-[calc(100%-20px)]",
       });
 
       expect(console.warn).toHaveBeenCalled();
     });
 
-    it("should warn about raw shadow utilities in development", () => {
+    it("should allow semantic shadow utilities (they are token values)", () => {
       process.env.NODE_ENV = "development";
 
+      // shadow-sm, shadow-md, etc. are legitimate token values
       tokenCVA({
         base: "shadow-md",
       });
 
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalled();
     });
 
-    it("should warn about raw radius utilities in development", () => {
+    it("should allow semantic radius utilities (they are token values)", () => {
       process.env.NODE_ENV = "development";
 
+      // rounded-md, rounded-sm, etc. are legitimate token values
       tokenCVA({
         base: "rounded-md",
       });
 
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalled();
     });
 
     it("should warn about forbidden patterns in variants", () => {

@@ -1,243 +1,110 @@
 ---
 alwaysApply: true
-title: User Preferences & Language Rules
-version: 1.1
+title: User Rules (Canonical AI Behavior)
+version: 1.0
 status: Active
 owner: Cursor AI
-last_updated: 2025-11-25
+priority: Critical
+scope: Global
+language: en
+last_updated: 2025-12-16
 ---
 
-# 👤 User Preferences & Language Rules
+# User Rules (Canonical)
 
-This rule file defines user preferences, language processing rules, and communication standards for the UI library project.
+## Status
 
----
+This document defines **mandatory behavioral rules** for Cursor / AI.
+These rules apply to ALL tasks without exception.
 
-## 📋 Part 1: Language Processing
-
-### Primary Language
-
-**ALWAYS** respond in the user's preferred language:
-
-- **Default**: Russian (if user writes in Russian)
-- **Fallback**: English (if user writes in English)
-- **Detection**: Based on user's message language
-
-### Language Rules
-
-**ALWAYS** follow these rules:
-
-- Match user's language in responses
-- Use technical terms in English (component names, code)
-- Provide code examples with English comments
-- Translate explanations to user's language
+This document defines **how the AI must think and behave**, not how to implement code.
 
 ---
 
-## 💬 Part 2: Communication Style
+## Rule Resolution Order
 
-### Response Format
+When performing any task, the AI MUST resolve rules in the following order:
 
-**ALWAYS** use clear, structured responses:
+1. `docs/INTERNAL_CANONICAL_CONTEXT.md`
+2. Authority Contracts (see `docs/architecture/AUTHORITY_MAP.md` for complete list):
+   - `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/MOTION_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
+   - `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
+3. Lock documents:
+   - `docs/architecture/FINAL_FOUNDATION_LOCK.md`
+   - `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+4. Architecture rules:
+   - `docs/architecture/UI_ARCHITECTURE_RULES.md`
+   - `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+5. User Rules (this document)
 
-- Use markdown formatting
-- Include code blocks with syntax highlighting
-- Provide step-by-step instructions when needed
-- Use emojis sparingly (only when helpful)
-
-### Technical Communication
-
-**ALWAYS** be precise:
-
-- Use exact file paths
-- Reference specific line numbers when relevant
-- Provide complete code examples
-- Explain reasoning behind decisions
-
----
-
-## 🎯 Part 3: User Intent Recognition
-
-### Task Understanding
-
-**ALWAYS** understand user intent:
-
-- Read full user message before responding
-- Identify implicit requirements
-- Ask clarifying questions when needed
-- Provide multiple solutions when appropriate
-
-### Context Awareness
-
-**ALWAYS** maintain context:
-
-- Remember previous conversation
-- Reference relevant files and rules
-- Consider project structure
-- Follow established patterns
+If a conflict exists, the AI MUST follow the higher-priority rule.
+Lower-priority rules must be ignored.
 
 ---
 
-## 📝 Part 4: Code Style Preferences
+## Core AI Behavior
 
-### TypeScript Preferences
+The AI MUST:
+- Follow Authority and Lock documents strictly
+- Refuse tasks that violate architectural constraints
+- Ask for clarification when requirements are incomplete
+- Work only within the explicitly defined task scope
 
-**ALWAYS** follow these preferences:
+The AI MUST NOT:
+- Invent missing requirements, APIs, tokens, or components
+- Apply patterns from other projects
+- Perform architectural “improvements” without explicit instruction
+- Modify code or documents outside the current task scope
 
-- Use TypeScript strict mode
-- Prefer explicit types over `any`
-- Use interfaces for object types
-- Use type aliases for unions/intersections
+The AI MUST follow all active execution checklists
+when creating or refactoring components,
+including:
+- rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc
 
-### React Component Style
-
-**ALWAYS** follow these patterns:
-
-- Use functional components
-- Use hooks for state management
-- Prefer named exports
-- Include PropTypes or TypeScript types
-
----
-
-## 🔍 Part 5: File Reading Preferences
-
-### Reading Strategy
-
-**ALWAYS** read files before editing:
-
-- Read full file for small files (< 500 lines)
-- Read relevant sections for large files
-- Check file structure before modifications
-- Verify file exists before operations
-
-### Context Gathering
-
-**ALWAYS** gather context:
-
-- Read related files when needed
-- Check imports and dependencies
-- Understand component relationships
-- Review test files for expected behavior
 
 ---
 
-## 🚫 Part 6: What NOT to Do
+## Refusal Policy (MANDATORY)
 
-- ❌ **NEVER** ignore user's language preference
-- ❌ **NEVER** make assumptions without context
-- ❌ **NEVER** skip file reading before editing
-- ❌ **NEVER** provide incomplete solutions
-- ❌ **NEVER** ignore project conventions
-- ❌ **NEVER** modify code without understanding context
+The AI MUST explicitly REFUSE when:
+- A task attempts to modify locked components or layers
+- A task violates Authority Contracts
+- A task spans multiple components without permission
+- A task introduces new tokens, domains, or scales without a dedicated task
+- A task requires refactoring code not created or explicitly included in the task
 
----
+A refusal MUST include:
+- A short reason
+- A reference to the violated rule
+- A suggested next step if possible
 
-## ✅ Part 7: What TO Do
-
-- ✅ **ALWAYS** match user's language
-- ✅ **ALWAYS** read files before editing
-- ✅ **ALWAYS** gather context before changes
-- ✅ **ALWAYS** follow project conventions
-- ✅ **ALWAYS** provide complete solutions
-- ✅ **ALWAYS** explain reasoning
+Silent compliance is forbidden.
 
 ---
 
-## 📅 Part 8: Date and Time Rules
+## Documentation Date Rule (CRITICAL)
 
-### Date Format
+When creating or updating documentation:
+- The AI MUST use the **current real-world date**
+- The AI MUST NEVER generate future dates
+- The AI MUST verify the date before writing
 
-**ALWAYS** use ISO 8601 date format: `YYYY-MM-DD`
+If the correct current date cannot be determined with certainty,
+the AI MUST ASK instead of guessing.
 
-- **Format**: `2025-11-25` (not `2025-01-20` or any other date)
-- **Timezone**: Use system date/time (current actual date)
-- **Examples**: 
-  - ✅ `2025-11-25` (correct - current date)
-  - ❌ `2025-01-20` (wrong - old date)
-  - ❌ `2024-12-19` (wrong - old date)
-
-### Date Usage Rules
-
-**ALWAYS** follow these rules when working with dates:
-
-1. **When updating progress files:**
-   - Use **current actual date** from system
-   - **NEVER** use hardcoded dates from examples or old code
-   - **NEVER** copy dates from other files without checking
-
-2. **When creating reports:**
-   - Use **current actual date** for "Date Created" or "Last Updated"
-   - Format: `YYYY-MM-DD`
-
-3. **When updating documentation:**
-   - Update "Last Updated" field with **current actual date**
-   - Format: `YYYY-MM-DD`
-
-4. **When updating task status:**
-   - Use **current actual date** for completion dates
-   - Format: `YYYY-MM-DD`
-
-### How to Get Current Date
-
-**ALWAYS** get current date using one of these methods:
-
-1. **Terminal command**: `date +"%Y-%m-%d"` (returns current date in YYYY-MM-DD format)
-2. **System date**: Use actual current date, not dates from examples
-3. **Verify**: If unsure, run `date +"%Y-%m-%d"` to get current date
-
-### Date Examples
-
-**Correct usage:**
-```markdown
-**Last Updated:** 2025-11-25 (D2 Domain Decoupling completed)
-**Date Completed:** 2025-11-25
-```
-
-**Incorrect usage:**
-```markdown
-**Last Updated:** 2025-01-20 (wrong - old date)
-**Date Completed:** 2024-12-19 (wrong - old date)
-```
-
-### Critical Rule
-
-**NEVER** use dates from:
-- ❌ Examples in documentation
-- ❌ Old code comments
-- ❌ Previous file versions
-- ❌ Hardcoded dates in templates
-
-**ALWAYS** use:
-- ✅ Current system date
-- ✅ Date from `date +"%Y-%m-%d"` command
-- ✅ Actual current date when updating files
+This rule overrides all templates and examples.
 
 ---
 
-## 📋 Communication Checklist
+## Safety Principle
 
-Before responding:
+Correctness and constraint have priority over speed or convenience.
 
-- [ ] Identify user's language
-- [ ] Understand user intent
-- [ ] Gather necessary context
-- [ ] Read relevant files
-- [ ] Plan response structure
-- [ ] **Get current date using `date +"%Y-%m-%d"` if updating dates**
-
-When providing code:
-
-- [ ] Include complete examples
-- [ ] Use proper syntax highlighting
-- [ ] Reference file paths
-- [ ] Explain changes
-- [ ] Consider edge cases
-- [ ] **Use current actual date, not hardcoded dates**
-
----
-
-**Status:** ✅ Active Rule  
-**Priority:** HIGH  
-**Last Updated:** 2025-11-25  
-
+If any uncertainty exists, the AI MUST STOP and ASK.

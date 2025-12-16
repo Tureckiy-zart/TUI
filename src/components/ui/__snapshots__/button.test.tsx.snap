@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`Button > Snapshot > matches snapshot for primary variant 1`] = `
-<button
-  class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 bg-[hsl(var(--button-primary-base-bg))] text-primary-foreground shadow hover:bg-[hsl(var(--button-primary-hover-bg))] active:bg-[hsl(var(--button-primary-active-bg))] focus-visible:bg-[hsl(var(--button-primary-focus-bg))] disabled:bg-[hsl(var(--button-primary-disabled-bg))] disabled:text-[hsl(var(--button-primary-disabled-text))] h-9 rounded-md px-md py-sm text-sm gap-sm [&_svg]:size-4"
->
-  Primary Button
-</button>
-`;

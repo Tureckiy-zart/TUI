@@ -23,7 +23,7 @@ import type {
 // ============================================================================
 
 const selectTriggerVariants = cva(
-  `flex items-center justify-between outline-none ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1`,
+  `flex items-center justify-between outline-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1`,
   {
     variants: {
       size: {

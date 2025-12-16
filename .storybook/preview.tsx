@@ -428,7 +428,9 @@ if (typeof window !== "undefined") {
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    // Note: argTypesRegex is removed for Storybook 10+ compatibility
+    // All actions must be explicit spies using fn() from 'storybook/test'
+    // actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

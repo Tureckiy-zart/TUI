@@ -462,7 +462,7 @@ const ModalClose = React.forwardRef<HTMLButtonElement, ModalCloseProps>(
           MODAL_TOKENS.close.radius,
           MODAL_TOKENS.close.opacity.default,
           MODAL_TOKENS.close.opacity.hover,
-          "ring-offset-background transition-opacity focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
+          "ring-offset-background transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
           className,
         )}
         {...props}

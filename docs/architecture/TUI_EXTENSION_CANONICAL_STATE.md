@@ -1,14 +1,18 @@
 # TUI Extension Layer - Canonical State
 
-**Date:** 2025-12-13  
+**Date:** 2025-12-16  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
+
+**Related Authority:** [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) - Defines Extension layer boundaries and rules
 
 ---
 
 ## Authority & Scope
 
 This document is the **single source of truth** for what UI components are allowed, restricted, or locked in the `@tenerife.music/ui` Extension Layer.
+
+**Important:** Extension components **MUST** comply with the [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md). Extension **CANNOT** modify, override, bypass, or duplicate Foundation functionality. Foundation Authorities are **CLOSED** and **IMMUTABLE**.
 
 ### Authority Rules
 
@@ -47,7 +51,13 @@ This document defines the canonical state of:
 
 ## Foundation Layer (LOCKED)
 
+**Status:** ✅ **FOUNDATION CLOSED**  
+**Lock Date:** 2025-12-12  
+**Source of Truth:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)
+
 The following components are **LOCKED** and **IMMUTABLE**. They form the foundation of the UI system and must not be modified, extended, or replaced.
+
+**Foundation Authorities are CLOSED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
 
 ### Locked Components
 
@@ -85,6 +95,9 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
 - **DO NOT** extend locked components beyond their documented API
 - **DO NOT** import locked components from non-canonical paths
 - **DO NOT** use internal implementation details of locked components
+- **DO NOT** modify Foundation Authority rules (Foundation Authorities are CLOSED and IMMUTABLE)
+- **DO NOT** override, bypass, or duplicate Foundation functionality
+- **MUST** comply with all Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation)
 
 ---
 
@@ -716,6 +729,13 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - Reimplementation of Foundation Layer behavior is FORBIDDEN
     - Composition components are ALLOWED but must respect Foundation Layer immutability
 
+11. **Extension cannot modify Foundation Authorities**
+    - Foundation Authorities are CLOSED and IMMUTABLE
+    - Extension MUST comply with all Foundation Authority rules
+    - Extension CANNOT override, bypass, or duplicate Foundation functionality
+    - Extension CANNOT modify Foundation Authority Contracts
+    - Reference: [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md)
+
 ---
 
 ## Verification
@@ -740,10 +760,27 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 ## Document Status
 
 **Status:** FINAL  
-**Version:** 1.0  
-**Last Updated:** 2025-12-15
+**Version:** 1.1  
+**Last Updated:** 2025-12-16
 
 This document is **FINAL**. Any changes to this canonical state require explicit architectural review and approval. This document serves as the definitive law for UI component usage in the Extension Layer.
+
+**Related Documents:**
+- [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation lock status (source of truth)
+
+---
+
+## Version History
+
+- **v1.1** (2025-12-16): Foundation Authority Alignment
+  - Added reference to Extension Authority Contract
+  - Updated Foundation Layer section with Foundation CLOSED status
+  - Added Foundation Authority compliance rules
+  - Clarified that Extension cannot modify Foundation Authorities
+  - Added explicit rules about Foundation Authority immutability
+
+- **v1.0** (2025-12-15): Initial canonical state document
 
 ---
 

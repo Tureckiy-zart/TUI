@@ -172,7 +172,7 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
             size="icon"
             onClick={handleDismiss}
             aria-label="Dismiss notification"
-            className="absolute right-xs top-xs h-6 w-6 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
+            className="absolute right-xs top-xs h-6 w-6 opacity-0 transition-opacity hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 group-hover:opacity-100"
           >
             <X className="h-4 w-4" />
           </Button>

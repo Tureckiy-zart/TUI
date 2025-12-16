@@ -106,8 +106,8 @@ export const CONTEXT_MENU_TOKENS = {
   item: {
     radius: "rounded-sm", // 4px (0.25rem)
     focus: {
-      background: "focus:bg-[hsl(var(--accent))]", // Focus background using CSS var
-      text: "focus:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
+      background: "focus-visible:bg-[hsl(var(--accent))]", // Focus background using CSS var
+      text: "focus-visible:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
     },
     disabled: {
       opacity: "opacity-50", // Disabled opacity

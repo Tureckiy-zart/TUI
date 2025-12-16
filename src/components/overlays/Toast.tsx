@@ -125,7 +125,7 @@ const ToastRoot = React.forwardRef<HTMLLIElement, ToastRootProps>(
                   altText={toast.action.label}
                   onClick={toast.action.onClick}
                   className={cn(
-                    "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50",
+                    "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
                     TOAST_TOKENS.action.height,
                     TOAST_TOKENS.action.padding,
                     TOAST_TOKENS.action.fontSize,
@@ -208,7 +208,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50",
+      "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
       TOAST_TOKENS.action.height,
       TOAST_TOKENS.action.padding,
       TOAST_TOKENS.action.fontSize,

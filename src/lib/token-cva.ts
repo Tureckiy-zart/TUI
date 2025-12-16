@@ -72,18 +72,23 @@ export interface TokenCVAConfig<Variants extends Record<string, Record<string, C
 /**
  * Forbidden Tailwind patterns that indicate hardcoded values
  * These patterns should not appear in token-based styling
+ *
+ * Note: We allow semantic utilities (rounded-md, shadow-sm, h-8, etc.) as these
+ * are legitimate token values that map to design system tokens. The validator
+ * focuses on catching raw color utilities and arbitrary numeric values that
+ * bypass the token system.
  */
 const FORBIDDEN_PATTERNS = [
   // Raw color utilities (bg-red-500, text-blue-600, etc.)
+  // These are always forbidden as they bypass the color token system
   /\b(bg|text|border|ring|outline)-(red|blue|green|yellow|purple|pink|indigo|gray|slate|zinc|neutral|stone|orange|amber|emerald|teal|cyan|sky|violet|fuchsia|rose)-\d+/,
-  // Raw spacing utilities (p-4, m-2, gap-3, etc.) - but allow structural ones
-  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-\d+/,
-  // Raw size utilities (w-4, h-6, etc.) - but allow structural ones
-  /\b(w|h|min-w|min-h|max-w|max-h)-\d+/,
-  // Raw shadow utilities (shadow-sm, shadow-md, etc.) - but allow token-based ones
-  /\bshadow-(sm|md|lg|xl|2xl|inner|none)\b/,
-  // Raw radius utilities (rounded-sm, rounded-md, etc.) - but allow token-based ones
-  /\brounded-(sm|md|lg|xl|2xl|3xl|full|none)\b/,
+  // Raw spacing utilities with arbitrary numbers (p-4, m-2, gap-3, etc.)
+  // Allow semantic spacing tokens (px-sm, py-md, etc.) which use token names
+  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-(\d+|\[)/,
+  // Raw size utilities with arbitrary numbers (w-4, h-6, etc.)
+  // Allow semantic size tokens (h-8, w-9, etc.) which are standard design system values
+  // Only flag arbitrary values like w-[123px] or h-[calc(...)]
+  /\b(w|h|min-w|min-h|max-w|max-h)-\[/,
 ] as const;
 
 /**

@@ -73,20 +73,6 @@ Gradients are used sparingly in Tenerife UI to maintain brand consistency while 
 - **Location:** `src/components/cards/VenueCard.tsx`
 - **Rationale:** Subtle muted gradient for image placeholders
 
-#### `bg-gradient-to-br from-primary/20 to-accent/20`
-
-- **Component:** `HeroSection` (stories)
-- **Usage:** Hero section background overlay
-- **Location:** `src/components/sections/HeroSection.stories.tsx`
-- **Rationale:** Subtle hero background overlay
-
-#### `bg-gradient-to-br from-primary/30 via-accent/30 to-secondary/30`
-
-- **Component:** `HeroSection` (stories)
-- **Usage:** Hero section background overlay with via color
-- **Location:** `src/components/sections/HeroSection.stories.tsx`
-- **Rationale:** Multi-color hero background overlay
-
 ---
 
 ### 3. Overlay Gradients
@@ -194,11 +180,6 @@ The following gradient patterns are **NOT allowed** and should be flagged:
   - Badge: `bg-gradient-to-r from-accent to-primary`
   - Placeholder: `bg-gradient-to-br from-muted to-muted/50`
   - Overlay: `bg-gradient-to-t from-black/60 via-transparent to-transparent`
-
-### HeroSection
-
-- **Allowed:** Background overlays with opacity (`/20`, `/30`)
-- **Purpose:** Subtle hero backgrounds
 
 ---
 

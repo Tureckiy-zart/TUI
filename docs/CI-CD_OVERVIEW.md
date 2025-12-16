@@ -1,177 +1,248 @@
 # 🚀 Tenerife.UI — CI/CD Overview (2025 Edition)
 
-Этот документ описывает **полную структуру CI/CD-пайплайнов** UI-библиотеки Tenerife.UI. Он фиксирует роли каждого workflow, порядок запуска, триггеры, обязанности и архитектуру. Документ является эталоном и должен всегда оставаться в актуальном состоянии.
+This document describes the **complete CI/CD pipeline structure** for the Tenerife.UI library. It defines the role of each workflow, execution order, triggers, responsibilities, and architecture. This document is the reference standard and must always remain up to date.
 
 ---
 
-# 📁 1. Общая структура CI/CD
+# 📁 1. General CI/CD Structure
 
-В библиотеке используется **4 независимых pipeline**, каждый отвечает за свою отдельную область:
+The library uses **6 independent pipelines**, each responsible for its own area:
 
-1. **Quality Checks** — проверка качества кода, сборка и тестирование.
-2. **Release (manual)** — ручной запуск semantic-release → npm publish.
-3. **Storybook Deploy** — публикация Storybook на GitHub Pages.
-4. **Test NPM Token (manual)** — отладочный инструмент для проверки NPM_TOKEN.
+1. **Quality Checks** — code quality checks, testing, and accessibility (lint, tests, a11y).
+2. **Full CI/CD** — complete pipeline for main branch (quality, build, storybook, release).
+3. **Chromatic Visual Tests** — visual regression testing for components.
+4. **Release (manual)** — manual semantic-release → npm publish.
+5. **Storybook Deploy** — Storybook publication to GitHub Pages.
+6. **Test NPM Token** — debugging tool for NPM_TOKEN verification.
 
-Эти pipeline работают независимо и НЕ должны объединяться.
+These pipelines work independently and should NOT be combined.
 
 ---
 
 # 🟦 2. Quality Checks Pipeline
 
-**Файл:** `.github/workflows/quality.yml`
+**File:** `.github/workflows/quality.yml`
 
-**Запускается при:**
+**Triggers:**
 
-- push: `main`, `dev`, `feature/**`
-- pull_request → `main`, `dev`
+- push: `main`, `develop`, `feature/**`
+- pull_request → `main`, `develop`
 
-### 🔍 Что делает:
+### 🔍 What it does:
 
-- 🧹 Lint (ESLint)
-- 🎨 Prettier check
-- 🔍 TypeScript typecheck
-- 🧪 Unit tests
-- ♿ Accessibility tests
-- 🏗 Build библиотеки
-- 🏗 Build Storybook
+- 🧹 Lint (ESLint) — via `scripts/lint-ci.sh` and `pnpm lint:check`
+- 🧪 Unit tests — `pnpm test`
+- ♿ Accessibility tests — `pnpm ci:a11y`
+- 📤 Upload lint artifacts (lint-report.md, prettier logs)
 
-### 🎯 Задача:
+### 🎯 Purpose:
 
-Обеспечить, что библиотека **всегда собирается, типизирована, тесты проходят** и UI-система не ломается.
+Ensure that code **passes linting, tests, and accessibility checks** on all development branches.
 
-### 📝 Примечание:
+### 📝 Note:
 
-Quality не публикует пакет и не деплоит Storybook — он только проверяет.
+Quality does not build the library or deploy Storybook — it only checks code quality. For full verification, use `ci.yml` on the main branch.
 
 ---
 
-# 🟩 3. Release Pipeline (manual semantic-release)
+# 🟨 3. Full CI/CD Pipeline
 
-**Файл:** `.github/workflows/release.yml`
+**File:** `.github/workflows/ci.yml`
 
-**Запускается:**
+**Triggers:**
 
-- ❗️ _Только вручную_ через "Run Workflow".
+- push: `main`
+- pull_request → `main`
 
-### 🔍 Что делает:
+### 🔍 What it does:
 
-- Устанавливает PNPM и Node
-- Проверяет доступность npm-токена
-- Выполняет accessibility suite
-- Выполняет `semantic-release` (npm publish + git tag + GitHub Release)
+**Job: quality**
+- 🧹 Lint — `pnpm lint`
+- 🎨 Prettier check — `pnpm format:check`
+- 🔍 TypeScript typecheck — `pnpm typecheck`
+- 🔄 Matrix testing: Node.js 18.x, 20.x, 22.x
 
-### 🎯 Задача:
+**Job: build** (depends on quality)
+- 🏗 Build library — `pnpm build`
 
-Позволить выпускать версии библиотеки **без ручного изменения version в package.json**.
+**Job: storybook** (depends on build)
+- 📚 Build Storybook — `pnpm build-storybook`
+- 📤 Upload Storybook artifact
 
-### 🔥 semantic-release делает автоматически:
+**Job: release** (depends on quality + build, main branch only)
+- 📦 Semantic Release — `npx semantic-release`
+- 🚀 Automatic npm publication (if there are new commits for release)
 
-- определение новой версии из commit messages
-- генерацию changelog
-- создание GitHub Release
-- публикацию в npm
+### 🎯 Purpose:
+
+Provide **complete CI/CD cycle for main branch**: quality checks, build, testing on different Node.js versions, Storybook build, and automatic publication when release commits are present.
+
+### 📝 Note:
+
+This is the main pipeline for the main branch. The release job runs automatically only if semantic-release determines there are commits for release.
 
 ---
 
-# 🟪 4. Storybook Deploy Pipeline
+# 🟣 4. Chromatic Visual Tests Pipeline
 
-**Файл:** `.github/workflows/storybook-deploy.yml`
+**File:** `.github/workflows/chromatic.yml`
 
-**Запускается при:**
+**Triggers:**
+
+- pull_request → `main`, `develop`
+- push: `main`
+
+### 🔍 What it does:
+
+- 📸 Visual regression testing for components
+- 🔍 Compare Storybook changes with baseline version
+- ✅ Check for visual changes in components
+
+### 🎯 Purpose:
+
+Detect **unintended visual changes** in components before merging to main or develop.
+
+### 📝 Note:
+
+Uses Chromatic for visual testing. Requires `CHROMATIC_PROJECT_TOKEN` in GitHub Secrets.
+
+---
+
+# 🟩 5. Release Pipeline (manual semantic-release)
+
+**File:** `.github/workflows/release.yml`
+
+**Triggers:**
+
+- ❗️ _Manual only_ via "Run Workflow" (`workflow_dispatch`).
+
+### 🔍 What it does:
+
+- Installs PNPM and Node.js 22
+- Runs accessibility suite — `pnpm ci:a11y`
+- Configures NPM token
+- Runs `semantic-release` (npm publish + git tag + GitHub Release)
+
+### 🎯 Purpose:
+
+Allow manual library version releases **without manually changing version in package.json**.
+
+### 🔥 semantic-release automatically:
+
+- determines new version from commit messages
+- generates changelog
+- creates GitHub Release
+- publishes to npm
+
+### 📝 Note:
+
+Alternative to automatic release in `ci.yml`. Used for manual control of the release process.
+
+---
+
+# 🟪 6. Storybook Deploy Pipeline
+
+**File:** `.github/workflows/storybook-deploy.yml`
+
+**Triggers:**
 
 - push → `main`
-- вручную (`workflow_dispatch`)
+- manually (`workflow_dispatch`)
 
-### 🔍 Что делает:
+### 🔍 What it does:
 
-- собирает Storybook (`storybook-static`)
-- загружает артефакт
-- публикует на GitHub Pages через Pages API
+- builds Storybook (`storybook-static`)
+- uploads artifact
+- publishes to GitHub Pages via Pages API
 
-### 🎯 Задача:
+### 🎯 Purpose:
 
-Держать **живую онлайн-версию Storybook**, как документацию для дизайнеров и разработчиков.
+Maintain a **live online version of Storybook** as documentation for designers and developers.
 
-### 🌐 URL развёртывания:
+### 🌐 Deployment URL:
 
-- формируется через GitHub Pages environment.
-
----
-
-# 🟧 5. Test NPM Token (Manual Diagnostics)
-
-**Файл:** `.github/workflows/test-npm-token.yml`
-
-**Запускается:**
-
-- вручную (`workflow_dispatch`)
-
-### 🔍 Что делает:
-
-- проверяет наличие `NPM_TOKEN`
-- проверяет формат токена (`npm_…`)
-- делает dry-run publish (не публикует реальный пакет)
-- запускает `semantic-release --dry-run`
-
-### 🎯 Задача:
-
-**Проверить работоспособность токена NPM**, чтобы избежать сбоев релизов.
-
-### 📝 Примечание:
-
-Этот workflow НЕ является частью CI — это инструмент для разработчика.
+- generated via GitHub Pages environment.
 
 ---
 
-# 🧩 6. Локальный CI для разработчика
+# 🟧 7. Test NPM Token (Manual Diagnostics)
 
-**Файл:** `scripts/ci-local.sh`
+**File:** `.github/workflows/test-npm-token.yml`
 
-**Запускается вручную:**
+**Triggers:**
+
+- manually (`workflow_dispatch`)
+- automatically on push to `main` (only if the workflow file itself is changed)
+
+### 🔍 What it does:
+
+- checks for `NPM_TOKEN` in GitHub Secrets
+- verifies token format (must start with `npm_`)
+- performs dry-run publish (does not publish real package)
+- checks package existence on npm
+- runs `semantic-release --dry-run`
+
+### 🎯 Purpose:
+
+**Verify NPM token functionality** to avoid release failures.
+
+### 📝 Note:
+
+This workflow is NOT part of the main CI — it's a developer tool for diagnosing npm token issues.
+
+---
+
+# 🧩 8. Local CI for Developers
+
+**File:** `scripts/ci-local.sh`
+
+**Run manually:**
 
 ```
 pnpm ci:local
 ```
 
-### 🔍 Что делает:
+### 🔍 What it does:
 
-- очищает кеши
-- устанавливает зависимости
-- запускает lint / format check
-- typecheck
-- build
-- storybook build
+1. 🧹 Clean — `pnpm clean`
+2. 📦 Install dependencies — `pnpm install --frozen-lockfile`
+3. 🔍 Lint check — `pnpm lint:check`
+4. 💅 Format check — `pnpm format:check`
+5. 🔷 Typecheck — `pnpm typecheck`
+6. 🏗 Build library — `pnpm build`
+7. 📚 Build Storybook — `pnpm build-storybook`
 
-### 🎯 Задача:
+### 🎯 Purpose:
 
-Иметь **100% идентичный CI**, как в GitHub Actions, но локально.
+Have **100% identical CI** as in GitHub Actions, but locally. Allows checking all stages before push.
 
 ---
 
-# 🛠 7. Husky Hooks
+# 🛠 9. Husky Hooks
 
-**Цель:** предотвратить попадание некачественного кода в репозиторий.
+**Purpose:** prevent low-quality code from entering the repository.
 
 ### `.husky/pre-commit`
 
-- запускает `lint-staged`
-- автофикс только изменённых файлов
+- runs `lint-staged`
+- auto-fix only changed files
 
 ### `.husky/pre-push`
 
-- запускает минимальный CI subset
-- typecheck
-- lint
-- build
+- runs minimal CI subset before push:
+  - 📘 TypeScript typecheck — `pnpm typecheck`
+  - 💅 Prettier format check — `pnpm format:check`
+  - 🔍 ESLint strict check — `pnpm lint:strict` (no warnings allowed)
+  - 🏗 Build library — `pnpm build`
+  - 🧪 Unit tests — `pnpm test`
 
 ### `.husky/commit-msg`
 
-- проверяет conventional commits (commitlint)
+- validates conventional commits (commitlint)
 
 ---
 
-# 🧱 8. Общая архитектура пайплайнов
+# 🧱 10. General Pipeline Architecture
 
 ```
            ┌──────────────────────┐
@@ -180,45 +251,55 @@ pnpm ci:local
                      │
         ┌────────────▼──────────────┐
         │     QUALITY PIPELINE      │
-        │  lint / test / typecheck  │
-        │    build + storybook      │
+        │  (main/develop/feature)   │
+        │  lint / test / a11y       │
         └────────────┬──────────────┘
                      │
-         (if manual) ▼
+         (main only) ▼
         ┌────────────────────────────┐
-        │    RELEASE PIPELINE        │
-        │ semantic-release → npm     │
-        └────────────────────────────┘
+        │      FULL CI/CD PIPELINE   │
+        │  quality (matrix)          │
+        │  → build                   │
+        │  → storybook               │
+        │  → release (auto if needed)│
+        └────────────┬───────────────┘
                      │
          ┌───────────▼─────────────┐
          │ STORYBOOK DEPLOY PIPELINE│
          │   deploy to GitHub Pages │
          └──────────────────────────┘
 
-Manual: TEST-NPM-TOKEN
+         ┌──────────────────────────┐
+         │  CHROMATIC VISUAL TESTS   │
+         │  (PR to main/develop)     │
+         └──────────────────────────┘
+
+Manual: RELEASE, TEST-NPM-TOKEN
 ```
 
 ---
 
-# 🏁 9. Итог
+# 🏁 11. Summary
 
-CI/CD системы библиотеки разделены по назначению:
+The library's CI/CD systems are separated by purpose:
 
-| Workflow             | Задача              | Автоматически | Выполняет                     |
-| -------------------- | ------------------- | ------------- | ----------------------------- |
-| **Quality**          | Проверка качества   | ✔            | lint, tests, typecheck, build |
-| **Release**          | Публикация npm      | ❌ (manual)   | semantic-release              |
-| **Storybook Deploy** | Документация онлайн | ✔ (main)     | GitHub Pages                  |
-| **Test NPM Token**   | Диагностика токена  | ❌ (manual)   | dry-run publish               |
+| Workflow             | Purpose              | Automatic | Executes                     |
+| -------------------- | -------------------- | --------- | ---------------------------- |
+| **Quality**          | Quality checks       | ✔         | lint, tests, a11y            |
+| **Full CI/CD**       | Full pipeline        | ✔ (main)  | quality, build, storybook, release |
+| **Chromatic**        | Visual tests         | ✔ (PR/main) | visual regression tests    |
+| **Release**          | npm publication      | ❌ (manual) | semantic-release           |
+| **Storybook Deploy** | Online documentation | ✔ (main)  | GitHub Pages                 |
+| **Test NPM Token**   | Token diagnostics    | ❌ (manual) | dry-run publish            |
 
-Это обеспечивает:
+This ensures:
 
-- стабильность
-- предсказуемость
-- безопасность npm-публикаций
-- удобство разработки
-- профессиональный CI/CD уровень
+- stability
+- predictability
+- security of npm publications
+- development convenience
+- professional CI/CD level
 
 ---
 
-Готово. Если нужно — сделаю и визуальную диаграмму в SVG/ASCII, или добавлю раздел «Troubleshooting CI/CD». Будем расширять?
+Done. If needed, I can create a visual diagram in SVG/ASCII, or add a "Troubleshooting CI/CD" section. Should we expand?

@@ -1,0 +1,130 @@
+---
+alwaysApply: true
+title: GPT Project Lock
+version: 1.0
+status: Locked
+owner: Project Owner
+priority: Critical
+scope: Global
+language: en
+last_updated: 2025-12-16
+---
+
+# GPT Project Lock (Canonical)
+
+## Purpose
+
+This document **locks the GPT project context**.
+
+It defines:
+- which files constitute the complete GPT context
+- which files are allowed to influence AI reasoning
+- which files are explicitly excluded
+- how changes to the GPT context may occur
+
+After this document is active, the GPT project context
+is considered **frozen and authoritative**.
+
+---
+
+## Locked GPT Context
+
+The GPT project context consists ONLY of the following files.
+
+### Core Canonical Context
+- `docs/INTERNAL_CANONICAL_CONTEXT.md`
+- `docs/CANONICAL_PROJECT_ORIENTATION.md`
+- `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
+
+### Authority & Locks
+- `docs/AUTHORITY_MAP.md`
+- `docs/FINAL_FOUNDATION_LOCK.md`
+- `docs/TUI_ARCHITECTURE_LOCK.md`
+- All Authority Contracts explicitly listed in `AUTHORITY_MAP.md`
+
+### Architecture Rules
+- `docs/UI_ARCHITECTURE_RULES.md`
+- `docs/TUI_EXTENSION_CANONICAL_STATE.md`
+- `docs/TUI_TOKEN_SYSTEM.md`
+
+### Cursor Rules (Verified)
+- `rules/user-rules.mdc`
+- `rules/component-lifecycle.mdc`
+- `rules/block-and-scope-rules.mdc`
+- `rules/CURSOR_RULES_RESOLUTION_ORDER.mdc`
+- `rules/CURSOR_RULES_VERIFICATION.mdc`
+
+These files represent the **entire reasoning surface** available to AI.
+
+No other files are considered part of the GPT context.
+
+---
+
+## Explicit Exclusions
+
+The following are **explicitly excluded** from the GPT context
+and MUST NOT influence AI reasoning:
+
+- `docs_archive/**`
+- historical audits
+- migration reports
+- one-time analyses
+- experimental drafts
+- deprecated or legacy documentation
+- Cursor execution logs
+- task reports and snapshots
+
+Excluded files may exist in the repository
+but are **non-authoritative**.
+
+---
+
+## Context Integrity Rules
+
+The AI MUST:
+
+- Rely ONLY on the locked GPT context
+- Ignore excluded files entirely
+- Never scan directories to infer context
+- Never merge canonical and archived information
+
+If required information is missing from the locked context,
+the AI MUST ASK instead of guessing.
+
+---
+
+## Change Control Policy
+
+Any modification to the GPT project context requires:
+
+1. Explicit instruction to unlock this document
+2. Clear justification for the change
+3. Review against Authority Contracts and Locks
+4. Re-locking with an updated version of this document
+
+Silent or implicit changes are forbidden.
+
+---
+
+## Violation Handling
+
+If a task requires violating this lock:
+
+- The AI MUST REFUSE
+- The refusal MUST reference this document
+- A suggested next step MAY be provided
+
+---
+
+## Final Lock Statement
+
+This document **locks the GPT project context**.
+
+After this point:
+- The context is stable
+- The rules are deterministic
+- The AI behavior is predictable
+
+Any deviation is considered a violation.
+
+**Status: LOCKED**

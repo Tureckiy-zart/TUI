@@ -1,7 +1,7 @@
 # 🔷 Global TypeScript Typing Standard
 
 **Version:** 1.0  
-**Date:** 2025-01-20  
+**Date:** 2025-12-16  
 **Status:** ✅ ACTIVE
 
 ---
@@ -263,31 +263,46 @@ export function useModal<T = unknown>(initialState?: boolean): UseModalReturn<T>
 
 ---
 
-## 🚫 Part 5: Forbidden Types
+## 🚫 Part 5: Type Usage Guidelines
 
-### No `any` Type
+### `any` Type - Temporary Allowance
 
-**NEVER** use `any` type:
+**Current Status:** Explicit `any` is temporarily allowed by ESLint configuration while migrating legacy code to proper types. However, `any` should be avoided whenever possible.
+
+**TypeScript Configuration:** `noImplicitAny: true` - implicit `any` is still forbidden by TypeScript compiler.
+
+**ESLint Configuration:** `@typescript-eslint/no-explicit-any: "off"` - explicit `any` is temporarily allowed.
+
+**Guidelines:**
 
 ```typescript
-// ❌ Forbidden
+// ⚠️ Temporarily allowed (but discouraged)
 const data: any = ...;
 function process(data: any): any { ... }
 
-// ✅ Use unknown or specific type
+// ✅ Preferred - Use unknown or specific type
 const data: unknown = ...;
 function process<T>(data: T): T { ... }
+
+// ❌ Still forbidden - implicit any (caught by TypeScript)
+function process(data) { ... } // Error: Parameter 'data' implicitly has an 'any' type
 ```
 
-### No `any[]` Arrays
+**Migration Path:** When encountering `any` in code:
+1. Prefer `unknown` for truly unknown types
+2. Use generics for flexible but type-safe code
+3. Define specific interfaces/types when structure is known
+4. Use type guards for runtime type checking
 
-**NEVER** use `any[]`:
+### `any[]` Arrays
+
+**Guidelines:**
 
 ```typescript
-// ❌ Forbidden
+// ⚠️ Temporarily allowed (but discouraged)
 const items: any[] = [...];
 
-// ✅ Use specific type or generic
+// ✅ Preferred - Use specific type or generic
 interface Event {
   id: string;
   title: string;
@@ -297,17 +312,17 @@ const items: Event[] = [...];
 const items: Array<Event> = [...];
 ```
 
-### No Index Signature `any`
+### Index Signature with `any`
 
-**NEVER** use `[key: string]: any`:
+**Guidelines:**
 
 ```typescript
-// ❌ Forbidden
+// ⚠️ Temporarily allowed (but discouraged)
 interface Config {
   [key: string]: any;
 }
 
-// ✅ Use unknown or Record
+// ✅ Preferred - Use unknown or Record
 interface Config {
   [key: string]: unknown;
 }
@@ -317,13 +332,13 @@ type Config = Record<string, unknown>;
 
 ### No Implicit `any`
 
-**NEVER** rely on implicit `any`:
+**NEVER** rely on implicit `any` (enforced by TypeScript `noImplicitAny: true`):
 
 ```typescript
-// ❌ Forbidden - implicit any
+// ❌ Forbidden - implicit any (TypeScript error)
 function process(data) { ... }
 
-// ✅ Explicit type
+// ✅ Explicit type required
 function process(data: string) { ... }
 ```
 
@@ -507,7 +522,8 @@ Before marking code as complete:
 - [ ] All event handlers are explicitly typed
 - [ ] All tokens use `as const` and export type unions
 - [ ] All hooks have return type interfaces
-- [ ] No `any`, `any[]`, or `[key: string]: any`
+- [ ] Avoid `any` where possible (temporarily allowed but discouraged)
+- [ ] No implicit `any` (enforced by TypeScript)
 - [ ] All types are exported
 - [ ] Strict mode passes
 - [ ] Type enforcement script passes
@@ -515,4 +531,4 @@ Before marking code as complete:
 ---
 
 **Status:** ✅ ACTIVE  
-**Last Updated:** 2025-01-20
+**Last Updated:** 2025-12-16
