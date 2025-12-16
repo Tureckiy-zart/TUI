@@ -3,26 +3,23 @@ import type { ComponentAPI } from "@/lib/autodocs/types";
 
 export const SelectAPI = {
   name: "Select",
+  description:
+    "Foundation Select (LOCKED). Compound API: use Select.Root/Trigger/Content/etc. Variants below describe token props exposed on subcomponents.",
   props: [],
   variants: [
     {
-      name: "size",
-      options: ["sm", "md", "lg"],
+      name: "trigger.size",
+      options: ["xs", "sm", "md", "lg", "xl"],
     },
     {
-      name: "state",
-      options: ["default", "error", "disabled"],
+      name: "trigger.variant",
+      options: ["primary", "secondary", "outline", "ghost", "destructive"],
     },
     {
-      name: "fullWidth",
-      options: ["true", "false"],
+      name: "trigger.width",
+      options: ["auto", "sm", "md", "lg", "xl", "full"],
     },
   ],
   examples: [],
-  imports: [
-    'import { cva, type VariantProps } from "class-variance-authority";',
-    'import * as React from "react";',
-    'import { cn } from "@/lib/utils";',
-    'import { INPUT_TOKENS } from "@/tokens/components/input";',
-  ],
+  imports: ['import { Select } from "@tenerife.music/ui";'],
 } as const satisfies ComponentAPI;

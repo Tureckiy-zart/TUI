@@ -13,7 +13,7 @@ const meta: Meta<typeof Select.Root> = {
     docs: {
       description: {
         component:
-          "Select component built on Radix UI for dropdown selection. Supports variants (primary, secondary, outline, ghost, destructive), sizes (xs, sm, md, lg, xl), keyboard navigation, and full ARIA support. All visual props use token unions for type safety.",
+          "Foundation Select (LOCKED). Thin Radix Select wrapper that provides token-driven styling and a stable, immutable public API. Behavior (focus management, keyboard navigation, ARIA) is delegated to Radix.",
       },
     },
   },
@@ -39,7 +39,7 @@ type Story = StoryObj<typeof Select.Root>;
 export const Default: Story = {
   render: () => (
     <Select.Root>
-      <Select.Trigger>
+      <Select.Trigger aria-label="Select an option">
         <Select.Value placeholder="Select an option" />
         <Select.Icon />
       </Select.Trigger>
@@ -68,7 +68,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
       <Select.Root>
-        <Select.Trigger size="xs">
+        <Select.Trigger size="xs" aria-label="Extra small select">
           <Select.Value placeholder="Extra small (xs)" />
           <Select.Icon />
         </Select.Trigger>
@@ -85,7 +85,7 @@ export const Sizes: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger size="sm">
+        <Select.Trigger size="sm" aria-label="Small select">
           <Select.Value placeholder="Small (sm)" />
           <Select.Icon />
         </Select.Trigger>
@@ -102,7 +102,7 @@ export const Sizes: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger size="md">
+        <Select.Trigger size="md" aria-label="Medium select">
           <Select.Value placeholder="Medium (md)" />
           <Select.Icon />
         </Select.Trigger>
@@ -119,7 +119,7 @@ export const Sizes: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger size="lg">
+        <Select.Trigger size="lg" aria-label="Large select">
           <Select.Value placeholder="Large (lg)" />
           <Select.Icon />
         </Select.Trigger>
@@ -136,7 +136,7 @@ export const Sizes: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger size="xl">
+        <Select.Trigger size="xl" aria-label="Extra large select">
           <Select.Value placeholder="Extra large (xl)" />
           <Select.Icon />
         </Select.Trigger>
@@ -169,7 +169,7 @@ export const Variants: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
       <Select.Root>
-        <Select.Trigger variant="primary">
+        <Select.Trigger variant="primary" aria-label="Primary select">
           <Select.Value placeholder="Primary variant" />
           <Select.Icon />
         </Select.Trigger>
@@ -182,7 +182,7 @@ export const Variants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger variant="secondary">
+        <Select.Trigger variant="secondary" aria-label="Secondary select">
           <Select.Value placeholder="Secondary variant" />
           <Select.Icon />
         </Select.Trigger>
@@ -195,7 +195,7 @@ export const Variants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger variant="outline">
+        <Select.Trigger variant="outline" aria-label="Outline select">
           <Select.Value placeholder="Outline variant" />
           <Select.Icon />
         </Select.Trigger>
@@ -208,7 +208,7 @@ export const Variants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger variant="ghost">
+        <Select.Trigger variant="ghost" aria-label="Ghost select">
           <Select.Value placeholder="Ghost variant" />
           <Select.Icon />
         </Select.Trigger>
@@ -221,7 +221,7 @@ export const Variants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger variant="destructive">
+        <Select.Trigger variant="destructive" aria-label="Destructive select">
           <Select.Value placeholder="Destructive variant" />
           <Select.Icon />
         </Select.Trigger>
@@ -251,7 +251,7 @@ export const Disabled: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
       <Select.Root disabled defaultValue="option1">
-        <Select.Trigger>
+        <Select.Trigger aria-label="Disabled select">
           <Select.Value placeholder="Disabled select" />
           <Select.Icon />
         </Select.Trigger>
@@ -265,7 +265,7 @@ export const Disabled: Story = {
       </Select.Root>
 
       <Select.Root defaultValue="option1">
-        <Select.Trigger>
+        <Select.Trigger aria-label="Select with disabled option">
           <Select.Value placeholder="Select with disabled option" />
           <Select.Icon />
         </Select.Trigger>
@@ -307,19 +307,9 @@ export const WithLabel: Story = {
         </Select.Trigger>
         <Select.Content>
           <Select.Viewport>
-            <Select.Group>
-              <Select.Label>North America</Select.Label>
-              <Select.Item value="us">United States</Select.Item>
-              <Select.Item value="ca">Canada</Select.Item>
-              <Select.Item value="mx">Mexico</Select.Item>
-            </Select.Group>
-            <Select.Separator />
-            <Select.Group>
-              <Select.Label>Europe</Select.Label>
-              <Select.Item value="uk">United Kingdom</Select.Item>
-              <Select.Item value="de">Germany</Select.Item>
-              <Select.Item value="fr">France</Select.Item>
-            </Select.Group>
+            <Select.Item value="us">United States</Select.Item>
+            <Select.Item value="ca">Canada</Select.Item>
+            <Select.Item value="mx">Mexico</Select.Item>
           </Select.Viewport>
         </Select.Content>
       </Select.Root>
@@ -329,7 +319,7 @@ export const WithLabel: Story = {
     docs: {
       description: {
         story:
-          "Select with Label component for accessibility. Uses Select.Label for grouping items and external label for form association.",
+          "Accessibility: external <label htmlFor> + Trigger id. Prefer this pattern when Select is used as a form field.",
       },
     },
   },
@@ -341,7 +331,7 @@ export const WithLabel: Story = {
 export const LongList: Story = {
   render: () => (
     <Select.Root>
-      <Select.Trigger>
+      <Select.Trigger aria-label="Choose a country">
         <Select.Value placeholder="Choose a country" />
         <Select.Icon />
       </Select.Trigger>
@@ -393,7 +383,7 @@ export const Controlled: Story = {
     return (
       <div className="flex w-64 flex-col gap-md">
         <Select.Root value={value} onValueChange={setValue}>
-          <Select.Trigger>
+          <Select.Trigger aria-label="Controlled select">
             <Select.Value placeholder="Controlled select" />
             <Select.Icon />
           </Select.Trigger>
@@ -426,7 +416,7 @@ export const Controlled: Story = {
 export const WithGroups: Story = {
   render: () => (
     <Select.Root>
-      <Select.Trigger>
+      <Select.Trigger aria-label="Select a framework">
         <Select.Value placeholder="Select a framework" />
         <Select.Icon />
       </Select.Trigger>
@@ -452,32 +442,8 @@ export const WithGroups: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Select with grouped items using Select.Group and Select.Label for organization.",
-      },
-    },
-  },
-};
-
-export const WithDefaultValue: Story = {
-  render: () => (
-    <Select.Root defaultValue="option2">
-      <Select.Trigger>
-        <Select.Value placeholder="Select an option" />
-        <Select.Icon />
-      </Select.Trigger>
-      <Select.Content>
-        <Select.Viewport>
-          <Select.Item value="option1">Option 1</Select.Item>
-          <Select.Item value="option2">Option 2</Select.Item>
-          <Select.Item value="option3">Option 3</Select.Item>
-        </Select.Viewport>
-      </Select.Content>
-    </Select.Root>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: "Select with default value using defaultValue prop (uncontrolled).",
+        story:
+          "Grouped items using Select.Group + Select.Label + Select.Separator (canonical grouping pattern).",
       },
     },
   },
@@ -487,7 +453,7 @@ export const WidthVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
       <Select.Root>
-        <Select.Trigger width="auto">
+        <Select.Trigger width="auto" aria-label="Auto width select">
           <Select.Value placeholder="Auto width" />
           <Select.Icon />
         </Select.Trigger>
@@ -499,7 +465,7 @@ export const WidthVariants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger width="sm">
+        <Select.Trigger width="sm" aria-label="Small width select">
           <Select.Value placeholder="Small width (192px)" />
           <Select.Icon />
         </Select.Trigger>
@@ -511,7 +477,7 @@ export const WidthVariants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger width="md">
+        <Select.Trigger width="md" aria-label="Medium width select">
           <Select.Value placeholder="Medium width (256px)" />
           <Select.Icon />
         </Select.Trigger>
@@ -523,7 +489,7 @@ export const WidthVariants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger width="lg">
+        <Select.Trigger width="lg" aria-label="Large width select">
           <Select.Value placeholder="Large width (320px)" />
           <Select.Icon />
         </Select.Trigger>
@@ -535,7 +501,7 @@ export const WidthVariants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger width="xl">
+        <Select.Trigger width="xl" aria-label="Extra large width select">
           <Select.Value placeholder="Extra large width (384px)" />
           <Select.Icon />
         </Select.Trigger>
@@ -547,7 +513,7 @@ export const WidthVariants: Story = {
       </Select.Root>
 
       <Select.Root>
-        <Select.Trigger width="full">
+        <Select.Trigger width="full" aria-label="Full width select">
           <Select.Value placeholder="Full width (100%)" />
           <Select.Icon />
         </Select.Trigger>
