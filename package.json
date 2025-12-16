@@ -1,6 +1,6 @@
 {
   "name": "@tenerife.music/ui",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "private": false,
   "packageManager": "pnpm@10.18.2",
   "type": "module",
