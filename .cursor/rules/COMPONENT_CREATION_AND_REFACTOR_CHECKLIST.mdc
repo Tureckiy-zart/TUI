@@ -1,0 +1,239 @@
+---
+alwaysApply: true
+title: Component Creation & Refactor Checklist
+version: 1.0
+status: Active
+owner: Cursor AI
+priority: Critical
+scope: Component
+language: en
+last_updated: 2025-12-16
+---
+
+# Component Creation & Refactor Checklist (Canonical)
+
+## Purpose
+
+This document defines a **mandatory execution checklist**
+for creating NEW components and REFACTORING existing components.
+
+It exists to:
+- standardize component quality
+- prevent uncontrolled refactors
+- ensure full compliance with token-driven architecture
+- safely migrate legacy components to canonical form
+
+This checklist is **not advisory**.
+All steps are mandatory.
+
+---
+
+## MODE SELECTION (STEP 0)
+
+Before any work begins, the AI MUST explicitly select ONE mode:
+
+- **CREATE** — creating a brand-new component
+- **REFACTOR** — refactoring an existing component
+- **BUGFIX** — fixing behavior without structural change
+
+If the mode is not explicitly clear, the AI MUST STOP and ASK.
+
+---
+
+# 🆕 CREATE MODE — New Component
+
+## CREATE-1: Authority & Lock Check
+
+The AI MUST verify:
+
+- The component does NOT exist already
+- The component is not listed as LOCKED
+- The component is allowed in the current extension layer
+
+References:
+- `docs/TUI_EXTENSION_CANONICAL_STATE.md`
+- `docs/FINAL_FOUNDATION_LOCK.md`
+
+If creation violates any lock → **REFUSE**.
+
+---
+
+## CREATE-2: Component Classification
+
+The AI MUST classify the component as ONE of:
+
+- Primitive
+- Control
+- Layout
+- Composite
+- Utility
+
+Classification MUST match existing project taxonomy.
+
+---
+
+## CREATE-3: Token Mapping (MANDATORY)
+
+Before writing code, the AI MUST:
+
+- List all visual and behavioral props
+- Map EACH prop to an existing token domain
+- Use **token unions only**
+- Use `Responsive<T>` where applicable
+
+The AI MUST NOT:
+- Use raw values
+- Create new tokens
+- Extend token scales
+
+If a required token does not exist → **STOP and REQUEST NEW TASK**.
+
+---
+
+## CREATE-4: API Design Constraints
+
+The AI MUST ensure:
+
+- Public props are minimal and explicit
+- No boolean style toggles without token backing
+- No `variant: "primary" | "secondary"` patterns
+- Types are exported explicitly
+
+---
+
+## CREATE-5: Implementation
+
+The AI MUST:
+
+- Follow architecture rules
+- Modify ONLY files required for the component
+- Export types and component explicitly
+- Avoid wildcard exports
+
+---
+
+## CREATE-6: Verification
+
+Before completion, the AI MUST verify:
+
+- No raw values exist
+- All props map to tokens
+- Scope is limited to this component
+- No unrelated files were touched
+
+If verification fails → **FIX or REFUSE**.
+
+---
+
+# ♻️ REFACTOR MODE — Existing Component
+
+## REFACTOR-1: Refactor Legitimacy Check
+
+The AI MUST verify that:
+
+- Refactor is explicitly requested
+- Target component is NOT locked
+- Scope is limited to ONE component
+
+If refactor legitimacy is unclear → **STOP and ASK**.
+
+---
+
+## REFACTOR-2: Baseline Preservation
+
+The AI MUST:
+
+- Preserve existing behavior unless change is explicitly requested
+- Treat visual parity as mandatory
+- Avoid API changes unless explicitly requested
+
+Breaking changes are forbidden by default.
+
+---
+
+## REFACTOR-3: Token Migration
+
+The AI MUST:
+
+- Replace raw values with token-backed values
+- Replace legacy enums with token unions
+- Align props with current token domains
+
+The AI MUST NOT:
+- Introduce new tokens
+- Modify token scales
+- Collapse or merge domains
+
+---
+
+## REFACTOR-4: Structural Discipline
+
+The AI MUST:
+
+- Keep file structure unless change is requested
+- Avoid renaming exports
+- Avoid moving files
+
+Refactor ≠ rewrite.
+
+---
+
+## REFACTOR-5: Scope Guard
+
+The AI MUST NOT:
+
+- Refactor adjacent components
+- Touch shared utilities
+- Perform opportunistic cleanups
+
+If refactor requires touching another component → **REFUSE**.
+
+---
+
+## REFACTOR-6: Verification
+
+Before completion, the AI MUST verify:
+
+- Behavior parity
+- Token compliance
+- No scope leakage
+- No hidden API changes
+
+If verification fails → **FIX or REFUSE**.
+
+---
+
+# 🛠 BUGFIX MODE — Limited Fix
+
+## BUGFIX-1: Scope Limitation
+
+The AI MUST:
+
+- Fix ONLY the reported bug
+- Avoid structural changes
+- Avoid refactors
+
+If bugfix requires refactor → **STOP and REQUEST MODE CHANGE**.
+
+---
+
+# 🚫 GLOBAL PROHIBITIONS
+
+In ALL modes, the AI MUST NOT:
+
+- Introduce new tokens
+- Change Authority or Locks
+- Modify multiple components
+- Apply patterns from other projects
+
+---
+
+## Final Enforcement Rule
+
+This checklist is mandatory.
+
+Skipping any step is forbidden.
+
+If any step cannot be completed safely,
+the AI MUST STOP and ASK or REFUSE.
+

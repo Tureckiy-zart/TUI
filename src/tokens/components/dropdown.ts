@@ -130,11 +130,11 @@ export const DROPDOWN_TOKENS = {
    */
   item: {
     background: {
-      focus: "focus:bg-[hsl(var(--accent))]", // Focus background using CSS var
+      focus: "focus-visible:bg-[hsl(var(--accent))]", // Focus background using CSS var
       selected: "bg-[hsl(var(--accent))]", // Selected background using CSS var
     } as const,
     text: {
-      focus: "focus:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
+      focus: "focus-visible:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
       selected: "text-[hsl(var(--accent-foreground))]", // Selected text using CSS var
     } as const,
     padding: {

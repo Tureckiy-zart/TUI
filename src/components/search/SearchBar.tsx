@@ -112,7 +112,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         onKeyDown={handleKeyDown}
         className={cn(
           "transition-[border-color,box-shadow] duration-fast",
-          "focus:ring-2 focus:ring-primary focus:ring-offset-2",
+          "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
           "hover:border-primary/50",
           isFocused && "border-primary shadow-sm",
         )}

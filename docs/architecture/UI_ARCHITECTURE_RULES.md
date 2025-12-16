@@ -1,13 +1,24 @@
 # UI Architecture Rules: Radix UI and Token Union Canon
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-13  
+**Last Updated:** 2025-12-16  
 **Status:** ✅ ACTIVE  
 **Layer:** ARCHITECTURE / GOVERNANCE  
 **Priority:** CRITICAL
 
-> ⚠️ **TOKEN SYSTEM LOCKED**: The token system is **LOCKED** and **IMMUTABLE** as of 2025-12-13. All token domains, ownership rules, and semantic classifications are frozen. See [Token System Lock](#-token-system-lock-status) section below.
+> ⚠️ **FOUNDATION CLOSED**: Foundation Authorities are **CLOSED** and **IMMUTABLE** as of 2025-12-16. All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED**. See [Token System Lock](#-token-system-lock-status) section below and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete Foundation lock status.
+
+---
+
+## Document Classification
+
+**TYPE:** AUTHORITY  
+**MUTABILITY:** IMMUTABLE  
+**LOCK STATUS:** ✅ ACTIVE  
+**AUTHORITY DOMAIN:** Architecture Rules
+
+**Purpose:** This document defines the canonical declarative rules for Radix UI boundaries, token union rules, and public API constraints. It establishes architectural law that cannot be changed without explicit unlock procedure.
 
 ---
 
@@ -826,11 +837,23 @@ Any token system modifications require:
 
 ## 📖 Additional Resources
 
+- **Foundation Lock (Source of Truth):** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) (🔒 **LOCKED** - Foundation CLOSED)
 - **Token Types:** `src/tokens/types/index.ts` (🔒 **LOCKED**)
 - **Token System:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md) (🔒 **LOCKED**)
+- **Token Authority Contracts:**
+  - [Spacing Authority Contract](./SPACING_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Radius Authority Contract](./RADIUS_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Typography Authority Contract](./TYPOGRAPHY_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Motion Authority Contract](./MOTION_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Elevation Authority Contract](./ELEVATION_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+- **Other Authority Contracts:**
+  - [Interaction Authority Contract](./INTERACTION_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [State Authority Matrix](./STATE_AUTHORITY_MATRIX.md) (🔒 **LOCKED**)
+  - [State Authority Contract](./STATE_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Layout Authority Contract](./LAYOUT_AUTHORITY_CONTRACT.md) (🔒 **LOCKED**)
+  - [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) (✅ **ACTIVE**)
 - **Responsive Types:** `src/types/responsive.ts`
 - **Responsive Utilities:** `src/lib/responsive-props.ts`
-- **Foundation Lock:** [Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md) (🔒 **LOCKED**)
 - **Architecture Lock:** [Architecture Lock](./TUI_ARCHITECTURE_LOCK.md) (🔒 **LOCKED**)
 - **Component Rules:** `docs/architecture/CURSOR_UI_RULES.md`
 - **Linting Rules:** `docs/architecture/LINTING_RULES.md`
@@ -838,6 +861,14 @@ Any token system modifications require:
 ---
 
 ## 🔄 Version History
+
+- **v1.2** (2025-12-16): Foundation Closure Alignment
+  - Updated document to reflect Foundation CLOSED status (2025-12-16)
+  - Added references to all Token Authority Contracts (Spacing, Radius, Typography, Motion, Elevation)
+  - Added references to other Authority Contracts (Interaction, State, Layout, Extension)
+  - Updated warning to reflect Foundation CLOSED status
+  - Updated Additional Resources section with comprehensive Authority Contract references
+  - Clarified that all Foundation Authorities are LOCKED and IMMUTABLE
 
 - **v1.1** (2025-12-13): Token System Lock Integration
   - Added Token System Lock Status section
@@ -855,6 +886,6 @@ Any token system modifications require:
 ---
 
 **Status:** ✅ ACTIVE  
-**Version:** 1.1  
-**Last Updated:** 2025-12-13  
+**Version:** 1.2  
+**Last Updated:** 2025-12-16  
 **Priority:** CRITICAL

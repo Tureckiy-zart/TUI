@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import { FilterBar } from "./FilterBar";
 
 const meta: Meta<typeof FilterBar> = {
@@ -62,6 +63,7 @@ export const Default: Story = {
     showDateRange: true,
     showPriceRange: true,
     showSorting: true,
+    onFiltersChange: fn(),
     ...defaultLabels,
   },
 };
@@ -73,6 +75,7 @@ export const SearchOnly: Story = {
     showDateRange: false,
     showPriceRange: false,
     showSorting: false,
+    onFiltersChange: fn(),
     ...defaultLabels,
   },
 };
@@ -85,6 +88,7 @@ export const WithoutPriceRange: Story = {
     showDateRange: true,
     showPriceRange: false,
     showSorting: true,
+    onFiltersChange: fn(),
     ...defaultLabels,
   },
 };
@@ -99,6 +103,7 @@ export const Compact: Story = {
         showDateRange={false}
         showPriceRange={false}
         showSorting={true}
+        onFiltersChange={fn()}
         {...defaultLabels}
       />
     </div>

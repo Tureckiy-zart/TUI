@@ -1,78 +1,78 @@
-# 📊 Инвентаризация компонентов Tenerife UI
+# 📊 Tenerife UI Components Inventory
 
-**Дата создания:** 2025-11-25  
-**Цель:** Подсчет и описание всех элементов UI библиотеки Tenerife UI
-
----
-
-## 📈 Общая статистика
-
-- **Всего компонентов:** ~158 файлов компонентов (без тестов и stories)
-- **Категорий компонентов:** 18
-- **Экспортируемых компонентов:** 200+ (включая подкомпоненты и типы)
+**Created:** 2025-11-25  
+**Purpose:** Count and description of all UI library elements in Tenerife UI
 
 ---
 
-## 📦 Детальная разбивка по категориям
+## 📈 General Statistics
 
-### 1. UI Примитивы (CVA-based, Token-driven)
-
-**Количество:** 17 компонентов
-
-#### Типографика (7 компонентов)
-
-- `Text` - базовый текстовый компонент
-- `Body` - компонент для основного текста
-- `Caption` - компонент для подписей
-- `Code` - компонент для кода
-- `Display` - компонент для заголовков дисплея
-- `Heading` - компонент для заголовков
-- `Lead` - компонент для лид-текста
-
-#### Формы (5 компонентов)
-
-- `Input` - поле ввода
-- `Textarea` - многострочное поле ввода
-- `Select` - выпадающий список
-- `Label` - метка для полей
-- `Field` - обертка для полей формы
-
-#### Базовые компоненты (5 компонентов)
-
-- `Button` - кнопка
-- `Alert` - уведомление/алерт
-- `Card` - карточка
-- `Dialog` - диалоговое окно
-- `Toast` - всплывающее уведомление
-- `Tooltip` - подсказка
-- `Toaster` - провайдер для тостов
+- **Total components:** ~158 component files (excluding tests and stories)
+- **Component categories:** 18
+- **Exported components:** 200+ (including subcomponents and types)
 
 ---
 
-### 2. Layout Примитивы (Token-driven)
+## 📦 Detailed Breakdown by Category
 
-**Количество:** 8 компонентов
+### 1. UI Primitives (CVA-based, Token-driven)
 
-- `Box` - базовый контейнер
-- `Stack` - вертикальный стек
-- `Row` - горизонтальная строка
-- `Column` - вертикальная колонка
-- `Flex` - flex контейнер
-- `Grid` - grid контейнер
-- `Surface` - поверхность с вариантами стилей
-- `Container` - контейнер с ограничением ширины
+**Count:** 17 components
+
+#### Typography (7 components)
+
+- `Text` - basic text component
+- `Body` - component for body text
+- `Caption` - component for captions
+- `Code` - component for code
+- `Display` - component for display headings
+- `Heading` - component for headings
+- `Lead` - component for lead text
+
+#### Forms (5 components)
+
+- `Input` - input field
+- `Textarea` - multiline input field
+- `Select` - dropdown list
+- `Label` - field label
+- `Field` - form field wrapper
+
+#### Basic Components (5 components)
+
+- `Button` - button
+- `Alert` - notification/alert
+- `Card` - card
+- `Dialog` - dialog window
+- `Toast` - popup notification
+- `Tooltip` - tooltip
+- `Toaster` - toast provider
 
 ---
 
-### 3. Container Компоненты
+### 2. Layout Primitives (Token-driven)
 
-**Количество:** 3 компонента
+**Count:** 8 components
 
-- `Card` - карточка с Header/Body/Footer
-- `Section` - секция контента
-- `Surface` - поверхность с вариантами
+- `Box` - basic container
+- `Stack` - vertical stack
+- `Row` - horizontal row
+- `Column` - vertical column
+- `Flex` - flex container
+- `Grid` - grid container
+- `Surface` - surface with style variants
+- `Container` - container with width constraint
 
-**Подкомпоненты Card:**
+---
+
+### 3. Container Components
+
+**Count:** 3 components
+
+- `Card` - card with Header/Body/Footer
+- `Section` - content section
+- `Surface` - surface with variants
+
+**Card Subcomponents:**
 
 - `CardHeader`
 - `CardBody`
@@ -80,26 +80,26 @@
 
 ---
 
-### 4. Overlay Система
+### 4. Overlay System
 
-**Количество:** 8 компонентов
+**Count:** 8 components
 
-- `Portal` - портал для рендеринга вне DOM
-- `Backdrop` - фоновый слой
-- `Modal` - модальное окно
-- `Dialog` - диалоговое окно
-- `Toast` - всплывающее уведомление
-- `ToastProvider` - провайдер для тостов
-- `ToastViewport` - контейнер для тостов
-- `OverlayPortal` - портал для оверлеев
+- `Portal` - portal for rendering outside DOM
+- `Backdrop` - background layer
+- `Modal` - modal window
+- `Dialog` - dialog window
+- `Toast` - popup notification
+- `ToastProvider` - toast provider
+- `ToastViewport` - toast container
+- `OverlayPortal` - overlay portal
 
-**Подкомпоненты Modal:**
+**Modal Subcomponents:**
 
 - `ModalHeader`
 - `ModalBody`
 - `ModalFooter`
 
-**Подкомпоненты Dialog:**
+**Dialog Subcomponents:**
 
 - `DialogRoot`
 - `DialogHeader`
@@ -110,18 +110,18 @@
 
 ---
 
-### 5. Menu Система
+### 5. Menu System
 
-**Количество:** 35+ компонентов
+**Count:** 35+ components
 
-#### Popover (4 компонента)
+#### Popover (4 components)
 
 - `PopoverRoot`
 - `PopoverTrigger`
 - `PopoverContent`
 - `PopoverArrow`
 
-#### DropdownMenu (13 компонентов)
+#### DropdownMenu (13 components)
 
 - `DropdownMenuRoot`
 - `DropdownMenuTrigger`
@@ -137,7 +137,7 @@
 - `DropdownMenuSubTrigger`
 - `DropdownMenuSubContent`
 
-#### ContextMenu (7 компонентов)
+#### ContextMenu (7 components)
 
 - `ContextMenuRoot`
 - `ContextMenuTrigger`
@@ -147,13 +147,13 @@
 - `ContextMenuGroup`
 - `ContextMenuSeparator`
 
-#### HoverCard (3 компонента)
+#### HoverCard (3 components)
 
 - `HoverCardRoot`
 - `HoverCardTrigger`
 - `HoverCardContent`
 
-#### Legacy Menu (2 компонента)
+#### Legacy Menu (2 components)
 
 - `DropdownMenu` (legacy)
 - `NavigationMenu` (legacy)
@@ -161,9 +161,9 @@
 
 ---
 
-### 6. Navigation Система
+### 6. Navigation System
 
-**Количество:** 5 основных компонентов + подкомпоненты
+**Count:** 5 main components + subcomponents
 
 #### Tabs (Compound Component)
 
@@ -201,11 +201,11 @@
 
 ---
 
-### 7. Data Display Компоненты
+### 7. Data Display Components
 
-**Количество:** 25+ компонентов
+**Count:** 25+ components
 
-#### Table (11 компонентов)
+#### Table (11 components)
 
 - `Table` / `TableRoot`
 - `TableHead`
@@ -218,14 +218,14 @@
 - `TableExpandableContent`
 - `TableSortIcon`
 
-#### DataList (4 компонента)
+#### DataList (4 components)
 
 - `DataList` / `DataListRoot`
 - `DataListItem`
 - `DataListLabel`
 - `DataListValue`
 
-#### EmptyState (5 компонентов)
+#### EmptyState (5 components)
 
 - `EmptyState`
 - `EmptyStateTitle`
@@ -233,11 +233,11 @@
 - `EmptyStateIcon`
 - `EmptyStateAction`
 
-#### Skeleton (1 компонент)
+#### Skeleton (1 component)
 
 - `Skeleton`
 
-#### Legacy Data (2 компонента)
+#### Legacy Data (2 components)
 
 - `List` (legacy)
 - `Timeline` (legacy)
@@ -245,9 +245,9 @@
 
 ---
 
-### 8. Notification Система
+### 8. Notification System
 
-**Количество:** 8 компонентов + 1 хук
+**Count:** 8 components + 1 hook
 
 - `NotificationCenter` (Compound Component)
 - `NotificationCenterProvider`
@@ -261,137 +261,137 @@
 
 ---
 
-### 9. Form Компоненты (Legacy)
+### 9. Form Components (Legacy)
 
-**Количество:** 3 компонента
+**Count:** 3 components
 
-- `FormInput` (удален, заменен на `Input`)
-- `FormSelect` (удален, заменен на `Select`)
-- `FormTextarea` (удален, заменен на `Textarea`)
-
----
-
-### 10. Filter Компоненты
-
-**Количество:** 6 компонентов
-
-- `SearchInput` - поле поиска
-- `FilterBar` - панель фильтров
-- `FilterSelect` - фильтр-селект
-- `DateRangePicker` - выбор диапазона дат
-- `PriceRangeSlider` - слайдер диапазона цен
-- `SearchFilters` - компонент фильтров поиска
+- `FormInput` (removed, replaced with `Input`)
+- `FormSelect` (removed, replaced with `Select`)
+- `FormTextarea` (removed, replaced with `Textarea`)
 
 ---
 
-### 11. Feedback Компоненты
+### 10. Filter Components
 
-**Количество:** 3 компонента
+**Count:** 6 components
 
-- `Alert` - уведомление
-- `Progress` - индикатор прогресса
-- `Skeleton` - скелетон загрузки
-- `ConsentBanner` - баннер согласия
-
----
-
-### 12. Card Компоненты (Domain-specific)
-
-**Количество:** 2 компонента
-
-- `EventCard` - карточка события
-- `VenueCard` - карточка места
+- `SearchInput` - search field
+- `FilterBar` - filter bar
+- `FilterSelect` - filter select
+- `DateRangePicker` - date range picker
+- `PriceRangeSlider` - price range slider
+- `SearchFilters` - search filters component
 
 ---
 
-### 13. Section Компоненты
+### 11. Feedback Components
 
-**Количество:** 5 компонентов
+**Count:** 3 components
 
-- `HeroSection` - секция героя
-- `FeatureSection` - секция функций
-- `CTASection` - секция призыва к действию
-- `ArticlesSection` - секция статей
-- `TrendingSection` - секция трендов
-- `SectionBuilder` - конструктор секций
+- `Alert` - notification
+- `Progress` - progress indicator
+- `Skeleton` - loading skeleton
+- `ConsentBanner` - consent banner
 
 ---
 
-### 14. Modal Компоненты
+### 12. Card Components (Domain-specific)
 
-**Количество:** 4 компонента
+**Count:** 2 components
 
-- `Modal` - базовый модальный компонент (Foundation - Radix Dialog wrapper)
-- `Dialog` - диалог расширение (использует Modal внутри)
-- `ConfirmDialog` - диалог подтверждения (использует Modal внутри)
-- `ModalProvider` - провайдер модалок
-
-**Примечание:** `CustomDialog` был удален как legacy компонент. Используйте `Modal` (foundation) или `Dialog`/`ConfirmDialog` (extensions).
+- `EventCard` - event card
+- `VenueCard` - venue card
 
 ---
 
-### 15. Toast Компоненты (Legacy)
+### 13. Section Components
 
-**Количество:** 2 компонента
+**Count:** 5 components
 
-- `Toast` - тост
-- `ToastProvider` - провайдер тостов
-
----
-
-### 16. Auth Компоненты
-
-**Количество:** 3 компонента
-
-- `LoginForm` - форма входа
-- `RegisterForm` - форма регистрации
-- `ProfileCard` - карточка профиля
+- `HeroSection` - hero section
+- `FeatureSection` - feature section
+- `CTASection` - call-to-action section
+- `ArticlesSection` - articles section
+- `TrendingSection` - trending section
+- `SectionBuilder` - section builder
 
 ---
 
-### 17. Admin Компоненты
+### 14. Modal Components
 
-**Количество:** 2 компонента
+**Count:** 4 components
 
-- `Dashboard` - панель администратора
-- `UserManagement` - управление пользователями
+- `Modal` - base modal component (Foundation - Radix Dialog wrapper)
+- `Dialog` - dialog extension (uses Modal internally)
+- `ConfirmDialog` - confirmation dialog (uses Modal internally)
+- `ModalProvider` - modal provider
+
+**Note:** `CustomDialog` was removed as a legacy component. Use `Modal` (foundation) or `Dialog`/`ConfirmDialog` (extensions).
+
+---
+
+### 15. Toast Components (Legacy)
+
+**Count:** 2 components
+
+- `Toast` - toast
+- `ToastProvider` - toast provider
+
+---
+
+### 16. Auth Components
+
+**Count:** 3 components
+
+- `LoginForm` - login form
+- `RegisterForm` - registration form
+- `ProfileCard` - profile card
+
+---
+
+### 17. Admin Components
+
+**Count:** 2 components
+
+- `Dashboard` - admin dashboard
+- `UserManagement` - user management
 
 ---
 
 ### 18. Primitives (Legacy)
 
-**Количество:** 8 компонентов
+**Count:** 8 components
 
 - `Button` (legacy)
 - `Input` (legacy)
 - `Label` (legacy)
-- `Badge` - значок
+- `Badge` - badge
 - `Card` (legacy)
-- `Divider` - разделитель
-- `Link` - ссылка
-- `ThemeSwitch` - переключатель темы
+- `Divider` - divider
+- `Link` - link
+- `ThemeSwitch` - theme switcher
 
 ---
 
-### 19. Layout Компоненты (Legacy)
+### 19. Layout Components (Legacy)
 
-**Количество:** 4 компонента
+**Count:** 4 components
 
-- `Navbar` - навигационная панель
-- `Footer` - подвал
-- `ModeHero` - герой с режимом
+- `Navbar` - navigation bar
+- `Footer` - footer
+- `ModeHero` - hero with mode
 - `Section` (legacy)
 
 ---
 
-### 20. Icon Система
+### 20. Icon System
 
-**Количество:** 1 компонент + иконки
+**Count:** 1 component + icons
 
-- `Icon` - универсальный компонент иконок
-- `TrendingIcon` - иконка тренда
+- `Icon` - universal icon component
+- `TrendingIcon` - trending icon
 
-**Иконки в реестре:**
+**Icons in registry:**
 
 - `IconCheck`
 - `IconChevronDown`
@@ -406,96 +406,96 @@
 
 ---
 
-### 21. Дополнительные компоненты
+### 21. Additional Components
 
-**Количество:** 5 компонентов
+**Count:** 5 components
 
-- `Image` - компонент изображения
-- `LanguageSelector` - селектор языка
-- `SearchBar` - панель поиска
-- `EventCardSkeleton` - скелетон карточки события
-- `VenueCardSkeleton` - скелетон карточки места
+- `Image` - image component
+- `LanguageSelector` - language selector
+- `SearchBar` - search bar
+- `EventCardSkeleton` - event card skeleton
+- `VenueCardSkeleton` - venue card skeleton
 
 ---
 
 ## 🎨 Design Tokens
 
-### Категории токенов (7 модулей)
+### Token Categories (7 modules)
 
-1. **Colors** - цветовая система
-2. **Typography** - типографика
-3. **Spacing** - отступы
-4. **Shadows** - тени
-5. **Radius** - радиусы скругления
-6. **Motion** - анимации
-7. **Components** - токены компонентов
-8. **CSS Variables** - CSS переменные
-9. **Theme** - темы (day/night)
-
----
-
-## 📊 Итоговая статистика
-
-### По типам компонентов:
-
-| Категория          | Количество компонентов      |
-| ------------------ | --------------------------- |
-| UI Примитивы (CVA) | 17                          |
-| Layout Примитивы   | 8                           |
-| Container          | 3                           |
-| Overlay Система    | 8                           |
-| Menu Система       | 35+                         |
-| Navigation         | 5 основных + подкомпоненты  |
-| Data Display       | 25+                         |
-| Notification       | 8 + 1 хук                   |
-| Filter             | 6                           |
-| Feedback           | 3                           |
-| Section            | 5                           |
-| Card (Domain)      | 2                           |
-| Auth               | 3                           |
-| Admin              | 2                           |
-| Icon               | 1 + 10 иконок               |
-| Дополнительные     | 5                           |
-| Legacy Primitives  | 8                           |
-| Legacy Layout      | 4                           |
-| Legacy Modal       | 5                           |
-| Legacy Toast       | 2                           |
-| **ИТОГО**          | **~158 файлов компонентов** |
-
-### По статусу:
-
-- ✅ **Активные (Token-driven, CVA-based):** ~80 компонентов
-- ⚠️ **Legacy (требуют миграции):** ~40 компонентов
-- 🎯 **Domain-specific:** ~10 компонентов
-- 🔧 **Утилиты/Хуки:** ~5 компонентов
+1. **Colors** - color system
+2. **Typography** - typography
+3. **Spacing** - spacing
+4. **Shadows** - shadows
+5. **Radius** - border radius
+6. **Motion** - animations
+7. **Components** - component tokens
+8. **CSS Variables** - CSS variables
+9. **Theme** - themes (day/night)
 
 ---
 
-## 🎯 Ключевые особенности
+## 📊 Final Statistics
 
-### Современная архитектура (v3):
+### By Component Type:
 
-- ✅ Token-driven компоненты (используют только токены)
-- ✅ CVA-based стилизация (class-variance-authority)
-- ✅ SSR-safe компоненты
-- ✅ Полная поддержка TypeScript
-- ✅ Accessibility (a11y) из коробки
-- ✅ Compound Components паттерн
+| Category              | Component Count         |
+| --------------------- | ----------------------- |
+| UI Primitives (CVA)   | 17                      |
+| Layout Primitives     | 8                       |
+| Container             | 3                       |
+| Overlay System        | 8                       |
+| Menu System           | 35+                     |
+| Navigation            | 5 main + subcomponents  |
+| Data Display          | 25+                     |
+| Notification          | 8 + 1 hook              |
+| Filter                | 6                       |
+| Feedback              | 3                       |
+| Section               | 5                       |
+| Card (Domain)         | 2                       |
+| Auth                  | 3                       |
+| Admin                 | 2                       |
+| Icon                  | 1 + 10 icons            |
+| Additional            | 5                       |
+| Legacy Primitives     | 8                       |
+| Legacy Layout         | 4                       |
+| Legacy Modal          | 5                       |
+| Legacy Toast          | 2                       |
+| **TOTAL**             | **~158 component files** |
 
-### Legacy компоненты:
+### By Status:
 
-- ⚠️ Некоторые компоненты требуют миграции на новую архитектуру
-- ⚠️ Часть компонентов использует старые паттерны
+- ✅ **Active (Token-driven, CVA-based):** ~80 components
+- ⚠️ **Legacy (require migration):** ~40 components
+- 🎯 **Domain-specific:** ~10 components
+- 🔧 **Utilities/Hooks:** ~5 components
 
 ---
 
-## 📝 Примечания
+## 🎯 Key Features
 
-1. **Подсчет компонентов:** Учитываются только файлы `.tsx` без тестов и stories
-2. **Compound Components:** Считаются как один компонент с подкомпонентами
-3. **Legacy компоненты:** Отмечены для будущей миграции
-4. **Domain-specific:** Компоненты, специфичные для домена Tenerife Music
+### Modern Architecture (v3):
+
+- ✅ Token-driven components (use only tokens)
+- ✅ CVA-based styling (class-variance-authority)
+- ✅ SSR-safe components
+- ✅ Full TypeScript support
+- ✅ Accessibility (a11y) out of the box
+- ✅ Compound Components pattern
+
+### Legacy Components:
+
+- ⚠️ Some components require migration to new architecture
+- ⚠️ Some components use old patterns
 
 ---
 
-**Последнее обновление:** 2025-11-25
+## 📝 Notes
+
+1. **Component counting:** Only `.tsx` files are counted, excluding tests and stories
+2. **Compound Components:** Counted as one component with subcomponents
+3. **Legacy components:** Marked for future migration
+4. **Domain-specific:** Components specific to Tenerife Music domain
+
+---
+
+**Last Updated:** 2025-11-25

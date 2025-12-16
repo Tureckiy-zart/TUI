@@ -145,3 +145,8 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 .npmrc
+
+# Documentation Archive (non-canonical, historical documents)
+# docs_archive/ contains archived documentation that is NOT source of truth
+# All canonical and authority documents remain in docs/
+docs_archive/

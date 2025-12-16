@@ -1,11 +1,32 @@
 # TUI Token System - Canonical Documentation
 
-**Date:** 2025-12-13  
-**Status:** 🔒 **LOCKED** - IMMUTABLE  
+**Date:** 2025-12-16  
+**Status:** 🔒 **LOCKED** - IMMUTABLE (Part of Foundation CLOSED)  
 **Lock Date:** 2025-12-13  
+**Foundation Closure Date:** 2025-12-16  
 **Authority:** This document defines the canonical rules and structure for the TUI design token system.
 
-> ⚠️ **SYSTEM LOCKED**: This token system is **FROZEN** and **IMMUTABLE**. Any modifications require an explicit UNLOCK + AUDIT workflow. See [Lock Status](#lock-status) section below.
+> ⚠️ **SYSTEM LOCKED**: This token system is **FROZEN** and **IMMUTABLE** as part of the Foundation architecture. The Foundation phase is **CLOSED**. Any modifications require an explicit UNLOCK + AUDIT workflow. See [Lock Status](#lock-status) section below.
+
+**Related Token Authority Contracts:**
+- [Spacing Authority Contract](./SPACING_AUTHORITY_CONTRACT.md) - LOCKED
+- [Radius Authority Contract](./RADIUS_AUTHORITY_CONTRACT.md) - LOCKED
+- [Typography Authority Contract](./TYPOGRAPHY_AUTHORITY_CONTRACT.md) - LOCKED
+- [Motion Authority Contract](./MOTION_AUTHORITY_CONTRACT.md) - LOCKED
+- [Elevation Authority Contract](./ELEVATION_AUTHORITY_CONTRACT.md) - LOCKED
+
+**Source of Truth:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation lock status
+
+---
+
+## Document Classification
+
+**TYPE:** AUTHORITY  
+**MUTABILITY:** IMMUTABLE  
+**LOCK STATUS:** ✅ LOCKED  
+**AUTHORITY DOMAIN:** Token System
+
+**Purpose:** This document defines the canonical declarative rules for token domain hierarchy, ownership rules, and semantic classifications. It establishes architectural law that cannot be changed without explicit unlock procedure.
 
 ---
 
@@ -428,27 +449,18 @@ export const INPUT_TOKENS = {
 };
 ```
 
----
-
-## Enforcement
-
-### Manual Review
-
-- Code reviews should check for cross-domain token imports
-- Token domain files should be reviewed for leakage
-- New components should have independent token domains
-
-### Automated Checks (Future)
-
-Consider implementing:
-- ESLint rules to prevent cross-domain imports
-- Automated token domain validation
-- Token ownership verification in CI/CD
+**Note:** For enforcement mechanisms, see enforcement documents in the Foundation Document Classification table in [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md).
 
 ---
 
 ## Related Documentation
 
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - **Source of truth** for Foundation lock status
+- [Spacing Authority Contract](./SPACING_AUTHORITY_CONTRACT.md) - Spacing token authority (LOCKED)
+- [Radius Authority Contract](./RADIUS_AUTHORITY_CONTRACT.md) - Radius token authority (LOCKED)
+- [Typography Authority Contract](./TYPOGRAPHY_AUTHORITY_CONTRACT.md) - Typography token authority (LOCKED)
+- [Motion Authority Contract](./MOTION_AUTHORITY_CONTRACT.md) - Motion token authority (LOCKED)
+- [Elevation Authority Contract](./ELEVATION_AUTHORITY_CONTRACT.md) - Elevation token authority (LOCKED)
 - [TUI Token System Audit Report](../reports/TUI_TOKEN_SYSTEM_AUDIT.md) - Detailed audit findings
 - [TUI Extension Canonical State](./TUI_EXTENSION_CANONICAL_STATE.md) - Component usage rules
 
@@ -521,6 +533,13 @@ If token system modifications are required, the following procedure **MUST** be 
 
 ## Changelog
 
+### 2025-12-16 - Foundation Closure Alignment
+- Updated document to reflect Foundation CLOSED status
+- Added references to Token Authority Contracts (Spacing, Radius, Typography, Motion, Elevation)
+- Added reference to FINAL_FOUNDATION_LOCK.md as source of truth
+- Clarified that Token System is part of Foundation CLOSED architecture
+- Updated related documentation section with Authority Contract references
+
 ### 2025-12-13 - System Locked
 - 🔒 **TOKEN SYSTEM LOCKED** - System frozen and immutable
 - Final verification completed with 0 violations
@@ -534,6 +553,6 @@ If token system modifications are required, the following procedure **MUST** be 
 
 ---
 
-**Last Updated:** 2025-12-13  
-**Lock Status:** 🔒 **LOCKED**  
+**Last Updated:** 2025-12-16  
+**Lock Status:** 🔒 **LOCKED** (Part of Foundation CLOSED)  
 **Maintained By:** TUI Design System Team

@@ -170,8 +170,8 @@ export const TOAST_TOKENS = {
     states: {
       default: "opacity-0", // Default opacity (hidden)
       groupHover: "group-hover:opacity-100", // Visible on group hover
-      focus: "focus:opacity-100", // Visible on focus
-      focusRing: "focus:outline-none focus:ring-1", // Focus ring styling
+      focus: "focus-visible:opacity-100", // Visible on focus
+      focusRing: "focus-visible:outline-none focus-visible:ring-1", // Focus ring styling
     } as const,
   } as const,
 } as const;

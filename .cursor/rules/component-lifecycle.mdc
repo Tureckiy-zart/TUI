@@ -1,0 +1,129 @@
+---
+alwaysApply: true
+title: Component Lifecycle Protocol
+version: 1.0
+status: Active
+owner: Cursor AI
+priority: Critical
+scope: Component
+language: en
+last_updated: 2025-12-16
+---
+
+# Component Lifecycle Protocol (Canonical)
+
+## Purpose
+
+This document defines the **mandatory algorithm** for creating,
+modifying, or refactoring any component or block.
+
+Deviation from this protocol is forbidden.
+
+
+For detailed execution steps, the AI MUST follow:
+- rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc
+
+This lifecycle defines the algorithm.
+The checklist defines mandatory execution steps.
+
+
+---
+
+## Task Classification (STEP 0)
+
+Before any action, the AI MUST classify the task as ONE of the following:
+
+- New component
+- Extension component
+- Refactor existing component
+- Bugfix only (no structural changes)
+
+If classification is unclear, the AI MUST STOP and ASK.
+
+---
+
+## Lock & Authority Check (STEP 1)
+
+Before touching any code, the AI MUST:
+
+1. Check component status in:
+   - `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+   - Relevant Lock documents:
+     - `docs/architecture/FINAL_FOUNDATION_LOCK.md`
+     - `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+
+2. If the component or block is LOCKED:
+   - The AI MUST REFUSE immediately
+
+No implementation may proceed before this check.
+
+---
+
+## Scope Enforcement (STEP 2)
+
+The AI MUST ensure:
+
+- One task = one component or block
+- No cross-component refactors
+- No hidden or indirect changes
+
+If scope is violated, the AI MUST REFUSE.
+
+---
+
+## Token Validation (STEP 3)
+
+Before writing implementation code, the AI MUST:
+
+1. Identify all visual and behavioral properties
+2. Map each property to an existing token domain
+3. Use token unions only
+4. Use Responsive<T> where responsiveness is required
+
+The AI MUST NOT:
+
+- Use raw values (colors, spacing, sizes)
+- Introduce new tokens or scales
+- Bypass token systems
+
+If a required token domain does not exist,
+the AI MUST STOP and request a separate task.
+
+---
+
+## Implementation Rules (STEP 4)
+
+During implementation, the AI MUST:
+
+- Follow architecture rules
+- Export types explicitly
+- Avoid wildcard exports
+- Modify only files explicitly included in the task
+
+The AI MUST NOT:
+
+- Refactor unrelated code
+- Change public APIs unintentionally
+- Reformat code outside the task scope
+
+---
+
+## Verification Before Completion (STEP 5)
+
+Before completing the task, the AI MUST verify:
+
+- Authority and Lock rules are respected
+- Token rules are fully applied
+- No scope leakage occurred
+- No forbidden patterns were introduced
+
+If verification fails, the AI MUST FIX or REFUSE.
+
+---
+
+## Mandatory Behavior
+
+Skipping any step is forbidden.
+
+If any step cannot be completed,
+the AI MUST STOP and ASK.

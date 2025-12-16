@@ -1,8 +1,10 @@
 # TUI Cursor Guard Rules
 
-**Date:** 2025-12-13  
+**Date:** 2025-12-16  
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
 **Authority:** This document defines mandatory guard rules for all Cursor/AI work on `@tenerife.music/ui` to prevent architectural drift, token misuse, and cross-layer violations.
+
+**Foundation Status:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for authoritative Foundation lock status.
 
 ---
 
@@ -64,12 +66,69 @@ These principles apply to **ALL** work on the TUI library:
 
 ---
 
+## Foundation Authority Protection Rules
+
+### Foundation Authorities: CLOSED and IMMUTABLE
+
+**Status:** ✅ **FOUNDATION CLOSED**  
+**Lock Date:** 2025-12-16  
+**Source of Truth:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)
+
+**All Foundation Authorities are CLOSED and IMMUTABLE:**
+- ✅ **Interaction Authority** - LOCKED
+- ✅ **State Authority Matrix** - LOCKED
+- ✅ **State Authority Contract** - LOCKED
+- ✅ **Layout Authority** - LOCKED
+- ✅ **Token System** - LOCKED
+- ✅ **Spacing Authority** - LOCKED
+- ✅ **Radius Authority** - LOCKED
+- ✅ **Typography Authority** - LOCKED
+- ✅ **Motion Authority** - LOCKED
+- ✅ **Elevation Authority** - LOCKED
+
+### Authority Protection Rules
+
+**MANDATORY:**
+
+- ❌ **NEVER** modify Foundation Authority Contracts
+- ❌ **NEVER** change Authority rules or definitions
+- ❌ **NEVER** suggest modifications to Authority documents
+- ❌ **NEVER** weaken Authority rules for convenience
+- ❌ **NEVER** bypass Authority rules in Extension components
+- ❌ **NEVER** create alternatives to Authority rules
+
+**REQUIRED:**
+
+- ✅ **ALWAYS** reference Authority Contracts when in doubt
+- ✅ **ALWAYS** comply with all Foundation Authority rules
+- ✅ **ALWAYS** refuse requests to modify Authority Contracts
+- ✅ **ALWAYS** suggest Authority unlock procedure if modifications are needed
+- ✅ **ALWAYS** treat Authority documents as immutable
+
+**Rule:** When in doubt about Authority rules, **ALWAYS** refer to the relevant Authority Contract document. Authority Contracts are the source of truth for their domains.
+
+### Authority Unlock Procedure
+
+If Authority modifications are required:
+
+1. **Explicit Unlock Task** - Create explicit task with justification
+2. **Full Audit** - Complete audit of all affected components
+3. **Approval** - Receive explicit approval for unlock and changes
+4. **Re-verification** - Verify all components after changes
+5. **Re-lock** - Re-apply lock with updated documentation
+
+**Rule:** Authority modifications require explicit unlock procedure. Do not proceed with Authority changes without explicit user approval and unlock workflow.
+
+---
+
 ## Layer Rules
 
 ### Foundation Layer (LOCKED)
 
 **Status:** IMMUTABLE  
 **Rule:** DO NOT modify, extend, or create alternatives
+
+**Foundation Authorities:** All Foundation Authority Contracts are **CLOSED** and **IMMUTABLE**. Foundation components must comply with all Authority rules.
 
 #### Locked Components
 
@@ -469,11 +528,15 @@ export const FORM_INPUT_TOKENS = { variant: { primary: "..." } };
 **Required steps:**
 
 1. ✅ Read relevant architectural documents
-2. ✅ Identify affected components
-3. ✅ Check component status (LOCKED/ALLOWED/RESTRICTED)
-4. ✅ Verify token domain ownership
-5. ✅ Check for cross-domain dependencies
-6. ✅ Plan changes before executing
+2. ✅ **Check Foundation Authority status** (Foundation Authorities are CLOSED)
+3. ✅ **Verify Authority compliance** (all changes must comply with Authority rules)
+4. ✅ Identify affected components
+5. ✅ Check component status (LOCKED/ALLOWED/RESTRICTED)
+6. ✅ Verify token domain ownership
+7. ✅ Check for cross-domain dependencies
+8. ✅ Plan changes before executing
+
+**Rule:** If a change would violate Foundation Authority rules, **MUST refuse** and explain why. Foundation Authorities are immutable.
 
 **✅ CORRECT:**
 ```
@@ -675,6 +738,8 @@ Before completing any task, verify:
 - [ ] Component is in canonical state document
 - [ ] No Foundation component modifications
 - [ ] No product components in Extension layer
+- [ ] **Foundation Authority compliance verified** (all changes comply with Authority rules)
+- [ ] **No Authority Contract modifications** (Foundation Authorities are CLOSED)
 
 ### Token System Compliance
 - [ ] Component has independent token domain
@@ -785,7 +850,9 @@ Your request is ambiguous regarding:
 
 ## Related Documentation
 
-- [TUI Token System](./TUI_TOKEN_SYSTEM.md) - Token system rules and structure
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - **Source of truth** for Foundation lock status
+- [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract
+- [TUI Token System](./TUI_TOKEN_SYSTEM.md) - Token system rules and structure (LOCKED)
 - [TUI Extension Canonical State](./TUI_EXTENSION_CANONICAL_STATE.md) - Component usage rules
 - [TUI Token System Audit Report](../reports/TUI_TOKEN_SYSTEM_AUDIT.md) - Audit findings and violations
 
@@ -794,10 +861,25 @@ Your request is ambiguous regarding:
 ## Document Status
 
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
-**Version:** 1.0  
-**Last Updated:** 2025-12-13
+**Version:** 1.1  
+**Last Updated:** 2025-12-16
 
 This document is **MANDATORY**. Any work violating these rules is **INVALID**. These rules must be enforced by all AI/Cursor interactions with the TUI library.
+
+---
+
+## Version History
+
+- **v1.1** (2025-12-16): Foundation Authority Protection Rules
+  - Added "Foundation Authority Protection Rules" section
+  - Added Authority protection rules (never modify, always comply, always reference)
+  - Added Authority unlock procedure documentation
+  - Updated "Analyze Before Modifying" rule to include Authority compliance check
+  - Updated Architecture Compliance checklist to include Authority verification
+  - Added references to FINAL_FOUNDATION_LOCK.md as source of truth
+  - Clarified that Foundation Authorities are CLOSED and IMMUTABLE
+
+- **v1.0** (2025-12-13): Initial guard rules document
 
 ---
 

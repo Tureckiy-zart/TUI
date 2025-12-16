@@ -1,221 +1,181 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2025-12-12  
-**Purpose:** Central documentation hub for the TUI component library
+**Last Updated:** 2025-12-16  
+**Purpose:** Central documentation hub for the TUI component library  
+**Total Files:** 36 (all canonical and authoritative)
+
+---
+
+## ⚠️ Documentation Scope & Canonical Status
+
+### Active Documentation (`docs/`)
+
+**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (36 files):**
+
+- ✅ **Canonical Documents** - Single source of truth for architecture and decisions
+- ✅ **Authority Contracts** - Immutable Foundation and Extension authority rules
+- ✅ **Architecture Rules** - Active architecture guidelines and locks
+- ✅ **Reference Documentation** - Current API and integration references
+- ✅ **Progress Tracking** - Active project progress and task management
+
+**All files in `docs/` are considered ACTIVE and CANONICAL.**
+
+### Archived Documentation (`docs_archive/`)
+
+**⚠️ CRITICAL: `docs_archive/` is NOT source of truth and MUST NOT be used for canonical context.**
+
+The `docs_archive/` directory contains:
+- ❌ Historical reports and audits (one-time analysis)
+- ❌ Legacy guides and outdated documentation
+- ❌ Migration documentation (historical context only)
+- ❌ Deprecated documents and code reviews
+- ❌ Cursor/AI task results and experimental documents
+
+**Rules:**
+- ❌ **NEVER** use `docs_archive/` as source of truth
+- ❌ **NEVER** reference archived documents for canonical rules
+- ❌ **NEVER** use archived documents for AI/Cursor context
+- ✅ **ALWAYS** use `docs/` for canonical and authoritative information
+- ✅ **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
+
+**For canonical architecture, Authority rules, and active documentation, use ONLY `docs/`.**
+
+---
+
+## 🎯 Canonical Entry Points
+
+### Primary Entry Points (Start Here)
+
+1. **[INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md)**  
+   → **IMMUTABLE** - Single source of truth for architecture, design decisions, Foundation vs Extension rules
+
+2. **[architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)**  
+   → **LOCKED** - Authoritative Foundation lock status (source of truth for locked Foundation layer)
+
+3. **[CANONICAL_PROJECT_ORIENTATION.md](./CANONICAL_PROJECT_ORIENTATION.md)**  
+   → **ACTIVE** - Canonical project orientation and current state
+
+### Authority Contracts (Foundation - LOCKED)
+
+All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**:
+
+- [INTERACTION_AUTHORITY_CONTRACT.md](./architecture/INTERACTION_AUTHORITY_CONTRACT.md) - Interaction state rules
+- [STATE_AUTHORITY_MATRIX.md](./architecture/STATE_AUTHORITY_MATRIX.md) - Canonical state set
+- [STATE_AUTHORITY_CONTRACT.md](./architecture/STATE_AUTHORITY_CONTRACT.md) - State token model
+- [SPACING_AUTHORITY_CONTRACT.md](./architecture/SPACING_AUTHORITY_CONTRACT.md) - Spacing rules
+- [RADIUS_AUTHORITY_CONTRACT.md](./architecture/RADIUS_AUTHORITY_CONTRACT.md) - Radius rules
+- [TYPOGRAPHY_AUTHORITY_CONTRACT.md](./architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md) - Typography rules
+- [MOTION_AUTHORITY_CONTRACT.md](./architecture/MOTION_AUTHORITY_CONTRACT.md) - Motion rules
+- [ELEVATION_AUTHORITY_CONTRACT.md](./architecture/ELEVATION_AUTHORITY_CONTRACT.md) - Elevation rules
+- [LAYOUT_AUTHORITY_CONTRACT.md](./architecture/LAYOUT_AUTHORITY_CONTRACT.md) - Layout rules
+- [TUI_TOKEN_SYSTEM.md](./architecture/TUI_TOKEN_SYSTEM.md) - Token system rules
+
+### Extension Authority
+
+- [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract (ACTIVE)
+
+### Authority Navigation
+
+- [AUTHORITY_MAP.md](./architecture/AUTHORITY_MAP.md) - Navigation map for Authority system
+
+### Architecture Rules & Locks
+
+- [TUI_ARCHITECTURE_LOCK.md](./architecture/TUI_ARCHITECTURE_LOCK.md) - UI architecture lock
+- [TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md) - Extension layer canonical state
+- [UI_ARCHITECTURE_RULES.md](./architecture/UI_ARCHITECTURE_RULES.md) - UI architecture rules
+- [TUI_CURSOR_GUARD_RULES.md](./architecture/TUI_CURSOR_GUARD_RULES.md) - Cursor guard rules
+- [CURSOR_UI_RULES.md](./architecture/CURSOR_UI_RULES.md) - Cursor AI rules for UI development
+- [LINTING_RULES.md](./architecture/LINTING_RULES.md) - Linting standards
+- [TOOLING_DECISIONS.md](./architecture/TOOLING_DECISIONS.md) - Tooling decisions
+
+### Component Locks
+
+- [locks/TUI_LAYOUT_LOCK.md](./locks/TUI_LAYOUT_LOCK.md) - Layout primitives lock
+- [locks/TUI_TEXT_LOCK.md](./locks/TUI_TEXT_LOCK.md) - Text/typography components lock
+
+### Progress & Project Management
+
+- [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) - Project progress tracking (canonical progress file)
+- [tasks/master_task_index.md](./tasks/master_task_index.md) - Master task index and navigation
+
+### Reference Documentation
+
+- [reference/public-api.md](./reference/public-api.md) - Public API reference
+- [reference/design_tokens_export.md](./reference/design_tokens_export.md) - Design tokens export reference
+- [reference/token-map-overview.md](./reference/token-map-overview.md) - Token map overview
+- [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md) - UI components inventory
+- [reference/UI_INTEGRATION.md](./reference/UI_INTEGRATION.md) - UI integration guide
+
+### Structure & Standards
+
+- [structure/TYPING_STANDARD.md](./structure/TYPING_STANDARD.md) - Typing standards
+
+### UI Exceptions
+
+- [ui/gradient_exceptions.md](./ui/gradient_exceptions.md) - Gradient exceptions documentation
+
+### CI/CD
+
+- [CI-CD_OVERVIEW.md](./CI-CD_OVERVIEW.md) - CI/CD overview
+
+### AI Context
+
+- [README_GPT.md](./README_GPT.md) - GPT-specific context reference
 
 ---
 
 ## 📁 Documentation Structure
 
-This directory contains all project documentation organized into logical sections:
+This directory contains **ONLY canonical and active documentation** (36 files total):
 
 ```
 docs/
-├── guides/                  # User guides and tutorials
-├── reference/               # API reference and technical documentation
-├── reports/                 # Current and historical reports
-│   └── current/            # Active and recent reports
-├── archive/                 # Archived documentation
-│   └── reports/            # Historical reports by category
-├── migration/               # Migration guides and documentation
-├── tenerife_audit/         # Design system and audit documentation
-├── structure/              # Architecture and structure documentation
-├── tasks/                  # Task management and indexes
-├── reviews/                # Code review documentation
-├── review/                 # Review documentation
-├── core/                   # Core context documentation
-├── ui/                     # UI-specific documentation
+├── architecture/            # Authority Contracts, Architecture Rules, Locks (20 files)
+│   ├── *_AUTHORITY_CONTRACT.md  # Foundation Authority Contracts (LOCKED)
+│   ├── EXTENSION_AUTHORITY_CONTRACT.md  # Extension boundary contract
+│   ├── FINAL_FOUNDATION_LOCK.md  # Foundation lock status (source of truth)
+│   ├── TUI_ARCHITECTURE_LOCK.md  # Architecture lock
+│   ├── UI_ARCHITECTURE_RULES.md  # Architecture rules
+│   └── ...                 # Other architecture rules and locks
+├── locks/                   # Component lock documents (2 files)
+├── reference/              # API reference and technical documentation (5 files)
+├── structure/              # Typing standards (1 file)
+├── tasks/                  # Task management and indexes (1 file)
+├── ui/                     # UI-specific documentation (1 file)
+├── INTERNAL_CANONICAL_CONTEXT.md  # Single source of truth (IMMUTABLE)
+├── CANONICAL_PROJECT_ORIENTATION.md  # Project orientation
 ├── PROJECT_PROGRESS.md     # Project progress tracker
-└── README.md               # This file
+├── CI-CD_OVERVIEW.md       # CI/CD overview
+├── README.md               # This file
+└── README_GPT.md          # GPT-specific context
 ```
 
----
-
-## 📂 Directory Overview
-
-### `/guides`
-
-User guides, tutorials, and best practices:
-
-- `GETTING_STARTED.md` - Getting started guide
-- `QUICK_START.md` - Quick start tutorial
-- `INSTALLATION.md` - Installation instructions
-- `USAGE.md` - Usage guide
-- `THEME_GUIDE.md` - Theme system guide
-- `TOKENS_GUIDE.md` - Design tokens guide
-- `COMPONENT_EXAMPLES.md` - Component usage examples
-- `ANIMATION_GUIDELINES.md` - Animation guidelines
-- `a11y_guidelines.md` - Accessibility guidelines
-- `TUI_TESTING_GUIDE.md` - Testing guide
-- `GRID.md` - Grid system documentation
-- `props-guidelines.md` - Props guidelines
-
-**Status:** ✅ All guides organized and up to date.
+**Note:** Historical reports, audits, legacy guides, and deprecated documentation have been moved to `docs_archive/` (excluded from git and AI context).
 
 ---
 
-### `/reference`
+## 🚀 Quick Start Guide
 
-API reference and technical documentation:
+### For AI/Cursor Assistants
 
-- `public-api.md` - Complete public API reference
-- `UI_INTEGRATION.md` - UI integration guide
-- `UI_COMPONENTS_INVENTORY.md` - Components inventory
-- `design_tokens_export.md` - Design tokens export documentation
-- `token-map-overview.md` - Token mapping overview
+1. **Start with:** [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) - Single source of truth
+2. **Check Foundation status:** [architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)
+3. **Consult Authority Contracts:** [architecture/AUTHORITY_MAP.md](./architecture/AUTHORITY_MAP.md) for navigation
+4. **Verify component status:** [architecture/TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md)
 
-**Status:** ✅ Reference documentation organized.
+### For Developers
 
----
+1. **Architecture:** [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md)
+2. **Foundation Lock:** [architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)
+3. **Task Management:** [tasks/master_task_index.md](./tasks/master_task_index.md)
+4. **Progress:** [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md)
 
-### `/reports`
+### For API Reference
 
-Audit reports, changelog, and project reports:
-
-- `current/` - Active and recent reports
-  - `TUI_200_DOCS_V3_*.md` - Documentation v3 audit reports
-  - `D6_ADAPTER_LAYER_COMPLETE_REPORT.md` - Adapter layer report
-- Historical reports (various audit and completion reports)
-
-**Status:** ✅ Reports organized with current reports in `current/` subdirectory.
-
----
-
-### `/archive/reports`
-
-Archived historical reports organized by category:
-
-- `foundation/` - Foundation Layer reports (F0-F9, L0)
-- `layer1/` - Layer 1 reports (L1)
-- `layer2/` - Layer 2 reports (L2)
-- `layer3/` - Layer 3 reports (L3)
-- `tasks/` - Task completion reports (U0-U13)
-- `other/` - Other historical reports (code reviews, audits, etc.)
-
-**Status:** ✅ Historical reports archived and organized.
-
----
-
-### `/migration`
-
-Migration guides and refactoring documentation:
-
-- `route-decoupling.md` - Route decoupling migration guide
-- `i18n-removal.md` - I18n removal migration guide
-- `domain-decoupling-report.md` - Domain decoupling report
-- `EVENTCARD_EVENT_TO_PROPS_MIGRATION.md` - EventCard migration guide
-
-**Status:** ✅ Migration documentation organized.
-
----
-
-### `/tenerife_audit`
-
-Design system specifications and audit documentation:
-
-**Note:** The following files are referenced in some documentation but do not currently exist:
-- `design_system.md` - Design system specifications (if needed, see [Tokens Guide](./guides/TOKENS_GUIDE.md))
-- `components_redesign.md` - Component redesign specifications
-- `layout_and_brand_guide.md` - Layout principles and brand guidelines
-- `ui_ux_audit_report.md` - UI/UX audit findings
-- `technical_analysis.md` - Technical analysis documentation
-- `component_comparison_matrix.md` - Component comparison matrix
-
-**Status:** ⚠️ These files are not present in the repository. For component examples, see [Component Examples](./guides/COMPONENT_EXAMPLES.md).
-
----
-
-### `/structure`
-
-Architecture and structural documentation:
-
-- `STRUCTURE_OF_WORK.md` - Complete architecture and work sequence guide
-- `TYPING_STANDARD.md` - Typing standards
-
-**Status:** ✅ Files exist and are up to date.
-
----
-
-### `/tasks`
-
-Task management and navigation:
-
-- `master_task_index.md` - Complete index of all Master Task V3 layers and tasks
-
-**Status:** ✅ File exists and is up to date.
-
----
-
-### `/reviews` and `/review`
-
-Code review documentation:
-
-- `reviews/` - Code review reports
-- `review/` - Review documentation and plans
-
-**Status:** ✅ Review documentation organized.
-
----
-
-### `/core`
-
-Core context documentation:
-
-- `TENERIFEUI_CORECONTEXT_GPT.md` - Core context for GPT
-- `TENERIFEUI_CORECONTEXT_v1.0.md` - Core context v1.0
-
-**Status:** ✅ Core documentation available.
-
----
-
-## 🔗 Quick Links
-
-### Getting Started
-
-- [Getting Started Guide](guides/GETTING_STARTED.md) - Start here for new users
-- [Quick Start](guides/QUICK_START.md) - Quick start tutorial
-- [Installation Guide](guides/INSTALLATION.md) - Installation instructions
-- [Usage Guide](guides/USAGE.md) - How to use the library
-
-### Essential Documentation
-
-- [Final Foundation Lock](architecture/FINAL_FOUNDATION_LOCK.md) - 🔒 **Authoritative Foundation lock** (single source of truth)
-- [Architecture Lock](architecture/TUI_ARCHITECTURE_LOCK.md) - Foundation architecture lock and rules
-- [Master Task Index](tasks/master_task_index.md) - Complete task reference
-- [Structure of Work](structure/STRUCTURE_OF_WORK.md) - Architecture guide
-- [Project Progress](PROJECT_PROGRESS.md) - Task completion tracking
-
-### Guides
-
-- [Theme Guide](guides/THEME_GUIDE.md) - Theme system documentation
-- [Tokens Guide](guides/TOKENS_GUIDE.md) - Design tokens guide
-- [Component Examples](guides/COMPONENT_EXAMPLES.md) - Component usage examples
-- [Animation Guidelines](guides/ANIMATION_GUIDELINES.md) - Animation best practices
-- [Accessibility Guidelines](guides/a11y_guidelines.md) - A11y best practices
-- [Testing Guide](guides/TUI_TESTING_GUIDE.md) - Testing documentation
-
-### Reference
-
-- [Public API Reference](reference/public-api.md) - Complete API documentation
-- [UI Integration Guide](reference/UI_INTEGRATION.md) - Integration guide
-- [Components Inventory](reference/UI_COMPONENTS_INVENTORY.md) - Components list
-
-### Reports
-
-- [Current Reports](reports/current/) - Active and recent reports
-- [Project Audit Report](reports/PROJECT_AUDIT_REPORT.md)
-- [Path Resolution Report](reports/PATH_RESOLUTION_REPORT.md)
-- [Changelog](reports/CHANGELOG.md)
-
-### Migration
-
-- [Route Decoupling](migration/route-decoupling.md) - Route decoupling guide
-- [I18n Removal](migration/i18n-removal.md) - I18n removal guide
-- [Domain Decoupling](migration/domain-decoupling-report.md) - Domain decoupling report
-
-### Redirects
-
-If you're looking for a file that was moved, check [redirect_map.json](redirect_map.json) for the new location.
+1. **Public API:** [reference/public-api.md](./reference/public-api.md)
+2. **Integration:** [reference/UI_INTEGRATION.md](./reference/UI_INTEGRATION.md)
+3. **Components:** [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md)
+4. **Tokens:** [reference/design_tokens_export.md](./reference/design_tokens_export.md)
 
 ---
 
@@ -225,45 +185,15 @@ TUI follows a two-layer architecture:
 
 ### Foundation Layer (Locked)
 
-The Foundation layer consists of five immutable components that serve as the sole canonical foundation for their categories:
+The Foundation layer consists of immutable components that serve as the sole canonical foundation. All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**.
 
-- **Modal** (Radix Dialog) - `src/components/modal/`
-- **Tabs** (Radix Tabs) - `src/components/navigation/tabs/`
-- **Select** (Radix Select) - `src/components/select/`
-- **ContextMenu** (Radix ContextMenu) - `src/components/menus/context-menu/`
-- **Toast** (Radix Toast) - `src/components/overlays/`
-
-Foundation components are **locked** and **immutable**. All behavior is delegated to Radix UI primitives, and styling is token-driven.
-
-See [Final Foundation Lock](architecture/FINAL_FOUNDATION_LOCK.md) for complete architecture rules.
+See [FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md) for complete architecture rules and lock status.
 
 ### Extension Layer
 
 Extension components are composable and may use Foundation components internally. They provide domain-specific functionality and can be created, modified, or deleted without affecting the Foundation layer.
 
----
-
-## 🗂️ File Organization Rules
-
-### Where Files Belong
-
-- **User guides and tutorials** → `guides/`
-- **API reference and technical docs** → `reference/`
-- **Current reports** → `reports/current/`
-- **Historical reports** → `archive/reports/`
-- **Migration guides** → `migration/`
-- **Design specifications** → `tenerife_audit/`
-- **Architecture docs** → `structure/`
-- **Task indexes** → `tasks/`
-- **Code reviews** → `reviews/` or `review/`
-- **Core context** → `core/`
-- **UI-specific docs** → `ui/`
-
-### Naming Conventions
-
-- Use `SCREAMING_SNAKE_CASE.md` for important documents (e.g., `STRUCTURE_OF_WORK.md`)
-- Use `snake_case.md` for regular documents (e.g., `design_system.md`)
-- Use `PascalCase.md` for reports (e.g., `PROJECT_AUDIT_REPORT.md`)
+See [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRACT.md) for Extension layer rules.
 
 ---
 
@@ -271,17 +201,17 @@ Extension components are composable and may use Foundation components internally
 
 ### When to Update
 
-- After completing any Master Task → Update `PROJECT_PROGRESS.md`
-- After creating new components → Update component documentation
-- After releases → Update `reports/CHANGELOG.md`
-- After audits → Create new reports in `reports/`
+- After completing any Master Task → Update [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md)
+- After creating new components → Update [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md)
+- After architecture changes → Update [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) (if explicitly approved)
 
 ### Update Process
 
 1. Make changes to documentation files
-2. Update `PROJECT_PROGRESS.md` with completion status
-3. Update `CHANGELOG.md` if applicable
-4. Commit changes with descriptive message
+2. Update [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) with completion status
+3. Commit changes with descriptive message
+
+**Note:** Authority Contracts and Canonical documents require explicit approval for modifications.
 
 ---
 
@@ -298,7 +228,7 @@ Extension components are composable and may use Foundation components internally
 
 - Use relative paths for internal links
 - Update links when files are moved
-- Check `redirect_map.json` for moved files
+- All links in this README point to canonical documents only
 
 ### Version Control
 
@@ -308,42 +238,20 @@ Extension components are composable and may use Foundation components internally
 
 ---
 
-## 🚀 Getting Started
-
-### For Developers
-
-1. Read [Structure of Work](structure/STRUCTURE_OF_WORK.md) to understand architecture
-2. Review [Master Task Index](tasks/master_task_index.md) for task overview
-3. Check [Project Progress](../PROJECT_PROGRESS.md) for current status
-4. Follow task dependencies when implementing features
-
-### For Designers
-
-1. Review design system documentation (when available)
-2. Check component redesign specifications
-3. Review layout and brand guidelines
-4. Reference audit reports for current state
-
-### For Project Managers
-
-1. Review [Master Task Index](tasks/master_task_index.md) for task overview
-2. Check [Project Progress](../PROJECT_PROGRESS.md) for completion status
-3. Review audit reports for project health
-4. Check [Changelog](reports/CHANGELOG.md) for recent changes
-
----
-
 ## 📞 Support
 
 For questions about documentation:
 
-- Check the relevant documentation file
-- Review [Master Task Index](tasks/master_task_index.md)
-- Check [redirect_map.json](redirect_map.json) for moved files
-- Review [Project Audit Report](reports/PROJECT_AUDIT_REPORT.md) for project status
+- Check the relevant canonical document from the entry points above
+- Review [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) for architecture questions
+- Check [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) for current status
+- Consult [tasks/master_task_index.md](./tasks/master_task_index.md) for task overview
+
+**Remember:** Use ONLY `docs/` for canonical information. `docs_archive/` is NOT source of truth.
 
 ---
 
-**Last Updated:** 2025-12-12  
-**Documentation Version:** 2.1  
-**Master Task Version:** 3.0
+**Last Updated:** 2025-12-16  
+**Documentation Version:** 3.0  
+**Total Canonical Files:** 36  
+**Archive Status:** Isolated (excluded from git and AI context)

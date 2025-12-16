@@ -129,7 +129,7 @@ export const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuIte
           MENU_TOKENS.item.padding.md,
           MENU_TOKENS.item.radius.md,
           inset && "pl-8",
-          !disabled && "focus:bg-accent focus:text-accent-foreground",
+          !disabled && "focus-visible:bg-accent focus-visible:text-accent-foreground",
           selected && "bg-accent/50",
           disabled && "pointer-events-none opacity-50",
           className,

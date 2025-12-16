@@ -1,6 +1,6 @@
 # Tenerife UI - Token System Map Overview
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-16  
 **Purpose:** Complete reference for the token-driven architecture of Tenerife UI
 
 ---
@@ -520,7 +520,7 @@ Tokens automatically adapt to theme mode (day/night):
 **All tokens exported via:**
 
 - `src/tokens/index.ts` → `export * from "./colors"` etc.
-- Available in public API: `import { colors, spacing } from "@tenerife.music/ui"`
+- Available in public API: `import { primaryColors, accentColors, spacing, semanticSpacing } from "@tenerife.music/ui"`
 
 ---
 
@@ -544,5 +544,5 @@ Tokens automatically adapt to theme mode (day/night):
 
 ---
 
-**Last Updated:** 2025-12-08  
+**Last Updated:** 2025-12-16  
 **Version:** 1.0.0

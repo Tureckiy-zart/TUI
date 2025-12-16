@@ -1,6 +1,6 @@
 // This file has been automatically migrated to valid ESM format by Storybook.
 import { fileURLToPath } from "node:url";
-import { resolve, dirname } from "path";
+import { dirname, resolve } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,6 +13,7 @@ const config = {
     "@storybook/addon-onboarding",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
+    "@chromatic-com/storybook",
   ],
 
   framework: {

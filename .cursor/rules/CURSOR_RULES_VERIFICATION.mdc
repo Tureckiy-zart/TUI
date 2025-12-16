@@ -1,0 +1,157 @@
+---
+alwaysApply: true
+title: Cursor Rules Verification & Activation
+version: 1.0
+status: Active
+owner: Cursor AI
+priority: Critical
+scope: Global
+language: en
+last_updated: 2025-12-16
+---
+
+# Cursor Rules Verification & Activation (Canonical)
+
+## Purpose
+
+This document formally verifies that all Cursor / AI rules
+are **complete, non-conflicting, and safe to apply**.
+
+It represents the **official verification checkpoint**
+after which further project work is allowed to proceed.
+
+Without this document, the rule system is considered **unverified**.
+
+---
+
+## Verified Rule Set
+
+The following Cursor rule documents are verified and active:
+
+- `rules/user-rules.mdc`
+- `rules/component-lifecycle.mdc`
+- `rules/block-and-scope-rules.mdc`
+- `rules/CURSOR_RULES_RESOLUTION_ORDER.mdc`
+- `rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc`
+
+
+These documents together define:
+- AI behavior
+- Component lifecycle enforcement
+- Scope and boundary enforcement
+- Deterministic rule resolution
+
+No additional Cursor rules are considered active.
+
+---
+
+## Coverage Verification
+
+The following risk areas are explicitly covered:
+
+### ✅ Architectural Integrity
+- Foundation layers are immutable
+- Authority Contracts are enforced
+- Lock documents override lower rules
+
+### ✅ Component Creation & Refactoring
+- Mandatory lifecycle protocol defined
+- Task classification enforced
+- Explicit refusal conditions defined
+
+### ✅ Scope & Boundary Control
+- One task = one component or block
+- Cross-scope refactors forbidden
+- Hidden changes prohibited
+
+### ✅ Token System Safety
+- Raw values forbidden
+- Token unions enforced
+- New tokens require separate tasks
+
+### ✅ AI Behavior & Refusal
+- Explicit refusal policy defined
+- Silent compliance forbidden
+- Clarification required on ambiguity
+
+### ✅ Documentation Safety
+- Correct real-world date enforced
+- Future dates explicitly forbidden
+- Guessing dates forbidden
+
+### ✅ Archive & Context Isolation
+- Archived documentation excluded
+- No reliance on removed or legacy rules
+- No inference from non-canonical sources
+
+### ✅ Legacy Component Refactor Safety
+- Mandatory refactor checklist defined
+- Safe migration from legacy components enforced
+
+
+---
+
+## Conflict Verification
+
+The verified rule set was reviewed for conflicts.
+
+Result:
+- ❌ No conflicting rules detected
+- ❌ No circular authority references
+- ❌ No ambiguous priority resolution
+
+Rule resolution order is fully deterministic.
+
+---
+
+## Resolution Order Verification
+
+The AI MUST resolve rules using the following verified order:
+
+1. `docs/INTERNAL_CANONICAL_CONTEXT.md`
+2. `docs/architecture/AUTHORITY_MAP.md`
+3. Authority Contracts (see `docs/architecture/AUTHORITY_MAP.md` for complete list)
+4. Lock documents: `docs/architecture/FINAL_FOUNDATION_LOCK.md`, `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+5. Architecture rules: `docs/architecture/UI_ARCHITECTURE_RULES.md`, `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+6. Cursor rules
+7. Task instructions
+
+This order is explicitly enforced and verified.
+
+---
+
+## Activation Statement
+
+All Cursor rules listed in this document are:
+
+- Verified
+- Active
+- Mandatory
+
+The AI is authorized to operate **only within these rules**.
+
+Any task that cannot be completed without violating them
+MUST be refused.
+
+---
+
+## Change Control
+
+Any modification to the verified rule set requires:
+
+- Explicit instruction
+- Review against Authority and Locks
+- Re-verification via an updated version of this document
+
+Unverified changes are forbidden.
+
+---
+
+## Final Verdict
+
+**Cursor Rules Status: VERIFIED & SAFE TO PROCEED**
+
+Further development, refactoring, and analysis
+may continue under these rules.
+
+This document closes the Cursor Rules verification phase.

@@ -21,17 +21,33 @@ import { BUTTON_TOKENS } from "@/tokens/components/button";
 /**
  * Button CVA Variants
  *
+ * @enforcement C0_BUTTON_CVA_ENFORCEMENT
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
  * @enforcement TUNG: tokenCVA introduction
  * @enforcement TUNG_BUTTON_INTERACTION_FIX
- * @rule ALL color-related classes MUST be token-based utilities only
- * @rule NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
- * @rule ALL color logic MUST be centralized in BUTTON_TOKENS
- * @rule NO conditional color class concatenation outside CVA
- * @rule Button is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
- * @rule Button MUST react to token changes - changing tokens/colors.ts MUST change Button appearance
  *
- * Interaction Authority Contract (TUNG_BUTTON_INTERACTION_FIX):
+ * CVA Enforcement Rules (C0_BUTTON_CVA_ENFORCEMENT):
+ * - CVA may ONLY reference token-derived classes
+ * - NO raw Tailwind color utilities (bg-red-*, text-blue-*, etc.)
+ * - NO direct hover/active utilities outside State Matrix
+ * - NO inline conditional class concatenation
+ * - NO per-variant Tailwind overrides
+ * - Structural utilities (inline-flex, items-center, etc.) are ALLOWED
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in BUTTON_TOKENS
+ * - Button is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Button MUST react to token changes - changing tokens/colors.ts MUST change Button appearance
+ *
+ * State Matrix Authority Rules:
+ * - ALL state classes (hover, active, disabled) MUST use State Matrix CSS variables
+ * - NO raw Tailwind state utilities (hover:bg-primary/80, active:opacity-50)
+ * - States react to Color Authority changes automatically through State Matrix
+ *
+ * Interaction Authority Contract (TUNG_INTERACTION_AUTHORITY_FOUNDATION):
+ * - State Priority: disabled > loading > active > hover > focus-visible > base
  * - CSS variables (--button-*-hover-bg, etc.) are ONLY for visual appearance
  * - pointer-events is NOT a visual token - it controls interaction behavior
  * - Base state MUST have pointer-events: auto (default) - NO pointer-events-none in base
@@ -39,19 +55,45 @@ import { BUTTON_TOKENS } from "@/tokens/components/button";
  * - DevTools Force :hover is NOT proof of functionality - real mouse hover must work
  * - Interaction state (pointer-events, cursor) is SEPARATE from visual state (colors, opacity)
  * - Base state CANNOT block pointer events - only disabled/loading states can
+ * - Hover is FORBIDDEN when disabled={true} or loading={true}
+ * - Active is FORBIDDEN when disabled={true} or loading={true}
+ * - Focus is FORBIDDEN when disabled={true} (for interactions)
+ * - All states MUST be browser-native (CSS pseudo-classes), NOT JavaScript-managed
+ *
+ * @see docs/architecture/BUTTON_CVA_ENFORCEMENT.md
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Button uses MOTION_TOKENS.transitionPreset.colors for transitions
+ * - Radius Authority: Button references componentRadius.button.md for border radius
+ * - Typography Authority: Button references fontSize tokens for text sizing
+ * - Spacing Authority: Button references semanticSpacing tokens for padding/gap
+ * - State Authority: Button uses State Matrix CSS variables for all states
+ * - Interaction Authority: Button follows Interaction Authority Contract for state priority
  *
  * Color tokens used (all from BUTTON_TOKENS, which reference tokens/colors.ts):
  * - bg-primary, bg-secondary, bg-accent, bg-destructive, bg-background, bg-muted
  * - text-primary-foreground, text-secondary-foreground, text-accent-foreground, text-destructive-foreground, text-foreground
  * - border-input, border-accent
  * - ring-ring (token-based focus ring)
- * - All hover states use token-based opacity variants (e.g., bg-primary/85)
+ * - All hover/active/disabled states use State Matrix CSS variables (--button-*-hover-bg, etc.)
  *
  * Type-level enforcement:
  * - Variant values are restricted to: "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
  * - Size values are restricted to: "sm" | "md" | "lg" | "icon"
  * - TypeScript will error if invalid variant/size values are passed
+ * - tokenCVA validates token usage in development mode (warns on forbidden patterns)
  * - No arbitrary color classes can be passed via className prop (enforced by tokenCVA validation)
+ *
+ * Reference Implementation:
+ * - Button is the canonical reference for token-driven CVA patterns
+ * - Future components should follow Button's CVA enforcement patterns
+ * - Button CVA is immutable - changes require explicit unlock task
  */
 const buttonVariants = tokenCVA({
   base: `inline-flex items-center justify-center whitespace-nowrap ${BUTTON_TOKENS.radius} font-medium ${BUTTON_TOKENS.transition.colors} ${BUTTON_TOKENS.state.focus.outline} ${BUTTON_TOKENS.state.focus.ring} ${BUTTON_TOKENS.state.disabled.cursor} ${BUTTON_TOKENS.state.disabled.pointerEvents} [&_svg]:pointer-events-none [&_svg]:shrink-0`,

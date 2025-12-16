@@ -319,6 +319,201 @@ export const WithIcons: Story = {
 };
 
 /**
+ * Interaction Verification Story
+ *
+ * Verifies real user interactions (hover, active, focus, disabled) according to
+ * Interaction Authority Contract. This story MUST be tested with real mouse cursor
+ * and keyboard navigation, NOT with DevTools force states.
+ *
+ * @enforcement TUNG_INTERACTION_AUTHORITY_FOUNDATION
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ */
+export const InteractionVerification: Story = {
+  render: () => (
+    <div className="flex flex-col gap-lg">
+      <div className="rounded-lg border border-border bg-card p-lg">
+        <h3 className="mb-md text-base font-semibold">⚠️ Important Testing Instructions</h3>
+        <div className="space-y-sm text-sm text-muted-foreground">
+          <p>
+            <strong>Real Interactions Required:</strong> This story MUST be tested with real mouse
+            cursor movement and keyboard navigation. DevTools force states are NOT a source of
+            truth.
+          </p>
+          <p>
+            <strong>State Priority:</strong> disabled &gt; loading &gt; active &gt; hover &gt;
+            focus-visible &gt; base
+          </p>
+          <p>
+            <strong>Testing Method:</strong> Use your actual mouse cursor and keyboard (Tab key) to
+            interact with buttons below. Do NOT rely on DevTools force :hover or :active states.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">Test 1: Hover State (Real Mouse Cursor)</h3>
+        <p className="mb-sm text-xs text-muted-foreground">
+          Move your real mouse cursor over the buttons below. Hover state should activate (darker
+          background). Hover should work on all enabled buttons.
+        </p>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary">Hover Me (Primary)</Button>
+          <Button variant="secondary">Hover Me (Secondary)</Button>
+          <Button variant="outline">Hover Me (Outline)</Button>
+          <Button variant="ghost">Hover Me (Ghost)</Button>
+        </div>
+        <div className="mt-sm text-xs text-muted-foreground">
+          <p>
+            ✅ <strong>Expected:</strong> Hover state activates when mouse cursor is over button
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Hover state deactivates when mouse cursor leaves button
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">Test 2: Disabled State (Hover Blocked)</h3>
+        <p className="mb-sm text-xs text-muted-foreground">
+          Move your real mouse cursor over the disabled buttons below. Hover state should NOT
+          activate. Cursor should show "not-allowed".
+        </p>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary" disabled>
+            Disabled (No Hover)
+          </Button>
+          <Button variant="secondary" disabled>
+            Disabled (No Hover)
+          </Button>
+          <Button variant="outline" disabled>
+            Disabled (No Hover)
+          </Button>
+        </div>
+        <div className="mt-sm text-xs text-muted-foreground">
+          <p>
+            ✅ <strong>Expected:</strong> Hover state does NOT activate on disabled buttons
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Cursor shows "not-allowed" when over disabled buttons
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">Test 3: Active State (Real Mouse Click)</h3>
+        <p className="mb-sm text-xs text-muted-foreground">
+          Press and hold your mouse button down on the buttons below. Active state should activate
+          (even darker background). Active has priority over hover.
+        </p>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary">Click & Hold (Active)</Button>
+          <Button variant="secondary">Click & Hold (Active)</Button>
+          <Button variant="outline">Click & Hold (Active)</Button>
+        </div>
+        <div className="mt-sm text-xs text-muted-foreground">
+          <p>
+            ✅ <strong>Expected:</strong> Active state activates when mouse button is pressed down
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Active state deactivates when mouse button is released
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Active state has priority over hover (darker than hover)
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">Test 4: Focus State (Keyboard Navigation)</h3>
+        <p className="mb-sm text-xs text-muted-foreground">
+          Use Tab key to navigate to the buttons below. Focus-visible state should activate (focus
+          ring appears). Focus should NOT activate on mouse click.
+        </p>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary">Tab to Focus (Primary)</Button>
+          <Button variant="secondary">Tab to Focus (Secondary)</Button>
+          <Button variant="outline">Tab to Focus (Outline)</Button>
+        </div>
+        <div className="mt-sm text-xs text-muted-foreground">
+          <p>
+            ✅ <strong>Expected:</strong> Focus ring appears when navigating with Tab key
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Focus ring does NOT appear on mouse click (uses
+            focus-visible:)
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Focus is blocked on disabled buttons
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">Test 5: Icon Buttons (Hover on Icon Area)</h3>
+        <p className="mb-sm text-xs text-muted-foreground">
+          Move your real mouse cursor over the icon area of buttons below. Hover should work even
+          when cursor is over the icon (icons have pointer-events-none).
+        </p>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary" leftIcon={<IconSearch />}>
+            Hover Icon Area
+          </Button>
+          <Button variant="secondary" rightIcon={<IconArrowRight />}>
+            Hover Icon Area
+          </Button>
+          <Button variant="outline" leftIcon={<IconCheck />} rightIcon={<IconArrowRight />}>
+            Hover Icon Area
+          </Button>
+        </div>
+        <div className="mt-sm text-xs text-muted-foreground">
+          <p>
+            ✅ <strong>Expected:</strong> Hover works when cursor is over icon area (icons don't
+            block)
+          </p>
+          <p>
+            ✅ <strong>Expected:</strong> Icons have pointer-events-none to allow button hover
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-border bg-muted/50 p-md">
+        <h4 className="mb-sm text-sm font-semibold">Verification Checklist</h4>
+        <div className="space-y-xs text-xs">
+          <p>✅ Hover works with real mouse cursor (not DevTools force)</p>
+          <p>✅ Hover is blocked when disabled={true}</p>
+          <p>✅ Active works with real mouse click (mousedown)</p>
+          <p>✅ Active is blocked when disabled={true}</p>
+          <p>✅ Focus-visible works with Tab key navigation</p>
+          <p>✅ Focus-visible does NOT activate on mouse click</p>
+          <p>✅ Icons don't block button hover</p>
+          <p>✅ Real behavior matches expected behavior</p>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `Interaction verification story for Button component. Tests real user interactions (hover, active, focus, disabled) according to Interaction Authority Contract.
+
+**⚠️ CRITICAL:** This story MUST be tested with real mouse cursor and keyboard navigation. DevTools force states are NOT a source of truth.
+
+**State Priority:** disabled > loading > active > hover > focus-visible > base
+
+**Testing Requirements:**
+- Use real mouse cursor for hover/active tests
+- Use Tab key for focus tests
+- Verify that disabled blocks all interactions
+- Verify that icons don't block button hover
+
+See [Interaction Authority Contract](../../../docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md) for full rules.`,
+      },
+    },
+  },
+};
+
+/**
  * Playground Story
  *
  * Interactive sandbox for manual exploration of Button component.
