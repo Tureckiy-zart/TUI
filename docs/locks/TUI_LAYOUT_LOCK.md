@@ -264,8 +264,8 @@ If modifications to locked Layout Primitives components are required, the follow
 
 - **[Extension Canonical State](../architecture/TUI_EXTENSION_CANONICAL_STATE.md)** - Component usage rules and responsibilities
 - **[Architecture Lock](../architecture/TUI_ARCHITECTURE_LOCK.md)** - Foundation and Extension lock status
-- **[Layout Standardization Report](../reports/TUI_LAYOUT_STANDARDIZATION_REPORT.md)** - Standardization and cleanup report
-- **[Layout Inventory and Audit Report](../reports/TUI_LAYOUT_INVENTORY_AND_AUDIT_REPORT.md)** - Initial inventory and audit
+- **[Layout Standardization Report](../../docs_archive/reports/archive/archive/reports/other/TUI_LAYOUT_STANDARDIZATION_REPORT.md)** - Standardization and cleanup report (Note: File may be in docs_archive)
+- **[Layout Inventory and Audit Report](../../docs_archive/reports/archive/archive/reports/other/TUI_LAYOUT_INVENTORY_AND_AUDIT_REPORT.md)** - Initial inventory and audit (Note: File may be in docs_archive)
 
 ---
 

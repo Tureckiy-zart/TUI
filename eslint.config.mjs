@@ -37,7 +37,7 @@ export default [
       "jest.setup.js",
       "scripts/**",
       "eslint-rules/**", // ESLint rule files - configuration, not source code
-      "src/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
+      "src/FOUNDATION/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
       "**/legacy/**", // Legacy files are excluded from token compliance
 
       // =================================================================
@@ -338,7 +338,7 @@ export default [
     files: [
       "src/components/ui/**/*.{ts,tsx}",
       "src/utils/createTokenCVA.ts",
-      "src/lib/token-cva.ts",
+      "src/FOUNDATION/lib/token-cva.ts",
     ],
     rules: {
       // Enable strict color enforcement for UI files

@@ -22,7 +22,7 @@ export type {
   SemanticColors,
   SurfaceColors,
   TextColors,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 export {
   accentColors,
   baseColors,
@@ -35,7 +35,7 @@ export {
   surfaceColors,
   tailwindThemeColors,
   textColors,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Component tokens
 export {
@@ -70,11 +70,6 @@ export {
   type DomainCardSkeleton,
   type DomainCardSkeletonContentWidth,
   type DomainCardSurface,
-  DROPDOWN_TOKENS,
-  type DropdownItemSize,
-  type DropdownMenuSize,
-  type DropdownTriggerSize,
-  type DropdownVariant,
   type EmptyStateIconSize,
   INPUT_TOKENS,
   type InputFontSize,
@@ -156,10 +151,10 @@ export {
   TOOLTIP_TOKENS,
   type TooltipContentRadius,
   type TooltipContentShadow,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Icon tokens (explicit export)
-export { ICON_TOKENS, type IconColor, type IconSize, type IconStroke } from "./tokens";
+export { ICON_TOKENS, type IconColor, type IconSize, type IconStroke } from "./FOUNDATION/tokens";
 
 // CSS Variables
 export {
@@ -167,7 +162,7 @@ export {
   allCSSVariablesCSS,
   generateCSSVariablesCSS,
   tokenSystemSummary,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Motion tokens
 export type {
@@ -182,7 +177,7 @@ export type {
   MotionV2Transition,
   Spring,
   Transition,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 export {
   animations,
   durations,
@@ -202,14 +197,19 @@ export {
   springs,
   tailwindMotionConfig,
   transitions,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Radius tokens
-export type { BorderRadius, ComponentRadius } from "./tokens";
-export { borderRadius, componentRadius, radiusCSSVariables, tailwindRadiusConfig } from "./tokens";
+export type { BorderRadius, ComponentRadius } from "./FOUNDATION/tokens";
+export {
+  borderRadius,
+  componentRadius,
+  radiusCSSVariables,
+  tailwindRadiusConfig,
+} from "./FOUNDATION/tokens";
 
 // Shadow tokens
-export type { ColoredShadow, ElevationShadow, FocusRing, GlowEffect } from "./tokens";
+export type { ColoredShadow, ElevationShadow, FocusRing, GlowEffect } from "./FOUNDATION/tokens";
 export {
   accentColoredShadows,
   componentShadowMapping,
@@ -221,7 +221,7 @@ export {
   shadowCSSVariables,
   shadowOpacity,
   tailwindShadowConfig,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Spacing tokens
 export type {
@@ -232,17 +232,17 @@ export type {
   SemanticSpacing,
   Spacing,
   StackSpacing,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 export {
   layoutSpacing,
   semanticSpacing,
   spacing,
   spacingCSSVariables,
   tailwindSpacingConfig,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // Theme tokens
-export { UI_COLORS } from "./tokens";
+export { UI_COLORS } from "./FOUNDATION/tokens";
 
 // Typography tokens
 export type {
@@ -257,7 +257,7 @@ export type {
   LetterSpacing,
   LineHeight,
   TextStyle,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 export {
   fontFamily,
   fontSize,
@@ -268,13 +268,13 @@ export {
   tailwindTypographyConfig,
   textStyles,
   typographyCSSVariables,
-} from "./tokens";
+} from "./FOUNDATION/tokens";
 
 // ============================================================================
 // UI COMPONENTS
 // ============================================================================
 // Button component (CVA-based, token-driven)
-export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
+export { Button, type ButtonProps, buttonVariants } from "./PRIMITIVES/Button";
 
 // Text component (CVA-based, token-driven)
 export {
@@ -283,18 +283,13 @@ export {
   type TextSize,
   textVariants,
   type TextWeight,
-} from "./components/ui/text";
+} from "./PRIMITIVES/Text";
 
 // Alert component (CVA-based, token-driven)
-export { Alert, type AlertProps, alertVariants } from "./components/ui/alert";
+export { Alert, type AlertProps, alertVariants } from "./PRIMITIVES/Alert";
 
 // Typography components (CVA-based, token-driven)
-export { Body, type BodyProps, bodyVariants } from "./components/ui/body";
-export { Caption, type CaptionProps, captionVariants } from "./components/ui/caption";
-export { Code, type CodeProps, codeVariants } from "./components/ui/code";
-export { Display, type DisplayProps, displayVariants } from "./components/ui/display";
-export { Heading, type HeadingProps, headingVariants } from "./components/ui/heading";
-export { Lead, type LeadProps, leadVariants } from "./components/ui/lead";
+export { Heading, type HeadingProps, headingVariants } from "./PRIMITIVES/Heading";
 
 // Select component (Radix-based, token-driven)
 export {
@@ -327,7 +322,7 @@ export {
   SelectViewport,
   type SelectViewportProps,
   type SelectWidth,
-} from "./components/select";
+} from "./COMPOSITION/controls/Select";
 
 // Modal component (Radix-based, token-driven)
 export {
@@ -350,20 +345,11 @@ export {
   type ModalTitleProps,
   ModalTrigger,
   type ModalTriggerProps,
-} from "./components/modal";
+} from "./COMPOSITION/overlays/Modal";
 // Note: ModalPortal is internal-only and not exported
 
 // Form components (CVA-based, token-driven)
-export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/checkbox";
-export { Input, type InputProps, inputVariants } from "./components/input";
-export {
-  Radio,
-  RadioGroup,
-  type RadioGroupProps,
-  type RadioProps,
-  radioVariants,
-} from "./components/radio";
-export { Textarea, type TextareaProps, textareaVariants } from "./components/textarea";
+export { Checkbox, type CheckboxProps, checkboxVariants } from "./PRIMITIVES/Checkbox";
 export {
   Field,
   type FieldControlProps,
@@ -371,8 +357,21 @@ export {
   type FieldErrorProps,
   type FieldLabelProps,
   type FieldProps,
-} from "./components/ui/field";
-export { Label, type LabelProps, labelVariants } from "./components/ui/label";
+} from "./PRIMITIVES/Field";
+export { Input, type InputProps, inputVariants } from "./PRIMITIVES/Input";
+export { Label, type LabelProps, labelVariants } from "./PRIMITIVES/Label";
+export {
+  Radio,
+  RadioGroup,
+  type RadioGroupProps,
+  type RadioProps,
+  radioVariants,
+} from "./PRIMITIVES/Radio";
+export { Textarea, type TextareaProps, textareaVariants } from "./PRIMITIVES/Textarea";
+
+// Progress and Skeleton components (token-driven)
+export { Progress, type ProgressProps } from "./PRIMITIVES/Progress";
+export { Skeleton, type SkeletonProps, skeletonVariants } from "./PRIMITIVES/Skeleton";
 
 // ============================================================================
 // LAYOUT PRIMITIVES
@@ -396,7 +395,7 @@ export {
   Surface,
   type SurfaceProps,
   surfaceVariants,
-} from "./components/layout";
+} from "./COMPOSITION/layout";
 
 // ============================================================================
 // CONTAINER COMPONENTS
@@ -416,7 +415,7 @@ export {
   surfaceVariants as containerSurfaceVariants,
   Section,
   type SectionProps,
-} from "./components/containers";
+} from "./COMPOSITION/layout";
 
 // ============================================================================
 // OVERLAY SYSTEM
@@ -444,6 +443,7 @@ export {
   Toast,
   type ToastAction,
   type ToastData,
+  Toaster,
   type ToastOptions,
   type ToastPosition,
   type ToastProps,
@@ -452,7 +452,7 @@ export {
   ToastViewport,
   type ToastViewportProps,
   useToast,
-} from "./components/overlays";
+} from "./COMPOSITION/overlays";
 
 // ============================================================================
 // NOTIFICATION SYSTEM
@@ -482,40 +482,13 @@ export {
   type NotificationVariant,
   useNotificationCenter,
   useNotificationCenterContext,
-} from "./components/notifications";
+} from "./DOMAIN/notifications/notifications";
 
 // ============================================================================
 // MENU SYSTEM
 // ============================================================================
-// Menu components (Popover, DropdownMenu, HoverCard)
+// Menu components (HoverCard)
 export {
-  DropdownMenuCheckItem,
-  type DropdownMenuCheckItemProps,
-  DropdownMenuContent,
-  type DropdownMenuContentProps,
-  DropdownMenuGroup,
-  type DropdownMenuGroupProps,
-  DropdownMenuItem,
-  type DropdownMenuItemProps,
-  DropdownMenuLabel,
-  type DropdownMenuLabelProps,
-  DropdownMenuRadioGroup,
-  type DropdownMenuRadioGroupProps,
-  DropdownMenuRadioItem,
-  type DropdownMenuRadioItemProps,
-  // DropdownMenu
-  DropdownMenuRoot,
-  type DropdownMenuRootProps,
-  DropdownMenuSeparator,
-  type DropdownMenuSeparatorProps,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  type DropdownMenuSubContentProps,
-  type DropdownMenuSubProps,
-  DropdownMenuSubTrigger,
-  type DropdownMenuSubTriggerProps,
-  DropdownMenuTrigger,
-  type DropdownMenuTriggerProps,
   HoverCardContent,
   type HoverCardContentProps,
   // HoverCard
@@ -523,17 +496,7 @@ export {
   type HoverCardRootProps,
   HoverCardTrigger,
   type HoverCardTriggerProps,
-  PopoverArrow,
-  type PopoverArrowProps,
-  PopoverContent,
-  type PopoverContentProps,
-  popoverContentVariants,
-  // Popover
-  PopoverRoot,
-  type PopoverRootProps,
-  PopoverTrigger,
-  type PopoverTriggerProps,
-} from "./components/menus";
+} from "./PATTERNS/menus/menus";
 
 // ContextMenu components
 export {
@@ -562,7 +525,7 @@ export {
   type ContextMenuSubTriggerProps,
   ContextMenuTrigger,
   type ContextMenuTriggerProps,
-} from "./components/context-menu";
+} from "./COMPOSITION/overlays";
 
 // ============================================================================
 // DATA DISPLAY COMPONENTS
@@ -588,12 +551,9 @@ export {
   type EmptyStateProps,
   EmptyStateTitle,
   type EmptyStateTitleProps,
-  Skeleton,
-  type SkeletonProps,
-  skeletonVariants,
   type SortDirection,
   type SortState,
-  Table,
+  TableRoot as Table,
   TableBody,
   type TableBodyProps,
   TableCell,
@@ -617,7 +577,7 @@ export {
   TableSortIcon,
   type TableSortIconProps,
   useTableContext,
-} from "./components/data";
+} from "./PATTERNS";
 
 // ============================================================================
 // NAVIGATION SYSTEM
@@ -652,13 +612,13 @@ export {
   type TabsListProps,
   type TabsRootProps,
   type TabsTriggerProps,
-} from "./components/navigation";
+} from "./COMPOSITION/navigation";
 
 // ============================================================================
 // ICON SYSTEM
 // ============================================================================
 // Icon component and icon registry
-export { Icon, type IconProps, iconVariants } from "./components/icon";
+export { Icon, type IconProps, iconVariants } from "./PRIMITIVES/Icon";
 
 // Icon registry exports (tree-shakeable)
 export {
@@ -684,32 +644,35 @@ export {
 // DOMAIN COMPONENTS
 // ============================================================================
 // Domain-specific card components (EventCard, VenueCard, TicketCard, etc.)
-export type { ArtistCardProps } from "./components/cards/ArtistCard";
-export { ArtistCard } from "./components/cards/ArtistCard";
-export type {
-  ArtistCardSize,
-  ArtistCardVariant,
-} from "./components/cards/ArtistCard/ArtistCard.types";
-export type { CategoryCardProps } from "./components/cards/CategoryCard";
-export { CategoryCard } from "./components/cards/CategoryCard";
-export type {
-  CategoryCardSize,
-  CategoryCardVariant,
-} from "./components/cards/CategoryCard/CategoryCard.types";
-export type { PromoCardProps } from "./components/cards/PromoCard";
-export { PromoCard } from "./components/cards/PromoCard";
-export type { PromoCardSize, PromoCardVariant } from "./components/cards/PromoCard/PromoCard.types";
-export type { TicketCardProps } from "./components/cards/TicketCard";
-export { TicketCard } from "./components/cards/TicketCard";
-export type {
-  TicketAvailability,
-  TicketCardSize,
-  TicketCardVariant,
-} from "./components/cards/TicketCard/TicketCard.types";
 export type {
   EventCardLayout,
   EventCardProps,
   EventCardSize,
   EventCardVariant,
-} from "./components/domain/EventCard";
-export { EventCard } from "./components/domain/EventCard";
+} from "./DOMAIN/sections/EventCard";
+export { EventCard } from "./DOMAIN/sections/EventCard";
+export { ArtistCard } from "./PATTERNS/cards/cards/ArtistCard";
+export type {
+  ArtistCardProps,
+  ArtistCardSize,
+  ArtistCardVariant,
+} from "./PATTERNS/cards/cards/ArtistCard/ArtistCard.types";
+export { CategoryCard } from "./PATTERNS/cards/cards/CategoryCard";
+export type {
+  CategoryCardProps,
+  CategoryCardSize,
+  CategoryCardVariant,
+} from "./PATTERNS/cards/cards/CategoryCard/CategoryCard.types";
+export { PromoCard } from "./PATTERNS/cards/cards/PromoCard";
+export type {
+  PromoCardProps,
+  PromoCardSize,
+  PromoCardVariant,
+} from "./PATTERNS/cards/cards/PromoCard/PromoCard.types";
+export { TicketCard } from "./PATTERNS/cards/cards/TicketCard";
+export type {
+  TicketAvailability,
+  TicketCardProps,
+  TicketCardSize,
+  TicketCardVariant,
+} from "./PATTERNS/cards/cards/TicketCard/TicketCard.types";

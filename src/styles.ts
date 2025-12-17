@@ -9,4 +9,4 @@
  * 2. Then import theme/global.css with theme-specific styles
  */
 import "./styles/globals.css";
-import "./theme/global.css";
+import "./FOUNDATION/theme/global.css";

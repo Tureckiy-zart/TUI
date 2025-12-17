@@ -252,10 +252,10 @@ src/components/
 │   └── Toast.tsx             # 🔒 FOUNDATION (only this file)
 │
 ├── menus/                    # ✅ EXTENSION: Menu Extensions (NOT Foundation ContextMenu)
-│   ├── dropdown/             # Extension dropdowns
-│   ├── DropdownMenu.tsx      # Extension (uses Foundation internally)
-│   ├── hover-card/
-│   ├── popover/
+│   ├── ~~dropdown/~~         # ✅ REMOVED (MIGRATION_12C)
+│   ├── ~~DropdownMenu.tsx~~  # ✅ REMOVED (MIGRATION_12C)
+│   ├── hover-card/           # ✅ Uses COMPOSITION/overlays/Popover (Radix-based)
+│   ├── ~~popover/~~          # ✅ REMOVED (MIGRATION_12D - migrated to COMPOSITION/overlays/Popover)
 │   └── context-menu/         # 🔒 FOUNDATION (only this subfolder)
 │
 ├── navigation/               # ✅ EXTENSION: Navigation Extensions (NOT Foundation Tabs)
@@ -568,7 +568,7 @@ Extensions **MUST NOT**:
 **Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./architecture/TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](./reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 **The Token System is LOCKED and IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen. Token modifications require explicit unlock procedure with full audit.
 
@@ -1294,6 +1294,8 @@ export const FormModal = ({ fields, onSubmit, ... }) => {
 
 This document is the **single source of truth** for TenerifeUI architecture. However, the following documents provide complementary information:
 
+- **`docs/architecture/CANONICAL_LOCK.md`** - **Canonical architecture lock** (authoritative source for canonical state and forbidden regressions)
+- **`docs/architecture/CANONICAL_STATE_FINAL.md`** - Final truth snapshot of canonical state
 - **`.cursor/tasks/master/master_tasks.json`** - Master Task system (project roadmap and task tracking)
 - **`docs/PROJECT_PROGRESS.md`** - Project progress tracking (task completion status)
 - **`docs/architecture/FINAL_FOUNDATION_LOCK.md`** - Foundation lock details (supplementary to this document)
@@ -1301,7 +1303,7 @@ This document is the **single source of truth** for TenerifeUI architecture. How
 - **`docs/architecture/UI_ARCHITECTURE_RULES.md`** - Radix UI and token union rules (supplementary to this document)
 - **`docs/architecture/CURSOR_UI_RULES.md`** - Cursor AI development rules (supplementary to this document)
 
-**Note:** This document supersedes all other architecture documentation. The documents listed above are supplementary and provide additional detail, but this document contains the canonical rules and principles.
+**Note:** This document supersedes all other architecture documentation. The documents listed above are supplementary and provide additional detail, but this document contains the canonical rules and principles. **CANONICAL_LOCK.md** is the authoritative source for canonical architecture state and forbidden regressions.
 
 ---
 
@@ -1316,15 +1318,20 @@ This document is the **single source of truth** for TenerifeUI architecture. How
 ---
 
 **Status:** ✅ **IMMUTABLE**  
-**Version:** 1.1  
+**Version:** 1.2  
 **Date Created:** 2025-12-13  
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-17  
 **Priority:** **CRITICAL**  
 **Next Review:** **NEVER** (this document is the canonical architectural contract)
 
 ---
 
 ## Version History
+
+- **v1.2** (2025-12-17): Canonical Architecture Lock Reference
+  - Added reference to CANONICAL_LOCK.md as authoritative source for canonical state
+  - Updated Related Documents section to include CANONICAL_LOCK.md
+  - Clarified that CANONICAL_LOCK.md is authoritative for canonical architecture state and forbidden regressions
 
 - **v1.1** (2025-12-16): Foundation Status Update
   - Added "Current Foundation Status" section (Section 0)

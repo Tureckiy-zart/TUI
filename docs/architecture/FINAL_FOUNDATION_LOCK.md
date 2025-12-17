@@ -694,7 +694,7 @@ If new behavior or UX is required:
 If token modifications are needed:
 - Token system modifications require explicit UNLOCK + AUDIT workflow
 - Reference: docs/architecture/TUI_TOKEN_SYSTEM.md
-- Reference: docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md
+- Reference: docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md (Note: File location may vary, check docs_archive)
 
 If Interaction Authority modifications are needed:
 - Interaction Authority modifications require explicit UNLOCK + AUDIT workflow
@@ -823,7 +823,7 @@ The Extension layer is **OPEN** for development. All Extension components must:
 **Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 The **Token System** is also **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
 
@@ -1386,10 +1386,10 @@ If Authority modifications are required in the future:
 - **[Architecture Lock](./TUI_ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
 - **[Token System](./TUI_TOKEN_SYSTEM.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
-- **[Component Guidelines](../structure/COMPONENT_GUIDELINES.md)** — Component development guidelines
+- **[Component Guidelines](../../docs_archive/legacy/guides/guides/COMPONENT_GUIDELINES.md)** — Component development guidelines (Note: File may be in docs_archive)
 - **[Cursor UI Rules](./CURSOR_UI_RULES.md)** — Cursor AI development rules
-- **[Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)** — Final token domain verification (FINAL VERDICT: OK)
-- **[Button CVA Enforcement](./BUTTON_CVA_ENFORCEMENT.md)** — 🔒 **LOCKED** Button CVA enforcement rules
+- **[Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)** — Final token domain verification (FINAL VERDICT: OK) (Note: File may be in docs_archive)
+- **[Button CVA Enforcement](../../docs_archive/deprecated/BUTTON_CVA_ENFORCEMENT.md)** — 🔒 **LOCKED** Button CVA enforcement rules (archived)
 - **[State Authority Matrix](./STATE_AUTHORITY_MATRIX.md)** — 🔒 **LOCKED** Universal state model for all interactive components
 - **[State Authority Contract](./STATE_AUTHORITY_CONTRACT.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
 - **[Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md)** — ✅ **ACTIVE** Extension layer boundary contract

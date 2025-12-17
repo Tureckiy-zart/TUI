@@ -971,7 +971,7 @@ Cursor demonstrates consistent use of token unions in subsequent tasks when:
 
 - **Token Types:** `src/tokens/types/index.ts`
 - **Responsive Types:** `src/types/responsive.ts`
-- **Token Refactor Report:** `docs/reports/TUI_TOKEN_UNION_REFACTOR_REPORT.md`
+- **Token Refactor Report:** `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_UNION_REFACTOR_REPORT.md` (Note: File may be in docs_archive)
 - **Typing Standard:** `docs/structure/TYPING_STANDARD.md`
 
 ---

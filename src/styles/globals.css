@@ -5,8 +5,8 @@
 
 /* 
  * NOTE: ALL CSS variables (colors, spacing, typography, shadows, radius, motion)
- * are set dynamically by updateCSSVariablesFromTokens() in src/theme/applyMode.ts
- * from token values in src/tokens/.
+ * are set dynamically by updateCSSVariablesFromTokens() in src/FOUNDATION/theme/applyMode.ts
+ * from token values in src/FOUNDATION/tokens/.
  * 
  * This ensures a single source of truth for all CSS variables and prevents
  * conflicts between static CSS definitions and dynamic token-driven updates.

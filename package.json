@@ -1,8 +1,8 @@
 {
   "name": "@tenerife.music/ui",
-  "version": "1.0.16",
+  "version": "1.1.0",
   "private": false,
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.26.0",
   "type": "module",
   "sideEffects": [
     "**/*.css",
@@ -63,8 +63,6 @@
     "test:a11y": "vitest run a11y.test",
     "a11y:contrast": "tsx scripts/a11y-contrast-check.js",
     "build-storybook": "storybook build",
-    "chromatic": "./scripts/chromatic.sh",
-    "chromatic:ci": "CHROMATIC_CI_MODE=true ./scripts/chromatic.sh",
     "preview": "vite preview",
     "prepublishOnly": "npm run clean && npm run build && npm run typecheck",
     "validate": "npm run typecheck && npm run lint:check && npm run format:check",
@@ -78,7 +76,15 @@
     "publish:minor": "./scripts/publish.sh minor",
     "publish:major": "./scripts/publish.sh major",
     "safelist:generate": "tsx scripts/generateTailwindSafelist.ts",
-    "verify:interaction-authority": "node scripts/verify-interaction-authority.mjs"
+    "verify:interaction-authority": "node scripts/verify-interaction-authority.mjs",
+    "chromatic": "./scripts/chromatic.sh",
+    "chromatic:ci": "CHROMATIC_CI_MODE=true ./scripts/chromatic.sh",
+    "docs:dev": "cd docs-app && npm run docs:dev",
+    "docs:build": "cd docs-app && npm run docs:build",
+    "docs:start": "cd docs-app && npm run docs:start",
+    "docs:generate-api": "cd docs-app && npm run docs:generate-api",
+    "docs:validate": "cd docs-app && npm run docs:validate",
+    "docs:analyze": "cd docs-app && npm run docs:analyze"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

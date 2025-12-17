@@ -154,6 +154,16 @@ fi
 echo ""
 
 # === SUMMARY ===
+# Ensure all variables are numeric before arithmetic (default to 0 if empty or non-numeric)
+ESLINT_ERRORS=${ESLINT_ERRORS:-0}
+ESLINT_WARNINGS=${ESLINT_WARNINGS:-0}
+PRETTIER_ERRORS=${PRETTIER_ERRORS:-0}
+
+# Convert to integers explicitly (handle any non-numeric values)
+ESLINT_ERRORS=$((ESLINT_ERRORS + 0))
+ESLINT_WARNINGS=$((ESLINT_WARNINGS + 0))
+PRETTIER_ERRORS=$((PRETTIER_ERRORS + 0))
+
 # Calculate total issues (using proper arithmetic)
 TOTAL_ISSUES=$((ESLINT_ERRORS + ESLINT_WARNINGS + PRETTIER_ERRORS))
 

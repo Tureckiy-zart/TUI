@@ -1,13 +1,16 @@
 import "../src/styles/globals.css";
-import "../src/theme/global.css";
+import "../src/FOUNDATION/theme/global.css";
 import "./storybook-overrides.css";
 
 import type { Preview } from "@storybook/react-vite";
 import React from "react";
 
-import { initThemeSync } from "../src/theme/applyMode";
-import { __checkStateMatrix, updateStateMatrixFromTokens } from "../src/theme/applyStateMatrix";
-import { ThemeProvider } from "../src/theme/ThemeProvider";
+import { initThemeSync } from "../src/FOUNDATION/theme/applyMode";
+import {
+  __checkStateMatrix,
+  updateStateMatrixFromTokens,
+} from "../src/FOUNDATION/theme/applyStateMatrix";
+import { ThemeProvider } from "../src/FOUNDATION/theme/ThemeProvider";
 
 // Synchronous theme initialization - sets CSS variables BEFORE first React render
 // This ensures Button and other components have token-driven colors on initial render

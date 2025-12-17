@@ -6,7 +6,9 @@ import { pathToFileURL } from "node:url";
 
 const MIN_CONTRAST = 4.5;
 
-const moduleUrl = pathToFileURL(path.resolve(process.cwd(), "src/tokens/colors.ts")).href;
+const moduleUrl = pathToFileURL(
+  path.resolve(process.cwd(), "src/FOUNDATION/tokens/colors.ts"),
+).href;
 
 const { textColors, surfaceColors, semanticColors, primaryColors, accentColors } = await import(
   moduleUrl

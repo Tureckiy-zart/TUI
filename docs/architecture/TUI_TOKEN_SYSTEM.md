@@ -472,7 +472,7 @@ export const INPUT_TOKENS = {
 
 **Lock Date:** 2025-12-13  
 **Lock Status:** ✅ **LOCKED** - Token system is **FROZEN** and **IMMUTABLE**  
-**Final Audit:** [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File location may vary, check docs_archive)
 
 ### What Is Locked
 
@@ -521,7 +521,7 @@ If token system modifications are required, the following procedure **MUST** be 
 
 ### Lock Verification
 
-- ✅ **Final Audit**: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)
+- ✅ **Final Audit**: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) (Note: File location may vary, check docs_archive)
   - Final Verdict: **FINAL OK**
   - Violations Found: **0**
   - Date: 2025-12-13
@@ -544,7 +544,7 @@ If token system modifications are required, the following procedure **MUST** be 
 - 🔒 **TOKEN SYSTEM LOCKED** - System frozen and immutable
 - Final verification completed with 0 violations
 - Lock date: 2025-12-13
-- Reference: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)
+- Reference: [TUI_TOKEN_DOMAINS_FINAL_REPORT.md](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) (Note: File location may vary, check docs_archive)
 
 ### 2025-12-13 - Initial Documentation
 - Initial canonical documentation created

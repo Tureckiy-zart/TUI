@@ -1,13 +1,13 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
-import { tailwindThemeColors } from "./tokens/colors";
-import { tailwindMotionConfig } from "./tokens/motion";
-import { motionV2TailwindConfig } from "./tokens/motion/v2";
-import { tailwindRadiusConfig } from "./tokens/radius";
-import { tailwindShadowConfig } from "./tokens/shadows";
-import { tailwindSpacingConfig } from "./tokens/spacing";
-import { tailwindTypographyConfig } from "./tokens/typography";
+import { tailwindThemeColors } from "./FOUNDATION/tokens/colors";
+import { tailwindMotionConfig } from "./FOUNDATION/tokens/motion";
+import { motionV2TailwindConfig } from "./FOUNDATION/tokens/motion/v2";
+import { tailwindRadiusConfig } from "./FOUNDATION/tokens/radius";
+import { tailwindShadowConfig } from "./FOUNDATION/tokens/shadows";
+import { tailwindSpacingConfig } from "./FOUNDATION/tokens/spacing";
+import { tailwindTypographyConfig } from "./FOUNDATION/tokens/typography";
 
 /**
  * Tailwind CSS preset for Tenerife.Music UI
@@ -70,7 +70,7 @@ const preset: Partial<Config> = {
   plugins: [
     plugin(({ addUtilities }) => {
       // NOTE: CSS variables (including motionV2CSSVariables) are set dynamically
-      // by updateCSSVariablesFromTokens() in src/theme/applyMode.ts
+      // by updateCSSVariablesFromTokens() in src/FOUNDATION/theme/applyMode.ts
       // This ensures a single source of truth for all CSS variables
 
       // Motion V2 utility classes
