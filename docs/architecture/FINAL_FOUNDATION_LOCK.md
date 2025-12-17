@@ -426,7 +426,7 @@ The following components constitute the **complete and final** Foundation layer.
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
 | **Modal**       | Overlays   | Radix Dialog      | ✅ LOCKED          | 2025-12-12 |
 | **Tabs**        | Navigation | Radix Tabs        | ✅ LOCKED          | 2025-12-12 |
-| **Select**      | Inputs     | Radix Select      | ✅ LOCKED          | 2025-12-12 |
+| **Select**      | Inputs     | Radix Select      | ✅ LOCKED (FINALIZED) | 2025-12-12 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ✅ LOCKED          | 2025-12-12 |
 | **Toast**       | Overlays   | Radix Toast       | ✅ LOCKED          | 2025-12-12 |
 
@@ -451,7 +451,11 @@ The following components constitute the **complete and final** Foundation layer.
 - **Export Path:** `@tenerife.music/ui` → `Select`, `SelectRoot`, `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`, `SelectGroup`, `SelectLabel`, `SelectSeparator`
 - **Base Library:** Radix Select (`@radix-ui/react-select`)
 - **Purpose:** Sole select foundation. All dropdown selection must use this internally.
-- **Status:** ✅ **LOCKED** — Immutable
+- **Status:** ✅ **LOCKED** — **FOUNDATION FINALIZED** (S1 + H1–H4 complete)
+- **UNLOCK Requirement:** Any functional, behavioral, accessibility-semantic, or public API change is **UNLOCK** → **FORBIDDEN** without a formal UNLOCK procedure.
+- **No Growth Policy:** No new variants/modes, no alternative usage patterns, no capability expansion, no contract relaxation.
+- **No Extensions / Variants / Refactors:** No extension of Select’s capabilities, no new variants, and no refactors as standalone work. Refactors are permitted only when strictly required for a LOCK-safe bug/a11y fix and only if public API and behavior remain unchanged.
+- **Lock-Safe Changes Only:** Only actions explicitly allowed by `FOUNDATION_LOCK_OPERATING_RULES.md` are permitted (documentation clarification, a11y/bug fixes within the documented contract, typing/internal refactor with no API/behavior change).
 
 #### ContextMenu
 - **Location:** `src/components/menus/context-menu/`
@@ -753,7 +757,7 @@ If State Authority Contract modifications are needed:
 | --------------- | --------- | --------- | ------------ |
 | Modal           | ✅ LOCKED | 2025-12-12 | Immutable    |
 | Tabs            | ✅ LOCKED | 2025-12-12 | Immutable    |
-| Select          | ✅ LOCKED | 2025-12-12 | Immutable    |
+| Select          | ✅ LOCKED (FINALIZED) | 2025-12-12 | Immutable    |
 | ContextMenu     | ✅ LOCKED | 2025-12-12 | Immutable    |
 | Toast           | ✅ LOCKED | 2025-12-12 | Immutable    |
 

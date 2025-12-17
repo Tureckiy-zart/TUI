@@ -412,7 +412,7 @@ The Foundation layer consists of **exactly five components**, one per category:
 |-----------|----------|--------------|----------|--------|
 | **Modal** | Overlays | Radix Dialog | `src/components/modal/` | ✅ LOCKED |
 | **Tabs** | Navigation | Radix Tabs | `src/components/navigation/tabs/` | ✅ LOCKED |
-| **Select** | Inputs | Radix Select | `src/components/select/` | ✅ LOCKED |
+| **Select** | Inputs | Radix Select | `src/components/select/` | ✅ LOCKED (FINALIZED) |
 | **ContextMenu** | Menus | Radix ContextMenu | `src/components/menus/context-menu/` | ✅ LOCKED |
 | **Toast** | Overlays | Radix Toast | `src/components/overlays/Toast.tsx` | ✅ LOCKED |
 

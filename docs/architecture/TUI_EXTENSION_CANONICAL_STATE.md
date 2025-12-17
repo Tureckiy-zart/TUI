@@ -73,8 +73,11 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
    - **Types:** `TabsContentProps`, `TabsListProps`, `TabsRootProps`, `TabsTriggerProps`
 
 3. **Select** - `src/components/select/Select.tsx`
-   - **Status:** LOCKED
-   - **Rule:** DO NOT modify, extend, or create alternatives
+   - **Status:** FOUNDATION · LOCKED (FINALIZED)
+   - **Comment:** Implementation hardened, a11y verified (S1 + H1–H4 complete)
+   - **UNLOCK:** Any functional, behavioral, accessibility-semantic, or public API change requires formal **UNLOCK** (see `FINAL_FOUNDATION_LOCK.md`, `FOUNDATION_LOCK_OPERATING_RULES.md`)
+   - **Rule:** DO NOT modify, extend, or create alternatives beyond LOCK-safe changes permitted by `FOUNDATION_LOCK_OPERATING_RULES.md`
+   - **Finalization Rule:** No extensions/variants/refactors of `Select` as standalone work. Only LOCK-safe bug/a11y fixes are permitted.
    - **Exports:** `Select`, `SelectContent`, `SelectGroup`, `SelectIcon`, `SelectItem`, `SelectItemIndicator`, `SelectItemText`, `SelectLabel`, `SelectRoot`, `SelectSeparator`, `SelectTrigger`, `SelectValue`, `SelectViewport`
 
 4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx`

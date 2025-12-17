@@ -17,7 +17,7 @@ The following components are **locked** and **immutable** as part of the UI Foun
 
 1. **Modal** - `src/components/modal/Modal.tsx` (Radix Dialog wrapper)
 2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx` (Radix Tabs wrapper)
-3. **Select** - `src/components/select/Select.tsx` (Radix Select wrapper)
+3. **Select** - `src/components/select/Select.tsx` (Radix Select wrapper) — **FINALIZED** (S1 + H1–H4 complete; UNLOCK required for any functional/behavioral/API change)
 4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx` (Radix ContextMenu wrapper)
 5. **Toast** - `src/components/overlays/Toast.tsx` (Radix Toast wrapper)
 
@@ -233,6 +233,14 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 ```
 
 ---
+
+## TUI_SELECT_FOUNDATION_LOCK - Select Foundation Finalization (Documentation-Only)
+
+- **Status:** ✅ completed
+- **Date Updated:** 2025-12-17
+- **Summary:** Select officially marked as **FOUNDATION FINALIZED** (S1 + H1–H4 complete) with explicit UNLOCK-only change policy. Canonical docs synchronized (`FINAL_FOUNDATION_LOCK`, `TUI_EXTENSION_CANONICAL_STATE`, `INTERNAL_CANONICAL_CONTEXT`).
+- **Commit Hash:** N/A (not committed in this task)
+- **Notes:** Documentation-only change. No modifications to `src/components/select/*` permitted/required.
 
 ## Completed Tasks
 
