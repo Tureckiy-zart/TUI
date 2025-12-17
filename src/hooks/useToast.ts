@@ -2,8 +2,8 @@
 
 import { useCallback, useState } from "react";
 
-import { getDelayMs } from "@/lib/responsive-props";
-import type { ResponsiveDelay } from "@/tokens/types";
+import { getDelayMs } from "@/FOUNDATION/lib/responsive-props";
+import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 

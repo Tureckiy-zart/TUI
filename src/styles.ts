@@ -8,5 +8,5 @@
  * 1. First import globals.css with Tailwind directives (@tailwind base, components, utilities)
  * 2. Then import theme/global.css with theme-specific styles
  */
+import "./FOUNDATION/theme/global.css";
 import "./styles/globals.css";
-import "./theme/global.css";

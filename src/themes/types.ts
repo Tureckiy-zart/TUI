@@ -10,16 +10,16 @@ import type {
   SemanticColors,
   SurfaceColors,
   TextColors,
-} from "@/tokens/colors";
-import { type BorderRadius, componentRadius } from "@/tokens/radius";
+} from "@/FOUNDATION/tokens/colors";
+import { type BorderRadius, componentRadius } from "@/FOUNDATION/tokens/radius";
 import type {
   accentColoredShadows,
   elevationShadows,
   focusRings,
   glowEffects,
   primaryColoredShadows,
-} from "@/tokens/shadows";
-import type { SemanticSpacing } from "@/tokens/spacing";
+} from "@/FOUNDATION/tokens/shadows";
+import type { SemanticSpacing } from "@/FOUNDATION/tokens/spacing";
 import type {
   FontFamily,
   FontSize,
@@ -27,7 +27,7 @@ import type {
   LetterSpacing,
   LineHeight,
   TextStyle,
-} from "@/tokens/typography";
+} from "@/FOUNDATION/tokens/typography";
 
 /**
  * Typography override configuration

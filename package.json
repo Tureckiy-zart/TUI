@@ -2,7 +2,7 @@
   "name": "@tenerife.music/ui",
   "version": "1.0.16",
   "private": false,
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.26.0",
   "type": "module",
   "sideEffects": [
     "**/*.css",

@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
-import { tailwindThemeColors } from "./src/tokens/colors";
-import { tailwindMotionConfig } from "./src/tokens/motion";
-import { tailwindRadiusConfig } from "./src/tokens/radius";
-import { tailwindShadowConfig } from "./src/tokens/shadows";
-import { tailwindSpacingConfig } from "./src/tokens/spacing";
-import { tailwindTypographyConfig } from "./src/tokens/typography";
+import { tailwindThemeColors } from "./src/FOUNDATION/tokens/colors";
+import { tailwindMotionConfig } from "./src/FOUNDATION/tokens/motion";
+import { tailwindRadiusConfig } from "./src/FOUNDATION/tokens/radius";
+import { tailwindShadowConfig } from "./src/FOUNDATION/tokens/shadows";
+import { tailwindSpacingConfig } from "./src/FOUNDATION/tokens/spacing";
+import { tailwindTypographyConfig } from "./src/FOUNDATION/tokens/typography";
 
 // CRITICAL: Safelist MUST be inlined directly in config file
 // Tailwind requires safelist to be available at build time as a static array

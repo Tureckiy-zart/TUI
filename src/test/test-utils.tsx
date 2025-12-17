@@ -12,7 +12,7 @@ import type { ReactElement } from "react";
 import { afterEach } from "vitest";
 import { axe } from "vitest-axe";
 
-import { ThemeProvider, type ThemeProviderProps } from "@/theme";
+import { ThemeProvider, type ThemeProviderProps } from "@/FOUNDATION/theme";
 
 /**
  * Global cleanup after each test to prevent memory leaks

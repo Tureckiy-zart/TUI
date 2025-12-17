@@ -43,6 +43,16 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
+      "@/FOUNDATION": ["./src/FOUNDATION/index.ts"],
+      "@/FOUNDATION/*": ["./src/FOUNDATION/*"],
+      "@/PRIMITIVES": ["./src/PRIMITIVES/index.ts"],
+      "@/PRIMITIVES/*": ["./src/PRIMITIVES/*"],
+      "@/COMPOSITION": ["./src/COMPOSITION/index.ts"],
+      "@/COMPOSITION/*": ["./src/COMPOSITION/*"],
+      "@/PATTERNS": ["./src/PATTERNS/index.ts"],
+      "@/PATTERNS/*": ["./src/PATTERNS/*"],
+      "@/DOMAIN": ["./src/DOMAIN/index.ts"],
+      "@/DOMAIN/*": ["./src/DOMAIN/*"],
       "@/*": ["./src/*"]
     },
 

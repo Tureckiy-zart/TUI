@@ -5,7 +5,7 @@
  * Provides isolation between brand packages to prevent cross-brand value leakage.
  */
 
-import type { Mode } from "@/tokens/colors";
+import type { Mode } from "@/FOUNDATION/tokens/colors";
 
 import type { BrandPackage, BrandTheme, BrandValidationResult } from "./types";
 
