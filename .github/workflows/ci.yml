@@ -15,15 +15,15 @@ jobs:
         node-version: [18.x, 20.x, 22.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 10.18.2
+          version: 10.26.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
@@ -46,11 +46,11 @@ jobs:
     needs: quality
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
-          version: 10.18.2
-      - uses: actions/setup-node@v4
+          version: 10.26.0
+      - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
@@ -67,11 +67,11 @@ jobs:
     needs: build
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
-          version: 10.18.2
-      - uses: actions/setup-node@v4
+          version: 10.26.0
+      - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
@@ -94,12 +94,12 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 10.18.2
-      - uses: actions/setup-node@v4
+          version: 10.26.0
+      - uses: actions/setup-node@v3
         with:
           node-version: 22
           cache: "pnpm"
