@@ -229,6 +229,66 @@ The following types are **FORBIDDEN** for any visual or layout prop:
 - ❌ `any` - Never allowed
 - ❌ `unknown` - Too permissive
 
+### CVA-Derived Public Typing (FORBIDDEN)
+
+**Rule:** CVA (`class-variance-authority` / `tokenCVA`) is an **internal implementation tool** and **MUST NOT** define or leak public types.
+
+**FORBIDDEN Patterns:**
+
+```typescript
+// ❌ FORBIDDEN - VariantProps in public API
+import { type VariantProps } from "class-variance-authority";
+
+export type ButtonProps = VariantProps<typeof buttonVariants>;
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  // ❌ This exposes CVA-derived types in public API
+}
+
+// ❌ FORBIDDEN - CVA-derived variant types
+variant?: VariantProps<typeof buttonVariants>["variant"];
+
+// ❌ FORBIDDEN - Inferring public types from CVA
+export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
+```
+
+**REQUIRED Pattern (see `docs/structure/TYPING_STANDARD.md`):**
+
+```typescript
+// ✅ REQUIRED - Explicit union types in public API
+export const BUTTON_VARIANTS = [
+  "primary",
+  "secondary",
+  "accent",
+  "outline",
+  "ghost",
+  "link",
+  "destructive",
+] as const;
+
+export type ButtonVariant = typeof BUTTON_VARIANTS[number];
+
+export const BUTTON_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
+
+export type ButtonSize = typeof BUTTON_SIZES[number];
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant; // ✅ Explicit union type
+  size?: ButtonSize; // ✅ Explicit union type
+}
+```
+
+**Rationale:**
+- Public component APIs **MUST** be explicitly typed
+- Inference from implementation details (CVA) is **FORBIDDEN**
+- CVA may exist internally, but public props **MUST** reference explicit union types
+- This ensures type safety, IDE autocomplete, and architectural stability
+
+**Reference:** For complete public API typing rules, see `docs/structure/TYPING_STANDARD.md` (MANDATORY architectural standard). For general TypeScript implementation guidance, see `docs/structure/TYPESCRIPT_GENERAL_RULES.md` (secondary, does not override `TYPING_STANDARD.md`).
+
 ### Allowed Exceptions (Non-Visual Props)
 
 The following props are **ALLOWED** to use `string` or other non-token types:
@@ -458,6 +518,33 @@ export interface ButtonProps {
   radius?: ResponsiveRadius;
 }
 ```
+
+### Pattern 7: CVA-Derived Public Types
+
+```typescript
+// ❌ FORBIDDEN - VariantProps in public API
+import { type VariantProps } from "class-variance-authority";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  // ❌ CVA-derived types in public API
+}
+
+// ❌ FORBIDDEN - CVA-derived variant types
+variant?: VariantProps<typeof buttonVariants>["variant"];
+
+// ✅ CORRECT - Explicit union types (see TYPING_STANDARD.md)
+export const BUTTON_VARIANTS = ["primary", "secondary", "accent"] as const;
+export type ButtonVariant = typeof BUTTON_VARIANTS[number];
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant; // ✅ Explicit union type
+}
+```
+
+**Reference:** For complete public API typing rules, see `docs/structure/TYPING_STANDARD.md` (MANDATORY architectural standard).
 
 ### Pattern 5: Non-Canonical Responsive Types
 
@@ -857,6 +944,8 @@ Any token system modifications require:
 - **Architecture Lock:** [Architecture Lock](./TUI_ARCHITECTURE_LOCK.md) (🔒 **LOCKED**)
 - **Component Rules:** `docs/architecture/CURSOR_UI_RULES.md`
 - **Linting Rules:** `docs/architecture/LINTING_RULES.md`
+- **Typing Standard:** `docs/structure/TYPING_STANDARD.md` - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED, PRIMARY AUTHORITY)
+- **General TypeScript Rules:** `docs/structure/TYPESCRIPT_GENERAL_RULES.md` - General TypeScript implementation rules (SECONDARY GUIDANCE, does not override `TYPING_STANDARD.md`)
 
 ---
 

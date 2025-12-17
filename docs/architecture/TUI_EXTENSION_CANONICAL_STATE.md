@@ -120,73 +120,79 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 2. **Alert** - `src/components/ui/alert.tsx`
    - Exports: `Alert`, `AlertProps`, `alertVariants`
 
-3. **Icon** - `src/components/icon/Icon.tsx`
+3. **Link** - `src/PRIMITIVES/Link/Link.tsx`
+   - Exports: `Link`, `LinkProps`, `linkVariants`
+
+4. **Badge** - `src/PRIMITIVES/Badge/Badge.tsx`
+   - Exports: `Badge`, `BadgeProps`, `badgeVariants`
+
+5. **Icon** - `src/components/icon/Icon.tsx`
    - Exports: `Icon`, `IconProps`, `iconVariants`
 
-4. **Icon Components** - `src/icons/`
+6. **Icon Components** - `src/icons/`
    - Exports: `IconArrowRight`, `IconCalendar`, `IconCheck`, `IconChevronDown`, `IconChevronRight`, `IconClose`, `IconError`, `IconInfo`, `IconLocation`, `IconMenu`, `IconSearch`, `IconSuccess`, `IconWarning`
    - Registry: `ICONS_MAP`
 
 ### Typography Components
 
-5. **Text** - `src/components/ui/text.tsx`
+7. **Text** - `src/components/ui/text.tsx`
    - **Status:** ✅ **LOCKED** (2025-12-15)
    - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Text`, `TextProps`, `TextSize`, `TextWeight`, `textVariants`
 
-6. **Body** - `src/components/ui/body.tsx`
+8. **Body** - `src/components/ui/body.tsx`
    - **Status:** ✅ **LOCKED** (2025-12-15)
    - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Body`, `BodyProps`, `bodyVariants`
 
-7. **Caption** - `src/components/ui/caption.tsx`
+9. **Caption** - `src/components/ui/caption.tsx`
    - **Status:** ✅ **LOCKED** (2025-12-15)
    - **Rule:** DO NOT modify, extend, or create alternatives
    - Exports: `Caption`, `CaptionProps`, `captionVariants`
 
-8. **Code** - `src/components/ui/code.tsx`
-   - **Status:** ✅ **LOCKED** (2025-12-15)
-   - **Rule:** DO NOT modify, extend, or create alternatives
-   - Exports: `Code`, `CodeProps`, `codeVariants`
+10. **Code** - `src/components/ui/code.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - Exports: `Code`, `CodeProps`, `codeVariants`
 
-9. **Display** - `src/components/ui/display.tsx`
-   - **Status:** ✅ **LOCKED** (2025-12-15)
-   - **Rule:** DO NOT modify, extend, or create alternatives
-   - Exports: `Display`, `DisplayProps`, `displayVariants`
+11. **Display** - `src/components/ui/display.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - Exports: `Display`, `DisplayProps`, `displayVariants`
 
-10. **Heading** - `src/components/ui/heading.tsx`
+12. **Heading** - `src/components/ui/heading.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
     - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Heading`, `HeadingProps`, `headingVariants`
 
-11. **Lead** - `src/components/ui/lead.tsx`
+13. **Lead** - `src/components/ui/lead.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
     - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Lead`, `LeadProps`, `leadVariants`
 
-12. **Label** - `src/components/ui/label.tsx`
+14. **Label** - `src/components/ui/label.tsx`
     - Exports: `Label`, `LabelProps`, `labelVariants`
 
 ### Form Components
 
-13. **Checkbox** - `src/components/checkbox/Checkbox.tsx`
+15. **Checkbox** - `src/components/checkbox/Checkbox.tsx`
     - Exports: `Checkbox`, `CheckboxProps`, `checkboxVariants`
 
-14. **Input** - `src/components/input/Input.tsx`
+16. **Input** - `src/components/input/Input.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
     - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Input`, `InputProps`, `InputSize`, `InputVariant`, `inputVariants`
 
-15. **Radio** - `src/components/radio/Radio.tsx`
+17. **Radio** - `src/components/radio/Radio.tsx`
     - Exports: `Radio`, `RadioProps`, `radioVariants`, `RadioGroup`, `RadioGroupProps`
 
-16. **Textarea** - `src/components/textarea/Textarea.tsx`
+18. **Textarea** - `src/components/textarea/Textarea.tsx`
     - Exports: `Textarea`, `TextareaProps`, `textareaVariants`
 
-17. **Switch** - `src/components/switch/Switch.tsx`
+19. **Switch** - `src/components/switch/Switch.tsx`
     - Exports: `Switch`, `SwitchProps`, `switchHandleStateVariants`, `switchHandleVariants`, `switchTrackVariants`
 
-18. **Field** - `src/components/ui/field.tsx`
+20. **Field** - `src/components/ui/field.tsx`
     - Exports: `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
 
 ### Layout Components
@@ -424,17 +430,18 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
    - **Status:** RESTRICTED
    - **Rule:** DO NOT USE - Use `Button` from `src/components/ui/button.tsx` instead
 
-9. **Link** - `src/components/primitives/Link.tsx`
+9. **Link** (legacy path) - `src/components/primitives/Link.tsx`
    - **Status:** RESTRICTED
-   - **Rule:** DO NOT USE
+   - **Rule:** DO NOT USE - Use `Link` from `src/PRIMITIVES/Link/Link.tsx` (exported) instead
 
-10. **Badge** - `src/components/primitives/Badge.tsx`
+10. **Badge** (legacy path) - `src/components/primitives/Badge.tsx`
     - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+    - **Rule:** DO NOT USE - Use `Badge` from `src/PRIMITIVES/Badge/Badge.tsx` (exported) instead
 
-11. **Divider** - `src/components/primitives/Divider.tsx`
+11. **Divider** - `src/PRIMITIVES/Divider/Divider.tsx`
     - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+    - **Rule:** DO NOT USE - RESTRICTED per API decision (TUI_API_DECISION_PRIMITIVES_EXPORT)
+    - **Rationale:** Minimal value over native HTML `<hr>`; token usage is basic; context-specific rather than universal UI primitive
 
 12. **Input** (primitive) - `src/components/primitives/Input.tsx`
     - **Status:** RESTRICTED
@@ -548,9 +555,10 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 ### DO NOT USE - Image Components
 
-36. **Image** - `src/components/image/Image.tsx`
+36. **Image** - `src/PRIMITIVES/Image/Image.tsx`
     - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+    - **Rule:** DO NOT USE - RESTRICTED per API decision (TUI_API_DECISION_PRIMITIVES_EXPORT)
+    - **Rationale:** Domain-specific concerns (skeleton loading, fallback handling) belong in application code, not design system; violates token-driven architecture; image optimization is application-specific
 
 ### DO NOT USE - Auth Components
 

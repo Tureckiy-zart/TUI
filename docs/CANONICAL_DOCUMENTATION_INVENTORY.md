@@ -2,7 +2,7 @@
 
 **Date:** 2025-12-16  
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 36  
+**Total Canonical Documents:** 38  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001)
 
 ---
@@ -86,6 +86,8 @@ These documents define architecture rules, locks, and development guidelines.
 
 | Path | Description | Status |
 |------|-------------|--------|
+| `docs/architecture/CANONICAL_LOCK.md` | Canonical architecture lock - authoritative source for canonical state and forbidden regressions | **LOCKED** |
+| `docs/architecture/CANONICAL_STATE_FINAL.md` | Final truth snapshot of canonical state - definitive record of resolved architectural risks | **FINAL** |
 | `docs/architecture/TUI_ARCHITECTURE_LOCK.md` | UI architecture lock document - references FINAL_FOUNDATION_LOCK | **LOCKED** |
 | `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md` | Extension layer canonical state - Extension layer reference | **ACTIVE** |
 | `docs/architecture/UI_ARCHITECTURE_RULES.md` | UI architecture rules - Architecture rules reference | **ACTIVE** |
@@ -94,7 +96,7 @@ These documents define architecture rules, locks, and development guidelines.
 | `docs/architecture/LINTING_RULES.md` | Linting standards and rules - Linting reference | **ACTIVE** |
 | `docs/architecture/TOOLING_DECISIONS.md` | Tooling decisions and rationale - Tooling reference | **ACTIVE** |
 
-**Total:** 7 files
+**Total:** 9 files
 
 ---
 
@@ -200,6 +202,8 @@ These documents provide API and integration references.
 | `docs/architecture/TUI_TOKEN_SYSTEM.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
 | `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (ACTIVE) | Extension boundary |
 | `docs/architecture/AUTHORITY_MAP.md` | Authority Navigation | Reference (ACTIVE) | Authority navigation |
+| `docs/architecture/CANONICAL_LOCK.md` | Architecture Rules | Lock (LOCKED) | Canonical architecture lock |
+| `docs/architecture/CANONICAL_STATE_FINAL.md` | Architecture Rules | Reference (FINAL) | Final truth snapshot |
 | `docs/architecture/TUI_ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | Architecture lock |
 | `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md` | Architecture Rules | Reference (ACTIVE) | Extension state |
 | `docs/architecture/UI_ARCHITECTURE_RULES.md` | Architecture Rules | Reference (ACTIVE) | Architecture rules |
@@ -222,7 +226,7 @@ These documents provide API and integration references.
 | `docs/README.md` | Entry Point | Reference (ACTIVE) | Documentation index |
 | `docs/README_GPT.md` | Entry Point | Reference (ACTIVE) | GPT context |
 
-**Total:** 36 files
+**Total:** 38 files
 
 ---
 
@@ -233,8 +237,8 @@ These documents provide API and integration references.
 
 ### Verification
 
-- ✅ All 36 files from `docs/` are listed
-- ✅ File count matches actual `docs/` count (36 files)
+- ✅ All 38 files from `docs/` are listed
+- ✅ File count matches actual `docs/` count (38 files)
 - ✅ Categories are clear and non-overlapping
 - ✅ No references to archived content
 - ✅ All files are canonical, authoritative, or active documentation
@@ -247,6 +251,6 @@ These documents provide API and integration references.
 
 ---
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-17  
 **Inventory Version:** 1.0  
 **Related Task:** DOCS_ARCHIVE_RESTRUCTURE_001

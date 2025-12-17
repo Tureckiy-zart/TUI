@@ -150,3 +150,6 @@ vite.config.ts.timestamp-*
 # docs_archive/ contains archived documentation that is NOT source of truth
 # All canonical and authority documents remain in docs/
 docs_archive/
+
+# Documentation backup folders (temporary backups)
+docs/backup_*/

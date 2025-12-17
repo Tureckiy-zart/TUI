@@ -2,7 +2,7 @@
 
 **Status:** ✅ LOCKED  
 **Priority:** BLOCKER  
-**Date Created:** 2025-12-19  
+**Date Created:** 2025-12-16  
 **Version:** 1.1  
 **Enforcement:** TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN
 
@@ -398,7 +398,7 @@ Any Elevation Authority modifications require:
   - All rules are immutable and require unlock procedure for modifications
   - Future changes require Authority versioning (v2+) or explicit unlock procedure
 
-- **v1.0** (2025-12-19): Initial Elevation Authority Contract definition
+- **v1.0** (2025-12-16): Initial Elevation Authority Contract definition
   - Defined canonical elevation token scale (shadows, colored shadows, glow effects, focus rings)
   - Defined z-index scale and component rules
   - Established as immutable authority
@@ -407,7 +407,7 @@ Any Elevation Authority modifications require:
 
 **Status:** ✅ **LOCKED**  
 **Version:** 1.1  
-**Date Created:** 2025-12-19  
+**Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-16  
 **Priority:** BLOCKER  
 **Authority Domain:** Elevation Authority

@@ -2,7 +2,7 @@
 
 **Status:** ✅ LOCKED  
 **Priority:** BLOCKER  
-**Date Created:** 2025-12-19  
+**Date Created:** 2025-12-16  
 **Version:** 1.1  
 **Enforcement:** TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN
 
@@ -365,7 +365,7 @@ Any Spacing Authority modifications require:
   - All rules are immutable and require unlock procedure for modifications
   - Future changes require Authority versioning (v2+) or explicit unlock procedure
 
-- **v1.0** (2025-12-19): Initial Spacing Authority Contract definition
+- **v1.0** (2025-12-16): Initial Spacing Authority Contract definition
   - Defined canonical spacing token scale (base, semantic, layout)
   - Defined component rules and forbidden patterns
   - Established as immutable authority
@@ -374,7 +374,7 @@ Any Spacing Authority modifications require:
 
 **Status:** ✅ **LOCKED**  
 **Version:** 1.1  
-**Date Created:** 2025-12-19  
+**Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-16  
 **Priority:** BLOCKER  
 **Authority Domain:** Spacing Authority

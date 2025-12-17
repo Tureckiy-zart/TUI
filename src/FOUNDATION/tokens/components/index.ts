@@ -11,6 +11,9 @@
 // Alert tokens
 export { ALERT_TOKENS, type AlertVariant } from "./alert";
 
+// Badge tokens
+export { BADGE_TOKENS, type BadgeVariant } from "./badge";
+
 // Button tokens
 export {
   BUTTON_TOKENS,
@@ -249,6 +252,15 @@ export { PAGINATION_TOKENS, type PaginationSize, type PaginationState } from "./
 
 // Icon tokens
 export { ICON_TOKENS, type IconColor, type IconSize, type IconStroke } from "./icon";
+
+// Link tokens
+export {
+  LINK_TOKENS,
+  type LinkFontSize,
+  type LinkHeight,
+  type LinkPaddingHorizontal,
+  type LinkPaddingVertical,
+} from "./link";
 
 // Motion tokens
 export {

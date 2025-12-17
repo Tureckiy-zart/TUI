@@ -27,7 +27,8 @@ export default function ThemingPage() {
           </p>
 
           <LiveExample>
-            {`import { ThemeProvider, Button } from '@tenerife.music/ui';
+            {`import { ThemeProvider } from '@tenerife.music/ui/theme';
+import { Button } from '@tenerife.music/ui';
 
 export default function App() {
   return (
@@ -69,7 +70,8 @@ export default function App() {
           </p>
 
           <LiveExample>
-            {`import { ThemeProvider, Button } from '@tenerife.music/ui';
+            {`import { ThemeProvider } from '@tenerife.music/ui/theme';
+import { Button } from '@tenerife.music/ui';
 
 export default function App() {
   return (
@@ -93,7 +95,8 @@ export default function App() {
           </p>
 
           <LiveExample>
-            {`import { ThemeProvider, useTheme, Button } from '@tenerife.music/ui';
+            {`import { ThemeProvider, useTheme } from '@tenerife.music/ui/theme';
+import { Button } from '@tenerife.music/ui';
 
 function ThemeToggle() {
   const { mode, toggleMode } = useTheme();

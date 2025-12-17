@@ -887,6 +887,70 @@ export interface ComponentProps {
 
 **Rationale:** Foundation provides stable infrastructure. Extensions provide evolving domain functionality.
 
+### Public API Typing Standards (MANDATORY)
+
+**Rule:** All public component APIs **MUST** follow the architectural typing standard defined in `docs/structure/TYPING_STANDARD.md`.
+
+**Source of Truth:** `docs/structure/TYPING_STANDARD.md` is the **REQUIRED, ENFORCED architectural standard** that overrides:
+- Local coding preferences
+- General TypeScript guidelines
+- CVA-derived typing patterns
+- Any other typing conventions
+
+**Mandatory Requirements:**
+
+1. **Explicit Union Types (REQUIRED):**
+   - All `variant`, `size`, and similar props **MUST** use explicit union types
+   - Inline string unions in props are **FORBIDDEN**
+   - `string` as a public variant type is **FORBIDDEN**
+
+2. **CVA Is NOT a Public Type Source (FORBIDDEN):**
+   - `VariantProps<typeof cvaVariants>` in public APIs is **FORBIDDEN**
+   - CVA may exist internally, but public props **MUST** reference explicit union types
+   - Inferring public types from CVA is **FORBIDDEN**
+
+3. **CVA Variant Maps MUST Be Type-Constrained:**
+   - All variant maps passed into CVA **MUST** use `satisfies Record<...>` constraints
+   - This guarantees no missing variants and immediate TypeScript failure on mismatch
+
+4. **Public Component Props MUST Use Canonical Types:**
+   - Public component props **MUST** reference canonical union types
+   - `variant?: string` is **FORBIDDEN**
+   - Inline unions in props are **FORBIDDEN**
+   - CVA-derived types in public APIs are **FORBIDDEN**
+
+**Enforcement:**
+
+- Violations are considered **architectural violations**
+- Violations are **review blockers**
+- AI assistants **MUST** follow `TYPING_STANDARD.md` and **NEVER** generate CVA-derived public types
+- Manual review **MUST** verify compliance with `TYPING_STANDARD.md`
+
+### Typing System
+
+**📚 Typing System Index:** For a complete overview of the typing system architecture, hierarchy, and navigation guide, see [`docs/structure/TYPING_SYSTEM.md`](./structure/TYPING_SYSTEM.md).
+
+The typing system consists of two documents with explicit priority ordering:
+
+**Priority Order:**
+1. **`docs/structure/TYPING_STANDARD.md`** — **PRIMARY AUTHORITY** for all public API typing
+   - Mandatory architectural standard
+   - Governs variant, size, and similar prop type definitions
+   - Takes precedence over all other typing guidelines
+2. **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** — **SECONDARY GUIDANCE** for general TypeScript implementation
+   - Provides implementation guidance for internal code patterns
+   - Does NOT override `TYPING_STANDARD.md` for public API typing
+   - Use for general TypeScript best practices outside of public API typing
+
+**Hierarchy Rule:** Architectural standard (`TYPING_STANDARD.md`) > General rules (`TYPESCRIPT_GENERAL_RULES.md`)
+
+**Related Documents:**
+- **`docs/structure/TYPING_SYSTEM.md`** - Typing system index and navigation guide (canonical entry point for typing rules)
+- **`docs/structure/TYPING_STANDARD.md`** - **MANDATORY** architectural typing standard (this document takes precedence)
+- **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** - General TypeScript implementation rules (secondary, does not override `TYPING_STANDARD.md`)
+
+**Rationale:** Public API typing is an architectural concern, not a stylistic preference. Explicit union types ensure type safety, IDE autocomplete, and long-term architectural stability. CVA is an internal implementation tool and must not leak into public APIs.
+
 ---
 
 ## 9. Development Workflow
@@ -1302,6 +1366,9 @@ This document is the **single source of truth** for TenerifeUI architecture. How
 - **`docs/architecture/TUI_ARCHITECTURE_LOCK.md`** - Architecture lock details (supplementary to this document)
 - **`docs/architecture/UI_ARCHITECTURE_RULES.md`** - Radix UI and token union rules (supplementary to this document)
 - **`docs/architecture/CURSOR_UI_RULES.md`** - Cursor AI development rules (supplementary to this document)
+- **`docs/structure/TYPING_SYSTEM.md`** - Typing system index and navigation guide (canonical entry point for typing rules)
+- **`docs/structure/TYPING_STANDARD.md`** - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED)
+- **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** - General TypeScript implementation rules (secondary to `TYPING_STANDARD.md`)
 
 **Note:** This document supersedes all other architecture documentation. The documents listed above are supplementary and provide additional detail, but this document contains the canonical rules and principles. **CANONICAL_LOCK.md** is the authoritative source for canonical architecture state and forbidden regressions.
 
