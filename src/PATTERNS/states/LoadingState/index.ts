@@ -5,5 +5,3 @@
  */
 
 export * from "./DomainSkeleton";
-export * from "./EventCardSkeleton";
-export * from "./VenueCardSkeleton";

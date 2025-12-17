@@ -60,16 +60,6 @@ export {
   DATA_TOKENS,
   type DataListLabelWidth,
   type DataListRowPadding,
-  DOMAIN_TOKENS,
-  type DomainCardBadge,
-  type DomainCardImage,
-  type DomainCardLayout,
-  type DomainCardMetadata,
-  type DomainCardMotion,
-  type DomainCardPriceCapacity,
-  type DomainCardSkeleton,
-  type DomainCardSkeletonContentWidth,
-  type DomainCardSurface,
   type EmptyStateIconSize,
   INPUT_TOKENS,
   type InputFontSize,
@@ -288,6 +278,26 @@ export {
 // Alert component (CVA-based, token-driven)
 export { Alert, type AlertProps, alertVariants } from "./PRIMITIVES/Alert";
 
+// Link component (CVA-based, token-driven)
+export {
+  Link,
+  LINK_SIZES,
+  LINK_VARIANTS,
+  type LinkProps,
+  type LinkSize,
+  type LinkVariant,
+  linkVariants,
+} from "./PRIMITIVES/Link";
+
+// Badge component (CVA-based, token-driven)
+export {
+  Badge,
+  BADGE_VARIANTS,
+  type BadgeProps,
+  type BadgeVariant,
+  badgeVariants,
+} from "./PRIMITIVES/Badge";
+
 // Typography components (CVA-based, token-driven)
 export { Heading, type HeadingProps, headingVariants } from "./PRIMITIVES/Heading";
 
@@ -369,8 +379,7 @@ export {
 } from "./PRIMITIVES/Radio";
 export { Textarea, type TextareaProps, textareaVariants } from "./PRIMITIVES/Textarea";
 
-// Progress and Skeleton components (token-driven)
-export { Progress, type ProgressProps } from "./PRIMITIVES/Progress";
+// Skeleton component (token-driven)
 export { Skeleton, type SkeletonProps, skeletonVariants } from "./PRIMITIVES/Skeleton";
 
 // ============================================================================
@@ -639,40 +648,3 @@ export {
   IconSuccess,
   IconWarning,
 } from "./icons";
-
-// ============================================================================
-// DOMAIN COMPONENTS
-// ============================================================================
-// Domain-specific card components (EventCard, VenueCard, TicketCard, etc.)
-export type {
-  EventCardLayout,
-  EventCardProps,
-  EventCardSize,
-  EventCardVariant,
-} from "./DOMAIN/sections/EventCard";
-export { EventCard } from "./DOMAIN/sections/EventCard";
-export { ArtistCard } from "./PATTERNS/cards/cards/ArtistCard";
-export type {
-  ArtistCardProps,
-  ArtistCardSize,
-  ArtistCardVariant,
-} from "./PATTERNS/cards/cards/ArtistCard/ArtistCard.types";
-export { CategoryCard } from "./PATTERNS/cards/cards/CategoryCard";
-export type {
-  CategoryCardProps,
-  CategoryCardSize,
-  CategoryCardVariant,
-} from "./PATTERNS/cards/cards/CategoryCard/CategoryCard.types";
-export { PromoCard } from "./PATTERNS/cards/cards/PromoCard";
-export type {
-  PromoCardProps,
-  PromoCardSize,
-  PromoCardVariant,
-} from "./PATTERNS/cards/cards/PromoCard/PromoCard.types";
-export { TicketCard } from "./PATTERNS/cards/cards/TicketCard";
-export type {
-  TicketAvailability,
-  TicketCardProps,
-  TicketCardSize,
-  TicketCardVariant,
-} from "./PATTERNS/cards/cards/TicketCard/TicketCard.types";

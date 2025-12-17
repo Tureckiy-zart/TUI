@@ -1,3 +1,3 @@
 "use client";
 
-export { Badge, type BadgeProps, badgeVariants } from "./Badge";
+export { Badge, BADGE_VARIANTS, type BadgeProps, type BadgeVariant, badgeVariants } from "./Badge";

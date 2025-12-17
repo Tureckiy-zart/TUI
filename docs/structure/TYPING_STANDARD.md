@@ -1,534 +1,268 @@
-# 🔷 Global TypeScript Typing Standard
 
-**Version:** 1.0  
-**Date:** 2025-12-16  
-**Status:** ✅ ACTIVE
+# TYPING STANDARD
 
----
-
-## 📋 Overview
-
-This document defines the global TypeScript typing standards for Tenerife UI library. All code must adhere to these standards to ensure type safety, maintainability, and excellent developer experience.
+**Status:** MANDATORY  
+**Scope:** @tenerife.music/ui  
+**Applies to:** ALL UI components (Foundation + Extension)  
+**Audience:** Maintainers, Contributors, Cursor AI
 
 ---
 
-## 🎯 Core Principles
+## Typing System Overview
 
-1. **Strict Type Safety**: No implicit `any`, all types explicitly defined
-2. **Full Type Coverage**: Every component, token, hook, and utility must be fully typed
-3. **Native Type Extension**: All components must extend appropriate native HTML types
-4. **Type Unions for Tokens**: All tokens must export type unions via `keyof typeof`
-5. **VariantProps Integration**: CVA-based components must use `VariantProps` for variants
+This document is the **top-level authority** for PUBLIC API typing in the `@tenerife.music/ui` library.
 
----
+**📚 Typing System Index:** For a complete overview of the typing system architecture, hierarchy, and navigation guide, see [`docs/structure/TYPING_SYSTEM.md`](./TYPING_SYSTEM.md).
 
-## 📦 Part 1: Component Typing
+**Authority Hierarchy:**
+- **This document** (`docs/structure/TYPING_STANDARD.md`) — **PRIMARY AUTHORITY** for all public API typing decisions
+- **General TypeScript Rules** (`docs/structure/TYPESCRIPT_GENERAL_RULES.md`) — Secondary implementation guidance (does not override this document)
 
-### Component Props Interface
+This document governs:
+- Architectural typing decisions for public component APIs
+- Variant, size, and similar prop type definitions
+- CVA usage boundaries in public APIs
+- Explicit union type requirements
 
-**ALWAYS** define a props interface for every component:
-
-```typescript
-// ✅ Good
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
-
-// ❌ Bad - No props interface
-export const Button = ({ children, ...rest }) => { ... }
-```
-
-### Component Props Naming
-
-**ALWAYS** use PascalCase with `Props` suffix:
-
-- `ButtonProps` for Button component
-- `CardProps` for Card component
-- `ModalProps` for Modal component
-
-### Native Type Extension
-
-**ALWAYS** extend appropriate native HTML types:
-
-```typescript
-// Button extends button HTML attributes
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> { ... }
-
-// Input extends input HTML attributes
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> { ... }
-
-// Div extends div HTML attributes
-export interface DivProps
-  extends React.HTMLAttributes<HTMLDivElement> { ... }
-```
-
-### CVA Variant Props
-
-**ALWAYS** use `VariantProps` for CVA-based components:
-
-```typescript
-import { cva, type VariantProps } from "class-variance-authority";
-
-const buttonVariants = cva("base-classes", {
-  variants: {
-    variant: { ... },
-    size: { ... },
-  },
-});
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> { ... }
-```
-
-### Event Handler Typing
-
-**ALWAYS** type event handlers explicitly:
-
-```typescript
-// ✅ Good
-onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-
-// ❌ Bad
-onClick?: any;
-onChange?: (e: any) => void;
-```
-
-### Component Export Types
-
-**ALWAYS** export component props types:
-
-```typescript
-// Component file
-export interface ButtonProps { ... }
-export const Button: React.FC<ButtonProps> = ... ;
-
-// Index file
-export type { ButtonProps } from "./Button";
-export { Button } from "./Button";
-```
+**This document takes precedence over all other typing guidelines**, including general TypeScript coding practices, when it comes to public API typing.
 
 ---
 
-## 🎨 Part 2: Token Typing
+## 1. Purpose
 
-### Token Const Assertions
+This document defines **mandatory typing rules** for all public APIs
+in the `@tenerife.music/ui` library.
 
-**ALWAYS** use `as const` for token objects:
+The goal is to ensure:
 
-```typescript
-export const spacing = {
-  0: "0",
-  1: "0.25rem",
-  2: "0.5rem",
-  // ...
-} as const;
-```
+- Explicit, readable, and predictable public APIs
+- Strong DX with full IDE autocomplete
+- Clear separation between **public contracts** and **internal mechanisms**
+- Long-term architectural stability
 
-### Token Type Unions
-
-**ALWAYS** export type unions for token keys:
-
-```typescript
-export const spacing = {
-  0: "0",
-  1: "0.25rem",
-  2: "0.5rem",
-} as const;
-
-export type Spacing = keyof typeof spacing;
-// Result: type Spacing = 0 | 1 | 2
-```
-
-### Token Indexed Access
-
-**ALWAYS** use `typeof` and `keyof` for token types:
-
-```typescript
-// ✅ Good
-export type Spacing = keyof typeof spacing;
-export type SemanticSpacing = keyof typeof semanticSpacing;
-export type ElevationShadow = keyof typeof elevationShadows;
-
-// ❌ Bad
-export type Spacing = string;
-export type SemanticSpacing = "xs" | "sm" | "md" | "lg";
-```
-
-### Token Value Types
-
-**ALWAYS** define value types when needed:
-
-```typescript
-export type ColorScale = {
-  50: string;
-  100: string;
-  200: string;
-  // ...
-};
-
-export const primaryColors: ColorScale = { ... };
-```
+These rules are **NOT stylistic**.  
+They are **architectural requirements**.
 
 ---
 
-## 🎭 Part 3: Theme Typing
+## 2. Core Principle
 
-### Theme Mode Types
+> **Public component APIs MUST be explicitly typed.**  
+> **Inference from implementation details is forbidden.**
 
-**ALWAYS** use literal union types for modes:
-
-```typescript
-export type Mode = "day" | "night";
-export type ThemeName = "default" | "dark" | "brand";
-```
-
-### Theme Override Types
-
-**ALWAYS** define strict interface for theme overrides:
-
-```typescript
-export interface ThemeOverride {
-  name: string;
-  description?: string;
-  primaryColors?: Partial<ColorScale>;
-  // ...
-}
-```
-
-### Theme Provider Props
-
-**ALWAYS** type ThemeProvider props:
-
-```typescript
-export interface ThemeProviderProps {
-  children: React.ReactNode;
-  defaultMode?: Mode;
-  defaultTheme?: ThemeName;
-  storageKey?: string;
-  themeStorageKey?: string;
-  enableSystem?: boolean;
-}
-```
-
-### Theme Context Types
-
-**ALWAYS** type context values:
-
-```typescript
-export interface ThemeContextValue {
-  mode: Mode;
-  theme: ThemeName;
-  setMode: (mode: Mode) => void;
-  setTheme: (theme: ThemeName) => void;
-  toggleMode: () => void;
-}
-```
+CVA (`class-variance-authority` / `tokenCVA`) is an **internal implementation tool**  
+and MUST NOT define or leak public types.
 
 ---
 
-## 🪝 Part 4: Hook Typing
+## 3. Mandatory Rules
 
-### Hook Return Types
+### RULE 1 — Explicit Variant Union Types (REQUIRED)
 
-**ALWAYS** define return type interfaces:
+Each component exposing `variant`, `size`, or similar props  
+**MUST define explicit union types**.
 
-```typescript
-export interface UseModalReturn {
-  isOpen: boolean;
-  data: unknown;
-  open: (data?: unknown) => void;
-  close: () => void;
-  toggle: () => void;
-}
+#### ✅ REQUIRED
 
-export function useModal(initialState?: boolean): UseModalReturn { ... }
+```ts
+export const BUTTON_VARIANTS = [
+  "primary",
+  "secondary",
+  "accent",
+  "outline",
+  "ghost",
+  "link",
+  "destructive",
+] as const
+
+export type ButtonVariant = typeof BUTTON_VARIANTS[number]
+
+export const BUTTON_SIZES = ["xs", "sm", "md", "lg", "xl"] as const
+
+export type ButtonSize = typeof BUTTON_SIZES[number]
 ```
 
-### Hook Generic Types
+#### ❌ FORBIDDEN
 
-**ALWAYS** use generics for flexible hooks:
-
-```typescript
-export function useModal<T = unknown>(initialState?: boolean): UseModalReturn<T> {
-  // ...
-}
-```
+- Inline string unions in props
+- `string` as a public variant type
+- Inferring public types from CVA
 
 ---
 
-## 🚫 Part 5: Type Usage Guidelines
+### RULE 2 — CVA Is NOT a Public Type Source (FORBIDDEN)
 
-### `any` Type - Temporary Allowance
+CVA (`cva`, `tokenCVA`) MUST NOT be used as a source of public types.
 
-**Current Status:** Explicit `any` is temporarily allowed by ESLint configuration while migrating legacy code to proper types. However, `any` should be avoided whenever possible.
+#### ❌ FORBIDDEN
 
-**TypeScript Configuration:** `noImplicitAny: true` - implicit `any` is still forbidden by TypeScript compiler.
+```ts
+export type ButtonProps = VariantProps<typeof buttonVariants>
 
-**ESLint Configuration:** `@typescript-eslint/no-explicit-any: "off"` - explicit `any` is temporarily allowed.
+variant?: VariantProps<typeof buttonVariants>["variant"]
 
-**Guidelines:**
-
-```typescript
-// ⚠️ Temporarily allowed (but discouraged)
-const data: any = ...;
-function process(data: any): any { ... }
-
-// ✅ Preferred - Use unknown or specific type
-const data: unknown = ...;
-function process<T>(data: T): T { ... }
-
-// ❌ Still forbidden - implicit any (caught by TypeScript)
-function process(data) { ... } // Error: Parameter 'data' implicitly has an 'any' type
+export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"]
 ```
 
-**Migration Path:** When encountering `any` in code:
-1. Prefer `unknown` for truly unknown types
-2. Use generics for flexible but type-safe code
-3. Define specific interfaces/types when structure is known
-4. Use type guards for runtime type checking
+#### ✅ REQUIRED
 
-### `any[]` Arrays
-
-**Guidelines:**
-
-```typescript
-// ⚠️ Temporarily allowed (but discouraged)
-const items: any[] = [...];
-
-// ✅ Preferred - Use specific type or generic
-interface Event {
-  id: string;
-  title: string;
-}
-const items: Event[] = [...];
-// OR
-const items: Array<Event> = [...];
-```
-
-### Index Signature with `any`
-
-**Guidelines:**
-
-```typescript
-// ⚠️ Temporarily allowed (but discouraged)
-interface Config {
-  [key: string]: any;
-}
-
-// ✅ Preferred - Use unknown or Record
-interface Config {
-  [key: string]: unknown;
-}
-// OR
-type Config = Record<string, unknown>;
-```
-
-### No Implicit `any`
-
-**NEVER** rely on implicit `any` (enforced by TypeScript `noImplicitAny: true`):
-
-```typescript
-// ❌ Forbidden - implicit any (TypeScript error)
-function process(data) { ... }
-
-// ✅ Explicit type required
-function process(data: string) { ... }
-```
+- CVA types may exist internally
+- Public props MUST reference explicit union types
 
 ---
 
-## ✅ Part 6: Required Type Exports
+### RULE 3 — CVA Variant Maps MUST Be Type-Constrained
 
-### Component Type Exports
+All variant maps passed into CVA MUST be constrained
+using `satisfies Record<...>`.
 
-**ALWAYS** export component props types:
+#### ✅ REQUIRED
 
-```typescript
-// Button.tsx
-export interface ButtonProps { ... }
-
-// index.ts
-export type { ButtonProps } from "./Button";
-export { Button } from "./Button";
-```
-
-### Token Type Exports
-
-**ALWAYS** export token type unions:
-
-```typescript
-// spacing.ts
-export type Spacing = keyof typeof spacing;
-export type SemanticSpacing = keyof typeof semanticSpacing;
-
-// index.ts
-export type { Spacing, SemanticSpacing } from "./spacing";
-```
-
-### Hook Type Exports
-
-**ALWAYS** export hook return types:
-
-```typescript
-// useModal.ts
-export interface UseModalReturn { ... }
-
-// index.ts
-export type { UseModalReturn } from "./useModal";
-```
-
----
-
-## 🔍 Part 7: Type Checking Rules
-
-### Strict Mode Requirements
-
-**ALWAYS** ensure strict mode enabled:
-
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
-  }
-}
-```
-
-### Type Assertion Rules
-
-**NEVER** use `as` type assertions unless necessary:
-
-```typescript
-// ❌ Avoid unnecessary assertions
-const value = data as string;
-
-// ✅ Use type guards
-function isString(value: unknown): value is string {
-  return typeof value === "string";
-}
-if (isString(data)) {
-  const value = data; // TypeScript knows it's string
-}
-```
-
----
-
-## 📚 Part 8: Examples
-
-### Complete Component Example
-
-```typescript
-import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
-
-const buttonVariants = cva("base-classes", {
+```ts
+export const buttonVariants = tokenCVA({
   variants: {
     variant: {
       primary: "...",
       secondary: "...",
-    },
+      accent: "...",
+      outline: "...",
+      ghost: "...",
+      link: "...",
+      destructive: "...",
+    } satisfies Record<ButtonVariant, string>,
+
     size: {
+      xs: "...",
       sm: "...",
       md: "...",
-    },
+      lg: "...",
+      xl: "...",
+    } satisfies Record<ButtonSize, string>,
   },
-  defaultVariants: {
-    variant: "primary",
-    size: "md",
-  },
-});
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
-
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    // Implementation
-  },
-);
-
-Button.displayName = "Button";
+})
 ```
 
-### Complete Token Example
+This guarantees:
 
-```typescript
-export const spacing = {
-  0: "0",
-  1: "0.25rem",
-  2: "0.5rem",
-} as const;
-
-export type Spacing = keyof typeof spacing;
-export type SpacingValue = (typeof spacing)[Spacing];
-```
-
-### Complete Hook Example
-
-```typescript
-export interface UseCounterReturn {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
-  reset: () => void;
-}
-
-export function useCounter(initialValue = 0): UseCounterReturn {
-  const [count, setCount] = React.useState(initialValue);
-
-  const increment = React.useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []);
-
-  const decrement = React.useCallback(() => {
-    setCount((prev) => prev - 1);
-  }, []);
-
-  const reset = React.useCallback(() => {
-    setCount(initialValue);
-  }, [initialValue]);
-
-  return { count, increment, decrement, reset };
-}
-```
+- No missing variants
+- No extra undocumented variants
+- Immediate TypeScript failure on mismatch
 
 ---
 
-## ✅ Checklist
+### RULE 4 — Public Component Props MUST Use Canonical Types
 
-Before marking code as complete:
+Public component props MUST reference canonical union types.
 
-- [ ] All components have typed Props interfaces
-- [ ] All Props extend appropriate native HTML types
-- [ ] CVA components use VariantProps
-- [ ] All event handlers are explicitly typed
-- [ ] All tokens use `as const` and export type unions
-- [ ] All hooks have return type interfaces
-- [ ] Avoid `any` where possible (temporarily allowed but discouraged)
-- [ ] No implicit `any` (enforced by TypeScript)
-- [ ] All types are exported
-- [ ] Strict mode passes
-- [ ] Type enforcement script passes
+#### ✅ REQUIRED
+
+```ts
+export interface ButtonProps {
+  variant?: ButtonVariant
+  size?: ButtonSize
+}
+```
+
+#### ❌ FORBIDDEN
+
+- `variant?: string`
+- Inline unions in props
+- CVA-derived types in public APIs
 
 ---
 
-**Status:** ✅ ACTIVE  
-**Last Updated:** 2025-12-16
+## 4. File Structure Convention (RECOMMENDED)
+
+To keep typing discoverable and clean, the following structure is recommended:
+
+```
+button.types.ts  // explicit public unions
+button.tsx       // component implementation
+button.variants.ts  // CVA / tokenCVA definitions
+```
+
+Where:
+
+- `*.types.ts` — explicit public unions
+- `*.variants.ts` — CVA / tokenCVA definitions
+- `*.tsx` — component implementation
+
+This is **recommended**, not mandatory,
+but typing rules remain mandatory regardless of structure.
+
+---
+
+## 5. Scope of Application
+
+These rules apply to:
+
+- **All Extension components**
+- **All locked Extension components** (typing cleanup allowed)
+- **All new components**
+- **All refactors touching public APIs**
+
+### Foundation Components
+
+Foundation components:
+
+- MUST follow these rules for typing improvements
+- MUST NOT change behavior or public API semantics
+- Typing cleanup does NOT constitute UNLOCK.
+
+---
+
+## 6. Enforcement
+
+Violations of this document are considered:
+
+- ❌ Architectural violations
+- ❌ DX regressions
+- ❌ Review blockers
+
+Enforcement occurs via:
+
+- Canonical Context (`INTERNAL_CANONICAL_CONTEXT.md`)
+- Architecture Rules
+- Cursor AI Guard Rules
+- Manual Review
+
+---
+
+## 7. Golden Rules
+
+- **Explicit > Inferred**
+- **Public API > Internal convenience**
+- **Types are contracts, not implementation details**
+- **If CVA defines your public types — it is wrong**
+
+---
+
+## 8. Status
+
+This document is:
+
+- ✅ MANDATORY
+- ✅ CANONICAL
+- ✅ ENFORCED
+- ❌ NOT OPTIONAL
+- ❌ NOT A STYLE GUIDE
+
+---
+
+## 9. Related Documents
+
+**Typing System:**
+- **`docs/structure/TYPING_SYSTEM.md`** — Typing system index and navigation guide (canonical entry point)
+
+**Secondary Implementation Guidance:**
+- **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** — General TypeScript implementation rules and coding practices
+  - Provides implementation guidance for internal code patterns
+  - Does NOT override this document for public API typing
+  - Use for general TypeScript best practices outside of public API typing
+
+**Architecture Documents:**
+- **`docs/INTERNAL_CANONICAL_CONTEXT.md`** — References this document as MANDATORY architectural standard
+- **`docs/architecture/UI_ARCHITECTURE_RULES.md`** — References this document for CVA-derived typing rules
+- **`docs/architecture/CURSOR_UI_RULES.md`** — References this document as MANDATORY for AI assistants
+
+**Note:** For public API typing (variants, sizes, CVA boundaries), this document (`TYPING_STANDARD.md`) is the **REQUIRED, ENFORCED architectural standard** and takes precedence over all other typing guidelines.

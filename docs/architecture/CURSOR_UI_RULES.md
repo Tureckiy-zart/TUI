@@ -36,6 +36,61 @@ This document establishes permanent self-governing rules for Cursor when working
 
 ## 🔒 Enforced Rules
 
+### Rule 0: ARCHITECTURAL_TYPING_STANDARD (MANDATORY)
+
+**Rule:** Cursor AI **MUST ALWAYS** follow `docs/structure/TYPING_STANDARD.md` for all public API typing. CVA-derived public types are **FORBIDDEN**.
+
+**Typing Resolution Order:**
+1. **PRIMARY:** `docs/structure/TYPING_STANDARD.md` — **MANDATORY architectural standard** for public API typing (variants, sizes, CVA boundaries)
+2. **SECONDARY:** `docs/structure/TYPESCRIPT_GENERAL_RULES.md` — General TypeScript implementation guidance (does not override `TYPING_STANDARD.md`)
+
+**Explanation:** `docs/structure/TYPING_STANDARD.md` is the **MANDATORY architectural standard** governing public API typing. It overrides all other typing guidelines, including general TypeScript rules. For general TypeScript implementation patterns (outside of public API typing), refer to `TYPESCRIPT_GENERAL_RULES.md` as secondary guidance.
+
+**Mandatory Requirements:**
+
+1. **Explicit Union Types (REQUIRED):**
+   - All `variant`, `size`, and similar props **MUST** use explicit union types
+   - **NEVER** use `VariantProps<typeof cvaVariants>` in public APIs
+   - **NEVER** infer public types from CVA
+
+2. **CVA Is Internal Only:**
+   - CVA may exist internally for implementation
+   - Public component props **MUST** reference explicit union types
+   - **NEVER** export CVA-derived types in public APIs
+
+3. **Enforcement:**
+   - If a task requires violating `TYPING_STANDARD.md`, Cursor **MUST REFUSE**
+   - Cursor **MUST** reference `TYPING_STANDARD.md` when refusing
+   - Cursor **MUST** suggest following `TYPING_STANDARD.md` instead
+
+**Examples:**
+
+```typescript
+// ❌ FORBIDDEN - Cursor MUST NEVER generate this
+import { type VariantProps } from "class-variance-authority";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  // ❌ CVA-derived types in public API
+}
+
+// ✅ REQUIRED - Cursor MUST ALWAYS generate this
+export const BUTTON_VARIANTS = ["primary", "secondary", "accent"] as const;
+export type ButtonVariant = typeof BUTTON_VARIANTS[number];
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant; // ✅ Explicit union type
+}
+```
+
+**Reference:** 
+- `docs/structure/TYPING_STANDARD.md` - **MANDATORY** architectural standard (PRIMARY AUTHORITY, takes precedence over all other typing rules)
+- `docs/structure/TYPESCRIPT_GENERAL_RULES.md` - General TypeScript implementation rules (SECONDARY GUIDANCE, does not override `TYPING_STANDARD.md`)
+
+---
+
 ### Rule 1: NO_STRING_VISUAL_PROPS
 
 **Rule:** Public component props MUST NOT use raw `string` or `number` types for any visual, layout, spacing, sizing, color, typography, motion, or elevation values.
@@ -485,15 +540,21 @@ When working with components, Cursor must follow these directives:
 
 **Before implementing any new component or modifying existing ones:**
 
-1. **Scan Props:** Read all props in the component interface
-2. **Classify Props:** Categorize each prop as:
+1. **Check Typing Standard (Resolution Order):**
+   - **PRIMARY:** **ALWAYS** reference `docs/structure/TYPING_STANDARD.md` first for public API typing
+     - Verify public API typing follows `TYPING_STANDARD.md`
+     - **NEVER** use `VariantProps` in public APIs
+     - **NEVER** infer public types from CVA
+   - **SECONDARY:** For general TypeScript implementation patterns, refer to `docs/structure/TYPESCRIPT_GENERAL_RULES.md` (does not override `TYPING_STANDARD.md`)
+2. **Scan Props:** Read all props in the component interface
+3. **Classify Props:** Categorize each prop as:
    - **Visual:** Affects appearance, layout, spacing, color, typography, motion
    - **Semantic:** Affects meaning, behavior, accessibility (aria-_, data-_, id, etc.)
-3. **Tokenize Visual Props:** For each visual prop:
+4. **Tokenize Visual Props:** For each visual prop:
    - Check if existing token union exists in `src/tokens/types/index.ts`
    - If exists, use it (with `Responsive<T>` wrapper if responsive)
    - If doesn't exist, create new token domain
-4. **Allow Semantic Props:** Semantic props can use string/number types
+5. **Allow Semantic Props:** Semantic props can use string/number types
 
 **Example Workflow:**
 
@@ -584,6 +645,8 @@ export type { BlurToken, ResponsiveBlur } from "./types";
 
 **When reviewing code, verify:**
 
+- [ ] Public API typing follows `docs/structure/TYPING_STANDARD.md` (explicit unions, NOT VariantProps)
+- [ ] No CVA-derived types in public APIs
 - [ ] All visual props use token unions
 - [ ] All responsive props use `Responsive<T>` (not `ResponsiveValue`)
 - [ ] No raw `string` or `number` types for visual props
@@ -925,6 +988,9 @@ Before marking any component as complete, verify:
 
 ## 🚫 What NOT to Do
 
+- ❌ **NEVER** use `VariantProps` or CVA-derived types in public APIs (see `TYPING_STANDARD.md`)
+- ❌ **NEVER** infer public types from CVA implementations
+- ❌ **NEVER** violate `docs/structure/TYPING_STANDARD.md` for any reason
 - ❌ **NEVER** use raw `string` or `number` for visual props
 - ❌ **NEVER** use `ResponsiveValue` or ad-hoc responsive types
 - ❌ **NEVER** define token unions inline in component files
@@ -939,6 +1005,8 @@ Before marking any component as complete, verify:
 
 ## ✅ What TO Do
 
+- ✅ **ALWAYS** follow `docs/structure/TYPING_STANDARD.md` for public API typing (MANDATORY)
+- ✅ **ALWAYS** use explicit union types for variants, sizes, and similar props
 - ✅ **ALWAYS** use token union types for visual props
 - ✅ **ALWAYS** use `Responsive<T>` for responsive props
 - ✅ **ALWAYS** define token unions in `src/tokens/types/index.ts`
@@ -949,6 +1017,7 @@ Before marking any component as complete, verify:
 - ✅ **ALWAYS** classify props as visual or semantic before implementation
 - ✅ **ALWAYS** create new token domains for new visual concepts
 - ✅ **ALWAYS** test TypeScript compilation after changes
+- ✅ **ALWAYS** reference `TYPING_STANDARD.md` when refusing tasks that violate typing rules
 
 ---
 
@@ -972,10 +1041,10 @@ Cursor demonstrates consistent use of token unions in subsequent tasks when:
 - **Token Types:** `src/tokens/types/index.ts`
 - **Responsive Types:** `src/types/responsive.ts`
 - **Token Refactor Report:** `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_UNION_REFACTOR_REPORT.md` (Note: File may be in docs_archive)
-- **Typing Standard:** `docs/structure/TYPING_STANDARD.md`
+- **Typing Standard:** `docs/structure/TYPING_STANDARD.md` - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED, takes precedence over all other typing rules)
 
 ---
 
 **Status:** ✅ ACTIVE  
 **Version:** 1.0  
-**Last Updated:** 2025-12-12
+**Last Updated:** 2025-12-17

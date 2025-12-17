@@ -1,35 +1,58 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
+import { BADGE_TOKENS } from "@/FOUNDATION/tokens/components/badge";
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-xs py-xs text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        primary: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        accent: "border-transparent bg-accent text-accent-foreground hover:bg-accent/80",
-        outline: "text-foreground border-border",
-        ghost: "border-transparent bg-transparent text-foreground hover:bg-accent/10",
-        link: "border-transparent bg-transparent text-primary hover:text-primary/80 underline-offset-4 hover:underline",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-    },
+/**
+ * Badge variant values
+ *
+ * @public
+ */
+export const BADGE_VARIANTS = [
+  "primary",
+  "secondary",
+  "accent",
+  "outline",
+  "ghost",
+  "link",
+  "destructive",
+] as const;
+
+/**
+ * Badge variant type
+ *
+ * @public
+ */
+export type BadgeVariant = (typeof BADGE_VARIANTS)[number];
+
+const badgeVariants = tokenCVA({
+  base: `${BADGE_TOKENS.layout} ${BADGE_TOKENS.radius} ${BADGE_TOKENS.border} ${BADGE_TOKENS.padding.horizontal} ${BADGE_TOKENS.padding.vertical} ${BADGE_TOKENS.fontSize} ${BADGE_TOKENS.fontWeight} ${BADGE_TOKENS.transition.colors} ${BADGE_TOKENS.focus.outline} ${BADGE_TOKENS.focus.ring} ${BADGE_TOKENS.focus.offset}`,
+  variants: {
+    variant: {
+      primary: `${BADGE_TOKENS.variant.primary.border} ${BADGE_TOKENS.variant.primary.background} ${BADGE_TOKENS.variant.primary.text} ${BADGE_TOKENS.variant.primary.hover}`,
+      secondary: `${BADGE_TOKENS.variant.secondary.border} ${BADGE_TOKENS.variant.secondary.background} ${BADGE_TOKENS.variant.secondary.text} ${BADGE_TOKENS.variant.secondary.hover}`,
+      accent: `${BADGE_TOKENS.variant.accent.border} ${BADGE_TOKENS.variant.accent.background} ${BADGE_TOKENS.variant.accent.text} ${BADGE_TOKENS.variant.accent.hover}`,
+      outline: `${BADGE_TOKENS.variant.outline.border} ${BADGE_TOKENS.variant.outline.text}`,
+      ghost: `${BADGE_TOKENS.variant.ghost.border} ${BADGE_TOKENS.variant.ghost.background} ${BADGE_TOKENS.variant.ghost.text} ${BADGE_TOKENS.variant.ghost.hover}`,
+      link: `${BADGE_TOKENS.variant.link.border} ${BADGE_TOKENS.variant.link.background} ${BADGE_TOKENS.variant.link.text} ${BADGE_TOKENS.variant.link.hover} ${BADGE_TOKENS.underlineOffset} ${BADGE_TOKENS.variant.link.underline}`,
+      destructive: `${BADGE_TOKENS.variant.destructive.border} ${BADGE_TOKENS.variant.destructive.background} ${BADGE_TOKENS.variant.destructive.text} ${BADGE_TOKENS.variant.destructive.hover}`,
+    } satisfies Record<BadgeVariant, string>,
   },
-);
+  defaultVariants: {
+    variant: "primary",
+  },
+});
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Badge variant style
+   * @default "primary"
+   */
+  variant?: BadgeVariant;
+}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return <div className={cn(badgeVariants({ variant }), className)} {...props} />;

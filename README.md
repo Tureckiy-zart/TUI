@@ -82,7 +82,8 @@ yarn add @tenerife.music/ui
 ### Minimal Example
 
 ```tsx
-import { ThemeProvider, Button } from "@tenerife.music/ui";
+import { ThemeProvider } from "@tenerife.music/ui/theme";
+import { Button } from "@tenerife.music/ui";
 
 export default function App() {
   return (

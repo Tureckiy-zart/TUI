@@ -37,7 +37,8 @@ export default function GettingStartedPage() {
             Wrap your app with ThemeProvider and start using components:
           </p>
           <div className="overflow-x-auto rounded-lg bg-muted p-4 font-mono text-sm">
-            <pre>{`import { ThemeProvider, Button } from '@tenerife.music/ui';
+            <pre>{`import { ThemeProvider } from '@tenerife.music/ui/theme';
+import { Button } from '@tenerife.music/ui';
 import '@tenerife.music/ui/styles';
 
 function App() {

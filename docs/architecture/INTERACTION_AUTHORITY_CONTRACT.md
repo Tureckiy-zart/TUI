@@ -561,6 +561,6 @@ button:disabled { pointer-events: none; }
 ---
 
 **Last Updated:** 2025-12-16  
-**Version:** 1.1.0  
+**Version:** 1.1.1  
 **Lock Status:** ✅ LOCKED - Only changes allowed via explicit 'Unlock Interaction Authority' task
 

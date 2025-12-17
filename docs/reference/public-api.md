@@ -1,6 +1,6 @@
 # Tenerife UI Library - Public API Reference
 
-**Version:** 1.0.15  
+**Version:** 1.1.1  
 **Last Updated:** 2025-12-16
 
 This document describes the complete public API surface of `@tenerife.music/ui`. All exports are available from the main entry point unless otherwise specified.
@@ -124,8 +124,6 @@ Component-specific token mappings for consistent component styling:
 - `SECTION_TOKENS` - Section component tokens
 - `MOTION_TOKENS` - Motion component tokens
 - `DATA_TOKENS` - Data display component tokens
-- `DOMAIN_TOKENS` - Domain card component tokens
-- `ARTIST_TOKENS` - Artist card tokens
 
 **Type Exports:** Many component-specific types (e.g., `ButtonHeight`, `InputSize`, `SelectVariant`, `CardSize`, etc.)
 
@@ -236,10 +234,25 @@ Foundation UI components built on shadcn/ui primitives with Tenerife branding an
 - **Types:** `AlertProps`, `alertVariants`
 - **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
 
+### Link
+
+- **Component:** `Link`
+- **Types:** `LinkProps`, `linkVariants`
+- **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
+- **Sizes:** `xs`, `sm`, `md`, `lg`, `xl`
+- **Features:** Icon support (leftIcon, rightIcon), asChild support, focus-visible ring
+
+### Badge
+
+- **Component:** `Badge`
+- **Types:** `BadgeProps`, `badgeVariants`
+- **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
+- **Features:** Token-driven styling, focus-visible ring
+
 **Usage:**
 
 ```typescript
-import { Button, Input, Text, Heading, Alert, Checkbox, Radio, Textarea, Field, Label } from "@tenerife.music/ui";
+import { Button, Input, Text, Heading, Alert, Link, Badge, Checkbox, Radio, Textarea, Field, Label } from "@tenerife.music/ui";
 ```
 
 ---
@@ -297,9 +310,9 @@ import { Card, CardHeader, CardBody, Section, ContainerSurface } from "@tenerife
 **Usage:**
 
 ```typescript
-import { ThemeProvider, useTheme } from "@tenerife.music/ui";
-// Or from theme entry point:
-import { ThemeProvider, loadTheme, registerTheme } from "@tenerife.music/ui/theme";
+import { ThemeProvider, useTheme } from "@tenerife.music/ui/theme";
+// Or import theme utilities:
+import { loadTheme, registerTheme } from "@tenerife.music/ui/theme";
 ```
 
 ---
@@ -649,49 +662,6 @@ import { Table, TableRoot, TableHeader, TableRow, TableCell, DataListRoot, DataL
 
 ---
 
-## Domain Card Components
-
-Domain-specific card components for event and venue display.
-
-### EventCard
-
-- **Component:** `EventCard`
-- **Types:** `EventCardProps`, `EventCardSize`, `EventCardVariant`, `EventCardLayout`
-- **Features:** Event display, featured variant, metadata icons, multiple layouts
-
-
-### ArtistCard
-
-- **Component:** `ArtistCard`
-- **Types:** `ArtistCardProps`, `ArtistCardSize`, `ArtistCardVariant`
-- **Features:** Artist display card
-
-### CategoryCard
-
-- **Component:** `CategoryCard`
-- **Types:** `CategoryCardProps`, `CategoryCardSize`, `CategoryCardVariant`
-- **Features:** Category display card
-
-### PromoCard
-
-- **Component:** `PromoCard`
-- **Types:** `PromoCardProps`, `PromoCardSize`, `PromoCardVariant`
-- **Features:** Promotional content card
-
-### TicketCard
-
-- **Component:** `TicketCard`
-- **Types:** `TicketCardProps`, `TicketCardSize`, `TicketCardVariant`, `TicketAvailability`
-- **Features:** Ticket display card with availability status
-
-**Usage:**
-
-```typescript
-import { EventCard, ArtistCard, CategoryCard, PromoCard, TicketCard } from "@tenerife.music/ui";
-```
-
----
-
 
 ---
 
@@ -823,21 +793,17 @@ import { Button } from "@tenerife.music/ui/components/primitives/Button";
 
 ### Removed Exports (v1.0.0+)
 
-The following components are no longer exported (may be internal-only or removed):
+The following components are RESTRICTED and not exported from the public API:
 
-- `Badge`, `Divider`, `Link`, `ThemeSwitch` - Not exported from main entry
-- `Footer`, `ModeHero`, `Navbar` - Not exported from main entry
-- `DateRangePicker`, `FilterBar`, `FilterSelect`, `PriceRangeSlider`, `SearchFilters`, `SearchInput` - Not exported
-- `FormInput`, `FormSelect`, `FormTextarea` - Not exported
-- `Progress`, `List`, `Timeline` - Not exported
-- `ArticlesSection`, `CTASection`, `FeatureSection`, `HeroSection`, `TrendingSection` - Not exported
-- `EventCardSkeleton`, `VenueCardSkeleton` - Not exported
-- `SearchBar`, `Image`, `TrendingIcon` - Not exported
-- `LanguageSelector` - Not exported
-- `LoginForm`, `ProfileCard`, `RegisterForm` - Not exported
-- `Dashboard`, `UserManagement` - Not exported
-- `useModal` - Not exported
-- `FilterOption`, `FilterState` - Types not exported
+- `Divider`, `Image`, `ThemeSwitch` - RESTRICTED per API decision (TUI_API_DECISION_PRIMITIVES_EXPORT)
+- `Footer`, `ModeHero`, `Navbar` - RESTRICTED (layout components)
+- `DateRangePicker`, `FilterBar`, `FilterSelect`, `PriceRangeSlider`, `SearchFilters`, `SearchInput`, `SearchBar` - RESTRICTED (filter components)
+- `Progress` - RESTRICTED (feedback component)
+- `ArticlesSection`, `CTASection`, `FeatureSection`, `HeroSection`, `TrendingSection` - RESTRICTED (section components)
+- `EventCard`, `ArtistCard`, `CategoryCard`, `PromoCard`, `TicketCard`, `VenueCard` - RESTRICTED (domain/product-specific components)
+- `EventCardSkeleton`, `VenueCardSkeleton` - RESTRICTED (domain-specific skeletons)
+
+**Note:** These components are RESTRICTED per `TUI_EXTENSION_CANONICAL_STATE.md`. Use canonical primitives (e.g., `CardBase`) to build custom components instead.
 
 ---
 
@@ -854,8 +820,7 @@ The following components are no longer exported (may be internal-only or removed
 
 ### Unstable APIs (May Change)
 
-- `EventCard` - Will be refactored in D2 (Domain Decoupling)
-- Domain card components (ArtistCard, CategoryCard, PromoCard, TicketCard) - May be refactored in D2
+None. All exported APIs are stable.
 
 ---
 
@@ -891,7 +856,7 @@ const styles = {
 ### Using Theme System
 
 ```typescript
-import { ThemeProvider, useTheme } from '@tenerife.music/ui';
+import { ThemeProvider, useTheme } from '@tenerife.music/ui/theme';
 
 function App() {
   return (

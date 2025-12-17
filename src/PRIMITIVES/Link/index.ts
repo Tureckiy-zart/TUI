@@ -1,3 +1,11 @@
 "use client";
 
-export { Link, type LinkProps, linkVariants } from "./Link";
+export {
+  Link,
+  LINK_SIZES,
+  LINK_VARIANTS,
+  type LinkProps,
+  type LinkSize,
+  type LinkVariant,
+  linkVariants,
+} from "./Link";

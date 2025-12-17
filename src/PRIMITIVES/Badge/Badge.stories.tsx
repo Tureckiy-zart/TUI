@@ -21,7 +21,7 @@ const meta: Meta<typeof Badge> = {
       options: ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"],
       description: "Badge variant style",
       table: {
-        type: { summary: "string" },
+        type: { summary: "BadgeVariant" },
         defaultValue: { summary: "primary" },
       },
     },

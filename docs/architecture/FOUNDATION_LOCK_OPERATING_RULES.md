@@ -1,6 +1,8 @@
 # 🔒 Foundation LOCK — Operating Rules
 
 **Status:** ACTIVE  
+**Date Created:** 2025-12-16  
+**Last Updated:** 2025-12-17  
 **Classification:** Canonical Interpretation Rules  
 **Authority Level:** Secondary (Derived from INTERNAL_CANONICAL_CONTEXT.md)  
 **Scope:** Tenerife UI — Foundation Layer  

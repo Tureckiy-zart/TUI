@@ -1,5 +1,9 @@
 # GPT Project Scope & Canonical Context
 
+**Date Created:** 2025-12-16  
+**Last Updated:** 2025-12-17  
+**Status:** ACTIVE
+
 ## Purpose
 
 This GPT project exists to provide **accurate, consistent, and rule-compliant assistance**

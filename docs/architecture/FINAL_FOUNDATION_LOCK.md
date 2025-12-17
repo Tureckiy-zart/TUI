@@ -1474,7 +1474,7 @@ If Authority modifications are required in the future:
   - Added State Authority Contract unlock procedure documentation
   - Completed formal lock process per TUNG_LOCK_STATE_AUTHORITY_CONTRACT task
 
-- **v1.7** (2025-12-19): Token Authority Expansion - New Token Authorities
+- **v1.7** (2025-12-16): Token Authority Expansion - New Token Authorities
   - Added Spacing Authority Contract to Authority Documents table
   - Added Radius Authority Contract to Authority Documents table
   - Added Typography Authority Contract to Authority Documents table
