@@ -70,11 +70,6 @@ export {
   type DomainCardSkeleton,
   type DomainCardSkeletonContentWidth,
   type DomainCardSurface,
-  DROPDOWN_TOKENS,
-  type DropdownItemSize,
-  type DropdownMenuSize,
-  type DropdownTriggerSize,
-  type DropdownVariant,
   type EmptyStateIconSize,
   INPUT_TOKENS,
   type InputFontSize,
@@ -492,35 +487,8 @@ export {
 // ============================================================================
 // MENU SYSTEM
 // ============================================================================
-// Menu components (Popover, DropdownMenu, HoverCard)
+// Menu components (HoverCard)
 export {
-  DropdownMenuCheckItem,
-  type DropdownMenuCheckItemProps,
-  DropdownMenuContent,
-  type DropdownMenuContentProps,
-  DropdownMenuGroup,
-  type DropdownMenuGroupProps,
-  DropdownMenuItem,
-  type DropdownMenuItemProps,
-  DropdownMenuLabel,
-  type DropdownMenuLabelProps,
-  DropdownMenuRadioGroup,
-  type DropdownMenuRadioGroupProps,
-  DropdownMenuRadioItem,
-  type DropdownMenuRadioItemProps,
-  // DropdownMenu
-  DropdownMenuRoot,
-  type DropdownMenuRootProps,
-  DropdownMenuSeparator,
-  type DropdownMenuSeparatorProps,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  type DropdownMenuSubContentProps,
-  type DropdownMenuSubProps,
-  DropdownMenuSubTrigger,
-  type DropdownMenuSubTriggerProps,
-  DropdownMenuTrigger,
-  type DropdownMenuTriggerProps,
   HoverCardContent,
   type HoverCardContentProps,
   // HoverCard
@@ -528,16 +496,6 @@ export {
   type HoverCardRootProps,
   HoverCardTrigger,
   type HoverCardTriggerProps,
-  PopoverArrow,
-  type PopoverArrowProps,
-  PopoverContent,
-  type PopoverContentProps,
-  popoverContentVariants,
-  // Popover
-  PopoverRoot,
-  type PopoverRootProps,
-  PopoverTrigger,
-  type PopoverTriggerProps,
 } from "./PATTERNS/menus/menus";
 
 // ContextMenu components

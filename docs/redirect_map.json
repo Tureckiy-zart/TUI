@@ -10,22 +10,22 @@
     },
     {
       "old_path": "docs/PROJECT_AUDIT_REPORT.md",
-      "new_path": "docs/reports/PROJECT_AUDIT_REPORT.md",
+      "new_path": "docs_archive/reports/archive/archive/reports/other/PROJECT_AUDIT_REPORT.md",
       "reason": "Moved to reports/ directory"
     },
     {
       "old_path": "docs/CHANGELOG.md",
-      "new_path": "docs/reports/CHANGELOG.md",
+      "new_path": "CHANGELOG.md",
       "reason": "Moved to reports/ directory"
     },
     {
       "old_path": "docs/PATH_RESOLUTION_REPORT.md",
-      "new_path": "docs/reports/PATH_RESOLUTION_REPORT.md",
+      "new_path": "docs_archive/reports/archive/archive/reports/other/PATH_RESOLUTION_REPORT.md",
       "reason": "Moved to reports/ directory"
     },
     {
       "old_path": "docs/AUDIT_REPORT.md",
-      "new_path": "docs/reports/AUDIT_REPORT.md",
+      "new_path": "docs_archive/reports/archive/archive/reports/other/AUDIT_REPORT.md",
       "reason": "Will be created in reports/ directory by task U0"
     },
     {
@@ -40,7 +40,7 @@
     },
     {
       "old_path": "docs/tenerife_audit/AUDIT_REPORT.md",
-      "new_path": "docs/reports/AUDIT_REPORT.md",
+      "new_path": "docs_archive/reports/archive/archive/reports/other/AUDIT_REPORT.md",
       "reason": "Corrected path - file should be in reports/"
     }
   ],

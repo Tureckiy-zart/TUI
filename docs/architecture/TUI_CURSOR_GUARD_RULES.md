@@ -740,6 +740,9 @@ Before completing any task, verify:
 - [ ] No product components in Extension layer
 - [ ] **Foundation Authority compliance verified** (all changes comply with Authority rules)
 - [ ] **No Authority Contract modifications** (Foundation Authorities are CLOSED)
+- [ ] **Canonical architecture compliance verified** (no forbidden regressions)
+- [ ] **Canonical component imports verified** (using canonical paths only)
+- [ ] **No overlay infrastructure in PATTERNS** (overlays in COMPOSITION only)
 
 ### Token System Compliance
 - [ ] Component has independent token domain
@@ -848,27 +851,165 @@ Your request is ambiguous regarding:
 
 ---
 
+## Canonical Architecture Protection Rules
+
+### Canonical Architecture: LOCKED
+
+**Status:** ✅ **CANONICAL ARCHITECTURE LOCKED**  
+**Lock Date:** 2025-12-17  
+**Source of Truth:** [CANONICAL_LOCK.md](./CANONICAL_LOCK.md)
+
+**The UI architecture is OFFICIALLY LOCKED as CANONICAL.** All architectural decisions documented in CANONICAL_LOCK.md are **FINAL** and **MUST NOT** change without explicit unlock procedure.
+
+### Forbidden Regressions (MANDATORY)
+
+**The following are EXPLICITLY FORBIDDEN and MUST NOT be reintroduced:**
+
+#### ❌ Dropdown Components and Tokens
+
+**MANDATORY:**
+- ❌ **NEVER** create Dropdown components in any layer
+- ❌ **NEVER** create Dropdown tokens in FOUNDATION
+- ❌ **NEVER** export Dropdown from public API
+- ❌ **NEVER** use Dropdown in new code
+
+**Rationale:** Dropdown was removed (MIGRATION_12C). Use Select or ContextMenu instead.
+
+**If requested:** **MUST REFUSE** and suggest using Select or ContextMenu.
+
+#### ❌ Legacy Card in PRIMITIVES
+
+**MANDATORY:**
+- ❌ **NEVER** create Card component in PRIMITIVES layer
+- ❌ **NEVER** reintroduce legacy PRIMITIVES/Card
+
+**Rationale:** Legacy PRIMITIVES/Card was removed (MIGRATION_12A). Use COMPOSITION/layout/Card instead.
+
+**If requested:** **MUST REFUSE** and suggest using COMPOSITION/layout/Card.
+
+#### ❌ Overlay Infrastructure in PATTERNS
+
+**MANDATORY:**
+- ❌ **NEVER** add overlay primitives to PATTERNS layer
+- ❌ **NEVER** create Popover, Modal, ContextMenu, or Toast in PATTERNS
+- ❌ **NEVER** add overlay infrastructure to PATTERNS
+
+**Rationale:** Overlays **MUST** live in COMPOSITION layer only. PATTERNS is for business/UI patterns, not overlay primitives.
+
+**If requested:** **MUST REFUSE** and suggest using COMPOSITION/overlays components.
+
+#### ❌ Legacy useToast Exports in New Code
+
+**MANDATORY:**
+- ❌ **NEVER** use `useToast` from `hooks/useToast.ts` in new code
+- ❌ **NEVER** use `useToast` from `hooks/use-toast.ts` in new code
+
+**Rationale:** Legacy exports are deprecated. New code **MUST** use canonical hooks (`useLocalToast`, `useGlobalToast`).
+
+**If requested:** **MUST REFUSE** and suggest using canonical hooks.
+
+#### ❌ Tokens Without Components
+
+**MANDATORY:**
+- ❌ **NEVER** create tokens in FOUNDATION without active components
+- ❌ **NEVER** create orphaned tokens
+
+**Rationale:** Tokens **MUST** correspond to active components. Orphaned tokens create maintenance burden.
+
+**If requested:** **MUST REFUSE** and require component creation first.
+
+### Allowed Actions (MANDATORY)
+
+**The following actions are EXPLICITLY ALLOWED:**
+
+#### ✅ Extend Within Layer
+
+**ALLOWED:**
+- ✅ Add new components within existing layers (PRIMITIVES, COMPOSITION, PATTERNS, DOMAIN)
+- ✅ Extend existing components within their layer
+- ✅ Add new patterns in PATTERNS layer
+
+**Rule:** Extensions **MUST** respect layer boundaries and canonical rules.
+
+#### ✅ Add New Component with Layer Justification
+
+**ALLOWED:**
+- ✅ Create new components with explicit layer justification
+- ✅ Verify component belongs to correct layer before creation
+
+**Rule:** New components **MUST** be placed in the correct layer based on their purpose and behavior.
+
+#### ✅ Unlock Required for Architecture Changes
+
+**REQUIRED:**
+- ✅ Architecture changes require explicit unlock procedure
+- ✅ Unlock must be documented and approved
+- ✅ Changes must follow canonical rules
+
+**Rule:** Architecture changes **MUST** go through unlock protocol defined in CANONICAL_LOCK.md.
+
+### Canonical Component Import Rules
+
+**MANDATORY:** Components **MUST** be imported from canonical locations only.
+
+**Canonical Locations:**
+- ✅ Popover: `COMPOSITION/overlays/Popover`
+- ✅ Modal: `COMPOSITION/overlays/Modal`
+- ✅ ContextMenu: `COMPOSITION/overlays/ContextMenu`
+- ✅ Toast: `COMPOSITION/overlays/Toast`
+- ✅ Card: `COMPOSITION/layout/Card`
+
+**FORBIDDEN:**
+- ❌ Importing from non-canonical paths
+- ❌ Creating duplicate implementations
+- ❌ Bypassing canonical components
+
+### Canonical Architecture Verification
+
+**BEFORE** any architectural change:
+
+1. ✅ Check [CANONICAL_LOCK.md](./CANONICAL_LOCK.md) for canonical state
+2. ✅ Verify change does not violate forbidden regressions
+3. ✅ Verify change respects layer boundaries
+4. ✅ Verify change uses canonical components
+5. ✅ If unlock required, follow unlock protocol
+
+**Rule:** If change violates canonical architecture, **MUST REFUSE** and explain why.
+
+---
+
 ## Related Documentation
 
+- [CANONICAL_LOCK.md](./CANONICAL_LOCK.md) - **Source of truth** for canonical architecture state
 - [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - **Source of truth** for Foundation lock status
+- [CANONICAL_STATE_FINAL.md](./CANONICAL_STATE_FINAL.md) - Final truth snapshot of canonical state
 - [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract
 - [TUI Token System](./TUI_TOKEN_SYSTEM.md) - Token system rules and structure (LOCKED)
 - [TUI Extension Canonical State](./TUI_EXTENSION_CANONICAL_STATE.md) - Component usage rules
-- [TUI Token System Audit Report](../reports/TUI_TOKEN_SYSTEM_AUDIT.md) - Audit findings and violations
+- [TUI Token System Audit Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_SYSTEM_AUDIT.md) - Audit findings and violations (Note: File may be in docs_archive)
 
 ---
 
 ## Document Status
 
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
-**Version:** 1.1  
-**Last Updated:** 2025-12-16
+**Version:** 1.2  
+**Last Updated:** 2025-12-17
 
 This document is **MANDATORY**. Any work violating these rules is **INVALID**. These rules must be enforced by all AI/Cursor interactions with the TUI library.
 
 ---
 
 ## Version History
+
+- **v1.2** (2025-12-17): Canonical Architecture Protection Rules
+  - Added "Canonical Architecture Protection Rules" section
+  - Added forbidden regressions list (Dropdown, legacy Card, PATTERNS overlays, legacy useToast, orphaned tokens)
+  - Added allowed actions (extend within layer, add with justification, unlock protocol)
+  - Added canonical component import rules
+  - Added canonical architecture verification checklist
+  - Added reference to CANONICAL_LOCK.md as source of truth
+  - Clarified that canonical architecture is LOCKED
 
 - **v1.1** (2025-12-16): Foundation Authority Protection Rules
   - Added "Foundation Authority Protection Rules" section

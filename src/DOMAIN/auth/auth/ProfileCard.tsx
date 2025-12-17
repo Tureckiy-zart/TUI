@@ -2,8 +2,8 @@
 
 import React from "react";
 
+import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { Card, CardContent } from "@/PRIMITIVES/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -24,7 +24,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
 
   return (
     <Card className={cn("shadow-md", className)}>
-      <CardContent className="p-md">
+      <CardBody className="p-md">
         {avatar && (
           <div className="mb-md h-[var(--spacing-md)] w-[var(--spacing-md)] rounded-full bg-muted" />
         )}
@@ -32,7 +32,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
           {name}
         </Heading>
         <Text variant="muted">{email}</Text>
-      </CardContent>
+      </CardBody>
     </Card>
   );
 };

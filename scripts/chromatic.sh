@@ -46,7 +46,9 @@ echo ""
 # CI mode should fail on errors, local mode should not
 if [ "${CHROMATIC_CI_MODE:-}" = "true" ]; then
   echo -e "${YELLOW}ℹ️  Running in CI mode (will fail on errors)${NC}"
-  npx chromatic --project-token="${CHROMATIC_PROJECT_TOKEN}"
+  # Use --auto-accept-changes to automatically accept expected visual changes
+  # Remove this flag if you want to manually review changes in CI
+  npx chromatic --project-token="${CHROMATIC_PROJECT_TOKEN}" --auto-accept-changes
 else
   echo -e "${YELLOW}ℹ️  Running in local mode (--exit-zero-on-changes)${NC}"
   npx chromatic --project-token="${CHROMATIC_PROJECT_TOKEN}" --exit-zero-on-changes

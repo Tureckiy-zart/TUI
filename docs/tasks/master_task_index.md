@@ -65,10 +65,10 @@ Master Task V3.1 defines **71 tasks** across **9 layers** to build a universal, 
 
 **Key Documentation:**
 
-- [Structure of Work](../structure/STRUCTURE_OF_WORK.md)
-- [Design System](../tenerife_audit/design_system.md) (missing)
-- [Components Redesign](../tenerife_audit/components_redesign.md) (missing)
-- [Layout and Brand Guide](../tenerife_audit/layout_and_brand_guide.md) (missing)
+- [Structure of Work](../../docs_archive/legacy/STRUCTURE_OF_WORK.md) (archived)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
+- [Components Redesign](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/components_redesign.md) (archived)
+- [Layout and Brand Guide](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/layout_and_brand_guide.md) (archived)
 
 ---
 
@@ -99,11 +99,11 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 ### Key Documentation
 
-- [UI_LIB_PUBLIC_API.md](../../.cursor/reports/UI_LIB_PUBLIC_API.md)
-- [UI_LIB_DOMAIN_DEPENDENCIES.md](../../.cursor/reports/UI_LIB_DOMAIN_DEPENDENCIES.md)
-- [UI_LIB_ROUTE_HARDCODING.md](../../.cursor/reports/UI_LIB_ROUTE_HARDCODING.md)
-- [UI_LIB_COUPLING_ANALYSIS.md](../../.cursor/reports/UI_LIB_COUPLING_ANALYSIS.md)
-- [UI_LIB_INDEPENDENCE_ROADMAP.md](../../.cursor/reports/UI_LIB_INDEPENDENCE_ROADMAP.md)
+- [UI_LIB_PUBLIC_API.md](../../../docs_archive/cursor_runs/reports/UI_LIB_PUBLIC_API.md) (archived)
+- [UI_LIB_DOMAIN_DEPENDENCIES.md](../../../docs_archive/cursor_runs/reports/UI_LIB_DOMAIN_DEPENDENCIES.md) (archived)
+- [UI_LIB_ROUTE_HARDCODING.md](../../../docs_archive/cursor_runs/reports/UI_LIB_ROUTE_HARDCODING.md) (archived)
+- [UI_LIB_COUPLING_ANALYSIS.md](../../../docs_archive/cursor_runs/reports/UI_LIB_COUPLING_ANALYSIS.md) (archived)
+- [UI_LIB_INDEPENDENCE_ROADMAP.md](../../../docs_archive/cursor_runs/reports/UI_LIB_INDEPENDENCE_ROADMAP.md) (archived)
 
 ### Subtask Files
 
@@ -166,7 +166,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Design System](../tenerife_audit/design_system.md) (missing)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
 
 **Outputs:**
 
@@ -205,8 +205,8 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Components Redesign](../tenerife_audit/components_redesign.md) (missing)
-- [Design System](../tenerife_audit/design_system.md) (missing)
+- [Components Redesign](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/components_redesign.md) (archived)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
 
 ---
 
@@ -226,15 +226,15 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 | **A6**  | Create Feature component         | C8, C9         | pending |
 | **A7**  | Create CTA component             | C1, C8         | pending |
 | **A8**  | Create Modal component           | F4-F7          | pending |
-| **A9**  | Create Dropdown component        | C4, F4, F6     | pending |
+| **A9**  | ~~Create Dropdown component~~    | C4, F4, F6     | ❌ **CANCELLED** - Dropdown removed (MIGRATION_12C) |
 | **A10** | Create Avatar component          | F5             | pending |
 | **A11** | Create Skeleton Loader component | F6             | pending |
 
 **Key Documentation:**
 
-- [Components Redesign](../tenerife_audit/components_redesign.md) (missing)
-- [Layout and Brand Guide](../tenerife_audit/layout_and_brand_guide.md) (missing)
-- [Design System](../tenerife_audit/design_system.md) (missing)
+- [Components Redesign](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/components_redesign.md) (archived)
+- [Layout and Brand Guide](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/layout_and_brand_guide.md) (archived)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
 
 ---
 
@@ -257,9 +257,9 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Design System](../tenerife_audit/design_system.md) (missing)
-- [Components Redesign](../tenerife_audit/components_redesign.md) (missing)
-- [Layout and Brand Guide](../tenerife_audit/layout_and_brand_guide.md) (missing)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
+- [Components Redesign](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/components_redesign.md) (archived)
+- [Layout and Brand Guide](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/layout_and_brand_guide.md) (archived)
 
 ---
 
@@ -277,8 +277,8 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Design System](../tenerife_audit/design_system.md) (missing)
-- [Publishing Guide](../PUBLISHING.md)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
+- [Publishing Guide](../../docs_archive/reports/archive/archive/PUBLISHING.md) (archived)
 
 ---
 
@@ -296,7 +296,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Design System](../tenerife_audit/design_system.md) (missing)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
 
 ---
 
@@ -314,7 +314,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 
 **Key Documentation:**
 
-- [Design System](../tenerife_audit/design_system.md) (missing)
+- [Design System](../../docs_archive/deprecated/tenerife_audit/tenerife_audit/design_system.md) (archived)
 
 ---
 
@@ -361,21 +361,21 @@ G0 → U0 → [D1-D7] → [F0-F9] → C0 → C1-C10 → A1-A11 → Q1-Q8 → P1-
 
 | File                          | Location               | Status                   | Referenced In |
 | ----------------------------- | ---------------------- | ------------------------ | ------------- |
-| **design_system.md**          | `docs/tenerife_audit/` | ❌ Missing               | 30+ tasks     |
-| **components_redesign.md**    | `docs/tenerife_audit/` | ❌ Missing               | 20+ tasks     |
-| **layout_and_brand_guide.md** | `docs/tenerife_audit/` | ❌ Missing               | 10+ tasks     |
-| **STRUCTURE_OF_WORK.md**      | `docs/structure/`      | ✅ Exists                | G0, Reference |
-| **AUDIT_REPORT.md**           | `docs/reports/`        | ⚠️ Will be created by U0 | U0, U1, U2    |
+| **design_system.md**          | `docs_archive/deprecated/tenerife_audit/tenerife_audit/` | ✅ Archived              | 30+ tasks     |
+| **components_redesign.md**    | `docs_archive/deprecated/tenerife_audit/tenerife_audit/` | ✅ Archived              | 20+ tasks     |
+| **layout_and_brand_guide.md** | `docs_archive/deprecated/tenerife_audit/tenerife_audit/` | ✅ Archived              | 10+ tasks     |
+| **STRUCTURE_OF_WORK.md**      | `docs_archive/legacy/` | ✅ Archived              | G0, Reference |
+| **AUDIT_REPORT.md**           | `docs_archive/reports/archive/archive/reports/other/` | ⚠️ Will be created by U0 | U0, U1, U2    |
 
 ### Available Documentation Files
 
 | File                          | Location        | Status    |
 | ----------------------------- | --------------- | --------- |
 | **PROJECT_PROGRESS.md**       | `docs/`         | ✅ Exists |
-| **PUBLISHING.md**             | `docs/`         | ✅ Exists |
-| **PROJECT_AUDIT_REPORT.md**   | `docs/reports/` | ✅ Exists |
-| **PATH_RESOLUTION_REPORT.md** | `docs/reports/` | ✅ Exists |
-| **CHANGELOG.md**              | `docs/reports/` | ✅ Exists |
+| **PUBLISHING.md**             | `docs_archive/reports/archive/archive/` | ✅ Archived |
+| **PROJECT_AUDIT_REPORT.md**   | `docs_archive/reports/archive/archive/reports/other/` | ✅ Archived |
+| **PATH_RESOLUTION_REPORT.md** | `docs_archive/reports/archive/archive/reports/other/` | ✅ Archived |
+| **CHANGELOG.md**              | Project root    | ✅ Exists |
 
 ---
 
@@ -392,9 +392,9 @@ G0 → U0 → [D1-D7] → [F0-F9] → C0 → C1-C10 → A1-A11 → Q1-Q8 → P1-
 
 - [Master Task JSON](../../.cursor/tasks/master/master_tasks.json)
 - [Project Progress](../PROJECT_PROGRESS.md)
-- [Structure of Work](../structure/STRUCTURE_OF_WORK.md)
-- [Publishing Guide](../PUBLISHING.md)
-- [Audit Reports](../reports/)
+- [Structure of Work](../../docs_archive/legacy/STRUCTURE_OF_WORK.md) (archived)
+- [Publishing Guide](../../docs_archive/reports/archive/archive/PUBLISHING.md) (archived)
+- [Audit Reports](../../docs_archive/reports/archive/archive/reports/) (archived)
 
 ---
 

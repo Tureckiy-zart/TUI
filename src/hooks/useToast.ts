@@ -30,7 +30,7 @@ export interface UseToastReturn {
   dismissAll: () => void;
 }
 
-export function useToast(): UseToastReturn {
+export function useLocalToast(): UseToastReturn {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const dismiss = useCallback((toastId: string) => {
@@ -71,6 +71,9 @@ export function useToast(): UseToastReturn {
     dismissAll,
   };
 }
+
+/** @deprecated Use useLocalToast */
+export { useLocalToast as useToast };
 
 // Hook for managing multiple toast contexts
 export function useToastManager() {

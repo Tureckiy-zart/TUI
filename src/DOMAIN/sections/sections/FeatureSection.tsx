@@ -2,8 +2,8 @@
 
 import React from "react";
 
+import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { Card, CardContent } from "@/PRIMITIVES/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -79,7 +79,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
         <div className={cn("grid gap-lg", gridCols[columns])}>
           {features.map((feature, index) => (
             <Card key={index} className="transition-shadow hover:shadow-md">
-              <CardContent className="p-lg">
+              <CardBody className="p-lg">
                 <div className="space-y-md">
                   {/* Icon */}
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -96,7 +96,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
                     {feature.description}
                   </Text>
                 </div>
-              </CardContent>
+              </CardBody>
             </Card>
           ))}
         </div>

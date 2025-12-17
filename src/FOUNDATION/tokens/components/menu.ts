@@ -1,7 +1,7 @@
 /**
  * Menu Component Tokens
  *
- * Component-level design tokens for Menu components (DropdownMenu, ContextMenu).
+ * Component-level design tokens for Menu components (ContextMenu).
  * Maps foundation tokens (spacing, radius, shadows, typography, motion) to menu-specific usage.
  *
  * All values use Tailwind utility classes that map to foundation tokens.

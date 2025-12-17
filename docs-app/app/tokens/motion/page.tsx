@@ -2,7 +2,6 @@
 
 // Motion tokens are exported from the library
 import {
-  MOTION_TOKENS,
   motionV2Durations,
   motionV2Easings,
   motionV2Fade,
@@ -33,7 +32,7 @@ export default function MotionPage() {
                   preview={
                     <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                       <div
-                        className={`h-full rounded-full bg-primary ${MOTION_TOKENS.transition.all}`}
+                        className="h-full rounded-full bg-primary transition-all"
                         style={{
                           width: "100%",
                           transitionDuration: typeof value === "string" ? value : String(value),

@@ -121,21 +121,11 @@
 - `PopoverContent`
 - `PopoverArrow`
 
-#### DropdownMenu (13 components)
+#### ~~DropdownMenu~~ ✅ REMOVED (MIGRATION_12C, 2025-01-27)
 
-- `DropdownMenuRoot`
-- `DropdownMenuTrigger`
-- `DropdownMenuContent`
-- `DropdownMenuItem`
-- `DropdownMenuLabel`
-- `DropdownMenuGroup`
-- `DropdownMenuSeparator`
-- `DropdownMenuCheckItem`
-- `DropdownMenuRadioGroup`
-- `DropdownMenuRadioItem`
-- `DropdownMenuSub`
-- `DropdownMenuSubTrigger`
-- `DropdownMenuSubContent`
+**Status:** All Dropdown components and tokens fully removed from codebase.
+
+See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details (archived).
 
 #### ContextMenu (7 components)
 
@@ -153,9 +143,9 @@
 - `HoverCardTrigger`
 - `HoverCardContent`
 
-#### Legacy Menu (2 components)
+#### Legacy Menu (1 component)
 
-- `DropdownMenu` (legacy)
+- ~~`DropdownMenu` (legacy)~~ ✅ **REMOVED** (MIGRATION_12C)
 - `NavigationMenu` (legacy)
 - `Tabs` (legacy)
 

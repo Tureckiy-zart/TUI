@@ -2,8 +2,8 @@
 
 import React from "react";
 
+import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { Card, CardContent } from "@/PRIMITIVES/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -65,7 +65,7 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
 
   return (
     <Card className={cn("shadow-md", className)} {...rest}>
-      <CardContent className="p-lg">
+      <CardBody className="p-lg">
         <Heading level={2} className="mb-md">
           {title}
         </Heading>
@@ -74,7 +74,7 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
         ) : (
           <Text variant="muted">{contentText}</Text>
         )}
-      </CardContent>
+      </CardBody>
     </Card>
   );
 };

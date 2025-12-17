@@ -2,8 +2,8 @@
 
 import React from "react";
 
+import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { Card, CardContent } from "@/PRIMITIVES/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -51,20 +51,20 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
         </Text>
         <div className="grid grid-cols-1 gap-lg md:grid-cols-2">
           <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
-            <CardContent className="p-lg">
+            <CardBody className="p-lg">
               <Heading level={3} className="mb-sm text-2xl font-semibold">
                 {dayLabel}
               </Heading>
               <Text className="text-white/80">{dayDescription}</Text>
-            </CardContent>
+            </CardBody>
           </Card>
           <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
-            <CardContent className="p-lg">
+            <CardBody className="p-lg">
               <Heading level={3} className="mb-sm text-2xl font-semibold">
                 {nightLabel}
               </Heading>
               <Text className="text-white/80">{nightDescription}</Text>
-            </CardContent>
+            </CardBody>
           </Card>
         </div>
       </div>

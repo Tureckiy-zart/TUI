@@ -114,7 +114,6 @@ Component-specific token mappings for consistent component styling:
 - `TEXT_TOKENS` - Text component tokens
 - `ICON_TOKENS` - Icon component tokens
 - `MENU_TOKENS` - Menu component tokens
-- `DROPDOWN_TOKENS` - Dropdown menu tokens
 - `POPOVER_TOKENS` - Popover component tokens
 - `TOOLTIP_TOKENS` - Tooltip component tokens
 - `TOAST_TOKENS` - Toast component tokens
@@ -419,23 +418,11 @@ import { Modal, ModalRoot, ModalTrigger, ModalContent, Dialog, Backdrop, Portal 
 
 Radix-based menu and navigation components with token-driven styling.
 
-### DropdownMenu
+### ~~DropdownMenu~~ ✅ REMOVED
 
-- `DropdownMenuRoot` - Dropdown menu root
-- `DropdownMenuTrigger` - Dropdown menu trigger
-- `DropdownMenuContent` - Dropdown menu content
-- `DropdownMenuItem` - Dropdown menu item
-- `DropdownMenuCheckItem` - Dropdown menu checkbox item
-- `DropdownMenuRadioGroup` - Dropdown menu radio group
-- `DropdownMenuRadioItem` - Dropdown menu radio item
-- `DropdownMenuLabel` - Dropdown menu label
-- `DropdownMenuGroup` - Dropdown menu group
-- `DropdownMenuSeparator` - Dropdown menu separator
-- `DropdownMenuSub` - Dropdown menu submenu
-- `DropdownMenuSubTrigger` - Dropdown menu submenu trigger
-- `DropdownMenuSubContent` - Dropdown menu submenu content
+**Status:** Fully removed in MIGRATION_12C (2025-01-27)
 
-**Types:** `DropdownMenuRootProps`, `DropdownMenuTriggerProps`, `DropdownMenuContentProps`, `DropdownMenuItemProps`, `DropdownMenuCheckItemProps`, `DropdownMenuRadioGroupProps`, `DropdownMenuRadioItemProps`, `DropdownMenuLabelProps`, `DropdownMenuGroupProps`, `DropdownMenuSeparatorProps`, `DropdownMenuSubProps`, `DropdownMenuSubTriggerProps`, `DropdownMenuSubContentProps`
+All Dropdown components and tokens have been removed from the codebase. See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details (archived).
 
 ### ContextMenu
 
@@ -474,7 +461,7 @@ Radix-based menu and navigation components with token-driven styling.
 **Usage:**
 
 ```typescript
-import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, ContextMenuRoot, PopoverRoot, HoverCardRoot } from "@tenerife.music/ui";
+import { ContextMenuRoot, PopoverRoot, HoverCardRoot } from "@tenerife.music/ui";
 ```
 
 ---
@@ -536,15 +523,25 @@ Radix-based toast notification system with token-driven styling.
 - `Toast` - Toast component
 - `ToastProvider` - Toast context provider
 - `ToastViewport` - Toast viewport container
-- `useToast` - Hook for toast management
+- `useToast` - Hook for toast management (from ToastProvider context)
+- `Toaster` - Global toast renderer component
 
 **Types:** `ToastProps`, `ToastProviderProps`, `ToastViewportProps`, `ToastData`, `ToastOptions`, `ToastAction`, `ToastPosition`
 
 **Usage:**
 
 ```typescript
+// Context-based toast (from ToastProvider)
 import { Toast, ToastProvider, ToastViewport, useToast } from "@tenerife.music/ui";
+
+// For local/component-scoped toasts, use:
+// import { useLocalToast } from "@/hooks/useLocalToast";
+
+// For global app-wide toasts, use:
+// import { useGlobalToast } from "@/hooks/useGlobalToast";
 ```
+
+> **Note:** The library exports `useToast` from `ToastProvider` (context-based). For local and global toast hooks, see `docs/architecture/TOAST_SYSTEM.md` for canonical hook names and usage patterns.
 
 ---
 

@@ -6,19 +6,24 @@
 
 "use client";
 
+import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
-import { usePopoverContext } from "../popover/PopoverRoot";
-import { PopoverTrigger, type PopoverTriggerProps } from "../popover/PopoverTrigger";
+import { useHoverCardContext } from "./HoverCardRoot";
 
-export interface HoverCardTriggerProps extends PopoverTriggerProps {}
+export interface HoverCardTriggerProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Render as child element (composition pattern)
+   */
+  asChild?: boolean;
+}
 
 /**
  * HoverCard Trigger component
  */
 export const HoverCardTrigger = React.forwardRef<HTMLElement, HoverCardTriggerProps>(
-  ({ onMouseEnter, onMouseLeave, onFocus, onBlur, ...props }, ref) => {
-    const { onOpenChange } = usePopoverContext();
+  ({ onMouseEnter, onMouseLeave, onFocus, onBlur, asChild = false, ...props }, ref) => {
+    const { onOpenChange } = useHoverCardContext();
 
     const handleMouseEnter = React.useCallback(
       (event: React.MouseEvent<HTMLElement>) => {
@@ -52,17 +57,22 @@ export const HoverCardTrigger = React.forwardRef<HTMLElement, HoverCardTriggerPr
       [onOpenChange, onBlur],
     );
 
-    return (
-      <PopoverTrigger
-        ref={ref}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        aria-haspopup="dialog"
-        {...props}
-      />
-    );
+    const triggerProps = {
+      ...props,
+      ref,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
+      "aria-haspopup": "dialog" as const,
+      type: "button" as const,
+    };
+
+    if (asChild) {
+      return <Slot {...triggerProps} />;
+    }
+
+    return <button {...(triggerProps as React.ButtonHTMLAttributes<HTMLButtonElement>)} />;
   },
 );
 

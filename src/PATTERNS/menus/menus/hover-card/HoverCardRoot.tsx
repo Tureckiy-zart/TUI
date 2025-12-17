@@ -9,12 +9,25 @@
 
 import * as React from "react";
 
+import { Popover } from "@/COMPOSITION/overlays/Popover";
 import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
 import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
 
-import { PopoverRoot, type PopoverRootProps } from "../popover/PopoverRoot";
+export interface HoverCardContextValue {
+  onOpenChange: (open: boolean) => void;
+}
 
-export interface HoverCardRootProps extends Omit<PopoverRootProps, "open" | "onOpenChange"> {
+const HoverCardContext = React.createContext<HoverCardContextValue | null>(null);
+
+export function useHoverCardContext(): HoverCardContextValue {
+  const context = React.useContext(HoverCardContext);
+  if (!context) {
+    throw new Error("HoverCard components must be used within HoverCardRoot");
+  }
+  return context;
+}
+
+export interface HoverCardRootProps {
   /**
    * Delay before opening - token-based
    * Uses motion duration tokens
@@ -28,6 +41,31 @@ export interface HoverCardRootProps extends Omit<PopoverRootProps, "open" | "onO
    * @default 300
    */
   closeDelay?: ResponsiveDelay;
+
+  /**
+   * Whether the hover card is open (controlled mode)
+   */
+  open?: boolean;
+
+  /**
+   * Callback when open state changes
+   */
+  onOpenChange?: (open: boolean) => void;
+
+  /**
+   * Default open state (uncontrolled mode)
+   */
+  defaultOpen?: boolean;
+
+  /**
+   * Whether the hover card is modal (blocks interaction with other elements)
+   */
+  modal?: boolean;
+
+  /**
+   * Children
+   */
+  children: React.ReactNode;
 }
 
 /**
@@ -37,9 +75,12 @@ export function HoverCardRoot({
   openDelay,
   closeDelay,
   defaultOpen = false,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+  modal = false,
   ...props
 }: HoverCardRootProps) {
-  const [open, setOpen] = React.useState(defaultOpen);
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
   const openTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -53,6 +94,9 @@ export function HoverCardRoot({
     const baseDelay = getBaseValue(closeDelay);
     return baseDelay ? getDurationMs(baseDelay) : 300; // Default 300ms
   }, [closeDelay]);
+
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
 
   const handleOpenChange = React.useCallback(
     (newOpen: boolean) => {
@@ -70,21 +114,33 @@ export function HoverCardRoot({
         // Open with delay
         if (openDelayMs > 0) {
           openTimeoutRef.current = setTimeout(() => {
-            setOpen(true);
+            if (!isControlled) {
+              setUncontrolledOpen(true);
+            }
+            controlledOnOpenChange?.(true);
           }, openDelayMs);
         } else {
-          setOpen(true);
+          if (!isControlled) {
+            setUncontrolledOpen(true);
+          }
+          controlledOnOpenChange?.(true);
         }
       } else if (closeDelayMs > 0) {
         // Close with delay
         closeTimeoutRef.current = setTimeout(() => {
-          setOpen(false);
+          if (!isControlled) {
+            setUncontrolledOpen(false);
+          }
+          controlledOnOpenChange?.(false);
         }, closeDelayMs);
       } else {
-        setOpen(false);
+        if (!isControlled) {
+          setUncontrolledOpen(false);
+        }
+        controlledOnOpenChange?.(false);
       }
     },
-    [openDelayMs, closeDelayMs],
+    [openDelayMs, closeDelayMs, isControlled, controlledOnOpenChange],
   );
 
   // Cleanup timeouts on unmount
@@ -99,8 +155,19 @@ export function HoverCardRoot({
     };
   }, []);
 
+  const contextValue = React.useMemo<HoverCardContextValue>(
+    () => ({
+      onOpenChange: handleOpenChange,
+    }),
+    [handleOpenChange],
+  );
+
   return (
-    <PopoverRoot {...props} open={open} onOpenChange={handleOpenChange} defaultOpen={defaultOpen} />
+    <HoverCardContext.Provider value={contextValue}>
+      <Popover open={open} onOpenChange={handleOpenChange} defaultOpen={defaultOpen} modal={modal}>
+        {props.children}
+      </Popover>
+    </HoverCardContext.Provider>
   );
 }
 

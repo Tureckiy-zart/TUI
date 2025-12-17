@@ -370,7 +370,7 @@ If token modifications are needed:
 
 - Token system modifications require explicit **UNLOCK + AUDIT** workflow
 - Reference: `docs/architecture/TUI_TOKEN_SYSTEM.md`
-- Reference: `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md`
+- Reference: `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` (Note: File may be in docs_archive)
 - All token changes require full audit and explicit approval
 
 ### Radix Rule
@@ -404,7 +404,7 @@ All visual props **MUST** use token unions.
 
 **Token System Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 **Any token system modifications require explicit unlock procedure with full audit.**
 
@@ -644,7 +644,7 @@ The architecture lock fails if:
 **Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 The **Token System** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
 
@@ -676,7 +676,7 @@ Any token system modifications require:
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** - Radix UI and Token Union rules
 - **[Component Guidelines](../structure/COMPONENT_GUIDELINES.md)** - Component development guidelines
 - **[Cursor UI Rules](./CURSOR_UI_RULES.md)** - Cursor AI development rules
-- **[Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)** - Final token domain verification (FINAL VERDICT: OK)
+- **[Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md)** - Final token domain verification (FINAL VERDICT: OK) (Note: File may be in docs_archive)
 
 ---
 

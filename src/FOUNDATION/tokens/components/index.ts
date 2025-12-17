@@ -167,15 +167,6 @@ export {
   type PopoverContentWidth,
 } from "./popover";
 
-// Dropdown tokens
-export {
-  DROPDOWN_TOKENS,
-  type DropdownItemSize,
-  type DropdownMenuSize,
-  type DropdownTriggerSize,
-  type DropdownVariant,
-} from "./dropdown";
-
 // Divider tokens
 export { DIVIDER_TOKENS, type DividerHeight, type DividerWidth } from "./divider";
 

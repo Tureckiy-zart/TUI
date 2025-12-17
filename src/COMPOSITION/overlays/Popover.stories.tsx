@@ -1,6 +1,7 @@
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/PRIMITIVES/Card";
+import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
+import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -226,12 +227,12 @@ export const WithCardContent: Story = {
       content={
         <Card className="w-80">
           <CardHeader className="pb-sm">
-            <CardTitle className="flex items-center gap-sm">
+            <Heading level={4} className="flex items-center gap-sm">
               <Settings className="h-4 w-4" />
               Quick Settings
-            </CardTitle>
+            </Heading>
           </CardHeader>
-          <CardContent className="space-y-sm">
+          <CardBody className="space-y-sm">
             <div className="flex items-center justify-between">
               <span className="text-sm">Notifications</span>
               <Badge variant="secondary">On</Badge>
@@ -244,7 +245,7 @@ export const WithCardContent: Story = {
               <span className="text-sm">Auto-save</span>
               <Badge variant="secondary">On</Badge>
             </div>
-          </CardContent>
+          </CardBody>
         </Card>
       }
     >

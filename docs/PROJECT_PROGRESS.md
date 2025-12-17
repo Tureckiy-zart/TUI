@@ -2,6 +2,21 @@
 
 This file tracks the completion status of all tasks and subtasks in the Master Task system.
 
+## 🚀 Development Mode
+
+**Status:** ✅ **FEATURE DEVELOPMENT MODE**  
+**Date:** 2025-01-27
+
+The project is operating in **Feature Development Mode**. Architecture is locked and stable. All work focuses on:
+- Implementing product features
+- Improving UX and usability
+- Extending existing components within canonical layers
+- Respecting all architectural constraints
+
+Architecture modifications require explicit unlock procedure.
+
+---
+
 ## 🔒 UI Foundation Lock Status
 
 **Status:** ✅ **FOUNDATION CLOSED**  
@@ -62,7 +77,7 @@ All Foundation Authorities are **CLOSED** and **IMMUTABLE**:
 **Status:** ✅ **LOCKED** (Part of Foundation CLOSED)  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./architecture/TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](./reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 **The Token System is LOCKED as part of the Foundation architecture.** Token System is one of the Foundation Authorities that are CLOSED and IMMUTABLE.
 
@@ -80,7 +95,7 @@ The following aspects of the token system are **FROZEN** and **IMMUTABLE**:
 
 **Foundation Tokens (7):** COLORS, SPACING, TYPOGRAPHY, RADIUS, SHADOWS, OPACITY, MOTION  
 **Shared Component Tokens (4):** FORM_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS  
-**Component-Specific Tokens (26):** ALERT_TOKENS, ARTIST_TOKENS, BUTTON_TOKENS, CARD_TOKENS, CHECKBOX_TOKENS, CONTEXT_MENU_TOKENS, DATA_TOKENS, DIVIDER_TOKENS, DOMAIN_TOKENS, DROPDOWN_TOKENS, INPUT_TOKENS, MENU_TOKENS, MODAL_TOKENS, NAVIGATION_TOKENS, NOTIFICATION_TOKENS, OVERLAY_TOKENS, POPOVER_TOKENS, RADIO_TOKENS, SECTION_TOKENS, SELECT_TOKENS, SURFACE_TOKENS, SWITCH_TOKENS, TABS_TOKENS, TEXTAREA_TOKENS, TOAST_TOKENS, TOOLTIP_TOKENS
+**Component-Specific Tokens (25):** ALERT_TOKENS, ARTIST_TOKENS, BUTTON_TOKENS, CARD_TOKENS, CHECKBOX_TOKENS, CONTEXT_MENU_TOKENS, DATA_TOKENS, DIVIDER_TOKENS, DOMAIN_TOKENS, INPUT_TOKENS, MENU_TOKENS, MODAL_TOKENS, NAVIGATION_TOKENS, NOTIFICATION_TOKENS, OVERLAY_TOKENS, POPOVER_TOKENS, RADIO_TOKENS, SECTION_TOKENS, SELECT_TOKENS, SURFACE_TOKENS, SWITCH_TOKENS, TABS_TOKENS, TEXTAREA_TOKENS, TOAST_TOKENS, TOOLTIP_TOKENS
 
 ### Token Lock Rules
 
@@ -118,9 +133,9 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Status:** ✅ **LOCKED**
    - **Lock Date:** 2025-12-15
    - **Audits Completed:**
-     - ✅ Inventory and Status Audit (`docs/reports/TUI_BUTTON_INVENTORY_REPORT.md`)
-     - ✅ Token Domain Audit (`docs/reports/TUI_BUTTON_TOKEN_AUDIT.md`)
-     - ✅ Storybook and Tests Audit (`docs/reports/TUI_BUTTON_STORYBOOK_TESTS_REPORT.md`)
+     - ✅ Inventory and Status Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_INVENTORY_REPORT.md`) (Note: File may be in docs_archive)
+     - ✅ Token Domain Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_TOKEN_AUDIT.md`) (Note: File may be in docs_archive)
+     - ✅ Storybook and Tests Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_STORYBOOK_TESTS_REPORT.md`) (Note: File may be in docs_archive)
    - **Rule:** DO NOT modify, extend, or create alternatives
    - **Exports:** `Button`, `ButtonProps`, `buttonVariants`
 
@@ -161,14 +176,14 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
   - ⚠️ Spacing: ~85%
   - ⚠️ Shadows: ~10%
 - **Reports Generated:**
-  - `docs/reports/FRP_INVENTORY.md` - Complete codebase inventory (71 components, 4 hooks)
-  - `docs/reports/FRP_CODE_REVIEW.md` - Code review findings (47 issues)
-  - `docs/reports/FRP_API_AUDIT.md` - API consistency audit (12 inconsistencies)
-  - `docs/reports/FRP_CONSISTENCY_AUDIT.md` - Architecture consistency (15 issues)
-  - `docs/reports/FRP_TOKEN_VALIDATION.md` - Token usage validation (12 violations)
-  - `docs/reports/FRP_STATIC_VALIDATION.md` - Static analysis results (all passed)
-  - `docs/reports/FRP_FIX_PROPOSALS.md` - Structured fix proposals (67 issues)
-  - `docs/reports/FULL_REVIEW_PIPELINE_REPORT.md` - Final summary report
+  - `docs_archive/reports/archive/archive/reports/other/FRP_INVENTORY.md` - Complete codebase inventory (71 components, 4 hooks)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_CODE_REVIEW.md` - Code review findings (47 issues)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_API_AUDIT.md` - API consistency audit (12 inconsistencies)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_CONSISTENCY_AUDIT.md` - Architecture consistency (15 issues)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_TOKEN_VALIDATION.md` - Token usage validation (12 violations)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_STATIC_VALIDATION.md` - Static analysis results (all passed)
+  - `docs_archive/reports/archive/archive/reports/other/FRP_FIX_PROPOSALS.md` - Structured fix proposals (67 issues)
+  - `docs_archive/reports/archive/archive/reports/other/FULL_REVIEW_PIPELINE_REPORT.md` - Final summary report
 - **Overall Assessment:** Codebase is in good shape with solid foundation. No blocking issues. Improvements can be addressed incrementally.
 - **Next Steps:**
   - Address critical issues (Week 1)
@@ -260,8 +275,8 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
   - ✅ Type Checking: PASSED
   - ✅ Build: PASSED
 - **Reports:**
-  - `docs/reports/U0_TOKEN_COMPLIANCE_AUDIT.md` - Initial audit
-  - `docs/reports/U1_FINAL_CLEANUP_REPORT.md` - Final cleanup report
+  - `docs_archive/reports/archive/archive/reports/tasks/U0_TOKEN_COMPLIANCE_AUDIT.md` - Initial audit
+  - `docs_archive/reports/archive/archive/reports/tasks/U1_FINAL_CLEANUP_REPORT.md` - Final cleanup report
 - **Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
 - **Next Steps:** U2 - Enforce minimal API and variant consistency (completed)
 
@@ -304,7 +319,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
   - ✅ Storybook Build: PASSED
   - ✅ Token Compliance: 100%
 - **Reports:**
-  - `docs/reports/U2_COMPLETION_REPORT.md` - Complete standardization report with migration guide
+  - `docs_archive/reports/archive/archive/reports/tasks/U2_COMPLETION_REPORT.md` - Complete standardization report with migration guide
 - **Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
 - **Next Steps:** ✅ U3 - Theme Scaffolding CLI (completed 2025-11-23)
 
@@ -333,7 +348,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-20
 - **Summary:** Comprehensive analysis of TUI project structure completed. Analyzed 92 components across 19 categories, 5 token files, 8 theme files. Identified missing shadow tokens, incomplete theme system (missing ThemeProvider, useTheme, themeUtils), and structural mismatches. Prepared actionable summary for Foundation Layer (F0-F9).
-- **Output:** `docs/reports/LAYER0_G0_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/LAYER0_G0_REPORT.md`
 - **Key Findings:**
   - Project has solid foundation with well-organized component structure
   - Token system partially implemented (missing shadows.ts)
@@ -347,7 +362,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-20
 - **Summary:** Established complete token file structure in `src/tokens/` directory. Created missing `shadows.ts` file with elevation shadows, colored shadows, glow effects, and focus shadows. Moved `motion.ts` from `src/theme/` to `src/tokens/` to fix structural mismatch identified in G0. Updated barrel exports in `index.ts`. All 6 token files now exist (colors, typography, spacing, shadows, radius, motion).
-- **Output:** `docs/reports/F0_TOKENS_IMPLEMENTATION_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F0_TOKENS_IMPLEMENTATION_REPORT.md`
 - **Files Created:**
   - ✅ `src/tokens/shadows.ts` (109 lines)
 - **Files Moved:**
@@ -367,7 +382,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-20
 - **Summary:** Complete color palette tokens implemented with full scales (50-950) for primary (midnight blues), accent (purples), and secondary (refined cyan) colors. Added surface tokens (6 surfaces × 2 modes), semantic colors (success, error, warning, info), and text colors (primary, secondary, tertiary, muted). All colors integrated into Tailwind config using token references exclusively. Day and night modes fully supported.
-- **Output:** `docs/reports/F1_COLOR_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F1_COLOR_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/colors.ts` (completely rewritten, 513 lines, was 146 lines)
   - ✅ `tailwind.config.ts` (updated to use token imports)
@@ -386,7 +401,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-11-20
 - **Summary:** Complete typography system tokens implemented with fluid type scale using clamp() for responsive scaling, font families (Inter as primary, Satoshi optional, Clash Display for headings/hero), font weights (100-900), line heights (6 values), letter spacing (6 values), and 13 predefined text styles. All typography tokens integrated into Tailwind config using token references exclusively.
-- **Output:** `docs/reports/F2_TYPOGRAPHY_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F2_TYPOGRAPHY_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/typography.ts` (completely rewritten, 369 lines, was 82 lines)
   - ✅ `tailwind.config.ts` (updated with typography imports)
@@ -407,7 +422,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete spacing system tokens implemented with 8px-based grid system, base spacing scale (0-96), semantic spacing tokens (xs..5xl), and layout spacing tokens (sections, containers, grids, stacks, components). All spacing tokens integrated into Tailwind config using token references exclusively.
-- **Output:** `docs/reports/F3_SPACING_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F3_SPACING_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/spacing.ts` (260 lines with complete spacing system)
   - ✅ `tailwind.config.ts` (updated with spacing imports)
@@ -424,7 +439,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete shadow system tokens implemented with elevation shadows (none, xs, sm, md, lg, xl, 2xl), colored shadows for primary and accent colors, glow effects (subtle, medium, strong), and focus rings. Shadow mapping table for components documented. All shadow tokens integrated into Tailwind config.
-- **Output:** `docs/reports/F4_SHADOW_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F4_SHADOW_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/shadows.ts` (243 lines with complete shadow system)
   - ✅ `tailwind.config.ts` (updated with shadow imports)
@@ -443,7 +458,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete border radius system tokens implemented with radius scale (none, xs, sm, md, lg, xl, 2xl, 3xl, full) and component-specific radius standards (button, card, input, badge, avatar, modal, tooltip, toast, chip, image). All radius tokens integrated into Tailwind config.
-- **Output:** `docs/reports/F5_RADIUS_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F5_RADIUS_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/radius.ts` (201 lines with complete radius system)
   - ✅ `tailwind.config.ts` (updated with radius imports)
@@ -459,7 +474,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete motion system tokens implemented with durations (instant through slowest, including granular values), easing functions (linear, ease-in, ease-out, ease-in-out, bounce, elastic, Material Design easing), transitions (pre-configured duration+easing combinations), keyframe animations (fade, slide, scale, spin, pulse, bounce, ping, shake), and reduced motion support. All motion tokens integrated into Tailwind config.
-- **Output:** `docs/reports/F6_MOTION_TOKENS_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F6_MOTION_TOKENS_REPORT.md`
 - **Files Modified:**
   - ✅ `src/tokens/motion.ts` (346 lines with complete motion system)
   - ✅ `tailwind.config.ts` (updated with motion imports)
@@ -479,7 +494,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete Tailwind CSS integration with all tokens (colors, typography, spacing, shadows, radius, motion) configured. Dark and light theme support using CSS variables. All design tokens exposed as CSS variables. Tailwind config uses CSS variables exclusively with no raw values.
-- **Output:** `docs/reports/F7_TAILWIND_INTEGRATION_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F7_TAILWIND_INTEGRATION_REPORT.md`
 - **Files Modified:**
   - ✅ `tailwind.config.ts` (complete rewrite with token integration)
   - ✅ `src/tokens/css-variables.ts` (60 lines with CSS variable definitions)
@@ -496,7 +511,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete theme provider system implemented with React context, automatic mode detection (DOM attribute → localStorage → system preference → default), mode persistence in localStorage, system preference sync, dynamic CSS variable updates from tokens, and support for both day and night modes. useTheme hook provided for components.
-- **Output:** `docs/reports/F8_THEME_PROVIDER_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F8_THEME_PROVIDER_REPORT.md`
 - **Files Created:**
   - ✅ `src/theme/ThemeProvider.tsx` (154 lines with full theme context)
 - **Files Modified:**
@@ -516,7 +531,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Theme override system implemented with support for multiple configurable themes (default, dark, brand). Each theme can override token subsets independently. Theme loader with caching, token merging system, and instant UI updates on theme switch. All themes fully typed with TypeScript interfaces.
-- **Output:** `docs/reports/F9_THEME_OVERRIDES_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/foundation/F9_THEME_OVERRIDES_REPORT.md`
 - **Files Created:**
   - ✅ `src/themes/types.ts` (Theme override types)
   - ✅ `src/themes/default.ts` (Default theme - no overrides)
@@ -542,9 +557,9 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Summary:** Global TypeScript typing enforcement successfully implemented across entire TUI library. Strict TypeScript mode enabled with all strict options. All components, tokens, themes, hooks, and utilities fully typed. All `any` types removed (except acceptable exceptions for generic utilities). Typing standards, rules, and enforcement script created.
 - **Output:**
   - `docs/structure/TYPING_STANDARD.md` (Global typing standard)
-  - `docs/reports/TYPING_AUDIT_REPORT.md` (Typing audit report)
-  - `docs/reports/FULL_TYPING_COMPLETION_REPORT.md` (Completion report)
-  - `.cursor/rules/typing.mdc` (Typing rules)
+  - `docs_archive/reports/archive/archive/reports/other/TYPING_AUDIT_REPORT.md` (Typing audit report)
+  - `docs_archive/reports/archive/archive/reports/other/FULL_TYPING_COMPLETION_REPORT.md` (Completion report)
+  - `.cursor/rules/user-rules.mdc` (Typing rules - see structure/TYPING_STANDARD.md)
   - `.cursor/scripts/type_enforcement.sh` (Type enforcement script)
 - **Files Modified:**
   - ✅ `tsconfig.json` (all strict options enabled)
@@ -566,6 +581,62 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
   - Typing rules: Comprehensive rules document created
   - Enforcement script: Automated type checking script
 - **Next Steps:** Foundation Layer COMPLETE - Proceed to Upgrade Layer (U0)
+
+---
+
+## UI Architecture Cleanup Phase
+
+### ✅ COMPLETED - UI Architecture Cleanup (2025-01-27)
+
+**Summary:** UI architecture cleanup phase completed. Canonical layers enforced. All duplicate UI implementations resolved. Legacy components removed.
+
+**Completed Migrations:**
+
+1. **MIGRATION_12A - Legacy Card Removal**
+   - ✅ Removed legacy `PRIMITIVES/Card` component
+   - ✅ All usages migrated to `COMPOSITION/layout/Card` (canonical token-driven implementation)
+   - ✅ Architecture now has single canonical Card implementation
+
+2. **MIGRATION_12B - HoverCard Migration to Radix Popover**
+   - ✅ Migrated HoverCard to use `COMPOSITION/overlays/Popover` (Radix-based)
+   - ✅ Removed PATTERNS popover custom implementation
+   - ✅ Single canonical Popover implementation established (Radix-based)
+
+3. **MIGRATION_12C - Dropdown Removal**
+   - ✅ Removed all Dropdown components (PATTERNS and COMPOSITION)
+   - ✅ Removed all Dropdown tokens from FOUNDATION layer
+   - ✅ Removed Dropdown exports from public API
+   - ✅ See `docs/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details
+
+4. **MIGRATION_12D - PATTERNS Popover Removal**
+   - ✅ Removed PATTERNS/menus/menus/popover custom implementation
+   - ✅ HoverCard now uses canonical Radix Popover from COMPOSITION/overlays
+   - ✅ Single canonical Popover implementation (Radix-based)
+
+5. **Toast Hooks Canonicalization**
+   - ✅ Created canonical exports: `useLocalToast` and `useGlobalToast`
+   - ✅ Deprecated old `useToast` exports (backward-compatible)
+   - ✅ Documentation updated in `docs/architecture/TOAST_SYSTEM.md`
+   - ✅ Standardized naming: canonical hooks use camelCase
+
+6. **ContextMenu Consolidation**
+   - ✅ Removed PATTERNS/menus/menus/context-menu custom implementation
+   - ✅ Only canonical Radix-based ContextMenu exists (COMPOSITION/overlays/ContextMenu, locked Foundation component)
+
+**Architectural State:**
+- ✅ No duplicate UI implementations remain
+- ✅ All known legacy layers removed
+- ✅ Canonical implementations established for all UI concerns
+- ✅ Overlays live only in COMPOSITION layer
+- ✅ PATTERNS do not define overlay primitives
+- ✅ FOUNDATION tokens only exist for active components
+
+**Documentation Updated:**
+- ✅ `docs_archive/audits/AUDIT_01_SEMANTIC_DUPLICATES_AND_OVERLAPS.md` - All items marked as RESOLVED (archived)
+- ✅ `docs_archive/cursor_runs/reports/repository-structure-and-duplicates.md` - Updated to reflect resolved state (archived)
+- ✅ `docs/architecture/TOAST_SYSTEM.md` - Canonical names documented
+
+**Status:** ✅ **COMPLETED** - Repository ready for CANON_RELOCK_AND_GUARD_RULES
 
 ---
 
@@ -626,15 +697,15 @@ All typing enforcement tasks completed:
 - **Date Updated:** 2025-01-20
 - **Summary:** Complete code review of TUI library finished. Reviewed 109 files across all categories: components, hooks, tokens, themes. Overall code quality is GOOD with 47 issues identified across 6 categories. Most issues are non-critical improvements. Generated 8 comprehensive reports with 29 fix proposals.
 - **Output:**
-  - `docs/reports/CRV_SCAN_REPORT.md` - Initial codebase scan
-  - `docs/reports/CRV_ARCHITECTURE_REPORT.md` - Architecture review
-  - `docs/reports/CRV_TYPING_REPORT.md` - Typing correctness review
-  - `docs/reports/CRV_TOKEN_VIOLATIONS.md` - Token usage violations
-  - `docs/reports/CRV_THEME_REPORT.md` - Theme integration review
-  - `docs/reports/CRV_A11Y_REPORT.md` - Accessibility review
-  - `docs/reports/CRV_NAMING_REPORT.md` - Naming & consistency review
-  - `docs/reports/CRV_FIX_PROPOSALS.md` - Auto-fix proposals
-  - `docs/reports/CODE_REVIEW_FINAL_REPORT.md` - Consolidated final report
+  - `docs_archive/reports/archive/archive/reports/other/CRV_SCAN_REPORT.md` - Initial codebase scan
+  - `docs_archive/reports/archive/archive/reports/other/CRV_ARCHITECTURE_REPORT.md` - Architecture review
+  - `docs_archive/reports/archive/archive/reports/other/CRV_TYPING_REPORT.md` - Typing correctness review
+  - `docs_archive/reports/archive/archive/reports/other/CRV_TOKEN_VIOLATIONS.md` - Token usage violations
+  - `docs_archive/reports/archive/archive/reports/other/CRV_THEME_REPORT.md` - Theme integration review
+  - `docs_archive/reports/archive/archive/reports/other/CRV_A11Y_REPORT.md` - Accessibility review
+  - `docs_archive/reports/archive/archive/reports/other/CRV_NAMING_REPORT.md` - Naming & consistency review
+  - `docs_archive/reports/archive/archive/reports/other/CRV_FIX_PROPOSALS.md` - Auto-fix proposals
+  - `docs_archive/reports/archive/archive/reports/other/CODE_REVIEW_FINAL_REPORT.md` - Consolidated final report
 - **Key Findings:**
   - Overall Score: 8.0/10
   - Typing: 8.5/10 (Good, 8 issues - missing HTML attribute extensions)
@@ -662,7 +733,7 @@ All typing enforcement tasks completed:
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Successfully applied all 47 fixes from code review reports across 6 categories. All typing issues resolved (5 components), all token violations fixed (23 issues), all accessibility improvements implemented (8 fixes), architecture refactored (useDebounce hook, simplified validation), and legacy CSS documented.
-- **Output:** `docs/reports/U1_FIXES_APPLIED_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/tasks/U1_FIXES_APPLIED_REPORT.md`
 - **Files Modified:** 19 files (15 components, 1 UI component, 1 hook created, 2 CSS files)
 - **Files Created:** 1 (`src/hooks/useDebounce.ts`)
 - **Key Accomplishments:**
@@ -729,7 +800,7 @@ All typing enforcement tasks completed:
 - **Date Updated:** 2025-01-20
 - **Summary:** Comprehensive token compliance audit completed for all 92 components in TUI library. Identified 713 violations across 6 categories (colors, spacing, radius, shadows, typography, font weights, animation). Created detailed audit report with violation breakdown, migration strategies, and priority classification. Generated migration task files for 8 critical components.
 - **Output:**
-  - `docs/reports/U0_TOKEN_COMPLIANCE_AUDIT.md` (407 lines - comprehensive audit report)
+  - `docs_archive/reports/archive/archive/reports/tasks/U0_TOKEN_COMPLIANCE_AUDIT.md` (407 lines - comprehensive audit report)
   - `.cursor/tasks/migration/U0_MIGRATION_Toast.tsx.md` (migration task)
   - `.cursor/tasks/migration/U0_MIGRATION_Alert.tsx.md` (migration task)
   - `.cursor/tasks/migration/U0_MIGRATION_EventCard.tsx.md` (migration task)
@@ -764,7 +835,7 @@ All typing enforcement tasks completed:
 - **Status:** ✅ completed
 - **Date Updated:** 2025-01-20
 - **Summary:** Successfully migrated all HIGH priority color violations (31 violations) from hardcoded Tailwind colors to semantic design tokens. All critical components now use token-based colors that automatically adapt to theme changes.
-- **Output:** `docs/reports/U1_PHASE1_COLOR_MIGRATION_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/tasks/U1_PHASE1_COLOR_MIGRATION_REPORT.md`
 - **Components Migrated:**
   - ✅ Toast.tsx (12 color violations fixed)
   - ✅ Alert.tsx (4 color violations fixed)
@@ -915,9 +986,9 @@ All typing enforcement tasks completed:
 - **Summary:** Successfully configured automated Storybook deployment to GitHub Pages using GitHub Actions. Workflow automatically builds and deploys Storybook on every push to main branch. All documentation and setup guides created.
 - **Files Created:**
   - ✅ `.github/workflows/storybook-deploy.yml` - GitHub Actions workflow for Storybook deployment
-  - ✅ `docs/reports/STORYBOOK_GHPAGES_SETUP.md` - Manual setup instructions and troubleshooting guide
-  - ✅ `docs/reports/STORYBOOK_DRY_RUN_REPORT.md` - Local build validation instructions
-  - ✅ `docs/reports/STORYBOOK_DEPLOYMENT_COMPLETE.md` - Deployment summary and next steps
+  - ✅ `docs_archive/reports/archive/archive/reports/other/STORYBOOK_GHPAGES_SETUP.md` - Manual setup instructions and troubleshooting guide (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/STORYBOOK_DRY_RUN_REPORT.md` - Local build validation instructions (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/STORYBOOK_DEPLOYMENT_COMPLETE.md` - Deployment summary and next steps (Note: File may be in docs_archive)
 - **Files Modified:**
   - ✅ `README.md` - Added Storybook badge linking to GitHub Pages URL
 - **Key Accomplishments:**
@@ -933,9 +1004,9 @@ All typing enforcement tasks completed:
   - Enable GitHub Pages in repository settings (Settings → Pages → Source = GitHub Actions)
   - One-time setup, then deployments happen automatically
 - **Reports:**
-  - `docs/reports/STORYBOOK_GHPAGES_SETUP.md` - Complete setup instructions
-  - `docs/reports/STORYBOOK_DRY_RUN_REPORT.md` - Local validation guide
-  - `docs/reports/STORYBOOK_DEPLOYMENT_COMPLETE.md` - Deployment summary
+  - `docs_archive/reports/archive/archive/reports/other/STORYBOOK_GHPAGES_SETUP.md` - Complete setup instructions (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/STORYBOOK_DRY_RUN_REPORT.md` - Local validation guide (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/STORYBOOK_DEPLOYMENT_COMPLETE.md` - Deployment summary (Note: File may be in docs_archive)
 - **Next Steps:**
   - Enable GitHub Pages in repository settings (manual step)
   - Trigger first deployment (automatic on next push to main or manual trigger)
@@ -952,11 +1023,11 @@ All typing enforcement tasks completed:
   - ✅ `commitlint.config.cjs` - Commitlint configuration
   - ✅ `.github/workflows/release.yml` - GitHub Actions release workflow
   - ✅ `.husky/commit-msg` - Husky hook for commitlint
-  - ✅ `docs/reports/SEMVER_NPM_VALIDATION.md` - NPM token setup and validation guide
-  - ✅ `docs/reports/SEMVER_DRY_RUN.md` - Dry-run validation results
+  - ✅ `docs_archive/reports/archive/archive/reports/other/SEMVER_NPM_VALIDATION.md` - NPM token setup and validation guide (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/SEMVER_DRY_RUN.md` - Dry-run validation results (Note: File may be in docs_archive)
 - **Files Modified:**
   - ✅ `package.json` - Version set to 0.0.0, added publishConfig, added commitlint script
-  - ✅ `CHANGELOG.md` - Moved from docs/reports/ to root directory
+  - ✅ `CHANGELOG.md` - Moved from docs/reports/ to root directory (now at project root)
   - ✅ `README.md` - Added release badge
 - **Dependencies Installed:**
   - ✅ semantic-release 25.0.2
@@ -989,8 +1060,8 @@ All typing enforcement tasks completed:
   - Verify npm scope access for `@tenerife.music`
   - First release will be triggered by conventional commit on main branch
 - **Reports:**
-  - `docs/reports/SEMVER_NPM_VALIDATION.md` - Complete npm token and scope validation guide
-  - `docs/reports/SEMVER_DRY_RUN.md` - Dry-run validation results and configuration details
+  - `docs_archive/reports/archive/archive/reports/other/SEMVER_NPM_VALIDATION.md` - Complete npm token and scope validation guide (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/SEMVER_DRY_RUN.md` - Dry-run validation results and configuration details (Note: File may be in docs_archive)
 - **Next Steps:**
   - Set up NPM_TOKEN in GitHub Secrets (manual step - see validation guide)
   - Verify npm scope access for `@tenerife.music`
@@ -1007,15 +1078,15 @@ All typing enforcement tasks completed:
 - **Date Completed:** 2025-11-22
 - **Summary:** Complete comprehensive audit of the semantic-release pipeline completed. All automated checks passed (87/87 - 100%). Workflow, configuration, package.json, CHANGELOG.md, and dry-run all validated successfully. System is 98% production ready, pending only manual NPM_TOKEN setup verification.
 - **Files Created:**
-  - ✅ `docs/reports/RELEASE_AUDIT_SECRETS.md` - GitHub Secrets validation and setup instructions
-  - ✅ `docs/reports/RELEASE_AUDIT_WORKFLOW.md` - GitHub Actions workflow validation (15/15 checks passed)
-  - ✅ `docs/reports/RELEASE_AUDIT_CONFIG.md` - Semantic-release configuration validation (20/20 checks passed)
-  - ✅ `docs/reports/RELEASE_AUDIT_PACKAGE_JSON.md` - Package.json release configuration validation (18/18 checks passed)
-  - ✅ `docs/reports/RELEASE_AUDIT_NPM_SCOPE.md` - NPM scope and token validation guide
-  - ✅ `docs/reports/RELEASE_AUDIT_CHANGELOG.md` - CHANGELOG.md validation (15/15 checks passed)
-  - ✅ `docs/reports/RELEASE_AUDIT_DRY_RUN.md` - Semantic-release dry-run execution results (16/16 checks passed)
-  - ✅ `docs/reports/RELEASE_AUDIT_WORKFLOW_SIMULATION.md` - Workflow execution simulation (19/20 checks passed)
-  - ✅ `docs/reports/RELEASE_PIPELINE_FINAL_AUDIT.md` - Comprehensive final audit report with summary and recommendations
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_SECRETS.md` - GitHub Secrets validation and setup instructions (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW.md` - GitHub Actions workflow validation (15/15 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_CONFIG.md` - Semantic-release configuration validation (20/20 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_PACKAGE_JSON.md` - Package.json release configuration validation (18/18 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_NPM_SCOPE.md` - NPM scope and token validation guide (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_CHANGELOG.md` - CHANGELOG.md validation (15/15 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_DRY_RUN.md` - Semantic-release dry-run execution results (16/16 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW_SIMULATION.md` - Workflow execution simulation (19/20 checks passed) (Note: File may be in docs_archive)
+  - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_PIPELINE_FINAL_AUDIT.md` - Comprehensive final audit report with summary and recommendations (Note: File may be in docs_archive)
 - **Audit Results:**
   - **Automated Checks:** ✅ 100% PASSED (87/87 checks)
     - GitHub Secrets workflow references: ✅ PASSED (4/4)
@@ -1048,15 +1119,15 @@ All typing enforcement tasks completed:
   - **Risk Level:** 🟢 LOW
   - **Recommendation:** PROCEED with production deployment after NPM_TOKEN setup
 - **Reports Generated:**
-  - `docs/reports/RELEASE_AUDIT_SECRETS.md` - Secrets validation with manual setup instructions
-  - `docs/reports/RELEASE_AUDIT_WORKFLOW.md` - Complete workflow validation report
-  - `docs/reports/RELEASE_AUDIT_CONFIG.md` - Semantic-release configuration validation
-  - `docs/reports/RELEASE_AUDIT_PACKAGE_JSON.md` - Package.json release settings validation
-  - `docs/reports/RELEASE_AUDIT_NPM_SCOPE.md` - NPM scope and token validation guide
-  - `docs/reports/RELEASE_AUDIT_CHANGELOG.md` - CHANGELOG.md validation report
-  - `docs/reports/RELEASE_AUDIT_DRY_RUN.md` - Dry-run execution results and analysis
-  - `docs/reports/RELEASE_AUDIT_WORKFLOW_SIMULATION.md` - Workflow execution simulation
-  - `docs/reports/RELEASE_PIPELINE_FINAL_AUDIT.md` - Comprehensive final audit report
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_SECRETS.md` - Secrets validation with manual setup instructions (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW.md` - Complete workflow validation report (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_CONFIG.md` - Semantic-release configuration validation (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_PACKAGE_JSON.md` - Package.json release settings validation (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_NPM_SCOPE.md` - NPM scope and token validation guide (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_CHANGELOG.md` - CHANGELOG.md validation report (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_DRY_RUN.md` - Dry-run execution results and analysis (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW_SIMULATION.md` - Workflow execution simulation (Note: File may be in docs_archive)
+  - `docs_archive/reports/archive/archive/reports/other/RELEASE_PIPELINE_FINAL_AUDIT.md` - Comprehensive final audit report (Note: File may be in docs_archive)
 - **Next Steps:**
   - Setup NPM_TOKEN in GitHub Secrets (manual step - see RELEASE_AUDIT_SECRETS.md)
   - Verify npm scope access for `@tenerife.music` (see RELEASE_AUDIT_NPM_SCOPE.md)
@@ -1111,7 +1182,7 @@ All typing enforcement tasks completed:
   - ✅ TypeScript: 0 errors
   - ✅ ESLint: 0 errors
   - ✅ All themes validated successfully
-- **Output:** `docs/reports/U3_COMPLETION_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/tasks/U3_COMPLETION_REPORT.md`
 - **Next Steps:** ✅ U4 - Introduce Premium Layout Sections (completed)
 
 ---
@@ -1157,7 +1228,7 @@ All typing enforcement tasks completed:
 - **Files Modified:**
   - ✅ `src/index.ts` (added exports for all three sections)
 - **Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
-- **Output:** `docs/reports/U4_COMPLETION_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/tasks/U4_COMPLETION_REPORT.md`
 - **Next Steps:** U8 or U9 depending on development order
 
 ---
@@ -1186,7 +1257,7 @@ All typing enforcement tasks completed:
 - **Date Completed:** 2025-11-26
 - **Summary:** Executed the Upgrade Layer accessibility mandate—audited every component, fixed keyboard/focus gaps, formalized guidelines, and enforced automated testing + CI gates.
 - **Key Deliverables:**
-  - ✅ Audit artifacts: `docs/reports/accessibility_audit_report.md` highlighting violations + remediation
+  - ✅ Audit artifacts: `docs_archive/reports/archive/archive/reports/other/accessibility_audit_report.md` highlighting violations + remediation (Note: File may be in docs_archive)
   - ✅ Component fixes: `SimpleModal` rebuilt on Radix Dialog with focus trap, `Pagination`/`Breadcrumbs`/`Navbar` ARIA upgrades, card icons hidden from SRs, shared `focusRing` helper in `src/lib/a11y.ts`
   - ✅ Automated coverage: new axe suites (`Pagination.a11y.test.tsx`, `SimpleModal.a11y.test.tsx`), `jest-axe` integration, and `scripts/a11y-contrast-check.js`
   - ✅ Documentation: `docs/a11y_guidelines.md` describing required roles, keyboard patterns, focus styles, and checklist
@@ -1226,7 +1297,7 @@ All typing enforcement tasks completed:
   - ✅ ESLint: 0 errors
   - ✅ Storybook: Builds successfully
   - ✅ Token Compliance: 100% (0 violations)
-- **Output:** `docs/reports/U3.1_FIX_REPORT.md`
+- **Output:** `docs_archive/reports/archive/archive/reports/tasks/U3.1_FIX_REPORT.md`
 - **Next Steps:** ✅ U3 - Theme Scaffolding CLI (completed)
 
 ---
@@ -1887,7 +1958,7 @@ _No tasks in progress currently._
   - ✅ NotificationVariant conflict resolved (renamed to NotificationTokenVariant)
   - ✅ componentShadowMapping export added
   - ✅ Build and typecheck passing successfully
-  - ✅ Comprehensive snapshot document created: `docs/reports/TUI_TYPES_AND_CONFIG_SNAPSHOT.md`
+  - ✅ Comprehensive snapshot document created: `docs_archive/reports/archive/archive/reports/other/TUI_TYPES_AND_CONFIG_SNAPSHOT.md` (Note: File may be in docs_archive)
 - **Type System Status:**
   - ✅ All component Props types exported
   - ✅ All token types exported explicitly
@@ -1900,7 +1971,7 @@ _No tasks in progress currently._
   - ✅ No `export *` patterns found (grep verification)
   - ✅ All exports verified against source files
 - **Output:**
-  - `docs/reports/TUI_TYPES_AND_CONFIG_SNAPSHOT.md` - Complete type system analysis
+  - `docs_archive/reports/archive/archive/reports/other/TUI_TYPES_AND_CONFIG_SNAPSHOT.md` - Complete type system analysis (Note: File may be in docs_archive)
   - All configuration files embedded in snapshot document
   - Clear status: READY for Music project consumption (after fixes)
 - **Next Steps:**
@@ -2333,7 +2404,7 @@ _No tasks in progress currently._
   - **1 violation** detected: PromoCard importing BUTTON_TOKENS
   - All other components verified as compliant
 - **Reports Generated:**
-  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Complete verification report
+  - ✅ `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Complete verification report (Note: File may be in docs_archive)
 - **Next Steps:** PromoCard fix required before system lock
 
 ---
@@ -2355,7 +2426,7 @@ _No tasks in progress currently._
   - Improved tone to premium infrastructure-level language
   - Updated all examples to be token-driven
 - **Reports Generated:**
-  - ✅ `docs/reports/DOCS_ALIGNMENT_REPORT.md` - Complete alignment report with all changes documented
+  - ✅ `docs_archive/reports/archive/archive/reports/other/DOCS_ALIGNMENT_REPORT.md` - Complete alignment report with all changes documented (Note: File may be in docs_archive)
 - **Missing Files Noted:**
   - `00_START_HERE.md`, `design_system.md`, `component_comparison_matrix.md`, `technical_analysis.md`, `ui_ux_audit_report.md`, `layout_and_brand_guide.md`, and PDF files (not found, noted in report)
 - **Success Criteria Met:**
@@ -2438,7 +2509,7 @@ _No tasks in progress currently._
   - `src/components/cards/PromoCard/PromoCard.variants.ts` - Updated to use DOMAIN_TOKENS
   - `src/components/cards/PromoCard/PromoCard.tsx` - Updated JSDoc documentation
 - **Reports Generated:**
-  - ✅ `docs/reports/TUI_PROMOCARD_TOKEN_FIX_REPORT.md` - Complete fix report
+  - ✅ `docs_archive/reports/archive/archive/reports/other/TUI_PROMOCARD_TOKEN_FIX_REPORT.md` - Complete fix report (Note: File may be in docs_archive)
 - **Verification:**
   - ✅ No `BUTTON_TOKENS` imports found in PromoCard directory
   - ✅ PromoCard correctly uses only domain-owned tokens
@@ -2462,7 +2533,7 @@ _No tasks in progress currently._
   - ✅ All components correctly use their own token domains or shared domains
   - ✅ PromoCard violation fully resolved
 - **Reports Updated:**
-  - ✅ `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Updated with re-verification results
+  - ✅ `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - Updated with re-verification results (Note: File may be in docs_archive)
     - Changed status from **FAIL** to **FINAL OK**
     - Added "Re-verification Results" section (Section 11)
     - Updated all violation statuses to **RESOLVED**
@@ -2484,7 +2555,7 @@ _No tasks in progress currently._
     - Documented what is locked, allowed, and forbidden
     - Added unlock procedure documentation
     - Referenced final audit report (FINAL VERDICT: OK)
-  - ✅ Updated `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` with token lock enforcement
+  - ✅ Updated `docs/architecture/TUI_CURSOR_GUARD_RULES.md` with token lock enforcement
     - Added "Token System Lock Status" section
     - Defined forbidden actions
     - Added unlock procedure requirements
@@ -2493,7 +2564,7 @@ _No tasks in progress currently._
 - **Lock Details:**
   - **Lock Date:** 2025-12-13
   - **Lock Scope:** All token domains, ownership rules, shared/component-specific separation
-  - **Final Audit:** `docs/reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - FINAL VERDICT: OK
+  - **Final Audit:** `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md` - FINAL VERDICT: OK (Note: File may be in docs_archive)
   - **Violations:** 0 (all resolved)
 - **Enforcement:**
   - ✅ Lock applies to both humans and AI agents
@@ -2501,12 +2572,76 @@ _No tasks in progress currently._
   - ✅ Unlock procedure explicitly documented
 - **Files Modified:**
   - `docs/architecture/TUI_TOKEN_SYSTEM.md` - Locked and documented
-  - `.cursor/rules/TUI_CURSOR_GUARD_RULES.md` - Lock enforcement rules added
+  - `docs/architecture/TUI_CURSOR_GUARD_RULES.md` - Lock enforcement rules added
 - **Success Criteria Met:**
   - ✅ Token system declared immutable
   - ✅ Guard rules enforce the lock
   - ✅ No ambiguity about allowed vs forbidden token changes
   - ✅ All token domains verified and isolated
+
+---
+
+### CANON_RELOCK_AND_GUARD_RULES - UI Architecture Cleanup & Canon Lock
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-17
+- **Summary:** Officially declared the current architecture as CANONICAL and locked resolved decisions to prevent regression into legacy/duplicate structures.
+- **Actions Taken:**
+  - ✅ Created `docs/architecture/CANONICAL_LOCK.md` - Canonical architecture lock document
+    - Documented canonical layer definitions (FOUNDATION, PRIMITIVES, COMPOSITION, PATTERNS, DOMAIN)
+    - Documented canonical overlay components (Popover, Modal/Dialog, ContextMenu, Toast)
+    - Documented removed components (Dropdown, legacy Card)
+    - Documented canonical toast hooks (useLocalToast, useGlobalToast)
+    - Documented forbidden regressions list
+    - Documented allowed actions
+    - Documented unlock protocol
+  - ✅ Updated `docs/architecture/TUI_CURSOR_GUARD_RULES.md` with canonical architecture protection rules
+    - Added "Canonical Architecture Protection Rules" section
+    - Added forbidden regressions list (Dropdown, legacy Card, PATTERNS overlays, legacy useToast, orphaned tokens)
+    - Added allowed actions (extend within layer, add with justification, unlock protocol)
+    - Added canonical component import rules
+    - Added canonical architecture verification checklist
+    - Updated version to 1.2
+  - ✅ Updated `docs/INTERNAL_CANONICAL_CONTEXT.md` to reference canonical lock
+    - Added reference to CANONICAL_LOCK.md as authoritative source
+    - Updated Related Documents section
+    - Updated version to 1.2
+  - ✅ Updated `docs/PROJECT_PROGRESS.md` with final entry (this entry)
+- **Lock Details:**
+  - **Lock Date:** 2025-12-17
+  - **Lock Scope:** Canonical architecture state, layer definitions, component locations, forbidden regressions
+  - **Reference:** `docs/architecture/CANONICAL_LOCK.md` - Authoritative source for canonical state
+  - **Guard Rules:** `docs/architecture/TUI_CURSOR_GUARD_RULES.md` - Enforcement rules
+- **Canonical Truth Locked:**
+  - ✅ Layers: FOUNDATION (tokens only), PRIMITIVES (atomic UI), COMPOSITION (layout, overlays), PATTERNS (business/UI patterns), DOMAIN (app-specific)
+  - ✅ Overlays: Popover, Modal/Dialog, ContextMenu, Toast - ONLY in COMPOSITION
+  - ✅ Components: Card - ONLY in COMPOSITION/layout/Card
+  - ✅ Hooks: useLocalToast, useGlobalToast - canonical hooks
+  - ✅ Tokens: MUST NOT exist without active components
+- **Forbidden Regressions:**
+  - ❌ Dropdown components and tokens (removed MIGRATION_12C)
+  - ❌ Legacy Card in PRIMITIVES (removed MIGRATION_12A)
+  - ❌ Overlay infrastructure in PATTERNS
+  - ❌ Legacy useToast exports in new code
+  - ❌ Tokens without components
+- **Enforcement:**
+  - ✅ Lock applies to both humans and AI agents
+  - ✅ Any regression requests MUST be refused with reference to CANONICAL_LOCK.md
+  - ✅ Unlock procedure explicitly documented
+- **Files Created/Modified:**
+  - `docs/architecture/CANONICAL_LOCK.md` - Created (canonical lock document)
+  - `docs/architecture/TUI_CURSOR_GUARD_RULES.md` - Updated (canonical architecture protection rules)
+  - `docs/INTERNAL_CANONICAL_CONTEXT.md` - Updated (canonical lock reference)
+  - `docs/PROJECT_PROGRESS.md` - Updated (this entry)
+- **Success Criteria Met:**
+  - ✅ Canonical architecture explicitly locked
+  - ✅ Guard rules exist and are visible
+  - ✅ Future regressions require explicit unlock
+  - ✅ The project is declared ARCHITECTURALLY STABLE
+- **Post-Condition:**
+  - ✅ The UI system is closed for structural drift
+  - ✅ Any future change is intentional, explicit, and reviewable
+  - ✅ Features can be safely built without fear of entropy
 
 ---
 

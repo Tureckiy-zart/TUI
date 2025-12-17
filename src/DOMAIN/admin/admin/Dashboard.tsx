@@ -2,8 +2,8 @@
 
 import React from "react";
 
+import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { Card, CardContent } from "@/PRIMITIVES/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -23,12 +23,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ title, content, className 
 
   return (
     <Card className={cn("shadow-md", className)}>
-      <CardContent className="p-lg">
+      <CardBody className="p-lg">
         <Heading level={2} className="mb-md">
           {title}
         </Heading>
         <Text variant="muted">{content}</Text>
-      </CardContent>
+      </CardBody>
     </Card>
   );
 };

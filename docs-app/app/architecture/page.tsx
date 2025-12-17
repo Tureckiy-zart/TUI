@@ -43,8 +43,8 @@ export default function ArchitecturePage() {
         <section>
           <h2 className="mb-4 text-3xl font-semibold">Menu Architecture</h2>
           <p className="mb-4 text-muted-foreground">
-            Menu components (DropdownMenu, ContextMenu, HoverCard) share a common foundation with
-            consistent keyboard navigation and focus management.
+            Menu components (ContextMenu, HoverCard) share a common foundation with consistent
+            keyboard navigation and focus management.
           </p>
         </section>
 

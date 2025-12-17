@@ -310,9 +310,9 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Types: `PopoverArrowProps`, `PopoverContentProps`, `PopoverRootProps`, `PopoverTriggerProps`
     - Variants: `popoverContentVariants`
 
-34. **DropdownMenu** - `src/components/menus/dropdown/`
-    - Exports: `DropdownMenuCheckItem`, `DropdownMenuContent`, `DropdownMenuGroup`, `DropdownMenuItem`, `DropdownMenuLabel`, `DropdownMenuRadioGroup`, `DropdownMenuRadioItem`, `DropdownMenuRoot`, `DropdownMenuSeparator`, `DropdownMenuSub`, `DropdownMenuSubContent`, `DropdownMenuSubTrigger`, `DropdownMenuTrigger`
-    - Types: `DropdownMenuCheckItemProps`, `DropdownMenuContentProps`, `DropdownMenuGroupProps`, `DropdownMenuItemProps`, `DropdownMenuLabelProps`, `DropdownMenuRadioGroupProps`, `DropdownMenuRadioItemProps`, `DropdownMenuRootProps`, `DropdownMenuSeparatorProps`, `DropdownMenuSubContentProps`, `DropdownMenuSubProps`, `DropdownMenuSubTriggerProps`, `DropdownMenuTriggerProps`
+34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C, 2025-01-27)
+    - All Dropdown components and tokens fully removed
+    - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 
 35. **HoverCard** - `src/components/menus/hover-card/`
     - Exports: `HoverCardContent`, `HoverCardRoot`, `HoverCardTrigger`
@@ -468,9 +468,9 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 ### DO NOT USE - Menu Components (Non-Canonical Variants)
 
-19. **DropdownMenu** (menus variant) - `src/components/menus/DropdownMenu.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE - Use `DropdownMenu` from `src/components/menus/dropdown/` instead
+19. ~~**DropdownMenu** (menus variant)~~ - ❌ **REMOVED** (MIGRATION_12C)
+    - **Status:** REMOVED
+    - **Rule:** Fully removed from codebase
 
 20. **NavigationMenu** - `src/components/menus/NavigationMenu.tsx`
     - **Status:** RESTRICTED
@@ -478,9 +478,9 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 ### DO NOT USE - Dropdown Component
 
-21. **Dropdown** - `src/components/dropdown/Dropdown.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+21. ~~**Dropdown**~~ - ❌ **REMOVED** (MIGRATION_12C)
+    - **Status:** REMOVED
+    - **Rule:** Fully removed from codebase
 
 ### DO NOT USE - Drawer Component
 

@@ -798,7 +798,7 @@ These rules are successfully implemented when:
 **Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./TUI_TOKEN_SYSTEM.md)  
-**Final Audit:** [Token Domains Final Report](../reports/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK**
+**Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
 The **Token System** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
 

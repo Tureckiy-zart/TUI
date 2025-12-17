@@ -9,17 +9,25 @@
 
 import * as React from "react";
 
-import { PopoverContent, type PopoverContentProps } from "../popover/PopoverContent";
-import { usePopoverContext } from "../popover/PopoverRoot";
+import { PopoverContent } from "@/COMPOSITION/overlays/Popover";
 
-export interface HoverCardContentProps extends PopoverContentProps {}
+import { useHoverCardContext } from "./HoverCardRoot";
+
+export interface HoverCardContentProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof PopoverContent>,
+    "onMouseEnter" | "onMouseLeave"
+  > {
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
+}
 
 /**
  * HoverCard Content component
  */
 export const HoverCardContent = React.forwardRef<HTMLDivElement, HoverCardContentProps>(
   ({ onMouseEnter, onMouseLeave, ...props }, ref) => {
-    const { onOpenChange } = usePopoverContext();
+    const { onOpenChange } = useHoverCardContext();
 
     const handleMouseEnter = React.useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
