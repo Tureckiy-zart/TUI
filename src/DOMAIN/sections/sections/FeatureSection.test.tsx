@@ -135,8 +135,9 @@ describe("FeatureSection component", () => {
 
   it("should render feature cards with proper structure", () => {
     const { container } = render(<FeatureSection features={sampleFeatures} />);
-    const cards = container.querySelectorAll('[class*="rounded-xl"]');
-    expect(cards.length).toBe(sampleFeatures.length);
+    // Card components are rendered, check by CardBody presence or feature titles
+    const featureTitles = container.querySelectorAll("h3");
+    expect(featureTitles.length).toBe(sampleFeatures.length);
   });
 
   it("should apply token-based classes", () => {
