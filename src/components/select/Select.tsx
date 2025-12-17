@@ -7,6 +7,7 @@ import * as React from "react";
 
 import { getBaseValue, getSpacingPx } from "@/lib/responsive-props";
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/tokens/components/motion";
 import { SELECT_TOKENS } from "@/tokens/components/select";
 import type {
   ResponsiveAlignOffset,
@@ -23,7 +24,7 @@ import type {
 // ============================================================================
 
 const selectTriggerVariants = cva(
-  `flex items-center justify-between outline-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1`,
+  `flex items-center justify-between outline-none focus-visible:outline-none disabled:cursor-not-allowed [&>span]:line-clamp-1`,
   {
     variants: {
       size: {
@@ -61,7 +62,7 @@ const selectTriggerVariants = cva(
 );
 
 const selectContentVariants = cva(
-  `relative z-50 ${SELECT_TOKENS.content.maxHeight} ${SELECT_TOKENS.content.minWidth} overflow-hidden ${SELECT_TOKENS.content.border} ${SELECT_TOKENS.content.background} ${SELECT_TOKENS.content.text} ${SELECT_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[8px] data-[side=left]:slide-in-from-right-[8px] data-[side=right]:slide-in-from-left-[8px] data-[side=top]:slide-in-from-bottom-[8px]`,
+  `relative z-50 ${SELECT_TOKENS.content.maxHeight} ${SELECT_TOKENS.content.minWidth} overflow-hidden ${SELECT_TOKENS.content.border} ${SELECT_TOKENS.content.background} ${SELECT_TOKENS.content.text} ${SELECT_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)] data-[side=left]:slide-in-from-right-[var(--spacing-sm)] data-[side=right]:slide-in-from-left-[var(--spacing-sm)] data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]`,
   {
     variants: {
       size: {
@@ -79,7 +80,7 @@ const selectContentVariants = cva(
 );
 
 const selectItemVariants = cva(
-  `relative flex ${SELECT_TOKENS.width.full} cursor-default select-none items-center outline-none ${SELECT_TOKENS.item.focus.background} ${SELECT_TOKENS.item.focus.text} ${SELECT_TOKENS.item.disabled.pointerEvents} data-[disabled]:opacity-50`,
+  `relative flex ${SELECT_TOKENS.width.full} cursor-default select-none items-center outline-none ${SELECT_TOKENS.item.focus.background} ${SELECT_TOKENS.item.focus.text} data-[disabled]:${SELECT_TOKENS.item.disabled.pointerEvents} data-[disabled]:${SELECT_TOKENS.item.disabled.opacity}`,
   {
     variants: {
       size: {
@@ -152,7 +153,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
           }),
           // Radix provides data-state attributes automatically
           // Add state-based styling via data attributes
-          "data-[state=open]:border-[hsl(var(--ring))]",
+          `data-[state=open]:${SELECT_TOKENS.state.open.border}`,
           "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
           className,
         )}
@@ -192,7 +193,11 @@ const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(
           className={cn(
             SELECT_TOKENS.trigger.icon.size,
             SELECT_TOKENS.trigger.icon.color,
-            "shrink-0 opacity-50 transition-transform duration-200 data-[state=open]:rotate-180",
+            "shrink-0 opacity-50",
+            MOTION_TOKENS.transition.transform,
+            MOTION_TOKENS.duration["200"],
+            MOTION_TOKENS.easing.out,
+            "data-[state=open]:rotate-180",
             className,
           )}
         />
@@ -232,7 +237,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
     // Resolve offset tokens to pixels
     const sideOffsetPx = React.useMemo(() => {
       const baseOffset = getBaseValue(sideOffset);
-      return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
+      return baseOffset ? getSpacingPx(baseOffset) : getSpacingPx("xs"); // Default: spacing token (xs)
     }, [sideOffset]);
 
     const alignOffsetPx = React.useMemo(() => {
@@ -252,7 +257,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
               size: baseSize as SelectSizeToken,
             }),
             position === "popper" &&
-              "data-[side=bottom]:translate-y-[4px] data-[side=left]:-translate-x-[4px] data-[side=right]:translate-x-[4px] data-[side=top]:-translate-y-[4px]",
+              "data-[side=bottom]:translate-y-[var(--spacing-xs)] data-[side=left]:-translate-x-[var(--spacing-xs)] data-[side=right]:translate-x-[var(--spacing-xs)] data-[side=top]:-translate-y-[var(--spacing-xs)]",
             className,
           )}
           {...props}
