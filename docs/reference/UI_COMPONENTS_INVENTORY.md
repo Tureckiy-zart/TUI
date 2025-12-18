@@ -121,7 +121,7 @@
 - `PopoverContent`
 - `PopoverArrow`
 
-#### ~~DropdownMenu~~ ✅ REMOVED (MIGRATION_12C, 2025-01-27)
+#### ~~DropdownMenu~~ ✅ REMOVED (MIGRATION_12C,  )
 
 **Status:** All Dropdown components and tokens fully removed from codebase.
 

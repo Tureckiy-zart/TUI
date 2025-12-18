@@ -433,7 +433,7 @@ Radix-based menu and navigation components with token-driven styling.
 
 ### ~~DropdownMenu~~ ✅ REMOVED
 
-**Status:** Fully removed in MIGRATION_12C (2025-01-27)
+**Status:** Fully removed in MIGRATION_12C ( )
 
 All Dropdown components and tokens have been removed from the codebase. See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details (archived).
 

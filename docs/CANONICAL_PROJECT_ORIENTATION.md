@@ -180,7 +180,7 @@ theme: {
 
 **Example: Button Component**
 
-**Status:** ✅ **LOCKED** (2025-12-15) — Validated and immutable
+**Status:** ✅ **FINAL LOCK** ( ) — Foundation primitive, validated and immutable
 
 ```typescript
 // src/components/ui/button.tsx
@@ -320,7 +320,7 @@ const buttonVariants = tokenCVA({
 
 #### 3. Button Component
 
-**Status:** ✅ **LOCKED and VALIDATED** (2025-12-15)
+**Status:** ✅ **FINAL LOCK** ( ) — Foundation primitive, validated and immutable
 
 - Button component is locked and immutable after audit completion
 - Button reflects token changes immediately
@@ -504,7 +504,7 @@ grep "initThemeSync" .storybook/preview.tsx  # Must be top-level
 - Color authority (single source of truth)
 - Runtime injection mechanism
 - Storybook initialization
-- Button component (Extension layer)
+- Button component (Foundation layer - FINAL LOCK)
 
 **What is READY FOR NEXT PHASE:**
 - CVA enforcement tasks (not in Foundation scope)

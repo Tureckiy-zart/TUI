@@ -158,12 +158,12 @@ export const LINK_TOKENS = {
       underline: "hover:underline", // Underline on hover
     } as const,
     secondary: {
-      text: "text-secondary-foreground", // Secondary text using CSS var
+      text: "text-secondary", // Secondary text using CSS var
       hover: "hover:underline", // Underline on hover
     } as const,
     accent: {
-      text: "text-accent-foreground", // Accent text using CSS var
-      hover: "hover:text-accent-foreground/80", // Accent hover text
+      text: "text-accent", // Accent text using CSS var (accent color, not accent-foreground)
+      hover: "hover:text-accent/80", // Accent hover text
       underline: "hover:underline", // Underline on hover
     } as const,
     outline: {

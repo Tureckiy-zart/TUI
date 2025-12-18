@@ -19,7 +19,7 @@ This system solves the problem of design entropy at scale by establishing immuta
 ## 1.1. Current Development Mode
 
 **Status:** ✅ **FEATURE DEVELOPMENT MODE**  
-**Date:** 2025-01-27
+**Date:**  
 
 The project operates in **Feature Development Mode**. Architecture is locked and stable. All work focuses on implementing product features, improving UX, and extending existing components within canonical layers.
 
@@ -184,7 +184,7 @@ Changes are possible, but they require an explicit unlock.
 
 **Status:** ✅ **STABLE**  
 **Version:** 1.0  
-**Date Created:** 2025-01-27
+**Date Created:**  
 
 This document is the primary architectural entrypoint. It is designed to remain stable over time. For detailed rules, constraints, and implementation guidance, refer to the canonical documents listed in Section 7.
 

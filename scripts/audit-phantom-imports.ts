@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+/// <reference types="node" />
 /**
  * Phantom Imports Audit Script
  * Scans the entire repository for imports from @tenerife.music/* packages

@@ -84,12 +84,13 @@ export const BUTTON_TOKENS = {
   /**
    * Icon size within buttons by button size
    * Scales proportionally with button size for visual balance
+   * Contains full SVG selector classes for direct use in CVA
    */
   iconSize: {
-    sm: "size-3.5", // 14px (0.875rem) - smaller icon for small buttons
-    md: "size-4", // 16px (1rem) - medium icon for medium buttons
-    lg: "size-5", // 20px (1.25rem) - larger icon for large buttons
-    icon: "size-4", // 16px (1rem) - medium icon for icon-only buttons
+    sm: "[&_svg]:w-3.5 [&_svg]:h-3.5", // 14px (0.875rem) - smaller icon for small buttons
+    md: "[&_svg]:w-4 [&_svg]:h-4", // 16px (1rem) - medium icon for medium buttons
+    lg: "[&_svg]:w-5 [&_svg]:h-5", // 20px (1.25rem) - larger icon for large buttons
+    icon: "[&_svg]:w-4 [&_svg]:h-4", // 16px (1rem) - medium icon for icon-only buttons
   } as const,
 
   /**

@@ -91,6 +91,23 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
    - **Exports:** `Toast`, `ToastAction`, `ToastClose`, `ToastDescription`, `ToastRoot`, `ToastTitle`, `toastVariants`
    - **Provider:** `ToastProvider`, `ToastViewport`, `useToast`
 
+6. **Button** - `src/PRIMITIVES/Button/Button.tsx`
+   - **Status:** ✅ **FINAL LOCK** ( )
+   - **Rule:** DO NOT modify, extend, or create alternatives
+   - **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+   - **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
+   - **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
+   - **Exports:** `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
+   - **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg, icon)
+   - **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
+   - **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
+
+7. **Link** - `src/PRIMITIVES/Link/Link.tsx`
+   - **Status:** ✅ **FINAL LOCK** (2025-12-18)
+   - **Rule:** DO NOT modify, extend, or create alternatives
+   - **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
+   - **Exports:** `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
+
 ### Foundation Layer Rules
 
 - **DO NOT** modify locked components
@@ -112,12 +129,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 ### Visual Components
 
-1. **Button** - `src/components/ui/button.tsx`
-   - **Status:** ✅ **LOCKED** (2025-12-15)
-   - **Rule:** DO NOT modify, extend, or create alternatives
-   - Exports: `Button`, `ButtonProps`, `buttonVariants`
-
-2. **Alert** - `src/components/ui/alert.tsx`
+1. **Alert** - `src/components/ui/alert.tsx`
    - Exports: `Alert`, `AlertProps`, `alertVariants`
 
 3. **Link** - `src/PRIMITIVES/Link/Link.tsx`
@@ -316,7 +328,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Types: `PopoverArrowProps`, `PopoverContentProps`, `PopoverRootProps`, `PopoverTriggerProps`
     - Variants: `popoverContentVariants`
 
-34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C, 2025-01-27)
+34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C,  )
     - All Dropdown components and tokens fully removed
     - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 
@@ -428,7 +440,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 8. **Button** (primitive) - `src/components/primitives/Button.tsx`
    - **Status:** RESTRICTED
-   - **Rule:** DO NOT USE - Use `Button` from `src/components/ui/button.tsx` instead
+   - **Rule:** DO NOT USE - Use `Button` from `src/PRIMITIVES/Button/Button.tsx` (FOUNDATION LOCKED) instead
 
 9. **Link** (legacy path) - `src/components/primitives/Link.tsx`
    - **Status:** RESTRICTED
@@ -771,8 +783,8 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 ## Document Status
 
 **Status:** FINAL  
-**Version:** 1.1  
-**Last Updated:** 2025-12-16
+**Version:** 1.2  
+**Last Updated:**  
 
 This document is **FINAL**. Any changes to this canonical state require explicit architectural review and approval. This document serves as the definitive law for UI component usage in the Extension Layer.
 
@@ -783,6 +795,15 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 ---
 
 ## Version History
+
+- **v1.2** ( ): Button Foundation Lock (FINAL)
+  - Updated Button status to FINAL LOCK ( )
+  - Changed Button layer from Extension to FOUNDATION (Primitive)
+  - Updated Button path to `src/PRIMITIVES/Button/Button.tsx`
+  - Added Button lock report reference
+  - Added reference to FINAL_FOUNDATION_LOCK.md
+  - Updated RESTRICTED section Button reference to correct path
+  - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task
 
 - **v1.1** (2025-12-16): Foundation Authority Alignment
   - Added reference to Extension Authority Contract
