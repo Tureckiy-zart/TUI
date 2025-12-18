@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2025-12-18
+
+### Added
+
+- **Foundation Regression Guards (Phase 4)**: Technical enforcement to prevent reintroduction of styling escape hatches
+  - ESLint rule `no-foundation-classname-style`: Blocks `className` and `style` props in Foundation component interfaces
+  - ESLint rule `no-foundation-open-htmlattributes`: Requires `Omit<React.*HTMLAttributes, "className" | "style">` instead of direct extension
+  - Type-level tests for all 9 Foundation components (Button, Link, Text, Heading, Input, Textarea, Checkbox, Radio, Label)
+  - Type tests use `@ts-expect-error` to ensure `className` and `style` are rejected at compile time
+  - All guards are enforced in CI via `typecheck` and `lint:ci` scripts
+
+### Changed
+
+- Foundation components now have compile-time and lint-time protection against regression
+- Type-test files are excluded from ESLint linting (added `**/*.type-test.tsx` to ignore patterns)
+
+### Security
+
+- Foundation enforcement is now technically impossible to bypass without explicit rule changes
+- No manual review needed to catch violations - CI will fail on any regression attempt
+
 ## [1.0.11] - 2025-12-11
 
 ### Added
@@ -138,7 +159,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Legacy EventCard.tsx and VenueCard.tsx files (replaced with new token-driven implementations)
 
-## [0.0.1] - 2025-01-29
+## [0.0.1] -
 
 ### Added
 

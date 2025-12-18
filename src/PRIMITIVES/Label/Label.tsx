@@ -14,7 +14,7 @@ const labelVariants = cva(
 
 export interface LabelProps
   extends
-    React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
+    Omit<React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>, "className" | "style">,
     VariantProps<typeof labelVariants> {
   /**
    * Whether the field is required (shows asterisk)
@@ -23,8 +23,9 @@ export interface LabelProps
 }
 
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className, required, children, ...props }, ref) => (
-    <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props}>
+  ({ required, children, ...props }, ref) => (
+    // className and style are forbidden from public API - only CVA output is used
+    <LabelPrimitive.Root ref={ref} className={labelVariants()} {...props}>
       {children}
       {required && <span className={cn(FORM_TOKENS.label.requiredMark, "ml-xs")}>*</span>}
     </LabelPrimitive.Root>

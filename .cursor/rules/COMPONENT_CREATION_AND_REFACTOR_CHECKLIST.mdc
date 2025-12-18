@@ -98,6 +98,8 @@ The AI MUST ensure:
 - No boolean style toggles without token backing
 - No `variant: "primary" | "secondary"` patterns
 - Types are exported explicitly
+- **For Foundation components:** `className` and `style` props MUST be excluded from public API (Foundation Enforcement is FINAL/APPLIED)
+- **For Foundation components:** MUST use `Omit<React.*HTMLAttributes, "className" | "style">` pattern
 
 ---
 
@@ -120,6 +122,7 @@ Before completion, the AI MUST verify:
 - All props map to tokens
 - Scope is limited to this component
 - No unrelated files were touched
+- **For Foundation components:** Foundation Enforcement compliance verified (className/style excluded, ESLint rules pass, type-tests pass)
 
 If verification fails → **FIX or REFUSE**.
 
@@ -198,6 +201,7 @@ Before completion, the AI MUST verify:
 - Token compliance
 - No scope leakage
 - No hidden API changes
+- **For Foundation components:** Foundation Enforcement compliance maintained (className/style remain excluded, ESLint rules pass, type-tests pass)
 
 If verification fails → **FIX or REFUSE**.
 
@@ -225,6 +229,8 @@ In ALL modes, the AI MUST NOT:
 - Change Authority or Locks
 - Modify multiple components
 - Apply patterns from other projects
+- **For Foundation components:** Add `className` or `style` props to public API (Foundation Enforcement is FINAL/APPLIED and LOCKED)
+- **For Foundation components:** Extend `React.*HTMLAttributes` directly without `Omit<..., "className" | "style">`
 
 ---
 

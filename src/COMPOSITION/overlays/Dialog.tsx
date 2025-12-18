@@ -98,17 +98,10 @@ export interface DialogTitleProps extends React.HTMLAttributes<HTMLHeadingElemen
 }
 
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ titleId, className, children, ...props }, ref) => {
+  ({ titleId, children, ...props }, ref) => {
+    // className is forbidden on Foundation components - DialogTitle uses only token-driven props
     return (
-      <Heading
-        ref={ref}
-        as="h2"
-        level={4}
-        weight="semibold"
-        id={titleId}
-        className={cn(className)}
-        {...props}
-      >
+      <Heading ref={ref} as="h2" level={4} weight="semibold" id={titleId} {...props}>
         {children}
       </Heading>
     );

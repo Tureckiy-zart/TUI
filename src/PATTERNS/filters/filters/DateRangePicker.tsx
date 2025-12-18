@@ -84,15 +84,7 @@ export function DateRangePicker({
 
   return (
     <div className={cn("relative", className)}>
-      <Button
-        variant="outline"
-        className={cn(
-          "w-full justify-start text-left font-normal",
-          !value.from && "text-muted-foreground",
-        )}
-        onClick={() => setIsOpen(!isOpen)}
-        disabled={disabled}
-      >
+      <Button variant="outline" onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
         <CalendarIcon className="mr-sm h-4 w-4" />
         {formatDateRange(value)}
       </Button>

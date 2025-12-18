@@ -22,14 +22,11 @@ import { Text } from "@/PRIMITIVES/Text";
 import type { VenueCardProps } from "./VenueCard.types";
 import {
   venueCardBadgeVariants,
-  venueCardDescriptionVariants,
   venueCardFooterBorderVariants,
   venueCardImageOverlayVariants,
   venueCardImagePlaceholderVariants,
   venueCardImageTransformVariants,
-  venueCardLocationTextVariants,
   venueCardMetadataRowVariants,
-  venueCardTitleVariants,
   venueCardVariants,
 } from "./VenueCard.variants";
 
@@ -146,7 +143,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         {/* Content Section */}
         <CardBaseContentWrapper size={cardBaseSize}>
           {/* Title */}
-          <Heading level={3} className={venueCardTitleVariants({ size })}>
+          <Heading level={3}>
             {href ? (
               <Link href={href} variant="ghost">
                 {name}
@@ -158,7 +155,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
 
           {/* Description */}
           {description && (
-            <Text size="sm" variant="muted" className={venueCardDescriptionVariants({ size })}>
+            <Text size="sm" variant="muted">
               {description}
             </Text>
           )}
@@ -174,7 +171,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   className={ICON_TOKENS.sizes.sm}
                   aria-hidden="true"
                 />
-                <Text size="xs" variant="muted" className={venueCardLocationTextVariants({ size })}>
+                <Text size="xs" variant="muted">
                   {location}
                 </Text>
               </div>

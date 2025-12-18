@@ -22,7 +22,9 @@ This document provides **human-readable navigation** to the Foundation component
 **Canonical Lifecycle:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle
 
 **Authority Documents:**
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status and rules
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status and rules (includes Foundation Enforcement Lock Status)
+- [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) — Foundation Contract (FINAL/APPLIED — Foundation Enforcement is LOCKED)
+- [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) — Foundation component scope (FINAL/APPLIED)
 - [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) — Canonical architecture context
 - [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) — TypeScript typing standard
 
@@ -30,13 +32,13 @@ This document provides **human-readable navigation** to the Foundation component
 
 ## Lifecycle Steps Overview
 
-The Foundation component lifecycle consists of 13 steps that must be completed in sequence. Each step has explicit exit criteria and verification requirements.
+The Foundation component lifecycle consists of steps that must be completed in sequence (Steps 1-10 including mandatory Step 7.5, Steps 11-12, Step 13). Each step has explicit exit criteria and verification requirements.
 
 **Lifecycle Structure:**
 
 The Foundation component lifecycle is structured in three phases:
 
-1. **Architectural Validation (Steps 1-10):** Component structure, compliance, and architectural rules
+1. **Architectural Validation (Steps 1-10, including Step 7.5):** Component structure, compliance, and architectural rules (including Foundation Enforcement verification)
 2. **Quality Gates (Steps 11-12):** Storybook and Testing — BLOCKING requirements
 3. **Foundation Lock (Step 13):** Formal locking after all validations and quality gates pass
 
@@ -93,8 +95,27 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 - **Authority:** [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md)
 - **Key Concepts:** Public Type Surface, explicit separation of public vs internal types, forbidden patterns (any, string widening, VariantProps)
 - **Checklist:** See TypeScript System Compliance Checklist in lifecycle document
-- **Rollback Rules:** Public Type Surface changes require unlock procedure; violations prevent progression to Step 8
+- **Rollback Rules:** Public Type Surface changes require unlock procedure; violations prevent progression to Step 7.5
 - **Exit Criteria:** All checklist items verified, types comply with standard, compilation passes, Public Type Surface documented and locked
+
+### Step 7.5: Internal Styling Integrity & className Isolation Verification
+- **Purpose:** Ensure Foundation components comply with FINAL Foundation Enforcement Lock (MANDATORY)
+- **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 7.5
+- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation Enforcement Lock Status
+- **Classification:** MANDATORY — Foundation components MUST comply with Foundation Enforcement
+- **What is Validated:**
+  - `className` and `style` props are excluded from public API
+  - `Omit<React.*HTMLAttributes, "className" | "style">` pattern is used
+  - ESLint rules pass (`no-foundation-classname-style`, `no-foundation-open-htmlattributes`)
+  - Type-tests pass (compile-time verification)
+  - No styling escape hatches exist
+- **Failure Consequences:** Component CANNOT proceed to Step 8; Foundation Enforcement compliance is MANDATORY
+- **Exit Criteria:**
+  - All verification checklist items pass
+  - ESLint rules pass without errors
+  - Type-tests pass without errors
+  - No styling escape hatches exist in public API
+  - Foundation Enforcement compliance confirmed
 
 ### Step 8: CVA Canonicalization
 - **Purpose:** Ensure CVA follows canonical patterns, enforces Canonical CVA Shape, and is used only as composition transport layer
@@ -226,7 +247,9 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 - [LINK_FOUNDATION_LOCK_REPORT.md](../reports/LINK_FOUNDATION_LOCK_REPORT.md) — Canonical example (Link component)
 
 **Authority Documents:**
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status (includes Foundation Enforcement Lock Status)
+- [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) — 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
+- [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) — 🔒 **FINAL/APPLIED** Foundation component scope
 - [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) — Canonical architecture context
 - [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) — TypeScript typing standard
 
@@ -241,20 +264,29 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ## Document Status
 
 **Status:** ✅ ACTIVE  
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-17  
-**Last Updated:** 2025-12-17  
+**Last Updated:** 2025-12-18  
 **Classification:** Process Navigation (Evolvable)
 
 **This document provides navigation only. The authoritative lifecycle definition is in [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10.**
 
 ---
 
-## Lifecycle Expansion Note (2025-12-17)
+## Lifecycle Expansion Notes
 
-The Foundation lifecycle was expanded to include explicit quality gates:
+### 2025-12-18: Foundation Enforcement Verification Step Added
+- **Step 7.5 added:** Internal Styling Integrity & className Isolation Verification
+- **Purpose:** Mandatory verification of Foundation Enforcement compliance (FINAL/APPLIED)
+- **Placement:** After Step 7 (TypeScript System Compliance), before Step 8 (CVA Canonicalization)
+- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) (Foundation Enforcement Lock Status)
+- **Status:** Foundation Enforcement is LOCKED/APPLIED - all Foundation components must pass Step 7.5 verification before proceeding to Step 8
+
+### 2025-12-17: Quality Gates Expansion
 - **Previous lifecycle:** 11 steps
 - **Current lifecycle:** 13 steps (added Storybook and Testing as separate quality gate steps)
 
-See [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) for details on the lifecycle expansion and backward compatibility.
+**Note:** With Step 7.5 addition, the lifecycle now effectively has 13.5 steps (Step 7.5 is mandatory but numbered as 7.5 to maintain step sequence). The lifecycle structure remains: Steps 1-10 (Architectural Validation, including Step 7.5), Steps 11-12 (Quality Gates), Step 13 (Foundation Lock).
+
+See [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) for details on lifecycle expansions and backward compatibility.
 

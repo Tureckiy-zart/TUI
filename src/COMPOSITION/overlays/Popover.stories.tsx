@@ -227,7 +227,7 @@ export const WithCardContent: Story = {
       content={
         <Card className="w-80">
           <CardHeader className="pb-sm">
-            <Heading level={4} className="flex items-center gap-sm">
+            <Heading level={4}>
               <Settings className="h-4 w-4" />
               Quick Settings
             </Heading>
@@ -298,7 +298,7 @@ export const NotificationsMenu: Story = {
         </div>
       }
     >
-      <Button variant="outline" size="icon" className="relative">
+      <Button variant="outline" size="icon">
         <Bell className="h-4 w-4" />
         <Badge className="absolute -right-1 -top-1 h-5 w-5 text-xs">3</Badge>
       </Button>

@@ -4,7 +4,7 @@
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
 **Authority:** This document defines mandatory guard rules for all Cursor/AI work on `@tenerife.music/ui` to prevent architectural drift, token misuse, and cross-layer violations.
 
-**Foundation Status:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for authoritative Foundation lock status.
+**Foundation Status:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for authoritative Foundation lock status and Foundation Enforcement Lock Status.
 
 ---
 
@@ -85,6 +85,7 @@ These principles apply to **ALL** work on the TUI library:
 - ✅ **Typography Authority** - LOCKED
 - ✅ **Motion Authority** - LOCKED
 - ✅ **Elevation Authority** - LOCKED
+- ✅ **Foundation Enforcement** - LOCKED / APPLIED (className/style exclusion, TypeScript/ESLint enforcement)
 
 ### Authority Protection Rules
 
@@ -128,7 +129,7 @@ If Authority modifications are required:
 **Status:** IMMUTABLE  
 **Rule:** DO NOT modify, extend, or create alternatives
 
-**Foundation Authorities:** All Foundation Authority Contracts are **CLOSED** and **IMMUTABLE**. Foundation components must comply with all Authority rules.
+**Foundation Authorities:** All Foundation Authority Contracts are **CLOSED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. Foundation components must comply with all Authority rules and Foundation Enforcement.
 
 #### Locked Components
 
@@ -148,6 +149,8 @@ If Authority modifications are required:
 - ❌ **NEVER** extend Foundation components beyond their documented API
 - ❌ **NEVER** import Foundation components from non-canonical paths
 - ❌ **NEVER** use internal implementation details of Foundation components
+- ❌ **NEVER** add `className` or `style` props to Foundation component public APIs (Foundation Enforcement is FINAL/APPLIED)
+- ❌ **NEVER** extend `React.*HTMLAttributes` directly without `Omit<..., "className" | "style">` in Foundation components
 
 **REQUIRED:**
 

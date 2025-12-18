@@ -29,7 +29,6 @@ import { textareaVariants } from "./textarea-variants";
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
-      className,
       variant,
       size,
       state,
@@ -63,7 +62,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     });
 
     // Compute textarea classes
-    const textareaClasses = cn(textareaVariants({ variant, size, state, fullWidth }), className);
+    // className and style are forbidden from public API - only CVA output is used
+    const textareaClasses = textareaVariants({ variant, size, state, fullWidth });
 
     // Get current value length for character counter
     const currentValue = value ?? defaultValue ?? "";

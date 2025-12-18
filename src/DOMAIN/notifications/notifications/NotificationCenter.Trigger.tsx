@@ -15,7 +15,10 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
-export interface NotificationCenterTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface NotificationCenterTriggerProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "style"
+> {
   /**
    * Callback when trigger is clicked
    */
@@ -33,10 +36,12 @@ export interface NotificationCenterTriggerProps extends React.ButtonHTMLAttribut
 export const NotificationCenterTrigger = React.forwardRef<
   HTMLButtonElement,
   NotificationCenterTriggerProps
->(({ onClick, showBadge = true, className, ...props }, ref) => {
+>(({ onClick, showBadge = true, ...props }, ref) => {
   const { getUnreadCount } = useNotificationCenterContext();
   const unreadCount = getUnreadCount();
 
+  // className is forbidden on Foundation components - NotificationCenterTrigger uses only token-driven props
+  // Note: Badge positioning may be affected as relative positioning cannot be applied via className
   return (
     <Button
       ref={ref}
@@ -44,7 +49,6 @@ export const NotificationCenterTrigger = React.forwardRef<
       size="icon"
       onClick={onClick}
       aria-label={`Open notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
-      className={cn("relative", className)}
       {...props}
     >
       <Bell className="h-5 w-5" />

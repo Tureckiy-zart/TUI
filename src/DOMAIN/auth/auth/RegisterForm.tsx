@@ -70,7 +70,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           <Input placeholder={passwordPlaceholder} type="password" />
         </Field.Control>
       </Field>
-      <Button className="w-full">{registerButtonText}</Button>
+      <Button>{registerButtonText}</Button>
     </div>
   );
 };

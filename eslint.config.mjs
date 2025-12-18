@@ -47,6 +47,7 @@ export default [
       "**/*.test.tsx",
       "**/*.spec.ts",
       "**/*.spec.tsx",
+      "**/*.type-test.tsx", // Type-level tests for Foundation components
       "**/__tests__/**",
       "**/tests/**",
     ],
@@ -265,6 +266,15 @@ export default [
 
       // Enforce token-driven typing for visual props
       "tenerife-ui-architecture/no-raw-visual-props": "error",
+
+      // ═══════════════════════════════════════════════════════════
+      // FOUNDATION ENFORCEMENT - REGRESSION GUARDS
+      // ═══════════════════════════════════════════════════════════
+
+      // Prevent Foundation components from exposing className/style props
+      "tenerife-ui-architecture/no-foundation-classname-style": "error",
+      // Prevent Foundation components from extending HTMLAttributes without Omit
+      "tenerife-ui-architecture/no-foundation-open-htmlattributes": "error",
 
       // ═══════════════════════════════════════════════════════════
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES

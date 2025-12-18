@@ -13,7 +13,10 @@ import { radioVariants } from "./radio-variants";
  */
 export interface RadioProps
   extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
+    Omit<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      "size" | "onChange" | "className" | "style"
+    >,
     VariantProps<typeof radioVariants> {
   /**
    * Radio variant style

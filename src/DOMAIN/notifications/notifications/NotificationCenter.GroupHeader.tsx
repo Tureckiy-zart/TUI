@@ -66,7 +66,6 @@ export const NotificationCenterGroupHeader = React.forwardRef<
             onClick={onToggleCollapse}
             aria-label={collapsed ? "Expand group" : "Collapse group"}
             aria-expanded={!collapsed}
-            className="h-6 w-6"
           >
             {collapsed ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
           </Button>

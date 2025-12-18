@@ -92,21 +92,9 @@ export const CTASection: React.FC<CTASectionProps> = ({
         >
           {/* Content Area */}
           <div className={cn("space-y-md", isCentered && "flex flex-col items-center")}>
-            <Heading
-              level={2}
-              className={cn(
-                "font-bold tracking-tight",
-                isCentered ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
-              )}
-            >
-              {headline}
-            </Heading>
+            <Heading level={2}>{headline}</Heading>
             {description && (
-              <Text
-                size={isCentered ? "lg" : "md"}
-                variant="muted"
-                className={cn(isCentered ? "max-w-2xl" : "max-w-none")}
-              >
+              <Text size={isCentered ? "lg" : "md"} variant="muted">
                 {description}
               </Text>
             )}

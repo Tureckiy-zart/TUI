@@ -30,7 +30,7 @@ export type { InputSize };
  */
 export interface InputProps
   extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "className" | "style">,
     Omit<VariantProps<typeof inputVariants>, "variant" | "size"> {
   /**
    * Input variant style

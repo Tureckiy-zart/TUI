@@ -526,7 +526,6 @@ describe("Link", () => {
           asChild={false}
           leftIcon={<span>←</span>}
           rightIcon={<span>→</span>}
-          className="custom-class"
           id="test-id"
           aria-label="Test link"
         >
@@ -537,7 +536,7 @@ describe("Link", () => {
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", "/test");
       expect(link).toHaveAttribute("id", "test-id");
-      expect(link).toHaveClass("custom-class");
+      // Foundation components do not support className prop
     });
 
     it("maintains href requirement for semantic link behavior", () => {

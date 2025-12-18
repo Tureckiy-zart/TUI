@@ -162,7 +162,10 @@ export type ButtonSize = "sm" | "md" | "lg" | "icon";
  * @rule className prop cannot override color classes (tokenCVA validation in dev mode)
  * @rule Button is fully token-based - no raw Tailwind colors allowed
  */
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "style"
+> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   asChild?: boolean;
@@ -194,11 +197,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * - All hover states use token-based opacity variants
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+  ({ variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
     // Color logic is fully centralized in CVA - no color classes applied here
     // All colors come from BUTTON_TOKENS → tokens/colors.ts (Color Authority)
-    const finalClassName = cn(buttonVariants({ variant, size, className }));
+    // className and style are forbidden from public API - only CVA output is used
+    const finalClassName = buttonVariants({ variant, size });
     // #region agent log
     if (typeof window !== "undefined" && variant === "primary") {
       const hasHoverClass = finalClassName.includes(
@@ -232,6 +235,55 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }).catch(() => {});
     }
     // #endregion
+
+    // When asChild is true and icons are provided, we need to clone the child element
+    // and add icons inside it, so Slot applies props to the correct element (the child, not a wrapper span)
+    if (asChild && (leftIcon || rightIcon)) {
+      if (!React.isValidElement(children)) {
+        // If children is not a valid React element, fall back to regular button behavior
+        const Comp = "button";
+        return (
+          <Comp className={finalClassName} ref={ref} {...props}>
+            {leftIcon && (
+              <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
+                {leftIcon}
+              </span>
+            )}
+            {children}
+            {rightIcon && (
+              <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
+                {rightIcon}
+              </span>
+            )}
+          </Comp>
+        );
+      }
+
+      // Clone the child element and add icons as its children
+      // This ensures Slot applies className, href, tabIndex, and disabled handler to the actual child element
+      // Slot will handle ref forwarding correctly, so we don't pass ref to cloneElement
+      const iconWrapperClass =
+        "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current";
+      const childProps = children.props as React.HTMLAttributes<HTMLElement> & {
+        children?: React.ReactNode;
+      };
+      const clonedChild = React.cloneElement(children, {
+        className: cn(finalClassName, childProps.className),
+        ...props,
+        children: (
+          <>
+            {leftIcon && <span className={iconWrapperClass}>{leftIcon}</span>}
+            {childProps.children}
+            {rightIcon && <span className={iconWrapperClass}>{rightIcon}</span>}
+          </>
+        ),
+      } as React.HTMLAttributes<HTMLElement>);
+
+      return <Slot ref={ref}>{clonedChild}</Slot>;
+    }
+
+    // Regular button or asChild without icons
+    const Comp = asChild ? Slot : "button";
     return (
       <Comp className={finalClassName} ref={ref} {...props}>
         {leftIcon && (

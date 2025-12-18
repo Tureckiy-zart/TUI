@@ -57,7 +57,7 @@ This document defines the canonical state of:
 
 The following components are **LOCKED** and **IMMUTABLE**. They form the foundation of the UI system and must not be modified, extended, or replaced.
 
-**Foundation Authorities are CLOSED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
+**Foundation Authorities are CLOSED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
 
 ### Locked Components
 

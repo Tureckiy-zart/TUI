@@ -54,7 +54,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <Input placeholder={passwordPlaceholder} type="password" />
         </Field.Control>
       </Field>
-      <Button className="w-full">{loginButtonText}</Button>
+      <Button>{loginButtonText}</Button>
     </div>
   );
 };

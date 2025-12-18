@@ -69,7 +69,10 @@ const linkVariants = tokenCVA({
   },
 });
 
-export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "className" | "style"
+> {
   /**
    * Link variant style
    * @default "link"
@@ -103,7 +106,6 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
     {
-      className,
       variant,
       size,
       asChild = false,
@@ -118,8 +120,6 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref,
   ) => {
-    const Comp = asChild ? Slot : "a";
-
     // Handle disabled state with proper accessibility semantics
     const handleClick = React.useCallback(
       (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -133,45 +133,75 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       [disabled, onClick],
     );
 
-    // When asChild is true, Slot requires exactly one child element
-    // If we have icons, we need to wrap everything in a single element
-    const renderContent = () => {
-      if (asChild) {
-        // When asChild is true, Slot requires a single child
-        if (leftIcon || rightIcon) {
-          // If we have icons, wrap everything in a span
-          return (
-            <span>
-              {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
-              {children}
-              {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
-            </span>
-          );
-        }
-        // No icons, pass children directly (should be a single element)
-        return children;
-      }
-      // When asChild is false, we can render multiple children
-      return (
-        <>
-          {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
-          {children}
-          {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
-        </>
-      );
-    };
+    // className and style are forbidden from public API - only CVA output is used
+    const finalClassName = linkVariants({ variant, size });
+    const finalTabIndex = disabled ? (tabIndex ?? -1) : tabIndex;
+    const finalAriaDisabled = disabled ? true : undefined;
 
+    // When asChild is true and icons are provided, we need to clone the child element
+    // and add icons inside it, so Slot applies props to the correct element (the child, not a wrapper span)
+    if (asChild && (leftIcon || rightIcon)) {
+      if (!React.isValidElement(children)) {
+        // If children is not a valid React element, fall back to regular anchor behavior
+        const Comp = "a";
+        return (
+          <Comp
+            className={finalClassName}
+            ref={ref}
+            href={href}
+            tabIndex={finalTabIndex}
+            aria-disabled={finalAriaDisabled}
+            onClick={handleClick}
+            {...props}
+          >
+            {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+            {children}
+            {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+          </Comp>
+        );
+      }
+
+      // Clone the child element and add icons as its children
+      // This ensures Slot applies className, href, tabIndex, and disabled handler to the actual child element
+      // Slot will handle ref forwarding correctly, so we don't pass ref to cloneElement
+      // Note: className from childProps is preserved for asChild pattern (internal use only)
+      const childProps = children.props as React.HTMLAttributes<HTMLElement> & {
+        children?: React.ReactNode;
+      };
+      const clonedChild = React.cloneElement(children, {
+        className: cn(finalClassName, childProps.className),
+        href,
+        tabIndex: finalTabIndex,
+        "aria-disabled": finalAriaDisabled,
+        onClick: handleClick,
+        ...props,
+        children: (
+          <>
+            {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+            {childProps.children}
+            {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+          </>
+        ),
+      } as React.HTMLAttributes<HTMLElement>);
+
+      return <Slot ref={ref}>{clonedChild}</Slot>;
+    }
+
+    // Regular anchor or asChild without icons
+    const Comp = asChild ? Slot : "a";
     return (
       <Comp
-        className={cn(linkVariants({ variant, size, className }))}
+        className={finalClassName}
         ref={ref}
         href={href}
-        tabIndex={disabled ? (tabIndex ?? -1) : tabIndex}
-        aria-disabled={disabled ? true : undefined}
+        tabIndex={finalTabIndex}
+        aria-disabled={finalAriaDisabled}
         onClick={handleClick}
         {...props}
       >
-        {renderContent()}
+        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
       </Comp>
     );
   },

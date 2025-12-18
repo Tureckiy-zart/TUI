@@ -65,21 +65,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Content Area */}
         <div className={cn("flex flex-col", isSplit ? "space-y-md" : "max-w-3xl space-y-lg")}>
           <header className="space-y-md">
-            <Heading
-              level={1}
-              className={cn(
-                "font-bold tracking-tight",
-                isSplit ? "text-3xl md:text-4xl lg:text-5xl" : "text-4xl md:text-5xl lg:text-6xl",
-              )}
-            >
-              {title}
-            </Heading>
+            <Heading level={1}>{title}</Heading>
             {description && (
-              <Text
-                size={isSplit ? "lg" : "xl"}
-                variant="muted"
-                className={cn(isSplit ? "max-w-none" : "mx-auto max-w-2xl")}
-              >
+              <Text size={isSplit ? "lg" : "xl"} variant="muted">
                 {description}
               </Text>
             )}

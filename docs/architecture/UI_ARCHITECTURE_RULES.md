@@ -7,7 +7,7 @@
 **Layer:** ARCHITECTURE / GOVERNANCE  
 **Priority:** CRITICAL
 
-> ⚠️ **FOUNDATION CLOSED**: Foundation Authorities are **CLOSED** and **IMMUTABLE** as of 2025-12-16. All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED**. See [Token System Lock](#-token-system-lock-status) section below and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete Foundation lock status.
+> ⚠️ **FOUNDATION CLOSED**: Foundation Authorities are **CLOSED** and **IMMUTABLE** as of 2025-12-16. All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED** as of 2025-12-18. See [Token System Lock](#-token-system-lock-status) section below and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete Foundation lock status.
 
 ---
 

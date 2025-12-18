@@ -57,7 +57,7 @@ The `docs_archive/` directory contains:
 
 ### Authority Contracts (Foundation - LOCKED)
 
-All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**:
+All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**:
 
 - [INTERACTION_AUTHORITY_CONTRACT.md](./architecture/INTERACTION_AUTHORITY_CONTRACT.md) - Interaction state rules
 - [STATE_AUTHORITY_MATRIX.md](./architecture/STATE_AUTHORITY_MATRIX.md) - Canonical state set
@@ -82,6 +82,8 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**:
 
 - [TUI_ARCHITECTURE_LOCK.md](./architecture/TUI_ARCHITECTURE_LOCK.md) - UI architecture lock
 - [TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md) - Extension layer canonical state
+- [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) - 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
+- [FOUNDATION_COMPONENT_SCOPE.md](./architecture/FOUNDATION_COMPONENT_SCOPE.md) - 🔒 **FINAL/APPLIED** Foundation component scope
 - [UI_ARCHITECTURE_RULES.md](./architecture/UI_ARCHITECTURE_RULES.md) - UI architecture rules
 - [TUI_CURSOR_GUARD_RULES.md](./architecture/TUI_CURSOR_GUARD_RULES.md) - Cursor guard rules
 - [CURSOR_UI_RULES.md](./architecture/CURSOR_UI_RULES.md) - Cursor AI rules for UI development

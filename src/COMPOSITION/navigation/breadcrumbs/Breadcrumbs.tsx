@@ -11,7 +11,6 @@ import { ChevronRight } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/FOUNDATION/tokens/components/navigation";
 import { Link } from "@/PRIMITIVES/Link";
 
@@ -111,15 +110,7 @@ const BreadcrumbsRoot = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(
                   <BreadcrumbsSeparator>{separator || defaultSeparator}</BreadcrumbsSeparator>
                 )}
                 {item.href && !isLast && !item.disabled ? (
-                  <Link
-                    href={item.href}
-                    variant="link"
-                    className={cn(
-                      NAVIGATION_TOKENS.states.default.text,
-                      NAVIGATION_TOKENS.states.hover.text,
-                      MOTION_TOKENS.transition.colors,
-                    )}
-                  >
+                  <Link href={item.href} variant="link">
                     {item.label}
                   </Link>
                 ) : (

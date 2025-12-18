@@ -708,7 +708,16 @@ State Authority Contract (Locked):
 - Component obligations are immutable
 - No local state definitions allowed in components
 
-You MUST treat Foundation components, Token system, AND Interaction Authority as immutable.
+Foundation Enforcement (Locked/Applied):
+- className and style props are FORBIDDEN in Foundation component public APIs
+- Foundation components MUST use Omit<React.*HTMLAttributes, "className" | "style"> pattern
+- TypeScript enforces exclusion at compile time
+- ESLint rules prevent regression (no-foundation-classname-style, no-foundation-open-htmlattributes)
+- Type-tests verify enforcement for all Foundation components
+- CI integration ensures violations fail the pipeline
+- All Foundation components are visually closed by design
+
+You MUST treat Foundation components, Token system, Interaction Authority, AND Foundation Enforcement as immutable.
 
 You may ONLY:
 - Fix bugs
@@ -732,6 +741,9 @@ You MUST NEVER:
 - Use JavaScript-driven interaction states (useState for hover/active/focus)
 - Use raw pointer-events-none in base state (only via disabled:/loading: prefixes)
 - Use focus: instead of focus-visible: for focus states
+- Add className or style props to Foundation component public APIs
+- Extend React.*HTMLAttributes directly without Omit<..., "className" | "style">
+- Bypass Foundation Enforcement (enforcement is LOCKED and APPLIED)
 
 If new behavior or UX is required:
 - Create an EXTENSION component
@@ -762,6 +774,14 @@ If State Authority Contract modifications are needed:
 - Reference: docs/architecture/STATE_AUTHORITY_CONTRACT.md
 - Reference: docs/architecture/STATE_AUTHORITY_MATRIX.md
 - Reference: docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+
+If Foundation Enforcement modifications are needed:
+- Foundation Enforcement modifications require explicit UNLOCK + AUDIT workflow
+- Reference: docs/architecture/FOUNDATION_CONTRACT.md
+- Reference: docs/architecture/FOUNDATION_COMPONENT_SCOPE.md
+- Reference: docs/architecture/FINAL_FOUNDATION_LOCK.md (Foundation Enforcement Lock Status section)
+- Reference: docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md
+- Reference: docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md
 ```
 
 **If a request would violate these rules, AI assistants MUST REFUSE and explain why.**
@@ -1353,6 +1373,94 @@ Any Layout Authority modifications require:
 
 ---
 
+## 🔒 Foundation Enforcement Lock Status
+
+**Status:** ✅ **LOCKED / APPLIED**  
+**Lock Date:** 2025-12-18  
+**Version:** 1.0  
+**Reference:** [Foundation Contract](./FOUNDATION_CONTRACT.md)  
+**Reference:** [Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)
+
+The **Foundation Enforcement** is **LOCKED** and **APPLIED** as part of the Foundation architecture. Foundation components are **visually closed by design** and exclude `className` and `style` props from their public APIs. This enforcement is **technically enforced** and **irreversible** without explicit unlock procedure.
+
+### What Is Locked in Foundation Enforcement
+
+1. **className Exclusion** - Foundation components MUST NOT accept `className` prop in public API
+2. **style Exclusion** - Foundation components MUST NOT accept `style` prop in public API
+3. **Omit Pattern Requirement** - Foundation components MUST use `Omit<React.*HTMLAttributes, "className" | "style">` pattern
+4. **TypeScript Enforcement** - All Foundation components exclude styling props at compile time
+5. **ESLint Rules** - Regression guards prevent reintroduction of styling escape hatches
+6. **Type-Tests** - Compile-time verification ensures enforcement compliance for all Foundation components
+
+### Foundation Enforcement Contract Documents
+
+The following documents are part of the locked Foundation Enforcement:
+
+- `docs/architecture/FOUNDATION_CONTRACT.md` - Canonical Foundation contract definition (FINAL/APPLIED)
+- `docs/architecture/FOUNDATION_COMPONENT_SCOPE.md` - Foundation component scope and inclusion criteria
+- `docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md` - Phase 3 TypeScript enforcement implementation
+- `docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md` - Phase 4 regression guards implementation
+
+### Enforcement Mechanisms
+
+Foundation Enforcement is enforced via:
+
+- **TypeScript:** All Foundation components use `Omit<HTMLAttributes<...>, "className" | "style">` to exclude styling props
+- **ESLint Rules:**
+  - `no-foundation-classname-style`: Blocks `className` and `style` props in Foundation component interfaces
+  - `no-foundation-open-htmlattributes`: Requires `Omit<React.*HTMLAttributes, "className" | "style">` instead of direct extension
+- **Type-Tests:** All 9 Foundation components have type-level tests that verify `className` and `style` are excluded
+- **CI Integration:** All enforcement checks run automatically in CI pipeline (`typecheck` and `lint:ci` scripts)
+
+### Foundation Components Subject to Enforcement
+
+All Foundation components listed in [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) are subject to Foundation Enforcement:
+
+**Confirmed Foundation (Locked):**
+- Button
+- Link
+
+**Proposed Foundation (Subject to Enforcement):**
+- Text
+- Heading
+- Input
+- Textarea
+- Checkbox
+- Radio
+- Label
+
+**Radix-Based Foundation (Subject to Enforcement):**
+- Modal
+- Tabs
+- Select (when locked)
+- ContextMenu
+- Toast
+
+### Foundation Enforcement Unlock Procedure
+
+Any Foundation Enforcement modifications require:
+
+1. Explicit unlock task with justification
+2. Full audit of all Foundation components
+3. Impact analysis of proposed changes
+4. Explicit approval for changes
+5. Re-verification of all components after changes
+6. Re-lock with updated documentation
+
+**Note:** Foundation Enforcement lock applies to **BOTH humans and AI agents**. Any request to modify locked Foundation Enforcement aspects **MUST** be refused with reference to the Foundation Enforcement lock.
+
+**Do not modify Foundation Enforcement without explicit 'Unlock Foundation Enforcement' task approval.**
+
+### Integration with Component Lifecycle
+
+Foundation Enforcement verification is a **mandatory step** in the Foundation component lifecycle:
+
+- **Step 7.5: Internal Styling Integrity & className Isolation Verification** (see [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md))
+- All Foundation components MUST pass enforcement verification before Foundation Lock (Step 13)
+- Enforcement compliance is verified via ESLint rules, type-tests, and CI integration
+
+---
+
 ## 🏁 Foundation Closure Statement
 
 **Date:** 2025-12-16  
@@ -1435,6 +1543,9 @@ If Authority modifications are required in the future:
 
 ## 📚 Related Documents
 
+- **[Foundation Contract](./FOUNDATION_CONTRACT.md)** — 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
+- **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
+- **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Step 7.5)
 - **[Architecture Lock](./TUI_ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
 - **[Token System](./TUI_TOKEN_SYSTEM.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
@@ -1625,13 +1736,13 @@ If Authority modifications are required in the future:
 
 **After this lock, the UI Foundation architecture is considered complete and immutable.**
 
-All future work must occur in the **Extension layer**. Foundation components are **read-only** except for bug fixes, type improvements, and documentation updates. The **Token system is locked** and immutable - all token modifications require explicit unlock procedure with full audit. The **Interaction Authority is locked** and immutable - all interaction behavior rules, priority order, and enforcement mechanisms are frozen. The **State Authority Matrix is locked** and immutable - the canonical state set, state semantics, priority order, and suppression rules are frozen. The **State Authority Contract is locked** and immutable - the state token model, naming rules, property mapping, and component obligations are frozen. The **Spacing Authority is locked** and immutable - all spacing token rules, canonical scales, and component requirements are frozen. The **Radius Authority is locked** and immutable - all border radius token rules, canonical scales, and component standards are frozen. The **Typography Authority is locked** and immutable - all typography token rules, canonical scales, and semantic roles are frozen. The **Motion Authority is locked** and immutable - all motion token rules, canonical durations, easings, transitions, and animations are frozen. The **Elevation Authority is locked** and immutable - all elevation token rules, canonical shadows, z-index scale, and stacking order are frozen. The **Layout Authority is locked** and immutable - all layout rules, canonical layout primitives, separation laws, and component contract rules are frozen. Any changes to state model, interaction behavior, token system, token authorities, or layout authority require explicit unlock procedure with full audit.
+All future work must occur in the **Extension layer**. Foundation components are **read-only** except for bug fixes, type improvements, and documentation updates. The **Token system is locked** and immutable - all token modifications require explicit unlock procedure with full audit. The **Interaction Authority is locked** and immutable - all interaction behavior rules, priority order, and enforcement mechanisms are frozen. The **State Authority Matrix is locked** and immutable - the canonical state set, state semantics, priority order, and suppression rules are frozen. The **State Authority Contract is locked** and immutable - the state token model, naming rules, property mapping, and component obligations are frozen. The **Spacing Authority is locked** and immutable - all spacing token rules, canonical scales, and component requirements are frozen. The **Radius Authority is locked** and immutable - all border radius token rules, canonical scales, and component standards are frozen. The **Typography Authority is locked** and immutable - all typography token rules, canonical scales, and semantic roles are frozen. The **Motion Authority is locked** and immutable - all motion token rules, canonical durations, easings, transitions, and animations are frozen. The **Elevation Authority is locked** and immutable - all elevation token rules, canonical shadows, z-index scale, and stacking order are frozen. The **Layout Authority is locked** and immutable - all layout rules, canonical layout primitives, separation laws, and component contract rules are frozen. The **Foundation Enforcement is locked and applied** - Foundation components exclude `className` and `style` from public APIs, and this enforcement is technically enforced via TypeScript, ESLint rules, type-tests, and CI integration. Any changes to state model, interaction behavior, token system, token authorities, layout authority, or Foundation Enforcement require explicit unlock procedure with full audit.
 
 New functionality must be built as **Extensions** that compose Foundation components and use existing locked tokens. All Extension components must comply with the **Extension Authority Contract**, which defines the boundary between Foundation and Extension layers and establishes that Extension cannot override, bypass, or duplicate Foundation functionality.
 
 **This is a binding architectural contract. Violations are considered architectural breaches.**
 
-**The Foundation architecture phase is officially closed. The Token system is locked. The Interaction Authority is locked. The State Authority Matrix is locked. The State Authority Contract is locked. The Spacing Authority is locked. The Radius Authority is locked. The Typography Authority is locked. The Motion Authority is locked. The Elevation Authority is locked. The Layout Authority is locked. The Extension Authority Contract is active and defines Extension layer boundaries.**
+**The Foundation architecture phase is officially closed. The Token system is locked. The Interaction Authority is locked. The State Authority Matrix is locked. The State Authority Contract is locked. The Spacing Authority is locked. The Radius Authority is locked. The Typography Authority is locked. The Motion Authority is locked. The Elevation Authority is locked. The Layout Authority is locked. The Foundation Enforcement is locked and applied. The Extension Authority Contract is active and defines Extension layer boundaries.**
 
 ---
 

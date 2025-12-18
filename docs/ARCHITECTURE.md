@@ -52,11 +52,11 @@ TenerifeUI uses a five-layer architecture that separates concerns by purpose and
 
 **Purpose:** Immutable infrastructure layer providing canonical behavior and token definitions.
 
-**What belongs:** Design tokens, theme system, utility libraries, and exactly five locked components (Modal, Tabs, Select, ContextMenu, Toast). All Foundation components delegate behavior to Radix UI and expose token-driven visual APIs.
+**What belongs:** Design tokens, theme system, utility libraries, and exactly five locked components (Modal, Tabs, Select, ContextMenu, Toast). All Foundation components delegate behavior to Radix UI and expose token-driven visual APIs. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED** — Foundation components are visually closed by design.
 
 **What does NOT belong:** Extension components, domain logic, business patterns, or any component that is not explicitly locked as Foundation.
 
-**Status:** ✅ **LOCKED** — Foundation is immutable and closed for modifications.
+**Status:** ✅ **LOCKED** — Foundation is immutable and closed for modifications. **Foundation Enforcement** is **FINAL / APPLIED** (see [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md)).
 
 ### PRIMITIVES
 

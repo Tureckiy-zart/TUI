@@ -24,17 +24,13 @@ import {
   ticketCardAvailabilityVariants,
   ticketCardBadgeSurfaceVariants,
   ticketCardBadgeVariants,
-  ticketCardCapacityVariants,
   ticketCardDateVariants,
-  ticketCardDescriptionVariants,
   ticketCardFooterVariants,
   ticketCardImageOverlayVariants,
   ticketCardImageTransformVariants,
   ticketCardPriceCapacityContainerVariants,
-  ticketCardPriceVariants,
   ticketCardPurchaseButtonIconVariants,
   ticketCardPurchaseButtonVariants,
-  ticketCardTitleVariants,
   ticketCardVariants,
 } from "./TicketCard.variants";
 
@@ -210,7 +206,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading level={3} className={ticketCardTitleVariants({ size })}>
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -229,7 +225,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted" className={ticketCardDescriptionVariants({ size })}>
+              <Text size="sm" variant="muted">
                 {description}
               </Text>
             )}
@@ -238,20 +234,12 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
             {(price || capacity) && (
               <div className={ticketCardPriceCapacityContainerVariants({ size })}>
                 {price && (
-                  <Text
-                    size={size === "compact" ? "md" : "lg"}
-                    weight="bold"
-                    className={ticketCardPriceVariants({ size })}
-                  >
+                  <Text size={size === "compact" ? "md" : "lg"} weight="bold">
                     {price}
                   </Text>
                 )}
                 {capacity && (
-                  <Text
-                    size={size === "compact" ? "xs" : "sm"}
-                    variant="muted"
-                    className={ticketCardCapacityVariants({ size })}
-                  >
+                  <Text size={size === "compact" ? "xs" : "sm"} variant="muted">
                     {capacity}
                   </Text>
                 )}
@@ -272,15 +260,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           <CardBaseFooterWrapper size={size}>
             <div className={cn("w-full", ticketCardFooterVariants({ size }))}>
               {purchaseUrl && !isPurchaseDisabled && (
-                <Link
-                  href={purchaseUrl}
-                  className={cn(
-                    "w-full",
-                    ticketCardPurchaseButtonVariants({ size, disabled: false }),
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={purchaseUrl} target="_blank" rel="noopener noreferrer">
                   {purchaseLabel}
                   <IconArrowRight className={ticketCardPurchaseButtonIconVariants({ size })} />
                 </Link>

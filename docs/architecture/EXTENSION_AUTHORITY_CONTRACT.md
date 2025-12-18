@@ -169,8 +169,9 @@ Extension components **MUST NOT** perform the following actions:
 - ❌ Cannot override Typography Authority (typography scales, semantic roles)
 - ❌ Cannot override Motion Authority (motion scales, reduced motion rules)
 - ❌ Cannot override Elevation Authority (elevation scales, z-index layers)
+- ❌ Cannot override Foundation Enforcement (className/style exclusion is LOCKED/APPLIED - Foundation components are visually closed by design)
 
-**Rule:** Extension must comply with all Foundation Authority rules. Extension cannot create alternative Authority rules.
+**Rule:** Extension must comply with all Foundation Authority rules and Foundation Enforcement. Extension cannot create alternative Authority rules or bypass Foundation Enforcement.
 
 ### 2. Duplicate Foundation Functionality
 
@@ -245,8 +246,9 @@ export const ConfirmDialog = ({ ... }) => {
 - ❌ Cannot wrap Foundation components with behavior-changing HOCs
 - ❌ Cannot override Foundation component styles
 - ❌ Cannot modify Foundation component behavior
+- ❌ Cannot pass `className` or `style` props to Foundation components (Foundation Enforcement is FINAL/APPLIED - Foundation components exclude these props from public API)
 
-**Rule:** Foundation components are immutable. Extension composes Foundation, it does not modify Foundation.
+**Rule:** Foundation components are immutable and visually closed by design. Extension composes Foundation, it does not modify Foundation. Foundation Enforcement (className/style exclusion) is LOCKED/APPLIED.
 
 ### 6. Create Alternative Foundation Components
 
@@ -596,7 +598,9 @@ If new functionality is required:
 
 ## Related Documents
 
-- **[Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md)** - Foundation layer lock status
+- **[Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md)** - Foundation layer lock status (includes Foundation Enforcement Lock Status)
+- **[Foundation Contract](./FOUNDATION_CONTRACT.md)** - 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
+- **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** - 🔒 **FINAL/APPLIED** Foundation component scope
 - **[Interaction Authority Contract](./INTERACTION_AUTHORITY_CONTRACT.md)** - Interaction state rules
 - **[State Authority Contract](./STATE_AUTHORITY_CONTRACT.md)** - State token model
 - **[State Authority Matrix](./STATE_AUTHORITY_MATRIX.md)** - Canonical state set

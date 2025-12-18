@@ -43,6 +43,7 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 - ✅ **Motion Authority** - LOCKED (Canonical motion tokens, durations, easings, forbidden patterns)
 - ✅ **Elevation Authority** - LOCKED (Canonical elevation tokens, z-index scale, forbidden patterns)
 - ✅ **Layout Authority** - LOCKED (Canonical layout primitives, separation laws, forbidden patterns)
+- ✅ **Foundation Enforcement** - LOCKED / APPLIED (className/style exclusion, TypeScript/ESLint enforcement)
 - ✅ **Extension Authority Contract** - ACTIVE (Extension layer boundary contract)
 
 ### Authority Immutability

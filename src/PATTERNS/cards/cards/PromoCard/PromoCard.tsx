@@ -7,7 +7,6 @@ import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import { IconArrowRight } from "@/icons";
 import {
   CardBase,
@@ -132,15 +131,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading
-              level={3}
-              className={cn(
-                "line-clamp-2 transition-colors group-hover:text-primary",
-                TEXT_TOKENS.fontSize.lg,
-                TEXT_TOKENS.fontWeight.bold,
-                DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-              )}
-            >
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -152,16 +143,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
             {/* Description */}
             {description && (
-              <Text
-                size="sm"
-                variant="muted"
-                className={cn(
-                  "line-clamp-2",
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="sm" variant="muted">
                 {description}
               </Text>
             )}
@@ -171,7 +153,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           <CardBaseFooterWrapper size={size}>
             <div className="w-full">
               {ctaUrl && (
-                <Link href={ctaUrl} className={cn("w-full", promoCardCtaButtonVariants({ size }))}>
+                <Link href={ctaUrl}>
                   {ctaLabel}
                   <IconArrowRight className={promoCardCtaButtonIconVariants({ size })} />
                 </Link>

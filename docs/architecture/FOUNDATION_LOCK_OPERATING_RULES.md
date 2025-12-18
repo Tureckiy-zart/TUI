@@ -192,9 +192,11 @@ This section defines the **canonical lifecycle** for creating new Foundation com
 **Important:** The order of steps matters, but step numbering is non-semantic. Steps must be completed in sequence, but the specific numbers are not part of the architectural contract.
 
 **Lifecycle Structure:**
-- **Steps 1-10:** Architectural validation and compliance verification
+- **Steps 1-10 (including Step 7.5):** Architectural validation and compliance verification (including Foundation Enforcement verification)
 - **Steps 11-12:** Quality gates (Storybook and Testing) — must pass before Foundation Lock
 - **Step 13:** Foundation Lock — formal locking after all validations and quality gates pass
+
+**Note:** Step 7.5 (Internal Styling Integrity & className Isolation Verification) is a mandatory step that verifies Foundation Enforcement compliance. Foundation Enforcement is FINAL/APPLIED and LOCKED - all Foundation components must pass Step 7.5 verification before proceeding to Step 8.
 
 ### Document Classification: LAW vs PROCESS vs EXAMPLES
 
@@ -275,11 +277,13 @@ A component may intentionally exit the Foundation lifecycle before Step 13 (Foun
 
 ### Canonical Lifecycle Steps
 
-The following 13 steps constitute the complete Foundation component creation/refactor process:
+The following steps constitute the complete Foundation component creation/refactor process:
 
-**Steps 1-10:** Architectural validation (semantic, structural, compliance)  
+**Steps 1-10 (including Step 7.5):** Architectural validation (semantic, structural, compliance, Foundation Enforcement verification)  
 **Steps 11-12:** Quality gates (Storybook and Testing) — BLOCKING, must pass before Foundation Lock  
 **Step 13:** Foundation Lock — formal locking after all validations and quality gates pass
+
+**Note:** Step 7.5 is a mandatory Foundation Enforcement verification step. Foundation Enforcement (className/style exclusion) is FINAL/APPLIED and LOCKED - all Foundation components must comply.
 
 **Quality Gates Rationale:**
 
@@ -574,6 +578,57 @@ If Step 7 validation fails:
 - TypeScript compilation passes without errors
 - Public Type Surface is documented and locked
 - No forbidden patterns are present in public APIs
+
+#### Step 7.5: Internal Styling Integrity & className Isolation Verification
+
+**Purpose:** Ensure Foundation components comply with FINAL Foundation Enforcement Lock by verifying that `className` and `style` props are excluded from public APIs and that all enforcement mechanisms pass.
+
+**Foundation Enforcement is FINAL and APPLIED:** This step verifies compliance with the Foundation Contract, which is **LOCKED** and **APPLIED**. Foundation components are **visually closed by design** and must exclude styling escape hatches from their public APIs.
+
+**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+
+**Requirements:**
+- Verify `className` prop is excluded from Foundation component public props
+- Verify `style` prop is excluded from Foundation component public props
+- Verify `Omit<React.*HTMLAttributes, "className" | "style">` pattern is used
+- Verify ESLint rules pass (`no-foundation-classname-style`, `no-foundation-open-htmlattributes`)
+- Verify type-tests pass (compile-time verification that `className`/`style` are excluded)
+- Verify no styling escape hatches exist in public API
+- Verify internal styling remains functional and isolated (CVA usage is internal)
+
+**For Refactor:** Ensure refactoring maintains Foundation Enforcement compliance and does not reintroduce styling escape hatches.
+
+**Internal Styling Integrity & className Isolation Verification Checklist (Mandatory):**
+
+- [ ] **className Exclusion:** `className` prop is NOT in Foundation component public props
+- [ ] **style Exclusion:** `style` prop is NOT in Foundation component public props
+- [ ] **Omit Pattern:** Foundation component uses `Omit<React.*HTMLAttributes, "className" | "style">` pattern
+- [ ] **ESLint Compliance:** ESLint rules pass (`no-foundation-classname-style`, `no-foundation-open-htmlattributes`)
+- [ ] **Type-Test Compliance:** Type-tests pass (verify `className`/`style` are excluded at compile time)
+- [ ] **No Escape Hatches:** No styling escape hatches exist in public API
+- [ ] **Internal Styling Intact:** Internal styling via CVA remains functional and isolated
+- [ ] **CI Verification:** All enforcement checks pass in CI pipeline
+
+**Verification Methods:**
+- **TypeScript Compilation:** Run `typecheck` script to verify type-tests pass
+- **ESLint:** Run `lint:ci` script to verify ESLint rules pass
+- **Manual Review:** Verify prop interface uses `Omit<..., "className" | "style">` pattern
+- **Type-Test Files:** Verify `*.type-test.tsx` files exist and pass compilation
+
+**Reference Documents:**
+- [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Contract (FINAL/APPLIED)
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+- `docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md` - Phase 3 implementation
+- `docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md` - Phase 4 implementation
+
+**Exit Criteria:**
+- All checklist items are verified and documented
+- ESLint rules pass without errors
+- Type-tests pass without errors
+- No styling escape hatches exist in public API
+- Foundation Enforcement compliance is confirmed
+
+**Note:** This step is **MANDATORY** for all Foundation components. Components cannot proceed to Step 8 (CVA Canonicalization) or Step 13 (Foundation Lock) without passing Foundation Enforcement verification.
 
 #### Step 8: CVA Canonicalization
 

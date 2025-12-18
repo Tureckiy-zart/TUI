@@ -8,8 +8,6 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens";
 import { ARTIST_TOKENS } from "@/FOUNDATION/tokens/components/artist";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import {
   CardBase,
   CardBaseContentWrapper,
@@ -26,7 +24,6 @@ import {
   artistCardBadgeSurfaceVariants,
   artistCardBadgeVariants,
   artistCardFooterBorderVariants,
-  artistCardGenresVariants,
   artistCardImageOverlayVariants,
   artistCardImageTransformVariants,
   artistCardMetadataIconVariants,
@@ -154,19 +151,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading
-              level={3}
-              className={cn(
-                DOMAIN_TOKENS.text.lineClamp.two,
-                TEXT_TOKENS.fontSize.lg,
-                TEXT_TOKENS.fontWeight.bold,
-                MOTION_TOKENS.transition.colors,
-                DOMAIN_TOKENS.text.hover.primary,
-                size === "compact"
-                  ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                  : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-              )}
-            >
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {name}
@@ -178,32 +163,14 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
             {/* Description */}
             {description && (
-              <Text
-                size="sm"
-                variant="muted"
-                className={cn(
-                  DOMAIN_TOKENS.text.lineClamp.two,
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="sm" variant="muted">
                 {description}
               </Text>
             )}
 
             {/* Genres */}
             {genres && (
-              <Text
-                size="xs"
-                variant="muted"
-                className={cn(
-                  artistCardGenresVariants({ size }),
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="xs" variant="muted">
                 {genres}
               </Text>
             )}

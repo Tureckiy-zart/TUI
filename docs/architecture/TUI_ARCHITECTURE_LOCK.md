@@ -41,7 +41,7 @@ The foundation layer consists of **exactly one component per category**. These c
 - Are built on **Radix UI primitives** for accessibility and behavior
 - Use **token-based APIs** for visual design
 
-**Foundation Authorities:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**.
+**Foundation Authorities:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED** and technically enforced.
 
 ### Extension Layer (OPEN)
 

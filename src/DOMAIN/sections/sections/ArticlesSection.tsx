@@ -51,8 +51,8 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
             <div className="mb-md h-[var(--spacing-3xl)] w-full rounded-md bg-muted" />
           )}
           <div className="space-y-sm">
-            <Heading level={2} className="text-xl font-semibold">
-              <Link href={article.href} variant="ghost" className="hover:text-primary">
+            <Heading level={2}>
+              <Link href={article.href} variant="ghost">
                 {article.title}
               </Link>
             </Heading>
@@ -62,7 +62,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
                 {article.date}
               </Text>
             )}
-            <Link href={article.href} variant="primary" className="inline-flex items-center">
+            <Link href={article.href} variant="primary">
               {readMoreLabel} →
             </Link>
           </div>
