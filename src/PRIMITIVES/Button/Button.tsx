@@ -3,6 +3,13 @@
 /**
  * Button Component
  *
+ * @semantic_role FOUNDATION_PRIMITIVE_ACTION_TRIGGER
+ * @semantic_definition Button is a Foundation primitive component that serves exclusively as an action trigger.
+ *                     Button represents user-initiated actions (submit, confirm, execute, activate) and is NOT
+ *                     intended for layout purposes, navigation (use Link component), or toggle/state switching
+ *                     (use Switch/Checkbox components). Button's semantic role is immutable and defines its
+ *                     behavioral contract as a Foundation primitive.
+ *
  * @status LOCKED (2025-12-15)
  * @rule DO NOT modify, extend, or create alternatives
  * @audits
@@ -14,7 +21,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
-import { tokenCVA, type VariantProps } from "@/FOUNDATION/lib/token-cva";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { BUTTON_TOKENS } from "@/FOUNDATION/tokens/components/button";
 
@@ -107,10 +114,10 @@ const buttonVariants = tokenCVA({
       destructive: `${BUTTON_TOKENS.variant.destructive.background} ${BUTTON_TOKENS.variant.destructive.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.destructive.hover} ${BUTTON_TOKENS.variant.destructive.active} ${BUTTON_TOKENS.variant.destructive.disabled.background} ${BUTTON_TOKENS.variant.destructive.disabled.text}`,
     },
     size: {
-      sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.padding.vertical.sm} ${BUTTON_TOKENS.fontSize.sm} ${BUTTON_TOKENS.gap.sm} [&_svg]:${BUTTON_TOKENS.iconSize.sm}`,
-      md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.md} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.md} ${BUTTON_TOKENS.gap.md} [&_svg]:${BUTTON_TOKENS.iconSize.md}`,
-      lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.lg} ${BUTTON_TOKENS.gap.lg} [&_svg]:${BUTTON_TOKENS.iconSize.lg}`,
-      icon: `${BUTTON_TOKENS.height.icon} ${BUTTON_TOKENS.width.icon} [&_svg]:${BUTTON_TOKENS.iconSize.icon}`,
+      sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.padding.vertical.sm} ${BUTTON_TOKENS.fontSize.sm} ${BUTTON_TOKENS.gap.sm} ${BUTTON_TOKENS.iconSize.sm}`,
+      md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.md} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.md} ${BUTTON_TOKENS.gap.md} ${BUTTON_TOKENS.iconSize.md}`,
+      lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.lg} ${BUTTON_TOKENS.gap.lg} ${BUTTON_TOKENS.iconSize.lg}`,
+      icon: `${BUTTON_TOKENS.height.icon} ${BUTTON_TOKENS.width.icon} ${BUTTON_TOKENS.iconSize.icon}`,
     },
   },
   defaultVariants: {
@@ -128,7 +135,13 @@ const buttonVariants = tokenCVA({
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
  * @rule All variants use token-based colors from BUTTON_TOKENS
  */
-export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "outline"
+  | "ghost"
+  | "destructive";
 
 /**
  * Button Size Type
@@ -138,7 +151,7 @@ export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
  *
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
  */
-export type ButtonSize = VariantProps<typeof buttonVariants>["size"];
+export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 /**
  * Button Component Props
@@ -149,8 +162,9 @@ export type ButtonSize = VariantProps<typeof buttonVariants>["size"];
  * @rule className prop cannot override color classes (tokenCVA validation in dev mode)
  * @rule Button is fully token-based - no raw Tailwind colors allowed
  */
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   asChild?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -185,15 +199,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Color logic is fully centralized in CVA - no color classes applied here
     // All colors come from BUTTON_TOKENS → tokens/colors.ts (Color Authority)
     const finalClassName = cn(buttonVariants({ variant, size, className }));
-    // Get icon size classes based on button size
-    // Map size-* utilities to explicit w-* and h-* for SVG elements
-    const iconSizeMap: Record<string, string> = {
-      "size-3.5": "[&_svg]:w-3.5 [&_svg]:h-3.5",
-      "size-4": "[&_svg]:w-4 [&_svg]:h-4",
-      "size-5": "[&_svg]:w-5 [&_svg]:h-5",
-    };
-    const iconSizeToken = size ? BUTTON_TOKENS.iconSize[size] : BUTTON_TOKENS.iconSize.md;
-    const iconSizeClass = iconSizeMap[iconSizeToken] || "[&_svg]:w-4 [&_svg]:h-4";
     // #region agent log
     if (typeof window !== "undefined" && variant === "primary") {
       const hasHoverClass = finalClassName.includes(
@@ -230,23 +235,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp className={finalClassName} ref={ref} {...props}>
         {leftIcon && (
-          <span
-            className={cn(
-              "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current",
-              iconSizeClass,
-            )}
-          >
+          <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
             {leftIcon}
           </span>
         )}
         {children}
         {rightIcon && (
-          <span
-            className={cn(
-              "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current",
-              iconSizeClass,
-            )}
-          >
+          <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
             {rightIcon}
           </span>
         )}
@@ -256,4 +251,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export { Button };

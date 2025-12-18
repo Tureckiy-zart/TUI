@@ -455,28 +455,34 @@ export const Accessibility: Story = {
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">Keyboard Navigation</h3>
         <div className="flex flex-col gap-sm">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground">
             Links are keyboard accessible by default. Users can navigate between links using{" "}
-            <kbd className="py-xxs rounded bg-muted px-xs text-xs">Tab</kbd> and activate them with{" "}
-            <kbd className="py-xxs rounded bg-muted px-xs text-xs">Enter</kbd>.
+            <kbd className="py-xxs rounded bg-muted px-xs font-mono text-xs">Tab</kbd> and activate
+            them with <kbd className="py-xxs rounded bg-muted px-xs font-mono text-xs">Enter</kbd>.
           </p>
           <div className="flex flex-wrap gap-md">
-            <Link href="/keyboard-1">First Link</Link>
-            <Link href="/keyboard-2">Second Link</Link>
-            <Link href="/keyboard-3">Third Link</Link>
+            <Link href="/keyboard-1" variant="primary">
+              First Link
+            </Link>
+            <Link href="/keyboard-2" variant="primary">
+              Second Link
+            </Link>
+            <Link href="/keyboard-3" variant="primary">
+              Third Link
+            </Link>
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">ARIA Attributes</h3>
         <div className="flex flex-col gap-sm">
-          <Link href="/current" aria-current="page">
+          <Link href="/current" variant="primary" aria-current="page">
             Current Page (aria-current=&quot;page&quot;)
           </Link>
-          <Link href="/described" aria-describedby="link-description">
+          <Link href="/described" variant="primary" aria-describedby="link-description">
             Link with Description
           </Link>
-          <p id="link-description" className="text-xs text-muted-foreground">
+          <p id="link-description" className="text-sm text-foreground/80">
             This text describes the link above via aria-describedby.
           </p>
         </div>
@@ -484,11 +490,11 @@ export const Accessibility: Story = {
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">Focus Management</h3>
         <div className="flex flex-col gap-sm">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground">
             Links have visible focus indicators for keyboard navigation. Focus is programmatically
             manageable.
           </p>
-          <Link href="/focusable" id="focusable-link">
+          <Link href="/focusable" variant="primary" id="focusable-link">
             Focusable Link (click to focus programmatically)
           </Link>
         </div>
@@ -496,13 +502,13 @@ export const Accessibility: Story = {
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">Screen Reader Support</h3>
         <div className="flex flex-col gap-sm">
-          <Link href="/accessible" aria-label="Go to accessible page">
+          <Link href="/accessible" variant="primary" aria-label="Go to accessible page">
             Accessible Link
           </Link>
-          <Link href="/icon-only" aria-label="External link to documentation">
+          <Link href="/icon-only" variant="primary" aria-label="External link to documentation">
             →
           </Link>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-foreground/80">
             Always provide accessible names for links, especially when using icons or when text
             alone is not descriptive.
           </p>

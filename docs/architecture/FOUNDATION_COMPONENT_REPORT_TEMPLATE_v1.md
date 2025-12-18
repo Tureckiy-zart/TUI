@@ -30,6 +30,74 @@ This document defines the **mandatory canonical format** for Foundation Componen
 
 ---
 
+## Canonical Report Naming Rule
+
+**Status:** MANDATORY  
+**Version:** 1.0.0  
+**Enforcement:** All Foundation refactor steps MUST use this naming convention
+
+### Required Format
+
+All Foundation Component Reports **MUST** use the following canonical filename format:
+
+```
+<COMPONENT>_FOUNDATION_LOCK_REPORT.md
+```
+
+### Component Name Rules
+
+- **Uppercase:** Component name MUST be in UPPERCASE
+- **Singular:** Component name MUST be singular (e.g., `BUTTON`, not `BUTTONS`)
+- **Canonical Match:** Component name MUST match the canonical component name exactly
+
+### Examples
+
+- ✅ `BUTTON_FOUNDATION_LOCK_REPORT.md`
+- ✅ `LINK_FOUNDATION_LOCK_REPORT.md`
+- ✅ `SELECT_FOUNDATION_LOCK_REPORT.md`
+- ✅ `MODAL_FOUNDATION_LOCK_REPORT.md`
+- ✅ `TABS_FOUNDATION_LOCK_REPORT.md`
+
+### Forbidden Patterns
+
+The following filename patterns are **FORBIDDEN**:
+
+- ❌ **STEP-based filenames:** `BUTTON_STEP_3_REPORT.md`, `BUTTON_STEP_03_REPORT.md`
+- ❌ **AUDIT-based filenames:** `BUTTON_FOUNDATION_AUDIT.md`, `BUTTON_AUDIT_REPORT.md`
+- ❌ **Versioned filenames:** `BUTTON_FOUNDATION_LOCK_REPORT_v1.md`, `BUTTON_FOUNDATION_LOCK_REPORT_v2.md`
+- ❌ **Multiple report files per component:** Each component MUST have exactly ONE report file
+
+### Report File Behavior
+
+**Each Foundation component MUST have exactly one Foundation lock report file:**
+
+- ✅ **Single File Per Component:** All refactor steps (Step 1, Step 2, Step 3, etc.) append their results as new sections inside the same report file
+- ✅ **Step Identifiers in Content:** Step identifiers (STEP 1, STEP 2, etc.) MUST exist as headings inside the document, NOT in the filename
+- ✅ **Cumulative Audit Trail:** The report file represents the canonical audit trail toward Foundation LOCK
+- ✅ **Append, Don't Replace:** Each step adds content to the existing report, creating a complete lifecycle record
+
+### Process Violation
+
+**Deviation from canonical naming is a PROCESS VIOLATION:**
+
+- ❌ **FORBIDDEN:** Creating step-specific report files (e.g., `BUTTON_STEP_3_REPORT.md`)
+- ❌ **FORBIDDEN:** Creating audit-specific report files (e.g., `BUTTON_FOUNDATION_AUDIT.md`)
+- ❌ **FORBIDDEN:** Using versioned filenames for reports
+- ❌ **FORBIDDEN:** Creating multiple report files for a single component
+
+**Consequence:** Report files that violate naming convention are non-compliant. Component cannot proceed to Foundation Lock until report filename is corrected.
+
+### Enforcement
+
+**AI agents and humans MUST:**
+
+- Use canonical naming format for all Foundation Component Reports
+- Append step results to existing report file, not create new files
+- Verify report filename compliance before accepting lifecycle progression
+- Refuse to create step-specific or audit-specific report files
+
+---
+
 ## Report Structure
 
 All Foundation Component Reports **MUST** follow this exact structure:

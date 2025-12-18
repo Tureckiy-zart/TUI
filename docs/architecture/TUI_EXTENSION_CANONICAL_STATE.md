@@ -316,7 +316,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Types: `PopoverArrowProps`, `PopoverContentProps`, `PopoverRootProps`, `PopoverTriggerProps`
     - Variants: `popoverContentVariants`
 
-34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C, 2025-01-27)
+34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C,  )
     - All Dropdown components and tokens fully removed
     - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 

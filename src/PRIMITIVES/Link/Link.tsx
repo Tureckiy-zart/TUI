@@ -133,6 +133,34 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       [disabled, onClick],
     );
 
+    // When asChild is true, Slot requires exactly one child element
+    // If we have icons, we need to wrap everything in a single element
+    const renderContent = () => {
+      if (asChild) {
+        // When asChild is true, Slot requires a single child
+        if (leftIcon || rightIcon) {
+          // If we have icons, wrap everything in a span
+          return (
+            <span>
+              {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+              {children}
+              {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+            </span>
+          );
+        }
+        // No icons, pass children directly (should be a single element)
+        return children;
+      }
+      // When asChild is false, we can render multiple children
+      return (
+        <>
+          {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+          {children}
+          {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+        </>
+      );
+    };
+
     return (
       <Comp
         className={cn(linkVariants({ variant, size, className }))}
@@ -143,9 +171,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         onClick={handleClick}
         {...props}
       >
-        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
-        {children}
-        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+        {renderContent()}
       </Comp>
     );
   },

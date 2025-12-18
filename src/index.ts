@@ -264,7 +264,7 @@ export {
 // UI COMPONENTS
 // ============================================================================
 // Button component (CVA-based, token-driven)
-export { Button, type ButtonProps, buttonVariants } from "./PRIMITIVES/Button";
+export { Button, type ButtonProps } from "./PRIMITIVES/Button";
 
 // Text component (CVA-based, token-driven)
 export {

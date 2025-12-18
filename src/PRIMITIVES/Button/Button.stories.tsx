@@ -39,9 +39,16 @@ const meta: Meta<typeof Button> = {
       control: { type: "boolean" },
       description: "Disable button interaction",
     },
+    children: {
+      control: { type: "text" },
+      description: "Button content",
+    },
     asChild: {
-      control: { type: "boolean" },
-      description: "Render as child element (Radix Slot)",
+      control: false,
+      description: "Render as child element (Radix Slot) - internal use only",
+      table: {
+        disable: true,
+      },
     },
     leftIcon: {
       control: false,
@@ -56,6 +63,28 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 type Story = StoryObj<typeof Button>;
+
+/**
+ * Default Story
+ *
+ * Default Button component in its canonical state.
+ * Represents the standard Button usage with default props (variant: primary, size: md).
+ */
+export const Default: Story = {
+  args: {
+    variant: "primary",
+    size: "md",
+    children: "Button",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Default Button component with canonical defaults: primary variant, medium size. This represents the standard Button usage.",
+      },
+    },
+  },
+};
 
 /**
  * Variants Story
@@ -151,36 +180,58 @@ export const Sizes: Story = {
 };
 
 /**
- * States Story
+ * Disabled Story
  *
- * Displays supported button states: default, disabled, and interactive states.
- * Shows all states for primary variant to validate state visibility.
+ * Displays Button in disabled state across all variants.
+ * Validates that disabled state is clearly distinguishable and non-interactive.
  */
-export const States: Story = {
+export const Disabled: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
-      <div className="flex flex-wrap items-center gap-md">
-        <Button variant="primary">Default</Button>
-        <Button variant="primary" disabled>
-          Disabled
-        </Button>
-        <Button variant="primary" aria-pressed="true">
-          Active (pressed)
-        </Button>
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">All Variants (Disabled)</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary" disabled>
+            Primary
+          </Button>
+          <Button variant="secondary" disabled>
+            Secondary
+          </Button>
+          <Button variant="accent" disabled>
+            Accent
+          </Button>
+          <Button variant="outline" disabled>
+            Outline
+          </Button>
+          <Button variant="ghost" disabled>
+            Ghost
+          </Button>
+          <Button variant="destructive" disabled>
+            Destructive
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-sm text-sm font-semibold">All Sizes (Disabled)</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button variant="primary" size="sm" disabled>
+            Small
+          </Button>
+          <Button variant="primary" size="md" disabled>
+            Medium
+          </Button>
+          <Button variant="primary" size="lg" disabled>
+            Large
+          </Button>
+          <Button variant="primary" size="icon" disabled aria-label="Disabled icon button">
+            <IconSearch />
+          </Button>
+        </div>
       </div>
       <div className="text-sm text-muted-foreground">
         <p>
-          <strong>Default:</strong> Interactive state, ready for user interaction.
-        </p>
-        <p>
-          <strong>Disabled:</strong> Non-interactive state, clearly distinguishable from default.
-        </p>
-        <p>
-          <strong>Active:</strong> Pressed/engaged state, provides clear feedback.
-        </p>
-        <p className="mt-sm">
-          <strong>Hover:</strong> Hover over buttons to see hover state feedback (darker
-          background).
+          <strong>Disabled State:</strong> Non-interactive state, clearly distinguishable from
+          default. Hover and active states are blocked. Cursor shows "not-allowed".
         </p>
       </div>
     </div>
@@ -190,7 +241,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "Button states: default (interactive), disabled (non-interactive), and active (pressed state). Hover over buttons to see hover feedback.",
+          "Button disabled state across all variants and sizes. Validates that disabled state is clearly non-interactive and blocks all interactions.",
       },
     },
   },
@@ -508,31 +559,6 @@ export const InteractionVerification: Story = {
 - Verify that icons don't block button hover
 
 See [Interaction Authority Contract](../../../docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md) for full rules.`,
-      },
-    },
-  },
-};
-
-/**
- * Playground Story
- *
- * Interactive sandbox for manual exploration of Button component.
- * All controls are enabled for experimentation.
- *
- * ⚠️ Note: This is a non-canonical story for manual testing only.
- */
-export const Playground: Story = {
-  args: {
-    variant: "primary",
-    size: "md",
-    children: "Button",
-    disabled: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Interactive playground for exploring Button component. All controls are enabled. This story is for manual testing and does not replace the canonical API documentation stories above.",
       },
     },
   },
