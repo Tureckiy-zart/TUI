@@ -28,8 +28,7 @@ const backdropVariants = cva("fixed inset-0 z-40 transition-opacity", {
 });
 
 export interface BackdropProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof backdropVariants> {
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof backdropVariants> {
   /**
    * Backdrop variant
    */

@@ -12,7 +12,8 @@ import { radioVariants } from "./radio-variants";
  * Uses button role="radio" pattern for full keyboard accessibility.
  */
 export interface RadioProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
     VariantProps<typeof radioVariants> {
   /**
    * Radio variant style

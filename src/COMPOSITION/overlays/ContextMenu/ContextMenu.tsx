@@ -215,8 +215,10 @@ ContextMenuRoot.displayName = ContextMenuPrimitive.Root.displayName;
 // CONTEXT MENU TRIGGER
 // ============================================================================
 
-export interface ContextMenuTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>, "children"> {
+export interface ContextMenuTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>,
+  "children"
+> {
   children?: React.ReactNode;
 }
 
@@ -236,11 +238,10 @@ ContextMenuTrigger.displayName = ContextMenuPrimitive.Trigger.displayName;
 // CONTEXT MENU CONTENT
 // ============================================================================
 
-export interface ContextMenuContentProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>,
-    "size" | "width" | "padding" | "radius" | "surface"
-  > {
+export interface ContextMenuContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>,
+  "size" | "width" | "padding" | "radius" | "surface"
+> {
   /**
    * Size variant - token-based
    */
@@ -322,8 +323,10 @@ ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName;
 // CONTEXT MENU ITEM
 // ============================================================================
 
-export interface ContextMenuItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item>, "children"> {
+export interface ContextMenuItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item>,
+  "children"
+> {
   children?: React.ReactNode;
   /**
    * Size variant - token-based
@@ -384,11 +387,10 @@ ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;
 // CONTEXT MENU CHECKBOX ITEM
 // ============================================================================
 
-export interface ContextMenuCheckboxItemProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>,
-    "children"
-  > {
+export interface ContextMenuCheckboxItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>,
+  "children"
+> {
   children?: React.ReactNode;
   /**
    * Size variant - token-based
@@ -446,8 +448,10 @@ ContextMenuCheckboxItem.displayName = ContextMenuPrimitive.CheckboxItem.displayN
 // CONTEXT MENU RADIO GROUP
 // ============================================================================
 
-export interface ContextMenuRadioGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioGroup>, "children"> {
+export interface ContextMenuRadioGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioGroup>,
+  "children"
+> {
   children?: React.ReactNode;
 }
 
@@ -467,8 +471,10 @@ ContextMenuRadioGroup.displayName = ContextMenuPrimitive.RadioGroup.displayName;
 // CONTEXT MENU RADIO ITEM
 // ============================================================================
 
-export interface ContextMenuRadioItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>, "children"> {
+export interface ContextMenuRadioItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>,
+  "children"
+> {
   children?: React.ReactNode;
   /**
    * Size variant - token-based
@@ -526,8 +532,9 @@ ContextMenuRadioItem.displayName = ContextMenuPrimitive.RadioItem.displayName;
 // CONTEXT MENU SEPARATOR
 // ============================================================================
 
-export interface ContextMenuSeparatorProps
-  extends React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator> {
+export interface ContextMenuSeparatorProps extends React.ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.Separator
+> {
   className?: string;
 }
 
@@ -556,8 +563,10 @@ ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName;
 // CONTEXT MENU LABEL
 // ============================================================================
 
-export interface ContextMenuLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label>, "children"> {
+export interface ContextMenuLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label>,
+  "children"
+> {
   children?: React.ReactNode;
   /**
    * Padding - token-based
@@ -597,8 +606,9 @@ ContextMenuLabel.displayName = ContextMenuPrimitive.Label.displayName;
 // CONTEXT MENU SUB
 // ============================================================================
 
-export interface ContextMenuSubProps
-  extends React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Sub> {
+export interface ContextMenuSubProps extends React.ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.Sub
+> {
   children?: React.ReactNode;
 }
 
@@ -615,8 +625,10 @@ ContextMenuSub.displayName = ContextMenuPrimitive.Sub.displayName;
 // CONTEXT MENU SUB TRIGGER
 // ============================================================================
 
-export interface ContextMenuSubTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger>, "children"> {
+export interface ContextMenuSubTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger>,
+  "children"
+> {
   children?: React.ReactNode;
   /**
    * Size variant - token-based
@@ -670,11 +682,10 @@ ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName;
 // CONTEXT MENU SUB CONTENT
 // ============================================================================
 
-export interface ContextMenuSubContentProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>,
-    "size" | "width" | "padding" | "radius" | "surface"
-  > {
+export interface ContextMenuSubContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>,
+  "size" | "width" | "padding" | "radius" | "surface"
+> {
   /**
    * Size variant - token-based
    */

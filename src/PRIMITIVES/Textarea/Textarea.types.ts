@@ -11,8 +11,7 @@ import { textareaVariants } from "./textarea-variants";
  * Extends native textarea HTML attributes with variant props, character counter, and accessibility props.
  */
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    VariantProps<typeof textareaVariants> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, VariantProps<typeof textareaVariants> {
   /**
    * Textarea variant style
    * @default "outline"

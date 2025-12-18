@@ -27,8 +27,9 @@ export type ToastPosition =
   | "bottom-center"
   | "bottom-right";
 
-export interface ToastViewportProps
-  extends React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport> {
+export interface ToastViewportProps extends React.ComponentPropsWithoutRef<
+  typeof ToastPrimitives.Viewport
+> {
   /**
    * Position of toast viewport
    */

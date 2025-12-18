@@ -150,8 +150,7 @@ export type ButtonSize = VariantProps<typeof buttonVariants>["size"];
  * @rule Button is fully token-based - no raw Tailwind colors allowed
  */
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;

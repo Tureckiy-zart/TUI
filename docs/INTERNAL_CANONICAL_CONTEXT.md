@@ -967,6 +967,8 @@ The typing system consists of two documents with explicit priority ordering:
 6. **Implement Token-Driven:** Ensure all visual props use token unions
 7. **Export:** Add to public exports (if appropriate for public API)
 
+**Note:** The Foundation layer is **CLOSED**. No new Foundation components may be created. If Foundation unlock is required in the future, the canonical Foundation component creation/refactor lifecycle is defined in [FOUNDATION_LOCK_OPERATING_RULES.md](./architecture/FOUNDATION_LOCK_OPERATING_RULES.md) (Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle). For human-readable navigation to the lifecycle process, see [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./architecture/FOUNDATION_LIFECYCLE_PROCESS_INDEX.md). **All Foundation components MUST have a compliant report following [FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md](./architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md) before Foundation Lock (Step 11).**
+
 **Example:**
 ```typescript
 // ✅ CORRECT - Extension component
@@ -1366,6 +1368,8 @@ This document is the **single source of truth** for TenerifeUI architecture. How
 - **`docs/architecture/TUI_ARCHITECTURE_LOCK.md`** - Architecture lock details (supplementary to this document)
 - **`docs/architecture/UI_ARCHITECTURE_RULES.md`** - Radix UI and token union rules (supplementary to this document)
 - **`docs/architecture/CURSOR_UI_RULES.md`** - Cursor AI development rules (supplementary to this document)
+- **`docs/architecture/FOUNDATION_LOCK_OPERATING_RULES.md`** - Foundation component lifecycle process (Section 10) and report format requirement (Section 10.1)
+- **`docs/architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md`** - **MANDATORY** canonical format for Foundation Component Reports (REQUIRED for Foundation Lock)
 - **`docs/structure/TYPING_SYSTEM.md`** - Typing system index and navigation guide (canonical entry point for typing rules)
 - **`docs/structure/TYPING_STANDARD.md`** - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED)
 - **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** - General TypeScript implementation rules (secondary to `TYPING_STANDARD.md`)

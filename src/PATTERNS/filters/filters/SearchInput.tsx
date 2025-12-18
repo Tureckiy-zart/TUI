@@ -8,8 +8,10 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { Button } from "@/PRIMITIVES/Button";
 import { Input } from "@/PRIMITIVES/Input";
 
-export interface SearchInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "size"> {
+export interface SearchInputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "value" | "onChange" | "size"
+> {
   value: string;
   onChange: (value: string) => void;
   onClear?: () => void;

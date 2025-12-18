@@ -86,8 +86,9 @@ const modalOverlayVariants = cva(
 // MODAL ROOT
 // ============================================================================
 
-export interface ModalRootProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {}
+export interface ModalRootProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Root
+> {}
 
 /**
  * Modal Root component
@@ -102,8 +103,9 @@ ModalRoot.displayName = DialogPrimitive.Root.displayName;
 // MODAL TRIGGER
 // ============================================================================
 
-export interface ModalTriggerProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger> {}
+export interface ModalTriggerProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Trigger
+> {}
 
 /**
  * Modal Trigger component
@@ -140,8 +142,9 @@ ModalPortal.displayName = DialogPrimitive.Portal.displayName;
 // MODAL OVERLAY
 // ============================================================================
 
-export interface ModalOverlayProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> {}
+export interface ModalOverlayProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Overlay
+> {}
 
 /**
  * Modal Overlay component
@@ -164,11 +167,10 @@ ModalOverlay.displayName = DialogPrimitive.Overlay.displayName;
 // MODAL CONTENT
 // ============================================================================
 
-export interface ModalContentProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    "size" | "width" | "height" | "padding" | "radius" | "surface"
-  > {
+export interface ModalContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+  "size" | "width" | "height" | "padding" | "radius" | "surface"
+> {
   /**
    * Size variant - token-based
    *
@@ -343,8 +345,9 @@ ModalHeader.displayName = "ModalHeader";
 // MODAL TITLE
 // ============================================================================
 
-export interface ModalTitleProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {}
+export interface ModalTitleProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Title
+> {}
 
 /**
  * Modal Title component
@@ -373,8 +376,9 @@ ModalTitle.displayName = DialogPrimitive.Title.displayName;
 // MODAL DESCRIPTION
 // ============================================================================
 
-export interface ModalDescriptionProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> {}
+export interface ModalDescriptionProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Description
+> {}
 
 /**
  * Modal Description component
@@ -444,8 +448,9 @@ ModalFooter.displayName = "ModalFooter";
 // MODAL CLOSE
 // ============================================================================
 
-export interface ModalCloseProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close> {}
+export interface ModalCloseProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Close
+> {}
 
 /**
  * Modal Close component

@@ -15,8 +15,7 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
-export interface NotificationCenterTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface NotificationCenterTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Callback when trigger is clicked
    */

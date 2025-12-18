@@ -74,7 +74,8 @@ export interface ToastData {
 }
 
 export interface ToastRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root>, "duration">,
+  extends
+    Omit<React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root>, "duration">,
     VariantProps<typeof toastVariants> {
   /**
    * Toast data

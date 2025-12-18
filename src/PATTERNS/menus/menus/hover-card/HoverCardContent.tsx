@@ -13,11 +13,10 @@ import { PopoverContent } from "@/COMPOSITION/overlays/Popover";
 
 import { useHoverCardContext } from "./HoverCardRoot";
 
-export interface HoverCardContentProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof PopoverContent>,
-    "onMouseEnter" | "onMouseLeave"
-  > {
+export interface HoverCardContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof PopoverContent>,
+  "onMouseEnter" | "onMouseLeave"
+> {
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
 }

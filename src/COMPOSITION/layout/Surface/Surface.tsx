@@ -33,8 +33,7 @@ const surfaceVariants = cva("", {
 });
 
 export interface SurfaceProps
-  extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p">,
-    VariantProps<typeof surfaceVariants> {
+  extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p">, VariantProps<typeof surfaceVariants> {
   /**
    * Surface variant
    */

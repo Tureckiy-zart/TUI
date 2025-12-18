@@ -331,6 +331,8 @@ If architectural changes are required that violate this lock:
 
 **Rule:** Unlock **MUST** be explicit and documented. No silent unlocks allowed.
 
+**Note:** This unlock protocol is for unlocking **canonical architecture locks** (Authority Contracts, Token System, etc.). If the unlock involves creating or refactoring **Foundation components** (Modal, Tabs, Select, ContextMenu, Toast), the canonical lifecycle defined in [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) (Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle) **MUST** be followed as part of the implementation phase (Step 4). For human-readable navigation to the lifecycle process, see [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md).
+
 ---
 
 ## Verification

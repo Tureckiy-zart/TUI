@@ -101,8 +101,9 @@ const selectItemVariants = cva(
 // SELECT ROOT
 // ============================================================================
 
-export interface SelectRootProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {}
+export interface SelectRootProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Root
+> {}
 
 /**
  * Select Root component
@@ -117,11 +118,10 @@ SelectRoot.displayName = SelectPrimitive.Root.displayName;
 // SELECT TRIGGER
 // ============================================================================
 
-export interface SelectTriggerProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
-    "size" | "variant" | "width"
-  > {
+export interface SelectTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
+  "size" | "variant" | "width"
+> {
   /**
    * Size variant - token-based
    */
@@ -168,8 +168,9 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 // SELECT VALUE
 // ============================================================================
 
-export interface SelectValueProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value> {}
+export interface SelectValueProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Value
+> {}
 
 const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(
   ({ className, ...props }, ref) => {
@@ -182,8 +183,9 @@ SelectValue.displayName = SelectPrimitive.Value.displayName;
 // SELECT ICON
 // ============================================================================
 
-export interface SelectIconProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Icon> {}
+export interface SelectIconProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Icon
+> {}
 
 const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(
   ({ className, ...props }, ref) => {
@@ -211,11 +213,10 @@ SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 // SELECT CONTENT
 // ============================================================================
 
-export interface SelectContentProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
-    "size" | "sideOffset" | "alignOffset"
-  > {
+export interface SelectContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
+  "size" | "sideOffset" | "alignOffset"
+> {
   /**
    * Size variant - token-based
    */
@@ -274,8 +275,9 @@ SelectContent.displayName = SelectPrimitive.Content.displayName;
 // SELECT VIEWPORT
 // ============================================================================
 
-export interface SelectViewportProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport> {}
+export interface SelectViewportProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Viewport
+> {}
 
 const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
   ({ className, ...props }, ref) => {
@@ -298,8 +300,9 @@ SelectViewport.displayName = SelectPrimitive.Viewport.displayName;
 // SELECT ITEM
 // ============================================================================
 
-export interface SelectItemProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
+export interface SelectItemProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Item
+> {
   /**
    * Size variant - token-based
    */
@@ -342,8 +345,9 @@ SelectItem.displayName = SelectPrimitive.Item.displayName;
 // SELECT ITEM TEXT
 // ============================================================================
 
-export interface SelectItemTextProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemText> {}
+export interface SelectItemTextProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.ItemText
+> {}
 
 const SelectItemText = React.forwardRef<HTMLSpanElement, SelectItemTextProps>(
   ({ className, ...props }, ref) => {
@@ -356,8 +360,9 @@ SelectItemText.displayName = SelectPrimitive.ItemText.displayName;
 // SELECT ITEM INDICATOR
 // ============================================================================
 
-export interface SelectItemIndicatorProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator> {}
+export interface SelectItemIndicatorProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.ItemIndicator
+> {}
 
 const SelectItemIndicator = React.forwardRef<HTMLSpanElement, SelectItemIndicatorProps>(
   ({ className, ...props }, ref) => {
@@ -374,8 +379,9 @@ SelectItemIndicator.displayName = SelectPrimitive.ItemIndicator.displayName;
 // SELECT SEPARATOR
 // ============================================================================
 
-export interface SelectSeparatorProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> {
+export interface SelectSeparatorProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Separator
+> {
   /**
    * Size variant - token-based
    */
@@ -415,8 +421,9 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 // SELECT GROUP
 // ============================================================================
 
-export interface SelectGroupProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group> {}
+export interface SelectGroupProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Group
+> {}
 
 const SelectGroup = React.forwardRef<HTMLDivElement, SelectGroupProps>(
   ({ className, ...props }, ref) => {
@@ -429,8 +436,9 @@ SelectGroup.displayName = SelectPrimitive.Group.displayName;
 // SELECT LABEL
 // ============================================================================
 
-export interface SelectLabelProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label> {
+export interface SelectLabelProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Label
+> {
   /**
    * Size variant - token-based
    */

@@ -17,8 +17,10 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import type { NotificationData, NotificationVariant } from "./NotificationCenter.types";
 
-export interface NotificationCenterItemProps
-  extends Omit<React.HTMLAttributes<HTMLLIElement>, "onClick"> {
+export interface NotificationCenterItemProps extends Omit<
+  React.HTMLAttributes<HTMLLIElement>,
+  "onClick"
+> {
   /**
    * Notification data
    */

@@ -47,8 +47,7 @@ const textVariants = cva("text-foreground", {
 });
 
 export interface TextProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof textVariants> {
+  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof textVariants> {
   /**
    * @deprecated Use muted prop or semantic text colors instead
    */

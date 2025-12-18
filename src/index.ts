@@ -281,8 +281,6 @@ export { Alert, type AlertProps, alertVariants } from "./PRIMITIVES/Alert";
 // Link component (CVA-based, token-driven)
 export {
   Link,
-  LINK_SIZES,
-  LINK_VARIANTS,
   type LinkProps,
   type LinkSize,
   type LinkVariant,

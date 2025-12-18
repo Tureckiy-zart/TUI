@@ -28,7 +28,8 @@ export type DrawerBackdropVariant = "default" | "blurred" | "transparent";
  * Main props interface for Drawer component
  */
 export interface DrawerProps
-  extends Omit<
+  extends
+    Omit<
       React.HTMLAttributes<HTMLDivElement>,
       "onClick" | "role" | "aria-modal" | "aria-labelledby" | "aria-describedby"
     >,

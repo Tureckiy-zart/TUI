@@ -468,6 +468,64 @@ if (isString(data)) {
 }
 ```
 
+### Unsafe Type Assertions Prohibition (MANDATORY)
+
+**FORBIDDEN:** Unsafe type assertions (`as any`, `as unknown as`) that bypass the public API type system are **FORBIDDEN** in all contexts.
+
+**Scope of Prohibition:**
+- Component implementation
+- Tests
+- Storybook stories
+- Examples and documentation
+- Internal utilities
+
+**FORBIDDEN Patterns:**
+
+```typescript
+// ❌ FORBIDDEN - using as any to bypass public API
+<Component {...({ disabled: true } as any)} />
+
+// ❌ FORBIDDEN - unsafe type assertions to bypass TypeScript
+const props = componentProps as any;
+const value = data as unknown as TargetType;
+
+// ❌ FORBIDDEN - bypassing TypeScript errors instead of fixing types
+const result = (someValue as any).method();
+```
+
+**REQUIRED Process:**
+
+If a prop or feature is needed but does not exist in the public API:
+
+1. ✅ **MUST request architectural approval** to add the prop to the public API
+2. ✅ **MUST NOT** use `as any` to bypass the type system
+3. ✅ **MUST wait** for approval and implementation before using in tests/Storybook
+
+**Exception Process:**
+
+Exceptions are allowed **ONLY** after explicit architectural approval and documentation:
+- Exception must be documented with rationale
+- Exception must be temporary (with plan to fix)
+- Exception must be approved through architectural decision process
+
+**Violation Severity:**
+
+- **Silent use of `as any`** = **BLOCKING PROCESS VIOLATION**
+- Violations prevent progression past Foundation lifecycle Step 7 (TypeScript System Compliance)
+- Violations in tests/Storybook prevent progression past Steps 11-12 (Quality Gates)
+
+**Canonical Precedent: Link `disabled` Decision**
+
+The Link component's `disabled` prop decision serves as a canonical precedent:
+- **Initial State:** `disabled` was not part of Link's public API (`LinkProps`)
+- **Violation:** Tests/Storybook used `as any` to simulate `disabled` prop (see `Link.test.tsx` line 495: `{...({ disabled: false } as any)}`)
+- **Resolution:** Architectural decision was made to add `disabled` to Link's public API
+- **Outcome:** `disabled` is now part of Link's public API (see `LinkProps.disabled?: boolean`)
+
+**Lesson:** If a prop is needed for tests/Storybook/examples, it MUST be added to the public API through proper architectural approval, not bypassed with `as any`.
+
+**Reference:** See [FOUNDATION_LOCK_OPERATING_RULES.md](../architecture/FOUNDATION_LOCK_OPERATING_RULES.md) — Step 7: TypeScript System Compliance — Unsafe Type Assertions Prohibition
+
 ---
 
 ## 📚 Part 8: Examples
@@ -586,6 +644,7 @@ Before marking code as complete:
 - [ ] All hooks have return type interfaces
 - [ ] Avoid `any` where possible (temporarily allowed but discouraged)
 - [ ] No implicit `any` (enforced by TypeScript)
+- [ ] No unsafe type assertions (`as any`, `as unknown as`) to bypass public API typing (MANDATORY - see Unsafe Type Assertions Prohibition section)
 - [ ] All types are exported
 - [ ] Strict mode passes
 - [ ] Type enforcement script passes

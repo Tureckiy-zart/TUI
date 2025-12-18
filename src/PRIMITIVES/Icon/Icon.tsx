@@ -38,7 +38,8 @@ const iconVariants = cva("shrink-0", {
 });
 
 export interface IconProps
-  extends Omit<React.SVGProps<SVGSVGElement>, "color" | "stroke">,
+  extends
+    Omit<React.SVGProps<SVGSVGElement>, "color" | "stroke">,
     VariantProps<typeof iconVariants> {
   /**
    * Icon name from registry

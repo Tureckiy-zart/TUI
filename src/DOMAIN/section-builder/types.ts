@@ -342,7 +342,8 @@ export interface SectionBuilderConfig {
  * Extends the config with standard React props
  */
 export interface SectionBuilderProps
-  extends Omit<SectionBuilderConfig, "as" | "aria-label" | "style" | "className">,
+  extends
+    Omit<SectionBuilderConfig, "as" | "aria-label" | "style" | "className">,
     Omit<React.HTMLAttributes<HTMLElement>, "style" | "className"> {
   /**
    * Configuration object (alternative to individual props)

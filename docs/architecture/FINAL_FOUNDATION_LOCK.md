@@ -426,9 +426,10 @@ The following components constitute the **complete and final** Foundation layer.
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
 | **Modal**       | Overlays   | Radix Dialog      | ✅ LOCKED          | 2025-12-12 |
 | **Tabs**        | Navigation | Radix Tabs        | ✅ LOCKED          | 2025-12-12 |
-| **Select**      | Inputs     | Radix Select      | ✅ LOCKED (FINALIZED) | 2025-12-12 |
+| **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ✅ LOCKED          | 2025-12-12 |
 | **Toast**       | Overlays   | Radix Toast       | ✅ LOCKED          | 2025-12-12 |
+| **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
 
 ### Foundation Component Details
 
@@ -447,15 +448,26 @@ The following components constitute the **complete and final** Foundation layer.
 - **Status:** ✅ **LOCKED** — Immutable
 
 #### Select
-- **Location:** `src/components/select/`
+- **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)
 - **Export Path:** `@tenerife.music/ui` → `Select`, `SelectRoot`, `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`, `SelectGroup`, `SelectLabel`, `SelectSeparator`
 - **Base Library:** Radix Select (`@radix-ui/react-select`)
 - **Purpose:** Sole select foundation. All dropdown selection must use this internally.
-- **Status:** ✅ **LOCKED** — **FOUNDATION FINALIZED** (S1 + H1–H4 complete)
-- **UNLOCK Requirement:** Any functional, behavioral, accessibility-semantic, or public API change is **UNLOCK** → **FORBIDDEN** without a formal UNLOCK procedure.
-- **No Growth Policy:** No new variants/modes, no alternative usage patterns, no capability expansion, no contract relaxation.
-- **No Extensions / Variants / Refactors:** No extension of Select’s capabilities, no new variants, and no refactors as standalone work. Refactors are permitted only when strictly required for a LOCK-safe bug/a11y fix and only if public API and behavior remain unchanged.
-- **Lock-Safe Changes Only:** Only actions explicitly allowed by `FOUNDATION_LOCK_OPERATING_RULES.md` are permitted (documentation clarification, a11y/bug fixes within the documented contract, typing/internal refactor with no API/behavior change).
+- **Status:** ⏳ **UNLOCKED** — **PENDING CANONICAL LOCK**
+- **Unlock Date:** 2025-12-17
+- **Unlock Reason:** Select will undergo canonical Foundation lock process (Steps 1-11) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Link component.
+- **Next Steps:** Select will proceed through canonical Foundation component lifecycle:
+  1. Semantic Declaration
+  2. Alternative Cleanup
+  3. State Model and Priority Verification
+  4. JS-Free Interaction Model
+  5. Token-Driven Model
+  6. Public API Audit
+  7. TypeScript System Compliance
+  8. CVA Canonicalization
+  9. Accessibility Hardening
+  10. Authority Alignment
+  11. Foundation Lock
+- **Temporary Status:** During unlock period, Select remains functional but is not locked. Changes are allowed to bring it into full compliance with canonical Foundation requirements.
 
 #### ContextMenu
 - **Location:** `src/components/menus/context-menu/`
@@ -470,6 +482,22 @@ The following components constitute the **complete and final** Foundation layer.
 - **Base Library:** Radix Toast (`@radix-ui/react-toast`)
 - **Purpose:** Sole toast foundation. All notification toasts must use this internally.
 - **Status:** ✅ **LOCKED** — Immutable
+
+#### Link
+- **Location:** `src/PRIMITIVES/Link/`
+- **Export Path:** `@tenerife.music/ui` → `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
+- **Base Library:** Native `<a>` element (semantic HTML)
+- **Purpose:** Sole navigation link foundation. All navigation links must use this component. Link represents semantic navigation (location changes), not actions. Actions must use Button component.
+- **Status:** ✅ **FINAL LOCK** — Immutable
+- **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
+- **Lock Date:** 2025-12-17
+- **Final Lock Date:** 2025-12-18
+- **Lifecycle Version:** 1.0 (Steps 1-13)
+- **Lock Version:** 1.0
+- **Quality Gates:** ✅ Step 10A (Storybook & Testing) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS
+- **Scope:** Public API, tokens (LINK_TOKENS), behavior (navigation via `<a>`), states (base, hover, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, link, destructive), sizes (xs, sm, md, lg, xl)
+- **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
+- **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
 
 ---
 
@@ -815,6 +843,8 @@ The Extension layer is **OPEN** for development. All Extension components must:
 - [ ] All Authority documents reference enforcement docs (do not include enforcement content)
 
 **Rule:** If any checklist item is not satisfied, the Foundation Authority domain cannot be locked. All items must be verified and checked before proceeding with lock.
+
+**Note:** This checklist is for locking **Foundation Authority domains** (Interaction, State, Spacing, Radius, Typography, Motion, Elevation, Layout). For creating or refactoring **Foundation components** (Modal, Tabs, Select, ContextMenu, Toast), see the canonical lifecycle defined in [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) (Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle). For human-readable navigation to the lifecycle process, see [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md).
 
 ---
 
@@ -1393,10 +1423,28 @@ If Authority modifications are required in the future:
 - **[State Authority Matrix](./STATE_AUTHORITY_MATRIX.md)** — 🔒 **LOCKED** Universal state model for all interactive components
 - **[State Authority Contract](./STATE_AUTHORITY_CONTRACT.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
 - **[Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md)** — ✅ **ACTIVE** Extension layer boundary contract
+- **[Foundation Lifecycle Process Index](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md)** — Human-readable navigation to Foundation component creation/refactor lifecycle process
 
 ---
 
 ## 🔄 Version History
+
+- **v1.17** (2025-12-17): Select Component Unlock
+  - Unlocked Select component to allow canonical Foundation lock process
+  - Changed Select status from LOCKED (FINALIZED) to UNLOCKED (Pending Canonical Lock)
+  - Select will undergo full canonical lifecycle (Steps 1-11) similar to Link
+  - Unlock date: 2025-12-17
+  - Unlock reason: Ensure full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Completed unlock process per user request to prepare Select for canonical lock
+
+- **v1.16** (2025-12-17): Link Component Foundation Lock
+  - Added Link component to Locked Foundation Components table
+  - Added Link component details section
+  - Documented Link as sole navigation link foundation
+  - Link officially locked as Foundation primitive (STEP 1-11 complete)
+  - Lock date: 2025-12-17
+  - Lock report: `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
+  - Completed formal lock process per TUI_LINK_STEP_11_FOUNDATION_LOCK task
 
 - **v1.15** (2025-12-16): Visual Token Authorities Lock Completion
   - Locked Spacing Authority (changed from ACTIVE to LOCKED)
@@ -1554,9 +1602,9 @@ New functionality must be built as **Extensions** that compose Foundation compon
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.15  
+**Version:** 1.17  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-17  
 **Priority:** CRITICAL  
 **Architecture Phase:** **CLOSED**  
 **Next Review:** **NEVER** (Foundation is immutable)

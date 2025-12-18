@@ -65,7 +65,8 @@ const segmentedControlItemVariants = cva(
 // ============================================================================
 
 export interface SegmentedControlRootProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "role">,
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "role">,
     VariantProps<typeof segmentedControlRootVariants> {
   /**
    * Controlled value
@@ -89,7 +90,8 @@ export interface SegmentedControlRootProps
 }
 
 export interface SegmentedControlItemProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "role">,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "role">,
     VariantProps<typeof segmentedControlItemVariants> {
   /**
    * Value of this item

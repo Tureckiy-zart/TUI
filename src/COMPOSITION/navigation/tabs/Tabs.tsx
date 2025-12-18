@@ -170,8 +170,10 @@ TabsRoot.displayName = TabsPrimitive.Root.displayName;
 // TABS LIST
 // ============================================================================
 
-export interface TabsListProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>, "size" | "variant"> {
+export interface TabsListProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>,
+  "size" | "variant"
+> {
   /**
    * Size variant - token-based
    */
@@ -208,11 +210,10 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 // TABS TRIGGER
 // ============================================================================
 
-export interface TabsTriggerProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
-    "size" | "variant" | "tone"
-  > {
+export interface TabsTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
+  "size" | "variant" | "tone"
+> {
   /**
    * Size variant - token-based (inherited from context if not provided)
    */
@@ -297,8 +298,10 @@ TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 // TABS CONTENT
 // ============================================================================
 
-export interface TabsContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>, "size"> {
+export interface TabsContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>,
+  "size"
+> {
   /**
    * Size variant - token-based (for padding)
    */

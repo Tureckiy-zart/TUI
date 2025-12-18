@@ -13,6 +13,7 @@ import * as React from "react";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { NAVIGATION_TOKENS } from "@/FOUNDATION/tokens/components/navigation";
+import { Link } from "@/PRIMITIVES/Link";
 
 // ============================================================================
 // Types
@@ -110,8 +111,9 @@ const BreadcrumbsRoot = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(
                   <BreadcrumbsSeparator>{separator || defaultSeparator}</BreadcrumbsSeparator>
                 )}
                 {item.href && !isLast && !item.disabled ? (
-                  <a
+                  <Link
                     href={item.href}
+                    variant="link"
                     className={cn(
                       NAVIGATION_TOKENS.states.default.text,
                       NAVIGATION_TOKENS.states.hover.text,
@@ -119,7 +121,7 @@ const BreadcrumbsRoot = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(
                     )}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ) : (
                   <span
                     className={cn(

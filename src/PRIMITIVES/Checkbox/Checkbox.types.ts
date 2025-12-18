@@ -12,7 +12,8 @@ import { checkboxVariants } from "./checkbox-variants";
  * Uses button role="checkbox" pattern for full keyboard accessibility.
  */
 export interface CheckboxProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
     VariantProps<typeof checkboxVariants> {
   /**
    * Checkbox variant style

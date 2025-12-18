@@ -38,8 +38,10 @@ import type {
   SpacingValue,
 } from "../layout.types";
 
-export interface FlexProps
-  extends Omit<BoxProps, "display" | "flexDirection" | "align" | "justify"> {
+export interface FlexProps extends Omit<
+  BoxProps,
+  "display" | "flexDirection" | "align" | "justify"
+> {
   /**
    * Flex direction
    */

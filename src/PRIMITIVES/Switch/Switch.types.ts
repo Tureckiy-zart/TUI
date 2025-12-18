@@ -12,7 +12,8 @@ import { switchTrackVariants } from "./switch-variants";
  * Uses button role="switch" pattern for full keyboard accessibility.
  */
 export interface SwitchProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
     VariantProps<typeof switchTrackVariants> {
   /**
    * Switch variant style

@@ -107,8 +107,9 @@ export interface TableContextValue {
 /**
  * Table Root component props
  */
-export interface TableRootProps<T = Record<string, unknown>>
-  extends React.HTMLAttributes<HTMLTableElement> {
+export interface TableRootProps<
+  T = Record<string, unknown>,
+> extends React.HTMLAttributes<HTMLTableElement> {
   /**
    * Table data array
    */

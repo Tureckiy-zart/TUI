@@ -13,8 +13,7 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
-export interface NotificationCenterDismissAllProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface NotificationCenterDismissAllProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Show confirmation before clearing
    */

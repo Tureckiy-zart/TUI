@@ -8,11 +8,11 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { LINK_TOKENS } from "@/FOUNDATION/tokens/components/link";
 
 /**
- * Link variant values
+ * Link variant values (internal - used for type derivation only)
  *
- * @public
+ * @internal
  */
-export const LINK_VARIANTS = [
+const _LINK_VARIANTS = [
   "primary",
   "secondary",
   "accent",
@@ -27,21 +27,21 @@ export const LINK_VARIANTS = [
  *
  * @public
  */
-export type LinkVariant = (typeof LINK_VARIANTS)[number];
+export type LinkVariant = (typeof _LINK_VARIANTS)[number];
 
 /**
- * Link size values
+ * Link size values (internal - used for type derivation only)
  *
- * @public
+ * @internal
  */
-export const LINK_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
+const _LINK_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 
 /**
  * Link size type
  *
  * @public
  */
-export type LinkSize = (typeof LINK_SIZES)[number];
+export type LinkSize = (typeof _LINK_SIZES)[number];
 
 const linkVariants = tokenCVA({
   base: `${LINK_TOKENS.layout} ${LINK_TOKENS.fontWeight} ${LINK_TOKENS.transition.colors} ${LINK_TOKENS.focus.outline} ${LINK_TOKENS.focus.ring} ${LINK_TOKENS.focus.offset} ${LINK_TOKENS.state.disabled.pointerEvents} ${LINK_TOKENS.state.disabled.opacity}`,
@@ -92,13 +92,57 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
    * Icon to display on the right side
    */
   rightIcon?: React.ReactNode;
+  /**
+   * Whether the link is disabled
+   * When disabled, the link will not be navigable and will be removed from the tab order
+   * @default false
+   */
+  disabled?: boolean;
 }
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      leftIcon,
+      rightIcon,
+      children,
+      disabled,
+      onClick,
+      href,
+      tabIndex,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "a";
+
+    // Handle disabled state with proper accessibility semantics
+    const handleClick = React.useCallback(
+      (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        onClick?.(e);
+      },
+      [disabled, onClick],
+    );
+
     return (
-      <Comp className={cn(linkVariants({ variant, size, className }))} ref={ref} {...props}>
+      <Comp
+        className={cn(linkVariants({ variant, size, className }))}
+        ref={ref}
+        href={href}
+        tabIndex={disabled ? (tabIndex ?? -1) : tabIndex}
+        aria-disabled={disabled ? true : undefined}
+        onClick={handleClick}
+        {...props}
+      >
         {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
         {children}
         {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}

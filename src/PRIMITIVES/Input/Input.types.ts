@@ -29,7 +29,8 @@ export type { InputSize };
  * Extends native input HTML attributes with variant props, icon slots, and accessibility props.
  */
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
     Omit<VariantProps<typeof inputVariants>, "variant" | "size"> {
   /**
    * Input variant style
