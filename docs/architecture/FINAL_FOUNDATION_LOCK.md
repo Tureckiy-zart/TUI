@@ -429,7 +429,7 @@ The following components constitute the **complete and final** Foundation layer.
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ✅ LOCKED          | 2025-12-12 |
 | **Toast**       | Overlays   | Radix Toast       | ✅ LOCKED          | 2025-12-12 |
-| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      | 2025-01-27 |
+| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
 
 ### Foundation Component Details
@@ -492,7 +492,7 @@ The following components constitute the **complete and final** Foundation layer.
 - **Status:** ✅ **FINAL LOCK** — Immutable
 - **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
 - **Lock Date:** 2025-12-15
-- **Final Lock Date:** 2025-01-27
+- **Final Lock Date:**  
 - **Lifecycle Version:** 1.0 (Steps 3-13)
 - **Lock Version:** 1.0
 - **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS, ✅ Step 13 (Foundation Lock FINAL) — FINAL
@@ -808,7 +808,7 @@ If State Authority Contract modifications are needed:
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
 | ContextMenu     | ✅ LOCKED | 2025-12-12 | Immutable    |
 | Toast           | ✅ LOCKED | 2025-12-12 | Immutable    |
-| Button          | ✅ FINAL LOCK | 2025-01-27 | Immutable    |
+| Button          | ✅ FINAL LOCK |   | Immutable    |
 | Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |
 
 ### Extension Layer Status
@@ -1451,12 +1451,12 @@ If Authority modifications are required in the future:
 
 ## 🔄 Version History
 
-- **v1.18** (2025-01-27): Button Component Foundation Lock (FINAL)
+- **v1.18** ( ): Button Component Foundation Lock (FINAL)
   - Added Button component to Locked Foundation Components table
   - Added Button component details section
   - Documented Button as sole action trigger foundation
   - Button officially locked as Foundation primitive (STEP 3-13 complete)
-  - Final Lock date: 2025-01-27
+  - Final Lock date:  
   - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
   - Button serves as canonical Foundation reference implementation
   - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task
@@ -1638,7 +1638,7 @@ New functionality must be built as **Extensions** that compose Foundation compon
 **Status:** ✅ **LOCKED**  
 **Version:** 1.18  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-01-27  
+**Last Updated:**    
 **Priority:** CRITICAL  
 **Architecture Phase:** **CLOSED**  
 **Next Review:** **NEVER** (Foundation is immutable)

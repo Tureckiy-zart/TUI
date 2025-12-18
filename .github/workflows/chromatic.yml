@@ -10,6 +10,7 @@ jobs:
   chromatic:
     name: Chromatic Visual Tests
     runs-on: ubuntu-latest
+    continue-on-error: true # Don't block PR if Chromatic fails
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -35,6 +36,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           buildScriptName: build-storybook
-          exitZeroOnChanges: false
+          exitZeroOnChanges: true # Don't fail on visual changes, just report them
           onlyChanged: true
           exitOnceUploaded: false

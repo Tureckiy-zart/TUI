@@ -180,7 +180,7 @@ theme: {
 
 **Example: Button Component**
 
-**Status:** ✅ **FINAL LOCK** (2025-01-27) — Foundation primitive, validated and immutable
+**Status:** ✅ **FINAL LOCK** ( ) — Foundation primitive, validated and immutable
 
 ```typescript
 // src/components/ui/button.tsx
@@ -320,7 +320,7 @@ const buttonVariants = tokenCVA({
 
 #### 3. Button Component
 
-**Status:** ✅ **FINAL LOCK** (2025-01-27) — Foundation primitive, validated and immutable
+**Status:** ✅ **FINAL LOCK** ( ) — Foundation primitive, validated and immutable
 
 - Button component is locked and immutable after audit completion
 - Button reflects token changes immediately
