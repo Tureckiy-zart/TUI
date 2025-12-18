@@ -595,7 +595,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 | Component | Status    | Locked Date | Notes                                    |
 | --------- | --------- | ----------- | ---------------------------------------- |
-| Button    | ✅ LOCKED | 2025-12-15  | Extension component. Locked after audit. |
+| Button    | ✅ FINAL LOCK | 2025-01-27  | Foundation primitive. FINAL LOCK after STEP 3-13 completion. |
 | Text      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
 | Heading   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
 | Body      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |

@@ -429,6 +429,7 @@ The following components constitute the **complete and final** Foundation layer.
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ✅ LOCKED          | 2025-12-12 |
 | **Toast**       | Overlays   | Radix Toast       | ✅ LOCKED          | 2025-12-12 |
+| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      | 2025-01-27 |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
 
 ### Foundation Component Details
@@ -482,6 +483,23 @@ The following components constitute the **complete and final** Foundation layer.
 - **Base Library:** Radix Toast (`@radix-ui/react-toast`)
 - **Purpose:** Sole toast foundation. All notification toasts must use this internally.
 - **Status:** ✅ **LOCKED** — Immutable
+
+#### Button
+- **Location:** `src/PRIMITIVES/Button/`
+- **Export Path:** `@tenerife.music/ui` → `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
+- **Base Library:** Native `<button>` element (semantic HTML)
+- **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
+- **Status:** ✅ **FINAL LOCK** — Immutable
+- **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+- **Lock Date:** 2025-12-15
+- **Final Lock Date:** 2025-01-27
+- **Lifecycle Version:** 1.0 (Steps 3-13)
+- **Lock Version:** 1.0
+- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS, ✅ Step 13 (Foundation Lock FINAL) — FINAL
+- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg, icon)
+- **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
+- **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
+- **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
 
 #### Link
 - **Location:** `src/PRIMITIVES/Link/`
@@ -656,6 +674,8 @@ Foundation Components (Read-Only):
 - Select (Radix Select wrapper)
 - ContextMenu (Radix ContextMenu wrapper)
 - Toast (Radix Toast wrapper)
+- Button (Native button element - FINAL LOCK)
+- Link (Native anchor element)
 
 Token System (Locked):
 - All token domains are LOCKED and IMMUTABLE
@@ -785,9 +805,11 @@ If State Authority Contract modifications are needed:
 | --------------- | --------- | --------- | ------------ |
 | Modal           | ✅ LOCKED | 2025-12-12 | Immutable    |
 | Tabs            | ✅ LOCKED | 2025-12-12 | Immutable    |
-| Select          | ✅ LOCKED (FINALIZED) | 2025-12-12 | Immutable    |
+| Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
 | ContextMenu     | ✅ LOCKED | 2025-12-12 | Immutable    |
 | Toast           | ✅ LOCKED | 2025-12-12 | Immutable    |
+| Button          | ✅ FINAL LOCK | 2025-01-27 | Immutable    |
+| Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |
 
 ### Extension Layer Status
 
@@ -1429,6 +1451,18 @@ If Authority modifications are required in the future:
 
 ## 🔄 Version History
 
+- **v1.18** (2025-01-27): Button Component Foundation Lock (FINAL)
+  - Added Button component to Locked Foundation Components table
+  - Added Button component details section
+  - Documented Button as sole action trigger foundation
+  - Button officially locked as Foundation primitive (STEP 3-13 complete)
+  - Final Lock date: 2025-01-27
+  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+  - Button serves as canonical Foundation reference implementation
+  - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task
+  - Updated Guard Prompt to include Button in Foundation Components list
+  - Updated Component Lock Status table
+
 - **v1.17** (2025-12-17): Select Component Unlock
   - Unlocked Select component to allow canonical Foundation lock process
   - Changed Select status from LOCKED (FINALIZED) to UNLOCKED (Pending Canonical Lock)
@@ -1602,9 +1636,9 @@ New functionality must be built as **Extensions** that compose Foundation compon
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.17  
+**Version:** 1.18  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-17  
+**Last Updated:** 2025-01-27  
 **Priority:** CRITICAL  
 **Architecture Phase:** **CLOSED**  
 **Next Review:** **NEVER** (Foundation is immutable)
