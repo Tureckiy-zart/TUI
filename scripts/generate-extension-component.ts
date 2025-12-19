@@ -16,8 +16,9 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
-import { join, dirname } from "path";
+import { join, dirname, resolve } from "path";
 import { readdir } from "fs/promises";
+import { fileURLToPath } from "url";
 
 // Foundation component names (must not duplicate)
 const FOUNDATION_COMPONENTS = ["Modal", "Tabs", "Select", "ContextMenu", "Toast", "Button", "Link"];
@@ -238,7 +239,12 @@ async function main() {
   }
 }
 
-if (require.main === module) {
+// ES module equivalent of require.main === module
+const __filename = fileURLToPath(import.meta.url);
+const currentFile = resolve(__filename);
+const mainFile = resolve(process.argv[1]);
+
+if (currentFile === mainFile) {
   main();
 }
 
