@@ -15,9 +15,8 @@
  *   --output <path>         Output directory (default: src/COMPOSITION/{category})
  */
 
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
-import { join, dirname, resolve } from "path";
-import { readdir } from "fs/promises";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { join, resolve } from "path";
 import { fileURLToPath } from "url";
 
 // Foundation component names (must not duplicate)

@@ -3,7 +3,7 @@
 **Review Date:** 2025-12-19  
 **Reviewer:** Automated Script  
 **Review Type:** Automated  
-**Status:** ✅ Healthy
+**Status:** ❌ Critical Issues
 
 ---
 
@@ -11,14 +11,14 @@
 
 This automated governance review scanned ESLint rules, Guard Rules alignment, Authority Contract compliance, and Lock document compliance.
 
-**Governance Score:** 10/10  
-**Overall Status:** ✅ Healthy
+**Governance Score:** 6/10  
+**Overall Status:** ❌ Critical Issues
 
 **Key Findings:**
 - ESLint Rules: 9/9 active
-- Guard Rules: ✅ Document exists
-- Authority Contracts: ✅ Map exists
-- Lock Documents: ✅ Both exist
+- Guard Rules: ❌ Document missing
+- Authority Contracts: ❌ Map missing
+- Lock Documents: ⚠️ Missing documents
 
 ---
 
@@ -48,11 +48,11 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 2.1 Guard Rules Document Review
 
-✅ Guard Rules document exists: ASSISTANT_RULES.md
+❌ Guard Rules document not found
 
-**References Found:**
-- Authority Contracts: 3 references
-- Lock Documents: 1 references
+### 2.2 Issues Found
+
+- **ERROR**: Guard Rules document not found: TUI_CURSOR_GUARD_RULES.md
 
 ---
 
@@ -60,9 +60,11 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 3.1 Authority Map Review
 
-✅ Authority Map exists: AUTHORITY_NAVIGATION.md
+❌ Authority Map not found
 
-**Authorities Found:** 29
+### 3.2 Issues Found
+
+- **ERROR**: Authority Map not found: AUTHORITY_MAP.md
 
 ---
 
@@ -70,9 +72,14 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 4.1 Lock Documents Review
 
-✅ Foundation Lock exists: FOUNDATION_LOCK.md
+❌ Foundation Lock not found
 
-✅ Architecture Lock exists: ARCHITECTURE_LOCK.md
+❌ Architecture Lock not found
+
+### 4.2 Issues Found
+
+- **ERROR**: Foundation Lock document not found: FINAL_FOUNDATION_LOCK.md
+- **ERROR**: Architecture Lock document not found: UI_ARCHITECTURE_LOCK.md
 
 ---
 
@@ -90,7 +97,10 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 6.1 Critical Issues
 
-✅ No critical issues found.
+- ❌ Guard Rules document not found: TUI_CURSOR_GUARD_RULES.md
+- ❌ Authority Map not found: AUTHORITY_MAP.md
+- ❌ Foundation Lock document not found: FINAL_FOUNDATION_LOCK.md
+- ❌ Architecture Lock document not found: UI_ARCHITECTURE_LOCK.md
 
 ### 6.2 Warnings
 

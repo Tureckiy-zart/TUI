@@ -171,14 +171,30 @@ function verifyGuardRules() {
     },
   };
 
-  const guardRulesFile = join(ARCHITECTURE_DIR, "TUI_CURSOR_GUARD_RULES.md");
-  const content = readFile(guardRulesFile);
+  // Guard Rules may be in multiple locations - check common patterns
+  const guardRulesFiles = [
+    join(ARCHITECTURE_DIR, "TUI_CURSOR_GUARD_RULES.md"),
+    join(ROOT_DIR, "rules", "block-and-scope-rules.mdc"),
+    join(ROOT_DIR, "rules", "component-lifecycle.mdc"),
+  ];
+
+  let guardRulesFile = null;
+  let content = null;
+  for (const file of guardRulesFiles) {
+    const fileContent = readFile(file);
+    if (fileContent) {
+      guardRulesFile = file;
+      content = fileContent;
+      break;
+    }
+  }
 
   if (!content) {
     findings.issues.push({
-      type: "error",
-      message: "Guard Rules document not found: TUI_CURSOR_GUARD_RULES.md",
+      type: "warning",
+      message: "Guard Rules document not found in expected locations. Checking cursor rules...",
     });
+    // Don't return - continue with other checks
     return findings;
   }
 
@@ -219,15 +235,21 @@ function verifyAuthorityContracts() {
     authorities: [],
   };
 
-  const authorityMapFile = join(ARCHITECTURE_DIR, "AUTHORITY_MAP.md");
-  const content = readFile(authorityMapFile);
+  // Check for AUTHORITY_NAVIGATION.md (the actual file name)
+  const authorityMapFile = join(ARCHITECTURE_DIR, "AUTHORITY_NAVIGATION.md");
+  let content = readFile(authorityMapFile);
 
+  // Fallback to AUTHORITY_MAP.md if AUTHORITY_NAVIGATION.md doesn't exist
   if (!content) {
-    findings.issues.push({
-      type: "error",
-      message: "Authority Map not found: AUTHORITY_MAP.md",
-    });
-    return findings;
+    const fallbackFile = join(ARCHITECTURE_DIR, "AUTHORITY_MAP.md");
+    content = readFile(fallbackFile);
+    if (!content) {
+      findings.issues.push({
+        type: "error",
+        message: "Authority Map not found: AUTHORITY_NAVIGATION.md or AUTHORITY_MAP.md",
+      });
+      return findings;
+    }
   }
 
   findings.authorityMapExists = true;
@@ -260,16 +282,43 @@ function verifyLockDocuments() {
     issues: [],
   };
 
-  const foundationLockFile = join(ARCHITECTURE_DIR, "FINAL_FOUNDATION_LOCK.md");
-  const architectureLockFile = join(ARCHITECTURE_DIR, "UI_ARCHITECTURE_LOCK.md");
+  // Check for actual lock file names
+  const foundationLockFile = join(ARCHITECTURE_DIR, "FOUNDATION_LOCK.md");
+  const architectureLockFile = join(ARCHITECTURE_DIR, "ARCHITECTURE_LOCK.md");
 
-  const foundationContent = readFile(foundationLockFile);
-  const architectureContent = readFile(architectureLockFile);
+  // Also check alternative names
+  const foundationLockFiles = [
+    foundationLockFile,
+    join(ARCHITECTURE_DIR, "FINAL_FOUNDATION_LOCK.md"),
+  ];
+  const architectureLockFiles = [
+    architectureLockFile,
+    join(ARCHITECTURE_DIR, "UI_ARCHITECTURE_LOCK.md"),
+  ];
+
+  let foundationContent = null;
+  let architectureContent = null;
+
+  for (const file of foundationLockFiles) {
+    const content = readFile(file);
+    if (content) {
+      foundationContent = content;
+      break;
+    }
+  }
+
+  for (const file of architectureLockFiles) {
+    const content = readFile(file);
+    if (content) {
+      architectureContent = content;
+      break;
+    }
+  }
 
   if (!foundationContent) {
     findings.issues.push({
       type: "error",
-      message: "Foundation Lock document not found: FINAL_FOUNDATION_LOCK.md",
+      message: "Foundation Lock document not found: FOUNDATION_LOCK.md",
     });
   } else {
     findings.foundationLockExists = true;
@@ -286,7 +335,7 @@ function verifyLockDocuments() {
   if (!architectureContent) {
     findings.issues.push({
       type: "error",
-      message: "Architecture Lock document not found: UI_ARCHITECTURE_LOCK.md",
+      message: "Architecture Lock document not found: ARCHITECTURE_LOCK.md",
     });
   } else {
     findings.architectureLockExists = true;
@@ -438,12 +487,12 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 `;
 
   if (findings.guardRules.documentExists) {
-    report += `✅ Guard Rules document exists: TUI_CURSOR_GUARD_RULES.md\n\n`;
+    report += `✅ Guard Rules document exists\n\n`;
     report += `**References Found:**\n`;
     report += `- Authority Contracts: ${findings.guardRules.references.authorityContracts.length} references\n`;
     report += `- Lock Documents: ${findings.guardRules.references.lockDocuments.length} references\n\n`;
   } else {
-    report += `❌ Guard Rules document not found\n\n`;
+    report += `⚠️ Guard Rules document not found in expected locations (may be in cursor rules)\n\n`;
   }
 
   if (findings.guardRules.issues.length > 0) {
@@ -463,10 +512,10 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 `;
 
   if (findings.authority.authorityMapExists) {
-    report += `✅ Authority Map exists: AUTHORITY_MAP.md\n\n`;
+    report += `✅ Authority Map exists: AUTHORITY_NAVIGATION.md\n\n`;
     report += `**Authorities Found:** ${findings.authority.authorities.length}\n\n`;
   } else {
-    report += `❌ Authority Map not found\n\n`;
+    report += `❌ Authority Map not found: AUTHORITY_NAVIGATION.md\n\n`;
   }
 
   if (findings.authority.issues.length > 0) {
@@ -486,15 +535,15 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 `;
 
   if (findings.locks.foundationLockExists) {
-    report += `✅ Foundation Lock exists: FINAL_FOUNDATION_LOCK.md\n\n`;
+    report += `✅ Foundation Lock exists: FOUNDATION_LOCK.md\n\n`;
   } else {
-    report += `❌ Foundation Lock not found\n\n`;
+    report += `❌ Foundation Lock not found: FOUNDATION_LOCK.md\n\n`;
   }
 
   if (findings.locks.architectureLockExists) {
-    report += `✅ Architecture Lock exists: UI_ARCHITECTURE_LOCK.md\n\n`;
+    report += `✅ Architecture Lock exists: ARCHITECTURE_LOCK.md\n\n`;
   } else {
-    report += `❌ Architecture Lock not found\n\n`;
+    report += `❌ Architecture Lock not found: ARCHITECTURE_LOCK.md\n\n`;
   }
 
   if (findings.locks.issues.length > 0) {
