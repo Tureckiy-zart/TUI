@@ -268,6 +268,19 @@ export default [
       "tenerife-ui-architecture/no-raw-visual-props": "error",
 
       // ═══════════════════════════════════════════════════════════
+      // SCALE ENFORCEMENT - CANONICAL SCALE VALUES
+      // ═══════════════════════════════════════════════════════════
+
+      // Enforce canonical font-size scale values
+      "tenerife-ui-architecture/no-raw-font-size-scale": "error",
+      // Enforce canonical line-height scale values
+      "tenerife-ui-architecture/no-raw-line-height-scale": "error",
+      // Enforce canonical shadow/elevation scale values
+      "tenerife-ui-architecture/no-raw-shadow-elevation-scale": "error",
+      // Enforce canonical motion duration and easing scale values
+      "tenerife-ui-architecture/no-raw-motion-scale": "error",
+
+      // ═══════════════════════════════════════════════════════════
       // FOUNDATION ENFORCEMENT - REGRESSION GUARDS
       // ═══════════════════════════════════════════════════════════
 
@@ -315,23 +328,16 @@ export default [
           message:
             "Numeric size classes are forbidden. Use size tokens through component token system instead.",
         },
-        {
-          selector:
-            "TemplateElement[value.raw=/\\btext-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)\\b/]",
-          message:
-            "Hardcoded typography size classes are forbidden. Use TYPOGRAPHY_TOKENS or component typography tokens instead.",
-        },
+        // Note: Typography size enforcement is now handled by no-raw-font-size-scale rule
+        // The rule is more precise and only catches non-canonical values (base, 5xl, 6xl, 7xl, 8xl, 9xl)
         {
           selector:
             "TemplateElement[value.raw=/\\btransition-(all|colors|opacity|transform|none)\\b/]",
           message:
             "Hardcoded transition utilities are forbidden. Use MOTION_TOKENS for transitions instead.",
         },
-        {
-          selector: "TemplateElement[value.raw=/\\bduration-(75|100|150|200|300|500|700|1000)\\b/]",
-          message:
-            "Hardcoded duration utilities are forbidden. Use MOTION_TOKENS for durations instead.",
-        },
+        // Note: Motion duration enforcement is now handled by no-raw-motion-scale rule
+        // The rule is more precise and only catches non-canonical durations (150, 300, 500, 700, 1000)
         {
           selector: "TemplateElement[value.raw=/hsl\\(var\\(--[^)]+\\)\\)/]",
           message:
@@ -382,23 +388,16 @@ export default [
           message:
             "Numeric size classes are forbidden. Use size tokens through component token system instead.",
         },
-        {
-          selector:
-            "TemplateElement[value.raw=/\\btext-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)\\b/]",
-          message:
-            "Hardcoded typography size classes are forbidden. Use TYPOGRAPHY_TOKENS or component typography tokens instead.",
-        },
+        // Note: Typography size enforcement is now handled by no-raw-font-size-scale rule
+        // The rule is more precise and only catches non-canonical values (base, 5xl, 6xl, 7xl, 8xl, 9xl)
         {
           selector:
             "TemplateElement[value.raw=/\\btransition-(all|colors|opacity|transform|none)\\b/]",
           message:
             "Hardcoded transition utilities are forbidden. Use MOTION_TOKENS for transitions instead.",
         },
-        {
-          selector: "TemplateElement[value.raw=/\\bduration-(75|100|150|200|300|500|700|1000)\\b/]",
-          message:
-            "Hardcoded duration utilities are forbidden. Use MOTION_TOKENS for durations instead.",
-        },
+        // Note: Motion duration enforcement is now handled by no-raw-motion-scale rule
+        // The rule is more precise and only catches non-canonical durations (150, 300, 500, 700, 1000)
         {
           selector: "TemplateElement[value.raw=/hsl\\(var\\(--[^)]+\\)\\)/]",
           message:

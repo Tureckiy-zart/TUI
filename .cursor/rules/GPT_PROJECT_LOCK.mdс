@@ -32,20 +32,20 @@ is considered **frozen and authoritative**.
 The GPT project context consists ONLY of the following files.
 
 ### Core Canonical Context
-- `docs/INTERNAL_CANONICAL_CONTEXT.md`
-- `docs/CANONICAL_PROJECT_ORIENTATION.md`
+- `docs/ARCHITECTURE_CONTEXT.md`
+- `docs/PROJECT_ORIENTATION.md`
 - `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
 
 ### Authority & Locks
-- `docs/AUTHORITY_MAP.md`
-- `docs/FINAL_FOUNDATION_LOCK.md`
-- `docs/TUI_ARCHITECTURE_LOCK.md`
-- All Authority Contracts explicitly listed in `AUTHORITY_MAP.md`
+- `docs/architecture/AUTHORITY_NAVIGATION.md`
+- `docs/architecture/FOUNDATION_LOCK.md`
+- `docs/architecture/ARCHITECTURE_LOCK.md`
+- All Authority Contracts explicitly listed in `AUTHORITY_NAVIGATION.md`
 
 ### Architecture Rules
-- `docs/UI_ARCHITECTURE_RULES.md`
-- `docs/TUI_EXTENSION_CANONICAL_STATE.md`
-- `docs/TUI_TOKEN_SYSTEM.md`
+- `docs/architecture/ARCHITECTURE_RULES.md`
+- `docs/architecture/EXTENSION_STATE.md`
+- `docs/architecture/TOKEN_AUTHORITY.md`
 
 ### Cursor Rules (Verified)
 - `rules/user-rules.mdc`

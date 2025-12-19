@@ -32,10 +32,15 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
         env:
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Release
         run: npx semantic-release
         env:
+          # GITHUB_TOKEN is automatically provided by GitHub Actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

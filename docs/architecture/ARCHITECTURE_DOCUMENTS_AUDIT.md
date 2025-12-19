@@ -30,8 +30,8 @@ Documents are consulted in this order (highest to lowest priority):
 
 1. `docs/INTERNAL_CANONICAL_CONTEXT.md` - Single source of truth
 2. Authority Contracts (via `AUTHORITY_MAP.md`)
-3. Lock Documents (`FINAL_FOUNDATION_LOCK.md`, `TUI_ARCHITECTURE_LOCK.md`)
-4. Architecture Rules (`UI_ARCHITECTURE_RULES.md`, `TUI_EXTENSION_CANONICAL_STATE.md`)
+3. Lock Documents (`FINAL_FOUNDATION_LOCK.md`, `UI_ARCHITECTURE_LOCK.md`)
+4. Architecture Rules (`UI_ARCHITECTURE_RULES.md`, `EXTENSION_CANONICAL_STATE.md`)
 5. Process Documents (lifecycle, workflows)
 6. Guard Rules (AI enforcement)
 7. Tooling Decisions
@@ -44,13 +44,13 @@ Documents are consulted in this order (highest to lowest priority):
 |----------|-----------------|----------------|--------|-----------|------------|----------------------|
 | **AUTHORITY_MAP.md** | Meta / Navigation | HIGH | ACTIVE | CRITICAL | SYSTEM | Descriptive (navigation aid) |
 | **FINAL_FOUNDATION_LOCK.md** | Lock Document | CRITICAL | LOCKED | CRITICAL | FOUNDATION | Normative (binding contract) |
-| **TUI_ARCHITECTURE_LOCK.md** | Lock Document | CRITICAL | LOCKED | CRITICAL | FOUNDATION | Normative (binding contract) |
+| **UI_ARCHITECTURE_LOCK.md** | Lock Document | CRITICAL | LOCKED | CRITICAL | FOUNDATION | Normative (binding contract) |
 | **CANONICAL_LOCK.md** | Lock Document | HIGH | LOCKED | HIGH | SYSTEM | Normative (prevents regression) |
 | **CANONICAL_STATE_FINAL.md** | Reference / Snapshot | MEDIUM | FINAL | MEDIUM | SYSTEM | Descriptive (historical record) |
 | **INTERNAL_CANONICAL_CONTEXT.md** | Core Canonical Law | CRITICAL | IMMUTABLE | CRITICAL | SYSTEM | Normative (single source of truth) |
 | **UI_ARCHITECTURE_RULES.md** | Authority Contract | CRITICAL | ACTIVE | CRITICAL | SYSTEM | Normative (Radix & Token rules) |
-| **TUI_EXTENSION_CANONICAL_STATE.md** | Governance / State | HIGH | CANONICAL | CRITICAL | EXTENSION | Normative (component inventory) |
-| **TUI_TOKEN_SYSTEM.md** | Authority Contract | CRITICAL | LOCKED | CRITICAL | SYSTEM | Normative (token rules) |
+| **EXTENSION_CANONICAL_STATE.md** | Governance / State | HIGH | CANONICAL | CRITICAL | EXTENSION | Normative (component inventory) |
+| **TOKEN_SYSTEM.md** | Authority Contract | CRITICAL | LOCKED | CRITICAL | SYSTEM | Normative (token rules) |
 | **EXTENSION_AUTHORITY_CONTRACT.md** | Authority Contract | CRITICAL | ACTIVE | CRITICAL | EXTENSION | Normative (extension boundaries) |
 | **INTERACTION_AUTHORITY_CONTRACT.md** | Authority Contract | CRITICAL | LOCKED | CRITICAL | FOUNDATION | Normative (interaction rules) |
 | **STATE_AUTHORITY_CONTRACT.md** | Authority Contract | CRITICAL | LOCKED | CRITICAL | FOUNDATION | Normative (state token model) |
@@ -136,7 +136,7 @@ These define immutable rules for Foundation layer behavior:
 
 These define immutable token usage rules:
 
-4. **TUI_TOKEN_SYSTEM.md**
+4. **TOKEN_SYSTEM.md**
    - **Status:** LOCKED
    - **Domain:** Token system structure, domain ownership, semantic classifications
    - **Applies to:** All components using tokens
@@ -314,10 +314,10 @@ These provide contextual information, historical records, or implementation guid
 
 ### Documents with Overlapping Content
 
-1. **FINAL_FOUNDATION_LOCK.md vs TUI_ARCHITECTURE_LOCK.md**
-   - **Relationship:** `FINAL_FOUNDATION_LOCK.md` is the authoritative source of truth; `TUI_ARCHITECTURE_LOCK.md` references it as the definitive lock document
-   - **Redundancy level:** Low - `TUI_ARCHITECTURE_LOCK.md` serves as a historical reference but explicitly defers to `FINAL_FOUNDATION_LOCK.md`
-   - **Recommendation:** Keep both; `TUI_ARCHITECTURE_LOCK.md` provides historical context and guard prompts, but always reference `FINAL_FOUNDATION_LOCK.md` as authoritative
+1. **FINAL_FOUNDATION_LOCK.md vs UI_ARCHITECTURE_LOCK.md**
+   - **Relationship:** `FINAL_FOUNDATION_LOCK.md` is the authoritative source of truth; `UI_ARCHITECTURE_LOCK.md` references it as the definitive lock document
+   - **Redundancy level:** Low - `UI_ARCHITECTURE_LOCK.md` serves as a historical reference but explicitly defers to `FINAL_FOUNDATION_LOCK.md`
+   - **Recommendation:** Keep both; `UI_ARCHITECTURE_LOCK.md` provides historical context and guard prompts, but always reference `FINAL_FOUNDATION_LOCK.md` as authoritative
 
 2. **TUI_CURSOR_GUARD_RULES.md vs CURSOR_UI_RULES.md**
    - **Relationship:** Both define AI/Cursor behavior rules, but with different scopes
@@ -327,10 +327,10 @@ These provide contextual information, historical records, or implementation guid
      - `CURSOR_UI_RULES.md`: Focuses on self-governing rules, typing standards, token union patterns
    - **Recommendation:** Keep both; they serve complementary purposes but should be consolidated in future to reduce overlap
 
-3. **CANONICAL_STATE_FINAL.md vs TUI_EXTENSION_CANONICAL_STATE.md**
-   - **Relationship:** `CANONICAL_STATE_FINAL.md` is a historical snapshot; `TUI_EXTENSION_CANONICAL_STATE.md` is the live canonical state
+3. **CANONICAL_STATE_FINAL.md vs EXTENSION_CANONICAL_STATE.md**
+   - **Relationship:** `CANONICAL_STATE_FINAL.md` is a historical snapshot; `EXTENSION_CANONICAL_STATE.md` is the live canonical state
    - **Redundancy level:** Low - Different purposes (snapshot vs. live state)
-   - **Recommendation:** Keep both; `CANONICAL_STATE_FINAL.md` is a historical record, `TUI_EXTENSION_CANONICAL_STATE.md` is the authoritative live state
+   - **Recommendation:** Keep both; `CANONICAL_STATE_FINAL.md` is a historical record, `EXTENSION_CANONICAL_STATE.md` is the authoritative live state
 
 ### Documents That May Be Partially Obsolete
 
@@ -349,7 +349,7 @@ None identified. All documents serve active purposes or provide necessary histor
 4. `AUTHORITY_MAP.md` - Understand which Authorities apply
 5. `STATE_AUTHORITY_MATRIX.md` - Understand canonical states
 6. `INTERACTION_AUTHORITY_CONTRACT.md` - Understand interaction rules
-7. `TUI_TOKEN_SYSTEM.md` - Understand token system
+7. `TOKEN_SYSTEM.md` - Understand token system
 8. Relevant Token Authority Contracts (Spacing, Radius, Typography, Motion, Elevation)
 9. `LAYOUT_AUTHORITY_CONTRACT.md` - If component has layout
 10. `UI_ARCHITECTURE_RULES.md` - Understand Radix and Token Union rules
@@ -386,16 +386,16 @@ None identified. All documents serve active purposes or provide necessary histor
 
 **Supporting Reading:**
 - `CANONICAL_STATE_FINAL.md` - Understand historical resolutions
-- `TUI_EXTENSION_CANONICAL_STATE.md` - Understand current canonical state
+- `EXTENSION_CANONICAL_STATE.md` - Understand current canonical state
 
 ### Scenario 4: Creating an Extension Component
 
 **Required Reading (in order):**
 1. `INTERNAL_CANONICAL_CONTEXT.md` - Understand Foundation vs Extension model
 2. `EXTENSION_AUTHORITY_CONTRACT.md` - Understand Extension boundaries
-3. `TUI_EXTENSION_CANONICAL_STATE.md` - Understand allowed components
+3. `EXTENSION_CANONICAL_STATE.md` - Understand allowed components
 4. `UI_ARCHITECTURE_RULES.md` - Understand Radix and Token Union rules
-5. `TUI_TOKEN_SYSTEM.md` - Understand token system
+5. `TOKEN_SYSTEM.md` - Understand token system
 6. Relevant Token Authority Contracts (Spacing, Radius, Typography, etc.)
 
 **Supporting Reading:**
@@ -408,7 +408,7 @@ None identified. All documents serve active purposes or provide necessary histor
 1. `INTERNAL_CANONICAL_CONTEXT.md` - Complete architecture overview
 2. `FINAL_FOUNDATION_LOCK.md` - Understand what is locked
 3. `AUTHORITY_MAP.md` - Understand Authority navigation
-4. `TUI_EXTENSION_CANONICAL_STATE.md` - Understand component inventory
+4. `EXTENSION_CANONICAL_STATE.md` - Understand component inventory
 5. `TUI_CURSOR_GUARD_RULES.md` - Understand guard rules (for AI agents)
 6. `CURSOR_UI_RULES.md` - Understand AI behavior rules (for AI agents)
 7. `UI_ARCHITECTURE_RULES.md` - Understand Radix and Token Union rules
@@ -430,10 +430,10 @@ INTERNAL_CANONICAL_CONTEXT.md (Single Source of Truth)
 │   ├── FOUNDATION_LOCK_OPERATING_RULES.md (Process)
 │   │   ├── FOUNDATION_LIFECYCLE_PROCESS_INDEX.md (Navigation)
 │   │   └── FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md (Format)
-│   └── TUI_ARCHITECTURE_LOCK.md (Historical Reference)
+│   └── UI_ARCHITECTURE_LOCK.md (Historical Reference)
 ├── AUTHORITY_MAP.md (Navigation)
 │   └── All Authority Contracts (via navigation)
-├── TUI_EXTENSION_CANONICAL_STATE.md (Extension State)
+├── EXTENSION_CANONICAL_STATE.md (Extension State)
 │   └── EXTENSION_AUTHORITY_CONTRACT.md (Extension Rules)
 └── UI_ARCHITECTURE_RULES.md (Architecture Rules)
 ```
@@ -462,7 +462,7 @@ TOOLING_DECISIONS.md (Tooling Config)
 
 ### LAW (Immutable) - 14 documents
 - Core Canonical Law: `INTERNAL_CANONICAL_CONTEXT.md`
-- Lock Documents: `FINAL_FOUNDATION_LOCK.md`, `TUI_ARCHITECTURE_LOCK.md`, `CANONICAL_LOCK.md`
+- Lock Documents: `FINAL_FOUNDATION_LOCK.md`, `UI_ARCHITECTURE_LOCK.md`, `CANONICAL_LOCK.md`
 - Authority Contracts: 10 documents (Token System, State, Interaction, Spacing, Radius, Typography, Motion, Elevation, Layout, Extension)
 
 ### PROCESS (Evolvable) - 3 documents
@@ -473,7 +473,7 @@ TOOLING_DECISIONS.md (Tooling Config)
 ### GOVERNANCE (Normative) - 4 documents
 - `TUI_CURSOR_GUARD_RULES.md`
 - `CURSOR_UI_RULES.md`
-- `TUI_EXTENSION_CANONICAL_STATE.md`
+- `EXTENSION_CANONICAL_STATE.md`
 - `UI_ARCHITECTURE_RULES.md`
 
 ### TOOLING (Implementation) - 2 documents
@@ -502,7 +502,7 @@ TOOLING_DECISIONS.md (Tooling Config)
 
 6. **Strong Navigation:** `AUTHORITY_MAP.md` provides excellent navigation through the Authority system.
 
-7. **Historical Context Preserved:** Documents like `CANONICAL_STATE_FINAL.md` and `TUI_ARCHITECTURE_LOCK.md` preserve historical context while maintaining clear authoritative sources.
+7. **Historical Context Preserved:** Documents like `CANONICAL_STATE_FINAL.md` and `UI_ARCHITECTURE_LOCK.md` preserve historical context while maintaining clear authoritative sources.
 
 ---
 

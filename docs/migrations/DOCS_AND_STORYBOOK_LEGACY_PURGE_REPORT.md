@@ -129,7 +129,7 @@ The following entities were identified as LEGACY and removed:
 - Changed: `| **A9**  | Create Dropdown component        | C4, F4, F6     | pending |`
 - To: `| **A9**  | ~~Create Dropdown component~~    | C4, F4, F6     | ❌ **CANCELLED** - Dropdown removed (MIGRATION_12C) |`
 
-#### `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+#### `docs/architecture/EXTENSION_CANONICAL_STATE.md`
 - Updated section "DO NOT USE - Menu Components" (lines 471-483)
 - Changed DropdownMenu and Dropdown status from "RESTRICTED" to "REMOVED"
 - Added MIGRATION_12C reference

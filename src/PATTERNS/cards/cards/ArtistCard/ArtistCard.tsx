@@ -163,14 +163,14 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted">
+              <Text size="sm" muted>
                 {description}
               </Text>
             )}
 
             {/* Genres */}
             {genres && (
-              <Text size="xs" variant="muted">
+              <Text size="xs" muted>
                 {genres}
               </Text>
             )}
@@ -187,7 +187,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                       className={artistCardMetadataIconVariants({ size })}
                       aria-hidden="true"
                     />
-                    <Text size="xs" variant="muted">
+                    <Text size="xs" muted>
                       {followers.toLocaleString()} {followersLabel}
                     </Text>
                   </div>
@@ -201,7 +201,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                       className={artistCardMetadataIconVariants({ size })}
                       aria-hidden="true"
                     />
-                    <Text size="xs" variant="muted">
+                    <Text size="xs" muted>
                       {plays.toLocaleString()} {playsLabel}
                     </Text>
                   </div>

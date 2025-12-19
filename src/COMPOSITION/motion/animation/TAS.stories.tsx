@@ -71,11 +71,11 @@ export const FadePresets: Story = {
     };
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
         <Heading>Fade Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {animations.map((animation) => (
-            <Stack key={animation.id} gap={3} align="center">
+            <Stack key={animation.id} spacing={3} align="center">
               <Box
                 key={keys[animation.id]}
                 p={6}
@@ -101,7 +101,7 @@ export const FadePresets: Story = {
             </Stack>
           ))}
         </Grid>
-        <Stack gap={3} align="center">
+        <Stack spacing={3} align="center">
           <Button onClick={() => setShow(!show)} variant="outline">
             Toggle Fade Out
           </Button>
@@ -162,11 +162,11 @@ export const SlidePresets: Story = {
     ];
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading>Slide Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {animations.map((animation) => (
-            <Stack key={animation.id} gap={3} align="center">
+            <Stack key={animation.id} spacing={3} align="center">
               <Box
                 key={keys[animation.id]}
                 p={6}
@@ -219,10 +219,10 @@ export const ScalePresets: Story = {
     };
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
         <Heading>Scale Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
-          <Stack gap={3} align="center">
+          <Stack spacing={3} align="center">
             <Box
               key={keys.scaleIn}
               p={6}
@@ -279,8 +279,8 @@ export const LayoutPrimitives: Story = {
     };
 
     return (
-      <Stack gap={6} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
-        <Stack gap={3} align="center">
+      <Stack spacing={6} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
+        <Stack spacing={3} align="center">
           <Heading>Layout Primitives with Animations</Heading>
           <Button onClick={() => setKey((prev) => prev + 1)} variant="outline" size="sm">
             Replay All Animations
@@ -348,7 +348,7 @@ export const LayoutPrimitives: Story = {
           </Box>
         </Grid>
 
-        <Stack key={`stack-${key}`} gap={3} className={cn(fadePresets.fadeIn().className)}>
+        <Stack key={`stack-${key}`} spacing={3} className={cn(fadePresets.fadeIn().className)}>
           <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
             <Text>Stack Item 1</Text>
           </Box>
@@ -392,12 +392,12 @@ export const SpringAnimations: Story = {
     };
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading>Scale Animations</Heading>
         <Text>CSS-based scale animations (spring animations require JavaScript)</Text>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {animations.map((animation) => (
-            <Stack key={animation.id} gap={3} align="center">
+            <Stack key={animation.id} spacing={3} align="center">
               <Box
                 key={keys[animation.id]}
                 p={6}
@@ -477,7 +477,7 @@ export const RevealOnScroll: Story = {
             boxShadow: "var(--shadow-sm)",
           }}
         >
-          <Stack gap={3} align="center">
+          <Stack spacing={3} align="center">
             <Text>
               Item {item.id + 1} - {item.direction === "up" ? "Slide Up" : "Slide Down"}
             </Text>
@@ -503,8 +503,8 @@ export const RevealOnScroll: Story = {
     };
 
     return (
-      <Stack gap={8} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
-        <Stack gap={4} align="center">
+      <Stack spacing={8} align="stretch" style={{ maxWidth: "800px", width: "100%" }}>
+        <Stack spacing={4} align="center">
           <Heading>Reveal on Scroll Animations</Heading>
           <Text>
             Elements animate when they enter the viewport during scrolling. Use buttons below to
@@ -578,7 +578,7 @@ export const ReducedMotion: Story = {
   render: () => {
     const prefersReducedMotion = shouldReduceMotion();
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "600px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "600px", width: "100%" }}>
         <Heading>Reduced Motion Support</Heading>
         <Box
           p={6}
@@ -652,12 +652,12 @@ export const CustomTransitions: Story = {
     };
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading>Custom Transitions</Heading>
         <Text>Using TAS transition helpers with motion tokens</Text>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           {transitions.map((transitionConfig) => (
-            <Stack key={transitionConfig.id} gap={3} align="center">
+            <Stack key={transitionConfig.id} spacing={3} align="center">
               <Box
                 key={keys[transitionConfig.id]}
                 p={6}
@@ -702,7 +702,7 @@ export const InteractiveAnimations: Story = {
     };
 
     return (
-      <Stack gap={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
+      <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading>Interactive Animations</Heading>
         <Text>Hover, focus, and tap interactions</Text>
         <Flex gap={4} wrap="wrap" justify="center">

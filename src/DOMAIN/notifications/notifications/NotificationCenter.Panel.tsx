@@ -248,7 +248,7 @@ export const NotificationCenterPanel = React.forwardRef<
                   No notifications
                 </div>
               ) : (
-                <Stack gap="md">
+                <Stack spacing="md">
                   {Object.entries(grouped).map(([groupKey, groupNotifications]) => {
                     const isCollapsed = collapsedGroups.has(groupKey);
                     return (

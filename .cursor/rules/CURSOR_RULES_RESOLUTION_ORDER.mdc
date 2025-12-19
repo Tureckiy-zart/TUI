@@ -41,7 +41,7 @@ the lower-priority rule MUST be ignored.
 
 The AI MUST resolve rules in the following exact order:
 
-### 1️⃣ `docs/INTERNAL_CANONICAL_CONTEXT.md`
+### 1️⃣ `docs/ARCHITECTURE_CONTEXT.md`
 
 - Defines the global architecture
 - Defines Foundation vs Extension boundaries
@@ -53,7 +53,7 @@ If a task conflicts with this document, the AI MUST REFUSE.
 
 ---
 
-### 2️⃣ `docs/architecture/AUTHORITY_MAP.md`
+### 2️⃣ `docs/architecture/AUTHORITY_NAVIGATION.md`
 
 - Defines which Authority Contract governs which domain
 - Defines ownership of rules
@@ -70,16 +70,16 @@ The AI MUST NOT bypass this step.
 - Define immutable domain laws (tokens, spacing, typography, motion, etc.)
 - Foundation Authority Contracts are **LOCKED**
 - Extension Authority Contracts define allowed extension boundaries
-- Complete list available in `docs/architecture/AUTHORITY_MAP.md`:
-  - `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/MOTION_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-  - `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
+- Complete list available in `docs/architecture/AUTHORITY_NAVIGATION.md`:
+  - `docs/architecture/ELEVATION_AUTHORITY.md`
+  - `docs/architecture/EXTENSION_AUTHORITY.md`
+  - `docs/architecture/INTERACTION_AUTHORITY.md`
+  - `docs/architecture/LAYOUT_AUTHORITY.md`
+  - `docs/architecture/MOTION_AUTHORITY.md`
+  - `docs/architecture/RADIUS_AUTHORITY.md`
+  - `docs/architecture/SPACING_AUTHORITY.md`
+  - `docs/architecture/STATE_AUTHORITY.md`
+  - `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
 
 If a task violates an Authority Contract, the AI MUST REFUSE.
 
@@ -95,8 +95,8 @@ Authority Contracts override:
 - Define explicitly locked components, layers, or decisions
 - Override all non-Authority documents
 - Lock documents:
-  - `docs/architecture/FINAL_FOUNDATION_LOCK.md`
-  - `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+  - `docs/architecture/FOUNDATION_LOCK.md`
+  - `docs/architecture/ARCHITECTURE_LOCK.md`
 
 If a target component or layer is LOCKED,
 the AI MUST REFUSE immediately.
@@ -108,9 +108,9 @@ No workaround is allowed.
 ### 5️⃣ Architecture Rules
 
 Includes:
-- `docs/architecture/UI_ARCHITECTURE_RULES.md`
-- `docs/architecture/TUI_ARCHITECTURE_LOCK.md` (also listed as Lock document)
-- `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+- `docs/architecture/ARCHITECTURE_RULES.md`
+- `docs/architecture/ARCHITECTURE_LOCK.md` (also listed as Lock document)
+- `docs/architecture/EXTENSION_STATE.md`
 
 These rules define **how** the system may be modified,
 but never override Authority or Lock documents.
@@ -133,9 +133,9 @@ Includes:
 These rules define **AI behavior and enforcement**.
 
 Cursor Rules MUST NEVER override:
-- `docs/INTERNAL_CANONICAL_CONTEXT.md`
-- Authority Contracts (see `docs/architecture/AUTHORITY_MAP.md`)
-- Lock documents (`docs/architecture/FINAL_FOUNDATION_LOCK.md`, `docs/architecture/TUI_ARCHITECTURE_LOCK.md`)
+- `docs/ARCHITECTURE_CONTEXT.md`
+- Authority Contracts (see `docs/architecture/AUTHORITY_NAVIGATION.md`)
+- Lock documents (`docs/architecture/FOUNDATION_LOCK.md`, `docs/architecture/ARCHITECTURE_LOCK.md`)
 
 ---
 

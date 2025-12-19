@@ -256,7 +256,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted">
+              <Text size="sm" muted>
                 {description}
               </Text>
             )}
@@ -270,7 +270,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                   </Text>
                 )}
                 {capacity && (
-                  <Text size={size === "compact" ? "xs" : "sm"} variant="muted">
+                  <Text size={size === "compact" ? "xs" : "sm"} muted>
                     {capacity}
                   </Text>
                 )}
@@ -280,7 +280,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
             {/* Availability Indicator */}
             {availabilityLabel && (
               <div className={ticketCardAvailabilityVariants({ availability })}>
-                <Text size="xs" variant={availability === "sold_out" ? "muted" : "primary"}>
+                <Text size="xs" muted={availability === "sold_out"}>
                   {availabilityLabel}
                 </Text>
               </div>

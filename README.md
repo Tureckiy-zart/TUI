@@ -123,6 +123,13 @@ export default function App() {
 | **Final Foundation Lock** | Authoritative source of truth         |
 | Storybook                 | Component examples and contracts      |
 
+### Development Resources
+
+- **Component Creation**: [Extension Component Creation Checklist](docs/tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md)
+- **Component Examples**: [Extension Component Examples](docs/reference/EXTENSION_COMPONENT_EXAMPLES.md)
+- **Component Needs**: [Component Needs Inventory](docs/tasks/COMPONENT_NEEDS_INVENTORY.md)
+- **Feedback Process**: [Usage Feedback Process](docs/tasks/USAGE_FEEDBACK_PROCESS.md)
+
 ---
 
 ## 🏗 Architecture Overview
@@ -198,6 +205,30 @@ Contributions are welcome **within the boundaries of the system**.
 > token ownership rules, and canonical constraints.
 
 Architectural discussions take precedence over visual changes.
+
+### Creating New Components
+
+To create a new Extension component:
+
+1. **Check Component Needs**: Review [Component Needs Inventory](docs/tasks/COMPONENT_NEEDS_INVENTORY.md) to ensure the component is needed
+2. **Use Template Generator**: Run `tsx scripts/generate-extension-component.ts <ComponentName> --category <category>`
+3. **Follow Checklist**: Complete all items in [Extension Component Creation Checklist](docs/tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md)
+4. **Reference Examples**: Use [Extension Component Examples](docs/reference/EXTENSION_COMPONENT_EXAMPLES.md) as patterns
+
+### Requesting Components
+
+To request a new component:
+
+1. **Create GitHub Issue**: Use the [Component Request template](.github/ISSUE_TEMPLATE/component-request.md)
+2. **Provide Use Case**: Describe the specific use case and frequency of need
+3. **Document Workaround**: Explain current solution and pain points
+4. **Wait for Review**: Requests are reviewed monthly (see [Feedback Review Process](docs/tasks/FEEDBACK_REVIEW_PROCESS.md))
+
+### Development Tools
+
+- **Component Analysis**: `tsx scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
+- **Feedback Collection**: `tsx scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
+- **Component Generator**: `tsx scripts/generate-extension-component.ts <Name> --category <category>` - Generates component scaffold
 
 ---
 

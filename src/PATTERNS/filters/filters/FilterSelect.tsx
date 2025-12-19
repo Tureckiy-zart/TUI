@@ -168,7 +168,7 @@ export function FilterSelect({
   return (
     <div className={cn("space-y-sm", className)}>
       {label && (
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+        <label className="text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           {label}
         </label>
       )}

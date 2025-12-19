@@ -7,6 +7,7 @@ import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 import { IconArrowRight } from "@/icons";
 import {
   CardBase,
@@ -126,7 +127,9 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={size}>
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-surface-elevated1 to-surface-elevated2">
+              <div
+                className={cn("relative w-full overflow-hidden", GRADIENT_TOKENS.surface.elevated)}
+              >
                 {imageUrl ? (
                   <img
                     src={imageUrl}
@@ -174,7 +177,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted">
+              <Text size="sm" muted>
                 {description}
               </Text>
             )}

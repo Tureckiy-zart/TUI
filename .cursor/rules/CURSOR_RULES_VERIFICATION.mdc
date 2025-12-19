@@ -108,11 +108,11 @@ Rule resolution order is fully deterministic.
 
 The AI MUST resolve rules using the following verified order:
 
-1. `docs/INTERNAL_CANONICAL_CONTEXT.md`
-2. `docs/architecture/AUTHORITY_MAP.md`
-3. Authority Contracts (see `docs/architecture/AUTHORITY_MAP.md` for complete list)
-4. Lock documents: `docs/architecture/FINAL_FOUNDATION_LOCK.md`, `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
-5. Architecture rules: `docs/architecture/UI_ARCHITECTURE_RULES.md`, `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+1. `docs/ARCHITECTURE_CONTEXT.md`
+2. `docs/architecture/AUTHORITY_NAVIGATION.md`
+3. Authority Contracts (see `docs/architecture/AUTHORITY_NAVIGATION.md` for complete list)
+4. Lock documents: `docs/architecture/FOUNDATION_LOCK.md`, `docs/architecture/ARCHITECTURE_LOCK.md`
+5. Architecture rules: `docs/architecture/ARCHITECTURE_RULES.md`, `docs/architecture/EXTENSION_STATE.md`
 6. Cursor rules
 7. Task instructions
 

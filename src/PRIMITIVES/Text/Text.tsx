@@ -24,19 +24,6 @@ const textVariants = cva("text-foreground", {
       true: "text-muted-foreground",
       false: "",
     },
-    /**
-     * @deprecated Use muted prop or semantic text colors instead
-     */
-    variant: {
-      primary: "text-primary",
-      secondary: "text-secondary-foreground",
-      accent: "text-accent-foreground",
-      outline: "text-foreground",
-      ghost: "text-foreground",
-      link: "text-primary hover:underline",
-      destructive: "text-destructive",
-      muted: "text-muted-foreground",
-    },
   },
   defaultVariants: {
     size: "md",
@@ -48,34 +35,12 @@ const textVariants = cva("text-foreground", {
 export interface TextProps
   extends
     Omit<React.HTMLAttributes<HTMLSpanElement>, "className" | "style">,
-    VariantProps<typeof textVariants> {
-  /**
-   * @deprecated Use muted prop or semantic text colors instead
-   */
-  variant?:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "outline"
-    | "ghost"
-    | "link"
-    | "destructive"
-    | "muted";
-}
+    VariantProps<typeof textVariants> {}
 
 const Text = React.forwardRef<HTMLSpanElement, TextProps>(
-  ({ size, weight, muted, variant, ...props }, ref) => {
-    // Handle deprecated variant prop
-    const isMuted = muted !== undefined ? muted : variant === "muted";
-
+  ({ size, weight, muted, ...props }, ref) => {
     // className and style are forbidden from public API - only CVA output is used
-    return (
-      <span
-        ref={ref}
-        className={textVariants({ size, weight, muted: isMuted, variant })}
-        {...props}
-      />
-    );
+    return <span ref={ref} className={textVariants({ size, weight, muted })} {...props} />;
   },
 );
 Text.displayName = "Text";

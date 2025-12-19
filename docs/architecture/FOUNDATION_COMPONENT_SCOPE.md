@@ -157,7 +157,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven typography system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Text is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Text is listed as locked in `EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 4. Heading
 
@@ -170,7 +170,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven typography system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Heading is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Heading is listed as locked in `EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 5. Input
 
@@ -183,7 +183,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven form system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Input is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Input is listed as locked in `EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 6. Textarea
 
@@ -443,7 +443,7 @@ This document works in conjunction with:
 - **[FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md)** - Defines the contract that applies to Foundation components (enforcement is FINAL/APPLIED)
 - **[FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)** - Documents lock status of all Foundation components and **Foundation Enforcement Lock Status**
 - **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
-- **[TUI_EXTENSION_CANONICAL_STATE.md](./TUI_EXTENSION_CANONICAL_STATE.md)** - Lists Extension layer components
+- **[EXTENSION_CANONICAL_STATE.md](./EXTENSION_CANONICAL_STATE.md)** - Lists Extension layer components
 - **[INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md)** - Provides architectural context
 
 ---

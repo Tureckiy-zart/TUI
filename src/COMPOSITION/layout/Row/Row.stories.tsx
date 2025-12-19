@@ -23,10 +23,6 @@ const meta: Meta<typeof Row> = {
         type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
       },
     },
-    gap: {
-      control: { type: "text" },
-      description: "Gap between row items (deprecated, use spacing instead)",
-    },
     align: {
       control: { type: "select" },
       options: ["start", "end", "center", "baseline", "stretch"],

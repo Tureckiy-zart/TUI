@@ -122,7 +122,7 @@ These are not preferences. These are decisions.
 
 **Check the layer hierarchy first.** Start with PRIMITIVES for atomic components, COMPOSITION for layout/overlays, PATTERNS for business patterns, DOMAIN for product-specific code. FOUNDATION is closed.
 
-**Verify it does not exist.** Check `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md` for allowed components. Check `src/index.ts` for exports. If it exists but is not listed as ALLOWED, it is RESTRICTED.
+**Verify it does not exist.** Check `docs/architecture/EXTENSION_CANONICAL_STATE.md` for allowed components. Check `src/index.ts` for exports. If it exists but is not listed as ALLOWED, it is RESTRICTED.
 
 **Ensure token compliance.** All visual props must use token union types. Raw strings, numbers, or CSS values are forbidden. Each component must have its own token domain.
 
@@ -156,7 +156,7 @@ These are not preferences. These are decisions.
 
 **`docs/architecture/CANONICAL_LOCK.md`** — Authoritative source for canonical architecture state and forbidden regressions. Defines what is locked, what is allowed, and what is explicitly forbidden.
 
-**`docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`** — Defines which components are ALLOWED, RESTRICTED, or LOCKED. This document overrides file existence, Storybook stories, and historical usage.
+**`docs/architecture/EXTENSION_CANONICAL_STATE.md`** — Defines which components are ALLOWED, RESTRICTED, or LOCKED. This document overrides file existence, Storybook stories, and historical usage.
 
 **`docs/architecture/TUI_CURSOR_GUARD_RULES.md`** — Mandatory guard rules for AI/Cursor work. Defines enforcement rules, token system rules, and workflow requirements.
 
@@ -180,11 +180,42 @@ Changes are possible, but they require an explicit unlock.
 
 ---
 
+## 9. Library Maturity Growth System
+
+**Status:** ✅ **ACTIVE** (2025-12-19)
+
+The library includes a comprehensive system for controlled growth and component development:
+
+### Component Development Tools
+
+- **Component Generator**: `scripts/generate-extension-component.ts` - CLI tool to generate Extension component scaffold
+- **Component Analysis**: `scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
+- **Feedback Collection**: `scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
+- **Templates**: `templates/extension-component.*.template` - Standardized component templates
+
+### Development Processes
+
+- **Component Needs Inventory**: Tracks real component needs based on usage patterns ([Component Needs Inventory](tasks/COMPONENT_NEEDS_INVENTORY.md))
+- **Component Creation Checklist**: Mandatory checklist for creating Extension components ([Extension Component Creation Checklist](tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md))
+- **Component Examples**: Reference examples and patterns ([Extension Component Examples](reference/EXTENSION_COMPONENT_EXAMPLES.md))
+- **Feedback Loop**: Systematic collection and review of usage feedback ([Usage Feedback Process](tasks/USAGE_FEEDBACK_PROCESS.md))
+
+### Storybook Enhancements
+
+- Enhanced configuration with a11y testing integration
+- Token display addon for visualizing design tokens
+- Improved documentation support
+
+**Reference:** See [Library Maturity Growth Plan](../../.cursor/plans/library_maturity_growth_plan_3f2b1a91.plan.md) for complete details.
+
+---
+
 ## Document Status
 
 **Status:** ✅ **STABLE**  
-**Version:** 1.0  
-**Date Created:**  
+**Version:** 1.1  
+**Date Created:** 2025-12-15  
+**Last Updated:** 2025-12-19
 
 This document is the primary architectural entrypoint. It is designed to remain stable over time. For detailed rules, constraints, and implementation guidance, refer to the canonical documents listed in Section 7.
 

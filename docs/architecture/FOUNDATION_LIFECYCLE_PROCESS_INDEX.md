@@ -80,7 +80,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 5: Token-Driven Model
 - **Purpose:** Ensure all visual properties use tokens
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 5
-- **Authority:** [TUI_TOKEN_SYSTEM.md](./TUI_TOKEN_SYSTEM.md)
+- **Authority:** [TOKEN_SYSTEM.md](./TOKEN_SYSTEM.md)
 - **Exit Criteria:** All visual properties use tokens, tokens reference Foundation domains, no raw values
 
 ### Step 6: Public API Audit
@@ -284,7 +284,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 **Authority Contracts:**
 - [STATE_AUTHORITY_MATRIX.md](./STATE_AUTHORITY_MATRIX.md) — State model
 - [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md) — Interaction rules
-- [TUI_TOKEN_SYSTEM.md](./TUI_TOKEN_SYSTEM.md) — Token system
+- [TOKEN_SYSTEM.md](./TOKEN_SYSTEM.md) — Token system
 - See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete Authority Contract list
 
 ---

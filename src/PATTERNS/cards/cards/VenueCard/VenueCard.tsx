@@ -155,7 +155,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
 
           {/* Description */}
           {description && (
-            <Text size="sm" variant="muted">
+            <Text size="sm" muted>
               {description}
             </Text>
           )}
@@ -171,7 +171,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   className={ICON_TOKENS.sizes.sm}
                   aria-hidden="true"
                 />
-                <Text size="xs" variant="muted">
+                <Text size="xs" muted>
                   {location}
                 </Text>
               </div>
@@ -201,7 +201,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                       className={ICON_TOKENS.sizes.sm}
                       aria-hidden="true"
                     />
-                    <Text size="xs" variant="primary" weight="medium">
+                    <Text size="xs" weight="medium">
                       {eventsCount} {eventsLabel}
                     </Text>
                   </div>
@@ -224,7 +224,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                       className={ICON_TOKENS.sizes.sm}
                       aria-hidden="true"
                     />
-                    <Text size="xs" variant="muted">
+                    <Text size="xs" muted>
                       {capacityLabel} {capacity}
                     </Text>
                   </div>

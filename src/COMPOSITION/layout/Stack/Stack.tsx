@@ -42,15 +42,9 @@ export interface StackProps extends Omit<BoxProps, "display" | "flexDirection" |
 
   /**
    * Spacing between stack items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
-   * This is the canonical prop for spacing. Use `spacing` instead of `gap` for clarity.
+   * This is the canonical prop for spacing.
    */
   spacing?: ResponsiveSpacing;
-
-  /**
-   * Gap between stack items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
-   * @deprecated Use `spacing` prop instead. This prop is kept for backward compatibility.
-   */
-  gap?: ResponsiveSpacing;
 
   /**
    * Align items
@@ -98,10 +92,8 @@ function justifyToClass(
  * Stack component - primary layout composition primitive
  */
 const Stack = React.forwardRef<HTMLDivElement, StackProps>(
-  ({ direction = "vertical", spacing, gap, align, justify, className, style, ...props }, ref) => {
-    // Use spacing as primary prop (more semantic), fallback to gap for backward compatibility
-    const gapValue = spacing ?? gap;
-    const gapBaseValue = getBaseValue<SpacingValue>(gapValue);
+  ({ direction = "vertical", spacing, align, justify, className, style, ...props }, ref) => {
+    const gapBaseValue = getBaseValue<SpacingValue>(spacing);
 
     // Build flex classes
     const flexClasses = cn(

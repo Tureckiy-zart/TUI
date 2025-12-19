@@ -51,8 +51,8 @@ The AI MUST verify:
 - The component is allowed in the current extension layer
 
 References:
-- `docs/TUI_EXTENSION_CANONICAL_STATE.md`
-- `docs/FINAL_FOUNDATION_LOCK.md`
+- `docs/architecture/EXTENSION_STATE.md`
+- `docs/architecture/FOUNDATION_LOCK.md`
 
 If creation violates any lock → **REFUSE**.
 

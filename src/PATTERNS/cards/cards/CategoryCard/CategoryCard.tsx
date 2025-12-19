@@ -141,7 +141,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted">
+              <Text size="sm" muted>
                 {description}
               </Text>
             )}

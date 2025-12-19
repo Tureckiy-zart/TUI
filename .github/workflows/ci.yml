@@ -110,6 +110,9 @@ jobs:
 
       - name: Semantic Release
         env:
+          # GITHUB_TOKEN is automatically provided by GitHub Actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release

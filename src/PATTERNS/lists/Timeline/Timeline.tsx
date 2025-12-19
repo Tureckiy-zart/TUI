@@ -29,11 +29,11 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className }) => {
           </div>
           <div className="ml-md flex-1">
             <Heading level={3}>{item.title}</Heading>
-            <Text size="sm" variant="muted">
+            <Text size="sm" muted>
               {item.date}
             </Text>
             {item.description && (
-              <Text size="sm" variant="muted">
+              <Text size="sm" muted>
                 {item.description}
               </Text>
             )}

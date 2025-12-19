@@ -28,6 +28,8 @@ jobs:
 
       - name: Verify NPM_TOKEN exists
         env:
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -z "$NPM_TOKEN" ]; then
@@ -41,6 +43,8 @@ jobs:
 
       - name: Setup NPM token
         env:
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Configuring npm authentication..."
@@ -49,6 +53,8 @@ jobs:
 
       - name: Test npm authentication (dry-run)
         env:
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Testing npm authentication with dry-run publish..."
@@ -94,7 +100,10 @@ jobs:
 
       - name: Test semantic-release dry-run
         env:
+          # GITHUB_TOKEN is automatically provided by GitHub Actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Note: NPM_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "Running semantic-release dry-run..."

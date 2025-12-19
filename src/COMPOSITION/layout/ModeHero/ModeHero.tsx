@@ -4,6 +4,7 @@ import React from "react";
 
 import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
+import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -38,7 +39,7 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg bg-gradient-to-r from-primary to-accent p-lg text-primary-foreground",
+        `rounded-lg ${GRADIENT_TOKENS.brand.primary} p-lg text-primary-foreground`,
         className,
       )}
     >

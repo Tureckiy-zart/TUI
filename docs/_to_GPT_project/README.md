@@ -1,8 +1,8 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-19  
 **Purpose:** Central documentation hub for the TUI component library  
-**Total Files:** 36 (all canonical and authoritative)
+**Total Files:** 44 (all canonical and authoritative)
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Active Documentation (`docs/`)
 
-**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (36 files):**
+**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (44 files):**
 
 - ✅ **Canonical Documents** - Single source of truth for architecture and decisions
 - ✅ **Authority Contracts** - Immutable Foundation and Extension authority rules
@@ -69,7 +69,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [ELEVATION_AUTHORITY_CONTRACT.md](./architecture/ELEVATION_AUTHORITY_CONTRACT.md) - Elevation rules
 - [LAYOUT_AUTHORITY_CONTRACT.md](./architecture/LAYOUT_AUTHORITY_CONTRACT.md) - Layout rules
 - [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale rules
-- [TUI_TOKEN_SYSTEM.md](./architecture/TUI_TOKEN_SYSTEM.md) - Token system rules
+- [TOKEN_SYSTEM.md](./architecture/TOKEN_SYSTEM.md) - Token system rules
 
 ### Extension Authority
 
@@ -81,8 +81,8 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Architecture Rules & Locks
 
-- [TUI_ARCHITECTURE_LOCK.md](./architecture/TUI_ARCHITECTURE_LOCK.md) - UI architecture lock
-- [TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md) - Extension layer canonical state
+- [UI_ARCHITECTURE_LOCK.md](./architecture/UI_ARCHITECTURE_LOCK.md) - UI architecture lock
+- [EXTENSION_CANONICAL_STATE.md](./architecture/EXTENSION_CANONICAL_STATE.md) - Extension layer canonical state
 - [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) - 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
 - [FOUNDATION_COMPONENT_SCOPE.md](./architecture/FOUNDATION_COMPONENT_SCOPE.md) - 🔒 **FINAL/APPLIED** Foundation component scope
 - [UI_ARCHITECTURE_RULES.md](./architecture/UI_ARCHITECTURE_RULES.md) - UI architecture rules
@@ -93,13 +93,21 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Component Locks
 
-- [locks/TUI_LAYOUT_LOCK.md](./locks/TUI_LAYOUT_LOCK.md) - Layout primitives lock
-- [locks/TUI_TEXT_LOCK.md](./locks/TUI_TEXT_LOCK.md) - Text/typography components lock
+- [locks/LAYOUT_LOCK.md](./locks/LAYOUT_LOCK.md) - Layout primitives lock
+- [locks/TEXT_LOCK.md](./locks/TEXT_LOCK.md) - Text/typography components lock
 
 ### Progress & Project Management
 
 - [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) - Project progress tracking (canonical progress file)
 - [tasks/master_task_index.md](./tasks/master_task_index.md) - Master task index and navigation
+
+### Library Maturity Growth System
+
+- [tasks/COMPONENT_NEEDS_INVENTORY.md](./tasks/COMPONENT_NEEDS_INVENTORY.md) - Component needs tracking and prioritization
+- [tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md](./tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md) - Extension component creation checklist
+- [tasks/USAGE_FEEDBACK_PROCESS.md](./tasks/USAGE_FEEDBACK_PROCESS.md) - Usage feedback collection process
+- [tasks/FEEDBACK_REVIEW_PROCESS.md](./tasks/FEEDBACK_REVIEW_PROCESS.md) - Feedback review and decision process
+- [tasks/COMPONENT_USAGE_TRACKING.md](./tasks/COMPONENT_USAGE_TRACKING.md) - Component usage tracking
 
 ### Reference Documentation
 
@@ -108,6 +116,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/token-map-overview.md](./reference/token-map-overview.md) - Token map overview
 - [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md) - UI components inventory
 - [reference/UI_INTEGRATION.md](./reference/UI_INTEGRATION.md) - UI integration guide
+- [reference/EXTENSION_COMPONENT_EXAMPLES.md](./reference/EXTENSION_COMPONENT_EXAMPLES.md) - Extension component examples and patterns
 
 ### Structure & Standards
 
@@ -129,7 +138,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ## 📁 Documentation Structure
 
-This directory contains **ONLY canonical and active documentation** (36 files total):
+This directory contains **ONLY canonical and active documentation** (44 files total):
 
 ```
 docs/
@@ -137,13 +146,13 @@ docs/
 │   ├── *_AUTHORITY_CONTRACT.md  # Foundation Authority Contracts (LOCKED)
 │   ├── EXTENSION_AUTHORITY_CONTRACT.md  # Extension boundary contract
 │   ├── FINAL_FOUNDATION_LOCK.md  # Foundation lock status (source of truth)
-│   ├── TUI_ARCHITECTURE_LOCK.md  # Architecture lock
+│   ├── UI_ARCHITECTURE_LOCK.md  # Architecture lock
 │   ├── UI_ARCHITECTURE_RULES.md  # Architecture rules
 │   └── ...                 # Other architecture rules and locks
 ├── locks/                   # Component lock documents (2 files)
-├── reference/              # API reference and technical documentation (5 files)
+├── reference/              # API reference and technical documentation (6 files)
 ├── structure/              # Typing standards (1 file)
-├── tasks/                  # Task management and indexes (1 file)
+├── tasks/                  # Task management, component needs, feedback processes (6 files)
 ├── ui/                     # UI-specific documentation (1 file)
 ├── INTERNAL_CANONICAL_CONTEXT.md  # Single source of truth (IMMUTABLE)
 ├── CANONICAL_PROJECT_ORIENTATION.md  # Project orientation
@@ -164,7 +173,7 @@ docs/
 1. **Start with:** [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) - Single source of truth
 2. **Check Foundation status:** [architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)
 3. **Consult Authority Contracts:** [architecture/AUTHORITY_MAP.md](./architecture/AUTHORITY_MAP.md) for navigation
-4. **Verify component status:** [architecture/TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md)
+4. **Verify component status:** [architecture/EXTENSION_CANONICAL_STATE.md](./architecture/EXTENSION_CANONICAL_STATE.md)
 
 ### For Developers
 
@@ -254,7 +263,18 @@ For questions about documentation:
 
 ---
 
-**Last Updated:** 2025-12-18  
-**Documentation Version:** 3.1  
-**Total Canonical Files:** 37  
+**Last Updated:** 2025-12-19  
+**Documentation Version:** 3.2  
+**Total Canonical Files:** 44  
 **Archive Status:** Isolated (excluded from git and AI context)
+
+### Library Maturity Growth System
+
+The library now includes a comprehensive system for controlled growth:
+- Component needs identification and tracking
+- Extension component creation templates and tools
+- Usage feedback collection and review processes
+- Enhanced Storybook DX with a11y testing and token display
+- Automated component request triage workflow
+
+See [tasks/COMPONENT_NEEDS_INVENTORY.md](./tasks/COMPONENT_NEEDS_INVENTORY.md) for details.

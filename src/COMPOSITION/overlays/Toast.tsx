@@ -9,7 +9,7 @@
  * All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal)
  * is handled by Radix Toast primitives. Tenerife UI provides visual styling through tokens only.
  *
- * This component is locked as a foundation component per TUI_ARCHITECTURE_LOCK.md.
+ * This component is locked as a foundation component per UI_ARCHITECTURE_LOCK.md.
  * DO NOT reimplement Radix behavior (timers, focus logic, keyboard handling, portals).
  * All behavioral logic must delegate to Radix Toast primitives.
  *

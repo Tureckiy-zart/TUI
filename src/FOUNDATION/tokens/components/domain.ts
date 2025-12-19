@@ -19,6 +19,7 @@
  * - DATA_TOKENS: skeleton patterns from src/tokens/components/data.ts
  */
 
+import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 import { semanticSpacing } from "@/FOUNDATION/tokens/spacing";
 import { DATA_TOKENS } from "./data";
 import { ICON_TOKENS } from "./icon";
@@ -185,17 +186,19 @@ export const DOMAIN_TOKENS = {
     /**
      * Overlay gradient tokens for image overlays
      * Used for hover states and text readability
+     * References GRADIENT_TOKENS.overlay.dark
      */
     overlay: {
-      gradient: "bg-gradient-to-t from-black/60 via-transparent to-transparent", // Gradient overlay for image hover states
+      gradient: GRADIENT_TOKENS.overlay.dark, // Gradient overlay for image hover states
     } as const,
 
     /**
      * Placeholder gradient tokens for image placeholders
      * Used when no image URL is provided
+     * References GRADIENT_TOKENS.surface.muted
      */
     placeholder: {
-      gradient: "bg-gradient-to-br from-muted to-muted/50", // Placeholder gradient background
+      gradient: GRADIENT_TOKENS.surface.muted, // Placeholder gradient background
     } as const,
   } as const,
 
@@ -297,10 +300,11 @@ export const DOMAIN_TOKENS = {
     /**
      * Badge surface (background) tokens
      * Maps to semantic color tokens
+     * References GRADIENT_TOKENS.brand.featured for featured badges
      */
     surface: {
       default: "bg-primary", // Default badge background - maps to semantic primary color
-      featured: "bg-gradient-to-r from-accent-500 to-primary-600", // Featured badge gradient
+      featured: GRADIENT_TOKENS.brand.featured, // Featured badge gradient
     } as const,
 
     /**

@@ -244,7 +244,7 @@ This document records the architectural decision regarding which of the followin
 2. Export types: `LinkProps`, `BadgeProps`, `linkVariants`, `badgeVariants`
 3. Update public API documentation (`docs/reference/public-api.md`)
 4. Add Storybook stories if missing
-5. Update `TUI_EXTENSION_CANONICAL_STATE.md` to list Link and Badge as ALLOWED
+5. Update `EXTENSION_CANONICAL_STATE.md` to list Link and Badge as ALLOWED
 
 **Acceptance Criteria:**
 - [ ] Link and Badge are exported from `src/index.ts`
@@ -279,7 +279,7 @@ This document records the architectural decision regarding which of the followin
 **Type:** Documentation
 
 **Actions:**
-1. Ensure Divider and Image are listed in `TUI_EXTENSION_CANONICAL_STATE.md` as RESTRICTED
+1. Ensure Divider and Image are listed in `EXTENSION_CANONICAL_STATE.md` as RESTRICTED
 2. Document that these components are internal-only
 3. Add notes explaining why they are not public API
 
@@ -301,7 +301,7 @@ This document records the architectural decision regarding which of the followin
 - Component exports list
 - Type exports list
 
-### Canonical State Document (`docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`)
+### Canonical State Document (`docs/architecture/EXTENSION_CANONICAL_STATE.md`)
 
 **Add to ALLOWED:**
 - Link (Extension Layer - Visual Components)

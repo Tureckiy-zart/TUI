@@ -232,7 +232,7 @@ export function FilterBar({
 
         {showDateRange && (
           <div className="space-y-sm">
-            <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <label className="text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               {dateRangeLabel}
             </label>
             <DateRangePicker
@@ -269,7 +269,7 @@ export function FilterBar({
 
         {showSorting && (
           <div className="space-y-sm">
-            <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <label className="text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               {sortByLabel}
             </label>
             <FilterSelect
