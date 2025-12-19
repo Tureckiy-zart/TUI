@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Защита от рекурсивного вызова
 if [ -n "$SKIP_PRE_PUSH" ]; then
   exit 0
