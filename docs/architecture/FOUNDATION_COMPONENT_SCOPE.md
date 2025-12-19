@@ -118,7 +118,8 @@ The following components are **confirmed Foundation components** based on archit
 
 **Status:** ✅ **FINAL LOCK** (2025-12-18)  
 **Location:** `src/PRIMITIVES/Link/`  
-**Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
+**Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`  
+**Architectural Lock:** [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
 
 **Rationale:**
 - Canonical navigation primitive
@@ -126,6 +127,14 @@ The following components are **confirmed Foundation components** based on archit
 - Locked and stable
 - Fully token-driven
 - Represents semantic navigation (location changes)
+- First-class semantic anchor (always renders `<a>` directly)
+
+**Architectural Constraints:**
+- Link MUST always render a single `<a>` element directly
+- `asChild` prop is FORBIDDEN
+- No proxy patterns (Radix Slot) allowed
+- No nested interactive elements
+- See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) for complete architectural contract
 
 **Scope:**
 - Public API: `Link`, `LinkProps`, `LinkVariant`, `LinkSize`

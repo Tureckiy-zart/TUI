@@ -556,6 +556,7 @@ button:disabled { pointer-events: none; }
 
 - `docs/architecture/INTERACTION_AUTHORITY_AUDIT.md` - Button component audit
 - `docs/architecture/STATE_AUTHORITY_CONTRACT.md` - State Matrix contract
+- `docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md` - Interactive size scale (for interactive components)
 - `src/components/ui/button.tsx` - Reference implementation
 
 ---

@@ -372,6 +372,17 @@ Any Spacing Authority modifications require:
 
 ---
 
+## Related Documents
+
+- `docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md` - Interactive size scale (interactive components use spacing tokens via size prop)
+- `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md` - Layout rules (layout uses spacing tokens)
+- `docs/architecture/FINAL_FOUNDATION_LOCK.md` - Foundation lock status (Spacing Authority Lock Status section)
+- `docs/architecture/TUI_TOKEN_SYSTEM.md` - Token system documentation
+
+**Note:** Interactive components use spacing tokens indirectly through the `size` prop. See [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) for interactive component sizing rules.
+
+---
+
 **Status:** ✅ **LOCKED**  
 **Version:** 1.1  
 **Date Created:** 2025-12-16  

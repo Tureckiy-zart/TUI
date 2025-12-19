@@ -9,17 +9,17 @@
  * Usage: pnpm tokens:export
  */
 
-import { writeFileSync, mkdirSync } from "fs";
-import { join, dirname } from "path";
+import { mkdirSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 // Import all token modules
-import * as colors from "../src/tokens/colors";
-import * as spacing from "../src/tokens/spacing";
-import * as typography from "../src/tokens/typography";
-import * as radius from "../src/tokens/radius";
-import * as shadows from "../src/tokens/shadows";
-import * as motion from "../src/tokens/motion";
+import * as colors from "../src/FOUNDATION/tokens/colors";
+import * as motion from "../src/FOUNDATION/tokens/motion";
+import * as radius from "../src/FOUNDATION/tokens/radius";
+import * as shadows from "../src/FOUNDATION/tokens/shadows";
+import * as spacing from "../src/FOUNDATION/tokens/spacing";
+import * as typography from "../src/FOUNDATION/tokens/typography";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

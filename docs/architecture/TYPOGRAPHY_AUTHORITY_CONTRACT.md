@@ -413,6 +413,16 @@ Any Typography Authority modifications require:
 
 ---
 
+## Related Documents
+
+- `docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md` - Interactive size scale (separate from typography scale)
+- `docs/architecture/FINAL_FOUNDATION_LOCK.md` - Foundation lock status (Typography Authority Lock Status section)
+- `docs/architecture/TUI_TOKEN_SYSTEM.md` - Token system documentation
+
+**Note:** Typography scale (`xs`, `sm`, `md`, `lg`, `xl`) is SEPARATE from interactive size scale (`sm`, `md`, `lg`). See [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) for interactive component sizing rules.
+
+---
+
 **Status:** ✅ **LOCKED**  
 **Version:** 1.1  
 **Date Created:** 2025-12-16  

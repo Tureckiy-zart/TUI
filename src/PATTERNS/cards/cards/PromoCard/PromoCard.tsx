@@ -28,6 +28,37 @@ import {
 } from "./PromoCard.variants";
 
 /**
+ * Helper component to apply custom variant classes to Link
+ * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
+ */
+const LinkWithCustomVariant = React.forwardRef<
+  HTMLAnchorElement,
+  React.ComponentProps<typeof Link> & { customClassName: string }
+>(({ customClassName, ...linkProps }, ref) => {
+  const anchorRef = React.useRef<HTMLAnchorElement>(null);
+  const mergedRef = React.useCallback(
+    (node: HTMLAnchorElement | null) => {
+      anchorRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref && "current" in ref) {
+        (ref as { current: HTMLAnchorElement | null }).current = node;
+      }
+      if (node && customClassName) {
+        // Merge custom classes with Link's internal classes
+        const existingClasses = node.className.split(" ").filter(Boolean);
+        const customClasses = customClassName.split(" ").filter(Boolean);
+        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
+      }
+    },
+    [ref, customClassName],
+  );
+
+  return <Link {...linkProps} ref={mergedRef} />;
+});
+LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
+
+/**
  * PromoCard Component
  *
  * Domain-specific card component for displaying promotional content.
@@ -153,10 +184,13 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           <CardBaseFooterWrapper size={size}>
             <div className="w-full">
               {ctaUrl && (
-                <Link href={ctaUrl}>
+                <LinkWithCustomVariant
+                  href={ctaUrl}
+                  customClassName={promoCardCtaButtonVariants({ size })}
+                >
                   {ctaLabel}
                   <IconArrowRight className={promoCardCtaButtonIconVariants({ size })} />
-                </Link>
+                </LinkWithCustomVariant>
               )}
               {!ctaUrl && (
                 <div className={cn("w-full", promoCardCtaButtonVariants({ size }))}>

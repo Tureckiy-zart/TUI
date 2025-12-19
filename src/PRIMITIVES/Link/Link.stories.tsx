@@ -124,14 +124,6 @@ export const AllVariants: Story = {
   ),
 };
 
-export const ExtraSmall: Story = {
-  args: {
-    size: "xs",
-    children: "Extra Small Link",
-    href: "#",
-  },
-};
-
 export const Small: Story = {
   args: {
     size: "sm",
@@ -156,20 +148,9 @@ export const Large: Story = {
   },
 };
 
-export const ExtraLarge: Story = {
-  args: {
-    size: "xl",
-    children: "Extra Large Link",
-    href: "#",
-  },
-};
-
 export const AllSizes: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
-      <Link size="xs" href="#">
-        Extra Small Link
-      </Link>
       <Link size="sm" href="#">
         Small Link
       </Link>
@@ -178,9 +159,6 @@ export const AllSizes: Story = {
       </Link>
       <Link size="lg" href="#">
         Large Link
-      </Link>
-      <Link size="xl" href="#">
-        Extra Large Link
       </Link>
     </div>
   ),
@@ -208,9 +186,6 @@ export const VariantsWithSizes: Story = {
       <div className="flex flex-col gap-xs">
         <h3 className="text-sm font-semibold">Primary Variant</h3>
         <div className="flex flex-wrap items-center gap-md">
-          <Link variant="primary" size="xs" href="#">
-            XS
-          </Link>
           <Link variant="primary" size="sm" href="#">
             SM
           </Link>
@@ -220,17 +195,11 @@ export const VariantsWithSizes: Story = {
           <Link variant="primary" size="lg" href="#">
             LG
           </Link>
-          <Link variant="primary" size="xl" href="#">
-            XL
-          </Link>
         </div>
       </div>
       <div className="flex flex-col gap-xs">
         <h3 className="text-sm font-semibold">Outline Variant</h3>
         <div className="flex flex-wrap items-center gap-md">
-          <Link variant="outline" size="xs" href="#">
-            XS
-          </Link>
           <Link variant="outline" size="sm" href="#">
             SM
           </Link>
@@ -239,9 +208,6 @@ export const VariantsWithSizes: Story = {
           </Link>
           <Link variant="outline" size="lg" href="#">
             LG
-          </Link>
-          <Link variant="outline" size="xl" href="#">
-            XL
           </Link>
         </div>
       </div>
@@ -317,74 +283,30 @@ export const DisabledWithIcons: Story = {
   },
 };
 
-export const AsChild: Story = {
+export const CTAUsage: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
       <p className="text-sm text-muted-foreground">
-        Use <code className="py-xxs rounded bg-muted px-xs text-xs">asChild</code> to compose Link
-        with router-specific components or custom anchor elements.
+        Link supports button-like variants for CTA usage. Use variant and size props directly.
       </p>
-      <Link asChild variant="primary">
-        <a href="/composed">Composed with native anchor</a>
-      </Link>
+      <div className="flex flex-wrap gap-md">
+        <Link href="/tickets" variant="primary" size="lg">
+          Buy Tickets
+        </Link>
+        <Link href="/learn-more" variant="outline" size="lg">
+          Learn More
+        </Link>
+        <Link href="/signup" variant="secondary" size="md">
+          Sign Up
+        </Link>
+      </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          "The asChild prop allows Link to compose with other components via Radix Slot. This is useful for integrating with router libraries like Next.js Link or React Router.",
-      },
-    },
-  },
-};
-
-export const AsChildRouterComposition: Story = {
-  render: () => {
-    // Example router Link component (simulated for Storybook)
-    const RouterLink = ({
-      to,
-      children,
-      className,
-      ...props
-    }: {
-      to: string;
-      children: React.ReactNode;
-      className?: string;
-      [key: string]: any;
-    }) => (
-      <a href={to} className={className} {...props}>
-        {children}
-      </a>
-    );
-
-    return (
-      <div className="flex flex-col gap-md">
-        <p className="text-sm text-muted-foreground">
-          Example: Composing Link with a router-specific Link component (e.g., Next.js Link, React
-          Router)
-        </p>
-        <Link asChild variant="primary" size="md">
-          <RouterLink to="/dashboard">Go to Dashboard</RouterLink>
-        </Link>
-        <Link asChild variant="accent">
-          <RouterLink to="/settings">Settings</RouterLink>
-        </Link>
-        <p className="mt-md text-xs text-muted-foreground">
-          <strong>Note:</strong> In a real application, replace{" "}
-          <code className="py-xxs rounded bg-muted px-xs">RouterLink</code> with your actual
-          router&apos;s Link component (e.g.,{" "}
-          <code className="py-xxs rounded bg-muted px-xs">next/link</code> or{" "}
-          <code className="py-xxs rounded bg-muted px-xs">react-router-dom</code>).
-        </p>
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Use asChild to compose Link with router-specific components. The Link styling and behavior are applied to the router component while preserving router functionality.",
+          "Link can be used for CTAs with button-like styling. Simply use variant and size props - no asChild pattern needed.",
       },
     },
   },

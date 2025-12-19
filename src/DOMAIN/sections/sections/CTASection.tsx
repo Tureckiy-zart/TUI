@@ -63,8 +63,16 @@ export const CTASection: React.FC<CTASectionProps> = ({
     const size = "lg" as const;
 
     if (action.href) {
+      // Canonical pattern: button-like links use Link with variant and size directly
+      // Button variants (primary, secondary, accent, outline, ghost, destructive) map to Link variants
       return (
-        <Link href={action.href} variant={variant} size={size}>
+        <Link
+          href={action.href}
+          variant={
+            variant as "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
+          }
+          size={size}
+        >
           {action.label}
         </Link>
       );

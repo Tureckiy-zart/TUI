@@ -40,8 +40,6 @@ export const NotificationCenterTrigger = React.forwardRef<
   const { getUnreadCount } = useNotificationCenterContext();
   const unreadCount = getUnreadCount();
 
-  // className is forbidden on Foundation components - NotificationCenterTrigger uses only token-driven props
-  // Note: Badge positioning may be affected as relative positioning cannot be applied via className
   return (
     <Button
       ref={ref}
@@ -51,17 +49,19 @@ export const NotificationCenterTrigger = React.forwardRef<
       aria-label={`Open notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
       {...props}
     >
-      <Bell className="h-5 w-5" />
-      {showBadge && unreadCount > 0 && (
-        <span
-          className={cn(
-            "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-semibold text-destructive-foreground",
-          )}
-          aria-hidden="true"
-        >
-          {unreadCount > 99 ? "99+" : unreadCount}
-        </span>
-      )}
+      <span className="relative">
+        <Bell className="h-5 w-5" />
+        {showBadge && unreadCount > 0 && (
+          <span
+            className={cn(
+              "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-semibold text-destructive-foreground",
+            )}
+            aria-hidden="true"
+          >
+            {unreadCount > 99 ? "99+" : unreadCount}
+          </span>
+        )}
+      </span>
     </Button>
   );
 });

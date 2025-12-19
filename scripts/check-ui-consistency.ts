@@ -8,14 +8,14 @@
  * - Brand consistency
  */
 
-import { readFileSync, readdirSync, existsSync, statSync } from "fs";
-import { join, dirname, extname } from "path";
+import { existsSync, readFileSync, readdirSync, statSync } from "fs";
+import { dirname, extname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const COMPONENTS_DIR = join(__dirname, "../src/components");
+const COMPONENTS_DIR = join(__dirname, "../src");
 const GRADIENT_EXCEPTIONS_FILE = join(__dirname, "../docs/ui/gradient_exceptions.md");
 
 /**

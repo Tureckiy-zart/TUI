@@ -7,6 +7,7 @@
 
 import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
+import { noLinkAsChild } from "./no-link-aschild";
 import noRawTailwindColors from "./no-raw-tailwind-colors";
 import noRawVisualProps from "./no-raw-visual-props";
 
@@ -16,5 +17,6 @@ export default {
     "no-raw-tailwind-colors": noRawTailwindColors,
     "no-foundation-classname-style": noFoundationClassnameStyle,
     "no-foundation-open-htmlattributes": noFoundationOpenHtmlAttributes,
+    "no-link-aschild": noLinkAsChild,
   },
 };

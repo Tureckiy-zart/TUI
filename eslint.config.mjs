@@ -273,6 +273,7 @@ export default [
 
       // Prevent Foundation components from exposing className/style props
       "tenerife-ui-architecture/no-foundation-classname-style": "error",
+      "tenerife-ui-architecture/no-link-aschild": "error",
       // Prevent Foundation components from extending HTMLAttributes without Omit
       "tenerife-ui-architecture/no-foundation-open-htmlattributes": "error",
 

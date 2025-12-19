@@ -6,8 +6,8 @@
  * Generates diff reports for missing or overridden tokens.
  */
 
-import { readFileSync, readdirSync, existsSync } from "fs";
-import { join, dirname } from "path";
+import { existsSync, readFileSync, readdirSync } from "fs";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -96,17 +96,30 @@ function validateTheme(themeFile: string): ValidationResult {
 
   const content = readFileSync(filePath, "utf-8");
 
+  // Check if this is a BrandPackage (minimal, neon, etc.)
+  const isBrandPackage =
+    content.includes("BrandPackage") &&
+    content.includes("export const") &&
+    (content.includes("Brand:") || content.match(/export const \w+Brand/));
+
   // Basic validation
   if (!content.includes("export const")) {
     errors.push("Theme must export a const");
   }
 
-  if (!content.includes("ThemeOverride")) {
+  // BrandPackage files don't need ThemeOverride type (they use BrandPackage)
+  if (!isBrandPackage && !content.includes("ThemeOverride")) {
     errors.push("Theme must use ThemeOverride type");
   }
 
-  if (!content.includes("name:")) {
+  // BrandPackage has name in the package object, ThemeOverride has name property
+  if (!isBrandPackage && !content.includes("name:")) {
     errors.push("Theme must have a 'name' property");
+  }
+
+  // For BrandPackage, check that it has name in the package
+  if (isBrandPackage && !content.includes("name:")) {
+    errors.push("BrandPackage must have a 'name' property");
   }
 
   // Check for color scale overrides
@@ -195,8 +208,14 @@ function main() {
     process.exit(1);
   }
 
+  // Exclude utility files and only check theme files
   const themeFiles = readdirSync(THEMES_DIR).filter(
-    (file) => file.endsWith(".ts") && file !== "index.ts" && file !== "types.ts",
+    (file) =>
+      file.endsWith(".ts") &&
+      file !== "index.ts" &&
+      file !== "types.ts" &&
+      file !== "brand_engine.ts" &&
+      !file.startsWith("--"), // Exclude special files like --help.ts
   );
   const results: ValidationResult[] = [];
 

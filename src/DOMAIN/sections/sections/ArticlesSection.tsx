@@ -62,6 +62,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
                 {article.date}
               </Text>
             )}
+            {/* Canonical pattern: button-like CTA link uses Link with variant directly */}
             <Link href={article.href} variant="primary">
               {readMoreLabel} →
             </Link>

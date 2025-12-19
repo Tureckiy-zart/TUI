@@ -33,27 +33,27 @@
       "type": "color"
     },
     "color.primary.400": {
-      "value": "#343434",
+      "value": "#393939",
       "type": "color"
     },
     "color.primary.500": {
-      "value": "#474747",
+      "value": "#4e4e4e",
       "type": "color"
     },
     "color.primary.600": {
-      "value": "#656565",
+      "value": "#606060",
       "type": "color"
     },
     "color.primary.700": {
-      "value": "#7c7c7c",
+      "value": "#4f4f4f",
       "type": "color"
     },
     "color.primary.800": {
-      "value": "#949494",
+      "value": "#404040",
       "type": "color"
     },
     "color.primary.900": {
-      "value": "#0f0f0f",
+      "value": "#181818",
       "type": "color"
     },
     "color.primary.950": {
@@ -81,23 +81,23 @@
       "type": "color"
     },
     "color.accent.500": {
-      "value": "#707070",
+      "value": "#898989",
       "type": "color"
     },
     "color.accent.600": {
-      "value": "#4e4e4e",
+      "value": "#525252",
       "type": "color"
     },
     "color.accent.700": {
-      "value": "#333333",
+      "value": "#2d2d2d",
       "type": "color"
     },
     "color.accent.800": {
-      "value": "#343434",
+      "value": "#2c2c2c",
       "type": "color"
     },
     "color.accent.900": {
-      "value": "#333333",
+      "value": "#292929",
       "type": "color"
     },
     "color.accent.950": {
@@ -133,7 +133,7 @@
       "type": "color"
     },
     "color.secondary.700": {
-      "value": "#030303",
+      "value": "#040404",
       "type": "color"
     },
     "color.secondary.800": {
@@ -141,7 +141,7 @@
       "type": "color"
     },
     "color.secondary.900": {
-      "value": "#070707",
+      "value": "#080808",
       "type": "color"
     },
     "color.secondary.950": {
@@ -209,7 +209,7 @@
       "type": "color"
     },
     "color.semantic.success": {
-      "value": "#161616",
+      "value": "#151515",
       "type": "color"
     },
     "color.semantic.successForeground": {
@@ -217,11 +217,11 @@
       "type": "color"
     },
     "color.semantic.error": {
-      "value": "#444444",
+      "value": "#141414",
       "type": "color"
     },
     "color.semantic.errorForeground": {
-      "value": "#fafafa",
+      "value": "#ffffff",
       "type": "color"
     },
     "color.semantic.warning": {
@@ -253,7 +253,7 @@
       "type": "color"
     },
     "color.text.muted": {
-      "value": "#737373",
+      "value": "#6b6b6b",
       "type": "color"
     },
     "color.text.inverse": {
@@ -563,27 +563,27 @@
       "type": "color"
     },
     "color.primary.400": {
-      "value": "#343434",
+      "value": "#393939",
       "type": "color"
     },
     "color.primary.500": {
-      "value": "#474747",
+      "value": "#4e4e4e",
       "type": "color"
     },
     "color.primary.600": {
-      "value": "#656565",
+      "value": "#606060",
       "type": "color"
     },
     "color.primary.700": {
-      "value": "#7c7c7c",
+      "value": "#4f4f4f",
       "type": "color"
     },
     "color.primary.800": {
-      "value": "#949494",
+      "value": "#404040",
       "type": "color"
     },
     "color.primary.900": {
-      "value": "#0f0f0f",
+      "value": "#181818",
       "type": "color"
     },
     "color.primary.950": {
@@ -611,23 +611,23 @@
       "type": "color"
     },
     "color.accent.500": {
-      "value": "#707070",
+      "value": "#898989",
       "type": "color"
     },
     "color.accent.600": {
-      "value": "#4e4e4e",
+      "value": "#525252",
       "type": "color"
     },
     "color.accent.700": {
-      "value": "#333333",
+      "value": "#2d2d2d",
       "type": "color"
     },
     "color.accent.800": {
-      "value": "#343434",
+      "value": "#2c2c2c",
       "type": "color"
     },
     "color.accent.900": {
-      "value": "#333333",
+      "value": "#292929",
       "type": "color"
     },
     "color.accent.950": {
@@ -663,7 +663,7 @@
       "type": "color"
     },
     "color.secondary.700": {
-      "value": "#030303",
+      "value": "#040404",
       "type": "color"
     },
     "color.secondary.800": {
@@ -671,7 +671,7 @@
       "type": "color"
     },
     "color.secondary.900": {
-      "value": "#070707",
+      "value": "#080808",
       "type": "color"
     },
     "color.secondary.950": {
@@ -755,15 +755,15 @@
       "type": "color"
     },
     "color.semantic.warning": {
-      "value": "#3b3b3b",
+      "value": "#070707",
       "type": "color"
     },
     "color.semantic.warningForeground": {
-      "value": "#171717",
+      "value": "#ffffff",
       "type": "color"
     },
     "color.semantic.info": {
-      "value": "#262626",
+      "value": "#0a0a0a",
       "type": "color"
     },
     "color.semantic.infoForeground": {

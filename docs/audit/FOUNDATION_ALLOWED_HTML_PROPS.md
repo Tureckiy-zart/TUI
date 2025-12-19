@@ -158,7 +158,7 @@ This document identifies which HTML and behavioral props **must remain allowed**
 - Link implements custom `disabled` behavior (not native to `<a>` element)
 - When `disabled={true}`, `tabIndex={-1}` and `aria-disabled={true}` are set
 - `href` is optional in TypeScript but semantically required for navigation
-- Link uses Radix Slot for `asChild` pattern
+- Link always renders a single `<a>` element directly (no `asChild` pattern - see [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](../architecture/LINK_NO_ASCHILD_CANONICAL_ANCHOR.md))
 
 ---
 
@@ -635,7 +635,7 @@ This document identifies which HTML and behavioral props **must remain allowed**
 | Component | Behavioral Props | Accessibility Props | Native HTML Props | Forbidden Props |
 |-----------|-----------------|-------------------|------------------|----------------|
 | **Button** | onClick, disabled, type, form*, asChild, leftIcon, rightIcon | aria-*, role, data-* | id, name, tabIndex, title, autoFocus | className, style |
-| **Link** | href, target, rel, onClick, disabled, asChild, leftIcon, rightIcon | aria-*, role, data-* | id, name, tabIndex, title, lang, hreflang | className, style |
+| **Link** | href, target, rel, onClick, disabled, leftIcon, rightIcon | aria-*, role, data-* | id, name, tabIndex, title, lang, hreflang | className, style, asChild |
 | **Text** | onClick, onFocus, onBlur, onMouseEnter, onMouseLeave | aria-*, role, data-* | id, tabIndex, title, lang, dir | className, style |
 | **Heading** | onClick, onFocus, onBlur | aria-*, role, data-* | id, tabIndex, title, lang, dir | className, style |
 | **Input** | type, value, onChange, disabled, required, name, placeholder, autoComplete, pattern, min, max, step, minLength, maxLength, iconLeft, iconRight | aria-*, role, data-* | id, tabIndex, title, lang, dir, spellCheck, inputMode | className, style, size (HTML) |
