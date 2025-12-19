@@ -17,9 +17,10 @@
  *   --format <json|markdown>  Output format (default: json)
  */
 
-import { existsSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { readdir, readFile } from "fs/promises";
-import { join, relative } from "path";
+import { dirname, join, relative, resolve } from "path";
+import { fileURLToPath } from "url";
 
 interface ComponentPattern {
   name: string;
@@ -293,13 +294,11 @@ function outputResults(
   const path = outputPath || defaultPath;
 
   if (format === "json") {
-    const fs = require("fs");
-    const { mkdirSync } = require("fs");
-    const dir = require("path").dirname(path);
+    const dir = dirname(path);
     if (!existsSync(dir)) {
       mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(path, JSON.stringify(result, null, 2));
+    writeFileSync(path, JSON.stringify(result, null, 2));
     console.log(`✅ Results written to ${path}`);
   } else {
     // Markdown format
@@ -330,13 +329,11 @@ ${result.patterns
   .join("\n")}
 `;
 
-    const fs = require("fs");
-    const { mkdirSync } = require("fs");
-    const dir = require("path").dirname(path);
+    const dir = dirname(path.replace(".json", ".md"));
     if (!existsSync(dir)) {
       mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(path.replace(".json", ".md"), markdown);
+    writeFileSync(path.replace(".json", ".md"), markdown);
     console.log(`✅ Results written to ${path.replace(".json", ".md")}`);
   }
 }
@@ -366,7 +363,12 @@ async function main() {
   }
 }
 
-if (require.main === module) {
+// ES module equivalent of require.main === module
+const __filename = fileURLToPath(import.meta.url);
+const currentFile = resolve(__filename);
+const mainFile = resolve(process.argv[1]);
+
+if (currentFile === mainFile) {
   main();
 }
 
