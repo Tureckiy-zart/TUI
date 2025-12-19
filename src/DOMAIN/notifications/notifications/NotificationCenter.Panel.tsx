@@ -233,7 +233,6 @@ export const NotificationCenterPanel = React.forwardRef<
                   size="icon"
                   onClick={onClose}
                   aria-label="Close notifications"
-                  className="h-8 w-8"
                 >
                   <X className="h-4 w-4" />
                 </Button>

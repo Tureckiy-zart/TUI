@@ -107,7 +107,7 @@ export const UsageExamples: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <Text size="lg" weight="semibold" className="mb-xs">
+        <Text size="lg" weight="semibold">
           Section Title
         </Text>
         <Text size="md" muted>
@@ -115,7 +115,7 @@ export const UsageExamples: Story = {
         </Text>
       </div>
       <div>
-        <Text size="sm" weight="medium" className="mb-xs">
+        <Text size="sm" weight="medium">
           Label Text
         </Text>
         <Text size="xs" muted>

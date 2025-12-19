@@ -308,20 +308,23 @@ export function ThemeProvider({
     // #region agent log
     if (typeof document !== "undefined" && document.documentElement) {
       setTimeout(() => {
-        const afterApply = document.documentElement.style.getPropertyValue("--tm-primary");
-        fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            location: "ThemeProvider.tsx:289",
-            message: "ThemeProvider useEffect after applyDocumentTheme",
-            data: { afterValue: afterApply, hasValue: !!afterApply },
-            timestamp: Date.now(),
-            sessionId: "debug-session",
-            runId: "run1",
-            hypothesisId: "C",
-          }),
-        }).catch(() => {});
+        // Check document is still available when timeout fires (important for test environments)
+        if (typeof document !== "undefined" && document.documentElement) {
+          const afterApply = document.documentElement.style.getPropertyValue("--tm-primary");
+          fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              location: "ThemeProvider.tsx:289",
+              message: "ThemeProvider useEffect after applyDocumentTheme",
+              data: { afterValue: afterApply, hasValue: !!afterApply },
+              timestamp: Date.now(),
+              sessionId: "debug-session",
+              runId: "run1",
+              hypothesisId: "C",
+            }),
+          }).catch(() => {});
+        }
       }, 100);
     }
     // #endregion

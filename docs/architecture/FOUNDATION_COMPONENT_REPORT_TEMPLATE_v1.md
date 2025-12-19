@@ -134,15 +134,17 @@ Each STEP section **MUST** appear exactly once and in canonical order:
 5. **Step 5: Token-Driven Model**
 6. **Step 6: Public API Audit**
 7. **Step 7: TypeScript System Compliance**
-8. **Step 8: CVA Canonicalization**
-9. **Step 9: Accessibility Hardening**
-10. **Step 10: Authority Alignment**
-11. **Step 11: Storybook Quality Gate**
-12. **Step 12: Testing Quality Gate**
-13. **Step 13: Foundation Lock**
+8. **Step 7.5: Internal Styling Integrity & className Isolation Verification** (REQUIRED)
+9. **Step 7.6: Internal Styling Integrity & ESLint Scope Verification** (REQUIRED)
+10. **Step 8: CVA Canonicalization**
+11. **Step 9: Accessibility Hardening**
+12. **Step 10: Authority Alignment**
+13. **Step 11: Storybook Quality Gate**
+14. **Step 12: Testing Quality Gate**
+15. **Step 13: Foundation Lock**
 
 **Lifecycle Structure:**
-- **Steps 1-10:** Architectural validation and compliance verification
+- **Steps 1-10 (including Steps 7.5 and 7.6):** Architectural validation and compliance verification (including Foundation Enforcement verification and ESLint scope governance)
 - **Steps 11-12:** Quality gates (Storybook and Testing) — must pass before Foundation Lock
 - **Step 13:** Foundation Lock — formal locking after all validations and quality gates pass
 
@@ -394,8 +396,8 @@ The Link component report is the **first canonical example** of a compliant Foun
 Before a component can proceed to Step 13 (Foundation Lock), the report MUST pass this validation:
 
 - [ ] **Metadata Section:** Present and complete
-- [ ] **All Steps Present:** Steps 1-13 all present exactly once
-- [ ] **Canonical Order:** Steps in correct order (1-13)
+- [ ] **All Steps Present:** Steps 1-13 (including Steps 7.5 and 7.6) all present exactly once
+- [ ] **Canonical Order:** Steps in correct order (1-7, 7.5, 7.6, 8-13)
 - [ ] **No Duplicates:** No duplicate STEP sections
 - [ ] **Violation Section:** VIOLATION SUMMARY & RESOLUTION section present
 - [ ] **All Violations Listed:** All violations from all steps consolidated
@@ -450,6 +452,11 @@ Before a component can proceed to Step 13 (Foundation Lock), the report MUST pas
   - Added Step 12: Testing Quality Gate
   - Renumbered Foundation Lock to Step 13
   - Updated lifecycle structure documentation
+- **v1.2** (2025-12-18): Expanded to include Foundation Enforcement verification steps
+  - Added Step 7.5: Internal Styling Integrity & className Isolation Verification
+  - Added Step 7.6: Internal Styling Integrity & ESLint Scope Verification
+  - Updated lifecycle structure to include Steps 7.5 and 7.6 in architectural validation phase
+  - Updated step numbering and structure documentation
 
 ---
 
@@ -470,8 +477,9 @@ Before a component can proceed to Step 13 (Foundation Lock), the report MUST pas
 ## Document Status
 
 **Status:** ✅ MANDATORY  
-**Version:** 1.0  
+**Version:** 1.2  
 **Date Created:** 2025-12-17  
+**Last Updated:** 2025-12-18  
 **Classification:** Process Standard (Evolvable)
 
 **This format is MANDATORY for all Foundation components. No component can reach Foundation Lock without a compliant report following this format.**
@@ -480,18 +488,27 @@ Before a component can proceed to Step 13 (Foundation Lock), the report MUST pas
 
 ## Backward Compatibility Note
 
-**Lifecycle Expansion (2025-12-17):**
+**Lifecycle Expansion (2025-12-17, 2025-12-18):**
 
-The Foundation lifecycle was expanded to include explicit quality gates:
+The Foundation lifecycle was expanded to include explicit quality gates and Foundation Enforcement verification:
 - **Previous lifecycle:** 11 steps (Foundation Lock was Step 11)
-- **Current lifecycle:** 13 steps (Storybook Step 11, Testing Step 12, Foundation Lock Step 13)
+- **Current lifecycle:** 13 steps (with mandatory Steps 7.5 and 7.6)
+  - Steps 1-7: Architectural validation (semantic, structural, compliance)
+  - Step 7.5: Internal Styling Integrity & className Isolation Verification (NEW - Foundation Enforcement verification)
+  - Step 7.6: Internal Styling Integrity & ESLint Scope Verification (NEW - ESLint scope governance verification)
+  - Steps 8-10: Architectural validation (CVA, Accessibility, Authority Alignment)
+  - Step 11: Storybook Quality Gate
+  - Step 12: Testing Quality Gate
+  - Step 13: Foundation Lock
 
 **For Existing Reports:**
 - Reports created before 2025-12-17 may reference the old 11-step structure
+- Reports created before 2025-12-18 may not include Steps 7.5 and 7.6
 - Existing reports remain valid but should be updated to reflect the new structure when lifecycle progresses
-- Components in progress should update their reports to include Steps 11-13
+- Components in progress should update their reports to include Steps 7.5, 7.6, 11-13
 
 **For New Reports:**
-- All new reports MUST follow the 13-step structure
+- All new reports MUST follow the 13-step structure (including Steps 7.5 and 7.6)
+- Steps 7.5 and 7.6 (Foundation Enforcement verification) are MANDATORY and must be completed before Step 8
 - Steps 11-12 (quality gates) are BLOCKING and must be completed before Step 13 (Foundation Lock)
 

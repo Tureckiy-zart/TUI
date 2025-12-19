@@ -188,7 +188,7 @@ export const WithInput: Story = {
           size="sm"
           className="absolute left-sm top-1/2 -translate-y-1/2 text-muted-foreground"
         />
-        <Input className="pl-8" placeholder="Search..." />
+        <Input placeholder="Search..." />
       </div>
     </div>
   ),

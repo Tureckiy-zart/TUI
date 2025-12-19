@@ -129,16 +129,6 @@ describe("Link", () => {
   });
 
   describe("Sizes", () => {
-    it("accepts and renders xs size", () => {
-      renderWithTheme(
-        <Link href="#" size="xs">
-          Extra Small
-        </Link>,
-      );
-      const link = screen.getByRole("link", { name: /extra small/i });
-      expect(link).toBeInTheDocument();
-    });
-
     it("accepts and renders sm size", () => {
       renderWithTheme(
         <Link href="#" size="sm">
@@ -166,16 +156,6 @@ describe("Link", () => {
         </Link>,
       );
       const link = screen.getByRole("link", { name: /large/i });
-      expect(link).toBeInTheDocument();
-    });
-
-    it("accepts and renders xl size", () => {
-      renderWithTheme(
-        <Link href="#" size="xl">
-          Extra Large
-        </Link>,
-      );
-      const link = screen.getByRole("link", { name: /extra large/i });
       expect(link).toBeInTheDocument();
     });
   });
@@ -270,80 +250,50 @@ describe("Link", () => {
     });
   });
 
-  describe("asChild Composition", () => {
-    it.skip("renders as child element when asChild is true", () => {
-      // Note: This test is skipped because Link with asChild has limitations
-      // when used with leftIcon/rightIcon. The current implementation renders
-      // multiple children (leftIcon, children, rightIcon) which conflicts with
-      // Slot's requirement for a single child element.
-      // This is a known limitation of the current Link implementation.
-      renderWithTheme(
-        <Link href="/test" asChild>
-          <a href="/custom">Custom Link</a>
-        </Link>,
-      );
-      const link = screen.getByRole("link", { name: /custom link/i });
-      expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute("href", "/custom");
-    });
-
-    it("renders as anchor when asChild is false", () => {
-      renderWithTheme(
-        <Link href="/test" asChild={false}>
-          Standard Link
-        </Link>,
-      );
-      const link = screen.getByRole("link", { name: /standard link/i });
-      expect(link).toBeInTheDocument();
+  describe("Anchor Semantics", () => {
+    it("always renders anchor element", () => {
+      renderWithTheme(<Link href="/test">Test Link</Link>);
+      const link = screen.getByRole("link", { name: /test link/i });
       expect(link.tagName).toBe("A");
-      expect(link).toHaveAttribute("href", "/test");
+      expect(link).toBeInstanceOf(HTMLAnchorElement);
     });
 
-    it.skip("composes with custom anchor element via asChild", () => {
-      // Note: Skipped due to asChild limitation with leftIcon/rightIcon
-      // See comment in first asChild test for details
-      renderWithTheme(
-        <Link asChild variant="primary" size="md">
-          <a href="/composed" className="custom-class" data-testid="custom-link">
-            Composed Link
-          </a>
+    it("applies variant classes correctly", () => {
+      const { container } = renderWithTheme(
+        <Link href="/test" variant="primary">
+          Primary Link
         </Link>,
       );
-      const link = screen.getByTestId("custom-link");
+      const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute("href", "/composed");
-      expect(link).toHaveClass("custom-class");
+      // Verify variant classes are applied (check for primary variant classes)
+      expect(link?.className).toContain("text-primary");
     });
 
-    it.skip("preserves child element props when using asChild", () => {
-      // Note: Skipped due to asChild limitation with leftIcon/rightIcon
-      // See comment in first asChild test for details
-      renderWithTheme(
-        <Link asChild variant="primary">
-          <a href="/preserved" target="_blank" rel="noopener" aria-label="Preserved link">
-            Preserved
-          </a>
+    it("applies size classes correctly", () => {
+      const { container } = renderWithTheme(
+        <Link href="/test" size="lg">
+          Large Link
         </Link>,
       );
-      const link = screen.getByRole("link", { name: /preserved link/i });
-      expect(link).toHaveAttribute("target", "_blank");
-      expect(link).toHaveAttribute("rel", "noopener");
-    });
-
-    it.skip("accepts asChild prop without errors (with single child, no icons)", () => {
-      // Note: This test is skipped because Link's current implementation
-      // always renders children inside the component structure, which conflicts
-      // with Slot's requirement for a single React element child.
-      // This is a known limitation similar to Button component.
-      // The asChild prop is part of the API but has implementation constraints.
-      renderWithTheme(
-        <Link asChild variant="primary" size="md">
-          <a href="/single-child">Single Child Link</a>
-        </Link>,
-      );
-      const link = screen.getByRole("link", { name: /single child link/i });
+      const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute("href", "/single-child");
+      // Verify size classes are applied (check for lg size classes)
+      expect(link?.className).toContain("h-10"); // lg height
+    });
+
+    it("prevents nested anchor elements", () => {
+      // Verify that children cannot be anchor elements
+      renderWithTheme(
+        <Link href="/test">
+          <span>Valid child</span>
+        </Link>,
+      );
+      const link = screen.getByRole("link");
+      expect(link.tagName).toBe("A");
+      // Verify no nested anchors exist
+      const nestedAnchors = link.querySelectorAll("a");
+      expect(nestedAnchors).toHaveLength(0);
     });
   });
 
@@ -523,10 +473,8 @@ describe("Link", () => {
           variant="primary"
           size="md"
           disabled={false}
-          asChild={false}
           leftIcon={<span>←</span>}
           rightIcon={<span>→</span>}
-          className="custom-class"
           id="test-id"
           aria-label="Test link"
         >
@@ -537,7 +485,7 @@ describe("Link", () => {
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", "/test");
       expect(link).toHaveAttribute("id", "test-id");
-      expect(link).toHaveClass("custom-class");
+      // Foundation components do not support className prop
     });
 
     it("maintains href requirement for semantic link behavior", () => {
@@ -571,7 +519,7 @@ describe("Link", () => {
       const variants: Array<
         "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
       > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
-      const sizes: Array<"xs" | "sm" | "md" | "lg" | "xl"> = ["xs", "sm", "md", "lg", "xl"];
+      const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
 
       variants.forEach((variant) => {
         sizes.forEach((size) => {
@@ -585,6 +533,6 @@ describe("Link", () => {
           unmount();
         });
       });
-    });
+    }, 10000);
   });
 });

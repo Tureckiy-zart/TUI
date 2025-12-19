@@ -18,7 +18,7 @@ exports[`Text > Snapshot > matches snapshot for large bold text 1`] = `
 
 exports[`Text > Snapshot > matches snapshot for muted variant 1`] = `
 <span
-  class="text-base font-normal text-muted-foreground"
+  class="text-foreground text-base font-normal text-muted-foreground"
 >
   Muted Text
 </span>

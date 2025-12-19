@@ -592,24 +592,27 @@ disabled > loading > active > hover > focus-visible > base
    - Foundation предоставляет примитив, Extension добавляет поведение
 
 4. **Совместимость с роутерами:**
-   - Link работает с любым роутером через `href` и `asChild`
-   - `asChild` позволяет использовать Link с роутер-специфичными компонентами (например, Next.js Link)
-   - Нет жесткой привязки к конкретному роутеру
+   - ⚠️ **OUTDATED:** This section references `asChild` pattern which has been **LOCKED OUT** by [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](../architecture/LINK_NO_ASCHILD_CANONICAL_ANCHOR.md)
+   - Link works with any router through `href` prop directly
+   - Link always renders a single `<a>` element (no `asChild` pattern)
+   - No router-specific composition patterns are supported
 
 ### Детальная проверка реализации
 
 **Структура компонента:**
 
 ```tsx
+// ⚠️ OUTDATED: This code example shows asChild pattern which has been LOCKED OUT
+// See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](../architecture/LINK_NO_ASCHILD_CANONICAL_ANCHOR.md)
+// Current implementation always renders <a> directly:
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "a";
+  ({ variant, size, leftIcon, rightIcon, children, ...props }, ref) => {
     return (
-      <Comp className={cn(linkVariants({ variant, size, className }))} ref={ref} {...props}>
+      <a className={linkVariants({ variant, size })} ref={ref} {...props}>
         {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
         {children}
         {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
-      </Comp>
+      </a>
     );
   },
 );

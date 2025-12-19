@@ -621,6 +621,7 @@ The State Authority Matrix is **LOCKED** and **IMMUTABLE**. Any modifications re
 
 - [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md) - Defines WHEN states can activate
 - [STATE_AUTHORITY_CONTRACT.md](./STATE_AUTHORITY_CONTRACT.md) - Defines HOW states are implemented (CSS variables, State Matrix structure)
+- [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Defines interactive size scale (for interactive components)
 - [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock status
 - [src/components/ui/button.tsx](../../src/components/ui/button.tsx) - Reference implementation
 - [src/tokens/state-matrix.ts](../../src/tokens/state-matrix.ts) - Technical State Matrix implementation

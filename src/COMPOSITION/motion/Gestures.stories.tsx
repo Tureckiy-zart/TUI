@@ -82,7 +82,6 @@ export const SwipeToDismissToast: Story = {
           <Button
             variant="ghost"
             size="icon"
-            className="h-6 w-6 rounded-md p-xs text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100"
             onClick={() => setIsVisible(false)}
             aria-label="Dismiss toast"
           >
@@ -157,9 +156,7 @@ export const NotificationPanelSwipe: Story = {
       return (
         <div className="rounded-lg border bg-card p-4">
           <p className="text-muted-foreground">Panel closed! Will reopen in 2 seconds.</p>
-          <Button onClick={() => setIsOpen(true)} className="mt-2">
-            Reopen Panel
-          </Button>
+          <Button onClick={() => setIsOpen(true)}>Reopen Panel</Button>
         </div>
       );
     }

@@ -133,11 +133,7 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
       if (typeof content === "string") {
         // Use Heading or Text based on level
         if (typoConfig.level) {
-          return (
-            <Heading level={typoConfig.level} className={cn(className, typoConfig.className)}>
-              {content}
-            </Heading>
-          );
+          return <Heading level={typoConfig.level}>{content}</Heading>;
         }
         // Map typography size to Text component supported sizes
         // For sizes > xl, use Heading component instead
@@ -149,14 +145,7 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
             "4xl": 1,
             "5xl": 1,
           };
-          return (
-            <Heading
-              level={levelMap[typoConfig.size] || 3}
-              className={cn(className, typoConfig.className)}
-            >
-              {content}
-            </Heading>
-          );
+          return <Heading level={levelMap[typoConfig.size] || 3}>{content}</Heading>;
         }
         const textSize =
           typoConfig.size && ["xs", "sm", "md", "lg", "xl"].includes(typoConfig.size)
@@ -169,11 +158,7 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
             ? (typoConfig.variant as "primary" | "secondary" | "accent" | "muted")
             : undefined;
         return (
-          <Text
-            size={textSize}
-            variant={textVariant}
-            className={cn(className, typoConfig.className)}
-          >
+          <Text size={textSize} variant={textVariant}>
             {content}
           </Text>
         );

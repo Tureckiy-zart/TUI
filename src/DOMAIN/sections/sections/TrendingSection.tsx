@@ -66,9 +66,7 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
   return (
     <Card className={cn("shadow-md", className)} {...rest}>
       <CardBody className="p-lg">
-        <Heading level={2} className="mb-md">
-          {title}
-        </Heading>
+        <Heading level={2}>{title}</Heading>
         {loading ? (
           <Text variant="muted">{loadingText}</Text>
         ) : (

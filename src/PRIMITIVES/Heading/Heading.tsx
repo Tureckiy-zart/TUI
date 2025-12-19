@@ -3,7 +3,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
 /**
@@ -139,20 +138,19 @@ const headingVariants = cva("font-display text-foreground", {
 });
 
 export interface HeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement>, VariantProps<typeof headingVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style">,
+    VariantProps<typeof headingVariants> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, level = 1, weight, muted, as, children, ...props }, ref) => {
+  ({ level = 1, weight, muted, as, children, ...props }, ref) => {
     const Component = (as || `h${level}`) as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
+    // className and style are forbidden from public API - only CVA output is used
     return (
-      <Component
-        ref={ref}
-        className={cn(headingVariants({ level, weight, muted }), className)}
-        {...props}
-      >
+      <Component ref={ref} className={headingVariants({ level, weight, muted })} {...props}>
         {children}
       </Component>
     );

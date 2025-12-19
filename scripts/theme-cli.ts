@@ -6,8 +6,8 @@
  * Usage: pnpm ui theme:create <name>
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join, dirname } from "path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -253,13 +253,21 @@ function main() {
   const command = args[0];
 
   if (command !== "create") {
-    console.error("❌ Unknown command. Usage: pnpm ui theme:create <name>");
+    console.error("❌ Unknown command. Usage: pnpm run theme:create <name>");
+    console.error("   Example: pnpm run theme:create my-theme");
     process.exit(1);
   }
 
   const themeName = args[1];
   if (!themeName) {
-    console.error("❌ Theme name is required. Usage: pnpm ui theme:create <name>");
+    console.error("❌ Theme name is required.");
+    console.error("");
+    console.error("Usage: pnpm run theme:create <name>");
+    console.error("");
+    console.error("Examples:");
+    console.error("  pnpm run theme:create ocean");
+    console.error("  pnpm run theme:create dark-blue");
+    console.error('  pnpm run theme:create "My Custom Theme"');
     process.exit(1);
   }
 
@@ -321,8 +329,9 @@ function main() {
   console.log(`\n✨ Theme "${displayName}" created successfully!`);
   console.log(`\n📝 Next steps:`);
   console.log(`   1. Edit ${themeFile} to customize your theme`);
-  console.log(`   2. Run 'npm run typecheck' to validate TypeScript`);
-  console.log(`   3. Use the theme in your app with ThemeProvider\n`);
+  console.log(`   2. Run 'pnpm run typecheck' to validate TypeScript`);
+  console.log(`   3. Run 'pnpm run theme:validate' to validate the theme`);
+  console.log(`   4. Use the theme in your app with ThemeProvider\n`);
 }
 
 // Run CLI

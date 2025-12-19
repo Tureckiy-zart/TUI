@@ -65,6 +65,7 @@ export const themes = {
   default: () => import("./default").then((m) => m.defaultTheme),
   dark: () => import("./dark").then((m) => m.darkTheme),
   brand: () => import("./brand").then((m) => m.brandTheme),
+  "--help": () => import("./--help").then((m) => m.helpTheme),
 } as const;
 
 /**

@@ -116,6 +116,7 @@ Before completing the task, the AI MUST verify:
 - Token rules are fully applied
 - No scope leakage occurred
 - No forbidden patterns were introduced
+- **For Foundation components:** Foundation Enforcement compliance verified (className/style excluded from public API, ESLint rules pass, type-tests pass)
 
 If verification fails, the AI MUST FIX or REFUSE.
 

@@ -30,7 +30,6 @@ import { checkboxVariants } from "./checkbox-variants";
 const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
   (
     {
-      className,
       variant,
       size,
       state,
@@ -114,10 +113,8 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     );
 
     // Compute checkbox classes
-    const checkboxClasses = cn(
-      checkboxVariants({ variant, size, state: effectiveState }),
-      className,
-    );
+    // className and style are forbidden from public API - only CVA output is used
+    const checkboxClasses = checkboxVariants({ variant, size, state: effectiveState });
 
     // Get icon size based on checkbox size
     const iconSize = size ? CHECKBOX_TOKENS.icon.size[size] : CHECKBOX_TOKENS.icon.size.md;

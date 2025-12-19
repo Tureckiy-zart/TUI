@@ -15,7 +15,10 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
-export interface NotificationCenterTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface NotificationCenterTriggerProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "style"
+> {
   /**
    * Callback when trigger is clicked
    */
@@ -33,7 +36,7 @@ export interface NotificationCenterTriggerProps extends React.ButtonHTMLAttribut
 export const NotificationCenterTrigger = React.forwardRef<
   HTMLButtonElement,
   NotificationCenterTriggerProps
->(({ onClick, showBadge = true, className, ...props }, ref) => {
+>(({ onClick, showBadge = true, ...props }, ref) => {
   const { getUnreadCount } = useNotificationCenterContext();
   const unreadCount = getUnreadCount();
 
@@ -44,20 +47,21 @@ export const NotificationCenterTrigger = React.forwardRef<
       size="icon"
       onClick={onClick}
       aria-label={`Open notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
-      className={cn("relative", className)}
       {...props}
     >
-      <Bell className="h-5 w-5" />
-      {showBadge && unreadCount > 0 && (
-        <span
-          className={cn(
-            "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-semibold text-destructive-foreground",
-          )}
-          aria-hidden="true"
-        >
-          {unreadCount > 99 ? "99+" : unreadCount}
-        </span>
-      )}
+      <span className="relative">
+        <Bell className="h-5 w-5" />
+        {showBadge && unreadCount > 0 && (
+          <span
+            className={cn(
+              "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-semibold text-destructive-foreground",
+            )}
+            aria-hidden="true"
+          >
+            {unreadCount > 99 ? "99+" : unreadCount}
+          </span>
+        )}
+      </span>
     </Button>
   );
 });

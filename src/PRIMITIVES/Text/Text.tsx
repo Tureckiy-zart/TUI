@@ -3,7 +3,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
 const textVariants = cva("text-foreground", {
@@ -47,7 +46,9 @@ const textVariants = cva("text-foreground", {
 });
 
 export interface TextProps
-  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof textVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLSpanElement>, "className" | "style">,
+    VariantProps<typeof textVariants> {
   /**
    * @deprecated Use muted prop or semantic text colors instead
    */
@@ -63,14 +64,15 @@ export interface TextProps
 }
 
 const Text = React.forwardRef<HTMLSpanElement, TextProps>(
-  ({ className, size, weight, muted, variant, ...props }, ref) => {
+  ({ size, weight, muted, variant, ...props }, ref) => {
     // Handle deprecated variant prop
     const isMuted = muted !== undefined ? muted : variant === "muted";
 
+    // className and style are forbidden from public API - only CVA output is used
     return (
       <span
         ref={ref}
-        className={cn(textVariants({ size, weight, muted: isMuted, variant }), className)}
+        className={textVariants({ size, weight, muted: isMuted, variant })}
         {...props}
       />
     );

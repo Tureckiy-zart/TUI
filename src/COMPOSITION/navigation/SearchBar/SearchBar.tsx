@@ -119,16 +119,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       />
       {isFocused && filteredSuggestions.length > 0 && (
         <div className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-popover shadow-lg">
-          {filteredSuggestions.map((suggestion, index) => (
+          {filteredSuggestions.map((suggestion) => (
             <Button
               key={suggestion}
               type="button"
               variant="ghost"
               onClick={() => handleSuggestionClick(suggestion)}
-              className={cn(
-                "w-full justify-start px-md py-sm text-sm",
-                index === selectedIndex && "bg-accent text-accent-foreground",
-              )}
             >
               {suggestion}
             </Button>

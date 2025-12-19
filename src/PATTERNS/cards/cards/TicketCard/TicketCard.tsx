@@ -24,19 +24,46 @@ import {
   ticketCardAvailabilityVariants,
   ticketCardBadgeSurfaceVariants,
   ticketCardBadgeVariants,
-  ticketCardCapacityVariants,
   ticketCardDateVariants,
-  ticketCardDescriptionVariants,
   ticketCardFooterVariants,
   ticketCardImageOverlayVariants,
   ticketCardImageTransformVariants,
   ticketCardPriceCapacityContainerVariants,
-  ticketCardPriceVariants,
   ticketCardPurchaseButtonIconVariants,
   ticketCardPurchaseButtonVariants,
-  ticketCardTitleVariants,
   ticketCardVariants,
 } from "./TicketCard.variants";
+
+/**
+ * Helper component to apply custom variant classes to Link
+ * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
+ */
+const LinkWithCustomVariant = React.forwardRef<
+  HTMLAnchorElement,
+  React.ComponentProps<typeof Link> & { customClassName: string }
+>(({ customClassName, ...linkProps }, ref) => {
+  const anchorRef = React.useRef<HTMLAnchorElement>(null);
+  const mergedRef = React.useCallback(
+    (node: HTMLAnchorElement | null) => {
+      anchorRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref && "current" in ref) {
+        (ref as { current: HTMLAnchorElement | null }).current = node;
+      }
+      if (node && customClassName) {
+        // Merge custom classes with Link's internal classes
+        const existingClasses = node.className.split(" ").filter(Boolean);
+        const customClasses = customClassName.split(" ").filter(Boolean);
+        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
+      }
+    },
+    [ref, customClassName],
+  );
+
+  return <Link {...linkProps} ref={mergedRef} />;
+});
+LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
 
 /**
  * TicketCard Component
@@ -210,7 +237,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading level={3} className={ticketCardTitleVariants({ size })}>
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -229,7 +256,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" variant="muted" className={ticketCardDescriptionVariants({ size })}>
+              <Text size="sm" variant="muted">
                 {description}
               </Text>
             )}
@@ -238,20 +265,12 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
             {(price || capacity) && (
               <div className={ticketCardPriceCapacityContainerVariants({ size })}>
                 {price && (
-                  <Text
-                    size={size === "compact" ? "md" : "lg"}
-                    weight="bold"
-                    className={ticketCardPriceVariants({ size })}
-                  >
+                  <Text size={size === "compact" ? "md" : "lg"} weight="bold">
                     {price}
                   </Text>
                 )}
                 {capacity && (
-                  <Text
-                    size={size === "compact" ? "xs" : "sm"}
-                    variant="muted"
-                    className={ticketCardCapacityVariants({ size })}
-                  >
+                  <Text size={size === "compact" ? "xs" : "sm"} variant="muted">
                     {capacity}
                   </Text>
                 )}
@@ -272,18 +291,15 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
           <CardBaseFooterWrapper size={size}>
             <div className={cn("w-full", ticketCardFooterVariants({ size }))}>
               {purchaseUrl && !isPurchaseDisabled && (
-                <Link
+                <LinkWithCustomVariant
                   href={purchaseUrl}
-                  className={cn(
-                    "w-full",
-                    ticketCardPurchaseButtonVariants({ size, disabled: false }),
-                  )}
                   target="_blank"
                   rel="noopener noreferrer"
+                  customClassName={ticketCardPurchaseButtonVariants({ size, disabled: false })}
                 >
                   {purchaseLabel}
                   <IconArrowRight className={ticketCardPurchaseButtonIconVariants({ size })} />
-                </Link>
+                </LinkWithCustomVariant>
               )}
               {(!purchaseUrl || isPurchaseDisabled) && (
                 <div

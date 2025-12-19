@@ -7,7 +7,6 @@ import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import { IconArrowRight, IconCalendar, IconLocation } from "@/icons";
 import {
   CardBase,
@@ -33,6 +32,37 @@ import {
   eventCardTicketButtonVariants,
   eventCardVariants,
 } from "./EventCard.variants";
+
+/**
+ * Helper component to apply custom variant classes to Link
+ * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
+ */
+const LinkWithCustomVariant = React.forwardRef<
+  HTMLAnchorElement,
+  React.ComponentProps<typeof Link> & { customClassName: string }
+>(({ customClassName, ...linkProps }, ref) => {
+  const anchorRef = React.useRef<HTMLAnchorElement>(null);
+  const mergedRef = React.useCallback(
+    (node: HTMLAnchorElement | null) => {
+      anchorRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref && "current" in ref) {
+        (ref as { current: HTMLAnchorElement | null }).current = node;
+      }
+      if (node && customClassName) {
+        // Merge custom classes with Link's internal classes
+        const existingClasses = node.className.split(" ").filter(Boolean);
+        const customClasses = customClassName.split(" ").filter(Boolean);
+        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
+      }
+    },
+    [ref, customClassName],
+  );
+
+  return <Link {...linkProps} ref={mergedRef} />;
+});
+LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
 
 /**
  * EventCard Component
@@ -155,16 +185,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading
-              level={3}
-              className={cn(
-                "line-clamp-2 group-hover:text-primary",
-                DOMAIN_TOKENS.motion.hover.transition,
-                TEXT_TOKENS.fontSize.lg,
-                TEXT_TOKENS.fontWeight.bold,
-                DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-              )}
-            >
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -176,16 +197,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
 
             {/* Description */}
             {description && (
-              <Text
-                size="sm"
-                muted
-                className={cn(
-                  "line-clamp-2",
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="sm" muted>
                 {description}
               </Text>
             )}
@@ -209,7 +221,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
                   />
-                  <Text size="xs" muted className="line-clamp-1">
+                  <Text size="xs" muted>
                     <address>{venueName}</address>
                   </Text>
                 </div>
@@ -221,18 +233,18 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           <CardBaseFooterWrapper size={size}>
             <div className={cn("w-full", eventCardFooterVariants({ size }))}>
               {ticketUrl && (
-                <Link
+                <LinkWithCustomVariant
                   href={ticketUrl}
-                  className={cn("w-full", eventCardTicketButtonVariants({ size }))}
                   target="_blank"
                   rel="noopener noreferrer"
+                  customClassName={eventCardTicketButtonVariants({ size })}
                 >
                   {getTicketsLabel}
                   <IconArrowRight
                     className={eventCardTicketButtonIconVariants({ size })}
                     aria-hidden={true}
                   />
-                </Link>
+                </LinkWithCustomVariant>
               )}
               {!ticketUrl && price && (
                 <div className="text-right">

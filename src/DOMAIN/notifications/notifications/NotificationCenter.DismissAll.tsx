@@ -13,7 +13,10 @@ import { Button } from "@/PRIMITIVES/Button";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
-export interface NotificationCenterDismissAllProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface NotificationCenterDismissAllProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "style"
+> {
   /**
    * Show confirmation before clearing
    */
@@ -31,7 +34,7 @@ export interface NotificationCenterDismissAllProps extends React.ButtonHTMLAttri
 export const NotificationCenterDismissAll = React.forwardRef<
   HTMLButtonElement,
   NotificationCenterDismissAllProps
->(({ confirm = false, confirmMessage = "Clear all notifications?", className, ...props }, ref) => {
+>(({ confirm = false, confirmMessage = "Clear all notifications?", ...props }, ref) => {
   const { clearAll, getAll } = useNotificationCenterContext();
   const notifications = getAll();
 
@@ -51,6 +54,7 @@ export const NotificationCenterDismissAll = React.forwardRef<
     return null;
   }
 
+  // className is forbidden on Foundation components - NotificationCenterDismissAll uses only token-driven props
   return (
     <Button
       ref={ref}
@@ -58,7 +62,6 @@ export const NotificationCenterDismissAll = React.forwardRef<
       size="sm"
       onClick={handleClick}
       aria-label="Clear all notifications"
-      className={className}
       {...props}
     >
       Clear all

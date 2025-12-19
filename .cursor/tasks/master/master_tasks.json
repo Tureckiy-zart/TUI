@@ -73,7 +73,7 @@
                   "title": "Migrate Radio",
                   "status": "done",
                   "progress": "100%",
-                  "completed_date": "2025-01-21",
+                  "completed_date": " ",
                   "comment": "Radio and RadioGroup components successfully migrated. New structure in src/components/radio/ with button role=\"radio\" pattern, 5 variants (primary, secondary, outline, ghost, destructive), 5 sizes (xs, sm, md, lg, xl), multiple states (default, checked, disabled, error), full keyboard navigation (Space to select, ArrowUp/ArrowDown for group navigation with roving tabindex), controlled/uncontrolled modes, RadioGroup context with horizontal/vertical orientation support, CSS variable-based styling using RADIO_TOKENS, comprehensive Storybook stories, and 53 passing tests covering all scenarios. All colors and styling use tokens exclusively.",
                   "details": "Implement radio group logic, CVA states, token colors, keyboard arrow movement, tests, remove legacy."
                 },
@@ -1474,7 +1474,7 @@
           ],
           "dependencies": [],
           "status": "completed",
-          "progress_notes": "✅ COMPLETED (2025-01-20): Public API rewritten with organized exports, missing types added (FilterOption, FilterState), duplicate exports removed (EventCardSkeletonUI, VenueCardSkeletonUI), comprehensive documentation created (docs/public-api.md). All exports organized into logical namespaces with comments. TypeScript compilation and build successful. See docs/public-api.md for complete API reference."
+          "progress_notes": "✅ COMPLETED ( ): Public API rewritten with organized exports, missing types added (FilterOption, FilterState), duplicate exports removed (EventCardSkeletonUI, VenueCardSkeletonUI), comprehensive documentation created (docs/public-api.md). All exports organized into logical namespaces with comments. TypeScript compilation and build successful. See docs/public-api.md for complete API reference."
         },
         {
           "id": "D2",
@@ -1499,7 +1499,7 @@
           ],
           "dependencies": ["D1"],
           "status": "completed",
-          "progress_notes": "✅ COMPLETED (2025-01-20): All domain coupling eliminated. EventCard, VenueCard, TrendingSection, and ArticlesSection refactored to use flat, domain-agnostic props. All multilingual patterns removed, MongoDB naming conventions removed. Legacy support maintained for backward compatibility. Comprehensive migration guide created. All types exported. TypeScript compilation successful. See docs/domain-decoupling-report.md for details."
+          "progress_notes": "✅ COMPLETED ( ): All domain coupling eliminated. EventCard, VenueCard, TrendingSection, and ArticlesSection refactored to use flat, domain-agnostic props. All multilingual patterns removed, MongoDB naming conventions removed. Legacy support maintained for backward compatibility. Comprehensive migration guide created. All types exported. TypeScript compilation successful. See docs/domain-decoupling-report.md for details."
         },
         {
           "id": "D3",

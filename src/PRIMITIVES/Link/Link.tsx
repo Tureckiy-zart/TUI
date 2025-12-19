@@ -1,10 +1,8 @@
 "use client";
 
-import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { cn } from "@/FOUNDATION/lib/utils";
 import { LINK_TOKENS } from "@/FOUNDATION/tokens/components/link";
 
 /**
@@ -34,7 +32,7 @@ export type LinkVariant = (typeof _LINK_VARIANTS)[number];
  *
  * @internal
  */
-const _LINK_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
+const _LINK_SIZES = ["sm", "md", "lg"] as const;
 
 /**
  * Link size type
@@ -56,11 +54,9 @@ const linkVariants = tokenCVA({
       destructive: `${LINK_TOKENS.variant.destructive.text} ${LINK_TOKENS.variant.destructive.hover} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.destructive.underline}`,
     } satisfies Record<LinkVariant, string>,
     size: {
-      xs: `${LINK_TOKENS.height.xs} ${LINK_TOKENS.fontSize.xs} ${LINK_TOKENS.padding.horizontal.xs} ${LINK_TOKENS.padding.vertical.xs}`,
       sm: `${LINK_TOKENS.height.sm} ${LINK_TOKENS.fontSize.sm} ${LINK_TOKENS.padding.horizontal.sm} ${LINK_TOKENS.padding.vertical.xs}`,
       md: `${LINK_TOKENS.height.md} ${LINK_TOKENS.fontSize.md} ${LINK_TOKENS.padding.horizontal.md} ${LINK_TOKENS.padding.vertical.sm}`,
       lg: `${LINK_TOKENS.height.lg} ${LINK_TOKENS.fontSize.lg} ${LINK_TOKENS.padding.horizontal.lg} ${LINK_TOKENS.padding.vertical.sm}`,
-      xl: `${LINK_TOKENS.height.xl} ${LINK_TOKENS.fontSize.xl} ${LINK_TOKENS.padding.horizontal.xl} ${LINK_TOKENS.padding.vertical.md}`,
     } satisfies Record<LinkSize, string>,
   },
   defaultVariants: {
@@ -69,7 +65,10 @@ const linkVariants = tokenCVA({
   },
 });
 
-export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "className" | "style"
+> {
   /**
    * Link variant style
    * @default "link"
@@ -80,10 +79,6 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
    * @default "md"
    */
   size?: LinkSize;
-  /**
-   * Render as child component using Radix Slot
-   */
-  asChild?: boolean;
   /**
    * Icon to display on the left side
    */
@@ -102,24 +97,9 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
-    {
-      className,
-      variant,
-      size,
-      asChild = false,
-      leftIcon,
-      rightIcon,
-      children,
-      disabled,
-      onClick,
-      href,
-      tabIndex,
-      ...props
-    },
+    { variant, size, leftIcon, rightIcon, children, disabled, onClick, href, tabIndex, ...props },
     ref,
   ) => {
-    const Comp = asChild ? Slot : "a";
-
     // Handle disabled state with proper accessibility semantics
     const handleClick = React.useCallback(
       (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -133,46 +113,26 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       [disabled, onClick],
     );
 
-    // When asChild is true, Slot requires exactly one child element
-    // If we have icons, we need to wrap everything in a single element
-    const renderContent = () => {
-      if (asChild) {
-        // When asChild is true, Slot requires a single child
-        if (leftIcon || rightIcon) {
-          // If we have icons, wrap everything in a span
-          return (
-            <span>
-              {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
-              {children}
-              {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
-            </span>
-          );
-        }
-        // No icons, pass children directly (should be a single element)
-        return children;
-      }
-      // When asChild is false, we can render multiple children
-      return (
-        <>
-          {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
-          {children}
-          {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
-        </>
-      );
-    };
+    // className and style are forbidden from public API - only CVA output is used
+    const finalClassName = linkVariants({ variant, size });
+    const finalTabIndex = disabled ? (tabIndex ?? -1) : tabIndex;
+    const finalAriaDisabled = disabled ? true : undefined;
 
+    // Link always renders a semantic <a> element
     return (
-      <Comp
-        className={cn(linkVariants({ variant, size, className }))}
+      <a
+        className={finalClassName}
         ref={ref}
         href={href}
-        tabIndex={disabled ? (tabIndex ?? -1) : tabIndex}
-        aria-disabled={disabled ? true : undefined}
+        tabIndex={finalTabIndex}
+        aria-disabled={finalAriaDisabled}
         onClick={handleClick}
         {...props}
       >
-        {renderContent()}
-      </Comp>
+        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+      </a>
     );
   },
 );

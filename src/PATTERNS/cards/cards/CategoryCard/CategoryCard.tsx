@@ -8,7 +8,6 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import {
   CardBase,
   CardBaseContentWrapper,
@@ -130,17 +129,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
           {/* Content Section */}
           <CardBaseContentWrapper size={size}>
             {/* Title */}
-            <Heading
-              level={3}
-              className={cn(
-                DOMAIN_TOKENS.text.lineClamp.two,
-                MOTION_TOKENS.transition.colors,
-                DOMAIN_TOKENS.text.hover.primary,
-                TEXT_TOKENS.fontSize.lg,
-                TEXT_TOKENS.fontWeight.bold,
-                DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-              )}
-            >
+            <Heading level={3}>
               {href ? (
                 <Link href={href} variant="ghost">
                   {title}
@@ -152,16 +141,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
 
             {/* Description */}
             {description && (
-              <Text
-                size="sm"
-                variant="muted"
-                className={cn(
-                  DOMAIN_TOKENS.text.lineClamp.two,
-                  size === "compact"
-                    ? DOMAIN_TOKENS.spacing.section.titleToSubtitle
-                    : DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-                )}
-              >
+              <Text size="sm" variant="muted">
                 {description}
               </Text>
             )}

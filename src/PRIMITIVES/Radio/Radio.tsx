@@ -32,7 +32,6 @@ import { RadioGroupContext } from "./RadioGroup";
 const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
   (
     {
-      className,
       variant,
       size,
       state,
@@ -210,10 +209,8 @@ const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
     );
 
     // Compute radio classes
-    const radioClasses = cn(
-      radioVariants({ variant, size: effectiveSize, state: effectiveState }),
-      className,
-    );
+    // className and style are forbidden from public API - only CVA output is used
+    const radioClasses = radioVariants({ variant, size: effectiveSize, state: effectiveState });
 
     // Get dot size based on radio size
     const dotSize = RADIO_TOKENS.dot.size[effectiveSize];

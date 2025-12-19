@@ -622,6 +622,7 @@ The State Authority Contract is **LOCKED** and **IMMUTABLE**. Any modifications 
 
 - [STATE_AUTHORITY_MATRIX.md](./STATE_AUTHORITY_MATRIX.md) - Defines WHAT states exist and HOW they relate
 - [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md) - Defines WHEN states can activate
+- [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Defines interactive size scale (for interactive components)
 - [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock status
 
 ---

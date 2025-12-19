@@ -28,7 +28,6 @@ import { inputVariants } from "./input-variants";
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      className,
       type = "text",
       variant,
       size,
@@ -65,12 +64,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const baseSize = getBaseValue(size);
 
     // Compute input classes
+    // className and style are forbidden from public API - only CVA output is used
     const inputClasses = cn(
       inputVariants({ variant: baseVariant, size: baseSize, state, fullWidth }),
       // Add padding for icons if present
       iconLeft && INPUT_TOKENS.icon.paddingLeft,
       iconRight && INPUT_TOKENS.icon.paddingRight,
-      className,
     );
 
     // If icons are present, wrap in container

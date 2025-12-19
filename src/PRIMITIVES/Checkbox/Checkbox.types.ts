@@ -13,7 +13,10 @@ import { checkboxVariants } from "./checkbox-variants";
  */
 export interface CheckboxProps
   extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
+    Omit<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      "size" | "onChange" | "className" | "style"
+    >,
     VariantProps<typeof checkboxVariants> {
   /**
    * Checkbox variant style

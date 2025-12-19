@@ -63,8 +63,16 @@ export const CTASection: React.FC<CTASectionProps> = ({
     const size = "lg" as const;
 
     if (action.href) {
+      // Canonical pattern: button-like links use Link with variant and size directly
+      // Button variants (primary, secondary, accent, outline, ghost, destructive) map to Link variants
       return (
-        <Link href={action.href} variant={variant} size={size}>
+        <Link
+          href={action.href}
+          variant={
+            variant as "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
+          }
+          size={size}
+        >
           {action.label}
         </Link>
       );
@@ -92,21 +100,9 @@ export const CTASection: React.FC<CTASectionProps> = ({
         >
           {/* Content Area */}
           <div className={cn("space-y-md", isCentered && "flex flex-col items-center")}>
-            <Heading
-              level={2}
-              className={cn(
-                "font-bold tracking-tight",
-                isCentered ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
-              )}
-            >
-              {headline}
-            </Heading>
+            <Heading level={2}>{headline}</Heading>
             {description && (
-              <Text
-                size={isCentered ? "lg" : "md"}
-                variant="muted"
-                className={cn(isCentered ? "max-w-2xl" : "max-w-none")}
-              >
+              <Text size={isCentered ? "lg" : "md"} variant="muted">
                 {description}
               </Text>
             )}

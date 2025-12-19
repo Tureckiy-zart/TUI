@@ -63,13 +63,9 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
       <div className="container mx-auto px-lg">
         {(title || description) && (
           <header className="mb-xl text-center">
-            {title && (
-              <Heading level={2} className="mb-md">
-                {title}
-              </Heading>
-            )}
+            {title && <Heading level={2}>{title}</Heading>}
             {description && (
-              <Text size="lg" variant="muted" className="mx-auto max-w-2xl">
+              <Text size="lg" variant="muted">
                 {description}
               </Text>
             )}
@@ -87,14 +83,10 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
                   </div>
 
                   {/* Title */}
-                  <Heading level={3} className="text-xl font-semibold">
-                    {feature.title}
-                  </Heading>
+                  <Heading level={3}>{feature.title}</Heading>
 
                   {/* Description */}
-                  <Text variant="muted" className="leading-relaxed">
-                    {feature.description}
-                  </Text>
+                  <Text variant="muted">{feature.description}</Text>
                 </div>
               </CardBody>
             </Card>

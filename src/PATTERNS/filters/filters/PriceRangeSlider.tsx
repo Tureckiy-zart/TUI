@@ -144,9 +144,7 @@ export function PriceRangeSlider({
         <Label>{priceRangeLabel}</Label>
         <div className="flex items-center space-x-sm">
           <div className="flex-1">
-            <Label htmlFor={minPriceId} className="text-xs text-muted-foreground">
-              {minLabel}
-            </Label>
+            <Label htmlFor={minPriceId}>{minLabel}</Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
                 {currency}
@@ -161,14 +159,11 @@ export function PriceRangeSlider({
                 min={min}
                 max={max}
                 step={step}
-                className="pl-8"
               />
             </div>
           </div>
           <div className="flex-1">
-            <Label htmlFor={maxPriceId} className="text-xs text-muted-foreground">
-              {maxLabel}
-            </Label>
+            <Label htmlFor={maxPriceId}>{maxLabel}</Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
                 {currency}
@@ -183,7 +178,6 @@ export function PriceRangeSlider({
                 min={min}
                 max={max}
                 step={step}
-                className="pl-8"
               />
             </div>
           </div>

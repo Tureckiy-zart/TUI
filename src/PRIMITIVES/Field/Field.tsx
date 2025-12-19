@@ -30,11 +30,10 @@ Field.displayName = "Field";
  */
 export interface FieldLabelProps extends React.ComponentProps<typeof Label> {}
 
-const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
-  ({ className, ...props }, ref) => {
-    return <Label ref={ref} className={className} {...props} />;
-  },
-);
+const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>((props, ref) => {
+  // className is forbidden on Foundation components - FieldLabel passes props directly to Label
+  return <Label ref={ref} {...props} />;
+});
 FieldLabel.displayName = "FieldLabel";
 
 /**
@@ -60,11 +59,10 @@ FieldControl.displayName = "FieldControl";
  */
 export interface FieldDescriptionProps extends React.ComponentProps<typeof Text> {}
 
-const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>(
-  ({ className, ...props }, ref) => {
-    return <Text ref={ref} size="sm" muted className={cn(className)} {...props} />;
-  },
-);
+const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>((props, ref) => {
+  // className is forbidden on Foundation components - FieldDescription uses only token-driven props
+  return <Text ref={ref} size="sm" muted {...props} />;
+});
 FieldDescription.displayName = "FieldDescription";
 
 /**
@@ -73,11 +71,12 @@ FieldDescription.displayName = "FieldDescription";
  */
 export interface FieldErrorProps extends React.ComponentProps<typeof Text> {}
 
-const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
-  ({ className, ...props }, ref) => {
-    return <Text ref={ref} size="sm" className={cn("text-destructive", className)} {...props} />;
-  },
-);
+const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>((props, ref) => {
+  // className is forbidden on Foundation components
+  // FieldError uses deprecated variant="destructive" for error styling (token-driven)
+  // This uses the deprecated variant prop which is still available for backward compatibility
+  return <Text ref={ref} size="sm" variant="destructive" {...props} />;
+});
 FieldError.displayName = "FieldError";
 
 // Compose Field API

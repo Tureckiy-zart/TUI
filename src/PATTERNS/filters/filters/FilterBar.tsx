@@ -210,7 +210,7 @@ export function FilterBar({
               <Filter className="h-3 w-3" />
               {getFilterSummary().length} {filtersLabel}
             </Badge>
-            <Button variant="outline" size="sm" onClick={clearAllFilters} className="gap-xs">
+            <Button variant="outline" size="sm" onClick={clearAllFilters}>
               <X className="h-3 w-3" />
               {clearAllLabel}
             </Button>
