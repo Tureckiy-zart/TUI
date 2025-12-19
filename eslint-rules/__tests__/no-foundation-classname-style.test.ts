@@ -7,21 +7,23 @@
  * Test cases are minimal and cover only canonical scenarios from the scope matrix.
  */
 
-import { describe } from "vitest";
 import { RuleTester } from "@typescript-eslint/utils/ts-eslint";
+import tseslint from "typescript-eslint";
+import { describe } from "vitest";
 import { noFoundationClassnameStyle } from "../no-foundation-classname-style";
 
 describe("no-foundation-classname-style", () => {
+  // RuleTester types don't fully support flat config format yet
+
   const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      ecmaFeatures: {
-        jsx: true,
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
       },
     },
-  });
+  } as any);
 
   ruleTester.run("no-foundation-classname-style", noFoundationClassnameStyle, {
     valid: [
