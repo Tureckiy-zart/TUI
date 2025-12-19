@@ -143,10 +143,10 @@
           "reason": "Foundation component contract and Foundation Enforcement (FINAL/APPLIED)"
         },
         {
-          "source": "docs/architecture/TYPOGRAPHY_AUTHORITY.md",
-          "target": "_to_GPT_project_essential/18_TYPOGRAPHY_AUTHORITY.md",
-          "priority": "HIGH",
-          "reason": "Typography rules (LOCKED)"
+          "source": "docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md",
+          "target": "_to_GPT_project_essential/18_FOUNDATION_STEP_PIPELINE.md",
+          "priority": "CRITICAL",
+          "reason": "Foundation component lifecycle pipeline (13-step process for Foundation components)"
         }
       ]
     },
@@ -206,14 +206,16 @@
           "Typing standards (TYPING_STANDARD.md)"
         ],
         "should_include": [
-          "Token Authority examples (SPACING_AUTHORITY.md, TYPOGRAPHY_AUTHORITY.md)",
+          "Token Authority examples (SPACING_AUTHORITY.md)",
           "Layout Authority (LAYOUT_AUTHORITY.md)",
-          "Architecture rules (ARCHITECTURE_RULES.md)"
+          "Architecture rules (ARCHITECTURE_RULES.md)",
+          "Foundation lifecycle process (FOUNDATION_STEP_PIPELINE.md)"
         ],
         "coverage_areas": [
           "Architecture (Foundation + Extension)",
           "Authority Contracts (core contracts)",
           "Foundation Status (lock, contract, enforcement)",
+          "Foundation Lifecycle (step pipeline process)",
           "Extension Rules (boundaries, state)",
           "State System (WHAT/WHEN/HOW layers)",
           "Current State (progress, orientation)",

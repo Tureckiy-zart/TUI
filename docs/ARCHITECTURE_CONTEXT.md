@@ -964,7 +964,7 @@ The typing system consists of two documents with explicit priority ordering:
 1. **Check Component Needs:** Review [Component Needs Inventory](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) to ensure the component is needed
 2. **Identify Use Case:** Determine if the component is domain-specific or a general pattern
 3. **Check Foundation:** Verify that no Foundation component already provides this functionality
-4. **Use Template Generator:** Run `tsx scripts/generate-extension-component.ts <ComponentName> --category <category>` to generate scaffold
+4. **Use Template Generator:** Run `pnpm run component:generate -- <ComponentName> [--category <category>]` to generate scaffold
 5. **Compose Foundation:** If the component is modal-like, tab-like, select-like, etc., compose the appropriate Foundation component internally
 6. **Choose Name:** Use descriptive, intent-based naming (not Foundation component names)
 7. **Choose Location:** Place in appropriate Extension folder (not Foundation folder)
@@ -974,7 +974,7 @@ The typing system consists of two documents with explicit priority ordering:
 11. **Export:** Add to public exports (if appropriate for public API)
 
 **Tools and Resources:**
-- **Component Generator:** `scripts/generate-extension-component.ts` - Generates component scaffold with templates
+- **Component Generator:** `scripts/generate-extension-component.ts` - CLI tool to generate component scaffold. Use: `pnpm run component:generate -- <ComponentName> [--category <category>]`
 - **Component Analysis:** `scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
 - **Feedback Collection:** `scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
 - **Templates:** `templates/extension-component.*.template` - Component template files

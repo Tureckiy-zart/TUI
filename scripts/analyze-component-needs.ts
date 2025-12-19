@@ -349,16 +349,51 @@ async function main() {
   const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : undefined;
   const format = (formatIndex >= 0 ? args[formatIndex + 1] : "json") as "json" | "markdown";
 
+  console.log("=".repeat(70));
+  console.log("🔍 COMPONENT NEEDS ANALYSIS");
+  console.log("=".repeat(70));
+  console.log("\n📋 Назначение:");
+  console.log("   Анализирует кодовую базу для выявления потенциальных");
+  console.log("   потребностей в Extension компонентах:");
+  console.log("   - Сканирует повторяющиеся JSX паттерны");
+  console.log("   - Идентифицирует кастомные реализации компонентов");
+  console.log("   - Генерирует отчет о потенциальных кандидатах на Extension");
+  console.log("   - Учитывает границы Foundation (не дублирует Foundation)\n");
+
   try {
+    console.log("🔍 Сканирование кодовой базы...");
     const result = await analyzeComponentNeeds();
+
+    console.log(`\n📁 Файлов просканировано: ${result.totalFilesScanned}`);
+    console.log(`📊 Найдено паттернов: ${result.summary.totalPatterns}`);
+    console.log(`🔢 Высокая частота (≥5): ${result.summary.highFrequency}`);
+    console.log(`💡 Потенциальных Extension (≥3): ${result.summary.potentialExtensions}\n`);
+
+    console.log("📝 Сохранение результатов...");
     outputResults(result, format, outputPath);
 
-    console.log("\n📊 Analysis Summary:");
-    console.log(`   Total patterns: ${result.summary.totalPatterns}`);
-    console.log(`   High frequency: ${result.summary.highFrequency}`);
-    console.log(`   Potential extensions: ${result.summary.potentialExtensions}`);
+    console.log("\n" + "=".repeat(70));
+    console.log("📊 ИТОГОВЫЕ РЕЗУЛЬТАТЫ:");
+    console.log("=".repeat(70));
+    console.log(`\n📁 Файлов проанализировано: ${result.totalFilesScanned}`);
+    console.log(`📊 Всего паттернов найдено: ${result.summary.totalPatterns}`);
+    console.log(`🔢 Паттернов с высокой частотой (≥5): ${result.summary.highFrequency}`);
+    console.log(
+      `💡 Потенциальных Extension компонентов (≥3, не-Foundation): ${result.summary.potentialExtensions}\n`,
+    );
+
+    if (result.summary.potentialExtensions > 0) {
+      console.log("💡 Рекомендации:");
+      console.log("   Рассмотрите создание Extension компонентов для паттернов");
+      console.log("   с частотой ≥3, которые не используют Foundation композицию.\n");
+    }
+
+    console.log("=".repeat(70));
   } catch (error) {
-    console.error("❌ Analysis failed:", error);
+    console.log("\n" + "=".repeat(70));
+    console.log("❌ ОШИБКА ПРИ АНАЛИЗЕ");
+    console.log("=".repeat(70));
+    console.error(`\n${error instanceof Error ? error.message : error}\n`);
     process.exit(1);
   }
 }

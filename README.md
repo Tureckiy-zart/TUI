@@ -125,10 +125,12 @@ export default function App() {
 
 ### Development Resources
 
-- **Component Creation**: [Extension Component Creation Checklist](docs/tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md)
+- **Component Creation**: [Extension Component Creation Checklist](docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md)
+  - **CLI Generator**: Use `pnpm run component:generate -- <ComponentName> [--category <category>]` to generate component scaffold
+  - See checklist for complete process and requirements
 - **Component Examples**: [Extension Component Examples](docs/reference/EXTENSION_COMPONENT_EXAMPLES.md)
-- **Component Needs**: [Component Needs Inventory](docs/tasks/COMPONENT_NEEDS_INVENTORY.md)
-- **Feedback Process**: [Usage Feedback Process](docs/tasks/USAGE_FEEDBACK_PROCESS.md)
+- **Component Needs**: [Component Needs Inventory](docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md)
+- **Feedback Process**: [Usage Feedback Process](docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md)
 
 ---
 

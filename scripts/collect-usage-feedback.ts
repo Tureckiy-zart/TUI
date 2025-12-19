@@ -18,7 +18,8 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
+import { fileURLToPath } from "url";
 
 interface FeedbackItem {
   id: string;
@@ -262,32 +263,75 @@ async function main() {
   const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : undefined;
   const format = (formatIndex >= 0 ? args[formatIndex + 1] : "json") as "json" | "markdown";
 
+  console.log("=".repeat(70));
+  console.log("📊 USAGE FEEDBACK COLLECTION");
+  console.log("=".repeat(70));
+  console.log("\n📋 Назначение:");
+  console.log("   Собирает и анализирует обратную связь об использовании:");
+  console.log("   - GitHub issues (запросы компонентов, обратная связь, проблемы)");
+  console.log("   - Анализ кодовой базы (паттерны использования компонентов)");
+  console.log("   - Генерирует отчет об использовании\n");
+
   try {
-    console.log("📊 Collecting usage feedback...");
+    console.log("🔍 Сбор обратной связи...\n");
 
     // Parse GitHub issues (placeholder for future API integration)
+    console.log("1️⃣  Парсинг GitHub issues...");
     const githubIssues = parseGitHubIssues();
+    console.log(
+      `   ${githubIssues.length > 0 ? "✓" : "⚠️"} Найдено issues: ${githubIssues.length}`,
+    );
 
     // Analyze usage patterns from codebase
+    console.log("\n2️⃣  Анализ паттернов использования из кодовой базы...");
     const usagePatterns = analyzeUsagePatterns();
+    console.log(`   ✓ Найдено паттернов: ${usagePatterns.length}`);
 
     // Generate report
+    console.log("\n3️⃣  Генерация отчета...");
     const report = generateReport(githubIssues, usagePatterns);
+    console.log(`   ✓ Отчет сгенерирован`);
 
     // Output results
+    console.log("\n4️⃣  Сохранение результатов...");
     outputResults(report, format, outputPath);
 
-    console.log("\n📊 Report Summary:");
-    console.log(`   Total feedback: ${report.summary.totalFeedback}`);
-    console.log(`   High priority: ${report.recommendations.highPriority.length}`);
-    console.log(`   Usage patterns: ${report.recommendations.patterns.length}`);
+    console.log("\n" + "=".repeat(70));
+    console.log("📊 ИТОГОВЫЕ РЕЗУЛЬТАТЫ:");
+    console.log("=".repeat(70));
+    console.log(`\n📋 Всего обратной связи: ${report.summary.totalFeedback}`);
+    console.log(`🔴 Высокий приоритет (P1): ${report.recommendations.highPriority.length}`);
+    console.log(`📊 Паттернов использования: ${report.recommendations.patterns.length}\n`);
+
+    if (report.summary.totalFeedback > 0) {
+      console.log("📈 Статистика по типам:");
+      for (const [type, count] of Object.entries(report.summary.byType)) {
+        console.log(`   • ${type}: ${count}`);
+      }
+      console.log("\n📈 Статистика по статусам:");
+      for (const [status, count] of Object.entries(report.summary.byStatus)) {
+        console.log(`   • ${status}: ${count}`);
+      }
+      if (Object.keys(report.summary.byPriority).length > 0) {
+        console.log("\n📈 Статистика по приоритетам:");
+        for (const [priority, count] of Object.entries(report.summary.byPriority)) {
+          console.log(`   • ${priority}: ${count}`);
+        }
+      }
+    }
+
+    console.log("\n" + "=".repeat(70));
   } catch (error) {
-    console.error("❌ Collection failed:", error);
+    console.log("\n" + "=".repeat(70));
+    console.log("❌ ОШИБКА ПРИ СБОРЕ ОБРАТНОЙ СВЯЗИ");
+    console.log("=".repeat(70));
+    console.error(`\n${error instanceof Error ? error.message : error}\n`);
     process.exit(1);
   }
 }
 
-if (require.main === module) {
+// Check if this is the main module (ES module equivalent of require.main === module)
+if (fileURLToPath(import.meta.url) === resolve(process.argv[1] || "")) {
   main();
 }
 

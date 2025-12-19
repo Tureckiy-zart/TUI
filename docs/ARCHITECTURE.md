@@ -188,7 +188,7 @@ The library includes a comprehensive system for controlled growth and component 
 
 ### Component Development Tools
 
-- **Component Generator**: `scripts/generate-extension-component.ts` - CLI tool to generate Extension component scaffold
+- **Component Generator**: `scripts/generate-extension-component.ts` - CLI tool to generate Extension component scaffold. Use: `pnpm run component:generate -- <ComponentName> [--category <category>]`
 - **Component Analysis**: `scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
 - **Feedback Collection**: `scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
 - **Templates**: `templates/extension-component.*.template` - Standardized component templates

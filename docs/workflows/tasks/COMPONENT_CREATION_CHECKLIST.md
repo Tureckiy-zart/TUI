@@ -59,6 +59,38 @@ This checklist ensures all Extension components comply with architectural rules,
   - [ ] NOT: `SimpleModal`, `BasicTabs`, `ModalV2`, etc.
   - [ ] Uses descriptive names: `ConfirmDialog`, `NotificationCenter`, etc.
 
+### Component Scaffold Generation
+
+- [ ] **Component scaffold generated using CLI tool**
+  - [ ] Ran `pnpm run component:generate -- <ComponentName> [--category <category>]`
+  - [ ] Verified component files created successfully:
+    - [ ] `{ComponentName}.tsx` - Main component file
+    - [ ] `{ComponentName}.stories.tsx` - Storybook stories
+    - [ ] `{ComponentName}.test.tsx` - Test file
+    - [ ] `{ComponentName}.index.ts` - Export file
+  - [ ] Verified component placed in correct directory:
+    - [ ] `src/COMPOSITION/{categoryDir}/{ComponentName}/`
+  - [ ] Reviewed generated scaffold structure
+  - [ ] Confirmed generated code follows project patterns
+
+**Note:** The scaffold generator (`scripts/generate-extension-component.ts`) automatically:
+- Validates component name (PascalCase, not Foundation duplicate)
+- Determines correct directory based on category
+- Creates all required files with proper structure
+- Includes TODO comments and compliance notes
+
+**Usage examples:**
+```bash
+# Default (composite category → overlays/)
+pnpm run component:generate -- ConfirmDialog
+
+# With category
+pnpm run component:generate -- HeroSection --category layout
+
+# With custom output path
+pnpm run component:generate -- CustomCard --category composite --output src/custom
+```
+
 ---
 
 ## Token Mapping (MANDATORY)
@@ -292,6 +324,7 @@ This checklist ensures all Extension components comply with architectural rules,
 - [Extension Canonical State](../../architecture/EXTENSION_STATE.md)
 - [Component Needs Inventory](./COMPONENT_NEEDS_INVENTORY.md)
 - [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md)
+- Component Generator Script: `scripts/generate-extension-component.ts` (see Component Scaffold Generation section above)
 
 ---
 

@@ -174,31 +174,41 @@ function verifyGuardRules() {
   // Guard Rules may be in multiple locations - check common patterns
   const guardRulesFiles = [
     join(ARCHITECTURE_DIR, "TUI_CURSOR_GUARD_RULES.md"),
-    join(ROOT_DIR, "rules", "block-and-scope-rules.mdc"),
-    join(ROOT_DIR, "rules", "component-lifecycle.mdc"),
+    join(ROOT_DIR, ".cursor", "rules", "block-and-scope-rules.mdc"),
+    join(ROOT_DIR, ".cursor", "rules", "component-lifecycle.mdc"),
+    join(ROOT_DIR, ".cursor", "rules", "COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc"),
+    join(ROOT_DIR, ".cursor", "rules", "user-rules.mdc"),
+    join(ROOT_DIR, "rules", "block-and-scope-rules.mdc"), // Fallback for old location
+    join(ROOT_DIR, "rules", "component-lifecycle.mdc"), // Fallback for old location
   ];
 
   let guardRulesFile = null;
   let content = null;
+  let foundFiles = [];
+
   for (const file of guardRulesFiles) {
     const fileContent = readFile(file);
     if (fileContent) {
-      guardRulesFile = file;
-      content = fileContent;
-      break;
+      foundFiles.push(file);
+      // Use the first found file as primary, but collect all for reference
+      if (!content) {
+        guardRulesFile = file;
+        content = fileContent;
+      }
     }
   }
 
   if (!content) {
     findings.issues.push({
       type: "warning",
-      message: "Guard Rules document not found in expected locations. Checking cursor rules...",
+      message: "Guard Rules document not found in expected locations.",
     });
     // Don't return - continue with other checks
     return findings;
   }
 
   findings.documentExists = true;
+  findings.foundFiles = foundFiles; // Store all found files for reference
 
   // Check for Authority Contract references
   const authorityPattern = /AUTHORITY.*CONTRACT|Authority Contract/gi;
@@ -643,31 +653,89 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
  * Main execution
  */
 function main() {
-  console.log("🔍 Starting Governance Review...\n");
+  console.log("=".repeat(70));
+  console.log("🔍 GOVERNANCE REVIEW");
+  console.log("=".repeat(70));
+  console.log("\n📋 Назначение:");
+  console.log("   Проводит комплексную проверку governance проекта:");
+  console.log("   - Сканирует ESLint правила и их соответствие");
+  console.log("   - Проверяет соответствие Guard Rules");
+  console.log("   - Верифицирует Authority Contract compliance");
+  console.log("   - Проверяет Lock документы");
+  console.log("   - Верифицирует конфигурацию ESLint\n");
 
   // Ensure output directories exist
   if (!existsSync(REVIEWS_DIR)) {
     mkdirSync(REVIEWS_DIR, { recursive: true });
+    console.log(`📁 Создана директория: ${REVIEWS_DIR}`);
   }
   if (!existsSync(OUTPUT_DIR)) {
     mkdirSync(OUTPUT_DIR, { recursive: true });
+    console.log(`📁 Создана директория: ${OUTPUT_DIR}`);
   }
 
   // Run all checks
-  console.log("📋 Scanning ESLint rules...");
+  console.log("=".repeat(70));
+  console.log("🔎 ВЫПОЛНЕНИЕ ПРОВЕРОК:");
+  console.log("=".repeat(70));
+
+  console.log("\n1️⃣  Сканирование ESLint правил...");
   const eslintFindings = scanESLintRules();
+  const activeRules = eslintFindings.rules.filter((r) => r.status === "active").length;
+  console.log(`   ✓ Активных правил: ${activeRules}/${EXPECTED_RULES.length}`);
+  console.log(
+    `   ${eslintFindings.issues.length > 0 ? "⚠️" : "✓"} Проблем: ${eslintFindings.issues.length}`,
+  );
 
-  console.log("🛡️ Verifying Guard Rules alignment...");
+  console.log("\n2️⃣  Проверка Guard Rules alignment...");
   const guardRulesFindings = verifyGuardRules();
+  console.log(
+    `   ${guardRulesFindings.documentExists ? "✓" : "❌"} Документ найден: ${guardRulesFindings.documentExists ? "Да" : "Нет"}`,
+  );
+  if (guardRulesFindings.documentExists && guardRulesFindings.foundFiles) {
+    console.log(`   📁 Найдено файлов: ${guardRulesFindings.foundFiles.length}`);
+    guardRulesFindings.foundFiles.forEach((file) => {
+      const relativePath = relative(ROOT_DIR, file);
+      console.log(`      • ${relativePath}`);
+    });
+  }
+  console.log(
+    `   ${guardRulesFindings.issues.length > 0 ? "⚠️" : "✓"} Проблем: ${guardRulesFindings.issues.length}`,
+  );
 
-  console.log("📜 Verifying Authority Contract compliance...");
+  console.log("\n3️⃣  Проверка Authority Contract compliance...");
   const authorityFindings = verifyAuthorityContracts();
+  console.log(
+    `   ${authorityFindings.authorityMapExists ? "✓" : "❌"} Authority Map найден: ${authorityFindings.authorityMapExists ? "Да" : "Нет"}`,
+  );
+  console.log(`   ✓ Найдено Authority: ${authorityFindings.authorities.length}`);
+  console.log(
+    `   ${authorityFindings.issues.length > 0 ? "⚠️" : "✓"} Проблем: ${authorityFindings.issues.length}`,
+  );
 
-  console.log("🔒 Verifying Lock document compliance...");
+  console.log("\n4️⃣  Проверка Lock документов...");
   const lockFindings = verifyLockDocuments();
+  console.log(
+    `   ${lockFindings.foundationLockExists ? "✓" : "❌"} Foundation Lock: ${lockFindings.foundationLockExists ? "Найден" : "Не найден"}`,
+  );
+  console.log(
+    `   ${lockFindings.architectureLockExists ? "✓" : "❌"} Architecture Lock: ${lockFindings.architectureLockExists ? "Найден" : "Не найден"}`,
+  );
+  console.log(
+    `   ${lockFindings.issues.length > 0 ? "⚠️" : "✓"} Проблем: ${lockFindings.issues.length}`,
+  );
 
-  console.log("⚙️ Verifying ESLint configuration...");
+  console.log("\n5️⃣  Проверка конфигурации ESLint...");
   const eslintConfigFindings = verifyESLintConfig();
+  console.log(
+    `   ${eslintConfigFindings.configExists ? "✓" : "❌"} Конфигурация найдена: ${eslintConfigFindings.configExists ? "Да" : "Нет"}`,
+  );
+  console.log(
+    `   ✓ Включено правил: ${eslintConfigFindings.rulesEnabled.length}/${EXPECTED_RULES.length}`,
+  );
+  console.log(
+    `   ${eslintConfigFindings.issues.length > 0 ? "⚠️" : "✓"} Проблем: ${eslintConfigFindings.issues.length}`,
+  );
 
   // Compile findings
   const findings = {
@@ -679,7 +747,9 @@ function main() {
   };
 
   // Generate report
-  console.log("📝 Generating report...");
+  console.log("\n" + "=".repeat(70));
+  console.log("📝 ГЕНЕРАЦИЯ ОТЧЕТА:");
+  console.log("=".repeat(70));
   const { report, score, hasCriticalIssues } = generateReport(findings);
 
   // Write report
@@ -691,16 +761,42 @@ function main() {
   const artifactPath = join(OUTPUT_DIR, `governance-review-${date}.md`);
   writeFileSync(artifactPath, report, "utf-8");
 
-  console.log(`\n✅ Governance Review Complete!\n`);
-  console.log(`📊 Governance Score: ${score}/10`);
-  console.log(`📄 Report saved to: ${relative(ROOT_DIR, reportPath)}`);
-  console.log(`📄 Artifact saved to: ${relative(ROOT_DIR, artifactPath)}\n`);
+  console.log(`\n✅ ОТЧЕТ СОЗДАН:`);
+  console.log(`   📄 ${relative(ROOT_DIR, reportPath)}`);
+  console.log(`   📄 ${relative(ROOT_DIR, artifactPath)}\n`);
+
+  console.log("=".repeat(70));
+  console.log("📊 ИТОГОВЫЕ РЕЗУЛЬТАТЫ:");
+  console.log("=".repeat(70));
+  console.log(`\n🎯 Governance Score: ${score}/10`);
+
+  const status =
+    score >= 9 ? "✅ Healthy" : score >= 7 ? "⚠️ Needs Attention" : "❌ Critical Issues";
+  console.log(`📊 Статус: ${status}\n`);
+
+  // Count issues
+  const totalErrors =
+    findings.eslint.issues.filter((i) => i.type === "error").length +
+    findings.guardRules.issues.filter((i) => i.type === "error").length +
+    findings.authority.issues.filter((i) => i.type === "error").length +
+    findings.locks.issues.filter((i) => i.type === "error").length;
+
+  const totalWarnings =
+    findings.eslint.issues.filter((i) => i.type === "warning").length +
+    findings.guardRules.issues.filter((i) => i.type === "warning").length +
+    findings.authority.issues.filter((i) => i.type === "warning").length +
+    findings.locks.issues.filter((i) => i.type === "warning").length;
+
+  console.log(`📋 Критических проблем: ${totalErrors}`);
+  console.log(`⚠️  Предупреждений: ${totalWarnings}\n`);
 
   if (hasCriticalIssues) {
-    console.log("❌ Critical issues found. Please review the report.");
+    console.log("❌ Обнаружены критические проблемы. Пожалуйста, проверьте отчет.");
+    console.log("=".repeat(70));
     process.exit(1);
   } else {
-    console.log("✅ No critical issues found.");
+    console.log("✅ Критических проблем не обнаружено.");
+    console.log("=".repeat(70));
     process.exit(0);
   }
 }
