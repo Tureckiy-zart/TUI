@@ -198,9 +198,7 @@ When integrating Grid component:
 
 ### Additional Resources
 
-- [Grid Component Documentation](./GRID.md) - Complete Grid component reference
 - [TOKENS_OVERVIEW.md](./TOKENS_OVERVIEW.md) - Complete design token system documentation
-- [Usage Guide](./USAGE.md) - General component usage guide
 
 ---
 
@@ -315,7 +313,7 @@ className = "bg-gradient-to-br from-primary/30 via-accent/30 to-secondary/30";
 
 1. **Use token colors only** - Always use design tokens (`primary`, `accent`, `secondary`, `surface-*`, `muted`)
 2. **No arbitrary colors** - Never use hex colors or arbitrary Tailwind colors
-3. **Document exceptions** - New gradients must be added to `docs/ui/GRADIENT_EXCEPTIONS.md`
+3. **Document exceptions** - New gradients must be added to `docs/reference/GRADIENT_EXCEPTIONS.md`
 4. **Maintain contrast** - Ensure text remains readable over gradients (WCAG AA)
 5. **Limit opacity** - Use opacity modifiers sparingly (`/20`, `/30`, `/50`, `/60`)
 
@@ -374,9 +372,8 @@ If you need to add a new gradient:
 
 ### Related Documentation
 
-- [Gradient Exceptions List](./ui/GRADIENT_EXCEPTIONS.md) - Complete whitelist of allowed gradients
+- [Gradient Exceptions List](./GRADIENT_EXCEPTIONS.md) - Complete whitelist of allowed gradients
 - [TOKENS_OVERVIEW.md](./TOKENS_OVERVIEW.md) - Complete design token system documentation
-- [Theme Guide](./THEME_GUIDE.md) - Theme customization
 
 ---
 

@@ -31,7 +31,7 @@ CI приведен в **canonical состояние** с осознанной 
 
 **Документация:**
 - `docs/architecture/CI_NODE_MATRIX_DECISION.md` — архитектурное решение
-- `docs/tasks/TUNG_CI_NODE_18_EOL_REMOVAL.md` — задача на удаление после EOL
+- `docs/workflows/tasks/TUNG_CI_NODE_18_EOL_REMOVAL.md` — задача на удаление после EOL
 
 ---
 
@@ -146,8 +146,8 @@ CI приведен в **canonical состояние** с осознанной 
 ## Связанные документы
 
 - `docs/architecture/CI_NODE_MATRIX_DECISION.md` — архитектурное решение по Node.js matrix
-- `docs/tasks/TUNG_CI_NODE_18_EOL_REMOVAL.md` — задача на удаление Node.js 18.x
-- `docs/CI-CD_OVERVIEW.md` — обзор CI/CD pipeline
+- `docs/workflows/tasks/TUNG_CI_NODE_18_EOL_REMOVAL.md` — задача на удаление Node.js 18.x
+- `docs/CI_CD_OVERVIEW.md` — обзор CI/CD pipeline
 - `.github/workflows/ci.yml` — основной CI workflow
 
 ---

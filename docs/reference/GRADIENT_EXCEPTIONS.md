@@ -25,7 +25,7 @@ import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 <div className={GRADIENT_TOKENS.text.brand} />
 ```
 
-**Reference:** See `docs/architecture/TOKEN_SYSTEM.md` for gradient token documentation.
+**Reference:** See `docs/architecture/TOKEN_AUTHORITY.md` for gradient token documentation.
 
 ---
 
@@ -214,7 +214,7 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 1. **Request approval** - New gradients must be approved by design team
 2. **Add to GRADIENT_TOKENS** - Add gradient to `src/FOUNDATION/tokens/gradients.ts`
-3. **Update documentation** - Update `docs/architecture/TOKEN_SYSTEM.md` if needed
+3. **Update documentation** - Update `docs/architecture/TOKEN_AUTHORITY.md` if needed
 4. **Update checker** - Update `scripts/check-ui-consistency.ts` to recognize new token pattern
 5. **Document rationale** - Explain why gradient is needed in token file comments
 6. **Test accessibility** - Verify contrast and readability
@@ -229,9 +229,8 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 ## Related Documentation
 
-- [UI Integration Guide](../UI_INTEGRATION.md) - General UI usage guidelines
-- [Tokens Guide](../TOKENS_GUIDE.md) - Design token system
-- [Theme Guide](../THEME_GUIDE.md) - Theme customization
+- [Integration Guide](./INTEGRATION_GUIDE.md) - General UI usage guidelines
+- [Tokens Overview](./TOKENS_OVERVIEW.md) - Design token system
 
 ---
 

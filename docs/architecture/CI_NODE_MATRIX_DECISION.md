@@ -243,7 +243,7 @@ jobs:
 ## Следующие шаги
 
 1. ✅ Обновить `.github/workflows/ci.yml` с выбранной конфигурацией
-2. ✅ Обновить `docs/CI-CD_OVERVIEW.md` с новым решением
+2. ✅ Обновить `docs/CI_CD_OVERVIEW.md` с новым решением
 3. ✅ Зафиксировать план миграции (удаление 18.x после EOL)
 4. ✅ Применить canonical naming для всех CI checks
 5. ✅ Разделить checks на blocking и informational

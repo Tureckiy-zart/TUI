@@ -40,9 +40,9 @@ These documents serve as the primary entry points for understanding the project 
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/INTERNAL_CANONICAL_CONTEXT.md` | Single source of truth for architecture, design decisions, Foundation vs Extension rules | **IMMUTABLE** |
-| `docs/architecture/FINAL_FOUNDATION_LOCK.md` | Authoritative Foundation lock status - source of truth for locked Foundation layer | **LOCKED** |
-| `docs/CANONICAL_PROJECT_ORIENTATION.md` | Canonical project orientation - documents PostCSS/Tailwind fix | **ACTIVE** |
+| `docs/ARCHITECTURE_CONTEXT.md` | Single source of truth for architecture, design decisions, Foundation vs Extension rules | **IMMUTABLE** |
+| `docs/architecture/FOUNDATION_LOCK.md` | Authoritative Foundation lock status - source of truth for locked Foundation layer | **LOCKED** |
+| `docs/PROJECT_ORIENTATION.md` | Canonical project orientation - documents PostCSS/Tailwind fix | **ACTIVE** |
 
 **Total:** 3 files
 
@@ -54,17 +54,17 @@ Foundation Authority Contracts define immutable rules for the design system. All
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md` | Interaction state activation rules, priority order, blocking rules | **LOCKED** |
-| `docs/architecture/STATE_AUTHORITY_MATRIX.md` | Canonical state set definition (base, hover, active, focus-visible, disabled, loading) | **LOCKED** |
-| `docs/architecture/STATE_AUTHORITY_CONTRACT.md` | State token model, naming rules, property mapping | **LOCKED** |
-| `docs/architecture/SPACING_AUTHORITY_CONTRACT.md` | Canonical spacing scale, component rules, forbidden patterns | **LOCKED** |
-| `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md` | Canonical radius scale, component standards, forbidden patterns | **LOCKED** |
-| `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md` | Canonical typography scale, semantic roles, forbidden patterns | **LOCKED** |
-| `docs/architecture/MOTION_AUTHORITY_CONTRACT.md` | Canonical motion tokens, durations, easings, forbidden patterns | **LOCKED** |
-| `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md` | Canonical elevation tokens, z-index scale, forbidden patterns | **LOCKED** |
-| `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md` | Canonical layout primitives, separation laws, forbidden patterns | **LOCKED** |
-| `docs/architecture/TOKEN_SYSTEM.md` | Token system definition, ownership rules, semantic classifications | **LOCKED** |
-| `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md` | Extension layer boundary contract | **ACTIVE** |
+| `docs/architecture/INTERACTION_AUTHORITY.md` | Interaction state activation rules, priority order, blocking rules | **LOCKED** |
+| `docs/architecture/STATE_MATRIX.md` | Canonical state set definition (base, hover, active, focus-visible, disabled, loading) | **LOCKED** |
+| `docs/architecture/STATE_AUTHORITY.md` | State token model, naming rules, property mapping | **LOCKED** |
+| `docs/architecture/SPACING_AUTHORITY.md` | Canonical spacing scale, component rules, forbidden patterns | **LOCKED** |
+| `docs/architecture/RADIUS_AUTHORITY.md` | Canonical radius scale, component standards, forbidden patterns | **LOCKED** |
+| `docs/architecture/TYPOGRAPHY_AUTHORITY.md` | Canonical typography scale, semantic roles, forbidden patterns | **LOCKED** |
+| `docs/architecture/MOTION_AUTHORITY.md` | Canonical motion tokens, durations, easings, forbidden patterns | **LOCKED** |
+| `docs/architecture/ELEVATION_AUTHORITY.md` | Canonical elevation tokens, z-index scale, forbidden patterns | **LOCKED** |
+| `docs/architecture/LAYOUT_AUTHORITY.md` | Canonical layout primitives, separation laws, forbidden patterns | **LOCKED** |
+| `docs/architecture/TOKEN_AUTHORITY.md` | Token system definition, ownership rules, semantic classifications | **LOCKED** |
+| `docs/architecture/EXTENSION_AUTHORITY.md` | Extension layer boundary contract | **ACTIVE** |
 
 **Total:** 11 files (10 Foundation + 1 Extension)
 
@@ -74,7 +74,7 @@ Foundation Authority Contracts define immutable rules for the design system. All
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/architecture/AUTHORITY_MAP.md` | Navigation map for Authority system - mental model | **ACTIVE** |
+| `docs/architecture/AUTHORITY_NAVIGATION.md` | Navigation map for Authority system - mental model | **ACTIVE** |
 
 **Total:** 1 file
 
@@ -86,14 +86,14 @@ These documents define architecture rules, locks, and development guidelines.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/architecture/CANONICAL_LOCK.md` | Canonical architecture lock - authoritative source for canonical state and forbidden regressions | **LOCKED** |
-| `docs/architecture/UI_ARCHITECTURE_LOCK.md` | **PRIMARY CANONICAL SOURCE** - UI architecture lock with all canonical rules and implementations (supersedes CANONICAL_STATE_FINAL.md) | **LOCKED** |
-| `docs/architecture/CANONICAL_STATE_FINAL.md` | ⚠️ **ARCHIVED/SUPERSEDED** - Final truth snapshot (superseded by UI_ARCHITECTURE_LOCK.md) | **ARCHIVED** |
-| `docs/architecture/EXTENSION_CANONICAL_STATE.md` | Extension layer canonical state - Extension layer reference | **ACTIVE** |
-| `docs/architecture/UI_ARCHITECTURE_RULES.md` | UI architecture rules - Architecture rules reference | **ACTIVE** |
-| `docs/architecture/TUI_CURSOR_GUARD_RULES.md` | Cursor guard rules - Guard rules reference | **ACTIVE** |
-| `docs/architecture/CURSOR_UI_RULES.md` | Cursor AI rules for UI development - Cursor-specific rules | **ACTIVE** |
-| `docs/architecture/LINTING_RULES.md` | Linting standards and rules - Linting reference | **ACTIVE** |
+| `docs/architecture/ARCHITECTURE_LOCK.md` | Canonical architecture lock - authoritative source for canonical state and forbidden regressions | **LOCKED** |
+| `docs/architecture/ARCHITECTURE_LOCK.md` | **PRIMARY CANONICAL SOURCE** - UI architecture lock with all canonical rules and implementations | **LOCKED** |
+| `docs/architecture/CANONICAL_STATE_FINAL.md` | ⚠️ **ARCHIVED/SUPERSEDED** - Final truth snapshot (superseded by ARCHITECTURE_LOCK.md) | **ARCHIVED** |
+| `docs/architecture/EXTENSION_STATE.md` | Extension layer canonical state - Extension layer reference | **ACTIVE** |
+| `docs/architecture/ARCHITECTURE_RULES.md` | UI architecture rules - Architecture rules reference | **ACTIVE** |
+| `docs/architecture/ASSISTANT_RULES.md` | Cursor guard rules - Guard rules reference | **ACTIVE** |
+| `docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md` | Cursor AI rules for UI development - Cursor-specific rules | **ACTIVE** |
+| `docs/architecture/LINTING_STANDARD.md` | Linting standards and rules - Linting reference | **ACTIVE** |
 | `docs/architecture/TOOLING_DECISIONS.md` | Tooling decisions and rationale - Tooling reference | **ACTIVE** |
 
 **Total:** 9 files
@@ -106,8 +106,8 @@ These documents define lock status for specific component categories.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/locks/LAYOUT_LOCK.md` | Layout primitives lock - Component lock document | **LOCKED** |
-| `docs/locks/TEXT_LOCK.md` | Text/typography components lock - Component lock document | **LOCKED** |
+| `docs/architecture/locks/LAYOUT_LOCK.md` | Layout primitives lock - Component lock document | **LOCKED** |
+| `docs/architecture/locks/TEXT_LOCK.md` | Text/typography components lock - Component lock document | **LOCKED** |
 
 **Total:** 2 files
 
@@ -120,7 +120,7 @@ These documents track project progress and task management.
 | Path | Description | Status |
 |------|-------------|--------|
 | `docs/PROJECT_PROGRESS.md` | Project progress tracking - canonical progress file - Single source of truth for progress | **ACTIVE** |
-| `docs/tasks/master_task_index.md` | Master task index and navigation - Task management reference | **ACTIVE** |
+| `docs/workflows/tasks/TASK_INDEX.md` | Master task index and navigation - Task management reference | **ACTIVE** |
 
 **Total:** 2 files
 
@@ -132,11 +132,11 @@ These documents support controlled library growth and component development proc
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/tasks/COMPONENT_NEEDS_INVENTORY.md` | Component needs tracking and prioritization - Tracks real component needs based on usage | **ACTIVE** |
-| `docs/tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md` | Extension component creation checklist - Mandatory checklist for creating Extension components | **ACTIVE** |
-| `docs/tasks/USAGE_FEEDBACK_PROCESS.md` | Usage feedback collection process - Defines how to collect and process usage feedback | **ACTIVE** |
-| `docs/tasks/FEEDBACK_REVIEW_PROCESS.md` | Feedback review and decision process - Process for reviewing feedback and making decisions | **ACTIVE** |
-| `docs/tasks/COMPONENT_USAGE_TRACKING.md` | Component usage tracking - Tracks component usage patterns and adoption rates | **ACTIVE** |
+| `docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md` | Component needs tracking and prioritization - Tracks real component needs based on usage | **ACTIVE** |
+| `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` | Extension component creation checklist - Mandatory checklist for creating Extension components | **ACTIVE** |
+| `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` | Usage feedback collection process - Defines how to collect and process usage feedback | **ACTIVE** |
+| `docs/workflows/tasks/FEEDBACK_REVIEW_PROCESS.md` | Feedback review and decision process - Process for reviewing feedback and making decisions | **ACTIVE** |
+| `docs/workflows/tasks/COMPONENT_USAGE_TRACKING.md` | Component usage tracking - Tracks component usage patterns and adoption rates | **ACTIVE** |
 
 **Total:** 5 files
 
@@ -163,17 +163,8 @@ These documents provide API and integration references.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/structure/TYPING_STANDARD.md` | Typing standards - Typing reference | **ACTIVE** |
-
-**Total:** 1 file
-
----
-
-### UI Exceptions
-
-| Path | Description | Status |
-|------|-------------|--------|
-| `docs/ui/gradient_exceptions.md` | Gradient exceptions documentation - Documented exceptions | **ACTIVE** |
+| `docs/reference/TYPING_STANDARD.md` | Typing standards - Typing reference | **ACTIVE** |
+| `docs/reference/GRADIENT_EXCEPTIONS.md` | Gradient exceptions documentation - Documented exceptions | **ACTIVE** |
 
 **Total:** 1 file
 
@@ -183,7 +174,7 @@ These documents provide API and integration references.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/CI-CD_OVERVIEW.md` | CI/CD overview - CI/CD reference | **ACTIVE** |
+| `docs/CI_CD_OVERVIEW.md` | CI/CD overview - CI/CD reference | **ACTIVE** |
 
 **Total:** 1 file
 
@@ -204,48 +195,48 @@ These documents provide API and integration references.
 
 | File Path | Category | Status | Notes |
 |-----------|----------|--------|-------|
-| `docs/INTERNAL_CANONICAL_CONTEXT.md` | Primary Entry Point | Canonical (IMMUTABLE) | Single source of truth |
-| `docs/architecture/FINAL_FOUNDATION_LOCK.md` | Primary Entry Point | Authority (LOCKED) | Foundation lock status |
-| `docs/CANONICAL_PROJECT_ORIENTATION.md` | Primary Entry Point | Canonical (ACTIVE) | Project orientation |
-| `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/STATE_AUTHORITY_MATRIX.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/STATE_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/SPACING_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/MOTION_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/TOKEN_SYSTEM.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
-| `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md` | Authority Contract | Authority (ACTIVE) | Extension boundary |
-| `docs/architecture/AUTHORITY_MAP.md` | Authority Navigation | Reference (ACTIVE) | Authority navigation |
-| `docs/architecture/CANONICAL_LOCK.md` | Architecture Rules | Lock (LOCKED) | Canonical architecture lock |
-| `docs/architecture/UI_ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | **PRIMARY CANONICAL SOURCE** - Architecture lock (supersedes CANONICAL_STATE_FINAL.md) |
-| `docs/architecture/CANONICAL_STATE_FINAL.md` | Architecture Rules | Reference (ARCHIVED) | ⚠️ **ARCHIVED/SUPERSEDED** - Final truth snapshot (superseded by UI_ARCHITECTURE_LOCK.md) |
-| `docs/architecture/EXTENSION_CANONICAL_STATE.md` | Architecture Rules | Reference (ACTIVE) | Extension state |
-| `docs/architecture/UI_ARCHITECTURE_RULES.md` | Architecture Rules | Reference (ACTIVE) | Architecture rules |
-| `docs/architecture/TUI_CURSOR_GUARD_RULES.md` | Architecture Rules | Reference (ACTIVE) | Guard rules |
-| `docs/architecture/CURSOR_UI_RULES.md` | Architecture Rules | Reference (ACTIVE) | Cursor rules |
-| `docs/architecture/LINTING_RULES.md` | Architecture Rules | Reference (ACTIVE) | Linting rules |
+| `docs/ARCHITECTURE_CONTEXT.md` | Primary Entry Point | Canonical (IMMUTABLE) | Single source of truth |
+| `docs/architecture/FOUNDATION_LOCK.md` | Primary Entry Point | Authority (LOCKED) | Foundation lock status |
+| `docs/PROJECT_ORIENTATION.md` | Primary Entry Point | Canonical (ACTIVE) | Project orientation |
+| `docs/architecture/INTERACTION_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/STATE_MATRIX.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/STATE_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/SPACING_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/RADIUS_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/TYPOGRAPHY_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/MOTION_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/ELEVATION_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/LAYOUT_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/TOKEN_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
+| `docs/architecture/EXTENSION_AUTHORITY.md` | Authority Contract | Authority (ACTIVE) | Extension boundary |
+| `docs/architecture/AUTHORITY_NAVIGATION.md` | Authority Navigation | Reference (ACTIVE) | Authority navigation |
+| `docs/architecture/ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | Canonical architecture lock |
+| `docs/architecture/ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | **PRIMARY CANONICAL SOURCE** - Architecture lock (supersedes CANONICAL_STATE_FINAL.md) |
+| `docs/architecture/CANONICAL_STATE_FINAL.md` | Architecture Rules | Reference (ARCHIVED) | ⚠️ **ARCHIVED/SUPERSEDED** - Final truth snapshot (superseded by ARCHITECTURE_LOCK.md) |
+| `docs/architecture/EXTENSION_STATE.md` | Architecture Rules | Reference (ACTIVE) | Extension state |
+| `docs/architecture/ARCHITECTURE_RULES.md` | Architecture Rules | Reference (ACTIVE) | Architecture rules |
+| `docs/architecture/ASSISTANT_RULES.md` | Architecture Rules | Reference (ACTIVE) | Guard rules |
+| `docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md` | Architecture Rules | Reference (ACTIVE) | Cursor rules |
+| `docs/architecture/LINTING_STANDARD.md` | Architecture Rules | Reference (ACTIVE) | Linting rules |
 | `docs/architecture/TOOLING_DECISIONS.md` | Architecture Rules | Reference (ACTIVE) | Tooling decisions |
-| `docs/locks/LAYOUT_LOCK.md` | Component Lock | Lock (LOCKED) | Layout lock |
-| `docs/locks/TEXT_LOCK.md` | Component Lock | Lock (LOCKED) | Text lock |
+| `docs/architecture/locks/LAYOUT_LOCK.md` | Component Lock | Lock (LOCKED) | Layout lock |
+| `docs/architecture/locks/TEXT_LOCK.md` | Component Lock | Lock (LOCKED) | Text lock |
 | `docs/PROJECT_PROGRESS.md` | Progress & Management | Reference (ACTIVE) | Progress tracking |
-| `docs/tasks/master_task_index.md` | Progress & Management | Reference (ACTIVE) | Task index |
-| `docs/tasks/COMPONENT_NEEDS_INVENTORY.md` | Library Maturity | Reference (ACTIVE) | Component needs tracking |
-| `docs/tasks/EXTENSION_COMPONENT_CREATION_CHECKLIST.md` | Library Maturity | Reference (ACTIVE) | Component creation checklist |
-| `docs/tasks/USAGE_FEEDBACK_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback collection process |
-| `docs/tasks/FEEDBACK_REVIEW_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback review process |
-| `docs/tasks/COMPONENT_USAGE_TRACKING.md` | Library Maturity | Reference (ACTIVE) | Usage tracking |
+| `docs/workflows/tasks/TASK_INDEX.md` | Progress & Management | Reference (ACTIVE) | Task index |
+| `docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md` | Library Maturity | Reference (ACTIVE) | Component needs tracking |
+| `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` | Library Maturity | Reference (ACTIVE) | Component creation checklist |
+| `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback collection process |
+| `docs/workflows/tasks/FEEDBACK_REVIEW_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback review process |
+| `docs/workflows/tasks/COMPONENT_USAGE_TRACKING.md` | Library Maturity | Reference (ACTIVE) | Usage tracking |
 | `docs/reference/public-api.md` | Reference | Reference (ACTIVE) | API reference |
 | `docs/reference/design_tokens_export.md` | Reference | Reference (ACTIVE) | Tokens export |
 | `docs/reference/token-map-overview.md` | Reference | Reference (ACTIVE) | Token map |
 | `docs/reference/UI_COMPONENTS_INVENTORY.md` | Reference | Reference (ACTIVE) | Components inventory |
 | `docs/reference/UI_INTEGRATION.md` | Reference | Reference (ACTIVE) | Integration guide |
 | `docs/reference/EXTENSION_COMPONENT_EXAMPLES.md` | Reference | Reference (ACTIVE) | Component examples |
-| `docs/structure/TYPING_STANDARD.md` | Structure & Standards | Reference (ACTIVE) | Typing standard |
-| `docs/ui/gradient_exceptions.md` | UI Exceptions | Reference (ACTIVE) | Gradient exceptions |
-| `docs/CI-CD_OVERVIEW.md` | CI/CD | Reference (ACTIVE) | CI/CD overview |
+| `docs/reference/TYPING_STANDARD.md` | Structure & Standards | Reference (ACTIVE) | Typing standard |
+| `docs/reference/GRADIENT_EXCEPTIONS.md` | UI Exceptions | Reference (ACTIVE) | Gradient exceptions |
+| `docs/CI_CD_OVERVIEW.md` | CI/CD | Reference (ACTIVE) | CI/CD overview |
 | `docs/README.md` | Entry Point | Reference (ACTIVE) | Documentation index |
 | `docs/README_GPT.md` | Entry Point | Reference (ACTIVE) | GPT context |
 

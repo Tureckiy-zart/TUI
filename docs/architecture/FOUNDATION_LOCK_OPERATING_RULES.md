@@ -4,7 +4,7 @@
 **Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-18  
 **Classification:** Canonical Interpretation Rules  
-**Authority Level:** Secondary (Derived from INTERNAL_CANONICAL_CONTEXT.md)  
+**Authority Level:** Secondary (Derived from ARCHITECTURE_CONTEXT.md)  
 **Scope:** Tenerife UI — Foundation Layer  
 **Audience:** Maintainers, Cursor AI, Contributors
 
@@ -32,8 +32,8 @@ Foundation LOCK means:
 
 A component is considered **Foundation LOCKED** if it is:
 
-- listed in `INTERNAL_CANONICAL_CONTEXT.md`
-- listed in `FINAL_FOUNDATION_LOCK.md`
+- listed in `ARCHITECTURE_CONTEXT.md`
+- listed in `FOUNDATION_LOCK.md`
 - marked as `LOCKED — Immutable`
 - classified under **Foundation Layer**
 
@@ -269,7 +269,7 @@ A component may intentionally exit the Foundation lifecycle before Step 13 (Foun
 2. **Relocation:** Component is moved to appropriate layer (PATTERNS or EXTENSION)
 3. **Token Cleanup:** Provisional Foundation tokens are removed (if any were created)
 4. **Documentation:** Early exit rationale is documented
-5. **No Lock:** Component is NOT added to `FINAL_FOUNDATION_LOCK.md`
+5. **No Lock:** Component is NOT added to `FOUNDATION_LOCK.md`
 
 **For Refactor:** Early exit does not apply to refactor flows. Refactors of existing LOCKED components must maintain LOCKED status.
 
@@ -503,7 +503,7 @@ The following patterns are **FORBIDDEN** in public APIs:
 
 **TypeScript System Compliance Checklist (Mandatory):**
 
-Aligned with `docs/structure/TYPING_STANDARD.md`:
+Aligned with `docs/reference/TYPING_STANDARD.md`:
 
 - [ ] **Explicit Union Types:** All variant/size props use explicit union types (not inferred from CVA)
 - [ ] **No CVA-Derived Types:** No `VariantProps<typeof cvaVariants>` in public APIs
@@ -517,7 +517,7 @@ Aligned with `docs/structure/TYPING_STANDARD.md`:
 - [ ] **Type Safety:** Type narrowing and type safety are maintained
 - [ ] **Public Type Surface Documented:** Public Type Surface is explicitly documented
 
-**Reference:** `docs/structure/TYPING_STANDARD.md` is the **REQUIRED, ENFORCED architectural standard** for public API typing.
+**Reference:** `docs/reference/TYPING_STANDARD.md` is the **REQUIRED, ENFORCED architectural standard** for public API typing.
 
 **Unsafe Type Assertions Prohibition (MANDATORY):**
 
@@ -585,7 +585,7 @@ If Step 7 validation fails:
 
 **Foundation Enforcement is FINAL and APPLIED:** This step verifies compliance with the Foundation Contract, which is **LOCKED** and **APPLIED**. Foundation components are **visually closed by design** and must exclude styling escape hatches from their public APIs.
 
-**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
 
 **Requirements:**
 - Verify `className` prop is excluded from Foundation component public props
@@ -617,7 +617,7 @@ If Step 7 validation fails:
 
 **Reference Documents:**
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Contract (FINAL/APPLIED)
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
 - `docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md` - Phase 3 implementation
 - `docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md` - Phase 4 implementation
 
@@ -636,7 +636,7 @@ If Step 7 validation fails:
 
 **Foundation Enforcement is FINAL and APPLIED:** This step verifies that ESLint scope governance is correctly configured and that Foundation enforcement rules do not leak into unintended scopes.
 
-**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
+**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
 
 **Requirements:**
 - Verify `className` is used **only internally** inside component implementation (not in public API)
@@ -674,7 +674,7 @@ If Step 7 validation fails:
 
 **Reference Documents:**
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Contract (FINAL/APPLIED)
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
 - [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md) - ESLint rules scope authority (canonical and binding)
 
 **Exit Criteria:**
@@ -1044,8 +1044,8 @@ Testing quality gates ensure that Foundation components have adequate test cover
 **Purpose:** Formally lock the component as a Foundation component.
 
 **Requirements:**
-- Update `FINAL_FOUNDATION_LOCK.md` to include the component
-- Update `INTERNAL_CANONICAL_CONTEXT.md` if necessary
+- Update `FOUNDATION_LOCK.md` to include the component
+- Update `ARCHITECTURE_CONTEXT.md` if necessary
 - Document the component's lock status and date
 - Verify all previous steps (1-12) are complete
 - Create or update component documentation
@@ -1086,8 +1086,8 @@ Foundation Component Reports are **mandatory artifacts** for Foundation Lock. Be
 **For Refactor:** Verify that refactoring does not require unlock and that component remains locked. Ensure all quality gates (Storybook, Testing) remain valid after refactor. Ensure report is updated to reflect refactor state.
 
 **Exit Criteria:**
-- Component is listed in `FINAL_FOUNDATION_LOCK.md`
-- Component is listed in `INTERNAL_CANONICAL_CONTEXT.md` (if necessary)
+- Component is listed in `FOUNDATION_LOCK.md`
+- Component is listed in `ARCHITECTURE_CONTEXT.md` (if necessary)
 - Component's lock status and date are documented
 - All previous lifecycle steps (1-12) are complete and verified
 - Component documentation is created or updated

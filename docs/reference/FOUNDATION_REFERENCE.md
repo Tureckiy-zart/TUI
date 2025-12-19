@@ -148,7 +148,7 @@ Before a component can achieve FINAL status, it must:
    - Lifecycle status explicitly stated
 
 4. **Complete Foundation Lock finalization** (Step 13)
-   - Listed in FINAL_FOUNDATION_LOCK.md
+   - Listed in FOUNDATION_LOCK.md
    - Lock status documented
    - Reference status established
 
@@ -295,11 +295,11 @@ Foundation Component Reports must follow the canonical format defined in:
 - `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` - Canonical example (Link component)
 
 **Authority Documents:**
-- `docs/architecture/FINAL_FOUNDATION_LOCK.md` - Foundation lock status
-- `docs/INTERNAL_CANONICAL_CONTEXT.md` - Canonical architecture context
+- `docs/architecture/FOUNDATION_LOCK.md` - Foundation lock status
+- `docs/ARCHITECTURE_CONTEXT.md` - Canonical architecture context
 
 **Authority Contracts:**
-- See `docs/architecture/AUTHORITY_MAP.md` for complete Authority Contract list
+- See `docs/architecture/AUTHORITY_NAVIGATION.md` for complete Authority Contract list
 
 ---
 

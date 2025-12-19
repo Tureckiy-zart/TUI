@@ -370,10 +370,10 @@ src/COMPOSITION/layout/Stack/
 
 ## Related Documents
 
-- [Extension Authority Contract](../architecture/EXTENSION_AUTHORITY_CONTRACT.md)
+- [Extension Authority Contract](../architecture/EXTENSION_AUTHORITY.md)
 - [Extension Canonical State](../architecture/EXTENSION_STATE.md)
-- [Component Creation Checklist](../tasks/COMPONENT_CREATION_CHECKLIST.md)
-- [Component Needs Inventory](../tasks/COMPONENT_NEEDS_INVENTORY.md)
+- [Component Creation Checklist](../workflows/tasks/COMPONENT_CREATION_CHECKLIST.md)
+- [Component Needs Inventory](../workflows/tasks/COMPONENT_NEEDS_INVENTORY.md)
 
 ---
 

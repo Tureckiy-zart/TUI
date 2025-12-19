@@ -4,7 +4,7 @@
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
 **Authority:** This document defines mandatory guard rules for all Cursor/AI work on `@tenerife.music/ui` to prevent architectural drift, token misuse, and cross-layer violations.
 
-**Foundation Status:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for authoritative Foundation lock status and Foundation Enforcement Lock Status.
+**Foundation Status:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. See [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) for authoritative Foundation lock status and Foundation Enforcement Lock Status.
 
 ---
 
@@ -72,7 +72,7 @@ These principles apply to **ALL** work on the TUI library:
 
 **Status:** ✅ **FOUNDATION CLOSED**  
 **Lock Date:** 2025-12-16  
-**Source of Truth:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)
+**Source of Truth:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)
 
 **All Foundation Authorities are CLOSED and IMMUTABLE:**
 - ✅ **Interaction Authority** - LOCKED
@@ -226,7 +226,7 @@ export const Dialog = ({ ... }) => {
 
 **BEFORE** using any component:
 
-1. ✅ Check `docs/architecture/EXTENSION_CANONICAL_STATE.md`
+1. ✅ Check `docs/architecture/EXTENSION_STATE.md`
 2. ✅ Verify component is in ALLOWED section
 3. ✅ Verify component is exported via `src/index.ts`
 4. ✅ Use component from canonical import path
@@ -605,7 +605,7 @@ The Link component's `disabled` prop decision serves as a canonical precedent:
 
 **✅ CORRECT:**
 ```
-1. Read EXTENSION_CANONICAL_STATE.md
+1. Read EXTENSION_STATE.md
 2. Verify component is ALLOWED
 3. Check token domain rules
 4. Plan changes
@@ -631,8 +631,8 @@ The Link component's `disabled` prop decision serves as a canonical precedent:
 - src/tokens/components/input.ts
 
 ## Files to be read (for context):
-- docs/architecture/TOKEN_SYSTEM.md
-- docs/architecture/EXTENSION_CANONICAL_STATE.md
+- docs/architecture/TOKEN_AUTHORITY.md
+- docs/architecture/EXTENSION_STATE.md
 ```
 
 **✅ CORRECT:**
@@ -851,8 +851,8 @@ Before completing any task, verify:
 - src/tokens/components/input.ts (if needed)
 
 ## Files to be read:
-- docs/architecture/TOKEN_SYSTEM.md
-- docs/architecture/EXTENSION_CANONICAL_STATE.md
+- docs/architecture/TOKEN_AUTHORITY.md
+- docs/architecture/EXTENSION_STATE.md
 
 ## Expected Outcome:
 - Input component uses INPUT_TOKENS exclusively
@@ -922,9 +922,9 @@ Your request is ambiguous regarding:
 
 **Status:** ✅ **CANONICAL ARCHITECTURE LOCKED**  
 **Lock Date:** 2025-12-17  
-**Source of Truth:** [CANONICAL_LOCK.md](./CANONICAL_LOCK.md)
+**Source of Truth:** [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md)
 
-**The UI architecture is OFFICIALLY LOCKED as CANONICAL.** All architectural decisions documented in CANONICAL_LOCK.md are **FINAL** and **MUST NOT** change without explicit unlock procedure.
+**The UI architecture is OFFICIALLY LOCKED as CANONICAL.** All architectural decisions documented in ARCHITECTURE_LOCK.md are **FINAL** and **MUST NOT** change without explicit unlock procedure.
 
 ### Forbidden Regressions (MANDATORY)
 
@@ -1011,7 +1011,7 @@ Your request is ambiguous regarding:
 - ✅ Unlock must be documented and approved
 - ✅ Changes must follow canonical rules
 
-**Rule:** Architecture changes **MUST** go through unlock protocol defined in CANONICAL_LOCK.md.
+**Rule:** Architecture changes **MUST** go through unlock protocol defined in ARCHITECTURE_LOCK.md.
 
 ### Canonical Component Import Rules
 
@@ -1033,7 +1033,7 @@ Your request is ambiguous regarding:
 
 **BEFORE** any architectural change:
 
-1. ✅ Check [CANONICAL_LOCK.md](./CANONICAL_LOCK.md) for canonical state
+1. ✅ Check [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) for canonical state
 2. ✅ Verify change does not violate forbidden regressions
 3. ✅ Verify change respects layer boundaries
 4. ✅ Verify change uses canonical components
@@ -1045,13 +1045,13 @@ Your request is ambiguous regarding:
 
 ## Related Documentation
 
-- [CANONICAL_LOCK.md](./CANONICAL_LOCK.md) - **Source of truth** for canonical architecture state
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - **Source of truth** for Foundation lock status
-- [UI_ARCHITECTURE_LOCK.md](./UI_ARCHITECTURE_LOCK.md) - **PRIMARY CANONICAL SOURCE** - Architecture lock with all canonical rules and implementations (supersedes CANONICAL_STATE_FINAL.md)
-- [Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract
-- [TUI Token System](./TOKEN_SYSTEM.md) - Token system rules and structure (LOCKED)
-- [TUI Extension Canonical State](./EXTENSION_CANONICAL_STATE.md) - Component usage rules
-- [TUI Token System Audit Report](../../docs_archive/reports/archive/archive/reports/other/TOKEN_SYSTEM_AUDIT.md) - Audit findings and violations (Note: File may be in docs_archive)
+- [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - **Source of truth** for canonical architecture state
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - **Source of truth** for Foundation lock status
+- [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - **PRIMARY CANONICAL SOURCE** - Architecture lock with all canonical rules and implementations (supersedes CANONICAL_STATE_FINAL.md)
+- [Extension Authority Contract](./EXTENSION_AUTHORITY.md) - Extension layer boundary contract
+- [TUI Token System](./TOKEN_AUTHORITY.md) - Token system rules and structure (LOCKED)
+- [TUI Extension Canonical State](./EXTENSION_STATE.md) - Component usage rules
+- [TUI Token System Audit Report](../../../docs_archive/reports/archive/archive/reports/other/TOKEN_SYSTEM_AUDIT.md) - Audit findings and violations (Note: File may be in docs_archive)
 
 ---
 
@@ -1073,7 +1073,7 @@ This document is **MANDATORY**. Any work violating these rules is **INVALID**. T
   - Added allowed actions (extend within layer, add with justification, unlock protocol)
   - Added canonical component import rules
   - Added canonical architecture verification checklist
-  - Added reference to CANONICAL_LOCK.md as source of truth
+  - Added reference to ARCHITECTURE_LOCK.md as source of truth
   - Clarified that canonical architecture is LOCKED
 
 - **v1.1** (2025-12-16): Foundation Authority Protection Rules
@@ -1082,7 +1082,7 @@ This document is **MANDATORY**. Any work violating these rules is **INVALID**. T
   - Added Authority unlock procedure documentation
   - Updated "Analyze Before Modifying" rule to include Authority compliance check
   - Updated Architecture Compliance checklist to include Authority verification
-  - Added references to FINAL_FOUNDATION_LOCK.md as source of truth
+  - Added references to FOUNDATION_LOCK.md as source of truth
   - Clarified that Foundation Authorities are CLOSED and IMMUTABLE
 
 - **v1.0** (2025-12-13): Initial guard rules document

@@ -31,14 +31,16 @@ The following Cursor rule documents are verified and active:
 - `rules/user-rules.mdc`
 - `rules/component-lifecycle.mdc`
 - `rules/block-and-scope-rules.mdc`
-- `rules/CURSOR_RULES_RESOLUTION_ORDER.mdc`
 - `rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc`
+- `rules/documentation-structure-freeze.mdc`
+- `rules/CURSOR_RULES_RESOLUTION_ORDER.mdc`
 
 
 These documents together define:
 - AI behavior
 - Component lifecycle enforcement
 - Scope and boundary enforcement
+- Documentation structure enforcement
 - Deterministic rule resolution
 
 No additional Cursor rules are considered active.
@@ -78,6 +80,12 @@ The following risk areas are explicitly covered:
 - Correct real-world date enforced
 - Future dates explicitly forbidden
 - Guessing dates forbidden
+
+### ✅ Documentation Structure Freeze
+- Structure freeze rules enforced
+- Unauthorized directory creation forbidden
+- Structural changes require lock document update
+- Single source of truth for structure defined
 
 ### ✅ Archive & Context Isolation
 - Archived documentation excluded

@@ -49,7 +49,7 @@ The typing system consists of **two primary documents** with a clear hierarchy:
 
 ## 📚 Document Hierarchy
 
-### 1. PRIMARY AUTHORITY: `docs/structure/TYPING_STANDARD.md`
+### 1. PRIMARY AUTHORITY: `docs/reference/TYPING_STANDARD.md`
 
 **Status:** MANDATORY, ENFORCED, CANONICAL  
 **Priority:** HIGHEST (overrides all other typing guidelines)
@@ -81,7 +81,7 @@ The typing system consists of **two primary documents** with a clear hierarchy:
 
 ---
 
-### 2. SECONDARY GUIDANCE: `docs/structure/TYPESCRIPT_GENERAL_RULES.md`
+### 2. SECONDARY GUIDANCE: `docs/reference/TYPESCRIPT_GENERAL_RULES.md`
 
 **Status:** ACTIVE, SECONDARY  
 **Priority:** LOWER (does not override `TYPING_STANDARD.md`)
@@ -237,19 +237,19 @@ Is this a PUBLIC component API typing question?
 
 ### Typing Documents
 
-- **`docs/structure/TYPING_STANDARD.md`** - PRIMARY AUTHORITY for public API typing
-- **`docs/structure/TYPESCRIPT_GENERAL_RULES.md`** - SECONDARY GUIDANCE for general TypeScript rules
+- **`docs/reference/TYPING_STANDARD.md`** - PRIMARY AUTHORITY for public API typing
+- **`docs/reference/TYPESCRIPT_GENERAL_RULES.md`** - SECONDARY GUIDANCE for general TypeScript rules
 
 ### Architecture Documents
 
-- **`docs/INTERNAL_CANONICAL_CONTEXT.md`** - References this index as the canonical entry point for typing rules
-- **`docs/architecture/UI_ARCHITECTURE_RULES.md`** - References `TYPING_STANDARD.md` for CVA-derived typing rules
-- **`docs/architecture/CURSOR_UI_RULES.md`** - References `TYPING_STANDARD.md` as MANDATORY for AI assistants
+- **`docs/ARCHITECTURE_CONTEXT.md`** - References this index as the canonical entry point for typing rules
+- **`docs/architecture/ARCHITECTURE_RULES.md`** - References `TYPING_STANDARD.md` for CVA-derived typing rules
+- **`docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md`** - References `TYPING_STANDARD.md` as MANDATORY for AI assistants
 
 ### Token System
 
 - **`src/tokens/types/index.ts`** - Token union type definitions
-- **`docs/architecture/TOKEN_SYSTEM.md`** - Token system documentation
+- **`docs/architecture/TOKEN_AUTHORITY.md`** - Token system documentation
 
 ---
 

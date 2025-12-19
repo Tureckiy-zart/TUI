@@ -13,7 +13,7 @@ This audit verifies that API and token reference documents are consistent with c
 - Actual source code exports (`src/index.ts`, `src/tokens/index.ts`)
 - Package.json entry points
 - Authority Contracts (Spacing, Typography, Radius, Motion, Elevation)
-- TOKEN_SYSTEM.md (canonical token system)
+- TOKEN_AUTHORITY.md (canonical token system)
 
 ---
 
@@ -39,7 +39,7 @@ This audit verifies that API and token reference documents are consistent with c
 - Export script location (`scripts/export-tokens.ts`) is accurate
 - Generated file locations (`design-tokens/tokens.json`, `design-tokens/tokens.fig`) are correct
 - Token conversion rules (HSL→hex, rem→px) align with Authority Contract specifications
-- Export process documentation aligns with locked token system (TOKEN_SYSTEM.md)
+- Export process documentation aligns with locked token system (TOKEN_AUTHORITY.md)
 - File structure references match actual project structure
 
 ---

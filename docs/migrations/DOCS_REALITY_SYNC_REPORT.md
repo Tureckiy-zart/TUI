@@ -130,7 +130,7 @@ src/
 | Document | Location | Purpose | Last Verified |
 |----------|----------|---------|---------------|
 | **CANONICAL_STATE_FINAL.md** | `docs/architecture/` | Final truth snapshot of architecture state | 2025-12-17 |
-| **INTERNAL_CANONICAL_CONTEXT.md** | `docs/` | Single source of truth for architecture | Active |
+| **ARCHITECTURE_CONTEXT.md** | `docs/` | Single source of truth for architecture | Active |
 | **PROJECT_PROGRESS.md** | `docs/` | Migration and progress tracking | Active |
 | **TOAST_SYSTEM.md** | `docs/architecture/` | Toast system documentation | Active |
 

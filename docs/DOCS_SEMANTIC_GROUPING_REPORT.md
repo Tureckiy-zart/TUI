@@ -28,10 +28,10 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Override all other documentation for their domain
 
 **Files:**
-1. `docs/INTERNAL_CANONICAL_CONTEXT.md` - Single source of truth for architecture, design decisions, Foundation vs Extension rules (IMMUTABLE)
-2. `docs/architecture/FINAL_FOUNDATION_LOCK.md` - Authoritative Foundation lock status, source of truth for locked Foundation layer (LOCKED)
-3. `docs/architecture/UI_ARCHITECTURE_LOCK.md` - Primary canonical source for UI architecture lock with all canonical rules and implementations (LOCKED)
-4. `docs/architecture/CANONICAL_LOCK.md` - Canonical architecture lock, authoritative source for canonical state and forbidden regressions (LOCKED)
+1. `docs/ARCHITECTURE_CONTEXT.md` - Single source of truth for architecture, design decisions, Foundation vs Extension rules (IMMUTABLE)
+2. `docs/architecture/FOUNDATION_LOCK.md` - Authoritative Foundation lock status, source of truth for locked Foundation layer (LOCKED)
+3. `docs/architecture/ARCHITECTURE_LOCK.md` - Primary canonical source for UI architecture lock with all canonical rules and implementations (LOCKED)
+4. `docs/architecture/ARCHITECTURE_LOCK.md` - Canonical architecture lock, authoritative source for canonical state and forbidden regressions (LOCKED)
 
 **Total:** 4 files
 
@@ -48,17 +48,17 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Provide single source of truth for domain decisions
 
 **Files:**
-1. `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md` - Interaction state activation rules, priority order, blocking rules (LOCKED)
-2. `docs/architecture/STATE_AUTHORITY_MATRIX.md` - Canonical state set definition (base, hover, active, focus-visible, disabled, loading) (LOCKED)
-3. `docs/architecture/STATE_AUTHORITY_CONTRACT.md` - State token model, naming rules, property mapping (LOCKED)
-4. `docs/architecture/SPACING_AUTHORITY_CONTRACT.md` - Canonical spacing scale, component rules, forbidden patterns (LOCKED)
-5. `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md` - Canonical radius scale, component standards, forbidden patterns (LOCKED)
-6. `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md` - Canonical typography scale, semantic roles, forbidden patterns (LOCKED)
-7. `docs/architecture/MOTION_AUTHORITY_CONTRACT.md` - Canonical motion tokens, durations, easings, forbidden patterns (LOCKED)
-8. `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md` - Canonical elevation tokens, z-index scale, forbidden patterns (LOCKED)
-9. `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md` - Canonical layout primitives, separation laws, forbidden patterns (LOCKED)
-10. `docs/architecture/TOKEN_SYSTEM.md` - Token system definition, ownership rules, semantic classifications (LOCKED)
-11. `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md` - Extension layer boundary contract (ACTIVE)
+1. `docs/architecture/INTERACTION_AUTHORITY.md` - Interaction state activation rules, priority order, blocking rules (LOCKED)
+2. `docs/architecture/STATE_MATRIX.md` - Canonical state set definition (base, hover, active, focus-visible, disabled, loading) (LOCKED)
+3. `docs/architecture/STATE_AUTHORITY.md` - State token model, naming rules, property mapping (LOCKED)
+4. `docs/architecture/SPACING_AUTHORITY.md` - Canonical spacing scale, component rules, forbidden patterns (LOCKED)
+5. `docs/architecture/RADIUS_AUTHORITY.md` - Canonical radius scale, component standards, forbidden patterns (LOCKED)
+6. `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - Canonical typography scale, semantic roles, forbidden patterns (LOCKED)
+7. `docs/architecture/MOTION_AUTHORITY.md` - Canonical motion tokens, durations, easings, forbidden patterns (LOCKED)
+8. `docs/architecture/ELEVATION_AUTHORITY.md` - Canonical elevation tokens, z-index scale, forbidden patterns (LOCKED)
+9. `docs/architecture/LAYOUT_AUTHORITY.md` - Canonical layout primitives, separation laws, forbidden patterns (LOCKED)
+10. `docs/architecture/TOKEN_AUTHORITY.md` - Token system definition, ownership rules, semantic classifications (LOCKED)
+11. `docs/architecture/EXTENSION_AUTHORITY.md` - Extension layer boundary contract (ACTIVE)
 
 **Total:** 11 files
 
@@ -75,7 +75,7 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Educational and reference-oriented
 
 **Files:**
-1. `docs/architecture/AUTHORITY_MAP.md` - Navigation map for Authority system, mental model (ACTIVE)
+1. `docs/architecture/AUTHORITY_NAVIGATION.md` - Navigation map for Authority system, mental model (ACTIVE)
 
 **Total:** 1 file
 
@@ -92,9 +92,9 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Reference-oriented (not immutable contracts)
 
 **Files:**
-1. `docs/architecture/UI_ARCHITECTURE_RULES.md` - UI architecture rules, Radix UI boundaries, token union rules (ACTIVE)
-2. `docs/architecture/EXTENSION_CANONICAL_STATE.md` - Extension layer canonical state, Extension layer reference (ACTIVE)
-3. `docs/architecture/CANONICAL_STATE_FINAL.md` - ⚠️ ARCHIVED/SUPERSEDED - Final truth snapshot (superseded by UI_ARCHITECTURE_LOCK.md) (ARCHIVED)
+1. `docs/architecture/ARCHITECTURE_RULES.md` - UI architecture rules, Radix UI boundaries, token union rules (ACTIVE)
+2. `docs/architecture/EXTENSION_STATE.md` - Extension layer canonical state, Extension layer reference (ACTIVE)
+3. `docs/architecture/CANONICAL_STATE_FINAL.md` - ⚠️ ARCHIVED/SUPERSEDED - Final truth snapshot (superseded by ARCHITECTURE_LOCK.md) (ARCHIVED)
 
 **Total:** 3 files
 
@@ -111,8 +111,8 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Guard against violations
 
 **Files:**
-1. `docs/architecture/TUI_CURSOR_GUARD_RULES.md` - Cursor guard rules, mandatory guard rules for all Cursor/AI work (ACTIVE)
-2. `docs/architecture/CURSOR_UI_RULES.md` - Cursor AI rules for UI development, token union patterns, self-governing rules (ACTIVE)
+1. `docs/architecture/ASSISTANT_RULES.md` - Cursor guard rules, mandatory guard rules for all Cursor/AI work (ACTIVE)
+2. `docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md` - Cursor AI rules for UI development, token union patterns, self-governing rules (ACTIVE)
 
 **Total:** 2 files
 
@@ -208,9 +208,9 @@ This report presents a semantic grouping of all 44 canonical documentation files
 - Tool configuration reference
 
 **Files:**
-1. `docs/architecture/LINTING_RULES.md` - Linting standards and rules, linting reference (ACTIVE)
+1. `docs/architecture/LINTING_STANDARD.md` - Linting standards and rules, linting reference (ACTIVE)
 2. `docs/architecture/TOOLING_DECISIONS.md` - Tooling decisions and rationale, tooling reference (ACTIVE)
-3. `docs/structure/TYPING_STANDARD.md` - Typing standards, typing reference (ACTIVE)
+3. `docs/reference/TYPING_STANDARD.md` - Typing standards, typing reference (ACTIVE)
 
 **Total:** 3 files
 
@@ -229,7 +229,7 @@ This report presents a semantic grouping of all 44 canonical documentation files
 **Files:**
 1. `docs/README.md` - Main README, documentation hub, documentation index (ACTIVE)
 2. `docs/README_GPT.md` - GPT-specific README, GPT context reference (ACTIVE)
-3. `docs/CANONICAL_PROJECT_ORIENTATION.md` - Canonical project orientation, documents PostCSS/Tailwind fix (ACTIVE)
+3. `docs/PROJECT_ORIENTATION.md` - Canonical project orientation, documents PostCSS/Tailwind fix (ACTIVE)
 
 **Total:** 3 files
 
@@ -247,7 +247,7 @@ This report presents a semantic grouping of all 44 canonical documentation files
 
 **Files:**
 1. `docs/ui/gradient_exceptions.md` - Gradient exceptions documentation, documented exceptions (ACTIVE)
-2. `docs/CI-CD_OVERVIEW.md` - CI/CD overview, CI/CD reference (ACTIVE)
+2. `docs/CI_CD_OVERVIEW.md` - CI/CD overview, CI/CD reference (ACTIVE)
 
 **Total:** 2 files
 

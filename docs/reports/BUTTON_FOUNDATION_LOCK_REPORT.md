@@ -46,9 +46,9 @@ Verify that Button component:
 4. Uses no JavaScript-driven state logic for visual behavior
 
 ### Authority References
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-- **State Authority Matrix:** `docs/architecture/STATE_AUTHORITY_MATRIX.md`
-- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
+- **State Authority Matrix:** `docs/architecture/STATE_MATRIX.md`
+- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY.md`
 
 ### Component Under Audit
 - **Path:** `src/PRIMITIVES/Button/Button.tsx`
@@ -472,9 +472,9 @@ Button component requires no changes. The state model is fully compliant with St
 
 ## Related Documents
 
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-- **State Authority Matrix:** `docs/architecture/STATE_AUTHORITY_MATRIX.md`
-- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
+- **State Authority Matrix:** `docs/architecture/STATE_MATRIX.md`
+- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY.md`
 - **Button Component:** `src/PRIMITIVES/Button/Button.tsx`
 - **Button Tokens:** `src/FOUNDATION/tokens/components/button.ts`
 
@@ -512,9 +512,9 @@ Verify that Button component:
 4. Contains no event handlers for visual state management
 
 #### Authority References
-- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-- **State Authority Matrix:** `docs/architecture/STATE_AUTHORITY_MATRIX.md`
+- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
+- **State Authority Matrix:** `docs/architecture/STATE_MATRIX.md`
 
 #### Component Under Audit
 - **Path:** `src/PRIMITIVES/Button/Button.tsx`
@@ -848,9 +848,9 @@ Button component requires no changes. The interaction model is fully compliant w
 
 ### Related Documents
 
-- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-- **State Authority Matrix:** `docs/architecture/STATE_AUTHORITY_MATRIX.md`
+- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
+- **State Authority Matrix:** `docs/architecture/STATE_MATRIX.md`
 - **Button Component:** `src/PRIMITIVES/Button/Button.tsx`
 - **Button Tokens:** `src/FOUNDATION/tokens/components/button.ts`
 
@@ -889,9 +889,9 @@ Verify that Button component:
 
 #### Authority References
 - **Token Authority:** All visual properties must use tokens
-- **Spacing Authority Contract:** `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
-- **Typography Authority Contract:** `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
-- **Radius Authority Contract:** `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
+- **Spacing Authority Contract:** `docs/architecture/SPACING_AUTHORITY.md`
+- **Typography Authority Contract:** `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
+- **Radius Authority Contract:** `docs/architecture/RADIUS_AUTHORITY.md`
 - **Color Authority:** All colors via CSS variables from State Matrix
 
 #### Component Under Audit
@@ -1225,11 +1225,11 @@ Button component is **100% token-driven** with **no violations**:
 
 ### Related Documents
 
-- **Spacing Authority Contract:** `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
-- **Typography Authority Contract:** `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
-- **Radius Authority Contract:** `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
-- **Motion Authority Contract:** `docs/architecture/MOTION_AUTHORITY_CONTRACT.md`
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
+- **Spacing Authority Contract:** `docs/architecture/SPACING_AUTHORITY.md`
+- **Typography Authority Contract:** `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
+- **Radius Authority Contract:** `docs/architecture/RADIUS_AUTHORITY.md`
+- **Motion Authority Contract:** `docs/architecture/MOTION_AUTHORITY.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
 - **Button Component:** `src/PRIMITIVES/Button/Button.tsx`
 - **Button Tokens:** `src/FOUNDATION/tokens/components/button.ts`
 
@@ -2131,7 +2131,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 - **Button Index:** `src/PRIMITIVES/Button/index.ts`
 - **Main Export:** `src/index.ts`
 - **Canonical TypeScript Rules:** See task requirements (canonical_typescript_rules)
-- **Foundation Lock:** `docs/architecture/FINAL_FOUNDATION_LOCK.md`
+- **Foundation Lock:** `docs/architecture/FOUNDATION_LOCK.md`
 
 ---
 
@@ -2615,7 +2615,7 @@ export { Button, type ButtonProps } from "./PRIMITIVES/Button";
 - **Main Export:** `src/index.ts`
 - **Button Tokens:** `src/FOUNDATION/tokens/components/button.ts`
 - **Canonical CVA Rules:** See task requirements (canonical_cva_rules)
-- **Foundation Lock:** `docs/architecture/FINAL_FOUNDATION_LOCK.md`
+- **Foundation Lock:** `docs/architecture/FOUNDATION_LOCK.md`
 
 ---
 
@@ -2889,7 +2889,7 @@ Button component's Storybook stories **fully comply** with canonical Foundation 
 
 - **Button Component:** `src/PRIMITIVES/Button/Button.tsx`
 - **Button Stories:** `src/PRIMITIVES/Button/Button.stories.tsx`
-- **Foundation Lock:** `docs/architecture/FINAL_FOUNDATION_LOCK.md`
+- **Foundation Lock:** `docs/architecture/FOUNDATION_LOCK.md`
 - **Storybook Canonical Rules:** See task requirements (canonical_story_rules)
 
 ---
@@ -3175,9 +3175,9 @@ Button component's runtime tests **fully comply** with canonical Foundation cont
 - **Button Component:** `src/PRIMITIVES/Button/Button.tsx`
 - **Button Tests:** `src/PRIMITIVES/Button/Button.test.tsx`
 - **Test Utilities:** `src/test/test-utils.tsx`
-- **Foundation Lock:** `docs/architecture/FINAL_FOUNDATION_LOCK.md`
-- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
+- **Foundation Lock:** `docs/architecture/FOUNDATION_LOCK.md`
+- **State Authority Contract:** `docs/architecture/STATE_AUTHORITY.md`
+- **Interaction Authority Contract:** `docs/architecture/INTERACTION_AUTHORITY.md`
 
 ---
 

@@ -9,12 +9,12 @@
 
 ## ⚠️ IMPORTANT: Typing Hierarchy and Conflict Resolution
 
-**📚 Typing System Index:** For a complete overview of the typing system architecture, hierarchy, and navigation guide, see [`docs/structure/TYPING_SYSTEM.md`](./TYPING_SYSTEM.md).
+**📚 Typing System Index:** For a complete overview of the typing system architecture, hierarchy, and navigation guide, see [`docs/reference/TYPING_SYSTEM.md`](./TYPING_SYSTEM.md).
 
 **This document defines GENERAL TypeScript implementation rules and coding practices.**
 
 **Typing System Hierarchy:**
-- **PRIMARY AUTHORITY:** `docs/structure/TYPING_STANDARD.md` — **MANDATORY architectural standard** governing PUBLIC API typing (variants, sizes, CVA boundaries, component props)
+- **PRIMARY AUTHORITY:** `docs/reference/TYPING_STANDARD.md` — **MANDATORY architectural standard** governing PUBLIC API typing (variants, sizes, CVA boundaries, component props)
 - **SECONDARY GUIDANCE:** This document (`TYPESCRIPT_GENERAL_RULES.md`) — General TypeScript implementation rules and coding practices
 
 **Conflict Resolution Rule:** If this document conflicts with `TYPING_STANDARD.md`, **`TYPING_STANDARD.md` ALWAYS wins.**
@@ -40,7 +40,7 @@ This document defines **general TypeScript implementation rules** for Tenerife U
 - Type safety guidelines
 - Code organization and structure
 
-**This document does NOT define public API typing rules.** For public API typing standards, see `docs/structure/TYPING_STANDARD.md`.
+**This document does NOT define public API typing rules.** For public API typing standards, see `docs/reference/TYPING_STANDARD.md`.
 
 ---
 
@@ -51,7 +51,7 @@ This document defines **general TypeScript implementation rules** for Tenerife U
 3. **Native Type Extension**: All components must extend appropriate native HTML types
 4. **Type Unions for Tokens**: All tokens must export type unions via `keyof typeof`
 
-**Note:** For public API typing rules (variants, sizes, CVA boundaries), see `docs/structure/TYPING_STANDARD.md`.
+**Note:** For public API typing rules (variants, sizes, CVA boundaries), see `docs/reference/TYPING_STANDARD.md`.
 
 ---
 
@@ -101,7 +101,7 @@ export interface DivProps
 
 ### CVA Variant Props (Internal Implementation Only)
 
-**⚠️ IMPORTANT:** This section describes internal implementation patterns. For **public API typing**, see `docs/structure/TYPING_STANDARD.md`.
+**⚠️ IMPORTANT:** This section describes internal implementation patterns. For **public API typing**, see `docs/reference/TYPING_STANDARD.md`.
 
 **For internal implementation:** CVA may use `VariantProps` internally, but **public component props MUST NOT** use `VariantProps` or derive types from CVA.
 
@@ -125,7 +125,7 @@ export interface ButtonProps
 }
 ```
 
-**For complete public API typing rules, see `docs/structure/TYPING_STANDARD.md`.**
+**For complete public API typing rules, see `docs/reference/TYPING_STANDARD.md`.**
 
 ### Event Handler Typing
 
@@ -532,7 +532,7 @@ The Link component's `disabled` prop decision serves as a canonical precedent:
 
 ### Complete Component Example
 
-**⚠️ IMPORTANT:** This example shows internal implementation patterns. For **public API typing**, this example violates `TYPING_STANDARD.md`. See `docs/structure/TYPING_STANDARD.md` for correct public API patterns.
+**⚠️ IMPORTANT:** This example shows internal implementation patterns. For **public API typing**, this example violates `TYPING_STANDARD.md`. See `docs/reference/TYPING_STANDARD.md` for correct public API patterns.
 
 **Internal Implementation (CVA may use VariantProps internally):**
 ```typescript
@@ -586,7 +586,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 ```
 
-**For complete public API typing rules, see `docs/structure/TYPING_STANDARD.md`.**
+**For complete public API typing rules, see `docs/reference/TYPING_STANDARD.md`.**
 
 ### Complete Token Example
 
@@ -654,13 +654,13 @@ Before marking code as complete:
 ## 📚 Related Documents
 
 **Typing System:**
-- **`docs/structure/TYPING_SYSTEM.md`** — Typing system index and navigation guide (canonical entry point)
+- **`docs/reference/TYPING_SYSTEM.md`** — Typing system index and navigation guide (canonical entry point)
 
 **Primary Authority:**
-- **`docs/structure/TYPING_STANDARD.md`** — PRIMARY AUTHORITY for public API typing (MANDATORY, takes precedence over this document)
+- **`docs/reference/TYPING_STANDARD.md`** — PRIMARY AUTHORITY for public API typing (MANDATORY, takes precedence over this document)
 
 **Architecture Documents:**
-- **`docs/INTERNAL_CANONICAL_CONTEXT.md`** — References `TYPING_STANDARD.md` as MANDATORY architectural standard
+- **`docs/ARCHITECTURE_CONTEXT.md`** — References `TYPING_STANDARD.md` as MANDATORY architectural standard
 
 ---
 

@@ -32,7 +32,7 @@ The following architectural assertions from this document were merged into `ARCH
 
 The historical migration records and verification results from this document have been preserved for reference but are no longer part of the canonical architecture documentation. For current architectural rules, see:
 
-**👉 [UI_ARCHITECTURE_LOCK.md](./UI_ARCHITECTURE_LOCK.md)**
+**👉 [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md)**
 
 ---
 

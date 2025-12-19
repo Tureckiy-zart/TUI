@@ -142,7 +142,7 @@ The Governance Review Cycle ensures that all enforcement mechanisms (ESLint rule
 
 ### Guard Rules Alignment
 
-- [ ] [TUI_CURSOR_GUARD_RULES.md](../architecture/TUI_CURSOR_GUARD_RULES.md) aligns with current architecture
+- [ ] [ASSISTANT_RULES.md](../architecture/ASSISTANT_RULES.md) aligns with current architecture
 - [ ] Guard Rules reference correct Authority Contracts
 - [ ] Guard Rules reference correct Lock documents
 - [ ] No contradictions between Guard Rules and ESLint rules
@@ -330,10 +330,10 @@ The review cycle itself should be reviewed and refined:
 - [GOVERNANCE_REVIEW_TEMPLATE.md](./GOVERNANCE_REVIEW_TEMPLATE.md) - Review report template
 - [ESLint Setup & Governance](../architecture/ESLINT_SETUP.md) - ESLint governance rules
 - [ESLint Rules Scope Matrix](../architecture/eslint_rules_scope_matrix.md) - Rule scope authority
-- [TUI Cursor Guard Rules](../architecture/TUI_CURSOR_GUARD_RULES.md) - Guard Rules document
-- [Authority Map](../architecture/AUTHORITY_MAP.md) - Authority navigation
-- [Final Foundation Lock](../architecture/FINAL_FOUNDATION_LOCK.md) - Foundation lock status
-- [TUI Architecture Lock](../architecture/UI_ARCHITECTURE_LOCK.md) - Architecture lock status
+- [TUI Cursor Guard Rules](../architecture/ASSISTANT_RULES.md) - Guard Rules document
+- [Authority Map](../architecture/AUTHORITY_NAVIGATION.md) - Authority navigation
+- [Final Foundation Lock](../architecture/FOUNDATION_LOCK.md) - Foundation lock status
+- [TUI Architecture Lock](../architecture/ARCHITECTURE_LOCK.md) - Architecture lock status
 
 ---
 

@@ -48,7 +48,7 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 2.1 Guard Rules Document Review
 
-✅ Guard Rules document exists: TUI_CURSOR_GUARD_RULES.md
+✅ Guard Rules document exists: ASSISTANT_RULES.md
 
 **References Found:**
 - Authority Contracts: 3 references
@@ -60,7 +60,7 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 3.1 Authority Map Review
 
-✅ Authority Map exists: AUTHORITY_MAP.md
+✅ Authority Map exists: AUTHORITY_NAVIGATION.md
 
 **Authorities Found:** 29
 
@@ -70,9 +70,9 @@ This automated governance review scanned ESLint rules, Guard Rules alignment, Au
 
 ### 4.1 Lock Documents Review
 
-✅ Foundation Lock exists: FINAL_FOUNDATION_LOCK.md
+✅ Foundation Lock exists: FOUNDATION_LOCK.md
 
-✅ Architecture Lock exists: UI_ARCHITECTURE_LOCK.md
+✅ Architecture Lock exists: ARCHITECTURE_LOCK.md
 
 ---
 

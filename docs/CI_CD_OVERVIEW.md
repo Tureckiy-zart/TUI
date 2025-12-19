@@ -220,7 +220,7 @@ Automated triage and validation of component requests to ensure proper process i
 
 ### 📝 Note:
 
-This workflow is part of the Library Maturity Growth System. See [Component Needs Inventory](../tasks/COMPONENT_NEEDS_INVENTORY.md) and [Usage Feedback Process](../tasks/USAGE_FEEDBACK_PROCESS.md) for details.
+This workflow is part of the Library Maturity Growth System. See [Component Needs Inventory](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) and [Usage Feedback Process](./workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md) for details.
 
 ---
 

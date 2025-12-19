@@ -93,21 +93,21 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Component Locks
 
-- [locks/LAYOUT_LOCK.md](./locks/LAYOUT_LOCK.md) - Layout primitives lock
-- [locks/TEXT_LOCK.md](./locks/TEXT_LOCK.md) - Text/typography components lock
+- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives lock
+- [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
 
 ### Progress & Project Management
 
 - [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) - Project progress tracking (canonical progress file)
-- [tasks/TASK_INDEX.md](./tasks/TASK_INDEX.md) - Master task index and navigation
+- [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md) - Master task index and navigation
 
 ### Library Maturity Growth System
 
-- [tasks/COMPONENT_NEEDS_INVENTORY.md](./tasks/COMPONENT_NEEDS_INVENTORY.md) - Component needs tracking and prioritization
-- [tasks/COMPONENT_CREATION_CHECKLIST.md](./tasks/COMPONENT_CREATION_CHECKLIST.md) - Extension component creation checklist
-- [tasks/FEEDBACK_COLLECTION_PROCESS.md](./tasks/FEEDBACK_COLLECTION_PROCESS.md) - Usage feedback collection process
-- [tasks/FEEDBACK_REVIEW_PROCESS.md](./tasks/FEEDBACK_REVIEW_PROCESS.md) - Feedback review and decision process
-- [tasks/COMPONENT_USAGE_TRACKING.md](./tasks/COMPONENT_USAGE_TRACKING.md) - Component usage tracking
+- [workflows/tasks/COMPONENT_NEEDS_INVENTORY.md](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) - Component needs tracking and prioritization
+- [workflows/tasks/COMPONENT_CREATION_CHECKLIST.md](./workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) - Extension component creation checklist
+- [workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md](./workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md) - Usage feedback collection process
+- [workflows/tasks/FEEDBACK_REVIEW_PROCESS.md](./workflows/tasks/FEEDBACK_REVIEW_PROCESS.md) - Feedback review and decision process
+- [workflows/tasks/COMPONENT_USAGE_TRACKING.md](./workflows/tasks/COMPONENT_USAGE_TRACKING.md) - Component usage tracking
 
 ### Reference Documentation
 
@@ -117,14 +117,8 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/COMPONENTS_INVENTORY.md](./reference/COMPONENTS_INVENTORY.md) - UI components inventory
 - [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
 - [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
-
-### Structure & Standards
-
-- [structure/TYPING_STANDARD.md](./structure/TYPING_STANDARD.md) - Typing standards
-
-### UI Exceptions
-
-- [ui/GRADIENT_EXCEPTIONS.md](./ui/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation
+- [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
+- [reference/GRADIENT_EXCEPTIONS.md](./reference/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation
 
 ### CI/CD
 
@@ -142,18 +136,29 @@ This directory contains **ONLY canonical and active documentation** (44 files to
 
 ```
 docs/
-├── architecture/            # Authority Contracts, Architecture Rules, Locks (20 files)
-│   ├── *_AUTHORITY.md  # Foundation Authority Contracts (LOCKED)
+├── architecture/            # LAW documents: Authority Contracts, Architecture Rules, Locks
+│   ├── locks/              # Component lock documents (2 files)
+│   ├── *_AUTHORITY.md      # Foundation Authority Contracts (LOCKED)
 │   ├── EXTENSION_AUTHORITY.md  # Extension boundary contract
 │   ├── FOUNDATION_LOCK.md  # Foundation lock status (source of truth)
 │   ├── ARCHITECTURE_LOCK.md  # Architecture lock
 │   ├── ARCHITECTURE_RULES.md  # Architecture rules
 │   └── ...                 # Other architecture rules and locks
-├── locks/                   # Component lock documents (2 files)
-├── reference/              # API reference and technical documentation (6 files)
-├── structure/              # Typing standards (1 file)
-├── tasks/                  # Task management, component needs, feedback processes (6 files)
-├── ui/                     # UI-specific documentation (1 file)
+├── reference/              # Reference documentation: API, integration, typing standards
+│   ├── API_REFERENCE.md
+│   ├── TOKENS_EXPORT_REFERENCE.md
+│   ├── TYPING_STANDARD.md
+│   ├── GRADIENT_EXCEPTIONS.md
+│   └── ...                 # Other reference documents
+├── workflows/              # Processes and workflows
+│   ├── tasks/              # Task management, component needs, feedback processes
+│   └── foundation/         # Foundation processes
+├── governance/              # Governance processes and reviews
+├── reports/                # Reports and audits
+│   └── audit/              # Audit reports
+├── migrations/             # Migration documentation
+└── _internal/              # Internal service documents
+    └── ai/                 # AI/Assistant context
 ├── ARCHITECTURE_CONTEXT.md  # Single source of truth (IMMUTABLE)
 ├── PROJECT_ORIENTATION.md  # Project orientation
 ├── PROJECT_PROGRESS.md     # Project progress tracker
@@ -179,7 +184,7 @@ docs/
 
 1. **Architecture:** [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md)
 2. **Foundation Lock:** [architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
-3. **Task Management:** [tasks/TASK_INDEX.md](./tasks/TASK_INDEX.md)
+3. **Task Management:** [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md)
 4. **Progress:** [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md)
 
 ### For API Reference
@@ -248,6 +253,27 @@ See [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) for Extensio
 - Use semantic versioning for major documents
 - Include version numbers in document headers
 
+### Structure Interpretation Rules
+
+**Single Source of Truth for Documentation Structure:**
+
+The structure of `docs/` directory is **FROZEN** and **CANONICAL**. All structural questions must be resolved by reference to:
+
+- **[architecture/DOCUMENTATION_CANON_LOCK.md](./architecture/DOCUMENTATION_CANON_LOCK.md)** - **Single source of truth** for documentation structure, naming rules, and organization
+
+**Rules:**
+- ✅ If a directory is listed in `DOCUMENTATION_CANON_LOCK.md` → it is canonical
+- ❌ If a directory is not listed → it is non-canonical
+- ✅ If a document's placement is described → it is correct
+- ❌ If a document's placement contradicts the lock → it is incorrect
+
+**Structural Changes:**
+- Any structural changes to `docs/` **MUST** be made through modification of `DOCUMENTATION_CANON_LOCK.md` first
+- Creating new top-level directories without updating the lock is **FORBIDDEN**
+- Moving documents between sections without updating the lock is **FORBIDDEN**
+
+See [architecture/DOCUMENTATION_CANON_LOCK.md](./architecture/DOCUMENTATION_CANON_LOCK.md) for complete structure freeze rules and enforcement.
+
 ---
 
 ## 📞 Support
@@ -257,7 +283,7 @@ For questions about documentation:
 - Check the relevant canonical document from the entry points above
 - Review [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md) for architecture questions
 - Check [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) for current status
-- Consult [tasks/TASK_INDEX.md](./tasks/TASK_INDEX.md) for task overview
+- Consult [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md) for task overview
 
 **Remember:** Use ONLY `docs/` for canonical information. `docs_archive/` is NOT source of truth.
 
@@ -277,4 +303,4 @@ The library now includes a comprehensive system for controlled growth:
 - Enhanced Storybook DX with a11y testing and token display
 - Automated component request triage workflow
 
-See [tasks/COMPONENT_NEEDS_INVENTORY.md](./tasks/COMPONENT_NEEDS_INVENTORY.md) for details.
+See [workflows/tasks/COMPONENT_NEEDS_INVENTORY.md](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) for details.

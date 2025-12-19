@@ -74,7 +74,7 @@ Brief overview of governance health, key findings, and overall compliance status
 
 ### 2.1 Guard Rules Document Review
 
-**Reference:** [TUI_CURSOR_GUARD_RULES.md](../architecture/TUI_CURSOR_GUARD_RULES.md)
+**Reference:** [ASSISTANT_RULES.md](../architecture/ASSISTANT_RULES.md)
 
 - [ ] Guard Rules align with current architecture
 - [ ] Guard Rules reference correct Authority Contracts
@@ -119,7 +119,7 @@ Brief overview of governance health, key findings, and overall compliance status
 
 ### 3.1 Authority Map Review
 
-**Reference:** [AUTHORITY_MAP.md](../architecture/AUTHORITY_MAP.md)
+**Reference:** [AUTHORITY_NAVIGATION.md](../architecture/AUTHORITY_NAVIGATION.md)
 
 - [ ] All Foundation Authorities remain LOCKED
 - [ ] Extension Authority Contract is ACTIVE
@@ -153,7 +153,7 @@ Brief overview of governance health, key findings, and overall compliance status
 
 ### 4.1 Foundation Lock Review
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](../architecture/FINAL_FOUNDATION_LOCK.md)
+**Reference:** [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md)
 
 - [ ] Foundation Lock remains in effect
 - [ ] Foundation Enforcement is LOCKED/APPLIED
@@ -165,7 +165,7 @@ Brief overview of governance health, key findings, and overall compliance status
 
 ### 4.2 Architecture Lock Review
 
-**Reference:** [UI_ARCHITECTURE_LOCK.md](../architecture/UI_ARCHITECTURE_LOCK.md)
+**Reference:** [ARCHITECTURE_LOCK.md](../architecture/ARCHITECTURE_LOCK.md)
 
 - [ ] Architecture Lock remains in effect
 - [ ] No architectural violations detected
@@ -302,10 +302,10 @@ Brief overview of governance health, key findings, and overall compliance status
 
 - [ESLint Setup & Governance](../architecture/ESLINT_SETUP.md)
 - [ESLint Rules Scope Matrix](../architecture/eslint_rules_scope_matrix.md)
-- [TUI Cursor Guard Rules](../architecture/TUI_CURSOR_GUARD_RULES.md)
-- [Authority Map](../architecture/AUTHORITY_MAP.md)
-- [Final Foundation Lock](../architecture/FINAL_FOUNDATION_LOCK.md)
-- [TUI Architecture Lock](../architecture/UI_ARCHITECTURE_LOCK.md)
+- [TUI Cursor Guard Rules](../architecture/ASSISTANT_RULES.md)
+- [Authority Map](../architecture/AUTHORITY_NAVIGATION.md)
+- [Final Foundation Lock](../architecture/FOUNDATION_LOCK.md)
+- [TUI Architecture Lock](../architecture/ARCHITECTURE_LOCK.md)
 
 ---
 

@@ -261,11 +261,11 @@ Over:
 
 ## 📚 Related Documents
 
-* [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock (includes Link component details)
+* [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation layer lock (includes Link component details)
 * [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) - Foundation component scope (includes Link scope definition)
 * [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) - Foundation lifecycle process (includes asChild usage notes for Link)
-* [UI_ARCHITECTURE_LOCK.md](./UI_ARCHITECTURE_LOCK.md) - UI architecture lock
-* [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md) - Interaction patterns
+* [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - UI architecture lock
+* [INTERACTION_AUTHORITY.md](./INTERACTION_AUTHORITY.md) - Interaction patterns
 * [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale (Link uses canonical scale)
 
 ---

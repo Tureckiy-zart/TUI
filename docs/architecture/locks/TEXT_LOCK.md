@@ -208,11 +208,11 @@ If modifications to locked Text / Typography components or tokens are required, 
 
 ## 📚 Related Documents
 
-- **[Extension Canonical State](../architecture/TUI_EXTENSION_CANONICAL_STATE.md)** - Component usage rules
-- **[Architecture Lock](../architecture/TUI_ARCHITECTURE_LOCK.md)** - Foundation and Extension lock status
-- **[Token System](../architecture/TUI_TOKEN_SYSTEM.md)** - Token system documentation
-- **[Code Review Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TEXT_TOKEN_STANDARDIZATION_CODE_REVIEW.md)** - Architectural code review (Note: File may be in docs_archive)
-- **[Micro-Fixes Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TEXT_TYPOGRAPHY_MICRO_FIXES_REPORT.md)** - Documentation improvements (Note: File may be in docs_archive)
+- **[Extension Canonical State](../EXTENSION_STATE.md)** - Component usage rules
+- **[Architecture Lock](../ARCHITECTURE_LOCK.md)** - Foundation and Extension lock status
+- **[Token System](../TOKEN_AUTHORITY.md)** - Token system documentation
+- **Code Review Report** — Architectural code review (archived; file no longer available)
+- **Micro-Fixes Report** — Documentation improvements (archived; file no longer available)
 
 ---
 

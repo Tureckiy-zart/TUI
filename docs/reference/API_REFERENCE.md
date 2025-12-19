@@ -179,7 +179,7 @@ Foundation UI components built on shadcn/ui primitives with Tenerife branding an
 
 ### Button
 
-- **Status:** 🔒 **FOUNDATION LOCKED** - See [FINAL_FOUNDATION_LOCK.md](../architecture/FINAL_FOUNDATION_LOCK.md)
+- **Status:** 🔒 **FOUNDATION LOCKED** - See [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md)
 - **Component:** `Button`
 - **Types:** `ButtonProps`, `buttonVariants`
 - **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
@@ -258,7 +258,7 @@ Foundation UI components built on shadcn/ui primitives with Tenerife branding an
 
 ### Link
 
-- **Status:** 🔒 **FOUNDATION LOCKED** - See [FINAL_FOUNDATION_LOCK.md](../architecture/FINAL_FOUNDATION_LOCK.md)
+- **Status:** 🔒 **FOUNDATION LOCKED** - See [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md)
 - **Component:** `Link`
 - **Types:** `LinkProps`, `linkVariants`
 - **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
@@ -511,7 +511,7 @@ Radix-based select component with token-driven styling.
 
 ### Select
 
-- **Status:** ⏳ **FOUNDATION - PENDING CANONICAL LOCK** - See [FINAL_FOUNDATION_LOCK.md](../architecture/FINAL_FOUNDATION_LOCK.md)
+- **Status:** ⏳ **FOUNDATION - PENDING CANONICAL LOCK** - See [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md)
 - `SelectRoot` - Select root container
 - `SelectTrigger` - Select trigger button
 - `SelectValue` - Select value display

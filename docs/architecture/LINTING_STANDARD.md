@@ -254,4 +254,4 @@ Potential improvements to this rule:
 
 - [TypeScript ESLint Rules](https://typescript-eslint.io/rules/)
 - [ESLint Custom Rules](https://eslint.org/docs/latest/extend/custom-rules)
-- [Tenerife UI Architecture](./tui-self-governing-architecture.mdc)
+- [Tenerife UI Architecture](../ARCHITECTURE_CONTEXT.md)

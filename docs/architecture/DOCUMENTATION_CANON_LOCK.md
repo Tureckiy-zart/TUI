@@ -54,15 +54,17 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Standards (`LINTING_STANDARD.md`)
 - Tooling decisions (`TOOLING_DECISIONS.md`)
 - Authority Navigation (`AUTHORITY_NAVIGATION.md`)
+- `locks/` subdirectory - Component-specific locks
 
 **Rules:**
 - ✅ Authority Contracts MUST be in this folder
 - ✅ Architecture locks and rules MUST be in this folder
+- ✅ Component locks MUST be in `architecture/locks/` subdirectory
 - ❌ Reference documentation MUST NOT be in this folder
 
 ### `docs/reference/`
 
-**Purpose:** API references, integration guides, and usage examples
+**Purpose:** API references, integration guides, typing standards, and usage examples
 
 **Contains:**
 - API references (`API_REFERENCE.md`, `TOKENS_EXPORT_REFERENCE.md`)
@@ -70,29 +72,17 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Component inventories (`COMPONENTS_INVENTORY.md`)
 - Examples (`COMPONENT_EXAMPLES.md`)
 - Token overviews (`TOKENS_OVERVIEW.md`)
+- Typing standards (`TYPING_STANDARD.md`, `TYPING_SYSTEM.md`, `TYPESCRIPT_GENERAL_RULES.md`)
+- UI exceptions (`GRADIENT_EXCEPTIONS.md`)
+- Foundation reference (`FOUNDATION_REFERENCE.md`)
 
 **Rules:**
 - ✅ Developer-facing reference material ONLY
 - ✅ API documentation and integration guides
+- ✅ Typing standards and structural conventions
 - ❌ Architecture rules MUST NOT be in this folder
 
-### `docs/tasks/`
-
-**Purpose:** Process workflows, checklists, and library maturity system
-
-**Contains:**
-- Component creation checklists (`COMPONENT_CREATION_CHECKLIST.md`)
-- Feedback processes (`FEEDBACK_COLLECTION_PROCESS.md`, `FEEDBACK_REVIEW_PROCESS.md`)
-- Component needs tracking (`COMPONENT_NEEDS_INVENTORY.md`)
-- Usage tracking (`COMPONENT_USAGE_TRACKING.md`)
-- Task index (`TASK_INDEX.md`)
-
-**Rules:**
-- ✅ Process definitions and workflows
-- ✅ Checklists and task management
-- ❌ Architecture rules MUST NOT be in this folder
-
-### `docs/locks/`
+### `docs/architecture/locks/`
 
 **Purpose:** Component-specific locks
 
@@ -101,53 +91,69 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 **Rules:**
 - ✅ Component-specific locks ONLY
-- ❌ General architecture locks MUST be in `docs/architecture/`
+- ❌ General architecture locks MUST be in `docs/architecture/` (parent directory)
 
-### `docs/structure/`
+### `docs/workflows/`
 
-**Purpose:** Standards and structural conventions
+**Purpose:** Process workflows, checklists, and library maturity system
 
 **Contains:**
-- Typing standards (`TYPING_STANDARD.md`)
+- `tasks/` - Component creation checklists (`COMPONENT_CREATION_CHECKLIST.md`), feedback processes, component needs tracking, usage tracking, task index
+- `foundation/` - Foundation processes (`FOUNDATION_STEP_PIPELINE.md`)
 
 **Rules:**
-- ✅ Standards and conventions
+- ✅ Process definitions and workflows
+- ✅ Checklists and task management
 - ❌ Architecture rules MUST NOT be in this folder
-
-### `docs/ui/`
-
-**Purpose:** UI-specific exceptions and special cases
-
-**Contains:**
-- Documented exceptions (`GRADIENT_EXCEPTIONS.md`)
-
-**Rules:**
-- ✅ UI-specific exceptions and special cases
-- ❌ General documentation MUST NOT be in this folder
-
-### `docs/foundation/`
-
-**Purpose:** Foundation-specific documentation
-
-**Contains:**
-- Foundation reference (`FOUNDATION_REFERENCE.md`)
-- Foundation processes (`FOUNDATION_STEP_PIPELINE.md`)
-
-**Rules:**
-- ✅ Foundation layer documentation ONLY
-- ❌ Extension documentation MUST NOT be in this folder
 
 ### `docs/governance/`
 
-**Purpose:** Governance processes and reviews
+**Purpose:** Governance review cycles and review templates
 
 **Contains:**
-- Governance review cycles (`GOVERNANCE_REVIEW_CYCLE.md`)
-- Review templates (`GOVERNANCE_REVIEW_TEMPLATE.md`)
+- Governance review cycles, review templates
+- `reviews/` - Governance review reports
 
 **Rules:**
-- ✅ Governance and review processes
-- ❌ Architecture rules MUST NOT be in this folder
+- ✅ Governance processes and reviews
+- ❌ Should NOT be part of primary reading route for architecture understanding
+
+### `docs/reports/`
+
+**Purpose:** Reports and audit documentation
+
+**Contains:**
+- Project reports (`*_REPORT.md`)
+- `audit/` - Audit reports and analyses
+
+**Rules:**
+- ✅ Historical reports and audits
+- ❌ Should NOT be part of primary reading route
+
+### `docs/migrations/`
+
+**Purpose:** Migration documentation
+
+**Contains:**
+- Migration reports and historical migration context
+
+**Rules:**
+- ✅ Migration documentation for historical reference
+- ❌ Should NOT be part of primary reading route
+
+### `docs/_internal/`
+
+**Purpose:** Internal service documents (AI context only)
+
+**Contains:**
+- `ai/` - AI/Assistant context and GPT-specific documentation
+  - `gpt_canon_context/` - GPT canonical context
+  - `_to_GPT_project/` - GPT project documentation
+  - `_to_GPT_project_essential/` - Essential GPT project documentation
+
+**Rules:**
+- ✅ AI-specific context and documentation
+- ❌ Should NOT be part of primary reading route
 
 ### Root-Level Files: `docs/*.md`
 
@@ -183,6 +189,131 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - ❌ **NEVER** reference archived documents for canonical rules
 - ❌ **NEVER** use archived documents for AI/Cursor context
 - ✅ **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
+
+---
+
+## Documentation Structure Freeze
+
+**Status:** 🔒 **FROZEN**  
+**Date:** 2025-01-27  
+**Purpose:** Prevent structural drift and ensure all documentation changes respect canonical organization
+
+### Freeze Declaration
+
+The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This structure represents the single source of truth for documentation organization.
+
+**The following top-level directories are FROZEN:**
+
+1. **`docs/architecture/`** - Authority Contracts, Architecture Rules, Locks, and architectural guidelines
+   - **Purpose:** Contains immutable LAW documents and active GUIDE documents
+   - **Boundary:** Architecture rules and authority contracts ONLY
+   - **Forbidden:** Reference documentation, reports, or service documents
+
+2. **`docs/reference/`** - API references, integration guides, typing standards, and usage examples
+   - **Purpose:** Developer-facing reference material
+   - **Boundary:** API documentation, integration guides, typing standards ONLY
+   - **Forbidden:** Architecture rules or internal service documents
+
+3. **`docs/governance/`** - Governance review cycles and review templates
+   - **Purpose:** Governance processes and review reports
+   - **Boundary:** Governance workflows and review documentation ONLY
+   - **Forbidden:** Architecture rules or primary reading route documents
+
+4. **`docs/workflows/`** - Process workflows, checklists, and library maturity system
+   - **Purpose:** Process definitions, workflows, and task management
+   - **Boundary:** Workflow definitions and process documentation ONLY
+   - **Forbidden:** Architecture rules or reference documentation
+
+5. **`docs/reports/`** - Reports and audit documentation
+   - **Purpose:** Historical reports and audit analyses
+   - **Boundary:** Project reports and audit documentation ONLY
+   - **Forbidden:** Primary reading route documents or architecture rules
+
+6. **`docs/migrations/`** - Migration documentation
+   - **Purpose:** Historical migration context and reports
+   - **Boundary:** Migration documentation ONLY
+   - **Forbidden:** Primary reading route documents or active architecture rules
+
+7. **`docs/_internal/`** - Internal service documents (AI context only)
+   - **Purpose:** AI/Assistant-specific context and documentation
+   - **Boundary:** Service documents for AI context ONLY
+   - **Forbidden:** Reader-facing documentation or architecture rules
+
+8. **`docs/archive/`** - Archived documentation (if exists)
+   - **Purpose:** Non-canonical, archived documentation
+   - **Boundary:** Historical and deprecated documentation ONLY
+   - **Forbidden:** Active canonical documentation
+
+### Structural Change Policy
+
+**CRITICAL RULE:** Any structural changes to `docs/` directory structure **MUST** be made through modification of this document (`DOCUMENTATION_CANON_LOCK.md`) first.
+
+**Process for Structural Changes:**
+
+1. **Proposal Phase:**
+   - Document the proposed structural change
+   - Justify why the change is architecturally necessary
+   - Identify which documents will be affected
+
+2. **Lock Update Phase:**
+   - Update this document (`DOCUMENTATION_CANON_LOCK.md`) to reflect the new structure
+   - Update the "Canonical Structure" section
+   - Update the "Documentation Structure Freeze" section
+   - Document the purpose and boundaries of any new directories
+
+3. **Implementation Phase:**
+   - Only after lock document is updated, implement the structural change
+   - Move files according to the updated structure
+   - Update all cross-references and links
+
+4. **Verification Phase:**
+   - Verify all files are in their canonical locations
+   - Verify all links are valid
+   - Verify no files are in unauthorized locations
+
+**Forbidden Without Lock Update:**
+
+- ❌ Creating new top-level directories in `docs/`
+- ❌ Moving documents between top-level directories
+- ❌ Placing reader-facing documents in `_internal/`
+- ❌ Placing architecture rules in `reference/`
+- ❌ Placing reference documentation in `architecture/`
+- ❌ Any structural change without first updating this lock document
+
+### Enforcement Rules
+
+**If a document violates structure:**
+- The document is considered **non-canonical**
+- The placement is considered an **error**
+- The document must be moved to its canonical location
+
+**If a file is placed outside its section:**
+- This is a **structural violation**
+- The file must be moved to the correct canonical location
+- All references must be updated
+
+**If a new directory is needed:**
+- The lock document (`DOCUMENTATION_CANON_LOCK.md`) **MUST** be updated first
+- The new directory's purpose and boundaries **MUST** be documented
+- Only after lock update can the directory be created
+
+**Priority Principle:**
+- **Architecture and Governance have priority over convenience**
+- Structural stability is more important than temporary convenience
+- All structural changes require architectural justification
+
+### Single Source of Truth
+
+This document (`DOCUMENTATION_CANON_LOCK.md`) is the **single source of truth** for documentation structure.
+
+**All structural questions must be resolved by reference to this document.**
+
+- ✅ If a directory is listed here → it is canonical
+- ❌ If a directory is not listed here → it is non-canonical
+- ✅ If a document's placement is described here → it is correct
+- ❌ If a document's placement contradicts this document → it is incorrect
+
+**No structural change can be made unconsciously.** All changes must pass through this lock document.
 
 ---
 
@@ -232,14 +363,14 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 **Forbidden:**
 - ❌ `*_AUTHORITY_CONTRACT.md` (CONTRACT redundant with AUTHORITY)
-- ❌ `TOKEN_SYSTEM.md` (should be `TOKEN_AUTHORITY.md`)
+- ❌ `TOKEN_AUTHORITY.md` (should be `TOKEN_AUTHORITY.md`)
 
 #### Authority Navigation
 
 **Pattern:** `AUTHORITY_NAVIGATION.md`
 
 **Forbidden:**
-- ❌ `AUTHORITY_MAP.md` (MAP is implementation detail)
+- ❌ `AUTHORITY_NAVIGATION.md` (MAP is implementation detail)
 
 #### Architecture Rules & Extension Guidelines
 
@@ -251,8 +382,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `LINTING_STANDARD.md`
 
 **Forbidden:**
-- ❌ `UI_ARCHITECTURE_RULES.md` (UI_ prefix redundant)
-- ❌ `EXTENSION_CANONICAL_STATE.md` (CANONICAL redundant)
+- ❌ `ARCHITECTURE_RULES.md` (UI_ prefix redundant)
+- ❌ `EXTENSION_STATE.md` (CANONICAL redundant)
 
 #### AI/Assistant Behavior Rules
 
@@ -263,8 +394,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `ASSISTANT_DEVELOPMENT_RULES.md`
 
 **Forbidden:**
-- ❌ `TUI_CURSOR_GUARD_RULES.md` (TUI_ internal abbreviation, CURSOR tool-specific)
-- ❌ `CURSOR_UI_RULES.md` (CURSOR tool-specific, UI redundant)
+- ❌ `ASSISTANT_RULES.md` (TUI_ internal abbreviation, CURSOR tool-specific)
+- ❌ `ASSISTANT_DEVELOPMENT_RULES.md` (CURSOR tool-specific, UI redundant)
 
 #### Component Locks
 
@@ -330,7 +461,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `TOOLING_DECISIONS.md`
 
 **Forbidden:**
-- ❌ `LINTING_RULES.md` (should be STANDARD, not RULES)
+- ❌ `LINTING_STANDARD.md` (should be STANDARD, not RULES)
 
 #### Entry Points & Orientation
 
@@ -343,7 +474,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 **Forbidden:**
 - ❌ `README_GPT.md` (GPT is tool-specific, should be ASSISTANT)
-- ❌ `CANONICAL_PROJECT_ORIENTATION.md` (CANONICAL redundant)
+- ❌ `PROJECT_ORIENTATION.md` (CANONICAL redundant)
 
 #### Exceptions & Special Cases
 
@@ -355,14 +486,14 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 **Forbidden:**
 - ❌ `gradient_exceptions.md` (lowercase)
-- ❌ `CI-CD_OVERVIEW.md` (hyphen instead of underscore)
+- ❌ `CI_CD_OVERVIEW.md` (hyphen instead of underscore)
 
 ### Case Standardization
 
 - ✅ **UPPERCASE** for all canonical document names
 - ❌ **lowercase** forbidden (except standard `README.md`)
 - ✅ **Underscores** for word separation (`CI_CD_OVERVIEW.md`)
-- ❌ **Hyphens** forbidden (`CI-CD_OVERVIEW.md` → `CI_CD_OVERVIEW.md`)
+- ❌ **Hyphens** forbidden (`CI_CD_OVERVIEW.md` → `CI_CD_OVERVIEW.md`)
 
 ### Forbidden Patterns Summary
 
@@ -408,8 +539,8 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 13. `docs/architecture/LAYOUT_AUTHORITY.md` - LOCKED
 14. `docs/architecture/TOKEN_AUTHORITY.md` - LOCKED
 15. `docs/architecture/EXTENSION_AUTHORITY.md` - ACTIVE (but still LAW - defines Extension boundaries)
-16. `docs/locks/LAYOUT_LOCK.md` - LOCKED
-17. `docs/locks/TEXT_LOCK.md` - LOCKED
+16. `docs/architecture/locks/LAYOUT_LOCK.md` - LOCKED
+17. `docs/architecture/locks/TEXT_LOCK.md` - LOCKED
 
 **Change Policy:** ❌ **FORBIDDEN** - LAW documents are immutable
 
@@ -432,13 +563,13 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 5. `docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md` - Assistant development rules
 6. `docs/architecture/LINTING_STANDARD.md` - Linting standards
 7. `docs/architecture/TOOLING_DECISIONS.md` - Tooling decisions
-8. `docs/structure/TYPING_STANDARD.md` - Typing standards
-9. `docs/tasks/COMPONENT_CREATION_CHECKLIST.md` - Component creation checklist
-10. `docs/tasks/FEEDBACK_COLLECTION_PROCESS.md` - Feedback collection process
-11. `docs/tasks/FEEDBACK_REVIEW_PROCESS.md` - Feedback review process
-12. `docs/tasks/COMPONENT_NEEDS_INVENTORY.md` - Component needs tracking
-13. `docs/tasks/COMPONENT_USAGE_TRACKING.md` - Component usage tracking
-14. `docs/ui/GRADIENT_EXCEPTIONS.md` - Documented exceptions
+8. `docs/reference/TYPING_STANDARD.md` - Typing standards
+9. `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` - Component creation checklist
+10. `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` - Feedback collection process
+11. `docs/workflows/tasks/FEEDBACK_REVIEW_PROCESS.md` - Feedback review process
+12. `docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md` - Component needs tracking
+13. `docs/workflows/tasks/COMPONENT_USAGE_TRACKING.md` - Component usage tracking
+14. `docs/reference/GRADIENT_EXCEPTIONS.md` - Documented exceptions
 15. `docs/CI_CD_OVERVIEW.md` - CI/CD overview
 
 **Change Policy:** ✅ **ALLOWED** with architectural review
@@ -482,7 +613,7 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 2. `docs/ASSISTANT_README.md` - Assistant-specific README
 3. `docs/PROJECT_ORIENTATION.md` - Canonical project orientation
 4. `docs/PROJECT_PROGRESS.md` - Project progress tracking
-5. `docs/tasks/TASK_INDEX.md` - Task index and navigation
+5. `docs/workflows/tasks/TASK_INDEX.md` - Task index and navigation
 6. `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Documentation inventory
 7. `docs/architecture/DOCUMENTATION_CANON_LOCK.md` - This document
 

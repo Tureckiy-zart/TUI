@@ -24,7 +24,7 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 
 **Canonical Rule:** FOUNDATION tokens **MUST NOT** exist without active components.
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)
+**Reference:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)
 
 ### ✅ PRIMITIVES Layer
 
@@ -385,15 +385,15 @@ Violating this governance requires an explicit unlock procedure.
 
 ## Related Documents
 
-- [UI_ARCHITECTURE_LOCK.md](./UI_ARCHITECTURE_LOCK.md) - **PRIMARY CANONICAL SOURCE** - Architecture lock with all canonical rules and implementations (supersedes CANONICAL_STATE_FINAL.md)
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock
+- [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - **PRIMARY CANONICAL SOURCE** - Architecture lock with all canonical rules and implementations (supersedes CANONICAL_STATE_FINAL.md)
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation layer lock
 - [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) - 🔒 **LOCKED** Link architectural lock: first-class semantic anchor, `asChild` FORBIDDEN
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Enforcement Contract (FINAL / APPLIED)
 - [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) - 13-step Foundation component lifecycle
 - [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md) - Human-readable navigation to Foundation lifecycle
-- [UI_ARCHITECTURE_LOCK.md](./UI_ARCHITECTURE_LOCK.md) - Architecture lock details
-- [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) - Internal canonical context
-- [TUI_CURSOR_GUARD_RULES.md](./TUI_CURSOR_GUARD_RULES.md) - Cursor/AI guard rules
+- [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - Architecture lock details
+- [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) - Internal canonical context
+- [ASSISTANT_RULES.md](./ASSISTANT_RULES.md) - Cursor/AI guard rules
 - [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md) - ESLint rules scope authority
 - [ESLINT_SETUP.md](./ESLINT_SETUP.md) - ESLint setup and governance (architectural enforcement)
 

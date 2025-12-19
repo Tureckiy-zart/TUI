@@ -38,13 +38,13 @@ This document establishes permanent self-governing rules for Cursor when working
 
 ### Rule 0: ARCHITECTURAL_TYPING_STANDARD (MANDATORY)
 
-**Rule:** Cursor AI **MUST ALWAYS** follow `docs/structure/TYPING_STANDARD.md` for all public API typing. CVA-derived public types are **FORBIDDEN**.
+**Rule:** Cursor AI **MUST ALWAYS** follow `docs/reference/TYPING_STANDARD.md` for all public API typing. CVA-derived public types are **FORBIDDEN**.
 
 **Typing Resolution Order:**
-1. **PRIMARY:** `docs/structure/TYPING_STANDARD.md` — **MANDATORY architectural standard** for public API typing (variants, sizes, CVA boundaries)
-2. **SECONDARY:** `docs/structure/TYPESCRIPT_GENERAL_RULES.md` — General TypeScript implementation guidance (does not override `TYPING_STANDARD.md`)
+1. **PRIMARY:** `docs/reference/TYPING_STANDARD.md` — **MANDATORY architectural standard** for public API typing (variants, sizes, CVA boundaries)
+2. **SECONDARY:** `docs/reference/TYPESCRIPT_GENERAL_RULES.md` — General TypeScript implementation guidance (does not override `TYPING_STANDARD.md`)
 
-**Explanation:** `docs/structure/TYPING_STANDARD.md` is the **MANDATORY architectural standard** governing public API typing. It overrides all other typing guidelines, including general TypeScript rules. For general TypeScript implementation patterns (outside of public API typing), refer to `TYPESCRIPT_GENERAL_RULES.md` as secondary guidance.
+**Explanation:** `docs/reference/TYPING_STANDARD.md` is the **MANDATORY architectural standard** governing public API typing. It overrides all other typing guidelines, including general TypeScript rules. For general TypeScript implementation patterns (outside of public API typing), refer to `TYPESCRIPT_GENERAL_RULES.md` as secondary guidance.
 
 **Mandatory Requirements:**
 
@@ -86,8 +86,8 @@ export interface ButtonProps
 ```
 
 **Reference:** 
-- `docs/structure/TYPING_STANDARD.md` - **MANDATORY** architectural standard (PRIMARY AUTHORITY, takes precedence over all other typing rules)
-- `docs/structure/TYPESCRIPT_GENERAL_RULES.md` - General TypeScript implementation rules (SECONDARY GUIDANCE, does not override `TYPING_STANDARD.md`)
+- `docs/reference/TYPING_STANDARD.md` - **MANDATORY** architectural standard (PRIMARY AUTHORITY, takes precedence over all other typing rules)
+- `docs/reference/TYPESCRIPT_GENERAL_RULES.md` - General TypeScript implementation rules (SECONDARY GUIDANCE, does not override `TYPING_STANDARD.md`)
 
 ---
 
@@ -541,11 +541,11 @@ When working with components, Cursor must follow these directives:
 **Before implementing any new component or modifying existing ones:**
 
 1. **Check Typing Standard (Resolution Order):**
-   - **PRIMARY:** **ALWAYS** reference `docs/structure/TYPING_STANDARD.md` first for public API typing
+   - **PRIMARY:** **ALWAYS** reference `docs/reference/TYPING_STANDARD.md` first for public API typing
      - Verify public API typing follows `TYPING_STANDARD.md`
      - **NEVER** use `VariantProps` in public APIs
      - **NEVER** infer public types from CVA
-   - **SECONDARY:** For general TypeScript implementation patterns, refer to `docs/structure/TYPESCRIPT_GENERAL_RULES.md` (does not override `TYPING_STANDARD.md`)
+   - **SECONDARY:** For general TypeScript implementation patterns, refer to `docs/reference/TYPESCRIPT_GENERAL_RULES.md` (does not override `TYPING_STANDARD.md`)
 2. **Scan Props:** Read all props in the component interface
 3. **Classify Props:** Categorize each prop as:
    - **Visual:** Affects appearance, layout, spacing, color, typography, motion
@@ -645,7 +645,7 @@ export type { BlurToken, ResponsiveBlur } from "./types";
 
 **When reviewing code, verify:**
 
-- [ ] Public API typing follows `docs/structure/TYPING_STANDARD.md` (explicit unions, NOT VariantProps)
+- [ ] Public API typing follows `docs/reference/TYPING_STANDARD.md` (explicit unions, NOT VariantProps)
 - [ ] No CVA-derived types in public APIs
 - [ ] All visual props use token unions
 - [ ] All responsive props use `Responsive<T>` (not `ResponsiveValue`)
@@ -990,7 +990,7 @@ Before marking any component as complete, verify:
 
 - ❌ **NEVER** use `VariantProps` or CVA-derived types in public APIs (see `TYPING_STANDARD.md`)
 - ❌ **NEVER** infer public types from CVA implementations
-- ❌ **NEVER** violate `docs/structure/TYPING_STANDARD.md` for any reason
+- ❌ **NEVER** violate `docs/reference/TYPING_STANDARD.md` for any reason
 - ❌ **NEVER** use raw `string` or `number` for visual props
 - ❌ **NEVER** use `ResponsiveValue` or ad-hoc responsive types
 - ❌ **NEVER** define token unions inline in component files
@@ -1005,7 +1005,7 @@ Before marking any component as complete, verify:
 
 ## ✅ What TO Do
 
-- ✅ **ALWAYS** follow `docs/structure/TYPING_STANDARD.md` for public API typing (MANDATORY)
+- ✅ **ALWAYS** follow `docs/reference/TYPING_STANDARD.md` for public API typing (MANDATORY)
 - ✅ **ALWAYS** use explicit union types for variants, sizes, and similar props
 - ✅ **ALWAYS** use token union types for visual props
 - ✅ **ALWAYS** use `Responsive<T>` for responsive props
@@ -1041,7 +1041,7 @@ Cursor demonstrates consistent use of token unions in subsequent tasks when:
 - **Token Types:** `src/tokens/types/index.ts`
 - **Responsive Types:** `src/types/responsive.ts`
 - **Token Refactor Report:** `docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_UNION_REFACTOR_REPORT.md` (Note: File may be in docs_archive)
-- **Typing Standard:** `docs/structure/TYPING_STANDARD.md` - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED, takes precedence over all other typing rules)
+- **Typing Standard:** `docs/reference/TYPING_STANDARD.md` - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED, takes precedence over all other typing rules)
 
 ---
 

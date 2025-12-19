@@ -49,7 +49,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 1.2 Scope Matrix Compliance
 
-**Reference:** [eslint_rules_scope_matrix.md](../architecture/eslint_rules_scope_matrix.md)
+**Reference:** [eslint_rules_scope_matrix.md](../../architecture/eslint_rules_scope_matrix.md)
 
 - [x] All rules apply only within declared scope
 - [x] No rules leak across layer boundaries
@@ -93,7 +93,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 2.1 Guard Rules Document Review
 
-**Reference:** [TUI_CURSOR_GUARD_RULES.md](../architecture/TUI_CURSOR_GUARD_RULES.md)
+**Reference:** [ASSISTANT_RULES.md](../../architecture/ASSISTANT_RULES.md)
 
 - [x] Guard Rules align with current architecture
 - [x] Guard Rules reference correct Authority Contracts
@@ -103,7 +103,7 @@ This initial governance review establishes the baseline for the governance maint
 
 **Findings:**
 - ✅ Guard Rules document exists and is up-to-date (2025-12-16)
-- ✅ Document references FINAL_FOUNDATION_LOCK.md correctly
+- ✅ Document references FOUNDATION_LOCK.md correctly
 - ✅ Document references Authority Contracts appropriately
 - ✅ Guard Rules align with ESLint rule enforcement
 - ✅ All protection areas are covered:
@@ -153,7 +153,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 3.1 Authority Map Review
 
-**Reference:** [AUTHORITY_MAP.md](../architecture/AUTHORITY_MAP.md)
+**Reference:** [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md)
 
 - [x] All Foundation Authorities remain LOCKED
 - [x] Extension Authority Contract is ACTIVE
@@ -199,7 +199,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 4.1 Foundation Lock Review
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](../architecture/FINAL_FOUNDATION_LOCK.md)
+**Reference:** [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md)
 
 - [x] Foundation Lock remains in effect
 - [x] Foundation Enforcement is LOCKED/APPLIED
@@ -215,7 +215,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 4.2 Architecture Lock Review
 
-**Reference:** [UI_ARCHITECTURE_LOCK.md](../architecture/UI_ARCHITECTURE_LOCK.md)
+**Reference:** [ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md)
 
 - [x] Architecture Lock remains in effect
 - [x] No architectural violations detected
@@ -243,7 +243,7 @@ This initial governance review establishes the baseline for the governance maint
 
 ### 5.1 ESLint Configuration
 
-**Reference:** [eslint.config.mjs](../../eslint.config.mjs)
+**Reference:** [eslint.config.mjs](../../../eslint.config.mjs)
 
 - [x] ESLint configuration is correct
 - [x] Rule scope boundaries are enforced
@@ -403,14 +403,14 @@ All enforcement mechanisms are healthy and aligned. Governance score is perfect 
 
 ### 10.2 References
 
-- [ESLint Setup & Governance](../architecture/ESLINT_SETUP.md)
-- [ESLint Rules Scope Matrix](../architecture/eslint_rules_scope_matrix.md)
-- [TUI Cursor Guard Rules](../architecture/TUI_CURSOR_GUARD_RULES.md)
-- [Authority Map](../architecture/AUTHORITY_MAP.md)
-- [Final Foundation Lock](../architecture/FINAL_FOUNDATION_LOCK.md)
-- [TUI Architecture Lock](../architecture/UI_ARCHITECTURE_LOCK.md)
-- [Governance Review Cycle](./GOVERNANCE_REVIEW_CYCLE.md)
-- [Governance Review Template](./GOVERNANCE_REVIEW_TEMPLATE.md)
+- [ESLint Setup & Governance](../../architecture/ESLINT_SETUP.md)
+- [ESLint Rules Scope Matrix](../../architecture/eslint_rules_scope_matrix.md)
+- [TUI Cursor Guard Rules](../../architecture/ASSISTANT_RULES.md)
+- [Authority Map](../../architecture/AUTHORITY_NAVIGATION.md)
+- [Final Foundation Lock](../../architecture/FOUNDATION_LOCK.md)
+- [TUI Architecture Lock](../../architecture/ARCHITECTURE_LOCK.md)
+- [Governance Review Cycle](../GOVERNANCE_REVIEW_CYCLE.md)
+- [Governance Review Template](../GOVERNANCE_REVIEW_TEMPLATE.md)
 
 ### 10.3 Automated Report
 

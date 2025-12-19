@@ -24,7 +24,7 @@ This document defines canonical naming standards for all 44 documentation files 
 
 **Semantic Meaning:** Documents that establish the fundamental locked and immutable state of the architecture.
 
-**Canonical Document:** `INTERNAL_CANONICAL_CONTEXT.md`  
+**Canonical Document:** `ARCHITECTURE_CONTEXT.md`  
 **Reason:** Marked as IMMUTABLE and "single source of truth for architecture, design decisions, Foundation vs Extension rules"
 
 **Naming Standard:** `ARCHITECTURE_{PURPOSE}.md`
@@ -34,10 +34,10 @@ This document defines canonical naming standards for all 44 documentation files 
 - Canonical state: `ARCHITECTURE_STATE.md`
 
 **Files:**
-1. `INTERNAL_CANONICAL_CONTEXT.md` → `ARCHITECTURE_CONTEXT.md`
-2. `FINAL_FOUNDATION_LOCK.md` → `FOUNDATION_LOCK.md`
-3. `UI_ARCHITECTURE_LOCK.md` → `ARCHITECTURE_LOCK.md`
-4. `CANONICAL_LOCK.md` → `ARCHITECTURE_STATE.md`
+1. `ARCHITECTURE_CONTEXT.md` → `ARCHITECTURE_CONTEXT.md`
+2. `FOUNDATION_LOCK.md` → `FOUNDATION_LOCK.md`
+3. `ARCHITECTURE_LOCK.md` → `ARCHITECTURE_LOCK.md`
+4. `ARCHITECTURE_LOCK.md` → `ARCHITECTURE_STATE.md`
 
 ---
 
@@ -53,17 +53,17 @@ This document defines canonical naming standards for all 44 documentation files 
 - Remove "CONTRACT" suffix (redundant with AUTHORITY)
 
 **Files:**
-1. `INTERACTION_AUTHORITY_CONTRACT.md` → `INTERACTION_AUTHORITY.md`
-2. `STATE_AUTHORITY_MATRIX.md` → `STATE_MATRIX.md` (matrix is part of state authority system)
-3. `STATE_AUTHORITY_CONTRACT.md` → `STATE_AUTHORITY.md`
-4. `SPACING_AUTHORITY_CONTRACT.md` → `SPACING_AUTHORITY.md`
-5. `RADIUS_AUTHORITY_CONTRACT.md` → `RADIUS_AUTHORITY.md`
-6. `TYPOGRAPHY_AUTHORITY_CONTRACT.md` → `TYPOGRAPHY_AUTHORITY.md`
-7. `MOTION_AUTHORITY_CONTRACT.md` → `MOTION_AUTHORITY.md`
-8. `ELEVATION_AUTHORITY_CONTRACT.md` → `ELEVATION_AUTHORITY.md`
-9. `LAYOUT_AUTHORITY_CONTRACT.md` → `LAYOUT_AUTHORITY.md`
-10. `TOKEN_SYSTEM.md` → `TOKEN_AUTHORITY.md` (token system is an authority)
-11. `EXTENSION_AUTHORITY_CONTRACT.md` → `EXTENSION_AUTHORITY.md`
+1. `INTERACTION_AUTHORITY.md` → `INTERACTION_AUTHORITY.md`
+2. `STATE_MATRIX.md` → `STATE_MATRIX.md` (matrix is part of state authority system)
+3. `STATE_AUTHORITY.md` → `STATE_AUTHORITY.md`
+4. `SPACING_AUTHORITY.md` → `SPACING_AUTHORITY.md`
+5. `RADIUS_AUTHORITY.md` → `RADIUS_AUTHORITY.md`
+6. `TYPOGRAPHY_AUTHORITY.md` → `TYPOGRAPHY_AUTHORITY.md`
+7. `MOTION_AUTHORITY.md` → `MOTION_AUTHORITY.md`
+8. `ELEVATION_AUTHORITY.md` → `ELEVATION_AUTHORITY.md`
+9. `LAYOUT_AUTHORITY.md` → `LAYOUT_AUTHORITY.md`
+10. `TOKEN_AUTHORITY.md` → `TOKEN_AUTHORITY.md` (token system is an authority)
+11. `EXTENSION_AUTHORITY.md` → `EXTENSION_AUTHORITY.md`
 
 ---
 
@@ -71,13 +71,13 @@ This document defines canonical naming standards for all 44 documentation files 
 
 **Semantic Meaning:** Documents that help navigate and understand the Authority system.
 
-**Canonical Document:** `AUTHORITY_MAP.md` (only document in group)
+**Canonical Document:** `AUTHORITY_NAVIGATION.md` (only document in group)
 
 **Naming Standard:** `AUTHORITY_NAVIGATION.md`
 - "MAP" is implementation detail; "NAVIGATION" reflects semantic purpose
 
 **Files:**
-1. `AUTHORITY_MAP.md` → `AUTHORITY_NAVIGATION.md`
+1. `AUTHORITY_NAVIGATION.md` → `AUTHORITY_NAVIGATION.md`
 
 ---
 
@@ -85,15 +85,15 @@ This document defines canonical naming standards for all 44 documentation files 
 
 **Semantic Meaning:** Documents that define how to work within the architecture.
 
-**Canonical Document:** `UI_ARCHITECTURE_RULES.md` (primary rules document)
+**Canonical Document:** `ARCHITECTURE_RULES.md` (primary rules document)
 
 **Naming Standard:** `{DOMAIN}_RULES.md` or `{DOMAIN}_GUIDELINES.md`
 - "UI_" prefix is redundant (all architecture docs are UI-related)
 - "CANONICAL_STATE" → "EXTENSION_STATE" (clearer purpose)
 
 **Files:**
-1. `UI_ARCHITECTURE_RULES.md` → `ARCHITECTURE_RULES.md`
-2. `EXTENSION_CANONICAL_STATE.md` → `EXTENSION_STATE.md`
+1. `ARCHITECTURE_RULES.md` → `ARCHITECTURE_RULES.md`
+2. `EXTENSION_STATE.md` → `EXTENSION_STATE.md`
 3. `CANONICAL_STATE_FINAL.md` → (ARCHIVED - no rename needed)
 
 ---
@@ -102,7 +102,7 @@ This document defines canonical naming standards for all 44 documentation files 
 
 **Semantic Meaning:** Documents that define mandatory behavior rules for AI assistants.
 
-**Canonical Document:** `TUI_CURSOR_GUARD_RULES.md` (more comprehensive, guard-focused)
+**Canonical Document:** `ASSISTANT_RULES.md` (more comprehensive, guard-focused)
 
 **Naming Standard:** `ASSISTANT_RULES.md` or `AI_BEHAVIOR_RULES.md`
 - Remove "TUI_" prefix (internal abbreviation)
@@ -110,8 +110,8 @@ This document defines canonical naming standards for all 44 documentation files 
 - "GUARD" vs "RULES" - consolidate to "RULES"
 
 **Files:**
-1. `TUI_CURSOR_GUARD_RULES.md` → `ASSISTANT_RULES.md`
-2. `CURSOR_UI_RULES.md` → (merge into ASSISTANT_RULES.md or keep as `ASSISTANT_DEVELOPMENT_RULES.md`)
+1. `ASSISTANT_RULES.md` → `ASSISTANT_RULES.md`
+2. `ASSISTANT_DEVELOPMENT_RULES.md` → (merge into ASSISTANT_RULES.md or keep as `ASSISTANT_DEVELOPMENT_RULES.md`)
 
 ---
 
@@ -201,7 +201,7 @@ This document defines canonical naming standards for all 44 documentation files 
 - Remove "LINTING_" prefix (redundant with context)
 
 **Files:**
-1. `LINTING_RULES.md` → `LINTING_STANDARD.md`
+1. `LINTING_STANDARD.md` → `LINTING_STANDARD.md`
 2. `TOOLING_DECISIONS.md` → `TOOLING_DECISIONS.md` (no change - decisions is appropriate)
 3. `TYPING_STANDARD.md` → `TYPING_STANDARD.md` (no change)
 
@@ -214,7 +214,7 @@ This document defines canonical naming standards for all 44 documentation files 
 **Canonical Documents:** 
 - `README.md` - main entry point (standard)
 - `README_GPT.md` - AI assistant entry point
-- `CANONICAL_PROJECT_ORIENTATION.md` - project orientation
+- `PROJECT_ORIENTATION.md` - project orientation
 
 **Naming Standard:** `README.md`, `{AUDIENCE}_README.md`, `PROJECT_ORIENTATION.md`
 - Keep standard README.md
@@ -224,7 +224,7 @@ This document defines canonical naming standards for all 44 documentation files 
 **Files:**
 1. `README.md` → `README.md` (no change)
 2. `README_GPT.md` → `ASSISTANT_README.md`
-3. `CANONICAL_PROJECT_ORIENTATION.md` → `PROJECT_ORIENTATION.md`
+3. `PROJECT_ORIENTATION.md` → `PROJECT_ORIENTATION.md`
 
 ---
 
@@ -240,7 +240,7 @@ This document defines canonical naming standards for all 44 documentation files 
 
 **Files:**
 1. `gradient_exceptions.md` → `GRADIENT_EXCEPTIONS.md`
-2. `CI-CD_OVERVIEW.md` → `CI_CD_OVERVIEW.md` (standardize hyphenation)
+2. `CI_CD_OVERVIEW.md` → `CI_CD_OVERVIEW.md` (standardize hyphenation)
 
 ---
 
@@ -248,26 +248,26 @@ This document defines canonical naming standards for all 44 documentation files 
 
 | Old Name | Canonical Name | Group | Rationale |
 |----------|---------------|-------|-----------|
-| `INTERNAL_CANONICAL_CONTEXT.md` | `ARCHITECTURE_CONTEXT.md` | 1 | Remove "INTERNAL" (internal detail), "CANONICAL" redundant with context |
-| `FINAL_FOUNDATION_LOCK.md` | `FOUNDATION_LOCK.md` | 1 | "FINAL" is historical, not semantic |
-| `UI_ARCHITECTURE_LOCK.md` | `ARCHITECTURE_LOCK.md` | 1 | "UI_" prefix redundant (all architecture is UI) |
-| `CANONICAL_LOCK.md` | `ARCHITECTURE_STATE.md` | 1 | Reflects semantic purpose (state definition) |
-| `INTERACTION_AUTHORITY_CONTRACT.md` | `INTERACTION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `STATE_AUTHORITY_MATRIX.md` | `STATE_MATRIX.md` | 2 | Part of state authority system, matrix is clear |
-| `STATE_AUTHORITY_CONTRACT.md` | `STATE_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `SPACING_AUTHORITY_CONTRACT.md` | `SPACING_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `RADIUS_AUTHORITY_CONTRACT.md` | `RADIUS_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `TYPOGRAPHY_AUTHORITY_CONTRACT.md` | `TYPOGRAPHY_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `MOTION_AUTHORITY_CONTRACT.md` | `MOTION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `ELEVATION_AUTHORITY_CONTRACT.md` | `ELEVATION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `LAYOUT_AUTHORITY_CONTRACT.md` | `LAYOUT_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `TOKEN_SYSTEM.md` | `TOKEN_AUTHORITY.md` | 2 | Token system is an authority, consistent naming |
-| `EXTENSION_AUTHORITY_CONTRACT.md` | `EXTENSION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
-| `AUTHORITY_MAP.md` | `AUTHORITY_NAVIGATION.md` | 3 | "MAP" is implementation, "NAVIGATION" is semantic |
-| `UI_ARCHITECTURE_RULES.md` | `ARCHITECTURE_RULES.md` | 4 | "UI_" prefix redundant |
-| `EXTENSION_CANONICAL_STATE.md` | `EXTENSION_STATE.md` | 4 | "CANONICAL" redundant |
-| `TUI_CURSOR_GUARD_RULES.md` | `ASSISTANT_RULES.md` | 5 | Remove "TUI_" (internal), "CURSOR" → "ASSISTANT" (semantic), "GUARD" → "RULES" |
-| `CURSOR_UI_RULES.md` | `ASSISTANT_DEVELOPMENT_RULES.md` | 5 | "CURSOR" → "ASSISTANT", "UI" → "DEVELOPMENT" (clearer scope) |
+| `ARCHITECTURE_CONTEXT.md` | `ARCHITECTURE_CONTEXT.md` | 1 | Remove "INTERNAL" (internal detail), "CANONICAL" redundant with context |
+| `FOUNDATION_LOCK.md` | `FOUNDATION_LOCK.md` | 1 | "FINAL" is historical, not semantic |
+| `ARCHITECTURE_LOCK.md` | `ARCHITECTURE_LOCK.md` | 1 | "UI_" prefix redundant (all architecture is UI) |
+| `ARCHITECTURE_LOCK.md` | `ARCHITECTURE_STATE.md` | 1 | Reflects semantic purpose (state definition) |
+| `INTERACTION_AUTHORITY.md` | `INTERACTION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `STATE_MATRIX.md` | `STATE_MATRIX.md` | 2 | Part of state authority system, matrix is clear |
+| `STATE_AUTHORITY.md` | `STATE_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `SPACING_AUTHORITY.md` | `SPACING_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `RADIUS_AUTHORITY.md` | `RADIUS_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `TYPOGRAPHY_AUTHORITY.md` | `TYPOGRAPHY_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `MOTION_AUTHORITY.md` | `MOTION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `ELEVATION_AUTHORITY.md` | `ELEVATION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `LAYOUT_AUTHORITY.md` | `LAYOUT_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `TOKEN_AUTHORITY.md` | `TOKEN_AUTHORITY.md` | 2 | Token system is an authority, consistent naming |
+| `EXTENSION_AUTHORITY.md` | `EXTENSION_AUTHORITY.md` | 2 | "CONTRACT" redundant with "AUTHORITY" |
+| `AUTHORITY_NAVIGATION.md` | `AUTHORITY_NAVIGATION.md` | 3 | "MAP" is implementation, "NAVIGATION" is semantic |
+| `ARCHITECTURE_RULES.md` | `ARCHITECTURE_RULES.md` | 4 | "UI_" prefix redundant |
+| `EXTENSION_STATE.md` | `EXTENSION_STATE.md` | 4 | "CANONICAL" redundant |
+| `ASSISTANT_RULES.md` | `ASSISTANT_RULES.md` | 5 | Remove "TUI_" (internal), "CURSOR" → "ASSISTANT" (semantic), "GUARD" → "RULES" |
+| `ASSISTANT_DEVELOPMENT_RULES.md` | `ASSISTANT_DEVELOPMENT_RULES.md` | 5 | "CURSOR" → "ASSISTANT", "UI" → "DEVELOPMENT" (clearer scope) |
 | `master_task_index.md` | `TASK_INDEX.md` | 7 | "master_" is historical, not semantic |
 | `EXTENSION_COMPONENT_CREATION_CHECKLIST.md` | `COMPONENT_CREATION_CHECKLIST.md` | 8 | "EXTENSION_" prefix redundant (context makes it clear) |
 | `USAGE_FEEDBACK_PROCESS.md` | `FEEDBACK_COLLECTION_PROCESS.md` | 8 | "USAGE_" redundant, "COLLECTION" clearer than implicit |
@@ -277,11 +277,11 @@ This document defines canonical naming standards for all 44 documentation files 
 | `UI_COMPONENTS_INVENTORY.md` | `COMPONENTS_INVENTORY.md` | 9 | "UI_" prefix redundant |
 | `UI_INTEGRATION.md` | `INTEGRATION_GUIDE.md` | 9 | "UI_" redundant, "GUIDE" clearer than implicit |
 | `EXTENSION_COMPONENT_EXAMPLES.md` | `COMPONENT_EXAMPLES.md` | 9 | "EXTENSION_" prefix redundant |
-| `LINTING_RULES.md` | `LINTING_STANDARD.md` | 10 | "STANDARD" more appropriate than "RULES" |
-| `CANONICAL_PROJECT_ORIENTATION.md` | `PROJECT_ORIENTATION.md` | 11 | "CANONICAL" redundant |
+| `LINTING_STANDARD.md` | `LINTING_STANDARD.md` | 10 | "STANDARD" more appropriate than "RULES" |
+| `PROJECT_ORIENTATION.md` | `PROJECT_ORIENTATION.md` | 11 | "CANONICAL" redundant |
 | `README_GPT.md` | `ASSISTANT_README.md` | 11 | "GPT" is tool-specific, "ASSISTANT" is semantic |
 | `gradient_exceptions.md` | `GRADIENT_EXCEPTIONS.md` | 12 | Standardize case |
-| `CI-CD_OVERVIEW.md` | `CI_CD_OVERVIEW.md` | 12 | Standardize hyphenation (underscore) |
+| `CI_CD_OVERVIEW.md` | `CI_CD_OVERVIEW.md` | 12 | Standardize hyphenation (underscore) |
 
 ---
 
@@ -321,7 +321,7 @@ The following files already follow canonical naming standards:
 
 ### Files That Need Special Consideration
 
-1. **`CURSOR_UI_RULES.md`** - Consider merging with `ASSISTANT_RULES.md` or keeping as `ASSISTANT_DEVELOPMENT_RULES.md` if it has distinct content
+1. **`ASSISTANT_DEVELOPMENT_RULES.md`** - Consider merging with `ASSISTANT_RULES.md` or keeping as `ASSISTANT_DEVELOPMENT_RULES.md` if it has distinct content
 2. **`CANONICAL_STATE_FINAL.md`** - Already archived, no rename needed
 3. **Authority documents** - All follow consistent pattern after removing "CONTRACT" suffix
 

@@ -127,6 +127,7 @@ Includes:
 - rules/component-lifecycle.mdc
 - rules/block-and-scope-rules.mdc
 - rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc
+- rules/documentation-structure-freeze.mdc
 - rules/CURSOR_RULES_RESOLUTION_ORDER.mdc
 
 
