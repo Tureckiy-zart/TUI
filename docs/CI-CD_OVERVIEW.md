@@ -56,18 +56,21 @@ Quality does not build the library or deploy Storybook — it only checks code q
 
 ### 🔍 What it does:
 
-**Job: quality**
+**Job: quality** (matrix strategy)
+- 🔄 Matrix testing: Node.js 18.x [Legacy, non-blocking], 20.x [BLOCKING]
 - 🧹 Lint — `pnpm lint`
 - 🎨 Prettier check — `pnpm format:check`
 - 🔍 TypeScript typecheck — `pnpm typecheck`
-- 🔄 Matrix testing: Node.js 18.x, 20.x, 22.x
+- **Blocking status:** Node.js 20.x блокирует PR, Node.js 18.x — informational (до EOL в апреле 2025)
 
-**Job: build** (depends on quality)
+**Job: build** (depends on quality) [BLOCKING]
 - 🏗 Build library — `pnpm build`
+- **Blocking status:** Обязательная проверка, блокирует PR при ошибках
 
-**Job: storybook** (depends on build)
+**Job: storybook** (depends on build) [Informational]
 - 📚 Build Storybook — `pnpm build-storybook`
 - 📤 Upload Storybook artifact
+- **Blocking status:** Информационная проверка, не блокирует PR
 
 **Job: release** (depends on quality + build, main branch only)
 - 📦 Semantic Release — `npx semantic-release`
@@ -264,14 +267,14 @@ Have **100% identical CI** as in GitHub Actions, but locally. Allows checking al
         │  → release (auto if needed)│
         └────────────┬───────────────┘
                      │
-         ┌───────────▼─────────────┐
+         ┌───────────▼──────────────┐
          │ STORYBOOK DEPLOY PIPELINE│
          │   deploy to GitHub Pages │
          └──────────────────────────┘
 
          ┌──────────────────────────┐
-         │  CHROMATIC VISUAL TESTS   │
-         │  (PR to main/develop)     │
+         │  CHROMATIC VISUAL TESTS  │
+         │  (PR to main/develop)    │
          └──────────────────────────┘
 
 Manual: RELEASE, TEST-NPM-TOKEN
@@ -279,18 +282,58 @@ Manual: RELEASE, TEST-NPM-TOKEN
 
 ---
 
-# 🏁 11. Summary
+# 🔒 11. Blocking vs Informational Checks
+
+CI checks явно разделены на **blocking** (блокирующие PR) и **informational** (информационные, не блокирующие).
+
+## Blocking Checks (обязательные)
+
+Эти проверки **блокируют merge PR** при ошибках:
+
+- ✅ **Quality Checks (Node 20.x) [BLOCKING]** — lint, format, typecheck на Node.js 20.x
+- ✅ **Build Package [BLOCKING]** — сборка библиотеки
+- ✅ **Quality Checks (Node 22.x) [BLOCKING]** — quality pipeline на Node.js 22.x
+
+**Принцип:** Минимальный набор стабильных проверок, которые гарантируют качество кода.
+
+## Informational Checks (информационные)
+
+Эти проверки **не блокируют merge**, но предоставляют важную информацию:
+
+- ℹ️ **Quality Checks (Node 18.x) [Legacy]** — мониторинг совместимости до EOL (апрель 2025)
+- ℹ️ **Storybook Build [Informational]** — проверка сборки документации
+- ℹ️ **Chromatic Visual Tests [Informational]** — визуальные регрессионные тесты
+
+**Принцип:** Позволяют мониторить дополнительные аспекты без блокировки разработки.
+
+## Naming Convention
+
+Все CI checks используют canonical naming с явными маркерами:
+
+- `[BLOCKING]` — обязательная проверка
+- `[Legacy]` — устаревшая версия (до удаления)
+- `[Informational]` — информационная проверка
+- `[Main Only]` — выполняется только на main branch
+
+**Примеры:**
+- `Quality Checks (Node 20.x) [BLOCKING]`
+- `Quality Checks (Node 18.x) [Legacy]`
+- `Chromatic Visual Tests [Informational]`
+
+---
+
+# 🏁 12. Summary
 
 The library's CI/CD systems are separated by purpose:
 
-| Workflow             | Purpose              | Automatic | Executes                     |
-| -------------------- | -------------------- | --------- | ---------------------------- |
-| **Quality**          | Quality checks       | ✔         | lint, tests, a11y            |
-| **Full CI/CD**       | Full pipeline        | ✔ (main)  | quality, build, storybook, release |
-| **Chromatic**        | Visual tests         | ✔ (PR/main) | visual regression tests    |
-| **Release**          | npm publication      | ❌ (manual) | semantic-release           |
-| **Storybook Deploy** | Online documentation | ✔ (main)  | GitHub Pages                 |
-| **Test NPM Token**   | Token diagnostics    | ❌ (manual) | dry-run publish            |
+| Workflow             | Purpose              | Automatic | Executes                     | Blocking Status |
+| -------------------- | -------------------- | --------- | ---------------------------- | --------------- |
+| **Quality**          | Quality checks       | ✔         | lint, tests, a11y            | ✅ Blocking     |
+| **Full CI/CD**       | Full pipeline        | ✔ (main)  | quality (matrix), build, storybook, release | ✅ Blocking (Node 20.x) |
+| **Chromatic**        | Visual tests         | ✔ (PR/main) | visual regression tests    | ℹ️ Informational |
+| **Release**          | npm publication      | ❌ (manual) | semantic-release           | Main only       |
+| **Storybook Deploy** | Online documentation | ✔ (main)  | GitHub Pages                 | ℹ️ Informational |
+| **Test NPM Token**   | Token diagnostics    | ❌ (manual) | dry-run publish            | N/A             |
 
 This ensures:
 

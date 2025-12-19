@@ -8,7 +8,7 @@ on:
 
 jobs:
   chromatic:
-    name: Chromatic Visual Tests
+    name: Chromatic Visual Tests [Informational]
     runs-on: ubuntu-latest
     continue-on-error: true # Don't block PR if Chromatic fails
     permissions:
