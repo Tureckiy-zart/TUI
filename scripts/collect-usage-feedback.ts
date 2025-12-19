@@ -17,7 +17,7 @@
  *   --github-token <token>  GitHub token for API access (optional, for future GitHub API integration)
  */
 
-import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 
 interface FeedbackItem {
@@ -291,7 +291,7 @@ if (require.main === module) {
   main();
 }
 
-export { collectUsageFeedback, type UsageReport, type FeedbackItem };
+export { collectUsageFeedback, type FeedbackItem, type UsageReport };
 
 // Export for future GitHub API integration
 async function collectUsageFeedback(): Promise<UsageReport> {

@@ -239,11 +239,19 @@ async function main() {
 }
 
 // ES module equivalent of require.main === module
+// Run main() when script is executed directly
 const __filename = fileURLToPath(import.meta.url);
-const currentFile = resolve(__filename);
-const mainFile = resolve(process.argv[1]);
+const scriptName = "generate-extension-component.ts";
 
-if (currentFile === mainFile) {
+// Check if this file is being run directly (not imported)
+// When run via tsx/pnpm, process.argv[1] will contain the script path
+const isMainModule = Boolean(
+  process.argv[1]?.includes(scriptName) ||
+  process.argv[1]?.endsWith("generate-extension-component.ts") ||
+  process.argv[1]?.includes("generate-extension-component"),
+);
+
+if (isMainModule) {
   main();
 }
 
