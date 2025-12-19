@@ -1412,6 +1412,8 @@ Foundation Enforcement is enforced via:
 - **Type-Tests:** All 9 Foundation components have type-level tests that verify `className` and `style` are excluded
 - **CI Integration:** All enforcement checks run automatically in CI pipeline (`typecheck` and `lint:ci` scripts)
 
+**ESLint Governance:** For complete ESLint governance rules, autofix policy, and architectural enforcement principles, see [ESLINT_SETUP.md](./ESLINT_SETUP.md).
+
 ### Foundation Components Subject to Enforcement
 
 All Foundation components listed in [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) are subject to Foundation Enforcement:
@@ -1456,8 +1458,9 @@ Any Foundation Enforcement modifications require:
 Foundation Enforcement verification is a **mandatory step** in the Foundation component lifecycle:
 
 - **Step 7.5: Internal Styling Integrity & className Isolation Verification** (see [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md))
-- All Foundation components MUST pass enforcement verification before Foundation Lock (Step 13)
-- Enforcement compliance is verified via ESLint rules, type-tests, and CI integration
+- **Step 7.6: Internal Styling Integrity & ESLint Scope Verification** (see [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md))
+- All Foundation components MUST pass enforcement verification (Steps 7.5 and 7.6) before Foundation Lock (Step 13)
+- Enforcement compliance is verified via ESLint rules, type-tests, CI integration, and ESLint scope governance
 
 ---
 
@@ -1545,7 +1548,7 @@ If Authority modifications are required in the future:
 
 - **[Foundation Contract](./FOUNDATION_CONTRACT.md)** — 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
 - **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
-- **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Step 7.5)
+- **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[Architecture Lock](./TUI_ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
 - **[Token System](./TUI_TOKEN_SYSTEM.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./UI_ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
@@ -1557,6 +1560,8 @@ If Authority modifications are required in the future:
 - **[State Authority Contract](./STATE_AUTHORITY_CONTRACT.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
 - **[Extension Authority Contract](./EXTENSION_AUTHORITY_CONTRACT.md)** — ✅ **ACTIVE** Extension layer boundary contract
 - **[Foundation Lifecycle Process Index](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md)** — Human-readable navigation to Foundation component creation/refactor lifecycle process
+- **[ESLint Setup & Governance](./ESLINT_SETUP.md)** — ESLint as architectural enforcement (governance rules, autofix policy, scope boundaries)
+- **[ESLint Rules Scope Matrix](./eslint_rules_scope_matrix.md)** — Canonical scope authority for ESLint rules
 
 ---
 

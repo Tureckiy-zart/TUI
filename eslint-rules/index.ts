@@ -5,7 +5,7 @@
  * for the @tenerife.music/ui component library.
  */
 
-import noFoundationClassNameStyle from "./no-foundation-classname-style";
+import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
 import noRawTailwindColors from "./no-raw-tailwind-colors";
 import noRawVisualProps from "./no-raw-visual-props";
@@ -14,7 +14,7 @@ export default {
   rules: {
     "no-raw-visual-props": noRawVisualProps,
     "no-raw-tailwind-colors": noRawTailwindColors,
-    "no-foundation-classname-style": noFoundationClassNameStyle,
+    "no-foundation-classname-style": noFoundationClassnameStyle,
     "no-foundation-open-htmlattributes": noFoundationOpenHtmlAttributes,
   },
 };

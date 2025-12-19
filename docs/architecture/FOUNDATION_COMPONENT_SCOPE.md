@@ -394,7 +394,7 @@ Adding a new component to Foundation scope requires:
    - Component must be one per category
 
 2. **Foundation Lock Process**
-   - Complete Foundation component lifecycle (Steps 1-13, including Step 7.5: Internal Styling Integrity & className Isolation Verification)
+   - Complete Foundation component lifecycle (Steps 1-13, including Steps 7.5 and 7.6: Internal Styling Integrity & className Isolation Verification, Internal Styling Integrity & ESLint Scope Verification)
    - Verify Foundation Contract compliance (enforcement is MANDATORY)
    - Create Foundation lock report
    - Update `FINAL_FOUNDATION_LOCK.md`
@@ -433,7 +433,7 @@ This document works in conjunction with:
 
 - **[FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md)** - Defines the contract that applies to Foundation components (enforcement is FINAL/APPLIED)
 - **[FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)** - Documents lock status of all Foundation components and **Foundation Enforcement Lock Status**
-- **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Step 7.5)
+- **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[TUI_EXTENSION_CANONICAL_STATE.md](./TUI_EXTENSION_CANONICAL_STATE.md)** - Lists Extension layer components
 - **[INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md)** - Provides architectural context
 

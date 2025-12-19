@@ -324,6 +324,11 @@ This document explicitly does NOT:
 
 - [Final Foundation Lock](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock status
 
+### Enforcement & Governance
+
+- [ESLint Setup & Governance](./ESLINT_SETUP.md) - ESLint as architectural enforcement
+- [ESLint Rules Scope Matrix](./eslint_rules_scope_matrix.md) - Canonical scope authority for ESLint rules
+
 ### Reference Implementation
 
 - [Button Component](../../src/components/ui/button.tsx) - Canonical reference implementation

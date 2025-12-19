@@ -355,9 +355,11 @@ The following files have existing violations that are **out of scope** for this 
    - Mark Foundation components as FINAL LOCKED
    - Update documentation to reflect locked status
 
-2. **Update 13-step refactor/creation plan**
-   - Mark guard step as mandatory
-   - Include regression guard verification in component lifecycle
+2. **Update 13-step refactor/creation plan** ✅ COMPLETED (2025-12-18)
+   - ✅ Step 7.5 added: Internal Styling Integrity & className Isolation Verification (mandatory)
+   - ✅ Step 7.6 added: Internal Styling Integrity & ESLint Scope Verification (mandatory)
+   - ✅ Regression guard verification included in component lifecycle
+   - ✅ All lifecycle documents updated to reflect Steps 7.5 and 7.6
 
 3. **Fix existing violations** (separate task)
    - Remove `className` usage from ModeHero component

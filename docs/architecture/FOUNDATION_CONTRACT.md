@@ -299,7 +299,7 @@ This contract works in conjunction with:
 
 - **[FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)** - Defines which components are Foundation, their lock status, and **Foundation Enforcement Lock Status** (authority for enforcement)
 - **[FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md)** - Lists all Foundation components and inclusion criteria (must comply with this contract)
-- **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Step 7.5)
+- **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[UI_STYLING_ESCAPE_HATCHES_REPORT.md](../audit/UI_STYLING_ESCAPE_HATCHES_REPORT.md)** - Documents historical state of escape hatches (pre-enforcement)
 - **[INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md)** - Provides architectural context
 
@@ -315,7 +315,7 @@ This contract works in conjunction with:
 4. ✅ **Enforcement is APPLIED and LOCKED** - TypeScript, ESLint, and type-tests enforce this contract
 5. 📋 This contract is the authoritative source of truth for Foundation visual closure
 
-**Foundation enforcement is FINAL and cannot be reversed without explicit unlock procedure.** All Foundation components must comply with this contract, and the 13-step lifecycle (Step 7.5) includes mandatory verification of enforcement compliance.
+**Foundation enforcement is FINAL and cannot be reversed without explicit unlock procedure.** All Foundation components must comply with this contract, and the 13-step lifecycle (Steps 7.5 and 7.6) includes mandatory verification of enforcement compliance and ESLint scope governance.
 
 ---
 

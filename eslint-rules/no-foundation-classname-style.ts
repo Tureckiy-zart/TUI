@@ -1,144 +1,104 @@
-/**
- * ESLint Rule: no-foundation-classname-style
- *
- * Prevents Foundation components from exposing className or style props.
- * Foundation components must use Omit<..., "className" | "style"> when extending HTMLAttributes.
- *
- * This rule is part of the Tenerife UI Foundation enforcement system.
- */
+import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+import path from "path";
 
-import type { TSESTree } from "@typescript-eslint/types";
-import { ESLintUtils } from "@typescript-eslint/utils";
+type MessageIds = "noFoundationClassName";
 
-const createRule = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/Tureckiy-zart/tenerife-ui/blob/main/docs/architecture/FOUNDATION_CONTRACT.md#${name}`,
-);
-
-type MessageIds = "forbiddenClassName" | "forbiddenStyle";
-
-type Options = [];
-
-/**
- * Foundation component file patterns
- */
-const FOUNDATION_COMPONENT_PATTERNS = [
-  /src\/PRIMITIVES\/Button\/Button\.tsx$/,
-  /src\/PRIMITIVES\/Link\/Link\.tsx$/,
-  /src\/PRIMITIVES\/Text\/Text\.tsx$/,
-  /src\/PRIMITIVES\/Heading\/Heading\.tsx$/,
-  /src\/PRIMITIVES\/Input\/Input\.tsx$/,
-  /src\/PRIMITIVES\/Textarea\/Textarea\.tsx$/,
-  /src\/PRIMITIVES\/Checkbox\/Checkbox\.tsx$/,
-  /src\/PRIMITIVES\/Radio\/Radio\.tsx$/,
-  /src\/PRIMITIVES\/Label\/Label\.tsx$/,
-] as const;
-
-/**
- * Check if a file is a Foundation component
- */
-function isFoundationComponent(filePath: string): boolean {
-  return FOUNDATION_COMPONENT_PATTERNS.some((pattern) => pattern.test(filePath));
-}
-
-/**
- * Check if a property signature is className or style
- */
-function isForbiddenProp(propName: string): boolean {
-  return propName === "className" || propName === "style";
-}
-
-/**
- * Main rule implementation
- */
-export default createRule<Options, MessageIds>({
+export const noFoundationClassnameStyle = ESLintUtils.RuleCreator(
+  () => "docs/architecture/eslint_rules_scope_matrix.md",
+)<[], MessageIds>({
   name: "no-foundation-classname-style",
   meta: {
     type: "problem",
     docs: {
       description:
-        "Prevents Foundation components from exposing className or style props. Foundation components must use Omit<..., 'className' | 'style'> when extending HTMLAttributes.",
+        "Disallow className/style on Foundation components when used from public UI entry",
     },
     messages: {
-      forbiddenClassName:
-        "Foundation components cannot expose 'className' prop. Use Omit<React.*HTMLAttributes, 'className' | 'style'> instead.",
-      forbiddenStyle:
-        "Foundation components cannot expose 'style' prop. Use Omit<React.*HTMLAttributes, 'className' | 'style'> instead.",
+      noFoundationClassName:
+        "Passing className/style to Foundation components is forbidden by the Foundation Contract.",
     },
     schema: [],
+    fixable: undefined, // 🚫 NO AUTOFIX (INTENTIONAL)
   },
   defaultOptions: [],
   create(context) {
-    /**
-     * Check a property signature in an interface or type
-     */
-    function checkPropertySignature(node: TSESTree.TSPropertySignature): void {
-      if (!node.key || node.key.type !== "Identifier") {
-        return;
-      }
+    const filename = context.getFilename();
 
-      const propName = node.key.name;
-      if (!isForbiddenProp(propName)) {
-        return;
-      }
+    /* -------------------------------------------
+     * SCOPING GUARDS
+     * ----------------------------------------- */
 
-      const filePath = context.getFilename();
-      if (!isFoundationComponent(filePath)) {
-        return;
-      }
+    if (isUiLibrarySource(filename)) return {};
+    if (isStoryFile(filename)) return {};
 
-      // Report error for className or style prop
-      context.report({
-        node: node.key,
-        messageId: propName === "className" ? "forbiddenClassName" : "forbiddenStyle",
-      });
-    }
+    /* -------------------------------------------
+     * IMPORT MAP
+     * ----------------------------------------- */
 
-    /**
-     * Check interface declaration for forbidden props
-     */
-    function checkInterfaceDeclaration(node: TSESTree.TSInterfaceDeclaration): void {
-      const filePath = context.getFilename();
-      if (!isFoundationComponent(filePath)) {
-        return;
-      }
-
-      // Check for explicit className/style props
-      // (they shouldn't exist even with Omit)
-      if (!node.body || !node.body.body) {
-        return;
-      }
-
-      for (const member of node.body.body) {
-        if (member.type === "TSPropertySignature") {
-          checkPropertySignature(member);
-        }
-      }
-    }
-
-    /**
-     * Check type literal for forbidden props
-     */
-    function checkTypeLiteral(node: TSESTree.TSTypeLiteral): void {
-      const filePath = context.getFilename();
-      if (!isFoundationComponent(filePath)) {
-        return;
-      }
-
-      if (!node.members) {
-        return;
-      }
-
-      for (const member of node.members) {
-        if (member.type === "TSPropertySignature") {
-          checkPropertySignature(member);
-        }
-      }
-    }
+    const foundationImports = new Set<string>();
 
     return {
-      TSInterfaceDeclaration: checkInterfaceDeclaration,
-      TSTypeLiteral: checkTypeLiteral,
+      ImportDeclaration(node) {
+        const source = node.source.value;
+
+        if (!isPublicUiEntry(source)) return;
+
+        for (const spec of node.specifiers) {
+          if (spec.type === TSESTree.AST_NODE_TYPES.ImportSpecifier) {
+            foundationImports.add(spec.local.name);
+          }
+        }
+      },
+
+      JSXOpeningElement(node) {
+        const name = node.name;
+
+        if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
+
+        if (!foundationImports.has(name.name)) return;
+
+        for (const attr of node.attributes) {
+          if (attr.type !== TSESTree.AST_NODE_TYPES.JSXAttribute) continue;
+
+          if (attr.name.name === "className" || attr.name.name === "style") {
+            context.report({
+              node: attr,
+              messageId: "noFoundationClassName",
+            });
+          }
+        }
+      },
     };
   },
 });
+
+/* -------------------------------------------
+ * HELPERS
+ * ----------------------------------------- */
+
+function isUiLibrarySource(filename: string) {
+  const normalized = path.normalize(filename);
+
+  return (
+    normalized.includes("/tenerife-ui/") ||
+    normalized.includes("/packages/ui/") ||
+    normalized.includes("/src/ui/")
+  );
+}
+
+function isStoryFile(filename: string) {
+  return filename.endsWith(".stories.tsx") || filename.endsWith(".stories.ts");
+}
+
+function isPublicUiEntry(source: string) {
+  // Support both exact matches and deep imports
+  // Examples:
+  // - "@tenerife.music/ui" (exact)
+  // - "@tenerife.music/ui/components/Button" (deep import)
+  // - "@tenerife/ui" (legacy exact)
+  return (
+    source === "@tenerife/ui" ||
+    source === "@tenerife.music/ui" ||
+    source.startsWith("@tenerife.music/ui/")
+  );
+}

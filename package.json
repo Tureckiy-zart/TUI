@@ -77,6 +77,7 @@
     "publish:major": "./scripts/publish.sh major",
     "safelist:generate": "tsx scripts/generateTailwindSafelist.ts",
     "verify:interaction-authority": "node scripts/verify-interaction-authority.mjs",
+    "lint:rules": "eslint --config eslint-rules/eslint.config.mjs eslint-rules",
     "chromatic": "./scripts/chromatic.sh",
     "chromatic:ci": "CHROMATIC_CI_MODE=true ./scripts/chromatic.sh",
     "docs:dev": "cd docs-app && npm run docs:dev",

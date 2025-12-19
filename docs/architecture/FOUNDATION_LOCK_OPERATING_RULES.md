@@ -2,7 +2,7 @@
 
 **Status:** ACTIVE  
 **Date Created:** 2025-12-16  
-**Last Updated:** 2025-12-17  
+**Last Updated:** 2025-12-18  
 **Classification:** Canonical Interpretation Rules  
 **Authority Level:** Secondary (Derived from INTERNAL_CANONICAL_CONTEXT.md)  
 **Scope:** Tenerife UI — Foundation Layer  
@@ -192,11 +192,11 @@ This section defines the **canonical lifecycle** for creating new Foundation com
 **Important:** The order of steps matters, but step numbering is non-semantic. Steps must be completed in sequence, but the specific numbers are not part of the architectural contract.
 
 **Lifecycle Structure:**
-- **Steps 1-10 (including Step 7.5):** Architectural validation and compliance verification (including Foundation Enforcement verification)
+- **Steps 1-10 (including Steps 7.5 and 7.6):** Architectural validation and compliance verification (including Foundation Enforcement verification and ESLint scope governance)
 - **Steps 11-12:** Quality gates (Storybook and Testing) — must pass before Foundation Lock
 - **Step 13:** Foundation Lock — formal locking after all validations and quality gates pass
 
-**Note:** Step 7.5 (Internal Styling Integrity & className Isolation Verification) is a mandatory step that verifies Foundation Enforcement compliance. Foundation Enforcement is FINAL/APPLIED and LOCKED - all Foundation components must pass Step 7.5 verification before proceeding to Step 8.
+**Note:** Steps 7.5 (Internal Styling Integrity & className Isolation Verification) and 7.6 (Internal Styling Integrity & ESLint Scope Verification) are mandatory steps that verify Foundation Enforcement compliance and ESLint scope governance. Foundation Enforcement is FINAL/APPLIED and LOCKED - all Foundation components must pass Steps 7.5 and 7.6 verification before proceeding to Step 8.
 
 ### Document Classification: LAW vs PROCESS vs EXAMPLES
 
@@ -279,11 +279,11 @@ A component may intentionally exit the Foundation lifecycle before Step 13 (Foun
 
 The following steps constitute the complete Foundation component creation/refactor process:
 
-**Steps 1-10 (including Step 7.5):** Architectural validation (semantic, structural, compliance, Foundation Enforcement verification)  
+**Steps 1-10 (including Steps 7.5 and 7.6):** Architectural validation (semantic, structural, compliance, Foundation Enforcement verification, ESLint scope governance)  
 **Steps 11-12:** Quality gates (Storybook and Testing) — BLOCKING, must pass before Foundation Lock  
 **Step 13:** Foundation Lock — formal locking after all validations and quality gates pass
 
-**Note:** Step 7.5 is a mandatory Foundation Enforcement verification step. Foundation Enforcement (className/style exclusion) is FINAL/APPLIED and LOCKED - all Foundation components must comply.
+**Note:** Steps 7.5 and 7.6 are mandatory Foundation Enforcement verification steps. Step 7.5 verifies className/style exclusion from public APIs. Step 7.6 verifies ESLint scope governance and ensures Foundation rules do not affect internal implementation, Storybook stories, or Extension/Composition components. Foundation Enforcement is FINAL/APPLIED and LOCKED - all Foundation components must comply.
 
 **Quality Gates Rationale:**
 
@@ -629,6 +629,63 @@ If Step 7 validation fails:
 - Foundation Enforcement compliance is confirmed
 
 **Note:** This step is **MANDATORY** for all Foundation components. Components cannot proceed to Step 8 (CVA Canonicalization) or Step 13 (Foundation Lock) without passing Foundation Enforcement verification.
+
+#### Step 7.6: Internal Styling Integrity & ESLint Scope Verification (REQUIRED)
+
+**Purpose:** Verify that styling isolation and ESLint governance rules are respected, ensuring that Foundation ESLint rules apply only to Foundation components and do not affect internal implementation, Storybook stories, or Extension/Composition components.
+
+**Foundation Enforcement is FINAL and APPLIED:** This step verifies that ESLint scope governance is correctly configured and that Foundation enforcement rules do not leak into unintended scopes.
+
+**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
+
+**Requirements:**
+- Verify `className` is used **only internally** inside component implementation (not in public API)
+- Verify no consumer-controlled styling paths exist in public API
+- Verify Foundation ESLint rules do NOT affect:
+  - Internal implementation details
+  - Storybook stories (`.stories.tsx` files)
+  - Extension / Composition components
+  - Test files (`.test.tsx` files)
+- Verify autofix rules do not modify UI library source code
+- Verify ESLint scope matrix is correctly configured for Foundation components
+- Verify ESLint rules respect architectural layer boundaries
+
+**For Refactor:** Ensure refactoring maintains ESLint scope governance compliance and does not introduce scope violations.
+
+**Internal Styling Integrity & ESLint Scope Verification Checklist (Mandatory):**
+
+- [ ] **Internal className Usage:** `className` is used only internally inside component implementation (CVA, internal styling)
+- [ ] **No Consumer Styling Paths:** No consumer-controlled styling paths exist in public API
+- [ ] **ESLint Scope - Internal:** Foundation ESLint rules do NOT affect internal implementation details
+- [ ] **ESLint Scope - Stories:** Foundation ESLint rules do NOT affect Storybook stories (`.stories.tsx` files)
+- [ ] **ESLint Scope - Extension:** Foundation ESLint rules do NOT affect Extension / Composition components
+- [ ] **ESLint Scope - Tests:** Foundation ESLint rules do NOT affect test files (`.test.tsx` files)
+- [ ] **Autofix Protection:** Autofix rules do not modify UI library source code
+- [ ] **Scope Matrix Compliance:** ESLint scope matrix is correctly configured for Foundation components
+- [ ] **Layer Boundaries:** ESLint rules respect architectural layer boundaries
+
+**Verification Methods:**
+- **ESLint Configuration:** Verify ESLint rules are scoped correctly in `eslint.config.mjs`
+- **Scope Matrix:** Verify `eslint_rules_scope_matrix.md` correctly defines rule boundaries
+- **Manual Review:** Verify Foundation rules apply only to Foundation component files
+- **Storybook Verification:** Verify Storybook stories are not affected by Foundation ESLint rules
+- **Extension Verification:** Verify Extension/Composition components are not affected by Foundation ESLint rules
+- **Autofix Test:** Verify autofix does not modify source code inappropriately
+
+**Reference Documents:**
+- [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Contract (FINAL/APPLIED)
+- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+- [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md) - ESLint rules scope authority (canonical and binding)
+
+**Exit Criteria:**
+- All checklist items are verified and documented
+- ESLint scope governance is correctly configured
+- Foundation ESLint rules apply only to Foundation components
+- No scope violations exist (rules do not affect stories, tests, or Extension components)
+- Autofix protection is verified
+- ESLint scope matrix compliance is confirmed
+
+**Note:** This step is **MANDATORY** for all Foundation components. Components cannot proceed to Step 8 (CVA Canonicalization) or Step 13 (Foundation Lock) without passing ESLint scope verification. A component MUST NOT be considered complete if this step is skipped.
 
 #### Step 8: CVA Canonicalization
 
@@ -1060,11 +1117,12 @@ Foundation Component Reports are **mandatory artifacts** for Foundation Lock. Be
 ### Verification
 
 Before proceeding to Foundation Lock (Step 13), verify:
-- ✅ All architectural validation steps (1-10) are complete
+- ✅ All architectural validation steps (1-10, including Steps 7.5 and 7.6) are complete
 - ✅ All exit criteria for each step are met
 - ✅ All semantically relevant Authority Contracts are complied with
 - ✅ Public API Audit checklist is complete (Step 6)
 - ✅ TypeScript System Compliance checklist is complete (Step 7)
+- ✅ Foundation Enforcement verification is complete (Steps 7.5 and 7.6)
 - ✅ CVA Canonicalization checklist is complete (Step 8)
 - ✅ Component is token-driven and JS-free
 - ✅ Accessibility standards are met (Step 9)
@@ -1153,7 +1211,7 @@ All Foundation Component Reports **MUST** use the following canonical filename f
 **Foundation Component Report v1.0** is the mandatory canonical format defined in [FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md](./FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md).
 
 **Key Requirements:**
-- All 13 lifecycle steps must appear exactly once in canonical order
+- All 13 lifecycle steps (including Steps 7.5 and 7.6) must appear exactly once in canonical order
 - All violations must be consolidated in VIOLATION SUMMARY & RESOLUTION section
 - Lifecycle progression status must be explicitly stated in LIFECYCLE PROGRESSION STATUS section
 - Blocking violations automatically halt progression regardless of narrative text
@@ -1202,8 +1260,11 @@ The Link component report is the **first canonical example** of a compliant Foun
 The Foundation component lifecycle was expanded to explicitly include quality gates as mandatory steps:
 
 - **Previous lifecycle:** 11 steps (Foundation Lock was Step 11, Storybook verification was part of Foundation Lock)
-- **Current lifecycle:** 13 steps
-  - Steps 1-10: Architectural validation (unchanged)
+- **Current lifecycle:** 13 steps (with sub-steps 7.5 and 7.6)
+  - Steps 1-7: Architectural validation (semantic, structural, compliance)
+  - Step 7.5: Internal Styling Integrity & className Isolation Verification (NEW - Foundation Enforcement verification)
+  - Step 7.6: Internal Styling Integrity & ESLint Scope Verification (NEW - ESLint scope governance verification)
+  - Steps 8-10: Architectural validation (CVA, Accessibility, Authority Alignment)
   - Step 11: Storybook Quality Gate (NEW - separated from Foundation Lock)
   - Step 12: Testing Quality Gate (NEW - explicit quality gate)
   - Step 13: Foundation Lock (previously Step 11)
@@ -1211,15 +1272,22 @@ The Foundation component lifecycle was expanded to explicitly include quality ga
 **Backward Compatibility:**
 - Components already locked remain valid
 - Reports created before this expansion may reference the old structure
-- All new lifecycle processes must follow the 13-step structure
+- All new lifecycle processes must follow the 13-step structure (with Steps 7.5 and 7.6)
 - Quality gates (Steps 11-12) are now BLOCKING requirements before Foundation Lock
+- Foundation Enforcement verification (Steps 7.5 and 7.6) is now MANDATORY for all Foundation components
 
 **Rationale:**
 Quality gates are separated from Foundation Lock to:
-- Clearly distinguish architectural validation (Steps 1-10) from quality validation (Steps 11-12)
+- Clearly distinguish architectural validation (Steps 1-10, including 7.5 and 7.6) from quality validation (Steps 11-12)
 - Make Storybook and Testing mandatory, explicit steps rather than implicit verification
 - Ensure quality gates cannot be bypassed before Foundation Lock
 - Improve process clarity and enforceability
+
+Foundation Enforcement verification (Steps 7.5 and 7.6) was added to:
+- Ensure Foundation components comply with FINAL Foundation Enforcement Lock (className/style exclusion)
+- Verify ESLint scope governance is correctly configured
+- Ensure Foundation ESLint rules do not affect internal implementation, Storybook stories, or Extension/Composition components
+- Protect autofix from modifying UI library source code inappropriately
 
 ---
 

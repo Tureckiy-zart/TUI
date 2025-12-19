@@ -351,24 +351,59 @@ If architectural changes are required that violate this lock:
 
 **Reference:** [CANONICAL_STATE_FINAL.md](./CANONICAL_STATE_FINAL.md)
 
+
+
+---
+
+## ESLint Governance & Scope Authority
+
+Foundation enforcement is protected not only by TypeScript and CI guards,
+but also by **scoped ESLint governance rules**.
+
+The exact applicability and boundaries of all ESLint rules related to
+Foundation, Extension, and Product layers are defined in:
+
+→ [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
+
+This document is **canonical and binding**.
+
+Any ESLint rule behavior that contradicts the scope matrix
+MUST be treated as a misconfiguration, not as a violation of architecture.
+
+Foundation FINAL LOCK assumes:
+- ESLint rules respect architectural layer boundaries
+- No rule may apply outside its declared scope
+- Autofix is explicitly forbidden where it may alter internal implementation
+
+**ESLint Setup & Governance:** For complete ESLint governance rules, autofix policy, and architectural enforcement principles, see [ESLINT_SETUP.md](./ESLINT_SETUP.md).
+
+**Foundation Enforcement Contract:** For details on Foundation Enforcement (exclusion of `className` and `style` props from Foundation component public APIs), see [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL / APPLIED).
+
+Violating this governance requires an explicit unlock procedure.
+
 ---
 
 ## Related Documents
 
 - [CANONICAL_STATE_FINAL.md](./CANONICAL_STATE_FINAL.md) - Final truth snapshot of canonical state
 - [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock
+- [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation Enforcement Contract (FINAL / APPLIED)
+- [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) - 13-step Foundation component lifecycle
+- [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md) - Human-readable navigation to Foundation lifecycle
 - [TUI_ARCHITECTURE_LOCK.md](./TUI_ARCHITECTURE_LOCK.md) - Architecture lock details
 - [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) - Internal canonical context
 - [TUI_CURSOR_GUARD_RULES.md](./TUI_CURSOR_GUARD_RULES.md) - Cursor/AI guard rules
+- [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md) - ESLint rules scope authority
+- [ESLINT_SETUP.md](./ESLINT_SETUP.md) - ESLint setup and governance (architectural enforcement)
 
 ---
 
 ## Document Status
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-17  
-**Last Updated:** 2025-12-17  
+**Last Updated:** 2025-12-18  
 **Authority:** This document is the authoritative source for canonical architecture state.
 
 **This document MUST NOT be modified without explicit unlock procedure.**
@@ -382,6 +417,11 @@ This document represents the **FINAL, CANONICAL** architecture state of Tenerife
 **The UI system is ARCHITECTURALLY STABLE and closed for structural drift.**
 
 Any future change must be intentional, explicit, and reviewable.
+
+
+
+
+
 
 ---
 
