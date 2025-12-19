@@ -20,24 +20,10 @@ import { join, dirname } from "path";
 import { readdir } from "fs/promises";
 
 // Foundation component names (must not duplicate)
-const FOUNDATION_COMPONENTS = [
-  "Modal",
-  "Tabs",
-  "Select",
-  "ContextMenu",
-  "Toast",
-  "Button",
-  "Link",
-];
+const FOUNDATION_COMPONENTS = ["Modal", "Tabs", "Select", "ContextMenu", "Toast", "Button", "Link"];
 
 // Valid categories
-const VALID_CATEGORIES = [
-  "primitive",
-  "control",
-  "layout",
-  "composite",
-  "utility",
-] as const;
+const VALID_CATEGORIES = ["primitive", "control", "layout", "composite", "utility"] as const;
 
 type Category = (typeof VALID_CATEGORIES)[number];
 
@@ -107,7 +93,9 @@ function parseArgs(): {
     console.error("❌ Component name is required");
     console.log("\nUsage: tsx scripts/generate-extension-component.ts <ComponentName> [options]");
     console.log("\nOptions:");
-    console.log("  --category <category>  Component category (primitive|control|layout|composite|utility)");
+    console.log(
+      "  --category <category>  Component category (primitive|control|layout|composite|utility)",
+    );
     console.log("  --output <path>         Output directory");
     process.exit(1);
   }
@@ -116,10 +104,7 @@ function parseArgs(): {
   const categoryIndex = args.indexOf("--category");
   const outputIndex = args.indexOf("--output");
 
-  const category =
-    (categoryIndex >= 0
-      ? args[categoryIndex + 1]
-      : "composite") as Category;
+  const category = (categoryIndex >= 0 ? args[categoryIndex + 1] : "composite") as Category;
 
   if (!VALID_CATEGORIES.includes(category)) {
     throw new Error(
@@ -136,20 +121,14 @@ function parseArgs(): {
  * Convert PascalCase to kebab-case
  */
 function toKebabCase(str: string): string {
-  return str
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 /**
  * Load template file
  */
 function loadTemplate(templateName: string): string {
-  const templatePath = join(
-    process.cwd(),
-    "templates",
-    `${templateName}.template`,
-  );
+  const templatePath = join(process.cwd(), "templates", `${templateName}.template`);
 
   if (!existsSync(templatePath)) {
     throw new Error(`❌ Template not found: ${templatePath}`);
@@ -161,10 +140,7 @@ function loadTemplate(templateName: string): string {
 /**
  * Replace template variables
  */
-function replaceTemplate(
-  template: string,
-  config: ComponentConfig,
-): string {
+function replaceTemplate(template: string, config: ComponentConfig): string {
   return template
     .replace(/\{\{ComponentName\}\}/g, config.name)
     .replace(/\{\{componentName\}\}/g, config.name.charAt(0).toLowerCase() + config.name.slice(1))
@@ -267,4 +243,3 @@ if (require.main === module) {
 }
 
 export { generateComponent, validateComponentName, type ComponentConfig };
-

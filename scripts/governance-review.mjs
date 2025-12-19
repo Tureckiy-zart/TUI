@@ -141,8 +141,8 @@ function scanESLintRules() {
   }
 
   // Check for extra rules
-  const ruleFiles = getTSFiles(ESLINT_RULES_DIR).filter((f) =>
-    f.endsWith(".ts") && !f.endsWith("index.ts") && !f.endsWith("loader.mjs")
+  const ruleFiles = getTSFiles(ESLINT_RULES_DIR).filter(
+    (f) => f.endsWith(".ts") && !f.endsWith("index.ts") && !f.endsWith("loader.mjs"),
   );
   for (const ruleFile of ruleFiles) {
     const ruleName = ruleFile.split("/").pop().replace(".ts", "");
@@ -357,7 +357,8 @@ function generateReport(findings) {
 
   score = Math.max(0, Math.min(10, Math.round(score * 10) / 10)); // Clamp to 0-10, 1 decimal
 
-  const status = score >= 9 ? "✅ Healthy" : score >= 7 ? "⚠️ Needs Attention" : "❌ Critical Issues";
+  const status =
+    score >= 9 ? "✅ Healthy" : score >= 7 ? "⚠️ Needs Attention" : "❌ Critical Issues";
 
   let report = `# Governance Review Report
 
@@ -656,4 +657,3 @@ function main() {
 }
 
 main();
-

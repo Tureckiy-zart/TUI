@@ -4,8 +4,8 @@ import { cva } from "class-variance-authority";
 
 import { CARD_TOKENS } from "@/FOUNDATION/tokens/components/card";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 
 /**
  * EventCard Variants

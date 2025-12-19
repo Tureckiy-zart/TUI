@@ -19,10 +19,10 @@ jobs:
           echo "Issue: ${{ github.event.issue.number }}"
           echo "Title: ${{ github.event.issue.title }}"
           echo "Labels: ${{ github.event.issue.labels }}"
-          
+
           # Basic validation - check if issue has required information
           # In production, this could parse the issue body and validate fields
-          
+
           echo "✅ Component request triaged"
           echo "📝 Next steps:"
           echo "   1. Review issue against Component Needs Inventory"
@@ -38,25 +38,24 @@ jobs:
           script: |
             const issueNumber = context.payload.issue.number;
             const comment = `## Component Request Triage
-            
+
             This issue has been triaged as a component request.
-            
+
             **Next Steps:**
             1. This request will be reviewed against the [Component Needs Inventory](https://github.com/${{ github.repository }}/blob/main/docs/tasks/COMPONENT_NEEDS_INVENTORY.md)
             2. Architectural fit will be evaluated per the [Extension Authority Contract](https://github.com/${{ github.repository }}/blob/main/docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md)
             3. Priority will be assigned based on impact and frequency
             4. Decision will be communicated here
-            
+
             **Review Schedule:**
             - Monthly reviews: First Monday of each month
             - High priority items: Immediate review
-            
+
             See [Feedback Review Process](https://github.com/${{ github.repository }}/blob/main/docs/tasks/FEEDBACK_REVIEW_PROCESS.md) for details.`;
-            
+
             github.rest.issues.createComment({
               issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
             });
-

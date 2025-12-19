@@ -206,7 +206,6 @@ export const TokenBasedSpacing: Story = {
   },
 };
 
-
 export const AllProps: Story = {
   args: {
     direction: "horizontal",

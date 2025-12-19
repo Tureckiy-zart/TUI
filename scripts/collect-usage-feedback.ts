@@ -75,11 +75,11 @@ function analyzeUsagePatterns(): FeedbackItem[] {
 
   // Check if component needs analysis exists
   const analysisPath = join(process.cwd(), "artifacts", "component-needs-analysis.json");
-  
+
   if (existsSync(analysisPath)) {
     try {
       const analysis = JSON.parse(readFileSync(analysisPath, "utf-8"));
-      
+
       // Convert analysis patterns to feedback items
       for (const pattern of analysis.patterns || []) {
         if (pattern.frequency >= 3) {
@@ -101,7 +101,9 @@ function analyzeUsagePatterns(): FeedbackItem[] {
       console.warn(`⚠️  Could not parse component needs analysis: ${error}`);
     }
   } else {
-    console.log("ℹ️  Component needs analysis not found. Run scripts/analyze-component-needs.ts first.");
+    console.log(
+      "ℹ️  Component needs analysis not found. Run scripts/analyze-component-needs.ts first.",
+    );
   }
 
   return patterns;
@@ -110,10 +112,7 @@ function analyzeUsagePatterns(): FeedbackItem[] {
 /**
  * Generate usage report
  */
-function generateReport(
-  githubIssues: FeedbackItem[],
-  usagePatterns: FeedbackItem[],
-): UsageReport {
+function generateReport(githubIssues: FeedbackItem[], usagePatterns: FeedbackItem[]): UsageReport {
   const allFeedback = [...githubIssues, ...usagePatterns];
 
   const byType: Record<string, number> = {};
@@ -147,11 +146,11 @@ function generateReport(
       const priorityOrder = { P1: 1, P2: 2, P3: 3, P4: 4 };
       const aPriority = priorityOrder[a.priority || "P4"] || 4;
       const bPriority = priorityOrder[b.priority || "P4"] || 4;
-      
+
       if (aPriority !== bPriority) {
         return aPriority - bPriority;
       }
-      
+
       return (b.frequency || 0) - (a.frequency || 0);
     }),
     recommendations: {
@@ -188,16 +187,23 @@ function outputResults(
 ## Summary
 
 - **Total Feedback Items:** ${report.summary.totalFeedback}
-- **By Type:** ${Object.entries(report.summary.byType).map(([k, v]) => `${k}: ${v}`).join(", ")}
-- **By Status:** ${Object.entries(report.summary.byStatus).map(([k, v]) => `${k}: ${v}`).join(", ")}
-- **By Priority:** ${Object.entries(report.summary.byPriority).map(([k, v]) => `${k}: ${v}`).join(", ")}
+- **By Type:** ${Object.entries(report.summary.byType)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(", ")}
+- **By Status:** ${Object.entries(report.summary.byStatus)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(", ")}
+- **By Priority:** ${Object.entries(report.summary.byPriority)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(", ")}
 
 ## High Priority Items
 
-${report.recommendations.highPriority.length > 0
-  ? report.recommendations.highPriority
-      .map(
-        (item) => `### ${item.title}
+${
+  report.recommendations.highPriority.length > 0
+    ? report.recommendations.highPriority
+        .map(
+          (item) => `### ${item.title}
 
 - **Type:** ${item.type}
 - **Priority:** ${item.priority}
@@ -205,15 +211,18 @@ ${report.recommendations.highPriority.length > 0
 - **Frequency:** ${item.frequency || "N/A"}
 - **Description:** ${item.description}
 `,
-      )
-      .join("\n")
-  : "No high priority items."}
+        )
+        .join("\n")
+    : "No high priority items."
+}
 
 ## Usage Patterns
 
-${report.recommendations.patterns.length > 0
-  ? report.recommendations.patterns.map((p) => `- ${p}`).join("\n")
-  : "No patterns identified."}
+${
+  report.recommendations.patterns.length > 0
+    ? report.recommendations.patterns.map((p) => `- ${p}`).join("\n")
+    : "No patterns identified."
+}
 
 ## All Feedback Items
 
@@ -251,8 +260,7 @@ async function main() {
   const formatIndex = args.indexOf("--format");
 
   const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : undefined;
-  const format =
-    (formatIndex >= 0 ? args[formatIndex + 1] : "json") as "json" | "markdown";
+  const format = (formatIndex >= 0 ? args[formatIndex + 1] : "json") as "json" | "markdown";
 
   try {
     console.log("📊 Collecting usage feedback...");
@@ -291,4 +299,3 @@ async function collectUsageFeedback(): Promise<UsageReport> {
   const usagePatterns = analyzeUsagePatterns();
   return generateReport(githubIssues, usagePatterns);
 }
-

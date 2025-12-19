@@ -135,6 +135,5 @@ describe("Stack component", () => {
       const stack = container.firstChild as HTMLElement;
       expect(stack).toHaveStyle({ gap: "var(--spacing-md)" });
     });
-
   });
 });
