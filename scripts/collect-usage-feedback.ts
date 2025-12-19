@@ -18,7 +18,7 @@
  */
 
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
 
 interface FeedbackItem {
   id: string;
@@ -172,7 +172,7 @@ function outputResults(
   const path = outputPath || defaultPath;
 
   if (format === "json") {
-    const dir = require("path").dirname(path);
+    const dir = dirname(path);
     if (!existsSync(dir)) {
       mkdirSync(dir, { recursive: true });
     }
@@ -242,7 +242,7 @@ ${report.feedback
   .join("\n")}
 `;
 
-    const dir = require("path").dirname(path);
+    const dir = dirname(path.replace(".json", ".md"));
     if (!existsSync(dir)) {
       mkdirSync(dir, { recursive: true });
     }

@@ -1,3 +1,5 @@
+#!/usr/bin/env tsx
+
 /**
  * Tailwind Safelist Generator
  *
