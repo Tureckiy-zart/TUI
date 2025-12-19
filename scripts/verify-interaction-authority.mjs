@@ -329,7 +329,7 @@ function main() {
   console.log("🔎 Проверка файлов на нарушения...");
   const allViolations = [];
   let filesWithViolations = 0;
-  
+
   for (const file of files) {
     const violations = scanFile(file);
     if (violations.length > 0) {
@@ -339,8 +339,12 @@ function main() {
   }
 
   console.log(`   ✓ Проверено файлов: ${files.length}`);
-  console.log(`   ${allViolations.length > 0 ? '❌' : '✅'} Файлов с нарушениями: ${filesWithViolations}`);
-  console.log(`   ${allViolations.length > 0 ? '❌' : '✅'} Всего нарушений: ${allViolations.length}\n`);
+  console.log(
+    `   ${allViolations.length > 0 ? "❌" : "✅"} Файлов с нарушениями: ${filesWithViolations}`,
+  );
+  console.log(
+    `   ${allViolations.length > 0 ? "❌" : "✅"} Всего нарушений: ${allViolations.length}\n`,
+  );
 
   // Generate report
   console.log("📝 Генерация отчета...");
@@ -360,7 +364,7 @@ function main() {
   console.log("=".repeat(70));
   console.log("📊 РЕЗУЛЬТАТЫ ПРОВЕРКИ:");
   console.log("=".repeat(70));
-  
+
   if (allViolations.length > 0) {
     console.log(`\n❌ ОБНАРУЖЕНО НАРУШЕНИЙ: ${allViolations.length}\n`);
     console.log("📋 Нарушения по типам:");
