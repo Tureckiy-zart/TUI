@@ -164,7 +164,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
       <Row
         ref={ref}
         justify="end"
-        gap="sm"
+        spacing="sm"
         className={cn(OVERLAY_TOKENS.modal.spacing.footer.marginTop, className)}
         {...props}
       />

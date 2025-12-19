@@ -1,82 +1,48 @@
-// This file has been automatically migrated to valid ESM format by Storybook.
-import { fileURLToPath } from "node:url";
+import type { StorybookConfig } from "@storybook/react-vite";
 import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
+import { mergeConfig } from "vite";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const config = {
-  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
-
+const config: StorybookConfig = {
+  stories: ["../src/**/*.stories.@(ts|tsx|mdx)"],
   addons: [
     "@storybook/addon-links",
+    "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
+    "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
-    "@chromatic-com/storybook",
   ],
-
   framework: {
     name: "@storybook/react-vite",
     options: {},
   },
-
-  typescript: {
-    check: false,
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop: { parent?: { fileName: string } }) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    },
-  },
-
-  async viteFinal(config: any) {
-    const resolveConfig = config.resolve ?? {};
-    const alias = Array.isArray(resolveConfig.alias)
-      ? [...resolveConfig.alias, { find: "@", replacement: resolve(__dirname, "../src") }]
-      : {
-          ...(resolveConfig.alias ?? {}),
-          "@": resolve(__dirname, "../src"),
-        };
-
-    // Disable sourcemaps for Storybook build to eliminate
-    // "Can't resolve original location of error" warnings.
-    // This is a tooling-level decision and does NOT affect
-    // the library build sourcemaps (configured in tsup.config.ts).
-    // Sourcemaps are disabled here because Storybook's dev server
-    // doesn't need them and they generate excessive console noise.
-    //
-    // Defensive override: Force sourcemaps to false regardless of
-    // environment variables (e.g., VITE_SOURCEMAP) to ensure
-    // consistent behavior across all environments.
-    return {
-      ...config,
+  async viteFinal(config) {
+    return mergeConfig(config, {
       resolve: {
-        ...resolveConfig,
-        alias,
+        alias: [
+          // Explicit logical-layer aliases (defensive; keeps "@/layer" stable)
+          {
+            find: /^@\/FOUNDATION(\/.*)?$/,
+            replacement: resolve(__dirname, "../src/FOUNDATION$1"),
+          },
+          {
+            find: /^@\/PRIMITIVES(\/.*)?$/,
+            replacement: resolve(__dirname, "../src/PRIMITIVES$1"),
+          },
+          {
+            find: /^@\/COMPOSITION(\/.*)?$/,
+            replacement: resolve(__dirname, "../src/COMPOSITION$1"),
+          },
+          { find: /^@\/PATTERNS(\/.*)?$/, replacement: resolve(__dirname, "../src/PATTERNS$1") },
+          { find: /^@\/DOMAIN(\/.*)?$/, replacement: resolve(__dirname, "../src/DOMAIN$1") },
+          // Keep existing alias behavior for everything else under src/
+          { find: "@", replacement: resolve(__dirname, "../src") },
+        ],
       },
-      build: {
-        ...config.build,
-        // Explicitly disable sourcemaps in build (defensive override)
-        sourcemap: false,
-      },
-      esbuild: {
-        ...config.esbuild,
-        // Explicitly disable sourcemaps in esbuild (defensive override)
-        sourcemap: false,
-        // Disable sourcemap generation at the esbuild level
-        legalComments: "none",
-      },
-      // Disable sourcemaps in optimizeDeps as well
-      optimizeDeps: {
-        ...config.optimizeDeps,
-        esbuildOptions: {
-          ...config.optimizeDeps?.esbuildOptions,
-          sourcemap: false,
-        },
-      },
-    };
+    });
   },
 };
 

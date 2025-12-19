@@ -102,7 +102,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
           <div className={cn("space-y-md", isCentered && "flex flex-col items-center")}>
             <Heading level={2}>{headline}</Heading>
             {description && (
-              <Text size={isCentered ? "lg" : "md"} variant="muted">
+              <Text size={isCentered ? "lg" : "md"} muted>
                 {description}
               </Text>
             )}

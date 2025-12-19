@@ -346,12 +346,12 @@ export type ComponentSize = "sm" | "md" | "lg";
 
 ## Related Documents
 
-- `docs/architecture/FINAL_FOUNDATION_LOCK.md` - Foundation lock status (Interactive Size Scale Authority lock section)
+- `docs/architecture/FOUNDATION_LOCK.md` - Foundation lock status (Interactive Size Scale Authority lock section)
 - `src/PRIMITIVES/Button/Button.tsx` - Reference implementation
 - `src/PRIMITIVES/Link/Link.tsx` - Interactive component example
 - `docs/architecture/LINK_NO_ASCHILD_CANONICAL_ANCHOR.md` - 🔒 **LOCKED** Link architectural lock: first-class semantic anchor, `asChild` FORBIDDEN
-- `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md` - Typography scale (separate from interactive scale)
-- `docs/architecture/SPACING_AUTHORITY_CONTRACT.md` - Spacing tokens (for layout sizing)
+- `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - Typography scale (separate from interactive scale)
+- `docs/architecture/SPACING_AUTHORITY.md` - Spacing tokens (for layout sizing)
 
 ---
 

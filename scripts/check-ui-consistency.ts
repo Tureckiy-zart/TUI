@@ -137,6 +137,38 @@ function isGradientAllowed(
 }
 
 /**
+ * Check if gradient uses GRADIENT_TOKENS
+ */
+function usesGradientTokens(content: string, gradientClass: string): boolean {
+  // Check if gradient is used via GRADIENT_TOKENS reference
+  // Pattern: GRADIENT_TOKENS.brand.primary, GRADIENT_TOKENS.text.brand, etc.
+  const gradientTokenPatterns = [
+    /GRADIENT_TOKENS\.(brand|surface|overlay|text)\.\w+/,
+    /DOMAIN_TOKENS\.(image|badges)\.\w+\.gradient/,
+  ];
+
+  // Find the line where the gradient class appears
+  const lines = content.split("\n");
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(gradientClass)) {
+      // Check surrounding context for GRADIENT_TOKENS usage
+      const contextStart = Math.max(0, i - 5);
+      const contextEnd = Math.min(lines.length, i + 5);
+      const context = lines.slice(contextStart, contextEnd).join("\n");
+
+      // Check if GRADIENT_TOKENS is referenced in context
+      for (const pattern of gradientTokenPatterns) {
+        if (pattern.test(context)) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+/**
  * Extract gradient classes from file content
  */
 function extractGradientClasses(content: string): string[] {
@@ -207,9 +239,17 @@ function validateComponentFile(
 
   // Check each gradient class
   for (const gradientClass of gradientClasses) {
+    // Allow gradients if they use GRADIENT_TOKENS
+    if (usesGradientTokens(content, gradientClass)) {
+      continue; // Skip validation for token-based gradients
+    }
+
+    // Check against whitelist (for legacy/transitional usage)
     if (!isGradientAllowed(gradientClass, allowedClasses, allowedPatterns)) {
       gradientViolations.push(gradientClass);
-      errors.push(`Unauthorized gradient class: ${gradientClass}`);
+      errors.push(
+        `Unauthorized gradient class: ${gradientClass}. Use GRADIENT_TOKENS from src/FOUNDATION/tokens/gradients.ts instead.`,
+      );
     }
   }
 

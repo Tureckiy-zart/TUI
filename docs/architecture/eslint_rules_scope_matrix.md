@@ -149,5 +149,5 @@ If a rule causes confusion, the rule is wrong — not the code.
 
 - [ESLINT_SETUP.md](./ESLINT_SETUP.md) - ESLint setup and governance (architectural enforcement)
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation component contract (FINAL/APPLIED)
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock (Foundation Enforcement section)
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation layer lock (Foundation Enforcement section)
 

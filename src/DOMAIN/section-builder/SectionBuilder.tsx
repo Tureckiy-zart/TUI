@@ -152,13 +152,10 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
             ? (typoConfig.size as "xs" | "sm" | "md" | "lg" | "xl")
             : "md";
         // Map typography variant to Text component supported variants
-        // "default" maps to undefined (no variant)
-        const textVariant =
-          typoConfig.variant && typoConfig.variant !== "default"
-            ? (typoConfig.variant as "primary" | "secondary" | "accent" | "muted")
-            : undefined;
+        // Handle muted variant - other variants are no longer supported
+        const isMuted = typoConfig.variant === "muted";
         return (
-          <Text size={textSize} variant={textVariant}>
+          <Text size={textSize} muted={isMuted}>
             {content}
           </Text>
         );
@@ -315,7 +312,7 @@ function resolveStackedLayout(
 
   return (
     <Stack
-      gap={gap}
+      spacing={gap}
       align={align as "start" | "end" | "center" | "baseline" | "stretch"}
       justify={justify as "start" | "end" | "center" | "between" | "around" | "evenly"}
     >

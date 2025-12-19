@@ -9,7 +9,7 @@
  * Radix Toast.Viewport handles portal rendering internally.
  * Tenerife UI provides visual styling and positioning through tokens only.
  *
- * This component is locked as a foundation component per TUI_ARCHITECTURE_LOCK.md.
+ * This component is locked as a foundation component per UI_ARCHITECTURE_LOCK.md.
  * DO NOT reimplement portal logic - Radix handles this internally.
  */
 

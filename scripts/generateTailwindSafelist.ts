@@ -1,3 +1,5 @@
+#!/usr/bin/env tsx
+
 /**
  * Tailwind Safelist Generator
  *
@@ -182,38 +184,56 @@ function generateSafelistEntries(): string[] {
  * Main generator function
  */
 function generateSafelist() {
-  console.log("🔧 Generating Tailwind safelist from tokens...");
+  console.log("=".repeat(70));
+  console.log("🔧 TAILWIND SAFELIST GENERATOR");
+  console.log("=".repeat(70));
+  console.log("\n📋 Назначение:");
+  console.log("   Генерирует safelist для Tailwind CSS из токенов проекта.");
+  console.log("   Это гарантирует, что все классы, созданные через токены и CVA,");
+  console.log("   будут включены в финальный CSS, даже если Tailwind не может их");
+  console.log("   обнаружить статическим анализом.\n");
 
+  console.log("🔍 Анализ токенов...");
+  const groups = generateSafelistGroups();
   const safelist = generateSafelistEntries();
+  const totalEntries = safelist.length;
+
+  console.log(`   ✓ Найдено ${groups.length} категорий токенов`);
+  console.log(`   ✓ Сгенерировано ${totalEntries} safelist записей\n`);
 
   // Create generated directory if it doesn't exist
   const generatedDir = join(process.cwd(), "src", "generated");
-  mkdirSync(generatedDir, { recursive: true });
+  if (!existsSync(generatedDir)) {
+    mkdirSync(generatedDir, { recursive: true });
+    console.log(`📁 Создана директория: ${generatedDir}`);
+  }
 
   // Write safelist to JSON file
   const outputPath = join(generatedDir, "tailwind.safelist.json");
   writeFileSync(outputPath, JSON.stringify(safelist, null, 2) + "\n", "utf-8");
 
-  const groups = generateSafelistGroups();
-  const totalEntries = safelist.length;
-
-  console.log(`✅ Generated ${totalEntries} safelist entries`);
-  console.log(`📁 Output: ${outputPath}`);
-  console.log("\n" + "=".repeat(60));
-  console.log("Safelist entries by category:");
-  console.log("=".repeat(60));
+  console.log("=".repeat(70));
+  console.log("📊 РЕЗУЛЬТАТЫ ПО КАТЕГОРИЯМ:");
+  console.log("=".repeat(70));
 
   for (const group of groups) {
     if (group.entries.length > 0) {
-      console.log(`\n📌 ${group.label.toUpperCase()}`);
-      console.log("-".repeat(60));
+      console.log(`\n📌 ${group.label.toUpperCase()} (${group.entries.length} записей)`);
+      console.log("-".repeat(70));
       group.entries.forEach((entry) => console.log(`  ✓ ${entry}`));
     }
   }
 
-  console.log("\n" + "=".repeat(60));
-  console.log(`Total: ${totalEntries} entries`);
-  console.log("=".repeat(60));
+  console.log("\n" + "=".repeat(70));
+  console.log("✅ ИТОГИ:");
+  console.log("=".repeat(70));
+  console.log(`   📁 Файл сохранен: ${outputPath}`);
+  console.log(`   📊 Всего записей: ${totalEntries}`);
+  console.log(`   📂 Категорий: ${groups.length}`);
+  console.log("\n💡 Использование:");
+  console.log("   Импортируйте этот файл в tailwind.config.ts:");
+  console.log(`   import safelist from './src/generated/tailwind.safelist.json';`);
+  console.log("=".repeat(70));
 }
 
 // Run generator if called directly

@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import { Box } from "@/COMPOSITION/layout/Box";
 import { Card, CardBody } from "@/COMPOSITION/layout/Card";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -36,11 +37,13 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
   }
 
   return (
-    <div
-      className={cn(
-        "rounded-lg bg-gradient-to-r from-primary to-accent p-lg text-primary-foreground",
-        className,
-      )}
+    <Box
+      radius="lg"
+      p="lg"
+      className={cn("text-primary-foreground", className)}
+      style={{
+        background: "linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))",
+      }}
     >
       <div className="mx-auto max-w-4xl text-center">
         <Heading level={1}>Tenerife Music Platform</Heading>
@@ -60,6 +63,6 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
           </Card>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };

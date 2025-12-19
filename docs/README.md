@@ -1,8 +1,8 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-19  
 **Purpose:** Central documentation hub for the TUI component library  
-**Total Files:** 36 (all canonical and authoritative)
+**Total Files:** 44 (all canonical and authoritative)
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Active Documentation (`docs/`)
 
-**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (36 files):**
+**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (44 files):**
 
 - ✅ **Canonical Documents** - Single source of truth for architecture and decisions
 - ✅ **Authority Contracts** - Immutable Foundation and Extension authority rules
@@ -46,111 +46,125 @@ The `docs_archive/` directory contains:
 
 ### Primary Entry Points (Start Here)
 
-1. **[INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md)**  
+1. **[ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md)**  
    → **IMMUTABLE** - Single source of truth for architecture, design decisions, Foundation vs Extension rules
 
-2. **[architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)**  
+2. **[architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)**  
    → **LOCKED** - Authoritative Foundation lock status (source of truth for locked Foundation layer)
 
-3. **[CANONICAL_PROJECT_ORIENTATION.md](./CANONICAL_PROJECT_ORIENTATION.md)**  
+3. **[PROJECT_ORIENTATION.md](./PROJECT_ORIENTATION.md)**  
    → **ACTIVE** - Canonical project orientation and current state
 
 ### Authority Contracts (Foundation - LOCKED)
 
 All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**:
 
-- [INTERACTION_AUTHORITY_CONTRACT.md](./architecture/INTERACTION_AUTHORITY_CONTRACT.md) - Interaction state rules
-- [STATE_AUTHORITY_MATRIX.md](./architecture/STATE_AUTHORITY_MATRIX.md) - Canonical state set
-- [STATE_AUTHORITY_CONTRACT.md](./architecture/STATE_AUTHORITY_CONTRACT.md) - State token model
-- [SPACING_AUTHORITY_CONTRACT.md](./architecture/SPACING_AUTHORITY_CONTRACT.md) - Spacing rules
-- [RADIUS_AUTHORITY_CONTRACT.md](./architecture/RADIUS_AUTHORITY_CONTRACT.md) - Radius rules
-- [TYPOGRAPHY_AUTHORITY_CONTRACT.md](./architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md) - Typography rules
-- [MOTION_AUTHORITY_CONTRACT.md](./architecture/MOTION_AUTHORITY_CONTRACT.md) - Motion rules
-- [ELEVATION_AUTHORITY_CONTRACT.md](./architecture/ELEVATION_AUTHORITY_CONTRACT.md) - Elevation rules
-- [LAYOUT_AUTHORITY_CONTRACT.md](./architecture/LAYOUT_AUTHORITY_CONTRACT.md) - Layout rules
+- [INTERACTION_AUTHORITY.md](./architecture/INTERACTION_AUTHORITY.md) - Interaction state rules
+- [STATE_MATRIX.md](./architecture/STATE_MATRIX.md) - Canonical state set
+- [STATE_AUTHORITY.md](./architecture/STATE_AUTHORITY.md) - State token model
+- [SPACING_AUTHORITY.md](./architecture/SPACING_AUTHORITY.md) - Spacing rules
+- [RADIUS_AUTHORITY.md](./architecture/RADIUS_AUTHORITY.md) - Radius rules
+- [TYPOGRAPHY_AUTHORITY.md](./architecture/TYPOGRAPHY_AUTHORITY.md) - Typography rules
+- [MOTION_AUTHORITY.md](./architecture/MOTION_AUTHORITY.md) - Motion rules
+- [ELEVATION_AUTHORITY.md](./architecture/ELEVATION_AUTHORITY.md) - Elevation rules
+- [LAYOUT_AUTHORITY.md](./architecture/LAYOUT_AUTHORITY.md) - Layout rules
 - [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale rules
-- [TUI_TOKEN_SYSTEM.md](./architecture/TUI_TOKEN_SYSTEM.md) - Token system rules
+- [TOKEN_AUTHORITY.md](./architecture/TOKEN_AUTHORITY.md) - Token system rules
 
 ### Extension Authority
 
-- [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract (ACTIVE)
+- [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) - Extension layer boundary contract (ACTIVE)
 
 ### Authority Navigation
 
-- [AUTHORITY_MAP.md](./architecture/AUTHORITY_MAP.md) - Navigation map for Authority system
+- [AUTHORITY_NAVIGATION.md](./architecture/AUTHORITY_NAVIGATION.md) - Navigation map for Authority system
 
 ### Architecture Rules & Locks
 
-- [TUI_ARCHITECTURE_LOCK.md](./architecture/TUI_ARCHITECTURE_LOCK.md) - UI architecture lock
-- [TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md) - Extension layer canonical state
+- [ARCHITECTURE_LOCK.md](./architecture/ARCHITECTURE_LOCK.md) - UI architecture lock
+- [EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md) - Extension layer canonical state
 - [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) - 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
 - [FOUNDATION_COMPONENT_SCOPE.md](./architecture/FOUNDATION_COMPONENT_SCOPE.md) - 🔒 **FINAL/APPLIED** Foundation component scope
-- [UI_ARCHITECTURE_RULES.md](./architecture/UI_ARCHITECTURE_RULES.md) - UI architecture rules
-- [TUI_CURSOR_GUARD_RULES.md](./architecture/TUI_CURSOR_GUARD_RULES.md) - Cursor guard rules
-- [CURSOR_UI_RULES.md](./architecture/CURSOR_UI_RULES.md) - Cursor AI rules for UI development
-- [LINTING_RULES.md](./architecture/LINTING_RULES.md) - Linting standards
+- [ARCHITECTURE_RULES.md](./architecture/ARCHITECTURE_RULES.md) - UI architecture rules
+- [ASSISTANT_RULES.md](./architecture/ASSISTANT_RULES.md) - Cursor guard rules
+- [ASSISTANT_DEVELOPMENT_RULES.md](./architecture/ASSISTANT_DEVELOPMENT_RULES.md) - Cursor AI rules for UI development
+- [LINTING_STANDARD.md](./architecture/LINTING_STANDARD.md) - Linting standards
 - [TOOLING_DECISIONS.md](./architecture/TOOLING_DECISIONS.md) - Tooling decisions
 
 ### Component Locks
 
-- [locks/TUI_LAYOUT_LOCK.md](./locks/TUI_LAYOUT_LOCK.md) - Layout primitives lock
-- [locks/TUI_TEXT_LOCK.md](./locks/TUI_TEXT_LOCK.md) - Text/typography components lock
+- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives lock
+- [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
 
 ### Progress & Project Management
 
 - [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) - Project progress tracking (canonical progress file)
-- [tasks/master_task_index.md](./tasks/master_task_index.md) - Master task index and navigation
+- [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md) - Master task index and navigation
+
+### Library Maturity Growth System
+
+- [workflows/tasks/COMPONENT_NEEDS_INVENTORY.md](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) - Component needs tracking and prioritization
+- [workflows/tasks/COMPONENT_CREATION_CHECKLIST.md](./workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) - Extension component creation checklist
+- [workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md](./workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md) - Usage feedback collection process
+- [workflows/tasks/FEEDBACK_REVIEW_PROCESS.md](./workflows/tasks/FEEDBACK_REVIEW_PROCESS.md) - Feedback review and decision process
+- [workflows/tasks/COMPONENT_USAGE_TRACKING.md](./workflows/tasks/COMPONENT_USAGE_TRACKING.md) - Component usage tracking
 
 ### Reference Documentation
 
-- [reference/public-api.md](./reference/public-api.md) - Public API reference
-- [reference/design_tokens_export.md](./reference/design_tokens_export.md) - Design tokens export reference
-- [reference/token-map-overview.md](./reference/token-map-overview.md) - Token map overview
-- [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md) - UI components inventory
-- [reference/UI_INTEGRATION.md](./reference/UI_INTEGRATION.md) - UI integration guide
-
-### Structure & Standards
-
-- [structure/TYPING_STANDARD.md](./structure/TYPING_STANDARD.md) - Typing standards
-
-### UI Exceptions
-
-- [ui/gradient_exceptions.md](./ui/gradient_exceptions.md) - Gradient exceptions documentation
+- [reference/API_REFERENCE.md](./reference/API_REFERENCE.md) - Public API reference
+- [reference/TOKENS_EXPORT_REFERENCE.md](./reference/TOKENS_EXPORT_REFERENCE.md) - Design tokens export reference
+- [reference/TOKENS_OVERVIEW.md](./reference/TOKENS_OVERVIEW.md) - Token map overview
+- [reference/COMPONENTS_INVENTORY.md](./reference/COMPONENTS_INVENTORY.md) - UI components inventory
+- [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
+- [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
+- [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
+- [reference/GRADIENT_EXCEPTIONS.md](./reference/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation
 
 ### CI/CD
 
-- [CI-CD_OVERVIEW.md](./CI-CD_OVERVIEW.md) - CI/CD overview
+- [CI_CD_OVERVIEW.md](./CI_CD_OVERVIEW.md) - CI/CD overview
 
 ### AI Context
 
-- [README_GPT.md](./README_GPT.md) - GPT-specific context reference
+- [ASSISTANT_README.md](./ASSISTANT_README.md) - GPT-specific context reference
 
 ---
 
 ## 📁 Documentation Structure
 
-This directory contains **ONLY canonical and active documentation** (36 files total):
+This directory contains **ONLY canonical and active documentation** (44 files total):
 
 ```
 docs/
-├── architecture/            # Authority Contracts, Architecture Rules, Locks (20 files)
-│   ├── *_AUTHORITY_CONTRACT.md  # Foundation Authority Contracts (LOCKED)
-│   ├── EXTENSION_AUTHORITY_CONTRACT.md  # Extension boundary contract
-│   ├── FINAL_FOUNDATION_LOCK.md  # Foundation lock status (source of truth)
-│   ├── TUI_ARCHITECTURE_LOCK.md  # Architecture lock
-│   ├── UI_ARCHITECTURE_RULES.md  # Architecture rules
+├── architecture/            # LAW documents: Authority Contracts, Architecture Rules, Locks
+│   ├── locks/              # Component lock documents (2 files)
+│   ├── *_AUTHORITY.md      # Foundation Authority Contracts (LOCKED)
+│   ├── EXTENSION_AUTHORITY.md  # Extension boundary contract
+│   ├── FOUNDATION_LOCK.md  # Foundation lock status (source of truth)
+│   ├── ARCHITECTURE_LOCK.md  # Architecture lock
+│   ├── ARCHITECTURE_RULES.md  # Architecture rules
 │   └── ...                 # Other architecture rules and locks
-├── locks/                   # Component lock documents (2 files)
-├── reference/              # API reference and technical documentation (5 files)
-├── structure/              # Typing standards (1 file)
-├── tasks/                  # Task management and indexes (1 file)
-├── ui/                     # UI-specific documentation (1 file)
-├── INTERNAL_CANONICAL_CONTEXT.md  # Single source of truth (IMMUTABLE)
-├── CANONICAL_PROJECT_ORIENTATION.md  # Project orientation
+├── reference/              # Reference documentation: API, integration, typing standards
+│   ├── API_REFERENCE.md
+│   ├── TOKENS_EXPORT_REFERENCE.md
+│   ├── TYPING_STANDARD.md
+│   ├── GRADIENT_EXCEPTIONS.md
+│   └── ...                 # Other reference documents
+├── workflows/              # Processes and workflows
+│   ├── tasks/              # Task management, component needs, feedback processes
+│   └── foundation/         # Foundation processes
+├── governance/              # Governance processes and reviews
+├── reports/                # Reports and audits
+│   └── audit/              # Audit reports
+├── migrations/             # Migration documentation
+└── _internal/              # Internal service documents
+    └── ai/                 # AI/Assistant context
+├── ARCHITECTURE_CONTEXT.md  # Single source of truth (IMMUTABLE)
+├── PROJECT_ORIENTATION.md  # Project orientation
 ├── PROJECT_PROGRESS.md     # Project progress tracker
-├── CI-CD_OVERVIEW.md       # CI/CD overview
+├── CI_CD_OVERVIEW.md       # CI/CD overview
 ├── README.md               # This file
-└── README_GPT.md          # GPT-specific context
+└── ASSISTANT_README.md     # GPT-specific context
 ```
 
 **Note:** Historical reports, audits, legacy guides, and deprecated documentation have been moved to `docs_archive/` (excluded from git and AI context).
@@ -161,24 +175,24 @@ docs/
 
 ### For AI/Cursor Assistants
 
-1. **Start with:** [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) - Single source of truth
-2. **Check Foundation status:** [architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)
-3. **Consult Authority Contracts:** [architecture/AUTHORITY_MAP.md](./architecture/AUTHORITY_MAP.md) for navigation
-4. **Verify component status:** [architecture/TUI_EXTENSION_CANONICAL_STATE.md](./architecture/TUI_EXTENSION_CANONICAL_STATE.md)
+1. **Start with:** [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md) - Single source of truth
+2. **Check Foundation status:** [architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
+3. **Consult Authority Contracts:** [architecture/AUTHORITY_NAVIGATION.md](./architecture/AUTHORITY_NAVIGATION.md) for navigation
+4. **Verify component status:** [architecture/EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md)
 
 ### For Developers
 
-1. **Architecture:** [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md)
-2. **Foundation Lock:** [architecture/FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md)
-3. **Task Management:** [tasks/master_task_index.md](./tasks/master_task_index.md)
+1. **Architecture:** [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md)
+2. **Foundation Lock:** [architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
+3. **Task Management:** [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md)
 4. **Progress:** [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md)
 
 ### For API Reference
 
-1. **Public API:** [reference/public-api.md](./reference/public-api.md)
-2. **Integration:** [reference/UI_INTEGRATION.md](./reference/UI_INTEGRATION.md)
-3. **Components:** [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md)
-4. **Tokens:** [reference/design_tokens_export.md](./reference/design_tokens_export.md)
+1. **Public API:** [reference/API_REFERENCE.md](./reference/API_REFERENCE.md)
+2. **Integration:** [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md)
+3. **Components:** [reference/COMPONENTS_INVENTORY.md](./reference/COMPONENTS_INVENTORY.md)
+4. **Tokens:** [reference/TOKENS_EXPORT_REFERENCE.md](./reference/TOKENS_EXPORT_REFERENCE.md)
 
 ---
 
@@ -190,13 +204,13 @@ TUI follows a two-layer architecture:
 
 The Foundation layer consists of immutable components that serve as the sole canonical foundation. All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**.
 
-See [FINAL_FOUNDATION_LOCK.md](./architecture/FINAL_FOUNDATION_LOCK.md) for complete architecture rules and lock status.
+See [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) for complete architecture rules and lock status.
 
 ### Extension Layer
 
 Extension components are composable and may use Foundation components internally. They provide domain-specific functionality and can be created, modified, or deleted without affecting the Foundation layer.
 
-See [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRACT.md) for Extension layer rules.
+See [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) for Extension layer rules.
 
 ---
 
@@ -205,8 +219,8 @@ See [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRAC
 ### When to Update
 
 - After completing any Master Task → Update [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md)
-- After creating new components → Update [reference/UI_COMPONENTS_INVENTORY.md](./reference/UI_COMPONENTS_INVENTORY.md)
-- After architecture changes → Update [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) (if explicitly approved)
+- After creating new components → Update [reference/COMPONENTS_INVENTORY.md](./reference/COMPONENTS_INVENTORY.md)
+- After architecture changes → Update [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md) (if explicitly approved)
 
 ### Update Process
 
@@ -239,6 +253,27 @@ See [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRAC
 - Use semantic versioning for major documents
 - Include version numbers in document headers
 
+### Structure Interpretation Rules
+
+**Single Source of Truth for Documentation Structure:**
+
+The structure of `docs/` directory is **FROZEN** and **CANONICAL**. All structural questions must be resolved by reference to:
+
+- **[architecture/DOCUMENTATION_CANON_LOCK.md](./architecture/DOCUMENTATION_CANON_LOCK.md)** - **Single source of truth** for documentation structure, naming rules, and organization
+
+**Rules:**
+- ✅ If a directory is listed in `DOCUMENTATION_CANON_LOCK.md` → it is canonical
+- ❌ If a directory is not listed → it is non-canonical
+- ✅ If a document's placement is described → it is correct
+- ❌ If a document's placement contradicts the lock → it is incorrect
+
+**Structural Changes:**
+- Any structural changes to `docs/` **MUST** be made through modification of `DOCUMENTATION_CANON_LOCK.md` first
+- Creating new top-level directories without updating the lock is **FORBIDDEN**
+- Moving documents between sections without updating the lock is **FORBIDDEN**
+
+See [architecture/DOCUMENTATION_CANON_LOCK.md](./architecture/DOCUMENTATION_CANON_LOCK.md) for complete structure freeze rules and enforcement.
+
 ---
 
 ## 📞 Support
@@ -246,15 +281,26 @@ See [EXTENSION_AUTHORITY_CONTRACT.md](./architecture/EXTENSION_AUTHORITY_CONTRAC
 For questions about documentation:
 
 - Check the relevant canonical document from the entry points above
-- Review [INTERNAL_CANONICAL_CONTEXT.md](./INTERNAL_CANONICAL_CONTEXT.md) for architecture questions
+- Review [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md) for architecture questions
 - Check [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md) for current status
-- Consult [tasks/master_task_index.md](./tasks/master_task_index.md) for task overview
+- Consult [workflows/tasks/TASK_INDEX.md](./workflows/tasks/TASK_INDEX.md) for task overview
 
 **Remember:** Use ONLY `docs/` for canonical information. `docs_archive/` is NOT source of truth.
 
 ---
 
-**Last Updated:** 2025-12-18  
-**Documentation Version:** 3.1  
-**Total Canonical Files:** 37  
+**Last Updated:** 2025-12-19  
+**Documentation Version:** 3.2  
+**Total Canonical Files:** 44  
 **Archive Status:** Isolated (excluded from git and AI context)
+
+### Library Maturity Growth System
+
+The library now includes a comprehensive system for controlled growth:
+- Component needs identification and tracking
+- Extension component creation templates and tools
+- Usage feedback collection and review processes
+- Enhanced Storybook DX with a11y testing and token display
+- Automated component request triage workflow
+
+See [workflows/tasks/COMPONENT_NEEDS_INVENTORY.md](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) for details.

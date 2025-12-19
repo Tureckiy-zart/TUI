@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Library Maturity Growth System**: Comprehensive system for controlled library growth
+  - Component Needs Inventory system for tracking real component needs
+  - Extension component creation templates and CLI generator (`scripts/generate-extension-component.ts`)
+  - Component needs analysis script (`scripts/analyze-component-needs.ts`)
+  - Usage feedback collection and analysis system
+  - Enhanced Storybook configuration with a11y testing and token display
+  - GitHub issue template for component requests
+  - Automated component request triage workflow
+  - Component creation checklist and examples library
+  - Usage tracking and feedback review processes
+
+### Breaking Changes
+
+- **Removed deprecated `Text.variant` prop**: Use `muted` prop for muted text, or use semantic components for other semantic colors. See [Migration Guide](../docs/migrations/MIGRATION_V2_DEPRECATED_API_REMOVAL.md) for details.
+- **Removed deprecated `Stack.gap`, `Row.gap`, and `Column.gap` props**: Use `spacing` prop instead (canonical). Simply replace `gap` with `spacing` - values and behavior remain the same.
+- **Updated `FieldError` internal implementation**: No public API changes, but internal implementation now uses canonical approaches instead of deprecated APIs.
+
+### Removed
+
+- `Text` component `variant` prop (deprecated in v1.x)
+- `Stack`, `Row`, and `Column` components `gap` prop (deprecated in v1.x)
+
 ## [1.2.0] - 2025-12-18
 
 ### Added

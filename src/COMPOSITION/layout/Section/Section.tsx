@@ -16,7 +16,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import type { ResponsiveSpacing } from "../layout.types";
 import { Stack, type StackProps } from "../Stack";
 
-export interface SectionProps extends Omit<StackProps, "py" | "gap"> {
+export interface SectionProps extends Omit<StackProps, "py" | "spacing"> {
   /**
    * Vertical padding - token-based
    * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
@@ -26,12 +26,12 @@ export interface SectionProps extends Omit<StackProps, "py" | "gap"> {
   padding?: ResponsiveSpacing;
 
   /**
-   * Gap spacing for content blocks - token-based
+   * Spacing for content blocks - token-based
    * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
-   * @example gap="md"
-   * @example gap={{ base: "sm", lg: "xl" }}
+   * @example spacing="md"
+   * @example spacing={{ base: "sm", lg: "xl" }}
    */
-  gap?: ResponsiveSpacing;
+  spacing?: ResponsiveSpacing;
 
   /**
    * Render as different HTML element
@@ -43,13 +43,13 @@ export interface SectionProps extends Omit<StackProps, "py" | "gap"> {
  * Section component - page/landing layout container
  */
 const Section = React.forwardRef<HTMLDivElement, SectionProps>(
-  ({ padding = "md", gap, className, as, ...props }, ref) => {
+  ({ padding = "md", spacing, className, as, ...props }, ref) => {
     return (
       <Stack
         ref={ref}
         as={as ?? "section"}
         py={padding}
-        gap={gap}
+        spacing={spacing}
         className={cn("w-full", className)}
         {...props}
       />

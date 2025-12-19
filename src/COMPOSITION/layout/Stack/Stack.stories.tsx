@@ -9,7 +9,7 @@ const meta: Meta<typeof Stack> = {
     docs: {
       description: {
         component:
-          "Stack is the primary layout composition primitive for vertical and horizontal flows. It provides semantic spacing between items and handles flexbox layout composition. Uses Box internally as the base container. The `spacing` prop is canonical (preferred), `gap` is deprecated but kept for backward compatibility.",
+          "Stack is the primary layout composition primitive for vertical and horizontal flows. It provides semantic spacing between items and handles flexbox layout composition. Uses Box internally as the base container. The `spacing` prop is the canonical prop for spacing between items.",
       },
     },
   },
@@ -18,13 +18,6 @@ const meta: Meta<typeof Stack> = {
     spacing: {
       control: { type: "text" },
       description: "Spacing between stack items (canonical prop, uses spacing tokens)",
-      table: {
-        type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
-      },
-    },
-    gap: {
-      control: { type: "text" },
-      description: "Gap between stack items (deprecated, use spacing instead)",
       table: {
         type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
       },
@@ -208,35 +201,6 @@ export const TokenBasedSpacing: Story = {
     docs: {
       description: {
         story: "Using semantic spacing tokens with canonical `spacing` prop",
-      },
-    },
-  },
-};
-
-export const SpacingVsGap: Story = {
-  render: () => (
-    <div className="space-y-lg">
-      <div>
-        <h3 className="mb-sm text-lg font-semibold">Using spacing (canonical)</h3>
-        <Stack spacing="md">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-        </Stack>
-      </div>
-      <div>
-        <h3 className="mb-sm text-lg font-semibold">Using gap (deprecated, backward compatible)</h3>
-        <Stack gap="md">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-        </Stack>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Both `spacing` (canonical) and `gap` (deprecated) work, but prefer `spacing` for new code",
       },
     },
   },

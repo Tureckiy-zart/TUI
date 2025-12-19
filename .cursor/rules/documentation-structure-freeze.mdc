@@ -1,0 +1,252 @@
+---
+alwaysApply: true
+title: Documentation Structure Freeze Rules
+version: 1.0
+status: Active
+owner: Cursor AI
+priority: Critical
+scope: Global
+language: en
+last_updated: 2025-01-27
+---
+
+# Documentation Structure Freeze Rules (Canonical)
+
+## Purpose
+
+This document defines **mandatory rules** for Cursor / AI when working with documentation structure in `docs/` directory.
+
+These rules exist to prevent:
+- Structural drift
+- Unauthorized directory creation
+- Placement of documents in wrong sections
+- Unconscious structural changes
+
+**Single Source of Truth:** `docs/architecture/DOCUMENTATION_CANON_LOCK.md`
+
+Compliance is mandatory.
+
+---
+
+## Structure Freeze Status
+
+**Status:** 🔒 **FROZEN**  
+**Date:** 2025-01-27
+
+The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This structure represents the single source of truth for documentation organization.
+
+---
+
+## Canonical Top-Level Directories
+
+The following top-level directories in `docs/` are **FROZEN**:
+
+### 1. `docs/architecture/`
+- **Purpose:** Authority Contracts, Architecture Rules, Locks, and architectural guidelines
+- **Boundary:** Architecture rules and authority contracts ONLY
+- **Forbidden:** Reference documentation, reports, or service documents
+
+### 2. `docs/reference/`
+- **Purpose:** API references, integration guides, typing standards, and usage examples
+- **Boundary:** Developer-facing reference material ONLY
+- **Forbidden:** Architecture rules or internal service documents
+
+### 3. `docs/governance/`
+- **Purpose:** Governance review cycles and review templates
+- **Boundary:** Governance workflows and review documentation ONLY
+- **Forbidden:** Architecture rules or primary reading route documents
+
+### 4. `docs/workflows/`
+- **Purpose:** Process workflows, checklists, and library maturity system
+- **Boundary:** Workflow definitions and process documentation ONLY
+- **Forbidden:** Architecture rules or reference documentation
+
+### 5. `docs/reports/`
+- **Purpose:** Reports and audit documentation
+- **Boundary:** Project reports and audit documentation ONLY
+- **Forbidden:** Primary reading route documents or architecture rules
+
+### 6. `docs/migrations/`
+- **Purpose:** Historical migration context and reports
+- **Boundary:** Migration documentation ONLY
+- **Forbidden:** Primary reading route documents or active architecture rules
+
+### 7. `docs/_internal/`
+- **Purpose:** Internal service documents (AI context only)
+- **Boundary:** Service documents for AI context ONLY
+- **Forbidden:** Reader-facing documentation or architecture rules
+
+### 8. `docs/archive/` (if exists)
+- **Purpose:** Non-canonical, archived documentation
+- **Boundary:** Historical and deprecated documentation ONLY
+- **Forbidden:** Active canonical documentation
+
+---
+
+## Structural Change Policy (MANDATORY)
+
+**CRITICAL RULE:** Any structural changes to `docs/` directory structure **MUST** be made through modification of `docs/architecture/DOCUMENTATION_CANON_LOCK.md` first.
+
+### Process for Structural Changes
+
+The AI MUST follow this process:
+
+1. **Proposal Phase:**
+   - Document the proposed structural change
+   - Justify why the change is architecturally necessary
+   - Identify which documents will be affected
+
+2. **Lock Update Phase:**
+   - Update `docs/architecture/DOCUMENTATION_CANON_LOCK.md` to reflect the new structure
+   - Update the "Canonical Structure" section
+   - Update the "Documentation Structure Freeze" section
+   - Document the purpose and boundaries of any new directories
+
+3. **Implementation Phase:**
+   - Only after lock document is updated, implement the structural change
+   - Move files according to the updated structure
+   - Update all cross-references and links
+
+4. **Verification Phase:**
+   - Verify all files are in their canonical locations
+   - Verify all links are valid
+   - Verify no files are in unauthorized locations
+
+---
+
+## Forbidden Actions (MANDATORY REFUSAL)
+
+The AI MUST REFUSE when a task requires:
+
+- ❌ Creating new top-level directories in `docs/` without updating `DOCUMENTATION_CANON_LOCK.md`
+- ❌ Moving documents between top-level directories without updating the lock
+- ❌ Placing reader-facing documents in `_internal/`
+- ❌ Placing architecture rules in `reference/`
+- ❌ Placing reference documentation in `architecture/`
+- ❌ Any structural change without first updating `DOCUMENTATION_CANON_LOCK.md`
+
+---
+
+## Enforcement Rules
+
+### Document Placement Verification
+
+Before creating or moving any document in `docs/`, the AI MUST:
+
+1. **Verify canonical location:**
+   - Check `docs/architecture/DOCUMENTATION_CANON_LOCK.md` for correct placement
+   - Verify the document type matches the directory purpose
+   - Ensure no boundary violations
+
+2. **If placement is unclear:**
+   - The AI MUST STOP and ASK
+   - The AI MUST NOT guess or assume
+   - The AI MUST reference the lock document
+
+### Violation Handling
+
+**If a document violates structure:**
+- The document is considered **non-canonical**
+- The placement is considered an **error**
+- The document MUST be moved to its canonical location
+
+**If a file is placed outside its section:**
+- This is a **structural violation**
+- The file MUST be moved to the correct canonical location
+- All references MUST be updated
+
+**If a new directory is needed:**
+- The lock document (`DOCUMENTATION_CANON_LOCK.md`) **MUST** be updated first
+- The new directory's purpose and boundaries **MUST** be documented
+- Only after lock update can the directory be created
+
+---
+
+## Priority Principle
+
+**Architecture and Governance have priority over convenience.**
+
+- Structural stability is more important than temporary convenience
+- All structural changes require architectural justification
+- The lock document is the single source of truth
+
+---
+
+## Single Source of Truth
+
+`docs/architecture/DOCUMENTATION_CANON_LOCK.md` is the **single source of truth** for documentation structure.
+
+**All structural questions must be resolved by reference to this document.**
+
+- ✅ If a directory is listed in `DOCUMENTATION_CANON_LOCK.md` → it is canonical
+- ❌ If a directory is not listed → it is non-canonical
+- ✅ If a document's placement is described → it is correct
+- ❌ If a document's placement contradicts the lock → it is incorrect
+
+**No structural change can be made unconsciously.** All changes must pass through the lock document.
+
+---
+
+## Refusal Template
+
+When refusing a task that violates structure rules, the AI MUST use this format:
+
+```
+❌ **Request Refused: Violates Documentation Structure Freeze**
+
+Your request violates the following structure freeze rules:
+- [Specific rule violated]
+
+**Why this violates the rules:**
+[Explanation of why the requested change violates the frozen structure]
+
+**Required action:**
+1. Update `docs/architecture/DOCUMENTATION_CANON_LOCK.md` first
+2. Document the structural change and justification
+3. Then implement the change
+
+**Reference:**
+- `docs/architecture/DOCUMENTATION_CANON_LOCK.md` - Single source of truth for structure
+- `.cursor/rules/documentation-structure-freeze.mdc` - This rule document
+```
+
+---
+
+## Verification Checklist
+
+Before completing any documentation task, the AI MUST verify:
+
+- ✅ Document placement matches canonical structure in `DOCUMENTATION_CANON_LOCK.md`
+- ✅ No new top-level directories created without lock update
+- ✅ No documents moved between sections without lock update
+- ✅ No reader-facing documents in `_internal/`
+- ✅ No architecture rules in `reference/`
+- ✅ No reference documentation in `architecture/`
+- ✅ All structural changes went through lock document update first
+
+---
+
+## Final Enforcement Principle
+
+**Structure discipline is mandatory.**
+
+If the AI is unsure about document placement,
+it MUST:
+1. Reference `docs/architecture/DOCUMENTATION_CANON_LOCK.md`
+2. Verify canonical location
+3. If still unclear, STOP and ASK
+
+**When in doubt — REFUSE or ASK.**
+
+Silent compliance with structural violations is forbidden.
+
+---
+
+## Related Documents
+
+- `docs/architecture/DOCUMENTATION_CANON_LOCK.md` - **PRIMARY SOURCE** - Complete structure freeze and canonical organization
+- `docs/README.md` - Documentation hub with structure interpretation rules
+
+---
+
+**This rule is MANDATORY. Any work violating these rules is INVALID.**

@@ -1,0 +1,50 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { {{ComponentName}} } from "./{{ComponentName}}";
+
+const meta: Meta<typeof {{ComponentName}}> = {
+  title: "{{category}}/{{ComponentName}}",
+  component: {{ComponentName}},
+  parameters: {
+    layout: "padded",
+    docs: {
+      description: {
+        component: "{{description}}",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  argTypes: {
+    // TODO: Add argTypes for all props
+    // Follow existing patterns from Stack.stories.tsx
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof {{ComponentName}}>;
+
+export const Default: Story = {
+  args: {
+    children: "{{ComponentName}} content",
+  },
+};
+
+// TODO: Add more stories demonstrating:
+// - Different variants
+// - Token usage examples
+// - Responsive behavior
+// - Use cases
+// - Accessibility features
+
+export const Example: Story = {
+  args: {
+    // TODO: Add example props
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Example usage of {{ComponentName}}",
+      },
+    },
+  },
+};
+

@@ -8,7 +8,7 @@
  * This component is LOCKED as part of the UI Foundation Layer.
  *
  * **ARCHITECTURE LOCK DOCUMENTATION:**
- * See: docs/architecture/TUI_ARCHITECTURE_LOCK.md
+ * See: docs/architecture/UI_ARCHITECTURE_LOCK.md
  *
  * This component must not be modified except for critical bug fixes.
  * All architectural decisions are final. Museum-grade quality achieved.
@@ -39,7 +39,7 @@
  * - ❌ Style modifications beyond token wiring
  * - ❌ New props that change component behavior
  *
- * **If you believe changes are necessary, review TUI_ARCHITECTURE_LOCK.md first.**
+ * **If you believe changes are necessary, review UI_ARCHITECTURE_LOCK.md first.**
  *
  * ============================================================================
  *

@@ -47,10 +47,10 @@ If classification is unclear, the AI MUST STOP and ASK.
 Before touching any code, the AI MUST:
 
 1. Check component status in:
-   - `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+   - `docs/architecture/EXTENSION_STATE.md`
    - Relevant Lock documents:
-     - `docs/architecture/FINAL_FOUNDATION_LOCK.md`
-     - `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+     - `docs/architecture/FOUNDATION_LOCK.md`
+     - `docs/architecture/ARCHITECTURE_LOCK.md`
 
 2. If the component or block is LOCKED:
    - The AI MUST REFUSE immediately

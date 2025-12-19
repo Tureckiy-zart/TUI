@@ -304,36 +304,87 @@ function generateReport(violations) {
  * Main execution
  */
 function main() {
-  console.log("🔍 Scanning repository for Interaction Authority violations...\n");
+  console.log("=".repeat(70));
+  console.log("🔍 INTERACTION AUTHORITY VERIFICATION");
+  console.log("=".repeat(70));
+  console.log("\n📋 Назначение:");
+  console.log("   Проверяет код на соответствие правилам Interaction Authority.");
+  console.log("   Ищет запрещенные паттерны:");
+  console.log("   - JS-driven состояния (useState для hover/active/focus)");
+  console.log("   - Raw pointer-events-none в базовом состоянии");
+  console.log("   - focus: вместо focus-visible:");
+  console.log("   - Асинхронная инъекция состояний\n");
 
   // Ensure output directory exists
   if (!existsSync(OUTPUT_DIR)) {
     mkdirSync(OUTPUT_DIR, { recursive: true });
+    console.log(`📁 Создана директория: ${OUTPUT_DIR}`);
   }
 
   // Scan source directory
+  console.log("🔍 Сканирование репозитория...");
   const files = scanDirectory(SRC_DIR);
-  console.log(`📁 Scanning ${files.length} file(s)...\n`);
+  console.log(`   ✓ Найдено файлов для проверки: ${files.length}\n`);
 
-  // Scan each file
+  console.log("🔎 Проверка файлов на нарушения...");
   const allViolations = [];
+  let filesWithViolations = 0;
+
   for (const file of files) {
     const violations = scanFile(file);
-    allViolations.push(...violations);
+    if (violations.length > 0) {
+      filesWithViolations++;
+      allViolations.push(...violations);
+    }
   }
 
+  console.log(`   ✓ Проверено файлов: ${files.length}`);
+  console.log(
+    `   ${allViolations.length > 0 ? "❌" : "✅"} Файлов с нарушениями: ${filesWithViolations}`,
+  );
+  console.log(
+    `   ${allViolations.length > 0 ? "❌" : "✅"} Всего нарушений: ${allViolations.length}\n`,
+  );
+
   // Generate report
+  console.log("📝 Генерация отчета...");
   const report = generateReport(allViolations);
   writeFileSync(MARKDOWN_OUTPUT, report, "utf-8");
+  console.log(`   ✓ Отчет сохранен: ${MARKDOWN_OUTPUT}\n`);
 
-  console.log(`📊 Report generated: ${MARKDOWN_OUTPUT}\n`);
+  // Group violations by type for summary
+  const violationsByType = {};
+  for (const violation of allViolations) {
+    if (!violationsByType[violation.type]) {
+      violationsByType[violation.type] = 0;
+    }
+    violationsByType[violation.type]++;
+  }
+
+  console.log("=".repeat(70));
+  console.log("📊 РЕЗУЛЬТАТЫ ПРОВЕРКИ:");
+  console.log("=".repeat(70));
 
   if (allViolations.length > 0) {
-    console.log(`❌ FAIL: Found ${allViolations.length} violation(s)\n`);
-    console.log(`See ${MARKDOWN_OUTPUT} for details.\n`);
+    console.log(`\n❌ ОБНАРУЖЕНО НАРУШЕНИЙ: ${allViolations.length}\n`);
+    console.log("📋 Нарушения по типам:");
+    for (const [type, count] of Object.entries(violationsByType)) {
+      console.log(`   • ${type}: ${count}`);
+    }
+    console.log(`\n📄 Подробности в отчете: ${MARKDOWN_OUTPUT}`);
+    console.log("\n💡 Как исправить:");
+    console.log("   См. документацию: docs/architecture/INTERACTION_AUTHORITY_GUARD_LAYER.md");
+    console.log("=".repeat(70));
     process.exit(1);
   } else {
-    console.log(`✅ PASS: No violations found\n`);
+    console.log("\n✅ НАРУШЕНИЙ НЕ ОБНАРУЖЕНО");
+    console.log("\n✓ Все файлы соответствуют правилам Interaction Authority:");
+    console.log("   ✓ Нет raw pointer-events-none в базовом состоянии");
+    console.log("   ✓ Нет JavaScript useState для hover/active/focus состояний");
+    console.log("   ✓ Нет mouse handlers для визуальных эффектов");
+    console.log("   ✓ Используется focus-visible: вместо focus:");
+    console.log("   ✓ Нет асинхронной инъекции состояний");
+    console.log("=".repeat(70));
     process.exit(0);
   }
 }

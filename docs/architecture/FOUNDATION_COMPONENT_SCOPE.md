@@ -12,7 +12,7 @@
 
 This document defines **which components are considered Foundation** and therefore subject to the strict Foundation Contract. It provides explicit inclusion criteria, lists all Foundation components with rationale, and distinguishes Foundation components from Extension layer components.
 
-**This document is the authoritative source of truth** for Foundation component scope. All components listed in this document **MUST comply with the Foundation Contract** as enforced by [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md).
+**This document is the authoritative source of truth** for Foundation component scope. All components listed in this document **MUST comply with the Foundation Contract** as enforced by [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md).
 
 ---
 
@@ -25,9 +25,9 @@ This document defines **which components are considered Foundation** and therefo
 - ✅ **Type-Tests:** Compile-time verification ensures enforcement compliance
 - ✅ **CI Integration:** All enforcement checks run automatically
 
-**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
+**Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status
 
-**Unlock Procedure:** Any violations of Foundation enforcement require explicit unlock procedure as documented in [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md).
+**Unlock Procedure:** Any violations of Foundation enforcement require explicit unlock procedure as documented in [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md).
 
 ---
 
@@ -157,7 +157,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven typography system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Text is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Text is listed as locked in `EXTENSION_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 4. Heading
 
@@ -170,7 +170,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven typography system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Heading is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Heading is listed as locked in `EXTENSION_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 5. Input
 
@@ -183,7 +183,7 @@ The following components are **proposed** as Foundation based on architectural r
 - Token-driven form system
 - Listed as locked in Extension Canonical State (2025-12-15)
 
-**Note:** Input is listed as locked in `TUI_EXTENSION_CANONICAL_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
+**Note:** Input is listed as locked in `EXTENSION_STATE.md` but has not completed the full Foundation lock process with lock report. It is proposed here based on architectural role.
 
 #### 6. Textarea
 
@@ -320,7 +320,7 @@ These components are part of the Extension layer and are **not subject to the Fo
 
 ## Radix-Based Foundation Components
 
-The following components are **Foundation** but are **Radix-based** and located outside the `PRIMITIVES` folder. They are documented in `FINAL_FOUNDATION_LOCK.md`:
+The following components are **Foundation** but are **Radix-based** and located outside the `PRIMITIVES` folder. They are documented in `FOUNDATION_LOCK.md`:
 
 ### Modal
 
@@ -352,7 +352,7 @@ The following components are **Foundation** but are **Radix-based** and located 
 **Location:** `src/components/overlays/Toast.tsx`  
 **Base Library:** Radix Toast
 
-**Note:** These Radix-based Foundation components are subject to the Foundation Contract, but their lock status and details are documented in `FINAL_FOUNDATION_LOCK.md`. This document focuses on PRIMITIVES-based Foundation components.
+**Note:** These Radix-based Foundation components are subject to the Foundation Contract, but their lock status and details are documented in `FOUNDATION_LOCK.md`. This document focuses on PRIMITIVES-based Foundation components.
 
 ---
 
@@ -406,7 +406,7 @@ Adding a new component to Foundation scope requires:
    - Complete Foundation component lifecycle (Steps 1-13, including Steps 7.5 and 7.6: Internal Styling Integrity & className Isolation Verification, Internal Styling Integrity & ESLint Scope Verification)
    - Verify Foundation Contract compliance (enforcement is MANDATORY)
    - Create Foundation lock report
-   - Update `FINAL_FOUNDATION_LOCK.md`
+   - Update `FOUNDATION_LOCK.md`
    - Update this document
 
 3. **Explicit Approval**
@@ -432,7 +432,7 @@ To propose a new Foundation component:
 2. Ensure no existing Foundation component serves the same role
 3. Complete Foundation component lifecycle
 4. Create Foundation lock report
-5. Update this document and `FINAL_FOUNDATION_LOCK.md`
+5. Update this document and `FOUNDATION_LOCK.md`
 
 ---
 
@@ -441,10 +441,10 @@ To propose a new Foundation component:
 This document works in conjunction with:
 
 - **[FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md)** - Defines the contract that applies to Foundation components (enforcement is FINAL/APPLIED)
-- **[FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)** - Documents lock status of all Foundation components and **Foundation Enforcement Lock Status**
+- **[FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)** - Documents lock status of all Foundation components and **Foundation Enforcement Lock Status**
 - **[FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md)** - 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
-- **[TUI_EXTENSION_CANONICAL_STATE.md](./TUI_EXTENSION_CANONICAL_STATE.md)** - Lists Extension layer components
-- **[INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md)** - Provides architectural context
+- **[EXTENSION_STATE.md](./EXTENSION_STATE.md)** - Lists Extension layer components
+- **[ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md)** - Provides architectural context
 
 ---
 
@@ -466,7 +466,7 @@ This document works in conjunction with:
 - ⏳ Label (form label)
 
 **Radix-Based Foundation:**
-- ✅ Modal, Tabs, ContextMenu, Toast (documented in FINAL_FOUNDATION_LOCK.md)
+- ✅ Modal, Tabs, ContextMenu, Toast (documented in FOUNDATION_LOCK.md)
 - ⏳ Select (pending canonical lock)
 
 **Explicitly NOT Foundation:**

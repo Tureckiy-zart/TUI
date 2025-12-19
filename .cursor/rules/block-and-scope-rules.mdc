@@ -111,8 +111,8 @@ The AI MUST:
 
 - Verify that changes occur only in allowed extension areas
 - Respect all Lock documents and Authority Contracts:
-  - Lock documents: `docs/architecture/FINAL_FOUNDATION_LOCK.md`, `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
-  - Authority Contracts: see `docs/architecture/AUTHORITY_MAP.md` for complete list
+  - Lock documents: `docs/architecture/FOUNDATION_LOCK.md`, `docs/architecture/ARCHITECTURE_LOCK.md`
+  - Authority Contracts: see `docs/architecture/AUTHORITY_NAVIGATION.md` for complete list
 
 The AI MUST NOT:
 

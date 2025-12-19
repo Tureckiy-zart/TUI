@@ -29,7 +29,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, avatar, c
           <div className="mb-md h-[var(--spacing-md)] w-[var(--spacing-md)] rounded-full bg-muted" />
         )}
         <Heading level={3}>{name}</Heading>
-        <Text variant="muted">{email}</Text>
+        <Text muted>{email}</Text>
       </CardBody>
     </Card>
   );

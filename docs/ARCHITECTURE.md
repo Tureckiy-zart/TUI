@@ -122,11 +122,11 @@ These are not preferences. These are decisions.
 
 **Check the layer hierarchy first.** Start with PRIMITIVES for atomic components, COMPOSITION for layout/overlays, PATTERNS for business patterns, DOMAIN for product-specific code. FOUNDATION is closed.
 
-**Verify it does not exist.** Check `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md` for allowed components. Check `src/index.ts` for exports. If it exists but is not listed as ALLOWED, it is RESTRICTED.
+**Verify it does not exist.** Check `docs/architecture/EXTENSION_STATE.md` for allowed components. Check `src/index.ts` for exports. If it exists but is not listed as ALLOWED, it is RESTRICTED.
 
 **Ensure token compliance.** All visual props must use token union types. Raw strings, numbers, or CSS values are forbidden. Each component must have its own token domain.
 
-**Verify canonical compliance.** Check `docs/architecture/CANONICAL_LOCK.md` for forbidden regressions. Ensure you are not reintroducing removed concepts or violating layer boundaries.
+**Verify canonical compliance.** Check `docs/architecture/ARCHITECTURE_LOCK.md` for forbidden regressions. Ensure you are not reintroducing removed concepts or violating layer boundaries.
 
 **Use Foundation components internally.** If your component is modal-like, tab-like, or select-like, compose the appropriate Foundation component. Do not reimplement Foundation behavior.
 
@@ -136,7 +136,7 @@ These are not preferences. These are decisions.
 
 **Do not add tokens without components.** Foundation tokens must correspond to active components. Orphaned tokens are forbidden.
 
-**Do not reintroduce removed concepts.** Dropdown, legacy Card in PRIMITIVES, and legacy useToast exports are explicitly forbidden. Check `docs/architecture/CANONICAL_LOCK.md` before adding anything.
+**Do not reintroduce removed concepts.** Dropdown, legacy Card in PRIMITIVES, and legacy useToast exports are explicitly forbidden. Check `docs/architecture/ARCHITECTURE_LOCK.md` before adding anything.
 
 **Do not add overlay infrastructure to PATTERNS.** Overlays live in COMPOSITION only. PATTERNS may compose overlays but cannot define overlay primitives.
 
@@ -152,17 +152,17 @@ These are not preferences. These are decisions.
 
 ## 7. Canonical Documents (Where the Real Truth Lives)
 
-**`docs/INTERNAL_CANONICAL_CONTEXT.md`** — Single source of truth for architecture, design philosophy, constraints, and development rules. This document overrides all other architectural documentation.
+**`docs/ARCHITECTURE_CONTEXT.md`** — Single source of truth for architecture, design philosophy, constraints, and development rules. This document overrides all other architectural documentation.
 
-**`docs/architecture/CANONICAL_LOCK.md`** — Authoritative source for canonical architecture state and forbidden regressions. Defines what is locked, what is allowed, and what is explicitly forbidden.
+**`docs/architecture/ARCHITECTURE_LOCK.md`** — Authoritative source for canonical architecture state and forbidden regressions. Defines what is locked, what is allowed, and what is explicitly forbidden.
 
-**`docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`** — Defines which components are ALLOWED, RESTRICTED, or LOCKED. This document overrides file existence, Storybook stories, and historical usage.
+**`docs/architecture/EXTENSION_STATE.md`** — Defines which components are ALLOWED, RESTRICTED, or LOCKED. This document overrides file existence, Storybook stories, and historical usage.
 
-**`docs/architecture/TUI_CURSOR_GUARD_RULES.md`** — Mandatory guard rules for AI/Cursor work. Defines enforcement rules, token system rules, and workflow requirements.
+**`docs/architecture/ASSISTANT_RULES.md`** — Mandatory guard rules for AI/Cursor work. Defines enforcement rules, token system rules, and workflow requirements.
 
-**`docs/architecture/FINAL_FOUNDATION_LOCK.md`** — Authoritative source for Foundation lock status. Defines the five locked Foundation components and their immutability rules.
+**`docs/architecture/FOUNDATION_LOCK.md`** — Authoritative source for Foundation lock status. Defines the five locked Foundation components and their immutability rules.
 
-**`docs/architecture/AUTHORITY_MAP.md`** — Navigation map for Authority Contracts. Lists all Authority Contracts and their domains (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation).
+**`docs/architecture/AUTHORITY_NAVIGATION.md`** — Navigation map for Authority Contracts. Lists all Authority Contracts and their domains (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation).
 
 ---
 
@@ -170,9 +170,9 @@ These are not preferences. These are decisions.
 
 Changes are possible, but they require an explicit unlock.
 
-**Foundation unlock:** Foundation components and Authority Contracts are immutable. Changes require explicit unlock procedure: justification, full audit, approval, implementation, and re-lock. See `docs/architecture/FINAL_FOUNDATION_LOCK.md` for unlock protocol.
+**Foundation unlock:** Foundation components and Authority Contracts are immutable. Changes require explicit unlock procedure: justification, full audit, approval, implementation, and re-lock. See `docs/architecture/FOUNDATION_LOCK.md` for unlock protocol.
 
-**Canonical architecture unlock:** Architectural changes that violate `docs/architecture/CANONICAL_LOCK.md` require explicit unlock: unlock request, full audit, approval, implementation, and re-lock. See `docs/architecture/CANONICAL_LOCK.md` for unlock protocol.
+**Canonical architecture unlock:** Architectural changes that violate `docs/architecture/ARCHITECTURE_LOCK.md` require explicit unlock: unlock request, full audit, approval, implementation, and re-lock. See `docs/architecture/ARCHITECTURE_LOCK.md` for unlock protocol.
 
 **Undocumented changes are violations.** If a change is not documented in canonical documents or requires unlock but is not approved, it is considered an architectural violation and must be reverted.
 
@@ -180,11 +180,42 @@ Changes are possible, but they require an explicit unlock.
 
 ---
 
+## 9. Library Maturity Growth System
+
+**Status:** ✅ **ACTIVE** (2025-12-19)
+
+The library includes a comprehensive system for controlled growth and component development:
+
+### Component Development Tools
+
+- **Component Generator**: `scripts/generate-extension-component.ts` - CLI tool to generate Extension component scaffold. Use: `pnpm run component:generate -- <ComponentName> [--category <category>]`
+- **Component Analysis**: `scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
+- **Feedback Collection**: `scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
+- **Templates**: `templates/extension-component.*.template` - Standardized component templates
+
+### Development Processes
+
+- **Component Needs Inventory**: Tracks real component needs based on usage patterns ([Component Needs Inventory](workflows/tasks/COMPONENT_NEEDS_INVENTORY.md))
+- **Component Creation Checklist**: Mandatory checklist for creating Extension components ([Extension Component Creation Checklist](workflows/tasks/COMPONENT_CREATION_CHECKLIST.md))
+- **Component Examples**: Reference examples and patterns ([Extension Component Examples](reference/COMPONENT_EXAMPLES.md))
+- **Feedback Loop**: Systematic collection and review of usage feedback ([Usage Feedback Process](workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md))
+
+### Storybook Enhancements
+
+- Enhanced configuration with a11y testing integration
+- Token display addon for visualizing design tokens
+- Improved documentation support
+
+**Reference:** See [Library Maturity Growth Plan](../../.cursor/plans/library_maturity_growth_plan_3f2b1a91.plan.md) for complete details.
+
+---
+
 ## Document Status
 
 **Status:** ✅ **STABLE**  
-**Version:** 1.0  
-**Date Created:**  
+**Version:** 1.1  
+**Date Created:** 2025-12-15  
+**Last Updated:** 2025-12-19
 
 This document is the primary architectural entrypoint. It is designed to remain stable over time. For detailed rules, constraints, and implementation guidance, refer to the canonical documents listed in Section 7.
 

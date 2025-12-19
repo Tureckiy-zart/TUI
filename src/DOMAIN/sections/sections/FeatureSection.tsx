@@ -65,7 +65,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
           <header className="mb-xl text-center">
             {title && <Heading level={2}>{title}</Heading>}
             {description && (
-              <Text size="lg" variant="muted">
+              <Text size="lg" muted>
                 {description}
               </Text>
             )}
@@ -86,7 +86,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
                   <Heading level={3}>{feature.title}</Heading>
 
                   {/* Description */}
-                  <Text variant="muted">{feature.description}</Text>
+                  <Text muted>{feature.description}</Text>
                 </div>
               </CardBody>
             </Card>

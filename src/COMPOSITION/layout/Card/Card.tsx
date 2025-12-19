@@ -94,7 +94,13 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
     const spacingValue = sizeTokens.spacing.vertical.replace("space-y-", "") as ResponsiveSpacing;
 
     return (
-      <Stack ref={ref} gap={spacingValue} className={cn(className)} p={paddingValue} {...props} />
+      <Stack
+        ref={ref}
+        spacing={spacingValue}
+        className={cn(className)}
+        p={paddingValue}
+        {...props}
+      />
     );
   },
 );

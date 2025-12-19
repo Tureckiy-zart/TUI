@@ -25,23 +25,23 @@ This document defines **how the AI must think and behave**, not how to implement
 
 When performing any task, the AI MUST resolve rules in the following order:
 
-1. `docs/INTERNAL_CANONICAL_CONTEXT.md`
-2. Authority Contracts (see `docs/architecture/AUTHORITY_MAP.md` for complete list):
-   - `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/MOTION_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/STATE_AUTHORITY_CONTRACT.md`
-   - `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
+1. `docs/ARCHITECTURE_CONTEXT.md`
+2. Authority Contracts (see `docs/architecture/AUTHORITY_NAVIGATION.md` for complete list):
+   - `docs/architecture/ELEVATION_AUTHORITY.md`
+   - `docs/architecture/EXTENSION_AUTHORITY.md`
+   - `docs/architecture/INTERACTION_AUTHORITY.md`
+   - `docs/architecture/LAYOUT_AUTHORITY.md`
+   - `docs/architecture/MOTION_AUTHORITY.md`
+   - `docs/architecture/RADIUS_AUTHORITY.md`
+   - `docs/architecture/SPACING_AUTHORITY.md`
+   - `docs/architecture/STATE_AUTHORITY.md`
+   - `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
 3. Lock documents:
-   - `docs/architecture/FINAL_FOUNDATION_LOCK.md`
-   - `docs/architecture/TUI_ARCHITECTURE_LOCK.md`
+   - `docs/architecture/FOUNDATION_LOCK.md`
+   - `docs/architecture/ARCHITECTURE_LOCK.md`
 4. Architecture rules:
-   - `docs/architecture/UI_ARCHITECTURE_RULES.md`
-   - `docs/architecture/TUI_EXTENSION_CANONICAL_STATE.md`
+   - `docs/architecture/ARCHITECTURE_RULES.md`
+   - `docs/architecture/EXTENSION_STATE.md`
 5. User Rules (this document)
 
 If a conflict exists, the AI MUST follow the higher-priority rule.

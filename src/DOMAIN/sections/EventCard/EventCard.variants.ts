@@ -5,6 +5,7 @@ import { cva } from "class-variance-authority";
 import { CARD_TOKENS } from "@/FOUNDATION/tokens/components/card";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 
 /**
  * EventCard Variants
@@ -210,7 +211,7 @@ export const eventCardTicketButtonIconVariants = cva(
  */
 export const eventCardPriceVariants = cva(
   // Base classes - price gradient text from tokens
-  `bg-gradient-to-r from-accent-500 to-primary-600 bg-clip-text text-transparent`,
+  GRADIENT_TOKENS.text.brand,
   {
     variants: {
       size: {

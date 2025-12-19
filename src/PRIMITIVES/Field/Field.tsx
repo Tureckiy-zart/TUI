@@ -16,7 +16,7 @@ export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}
 const Field = React.forwardRef<HTMLDivElement, FieldProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <Stack ref={ref} gap="sm" className={cn(className)} {...props}>
+      <Stack ref={ref} spacing="sm" className={cn(className)} {...props}>
         {children}
       </Stack>
     );
@@ -71,12 +71,19 @@ FieldDescription.displayName = "FieldDescription";
  */
 export interface FieldErrorProps extends React.ComponentProps<typeof Text> {}
 
-const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>((props, ref) => {
-  // className is forbidden on Foundation components
-  // FieldError uses deprecated variant="destructive" for error styling (token-driven)
-  // This uses the deprecated variant prop which is still available for backward compatibility
-  return <Text ref={ref} size="sm" variant="destructive" {...props} />;
-});
+const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
+  ({ children, ...props }, ref) => {
+    // FieldError is a composition component (not Foundation), so it can use className
+    // Wraps Text with destructive color class for error styling (token-driven)
+    return (
+      <span ref={ref} className="text-destructive">
+        <Text size="sm" {...props}>
+          {children}
+        </Text>
+      </span>
+    );
+  },
+);
 FieldError.displayName = "FieldError";
 
 // Compose Field API

@@ -8,7 +8,7 @@ on:
 
 jobs:
   chromatic:
-    name: Chromatic Visual Tests
+    name: Chromatic Visual Tests [Informational]
     runs-on: ubuntu-latest
     continue-on-error: true # Don't block PR if Chromatic fails
     permissions:
@@ -37,6 +37,8 @@ jobs:
       - name: Run Chromatic
         uses: chromaui/action@v1
         with:
+          # Note: CHROMATIC_PROJECT_TOKEN must be configured in GitHub Secrets
+          # Settings > Secrets and variables > Actions > New repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           buildScriptName: build-storybook
           exitZeroOnChanges: true # Don't fail on visual changes, just report them

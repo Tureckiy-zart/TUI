@@ -10,7 +10,7 @@
  * Radix handles auto-dismiss (via duration prop), queue management, and swipe gestures.
  * Tenerife UI provides a convenience toast() function for easier usage.
  *
- * This component is locked as a foundation component per TUI_ARCHITECTURE_LOCK.md.
+ * This component is locked as a foundation component per UI_ARCHITECTURE_LOCK.md.
  * DO NOT reimplement Radix behavior (setTimeout, custom queues, swipe handling).
  * All behavioral logic must delegate to Radix Toast primitives.
  */

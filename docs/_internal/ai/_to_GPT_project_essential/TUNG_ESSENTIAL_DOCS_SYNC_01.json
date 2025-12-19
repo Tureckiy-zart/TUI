@@ -1,0 +1,307 @@
+{
+  "id": "TUNG_ESSENTIAL_DOCS_SYNC_01",
+  "version": "1.1.0",
+  "name": "Essential Documentation Sync for GPT Project",
+  "type": "STRATEGIC_GROWTH",
+  "status": "READY",
+  "priority": "P2",
+  "breaking": false,
+  "layer": "DOCUMENTATION",
+  "role": "Documentation Maintainer",
+  "objective": "Keep essential documentation files in _to_GPT_project_essential/ synchronized with source files and ensure optimal file selection for GPT project context.",
+  "context": [
+    "Essential files are manually selected for GPT project understanding",
+    "Source files may change over time",
+    "File selection should adapt to changes in documentation structure",
+    "18 files must be kept in sync (exactly 18 docs, no README)"
+  ],
+  "constraints": [
+    "Do NOT modify source files",
+    "Do NOT change file selection logic without explicit instruction",
+    "Do NOT add files beyond the 18-file limit",
+    "Do NOT include Cursor/AI operational rules (only architectural documents)"
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "name": "Verify Source Files Exist",
+      "description": "Check that all 18 source files exist in their original locations.",
+      "allowed_actions": [
+        "Verify source file paths exist",
+        "Check file modification dates",
+        "Report missing or moved files"
+      ],
+      "outputs": [
+        "Source file existence report",
+        "File modification date comparison"
+      ],
+      "exit_criteria": [
+        "All 18 source files are verified to exist",
+        "File paths are confirmed correct"
+      ],
+      "source_files": [
+        {
+          "source": "docs/ARCHITECTURE_CONTEXT.md",
+          "target": "_to_GPT_project_essential/01_ARCHITECTURE_CONTEXT.md",
+          "priority": "CRITICAL",
+          "reason": "Single source of truth for architecture (IMMUTABLE)"
+        },
+        {
+          "source": "docs/PROJECT_PROGRESS.md",
+          "target": "_to_GPT_project_essential/02_PROJECT_PROGRESS.md",
+          "priority": "HIGH",
+          "reason": "Current project status and progress tracking"
+        },
+        {
+          "source": "docs/PROJECT_ORIENTATION.md",
+          "target": "_to_GPT_project_essential/03_PROJECT_ORIENTATION.md",
+          "priority": "HIGH",
+          "reason": "Project orientation and current state"
+        },
+        {
+          "source": "docs/architecture/FOUNDATION_LOCK.md",
+          "target": "_to_GPT_project_essential/04_FOUNDATION_LOCK.md",
+          "priority": "CRITICAL",
+          "reason": "Authoritative Foundation lock status"
+        },
+        {
+          "source": "docs/architecture/ARCHITECTURE_LOCK.md",
+          "target": "_to_GPT_project_essential/05_ARCHITECTURE_LOCK.md",
+          "priority": "CRITICAL",
+          "reason": "UI architecture lock status and binding contracts"
+        },
+        {
+          "source": "docs/architecture/AUTHORITY_NAVIGATION.md",
+          "target": "_to_GPT_project_essential/06_AUTHORITY_NAVIGATION.md",
+          "priority": "CRITICAL",
+          "reason": "Navigation map for Authority system"
+        },
+        {
+          "source": "docs/architecture/TOKEN_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/07_TOKEN_AUTHORITY.md",
+          "priority": "CRITICAL",
+          "reason": "Token system documentation (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/EXTENSION_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/08_EXTENSION_AUTHORITY.md",
+          "priority": "CRITICAL",
+          "reason": "Extension layer boundary contract"
+        },
+        {
+          "source": "docs/architecture/INTERACTION_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/09_INTERACTION_AUTHORITY.md",
+          "priority": "CRITICAL",
+          "reason": "Interaction state rules (WHEN layer) (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/SPACING_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/10_SPACING_AUTHORITY.md",
+          "priority": "HIGH",
+          "reason": "Spacing rules (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/LAYOUT_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/11_LAYOUT_AUTHORITY.md",
+          "priority": "HIGH",
+          "reason": "Layout structure and flow rules (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/ARCHITECTURE_RULES.md",
+          "target": "_to_GPT_project_essential/12_ARCHITECTURE_RULES.md",
+          "priority": "HIGH",
+          "reason": "Radix UI and Token Union rules"
+        },
+        {
+          "source": "docs/reference/TYPING_STANDARD.md",
+          "target": "_to_GPT_project_essential/13_TYPING_STANDARD.md",
+          "priority": "HIGH",
+          "reason": "TypeScript typing standards (MANDATORY)"
+        },
+        {
+          "source": "docs/architecture/STATE_MATRIX.md",
+          "target": "_to_GPT_project_essential/14_STATE_MATRIX.md",
+          "priority": "CRITICAL",
+          "reason": "Canonical state set (WHAT layer) (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/STATE_AUTHORITY.md",
+          "target": "_to_GPT_project_essential/15_STATE_AUTHORITY.md",
+          "priority": "CRITICAL",
+          "reason": "State token model (HOW layer) (LOCKED)"
+        },
+        {
+          "source": "docs/architecture/EXTENSION_STATE.md",
+          "target": "_to_GPT_project_essential/16_EXTENSION_STATE.md",
+          "priority": "HIGH",
+          "reason": "Extension layer canonical state"
+        },
+        {
+          "source": "docs/architecture/FOUNDATION_CONTRACT.md",
+          "target": "_to_GPT_project_essential/17_FOUNDATION_CONTRACT.md",
+          "priority": "CRITICAL",
+          "reason": "Foundation component contract and Foundation Enforcement (FINAL/APPLIED)"
+        },
+        {
+          "source": "docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md",
+          "target": "_to_GPT_project_essential/18_FOUNDATION_STEP_PIPELINE.md",
+          "priority": "CRITICAL",
+          "reason": "Foundation component lifecycle pipeline (13-step process for Foundation components)"
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "name": "Compare File Versions",
+      "description": "Compare source files with target files to detect changes.",
+      "allowed_actions": [
+        "Compare file content (byte-by-byte or hash)",
+        "Compare file modification dates",
+        "Generate diff report",
+        "Identify changed files"
+      ],
+      "outputs": [
+        "File comparison report",
+        "List of changed files",
+        "List of unchanged files"
+      ],
+      "exit_criteria": [
+        "All 18 source files compared with targets",
+        "Change detection complete"
+      ]
+    },
+    {
+      "id": "T3",
+      "name": "Evaluate File Relevance",
+      "description": "Assess if current file selection is still optimal for GPT project understanding. Check for new critical files or changes in documentation structure.",
+      "allowed_actions": [
+        "Review documentation structure changes",
+        "Check for new Authority Contracts",
+        "Check for new critical architecture documents",
+        "Evaluate if current selection covers all critical areas",
+        "Suggest alternative files if structure changed significantly"
+      ],
+      "outputs": [
+        "File relevance assessment",
+        "Recommendations for file selection updates (if needed)",
+        "Coverage analysis report"
+      ],
+      "exit_criteria": [
+        "File relevance evaluated",
+        "Recommendations documented (if any)"
+      ],
+      "evaluation_criteria": {
+        "must_include": [
+          "Core architecture (ARCHITECTURE_CONTEXT.md)",
+          "Foundation lock status (FOUNDATION_LOCK.md)",
+          "Architecture lock (ARCHITECTURE_LOCK.md)",
+          "Project orientation (PROJECT_ORIENTATION.md)",
+          "Project progress (PROJECT_PROGRESS.md)",
+          "Authority navigation (AUTHORITY_NAVIGATION.md)",
+          "Extension boundaries (EXTENSION_AUTHORITY.md)",
+          "Token system (TOKEN_AUTHORITY.md)",
+          "State system (STATE_MATRIX.md, STATE_AUTHORITY.md, INTERACTION_AUTHORITY.md)",
+          "Foundation contract (FOUNDATION_CONTRACT.md)",
+          "Extension state (EXTENSION_STATE.md)",
+          "Typing standards (TYPING_STANDARD.md)"
+        ],
+        "should_include": [
+          "Token Authority examples (SPACING_AUTHORITY.md)",
+          "Layout Authority (LAYOUT_AUTHORITY.md)",
+          "Architecture rules (ARCHITECTURE_RULES.md)",
+          "Foundation lifecycle process (FOUNDATION_STEP_PIPELINE.md)"
+        ],
+        "coverage_areas": [
+          "Architecture (Foundation + Extension)",
+          "Authority Contracts (core contracts)",
+          "Foundation Status (lock, contract, enforcement)",
+          "Foundation Lifecycle (step pipeline process)",
+          "Extension Rules (boundaries, state)",
+          "State System (WHAT/WHEN/HOW layers)",
+          "Current State (progress, orientation)",
+          "Standards (typing)"
+        ]
+      }
+    },
+    {
+      "id": "T4",
+      "name": "Sync Changed Files",
+      "description": "Copy updated source files to target directory.",
+      "allowed_actions": [
+        "Copy changed source files to target directory",
+        "Maintain file structure with numbered prefixes",
+        "Verify copied files are identical to source"
+      ],
+      "outputs": [
+        "Synced files list",
+        "Sync verification report"
+      ],
+      "exit_criteria": [
+        "All changed files synced",
+        "All 18 files present in target directory",
+        "File numbering preserved"
+      ],
+      "sync_rules": {
+        "overwrite": true,
+        "preserve_numbering": true,
+        "verify_after_copy": true
+      }
+    },
+    {
+      "id": "T5",
+      "name": "Generate Sync Report",
+      "description": "Generate a summary report of the sync operation.",
+      "allowed_actions": [
+        "Generate sync summary",
+        "List all synced files",
+        "List unchanged files",
+        "Document any recommendations",
+        "Report file selection evaluation results"
+      ],
+      "outputs": [
+        "Sync operation report",
+        "File status summary"
+      ],
+      "exit_criteria": [
+        "Report generated",
+        "All operations documented"
+      ]
+    }
+  ],
+  "acceptance_criteria": [
+    "All 18 files present in _to_GPT_project_essential/",
+    "All source files synced (if changed)",
+    "File selection evaluated for relevance",
+    "Sync report generated"
+  ],
+  "non_goals": [
+    "Modify source files",
+    "Change file selection without explicit instruction",
+    "Add files beyond 18-file limit",
+    "Remove files without explicit instruction",
+    "Include Cursor/AI operational rules",
+    "Include README.md in sync"
+  ],
+  "success_metrics": [
+    "All essential files are up-to-date",
+    "File selection remains optimal for GPT project understanding",
+    "Sync process is repeatable and reliable"
+  ],
+  "reference_documents": {
+    "source_directory": "docs/",
+    "target_directory": "_to_GPT_project_essential/",
+    "file_count": 18
+  },
+  "labels": [
+    "documentation",
+    "sync",
+    "gpt-project",
+    "maintenance"
+  ],
+  "notes": [
+    "This task can be run periodically to keep essential docs in sync",
+    "File selection should be reviewed if documentation structure changes significantly",
+    "Only architectural documents are included (no Cursor/AI operational rules)",
+    "Files are numbered with prefixes (01-18) for logical reading order"
+  ]
+}

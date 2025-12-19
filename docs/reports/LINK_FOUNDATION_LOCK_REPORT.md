@@ -1195,7 +1195,7 @@ export { linkVariants };
 **Валидатор:** TUI_LINK_STEP_7_TYPESCRIPT_COMPLIANCE
 
 ### Область проверки
-Проверка соответствия TypeScript типов компонента Link стандарту [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) и проверка чистоты публичной поверхности типов.
+Проверка соответствия TypeScript типов компонента Link стандарту [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md) и проверка чистоты публичной поверхности типов.
 
 ### Требования
 
@@ -1228,7 +1228,7 @@ export { linkVariants };
 
 ### Область проверки
 
-Проверка соответствия TypeScript типов компонента Link стандарту [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) и проверка чистоты публичной поверхности типов.
+Проверка соответствия TypeScript типов компонента Link стандарту [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md) и проверка чистоты публичной поверхности типов.
 
 ### Методология
 
@@ -2235,7 +2235,7 @@ export {
 
 **Результат:** ✅ Spacing Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/SPACING_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/SPACING_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Typography Authority Contract
 
@@ -2263,7 +2263,7 @@ export {
 
 **Результат:** ✅ Typography Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Motion Authority Contract
 
@@ -2287,7 +2287,7 @@ export {
 
 **Результат:** ✅ Motion Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/MOTION_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/MOTION_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Radius Authority Contract
 
@@ -2311,7 +2311,7 @@ export {
 
 **Результат:** ✅ Radius Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/RADIUS_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/RADIUS_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Layout Authority Contract
 
@@ -2341,7 +2341,7 @@ export {
 
 **Результат:** ✅ Layout Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/LAYOUT_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/LAYOUT_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Extension Authority Contract
 
@@ -2370,7 +2370,7 @@ export {
 
 **Результат:** ✅ Extension Authority Contract полностью соблюден
 
-**Ссылка:** `docs/architecture/EXTENSION_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/EXTENSION_AUTHORITY.md`
 
 #### ✅ СООТВЕТСТВУЕТ — Elevation Authority Contract
 
@@ -2394,7 +2394,7 @@ export {
 
 **Результат:** ✅ Elevation Authority Contract полностью соблюден (Link не использует elevation, что правильно)
 
-**Ссылка:** `docs/architecture/ELEVATION_AUTHORITY_CONTRACT.md`
+**Ссылка:** `docs/architecture/ELEVATION_AUTHORITY.md`
 
 ### Итоговая проверка соответствия
 
@@ -3111,7 +3111,7 @@ grep -n "as any\|as unknown\|as \w+ as" src/PRIMITIVES/Link/Link.test.tsx
 
 ### Обновление канонического реестра блокировок
 
-**Обновление FINAL_FOUNDATION_LOCK.md:**
+**Обновление FOUNDATION_LOCK.md:**
 
 Link добавлен в канонический реестр Foundation компонентов:
 - ✅ Добавлен в таблицу Locked Foundation Components
@@ -3279,7 +3279,7 @@ Link добавлен в канонический реестр Foundation ком
 
 ### Обновление канонического реестра блокировок
 
-**Обновление FINAL_FOUNDATION_LOCK.md:**
+**Обновление FOUNDATION_LOCK.md:**
 
 Link добавлен в канонический реестр Foundation компонентов:
 - ✅ Добавлен в таблицу Locked Foundation Components

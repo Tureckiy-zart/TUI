@@ -469,8 +469,8 @@ Before a component can proceed to Step 13 (Foundation Lock), the report MUST pas
 - [LINK_FOUNDATION_LOCK_REPORT.md](../reports/LINK_FOUNDATION_LOCK_REPORT.md) — First compliant report following this format
 
 **Authority Documents:**
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status
-- [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) — Canonical architecture context
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) — Foundation lock status
+- [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) — Canonical architecture context
 
 ---
 

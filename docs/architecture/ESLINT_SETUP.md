@@ -65,7 +65,7 @@ ESLint rules are **layer-aware** and **scope-bound**. Rules apply differently to
 - ESLint rules protect Foundation contracts from modification
 - Rules apply to Foundation component **public APIs**, not internal implementation
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md)
+**Reference:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)
 
 ### Extension Layer
 
@@ -81,7 +81,7 @@ ESLint rules are **layer-aware** and **scope-bound**. Rules apply differently to
 - Rules are **advisory** for Extension layer (not mandatory)
 - Extension components must not violate Foundation contracts
 
-**Reference:** [EXTENSION_AUTHORITY_CONTRACT.md](./EXTENSION_AUTHORITY_CONTRACT.md)
+**Reference:** [EXTENSION_AUTHORITY.md](./EXTENSION_AUTHORITY.md)
 
 ### Product Layer
 
@@ -203,7 +203,7 @@ ESLint rules are **integrated** with Foundation Lock:
 - **Foundation components** are protected from regression by ESLint scope boundaries
 - **Foundation contracts** are enforced at lint time, not just compile time
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status section
+**Reference:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation Enforcement Lock Status section
 
 ### Lock Compliance
 
@@ -225,7 +225,7 @@ If ESLint rule changes require Foundation Lock modifications:
 4. **Implementation** - Update ESLint rules and Lock documents
 5. **Re-lock** - Re-apply lock with updated documentation
 
-**Reference:** [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Unlock Protocol section
+**Reference:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Unlock Protocol section
 
 ---
 
@@ -409,15 +409,15 @@ Run `npm run lint:rules` when:
 
 ### Authority & Lock Documents
 
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) - Foundation layer lock (Foundation Enforcement section)
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation layer lock (Foundation Enforcement section)
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) - Foundation component contract (FINAL/APPLIED)
-- [EXTENSION_AUTHORITY_CONTRACT.md](./EXTENSION_AUTHORITY_CONTRACT.md) - Extension layer boundary contract
-- [AUTHORITY_MAP.md](./AUTHORITY_MAP.md) - Authority navigation map
+- [EXTENSION_AUTHORITY.md](./EXTENSION_AUTHORITY.md) - Extension layer boundary contract
+- [AUTHORITY_NAVIGATION.md](./AUTHORITY_NAVIGATION.md) - Authority navigation map
 
 ### Scope & Enforcement
 
 - [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md) - **Canonical scope authority** for ESLint rules
-- [CANONICAL_LOCK.md](./CANONICAL_LOCK.md) - Canonical architecture lock (ESLint Governance section)
+- [ARCHITECTURE_LOCK.md](./ARCHITECTURE_LOCK.md) - Canonical architecture lock (ESLint Governance section)
 
 ### Implementation
 

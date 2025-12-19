@@ -7,7 +7,7 @@ owner: Cursor AI
 priority: Critical
 scope: Component
 language: en
-last_updated: 2025-12-16
+last_updated: 2025-12-19
 ---
 
 # Component Creation & Refactor Checklist (Canonical)
@@ -51,8 +51,8 @@ The AI MUST verify:
 - The component is allowed in the current extension layer
 
 References:
-- `docs/TUI_EXTENSION_CANONICAL_STATE.md`
-- `docs/FINAL_FOUNDATION_LOCK.md`
+- `docs/architecture/EXTENSION_STATE.md`
+- `docs/architecture/FOUNDATION_LOCK.md`
 
 If creation violates any lock → **REFUSE**.
 
@@ -69,6 +69,39 @@ The AI MUST classify the component as ONE of:
 - Utility
 
 Classification MUST match existing project taxonomy.
+
+---
+
+## CREATE-2.5: Component Scaffold Generation
+
+**For Extension components only:** The AI MUST generate component scaffold using the CLI tool before implementation.
+
+The AI MUST:
+- Run `pnpm run component:generate -- <ComponentName> [--category <category>]`
+- Verify all scaffold files created:
+  - `{ComponentName}.tsx` - Main component file
+  - `{ComponentName}.stories.tsx` - Storybook stories
+  - `{ComponentName}.test.tsx` - Test file
+  - `{ComponentName}.index.ts` - Export file
+- Verify component placed in correct directory: `src/COMPOSITION/{categoryDir}/{ComponentName}/`
+- Review generated scaffold structure
+
+**Note:** The scaffold generator (`scripts/generate-extension-component.ts`) automatically:
+- Validates component name (PascalCase, not Foundation duplicate)
+- Determines correct directory based on category
+- Creates all required files with proper structure
+- Includes TODO comments and compliance notes
+
+**Usage examples:**
+```bash
+# Default (composite category → overlays/)
+pnpm run component:generate -- ConfirmDialog
+
+# With category
+pnpm run component:generate -- HeroSection --category layout
+```
+
+**Reference:** See `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` for complete checklist.
 
 ---
 

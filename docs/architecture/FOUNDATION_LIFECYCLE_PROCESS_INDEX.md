@@ -22,11 +22,11 @@ This document provides **human-readable navigation** to the Foundation component
 **Canonical Lifecycle:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle
 
 **Authority Documents:**
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status and rules (includes Foundation Enforcement Lock Status)
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) — Foundation lock status and rules (includes Foundation Enforcement Lock Status)
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) — Foundation Contract (FINAL/APPLIED — Foundation Enforcement is LOCKED)
 - [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) — Foundation component scope (FINAL/APPLIED)
-- [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) — Canonical architecture context
-- [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) — TypeScript typing standard
+- [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) — Canonical architecture context
+- [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md) — TypeScript typing standard
 
 ---
 
@@ -69,7 +69,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 3: State Model and Priority Verification
 - **Purpose:** Ensure canonical states and priority order
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 3
-- **Authority:** [STATE_AUTHORITY_MATRIX.md](./STATE_AUTHORITY_MATRIX.md), [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md)
+- **Authority:** [STATE_MATRIX.md](./STATE_MATRIX.md), [INTERACTION_AUTHORITY.md](./INTERACTION_AUTHORITY.md)
 - **Exit Criteria:** Only canonical states used, priority order respected, no forbidden states
 
 ### Step 4: JS-Free Interaction Model
@@ -80,7 +80,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 5: Token-Driven Model
 - **Purpose:** Ensure all visual properties use tokens
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 5
-- **Authority:** [TUI_TOKEN_SYSTEM.md](./TUI_TOKEN_SYSTEM.md)
+- **Authority:** [TOKEN_AUTHORITY.md](./TOKEN_AUTHORITY.md)
 - **Exit Criteria:** All visual properties use tokens, tokens reference Foundation domains, no raw values
 
 ### Step 6: Public API Audit
@@ -92,7 +92,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 7: TypeScript System Compliance
 - **Purpose:** Ensure TypeScript types comply with Typing Standard and establish Public Type Surface as locked architectural contract
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 7
-- **Authority:** [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md)
+- **Authority:** [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md)
 - **Key Concepts:** Public Type Surface, explicit separation of public vs internal types, forbidden patterns (any, string widening, VariantProps)
 - **Checklist:** See TypeScript System Compliance Checklist in lifecycle document
 - **Rollback Rules:** Public Type Surface changes require unlock procedure; violations prevent progression to Step 7.5
@@ -101,7 +101,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 7.5: Internal Styling Integrity & className Isolation Verification
 - **Purpose:** Ensure Foundation components comply with FINAL Foundation Enforcement Lock (MANDATORY)
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 7.5
-- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation Enforcement Lock Status
+- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) — Foundation Enforcement Lock Status
 - **Classification:** MANDATORY — Foundation components MUST comply with Foundation Enforcement
 - **What is Validated:**
   - `className` and `style` props are excluded from public API
@@ -120,7 +120,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 7.6: Internal Styling Integrity & ESLint Scope Verification (REQUIRED)
 - **Purpose:** Verify that styling isolation and ESLint governance rules are respected (MANDATORY)
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 7.6
-- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
+- **Authority:** [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
 - **Classification:** MANDATORY — Foundation components MUST comply with ESLint scope governance
 - **What is Validated:**
   - `className` is used only internally inside component implementation (not in public API)
@@ -158,7 +158,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 ### Step 10: Authority Alignment
 - **Purpose:** Ensure compliance with semantically relevant Authority Contracts
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 10
-- **Authority:** All Authority Contracts (see [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete list)
+- **Authority:** All Authority Contracts (see [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) for complete list)
 - **Note:** Only semantically relevant Authority Contracts must be verified (scope-aware verification)
 - **Exit Criteria:** All semantically relevant Authority Contracts complied with, exceptions documented, no violations
 
@@ -209,7 +209,7 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 - **Reference:** [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) — Section 10, Step 13
 - **Note:** Includes Foundation Component Report verification (report must exist and be compliant with [FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md](./FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md))
 - **Note:** Requires all quality gates (Steps 11-12) to be complete before lock
-- **Exit Criteria:** Component listed in FINAL_FOUNDATION_LOCK.md, all steps (1-12) complete, documentation updated, Foundation Component Report compliant
+- **Exit Criteria:** Component listed in FOUNDATION_LOCK.md, all steps (1-12) complete, documentation updated, Foundation Component Report compliant
 
 ---
 
@@ -275,17 +275,17 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 - [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — 🔒 **LOCKED** Link architectural lock: first-class semantic anchor, `asChild` FORBIDDEN
 
 **Authority Documents:**
-- [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) — Foundation lock status (includes Foundation Enforcement Lock Status)
+- [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) — Foundation lock status (includes Foundation Enforcement Lock Status)
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) — 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
 - [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) — 🔒 **FINAL/APPLIED** Foundation component scope
-- [INTERNAL_CANONICAL_CONTEXT.md](../INTERNAL_CANONICAL_CONTEXT.md) — Canonical architecture context
-- [TYPING_STANDARD.md](../structure/TYPING_STANDARD.md) — TypeScript typing standard
+- [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) — Canonical architecture context
+- [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md) — TypeScript typing standard
 
 **Authority Contracts:**
-- [STATE_AUTHORITY_MATRIX.md](./STATE_AUTHORITY_MATRIX.md) — State model
-- [INTERACTION_AUTHORITY_CONTRACT.md](./INTERACTION_AUTHORITY_CONTRACT.md) — Interaction rules
-- [TUI_TOKEN_SYSTEM.md](./TUI_TOKEN_SYSTEM.md) — Token system
-- See [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) for complete Authority Contract list
+- [STATE_MATRIX.md](./STATE_MATRIX.md) — State model
+- [INTERACTION_AUTHORITY.md](./INTERACTION_AUTHORITY.md) — Interaction rules
+- [TOKEN_AUTHORITY.md](./TOKEN_AUTHORITY.md) — Token system
+- See [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) for complete Authority Contract list
 
 ---
 
@@ -311,8 +311,8 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
   - Step 7.6: Mandatory verification of ESLint scope governance and rule boundaries
 - **Placement:** After Step 7 (TypeScript System Compliance), before Step 8 (CVA Canonicalization)
 - **Authority:** 
-  - Step 7.5: [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FINAL_FOUNDATION_LOCK.md](./FINAL_FOUNDATION_LOCK.md) (Foundation Enforcement Lock Status)
-  - Step 7.6: [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FINAL_FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
+  - Step 7.5: [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) (FINAL/APPLIED), [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) (Foundation Enforcement Lock Status)
+  - Step 7.6: [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md), [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md), [eslint_rules_scope_matrix.md](./eslint_rules_scope_matrix.md)
 - **Status:** Foundation Enforcement is LOCKED/APPLIED - all Foundation components must pass Steps 7.5 and 7.6 verification before proceeding to Step 8
 
 ### 2025-12-17: Quality Gates Expansion

@@ -57,7 +57,7 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
         id={emptyStateId}
         {...props}
       >
-        <Stack gap="md" align="center" justify="center">
+        <Stack spacing="md" align="center" justify="center">
           {children}
         </Stack>
       </Surface>
