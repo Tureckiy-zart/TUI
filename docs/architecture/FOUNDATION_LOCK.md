@@ -1,8 +1,8 @@
 # 🔒 Final Foundation Lock
 
-**Version:** 1.20  
+**Version:** 1.21  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-01-27  
+**Last Updated:** 2025-12-20  
 **Status:** ✅ **LOCKED**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -425,29 +425,45 @@ The following components constitute the **complete and final** Foundation layer.
 
 | Component       | Category   | Base Library      | Foundation Status | Lock Date |
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
-| **Modal**       | Overlays   | Radix Dialog      | ✅ LOCKED          | 2025-12-12 |
-| **Tabs**        | Navigation | Radix Tabs        | ✅ LOCKED          | 2025-12-12 |
+| **Modal**       | Overlays   | Radix Dialog      | ✅ **LOCKED**      | 2025-12-20 |
+| **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ LOCKED          | 2025-12-12 |
-| **Toast**       | Overlays   | Radix Toast       | ✅ LOCKED          | 2025-12-12 |
+| **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
 
 ### Foundation Component Details
 
 #### Modal
-- **Location:** `src/components/modal/`
-- **Export Path:** `@tenerife.music/ui` → `Modal`, `ModalRoot`, `ModalContent`, `ModalHeader`, `ModalBody`, `ModalFooter`, `ModalTrigger`, `ModalClose`
+- **Location:** `src/COMPOSITION/overlays/Modal/`
+- **Export Path:** `@tenerife.music/ui` → `Modal`, `ModalRoot`, `ModalContent`, `ModalHeader`, `ModalTitle`, `ModalDescription`, `ModalFooter`, `ModalTrigger`, `ModalClose`
 - **Base Library:** Radix Dialog (`@radix-ui/react-dialog`)
 - **Purpose:** Sole modal foundation. All modal-like components must use this internally.
-- **Status:** ✅ **LOCKED** — Immutable
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-20
+- **Lock Task:** `TUNG_FOUNDATION_MODAL_STEP_13`
+- **Lock Report:** `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+- **Migration Completed:** Modal has completed canonical Foundation Step Pipeline (Steps 0–13) and is now locked
+- **Public API:** Immutable — All props are token-based
+- **Public Types:** Immutable — Type Surface is frozen
+- **Unlock Policy:** Any changes require explicit Foundation Unlock procedure with new versioned pipeline (Steps 0–13)
 
 #### Tabs
-- **Location:** `src/components/navigation/tabs/`
+- **Location:** `src/COMPOSITION/navigation/tabs/`
 - **Export Path:** `@tenerife.music/ui` → `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
 - **Base Library:** Radix Tabs (`@radix-ui/react-tabs`)
 - **Purpose:** Sole tabs foundation. All tab-based navigation must use this internally.
-- **Status:** ✅ **LOCKED** — Immutable
+- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
+- **Unlock Date:** 2025-12-19
+- **Unlock Reason:** Tabs was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+- **Migration Path:** Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+- **Constraints During Unlock:**
+  - ❌ No public API expansion
+  - ❌ No new variants or sizes
+  - ❌ No behavior changes outside canonicalization
+  - ❌ No bypass of Authority Contracts
+- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
 
 #### Select
 - **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)
@@ -472,18 +488,36 @@ The following components constitute the **complete and final** Foundation layer.
 - **Temporary Status:** During unlock period, Select remains functional but is not locked. Changes are allowed to bring it into full compliance with canonical Foundation requirements.
 
 #### ContextMenu
-- **Location:** `src/components/menus/context-menu/`
+- **Location:** `src/COMPOSITION/overlays/ContextMenu/`
 - **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuGroup`, `ContextMenuSeparator`
 - **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
 - **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ✅ **LOCKED** — Immutable
+- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
+- **Unlock Date:** 2025-12-19
+- **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+- **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+- **Constraints During Unlock:**
+  - ❌ No public API expansion
+  - ❌ No new variants or sizes
+  - ❌ No behavior changes outside canonicalization
+  - ❌ No bypass of Authority Contracts
+- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
 
 #### Toast
-- **Location:** `src/components/overlays/`
+- **Location:** `src/COMPOSITION/overlays/`
 - **Export Path:** `@tenerife.music/ui` → `Toast`, `ToastProvider`, `ToastViewport`, `ToastRoot`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `useToast`
 - **Base Library:** Radix Toast (`@radix-ui/react-toast`)
 - **Purpose:** Sole toast foundation. All notification toasts must use this internally.
-- **Status:** ✅ **LOCKED** — Immutable
+- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
+- **Unlock Date:** 2025-12-19
+- **Unlock Reason:** Toast was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+- **Migration Path:** Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+- **Constraints During Unlock:**
+  - ❌ No public API expansion
+  - ❌ No new variants or sizes
+  - ❌ No behavior changes outside canonicalization
+  - ❌ No bypass of Authority Contracts
+- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
 
 #### Button
 - **Location:** `src/PRIMITIVES/Button/`
@@ -512,7 +546,7 @@ The following components constitute the **complete and final** Foundation layer.
 - **Architectural Lock:** [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
 - **Lock Date:** 2025-12-17
 - **Final Lock Date:** 2025-12-18
-- **Architectural Lock Date:** 2025-01-27
+- **Architectural Lock Date:** 2025-12-19
 - **Lifecycle Version:** 1.0 (Steps 1-13)
 - **Lock Version:** 1.0
 - **Quality Gates:** ✅ Step 10A (Storybook & Testing) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS
@@ -520,6 +554,41 @@ The following components constitute the **complete and final** Foundation layer.
 - **Architectural Constraints:** Link MUST always render a single `<a>` element directly. `asChild` prop is FORBIDDEN. No proxy patterns (Radix Slot) allowed. See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) for complete architectural contract.
 - **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
 - **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications, `asChild` prop addition (requires unlock procedure)
+
+---
+
+### Legacy Foundation Components (Unlocked for Migration)
+
+The following components were declared as LOCKED but were implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). They have been temporarily unlocked strictly for canonical migration:
+
+- **Modal** — ✅ **LOCKED** (2025-12-20) — Migration complete
+- **Tabs** — Unlocked 2025-12-19
+- **ContextMenu** — Unlocked 2025-12-19
+- **Toast** — Unlocked 2025-12-19
+
+**Unlock Rationale:**
+These components were locked declaratively without completing the canonical Foundation lifecycle. The false lock prevents architectural convergence, blocks canonical CVA, typing, and interaction refactor, and creates inconsistency with Button/Link standards.
+
+**Migration Requirements:**
+- Each component must complete Foundation Step Pipeline (Steps 0–13)
+- Foundation lock report must exist per component
+- Public Type Surface must be locked
+- Component must be re-marked as FOUNDATION · LOCKED
+
+**Constraints During Unlock:**
+- ❌ No public API expansion
+- ❌ No new variants or sizes
+- ❌ No behavior changes outside canonicalization
+- ❌ No bypass of Authority Contracts
+- ✅ Refactor strictly via Foundation Step Pipeline
+- ✅ Canonical CVA, typing, and interaction refactor allowed
+- ✅ Authority Contract alignment allowed
+
+**Exit Criteria:**
+- Component completes Steps 0–13
+- Foundation lock report exists
+- Public Type Surface is locked
+- Component re-marked as FOUNDATION · LOCKED
 
 ---
 
@@ -672,14 +741,14 @@ The following changes to Foundation components are **explicitly forbidden** afte
 ```
 ⚠️ UI FOUNDATION ARCHITECTURE IS LOCKED.
 
-Foundation Components (Read-Only):
-- Modal (Radix Dialog wrapper)
-- Tabs (Radix Tabs wrapper)
-- Select (Radix Select wrapper)
-- ContextMenu (Radix ContextMenu wrapper)
-- Toast (Radix Toast wrapper)
-- Button (Native button element - FINAL LOCK)
-- Link (Native anchor element)
+Foundation Components:
+- Modal (Radix Dialog wrapper) - ✅ LOCKED (2025-12-20)
+- Tabs (Radix Tabs wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
+- ContextMenu (Radix ContextMenu wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- Button (Native button element - FINAL LOCK) - ✅ LOCKED
+- Link (Native anchor element) - ✅ LOCKED
 
 Token System (Locked):
 - All token domains are LOCKED and IMMUTABLE
@@ -732,8 +801,23 @@ Interactive Size Scale Authority (Locked):
 - Typography scale (xs, xl, etc.) is SEPARATE and belongs only to Text, Heading, Label
 - Interactive size maps to height, padding, font-size, and gap tokens
 
-You MUST treat Foundation components, Token system, Interaction Authority, Foundation Enforcement, AND Interactive Size Scale Authority as immutable.
+You MUST treat Foundation components (Button, Link), Token system, Interaction Authority, Foundation Enforcement, AND Interactive Size Scale Authority as immutable.
 
+**LEGACY UNLOCKED COMPONENTS (Tabs, ContextMenu, Toast):**
+- These components are UNLOCKED for canonical migration ONLY
+- Refactor strictly via Foundation Step Pipeline (Steps 0–13)
+- ❌ NO public API expansion
+- ❌ NO new variants or sizes
+- ❌ NO behavior changes outside canonicalization
+- ❌ NO bypass of Authority Contracts
+- Migration must complete Steps 0–13 before re-lock
+
+**LOCKED COMPONENTS (Modal):**
+- Modal has completed canonical migration (Steps 0–13) and is now LOCKED
+- Lock Date: 2025-12-20
+- Lock Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+
+**LOCKED COMPONENTS (Button, Link):**
 You may ONLY:
 - Fix bugs
 - Improve typing
@@ -849,11 +933,11 @@ If Interactive Size Scale Authority modifications are needed:
 
 | Component       | Status    | Lock Date | Immutability |
 | --------------- | --------- | --------- | ------------ |
-| Modal           | ✅ LOCKED | 2025-12-12 | Immutable    |
-| Tabs            | ✅ LOCKED | 2025-12-12 | Immutable    |
+| Modal           | ✅ **LOCKED** | 2025-12-20 | Immutable    |
+| Tabs            | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
-| ContextMenu     | ✅ LOCKED | 2025-12-12 | Immutable    |
-| Toast           | ✅ LOCKED | 2025-12-12 | Immutable    |
+| ContextMenu     | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Button          | ✅ FINAL LOCK |   | Immutable    |
 | Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |
 
@@ -1640,7 +1724,27 @@ If Authority modifications are required in the future:
 
 ## 🔄 Version History
 
-- **v1.20** (2025-01-27): Link No AsChild Canonical Anchor Architectural Lock
+- **v1.21** (2025-12-20): Modal Foundation Lock Complete
+  - Modal has completed canonical Foundation Step Pipeline (Steps 0–13)
+  - Modal status changed from LEGACY UNLOCKED to ✅ LOCKED
+  - Lock Date: 2025-12-20
+  - Lock Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+  - Public API and Type Surface are now immutable
+
+- **v1.20** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
+  - Unlocked Modal, Tabs, ContextMenu, and Toast for canonical migration
+  - Changed status from LOCKED to LEGACY UNLOCKED (Pending Canonical Migration)
+  - These components were declared as LOCKED but never passed canonical Foundation Step Pipeline (0–13)
+  - Unlock allows refactor strictly via Foundation Step Pipeline
+  - Constraints: No public API expansion, no new variants/sizes, no behavior changes outside canonicalization
+  - Exit criteria: Complete Steps 0–13, Foundation lock report, Public Type Surface locked, re-marked as FOUNDATION · LOCKED
+  - Updated component locations to reflect actual paths (src/COMPOSITION/)
+  - Added Legacy Foundation Components section explaining unlock rationale and constraints
+  - Updated Guard Prompt to reflect legacy unlock status
+  - Annotated component source files with LEGACY FOUNDATION comments
+  - Completed formal unlock process per TUNG_FOUNDATION_LEGACY_UNLOCK_01 task
+
+- **v1.20** (2025-12-19): Link No AsChild Canonical Anchor Architectural Lock
   - Added Link architectural lock: [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md)
   - Link is formally locked as a first-class semantic anchor
   - `asChild` pattern is FORBIDDEN for Link component
@@ -1851,9 +1955,9 @@ New functionality must be built as **Extensions** that compose Foundation compon
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.18  
+**Version:** 1.21  
 **Date Created:** 2025-12-12  
-**Last Updated:**    
+**Last Updated:** 2025-12-19  
 **Priority:** CRITICAL  
 **Architecture Phase:** **CLOSED**  
 **Next Review:** **NEVER** (Foundation is immutable)
