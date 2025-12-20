@@ -65,12 +65,6 @@ describe("Input", () => {
   });
 
   describe("Sizes", () => {
-    it("renders xs size", () => {
-      const { container } = renderWithTheme(<Input size="xs" placeholder="Extra small" />);
-      const input = container.querySelector("input");
-      expect(input).toBeInTheDocument();
-    });
-
     it("renders sm size", () => {
       const { container } = renderWithTheme(<Input size="sm" placeholder="Small" />);
       const input = container.querySelector("input");
@@ -85,12 +79,6 @@ describe("Input", () => {
 
     it("renders lg size", () => {
       const { container } = renderWithTheme(<Input size="lg" placeholder="Large" />);
-      const input = container.querySelector("input");
-      expect(input).toBeInTheDocument();
-    });
-
-    it("renders xl size", () => {
-      const { container } = renderWithTheme(<Input size="xl" placeholder="Extra large" />);
       const input = container.querySelector("input");
       expect(input).toBeInTheDocument();
     });
@@ -334,7 +322,7 @@ describe("Input", () => {
 
       it("renders with size as Responsive object with base and breakpoints", () => {
         const { container } = renderWithTheme(
-          <Input size={{ base: "sm", md: "lg", xl: "xl" }} placeholder="Responsive size full" />,
+          <Input size={{ base: "sm", md: "lg" }} placeholder="Responsive size full" />,
         );
         const input = container.querySelector("input");
         expect(input).toBeInTheDocument();
@@ -380,7 +368,7 @@ describe("Input", () => {
         const { container } = renderWithTheme(
           <Input
             variant={{ base: "outline", md: "primary" }}
-            size={{ base: "sm", lg: "xl" }}
+            size={{ base: "sm", md: "lg" }}
             placeholder="Both responsive"
           />,
         );
@@ -424,7 +412,7 @@ describe("Input", () => {
       });
 
       it("all string sizes still work", () => {
-        const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+        const sizes = ["sm", "md", "lg"] as const;
         sizes.forEach((size) => {
           const { container } = renderWithTheme(
             <Input size={size} placeholder={`String ${size}`} />,

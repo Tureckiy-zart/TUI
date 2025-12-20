@@ -14,11 +14,11 @@ const meta: Meta<typeof Input> = {
     docs: {
       description: {
         component:
-          "Input component for text input fields. Supports 5 variants, 5 sizes, 4 states (default, disabled, error, success), icon slots, and full accessibility with token-driven styling using CSS variables.\n\n" +
+          "Input component for text input fields. Supports 5 variants, 3 sizes (sm, md, lg), 4 states (default, disabled, error, success), icon slots, and full accessibility with token-driven styling using CSS variables.\n\n" +
           "**Token-Driven API:** Variant and size props use token-derived union types (`InputVariant`, `InputSize`) that are automatically synchronized with `INPUT_TOKENS`. This ensures type safety and prevents drift between prop types and token definitions.\n\n" +
           "**Responsive Support:** The `variant` and `size` props support `Responsive<T>` type, allowing responsive values:\n" +
           '- Single value: `variant="outline"` or `size="md"`\n' +
-          '- Responsive object: `variant={{ base: "outline", md: "primary" }}` or `size={{ base: "sm", lg: "xl" }}`\n\n' +
+          '- Responsive object: `variant={{ base: "outline", md: "primary" }}` or `size={{ base: "sm", md: "lg" }}`\n\n' +
           "**Note:** After standardization, the visual output and DOM structure remain unchanged. Only the TypeScript types have been updated to use token-derived unions with Responsive support.",
       },
     },
@@ -37,7 +37,7 @@ const meta: Meta<typeof Input> = {
     },
     size: {
       control: { type: "select" },
-      options: ["xs", "sm", "md", "lg", "xl"],
+      options: ["sm", "md", "lg"],
       description:
         "Input size. Token-derived type (`InputSize`) synchronized with `INPUT_TOKENS.size`. Supports `Responsive<InputSize>` for responsive values.",
       table: {
@@ -89,11 +89,9 @@ export const Default: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
-      <Input size="xs" placeholder="Extra small input" />
       <Input size="sm" placeholder="Small input" />
       <Input size="md" placeholder="Medium input" />
       <Input size="lg" placeholder="Large input" />
-      <Input size="xl" placeholder="Extra large input" />
     </div>
   ),
 };
@@ -334,11 +332,9 @@ export const Comprehensive: Story = {
       </div>
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">All Sizes</h3>
-        <Input size="xs" placeholder="Extra small" />
         <Input size="sm" placeholder="Small" />
         <Input size="md" placeholder="Medium" />
         <Input size="lg" placeholder="Large" />
-        <Input size="xl" placeholder="Extra large" />
       </div>
       <div className="flex flex-col gap-md">
         <h3 className="text-lg font-semibold">All States</h3>
