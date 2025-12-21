@@ -1,6 +1,6 @@
+import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
-import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
@@ -115,13 +115,61 @@ export const DifferentVariants: Story = {
       >
         <Button variant="outline">Destructive</Button>
       </PopoverWrapper>
+
+      <PopoverWrapper
+        variant="outline"
+        content={
+          <div className="space-y-sm">
+            <h4 className="font-medium">Outline Popover</h4>
+            <p className="text-sm text-muted-foreground">This is an outline popover.</p>
+          </div>
+        }
+      >
+        <Button variant="outline">Outline</Button>
+      </PopoverWrapper>
+
+      <PopoverWrapper
+        variant="ghost"
+        content={
+          <div className="space-y-sm">
+            <h4 className="font-medium">Ghost Popover</h4>
+            <p className="text-sm text-muted-foreground">This is a ghost popover.</p>
+          </div>
+        }
+      >
+        <Button variant="ghost">Ghost</Button>
+      </PopoverWrapper>
+
+      <PopoverWrapper
+        variant="link"
+        content={
+          <div className="space-y-sm">
+            <h4 className="font-medium">Link Popover</h4>
+            <p className="text-sm text-muted-foreground">This is a link popover.</p>
+          </div>
+        }
+      >
+        <Button variant="ghost">Link</Button>
+      </PopoverWrapper>
     </div>
   ),
 };
 
 export const DifferentSizes: Story = {
   render: () => (
-    <div className="flex gap-md">
+    <div className="flex flex-wrap gap-md">
+      <PopoverWrapper
+        size="xs"
+        content={
+          <div className="space-y-sm">
+            <h4 className="font-medium">Extra Small Popover</h4>
+            <p className="text-sm text-muted-foreground">Very compact content.</p>
+          </div>
+        }
+      >
+        <Button size="sm">XS</Button>
+      </PopoverWrapper>
+
       <PopoverWrapper
         size="sm"
         content={
@@ -162,6 +210,25 @@ export const DifferentSizes: Story = {
         }
       >
         <Button size="lg">Large</Button>
+      </PopoverWrapper>
+
+      <PopoverWrapper
+        size="xl"
+        content={
+          <div className="space-y-md">
+            <h4 className="font-medium">Extra Large Popover</h4>
+            <p className="text-sm text-muted-foreground">
+              Extra large popover with maximum space for extensive content and multiple sections.
+            </p>
+            <div className="space-y-sm">
+              <Badge>Feature</Badge>
+              <Badge variant="secondary">New</Badge>
+              <Badge variant="accent">Popular</Badge>
+            </div>
+          </div>
+        }
+      >
+        <Button size="lg">XL</Button>
       </PopoverWrapper>
     </div>
   ),
@@ -304,4 +371,104 @@ export const NotificationsMenu: Story = {
       </Button>
     </PopoverWrapper>
   ),
+};
+
+export const KeyboardAccessibility: Story = {
+  name: "Keyboard Accessibility",
+  render: () => (
+    <div className="space-y-md">
+      <p className="text-sm text-muted-foreground">
+        Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
+        buttons, <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Enter</kbd> or{" "}
+        <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Space</kbd> to open
+        popovers, and <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd>{" "}
+        to close.
+      </p>
+      <div className="flex gap-md">
+        <PopoverWrapper
+          content={
+            <div className="space-y-sm">
+              <h4 className="font-medium">Keyboard Accessible Popover</h4>
+              <p className="text-sm text-muted-foreground">
+                This popover is fully accessible via keyboard. All interactive elements inside can
+                be navigated with Tab.
+              </p>
+            </div>
+          }
+        >
+          <Button>Open with Keyboard</Button>
+        </PopoverWrapper>
+        <PopoverWrapper
+          content={
+            <div className="space-y-sm">
+              <h4 className="font-medium">Focus Management</h4>
+              <p className="text-sm text-muted-foreground">
+                Focus automatically moves to popover content when opened, and returns to trigger
+                when closed.
+              </p>
+            </div>
+          }
+        >
+          <Button>Focus Managed</Button>
+        </PopoverWrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates keyboard accessibility. Popovers can be opened with Enter/Space, navigated with Tab, and closed with Escape. Focus is automatically managed.",
+      },
+    },
+  },
+};
+
+export const ModalVsNonModal: Story = {
+  name: "Modal vs Non-Modal",
+  render: () => (
+    <div className="space-y-md">
+      <p className="text-sm text-muted-foreground">
+        Modal popovers trap focus and block interaction with other elements. Non-modal popovers
+        allow interaction with the rest of the page.
+      </p>
+      <div className="flex gap-md">
+        <PopoverWrapper
+          modal={true}
+          content={
+            <div className="space-y-sm">
+              <h4 className="font-medium">Modal Popover</h4>
+              <p className="text-sm text-muted-foreground">
+                This popover has role="dialog" and aria-modal="true". Focus is trapped inside.
+              </p>
+            </div>
+          }
+        >
+          <Button>Modal (ARIA dialog)</Button>
+        </PopoverWrapper>
+        <PopoverWrapper
+          modal={false}
+          content={
+            <div className="space-y-sm">
+              <h4 className="font-medium">Non-Modal Popover</h4>
+              <p className="text-sm text-muted-foreground">
+                This popover does not trap focus. You can interact with other elements while it's
+                open.
+              </p>
+            </div>
+          }
+        >
+          <Button>Non-Modal</Button>
+        </PopoverWrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows the difference between modal and non-modal popovers. Modal popovers use role='dialog' and trap focus, while non-modal popovers allow interaction with the rest of the page.",
+      },
+    },
+  },
 };

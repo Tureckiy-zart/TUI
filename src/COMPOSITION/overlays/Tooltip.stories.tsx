@@ -62,6 +62,14 @@ export const DifferentVariants: Story = {
       <TooltipWrapper content="Outline tooltip" variant="outline">
         <Button variant="outline">Outline</Button>
       </TooltipWrapper>
+
+      <TooltipWrapper content="Ghost tooltip" variant="ghost">
+        <Button variant="ghost">Ghost</Button>
+      </TooltipWrapper>
+
+      <TooltipWrapper content="Link tooltip" variant="link">
+        <Button variant="ghost">Link</Button>
+      </TooltipWrapper>
     </div>
   ),
 };
@@ -161,4 +169,64 @@ export const CustomDelay: Story = {
       </TooltipWrapper>
     </div>
   ),
+};
+
+export const KeyboardAccessibility: Story = {
+  name: "Keyboard Accessibility",
+  render: () => (
+    <div className="space-y-md">
+      <p className="text-sm text-muted-foreground">
+        Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
+        buttons and see tooltips appear. Press{" "}
+        <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+      </p>
+      <div className="flex gap-md">
+        <TooltipWrapper content="This tooltip appears on focus">
+          <Button>Focus me (Tab)</Button>
+        </TooltipWrapper>
+        <TooltipWrapper content="Tooltip with keyboard navigation">
+          <Button>Keyboard accessible</Button>
+        </TooltipWrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates keyboard accessibility. Tooltips appear when trigger elements receive focus via keyboard navigation. Press Escape to dismiss.",
+      },
+    },
+  },
+};
+
+export const FocusVisibleStates: Story = {
+  name: "Focus-Visible States",
+  render: () => (
+    <div className="space-y-md">
+      <p className="text-sm text-muted-foreground">
+        These tooltips demonstrate focus-visible states. Use keyboard navigation to see focus
+        indicators.
+      </p>
+      <div className="flex gap-md">
+        <TooltipWrapper content="Tooltip for primary button">
+          <Button variant="primary">Primary</Button>
+        </TooltipWrapper>
+        <TooltipWrapper content="Tooltip for outline button">
+          <Button variant="outline">Outline</Button>
+        </TooltipWrapper>
+        <TooltipWrapper content="Tooltip for ghost button">
+          <Button variant="ghost">Ghost</Button>
+        </TooltipWrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows tooltip behavior with different button variants and their focus-visible states. Use Tab to navigate and see focus indicators.",
+      },
+    },
+  },
 };

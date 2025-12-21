@@ -1,732 +1,362 @@
-# Foundation Component Step Pipeline
+# 18A — Component Review & Improvement Pipeline (Refined)
 
-**Status:** ACTIVE  
-**Date Created:**    
-**Classification:** Process Documentation  
-**Authority Level:** Process (Evolvable)  
-**Scope:** Foundation Component Creation & Refactor  
-**Audience:** Maintainers, Contributors, Cursor AI
+**Status:** ACTIVE (Refinement of existing process, not a replacement)
+**Scope:** Foundation / Extension components
+**Purpose:** Consistent, repeatable improvement of component quality, architecture, and usability.
 
----
-
-## Purpose
-
-This document describes each step (0-13) of the Foundation component lifecycle pipeline, including purpose, allowed actions, outputs, and exit criteria. This pipeline is extracted from the canonical Button Foundation process and is reusable for all Foundation components.
-
-**This document is PROCESS, not LAW.** It can evolve to improve ergonomics, but it cannot weaken or bypass architectural LAW (Authority Contracts, Lock documents).
+> This document is intentionally verbose. It is written as a **process control document**, not a checklist.
+> The goal is not speed, but **predictable, high-quality outcomes**.
 
 ---
 
-## Pipeline Overview
+## 0. Intent & Non-Goals
 
-The Foundation component lifecycle consists of **13 steps** organized into three phases:
+### Intent
 
-1. **Architectural Validation (Steps 0-10):** Component structure, compliance, and architectural rules
-2. **Quality Gates (Steps 11-12):** Storybook and Testing — BLOCKING requirements
-3. **Foundation Lock (Step 13):** Formal locking after all validations and quality gates pass
+This pipeline defines **how a component must be reviewed, understood, improved, and validated**.
 
-**Quality Gates are BLOCKING:**
-- Steps 11-12 must pass before Foundation Lock
-- Foundation Lock is IMPOSSIBLE without passing both quality gates
-- No exceptions — Foundation components require complete Storybook coverage and comprehensive testing
+The outcome of every run:
 
-**Note:** This pipeline is for **Foundation components only**. For **Extension components**, use:
-- [Extension Component Creation Checklist](../tasks/COMPONENT_CREATION_CHECKLIST.md) - Complete creation process
-- Component Generator CLI: `pnpm run component:generate -- <ComponentName> [--category <category>]` - Generates component scaffold
-- See `scripts/generate-extension-component.ts` for CLI tool documentation
+* the component is **better structured** than before,
+* the code is **cleaner and more readable**,
+* architectural violations are removed or explicitly documented,
+* future maintenance becomes easier, not harder.
 
----
+### Non-Goals
 
-## Step 0: Pre-Pipeline Setup
+This pipeline is **not**:
 
-### Purpose
+* a rewrite-everything exercise,
+* a theoretical architecture essay,
+* a “find problems and stop” audit.
 
-Establish component context, verify prerequisites, and prepare for Foundation lifecycle.
-
-### Allowed Actions
-
-- Verify component exists and is in correct location
-- Check component status (INCUBATION, LOCKED, etc.)
-- Review component's intended role and category
-- Prepare Foundation Component Report file
-- Verify Authority Contracts are available
-
-### Outputs
-
-- Component status confirmed
-- Foundation Component Report file created (empty template)
-- Prerequisites verified
-
-### Exit Criteria
-
-- Component location and status verified
-- Foundation Component Report file exists
-- Ready to proceed to Step 1
+If the pipeline ends without **actual code improvement**, it is considered a failure.
 
 ---
 
-## Step 1: Semantic Declaration
+## 1. General Execution Rules
 
-### Purpose
+1. The pipeline is executed **top-to-bottom**, without reordering.
+2. Each step has a clear purpose and stopping condition.
+3. Code **may be refactored during the pipeline**, but:
 
-Formally declare the component as a Foundation component and establish its semantic identity.
+   * behavior must not change unless explicitly allowed,
+   * public API changes must be deliberate and documented.
+4. Discovery, analysis, and refactoring are **part of the same process**, not separate activities.
+5. **Mandatory reporting rule (CRITICAL):** every step **MUST end** by updating the component audit report file (the baseline report created in STEP 0).
 
-### Allowed Actions
-
-- Explicitly declare component as Foundation in documentation
-- Define component's semantic role and purpose
-- Establish clear boundaries between Foundation and Extension layers
-- Document what component represents and what it does NOT represent
-
-### Outputs
-
-- Semantic declaration documented
-- Component role clearly defined
-- Boundaries established
-
-### Exit Criteria
-
-- Component is explicitly declared as Foundation in documentation
-- Semantic role and purpose are clearly documented
-- Boundaries between Foundation and Extension layers are established
+   * If a step results in no changes, the report must explicitly state: `No changes required in this step`.
+   * If changes were made, the report must include: what changed, why, and whether it is blocking or non-blocking.
 
 ---
 
-## Step 2: Alternative Cleanup
+## 2. STEP 0 — Baseline Snapshot & Context Fixation
 
-### Purpose
+### Goal
 
-Ensure there is only one canonical Foundation component per category.
+Establish a **factual baseline** of what exists *right now*.
 
-### Allowed Actions
+This step answers the question:
 
-- Scan codebase for alternative implementations
-- Remove or archive duplicate components
-- Ensure no `Simple*`, `Basic*`, `Legacy*`, or `*V2` variants exist
-- Verify all related components compose Foundation component internally
-- Check public exports to ensure only canonical component is exported
+> “What exactly are we dealing with before we start improving anything?”
 
-### Outputs
+### Required Actions
 
-- Duplicate components removed or archived
-- Public exports verified
-- Related components verified to compose Foundation
+* Locate all files related to the component (implementation, tests, stories).
+* Identify:
 
-### Exit Criteria
+  * component name(s) in use,
+  * export points,
+  * directory placement,
+  * layer (Foundation / Extension / Legacy-like behavior).
+* Create a **baseline snapshot file** that records:
 
-- No duplicate or alternative implementations exist in codebase
-- All related components compose Foundation component internally
-- Only canonical component is exported in public API
+  * file paths,
+  * exports,
+  * dependencies (e.g. Radix, custom logic),
+  * current public props.
 
----
+### Important Notes
 
-## Step 3: State Model and Priority Verification
+* This step **does not judge quality**.
+* This step **does not change code**.
+* This step prevents accidental refactoring of the wrong thing.
 
-### Purpose
+### Example
 
-Ensure component uses only canonical states and respects state priority order.
-
-### Allowed Actions
-
-- Verify component uses only canonical states from State Authority Matrix: `base`, `hover`, `active`, `focus-visible`, `disabled`, `loading`
-- Verify state priority order is respected: `disabled > loading > active > hover > focus-visible > base`
-- Ensure no custom or forbidden states are used
-- Verify disabled state blocks lower-priority states
-- Document which canonical states component uses (not all components need all states)
-
-### Outputs
-
-- State model verification report
-- State priority order verification
-- Forbidden patterns detection results
-
-### Exit Criteria
-
-- Component uses only canonical states from State Authority Matrix
-- State priority order is correctly implemented
-- No custom or forbidden states are present
-
-### Authority References
-
-- `docs/architecture/STATE_MATRIX.md`
-- `docs/architecture/STATE_AUTHORITY.md`
-- `docs/architecture/INTERACTION_AUTHORITY.md`
+If both `Tooltip.tsx` and `Popover.tsx` exist, this step must record that fact *before* any conclusions are made.
 
 ---
 
-## Step 4: JS-Free Interaction Model
+## 3. STEP 1 — Structural & Code Quality Review
 
-### Purpose
+### Goal
 
-Ensure all interaction states are controlled by CSS and browser-native behavior, not JavaScript.
+Identify and remove **obvious structural problems** in the code.
 
-### Allowed Actions
+### What to Look For
 
-- Verify no `useState` for interaction states (hover, active, focus)
-- Verify no `onMouseEnter` / `onMouseLeave` handlers
-- Verify no `onFocus` / `onBlur` handlers for visual state management
-- Verify all states use CSS pseudo-classes (`:hover`, `:focus-visible`, `:disabled`)
-- Verify no JavaScript-driven state management for interactions
-- Verify no side-effects in Foundation component
+* Repeated JSX blocks that should be mapped.
+* Conditional rendering that is hard to follow.
+* Copy-paste fragments with minor differences.
+* Deeply nested logic without clear intent.
 
-### Outputs
+### What Is Allowed Here
 
-- JS-free interaction verification report
-- Forbidden patterns detection results
-- Browser-native mechanism verification
+* Refactoring for readability.
+* Extracting helpers or subcomponents.
+* Replacing repetition with iteration (`map`).
 
-### Exit Criteria
+### What Is Not Allowed Here
 
-- No JavaScript-driven interaction states are present
-- All interaction states use CSS pseudo-classes
-- No side-effects exist in Foundation component
+* Changing behavior.
+* Redesigning API.
 
----
+### Example
 
-## Step 5: Token-Driven Model
-
-### Purpose
-
-Ensure all visual properties use tokens, not raw values.
-
-### Allowed Actions
-
-- Verify all visual styles come from component tokens (e.g., `COMPONENT_TOKENS`)
-- Verify no inline Tailwind classes for visual properties
-- Verify no hardcoded values (px-4, h-10, etc.)
-- Verify variant and state tokens are separated
-- Verify all tokens reference Foundation tokens (Spacing, Typography, Radius, Motion, Elevation, Color)
-- Verify no ad-hoc styling or conditional class generation
-
-### Outputs
-
-- Token coverage matrix
-- Forbidden patterns detection results
-- Token structure verification
-
-### Exit Criteria
-
-- All visual properties use tokens (no raw values)
-- All tokens reference Foundation token domains
-- No inline Tailwind classes for visual properties
-
-### Authority References
-
-- `docs/architecture/TOKEN_AUTHORITY.md`
-- `docs/architecture/SPACING_AUTHORITY.md`
-- `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
-- `docs/architecture/RADIUS_AUTHORITY.md`
-- `docs/architecture/MOTION_AUTHORITY.md`
-- `docs/architecture/ELEVATION_AUTHORITY.md`
+Multiple similar tooltip content blocks → single mapped structure.
 
 ---
 
-## Step 6: Public API Audit
+## 4. STEP 2 — Semantic Role & Responsibility Validation
 
-### Purpose
+### Goal
 
-Verify that public API is minimal, intentional, and does not leak implementation details.
+Ensure the component has a **clear, narrow responsibility**.
 
-### Allowed Actions
+### Questions to Answer
 
-- Audit all public exports from `src/index.ts`
-- Verify component and types are exported
-- Verify no internal implementation details are exported (unless explicitly needed for composition)
-- Verify no CVA instances are exported unless required for Extension composition
-- Verify no constant arrays are exported (types are sufficient for type-safety)
-- Verify TypeScript types enforce canonical usage (closed union types)
-- Verify Extension is possible only through `className` and composition, not mutation
-- Document any exceptions or special cases
+* Is this component informational, interactive, or structural?
+* Does it try to behave as more than one thing?
 
-### Outputs
+### Actions
 
-- Public API audit report
-- Export surface verification
-- Semantic boundary verification
-- Forbidden props detection results
+* Write a short role definition (1–2 sentences).
+* Identify logic that does not belong to this role.
 
-### Exit Criteria
+### Refactoring Guidance
 
-- All checklist items are verified and documented
-- Public API is minimal and intentional
-- No implementation details are leaked
-
-### Public API Audit Checklist (Mandatory)
-
-- [ ] **Exports Audit:** All public exports from `src/index.ts` are audited
-- [ ] **Component Export:** Component is exported (required)
-- [ ] **Type Export:** Component types are exported (required)
-- [ ] **No Implementation Leakage:** No internal implementation details are exported (unless explicitly needed for composition)
-- [ ] **No CVA Export:** No CVA instances are exported (unless required for Extension composition)
-- [ ] **No Constant Arrays:** No constant arrays are exported (types are sufficient for type-safety)
-- [ ] **Type Safety:** TypeScript types enforce canonical usage (closed union types)
-- [ ] **Extension Path:** Extension is possible only through `className` and composition, not mutation
-- [ ] **Exceptions Documented:** Any exceptions or special cases are documented
+* Move misplaced logic out.
+* Reduce scope rather than adding configuration flags.
 
 ---
 
-## Step 7: TypeScript System Compliance
+## 5. STEP 3 — Duplication & Internal Pattern Alignment
 
-### Purpose
+### Goal
 
-Ensure component's TypeScript types comply with Typing Standard and establish Public Type Surface as locked architectural contract.
+Normalize internal patterns so the component behaves like a **first-class citizen** of the system.
 
-### Allowed Actions
+### Checks
 
-- Verify all variant/size props use explicit union types (not inferred from CVA)
-- Verify no `VariantProps<typeof cvaVariants>` in public APIs
-- Verify CVA variant maps use `satisfies Record<...>` constraints
-- Verify public component props reference canonical union types
-- Verify no `string` types for variant/size props (no string widening)
-- Verify no `any` types in public APIs
-- Verify types are exported explicitly
-- Verify TypeScript compilation passes without errors
-- Verify type narrowing and type safety are maintained
-- Verify Public Type Surface is documented and locked
+* Consistent prop order.
+* Consistent JSX structure.
+* Consistent handling of children / trigger / content.
 
-### Outputs
+### Refactoring Guidance
 
-- TypeScript compliance verification report
-- Public Type Surface documentation
-- Forbidden patterns detection results
-
-### Exit Criteria
-
-- All checklist items are verified
-- Component types comply with Typing Standard
-- TypeScript compilation passes without errors
-- Public Type Surface is documented and locked
-- No forbidden patterns are present in public APIs
-
-### TypeScript System Compliance Checklist (Mandatory)
-
-- [ ] **Explicit Union Types:** All variant/size props use explicit union types (not inferred from CVA)
-- [ ] **No CVA-Derived Types:** No `VariantProps<typeof cvaVariants>` in public APIs
-- [ ] **CVA Type Constraints:** CVA variant maps use `satisfies Record<...>` constraints
-- [ ] **Canonical Type References:** Public component props reference canonical union types
-- [ ] **No String Types:** No `string` types for variant/size props (no string widening)
-- [ ] **No Any Types:** No `any` types in public APIs
-- [ ] **No Unsafe Type Assertions:** No `as any` or `as unknown as` to bypass public API typing
-- [ ] **Explicit Type Exports:** Types are exported explicitly
-- [ ] **TypeScript Compilation:** TypeScript compilation passes without errors
-- [ ] **Type Safety:** Type narrowing and type safety are maintained
-- [ ] **Public Type Surface Documented:** Public Type Surface is explicitly documented
-
-### Forbidden Patterns (MANDATORY)
-
-1. **CVA-Derived Public Types:** `VariantProps<typeof cvaVariants>` in public APIs
-2. **String Widening:** `variant?: string` or `size?: string`
-3. **Any Types:** `props?: any` or `value: any`
-4. **Unsafe Type Assertions:** `as any` or `as unknown as` to bypass public API
-5. **Inferred Public Types:** Inline unions in props without explicit type definitions
-
-### Authority References
-
-- `docs/reference/TYPING_STANDARD.md` (REQUIRED, ENFORCED architectural standard)
+* Align structure with similar components.
+* Prefer one clear pattern over multiple “almost the same” ones.
 
 ---
 
-## Step 8: CVA Canonicalization
+## 6. STEP 4 — State & Interaction Model Review
 
-### Purpose
+### Goal
 
-Ensure CVA usage follows canonical patterns, enforces Canonical CVA Shape, and is used only as composition transport layer.
+Confirm that interaction logic is **simple, predictable, and platform-native**.
 
-### Allowed Actions
+### Checks
 
-- Verify CVA uses `tokenCVA` utility (if applicable)
-- Verify CVA follows Canonical CVA Shape
-- Verify variant maps are properly structured with `satisfies Record<...>` constraints
-- Verify CVA variants reference tokens, not raw values
-- Verify no state variants in CVA (states are CSS-only)
-- Verify no logic, conditionals, or computed values in CVA
-- Verify compound variants are properly defined (if applicable)
-- Verify CVA structure matches canonical patterns (Button as reference)
-- Verify CVA is used only as variant transport layer, not styling engine
-- Verify CVA is not exported unless required for Extension composition
+* What states exist and why.
+* Which states are derived vs explicit.
+* Whether JS is used where CSS or native behavior would suffice.
 
-### Outputs
+### Refactoring Guidance
 
-- CVA canonicalization verification report
-- Canonical CVA Shape verification
-- Forbidden patterns detection results
-
-### Exit Criteria
-
-- All checklist items are verified
-- CVA follows Canonical CVA Shape
-- CVA variants reference tokens, not raw values
-- No forbidden patterns are present
-- CVA structure matches canonical patterns (Button as reference)
-- CVA is used only as composition transport layer
-
-### CVA Canonicalization Checklist (Mandatory)
-
-- [ ] **tokenCVA Usage:** CVA uses `tokenCVA` utility (if applicable)
-- [ ] **Canonical CVA Shape:** CVA follows Canonical CVA Shape structure
-- [ ] **Token References Only:** All variants reference tokens, no raw classes
-- [ ] **No State Variants:** No state variants in CVA (states are CSS-only)
-- [ ] **No Logic:** No logic, conditionals, or computed values in CVA
-- [ ] **Type Constraints:** All variant maps use `satisfies Record<...>` constraints
-- [ ] **Canonical Structure:** CVA structure matches Button as reference implementation
-- [ ] **Transport Layer Only:** CVA is used only as variant transport, not styling engine
-- [ ] **Non-Export Rule:** CVA is not exported unless required for Extension composition
-
-### Canonical CVA Shape Requirement
-
-All CVA instances MUST follow the **Canonical CVA Shape**:
-
-```typescript
-const componentVariants = tokenCVA({
-  base: `${COMPONENT_TOKENS.base} ...`, // Base classes from tokens
-  variants: {
-    variant: {
-      primary: `${COMPONENT_TOKENS.variant.primary} ...`, // Token references only
-      secondary: `${COMPONENT_TOKENS.variant.secondary} ...`,
-      // ... all variants reference tokens
-    } satisfies Record<ComponentVariant, string>,
-    size: {
-      xs: `${COMPONENT_TOKENS.size.xs} ...`, // Token references only
-      sm: `${COMPONENT_TOKENS.size.sm} ...`,
-      // ... all sizes reference tokens
-    } satisfies Record<ComponentSize, string>,
-  },
-  defaultVariants: {
-    variant: "primary",
-    size: "md",
-  },
-});
-```
-
-### Forbidden Patterns (MANDATORY)
-
-1. **State Variants:** States belong in CSS, not CVA
-2. **Logic or Conditionals:** No logic in CVA
-3. **Raw Classes (Non-Token):** Must reference tokens
-4. **Computed or Dynamic Values:** No computed values
+* Remove unnecessary JS state.
+* Simplify interaction paths.
 
 ---
 
-## Step 9: Accessibility Hardening
+## 7. STEP 5 — Token, Size & Variant Consistency
 
-### Purpose
+### Goal
 
-Ensure component meets WCAG accessibility standards.
+Ensure the component speaks the **same visual language** as the rest of the system.
 
-### Allowed Actions
+### Checks
 
-- Verify ARIA attributes are correct and complete
-- Verify keyboard navigation works correctly
-- Verify screen reader announcements are appropriate
-- Verify focus management is correct (if applicable)
-- Verify color contrast meets WCAG standards
-- Verify interactive elements are keyboard accessible
-- Run accessibility audit tools and fix violations
+* Token-only styling (no raw values).
+* Size usage aligned with the shared size scale.
+* Variants that represent real use cases, not implementation quirks.
 
-### Outputs
+### Refactoring Guidance
 
-- Accessibility verification report
-- ARIA attributes audit
-- Keyboard navigation verification
-- Accessibility audit tool results
+* Collapse near-duplicate variants.
+* Remove custom size naming.
 
-### Exit Criteria
+### Scope Boundary (CRITICAL)
 
-- ARIA attributes are correct and complete
-- Keyboard navigation works correctly
-- Accessibility audit tools pass without violations
+STEP 5 is a **compliance validation step**, not a final optimization step.
+
+* Allowed: `compliant`, `aligned`, `no issues detected at this stage`.
+* Prohibited: declaring `optimal`, `final`, or “no further refactoring will ever be required”.
 
 ---
 
-## Step 10: Authority Alignment
+## 8. STEP 6 — Public API & DX Review
 
-### Purpose
+### Goal
 
-Ensure component complies with all relevant Authority Contracts.
+Make the component **easy to understand and hard to misuse**.
 
-### Allowed Actions
+### Checks
 
-- Verify compliance with Interaction Authority Contract (if component is interactive)
-- Verify compliance with State Authority Matrix (if component has states)
-- Verify compliance with State Authority Contract (if component uses state tokens)
-- Verify compliance with Spacing Authority Contract (if component uses spacing)
-- Verify compliance with Radius Authority Contract (if component uses border radius)
-- Verify compliance with Typography Authority Contract (if component uses typography)
-- Verify compliance with Motion Authority Contract (if component uses motion/animation)
-- Verify compliance with Elevation Authority Contract (if component uses elevation/shadows)
-- Verify compliance with Layout Authority Contract (if component defines layout)
-- Document any exceptions or special cases
+* Are all public props necessary?
+* Can the component be used correctly without reading its implementation?
 
-### Outputs
+### Refactoring Guidance
 
-- Authority Contract compliance verification report
-- Scope-aware verification results
-- Exception documentation (if any)
+* Remove or rename unclear props.
+* Prefer composition over configuration.
 
-### Exit Criteria
+### Scope Boundary (CRITICAL)
 
-- Component complies with all semantically relevant Authority Contracts
-- Any exceptions or special cases are documented
-- No Authority rules are violated
-
-### Scope-Aware Verification
-
-**Important:** Not all Authority Contracts apply to every component. Only semantically relevant Authority Contracts must be verified. For example:
-- A non-interactive component does not need Interaction Authority verification
-- A component without typography does not need Typography Authority verification
-- A component without motion does not need Motion Authority verification
-
-### Authority References
-
-- See `docs/architecture/AUTHORITY_NAVIGATION.md` for complete Authority Contract list
+STEP 6 evaluates the **current API quality**, but must not declare the API final.
 
 ---
 
-## Step 11: Storybook Quality Gate
+## 9. STEP 7 — Type System Alignment
 
-### Purpose
+### Goal
 
-Ensure Storybook serves as a complete and accurate visual and semantic contract for Foundation components.
+Use the type system as **a safety net and documentation tool**.
 
-### Classification
+### Checks
 
-**Quality Gate (BLOCKING — Foundation Lock is IMPOSSIBLE without passing this step)**
+* Explicit unions instead of wide types.
+* No leaking of internal variant machinery.
+* Types readable without implementation context.
 
-### Allowed Actions
+### Refactoring Guidance
 
-- Verify canonical usage examples are present in Storybook
-- Verify all stories represent intended, canonical usage patterns
-- Verify no misleading or non-canonical usage examples exist
-- Verify no exploratory or experimental stories remain
-- Verify Storybook stories document all public API variations
-- Verify Storybook stories demonstrate proper component composition
-- Verify accessibility addon (if applicable) shows no violations in stories
-- Verify visual regression testing (if applicable) passes for all stories
-- **MUST document ALL canonical states** (including disabled, loading, interactive states)
-- **MUST demonstrate asChild usage** (if component supports `asChild` prop)
-- **MUST include accessibility-focused stories** (keyboard navigation, ARIA attributes, screen reader support)
-- **MUST include real usage scenarios** (not playground-only examples)
-- **MUST include conceptual guidance stories** where architecture matters
+* Rewrite types for clarity.
+* Treat types as part of the public contract.
 
-### Outputs
+### Scope Boundary (CRITICAL)
 
-- Storybook quality gate verification report
-- Story inventory and coverage analysis
-- Forbidden patterns detection results
-
-### Exit Criteria
-
-- All checklist items are verified and documented
-- Canonical usage examples are present and complete
-- All canonical states (including disabled) are documented
-- asChild usage is demonstrated (if applicable)
-- Accessibility-focused stories are present
-- Real usage scenarios are documented
-- Conceptual guidance stories are present (where architecture matters)
-- No misleading or exploratory stories exist
-- Storybook serves as accurate visual and semantic contract for component
-- Storybook quality gate status is explicitly documented in Foundation Component Report
-
-### Storybook Quality Checklist (Mandatory)
-
-- [ ] **Canonical Examples:** Canonical usage examples are present in Storybook
-- [ ] **API Coverage:** All public API variations are demonstrated in stories (variants, sizes, all props)
-- [ ] **State Coverage:** ALL canonical states are documented (base, hover, active, focus-visible, disabled, loading — as applicable)
-- [ ] **Disabled State:** Disabled state is explicitly demonstrated with all variants (if component supports disabled)
-- [ ] **asChild Usage:** asChild composition pattern is demonstrated (if component supports `asChild`)
-- [ ] **Accessibility Stories:** Accessibility-focused stories demonstrate keyboard navigation, ARIA attributes, and screen reader support
-- [ ] **Real Usage Scenarios:** Real-world usage scenarios are documented (not just playground examples)
-- [ ] **Conceptual Guidance:** Conceptual guidance stories explain architectural distinctions (e.g., when to use Link vs Button, component semantic boundaries)
-- [ ] **No Misleading Stories:** Misleading or non-canonical usage examples are removed
-- [ ] **No Exploratory Stories:** Exploratory or experimental stories are removed
-- [ ] **Visual Contract:** Storybook stories represent the intended, canonical usage of the component
-- [ ] **Composition Examples:** Proper component composition patterns are demonstrated
-- [ ] **Accessibility Verified:** Accessibility addon shows no violations (if applicable)
-- [ ] **Visual Regression:** Visual regression tests pass (if applicable)
-- [ ] **No Unsafe Type Assertions:** Storybook stories do NOT use `as any` or `as unknown as` to bypass public API typing
-
-### Failure Consequences
-
-- ❌ **BLOCKING:** Component CANNOT proceed to Foundation Lock
-- ❌ **BLOCKING:** Component MUST remain in INCUBATION (for creation) or cannot be refactored (for refactor)
-- ❌ **BLOCKING:** Foundation Component Report MUST document Storybook quality gate failure
+STEP 7 must not declare the type system `optimal` or `final`.
 
 ---
 
-## Step 12: Testing Quality Gate
+## 10. STEP 8 — Intentional Refactor Pass
 
-### Purpose
+### Goal
 
-Ensure comprehensive test coverage that provides semantic protection and regression safety for Foundation components.
+Perform a **final, focused quality sweep**.
 
-### Classification
+### Guiding Question
 
-**Quality Gate (BLOCKING — Foundation Lock is IMPOSSIBLE without passing this step)**
+> “If this code were reviewed today by a senior engineer, would it pass without comments?”
 
-### Allowed Actions
+### Actions
 
-- Verify component has test coverage for core behavior
-- Verify tests cover all public API variations (variants, sizes, states)
-- Verify tests validate semantic contracts (accessibility, interaction patterns)
-- Verify tests protect against regressions in critical functionality
-- Verify tests use appropriate testing patterns (unit, integration, accessibility testing as applicable)
-- Verify tests pass without errors or warnings
-- Verify tests follow project testing standards and patterns
-- **MUST include unit tests** for core behavior and API variations
-- **MUST include integration tests** where composition is involved (e.g., asChild patterns)
-- **MUST include accessibility tests** (ARIA attributes, roles, keyboard navigation)
-- **MUST include semantic behavior tests** (disabled blocks interaction, state transitions, interaction patterns)
+* Re-read all code.
+* Simplify naming and structure.
+* Remove remaining incidental complexity.
 
-### Outputs
+### Mandatory Outcome (CRITICAL)
 
-- Testing quality gate verification report
-- Test coverage analysis
-- Test execution results
+This step **must end** with an explicit decision recorded in the audit report:
 
-### Exit Criteria
+* `Refactor required` (with minimal scoped description)
+* or `Refactor not required` (with justification)
 
-- All checklist items are verified and documented
-- Component has adequate test coverage for critical functionality
-- Unit tests exist for core behavior
-- Integration tests exist where composition is involved
-- Accessibility tests validate ARIA, roles, and keyboard navigation
-- Semantic behavior tests validate component behavior matches contracts
-- All tests pass without errors or warnings
-- Tests provide semantic protection and regression safety
-- Testing quality gate status is explicitly documented in Foundation Component Report
-
-### Testing Quality Checklist (Mandatory)
-
-- [ ] **Core Behavior:** Component has test coverage for core behavior (unit tests)
-- [ ] **API Variations:** Tests cover all public API variations (variants, sizes, all props)
-- [ ] **State Coverage:** Tests validate all component states (disabled, loading, interactive states)
-- [ ] **Semantic Behavior:** Tests validate semantic behavior (disabled blocks interaction, state transitions work correctly)
-- [ ] **Accessibility Tests:** Accessibility tests validate ARIA attributes, roles, and keyboard navigation
-- [ ] **Integration Tests:** Integration tests validate composition patterns (asChild, component composition where applicable)
-- [ ] **Semantic Protection:** Tests validate semantic contracts (accessibility, interaction patterns)
-- [ ] **Regression Safety:** Tests protect against regressions in critical functionality
-- [ ] **Testing Patterns:** Tests follow project testing standards and patterns
-- [ ] **Test Execution:** All tests pass without errors or warnings
-- [ ] **No Unsafe Type Assertions:** Tests do NOT use `as any` or `as unknown as` to bypass public API typing
-
-### Failure Consequences
-
-- ❌ **BLOCKING:** Component CANNOT proceed to Foundation Lock
-- ❌ **BLOCKING:** Component MUST remain in INCUBATION (for creation) or cannot be refactored (for refactor)
-- ❌ **BLOCKING:** Foundation Component Report MUST document Testing quality gate failure
-- ❌ **BLOCKING:** No Foundation component is allowed without adequate test coverage
+Additionally, STEP 8 must record a list of **consciously NOT made changes**.
 
 ---
 
-## Step 13: Foundation Lock
+## 11. STEP 9 — Validation via Tests & Storybook
 
-### Purpose
+### Goal
 
-Formally lock component as Foundation component.
+Prove that the improved component behaves as expected.
 
-### Allowed Actions
+### Requirements
 
-- Update `docs/architecture/FOUNDATION_LOCK.md` to include component
-- Update `docs/ARCHITECTURE_CONTEXT.md` if necessary
-- Document component's lock status and date
-- Verify all previous steps (0-12) are complete
-- Create or update component documentation
-- Ensure component is listed in Foundation components list
-- **Verify Foundation Component Report:** Ensure compliant report following `docs/architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md` exists
+* Tests cover public behavior and edge cases.
+* Storybook demonstrates:
 
-### Outputs
+  * all variants,
+  * all sizes,
+  * meaningful interaction examples.
 
-- Component listed in `docs/architecture/FOUNDATION_LOCK.md`
-- Component documentation updated
-- Foundation Component Report validated
-- Lock status documented
-
-### Exit Criteria
-
-- Component is listed in `docs/architecture/FOUNDATION_LOCK.md`
-- Component is listed in `docs/ARCHITECTURE_CONTEXT.md` (if necessary)
-- Component's lock status and date are documented
-- All previous lifecycle steps (0-12) are complete and verified
-- Component documentation is created or updated
-- Foundation Component Report is compliant and validates all steps (0-13)
-
-### Pre-Lock Verification (MANDATORY)
-
-Foundation Lock is **IMPOSSIBLE** without passing all quality gates. Before proceeding to Foundation Lock, verify that all quality gates have passed:
-
-- ✅ **Step 11 (Storybook Quality Gate) is COMPLETE** — Storybook serves as visual and semantic contract
-- ✅ **Step 12 (Testing Quality Gate) is COMPLETE** — Tests provide semantic protection and regression safety
-- ✅ **All architectural validation steps (0-10) are COMPLETE** — Component complies with all architectural rules
-- ✅ **Foundation Component Report is COMPLIANT** — Report documents all steps and validates completion
-
-### Foundation Component Report Verification (Mandatory)
-
-Foundation Component Reports are **mandatory artifacts** for Foundation Lock. Before Foundation Lock:
-
-- [ ] **Report Exists:** Foundation Component Report exists in `docs/reports/` directory
-- [ ] **Format Compliant:** Report follows `docs/architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md` format
-- [ ] **All Steps Documented:** All lifecycle steps (0-13) are documented in report
-- [ ] **Violations Consolidated:** All violations are consolidated in VIOLATION SUMMARY & RESOLUTION section
-- [ ] **Lifecycle Status Clear:** LIFECYCLE PROGRESSION STATUS section explicitly states current status
-- [ ] **No Blocking Violations:** No blocking violations remain (all must be FIXED or ACCEPTED EXCEPTION)
-- [ ] **Report Validated:** Report passes validation checklist from template
-
-### Failure Consequences
-
-If any quality gate (Step 11 or Step 12) fails:
-- ❌ **Component CANNOT proceed to Foundation Lock (Step 13)**
-- ❌ **Component MUST remain in INCUBATION** (for creation) or **cannot be refactored** (for refactor)
-- ❌ **Foundation Component Report MUST document failure** with explicit blocking status
-- ❌ **Conditional Lock or STOP:** Component lifecycle is BLOCKED until quality gates pass
-
-**No Exceptions:** There are no exceptions to quality gate requirements. Foundation components require complete Storybook coverage and comprehensive testing before lock.
+Minimal or placeholder coverage is not sufficient.
 
 ---
 
-## Process vs Law Distinction
+## 12. STEP 10 — Accessibility Audit & Fixes (MANDATORY)
 
-**This pipeline is PROCESS, not LAW:**
+### Goal
 
-- **LAW (Immutable):** Authority Contracts define architectural rules that cannot be changed without unlock procedure
-- **PROCESS (Evolvable):** This pipeline describes how to work within the LAW; the process can evolve to improve ergonomics
-- **EXAMPLES (Reference):** Reference implementations and usage patterns provide non-binding guidance
+Make the component **accessible** and safe for keyboard and assistive technologies.
 
-**Key Principle:** This pipeline process can be improved, but it cannot weaken or bypass architectural LAW. All pipeline steps must respect Authority Contracts and Lock documents.
+### Rationale (CRITICAL)
 
----
+Accessibility work is typically the most code-invasive phase:
 
-## Related Documents
+* it touches real code paths,
+* it changes semantics (ARIA/roles), focus behavior, and keyboard flows,
+* it often introduces the largest set of changes.
 
-**Canonical Lifecycle:**
-- `docs/architecture/FOUNDATION_LOCK_OPERATING_RULES.md` - Section 10 (authoritative lifecycle definition)
-- `docs/architecture/FOUNDATION_LIFECYCLE_PROCESS_INDEX.md` - Process navigation
+Therefore, accessibility **cannot** be treated as an optional follow-up.
 
-**Report Format:**
-- `docs/architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md` - Mandatory canonical report format
-- `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md` - Canonical example (Button component)
-- `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` - Canonical example (Link component)
+### Scope
 
-**Authority Documents:**
-- `docs/architecture/FOUNDATION_LOCK.md` - Foundation lock status
-- `docs/ARCHITECTURE_CONTEXT.md` - Canonical architecture context
+* ARIA roles and attributes.
+* Keyboard navigation and focus management.
+* Screen reader announcement behavior.
+* Accessibility-specific tests and Storybook stories.
 
-**Authority Contracts:**
-- See `docs/architecture/AUTHORITY_NAVIGATION.md` for complete Authority Contract list
+### Important Notes
 
-**Extension Component Process:**
-- `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` - Extension component creation checklist (includes CLI generator usage)
-- `scripts/generate-extension-component.ts` - CLI tool for generating Extension component scaffold
-- Usage: `pnpm run component:generate -- <ComponentName> [--category <category>]`
+* This step may change code **only for accessibility correctness**.
+* Public API changes are still prohibited unless explicitly agreed and documented.
 
 ---
 
-## Document Status
+## 13. STEP 11 — Final Review & Outcome Fixation + Architectural Lock
 
-**Status:** ✅ ACTIVE  
-**Version:** 1.0  
-**Date Created:**    
-**Last Updated:**    
-**Classification:** Process Documentation (Evolvable)
+### Goal
 
-**This document provides process reference only. The authoritative lifecycle definition is in `docs/architecture/FOUNDATION_LOCK_OPERATING_RULES.md` — Section 10.**
+Formally conclude the pipeline and **lock the component status across all architectural authority documents**.
 
+### Actions
+
+* Verify that all previous steps are complete.
+* Confirm code quality improvements.
+* Record final state and decisions.
+
+### Mandatory Lock Propagation (CRITICAL)
+
+This step is considered **INCOMPLETE** unless the locked status is propagated consistently to:
+
+* `docs/FOUNDATION_LOCK.md`
+* `docs/ARCHITECTURE_LOCK.md`
+* `docs/PROJECT_PROGRESS.md`
+* `docs/ARCHITECTURAL_INDEX.md` (or equivalent)
+* the component audit report file
+
+### Outcome
+
+* Component accepted as canonical (and locked),
+* or explicitly marked for further iteration.
+
+---
+
+## Closing Note
+
+This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
+
+Skipping steps or rushing execution will only reintroduce the problems this document is designed to elimin

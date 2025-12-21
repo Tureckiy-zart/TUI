@@ -14,6 +14,8 @@ import { useHoverCardContext } from "./HoverCardRoot";
 export interface HoverCardTriggerProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Render as child element (composition pattern)
+   * When true, the component will merge its props with its child element
+   * @default false
    */
   asChild?: boolean;
 }

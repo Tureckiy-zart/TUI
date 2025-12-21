@@ -644,6 +644,9 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 | Display   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
 | Lead      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
 | Input     | ✅ LOCKED | 2025-12-15  | Form component. Locked after standardization, code review, and storybook taxonomy fix. |
+| Tooltip   | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
+| Popover   | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
+| HoverCard | ✅ LOCKED | 2025-12-21  | Menu component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Public API. |
 
 **Extension Layer Locked Components Status:** ✅ **ACTIVE**  
 **Lock Date:** 2025-12-15  
