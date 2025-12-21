@@ -112,14 +112,20 @@ describe("Button", () => {
 
     describe("asChild", () => {
       it("renders as child element when asChild is true", () => {
+        // Note: asChild without icons works correctly - Slot receives single child element
+        // This test verifies the basic asChild functionality
         const { container } = renderWithTheme(
-          <Button asChild variant="primary" size="md">
+          <Button asChild>
             <a href="/test">Link Button</a>
           </Button>,
         );
+        // When asChild is true without icons, Slot should render the child element
+        // The link should be present in the DOM
         const link = container.querySelector("a");
         expect(link).toBeInTheDocument();
         expect(link).toHaveTextContent("Link Button");
+        // Verify the link has button styling applied (via className from Button)
+        expect(link).toHaveClass("inline-flex");
       });
 
       it("renders as child element with icons when asChild is true", () => {

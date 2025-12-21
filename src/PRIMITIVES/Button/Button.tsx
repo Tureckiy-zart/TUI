@@ -257,13 +257,21 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     // Regular button or asChild without icons
-    const Comp = asChild ? Slot : "button";
+    if (asChild) {
+      // When asChild is true without icons, Slot needs a single child element
+      return (
+        <Slot className={finalClassName} ref={ref} {...props}>
+          {children}
+        </Slot>
+      );
+    }
+    // Regular button with icons
     return (
-      <Comp className={finalClassName} ref={ref} {...props}>
+      <button className={finalClassName} ref={ref} {...props}>
         {renderIcon(leftIcon)}
         {children}
         {renderIcon(rightIcon)}
-      </Comp>
+      </button>
     );
   },
 );
