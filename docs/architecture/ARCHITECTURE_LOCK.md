@@ -61,13 +61,17 @@ The extension layer consists of **opinionated, feature-rich components** that:
 
 The following components are **locked** and **immutable**:
 
-| Component       | Category   | Base Library      | Notes                                                                         |
-| --------------- | ---------- | ----------------- | ----------------------------------------------------------------------------- |
-| **Modal**       | Overlays   | Radix Dialog      | Sole modal foundation. All modal-like components must use this internally.    |
-| **Tabs**        | Navigation | Radix Tabs        | Sole tabs foundation. All tab-based navigation must use this internally.      |
-| **Select**      | Inputs     | Radix Select      | Sole select foundation. All dropdown selection must use this internally.      |
-| **ContextMenu** | Menus      | Radix ContextMenu | Sole context menu foundation. All right-click menus must use this internally. |
-| **Toast**       | Overlays   | Radix Toast       | Sole toast foundation. All notification toasts must use this internally.      |
+| Component       | Category   | Base Library      | Foundation Status | Lock Date |
+| --------------- | ---------- | ----------------- | ----------------- | --------- |
+| **Modal**       | Overlays   | Radix Dialog      | ✅ **LOCKED**      | 2025-12-20 |
+| **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
+| **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      | 2025-12-21 |
+| **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
+
+**Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md.
 
 ### Foundation Component Rules
 
@@ -629,24 +633,24 @@ Before considering the architecture lock complete, verify:
 **Lock Date:** 2025-12-12  
 **Next Review:** Never (foundation is immutable)
 
-### Extension Layer (LOCKED COMPONENTS)
+### Locked Public Components Index (Cross-layer)
 
-The following Extension Layer components are **LOCKED** and **IMMUTABLE** after completing their audit and locking procedures:
+The following public components are **LOCKED** and **IMMUTABLE** after completing their audit and locking procedures. This index includes components from Foundation, Extension, and Composition layers.
 
-| Component | Status    | Locked Date | Notes                                    |
-| --------- | --------- | ----------- | ---------------------------------------- |
-| Button    | ✅ FINAL LOCK |    | Foundation primitive. FINAL LOCK after STEP 3-13 completion. |
-| Text      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Heading   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Body      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Caption   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Code      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Display   | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Lead      | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
-| Input     | ✅ LOCKED | 2025-12-15  | Form component. Locked after standardization, code review, and storybook taxonomy fix. |
-| Tooltip   | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
-| Popover   | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
-| HoverCard | ✅ LOCKED | 2025-12-21  | Menu component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Public API. |
+| Component | Layer      | Status    | Locked Date | Notes                                    |
+| --------- | ---------- | --------- | ----------- | ---------------------------------------- |
+| Button    | Foundation | ✅ FINAL LOCK | 2025-12-21  | Foundation primitive. FINAL LOCK after STEP 3-13 completion and Pipeline 18A Steps 0-11. |
+| Text      | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Heading   | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Body      | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Caption   | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Code      | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Display   | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Lead      | Extension  | ✅ LOCKED | 2025-12-15  | Typography component. Locked after audit. |
+| Input     | Extension  | ✅ LOCKED | 2025-12-15  | Form component. Locked after standardization, code review, and storybook taxonomy fix. |
+| Tooltip   | Extension  | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
+| Popover   | Extension  | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
+| HoverCard | Extension  | ✅ LOCKED | 2025-12-21  | Menu component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Public API. |
 
 **Extension Layer Locked Components Status:** ✅ **ACTIVE**  
 **Lock Date:** 2025-12-15  

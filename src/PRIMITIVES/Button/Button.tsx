@@ -154,6 +154,22 @@ export type ButtonVariant =
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 /**
+ * Icon wrapper CSS classes
+ * Shared constant to eliminate duplication across icon rendering
+ */
+const ICON_WRAPPER_CLASS =
+  "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current";
+
+/**
+ * Renders an icon with consistent wrapper styling
+ * Internal helper to eliminate duplication across icon rendering paths
+ */
+function renderIcon(icon: React.ReactNode): React.ReactElement | null {
+  if (!icon) return null;
+  return <span className={ICON_WRAPPER_CLASS}>{icon}</span>;
+}
+
+/**
  * Button Component Props
  *
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
@@ -196,45 +212,13 @@ export interface ButtonProps extends Omit<
  * - Button variants are visually distinct and react to theme changes
  * - All hover states use token-based opacity variants
  */
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
     // Color logic is fully centralized in CVA - no color classes applied here
     // All colors come from BUTTON_TOKENS → tokens/colors.ts (Color Authority)
     // className and style are forbidden from public API - only CVA output is used
     const finalClassName = buttonVariants({ variant, size });
-    // #region agent log
-    if (typeof window !== "undefined" && variant === "primary") {
-      const hasHoverClass = finalClassName.includes(
-        "hover:bg-[hsl(var(--button-primary-hover-bg))]",
-      );
-      const hasActiveClass = finalClassName.includes(
-        "active:bg-[hsl(var(--button-primary-active-bg))]",
-      );
-      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          location: "button.tsx:137",
-          message: "Button className check (State Authority Contract)",
-          data: {
-            variant,
-            size,
-            className: finalClassName,
-            hasHoverClass,
-            hasActiveClass,
-            hoverClassInString: finalClassName.includes("hover"),
-            allClasses: finalClassName
-              .split(" ")
-              .filter((c) => c.includes("hover") || c.includes("active") || c.includes("disabled")),
-          },
-          timestamp: Date.now(),
-          sessionId: "debug-session",
-          runId: "state-authority-contract",
-          hypothesisId: "A",
-        }),
-      }).catch(() => {});
-    }
-    // #endregion
 
     // When asChild is true and icons are provided, we need to clone the child element
     // and add icons inside it, so Slot applies props to the correct element (the child, not a wrapper span)
@@ -244,17 +228,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const Comp = "button";
         return (
           <Comp className={finalClassName} ref={ref} {...props}>
-            {leftIcon && (
-              <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
-                {leftIcon}
-              </span>
-            )}
+            {renderIcon(leftIcon)}
             {children}
-            {rightIcon && (
-              <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
-                {rightIcon}
-              </span>
-            )}
+            {renderIcon(rightIcon)}
           </Comp>
         );
       }
@@ -262,8 +238,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Clone the child element and add icons as its children
       // This ensures Slot applies className, href, tabIndex, and disabled handler to the actual child element
       // Slot will handle ref forwarding correctly, so we don't pass ref to cloneElement
-      const iconWrapperClass =
-        "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current";
       const childProps = children.props as React.HTMLAttributes<HTMLElement> & {
         children?: React.ReactNode;
       };
@@ -272,9 +246,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ...props,
         children: (
           <>
-            {leftIcon && <span className={iconWrapperClass}>{leftIcon}</span>}
+            {renderIcon(leftIcon)}
             {childProps.children}
-            {rightIcon && <span className={iconWrapperClass}>{rightIcon}</span>}
+            {renderIcon(rightIcon)}
           </>
         ),
       } as React.HTMLAttributes<HTMLElement>);
@@ -286,17 +260,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp className={finalClassName} ref={ref} {...props}>
-        {leftIcon && (
-          <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
-            {leftIcon}
-          </span>
-        )}
+        {renderIcon(leftIcon)}
         {children}
-        {rightIcon && (
-          <span className="pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current">
-            {rightIcon}
-          </span>
-        )}
+        {renderIcon(rightIcon)}
       </Comp>
     );
   },

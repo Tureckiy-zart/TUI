@@ -5,11 +5,11 @@
 **Purpose:** Consistent, repeatable improvement of component quality, architecture, and usability.
 
 > This document is intentionally verbose. It is written as a **process control document**, not a checklist.
-> The goal is not speed, but **predictable, high-quality outcomes**.
+> The goal is not speed, but **predictable, high‑quality outcomes**.
 
 ---
 
-## 0. Intent & Non-Goals
+## 0. Intent & Non‑Goals
 
 ### Intent
 
@@ -22,11 +22,11 @@ The outcome of every run:
 * architectural violations are removed or explicitly documented,
 * future maintenance becomes easier, not harder.
 
-### Non-Goals
+### Non‑Goals
 
 This pipeline is **not**:
 
-* a rewrite-everything exercise,
+* a rewrite‑everything exercise,
 * a theoretical architecture essay,
 * a “find problems and stop” audit.
 
@@ -37,20 +37,133 @@ If the pipeline ends without **actual code improvement**, it is considered a fai
 ## 1. General Execution Rules
 
 1. The pipeline is executed **top-to-bottom**, without reordering.
+
 2. Each step has a clear purpose and stopping condition.
+
 3. Code **may be refactored during the pipeline**, but:
 
    * behavior must not change unless explicitly allowed,
    * public API changes must be deliberate and documented.
+
 4. Discovery, analysis, and refactoring are **part of the same process**, not separate activities.
+
 5. **Mandatory reporting rule (CRITICAL):** every step **MUST end** by updating the component audit report file (the baseline report created in STEP 0).
 
    * If a step results in no changes, the report must explicitly state: `No changes required in this step`.
    * If changes were made, the report must include: what changed, why, and whether it is blocking or non-blocking.
 
+6. **Assistant review checkpoints (CRITICAL process control):** the assistant must remind the operator when it is recommended or mandatory to share the current audit report before proceeding.
+
+   * **Mandatory to share the audit report (must not proceed without it):**
+
+     * STEP 0 (Baseline snapshot)
+     * STEP 8 (Intentional refactor decision)
+     * STEP 9 (Tests & Storybook validation)
+     * STEP 10 (Accessibility audit & fixes)
+     * STEP 11 (Final review & architectural lock)
+
+   * **Recommended to share the audit report (strongly advised when changes are non-trivial):**
+
+     * STEP 6 (Public API & DX)
+     * STEP 7 (Type system alignment)
+
+   * **Optional to share the audit report:**
+
+     * STEP 1–5 (Structural / patterns / interaction / tokens)
+
+   The assistant must explicitly remind the operator at each checkpoint before issuing the next step task.
+
+7. **No skipped documentation (CRITICAL):** a step is not considered executed unless the audit report contains a clearly labeled section for that step.
+
+   * If no work is required, the section must still exist and must contain: `No changes required in this step`.
+   * The operator must not proceed to the next step if the current step section is missing.
+
+8. **Step gating rule (CRITICAL):** the assistant must not issue a TUNG for STEP N+1 unless STEP N is present in the report (even if it contains `No changes required`).
+
+9. **Blocker classification rule (CRITICAL):** every step section must include a clear outcome tag:
+
+   * `Blocking: yes/no`
+   * If `yes`, include a single-sentence reason.
+   * If `no`, optionally mark items as `Deferred` with rationale.
+
+10. **Language consistency (CRITICAL):** the pipeline and all audit reports must use a single language per document. For this pipeline, English-only.
+
+* Emojis are **allowed and encouraged** as visual markers for readability, but must not replace words or structure.
+
+11. **Vocabulary guardrails (CRITICAL):** the following words/claims are prohibited in STEP 0–10 and may only appear in STEP 11:
+
+* `final`, `optimal`, `exemplary`, `canonical`, `locked`, `foundation-ready`.
+
+Allowed phrasing in STEP 0–10:
+
+* `No issues detected in this step`
+* `Compliant at this stage`
+* `No changes required in this step`
+* `Behavior unchanged`
+
+12. **Work pattern inside each step (REQUIRED):** every step must follow the same internal order:
+
+1) **Observe** (what exists)
+2) **Decide** (what to do)
+3) **Change** (apply scoped refactor if allowed)
+4) **Record** (update audit report with blocker/non-blocker)
+
+Skipping any sub-part is a process violation.
+
 ---
 
-## 2. STEP 0 — Baseline Snapshot & Context Fixation
+## 2. Audit Report Contract (REQUIRED)
+
+This pipeline is enforced through a single continuously-updated audit report created in STEP 0.
+
+### File
+
+* The audit report file path must be stable per component, e.g.:
+
+  * `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+
+### Required section structure
+
+* The report must contain these top-level sections (even if empty):
+
+  * `STEP 0` … `STEP 11`
+
+### Required fields per step
+
+Each `STEP N` section must include:
+
+* `Outcome:` one of `No changes required | Changes applied | Changes required (not yet applied)`
+* `Blocking:` `yes/no`
+* `Notes:` 1–5 bullet points max
+* `Changes:` list of actual changes (or `None`)
+* `Deferred:` list of deferred items (or `None`)
+
+### Emoji markers (READABILITY, OPTIONAL)
+
+Emojis may be used to improve scanning and readability.
+
+**Recommended mapping (do not invent new meanings):**
+
+* ✅ for compliant / no issues / completed
+* ⚠️ for non-blocking issues / warnings
+* 🚫 for blockers
+* 🛠️ for changes applied
+* 🧾 for documentation/report updates
+
+Rules:
+
+* Emojis are optional; never rely on emojis alone.
+* Keep emoji usage minimal (1 per bullet/line max).
+* Emojis must not change the meaning of the text.
+
+### Consistency rule (CRITICAL)
+
+* If a change is mentioned in `Notes`, it must exist in `Changes` (or be marked `Deferred`).
+* If a step made code changes, it must include `Behavior unchanged` confirmation (unless the step explicitly allows behavior change).
+
+---
+
+## 3. STEP 0 — Baseline Snapshot & Context Fixation
 
 ### Goal
 
@@ -68,7 +181,7 @@ This step answers the question:
   * component name(s) in use,
   * export points,
   * directory placement,
-  * layer (Foundation / Extension / Legacy-like behavior).
+  * layer (Foundation / Extension / Legacy‑like behavior).
 * Create a **baseline snapshot file** that records:
 
   * file paths,
@@ -98,7 +211,7 @@ Identify and remove **obvious structural problems** in the code.
 
 * Repeated JSX blocks that should be mapped.
 * Conditional rendering that is hard to follow.
-* Copy-paste fragments with minor differences.
+* Copy‑paste fragments with minor differences.
 * Deeply nested logic without clear intent.
 
 ### What Is Allowed Here
@@ -145,7 +258,7 @@ Ensure the component has a **clear, narrow responsibility**.
 
 ### Goal
 
-Normalize internal patterns so the component behaves like a **first-class citizen** of the system.
+Normalize internal patterns so the component behaves like a **first‑class citizen** of the system.
 
 ### Checks
 
@@ -164,7 +277,7 @@ Normalize internal patterns so the component behaves like a **first-class citize
 
 ### Goal
 
-Confirm that interaction logic is **simple, predictable, and platform-native**.
+Confirm that interaction logic is **simple, predictable, and platform‑native**.
 
 ### Checks
 
@@ -187,13 +300,13 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 
 ### Checks
 
-* Token-only styling (no raw values).
+* Token‑only styling (no raw values).
 * Size usage aligned with the shared size scale.
 * Variants that represent real use cases, not implementation quirks.
 
 ### Refactoring Guidance
 
-* Collapse near-duplicate variants.
+* Collapse near‑duplicate variants.
 * Remove custom size naming.
 
 ### Scope Boundary (CRITICAL)
@@ -262,7 +375,7 @@ Perform a **final, focused quality sweep**.
 
 ### Actions
 
-* Re-read all code.
+* Re‑read all code.
 * Simplify naming and structure.
 * Remove remaining incidental complexity.
 
@@ -304,20 +417,20 @@ Make the component **accessible** and safe for keyboard and assistive technologi
 
 ### Rationale (CRITICAL)
 
-Accessibility work is typically the most code-invasive phase:
+Accessibility work is typically the most code‑invasive phase:
 
 * it touches real code paths,
 * it changes semantics (ARIA/roles), focus behavior, and keyboard flows,
 * it often introduces the largest set of changes.
 
-Therefore, accessibility **cannot** be treated as an optional follow-up.
+Therefore, accessibility **cannot** be treated as an optional follow‑up.
 
 ### Scope
 
 * ARIA roles and attributes.
 * Keyboard navigation and focus management.
 * Screen reader announcement behavior.
-* Accessibility-specific tests and Storybook stories.
+* Accessibility‑specific tests and Storybook stories.
 
 ### Important Notes
 
@@ -359,4 +472,4 @@ This step is considered **INCOMPLETE** unless the locked status is propagated co
 
 This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
 
-Skipping steps or rushing execution will only reintroduce the problems this document is designed to elimin
+Skipping steps or rushing execution will only reintroduce the problems this document is designed to eliminate.
