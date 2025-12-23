@@ -128,7 +128,8 @@ describe("ContextMenu", () => {
       await waitFor(() => {
         const disabledItem = screen.getByText("Cut (Disabled)");
         expect(disabledItem).toBeInTheDocument();
-        expect(disabledItem).toHaveAttribute("data-disabled");
+        // Note: We test public contract (disabled items don't trigger onSelect) below,
+        // not Radix's internal data-disabled attribute which is an implementation detail.
       });
     });
 

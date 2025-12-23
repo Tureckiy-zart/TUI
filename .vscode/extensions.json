@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "davidanson.vscode-markdownlint",
+    "vitest.explorer",
+    "ms-azuretools.vscode-docker",
+    "github.vscode-github-actions",
+    "eamodio.gitlens",
+    "mechatroner.rainbow-csv",
+    "tomoki1207.pdf",
+    "bradlc.vscode-tailwindcss",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-vscode.makefile-tools"
+  ]
+}

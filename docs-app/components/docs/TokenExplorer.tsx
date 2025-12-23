@@ -47,7 +47,7 @@ export function CopyButton({ value, className }: CopyButtonProps) {
   return (
     <Button
       variant="ghost"
-      size="icon"
+      iconOnly
       onClick={handleCopy}
       className={cn("h-6 w-6", className)}
       aria-label="Copy value"

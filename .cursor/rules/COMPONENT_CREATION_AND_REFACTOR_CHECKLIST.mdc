@@ -1,7 +1,7 @@
 ---
 alwaysApply: true
 title: Component Creation & Refactor Checklist
-version: 1.0
+version: 2.0
 status: Active
 owner: Cursor AI
 priority: Critical
@@ -41,6 +41,8 @@ If the mode is not explicitly clear, the AI MUST STOP and ASK.
 ---
 
 # 🆕 CREATE MODE — New Component
+
+> **Canonical Reference:** For component creation lifecycle protocol, see [component-lifecycle.mdc](../.cursor/rules/component-lifecycle.mdc). This checklist provides detailed execution steps; the lifecycle protocol defines the mandatory algorithm for creating components.
 
 ## CREATE-1: Authority & Lock Check
 
@@ -163,80 +165,197 @@ If verification fails → **FIX or REFUSE**.
 
 # ♻️ REFACTOR MODE — Existing Component
 
-## REFACTOR-1: Refactor Legitimacy Check
+> **⚠️ CRITICAL:** Refactoring existing components **MUST** follow the [Component Review & Improvement Pipeline (18A)](../../docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md). This is the **ONLY** canonical process for refactoring components. The pipeline defines a mandatory 12-step process (STEP 0-11) that **MUST** be executed in order, without reordering.
+
+## REFACTOR-1: Pipeline Mandate Check
 
 The AI MUST verify that:
 
 - Refactor is explicitly requested
-- Target component is NOT locked
+- Target component is NOT locked (check `docs/architecture/FOUNDATION_LOCK.md` and `docs/architecture/ARCHITECTURE_LOCK.md`)
 - Scope is limited to ONE component
+- The AI understands that **pipeline 18A is MANDATORY** for all refactoring work
 
 If refactor legitimacy is unclear → **STOP and ASK**.
 
----
-
-## REFACTOR-2: Baseline Preservation
-
-The AI MUST:
-
-- Preserve existing behavior unless change is explicitly requested
-- Treat visual parity as mandatory
-- Avoid API changes unless explicitly requested
-
-Breaking changes are forbidden by default.
+If component is locked → **REFUSE immediately**.
 
 ---
 
-## REFACTOR-3: Token Migration
+## REFACTOR-2: Pipeline Execution Requirements
 
-The AI MUST:
+**The AI MUST execute pipeline 18A (STEP 0-11) in strict order:**
 
-- Replace raw values with token-backed values
-- Replace legacy enums with token unions
-- Align props with current token domains
+### Mandatory Pipeline Structure:
+
+1. **STEP 0 — Baseline Snapshot & Context Fixation**
+   - Create audit report at: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+   - Record current state (files, exports, dependencies, public props)
+   - **NO code changes allowed in STEP 0**
+
+2. **STEP 1 — Structural & Code Quality Review**
+   - Allowed: readability refactors, extracting helpers, mapping duplicates
+   - Forbidden: behavior changes, API changes
+   - Must update audit report STEP 1 section
+
+3. **STEP 2 — Semantic Role & Responsibility Validation**
+   - Define 1-2 sentence role definition
+   - Identify out-of-scope logic
+   - Must update audit report STEP 2 section
+
+4. **STEP 3 — Duplication & Internal Pattern Alignment**
+   - Align with nearest canonical patterns
+   - Forbidden: inventing new patterns
+   - Must update audit report STEP 3 section
+
+5. **STEP 4 — State & Interaction Model Review**
+   - Derived state via data-attributes/CSS where possible
+   - Minimal JS state
+   - Must update audit report STEP 4 section
+
+6. **STEP 5 — Token, Size & Variant Consistency**
+   - Token-only styling (no raw values)
+   - Size usage aligned with shared size scale
+   - Reference: [VARIANTS_SIZE_CANON.md](../../docs/architecture/VARIANTS_SIZE_CANON.md), [SIZE_MAPPING_SPEC.md](../../docs/architecture/SIZE_MAPPING_SPEC.md)
+   - Must update audit report STEP 5 section
+
+7. **STEP 6 — Public API & DX Review**
+   - Remove confusing props
+   - Enforce safe defaults
+   - Must update audit report STEP 6 section
+
+8. **STEP 7 — Type System Alignment**
+   - Explicit unions instead of wide types
+   - No leaking of internal variant machinery
+   - Must update audit report STEP 7 section
+
+9. **STEP 8 — Intentional Refactor Pass**
+   - Explicit decision: `Refactor required` OR `Refactor not required`
+   - Record consciously NOT made changes
+   - **MANDATORY checkpoint:** Must share audit report before proceeding
+   - Must update audit report STEP 8 section
+
+10. **STEP 9 — Validation via Tests & Storybook**
+    - Tests cover public behavior and edge cases
+    - Storybook demonstrates matrix (variants × sizes), states, realistic usage
+    - Reference: [VARIANTS_SIZE_CANON.md](../../docs/architecture/VARIANTS_SIZE_CANON.md) for Matrix/States rules
+    - **MANDATORY checkpoint:** Must share audit report before proceeding
+    - Must update audit report STEP 9 section
+
+11. **STEP 10 — Accessibility Audit & Fixes (MANDATORY)**
+    - ARIA roles and attributes
+    - Keyboard navigation and focus management
+    - Screen reader announcement behavior
+    - Accessibility-specific tests and Storybook stories
+    - **MANDATORY checkpoint:** Must share audit report before proceeding
+    - Must update audit report STEP 10 section
+
+12. **STEP 11 — Final Review & Outcome Fixation + Architectural Lock**
+    - Verify all previous steps complete
+    - Lock propagation to: `docs/architecture/FOUNDATION_LOCK.md`, `docs/architecture/ARCHITECTURE_LOCK.md`, `docs/PROJECT_PROGRESS.md`
+    - **MANDATORY checkpoint:** Must share audit report before proceeding
+    - Must update audit report STEP 11 section
+
+---
+
+## REFACTOR-3: Mandatory Process Requirements
+
+### 4-Phase Step Invariant (NON-NEGOTIABLE)
+
+**Every STEP must complete ALL four phases:**
+
+1. **Observe** → collect evidence (paths, exports, current API, current behavior)
+2. **Decide** → write a decision (what we change / what we do NOT change)
+3. **Change** → apply scoped refactor (only if allowed in this step)
+4. **Record** → update the audit report with blockers / non-blockers
+
+If any phase is missing → the step is **FAILED** even if code "looks fine".
+
+### Audit Report Requirements
+
+**The AI MUST:**
+
+- Create audit report in STEP 0 at canonical path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- Update audit report after EVERY step (STEP 0-11)
+- Each STEP section must include:
+  - `Outcome:` one of `No changes required | Changes applied | Changes required (not yet applied)`
+  - `Blocking:` `yes/no` (with reason if `yes`)
+  - `Notes:` 1-5 bullet points max
+  - `Changes:` list of actual changes (or `None`)
+  - `Deferred:` list of deferred items (or `None`)
+- If a step results in no changes, report must explicitly state: `No changes required in this step`
+- Cannot proceed to STEP N+1 unless STEP N is present in report (even if it contains `No changes required`)
+
+### Checkpoint Requirements
+
+**The AI MUST request operator to share audit report at:**
+
+- **Mandatory checkpoints:** STEP 0, STEP 8, STEP 9, STEP 10, STEP 11
+- **Recommended checkpoints:** STEP 6, STEP 7
+- Cannot proceed past mandatory checkpoint without shared report
+
+### Vocabulary Guardrails
+
+**The AI MUST NOT use these words in STEP 0-10 (only allowed in STEP 11):**
+
+- `final`, `optimal`, `exemplary`, `canonical`, `locked`, `foundation-ready`
+
+**Allowed phrasing in STEP 0-10:**
+
+- `No issues detected in this step`
+- `Compliant at this stage`
+- `No changes required in this step`
+- `Behavior unchanged`
+
+---
+
+## REFACTOR-4: Scope & Constraint Rules
+
+### Scope Enforcement
+
+The AI MUST ensure:
+
+- One task = one component
+- No cross-component refactors
+- No hidden or indirect changes
+- Changes limited to declared scope
+
+### Global Prohibitions
 
 The AI MUST NOT:
+
 - Introduce new tokens
-- Modify token scales
-- Collapse or merge domains
+- Change Authority or Locks (unless in STEP 11 with explicit permission)
+- Modify multiple components
+- Apply patterns from other projects
+- Skip pipeline steps or reorder them
+- Proceed without updating audit report
+- **For Foundation components:** Add `className` or `style` props to public API
+- **For Foundation components:** Extend `React.*HTMLAttributes` directly without `Omit<..., "className" | "style">`
+
+### Behavior Preservation
+
+- Behavior must not change unless explicitly allowed
+- Visual parity is mandatory unless change is requested
+- Public API changes must be deliberate and documented
+- Breaking changes are forbidden by default
 
 ---
 
-## REFACTOR-4: Structural Discipline
+## REFACTOR-5: Completion Verification
 
-The AI MUST:
+**A refactor is considered complete ONLY when:**
 
-- Keep file structure unless change is requested
-- Avoid renaming exports
-- Avoid moving files
+- ✅ Audit report has STEP 0-11 filled (all sections present)
+- ✅ All mandatory checkpoints passed (report shared at STEP 0, 8, 9, 10, 11)
+- ✅ All 4-phase process completed for each step (Observe → Decide → Change → Record)
+- ✅ Storybook coverage is not placeholder (matrix + states demonstrated)
+- ✅ Tests cover behavior and edge cases
+- ✅ A11Y step executed (STEP 10)
+- ✅ Lock propagation completed (STEP 11) if component is Foundation
+- ✅ No vocabulary violations (no `final`/`optimal`/`canonical` before STEP 11)
 
-Refactor ≠ rewrite.
-
----
-
-## REFACTOR-5: Scope Guard
-
-The AI MUST NOT:
-
-- Refactor adjacent components
-- Touch shared utilities
-- Perform opportunistic cleanups
-
-If refactor requires touching another component → **REFUSE**.
-
----
-
-## REFACTOR-6: Verification
-
-Before completion, the AI MUST verify:
-
-- Behavior parity
-- Token compliance
-- No scope leakage
-- No hidden API changes
-- **For Foundation components:** Foundation Enforcement compliance maintained (className/style remain excluded, ESLint rules pass, type-tests pass)
-
-If verification fails → **FIX or REFUSE**.
+If any requirement is missing → **REFACTOR IS INCOMPLETE**.
 
 ---
 

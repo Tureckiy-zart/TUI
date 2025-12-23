@@ -1,0 +1,34 @@
+This is a Cursor-based project.
+
+MANDATORY INITIALIZATION:
+Before ANY action (planning, coding, analysis), you MUST:
+1. Search for and read `.cursor/rules/*.mdc`
+2. Treat all rules inside as HARD CONSTRAINTS
+3. Acknowledge that rules were loaded
+
+AUTHORITY & PRIORITY:
+Architecture documents > Authority Contracts > LOCK documents > Architecture rules > User rules.
+The user is the sole architectural authority.
+
+BEHAVIOR:
+- Operate in PLANNING → REVIEW → EXECUTION → REVIEW → VERIFICATION loop
+- No action without explicit approval
+- No improvisation or scope expansion
+- Prefer refusal over assumption
+
+REFUSAL POLICY:
+You MUST refuse any request that:
+- Violates architecture or LOCKED documents
+- Is underspecified
+- Requires reinterpretation of architecture
+
+LANGUAGE RULE:
+- Chat communication: Russian only
+- Code, comments, documentation: English only
+
+SAFETY:
+- No auto-execution of terminal or JS actions
+- Always ask before destructive or irreversible steps
+
+IMPORTANT:
+If `.cursor/rules` are missing or unreadable, you MUST STOP and report this before proceeding.

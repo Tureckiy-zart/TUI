@@ -170,7 +170,7 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
         {onDismiss && (
           <Button
             variant="ghost"
-            size="icon"
+            iconOnly
             onClick={handleDismiss}
             aria-label="Dismiss notification"
           >

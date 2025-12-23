@@ -41,7 +41,6 @@ export const BUTTON_TOKENS = {
     sm: "h-8", // 32px (2rem)
     md: "h-9", // 36px (2.25rem)
     lg: "h-10", // 40px (2.5rem)
-    icon: "h-9", // 36px (2.25rem) - same as md
   } as const,
 
   /**
@@ -90,15 +89,23 @@ export const BUTTON_TOKENS = {
     sm: "[&_svg]:w-3.5 [&_svg]:h-3.5", // 14px (0.875rem) - smaller icon for small buttons
     md: "[&_svg]:w-4 [&_svg]:h-4", // 16px (1rem) - medium icon for medium buttons
     lg: "[&_svg]:w-5 [&_svg]:h-5", // 20px (1.25rem) - larger icon for large buttons
-    icon: "[&_svg]:w-4 [&_svg]:h-4", // 16px (1rem) - medium icon for icon-only buttons
   } as const,
 
   /**
    * Width tokens
+   * Used for icon-only buttons (square buttons with equal width and height)
    */
   width: {
-    icon: "w-9", // 36px width for icon buttons
+    sm: "w-8", // 32px (2rem) - matches height.sm for square icon-only buttons
+    md: "w-9", // 36px (2.25rem) - matches height.md for square icon-only buttons
+    lg: "w-10", // 40px (2.5rem) - matches height.lg for square icon-only buttons
   } as const,
+
+  /**
+   * Padding token for icon-only buttons
+   * Zero padding required for square dimensions (icon-only buttons have no text, so no padding needed)
+   */
+  paddingIconOnly: "p-0", // Zero padding for icon-only buttons (required for square dimensions)
 
   /**
    * Font sizes by button size

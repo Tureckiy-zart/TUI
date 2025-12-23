@@ -4,7 +4,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { getBaseValue, getDurationMs, getSpacingPx } from "@/FOUNDATION/lib/responsive-props";
+import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TOOLTIP_TOKENS } from "@/FOUNDATION/tokens/components/tooltip";
 import type {
@@ -13,12 +13,25 @@ import type {
   ResponsiveSideOffset,
 } from "@/FOUNDATION/tokens/types";
 
+import { resolveAlignOffset, resolveSideOffset } from "./utils/offset-resolution";
+
 const TooltipProvider = TooltipPrimitive.Provider;
 
 const Tooltip = TooltipPrimitive.Root;
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
+/**
+ * Tooltip Content Variants
+ *
+ * NOTE: This implementation is intentionally similar to Popover but not unified.
+ * Rationale (from STEP 3 & STEP 8):
+ * - Tooltip and Popover serve different semantic roles (hover vs click, small vs large)
+ * - Variant definitions reference different token objects (TOOLTIP_TOKENS vs POPOVER_TOKENS)
+ * - Tooltip has no size variants (inappropriate for small informational content)
+ * - Structural similarity is acceptable but abstraction would reduce clarity
+ * - Each component's variants are tightly coupled to its specific token definitions
+ */
 const tooltipContentVariants = cva(
   `z-50 overflow-hidden ${TOOLTIP_TOKENS.content.border.default} ${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
   {
@@ -39,6 +52,17 @@ const tooltipContentVariants = cva(
   },
 );
 
+/**
+ * Tooltip variant type
+ */
+type TooltipVariant = VariantProps<typeof tooltipContentVariants>["variant"];
+
+/**
+ * TooltipContent - Styled tooltip content component
+ *
+ * Use this component directly when composing custom tooltip implementations.
+ * For simpler use cases, prefer TooltipWrapper.
+ */
 const TooltipContent = React.forwardRef<
   HTMLDivElement,
   Omit<
@@ -51,15 +75,11 @@ const TooltipContent = React.forwardRef<
     }
 >(({ className, variant, sideOffset, alignOffset, ...props }, ref) => {
   // Resolve offset tokens to pixels
-  const sideOffsetPx = React.useMemo(() => {
-    const baseOffset = getBaseValue(sideOffset);
-    return baseOffset ? getSpacingPx(baseOffset) : 4; // Default 4px
-  }, [sideOffset]);
-
-  const alignOffsetPx = React.useMemo(() => {
-    const baseOffset = getBaseValue(alignOffset);
-    return baseOffset ? getSpacingPx(baseOffset) : undefined;
-  }, [alignOffset]);
+  // NOTE: Offset resolution pattern is intentionally duplicated in PopoverContent.
+  // See STEP 3 & STEP 8 rationale - shared utility exists but component-level pattern
+  // duplication is acceptable for clarity and component-specific behavior.
+  const sideOffsetPx = React.useMemo(() => resolveSideOffset(sideOffset), [sideOffset]);
+  const alignOffsetPx = React.useMemo(() => resolveAlignOffset(alignOffset), [alignOffset]);
 
   return (
     <TooltipPrimitive.Content
@@ -76,10 +96,28 @@ const TooltipContent = React.forwardRef<
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export interface TooltipProps {
+  /**
+   * Trigger element that the tooltip is attached to
+   */
   children: React.ReactNode;
+  /**
+   * Tooltip content to display
+   */
   content: React.ReactNode;
-  variant?: VariantProps<typeof tooltipContentVariants>["variant"];
+  /**
+   * Visual variant of the tooltip
+   * @default "primary"
+   */
+  variant?: TooltipVariant;
+  /**
+   * Side of the trigger where the tooltip appears
+   * @default "top"
+   */
   side?: "top" | "right" | "bottom" | "left";
+  /**
+   * Alignment of the tooltip relative to the trigger
+   * @default "center"
+   */
   align?: "start" | "center" | "end";
   /**
    * Side offset - token-based
@@ -92,20 +130,45 @@ export interface TooltipProps {
    */
   alignOffset?: ResponsiveAlignOffset;
   /**
-   * Delay duration - token-based
+   * Delay duration before tooltip appears - token-based
    * Uses motion duration tokens
+   * @default 400 (milliseconds)
    */
   delayDuration?: ResponsiveDelay;
   /**
-   * Skip delay duration - token-based
+   * Skip delay duration when moving between triggers - token-based
    * Uses motion duration tokens
+   * @default 300 (milliseconds)
    */
   skipDelayDuration?: ResponsiveDelay;
-  disableHoverableContent?: boolean;
+  /**
+   * Whether the tooltip is open (controlled mode)
+   */
   open?: boolean;
+  /**
+   * Callback when open state changes
+   */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Whether hovering over tooltip content keeps it open
+   * @default false
+   */
+  disableHoverableContent?: boolean;
 }
 
+/**
+ * TooltipWrapper - High-level tooltip component
+ *
+ * Provides a simple API for creating tooltips with hover behavior.
+ * Handles Provider, Root, Trigger, and Content composition automatically.
+ *
+ * @example
+ * ```tsx
+ * <TooltipWrapper content="Tooltip text">
+ *   <Button>Hover me</Button>
+ * </TooltipWrapper>
+ * ```
+ */
 export function TooltipWrapper({
   children,
   content,

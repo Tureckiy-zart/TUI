@@ -1,8 +1,8 @@
 # 🔒 Final Foundation Lock
 
-**Version:** 1.21  
+**Version:** 1.22  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-20  
+**Last Updated:** 2025-12-22  
 **Status:** ✅ **LOCKED**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -428,9 +428,9 @@ The following components constitute the **complete and final** Foundation layer.
 | **Modal**       | Overlays   | Radix Dialog      | ✅ **LOCKED**      | 2025-12-20 |
 | **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ **LOCKED** | 2025-12-22 |
 | **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
-| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
+| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      | 2025-12-21 |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
 
 ### Foundation Component Details
@@ -489,19 +489,16 @@ The following components constitute the **complete and final** Foundation layer.
 
 #### ContextMenu
 - **Location:** `src/COMPOSITION/overlays/ContextMenu/`
-- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuGroup`, `ContextMenuSeparator`
+- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuCheckboxItem`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuSeparator`, `ContextMenuLabel`, `ContextMenuSub`, `ContextMenuSubTrigger`, `ContextMenuSubContent`
 - **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
 - **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-22
+- **Lock Authority:** FOUNDATION PIPELINE
+- **Lock Report:** `docs/reports/audit/CONTEXT_MENU_BASELINE_REPORT.md`
+- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline (Steps 0–13) and is now formally locked as a Foundation component.
+- **Lock Scope:** Public API, behavioral contract, token & styling contract, typing surface, composition constraints, interaction boundaries, and runtime guarantees are frozen.
+- **Unlock Policy:** Any changes require explicit UNLOCK request, new baseline (STEP 0), and full pipeline re-run (Steps 0–13).
 
 #### Toast
 - **Location:** `src/COMPOSITION/overlays/`
@@ -525,15 +522,19 @@ The following components constitute the **complete and final** Foundation layer.
 - **Base Library:** Native `<button>` element (semantic HTML)
 - **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
 - **Status:** ✅ **FINAL LOCK** — Immutable
-- **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-- **Lock Date:** 2025-12-15
-- **Final Lock Date:**  
+- **Lock Date:** 2025-12-21
+- **Pipeline 18A Completion Date:** 2025-12-21
 - **Lifecycle Version:** 1.0 (Steps 3-13)
-- **Lock Version:** 1.0
-- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS, ✅ Step 13 (Foundation Lock FINAL) — FINAL
-- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg, icon)
-- **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
-- **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
+- **Lock Version:** 1.1 (Post-Pipeline 18A)
+- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS, ✅ Step 13 (Foundation Lock FINAL) — FINAL, ✅ Pipeline 18A Steps 0-11 — COMPLETE
+- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg), iconOnly prop (canonical pattern for icon-only buttons)
+- **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+- **Audit Report:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+- **Pipeline 18A Changes:**
+  - Icon rendering deduplication (extracted ICON_WRAPPER_CLASS constant and renderIcon helper)
+  - Matrix and Accessibility stories added to Storybook
+  - Test coverage enhanced (asChild test fixed, type behavior documented)
+  - Public API change: Added `iconOnly` prop (canonical pattern), removed `size="icon"` from ButtonSize type (GlobalSize compliance)
 - **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
 
 #### Link
@@ -563,7 +564,7 @@ The following components were declared as LOCKED but were implemented using lega
 
 - **Modal** — ✅ **LOCKED** (2025-12-20) — Migration complete
 - **Tabs** — Unlocked 2025-12-19
-- **ContextMenu** — Unlocked 2025-12-19
+- **ContextMenu** — ✅ **LOCKED** (2025-12-22) — Migration complete
 - **Toast** — Unlocked 2025-12-19
 
 **Unlock Rationale:**
@@ -745,7 +746,7 @@ Foundation Components:
 - Modal (Radix Dialog wrapper) - ✅ LOCKED (2025-12-20)
 - Tabs (Radix Tabs wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
-- ContextMenu (Radix ContextMenu wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- ContextMenu (Radix ContextMenu wrapper) - ✅ LOCKED (2025-12-22)
 - Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Button (Native button element - FINAL LOCK) - ✅ LOCKED
 - Link (Native anchor element) - ✅ LOCKED
@@ -936,9 +937,9 @@ If Interactive Size Scale Authority modifications are needed:
 | Modal           | ✅ **LOCKED** | 2025-12-20 | Immutable    |
 | Tabs            | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
-| ContextMenu     | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| ContextMenu     | ✅ LOCKED | 2025-12-22 | Complete |
 | Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
-| Button          | ✅ FINAL LOCK |   | Immutable    |
+| Button          | ✅ FINAL LOCK | 2025-12-21 | Immutable    |
 | Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |
 
 ### Extension Layer Status
@@ -1770,12 +1771,25 @@ If Authority modifications are required in the future:
   - Updated Final Note to include Interactive Size Scale Authority
   - Completed formal lock process per TUNG_ARCH_LOCK: INTERACTIVE_SIZE_SCALE_CANONICALIZATION task
 
-- **v1.18** ( ): Button Component Foundation Lock (FINAL)
+- **v1.22** (2025-12-22): Button Lock Date Fixation (TUI_TUNG_FOUNDATION_LOCK_002)
+  - Fixed Button Lock Date consistency: Updated Lock Date in Button details section from 2025-12-15 to 2025-12-21 (matches table and ARCHITECTURE_LOCK.md)
+  - Removed redundant "Final Lock Date" field (Lock Date is the authoritative date)
+  - Verified status consistency: All Button references use "✅ FINAL LOCK" uniformly
+  - Updated Last Updated date to 2025-12-22
+- **v1.22** (2025-12-21): Button Component Foundation Lock (FINAL)
+  - Button officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
+  - Final Lock date: 2025-12-21
+  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+  - Audit report: `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+  - Button serves as reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with final lock date
+
+- **v1.18** (2025-12-21): Button Component Foundation Lock (FINAL) - Initial entry
   - Added Button component to Locked Foundation Components table
   - Added Button component details section
   - Documented Button as sole action trigger foundation
   - Button officially locked as Foundation primitive (STEP 3-13 complete)
-  - Final Lock date:  
   - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
   - Button serves as canonical Foundation reference implementation
   - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task

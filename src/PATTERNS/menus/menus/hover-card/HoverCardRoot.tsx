@@ -54,11 +54,13 @@ export interface HoverCardRootProps {
 
   /**
    * Default open state (uncontrolled mode)
+   * @default false
    */
   defaultOpen?: boolean;
 
   /**
    * Whether the hover card is modal (blocks interaction with other elements)
+   * @default false
    */
   modal?: boolean;
 
@@ -98,62 +100,60 @@ export function HoverCardRoot({
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : uncontrolledOpen;
 
+  // Helper to clear all pending timeouts
+  const clearAllTimeouts = React.useCallback(() => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Helper to update state (handles both controlled and uncontrolled modes)
+  const updateState = React.useCallback(
+    (newOpen: boolean) => {
+      if (!isControlled) {
+        setUncontrolledOpen(newOpen);
+      }
+      controlledOnOpenChange?.(newOpen);
+    },
+    [isControlled, controlledOnOpenChange],
+  );
+
   const handleOpenChange = React.useCallback(
     (newOpen: boolean) => {
-      // Clear any pending timeouts
-      if (openTimeoutRef.current) {
-        clearTimeout(openTimeoutRef.current);
-        openTimeoutRef.current = null;
-      }
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-        closeTimeoutRef.current = null;
-      }
+      clearAllTimeouts();
 
       if (newOpen) {
-        // Open with delay
+        // Open with delay if configured
         if (openDelayMs > 0) {
           openTimeoutRef.current = setTimeout(() => {
-            if (!isControlled) {
-              setUncontrolledOpen(true);
-            }
-            controlledOnOpenChange?.(true);
+            updateState(true);
           }, openDelayMs);
         } else {
-          if (!isControlled) {
-            setUncontrolledOpen(true);
-          }
-          controlledOnOpenChange?.(true);
+          updateState(true);
         }
       } else if (closeDelayMs > 0) {
-        // Close with delay
+        // Close with delay if configured
         closeTimeoutRef.current = setTimeout(() => {
-          if (!isControlled) {
-            setUncontrolledOpen(false);
-          }
-          controlledOnOpenChange?.(false);
+          updateState(false);
         }, closeDelayMs);
       } else {
-        if (!isControlled) {
-          setUncontrolledOpen(false);
-        }
-        controlledOnOpenChange?.(false);
+        updateState(false);
       }
     },
-    [openDelayMs, closeDelayMs, isControlled, controlledOnOpenChange],
+    [openDelayMs, closeDelayMs, clearAllTimeouts, updateState],
   );
 
   // Cleanup timeouts on unmount
   React.useEffect(() => {
     return () => {
-      if (openTimeoutRef.current) {
-        clearTimeout(openTimeoutRef.current);
-      }
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-      }
+      clearAllTimeouts();
     };
-  }, []);
+  }, [clearAllTimeouts]);
 
   const contextValue = React.useMemo<HoverCardContextValue>(
     () => ({

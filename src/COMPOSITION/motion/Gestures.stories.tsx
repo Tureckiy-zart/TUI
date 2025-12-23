@@ -81,7 +81,7 @@ export const SwipeToDismissToast: Story = {
           </div>
           <Button
             variant="ghost"
-            size="icon"
+            iconOnly
             onClick={() => setIsVisible(false)}
             aria-label="Dismiss toast"
           >
@@ -180,7 +180,7 @@ export const NotificationPanelSwipe: Story = {
               <h2 className="text-lg font-semibold">Notifications</h2>
               <Button
                 variant="ghost"
-                size="icon"
+                iconOnly
                 onClick={() => setIsOpen(false)}
                 aria-label="Close notifications"
               >

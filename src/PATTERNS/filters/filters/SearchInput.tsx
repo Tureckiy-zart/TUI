@@ -84,7 +84,7 @@ export function SearchInput({
         <Button
           type="button"
           variant="ghost"
-          size="icon"
+          iconOnly
           onClick={handleClear}
           aria-label="Clear search"
         >

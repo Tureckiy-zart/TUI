@@ -17,7 +17,15 @@ export interface HoverCardContentProps extends Omit<
   React.ComponentPropsWithoutRef<typeof PopoverContent>,
   "onMouseEnter" | "onMouseLeave"
 > {
+  /**
+   * Mouse enter handler
+   * Called when mouse enters the content area (keeps hover card open)
+   */
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
+  /**
+   * Mouse leave handler
+   * Called when mouse leaves the content area (closes hover card)
+   */
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -28,18 +36,18 @@ export const HoverCardContent = React.forwardRef<HTMLDivElement, HoverCardConten
   ({ onMouseEnter, onMouseLeave, ...props }, ref) => {
     const { onOpenChange } = useHoverCardContext();
 
+    // Keep open when hovering over content
     const handleMouseEnter = React.useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
-        // Keep open when hovering over content
         onOpenChange(true);
         onMouseEnter?.(event);
       },
       [onOpenChange, onMouseEnter],
     );
 
+    // Close when leaving content
     const handleMouseLeave = React.useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
-        // Close when leaving content
         onOpenChange(false);
         onMouseLeave?.(event);
       },
@@ -51,7 +59,6 @@ export const HoverCardContent = React.forwardRef<HTMLDivElement, HoverCardConten
         ref={ref}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        role="tooltip"
         {...props}
       />
     );

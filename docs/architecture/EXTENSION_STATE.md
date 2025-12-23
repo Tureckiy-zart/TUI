@@ -356,18 +356,36 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 ### Menu Components
 
-33. **Popover** - `src/components/menus/popover/`
-    - Exports: `PopoverArrow`, `PopoverContent`, `PopoverRoot`, `PopoverTrigger`
-    - Types: `PopoverArrowProps`, `PopoverContentProps`, `PopoverRootProps`, `PopoverTriggerProps`
-    - Variants: `popoverContentVariants`
+33. **Popover** - `src/COMPOSITION/overlays/Popover.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-21)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Lock Report:** `docs/architecture/locks/TOOLTIP_POPOVER_LOCK.md`
+    - **Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+    - **Public API:** Internal-only (not exported from `src/index.ts`)
+    - Exports: `Popover`, `PopoverTrigger`, `PopoverAnchor`, `PopoverContent`, `PopoverWrapper`, `popoverContentVariants`
+    - Types: `PopoverProps`, `PopoverVariant`, `PopoverSize`
 
 34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C,  )
     - All Dropdown components and tokens fully removed
     - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 
-35. **HoverCard** - `src/components/menus/hover-card/`
+35. **HoverCard** - `src/PATTERNS/menus/menus/hover-card/`
+    - **Status:** ✅ **LOCKED** (2025-12-21)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Lock Report:** `docs/architecture/locks/TOOLTIP_POPOVER_LOCK.md`
+    - **Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+    - **Public API:** ✅ Public (exported from `src/index.ts`)
     - Exports: `HoverCardContent`, `HoverCardRoot`, `HoverCardTrigger`
     - Types: `HoverCardContentProps`, `HoverCardRootProps`, `HoverCardTriggerProps`
+
+36. **Tooltip** - `src/COMPOSITION/overlays/Tooltip.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-21)
+    - **Rule:** DO NOT modify, extend, or create alternatives
+    - **Lock Report:** `docs/architecture/locks/TOOLTIP_POPOVER_LOCK.md`
+    - **Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+    - **Public API:** Internal-only (not exported from `src/index.ts`)
+    - Exports: `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`, `TooltipWrapper`, `tooltipContentVariants`
+    - Types: `TooltipProps`, `TooltipVariant`
 
 ### Data Display Components
 
@@ -507,12 +525,14 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 ### DO NOT USE - Overlay Components (Non-Canonical Variants)
 
 16. **Popover** (overlays variant) - `src/components/overlays/Popover.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE - Use `Popover` from `src/components/menus/popover/` instead
+    - **Status:** RESTRICTED (Legacy path)
+    - **Note:** Popover is now locked at `src/COMPOSITION/overlays/Popover.tsx` (see Menu Components section)
+    - **Rule:** DO NOT USE - Use `Popover` from `src/COMPOSITION/overlays/Popover.tsx` (LOCKED) instead
 
 17. **Tooltip** (overlays variant) - `src/components/overlays/Tooltip.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+    - **Status:** RESTRICTED (Legacy path)
+    - **Note:** Tooltip is now locked at `src/COMPOSITION/overlays/Tooltip.tsx` (see Menu Components section)
+    - **Rule:** DO NOT USE - Use Tooltip from `src/COMPOSITION/overlays/Tooltip.tsx` (LOCKED) instead
 
 18. **OverlayPortal** - `src/components/overlays/OverlayPortal.tsx`
     - **Status:** RESTRICTED

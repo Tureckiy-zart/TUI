@@ -10,7 +10,9 @@
 
 This checklist ensures all Extension components comply with architectural rules, Authority Contracts, and project standards. **All items must be verified before a component is considered complete.**
 
-**Reference:** This checklist is based on the component lifecycle protocol. See [EXTENSION_AUTHORITY.md](../../architecture/EXTENSION_AUTHORITY.md) for Extension Authority Contract and [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) for all Authority Contracts.
+> **Note:** For refactoring existing components, use the [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) instead of this checklist. This checklist is for creating new components only.
+
+**Reference:** This checklist is based on the component lifecycle protocol for creating new components. For refactoring existing components, use the [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) instead. See [EXTENSION_AUTHORITY.md](../../architecture/EXTENSION_AUTHORITY.md) for Extension Authority Contract and [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) for all Authority Contracts.
 
 ---
 
@@ -46,6 +48,13 @@ This checklist ensures all Extension components comply with architectural rules,
   - [ ] Reviewed similar components in same category
   - [ ] Verified naming conventions
   - [ ] Confirmed directory structure
+
+- [ ] **Size and Variant Declaration (if applicable)**
+  - [ ] Component declares supported sizes from global scale: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+  - [ ] Component declares supported variants from global dictionary
+  - [ ] No invented size or variant names (must use global canonical dictionary)
+  - [ ] Reference: [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) for global size scale and variant dictionary
+  - [ ] **For components with `size` prop:** Size mapping table documented (see SIZE_MAPPING_SPEC requirements)
 
 ### Naming Verification
 
@@ -252,9 +261,33 @@ pnpm run component:generate -- CustomCard --category composite --output src/cust
 
 - [ ] **Storybook story complete**
   - [ ] Default story included
-  - [ ] Variant stories included
+  - [ ] Variant stories included (if component has variants)
   - [ ] Token usage examples included
   - [ ] Use case examples included
+
+- [ ] **Matrix Story (if applicable)**
+  - [ ] **REQUIRED** only if component supports **BOTH** `size` AND `variant` props
+  - [ ] Story named exactly `Matrix` (canonical name)
+  - [ ] Displays all variants × all sizes in grid layout
+  - [ ] Reference: [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) for Matrix story requirements
+
+- [ ] **States Story (if applicable)**
+  - [ ] **REQUIRED** only if component has public state props (disabled, loading, error, etc.)
+  - [ ] Story named exactly `States` (canonical name)
+  - [ ] Displays all variants, sizes, and canonical states
+  - [ ] Reference: [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) for States story requirements
+
+- [ ] **Sizes Gallery (if applicable)**
+  - [ ] **REQUIRED** if component exposes a public `size` prop
+  - [ ] Story named exactly `SizesGallery` (canonical name)
+  - [ ] Demonstrates all supported sizes with text content, icon content (if applicable), and multi-line content (if applicable)
+  - [ ] Reference: [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) for Sizes Gallery requirements
+
+- [ ] **Long Content Story (if overlay component)**
+  - [ ] **REQUIRED** for Overlay components (Tooltip, Popover, etc.), regardless of whether `size` exists
+  - [ ] Story named exactly `LongContent` (canonical name)
+  - [ ] Validates padding and maxWidth token behavior with long text content
+  - [ ] Reference: [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) for Long Content requirements
 
 ### Tests
 
@@ -268,6 +301,12 @@ pnpm run component:generate -- CustomCard --category composite --output src/cust
   - [ ] Token-based props tested
   - [ ] Foundation composition tested (if applicable)
   - [ ] Edge cases covered
+  - [ ] Public behavior tested (all public props and their interactions)
+  - [ ] **Accessibility tests** (if interactive component):
+    - [ ] ARIA roles and attributes tested
+    - [ ] Keyboard navigation tested
+    - [ ] Focus management tested
+    - [ ] Screen reader behavior tested (if applicable)
 
 ### Exports
 
@@ -324,6 +363,9 @@ pnpm run component:generate -- CustomCard --category composite --output src/cust
 - [Extension Canonical State](../../architecture/EXTENSION_STATE.md)
 - [Component Needs Inventory](./COMPONENT_NEEDS_INVENTORY.md)
 - [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md)
+- [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) - **Canonical process for refactoring existing components**
+- [Variants & Size Canon Authority](../../architecture/VARIANTS_SIZE_CANON.md) - **Global size scale and variant naming dictionary** (MANDATORY for components with size/variant props)
+- [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) - **Size-to-token mapping contract** (MANDATORY for components with `size` prop)
 - Component Generator Script: `scripts/generate-extension-component.ts` (see Component Scaffold Generation section above)
 
 ---

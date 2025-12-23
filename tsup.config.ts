@@ -12,6 +12,7 @@ export default defineConfig({
     preset: "src/preset.ts",
     "tokens/index": "src/FOUNDATION/tokens/index.ts",
     "theme/index": "src/FOUNDATION/theme/index.ts",
+    "extensions/next/index": "src/EXTENSIONS/next/index.ts",
   },
   format: ["esm", "cjs"],
   dts: true,

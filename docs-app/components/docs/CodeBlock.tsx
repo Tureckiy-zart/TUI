@@ -41,7 +41,7 @@ export function CodeBlock({ children, language, className }: CodeBlockProps) {
       <div className="absolute right-2 top-2 z-10">
         <Button
           variant="ghost"
-          size="icon"
+          iconOnly
           onClick={handleCopy}
           className="h-8 w-8"
           aria-label="Copy code"
