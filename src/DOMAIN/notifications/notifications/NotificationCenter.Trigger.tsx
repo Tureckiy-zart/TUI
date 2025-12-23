@@ -44,7 +44,7 @@ export const NotificationCenterTrigger = React.forwardRef<
     <Button
       ref={ref}
       variant="ghost"
-      size="icon"
+      iconOnly
       onClick={onClick}
       aria-label={`Open notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
       {...props}

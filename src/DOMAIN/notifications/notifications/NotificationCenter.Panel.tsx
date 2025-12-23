@@ -228,12 +228,7 @@ export const NotificationCenterPanel = React.forwardRef<
               <h2 className="text-lg font-semibold">Notifications</h2>
               <div className="flex items-center gap-xs">
                 <NotificationCenterDismissAll />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onClose}
-                  aria-label="Close notifications"
-                >
+                <Button variant="ghost" iconOnly onClick={onClose} aria-label="Close notifications">
                   <X className="h-4 w-4" />
                 </Button>
               </div>

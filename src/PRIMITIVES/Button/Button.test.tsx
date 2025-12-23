@@ -79,14 +79,156 @@ describe("Button", () => {
         expect(button).toBeInTheDocument();
       });
 
-      it("accepts and renders icon size", () => {
+      it("accepts and renders icon-only button with iconOnly prop", () => {
         renderWithTheme(
-          <Button size="icon" aria-label="Icon button">
+          <Button iconOnly aria-label="Icon button">
             <span>🔍</span>
           </Button>,
         );
         const button = screen.getByRole("button", { name: /icon button/i });
         expect(button).toBeInTheDocument();
+      });
+
+      it("accepts and renders icon-only button with iconOnly and size", () => {
+        renderWithTheme(
+          <Button iconOnly size="sm" aria-label="Small icon button">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = screen.getByRole("button", { name: /small icon button/i });
+        expect(button).toBeInTheDocument();
+      });
+    });
+
+    describe("IconOnly", () => {
+      it("renders square button when iconOnly is true", () => {
+        const { container } = renderWithTheme(
+          <Button iconOnly size="md" aria-label="Icon button">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = container.querySelector("button");
+        expect(button).toBeInTheDocument();
+        // Icon-only buttons should have equal width and height (square)
+        // Verification via class names or dimensions would require more complex testing
+        // For now, we verify the button renders correctly
+      });
+
+      it("iconOnly works with all sizes", () => {
+        const { container: smContainer } = renderWithTheme(
+          <Button iconOnly size="sm" aria-label="Small icon">
+            <span>🔍</span>
+          </Button>,
+        );
+        const { container: mdContainer } = renderWithTheme(
+          <Button iconOnly size="md" aria-label="Medium icon">
+            <span>🔍</span>
+          </Button>,
+        );
+        const { container: lgContainer } = renderWithTheme(
+          <Button iconOnly size="lg" aria-label="Large icon">
+            <span>🔍</span>
+          </Button>,
+        );
+
+        expect(smContainer.querySelector("button")).toBeInTheDocument();
+        expect(mdContainer.querySelector("button")).toBeInTheDocument();
+        expect(lgContainer.querySelector("button")).toBeInTheDocument();
+      });
+
+      it("iconOnly works with all variants", () => {
+        const variants: Array<
+          "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
+        > = ["primary", "secondary", "accent", "outline", "ghost", "destructive"];
+
+        variants.forEach((variant) => {
+          const { container } = renderWithTheme(
+            <Button iconOnly variant={variant} aria-label={`${variant} icon`}>
+              <span>🔍</span>
+            </Button>,
+          );
+          expect(container.querySelector("button")).toBeInTheDocument();
+        });
+      });
+
+      it("iconOnly button maintains disabled behavior", () => {
+        const handleClick = vi.fn();
+        renderWithTheme(
+          <Button iconOnly disabled onClick={handleClick} aria-label="Disabled icon">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = screen.getByRole("button", { name: /disabled icon/i });
+        expect(button).toBeDisabled();
+        button.click();
+        expect(handleClick).not.toHaveBeenCalled();
+      });
+
+      it("iconOnly button maintains keyboard activation", async () => {
+        const user = userEventSetup();
+        const handleClick = vi.fn();
+        renderWithTheme(
+          <Button iconOnly onClick={handleClick} aria-label="Icon button">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = screen.getByRole("button", { name: /icon button/i });
+        button.focus();
+        await user.keyboard("{Enter}");
+        expect(handleClick).toHaveBeenCalledTimes(1);
+      });
+
+      it("iconOnly renders icon node from children", () => {
+        renderWithTheme(
+          <Button iconOnly aria-label="Search">
+            <span data-testid="icon-content">🔍</span>
+          </Button>,
+        );
+        const iconContent = screen.getByTestId("icon-content");
+        expect(iconContent).toBeInTheDocument();
+        const button = screen.getByRole("button", { name: /search/i });
+        expect(button).toContainElement(iconContent);
+      });
+
+      it("iconOnly prioritizes children over leftIcon/rightIcon", () => {
+        renderWithTheme(
+          <Button
+            iconOnly
+            aria-label="Search"
+            leftIcon={<span data-testid="left-icon">←</span>}
+            rightIcon={<span data-testid="right-icon">→</span>}
+          >
+            <span data-testid="children-icon">🔍</span>
+          </Button>,
+        );
+        // Children should render, leftIcon/rightIcon should not
+        expect(screen.getByTestId("children-icon")).toBeInTheDocument();
+        expect(screen.queryByTestId("left-icon")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("right-icon")).not.toBeInTheDocument();
+      });
+
+      it("iconOnly preserves variant styling (primary variant)", () => {
+        const { container } = renderWithTheme(
+          <Button iconOnly variant="primary" aria-label="Primary icon">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = container.querySelector("button");
+        // Verify button has primary variant classes (at least one stable token class)
+        // Using bg-primary as a stable token class that should be present
+        expect(button).toHaveClass("bg-[hsl(var(--button-primary-base-bg))]");
+      });
+
+      it("iconOnly preserves variant styling (outline variant)", () => {
+        const { container } = renderWithTheme(
+          <Button iconOnly variant="outline" aria-label="Outline icon">
+            <span>🔍</span>
+          </Button>,
+        );
+        const button = container.querySelector("button");
+        // Verify button has outline variant classes
+        expect(button).toHaveClass("border");
+        expect(button).toHaveClass("border-input");
       });
     });
 
@@ -228,7 +370,7 @@ describe("Button", () => {
 
     it("passes axe accessibility checks with aria-label", async () => {
       const { container } = renderWithTheme(
-        <Button aria-label="Icon button" size="icon">
+        <Button aria-label="Icon button" iconOnly>
           <span>🔍</span>
         </Button>,
       );

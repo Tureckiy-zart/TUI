@@ -207,22 +207,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     console.error("[Theme] Failed to get merged tokens:", error);
     return; // Cannot proceed without tokens
   }
-  // #region agent log
-  const secondary800 = tokens.secondaryColors[800];
-  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "applyMode.ts:188",
-      message: "tokens retrieved",
-      data: { hasTokens: !!tokens, secondary800, hasSecondary800: !!secondary800 },
-      timestamp: Date.now(),
-      sessionId: "debug-session",
-      runId: "run1",
-      hypothesisId: "B",
-    }),
-  }).catch(() => {});
-  // #endregion
 
   const {
     primaryColors,
@@ -476,39 +460,9 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
  * @param storageKey - localStorage key for mode persistence
  */
 export function initThemeSync(defaultMode: Mode = "day", storageKey: string = "tm_mode"): void {
-  // #region agent log
-  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "applyMode.ts:366",
-      message: "initThemeSync entry",
-      data: { defaultMode, storageKey, hasDocument: typeof document !== "undefined" },
-      timestamp: Date.now(),
-      sessionId: "debug-session",
-      runId: "run1",
-      hypothesisId: "A",
-    }),
-  }).catch(() => {});
-  // #endregion
   if (typeof document === "undefined") return;
 
   const root = document.documentElement;
-  // #region agent log
-  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "applyMode.ts:372",
-      message: "initThemeSync root check",
-      data: { hasRoot: !!root, rootTagName: root?.tagName },
-      timestamp: Date.now(),
-      sessionId: "debug-session",
-      runId: "run1",
-      hypothesisId: "A",
-    }),
-  }).catch(() => {});
-  // #endregion
 
   // Determine mode synchronously (DOM attribute → localStorage → default)
   // Note: System preference check omitted for sync execution (handled later by ThemeProvider)
@@ -548,41 +502,11 @@ export function initThemeSync(defaultMode: Mode = "day", storageKey: string = "t
 
   // Apply CSS variables synchronously (no theme override for sync init)
   // ThemeProvider will apply overrides later if needed
-  // #region agent log
-  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "applyMode.ts:412",
-      message: "before updateCSSVariablesFromTokens",
-      data: { mode },
-      timestamp: Date.now(),
-      sessionId: "debug-session",
-      runId: "run1",
-      hypothesisId: "B",
-    }),
-  }).catch(() => {});
-  // #endregion
+
   updateCSSVariablesFromTokens(mode);
 
   // Update state matrix CSS variables (synchronous - must be called after color variables)
   updateStateMatrixFromTokens(mode);
-  // #region agent log
-  const afterUpdateVar = root.style.getPropertyValue("--tm-primary");
-  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "applyMode.ts:414",
-      message: "after updateCSSVariablesFromTokens",
-      data: { tmPrimary: afterUpdateVar, hasValue: !!afterUpdateVar },
-      timestamp: Date.now(),
-      sessionId: "debug-session",
-      runId: "run1",
-      hypothesisId: "B",
-    }),
-  }).catch(() => {});
-  // #endregion
 
   // Set body styles
   const tokens = getMergedTokens(mode);

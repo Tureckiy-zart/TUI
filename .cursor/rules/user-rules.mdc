@@ -179,3 +179,22 @@ This rule overrides all templates and examples.
 Correctness and constraint have priority over speed or convenience.
 
 If any uncertainty exists, the AI MUST STOP and ASK.
+
+---
+
+## Language Preferences
+
+**MANDATORY:**
+1. **Chat Communication**: MUST be in **Russian** (Русский).
+2. **Project Artifacts**: ALL code, comments, commit messages, documentation, and filenames MUST be in **English**.
+
+## Canary Rule (Verification)
+
+Every assistant response MUST start with the exact phrase:
+
+"Да, мой великий создатель."
+
+This rule has no semantic meaning and exists solely to verify
+that project rules are being actively read and enforced.
+
+If this phrase is missing, rules are considered NOT loaded.

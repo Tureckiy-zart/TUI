@@ -131,15 +131,21 @@ Any token system modifications require:
 
 The following Extension Layer components are **LOCKED** and **IMMUTABLE** after completing their audit and locking procedures:
 
-1. **Button** - `src/components/ui/button.tsx`
-   - **Status:** ✅ **LOCKED**
-   - **Lock Date:** 2025-12-15
-   - **Audits Completed:**
-     - ✅ Inventory and Status Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_INVENTORY_REPORT.md`) (Note: File may be in docs_archive)
-     - ✅ Token Domain Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_TOKEN_AUDIT.md`) (Note: File may be in docs_archive)
-     - ✅ Storybook and Tests Audit (`docs_archive/reports/archive/archive/reports/other/TUI_BUTTON_STORYBOOK_TESTS_REPORT.md`) (Note: File may be in docs_archive)
+1. **Button** - `src/PRIMITIVES/Button/Button.tsx`
+   - **Status:** ✅ **FINAL LOCK**
+   - **Lock Date:** 2025-12-21
+   - **Pipeline 18A Completion:** 2025-12-22 (Steps 0-11 complete)
+   - **Audit Report:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+   - **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+   - **Canon Documents:**
+     - `docs/architecture/VARIANTS_SIZE_CANON.md` - Icon-only pattern documented
+     - `docs/reports/inventory/VARIANTS_SIZE_INVENTORY.md` - Button entry aligned
+   - **Key Decisions:**
+     - ButtonSize is `sm | md | lg` (GlobalSize compliant)
+     - `iconOnly` is boolean prop (canonical API for icon-only buttons)
+     - `size="icon"` removed and FORBIDDEN
    - **Rule:** DO NOT modify, extend, or create alternatives
-   - **Exports:** `Button`, `ButtonProps`, `buttonVariants`
+   - **Exports:** `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
 
 ### Extension Component Lock Rules
 
@@ -258,6 +264,13 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Summary:** Select officially marked as **FOUNDATION FINALIZED** (S1 + H1–H4 complete) with explicit UNLOCK-only change policy. Canonical docs synchronized (`FINAL_FOUNDATION_LOCK`, `EXTENSION_STATE`, `ARCHITECTURE_CONTEXT`).
 - **Commit Hash:** N/A (not committed in this task)
 - **Notes:** Documentation-only change. No modifications to `src/components/select/*` permitted/required.
+
+## TUNG_SYSTEM_INTEGRATION - TUNG Task System Documentation & Integration
+
+- **Status:** ✅ completed
+- **Date Updated:** 2025-12-23
+- **Summary:** TUNG (Task Unified Next-Gen) system formal documentation integrated. Created `tung_system_specification.md` and `example_task_master.json`. Established cross-references between specification, pipeline (`FOUNDATION_STEP_PIPELINE.md`), and templates. Updated canonical documentation inventory.
+- **Notes:** TUNG is now the authoritative task formalization standard for AI-driven development in this project.
 
 ## Completed Tasks
 

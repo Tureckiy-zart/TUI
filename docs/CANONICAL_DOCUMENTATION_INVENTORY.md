@@ -1,8 +1,8 @@
 # Canonical Documentation Inventory
 
-**Date:** 2025-12-19  
+**Date:** 2025-12-23
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 44  
+**Total Canonical Documents:** 48  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
 
 ---
@@ -20,7 +20,7 @@ This document provides a complete and authoritative inventory of all canonical d
 
 ### Total Count
 
-**44 canonical documents** are currently present in `docs/`.
+**48 canonical documents** are currently present in `docs/`.
 
 ### Post-Archive State
 
@@ -142,6 +142,21 @@ These documents support controlled library growth and component development proc
 
 ---
 
+### TUNG Task System
+
+These documents define the TUNG (Task Unified Next-Gen) automation and task management system.
+
+| Path | Description | Status |
+|------|-------------|--------|
+| `docs/workflows/tung_system_specification.md` | TUNG system specification and rules | **ACTIVE** |
+| `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | Canonical TUNG template for Foundation pipeline | **ACTIVE** |
+| `docs/workflows/example_task_master.json` | Example master task in TUNG format | **ACTIVE** |
+| `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` | Component Review & Improvement Pipeline (Step-by-step) | **ACTIVE** |
+
+**Total:** 4 files
+
+---
+
 ### Reference Documentation
 
 These documents provide API and integration references.
@@ -239,8 +254,12 @@ These documents provide API and integration references.
 | `docs/CI_CD_OVERVIEW.md` | CI/CD | Reference (ACTIVE) | CI/CD overview |
 | `docs/README.md` | Entry Point | Reference (ACTIVE) | Documentation index |
 | `docs/README_GPT.md` | Entry Point | Reference (ACTIVE) | GPT context |
+| `docs/workflows/tung_system_specification.md` | TUNG System | Reference (ACTIVE) | System specification |
+| `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | TUNG System | Reference (ACTIVE) | JSON Step Template |
+| `docs/workflows/example_task_master.json` | TUNG System | Reference (ACTIVE) | Master Task Example |
+| `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` | Workflow | Reference (ACTIVE) | Step-by-step pipeline |
 
-**Total:** 44 files
+**Total:** 48 files
 
 ---
 
@@ -251,8 +270,8 @@ These documents provide API and integration references.
 
 ### Verification
 
-- ✅ All 44 files from `docs/` are listed
-- ✅ File count matches actual `docs/` count (44 files)
+- ✅ All 48 files from `docs/` are listed
+- ✅ File count matches actual `docs/` count (48 files)
 - ✅ Categories are clear and non-overlapping
 - ✅ No references to archived content
 - ✅ All files are canonical, authoritative, or active documentation
@@ -266,6 +285,6 @@ These documents provide API and integration references.
 
 ---
 
-**Last Updated:** 2025-12-19  
-**Inventory Version:** 1.1  
-**Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06
+**Last Updated:** 2025-12-23  
+**Inventory Version:** 1.2  
+**Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06, TUNG_SYSTEM_INTEGRATION

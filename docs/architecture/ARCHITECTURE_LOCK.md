@@ -623,15 +623,17 @@ Before considering the architecture lock complete, verify:
 
 | Component   | Status    | Locked Date | Notes                                                    |
 | ----------- | --------- | ----------- | -------------------------------------------------------- |
-| Modal       | ✅ LOCKED | 2025-12-12  | Radix Dialog wrapper. Sole modal foundation.             |
-| Tabs        | ✅ LOCKED | 2025-12-12  | Radix Tabs wrapper. Sole tabs foundation.                |
-| Select      | ✅ LOCKED | 2025-12-12  | Radix Select wrapper. Sole select foundation.            |
-| ContextMenu | ✅ LOCKED | 2025-12-12  | Radix ContextMenu wrapper. Sole context menu foundation. |
-| Toast       | ✅ LOCKED | 2025-12-12  | Radix Toast wrapper. Sole toast foundation.              |
+| Modal       | ✅ LOCKED | 2025-12-20  | Radix Dialog wrapper. Sole modal foundation.             |
+| Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix Tabs wrapper. Sole tabs foundation.                |
+| Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Radix Select wrapper. Sole select foundation.            |
+| ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix ContextMenu wrapper. Sole context menu foundation. |
+| Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix Toast wrapper. Sole toast foundation.              |
 
 **Foundation Layer Status:** ✅ **LOCKED**  
 **Lock Date:** 2025-12-12  
 **Next Review:** Never (foundation is immutable)
+
+**Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md.
 
 ### Locked Public Components Index (Cross-layer)
 

@@ -94,7 +94,8 @@
   },
   "peerDependencies": {
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react-dom": "^18 || ^19",
+    "next": "^13.0.0 || ^14.0.0 || ^15.0.0"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
@@ -185,7 +186,8 @@
     "typescript-eslint": "^8.47.0",
     "vite": "^5.0.0",
     "vitest": "^4.0.15",
-    "vitest-axe": "^0.1.0"
+    "vitest-axe": "^0.1.0",
+    "next": "^15.1.0"
   },
   "exports": {
     ".": {
@@ -208,6 +210,11 @@
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.mjs",
       "require": "./dist/theme/index.cjs"
+    },
+    "./extensions/next": {
+      "types": "./dist/extensions/next/index.d.ts",
+      "import": "./dist/extensions/next/index.mjs",
+      "require": "./dist/extensions/next/index.cjs"
     }
   }
 }

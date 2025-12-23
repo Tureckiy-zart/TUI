@@ -62,7 +62,7 @@ export const NotificationCenterGroupHeader = React.forwardRef<
         {collapsible && onToggleCollapse && (
           <Button
             variant="ghost"
-            size="icon"
+            iconOnly
             onClick={onToggleCollapse}
             aria-label={collapsed ? "Expand group" : "Collapse group"}
             aria-expanded={!collapsed}

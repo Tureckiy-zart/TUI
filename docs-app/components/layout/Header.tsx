@@ -12,7 +12,7 @@ function ThemeSwitch() {
   return (
     <Button
       variant="ghost"
-      size="icon"
+      iconOnly
       onClick={toggleMode}
       aria-label={`Switch to ${mode === "night" ? "day" : "night"} mode`}
     >

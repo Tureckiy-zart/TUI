@@ -92,7 +92,7 @@ import { BUTTON_TOKENS } from "@/FOUNDATION/tokens/components/button";
  *
  * Type-level enforcement:
  * - Variant values are restricted to: "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
- * - Size values are restricted to: "sm" | "md" | "lg" | "icon"
+ * - Size values are restricted to: "sm" | "md" | "lg" (GlobalSize compliant)
  * - TypeScript will error if invalid variant/size values are passed
  * - tokenCVA validates token usage in development mode (warns on forbidden patterns)
  * - No arbitrary color classes can be passed via className prop (enforced by tokenCVA validation)
@@ -116,8 +116,41 @@ const buttonVariants = tokenCVA({
     size: {
       sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.padding.vertical.sm} ${BUTTON_TOKENS.fontSize.sm} ${BUTTON_TOKENS.gap.sm} ${BUTTON_TOKENS.iconSize.sm}`,
       md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.md} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.md} ${BUTTON_TOKENS.gap.md} ${BUTTON_TOKENS.iconSize.md}`,
-      lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.padding.vertical.md} ${BUTTON_TOKENS.fontSize.lg} ${BUTTON_TOKENS.gap.lg} ${BUTTON_TOKENS.iconSize.lg}`,
-      icon: `${BUTTON_TOKENS.height.icon} ${BUTTON_TOKENS.width.icon} ${BUTTON_TOKENS.iconSize.icon}`,
+      lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.padding.vertical.lg} ${BUTTON_TOKENS.fontSize.lg} ${BUTTON_TOKENS.gap.lg} ${BUTTON_TOKENS.iconSize.lg}`,
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "md",
+  },
+});
+
+/**
+ * Button Icon-Only CVA Variants
+ *
+ * Dedicated tokenCVA path for icon-only buttons (square buttons with equal width and height).
+ * Uses same variant axis as normal buttons but different size axis (square dimensions, no padding, no fontSize).
+ *
+ * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
+ * @rule iconOnly variants use same variant colors/states as normal buttons
+ * @rule iconOnly size axis uses square dimensions (width = height) and zero padding
+ * @rule NO string manipulation - all classes come from tokenCVA output
+ */
+const buttonIconOnlyVariants = tokenCVA({
+  base: `inline-flex items-center justify-center ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.transition.colors} ${BUTTON_TOKENS.state.focus.outline} ${BUTTON_TOKENS.state.focus.ring} ${BUTTON_TOKENS.state.disabled.cursor} ${BUTTON_TOKENS.state.disabled.pointerEvents} [&_svg]:pointer-events-none [&_svg]:shrink-0`,
+  variants: {
+    variant: {
+      primary: `${BUTTON_TOKENS.variant.primary.background} ${BUTTON_TOKENS.variant.primary.text} ${BUTTON_TOKENS.shadow.primary} ${BUTTON_TOKENS.variant.primary.hover} ${BUTTON_TOKENS.variant.primary.active} ${BUTTON_TOKENS.variant.primary.focus} ${BUTTON_TOKENS.variant.primary.disabled.background} ${BUTTON_TOKENS.variant.primary.disabled.text}`,
+      secondary: `${BUTTON_TOKENS.variant.secondary.background} ${BUTTON_TOKENS.variant.secondary.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.secondary.hover} ${BUTTON_TOKENS.variant.secondary.active} ${BUTTON_TOKENS.variant.secondary.disabled.background} ${BUTTON_TOKENS.variant.secondary.disabled.text}`,
+      accent: `${BUTTON_TOKENS.variant.accent.background} ${BUTTON_TOKENS.variant.accent.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.accent.hover} ${BUTTON_TOKENS.variant.accent.active} ${BUTTON_TOKENS.variant.accent.disabled.background} ${BUTTON_TOKENS.variant.accent.disabled.text}`,
+      outline: `${BUTTON_TOKENS.variant.outline.border} ${BUTTON_TOKENS.variant.outline.background} ${BUTTON_TOKENS.variant.outline.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.outline.hover.background} ${BUTTON_TOKENS.variant.outline.hover.text} ${BUTTON_TOKENS.variant.outline.hover.border} ${BUTTON_TOKENS.variant.outline.active.background} ${BUTTON_TOKENS.variant.outline.active.text} ${BUTTON_TOKENS.variant.outline.active.border} ${BUTTON_TOKENS.variant.outline.disabled.background} ${BUTTON_TOKENS.variant.outline.disabled.text} ${BUTTON_TOKENS.variant.outline.disabled.border}`,
+      ghost: `${BUTTON_TOKENS.variant.ghost.background} ${BUTTON_TOKENS.variant.ghost.text} ${BUTTON_TOKENS.variant.ghost.hover.background} ${BUTTON_TOKENS.variant.ghost.hover.text} ${BUTTON_TOKENS.variant.ghost.active.background} ${BUTTON_TOKENS.variant.ghost.active.text} ${BUTTON_TOKENS.variant.ghost.disabled.background} ${BUTTON_TOKENS.variant.ghost.disabled.text}`,
+      destructive: `${BUTTON_TOKENS.variant.destructive.background} ${BUTTON_TOKENS.variant.destructive.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.destructive.hover} ${BUTTON_TOKENS.variant.destructive.active} ${BUTTON_TOKENS.variant.destructive.disabled.background} ${BUTTON_TOKENS.variant.destructive.disabled.text}`,
+    },
+    size: {
+      sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.width.sm} ${BUTTON_TOKENS.iconSize.sm} ${BUTTON_TOKENS.paddingIconOnly}`,
+      md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.width.md} ${BUTTON_TOKENS.iconSize.md} ${BUTTON_TOKENS.paddingIconOnly}`,
+      lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.width.lg} ${BUTTON_TOKENS.iconSize.lg} ${BUTTON_TOKENS.paddingIconOnly}`,
     },
   },
   defaultVariants: {
@@ -146,12 +179,16 @@ export type ButtonVariant =
 /**
  * Button Size Type
  *
- * Type-level enforcement: Only these size values are allowed.
+ * Type-level enforcement: Only GlobalSize values are allowed.
  * TypeScript will error if any other string is passed.
  *
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
+ * @enforcement VARIANTS_SIZE_CANON - Must use only GlobalSize values
+ *
+ * Canonical sizes: "sm" | "md" | "lg" (GlobalSize compliant)
+ * For icon-only buttons, use `iconOnly={true}` prop with any size.
  */
-export type ButtonSize = "sm" | "md" | "lg" | "icon";
+export type ButtonSize = "sm" | "md" | "lg";
 
 /**
  * Icon wrapper CSS classes
@@ -174,7 +211,8 @@ function renderIcon(icon: React.ReactNode): React.ReactElement | null {
  *
  * @enforcement TUNG_BUTTON_CVA_ENFORCEMENT
  * @rule variant prop is restricted to ButtonVariant union type
- * @rule size prop is restricted to ButtonSize union type
+ * @rule size prop is restricted to ButtonSize union type (GlobalSize values only: "sm" | "md" | "lg")
+ * @rule iconOnly prop creates square icon-only button using size for dimensions (canonical way to create icon buttons)
  * @rule className prop cannot override color classes (tokenCVA validation in dev mode)
  * @rule Button is fully token-based - no raw Tailwind colors allowed
  */
@@ -184,6 +222,19 @@ export interface ButtonProps extends Omit<
 > {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  /**
+   * Icon-only mode: Creates a square button (equal width and height) with icon-centered layout.
+   * When `iconOnly={true}`, the button uses the `size` prop to determine dimensions.
+   * This is the canonical way to create icon-only buttons (replaces deprecated `size="icon"`).
+   *
+   * @example
+   * ```tsx
+   * <Button iconOnly size="md" aria-label="Search">
+   *   <SearchIcon />
+   * </Button>
+   * ```
+   */
+  iconOnly?: boolean;
   asChild?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -214,11 +265,25 @@ export interface ButtonProps extends Omit<
  */
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
+  ({ variant, size, iconOnly, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
+    // iconOnly prop is the canonical way to create icon-only buttons
+    // size prop uses only GlobalSize values (sm, md, lg) - no legacy size="icon" support
+    const normalizedSize: "sm" | "md" | "lg" = size || "md";
+
     // Color logic is fully centralized in CVA - no color classes applied here
     // All colors come from BUTTON_TOKENS → tokens/colors.ts (Color Authority)
     // className and style are forbidden from public API - only CVA output is used
-    const finalClassName = buttonVariants({ variant, size });
+
+    // iconOnly: Square button (equal width and height) using size for dimensions
+    // Uses dedicated tokenCVA path (buttonIconOnlyVariants) - NO string manipulation
+    // All tokens come from BUTTON_TOKENS - no raw values
+    const finalClassName = iconOnly
+      ? buttonIconOnlyVariants({ variant, size: normalizedSize })
+      : buttonVariants({ variant, size: normalizedSize });
+
+    // iconOnly rendering: children-first resolution (children ?? leftIcon ?? rightIcon)
+    // This ensures icon passed as children (Storybook pattern) renders correctly
+    const iconNode = iconOnly ? (children ?? leftIcon ?? rightIcon) : null;
 
     // When asChild is true and icons are provided, we need to clone the child element
     // and add icons inside it, so Slot applies props to the correct element (the child, not a wrapper span)
@@ -263,6 +328,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <Slot className={finalClassName} ref={ref} {...props}>
           {children}
         </Slot>
+      );
+    }
+    // Regular button or iconOnly button
+    if (iconOnly) {
+      // iconOnly: Render icon node (children-first resolution) with icon wrapper
+      return (
+        <button className={finalClassName} ref={ref} {...props}>
+          {iconNode ? renderIcon(iconNode) : null}
+        </button>
       );
     }
     // Regular button with icons

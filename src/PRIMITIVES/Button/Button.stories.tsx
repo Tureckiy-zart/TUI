@@ -34,7 +34,7 @@ const meta: Meta<typeof Button> = {
     docs: {
       description: {
         component:
-          "Button component for user interactions. Supports 6 variants (primary, secondary, accent, outline, ghost, destructive) and 4 sizes (sm, md, lg, icon) with icon slot support.",
+          "Button component for user interactions. Supports 6 variants (primary, secondary, accent, outline, ghost, destructive), 3 sizes (sm, md, lg), and icon-only mode via iconOnly prop.",
       },
     },
   },
@@ -51,7 +51,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: { type: "select" },
-      options: ["sm", "md", "lg", "icon"],
+      options: ["sm", "md", "lg"],
       description: "Button size",
       table: {
         type: { summary: "string" },
@@ -119,20 +119,61 @@ export const Variants: Story = {
 };
 
 /**
- * Sizes Story
+ * SizesGallery Story
  *
  * Displays all Button sizes side-by-side for visual comparison.
- * All sizes use the same variant (primary) and content for fair comparison.
+ * Demonstrates text content, icon content, and multi-line content across all supported sizes.
+ * All sizes use the same variant (primary) for fair comparison.
  *
+ * @canonical VARIANTS_SIZE_CANON - SizesGallery story (REQUIRED for components with size prop)
  * @axis size
  * @values sm, md, lg
  */
-export const Sizes: Story = {
+export const SizesGallery: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-md">
-      <Button size="sm">Button</Button>
-      <Button size="md">Button</Button>
-      <Button size="lg">Button</Button>
+    <div className="space-y-lg">
+      <div>
+        <h3 className="mb-md text-sm font-medium">Text Content</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button size="sm">Button</Button>
+          <Button size="md">Button</Button>
+          <Button size="lg">Button</Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">With Icon</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button size="sm" leftIcon={<IconSearch />}>
+            Button
+          </Button>
+          <Button size="md" leftIcon={<IconSearch />}>
+            Button
+          </Button>
+          <Button size="lg" leftIcon={<IconSearch />}>
+            Button
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">Multi-line Content</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button size="sm">
+            Button
+            <br />
+            Text
+          </Button>
+          <Button size="md">
+            Button
+            <br />
+            Text
+          </Button>
+          <Button size="lg">
+            Button
+            <br />
+            Text
+          </Button>
+        </div>
+      </div>
     </div>
   ),
   parameters: {
@@ -140,7 +181,74 @@ export const Sizes: Story = {
     docs: {
       description: {
         story:
-          "All Button sizes displayed side-by-side for visual comparison. Same variant (primary) and content used for fair comparison.",
+          "Size demonstration gallery showing all supported sizes with text content, icon content, and multi-line content. Same variant (primary) used for fair comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * IconOnly Story
+ *
+ * Displays icon-only buttons across all supported sizes.
+ * Demonstrates the canonical way to create icon-only buttons using the iconOnly prop.
+ *
+ * @axis iconOnly × size
+ * @values iconOnly={true} with sizes sm, md, lg
+ */
+export const IconOnly: Story = {
+  render: () => (
+    <div className="space-y-lg">
+      <div>
+        <h3 className="mb-md text-sm font-medium">Icon-Only Buttons</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button iconOnly size="sm" aria-label="Search small">
+            <IconSearch />
+          </Button>
+          <Button iconOnly size="md" aria-label="Search medium">
+            <IconSearch />
+          </Button>
+          <Button iconOnly size="lg" aria-label="Search large">
+            <IconSearch />
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">Icon-Only with Variants</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button iconOnly variant="primary" aria-label="Primary icon button">
+            <IconSearch />
+          </Button>
+          <Button iconOnly variant="secondary" aria-label="Secondary icon button">
+            <IconSearch />
+          </Button>
+          <Button iconOnly variant="outline" aria-label="Outline icon button">
+            <IconSearch />
+          </Button>
+          <Button iconOnly variant="ghost" aria-label="Ghost icon button">
+            <IconSearch />
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">Icon-Only States</h3>
+        <div className="flex flex-wrap items-center gap-md">
+          <Button iconOnly aria-label="Default icon button">
+            <IconSearch />
+          </Button>
+          <Button iconOnly disabled aria-label="Disabled icon button">
+            <IconSearch />
+          </Button>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Icon-only button examples demonstrating the canonical iconOnly prop. Shows icon-only buttons across sizes, variants, and states. Icon-only buttons are square (equal width and height) and require aria-label for accessibility.",
       },
     },
   },
@@ -217,7 +325,7 @@ export const Matrix: Story = {
     const variants: Array<
       "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
     > = ["primary", "secondary", "accent", "outline", "ghost", "destructive"];
-    const sizes: Array<"sm" | "md" | "lg" | "icon"> = ["sm", "md", "lg", "icon"];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
 
     return (
       <div className="space-y-lg">
@@ -235,15 +343,9 @@ export const Matrix: Story = {
                 <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
                 {sizes.map((size) => (
                   <div key={`${variant}-${size}`} className="flex items-center justify-center">
-                    {size === "icon" ? (
-                      <Button variant={variant} size={size} aria-label={`${variant} icon button`}>
-                        <IconSearch />
-                      </Button>
-                    ) : (
-                      <Button variant={variant} size={size}>
-                        Button
-                      </Button>
-                    )}
+                    <Button variant={variant} size={size}>
+                      Button
+                    </Button>
                   </div>
                 ))}
               </React.Fragment>
@@ -268,20 +370,9 @@ export const Matrix: Story = {
                     key={`${variant}-${size}-disabled`}
                     className="flex items-center justify-center"
                   >
-                    {size === "icon" ? (
-                      <Button
-                        variant={variant}
-                        size={size}
-                        disabled
-                        aria-label={`${variant} icon button disabled`}
-                      >
-                        <IconSearch />
-                      </Button>
-                    ) : (
-                      <Button variant={variant} size={size} disabled>
-                        Button
-                      </Button>
-                    )}
+                    <Button variant={variant} size={size} disabled>
+                      Button
+                    </Button>
                   </div>
                 ))}
               </React.Fragment>
@@ -303,15 +394,9 @@ export const Matrix: Story = {
                 <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
                 {sizes.map((size) => (
                   <div key={`${variant}-${size}-left`} className="flex items-center justify-center">
-                    {size === "icon" ? (
-                      <Button variant={variant} size={size} aria-label={`${variant} icon button`}>
-                        <IconSearch />
-                      </Button>
-                    ) : (
-                      <Button variant={variant} size={size} leftIcon={<IconSearch />}>
-                        Button
-                      </Button>
-                    )}
+                    <Button variant={variant} size={size} leftIcon={<IconSearch />}>
+                      Button
+                    </Button>
                   </div>
                 ))}
               </React.Fragment>
@@ -336,15 +421,9 @@ export const Matrix: Story = {
                     key={`${variant}-${size}-right`}
                     className="flex items-center justify-center"
                   >
-                    {size === "icon" ? (
-                      <Button variant={variant} size={size} aria-label={`${variant} icon button`}>
-                        <IconSearch />
-                      </Button>
-                    ) : (
-                      <Button variant={variant} size={size} rightIcon={<IconArrowRight />}>
-                        Button
-                      </Button>
-                    )}
+                    <Button variant={variant} size={size} rightIcon={<IconArrowRight />}>
+                      Button
+                    </Button>
                   </div>
                 ))}
               </React.Fragment>
@@ -359,7 +438,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Comprehensive matrix displaying all variants x sizes combinations. Includes normal, disabled, icon-left, icon-right, and icon-only states for complete visual reference.",
+          "Comprehensive matrix displaying all variants × sizes combinations. Includes normal, disabled, icon-left, and icon-right states. For icon-only buttons, see the IconOnly story.",
       },
     },
   },
@@ -490,7 +569,7 @@ export const Accessibility: Story = {
         <div className="flex flex-wrap items-center gap-md">
           <Button>Button with text</Button>
           <Button aria-label="Close dialog">×</Button>
-          <Button size="icon" aria-label="Search">
+          <Button iconOnly aria-label="Search">
             <IconSearch />
           </Button>
           <Button leftIcon={<IconSearch />} aria-label="Search with icon">

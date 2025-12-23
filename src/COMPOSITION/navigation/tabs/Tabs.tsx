@@ -62,6 +62,48 @@ import type {
 } from "@/FOUNDATION/tokens/types";
 
 // ============================================================================
+// INTERNAL HELPERS
+// ============================================================================
+
+/**
+ * Resolves responsive size prop to base size token
+ */
+const resolveSize = (size: ResponsiveTabsSize | undefined): TabsSizeToken => {
+  return (getBaseValue(size) ?? "md") as TabsSizeToken;
+};
+
+/**
+ * Resolves variant prop to variant token with default
+ */
+const resolveVariant = (variant: TabsVariantToken | undefined): TabsVariantToken => {
+  return variant ?? "underline";
+};
+
+/**
+ * Resolves tone prop to tone token with default
+ */
+const resolveTone = (tone: TabsToneToken | undefined): TabsToneToken => {
+  return tone ?? "primary";
+};
+
+/**
+ * Renders icon wrapper with consistent styling
+ */
+const renderIconWrapper = (icon: React.ReactNode): React.ReactElement => {
+  return (
+    <span
+      className={cn(
+        TABS_TOKENS.trigger.icon.size,
+        TABS_TOKENS.trigger.icon.color,
+        TABS_TOKENS.trigger.icon.gap,
+      )}
+    >
+      {icon}
+    </span>
+  );
+};
+
+// ============================================================================
 // CVA VARIANTS
 // ============================================================================
 
@@ -225,16 +267,16 @@ export interface TabsListProps extends Omit<
 
 const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
   ({ className, size, variant, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-    const baseVariant = variant ?? "underline";
+    const resolvedSize = resolveSize(size);
+    const resolvedVariant = resolveVariant(variant);
 
     return (
       <TabsPrimitive.List
         ref={ref}
         className={cn(
           tabsListVariants({
-            size: baseSize as TabsSizeToken,
-            variant: baseVariant,
+            size: resolvedSize,
+            variant: resolvedVariant,
           }),
           className,
         )}
@@ -254,15 +296,15 @@ export interface TabsTriggerProps extends Omit<
   "size" | "variant" | "tone"
 > {
   /**
-   * Size variant - token-based (inherited from context if not provided)
+   * Size variant - token-based (defaults to "md" if not provided)
    */
   size?: ResponsiveTabsSize;
   /**
-   * Visual variant - token-based (inherited from context if not provided)
+   * Visual variant - token-based (defaults to "underline" if not provided)
    */
   variant?: TabsVariantToken;
   /**
-   * Tone - token-based (inherited from context if not provided)
+   * Tone - token-based (defaults to "primary" if not provided)
    */
   tone?: TabsToneToken;
   /**
@@ -284,9 +326,9 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     { className, size, variant, tone, leadingIcon, trailingIcon, icon, children, ...props },
     ref,
   ) => {
-    const baseSize = getBaseValue(size) ?? "md";
-    const baseVariant = variant ?? "underline";
-    const baseTone = tone ?? "primary";
+    const resolvedSize = resolveSize(size);
+    const resolvedVariant = resolveVariant(variant);
+    const resolvedTone = resolveTone(tone);
 
     // Use icon prop if provided, otherwise use leadingIcon
     const effectiveLeadingIcon = icon ?? leadingIcon;
@@ -296,37 +338,17 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         ref={ref}
         className={cn(
           tabsTriggerVariants({
-            size: baseSize as TabsSizeToken,
-            variant: baseVariant,
-            tone: baseTone,
+            size: resolvedSize,
+            variant: resolvedVariant,
+            tone: resolvedTone,
           }),
           className,
         )}
         {...props}
       >
-        {effectiveLeadingIcon && (
-          <span
-            className={cn(
-              TABS_TOKENS.trigger.icon.size,
-              TABS_TOKENS.trigger.icon.color,
-              TABS_TOKENS.trigger.icon.gap,
-            )}
-          >
-            {effectiveLeadingIcon}
-          </span>
-        )}
+        {effectiveLeadingIcon && renderIconWrapper(effectiveLeadingIcon)}
         {children}
-        {trailingIcon && (
-          <span
-            className={cn(
-              TABS_TOKENS.trigger.icon.size,
-              TABS_TOKENS.trigger.icon.color,
-              TABS_TOKENS.trigger.icon.gap,
-            )}
-          >
-            {trailingIcon}
-          </span>
-        )}
+        {trailingIcon && renderIconWrapper(trailingIcon)}
       </TabsPrimitive.Trigger>
     );
   },
@@ -349,14 +371,14 @@ export interface TabsContentProps extends Omit<
 
 const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ className, size, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
+    const resolvedSize = resolveSize(size);
 
     return (
       <TabsPrimitive.Content
         ref={ref}
         className={cn(
           tabsContentVariants({
-            size: baseSize as TabsSizeToken,
+            size: resolvedSize,
           }),
           className,
         )}

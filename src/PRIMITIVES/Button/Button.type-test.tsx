@@ -7,7 +7,7 @@
  * @see docs/architecture/FOUNDATION_CONTRACT.md
  */
 
-import type { ButtonProps } from "./Button";
+import type { ButtonProps, ButtonSize } from "./Button";
 
 // Test that className is not in ButtonProps
 type TestClassName = "className" extends keyof ButtonProps ? true : false;
@@ -33,3 +33,13 @@ void _testSize;
 type TestOnClick = "onClick" extends keyof ButtonProps ? true : false;
 const _testOnClick: TestOnClick = true; // Should pass
 void _testOnClick;
+
+type TestIconOnly = "iconOnly" extends keyof ButtonProps ? true : false;
+const _testIconOnly: TestIconOnly = true; // Should pass
+void _testIconOnly;
+
+// Type-level prevention: size="icon" should NOT be in ButtonSize type
+// This ensures GlobalSize compliance - only sm, md, lg allowed
+// @ts-expect-error — "icon" must not be in ButtonSize (violates GlobalSize requirement, use iconOnly prop instead)
+const _testIconSize: ButtonSize = "icon";
+void _testIconSize;
