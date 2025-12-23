@@ -68,7 +68,7 @@ Structural refactors are allowed **only** when explicitly declared,
 
 justified in the audit report, and re-validated against architectural constraints.
 
-PHASE C — PROVE & LOCK (STEP 9–12)
+PHASE C — PROVE & LOCK (STEP 10–12)
 
 Purpose: prove correctness, stability, and readiness for lock.
 
@@ -91,6 +91,8 @@ Tests and Storybook are built on top of refactored code, not used as a substitut
 **Canonical:** YES (single source of truth for the pipeline)
 
 > Note: **This pipeline document is not an audit report.** Audit reports are per-component files created in STEP 0 (e.g. `docs/reports/audit/BUTTON_BASELINE_REPORT.md`).
+> 
+> **Important:** This header applies only to the pipeline document; audit reports must not use 'canonical/locked/final' terminology until STEP 12.
 
 **Status:** ACTIVE (Refinement of existing process, not a replacement)
 
@@ -99,20 +101,16 @@ Tests and Storybook are built on top of refactored code, not used as a substitut
 **Purpose:** Consistent, repeatable improvement of component quality, architecture, and usability.
 
 > This document is intentionally verbose. It is written as a **process control document**, not a checklist.
-
 >
-
 > The goal is not speed, but **predictable, high‑quality outcomes**.
 
 ---
 
 ## 🔗 TUNG System
-Этот пайплай основан на системе **TUNG (Task Unified Next-Gen)**. 
-Полную спецификацию системы и шаблоны задач можно найти здесь:
+This pipeline is based on the **TUNG (Task Unified Next-Gen)** system.
+The full system specification and task templates can be found here:
 - 📄 [TUNG System Specification](../tung_system_specification.md)
 - 📄 [TUNG Step Template](templates/FOUNDATION_STEP_TUNG_TEMPLATE.json)
-
----
 
 ---
 
@@ -420,74 +418,41 @@ If a risky change happens unexpectedly, request the report immediately.
 
 ### **G. TUNG JSON skeleton (copy pattern)**
 
-💻 ```json
-
+💻
+```json
 {
-
- "meta": {
-
- "id": "TUI_<COMP>_STEP_<N>",
-
- "title": "<COMP>: STEP <N> — <Step Name>",
-
- "priority": "P0",
-
- "mode": "CODE|DOCS|CODE+DOCS",
-
- "scope": ["<COMP>"]
-
- },
-
- "axioms": [
-
- "No step reordering.",
-
- "No changes outside declared scope.",
-
- "Audit report STEP <N> must be updated."
-
- ],
-
- "inputs": {
-
- "files": ["<exact paths>"],
-
- "report": "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
-
- },
-
- "constraints": {
-
- "forbidden": ["<list>", "..."],
-
- "allowed": ["<list>", "..."]
-
- },
-
- "tasks": [
-
- {
-
- "name": "Observe → Decide → Change → Record",
-
- "steps": ["..."],
-
- "acceptance": ["..."]
-
- }
-
- ],
-
- "deliverables": [
-
- "<changed files>",
-
- "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
-
- ]
-
+  "meta": {
+    "id": "TUI_<COMP>_STEP_<N>",
+    "title": "<COMP>: STEP <N> — <Step Name>",
+    "priority": "P0",
+    "mode": "CODE|DOCS|CODE+DOCS",
+    "scope": ["<COMP>"]
+  },
+  "axioms": [
+    "No step reordering.",
+    "No changes outside declared scope.",
+    "Audit report STEP <N> must be updated."
+  ],
+  "inputs": {
+    "files": ["<exact paths>"],
+    "report": "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
+  },
+  "constraints": {
+    "forbidden": ["<list>", "..."],
+    "allowed": ["<list>", "..."]
+  },
+  "tasks": [
+    {
+      "name": "Observe → Decide → Change → Record",
+      "steps": ["..."],
+      "acceptance": ["..."]
+    }
+  ],
+  "deliverables": [
+    "<changed files>",
+    "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
+  ]
 }
-
 ```
 
 ---
@@ -748,47 +713,82 @@ Rules:
 
 ## 📸 **3. STEP 0 — Baseline Snapshot & Context Fixation**
 
-### **Goal**
+### Goal
 
-Establish a **factual baseline** of what exists **right now**.
+Establish a **factual baseline** of what exists **right now** and create a single, large, self-contained audit report that:
+1) captures the baseline (what exists now),
+2) captures the intended run plan (what we expect to do in STEP 1–12),
+3) prevents execution drift and rework loops.
 
 This step answers the question:
 
 > "What exactly are we dealing with before we start improving anything?"
 
-### **Required Actions**
+### Mandatory Output
 
-* Locate all files related to the component (implementation, tests, stories).
+Create/overwrite the audit report at the canonical path:
 
-* Identify:
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
 
- * component name(s) in use,
+### Required Sections in the Audit Report (all required)
 
- * export points,
+STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
- * directory placement,
+1) **Header / Metadata**
+   - Component name (exported name)
+   - Layer (Foundation / Extension)
+   - Date, operator, assistant
+   - Source files (exact paths)
 
- * layer (Foundation / Extension / Legacy‑like behavior).
+2) **Baseline Inventory (FACTS ONLY)**
+   - Implementation files
+   - Storybook files
+   - Test files
+   - Export points (barrels + root exports)
+   - External deps (Radix, etc.)
+   - Current public props (snapshot)
 
-* Create a **baseline snapshot file** that records:
+3) **Run Plan (STEP MAP) — REQUIRED**
+   A short plan for each step (STEP 1–12) including:
+   - What will be verified
+   - What is considered BLOCKING
+   - Whether code changes are allowed in that step
+   - Expected artifacts (report updates, tests, stories, docs)
 
- * file paths,
+   This is not "future work promises".
+   This is an execution map to prevent drift.
 
- * exports,
+4) **Risk Register (ANTI-DRIFT) — REQUIRED**
+   List the most likely failure modes for this component, e.g.:
+   - Cursor invents new variants/sizes
+   - Cursor renames/moves files
+   - Placeholder stories/tests
+   - API widening during structural steps
+   For each risk: prevention rule.
 
- * dependencies (e.g. Radix, custom logic),
+5) **Initial FIX Backlog (EMPTY STRUCTURE) — REQUIRED**
+   Create placeholders:
+   - `FIX-BLOCKERS (must fix)`
+   - `FIX-NONBLOCKERS (nice to fix)`
+   - `DEFERRED (explicitly not doing)`
+   Items are filled in STEP 1–8 and executed in STEP 9.
 
- * current public props.
+6) **DoD (Definition of Done) — REQUIRED**
+   The component is considered "closed" only when:
+   - STEP 0–12 sections exist and are filled
+   - STEP 10 tests + Storybook are not placeholder
+   - STEP 11 A11Y executed
+   - STEP 12 lock propagation completed and consistent
 
-### **Important Notes**
+### Constraints
 
-* This step **does not judge quality**.
+- STEP 0 MUST NOT change code.
+- STEP 0 MUST NOT rename or move files.
+- STEP 0 is BLOCKING if the report is missing any required section above.
+- This step **does not judge quality**.
+- This step prevents accidental refactoring of the wrong thing.
 
-* This step **does not change code**.
-
-* This step prevents accidental refactoring of the wrong thing.
-
-### **Example**
+### Example
 
 💡 If both `Tooltip.tsx` and `Popover.tsx` exist, this step must record that fact **before** any conclusions are made.
 
@@ -1238,7 +1238,7 @@ Formally conclude the pipeline and **lock the component status across all archit
 
 ### **Outcome**
 
-* Component accepted as canonical (and locked),
+* Component accepted and locked (Foundation Lock),
 
 * or explicitly marked for further iteration.
 
