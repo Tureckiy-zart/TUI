@@ -18,14 +18,12 @@
 export const INPUT_TOKENS = {
   /**
    * Input heights by size
-   * Supports xs, sm, md, lg, xl sizes
+   * Supports sm, md, lg sizes (canonical interactive size scale)
    */
   height: {
-    xs: "h-7", // 28px (1.75rem)
     sm: "h-8", // 32px (2rem)
     md: "h-9", // 36px (2.25rem) - default
     lg: "h-10", // 40px (2.5rem)
-    xl: "h-11", // 44px (2.75rem)
   } as const,
 
   /**
@@ -34,18 +32,14 @@ export const INPUT_TOKENS = {
    */
   padding: {
     horizontal: {
-      xs: "px-xs", // 4px (0.25rem)
       sm: "px-sm", // 8px (0.5rem)
       md: "px-sm", // 8px (0.5rem) - default
       lg: "px-md", // 16px (1rem)
-      xl: "px-lg", // 24px (1.5rem)
     },
     vertical: {
-      xs: "py-xs", // 4px (0.25rem)
       sm: "py-xs", // 4px (0.25rem)
       md: "py-xs", // 4px (0.25rem) - default
       lg: "py-sm", // 8px (0.5rem)
-      xl: "py-md", // 16px (1rem)
     },
   } as const,
 
@@ -53,11 +47,9 @@ export const INPUT_TOKENS = {
    * Border radius by size
    */
   radius: {
-    xs: "rounded-sm", // 4px (0.25rem)
     sm: "rounded-md", // 6px (0.375rem)
     md: "rounded-md", // 6px (0.375rem) - default
     lg: "rounded-md", // 6px (0.375rem)
-    xl: "rounded-lg", // 8px (0.5rem)
   } as const,
 
   /**
@@ -65,11 +57,9 @@ export const INPUT_TOKENS = {
    * Maps to foundation typography fontSize tokens
    */
   fontSize: {
-    xs: "text-xs", // Maps to fontSize.xs[0]
     sm: "text-sm", // Maps to fontSize.sm[0]
     md: "text-base", // Maps to fontSize.base[0] - default
     lg: "text-base", // Maps to fontSize.base[0]
-    xl: "text-lg", // Maps to fontSize.lg[0]
   } as const,
 
   /**
@@ -211,16 +201,6 @@ export const INPUT_TOKENS = {
    * Organized by size for easy access
    */
   size: {
-    xs: {
-      height: "h-7",
-      padding: {
-        horizontal: "px-xs",
-        vertical: "py-xs",
-      },
-      radius: "rounded-sm",
-      fontSize: "text-xs",
-      shadow: "shadow-sm",
-    },
     sm: {
       height: "h-8",
       padding: {
@@ -250,16 +230,6 @@ export const INPUT_TOKENS = {
       },
       radius: "rounded-md",
       fontSize: "text-base",
-      shadow: "shadow-sm",
-    },
-    xl: {
-      height: "h-11",
-      padding: {
-        horizontal: "px-lg",
-        vertical: "py-md",
-      },
-      radius: "rounded-lg",
-      fontSize: "text-lg",
       shadow: "shadow-sm",
     },
   } as const,

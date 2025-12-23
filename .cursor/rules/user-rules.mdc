@@ -103,6 +103,77 @@ This rule overrides all templates and examples.
 
 ---
 
+## Date and Time Rules
+
+### Date Format
+
+**ALWAYS** use ISO 8601 date format: `YYYY-MM-DD`
+
+- **Format**: Use current actual date (e.g., `2025-12-19`)
+- **Timezone**: Use system date/time (current actual date)
+- **Examples**: 
+  - ✅ `2025-12-19` (correct - current date)
+  - ❌ `2025-01-20` (wrong - old date)
+  - ❌ `2024-12-19` (wrong - old date)
+
+### Date Usage Rules
+
+**ALWAYS** follow these rules when working with dates:
+
+1. **When updating progress files:**
+   - Use **current actual date** from system
+   - **NEVER** use hardcoded dates from examples or old code
+   - **NEVER** copy dates from other files without checking
+
+2. **When creating reports:**
+   - Use **current actual date** for "Date Created" or "Last Updated"
+   - Format: `YYYY-MM-DD`
+
+3. **When updating documentation:**
+   - Update "Last Updated" field with **current actual date**
+   - Format: `YYYY-MM-DD`
+
+4. **When updating task status:**
+   - Use **current actual date** for completion dates
+   - Format: `YYYY-MM-DD`
+
+### How to Get Current Date
+
+**ALWAYS** get current date using one of these methods:
+
+1. **Terminal command**: `date +"%Y-%m-%d"` (returns current date in YYYY-MM-DD format)
+2. **System date**: Use actual current date, not dates from examples
+3. **Verify**: If unsure, run `date +"%Y-%m-%d"` to get current date
+
+### Date Examples
+
+**Correct usage:**
+```markdown
+**Last Updated:** 2025-12-19
+**Date Completed:** 2025-12-19
+```
+
+**Incorrect usage:**
+```markdown
+**Last Updated:** 2025-01-20 (wrong - old date)
+**Date Completed:** 2024-12-19 (wrong - old date)
+```
+
+### Critical Rule
+
+**NEVER** use dates from:
+- ❌ Examples in documentation
+- ❌ Old code comments
+- ❌ Previous file versions
+- ❌ Hardcoded dates in templates
+
+**ALWAYS** use:
+- ✅ Current system date
+- ✅ Date from `date +"%Y-%m-%d"` command
+- ✅ Actual current date when updating files
+
+---
+
 ## Safety Principle
 
 Correctness and constraint have priority over speed or convenience.

@@ -61,14 +61,29 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
 
 ### Locked Components
 
-1. **Modal** - `src/components/modal/Modal.tsx`
-   - **Status:** LOCKED
-   - **Rule:** DO NOT modify, extend, or create alternatives
+1. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx`
+   - **Status:** ✅ **LOCKED**
+   - **Lock Date:** 2025-12-20
+   - **Task:** TUNG_FOUNDATION_MODAL_STEP_13
+   - **Lock Report:** `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+   - **Migration Completed:** Modal has completed canonical Foundation Step Pipeline (Steps 0–13) and is now locked
+   - **Public API:** Immutable — All props are token-based
+   - **Public Types:** Immutable — Type Surface is frozen
+   - **Unlock Policy:** Any changes require explicit Foundation Unlock procedure with new versioned pipeline (Steps 0–13)
    - **Exports:** `Modal`, `ModalClose`, `ModalContent`, `ModalDescription`, `ModalFooter`, `ModalHeader`, `ModalOverlay`, `ModalRoot`, `ModalTitle`, `ModalTrigger`
 
-2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx`
-   - **Status:** LOCKED
-   - **Rule:** DO NOT modify, extend, or create alternatives
+2. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx`
+   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
+   - **Unlock Date:** 2025-12-19
+   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
+   - **Unlock Reason:** Tabs was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+   - **Migration Path:** Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+   - **Constraints During Unlock:**
+     - ❌ No public API expansion
+     - ❌ No new variants or sizes
+     - ❌ No behavior changes outside canonicalization
+     - ❌ No bypass of Authority Contracts
+   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
    - **Exports:** `Tabs`
    - **Types:** `TabsContentProps`, `TabsListProps`, `TabsRootProps`, `TabsTriggerProps`
 
@@ -80,14 +95,32 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
    - **Finalization Rule:** No extensions/variants/refactors of `Select` as standalone work. Only LOCK-safe bug/a11y fixes are permitted.
    - **Exports:** `Select`, `SelectContent`, `SelectGroup`, `SelectIcon`, `SelectItem`, `SelectItemIndicator`, `SelectItemText`, `SelectLabel`, `SelectRoot`, `SelectSeparator`, `SelectTrigger`, `SelectValue`, `SelectViewport`
 
-4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx`
-   - **Status:** LOCKED
-   - **Rule:** DO NOT modify, extend, or create alternatives
+4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
+   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
+   - **Unlock Date:** 2025-12-19
+   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
+   - **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+   - **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+   - **Constraints During Unlock:**
+     - ❌ No public API expansion
+     - ❌ No new variants or sizes
+     - ❌ No behavior changes outside canonicalization
+     - ❌ No bypass of Authority Contracts
+   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
    - **Exports:** `ContextMenu`, `ContextMenuCheckboxItem`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuRoot`, `ContextMenuSeparator`, `ContextMenuSub`, `ContextMenuSubContent`, `ContextMenuSubTrigger`, `ContextMenuTrigger`
 
-5. **Toast** - `src/components/overlays/Toast.tsx`
-   - **Status:** LOCKED
-   - **Rule:** DO NOT modify, extend, or create alternatives
+5. **Toast** - `src/COMPOSITION/overlays/Toast.tsx`
+   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
+   - **Unlock Date:** 2025-12-19
+   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
+   - **Unlock Reason:** Toast was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
+   - **Migration Path:** Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
+   - **Constraints During Unlock:**
+     - ❌ No public API expansion
+     - ❌ No new variants or sizes
+     - ❌ No behavior changes outside canonicalization
+     - ❌ No bypass of Authority Contracts
+   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
    - **Exports:** `Toast`, `ToastAction`, `ToastClose`, `ToastDescription`, `ToastRoot`, `ToastTitle`, `toastVariants`
    - **Provider:** `ToastProvider`, `ToastViewport`, `useToast`
 
@@ -710,9 +743,10 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
    - Components not listed anywhere are FORBIDDEN
    - Assumptions about component availability are FORBIDDEN
 
-3. **Foundation components are immutable**
-   - Modal, Tabs, Select, ContextMenu, Toast are LOCKED
-   - DO NOT modify, extend, or create alternatives
+3. **Foundation components status**
+   - Modal, Tabs, ContextMenu, Toast are ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration) - unlocked for canonical migration only
+   - Select is ⏳ **UNLOCKED** (Pending Canonical Lock)
+   - Button, Link are ✅ **FINAL LOCK** - DO NOT modify, extend, or create alternatives
    - DO NOT import from non-canonical paths
 
 4. **Export status is necessary but NOT sufficient**
@@ -796,6 +830,13 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 
 ## Version History
 
+- **v1.3** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
+  - Updated Modal, Tabs, ContextMenu, and Toast status from LOCKED to LEGACY UNLOCKED
+  - Updated component paths to reflect actual locations (src/COMPOSITION/)
+  - Added unlock rationale, migration path, constraints, and exit criteria for each component
+  - Updated Foundation Layer Rules section to reflect legacy unlock status
+  - Completed per TUNG_FOUNDATION_LEGACY_UNLOCK_01 task
+
 - **v1.2** ( ): Button Foundation Lock (FINAL)
   - Updated Button status to FINAL LOCK ( )
   - Changed Button layer from Extension to FOUNDATION (Primitive)
@@ -811,6 +852,12 @@ This document is **FINAL**. Any changes to this canonical state require explicit
   - Added Foundation Authority compliance rules
   - Clarified that Extension cannot modify Foundation Authorities
   - Added explicit rules about Foundation Authority immutability
+
+- **v1.1** (2025-12-20): Modal Foundation Lock Complete
+  - Modal status updated from LEGACY UNLOCKED to ✅ LOCKED
+  - Modal has completed canonical Foundation Step Pipeline (Steps 0–13)
+  - Lock Date: 2025-12-20
+  - Lock Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
 
 - **v1.0** (2025-12-15): Initial canonical state document
 

@@ -1,15 +1,51 @@
 "use client";
 
 /**
- * Toast Component
+ * ============================================================================
+ * ⏳ FOUNDATION · LEGACY · UNLOCKED_FOR_MIGRATION - Toast Component
+ * ============================================================================
  *
- * 🔒 FOUNDATION COMPONENT - ARCHITECTURE LOCKED
+ * **STATUS:** ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+ * **UNLOCK DATE:** 2025-12-19
+ * **TASK:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
+ *
+ * **UNLOCK RATIONALE:**
+ * Toast was declared as LOCKED but was implemented using legacy patterns and
+ * never passed the canonical Foundation Step Pipeline (0–13). The current lock
+ * is declarative only and blocks required migration.
+ *
+ * **MIGRATION PATH:**
+ * Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure
+ * full compliance with all Authority Contracts and canonical lifecycle
+ * requirements, similar to Button/Link standards.
+ *
+ * **CONSTRAINTS DURING UNLOCK:**
+ * - ❌ No public API expansion
+ * - ❌ No new variants or sizes
+ * - ❌ No behavior changes outside canonicalization
+ * - ❌ No bypass of Authority Contracts
+ * - ✅ Refactor strictly via Foundation Step Pipeline
+ * - ✅ Canonical CVA, typing, and interaction refactor allowed
+ * - ✅ Authority Contract alignment allowed
+ *
+ * **EXIT CRITERIA:**
+ * - Component completes Steps 0–13
+ * - Foundation lock report exists
+ * - Public Type Surface is locked
+ * - Component re-marked as FOUNDATION · LOCKED
+ *
+ * **REFERENCE:**
+ * - docs/architecture/FOUNDATION_LOCK.md (Legacy Foundation Components section)
+ * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
+ *
+ * ============================================================================
+ *
+ * Toast Component
  *
  * Radix-based toast notification component with token-driven styling.
  * All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal)
  * is handled by Radix Toast primitives. Tenerife UI provides visual styling through tokens only.
  *
- * This component is locked as a foundation component per UI_ARCHITECTURE_LOCK.md.
  * DO NOT reimplement Radix behavior (timers, focus logic, keyboard handling, portals).
  * All behavioral logic must delegate to Radix Toast primitives.
  *

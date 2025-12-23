@@ -4,6 +4,117 @@ import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 
 import { Modal } from "@/COMPOSITION/overlays/Modal";
+import { Button } from "@/PRIMITIVES/Button";
+
+// ============================================================================
+// LOCAL HELPERS (Storybook only, not exported)
+// ============================================================================
+
+/**
+ * ModalExample - локальный helper для stories
+ * ⚠️ ВАЖНО: файл только для Storybook, не экспортируется из библиотеки, не считается public API
+ */
+type ModalExampleProps = {
+  title?: string;
+  description?: string;
+  footerAlign?: "left" | "center" | "right" | "between";
+  size?: "sm" | "md" | "lg" | "xl" | "fullscreen";
+  width?: "auto" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  height?: "auto" | "sm" | "md" | "lg" | "xl" | "full";
+  padding?: "xs" | "sm" | "md" | "lg" | "xl";
+  radius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
+  surface?: "flat" | "raised" | "sunken" | "outline" | "subtle";
+  headerGap?: "xs" | "sm" | "md" | "lg";
+  footerGap?: "xs" | "sm" | "md" | "lg";
+};
+
+function ModalExample({
+  title = "Modal title",
+  description = "Modal description text",
+  footerAlign = "right",
+  size = "md",
+  width,
+  height,
+  padding,
+  radius,
+  surface,
+  headerGap,
+  footerGap,
+}: ModalExampleProps) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Modal.Root open={open} onOpenChange={setOpen}>
+      <Modal.Trigger asChild>
+        <Button>{title}</Button>
+      </Modal.Trigger>
+
+      <Modal.Content
+        size={size}
+        width={width}
+        height={height}
+        padding={padding}
+        radius={radius}
+        surface={surface}
+      >
+        <Modal.Header gap={headerGap}>
+          <Modal.Title>{title}</Modal.Title>
+          <Modal.Description>{description}</Modal.Description>
+        </Modal.Header>
+
+        <div className="py-4">
+          <p>Modal content area.</p>
+        </div>
+
+        <Modal.Footer align={footerAlign} gap={footerGap}>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => setOpen(false)}>Confirm</Button>
+        </Modal.Footer>
+
+        <Modal.Close />
+      </Modal.Content>
+    </Modal.Root>
+  );
+}
+
+/**
+ * StoryGrid - вертикальное сравнение (grid layout)
+ * ⚠️ Inline styles допустимы здесь, потому что это Storybook layout, не компонент.
+ */
+function StoryGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gap: 24,
+        maxWidth: 480,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * StoryRow - горизонтальное сравнение (flex layout)
+ * ⚠️ Inline styles допустимы здесь, потому что это Storybook layout, не компонент.
+ */
+function StoryRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: 24,
+        alignItems: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 const meta: Meta<typeof Modal.Root> = {
   title: "UI/Foundation/Modal",
@@ -68,22 +179,8 @@ export const Default: Story = {
               <Modal.Description>This is a modal description.</Modal.Description>
             </Modal.Header>
             <div className="py-4">
-              <p>This is the modal content. You can put any content here.</p>
+              <p>This is the modal content.</p>
             </div>
-            <Modal.Footer>
-              <button
-                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
-                onClick={() => setOpen(false)}
-              >
-                Confirm
-              </button>
-            </Modal.Footer>
             <Modal.Close />
           </Modal.Content>
         </Modal.Root>
@@ -94,162 +191,16 @@ export const Default: Story = {
     docs: {
       description: {
         story:
-          "Basic Modal usage with default tokens (md size). The close button (X icon) in the top-right corner is provided by `<Modal.Close />`. Footer buttons use regular onClick handlers to close the modal.",
+          "Basic Modal usage with default tokens (md size). The close button (X icon) in the top-right corner is provided by `<Modal.Close />`.",
       },
     },
   },
 };
 
 /**
- * All available size variants (sm, md, lg, xl, fullscreen)
+ * Modal with title and description only
  */
-export const Sizes: Story = {
-  render: () => {
-    const [openSm, setOpenSm] = React.useState(false);
-    const [openMd, setOpenMd] = React.useState(false);
-    const [openLg, setOpenLg] = React.useState(false);
-    const [openXl, setOpenXl] = React.useState(false);
-    const [openFullscreen, setOpenFullscreen] = React.useState(false);
-
-    return (
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-2">
-          <Modal.Root open={openSm} onOpenChange={setOpenSm}>
-            <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-              Small (sm)
-            </Modal.Trigger>
-            <Modal.Content size="sm">
-              <Modal.Header>
-                <Modal.Title>Small Modal</Modal.Title>
-                <Modal.Description>This is a small modal (sm size).</Modal.Description>
-              </Modal.Header>
-              <div className="py-4">
-                <p>Small modal content.</p>
-              </div>
-              <Modal.Footer>
-                <button
-                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                  onClick={() => setOpenSm(false)}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-              <Modal.Close />
-            </Modal.Content>
-          </Modal.Root>
-
-          <Modal.Root open={openMd} onOpenChange={setOpenMd}>
-            <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-              Medium (md)
-            </Modal.Trigger>
-            <Modal.Content size="md">
-              <Modal.Header>
-                <Modal.Title>Medium Modal</Modal.Title>
-                <Modal.Description>This is a medium modal (md size).</Modal.Description>
-              </Modal.Header>
-              <div className="py-4">
-                <p>Medium modal content.</p>
-              </div>
-              <Modal.Footer>
-                <button
-                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                  onClick={() => setOpenSm(false)}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-              <Modal.Close />
-            </Modal.Content>
-          </Modal.Root>
-
-          <Modal.Root open={openLg} onOpenChange={setOpenLg}>
-            <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-              Large (lg)
-            </Modal.Trigger>
-            <Modal.Content size="lg">
-              <Modal.Header>
-                <Modal.Title>Large Modal</Modal.Title>
-                <Modal.Description>This is a large modal (lg size).</Modal.Description>
-              </Modal.Header>
-              <div className="py-4">
-                <p>Large modal content.</p>
-              </div>
-              <Modal.Footer>
-                <button
-                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                  onClick={() => setOpenSm(false)}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-              <Modal.Close />
-            </Modal.Content>
-          </Modal.Root>
-
-          <Modal.Root open={openXl} onOpenChange={setOpenXl}>
-            <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-              Extra Large (xl)
-            </Modal.Trigger>
-            <Modal.Content size="xl">
-              <Modal.Header>
-                <Modal.Title>Extra Large Modal</Modal.Title>
-                <Modal.Description>This is an extra large modal (xl size).</Modal.Description>
-              </Modal.Header>
-              <div className="py-4">
-                <p>Extra large modal content.</p>
-              </div>
-              <Modal.Footer>
-                <button
-                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                  onClick={() => setOpenSm(false)}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-              <Modal.Close />
-            </Modal.Content>
-          </Modal.Root>
-
-          <Modal.Root open={openFullscreen} onOpenChange={setOpenFullscreen}>
-            <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-              Fullscreen
-            </Modal.Trigger>
-            <Modal.Content size="fullscreen">
-              <Modal.Header>
-                <Modal.Title>Fullscreen Modal</Modal.Title>
-                <Modal.Description>This is a fullscreen modal.</Modal.Description>
-              </Modal.Header>
-              <div className="py-4">
-                <p>Fullscreen modal content.</p>
-              </div>
-              <Modal.Footer>
-                <button
-                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                  onClick={() => setOpenSm(false)}
-                >
-                  Close
-                </button>
-              </Modal.Footer>
-              <Modal.Close />
-            </Modal.Content>
-          </Modal.Root>
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "All available size variants: sm, md, lg, xl, and fullscreen.",
-      },
-    },
-  },
-};
-
-/**
- * Modal with scrollable content
- */
-export const ScrollableContent: Story = {
+export const WithTitleAndDescription: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
 
@@ -257,30 +208,13 @@ export const ScrollableContent: Story = {
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
           <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-            Open Scrollable Modal
+            Open Modal
           </Modal.Trigger>
-          <Modal.Content size="md">
+          <Modal.Content>
             <Modal.Header>
-              <Modal.Title>Scrollable Content</Modal.Title>
-              <Modal.Description>This modal has long content that will scroll.</Modal.Description>
+              <Modal.Title>Modal Title</Modal.Title>
+              <Modal.Description>This is a modal description.</Modal.Description>
             </Modal.Header>
-            <div className="max-h-[400px] overflow-y-auto py-4">
-              {Array.from({ length: 50 }, (_, i) => (
-                <p key={i} className="mb-4">
-                  This is paragraph {i + 1}. The modal content area will scroll when the content
-                  exceeds the maximum height. Radix Dialog handles the scroll behavior
-                  automatically.
-                </p>
-              ))}
-            </div>
-            <Modal.Footer>
-              <button
-                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
-                onClick={() => setOpen(false)}
-              >
-                Close
-              </button>
-            </Modal.Footer>
             <Modal.Close />
           </Modal.Content>
         </Modal.Root>
@@ -291,7 +225,7 @@ export const ScrollableContent: Story = {
     docs: {
       description: {
         story:
-          "Modal with long scrollable content. The content area scrolls while the header and footer remain fixed.",
+          "Modal with title and description only. Demonstrates the minimal Modal composition with header elements.",
       },
     },
   },
@@ -319,20 +253,13 @@ export const WithFooter: Story = {
             </Modal.Header>
             <div className="py-4">
               <p>This is the main content area.</p>
-              <p className="mt-2">You can put any content here.</p>
             </div>
             <Modal.Footer align="right" gap="sm">
               <button
                 className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
                 onClick={() => setOpen(false)}
               >
-                Cancel
-              </button>
-              <button
-                className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
-                onClick={() => setOpen(false)}
-              >
-                Save Changes
+                Close
               </button>
             </Modal.Footer>
             <Modal.Close />
@@ -407,51 +334,411 @@ export const Controlled: Story = {
     docs: {
       description: {
         story:
-          "Controlled Modal example. The open state is managed externally, allowing you to control the modal from anywhere in your application.",
+          "Controlled Modal example. The open state is managed externally using the open and onOpenChange props.",
       },
     },
   },
 };
 
 /**
- * Modal that cannot be closed by overlay click or escape key
- * Note: Radix Dialog supports this via the modal prop and onInteractOutside
+ * Uncontrolled Modal with defaultOpen prop
  */
-export const PreventClose: Story = {
+export const Uncontrolled: Story = {
+  render: () => {
+    return (
+      <>
+        <Modal.Root defaultOpen={false}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Uncontrolled Modal</Modal.Title>
+              <Modal.Description>
+                This modal uses defaultOpen prop for uncontrolled state management. The Modal
+                component manages its own open state internally.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>
+                This modal manages its own state. You can control the initial state using the
+                defaultOpen prop.
+              </p>
+            </div>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Uncontrolled Modal example. The open state is managed internally by the Modal component using the defaultOpen prop.",
+      },
+    },
+  },
+};
+
+// ============================================================================
+// COMPARATIVE STORIES - Multiple Variants on One Page
+// ============================================================================
+
+/**
+ * All size variants displayed together
+ */
+export const Sizes: Story = {
+  render: () => (
+    <StoryGrid>
+      <ModalExample title="Size SM" size="sm" />
+      <ModalExample title="Size MD" size="md" />
+      <ModalExample title="Size LG" size="lg" />
+      <ModalExample title="Size XL" size="xl" />
+      <ModalExample title="Size Fullscreen" size="fullscreen" />
+    </StoryGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All size variants (sm, md, lg, xl, fullscreen) displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * All width variants displayed together
+ */
+export const Widths: Story = {
+  render: () => (
+    <StoryGrid>
+      <ModalExample title="Width Auto" width="auto" />
+      <ModalExample title="Width SM" width="sm" />
+      <ModalExample title="Width MD" width="md" />
+      <ModalExample title="Width LG" width="lg" />
+      <ModalExample title="Width XL" width="xl" />
+      <ModalExample title="Width 2XL" width="2xl" />
+      <ModalExample title="Width Full" width="full" />
+    </StoryGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All width variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * All height variants displayed together
+ */
+export const Heights: Story = {
+  render: () => (
+    <StoryGrid>
+      <ModalExample title="Height Auto" height="auto" />
+      <ModalExample title="Height SM" height="sm" />
+      <ModalExample title="Height MD" height="md" />
+      <ModalExample title="Height LG" height="lg" />
+      <ModalExample title="Height XL" height="xl" />
+      <ModalExample title="Height Full" height="full" />
+    </StoryGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All height variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * All surface variants displayed together
+ */
+export const Surfaces: Story = {
+  render: () => (
+    <StoryRow>
+      <ModalExample title="Surface Flat" surface="flat" />
+      <ModalExample title="Surface Raised" surface="raised" />
+      <ModalExample title="Surface Sunken" surface="sunken" />
+      <ModalExample title="Surface Outline" surface="outline" />
+      <ModalExample title="Surface Subtle" surface="subtle" />
+    </StoryRow>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All surface variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * Footer alignment variants displayed together
+ */
+export const FooterAlignment: Story = {
+  render: () => (
+    <StoryRow>
+      <ModalExample title="Footer Left" footerAlign="left" />
+      <ModalExample title="Footer Center" footerAlign="center" />
+      <ModalExample title="Footer Right" footerAlign="right" />
+      <ModalExample title="Footer Between" footerAlign="between" />
+    </StoryRow>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Footer alignment variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * Footer gap variants displayed together
+ */
+export const FooterGaps: Story = {
+  render: () => (
+    <StoryRow>
+      <ModalExample title="Footer Gap XS" footerGap="xs" />
+      <ModalExample title="Footer Gap SM" footerGap="sm" />
+      <ModalExample title="Footer Gap MD" footerGap="md" />
+      <ModalExample title="Footer Gap LG" footerGap="lg" />
+    </StoryRow>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Footer gap variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * Header gap variants displayed together
+ */
+export const HeaderGaps: Story = {
+  render: () => (
+    <StoryRow>
+      <ModalExample title="Header Gap XS" headerGap="xs" />
+      <ModalExample title="Header Gap SM" headerGap="sm" />
+      <ModalExample title="Header Gap MD" headerGap="md" />
+      <ModalExample title="Header Gap LG" headerGap="lg" />
+    </StoryRow>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Header gap variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * Radius variants displayed together
+ */
+export const Radiuses: Story = {
+  render: () => (
+    <StoryGrid>
+      <ModalExample title="Radius None" radius="none" />
+      <ModalExample title="Radius XS" radius="xs" />
+      <ModalExample title="Radius SM" radius="sm" />
+      <ModalExample title="Radius MD" radius="md" />
+      <ModalExample title="Radius LG" radius="lg" />
+      <ModalExample title="Radius XL" radius="xl" />
+      <ModalExample title="Radius 2XL" radius="2xl" />
+      <ModalExample title="Radius 3XL" radius="3xl" />
+      <ModalExample title="Radius Full" radius="full" />
+    </StoryGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All radius variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * Padding variants displayed together
+ */
+export const Paddings: Story = {
+  render: () => (
+    <StoryGrid>
+      <ModalExample title="Padding XS" padding="xs" />
+      <ModalExample title="Padding SM" padding="sm" />
+      <ModalExample title="Padding MD" padding="md" />
+      <ModalExample title="Padding LG" padding="lg" />
+      <ModalExample title="Padding XL" padding="xl" />
+    </StoryGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All padding variants displayed together for comparison.",
+      },
+    },
+  },
+};
+
+// ============================================================================
+// USAGE SCENARIOS
+// ============================================================================
+
+/**
+ * Modal with scrollable long content
+ */
+export const ScrollableContent: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
 
     return (
       <>
-        <Modal.Root open={open} onOpenChange={setOpen} modal={true}>
+        <Modal.Root open={open} onOpenChange={setOpen}>
           <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-            Open Non-Closable Modal
+            Open Scrollable Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Scrollable Content Modal</Modal.Title>
+              <Modal.Description>
+                Modal with long content that requires scrolling.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="max-h-[60vh] overflow-y-auto py-4">
+              <div className="space-y-4">
+                {Array.from({ length: 20 }, (_, i) => (
+                  <div key={i} className="rounded border p-4">
+                    <h3 className="mb-2 font-semibold">Section {i + 1}</h3>
+                    <p>
+                      This is a long content section that demonstrates scrolling within the modal.
+                      The content area has a maximum height and overflow-y-auto to enable scrolling
+                      when content exceeds the available space.
+                    </p>
+                    <p className="mt-2">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                      nostrud exercitation ullamco laboris.
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Modal.Footer>
+              <button
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Modal with long scrollable content. Demonstrates scrolling within the modal.",
+      },
+    },
+  },
+};
+
+/**
+ * Non-modal dialog that doesn't block interaction
+ */
+export const NonModal: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            This is background content. When the modal is open, you can still interact with this
+            content because modal=false.
+          </p>
+          <button
+            className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+            onClick={() => alert("Background button clicked!")}
+          >
+            Click Background Button
+          </button>
+        </div>
+        <Modal.Root open={open} onOpenChange={setOpen} modal={false}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Non-Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Non-Modal Dialog</Modal.Title>
+              <Modal.Description>
+                This dialog does not block interaction with background elements (modal=false).
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>You can still interact with background content while this dialog is open.</p>
+            </div>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Non-modal dialog that does not block interaction with background elements. Set modal=false to allow background interaction.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal that prevents closing on Escape key
+ */
+export const PreventCloseOnEscape: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Prevent Escape Modal
           </Modal.Trigger>
           <Modal.Content
             size="md"
-            onInteractOutside={(e) => {
-              e.preventDefault();
-            }}
             onEscapeKeyDown={(e) => {
               e.preventDefault();
+              alert("Escape key pressed, but modal will not close. Use the close button instead.");
             }}
           >
             <Modal.Header>
-              <Modal.Title>Non-Closable Modal</Modal.Title>
+              <Modal.Title>Prevent Close on Escape</Modal.Title>
               <Modal.Description>
-                This modal cannot be closed by clicking the overlay or pressing Escape. You must use
-                the close button.
+                This modal prevents closing when Escape key is pressed. Use the close button
+                instead.
               </Modal.Description>
             </Modal.Header>
             <div className="py-4">
               <p>
-                This modal prevents closing via overlay click or Escape key. You must use the close
-                button to dismiss it.
+                Try pressing Escape - the modal will not close. Use the close button (X) instead.
               </p>
             </div>
             <Modal.Footer>
               <button
-                className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
                 onClick={() => setOpen(false)}
               >
                 Close
@@ -467,7 +754,453 @@ export const PreventClose: Story = {
     docs: {
       description: {
         story:
-          "Modal that prevents closing via overlay click or Escape key. Uses Radix Dialog's onInteractOutside and onEscapeKeyDown props to prevent default behavior.",
+          "Modal that prevents closing when Escape key is pressed. Uses onEscapeKeyDown to prevent default behavior.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal that prevents closing on outside click
+ */
+export const PreventCloseOnOutsideClick: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Prevent Outside Click Modal
+          </Modal.Trigger>
+          <Modal.Content
+            size="md"
+            onPointerDownOutside={(e) => {
+              e.preventDefault();
+              alert(
+                "Click outside detected, but modal will not close. Use the close button instead.",
+              );
+            }}
+          >
+            <Modal.Header>
+              <Modal.Title>Prevent Close on Outside Click</Modal.Title>
+              <Modal.Description>
+                This modal prevents closing when clicking outside. Use the close button instead.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>
+                Try clicking outside the modal - it will not close. Use the close button (X)
+                instead.
+              </p>
+            </div>
+            <Modal.Footer>
+              <button
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Modal that prevents closing when clicking outside. Uses onPointerDownOutside to prevent default behavior.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal that prevents closing on any outside interaction
+ */
+export const PreventCloseOnOutsideInteraction: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Prevent Outside Interaction Modal
+          </Modal.Trigger>
+          <Modal.Content
+            size="md"
+            onInteractOutside={(e) => {
+              e.preventDefault();
+              alert(
+                "Outside interaction detected, but modal will not close. Use the close button instead.",
+              );
+            }}
+          >
+            <Modal.Header>
+              <Modal.Title>Prevent Close on Outside Interaction</Modal.Title>
+              <Modal.Description>
+                This modal prevents closing on any outside interaction (click, touch, etc.). Use the
+                close button instead.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>
+                Try interacting outside the modal - it will not close. Use the close button (X)
+                instead.
+              </p>
+            </div>
+            <Modal.Footer>
+              <button
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Modal that prevents closing on any outside interaction. Uses onInteractOutside to prevent default behavior.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal with form content
+ */
+export const WithForm: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+    const [formData, setFormData] = React.useState({ name: "", email: "", message: "" });
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Form Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Contact Form</Modal.Title>
+              <Modal.Description>Fill out the form below to contact us.</Modal.Description>
+            </Modal.Header>
+            <form
+              className="space-y-4 py-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert(`Form submitted: ${JSON.stringify(formData, null, 2)}`);
+                setOpen(false);
+              }}
+            >
+              <div>
+                <label htmlFor="name" className="mb-1 block text-sm font-medium">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  className="w-full rounded-md border px-3 py-2"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="mb-1 block text-sm font-medium">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="w-full rounded-md border px-3 py-2"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="mb-1 block text-sm font-medium">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  className="w-full rounded-md border px-3 py-2"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+              </div>
+              <Modal.Footer>
+                <button
+                  type="button"
+                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                  onClick={() => setOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                >
+                  Submit
+                </button>
+              </Modal.Footer>
+            </form>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Modal with form content. Demonstrates form handling within a modal dialog.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal with multiple action buttons
+ */
+export const MultipleActions: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Multiple Actions Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Multiple Actions</Modal.Title>
+              <Modal.Description>
+                Modal with multiple action buttons in the footer.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>Content area.</p>
+            </div>
+            <Modal.Footer align="between">
+              <button
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+              <div className="flex gap-2">
+                <button
+                  className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                  onClick={() => setOpen(false)}
+                >
+                  Save Draft
+                </button>
+                <button
+                  className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                  onClick={() => setOpen(false)}
+                >
+                  Publish
+                </button>
+              </div>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Modal with multiple action buttons in the footer. Demonstrates complex footer layouts.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal with title only (no description)
+ */
+export const TitleOnly: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Title Only Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Title Only Modal</Modal.Title>
+            </Modal.Header>
+            <div className="py-4">
+              <p>This modal has no description - only a title.</p>
+            </div>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Modal with title only, no description. Minimal header composition.",
+      },
+    },
+  },
+};
+
+/**
+ * Modal with content only (no header)
+ */
+export const ContentOnly: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Content Only Modal
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <div className="py-4">
+              <p>This modal has no header - only content.</p>
+              <p className="mt-2">
+                Use this pattern when you need a simple content display without a title.
+              </p>
+            </div>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Modal with content only, no header. Minimal composition without title or description.",
+      },
+    },
+  },
+};
+
+/**
+ * Confirmation dialog modal
+ */
+export const ConfirmationDialog: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Confirmation Dialog
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Delete Item</Modal.Title>
+              <Modal.Description>
+                Are you sure you want to delete this item? This action cannot be undone.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>This is a destructive action that requires confirmation.</p>
+            </div>
+            <Modal.Footer align="right">
+              <button
+                className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="rounded-md bg-destructive px-4 py-2 text-destructive-foreground"
+                onClick={() => {
+                  alert("Item deleted!");
+                  setOpen(false);
+                }}
+              >
+                Delete
+              </button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Confirmation dialog modal. Typically used for destructive actions that require user confirmation.",
+      },
+    },
+  },
+};
+
+/**
+ * Alert dialog modal
+ */
+export const AlertDialog: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Alert Dialog
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Information</Modal.Title>
+              <Modal.Description>
+                This is an alert dialog. It provides important information to the user.
+              </Modal.Description>
+            </Modal.Header>
+            <div className="py-4">
+              <p>Please review the information above before proceeding.</p>
+            </div>
+            <Modal.Footer align="right">
+              <button
+                className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                onClick={() => setOpen(false)}
+              >
+                OK
+              </button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Alert dialog modal. Typically used for informational messages that require acknowledgment.",
       },
     },
   },

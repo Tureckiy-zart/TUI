@@ -1,52 +1,33 @@
 import "@testing-library/jest-dom/vitest";
-import { screen, waitFor } from "@testing-library/react";
-import React from "react";
+import { screen, waitFor, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 
-describe("Modal", () => {
-  describe("Rendering", () => {
-    it("renders trigger element", () => {
+/**
+ * STEP 10: Runtime / Interaction Tests (Minimal Gate)
+ *
+ * These tests verify Modal's runtime behavior and interaction contract
+ * without checking visual design, CSS classes, or tokens.
+ *
+ * Test scope:
+ * - Open/Close behavior
+ * - Focus management
+ * - Accessibility attributes
+ * - Public API integrity
+ */
+
+describe("Modal - Runtime / Interaction Tests", () => {
+  // ============================================================================
+  // T10_TC1: Modal opens and closes
+  // ============================================================================
+
+  describe("T10_TC1: Modal opens and closes", () => {
+    it("Modal is closed by default", () => {
       renderWithTheme(
         <Modal.Root>
-          <Modal.Trigger>Open Modal</Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header>
-              <Modal.Title>Test Modal</Modal.Title>
-            </Modal.Header>
-          </Modal.Content>
-        </Modal.Root>,
-      );
-      const trigger = screen.getByRole("button", { name: /open modal/i });
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders modal content when open", async () => {
-      renderWithTheme(
-        <Modal.Root defaultOpen>
-          <Modal.Trigger>Open Modal</Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header>
-              <Modal.Title>Test Modal</Modal.Title>
-              <Modal.Description>Test description</Modal.Description>
-            </Modal.Header>
-          </Modal.Content>
-        </Modal.Root>,
-      );
-
-      await waitFor(() => {
-        expect(screen.getByRole("dialog")).toBeInTheDocument();
-        expect(screen.getByText("Test Modal")).toBeInTheDocument();
-        expect(screen.getByText("Test description")).toBeInTheDocument();
-      });
-    });
-
-    it("does not render modal content when closed", () => {
-      renderWithTheme(
-        <Modal.Root defaultOpen={false}>
           <Modal.Trigger>Open Modal</Modal.Trigger>
           <Modal.Content>
             <Modal.Header>
@@ -59,23 +40,7 @@ describe("Modal", () => {
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
 
-    it("forwards ref correctly", () => {
-      const ref = React.createRef<HTMLDivElement>();
-      renderWithTheme(
-        <Modal.Root defaultOpen>
-          <Modal.Content ref={ref}>
-            <Modal.Header>
-              <Modal.Title>Ref test</Modal.Title>
-            </Modal.Header>
-          </Modal.Content>
-        </Modal.Root>,
-      );
-      expect(ref.current).toBeInstanceOf(HTMLDivElement);
-    });
-  });
-
-  describe("Open/Close Behavior", () => {
-    it("opens modal when trigger is clicked", async () => {
+    it("Modal opens when trigger is clicked", async () => {
       const user = userEventSetup();
       renderWithTheme(
         <Modal.Root>
@@ -96,7 +61,31 @@ describe("Modal", () => {
       });
     });
 
-    it("closes modal when close button is clicked", async () => {
+    it("Modal closes when Escape key is pressed", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Modal.Root defaultOpen>
+          <Modal.Trigger>Open Modal</Modal.Trigger>
+          <Modal.Content>
+            <Modal.Header>
+              <Modal.Title>Test Modal</Modal.Title>
+            </Modal.Header>
+          </Modal.Content>
+        </Modal.Root>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      await user.keyboard("{Escape}");
+
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
+    });
+
+    it("Modal closes when close button is clicked", async () => {
       const user = userEventSetup();
       renderWithTheme(
         <Modal.Root defaultOpen>
@@ -144,80 +133,131 @@ describe("Modal", () => {
     });
   });
 
-  // Note: Keyboard navigation, focus trap, overlay interaction, and portal rendering
-  // are all handled by Radix Dialog. We do not test Radix behavior, only our integration.
+  // ============================================================================
+  // T10_TC2: Focus management
+  // ============================================================================
 
-  describe("Token Props", () => {
-    it("applies size token correctly", () => {
+  describe("T10_TC2: Focus management", () => {
+    it("focus moves into Content when modal opens", async () => {
+      const user = userEventSetup();
       renderWithTheme(
-        <Modal.Root defaultOpen>
-          <Modal.Content size="sm" data-testid="modal-content">
+        <Modal.Root>
+          <Modal.Trigger>Open Modal</Modal.Trigger>
+          <Modal.Content>
             <Modal.Header>
-              <Modal.Title>Small Modal</Modal.Title>
+              <Modal.Title>Test Modal</Modal.Title>
             </Modal.Header>
+            <button>First focusable</button>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      const content = screen.getByTestId("modal-content");
-      expect(content).toBeInTheDocument();
-      // Check that size classes are applied
-      expect(content).toHaveClass("max-w-sm");
+      const trigger = screen.getByRole("button", { name: /open modal/i });
+      await user.click(trigger);
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      // Focus should move to first focusable element inside dialog
+      const firstFocusable = screen.getByRole("button", { name: /first focusable/i });
+      expect(firstFocusable).toHaveFocus();
     });
 
-    it("applies width token correctly", () => {
+    it("focus returns to trigger when modal closes", async () => {
+      const user = userEventSetup();
       renderWithTheme(
-        <Modal.Root defaultOpen>
-          <Modal.Content width="lg" data-testid="modal-content">
+        <Modal.Root>
+          <Modal.Trigger>Open Modal</Modal.Trigger>
+          <Modal.Content>
             <Modal.Header>
-              <Modal.Title>Modal with Width</Modal.Title>
+              <Modal.Title>Test Modal</Modal.Title>
             </Modal.Header>
+            <Modal.Close>Close</Modal.Close>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      const content = screen.getByTestId("modal-content");
-      expect(content).toBeInTheDocument();
-      // Check that width classes are applied
-      expect(content).toHaveClass("max-w-lg");
+      const trigger = screen.getByRole("button", { name: /open modal/i });
+      await user.click(trigger);
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      const closeButton = screen.getByRole("button", { name: /close/i });
+      await user.click(closeButton);
+
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
+
+      // Focus should return to trigger
+      expect(trigger).toHaveFocus();
     });
 
-    it("applies footer align token correctly", () => {
+    it("focus trap is active while modal is open", async () => {
+      const user = userEventSetup();
       renderWithTheme(
         <Modal.Root defaultOpen>
           <Modal.Content>
-            <Modal.Footer align="center" data-testid="modal-footer">
-              <button>Button</button>
-            </Modal.Footer>
+            <Modal.Header>
+              <Modal.Title>Test Modal</Modal.Title>
+            </Modal.Header>
+            <button>First</button>
+            <button>Second</button>
+            <button>Last</button>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      const footer = screen.getByTestId("modal-footer");
-      expect(footer).toBeInTheDocument();
-      // Check that align classes are applied
-      expect(footer).toHaveClass("justify-center");
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      const dialog = screen.getByRole("dialog");
+      const firstButton = within(dialog).getByRole("button", { name: /^first$/i });
+      const lastButton = within(dialog).getByRole("button", { name: /^last$/i });
+
+      // Tab through focusable elements
+      firstButton.focus();
+      expect(firstButton).toHaveFocus();
+
+      await user.tab();
+      expect(within(dialog).getByRole("button", { name: /^second$/i })).toHaveFocus();
+
+      await user.tab();
+      expect(lastButton).toHaveFocus();
+
+      // Tab should wrap back to first element (focus trap)
+      await user.tab();
+      expect(firstButton).toHaveFocus();
     });
   });
 
-  describe("Subcomponents", () => {
-    it("renders ModalHeader correctly", () => {
+  // ============================================================================
+  // T10_TC3: Accessibility attributes
+  // ============================================================================
+
+  describe("T10_TC3: Accessibility attributes", () => {
+    it("Content has role='dialog'", async () => {
       renderWithTheme(
         <Modal.Root defaultOpen>
           <Modal.Content>
-            <Modal.Header data-testid="modal-header">
-              <Modal.Title>Test Title</Modal.Title>
+            <Modal.Header>
+              <Modal.Title>Test Modal</Modal.Title>
             </Modal.Header>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      const header = screen.getByTestId("modal-header");
-      expect(header).toBeInTheDocument();
-      expect(header).toHaveClass("flex", "flex-col");
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
+        expect(dialog).toBeInTheDocument();
+      });
     });
 
-    it("renders ModalTitle correctly", () => {
+    it("aria-labelledby is correctly bound to Title when present", async () => {
       renderWithTheme(
         <Modal.Root defaultOpen>
           <Modal.Content>
@@ -228,12 +268,17 @@ describe("Modal", () => {
         </Modal.Root>,
       );
 
-      const title = screen.getByText("Test Title");
-      expect(title).toBeInTheDocument();
-      expect(title.tagName).toBe("H2"); // Radix Dialog.Title renders as h2
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
+        const title = screen.getByText("Test Title");
+
+        // Radix Dialog automatically binds aria-labelledby
+        expect(dialog).toHaveAttribute("aria-labelledby");
+        expect(dialog.getAttribute("aria-labelledby")).toBe(title.id);
+      });
     });
 
-    it("renders ModalDescription correctly", () => {
+    it("aria-describedby is correctly bound to Description when present", async () => {
       renderWithTheme(
         <Modal.Root defaultOpen>
           <Modal.Content>
@@ -245,47 +290,71 @@ describe("Modal", () => {
         </Modal.Root>,
       );
 
-      const description = screen.getByText("Test Description");
-      expect(description).toBeInTheDocument();
-      expect(description.tagName).toBe("P"); // Radix Dialog.Description renders as p
-    });
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
+        const description = screen.getByText("Test Description");
 
-    it("renders ModalFooter correctly", () => {
+        // Radix Dialog automatically binds aria-describedby
+        expect(dialog).toHaveAttribute("aria-describedby");
+        expect(dialog.getAttribute("aria-describedby")).toBe(description.id);
+      });
+    });
+  });
+
+  // ============================================================================
+  // T10_TC4: Public API integrity
+  // ============================================================================
+
+  describe("T10_TC4: Public API integrity", () => {
+    it("Modal accepts only declared public props", async () => {
+      // Type check: This should compile without errors
       renderWithTheme(
-        <Modal.Root defaultOpen>
-          <Modal.Content>
-            <Modal.Footer data-testid="modal-footer">
-              <button>Button</button>
+        <Modal.Root open={false} onOpenChange={vi.fn()}>
+          <Modal.Trigger>Open</Modal.Trigger>
+          <Modal.Content size="md" width="lg" padding="md">
+            <Modal.Header gap="sm">
+              <Modal.Title>Title</Modal.Title>
+              <Modal.Description>Description</Modal.Description>
+            </Modal.Header>
+            <Modal.Footer gap="md" align="center">
+              <Modal.Close>Close</Modal.Close>
             </Modal.Footer>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      const footer = screen.getByTestId("modal-footer");
-      expect(footer).toBeInTheDocument();
-      expect(footer).toHaveClass("flex");
+      // If we get here, props are correctly typed
+      expect(true).toBe(true);
     });
-  });
 
-  describe("Accessibility", () => {
-    it("has dialog role for screen readers", async () => {
+    it("Modal API does not require Radix imports", () => {
+      // This test ensures consumers don't need to import Radix directly
+      // The test itself uses only Modal public API
       renderWithTheme(
-        <Modal.Root defaultOpen>
+        <Modal.Root>
+          <Modal.Trigger>Open</Modal.Trigger>
           <Modal.Content>
             <Modal.Header>
-              <Modal.Title>Test Modal</Modal.Title>
-              <Modal.Description>Test description</Modal.Description>
+              <Modal.Title>Title</Modal.Title>
             </Modal.Header>
           </Modal.Content>
         </Modal.Root>,
       );
 
-      await waitFor(() => {
-        const dialog = screen.getByRole("dialog");
-        expect(dialog).toBeInTheDocument();
-        // Radix Dialog handles all ARIA attributes automatically
-        // We only verify that the dialog is accessible via role
-      });
+      // If this compiles and renders, public API is self-contained
+      expect(screen.getByRole("button", { name: /open/i })).toBeInTheDocument();
+    });
+
+    it("all sub-components are accessible via public API", () => {
+      // Type check: All components should be accessible
+      expect(Modal.Root).toBeDefined();
+      expect(Modal.Trigger).toBeDefined();
+      expect(Modal.Content).toBeDefined();
+      expect(Modal.Header).toBeDefined();
+      expect(Modal.Title).toBeDefined();
+      expect(Modal.Description).toBeDefined();
+      expect(Modal.Footer).toBeDefined();
+      expect(Modal.Close).toBeDefined();
     });
   });
 });

@@ -2,44 +2,41 @@
 
 /**
  * ============================================================================
- * 🔒 FOUNDATION LOCK - ContextMenu Component
+ * ⏳ FOUNDATION · LEGACY · UNLOCKED_FOR_MIGRATION - ContextMenu Component
  * ============================================================================
  *
- * This component is LOCKED as part of the UI Foundation Layer.
+ * **STATUS:** ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+ * **UNLOCK DATE:** 2025-12-19
+ * **TASK:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
  *
- * **ARCHITECTURE LOCK DOCUMENTATION:**
- * See: docs/architecture/UI_ARCHITECTURE_LOCK.md
+ * **UNLOCK RATIONALE:**
+ * ContextMenu was declared as LOCKED but was implemented using legacy patterns
+ * and never passed the canonical Foundation Step Pipeline (0–13). The current
+ * lock is declarative only and blocks required migration.
  *
- * This component must not be modified except for critical bug fixes.
- * All architectural decisions are final. Museum-grade quality achieved.
+ * **MIGRATION PATH:**
+ * ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to
+ * ensure full compliance with all Authority Contracts and canonical lifecycle
+ * requirements, similar to Button/Link standards.
  *
- * LOCKED STATUS:
- * - Component: ContextMenu (Radix ContextMenu wrapper)
- * - Category: Menus (Foundation Layer)
- * - Lock Date: 2025-12-12
- * - Status: ✅ LOCKED (FOUNDATION_LOCKED)
+ * **CONSTRAINTS DURING UNLOCK:**
+ * - ❌ No public API expansion
+ * - ❌ No new variants or sizes
+ * - ❌ No behavior changes outside canonicalization
+ * - ❌ No bypass of Authority Contracts
+ * - ✅ Refactor strictly via Foundation Step Pipeline
+ * - ✅ Canonical CVA, typing, and interaction refactor allowed
+ * - ✅ Authority Contract alignment allowed
  *
- * ALLOWED CHANGES (Minimal, approval required):
- * - Critical bug fixes only (with explicit approval)
- * - Typing improvements (TypeScript only, no runtime changes)
- * - Token wiring improvements (connecting existing tokens, no new tokens)
- * - Stories/tests fixes (test updates only, no component changes)
- * - Documentation updates (comments, docs only)
- * - Code comments explaining intentional design decisions
+ * **EXIT CRITERIA:**
+ * - Component completes Steps 0–13
+ * - Foundation lock report exists
+ * - Public Type Surface is locked
+ * - Component re-marked as FOUNDATION · LOCKED
  *
- * FORBIDDEN CHANGES (Strictly prohibited):
- * - ❌ New foundation components or subcomponents
- * - ❌ Duplicate component implementations
- * - ❌ Custom behavior that Radix ContextMenu should handle
- * - ❌ String/number visual props (must use tokens only)
- * - ❌ Re-implementing focus/keyboard/aria/portal logic
- * - ❌ Breaking API changes
- * - ❌ Behavioral rewrites or custom logic additions
- * - ❌ Token system modifications (additions/removals)
- * - ❌ Style modifications beyond token wiring
- * - ❌ New props that change component behavior
- *
- * **If you believe changes are necessary, review UI_ARCHITECTURE_LOCK.md first.**
+ * **REFERENCE:**
+ * - docs/architecture/FOUNDATION_LOCK.md (Legacy Foundation Components section)
+ * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
  *
  * ============================================================================
  *
