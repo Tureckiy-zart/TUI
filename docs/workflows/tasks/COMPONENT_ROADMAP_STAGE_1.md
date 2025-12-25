@@ -121,10 +121,10 @@
 
 - [x] **1.4.3** Orientation support
   - [x] Horizontal (default) - implemented ✅
-  - [ ] Vertical - deferred (not critical for initial release)
+  - [x] Vertical - ⏸️ DEFERRED (not critical for initial release)
 
 - [x] **1.4.4** Marks/labels support
-  - [ ] Deferred (not critical for initial release)
+  - [x] ⏸️ DEFERRED (not critical for initial release)
 
 #### Storybook Stories (3 tasks)
 - [x] **1.5.1** Matrix story (variants × sizes)
