@@ -357,6 +357,18 @@ export {
 // Note: ModalPortal is internal-only and not exported
 
 // Form components (CVA-based, token-driven)
+export {
+  RangeSlider,
+  type RangeSliderProps,
+  type RangeSliderSize,
+  type RangeSliderVariant,
+} from "./COMPOSITION/controls/RangeSlider";
+export {
+  Slider,
+  type SliderProps,
+  type SliderSize,
+  type SliderVariant,
+} from "./COMPOSITION/controls/Slider";
 export { Checkbox, type CheckboxProps, checkboxVariants } from "./PRIMITIVES/Checkbox";
 export {
   Field,

@@ -40,6 +40,37 @@
  *
  * ============================================================================
  *
+ * ARCHITECTURAL INVARIANTS (MANDATORY)
+ * ============================================================================
+ *
+ * **RADIX OWNERSHIP INVARIANT:**
+ * - All runtime behavior (keyboard navigation, focus management, ARIA attributes,
+ *   state management, disabled state handling) MUST be delegated to Radix primitives.
+ * - Tabs component MUST NOT implement custom state management or interaction logic.
+ * - Tabs component MUST NOT override or extend Radix behavior beyond visual styling.
+ * - Violation: Adding useState, useEffect, useRef, or custom event handlers for behavior.
+ *
+ * **STYLING/TOKEN OWNERSHIP INVARIANT:**
+ * - All visual styling MUST use TABS_TOKENS as the single source of truth.
+ * - All spacing, typography, colors, radius, shadows MUST reference tokens, never raw values.
+ * - Tabs component owns visual styling at COMPOSITION level, Foundation tokens own token definitions.
+ * - Violation: Using raw CSS values, inline styles, or non-token Tailwind classes for styling.
+ *
+ * **VARIANT SYSTEM INVARIANT:**
+ * - Variant system (underline, pill, segmented) is FINITE and EXPLICIT.
+ * - Size system (sm, md, lg) is FINITE and EXPLICIT.
+ * - Tone system (neutral, primary) is FINITE and EXPLICIT.
+ * - Adding new variants, sizes, or tones REQUIRES Foundation Step Pipeline approval.
+ * - Violation: Adding new variant/size/tone values without pipeline approval.
+ *
+ * **PUBLIC API INVARIANT:**
+ * - Public API surface MUST remain minimal and expressive.
+ * - Custom props (size, variant, tone, icon props) MUST be token-based unions.
+ * - Radix props MUST be passed through without modification.
+ * - Violation: Adding non-token props, changing prop types, or modifying Radix prop behavior.
+ *
+ * ============================================================================
+ *
  * Tabs Component
  *
  * Radix-based tabs component with token-driven styling.
@@ -115,12 +146,12 @@ const tabsListVariants = cva(
         sm: `${TABS_TOKENS.size.sm.list.gap} ${TABS_TOKENS.size.sm.list.padding}`,
         md: `${TABS_TOKENS.size.md.list.gap} ${TABS_TOKENS.size.md.list.padding}`,
         lg: `${TABS_TOKENS.size.lg.list.gap} ${TABS_TOKENS.size.lg.list.padding}`,
-      },
+      } satisfies Record<TabsSizeToken, string>,
       variant: {
         underline: "",
         pill: "",
         segmented: `${TABS_TOKENS.variant.segmented.list.background} ${TABS_TOKENS.variant.segmented.list.padding} ${TABS_TOKENS.variant.segmented.list.radius}`,
-      },
+      } satisfies Record<TabsVariantToken, string>,
     },
     defaultVariants: {
       size: "md",
@@ -137,7 +168,7 @@ const tabsTriggerVariants = cva(
         sm: `${TABS_TOKENS.size.sm.trigger.height} ${TABS_TOKENS.size.sm.trigger.padding.horizontal} ${TABS_TOKENS.size.sm.trigger.padding.vertical} ${TABS_TOKENS.size.sm.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
         md: `${TABS_TOKENS.size.md.trigger.height} ${TABS_TOKENS.size.md.trigger.padding.horizontal} ${TABS_TOKENS.size.md.trigger.padding.vertical} ${TABS_TOKENS.size.md.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
         lg: `${TABS_TOKENS.size.lg.trigger.height} ${TABS_TOKENS.size.lg.trigger.padding.horizontal} ${TABS_TOKENS.size.lg.trigger.padding.vertical} ${TABS_TOKENS.size.lg.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
-      },
+      } satisfies Record<TabsSizeToken, string>,
       variant: {
         underline: cn(
           TABS_TOKENS.variant.underline.trigger.default.background,
@@ -169,11 +200,11 @@ const tabsTriggerVariants = cva(
           TABS_TOKENS.variant.segmented.trigger.active.border,
           TABS_TOKENS.variant.segmented.trigger.active.shadow,
         ),
-      },
+      } satisfies Record<TabsVariantToken, string>,
       tone: {
         neutral: "",
         primary: "",
-      },
+      } satisfies Record<TabsToneToken, string>,
     },
     compoundVariants: [
       // Underline variant with indicator (CSS-based)
@@ -225,7 +256,7 @@ const tabsContentVariants = cva(`outline-none`, {
       sm: `${TABS_TOKENS.size.sm.content.padding} ${TABS_TOKENS.size.sm.content.marginTop}`,
       md: `${TABS_TOKENS.size.md.content.padding} ${TABS_TOKENS.size.md.content.marginTop}`,
       lg: `${TABS_TOKENS.size.lg.content.padding} ${TABS_TOKENS.size.lg.content.marginTop}`,
-    },
+    } satisfies Record<TabsSizeToken, string>,
   },
   defaultVariants: {
     size: "md",

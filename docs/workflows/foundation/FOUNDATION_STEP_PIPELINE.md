@@ -112,6 +112,37 @@ The full system specification and task templates can be found here:
 - 📄 [TUNG System Specification](../tung_system_specification.md)
 - 📄 [TUNG Step Template](templates/FOUNDATION_STEP_TUNG_TEMPLATE.json)
 
+## 🤖 AI Model Recommendations
+Each pipeline step has a recommended AI model for optimal execution.
+See the complete model usage guide:
+- 📄 [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
+
+---
+
+## 🚀 Quick Start Guide
+
+**Before starting the pipeline:**
+1. Identify component name (use exported name, e.g., `Button`, not `button`)
+2. Determine layer: Foundation or Extension
+3. Prepare audit report path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+4. Open recommended AI model (see AI Models Usage Guide)
+
+**Pipeline execution order:**
+- **STEP 0** → Create baseline (Sonnet 4.5)
+- **STEP 1–8** → Analyze and document (Sonnet/Opus) [findings → FIX backlog]
+- **STEP 9** → Apply ALL fixes (Codex Max)
+- **STEP 10–12** → Validate and lock (Codex Max / GPT-5.2)
+
+**Mandatory checkpoints (must share audit report):**
+- ✅ STEP 0 (Baseline)
+- ✅ STEP 8 (Refactor Decision)
+- ✅ STEP 9 (FIX Consolidation)
+- ✅ STEP 10 (Tests & Storybook)
+- ✅ STEP 11 (Accessibility)
+- ✅ STEP 12 (Final Lock)
+
+**Estimated time:** 6-8 hours for typical component
+
 ---
 
 ## 🎯 **0. Intent & Non‑Goals**
@@ -619,13 +650,14 @@ Also record **consciously NOT made changes**.
 
 Lock propagation targets (minimum):
 
-* `docs/FOUNDATION_LOCK.md`
+**Required files (all components):**
+* `docs/architecture/FOUNDATION_LOCK.md` — If component is Foundation layer
+* `docs/architecture/ARCHITECTURE_LOCK.md` — Architectural decisions and constraints
+* `docs/PROJECT_PROGRESS.md` — Project progress tracking
+* `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — Component audit report (final section)
 
-* `docs/ARCHITECTURE_LOCK.md`
-
-* `docs/PROJECT_PROGRESS.md`
-
-* audit report final section
+**Additional files (if applicable):**
+* `docs/architecture/EXTENSION_STATE.md` — If component is Extension layer
 
 **Forbidden:** claiming locked if any doc/report contradicts reality.
 
@@ -724,6 +756,10 @@ This step answers the question:
 
 > "What exactly are we dealing with before we start improving anything?"
 
+### Recommended Model
+
+**Sonnet 4.5** — Structured documentation and careful reading. No code changes required in this step.
+
 ### Mandatory Output
 
 Create/overwrite the audit report at the canonical path:
@@ -733,6 +769,12 @@ Create/overwrite the audit report at the canonical path:
 ### Required Sections in the Audit Report (all required)
 
 STEP 0 MUST produce a "Full Audit Report" with the following sections:
+
+0) **Pipeline Progress Tracker**
+   - Checklist of all steps (STEP 0-12)
+   - Estimated time per step
+   - Checkpoint markers
+   - Total estimated time
 
 1) **Header / Metadata**
    - Component name (exported name)
@@ -792,6 +834,21 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
 💡 If both `Tooltip.tsx` and `Popover.tsx` exist, this step must record that fact **before** any conclusions are made.
 
+### Step Completion Checklist
+
+Before proceeding to STEP 1, verify:
+- [ ] Audit report created at canonical path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- [ ] Pipeline Progress Tracker section exists
+- [ ] Header/Metadata section filled
+- [ ] Baseline Inventory documented (files, exports, deps, props)
+- [ ] Run Plan (STEP MAP) created
+- [ ] Risk Register (ANTI-DRIFT) filled
+- [ ] Initial FIX Backlog structure created
+- [ ] DoD (Definition of Done) documented
+- [ ] No code changes made
+- [ ] STEP 0 section in audit report filled
+- [ ] Checkpoint: Audit report shared with operator
+
 ---
 
 ## 🔍 **4. STEP 1 — Structural & Code Quality Review**
@@ -799,6 +856,10 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 ### **Goal**
 
 Identify and remove **obvious structural problems** in the code.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **What to Look For**
 
@@ -828,6 +889,18 @@ Identify and remove **obvious structural problems** in the code.
 
 💡 Multiple similar tooltip content blocks → single mapped structure.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 2, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 1 section exists
+- [ ] Outcome field filled (`No changes required` | `Changes applied` | `Changes required`)
+- [ ] Blocking field filled (`yes/no`)
+- [ ] Structural issues documented in FIX backlog
+- [ ] No behavior changes made
+- [ ] No API changes made
+- [ ] Model recommendation followed (Sonnet 4.5)
+
 ---
 
 ## 🎯 **5. STEP 2 — Semantic Role & Responsibility Validation**
@@ -835,6 +908,10 @@ Identify and remove **obvious structural problems** in the code.
 ### **Goal**
 
 Ensure the component has a **clear, narrow responsibility**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural analysis and decision-making about component role and responsibility.
 
 ### **Questions to Answer**
 
@@ -854,6 +931,16 @@ Ensure the component has a **clear, narrow responsibility**.
 
 * Reduce scope rather than adding configuration flags.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 3, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 2 section exists
+- [ ] Role definition written (1-2 sentences)
+- [ ] Out-of-scope logic identified
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+
 ---
 
 ## 🔄 **6. STEP 3 — Duplication & Internal Pattern Alignment**
@@ -861,6 +948,10 @@ Ensure the component has a **clear, narrow responsibility**.
 ### **Goal**
 
 Normalize internal patterns so the component behaves like a **first‑class citizen** of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **Checks**
 
@@ -876,6 +967,15 @@ Normalize internal patterns so the component behaves like a **first‑class citi
 
 * Prefer one clear pattern over multiple "almost the same" ones.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 4, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 3 section exists
+- [ ] Pattern alignment issues documented
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+
 ---
 
 ## ⚡ **7. STEP 4 — State & Interaction Model Review**
@@ -883,6 +983,10 @@ Normalize internal patterns so the component behaves like a **first‑class citi
 ### **Goal**
 
 Confirm that interaction logic is **simple, predictable, and platform‑native**.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **Checks**
 
@@ -898,6 +1002,15 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 
 * Simplify interaction paths.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 5, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 4 section exists
+- [ ] State model documented
+- [ ] Interaction issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+
 ---
 
 ## 🎨 **8. STEP 5 — Token, Size & Variant Consistency**
@@ -905,6 +1018,10 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 ### **Goal**
 
 Ensure the component speaks the **same visual language** as the rest of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Compliance validation and documentation.
 
 ### **Checks**
 
@@ -936,6 +1053,17 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 
 STEP 5 checks compliance; mapping details live in SIZE_MAPPING_SPEC; naming rules live in VARIANTS_SIZE_CANON.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 6, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 5 section exists
+- [ ] Token compliance validated
+- [ ] Size scale alignment checked
+- [ ] Variant issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
 ---
 
 ## 📚 **9. STEP 6 — Public API & DX Review**
@@ -943,6 +1071,10 @@ STEP 5 checks compliance; mapping details live in SIZE_MAPPING_SPEC; naming rule
 ### **Goal**
 
 Make the component **easy to understand and hard to misuse**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural judgment about public API design and developer experience.
 
 ### **Checks**
 
@@ -960,6 +1092,16 @@ Make the component **easy to understand and hard to misuse**.
 
 ⚠️ STEP 6 evaluates the **current API quality**, but must not declare the API final.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 7, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 6 section exists
+- [ ] Public API reviewed
+- [ ] DX issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
 ---
 
 ## 🔷 **10. STEP 7 — Type System Alignment**
@@ -967,6 +1109,10 @@ Make the component **easy to understand and hard to misuse**.
 ### **Goal**
 
 Use the type system as **a safety net and documentation tool**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Type system analysis and reasoning.
 
 ### **Checks**
 
@@ -986,6 +1132,16 @@ Use the type system as **a safety net and documentation tool**.
 
 ⚠️ STEP 7 must not declare the type system `optimal` or `final`.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 8, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 7 section exists
+- [ ] Type system reviewed
+- [ ] Type issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
 ---
 
 ## ✨ **11. STEP 8 — Intentional Refactor Pass**
@@ -993,6 +1149,10 @@ Use the type system as **a safety net and documentation tool**.
 ### **Goal**
 
 Perform a **final, focused quality sweep**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Senior-level decision-making about what to fix in STEP 9.
 
 ### **Guiding Question**
 
@@ -1016,6 +1176,17 @@ Perform a **final, focused quality sweep**.
 
 Additionally, STEP 8 must record a list of **consciously NOT made changes**.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 9, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 8 section exists
+- [ ] Explicit decision recorded: `Refactor required` OR `Refactor not required`
+- [ ] Consciously NOT made changes documented
+- [ ] FIX backlog finalized (all STEP 1-8 findings collected)
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 9**
+
 ---
 
 ## 🛠️ **12. STEP 9 — Mandatory FIX & Consolidation (CRITICAL)**
@@ -1025,6 +1196,10 @@ Additionally, STEP 8 must record a list of **consciously NOT made changes**.
 Apply all required fixes identified during STEP 1–8 to ensure full compliance
 
 with existing system standards before any validation or locking occurs.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Apply ALL fixes from backlog. Heavy code work including refactoring, structure improvements, and duplication removal.
 
 ### **Scope**
 
@@ -1110,6 +1285,33 @@ This step exists to guarantee that:
 
 - the locked result reflects deliberate engineering decisions.
 
+### **STEP 9 Decision Flow**
+
+1. Review FIX backlog from STEP 1-8
+2. Classify fixes:
+   - **BLOCKERS** → must fix now
+   - **NON-BLOCKERS** → fix or defer with justification
+   - **DEFERRED** → explicitly document why not fixing
+3. Apply fixes (use Codex Max)
+4. Update audit report STEP 9 section
+5. **Checkpoint: Share report before STEP 10**
+
+**Exit condition:** All BLOCKERS resolved OR component marked "Not ready for Foundation"
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 10, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 9 section exists
+- [ ] All BLOCKERS from FIX backlog resolved
+- [ ] NON-BLOCKERS fixed or deferred with justification
+- [ ] Code quality improved (readability, structure, maintainability)
+- [ ] Duplication reduced
+- [ ] No new features added
+- [ ] Public API changes documented (if any)
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 10**
+
 ---
 
 ## Failure Modes & Exit Conditions (REFERENCE)
@@ -1142,6 +1344,11 @@ Prove that the improved component behaves as expected.
 
 Tests and Storybook are treated as **executable proof of the component contract**,
 
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Code generation for tests and Storybook stories.
+
+
 not as auxiliary validation artifacts.
 
 If a behavior, variant, interaction, or constraint cannot be clearly demonstrated
@@ -1170,6 +1377,18 @@ Minimal or placeholder coverage is not sufficient.
 
 Story names are canonical in VARIANTS_SIZE_CANON; size-mapping stories are defined in SIZE_MAPPING_SPEC.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 11, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 10 section exists
+- [ ] Tests cover public behavior and edge cases
+- [ ] Storybook demonstrates all variants and sizes
+- [ ] Storybook includes meaningful interaction examples
+- [ ] No placeholder coverage
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 11**
+
 ---
 
 ## ♿ **14. STEP 11 — Accessibility Audit & Fixes (MANDATORY)**
@@ -1177,6 +1396,10 @@ Story names are canonical in VARIANTS_SIZE_CANON; size-mapping stories are defin
 ### **Goal**
 
 Make the component **accessible** and safe for keyboard and assistive technologies.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — A11Y correctness requires code-invasive changes (ARIA, keyboard navigation, focus management).
 
 ### **Rationale (CRITICAL)**
 
@@ -1206,6 +1429,20 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 
 * Public API changes are still prohibited unless explicitly agreed and documented.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 12, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 11 section exists
+- [ ] ARIA roles and attributes correct
+- [ ] Keyboard navigation working
+- [ ] Focus management implemented
+- [ ] Screen reader behavior tested
+- [ ] A11Y-specific tests added
+- [ ] A11Y-specific Storybook stories added
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 12**
+
 ---
 
 ## 🔒 **15. STEP 12 — Final Review & Outcome Fixation + Architectural Lock**
@@ -1213,6 +1450,10 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 ### **Goal**
 
 Formally conclude the pipeline and **lock the component status across all architectural authority documents**.
+
+### **Recommended Model**
+
+**GPT‑5.2** — Independent verification and final validation before locking.
 
 ### **Actions**
 
@@ -1226,21 +1467,107 @@ Formally conclude the pipeline and **lock the component status across all archit
 
 ⚠️ This step is considered **INCOMPLETE** unless the locked status is propagated consistently to:
 
-* `docs/FOUNDATION_LOCK.md`
+**Required files (all components):**
+* `docs/architecture/FOUNDATION_LOCK.md` — If component is Foundation layer
+* `docs/architecture/ARCHITECTURE_LOCK.md` — Architectural decisions and constraints
+* `docs/PROJECT_PROGRESS.md` — Project progress tracking
+* `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — Component audit report (final section)
 
-* `docs/ARCHITECTURE_LOCK.md`
+**Additional files (if applicable):**
+* `docs/architecture/EXTENSION_STATE.md` — If component is Extension layer
 
-* `docs/PROJECT_PROGRESS.md`
-
-* `docs/ARCHITECTURAL_INDEX.md` (or equivalent)
-
-* the component audit report file
+**Note:** The component's layer (Foundation vs Extension) determines which lock files must be updated. Foundation components are locked in `FOUNDATION_LOCK.md`, Extension components are tracked in `EXTENSION_STATE.md`.
 
 ### **Outcome**
 
 * Component accepted and locked (Foundation Lock),
 
 * or explicitly marked for further iteration.
+
+### **Step Completion Checklist**
+
+Before marking pipeline complete, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 12 section exists
+- [ ] All previous steps (STEP 0-11) verified complete
+- [ ] Code quality improvements confirmed
+- [ ] Lock propagation completed to all required files:
+  - [ ] `docs/architecture/FOUNDATION_LOCK.md` (if Foundation)
+  - [ ] `docs/architecture/ARCHITECTURE_LOCK.md`
+  - [ ] `docs/PROJECT_PROGRESS.md`
+  - [ ] `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+  - [ ] `docs/architecture/EXTENSION_STATE.md` (if Extension)
+- [ ] Model recommendation followed (GPT-5.2)
+- [ ] **MANDATORY checkpoint: Final audit report shared**
+
+---
+
+---
+
+## 🔧 Troubleshooting
+
+### "Audit report section missing"
+**Problem:** Cannot proceed to STEP N+1 without STEP N section.
+
+**Solution:** Create STEP N section in audit report, even if it contains `No changes required in this step`.
+
+### "FIX backlog too large"
+**Problem:** Too many fixes identified in STEP 1-8.
+
+**Solution:** 
+- Consider splitting into multiple pipeline runs
+- Mark component "Not ready for Foundation" if fixes are disproportionate
+- Document decision in STEP 8 audit section
+
+### "Tests fail after STEP 9"
+**Problem:** Code changes in STEP 9 broke existing tests.
+
+**Solution:** 
+- Review STEP 9 changes for unintended behavior changes
+- Update tests in STEP 10, not during STEP 9
+- Document test updates in STEP 10 audit section
+
+### "A11Y changes break existing behavior"
+**Problem:** Accessibility fixes in STEP 11 changed component behavior.
+
+**Solution:** 
+- Document in STEP 11 audit section
+- May require re-validation in STEP 10
+- Ensure behavior changes are accessibility-required only
+
+### "Lock propagation incomplete"
+**Problem:** Not all lock files updated in STEP 12.
+
+**Solution:** Verify all required files updated:
+- `docs/architecture/FOUNDATION_LOCK.md` (if Foundation)
+- `docs/architecture/ARCHITECTURE_LOCK.md`
+- `docs/PROJECT_PROGRESS.md`
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- `docs/architecture/EXTENSION_STATE.md` (if Extension)
+
+### "Model recommendation not followed"
+**Problem:** Wrong AI model used for step.
+
+**Solution:** 
+- Check [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
+- Use recommended model for optimal results
+- Document if different model used with justification
+
+---
+
+## 📚 Reference Examples
+
+Successfully completed pipeline runs:
+- **Button:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+- **Tooltip:** `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md`
+- **Tabs:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+
+These reports demonstrate:
+- Complete STEP 0-12 structure
+- Proper FIX backlog usage
+- Checkpoint compliance
+- Lock propagation
+- Model recommendations followed
 
 ---
 
@@ -1249,4 +1576,6 @@ Formally conclude the pipeline and **lock the component status across all archit
 This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
 
 Skipping steps or rushing execution will only reintroduce the problems this document is designed to eliminate.
+
+**Pipeline completion time:** 6-8 hours for typical component.
 

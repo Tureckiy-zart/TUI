@@ -426,7 +426,7 @@ The following components constitute the **complete and final** Foundation layer.
 | Component       | Category   | Base Library      | Foundation Status | Lock Date |
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
 | **Modal**       | Overlays   | Radix Dialog      | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
-| **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Tabs**        | Navigation | Radix Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
@@ -745,7 +745,7 @@ The following changes to Foundation components are **explicitly forbidden** afte
 
 Foundation Components:
 - Modal (Radix Dialog wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
-- Tabs (Radix Tabs wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- Tabs (Radix Tabs wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-23)
 - Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
 - ContextMenu (Radix ContextMenu wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
@@ -805,8 +805,13 @@ Interactive Size Scale Authority (Locked):
 
 You MUST treat Foundation components (Button, Link), Token system, Interaction Authority, Foundation Enforcement, AND Interactive Size Scale Authority as immutable.
 
-**LEGACY UNLOCKED COMPONENTS (Modal, Tabs, ContextMenu, Toast):**
+**LEGACY UNLOCKED COMPONENTS (ContextMenu, Toast):**
 - These components are UNLOCKED for canonical migration ONLY
+
+**PROCESS LOCKED COMPONENTS (Tabs):**
+- Tabs has completed Pipeline 18A (Steps 0-12) and is PROCESS LOCKED (2025-12-23)
+- Component is in COMPOSITION layer, not Foundation lock
+- Future structural modifications require re-entry into Pipeline 18A
 - Refactor strictly via Foundation Step Pipeline (Steps 0–13)
 - ❌ NO public API expansion
 - ❌ NO new variants or sizes
@@ -931,7 +936,7 @@ If Interactive Size Scale Authority modifications are needed:
 | Component       | Status    | Lock Date | Immutability |
 | --------------- | --------- | --------- | ------------ |
 | Modal           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
-| Tabs            | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| Tabs            | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 | Pipeline Complete |
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
 | ContextMenu     | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |

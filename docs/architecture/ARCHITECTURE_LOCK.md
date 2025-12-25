@@ -1,8 +1,8 @@
 # 🔒 Tenerife UI Architecture Lock
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-23  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -64,7 +64,7 @@ The following components are **locked** and **immutable**:
 | Component       | Category   | Base Library      | Foundation Status | Lock Date |
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
 | **Modal**       | Overlays   | Radix Dialog      | ✅ **LOCKED**      | 2025-12-20 |
-| **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Tabs**        | Navigation | Radix Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
 | **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
@@ -624,7 +624,7 @@ Before considering the architecture lock complete, verify:
 | Component   | Status    | Locked Date | Notes                                                    |
 | ----------- | --------- | ----------- | -------------------------------------------------------- |
 | Modal       | ✅ LOCKED | 2025-12-20  | Radix Dialog wrapper. Sole modal foundation.             |
-| Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix Tabs wrapper. Sole tabs foundation.                |
+| Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 | Radix Tabs wrapper. Sole tabs foundation. Pipeline 18A complete.                |
 | Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Radix Select wrapper. Sole select foundation.            |
 | ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix ContextMenu wrapper. Sole context menu foundation. |
 | Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Radix Toast wrapper. Sole toast foundation.              |
@@ -653,6 +653,7 @@ The following public components are **LOCKED** and **IMMUTABLE** after completin
 | Tooltip   | Extension  | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
 | Popover   | Extension  | ✅ LOCKED | 2025-12-21  | Overlay component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
 | HoverCard | Extension  | ✅ LOCKED | 2025-12-21  | Menu component. Locked after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Public API. |
+| NextLinkAdapter | Extension  | ✅ PROCESS_LOCK | 2025-12-23  | Framework adapter component. Locked after Pipeline 18A completion (Steps 0-12). Extension-only (not exported from main library). |
 
 **Extension Layer Locked Components Status:** ✅ **ACTIVE**  
 **Lock Date:** 2025-12-15  
@@ -731,6 +732,13 @@ Any token system modifications require:
 
 ## 🔄 Version History
 
+- **v1.3** (2025-12-23): NextLinkAdapter PROCESS_LOCK Applied
+  - Added NextLinkAdapter to Locked Public Components Index
+  - NextLinkAdapter status: PROCESS_LOCK (Extension component lock)
+  - Pipeline 18A completed (Steps 0-12, STEP 9 skipped)
+  - Lock Date: 2025-12-23
+  - Completed per TUI_NEXTLINKADAPTER_STEP_12 task
+
 - **v1.2** (2025-12-16): Foundation Closure Status Update
   - Updated document to reflect Foundation CLOSED status (2025-12-16)
   - Added Foundation Authorities status (all LOCKED and IMMUTABLE)
@@ -772,8 +780,8 @@ New functionality must be built as **extensions** that compose foundation compon
 ---
 
 **Status:** ✅ **LOCKED** (Foundation CLOSED)  
-**Version:** 1.2  
+**Version:** 1.3  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-23  
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable)

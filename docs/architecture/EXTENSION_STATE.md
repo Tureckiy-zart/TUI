@@ -73,18 +73,14 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
    - **Exports:** `Modal`, `ModalClose`, `ModalContent`, `ModalDescription`, `ModalFooter`, `ModalHeader`, `ModalOverlay`, `ModalRoot`, `ModalTitle`, `ModalTrigger`
 
 2. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx`
-   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
-   - **Unlock Date:** 2025-12-19
-   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
-   - **Unlock Reason:** Tabs was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-   - **Migration Path:** Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-   - **Constraints During Unlock:**
-     - ❌ No public API expansion
-     - ❌ No new variants or sizes
-     - ❌ No behavior changes outside canonicalization
-     - ❌ No bypass of Authority Contracts
-   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
-   - **Exports:** `Tabs`
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-23
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+   - **Exports:** `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
    - **Types:** `TabsContentProps`, `TabsListProps`, `TabsRootProps`, `TabsTriggerProps`
 
 3. **Select** - `src/components/select/Select.tsx`
@@ -239,6 +235,26 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 20. **Field** - `src/components/ui/field.tsx`
     - Exports: `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
+
+21. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
+    - **Status:** ✅ **ALLOWED** (Extension Control)
+    - **Type:** Interactive Control Component
+    - **Purpose:** Numeric value control via draggable thumb on track
+    - **Radix Primitive:** `@radix-ui/react-slider`
+    - **Sizes:** `sm | md | lg` (Interactive Size Scale Authority)
+    - **Variants:** `primary | secondary | outline` (InteractiveVariant subset)
+    - **Use Cases:** Volume control, price filters, numeric input with visual feedback
+    - Exports: `Slider`, `SliderProps`, `SliderSize`, `SliderVariant`
+
+22. **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
+    - **Status:** ✅ **ALLOWED** (Extension Control)
+    - **Type:** Interactive Control Component
+    - **Purpose:** Numeric range selection via two draggable thumbs on track
+    - **Radix Primitive:** `@radix-ui/react-slider` (with `minStepsBetweenThumbs`)
+    - **Sizes:** `sm | md | lg` (Interactive Size Scale Authority)
+    - **Variants:** `primary | secondary | outline` (InteractiveVariant subset)
+    - **Use Cases:** Price range filters, date range selection, min-max value input
+    - Exports: `RangeSlider`, `RangeSliderProps`, `RangeSliderSize`, `RangeSliderVariant`
 
 ### Layout Components
 
@@ -448,6 +464,21 @@ Higher-level component compositions that combine multiple Extension Layer compon
    - **Types:** `GroupByFunction`, `NotificationChannel`, `NotificationContextType`, `NotificationData`, `NotificationOptions`, `NotificationVariant`, `NotificationCenterDismissAllProps`, `NotificationCenterGroupHeaderProps`, `NotificationCenterItemProps`, `NotificationCenterListProps`, `NotificationCenterPanelProps`, `NotificationCenterProviderProps`, `NotificationCenterTriggerProps`
 
 **Note:** Dialog is also an Extension Composition (see Overlay Components section) but is listed there for organizational purposes.
+
+### Framework Adapters (Extension-Only)
+
+Framework-specific adapter components that bridge external framework APIs with Foundation components. These components are **Extension-only** (not exported from `src/index.ts`) and are available for use within Next.js applications.
+
+1. **NextLinkAdapter** - `src/EXTENSIONS/next/NextLinkAdapter.tsx`
+   - **Status:** ✅ **PROCESS_LOCK**
+   - **Lock Date:** 2025-12-23
+   - **Pipeline 18A Completion:** 2025-12-23 (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Extension component lock)
+   - **Component Type:** Extension-level Framework Adapter
+   - **Purpose:** Bridges Next.js `next/link` with Foundation `Link` component
+   - **Rule:** Future modifications require new Pipeline 18A execution
+   - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
 
 ---
 
@@ -764,7 +795,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
    - Assumptions about component availability are FORBIDDEN
 
 3. **Foundation components status**
-   - Modal, Tabs, ContextMenu, Toast are ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration) - unlocked for canonical migration only
+   - Modal is ✅ **LOCKED** (2025-12-20), Tabs is ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-23), ContextMenu is ✅ **LOCKED** (2025-12-22), Toast is ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration) - unlocked for canonical migration only
    - Select is ⏳ **UNLOCKED** (Pending Canonical Lock)
    - Button, Link are ✅ **FINAL LOCK** - DO NOT modify, extend, or create alternatives
    - DO NOT import from non-canonical paths
@@ -837,8 +868,8 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 ## Document Status
 
 **Status:** FINAL  
-**Version:** 1.2  
-**Last Updated:**  
+**Version:** 1.4  
+**Last Updated:** 2025-12-23  
 
 This document is **FINAL**. Any changes to this canonical state require explicit architectural review and approval. This document serves as the definitive law for UI component usage in the Extension Layer.
 
@@ -849,6 +880,22 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 ---
 
 ## Version History
+
+- **v1.4** (2025-12-23): NextLinkAdapter PROCESS_LOCK Applied
+  - Added NextLinkAdapter to Framework Adapters section
+  - NextLinkAdapter status updated to PROCESS_LOCK
+  - Pipeline 18A completed (Steps 0-12, STEP 9 skipped)
+  - Lock Date: 2025-12-23
+  - Audit Report: `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
+  - Completed per TUI_NEXTLINKADAPTER_STEP_12 task
+
+- **v1.4** (2025-12-23): Tabs Pipeline 18A Complete
+  - Tabs has completed canonical Foundation Step Pipeline (Steps 0–12)
+  - Tabs status changed from LEGACY UNLOCKED to ✅ PROCESS LOCKED
+  - Lock Date: 2025-12-23
+  - Lock Type: PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+  - Audit Report: `docs/reports/audit/TABS_BASELINE_REPORT.md`
+  - Component demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
 
 - **v1.3** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
   - Updated Modal, Tabs, ContextMenu, and Toast status from LOCKED to LEGACY UNLOCKED

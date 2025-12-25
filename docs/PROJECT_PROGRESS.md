@@ -31,7 +31,7 @@ Architecture modifications require explicit unlock procedure.
 The following components are **locked** and **immutable** as part of the UI Foundation Layer:
 
 1. **Modal** - `src/components/modal/Modal.tsx` (Radix Dialog wrapper)
-2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx` (Radix Tabs wrapper)
+2. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx` (Radix Tabs wrapper) — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-23)
 3. **Select** - `src/components/select/Select.tsx` (Radix Select wrapper) — **FINALIZED** (S1 + H1–H4 complete; UNLOCK required for any functional/behavioral/API change)
 4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx` (Radix ContextMenu wrapper)
 5. **Toast** - `src/components/overlays/Toast.tsx` (Radix Toast wrapper)
@@ -146,6 +146,21 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
      - `size="icon"` removed and FORBIDDEN
    - **Rule:** DO NOT modify, extend, or create alternatives
    - **Exports:** `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
+
+2. **NextLinkAdapter** - `src/EXTENSIONS/next/NextLinkAdapter.tsx`
+   - **Status:** ✅ **PROCESS_LOCK**
+   - **Lock Date:** 2025-12-23
+   - **Pipeline 18A Completion:** 2025-12-23 (Steps 0-12 complete, STEP 9 skipped per STEP 8 decision)
+   - **Audit Report:** `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Extension component lock)
+   - **Component Type:** Extension-level Framework Adapter
+   - **Key Decisions:**
+     - FIX NOT REQUIRED (STEP 8 decision)
+     - All accessibility semantics preserved
+     - Complete visual delegation to Foundation Link
+     - Zero styling/token/variant logic in adapter
+   - **Rule:** Future modifications require new Pipeline 18A execution
+   - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
 
 ### Extension Component Lock Rules
 
@@ -273,6 +288,46 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Notes:** TUNG is now the authoritative task formalization standard for AI-driven development in this project.
 
 ## Completed Tasks
+
+### Slider & RangeSlider Components (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-25
+- **Summary:** Successfully created Slider and RangeSlider Extension control components following Component Creation Pipeline v1.2 (C0-C10). Both components are fully token-driven, accessible, and tested.
+- **Components Created:**
+  - **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
+    - Single value numeric control via draggable thumb
+    - Radix UI Slider primitive (`@radix-ui/react-slider`)
+    - Sizes: `sm | md | lg` (Interactive Size Scale Authority)
+    - Variants: `primary | secondary | outline` (InteractiveVariant subset)
+    - Use cases: Volume control, price filters, numeric input
+  - **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
+    - Range value numeric control via two draggable thumbs
+    - Radix UI Slider primitive with `minStepsBetweenThumbs={1}`
+    - Sizes: `sm | md | lg` (Interactive Size Scale Authority)
+    - Variants: `primary | secondary | outline` (InteractiveVariant subset)
+    - Use cases: Price range filters, date range selection, min-max value input
+- **Pipeline Phases Completed:**
+  - ✅ C0: Authority & Lock Check
+  - ✅ C1: Component Classification & Justification (Control components)
+  - ✅ C2: Token Mapping Design (all visual props mapped to tokens)
+  - ✅ C3: API Design & Contract Definition (Authority compliance verified)
+  - ✅ C4: Component Scaffold Generation (via CLI tool)
+  - ✅ C5: Token-Based Implementation (Radix + CVA + token unions)
+  - ✅ C6: Implementation Refinement (JSDoc, code quality)
+  - ✅ C7: Storybook Stories (Default, Matrix, States, SizesGallery, Use Cases)
+  - ✅ C8: Tests (Behavior, edge cases, A11Y, token compliance)
+  - ✅ C9: Token Compliance Validation (NO raw values detected)
+  - ✅ C10: Export Registration & Lock Propagation
+- **Token Compliance:** ✅ PASSED (no raw values, all token unions)
+- **Accessibility:** ✅ FULL SUPPORT (ARIA roles, keyboard navigation, focus management)
+- **Testing:** ✅ COMPREHENSIVE (behavior, edge cases, A11Y, token compliance)
+- **Documentation:** ✅ COMPLETE (Storybook stories with Matrix/States/Use Cases)
+- **Exports:** Added to `src/index.ts`, `docs/architecture/EXTENSION_STATE.md`
+- **Reference:** Component Creation Pipeline v1.2 (`docs/workflows/COMPONENT_CREATION_PIPELINE.md`)
+- **Roadmap:** First component from Stage 1 (`docs/workflows/tasks/COMPONENT_ROADMAP.md`)
+
+---
 
 ### U1 - Introduce Theme System (100% Complete)
 
