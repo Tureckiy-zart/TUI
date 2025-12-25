@@ -236,7 +236,19 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 20. **Field** - `src/components/ui/field.tsx`
     - Exports: `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
 
-21. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
+21. **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
+    - **Status:** ✅ **ALLOWED** (Extension Primitive)
+    - **Type:** User Representation Primitive
+    - **Purpose:** Displays user profile images with automatic fallback to initials or icon
+    - **Radix Primitive:** `@radix-ui/react-avatar`
+    - **Sizes:** `xs | sm | md | lg | xl | 2xl` (Non-interactive Size Scale)
+    - **Shapes:** `circle | square` (Border radius variants)
+    - **Status Indicators:** `online | offline | busy | null` (Optional status dot)
+    - **Use Cases:** User profiles, comment sections, team member lists, chat interfaces, activity feeds
+    - **Features:** Image loading with fallback, automatic initials extraction, status indicators, grouped avatars
+    - Exports: `Avatar`, `AvatarGroup`, `AvatarProps`, `AvatarGroupProps`, `AvatarSize`, `AvatarShape`, `AvatarStatus`, `AvatarGroupSpacing`
+
+22. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
     - **Status:** ✅ **ALLOWED** (Extension Control)
     - **Type:** Interactive Control Component
     - **Purpose:** Numeric value control via draggable thumb on track
@@ -246,7 +258,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Use Cases:** Volume control, price filters, numeric input with visual feedback
     - Exports: `Slider`, `SliderProps`, `SliderSize`, `SliderVariant`
 
-22. **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
+23. **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
     - **Status:** ✅ **ALLOWED** (Extension Control)
     - **Type:** Interactive Control Component
     - **Purpose:** Numeric range selection via two draggable thumbs on track

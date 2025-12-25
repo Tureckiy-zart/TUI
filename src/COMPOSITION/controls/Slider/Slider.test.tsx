@@ -264,4 +264,144 @@ describe("Slider", () => {
       expect(root).not.toHaveStyle({ height: "32px" }); // No hardcoded height
     });
   });
+
+  describe("Vertical Orientation Tests", () => {
+    it("renders in vertical orientation", () => {
+      render(<Slider orientation="vertical" defaultValue={50} aria-label="Vertical slider" />);
+
+      const slider = screen.getByRole("slider");
+      expect(slider).toHaveAttribute("aria-orientation", "vertical");
+    });
+
+    it("defaults to horizontal orientation", () => {
+      render(<Slider defaultValue={50} aria-label="Horizontal slider" />);
+
+      const slider = screen.getByRole("slider");
+      expect(slider).toHaveAttribute("aria-orientation", "horizontal");
+    });
+
+    it("applies correct variant classes for vertical orientation", () => {
+      const { container } = render(
+        <Slider
+          orientation="vertical"
+          variant="primary"
+          size="md"
+          defaultValue={50}
+          aria-label="Vertical slider"
+        />,
+      );
+
+      const root = container.firstChild as HTMLElement;
+      expect(root).toHaveClass("flex-col");
+    });
+
+    it("keyboard navigation works in vertical mode", async () => {
+      const handleChange = vi.fn();
+      render(
+        <Slider
+          orientation="vertical"
+          defaultValue={50}
+          onValueChange={handleChange}
+          aria-label="Vertical slider"
+        />,
+      );
+
+      const slider = screen.getByRole("slider");
+      slider.focus();
+
+      // Arrow Up increases value in vertical mode
+      await userEvent.keyboard("{ArrowUp}");
+      expect(handleChange).toHaveBeenCalled();
+    });
+  });
+
+  describe("Marks Tests", () => {
+    it("renders marks as numbers array", () => {
+      const { container } = render(
+        <Slider defaultValue={50} marks={[0, 25, 50, 75, 100]} aria-label="Slider with marks" />,
+      );
+
+      // Check that marks container exists
+      const marksContainer = container.querySelector(".absolute.inset-0");
+      expect(marksContainer).toBeInTheDocument();
+    });
+
+    it("renders marks as SliderMark objects", () => {
+      const { container } = render(
+        <Slider
+          defaultValue={50}
+          marks={[
+            { value: 0, label: "Low" },
+            { value: 50, label: "Mid" },
+            { value: 100, label: "High" },
+          ]}
+          aria-label="Slider with mark objects"
+        />,
+      );
+
+      const marksContainer = container.querySelector(".absolute.inset-0");
+      expect(marksContainer).toBeInTheDocument();
+    });
+
+    it("shows mark labels when showMarkLabels is true", () => {
+      render(
+        <Slider
+          defaultValue={50}
+          marks={[
+            { value: 0, label: "Low" },
+            { value: 50, label: "Mid" },
+            { value: 100, label: "High" },
+          ]}
+          showMarkLabels
+          aria-label="Slider with mark labels"
+        />,
+      );
+
+      expect(screen.getByText("Low")).toBeInTheDocument();
+      expect(screen.getByText("Mid")).toBeInTheDocument();
+      expect(screen.getByText("High")).toBeInTheDocument();
+    });
+
+    it("hides mark labels when showMarkLabels is false", () => {
+      render(
+        <Slider
+          defaultValue={50}
+          marks={[
+            { value: 0, label: "Low" },
+            { value: 50, label: "Mid" },
+            { value: 100, label: "High" },
+          ]}
+          showMarkLabels={false}
+          aria-label="Slider without mark labels"
+        />,
+      );
+
+      expect(screen.queryByText("Low")).not.toBeInTheDocument();
+      expect(screen.queryByText("Mid")).not.toBeInTheDocument();
+      expect(screen.queryByText("High")).not.toBeInTheDocument();
+    });
+
+    it("renders marks in vertical orientation", () => {
+      const { container } = render(
+        <Slider
+          orientation="vertical"
+          defaultValue={50}
+          marks={[0, 50, 100]}
+          aria-label="Vertical slider with marks"
+        />,
+      );
+
+      const marksContainer = container.querySelector(".absolute.inset-0");
+      expect(marksContainer).toBeInTheDocument();
+    });
+
+    it("does not render marks when marks array is empty", () => {
+      const { container } = render(
+        <Slider defaultValue={50} marks={[]} aria-label="Slider without marks" />,
+      );
+
+      const marksContainer = container.querySelector(".absolute.inset-0");
+      expect(marksContainer).not.toBeInTheDocument();
+    });
+  });
 });

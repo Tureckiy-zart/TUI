@@ -322,3 +322,202 @@ export const DisabledState: Story = {
     "aria-label": "Disabled range slider",
   },
 };
+
+/**
+ * Vertical Orientation
+ * Demonstrates vertical range slider orientation
+ */
+export const VerticalOrientation: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<[number, number]>([25, 75]);
+
+    return (
+      <div className="flex h-64 items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            orientation="vertical"
+            size="sm"
+            variant="primary"
+            value={range}
+            onValueChange={setRange}
+            aria-label="Vertical range slider small"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            orientation="vertical"
+            size="md"
+            variant="secondary"
+            value={range}
+            onValueChange={setRange}
+            aria-label="Vertical range slider medium"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            orientation="vertical"
+            size="lg"
+            variant="outline"
+            value={range}
+            onValueChange={setRange}
+            aria-label="Vertical range slider large"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * With Marks (No Labels)
+ * Demonstrates range slider with visual tick marks only
+ */
+export const WithMarks: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<[number, number]>([25, 75]);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-2 block text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            value={range}
+            onValueChange={setRange}
+            marks={[0, 25, 50, 75, 100]}
+            size="md"
+            variant="primary"
+            aria-label="Range slider with marks"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * With Marks and Labels
+ * Demonstrates range slider with tick marks and custom labels
+ */
+export const WithMarksAndLabels: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<[number, number]>([25, 75]);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-4 block text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            value={range}
+            onValueChange={setRange}
+            marks={[
+              { value: 0, label: "0%" },
+              { value: 25, label: "25%" },
+              { value: 50, label: "50%" },
+              { value: 75, label: "75%" },
+              { value: 100, label: "100%" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="primary"
+            aria-label="Range slider with marks and labels"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * Custom Mark Labels
+ * Demonstrates range slider with custom text labels at marks
+ */
+export const CustomMarkLabels: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<[number, number]>([33, 66]);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-4 block text-sm text-muted-foreground">
+            Price Range: ${range[0]}-${range[1]}
+          </span>
+          <RangeSlider
+            value={range}
+            onValueChange={setRange}
+            marks={[
+              { value: 0, label: "$0" },
+              { value: 33, label: "$33" },
+              { value: 66, label: "$66" },
+              { value: 100, label: "$100" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="primary"
+            aria-label="Price range slider"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * Vertical with Marks
+ * Demonstrates vertical range slider with marks and labels
+ */
+export const VerticalWithMarks: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<[number, number]>([25, 75]);
+
+    return (
+      <div className="flex h-64 items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            orientation="vertical"
+            value={range}
+            onValueChange={setRange}
+            marks={[0, 25, 50, 75, 100]}
+            size="md"
+            variant="primary"
+            aria-label="Vertical range slider with marks"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">
+            {range[0]}-{range[1]}
+          </span>
+          <RangeSlider
+            orientation="vertical"
+            value={range}
+            onValueChange={setRange}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 50, label: "50" },
+              { value: 100, label: "100" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="secondary"
+            aria-label="Vertical range slider with marks and labels"
+          />
+        </div>
+      </div>
+    );
+  },
+};

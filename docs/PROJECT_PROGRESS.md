@@ -327,6 +327,46 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Reference:** Component Creation Pipeline v1.2 (`docs/workflows/COMPONENT_CREATION_PIPELINE.md`)
 - **Roadmap:** First component from Stage 1 (`docs/workflows/tasks/COMPONENT_ROADMAP.md`)
 
+### Avatar & AvatarGroup Components (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-25
+- **Summary:** Successfully created Avatar and AvatarGroup Extension primitive components following Component Creation Pipeline v1.2 (C0-C10). Both components are fully token-driven, accessible, and tested with comprehensive Storybook stories.
+- **Components Created:**
+  - **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
+    - User profile image display with automatic fallback to initials or icon
+    - Radix UI Avatar primitive (`@radix-ui/react-avatar`)
+    - Sizes: `xs | sm | md | lg | xl | 2xl` (Non-interactive Size Scale)
+    - Shapes: `circle | square` (Border radius variants)
+    - Status indicators: `online | offline | busy | null` (Optional status dot)
+    - Features: Image loading with fallback, automatic initials extraction, status indicators
+    - Use cases: User profiles, comment sections, team member lists, chat interfaces, activity feeds
+  - **AvatarGroup** - `src/COMPOSITION/controls/Avatar/AvatarGroup.tsx`
+    - Multiple avatars with overlap effect and overflow indicator
+    - Spacing variants: `tight | normal | loose` (Token-based negative margin)
+    - Max count support with "+N" overflow indicator
+    - Use cases: Team displays, participant lists, user groups
+- **Pipeline Phases Completed:**
+  - ✅ C0: Authority & Lock Check (verified no conflicts)
+  - ✅ C1: Component Classification & Justification (Primitive - user representation)
+  - ✅ C2: Token Mapping Design (all visual props mapped to existing tokens)
+  - ✅ C3: API Design & Contract Definition (minimal and explicit API)
+  - ✅ C4: Component Scaffold Generation (via CLI tool)
+  - ✅ C5: Token-Based Implementation (Radix + CVA + token unions + initials extraction)
+  - ✅ C6: Implementation Refinement (JSDoc, code quality, helper extraction)
+  - ✅ C7: Storybook Stories (Default, Matrix, States, FallbackStates, AvatarGroup variants, Realistic examples)
+  - ✅ C8: Tests (60+ test cases: behavior, edge cases, A11Y, initials extraction, group logic)
+  - ✅ C9: Token Compliance Validation (NO raw values detected - 100% token compliance)
+  - ✅ C10: Export Registration & Lock Propagation
+- **Token Compliance:** ✅ PASSED (zero raw values, all token-based Tailwind classes)
+- **Accessibility:** ✅ FULL SUPPORT (alt text, ARIA labels for status, Radix accessibility)
+- **Testing:** ✅ COMPREHENSIVE (60+ test cases covering Avatar + AvatarGroup)
+- **Documentation:** ✅ COMPLETE (10+ Storybook stories including Matrix, States, realistic examples)
+- **Exports:** Added to `src/index.ts`, `docs/architecture/EXTENSION_STATE.md`
+- **Reference:** Component Creation Pipeline v1.2 (`docs/workflows/COMPONENT_CREATION_PIPELINE.md`)
+- **Roadmap:** Second component from Stage 1 (`docs/workflows/tasks/COMPONENT_ROADMAP.md`, `docs/workflows/tasks/COMPONENT_ROADMAP_STAGE_1.md`)
+- **Progress:** Stage 1 now 2/6 components complete (33%)
+
 ---
 
 ### U1 - Introduce Theme System (100% Complete)

@@ -28,6 +28,18 @@ import { rangeSliderVariants } from "./range-slider-variants";
 
 export type RangeSliderSize = "sm" | "md" | "lg";
 export type RangeSliderVariant = "primary" | "secondary" | "outline";
+export type RangeSliderOrientation = "horizontal" | "vertical";
+
+export interface RangeSliderMark {
+  /**
+   * Value at which the mark should be placed
+   */
+  value: number;
+  /**
+   * Optional label to display at the mark
+   */
+  label?: string | React.ReactNode;
+}
 
 export interface RangeSliderProps {
   /**
@@ -85,6 +97,24 @@ export interface RangeSliderProps {
   disabled?: boolean;
 
   /**
+   * Orientation of the range slider
+   * @default "horizontal"
+   */
+  orientation?: RangeSliderOrientation;
+
+  /**
+   * Marks to display on the range slider
+   * Can be an array of mark objects or just an array of values
+   */
+  marks?: RangeSliderMark[] | number[];
+
+  /**
+   * Whether to show labels for marks
+   * @default false
+   */
+  showMarkLabels?: boolean;
+
+  /**
    * Accessible label for the range slider
    */
   "aria-label"?: string;
@@ -121,6 +151,9 @@ const RangeSlider = React.forwardRef<
       size = "md",
       variant = "primary",
       disabled = false,
+      orientation = "horizontal",
+      marks,
+      showMarkLabels = false,
       "aria-label": ariaLabel,
       name,
     },
@@ -137,7 +170,41 @@ const RangeSlider = React.forwardRef<
     );
 
     // Get variant classes from CVA
-    const { root, track, range, thumb } = rangeSliderVariants({ size, variant });
+    const { root, track, range, thumb, mark, markDot, markLabel } = rangeSliderVariants({
+      size,
+      variant,
+      orientation,
+    });
+
+    // Normalize marks to array of RangeSliderMark objects
+    const normalizedMarks = React.useMemo(() => {
+      if (!marks || marks.length === 0) return [];
+      return marks.map((m) => (typeof m === "number" ? { value: m } : m));
+    }, [marks]);
+
+    // Render marks
+    const renderMarks = () => {
+      if (normalizedMarks.length === 0) return null;
+
+      return (
+        <div className="pointer-events-none absolute inset-0">
+          {normalizedMarks.map((markItem, idx) => {
+            const percent = ((markItem.value - min) / (max - min)) * 100;
+            const style =
+              orientation === "horizontal" ? { left: `${percent}%` } : { bottom: `${percent}%` };
+
+            return (
+              <div key={idx} className={cn(mark())} style={style}>
+                <div className={cn(markDot())} />
+                {showMarkLabels && markItem.label && (
+                  <div className={cn(markLabel())}>{markItem.label}</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      );
+    };
 
     return (
       <SliderPrimitive.Root
@@ -151,11 +218,13 @@ const RangeSlider = React.forwardRef<
         step={step}
         minStepsBetweenThumbs={1}
         disabled={disabled}
+        orientation={orientation}
         aria-label={ariaLabel}
         name={name}
       >
         <SliderPrimitive.Track className={cn(track())}>
           <SliderPrimitive.Range className={cn(range())} />
+          {renderMarks()}
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb className={cn(thumb())} />
         <SliderPrimitive.Thumb className={cn(thumb())} />

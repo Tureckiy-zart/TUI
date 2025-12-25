@@ -12,23 +12,38 @@ import { cva } from "class-variance-authority";
  */
 const rangeSliderRootVariants = cva(
   // Base styles
-  "relative flex w-full touch-none select-none items-center",
+  "relative flex touch-none select-none items-center",
   {
     variants: {
       size: {
-        sm: "h-4", // Container height for small
-        md: "h-5", // Container height for medium
-        lg: "h-6", // Container height for large
+        sm: "", // Container size for small (orientation-specific)
+        md: "", // Container size for medium (orientation-specific)
+        lg: "", // Container size for large (orientation-specific)
       },
       variant: {
         primary: "",
         secondary: "",
         outline: "",
       },
+      orientation: {
+        horizontal: "w-full flex-row",
+        vertical: "h-full flex-col",
+      },
     },
+    compoundVariants: [
+      // Horizontal sizes (height)
+      { orientation: "horizontal", size: "sm", class: "h-4" },
+      { orientation: "horizontal", size: "md", class: "h-5" },
+      { orientation: "horizontal", size: "lg", class: "h-6" },
+      // Vertical sizes (width)
+      { orientation: "vertical", size: "sm", class: "w-4" },
+      { orientation: "vertical", size: "md", class: "w-5" },
+      { orientation: "vertical", size: "lg", class: "w-6" },
+    ],
     defaultVariants: {
       size: "md",
       variant: "primary",
+      orientation: "horizontal",
     },
   },
 );
@@ -38,23 +53,38 @@ const rangeSliderRootVariants = cva(
  */
 const rangeSliderTrackVariants = cva(
   // Base styles - rounded track with transition
-  "relative h-full w-full grow overflow-hidden rounded-full transition-colors",
+  "relative grow overflow-hidden rounded-full transition-colors",
   {
     variants: {
       size: {
-        sm: "h-1", // Track height: 4px
-        md: "h-1.5", // Track height: 6px
-        lg: "h-2", // Track height: 8px
+        sm: "", // Track thickness (orientation-specific)
+        md: "", // Track thickness (orientation-specific)
+        lg: "", // Track thickness (orientation-specific)
       },
       variant: {
         primary: "bg-primary-200 dark:bg-primary-800",
         secondary: "bg-secondary-200 dark:bg-secondary-800",
         outline: "bg-border",
       },
+      orientation: {
+        horizontal: "w-full",
+        vertical: "h-full",
+      },
     },
+    compoundVariants: [
+      // Horizontal track heights
+      { orientation: "horizontal", size: "sm", class: "h-1" },
+      { orientation: "horizontal", size: "md", class: "h-1.5" },
+      { orientation: "horizontal", size: "lg", class: "h-2" },
+      // Vertical track widths
+      { orientation: "vertical", size: "sm", class: "w-1" },
+      { orientation: "vertical", size: "md", class: "w-1.5" },
+      { orientation: "vertical", size: "lg", class: "w-2" },
+    ],
     defaultVariants: {
       size: "md",
       variant: "primary",
+      orientation: "horizontal",
     },
   },
 );
@@ -64,7 +94,7 @@ const rangeSliderTrackVariants = cva(
  */
 const rangeSliderRangeVariants = cva(
   // Base styles - absolute positioning for range fill
-  "absolute h-full transition-colors",
+  "absolute transition-colors",
   {
     variants: {
       size: {
@@ -77,10 +107,15 @@ const rangeSliderRangeVariants = cva(
         secondary: "bg-secondary-600 dark:bg-secondary-500",
         outline: "bg-primary-600 dark:bg-primary-500",
       },
+      orientation: {
+        horizontal: "h-full",
+        vertical: "w-full",
+      },
     },
     defaultVariants: {
       size: "md",
       variant: "primary",
+      orientation: "horizontal",
     },
   },
 );
@@ -128,18 +163,98 @@ const rangeSliderThumbVariants = cva(
 );
 
 /**
+ * RangeSlider mark variants (visual tick marks)
+ */
+const rangeSliderMarkVariants = cva(
+  // Base styles - absolute positioned mark with dot
+  "absolute flex items-center justify-center pointer-events-none",
+  {
+    variants: {
+      size: {
+        sm: "text-xs",
+        md: "text-sm",
+        lg: "text-base",
+      },
+      orientation: {
+        horizontal: "flex-col top-full mt-1 -translate-x-1/2",
+        vertical: "flex-row left-full ml-1 -translate-y-1/2",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      orientation: "horizontal",
+    },
+  },
+);
+
+/**
+ * RangeSlider mark dot variants (the actual tick mark)
+ */
+const rangeSliderMarkDotVariants = cva(
+  // Base styles - small circular dot
+  "rounded-full bg-border transition-colors",
+  {
+    variants: {
+      size: {
+        sm: "w-1 h-1",
+        md: "w-1.5 h-1.5",
+        lg: "w-2 h-2",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+/**
+ * RangeSlider mark label variants
+ */
+const rangeSliderMarkLabelVariants = cva(
+  // Base styles - label text
+  "text-muted-foreground whitespace-nowrap",
+  {
+    variants: {
+      size: {
+        sm: "text-xs mt-1",
+        md: "text-sm mt-1.5",
+        lg: "text-base mt-2",
+      },
+      orientation: {
+        horizontal: "",
+        vertical: "ml-1",
+      },
+    },
+    compoundVariants: [
+      { orientation: "vertical", size: "sm", class: "ml-1 mt-0" },
+      { orientation: "vertical", size: "md", class: "ml-1.5 mt-0" },
+      { orientation: "vertical", size: "lg", class: "ml-2 mt-0" },
+    ],
+    defaultVariants: {
+      size: "md",
+      orientation: "horizontal",
+    },
+  },
+);
+
+/**
  * Combined range slider variants
- * Returns all variant classes for root, track, range, and thumb
+ * Returns all variant classes for root, track, range, thumb, and marks
  */
 export const rangeSliderVariants = ({
   size,
   variant,
+  orientation,
 }: {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "outline";
+  orientation?: "horizontal" | "vertical";
 }) => ({
-  root: () => rangeSliderRootVariants({ size, variant }),
-  track: () => rangeSliderTrackVariants({ size, variant }),
-  range: () => rangeSliderRangeVariants({ size, variant }),
+  root: () => rangeSliderRootVariants({ size, variant, orientation }),
+  track: () => rangeSliderTrackVariants({ size, variant, orientation }),
+  range: () => rangeSliderRangeVariants({ size, variant, orientation }),
   thumb: () => rangeSliderThumbVariants({ size, variant }),
+  mark: () => rangeSliderMarkVariants({ size, orientation }),
+  markDot: () => rangeSliderMarkDotVariants({ size }),
+  markLabel: () => rangeSliderMarkLabelVariants({ size, orientation }),
 });

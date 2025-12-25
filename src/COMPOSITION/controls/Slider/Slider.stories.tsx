@@ -285,3 +285,186 @@ export const DisabledState: Story = {
     "aria-label": "Disabled slider",
   },
 };
+
+/**
+ * Vertical Orientation
+ * Demonstrates vertical slider orientation
+ */
+export const VerticalOrientation: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(50);
+
+    return (
+      <div className="flex h-64 items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            orientation="vertical"
+            size="sm"
+            variant="primary"
+            value={value}
+            onValueChange={setValue}
+            aria-label="Vertical slider small"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            orientation="vertical"
+            size="md"
+            variant="secondary"
+            value={value}
+            onValueChange={setValue}
+            aria-label="Vertical slider medium"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            orientation="vertical"
+            size="lg"
+            variant="outline"
+            value={value}
+            onValueChange={setValue}
+            aria-label="Vertical slider large"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * With Marks (No Labels)
+ * Demonstrates slider with visual tick marks only
+ */
+export const WithMarks: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(50);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-2 block text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            value={value}
+            onValueChange={setValue}
+            marks={[0, 25, 50, 75, 100]}
+            size="md"
+            variant="primary"
+            aria-label="Slider with marks"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * With Marks and Labels
+ * Demonstrates slider with tick marks and custom labels
+ */
+export const WithMarksAndLabels: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(50);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-4 block text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            value={value}
+            onValueChange={setValue}
+            marks={[
+              { value: 0, label: "0%" },
+              { value: 25, label: "25%" },
+              { value: 50, label: "50%" },
+              { value: 75, label: "75%" },
+              { value: 100, label: "100%" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="primary"
+            aria-label="Slider with marks and labels"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * Custom Mark Labels
+ * Demonstrates slider with custom text labels at marks
+ */
+export const CustomMarkLabels: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(50);
+
+    return (
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <span className="mb-4 block text-sm text-muted-foreground">Volume: {value}%</span>
+          <Slider
+            value={value}
+            onValueChange={setValue}
+            marks={[
+              { value: 0, label: "Off" },
+              { value: 33, label: "Low" },
+              { value: 66, label: "Medium" },
+              { value: 100, label: "High" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="primary"
+            aria-label="Volume slider"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * Vertical with Marks
+ * Demonstrates vertical slider with marks and labels
+ */
+export const VerticalWithMarks: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(50);
+
+    return (
+      <div className="flex h-64 items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            orientation="vertical"
+            value={value}
+            onValueChange={setValue}
+            marks={[0, 25, 50, 75, 100]}
+            size="md"
+            variant="primary"
+            aria-label="Vertical slider with marks"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-muted-foreground">{value}%</span>
+          <Slider
+            orientation="vertical"
+            value={value}
+            onValueChange={setValue}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 50, label: "50" },
+              { value: 100, label: "100" },
+            ]}
+            showMarkLabels
+            size="md"
+            variant="secondary"
+            aria-label="Vertical slider with marks and labels"
+          />
+        </div>
+      </div>
+    );
+  },
+};
