@@ -55,9 +55,13 @@ This document provides a prioritized roadmap for developing components needed to
 - **Time Estimate:** 3-4 days
 - **Radix:** `@radix-ui/react-slider`
 - **Use Cases:** Price filters, volume control, date range selection
-- **Status:** ✅ Completed
+- **Status:** ✅ Completed (Enhanced)
 - **Date Completed:** 2025-12-25
+- **Enhanced:** 2025-12-25 (vertical orientation + marks/labels support)
 - **PR:** `fix/slider-rangeslider-code-review-fixes`
+- **Features:** Horizontal/vertical orientation, marks with optional labels, token-driven styling
+- **Tests:** 74 total tests (36 Slider + 38 RangeSlider), 100% pass rate
+- **Stories:** 28+ Storybook stories including vertical and marks demonstrations
 
 ### 1.2 Avatar / AvatarGroup
 - **Why:** User avatar display, profiles

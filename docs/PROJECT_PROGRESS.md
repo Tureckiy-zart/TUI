@@ -289,24 +289,28 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 ## Completed Tasks
 
-### Slider & RangeSlider Components (100% Complete)
+### Slider & RangeSlider Components (100% Complete + Enhanced)
 
-- **Status:** ✅ completed
-- **Date Completed:** 2025-12-25
-- **Summary:** Successfully created Slider and RangeSlider Extension control components following Component Creation Pipeline v1.2 (C0-C10). Both components are fully token-driven, accessible, and tested.
+- **Status:** ✅ completed (Enhanced 2025-12-25)
+- **Date Completed:** 2025-12-25 (Initial), Enhanced with vertical orientation and marks support
+- **Summary:** Successfully created Slider and RangeSlider Extension control components following Component Creation Pipeline v1.2 (C0-C10). Both components are fully token-driven, accessible, and tested. **Enhanced with vertical orientation and marks/labels support.**
 - **Components Created:**
   - **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
     - Single value numeric control via draggable thumb
     - Radix UI Slider primitive (`@radix-ui/react-slider`)
     - Sizes: `sm | md | lg` (Interactive Size Scale Authority)
     - Variants: `primary | secondary | outline` (InteractiveVariant subset)
-    - Use cases: Volume control, price filters, numeric input
+    - **Orientation:** `horizontal | vertical` ✅ (2025-12-25)
+    - **Marks/Labels:** Full support with `SliderMark` interface ✅ (2025-12-25)
+    - Use cases: Volume control, price filters, numeric input, vertical sliders
   - **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
     - Range value numeric control via two draggable thumbs
     - Radix UI Slider primitive with `minStepsBetweenThumbs={1}`
     - Sizes: `sm | md | lg` (Interactive Size Scale Authority)
     - Variants: `primary | secondary | outline` (InteractiveVariant subset)
-    - Use cases: Price range filters, date range selection, min-max value input
+    - **Orientation:** `horizontal | vertical` ✅ (2025-12-25)
+    - **Marks/Labels:** Full support with `RangeSliderMark` interface ✅ (2025-12-25)
+    - Use cases: Price range filters, date range selection, min-max value input, vertical range sliders
 - **Pipeline Phases Completed:**
   - ✅ C0: Authority & Lock Check
   - ✅ C1: Component Classification & Justification (Control components)
@@ -315,17 +319,25 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
   - ✅ C4: Component Scaffold Generation (via CLI tool)
   - ✅ C5: Token-Based Implementation (Radix + CVA + token unions)
   - ✅ C6: Implementation Refinement (JSDoc, code quality)
-  - ✅ C7: Storybook Stories (Default, Matrix, States, SizesGallery, Use Cases)
-  - ✅ C8: Tests (Behavior, edge cases, A11Y, token compliance)
+  - ✅ C7: Storybook Stories (Default, Matrix, States, SizesGallery, Use Cases, **Vertical + Marks stories**)
+  - ✅ C8: Tests (Behavior, edge cases, A11Y, token compliance, **vertical + marks tests**)
   - ✅ C9: Token Compliance Validation (NO raw values detected)
   - ✅ C10: Export Registration & Lock Propagation
-- **Token Compliance:** ✅ PASSED (no raw values, all token unions)
-- **Accessibility:** ✅ FULL SUPPORT (ARIA roles, keyboard navigation, focus management)
-- **Testing:** ✅ COMPREHENSIVE (behavior, edge cases, A11Y, token compliance)
-- **Documentation:** ✅ COMPLETE (Storybook stories with Matrix/States/Use Cases)
+- **Enhanced Features (2025-12-25):**
+  - ✅ **Vertical Orientation:** Full support for vertical sliders with token-driven styling
+  - ✅ **Marks/Labels:** Visual tick marks with optional labels (`marks` prop, `showMarkLabels` prop)
+  - ✅ **14 Additional Tests:** Vertical orientation (8 tests) + Marks functionality (6 tests)
+  - ✅ **14 Additional Stories:** Vertical orientation examples (4) + Marks/labels demonstrations (10)
+  - ✅ **CVA Enhancements:** Updated variants with orientation and mark styling support
+- **Token Compliance:** ✅ PASSED (no raw values, all token unions, marks use spacing/typography tokens)
+- **Accessibility:** ✅ FULL SUPPORT (ARIA roles, keyboard navigation, focus management, orientation attributes)
+- **Testing:** ✅ COMPREHENSIVE (Slider: 36 tests, RangeSlider: 38 tests, 100% pass rate)
+- **Documentation:** ✅ COMPLETE (Storybook stories with Matrix/States/Use Cases/Vertical/Marks)
+- **Code Statistics:** ~2,485 lines of production-ready code (components + variants + stories + tests)
 - **Exports:** Added to `src/index.ts`, `docs/architecture/EXTENSION_STATE.md`
 - **Reference:** Component Creation Pipeline v1.2 (`docs/workflows/COMPONENT_CREATION_PIPELINE.md`)
 - **Roadmap:** First component from Stage 1 (`docs/workflows/tasks/COMPONENT_ROADMAP.md`)
+- **Enhancement PR:** `fix/slider-rangeslider-code-review-fixes` branch
 
 ### Avatar & AvatarGroup Components (100% Complete)
 
