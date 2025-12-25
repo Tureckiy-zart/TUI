@@ -171,7 +171,7 @@
 - [x] **1.7.3** Export component
   - [x] Add to `src/index.ts` ✅
   - [x] Export types: `SliderProps`, `RangeSliderProps`, `SliderSize`, `SliderVariant` ✅
-  - [ ] Update `EXTENSION_STATE.md` - TODO
+  - [x] Update `EXTENSION_STATE.md` ✅ (lines 239-257)
 
 ---
 
