@@ -6,6 +6,8 @@
  * All color values use CSS variables for theme-aware styling.
  */
 
+import { MOTION_TOKENS } from "./motion";
+
 // Foundation tokens are referenced in comments for documentation
 // All color values use CSS variable references for theme support
 
@@ -150,8 +152,9 @@ export const CHECKBOX_TOKENS = {
   /**
    * Transition tokens
    * Smooth transitions for state changes
+   * Uses MOTION_TOKENS for canonical motion values
    */
-  transition: "transition-all duration-200 ease-in-out", // Smooth transitions
+  transition: MOTION_TOKENS.transitionPreset.normal, // Smooth transitions - Motion Authority compliant
 } as const;
 
 /**

@@ -672,11 +672,38 @@ All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` prefer
 ### Source of Truth
 
 **Canonical Token Definitions:**
-- Location: `src/tokens/motion.ts`
-- Exports: `durations`, `easings`, `transitions`, `keyframes`, `animations`, `reducedMotion`
-- Types: `Duration`, `Easing`, `Transition`, `Keyframe`, `Animation`
+- Location: `src/FOUNDATION/tokens/motion.ts` (V1 - deprecated)
+- Location: `src/FOUNDATION/tokens/motion/v2.ts` (V2 - canonical, preferred)
+- Exports: `durations`, `easings`, `transitions`, `keyframes`, `animations`, `reducedMotion` (V1)
+- Exports: `motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined` (V2)
 
-**Rule:** The token system file (`src/tokens/motion.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
+**Rule:** The token system files (`src/FOUNDATION/tokens/motion.ts` and `src/FOUNDATION/tokens/motion/v2.ts`) are the single source of truth for all motion values. Components MUST reference tokens from these files, never define their own motion values.
+
+### Motion Token Version Policy
+
+**Motion V1 Tokens (DEPRECATED):**
+- **File:** `src/FOUNDATION/tokens/motion.ts`
+- **Status:** ⚠️ **DEPRECATED** - Read-only, no new usage
+- **Policy:** V1 tokens are locked and immutable. Existing components using V1 tokens may continue to use them, but **no new components or features should reference V1 tokens**.
+- **Migration:** Components using V1 tokens should migrate to V2 when refactored, but migration is not mandatory for existing code.
+
+**Motion V2 Tokens (CANONICAL):**
+- **File:** `src/FOUNDATION/tokens/motion/v2.ts`
+- **Status:** ✅ **CANONICAL** - Only allowed forward path
+- **Policy:** V2 tokens are the **only allowed forward path** for new motion usage. All new components, features, and motion implementations **MUST** reference V2 namespace.
+- **Rule:** Any new motion usage must reference V2 tokens (`motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, etc.) or component-level `MOTION_TOKENS` which map to V2 values.
+
+**Component Motion Tokens:**
+- **File:** `src/FOUNDATION/tokens/components/motion.ts`
+- **Status:** ✅ **CANONICAL** - Preferred for component usage
+- **Policy:** `MOTION_TOKENS` provides component-level mappings that abstract V1/V2 differences. Components should prefer `MOTION_TOKENS` over direct V1/V2 references when possible.
+- **Rule:** `MOTION_TOKENS` is the recommended interface for component-level motion usage, as it provides semantic names and abstracts token version differences.
+
+**Forward Path Rule:**
+- ✅ **Allowed:** New components using `MOTION_TOKENS` or V2 tokens directly
+- ✅ **Allowed:** Existing components continuing to use V1 tokens (grandfathered)
+- ❌ **Forbidden:** New components or features using V1 tokens directly
+- ❌ **Forbidden:** Creating new V1 token references in new code
 
 ---
 
@@ -757,11 +784,19 @@ Any Motion Authority modifications require:
 
 ## Related Documentation
 
+- **[Motion System Lock](./locks/MOTION_LOCK.md)** - Formal lock declaration for motion system (tokens, presets, utilities, tests, stories)
 - [Motion Animations Working Guide](../reference/MOTION_ANIMATIONS_GUIDE.md) - Practical guide for implementing motion animations, troubleshooting common issues, and ensuring animations work correctly in Storybook and runtime environments
 
 ---
 
 ## Version History
+
+- **v1.5** (2025-12-27): Motion Final Lock Confirmation - V1/V2 Policy
+  - Added Motion Token Version Policy section
+  - Marked Motion V1 tokens as DEPRECATED (read-only, no new usage)
+  - Marked Motion V2 tokens as CANONICAL (only allowed forward path)
+  - Added forward path rule: new components must use V2 or MOTION_TOKENS
+  - Updated Token System Integration section with V1/V2 file locations
 
 - **v1.4** (2025-12-27): Motion Audit and Lock - Escape Hatch Policy
   - Added Escape Hatch Policy section
@@ -796,7 +831,7 @@ Any Motion Authority modifications require:
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.4  
+**Version:** 1.5  
 **Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-27  
 **Priority:** BLOCKER  

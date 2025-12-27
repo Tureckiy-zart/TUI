@@ -8,6 +8,8 @@
  * Switch consists of a track (container) and handle (thumb) that slides within the track.
  */
 
+import { MOTION_TOKENS } from "./motion";
+
 // Foundation tokens are referenced in comments for documentation
 // All color values use CSS variable references for theme support
 
@@ -190,12 +192,12 @@ export const SWITCH_TOKENS = {
   /**
    * Transition tokens
    * Smooth transitions for handle animation and state changes
-   * Uses motion tokens for duration and easing
+   * Uses MOTION_TOKENS for canonical motion values
    */
   transition: {
-    handle: "transition-transform duration-300 ease-in-out", // Handle slide animation
-    track: "transition-colors duration-300 ease-in-out", // Track color transition
-    combined: "transition-all duration-300 ease-in-out", // Combined transitions
+    handle: `${MOTION_TOKENS.transition.transform} ${MOTION_TOKENS.duration.normal} ${MOTION_TOKENS.easing["in-out"]}`, // Handle slide animation - Motion Authority compliant
+    track: `${MOTION_TOKENS.transition.colors} ${MOTION_TOKENS.duration.normal} ${MOTION_TOKENS.easing["in-out"]}`, // Track color transition - Motion Authority compliant
+    combined: MOTION_TOKENS.transitionPreset.normal, // Combined transitions - Motion Authority compliant
   } as const,
 
   /**

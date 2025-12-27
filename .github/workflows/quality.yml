@@ -54,6 +54,9 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
+      - name: Run motion integrity tests
+        run: pnpm test -- src/COMPOSITION/motion/animation/motion-integrity.test.ts src/COMPOSITION/motion/animation/interactivity-integrity.test.ts src/COMPOSITION/motion/animation/reduced-motion.test.ts
+
       - name: Run accessibility suite
         run: pnpm ci:a11y
 
@@ -62,4 +65,5 @@ jobs:
           echo "✅ Quality checks complete"
           echo "   • Linting"
           echo "   • Unit tests"
+          echo "   • Motion integrity tests"
           echo "   • Accessibility (axe + contrast)"
