@@ -3,8 +3,11 @@
 **Status:** ✅ LOCKED  
 **Priority:** BLOCKER  
 **Date Created:** 2025-12-16  
-**Version:** 1.2  
+**Version:** 2.2  
 **Enforcement:** TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN
+
+> **⚠️ BREAKING CHANGE (2.0.0):** Motion V1 has been permanently removed from the codebase as of version 2.0.0.  
+> Motion V1 tokens, APIs, and references must not be reintroduced. The motion system is singular and versionless post-2.0.0.
 
 ---
 
@@ -95,6 +98,71 @@ The following patterns are explicitly forbidden:
 
 ---
 
+## Motion GAP
+
+### Definition
+
+**Motion GAP** is a state where a component undergoes a perceivable state or spatial change without temporal feedback (motion/animation).
+
+**Key Principle:** Motion GAP is a diagnostic signal, not an automatic defect. It represents a design decision point that must be consciously evaluated and resolved.
+
+### GAP Evaluation Rule
+
+**Any component that changes state, visibility, or spatial position MUST be evaluated for Motion GAP.**
+
+The following change types trigger mandatory GAP evaluation:
+
+1. **Visibility changes** - Enter/exit animations (e.g., modal open/close, toast show/hide, dropdown expand/collapse)
+2. **Size or layout changes** - Dimension changes (e.g., accordion expand/collapse, resizable panels)
+3. **Selection or active state changes** - Interactive state transitions (e.g., button active, checkbox checked, tab selected)
+4. **User-triggered action feedback** - Direct user interaction responses (e.g., button press, form submission, navigation)
+
+**Rule:** Lack of motion MUST be justified as 'no motion by design'. Unresolved GAPs are forbidden in LOCKED components.
+
+### Allowed GAP Outcomes
+
+Exactly three outcomes are allowed for GAP resolution:
+
+1. **ADD MOTION** — A canonical motion preset is applied from the Motion Preset Catalog (`.tm-motion-*` utilities) or motion tokens.
+2. **NO MOTION BY DESIGN** — Absence of motion is explicitly declared and documented as an intentional design decision.
+3. **DEFERRED** — Decision is postponed with documented rationale (only allowed for UNLOCKED components).
+
+**Rule:** Unresolved GAPs are forbidden in LOCKED components. A component may only be considered LOCKED if all potential Motion GAPs are resolved.
+
+**Visual Examples:** See Storybook section "Foundation Locked/Composition/Motion/GAP" for visual demonstrations of unresolved GAP, resolved GAP with motion, and no motion by design examples.
+
+### GAP Resolution Examples
+
+**✅ ADD MOTION:**
+```tsx
+// Modal with fade-scale animation
+<Modal className={isOpen ? "tm-motion-fade-scale" : "tm-motion-fade-scale-out"}>
+  Content
+</Modal>
+```
+
+**✅ NO MOTION BY DESIGN:**
+```tsx
+// Explicitly documented: no motion for instant feedback
+// Motion GAP resolved: NO MOTION BY DESIGN - instant state change required for accessibility
+<Button onClick={handleClick}>Submit</Button>
+```
+
+**✅ DEFERRED (UNLOCKED only):**
+```tsx
+// Motion GAP: DEFERRED - requires design review for appropriate animation
+// Rationale: Component is in active development, motion decision pending
+<CustomComponent />
+```
+
+**❌ FORBIDDEN:**
+```tsx
+// Unresolved GAP - component changes state without motion or explicit justification
+<Modal isOpen={isOpen}>Content</Modal>
+```
+
+---
+
 ## Canonical Token Scale Table
 
 The following table defines the canonical motion token scale with key, meaning, and example values:
@@ -102,23 +170,23 @@ The following table defines the canonical motion token scale with key, meaning, 
 | Key | Meaning | Example Value |
 |-----|---------|---------------|
 | `durations.fast` | Fast duration | `150ms` |
-| `durations.normal` | Normal duration | `300ms` |
-| `durations.slow` | Slow duration | `500ms` |
+| `durations.normal` | Normal duration | `250ms` |
+| `durations.slow` | Slow duration | `350ms` |
 | `easings["ease-out"]` | Ease out (recommended) | `cubic-bezier(0, 0, 0.2, 1)` |
 | `easings["ease-in-out"]` | Ease in-out | `cubic-bezier(0.4, 0, 0.2, 1)` |
 | `transitions.fast` | Fast transition | `150ms ease-out` |
-| `transitions.normal` | Normal transition | `300ms ease-in-out` |
-| `transitions.slow` | Slow transition | `500ms ease-in-out` |
+| `transitions.normal` | Normal transition | `250ms ease-in-out` |
+| `transitions.slow` | Slow transition | `350ms ease-in-out` |
 | `keyframes.fadeIn` | Fade in keyframe | `opacity: 0 → 1` |
 | `keyframes.slideInUp` | Slide in up keyframe | `translateY(100%) → translateY(0)` |
 | `keyframes.scaleIn` | Scale in keyframe | `scale(0.95) → scale(1)` |
-| `animations.fadeIn` | Fade in animation | `fadeIn 300ms ease-out` |
-| `animations.slideInUp` | Slide in up animation | `slideInUp 300ms ease-out` |
+| `animations.fadeIn` | Fade in animation | `fadeIn 250ms ease-out` |
+| `animations.slideInUp` | Slide in up animation | `slideInUp 250ms ease-out` |
 | `animations.spin` | Spin animation | `spin 1s linear infinite` |
 | `reducedMotion.duration` | Reduced motion duration | `0ms` (instant) |
 | `reducedMotion.transition` | Reduced motion transition | `0ms linear` |
 
-**Rule:** All motion tokens must reference values from this canonical scale. Durations are based on a 100ms base unit. All motion must respect `prefers-reduced-motion` user preferences.
+**Rule:** All motion tokens must reference values from this canonical scale. All motion must respect `prefers-reduced-motion` user preferences.
 
 ---
 
@@ -140,26 +208,15 @@ The Motion Authority defines five categories of motion tokens:
 
 ### 1. Duration Tokens
 
-Duration tokens define the canonical animation durations based on a 100ms base unit.
+Duration tokens define the canonical animation durations for smooth CSS transitions.
 
 **Canonical Values:**
 - `instant` → `0ms` (no animation)
-- `fast` → `150ms` (1.5 × base, quick interactions)
-- `normal` → `300ms` (3 × base, default)
-- `slow` → `500ms` (5 × base, emphasized)
-- `slower` → `700ms` (7 × base, very emphasized)
-- `slowest` → `1000ms` (10 × base, maximum emphasis)
+- `fast` → `150ms` (quick interactions)
+- `normal` → `250ms` (default)
+- `slow` → `350ms` (emphasized)
 
-**Granular Durations:**
-- `75` → `75ms` (ultra-fast)
-- `100` → `100ms` (base unit)
-- `200` → `200ms` (fast-normal)
-- `250` → `250ms` (between fast and normal)
-- `400` → `400ms` (between normal and slow)
-- `600` → `600ms` (between slow and slower)
-- `800` → `800ms` (between slower and slowest)
-
-**Rule:** All duration values are multiples of the 100ms base unit, with granular options for fine adjustments.
+**Rule:** Duration values are optimized for smooth CSS transitions and accessibility compliance.
 
 ### 2. Easing Function Tokens
 
@@ -192,21 +249,21 @@ Transition tokens provide pre-configured transitions combining duration and easi
 - `fast-in-out` → `150ms ease-in-out`
 
 **Normal Transitions:**
-- `normal` → `300ms ease-in-out` (default)
-- `normal-in` → `300ms ease-in`
-- `normal-out` → `300ms ease-out`
-- `normal-in-out` → `300ms ease-in-out`
+- `normal` → `250ms ease-in-out` (default)
+- `normal-in` → `250ms ease-in`
+- `normal-out` → `250ms ease-out`
+- `normal-in-out` → `250ms ease-in-out`
 
 **Slow Transitions:**
-- `slow` → `500ms ease-in-out` (emphasized)
-- `slow-in` → `500ms ease-in`
-- `slow-out` → `500ms ease-out`
-- `slow-in-out` → `500ms ease-in-out`
+- `slow` → `350ms ease-in-out` (emphasized)
+- `slow-in` → `350ms ease-in`
+- `slow-out` → `350ms ease-out`
+- `slow-in-out` → `350ms ease-in-out`
 
 **Special Transitions:**
-- `bounce` → `300ms bounce` (bouncy transition)
-- `elastic` → `500ms elastic` (elastic transition)
-- `DEFAULT` → `300ms ease-in-out` (default transition)
+- `bounce` → `250ms bounce` (bouncy transition)
+- `elastic` → `350ms elastic` (elastic transition)
+- `DEFAULT` → `250ms ease-in-out` (default transition)
 
 **Rule:** Transition tokens MUST combine canonical duration and easing tokens. Components should prefer transition tokens over individual duration/easing combinations.
 
@@ -257,25 +314,25 @@ Keyframe animation tokens define pre-defined keyframe animations for common UI p
 Animation tokens provide pre-configured animations combining keyframes, duration, and easing.
 
 **Canonical Animations:**
-- `fadeIn` → `fadeIn 300ms ease-out`
+- `fadeIn` → `fadeIn 250ms ease-out`
 - `fadeOut` → `fadeOut 150ms ease-in`
-- `slideInUp` → `slideInUp 300ms ease-out`
-- `slideInDown` → `slideInDown 300ms ease-out`
-- `slideInLeft` → `slideInLeft 300ms ease-out`
-- `slideInRight` → `slideInRight 300ms ease-out`
+- `slideInUp` → `slideInUp 250ms ease-out`
+- `slideInDown` → `slideInDown 250ms ease-out`
+- `slideInLeft` → `slideInLeft 250ms ease-out`
+- `slideInRight` → `slideInRight 250ms ease-out`
 - `slideOutUp` → `slideOutUp 150ms ease-in`
 - `slideOutDown` → `slideOutDown 150ms ease-in`
 - `slideOutLeft` → `slideOutLeft 150ms ease-in`
 - `slideOutRight` → `slideOutRight 150ms ease-in`
-- `scaleIn` → `scaleIn 300ms ease-out`
+- `scaleIn` → `scaleIn 250ms ease-out`
 - `scaleOut` → `scaleOut 150ms ease-in`
 - `spin` → `spin 1s linear infinite`
 - `pulse` → `pulse 2s ease-in-out infinite`
 - `bounce` → `bounce 1s linear infinite`
 - `ping` → `ping 1s ease-out infinite`
 - `shake` → `shake 0.5s ease-in-out`
-- `accordion-down` → `accordion-down 300ms ease-out`
-- `accordion-up` → `accordion-up 300ms ease-out`
+- `accordion-down` → `accordion-down 250ms ease-out`
+- `accordion-up` → `accordion-up 250ms ease-out`
 
 **Rule:** Animation tokens MUST combine canonical keyframes, durations, and easings. Components should prefer animation tokens over individual keyframe/duration/easing combinations.
 
@@ -288,7 +345,12 @@ Reduced motion support ensures accessibility compliance with user preferences.
 - `easing` → `linear` (linear, no easing)
 - `transition` → `0ms linear` (instant transition)
 - `mediaQuery` → `@media (prefers-reduced-motion: reduce)`
-- `disableAnimations` → `animation: none !important; transition: none !important;`
+
+**Reduced Motion Behavior:**
+When `prefers-reduced-motion: reduce` is enabled:
+- Durations collapse to `0ms` (instant)
+- Keyframe animations are disabled
+- Transitions may remain but with zero duration
 
 **Rule:** All motion MUST respect user preferences for reduced motion. Components MUST support reduced motion via the canonical reduced motion tokens.
 
@@ -401,6 +463,21 @@ Reduced motion support ensures accessibility compliance with user preferences.
 - ❌ Conditional motion values based on component state
 
 **Rationale:** Inline motion values bypass the token system and break consistency.
+
+### 6. Physics-Based Motion (Spring, Inertia)
+
+**Forbidden:**
+- ❌ Spring animations (`spring()`, `cubic-bezier()` with spring-like curves)
+- ❌ Inertia-based animations
+- ❌ Physics-based motion systems
+
+**Rationale:** Physics-based motion is intentionally excluded from the design system because:
+- **Unpredictable timing** - Spring animations have variable duration based on physics simulation
+- **Inconsistent reduced-motion behavior** - Cannot reliably collapse to 0ms for accessibility
+- **Hard to govern and test** - Non-deterministic timing makes testing and governance difficult
+- **Not token-friendly** - Cannot be represented as fixed duration/easing token pairs
+
+**Rule:** Any spring or physics-based motion usage requires explicit unlock procedure and architectural justification.
 
 ---
 
@@ -672,38 +749,17 @@ All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` prefer
 ### Source of Truth
 
 **Canonical Token Definitions:**
-- Location: `src/FOUNDATION/tokens/motion.ts` (V1 - deprecated)
-- Location: `src/FOUNDATION/tokens/motion/v2.ts` (V2 - canonical, preferred)
-- Exports: `durations`, `easings`, `transitions`, `keyframes`, `animations`, `reducedMotion` (V1)
-- Exports: `motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined` (V2)
+- Location: `src/FOUNDATION/tokens/motion/v2.ts` - **ONLY MOTION TOKEN FILE**
+- Exports: `motionDurations`, `motionEasings`, `motionTransitions`, `motionFade`, `motionScale`, `motionSlide`, `motionCombined`, `motionReducedMotion`, `motionCSSVariables`, `motionTailwindConfig`
 
-**Rule:** The token system files (`src/FOUNDATION/tokens/motion.ts` and `src/FOUNDATION/tokens/motion/v2.ts`) are the single source of truth for all motion values. Components MUST reference tokens from these files, never define their own motion values.
+**Rule:** The motion token file (`src/FOUNDATION/tokens/motion/v2.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
 
-### Motion Token Version Policy
-
-**Motion V1 Tokens (DEPRECATED):**
-- **File:** `src/FOUNDATION/tokens/motion.ts`
-- **Status:** ⚠️ **DEPRECATED** - Read-only, no new usage
-- **Policy:** V1 tokens are locked and immutable. Existing components using V1 tokens may continue to use them, but **no new components or features should reference V1 tokens**.
-- **Migration:** Components using V1 tokens should migrate to V2 when refactored, but migration is not mandatory for existing code.
-
-**Motion V2 Tokens (CANONICAL):**
-- **File:** `src/FOUNDATION/tokens/motion/v2.ts`
-- **Status:** ✅ **CANONICAL** - Only allowed forward path
-- **Policy:** V2 tokens are the **only allowed forward path** for new motion usage. All new components, features, and motion implementations **MUST** reference V2 namespace.
-- **Rule:** Any new motion usage must reference V2 tokens (`motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, etc.) or component-level `MOTION_TOKENS` which map to V2 values.
+**Note:** Motion V1 was permanently removed in version 2.0.0. The motion system is singular and versionless post-2.0.0. Any references to Motion V1 in code, comments, examples, or documentation are incorrect and must be removed.
 
 **Component Motion Tokens:**
 - **File:** `src/FOUNDATION/tokens/components/motion.ts`
 - **Status:** ✅ **CANONICAL** - Preferred for component usage
-- **Policy:** `MOTION_TOKENS` provides component-level mappings that abstract V1/V2 differences. Components should prefer `MOTION_TOKENS` over direct V1/V2 references when possible.
-- **Rule:** `MOTION_TOKENS` is the recommended interface for component-level motion usage, as it provides semantic names and abstracts token version differences.
-
-**Forward Path Rule:**
-- ✅ **Allowed:** New components using `MOTION_TOKENS` or V2 tokens directly
-- ✅ **Allowed:** Existing components continuing to use V1 tokens (grandfathered)
-- ❌ **Forbidden:** New components or features using V1 tokens directly
-- ❌ **Forbidden:** Creating new V1 token references in new code
+- **Policy:** `MOTION_TOKENS` provides component-level semantic mappings. Components should prefer `MOTION_TOKENS` over direct token references when possible.
 
 ---
 
@@ -791,12 +847,27 @@ Any Motion Authority modifications require:
 
 ## Version History
 
-- **v1.5** (2025-12-27): Motion Final Lock Confirmation - V1/V2 Policy
-  - Added Motion Token Version Policy section
-  - Marked Motion V1 tokens as DEPRECATED (read-only, no new usage)
-  - Marked Motion V2 tokens as CANONICAL (only allowed forward path)
-  - Added forward path rule: new components must use V2 or MOTION_TOKENS
-  - Updated Token System Integration section with V1/V2 file locations
+- **v2.2** (2025-12-27): Motion 2.0.0 Finalization
+  - Motion V1 permanently removed (not deprecated - removed)
+  - Added explicit prohibition of physics-based motion (spring, inertia)
+  - Updated all references to state V1 must not be reintroduced
+  - Motion system finalized and locked as singular, versionless system
+
+- **v2.1** (2025-12-27): Motion GAP Rule Introduction
+  - Added Motion GAP section defining GAP concept and evaluation rule
+  - Defined mandatory GAP evaluation for all state/spatial changes
+  - Established three allowed GAP outcomes: ADD MOTION, NO MOTION BY DESIGN, DEFERRED
+  - Integrated GAP rule into component lock requirements
+  - Added GAP resolution examples and forbidden patterns
+
+- **v2.0** (2025-12-27): Motion V1 Complete Removal (Major 2.0.0)
+  - **BREAKING:** Completely removed Motion V1 tokens from codebase
+  - Deleted `src/FOUNDATION/tokens/motion.ts` (V1 file)
+  - Removed all V1 exports: `durations`, `easings`, `transitions`, `keyframes`, `animations`, `springs`, `motionCSSVariables`, `tailwindMotionConfig`, `reducedMotion`
+  - Removed legacy CSS variable names (`--duration-*`, `--ease-*`, `--transition-*`)
+  - Motion system is now singular and versionless
+  - Updated Token System Integration section
+  - Added CI guard script (`pnpm check:motion-v1`) to prevent V1 reintroduction
 
 - **v1.4** (2025-12-27): Motion Audit and Lock - Escape Hatch Policy
   - Added Escape Hatch Policy section
@@ -831,8 +902,17 @@ Any Motion Authority modifications require:
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.5  
+**Version:** 2.2  
 **Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-27  
 **Priority:** BLOCKER  
 **Authority Domain:** Motion Authority
+
+---
+
+## Documentation Consistency Sign-off
+
+**Date:** 2025-12-27  
+**Status:** ✅ **ALIGNED**
+
+Documentation aligned with Motion 2.0.0 (V1 fully removed). All references to Motion V1 as deprecated or legacy have been removed. Motion system is described as singular and versionless post-2.0.0. All duration values and reduced-motion behavior descriptions are consistent across all motion documentation.

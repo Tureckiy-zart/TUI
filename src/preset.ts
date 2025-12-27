@@ -2,11 +2,10 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
 import { tailwindThemeColors } from "./FOUNDATION/tokens/colors";
-import { tailwindMotionConfig } from "./FOUNDATION/tokens/motion";
 import {
-  motionV2Durations,
-  motionV2Easings,
-  motionV2TailwindConfig,
+  motionDurations,
+  motionEasings,
+  motionTailwindConfig,
 } from "./FOUNDATION/tokens/motion/v2";
 import { tailwindRadiusConfig } from "./FOUNDATION/tokens/radius";
 import { tailwindShadowConfig } from "./FOUNDATION/tokens/shadows";
@@ -51,51 +50,41 @@ const preset: Partial<Config> = {
       ringColor: tailwindShadowConfig.ringColor,
       // Token-based border radius from tokens/radius
       borderRadius: tailwindRadiusConfig.borderRadius,
-      // Token-based motion from tokens/motion
-      transitionDuration: {
-        ...tailwindMotionConfig.transitionDuration,
-        ...motionV2TailwindConfig.transitionDuration,
-      },
-      transitionTimingFunction: {
-        ...tailwindMotionConfig.transitionTimingFunction,
-        ...motionV2TailwindConfig.transitionTimingFunction,
-      },
-      transitionProperty: tailwindMotionConfig.transitionProperty,
-      keyframes: {
-        ...(tailwindMotionConfig.keyframes as Record<string, any>),
-        ...(motionV2TailwindConfig.keyframes as Record<string, any>),
-      },
+      // Token-based motion
+      transitionDuration: motionTailwindConfig.transitionDuration,
+      transitionTimingFunction: motionTailwindConfig.transitionTimingFunction,
+      transitionProperty: motionTailwindConfig.transitionProperty,
+      keyframes: motionTailwindConfig.keyframes as Record<string, any>,
       animation: {
-        ...tailwindMotionConfig.animation,
-        // Motion V2 animations - map keyframes to animation utilities
-        "fade-in": `fade-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-out": `fade-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "scale-in": `scale-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "scale-out": `scale-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "slide-up-in": `slide-up-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "slide-down-in": `slide-down-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "slide-left-in": `slide-left-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "slide-right-in": `slide-right-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-scale-in": `fade-scale-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-slide-up-in": `fade-slide-up-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-slide-down-in": `fade-slide-down-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-slide-left-in": `fade-slide-left-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-slide-right-in": `fade-slide-right-in ${motionV2Durations.normal} ${motionV2Easings.standard}`,
-        "fade-scale-out": `fade-scale-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "fade-slide-up-out": `fade-slide-up-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "fade-slide-down-out": `fade-slide-down-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "fade-slide-left-out": `fade-slide-left-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
-        "fade-slide-right-out": `fade-slide-right-out ${motionV2Durations.fast} ${motionV2Easings.standard}`,
+        // Motion animations - map keyframes to animation utilities
+        "fade-in": `fade-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-out": `fade-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "scale-in": `scale-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "scale-out": `scale-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "slide-up-in": `slide-up-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "slide-down-in": `slide-down-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "slide-left-in": `slide-left-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "slide-right-in": `slide-right-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-scale-in": `fade-scale-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-slide-up-in": `fade-slide-up-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-slide-down-in": `fade-slide-down-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-slide-left-in": `fade-slide-left-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-slide-right-in": `fade-slide-right-in ${motionDurations.normal} ${motionEasings.standard}`,
+        "fade-scale-out": `fade-scale-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "fade-slide-up-out": `fade-slide-up-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "fade-slide-down-out": `fade-slide-down-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "fade-slide-left-out": `fade-slide-left-out ${motionDurations.fast} ${motionEasings.standard}`,
+        "fade-slide-right-out": `fade-slide-right-out ${motionDurations.fast} ${motionEasings.standard}`,
       },
     },
   },
   plugins: [
     plugin(({ addUtilities }) => {
-      // NOTE: CSS variables (including motionV2CSSVariables) are set dynamically
+      // NOTE: CSS variables (including motionCSSVariables) are set dynamically
       // by updateCSSVariablesFromTokens() in src/FOUNDATION/theme/applyMode.ts
       // This ensures a single source of truth for all CSS variables
 
-      // Motion V2 utility classes
+      // Motion utility classes
       // NOTE: animation-fill-mode: both MUST be included in the shorthand
       // to ensure element starts at 'from' state before animation begins
       addUtilities({

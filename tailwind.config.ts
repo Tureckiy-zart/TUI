@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 import { tailwindThemeColors } from "./src/FOUNDATION/tokens/colors";
-import { tailwindMotionConfig } from "./src/FOUNDATION/tokens/motion";
-import { motionV2TailwindConfig } from "./src/FOUNDATION/tokens/motion/v2";
+import { motionTailwindConfig } from "./src/FOUNDATION/tokens/motion/v2";
 import { tailwindRadiusConfig } from "./src/FOUNDATION/tokens/radius";
 import { tailwindShadowConfig } from "./src/FOUNDATION/tokens/shadows";
 import { tailwindSpacingConfig } from "./src/FOUNDATION/tokens/spacing";
@@ -185,22 +184,12 @@ const config: Config = {
       ringColor: tailwindShadowConfig.ringColor,
       // Token-based border radius from tokens/radius
       borderRadius: tailwindRadiusConfig.borderRadius,
-      // Token-based motion from tokens/motion
-      transitionDuration: {
-        ...tailwindMotionConfig.transitionDuration,
-        ...motionV2TailwindConfig.transitionDuration,
-      },
-      transitionTimingFunction: {
-        ...tailwindMotionConfig.transitionTimingFunction,
-        ...motionV2TailwindConfig.transitionTimingFunction,
-      },
-      transitionProperty: tailwindMotionConfig.transitionProperty,
-      keyframes: {
-        ...(tailwindMotionConfig.keyframes as Record<string, any>),
-        ...(motionV2TailwindConfig.keyframes as Record<string, any>),
-      },
+      // Token-based motion
+      transitionDuration: motionTailwindConfig.transitionDuration,
+      transitionTimingFunction: motionTailwindConfig.transitionTimingFunction,
+      transitionProperty: motionTailwindConfig.transitionProperty,
+      keyframes: motionTailwindConfig.keyframes as Record<string, any>,
       animation: {
-        ...tailwindMotionConfig.animation,
         // Motion V2 animations - MUST be here for Tailwind to generate @keyframes
         "fade-in": "fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
         "fade-out": "fade-out 150ms cubic-bezier(0.4, 0, 0.2, 1) both",

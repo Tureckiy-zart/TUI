@@ -41,6 +41,9 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
+      - name: Check Motion V1 Patterns
+        run: pnpm check:motion-v1
+
   build:
     name: Build Package [BLOCKING]
     runs-on: ubuntu-latest

@@ -9,14 +9,19 @@
 "use client";
 
 import {
-  type Duration,
-  durations,
-  type Easing,
-  easings,
-  reducedMotion,
-  type Transition,
-  transitions,
-} from "@/FOUNDATION/tokens/motion";
+  type MotionDuration,
+  motionDurations,
+  type MotionEasing,
+  motionEasings,
+  motionReducedMotion,
+  type MotionTransition,
+  motionTransitions,
+} from "@/FOUNDATION/tokens/motion/v2";
+
+// Re-export types with simpler names for backward compatibility
+export type Duration = MotionDuration;
+export type Easing = MotionEasing;
+export type Transition = MotionTransition;
 
 /**
  * Check if user prefers reduced motion
@@ -138,7 +143,7 @@ export function shouldReduceMotion(override?: boolean | "auto"): boolean {
 
 /**
  * Create CSS transition from tokens
- * Returns transition string using motion tokens
+ * Returns transition string using Motion V2 tokens
  */
 export function createTransition(
   transitionName?: Transition,
@@ -147,12 +152,12 @@ export function createTransition(
   reduceMotionOverride?: boolean | "auto",
 ): string {
   if (shouldReduceMotion(reduceMotionOverride)) {
-    return reducedMotion.transition;
+    return motionReducedMotion.transition;
   }
 
   // Use predefined transition if provided
-  if (transitionName && transitions[transitionName]) {
-    return transitions[transitionName];
+  if (transitionName && motionTransitions[transitionName]) {
+    return motionTransitions[transitionName];
   }
 
   // Build custom transition
@@ -162,9 +167,10 @@ export function createTransition(
   if (customDuration) {
     if (typeof customDuration === "string") {
       // Check if it's a Duration token first (e.g., "normal", "fast", "slow")
-      // Duration tokens are string literals that map to CSS duration strings in the durations object
-      if (customDuration in durations) {
-        duration = durations[customDuration as keyof typeof durations] || durations.normal;
+      // Duration tokens are string literals that map to CSS duration strings
+      if (customDuration in motionDurations) {
+        duration =
+          motionDurations[customDuration as keyof typeof motionDurations] || motionDurations.normal;
       } else {
         // Not a Duration token - treat as raw CSS duration string (e.g., "300ms", "0.5s")
         // WARNING: This bypasses Motion Authority. Prefer Duration tokens when possible.
@@ -172,19 +178,20 @@ export function createTransition(
       }
     } else {
       // This branch handles cases where TypeScript knows it's a Duration type (not a string)
-      duration = durations[customDuration] || durations.normal;
+      duration = motionDurations[customDuration] || motionDurations.normal;
     }
   } else {
-    duration = durations.normal;
+    duration = motionDurations.normal;
   }
 
   let easing: string;
   if (customEasing) {
     if (typeof customEasing === "string") {
-      // Check if it's an Easing token first (e.g., "bounce", "ease-in-out")
-      // Easing tokens are string literals that map to CSS easing strings in the easings object
-      if (customEasing in easings) {
-        easing = easings[customEasing as keyof typeof easings] || easings["ease-in-out"];
+      // Check if it's an Easing token first (e.g., "soft", "standard", "emphasized")
+      // Easing tokens are string literals that map to CSS easing strings
+      if (customEasing in motionEasings) {
+        easing =
+          motionEasings[customEasing as keyof typeof motionEasings] || motionEasings.standard;
       } else {
         // Not an Easing token - treat as raw CSS easing string (e.g., "cubic-bezier(0.4, 0, 0.2, 1)")
         // WARNING: This bypasses Motion Authority. Prefer Easing tokens when possible.
@@ -192,10 +199,10 @@ export function createTransition(
       }
     } else {
       // This branch handles cases where TypeScript knows it's an Easing type (not a string)
-      easing = easings[customEasing] || easings["ease-in-out"];
+      easing = motionEasings[customEasing] || motionEasings.standard;
     }
   } else {
-    easing = easings["ease-in-out"];
+    easing = motionEasings.standard;
   }
 
   return `${duration} ${easing}`;
@@ -219,11 +226,12 @@ export function shouldEnableAnimations(
 }
 
 /**
- * Export motion tokens for direct access
+ * Export Motion tokens for direct access
+ * Aliased to shorter names for convenience
  */
-export { durations, easings, reducedMotion, transitions };
-
-/**
- * Export types
- */
-export type { Duration, Easing, Transition };
+export {
+  motionDurations as durations,
+  motionEasings as easings,
+  motionReducedMotion as reducedMotion,
+  motionTransitions as transitions,
+};

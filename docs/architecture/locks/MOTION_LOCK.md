@@ -1,8 +1,8 @@
 # 🔒 Motion System Lock
 
-**Version:** 1.0  
+**Version:** 1.2  
 **Date Created:** 2025-12-27  
-**Status:** ✅ **LOCKED** - IMMUTABLE  
+**Status:** ✅ **LOCKED (singular, versionless since 2.0.0)** - IMMUTABLE  
 **Layer:** FOUNDATION / ARCHITECTURE  
 **Priority:** CRITICAL
 
@@ -14,6 +14,9 @@ This document **formally locks** the Motion system of `@tenerife.music/ui`. Afte
 
 **This is a binding architectural contract.** Any violation of these rules is considered an architectural breach.
 
+> **⚠️ BREAKING CHANGE (2.0.0):** Motion V1 tokens have been completely removed from the codebase.  
+> The motion system is singular and versionless post-2.0.0. CI guards prevent V1 reintroduction.
+
 ---
 
 ## 🔒 Locked Components
@@ -22,21 +25,15 @@ The following Motion system components are **LOCKED** and **IMMUTABLE**:
 
 ### 1. Motion Tokens
 
-#### Foundation Motion Tokens V1
-- **File:** `src/FOUNDATION/tokens/motion.ts`
-- **Status:** ✅ **LOCKED**
-- **Lock Date:** 2025-12-27
-- **Exports:** `durations`, `easings`, `transitions`, `keyframes`, `animations`, `reducedMotion`, `motionCSSVariables`, `tailwindMotionConfig`
-- **Role:** Canonical motion token definitions (V1)
-- **Rule:** DO NOT modify, extend, or create alternatives
-
-#### Foundation Motion Tokens V2
+#### Foundation Motion Tokens (V2 Only)
 - **File:** `src/FOUNDATION/tokens/motion/v2.ts`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-27
-- **Exports:** `motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined`, `motionV2CSSVariables`, `motionV2TailwindConfig`
-- **Role:** Canonical motion token definitions (V2 - preferred)
+- **Exports:** `motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined`, `motionV2CSSVariables`, `motionV2TailwindConfig`, `motionV2ReducedMotion`, `motionV2TransitionProperty`
+- **Role:** Canonical motion token definitions (V2 - ONLY)
 - **Rule:** DO NOT modify, extend, or create alternatives
+
+> **Note:** Motion V1 (`src/FOUNDATION/tokens/motion.ts`) was deleted in 2.0.0. See MOTION_V1_INVENTORY.md for removal details.
 
 #### Component Motion Tokens
 - **File:** `src/FOUNDATION/tokens/components/motion.ts`
@@ -139,9 +136,7 @@ The following hierarchy is **LOCKED** and **IMMUTABLE**:
 
 ```
 Motion Authority Contract (docs/architecture/MOTION_AUTHORITY.md)
-  ├── Motion Tokens (src/FOUNDATION/tokens/motion/)
-  │   ├── V1 Tokens (motion.ts)
-  │   └── V2 Tokens (motion/v2.ts) [Preferred]
+  ├── Motion Tokens (src/FOUNDATION/tokens/motion/v2.ts) [ONLY]
   ├── Component Tokens (src/FOUNDATION/tokens/components/motion.ts)
   ├── Motion Presets (src/preset.ts)
   │   └── .tm-motion-* utilities
@@ -150,6 +145,8 @@ Motion Authority Contract (docs/architecture/MOTION_AUTHORITY.md)
   ├── Integrity Tests (src/COMPOSITION/motion/animation/*.test.ts)
   └── Static Guards (eslint-rules/no-raw-motion-scale.ts)
 ```
+
+**Note:** Motion V1 was permanently removed in 2.0.0. The motion system is singular and versionless post-2.0.0.
 
 ### Motion Domains
 
@@ -181,6 +178,31 @@ The following patterns are **LOCKED** as forbidden:
 4. Ad-hoc keyframes in components
 5. Inline style animations
 6. Component-level motion scales
+7. Physics-based motion (spring, inertia) - explicitly forbidden (see MOTION_AUTHORITY.md)
+
+### Motion GAP Rule
+
+**Motion GAP resolution is mandatory for component lock.**
+
+**Rule:** A component may only be considered LOCKED if all potential Motion GAPs are resolved.
+
+**Motion GAP Definition:** A Motion GAP is a state where a component undergoes a perceivable state or spatial change without temporal feedback (motion/animation).
+
+**GAP Resolution Requirements:**
+
+1. **All state/spatial changes MUST be evaluated** for Motion GAP (visibility, size/layout, selection/active state, user-triggered actions)
+2. **Each GAP MUST be resolved** using one of three allowed outcomes:
+   - **ADD MOTION** — Canonical motion preset applied
+   - **NO MOTION BY DESIGN** — Explicitly declared intentional absence
+   - **DEFERRED** — Postponed with documented rationale (UNLOCKED components only)
+3. **Unresolved GAPs are a hard blocker** for motion lock
+4. **Post-lock GAP discovery** requires formal unlock procedure
+
+**Lock Breaking Condition:** Any unresolved Motion GAP discovered in a LOCKED component requires formal unlock procedure before resolution.
+
+**Reference:** See [Motion Authority Contract](../MOTION_AUTHORITY.md#motion-gap) for complete GAP definition and resolution rules.
+
+**Visual Examples:** See Storybook section "Foundation Locked/Composition/Motion/GAP" for visual demonstrations of GAP evaluation and resolution.
 
 ---
 
@@ -265,6 +287,8 @@ If modifications to locked Motion system components are required, the following 
 - Audit all motion usage across codebase
 - Document all dependencies on motion system
 - Identify all affected components
+- **Evaluate all components for Motion GAP** (state/spatial changes without motion)
+- **Resolve all Motion GAPs** (ADD MOTION, NO MOTION BY DESIGN, or DEFERRED with rationale)
 - Create impact analysis report
 
 ### Step 3: Get Approval
@@ -317,7 +341,6 @@ Before requesting unlock, ensure:
 
 | Component | Status | Lock Date | Immutability |
 |-----------|--------|-----------|--------------|
-| Motion Tokens V1 | ✅ LOCKED | 2025-12-27 | Immutable |
 | Motion Tokens V2 | ✅ LOCKED | 2025-12-27 | Immutable |
 | Component Motion Tokens | ✅ LOCKED | 2025-12-27 | Immutable |
 | Motion Presets (preset.ts) | ✅ LOCKED | 2025-12-27 | Immutable |
@@ -382,7 +405,9 @@ The Motion system lock fails if:
 
 ## 📝 Final Note
 
-**After this lock, the Motion system is considered complete and immutable.**
+**Motion 2.0.0 finalized. Motion V1 permanently removed.**
+
+After this lock, the Motion system is considered complete and immutable. Motion V1 has been permanently removed as of version 2.0.0 and must not be reintroduced. The motion system is singular and versionless post-2.0.0.
 
 All future work must respect this lock. Motion system components are **read-only** except for bug fixes and non-breaking improvements. The **motion tokens, presets, authority, audit stories, tests, and guards are locked** and immutable - all modifications require explicit unlock procedure with full audit.
 
@@ -392,9 +417,48 @@ All future work must respect this lock. Motion system components are **read-only
 
 ---
 
-**Status:** ✅ **LOCKED**  
-**Version:** 1.0  
+**Status:** ✅ **LOCKED (singular, versionless since 2.0.0)**  
+**Version:** 1.3  
 **Date Created:** 2025-12-27  
+**Last Updated:** 2025-12-27  
 **Priority:** CRITICAL  
 **Next Review:** Never (system is immutable)
 
+---
+
+## Documentation Consistency Sign-off
+
+**Date:** 2025-12-27  
+**Status:** ✅ **ALIGNED**
+
+Documentation aligned with Motion 2.0.0 (V1 fully removed). All references to Motion V1/V2 versioning have been removed. Motion system is described as singular and versionless post-2.0.0.
+
+---
+
+## 📋 Version History
+
+- **v1.3** (2025-12-27): Motion 2.0.0 Finalization
+  - Motion 2.0.0 finalized - Motion V1 permanently removed
+  - Added explicit prohibition of physics-based motion (spring, inertia)
+  - Updated hierarchy to reflect singular, versionless architecture
+  - Reasserted Motion LOCK status post-2.0.0 cleanup
+
+- **v1.2** (2025-12-27): Motion GAP Rule Integration
+  - Added Motion GAP rule to locked architecture section
+  - Declared GAP resolution as mandatory requirement for component lock
+  - Established unresolved GAP as hard blocker for motion lock
+  - Updated unlock procedure to include GAP evaluation and resolution
+  - Integrated GAP rule with Motion Authority Contract
+
+- **v1.1** (2025-12-27): Motion V1 Removed in 2.0.0
+  - Removed Motion V1 tokens (motion.ts deleted)
+  - Motion system is now singular and versionless
+  - Updated lock to reflect singular architecture
+  - Added CI guard: `pnpm check:motion-v1`
+
+- **v1.0** (2025-12-27): Initial Motion System Lock
+  - Locked motion tokens
+  - Locked Motion presets and utilities
+  - Locked Motion authority and policies
+  - Locked audit stories and integrity tests
+  - Locked CI enforcement guards

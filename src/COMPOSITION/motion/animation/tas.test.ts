@@ -123,7 +123,8 @@ describe("createTransition", () => {
 
     const result = createTransition();
     expect(result).toContain(durations.normal);
-    expect(result).toContain(easings["ease-in-out"]);
+    // V2 uses 'standard' easing as default (was 'ease-in-out' in V1)
+    expect(result).toContain(easings.standard);
   });
 
   it("should use custom duration token when provided", () => {
@@ -142,7 +143,7 @@ describe("createTransition", () => {
     expect(result).toContain(durations.fast);
   });
 
-  it("should use custom easing token when provided", () => {
+  it("should use custom V2 easing token when provided", () => {
     vi.spyOn(window, "matchMedia").mockReturnValue({
       matches: false,
       media: "(prefers-reduced-motion: reduce)",
@@ -154,8 +155,9 @@ describe("createTransition", () => {
       dispatchEvent: vi.fn(),
     } as MediaQueryList);
 
-    const result = createTransition(undefined, undefined, "ease-out");
-    expect(result).toContain(easings["ease-out"]);
+    // V2 uses 'soft' easing (was 'ease-out' in V1)
+    const result = createTransition(undefined, undefined, "soft");
+    expect(result).toContain(easings.soft);
   });
 
   it("should allow raw CSS duration string as fallback", () => {

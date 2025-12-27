@@ -106,20 +106,20 @@ All design tokens are exported from the main entry point. These include:
 
 **Type Exports:** `BorderRadius`, `ComponentRadius`
 
-### Motion Tokens
+### Motion Tokens (V2 Only)
 
-- `durations` - Animation durations (instant, fast, normal, slow, slower, slowest, plus granular)
-- `easings` - Easing functions (linear, ease-in, ease-out, ease-in-out, bounce, elastic, Material Design)
-- `transitions` - Pre-configured transition combinations
-- `animations` - Animation presets
-- `keyframes` - Keyframe definitions (fade, slide, scale, spin, pulse, bounce, ping, shake)
-- `springs` - Spring animation configurations
-- `motionCSSVariables` - CSS variable mappings
-- `tailwindMotionConfig` - Tailwind motion configuration
-- `motionV2Durations`, `motionV2Easings`, `motionV2Transitions` - Motion V2 system
-- `motionV2Fade`, `motionV2Scale`, `motionV2Slide` - Motion V2 presets
+> **Note:** Motion V1 tokens were removed in version 2.0.0. Only Motion V2 tokens are available.
 
-**Type Exports:** `Duration`, `Easing`, `Transition`, `Animation`, `Keyframe`, `Spring`, `MotionV2Duration`, `MotionV2Easing`, `MotionV2Transition`, etc.
+- `motionV2Durations` - Animation durations (fast, normal, slow, reduced)
+- `motionV2Easings` - Easing functions (soft, standard, emphasized)
+- `motionV2Transitions` - Pre-configured transitions (fast, normal, slow, soft, reduced)
+- `motionV2CSSVariables` - CSS variable mappings (`--motion-duration-*`, `--motion-easing-*`, `--motion-transition-*`)
+- `motionV2TailwindConfig` - Tailwind motion configuration
+- `motionV2ReducedMotion` - Reduced motion support (duration, easing, transition, mediaQuery)
+- `motionV2TransitionProperty` - Transition property mappings
+- `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined` - Animation presets
+
+**Type Exports:** `MotionV2Duration`, `MotionV2Easing`, `MotionV2Transition`, `MotionV2SlideDirection`, `MotionV2CombinedType`
 
 ### Component Tokens
 
