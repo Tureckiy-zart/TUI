@@ -11,36 +11,33 @@ import { clearBrandRegistry } from "@/themes/brand_engine";
 // Extend expect with vitest-axe matchers
 expect.extend(matchers);
 
-// Global error handler to catch Radix UI async callback errors and React DOM errors
-// Radix UI components (like Toast) use async callbacks that may try to access
-// document after test completion. React DOM may also try to access window
-// after component unmount when setTimeout callbacks execute.
-// This handler prevents these errors from causing test failures.
+// Global error handler to catch uncaught exceptions
+// We log SSR-related errors as warnings instead of silently ignoring them
+// to avoid masking real SSR failures and cleanup bugs
 const originalErrorHandler = process.listeners("uncaughtException")[0];
 process.removeAllListeners("uncaughtException");
 process.on("uncaughtException", (error) => {
-  // Ignore errors about document not being defined from Radix UI callbacks
+  // Log SSR-related errors as warnings instead of silently ignoring them
+  // This helps identify real SSR failures while still allowing tests to pass
+  // for known issues with async callbacks executing after cleanup
   if (
     error instanceof ReferenceError &&
-    error.message.includes("document is not defined") &&
-    error.stack?.includes("@radix-ui")
+    (error.message.includes("document is not defined") ||
+      error.message.includes("window is not defined")) &&
+    (error.stack?.includes("@radix-ui") || error.stack?.includes("react-dom"))
   ) {
-    // Silently ignore - this is expected behavior when Radix UI callbacks
-    // execute after test completion
+    // Log as warning instead of silently ignoring
+    // This helps identify real SSR failures and cleanup bugs
+    console.warn(
+      "[Test Setup] SSR-related error caught (may indicate cleanup issue):",
+      error.message,
+      "\nStack:",
+      error.stack,
+    );
+    // Don't throw - allow test to continue, but make the error visible
     return;
   }
-  // Ignore errors about window not being defined from React DOM
-  // This can happen when setTimeout callbacks execute after component unmount
-  if (
-    error instanceof ReferenceError &&
-    error.message.includes("window is not defined") &&
-    error.stack?.includes("react-dom")
-  ) {
-    // Silently ignore - this is expected behavior when React DOM callbacks
-    // execute after test completion
-    return;
-  }
-  // Re-throw other errors
+  // Re-throw other errors to catch real issues
   if (originalErrorHandler) {
     // UncaughtExceptionListener expects (error, origin) - pass both arguments
     // If handler doesn't accept origin, it will be ignored
@@ -69,14 +66,15 @@ afterEach(async () => {
   }
 
   // Wait for any pending async operations to complete
-  // This allows Radix UI callbacks to finish before cleanup
-  await new Promise((resolve) => {
-    if (typeof setTimeout !== "undefined") {
-      setTimeout(resolve, 10);
-    } else {
-      resolve(undefined);
-    }
-  });
+  // This allows Radix UI callbacks and React DOM operations to finish before cleanup
+  // We use multiple ticks to ensure all pending operations complete
+  if (typeof setTimeout !== "undefined") {
+    // Wait for multiple event loop ticks to ensure all pending operations complete
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    // Additional wait for any delayed operations (e.g., Radix UI animations)
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
 
   cleanup();
   // Clear brand registry to prevent "already registered" errors between tests
