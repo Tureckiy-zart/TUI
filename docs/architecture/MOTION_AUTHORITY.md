@@ -437,6 +437,214 @@ Reduced motion support ensures accessibility compliance with user preferences.
 
 ---
 
+## Motion Preset Catalog
+
+This section documents all canonical motion presets available via `.tm-motion-*` utility classes. All presets use CSS variables for duration and easing, ensuring compatibility with reduced motion preferences.
+
+### Naming Conventions
+
+**Pattern:** `tm-motion-{type}-{direction}-{state}`
+
+- **Type:** `fade`, `scale`, `slide`, `fade-scale`, `fade-slide`
+- **Direction:** `up`, `down`, `left`, `right` (for slide animations)
+- **State:** `in`, `out` (for enter/exit animations)
+- **Interaction:** `hover-{effect}`, `tap-{effect}` (for interactive states)
+
+**Examples:**
+- `.tm-motion-fade-in` - Fade in animation
+- `.tm-motion-slide-up` - Slide up animation (enter)
+- `.tm-motion-fade-slide-down-out` - Fade + slide down exit animation
+- `.tm-motion-hover-lift` - Hover lift effect
+- `.tm-motion-tap-scale` - Tap/active scale effect
+
+### Enter/Exit Animation Presets
+
+#### Fade Animations
+- `.tm-motion-fade-in` - Fade in (opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: General enter animations, overlays
+  
+- `.tm-motion-fade-out` - Fade out (opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: General exit animations, overlays
+
+#### Scale Animations
+- `.tm-motion-scale-in` - Scale in (scale: 0.95 → 1, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Modal dialogs, popovers, cards
+  
+- `.tm-motion-scale-out` - Scale out (scale: 1 → 0.95, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Modal dialogs, popovers, cards
+
+#### Slide Animations
+- `.tm-motion-slide-up` - Slide up (translateY: 100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Toast notifications, bottom sheets
+  
+- `.tm-motion-slide-down` - Slide down (translateY: -100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Dropdowns, top sheets
+  
+- `.tm-motion-slide-left` - Slide left (translateX: 100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+  
+- `.tm-motion-slide-right` - Slide right (translateX: -100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+
+#### Compound Animations
+- `.tm-motion-fade-scale` - Fade + scale in (scale: 0.95 → 1, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Modal dialogs, emphasized enter animations
+  
+- `.tm-motion-fade-slide-up` - Fade + slide up (translateY: 100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Toast notifications, bottom sheets
+  
+- `.tm-motion-fade-slide-down` - Fade + slide down (translateY: -100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Dropdowns, top sheets
+  
+- `.tm-motion-fade-slide-left` - Fade + slide left (translateX: 100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+  
+- `.tm-motion-fade-slide-right` - Fade + slide right (translateX: -100% → 0, opacity: 0 → 1)
+  - Duration: `var(--motion-duration-normal)` (250ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+
+#### Exit Animations
+- `.tm-motion-fade-scale-out` - Fade + scale out (scale: 1 → 0.95, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Modal dialogs, emphasized exit animations
+  
+- `.tm-motion-fade-slide-up-out` - Fade + slide up out (translateY: 0 → 100%, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Toast notifications, bottom sheets
+  
+- `.tm-motion-fade-slide-down-out` - Fade + slide down out (translateY: 0 → -100%, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Dropdowns, top sheets
+  
+- `.tm-motion-fade-slide-left-out` - Fade + slide left out (translateX: 0 → 100%, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+  
+- `.tm-motion-fade-slide-right-out` - Fade + slide right out (translateX: 0 → -100%, opacity: 1 → 0)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Side panels, drawers
+
+### Interactive State Presets
+
+#### Hover Animations
+- `.tm-motion-hover-lift` - Hover lift effect (scale: 1 → 1.05, translateY: 0 → -0.3125rem)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Cards, buttons, interactive elements
+  
+- `.tm-motion-hover-scale` - Hover scale effect (scale: 1 → 1.05)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Icons, avatars, small interactive elements
+
+#### Tap/Active Animations
+- `.tm-motion-tap-scale` - Tap/active scale effect (scale: 1 → 0.95)
+  - Duration: `var(--motion-duration-fast)` (150ms)
+  - Easing: `var(--motion-easing-standard)`
+  - Use: Buttons, interactive elements, press feedback
+
+### Preset Usage Guidelines
+
+#### Do's
+
+✅ **DO use presets for common patterns:**
+```tsx
+// Enter animation
+<div className="tm-motion-fade-in">Content</div>
+
+// Hover effect
+<button className="tm-motion-hover-lift">Hover me</button>
+
+// Combined effects
+<button className="tm-motion-hover-lift tm-motion-tap-scale">
+  Interactive button
+</button>
+```
+
+✅ **DO use presets with conditional classes:**
+```tsx
+<div className={isOpen ? "tm-motion-fade-in" : "tm-motion-fade-out"}>
+  Content
+</div>
+```
+
+✅ **DO combine presets for complex interactions:**
+```tsx
+<Card className="tm-motion-fade-scale tm-motion-hover-lift">
+  Card content
+</Card>
+```
+
+#### Don'ts
+
+❌ **DON'T create custom animation classes:**
+```tsx
+// ❌ Forbidden
+<div className="custom-fade-in">Content</div>
+```
+
+❌ **DON'T use inline styles for motion:**
+```tsx
+// ❌ Forbidden
+<div style={{ animation: "fadeIn 300ms ease-out" }}>Content</div>
+```
+
+❌ **DON'T use raw duration/easing values:**
+```tsx
+// ❌ Forbidden
+<div className="transition-all duration-200 ease-in-out">Content</div>
+```
+
+❌ **DON'T mix presets with custom transitions:**
+```tsx
+// ❌ Forbidden
+<div className="tm-motion-fade-in transition-all duration-300">
+  Content
+</div>
+```
+
+### Reduced Motion Compatibility
+
+All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` preferences via CSS variables. When reduced motion is enabled:
+
+- Durations collapse to `0ms` (instant)
+- Animations become instant transitions
+- No motion is forced on users who prefer reduced motion
+
+**Implementation:** CSS variables (`var(--motion-duration-*)`) are dynamically updated by `ThemeProvider` based on user preferences.
+
+---
+
 ## Semantic Mapping
 
 ### Motion Pattern Usage
@@ -448,14 +656,14 @@ Reduced motion support ensures accessibility compliance with user preferences.
 - Disabled state → no motion (instant)
 
 **Component Animations:**
-- Modal open/close → `animations.fadeIn` / `animations.fadeOut` or `animations.scaleIn` / `animations.scaleOut`
-- Toast show/hide → `animations.slideInUp` / `animations.slideOutDown` or `animations.fadeIn` / `animations.fadeOut`
-- Dropdown open/close → `animations.slideInDown` / `animations.slideOutUp` or `animations.fadeIn` / `animations.fadeOut`
-- Tooltip show/hide → `animations.fadeIn` / `animations.fadeOut`
-- Loading spinner → `animations.spin`
-- Loading pulse → `animations.pulse`
+- Modal open/close → `.tm-motion-fade-scale` / `.tm-motion-fade-scale-out` or `.tm-motion-fade-in` / `.tm-motion-fade-out`
+- Toast show/hide → `.tm-motion-fade-slide-up` / `.tm-motion-fade-slide-up-out` or `.tm-motion-fade-in` / `.tm-motion-fade-out`
+- Dropdown open/close → `.tm-motion-fade-slide-down` / `.tm-motion-fade-slide-down-out` or `.tm-motion-fade-in` / `.tm-motion-fade-out`
+- Tooltip show/hide → `.tm-motion-fade-in` / `.tm-motion-fade-out`
+- Loading spinner → `animations.spin` (from motion tokens)
+- Loading pulse → `animations.pulse` (from motion tokens)
 
-**Rule:** Components should use motion tokens that match their interaction patterns and animation needs, ensuring consistent motion patterns across the design system.
+**Rule:** Components should use motion presets (`.tm-motion-*` utilities) or motion tokens that match their interaction patterns and animation needs, ensuring consistent motion patterns across the design system.
 
 ---
 
@@ -469,6 +677,60 @@ Reduced motion support ensures accessibility compliance with user preferences.
 - Types: `Duration`, `Easing`, `Transition`, `Keyframe`, `Animation`
 
 **Rule:** The token system file (`src/tokens/motion.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
+
+---
+
+## Escape Hatch Policy
+
+In rare cases, raw motion values may be necessary for specific use cases that cannot be achieved with tokens or presets. An escape hatch exists for these exceptional circumstances.
+
+### Escape Hatch Requirements
+
+To use raw motion values, you **MUST**:
+
+1. **Add explicit comment** with reason:
+   ```tsx
+   // eslint-disable-next-line no-raw-motion-scale -- [specific reason why token cannot be used]
+   <div className="transition-all duration-[200ms] ease-in-out">
+   ```
+
+2. **Document the exception** in the component's documentation or inline comments
+
+3. **Get approval** from architecture review if the exception affects Foundation components
+
+4. **Consider alternatives first** - Most motion needs can be met with:
+   - `.tm-motion-*` utilities
+   - `MOTION_TOKENS` references
+   - Tailwind utilities that reference tokens (`duration-normal`, `ease-out`)
+
+### When Escape Hatch is NOT Allowed
+
+❌ **Forbidden without exception:**
+- Raw values in Foundation components
+- Raw values in new components (use tokens from the start)
+- Raw values for convenience (must have architectural justification)
+- Raw values that duplicate existing token functionality
+
+### Escape Hatch Examples
+
+**✅ Allowed (with comment):**
+```tsx
+// eslint-disable-next-line no-raw-motion-scale -- Third-party library requires specific timing
+<div style={{ transition: "opacity 200ms cubic-bezier(0.4, 0, 0.2, 1)" }}>
+```
+
+**❌ Forbidden (no justification):**
+```tsx
+<div className="transition-all duration-200 ease-in-out">
+```
+
+### CI Enforcement
+
+The ESLint rule `no-raw-motion-scale` will fail CI builds on new raw motion usage. To bypass:
+
+1. Add `eslint-disable-next-line` comment with reason
+2. Ensure the reason is architecturally justified
+3. Consider if a new token or preset should be added instead
 
 ---
 
@@ -501,6 +763,11 @@ Any Motion Authority modifications require:
 
 ## Version History
 
+- **v1.4** (2025-12-27): Motion Audit and Lock - Escape Hatch Policy
+  - Added Escape Hatch Policy section
+  - Documented exception process for rare cases requiring raw motion values
+  - Clarified CI enforcement and approval requirements
+
 - **v1.3** (2025-12-27): Motion Audit and Lock - Preset Catalog
   - Added comprehensive Motion Preset Catalog section
   - Documented all `.tm-motion-*` utility classes with usage guidelines
@@ -529,7 +796,7 @@ Any Motion Authority modifications require:
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.3  
+**Version:** 1.4  
 **Date Created:** 2025-12-16  
 **Last Updated:** 2025-12-27  
 **Priority:** BLOCKER  
