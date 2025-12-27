@@ -67,9 +67,11 @@ export const ModalFocusTrap: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Modal Focus Trap</Heading>
-            <Text tone="muted" className="mt-2">
-              Open Modal and Tab through elements. Focus stays trapped inside.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">
+                Open Modal and Tab through elements. Focus stays trapped inside.
+              </Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -138,12 +140,14 @@ export const FocusRestoreDemo: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Focus Restore on Close</Heading>
-            <Text tone="muted" className="mt-2">
-              After closing Modal, focus returns to the trigger button.
-            </Text>
-            <Text size="sm" className="mt-1">
-              Last focused: <strong>{lastFocused || "None"}</strong>
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">After closing Modal, focus returns to the trigger button.</Text>
+            </Box>
+            <Box className="mt-1">
+              <Text size="sm">
+                Last focused: <strong>{lastFocused || "None"}</strong>
+              </Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -198,9 +202,11 @@ export const DialogFocusBehavior: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Dialog Focus Behavior</Heading>
-            <Text tone="muted" className="mt-2">
-              Dialog uses Modal internally - same focus trap and restore behavior.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">
+                Dialog uses Modal internally - same focus trap and restore behavior.
+              </Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -245,20 +251,24 @@ export const DrawerFocusBehavior: Story = {
   name: "Drawer Focus",
   render: function DrawerFocusStory() {
     const [isOpen, setIsOpen] = useState(false);
-    const triggerRef = useRef<HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLElement>(null);
 
     return (
       <Box className="p-lg">
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Drawer Focus Behavior</Heading>
-            <Text tone="muted" className="mt-2">
-              Drawer uses custom useFocusLock hook for focus management.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Drawer uses custom useFocusLock hook for focus management.</Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
-            <Button ref={triggerRef} variant="primary" onClick={() => setIsOpen(true)}>
+            <Button
+              ref={triggerRef as React.RefObject<HTMLButtonElement>}
+              variant="primary"
+              onClick={() => setIsOpen(true)}
+            >
               Open Drawer
             </Button>
           </Box>
@@ -267,7 +277,7 @@ export const DrawerFocusBehavior: Story = {
             open={isOpen}
             onClose={() => setIsOpen(false)}
             position="right"
-            returnFocusRef={triggerRef}
+            returnFocusRef={triggerRef as React.RefObject<HTMLElement>}
           >
             <Drawer.Header>
               <Heading level={3}>Drawer Title</Heading>
@@ -310,9 +320,9 @@ export const PopoverNoTrap: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Popover - No Focus Trap (By Design)</Heading>
-            <Text tone="muted" className="mt-2">
-              Popover is non-modal. Tab can leave popover to page content.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Popover is non-modal. Tab can leave popover to page content.</Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -363,9 +373,9 @@ export const EscapeKeyBehavior: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Escape Key Behavior</Heading>
-            <Text tone="muted" className="mt-2">
-              Press Escape to close overlay and restore focus to trigger.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Press Escape to close overlay and restore focus to trigger.</Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">

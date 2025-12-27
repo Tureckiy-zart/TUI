@@ -20,7 +20,8 @@ import {
   ToastDescription,
   ToastTitle,
 } from "@/COMPOSITION/overlays/Toast";
-import { ToastProvider, ToastViewport } from "@/COMPOSITION/overlays/ToastProvider";
+import { ToastProvider } from "@/COMPOSITION/overlays/ToastProvider";
+import { ToastViewport } from "@/COMPOSITION/overlays/ToastViewport";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
@@ -69,18 +70,20 @@ export const Overview: Story = {
         <Stack spacing={8}>
           <Box>
             <Heading level={1}>Focus GAP Gallery</Heading>
-            <Text tone="muted" className="mt-2">
-              Demonstrating intentional, documented focus behavior gaps.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Demonstrating intentional, documented focus behavior gaps.</Text>
+            </Box>
           </Box>
 
           <Stack spacing={6}>
             <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
               <Heading level={2}>What is a Focus GAP?</Heading>
-              <Text className="mt-2">
-                A <strong>Focus GAP</strong> is an intentional, documented absence or break in
-                expected focus behavior. GAPs are allowed ONLY when properly documented.
-              </Text>
+              <Box className="mt-2">
+                <Text>
+                  A <strong>Focus GAP</strong> is an intentional, documented absence or break in
+                  expected focus behavior. GAPs are allowed ONLY when properly documented.
+                </Text>
+              </Box>
             </Box>
 
             <Box>
@@ -106,10 +109,12 @@ export const Overview: Story = {
 
             <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
               <Heading level={3}>Excluded from Gallery</Heading>
-              <Text size="sm" className="mt-2">
-                <strong>GAP-3:</strong> Drawer focus-visible inconsistency is classified as
-                <strong> BUG</strong>, not ACCEPTABLE GAP. It must be fixed before FOCUS_LOCK.
-              </Text>
+              <Box className="mt-2">
+                <Text size="sm">
+                  <strong>GAP-3:</strong> Drawer focus-visible inconsistency is classified as
+                  <strong> BUG</strong>, not ACCEPTABLE GAP. It must be fixed before FOCUS_LOCK.
+                </Text>
+              </Box>
             </Box>
           </Stack>
         </Stack>
@@ -130,9 +135,11 @@ export const GAP1_PopoverNonModal: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>GAP-1: Popover Non-Modal Behavior</Heading>
-            <Text tone="muted" className="mt-2">
-              Popover does NOT trap focus. This is intentional for non-modal overlays.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">
+                Popover does NOT trap focus. This is intentional for non-modal overlays.
+              </Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -202,9 +209,11 @@ export const GAP2_ToastTabOrder: Story = {
           <Stack spacing={6}>
             <Box>
               <Heading level={2}>GAP-2: Toast Tab Order Insertion</Heading>
-              <Text tone="muted" className="mt-2">
-                When Toast appears, its interactive elements enter the tab order.
-              </Text>
+              <Box className="mt-2">
+                <Text tone="muted">
+                  When Toast appears, its interactive elements enter the tab order.
+                </Text>
+              </Box>
             </Box>
 
             <Box className="rounded-lg border border-border p-md">
@@ -275,9 +284,9 @@ export const GAP4_StepperReadOnly: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>GAP-4: Stepper Non-Interactive Steps</Heading>
-            <Text tone="muted" className="mt-2">
-              Step indicators are read-only. Tab skips over them.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Step indicators are read-only. Tab skips over them.</Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -357,9 +366,9 @@ export const Summary: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Focus GAP Summary</Heading>
-            <Text tone="muted" className="mt-2">
-              All ACCEPTABLE Focus GAPs in the Tenerife UI design system.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">All ACCEPTABLE Focus GAPs in the Tenerife UI design system.</Text>
+            </Box>
           </Box>
 
           <Box className="overflow-x-auto">

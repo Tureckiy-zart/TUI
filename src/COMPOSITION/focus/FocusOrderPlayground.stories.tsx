@@ -78,9 +78,9 @@ export const FocusTracker: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Focus Tracker</Heading>
-            <Text tone="muted" className="mt-2">
-              Tab through elements. The tracker shows focus order history.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Tab through elements. The tracker shows focus order history.</Text>
+            </Box>
           </Box>
 
           {/* Focus Monitor */}
@@ -88,10 +88,14 @@ export const FocusTracker: Story = {
             <Text size="sm" weight="semibold">
               Currently Focused:
             </Text>
-            <Text className="font-mono text-primary">{focusedElement}</Text>
-            <Text size="xs" tone="muted" className="mt-2">
-              History: {focusHistory.join(" → ") || "Start tabbing..."}
-            </Text>
+            <Box className="font-mono text-primary">
+              <Text>{focusedElement}</Text>
+            </Box>
+            <Box className="mt-2">
+              <Text size="xs" tone="muted">
+                History: {focusHistory.join(" → ") || "Start tabbing..."}
+              </Text>
+            </Box>
           </Box>
 
           {/* Interactive Elements */}
@@ -132,16 +136,18 @@ export const VisualVsDomOrder: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Visual vs DOM Order</Heading>
-            <Text tone="muted" className="mt-2">
-              CSS flex order changes visual position but NOT tab order.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">CSS flex order changes visual position but NOT tab order.</Text>
+            </Box>
           </Box>
 
           {/* Normal Order */}
           <Box className="rounded-lg border border-border p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              Normal DOM Order (1 → 2 → 3):
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                Normal DOM Order (1 → 2 → 3):
+              </Text>
+            </Box>
             <Box className="flex gap-2">
               <Button variant="outline">1. First</Button>
               <Button variant="outline">2. Second</Button>
@@ -151,12 +157,16 @@ export const VisualVsDomOrder: Story = {
 
           {/* Reversed Visual Order */}
           <Box className="rounded-lg border border-warning/30 bg-warning/10 p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              Reversed Visual Order (CSS flex-row-reverse):
-            </Text>
-            <Text size="xs" tone="muted" className="mb-2">
-              Visually: 3 → 2 → 1, but Tab order: 1 → 2 → 3 (DOM order)
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                Reversed Visual Order (CSS flex-row-reverse):
+              </Text>
+            </Box>
+            <Box className="mb-2">
+              <Text size="xs" tone="muted">
+                Visually: 3 → 2 → 1, but Tab order: 1 → 2 → 3 (DOM order)
+              </Text>
+            </Box>
             <Box className="flex flex-row-reverse gap-2">
               <Button variant="outline">1. First (visually last)</Button>
               <Button variant="outline">2. Second</Button>
@@ -166,22 +176,26 @@ export const VisualVsDomOrder: Story = {
 
           {/* Grid Order */}
           <Box className="rounded-lg border border-warning/30 bg-warning/10 p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              CSS Grid with order property:
-            </Text>
-            <Text size="xs" tone="muted" className="mb-2">
-              Visual order differs from tab order. This can confuse keyboard users!
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                CSS Grid with order property:
+              </Text>
+            </Box>
+            <Box className="mb-2">
+              <Text size="xs" tone="muted">
+                Visual order differs from tab order. This can confuse keyboard users!
+              </Text>
+            </Box>
             <Box className="grid grid-cols-3 gap-2">
-              <Button variant="outline" className="order-3">
-                1. First (order: 3)
-              </Button>
-              <Button variant="outline" className="order-1">
-                2. Second (order: 1)
-              </Button>
-              <Button variant="outline" className="order-2">
-                3. Third (order: 2)
-              </Button>
+              <Box className="order-3">
+                <Button variant="outline">1. First (order: 3)</Button>
+              </Box>
+              <Box className="order-1">
+                <Button variant="outline">2. Second (order: 1)</Button>
+              </Box>
+              <Box className="order-2">
+                <Button variant="outline">3. Third (order: 2)</Button>
+              </Box>
             </Box>
           </Box>
 
@@ -209,9 +223,11 @@ export const CompositeControlsDemo: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Composite Controls</Heading>
-            <Text tone="muted" className="mt-2">
-              Tab enters group, Arrow keys navigate within, Tab exits group.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">
+                Tab enters group, Arrow keys navigate within, Tab exits group.
+              </Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -219,9 +235,11 @@ export const CompositeControlsDemo: Story = {
               <Button variant="outline">Before Tabs</Button>
 
               <Box>
-                <Text size="sm" weight="semibold" className="mb-2">
-                  Tabs Component (Radix):
-                </Text>
+                <Box className="mb-2">
+                  <Text size="sm" weight="semibold">
+                    Tabs Component (Radix):
+                  </Text>
+                </Box>
                 <Tabs.Root defaultValue="tab1">
                   <Tabs.List>
                     <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
@@ -231,7 +249,9 @@ export const CompositeControlsDemo: Story = {
                   <Tabs.Content value="tab1">
                     <Box className="p-4">
                       <Text>Content for Tab 1</Text>
-                      <Input placeholder="Field in tab 1" className="mt-2" />
+                      <Box className="mt-2">
+                        <Input placeholder="Field in tab 1" />
+                      </Box>
                     </Box>
                   </Tabs.Content>
                   <Tabs.Content value="tab2">
@@ -284,9 +304,9 @@ export const DisabledElementsDemo: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Disabled Elements</Heading>
-            <Text tone="muted" className="mt-2">
-              Disabled elements are skipped in tab order.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Disabled elements are skipped in tab order.</Text>
+            </Box>
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
@@ -325,16 +345,18 @@ export const TabindexDemo: Story = {
         <Stack spacing={6}>
           <Box>
             <Heading level={2}>Tabindex Values</Heading>
-            <Text tone="muted" className="mt-2">
-              Only tabindex="0" and tabindex="-1" are allowed.
-            </Text>
+            <Box className="mt-2">
+              <Text tone="muted">Only tabindex="0" and tabindex="-1" are allowed.</Text>
+            </Box>
           </Box>
 
           {/* Allowed */}
           <Box className="rounded-lg border border-success/30 bg-success/10 p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              ✅ Allowed (tabindex="0"):
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                ✅ Allowed (tabindex="0"):
+              </Text>
+            </Box>
             <Box className="flex gap-2">
               <div
                 tabIndex={0}
@@ -349,12 +371,16 @@ export const TabindexDemo: Story = {
 
           {/* Programmatic only */}
           <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              ✅ Allowed (tabindex="-1"):
-            </Text>
-            <Text size="xs" tone="muted" className="mb-2">
-              Not in tab order, but can receive programmatic focus.
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                ✅ Allowed (tabindex="-1"):
+              </Text>
+            </Box>
+            <Box className="mb-2">
+              <Text size="xs" tone="muted">
+                Not in tab order, but can receive programmatic focus.
+              </Text>
+            </Box>
             <Box className="flex gap-2">
               <div
                 tabIndex={-1}
@@ -376,12 +402,16 @@ export const TabindexDemo: Story = {
 
           {/* Forbidden */}
           <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
-            <Text size="sm" weight="semibold" className="mb-2">
-              ❌ FORBIDDEN (positive tabindex):
-            </Text>
-            <Text size="xs" tone="muted" className="mb-2">
-              This creates unpredictable tab order. Never use tabindex {">"} 0.
-            </Text>
+            <Box className="mb-2">
+              <Text size="sm" weight="semibold">
+                ❌ FORBIDDEN (positive tabindex):
+              </Text>
+            </Box>
+            <Box className="mb-2">
+              <Text size="xs" tone="muted">
+                This creates unpredictable tab order. Never use tabindex {">"} 0.
+              </Text>
+            </Box>
             <Box className="flex gap-2 opacity-50">
               <code className="rounded bg-destructive/20 px-2 py-1 text-sm">tabindex="1"</code>
               <code className="rounded bg-destructive/20 px-2 py-1 text-sm">tabindex="99"</code>
