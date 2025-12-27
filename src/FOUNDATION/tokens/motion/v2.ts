@@ -48,12 +48,12 @@ export const motionV2Transitions = {
  */
 export const motionV2Fade = {
   in: {
-    from: { opacity: 0 },
-    to: { opacity: 1 },
+    from: { opacity: "0" },
+    to: { opacity: "1" },
   },
   out: {
-    from: { opacity: 1 },
-    to: { opacity: 0 },
+    from: { opacity: "1" },
+    to: { opacity: "0" },
   },
 } as const;
 
@@ -63,12 +63,12 @@ export const motionV2Fade = {
  */
 export const motionV2Scale = {
   in: {
-    from: { transform: "scale(0.95)", opacity: 0 },
-    to: { transform: "scale(1)", opacity: 1 },
+    from: { transform: "scale(0.95)", opacity: "0" },
+    to: { transform: "scale(1)", opacity: "1" },
   },
   out: {
-    from: { transform: "scale(1)", opacity: 1 },
-    to: { transform: "scale(0.95)", opacity: 0 },
+    from: { transform: "scale(1)", opacity: "1" },
+    to: { transform: "scale(0.95)", opacity: "0" },
   },
 } as const;
 
@@ -79,42 +79,42 @@ export const motionV2Scale = {
 export const motionV2Slide = {
   up: {
     in: {
-      from: { transform: "translateY(100%)", opacity: 0 },
-      to: { transform: "translateY(0)", opacity: 1 },
+      from: { transform: "translateY(100%)", opacity: "0" },
+      to: { transform: "translateY(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateY(0)", opacity: 1 },
-      to: { transform: "translateY(100%)", opacity: 0 },
+      from: { transform: "translateY(0)", opacity: "1" },
+      to: { transform: "translateY(100%)", opacity: "0" },
     },
   },
   down: {
     in: {
-      from: { transform: "translateY(-100%)", opacity: 0 },
-      to: { transform: "translateY(0)", opacity: 1 },
+      from: { transform: "translateY(-100%)", opacity: "0" },
+      to: { transform: "translateY(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateY(0)", opacity: 1 },
-      to: { transform: "translateY(-100%)", opacity: 0 },
+      from: { transform: "translateY(0)", opacity: "1" },
+      to: { transform: "translateY(-100%)", opacity: "0" },
     },
   },
   left: {
     in: {
-      from: { transform: "translateX(100%)", opacity: 0 },
-      to: { transform: "translateX(0)", opacity: 1 },
+      from: { transform: "translateX(100%)", opacity: "0" },
+      to: { transform: "translateX(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateX(0)", opacity: 1 },
-      to: { transform: "translateX(100%)", opacity: 0 },
+      from: { transform: "translateX(0)", opacity: "1" },
+      to: { transform: "translateX(100%)", opacity: "0" },
     },
   },
   right: {
     in: {
-      from: { transform: "translateX(-100%)", opacity: 0 },
-      to: { transform: "translateX(0)", opacity: 1 },
+      from: { transform: "translateX(-100%)", opacity: "0" },
+      to: { transform: "translateX(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateX(0)", opacity: 1 },
-      to: { transform: "translateX(-100%)", opacity: 0 },
+      from: { transform: "translateX(0)", opacity: "1" },
+      to: { transform: "translateX(-100%)", opacity: "0" },
     },
   },
 } as const;
@@ -126,52 +126,52 @@ export const motionV2Slide = {
 export const motionV2Combined = {
   fadeScale: {
     in: {
-      from: { transform: "scale(0.95)", opacity: 0 },
-      to: { transform: "scale(1)", opacity: 1 },
+      from: { transform: "scale(0.95)", opacity: "0" },
+      to: { transform: "scale(1)", opacity: "1" },
     },
     out: {
-      from: { transform: "scale(1)", opacity: 1 },
-      to: { transform: "scale(0.95)", opacity: 0 },
+      from: { transform: "scale(1)", opacity: "1" },
+      to: { transform: "scale(0.95)", opacity: "0" },
     },
   },
   fadeSlideUp: {
     in: {
-      from: { transform: "translateY(100%)", opacity: 0 },
-      to: { transform: "translateY(0)", opacity: 1 },
+      from: { transform: "translateY(100%)", opacity: "0" },
+      to: { transform: "translateY(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateY(0)", opacity: 1 },
-      to: { transform: "translateY(100%)", opacity: 0 },
+      from: { transform: "translateY(0)", opacity: "1" },
+      to: { transform: "translateY(100%)", opacity: "0" },
     },
   },
   fadeSlideDown: {
     in: {
-      from: { transform: "translateY(-100%)", opacity: 0 },
-      to: { transform: "translateY(0)", opacity: 1 },
+      from: { transform: "translateY(-100%)", opacity: "0" },
+      to: { transform: "translateY(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateY(0)", opacity: 1 },
-      to: { transform: "translateY(-100%)", opacity: 0 },
+      from: { transform: "translateY(0)", opacity: "1" },
+      to: { transform: "translateY(-100%)", opacity: "0" },
     },
   },
   fadeSlideLeft: {
     in: {
-      from: { transform: "translateX(100%)", opacity: 0 },
-      to: { transform: "translateX(0)", opacity: 1 },
+      from: { transform: "translateX(100%)", opacity: "0" },
+      to: { transform: "translateX(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateX(0)", opacity: 1 },
-      to: { transform: "translateX(100%)", opacity: 0 },
+      from: { transform: "translateX(0)", opacity: "1" },
+      to: { transform: "translateX(100%)", opacity: "0" },
     },
   },
   fadeSlideRight: {
     in: {
-      from: { transform: "translateX(-100%)", opacity: 0 },
-      to: { transform: "translateX(0)", opacity: 1 },
+      from: { transform: "translateX(-100%)", opacity: "0" },
+      to: { transform: "translateX(0)", opacity: "1" },
     },
     out: {
-      from: { transform: "translateX(0)", opacity: 1 },
-      to: { transform: "translateX(-100%)", opacity: 0 },
+      from: { transform: "translateX(0)", opacity: "1" },
+      to: { transform: "translateX(-100%)", opacity: "0" },
     },
   },
 } as const;

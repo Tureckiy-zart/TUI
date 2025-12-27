@@ -304,6 +304,8 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 - `--easing-{name}`
 - `--transition-{name}`
 
+**See also:** [Motion Animations Working Guide](./MOTION_ANIMATIONS_GUIDE.md) for practical implementation details, troubleshooting, and common pitfalls when working with motion animations.
+
 ---
 
 ## Component Tokens

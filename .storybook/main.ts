@@ -9,9 +9,7 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx|mdx)"],
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
-    "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
   ],

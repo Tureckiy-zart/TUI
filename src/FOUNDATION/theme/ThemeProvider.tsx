@@ -85,7 +85,6 @@ function getInitialReduceMotion(override?: boolean): boolean {
   }
 }
 
-// eslint-disable-next-line max-lines-per-function
 export function ThemeProvider({
   children,
   defaultMode = "day",
@@ -280,54 +279,14 @@ export function ThemeProvider({
 
   // Initialize theme on mount
   React.useEffect(() => {
-    // #region agent log
-    if (typeof document !== "undefined" && document.documentElement) {
-      const beforeApply = document.documentElement.style.getPropertyValue("--tm-primary");
-      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          location: "ThemeProvider.tsx:281",
-          message: "ThemeProvider useEffect before applyDocumentTheme",
-          data: { beforeValue: beforeApply, hasValue: !!beforeApply },
-          timestamp: Date.now(),
-          sessionId: "debug-session",
-          runId: "run1",
-          hypothesisId: "C",
-        }),
-      }).catch(() => {});
-    }
-    // #endregion
     const initialMode = getInitialMode(defaultMode, storageKey, enableSystem);
     const initialTheme = getInitialTheme(defaultTheme, themeStorageKey);
     const initialBrand = getInitialBrand(defaultBrand, brandStorageKey);
+
     setModeState(initialMode);
     setThemeState(initialTheme);
     setBrandState(initialBrand);
     applyDocumentTheme(initialMode, initialTheme, initialBrand);
-    // #region agent log
-    if (typeof document !== "undefined" && document.documentElement) {
-      setTimeout(() => {
-        // Check document is still available when timeout fires (important for test environments)
-        if (typeof document !== "undefined" && document.documentElement) {
-          const afterApply = document.documentElement.style.getPropertyValue("--tm-primary");
-          fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              location: "ThemeProvider.tsx:289",
-              message: "ThemeProvider useEffect after applyDocumentTheme",
-              data: { afterValue: afterApply, hasValue: !!afterApply },
-              timestamp: Date.now(),
-              sessionId: "debug-session",
-              runId: "run1",
-              hypothesisId: "C",
-            }),
-          }).catch(() => {});
-        }
-      }, 100);
-    }
-    // #endregion
     persistMode(initialMode, storageKey);
     persistTheme(initialTheme, themeStorageKey);
     persistBrand(initialBrand, brandStorageKey);
@@ -365,48 +324,7 @@ export function ThemeProvider({
   // Update CSS variables when mode, theme, or brand changes
   // CSS variables are updated by applyDocumentTheme
   React.useEffect(() => {
-    // #region agent log
-    if (typeof document !== "undefined" && document.documentElement) {
-      const beforeChange = document.documentElement.style.getPropertyValue("--tm-primary");
-      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          location: "ThemeProvider.tsx:325",
-          message: "ThemeProvider useEffect mode/theme/brand change",
-          data: { mode, theme, brand, beforeValue: beforeChange, hasValue: !!beforeChange },
-          timestamp: Date.now(),
-          sessionId: "debug-session",
-          runId: "run1",
-          hypothesisId: "C",
-        }),
-      }).catch(() => {});
-    }
-    // #endregion
     applyDocumentTheme(mode, theme, brand);
-    // #region agent log
-    if (typeof document !== "undefined" && document.documentElement) {
-      setTimeout(() => {
-        // Check document is still available when timeout fires (important for test environments)
-        if (typeof document !== "undefined" && document.documentElement) {
-          const afterChange = document.documentElement.style.getPropertyValue("--tm-primary");
-          fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              location: "ThemeProvider.tsx:327",
-              message: "ThemeProvider useEffect after applyDocumentTheme change",
-              data: { afterValue: afterChange, hasValue: !!afterChange },
-              timestamp: Date.now(),
-              sessionId: "debug-session",
-              runId: "run1",
-              hypothesisId: "C",
-            }),
-          }).catch(() => {});
-        }
-      }, 100);
-    }
-    // #endregion
   }, [mode, theme, brand]);
 
   const value = React.useMemo(

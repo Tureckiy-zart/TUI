@@ -142,6 +142,21 @@ const SAFELIST = [
   "tm-motion-hover-lift",
   "tm-motion-hover-scale",
   "tm-motion-tap-scale",
+  // CRITICAL: Tailwind animate-* classes must be in safelist to generate @keyframes
+  // Without these, @keyframes are not included in CSS output
+  "animate-fade-in",
+  "animate-fade-out",
+  "animate-scale-in",
+  "animate-scale-out",
+  "animate-slide-up-in",
+  "animate-slide-down-in",
+  "animate-slide-left-in",
+  "animate-slide-right-in",
+  "animate-fade-scale-in",
+  "animate-fade-slide-up-in",
+  "animate-fade-slide-down-in",
+  "animate-fade-slide-left-in",
+  "animate-fade-slide-right-in",
 ];
 
 const config: Config = {
@@ -184,7 +199,23 @@ const config: Config = {
         ...(tailwindMotionConfig.keyframes as Record<string, any>),
         ...(motionV2TailwindConfig.keyframes as Record<string, any>),
       },
-      animation: tailwindMotionConfig.animation,
+      animation: {
+        ...tailwindMotionConfig.animation,
+        // Motion V2 animations - MUST be here for Tailwind to generate @keyframes
+        "fade-in": "fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-out": "fade-out 150ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "scale-in": "scale-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "scale-out": "scale-out 150ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "slide-up-in": "slide-up-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "slide-down-in": "slide-down-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "slide-left-in": "slide-left-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "slide-right-in": "slide-right-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-scale-in": "fade-scale-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-slide-up-in": "fade-slide-up-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-slide-down-in": "fade-slide-down-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-slide-left-in": "fade-slide-left-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "fade-slide-right-in": "fade-slide-right-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+      },
     },
   },
   presets: [preset],

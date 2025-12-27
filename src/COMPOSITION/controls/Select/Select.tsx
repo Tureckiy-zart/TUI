@@ -35,6 +35,8 @@ const selectContentVariants = tokenCVA({
 });
 
 // Select item uses Input tokens with default size (md)
+// Note: Radix UI Select.Item uses data-disabled attribute, not disabled attribute
+// Therefore we use data-[disabled]: prefix for disabled state styles
 const selectItemVariants = tokenCVA({
   base: `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none focus-visible:${INPUT_TOKENS.variant.primary.background} focus-visible:${INPUT_TOKENS.variant.primary.text} data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${INPUT_TOKENS.padding.horizontal.md} ${INPUT_TOKENS.padding.vertical.md} ${INPUT_TOKENS.radius.sm} ${INPUT_TOKENS.fontSize.sm}`,
 });

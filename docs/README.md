@@ -119,6 +119,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
 - [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
 - [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
+- [reference/MOTION_ANIMATIONS_GUIDE.md](./reference/MOTION_ANIMATIONS_GUIDE.md) - Motion animations working guide (implementation, troubleshooting, common pitfalls)
 - [reference/GRADIENT_EXCEPTIONS.md](./reference/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation
 
 ### CI/CD

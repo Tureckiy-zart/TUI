@@ -3,7 +3,7 @@
 **Status:** ✅ LOCKED  
 **Priority:** BLOCKER  
 **Date Created:** 2025-12-16  
-**Version:** 1.1  
+**Version:** 1.2  
 **Enforcement:** TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN
 
 ---
@@ -24,6 +24,74 @@
 This document defines the canonical Motion Authority contract for all UI components. It establishes the rules for motion token usage, ensuring consistent animation timing, easing, and transitions across the design system.
 
 **Key Principle:** All motion values must come from the canonical motion token system. Components cannot introduce arbitrary motion values that break animation consistency and accessibility.
+
+---
+
+## Motion Domains and Definitions
+
+This section defines what counts as motion and interactivity for the motion lock system.
+
+### Motion Domains
+
+Motion in the design system is organized into seven primary domains:
+
+1. **Enter/Exit** - Animations that occur when elements appear or disappear from the viewport (e.g., modal open/close, toast show/hide, dropdown expand/collapse)
+2. **Hover** - Interactive feedback when user hovers over clickable elements (e.g., button hover lift, card hover scale)
+3. **Press/Tap** - Interactive feedback when user presses or taps elements (e.g., button active state, tap scale down)
+4. **Focus/Keyboard** - Visual feedback for keyboard navigation and focus states (e.g., focus ring transitions, focus-visible states)
+5. **Expand/Collapse** - Animations for expanding and collapsing content (e.g., accordion, collapsible menus, expandable sections)
+6. **Toast/Dialog Transitions** - Specific transitions for notification and dialog components (e.g., slide-in from edge, fade-in overlay)
+7. **Loading/Progress Micro-motion** - Subtle animations for loading states and progress indicators (e.g., spinner rotation, pulse, skeleton shimmer)
+
+### Allowed Mechanisms
+
+Motion MUST be implemented using only the following mechanisms:
+
+1. **Token CSS Variables** - Motion values via CSS custom properties (e.g., `var(--motion-duration-normal)`, `var(--motion-easing-standard)`)
+2. **tm-motion Utilities** - Pre-configured Tailwind utility classes (e.g., `.tm-motion-fade-in`, `.tm-motion-hover-lift`, `.tm-motion-tap-scale`)
+3. **Tailwind Motion Utilities** - Standard Tailwind transition/animation utilities that reference motion tokens (e.g., `transition-all duration-normal ease-out`)
+
+**Note:** framer-motion is NOT part of the approved stack. All motion MUST be CSS-based using tokens and utilities.
+
+### Forbidden Patterns
+
+The following patterns are explicitly forbidden:
+
+1. **Raw Duration Values** - ❌ `transition-duration: 200ms`, `animation-duration: 450ms`
+2. **Raw Easing Values** - ❌ `transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1)`
+3. **Raw Transition Shorthand** - ❌ `transition: all 250ms ease`
+4. **Ad-hoc Keyframes** - ❌ Custom `@keyframes` definitions in component files
+5. **Inline Style Animations** - ❌ `style={{ transition: '200ms' }}` or `style={{ animation: 'custom 500ms' }}`
+6. **Component-Level Motion Scales** - ❌ Defining new motion values within components
+7. **Runtime Motion Calculations** - ❌ Calculating motion values from props or state
+
+### Examples
+
+**✅ Allowed:**
+```tsx
+// Using token CSS variables
+<div className="transition-all duration-normal ease-out" />
+
+// Using tm-motion utilities
+<div className="tm-motion-fade-in" />
+<button className="tm-motion-hover-lift tm-motion-tap-scale" />
+
+// Using Tailwind utilities that reference tokens
+<div className="transition-transform duration-fast ease-out" />
+```
+
+**❌ Forbidden:**
+```tsx
+// Raw values
+<div style={{ transition: '200ms ease-out' }} />
+<div className="transition-all duration-[200ms]" />
+
+// Custom keyframes in component
+<style>{`@keyframes custom { ... }`}</style>
+
+// Inline motion calculations
+<div style={{ transitionDuration: `${props.duration}ms` }} />
+```
 
 ---
 
@@ -425,7 +493,27 @@ Any Motion Authority modifications require:
 
 ---
 
+## Related Documentation
+
+- [Motion Animations Working Guide](../reference/MOTION_ANIMATIONS_GUIDE.md) - Practical guide for implementing motion animations, troubleshooting common issues, and ensuring animations work correctly in Storybook and runtime environments
+
+---
+
 ## Version History
+
+- **v1.3** (2025-12-27): Motion Audit and Lock - Preset Catalog
+  - Added comprehensive Motion Preset Catalog section
+  - Documented all `.tm-motion-*` utility classes with usage guidelines
+  - Added Do's and Don'ts for preset usage
+  - Updated Semantic Mapping to reference presets
+  - Verified all presets use CSS variables and are reduced-motion compatible
+
+- **v1.2** (2025-12-27): Motion Audit and Lock - Definitions Section
+  - Added Motion Domains and Definitions section
+  - Defined seven motion domains (Enter/Exit, Hover, Press/Tap, Focus/Keyboard, Expand/Collapse, Toast/Dialog, Loading/Progress)
+  - Documented allowed mechanisms (token CSS vars, tm-motion utilities, Tailwind motion utilities)
+  - Explicitly forbidden patterns with examples
+  - Clarified that framer-motion is NOT part of approved stack
 
 - **v1.1** (2025-12-16): Formal Lock Completion
   - Changed status from ACTIVE to LOCKED
@@ -441,8 +529,8 @@ Any Motion Authority modifications require:
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.1  
+**Version:** 1.3  
 **Date Created:** 2025-12-16  
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2025-12-27  
 **Priority:** BLOCKER  
 **Authority Domain:** Motion Authority

@@ -159,10 +159,11 @@ const sliderThumbVariants = tokenCVA({
 
 /**
  * Slider mark variants (visual tick marks)
+ * Note: pointer-events-none is applied via wrapper div in component, not in base state
  */
 const sliderMarkVariants = tokenCVA({
   // Base styles - absolute positioned mark with dot
-  base: "absolute flex items-center justify-center pointer-events-none",
+  base: "absolute flex items-center justify-center",
   variants: {
     size: {
       sm: "",
