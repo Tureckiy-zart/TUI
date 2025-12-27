@@ -245,7 +245,23 @@ export const DialogFocusBehavior: Story = {
 
 /**
  * Drawer Focus Behavior
- * Custom focus lock implementation
+ * Custom focus lock implementation with focus-visible compliance
+ *
+ * Demonstrates:
+ * 1. Focus trap (Tab/Shift+Tab cycles within Drawer)
+ * 2. Focus restore (focus returns to trigger on close)
+ * 3. Focus-visible styling (keyboard-only focus rings)
+ * 4. Container focus suppression (container does not show focus ring)
+ *
+ * Testing Instructions:
+ * 1. Focus trigger button and press Enter/Space to open Drawer
+ * 2. Verify first interactive element (Input) receives focus with visible ring
+ * 3. Press Tab - verify focus moves to "Action Button" with visible ring
+ * 4. Press Tab - verify focus moves to "Close Drawer" button with visible ring
+ * 5. Press Tab again - verify focus wraps to Input (trap working)
+ * 6. Press Shift+Tab - verify focus cycles backward
+ * 7. Verify Drawer container does NOT show focus ring
+ * 8. Press Escape or click Close - verify focus returns to trigger button
  */
 export const DrawerFocusBehavior: Story = {
   name: "Drawer Focus",
@@ -259,7 +275,10 @@ export const DrawerFocusBehavior: Story = {
           <Box>
             <Heading level={2}>Drawer Focus Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Drawer uses custom useFocusLock hook for focus management.</Text>
+              <Text tone="muted">
+                Drawer uses custom useFocusLock hook for focus management. Demonstrates focus trap,
+                restore, and focus-visible compliance (GAP-3 fixed).
+              </Text>
             </Box>
           </Box>
 
@@ -284,8 +303,11 @@ export const DrawerFocusBehavior: Story = {
             </Drawer.Header>
             <Drawer.Body>
               <Stack spacing={3}>
-                <Text>Focus is trapped in this drawer.</Text>
-                <Input placeholder="Input field" />
+                <Text>
+                  Focus is trapped in this drawer. Tab through elements to verify focus-visible
+                  rings.
+                </Text>
+                <Input placeholder="Input field (first focusable)" />
                 <Button variant="outline">Action Button</Button>
               </Stack>
             </Drawer.Body>
@@ -296,10 +318,25 @@ export const DrawerFocusBehavior: Story = {
             </Drawer.Footer>
           </Drawer>
 
-          <Box className="rounded-lg border border-warning/30 bg-warning/10 p-md">
+          <Box className="rounded-lg border border-success/30 bg-success/10 p-md">
+            <Heading level={3}>Focus-Visible Compliance (GAP-3 Fixed)</Heading>
+            <Stack spacing={2} className="mt-2">
+              <Text size="sm">
+                ✅ Interactive elements show focus ring when focused via keyboard
+              </Text>
+              <Text size="sm">
+                ✅ Drawer container does NOT show focus ring (outline-none applied)
+              </Text>
+              <Text size="sm">✅ Focus trap cycles Tab/Shift+Tab within Drawer boundary</Text>
+              <Text size="sm">✅ Focus restores to trigger button on close</Text>
+            </Stack>
+          </Box>
+
+          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
             <Text size="sm">
               <strong>Note:</strong> Drawer uses custom focus implementation (useFocusLock). Pass
-              returnFocusRef prop to restore focus correctly.
+              returnFocusRef prop to restore focus correctly. Container focus is programmatic only
+              (tabindex=-1) and does not show visual focus indication.
             </Text>
           </Box>
         </Stack>
