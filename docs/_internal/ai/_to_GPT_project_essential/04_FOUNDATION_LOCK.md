@@ -426,9 +426,9 @@ The following components constitute the **complete and final** Foundation layer.
 | Component       | Category   | Base Library      | Foundation Status | Lock Date |
 | --------------- | ---------- | ----------------- | ----------------- | --------- |
 | **Modal**       | Overlays   | Radix Dialog      | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
-| **Tabs**        | Navigation | Radix Tabs        | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **Tabs**        | Navigation | Radix Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 |
 | **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
@@ -456,16 +456,13 @@ The following components constitute the **complete and final** Foundation layer.
 - **Export Path:** `@tenerife.music/ui` → `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
 - **Base Library:** Radix Tabs (`@radix-ui/react-tabs`)
 - **Purpose:** Sole tabs foundation. All tab-based navigation must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** Tabs was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25 (First Pass), 2025-12-25 (Second Pass), 2025-12-27 (Third Pass)
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete, Third Pass 2025-12-27)
+- **Audit Report:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+- **Lock Type:** PROCESS LOCK (COMPOSITION Layer - Navigation)
+- **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0-12) three times and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Third pass completed 2025-12-27 with all compliance verified, no issues found.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
 
 #### Select
 - **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)
@@ -491,19 +488,22 @@ The following components constitute the **complete and final** Foundation layer.
 
 #### ContextMenu
 - **Location:** `src/COMPOSITION/overlays/ContextMenu/`
-- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuGroup`, `ContextMenuSeparator`
+- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuCheckboxItem`, `ContextMenuSeparator`, `ContextMenuSub`, `ContextMenuSubTrigger`, `ContextMenuSubContent`
 - **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
 - **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline and demonstrates full compliance with all Authority Contracts.
+- **Key Decisions:**
+  - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+  - Tone variants: neutral, primary, destructive (overlay-specific semantics)
+  - Size scale: sm, md, lg (overlay restriction compliant)
+  - Size inheritance pattern via Context (DX improvement)
+  - Full Radix delegation (right-click, keyboard, focus, a11y)
+- **Quality Metrics:** 380 tests, 10 Storybook stories (3 canonical), 100% token compliance
+- **Future Changes:** Re-entry into Pipeline 18A required for structural modifications
 
 #### Toast
 - **Location:** `src/COMPOSITION/overlays/`
@@ -564,8 +564,8 @@ The following components constitute the **complete and final** Foundation layer.
 The following components were declared as LOCKED but were implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). They have been temporarily unlocked strictly for canonical migration:
 
 - **Modal** — Unlocked 2025-12-19
-- **Tabs** — Unlocked 2025-12-19
-- **ContextMenu** — Unlocked 2025-12-19
+- **Tabs** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-23
+- **ContextMenu** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-25
 - **Toast** — Unlocked 2025-12-19
 
 **Unlock Rationale:**
@@ -745,9 +745,9 @@ The following changes to Foundation components are **explicitly forbidden** afte
 
 Foundation Components:
 - Modal (Radix Dialog wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
-- Tabs (Radix Tabs wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- Tabs (Radix Tabs wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-23)
 - Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
-- ContextMenu (Radix ContextMenu wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- ContextMenu (Radix ContextMenu wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-25)
 - Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Button (Native button element - FINAL LOCK) - ✅ LOCKED
 - Link (Native anchor element) - ✅ LOCKED
@@ -805,8 +805,13 @@ Interactive Size Scale Authority (Locked):
 
 You MUST treat Foundation components (Button, Link), Token system, Interaction Authority, Foundation Enforcement, AND Interactive Size Scale Authority as immutable.
 
-**LEGACY UNLOCKED COMPONENTS (Modal, Tabs, ContextMenu, Toast):**
+**LEGACY UNLOCKED COMPONENTS (ContextMenu, Toast):**
 - These components are UNLOCKED for canonical migration ONLY
+
+**PROCESS LOCKED COMPONENTS (Tabs):**
+- Tabs has completed Pipeline 18A (Steps 0-12) and is PROCESS LOCKED (2025-12-23)
+- Component is in COMPOSITION layer, not Foundation lock
+- Future structural modifications require re-entry into Pipeline 18A
 - Refactor strictly via Foundation Step Pipeline (Steps 0–13)
 - ❌ NO public API expansion
 - ❌ NO new variants or sizes
@@ -931,9 +936,9 @@ If Interactive Size Scale Authority modifications are needed:
 | Component       | Status    | Lock Date | Immutability |
 | --------------- | --------- | --------- | ------------ |
 | Modal           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
-| Tabs            | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| Tabs            | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 | Pipeline Complete |
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
-| ContextMenu     | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| ContextMenu     | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 | Pipeline Complete |
 | Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Button          | ✅ FINAL LOCK |   | Immutable    |
 | Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |

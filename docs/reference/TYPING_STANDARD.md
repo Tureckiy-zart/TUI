@@ -260,9 +260,15 @@ This document is:
   - Does NOT override this document for public API typing
   - Use for general TypeScript best practices outside of public API typing
 
+**CVA Structure Authority:**
+- **`docs/architecture/CVA_CANONICAL_STYLE.md`** — Canonical CVA structure pattern (complements typing rules)
+  - Defines mandatory CVA structure (variants inline, no intermediate objects)
+  - Requires `satisfies Record<Type, string>` constraints in variant maps
+  - Ensures CVA structure supports explicit union types defined in this document
+
 **Architecture Documents:**
 - **`docs/ARCHITECTURE_CONTEXT.md`** — References this document as MANDATORY architectural standard
 - **`docs/architecture/ARCHITECTURE_RULES.md`** — References this document for CVA-derived typing rules
 - **`docs/architecture/ASSISTANT_DEVELOPMENT_RULES.md`** — References this document as MANDATORY for AI assistants
 
-**Note:** For public API typing (variants, sizes, CVA boundaries), this document (`TYPING_STANDARD.md`) is the **REQUIRED, ENFORCED architectural standard** and takes precedence over all other typing guidelines.
+**Note:** For public API typing (variants, sizes, CVA boundaries), this document (`TYPING_STANDARD.md`) is the **REQUIRED, ENFORCED architectural standard** and takes precedence over all other typing guidelines. CVA structure must follow `CVA_CANONICAL_STYLE.md` to support the typing requirements defined in this document.

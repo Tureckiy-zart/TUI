@@ -43,18 +43,62 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
   const finalTitleId = titleId || titleIdRef;
   const finalDescriptionId = descriptionId || descriptionIdRef;
 
+  // Collect titleId and descriptionId from children to pass to Modal.Content
+  let actualTitleId: string | undefined;
+  let actualDescriptionId: string | undefined;
+
+  const processedChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      // Check by displayName since forwardRef components don't work with ===
+      const childDisplayName = (child.type as any)?.displayName;
+      // Pass titleId/descriptionId to DialogHeader
+      if (childDisplayName === "DialogHeader") {
+        return React.cloneElement(child as React.ReactElement<any>, {
+          titleId: finalTitleId,
+          descriptionId: finalDescriptionId,
+        });
+      }
+      // For standalone DialogTitle or DialogDescription
+      if (childDisplayName === "DialogTitle") {
+        actualTitleId = finalTitleId;
+        return React.cloneElement(child as React.ReactElement<any>, {
+          titleId: finalTitleId,
+        });
+      }
+      if (childDisplayName === "DialogDescription") {
+        actualDescriptionId = finalDescriptionId;
+        return React.cloneElement(child as React.ReactElement<any>, {
+          descriptionId: finalDescriptionId,
+        });
+      }
+    }
+    return child;
+  });
+
+  // Also check children recursively for DialogTitle/DialogDescription
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child)) {
+      const childDisplayName = (child.type as any)?.displayName;
+      if (childDisplayName === "DialogHeader") {
+        React.Children.forEach((child as any).props.children, (grandchild: any) => {
+          if (React.isValidElement(grandchild)) {
+            const grandchildDisplayName = (grandchild.type as any)?.displayName;
+            if (grandchildDisplayName === "DialogTitle") {
+              actualTitleId = finalTitleId;
+            }
+            if (grandchildDisplayName === "DialogDescription") {
+              actualDescriptionId = finalDescriptionId;
+            }
+          }
+        });
+      }
+    }
+  });
+
   return (
     <Modal.Root {...props}>
-      <Modal.Content>
-        {React.Children.map(children, (child) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child as React.ReactElement<any>, {
-              titleId: finalTitleId,
-              descriptionId: finalDescriptionId,
-            });
-          }
-          return child;
-        })}
+      <Modal.Content aria-labelledby={actualTitleId} aria-describedby={actualDescriptionId}>
+        {processedChildren}
         <Modal.Close />
       </Modal.Content>
     </Modal.Root>
@@ -72,7 +116,7 @@ export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, titleId, descriptionId, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -83,7 +127,27 @@ const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
           className,
         )}
         {...props}
-      />
+      >
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child)) {
+            // Check by displayName since forwardRef components don't work with ===
+            const childDisplayName = (child.type as any)?.displayName;
+            // Pass titleId to DialogTitle if present
+            if (childDisplayName === "DialogTitle" && titleId) {
+              return React.cloneElement(child as React.ReactElement<any>, {
+                titleId: titleId,
+              });
+            }
+            // Pass descriptionId to DialogDescription if present
+            if (childDisplayName === "DialogDescription" && descriptionId) {
+              return React.cloneElement(child as React.ReactElement<any>, {
+                descriptionId: descriptionId,
+              });
+            }
+          }
+          return child;
+        })}
+      </div>
     );
   },
 );

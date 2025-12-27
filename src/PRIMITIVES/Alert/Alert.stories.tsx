@@ -1,8 +1,8 @@
-import { Alert } from "./Alert";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Alert, ALERT_VARIANTS, type AlertVariant } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "Components/Alert",
+  title: "Foundation Locked/Primitives/Alert",
   component: Alert,
   parameters: {
     layout: "padded",
@@ -11,10 +11,10 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["default", "primary", "secondary", "accent", "destructive"],
-      description: "Alert variant style (canonical variants per Freeze API)",
+      options: ALERT_VARIANTS,
+      description: "Alert variant style",
       table: {
-        type: { summary: "string" },
+        type: { summary: "AlertVariant" },
         defaultValue: { summary: "default" },
       },
     },
@@ -61,12 +61,12 @@ export const Destructive: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="space-y-md">
-      <Alert variant="default">Default alert variant.</Alert>
-      <Alert variant="primary">Primary alert variant.</Alert>
-      <Alert variant="secondary">Secondary alert variant.</Alert>
-      <Alert variant="accent">Accent alert variant.</Alert>
-      <Alert variant="destructive">Destructive alert variant.</Alert>
+    <div className="flex flex-col gap-md">
+      {ALERT_VARIANTS.map((variant) => (
+        <Alert key={variant} variant={variant as AlertVariant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)} alert variant.
+        </Alert>
+      ))}
     </div>
   ),
 };

@@ -1,0 +1,234 @@
+"use client";
+
+/**
+ * Slider Component
+ *
+ * A fully accessible, token-driven slider component for numeric value control.
+ * Built on Radix UI Slider primitive with variant and size support.
+ *
+ * @example
+ * ```tsx
+ * <Slider
+ *   variant="primary"
+ *   size="md"
+ *   min={0}
+ *   max={100}
+ *   defaultValue={50}
+ *   onValueChange={(value) => console.log(value)}
+ * />
+ * ```
+ */
+
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import * as React from "react";
+
+import { cn } from "@/FOUNDATION/lib/utils";
+
+import { sliderVariants } from "./slider-variants";
+
+export type SliderSize = "sm" | "md" | "lg";
+export type SliderVariant = "primary" | "secondary" | "outline";
+export type SliderOrientation = "horizontal" | "vertical";
+
+export interface SliderMark {
+  /**
+   * Value at which the mark should be placed
+   */
+  value: number;
+  /**
+   * Optional label to display at the mark
+   */
+  label?: string | React.ReactNode;
+}
+
+export interface SliderProps {
+  /**
+   * Current value of the slider (controlled)
+   */
+  value?: number;
+
+  /**
+   * Default value of the slider (uncontrolled)
+   * @default 50
+   */
+  defaultValue?: number;
+
+  /**
+   * Callback fired when the value changes
+   */
+  onValueChange?: (value: number) => void;
+
+  /**
+   * Minimum value
+   * @default 0
+   */
+  min?: number;
+
+  /**
+   * Maximum value
+   * @default 100
+   */
+  max?: number;
+
+  /**
+   * Step increment
+   * @default 1
+   */
+  step?: number;
+
+  /**
+   * Visual size variant
+   * @default "md"
+   */
+  size?: SliderSize;
+
+  /**
+   * Visual style variant
+   * @default "primary"
+   */
+  variant?: SliderVariant;
+
+  /**
+   * Whether the slider is disabled
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Orientation of the slider
+   * @default "horizontal"
+   */
+  orientation?: SliderOrientation;
+
+  /**
+   * Marks to display on the slider
+   * Can be an array of mark objects or just an array of values
+   */
+  marks?: SliderMark[] | number[];
+
+  /**
+   * Whether to show labels for marks
+   * @default false
+   */
+  showMarkLabels?: boolean;
+
+  /**
+   * Accessible label for the slider
+   */
+  "aria-label"?: string;
+
+  /**
+   * Name attribute for form submission
+   */
+  name?: string;
+}
+
+/**
+ * Slider component
+ *
+ * COMPLIANCE NOTES:
+ * - ✅ Uses token system exclusively (SLIDER_TOKENS, no raw values)
+ * - ✅ Uses Radix UI Slider primitive
+ * - ✅ Follows Extension Authority Contract
+ * - ✅ Interactive Size Scale Authority (sm/md/lg)
+ * - ✅ InteractiveVariant subset (primary/secondary/outline)
+ * - ✅ tokenCVA pattern for variants and sizes (Decision Matrix RULE 1 compliance)
+ */
+const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
+  (
+    {
+      value,
+      defaultValue = 50,
+      onValueChange,
+      min = 0,
+      max = 100,
+      step = 1,
+      size = "md",
+      variant = "primary",
+      disabled = false,
+      orientation = "horizontal",
+      marks,
+      showMarkLabels = false,
+      "aria-label": ariaLabel,
+      name,
+    },
+    ref,
+  ) => {
+    // Convert single value to array for Radix API
+    const handleValueChange = React.useCallback(
+      (values: number[]) => {
+        if (values[0] !== undefined) {
+          onValueChange?.(values[0]);
+        }
+      },
+      [onValueChange],
+    );
+
+    // Get variant classes from CVA
+    const { root, track, range, thumb, mark, markDot, markLabel } = sliderVariants({
+      size,
+      variant,
+      orientation,
+    });
+
+    // Normalize marks to array of SliderMark objects
+    const normalizedMarks = React.useMemo(() => {
+      if (!marks || marks.length === 0) return [];
+      return marks
+        .map((m) => (typeof m === "number" ? { value: m } : m))
+        .filter((m) => m.value >= min && m.value <= max); // Filter out-of-bounds marks
+    }, [marks, min, max]);
+
+    // Render marks
+    const renderMarks = () => {
+      if (normalizedMarks.length === 0) return null;
+      if (max === min) return null; // Prevent division by zero
+
+      return (
+        <div className="pointer-events-none absolute inset-0">
+          {normalizedMarks.map((markItem) => {
+            const percent = ((markItem.value - min) / (max - min)) * 100;
+            const style =
+              orientation === "horizontal" ? { left: `${percent}%` } : { bottom: `${percent}%` };
+
+            return (
+              <div key={markItem.value} className={cn(mark())} style={style}>
+                <div className={cn(markDot())} />
+                {showMarkLabels && markItem.label && (
+                  <div className={cn(markLabel())}>{markItem.label}</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      );
+    };
+
+    return (
+      <SliderPrimitive.Root
+        ref={ref}
+        className={cn(root())}
+        value={value !== undefined ? [value] : undefined}
+        defaultValue={[defaultValue]}
+        onValueChange={handleValueChange}
+        min={min}
+        max={max}
+        step={step}
+        disabled={disabled}
+        orientation={orientation}
+        aria-label={ariaLabel}
+        name={name}
+      >
+        <SliderPrimitive.Track className={cn(track())}>
+          <SliderPrimitive.Range className={cn(range())} />
+          {renderMarks()}
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb className={cn(thumb())} />
+      </SliderPrimitive.Root>
+    );
+  },
+);
+
+Slider.displayName = "Slider";
+
+export { Slider };

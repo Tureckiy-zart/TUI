@@ -164,9 +164,20 @@ export function HoverCardRoot({
 
   return (
     <HoverCardContext.Provider value={contextValue}>
-      <Popover open={open} onOpenChange={handleOpenChange} defaultOpen={defaultOpen} modal={modal}>
-        {props.children}
-      </Popover>
+      {isControlled ? (
+        <Popover open={open} onOpenChange={handleOpenChange} modal={modal}>
+          {props.children}
+        </Popover>
+      ) : (
+        <Popover
+          open={open}
+          onOpenChange={handleOpenChange}
+          defaultOpen={defaultOpen}
+          modal={modal}
+        >
+          {props.children}
+        </Popover>
+      )}
     </HoverCardContext.Provider>
   );
 }

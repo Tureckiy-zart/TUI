@@ -1,3 +1,3 @@
 "use client";
 
-export { Label, type LabelProps, labelVariants } from "./Label";
+export { Label, type LabelProps } from "./Label";

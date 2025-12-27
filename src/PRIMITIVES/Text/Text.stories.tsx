@@ -1,15 +1,15 @@
-import { Text } from "./Text";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
-  title: "Components/Text",
+  title: "Foundation Locked/Primitives/Text",
   component: Text,
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          "Text component for general-purpose text. Supports 5 sizes (xs, sm, md, lg, xl), 4 weights, and muted state. Uses sans-serif font family.\n\n" +
+          "Text component for general-purpose text. Supports 5 sizes (xs, sm, md, lg, xl), 4 weights, tone variants, and polymorphic `as` prop for semantic HTML elements. Uses sans-serif font family.\n\n" +
           "**Note:** This is a low-level text component. For typography system overview, see `Compositions/Typography`. For semantic typography components (Heading, Body, Caption, etc.), see `Components/Typography/`.",
       },
     },
@@ -34,12 +34,22 @@ const meta: Meta<typeof Text> = {
         defaultValue: { summary: "normal" },
       },
     },
-    muted: {
-      control: { type: "boolean" },
-      description: "Muted text color",
+    tone: {
+      control: { type: "select" },
+      options: ["default", "muted"],
+      description: "Text color tone",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: "default | muted" },
+        defaultValue: { summary: "default" },
+      },
+    },
+    as: {
+      control: { type: "select" },
+      options: ["span", "p", "label", "strong", "em"],
+      description: "HTML element to render",
+      table: {
+        type: { summary: "span | p | label | strong | em" },
+        defaultValue: { summary: "span" },
       },
     },
   },
@@ -78,11 +88,23 @@ export const AllWeights: Story = {
   ),
 };
 
-export const Muted: Story = {
+export const Tone: Story = {
   render: () => (
     <div className="space-y-md">
-      <Text>Normal Text</Text>
-      <Text muted>Muted Text</Text>
+      <Text tone="default">Default Text</Text>
+      <Text tone="muted">Muted Text</Text>
+    </div>
+  ),
+};
+
+export const Polymorphic: Story = {
+  render: () => (
+    <div className="space-y-md">
+      <Text as="span">Span element (default)</Text>
+      <Text as="p">Paragraph element</Text>
+      <Text as="label">Label element</Text>
+      <Text as="strong">Strong element</Text>
+      <Text as="em">Emphasized element</Text>
     </div>
   ),
 };
@@ -93,7 +115,7 @@ export const CombinedProps: Story = {
       <Text size="lg" weight="bold">
         Large Bold Text
       </Text>
-      <Text size="sm" weight="medium" muted>
+      <Text size="sm" weight="medium" tone="muted">
         Small Medium Muted Text
       </Text>
       <Text size="xl" weight="semibold">
@@ -110,7 +132,7 @@ export const UsageExamples: Story = {
         <Text size="lg" weight="semibold">
           Section Title
         </Text>
-        <Text size="md" muted>
+        <Text size="md" tone="muted">
           This is supporting text that provides additional context or description.
         </Text>
       </div>
@@ -118,9 +140,112 @@ export const UsageExamples: Story = {
         <Text size="sm" weight="medium">
           Label Text
         </Text>
-        <Text size="xs" muted>
+        <Text size="xs" tone="muted">
           Helper text or additional information.
         </Text>
+      </div>
+    </div>
+  ),
+};
+
+export const Matrix: Story = {
+  render: () => {
+    const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+    const weights = ["normal", "medium", "semibold", "bold"] as const;
+
+    return (
+      <div className="space-y-lg">
+        <div>
+          <div className="mb-md">
+            <Text size="lg" weight="bold">
+              Size × Weight Matrix
+            </Text>
+          </div>
+          <div className="space-y-md">
+            {sizes.map((size) => (
+              <div key={size} className="space-y-sm">
+                <div>
+                  <Text size="sm" weight="semibold">
+                    Size: {size}
+                  </Text>
+                </div>
+                <div className="flex flex-wrap gap-md">
+                  {weights.map((weight) => (
+                    <div key={weight} className="min-w-[200px]">
+                      <Text size={size} weight={weight}>
+                        {weight} text
+                      </Text>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="border-t pt-lg">
+          <div className="mb-md">
+            <Text size="lg" weight="bold">
+              Tone Variants
+            </Text>
+          </div>
+          <div className="space-y-sm">
+            {sizes.map((size) => (
+              <div key={size} className="flex gap-lg">
+                <Text size={size} tone="default">
+                  Default foreground
+                </Text>
+                <Text size={size} tone="muted">
+                  Muted foreground
+                </Text>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  },
+};
+
+export const States: Story = {
+  render: () => (
+    <div className="space-y-md">
+      <div>
+        <div className="mb-xs">
+          <Text size="sm" weight="medium">
+            Normal State
+          </Text>
+        </div>
+        <Text>This is text in normal foreground color.</Text>
+      </div>
+      <div>
+        <div className="mb-xs">
+          <Text size="sm" weight="medium">
+            Muted Tone
+          </Text>
+        </div>
+        <Text tone="muted">This is text in muted/secondary foreground color.</Text>
+      </div>
+      <div>
+        <div className="mb-xs">
+          <Text size="sm" weight="medium">
+            Combined with Weight
+          </Text>
+        </div>
+        <div className="space-y-xs">
+          <Text weight="normal" tone="default">
+            Normal weight, default color
+          </Text>
+          <Text weight="normal" tone="muted">
+            Normal weight, muted color
+          </Text>
+          <Text weight="bold" tone="default">
+            Bold weight, default color
+          </Text>
+          <Text weight="bold" tone="muted">
+            Bold weight, muted color
+          </Text>
+        </div>
       </div>
     </div>
   ),

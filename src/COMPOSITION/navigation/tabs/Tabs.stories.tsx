@@ -1,12 +1,13 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { Bell, Settings, User } from "lucide-react";
 import * as React from "react";
 
 import { Tabs } from "./Tabs";
 
 const meta: Meta<typeof Tabs.Root> = {
-  title: "UI/Foundation/Tabs",
+  title: "Foundation Locked/Navigation/Tabs",
   component: Tabs.Root,
   parameters: {
     layout: "padded",
@@ -458,6 +459,260 @@ export const ManualActivation: Story = {
       description: {
         story:
           "Tabs with manual activation mode. Tabs are activated only on click (Enter/Space), not on focus. Use arrow keys to navigate, then press Enter to activate.",
+      },
+    },
+  },
+};
+
+/**
+ * Tabs with icons in triggers (leading and trailing icons)
+ */
+export const WithIcons: Story = {
+  render: () => (
+    <Tabs.Root defaultValue="settings">
+      <Tabs.List>
+        <Tabs.Trigger value="settings" leadingIcon={<Settings />}>
+          Settings
+        </Tabs.Trigger>
+        <Tabs.Trigger value="profile" leadingIcon={<User />}>
+          Profile
+        </Tabs.Trigger>
+        <Tabs.Trigger value="notifications" leadingIcon={<Bell />} trailingIcon={<Bell />}>
+          Notifications
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="settings">
+        <div className="p-md">Settings content</div>
+      </Tabs.Content>
+      <Tabs.Content value="profile">
+        <div className="p-md">Profile content</div>
+      </Tabs.Content>
+      <Tabs.Content value="notifications">
+        <div className="p-md">Notifications content</div>
+      </Tabs.Content>
+    </Tabs.Root>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Tabs with icons in triggers. Icons can be placed before (leadingIcon) or after (trailingIcon) the label.",
+      },
+    },
+  },
+};
+
+/**
+ * Variant and size matrix - all combinations side-by-side
+ */
+export const VariantSizeMatrix: Story = {
+  render: () => (
+    <div className="flex flex-col gap-xl">
+      <div>
+        <h3 className="mb-md text-base font-semibold">Underline Variant</h3>
+        <div className="flex flex-col gap-lg">
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="underline" size="sm">
+                <Tabs.Trigger value="tab1" variant="underline" size="sm">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="underline" size="sm">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="underline" size="md">
+                <Tabs.Trigger value="tab1" variant="underline" size="md">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="underline" size="md">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="underline" size="lg">
+                <Tabs.Trigger value="tab1" variant="underline" size="lg">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="underline" size="lg">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-base font-semibold">Pill Variant</h3>
+        <div className="flex flex-col gap-lg">
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="pill" size="sm">
+                <Tabs.Trigger value="tab1" variant="pill" size="sm">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="pill" size="sm">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="pill" size="md">
+                <Tabs.Trigger value="tab1" variant="pill" size="md">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="pill" size="md">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="pill" size="lg">
+                <Tabs.Trigger value="tab1" variant="pill" size="lg">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="pill" size="lg">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-md text-base font-semibold">Segmented Variant</h3>
+        <div className="flex flex-col gap-lg">
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="segmented" size="sm">
+                <Tabs.Trigger value="tab1" variant="segmented" size="sm">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="segmented" size="sm">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="segmented" size="md">
+                <Tabs.Trigger value="tab1" variant="segmented" size="md">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="segmented" size="md">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <Tabs.Root defaultValue="tab1">
+              <Tabs.List variant="segmented" size="lg">
+                <Tabs.Trigger value="tab1" variant="segmented" size="lg">
+                  Tab 1
+                </Tabs.Trigger>
+                <Tabs.Trigger value="tab2" variant="segmented" size="lg">
+                  Tab 2
+                </Tabs.Trigger>
+              </Tabs.List>
+            </Tabs.Root>
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Complete variant and size matrix showing all combinations (underline/pill/segmented × sm/md/lg).",
+      },
+    },
+  },
+};
+
+/**
+ * Controlled vs Uncontrolled comparison
+ */
+export const ControlledVsUncontrolled: Story = {
+  render: () => {
+    const [controlledValue, setControlledValue] = React.useState("tab1");
+    return (
+      <div className="flex flex-col gap-xl">
+        <div>
+          <h3 className="mb-md text-base font-semibold">Controlled Mode</h3>
+          <p className="mb-sm text-sm text-muted-foreground">
+            Value is managed externally via state. Current value: <strong>{controlledValue}</strong>
+          </p>
+          <Tabs.Root value={controlledValue} onValueChange={setControlledValue}>
+            <Tabs.List>
+              <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+              <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+              <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="tab1">
+              <div className="p-md">Content 1 (Controlled)</div>
+            </Tabs.Content>
+            <Tabs.Content value="tab2">
+              <div className="p-md">Content 2 (Controlled)</div>
+            </Tabs.Content>
+            <Tabs.Content value="tab3">
+              <div className="p-md">Content 3 (Controlled)</div>
+            </Tabs.Content>
+          </Tabs.Root>
+        </div>
+        <div>
+          <h3 className="mb-md text-base font-semibold">Uncontrolled Mode</h3>
+          <p className="mb-sm text-sm text-muted-foreground">
+            Value is managed internally by Radix. Use <code className="text-xs">defaultValue</code>{" "}
+            to set initial state.
+          </p>
+          <Tabs.Root defaultValue="tab2">
+            <Tabs.List>
+              <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+              <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+              <Tabs.Trigger value="tab3">Tab 3</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="tab1">
+              <div className="p-md">Content 1 (Uncontrolled)</div>
+            </Tabs.Content>
+            <Tabs.Content value="tab2">
+              <div className="p-md">Content 2 (Uncontrolled - Default)</div>
+            </Tabs.Content>
+            <Tabs.Content value="tab3">
+              <div className="p-md">Content 3 (Uncontrolled)</div>
+            </Tabs.Content>
+          </Tabs.Root>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Comparison of controlled and uncontrolled modes. Controlled mode uses `value` and `onValueChange` props. Uncontrolled mode uses `defaultValue` prop.",
       },
     },
   },

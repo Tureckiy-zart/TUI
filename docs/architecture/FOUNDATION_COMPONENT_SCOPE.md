@@ -198,7 +198,7 @@ The following components are **proposed** as Foundation based on architectural r
 
 #### 7. Checkbox
 
-**Status:** ⏳ **PROPOSED** (not yet locked)  
+**Status:** ✅ **LOCKED** (Foundation Layer, Lock Date: 2025-12-25; Refactor Cycle 2 Complete, 2025-12-27)  
 **Location:** `src/PRIMITIVES/Checkbox/`
 
 **Rationale:**
@@ -457,13 +457,13 @@ This document works in conjunction with:
 - ✅ Link (navigation)
 
 **Proposed Foundation (Not Yet Locked):**
-- ⏳ Text (typography)
-- ⏳ Heading (typography)
-- ⏳ Input (form input)
-- ⏳ Textarea (form input)
-- ⏳ Checkbox (form selection)
-- ⏳ Radio (form selection)
-- ⏳ Label (form label)
+- ✅ Text (typography)
+- ✅ Heading (typography)
+- ✅ Input (form input)
+- ✅ Textarea (form input)
+- ✅ Checkbox (form selection)
+- ✅ Radio (form selection)
+- ✅ Label (form label)
 
 **Radix-Based Foundation:**
 - ✅ Modal, Tabs, ContextMenu, Toast (documented in FOUNDATION_LOCK.md)

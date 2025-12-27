@@ -18,7 +18,7 @@ type ModalExampleProps = {
   title?: string;
   description?: string;
   footerAlign?: "left" | "center" | "right" | "between";
-  size?: "sm" | "md" | "lg" | "xl" | "fullscreen";
+  size?: "sm" | "md" | "lg";
   width?: "auto" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   height?: "auto" | "sm" | "md" | "lg" | "xl" | "full";
   padding?: "xs" | "sm" | "md" | "lg" | "xl";
@@ -117,14 +117,14 @@ function StoryRow({ children }: { children: React.ReactNode }) {
 }
 
 const meta: Meta<typeof Modal.Root> = {
-  title: "UI/Foundation/Modal",
+  title: "Foundation Locked/Composition/Overlays/Modal",
   component: Modal.Root,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Modal component built on Radix Dialog for modal dialogs. Supports sizes (sm, md, lg, xl, fullscreen), token-based visual props, keyboard navigation, focus trap, and full ARIA support. All behavior is handled by Radix Dialog; Tenerife UI provides visual styling through tokens only.",
+          "Modal component built on Radix Dialog for modal dialogs. Supports sizes (sm, md, lg), token-based visual props, keyboard navigation, focus trap, and full ARIA support. All behavior is handled by Radix Dialog; Tenerife UI provides visual styling through tokens only.",
       },
     },
   },
@@ -192,6 +192,67 @@ export const Default: Story = {
       description: {
         story:
           "Basic Modal usage with default tokens (md size). The close button (X icon) in the top-right corner is provided by `<Modal.Close />`.",
+      },
+    },
+  },
+};
+
+/**
+ * States Story
+ * Demonstrates all sizes in open state
+ * REQUIRED: Component has interactive behavior (open/close states)
+ * Per VARIANTS_SIZE_CANON: Required for components with public states/interactive behavior
+ */
+export const States: Story = {
+  render: () => {
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">All Sizes (Open State)</h3>
+          <p className="text-sm text-muted-foreground">
+            Demonstrates all size variants in open state. Use keyboard navigation (Tab, Escape) to
+            interact with modals.
+          </p>
+          <div className="space-y-4">
+            {sizes.map((size) => (
+              <Modal.Root key={size} defaultOpen>
+                <Modal.Content size={size}>
+                  <Modal.Header>
+                    <Modal.Title>Modal {size.toUpperCase()}</Modal.Title>
+                    <Modal.Description>
+                      This is a {size} modal demonstrating open state and focus management.
+                    </Modal.Description>
+                  </Modal.Header>
+                  <div className="py-4">
+                    <p>Modal content for {size} size variant.</p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Press{" "}
+                      <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd>{" "}
+                      to close or use the close button.
+                    </p>
+                  </div>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {}}>
+                      Cancel
+                    </Button>
+                    <Button onClick={() => {}}>Confirm</Button>
+                  </Modal.Footer>
+                  <Modal.Close />
+                </Modal.Content>
+              </Modal.Root>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates all size variants (sm, md, lg) in open state. Validates focus management, keyboard navigation, and ARIA attributes. Required for interactive components per VARIANTS_SIZE_CANON.",
       },
     },
   },
@@ -386,22 +447,24 @@ export const Uncontrolled: Story = {
 // ============================================================================
 
 /**
- * All size variants displayed together
+ * SizesGallery Story
+ * Demonstrates all supported sizes with consistent content
+ * REQUIRED: Component has size prop
+ * Per VARIANTS_SIZE_CANON: overlay components restricted to sm | md | lg only
  */
-export const Sizes: Story = {
+export const SizesGallery: Story = {
   render: () => (
     <StoryGrid>
       <ModalExample title="Size SM" size="sm" />
       <ModalExample title="Size MD" size="md" />
       <ModalExample title="Size LG" size="lg" />
-      <ModalExample title="Size XL" size="xl" />
-      <ModalExample title="Size Fullscreen" size="fullscreen" />
     </StoryGrid>
   ),
   parameters: {
     docs: {
       description: {
-        story: "All size variants (sm, md, lg, xl, fullscreen) displayed together for comparison.",
+        story:
+          "All size variants (sm, md, lg) displayed together for comparison. Per VARIANTS_SIZE_CANON, overlay components are restricted to sm | md | lg only.",
       },
     },
   },
@@ -592,9 +655,11 @@ export const Paddings: Story = {
 // ============================================================================
 
 /**
- * Modal with scrollable long content
+ * LongContent Story
+ * Validates padding and maxWidth token behavior with long text content
+ * REQUIRED: For overlay components per VARIANTS_SIZE_CANON
  */
-export const ScrollableContent: Story = {
+export const LongContent: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
 
@@ -602,13 +667,13 @@ export const ScrollableContent: Story = {
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
           <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-            Open Scrollable Modal
+            Open Long Content Modal
           </Modal.Trigger>
           <Modal.Content size="md">
             <Modal.Header>
-              <Modal.Title>Scrollable Content Modal</Modal.Title>
+              <Modal.Title>Long Content Modal</Modal.Title>
               <Modal.Description>
-                Modal with long content that requires scrolling.
+                This modal demonstrates padding and maxWidth token behavior with long text content.
               </Modal.Description>
             </Modal.Header>
             <div className="max-h-[60vh] overflow-y-auto py-4">
@@ -619,12 +684,13 @@ export const ScrollableContent: Story = {
                     <p>
                       This is a long content section that demonstrates scrolling within the modal.
                       The content area has a maximum height and overflow-y-auto to enable scrolling
-                      when content exceeds the available space.
+                      when content exceeds the available space. This validates that padding and
+                      maxWidth tokens behave correctly with long text content.
                     </p>
                     <p className="mt-2">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                      nostrud exercitation ullamco laboris.
+                      nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
                   </div>
                 ))}
@@ -647,7 +713,8 @@ export const ScrollableContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Modal with long scrollable content. Demonstrates scrolling within the modal.",
+        story:
+          "Validates padding and maxWidth token behavior with long text content. Required for overlay components per VARIANTS_SIZE_CANON.",
       },
     },
   },

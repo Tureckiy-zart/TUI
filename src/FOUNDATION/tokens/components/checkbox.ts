@@ -19,16 +19,13 @@
 export const CHECKBOX_TOKENS = {
   /**
    * Checkbox sizes by size variant
-   * Supports xs, sm, md, lg, xl sizes
+   * Supports sm, md, lg sizes (canonical interactive scale)
    * Checkboxes are typically square and smaller than input fields
+   *
+   * NOTE: Size scale restricted to sm|md|lg per canonical interactive size scale (FOUNDATION_LOCK.md).
+   * xs and xl sizes removed to comply with Button-defined canonical scale.
    */
   size: {
-    xs: {
-      width: "w-3.5", // 14px (0.875rem)
-      height: "h-3.5", // 14px (0.875rem)
-      radius: "rounded-sm", // 4px (0.25rem)
-      iconSize: "size-2.5", // 10px (0.625rem)
-    },
     sm: {
       width: "w-4", // 16px (1rem)
       height: "h-4", // 16px (1rem)
@@ -46,12 +43,6 @@ export const CHECKBOX_TOKENS = {
       height: "h-5", // 20px (1.25rem)
       radius: "rounded-md", // 6px (0.375rem)
       iconSize: "size-4", // 16px (1rem)
-    },
-    xl: {
-      width: "w-6", // 24px (1.5rem)
-      height: "h-6", // 24px (1.5rem)
-      radius: "rounded-md", // 6px (0.375rem)
-      iconSize: "size-5", // 20px (1.25rem)
     },
   } as const,
 
@@ -125,14 +116,13 @@ export const CHECKBOX_TOKENS = {
   /**
    * Icon tokens
    * Size and styling for checkmark icon within checkbox
+   * NOTE: Icon sizes restricted to sm|md|lg per canonical interactive size scale
    */
   icon: {
     size: {
-      xs: "size-2.5", // 10px (0.625rem)
       sm: "size-3", // 12px (0.75rem)
       md: "size-3.5", // 14px (0.875rem) - default
       lg: "size-4", // 16px (1rem)
-      xl: "size-5", // 20px (1.25rem)
     },
     stroke: "stroke-2", // 2px stroke width for checkmark
     color: {

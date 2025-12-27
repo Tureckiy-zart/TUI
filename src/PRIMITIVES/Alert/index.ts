@@ -1,3 +1,3 @@
 "use client";
 
-export { Alert, type AlertProps, alertVariants } from "./Alert";
+export { Alert, ALERT_VARIANTS, type AlertProps, type AlertVariant, alertVariants } from "./Alert";

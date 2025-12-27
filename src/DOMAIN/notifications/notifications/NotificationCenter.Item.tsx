@@ -35,11 +35,6 @@ export interface NotificationCenterItemProps extends Omit<
    * Callback when notification is clicked
    */
   onClick?: (id: string) => void;
-
-  /**
-   * Show expandable details
-   */
-  expandable?: boolean;
 }
 
 /**
@@ -86,10 +81,7 @@ function formatRelativeTime(timestamp: number): string {
  * NotificationCenter.Item component - individual notification item
  */
 export const NotificationCenterItem = React.forwardRef<HTMLLIElement, NotificationCenterItemProps>(
-  (
-    { notification, onDismiss, onClick, expandable: _expandable = false, className, ...props },
-    ref,
-  ) => {
+  ({ notification, onDismiss, onClick, className, ...props }, ref) => {
     const variant = notification.variant || "default";
     const Icon = getNotificationIcon(variant);
     const isRead = notification.read ?? false;

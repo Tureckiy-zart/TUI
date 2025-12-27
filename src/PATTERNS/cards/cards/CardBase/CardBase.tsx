@@ -40,7 +40,7 @@ import {
  * All styling comes from DOMAIN_TOKENS, MOTION_TOKENS.
  */
 const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
-  ({ size = "default", variant = "default", className, children, ...props }, ref) => {
+  ({ size = "md", variant = "default", className, children, ...props }, ref) => {
     return (
       <div ref={ref} className={cn(cardBaseVariants({ size, variant }), className)} {...props}>
         {children}
@@ -58,7 +58,7 @@ CardBase.displayName = "CardBase";
  * Provides aspect ratio, border radius, and overflow handling.
  */
 const CardBaseImageWrapper = React.forwardRef<HTMLDivElement, CardBaseImageWrapperProps>(
-  ({ size = "default", className, children, ...props }, ref) => {
+  ({ size = "md", className, children, ...props }, ref) => {
     return (
       <div ref={ref} className={cn(cardBaseImageVariants({ size }), className)} {...props}>
         {children}
@@ -76,7 +76,7 @@ CardBaseImageWrapper.displayName = "CardBaseImageWrapper";
  * Spacing is controlled by parent CardBase size variant.
  */
 const CardBaseContentWrapper = React.forwardRef<HTMLDivElement, CardBaseContentWrapperProps>(
-  ({ size = "default", className, children, ...props }, ref) => {
+  ({ size = "md", className, children, ...props }, ref) => {
     return (
       <Stack
         ref={ref}
@@ -99,7 +99,7 @@ CardBaseContentWrapper.displayName = "CardBaseContentWrapper";
  * Spacing is controlled by parent CardBase size variant.
  */
 const CardBaseFooterWrapper = React.forwardRef<HTMLDivElement, CardBaseFooterWrapperProps>(
-  ({ size = "default", className, children, ...props }, ref) => {
+  ({ size = "md", className, children, ...props }, ref) => {
     return (
       <div ref={ref} className={cn(cardBaseFooterVariants({ size }), className)} {...props}>
         {children}

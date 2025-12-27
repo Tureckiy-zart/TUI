@@ -1,11 +1,12 @@
 # 🔒 TUI Tooltip / Popover / HoverCard Components Lock
 
-**Version:** 1.0  
+**Version:** 1.2  
 **Date Created:** 2025-12-21  
+**Last Updated:** 2025-12-27  
 **Status:** ✅ **LOCKED** - IMMUTABLE  
 **Layer:** UI / EXTENSION / LOCKED  
 **Priority:** CRITICAL  
-**Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+**Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete) + Pipeline 18A (Popover Complete, HoverCard Complete)
 
 ---
 
@@ -42,27 +43,41 @@ The following Overlay components are **LOCKED** and **IMMUTABLE**:
 - **File:** `src/COMPOSITION/overlays/Popover.tsx`
 - **Stories:** `src/COMPOSITION/overlays/Popover.stories.tsx`
 - **Tests:** `src/COMPOSITION/overlays/Popover.test.tsx`
-- **Status:** ✅ **LOCKED**
+- **Status:** ✅ **LOCKED** + ✅ **Pipeline 18A Complete**
 - **Lock Date:** 2025-12-21
+- **Pipeline 18A Completion:** 2025-12-25
+- **Audit Report:** `docs/reports/audit/POPOVER_BASELINE_REPORT.md`
 - **Exports:** `Popover`, `PopoverTrigger`, `PopoverAnchor`, `PopoverContent`, `PopoverWrapper`, `popoverContentVariants`
 - **Types:** `PopoverProps`, `PopoverVariant`, `PopoverSize`
 - **Rule:** DO NOT modify, extend, or create alternatives
 - **Public API:** Internal-only (not exported from `src/index.ts`)
 - **Technology:** `@radix-ui/react-popover` (v1.1.2)
+- **CVA:** tokenCVA (migrated from cva per Pipeline 18A)
+- **Type System:** Explicit union types (no CVA leakage)
 
 ### 3. HoverCard Component
 - **Files:**
   - `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx`
   - `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx`
   - `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx`
+  - `src/PATTERNS/menus/menus/hover-card/HoverCard.test.tsx`
 - **Stories:** `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx`
-- **Status:** ✅ **LOCKED**
+- **Status:** ✅ **PROCESS LOCKED** + ✅ **Pipeline 18A Complete**
 - **Lock Date:** 2025-12-21
-- **Exports:** `HoverCardRoot`, `HoverCardTrigger`, `HoverCardContent`
+- **Pipeline 18A Completion:** 2025-12-27
+- **Audit Report:** `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
+- **Exports:** `HoverCardRoot`, `HoverCardTrigger`, `HoverCardContent`, `useHoverCardContext`
 - **Types:** `HoverCardRootProps`, `HoverCardTriggerProps`, `HoverCardContentProps`
 - **Rule:** DO NOT modify, extend, or create alternatives
 - **Public API:** ✅ Public (exported from `src/index.ts`)
 - **Technology:** Custom implementation wrapping Popover
+- **Key Decisions:**
+  - Delegation pattern: HoverCardContent delegates styling to PopoverContent (intentional design)
+  - Token compliance: All styling via POPOVER_TOKENS through PopoverContent
+  - Type system: Explicit types, no CVA type leakage (delegates to PopoverContent types)
+  - Storybook compliance: Required stories added (Matrix, States, SizesGallery, LongContent per VARIANTS_SIZE_CANON)
+  - Test coverage: Comprehensive test suite with 20+ test cases
+  - Accessibility: ARIA attributes, keyboard navigation validated
 
 ---
 
@@ -277,6 +292,26 @@ To unlock any locked component, utility, or token:
 ---
 
 ## 📝 Version History
+
+- **v1.2** (2025-12-27): HoverCard Pipeline 18A completion
+  - HoverCard completed full Pipeline 18A (Steps 0-12)
+  - Delegation pattern validated: HoverCardContent delegates styling to PopoverContent (intentional design)
+  - Token compliance: All styling via POPOVER_TOKENS through PopoverContent
+  - Type system: Explicit types, no CVA type leakage (delegates to PopoverContent types)
+  - Canonical stories added: Matrix, States, SizesGallery, LongContent
+  - Test coverage: Comprehensive test suite with 20+ test cases
+  - Accessibility audit complete (ARIA attributes, keyboard navigation validated)
+  - Audit report: `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
+  - **Note:** Tooltip remains at previous lock status (TUNG_TOOLTIP_POPOVER_STEP_0-10)
+
+- **v1.1** (2025-12-25): Popover Pipeline 18A completion
+  - Popover completed full Pipeline 18A (Steps 0-12)
+  - CVA migration: cva → tokenCVA (Decision Matrix compliance)
+  - Type system: Explicit union types (no CVA leakage)
+  - Canonical stories added: Matrix, LongContent
+  - Accessibility audit complete (WCAG 2.1 Level AA)
+  - Audit report: `docs/reports/audit/POPOVER_BASELINE_REPORT.md`
+  - **Note:** Tooltip and HoverCard remain at previous lock status (TUNG_TOOLTIP_POPOVER_STEP_0-10)
 
 - **v1.0** (2025-12-21): Initial lock after completion of TUNG_TOOLTIP_POPOVER_STEP_0-10 pipeline
   - Tooltip, Popover, and HoverCard components locked

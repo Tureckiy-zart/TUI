@@ -8,7 +8,7 @@ import { AlertCircle, HelpCircle, Info } from "lucide-react";
 import { TooltipProvider, TooltipWrapper } from "./Tooltip";
 
 const meta: Meta<typeof TooltipWrapper> = {
-  title: "Components/Overlays/Tooltip",
+  title: "Foundation Locked/Composition/Overlays/Tooltip",
   component: TooltipWrapper,
   parameters: {
     layout: "centered",
@@ -32,11 +32,30 @@ export const Default: Story = {
   },
 };
 
-export const WithLongContent: Story = {
-  args: {
-    content:
-      "This is a longer tooltip message that provides more detailed information about the element.",
-    children: <Button>Hover for details</Button>,
+export const LongContent: Story = {
+  name: "LongContent",
+  render: () => (
+    <div className="space-y-md">
+      <p className="text-sm text-muted-foreground">
+        This story validates padding and maxWidth token behavior with long text content.
+      </p>
+      <div className="flex gap-md">
+        <TooltipWrapper content="This is a very long tooltip message that demonstrates how the tooltip handles extended text content. It should properly wrap and maintain appropriate padding and maximum width constraints based on the token system.">
+          <Button>Long Content Tooltip</Button>
+        </TooltipWrapper>
+        <TooltipWrapper content="Another example with even more text to test the tooltip's ability to handle lengthy descriptions while maintaining proper visual appearance and readability. The tooltip should gracefully handle multi-line content.">
+          <Button>Very Long Content</Button>
+        </TooltipWrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Validates padding and maxWidth token behavior with long text content. Required for overlay components per VARIANTS_SIZE_CANON.",
+      },
+    },
   },
 };
 
@@ -200,24 +219,65 @@ export const KeyboardAccessibility: Story = {
   },
 };
 
-export const FocusVisibleStates: Story = {
-  name: "Focus-Visible States",
+export const States: Story = {
+  name: "States",
   render: () => (
-    <div className="space-y-md">
-      <p className="text-sm text-muted-foreground">
-        These tooltips demonstrate focus-visible states. Use keyboard navigation to see focus
-        indicators.
-      </p>
-      <div className="flex gap-md">
-        <TooltipWrapper content="Tooltip for primary button">
-          <Button variant="primary">Primary</Button>
-        </TooltipWrapper>
-        <TooltipWrapper content="Tooltip for outline button">
-          <Button variant="outline">Outline</Button>
-        </TooltipWrapper>
-        <TooltipWrapper content="Tooltip for ghost button">
-          <Button variant="ghost">Ghost</Button>
-        </TooltipWrapper>
+    <div className="space-y-lg">
+      <div className="space-y-md">
+        <h3 className="text-sm font-semibold">All Variants</h3>
+        <div className="flex flex-wrap gap-md">
+          <TooltipWrapper content="Primary tooltip" variant="primary">
+            <Button variant="primary">Primary</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Secondary tooltip" variant="secondary">
+            <Button variant="outline">Secondary</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Accent tooltip" variant="accent">
+            <Button variant="outline">Accent</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Outline tooltip" variant="outline">
+            <Button variant="outline">Outline</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Ghost tooltip" variant="ghost">
+            <Button variant="ghost">Ghost</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Link tooltip" variant="link">
+            <Button variant="ghost">Link</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Destructive tooltip" variant="destructive">
+            <Button variant="outline">Destructive</Button>
+          </TooltipWrapper>
+        </div>
+      </div>
+      <div className="space-y-md">
+        <h3 className="text-sm font-semibold">Focus States</h3>
+        <p className="text-sm text-muted-foreground">
+          Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
+          buttons and see tooltips appear. Press{" "}
+          <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+        </p>
+        <div className="flex gap-md">
+          <TooltipWrapper content="Tooltip for primary button" variant="primary">
+            <Button variant="primary">Primary (Focus)</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Tooltip for outline button" variant="outline">
+            <Button variant="outline">Outline (Focus)</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Tooltip for ghost button" variant="ghost">
+            <Button variant="ghost">Ghost (Focus)</Button>
+          </TooltipWrapper>
+        </div>
+      </div>
+      <div className="space-y-md">
+        <h3 className="text-sm font-semibold">Controlled State</h3>
+        <div className="flex gap-md">
+          <TooltipWrapper content="Controlled open tooltip" variant="primary" open={true}>
+            <Button>Always Open</Button>
+          </TooltipWrapper>
+          <TooltipWrapper content="Controlled closed tooltip" variant="primary" open={false}>
+            <Button>Always Closed</Button>
+          </TooltipWrapper>
+        </div>
       </div>
     </div>
   ),
@@ -225,7 +285,7 @@ export const FocusVisibleStates: Story = {
     docs: {
       description: {
         story:
-          "Shows tooltip behavior with different button variants and their focus-visible states. Use Tab to navigate and see focus indicators.",
+          "Demonstrates all variants and states (default, focus, controlled). Required for interactive components per VARIANTS_SIZE_CANON.",
       },
     },
   },

@@ -112,6 +112,90 @@ The full system specification and task templates can be found here:
 - 📄 [TUNG System Specification](../tung_system_specification.md)
 - 📄 [TUNG Step Template](templates/FOUNDATION_STEP_TUNG_TEMPLATE.json)
 
+## 🤖 AI Model Recommendations
+Each pipeline step has a recommended AI model for optimal execution.
+See the complete model usage guide:
+- 📄 [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
+
+---
+
+## 🚀 Quick Start Guide
+
+**Before starting the pipeline:**
+1. Identify component name (use exported name, e.g., `Button`, not `button`)
+2. Determine layer: Foundation or Extension
+3. Prepare audit report path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+4. Open recommended AI model (see AI Models Usage Guide)
+
+**Pipeline execution order:**
+- **STEP 0** → Create baseline (Sonnet 4.5)
+- **STEP 1–8** → Analyze and document (Sonnet/Opus) [findings → FIX backlog]
+- **STEP 9** → Apply ALL fixes (Codex Max)
+- **STEP 10–12** → Validate and lock (Codex Max / GPT-5.2)
+
+**Mandatory checkpoints (must share audit report):**
+- ✅ STEP 0 (Baseline)
+- ✅ STEP 8 (Refactor Decision)
+- ✅ STEP 9 (FIX Consolidation)
+- ✅ STEP 10 (Tests & Storybook)
+- ✅ STEP 11 (Accessibility)
+- ✅ STEP 12 (Final Lock)
+
+**Estimated time:** 6-8 hours for typical component
+
+---
+
+## 🗺️ Authority Navigation & Reference
+
+This pipeline enforces compliance with Authority Contracts and architectural standards.
+
+### Process Policies
+
+📄 [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) - Locked component change guard policy  
+📄 [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) - Exception declaration template  
+📄 [POLICIES_INDEX.md](../policies/POLICIES_INDEX.md) - Complete policies index
+
+### Complete Authority Map
+
+📖 [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) - Complete Authority navigation map (question → authority mapping)
+
+### State Authorities (WHAT/WHEN/HOW)
+
+- 📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - **WHAT** states exist (canonical set: base, hover, active, focus-visible, disabled, loading)
+- 📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - **WHEN** states activate (activation conditions, blocking rules, priority order)
+- 📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - **HOW** states represented (format, structure, naming, CSS variables)
+
+### Token Authorities
+
+- 📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale (padding, margin, gap)
+- 📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography tokens (font-size, line-height, font-weight, letter-spacing, font-family)
+- 📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius token scale
+- 📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens (duration, easing, transitions)
+- 📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens (shadows, z-index layers)
+
+### Size & Variant Authorities
+
+- 📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale (xs..3xl) and variant naming dictionary
+- 📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract (how size maps to tokens)
+
+### Structural Authorities
+
+- 📖 [LAYOUT_AUTHORITY.md](../../architecture/LAYOUT_AUTHORITY.md) - Layout structure and flow (WHERE elements positioned)
+
+### Lock Documents
+
+- 📖 [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation layer lock status
+- 📖 [ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) - Architectural decisions lock
+- 📖 [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) - Extension layer tracking
+
+### Reference Components for Complex Controls
+
+- 📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Reference examples including **Button** (Foundation) and **Slider** (Extension) for complex controls
+  - **Button** (`src/PRIMITIVES/Button/Button.tsx`) - Foundation layer reference: token compliance, Foundation Enforcement
+  - **Slider** (`src/COMPOSITION/controls/Slider/Slider.tsx`) - Extension layer reference: token migration, token hole fixing, complex control patterns
+
+**Pipeline Compliance Rule:** Every step must validate against applicable Authority documents. Violations are blocking.
+
 ---
 
 ## 🎯 **0. Intent & Non‑Goals**
@@ -615,17 +699,37 @@ Also record **consciously NOT made changes**.
 
 #### **STEP 12 — Final Review & Outcome Fixation + Architectural Lock**
 
-**I must demand:** lock propagation + doc sync + final gate results.
+**I must demand:**
+
+* Final Report Consistency Check completion (6 mandatory checks)
+
+* All consistency checks pass before Lock Propagation
+
+**Mandatory checks before Lock Propagation:**
+- Lock status consistency (single status throughout)
+- Baseline BLOCKER → STEP 9 resolution traceability
+- STEP 9 absolutism verification (explanations for exceptions)
+- File reality verification (mentions match actual state)
+- Outcome/changes logic consistency
+- Export decision documentation
+
+**Forbidden:** Proceeding to Lock Propagation if any consistency check fails
+
+**Acceptance must include:**
+- All 6 consistency checks verified passed
+- Audit report wording corrections applied (if any)
+- Lock Propagation completed only after consistency check pass
 
 Lock propagation targets (minimum):
 
-* `docs/FOUNDATION_LOCK.md`
+**Required files (all components):**
+* `docs/architecture/FOUNDATION_LOCK.md` — If component is Foundation layer
+* `docs/architecture/ARCHITECTURE_LOCK.md` — Architectural decisions and constraints
+* `docs/PROJECT_PROGRESS.md` — Project progress tracking
+* `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — Component audit report (final section)
 
-* `docs/ARCHITECTURE_LOCK.md`
-
-* `docs/PROJECT_PROGRESS.md`
-
-* audit report final section
+**Additional files (if applicable):**
+* `docs/architecture/EXTENSION_STATE.md` — If component is Extension layer
 
 **Forbidden:** claiming locked if any doc/report contradicts reality.
 
@@ -709,6 +813,19 @@ Rules:
 
 * If a step made code changes, it must include `Behavior unchanged` confirmation (unless the step explicitly allows behavior change).
 
+### **Final Consistency Verification (STEP 12)**
+
+Before STEP 12 completion, the audit report MUST pass 6 mandatory consistency checks:
+
+1. Lock status is unified and consistent throughout
+2. All baseline BLOCKERS have resolution traces in STEP 9
+3. Absolute claims in STEP 9 have explanatory context
+4. All file mentions correspond to actual repository state
+5. No logical contradictions between outcome and changes sections
+6. Export decisions are explicitly documented
+
+Any failure in these checks prevents STEP 12 completion.
+
 ---
 
 ## 📸 **3. STEP 0 — Baseline Snapshot & Context Fixation**
@@ -724,6 +841,21 @@ This step answers the question:
 
 > "What exactly are we dealing with before we start improving anything?"
 
+### Lock Status Check (MANDATORY)
+
+**Before proceeding:** Verify component lock status:
+
+- Check `docs/architecture/FOUNDATION_LOCK.md` for Foundation components
+- Check `docs/architecture/EXTENSION_STATE.md` for Extension components
+- If component is LOCKED, review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- Document lock status in audit report STEP 0 section
+
+**For LOCKED components:** Any changes require exception declaration per policy. See [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) for template.
+
+### Recommended Model
+
+**Sonnet 4.5** — Structured documentation and careful reading. No code changes required in this step.
+
 ### Mandatory Output
 
 Create/overwrite the audit report at the canonical path:
@@ -733,6 +865,12 @@ Create/overwrite the audit report at the canonical path:
 ### Required Sections in the Audit Report (all required)
 
 STEP 0 MUST produce a "Full Audit Report" with the following sections:
+
+0) **Pipeline Progress Tracker**
+   - Checklist of all steps (STEP 0-12)
+   - Estimated time per step
+   - Checkpoint markers
+   - Total estimated time
 
 1) **Header / Metadata**
    - Component name (exported name)
@@ -792,6 +930,21 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
 💡 If both `Tooltip.tsx` and `Popover.tsx` exist, this step must record that fact **before** any conclusions are made.
 
+### Step Completion Checklist
+
+Before proceeding to STEP 1, verify:
+- [ ] Audit report created at canonical path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- [ ] Pipeline Progress Tracker section exists
+- [ ] Header/Metadata section filled
+- [ ] Baseline Inventory documented (files, exports, deps, props)
+- [ ] Run Plan (STEP MAP) created
+- [ ] Risk Register (ANTI-DRIFT) filled
+- [ ] Initial FIX Backlog structure created
+- [ ] DoD (Definition of Done) documented
+- [ ] No code changes made
+- [ ] STEP 0 section in audit report filled
+- [ ] Checkpoint: Audit report shared with operator
+
 ---
 
 ## 🔍 **4. STEP 1 — Structural & Code Quality Review**
@@ -799,6 +952,10 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 ### **Goal**
 
 Identify and remove **obvious structural problems** in the code.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **What to Look For**
 
@@ -828,6 +985,18 @@ Identify and remove **obvious structural problems** in the code.
 
 💡 Multiple similar tooltip content blocks → single mapped structure.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 2, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 1 section exists
+- [ ] Outcome field filled (`No changes required` | `Changes applied` | `Changes required`)
+- [ ] Blocking field filled (`yes/no`)
+- [ ] Structural issues documented in FIX backlog
+- [ ] No behavior changes made
+- [ ] No API changes made
+- [ ] Model recommendation followed (Sonnet 4.5)
+
 ---
 
 ## 🎯 **5. STEP 2 — Semantic Role & Responsibility Validation**
@@ -835,6 +1004,10 @@ Identify and remove **obvious structural problems** in the code.
 ### **Goal**
 
 Ensure the component has a **clear, narrow responsibility**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural analysis and decision-making about component role and responsibility.
 
 ### **Questions to Answer**
 
@@ -854,6 +1027,16 @@ Ensure the component has a **clear, narrow responsibility**.
 
 * Reduce scope rather than adding configuration flags.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 3, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 2 section exists
+- [ ] Role definition written (1-2 sentences)
+- [ ] Out-of-scope logic identified
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+
 ---
 
 ## 🔄 **6. STEP 3 — Duplication & Internal Pattern Alignment**
@@ -861,6 +1044,10 @@ Ensure the component has a **clear, narrow responsibility**.
 ### **Goal**
 
 Normalize internal patterns so the component behaves like a **first‑class citizen** of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **Checks**
 
@@ -870,11 +1057,63 @@ Normalize internal patterns so the component behaves like a **first‑class citi
 
 * Consistent handling of children / trigger / content.
 
+* **CVA Structure Validation (MANDATORY):**
+  - ✅ Validate CVA structure against canonical style (see `CVA_CANONICAL_STYLE.md`)
+  - ✅ Check for forbidden patterns (variant maps in variables, function calls, conditional logic)
+  - ✅ Verify variants are defined inline within CVA config
+  - ✅ Verify single tokenCVA invocation per variant set
+  - ✅ **Validate CVA type against Decision Matrix** (tokenCVA vs cva selection)
+  - ✅ Document any deviations in audit report
+
 ### **Refactoring Guidance**
 
 * Align structure with similar components.
 
 * Prefer one clear pattern over multiple "almost the same" ones.
+
+### **Reference (CRITICAL)**
+
+**CVA Canonical Style Authority:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern
+- Variants must be explicit and inspectable
+- No inline variant objects outside CVA config
+- No dynamic construction of variants
+- Single tokenCVA invocation per variant set
+- Variants defined inline ONLY inside tokenCVA
+- **CVA Usage Decision Matrix** - Mandatory rules for tokenCVA vs cva selection
+
+**CVA Usage Decision Matrix Rules:**
+- ✅ **RULE 1:** tokenCVA is REQUIRED for components with token-driven axes (variant, size, state)
+- ✅ **RULE 2:** cva is ALLOWED only for components without token-driven axes (boolean/presentational flags only)
+- ✅ **RULE 3:** Foundation components using cva MUST document explicit rationale in audit report
+
+**Common CVA Violations:**
+- ❌ Variant maps defined in separate variables (violates explicit variant requirement)
+- ❌ Function calls generating variant objects (violates declarative requirement)
+- ❌ Conditional spreading inside CVA config (violates static requirement)
+- ❌ Building CVA config dynamically (violates single invocation requirement)
+- ❌ Reusing variant objects across components (violates inline requirement)
+- ❌ Using cva for token-driven component (violates Decision Matrix RULE 1)
+- ❌ Using tokenCVA for boolean-only component without justification (violates Decision Matrix RULE 2)
+
+**Reference Examples:**
+- **Button** (`src/PRIMITIVES/Button/Button.tsx`) - Foundation component with tokenCVA, complete token compliance
+- **Slider** (`src/COMPOSITION/controls/Slider/Slider.tsx`) - Extension component with tokenCVA migration pattern (cva → tokenCVA), token hole fixing
+- 📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Complete reference examples
+
+**STEP 3 validates CVA structure against canonical style AND CVA Usage Decision Matrix. Non-canonical structure or incorrect CVA type selection is a BLOCKER.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 4, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 3 section exists
+- [ ] Pattern alignment issues documented
+- [ ] CVA structure validated against canonical style
+- [ ] CVA violations documented in FIX backlog (if any)
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
 
 ---
 
@@ -883,6 +1122,10 @@ Normalize internal patterns so the component behaves like a **first‑class citi
 ### **Goal**
 
 Confirm that interaction logic is **simple, predictable, and platform‑native**.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
 
 ### **Checks**
 
@@ -898,6 +1141,41 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 
 * Simplify interaction paths.
 
+### **Reference (CRITICAL)**
+
+**State Authorities (3-Layer System):**
+
+📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - **WHAT** states exist
+- Canonical state set: `base`, `hover`, `active`, `focus-visible`, `disabled`, `loading`
+- State relationships and mutual exclusivity rules
+
+📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - **WHEN** states activate
+- Activation conditions and blocking rules
+- Priority order: `disabled > loading > active > hover > focus-visible > base`
+- Browser-native interaction rules
+
+📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - **HOW** states represented
+- State token naming pattern: `--{component}-{variant}-{state}-{property}`
+- CSS variable structure and format
+- State representation as tokens
+
+**STEP 4 validates interaction logic against all three state authorities.**
+
+**Common Violations:**
+- ❌ Custom state invention (violates STATE_MATRIX)
+- ❌ JavaScript-driven hover/active (violates INTERACTION_AUTHORITY)
+- ❌ Incorrect state priority (violates INTERACTION_AUTHORITY)
+- ❌ Non-standard state naming (violates STATE_AUTHORITY)
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 5, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 4 section exists
+- [ ] State model documented
+- [ ] Interaction issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+
 ---
 
 ## 🎨 **8. STEP 5 — Token, Size & Variant Consistency**
@@ -905,6 +1183,10 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 ### **Goal**
 
 Ensure the component speaks the **same visual language** as the rest of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Compliance validation and documentation.
 
 ### **Checks**
 
@@ -928,13 +1210,91 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 
 * Prohibited: declaring `optimal`, `final`, or "no further refactoring will ever be required".
 
-### **Reference**
+### **Reference (CRITICAL)**
 
-📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Defines the global size scale and variant naming dictionary that components must align with.
+**Size & Variant Canon:**
 
-📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Defines the size-to-token mapping contract that components must follow.
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale and variant naming dictionary
+- GlobalSize scale: `xs | sm | md | lg | xl | 2xl | 3xl`
+- InteractiveVariant dictionary: `primary | secondary | accent | outline | ghost | destructive | link`
+- SurfaceVariant dictionary: `default | elevated | outlined | filled | subtle`
+- Component subset declarations
+- Overlay size restriction: `sm | md | lg` only
+- Storybook requirements: Matrix and States stories
 
-STEP 5 checks compliance; mapping details live in SIZE_MAPPING_SPEC; naming rules live in VARIANTS_SIZE_CANON.
+📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract
+- Mandatory mapping keys: heightToken, paddingXToken, paddingYToken, textToken, radiusToken
+- Optional mapping keys: gapToken, iconSizeToken, minWidthToken, hitAreaToken, maxWidthToken
+- No raw values policy (token references only)
+- Storybook requirements: SizesGallery story
+
+**Token Authorities (Referenced by Size Mappings):**
+
+📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale
+- Canonical spacing scale: `spacing[0]`, `spacing[px]`, `spacing[1..8]`
+- Semantic spacing: `semanticSpacing.xs`, `semanticSpacing.sm`, `semanticSpacing.md`, `semanticSpacing.lg`, `semanticSpacing.xl`
+- Layout spacing: `layoutSpacing.section.*`, `layoutSpacing.container.*`, `layoutSpacing.grid.*`
+- Forbidden: raw pixel/rem values
+
+📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography token scale
+- Font size scale: `fontSize.xs`, `fontSize.sm`, `fontSize.base`, `fontSize.lg`, `fontSize.xl`, `fontSize["2xl"]`
+- Font family: `fontFamily.sans`, `fontFamily.display`
+- Font weight: `fontWeight.normal`, `fontWeight.medium`, `fontWeight.semibold`, `fontWeight.bold`
+- Line height: `lineHeight.tight`, `lineHeight.normal`, `lineHeight.relaxed`
+- Forbidden: raw font-size values
+
+📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius token scale
+- Base radius: `borderRadius.none`, `borderRadius.sm`, `borderRadius.md`, `borderRadius.lg`, `borderRadius.full`
+- Component radius: `componentRadius.button.*`, `componentRadius.input.*`, etc.
+- Forbidden: raw border-radius values
+
+📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens
+- Duration scale: `duration.fast`, `duration.normal`, `duration.slow`
+- Easing: `easing.default`, `easing.in`, `easing.out`, `easing.inOut`
+- Transition presets: `transitions.fast`, `transitions.normal`, `transitions.slow`
+- Forbidden: raw transition values
+
+📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens
+- Shadow scale: `elevationShadows.none`, `elevationShadows.sm`, `elevationShadows.md`, `elevationShadows.lg`
+- Z-index layers: `zIndex.base`, `zIndex.dropdown`, `zIndex.overlay`, `zIndex.modal`, `zIndex.notification`
+- Focus rings: `focusRings.default`
+- Forbidden: raw box-shadow/z-index values
+
+**STEP 5 Compliance Rules:**
+1. ✅ All sizes must use GlobalSize scale (component declares supported subset)
+2. ✅ All variants must use canonical variant dictionaries (InteractiveVariant or SurfaceVariant)
+3. ✅ Overlay components: restricted to `sm | md | lg` sizes only (CRITICAL rule)
+4. ✅ All mappings must reference tokens only (no raw values)
+5. ✅ Size mapping table required for all sized components
+6. ✅ Matrix story required if component has BOTH size AND variant props
+7. ✅ States story required if component has public state props/interactive behavior
+8. ✅ SizesGallery story required if component has public size prop
+
+**Common Violations:**
+- ❌ Using `size="icon"` (forbidden non-GlobalSize value, use `iconOnly={true}` instead)
+- ❌ Raw spacing values (e.g., `padding: "8px"` instead of `semanticSpacing.sm`)
+- ❌ Raw typography values (e.g., `fontSize: "14px"` instead of `fontSize.sm`)
+- ❌ Invented variant names (e.g., `variant="danger"` instead of `variant="destructive"`)
+- ❌ Overlay with `xs` or `xl` sizes (violates overlay restriction)
+- ❌ States encoded as variants (e.g., `variant="disabled"` instead of `disabled={true}`)
+
+**Validation Order:**
+1. Check GlobalSize compliance (VARIANTS_SIZE_CANON)
+2. Check variant dictionary compliance (VARIANTS_SIZE_CANON)
+3. Check size mapping table existence (SIZE_MAPPING_SPEC)
+4. Check token reference compliance (all Token Authorities)
+5. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 6, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 5 section exists
+- [ ] Token compliance validated
+- [ ] Size scale alignment checked
+- [ ] Variant issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+- [ ] Recommended checkpoint: Share audit report
 
 ---
 
@@ -943,6 +1303,10 @@ STEP 5 checks compliance; mapping details live in SIZE_MAPPING_SPEC; naming rule
 ### **Goal**
 
 Make the component **easy to understand and hard to misuse**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural judgment about public API design and developer experience.
 
 ### **Checks**
 
@@ -960,6 +1324,16 @@ Make the component **easy to understand and hard to misuse**.
 
 ⚠️ STEP 6 evaluates the **current API quality**, but must not declare the API final.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 7, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 6 section exists
+- [ ] Public API reviewed
+- [ ] DX issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
 ---
 
 ## 🔷 **10. STEP 7 — Type System Alignment**
@@ -968,6 +1342,10 @@ Make the component **easy to understand and hard to misuse**.
 
 Use the type system as **a safety net and documentation tool**.
 
+### **Recommended Model**
+
+**Opus 4.5** — Type system analysis and reasoning.
+
 ### **Checks**
 
 * Explicit unions instead of wide types.
@@ -975,6 +1353,13 @@ Use the type system as **a safety net and documentation tool**.
 * No leaking of internal variant machinery.
 
 * Types readable without implementation context.
+
+* **CVA Structure & Type Alignment (MANDATORY):**
+  - ✅ Ensure CVA structure matches canonical variant/type layout (see `CVA_CANONICAL_STYLE.md`)
+  - ✅ Verify explicit union types exist (see `TYPING_STANDARD.md`)
+  - ✅ Verify `satisfies Record<Type, string>` constraints are present in CVA variant maps
+  - ✅ Ensure no CVA-derived types leak into public API
+  - ✅ Verify CVA structure supports explicit union types (variants inline, no intermediate objects)
 
 ### **Refactoring Guidance**
 
@@ -986,6 +1371,102 @@ Use the type system as **a safety net and documentation tool**.
 
 ⚠️ STEP 7 must not declare the type system `optimal` or `final`.
 
+### **Reference**
+
+**Type System Standards:**
+
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Size and variant type declarations
+- Component must declare supported sizes explicitly (e.g., `type ButtonSize = "sm" | "md" | "lg"`)
+- Component must declare supported variants explicitly (e.g., `type ButtonVariant = "primary" | "secondary" | ...`)
+- No invented type names outside canonical dictionaries
+
+**CVA Canonical Style Authority:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern
+- CVA structure must support explicit union types
+- Variant maps must use `satisfies Record<Type, string>` constraints
+- CVA structure must not leak into public API types
+- **CVA Usage Decision Matrix** - Mandatory rules for tokenCVA vs cva selection
+
+**CVA Usage Decision Matrix Validation:**
+- ✅ Components with token-driven axes (variant, size, state) MUST use tokenCVA
+- ✅ Components with only boolean/presentational flags MAY use cva
+- ✅ Foundation components using cva MUST document explicit rationale
+
+**Typing Standard:**
+
+📖 [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - Explicit union types requirement
+- Public props MUST reference explicit union types
+- CVA-derived types are FORBIDDEN in public APIs
+- Variant maps MUST be type-constrained with `satisfies Record<Type, string>`
+
+**Common Type Patterns:**
+
+✅ **Explicit Size/Variant Types:**
+```typescript
+export type ButtonSize = "sm" | "md" | "lg"; // Explicit GlobalSize subset
+export type ButtonVariant = "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive";
+```
+
+✅ **Props Interface:**
+```typescript
+export interface ButtonProps {
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  loading?: boolean;
+}
+```
+
+✅ **CVA with Type Constraints:**
+```typescript
+export const buttonVariants = tokenCVA({
+  variants: {
+    variant: {
+      primary: `${TOKENS.variant.primary.bg}`,
+      secondary: `${TOKENS.variant.secondary.bg}`,
+    } satisfies Record<ButtonVariant, string>, // Type constraint required
+  },
+});
+```
+
+❌ **Wide Types (Forbidden):**
+```typescript
+type ButtonSize = string; // Too wide, violates GlobalSize
+type ButtonVariant = string; // Too wide, violates variant dictionary
+```
+
+❌ **Leaking Internal Machinery (Forbidden):**
+```typescript
+export type ButtonProps = VariantProps<typeof buttonVariants>; // Leaks CVA internal types
+```
+
+❌ **CVA Without Type Constraints (Forbidden):**
+```typescript
+export const buttonVariants = tokenCVA({
+  variants: {
+    variant: {
+      primary: `${TOKENS.variant.primary.bg}`,
+      secondary: `${TOKENS.variant.secondary.bg}`,
+    }, // ❌ Missing satisfies Record<ButtonVariant, string>
+  },
+});
+```
+
+**STEP 7 validates that types are explicit, readable, aligned with canonical dictionaries, that CVA structure supports type system requirements, and that CVA type selection (tokenCVA vs cva) matches Decision Matrix. CVA structure violations and Decision Matrix violations are BLOCKERS.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 8, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 7 section exists
+- [ ] Type system reviewed
+- [ ] CVA structure validated for type alignment
+- [ ] Type constraints (`satisfies Record<Type, string>`) verified in CVA variant maps
+- [ ] Type issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
 ---
 
 ## ✨ **11. STEP 8 — Intentional Refactor Pass**
@@ -993,6 +1474,21 @@ Use the type system as **a safety net and documentation tool**.
 ### **Goal**
 
 Perform a **final, focused quality sweep**.
+
+### **Locked Component Exception Check (MANDATORY)**
+
+**For LOCKED components:** Before deciding on refactor changes:
+
+- Review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- If changes violate lock policy, declare exception using [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md)
+- Document exception in audit report BEFORE proceeding to STEP 9
+- Exception must include: reason, pipeline step, why lock is insufficient, risk assessment, rollback strategy
+
+**Exception Declaration:** Must be completed in STEP 8 before any code changes in STEP 9.
+
+### **Recommended Model**
+
+**Opus 4.5** — Senior-level decision-making about what to fix in STEP 9.
 
 ### **Guiding Question**
 
@@ -1016,6 +1512,17 @@ Perform a **final, focused quality sweep**.
 
 Additionally, STEP 8 must record a list of **consciously NOT made changes**.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 9, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 8 section exists
+- [ ] Explicit decision recorded: `Refactor required` OR `Refactor not required`
+- [ ] Consciously NOT made changes documented
+- [ ] FIX backlog finalized (all STEP 1-8 findings collected)
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 9**
+
 ---
 
 ## 🛠️ **12. STEP 9 — Mandatory FIX & Consolidation (CRITICAL)**
@@ -1025,6 +1532,22 @@ Additionally, STEP 8 must record a list of **consciously NOT made changes**.
 Apply all required fixes identified during STEP 1–8 to ensure full compliance
 
 with existing system standards before any validation or locking occurs.
+
+### **Locked Component Guard (MANDATORY)**
+
+**For LOCKED components:** Before applying ANY code changes:
+
+- ✅ Verify exception declaration exists in audit report (from STEP 8)
+- ✅ Verify exception follows [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- ✅ Verify change scope matches exception declaration (minimal delta only)
+- ❌ **FORBIDDEN:** Changes without exception declaration
+- ❌ **FORBIDDEN:** Changes exceeding exception scope
+
+**Guard Enforcement:** If exception is missing or invalid, STOP and request exception declaration before proceeding.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Apply ALL fixes from backlog. Heavy code work including refactoring, structure improvements, and duplication removal.
 
 ### **Scope**
 
@@ -1068,6 +1591,30 @@ If `Refactor required` is declared:
 
 - affected steps **must be re-validated** and recorded.
 
+### **CVA Normalization (MANDATORY)**
+
+**If CVA structure deviates from canonical style, normalization is REQUIRED:**
+
+- ✅ Normalize CVA structure to canonical pattern (see `CVA_CANONICAL_STYLE.md`)
+- ✅ Remove intermediate variant objects
+- ✅ Inline all variant definitions within CVA config
+- ✅ Remove conditional logic from CVA config
+- ✅ Ensure single tokenCVA invocation per variant set
+- ✅ Verify `satisfies Record<Type, string>` constraints are present
+- ✅ **Normalize CVA type if non-canonical** (tokenCVA vs cva decision per Decision Matrix)
+
+**CVA Type Normalization Rules:**
+- ✅ If component has token-driven axes (variant, size, state) → **MUST** use tokenCVA
+- ✅ If component has only boolean/presentational flags → **MAY** use cva
+- ✅ If Foundation component uses cva → **MUST** document explicit rationale in audit report
+- ✅ If CVA type mismatch detected → **MUST** migrate to correct type before STEP 10
+
+**Blocking Condition:** Component cannot proceed to STEP 10 if CVA structure is non-canonical OR if CVA type does not match Decision Matrix requirements.
+
+**Reference:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern, forbidden patterns, and CVA Usage Decision Matrix
+
 ### **FIX Sufficiency Criteria (REQUIRED)**
 
 The FIX phase is considered complete **only** when the component is fully compliant
@@ -1083,6 +1630,8 @@ This includes, but is not limited to:
 - public API and DX conventions,
 
 - type system rules and exposure boundaries,
+
+- **CVA canonical style compliance** (structure must match canonical pattern),
 
 - accessibility requirements where applicable.
 
@@ -1109,6 +1658,35 @@ This step exists to guarantee that:
 - Storybook does not document accidental complexity,
 
 - the locked result reflects deliberate engineering decisions.
+
+### **STEP 9 Decision Flow**
+
+1. Review FIX backlog from STEP 1-8
+2. Classify fixes:
+   - **BLOCKERS** → must fix now
+   - **NON-BLOCKERS** → fix or defer with justification
+   - **DEFERRED** → explicitly document why not fixing
+3. Apply fixes (use Codex Max)
+4. Update audit report STEP 9 section
+5. **Checkpoint: Share report before STEP 10**
+
+**Exit condition:** All BLOCKERS resolved OR component marked "Not ready for Foundation"
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 10, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 9 section exists
+- [ ] All BLOCKERS from FIX backlog resolved
+- [ ] NON-BLOCKERS fixed or deferred with justification
+- [ ] CVA structure normalized to canonical style (if deviations existed)
+- [ ] CVA type normalized per Decision Matrix (tokenCVA vs cva selection validated)
+- [ ] Code quality improved (readability, structure, maintainability)
+- [ ] Duplication reduced
+- [ ] No new features added
+- [ ] Public API changes documented (if any)
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 10**
 
 ---
 
@@ -1142,6 +1720,11 @@ Prove that the improved component behaves as expected.
 
 Tests and Storybook are treated as **executable proof of the component contract**,
 
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Code generation for tests and Storybook stories.
+
+
 not as auxiliary validation artifacts.
 
 If a behavior, variant, interaction, or constraint cannot be clearly demonstrated
@@ -1162,13 +1745,72 @@ via tests or Storybook, the component is considered **incomplete** at this stage
 
 Minimal or placeholder coverage is not sufficient.
 
-### **Reference**
+### **Reference (CRITICAL)**
 
-📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Defines Matrix/States conditional story requirements for components with variants.
+**Storybook Requirements:**
 
-📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Defines Sizes Gallery story requirements for demonstrating size mappings.
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Canonical story names and requirements
 
-Story names are canonical in VARIANTS_SIZE_CANON; size-mapping stories are defined in SIZE_MAPPING_SPEC.
+**Strict Story Requirements:**
+
+1. **Matrix Story** - **REQUIRED** ONLY when component publicly supports **BOTH** size AND variant props
+   - Name: `Matrix` (canonical, no other names allowed)
+   - Shows: All variants × all sizes grid
+   - Components with only size OR only variant: Matrix NOT REQUIRED
+
+2. **States Story** - **REQUIRED** ONLY when component has public states/interactive behavior
+   - Name: `States` (canonical, no other names allowed)
+   - Shows: All variants × all sizes × all states (default, disabled, loading, etc.)
+   - Non-interactive components: States NOT REQUIRED
+
+3. **SizesGallery Story** - **REQUIRED** when component exposes public `size` prop
+   - Name: `SizesGallery` (canonical)
+   - Shows: All supported sizes with text/icon/multi-line content
+   - Reference: [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md)
+
+4. **LongContent Story** - **REQUIRED** for Overlay components (Tooltip, Popover, etc.)
+   - Name: `LongContent` (canonical)
+   - Validates: padding and maxWidth token behavior with long text
+   - Required regardless of whether `size` prop exists
+
+**Story Naming Authority:**
+- ✅ Use canonical names only: `Matrix`, `States`, `SizesGallery`, `LongContent`
+- ❌ Forbidden names: `VariantsMatrix`, `AllStates`, `SizeMatrix`, `StateVariations`
+
+**Common Violations:**
+- ❌ Missing Matrix story when component has both size AND variant props
+- ❌ Missing States story for interactive components
+- ❌ Missing SizesGallery story for sized components
+- ❌ Using non-canonical story names
+- ❌ Placeholder stories (single example only)
+
+**Test Requirements:**
+
+✅ **Required Coverage:**
+- Public behavior and edge cases
+- All variant combinations (if applicable)
+- All size combinations (if applicable)
+- State transitions (disabled, loading, etc.)
+- Accessibility (keyboard navigation, ARIA attributes, screen reader behavior)
+
+❌ **Forbidden Patterns:**
+- Shallow tests (single "renders without crashing" test)
+- Missing edge case coverage
+- No accessibility tests
+
+**STEP 10 validates that tests and Storybook provide executable proof of component contract.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 11, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 10 section exists
+- [ ] Tests cover public behavior and edge cases
+- [ ] Storybook demonstrates all variants and sizes
+- [ ] Storybook includes meaningful interaction examples
+- [ ] No placeholder coverage
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 11**
 
 ---
 
@@ -1177,6 +1819,10 @@ Story names are canonical in VARIANTS_SIZE_CANON; size-mapping stories are defin
 ### **Goal**
 
 Make the component **accessible** and safe for keyboard and assistive technologies.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — A11Y correctness requires code-invasive changes (ARIA, keyboard navigation, focus management).
 
 ### **Rationale (CRITICAL)**
 
@@ -1206,6 +1852,20 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 
 * Public API changes are still prohibited unless explicitly agreed and documented.
 
+### **Step Completion Checklist**
+
+Before proceeding to STEP 12, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 11 section exists
+- [ ] ARIA roles and attributes correct
+- [ ] Keyboard navigation working
+- [ ] Focus management implemented
+- [ ] Screen reader behavior tested
+- [ ] A11Y-specific tests added
+- [ ] A11Y-specific Storybook stories added
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 12**
+
 ---
 
 ## 🔒 **15. STEP 12 — Final Review & Outcome Fixation + Architectural Lock**
@@ -1213,6 +1873,28 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 ### **Goal**
 
 Formally conclude the pipeline and **lock the component status across all architectural authority documents**.
+
+### **Recommended Model**
+
+**GPT‑5.2** — Independent verification and final validation before locking.
+
+### **Constraints**
+
+- ✅ Lock propagation to ALL required files is **MANDATORY** (see Lock Propagation section).
+- ✅ Missing any required lock file update is a **BLOCKING** condition.
+- ✅ Pipeline completion requires verification of ALL lock file updates.
+- 🚫 Cannot mark STEP 12 complete without lock propagation.
+- 🚫 Cannot skip lock propagation for any component.
+
+### **Mandatory Lock Propagation Rule (NON-NEGOTIABLE)**
+
+🚫 **CRITICAL ENFORCEMENT:** Lock propagation to all required files is **MANDATORY** and **NON-NEGOTIABLE**.
+
+**This step CANNOT be considered complete** unless lock propagation is verified in ALL required files listed below.
+
+**Blocking Condition:** If any required lock file is not updated, STEP 12 is **INCOMPLETE** and the pipeline **CANNOT** be marked as finished.
+
+**Verification Requirement:** The assistant MUST verify that all lock files have been updated before marking STEP 12 complete.
 
 ### **Actions**
 
@@ -1222,25 +1904,478 @@ Formally conclude the pipeline and **lock the component status across all archit
 
 * Record final state and decisions.
 
+* **MANDATORY:** Perform Final Report Consistency Check before Lock Propagation (see Final Report Consistency Check section below).
+
+* **MANDATORY:** Propagate lock status to ALL required files (see Lock Propagation section below).
+
+### **Mandatory Final Report Consistency Check (CRITICAL)**
+
+⚠️ **This phase is BLOCKING** and must be completed before Lock Propagation.
+
+**Purpose:** Verify that the audit report is logically, terminologically, and factually consistent with the actual final state of the component before locking.
+
+**Scope:** Audit report only. Codebase and implementation MUST NOT be modified at this stage.
+
+**Execution Order:** This check MUST be performed before Lock Propagation. Lock Propagation cannot proceed if any consistency check fails.
+
+**Required Checks:**
+
+1. **CHECK_LOCK_STATUS** — Lock Status Consistency
+   - Verify: Lock status is unified and matches final state (LOCKED / PROCESS LOCKED)
+   - Forbidden: Contradictory statuses (e.g., NOT LOCKED in one section, LOCKED in another)
+   - Action: If contradiction found → correct wording, ensure single consistent status throughout report
+
+2. **CHECK_BASELINE_TO_FIX_LINK** — Baseline BLOCKER Resolution Traceability
+   - Verify: Every BLOCKER recorded in baseline (STEP 5 or earlier) has explicit textual link to its resolution in STEP 9 or reclassification as Accepted Exception
+   - Forbidden: BLOCKERS mentioned in baseline without resolution trace in STEP 9
+   - Action: Add explicit links or reclassification documentation
+
+3. **CHECK_STEP_9_ABSOLUTISM** — STEP 9 Absolutism Verification
+   - Verify: Formulations like "All BLOCKERS resolved" are only acceptable with explanation for exceptions or reclassifications
+   - Forbidden: Absolute claims without justification for any exceptions
+   - Action: Add explanatory context for any exceptions
+
+4. **CHECK_FILE_REALITY** — File Reality Verification
+   - Verify: All file mentions (tests, stories, tokens) correspond to actual repository state
+   - Forbidden: Mentions of "MISSING" if file exists, or claims of existence if file missing
+   - Action: Verify files exist at mentioned paths, correct status claims
+
+5. **CHECK_OUTCOME_LOGIC** — Outcome/Changes Logic Consistency
+   - Verify: Outcome / Changes sections contain no logical contradictions (e.g., "Changes required" + "Changes: None")
+   - Forbidden: Contradictory statements in outcome vs changes sections
+   - Action: Align outcome statements with actual changes listed
+
+6. **CHECK_EXPORT_DECISIONS** — Export Decision Documentation
+   - Verify: If component is intentionally not exported, this is explicitly recorded as architectural decision
+   - Forbidden: Silent non-export without documented reason
+   - Action: Document export decisions explicitly
+
+**Failure Policy:**
+
+⚠️ **CRITICAL ENFORCEMENT:** STEP 12 completion is **BLOCKED** until ALL 6 checks pass. Any failure in any check prevents Lock Propagation and prevents STEP 12 from being marked as complete.
+
+- **On Failure:** STEP 12 **CANNOT** be marked as complete. The pipeline **MUST NOT** proceed to Lock Propagation until all consistency checks pass.
+- **Allowed Actions (Audit Report Only):**
+  - Audit report wording correction (e.g., changing "NOT LOCKED" to "LOCKED" to match final state)
+  - Terminology alignment (e.g., ensuring consistent use of "LOCKED" vs "PROCESS LOCKED")
+  - Status clarification (e.g., adding explicit links from baseline BLOCKERS to STEP 9 resolution)
+  - Adding explanatory context for absolute claims (e.g., "All BLOCKERS resolved" → "All BLOCKERS resolved (0 BLOCKERS found in baseline)")
+  - Correcting file status claims (e.g., changing "MISSING tests" to "Tests created in STEP 10")
+  - Aligning outcome statements with changes (e.g., changing "Changes required" to "No changes required" if Changes: None)
+  - Documenting export decisions explicitly
+- **Forbidden Actions:**
+  - Code changes (component implementation, tests, stories)
+  - Token changes (token definitions, token usage)
+  - Reopening STEP 9 (cannot return to FIX phase)
+  - Modifying lock files before consistency check passes
+
+**Verification Checklist:**
+
+⚠️ **MANDATORY:** Before proceeding to Lock Propagation, ALL 6 checks MUST be verified and explicitly documented in the audit report STEP 12 section. Each check must show either "✅ PASS" or "❌ FAIL" with correction applied.
+
+**Verification Requirements:**
+
+1. **CHECK_LOCK_STATUS** — Lock Status Consistency
+   - **Verify:** Single consistent lock status throughout report (LOCKED / PROCESS LOCKED)
+   - **Typical Contradiction:** "NOT LOCKED" in baseline (STEP 0) but "LOCKED" in STEP 12
+   - **Fix:** Correct all mentions to match final state (e.g., change "NOT LOCKED" → "LOCKED" throughout report)
+   - **Documentation:** Explicitly state final lock status in STEP 12 section
+   - [ ] ✅ Verified: Single consistent lock status throughout report
+
+2. **CHECK_BASELINE_TO_FIX_LINK** — Baseline BLOCKER Resolution Traceability
+   - **Verify:** Every BLOCKER from baseline (STEP 0-7) has explicit textual link to resolution in STEP 9 or reclassification as Accepted Exception
+   - **Typical Contradiction:** BLOCKER mentioned in STEP 5 (e.g., "Missing type constraints") without explicit link to STEP 9 resolution
+   - **Fix:** Add explicit link in STEP 9 section (e.g., "Resolved BLOCKER from STEP 5: Added `satisfies Record<Type, string>` constraint")
+   - **Documentation:** List all baseline BLOCKERS and their resolution status in STEP 12 section
+   - [ ] ✅ Verified: All baseline BLOCKERS have resolution traces or explicit exception documentation
+
+3. **CHECK_STEP_9_ABSOLUTISM** — STEP 9 Absolutism Verification
+   - **Verify:** Formulations like "All BLOCKERS resolved" have explanatory context for any exceptions or reclassifications
+   - **Typical Contradiction:** "All BLOCKERS resolved" without explanation when some were deferred or reclassified
+   - **Fix:** Add explanatory context (e.g., "All BLOCKERS resolved (0 BLOCKERS found in baseline)" or "All BLOCKERS resolved; 2 NON-BLOCKERS deferred with justification")
+   - **Documentation:** Explicitly state resolution status with context in STEP 12 section
+   - [ ] ✅ Verified: Absolute claims have explanatory context
+
+4. **CHECK_FILE_REALITY** — File Reality Verification
+   - **Verify:** All file mentions (tests, stories, tokens) correspond to actual repository state
+   - **Typical Contradiction:** "MISSING tests" in baseline (STEP 0) but tests created in STEP 10, or "Tests exist" but file missing
+   - **Fix:** Verify files exist at mentioned paths, correct status claims (e.g., change "MISSING tests" → "Tests created in STEP 10: `src/Component/Component.test.tsx`")
+   - **Documentation:** List all file statuses and verify against repository in STEP 12 section
+   - [ ] ✅ Verified: All file mentions match repository state
+
+5. **CHECK_OUTCOME_LOGIC** — Outcome/Changes Logic Consistency
+   - **Verify:** Outcome / Changes sections contain no logical contradictions
+   - **Typical Contradiction:** Outcome: "Changes required" but Changes: None, or Outcome: "No changes required" but Changes: "Added tests"
+   - **Fix:** Align outcome statements with actual changes listed (e.g., if Changes: None, then Outcome: "No changes required")
+   - **Documentation:** Explicitly verify outcome matches changes in STEP 12 section
+   - [ ] ✅ Verified: No contradictions between outcome and changes sections
+
+6. **CHECK_EXPORT_DECISIONS** — Export Decision Documentation
+   - **Verify:** If component is intentionally not exported, this is explicitly recorded as architectural decision
+   - **Typical Contradiction:** Component not exported from `src/index.ts` without documented reason
+   - **Fix:** Document export decision explicitly (e.g., "Component intentionally not exported: Extension-only adapter per architecture rules")
+   - **Documentation:** Explicitly state export decision and rationale in STEP 12 section
+   - [ ] ✅ Verified: Export decisions explicitly documented
+
+**All 6 checks MUST pass before Lock Propagation can proceed.**
+
+**Completion Rule:** 
+
+⚠️ **MANDATORY:** Final Report Consistency Check is complete **ONLY** when ALL 6 checks pass. Any failure in any check is **BLOCKING** and prevents Lock Propagation.
+
+**STEP 12 is considered complete ONLY after:**
+1. All 6 consistency checks have passed (verified and documented in audit report)
+2. All contradictions found during checks have been corrected in audit report
+3. Lock Propagation has been completed (see Lock Propagation section below)
+4. All items in Step Completion Checklist (see below) have been verified
+
+**This check is an integral part of STEP 12 completion process.** It cannot be skipped, deferred, or marked as "optional". The assistant executing STEP 12 MUST verify all 6 checks before proceeding to Lock Propagation. See Step Completion Checklist section for complete verification requirements.
+
+### **Typical Contradictions & Fixes (REFERENCE)**
+
+This section provides examples of common contradictions found in audit reports and how to fix them. Use this as a reference when performing Final Report Consistency Check.
+
+#### **Contradiction 1: Lock Status Inconsistency**
+
+**Problem:** Component status is "NOT LOCKED" in baseline (STEP 0) but "LOCKED" in STEP 12, or status changes between sections without explanation.
+
+**Example:**
+- STEP 0: "Status: NOT LOCKED"
+- STEP 12: "Status: LOCKED" (without explanation of change)
+
+**Fix:**
+- Correct all mentions to match final state throughout report
+- Add explicit statement in STEP 12: "Component status: LOCKED (locked in STEP 12 after pipeline completion)"
+
+**Correct Formulation:**
+```
+STEP 0: "Status: NOT LOCKED (will be locked after pipeline completion)"
+STEP 12: "Status: LOCKED (locked in STEP 12 after pipeline completion)"
+```
+
+#### **Contradiction 2: BLOCKER Without Resolution Trace**
+
+**Problem:** BLOCKER mentioned in baseline (STEP 5 or earlier) without explicit link to its resolution in STEP 9.
+
+**Example:**
+- STEP 5: "❌ BLOCKER: Missing type constraints (`satisfies Record<Type, string>`)"
+- STEP 9: "All BLOCKERS resolved" (without mentioning which BLOCKER was resolved)
+
+**Fix:**
+- Add explicit link in STEP 9 section: "Resolved BLOCKER from STEP 5: Added `satisfies Record<ButtonVariant, string>` constraint"
+- Document in STEP 12: "All baseline BLOCKERS resolved: STEP 5 BLOCKER (type constraints) → resolved in STEP 9"
+
+**Correct Formulation:**
+```
+STEP 5: "❌ BLOCKER: Missing type constraints"
+STEP 9: "Resolved BLOCKER from STEP 5: Added `satisfies Record<ButtonVariant, string>` constraint"
+STEP 12: "All baseline BLOCKERS resolved: STEP 5 BLOCKER (type constraints) → resolved in STEP 9"
+```
+
+#### **Contradiction 3: "All BLOCKERS resolved" Without Context**
+
+**Problem:** Absolute claim "All BLOCKERS resolved" without explanation when some items were deferred or reclassified.
+
+**Example:**
+- STEP 9: "All BLOCKERS resolved"
+- But FIX backlog shows: "2 NON-BLOCKERS deferred"
+
+**Fix:**
+- Add explanatory context: "All BLOCKERS resolved (0 BLOCKERS found in baseline; 2 NON-BLOCKERS deferred with justification)"
+- Or: "All BLOCKERS resolved; 2 NON-BLOCKERS deferred (see Deferred section)"
+
+**Correct Formulation:**
+```
+STEP 9: "All BLOCKERS resolved (0 BLOCKERS found in baseline). 2 NON-BLOCKERS deferred with justification (see Deferred section)"
+```
+
+#### **Contradiction 4: File Status Mismatch**
+
+**Problem:** File mentioned as "MISSING" in baseline but created in STEP 10, or file claimed to exist but missing.
+
+**Example:**
+- STEP 0: "Tests: MISSING"
+- STEP 10: "Tests created: `src/Component/Component.test.tsx`"
+- STEP 12: Still mentions "MISSING tests" in baseline section
+
+**Fix:**
+- Update baseline section to reflect final state: "Tests: Created in STEP 10 (`src/Component/Component.test.tsx`)"
+- Or add note: "Baseline: Tests MISSING → Created in STEP 10"
+
+**Correct Formulation:**
+```
+STEP 0: "Tests: MISSING (will be created in STEP 10)"
+STEP 10: "Tests created: `src/Component/Component.test.tsx`"
+STEP 12: "File Reality Check: Tests exist at `src/Component/Component.test.tsx` (created in STEP 10)"
+```
+
+#### **Contradiction 5: Outcome/Changes Logic Mismatch**
+
+**Problem:** Outcome states "Changes required" but Changes: None, or vice versa.
+
+**Example:**
+- STEP 5: "Outcome: Changes required"
+- STEP 5: "Changes: None"
+
+**Fix:**
+- Align outcome with actual changes: If Changes: None, then Outcome: "No changes required"
+- Or if changes were made: Outcome: "Changes applied" + list actual changes
+
+**Correct Formulation:**
+```
+STEP 5: "Outcome: No changes required"
+STEP 5: "Changes: None"
+```
+
+Or:
+
+```
+STEP 5: "Outcome: Changes applied"
+STEP 5: "Changes: Added `satisfies Record<Type, string>` constraint to variant map"
+```
+
+#### **Contradiction 6: Silent Non-Export**
+
+**Problem:** Component not exported from `src/index.ts` without documented architectural decision.
+
+**Example:**
+- Component exists but not in `src/index.ts` exports
+- No explanation in audit report
+
+**Fix:**
+- Document export decision explicitly in STEP 12: "Component intentionally not exported: Extension-only adapter per architecture rules (see EXTENSION_STATE.md)"
+
+**Correct Formulation:**
+```
+STEP 12: "Export Decision: Component intentionally not exported from `src/index.ts`. Rationale: Extension-only framework adapter per architecture rules. Component is exported from `src/EXTENSIONS/next/index.ts` for Next.js-specific usage."
+```
+
 ### **Mandatory Lock Propagation (CRITICAL)**
 
-⚠️ This step is considered **INCOMPLETE** unless the locked status is propagated consistently to:
+⚠️ **This step is considered INCOMPLETE and BLOCKING** unless the locked status is propagated consistently to **ALL** required files listed below.
 
-* `docs/FOUNDATION_LOCK.md`
+**Failure to update any required file is a PROCESS VIOLATION** and prevents pipeline completion.
 
-* `docs/ARCHITECTURE_LOCK.md`
+**Required files (all components):**
 
-* `docs/PROJECT_PROGRESS.md`
+- 📖 [docs/architecture/FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) — **MANDATORY** if component is Foundation layer
+  - Add component to locked component list
+  - Document lock date and version
+  - **BLOCKING:** If Foundation component and this file is not updated → STEP 12 INCOMPLETE
+  
+- 📖 [docs/architecture/ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) — **MANDATORY** for all components
+  - Document architectural decisions made during pipeline
+  - Record any conscious trade-offs or deferred changes
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
+  
+- 📖 [docs/PROJECT_PROGRESS.md](../../PROJECT_PROGRESS.md) — **MANDATORY** for all components
+  - Update component status to "Locked" or "Foundation-Ready"
+  - Record completion date
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
+  
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — **MANDATORY** for all components
+  - Complete STEP 12 section with final review outcome
+  - Mark all previous steps as verified
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
 
-* `docs/ARCHITECTURAL_INDEX.md` (or equivalent)
+**Additional files (if applicable):**
 
-* the component audit report file
+- 📖 [docs/architecture/EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) — **MANDATORY** if component is Extension layer
+  - Update component extension status
+  - Document extension-specific decisions
+  - **BLOCKING:** If Extension component and this file is not updated → STEP 12 INCOMPLETE
+
+**Lock Propagation Checklist (ALL ITEMS REQUIRED):**
+- [ ] FOUNDATION_LOCK.md updated (if Foundation component) — **MANDATORY**
+- [ ] ARCHITECTURE_LOCK.md updated with decisions — **MANDATORY**
+- [ ] PROJECT_PROGRESS.md updated with status — **MANDATORY**
+- [ ] Component audit report STEP 12 completed — **MANDATORY**
+- [ ] EXTENSION_STATE.md updated (if Extension component) — **MANDATORY**
+- [ ] All lock documents consistent (no contradictions) — **MANDATORY**
+
+**Note:** The component's layer (Foundation vs Extension) determines which lock files must be updated. Foundation components are locked in `FOUNDATION_LOCK.md`, Extension components are tracked in `EXTENSION_STATE.md`.
+
+**Verification:** Lock propagation is verified by cross-checking all documents for consistency. Any contradiction between documents is a BLOCKING issue.
+
+**Enforcement:** The assistant MUST verify completion of ALL checklist items before marking STEP 12 complete. Missing any item is a BLOCKING condition.
 
 ### **Outcome**
 
 * Component accepted and locked (Foundation Lock),
 
 * or explicitly marked for further iteration.
+
+### **Step Completion Checklist**
+
+**⚠️ CRITICAL:** Before marking pipeline complete, ALL items below MUST be verified. Missing any item is a BLOCKING condition.
+
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 12 section exists
+- [ ] All previous steps (STEP 0-11) verified complete
+- [ ] Code quality improvements confirmed
+- [ ] **MANDATORY Final Report Consistency Check — ALL checks verified and documented:**
+  - [ ] Final Report Consistency Check executed **BEFORE** Lock Propagation — **REQUIRED**
+  - [ ] All 6 checks explicitly documented in audit report STEP 12 section with PASS/FAIL status — **REQUIRED**
+  - [ ] All contradictions found during checks corrected in audit report — **REQUIRED**
+  - [ ] CHECK_LOCK_STATUS: Lock status consistent throughout report — **REQUIRED**
+  - [ ] CHECK_BASELINE_TO_FIX_LINK: All baseline BLOCKERS have resolution traces — **REQUIRED**
+  - [ ] CHECK_STEP_9_ABSOLUTISM: Absolute claims have explanatory context — **REQUIRED**
+  - [ ] CHECK_FILE_REALITY: File mentions match repository state — **REQUIRED**
+  - [ ] CHECK_OUTCOME_LOGIC: No contradictions in outcome/changes — **REQUIRED**
+  - [ ] CHECK_EXPORT_DECISIONS: Export decisions explicitly documented — **REQUIRED**
+  - [ ] All 6 checks show ✅ PASS status — **REQUIRED** (any ❌ FAIL blocks completion)
+- [ ] **MANDATORY Lock Propagation — ALL files verified:**
+  - [ ] `docs/architecture/FOUNDATION_LOCK.md` updated (if Foundation component) — **REQUIRED**
+  - [ ] `docs/architecture/ARCHITECTURE_LOCK.md` updated — **REQUIRED**
+  - [ ] `docs/PROJECT_PROGRESS.md` updated — **REQUIRED**
+  - [ ] `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` STEP 12 completed — **REQUIRED**
+  - [ ] `docs/architecture/EXTENSION_STATE.md` updated (if Extension component) — **REQUIRED**
+  - [ ] All lock documents cross-checked for consistency — **REQUIRED**
+- [ ] Model recommendation followed (GPT-5.2)
+- [ ] **MANDATORY checkpoint: Final audit report shared**
+
+**Completion Rule:** STEP 12 is considered complete ONLY when ALL checklist items are verified, including ALL lock file updates. Pipeline cannot be marked as finished without complete lock propagation.
+
+---
+
+---
+
+## 🔧 Troubleshooting
+
+### "Audit report section missing"
+**Problem:** Cannot proceed to STEP N+1 without STEP N section.
+
+**Solution:** Create STEP N section in audit report, even if it contains `No changes required in this step`.
+
+### "FIX backlog too large"
+**Problem:** Too many fixes identified in STEP 1-8.
+
+**Solution:** 
+- Consider splitting into multiple pipeline runs
+- Mark component "Not ready for Foundation" if fixes are disproportionate
+- Document decision in STEP 8 audit section
+
+### "Tests fail after STEP 9"
+**Problem:** Code changes in STEP 9 broke existing tests.
+
+**Solution:** 
+- Review STEP 9 changes for unintended behavior changes
+- Update tests in STEP 10, not during STEP 9
+- Document test updates in STEP 10 audit section
+
+### "A11Y changes break existing behavior"
+**Problem:** Accessibility fixes in STEP 11 changed component behavior.
+
+**Solution:** 
+- Document in STEP 11 audit section
+- May require re-validation in STEP 10
+- Ensure behavior changes are accessibility-required only
+
+### "Lock propagation incomplete"
+**Problem:** Not all lock files updated in STEP 12.
+
+**Solution:** Verify all required files updated:
+- `docs/architecture/FOUNDATION_LOCK.md` (if Foundation)
+- `docs/architecture/ARCHITECTURE_LOCK.md`
+- `docs/PROJECT_PROGRESS.md`
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- `docs/architecture/EXTENSION_STATE.md` (if Extension)
+
+### "Audit report consistency check failed"
+**Problem:** One or more consistency checks failed in STEP 12.
+
+**Solution:**
+- Review failed check(s) and identify inconsistencies
+- Correct audit report wording only (no code changes allowed)
+- Re-run consistency checks
+- Document corrections in audit report
+- Cannot proceed to Lock Propagation until all checks pass
+
+### "Model recommendation not followed"
+**Problem:** Wrong AI model used for step.
+
+**Solution:** 
+- Check [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
+- Use recommended model for optimal results
+- Document if different model used with justification
+
+---
+
+## 📚 Reference Examples
+
+Successfully completed pipeline runs:
+
+**Reference Components for Complex Controls:**
+- **Button** (Foundation) - `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+  - Foundation layer reference for complex controls
+  - Complete token compliance (BUTTON_TOKENS)
+  - Foundation Enforcement (no className/style props)
+- **Slider** (Extension) - `docs/reports/audit/SLIDER_BASELINE_REPORT.md`
+  - Extension layer reference for complex controls
+  - Token migration pattern (cva → tokenCVA)
+  - Token hole fixing (SLIDER_TOKENS, all raw values replaced)
+  - Complex multi-part component pattern (root, track, range, thumb, marks)
+  - Type system alignment (`satisfies Record<Type, string>`)
+
+📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Complete reference examples including **Button** (Foundation) and **Slider** (Extension)
+
+**Other Completed Pipeline Runs:**
+- **Tooltip:** `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md`
+- **Tabs:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+
+These reports demonstrate:
+- Complete STEP 0-12 structure
+- Proper FIX backlog usage
+- Checkpoint compliance
+- Lock propagation
+- Model recommendations followed
+
+---
+
+## 📚 Related Documents
+
+### Authority Navigation
+
+- 📖 [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) - Complete Authority map and question → authority mapping table
+
+### State Authorities (WHAT/WHEN/HOW)
+
+- 📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - WHAT states exist
+- 📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - WHEN states activate
+- 📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - HOW states represented
+
+### Token Authorities
+
+- 📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale
+- 📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography tokens
+- 📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius tokens
+- 📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens
+- 📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens
+
+### Size & Variant Authorities
+
+- 📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale and variant naming dictionary
+- 📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract
+
+### Structural Authorities
+
+- 📖 [LAYOUT_AUTHORITY.md](../../architecture/LAYOUT_AUTHORITY.md) - Layout structure and flow
+
+### Lock Documents
+
+- 📖 [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation layer lock status
+- 📖 [ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) - Architectural decisions lock
+- 📖 [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) - Extension layer tracking
+
+### Process Documents
+
+- 📖 [TUNG System Specification](../tung_system_specification.md) - Task Unified Next-Gen system
+- 📖 [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md) - Model recommendations per step
+
+### Architecture Context
+
+- 📖 [ARCHITECTURE_CONTEXT.md](../../ARCHITECTURE_CONTEXT.md) - Global architecture overview
+- 📖 [ARCHITECTURE_RULES.md](../../architecture/ARCHITECTURE_RULES.md) - Architectural rules and constraints
 
 ---
 
@@ -1249,4 +2384,6 @@ Formally conclude the pipeline and **lock the component status across all archit
 This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
 
 Skipping steps or rushing execution will only reintroduce the problems this document is designed to eliminate.
+
+**Pipeline completion time:** 6-8 hours for typical component.
 

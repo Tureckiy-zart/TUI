@@ -17,32 +17,87 @@ Architecture modifications require explicit unlock procedure.
 
 ---
 
-## 🔒 UI Foundation Lock Status
+## ⚠️ UI Foundation Unlock Status
 
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Lock Date:** 2025-12-12  
-**Foundation Closure Date:** 2025-12-16  
+**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
+**Foundation Closure Date:** 2025-12-16 (Previous)  
 **Reference:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) - **Source of Truth**
 
-**The Foundation architecture phase is OFFICIALLY CLOSED.** All Foundation Authorities are **COMPLETE**, **IMMUTABLE**, and **LOCKED**.
+**The Foundation layer is OFFICIALLY UNLOCKED for active construction.** Foundation Authorities remain **COMPLETE**, **IMMUTABLE**, and **LOCKED**, but Foundation layer components can be added, refactored, or adjusted to reach canonical form. Foundation layer is intentionally unlocked until all primitives reach canonical form.
 
 ### Locked Foundation Components
 
 The following components are **locked** and **immutable** as part of the UI Foundation Layer:
 
-1. **Modal** - `src/components/modal/Modal.tsx` (Radix Dialog wrapper)
-2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx` (Radix Tabs wrapper)
-3. **Select** - `src/components/select/Select.tsx` (Radix Select wrapper) — **FINALIZED** (S1 + H1–H4 complete; UNLOCK required for any functional/behavioral/API change)
-4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx` (Radix ContextMenu wrapper)
-5. **Toast** - `src/components/overlays/Toast.tsx` (Radix Toast wrapper)
+1. **Button** - `src/PRIMITIVES/Button/Button.tsx` (Native button element) — ✅ **FINAL LOCK** (Pipeline 18A Complete, 2025-12-25)
+2. **Link** - `src/PRIMITIVES/Link/Link.tsx` (Native anchor element) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+3. **Text** - `src/PRIMITIVES/Text/Text.tsx` (Native span element) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+4. **Input** - `src/PRIMITIVES/Input/Input.tsx` (Native input element) — ✅ **LOCKED** (Pipeline 18A Refactor Cycle 2 Complete, 2025-12-26)
+   - **Primitive Refactor:** Simplified to strict low-level form control primitive (TUNG_INPUT_PRIMITIVE_REFACTOR_FINAL)
+     - Removed variant prop (strict primitive model)
+     - Removed state prop (replaced with invalid?: boolean)
+     - Removed iconLeft/iconRight props (composition concern)
+     - Removed fullWidth prop (layout concern)
+     - Limited API to size + invalid props only
+     - Size-only CVA (removed variant/state/fullWidth variants)
+   - **Exception:** LOCKED component change authorized via TUNG_LOCKED_COMPONENT_CHANGE_GUARD policy
+   - **Breaking Changes:** Variant, state, iconLeft, iconRight, fullWidth props removed
+   - **Intentional Limitation:** Input does not handle validation, errors, labels, helper text, or form logic. All such concerns delegated to higher-level composition components.
+   - **Audit Report:** `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+5. **Heading** - `src/PRIMITIVES/Heading/Heading.tsx` (Native heading elements h1-h6) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+6. **Icon** - `src/PRIMITIVES/Icon/Icon.tsx` (SVG Registry with Radix Slot) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+7. **Select** - `src/COMPOSITION/controls/Select/Select.tsx` (Radix Select primitive) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+8. **Label** - `src/PRIMITIVES/Label/Label.tsx` (Radix Label primitive) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+9. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx` (Radix Tabs primitive) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25; Third Pass Complete, 2025-12-27)
+10. **Checkbox** - `src/PRIMITIVES/Checkbox/Checkbox.tsx` (Native button with role="checkbox") — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Refactor Cycle 2 Complete, 2025-12-27)
+11. **Radio** - `src/PRIMITIVES/Radio/Radio.tsx` (Native button with role="radio") — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - **Refactored:** CVA migrated (cva → tokenCVA), type system normalized (explicit union types exported), CVA type constraints applied (satisfies Record<Type, string>)
+   - **Pipeline 18A:** All 5 BLOCKERS resolved (CVA migration, union types export, type constraints × 3)
+   - **Key Changes:** tokenCVA with type constraints, explicit union types (RadioVariant, RadioSize, RadioState), canonical stories (Matrix, States, SizesGallery)
+   - **Accessibility:** WCAG 2.1 Level AA compliant, roving tabindex pattern, comprehensive keyboard navigation (Space, Arrow keys with wrapping)
+   - **RadioGroup:** Correct radiogroup pattern with orientation support (vertical/horizontal), roving tabindex, keyboard navigation
+   - **Audit Report:** `docs/reports/audit/RADIO_BASELINE_REPORT.md`
+12. **Switch** - `src/PRIMITIVES/Switch/Switch.tsx` (Native button with role="switch") — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - **Refactored:** CVA migrated (cva → tokenCVA), state model normalized (removed public state prop, added invalid prop), Foundation Enforcement applied (className/style excluded)
+   - **Pipeline 18A:** All 8 BLOCKERS resolved (CVA migration, type system cleanup, state refactor, Storybook normalization)
+   - **Key Changes:** tokenCVA with type constraints, explicit union types (SwitchVariant, SwitchSize), derived state model (no public state prop), canonical stories (Matrix, SizesGallery, States)
+   - **Audit Report:** `docs/reports/audit/SWITCH_BASELINE_REPORT.md`
+13. **Textarea** - `src/PRIMITIVES/Textarea/Textarea.tsx` (Native textarea element) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Initial Refactor (2025-12-25):** CVA migrated (cva → tokenCVA), variant dictionary corrected (InteractiveVariant → SurfaceVariant), state model normalized (state prop → boolean props)
+   - **Strict Primitive Refactor (2025-12-26):** Simplified to strict low-level primitive model (TUNG_TEXTAREA_PRIMITIVE_REFACTOR_FINAL)
+     - Removed variant prop (strict primitive model)
+     - Removed character counter feature
+     - Removed fullWidth prop (always full width)
+     - Limited size to sm/md/lg only
+     - Added invalid prop (maps to aria-invalid)
+     - Excluded rows from allowed props
+   - **Exception:** LOCKED component change authorized via TUNG_LOCKED_COMPONENT_CHANGE_GUARD policy
+   - **Breaking Changes:** Variant prop removed, character counter removed, size limited to sm/md/lg, rows excluded
+   - **Audit Report:** `docs/reports/audit/TEXTAREA_BASELINE_REPORT.md`
+14. **Toast** - `src/COMPOSITION/overlays/Toast.tsx` (Radix Toast primitive) — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Stateless Refactor (2025-12-26):** Transformed to fully stateless UI renderer (TUNG_TOAST_STATELESS_RENDERER_FINAL)
+     - Removed all business logic (state management, timers, imperative APIs)
+     - ToastProvider transformed to thin Radix wrapper (no state, no timers, no imperative API)
+     - ToastRoot simplified to stateless (removed ToastData prop, duration handling)
+     - Added controlled props: open (required), onOpenChange (required)
+     - Implemented children composition pattern (ToastTitle, ToastDescription, ToastAction, ToastClose as children)
+     - Removed ToastData, ToastActionData interfaces from Foundation exports
+     - Removed useToast hook from Foundation exports
+     - Variant alignment: Changed "danger" to "error" to match task specification
+   - **Exception:** LOCKED component change authorized via TUNG_LOCKED_COMPONENT_CHANGE_GUARD policy (UNLOCKED_FOR_MIGRATION status)
+   - **Breaking Changes:** ToastData prop removed, useToast hook removed, imperative APIs removed, ToastProvider no longer manages state
+   - **Intentional Limitation:** Toast is permanently limited to a stateless rendering role. All business logic, notification decisions, state ownership, and timing are explicitly delegated to the consuming application.
+   - **Audit Report:** `docs/reports/audit/TOAST_BASELINE_REPORT.md`
 
 ### Foundation Rules
 
+- ⚠️ **FOUNDATION IS UNDER ACTIVE CONSTRUCTION** - Foundation layer is unlocked for completing missing primitives
 - ✅ **ONE FOUNDATION PER CATEGORY** - Exactly one foundation component per category
-- ✅ **FOUNDATION COMPONENTS ARE IMMUTABLE** - No breaking changes, no deletion, no renaming
-- ✅ **NO NEW FOUNDATION COMPONENTS** - Foundation layer is closed
+- ✅ **MISSING PRIMITIVES CAN BE ADDED** - Text, Input, Textarea, Link, Toast renderer, Modal can be added or finalized
+- ✅ **EXISTING PRIMITIVES CAN BE REFACTORED** - Existing Foundation primitives can be refactored to reach canonical form
 - ✅ **EXTENSIONS MUST USE FOUNDATION** - All extensions must compose foundation components internally
-- ✅ **FOUNDATION AUTHORITIES ARE CLOSED** - All Foundation Authority Contracts are LOCKED and IMMUTABLE
+- ✅ **FOUNDATION AUTHORITIES ARE LOCKED** - All Foundation Authority Contracts remain LOCKED and IMMUTABLE
 
 ### Foundation Authorities Status
 
@@ -66,22 +121,310 @@ All Foundation Authorities are **CLOSED** and **IMMUTABLE**:
 
 ### Known Extensions
 
-- **Dialog** - Uses Modal internally (`src/components/overlays/Dialog.tsx`)
+- **Dialog** - Uses Modal internally (`src/COMPOSITION/overlays/Dialog.tsx`) — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
 - **ConfirmDialog** - Uses Modal internally (`src/components/modals/ConfirmDialog.tsx`)
 - **NotificationCenter** - Uses Toast internally (`src/components/notifications/NotificationCenter.tsx`)
 
-**Note:** Foundation phase is **CLOSED**. All future work must occur in Enforcement and Extension layers only. Foundation Authorities cannot be modified without explicit unlock procedure.
+### Extension Components (Pipeline 18A Complete)
+
+The following Extension layer components have successfully completed Pipeline 18A and are **PROCESS LOCKED**:
+
+1. **Dialog** - `src/COMPOSITION/overlays/Dialog.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Extension Composition over Modal
+   - **Audit Report:** `docs/reports/audit/DIALOG_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - Semantic wrapper over Modal (Foundation) - correctly composes Modal.Root, Modal.Content, Modal.Close
+     - Provides Dialog.Header, Dialog.Title, Dialog.Description, Dialog.Body, Dialog.Footer subcomponents
+     - Automatic aria-labelledby and aria-describedby management via titleId/descriptionId props
+     - No size/variant props (inherits from Modal) - correct pattern
+     - Token-compliant (all styling uses tokens)
+     - Comprehensive test coverage (all subcomponents, composition, accessibility, edge cases)
+   - **Quality:** Comprehensive test suite (Dialog.test.tsx), Storybook stories (LongContent required and validated)
+
+2. **Table** - `src/PATTERNS/tables/table/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Layer:** PATTERNS (Extension layer)
+   - **Type:** Interactive table component with sorting, expansion, and selection capabilities
+   - **Audit Report:** `docs/reports/audit/TABLE_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - Compound component pattern (not data-driven API)
+     - Alignment classes extracted to shared constant (`Table.constants.ts`)
+     - Subcomponent attachment pattern optimized (type alias instead of repetitive assertions)
+     - Keyboard navigation support for sortable columns (Enter/Space keys)
+     - Explicit union types for size (`sm | md | lg`) and alignment (`left | center | right`)
+     - All styling uses TABLE_TOKENS (no raw values)
+     - React Context for sharing sort/expansion state across subcomponents
+     - Unused props removed (data, columns, rowKey, sortable, loading, emptyMessage, stickyHeader, rowSize)
+   - **Quality:** Comprehensive tests, canonical stories (SizesGallery, States), full accessibility compliance
+
+2. **SimpleTable** - `src/PATTERNS/tables/SimpleTable/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Layer:** PATTERNS (Extension layer)
+   - **Type:** Simple tabular data display component
+   - **Audit Report:** `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - CVA migrated from no CVA to tokenCVA (Decision Matrix RULE 1 - component has token-driven size axis)
+     - Size prop added with `sm | md | lg` subset (per VARIANTS_SIZE_CANON.md)
+     - Explicit union type exported (`SimpleTableSize`), no CVA type leakage
+     - Type constraints applied (`satisfies Record<SimpleTableSize, string>`)
+     - SIMPLETABLE_TOKENS created for component-specific tokens
+     - All raw Tailwind classes replaced with tokens
+     - Semantic HTML structure with `scope="col"` on headers
+     - No variant prop (simple table doesn't need visual variants)
+   - **Quality:** Comprehensive tests, canonical stories (SizesGallery, States)
+
+3. **Timeline** - `src/PATTERNS/lists/Timeline/Timeline.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+   - **Layer:** PATTERNS (Extension layer)
+   - **Type:** Presentational timeline component for chronological events
+   - **Audit Report:** `docs/reports/audit/TIMELINE_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - Token-only styling (TIMELINE_TOKENS created, 100% token compliance)
+     - Semantic HTML (`<ol>`, `<li>` with `role="list"` for chronological events)
+     - Accessibility improvements (ARIA attributes, decorative elements hidden)
+     - No CVA structure (component has no token-driven axes per Decision Matrix)
+     - Presentational component (no interactive states, no size/variant props)
+     - React.FC replaced with explicit function signature
+   - **Quality:** Comprehensive tests (15 test cases), 4 Storybook stories (including Accessibility)
+
+4. **FilterBar** - `src/PATTERNS/filters/filters/FilterBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete + FINALIZATION, 2025-12-27)
+   - **Layer:** PATTERNS (Extension layer)
+   - **Type:** Fully controlled filter orchestration component (composes multiple filter controls)
+   - **Status:** PROCESS LOCKED — pure UI component, no mock logic
+   - **Audit Report:** `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md`
+   - **Pipeline 18A:** All steps (0-12) completed successfully
+   - **FINALIZATION (2025-12-27):** Mock logic removed, converted to fully controlled component
+   - **Key Decisions:**
+     - Code quality improved (validation helper extracted, constant extraction)
+     - No CVA structure (correct - component has no size/variant props)
+     - Token compliance verified (delegates to sub-components)
+     - Compound pattern: FilterBar + FilterBarCompact wrapper
+     - **Fully controlled via `filterManager: FilterManager` prop** (breaking change)
+   - **Test Coverage:** Comprehensive (FilterBar.test.tsx - 22 test cases)
+   - **Storybook Coverage:** Compliant (6 stories demonstrating controlled usage)
+   - **Accessibility:** Delegated to sub-components (appropriate for composition component)
+   - **Breaking Change:** `filterManager` prop is now required — consumer must implement `FilterManager` interface
+
+2. **Progress** - `src/PRIMITIVES/Progress/Progress.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+2. **Separator** - `src/COMPOSITION/controls/Separator/Separator.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+3. **Breadcrumbs** - `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Pipeline 18A:** All steps (0-12) completed successfully
+   - **Key Decisions:** No CVA structure (correct for no size/variant props), token compliance via NAVIGATION_TOKENS, compound API pattern
+   - **States:** default, disabled (via item.disabled), current (via aria-current="page")
+   - **Audit Report:** `docs/reports/audit/BREADCRUMBS_BASELINE_REPORT.md`
+3. **SegmentedControl** - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Refactored:** CVA migrated (cva → tokenCVA), type system normalized (VariantProps removed, explicit union types exported), type constraints applied (satisfies Record<Type, string>)
+   - **Pipeline 18A:** All 7 BLOCKERS resolved (CVA migration, type system fixes × 3, size mapping table, tests, Storybook compliance)
+   - **Key Changes:** tokenCVA with type constraints, explicit union types (SegmentedControlSize, SegmentedControlOrientation, SegmentedControlState), keyboard navigation helper extracted, canonical stories (States, SizesGallery)
+   - **Accessibility:** WCAG 2.1 Level AA compliant, roving tabindex pattern, comprehensive keyboard navigation (Arrow keys with wrap-around, cross-orientation support)
+   - **Audit Report:** `docs/reports/audit/SEGMENTEDCONTROL_BASELINE_REPORT.md`
+3. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+3. **AspectRatio** - `src/COMPOSITION/controls/AspectRatio/AspectRatio.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+4. **Badge** - `src/PRIMITIVES/Badge/Badge.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+5. **Pagination** - `src/COMPOSITION/navigation/pagination/Pagination.tsx` — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Refactored:** Token violations fixed (h-4 w-4 → ICON_TOKENS.sizes.md), duplicate styling extracted (PaginationPrev/PaginationNext), border-input usage documented (standard Tailwind utility class mapped to CSS variable --input, follows BUTTON_TOKENS/LINK_TOKENS pattern)
+   - **Pipeline 18A:** All BLOCKERS resolved (token violations fixed), code quality improved (duplication reduced)
+   - **Key Decisions:** Fixed md size (no size prop, correct), no variant prop (correct), compound component pattern (Root, Item, Prev, Next, Ellipsis), NAVIGATION_TOKENS usage (shared navigation token domain), border-input usage (standard Tailwind utility class)
+   - **Token Compliance:** ✅ 100% (NAVIGATION_TOKENS, ICON_TOKENS, MOTION_TOKENS)
+   - **Test Coverage:** Comprehensive unit tests (Pagination.test.tsx) + a11y tests (Pagination.a11y.test.tsx)
+   - **Storybook Coverage:** Compliant (usage patterns demonstrated, Matrix/States/SizesGallery NOT REQUIRED per VARIANTS_SIZE_CANON)
+   - **Accessibility:** WCAG 2.1 Level AA compliant, ARIA attributes correct, keyboard navigation working, screen reader announcements correct
+   - **Audit Report:** `docs/reports/audit/PAGINATION_BASELINE_REPORT.md`
+   - **Refactored:** Component already compliant, no refactoring required
+   - **Pipeline 18A:** All steps complete (0-12), no blockers found
+   - **Key Decisions:** tokenCVA (Decision Matrix RULE 1), InteractiveVariant compliant (7 variants), no size prop (correct for semi-interactive), CSS-derived hover states, explicit union types (BadgeVariant)
+   - **Token Compliance:** ✅ 100% (BADGE_TOKENS)
+   - **Test Coverage:** Comprehensive (Badge.test.tsx)
+   - **Storybook Coverage:** Compliant (all variants demonstrated)
+   - **Audit Report:** `docs/reports/audit/BADGE_BASELINE_REPORT.md`
+5. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Re-run Complete, 2025-12-27)
+6. **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Refactor Cycle Complete, 2025-12-27)
+   - **Refactored:** CVA migrated (cva → tokenCVA), token file created (RANGESLIDER_TOKENS), all raw values replaced with tokens, type constraints added
+   - **Pipeline 18A:** All 4 BLOCKERS resolved (CVA migration, type constraints, token migration, token file creation)
+   - **Key Changes:** tokenCVA with type constraints, explicit union types (RangeSliderSize, RangeSliderVariant, RangeSliderOrientation), component-specific tokens, canonical stories (Matrix, States, SizesGallery)
+   - **Refactor Cycle 2025-12-27:** No changes required - Component fully compliant, all Authority Contracts verified
+   - **Audit Report:** `docs/reports/audit/RANGESLIDER_BASELINE_REPORT.md`
+7. **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+8. **Skeleton** - `src/PRIMITIVES/Skeleton/Skeleton.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Refactored:** CVA migrated (cva → tokenCVA), type system improved (explicit SkeletonVariant type, type constraints)
+   - **Pipeline 18A:** All 3 BLOCKERS resolved (CVA migration, type system leakage, missing type constraints)
+   - **Key Changes:** tokenCVA with type constraints, explicit union type (SkeletonVariant), removed VariantProps leakage, type deduplication (removed Skeleton.types.ts)
+   - **Layer:** PRIMITIVES - Extension (presentational primitive)
+   - **Test Coverage:** Comprehensive (Skeleton.test.tsx - 20+ test cases)
+   - **Storybook Coverage:** Compliant (all variants demonstrated, realistic usage examples)
+9. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+10. **CardBase** - `src/PATTERNS/cards/cards/CardBase/CardBase.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+11. **EmptyState** - `src/PATTERNS/states/EmptyState/EmptyState.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+    - **Layer:** PATTERNS (Extension layer)
+    - **Refactored:** Subcomponent attachment pattern optimized (74% code reduction), type consistency improved (EmptyStateIconSize type used)
+    - **Pipeline 18A:** All steps (0-12) completed successfully, no blockers found
+    - **Key Decisions:** Compound component pattern (Icon, Title, Description, Action), token-only styling (EMPTY_STATE_TOKENS), semantic HTML (h3, p), stateless non-interactive display component, no CVA required (correct per Decision Matrix)
+    - **Token Compliance:** ✅ 100% (EMPTY_STATE_TOKENS)
+    - **Test Coverage:** Comprehensive (EmptyState.test.tsx - 25+ tests covering rendering, subcomponents, icon sizes, accessibility, edge cases)
+    - **Storybook Coverage:** Compliant (SizesGallery story for EmptyStateIcon, Matrix/States NOT REQUIRED per VARIANTS_SIZE_CANON)
+    - **Accessibility:** ✅ Compliant (semantic HTML, ARIA support via HTMLAttributes, screen reader friendly)
+    - **Audit Report:** `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md`
+   - **Refactored:** Helper functions extracted (getIndicatorStateClasses, renderIndicatorContent) to reduce duplication, icon size token usage improved (ICON_TOKENS.sizes.md)
+   - **Pipeline 18A:** All steps (0-12) completed successfully, no blockers found
+   - **Key Decisions:** No CVA structure (correct - component has no size/variant props per Decision Matrix), token compliance via NAVIGATION_TOKENS/MOTION_TOKENS/ICON_TOKENS, compound API pattern (Stepper.Root, Stepper.Item, Stepper.Indicator, Stepper.Label, Stepper.Content), semantic process states (isActive, isCompleted, disabled) for visualization
+   - **Accessibility:** role="group", aria-label="Progress steps", aria-orientation, aria-current="step", aria-disabled, role="listitem"
+   - **Test Coverage:** Comprehensive (Stepper.test.tsx - ~15 test cases covering rendering, states, orientation, edge cases, ref forwarding, accessibility)
+   - **Storybook Coverage:** Compliant (States story added per VARIANTS_SIZE_CANON.md, Accessibility story added)
+   - **Audit Report:** `docs/reports/audit/STEPPER_BASELINE_REPORT.md`
+9. **Row** - `src/COMPOSITION/layout/Row/Row.tsx` — ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Pipeline 18A:** All steps complete (0-12), no blockers found, no changes required
+   - **Key Decisions:** Semantic alias pattern (delegates to Stack with direction="horizontal"), no CVA required (no token-driven axes), type system inherits from StackProps, token compliance via Stack delegation
+   - **Component Role:** Layout primitive - semantic alias for Stack with horizontal direction
+   - **Test Coverage:** Comprehensive (Row.test.tsx - 8 test cases covering all public behavior)
+   - **Storybook Coverage:** Compliant (4 stories demonstrating spacing, alignment, and semantic alias pattern)
+   - **Audit Report:** `docs/reports/audit/ROW_BASELINE_REPORT.md`
+   - **Audit Report:** `docs/reports/audit/SKELETON_BASELINE_REPORT.md`
+9. **Box** - `src/COMPOSITION/layout/Box/Box.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+   - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
+   - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
+   - **Key Decisions:** Pure container component (no layout composition), 100% token compliance (CSS variables + Tailwind classes), no CVA required (correct per Decision Matrix), non-interactive (no states), Extension API (allows className/style)
+   - **Token Compliance:** ✅ 100% (all spacing, radius, background, shadow use tokens)
+   - **Test Coverage:** Comprehensive (Box.test.tsx - 15+ test cases covering all props and edge cases)
+   - **Storybook Coverage:** Compliant (10 stories demonstrating all features, no required stories missing - Box doesn't have size/variant/states)
+   - **Accessibility:** ✅ Compliant (renders standard HTML elements, no barriers)
+   - **Audit Report:** `docs/reports/audit/BOX_BASELINE_REPORT.md`
+10. **Stack** - `src/COMPOSITION/layout/Stack/Stack.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+    - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
+    - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
+11. **Flex** - `src/COMPOSITION/layout/Flex/Flex.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+    - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
+    - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
+    - **Key Decisions:** Advanced flexbox container (full control over flexbox properties), no CVA required (correct per Decision Matrix - no token-driven axes), 100% token compliance (gap uses spacing tokens, basis accepts tokens and semantic CSS values), non-interactive (no states), Extension API (allows className/style)
+    - **Token Compliance:** ✅ 100% (gap uses spacing tokens via CSS variables, basis accepts tokens and semantic CSS values)
+    - **Test Coverage:** Comprehensive (Flex.test.tsx - 12+ test cases covering all props and edge cases)
+12. **Grid** - `src/COMPOSITION/layout/Grid/Grid.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+    - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
+    - **Pipeline 18A:** All steps complete (0-12), 2 NON-BLOCKERS resolved (removed duplicate getBaseValue function, added JSDoc for prop merging behavior)
+    - **Key Decisions:** CSS Grid container extension of Box, no CVA required (correct per Decision Matrix - no token-driven axes), 100% token compliance (gap uses spacing tokens via CSS variables), non-interactive (no states), no size/variant props (correct per FOUNDATION_LOCK.md rule 877), Extension API (allows className/style)
+    - **Token Compliance:** ✅ 100% (gap uses spacing tokens via CSS variables)
+    - **Test Coverage:** Comprehensive (Grid.test.tsx - 14 tests covering all props and edge cases)
+    - **Storybook Coverage:** Compliant (5 stories demonstrating usage patterns - no Matrix/States required for layout component)
+    - **Refactoring:** Removed duplicate `getBaseValue` local function (uses shared `getBaseValueUtil` from responsive-props), added JSDoc comment explaining responsive prop merging behavior
+    - **Audit Report:** `docs/reports/audit/GRID_BASELINE_REPORT.md`
+    - **Storybook Coverage:** Compliant (8 stories demonstrating all flexbox options, no required stories missing - Flex doesn't have size/variant/states)
+    - **Accessibility:** ✅ Compliant (layout container, renders standard HTML div, no barriers)
+    - **Audit Report:** `docs/reports/audit/FLEX_BASELINE_REPORT.md`
+    - **Key Decisions:** Layout composition primitive (vertical/horizontal flows), 100% token compliance (spacing via CSS variables), no CVA required (correct per Decision Matrix), non-interactive (no states), uses Box internally as base container
+    - **Token Compliance:** ✅ 100% (all spacing uses token system via CSS variables)
+    - **Test Coverage:** Comprehensive (Stack.test.tsx - 14 test cases covering all props and edge cases)
+    - **Storybook Coverage:** Compliant (7 stories demonstrating all features, no required stories missing - Stack doesn't have size/variant/states)
+    - **Accessibility:** ✅ Compliant (layout-only component, uses semantic HTML via Box)
+    - **Audit Report:** `docs/reports/audit/STACK_BASELINE_REPORT.md`
+11. **Column** - `src/COMPOSITION/layout/Column/Column.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+    - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
+    - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
+    - **Key Decisions:** Semantic alias for Stack (direct alias pattern), 100% token compliance (inherited from Stack), no CVA required (correct per Decision Matrix), non-interactive (no states), provides explicit vertical layout API
+    - **Component Role:** Layout primitive - semantic alias for Stack with vertical direction
+    - **Token Compliance:** ✅ 100% (all styling inherited from Stack, spacing uses token system)
+    - **Test Coverage:** Comprehensive (Column.test.tsx - 7 test cases covering alias verification, spacing, alignment, ref forwarding)
+    - **Storybook Coverage:** Compliant (4 stories demonstrating spacing, alignment, and semantic alias pattern)
+    - **Accessibility:** ✅ Compliant (layout-only component, uses semantic HTML via Stack → Box)
+    - **Audit Report:** `docs/reports/audit/COLUMN_BASELINE_REPORT.md`
+9. **TAS (Tenerife Animation System)** - `src/COMPOSITION/motion/animation/` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+   - **Refactored:** Extracted common preset pattern helper, removed unused parameters, simplified createStagger logic
+   - **Pipeline 18A:** All steps complete (0-12), no blockers found
+   - **Key Changes:** createPreset helper function (eliminated 20+ duplicate patterns), removed unused parameters (distance, scale, y), comprehensive test suite added, documentation warnings for raw string fallback
+   - **Layer:** COMPOSITION - Extension Utility System (not a React component)
+   - **Test Coverage:** Comprehensive (tas.test.ts, presets.test.ts, utils.test.ts, useInView.test.tsx)
+   - **Storybook Coverage:** Comprehensive (TAS.stories.tsx demonstrates all features)
+   - **Motion Authority Compliance:** ✅ All motion values from tokens, CSS classes mapped to tm-motion-* utilities
+   - **Accessibility:** ✅ Full reduced motion support, SSR-safe implementation
+   - **Audit Report:** `docs/reports/audit/TAS_BASELINE_REPORT.md`
+10. **IconGallery** - `src/COMPOSITION/utilities/IconGallery/` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26; Refactor Cycle 2 Complete, 2025-12-27)
+   - **Layer:** COMPOSITION - Extension Utility Component (showcase/utility)
+   - **Type:** Visual catalog component for displaying icons in various layouts
+   - **Pipeline 18A:** Two complete cycles (2025-12-26, 2025-12-27), all steps (0-12) completed successfully, no blockers found
+   - **Key Decisions:**
+     - No CVA required (correct - component uses direct layout components without token-driven axes)
+     - Token compliance: ✅ 100% (all spacing, padding, radius use token props from layout components)
+     - Component role: Utility/showcase component for Storybook documentation
+     - Export decision: Intentionally NOT exported from `src/index.ts` (utility component, not for production use)
+     - Non-interactive: Pure presentational component (no state, no interaction logic)
+   - **Test Coverage:** Comprehensive edge case tests (empty array, single icon, ref forwarding, HTML attributes, all modes)
+   - **Storybook Coverage:** Compliant (all modes demonstrated: Default, AllIcons, AllIconsWithSizes, AllIconsWithColors, CustomIcons, SingleIcon, WithCustomProps, EmptyIcons)
+   - **Accessibility:** ✅ Compliant (presentational component, uses accessible Icon and Text components)
+   - **Audit Report:** `docs/reports/audit/ICONGALLERY_BASELINE_REPORT.md`
+
+### Composition Components (Pipeline 18A Complete)
+
+The following Composition layer components have successfully completed Pipeline 18A and are **PROCESS LOCKED**:
+
+1. **Portal** - `src/COMPOSITION/overlays/Portal.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+   - **Component Type:** Utility component (SSR-safe portal rendering)
+   - **Pipeline 18A:** All steps (0-12) completed successfully
+   - **Key Decisions:**
+     - Utility component (no visual tokens, no size/variant props)
+     - SSR-safe mounting pattern (mounted state + window check)
+     - Wrapper div necessary for ref forwarding (asChild pattern not needed)
+     - className/style props acceptable for COMPOSITION layer
+     - No CVA structure (Decision Matrix RULE 2 - no token-driven axes)
+   - **Test Coverage:** Comprehensive test suite created (rendering, SSR safety, container prop, ref forwarding, multiple portals, accessibility)
+   - **Storybook:** Compliant (Default, CustomContainer, SSR stories - no Matrix/States/SizesGallery/LongContent needed for utility component)
+   - **Audit Report:** `docs/reports/audit/PORTAL_BASELINE_REPORT.md`
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+
+2. **Toast** - `src/COMPOSITION/overlays/Toast.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+3. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Re-run Complete, 2025-12-27)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Notification overlay component
+   - **Audit Report:** `docs/reports/audit/TOAST_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+     - Custom semantic variants: default, success, info, warning, danger
+     - No public size prop (fixed size, notification component)
+     - Radix delegation for all behavior (swipe, auto-dismiss, focus, keyboard, a11y)
+   - **Quality:** 25 tests, canonical stories (States + LongContent)
+
+2. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Right-click context menu overlay
+   - **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+     - Tone variants: neutral, primary, destructive (overlay-specific semantics)
+
+3. **Tooltip** - `src/COMPOSITION/overlays/Tooltip.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Small informational overlay component
+   - **Audit Report:** `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+     - Explicit union type exported (`TooltipVariant`), no CVA type leakage
+     - Type constraints applied (`satisfies Record<TooltipVariant, string>`)
+     - InteractiveVariant dictionary: primary, secondary, accent, outline, ghost, link, destructive
+     - No public size prop (fixed size appropriate for small informational overlay)
+     - Radix delegation for all behavior (hover, focus, keyboard, a11y)
+   - **Quality:** Comprehensive tests, canonical stories (States + LongContent)
+
+4. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Modal dialog overlay component
+   - **Audit Report:** `docs/reports/audit/MODAL_BASELINE_REPORT.md`
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1 - token-driven size axis)
+     - Size restriction compliance (removed xl and fullscreen, restricted to sm | md | lg only per VARIANTS_SIZE_CANON overlay restriction)
+     - Explicit union type exported (`ModalSize = "sm" | "md" | "lg"`), no CVA type leakage
+     - Type constraints applied (`satisfies Record<ModalSize, string>`)
+     - Token compliance: All styling token-driven (MODAL_TOKENS), no raw values in token file
+     - Radix delegation for all behavior (focus trap, keyboard navigation, ARIA, portal, scroll lock)
+     - Compound component pattern: Modal.Root, Modal.Trigger, Modal.Content, Modal.Header, Modal.Title, Modal.Description, Modal.Footer, Modal.Close
+   - **Quality:** 16 tests, 24 stories (canonical: States, SizesGallery, LongContent)
+
+**Note:** Foundation layer is **UNLOCKED** for active construction. Foundation Authorities remain LOCKED and IMMUTABLE. Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 ---
 
 ## 🔒 Token System Lock Status
 
-**Status:** ✅ **LOCKED** (Part of Foundation CLOSED)  
+**Status:** ✅ **LOCKED** (Foundation Authority remains LOCKED)  
 **Lock Date:** 2025-12-13  
 **Reference:** [Token System Documentation](./architecture/TOKEN_AUTHORITY.md)  
 **Final Audit:** [Token Domains Final Report](../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
 
-**The Token System is LOCKED as part of the Foundation architecture.** Token System is one of the Foundation Authorities that are CLOSED and IMMUTABLE.
+**The Token System is LOCKED as part of the Foundation architecture.** Token System is one of the Foundation Authorities that remain LOCKED and IMMUTABLE. Foundation layer unlock does not affect Foundation Authorities.
 
 ### What Is Locked
 
@@ -133,8 +476,8 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 1. **Button** - `src/PRIMITIVES/Button/Button.tsx`
    - **Status:** ✅ **FINAL LOCK**
-   - **Lock Date:** 2025-12-21
-   - **Pipeline 18A Completion:** 2025-12-22 (Steps 0-11 complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline 18A Completion:** 2025-12-25 (Steps 0-12 complete)
    - **Audit Report:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
    - **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
    - **Canon Documents:**
@@ -146,6 +489,44 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
      - `size="icon"` removed and FORBIDDEN
    - **Rule:** DO NOT modify, extend, or create alternatives
    - **Exports:** `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
+
+2. **NextLinkAdapter** - `src/EXTENSIONS/next/NextLinkAdapter.tsx`
+   - **Status:** ✅ **PROCESS_LOCK** (Re-confirmed)
+   - **Lock Date:** 2025-12-23 (Initial), 2025-12-25 (Re-confirmed)
+   - **Pipeline 18A Completion:** 2025-12-25 (Steps 0-12 complete, full pipeline re-execution)
+   - **Audit Report:** `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Extension component lock)
+   - **Component Type:** Extension-level Framework Adapter
+   - **Changes (2025-12-25 Pipeline):**
+     - Added 3 canonical Storybook stories (Matrix, States, SizesGallery)
+     - No component code changes required (already compliant)
+   - **Key Decisions:**
+     - FIX NOT REQUIRED (zero issues found in STEP 1-8)
+     - All accessibility semantics preserved (delegation to Foundation Link)
+     - Complete visual delegation to Foundation Link (token-compliant)
+     - Zero styling/token/variant logic in adapter (canonical delegation pattern)
+     - Tests comprehensive (20 test cases: 11 main + 9 accessibility)
+     - Storybook complete (12 stories: 9 existing + 3 canonical added)
+   - **Rule:** Future modifications require new Pipeline 18A execution
+   - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
+
+3. **Field** - `src/PRIMITIVES/Field/Field.tsx`
+   - **Status:** ✅ **COMPOSITION READY**
+   - **Completion Date:** 2025-12-27
+   - **Pipeline 18A Completion:** 2025-12-27 (Third Pass: Steps 0-12 complete, no changes required)
+   - **Audit Report:** `docs/reports/audit/FIELD_BASELINE_REPORT.md`
+   - **Component Type:** Composition Primitive (Form Composition)
+   - **Layer:** COMPOSITION (not Foundation)
+   - **Quality:** High
+   - **Key Decisions:**
+     - Classification: Composition primitive (not Foundation)
+     - A11Y model: Manual association pattern (htmlFor + id + ARIA attributes)
+     - Fixed spacing="sm" (delegated to Stack)
+     - FieldError uses wrapper span for destructive color (respects Foundation Enforcement)
+     - No auto-generated IDs (explicit, flexible, standard HTML pattern)
+   - **Test Coverage:** 32 tests (comprehensive)
+   - **Storybook Coverage:** 11 stories (all use cases demonstrated)
+   - **Exports:** `Field`, `FieldProps`, `FieldLabelProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`
 
 ### Extension Component Lock Rules
 
@@ -257,11 +638,29 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 ---
 
-## TUI_SELECT_FOUNDATION_LOCK - Select Foundation Finalization (Documentation-Only)
+## TUNG_SELECT_PIPELINE_18A - Select Component Pipeline 18A Refactor & Lock
 
 - **Status:** ✅ completed
+- **Date Completed:** 2025-12-25
+- **Summary:** Select component successfully completed Pipeline 18A (Steps 0-12) and is now **LOCKED** as Foundation component. All BLOCKER issues resolved: CVA migrated from `cva` to `tokenCVA` (BLOCKER-1), canonical Storybook stories added (Matrix, States, SizesGallery - BLOCKER-2). Code quality improved: default size resolution helper extracted (DRY principle). A11Y validated via Radix integration (WCAG 2.1 Level AA compliant).
+- **Key Accomplishments:**
+  - ✅ STEP 0-12 completed (full Pipeline 18A execution)
+  - ✅ CVA compliance: `cva` → `tokenCVA` migration with `satisfies Record<Type, string>` type constraints
+  - ✅ Canonical stories: Matrix (5 variants × 5 sizes), States (variants × sizes × 3 states), SizesGallery (sizes with content variations)
+  - ✅ Code quality: Extracted `resolveSelectSize()` helper (DRY improvement)
+  - ✅ A11Y: Validated Radix integration (keyboard navigation, ARIA, focus management, screen reader support)
+  - ✅ Lock propagation: FOUNDATION_LOCK.md, PROJECT_PROGRESS.md, SELECT_BASELINE_REPORT.md updated
+- **Audit Report:** `docs/reports/audit/SELECT_BASELINE_REPORT.md`
+- **Lock Files Updated:** FOUNDATION_LOCK.md v1.18, PROJECT_PROGRESS.md, EXTENSION_STATE.md
+- **Component Details:** Compound component (12 subcomponents: Root, Trigger, Value, Icon, Content, Viewport, Item, ItemText, ItemIndicator, Separator, Group, Label), token-driven styling (SELECT_TOKENS), Radix-powered behavior delegation
+- **Commit Hash:** (pending commit)
+
+## TUI_SELECT_FOUNDATION_LOCK - Select Foundation Finalization (Documentation-Only)
+
+- **Status:** ✅ completed (superseded by TUNG_SELECT_PIPELINE_18A)
 - **Date Updated:** 2025-12-17
 - **Summary:** Select officially marked as **FOUNDATION FINALIZED** (S1 + H1–H4 complete) with explicit UNLOCK-only change policy. Canonical docs synchronized (`FINAL_FOUNDATION_LOCK`, `EXTENSION_STATE`, `ARCHITECTURE_CONTEXT`).
+- **Note:** This task was superseded by TUNG_SELECT_PIPELINE_18A which completed canonical Pipeline 18A process and locked Select as Foundation component.
 - **Commit Hash:** N/A (not committed in this task)
 - **Notes:** Documentation-only change. No modifications to `src/components/select/*` permitted/required.
 
@@ -273,6 +672,131 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Notes:** TUNG is now the authoritative task formalization standard for AI-driven development in this project.
 
 ## Completed Tasks
+
+### Heading Component - Foundation Lock (Pipeline 18A)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-25
+- **Summary:** Successfully completed Pipeline 18A (STEP 0-12) for Heading component and added to Foundation Lock. Validated CVA structure (cva usage is COMPLIANT per Decision Matrix), documented programmatic compound variant generation exception with architectural justification, added Matrix story (6 levels × 4 weights grid) and TypographyHierarchy story for complete Storybook coverage, verified accessibility (semantic HTML h1-h6), and verified all 19 tests passing.
+- **Key Decisions:**
+  - ✅ CVA Decision Matrix: cva usage COMPLIANT (pure typography primitive)
+  - ✅ Programmatic generation exception documented (maintainability over strict Principle 2 compliance)
+  - ✅ Token compliance: ~95% (uses TEXT_TOKENS extensively)
+  - ✅ Foundation Enforcement verified (className/style excluded)
+  - ✅ Foundation Lock added to `docs/architecture/FOUNDATION_LOCK.md`
+- **Files Modified:**
+  - Enhanced: `src/PRIMITIVES/Heading/Heading.stories.tsx` (Matrix + TypographyHierarchy stories)
+  - Created: `docs/reports/audit/HEADING_BASELINE_REPORT.md`
+  - Updated: `docs/architecture/FOUNDATION_LOCK.md` (added Heading)
+- **Audit Report:** `docs/reports/audit/HEADING_BASELINE_REPORT.md`
+- **Notes:** Heading is Foundation Layer typography primitive. Depends on Text (already Foundation Lock). No code refactor required - exception documented for programmatic compound variant generation.
+
+---
+
+### Progress Component - Token Migration & Refactor (Pipeline 18A)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-12-25
+- **Summary:** Successfully migrated Progress component from ~20% to 100% token compliance via Pipeline 18A (STEP 0-12). Created PROGRESS_TOKENS, implemented tokenCVA structure, added size variants (sm, md, lg), created comprehensive tests (30+ test cases), enhanced Storybook with SizesGallery story and realistic examples (UploadProgress, MultiStepWizard), added ARIA attributes for full accessibility (WCAG 2.1 AA compliant), and exported from root barrel.
+- **Key Achievements:**
+  - ✅ Token compliance: 20% → 100% (5x improvement)
+  - ✅ PROGRESS_TOKENS created (`src/FOUNDATION/tokens/components/progress.ts`)
+  - ✅ CVA structure implemented (tokenCVA with size variants)
+  - ✅ Size variants added (sm, md, lg - GlobalSize compliant)
+  - ✅ Public API extended (size prop, explicit ProgressSize type)
+  - ✅ Tests created (30+ test cases: behavior, edge cases, accessibility, token compliance)
+  - ✅ Storybook enhanced (SizesGallery + 8 stories total)
+  - ✅ ARIA attributes added (role="progressbar", aria-valuenow, aria-valuemin, aria-valuemax)
+  - ✅ Root export added (`src/index.ts`)
+- **Files Created/Modified:**
+  - Created: `src/FOUNDATION/tokens/components/progress.ts`
+  - Refactored: `src/PRIMITIVES/Progress/Progress.tsx`
+  - Created: `src/PRIMITIVES/Progress/Progress.test.tsx`
+  - Enhanced: `src/PRIMITIVES/Progress/Progress.stories.tsx`
+  - Updated: `src/PRIMITIVES/Progress/index.ts`, `src/index.ts`
+- **Audit Report:** `docs/reports/audit/PROGRESS_BASELINE_REPORT.md`
+- **Roadmap:** `docs/workflows/tasks/COMPONENT_ROADMAP_PRIMITIVES.md` (Primitive 17 - marked ✅ Complete)
+- **Notes:** Progress is Extension layer component (not Foundation). No Foundation Lock required. All 12 blockers resolved. Component is production-ready.
+
+---
+
+### Slider Component (Pipeline 18A Complete)
+
+- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Re-run Complete, 2025-12-27)
+- **Date Completed:** 2025-12-25
+- **Re-run Date:** 2025-12-27 (Pipeline 18A re-run complete, all steps validated, lock consistency verified)
+- **Summary:** Slider Extension control component completed Pipeline 18A (Steps 0-12). Component is fully token-driven (SLIDER_TOKENS), uses tokenCVA, and is fully accessible with comprehensive test coverage.
+- **Component:** **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx`
+  - Single value numeric control via draggable thumb
+  - Radix UI Slider primitive (`@radix-ui/react-slider`)
+  - Sizes: `sm | md | lg` (Interactive Size Scale Authority)
+  - Variants: `primary | secondary | outline` (InteractiveVariant subset)
+  - Orientation: `horizontal | vertical` (full support)
+  - Marks/Labels: Full support with `SliderMark` interface
+  - Use cases: Volume control, price filters, numeric input, vertical sliders
+- **Pipeline 18A Completed (Steps 0-12):**
+  - ✅ STEP 0: Baseline snapshot created
+  - ✅ STEP 1-8: Analysis phase completed (structural review, role validation, pattern alignment, state model, token compliance, API review, type alignment, refactor decision)
+  - ✅ STEP 9: FIX phase completed (CVA migration cva→tokenCVA, SLIDER_TOKENS domain created, token migration, type constraints added)
+  - ✅ STEP 10: Tests & Storybook validation (comprehensive coverage verified)
+  - ✅ STEP 11: Accessibility audit (full compliance via Radix delegation)
+  - ✅ STEP 12: Final review & lock propagation
+- **Architectural Improvements:**
+  - ✅ **CVA Migration:** Migrated from `cva` to `tokenCVA` per Decision Matrix RULE 1
+  - ✅ **Token Domain:** Created SLIDER_TOKENS domain for all size-related styling
+  - ✅ **Type System:** Explicit union types exported, type constraints applied
+  - ✅ **Token Compliance:** All raw Tailwind classes replaced with SLIDER_TOKENS references
+- **Token Compliance:** ✅ COMPLIANT (SLIDER_TOKENS domain, no raw values)
+- **Accessibility:** ✅ FULL SUPPORT (ARIA roles, keyboard navigation, focus management, full Radix delegation)
+- **Testing:** ✅ COMPREHENSIVE (408 lines, multiple test suites covering behavior, edge cases, accessibility, variants, sizes, orientation, marks)
+- **Storybook:** ✅ COMPLETE (Matrix, States, SizesGallery stories + additional use case stories)
+- **Audit Report:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md`
+- **Reference:** Foundation Step Pipeline 18A (`docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md`)
+
+### Avatar & AvatarGroup Components (100% Complete, Pipeline 18A Complete)
+
+- **Status:** ✅ completed, ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+- **Date Completed:** 2025-12-25 (Component Creation), 2025-12-26 (Pipeline 18A)
+- **Summary:** Successfully created Avatar and AvatarGroup Extension primitive components following Component Creation Pipeline v1.2 (C0-C10). Completed Pipeline 18A (Steps 0-12) with full compliance to Authority Contracts. Both components are fully token-driven, accessible, and tested with comprehensive Storybook stories.
+- **Pipeline 18A:** ✅ Complete (Steps 0-12)
+  - **Key Changes:** CVA migrated (cva → tokenCVA), token file created (AVATAR_TOKENS), type constraints added (satisfies Record<Type, string>), SizesGallery story added
+  - **Audit Report:** `docs/reports/audit/AVATAR_BASELINE_REPORT.md`
+- **Components Created:**
+  - **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
+    - User profile image display with automatic fallback to initials or icon
+    - Radix UI Avatar primitive (`@radix-ui/react-avatar`)
+    - Sizes: `xs | sm | md | lg | xl | 2xl` (Non-interactive Size Scale)
+    - Shapes: `circle | square` (Border radius variants)
+    - Status indicators: `online | offline | busy | null` (Optional status dot)
+    - Features: Image loading with fallback, automatic initials extraction, status indicators
+    - Use cases: User profiles, comment sections, team member lists, chat interfaces, activity feeds
+  - **AvatarGroup** - `src/COMPOSITION/controls/Avatar/AvatarGroup.tsx`
+    - Multiple avatars with overlap effect and overflow indicator
+    - Spacing variants: `tight | normal | loose` (Token-based negative margin)
+    - Max count support with "+N" overflow indicator
+    - Use cases: Team displays, participant lists, user groups
+- **Pipeline Phases Completed:**
+  - ✅ C0: Authority & Lock Check (verified no conflicts)
+  - ✅ C1: Component Classification & Justification (Primitive - user representation)
+  - ✅ C2: Token Mapping Design (all visual props mapped to existing tokens)
+  - ✅ C3: API Design & Contract Definition (minimal and explicit API)
+  - ✅ C4: Component Scaffold Generation (via CLI tool)
+  - ✅ C5: Token-Based Implementation (Radix + CVA + token unions + initials extraction)
+  - ✅ C6: Implementation Refinement (JSDoc, code quality, helper extraction)
+  - ✅ C7: Storybook Stories (Default, Matrix, States, FallbackStates, AvatarGroup variants, Realistic examples)
+  - ✅ C8: Tests (60+ test cases: behavior, edge cases, A11Y, initials extraction, group logic)
+  - ✅ C9: Token Compliance Validation (NO raw values detected - 100% token compliance)
+  - ✅ C10: Export Registration & Lock Propagation
+- **Token Compliance:** ✅ PASSED (zero raw values, all token-based Tailwind classes)
+- **Accessibility:** ✅ FULL SUPPORT (alt text, ARIA labels for status, Radix accessibility)
+- **Testing:** ✅ COMPREHENSIVE (60+ test cases covering Avatar + AvatarGroup)
+- **Documentation:** ✅ COMPLETE (10+ Storybook stories including Matrix, States, realistic examples)
+- **Exports:** Added to `src/index.ts`, `docs/architecture/EXTENSION_STATE.md`
+- **Reference:** Component Creation Pipeline v1.2 (`docs/workflows/COMPONENT_CREATION_PIPELINE.md`)
+- **Roadmap:** Second component from Stage 1 (`docs/workflows/tasks/COMPONENT_ROADMAP.md`, `docs/workflows/tasks/COMPONENT_ROADMAP_STAGE_1.md`)
+- **Progress:** Stage 1 now 2/6 components complete (33%)
+
+---
 
 ### U1 - Introduce Theme System (100% Complete)
 
@@ -657,11 +1181,11 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 ## Foundation Layer Status
 
-### ✅ CLOSED - Foundation Architecture Phase Officially Closed
+### ⚠️ UNLOCKED - Foundation Layer Under Active Construction
 
-**Foundation Layer (F0-F9):** ✅ **CLOSED** (2025-12-16)
+**Foundation Layer (F0-F9):** ⚠️ **UNLOCKED (Active Construction)** (2025-12-26)
 
-**The Foundation architecture phase is OFFICIALLY CLOSED.** All Foundation Authorities are **COMPLETE**, **IMMUTABLE**, and **LOCKED**.
+**The Foundation layer is OFFICIALLY UNLOCKED for active construction.** All Foundation Authorities remain **COMPLETE**, **IMMUTABLE**, and **LOCKED**. Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 **Foundation Authorities Status:**
 - ✅ **Interaction Authority** - LOCKED
@@ -2355,7 +2879,17 @@ _No tasks in progress currently._
   - **PAGINATION_TOKENS:** Includes container, sizes, states, icon tokens
 - **Components Updated:**
   - ✅ Table component and all subcomponents (TableHead, TableCell, TableRow, TableHeader, TableExpandableContent, TableLoadingState, TableEmpty)
-  - ✅ DataList component and all subcomponents (DataListItem, DataListValue)
+  - ✅ DataList component and all subcomponents (DataListItem, DataListValue) — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+  - ✅ List component — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+    - **Location:** `src/PATTERNS/lists/List/List.tsx`
+    - **Layer:** PATTERNS (Extension layer)
+    - **Pipeline 18A:** All steps (0-12) completed successfully
+    - **Key Changes:** React.FC replaced with explicit function, LIST_TOKENS created, all raw Tailwind classes replaced with tokens, semantic HTML improved (ul/li), accessibility tests added
+    - **Token Compliance:** ✅ 100% (LIST_TOKENS file created, all raw values replaced)
+    - **Test Coverage:** Comprehensive (List.test.tsx - 9 test cases)
+    - **Storybook Coverage:** Compliant (3 existing stories + Accessibility story added)
+    - **Accessibility:** WCAG 2.1 Level A compliant (semantic HTML, role="list", proper structure)
+    - **Audit Report:** `docs/reports/audit/LIST_BASELINE_REPORT.md`
   - ✅ EmptyState component and all subcomponents (EmptyStateIcon, EmptyStateTitle, EmptyStateDescription)
   - ✅ Storybook stories updated with correct token references
 - **Files Created:**
@@ -2796,6 +3330,163 @@ Added cross-references to Interactive Size Scale Authority Contract in all relat
 - **Accessibility:** Ensures consistent hit-area sizing across interactive elements
 - **Developer Experience:** Reduces cognitive load with single, well-defined scale
 - **System Coherence:** Prevents scale drift and maintains design system consistency
+
+---
+
+## Component Creation Completions
+
+### Navigation Primitives (2025-12-26)
+
+- ✅ **NavRoot** - Foundation Step Pipeline 18A (Steps 0-12 complete, 2025-12-26)
+  - Component: NavRoot
+  - Type: Extension Layer Primitive - Navigation Boundary
+  - Location: `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx`
+  - Status: ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+  - Pipeline: Foundation Step Pipeline (Steps 0-12 complete, 2025-12-26)
+  - Audit Report: `docs/reports/audit/NAVROOT_BASELINE_REPORT.md`
+  - Features: Pure semantic navigation boundary, required aria-label, asChild support, zero logic
+  - Key Changes: Duplicate definition removed, exports consolidated, tests/stories updated, accessibility validated
+  - Token Compliance: ✅ 100% (no tokens used, appropriate for pure semantic wrapper)
+
+- ✅ **Navigation Primitives** - Foundation Step Pipeline 18A (Steps 0-12 complete, 2025-12-26)
+  - Components: NavList, NavItem, NavText (imported), NavSeparator (imported)
+  - Type: Extension Layer Primitive - Navigation Building Blocks
+  - Location: `src/COMPOSITION/navigation/primitives/Navigation.tsx`
+  - **NavItem Architecture Hardening (2025-12-26):** ✅ VALIDATED - Component fully complies with all architectural hardening rules (TUNG_NAVITEM_FINALIZATION). Pure structural primitive with zero navigation logic, zero dependencies on other navigation primitives, framework-agnostic, composition-only. Ready for architectural lock. See `docs/reports/audit/NAVITEM_ARCHITECTURE_HARDENING_VALIDATION.md` for complete validation report.
+  - Status: ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+  - Pipeline: Foundation Step Pipeline (Steps 0-12 complete, 2025-12-26)
+  - Audit Report: `docs/reports/audit/NAVIGATION_BASELINE_REPORT.md`
+  - Features: Stateless, semantic HTML wrappers, composition-friendly, ARIA support
+  - Token Compliance: ✅ 100% (NAVIGATION_TOKENS for optional styling)
+  - **Key Changes (2025-12-26):**
+    - NavSeparator duplication removed from Navigation.tsx, aligned with NavText pattern (standalone component)
+    - Multiple primitives in one file is intentional design (grouped primitives)
+    - Stateless semantic primitives pattern (no state, no interaction logic)
+    - No size/variant props (correct for structural primitives)
+    - Type system: Explicit types, no CVA-derived types
+  - **NavItem Update (2025-12-26):** Added `asChild` prop support via Radix Slot for composition pattern. NavItem is now a pure structural navigation list item with no logic, styling, or behavioral assumptions. Fully compliant with strict architectural requirements.
+  - **NavText Pipeline 18A Complete (2025-12-26):** NavText has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Component is now PROCESS LOCKED.
+
+- ✅ **NavSeparator** - Foundation Step Pipeline 18A (Steps 0-12 complete, 2025-12-26)
+  - Component: NavSeparator
+  - Status: ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+  - Lock Date: 2025-12-26
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Location: `src/COMPOSITION/navigation/NavSeparator/NavSeparator.tsx`
+  - Audit Report: `docs/reports/audit/NAVSEPARATOR_BASELINE_REPORT.md`
+  - Lock Type: PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+  - Migration Complete: NavSeparator has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Decisions:
+    - No CVA structure (correct - component has no size/variant props per Decision Matrix)
+    - Token compliance: All styling via NAVIGATION_TOKENS
+    - Stateless component (no internal state)
+    - Purely decorative element (aria-hidden="true" always)
+    - Supports asChild pattern via Radix Slot (canonical composition pattern)
+    - Common props extracted to reduce duplication (STEP 1 improvement)
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Type: Extension Layer Primitive - Navigation Visual
+  - Features: Purely visual separator, stateless, `aria-hidden="true"`, supports `asChild` pattern
+  - Token Compliance: ✅ 100% (NAVIGATION_TOKENS.states.default.text for styling)
+  - Key Characteristics: Zero logic, no semantics, decorative element only, default content "/"
+  - Exports: `NavSeparator`, `NavSeparatorProps`
+
+- ✅ **NavText** - Pipeline 18A Complete (2025-12-26)
+  - Component: NavText
+  - Type: Extension Layer Primitive - Navigation Text
+  - Location: `src/COMPOSITION/navigation/NavText/NavText.tsx`
+  - Status: ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+  - Lock Date: 2025-12-26
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Audit Report: `docs/reports/audit/NAVTEXT_BASELINE_REPORT.md`
+  - Lock Type: PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+  - Migration Complete: NavText has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Decisions:
+    - No CVA structure (correct - component has no size/variant props per Decision Matrix)
+    - Token compliance: All styling via NAVIGATION_TOKENS.states.default.text
+    - Non-interactive navigation text primitive (not focusable, no role overrides)
+    - Stateless component (only passes through aria-current attribute)
+    - Supports asChild pattern via Radix Slot for composition
+  - Features: Non-interactive navigation text, stateless, supports `aria-current="page"`, supports `asChild` pattern
+  - Token Compliance: ✅ 100% (NAVIGATION_TOKENS.states.default.text for styling)
+  - Key Characteristics: Zero logic, no routing, no state detection, pure render-only primitive, not focusable, no role overrides
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Exports: `NavText`, `NavTextProps`
+
+- ✅ **NavList** - Pipeline 18A Complete (2025-12-26)
+  - Component: NavList
+  - Type: Extension Layer Primitive - Navigation Structural
+  - Location: `src/COMPOSITION/navigation/nav-list/NavList.tsx`
+  - Audit Report: `docs/reports/audit/NAVLIST_BASELINE_REPORT.md`
+  - Status: ✅ PROCESS LOCKED
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-26)
+  - Features: Pure semantic list container, renders `<ol>` by default or `<ul>` when `as="ul"`, supports `asChild` pattern
+  - Token Compliance: ✅ 100% (No tokens required - pure structural component)
+  - Key Characteristics: Zero logic, no visual styling, no navigation behavior, pure structural wrapper, Foundation Enforcement compliant (no className/style props)
+  - Migration: Created as standalone component following strict architectural requirements (TUNG_NAVLIST_CREATION)
+
+- ✅ **CardBase** - Pipeline 18A Complete (2025-12-27)
+  - Component: CardBase
+  - Type: Extension Layer Primitive - Layout Composition
+  - Location: `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+
+- ✅ **HoverCard** - Pipeline 18A Complete (2025-12-27)
+  - Component: HoverCard
+  - Type: Extension Layer Pattern - Menus
+  - Location: `src/PATTERNS/menus/menus/hover-card/`
+  - Audit Report: `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
+  - Status: ✅ PROCESS LOCKED
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Features: Hover-triggered overlay card with delay support, compound component pattern (Root, Trigger, Content)
+  - Token Compliance: ✅ 100% (All styling via POPOVER_TOKENS through PopoverContent delegation)
+  - Key Characteristics: Delegates styling to PopoverContent, token-based delays, controlled/uncontrolled modes, comprehensive test coverage, canonical Storybook stories
+  - Key Decisions: Delegation pattern validated (HoverCardContent delegates to PopoverContent), explicit types (no CVA leakage), Storybook compliance (Matrix, States, SizesGallery, LongContent)
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Audit Report: `docs/reports/audit/CARDBASE_BASELINE_REPORT.md`
+  - Status: ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+  - Lock Date: 2025-12-27
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Lock Type: PROCESS_LOCK (Component is in PATTERNS layer, not Foundation lock)
+  - Migration Complete: CardBase has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Changes:
+    - CVA migrated (cva → tokenCVA per Decision Matrix RULE 1)
+    - Size scale aligned (default/compact → sm/md per GlobalSize scale)
+    - Variant dictionary aligned (default/featured → default/elevated per SurfaceVariant dictionary)
+    - Type constraints added (satisfies Record<CardBaseSize, string>, satisfies Record<CardBaseVariant, string>)
+    - Size mapping table created per SIZE_MAPPING_SPEC.md
+    - Tests created (comprehensive coverage)
+    - Storybook updated (Matrix, SizesGallery stories added per VARIANTS_SIZE_CANON.md)
+  - Breaking Changes: Size prop changed from `"default" | "compact"` to `"sm" | "md"`, variant prop changed from `"default" | "featured"` to `"default" | "elevated"`
+  - Component Role: Layout composition primitive for card structures. Provides pure layout wrappers (ImageWrapper, ContentWrapper, FooterWrapper) with no domain logic. All styling uses token-based values.
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Exports: `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
+  - Types: `CardBaseContentWrapperProps`, `CardBaseFooterWrapperProps`, `CardBaseImageWrapperProps`, `CardBaseProps`, `CardBaseSize` (`"sm" | "md"`), `CardBaseVariant` (`"default" | "elevated"`)
+
+- ✅ **NotificationCenter** - Pipeline 18A Complete (2025-12-27)
+  - Component: NotificationCenter
+  - Type: Extension Layer Composition - Domain Component
+  - Location: `src/DOMAIN/notifications/notifications/`
+  - Audit Report: `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md`
+  - Status: ✅ PROCESS LOCKED
+  - Lock Date: 2025-12-27
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Lock Type: PROCESS_LOCK (Component is in DOMAIN layer, not Foundation lock)
+  - Migration Complete: NotificationCenter has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Changes:
+    - Utility functions extracted (`NotificationCenter.utils.ts` for variant/channel conversion)
+    - Channel method pattern extracted (reduced duplication in useNotificationCenter)
+    - Unused `expandable` prop removed from Item
+    - Tests created (comprehensive coverage for all subcomponents)
+    - Storybook stories updated (SizesGallery, LongContent added per VARIANTS_SIZE_CANON.md)
+  - Key Decisions:
+    - Compound component pattern maintained (Provider, Panel, Trigger, List, Item, GroupHeader, DismissAll)
+    - No CVA structures (Decision Matrix RULE 2 applies - components without token-driven axes use direct token classes via NOTIFICATION_TOKENS)
+    - Panel width prop restricted to overlay size scale (`sm | md | lg` only, compliant with VARIANTS_SIZE_CANON overlay restriction)
+    - Token compliance: ✅ NOTIFICATION_TOKENS used throughout
+    - Accessibility: ✅ Full ARIA support, keyboard navigation, focus lock, screen reader support
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Exports: `NotificationCenter`, `NotificationCenterDismissAll`, `NotificationCenterGroupHeader`, `NotificationCenterItem`, `NotificationCenterList`, `NotificationCenterPanel`, `NotificationCenterProvider`, `NotificationCenterTrigger`
+  - Hooks: `useNotificationCenter`, `useNotificationCenterContext`
+  - Types: `GroupByFunction`, `NotificationChannel`, `NotificationContextType`, `NotificationData`, `NotificationOptions`, `NotificationVariant`, and all component prop types
 
 ---
 

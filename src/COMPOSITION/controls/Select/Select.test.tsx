@@ -69,12 +69,12 @@ describe("Select", () => {
     });
   });
 
-  describe("Variants", () => {
-    it("renders primary variant", () => {
-      const { container } = renderWithTheme(
+  describe("Invalid State", () => {
+    it("applies aria-invalid when invalid", () => {
+      renderWithTheme(
         <Select.Root>
-          <Select.Trigger variant="primary">
-            <Select.Value placeholder="Primary" />
+          <Select.Trigger aria-invalid>
+            <Select.Value placeholder="Invalid select" />
             <Select.Icon />
           </Select.Trigger>
           <Select.Content>
@@ -84,15 +84,15 @@ describe("Select", () => {
           </Select.Content>
         </Select.Root>,
       );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
+      const trigger = screen.getByRole("combobox");
+      expect(trigger).toHaveAttribute("aria-invalid", "true");
     });
 
-    it("renders secondary variant", () => {
-      const { container } = renderWithTheme(
+    it("does not apply aria-invalid when not invalid", () => {
+      renderWithTheme(
         <Select.Root>
-          <Select.Trigger variant="secondary">
-            <Select.Value placeholder="Secondary" />
+          <Select.Trigger>
+            <Select.Value placeholder="Valid select" />
             <Select.Icon />
           </Select.Trigger>
           <Select.Content>
@@ -102,164 +102,8 @@ describe("Select", () => {
           </Select.Content>
         </Select.Root>,
       );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders outline variant", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger variant="outline">
-            <Select.Value placeholder="Outline" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Item value="option1">Option 1</Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders ghost variant", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger variant="ghost">
-            <Select.Value placeholder="Ghost" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Item value="option1">Option 1</Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders destructive variant", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger variant="destructive">
-            <Select.Value placeholder="Destructive" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Item value="option1">Option 1</Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-  });
-
-  describe("Sizes", () => {
-    it("renders xs size", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger size="xs">
-            <Select.Value placeholder="Extra small" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content size="xs">
-            <Select.Viewport>
-              <Select.Item value="option1" size="xs">
-                Option 1
-              </Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders sm size", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger size="sm">
-            <Select.Value placeholder="Small" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content size="sm">
-            <Select.Viewport>
-              <Select.Item value="option1" size="sm">
-                Option 1
-              </Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders md size (default)", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger size="md">
-            <Select.Value placeholder="Medium" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content size="md">
-            <Select.Viewport>
-              <Select.Item value="option1" size="md">
-                Option 1
-              </Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders lg size", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger size="lg">
-            <Select.Value placeholder="Large" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content size="lg">
-            <Select.Viewport>
-              <Select.Item value="option1" size="lg">
-                Option 1
-              </Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
-    });
-
-    it("renders xl size", () => {
-      const { container } = renderWithTheme(
-        <Select.Root>
-          <Select.Trigger size="xl">
-            <Select.Value placeholder="Extra large" />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content size="xl">
-            <Select.Viewport>
-              <Select.Item value="option1" size="xl">
-                Option 1
-              </Select.Item>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Root>,
-      );
-      const trigger = container.querySelector("button");
-      expect(trigger).toBeInTheDocument();
+      const trigger = screen.getByRole("combobox");
+      expect(trigger).not.toHaveAttribute("aria-invalid", "true");
     });
   });
 
@@ -330,8 +174,539 @@ describe("Select", () => {
     });
   });
 
-  // Note: Keyboard navigation (Enter, Arrow keys, Escape) is handled by Radix Select.
-  // We do not test Radix behavior, only our component integration and token usage.
+  describe("Keyboard Navigation", () => {
+    it("opens select with Enter key", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+      await user.keyboard("{Enter}");
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+    });
+
+    it("opens select with Space key", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+      await user.keyboard(" ");
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+    });
+
+    it("closes select with Escape key", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      await user.keyboard("{Escape}");
+
+      await waitFor(() => {
+        expect(screen.queryByRole("option", { name: /option 1/i })).not.toBeInTheDocument();
+      });
+    });
+
+    it("navigates options with Arrow keys", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+              <Select.Item value="option3">Option 3</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+      await user.keyboard("{Enter}");
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      // Arrow down to next option
+      await user.keyboard("{ArrowDown}");
+      const option2 = screen.getByRole("option", { name: /option 2/i });
+      expect(option2).toHaveAttribute("data-highlighted");
+
+      // Arrow down again
+      await user.keyboard("{ArrowDown}");
+      const option3 = screen.getByRole("option", { name: /option 3/i });
+      expect(option3).toHaveAttribute("data-highlighted");
+
+      // Arrow up
+      await user.keyboard("{ArrowUp}");
+      expect(option2).toHaveAttribute("data-highlighted");
+    });
+
+    it("selects option with Enter key", async () => {
+      const user = userEventSetup();
+      const onValueChange = vi.fn();
+
+      renderWithTheme(
+        <Select.Root onValueChange={onValueChange}>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+      await user.keyboard("{Enter}");
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      await user.keyboard("{ArrowDown}");
+      await user.keyboard("{Enter}");
+
+      await waitFor(() => {
+        expect(onValueChange).toHaveBeenCalledWith("option2");
+      });
+    });
+
+    it("supports Tab key navigation", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <div>
+          <button>Previous</button>
+          <Select.Root>
+            <Select.Trigger>
+              <Select.Value placeholder="Select an option" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Viewport>
+                <Select.Item value="option1">Option 1</Select.Item>
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Root>
+          <button>Next</button>
+        </div>,
+      );
+
+      const previousButton = screen.getByRole("button", { name: /previous/i });
+      previousButton.focus();
+
+      await user.keyboard("{Tab}");
+      const trigger = screen.getByRole("combobox");
+      expect(trigger).toHaveFocus();
+
+      await user.keyboard("{Tab}");
+      const nextButton = screen.getByRole("button", { name: /next/i });
+      expect(nextButton).toHaveFocus();
+    });
+
+    it("supports type-ahead search", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="apple">Apple</Select.Item>
+              <Select.Item value="banana">Banana</Select.Item>
+              <Select.Item value="cherry">Cherry</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+      await user.keyboard("{Enter}");
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      // Type 'b' to jump to Banana
+      await user.keyboard("b");
+      const banana = screen.getByRole("option", { name: /banana/i });
+      expect(banana).toHaveAttribute("data-highlighted");
+    });
+  });
+
+  describe("Focus Management", () => {
+    it("traps focus when dropdown is open", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <div>
+          <button>Outside</button>
+          <Select.Root>
+            <Select.Trigger>
+              <Select.Value placeholder="Select an option" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Viewport>
+                <Select.Item value="option1">Option 1</Select.Item>
+                <Select.Item value="option2">Option 2</Select.Item>
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Root>
+        </div>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      const outsideButton = screen.getByRole("button", { name: /outside/i });
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      // Focus should be within dropdown, not on outside button
+      // Radix Select focuses the first option when opened, so focus should be on an option
+      const firstOption = screen.getByRole("option", { name: /option 1/i });
+      expect(firstOption).toHaveFocus();
+      expect(outsideButton).not.toHaveFocus();
+    });
+
+    it("restores focus to trigger when closed", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      await user.keyboard("{Escape}");
+
+      await waitFor(() => {
+        expect(screen.queryByRole("option", { name: /option 1/i })).not.toBeInTheDocument();
+        expect(trigger).toHaveFocus();
+      });
+    });
+
+    it("applies focus-visible styles on keyboard focus", () => {
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      trigger.focus();
+
+      // Focus-visible should be applied (Radix handles this, component provides styling)
+      expect(trigger).toHaveFocus();
+    });
+
+    it("does not apply focus styles on mouse click", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      // When dropdown opens, Radix Select focuses the first option, not the trigger
+      // This is expected behavior for keyboard navigation
+      const firstOption = screen.getByRole("option", { name: /option 1/i });
+      expect(firstOption).toHaveFocus();
+    });
+  });
+
+  describe("Selection Behavior", () => {
+    it("updates trigger value when option is selected", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      const option2 = screen.getByRole("option", { name: /option 2/i });
+      await user.click(option2);
+
+      await waitFor(() => {
+        expect(trigger).toHaveTextContent("Option 2");
+      });
+    });
+
+    it("shows selected indicator on selected item", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root defaultValue="option2">
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          const option2 = screen.getByRole("option", { name: /option 2/i });
+          // Selected item should have indicator (Radix ItemIndicator)
+          expect(option2).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+    });
+
+    it("supports controlled mode", async () => {
+      const user = userEventSetup();
+      const onValueChange = vi.fn();
+
+      const { rerender } = renderWithTheme(
+        <Select.Root value="option1" onValueChange={onValueChange}>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      expect(trigger).toHaveTextContent("Option 1");
+
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 2/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      const option2 = screen.getByRole("option", { name: /option 2/i });
+      await user.click(option2);
+
+      await waitFor(() => {
+        expect(onValueChange).toHaveBeenCalledWith("option2");
+      });
+
+      // Update value externally (controlled)
+      rerender(
+        <Select.Root value="option2" onValueChange={onValueChange}>
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      await waitFor(() => {
+        expect(trigger).toHaveTextContent("Option 2");
+      });
+    });
+
+    it("supports uncontrolled mode", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Select.Root defaultValue="option1">
+          <Select.Trigger>
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+              <Select.Item value="option2">Option 2</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+
+      const trigger = screen.getByRole("combobox");
+      expect(trigger).toHaveTextContent("Option 1");
+
+      await user.click(trigger);
+
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 2/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      const option2 = screen.getByRole("option", { name: /option 2/i });
+      await user.click(option2);
+
+      await waitFor(() => {
+        expect(trigger).toHaveTextContent("Option 2");
+      });
+    });
+  });
 
   describe("Disabled State", () => {
     it("does not open when disabled", async () => {

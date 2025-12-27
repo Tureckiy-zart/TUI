@@ -22,3 +22,173 @@ h6.text-gray-900 {
 .sb-main-centered .text-gray-900 {
   color: #111827 !important;
 }
+
+/* ============================================
+ * Text Foreground Colors - Stories Content
+ * ============================================
+ * Override pale text colors to ensure readability in Storybook stories
+ */
+
+/* Base text-foreground - very dark for maximum readability */
+.sb-story .text-foreground,
+[data-testid="story"] .text-foreground,
+.sb-main-padded .text-foreground,
+.sb-main-centered .text-foreground,
+.text-foreground:not([class*="sb-bar"]):not([class*="sidebar"]) {
+  color: #0a0a0a !important; /* Very dark, almost black */
+}
+
+/* Muted foreground - dark gray but still readable */
+.sb-story .text-muted-foreground,
+[data-testid="story"] .text-muted-foreground,
+.sb-main-padded .text-muted-foreground,
+.sb-main-centered .text-muted-foreground,
+.text-muted-foreground:not([class*="sb-bar"]):not([class*="sidebar"]) {
+  color: #525252 !important; /* Dark gray (gray-600) for good contrast */
+}
+
+/* Text foreground opacity variants - ensure they're dark enough */
+/* Use attribute selectors for Tailwind opacity classes (text-foreground/95, etc.) */
+.sb-story [class*="text-foreground/95"],
+[data-testid="story"] [class*="text-foreground/95"],
+.sb-main-padded [class*="text-foreground/95"],
+.sb-main-centered [class*="text-foreground/95"] {
+  color: rgba(10, 10, 10, 0.95) !important; /* 95% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/90"],
+[data-testid="story"] [class*="text-foreground/90"],
+.sb-main-padded [class*="text-foreground/90"],
+.sb-main-centered [class*="text-foreground/90"] {
+  color: rgba(10, 10, 10, 0.9) !important; /* 90% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/85"],
+[data-testid="story"] [class*="text-foreground/85"],
+.sb-main-padded [class*="text-foreground/85"],
+.sb-main-centered [class*="text-foreground/85"] {
+  color: rgba(10, 10, 10, 0.85) !important; /* 85% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/80"],
+[data-testid="story"] [class*="text-foreground/80"],
+.sb-main-padded [class*="text-foreground/80"],
+.sb-main-centered [class*="text-foreground/80"] {
+  color: rgba(10, 10, 10, 0.8) !important; /* 80% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/75"],
+[data-testid="story"] [class*="text-foreground/75"],
+.sb-main-padded [class*="text-foreground/75"],
+.sb-main-centered [class*="text-foreground/75"] {
+  color: rgba(10, 10, 10, 0.75) !important; /* 75% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/70"],
+[data-testid="story"] [class*="text-foreground/70"],
+.sb-main-padded [class*="text-foreground/70"],
+.sb-main-centered [class*="text-foreground/70"] {
+  color: rgba(10, 10, 10, 0.7) !important; /* 70% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/60"],
+[data-testid="story"] [class*="text-foreground/60"],
+.sb-main-padded [class*="text-foreground/60"],
+.sb-main-centered [class*="text-foreground/60"] {
+  color: rgba(10, 10, 10, 0.6) !important; /* 60% opacity on dark base */
+}
+
+.sb-story [class*="text-foreground/50"],
+[data-testid="story"] [class*="text-foreground/50"],
+.sb-main-padded [class*="text-foreground/50"],
+.sb-main-centered [class*="text-foreground/50"] {
+  color: rgba(10, 10, 10, 0.5) !important; /* 50% opacity on dark base */
+}
+
+/* ============================================
+ * Storybook Manager UI - Sidebar, Toolbar, Panels
+ * ============================================
+ * Override pale text colors in Storybook's UI elements
+ */
+
+/* Sidebar text - ensure readability */
+.sidebar-container,
+[role="complementary"],
+.os-host,
+[class*="sidebar"] {
+  color: #1a1a1a !important; /* Dark text for sidebar */
+}
+
+.sidebar-container *,
+[role="complementary"] *,
+[class*="sidebar"] * {
+  color: inherit;
+}
+
+/* Sidebar links and interactive elements */
+.sidebar-container a,
+[role="complementary"] a,
+[class*="sidebar"] a,
+[class*="sidebar"] button {
+  color: #1a1a1a !important;
+}
+
+/* Toolbar text */
+.sb-bar,
+[class*="toolbar"],
+[class*="Toolbar"] {
+  color: #1a1a1a !important;
+}
+
+.sb-bar *,
+[class*="toolbar"] *,
+[class*="Toolbar"] * {
+  color: inherit;
+}
+
+/* Panel controls text */
+[class*="panel"],
+[class*="Panel"],
+.os-host-text {
+  color: #1a1a1a !important;
+}
+
+[class*="panel"] *,
+[class*="Panel"] * {
+  color: inherit;
+}
+
+/* Storybook navigation and menu items */
+[class*="sidebar"] [class*="item"],
+[class*="sidebar"] [class*="Item"] {
+  color: #1a1a1a !important;
+}
+
+/* Storybook docs/controls panels */
+.docs-story,
+.sbdocs,
+[class*="docs"] {
+  color: #0a0a0a !important;
+}
+
+.docs-story *,
+.sbdocs *,
+[class*="docs"] * {
+  color: inherit;
+}
+
+/* Ensure headings in Storybook UI are readable */
+.sidebar-container h1,
+.sidebar-container h2,
+.sidebar-container h3,
+.sidebar-container h4,
+.sidebar-container h5,
+.sidebar-container h6,
+.sb-bar h1,
+.sb-bar h2,
+.sb-bar h3,
+.sb-bar h4,
+.sb-bar h5,
+.sb-bar h6 {
+  color: #0a0a0a !important;
+}

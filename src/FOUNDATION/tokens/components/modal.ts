@@ -18,7 +18,7 @@
 export const MODAL_TOKENS = {
   /**
    * Modal size tokens
-   * Supports sm, md, lg, xl, fullscreen sizes
+   * Supports sm, md, lg sizes only (overlay restriction per VARIANTS_SIZE_CANON)
    */
   size: {
     sm: {
@@ -41,20 +41,6 @@ export const MODAL_TOKENS = {
       padding: "p-xl", // 32px (2rem)
       radius: "rounded-xl", // 12px (0.75rem)
       shadow: "shadow-2xl",
-    } as const,
-    xl: {
-      width: "w-full max-w-xl", // 576px (36rem)
-      height: "h-auto max-h-[90vh]",
-      padding: "p-xl", // 32px (2rem)
-      radius: "rounded-xl", // 12px (0.75rem)
-      shadow: "shadow-2xl",
-    } as const,
-    fullscreen: {
-      width: "w-full h-full max-w-full max-h-full", // Full viewport
-      height: "h-full",
-      padding: "p-xl", // 32px (2rem)
-      radius: "rounded-none", // No radius for fullscreen
-      shadow: "shadow-none", // No shadow for fullscreen
     } as const,
   } as const,
 

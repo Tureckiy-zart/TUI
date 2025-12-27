@@ -1,12 +1,5 @@
 "use client";
 
-import type {
-  SelectSizeToken,
-  SelectStateToken,
-  SelectVariantToken,
-  SelectWidthToken,
-} from "@/FOUNDATION/tokens/types";
-
 // Re-export types from Select.tsx for convenience
 export type {
   SelectContentProps,
@@ -23,22 +16,6 @@ export type {
   SelectViewportProps,
 } from "./Select";
 
-/**
- * Select size token type
- */
-export type SelectSize = SelectSizeToken;
-
-/**
- * Select variant token type
- */
-export type SelectVariant = SelectVariantToken;
-
-/**
- * Select width token type
- */
-export type SelectWidth = SelectWidthToken;
-
-/**
- * Select state token type
- */
-export type SelectState = SelectStateToken;
+// Note: SelectSize, SelectVariant, SelectWidth, SelectState types removed
+// Select now uses Input tokens and defaults (md size, outline variant, full width)
+// Invalid state is handled via aria-invalid prop

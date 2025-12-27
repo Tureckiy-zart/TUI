@@ -7,7 +7,7 @@ import * as React from "react";
 import { ContextMenu } from "./ContextMenu";
 
 const meta: Meta<typeof ContextMenu.Root> = {
-  title: "UI/Foundation/ContextMenu",
+  title: "Foundation Locked/Composition/Overlays/ContextMenu",
   component: ContextMenu.Root,
   parameters: {
     layout: "centered",
@@ -402,6 +402,238 @@ export const Sizes: Story = {
       description: {
         story:
           "All available size variants for ContextMenu. Size affects both content padding and item sizing. Items automatically inherit size from their parent Content, so you only need to set `size` on `Content`. You can still override individual items if needed.",
+      },
+    },
+  },
+};
+
+/**
+ * Matrix: All tones × all sizes grid
+ *
+ * **Canonical Story (Required per VARIANTS_SIZE_CANON.md)**
+ *
+ * This story demonstrates all combinations of tone variants (neutral, primary, destructive)
+ * and size variants (sm, md, lg) in a systematic grid. Required for components with BOTH
+ * size AND tone props.
+ *
+ * **Purpose:** Verify visual consistency across all tone/size combinations.
+ */
+export const Matrix: Story = {
+  render: () => {
+    const tones: Array<"neutral" | "primary" | "destructive"> = [
+      "neutral",
+      "primary",
+      "destructive",
+    ];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="flex flex-col gap-8 p-8">
+        <h2 className="text-lg font-semibold">Matrix: All Tones × All Sizes</h2>
+
+        {tones.map((tone) => (
+          <div key={tone} className="flex flex-col gap-4">
+            <h3 className="text-base font-semibold capitalize">{tone} Tone</h3>
+            <div className="flex flex-wrap gap-6">
+              {sizes.map((size) => (
+                <div key={`${tone}-${size}`} className="flex flex-col gap-2">
+                  <p className="text-xs text-muted-foreground">size={size}</p>
+                  <div className="flex h-[150px] items-center justify-center rounded-lg border border-dashed p-4">
+                    <ContextMenu.Root>
+                      <ContextMenu.Trigger className="rounded-md border px-3 py-1.5 text-sm">
+                        Right-click
+                      </ContextMenu.Trigger>
+                      <ContextMenu.Content size={size}>
+                        <ContextMenu.Item tone={tone}>Copy</ContextMenu.Item>
+                        <ContextMenu.Item tone={tone}>Edit</ContextMenu.Item>
+                        <ContextMenu.Item tone={tone}>Share</ContextMenu.Item>
+                      </ContextMenu.Content>
+                    </ContextMenu.Root>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Canonical Matrix Story:** Demonstrates all tone variants (neutral, primary, destructive) × all size variants (sm, md, lg). This story is required per VARIANTS_SIZE_CANON.md for components with both size and tone props. Use this to verify visual consistency across all combinations.",
+      },
+    },
+  },
+};
+
+/**
+ * States: All tones × all sizes × all states
+ *
+ * **Canonical Story (Required per VARIANTS_SIZE_CANON.md)**
+ *
+ * This story demonstrates all combinations of tone variants, size variants, and interaction states
+ * (default, disabled). Required for interactive components.
+ *
+ * **Purpose:** Verify state styling consistency (hover, focus-visible, disabled) across all variants.
+ */
+export const States: Story = {
+  render: () => {
+    const tones: Array<"neutral" | "primary" | "destructive"> = [
+      "neutral",
+      "primary",
+      "destructive",
+    ];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="flex flex-col gap-8 p-8">
+        <h2 className="text-lg font-semibold">States: All Tones × All Sizes × All States</h2>
+
+        {tones.map((tone) => (
+          <div key={tone} className="flex flex-col gap-4">
+            <h3 className="text-base font-semibold capitalize">{tone} Tone</h3>
+            <div className="flex flex-wrap gap-6">
+              {sizes.map((size) => (
+                <div key={`${tone}-${size}`} className="flex flex-col gap-2">
+                  <p className="text-xs text-muted-foreground">size={size}</p>
+                  <div className="flex h-[200px] items-center justify-center rounded-lg border border-dashed p-4">
+                    <ContextMenu.Root>
+                      <ContextMenu.Trigger className="rounded-md border px-3 py-1.5 text-sm">
+                        Right-click
+                      </ContextMenu.Trigger>
+                      <ContextMenu.Content size={size}>
+                        <ContextMenu.Item tone={tone}>Default State</ContextMenu.Item>
+                        <ContextMenu.Item tone={tone} disabled>
+                          Disabled State
+                        </ContextMenu.Item>
+                        <ContextMenu.Separator />
+                        <ContextMenu.Label>Hover & Focus</ContextMenu.Label>
+                        <ContextMenu.Item tone={tone}>Hover over me</ContextMenu.Item>
+                        <ContextMenu.Item tone={tone}>Focus me (Tab)</ContextMenu.Item>
+                      </ContextMenu.Content>
+                    </ContextMenu.Root>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Canonical States Story:** Demonstrates all tone variants × all size variants × all interaction states (default, disabled, hover, focus-visible). This story is required per VARIANTS_SIZE_CANON.md for interactive components. Hover and focus states are CSS-driven (no JS state). Use this to verify state styling consistency.",
+      },
+    },
+  },
+};
+
+/**
+ * LongContent: Overlay padding/maxWidth validation
+ *
+ * **Canonical Story (Required per VARIANTS_SIZE_CANON.md)**
+ *
+ * This story validates padding and maxWidth token behavior with long text content.
+ * Required for overlay components (Popover, Tooltip, ContextMenu, etc.).
+ *
+ * **Purpose:** Verify overlay doesn't overflow viewport, padding tokens work correctly,
+ * and long content wraps appropriately.
+ */
+export const LongContent: Story = {
+  render: () => {
+    return (
+      <div className="flex flex-col gap-8 p-8">
+        <h2 className="text-lg font-semibold">LongContent: Padding & MaxWidth Validation</h2>
+
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-base font-semibold">Long Item Text (Wrapping Test)</h3>
+            <div className="flex h-[250px] items-center justify-center rounded-lg border border-dashed p-8">
+              <ContextMenu.Root>
+                <ContextMenu.Trigger className="rounded-md border px-4 py-2">
+                  Right-click for long content menu
+                </ContextMenu.Trigger>
+                <ContextMenu.Content>
+                  <ContextMenu.Item>
+                    This is a very long menu item text that should wrap appropriately within the
+                    context menu without breaking the layout or overflowing the viewport boundaries
+                  </ContextMenu.Item>
+                  <ContextMenu.Item>
+                    Another extremely long item that tests the padding and maxWidth token behavior
+                    to ensure proper text wrapping and visual consistency
+                  </ContextMenu.Item>
+                  <ContextMenu.Separator />
+                  <ContextMenu.Item tone="destructive">
+                    Delete this item with an unnecessarily verbose and descriptive label that goes
+                    on and on
+                  </ContextMenu.Item>
+                </ContextMenu.Content>
+              </ContextMenu.Root>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <h3 className="text-base font-semibold">Many Items (Scrolling Test)</h3>
+            <div className="flex h-[250px] items-center justify-center rounded-lg border border-dashed p-8">
+              <ContextMenu.Root>
+                <ContextMenu.Trigger className="rounded-md border px-4 py-2">
+                  Right-click for many items menu
+                </ContextMenu.Trigger>
+                <ContextMenu.Content>
+                  <ContextMenu.Label>Actions</ContextMenu.Label>
+                  <ContextMenu.Item>Copy</ContextMenu.Item>
+                  <ContextMenu.Item>Cut</ContextMenu.Item>
+                  <ContextMenu.Item>Paste</ContextMenu.Item>
+                  <ContextMenu.Separator />
+                  <ContextMenu.Label>Edit</ContextMenu.Label>
+                  <ContextMenu.Item>Undo</ContextMenu.Item>
+                  <ContextMenu.Item>Redo</ContextMenu.Item>
+                  <ContextMenu.Separator />
+                  <ContextMenu.Label>File</ContextMenu.Label>
+                  <ContextMenu.Item>New File</ContextMenu.Item>
+                  <ContextMenu.Item>Open File</ContextMenu.Item>
+                  <ContextMenu.Item>Save File</ContextMenu.Item>
+                  <ContextMenu.Item>Save As...</ContextMenu.Item>
+                  <ContextMenu.Separator />
+                  <ContextMenu.Label>Danger Zone</ContextMenu.Label>
+                  <ContextMenu.Item tone="destructive">Delete File</ContextMenu.Item>
+                  <ContextMenu.Item tone="destructive">Remove Project</ContextMenu.Item>
+                </ContextMenu.Content>
+              </ContextMenu.Root>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <h3 className="text-base font-semibold">Custom Width Token Test</h3>
+            <div className="flex h-[200px] items-center justify-center rounded-lg border border-dashed p-8">
+              <ContextMenu.Root>
+                <ContextMenu.Trigger className="rounded-md border px-4 py-2">
+                  Right-click (width=xl)
+                </ContextMenu.Trigger>
+                <ContextMenu.Content width="xl">
+                  <ContextMenu.Item>
+                    Extra large width menu to test custom width token behavior with longer content
+                  </ContextMenu.Item>
+                  <ContextMenu.Item>Copy</ContextMenu.Item>
+                  <ContextMenu.Item>Paste</ContextMenu.Item>
+                </ContextMenu.Content>
+              </ContextMenu.Root>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Canonical LongContent Story:** Validates padding and maxWidth token behavior with long text content. This story is required per VARIANTS_SIZE_CANON.md for overlay components. Tests: (1) Long item text wrapping, (2) Many items scrolling, (3) Custom width tokens. Use this to verify overlay doesn't overflow viewport and padding tokens work correctly.",
       },
     },
   },

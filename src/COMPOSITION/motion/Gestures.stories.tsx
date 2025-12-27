@@ -13,7 +13,7 @@ import { useSwipe } from "@/FOUNDATION/theme/motion/gestures";
 import { Button } from "@/PRIMITIVES/Button";
 
 const meta: Meta = {
-  title: "Components/Motion/Gestures",
+  title: "Foundation Locked/Composition/Motion/Gestures",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -173,7 +173,7 @@ export const NotificationPanelSwipe: Story = {
         </div>
         <div
           {...handlers}
-          className="tm-motion-fade-slide-right fixed right-0 top-0 z-50 h-full w-80 border-l bg-card shadow-xl"
+          className="fixed right-0 top-0 z-50 h-full w-80 border-l bg-card shadow-xl tm-motion-fade-slide-right"
         >
           <div className="border-b p-4">
             <div className="flex items-center justify-between">

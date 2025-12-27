@@ -94,12 +94,19 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
     // Determine variant: use explicit variant prop or derive from featured
     const cardVariant = variant || (featured ? "featured" : "default");
 
+    // Map ArtistCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
+    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+
+    // Map ArtistCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
+    const cardBaseVariant: "default" | "elevated" =
+      cardVariant === "featured" ? "elevated" : "default";
+
     return (
       <Box {...animationProps}>
         <CardBase
           ref={ref}
-          size={size}
-          variant={cardVariant}
+          size={cardBaseSize}
+          variant={cardBaseVariant}
           className={cn(artistCardVariants({ size, variant }), className)}
           {...props}
         >
@@ -114,7 +121,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
           {/* Image Section */}
           {showImage && (
-            <CardBaseImageWrapper size={size}>
+            <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn(
                   ARTIST_TOKENS.image.container.layout,
@@ -149,7 +156,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
           )}
 
           {/* Content Section */}
-          <CardBaseContentWrapper size={size}>
+          <CardBaseContentWrapper size={cardBaseSize}>
             {/* Title */}
             <Heading level={3}>
               {href ? (
@@ -163,14 +170,14 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" muted>
+              <Text size="sm" tone="muted">
                 {description}
               </Text>
             )}
 
             {/* Genres */}
             {genres && (
-              <Text size="xs" muted>
+              <Text size="xs" tone="muted">
                 {genres}
               </Text>
             )}
@@ -187,7 +194,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                       className={artistCardMetadataIconVariants({ size })}
                       aria-hidden="true"
                     />
-                    <Text size="xs" muted>
+                    <Text size="xs" tone="muted">
                       {followers.toLocaleString()} {followersLabel}
                     </Text>
                   </div>
@@ -201,7 +208,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                       className={artistCardMetadataIconVariants({ size })}
                       aria-hidden="true"
                     />
-                    <Text size="xs" muted>
+                    <Text size="xs" tone="muted">
                       {plays.toLocaleString()} {playsLabel}
                     </Text>
                   </div>
@@ -212,7 +219,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
           {/* Footer Section - Currently empty but structure in place for future extensions */}
           {(followers !== undefined || plays !== undefined) && (
-            <CardBaseFooterWrapper size={size}>
+            <CardBaseFooterWrapper size={cardBaseSize}>
               <div className={artistCardFooterBorderVariants({ size })}>
                 {/* Footer content can be added here if needed in the future */}
               </div>

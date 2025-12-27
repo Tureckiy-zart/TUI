@@ -10,8 +10,9 @@
  *                     (use Switch/Checkbox components). Button's semantic role is immutable and defines its
  *                     behavioral contract as a Foundation primitive.
  *
- * @status LOCKED (2025-12-15)
+ * @status FINAL LOCK (2025-12-25)
  * @rule DO NOT modify, extend, or create alternatives
+ * @pipeline Pipeline 18A (Steps 0-12 complete)
  * @audits
  *   - Inventory: docs/reports/TUI_BUTTON_INVENTORY_REPORT.md
  *   - Token Domain: docs/reports/TUI_BUTTON_TOKEN_AUDIT.md
@@ -24,6 +25,60 @@ import * as React from "react";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { BUTTON_TOKENS } from "@/FOUNDATION/tokens/components/button";
+
+/**
+ * Icon wrapper CSS classes
+ * Shared constant to eliminate duplication across icon rendering
+ */
+const ICON_WRAPPER_CLASS =
+  "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current";
+
+/**
+ * Renders an icon with consistent wrapper styling
+ * Internal helper to eliminate duplication across icon rendering paths
+ */
+function renderIcon(icon: React.ReactNode): React.ReactElement | null {
+  if (!icon) return null;
+  return <span className={ICON_WRAPPER_CLASS}>{icon}</span>;
+}
+
+/**
+ * Shared variant classes for both regular and icon-only buttons
+ * Extracted to eliminate duplication between buttonVariants and buttonIconOnlyVariants
+ */
+const getVariantClasses = (variant: keyof typeof BUTTON_TOKENS.variant): string => {
+  if (variant === "primary") {
+    const tokens = BUTTON_TOKENS.variant.primary;
+    return `${tokens.background} ${tokens.text} ${BUTTON_TOKENS.shadow.primary} ${tokens.hover} ${tokens.active} ${tokens.focus} ${tokens.disabled.background} ${tokens.disabled.text}`;
+  }
+
+  if (variant === "secondary") {
+    const tokens = BUTTON_TOKENS.variant.secondary;
+    return `${tokens.background} ${tokens.text} ${BUTTON_TOKENS.shadow.default} ${tokens.hover} ${tokens.active} ${tokens.disabled.background} ${tokens.disabled.text}`;
+  }
+
+  if (variant === "accent") {
+    const tokens = BUTTON_TOKENS.variant.accent;
+    return `${tokens.background} ${tokens.text} ${BUTTON_TOKENS.shadow.default} ${tokens.hover} ${tokens.active} ${tokens.disabled.background} ${tokens.disabled.text}`;
+  }
+
+  if (variant === "destructive") {
+    const tokens = BUTTON_TOKENS.variant.destructive;
+    return `${tokens.background} ${tokens.text} ${BUTTON_TOKENS.shadow.default} ${tokens.hover} ${tokens.active} ${tokens.disabled.background} ${tokens.disabled.text}`;
+  }
+
+  if (variant === "outline") {
+    const tokens = BUTTON_TOKENS.variant.outline;
+    return `${tokens.border} ${tokens.background} ${tokens.text} ${BUTTON_TOKENS.shadow.default} ${tokens.hover.background} ${tokens.hover.text} ${tokens.hover.border} ${tokens.active.background} ${tokens.active.text} ${tokens.active.border} ${tokens.disabled.background} ${tokens.disabled.text} ${tokens.disabled.border}`;
+  }
+
+  if (variant === "ghost") {
+    const tokens = BUTTON_TOKENS.variant.ghost;
+    return `${tokens.background} ${tokens.text} ${tokens.hover.background} ${tokens.hover.text} ${tokens.active.background} ${tokens.active.text} ${tokens.disabled.background} ${tokens.disabled.text}`;
+  }
+
+  return "";
+};
 
 /**
  * Button CVA Variants
@@ -106,12 +161,12 @@ const buttonVariants = tokenCVA({
   base: `inline-flex items-center justify-center whitespace-nowrap ${BUTTON_TOKENS.radius} font-medium ${BUTTON_TOKENS.transition.colors} ${BUTTON_TOKENS.state.focus.outline} ${BUTTON_TOKENS.state.focus.ring} ${BUTTON_TOKENS.state.disabled.cursor} ${BUTTON_TOKENS.state.disabled.pointerEvents} [&_svg]:pointer-events-none [&_svg]:shrink-0`,
   variants: {
     variant: {
-      primary: `${BUTTON_TOKENS.variant.primary.background} ${BUTTON_TOKENS.variant.primary.text} ${BUTTON_TOKENS.shadow.primary} ${BUTTON_TOKENS.variant.primary.hover} ${BUTTON_TOKENS.variant.primary.active} ${BUTTON_TOKENS.variant.primary.focus} ${BUTTON_TOKENS.variant.primary.disabled.background} ${BUTTON_TOKENS.variant.primary.disabled.text}`,
-      secondary: `${BUTTON_TOKENS.variant.secondary.background} ${BUTTON_TOKENS.variant.secondary.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.secondary.hover} ${BUTTON_TOKENS.variant.secondary.active} ${BUTTON_TOKENS.variant.secondary.disabled.background} ${BUTTON_TOKENS.variant.secondary.disabled.text}`,
-      accent: `${BUTTON_TOKENS.variant.accent.background} ${BUTTON_TOKENS.variant.accent.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.accent.hover} ${BUTTON_TOKENS.variant.accent.active} ${BUTTON_TOKENS.variant.accent.disabled.background} ${BUTTON_TOKENS.variant.accent.disabled.text}`,
-      outline: `${BUTTON_TOKENS.variant.outline.border} ${BUTTON_TOKENS.variant.outline.background} ${BUTTON_TOKENS.variant.outline.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.outline.hover.background} ${BUTTON_TOKENS.variant.outline.hover.text} ${BUTTON_TOKENS.variant.outline.hover.border} ${BUTTON_TOKENS.variant.outline.active.background} ${BUTTON_TOKENS.variant.outline.active.text} ${BUTTON_TOKENS.variant.outline.active.border} ${BUTTON_TOKENS.variant.outline.disabled.background} ${BUTTON_TOKENS.variant.outline.disabled.text} ${BUTTON_TOKENS.variant.outline.disabled.border}`,
-      ghost: `${BUTTON_TOKENS.variant.ghost.background} ${BUTTON_TOKENS.variant.ghost.text} ${BUTTON_TOKENS.variant.ghost.hover.background} ${BUTTON_TOKENS.variant.ghost.hover.text} ${BUTTON_TOKENS.variant.ghost.active.background} ${BUTTON_TOKENS.variant.ghost.active.text} ${BUTTON_TOKENS.variant.ghost.disabled.background} ${BUTTON_TOKENS.variant.ghost.disabled.text}`,
-      destructive: `${BUTTON_TOKENS.variant.destructive.background} ${BUTTON_TOKENS.variant.destructive.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.destructive.hover} ${BUTTON_TOKENS.variant.destructive.active} ${BUTTON_TOKENS.variant.destructive.disabled.background} ${BUTTON_TOKENS.variant.destructive.disabled.text}`,
+      primary: getVariantClasses("primary"),
+      secondary: getVariantClasses("secondary"),
+      accent: getVariantClasses("accent"),
+      outline: getVariantClasses("outline"),
+      ghost: getVariantClasses("ghost"),
+      destructive: getVariantClasses("destructive"),
     },
     size: {
       sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.padding.vertical.sm} ${BUTTON_TOKENS.fontSize.sm} ${BUTTON_TOKENS.gap.sm} ${BUTTON_TOKENS.iconSize.sm}`,
@@ -140,12 +195,12 @@ const buttonIconOnlyVariants = tokenCVA({
   base: `inline-flex items-center justify-center ${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.transition.colors} ${BUTTON_TOKENS.state.focus.outline} ${BUTTON_TOKENS.state.focus.ring} ${BUTTON_TOKENS.state.disabled.cursor} ${BUTTON_TOKENS.state.disabled.pointerEvents} [&_svg]:pointer-events-none [&_svg]:shrink-0`,
   variants: {
     variant: {
-      primary: `${BUTTON_TOKENS.variant.primary.background} ${BUTTON_TOKENS.variant.primary.text} ${BUTTON_TOKENS.shadow.primary} ${BUTTON_TOKENS.variant.primary.hover} ${BUTTON_TOKENS.variant.primary.active} ${BUTTON_TOKENS.variant.primary.focus} ${BUTTON_TOKENS.variant.primary.disabled.background} ${BUTTON_TOKENS.variant.primary.disabled.text}`,
-      secondary: `${BUTTON_TOKENS.variant.secondary.background} ${BUTTON_TOKENS.variant.secondary.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.secondary.hover} ${BUTTON_TOKENS.variant.secondary.active} ${BUTTON_TOKENS.variant.secondary.disabled.background} ${BUTTON_TOKENS.variant.secondary.disabled.text}`,
-      accent: `${BUTTON_TOKENS.variant.accent.background} ${BUTTON_TOKENS.variant.accent.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.accent.hover} ${BUTTON_TOKENS.variant.accent.active} ${BUTTON_TOKENS.variant.accent.disabled.background} ${BUTTON_TOKENS.variant.accent.disabled.text}`,
-      outline: `${BUTTON_TOKENS.variant.outline.border} ${BUTTON_TOKENS.variant.outline.background} ${BUTTON_TOKENS.variant.outline.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.outline.hover.background} ${BUTTON_TOKENS.variant.outline.hover.text} ${BUTTON_TOKENS.variant.outline.hover.border} ${BUTTON_TOKENS.variant.outline.active.background} ${BUTTON_TOKENS.variant.outline.active.text} ${BUTTON_TOKENS.variant.outline.active.border} ${BUTTON_TOKENS.variant.outline.disabled.background} ${BUTTON_TOKENS.variant.outline.disabled.text} ${BUTTON_TOKENS.variant.outline.disabled.border}`,
-      ghost: `${BUTTON_TOKENS.variant.ghost.background} ${BUTTON_TOKENS.variant.ghost.text} ${BUTTON_TOKENS.variant.ghost.hover.background} ${BUTTON_TOKENS.variant.ghost.hover.text} ${BUTTON_TOKENS.variant.ghost.active.background} ${BUTTON_TOKENS.variant.ghost.active.text} ${BUTTON_TOKENS.variant.ghost.disabled.background} ${BUTTON_TOKENS.variant.ghost.disabled.text}`,
-      destructive: `${BUTTON_TOKENS.variant.destructive.background} ${BUTTON_TOKENS.variant.destructive.text} ${BUTTON_TOKENS.shadow.default} ${BUTTON_TOKENS.variant.destructive.hover} ${BUTTON_TOKENS.variant.destructive.active} ${BUTTON_TOKENS.variant.destructive.disabled.background} ${BUTTON_TOKENS.variant.destructive.disabled.text}`,
+      primary: getVariantClasses("primary"),
+      secondary: getVariantClasses("secondary"),
+      accent: getVariantClasses("accent"),
+      outline: getVariantClasses("outline"),
+      ghost: getVariantClasses("ghost"),
+      destructive: getVariantClasses("destructive"),
     },
     size: {
       sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.width.sm} ${BUTTON_TOKENS.iconSize.sm} ${BUTTON_TOKENS.paddingIconOnly}`,
@@ -189,22 +244,6 @@ export type ButtonVariant =
  * For icon-only buttons, use `iconOnly={true}` prop with any size.
  */
 export type ButtonSize = "sm" | "md" | "lg";
-
-/**
- * Icon wrapper CSS classes
- * Shared constant to eliminate duplication across icon rendering
- */
-const ICON_WRAPPER_CLASS =
-  "pointer-events-none relative z-10 inline-flex items-center [&_svg]:text-current";
-
-/**
- * Renders an icon with consistent wrapper styling
- * Internal helper to eliminate duplication across icon rendering paths
- */
-function renderIcon(icon: React.ReactNode): React.ReactElement | null {
-  if (!icon) return null;
-  return <span className={ICON_WRAPPER_CLASS}>{icon}</span>;
-}
 
 /**
  * Button Component Props
@@ -265,10 +304,12 @@ export interface ButtonProps extends Omit<
  */
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, iconOnly, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
+  (
+    { variant, size = "md", iconOnly, asChild = false, leftIcon, rightIcon, children, ...props },
+    ref,
+  ) => {
     // iconOnly prop is the canonical way to create icon-only buttons
     // size prop uses only GlobalSize values (sm, md, lg) - no legacy size="icon" support
-    const normalizedSize: "sm" | "md" | "lg" = size || "md";
 
     // Color logic is fully centralized in CVA - no color classes applied here
     // All colors come from BUTTON_TOKENS → tokens/colors.ts (Color Authority)
@@ -278,8 +319,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Uses dedicated tokenCVA path (buttonIconOnlyVariants) - NO string manipulation
     // All tokens come from BUTTON_TOKENS - no raw values
     const finalClassName = iconOnly
-      ? buttonIconOnlyVariants({ variant, size: normalizedSize })
-      : buttonVariants({ variant, size: normalizedSize });
+      ? buttonIconOnlyVariants({ variant, size })
+      : buttonVariants({ variant, size });
 
     // iconOnly rendering: children-first resolution (children ?? leftIcon ?? rightIcon)
     // This ensures icon passed as children (Storybook pattern) renders correctly

@@ -7,32 +7,40 @@
  * Uses DATA_TOKENS for all sizing and styling.
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DATA_TOKENS } from "@/FOUNDATION/tokens/components/data";
 
-const skeletonVariants = cva(
-  `${DATA_TOKENS.skeleton.background.default} ${DATA_TOKENS.skeleton.animation.pulse}`,
-  {
-    variants: {
-      variant: {
-        text: `${DATA_TOKENS.skeleton.height.text} ${DATA_TOKENS.skeleton.radius.text} ${DATA_TOKENS.skeleton.width.full}`,
-        inline: `${DATA_TOKENS.skeleton.height.inline} ${DATA_TOKENS.skeleton.radius.inline} ${DATA_TOKENS.skeleton.width.inline}`,
-        block: `${DATA_TOKENS.skeleton.height.block} ${DATA_TOKENS.skeleton.radius.block} ${DATA_TOKENS.skeleton.width.full}`,
-        card: `${DATA_TOKENS.skeleton.height.card} ${DATA_TOKENS.skeleton.radius.card} ${DATA_TOKENS.skeleton.width.full}`,
-        circle: `${DATA_TOKENS.skeleton.height.circle} ${DATA_TOKENS.skeleton.radius.circle}`,
-      },
-    },
-    defaultVariants: {
-      variant: "text",
-    },
-  },
-);
+/**
+ * Skeleton variant type
+ * Explicit union type for variant prop
+ */
+export type SkeletonVariant = "text" | "inline" | "block" | "card" | "circle";
 
-export interface SkeletonProps
-  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof skeletonVariants> {
+const skeletonVariants = tokenCVA({
+  base: `${DATA_TOKENS.skeleton.background.default} ${DATA_TOKENS.skeleton.animation.pulse}`,
+  variants: {
+    variant: {
+      text: `${DATA_TOKENS.skeleton.height.text} ${DATA_TOKENS.skeleton.radius.text} ${DATA_TOKENS.skeleton.width.full}`,
+      inline: `${DATA_TOKENS.skeleton.height.inline} ${DATA_TOKENS.skeleton.radius.inline} ${DATA_TOKENS.skeleton.width.inline}`,
+      block: `${DATA_TOKENS.skeleton.height.block} ${DATA_TOKENS.skeleton.radius.block} ${DATA_TOKENS.skeleton.width.full}`,
+      card: `${DATA_TOKENS.skeleton.height.card} ${DATA_TOKENS.skeleton.radius.card} ${DATA_TOKENS.skeleton.width.full}`,
+      circle: `${DATA_TOKENS.skeleton.height.circle} ${DATA_TOKENS.skeleton.radius.circle}`,
+    } satisfies Record<SkeletonVariant, string>,
+  },
+  defaultVariants: {
+    variant: "text",
+  },
+});
+
+export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Skeleton variant style
+   * @default "text"
+   */
+  variant?: SkeletonVariant;
   /**
    * Whether to hide from screen readers
    * @default true

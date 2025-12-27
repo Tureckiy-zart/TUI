@@ -22,9 +22,13 @@ const _testStyle: TestStyle = true;
 void _testStyle;
 
 // Test that allowed props are still present
-type TestVariant = "variant" extends keyof InputProps ? true : false;
-const _testVariant: TestVariant = true; // Should pass
-void _testVariant;
+type TestSize = "size" extends keyof InputProps ? true : false;
+const _testSize: TestSize = true; // Should pass
+void _testSize;
+
+type TestInvalid = "invalid" extends keyof InputProps ? true : false;
+const _testInvalid: TestInvalid = true; // Should pass
+void _testInvalid;
 
 type TestType = "type" extends keyof InputProps ? true : false;
 const _testType: TestType = true; // Should pass

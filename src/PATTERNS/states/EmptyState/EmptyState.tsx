@@ -50,7 +50,7 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
     return (
       <Surface
         ref={ref}
-        variant="flat"
+        variant="subtle"
         radius="xl"
         p="lg"
         className={cn(EMPTY_STATE_TOKENS.alignment.center, className)}
@@ -68,40 +68,16 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
 EmptyState.displayName = "EmptyState";
 
 // Attach subcomponents to EmptyState
-(
-  EmptyState as typeof EmptyState & {
-    Icon: typeof EmptyStateIcon;
-    Title: typeof EmptyStateTitle;
-    Description: typeof EmptyStateDescription;
-    Action: typeof EmptyStateAction;
-  }
-).Icon = EmptyStateIcon;
+type EmptyStateWithSubcomponents = typeof EmptyState & {
+  Icon: typeof EmptyStateIcon;
+  Title: typeof EmptyStateTitle;
+  Description: typeof EmptyStateDescription;
+  Action: typeof EmptyStateAction;
+};
 
-(
-  EmptyState as typeof EmptyState & {
-    Icon: typeof EmptyStateIcon;
-    Title: typeof EmptyStateTitle;
-    Description: typeof EmptyStateDescription;
-    Action: typeof EmptyStateAction;
-  }
-).Title = EmptyStateTitle;
-
-(
-  EmptyState as typeof EmptyState & {
-    Icon: typeof EmptyStateIcon;
-    Title: typeof EmptyStateTitle;
-    Description: typeof EmptyStateDescription;
-    Action: typeof EmptyStateAction;
-  }
-).Description = EmptyStateDescription;
-
-(
-  EmptyState as typeof EmptyState & {
-    Icon: typeof EmptyStateIcon;
-    Title: typeof EmptyStateTitle;
-    Description: typeof EmptyStateDescription;
-    Action: typeof EmptyStateAction;
-  }
-).Action = EmptyStateAction;
+(EmptyState as EmptyStateWithSubcomponents).Icon = EmptyStateIcon;
+(EmptyState as EmptyStateWithSubcomponents).Title = EmptyStateTitle;
+(EmptyState as EmptyStateWithSubcomponents).Description = EmptyStateDescription;
+(EmptyState as EmptyStateWithSubcomponents).Action = EmptyStateAction;
 
 export { EmptyState };

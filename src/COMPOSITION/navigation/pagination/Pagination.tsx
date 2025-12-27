@@ -130,6 +130,25 @@ function getVisiblePages(
 }
 
 // ============================================================================
+// Shared Styles
+// ============================================================================
+
+/**
+ * Shared button styling for PaginationPrev and PaginationNext
+ * Extracted to reduce duplication
+ */
+const paginationNavButtonStyles = cn(
+  NAVIGATION_TOKENS.sizes.md.height,
+  NAVIGATION_TOKENS.sizes.md.padding.horizontal,
+  NAVIGATION_TOKENS.sizes.md.padding.vertical,
+  NAVIGATION_TOKENS.radius.default,
+  NAVIGATION_TOKENS.sizes.md.fontSize,
+  "border border-input",
+  MOTION_TOKENS.transition.colors,
+  `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
+);
+
+// ============================================================================
 // Components
 // ============================================================================
 
@@ -260,21 +279,14 @@ const PaginationPrev = React.forwardRef<HTMLButtonElement, PaginationPrevProps>(
         aria-label="Previous page"
         aria-disabled={disabled}
         className={cn(
-          NAVIGATION_TOKENS.sizes.md.height,
-          NAVIGATION_TOKENS.sizes.md.padding.horizontal,
-          NAVIGATION_TOKENS.sizes.md.padding.vertical,
-          NAVIGATION_TOKENS.radius.default,
-          NAVIGATION_TOKENS.sizes.md.fontSize,
-          "border border-input",
-          MOTION_TOKENS.transition.colors,
-          `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
+          paginationNavButtonStyles,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
           className,
         )}
         {...props}
       >
-        <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+        <ChevronLeft className={ICON_TOKENS.sizes.md} aria-hidden="true" />
         <span className="sr-only">Previous</span>
       </button>
     );
@@ -296,21 +308,14 @@ const PaginationNext = React.forwardRef<HTMLButtonElement, PaginationNextProps>(
         aria-label="Next page"
         aria-disabled={disabled}
         className={cn(
-          NAVIGATION_TOKENS.sizes.md.height,
-          NAVIGATION_TOKENS.sizes.md.padding.horizontal,
-          NAVIGATION_TOKENS.sizes.md.padding.vertical,
-          NAVIGATION_TOKENS.radius.default,
-          NAVIGATION_TOKENS.sizes.md.fontSize,
-          "border border-input",
-          MOTION_TOKENS.transition.colors,
-          `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
+          paginationNavButtonStyles,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
           className,
         )}
         {...props}
       >
-        <ChevronRight className="h-4 w-4" aria-hidden="true" />
+        <ChevronRight className={ICON_TOKENS.sizes.md} aria-hidden="true" />
         <span className="sr-only">Next</span>
       </button>
     );

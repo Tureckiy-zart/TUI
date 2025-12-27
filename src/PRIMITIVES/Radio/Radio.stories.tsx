@@ -7,7 +7,7 @@ import { Radio } from "./Radio";
 import { RadioGroup } from "./RadioGroup";
 
 const meta: Meta<typeof Radio> = {
-  title: "Components/Radio",
+  title: "Foundation Locked/Primitives/Radio",
   component: Radio,
   parameters: {
     layout: "centered",
@@ -93,28 +93,63 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const AllSizes: Story = {
+export const Matrix: Story = {
+  render: () => (
+    <div className="flex flex-col gap-lg">
+      <div>
+        <h3 className="mb-md text-sm font-semibold">Variants × Sizes Matrix</h3>
+        <div className="grid grid-cols-6 gap-md">
+          <div className="text-xs font-medium">Size →</div>
+          {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+            <div key={size} className="text-center text-xs font-medium">
+              {size}
+            </div>
+          ))}
+          {(["primary", "secondary", "outline", "ghost", "destructive"] as const).map((variant) => (
+            <>
+              <div key={`${variant}-label`} className="text-xs font-medium capitalize">
+                {variant}
+              </div>
+              {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+                <div key={`${variant}-${size}`} className="flex justify-center">
+                  <Radio
+                    variant={variant}
+                    size={size}
+                    checked
+                    aria-label={`${variant} ${size} radio`}
+                  />
+                </div>
+              ))}
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+export const SizesGallery: Story = {
   render: () => (
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-sm">
         <Radio size="xs" checked aria-label="Extra small radio" />
-        <span className="text-xs text-muted-foreground">xs</span>
+        <span className="text-xs font-medium text-foreground">xs</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="sm" checked aria-label="Small radio" />
-        <span className="text-xs text-muted-foreground">sm</span>
+        <span className="text-xs font-medium text-foreground">sm</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="md" checked aria-label="Medium radio" />
-        <span className="text-xs text-muted-foreground">md</span>
+        <span className="text-xs font-medium text-foreground">md</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="lg" checked aria-label="Large radio" />
-        <span className="text-xs text-muted-foreground">lg</span>
+        <span className="text-xs font-medium text-foreground">lg</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="xl" checked aria-label="Extra large radio" />
-        <span className="text-xs text-muted-foreground">xl</span>
+        <span className="text-xs font-medium text-foreground">xl</span>
       </div>
     </div>
   ),
@@ -147,24 +182,59 @@ export const AllVariants: Story = {
   ),
 };
 
-export const AllStates: Story = {
+export const States: Story = {
   render: () => (
-    <div className="flex flex-col gap-md">
-      <div className="flex items-center gap-md">
-        <Radio state="default" aria-label="Default state radio" />
-        <span>Default</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio state="checked" checked aria-label="Checked state radio" />
-        <span>Checked</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio state="error" aria-label="Error state radio" />
-        <span>Error</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio state="disabled" disabled aria-label="Disabled state radio" />
-        <span>Disabled</span>
+    <div className="flex flex-col gap-lg">
+      <div>
+        <h3 className="mb-md text-sm font-semibold">
+          States Matrix (All Variants × All Sizes × All States)
+        </h3>
+        <div className="grid grid-cols-5 gap-md">
+          {(["primary", "secondary", "outline", "ghost", "destructive"] as const).map((variant) => (
+            <div key={variant} className="flex flex-col gap-sm">
+              <h4 className="text-xs font-medium capitalize">{variant}</h4>
+              {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+                <div key={size} className="flex flex-col gap-xs">
+                  <div className="flex items-center gap-xs">
+                    <Radio
+                      variant={variant}
+                      size={size}
+                      aria-label={`${variant} ${size} default`}
+                    />
+                    <span className="text-xs">default</span>
+                  </div>
+                  <div className="flex items-center gap-xs">
+                    <Radio
+                      variant={variant}
+                      size={size}
+                      checked
+                      aria-label={`${variant} ${size} checked`}
+                    />
+                    <span className="text-xs">checked</span>
+                  </div>
+                  <div className="flex items-center gap-xs">
+                    <Radio
+                      variant={variant}
+                      size={size}
+                      disabled
+                      aria-label={`${variant} ${size} disabled`}
+                    />
+                    <span className="text-xs">disabled</span>
+                  </div>
+                  <div className="flex items-center gap-xs">
+                    <Radio
+                      variant={variant}
+                      size={size}
+                      state="error"
+                      aria-label={`${variant} ${size} error`}
+                    />
+                    <span className="text-xs">error</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   ),
@@ -317,7 +387,7 @@ export const Controlled: Story = {
             </span>
           </div>
         </RadioGroup>
-        <p className="text-sm text-muted-foreground">Selected: {value}</p>
+        <p className="text-sm font-medium text-foreground">Selected: {value}</p>
       </div>
     );
   },
@@ -391,17 +461,17 @@ export const KeyboardNavigation: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Keyboard Navigation in RadioGroup</h3>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           Use <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowUp</kbd> /{" "}
           <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowDown</kbd> to navigate between
           options in vertical groups.
         </p>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           Use <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowLeft</kbd> /{" "}
           <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowRight</kbd> in horizontal
           groups.
         </p>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           Press <kbd className="rounded bg-muted px-1 py-0.5 text-xs">Space</kbd> to select the
           focused radio.
         </p>
@@ -429,7 +499,7 @@ export const Accessibility: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Screen Reader Support</h3>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           All radios have proper ARIA attributes for screen readers. Use aria-label or
           aria-labelledby for labels.
         </p>
@@ -441,7 +511,7 @@ export const Accessibility: Story = {
       </div>
       <div>
         <h3 className="mb-md text-lg font-semibold">With Labels</h3>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           Use aria-labelledby to associate radios with visible labels.
         </p>
         <RadioGroup defaultValue="label-1">

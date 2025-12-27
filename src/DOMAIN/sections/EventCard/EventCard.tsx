@@ -121,12 +121,19 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
     // Determine variant: use explicit variant prop or derive from featured
     const cardVariant = variant || (featured ? "featured" : "default");
 
+    // Map EventCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
+    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+
+    // Map EventCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
+    const cardBaseVariant: "default" | "elevated" =
+      cardVariant === "featured" ? "elevated" : "default";
+
     return (
       <Box {...animationProps}>
         <CardBase
           ref={ref}
-          size={size}
-          variant={cardVariant}
+          size={cardBaseSize}
+          variant={cardBaseVariant}
           className={cn(
             eventCardVariants({ size, layout, variant: cardVariant }),
             "group relative",
@@ -145,7 +152,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
 
           {/* Image Section */}
           {showImage && (
-            <CardBaseImageWrapper size={size}>
+            <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn("relative w-full overflow-hidden", DOMAIN_TOKENS.surface.bg.default)}
               >
@@ -183,7 +190,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           )}
 
           {/* Content Section */}
-          <CardBaseContentWrapper size={size}>
+          <CardBaseContentWrapper size={cardBaseSize}>
             {/* Title */}
             <Heading level={3}>
               {href ? (
@@ -197,7 +204,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" muted>
+              <Text size="sm" tone="muted">
                 {description}
               </Text>
             )}
@@ -210,7 +217,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
                   />
-                  <Text size="xs" muted>
+                  <Text size="xs" tone="muted">
                     <time dateTime={date}>{date}</time>
                   </Text>
                 </div>
@@ -221,7 +228,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
                   />
-                  <Text size="xs" muted>
+                  <Text size="xs" tone="muted">
                     <address>{venueName}</address>
                   </Text>
                 </div>
@@ -230,7 +237,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           </CardBaseContentWrapper>
 
           {/* Footer Section */}
-          <CardBaseFooterWrapper size={size}>
+          <CardBaseFooterWrapper size={cardBaseSize}>
             <div className={cn("w-full", eventCardFooterVariants({ size }))}>
               {ticketUrl && (
                 <LinkWithCustomVariant

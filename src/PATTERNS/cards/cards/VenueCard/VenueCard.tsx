@@ -84,9 +84,15 @@ export const VenueCard: React.FC<VenueCardProps> = ({
     animationProps: animation?.animationProps,
   });
 
-  // Determine CardBase variant based on featured prop
-  const cardBaseVariant = featured ? "featured" : "default";
-  const cardBaseSize = size;
+  // Determine variant: use explicit variant prop or derive from featured
+  const cardVariant = variant || (featured ? "featured" : "default");
+
+  // Map VenueCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
+  const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+
+  // Map VenueCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
+  const cardBaseVariant: "default" | "elevated" =
+    cardVariant === "featured" ? "elevated" : "default";
 
   return (
     <Box {...animationProps}>
@@ -155,7 +161,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
 
           {/* Description */}
           {description && (
-            <Text size="sm" muted>
+            <Text size="sm" tone="muted">
               {description}
             </Text>
           )}
@@ -171,7 +177,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   className={ICON_TOKENS.sizes.sm}
                   aria-hidden="true"
                 />
-                <Text size="xs" muted>
+                <Text size="xs" tone="muted">
                   {location}
                 </Text>
               </div>
@@ -224,7 +230,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                       className={ICON_TOKENS.sizes.sm}
                       aria-hidden="true"
                     />
-                    <Text size="xs" muted>
+                    <Text size="xs" tone="muted">
                       {capacityLabel} {capacity}
                     </Text>
                   </div>

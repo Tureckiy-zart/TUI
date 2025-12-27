@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-
 import { cn } from "@/FOUNDATION/lib/utils";
+import { LIST_TOKENS } from "@/FOUNDATION/tokens/components/list";
 
 export interface ListItem {
   id: string;
@@ -15,17 +14,36 @@ export interface ListProps {
   className?: string;
 }
 
-export const List: React.FC<ListProps> = ({ items, className }) => {
+export function List({ items, className }: ListProps) {
   return (
-    <div className={cn("space-y-sm", className)}>
+    <ul className={cn(LIST_TOKENS.spacing.gap, className)} role="list">
       {items.map((item) => (
-        <div key={item.id} className="rounded-lg border p-md transition-colors hover:bg-muted/50">
-          <h3 className="font-medium text-foreground">{item.title}</h3>
-          {item.description && (
-            <p className="mt-xs text-sm text-muted-foreground">{item.description}</p>
+        <li
+          key={item.id}
+          className={cn(
+            LIST_TOKENS.item.radius,
+            LIST_TOKENS.item.border,
+            LIST_TOKENS.item.padding,
+            LIST_TOKENS.item.transition,
+            LIST_TOKENS.item.hover.background,
           )}
-        </div>
+        >
+          <h3 className={cn(LIST_TOKENS.title.fontWeight, LIST_TOKENS.title.color)}>
+            {item.title}
+          </h3>
+          {item.description && (
+            <p
+              className={cn(
+                LIST_TOKENS.description.marginTop,
+                LIST_TOKENS.description.fontSize,
+                LIST_TOKENS.description.color,
+              )}
+            >
+              {item.description}
+            </p>
+          )}
+        </li>
       ))}
-    </div>
+    </ul>
   );
-};
+}

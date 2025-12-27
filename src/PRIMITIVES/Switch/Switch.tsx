@@ -2,8 +2,6 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-
 import type { SwitchProps } from "./Switch.types";
 import {
   switchHandleStateVariants,
@@ -20,6 +18,8 @@ import {
  *
  * The switch consists of a track (container) and handle (thumb) that slides within the track.
  *
+ * Foundation Enforcement: This component excludes className and style props (token-driven styling only).
+ *
  * @example
  * ```tsx
  * <Switch
@@ -34,12 +34,11 @@ import {
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
-      className,
       variant,
       size,
-      state,
       checked: controlledChecked,
       disabled = false,
+      invalid = false,
       onCheckedChange,
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledBy,
@@ -57,16 +56,16 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const isControlled = controlledChecked !== undefined;
     const checked = isControlled ? controlledChecked : uncontrolledChecked;
 
-    // Determine effective state
-    const isDisabled = disabled || state === "disabled";
-    const isError = state === "error";
+    // Determine effective state (derived from props only)
+    const isDisabled = disabled;
+    const isInvalid = invalid;
     const effectiveState = React.useMemo(() => {
       if (isDisabled && checked) return "disabledChecked";
       if (isDisabled) return "disabled";
-      if (isError) return "error";
+      if (isInvalid) return "invalid";
       if (checked) return "checked";
-      return "default";
-    }, [isDisabled, isError, checked]);
+      return "base";
+    }, [isDisabled, isInvalid, checked]);
 
     // Determine aria-checked value (switches only have true/false, not mixed)
     const ariaChecked = checked ? "true" : "false";
@@ -112,19 +111,19 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     );
 
     // Compute track classes
-    const trackClasses = cn(
-      switchTrackVariants({ variant, size, state: effectiveState }),
-      className,
-    );
+    const trackClasses = switchTrackVariants({ variant, size, state: effectiveState });
 
     // Compute handle classes
-    const handleClasses = cn(
-      switchHandleVariants({ size, checked }),
+    const handleClasses = [
+      switchHandleVariants({
+        size,
+        checked: ((checked ?? false) ? "true" : "false") as unknown as boolean,
+      }),
       switchHandleStateVariants({
         variant: variant || "primary",
         state: effectiveState,
       }),
-    );
+    ].join(" ");
 
     return (
       <button
@@ -132,7 +131,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         role="switch"
         aria-checked={ariaChecked}
         aria-disabled={isDisabled}
-        aria-invalid={isError}
+        aria-invalid={isInvalid}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}

@@ -56,11 +56,6 @@ export interface BreadcrumbsRootProps extends React.HTMLAttributes<HTMLElement> 
 
 export interface BreadcrumbsItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
-   * Whether this is the last item (current page)
-   */
-  isLast?: boolean;
-
-  /**
    * Whether this item is disabled
    */
   disabled?: boolean;
@@ -101,11 +96,7 @@ const BreadcrumbsRoot = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(
           {items.map((item, index) => {
             const isLast = index === lastIndex;
             return (
-              <BreadcrumbsItem
-                key={`${item.label}-${index}`}
-                isLast={isLast}
-                disabled={item.disabled}
-              >
+              <BreadcrumbsItem key={`${item.label}-${index}`} disabled={item.disabled}>
                 {index > 0 && (
                   <BreadcrumbsSeparator>{separator || defaultSeparator}</BreadcrumbsSeparator>
                 )}

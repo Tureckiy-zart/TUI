@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Table } from "./Table";
 
 const meta: Meta<typeof Table> = {
-  title: "Components/Table",
+  title: "Foundation Locked/Patterns/Tables/SimpleTable",
   component: Table,
   parameters: {
     layout: "padded",
@@ -19,14 +19,16 @@ const sampleData = [
   { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Moderator" },
 ];
 
+const basicColumns = [
+  { key: "name" as const, title: "Name" },
+  { key: "email" as const, title: "Email" },
+  { key: "role" as const, title: "Role" },
+];
+
 export const Default: Story = {
   args: {
     data: sampleData,
-    columns: [
-      { key: "name", title: "Name" },
-      { key: "email", title: "Email" },
-      { key: "role", title: "Role" },
-    ],
+    columns: basicColumns,
     rowKey: "id",
   },
 };
@@ -35,10 +37,10 @@ export const WithCustomRender: Story = {
   args: {
     data: sampleData,
     columns: [
-      { key: "name", title: "Name" },
-      { key: "email", title: "Email" },
+      { key: "name" as const, title: "Name" },
+      { key: "email" as const, title: "Email" },
       {
-        key: "role",
+        key: "role" as const,
         title: "Role",
         render: (value: unknown) => (
           <span
@@ -57,4 +59,47 @@ export const WithCustomRender: Story = {
     ],
     rowKey: "id",
   },
+};
+
+/**
+ * SizesGallery Story
+ *
+ * Demonstrates all available size variants (sm, md, lg).
+ * Required per VARIANTS_SIZE_CANON.md for components with size prop.
+ */
+export const SizesGallery: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <h3 className="mb-4 text-lg font-semibold">Small (sm)</h3>
+        <Table data={sampleData} columns={basicColumns} rowKey="id" size="sm" />
+      </div>
+      <div>
+        <h3 className="mb-4 text-lg font-semibold">Medium (md) - Default</h3>
+        <Table data={sampleData} columns={basicColumns} rowKey="id" size="md" />
+      </div>
+      <div>
+        <h3 className="mb-4 text-lg font-semibold">Large (lg)</h3>
+        <Table data={sampleData} columns={basicColumns} rowKey="id" size="lg" />
+      </div>
+    </div>
+  ),
+};
+
+/**
+ * States Story
+ *
+ * Demonstrates interactive states (hover on rows).
+ * Component uses CSS-only hover state, so this story shows the hover effect.
+ */
+export const States: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <h3 className="mb-4 text-lg font-semibold">Default State</h3>
+        <p className="mb-2 text-sm text-muted-foreground">Hover over rows to see hover state</p>
+        <Table data={sampleData} columns={basicColumns} rowKey="id" />
+      </div>
+    </div>
+  ),
 };

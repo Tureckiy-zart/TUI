@@ -1,3 +1,11 @@
 "use client";
 
-export { Text, type TextProps, type TextSize, textVariants, type TextWeight } from "./Text";
+export {
+  Text,
+  type TextAsElement,
+  type TextProps,
+  type TextSize,
+  type TextTone,
+  textVariants,
+  type TextWeight,
+} from "./Text";

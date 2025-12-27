@@ -4,7 +4,8 @@
  * Component-level design tokens for Surface component.
  * Maps foundation tokens (spacing, radius, shadows) to surface-specific usage.
  *
- * Defines tokens for flat, raised, sunken, outline, and subtle surface variants.
+ * Defines tokens for canonical SurfaceVariant names: default, elevated, outlined, filled, subtle.
+ * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
  */
 
 // Foundation tokens are referenced in comments for documentation
@@ -15,6 +16,7 @@
  *
  * Defines spacing, radius, and shadow tokens for Surface component variants.
  * Values are mapped to Tailwind utility classes for direct use.
+ * Uses canonical SurfaceVariant dictionary: default, elevated, outlined, filled, subtle.
  */
 export const SURFACE_TOKENS = {
   /**
@@ -41,47 +43,49 @@ export const SURFACE_TOKENS = {
   /**
    * Shadow tokens by surface variant
    * Maps to foundation elevation shadow tokens
+   * Uses canonical SurfaceVariant names
    */
   shadow: {
-    flat: "shadow-none", // No shadow - maps to elevationShadows.none
-    raised: "shadow-sm", // Small shadow - maps to elevationShadows.sm
-    sunken: "shadow-none", // No shadow - maps to elevationShadows.none
-    outline: "shadow-none", // No shadow - border-focused variant
+    default: "shadow-none", // No shadow - maps to elevationShadows.none
+    elevated: "shadow-sm", // Small shadow - maps to elevationShadows.sm
+    outlined: "shadow-none", // No shadow - border-focused variant
+    filled: "shadow-none", // No shadow - maps to elevationShadows.none
     subtle: "shadow-none", // No shadow - minimal background difference
   } as const,
 
   /**
    * Variant-based token structure
    * Organized by variant for easy access
+   * Uses canonical SurfaceVariant names: default, elevated, outlined, filled, subtle
    */
   variant: {
-    flat: {
+    default: {
       padding: "p-md",
       radius: "rounded-md",
       shadow: "shadow-none",
       bg: "bg-background",
       border: "border border-border",
     },
-    raised: {
+    elevated: {
       padding: "p-md",
       radius: "rounded-md",
       shadow: "shadow-sm",
       bg: "bg-card",
       border: "border border-border",
     },
-    sunken: {
-      padding: "p-md",
-      radius: "rounded-md",
-      shadow: "shadow-none",
-      bg: "bg-muted",
-      border: "border border-border",
-    },
-    outline: {
+    outlined: {
       padding: "p-md",
       radius: "rounded-md",
       shadow: "shadow-none",
       bg: "bg-transparent",
       border: "border-2 border-border",
+    },
+    filled: {
+      padding: "p-md",
+      radius: "rounded-md",
+      shadow: "shadow-none",
+      bg: "bg-muted",
+      border: "border border-border",
     },
     subtle: {
       padding: "p-md",

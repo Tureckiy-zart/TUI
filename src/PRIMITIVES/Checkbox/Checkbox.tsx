@@ -72,6 +72,14 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       return checked ? "true" : "false";
     }, [indeterminate, checked]);
 
+    // Shared toggle logic (extracted to reduce duplication)
+    const toggleChecked = React.useCallback(() => {
+      if (!isControlled) {
+        setUncontrolledChecked((prev) => !prev);
+      }
+      onCheckedChange?.(!checked);
+    }, [isControlled, checked, onCheckedChange]);
+
     // Handle click
     const handleClick = React.useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,14 +88,10 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           return;
         }
 
-        if (!isControlled) {
-          setUncontrolledChecked((prev) => !prev);
-        }
-
-        onCheckedChange?.(!checked);
+        toggleChecked();
         onClick?.(event);
       },
-      [isDisabled, isControlled, checked, onCheckedChange, onClick],
+      [isDisabled, toggleChecked, onClick],
     );
 
     // Handle keyboard (Space key)
@@ -99,17 +103,12 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         if (event.key === " " || event.key === "Spacebar") {
           event.preventDefault();
           event.stopPropagation();
-
-          if (!isControlled) {
-            setUncontrolledChecked((prev) => !prev);
-          }
-
-          onCheckedChange?.(!checked);
+          toggleChecked();
         }
 
         onKeyDown?.(event);
       },
-      [isDisabled, isControlled, checked, onCheckedChange, onKeyDown],
+      [isDisabled, toggleChecked, onKeyDown],
     );
 
     // Compute checkbox classes

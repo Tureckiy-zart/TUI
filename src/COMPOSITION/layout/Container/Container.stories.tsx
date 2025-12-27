@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Box } from "../Box";
-import { Container } from "./Container";
 import { Stack } from "../Stack";
+import { Container } from "./Container";
 
 const meta: Meta<typeof Container> = {
-  title: "Layout/Container",
+  title: "Foundation Locked/Composition/Layout/Container",
   component: Container,
   parameters: {
     layout: "fullscreen",

@@ -1,101 +1,43 @@
 "use client";
 
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { cva } from "class-variance-authority";
 import { Check, ChevronDown } from "lucide-react";
 import * as React from "react";
 
 import { getBaseValue, getSpacingPx } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { SELECT_TOKENS } from "@/FOUNDATION/tokens/components/select";
-import type {
-  ResponsiveAlignOffset,
-  ResponsiveSelectSize,
-  ResponsiveSelectWidth,
-  ResponsiveSideOffset,
-  SelectSizeToken,
-  SelectVariantToken,
-  SelectWidthToken,
-} from "@/FOUNDATION/tokens/types";
+import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
+import { SEPARATOR_TOKENS } from "@/FOUNDATION/tokens/components/separator";
+import type { ResponsiveAlignOffset, ResponsiveSideOffset } from "@/FOUNDATION/tokens/types";
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+// Note: Size resolution helper removed - Select uses Input default size (md)
 
 // ============================================================================
 // CVA VARIANTS
 // ============================================================================
 
-const selectTriggerVariants = cva(
-  `flex items-center justify-between outline-none focus-visible:outline-none disabled:cursor-not-allowed [&>span]:line-clamp-1`,
-  {
-    variants: {
-      size: {
-        xs: `${SELECT_TOKENS.trigger.height.xs} ${SELECT_TOKENS.trigger.padding.horizontal.xs} ${SELECT_TOKENS.trigger.padding.vertical.xs} ${SELECT_TOKENS.trigger.radius.xs} ${SELECT_TOKENS.trigger.fontSize.xs}`,
-        sm: `${SELECT_TOKENS.trigger.height.sm} ${SELECT_TOKENS.trigger.padding.horizontal.sm} ${SELECT_TOKENS.trigger.padding.vertical.sm} ${SELECT_TOKENS.trigger.radius.sm} ${SELECT_TOKENS.trigger.fontSize.sm}`,
-        md: `${SELECT_TOKENS.trigger.height.md} ${SELECT_TOKENS.trigger.padding.horizontal.md} ${SELECT_TOKENS.trigger.padding.vertical.md} ${SELECT_TOKENS.trigger.radius.md} ${SELECT_TOKENS.trigger.fontSize.md}`,
-        lg: `${SELECT_TOKENS.trigger.height.lg} ${SELECT_TOKENS.trigger.padding.horizontal.lg} ${SELECT_TOKENS.trigger.padding.vertical.lg} ${SELECT_TOKENS.trigger.radius.lg} ${SELECT_TOKENS.trigger.fontSize.lg}`,
-        xl: `${SELECT_TOKENS.trigger.height.xl} ${SELECT_TOKENS.trigger.padding.horizontal.xl} ${SELECT_TOKENS.trigger.padding.vertical.xl} ${SELECT_TOKENS.trigger.radius.xl} ${SELECT_TOKENS.trigger.fontSize.xl}`,
-      },
-      variant: {
-        primary: `${SELECT_TOKENS.variant.primary.border} ${SELECT_TOKENS.variant.primary.background} ${SELECT_TOKENS.variant.primary.text} ${SELECT_TOKENS.variant.primary.focus}`,
-        secondary: `${SELECT_TOKENS.variant.secondary.border} ${SELECT_TOKENS.variant.secondary.background} ${SELECT_TOKENS.variant.secondary.text} ${SELECT_TOKENS.variant.secondary.focus}`,
-        outline: `${SELECT_TOKENS.variant.outline.border} ${SELECT_TOKENS.variant.outline.background} ${SELECT_TOKENS.variant.outline.text} ${SELECT_TOKENS.variant.outline.focus}`,
-        ghost: `${SELECT_TOKENS.variant.ghost.border} ${SELECT_TOKENS.variant.ghost.background} ${SELECT_TOKENS.variant.ghost.text} ${SELECT_TOKENS.variant.ghost.focus}`,
-        destructive: `${SELECT_TOKENS.variant.destructive.border} ${SELECT_TOKENS.variant.destructive.background} ${SELECT_TOKENS.variant.destructive.text} ${SELECT_TOKENS.variant.destructive.focus}`,
-      },
-      // State is managed by Radix via data-state attributes
-      // We use compound variants to handle Radix's data-state
-      // Note: state prop removed - use Radix's data-state instead
-      width: {
-        auto: SELECT_TOKENS.width.auto,
-        full: SELECT_TOKENS.width.full,
-        sm: SELECT_TOKENS.width.sm,
-        md: SELECT_TOKENS.width.md,
-        lg: SELECT_TOKENS.width.lg,
-        xl: SELECT_TOKENS.width.xl,
-      },
-    },
-    defaultVariants: {
-      size: "md",
-      variant: "outline",
-      width: "full",
-    },
-  },
-);
+// Select trigger uses Input tokens with default size (md), variant (outline), width (full)
+const selectTriggerVariants = tokenCVA({
+  base: `flex items-center justify-between outline-none focus-visible:outline-none disabled:cursor-not-allowed [&>span]:line-clamp-1 ${INPUT_TOKENS.width.full} ${INPUT_TOKENS.height.md} ${INPUT_TOKENS.padding.horizontal.md} ${INPUT_TOKENS.padding.vertical.md} ${INPUT_TOKENS.radius.md} ${INPUT_TOKENS.fontSize.md} ${INPUT_TOKENS.variant.outline.border} ${INPUT_TOKENS.variant.outline.background} ${INPUT_TOKENS.variant.outline.text} ${INPUT_TOKENS.variant.outline.focus}`,
+});
 
-const selectContentVariants = cva(
-  `relative z-50 ${SELECT_TOKENS.content.maxHeight} ${SELECT_TOKENS.content.minWidth} overflow-hidden ${SELECT_TOKENS.content.border} ${SELECT_TOKENS.content.background} ${SELECT_TOKENS.content.text} ${SELECT_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)] data-[side=left]:slide-in-from-right-[var(--spacing-sm)] data-[side=right]:slide-in-from-left-[var(--spacing-sm)] data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]`,
-  {
-    variants: {
-      size: {
-        xs: `${SELECT_TOKENS.content.padding.xs} ${SELECT_TOKENS.content.radius.xs}`,
-        sm: `${SELECT_TOKENS.content.padding.sm} ${SELECT_TOKENS.content.radius.sm}`,
-        md: `${SELECT_TOKENS.content.padding.md} ${SELECT_TOKENS.content.radius.md}`,
-        lg: `${SELECT_TOKENS.content.padding.lg} ${SELECT_TOKENS.content.radius.lg}`,
-        xl: `${SELECT_TOKENS.content.padding.xl} ${SELECT_TOKENS.content.radius.xl}`,
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
-  },
-);
+// Select content uses Input tokens with default size (md)
+// Note: Content-specific tokens (maxHeight, minWidth, border, background, text, shadow) kept from SELECT_TOKENS
+// as they are dropdown-specific and not available in INPUT_TOKENS
+const selectContentVariants = tokenCVA({
+  base: `relative z-50 max-h-[384px] min-w-[128px] overflow-hidden ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.border.color} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} shadow-md outline-none p-sm ${POPOVER_TOKENS.content.radius.md} data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)] data-[side=left]:slide-in-from-right-[var(--spacing-sm)] data-[side=right]:slide-in-from-left-[var(--spacing-sm)] data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]`,
+});
 
-const selectItemVariants = cva(
-  `relative flex ${SELECT_TOKENS.width.full} cursor-default select-none items-center outline-none ${SELECT_TOKENS.item.focus.background} ${SELECT_TOKENS.item.focus.text} data-[disabled]:${SELECT_TOKENS.item.disabled.pointerEvents} data-[disabled]:${SELECT_TOKENS.item.disabled.opacity}`,
-  {
-    variants: {
-      size: {
-        xs: `${SELECT_TOKENS.item.padding.horizontal.xs} ${SELECT_TOKENS.item.padding.vertical.xs} ${SELECT_TOKENS.item.radius.xs} ${SELECT_TOKENS.item.fontSize.xs}`,
-        sm: `${SELECT_TOKENS.item.padding.horizontal.sm} ${SELECT_TOKENS.item.padding.vertical.sm} ${SELECT_TOKENS.item.radius.sm} ${SELECT_TOKENS.item.fontSize.sm}`,
-        md: `${SELECT_TOKENS.item.padding.horizontal.md} ${SELECT_TOKENS.item.padding.vertical.md} ${SELECT_TOKENS.item.radius.md} ${SELECT_TOKENS.item.fontSize.md}`,
-        lg: `${SELECT_TOKENS.item.padding.horizontal.lg} ${SELECT_TOKENS.item.padding.vertical.lg} ${SELECT_TOKENS.item.radius.lg} ${SELECT_TOKENS.item.fontSize.lg}`,
-        xl: `${SELECT_TOKENS.item.padding.horizontal.xl} ${SELECT_TOKENS.item.padding.vertical.xl} ${SELECT_TOKENS.item.radius.xl} ${SELECT_TOKENS.item.fontSize.xl}`,
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
-  },
-);
+// Select item uses Input tokens with default size (md)
+const selectItemVariants = tokenCVA({
+  base: `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none focus-visible:${INPUT_TOKENS.variant.primary.background} focus-visible:${INPUT_TOKENS.variant.primary.text} data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${INPUT_TOKENS.padding.horizontal.md} ${INPUT_TOKENS.padding.vertical.md} ${INPUT_TOKENS.radius.sm} ${INPUT_TOKENS.fontSize.sm}`,
+});
 
 // ============================================================================
 // SELECT ROOT
@@ -123,37 +65,22 @@ export interface SelectTriggerProps extends Omit<
   "size" | "variant" | "width"
 > {
   /**
-   * Size variant - token-based
+   * Invalid state - uses aria-invalid
    */
-  size?: ResponsiveSelectSize;
-  /**
-   * Visual variant - token-based
-   */
-  variant?: SelectVariantToken;
-  /**
-   * Width - token-based
-   */
-  width?: ResponsiveSelectWidth;
+  "aria-invalid"?: boolean;
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, size, variant, width, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-    const baseVariant = variant ?? "outline";
-    const baseWidth = getBaseValue(width) ?? "full";
-
+  ({ className, "aria-invalid": ariaInvalid, ...props }, ref) => {
     return (
       <SelectPrimitive.Trigger
         ref={ref}
+        aria-invalid={ariaInvalid || undefined}
         className={cn(
-          selectTriggerVariants({
-            size: baseSize as SelectSizeToken,
-            variant: baseVariant,
-            width: baseWidth as SelectWidthToken,
-          }),
+          selectTriggerVariants(),
           // Radix provides data-state attributes automatically
           // Add state-based styling via data attributes
-          `data-[state=open]:${SELECT_TOKENS.state.open.border}`,
+          "data-[state=open]:border-ring",
           "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
           className,
         )}
@@ -174,7 +101,19 @@ export interface SelectValueProps extends React.ComponentPropsWithoutRef<
 
 const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(
   ({ className, ...props }, ref) => {
-    return <SelectPrimitive.Value ref={ref} className={cn("truncate", className)} {...props} />;
+    return (
+      <SelectPrimitive.Value
+        ref={ref}
+        className={cn(
+          "truncate",
+          // Placeholder styling with sufficient contrast (WCAG AA)
+          // Radix adds data-placeholder attribute when showing placeholder text
+          "data-[placeholder]:text-foreground data-[placeholder]:opacity-70",
+          className,
+        )}
+        {...props}
+      />
+    );
   },
 );
 SelectValue.displayName = SelectPrimitive.Value.displayName;
@@ -193,8 +132,8 @@ const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(
       <SelectPrimitive.Icon ref={ref} asChild {...props}>
         <ChevronDown
           className={cn(
-            SELECT_TOKENS.trigger.icon.size,
-            SELECT_TOKENS.trigger.icon.color,
+            INPUT_TOKENS.icon.size,
+            INPUT_TOKENS.icon.color,
             "shrink-0 opacity-50",
             MOTION_TOKENS.transition.transform,
             MOTION_TOKENS.duration["200"],
@@ -215,12 +154,8 @@ SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 
 export interface SelectContentProps extends Omit<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
-  "size" | "sideOffset" | "alignOffset"
+  "sideOffset" | "alignOffset"
 > {
-  /**
-   * Size variant - token-based
-   */
-  size?: ResponsiveSelectSize;
   /**
    * Side offset - token-based
    */
@@ -232,9 +167,7 @@ export interface SelectContentProps extends Omit<
 }
 
 const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
-  ({ className, size, sideOffset, alignOffset, position = "popper", ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-
+  ({ className, sideOffset, alignOffset, position = "popper", ...props }, ref) => {
     // Resolve offset tokens to pixels
     const sideOffsetPx = React.useMemo(() => {
       const baseOffset = getBaseValue(sideOffset);
@@ -254,9 +187,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
           sideOffset={sideOffsetPx}
           alignOffset={alignOffsetPx}
           className={cn(
-            selectContentVariants({
-              size: baseSize as SelectSizeToken,
-            }),
+            selectContentVariants(),
             position === "popper" &&
               "data-[side=bottom]:translate-y-[var(--spacing-xs)] data-[side=left]:-translate-x-[var(--spacing-xs)] data-[side=right]:translate-x-[var(--spacing-xs)] data-[side=top]:-translate-y-[var(--spacing-xs)]",
             className,
@@ -285,7 +216,8 @@ const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
       <SelectPrimitive.Viewport
         ref={ref}
         className={cn(
-          SELECT_TOKENS.content.padding.md,
+          INPUT_TOKENS.padding.horizontal.md,
+          INPUT_TOKENS.padding.vertical.md,
           "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
           className,
         )}
@@ -302,36 +234,20 @@ SelectViewport.displayName = SelectPrimitive.Viewport.displayName;
 
 export interface SelectItemProps extends React.ComponentPropsWithoutRef<
   typeof SelectPrimitive.Item
-> {
-  /**
-   * Size variant - token-based
-   */
-  size?: ResponsiveSelectSize;
-}
+> {}
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ className, size, children, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-
+  ({ className, children, ...props }, ref) => {
     return (
-      <SelectPrimitive.Item
-        ref={ref}
-        className={cn(
-          selectItemVariants({
-            size: baseSize as SelectSizeToken,
-          }),
-          className,
-        )}
-        {...props}
-      >
+      <SelectPrimitive.Item ref={ref} className={cn(selectItemVariants(), className)} {...props}>
         <span
           className={cn(
             "absolute left-sm flex items-center justify-center",
-            SELECT_TOKENS.item.indicator.size,
+            INPUT_TOKENS.icon.size,
           )}
         >
           <SelectPrimitive.ItemIndicator>
-            <Check className={cn(SELECT_TOKENS.item.indicator.size)} />
+            <Check className={cn(INPUT_TOKENS.icon.size)} />
           </SelectPrimitive.ItemIndicator>
         </span>
         <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -368,7 +284,7 @@ const SelectItemIndicator = React.forwardRef<HTMLSpanElement, SelectItemIndicato
   ({ className, ...props }, ref) => {
     return (
       <SelectPrimitive.ItemIndicator ref={ref} className={className} {...props}>
-        <Check className={cn(SELECT_TOKENS.item.indicator.size)} />
+        <Check className={cn(INPUT_TOKENS.icon.size)} />
       </SelectPrimitive.ItemIndicator>
     );
   },
@@ -381,35 +297,14 @@ SelectItemIndicator.displayName = SelectPrimitive.ItemIndicator.displayName;
 
 export interface SelectSeparatorProps extends React.ComponentPropsWithoutRef<
   typeof SelectPrimitive.Separator
-> {
-  /**
-   * Size variant - token-based
-   */
-  size?: ResponsiveSelectSize;
-}
+> {}
 
 const SelectSeparator = React.forwardRef<HTMLDivElement, SelectSeparatorProps>(
-  ({ className, size, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-    const marginHorizontal =
-      baseSize === "xs" || baseSize === "sm" || baseSize === "md"
-        ? SELECT_TOKENS.separator.margin.horizontal.md
-        : SELECT_TOKENS.separator.margin.horizontal.lg;
-    const marginVertical =
-      baseSize === "xs" || baseSize === "sm" || baseSize === "md"
-        ? SELECT_TOKENS.separator.margin.vertical.md
-        : SELECT_TOKENS.separator.margin.vertical.lg;
-
+  ({ className, ...props }, ref) => {
     return (
       <SelectPrimitive.Separator
         ref={ref}
-        className={cn(
-          marginHorizontal,
-          marginVertical,
-          SELECT_TOKENS.separator.height,
-          SELECT_TOKENS.separator.background,
-          className,
-        )}
+        className={cn("-mx-xs my-xs", SEPARATOR_TOKENS.thickness["1"], "bg-muted", className)}
         {...props}
       />
     );
@@ -438,28 +333,20 @@ SelectGroup.displayName = SelectPrimitive.Group.displayName;
 
 export interface SelectLabelProps extends React.ComponentPropsWithoutRef<
   typeof SelectPrimitive.Label
-> {
-  /**
-   * Size variant - token-based
-   */
-  size?: ResponsiveSelectSize;
-}
+> {}
 
 const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(
-  ({ className, size, ...props }, ref) => {
-    const baseSize = getBaseValue(size) ?? "md";
-    const paddingHorizontal = SELECT_TOKENS.label.padding.horizontal[baseSize as SelectSizeToken];
-    const paddingVertical = SELECT_TOKENS.label.padding.vertical[baseSize as SelectSizeToken];
-    const fontSize = SELECT_TOKENS.label.fontSize[baseSize as SelectSizeToken];
-
+  ({ className, ...props }, ref) => {
     return (
       <SelectPrimitive.Label
         ref={ref}
         className={cn(
-          paddingHorizontal,
-          paddingVertical,
-          fontSize,
-          SELECT_TOKENS.label.fontWeight,
+          INPUT_TOKENS.padding.horizontal.md,
+          INPUT_TOKENS.padding.vertical.md,
+          INPUT_TOKENS.fontSize.sm,
+          "font-semibold",
+          // Text color with sufficient contrast (WCAG AA)
+          "text-foreground",
           className,
         )}
         {...props}

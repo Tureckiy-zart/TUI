@@ -18,8 +18,10 @@ export {
   SegmentedControl,
   type SegmentedControlItemProps,
   segmentedControlItemVariants,
+  type SegmentedControlOrientation,
   type SegmentedControlRootProps,
   segmentedControlRootVariants,
+  type SegmentedControlSize,
 } from "./segmented-control";
 
 // Breadcrumbs
@@ -54,3 +56,15 @@ export {
 
 // SearchBar
 export { SearchBar, type SearchBarProps } from "./SearchBar";
+
+// Navigation Primitives
+export { NavItem, type NavItemProps, NavRoot, type NavRootProps } from "./primitives";
+
+// NavList (standalone component)
+export { NavList, type NavListProps } from "./nav-list";
+
+// NavText (standalone component)
+export { NavText, type NavTextProps } from "./NavText/NavText";
+
+// NavSeparator (standalone component)
+export { NavSeparator, type NavSeparatorProps } from "./NavSeparator/NavSeparator";

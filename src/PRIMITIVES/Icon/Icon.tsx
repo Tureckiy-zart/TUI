@@ -1,21 +1,29 @@
 "use client";
 
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { ICON_TOKENS, type IconColor, type IconStroke } from "@/FOUNDATION/tokens/components/icon";
 import { type IconName, type IconProps as IconComponentProps, ICONS_MAP } from "@/icons";
 
-const iconVariants = cva("shrink-0", {
+/**
+ * Icon size type
+ * Icon uses a visual size scale (sm, md, lg, xl) distinct from interactive components.
+ * Per Foundation rule: "Semi-interactive components (Icon, Badge, Avatar) MUST NOT use size as interactive scale"
+ */
+type IconSizeSubset = "sm" | "md" | "lg" | "xl";
+
+const iconVariants = tokenCVA({
+  base: "shrink-0",
   variants: {
     size: {
       sm: ICON_TOKENS.sizes.sm,
       md: ICON_TOKENS.sizes.md,
       lg: ICON_TOKENS.sizes.lg,
       xl: ICON_TOKENS.sizes.xl,
-    },
+    } satisfies Record<IconSizeSubset, string>,
     color: {
       default: ICON_TOKENS.colors.default,
       muted: ICON_TOKENS.colors.muted,
@@ -23,12 +31,12 @@ const iconVariants = cva("shrink-0", {
       warning: ICON_TOKENS.colors.warning,
       danger: ICON_TOKENS.colors.danger,
       info: ICON_TOKENS.colors.info,
-    },
+    } satisfies Record<IconColor, string>,
     stroke: {
       thin: ICON_TOKENS.stroke.thin,
       normal: ICON_TOKENS.stroke.normal,
       bold: ICON_TOKENS.stroke.bold,
-    },
+    } satisfies Record<IconStroke, string>,
   },
   defaultVariants: {
     size: "md",
@@ -37,14 +45,27 @@ const iconVariants = cva("shrink-0", {
   },
 });
 
-export interface IconProps
-  extends
-    Omit<React.SVGProps<SVGSVGElement>, "color" | "stroke">,
-    VariantProps<typeof iconVariants> {
+export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, "color" | "stroke"> {
   /**
    * Icon name from registry
    */
   name: IconName;
+
+  /**
+   * Icon size
+   * Icon uses a visual size scale (sm, md, lg, xl) distinct from interactive components.
+   */
+  size?: IconSizeSubset;
+
+  /**
+   * Icon color variant
+   */
+  color?: IconColor;
+
+  /**
+   * Stroke width variant
+   */
+  stroke?: IconStroke;
 
   /**
    * Render as child element (composition pattern)
@@ -59,13 +80,17 @@ export interface IconProps
  * Unified icon component with token-driven sizing, colors, and stroke.
  * Supports SSR-safe rendering and tree-shakeable icon registry.
  *
+ * Icon is a semi-interactive primitive that provides pure visual representation
+ * without interactive behavior. All interactivity (clicks, keyboard navigation)
+ * is delegated to parent components.
+ *
  * @example
  * ```tsx
  * <Icon name="search" size="md" color="default" />
  * ```
  */
 const Icon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ name, size, color, stroke, className, asChild = false, ...props }, ref) => {
+  ({ name, size, color, stroke, className, asChild = false, ...svgProps }, ref) => {
     // Lookup icon from registry, fallback to error icon
     const IconComponent = ICONS_MAP[name] || ICONS_MAP.error;
 
@@ -74,22 +99,12 @@ const Icon = React.forwardRef<SVGSVGElement, IconProps>(
       return null;
     }
 
-    // Extract icon component props (exclude name, asChild, and variant props)
-    const {
-      name: _name,
-      asChild: _asChild,
-      size: _size,
-      color: _color,
-      stroke: _stroke,
-      ...iconProps
-    } = props as any;
-
     // Render icon with variants applied
     const iconElement = (
       <IconComponent
         className={cn(iconVariants({ size, color, stroke }), className)}
         ref={ref}
-        {...(iconProps as IconComponentProps)}
+        {...(svgProps as IconComponentProps)}
       />
     );
 

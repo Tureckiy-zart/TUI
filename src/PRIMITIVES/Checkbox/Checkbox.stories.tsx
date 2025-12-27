@@ -6,7 +6,7 @@ import * as React from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Components/Checkbox",
+  title: "Foundation Locked/Primitives/Checkbox",
   component: Checkbox,
   parameters: {
     layout: "centered",
@@ -30,8 +30,8 @@ const meta: Meta<typeof Checkbox> = {
     },
     size: {
       control: { type: "select" },
-      options: ["xs", "sm", "md", "lg", "xl"],
-      description: "Checkbox size",
+      options: ["sm", "md", "lg"],
+      description: "Checkbox size (canonical interactive scale: sm | md | lg)",
       table: {
         type: { summary: "string" },
         defaultValue: { summary: "md" },
@@ -103,85 +103,101 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const AllSizes: Story = {
+export const SizesGallery: Story = {
   render: () => (
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-sm">
-        <Checkbox size="xs" aria-label="Extra small checkbox" />
-        <span className="text-xs text-muted-foreground">xs</span>
-      </div>
-      <div className="flex flex-col items-center gap-sm">
         <Checkbox size="sm" aria-label="Small checkbox" />
-        <span className="text-xs text-muted-foreground">sm</span>
+        <span className="text-xs font-medium text-foreground">sm</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="md" aria-label="Medium checkbox" />
-        <span className="text-xs text-muted-foreground">md</span>
+        <span className="text-xs font-medium text-foreground">md</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="lg" aria-label="Large checkbox" />
-        <span className="text-xs text-muted-foreground">lg</span>
-      </div>
-      <div className="flex flex-col items-center gap-sm">
-        <Checkbox size="xl" aria-label="Extra large checkbox" />
-        <span className="text-xs text-muted-foreground">xl</span>
+        <span className="text-xs font-medium text-foreground">lg</span>
       </div>
     </div>
   ),
 };
 
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-md">
-      <div className="flex items-center gap-md">
-        <Checkbox variant="primary" checked aria-label="Primary checkbox" />
-        <span>Primary</span>
+export const Matrix: Story = {
+  render: () => {
+    const variants = ["primary", "secondary", "outline", "ghost", "destructive"] as const;
+    const sizes = ["sm", "md", "lg"] as const;
+
+    return (
+      <div className="space-y-md">
+        <div className="grid grid-cols-4 gap-md">
+          <div></div>
+          {sizes.map((size) => (
+            <div key={size} className="text-center text-xs font-medium text-foreground">
+              {size}
+            </div>
+          ))}
+        </div>
+        {variants.map((variant) => (
+          <div key={variant} className="grid grid-cols-4 items-center gap-md">
+            <div className="text-xs font-medium text-foreground">{variant}</div>
+            {sizes.map((size) => (
+              <div key={`${variant}-${size}`} className="flex justify-center">
+                <Checkbox
+                  variant={variant}
+                  size={size}
+                  checked
+                  aria-label={`${variant} ${size} checkbox`}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-      <div className="flex items-center gap-md">
-        <Checkbox variant="secondary" checked aria-label="Secondary checkbox" />
-        <span>Secondary</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox variant="outline" checked aria-label="Outline checkbox" />
-        <span>Outline</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox variant="ghost" checked aria-label="Ghost checkbox" />
-        <span>Ghost</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox variant="destructive" checked aria-label="Destructive checkbox" />
-        <span>Destructive</span>
-      </div>
-    </div>
-  ),
+    );
+  },
 };
 
-export const AllStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-md">
-      <div className="flex items-center gap-md">
-        <Checkbox state="default" aria-label="Default state checkbox" />
-        <span>Default</span>
+export const States: Story = {
+  render: () => {
+    const variants = ["primary", "outline"] as const;
+    const sizes = ["sm", "md", "lg"] as const;
+    const states = [
+      { name: "Default", props: {} },
+      { name: "Checked", props: { checked: true } },
+      { name: "Indeterminate", props: { indeterminate: true } },
+      { name: "Disabled", props: { disabled: true } },
+      { name: "Disabled Checked", props: { disabled: true, checked: true } },
+      { name: "Error", props: { state: "error" as const } },
+    ];
+
+    return (
+      <div className="space-y-lg">
+        {variants.map((variant) => (
+          <div key={variant}>
+            <h3 className="mb-md text-lg font-semibold capitalize">{variant}</h3>
+            {sizes.map((size) => (
+              <div key={size} className="mb-md">
+                <div className="mb-sm text-sm font-medium text-foreground">{size}</div>
+                <div className="flex items-center gap-md">
+                  {states.map((state) => (
+                    <div key={state.name} className="flex flex-col items-center gap-sm">
+                      <Checkbox
+                        variant={variant}
+                        size={size}
+                        aria-label={`${variant} ${size} ${state.name}`}
+                        {...state.props}
+                      />
+                      <span className="text-xs font-medium text-foreground">{state.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-      <div className="flex items-center gap-md">
-        <Checkbox state="checked" checked aria-label="Checked state checkbox" />
-        <span>Checked</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox state="indeterminate" indeterminate aria-label="Indeterminate state checkbox" />
-        <span>Indeterminate</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox state="error" aria-label="Error state checkbox" />
-        <span>Error</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Checkbox state="disabled" disabled aria-label="Disabled state checkbox" />
-        <span>Disabled</span>
-      </div>
-    </div>
-  ),
+    );
+  },
 };
 
 export const WithLabel: Story = {
@@ -256,7 +272,7 @@ export const Accessibility: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Keyboard Navigation</h3>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           Press <kbd className="rounded bg-muted px-1 py-0.5 text-xs">Space</kbd> to toggle the
           checkbox.
         </p>
@@ -269,7 +285,7 @@ export const Accessibility: Story = {
       </div>
       <div>
         <h3 className="mb-md text-lg font-semibold">Screen Reader Support</h3>
-        <p className="mb-md text-sm text-muted-foreground">
+        <p className="mb-md text-sm font-medium text-foreground/90">
           All checkboxes have proper ARIA attributes for screen readers.
         </p>
         <div className="flex flex-col gap-sm">

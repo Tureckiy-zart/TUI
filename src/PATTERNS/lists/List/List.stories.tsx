@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { List } from "./List";
 
 const meta: Meta<typeof List> = {
-  title: "Components/List",
+  title: "Foundation Locked/Patterns/Lists/List",
   component: List,
   parameters: {
     layout: "padded",
@@ -56,5 +56,19 @@ export const LongDescriptions: Story = {
         description: "Short description.",
       },
     ],
+  },
+};
+
+export const Accessibility: Story = {
+  args: {
+    items: sampleItems,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "List component uses semantic HTML (`<ul>` and `<li>`) with proper ARIA attributes for screen reader support. Each list item contains a heading and optional description.",
+      },
+    },
   },
 };

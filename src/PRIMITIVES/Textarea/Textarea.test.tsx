@@ -14,7 +14,7 @@ describe("Textarea", () => {
       expect(textarea).toBeInTheDocument();
     });
 
-    it("renders with default variant and size", () => {
+    it("renders with default size", () => {
       const { container } = renderWithTheme(<Textarea placeholder="Default textarea" />);
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
@@ -28,49 +28,7 @@ describe("Textarea", () => {
     });
   });
 
-  describe("Variants", () => {
-    it("renders primary variant", () => {
-      const { container } = renderWithTheme(<Textarea variant="primary" placeholder="Primary" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("renders secondary variant", () => {
-      const { container } = renderWithTheme(
-        <Textarea variant="secondary" placeholder="Secondary" />,
-      );
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("renders outline variant", () => {
-      const { container } = renderWithTheme(<Textarea variant="outline" placeholder="Outline" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("renders ghost variant", () => {
-      const { container } = renderWithTheme(<Textarea variant="ghost" placeholder="Ghost" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("renders destructive variant", () => {
-      const { container } = renderWithTheme(
-        <Textarea variant="destructive" placeholder="Destructive" />,
-      );
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-  });
-
   describe("Sizes", () => {
-    it("renders xs size", () => {
-      const { container } = renderWithTheme(<Textarea size="xs" placeholder="Extra small" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
     it("renders sm size", () => {
       const { container } = renderWithTheme(<Textarea size="sm" placeholder="Small" />);
       const textarea = container.querySelector("textarea");
@@ -88,182 +46,82 @@ describe("Textarea", () => {
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
     });
-
-    it("renders xl size", () => {
-      const { container } = renderWithTheme(<Textarea size="xl" placeholder="Extra large" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
   });
 
   describe("States", () => {
-    it("renders default state", () => {
-      const { container } = renderWithTheme(<Textarea state="default" placeholder="Default" />);
+    it("renders without disabled or invalid state by default", () => {
+      const { container } = renderWithTheme(<Textarea placeholder="Default" />);
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
       expect(textarea).not.toBeDisabled();
+      expect(textarea).not.toHaveAttribute("aria-invalid", "true");
     });
 
-    it("renders error state", () => {
-      const { container } = renderWithTheme(<Textarea state="error" placeholder="Error" />);
+    it("renders invalid state via invalid prop", () => {
+      const { container } = renderWithTheme(<Textarea invalid placeholder="Invalid" />);
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
       expect(textarea).toHaveAttribute("aria-invalid", "true");
     });
 
-    it("renders success state", () => {
-      const { container } = renderWithTheme(<Textarea state="success" placeholder="Success" />);
+    it("renders invalid state via aria-invalid", () => {
+      const { container } = renderWithTheme(<Textarea aria-invalid={true} placeholder="Invalid" />);
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
+      expect(textarea).toHaveAttribute("aria-invalid", "true");
     });
 
-    it("renders disabled state", () => {
-      renderWithTheme(<Textarea state="disabled" placeholder="Disabled" />);
+    it("renders disabled state via disabled prop", () => {
+      renderWithTheme(<Textarea disabled placeholder="Disabled" />);
       const textarea = screen.getByPlaceholderText("Disabled");
       expect(textarea).toBeDisabled();
     });
 
-    it("is disabled when disabled prop is true", () => {
-      renderWithTheme(<Textarea disabled placeholder="Disabled prop" />);
-      const textarea = screen.getByPlaceholderText("Disabled prop");
+    it("combines disabled and invalid", () => {
+      renderWithTheme(<Textarea disabled invalid placeholder="Disabled and invalid" />);
+      const textarea = screen.getByPlaceholderText("Disabled and invalid");
       expect(textarea).toBeDisabled();
-    });
-  });
-
-  describe("Character Counter", () => {
-    it("does not show character counter by default", () => {
-      const { container } = renderWithTheme(<Textarea placeholder="No counter" maxLength={100} />);
-      const counter = container.querySelector(".absolute");
-      expect(counter).toBeNull();
+      expect(textarea).toHaveAttribute("aria-invalid", "true");
     });
 
-    it("shows character counter when showCharacterCount is true and maxLength is provided", () => {
-      const { container } = renderWithTheme(
-        <Textarea placeholder="With counter" maxLength={100} showCharacterCount />,
+    it("invalid prop takes precedence over aria-invalid when both provided", () => {
+      renderWithTheme(
+        <Textarea invalid={false} aria-invalid={true} placeholder="Invalid precedence" />,
       );
-      const counter = container.querySelector(".absolute");
-      expect(counter).toBeInTheDocument();
-      expect(counter?.textContent).toBe("0 / 100");
-    });
-
-    it("displays correct character count", () => {
-      const { container } = renderWithTheme(
-        <Textarea
-          placeholder="With counter"
-          maxLength={100}
-          showCharacterCount
-          defaultValue="Hello"
-        />,
-      );
-      const counter = container.querySelector(".absolute");
-      expect(counter?.textContent).toBe("5 / 100");
-    });
-
-    it("updates character count when value changes", () => {
-      const { container, rerender } = renderWithTheme(
-        <Textarea
-          placeholder="With counter"
-          maxLength={100}
-          showCharacterCount
-          defaultValue="Hello"
-        />,
-      );
-      let counter = container.querySelector(".absolute");
-      expect(counter?.textContent).toBe("5 / 100");
-
-      rerender(
-        <Textarea
-          placeholder="With counter"
-          maxLength={100}
-          showCharacterCount
-          value="Hello World"
-        />,
-      );
-      counter = container.querySelector(".absolute");
-      expect(counter?.textContent).toBe("11 / 100");
-    });
-
-    it("wraps textarea in container when character counter is shown", () => {
-      const { container } = renderWithTheme(
-        <Textarea placeholder="With counter" maxLength={100} showCharacterCount />,
-      );
-      const wrapper = container.querySelector("div.relative");
-      expect(wrapper).toBeInTheDocument();
-      const textarea = wrapper?.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("does not wrap textarea when character counter is not shown", () => {
-      const { container } = renderWithTheme(<Textarea placeholder="No counter" />);
-      const wrapper = container.querySelector("div.relative");
-      expect(wrapper).toBeNull();
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toBeInTheDocument();
-    });
-
-    it("applies error styling to counter when exceeding maxLength", () => {
-      const { container } = renderWithTheme(
-        <Textarea
-          placeholder="With counter"
-          maxLength={10}
-          showCharacterCount
-          defaultValue="This is a very long text that exceeds the limit"
-        />,
-      );
-      const counter = container.querySelector(".absolute");
-      expect(counter).toHaveClass("text-[hsl(var(--destructive))]");
-    });
-  });
-
-  describe("FullWidth", () => {
-    it("renders fullWidth by default", () => {
-      const { container } = renderWithTheme(<Textarea placeholder="Full width" />);
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toHaveClass("w-full");
-    });
-
-    it("renders not fullWidth when fullWidth is false", () => {
-      const { container } = renderWithTheme(
-        <Textarea fullWidth={false} placeholder="Not full width" />,
-      );
-      const textarea = container.querySelector("textarea");
-      expect(textarea).not.toHaveClass("w-full");
+      const textarea = screen.getByPlaceholderText("Invalid precedence");
+      expect(textarea).toHaveAttribute("aria-invalid", "false");
     });
   });
 
   describe("Accessibility", () => {
-    it("maps aria-invalid when state is error", () => {
-      renderWithTheme(<Textarea state="error" placeholder="Error textarea" />);
-      const textarea = screen.getByPlaceholderText("Error textarea");
-      expect(textarea).toHaveAttribute("aria-invalid", "true");
-    });
-
-    it("maps aria-invalid when aria-invalid prop is true", () => {
+    it("supports aria-invalid attribute", () => {
       renderWithTheme(<Textarea aria-invalid={true} placeholder="Invalid textarea" />);
       const textarea = screen.getByPlaceholderText("Invalid textarea");
       expect(textarea).toHaveAttribute("aria-invalid", "true");
     });
 
-    it("generates aria-describedby for error state", () => {
-      const { container } = renderWithTheme(
-        <Textarea state="error" placeholder="Error textarea" />,
-      );
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toHaveAttribute("aria-describedby");
-    });
-
-    it("generates aria-describedby for success state", () => {
-      const { container } = renderWithTheme(
-        <Textarea state="success" placeholder="Success textarea" />,
-      );
-      const textarea = container.querySelector("textarea");
-      expect(textarea).toHaveAttribute("aria-describedby");
+    it("supports aria-invalid false", () => {
+      renderWithTheme(<Textarea aria-invalid={false} placeholder="Valid textarea" />);
+      const textarea = screen.getByPlaceholderText("Valid textarea");
+      expect(textarea).toHaveAttribute("aria-invalid", "false");
     });
 
     it("uses provided aria-describedby", () => {
       renderWithTheme(<Textarea aria-describedby="custom-id" placeholder="Custom describedby" />);
       const textarea = screen.getByPlaceholderText("Custom describedby");
       expect(textarea).toHaveAttribute("aria-describedby", "custom-id");
+    });
+
+    it("supports aria-required attribute", () => {
+      renderWithTheme(<Textarea aria-required={true} placeholder="Required textarea" />);
+      const textarea = screen.getByPlaceholderText("Required textarea");
+      expect(textarea).toHaveAttribute("aria-required", "true");
+    });
+
+    it("supports native required attribute", () => {
+      renderWithTheme(<Textarea required placeholder="Required textarea" />);
+      const textarea = screen.getByPlaceholderText("Required textarea");
+      expect(textarea).toBeRequired();
     });
   });
 
@@ -300,12 +158,6 @@ describe("Textarea", () => {
   });
 
   describe("Native textarea attributes", () => {
-    it("renders with rows attribute", () => {
-      renderWithTheme(<Textarea placeholder="With rows" rows={5} />);
-      const textarea = screen.getByPlaceholderText("With rows");
-      expect(textarea).toHaveAttribute("rows", "5");
-    });
-
     it("renders with maxLength attribute", () => {
       renderWithTheme(<Textarea placeholder="With maxLength" maxLength={200} />);
       const textarea = screen.getByPlaceholderText("With maxLength");
@@ -323,22 +175,31 @@ describe("Textarea", () => {
       const textarea = screen.getByPlaceholderText("Controlled");
       expect(textarea).toHaveValue("Controlled value");
     });
+
+    it("renders with placeholder", () => {
+      renderWithTheme(<Textarea placeholder="Enter your text" />);
+      const textarea = screen.getByPlaceholderText("Enter your text");
+      expect(textarea).toBeInTheDocument();
+    });
+
+    it("renders with name attribute", () => {
+      renderWithTheme(<Textarea name="description" placeholder="Description" />);
+      const textarea = screen.getByPlaceholderText("Description");
+      expect(textarea).toHaveAttribute("name", "description");
+    });
   });
 
-  describe("ClassName merging", () => {
-    it.skip("merges custom className", () => {
-      // Foundation components do not support className prop
-      const { container } = renderWithTheme(<Textarea placeholder="Custom class" />);
+  describe("Layout", () => {
+    it("renders full width by default", () => {
+      const { container } = renderWithTheme(<Textarea placeholder="Full width" />);
       const textarea = container.querySelector("textarea");
-      expect(textarea).not.toHaveClass("custom-class");
+      expect(textarea).toHaveClass("w-full");
     });
   });
 
   describe("Snapshot", () => {
-    it("matches snapshot for outline variant", () => {
-      const { container } = renderWithTheme(
-        <Textarea variant="outline" placeholder="Snapshot test" />,
-      );
+    it("matches snapshot for default textarea", () => {
+      const { container } = renderWithTheme(<Textarea placeholder="Snapshot test" />);
       expect(container.firstChild).toMatchSnapshot();
     });
   });

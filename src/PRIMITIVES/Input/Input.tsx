@@ -1,10 +1,21 @@
 "use client";
 
+/**
+ * Input Component
+ *
+ * @semantic_role FOUNDATION_PRIMITIVE_TEXT_INPUT
+ * @semantic_definition Input is a low-level form control primitive that wraps the native <input> element.
+ *                     It is responsible only for visual styling via tokens, accessibility via native and ARIA attributes,
+ *                     and forwarding all native input behavior. Input does not handle labels, errors, validation,
+ *                     helper text, or form logic. Higher-level composition is delegated to FormField or domain-level form abstractions.
+ *
+ * @status FOUNDATION LOCK (Target - 2025-12-26)
+ * @rule DO NOT modify, extend, or create alternatives (after Foundation Lock)
+ */
+
 import * as React from "react";
 
-import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 
 import type { InputProps } from "./Input.types";
 import { inputVariants } from "./input-variants";
@@ -12,116 +23,23 @@ import { inputVariants } from "./input-variants";
 /**
  * Input Component
  *
- * A fully accessible, theme-aware input component with variant support,
- * icon slots, and comprehensive state management.
+ * A minimal, low-level form control primitive that wraps the native <input> element.
+ * Supports size variants and invalid state for accessibility.
  *
  * @example
  * ```tsx
- * <Input
- *   variant="outline"
- *   size="md"
- *   placeholder="Enter text..."
- *   iconLeft={<Icon name="search" />}
- * />
+ * <Input size="md" placeholder="Enter text..." />
+ * <Input invalid aria-describedby="error-id" />
  * ```
  */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      type = "text",
-      variant,
-      size,
-      state,
-      fullWidth,
-      iconLeft,
-      iconRight,
-      disabled,
-      "aria-invalid": ariaInvalid,
-      "aria-describedby": ariaDescribedBy,
-      ...props
-    },
-    ref,
-  ) => {
-    // Determine if input is in error state
-    const isError = state === "error" || ariaInvalid === true;
-    const isDisabled = disabled || state === "disabled";
-
-    // Map state to aria-invalid
-    const ariaInvalidValue = isError ? true : ariaInvalid;
-
-    // Generate unique ID for aria-describedby if error/success state
-    const inputId = React.useId();
-    const [describedById] = React.useState(() => {
-      if (ariaDescribedBy) return ariaDescribedBy;
-      if (state === "error" || state === "success") {
-        return `input-${inputId}-message`;
-      }
-      return undefined;
-    });
-
-    // Extract base values from Responsive props for CVA
-    const baseVariant = getBaseValue(variant);
-    const baseSize = getBaseValue(size);
-
-    // Compute input classes
-    // className and style are forbidden from public API - only CVA output is used
-    const inputClasses = cn(
-      inputVariants({ variant: baseVariant, size: baseSize, state, fullWidth }),
-      // Add padding for icons if present
-      iconLeft && INPUT_TOKENS.icon.paddingLeft,
-      iconRight && INPUT_TOKENS.icon.paddingRight,
-    );
-
-    // If icons are present, wrap in container
-    if (iconLeft || iconRight) {
-      return (
-        <div className={cn("relative", fullWidth !== false && INPUT_TOKENS.width.full)}>
-          {iconLeft && (
-            <span
-              className={cn(
-                "absolute left-0 top-0 flex h-full items-center",
-                INPUT_TOKENS.icon.paddingLeft,
-                INPUT_TOKENS.icon.size,
-                INPUT_TOKENS.icon.color,
-              )}
-            >
-              {iconLeft}
-            </span>
-          )}
-          <input
-            type={type}
-            className={inputClasses}
-            ref={ref}
-            disabled={isDisabled}
-            aria-invalid={ariaInvalidValue}
-            aria-describedby={describedById}
-            {...props}
-          />
-          {iconRight && (
-            <span
-              className={cn(
-                "absolute right-0 top-0 flex h-full items-center",
-                INPUT_TOKENS.icon.paddingRight,
-                INPUT_TOKENS.icon.size,
-                INPUT_TOKENS.icon.color,
-              )}
-            >
-              {iconRight}
-            </span>
-          )}
-        </div>
-      );
-    }
-
-    // No icons - render input directly
+  ({ size = "md", invalid, type = "text", ...props }, ref) => {
     return (
       <input
-        type={type}
-        className={inputClasses}
         ref={ref}
-        disabled={isDisabled}
-        aria-invalid={ariaInvalidValue}
-        aria-describedby={describedById}
+        type={type}
+        aria-invalid={invalid || undefined}
+        className={cn(inputVariants({ size }))}
         {...props}
       />
     );

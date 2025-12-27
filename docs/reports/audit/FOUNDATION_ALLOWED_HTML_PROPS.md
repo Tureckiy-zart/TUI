@@ -441,8 +441,8 @@ This document identifies which HTML and behavioral props **must remain allowed**
 ### 7. Checkbox
 
 **Component:** `src/PRIMITIVES/Checkbox/Checkbox.tsx`  
-**Base Type:** `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">`  
-**Status:** ⏳ **PROPOSED** (not yet locked)
+**Base Type:** `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange" | "className" | "style">`  
+**Status:** ✅ **LOCKED** (Foundation Layer, Lock Date: 2025-12-25; Refactor Cycle 2 Complete, 2025-12-27)
 
 #### Allowed Behavioral Props
 
@@ -459,7 +459,7 @@ This document identifies which HTML and behavioral props **must remain allowed**
 
 **Custom Props:**
 - `variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive"` - Visual variant (token-driven)
-- `size?: "xs" | "sm" | "md" | "lg" | "xl"` - Checkbox size (token-driven)
+- `size?: "sm" | "md" | "lg"` - Checkbox size (canonical interactive scale, token-driven)
 - `state?: "default" | "checked" | "indeterminate" | "error" | "disabled"` - Checkbox state
 - `icon?: React.ReactNode` - Custom checked icon
 - `indeterminateIcon?: React.ReactNode` - Custom indeterminate icon

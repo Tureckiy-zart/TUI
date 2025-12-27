@@ -299,6 +299,8 @@ Completed review reports are archived in:
 
 ### Retention Policy
 
+**Reference:** For complete Retention Policy, see [RETENTION_POLICY.md](../../workflows/policies/RETENTION_POLICY.md).
+
 - Keep all review reports indefinitely
 - Use for historical comparison
 - Reference in future reviews

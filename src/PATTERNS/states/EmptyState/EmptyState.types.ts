@@ -16,6 +16,8 @@ export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
 }
 
+import type { EmptyStateIconSize } from "@/FOUNDATION/tokens/components/empty-state";
+
 /**
  * EmptyState Icon component props
  */
@@ -29,7 +31,7 @@ export interface EmptyStateIconProps extends React.HTMLAttributes<HTMLDivElement
    * Icon size
    * @default "md"
    */
-  size?: "sm" | "md" | "lg";
+  size?: EmptyStateIconSize;
 }
 
 /**

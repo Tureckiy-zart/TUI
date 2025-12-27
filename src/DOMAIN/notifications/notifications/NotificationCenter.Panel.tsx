@@ -215,7 +215,7 @@ export const NotificationCenterPanel = React.forwardRef<
         >
           <Surface
             ref={ref}
-            variant="raised"
+            variant="elevated"
             className={cn("flex h-full flex-col", NOTIFICATION_TOKENS.panel.radius.default)}
           >
             {/* Header */}

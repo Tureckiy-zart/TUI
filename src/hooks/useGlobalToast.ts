@@ -69,7 +69,7 @@ export function useGlobalToast(): UseGlobalToastReturn {
       notifyListeners();
 
       // Auto dismiss after duration
-      const durationMs = toastData.duration ? getDelayMs(toastData.duration, 5000) : 5000;
+      const durationMs = getDelayMs(toastData.duration, 5000);
       if (durationMs > 0) {
         setTimeout(() => {
           dismiss(id);

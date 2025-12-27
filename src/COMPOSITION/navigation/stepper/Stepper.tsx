@@ -159,6 +159,44 @@ export interface StepperContentProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 // ============================================================================
+// Internal Helpers
+// ============================================================================
+
+/**
+ * Gets state-based className for indicator based on step state
+ */
+function getIndicatorStateClasses(
+  isCompleted: boolean,
+  isActive: boolean,
+  disabled?: boolean,
+): string {
+  if (isCompleted || isActive) {
+    return `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border}`;
+  }
+
+  return `${NAVIGATION_TOKENS.states.default.border} ${NAVIGATION_TOKENS.border.muted} ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${disabled ? NAVIGATION_TOKENS.states.disabled.text : ""}`;
+}
+
+/**
+ * Renders indicator content (icon or step number)
+ */
+function renderIndicatorContent(
+  icon: React.ReactNode | undefined,
+  showNumber: boolean,
+  index: number,
+): React.ReactNode {
+  if (icon) {
+    return icon;
+  }
+
+  if (showNumber) {
+    return <span>{index + 1}</span>;
+  }
+
+  return null;
+}
+
+// ============================================================================
 // Components
 // ============================================================================
 
@@ -183,6 +221,9 @@ const StepperRoot = React.forwardRef<HTMLDivElement, StepperRootProps>(
     return (
       <div
         ref={ref}
+        role="group"
+        aria-label="Progress steps"
+        aria-orientation={orientation}
         className={cn(
           "flex",
           orientation === "horizontal" ? "flex-row items-start" : "flex-col",
@@ -238,6 +279,7 @@ const StepperItem = React.forwardRef<HTMLDivElement, StepperItemPropsInternal>(
     return (
       <div
         ref={ref}
+        role="listitem"
         className={cn(
           "flex items-start",
           orientation === "horizontal" ? "flex-col" : "flex-row",
@@ -280,52 +322,26 @@ const StepperIndicator = React.forwardRef<HTMLDivElement, StepperIndicatorProps>
       MOTION_TOKENS.transition.colors,
     );
 
-    if (isCompleted) {
-      return (
-        <div
-          ref={ref}
-          className={cn(
-            baseClasses,
-            `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border}`,
-            className,
-          )}
-          aria-current={isActive ? "step" : undefined}
-          {...props}
-        >
-          <Check className="h-4 w-4" aria-hidden="true" />
-        </div>
-      );
-    }
+    const stateClasses = getIndicatorStateClasses(isCompleted, isActive, disabled);
+    const content = isCompleted ? (
+      <Check className={ICON_TOKENS.sizes.md} aria-hidden="true" />
+    ) : (
+      renderIndicatorContent(icon, showNumber, index)
+    );
 
-    if (isActive) {
-      return (
-        <div
-          ref={ref}
-          className={cn(
-            baseClasses,
-            `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border}`,
-            className,
-          )}
-          aria-current="step"
-          {...props}
-        >
-          {icon || (showNumber && <span>{index + 1}</span>)}
-        </div>
-      );
-    }
+    // Only active step should have aria-current="step"
+    // Completed steps should not have aria-current (they are past steps)
+    const ariaCurrent = isActive ? "step" : undefined;
 
     return (
       <div
         ref={ref}
-        className={cn(
-          baseClasses,
-          `${NAVIGATION_TOKENS.states.default.border} ${NAVIGATION_TOKENS.border.muted} ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text}`,
-          disabled && NAVIGATION_TOKENS.states.disabled.text,
-          className,
-        )}
+        className={cn(baseClasses, stateClasses, className)}
+        aria-current={ariaCurrent}
+        aria-disabled={disabled ? "true" : undefined}
         {...props}
       >
-        {icon || (showNumber && <span>{index + 1}</span>)}
+        {content}
       </div>
     );
   },
@@ -363,6 +379,7 @@ const StepperLabel = React.forwardRef<HTMLDivElement, StepperLabelProps>(
               NAVIGATION_TOKENS.states.default.text,
               ICON_TOKENS.colors.muted,
             )}
+            aria-label={`${label}: ${description}`}
           >
             {description}
           </span>

@@ -48,17 +48,16 @@
  */
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
 import * as React from "react";
 
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MODAL_TOKENS } from "@/FOUNDATION/tokens/components/modal";
 import type {
   ModalFooterAlignToken,
   ModalHeightToken,
-  ModalSizeToken,
   ModalWidthToken,
   RadiusToken,
   ResponsiveModalHeight,
@@ -68,6 +67,17 @@ import type {
   SpaceToken,
   SurfaceToken,
 } from "@/FOUNDATION/tokens/types";
+
+// ============================================================================
+// TYPE EXPORTS
+// ============================================================================
+
+/**
+ * Modal size union type
+ * Explicit union type for Modal size prop (sm | md | lg)
+ * Per VARIANTS_SIZE_CANON: overlay components restricted to sm | md | lg only
+ */
+export type ModalSize = "sm" | "md" | "lg";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -96,30 +106,28 @@ function getRadiusClass(token: RadiusToken | undefined): string | undefined {
 // CVA VARIANTS
 // ============================================================================
 
-const modalContentVariants = cva(
-  `${MODAL_TOKENS.content.position} ${MODAL_TOKENS.content.background} ${MODAL_TOKENS.content.text} ${MODAL_TOKENS.content.border} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`,
-  {
-    variants: {
-      size: {
-        sm: `${MODAL_TOKENS.size.sm.width} ${MODAL_TOKENS.size.sm.height} ${MODAL_TOKENS.size.sm.padding} ${MODAL_TOKENS.size.sm.radius} ${MODAL_TOKENS.size.sm.shadow}`,
-        md: `${MODAL_TOKENS.size.md.width} ${MODAL_TOKENS.size.md.height} ${MODAL_TOKENS.size.md.padding} ${MODAL_TOKENS.size.md.radius} ${MODAL_TOKENS.size.md.shadow}`,
-        lg: `${MODAL_TOKENS.size.lg.width} ${MODAL_TOKENS.size.lg.height} ${MODAL_TOKENS.size.lg.padding} ${MODAL_TOKENS.size.lg.radius} ${MODAL_TOKENS.size.lg.shadow}`,
-        xl: `${MODAL_TOKENS.size.xl.width} ${MODAL_TOKENS.size.xl.height} ${MODAL_TOKENS.size.xl.padding} ${MODAL_TOKENS.size.xl.radius} ${MODAL_TOKENS.size.xl.shadow}`,
-        fullscreen: `${MODAL_TOKENS.size.fullscreen.width} ${MODAL_TOKENS.size.fullscreen.height} ${MODAL_TOKENS.size.fullscreen.padding} ${MODAL_TOKENS.size.fullscreen.radius} ${MODAL_TOKENS.size.fullscreen.shadow}`,
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
+/**
+ * Modal content variants using tokenCVA
+ * Per CVA Usage Decision Matrix RULE 1: tokenCVA is REQUIRED for components with token-driven axes (size)
+ */
+const modalContentVariants = tokenCVA({
+  base: `${MODAL_TOKENS.content.position} ${MODAL_TOKENS.content.background} ${MODAL_TOKENS.content.text} ${MODAL_TOKENS.content.border} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`,
+  variants: {
+    size: {
+      sm: `${MODAL_TOKENS.size.sm.width} ${MODAL_TOKENS.size.sm.height} ${MODAL_TOKENS.size.sm.padding} ${MODAL_TOKENS.size.sm.radius} ${MODAL_TOKENS.size.sm.shadow}`,
+      md: `${MODAL_TOKENS.size.md.width} ${MODAL_TOKENS.size.md.height} ${MODAL_TOKENS.size.md.padding} ${MODAL_TOKENS.size.md.radius} ${MODAL_TOKENS.size.md.shadow}`,
+      lg: `${MODAL_TOKENS.size.lg.width} ${MODAL_TOKENS.size.lg.height} ${MODAL_TOKENS.size.lg.padding} ${MODAL_TOKENS.size.lg.radius} ${MODAL_TOKENS.size.lg.shadow}`,
+    } satisfies Record<ModalSize, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});
 
-const modalOverlayVariants = cva(
-  `fixed inset-0 z-50 ${MODAL_TOKENS.overlay.background} data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0`,
-  {
-    variants: {},
-  },
-);
+const modalOverlayVariants = tokenCVA({
+  base: `fixed inset-0 z-50 ${MODAL_TOKENS.overlay.background} data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0`,
+  variants: {},
+});
 
 // ============================================================================
 // MODAL ROOT
@@ -329,7 +337,7 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
           ref={ref}
           className={cn(
             modalContentVariants({
-              size: baseSize as ModalSizeToken,
+              size: baseSize as ModalSize,
             }),
             widthClass,
             heightClass,

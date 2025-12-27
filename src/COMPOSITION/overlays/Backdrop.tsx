@@ -55,7 +55,7 @@ export const Backdrop = React.forwardRef<HTMLDivElement, BackdropProps>(
         ref={ref}
         className={cn(
           backdropVariants({ variant }),
-          isVisible ? "tm-motion-fade-in opacity-100" : "tm-motion-fade-out opacity-0",
+          isVisible ? "opacity-100 tm-motion-fade-in" : "opacity-0 tm-motion-fade-out",
           className,
         )}
         onClick={onClick}

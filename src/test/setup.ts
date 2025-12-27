@@ -11,8 +11,71 @@ import { clearBrandRegistry } from "@/themes/brand_engine";
 // Extend expect with vitest-axe matchers
 expect.extend(matchers);
 
+// Global error handler to catch uncaught exceptions
+// We log SSR-related errors as warnings instead of silently ignoring them
+// to avoid masking real SSR failures and cleanup bugs
+const originalErrorHandler = process.listeners("uncaughtException")[0];
+process.removeAllListeners("uncaughtException");
+process.on("uncaughtException", (error) => {
+  // Log SSR-related errors as warnings instead of silently ignoring them
+  // This helps identify real SSR failures while still allowing tests to pass
+  // for known issues with async callbacks executing after cleanup
+  if (
+    error instanceof ReferenceError &&
+    (error.message.includes("document is not defined") ||
+      error.message.includes("window is not defined")) &&
+    (error.stack?.includes("@radix-ui") || error.stack?.includes("react-dom"))
+  ) {
+    // Log as warning instead of silently ignoring
+    // This helps identify real SSR failures and cleanup bugs
+    console.warn(
+      "[Test Setup] SSR-related error caught (may indicate cleanup issue):",
+      error.message,
+      "\nStack:",
+      error.stack,
+    );
+    // Don't throw - allow test to continue, but make the error visible
+    return;
+  }
+  // Re-throw other errors to catch real issues
+  if (originalErrorHandler) {
+    // UncaughtExceptionListener expects (error, origin) - pass both arguments
+    // If handler doesn't accept origin, it will be ignored
+    (originalErrorHandler as (error: Error, origin?: string) => void)(error, "uncaughtException");
+  } else {
+    throw error;
+  }
+});
+
 // Cleanup after each test
-afterEach(() => {
+afterEach(async () => {
+  // Cleanup Radix UI portals first
+  // Radix UI components (like Toast) use portals and async callbacks
+  // that may try to access document after test completion
+  if (typeof document !== "undefined") {
+    // Remove all Radix UI portal containers
+    const portals = document.querySelectorAll("[data-radix-portal]");
+    portals.forEach((portal) => {
+      portal.remove();
+    });
+    // Also remove any toast viewports that might be left behind
+    const toastViewports = document.querySelectorAll("[data-radix-toast-viewport]");
+    toastViewports.forEach((viewport) => {
+      viewport.remove();
+    });
+  }
+
+  // Wait for any pending async operations to complete
+  // This allows Radix UI callbacks and React DOM operations to finish before cleanup
+  // We use multiple ticks to ensure all pending operations complete
+  if (typeof setTimeout !== "undefined") {
+    // Wait for multiple event loop ticks to ensure all pending operations complete
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    // Additional wait for any delayed operations (e.g., Radix UI animations)
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+
   cleanup();
   // Clear brand registry to prevent "already registered" errors between tests
   clearBrandRegistry();

@@ -149,6 +149,8 @@ ESLint rules **MUST** verify scope before applying:
 
 ## Autofix Policy
 
+**Reference:** For complete Autofix Policy, see [ESLINT_AUTOFIX_POLICY.md](../../workflows/policies/ESLINT_AUTOFIX_POLICY.md).
+
 ### Core Principle
 
 > **Autofix MUST NOT mutate UI library internal implementation.**

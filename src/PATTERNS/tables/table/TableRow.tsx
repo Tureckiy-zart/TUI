@@ -19,17 +19,7 @@ export type { TableRowProps };
  * Table Row component
  */
 const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
-  (
-    {
-      selected = false,
-      expandable = false,
-      rowKey: _rowKey,
-      expanded = false,
-      className,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ selected = false, expandable = false, expanded = false, className, ...props }, ref) => {
     return (
       <tr
         ref={ref}

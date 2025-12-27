@@ -22,6 +22,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+- **Textarea Component API Migration (Foundation Pipeline 18A)**:
+  - ❌ **BREAKING:** `state` prop removed - Use native HTML attributes instead
+    - `state="disabled"` → `disabled={true}` (native HTML attribute)
+    - `state="error"` → `aria-invalid={true}` (native ARIA attribute)
+    - `state="success"` → removed (validation feedback should be external)
+    - `state="default"` → removed (implicit, no prop needed)
+  - ❌ **BREAKING:** Variant dictionary changed from InteractiveVariant to SurfaceVariant
+    - `variant="primary"` → `variant="default"`
+    - `variant="secondary"` → `variant="elevated"`
+    - `variant="outline"` → `variant="outlined"` (name normalized)
+    - `variant="ghost"` → `variant="subtle"`
+    - `variant="destructive"` → removed (use `aria-invalid` for error state)
+  - **Reason:** Foundation Authority compliance (CVA_CANONICAL_STYLE, VARIANTS_SIZE_CANON, STATE_AUTHORITY)
+  - **Severity:** HIGH (API changes required)
+  - **Migration Difficulty:** EASY (straightforward mappings, visual parity preserved)
+  - **Backward Compatibility:** ❌ NOT PROVIDED (by design, violates Authority)
+  - **Migration Guide:** See [Textarea Migration Guide](./docs/migrations/TEXTAREA_MIGRATION.md) for detailed migration instructions
+  - **Version Requirement:** MAJOR bump required (v1.x → v2.0.0) per Semantic Versioning
+
 - **Removed deprecated `Text.variant` prop**: Use `muted` prop for muted text, or use semantic components for other semantic colors. See [Migration Guide](../docs/migrations/MIGRATION_V2_DEPRECATED_API_REMOVAL.md) for details.
 - **Removed deprecated `Stack.gap`, `Row.gap`, and `Column.gap` props**: Use `spacing` prop instead (canonical). Simply replace `gap` with `spacing` - values and behavior remain the same.
 - **Updated `FieldError` internal implementation**: No public API changes, but internal implementation now uses canonical approaches instead of deprecated APIs.

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs";
 
 const meta: Meta<typeof Breadcrumbs.Root> = {
-  title: "Components/Navigation/Breadcrumbs",
+  title: "Foundation Locked/Composition/Navigation/Breadcrumbs",
   component: Breadcrumbs.Root,
   parameters: {
     layout: "padded",
@@ -84,4 +84,42 @@ export const CustomSeparator: Story = {
       separator={<span className="mx-1 text-muted-foreground">/</span>}
     />
   ),
+};
+
+export const DeepChain: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Products", href: "/products" },
+      { label: "Category 1", href: "/products/category1" },
+      { label: "Category 2", href: "/products/category1/category2" },
+      { label: "Category 3", href: "/products/category1/category2/category3" },
+      { label: "Category 4", href: "/products/category1/category2/category3/category4" },
+      { label: "Category 5", href: "/products/category1/category2/category3/category4/category5" },
+      {
+        label: "Category 6",
+        href: "/products/category1/category2/category3/category4/category5/category6",
+      },
+      { label: "Current Page" },
+    ],
+  },
+};
+
+export const Overflow: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      {
+        label:
+          "Very Long Category Name That Might Cause Overflow Issues In The Breadcrumb Navigation Component",
+        href: "/very-long-category",
+      },
+      {
+        label:
+          "Another Extremely Long Label To Test How The Component Handles Text Overflow And Wrapping Behavior",
+        href: "/another-long-category",
+      },
+      { label: "Current Page" },
+    ],
+  },
 };

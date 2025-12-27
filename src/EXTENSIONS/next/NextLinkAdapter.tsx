@@ -37,6 +37,9 @@ export interface NextLinkAdapterProps extends Omit<LinkProps, "href"> {
  */
 export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapterProps>(
   ({ href, prefetch, replace, scroll, shallow, locale, ...props }, ref) => {
+    // Convert Next.js href to string for Foundation Link
+    const hrefString = typeof href === "string" ? href : href.pathname || String(href);
+
     return (
       <NextLink
         href={href}
@@ -48,7 +51,7 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
         passHref
         legacyBehavior
       >
-        <Link ref={ref} {...props} />
+        <Link ref={ref} href={hrefString} {...props} />
       </NextLink>
     );
   },

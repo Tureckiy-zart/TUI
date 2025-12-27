@@ -155,7 +155,7 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
         // Handle muted variant - other variants are no longer supported
         const isMuted = typoConfig.variant === "muted";
         return (
-          <Text size={textSize} muted={isMuted}>
+          <Text size={textSize} tone={isMuted ? "muted" : "default"}>
             {content}
           </Text>
         );

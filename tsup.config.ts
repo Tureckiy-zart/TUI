@@ -38,6 +38,9 @@ export default defineConfig({
     "react",
     "react-dom",
     "react/jsx-runtime",
+    // Next.js (peer dependency)
+    "next",
+    "next/link",
     // Radix UI packages
     "@radix-ui/react-dropdown-menu",
     "@radix-ui/react-dialog",

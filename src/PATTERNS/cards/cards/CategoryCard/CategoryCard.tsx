@@ -67,12 +67,19 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
     // Determine variant: use explicit variant prop or derive from featured
     const cardVariant = variant || (featured ? "featured" : "default");
 
+    // Map CategoryCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
+    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+
+    // Map CategoryCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
+    const cardBaseVariant: "default" | "elevated" =
+      cardVariant === "featured" ? "elevated" : "default";
+
     return (
       <Box {...animationProps}>
         <CardBase
           ref={ref}
-          size={size}
-          variant={cardVariant}
+          size={cardBaseSize}
+          variant={cardBaseVariant}
           className={cn("group relative", className)}
           {...props}
         >
@@ -87,7 +94,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
 
           {/* Image Section */}
           {showImage && (
-            <CardBaseImageWrapper size={size}>
+            <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn(
                   "relative w-full overflow-hidden",
@@ -127,7 +134,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
           )}
 
           {/* Content Section */}
-          <CardBaseContentWrapper size={size}>
+          <CardBaseContentWrapper size={cardBaseSize}>
             {/* Title */}
             <Heading level={3}>
               {href ? (
@@ -141,7 +148,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" muted>
+              <Text size="sm" tone="muted">
                 {description}
               </Text>
             )}

@@ -23,17 +23,114 @@ import {
  * Checks both system preference and global override
  */
 export function shouldReduceMotion(override?: boolean | "auto"): boolean {
+  // #region agent log
+  fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "tas.ts:shouldReduceMotion:entry",
+      message: "shouldReduceMotion called",
+      data: { override, typeofWindow: typeof window },
+      timestamp: Date.now(),
+      sessionId: "debug-session",
+      runId: "run1",
+      hypothesisId: "A",
+    }),
+  }).catch(() => {});
+  // #endregion
   // If explicitly set, use that value
-  if (override === true) return true;
-  if (override === false) return false;
+  if (override === true) {
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "tas.ts:shouldReduceMotion:override-true",
+        message: "override is true, returning true",
+        data: { override },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+    return true;
+  }
+  if (override === false) {
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "tas.ts:shouldReduceMotion:override-false",
+        message: "override is false, returning false",
+        data: { override },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+    return false;
+  }
 
   // Check system preference
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") {
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "tas.ts:shouldReduceMotion:no-window",
+        message: "window is undefined (SSR), returning false",
+        data: {},
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+    return false;
+  }
 
   try {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    return mediaQuery.matches;
-  } catch {
+    const { matches } = mediaQuery;
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "tas.ts:shouldReduceMotion:media-query",
+        message: "matchMedia result",
+        data: { matches, mediaQueryMatches: mediaQuery.matches },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+    return matches;
+  } catch (error) {
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "tas.ts:shouldReduceMotion:error",
+        message: "matchMedia error, returning false",
+        data: { error: String(error) },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
     // Fallback if matchMedia is not available
     return false;
   }
@@ -59,6 +156,8 @@ export function createTransition(
   }
 
   // Build custom transition
+  // Note: This function allows raw CSS strings as fallback for edge cases,
+  // but prefer using Duration and Easing tokens when possible (Motion Authority compliance)
   let duration: string;
   if (customDuration) {
     if (typeof customDuration === "string") {
@@ -68,6 +167,7 @@ export function createTransition(
         duration = durations[customDuration as keyof typeof durations] || durations.normal;
       } else {
         // Not a Duration token - treat as raw CSS duration string (e.g., "300ms", "0.5s")
+        // WARNING: This bypasses Motion Authority. Prefer Duration tokens when possible.
         duration = customDuration;
       }
     } else {
@@ -87,6 +187,7 @@ export function createTransition(
         easing = easings[customEasing as keyof typeof easings] || easings["ease-in-out"];
       } else {
         // Not an Easing token - treat as raw CSS easing string (e.g., "cubic-bezier(0.4, 0, 0.2, 1)")
+        // WARNING: This bypasses Motion Authority. Prefer Easing tokens when possible.
         easing = customEasing;
       }
     } else {

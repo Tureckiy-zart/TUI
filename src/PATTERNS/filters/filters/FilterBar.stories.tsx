@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { FilterBar } from "./FilterBar";
+import * as React from "react";
+import { FilterBar, type FilterManager } from "./FilterBar";
 
 const meta: Meta<typeof FilterBar> = {
-  title: "Filters/FilterBar",
+  title: "Foundation Locked/Patterns/Filters/FilterBar",
   component: FilterBar,
   parameters: {
     layout: "padded",
@@ -55,48 +56,174 @@ const defaultLabels = {
   priceMaxAriaLabel: "Maximum price",
 };
 
+/**
+ * Hook to create a controlled filter manager for stories.
+ * Demonstrates how consumers should implement FilterManager interface.
+ */
+function useStoryFilterManager(initialState?: Partial<FilterManager>): FilterManager {
+  const [search, setSearch] = React.useState(initialState?.search ?? "");
+  const [category, setCategory] = React.useState(initialState?.category ?? "");
+  const [dateRange, setDateRangeState] = React.useState(
+    initialState?.dateRange ?? { start: null, end: null },
+  );
+  const [priceRange, setPriceRangeState] = React.useState(
+    initialState?.priceRange ?? { min: null, max: null },
+  );
+  const [sortBy, setSortBy] = React.useState(initialState?.sortBy ?? "date");
+  const [sortOrder, setSortOrder] = React.useState<"asc" | "desc">(
+    initialState?.sortOrder ?? "desc",
+  );
+
+  const setDateRange = React.useCallback((start: Date | null, end: Date | null) => {
+    setDateRangeState({ start, end });
+  }, []);
+
+  const setPriceRange = React.useCallback((min: number | null, max: number | null) => {
+    setPriceRangeState({ min, max });
+  }, []);
+
+  const setSorting = React.useCallback((newSortBy: string, newSortOrder: "asc" | "desc") => {
+    setSortBy(newSortBy);
+    setSortOrder(newSortOrder);
+  }, []);
+
+  const hasActiveFilters =
+    search !== "" ||
+    category !== "" ||
+    dateRange.start !== null ||
+    dateRange.end !== null ||
+    priceRange.min !== null ||
+    priceRange.max !== null;
+
+  const clearAllFilters = React.useCallback(() => {
+    setSearch("");
+    setCategory("");
+    setDateRangeState({ start: null, end: null });
+    setPriceRangeState({ min: null, max: null });
+    setSortBy("date");
+    setSortOrder("desc");
+  }, []);
+
+  const getFilterSummary = React.useCallback(() => {
+    const summary: string[] = [];
+    if (search) summary.push(`Search: "${search}"`);
+    if (category) summary.push(`Category: ${category}`);
+    if (dateRange.start || dateRange.end) {
+      const start = dateRange.start?.toLocaleDateString() ?? "Any";
+      const end = dateRange.end?.toLocaleDateString() ?? "Any";
+      summary.push(`Date: ${start} - ${end}`);
+    }
+    if (priceRange.min !== null || priceRange.max !== null) {
+      const min = priceRange.min ?? 0;
+      const max = priceRange.max ?? "∞";
+      summary.push(`Price: €${min} - €${max}`);
+    }
+    return summary;
+  }, [search, category, dateRange, priceRange]);
+
+  return {
+    search,
+    category,
+    dateRange,
+    priceRange,
+    sortBy,
+    sortOrder,
+    setSearch,
+    setCategory,
+    setDateRange,
+    setPriceRange,
+    setSorting,
+    hasActiveFilters,
+    clearAllFilters,
+    getFilterSummary,
+  };
+}
+
+/**
+ * Wrapper component that provides controlled state for stories.
+ */
+function FilterBarWithState(props: Omit<React.ComponentProps<typeof FilterBar>, "filterManager">) {
+  const filterManager = useStoryFilterManager();
+  return <FilterBar filterManager={filterManager} {...props} />;
+}
+
+/**
+ * Wrapper with pre-filled filter state to demonstrate active filters.
+ */
+function FilterBarWithActiveFilters(
+  props: Omit<React.ComponentProps<typeof FilterBar>, "filterManager">,
+) {
+  const filterManager = useStoryFilterManager({
+    search: "concert",
+    category: "music",
+    priceRange: { min: 20, max: 100 },
+  });
+  return <FilterBar filterManager={filterManager} {...props} />;
+}
+
 export const Default: Story = {
-  args: {
-    categories: mockCategories,
-    showSearch: true,
-    showCategory: true,
-    showDateRange: true,
-    showPriceRange: true,
-    showSorting: true,
-    onFiltersChange: fn(),
-    ...defaultLabels,
-  },
+  render: () => (
+    <FilterBarWithState
+      categories={mockCategories}
+      showSearch={true}
+      showCategory={true}
+      showDateRange={true}
+      showPriceRange={true}
+      showSorting={true}
+      onFiltersChange={fn()}
+      {...defaultLabels}
+    />
+  ),
+};
+
+export const WithActiveFilters: Story = {
+  render: () => (
+    <FilterBarWithActiveFilters
+      categories={mockCategories}
+      showSearch={true}
+      showCategory={true}
+      showDateRange={true}
+      showPriceRange={true}
+      showSorting={true}
+      onFiltersChange={fn()}
+      {...defaultLabels}
+    />
+  ),
 };
 
 export const SearchOnly: Story = {
-  args: {
-    showSearch: true,
-    showCategory: false,
-    showDateRange: false,
-    showPriceRange: false,
-    showSorting: false,
-    onFiltersChange: fn(),
-    ...defaultLabels,
-  },
+  render: () => (
+    <FilterBarWithState
+      showSearch={true}
+      showCategory={false}
+      showDateRange={false}
+      showPriceRange={false}
+      showSorting={false}
+      onFiltersChange={fn()}
+      {...defaultLabels}
+    />
+  ),
 };
 
 export const WithoutPriceRange: Story = {
-  args: {
-    categories: mockCategories,
-    showSearch: true,
-    showCategory: true,
-    showDateRange: true,
-    showPriceRange: false,
-    showSorting: true,
-    onFiltersChange: fn(),
-    ...defaultLabels,
-  },
+  render: () => (
+    <FilterBarWithState
+      categories={mockCategories}
+      showSearch={true}
+      showCategory={true}
+      showDateRange={true}
+      showPriceRange={false}
+      showSorting={true}
+      onFiltersChange={fn()}
+      {...defaultLabels}
+    />
+  ),
 };
 
 export const Compact: Story = {
   render: () => (
     <div className="max-w-md">
-      <FilterBar
+      <FilterBarWithState
         categories={mockCategories}
         showSearch={true}
         showCategory={true}
@@ -107,5 +234,23 @@ export const Compact: Story = {
         {...defaultLabels}
       />
     </div>
+  ),
+};
+
+/**
+ * Demonstrates empty/reset state - all filters cleared.
+ */
+export const EmptyState: Story = {
+  render: () => (
+    <FilterBarWithState
+      categories={mockCategories}
+      showSearch={true}
+      showCategory={true}
+      showDateRange={true}
+      showPriceRange={true}
+      showSorting={true}
+      onFiltersChange={fn()}
+      {...defaultLabels}
+    />
   ),
 };

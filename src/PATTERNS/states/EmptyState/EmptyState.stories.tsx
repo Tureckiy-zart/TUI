@@ -11,7 +11,7 @@ import {
 } from "./index";
 
 const meta: Meta<typeof EmptyState> = {
-  title: "Components/Data/EmptyState",
+  title: "Foundation Locked/Patterns/States/EmptyState",
   component: EmptyState,
   tags: ["autodocs"],
   parameters: {
@@ -58,30 +58,29 @@ export const WithAction: Story = {
 };
 
 /**
- * Empty state with different icon sizes
+ * Sizes Gallery - Demonstrates all supported icon sizes
+ *
+ * Required per VARIANTS_SIZE_CANON.md: SizesGallery story is REQUIRED when component exposes public size prop.
+ * EmptyStateIcon has size prop (sm | md | lg), so this story is required.
  */
-export const IconSizes: Story = {
-  render: () => (
-    <div className="space-y-8">
-      <EmptyState>
-        <EmptyStateIcon size="sm">📭</EmptyStateIcon>
-        <EmptyStateTitle>Small Icon</EmptyStateTitle>
-        <EmptyStateDescription>Icon size: sm</EmptyStateDescription>
-      </EmptyState>
+export const SizesGallery: Story = {
+  render: () => {
+    const sizes = ["sm", "md", "lg"] as const;
 
-      <EmptyState>
-        <EmptyStateIcon size="md">📭</EmptyStateIcon>
-        <EmptyStateTitle>Medium Icon</EmptyStateTitle>
-        <EmptyStateDescription>Icon size: md (default)</EmptyStateDescription>
-      </EmptyState>
-
-      <EmptyState>
-        <EmptyStateIcon size="lg">📭</EmptyStateIcon>
-        <EmptyStateTitle>Large Icon</EmptyStateTitle>
-        <EmptyStateDescription>Icon size: lg</EmptyStateDescription>
-      </EmptyState>
-    </div>
-  ),
+    return (
+      <div className="space-y-8">
+        {sizes.map((size) => (
+          <EmptyState key={size}>
+            <EmptyStateIcon size={size}>📭</EmptyStateIcon>
+            <EmptyStateTitle>Icon Size: {size}</EmptyStateTitle>
+            <EmptyStateDescription>
+              {size === "md" ? "Default size" : `Size: ${size}`}
+            </EmptyStateDescription>
+          </EmptyState>
+        ))}
+      </div>
+    );
+  },
 };
 
 /**

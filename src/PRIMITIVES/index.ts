@@ -14,6 +14,7 @@ export * from "./Icon";
 export * from "./Input";
 export * from "./Label";
 export * from "./Link";
+export * from "./NavLink";
 export * from "./Radio";
 export * from "./Skeleton";
 export * from "./Switch";

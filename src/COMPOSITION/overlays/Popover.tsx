@@ -1,9 +1,9 @@
 "use client";
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
 import type { ResponsiveAlignOffset, ResponsiveSideOffset } from "@/FOUNDATION/tokens/types";
@@ -17,53 +17,57 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 /**
+ * Popover variant type - Explicit union (not derived from CVA)
+ */
+export type PopoverVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "outline"
+  | "ghost"
+  | "link"
+  | "destructive";
+
+/**
+ * Popover size type - Explicit union (not derived from CVA)
+ * Restricted to sm, md, lg per overlay size restriction rule (VARIANTS_SIZE_CANON.md)
+ */
+export type PopoverSize = "sm" | "md" | "lg";
+
+/**
  * Popover Content Variants
  *
  * NOTE: This implementation is intentionally similar to Tooltip but not unified.
  * Rationale (from STEP 3 & STEP 8):
  * - Popover and Tooltip serve different semantic roles (click vs hover, large vs small)
  * - Variant definitions reference different token objects (POPOVER_TOKENS vs TOOLTIP_TOKENS)
- * - Popover has size variants (xs, sm, md, lg, xl) which Tooltip doesn't need
+ * - Popover has size variants (sm, md, lg) which Tooltip doesn't need
  * - Structural similarity is acceptable but abstraction would reduce clarity
  * - Each component's variants are tightly coupled to its specific token definitions
  */
-const popoverContentVariants = cva(
-  `z-50 ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} outline-none ${POPOVER_TOKENS.content.radius.md} ${POPOVER_TOKENS.content.shadow.md}`,
-  {
-    variants: {
-      variant: {
-        primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
-        secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-        accent: "border-accent/50 text-accent-foreground bg-accent/10",
-        outline: "bg-background text-foreground border-border",
-        ghost: "bg-transparent text-foreground border-transparent",
-        link: "bg-transparent text-primary border-transparent",
-        destructive: "border-destructive/50 text-destructive bg-destructive/10",
-      },
-      size: {
-        xs: `${POPOVER_TOKENS.content.width.xs} ${POPOVER_TOKENS.content.padding.sm}`,
-        sm: `${POPOVER_TOKENS.content.width.sm} ${POPOVER_TOKENS.content.padding.sm}`,
-        md: `${POPOVER_TOKENS.content.width.md} ${POPOVER_TOKENS.content.padding.md}`,
-        lg: `${POPOVER_TOKENS.content.width.lg} ${POPOVER_TOKENS.content.padding.lg}`,
-        xl: `${POPOVER_TOKENS.content.width.xl} ${POPOVER_TOKENS.content.padding.lg}`,
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-    },
+const popoverContentVariants = tokenCVA({
+  base: `z-50 ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} outline-none ${POPOVER_TOKENS.content.radius.md} ${POPOVER_TOKENS.content.shadow.md}`,
+  variants: {
+    variant: {
+      primary: `${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${POPOVER_TOKENS.content.border.color}`,
+      secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
+      accent: "border-accent/50 text-accent-foreground bg-accent/10",
+      outline: "bg-background text-foreground border-border",
+      ghost: "bg-transparent text-foreground border-transparent",
+      link: "bg-transparent text-primary border-transparent",
+      destructive: "border-destructive/50 text-destructive bg-destructive/10",
+    } satisfies Record<PopoverVariant, string>,
+    size: {
+      sm: `${POPOVER_TOKENS.content.width.sm} ${POPOVER_TOKENS.content.padding.sm}`,
+      md: `${POPOVER_TOKENS.content.width.md} ${POPOVER_TOKENS.content.padding.md}`,
+      lg: `${POPOVER_TOKENS.content.width.lg} ${POPOVER_TOKENS.content.padding.lg}`,
+    } satisfies Record<PopoverSize, string>,
   },
-);
-
-/**
- * Popover variant type
- */
-type PopoverVariant = VariantProps<typeof popoverContentVariants>["variant"];
-
-/**
- * Popover size type
- */
-type PopoverSize = VariantProps<typeof popoverContentVariants>["size"];
+  defaultVariants: {
+    variant: "primary",
+    size: "md",
+  },
+});
 
 /**
  * PopoverContent - Styled popover content component
@@ -76,11 +80,12 @@ const PopoverContent = React.forwardRef<
   Omit<
     React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>,
     "sideOffset" | "alignOffset"
-  > &
-    VariantProps<typeof popoverContentVariants> & {
-      sideOffset?: ResponsiveSideOffset;
-      alignOffset?: ResponsiveAlignOffset;
-    }
+  > & {
+    variant?: PopoverVariant;
+    size?: PopoverSize;
+    sideOffset?: ResponsiveSideOffset;
+    alignOffset?: ResponsiveAlignOffset;
+  }
 >(({ className, variant, size, align = "center", sideOffset, alignOffset, ...props }, ref) => {
   // Resolve offset tokens to pixels
   // NOTE: Offset resolution pattern is intentionally duplicated in TooltipContent.

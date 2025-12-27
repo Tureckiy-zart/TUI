@@ -1,3 +1,3 @@
 "use client";
 
-export { Progress, type ProgressProps } from "./Progress";
+export { Progress, type ProgressProps, type ProgressSize } from "./Progress";
