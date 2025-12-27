@@ -329,7 +329,9 @@ const StepperIndicator = React.forwardRef<HTMLDivElement, StepperIndicatorProps>
       renderIndicatorContent(icon, showNumber, index)
     );
 
-    const ariaCurrent = isActive || isCompleted ? "step" : undefined;
+    // Only active step should have aria-current="step"
+    // Completed steps should not have aria-current (they are past steps)
+    const ariaCurrent = isActive ? "step" : undefined;
 
     return (
       <div

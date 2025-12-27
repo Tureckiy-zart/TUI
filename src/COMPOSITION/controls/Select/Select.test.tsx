@@ -439,6 +439,7 @@ describe("Select", () => {
       );
 
       const trigger = screen.getByRole("combobox");
+      const outsideButton = screen.getByRole("button", { name: /outside/i });
       await user.click(trigger);
 
       await waitFor(
@@ -449,7 +450,9 @@ describe("Select", () => {
       );
 
       // Focus should be within dropdown, not on outside button
-      const outsideButton = screen.getByRole("button", { name: /outside/i });
+      // Radix Select focuses the first option when opened, so focus should be on an option
+      const firstOption = screen.getByRole("option", { name: /option 1/i });
+      expect(firstOption).toHaveFocus();
       expect(outsideButton).not.toHaveFocus();
     });
 
@@ -528,8 +531,17 @@ describe("Select", () => {
       const trigger = screen.getByRole("combobox");
       await user.click(trigger);
 
-      // Focus should be on trigger, but focus-visible should not apply (Radix uses :focus-visible)
-      expect(trigger).toHaveFocus();
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /option 1/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+
+      // When dropdown opens, Radix Select focuses the first option, not the trigger
+      // This is expected behavior for keyboard navigation
+      const firstOption = screen.getByRole("option", { name: /option 1/i });
+      expect(firstOption).toHaveFocus();
     });
   });
 

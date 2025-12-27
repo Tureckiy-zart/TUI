@@ -72,38 +72,38 @@ export const switchHandleVariants = tokenCVA({
     checked: {
       true: "",
       false: "",
-    },
+    } satisfies Record<"true" | "false", string>,
   },
   compoundVariants: [
     {
       size: "xs",
-      checked: true,
+      checked: "true",
       class: `${SWITCH_TOKENS.handle.xs.translate}`,
     },
     {
       size: "sm",
-      checked: true,
+      checked: "true",
       class: `${SWITCH_TOKENS.handle.sm.translate}`,
     },
     {
       size: "md",
-      checked: true,
+      checked: "true",
       class: `${SWITCH_TOKENS.handle.md.translate}`,
     },
     {
       size: "lg",
-      checked: true,
+      checked: "true",
       class: `${SWITCH_TOKENS.handle.lg.translate}`,
     },
     {
       size: "xl",
-      checked: true,
+      checked: "true",
       class: `${SWITCH_TOKENS.handle.xl.translate}`,
     },
   ],
   defaultVariants: {
     size: "md",
-    checked: false,
+    checked: "false",
   },
 });
 

@@ -23,7 +23,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { RADIO_TOKENS } from "@/FOUNDATION/tokens/components/radio";
 
 import type { RadioProps } from "./Radio.types";
-import { radioVariants } from "./radio-variants";
+import { type RadioSize, radioVariants } from "./radio-variants";
 import { RadioGroupContext } from "./RadioGroup";
 
 /**
@@ -101,8 +101,8 @@ const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
         }
 
         // In group mode, update group value
-        if (isGroupControlled && value !== undefined) {
-          radioGroupContext?.onValueChange(value);
+        if (isGroupControlled && value !== undefined && radioGroupContext) {
+          radioGroupContext.onValueChange(value);
         } else if (!isControlled) {
           // Standalone uncontrolled mode
           setUncontrolledChecked(true);
@@ -132,8 +132,8 @@ const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
           event.preventDefault();
           event.stopPropagation();
 
-          if (isGroupControlled && value !== undefined) {
-            radioGroupContext?.onValueChange(value);
+          if (isGroupControlled && value !== undefined && radioGroupContext) {
+            radioGroupContext.onValueChange(value);
           } else if (!isControlled) {
             setUncontrolledChecked(true);
           }
@@ -213,7 +213,7 @@ const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
     const radioClasses = radioVariants({ variant, size: effectiveSize, state: effectiveState });
 
     // Get dot size based on radio size
-    const dotSize = RADIO_TOKENS.dot.size[effectiveSize];
+    const dotSize = RADIO_TOKENS.dot.size[effectiveSize as RadioSize];
 
     // Render dot (filled circle indicator)
     const renderDot = () => {

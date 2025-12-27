@@ -79,16 +79,31 @@ export interface NavTextProps extends React.HTMLAttributes<HTMLSpanElement> {
  */
 export const NavText = React.forwardRef<HTMLSpanElement, NavTextProps>(
   ({ className, children, asChild = false, ...props }, ref) => {
+    // Explicitly exclude href and onClick from props (NavText is non-interactive)
+    const {
+      href: _href,
+      onClick: _onClick,
+      ...restProps
+    } = props as NavTextProps & { href?: string; onClick?: () => void };
+
     if (asChild) {
       return (
-        <Slot ref={ref} className={cn(NAVIGATION_TOKENS.states.default.text, className)} {...props}>
+        <Slot
+          ref={ref}
+          className={cn(NAVIGATION_TOKENS.states.default.text, className)}
+          {...restProps}
+        >
           {children}
         </Slot>
       );
     }
 
     return (
-      <span ref={ref} className={cn(NAVIGATION_TOKENS.states.default.text, className)} {...props}>
+      <span
+        ref={ref}
+        className={cn(NAVIGATION_TOKENS.states.default.text, className)}
+        {...restProps}
+      >
         {children}
       </span>
     );

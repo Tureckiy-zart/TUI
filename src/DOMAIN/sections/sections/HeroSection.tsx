@@ -67,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <header className="space-y-md">
             <Heading level={1}>{title}</Heading>
             {description && (
-              <Text size={isSplit ? "lg" : "xl"} muted>
+              <Text size={isSplit ? "lg" : "xl"} tone="muted">
                 {description}
               </Text>
             )}

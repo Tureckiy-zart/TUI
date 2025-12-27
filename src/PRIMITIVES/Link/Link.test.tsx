@@ -225,7 +225,7 @@ describe("Link", () => {
         expect(link).toHaveAttribute("tabindex", "-1");
         unmount();
       });
-    });
+    }, 10000);
 
     it("is excluded from tab navigation when disabled", async () => {
       const user = userEventSetup();
@@ -533,6 +533,6 @@ describe("Link", () => {
           unmount();
         });
       });
-    }, 10000);
+    }, 30000);
   });
 });

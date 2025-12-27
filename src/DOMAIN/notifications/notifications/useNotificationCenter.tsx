@@ -19,7 +19,11 @@
 import * as React from "react";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
-import type { NotificationOptions } from "./NotificationCenter.types";
+import type {
+  NotificationChannel,
+  NotificationOptions,
+  NotificationVariant,
+} from "./NotificationCenter.types";
 
 export interface NotificationAPI {
   /**
@@ -79,77 +83,39 @@ export interface NotificationAPI {
 export function useNotificationCenter(): NotificationAPI {
   const context = useNotificationCenterContext();
 
-  const success = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "success",
-        channel: "success",
-      });
+  /**
+   * Create channel notification method
+   * Helper function to reduce duplication in channel methods
+   */
+  const createChannelMethod = React.useCallback(
+    (variant: NotificationVariant, channel: NotificationChannel) => {
+      return (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
+        return context.push({
+          ...options,
+          description: message,
+          variant,
+          channel,
+        });
+      };
     },
     [context],
   );
 
-  const error = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "danger",
-        channel: "error",
-      });
-    },
-    [context],
+  const success = React.useMemo(
+    () => createChannelMethod("success", "success"),
+    [createChannelMethod],
   );
-
-  const info = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "info",
-        channel: "info",
-      });
-    },
-    [context],
+  const error = React.useMemo(() => createChannelMethod("danger", "error"), [createChannelMethod]);
+  const info = React.useMemo(() => createChannelMethod("info", "info"), [createChannelMethod]);
+  const warning = React.useMemo(
+    () => createChannelMethod("warning", "warning"),
+    [createChannelMethod],
   );
-
-  const warning = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "warning",
-        channel: "warning",
-      });
-    },
-    [context],
+  const system = React.useMemo(
+    () => createChannelMethod("system", "system"),
+    [createChannelMethod],
   );
-
-  const system = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "system",
-        channel: "system",
-      });
-    },
-    [context],
-  );
-
-  const log = React.useCallback(
-    (message: string, options?: Omit<NotificationOptions, "variant" | "channel">) => {
-      return context.push({
-        ...options,
-        description: message,
-        variant: "log",
-        channel: "log",
-      });
-    },
-    [context],
-  );
+  const log = React.useMemo(() => createChannelMethod("log", "log"), [createChannelMethod]);
 
   return React.useMemo(
     () => ({

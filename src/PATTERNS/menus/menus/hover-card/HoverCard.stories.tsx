@@ -9,7 +9,7 @@ import { Bell, Calendar, Mail, User } from "lucide-react";
 import { HoverCardContent, HoverCardRoot, HoverCardTrigger } from ".";
 
 const meta: Meta<typeof HoverCardRoot> = {
-  title: "Legacy Patterns/Menus/HoverCard",
+  title: "Foundation Locked/Patterns/Menus/HoverCard",
   component: HoverCardRoot,
   parameters: {
     layout: "centered",
@@ -337,4 +337,435 @@ export const WithNotifications: Story = {
       </HoverCardContent>
     </HoverCardRoot>
   ),
+};
+
+/**
+ * Matrix Story - REQUIRED for components with both variant AND size props
+ * Shows all variants × all sizes grid
+ */
+export const Matrix: Story = {
+  name: "Matrix",
+  render: () => {
+    const variants: Array<
+      "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
+    > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-lg">
+        <div className="space-y-sm">
+          <h3 className="text-lg font-semibold">HoverCard Matrix</h3>
+          <p className="text-sm text-muted-foreground">
+            All variants × all sizes. Each cell shows a hover card with that variant/size
+            combination.
+          </p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="border border-border bg-muted p-sm text-left text-sm font-medium">
+                  Variant / Size
+                </th>
+                {sizes.map((size) => (
+                  <th
+                    key={size}
+                    className="border border-border bg-muted p-sm text-center text-sm font-medium"
+                  >
+                    {size}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {variants.map((variant) => (
+                <tr key={variant}>
+                  <td className="border border-border bg-muted p-sm text-sm font-medium">
+                    {variant}
+                  </td>
+                  {sizes.map((size) => (
+                    <td key={size} className="border border-border p-md text-center">
+                      <HoverCardRoot>
+                        <HoverCardTrigger>
+                          <Button size="sm" variant="outline">
+                            {variant.slice(0, 3)}
+                          </Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent variant={variant} size={size}>
+                          <div className="space-y-xs">
+                            <p className="text-sm font-medium">
+                              {variant} / {size}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              HoverCard with variant="{variant}" size="{size}"
+                            </p>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCardRoot>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Canonical Matrix story showing all possible combinations of variants and sizes. Required per VARIANTS_SIZE_CANON.md for components with both variant and size props.",
+      },
+    },
+  },
+};
+
+/**
+ * States Story - REQUIRED for interactive components
+ * Shows all variants × all sizes × all states
+ */
+export const States: Story = {
+  name: "States",
+  render: () => (
+    <div className="space-y-lg">
+      <div className="space-y-md">
+        <h3 className="text-lg font-semibold">All Variants</h3>
+        <div className="flex flex-wrap gap-md">
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="primary">Primary</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="primary">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Primary HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Primary variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="outline">Secondary</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="secondary">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Secondary HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Secondary variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="outline">Accent</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="accent">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Accent HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Accent variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="outline">Outline</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="outline">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Outline HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Outline variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="ghost">Ghost</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="ghost">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Ghost HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Ghost variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="ghost">Link</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="link">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Link HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Link variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="outline">Destructive</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="destructive">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Destructive HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Destructive variant hover card.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+        </div>
+      </div>
+
+      <div className="space-y-md">
+        <h3 className="text-lg font-semibold">Focus States</h3>
+        <p className="text-sm text-muted-foreground">
+          Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
+          buttons and see hover cards appear. Press{" "}
+          <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+        </p>
+        <div className="flex gap-md">
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="primary">Primary (Focus)</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="primary">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Primary HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Hover card for primary button.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="outline">Outline (Focus)</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="outline">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Outline HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Hover card for outline button.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot>
+            <HoverCardTrigger>
+              <Button variant="ghost">Ghost (Focus)</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="ghost">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Ghost HoverCard</h4>
+                <p className="text-sm text-muted-foreground">Hover card for ghost button.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+        </div>
+      </div>
+
+      <div className="space-y-md">
+        <h3 className="text-lg font-semibold">Controlled State</h3>
+        <div className="flex gap-md">
+          <HoverCardRoot open={true}>
+            <HoverCardTrigger>
+              <Button>Always Open</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="primary">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Controlled Open</h4>
+                <p className="text-sm text-muted-foreground">Hover card controlled to stay open.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+
+          <HoverCardRoot open={false}>
+            <HoverCardTrigger>
+              <Button>Always Closed</Button>
+            </HoverCardTrigger>
+            <HoverCardContent variant="primary">
+              <div className="space-y-sm">
+                <h4 className="font-medium">Controlled Closed</h4>
+                <p className="text-sm text-muted-foreground">
+                  Hover card controlled to stay closed.
+                </p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates all variants and states (default, focus, controlled). Required for interactive components per VARIANTS_SIZE_CANON.",
+      },
+    },
+  },
+};
+
+/**
+ * SizesGallery Story - REQUIRED for components with size prop
+ * Shows all sizes with text/icon/multi-line content
+ */
+export const SizesGallery: Story = {
+  name: "SizesGallery",
+  render: () => {
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-lg">
+        <div className="space-y-sm">
+          <h3 className="text-lg font-semibold">HoverCard Sizes Gallery</h3>
+          <p className="text-sm text-muted-foreground">
+            All supported sizes with different content types
+          </p>
+        </div>
+
+        <div className="space-y-md">
+          <div>
+            <h4 className="mb-md text-md font-semibold">Text Content</h4>
+            <div className="flex flex-wrap items-center gap-md">
+              {sizes.map((size) => (
+                <HoverCardRoot key={size}>
+                  <HoverCardTrigger>
+                    <Button size="sm" variant="outline">
+                      {size}
+                    </Button>
+                  </HoverCardTrigger>
+                  <HoverCardContent size={size}>
+                    <div className="space-y-sm">
+                      <h4 className="font-medium">{size} Size</h4>
+                      <p className="text-sm text-muted-foreground">
+                        This is a {size} hover card with text content.
+                      </p>
+                    </div>
+                  </HoverCardContent>
+                </HoverCardRoot>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="mb-md text-md font-semibold">With Icons</h4>
+            <div className="flex flex-wrap items-center gap-md">
+              {sizes.map((size) => (
+                <HoverCardRoot key={size}>
+                  <HoverCardTrigger>
+                    <Button size="sm" variant="outline">
+                      <User className="mr-sm h-4 w-4" />
+                      {size}
+                    </Button>
+                  </HoverCardTrigger>
+                  <HoverCardContent size={size}>
+                    <div className="space-y-sm">
+                      <div className="flex items-center gap-sm">
+                        <User className="h-4 w-4 text-primary" />
+                        <h4 className="font-medium">{size} Size with Icon</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Hover card with icon content.</p>
+                    </div>
+                  </HoverCardContent>
+                </HoverCardRoot>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="mb-md text-md font-semibold">Multi-line Content</h4>
+            <div className="flex flex-wrap items-center gap-md">
+              {sizes.map((size) => (
+                <HoverCardRoot key={size}>
+                  <HoverCardTrigger>
+                    <Button size="sm" variant="outline">
+                      {size}
+                    </Button>
+                  </HoverCardTrigger>
+                  <HoverCardContent size={size}>
+                    <div className="space-y-sm">
+                      <h4 className="font-medium">{size} Multi-line</h4>
+                      <p className="text-sm text-muted-foreground">
+                        This is a {size} hover card with multi-line content. It demonstrates how the
+                        hover card handles longer text content that wraps across multiple lines.
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Additional paragraph to test spacing and layout with multiple text blocks.
+                      </p>
+                    </div>
+                  </HoverCardContent>
+                </HoverCardRoot>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "SizesGallery demonstrates all supported HoverCard sizes (sm, md, lg) with different content types: text, with icons, and multi-line content. This story is REQUIRED per SIZE_MAPPING_SPEC.md for sized components.",
+      },
+    },
+  },
+};
+
+/**
+ * LongContent Story - REQUIRED for overlay components
+ * Validates padding and maxWidth token behavior with long text
+ */
+export const LongContent: Story = {
+  name: "LongContent",
+  render: () => (
+    <div className="space-y-lg">
+      <div className="space-y-sm">
+        <h3 className="text-lg font-semibold">Long Content Validation</h3>
+        <p className="text-sm text-muted-foreground">
+          Validates that hover card padding and maxWidth tokens work correctly with long text
+          content. Required per VARIANTS_SIZE_CANON.md for overlay components.
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-md">
+        {(["sm", "md", "lg"] as const).map((size) => (
+          <HoverCardRoot key={size}>
+            <HoverCardTrigger>
+              <Button size="sm" variant="outline">
+                {size} Size
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent size={size}>
+              <div className="space-y-sm">
+                <h4 className="font-semibold">Long Content Test ({size})</h4>
+                <p className="text-sm text-muted-foreground">
+                  This is a longer paragraph of text to validate that the hover card padding and
+                  maxWidth tokens work correctly. The content should wrap naturally within the hover
+                  card's width constraints, and the padding should remain consistent regardless of
+                  content length. This helps ensure that the token-driven styling system is working
+                  as expected for overlay components.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Additional paragraph to test multi-paragraph content. The spacing between
+                  paragraphs should be consistent and the overall layout should remain readable even
+                  with multiple blocks of text.
+                </p>
+              </div>
+            </HoverCardContent>
+          </HoverCardRoot>
+        ))}
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Canonical LongContent story validating padding and maxWidth token behavior. Required per VARIANTS_SIZE_CANON.md for overlay components to ensure proper token-driven styling with varied content lengths.",
+      },
+    },
+  },
 };

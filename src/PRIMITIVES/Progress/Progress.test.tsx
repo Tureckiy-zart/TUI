@@ -1,4 +1,6 @@
+import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
+import * as React from "react";
 import { describe, expect, it } from "vitest";
 import { Progress } from "./Progress";
 
@@ -45,58 +47,76 @@ describe("Progress", () => {
 
   describe("Progress Value", () => {
     it("displays correct progress percentage", () => {
-      const { container } = render(<Progress value={50} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={50} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "50%" });
     });
 
     it("displays 0% progress", () => {
-      const { container } = render(<Progress value={0} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={0} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "0%" });
     });
 
     it("displays 100% progress", () => {
-      const { container } = render(<Progress value={100} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={100} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "100%" });
     });
 
     it("clamps value above 100 to 100%", () => {
-      const { container } = render(<Progress value={150} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={150} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "100%" });
     });
 
     it("clamps value below 0 to 0%", () => {
-      const { container } = render(<Progress value={-50} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={-50} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "0%" });
     });
   });
 
   describe("Max Value", () => {
     it("uses default max value of 100", () => {
-      const { container } = render(<Progress value={50} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={50} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "50%" });
     });
 
     it("calculates percentage with custom max value", () => {
-      const { container } = render(<Progress value={3} max={10} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={3} max={10} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "30%" }); // 3/10 = 30%
     });
 
     it("handles max value of 1", () => {
-      const { container } = render(<Progress value={1} max={1} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={1} max={1} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "100%" });
     });
 
     it("handles fractional values", () => {
-      const { container } = render(<Progress value={2.5} max={10} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={2.5} max={10} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "25%" });
     });
   });
@@ -177,14 +197,16 @@ describe("Progress", () => {
     });
 
     it("uses token-based fill background", () => {
-      const { container } = render(<Progress value={50} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={50} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div");
       expect(fill).toHaveClass("bg-primary"); // PROGRESS_TOKENS.fill.bg
     });
 
     it("uses token-based transition", () => {
-      const { container } = render(<Progress value={50} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={50} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div");
       expect(fill).toHaveClass("transition-[width]"); // PROGRESS_TOKENS.transition
       expect(fill).toHaveClass("duration-normal"); // PROGRESS_TOKENS.transition
     });
@@ -204,14 +226,18 @@ describe("Progress", () => {
     });
 
     it("handles very small max value", () => {
-      const { container } = render(<Progress value={0.5} max={1} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={0.5} max={1} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "50%" });
     });
 
     it("handles very large values", () => {
-      const { container } = render(<Progress value={1000} max={10000} />);
-      const fill = container.querySelector("div > div");
+      render(<Progress value={1000} max={10000} />);
+      const progressbar = screen.getByRole("progressbar");
+      const fill = progressbar.querySelector("div") as HTMLElement;
+      expect(fill).toBeInTheDocument();
       expect(fill).toHaveStyle({ width: "10%" });
     });
 
@@ -225,8 +251,8 @@ describe("Progress", () => {
 
   describe("Ref Forwarding", () => {
     it("forwards ref to progress bar container", () => {
-      const ref = { current: null };
-      render(<Progress value={50} ref={ref as React.RefObject<HTMLDivElement>} />);
+      const ref = React.createRef<HTMLDivElement>();
+      render(<Progress value={50} ref={ref} />);
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
       expect(ref.current).toHaveAttribute("role", "progressbar");
     });

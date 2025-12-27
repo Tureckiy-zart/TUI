@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Timeline } from "./Timeline";
 
 const meta: Meta<typeof Timeline> = {
-  title: "Legacy Patterns/Lists/Timeline",
+  title: "Foundation Locked/Patterns/Lists/Timeline",
   component: Timeline,
   parameters: {
     layout: "padded",
@@ -58,5 +58,19 @@ export const LongDescriptions: Story = {
         description: "Beta version released to selected users for testing and feedback collection",
       },
     ],
+  },
+};
+
+export const Accessibility: Story = {
+  args: {
+    items: sampleItems,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Timeline component uses semantic HTML (`<ol>` and `<li>`) with proper ARIA attributes for screen reader support. Decorative elements (dots and connectors) are hidden from screen readers using `aria-hidden`. Each timeline item contains a heading, date, and optional description.",
+      },
+    },
   },
 };

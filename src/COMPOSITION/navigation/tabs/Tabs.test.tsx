@@ -9,7 +9,7 @@ import { Tabs } from "./Tabs";
 
 describe("Tabs", () => {
   describe("Rendering", () => {
-    it("renders tabs components", () => {
+    it("renders tabs components", async () => {
       renderWithTheme(
         <Tabs.Root defaultValue="tab1">
           <Tabs.List>
@@ -21,10 +21,12 @@ describe("Tabs", () => {
         </Tabs.Root>,
       );
 
-      const tab1 = screen.getByRole("tab", { name: /tab 1/i });
-      const tab2 = screen.getByRole("tab", { name: /tab 2/i });
-      expect(tab1).toBeInTheDocument();
-      expect(tab2).toBeInTheDocument();
+      await waitFor(() => {
+        const tab1 = screen.getByRole("tab", { name: /tab 1/i });
+        const tab2 = screen.getByRole("tab", { name: /tab 2/i });
+        expect(tab1).toBeInTheDocument();
+        expect(tab2).toBeInTheDocument();
+      });
     });
 
     it("renders with default value", () => {

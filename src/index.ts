@@ -115,7 +115,6 @@ export {
   type SectionPadding,
   type SkeletonAnimation,
   type SkeletonBackground,
-  type SkeletonVariant,
   SURFACE_TOKENS,
   type SurfacePadding,
   type SurfaceRadius,
@@ -328,16 +327,12 @@ export {
   type SelectRootProps,
   SelectSeparator,
   type SelectSeparatorProps,
-  type SelectSize,
-  type SelectState,
   SelectTrigger,
   type SelectTriggerProps,
   SelectValue,
   type SelectValueProps,
-  type SelectVariant,
   SelectViewport,
   type SelectViewportProps,
-  type SelectWidth,
 } from "./COMPOSITION/controls/Select";
 
 // Avatar component (Radix-based, token-driven)

@@ -44,3 +44,23 @@ export const AllIconsWithColors: Story = {
 export const CustomIcons: Story = {
   render: () => <IconGallery icons={["search", "menu", "check"]} mode="grid" />,
 };
+
+export const SingleIcon: Story = {
+  render: () => <IconGallery icons={["search"]} mode="grid" />,
+};
+
+export const WithCustomProps: Story = {
+  render: () => (
+    <IconGallery
+      icons={["search", "menu", "check"]}
+      mode="grid"
+      iconSize="lg"
+      iconColor="muted"
+      className="border-2 border-primary"
+    />
+  ),
+};
+
+export const EmptyIcons: Story = {
+  render: () => <IconGallery icons={[]} mode="grid" />,
+};

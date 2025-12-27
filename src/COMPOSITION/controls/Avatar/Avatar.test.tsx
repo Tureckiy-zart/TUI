@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom/vitest";
-import { screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithTheme } from "../../../test/test-utils";
 import { Avatar } from "./Avatar";

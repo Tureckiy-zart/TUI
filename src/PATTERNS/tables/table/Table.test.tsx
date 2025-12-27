@@ -276,8 +276,16 @@ describe("Table", () => {
       );
 
       // Content should not be visible when not expanded
+      // The content is rendered but hidden via CSS (hidden class on inner div)
       const content = screen.queryByText("Additional Information");
-      expect(content).not.toBeVisible();
+      // Content exists in DOM but should be hidden via CSS
+      expect(content).toBeInTheDocument();
+      // The content is inside a div that should have 'hidden' class when collapsed
+      // content -> div (with hidden class) -> td
+      const contentDiv = content?.parentElement;
+      expect(contentDiv).toBeInTheDocument();
+      // The div wrapping the content should have 'hidden' class when collapsed
+      expect(contentDiv).toHaveClass("hidden");
     });
 
     it("sets aria-expanded attribute on expandable rows", () => {

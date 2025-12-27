@@ -2,7 +2,12 @@
  * SegmentedControl Component Exports
  */
 
-export type { SegmentedControlItemProps, SegmentedControlRootProps } from "./SegmentedControl";
+export type {
+  SegmentedControlItemProps,
+  SegmentedControlOrientation,
+  SegmentedControlRootProps,
+  SegmentedControlSize,
+} from "./SegmentedControl";
 export {
   SegmentedControl,
   segmentedControlItemVariants,

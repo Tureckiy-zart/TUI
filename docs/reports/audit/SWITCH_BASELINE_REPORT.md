@@ -1,12 +1,12 @@
 # Switch Component — Pipeline 18A Audit Report
 
 **Component:** Switch  
-**Layer:** TBD (PRIMITIVES location suggests Foundation candidate)  
-**Date Created:** 2025-12-25  
+**Layer:** Foundation (PRIMITIVES)  
+**Date Created:** 2025-12-27  
 **Operator:** Human  
 **Assistant:** Claude Sonnet 4.5  
 **Pipeline Version:** 18A  
-**Status:** IN PROGRESS
+**Status:** IN PROGRESS (Re-run)
 
 ---
 
@@ -14,15 +14,15 @@
 
 | Step | Name | Status | Duration | Checkpoint |
 |------|------|--------|----------|------------|
-| STEP 0 | Baseline Snapshot & Context Fixation | 🟢 IN PROGRESS | - | ✅ Mandatory |
-| STEP 1 | Structural & Code Quality Review | ⚪ Pending | - | Optional |
-| STEP 2 | Semantic Role & Responsibility Validation | ⚪ Pending | - | Optional |
-| STEP 3 | Duplication & Internal Pattern Alignment | ⚪ Pending | - | Optional |
-| STEP 4 | State & Interaction Model Review | ⚪ Pending | - | Optional |
-| STEP 5 | Token, Size & Variant Consistency | ⚪ Pending | - | Recommended |
-| STEP 6 | Public API & DX Review | ⚪ Pending | - | Recommended |
-| STEP 7 | Type System Alignment | ⚪ Pending | - | Recommended |
-| STEP 8 | Intentional Refactor Pass | ⚪ Pending | - | ✅ Mandatory |
+| STEP 0 | Baseline Snapshot & Context Fixation | ✅ COMPLETE | - | ✅ Mandatory |
+| STEP 1 | Structural & Code Quality Review | ✅ COMPLETE | - | Optional |
+| STEP 2 | Semantic Role & Responsibility Validation | ✅ COMPLETE | - | Optional |
+| STEP 3 | Duplication & Internal Pattern Alignment | ✅ COMPLETE | - | Optional |
+| STEP 4 | State & Interaction Model Review | ✅ COMPLETE | - | Optional |
+| STEP 5 | Token, Size & Variant Consistency | ✅ COMPLETE | - | Recommended |
+| STEP 6 | Public API & DX Review | ✅ COMPLETE | - | Recommended |
+| STEP 7 | Type System Alignment | ✅ COMPLETE | - | Recommended |
+| STEP 8 | Intentional Refactor Pass | ✅ COMPLETE | - | ✅ Mandatory |
 | STEP 9 | Mandatory FIX & Consolidation | ⚪ Pending | - | ✅ Mandatory |
 | STEP 10 | Validation via Tests & Storybook | ⚪ Pending | - | ✅ Mandatory |
 | STEP 11 | Accessibility Audit & Fixes | ⚪ Pending | - | ✅ Mandatory |
@@ -36,8 +36,8 @@
 
 **Component Name:** Switch  
 **Exported Name:** `Switch`  
-**Layer:** PRIMITIVES (Foundation candidate - TBD in STEP 2)  
-**Date:** 2025-12-25  
+**Layer:** Foundation (PRIMITIVES)  
+**Date:** 2025-12-27  
 **Operator:** Human  
 **Assistant:** Claude Sonnet 4.5  
 **Pipeline:** 18A (Component Review & Improvement Pipeline)
@@ -71,16 +71,18 @@
 **Types:**
 - `src/PRIMITIVES/Switch/Switch.types.ts`
   - `SwitchProps` interface
-  - Extends `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">`
-  - Extends `VariantProps<typeof switchTrackVariants>`
+  - Extends `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange" | "className" | "style">`
+  - Explicit union types: `SwitchVariant`, `SwitchSize`
+  - Foundation Enforcement: className and style excluded
 
 **Variants:**
 - `src/PRIMITIVES/Switch/switch-variants.ts`
-  - Uses `cva` from class-variance-authority (NOT tokenCVA)
-  - Three CVA configs:
-    - `switchTrackVariants` - track styling
-    - `switchHandleVariants` - handle sizing and translation
-    - `switchHandleStateVariants` - handle colors by state
+  - Uses `tokenCVA` from `@/FOUNDATION/lib/token-cva` (token-driven CVA)
+  - Three tokenCVA configs:
+    - `switchTrackVariants` - track styling (variant, size, state)
+    - `switchHandleVariants` - handle sizing and translation (size, checked)
+    - `switchHandleStateVariants` - handle colors by state (variant, state)
+  - All variant maps use `satisfies Record<Type, string>` constraints
 
 **Tokens:**
 - `src/FOUNDATION/tokens/components/switch.ts`
@@ -95,25 +97,27 @@
 
 **Location:** `src/PRIMITIVES/Switch/Switch.stories.tsx`
 
-**Storybook Title:** `"Legacy Primitives/Switch"`
+**Storybook Title:** `"Foundation Locked/Primitives/Switch"`
 
-**Stories (13 total):**
+**Stories (15 total):**
 1. Default
 2. Checked
 3. Disabled
 4. DisabledChecked
-5. AllSizes
-6. AllSizesChecked
-7. AllVariants
-8. AllVariantsUnchecked
-9. AllStates
-10. WithLabel
-11. Controlled
-12. Uncontrolled
-13. ErrorState
-14. Accessibility
+5. Matrix (canonical - REQUIRED for components with both variant and size props)
+6. SizesGallery (canonical - REQUIRED for components with size prop)
+7. AllSizes
+8. AllSizesChecked
+9. AllVariants
+10. AllVariantsUnchecked
+11. States (canonical - REQUIRED for interactive components)
+12. WithLabel
+13. Controlled
+14. Uncontrolled
+15. Invalid
+16. Accessibility
 
-**Note:** Stories do NOT follow canonical naming (no "Matrix", "States", "SizesGallery")
+**Note:** Stories include canonical names: Matrix, States, SizesGallery
 
 ### Test Files
 
@@ -164,52 +168,64 @@
 - `React.KeyboardEvent`
 
 **Third-Party:**
-- `class-variance-authority` → `cva`, `VariantProps`
+- None (no external CVA dependency)
 
 **Internal:**
-- `@/FOUNDATION/lib/utils` → `cn`
+- `@/FOUNDATION/lib/token-cva` → `tokenCVA` (token-driven CVA)
 - `@/FOUNDATION/tokens/components/switch` → `SWITCH_TOKENS`
 
 ### Current Public Props
 
 ```typescript
-interface SwitchProps {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
-  checked?: boolean;
-  disabled?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-describedby"?: string;
-  className?: string; // ⚠️ Inherited from ButtonHTMLAttributes
-  style?: React.CSSProperties; // ⚠️ Inherited from ButtonHTMLAttributes
-  // + all other ButtonHTMLAttributes except "size" and "onChange"
+interface SwitchProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange" | "className" | "style"
+> {
+  variant?: SwitchVariant; // "primary" | "secondary" | "outline" | "ghost" | "destructive"
+  size?: SwitchSize; // "xs" | "sm" | "md" | "lg" | "xl"
+  checked?: boolean; // Controlled checked state
+  disabled?: boolean; // Disabled state
+  invalid?: boolean; // Invalid/error state (form validation)
+  onCheckedChange?: (checked: boolean) => void; // Change callback
+  "aria-label"?: string; // ARIA label
+  "aria-labelledby"?: string; // ARIA labelledby reference
+  "aria-describedby"?: string; // ARIA describedby reference
+  // + all other ButtonHTMLAttributes except "size", "onChange", "className", "style"
 }
 ```
 
 **Default Values:**
-- `variant`: "primary" (from CVA defaultVariants)
-- `size`: "md" (from CVA defaultVariants)
-- `state`: "default" (from CVA defaultVariants)
-- `disabled`: false (from component)
+- `variant`: "primary" (from tokenCVA defaultVariants)
+- `size`: "md" (from tokenCVA defaultVariants)
+- `disabled`: false (from component default)
 - `checked`: undefined (uncontrolled by default)
+- `invalid`: false (from component default)
+
+**Foundation Enforcement:**
+- ✅ `className` and `style` props excluded from public API
+- ✅ Token-driven styling only (SWITCH_TOKENS)
 
 ---
 
 ## Lock Status Check (MANDATORY)
 
-**Component Lock Status:** ❌ NOT LOCKED
+**Component Lock Status:** ✅ **LOCKED**
 
 **Checked Documents:**
-- ✅ `docs/architecture/FOUNDATION_LOCK.md` - Switch NOT listed
-- ✅ `docs/architecture/ARCHITECTURE_LOCK.md` - Switch NOT listed
-- ✅ `docs/PROJECT_PROGRESS.md` - Switch NOT listed
+- ✅ `docs/architecture/FOUNDATION_LOCK.md` - Switch listed as **LOCKED** (2025-12-25)
+- ✅ `docs/architecture/ARCHITECTURE_LOCK.md` - Switch architectural decisions documented
+- ✅ `docs/PROJECT_PROGRESS.md` - Switch status tracked
 
-**Lock Status:** Component is NOT locked. Modifications are allowed per Pipeline 18A.
+**Lock Status:** Component is **LOCKED**. Any modifications require exception declaration per [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy.
 
-**Exception Declaration Required:** ❌ NO (component not locked)
+**Exception Declaration Required:** ⚠️ **YES** (if changes are identified in STEP 1-8, exception must be declared in STEP 8 before STEP 9)
+
+**Lock Details:**
+- Lock Date: 2025-12-25
+- Lock Scope: Public API, tokens (SWITCH_TOKENS), behavior, variants, sizes, states
+- Migration Status: Completed canonical Foundation Step Pipeline (Steps 0-12)
+- CVA Compliance: Migrated from `cva` to `tokenCVA` (completed)
+- Foundation Enforcement: className and style excluded (compliant)
 
 ---
 
@@ -517,17 +533,29 @@ _Empty at baseline._
 
 ### FIX-NONBLOCKERS (nice to fix)
 
-**NON-BLOCKER items will be identified during STEP 1-8.**
+**NON-BLOCKER items identified during STEP 1-8:**
 
-_Empty at baseline._
+- `[STRUCT-1]` Extract toggle logic into separate helper function (optional)
+  - **Source:** STEP 1
+  - **Location:** `src/PRIMITIVES/Switch/Switch.tsx` - `handleClick` and `handleKeyDown` (lines 81-85, 101-105)
+  - **Issue:** Toggle logic duplicated in two event handlers
+  - **Fix:** Extract into `const toggleSwitch = () => { ... }`
+  - **Impact:** Improves DRY principle, reduces duplication
+  - **Priority:** Low (code already maintainable)
 
 ---
 
 ### DEFERRED (explicitly not doing)
 
-**DEFERRED items will be identified during STEP 1-8.**
+**DEFERRED items identified during STEP 1-8:**
 
-_Empty at baseline._
+- Redundant variable assignments (`isDisabled`, `isInvalid`) - improves readability, keeping as-is
+  - **Source:** STEP 1
+  - **Rationale:** Current approach improves code readability, no change needed
+
+- Compound variants generation in `switchHandleStateVariants` - explicit is better than implicit, keeping as-is
+  - **Source:** STEP 1
+  - **Rationale:** Explicit compound variants are more maintainable than generated ones
 
 ---
 
@@ -575,7 +603,7 @@ _Empty at baseline._
 
 ### Outcome
 
-✅ **Baseline snapshot complete**
+✅ **Baseline snapshot complete** (Re-run on 2025-12-27)
 
 ### Blocking
 
@@ -584,17 +612,22 @@ _Empty at baseline._
 ### Notes
 
 - ✅ Component files inventoried (7 files total)
-- ✅ Public API documented (SwitchProps with all props)
-- ✅ Lock status checked (NOT locked)
+- ✅ Public API documented (SwitchProps with Foundation Enforcement: className/style excluded)
+- ✅ Lock status checked: **LOCKED** (2025-12-25)
 - ✅ Run Plan created (STEP 1-12)
-- ✅ Risk Register created (7 risks identified)
+- ✅ Risk Register created (updated for LOCKED component)
 - ✅ FIX Backlog structure created (empty)
 - ✅ DoD defined (7 criteria)
-- ⚠️ **Potential issues identified:**
-  - Uses `cva` instead of `tokenCVA` (may violate CVA Decision Matrix)
-  - Public `state` prop (may violate State Authority)
-  - `className` and `style` props accessible (may violate Foundation Enforcement if Foundation)
-  - Story names not canonical (AllSizes vs SizesGallery, AllStates vs States, missing Matrix)
+- ⚠️ **LOCKED Component Notice:**
+  - Component is **LOCKED** per `docs/architecture/FOUNDATION_LOCK.md`
+  - Any changes identified in STEP 1-8 require exception declaration in STEP 8 before STEP 9
+  - Exception must follow [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- ✅ **Current State Verified:**
+  - Uses `tokenCVA` (not `cva`) - compliant with CVA Decision Matrix
+  - No public `state` prop - states derived from props (compliant)
+  - `className` and `style` excluded from public API - Foundation Enforcement compliant
+  - Story names include canonical names: Matrix, States, SizesGallery
+  - All variant maps use `satisfies Record<Type, string>` constraints
 
 ### Changes
 
@@ -602,7 +635,7 @@ _Empty at baseline._
 
 ### Deferred
 
-**None** - All baseline documentation complete.
+**None** - All baseline documentation complete. Component is LOCKED, so any changes will require exception declaration in STEP 8.
 
 ---
 
@@ -620,7 +653,7 @@ _Empty at baseline._
 
 ### Outcome
 
-✅ **Changes applied** - Minor readability improvements identified
+✅ **No changes required** - Code structure is clean and readable
 
 ### Blocking
 
@@ -628,79 +661,130 @@ _Empty at baseline._
 
 ### Observe (What Exists)
 
-**Code Structure:**
-- Component uses `React.forwardRef` properly
-- Clear separation of concerns:
-  - State management (controlled/uncontrolled)
+**Code Structure Analysis:**
+
+**Main Component (`Switch.tsx`):**
+- ✅ Uses `React.forwardRef` properly for ref forwarding
+- ✅ Clear separation of concerns:
+  - State management (controlled/uncontrolled mode)
   - Event handlers (click, keyboard)
-  - Style computation (track, handle classes)
+  - Style computation (track, handle classes via tokenCVA)
   - Rendering (button + span structure)
-- Well-commented code with inline explanations
-- Clean JSX structure (no deep nesting, no conditional rendering)
+- ✅ Well-commented code with JSDoc documentation
+- ✅ Clean JSX structure (no deep nesting, no complex conditional rendering)
+- ✅ Proper use of React hooks:
+  - `useState` for uncontrolled mode
+  - `useMemo` for derived state (`effectiveState`)
+  - `useCallback` for event handlers
 
 **Event Handlers:**
-- `handleClick` - handles mouse interactions
-- `handleKeyDown` - handles keyboard interactions (Space key)
-- Both properly wrapped in `useCallback` with correct dependencies
+- `handleClick` (lines 74-89) - handles mouse interactions
+  - Properly checks disabled state
+  - Handles controlled/uncontrolled mode
+  - Calls `onCheckedChange` callback
+  - Properly wrapped in `useCallback` with correct dependencies
+- `handleKeyDown` (lines 92-111) - handles keyboard interactions (Space key)
+  - Checks for Space key (`" "` or `"Spacebar"`)
+  - Prevents default and stops propagation
+  - Handles controlled/uncontrolled mode
+  - Properly wrapped in `useCallback` with correct dependencies
 
 **State Management:**
-- `uncontrolledChecked` - internal state for uncontrolled mode
-- `isControlled` - derived flag (checked if controlled prop provided)
-- `effectiveState` - derived state via `useMemo` (good optimization)
+- `uncontrolledChecked` - internal state for uncontrolled mode (line 53)
+- `isControlled` - derived flag (line 56)
+- `checked` - computed value (line 57)
+- `effectiveState` - derived state via `useMemo` (lines 62-68)
+  - Computes state from props: `disabled`, `invalid`, `checked`
+  - Returns: `"base" | "checked" | "disabled" | "disabledChecked" | "invalid"`
+
+**Variants File (`switch-variants.ts`):**
+- ✅ Three separate tokenCVA configs (good separation of concerns):
+  - `switchTrackVariants` - track styling (variant, size, state)
+  - `switchHandleVariants` - handle sizing and translation (size, checked)
+  - `switchHandleStateVariants` - handle colors by state (variant, state)
+- ✅ All variant maps use `satisfies Record<Type, string>` constraints
+- ✅ Compound variants properly structured
+- ⚠️ **Duplication Pattern Identified:** `switchHandleStateVariants` has repetitive compound variants (5 variants × 5 states = 25 compound variants)
+  - Pattern is clear and maintainable
+  - Could be generated programmatically, but current approach is explicit and readable
+  - NON-BLOCKER (explicit is better than implicit for this case)
 
 **Duplication Patterns Identified:**
-1. Toggle logic repeated in `handleClick` and `handleKeyDown`:
-   ```typescript
-   if (!isControlled) {
-     setUncontrolledChecked((prev) => !prev);
-   }
-   onCheckedChange?.(!checked);
-   ```
-2. Space key check uses two comparisons: `event.key === " " || event.key === "Spacebar"`
+1. **Toggle logic duplication** (NON-BLOCKER):
+   - Toggle logic appears in both `handleClick` and `handleKeyDown`:
+     ```typescript
+     if (!isControlled) {
+       setUncontrolledChecked((prev) => !prev);
+     }
+     onCheckedChange?.(!checked);
+     ```
+   - Could be extracted into helper function `toggleSwitch`
+   - Impact: Low (code is still readable and maintainable)
+
+2. **Space key check** (NON-BLOCKER, micro-optimization):
+   - Uses two comparisons: `event.key === " " || event.key === "Spacebar"`
+   - Could use constant, but current approach is clear
+   - Very minor improvement, not worth complexity
+
+3. **Redundant variable assignments** (NON-BLOCKER):
+   - `isDisabled` (line 60) = `disabled` (just copies prop)
+   - `isInvalid` (line 61) = `invalid` (just copies prop)
+   - Could use props directly, but current approach improves readability
 
 **Overall Assessment:**
-- ✅ Code is generally clean and readable
+- ✅ Code is clean, readable, and well-structured
 - ✅ No deep nesting or complex conditional rendering
-- ✅ Good use of React hooks (useState, useMemo, useCallback)
 - ✅ Proper separation of concerns
-- ⚠️ Minor duplication in toggle logic (NON-BLOCKER)
+- ✅ Good use of React hooks and optimizations
+- ✅ Well-documented with comments
+- ⚠️ Minor duplication patterns exist but do not impact maintainability significantly
 
 ### Decide (What to Change)
 
-**Decision:** Code quality is good. Minor duplication exists but does not impact readability significantly.
+**Decision:** Code quality is good. Minor duplication exists but does not impact readability or maintainability significantly. No structural refactoring required at this stage.
 
-**Identified Issues:**
+**Identified Issues (All NON-BLOCKERS):**
 1. **Toggle logic duplication** (NON-BLOCKER)
-   - Can be extracted into helper function `toggleChecked`
+   - Can be extracted into helper function `toggleSwitch`
    - Would improve DRY principle
-   - Not blocking (code is still maintainable)
+   - Priority: Low (code already maintainable)
 
-2. **Space key constant** (NON-BLOCKER, micro-optimization)
-   - Could use constant for Space key values
-   - Very minor improvement
-   - Not worth the complexity
+2. **Redundant variable assignments** (NON-BLOCKER)
+   - `isDisabled` and `isInvalid` just copy props
+   - Could use props directly
+   - Priority: Very Low (current approach improves readability)
+
+3. **Compound variants repetition** (NON-BLOCKER)
+   - `switchHandleStateVariants` has 25 compound variants
+   - Could be generated programmatically
+   - Priority: Very Low (explicit is better than implicit)
 
 **Refactor Guidance:**
-- Extract toggle logic into separate function (nice to have)
-- Keep current structure otherwise (it's clean and readable)
+- No structural refactoring required
+- Minor improvements can be addressed in STEP 9 if needed
+- Current code structure is clean and maintainable
 
 ### Change (Apply Scoped Refactor)
 
-**Changes Applied:** None (analysis only, fixes deferred to STEP 9 per pipeline rules)
+**Changes Applied:** None
 
-**Rationale:** STEP 1 allows readability refactors, but identified issues are minor NON-BLOCKERS that can be addressed in STEP 9 FIX phase along with other changes. Component code is already readable and maintainable.
+**Rationale:** STEP 1 allows readability refactors, but identified issues are minor NON-BLOCKERS that do not impact code quality significantly. Component code is already clean, readable, and maintainable. No changes required at this stage.
 
 ### Record (Update FIX Backlog)
 
 **Added to FIX Backlog:**
 
 **FIX-NONBLOCKERS:**
-- `[STRUCT-1]` Extract toggle logic into separate helper function
-  - **Location:** `handleClick` and `handleKeyDown` (lines 75-90, 92-112)
+- `[STRUCT-1]` Extract toggle logic into separate helper function (optional)
+  - **Location:** `handleClick` and `handleKeyDown` (lines 81-85, 101-105)
   - **Issue:** Toggle logic duplicated in two event handlers
   - **Fix:** Extract into `const toggleSwitch = () => { ... }`
   - **Impact:** Improves DRY principle, reduces duplication
   - **Priority:** Low (code already maintainable)
+
+**FIX-DEFERRED (Explicitly NOT doing):**
+- Redundant variable assignments (`isDisabled`, `isInvalid`) - improves readability, keeping as-is
+- Compound variants generation - explicit is better than implicit, keeping as-is
 
 ### Notes
 
@@ -708,17 +792,18 @@ _Empty at baseline._
 - ✅ Event handlers properly optimized with `useCallback`
 - ✅ State derivation properly optimized with `useMemo`
 - ✅ Clean JSX structure (button > span)
-- ✅ Well-commented code
+- ✅ Well-commented code with JSDoc
 - ✅ No copy-paste fragments detected
-- ⚠️ Minor toggle logic duplication (NON-BLOCKER, deferred to STEP 9)
+- ✅ Proper separation of concerns (state, handlers, styles, rendering)
+- ⚠️ Minor toggle logic duplication (NON-BLOCKER, optional improvement)
 
 ### Changes
 
-**None** - Analysis only. Fixes deferred to STEP 9.
+**None** - No changes required. Code structure is clean and maintainable.
 
 ### Deferred
 
-- Toggle logic extraction deferred to STEP 9 FIX phase
+- Toggle logic extraction (optional improvement, deferred to STEP 9 if needed)
 
 ---
 
@@ -745,44 +830,67 @@ Switch is an **interactive control component** - a binary toggle input that allo
 **Current Responsibilities:**
 1. **Primary:** Binary state toggle (on/off, checked/unchecked)
 2. **State Management:** Supports both controlled and uncontrolled modes
+   - Controlled: `checked` prop controls state
+   - Uncontrolled: internal `useState` manages state
 3. **Interaction:** Handles mouse (click) and keyboard (Space) input
+   - Click handler: `handleClick` (lines 74-89)
+   - Keyboard handler: `handleKeyDown` (lines 92-111)
 4. **Accessibility:** Provides ARIA attributes for assistive technologies
+   - `role="switch"` (line 128)
+   - `aria-checked` (line 129)
+   - `aria-disabled` (line 130)
+   - `aria-invalid` (line 131)
+   - `aria-label`, `aria-labelledby`, `aria-describedby` (lines 132-134)
 5. **Visual Feedback:** Displays current state via track and handle styling
+   - Track: button element with tokenCVA classes
+   - Handle: span element with tokenCVA classes (decorative, `aria-hidden="true"`)
 
 **Semantic Behavior:**
-- Native `<button>` with `role="switch"`
-- ARIA-compliant switch pattern
-- Keyboard-accessible (Space key toggles)
+- Native `<button>` element with `role="switch"` (line 126-128)
+- ARIA-compliant switch pattern (binary toggle, not checkbox)
+- Keyboard-accessible (Space key toggles, line 97)
 - Focus management via native button behavior
+- Proper event delegation (`onClick`, `onKeyDown` props forwarded, lines 137-138)
 
 **Component Classification:**
 - **Type:** Interactive Form Control
 - **Category:** Primitives (binary input control)
-- **Layer:** Foundation candidate (primitive control, no composition)
+- **Layer:** Foundation (PRIMITIVES location, primitive control, no composition)
+
+**Props Analysis:**
+- `variant`, `size` - visual styling (in scope)
+- `checked` - state value (in scope)
+- `disabled` - interaction state (in scope)
+- `invalid` - visual validation feedback (in scope - visual only, not validation logic)
+- `onCheckedChange` - state change callback (in scope)
+- `aria-*` props - accessibility (in scope)
+- `onClick`, `onKeyDown` - event delegation (in scope - properly forwarded)
 
 ### Decide (What to Change)
 
 **Role Definition:**
 
-> Switch is a binary toggle control that allows users to switch between checked and unchecked states via click or keyboard interaction, following the ARIA switch pattern with native button semantics.
+> Switch is a binary toggle control that allows users to switch between checked and unchecked states via click or keyboard interaction, following the ARIA switch pattern with native button semantics. It provides visual feedback through a track and handle, supports both controlled and uncontrolled modes, and delegates validation and form logic to parent components.
 
 **Responsibility Assessment:**
 
-✅ **In Scope:**
-- Binary state management (checked/unchecked)
-- Controlled and uncontrolled modes
-- Mouse and keyboard interaction handling
-- ARIA attributes for accessibility
-- Visual state representation (track + handle)
-- Disabled state handling
-- Error state handling
+✅ **In Scope (All Present):**
+- Binary state management (checked/unchecked) - ✅ Lines 53-57
+- Controlled and uncontrolled modes - ✅ Lines 56-57
+- Mouse and keyboard interaction handling - ✅ Lines 74-111
+- ARIA attributes for accessibility - ✅ Lines 128-134
+- Visual state representation (track + handle) - ✅ Lines 113-123, 126-143
+- Disabled state handling - ✅ Lines 60, 76-78, 94
+- Error/invalid state visual feedback - ✅ Lines 61, 65, 131
 
-❌ **Out of Scope (None Detected):**
-- No form submission logic (correct - handled by parent form)
-- No label rendering (correct - labels are external, referenced via aria-label/aria-labelledby)
-- No validation logic (correct - handled by parent)
-- No multi-state logic (correct - switch is binary only)
-- No composition (correct - primitive control)
+❌ **Out of Scope (Correctly Absent):**
+- ✅ No form submission logic (correct - handled by parent form)
+- ✅ No label rendering (correct - labels are external, referenced via aria-label/aria-labelledby)
+- ✅ No validation logic (correct - `invalid` prop is visual feedback only, validation happens in parent)
+- ✅ No multi-state logic (correct - switch is binary only, no "mixed" state)
+- ✅ No composition of other components (correct - primitive control, only native button + span)
+- ✅ No navigation logic (correct - not a navigation component)
+- ✅ No data fetching or API calls (correct - pure UI component)
 
 **Scope Violations:** None detected
 
@@ -792,41 +900,55 @@ Switch is an **interactive control component** - a binary toggle input that allo
 
 **Single Responsibility Principle:** ✅ **PASS** - Component does one thing: binary toggle control
 
+**Validation of `invalid` Prop:**
+- `invalid` prop (line 41, 55) is **visual feedback only**, not validation logic
+- Validation logic correctly resides in parent components (forms, form libraries)
+- Component correctly displays invalid state visually (line 65, 131)
+- This is **correct separation of concerns** - component displays state, parent validates
+
 ### Change (Apply Scoped Refactor)
 
 **Changes Applied:** None (no out-of-scope logic detected)
+
+**Rationale:** Component has clear, narrow responsibility. All logic is appropriate for a binary toggle control. No refactoring needed.
 
 ### Record (Update FIX Backlog)
 
 **No new items added to FIX backlog.**
 
-**Rationale:** Component has clear, narrow responsibility. No scope violations detected.
+**Rationale:** Component has clear, narrow responsibility. No scope violations detected. All logic is appropriate for a primitive binary toggle control.
 
 ### Notes
 
-- ✅ Component has clear role definition
-- ✅ Single Responsibility Principle satisfied
+- ✅ Component has clear role definition (binary toggle control)
+- ✅ Single Responsibility Principle satisfied (does one thing: toggle binary state)
 - ✅ No out-of-scope logic detected
 - ✅ Appropriate level of complexity for primitive control
-- ✅ Proper separation of concerns (no label, validation, or submission logic)
-- ✅ Supports standard patterns (controlled/uncontrolled, disabled, error)
+- ✅ Proper separation of concerns:
+  - No label rendering (external via aria-label/aria-labelledby)
+  - No validation logic (`invalid` is visual feedback only)
+  - No form submission logic (delegated to parent)
+- ✅ Supports standard patterns (controlled/uncontrolled, disabled, error visual feedback)
+- ✅ Proper event delegation (`onClick`, `onKeyDown` forwarded to parent)
+- ✅ Native button semantics with ARIA switch pattern
 
 **Layer Classification:**
-- **Recommendation:** Foundation layer (primitive control, no dependencies on other components)
+- **Status:** Foundation layer (PRIMITIVES location, LOCKED)
 - **Justification:**
-  - Native `<button>` element (no Radix dependency)
-  - Primitive control (binary toggle)
-  - No composition (single element + handle span)
-  - Token-driven styling
+  - Native `<button>` element (no external library dependency)
+  - Primitive control (binary toggle, atomic component)
+  - No composition (single button element + decorative handle span)
+  - Token-driven styling (SWITCH_TOKENS)
   - Clear, narrow responsibility
+  - Foundation Enforcement compliant (className/style excluded)
 
 ### Changes
 
-**None** - No scope violations detected.
+**None** - No scope violations detected. Component responsibility is appropriate.
 
 ### Deferred
 
-**None** - Component responsibility is appropriate.
+**None** - Component responsibility is appropriate. No changes needed.
 
 ---
 
@@ -838,11 +960,11 @@ _End of STEP 2 Semantic Role & Responsibility Validation_
 
 ### Outcome
 
-❌ **BLOCKERS detected** - CVA Decision Matrix violations, missing type constraints
+✅ **No changes required** - CVA structure is canonical and compliant
 
 ### Blocking
 
-**Blocking:** ✅ **YES** - 2 BLOCKERS identified
+**Blocking:** No
 
 ### Observe (What Exists)
 
@@ -936,65 +1058,39 @@ Per CVA Canonical Style Authority (`docs/architecture/CVA_CANONICAL_STYLE.md`):
 
 **Pattern Alignment:**
 - ✅ CVA structure matches canonical style (inline definitions, no intermediate objects, no conditionals)
-- ❌ CVA type does not match Decision Matrix (must use tokenCVA)
-- ❌ Missing type constraints (must add `satisfies` constraints)
+- ✅ CVA type matches Decision Matrix (tokenCVA for token-driven axes)
+- ✅ Type constraints present (all variant maps have `satisfies` constraints)
 
 ### Change (Apply Scoped Refactor)
 
-**Changes Applied:** None (analysis only, fixes deferred to STEP 9 per pipeline rules)
+**Changes Applied:** None
 
-**Rationale:** STEP 3 is analysis only. All fixes deferred to STEP 9 FIX phase.
+**Rationale:** CVA structure is canonical and compliant. No changes required.
 
 ### Record (Update FIX Backlog)
 
-**Added to FIX Backlog:**
+**No new items added to FIX backlog.**
 
-**FIX-BLOCKERS:**
-
-- `[CVA-1] [BLOCKER]` Migrate cva → tokenCVA for token-driven axes
-  - **Location:** `src/PRIMITIVES/Switch/switch-variants.ts` (all 3 CVA invocations)
-  - **Issue:** Switch uses `cva` but has token-driven axes (variant, size, state)
-  - **Violation:** CVA Decision Matrix RULE 1
-  - **Fix:**
-    - Replace `import { cva } from "class-variance-authority"` with `import { tokenCVA } from "@/FOUNDATION/lib/token-cva"`
-    - Replace `cva(...)` with `tokenCVA(...)` for all 3 CVA invocations:
-      - `switchTrackVariants`
-      - `switchHandleVariants`
-      - `switchHandleStateVariants`
-  - **Impact:** HIGH (architectural compliance, enables token validation)
-  - **Priority:** CRITICAL
-  - **Deferrable:** NO
-
-- `[CVA-2] [BLOCKER]` Add `satisfies Record<Type, string>` constraints to variant objects
-  - **Location:** `src/PRIMITIVES/Switch/switch-variants.ts` (all variant axes)
-  - **Issue:** Variant objects missing type constraints
-  - **Violation:** CVA Canonical Style Authority (type constraints required)
-  - **Fix:** Add constraints to all variant objects:
-    - `switchTrackVariants.variants.variant` → `satisfies Record<SwitchVariant, string>`
-    - `switchTrackVariants.variants.size` → `satisfies Record<SwitchSize, string>`
-    - `switchTrackVariants.variants.state` → `satisfies Record<SwitchState, string>`
-    - `switchHandleVariants.variants.size` → `satisfies Record<SwitchSize, string>`
-    - `switchHandleStateVariants.variants.variant` → `satisfies Record<SwitchVariant, string>`
-    - `switchHandleStateVariants.variants.state` → `satisfies Record<SwitchState, string>`
-  - **Impact:** HIGH (type safety, architectural compliance)
-  - **Priority:** CRITICAL
-  - **Deferrable:** NO
+**Rationale:** CVA structure is canonical and compliant. All architectural requirements met.
 
 ### Notes
 
-- ❌ **BLOCKER:** CVA type mismatch (cva instead of tokenCVA for token-driven component)
-- ❌ **BLOCKER:** Missing type constraints on variant objects
-- ✅ CVA structure pattern is canonical (inline definitions, no intermediate objects, no conditionals)
-- ✅ CVA split pattern (3 invocations) is justified (separate visual concerns: track vs handle)
-- ✅ compoundVariants usage is proper (handle state colors)
-- ✅ Prop order consistent with Foundation patterns
-- ⚠️ 2 BLOCKERS must be resolved in STEP 9 before proceeding to STEP 10
+- ✅ **CVA Type:** Uses `tokenCVA` (correct for token-driven component per Decision Matrix RULE 1)
+- ✅ **CVA Structure:** Follows canonical style:
+  - Inline variant definitions (no intermediate objects)
+  - No function calls generating variants
+  - No conditional logic in CVA config
+  - Single tokenCVA invocation per variant set (3 invocations for 3 distinct visual concerns)
+- ✅ **Type Constraints:** All variant maps have `satisfies Record<Type, string>` constraints
+- ✅ **Compound Variants:** Properly structured (explicit, not generated)
+- ✅ **CVA Split Pattern:** Justified (track vs handle are separate visual concerns)
+- ✅ **Pattern Alignment:** Matches canonical patterns from Button reference component
 
-**CVA Normalization Required:** YES (cva → tokenCVA + add type constraints)
+**CVA Compliance Status:** ✅ **COMPLIANT** - No normalization required
 
 ### Changes
 
-**None** - Analysis only. Fixes deferred to STEP 9.
+**None** - No changes required. CVA structure is canonical and compliant.
 
 ### Deferred
 
@@ -1011,31 +1107,34 @@ _End of STEP 3 Duplication & Internal Pattern Alignment_
 
 ### Outcome
 
-❌ **BLOCKER detected** - Public `state` prop violates State Authority
+✅ **No changes required** - State model is compliant with State Authority
 
 ### Blocking
 
-**Blocking:** ✅ **YES** - 1 BLOCKER identified
+**Blocking:** No
 
 ### Observe (What Exists)
 
 **Current State Model:**
 
-**Public Props:**
-- `state?: "default" | "checked" | "disabled" | "error"` - Public state prop
-- `checked?: boolean` - Binary toggle value
-- `disabled?: boolean` - Disabled flag
+**Public Props (No State Prop):**
+- ✅ `checked?: boolean` - Binary toggle value (not a state, but a value)
+- ✅ `disabled?: boolean` - Disabled state flag (canonical state)
+- ✅ `invalid?: boolean` - Validation state flag (aria-invalid, visual feedback)
+- ❌ **NO public `state` prop** - States are derived (correct)
 
-**Derived Internal State:**
+**Derived Internal State (for styling only):**
 ```typescript
 const effectiveState = React.useMemo(() => {
   if (isDisabled && checked) return "disabledChecked";
   if (isDisabled) return "disabled";
-  if (isError) return "error";
+  if (isInvalid) return "invalid";
   if (checked) return "checked";
-  return "default";
-}, [isDisabled, isError, checked]);
+  return "base";
+}, [isDisabled, isInvalid, checked]);
 ```
+
+**Note:** `effectiveState` is **internal only** (used for CVA styling), not exposed as public prop. This is correct.
 
 **State Usage:**
 - `effectiveState` passed to CVA variants for styling
@@ -1060,67 +1159,56 @@ Per Interaction Authority (`docs/architecture/INTERACTION_AUTHORITY.md`):
 
 **Switch State Analysis:**
 
-**Custom States Used:**
-1. ❌ `"checked"` - NOT a canonical state (checked is a **value**, not a state)
-2. ❌ `"error"` - NOT a canonical state (validation state, should use `invalid` prop + aria-invalid)
-3. ❌ `"disabledChecked"` - Composite state (disabled + checked value)
-4. ✅ `"disabled"` - Matches canonical disabled state
-5. ❌ `"default"` - Should be `"base"` per canonical naming
+**Internal States Used (for styling only):**
+1. ✅ `"base"` - Default state (matches canonical naming, line 67)
+2. ✅ `"checked"` - Value-based styling state (represents checked value, not interaction state)
+3. ✅ `"disabled"` - Canonical disabled state (derived from `disabled` prop, line 64)
+4. ✅ `"disabledChecked"` - Composite styling state (disabled + checked, line 63)
+5. ✅ `"invalid"` - Validation styling state (derived from `invalid` prop, line 65)
+
+**Note:** These are **internal styling states**, not public API. They are used only for CVA variant selection.
 
 **Canonical States Used:**
-- ✅ **disabled:** Properly handled via `disabled` prop
+- ✅ **disabled:** Properly handled via `disabled` prop (line 40, 60, 64)
 - ✅ **hover:** CSS-driven via `:hover` pseudo-class (correct, not in JS state)
 - ✅ **active:** CSS-driven via `:active` pseudo-class (correct, not in JS state)
 - ✅ **focus-visible:** CSS-driven via `focus-visible:` prefix (correct, not in JS state)
-- ❌ **base:** Not explicitly used (uses "default" instead)
+- ✅ **base:** Used internally as default state (line 67)
 - ⚪ **loading:** Not applicable (switch is instant toggle, no async state)
 
 ### Decide (What to Change)
 
-**BLOCKER Issue:**
+**State Model Compliance Assessment:**
 
-**BLOCKER-3: Public `state` Prop Violation**
-- **Issue:** Switch exposes public `state` prop with custom state values
-- **Violation:** State Authority (states should be derived, not public props)
-- **Impact:** HIGH (architectural compliance, Foundation readiness)
-- **Fix:** Remove public `state` prop, derive states from other props
-- **Rationale:**
-  - States are system-level concerns, not component API
-  - `checked` is a value (binary toggle), not a state
-  - `disabled` is already a prop (state can be derived)
-  - `error` should be `invalid` prop (validation state)
-  - Hover, active, focus-visible are CSS-driven (correct)
-- **Deferrable:** NO (BLOCKER)
+✅ **Public API:** No public `state` prop (correct - states are derived)
+✅ **State Derivation:** States derived from props (`disabled`, `invalid`, `checked`)
+✅ **Canonical States:** Uses canonical state names (`base`, `disabled`)
+✅ **CSS-Driven States:** Hover, active, focus-visible handled via CSS (correct)
+✅ **Browser-Native:** Uses native `<button>` with browser-native focus management
 
-**Correct State Model for Switch:**
+**State Model Validation:**
 
-```typescript
-interface SwitchProps {
-  checked?: boolean; // ✅ Value (binary toggle)
-  disabled?: boolean; // ✅ State prop (canonical disabled)
-  invalid?: boolean; // ✅ Validation state (aria-invalid)
-  // ❌ NO public "state" prop
-}
+**Per State Authority Matrix:**
+- ✅ No public state prop (states are derived)
+- ✅ Uses canonical state names (`base`, `disabled`)
+- ✅ States derived from props (not exposed as API)
+- ✅ CSS-driven interaction states (hover, active, focus-visible)
 
-// Internal derived state (for styling):
-// - disabled (if disabled prop is true)
-// - base (default state, no user interaction)
-// - hover, active, focus-visible (CSS-driven, not JS state)
-```
+**Per Interaction Authority:**
+- ✅ Priority order respected: `disabled` blocks all other states
+- ✅ Browser-native interaction (CSS handles hover/active/focus-visible)
+- ✅ JavaScript only handles toggle logic (correct separation)
 
-**NON-BLOCKER Issues:**
+**Internal Styling States:**
+- `"base"`, `"checked"`, `"disabled"`, `"disabledChecked"`, `"invalid"` are internal styling states
+- Used only for CVA variant selection (not public API)
+- This is acceptable - they represent visual styling needs, not interaction states
 
-**NON-BLOCKER-2: Composite State "disabledChecked"**
-- **Issue:** Uses composite state `"disabledChecked"` instead of deriving from disabled + checked
-- **Assessment:** Minor implementation detail
-- **Fix:** Can be simplified in styling (disabled state + checked value)
-- **Deferrable:** YES (can be addressed during CVA refactor in STEP 9)
-
-**NON-BLOCKER-3: "default" vs "base" Naming**
-- **Issue:** Uses "default" instead of canonical "base" state name
-- **Assessment:** Internal naming (not public API)
-- **Fix:** Rename "default" → "base" for consistency with State Authority
-- **Deferrable:** YES (can be addressed during CVA refactor in STEP 9)
+**No Changes Required:**
+- State model is compliant with State Authority
+- No public state prop (correct)
+- States properly derived from props
+- CSS-driven interaction states (correct)
 
 **Interaction Model Assessment:**
 
@@ -1137,26 +1225,19 @@ interface SwitchProps {
 - CSS handles hover/active/focus-visible
 - JavaScript only handles toggle logic
 
-❌ **Violations:**
-- Public `state` prop (should be removed)
-- Custom state values (should use canonical states only)
+✅ **No Violations:** State model is compliant
 
 ### Change (Apply Scoped Refactor)
 
-**Changes Applied:** None (analysis only, fixes deferred to STEP 9 per pipeline rules)
+**Changes Applied:** None
 
-**Rationale:** STEP 4 is analysis only. All fixes deferred to STEP 9 FIX phase.
+**Rationale:** State model is compliant with State Authority. No changes required.
 
 ### Record (Update FIX Backlog)
 
-**Added to FIX Backlog:**
+**No new items added to FIX backlog.**
 
-**FIX-BLOCKERS:**
-
-- `[STATE-1] [BLOCKER]` Remove public `state` prop, use derived states
-  - **Location:** `src/PRIMITIVES/Switch/Switch.types.ts` (SwitchProps interface)
-  - **Issue:** Public `state` prop violates State Authority (states should be derived)
-  - **Violation:** State Authority (no public state props in Foundation components)
+**Rationale:** State model is compliant. No violations detected.
   - **Fix:**
     - Remove `state?: "default" | "checked" | "disabled" | "error"` from SwitchProps
     - Add `invalid?: boolean` prop for validation state (aria-invalid)
@@ -1223,13 +1304,11 @@ _End of STEP 4 State & Interaction Model Review_
 
 ### Outcome
 
-❌ **BLOCKERS detected** - Missing canonical Storybook stories
+✅ **No changes required** - Token, size, and variant usage is compliant
 
 ### Blocking
 
-**Blocking:** ✅ **YES** - 3 BLOCKERS identified (Storybook stories)
-
-**Note:** Token compliance violations identified at baseline (CVA type mismatch, missing type constraints) were fully resolved in STEP 9 via tokenCVA migration and SWITCH_TOKENS introduction.
+**Blocking:** No
 
 ### Observe (What Exists)
 
@@ -1323,51 +1402,32 @@ Per VARIANTS_SIZE_CANON.md:
 - Has public `size` prop → SizesGallery story REQUIRED
 
 **Current Stories (src/PRIMITIVES/Switch/Switch.stories.tsx):**
-- ❌ **Matrix story:** NOT FOUND (BLOCKER)
-- ⚠️ **States story:** Has `AllStates` story (wrong canonical name, should be `States`)
-- ❌ **SizesGallery story:** NOT FOUND (has `AllSizes`, `AllSizesChecked`, but not gallery format)
+- ✅ **Matrix story:** EXISTS (lines 107-142) - Canonical name, demonstrates all 5 variants × all 5 sizes = 25 combinations
+- ✅ **States story:** EXISTS (lines 299-349) - Canonical name, demonstrates all states across variants and sizes
+- ✅ **SizesGallery story:** EXISTS (lines 149-184) - Canonical name, demonstrates all sizes with labels (unchecked and checked)
 
-**Story Naming Violations:**
-- `AllSizes` → Should be `SizesGallery`
-- `AllSizesChecked` → Part of `SizesGallery` (checked variants)
-- `AllVariants` → Part of `Matrix` story
-- `AllVariantsUnchecked` → Part of `Matrix` story
-- `AllStates` → Should be `States`
+**Story Compliance:**
+- ✅ All canonical stories present (Matrix, States, SizesGallery)
+- ✅ Stories use canonical names (not `AllStates`, `AllSizes`, etc.)
+- ✅ Stories demonstrate required content per VARIANTS_SIZE_CANON.md
 
 **Verdict:**
-- ❌ **BLOCKER:** Missing canonical `Matrix` story
-- ❌ **BLOCKER:** Missing canonical `SizesGallery` story
-- ❌ **BLOCKER:** `AllStates` uses non-canonical name (should be `States`)
+- ✅ **COMPLIANT:** All canonical stories present and correctly named
 
 ### Decide (What to Change)
 
-**BLOCKER Issues (Storybook Stories):**
+**Token, Size & Variant Compliance Assessment:**
 
-**BLOCKER-4: Missing Matrix Story**
-- **Issue:** Switch has both size and variant props but missing canonical `Matrix` story
-- **Violation:** VARIANTS_SIZE_CANON.md (Matrix story REQUIRED for components with size AND variant)
-- **Fix:** Create `Matrix` story demonstrating all variants × all sizes grid
-- **Current:** Has separate `AllVariants` and `AllSizes` stories (not matrix format)
-- **Impact:** HIGH (Storybook canonical requirements)
-- **Priority:** CRITICAL
-- **Deferrable:** NO (BLOCKER)
+✅ **Size Scale:** All sizes (`xs`, `sm`, `md`, `lg`, `xl`) from GlobalSize scale
+✅ **Variant Dictionary:** All variants (`primary`, `secondary`, `outline`, `ghost`, `destructive`) from InteractiveVariant dictionary
+✅ **Token Compliance:** 100% token-only styling (all values reference SWITCH_TOKENS)
+✅ **Storybook Stories:** All canonical stories present (Matrix, States, SizesGallery)
 
-**BLOCKER-5: Missing SizesGallery Story**
-- **Issue:** Switch has public size prop but missing canonical `SizesGallery` story
-- **Violation:** VARIANTS_SIZE_CANON.md (SizesGallery story REQUIRED for components with size prop)
-- **Fix:** Create `SizesGallery` story demonstrating all sizes with realistic content
-- **Current:** Has `AllSizes` and `AllSizesChecked` (not gallery format)
-- **Impact:** HIGH (Storybook canonical requirements)
-- **Priority:** CRITICAL
-- **Deferrable:** NO (BLOCKER)
-
-**BLOCKER-6: Non-Canonical Story Names**
-- **Issue:** `AllStates` story uses non-canonical name
-- **Violation:** VARIANTS_SIZE_CANON.md (canonical name is `States`, not `AllStates`)
-- **Fix:** Rename `AllStates` → `States`
-- **Impact:** MEDIUM (story naming consistency)
-- **Priority:** CRITICAL
-- **Deferrable:** NO (BLOCKER)
+**No Changes Required:**
+- Token usage is compliant (100% token-only)
+- Size scale is compliant (GlobalSize subset)
+- Variant dictionary is compliant (InteractiveVariant subset)
+- Storybook stories are compliant (all canonical stories present)
 
 **NON-BLOCKER Issues:**
 
@@ -1486,35 +1546,38 @@ _End of STEP 5 Token, Size & Variant Consistency_
 
 ### Outcome
 
-❌ **BLOCKER detected** - className/style props violate Foundation Enforcement
+✅ **No changes required** - Public API is compliant with Foundation Enforcement
 
 ### Blocking
 
-**Blocking:** ✅ **YES** - 1 BLOCKER identified (Foundation Enforcement)
+**Blocking:** No
 
 ### Observe (What Exists)
 
 **Current Public API:**
 
 ```typescript
-export interface SwitchProps extends
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
-  VariantProps<typeof switchTrackVariants> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
-  checked?: boolean;
-  disabled?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-describedby"?: string;
-  // Inherited from ButtonHTMLAttributes:
-  className?: string; // ⚠️ Foundation Enforcement violation
-  style?: React.CSSProperties; // ⚠️ Foundation Enforcement violation
-  // + all other ButtonHTMLAttributes except "size" and "onChange"
+export interface SwitchProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange" | "className" | "style"
+> {
+  variant?: SwitchVariant; // "primary" | "secondary" | "outline" | "ghost" | "destructive"
+  size?: SwitchSize; // "xs" | "sm" | "md" | "lg" | "xl"
+  checked?: boolean; // Binary toggle value (controlled)
+  disabled?: boolean; // Disabled state
+  invalid?: boolean; // Validation state (aria-invalid)
+  onCheckedChange?: (checked: boolean) => void; // Toggle callback
+  "aria-label"?: string; // ARIA label
+  "aria-labelledby"?: string; // ARIA labelledby reference
+  "aria-describedby"?: string; // ARIA describedby reference
+  // + all other ButtonHTMLAttributes except "size", "onChange", "className", "style"
 }
 ```
+
+**Foundation Enforcement Compliance:**
+- ✅ `className` and `style` excluded from public API (line 27)
+- ✅ Uses `Omit<..., "className" | "style">` pattern (correct)
+- ✅ Token-driven styling only (SWITCH_TOKENS)
 
 **Inherited Props Analysis:**
 
@@ -1560,9 +1623,9 @@ Per Foundation Enforcement (docs/architecture/FOUNDATION_LOCK.md):
 - **Verdict:** Switch is Foundation candidate
 
 **Foundation Enforcement Check:**
-- Switch extends `React.ButtonHTMLAttributes<HTMLButtonElement>`
-- Does NOT exclude `className` and `style` props
-- **Verdict:** ❌ **VIOLATION** (if Switch is Foundation component)
+- Switch extends `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange" | "className" | "style">`
+- ✅ Excludes `className` and `style` props (Foundation Enforcement compliant)
+- **Verdict:** ✅ **COMPLIANT** (Foundation Enforcement requirements met)
 
 **DX Assessment:**
 
@@ -1575,8 +1638,8 @@ Per Foundation Enforcement (docs/architecture/FOUNDATION_LOCK.md):
 - ✅ Standard size scale (xs, sm, md, lg, xl)
 
 **Confusing Props:**
-- ❌ `state` prop (confusing - states should be derived, not explicitly set)
-- ⚠️ `variant` and `size` without defaults (should have defaults for better DX)
+- ✅ No confusing props detected
+- ✅ `variant` and `size` have defaults (from tokenCVA defaultVariants: "primary", "md")
 
 **Safe Defaults:**
 - Current defaults (from CVA): `variant="primary"`, `size="md"`, `state="default"`
@@ -1680,11 +1743,11 @@ _End of STEP 6 Public API & DX Review_
 
 ### Outcome
 
-❌ **BLOCKER detected** - CVA-derived types leaking into public API
+✅ **No changes required** - Type system is compliant
 
 ### Blocking
 
-**Blocking:** ✅ **YES** - 1 BLOCKER identified (type system)
+**Blocking:** No
 
 ### Observe (What Exists)
 
@@ -1692,20 +1755,29 @@ _End of STEP 6 Public API & DX Review_
 
 **Public Types:**
 ```typescript
-export interface SwitchProps extends
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
-  VariantProps<typeof switchTrackVariants> { // ⚠️ CVA-derived type leaking
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
+export type SwitchVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
+export type SwitchSize = "xs" | "sm" | "md" | "lg" | "xl";
+
+export interface SwitchProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange" | "className" | "style"
+> {
+  variant?: SwitchVariant; // ✅ Explicit union type
+  size?: SwitchSize; // ✅ Explicit union type
   checked?: boolean;
   disabled?: boolean;
+  invalid?: boolean;
   onCheckedChange?: (checked: boolean) => void;
   "aria-label"?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
 }
 ```
+
+**Type System Compliance:**
+- ✅ Explicit union types (`SwitchVariant`, `SwitchSize`) - no CVA-derived types
+- ✅ No `VariantProps` leakage (removed from public API)
+- ✅ All variant maps have `satisfies Record<Type, string>` constraints
 
 **Variant Types:**
 - No explicit union types exported
@@ -1870,7 +1942,7 @@ _End of STEP 7 Type System Alignment_
 
 ### Outcome
 
-✅ **Refactor decision recorded** - Refactor required (8 BLOCKERS identified)
+✅ **Refactor decision recorded** - Refactor not required
 
 ### Blocking
 
@@ -1921,32 +1993,32 @@ _End of STEP 7 Type System Alignment_
 **Guiding Question:**
 > "If this code were reviewed today by a senior engineer, would it pass without comments?"
 
-**Answer:** ❌ **NO** - Would receive 8 critical comments (all BLOCKERS identified)
+**Answer:** ✅ **YES** - Code is clean, compliant, and well-structured
 
 **Explicit Refactor Decision:**
 
-✅ **REFACTOR REQUIRED**
+✅ **REFACTOR NOT REQUIRED**
 
 **Rationale:**
-Switch component has solid implementation quality but contains 8 BLOCKERS that prevent Foundation lock:
-1. CVA type mismatch (cva → tokenCVA required for token-driven component)
-2. Missing CVA type constraints (architectural compliance)
-3. Public `state` prop (violates State Authority)
-4. Missing Matrix story (Storybook canonical requirements)
-5. Missing SizesGallery story (Storybook canonical requirements)
-6. Non-canonical story name (AllStates → States)
-7. className/style props (violates Foundation Enforcement)
-8. CVA-derived types leaking (violates type system)
+Switch component is compliant with all architectural requirements:
+1. ✅ Uses `tokenCVA` (correct for token-driven component)
+2. ✅ All CVA variant maps have `satisfies Record<Type, string>` constraints
+3. ✅ No public `state` prop (states are derived)
+4. ✅ Matrix story present (canonical name and format)
+5. ✅ SizesGallery story present (canonical name and format)
+6. ✅ States story present (canonical name)
+7. ✅ `className` and `style` excluded from public API (Foundation Enforcement compliant)
+8. ✅ No CVA-derived types in public API (explicit union types used)
 
-All BLOCKERS are **architectural compliance issues**, not code quality issues. Component code is clean and well-structured, but must be refactored to meet Foundation architecture requirements.
+Component code is clean, well-structured, and fully compliant with Foundation architecture requirements. No refactoring needed.
 
 **Refactor Scope:**
-- **Code changes:** CVA migration, type system cleanup, public API cleanup, state prop removal
-- **Storybook changes:** Add Matrix story, add SizesGallery story, rename AllStates
-- **Test changes:** Update tests after API changes (state → invalid)
-- **Documentation:** Update JSDoc after API changes
+- **No refactoring required** - Component is compliant with all architectural requirements
 
-**Refactor Priority:** CRITICAL (all 8 BLOCKERS must be resolved before Foundation lock)
+**FIX Backlog Status:**
+- **BLOCKERS:** 0 (all resolved)
+- **NON-BLOCKERS:** 1 optional improvement (toggle logic extraction)
+- **DEFERRED:** 2 items (size subset optimization, token type naming)
 
 ### Consciously NOT Made Changes
 
@@ -2713,11 +2785,12 @@ _End of STEP 11 Accessibility Audit & Fixes_
 **Lock Propagation Checklist:**
 
 **Required Document Updates:**
-1. ✅ `docs/architecture/FOUNDATION_LOCK.md` - Add Switch to locked Foundation components
+1. ✅ `docs/architecture/FOUNDATION_LOCK.md` - Switch already listed as LOCKED (2025-12-25)
 2. ✅ `docs/architecture/ARCHITECTURE_LOCK.md` - Not required (architectural decisions already locked in foundation)
-3. ✅ `docs/PROJECT_PROGRESS.md` - Add Switch to Foundation components list
-4. ✅ `docs/reports/audit/SWITCH_BASELINE_REPORT.md` - Complete STEP 12 section (this document)
-5. ⚪ `docs/architecture/EXTENSION_STATE.md` - Not applicable (Switch is Foundation, not Extension)
+3. ✅ `docs/PROJECT_PROGRESS.md` - Switch already listed as LOCKED (2025-12-25)
+4. ✅ `docs/workflows/tasks/COMPONENT_ROADMAP_PRIMITIVES.md` - Update Switch status (Pipeline 18A Re-run Complete, 2025-12-27)
+5. ✅ `docs/reports/audit/SWITCH_BASELINE_REPORT.md` - Complete STEP 12 section (this document)
+6. ⚪ `docs/architecture/EXTENSION_STATE.md` - Not applicable (Switch is Foundation, not Extension)
 
 ### Change (Apply Lock Propagation)
 
@@ -2755,7 +2828,14 @@ _End of STEP 11 Accessibility Audit & Fixes_
    - **Audit Report:** `docs/reports/audit/SWITCH_BASELINE_REPORT.md`
 ```
 
-**3. `docs/reports/audit/SWITCH_BASELINE_REPORT.md`**
+**3. `docs/workflows/tasks/COMPONENT_ROADMAP_PRIMITIVES.md`**
+
+✅ Updated Switch entry (line 45, 67, 77, 99):
+- Status: ✅ **FOUNDATION LOCK** (already correct)
+- Added note: Pipeline 18A Re-run Complete, 2025-12-27
+- Updated Last Updated field to include Switch Pipeline 18A Re-run completion
+
+**4. `docs/reports/audit/SWITCH_BASELINE_REPORT.md`**
 
 ✅ Completed STEP 12 section (this section)
 ✅ Final review documented
@@ -2806,7 +2886,7 @@ _End of STEP 11 Accessibility Audit & Fixes_
 - ✅ **All BLOCKERS Resolved** (8/8)
 - ✅ **All Tests Passing** (40/40)
 - ✅ **All Checkpoints Passed** (STEP 0, 8, 9, 10, 11, 12)
-- ✅ **Lock Propagation Complete** (FOUNDATION_LOCK.md, PROJECT_PROGRESS.md updated)
+- ✅ **Lock Propagation Complete** (FOUNDATION_LOCK.md verified, PROJECT_PROGRESS.md verified, COMPONENT_ROADMAP_PRIMITIVES.md updated)
 - ✅ **Architectural Decisions Locked** (5 decisions documented)
 - ✅ **Foundation Layer** - Switch is locked Foundation component
 - ✅ **WCAG 2.1 AA Compliant** - Full accessibility
@@ -2830,8 +2910,9 @@ _End of STEP 11 Accessibility Audit & Fixes_
 ### Changes
 
 **Lock propagation complete:**
-- FOUNDATION_LOCK.md updated (Switch added to locked components)
-- PROJECT_PROGRESS.md updated (Switch added to Foundation components list)
+- FOUNDATION_LOCK.md verified (Switch already listed as LOCKED, 2025-12-25)
+- PROJECT_PROGRESS.md verified (Switch already listed as LOCKED, 2025-12-25)
+- COMPONENT_ROADMAP_PRIMITIVES.md updated (Pipeline 18A Re-run Complete, 2025-12-27)
 - Audit report STEP 12 complete (this section)
 
 ### Deferred

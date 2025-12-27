@@ -82,6 +82,7 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ({ value, max = 100, size = "md", className }, ref) => {
     // Calculate percentage and clamp to 0-100 range
     const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+    const effectiveSize = size || "md";
 
     return (
       <div
@@ -94,7 +95,8 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       >
         <div
           className={cn(
-            progressVariants({ size }),
+            PROGRESS_TOKENS.height[effectiveSize],
+            PROGRESS_TOKENS.radius,
             PROGRESS_TOKENS.fill.bg,
             PROGRESS_TOKENS.transition,
           )}

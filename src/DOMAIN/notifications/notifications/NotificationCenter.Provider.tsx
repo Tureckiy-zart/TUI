@@ -18,8 +18,8 @@ import type {
   NotificationContextType,
   NotificationData,
   NotificationOptions,
-  NotificationVariant,
 } from "./NotificationCenter.types";
+import { getChannelFromVariant, getVariantFromChannel } from "./NotificationCenter.utils";
 
 const NotificationContext = React.createContext<NotificationContextType | undefined>(undefined);
 
@@ -50,11 +50,29 @@ export function NotificationCenterProvider({
 }: NotificationCenterProviderProps) {
   const [notifications, setNotifications] = React.useState<NotificationData[]>([]);
   const [history, setHistory] = React.useState<NotificationData[]>([]);
+  const timersRef = React.useRef<Map<string, NodeJS.Timeout>>(new Map());
+
+  // Cleanup all timers on unmount
+  React.useEffect(() => {
+    const timers = timersRef.current;
+    return () => {
+      timers.forEach((timer) => {
+        clearTimeout(timer);
+      });
+      timers.clear();
+    };
+  }, []);
 
   /**
    * Remove a specific notification
    */
   const remove = React.useCallback((id: string) => {
+    // Clear timer if exists
+    const timer = timersRef.current.get(id);
+    if (timer) {
+      clearTimeout(timer);
+      timersRef.current.delete(id);
+    }
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   }, []);
 
@@ -65,20 +83,6 @@ export function NotificationCenterProvider({
     (options: NotificationOptions): string => {
       const id = Math.random().toString(36).substr(2, 9);
       const timestamp = Date.now();
-      const getChannelFromVariant = (variant?: string): NotificationChannel => {
-        if (variant === "danger") return "error";
-        if (variant === "success") return "success";
-        if (variant === "warning") return "warning";
-        if (variant === "system") return "system";
-        if (variant === "log") return "log";
-        return "info";
-      };
-
-      const getVariantFromChannel = (channel: NotificationChannel): NotificationVariant => {
-        if (channel === "error") return "danger";
-        if (channel === "success") return "success";
-        return "default";
-      };
 
       const channel: NotificationChannel =
         options.channel || getChannelFromVariant(options.variant);
@@ -108,9 +112,11 @@ export function NotificationCenterProvider({
 
       // Auto-dismiss after duration (if not persistent)
       if (durationMs > 0) {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
+          timersRef.current.delete(id);
           setNotifications((prev) => prev.filter((n) => n.id !== id));
         }, durationMs);
+        timersRef.current.set(id, timer);
       }
 
       return id;
@@ -122,6 +128,11 @@ export function NotificationCenterProvider({
    * Clear all notifications
    */
   const clearAll = React.useCallback(() => {
+    // Clear all timers
+    timersRef.current.forEach((timer) => {
+      clearTimeout(timer);
+    });
+    timersRef.current.clear();
     setNotifications([]);
   }, []);
 

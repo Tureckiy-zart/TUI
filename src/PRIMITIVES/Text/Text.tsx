@@ -156,11 +156,13 @@ export interface TextProps extends Omit<
   tone?: TextTone;
 }
 
-const Text = React.forwardRef<HTMLSpanElement, TextProps>(
+const Text = React.forwardRef<HTMLElement, TextProps>(
   ({ as = "span", size, weight, tone, ...props }, ref) => {
     const Component = as as TextAsElement;
     // className and style are forbidden from public API - only CVA output is used
-    return <Component ref={ref} className={textVariants({ size, weight, tone })} {...props} />;
+    return (
+      <Component ref={ref as any} className={textVariants({ size, weight, tone })} {...props} />
+    );
   },
 );
 Text.displayName = "Text";

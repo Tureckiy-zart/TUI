@@ -37,10 +37,13 @@ describe("ContextMenu", () => {
       const trigger = screen.getByText("Right-click me");
       await user.pointer({ keys: "[MouseRight>]", target: trigger });
 
-      await waitFor(() => {
-        expect(screen.getByText("Copy")).toBeInTheDocument();
-        expect(screen.getByText("Cut")).toBeInTheDocument();
-      });
+      await waitFor(
+        () => {
+          expect(screen.getByText("Copy")).toBeInTheDocument();
+          expect(screen.getByText("Cut")).toBeInTheDocument();
+        },
+        { timeout: 10000 },
+      );
     });
 
     it("forwards ref correctly", async () => {

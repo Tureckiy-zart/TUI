@@ -243,6 +243,9 @@ export { SIMPLETABLE_TOKENS, type SimpleTableSize } from "./simple-table";
 // DataList tokens (isolated domain)
 export { DATA_LIST_TOKENS, type DataListLabelWidth, type DataListRowPadding } from "./data-list";
 
+// List tokens (isolated domain)
+export { LIST_TOKENS } from "./list";
+
 // EmptyState tokens (isolated domain)
 export {
   EMPTY_STATE_TOKENS,

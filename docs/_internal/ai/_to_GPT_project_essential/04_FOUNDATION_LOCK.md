@@ -456,16 +456,13 @@ The following components constitute the **complete and final** Foundation layer.
 - **Export Path:** `@tenerife.music/ui` → `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
 - **Base Library:** Radix Tabs (`@radix-ui/react-tabs`)
 - **Purpose:** Sole tabs foundation. All tab-based navigation must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** Tabs was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25 (First Pass), 2025-12-25 (Second Pass), 2025-12-27 (Third Pass)
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete, Third Pass 2025-12-27)
+- **Audit Report:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+- **Lock Type:** PROCESS LOCK (COMPOSITION Layer - Navigation)
+- **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0-12) three times and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Third pass completed 2025-12-27 with all compliance verified, no issues found.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
 
 #### Select
 - **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)

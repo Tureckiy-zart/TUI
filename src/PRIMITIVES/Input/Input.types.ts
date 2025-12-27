@@ -22,7 +22,7 @@ export type InputSize = "sm" | "md" | "lg";
  */
 export interface InputProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "size" | "color"
+  "size" | "color" | "className" | "style"
 > {
   /**
    * Input size

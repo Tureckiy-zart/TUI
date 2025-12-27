@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Stack } from "@/COMPOSITION/layout";
+import { Heading } from "@/PRIMITIVES/Heading";
+import { Text } from "@/PRIMITIVES/Text";
+
 import { DataListItem, DataListLabel, DataListRoot, DataListValue } from "./index";
 
 const meta: Meta<typeof DataListRoot> = {
-  title: "Legacy Patterns/Lists/DataList",
+  title: "Foundation Locked/Patterns/Lists/DataList",
   component: DataListRoot,
   tags: ["autodocs"],
   parameters: {
@@ -58,9 +62,11 @@ export const Basic: Story = {
  */
 export const PaddingSizes: Story = {
   render: () => (
-    <div className="space-y-8">
-      <div>
-        <h3 className="mb-4 text-sm font-semibold">Small Padding</h3>
+    <Stack spacing="xl">
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Small Padding
+        </Heading>
         <DataListRoot>
           <DataListItem padding="sm">
             <DataListLabel>Name</DataListLabel>
@@ -71,10 +77,12 @@ export const PaddingSizes: Story = {
             <DataListValue>john.doe@example.com</DataListValue>
           </DataListItem>
         </DataListRoot>
-      </div>
+      </Stack>
 
-      <div>
-        <h3 className="mb-4 text-sm font-semibold">Medium Padding (Default)</h3>
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Medium Padding (Default)
+        </Heading>
         <DataListRoot>
           <DataListItem padding="md">
             <DataListLabel>Name</DataListLabel>
@@ -85,10 +93,12 @@ export const PaddingSizes: Story = {
             <DataListValue>john.doe@example.com</DataListValue>
           </DataListItem>
         </DataListRoot>
-      </div>
+      </Stack>
 
-      <div>
-        <h3 className="mb-4 text-sm font-semibold">Large Padding</h3>
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Large Padding
+        </Heading>
         <DataListRoot>
           <DataListItem padding="lg">
             <DataListLabel>Name</DataListLabel>
@@ -99,8 +109,8 @@ export const PaddingSizes: Story = {
             <DataListValue>john.doe@example.com</DataListValue>
           </DataListItem>
         </DataListRoot>
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   ),
 };
 
@@ -133,9 +143,9 @@ export const UserProfile: Story = {
       <DataListItem>
         <DataListLabel>Status</DataListLabel>
         <DataListValue>
-          <span className="inline-flex items-center rounded-full bg-green-500/10 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400">
+          <Text size="xs" tone="muted">
             Active
-          </span>
+          </Text>
         </DataListValue>
       </DataListItem>
     </DataListRoot>
@@ -183,13 +193,18 @@ export const ProductInfo: Story = {
  * On mobile: labels above values (vertical)
  * On desktop: labels on left, values on right (horizontal)
  */
+/**
+ * Responsive behavior demonstration
+ * On mobile: labels above values (vertical)
+ * On desktop: labels on left, values on right (horizontal)
+ */
 export const Responsive: Story = {
   render: () => (
-    <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
+    <Stack spacing="md">
+      <Text size="sm" tone="muted">
         Resize the viewport to see the responsive behavior. On mobile, labels appear above values.
         On desktop (md breakpoint and above), labels appear on the left with fixed width.
-      </p>
+      </Text>
       <DataListRoot>
         <DataListItem>
           <DataListLabel>Mobile Layout</DataListLabel>
@@ -200,6 +215,76 @@ export const Responsive: Story = {
           <DataListValue>Labels on left, values on right</DataListValue>
         </DataListItem>
       </DataListRoot>
-    </div>
+    </Stack>
+  ),
+};
+
+/**
+ * SizesGallery - Demonstrates all padding sizes
+ * Required per SIZE_MAPPING_SPEC.md for components with size props
+ */
+export const SizesGallery: Story = {
+  render: () => (
+    <Stack spacing="xl">
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Small Padding
+        </Heading>
+        <DataListRoot>
+          <DataListItem padding="sm">
+            <DataListLabel>Name</DataListLabel>
+            <DataListValue>John Doe</DataListValue>
+          </DataListItem>
+          <DataListItem padding="sm">
+            <DataListLabel>Email</DataListLabel>
+            <DataListValue>john.doe@example.com</DataListValue>
+          </DataListItem>
+          <DataListItem padding="sm">
+            <DataListLabel>Role</DataListLabel>
+            <DataListValue>Administrator</DataListValue>
+          </DataListItem>
+        </DataListRoot>
+      </Stack>
+
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Medium Padding (Default)
+        </Heading>
+        <DataListRoot>
+          <DataListItem padding="md">
+            <DataListLabel>Name</DataListLabel>
+            <DataListValue>John Doe</DataListValue>
+          </DataListItem>
+          <DataListItem padding="md">
+            <DataListLabel>Email</DataListLabel>
+            <DataListValue>john.doe@example.com</DataListValue>
+          </DataListItem>
+          <DataListItem padding="md">
+            <DataListLabel>Role</DataListLabel>
+            <DataListValue>Administrator</DataListValue>
+          </DataListItem>
+        </DataListRoot>
+      </Stack>
+
+      <Stack spacing="sm">
+        <Heading as="h3" level={3}>
+          Large Padding
+        </Heading>
+        <DataListRoot>
+          <DataListItem padding="lg">
+            <DataListLabel>Name</DataListLabel>
+            <DataListValue>John Doe</DataListValue>
+          </DataListItem>
+          <DataListItem padding="lg">
+            <DataListLabel>Email</DataListLabel>
+            <DataListValue>john.doe@example.com</DataListValue>
+          </DataListItem>
+          <DataListItem padding="lg">
+            <DataListLabel>Role</DataListLabel>
+            <DataListValue>Administrator</DataListValue>
+          </DataListItem>
+        </DataListRoot>
+      </Stack>
+    </Stack>
   ),
 };

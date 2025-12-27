@@ -1,43 +1,11 @@
 import { screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { useState } from "react";
 
 import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
-import {
-  Toast,
-  ToastAction,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastRoot,
-  ToastTitle,
-  ToastViewport,
-} from "./Toast";
-
-// Helper component for controlled toast
-function ControlledToast({
-  variant,
-  defaultOpen = false,
-}: {
-  variant?: "default" | "success" | "warning" | "error";
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  return (
-    <ToastProvider>
-      <button onClick={() => setOpen(true)}>Show Toast</button>
-      <ToastViewport>
-        <ToastRoot open={open} onOpenChange={setOpen} variant={variant}>
-          <ToastTitle>Test Toast</ToastTitle>
-          <ToastDescription>Test description</ToastDescription>
-          <ToastClose />
-        </ToastRoot>
-      </ToastViewport>
-    </ToastProvider>
-  );
-}
+import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle } from "./Toast";
+import { ToastProvider } from "./ToastProvider";
+import { ToastViewport } from "./ToastViewport";
 
 describe("Toast", () => {
   describe("API Contract", () => {

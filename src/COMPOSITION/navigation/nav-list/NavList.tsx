@@ -88,11 +88,18 @@ export const NavList = React.forwardRef<HTMLOListElement | HTMLUListElement, Nav
       );
     }
 
-    const Component = as;
+    if (as === "ul") {
+      return (
+        <ul ref={ref as React.ForwardedRef<HTMLUListElement>} {...props}>
+          {children}
+        </ul>
+      );
+    }
+
     return (
-      <Component ref={ref} {...props}>
+      <ol ref={ref as React.ForwardedRef<HTMLOListElement>} {...props}>
         {children}
-      </Component>
+      </ol>
     );
   },
 );

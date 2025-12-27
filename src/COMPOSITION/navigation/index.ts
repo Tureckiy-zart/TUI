@@ -18,8 +18,10 @@ export {
   SegmentedControl,
   type SegmentedControlItemProps,
   segmentedControlItemVariants,
+  type SegmentedControlOrientation,
   type SegmentedControlRootProps,
   segmentedControlRootVariants,
+  type SegmentedControlSize,
 } from "./segmented-control";
 
 // Breadcrumbs
@@ -62,7 +64,7 @@ export { NavItem, type NavItemProps, NavRoot, type NavRootProps } from "./primit
 export { NavList, type NavListProps } from "./nav-list";
 
 // NavText (standalone component)
-export { NavText, type NavTextProps } from "./NavText";
+export { NavText, type NavTextProps } from "./NavText/NavText";
 
 // NavSeparator (standalone component)
-export { NavSeparator, type NavSeparatorProps } from "./NavSeparator";
+export { NavSeparator, type NavSeparatorProps } from "./NavSeparator/NavSeparator";

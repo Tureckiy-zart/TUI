@@ -146,7 +146,10 @@ describe("Text", () => {
       const { container } = renderWithTheme(<Text>{longText}</Text>);
       const text = container.querySelector("span");
       expect(text).toBeInTheDocument();
-      expect(text).toHaveTextContent(longText);
+      // Normalize whitespace for comparison (browser may normalize multiple spaces)
+      const normalizedExpected = longText.replace(/\s+/g, " ").trim();
+      const normalizedActual = text?.textContent?.replace(/\s+/g, " ").trim();
+      expect(normalizedActual).toBe(normalizedExpected);
     });
 
     it("handles numeric children", () => {

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { NotificationCenter, NotificationCenterProvider, useNotificationCenter } from "./";
 
 const meta: Meta<typeof NotificationCenterProvider> = {
-  title: "Legacy Domain/NotificationCenter",
+  title: "Foundation Locked/Domain/NotificationCenter",
   component: NotificationCenterProvider,
   parameters: {
     layout: "centered",
@@ -331,6 +331,111 @@ export const A11y: Story = {
     docs: {
       description: {
         story: "Accessibility features: keyboard navigation, focus management, ARIA attributes.",
+      },
+    },
+  },
+};
+
+// SizesGallery story - REQUIRED when component has public size prop
+function SizesGalleryDemo() {
+  const notify = useNotificationCenter();
+  const [activeSize, setActiveSize] = useState<"sm" | "md" | "lg" | null>(null);
+
+  const addNotifications = () => {
+    notify.success("Small panel notification");
+    notify.info("Medium panel notification");
+    notify.warning("Large panel notification");
+  };
+
+  return (
+    <div className="space-y-md">
+      <div className="flex items-center gap-sm">
+        <Button onClick={addNotifications}>Add Notifications</Button>
+      </div>
+      <div className="flex gap-sm">
+        <Button
+          variant={activeSize === "sm" ? "primary" : "outline"}
+          onClick={() => setActiveSize(activeSize === "sm" ? null : "sm")}
+        >
+          Show Small (sm)
+        </Button>
+        <Button
+          variant={activeSize === "md" ? "primary" : "outline"}
+          onClick={() => setActiveSize(activeSize === "md" ? null : "md")}
+        >
+          Show Medium (md)
+        </Button>
+        <Button
+          variant={activeSize === "lg" ? "primary" : "outline"}
+          onClick={() => setActiveSize(activeSize === "lg" ? null : "lg")}
+        >
+          Show Large (lg)
+        </Button>
+      </div>
+      {activeSize && (
+        <NotificationCenter.Panel
+          isOpen={true}
+          onClose={() => setActiveSize(null)}
+          width={activeSize}
+        />
+      )}
+    </div>
+  );
+}
+
+export const SizesGallery: Story = {
+  render: () => (
+    <NotificationCenterProvider>
+      <SizesGalleryDemo />
+    </NotificationCenterProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Panel width variants: sm (384px), md (448px), lg (512px). Demonstrates all supported sizes per overlay size restriction (sm | md | lg only). Click buttons to toggle different panel sizes.",
+      },
+    },
+  },
+};
+
+// LongContent story - REQUIRED for Overlay components
+function LongContentDemo() {
+  const notify = useNotificationCenter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const addLongNotification = () => {
+    notify.info(
+      "This is a very long notification message that tests how the panel handles long content. It should wrap properly and not overflow the container. The padding and maxWidth tokens should ensure proper layout even with extremely long text content that spans multiple lines.",
+      {
+        title:
+          "Very Long Notification Title That Should Also Wrap Properly Without Breaking Layout",
+      },
+    );
+  };
+
+  return (
+    <div className="space-y-md">
+      <div className="flex items-center gap-sm">
+        <NotificationCenter.Trigger onClick={() => setIsOpen(true)} />
+        <Button onClick={addLongNotification}>Add Long Notification</Button>
+      </div>
+      <NotificationCenter.Panel isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </div>
+  );
+}
+
+export const LongContent: Story = {
+  render: () => (
+    <NotificationCenterProvider>
+      <LongContentDemo />
+    </NotificationCenterProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Validates padding and maxWidth token behavior with long text content. Ensures panel does not overflow or break layout with extremely long notifications.",
       },
     },
   },

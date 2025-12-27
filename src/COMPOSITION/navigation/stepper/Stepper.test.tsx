@@ -35,10 +35,16 @@ describe("Stepper", () => {
     it("renders step numbers by default", () => {
       renderWithTheme(<Stepper.Root steps={defaultSteps} activeStep={1} />);
 
-      expect(screen.getByText("1")).toBeInTheDocument();
+      // When activeStep=1:
+      // Step 0 is completed (shows check icon, not number)
+      // Step 1 is active (shows number "2")
+      // Step 2 is default (shows number "3")
+      // Step 3 is default (shows number "4")
       expect(screen.getByText("2")).toBeInTheDocument();
       expect(screen.getByText("3")).toBeInTheDocument();
       expect(screen.getByText("4")).toBeInTheDocument();
+      // Step 0 shows check icon, not number "1"
+      expect(screen.queryByText("1")).not.toBeInTheDocument();
     });
 
     it("does not render step numbers when showNumbers is false", () => {
@@ -70,13 +76,14 @@ describe("Stepper", () => {
     });
 
     it("renders completed steps with check icon", () => {
-      renderWithTheme(<Stepper.Root steps={defaultSteps} activeStep={2} />);
+      const { container } = renderWithTheme(<Stepper.Root steps={defaultSteps} activeStep={2} />);
 
       // Step 0 and 1 should be completed (show check icon)
       // Step 2 should be active (show number)
       // Step 3 should be default (show number)
-      const checkIcons = screen.getAllByRole("img", { hidden: true });
-      expect(checkIcons.length).toBeGreaterThan(0);
+      // Check icons are SVG with aria-hidden="true", so we search by lucide-check class
+      const checkIcons = container.querySelectorAll(".lucide-check");
+      expect(checkIcons.length).toBe(2); // Steps 0 and 1 are completed
     });
 
     it("renders disabled steps correctly", () => {
@@ -127,11 +134,15 @@ describe("Stepper", () => {
     });
 
     it("handles empty steps array", () => {
-      renderWithTheme(<Stepper.Root steps={[]} activeStep={0} />);
+      const { container } = renderWithTheme(<Stepper.Root steps={[]} activeStep={0} />);
 
       // Should render without errors
-      const root = screen.getByRole("generic");
+      // The root has role="group" with aria-label
+      const root = screen.getByRole("group", { name: /progress steps/i });
       expect(root).toBeInTheDocument();
+      // Should have no step items
+      const stepItems = container.querySelectorAll('[role="listitem"]');
+      expect(stepItems).toHaveLength(0);
     });
 
     it("handles single step", () => {

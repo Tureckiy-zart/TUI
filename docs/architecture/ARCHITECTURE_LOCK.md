@@ -2,7 +2,7 @@
 
 **Version:** 1.6  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-27  
+**Last Updated:** 2025-12-27 (EmptyState Pipeline 18A Complete PROCESS LOCKED verified, List Pipeline 18A Complete PROCESS LOCKED verified, Slider Pipeline 18A Re-run Complete PROCESS LOCKED verified, Radio added to locked components table, NotificationCenter Pipeline 18A Complete PROCESS LOCKED verified)  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -68,7 +68,8 @@ The following components are **locked** and **immutable**:
 | **Input**       | Primitives | Native `<input>`  | ✅ **LOCKED**      | 2025-12-26 |
 | **Heading**     | Typography | Native `<h1-h6>`  | ✅ **LOCKED**      | 2025-12-25 |
 | **Tabs**        | Navigation | Radix Tabs        | ✅ **LOCKED**      | 2025-12-25 |
-| **Checkbox**    | Form Controls | Native `<button role="checkbox">` | ✅ **LOCKED** | 2025-12-25 |
+| **Checkbox**    | Form Controls | Native `<button role="checkbox">` | ✅ **PROCESS LOCKED** | 2025-12-25 (Refactor Cycle 2: 2025-12-27) |
+| **Radio**       | Form Controls | Native `<button role="radio">` | ✅ **LOCKED** | 2025-12-25 |
 
 **Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md.
 
@@ -206,6 +207,8 @@ The following Extension layer components have successfully completed Pipeline 18
 
 | Component | Location | Status | Lock Date | Audit Report |
 |-----------|----------|--------|-----------|--------------|
+| **Portal** | `src/COMPOSITION/overlays/Portal.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/PORTAL_BASELINE_REPORT.md` |
+| **Dialog** | `src/COMPOSITION/overlays/Dialog.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/DIALOG_BASELINE_REPORT.md` |
 | **Progress** | `src/PRIMITIVES/Progress/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/PROGRESS_BASELINE_REPORT.md` |
 | **Separator** | `src/COMPOSITION/controls/Separator/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/SEPARATOR_BASELINE_REPORT.md` |
 | **AspectRatio** | `src/COMPOSITION/controls/AspectRatio/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/ASPECTRATIO_BASELINE_REPORT.md` |
@@ -228,6 +231,50 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Flex** | `src/COMPOSITION/layout/Flex/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/FLEX_BASELINE_REPORT.md` |
 | **Toast** | `src/COMPOSITION/overlays/Toast.tsx` | ✅ **LOCKED** | 2025-12-26 | `docs/reports/audit/TOAST_BASELINE_REPORT.md` |
 | **SimpleTable** | `src/PATTERNS/tables/SimpleTable/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md` |
+| **Table** | `src/PATTERNS/tables/table/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TABLE_BASELINE_REPORT.md` |
+| **DataList** | `src/PATTERNS/lists/DataList/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/DATALIST_BASELINE_REPORT.md` |
+| **List** | `src/PATTERNS/lists/List/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/LIST_BASELINE_REPORT.md` |
+| **Timeline** | `src/PATTERNS/lists/Timeline/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/TIMELINE_BASELINE_REPORT.md` |
+| **IconGallery** | `src/COMPOSITION/utilities/IconGallery/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/ICONGALLERY_BASELINE_REPORT.md` |
+| **EmptyState** | `src/PATTERNS/states/EmptyState/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md` |
+| **NotificationCenter** | `src/DOMAIN/notifications/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
+
+**Key Architectural Decisions (EmptyState):**
+
+- **Compound Component Pattern:** Root component with Icon, Title, Description, Action subcomponents
+- **Token Compliance:** EMPTY_STATE_TOKENS usage, 100% token-driven styling (no raw values)
+- **Semantic HTML:** Uses `<h3>` for title, `<p>` for description, semantic structure
+- **Stateless Non-Interactive:** Display-only component, no JavaScript state, no interaction logic
+- **Subcomponent Attachment:** Optimized pattern using type alias (74% code reduction)
+- **Type System:** Explicit union types (EmptyStateIconSize), no CVA type leakage
+- **Icon Size Prop:** EmptyStateIcon has size prop (`sm | md | lg`) with token-driven sizing
+- **Storybook Compliance:** SizesGallery story for EmptyStateIcon per VARIANTS_SIZE_CANON.md
+- **Accessibility:** Semantic HTML, ARIA support, proper heading hierarchy
+
+**Key Architectural Decisions (IconGallery):**
+
+- **Component Role:** Utility/showcase component for displaying icons in various layouts (grid, sizes, colors)
+- **No CVA Required:** Component correctly uses direct layout components (Grid, Stack, Row, Box) without token-driven axes
+- **Token Compliance:** ✅ 100% (all spacing, padding, radius use token props from layout components)
+- **Non-Interactive:** Pure presentational component (no state, no interaction logic)
+- **Export Decision:** Intentionally NOT exported from `src/index.ts` (utility/showcase component for Storybook, not for production use)
+- **Refactor Cycles:** Two complete Pipeline 18A cycles (2025-12-26, 2025-12-27) - component validated and compliant
+- **Test Coverage:** Comprehensive edge case tests (empty array, single icon, ref forwarding, HTML attributes)
+- **Storybook Coverage:** Compliant (all modes demonstrated: Default, AllIcons, AllIconsWithSizes, AllIconsWithColors, CustomIcons, SingleIcon, WithCustomProps, EmptyIcons)
+- **Accessibility:** ✅ Compliant (presentational component, uses accessible Icon and Text components)
+
+**Key Architectural Decisions (NotificationCenter):**
+
+- **Compound Component Pattern:** Provider, Panel, Trigger, List, Item, GroupHeader, DismissAll subcomponents
+- **No CVA Required:** Components correctly use direct token classes via NOTIFICATION_TOKENS (Decision Matrix RULE 2 applies - components without token-driven axes)
+- **Token Compliance:** ✅ NOTIFICATION_TOKENS used throughout (Panel, List, Item, GroupHeader)
+- **Utility Functions:** Variant/channel conversion helpers extracted to `NotificationCenter.utils.ts` for reusability
+- **Code Quality:** Channel method pattern extracted in useNotificationCenter (reduced duplication from 6 callbacks to helper function)
+- **Panel Width Restriction:** Panel width prop restricted to overlay size scale (`sm | md | lg` only, compliant with VARIANTS_SIZE_CANON overlay restriction)
+- **State Management:** Provider manages notifications and history, Panel manages UI state (collapsedGroups)
+- **Accessibility:** ✅ Full ARIA support (dialog role, aria-modal, aria-label, aria-labelledby, aria-describedby), keyboard navigation (ESC), focus lock, screen reader support
+- **Storybook Compliance:** SizesGallery and LongContent stories added per VARIANTS_SIZE_CANON.md requirements
+- **Test Coverage:** Comprehensive tests covering all subcomponents, hooks, interactions, and accessibility
 
 **Key Architectural Decisions (SimpleTable):**
 
@@ -241,11 +288,41 @@ The following Extension layer components have successfully completed Pipeline 18
 - **Component Role:** Simple tabular data display component (no sorting, filtering, or pagination)
 - **Storybook Compliance:** Required stories added (SizesGallery, States per VARIANTS_SIZE_CANON)
 
+**Key Architectural Decisions (Table):**
+
+- **Compound Component Pattern:** Root, Header, Head, Body, Row, Cell, SortIcon, Empty, LoadingState, ExpandableContent
+- **React Context:** State management via TableContext (sortState, expandedRows)
+- **Token Compliance:** TABLE_TOKENS usage, no raw values
+- **Type System:** Explicit union types, no CVA type leakage
+- **Accessibility:** ARIA attributes, keyboard navigation, semantic HTML
+
+**Key Architectural Decisions (DataList):**
+
+- **Compound Component Pattern:** Root, Item, Label, Value subcomponents
+- **React Context:** labelWidth prop passed via DataListContext from Root to Label
+- **Token Compliance:** DATA_LIST_TOKENS usage, no raw values in stories
+- **Semantic HTML:** Uses `<dl>`, `<dt>`, `<dd>` elements for description lists
+- **Responsive Layout:** CSS-based responsive behavior (mobile: vertical, desktop: horizontal)
+- **No CVA:** Component correctly uses direct token objects (no token-driven axes)
+- **Storybook Compliance:** SizesGallery story added per SIZE_MAPPING_SPEC.md
+
+**Key Architectural Decisions (Timeline):**
+
+- **Token Compliance:** Created TIMELINE_TOKENS domain, 100% token usage (no raw Tailwind classes)
+- **Semantic HTML:** Uses `<ol>` and `<li>` for chronological list structure with `role="list"`
+- **Accessibility:** ARIA attributes (`role="list"`, `aria-hidden="true"` on decorative elements)
+- **No CVA:** Component correctly does NOT use CVA (no token-driven axes per Decision Matrix RULE 2)
+- **Presentational Component:** Display-only, no interactive states, no size/variant props
+- **Code Quality:** React.FC pattern replaced with explicit function signature (modern React pattern)
+- **Test Coverage:** 15 comprehensive test cases (public behavior, edge cases, A11Y)
+- **Storybook:** 4 stories (Default, WithoutDescription, LongDescriptions, Accessibility)
+
 **Key Architectural Decisions (RangeSlider):**
 - **CVA Type Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
 - **Token Compliance:** Created component-specific token file (`RANGESLIDER_TOKENS`) and replaced all raw Tailwind classes with token references
 - **Type Constraints:** Added `satisfies Record<Type, string>` constraints to all CVA variant maps for type safety
 - **Consciously NOT Made Changes:** No API changes (API was well-designed), no behavior changes (behavior was correct), no component splitting (component has clear responsibility)
+- **Refactor Cycle 2025-12-27:** No changes required - Component fully compliant with all Authority Contracts, all previous cycle improvements remain valid
 
 **Key Architectural Decisions (AspectRatio):**
 
@@ -372,6 +449,19 @@ The following Extension layer components have successfully completed Pipeline 18
 - **Type Deduplication:** Removed duplicate `SkeletonProps` definition (deleted Skeleton.types.ts)
 - **Storybook Compliance:** Stories demonstrate all variants and realistic usage (Matrix/States/SizesGallery not required - component has only variant prop, non-interactive)
 
+**Key Architectural Decisions (CardBase):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
+- **Size Scale Alignment:** Mapped custom sizes `"default" | "compact"` → GlobalSize scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
+- **Variant Dictionary Alignment:** Mapped custom variants `"default" | "featured"` → SurfaceVariant dictionary `"default" | "elevated"` per VARIANTS_SIZE_CANON.md
+- **Type Constraints:** Added `satisfies Record<CardBaseSize, string>` and `satisfies Record<CardBaseVariant, string>` constraints to all CVA variant maps
+- **Size Mapping Table:** Created size mapping table per SIZE_MAPPING_SPEC.md documenting token usage for each size
+- **Empty Variant Maps:** Kept empty size variants in subcomponents (ImageWrapper, ContentWrapper, FooterWrapper) - justified: no size-specific styling needed, but size prop maintained for API consistency
+- **Component Role:** Layout composition primitive for card structures with pure layout wrappers (no domain logic)
+- **Breaking Changes:** Size prop changed from `"default" | "compact"` to `"sm" | "md"`, variant prop changed from `"default" | "featured"` to `"default" | "elevated"`
+- **Storybook Compliance:** Added canonical stories (Matrix, SizesGallery) per VARIANTS_SIZE_CANON.md requirements
+- **Test Coverage:** Comprehensive test suite created covering all public behavior, variants, sizes, and subcomponents
+
 **Key Architectural Decisions (Flex):**
 
 - **Advanced Flexbox Container:** Full programmatic control over flexbox properties (direction, wrap, grow, shrink, basis, alignment, spacing) for complex layout scenarios
@@ -398,6 +488,20 @@ The following Extension layer components have successfully completed Pipeline 18
 - **Stateless Component:** No React hooks, no state management, pure render function
 - **Accessibility:** Native HTML list semantics are correctly announced by screen readers, ARIA attributes correctly passed through
 - **Pipeline Outcome:** Component validated by Pipeline 18A, no changes required, fully compliant with all architectural standards
+
+**Key Architectural Decisions (List):**
+
+- **Simple List Display Pattern:** Component is intentionally simple, no compound component pattern needed (unlike DataList which uses compound pattern for flexibility)
+- **Token Compliance:** LIST_TOKENS file created, all raw Tailwind classes replaced with tokens (100% token compliance achieved)
+- **Semantic HTML:** Component uses `<ul>` and `<li>` elements with `role="list"` for accessibility (improved from initial `<div>` structure)
+- **Presentational Component:** Component is purely presentational with no interactive states beyond CSS hover (no size/variant props intentionally)
+- **Modern React Pattern:** React.FC replaced with explicit function signature for better type inference
+- **No CVA Required:** Correctly does not use CVA per Decision Matrix (no token-driven axes: no variant, no size, no state)
+- **Type System:** Explicit types (`ListItem`, `ListProps`), no CVA type leakage
+- **Test Coverage:** Comprehensive test suite added (9 test cases covering behavior, edge cases, accessibility)
+- **Storybook Compliance:** Existing stories validated, Accessibility story added per STEP 11 requirements
+- **Accessibility:** WCAG 2.1 Level A compliant (semantic HTML structure, proper ARIA attributes, screen reader support)
+- **Pipeline Outcome:** Component validated by Pipeline 18A (Steps 0-12), all BLOCKERS resolved, fully compliant with all architectural standards
 
 **PROCESS LOCKED Status:**
 - Components completed Pipeline 18A (Steps 0-12)
@@ -851,8 +955,10 @@ The following public components are **IMPLEMENTED** after completing their audit
 | Input     | Foundation | ✅ **LOCKED** | 2025-12-26  | Foundation primitive. Completed Pipeline 18A Refactor Cycle 2 (Steps 0-12). Low-level form control primitive. Native input element with token-driven styling (size-only CVA). Intentional limitation: does not handle validation, errors, labels, helper text, or form logic. |
 | Tooltip   | Extension  | ✅ Implemented | 2025-12-21  | Overlay component. Implemented after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Internal-only. |
 | Popover   | Extension  | ✅ **PROCESS LOCKED** | 2025-12-26  | Overlay component. Pipeline 18A Second Pass complete (Steps 0-12). Overlay size restriction compliance achieved (3 sizes: sm, md, lg). Internal-only. |
-| HoverCard | Extension  | ✅ Implemented | 2025-12-21  | Menu component. Implemented after TUNG_TOOLTIP_POPOVER_STEP_0-10 completion. Public API. |
+| HoverCard | Extension  | ✅ **PROCESS LOCKED** | 2025-12-27  | Menu component. Pipeline 18A Complete (Steps 0-12). Hover-triggered overlay card with delay support. Delegates styling to PopoverContent. Public API. |
 | NextLinkAdapter | Extension  | ✅ **PROCESS LOCKED** | 2025-12-25  | Framework adapter component. Pipeline 18A re-executed (Steps 0-12 complete, full execution). PROCESS_LOCK re-confirmed. Extension-only (not exported from main library). |
+| Portal | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | SSR-safe portal utility component. Pipeline 18A complete (Steps 0-12). Utility component (no visual tokens, no size/variant props), SSR-safe mounting pattern, wrapper div necessary for ref forwarding. |
+| Dialog | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | Semantic wrapper over Modal (Foundation). Pipeline 18A complete (Steps 0-12). Provides Dialog.Header, Dialog.Title, Dialog.Description, Dialog.Body, Dialog.Footer subcomponents. Automatic aria-labelledby and aria-describedby management. |
 | Toast | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Notification overlay component. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling. |
 | ContextMenu | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Right-click context menu overlay. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling, full keyboard navigation and ARIA support. |
 
@@ -1096,6 +1202,23 @@ Any token system modifications require:
   - Audit Report: `docs/reports/audit/LINK_BASELINE_REPORT.md`
   - Completed per TUNG_FOUNDATION_LINK_UNLOCK_18A task
 
+- **v1.7** (2025-12-27): Portal Component Pipeline 18A Complete
+  - Added Portal to Extension Layer (overlays)
+  - Portal status: PROCESS LOCKED (Extension component lock)
+  - Pipeline 18A completed (Steps 0-12)
+  - Completion Date: 2025-12-27
+  - Audit Report: `docs/reports/audit/PORTAL_BASELINE_REPORT.md`
+  - Architectural decisions:
+    - Component type: Utility component (SSR-safe portal rendering)
+    - No visual tokens (utility component doesn't need tokens)
+    - No size/variant props (correct for utility component)
+    - Wrapper div necessary for ref forwarding (asChild pattern not needed)
+    - className/style props acceptable for COMPOSITION layer
+    - No CVA structure (Decision Matrix RULE 2 - no token-driven axes)
+    - SSR-safe mounting pattern (mounted state + window check)
+  - Quality: High (comprehensive test suite created, stories compliant)
+  - Completed per Pipeline 18A
+
 - **v1.3** (2025-12-23): NextLinkAdapter PROCESS_LOCK Applied (Initial)
   - Added NextLinkAdapter to Locked Public Components Index
   - NextLinkAdapter status: PROCESS_LOCK (Extension component lock)
@@ -1144,7 +1267,7 @@ New functionality must be built as **extensions** that compose foundation compon
 ---
 
 **Status:** ✅ **LOCKED** (Foundation CLOSED)  
-**Version:** 1.6  
+**Version:** 1.7  
 **Date Created:** 2025-12-12  
 **Last Updated:** 2025-12-27  
 **Priority:** CRITICAL  

@@ -1,5 +1,4 @@
 // Local types for filter components
-// Main filter types are defined in apps/web/src/stores/useFiltersStore.ts
 
 export interface FilterOption {
   value: string;
@@ -23,33 +22,37 @@ export interface FilterState {
   sortOrder: "asc" | "desc";
 }
 
-// Mock hook for components that need filter functionality
-// In actual usage, these should be imported from apps/web/src/stores/useFiltersStore
-export const useFilterManager = () => {
-  console.warn(
-    "useFilterManager: This is a mock implementation. Use the actual hook from apps/web/src/stores/useFiltersStore",
-  );
-
-  return {
-    search: "",
-    category: "",
-    tags: [],
-    dateRange: { start: null, end: null },
-    priceRange: { min: null, max: null },
-    sortBy: "date",
-    sortOrder: "desc" as const,
-    setSearch: (_search: string) => {},
-    setCategory: (_category: string) => {},
-    setTags: (_tags: string[]) => {},
-    addTag: (_tag: string) => {},
-    removeTag: (_tag: string) => {},
-    setDateRange: (_start: Date | null, _end: Date | null) => {},
-    setPriceRange: (_min: number | null, _max: number | null) => {},
-    setSorting: (_sortBy: string, _sortOrder: "asc" | "desc") => {},
-    resetFilters: () => {},
-    getActiveFiltersCount: () => 0,
-    getFilterSummary: () => [],
-    hasActiveFilters: false,
-    clearAllFilters: () => {},
-  };
-};
+/**
+ * Filter manager interface for controlled FilterBar usage.
+ * Consumer must implement this interface to manage filter state.
+ */
+export interface FilterManager {
+  /** Current search query */
+  search: string;
+  /** Current category filter */
+  category: string;
+  /** Current date range filter */
+  dateRange: { start: Date | null; end: Date | null };
+  /** Current price range filter */
+  priceRange: { min: number | null; max: number | null };
+  /** Current sort field */
+  sortBy: string;
+  /** Current sort order */
+  sortOrder: "asc" | "desc";
+  /** Update search query */
+  setSearch: (search: string) => void;
+  /** Update category filter */
+  setCategory: (category: string) => void;
+  /** Update date range filter */
+  setDateRange: (start: Date | null, end: Date | null) => void;
+  /** Update price range filter */
+  setPriceRange: (min: number | null, max: number | null) => void;
+  /** Update sorting */
+  setSorting: (sortBy: string, sortOrder: "asc" | "desc") => void;
+  /** Whether any filters are currently active */
+  hasActiveFilters: boolean;
+  /** Clear all filters to initial state */
+  clearAllFilters: () => void;
+  /** Get array of filter summary strings for display */
+  getFilterSummary: () => string[];
+}

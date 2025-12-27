@@ -26,6 +26,7 @@ export default [
       "docs-app/**", // Documentation app - allow demo code
       "docs/**",
       ".cursor/**", // Cursor IDE configuration files
+      "docs_archive/**",
       "**/*.stories.tsx",
       "**/*.stories.ts",
       "**/*.stories.js",

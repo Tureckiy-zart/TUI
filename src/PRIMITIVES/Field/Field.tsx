@@ -97,7 +97,7 @@ export interface FieldDescriptionProps extends React.ComponentProps<typeof Text>
 
 const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>((props, ref) => {
   // className is forbidden on Foundation components - FieldDescription uses only token-driven props
-  return <Text ref={ref} size="sm" muted {...props} />;
+  return <Text ref={ref} size="sm" tone="muted" {...props} />;
 });
 FieldDescription.displayName = "FieldDescription";
 

@@ -141,14 +141,14 @@ describe("Button", () => {
           "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
         > = ["primary", "secondary", "accent", "outline", "ghost", "destructive"];
 
-        variants.forEach((variant) => {
+        for (const variant of variants) {
           const { container } = renderWithTheme(
             <Button iconOnly variant={variant} aria-label={`${variant} icon`}>
               <span>🔍</span>
             </Button>,
           );
           expect(container.querySelector("button")).toBeInTheDocument();
-        });
+        }
       });
 
       it("iconOnly button maintains disabled behavior", () => {

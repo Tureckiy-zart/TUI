@@ -11,9 +11,26 @@ import { DateRangePicker } from "./DateRangePicker";
 import { FilterSelect } from "./FilterSelect";
 import { PriceRangeSlider } from "./PriceRangeSlider";
 import { SearchInput } from "./SearchInput";
-import { useFilterManager } from "./types";
+import type { FilterManager } from "./types";
+
+// Helper function to validate required string props
+function validateRequiredString(prop: string | undefined, propName: string): void {
+  if (!prop || prop.trim() === "") {
+    throw new Error(`FilterBar: "${propName}" prop is required and cannot be empty`);
+  }
+}
+
+// Reusable className for filter labels
+const LABEL_CLASS_NAME =
+  "text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70";
 
 export interface FilterBarProps {
+  /**
+   * Filter manager instance providing state and callbacks.
+   * Consumer must implement FilterManager interface.
+   * @required
+   */
+  filterManager: FilterManager;
   className?: string;
   showSearch?: boolean;
   showCategory?: boolean;
@@ -55,6 +72,7 @@ export interface FilterBarProps {
 }
 
 export function FilterBar({
+  filterManager,
   className,
   showSearch = true,
   showCategory = true,
@@ -87,75 +105,39 @@ export function FilterBar({
   priceMaxAriaLabel,
   onFiltersChange,
 }: FilterBarProps) {
+  // Validate required filterManager prop
+  if (!filterManager) {
+    throw new Error('FilterBar: "filterManager" prop is required');
+  }
+
+  // Validate required props
   if (!sortOptions || sortOptions.length === 0) {
     throw new Error('FilterBar: "sortOptions" prop is required and cannot be empty');
   }
-  if (!searchPlaceholder || searchPlaceholder.trim() === "") {
-    throw new Error('FilterBar: "searchPlaceholder" prop is required and cannot be empty');
-  }
-  if (!filtersLabel || filtersLabel.trim() === "") {
-    throw new Error('FilterBar: "filtersLabel" prop is required and cannot be empty');
-  }
-  if (!clearAllLabel || clearAllLabel.trim() === "") {
-    throw new Error('FilterBar: "clearAllLabel" prop is required and cannot be empty');
-  }
-  if (!categoryLabel || categoryLabel.trim() === "") {
-    throw new Error('FilterBar: "categoryLabel" prop is required and cannot be empty');
-  }
-  if (!allCategoriesLabel || allCategoriesLabel.trim() === "") {
-    throw new Error('FilterBar: "allCategoriesLabel" prop is required and cannot be empty');
-  }
-  if (!dateRangeLabel || dateRangeLabel.trim() === "") {
-    throw new Error('FilterBar: "dateRangeLabel" prop is required and cannot be empty');
-  }
-  if (!anyDateLabel || anyDateLabel.trim() === "") {
-    throw new Error('FilterBar: "anyDateLabel" prop is required and cannot be empty');
-  }
-  if (!dateSelectDateRangeLabel || dateSelectDateRangeLabel.trim() === "") {
-    throw new Error('FilterBar: "dateSelectDateRangeLabel" prop is required and cannot be empty');
-  }
-  if (!dateClearLabel || dateClearLabel.trim() === "") {
-    throw new Error('FilterBar: "dateClearLabel" prop is required and cannot be empty');
-  }
-  if (!dateCloseLabel || dateCloseLabel.trim() === "") {
-    throw new Error('FilterBar: "dateCloseLabel" prop is required and cannot be empty');
-  }
-  if (!sortByLabel || sortByLabel.trim() === "") {
-    throw new Error('FilterBar: "sortByLabel" prop is required and cannot be empty');
-  }
-  if (!sortAscLabel || sortAscLabel.trim() === "") {
-    throw new Error('FilterBar: "sortAscLabel" prop is required and cannot be empty');
-  }
-  if (!sortDescLabel || sortDescLabel.trim() === "") {
-    throw new Error('FilterBar: "sortDescLabel" prop is required and cannot be empty');
-  }
-  if (!sortByPlaceholder || sortByPlaceholder.trim() === "") {
-    throw new Error('FilterBar: "sortByPlaceholder" prop is required and cannot be empty');
-  }
-  if (!activeFiltersLabel || activeFiltersLabel.trim() === "") {
-    throw new Error('FilterBar: "activeFiltersLabel" prop is required and cannot be empty');
-  }
-  if (!priceRangeLabel || priceRangeLabel.trim() === "") {
-    throw new Error('FilterBar: "priceRangeLabel" prop is required and cannot be empty');
-  }
-  if (!priceMinLabel || priceMinLabel.trim() === "") {
-    throw new Error('FilterBar: "priceMinLabel" prop is required and cannot be empty');
-  }
-  if (!priceMaxLabel || priceMaxLabel.trim() === "") {
-    throw new Error('FilterBar: "priceMaxLabel" prop is required and cannot be empty');
-  }
-  if (!priceAnyLabel || priceAnyLabel.trim() === "") {
-    throw new Error('FilterBar: "priceAnyLabel" prop is required and cannot be empty');
-  }
-  if (!priceClearLabel || priceClearLabel.trim() === "") {
-    throw new Error('FilterBar: "priceClearLabel" prop is required and cannot be empty');
-  }
-  if (!priceMinAriaLabel || priceMinAriaLabel.trim() === "") {
-    throw new Error('FilterBar: "priceMinAriaLabel" prop is required and cannot be empty');
-  }
-  if (!priceMaxAriaLabel || priceMaxAriaLabel.trim() === "") {
-    throw new Error('FilterBar: "priceMaxAriaLabel" prop is required and cannot be empty');
-  }
+  validateRequiredString(searchPlaceholder, "searchPlaceholder");
+  validateRequiredString(filtersLabel, "filtersLabel");
+  validateRequiredString(clearAllLabel, "clearAllLabel");
+  validateRequiredString(categoryLabel, "categoryLabel");
+  validateRequiredString(allCategoriesLabel, "allCategoriesLabel");
+  validateRequiredString(dateRangeLabel, "dateRangeLabel");
+  validateRequiredString(anyDateLabel, "anyDateLabel");
+  validateRequiredString(dateSelectDateRangeLabel, "dateSelectDateRangeLabel");
+  validateRequiredString(dateClearLabel, "dateClearLabel");
+  validateRequiredString(dateCloseLabel, "dateCloseLabel");
+  validateRequiredString(sortByLabel, "sortByLabel");
+  validateRequiredString(sortAscLabel, "sortAscLabel");
+  validateRequiredString(sortDescLabel, "sortDescLabel");
+  validateRequiredString(sortByPlaceholder, "sortByPlaceholder");
+  validateRequiredString(activeFiltersLabel, "activeFiltersLabel");
+  validateRequiredString(priceRangeLabel, "priceRangeLabel");
+  validateRequiredString(priceMinLabel, "priceMinLabel");
+  validateRequiredString(priceMaxLabel, "priceMaxLabel");
+  validateRequiredString(priceAnyLabel, "priceAnyLabel");
+  validateRequiredString(priceClearLabel, "priceClearLabel");
+  validateRequiredString(priceMinAriaLabel, "priceMinAriaLabel");
+  validateRequiredString(priceMaxAriaLabel, "priceMaxAriaLabel");
+
+  // Extract state and callbacks from filterManager
   const {
     search,
     category,
@@ -171,7 +153,7 @@ export function FilterBar({
     hasActiveFilters,
     clearAllFilters,
     getFilterSummary,
-  } = useFilterManager();
+  } = filterManager;
 
   React.useEffect(() => {
     if (onFiltersChange) {
@@ -232,9 +214,7 @@ export function FilterBar({
 
         {showDateRange && (
           <div className="space-y-sm">
-            <label className="text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              {dateRangeLabel}
-            </label>
+            <label className={LABEL_CLASS_NAME}>{dateRangeLabel}</label>
             <DateRangePicker
               value={{
                 from: dateRange.start || undefined,
@@ -269,9 +249,7 @@ export function FilterBar({
 
         {showSorting && (
           <div className="space-y-sm">
-            <label className="text-sm font-medium leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              {sortByLabel}
-            </label>
+            <label className={LABEL_CLASS_NAME}>{sortByLabel}</label>
             <FilterSelect
               value={`${sortBy}-${sortOrder}`}
               onValueChange={(value) => {
@@ -318,3 +296,6 @@ export function FilterBar({
 export function FilterBarCompact({ className, ...props }: FilterBarProps) {
   return <FilterBar className={cn("space-y-sm", className)} {...props} />;
 }
+
+// Re-export types for consumer convenience
+export type { FilterManager } from "./types";

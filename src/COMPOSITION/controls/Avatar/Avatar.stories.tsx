@@ -95,14 +95,12 @@ export const Matrix: Story = {
 
     return (
       <Stack spacing="lg" className="p-4">
-        <Heading size="4xl">Avatar Matrix</Heading>
+        <Heading level={2}>Avatar Matrix</Heading>
         <Text>All size and shape combinations</Text>
 
         {shapes.map((shape) => (
           <Stack key={shape} spacing="md">
-            <Heading size="2xl" className="capitalize">
-              {shape}
-            </Heading>
+            <Heading level={4}>{shape}</Heading>
             <div className="flex items-center gap-4">
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
@@ -112,7 +110,7 @@ export const Matrix: Story = {
                     size={size}
                     shape={shape}
                   />
-                  <Text size="sm" className="text-muted-foreground">
+                  <Text size="sm" tone="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -147,7 +145,7 @@ export const States: Story = {
 
     return (
       <Stack spacing="lg" className="p-4">
-        <Heading size="4xl">Status Indicators</Heading>
+        <Heading level={2}>Status Indicators</Heading>
         <Text>Avatar with different status indicators</Text>
 
         <div className="flex items-center gap-6">
@@ -159,7 +157,7 @@ export const States: Story = {
                 size="lg"
                 status={status}
               />
-              <Text size="sm" className="text-muted-foreground">
+              <Text size="sm" tone="muted">
                 {label}
               </Text>
             </Stack>
@@ -194,14 +192,12 @@ export const SizesGallery: Story = {
 
     return (
       <Stack spacing="lg" className="p-4">
-        <Heading size="4xl">Avatar Sizes Gallery</Heading>
+        <Heading level={2}>Avatar Sizes Gallery</Heading>
         <Text>All supported sizes with different content types</Text>
 
         <Stack spacing="md">
           <div>
-            <Heading size="2xl" className="mb-md">
-              With Image
-            </Heading>
+            <Heading level={4}>With Image</Heading>
             <div className="flex flex-wrap items-center gap-md">
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
@@ -210,7 +206,7 @@ export const SizesGallery: Story = {
                     alt="John Doe"
                     size={size}
                   />
-                  <Text size="sm" className="text-muted-foreground">
+                  <Text size="sm" tone="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -219,14 +215,12 @@ export const SizesGallery: Story = {
           </div>
 
           <div>
-            <Heading size="2xl" className="mb-md">
-              With Initials (Fallback)
-            </Heading>
+            <Heading level={4}>With Initials (Fallback)</Heading>
             <div className="flex flex-wrap items-center gap-md">
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
                   <Avatar alt="John Doe" size={size} />
-                  <Text size="sm" className="text-muted-foreground">
+                  <Text size="sm" tone="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -235,14 +229,12 @@ export const SizesGallery: Story = {
           </div>
 
           <div>
-            <Heading size="2xl" className="mb-md">
-              With Custom Fallback
-            </Heading>
+            <Heading level={4}>With Custom Fallback</Heading>
             <div className="flex flex-wrap items-center gap-md">
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
                   <Avatar alt="User" fallback="?" size={size} />
-                  <Text size="sm" className="text-muted-foreground">
+                  <Text size="sm" tone="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -251,9 +243,7 @@ export const SizesGallery: Story = {
           </div>
 
           <div>
-            <Heading size="2xl" className="mb-md">
-              With Status Indicator
-            </Heading>
+            <Heading level={4}>With Status Indicator</Heading>
             <div className="flex flex-wrap items-center gap-md">
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
@@ -263,7 +253,7 @@ export const SizesGallery: Story = {
                     size={size}
                     status="online"
                   />
-                  <Text size="sm" className="text-muted-foreground">
+                  <Text size="sm" tone="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -291,7 +281,7 @@ export const SizesGallery: Story = {
 export const FallbackStates: Story = {
   render: () => (
     <Stack spacing="lg" className="p-4">
-      <Heading size="4xl">Fallback States</Heading>
+      <Heading level={2}>Fallback States</Heading>
       <Text>Demonstrates different fallback behaviors</Text>
 
       <div className="flex items-center gap-6">
@@ -301,28 +291,28 @@ export const FallbackStates: Story = {
             alt="John Doe"
             size="lg"
           />
-          <Text size="sm" className="text-muted-foreground">
+          <Text size="sm" tone="muted">
             With Image
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Alice Brown" size="lg" />
-          <Text size="sm" className="text-muted-foreground">
+          <Text size="sm" tone="muted">
             Initials (AB)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Bob" size="lg" />
-          <Text size="sm" className="text-muted-foreground">
+          <Text size="sm" tone="muted">
             Single Initial (B)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="User" fallback="?" size="lg" />
-          <Text size="sm" className="text-muted-foreground">
+          <Text size="sm" tone="muted">
             Custom Fallback
           </Text>
         </Stack>
@@ -346,15 +336,15 @@ export const FallbackStates: Story = {
 export const AccessibilityDemo: Story = {
   render: () => (
     <Stack spacing="lg" className="max-w-3xl p-4">
-      <Heading size="4xl">Accessibility Features</Heading>
+      <Heading level={2}>Accessibility Features</Heading>
       <Text>
         Each Avatar has a computed aria-label for screen readers. Inspect the DOM or use a screen
         reader to hear the full context.
       </Text>
 
       <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
-        <Heading size="2xl">Without Status</Heading>
-        <Text size="sm" className="text-muted-foreground">
+        <Heading level={4}>Without Status</Heading>
+        <Text size="sm" tone="muted">
           aria-label: "John Doe"
         </Text>
         <Avatar
@@ -365,8 +355,8 @@ export const AccessibilityDemo: Story = {
       </Stack>
 
       <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
-        <Heading size="2xl">With Status: Online</Heading>
-        <Text size="sm" className="text-muted-foreground">
+        <Heading level={4}>With Status: Online</Heading>
+        <Text size="sm" tone="muted">
           aria-label: "Jane Smith (online)"
         </Text>
         <Avatar
@@ -378,16 +368,16 @@ export const AccessibilityDemo: Story = {
       </Stack>
 
       <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
-        <Heading size="2xl">With Status: Busy</Heading>
-        <Text size="sm" className="text-muted-foreground">
+        <Heading level={4}>With Status: Busy</Heading>
+        <Text size="sm" tone="muted">
           aria-label: "Bob Wilson (busy)"
         </Text>
         <Avatar alt="Bob Wilson" size="lg" status="busy" />
       </Stack>
 
       <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
-        <Heading size="2xl">With Status: Offline</Heading>
-        <Text size="sm" className="text-muted-foreground">
+        <Heading level={4}>With Status: Offline</Heading>
+        <Text size="sm" tone="muted">
           aria-label: "Carol White (offline)"
         </Text>
         <Avatar alt="Carol White" size="lg" status="offline" />
@@ -418,9 +408,9 @@ export const UserProfileCard: Story = {
           status="online"
         />
         <Stack spacing="xs" align="center">
-          <Heading size="2xl">John Doe</Heading>
-          <Text className="text-muted-foreground">Senior Software Engineer</Text>
-          <Text size="sm" className="text-muted-foreground">
+          <Heading level={4}>John Doe</Heading>
+          <Text tone="muted">Senior Software Engineer</Text>
+          <Text size="sm" tone="muted">
             San Francisco, CA
           </Text>
         </Stack>
@@ -442,7 +432,7 @@ export const UserProfileCard: Story = {
 export const CommentSection: Story = {
   render: () => (
     <Stack spacing="md" className="w-full max-w-2xl p-4">
-      <Heading size="3xl">Comments</Heading>
+      <Heading level={3}>Comments</Heading>
 
       {[
         { name: "Alice Johnson", comment: "Great article! Very insightful.", time: "2 hours ago" },
@@ -454,7 +444,7 @@ export const CommentSection: Story = {
           <Stack spacing="xs" className="flex-1">
             <div className="flex items-center gap-2">
               <Text weight="medium">{item.name}</Text>
-              <Text size="sm" className="text-muted-foreground">
+              <Text size="sm" tone="muted">
                 {item.time}
               </Text>
             </div>
@@ -479,7 +469,7 @@ export const CommentSection: Story = {
 export const GroupBasic: Story = {
   render: () => (
     <Stack spacing="lg" className="p-4">
-      <Heading size="4xl">Avatar Group</Heading>
+      <Heading level={2}>Avatar Group</Heading>
       <Text>Multiple avatars with overlap effect</Text>
 
       <AvatarGroup
@@ -521,7 +511,7 @@ export const GroupBasic: Story = {
 export const GroupWithOverflow: Story = {
   render: () => (
     <Stack spacing="lg" className="p-4">
-      <Heading size="4xl">Avatar Group with Overflow</Heading>
+      <Heading level={2}>Avatar Group with Overflow</Heading>
       <Text>Shows max 3 avatars, indicates +5 more</Text>
 
       <AvatarGroup
@@ -567,15 +557,13 @@ export const GroupWithOverflow: Story = {
 export const GroupSpacing: Story = {
   render: () => (
     <Stack spacing="lg" className="p-4">
-      <Heading size="4xl">Avatar Group Spacing</Heading>
+      <Heading level={2}>Avatar Group Spacing</Heading>
       <Text>Different spacing variants: tight, normal, loose</Text>
 
       <Stack spacing="md">
         {(["tight", "normal", "loose"] as const).map((spacing) => (
           <Stack key={spacing} spacing="sm">
-            <Text weight="medium" className="capitalize">
-              {spacing}
-            </Text>
+            <Text weight="medium">{spacing}</Text>
             <AvatarGroup
               avatars={[
                 {
@@ -618,7 +606,7 @@ export const GroupSpacing: Story = {
 export const TeamMembersGrid: Story = {
   render: () => (
     <Stack spacing="lg" className="w-full max-w-4xl p-4">
-      <Heading size="4xl">Team Members</Heading>
+      <Heading level={2}>Team Members</Heading>
 
       <div className="grid grid-cols-3 gap-6">
         {[
@@ -638,7 +626,7 @@ export const TeamMembersGrid: Story = {
             <Avatar alt={member.name} size="lg" status={member.status} />
             <Stack spacing="xs" align="center">
               <Text weight="medium">{member.name}</Text>
-              <Text size="sm" className="text-muted-foreground">
+              <Text size="sm" tone="muted">
                 {member.role}
               </Text>
             </Stack>

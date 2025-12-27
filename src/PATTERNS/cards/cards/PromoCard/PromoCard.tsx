@@ -106,12 +106,19 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
     // Determine variant: use explicit variant prop or derive from featured
     const cardVariant = variant || (featured ? "featured" : "default");
 
+    // Map PromoCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
+    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+
+    // Map PromoCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
+    const cardBaseVariant: "default" | "elevated" =
+      cardVariant === "featured" ? "elevated" : "default";
+
     return (
       <Box {...animationProps}>
         <CardBase
           ref={ref}
-          size={size}
-          variant={cardVariant}
+          size={cardBaseSize}
+          variant={cardBaseVariant}
           className={cn("group relative", className)}
           {...props}
         >
@@ -126,7 +133,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
           {/* Image Section */}
           {showImage && (
-            <CardBaseImageWrapper size={size}>
+            <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn("relative w-full overflow-hidden", GRADIENT_TOKENS.surface.elevated)}
               >
@@ -163,7 +170,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           )}
 
           {/* Content Section */}
-          <CardBaseContentWrapper size={size}>
+          <CardBaseContentWrapper size={cardBaseSize}>
             {/* Title */}
             <Heading level={3}>
               {href ? (
@@ -177,14 +184,14 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" muted>
+              <Text size="sm" tone="muted">
                 {description}
               </Text>
             )}
           </CardBaseContentWrapper>
 
           {/* Footer Section */}
-          <CardBaseFooterWrapper size={size}>
+          <CardBaseFooterWrapper size={cardBaseSize}>
             <div className="w-full">
               {ctaUrl && (
                 <LinkWithCustomVariant

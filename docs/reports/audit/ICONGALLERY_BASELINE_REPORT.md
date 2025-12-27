@@ -809,3 +809,385 @@ The component is considered "closed" only when:
 
 **Deferred:** None
 
+---
+
+## Second Refactor Cycle (2025-12-27)
+
+**Pipeline Status:** 🔄 IN PROGRESS  
+**Cycle:** Second Pass  
+**Date Started:** 2025-12-27  
+**Reason:** Additional refactoring cycle to ensure full compliance and quality improvements
+
+---
+
+## STEP 0 (Second Cycle) — Baseline Snapshot & Context Fixation
+
+**Outcome:** Baseline snapshot created  
+**Blocking:** No  
+**Notes:**
+- ✅ Component is PROCESS LOCKED from first cycle (2025-12-26)
+- ✅ Current state documented for second refactor cycle
+- ✅ All files verified and current line counts documented
+- ✅ Component structure unchanged since first cycle
+- ⚠️ Component remains PROCESS LOCKED - exception declaration may be required in STEP 8
+
+**Current State Snapshot:**
+
+**Implementation Files:**
+- `src/COMPOSITION/utilities/IconGallery/IconGallery.tsx` (160 lines)
+- `src/COMPOSITION/utilities/IconGallery/IconGallery.types.ts` (7 lines)
+- `src/COMPOSITION/utilities/IconGallery/IconGallery.stories.tsx` (47 lines)
+- `src/COMPOSITION/utilities/IconGallery/IconGallery.test.tsx` (48 lines)
+- `src/COMPOSITION/utilities/IconGallery/index.ts` (5 lines)
+
+**Current Public Props:**
+- `icons?: IconName[]` - List of icon names to display
+- `mode?: "grid" | "sizes" | "colors"` - Display mode
+- `iconSize?: IconProps["size"]` - Icon size for grid mode
+- `iconColor?: IconProps["color"]` - Icon color for grid and sizes modes
+- Inherits `React.HTMLAttributes<HTMLDivElement>` (includes `className`, `style`)
+
+**Lock Status:**
+- Component is PROCESS LOCKED (first cycle completed 2025-12-26)
+- Component is Extension layer (COMPOSITION/utilities)
+- Component NOT exported from `src/index.ts` (intentional - utility component)
+- Component NOT listed in `EXTENSION_STATE.md` (utility/showcase component)
+
+**Changes:** None (baseline snapshot for second cycle)
+
+**Deferred:** None
+
+---
+
+## STEP 1 (Second Cycle) — Structural & Code Quality Review
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Code structure is clear and well-organized
+- ✅ Helper function `capitalize` is already extracted (from first cycle)
+- ✅ Component uses proper layout components (Grid, Stack, Row, Box)
+- ✅ Three rendering modes are clearly separated with early returns
+- ✅ Default icon list is appropriately scoped within component
+- ✅ Code is readable and maintainable
+- ⚠️ **Minor observation:** Sizes and colors modes have similar structure (both use Stack → Row → Stack pattern), but this is acceptable as they represent different semantic concepts
+- ✅ No critical structural problems detected
+- ✅ No severe duplication that introduces maintenance risk
+
+**Changes:** None (code structure is already good after first cycle)
+
+**Deferred:** None
+
+---
+
+## STEP 2 (Second Cycle) — Semantic Role & Responsibility Validation
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ **Role Definition:** IconGallery is a utility component that provides a visual catalog for displaying icons in various layouts (grid, sizes, colors). It serves as a showcase/demo component for the icon system.
+- ✅ Component responsibility is clear and focused: display icons in different visualization modes
+- ✅ All logic belongs to component responsibility (rendering, layout, display modes)
+- ✅ Component does not handle icon registry management (correct - out of scope)
+- ✅ Component does not handle icon search/filtering (correct - would expand responsibility unnecessarily)
+- ✅ Default icon list handling is appropriate (hardcoded list for showcase component)
+
+**Changes:** None (role and responsibility are appropriate)
+
+**Deferred:** None
+
+---
+
+## STEP 3 (Second Cycle) — Duplication & Internal Pattern Alignment
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Component does not use CVA (no CVA structure validation needed)
+- ✅ Pattern consistency: Uses Grid, Stack, Row, Box layout components appropriately
+- ✅ Pattern consistency: Uses Icon, Text components from PRIMITIVES layer appropriately
+- ✅ All layout uses token-based props (spacing, align, radius, p)
+- ⚠️ **Pattern observation:** Sizes and colors modes have similar structure (Stack → Row → Stack), but this is semantically appropriate (different concepts: sizes vs colors)
+- ✅ No pattern violations detected
+- ✅ Component follows canonical patterns from layout layer
+
+**Changes:** None (patterns are aligned with system standards)
+
+**Deferred:** None
+
+---
+
+## STEP 4 (Second Cycle) — State & Interaction Model Review
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Component is stateless (no React state management)
+- ✅ Component has no interactive behavior (presentational only)
+- ✅ All rendering is derived from props (no derived state needed)
+- ✅ Component uses declarative rendering (conditional based on mode prop)
+- ✅ No custom interaction logic (no event handlers, no keyboard navigation, no focus management)
+- ✅ Component is purely presentational/demo component
+
+**Changes:** None (component is appropriately stateless)
+
+**Deferred:** None
+
+---
+
+## STEP 5 (Second Cycle) — Token, Size & Variant Consistency
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Component does not have size prop (appropriate for utility component)
+- ✅ Component does not have variant prop (appropriate for utility component)
+- ✅ Component uses responsive Grid layout (cols prop uses responsive object)
+- ✅ **Token compliance verified:**
+  - Grid uses `gap="md"` token prop ✅
+  - Stack uses `spacing="lg"`, `spacing="xs"` token props ✅
+  - Row uses `spacing="md"` token prop ✅
+  - Box uses `p="md"`, `radius="md"` token props ✅
+  - Border classes (`border border-border`) are semantic color tokens (acceptable per architecture) ✅
+- ✅ All spacing uses token-based values only
+- ✅ All border radius uses token-based values only
+- ✅ No raw CSS values detected
+- ✅ Component fully compliant with token system
+
+**Changes:** None (all token violations were fixed in first cycle)
+
+**Deferred:** None
+
+---
+
+## STEP 6 (Second Cycle) — Public API & DX Review
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ All public props are necessary and serve clear purposes
+- ✅ API is clear and self-documenting (prop names are descriptive)
+- ✅ Component can be used correctly without reading implementation
+- ✅ Props have appropriate defaults (`mode="grid"`, `iconSize="xl"`, `iconColor="default"`)
+- ✅ Props are well-typed with explicit unions (`mode?: "grid" | "sizes" | "colors"`)
+- ✅ Props follow consistent naming patterns (iconSize, iconColor match Icon component props)
+- ✅ Component accepts standard HTML div attributes via React.HTMLAttributes<HTMLDivElement>
+- ✅ JSDoc comments are clear and helpful
+
+**Changes:** None (API is well-designed)
+
+**Deferred:** None
+
+---
+
+## STEP 7 (Second Cycle) — Type System Alignment
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ All types use explicit unions (no wide types like `string`)
+  - `mode?: "grid" | "sizes" | "colors"` - explicit union ✅
+  - `iconSize?: IconProps["size"]` - uses Icon component's explicit union type ✅
+  - `iconColor?: IconProps["color"]` - uses Icon component's explicit union type ✅
+  - `icons?: IconName[]` - IconName is union type from icon registry ✅
+- ✅ Types are readable without implementation context
+- ✅ No leaking of internal types to public API
+- ✅ Types reference canonical types from other components (IconProps, IconName)
+- ✅ Component props interface extends React.HTMLAttributes<HTMLDivElement> appropriately
+- ✅ Types are exported explicitly (`IconGalleryProps` exported from component file)
+
+**Changes:** None (type system is well-aligned)
+
+**Deferred:** None
+
+---
+
+## STEP 8 (Second Cycle) — Intentional Refactor Pass
+
+**Outcome:** Refactor not required  
+**Blocking:** No  
+**Notes:**
+- ✅ Code structure is clear and well-organized
+- ✅ All token violations were fixed in first cycle
+- ✅ All pattern violations were fixed in first cycle
+- ✅ Component follows canonical patterns
+- ✅ No architectural violations detected
+- ✅ Code quality is good
+- ✅ Component is ready for validation phase
+
+**Decision:** **Refactor not required** - Component is in good state after first cycle. No structural or quality issues that require refactoring.
+
+**Consciously NOT made changes:**
+- **Not extracting common logic from sizes/colors modes:**
+  - Rationale: Modes are semantically different (sizes vs colors), extracting common logic would require complex abstraction
+  - Trade-off: Accept duplication for clarity and simplicity
+  - This decision was made in first cycle and remains valid
+
+**FIX Backlog Finalized:**
+
+**FIX-BLOCKERS (must fix in STEP 9):**
+- None (no blockers identified)
+
+**FIX-NONBLOCKERS (nice to fix in STEP 9):**
+- None (no non-blockers identified)
+
+**DEFERRED (explicitly not doing):**
+- Extract common logic from sizes/colors modes (see "Consciously NOT made changes" above)
+
+**Changes:** None (no refactoring required)
+
+**Deferred:** See DEFERRED section above
+
+---
+
+## STEP 9 (Second Cycle) — Mandatory FIX & Consolidation
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ No FIX backlog items to apply (no issues identified in STEP 1-8)
+- ✅ Component is already compliant with all system standards
+- ✅ All token violations were fixed in first cycle
+- ✅ All pattern violations were fixed in first cycle
+- ✅ Code quality is good
+- ✅ Component structure is appropriate
+
+**Changes:** None (no fixes required - component is already in good state)
+
+**Deferred:** None
+
+---
+
+## STEP 10 (Second Cycle) — Validation via Tests & Storybook
+
+**Outcome:** Changes applied  
+**Blocking:** No  
+**Notes:**
+- ✅ Tests exist and cover component behavior:
+  - Default grid mode rendering ✅
+  - Custom icons prop ✅
+  - Sizes mode rendering with all sizes ✅
+  - Colors mode rendering with all colors ✅
+  - Custom iconSize and iconColor props ✅
+- ✅ Storybook stories exist and demonstrate all modes:
+  - Default ✅
+  - AllIcons ✅
+  - AllIconsWithSizes ✅
+  - AllIconsWithColors ✅
+  - CustomIcons ✅
+- ⚠️ **Enhancement opportunity:** Test coverage could be expanded with edge cases (empty icons array, invalid icon names, etc.), but basic behavior is covered
+- ⚠️ **Storybook enhancement:** Stories could include more realistic usage examples, but current stories demonstrate all modes adequately
+- ✅ Component behavior validated via tests
+- ✅ No placeholder coverage detected
+
+**Changes:**
+- Added edge case tests:
+  - Empty icons array handling
+  - Single icon rendering
+  - Ref forwarding verification
+  - HTML attributes passing
+  - Custom className application
+  - All sizes verification in sizes mode
+  - All colors verification in colors mode
+- Added Storybook stories:
+  - SingleIcon story (single icon example)
+  - WithCustomProps story (custom props demonstration)
+  - EmptyIcons story (empty array edge case)
+
+**Deferred:** None
+
+---
+
+## STEP 11 (Second Cycle) — Accessibility Audit & Fixes
+
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Component is presentational only (no interactive elements)
+- ✅ Component uses semantic HTML elements (div containers)
+- ✅ Component does not require ARIA roles (presentational content)
+- ✅ Component does not require keyboard navigation (non-interactive)
+- ✅ Component does not require focus management (non-interactive)
+- ✅ Component renders icons with accessible Icon component (Icon component handles accessibility)
+- ✅ Component renders text with accessible Text component (Text component handles accessibility)
+- ✅ No accessibility violations detected (component is showcase/utility, not interactive)
+
+**Changes:** None (component is appropriately accessible for its role)
+
+**Deferred:** None
+
+---
+
+## STEP 12 (Second Cycle) — Final Review & Outcome Fixation + Architectural Lock
+
+**Outcome:** Changes applied  
+**Blocking:** No  
+**Notes:**
+- ✅ All previous steps (STEP 0-11) verified complete
+- ✅ Code quality confirmed (no issues found in second cycle)
+- ✅ Component remains PROCESS LOCKED (validated by two pipeline cycles)
+- ✅ Tests and Storybook coverage verified
+- ✅ Accessibility verified (component is appropriately accessible for presentational role)
+- ✅ Component is ready for continued PROCESS LOCK status
+
+**Final Report Consistency Check:**
+
+1. **CHECK_LOCK_STATUS** — ✅ PASS
+   - Lock status is unified: Component Status shows "PROCESS LOCKED" (final state)
+   - Status remains PROCESS LOCKED after second cycle
+   - Status progression documented correctly
+
+2. **CHECK_BASELINE_TO_FIX_LINK** — ✅ PASS
+   - No BLOCKERS identified in second cycle baseline
+   - All findings from first cycle were already resolved
+   - No unresolved BLOCKERS
+
+3. **CHECK_STEP_9_ABSOLUTISM** — ✅ PASS
+   - STEP 9 states "No changes required" with clear justification
+   - No absolute claims without context
+   - Context provided for decision
+
+4. **CHECK_FILE_REALITY** — ✅ PASS
+   - All file mentions correspond to actual repository state:
+     - Component files exist: IconGallery.tsx, IconGallery.test.tsx, IconGallery.stories.tsx, IconGallery.types.ts, index.ts
+     - Tests exist: IconGallery.test.tsx
+     - Stories exist: IconGallery.stories.tsx
+     - Component NOT exported from root index.ts (documented as architectural decision)
+
+5. **CHECK_OUTCOME_LOGIC** — ✅ PASS
+   - No contradictions between outcome and changes sections
+   - All steps have consistent outcome statements matching actual changes
+
+6. **CHECK_EXPORT_DECISIONS** — ✅ PASS
+   - Export decision explicitly documented: Component intentionally not exported from root index.ts
+   - Rationale: IconGallery is a utility/showcase component for Storybook, not intended for production use
+   - Component exported from utilities/index.ts and COMPOSITION/index.ts for internal use
+
+**Lock Propagation:**
+
+- ✅ Component status remains PROCESS LOCKED in audit report
+- ✅ Second cycle completion documented
+- ✅ `docs/architecture/ARCHITECTURE_LOCK.md` updated with IconGallery entry and architectural decisions
+- ✅ `docs/PROJECT_PROGRESS.md` updated with IconGallery status and key decisions
+- ✅ Component NOT added to EXTENSION_STATE.md (utility component, showcase only, not for production use - intentional decision)
+- ✅ Component NOT exported from root index.ts (intentional architectural decision - utility component)
+- ✅ Pipeline completion documented in audit report
+- ✅ All lock documents cross-checked for consistency
+
+**Export Decision:**
+- **Decision:** IconGallery is intentionally NOT exported from `src/index.ts`
+- **Rationale:** IconGallery is a utility/showcase component designed for Storybook documentation and internal use only. It is not intended for production application code.
+- **Status:** Component is exported from `src/COMPOSITION/utilities/index.ts` for internal composition layer use.
+
+**Changes:**
+- Updated Pipeline Status to "COMPLETE (Second Cycle, STEP 0-12)"
+- Updated Component Status to "PROCESS LOCKED (validated by Pipeline 18A, two cycles: 2025-12-26, 2025-12-27)"
+- Updated Pipeline Progress Tracker (all steps marked complete for second cycle)
+- Final Report Consistency Check completed (all 6 checks passed)
+- Lock propagation completed:
+  - `docs/architecture/ARCHITECTURE_LOCK.md` updated with IconGallery entry and architectural decisions
+  - `docs/PROJECT_PROGRESS.md` updated with IconGallery status and key decisions
+- Export decision documented (unchanged from first cycle)
+
+**Deferred:** None
+

@@ -56,9 +56,9 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
                 {article.title}
               </Link>
             </Heading>
-            {article.description && <Text muted>{article.description}</Text>}
+            {article.description && <Text tone="muted">{article.description}</Text>}
             {article.date && (
-              <Text size="sm" muted>
+              <Text size="sm" tone="muted">
                 {article.date}
               </Text>
             )}

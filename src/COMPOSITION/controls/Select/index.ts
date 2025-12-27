@@ -28,11 +28,7 @@ export type {
   SelectLabelProps,
   SelectRootProps,
   SelectSeparatorProps,
-  SelectSize,
-  SelectState,
   SelectTriggerProps,
   SelectValueProps,
-  SelectVariant,
   SelectViewportProps,
-  SelectWidth,
 } from "./Select.types";

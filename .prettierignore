@@ -11,5 +11,6 @@ pnpm-lock.yaml
 package-lock.json
 docs
 .cursor
+docs_archive
 src/styles.ts
 

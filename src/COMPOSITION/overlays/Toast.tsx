@@ -30,6 +30,7 @@ import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { TOAST_TOKENS } from "@/FOUNDATION/tokens/components/toast";
+import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
 
 // ============================================================================
 // TYPES
@@ -40,6 +41,26 @@ import { TOAST_TOKENS } from "@/FOUNDATION/tokens/components/toast";
  * Represents visual intent only (no behavior changes)
  */
 export type ToastVariant = "default" | "success" | "warning" | "error";
+
+/**
+ * Toast data type for imperative toast creation
+ * Used by useGlobalToast and other toast management hooks
+ */
+export interface ToastData {
+  variant?: ToastVariant;
+  title?: string;
+  description?: string;
+  duration?: ResponsiveDelay;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+}
+
+/**
+ * Toast options type for toast configuration
+ */
+export type ToastOptions = Partial<ToastData>;
 
 // ============================================================================
 // STYLING CONSTANTS

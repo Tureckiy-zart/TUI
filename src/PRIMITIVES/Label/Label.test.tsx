@@ -137,7 +137,7 @@ describe("Label", () => {
     });
 
     it("renders with peer input (integration test)", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <div>
           <input className="peer" disabled />
           <Label>Disabled Input Label</Label>

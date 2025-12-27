@@ -14,7 +14,7 @@ describe("Navigation Primitives", () => {
   describe("NavRoot", () => {
     it("renders as semantic nav element", () => {
       renderWithTheme(
-        <NavRoot>
+        <NavRoot aria-label="Navigation">
           <div>Test</div>
         </NavRoot>,
       );
@@ -40,7 +40,7 @@ describe("Navigation Primitives", () => {
       const ref = React.createRef<HTMLElement>();
 
       renderWithTheme(
-        <NavRoot ref={ref}>
+        <NavRoot ref={ref} aria-label="Navigation">
           <div>Test</div>
         </NavRoot>,
       );
@@ -51,7 +51,7 @@ describe("Navigation Primitives", () => {
 
     it("applies className", () => {
       renderWithTheme(
-        <NavRoot className="custom-class">
+        <NavRoot className="custom-class" aria-label="Navigation">
           <div>Test</div>
         </NavRoot>,
       );
@@ -62,7 +62,7 @@ describe("Navigation Primitives", () => {
 
     it("renders children", () => {
       renderWithTheme(
-        <NavRoot>
+        <NavRoot aria-label="Navigation">
           <div>Test content</div>
         </NavRoot>,
       );
@@ -259,11 +259,11 @@ describe("Navigation Primitives", () => {
       expect(text).toHaveAttribute("aria-current", "page");
     });
 
-    it("renders with aria-current='step'", () => {
-      renderWithTheme(<NavText aria-current="step">Step 1</NavText>);
+    it("renders with aria-current='page'", () => {
+      renderWithTheme(<NavText aria-current="page">Step 1</NavText>);
 
       const text = screen.getByText("Step 1");
-      expect(text).toHaveAttribute("aria-current", "step");
+      expect(text).toHaveAttribute("aria-current", "page");
     });
 
     it("forwards ref correctly", () => {
@@ -394,7 +394,7 @@ describe("Navigation Primitives", () => {
   describe("Stateless behavior", () => {
     it("NavRoot has no state management", () => {
       const { container } = renderWithTheme(
-        <NavRoot>
+        <NavRoot aria-label="Navigation">
           <div>Test</div>
         </NavRoot>,
       );
@@ -409,7 +409,7 @@ describe("Navigation Primitives", () => {
 
     it("components render without interactive behavior", () => {
       renderWithTheme(
-        <NavRoot>
+        <NavRoot aria-label="Navigation">
           <NavList>
             <NavItem>
               <NavText>Item</NavText>
@@ -453,14 +453,14 @@ describe("Navigation Primitives", () => {
       expect(separator).toHaveAttribute("aria-hidden", "true");
     });
 
-    it("NavText supports different aria-current values", () => {
-      const { rerender } = renderWithTheme(<NavText aria-current="step">Step</NavText>);
+    it("NavText supports aria-current='page'", () => {
+      const { rerender } = renderWithTheme(<NavText aria-current="page">Page</NavText>);
 
-      expect(screen.getByText("Step")).toHaveAttribute("aria-current", "step");
+      expect(screen.getByText("Page")).toHaveAttribute("aria-current", "page");
 
-      rerender(<NavText aria-current="location">Location</NavText>);
+      rerender(<NavText>No aria-current</NavText>);
 
-      expect(screen.getByText("Location")).toHaveAttribute("aria-current", "location");
+      expect(screen.getByText("No aria-current")).not.toHaveAttribute("aria-current");
     });
   });
 });

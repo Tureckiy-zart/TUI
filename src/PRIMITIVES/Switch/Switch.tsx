@@ -115,7 +115,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
     // Compute handle classes
     const handleClasses = [
-      switchHandleVariants({ size, checked }),
+      switchHandleVariants({
+        size,
+        checked: ((checked ?? false) ? "true" : "false") as unknown as boolean,
+      }),
       switchHandleStateVariants({
         variant: variant || "primary",
         state: effectiveState,

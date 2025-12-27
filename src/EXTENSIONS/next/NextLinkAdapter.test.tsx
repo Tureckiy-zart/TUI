@@ -7,8 +7,17 @@ import { NextLinkAdapter } from "./NextLinkAdapter";
 // Mock next/link since we are not in a Next.js environment
 vi.mock("next/link", () => {
   return {
-    default: ({ children, href, replace, prefetch }: any) => {
+    default: ({
+      children,
+      href,
+      replace,
+      prefetch,
+      passHref: _passHref,
+      legacyBehavior: _legacyBehavior,
+    }: any) => {
       // simulate legacyBehavior: render children
+      // With passHref and legacyBehavior, Next.js passes href to child via function
+      // But in our case, we pass href directly to Link component
       // We pass the Next-specific props to a data attribute to verify they were passed
       return (
         <div

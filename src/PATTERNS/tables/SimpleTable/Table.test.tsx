@@ -178,7 +178,9 @@ describe("SimpleTable", () => {
       renderWithTheme(<Table data={nullableData} columns={nullableColumns} rowKey="id" />);
 
       expect(screen.getByText("null")).toBeInTheDocument();
-      expect(screen.getByText("undefined")).toBeInTheDocument();
+      // There are multiple "undefined" values, so use getAllByText
+      const undefinedElements = screen.getAllByText("undefined");
+      expect(undefinedElements.length).toBeGreaterThan(0);
     });
   });
 

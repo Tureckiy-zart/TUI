@@ -379,10 +379,4 @@ export const SegmentedControl = Object.assign(SegmentedControlRoot, {
   Item: SegmentedControlItem,
 });
 
-export {
-  segmentedControlItemVariants,
-  type SegmentedControlOrientation,
-  segmentedControlRootVariants,
-  type SegmentedControlSize,
-  type SegmentedControlState,
-};
+export { segmentedControlItemVariants, segmentedControlRootVariants };

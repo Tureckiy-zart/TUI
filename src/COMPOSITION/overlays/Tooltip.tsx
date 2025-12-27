@@ -24,7 +24,7 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
 /**
  * Tooltip variant type - Explicit union (not derived from CVA)
  */
-export type TooltipVariant =
+type TooltipVariant =
   | "primary"
   | "secondary"
   | "accent"

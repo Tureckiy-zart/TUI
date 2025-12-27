@@ -90,7 +90,7 @@ describe("Field", () => {
 
   describe("Field.Control", () => {
     it("renders control wrapper", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Field>
           <Field.Control>
             <Input placeholder="Test" />
@@ -115,7 +115,7 @@ describe("Field", () => {
     });
 
     it("accepts className prop", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Field>
           <Field.Control className="custom-class">
             <Input placeholder="Test" />
@@ -163,7 +163,7 @@ describe("Field", () => {
     });
 
     it("uses small size by default", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Field>
           <Field.Description>Small text</Field.Description>
         </Field>,
@@ -175,7 +175,7 @@ describe("Field", () => {
     });
 
     it("is muted by default", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Field>
           <Field.Description>Muted text</Field.Description>
         </Field>,
@@ -209,7 +209,7 @@ describe("Field", () => {
     });
 
     it("uses destructive color", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Field>
           <Field.Error>Destructive error</Field.Error>
         </Field>,

@@ -267,7 +267,7 @@ describe("Breadcrumbs", () => {
     it("uses semantic ol list element", () => {
       const items: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Current Page" }];
 
-      const { container } = renderWithTheme(<Breadcrumbs.Root items={items} />);
+      renderWithTheme(<Breadcrumbs.Root items={items} />);
 
       const nav = screen.getByRole("navigation");
       const list = nav.querySelector("ol");
@@ -278,7 +278,7 @@ describe("Breadcrumbs", () => {
     it("uses semantic li list item elements", () => {
       const items: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Current Page" }];
 
-      const { container } = renderWithTheme(<Breadcrumbs.Root items={items} />);
+      renderWithTheme(<Breadcrumbs.Root items={items} />);
 
       const nav = screen.getByRole("navigation");
       const listItems = nav.querySelectorAll("li");

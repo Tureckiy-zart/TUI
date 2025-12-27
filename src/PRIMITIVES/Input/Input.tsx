@@ -33,10 +33,11 @@ import { inputVariants } from "./input-variants";
  * ```
  */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ size = "md", invalid, ...props }, ref) => {
+  ({ size = "md", invalid, type = "text", ...props }, ref) => {
     return (
       <input
         ref={ref}
+        type={type}
         aria-invalid={invalid || undefined}
         className={cn(inputVariants({ size }))}
         {...props}

@@ -1,18 +1,11 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
-import {
-  Toast,
-  ToastAction,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastRoot,
-  ToastTitle,
-  ToastViewport,
-} from "./Toast";
+import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle } from "./Toast";
+import { ToastProvider } from "./ToastProvider";
+import { ToastViewport } from "./ToastViewport";
 
 const meta: Meta<typeof ToastRoot> = {
   title: "Foundation Locked/Composition/Overlays/Toast",

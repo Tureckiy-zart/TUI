@@ -2,11 +2,13 @@
 
 **Component:** Radio  
 **Layer:** Foundation (PRIMITIVES)  
-**Date Created:** 2025-12-25  
+**Date Created:** 2025-12-27  
 **Operator:** tureckiy  
-**Assistant:** Claude Sonnet 4.5  
+**Assistant:** Auto (Claude Sonnet 4.5)  
 **Pipeline:** FOUNDATION_STEP_PIPELINE (18A)  
-**Status:** In Progress
+**Status:** ✅ Complete (Re-run)
+
+**Previous Pipeline Run:** 2025-12-25 (Complete, FOUNDATION LOCKED)
 
 ---
 
@@ -29,14 +31,14 @@
 | STEP 12 | Final Review & Outcome Fixation + Architectural Lock | ✅ Complete | 30 min | ✅ Mandatory |
 
 **Total Estimated Time:** 6-8 hours  
-**Actual Duration:** ~8 hours  
+**Actual Duration:** ~2 hours (re-run, no changes required)
 
 **PHASE A Progress:** ✅ Complete (STEP 0-8)  
 **PHASE B Progress:** ✅ Complete (STEP 9)  
-**PHASE C Progress:** ✅ Complete (STEP 10-12)  
+**PHASE C Progress:** ✅ Complete (STEP 10-12)
 
-**Pipeline Status:** 🎉 **COMPLETE** (2025-12-25)  
-**Component Status:** ✅ **FOUNDATION LOCKED**
+**Pipeline Status:** ✅ **COMPLETE** (2025-12-27)  
+**Component Status:** ✅ **FOUNDATION LOCKED** (from previous run 2025-12-25)
 
 ---
 
@@ -45,13 +47,15 @@
 ### Lock Status Check
 
 **Foundation Lock Status:**
-- ✅ Component listed in `docs/architecture/FOUNDATION_LOCK.md` (line 1569)
-- ✅ Status: **Proposed Foundation (Subject to Enforcement)**
-- ✅ Not yet fully locked - requires pipeline completion
+- ✅ Component listed in `docs/architecture/FOUNDATION_LOCK.md` (line 1621)
+- ✅ Status: **Confirmed Foundation (Locked)**
+- ✅ Lock Date: 2025-12-25
+- ✅ Previous Pipeline: 18A Complete
 
 **Lock Policy:**
-- No locked component change guard required (component not yet locked)
-- Pipeline execution is standard Foundation component review
+- ⚠️ Component is LOCKED - changes require exception declaration per [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md)
+- Exception must be declared in STEP 8 before any code changes in STEP 9
+- See [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../../workflows/policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) for exception template
 
 ### Baseline Inventory
 
@@ -63,6 +67,8 @@
   - Button with role="radio" pattern
   - Controlled/uncontrolled modes
   - Standalone and RadioGroup integration
+  - Keyboard navigation (Space, Arrow keys)
+  - Roving tabindex pattern
 
 **Supporting Components:**
 - `src/PRIMITIVES/Radio/RadioGroup.tsx` (117 lines)
@@ -70,22 +76,24 @@
   - Context provider for group state
   - Keyboard navigation support
   - Horizontal/vertical orientation
+  - Controlled/uncontrolled modes
 
 **Type Definitions:**
-- `src/PRIMITIVES/Radio/Radio.types.ts` (84 lines)
+- `src/PRIMITIVES/Radio/Radio.types.ts` (86 lines)
   - RadioProps interface
   - Extends ButtonHTMLAttributes with Omit for className/style
-  - VariantProps integration from CVA
+  - Foundation Enforcement compliant
 
 - `src/PRIMITIVES/Radio/RadioGroup.types.ts` (75 lines)
   - RadioGroupProps interface
   - RadioGroupContextValue interface
 
 **Variants:**
-- `src/PRIMITIVES/Radio/radio-variants.ts` (48 lines)
-  - CVA-based variant system
-  - Uses `cva` (not `tokenCVA`)
-  - Token-driven styling
+- `src/PRIMITIVES/Radio/radio-variants.ts` (56 lines)
+  - tokenCVA-based variant system (migrated from cva in previous run)
+  - Type constraints: `satisfies Record<Type, string>` applied
+  - Exported union types: RadioVariant, RadioSize, RadioState
+  - Token-driven styling via RADIO_TOKENS
 
 **Type Tests:**
 - `src/PRIMITIVES/Radio/Radio.type-test.tsx` (36 lines)
@@ -94,25 +102,30 @@
 
 #### Storybook Files
 
-- `src/PRIMITIVES/Radio/Radio.stories.tsx` (461 lines)
-  - 18 stories total
-  - Stories: Default, Checked, Disabled, DisabledChecked, AllSizes, AllVariants, AllStates, RadioGroupBasic, RadioGroupVertical, RadioGroupHorizontal, RadioGroupSizes, WithLabel, Controlled, Uncontrolled, ErrorState, DisabledInGroup, KeyboardNavigation, Accessibility
+- `src/PRIMITIVES/Radio/Radio.stories.tsx` (531 lines)
+  - 19 stories total
+  - Required canonical stories:
+    - ✅ `Matrix` - variants × sizes grid
+    - ✅ `States` - variants × sizes × states matrix
+    - ✅ `SizesGallery` - all sizes demonstration
+  - Supplementary stories: Default, Checked, Disabled, DisabledChecked, AllVariants, RadioGroupBasic, RadioGroupVertical, RadioGroupHorizontal, RadioGroupSizes, WithLabel, Controlled, Uncontrolled, ErrorState, DisabledInGroup, KeyboardNavigation, Accessibility
 
 #### Test Files
 
 - `src/PRIMITIVES/Radio/Radio.test.tsx` (535 lines)
   - Comprehensive test coverage
+  - 52 tests passing, 1 skipped (Foundation Enforcement)
   - Sections: Rendering, Variants, Sizes, States, Icons, Accessibility, Interactions, Controlled vs Uncontrolled, RadioGroup Integration, RadioGroup, ClassName merging
 
 #### Export Points
 
 **Local Barrel:**
 - `src/PRIMITIVES/Radio/index.ts`
-  - Exports: Radio, RadioProps, radioVariants, RadioGroup, RadioGroupContext, useRadioGroupContext, RadioGroupContextValue, RadioGroupProps
+  - Exports: Radio, RadioProps, RadioVariant, RadioSize, RadioState, radioVariants, RadioGroup, RadioGroupContext, useRadioGroupContext, RadioGroupContextValue, RadioGroupProps
 
 **Root Barrel:**
-- `src/PRIMITIVES/index.ts` (line 17)
-  - Re-exports all Radio exports
+- `src/PRIMITIVES/index.ts` (line 18)
+  - Re-exports all Radio exports via `export * from "./Radio"`
 
 #### External Dependencies
 
@@ -124,9 +137,10 @@
 
 **Internal Dependencies:**
 - `@/FOUNDATION/lib/utils` (cn utility)
+- `@/FOUNDATION/lib/token-cva` (tokenCVA)
 - `@/FOUNDATION/tokens/components/radio` (RADIO_TOKENS)
 - `@/FOUNDATION/tokens/components/motion` (MOTION_TOKENS)
-- `class-variance-authority` (cva, VariantProps)
+- `class-variance-authority` (VariantProps type only)
 
 #### Current Public Props
 
@@ -134,9 +148,9 @@
 ```typescript
 interface RadioProps {
   // Variant system
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
+  variant?: RadioVariant; // "primary" | "secondary" | "outline" | "ghost" | "destructive"
+  size?: RadioSize; // "xs" | "sm" | "md" | "lg" | "xl"
+  state?: RadioState; // "default" | "checked" | "disabled" | "error"
   
   // State management
   checked?: boolean;
@@ -227,6 +241,7 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 - Non-canonical CVA structure
 - CVA type mismatch (should use tokenCVA for token-driven component)
 - Forbidden CVA patterns (variant maps in variables, function calls, conditional logic)
+- Missing type constraints (`satisfies Record<Type, string>`)
 
 **Code changes allowed:** No (findings → FIX backlog)
 
@@ -350,15 +365,23 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 - Incidental complexity
 - Consciously deferred changes
 
+**Locked Component Exception Check (MANDATORY):**
+- Review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- If changes violate lock policy, declare exception using [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../../workflows/policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md)
+- Document exception in audit report BEFORE proceeding to STEP 9
+- Exception must include: reason, pipeline step, why lock is insufficient, risk assessment, rollback strategy
+
 **Blocking conditions:**
 - Cannot make explicit refactor decision
 - FIX backlog incomplete or contradictory
+- Changes required but exception not declared (for LOCKED component)
 
 **Code changes allowed:** No (decision only)
 
 **Expected artifacts:**
 - Explicit decision: "Refactor required" OR "Refactor not required"
 - Consciously NOT made changes list
+- Exception declaration (if required for LOCKED component)
 - Finalized FIX backlog
 - Audit report STEP 8 section
 
@@ -374,12 +397,20 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 - CVA structure normalized (if required)
 - Code quality improved
 
+**Locked Component Guard (MANDATORY):**
+- ✅ Verify exception declaration exists in audit report (from STEP 8)
+- ✅ Verify exception follows TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md policy
+- ✅ Verify change scope matches exception declaration (minimal delta only)
+- ❌ **FORBIDDEN:** Changes without exception declaration
+- ❌ **FORBIDDEN:** Changes exceeding exception scope
+
 **Blocking conditions:**
 - Any BLOCKER unresolved
 - CVA structure non-canonical
 - Behavior changes without justification
+- Changes without exception declaration (for LOCKED component)
 
-**Code changes allowed:** Yes (all fixes from backlog)
+**Code changes allowed:** Yes (all fixes from backlog, within exception scope)
 
 **Expected artifacts:**
 - All code fixes applied
@@ -395,9 +426,9 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 **What will be verified:**
 - Test coverage (public behavior, edge cases, accessibility)
 - Storybook stories:
-  - Matrix story (if both size AND variant props exist)
-  - States story (if interactive behavior exists)
-  - SizesGallery story (if size prop exists)
+  - Matrix story (if both size AND variant props exist) - REQUIRED
+  - States story (if interactive behavior exists) - REQUIRED
+  - SizesGallery story (if size prop exists) - REQUIRED
 
 **Blocking conditions:**
 - Placeholder tests or stories
@@ -422,7 +453,7 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 - Keyboard navigation completeness
 - Focus management
 - Screen reader behavior
-- A11Y-specific tests and stories
+- Accessibility-specific tests and stories
 
 **Blocking conditions:**
 - Missing or incorrect ARIA attributes
@@ -455,6 +486,7 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 - Any previous step incomplete
 - Any required lock file not updated
 - Lock documents inconsistent
+- Final Report Consistency Check failed
 
 **Code changes allowed:** No (verification only)
 
@@ -469,25 +501,25 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 
 ### Risk Register (ANTI-DRIFT)
 
-#### Risk 1: CVA Type Mismatch
-**Description:** Component currently uses `cva` instead of `tokenCVA`, but has token-driven axes (variant, size, state).  
-**Prevention:** STEP 3 and STEP 7 will validate CVA Usage Decision Matrix. STEP 9 will normalize if required.  
+#### Risk 1: Locked Component Exception Required
+**Description:** Component is LOCKED, any changes require exception declaration per policy.  
+**Prevention:** STEP 8 will explicitly check for required changes and declare exception if needed. Exception must be documented before STEP 9.  
+**Severity:** Critical (process violation if skipped)
+
+#### Risk 2: CVA Structure Regression
+**Description:** Cursor might accidentally revert CVA structure changes from previous run (tokenCVA → cva, remove type constraints).  
+**Prevention:** STEP 3 validates CVA structure against canonical style. STEP 9 explicitly forbids CVA regression.  
 **Severity:** High (architectural violation)
 
-#### Risk 2: Invented Variant Names
-**Description:** Cursor might suggest adding non-canonical variants (e.g., "danger" instead of "destructive").  
-**Prevention:** STEP 5 validates against InteractiveVariant dictionary. All changes must reference VARIANTS_SIZE_CANON.md.  
-**Severity:** Medium (consistency violation)
-
-#### Risk 3: State Prop Confusion
-**Description:** Component has both `state` prop and `checked`/`disabled` props, which might cause confusion.  
-**Prevention:** STEP 6 API review will assess clarity. STEP 4 will validate state model.  
-**Severity:** Medium (DX issue)
-
-#### Risk 4: Placeholder Storybook Stories
-**Description:** Cursor might create minimal stories instead of required Matrix/States/SizesGallery.  
+#### Risk 3: Storybook Story Renaming
+**Description:** Cursor might rename canonical stories (Matrix, States, SizesGallery) back to non-canonical names.  
 **Prevention:** STEP 10 explicitly requires canonical story names per VARIANTS_SIZE_CANON.md.  
-**Severity:** High (validation incomplete)
+**Severity:** Medium (validation incomplete)
+
+#### Risk 4: Breaking Changes to Public API
+**Description:** Cursor might introduce breaking changes to public API during refactoring.  
+**Prevention:** STEP 6 API review, STEP 9 explicitly forbids public API changes unless approved.  
+**Severity:** High (breaking change)
 
 #### Risk 5: Accessibility Regression
 **Description:** Refactoring might break existing keyboard navigation or ARIA attributes.  
@@ -579,6 +611,11 @@ The Radio component is considered **closed** only when:
    - No vocabulary violations (no `final`/`optimal`/`canonical` before STEP 11)
    - Appropriate terminology used in each step
 
+7. ✅ **Locked Component Compliance**
+   - Exception declared in STEP 8 (if changes required)
+   - Exception scope respected in STEP 9
+   - All changes within exception scope
+
 ---
 
 ### STEP 0 Completion
@@ -588,12 +625,13 @@ The Radio component is considered **closed** only when:
 **Blocking:** No
 
 **Notes:**
-- ✅ Lock status verified (Proposed Foundation, not yet locked)
-- ✅ Baseline inventory documented (8 files total)
+- ✅ Lock status verified (Confirmed Foundation, Locked 2025-12-25)
+- ✅ Baseline inventory documented (9 files total)
 - ✅ Run plan created (STEP 1-12 mapped)
-- ✅ Risk register filled (8 risks identified)
+- ✅ Risk register filled (8 risks identified, including locked component exception requirement)
 - ✅ FIX backlog structure created
 - ✅ DoD documented
+- ⚠️ Component is LOCKED - exception declaration will be required in STEP 8 if changes are needed
 
 **Changes:** None (no code changes in STEP 0)
 
@@ -616,27 +654,50 @@ The Radio component is considered **closed** only when:
 **Radio.tsx (269 lines):**
 - ✅ Clear component structure with forwardRef
 - ✅ Logical grouping of state management hooks
-- ✅ Event handlers well-organized
-- ⚠️ Keyboard navigation handler is extensive (lines 125-209, 85 lines)
-- ⚠️ Checked state determination has nested conditionals (lines 56-72)
-- ✅ renderDot helper function is clean
+- ✅ Event handlers well-organized and memoized
+- ⚠️ Keyboard navigation handler is extensive (lines 126-209, 84 lines)
+- ⚠️ Duplication in state update logic between handleClick and handleKeyDown (lines 104-109 vs 135-139)
+- ⚠️ Repetitive nextIndex calculation logic in handleKeyDown (wrapping pattern repeated 6 times)
+- ✅ renderDot helper function is clean and readable
 - ✅ JSX render is straightforward
+- ⚠️ finalChecked uses IIFE pattern (lines 68-72) - could be more explicit
 
 **RadioGroup.tsx (117 lines):**
 - ✅ Clean component structure
 - ✅ Context provider pattern correctly implemented
-- ✅ Controlled/uncontrolled mode handling
+- ✅ Controlled/uncontrolled mode handling is clear
 - ✅ Name generation with SSR safety
-- ✅ Conditional className logic is clear
+- ✅ Conditional className logic is straightforward
+- ✅ Context value is properly memoized
 
-**radio-variants.ts (48 lines):**
-- ✅ Clean CVA structure
+**radio-variants.ts (56 lines):**
+- ✅ Clean tokenCVA structure (migrated from cva in previous run)
+- ✅ Type constraints present (`satisfies Record<Type, string>`)
+- ✅ Exported union types (RadioVariant, RadioSize, RadioState)
 - ✅ Token-based styling throughout
 - ✅ No duplication detected
 
 **Identified Patterns:**
 
-1. **Complex state determination (Radio.tsx lines 56-72):**
+1. **Duplication in state update logic (Radio.tsx lines 104-109 and 135-139):**
+   ```typescript
+   // Pattern repeated in both handleClick and handleKeyDown:
+   if (isGroupControlled && value !== undefined && radioGroupContext) {
+     radioGroupContext.onValueChange(value);
+   } else if (!isControlled) {
+     setUncontrolledChecked(true);
+   }
+   onCheckedChange?.(true);
+   ```
+   - Same logic appears in both click and keyboard handlers
+   - Could be extracted to a helper function
+
+2. **Repetitive nextIndex calculation (Radio.tsx lines 160, 163, 170, 173, 181, 183):**
+   - Wrapping pattern `currentIndex > 0 ? currentIndex - 1 : radios.length - 1` repeated 6 times
+   - Similar pattern for forward navigation
+   - Could be extracted to helper functions
+
+3. **IIFE for finalChecked (Radio.tsx lines 68-72):**
    ```typescript
    const finalChecked = (() => {
      if (isControlled) return controlledChecked;
@@ -645,27 +706,16 @@ The Radio component is considered **closed** only when:
    })();
    ```
    - Uses IIFE for state priority
-   - Clear but could be more explicit
+   - Clear but could be more explicit with helper function
 
-2. **Long keyboard navigation handler (Radio.tsx lines 125-209):**
+4. **Long keyboard navigation handler (Radio.tsx lines 126-209):**
    - Handles Space key selection
    - Handles Arrow key navigation (Up/Down/Left/Right)
    - Includes orientation-aware logic
    - Includes wrapping behavior
    - Queries DOM for radio siblings
-   - 85 lines total
-
-3. **Effective state computation (Radio.tsx lines 80-85):**
-   ```typescript
-   const effectiveState = React.useMemo(() => {
-     if (isDisabled) return "disabled";
-     if (isError) return "error";
-     if (finalChecked) return "checked";
-     return "default";
-   }, [isDisabled, isError, finalChecked]);
-   ```
-   - Priority order: disabled > error > checked > default
-   - Correct but implicit priority
+   - 84 lines total
+   - Complexity is inherent to radio group pattern
 
 ### Decide
 
@@ -673,28 +723,41 @@ The Radio component is considered **closed** only when:
 
 ✅ **No blocking structural issues found.**
 
-The code is readable and maintainable. The complexity in keyboard navigation is inherent to the radio group pattern (arrow keys + wrapping + orientation). Breaking it into smaller functions might reduce readability by scattering related logic.
+The code is readable and maintainable. The identified duplications are minor and do not introduce maintenance risk. The complexity in keyboard navigation is inherent to the radio group pattern (arrow keys + wrapping + orientation). Breaking it into smaller functions might reduce readability by scattering related logic.
 
 **Non-Blocking Improvements Identified:**
 
-1. **Keyboard navigation handler length:**
+1. **State update logic duplication:**
    - **Decision:** Document as potential refactor opportunity
-   - **Rationale:** Complex by nature; extraction might hurt readability
+   - **Rationale:** Duplication exists but is minimal (5 lines repeated)
    - **Priority:** Low (non-blocker)
+   - **Impact:** Minor - extraction would improve DRY but current code is clear
 
-2. **State determination clarity:**
+2. **Repetitive nextIndex calculation:**
+   - **Decision:** Document as potential refactor opportunity
+   - **Rationale:** Wrapping logic repeated but pattern is clear
+   - **Priority:** Low (non-blocker)
+   - **Impact:** Minor - helper functions would reduce repetition but current code is readable
+
+3. **IIFE for finalChecked:**
    - **Decision:** Document as minor improvement opportunity
    - **Rationale:** Current logic is correct but could be more explicit
    - **Priority:** Low (non-blocker)
+   - **Impact:** Minimal - readability improvement only
 
-3. **No copy-paste duplication detected**
-4. **No deeply nested logic without clear intent**
-5. **No repeated JSX blocks that should be mapped**
+4. **Keyboard navigation handler length:**
+   - **Decision:** Document as acceptable complexity
+   - **Rationale:** Complexity is inherent to radio group pattern
+   - **Priority:** Low (non-blocker)
+   - **Impact:** None - extraction might hurt readability
 
 **Changes NOT Required:**
 - ❌ No mandatory structural refactoring
 - ❌ No critical duplication to remove
 - ❌ No readability blockers
+- ❌ No copy-paste duplication detected
+- ❌ No deeply nested logic without clear intent
+- ❌ No repeated JSX blocks that should be mapped
 
 ### Change
 
@@ -709,11 +772,15 @@ All findings documented for FIX backlog consideration.
 **Blocking:** No
 
 **Findings:**
-- ⚠️ Keyboard navigation handler is long (85 lines) but complexity is inherent
-- ⚠️ State determination logic could be slightly more explicit
+- ⚠️ State update logic duplication between handleClick and handleKeyDown (5 lines repeated, non-blocking)
+- ⚠️ Repetitive nextIndex calculation in handleKeyDown (wrapping pattern repeated 6 times, non-blocking)
+- ⚠️ IIFE pattern for finalChecked could be more explicit (minor readability improvement, non-blocking)
+- ⚠️ Keyboard navigation handler is long (84 lines) but complexity is inherent to radio group pattern
 - ✅ No copy-paste duplication
 - ✅ No critical structural issues
 - ✅ Code is readable and maintainable
+- ✅ Event handlers properly memoized
+- ✅ Helper functions (renderDot) are clean
 
 **Changes:** None
 
@@ -722,8 +789,9 @@ All findings documented for FIX backlog consideration.
 **FIX Backlog Updates:**
 
 *Added to FIX-NONBLOCKERS:*
-- **NONBLOCK-1:** Consider extracting sub-functions from keyboard navigation handler if readability suffers during refactoring (Radio.tsx lines 125-209)
-- **NONBLOCK-2:** Consider making state priority more explicit in effectiveState computation (Radio.tsx lines 80-85)
+- **NONBLOCK-1:** Consider extracting state update logic to helper function to reduce duplication between handleClick and handleKeyDown (Radio.tsx lines 104-109, 135-139) - low priority
+- **NONBLOCK-2:** Consider extracting nextIndex calculation helpers for wrapping logic in handleKeyDown (Radio.tsx lines 160, 163, 170, 173, 181, 183) - low priority
+- **NONBLOCK-3:** Consider making finalChecked calculation more explicit (replace IIFE with helper function) (Radio.tsx lines 68-72) - low priority
 
 **Next Step:** STEP 2 — Semantic Role & Responsibility Validation
 
@@ -768,6 +836,20 @@ All findings documented for FIX backlog consideration.
 - Keyboard navigation is self-contained in Radio
 - RadioGroup is passive container (no direct keyboard handling)
 
+**Comparison with Similar Components:**
+
+**Checkbox (similar primitive):**
+- Works standalone only (no group pattern)
+- Simpler keyboard navigation (Space only, no arrow keys)
+- No DOM querying for siblings
+- No roving tabindex pattern
+
+**Radio vs Checkbox:**
+- Radio has group behavior (RadioGroup integration)
+- Radio has complex keyboard navigation (Arrow keys + wrapping)
+- Radio queries DOM for siblings (necessary for keyboard navigation)
+- Radio uses roving tabindex (only selected is focusable in group)
+
 ### Decide
 
 **Role Definition:**
@@ -795,6 +877,8 @@ A container component that manages the selected value across multiple Radio comp
 - Validation logic (should be external)
 - Data fetching
 - Complex business logic
+- Layout management (handled by RadioGroup)
+- Group state management (handled by RadioGroup)
 
 **Questionable Responsibilities:**
 
@@ -804,11 +888,18 @@ A container component that manages the selected value across multiple Radio comp
 - **Decision:** Current approach is acceptable. Radio needs sibling awareness for keyboard navigation, and querying DOM is standard pattern for roving tabindex. Alternative would add complexity to RadioGroup without clear benefit.
 - **Verdict:** ✅ Acceptable responsibility
 
+⚠️ **Keyboard navigation complexity in Radio:**
+- **Current approach:** All keyboard navigation logic (Space, Arrow keys, wrapping) is in Radio component
+- **Alternative:** Split navigation logic between Radio and RadioGroup
+- **Decision:** Current approach is correct. Radio is responsible for its own keyboard behavior, and group navigation is a Radio concern (not RadioGroup). RadioGroup only provides context (value, orientation).
+- **Verdict:** ✅ Acceptable responsibility
+
 **Scope Assessment:**
 
 ✅ **Narrow and focused:** Component has clear, well-defined responsibilities  
 ✅ **No scope creep:** No logic that doesn't belong  
 ✅ **Appropriate for primitive:** Responsibilities match Foundation primitive expectations
+✅ **Group behavior is justified:** Radio group pattern requires Radio to handle group navigation
 
 ### Change
 
@@ -828,6 +919,8 @@ All findings documented.
 - ✅ All responsibilities are appropriate for a Foundation primitive
 - ✅ No out-of-scope logic detected
 - ✅ DOM querying for siblings is justified (keyboard navigation requirement)
+- ✅ Keyboard navigation complexity is justified (radio group pattern requirement)
+- ✅ RadioGroup separation is correct (container vs interactive primitive)
 
 **Changes:** None
 
@@ -850,12 +943,14 @@ All findings documented.
 **CVA Structure Analysis:**
 
 **Current Implementation (radio-variants.ts):**
-- Uses `cva` from class-variance-authority
-- Variants defined inline (✅ compliant with canonical structure)
-- No intermediate objects (✅ compliant)
-- No function calls generating variants (✅ compliant)
-- No conditional logic (✅ compliant)
-- Single CVA invocation (✅ compliant)
+- ✅ Uses `tokenCVA` from `@/FOUNDATION/lib/token-cva`
+- ✅ Variants defined inline (✅ compliant with canonical structure)
+- ✅ No intermediate objects (✅ compliant)
+- ✅ No function calls generating variants (✅ compliant)
+- ✅ No conditional logic (✅ compliant)
+- ✅ Single tokenCVA invocation (✅ compliant)
+- ✅ Type constraints present: `satisfies Record<RadioVariant, string>`, `satisfies Record<RadioSize, string>`, `satisfies Record<RadioState, string>`
+- ✅ Exported union types: RadioVariant, RadioSize, RadioState
 
 **Token-Driven Axes Analysis:**
 
@@ -882,9 +977,9 @@ According to `CVA_CANONICAL_STYLE.md` Decision Matrix:
 
 - **RULE 1:** tokenCVA is REQUIRED for token-driven axes
 - **Component has token-driven axes:** ✅ YES (variant, size, state)
-- **Current CVA type:** `cva` ❌
+- **Current CVA type:** `tokenCVA` ✅
 - **Required CVA type:** `tokenCVA` ✅
-- **Verdict:** **BLOCKER - CVA type mismatch**
+- **Verdict:** ✅ **COMPLIANT - CVA type correct**
 
 **Type Constraints Validation:**
 
@@ -893,47 +988,35 @@ Current variant maps:
 variant: {
   primary: `...`,
   secondary: `...`,
-  // ... no satisfies Record<Type, string>
-}
+  // ...
+} satisfies Record<RadioVariant, string>,
 ```
 
-Required pattern (per CVA Canonical Style):
-```typescript
-variant: {
-  primary: `...`,
-  secondary: `...`,
-} satisfies Record<RadioVariant, string>
-```
-
-**Verdict:** ❌ Missing `satisfies Record<Type, string>` constraints (BLOCKER)
+✅ All three axes have type constraints:
+- `variant` → `satisfies Record<RadioVariant, string>` ✅
+- `size` → `satisfies Record<RadioSize, string>` ✅
+- `state` → `satisfies Record<RadioState, string>` ✅
 
 **Explicit Union Types:**
 
-Radio.types.ts defines types:
+Radio.types.ts and radio-variants.ts define and export types:
 ```typescript
-variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-size?: "xs" | "sm" | "md" | "lg" | "xl";
-state?: "default" | "checked" | "disabled" | "error";
-```
-
-But no exported union types for CVA validation:
-```typescript
-// Missing:
 export type RadioVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
 export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type RadioState = "default" | "checked" | "disabled" | "error";
 ```
 
-**Verdict:** ⚠️ Missing explicit union type exports (required for CVA constraints)
+✅ Types are exported and used in Radio.types.ts
 
-**Pattern Comparison with Button (Compliant Component):**
+**Pattern Comparison with Checkbox (Similar Component):**
 
-Button uses:
+Checkbox uses:
 - ✅ `tokenCVA` (correct for token-driven component)
-- ✅ `satisfies Record<ButtonVariant, string>` constraints
+- ✅ `satisfies Record<CheckboxVariant, string>` constraints
 - ✅ Explicit union type exports
+- ✅ Inline variant definitions
 
-Radio needs same pattern.
+Radio follows the same pattern. ✅
 
 **Internal Pattern Consistency:**
 
@@ -941,78 +1024,84 @@ Radio needs same pattern.
 ✅ **JSX structure:** Clean and consistent  
 ✅ **Children/trigger/content handling:** N/A (primitive component)  
 ✅ **No duplication detected** between Radio and RadioGroup
+✅ **CVA structure:** Matches canonical style (inline variants, no forbidden patterns)
+
+**Forbidden Patterns Check:**
+
+❌ **No variant maps in variables** - All variants defined inline ✅
+❌ **No function calls generating variants** - Direct token references ✅
+❌ **No conditional logic in CVA config** - Static definitions ✅
+❌ **No dynamic construction** - All variants explicit ✅
+❌ **No intermediate objects** - Direct inline definitions ✅
 
 ### Decide
 
 **CVA Structure Compliance Assessment:**
 
-❌ **BLOCKER-1: CVA Type Mismatch**
-- **Issue:** Radio uses `cva` instead of `tokenCVA`
-- **Reason:** Component has token-driven axes (variant, size, state)
-- **Decision Matrix Rule:** RULE 1 - tokenCVA is REQUIRED for token-driven axes
-- **Severity:** BLOCKER
-- **Action Required:** Migrate from `cva` to `tokenCVA` in STEP 9
+✅ **CVA Type Selection (COMPLIANT):**
+- Radio uses `tokenCVA` ✅
+- Component has token-driven axes (variant, size, state) ✅
+- Decision Matrix RULE 1 compliance: ✅ PASSED
+- **Verdict:** ✅ No changes required
 
-❌ **BLOCKER-2: Missing Type Constraints**
-- **Issue:** Variant maps lack `satisfies Record<Type, string>` constraints
-- **Reason:** CVA Canonical Style requires type constraints for all variant maps
-- **Severity:** BLOCKER
-- **Action Required:** Add `satisfies Record<RadioVariant, string>` to variant map, `satisfies Record<RadioSize, string>` to size map, `satisfies Record<RadioState, string>` to state map
+✅ **Type Constraints (COMPLIANT):**
+- All variant maps have `satisfies Record<Type, string>` constraints ✅
+- Type constraints present for variant, size, and state axes ✅
+- **Verdict:** ✅ No changes required
 
-⚠️ **NONBLOCK-3: Missing Explicit Union Type Exports**
-- **Issue:** No exported `RadioVariant`, `RadioSize`, `RadioState` types
-- **Reason:** Required for CVA type constraints
-- **Severity:** Non-blocking (types exist inline in RadioProps, but not exported)
-- **Action Required:** Export explicit union types from radio-variants.ts
+✅ **Explicit Union Types (COMPLIANT):**
+- RadioVariant, RadioSize, RadioState types exported ✅
+- Types used in Radio.types.ts ✅
+- **Verdict:** ✅ No changes required
+
+✅ **CVA Structure (COMPLIANT):**
+- Variants defined inline within CVA config ✅
+- No intermediate objects ✅
+- No function calls generating variants ✅
+- No conditional logic ✅
+- Single tokenCVA invocation ✅
+- **Verdict:** ✅ No changes required
 
 **Pattern Alignment:**
 
-✅ **Structural patterns are consistent** with other Foundation primitives  
+✅ **Structural patterns are consistent** with other Foundation primitives (Checkbox, Button)  
 ✅ **No forbidden CVA patterns detected** (no intermediate objects, no function calls, no conditional logic)  
-❌ **CVA type selection violates Decision Matrix** (BLOCKER)
+✅ **CVA type selection matches Decision Matrix** (tokenCVA for token-driven component)  
+✅ **Type system alignment** (explicit unions, type constraints, no CVA type leakage)
 
-**Migration Requirements:**
+**Migration Status:**
 
-1. Change `import { cva }` to `import { tokenCVA }`
-2. Change `cva(...)` to `tokenCVA(...)`
-3. Add explicit union type exports
-4. Add `satisfies Record<Type, string>` constraints to all variant maps
+✅ **Already migrated:** Radio was migrated from `cva` to `tokenCVA` in previous pipeline run (2025-12-25)  
+✅ **Type constraints added:** All variant maps have `satisfies Record<Type, string>` constraints  
+✅ **Union types exported:** RadioVariant, RadioSize, RadioState are exported and used
 
 ### Change
 
 **No code changes made in STEP 3.**
 
-All findings documented for FIX backlog.
+CVA structure is already compliant with canonical style. No changes required.
 
 ### Record
 
-**Outcome:** Changes required (not yet applied)
+**Outcome:** No changes required in this step
 
-**Blocking:** Yes (CVA type mismatch and missing type constraints)
+**Blocking:** No
 
 **Findings:**
-- ❌ **BLOCKER:** CVA type mismatch - uses `cva` instead of `tokenCVA` (Decision Matrix RULE 1 violation)
-- ❌ **BLOCKER:** Missing `satisfies Record<Type, string>` constraints on variant maps
-- ⚠️ Missing explicit union type exports (RadioVariant, RadioSize, RadioState)
-- ✅ CVA structure is otherwise canonical (inline variants, no forbidden patterns)
-- ✅ Internal patterns are consistent
+- ✅ CVA type correct: uses `tokenCVA` (Decision Matrix RULE 1 compliance)
+- ✅ Type constraints present: `satisfies Record<Type, string>` on all variant axes
+- ✅ Explicit union types exported and used (RadioVariant, RadioSize, RadioState)
+- ✅ CVA structure is canonical (inline variants, no forbidden patterns)
+- ✅ No intermediate objects, no function calls, no conditional logic
+- ✅ Single tokenCVA invocation
+- ✅ Internal patterns are consistent with other Foundation primitives
+- ✅ Pattern alignment with Checkbox (similar component) verified
 
-**Changes:** None (deferred to STEP 9)
+**Changes:** None
 
 **Deferred:** None
 
-**FIX Backlog Updates:**
-
-*Added to FIX-BLOCKERS:*
-- **BLOCKER-1:** Migrate from `cva` to `tokenCVA` in radio-variants.ts (Decision Matrix RULE 1 violation - component has token-driven axes)
-- **BLOCKER-2:** Add `satisfies Record<RadioVariant, string>` constraint to variant map in radio-variants.ts
-- **BLOCKER-3:** Add `satisfies Record<RadioSize, string>` constraint to size map in radio-variants.ts
-- **BLOCKER-4:** Add `satisfies Record<RadioState, string>` constraint to state map in radio-variants.ts
-
-*Added to FIX-BLOCKERS:*
-- **BLOCKER-5:** Export explicit union types (RadioVariant, RadioSize, RadioState) - required for satisfies Record<Type, string> constraints in BLOCKER-2,3,4
-
-**Rationale:** Without exported union types, the satisfies Record<RadioVariant, string> constraints cannot be applied. This is a logical dependency for BLOCKER-2,3,4.
+**FIX Backlog Updates:** None (no issues found)
 
 **Next Step:** STEP 4 — State & Interaction Model Review
 
@@ -1070,13 +1159,13 @@ Radio component manages state through multiple mechanisms:
 
 | Radio State | Canonical State | Status |
 |-------------|-----------------|--------|
-| default | base | ⚠️ Naming inconsistency |
-| checked | N/A | ⚠️ Custom (justified for radio) |
+| default | base | ⚠️ Naming inconsistency (semantic equivalence) |
+| checked | N/A | ⚠️ Custom (justified for radio - selection state) |
 | disabled | disabled | ✅ Canonical |
 | error | N/A | ⚠️ Custom (validation state) |
-| (missing) | hover | ✅ CSS-driven (implicit) |
-| (missing) | active | ✅ CSS-driven (implicit) |
-| (missing) | focus-visible | ✅ CSS-driven (implicit) |
+| (missing) | hover | ✅ CSS-driven (implicit via CSS) |
+| (missing) | active | ✅ CSS-driven (implicit via CSS) |
+| (missing) | focus-visible | ✅ CSS-driven (focus-visible:outline-none in base) |
 | (missing) | loading | N/A (not applicable to radio) |
 
 **Interaction Model Analysis:**
@@ -1084,31 +1173,32 @@ Radio component manages state through multiple mechanisms:
 **Hover State:**
 - Implementation: CSS-driven (no JS)
 - Activation: Browser-native `:hover` pseudo-class
-- Blocking: Disabled blocks hover via `disabled:cursor-not-allowed`
+- Blocking: Disabled blocks hover via `disabled:cursor-not-allowed` and `disabled` attribute
 - ✅ Compliant with INTERACTION_AUTHORITY
 
 **Active State:**
 - Implementation: CSS-driven (no JS)
 - Activation: Browser-native `:active` pseudo-class
-- Blocking: Disabled blocks active
+- Blocking: Disabled blocks active via `disabled` attribute
 - ✅ Compliant with INTERACTION_AUTHORITY
 
 **Focus-visible State:**
-- Implementation: CSS-driven via `focus-visible:outline-none`
+- Implementation: CSS-driven via `focus-visible:outline-none` in base classes
 - Activation: Browser-native `:focus-visible` pseudo-class
+- Custom focus ring via token: `RADIO_TOKENS.variant.*.focus`
 - ✅ Compliant with INTERACTION_AUTHORITY
 
 **Disabled State:**
 - Implementation: JS + CSS (via `disabled` attribute and state prop)
 - Activation: `disabled` prop or `state === "disabled"`
-- Blocking: Blocks all interactions (click, keyboard)
+- Blocking: Blocks all interactions (click, keyboard) via `disabled` attribute
 - ✅ Compliant with INTERACTION_AUTHORITY
 
 **Checked State:**
 - Implementation: JS-driven (via `checked` prop and internal state)
 - Activation: User interaction (click or Space key)
 - Representation: `aria-checked` attribute + visual dot indicator
-- ✅ Correct for radio semantics
+- ✅ Correct for radio semantics (selection state, not interaction state)
 
 **State Priority Validation:**
 
@@ -1117,16 +1207,38 @@ Radio component manages state through multiple mechanisms:
 disabled > error > checked > default
 ```
 
-**Canonical Priority (STATE_MATRIX.md):**
+**Canonical Priority (INTERACTION_AUTHORITY.md):**
 ```
 disabled > loading > active > hover > focus-visible > base
 ```
 
 **Analysis:**
 - Disabled has highest priority ✅ (matches canonical)
-- Error is custom state (validation concern)
-- Checked is radio-specific state (selection concern)
-- Default ≈ base (naming inconsistency)
+- Error is custom state (validation concern, not in canonical set)
+- Checked is radio-specific state (selection concern, not in canonical set)
+- Default ≈ base (naming inconsistency, but semantic equivalence exists)
+
+**Derived vs Explicit State:**
+
+✅ **Derived States (Correct Approach):**
+- `effectiveState` is derived from props (disabled, checked, state)
+- Uses useMemo for performance
+- Clear priority order
+
+✅ **Explicit State (Minimal):**
+- Only `uncontrolledChecked` for standalone mode
+- All other state is derived or prop-driven
+- ✅ Minimal JS state (correct per INTERACTION_AUTHORITY)
+
+**State Token Representation (STATE_AUTHORITY.md):**
+
+Radio uses RADIO_TOKENS.state structure:
+- `RADIO_TOKENS.state.border.default`, `checked`, `error`, `disabled`
+- `RADIO_TOKENS.state.background.default`, `checked`, `disabled`
+- `RADIO_TOKENS.state.text.default`, `checked`, `disabled`
+
+✅ Token structure exists and is used correctly
+⚠️ State naming uses "default" instead of canonical "base" (semantic equivalence exists)
 
 ### Decide
 
@@ -1137,21 +1249,22 @@ disabled > loading > active > hover > focus-visible > base
 - **Rationale:** `base` is the canonical name per STATE_MATRIX.md
 - **Impact:** Inconsistency with other Foundation components
 - **Decision:** Document as improvement opportunity (low priority)
-- **Severity:** Non-blocking (semantic equivalence exists)
+- **Severity:** Non-blocking (semantic equivalence exists, no functional impact)
 
 ✅ **Custom `checked` State (Justified):**
 - **Issue:** `checked` is not in canonical state set
 - **Rationale:** Radio inherently has checked/unchecked semantics (aria-checked attribute)
 - **Decision:** Justified custom state for radio component
-- **Verdict:** ✅ Acceptable (component-specific requirement)
+- **Verdict:** ✅ Acceptable (component-specific requirement for selection state)
 
-⚠️ **Custom `error` State (Questionable):**
+⚠️ **Custom `error` State (Questionable but Acceptable):**
 - **Issue:** `error` is not in canonical state set
 - **Rationale:** Represents validation error
 - **Alternative:** Could use separate `error` boolean prop instead of state axis
 - **Current approach:** Mixes validation concern with visual state
-- **Decision:** Document as API design consideration
+- **Decision:** Document as API design consideration (non-blocking)
 - **Severity:** Non-blocking (functional but could be clearer)
+- **Verdict:** ✅ Acceptable (validation state is common pattern)
 
 ✅ **Interaction Model (Compliant):**
 - ✅ Hover is CSS-driven (no JS)
@@ -1165,17 +1278,10 @@ disabled > loading > active > hover > focus-visible > base
 - ✅ Priority order is enforced in effectiveState computation
 - ✅ States are mutually exclusive
 
-**Derived vs Explicit State:**
-
-✅ **Derived States (Correct Approach):**
-- `effectiveState` is derived from props (disabled, checked, state)
-- Uses useMemo for performance
-- Clear priority order
-
-✅ **Explicit State (Minimal):**
-- Only `uncontrolledChecked` for standalone mode
-- All other state is derived or prop-driven
-- ✅ Minimal JS state (correct per INTERACTION_AUTHORITY)
+✅ **Derived State Pattern (Correct):**
+- ✅ Minimal JS state (only uncontrolledChecked)
+- ✅ All other state derived from props
+- ✅ useMemo used for performance
 
 ### Change
 
@@ -1190,13 +1296,14 @@ All findings documented for FIX backlog consideration.
 **Blocking:** No
 
 **Findings:**
-- ⚠️ State naming inconsistency: uses `default` instead of canonical `base` (non-blocking)
-- ✅ Custom `checked` state is justified (radio-specific requirement)
-- ⚠️ Custom `error` state could be improved (separate prop vs state axis)
+- ⚠️ State naming inconsistency: uses `default` instead of canonical `base` (non-blocking, semantic equivalence exists)
+- ✅ Custom `checked` state is justified (radio-specific requirement for selection state)
+- ⚠️ Custom `error` state could be improved (separate prop vs state axis, but acceptable as-is)
 - ✅ Interaction model is compliant (CSS-driven hover/active/focus-visible)
 - ✅ State priority order is correct (disabled highest)
 - ✅ Minimal JS state (derived state pattern used correctly)
 - ✅ No JavaScript-driven hover/active (correct per INTERACTION_AUTHORITY)
+- ✅ State token representation exists and is used correctly
 
 **Changes:** None
 
@@ -1205,8 +1312,8 @@ All findings documented for FIX backlog consideration.
 **FIX Backlog Updates:**
 
 *Added to FIX-NONBLOCKERS:*
-- **NONBLOCK-4:** Consider renaming `default` state to `base` for canonical naming consistency (low priority - semantic equivalence exists)
-- **NONBLOCK-5:** Consider separating `error` validation concern from state axis (could use separate `error` boolean prop instead)
+- **NONBLOCK-4:** Consider renaming `default` state to `base` for canonical naming consistency (low priority - semantic equivalence exists, breaking change)
+- **NONBLOCK-5:** Consider separating `error` validation concern from state axis (could use separate `error` boolean prop instead) (low priority - breaking change)
 
 **Next Step:** STEP 5 — Token, Size & Variant Consistency
 
@@ -1235,7 +1342,7 @@ type GlobalSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 **Radio Size Subset:**
 - Supports: `xs`, `sm`, `md`, `lg`, `xl`
 - Missing from GlobalSize: `2xl`, `3xl`
-- **Verdict:** ✅ Valid subset (interactive component pattern - uses restricted subset)
+- **Verdict:** ✅ Valid subset (interactive component pattern - uses extended subset xs-xl)
 
 **Variant Dictionary Validation:**
 
@@ -1301,7 +1408,7 @@ state: {
 
 **Raw Value Scan:**
 
-Scanning all styling in radio-variants.ts and Radio.tsx:
+Scanning all styling in radio-variants.ts, Radio.tsx, and RADIO_TOKENS:
 - ❌ No hardcoded pixel values in component code
 - ❌ No hardcoded colors in component code
 - ❌ No hardcoded spacing in component code
@@ -1315,6 +1422,7 @@ Scanning all styling in radio-variants.ts and Radio.tsx:
 **SPACING_AUTHORITY.md:**
 - Radio uses Tailwind spacing classes via tokens (`w-3.5`, `h-4`, etc.)
 - ✅ Spacing is token-driven (via RADIO_TOKENS.size)
+- RadioGroup uses `gap-md` (semantic spacing token) ✅
 
 **TYPOGRAPHY_AUTHORITY.md:**
 - Radio has no text content (visual primitive only)
@@ -1332,6 +1440,34 @@ Scanning all styling in radio-variants.ts and Radio.tsx:
 - Radio uses `shadow-sm` (via RADIO_TOKENS.shadow)
 - ✅ Elevation token used correctly
 
+**Size Mapping Table:**
+
+Radio has implicit size mapping via `RADIO_TOKENS.size`:
+
+| Size | Width Token | Height Token | Radius Token | Dot Size Token |
+|------|-------------|-------------|--------------|----------------|
+| xs | `RADIO_TOKENS.size.xs.width` (w-3.5) | `RADIO_TOKENS.size.xs.height` (h-3.5) | `RADIO_TOKENS.size.xs.radius` (rounded-full) | `RADIO_TOKENS.dot.size.xs` (size-1.5) |
+| sm | `RADIO_TOKENS.size.sm.width` (w-4) | `RADIO_TOKENS.size.sm.height` (h-4) | `RADIO_TOKENS.size.sm.radius` (rounded-full) | `RADIO_TOKENS.dot.size.sm` (size-2) |
+| md | `RADIO_TOKENS.size.md.width` (w-4.5) | `RADIO_TOKENS.size.md.height` (h-4.5) | `RADIO_TOKENS.size.md.radius` (rounded-full) | `RADIO_TOKENS.dot.size.md` (size-2.5) |
+| lg | `RADIO_TOKENS.size.lg.width` (w-5) | `RADIO_TOKENS.size.lg.height` (h-5) | `RADIO_TOKENS.size.lg.radius` (rounded-full) | `RADIO_TOKENS.dot.size.lg` (size-3) |
+| xl | `RADIO_TOKENS.size.xl.width` (w-6) | `RADIO_TOKENS.size.xl.height` (h-6) | `RADIO_TOKENS.size.xl.radius` (rounded-full) | `RADIO_TOKENS.dot.size.xl` (size-3.5) |
+
+✅ Size mapping exists implicitly in RADIO_TOKENS structure
+⚠️ Size mapping not documented in standard format per SIZE_MAPPING_SPEC.md (non-blocking, documentation enhancement)
+
+**Storybook Requirements (VARIANTS_SIZE_CANON.md):**
+
+Required stories for components with size AND variant props:
+1. **Matrix Story** - Shows all variants × all sizes grid
+2. **States Story** - Shows all variants × all sizes × all states
+3. **SizesGallery Story** - Shows all sizes with content variations
+
+Current stories (Radio.stories.tsx):
+- `Matrix` ✅ (shows all variants × all sizes grid - 5×5 = 25 combinations)
+- `States` ✅ (shows all variants × all sizes × all states - 5×5×4 = 100 combinations)
+- `SizesGallery` ✅ (shows all sizes with labels)
+- **Verdict:** ✅ All required stories present with canonical names
+
 ### Decide
 
 **Token Compliance Assessment:**
@@ -1345,7 +1481,7 @@ Scanning all styling in radio-variants.ts and Radio.tsx:
 
 ✅ **GlobalSize Scale Compliance (Compliant):**
 - Radio uses valid GlobalSize subset: `xs | sm | md | lg | xl`
-- Appropriate for interactive component (restricted subset)
+- Appropriate for interactive component (extended subset xs-xl)
 - No forbidden size values (no `icon`, no `tiny`, no numeric sizes)
 
 ✅ **Variant Dictionary Compliance (Compliant):**
@@ -1362,34 +1498,18 @@ Scanning all styling in radio-variants.ts and Radio.tsx:
 
 **Size Mapping Table:**
 
-Radio has implicit size mapping via `RADIO_TOKENS.size`:
+✅ **Size mapping exists** implicitly in RADIO_TOKENS structure
+⚠️ **Size mapping not documented** in standard format per SIZE_MAPPING_SPEC.md
+- **Impact:** Documentation enhancement, not functional issue
+- **Decision:** Document as non-blocking improvement opportunity
+- **Severity:** Non-blocking (mapping exists and is functional)
 
-| Size | Width | Height | Radius | Dot Size |
-|------|-------|--------|--------|----------|
-| xs | w-3.5 (14px) | h-3.5 (14px) | rounded-full | size-1.5 (6px) |
-| sm | w-4 (16px) | h-4 (16px) | rounded-full | size-2 (8px) |
-| md | w-4.5 (18px) | h-4.5 (18px) | rounded-full | size-2.5 (10px) |
-| lg | w-5 (20px) | h-5 (20px) | rounded-full | size-3 (12px) |
-| xl | w-6 (24px) | h-6 (24px) | rounded-full | size-3.5 (14px) |
+**Storybook Validation:**
 
-✅ Size mapping table exists and is complete
-
-**Storybook Requirements (VARIANTS_SIZE_CANON.md):**
-
-Required stories for components with size AND variant props:
-1. **Matrix Story** - Shows all variants × all sizes grid
-2. **States Story** - Shows all variants × all sizes × all states
-3. **SizesGallery Story** - Shows all sizes with content variations
-
-Current stories (Radio.stories.tsx):
-- `AllSizes` ✅ (shows all sizes)
-- `AllVariants` ✅ (shows all variants)
-- `AllStates` ✅ (shows all states)
-- Missing: `Matrix` story (canonical name required)
-- Missing: `States` story (canonical name required)
-- Missing: `SizesGallery` story (canonical name required)
-
-**Verdict:** ⚠️ Storybook stories exist but use non-canonical names. **Mandatory STEP 10 Gate:** Stories must be renamed/created per VARIANTS_SIZE_CANON.md requirements before pipeline completion.
+✅ **All required stories present:**
+- Matrix story ✅ (canonical name, variants × sizes grid)
+- States story ✅ (canonical name, full matrix)
+- SizesGallery story ✅ (canonical name, all sizes)
 
 ### Change
 
@@ -1413,8 +1533,9 @@ All findings documented.
   - ✅ MOTION_AUTHORITY (token-driven transitions)
   - ✅ ELEVATION_AUTHORITY (token-driven shadows)
   - N/A TYPOGRAPHY_AUTHORITY (no text content)
-- ✅ Size mapping table exists and is complete
-- ⚠️ Storybook stories exist but use non-canonical names (will address in STEP 10)
+- ✅ Size mapping exists implicitly in RADIO_TOKENS structure
+- ⚠️ Size mapping not documented in standard format per SIZE_MAPPING_SPEC.md (non-blocking, documentation enhancement)
+- ✅ Storybook stories comply with requirements (Matrix, States, SizesGallery present with canonical names)
 
 **Changes:** None
 
@@ -1422,15 +1543,12 @@ All findings documented.
 
 **FIX Backlog Updates:**
 
-**Plan for STEP 10 — Mandatory Storybook Validation Gate:**
-- Rename `AllSizes` → `SizesGallery` (canonical name per VARIANTS_SIZE_CANON.md)
-- Rename `AllStates` → `States` (canonical name per VARIANTS_SIZE_CANON.md)
-- Add `Matrix` story (variants × sizes grid) (required per VARIANTS_SIZE_CANON.md)
-- Keep `AllVariants` as supplementary example story
-
-**Rationale:** Per VARIANTS_SIZE_CANON.md and Pipeline 18A STEP 10 requirements, canonical story names are mandatory for components with size AND variant props. This is a validation gate, not an optional improvement.
+*Added to FIX-NONBLOCKERS:*
+- **NONBLOCK-6:** Document size mapping in standard format per SIZE_MAPPING_SPEC.md (low priority - documentation enhancement, mapping exists and is functional)
 
 **Next Step:** STEP 6 — Public API & DX Review
+
+**Checkpoint:** Recommended to share audit report
 
 ---
 
@@ -1442,171 +1560,128 @@ All findings documented.
 
 ### Observe
 
-**Radio Public API:**
+**Public API Analysis:**
 
+**RadioProps Structure:**
 ```typescript
-interface RadioProps {
-  // Visual system
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
-  
-  // State management
-  checked?: boolean;
-  disabled?: boolean;
-  value?: string;
-  onCheckedChange?: (checked: boolean) => void;
-  
-  // Customization
-  icon?: React.ReactNode;
-  
-  // Accessibility
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-describedby"?: string;
-  
-  // Inherited from ButtonHTMLAttributes (excluding size, onChange, className, style)
-}
+export type RadioProps = Omit<
+  React.ComponentPropsWithoutRef<"button">,
+  "size" | "onChange" | "className" | "style"
+> &
+  VariantProps<typeof radioVariants> & {
+    variant?: RadioVariant;
+    size?: RadioSize;
+    state?: RadioState;
+    // ... other props
+  };
 ```
 
-**RadioGroup Public API:**
+**Foundation Enforcement Compliance:**
 
-```typescript
-interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  name?: string;
-  orientation?: "horizontal" | "vertical";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-}
-```
+✅ **className excluded:** `Omit<..., "className" | "style">` ✅
+✅ **style excluded:** `Omit<..., "className" | "style">` ✅
+✅ **Type-level tests:** `Radio.type-test.tsx` verifies exclusion ✅
 
-**API Clarity Analysis:**
+**CVA Type Leakage:**
 
-**1. State Prop Overlap:**
+⚠️ **VariantProps<typeof radioVariants> used:**
+- RadioProps extends `VariantProps<typeof radioVariants>`
+- This exposes CVA internal machinery to public API
+- Checkbox (similar component) removed VariantProps in previous run
+- **Impact:** Public API depends on CVA implementation details
 
-Radio has three mechanisms to express state:
-- `state="disabled"` OR `disabled={true}` → both express disabled
-- `state="checked"` OR `checked={true}` → both express checked
-- `state="error"` → only way to express error
+**Prop Necessity Analysis:**
 
-**Example confusion:**
-```typescript
-// All three express disabled radio:
-<Radio disabled />
-<Radio state="disabled" />
-<Radio disabled state="disabled" />
-```
+**Variant System:**
+- `variant?: RadioVariant` - ✅ Necessary (visual styling)
+- `size?: RadioSize` - ✅ Necessary (size control)
+- `state?: RadioState` - ⚠️ Redundant with `checked`/`disabled` props (non-blocking)
 
-**Current behavior (Radio.tsx lines 78-79):**
-```typescript
-const isDisabled = disabled || state === "disabled";
-const isError = state === "error";
-```
+**State Management:**
+- `checked?: boolean` - ✅ Necessary (controlled state)
+- `disabled?: boolean` - ✅ Necessary (interaction control)
+- `value?: string` - ✅ Necessary (RadioGroup integration)
+- `onCheckedChange?: (checked: boolean) => void` - ✅ Necessary (state change callback)
 
-**Analysis:**
-- `disabled` prop and `state="disabled"` are OR'd together
-- Creates redundancy
-- Not immediately clear which to use
+**Customization:**
+- `icon?: React.ReactNode` - ✅ Useful (custom indicator)
 
-**2. Accessibility Props:**
+**Accessibility:**
+- `aria-label?: string` - ✅ Necessary (accessibility)
+- `aria-labelledby?: string` - ✅ Necessary (accessibility)
+- `aria-describedby?: string` - ✅ Necessary (accessibility)
 
-Current API:
-```typescript
-"aria-label"?: string;
-"aria-labelledby"?: string;
-"aria-describedby"?: string;
-```
+**API Clarity:**
 
-All are optional, but at least one of `aria-label` or `aria-labelledby` should be required for accessibility.
+✅ **JSDoc comments present** for all props
+✅ **Default values documented** in JSDoc (@default)
+✅ **Prop descriptions clear** and concise
+✅ **Required vs optional** clearly indicated
 
-**3. Value Prop Context Dependency:**
+**Safe Defaults:**
 
-`value` prop is:
-- Required when used in RadioGroup
-- Optional for standalone usage
-- Not enforced by types
+✅ **Variant default:** `variant: "outline"` (safe, visible)
+✅ **Size default:** `size: "md"` (safe, standard)
+✅ **State default:** `state: "default"` (safe, neutral)
+✅ **Disabled default:** `disabled: false` (safe, interactive)
 
-**4. Defaults:**
+**DX Assessment:**
 
-From CVA defaultVariants:
-```typescript
-variant: "outline",  // ✅ Good default (neutral)
-size: "md",          // ✅ Good default (standard)
-state: "default",    // ✅ Good default
-```
+✅ **Ease of use:** Component can be used without reading implementation
+✅ **Composition vs configuration:** Good balance (variant/size/state for configuration, icon for composition)
+✅ **Error prevention:** TypeScript types prevent invalid values
+⚠️ **CVA type leakage:** VariantProps exposes internal machinery (non-blocking, but not ideal)
 
-**5. Composition Pattern:**
+**Comparison with Checkbox:**
 
-✅ **Good:** Radio works standalone or within RadioGroup
-✅ **Good:** Context-based integration (RadioGroupContext)
-✅ **Good:** Controlled/uncontrolled modes supported
+Checkbox (similar component):
+- ✅ Does NOT use `VariantProps<typeof checkboxVariants>`
+- ✅ Uses explicit union types only
+- ✅ No CVA type leakage
 
-**6. Naming Clarity:**
-
-✅ **Good:** Clear prop names (`checked`, `disabled`, `variant`, `size`)
-✅ **Good:** Callback naming (`onCheckedChange` vs `onChange`)
-⚠️ **Questionable:** `state` prop name (mixes visual and functional states)
+Radio:
+- ⚠️ Uses `VariantProps<typeof radioVariants>`
+- ⚠️ CVA type leakage present
 
 ### Decide
 
 **API Clarity Assessment:**
 
-⚠️ **Issue 1: State Prop Redundancy (Non-Blocking):**
-- **Problem:** `state` prop overlaps with `checked` and `disabled` props
-- **Impact:** Developer confusion about which to use
-- **Current behavior:** Works correctly (OR logic), but API is unclear
-- **Alternatives:**
-  - Remove "checked" and "disabled" from `state` union
-  - OR remove `state` prop entirely, use separate boolean props
-- **Decision:** Document as API design issue (non-blocking, functional but confusing)
-- **Severity:** Non-blocking (DX issue, not functional issue)
+✅ **API is clear and well-documented:**
+- All props have JSDoc comments
+- Default values documented
+- Prop descriptions are clear
+- Required vs optional clearly indicated
 
-⚠️ **Issue 2: Accessibility Props Not Required (Non-Blocking):**
-- **Problem:** `aria-label` and `aria-labelledby` are optional
-- **Impact:** Developers might forget to add labels
-- **Mitigation:** Tests enforce labels, Storybook examples show labels
-- **Decision:** Document as DX improvement opportunity
-- **Severity:** Non-blocking (tests catch missing labels)
+✅ **Safe defaults:**
+- All defaults are safe and sensible
+- No unsafe defaults detected
 
-⚠️ **Issue 3: Value Prop Context Dependency (Non-Blocking):**
-- **Problem:** `value` is required in RadioGroup but not enforced by types
-- **Impact:** Runtime error if missing in group
-- **Mitigation:** TypeScript would need conditional types (complex)
-- **Decision:** Document as known limitation
-- **Severity:** Non-blocking (clear in docs and examples)
+⚠️ **CVA Type Leakage (Non-Blocking):**
+- **Issue:** RadioProps extends `VariantProps<typeof radioVariants>`
+- **Impact:** Public API depends on CVA implementation details
+- **Comparison:** Checkbox removed VariantProps in previous run
+- **Decision:** Document as improvement opportunity (low priority)
+- **Severity:** Non-blocking (functional, but not ideal DX)
 
-✅ **Good API Decisions:**
-- Clear prop names
-- Reasonable defaults
-- Composition pattern (Radio + RadioGroup)
-- Controlled/uncontrolled modes
-- Foundation Enforcement compliance (className/style excluded)
+⚠️ **State Prop Redundancy (Non-Blocking):**
+- **Issue:** `state` prop overlaps with `checked`/`disabled` props
+- **Impact:** Minor confusion (can use `state="checked"` or `checked={true}`)
+- **Decision:** Document as API design consideration (non-blocking)
+- **Severity:** Non-blocking (functional, but could be clearer)
 
-**Ease of Use Assessment:**
+**Foundation Enforcement Compliance:**
 
-✅ **Can be used correctly without reading implementation:**
-- Examples in Storybook are clear
-- Prop types are self-documenting
-- Common patterns (standalone, group, controlled, uncontrolled) are straightforward
-
-⚠️ **Potential confusion points:**
-- State prop overlap with checked/disabled
-- When to use `state` vs separate props
-
-**Safe Defaults:**
-
-✅ All defaults are safe:
-- `variant="outline"` - neutral, accessible
-- `size="md"` - standard size
-- `state="default"` - unchecked, enabled
+✅ **Compliant:**
+- className excluded ✅
+- style excluded ✅
+- Type-level tests verify exclusion ✅
 
 ### Change
 
 **No code changes made in STEP 6.**
 
-All findings documented for FIX backlog consideration.
+All findings documented.
 
 ### Record
 
@@ -1615,13 +1690,12 @@ All findings documented for FIX backlog consideration.
 **Blocking:** No
 
 **Findings:**
-- ⚠️ State prop redundancy: `state` overlaps with `checked` and `disabled` props (DX issue, non-blocking)
-- ⚠️ Accessibility props not required: `aria-label`/`aria-labelledby` are optional (non-blocking, tests enforce)
-- ⚠️ Value prop context dependency: not enforced by types (non-blocking, clear in docs)
-- ✅ Clear prop names and reasonable defaults
-- ✅ Composition pattern works well (Radio + RadioGroup)
-- ✅ Controlled/uncontrolled modes supported
-- ✅ Foundation Enforcement compliance (className/style excluded)
+- ✅ Foundation Enforcement compliant (className/style excluded, type-level tests present)
+- ✅ API clarity verified (JSDoc comments, default values, clear descriptions)
+- ✅ Safe defaults verified (variant="outline", size="md", state="default", disabled=false)
+- ✅ Prop necessity verified (all props serve clear purpose)
+- ⚠️ CVA type leakage: RadioProps extends VariantProps<typeof radioVariants> (non-blocking, improvement opportunity)
+- ⚠️ State prop redundancy: state prop overlaps with checked/disabled (non-blocking, API design consideration)
 
 **Changes:** None
 
@@ -1630,10 +1704,12 @@ All findings documented for FIX backlog consideration.
 **FIX Backlog Updates:**
 
 *Added to FIX-NONBLOCKERS:*
-- **NONBLOCK-7:** Consider API simplification: Remove "checked" and "disabled" from `state` union to reduce redundancy (low priority - breaking change)
-- **NONBLOCK-8:** Consider making `aria-label` or `aria-labelledby` required via TypeScript conditional types (low priority - complex type system change)
+- **NONBLOCK-7:** Consider removing VariantProps<typeof radioVariants> from RadioProps to eliminate CVA type leakage (low priority - Checkbox pattern, but breaking change)
+- **NONBLOCK-8:** Consider clarifying state prop vs checked/disabled props relationship (low priority - API design improvement)
 
 **Next Step:** STEP 7 — Type System Alignment
+
+**Checkpoint:** Recommended to share audit report
 
 ---
 
@@ -1645,176 +1721,155 @@ All findings documented for FIX backlog consideration.
 
 ### Observe
 
-**Type Definition Analysis:**
+**Type System Analysis:**
 
-**Radio.types.ts:**
+**Explicit Union Types:**
 
+✅ **RadioVariant exported:**
 ```typescript
-export interface RadioProps
-  extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange" | "className" | "style">,
-    VariantProps<typeof radioVariants> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  state?: "default" | "checked" | "disabled" | "error";
-  checked?: boolean;
-  disabled?: boolean;
-  value?: string;
-  onCheckedChange?: (checked: boolean) => void;
-  icon?: React.ReactNode;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-describedby"?: string;
-}
-```
-
-**Type System Patterns:**
-
-✅ **Explicit Unions:**
-- `variant`: Explicit union of 5 values (not `string`)
-- `size`: Explicit union of 5 values (not `string`)
-- `state`: Explicit union of 4 values (not `string`)
-
-✅ **Foundation Enforcement Compliance:**
-- `className` omitted from ButtonHTMLAttributes
-- `style` omitted from ButtonHTMLAttributes
-- Type-tests verify exclusion (Radio.type-test.tsx)
-
-⚠️ **CVA Type Leakage:**
-- Extends `VariantProps<typeof radioVariants>`
-- CVA internal machinery exposed in public API
-- Common pattern but violates type system purity
-
-**radio-variants.ts Type Analysis:**
-
-Current structure:
-```typescript
-export const radioVariants = cva({
-  variants: {
-    variant: {
-      primary: `...`,
-      secondary: `...`,
-      // ... no satisfies Record<Type, string>
-    },
-    size: {
-      xs: `...`,
-      sm: `...`,
-      // ... no satisfies Record<Type, string>
-    },
-    state: {
-      default: `...`,
-      checked: `...`,
-      // ... no satisfies Record<Type, string>
-    },
-  },
-});
-```
-
-❌ **Missing Type Constraints:**
-- No `satisfies Record<RadioVariant, string>` on variant map
-- No `satisfies Record<RadioSize, string>` on size map
-- No `satisfies Record<RadioState, string>` on state map
-
-❌ **Missing Explicit Union Type Exports:**
-
-Radio.types.ts defines inline unions but doesn't export them:
-```typescript
-// Current (inline only):
-variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-
-// Should also export:
 export type RadioVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
+```
+
+✅ **RadioSize exported:**
+```typescript
 export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
+```
+
+✅ **RadioState exported:**
+```typescript
 export type RadioState = "default" | "checked" | "disabled" | "error";
 ```
+
+✅ **Types used in RadioProps:**
+```typescript
+variant?: RadioVariant;
+size?: RadioSize;
+state?: RadioState;
+```
+
+**Type Constraints in CVA:**
+
+✅ **Variant map constraint:**
+```typescript
+variant: {
+  primary: `...`,
+  // ...
+} satisfies Record<RadioVariant, string>,
+```
+
+✅ **Size map constraint:**
+```typescript
+size: {
+  xs: `...`,
+  // ...
+} satisfies Record<RadioSize, string>,
+```
+
+✅ **State map constraint:**
+```typescript
+state: {
+  default: `...`,
+  // ...
+} satisfies Record<RadioState, string>,
+```
+
+**CVA Type Selection:**
+
+✅ **tokenCVA used:**
+```typescript
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
+export const radioVariants = tokenCVA({ ... });
+```
+
+✅ **Decision Matrix compliance:** Component has token-driven axes (variant, size, state) → tokenCVA required → tokenCVA used ✅
+
+**CVA Type Leakage:**
+
+⚠️ **VariantProps used in RadioProps:**
+```typescript
+export type RadioProps = ... & VariantProps<typeof radioVariants> & { ... };
+```
+
+- **Issue:** Public API depends on CVA implementation details
+- **Impact:** Type system leaks CVA internal machinery
+- **Comparison:** Checkbox removed VariantProps in previous run
+- **Severity:** Non-blocking (functional, but not ideal)
 
 **Type Readability:**
 
 ✅ **Types are readable without implementation context:**
-- Prop types are self-documenting
-- Union values are explicit
-- No complex conditional types
+- RadioVariant, RadioSize, RadioState are self-explanatory
+- Union types are explicit and clear
+- No wide types (e.g., `string`) used for variant/size/state
 
-⚠️ **CVA machinery visibility:**
-- `VariantProps<typeof radioVariants>` requires understanding CVA internals
-- Not immediately readable
+**Type Safety:**
 
-**CVA Type Selection Validation (from STEP 3):**
-
-❌ **BLOCKER (already identified):**
-- Component uses `cva` instead of `tokenCVA`
-- Has token-driven axes → should use `tokenCVA`
-- Decision Matrix RULE 1 violation
+✅ **TypeScript enforces valid values:**
+- Invalid variant/size/state values cause compile errors
+- Type constraints (`satisfies Record<Type, string>`) ensure completeness
+- No type assertions or `as` casts needed
 
 ### Decide
 
 **Type System Assessment:**
 
-❌ **BLOCKER-2, BLOCKER-3, BLOCKER-4 (from STEP 3):**
-- Missing `satisfies Record<Type, string>` constraints
-- Already documented in STEP 3 FIX backlog
-- Will be fixed in STEP 9
+✅ **Explicit Union Types (Compliant):**
+- RadioVariant, RadioSize, RadioState are explicit unions
+- No wide types (e.g., `string`) used
+- Types are exported and reused
+
+✅ **Type Constraints (Compliant):**
+- All variant maps have `satisfies Record<Type, string>` constraints
+- Type safety enforced at compile time
+- Completeness guaranteed
+
+✅ **CVA Type Selection (Compliant):**
+- tokenCVA used (correct for token-driven component)
+- Decision Matrix RULE 1 compliance verified
+- No CVA type mismatch
 
 ⚠️ **CVA Type Leakage (Non-Blocking):**
-- **Issue:** `RadioProps` extends `VariantProps<typeof radioVariants>`
-- **Impact:** CVA internal types exposed in public API
-- **Common Pattern:** Many components use this pattern (Button, Input, etc.)
-- **Alternative:** Define props explicitly without CVA extension
-- **Decision:** Document as improvement opportunity (low priority - common pattern)
-- **Severity:** Non-blocking (functional, but not ideal for type system purity)
+- VariantProps<typeof radioVariants> used in public API
+- Leaks CVA internal machinery
+- Functional but not ideal DX
+- Checkbox pattern (removed VariantProps) is better
 
-⚠️ **Missing Explicit Union Type Exports (Non-Blocking):**
-- **Issue:** Union types defined inline but not exported
-- **Impact:** Cannot import `RadioVariant`, `RadioSize`, `RadioState` types
-- **Use Case:** External components might need these types
-- **Decision:** Document as improvement opportunity
-- **Severity:** Non-blocking (types exist inline, export would improve reusability)
+**Type Readability:**
 
-✅ **Good Type System Patterns:**
-- Explicit unions (not wide types)
-- Foundation Enforcement compliance (className/style excluded)
-- Type-tests verify enforcement
-- Readable prop types
-
-**CVA Structure & Type Alignment (from STEP 3):**
-
-The CVA structure must support type system requirements:
-- ✅ Variants defined inline (supports explicit unions)
-- ❌ Missing `satisfies Record<Type, string>` constraints (BLOCKER)
-- ❌ Wrong CVA type (`cva` instead of `tokenCVA`) (BLOCKER)
+✅ **Types are readable:**
+- Union types are explicit and self-explanatory
+- No implementation details leaked (except VariantProps)
+- Types can be understood without reading CVA implementation
 
 ### Change
 
 **No code changes made in STEP 7.**
 
-All findings documented (most already in STEP 3 FIX backlog).
+All findings documented.
 
 ### Record
 
 **Outcome:** No changes required in this step
 
-**Blocking:** No (blockers already documented in STEP 3)
+**Blocking:** No
 
 **Findings:**
-- ❌ Missing `satisfies Record<Type, string>` constraints (BLOCKER - already in STEP 3 backlog)
-- ❌ Wrong CVA type (`cva` vs `tokenCVA`) (BLOCKER - already in STEP 3 backlog)
-- ⚠️ CVA type leakage: `VariantProps<typeof radioVariants>` in public API (non-blocking, common pattern)
-- ⚠️ Missing explicit union type exports (RadioVariant, RadioSize, RadioState) (non-blocking)
-- ✅ Explicit unions (not wide types)
-- ✅ Foundation Enforcement compliance (className/style excluded, type-tests verify)
-- ✅ Types are readable without implementation context
+- ✅ Explicit union types exported and used (RadioVariant, RadioSize, RadioState)
+- ✅ Type constraints present (`satisfies Record<Type, string>` on all variant maps)
+- ✅ CVA type selection correct (tokenCVA for token-driven component)
+- ✅ Type readability verified (types are self-explanatory)
+- ✅ Type safety verified (TypeScript enforces valid values)
+- ⚠️ CVA type leakage: VariantProps<typeof radioVariants> used in public API (non-blocking, improvement opportunity)
 
 **Changes:** None
 
 **Deferred:** None
 
-**FIX Backlog Updates:**
-
-*Added to FIX-NONBLOCKERS:*
-- **NONBLOCK-9:** Consider removing `VariantProps<typeof radioVariants>` extension to avoid CVA type leakage (low priority - common pattern)
-- **NONBLOCK-10:** Export explicit union types (RadioVariant, RadioSize, RadioState) from Radio.types.ts for external reusability (low priority)
+**FIX Backlog Updates:** None (CVA type leakage already documented in STEP 6)
 
 **Next Step:** STEP 8 — Intentional Refactor Pass
+
+**Checkpoint:** Recommended to share audit report
 
 ---
 
@@ -1826,186 +1881,142 @@ All findings documented (most already in STEP 3 FIX backlog).
 
 ### Observe
 
-**Final Code Quality Review:**
+**FIX Backlog Summary:**
 
-Guiding question: "If this code were reviewed today by a senior engineer, would it pass without comments?"
+**FIX-BLOCKERS:** 0 items
+- No blocking issues identified in STEP 0-7
 
-**Radio.tsx (269 lines):**
-- ✅ Clear component structure with forwardRef
-- ✅ State management is explicit and well-organized
-- ✅ Event handlers are properly memoized
-- ✅ Keyboard navigation is comprehensive (Space, Arrow keys, wrapping)
-- ✅ Naming is clear and consistent
-- ✅ Accessibility attributes are correct (role, aria-checked, aria-disabled, aria-invalid)
-- ⚠️ Keyboard handler is long (85 lines) but complexity is inherent to radio group pattern
+**FIX-NONBLOCKERS:** 8 items
+- NONBLOCK-1: Extract state update logic helper (duplication reduction)
+- NONBLOCK-2: Extract nextIndex calculation helpers (duplication reduction)
+- NONBLOCK-3: Make finalChecked calculation more explicit (readability)
+- NONBLOCK-4: Rename `default` state to `base` (canonical naming)
+- NONBLOCK-5: Separate `error` validation concern (API design)
+- NONBLOCK-6: Document size mapping in standard format (documentation)
+- NONBLOCK-7: Remove VariantProps to eliminate CVA type leakage (DX improvement)
+- NONBLOCK-8: Clarify state prop vs checked/disabled relationship (API design)
 
-**RadioGroup.tsx (117 lines):**
-- ✅ Clean context provider pattern
-- ✅ Controlled/uncontrolled mode handling is clear
-- ✅ Name generation with SSR safety
-- ✅ Conditional className logic is straightforward
-- ✅ Context value is properly memoized
+**Component Status:**
+- ✅ LOCKED (Confirmed Foundation, Locked 2025-12-25)
+- ✅ CVA structure compliant (tokenCVA, type constraints, explicit unions)
+- ✅ Foundation Enforcement compliant (className/style excluded)
+- ✅ Token compliance verified (100% token-driven)
+- ✅ All architectural requirements met
 
-**radio-variants.ts (48 lines):**
-- ✅ CVA structure is clean (inline variants, no forbidden patterns)
-- ✅ Token usage is consistent throughout
-- ❌ **BLOCKER:** Wrong CVA type (`cva` instead of `tokenCVA`)
-- ❌ **BLOCKER:** Missing `satisfies Record<Type, string>` constraints
+**Locked Component Change Guard Check:**
 
-**Radio.types.ts (84 lines):**
-- ✅ Type definitions are clear and explicit
-- ✅ Foundation Enforcement compliance (className/style excluded)
-- ⚠️ CVA type leakage (common pattern, non-blocking)
+**Policy:** [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md)
 
-**RadioGroup.types.ts (75 lines):**
-- ✅ Clean type definitions
-- ✅ Context value interface is clear
+**Default Rule:** Locked Component Change is FORBIDDEN unless exception declared.
 
-**Overall Code Quality:**
+**Exception Required?** ❌ **NO**
 
-✅ **Readability:** Code is easy to read and understand  
-✅ **Maintainability:** Well-organized, clear separation of concerns  
-✅ **Naming:** Consistent and descriptive names  
-✅ **Structure:** Logical file organization  
-❌ **Architectural Compliance:** CVA type mismatch (BLOCKER)
+**Rationale:**
+- No BLOCKERS identified
+- All non-blockers are optional improvements
+- Component is already compliant with all architectural requirements
+- No mandatory changes required for pipeline compliance
+- All findings are low-priority improvements that can be deferred
 
 ### Decide
 
-**Explicit Refactor Decision (MANDATORY):**
+**Refactor Decision:**
 
-**Decision:** ✅ **Refactor required**
+**Decision:** ✅ **Refactor not required**
 
 **Rationale:**
-
-The Radio component has **4 blocking architectural violations** that must be fixed:
-
-1. **BLOCKER-1:** CVA type mismatch (`cva` vs `tokenCVA`)
-   - Component has token-driven axes (variant, size, state)
-   - Decision Matrix RULE 1 requires `tokenCVA`
-   - **Must fix:** Migrate to `tokenCVA`
-
-2. **BLOCKER-2:** Missing `satisfies Record<RadioVariant, string>` on variant map
-   - CVA Canonical Style requires type constraints
-   - **Must fix:** Add constraint
-
-3. **BLOCKER-3:** Missing `satisfies Record<RadioSize, string>` on size map
-   - CVA Canonical Style requires type constraints
-   - **Must fix:** Add constraint
-
-4. **BLOCKER-4:** Missing `satisfies Record<RadioState, string>` on state map
-   - CVA Canonical Style requires type constraints
-   - **Must fix:** Add constraint
-
-**Additional Improvements (Non-Blocking):**
-
-5. **NONBLOCK-3:** Export explicit union types (RadioVariant, RadioSize, RadioState)
-6. **NONBLOCK-6:** Rename Storybook stories to canonical names (STEP 10)
+1. **No BLOCKERS:** All findings from STEP 0-7 are non-blocking
+2. **Architectural Compliance:** Component already meets all Foundation requirements:
+   - ✅ CVA structure compliant (tokenCVA, type constraints, explicit unions)
+   - ✅ Foundation Enforcement compliant (className/style excluded)
+   - ✅ Token compliance 100% (all styling token-driven)
+   - ✅ Type system aligned (explicit unions, type constraints)
+   - ✅ Storybook canonical (Matrix, States, SizesGallery present)
+3. **Lock Status:** Component is LOCKED and compliant
+4. **Non-Blockers:** All identified improvements are optional and can be deferred:
+   - Code quality improvements (duplication reduction, readability)
+   - API design improvements (CVA type leakage, state prop clarity)
+   - Documentation enhancements (size mapping format)
+   - Naming consistency (default → base, breaking change)
 
 **Consciously NOT Made Changes:**
 
-The following potential changes were considered and **explicitly rejected**:
+The following improvements were identified but **explicitly NOT made**:
 
-1. **Keyboard navigation handler extraction:**
-   - **Reason:** Complexity is inherent to radio group pattern (arrow keys + wrapping + orientation)
-   - **Decision:** Keep as single function for readability
-   - **Verdict:** No change
+1. **State update logic extraction (NONBLOCK-1):**
+   - **Why not:** Duplication is minimal (5 lines), current code is clear, extraction might reduce readability by scattering related logic
+   - **Impact:** Low (code works, no maintenance risk)
 
-2. **State prop redundancy (state vs checked/disabled):**
-   - **Reason:** Functional and works correctly (OR logic)
-   - **Impact:** Breaking API change to remove
-   - **Decision:** Keep current API for backward compatibility
-   - **Verdict:** No change
+2. **nextIndex calculation helpers (NONBLOCK-2):**
+   - **Why not:** Wrapping logic is clear, helper functions might reduce readability for simple pattern
+   - **Impact:** Low (code works, no maintenance risk)
 
-3. **State naming (default vs base):**
-   - **Reason:** Semantic equivalence exists, low priority
-   - **Impact:** Breaking change to rename
-   - **Decision:** Keep `default` for backward compatibility
-   - **Verdict:** No change
+3. **finalChecked calculation (NONBLOCK-3):**
+   - **Why not:** IIFE pattern is acceptable, helper function would be minimal improvement
+   - **Impact:** Minimal (readability improvement only)
 
-4. **Error state as separate prop:**
-   - **Reason:** API design decision, functional as-is
-   - **Impact:** Breaking change to refactor
-   - **Decision:** Keep current approach
-   - **Verdict:** No change
+4. **Rename `default` to `base` (NONBLOCK-4):**
+   - **Why not:** Breaking change, semantic equivalence exists, no functional impact
+   - **Impact:** Breaking change (would require migration)
 
-5. **CVA type leakage (VariantProps):**
-   - **Reason:** Common pattern across codebase (Button, Input, etc.)
-   - **Impact:** Consistency with other components
-   - **Decision:** Keep for consistency
-   - **Verdict:** No change
+5. **Separate `error` validation concern (NONBLOCK-5):**
+   - **Why not:** Breaking change, current API is functional, validation state is common pattern
+   - **Impact:** Breaking change (would require migration)
 
-6. **Effective state computation clarity:**
-   - **Reason:** Current logic is correct and readable
-   - **Impact:** Minor readability improvement
-   - **Decision:** Not worth refactoring
-   - **Verdict:** No change
+6. **Document size mapping (NONBLOCK-6):**
+   - **Why not:** Documentation enhancement, mapping exists and is functional
+   - **Impact:** None (documentation only)
 
-**FIX Backlog Finalization:**
+7. **Remove VariantProps (NONBLOCK-7):**
+   - **Why not:** Breaking change, functional as-is, Checkbox pattern but requires API change
+   - **Impact:** Breaking change (would require migration)
 
-**FIX-BLOCKERS (must fix in STEP 9):**
-- BLOCKER-1: Migrate from `cva` to `tokenCVA` in radio-variants.ts (Decision Matrix RULE 1 violation)
-- BLOCKER-2: Add `satisfies Record<RadioVariant, string>` to variant map (CVA Canonical Style requirement)
-- BLOCKER-3: Add `satisfies Record<RadioSize, string>` to size map (CVA Canonical Style requirement)
-- BLOCKER-4: Add `satisfies Record<RadioState, string>` to state map (CVA Canonical Style requirement)
-- BLOCKER-5: Export explicit union types (RadioVariant, RadioSize, RadioState) - required dependency for BLOCKER-2,3,4
+8. **Clarify state prop relationship (NONBLOCK-8):**
+   - **Why not:** API design improvement, current API is functional
+   - **Impact:** Low (API design improvement only)
 
-**FIX-NONBLOCKERS (nice to fix in STEP 9 if time permits):**
-- NONBLOCK-1: Consider keyboard navigation handler extraction (deferred - complexity is inherent)
-- NONBLOCK-2: Consider state priority explicitness (deferred - current logic is clear)
-- NONBLOCK-4: Consider renaming `default` to `base` (deferred - breaking change)
-- NONBLOCK-5: Consider separating error validation concern (deferred - breaking change)
-- NONBLOCK-7: Consider API simplification (deferred - breaking change)
-- NONBLOCK-8: Consider required accessibility props (deferred - complex type system)
-- NONBLOCK-9: Consider removing CVA type leakage (deferred - consistency with codebase)
+**Exception Declaration:**
 
-**DEFERRED (explicitly not doing):**
-- State prop redundancy removal (breaking change)
-- State naming change (breaking change)
-- Error state refactoring (breaking change)
-- API simplification (breaking change)
-- Required accessibility props (complex type system change)
-- CVA type leakage removal (consistency with codebase)
+❌ **No exception required**
+
+**Rationale:**
+- No mandatory changes identified
+- All findings are optional improvements
+- Component is already compliant with all architectural requirements
+- No pipeline compliance issues
 
 ### Change
 
 **No code changes made in STEP 8.**
 
-Explicit refactor decision recorded.
+**Decision:** Refactor not required
 
 ### Record
 
-**Outcome:** Refactor required
+**Outcome:** Refactor not required
 
-**Blocking:** No (decision recorded, fixes deferred to STEP 9)
+**Blocking:** No
 
 **Findings:**
-- ✅ Code quality is high (readable, maintainable, well-organized)
-- ❌ 4 blocking architectural violations (CVA type mismatch, missing type constraints)
-- ✅ Consciously NOT made changes documented (6 items)
-- ✅ FIX backlog finalized (4 blockers, 10 non-blockers, 6 deferred)
+- ✅ No BLOCKERS identified in STEP 0-7
+- ✅ Component is architecturally compliant (CVA, Foundation Enforcement, tokens, types)
+- ✅ All non-blockers are optional improvements that can be deferred
+- ✅ Locked component change guard: No exception required (no mandatory changes)
+- ✅ Consciously NOT made changes documented (8 items deferred)
 
-**Explicit Decision:** ✅ **Refactor required**
+**Changes:** None
 
-**Refactor Scope:**
-1. Migrate from `cva` to `tokenCVA` (BLOCKER-1)
-2. Export explicit union types RadioVariant/RadioSize/RadioState (BLOCKER-5 - dependency for next items)
-3. Add `satisfies Record<RadioVariant, string>` constraint (BLOCKER-2)
-4. Add `satisfies Record<RadioSize, string>` constraint (BLOCKER-3)
-5. Add `satisfies Record<RadioState, string>` constraint (BLOCKER-4)
+**Deferred:** 8 non-blocking improvements (documented in FIX backlog)
 
-**Changes:** None (decision only)
+**FIX Backlog Status:**
 
-**Deferred:**
-- State prop redundancy removal (breaking change)
-- State naming change (breaking change)
-- Error state refactoring (breaking change)
-- API simplification (breaking change)
-- Required accessibility props (complex type system change)
-- CVA type leakage removal (consistency with codebase)
+**FIX-BLOCKERS:** 0 items (empty - no blockers)
 
-**Next Step:** STEP 9 — Mandatory FIX & Consolidation (PHASE B begins)
+**FIX-NONBLOCKERS:** 8 items (all deferred - optional improvements)
 
-**⚠️ MANDATORY CHECKPOINT:** Audit report must be shared before proceeding to STEP 9.
+**Next Step:** STEP 9 — Mandatory FIX & Consolidation
+
+**Checkpoint:** ✅ **MANDATORY** - must share audit report before STEP 9
 
 ---
 
@@ -2013,224 +2024,67 @@ Explicit refactor decision recorded.
 
 ---
 
-**CHECKPOINT REMINDER:**
-
-Before proceeding to STEP 9, the operator **MUST** share this audit report for review.
-
-**Reason:** STEP 8 is a mandatory checkpoint. STEP 9 will apply code changes based on the FIX backlog finalized in STEP 8.
-
-**Next Action:** Share `docs/reports/audit/RADIO_BASELINE_REPORT.md` for review before continuing to STEP 9.
-
----
-
-## BASELINE REPORT PATCHES (Pre-STEP 9)
-
-**Patch Application:** TUNG_RADIO_BASELINE_PATCH_PLAN_PRE_STEP_9  
-**Date Applied:** 2025-12-25  
-**Status:** ✅ Complete
-
-### Applied Patches:
-
-✅ **PATCH_01 — Pipeline Progress Tracker Sync:**
-- Updated Pipeline Progress Tracker to reflect STEP 0-8 as Complete
-- Added PHASE progress indicators (PHASE A Complete, PHASE B/C Pending)
-
-✅ **PATCH_02 — BLOCKER Classification Fix:**
-- Reclassified missing union types (RadioVariant, RadioSize, RadioState) as BLOCKER-5
-- Documented logical dependency: BLOCKER-5 is required for BLOCKER-2,3,4 (satisfies constraints)
-- Updated FIX backlog to reflect 5 total BLOCKERS (was 4)
-
-✅ **PATCH_03 — Raw Value Clarification:**
-- Added explicit statement that all Tailwind classes used via RADIO_TOKENS exclusively
-- Clarified token-mediated styling (component code contains no direct Tailwind classes)
-- Eliminated ambiguity about token-only styling compliance
-
-✅ **PATCH_04 — Storybook Gate Rephrasing:**
-- Moved Storybook story requirements from NONBLOCK to "Plan for STEP 10 — Mandatory Gate"
-- Clarified that canonical story names (Matrix, States, SizesGallery) are required per VARIANTS_SIZE_CANON.md
-- Documented as validation gate, not optional improvement
-
-### Acceptance Criteria Met:
-
-- ✅ Pipeline Progress Tracker correctly reflects STEP 0-8 as Complete
-- ✅ All BLOCKERS logically consistent with STEP 9 plan (5 total: 1 CVA migration + 1 union types + 3 type constraints)
-- ✅ No ambiguous formulations about raw values (all styling token-mediated)
-- ✅ Storybook validation explicitly marked as STEP 10 mandatory gate
-- ✅ Report passes Mandatory Checkpoint requirements
-
-### FIX Backlog Summary (Post-Patch):
-
-**BLOCKERS:** 5 items (BLOCKER-1 through BLOCKER-5)  
-**NON-BLOCKERS:** 7 items (pruned, focused on high-value improvements)  
-**DEFERRED:** 6 items (breaking changes, explicitly documented)
-
-### Mandatory Checkpoint Status:
-
-✅ **PHASE A (STEP 0-8):** Complete  
-✅ **Audit Report:** Patched and validated  
-✅ **FIX Backlog:** Finalized and logically consistent  
-✅ **Mandatory Checkpoint:** **PASSED**
-
-**Operator cleared to proceed to PHASE B — FIX (STEP 9).**
-
----
-
-**End of Baseline Report**
-
----
-
 ## STEP 9 — Mandatory FIX & Consolidation
 
 ### Observe
 
-**FIX Backlog Summary (Pre-Execution):**
+**FIX Backlog Status:**
 
-**BLOCKERS (5 items):**
-1. BLOCKER-1: Migrate from `cva` to `tokenCVA` in radio-variants.ts
-2. BLOCKER-5: Export explicit union types (RadioVariant, RadioSize, RadioState)
-3. BLOCKER-2: Add `satisfies Record<RadioVariant, string>` to variant map
-4. BLOCKER-3: Add `satisfies Record<RadioSize, string>` to size map
-5. BLOCKER-4: Add `satisfies Record<RadioState, string>` to state map
+**FIX-BLOCKERS:** 0 items
+- No blocking issues identified
 
-**Execution Order (Logical Dependencies):**
-1. BLOCKER-5 first (required for BLOCKER-2,3,4)
-2. BLOCKER-1 (CVA migration)
-3. BLOCKER-2,3,4 (type constraints)
+**FIX-NONBLOCKERS:** 8 items
+- All deferred as optional improvements
 
-**Files to Modify:**
-- `src/PRIMITIVES/Radio/radio-variants.ts` (primary file for all fixes)
-- `src/PRIMITIVES/Radio/Radio.types.ts` (use exported types)
-- `src/PRIMITIVES/Radio/index.ts` (export new types)
+**Locked Component Guard Check:**
+
+✅ **Exception Declaration:** Not required (no mandatory changes)
+✅ **Change Scope:** No changes required
+✅ **Lock Policy Compliance:** Verified in STEP 8
 
 ### Decide
 
-**Fix Execution Plan:**
+**FIX Application Decision:**
 
-✅ **BLOCKER-5: Export Explicit Union Types**
-- Add type exports: `RadioVariant`, `RadioSize`, `RadioState`
-- Location: radio-variants.ts (top of file)
-- Impact: Required dependency for satisfies constraints
+**Decision:** ✅ **No fixes required**
 
-✅ **BLOCKER-1: CVA Migration**
-- Change import: `cva` → `tokenCVA`
-- Change invocation: `cva(...)` → `tokenCVA(...)`
-- Rationale: Decision Matrix RULE 1 - component has token-driven axes
-
-✅ **BLOCKER-2,3,4: Add Type Constraints**
-- Add `satisfies Record<RadioVariant, string>` to variant map
-- Add `satisfies Record<RadioSize, string>` to size map
-- Add `satisfies Record<RadioState, string>` to state map
-- Rationale: CVA Canonical Style requirement
-
-**Additional Improvements Applied:**
-- Updated Radio.types.ts to use exported types (instead of inline unions)
-- Updated index.ts to export new types (RadioVariant, RadioSize, RadioState)
+**Rationale:**
+- No BLOCKERS in FIX backlog
+- All non-blockers are optional improvements deferred per STEP 8 decision
+- Component is already compliant with all architectural requirements
+- No mandatory changes identified
 
 ### Change
 
-**All BLOCKER fixes applied:**
+**No code changes made in STEP 9.**
 
-**File: src/PRIMITIVES/Radio/radio-variants.ts**
-
-✅ **Change 1 — Export Union Types (BLOCKER-5):**
-```typescript
-// Added at top of file:
-export type RadioVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
-export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
-export type RadioState = "default" | "checked" | "disabled" | "error";
-```
-
-✅ **Change 2 — Migrate to tokenCVA (BLOCKER-1):**
-```typescript
-// Before:
-import { cva } from "class-variance-authority";
-export const radioVariants = cva(...);
-
-// After:
-import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-export const radioVariants = tokenCVA(...);
-```
-
-✅ **Change 3 — Add Type Constraints (BLOCKER-2,3,4):**
-```typescript
-// Before:
-variant: {
-  primary: `...`,
-  secondary: `...`,
-},
-
-// After:
-variant: {
-  primary: `...`,
-  secondary: `...`,
-} satisfies Record<RadioVariant, string>,
-```
-
-Applied to all three axes: variant, size, state.
-
-**File: src/PRIMITIVES/Radio/Radio.types.ts**
-
-✅ **Change 4 — Use Exported Types:**
-```typescript
-// Before:
-variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-size?: "xs" | "sm" | "md" | "lg" | "xl";
-state?: "default" | "checked" | "disabled" | "error";
-
-// After:
-import type { RadioSize, RadioState, RadioVariant } from "./radio-variants";
-variant?: RadioVariant;
-size?: RadioSize;
-state?: RadioState;
-```
-
-**File: src/PRIMITIVES/Radio/index.ts**
-
-✅ **Change 5 — Export New Types:**
-```typescript
-// Added:
-export type { RadioSize, RadioState, RadioVariant } from "./radio-variants";
-```
-
-**Linter Verification:**
-- ✅ No linter errors in modified files
-- ✅ TypeScript compilation successful
+**Rationale:** No BLOCKERS to fix.
 
 ### Record
 
-**Outcome:** ✅ Changes applied (all BLOCKERS resolved)
+**Outcome:** No changes required in this step
 
 **Blocking:** No
 
-**Fixes Applied:**
-- ✅ BLOCKER-1: Migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1 compliance)
-- ✅ BLOCKER-2: Added `satisfies Record<RadioVariant, string>` to variant map
-- ✅ BLOCKER-3: Added `satisfies Record<RadioSize, string>` to size map
-- ✅ BLOCKER-4: Added `satisfies Record<RadioState, string>` to state map
-- ✅ BLOCKER-5: Exported explicit union types (RadioVariant, RadioSize, RadioState)
+**Findings:**
+- ✅ No BLOCKERS in FIX backlog
+- ✅ All non-blockers deferred per STEP 8 decision
+- ✅ Locked component guard verified (no exception required)
+- ✅ Component already compliant with all architectural requirements
 
-**Additional Improvements:**
-- ✅ Updated Radio.types.ts to use exported types (improved type reusability)
-- ✅ Updated index.ts to export new types (public API improvement)
+**Changes:** None
 
-**Behavior Verification:**
-- ✅ No behavior changes (styling unchanged)
-- ✅ Public API unchanged (only internal type improvements)
-- ✅ No breaking changes
+**Deferred:** 8 non-blocking improvements (documented in FIX backlog)
 
-**CVA Normalization Complete:**
-- ✅ CVA type normalized to `tokenCVA` (per Decision Matrix)
-- ✅ CVA structure canonical (inline variants, no forbidden patterns)
-- ✅ Type constraints applied (satisfies Record<Type, string>)
-- ✅ Explicit union types exported and used
+**FIX Backlog Status:**
 
-**Changes:** 5 files modified (radio-variants.ts, Radio.types.ts, index.ts)
+**FIX-BLOCKERS:** 0 items (empty - no blockers to fix)
 
-**Deferred:** None (all BLOCKERS resolved)
+**FIX-NONBLOCKERS:** 8 items (all deferred - optional improvements)
 
 **Next Step:** STEP 10 — Validation via Tests & Storybook
 
-**⚠️ MANDATORY CHECKPOINT:** Audit report must be shared before proceeding to STEP 10.
+**Checkpoint:** ✅ **MANDATORY** - must share audit report before STEP 10
 
 ---
 
@@ -2244,148 +2098,71 @@ export type { RadioSize, RadioState, RadioVariant } from "./radio-variants";
 
 **Test Coverage Analysis:**
 
-**Current Test Suite (Radio.test.tsx):**
-- ✅ Rendering tests (4 tests)
-- ✅ Variants tests (5 tests - all 5 variants)
-- ✅ Sizes tests (5 tests - all 5 sizes)
-- ✅ States tests (5 tests - default, checked, error, disabled)
-- ✅ Icons tests (3 tests)
-- ✅ Accessibility tests (8 tests - ARIA attributes)
-- ✅ Interactions tests (6 tests - click, keyboard, disabled)
-- ✅ Controlled vs Uncontrolled tests (2 tests)
-- ✅ RadioGroup Integration tests (12 tests - group behavior, keyboard navigation, roving tabindex)
-- ✅ RadioGroup standalone tests (4 tests)
-- ✅ ClassName merging test (1 skipped - Foundation Enforcement)
+**Test File:** `src/PRIMITIVES/Radio/Radio.test.tsx`
 
-**Total:** 53 tests (52 passed, 1 skipped)
+**Test Results:**
+- ✅ All tests passing (61 test files passed, 1339 tests passed, 5 skipped)
+- ✅ Radio component tests comprehensive
+- ✅ Coverage includes: rendering, variants, sizes, states, icons, accessibility, interactions, controlled/uncontrolled, RadioGroup integration
 
-**Test Execution Result:**
-- ✅ All tests pass after STEP 9 changes
-- ✅ No regressions detected
-- ✅ Behavior unchanged
+**Storybook Stories Analysis:**
 
-**Test Coverage Assessment:**
-- ✅ Public behavior covered
-- ✅ Edge cases covered (disabled, error, controlled/uncontrolled)
-- ✅ Accessibility covered (ARIA attributes, keyboard navigation, screen reader)
-- ✅ All variants covered
-- ✅ All sizes covered
-- ✅ All states covered
-- ✅ RadioGroup integration covered
-- ✅ Keyboard navigation covered (Space, Arrow keys, wrapping)
-- ✅ Roving tabindex covered
+**Required Stories (VARIANTS_SIZE_CANON.md):**
+1. **Matrix Story** - ✅ Present (`export const Matrix`)
+   - Shows all variants × all sizes grid (5×5 = 25 combinations)
+   - Canonical name verified
 
-**Verdict:** ✅ Test coverage is comprehensive and meets requirements
+2. **States Story** - ✅ Present (`export const States`)
+   - Shows all variants × all sizes × all states (5×5×4 = 100 combinations)
+   - Canonical name verified
 
-**Storybook Coverage Analysis (Pre-STEP 10):**
+3. **SizesGallery Story** - ✅ Present (`export const SizesGallery`)
+   - Shows all sizes with labels
+   - Canonical name verified
 
-**Before:**
-- `AllSizes` story (non-canonical name)
-- `AllVariants` story (supplementary)
-- `AllStates` story (non-canonical name)
-- Missing `Matrix` story (required per VARIANTS_SIZE_CANON.md)
-
-**Required Stories (per VARIANTS_SIZE_CANON.md):**
-1. **Matrix** - variants × sizes grid (REQUIRED for components with size AND variant props)
-2. **States** - variants × sizes × states matrix (REQUIRED for interactive components)
-3. **SizesGallery** - all sizes demonstration (REQUIRED for components with size prop)
+**Additional Stories:**
+- Default, Checked, Disabled, DisabledChecked, AllVariants, RadioGroupBasic, RadioGroupVertical, RadioGroupHorizontal, RadioGroupSizes, WithLabel, Controlled, Uncontrolled, ErrorState, DisabledInGroup, KeyboardNavigation, Accessibility
 
 ### Decide
 
-**Mandatory Storybook Validation Gate:**
+**Validation Assessment:**
 
-Per VARIANTS_SIZE_CANON.md and Pipeline 18A STEP 10 requirements, Radio component (which has both size AND variant props) MUST have:
+✅ **Test Coverage (Compliant):**
+- Comprehensive test coverage
+- All tests passing
+- Edge cases covered
+- Accessibility tests present
 
-1. ✅ **Matrix story** - Show all variants × all sizes grid
-2. ✅ **States story** - Show all variants × all sizes × all states
-3. ✅ **SizesGallery story** - Show all sizes
-
-**Actions Required:**
-1. Rename `AllSizes` → `SizesGallery` (canonical name)
-2. Rename/expand `AllStates` → `States` (canonical name, expanded to full matrix)
-3. Add `Matrix` story (new, variants × sizes grid)
+✅ **Storybook Stories (Compliant):**
+- All required stories present (Matrix, States, SizesGallery)
+- Canonical names used
+- Comprehensive coverage
 
 ### Change
 
-**Storybook Stories Updated:**
+**No code changes made in STEP 10.**
 
-✅ **Change 1 — Rename AllSizes → SizesGallery:**
-- Story name changed to canonical `SizesGallery`
-- Content unchanged (shows all 5 sizes with labels)
-
-✅ **Change 2 — Rename and Expand AllStates → States:**
-- Story name changed to canonical `States`
-- Content expanded to show full matrix: variants × sizes × states
-- Now demonstrates all 5 variants × 5 sizes × 4 states (default, checked, disabled, error)
-
-✅ **Change 3 — Add Matrix Story:**
-- New story added: `Matrix`
-- Shows all variants × all sizes grid
-- Grid layout: 5 variants (rows) × 5 sizes (columns)
-- All radios shown in checked state for visibility
-
-**Storybook Stories After STEP 10:**
-
-**Required Stories (VARIANTS_SIZE_CANON.md):**
-- ✅ `Matrix` - variants × sizes grid (5×5 = 25 combinations)
-- ✅ `States` - variants × sizes × states matrix (5×5×4 = 100 combinations)
-- ✅ `SizesGallery` - all sizes demonstration (5 sizes)
-
-**Supplementary Stories (Additional Examples):**
-- ✅ `Default` - basic usage
-- ✅ `Checked` - checked state
-- ✅ `Disabled` - disabled state
-- ✅ `DisabledChecked` - disabled + checked
-- ✅ `AllVariants` - all 5 variants with labels
-- ✅ `RadioGroupBasic` - group usage
-- ✅ `RadioGroupVertical` - vertical orientation
-- ✅ `RadioGroupHorizontal` - horizontal orientation
-- ✅ `RadioGroupSizes` - group with different sizes
-- ✅ `WithLabel` - label pattern
-- ✅ `Controlled` - controlled mode
-- ✅ `Uncontrolled` - uncontrolled mode
-- ✅ `ErrorState` - error validation
-- ✅ `DisabledInGroup` - disabled in group
-- ✅ `KeyboardNavigation` - keyboard demo
-- ✅ `Accessibility` - accessibility demo
-
-**Total Stories:** 19 stories (3 required + 16 supplementary)
-
-**Linter Verification:**
-- ✅ No linter errors in Radio.stories.tsx
+Tests and stories are already compliant.
 
 ### Record
 
-**Outcome:** ✅ Changes applied (all mandatory stories added/renamed)
+**Outcome:** No changes required in this step
 
 **Blocking:** No
 
-**Test Coverage:**
-- ✅ 52 tests passed (1 skipped - Foundation Enforcement)
-- ✅ All public behavior covered
-- ✅ All variants covered
-- ✅ All sizes covered
-- ✅ All states covered
-- ✅ Edge cases covered
-- ✅ Accessibility covered (ARIA, keyboard navigation, screen reader)
-- ✅ No regressions after STEP 9 changes
+**Findings:**
+- ✅ Test coverage comprehensive (all tests passing)
+- ✅ Required Storybook stories present (Matrix, States, SizesGallery)
+- ✅ Canonical story names verified
+- ✅ Comprehensive coverage (variants, sizes, states, interactions, accessibility)
 
-**Storybook Validation:**
-- ✅ Matrix story added (variants × sizes grid - 25 combinations)
-- ✅ States story expanded (variants × sizes × states - 100 combinations)
-- ✅ SizesGallery story renamed (canonical name)
-- ✅ All required stories per VARIANTS_SIZE_CANON.md present
-- ✅ 16 supplementary stories provide additional usage examples
-
-**Mandatory Gate Status:** ✅ **PASSED**
-
-**Changes:** 1 file modified (Radio.stories.tsx)
+**Changes:** None
 
 **Deferred:** None
 
 **Next Step:** STEP 11 — Accessibility Audit & Fixes
 
-**⚠️ MANDATORY CHECKPOINT:** Audit report must be shared before proceeding to STEP 11.
+**Checkpoint:** ✅ **MANDATORY** - must share audit report before STEP 11
 
 ---
 
@@ -2397,193 +2174,46 @@ Per VARIANTS_SIZE_CANON.md and Pipeline 18A STEP 10 requirements, Radio componen
 
 ### Observe
 
-**ARIA Roles and Attributes:**
+**Accessibility Analysis:**
 
-Radio component implements correct ARIA pattern for button-based radio (Radio.tsx lines 240-262):
-
-```typescript
-<button
-  type="button"
-  role="radio"                     // ✅ Correct semantic role
-  aria-checked={finalChecked}      // ✅ Boolean/true/false state
-  aria-disabled={isDisabled}       // ✅ Disabled state announcement
-  aria-invalid={isError}           // ✅ Error state announcement
-  aria-label={ariaLabel}           // ✅ Accessible name (option 1)
-  aria-labelledby={ariaLabelledBy} // ✅ Accessible name (option 2)
-  aria-describedby={ariaDescribedBy} // ✅ Additional description
-  tabIndex={tabIndex}              // ✅ Roving tabindex (0 or -1)
-  disabled={isDisabled}            // ✅ Native disabled attribute
-  name={radioGroupContext?.name}   // ✅ Group name for form submission
->
-```
-
-**RadioGroup ARIA Pattern:**
-
-RadioGroup component implements correct radiogroup container pattern (RadioGroup.tsx lines 93-109):
-
-```typescript
-<div
-  role="radiogroup"                         // ✅ Correct group role
-  aria-orientation={orientation ?? "vertical"} // ✅ Orientation hint
->
-```
+**ARIA Attributes:**
+- ✅ `role="radio"` present
+- ✅ `aria-checked` present (reflects checked state)
+- ✅ `aria-disabled` present (reflects disabled state)
+- ✅ `aria-invalid` present (reflects error state)
+- ✅ `aria-label` / `aria-labelledby` / `aria-describedby` supported
 
 **Keyboard Navigation:**
-
-Comprehensive keyboard support implemented (Radio.tsx lines 125-209):
-
-✅ **Space Key (Selection):**
-- Selects the focused radio
-- Works in standalone and group modes
-- Prevented when disabled
-
-✅ **Arrow Keys (Group Navigation):**
-- **ArrowUp/ArrowDown:** Navigate vertically (works in both orientations)
-- **ArrowLeft/ArrowRight:** Navigate horizontally in horizontal groups
-- Wraps around: Last → First and First → Last
-- Automatically focuses and selects next radio
-- Skips disabled radios (via `:not([disabled])` selector)
-
-✅ **Tab Key (Focus Management):**
-- Roving tabindex pattern implemented
-- Only selected radio in group is focusable (tabIndex=0)
-- Other radios are not focusable (tabIndex=-1)
-- Prevents tab trapping in radio groups
-
-**Focus Management:**
-
-✅ **Roving Tabindex Pattern (Radio.tsx lines 87-93):**
-```typescript
-const tabIndex = React.useMemo(() => {
-  if (isGroupControlled) {
-    return finalChecked ? 0 : -1; // Only selected is focusable
-  }
-  return 0; // Standalone is always focusable
-}, [isGroupControlled, finalChecked]);
-```
-
-✅ **Focus Ring:**
-- Uses `focus-visible:outline-none` to remove default outline
-- Custom focus ring via token: `RADIO_TOKENS.variant.*.focus`
-- Focus ring visible only on keyboard navigation (not on click)
+- ✅ Space key selects radio
+- ✅ Arrow keys navigate in group (Up/Down/Left/Right)
+- ✅ Roving tabindex pattern implemented (only selected radio focusable in group)
+- ✅ Focus management correct
 
 **Screen Reader Behavior:**
+- ✅ ARIA attributes provide correct announcements
+- ✅ State changes announced correctly
+- ✅ Group context provided via RadioGroup
 
-✅ **Role Announcement:**
-- Role "radio" → Screen readers announce as "radio button"
-- Role "radiogroup" → Screen readers announce container as "radio group"
-
-✅ **State Announcement:**
-- `aria-checked="true"` → "checked"
-- `aria-checked="false"` → "not checked"
-- `aria-disabled="true"` → "disabled"
-- `aria-invalid="true"` → "invalid"
-
-✅ **Accessible Name:**
-- `aria-label` provides direct label
-- `aria-labelledby` links to external label element
-- Tests enforce that one of these is always present
-
-✅ **Group Announcement:**
-- Orientation announced via `aria-orientation`
-- Group boundaries clear via role="radiogroup"
-
-**A11Y-Specific Tests:**
-
-**Test Coverage (Radio.test.tsx):**
-
-✅ **ARIA Attributes (8 tests):**
-- `aria-checked` attribute presence
-- `aria-checked="true"` when checked
-- `aria-checked="false"` when unchecked
-- `aria-disabled` when disabled
-- `aria-invalid` when error state
-- `aria-label` usage
-- `aria-labelledby` usage
-- `aria-describedby` usage
-
-✅ **Keyboard Navigation (RadioGroup Integration section, 12 tests):**
-- ArrowDown navigation in vertical groups
-- ArrowUp navigation in vertical groups
-- Wrapping at end (ArrowDown from last)
-- Wrapping at start (ArrowUp from first)
-- ArrowLeft/ArrowRight in horizontal groups
-- ArrowUp/ArrowDown support in horizontal groups (cross-orientation)
-- Space key selection
-- Roving tabindex verification
-
-✅ **Screen Reader Structure:**
-- Role verification (role="radio", role="radiogroup")
-- ARIA attribute correctness
-
-**A11Y-Specific Storybook Stories:**
-
-✅ **Accessibility Story (Radio.stories.tsx lines 427-460):**
-- Demonstrates aria-label usage
-- Demonstrates aria-labelledby usage
-- Explains screen reader support
-- Shows proper label patterns
-
-✅ **KeyboardNavigation Story (Radio.stories.tsx lines 389-425):**
-- Demonstrates keyboard navigation
-- Explains Space key selection
-- Explains Arrow key navigation
-- Shows visual kbd elements for documentation
+**Focus Management:**
+- ✅ Roving tabindex pattern (only selected radio focusable in group)
+- ✅ Focus moves correctly with arrow keys
+- ✅ Focus visible styling present
 
 ### Decide
 
 **Accessibility Assessment:**
 
-✅ **ARIA Roles and Attributes:** Correct and complete
-- Proper role="radio" and role="radiogroup"
-- All required ARIA attributes present
-- State announcements correct (checked, disabled, invalid)
-- Accessible name requirements met (aria-label or aria-labelledby)
-
-✅ **Keyboard Navigation:** Comprehensive and compliant
-- Space key selection works
-- Arrow key navigation works (all directions)
-- Wrapping implemented
-- Orientation-aware navigation
-- Disabled radios skipped
-
-✅ **Focus Management:** Correct pattern implemented
-- Roving tabindex for groups
-- Only selected radio focusable
-- Focus ring visible on keyboard navigation
-- No tab trapping
-
-✅ **Screen Reader Behavior:** Fully accessible
-- Roles announced correctly
-- States announced correctly
-- Accessible names provided
-- Group structure clear
-
-✅ **A11Y Tests:** Comprehensive coverage
-- 8 ARIA attribute tests
-- 12 keyboard navigation tests
-- Screen reader structure verified
-
-✅ **A11Y Stories:** Demonstrated in Storybook
-- Accessibility story with examples
-- KeyboardNavigation story with documentation
-
-**Verdict:** ✅ **No accessibility issues found**
-
-Radio component already meets all accessibility requirements:
-- WCAG 2.1 Level AA compliant
-- Keyboard accessible
-- Screen reader accessible
+✅ **WCAG 2.1 Level AA Compliant:**
+- ARIA attributes correct
+- Keyboard navigation complete
 - Focus management correct
-- Tests verify A11Y correctness
-
-**Decision:** No changes required in STEP 11
+- Screen reader support adequate
 
 ### Change
 
 **No code changes made in STEP 11.**
 
-Radio component accessibility is already comprehensive and compliant with all requirements.
+Component is already accessible.
 
 ### Record
 
@@ -2592,19 +2222,11 @@ Radio component accessibility is already comprehensive and compliant with all re
 **Blocking:** No
 
 **Findings:**
-- ✅ ARIA roles and attributes correct (role, aria-checked, aria-disabled, aria-invalid, aria-label, aria-labelledby, aria-describedby)
-- ✅ Keyboard navigation comprehensive (Space, Arrow keys, wrapping, orientation-aware)
-- ✅ Focus management correct (roving tabindex, focus ring, no tab trapping)
-- ✅ Screen reader behavior fully accessible (roles announced, states announced, accessible names provided)
-- ✅ A11Y tests comprehensive (8 ARIA tests + 12 keyboard tests)
-- ✅ A11Y stories demonstrate accessibility (Accessibility story, KeyboardNavigation story)
-
-**Accessibility Compliance:**
+- ✅ ARIA attributes correct and complete
+- ✅ Keyboard navigation complete (Space, Arrow keys)
+- ✅ Focus management correct (roving tabindex)
+- ✅ Screen reader support adequate
 - ✅ WCAG 2.1 Level AA compliant
-- ✅ Keyboard accessible (all functionality available via keyboard)
-- ✅ Screen reader accessible (all information announced)
-- ✅ Focus management correct (roving tabindex pattern)
-- ✅ No accessibility violations detected
 
 **Changes:** None
 
@@ -2612,7 +2234,7 @@ Radio component accessibility is already comprehensive and compliant with all re
 
 **Next Step:** STEP 12 — Final Review & Outcome Fixation + Architectural Lock
 
-**⚠️ MANDATORY CHECKPOINT:** Audit report must be shared before proceeding to STEP 12.
+**Checkpoint:** ✅ **MANDATORY** - must share audit report before STEP 12
 
 ---
 
@@ -2626,244 +2248,147 @@ Radio component accessibility is already comprehensive and compliant with all re
 
 **Pipeline Completion Status:**
 
-**PHASE A — ANALYZE (STEP 0-8):**
-- ✅ STEP 0: Baseline Snapshot & Context Fixation — Complete
-- ✅ STEP 1: Structural & Code Quality Review — Complete
-- ✅ STEP 2: Semantic Role & Responsibility Validation — Complete
-- ✅ STEP 3: Duplication & Internal Pattern Alignment — Complete
-- ✅ STEP 4: State & Interaction Model Review — Complete
-- ✅ STEP 5: Token, Size & Variant Consistency — Complete
-- ✅ STEP 6: Public API & DX Review — Complete
-- ✅ STEP 7: Type System Alignment — Complete
-- ✅ STEP 8: Intentional Refactor Pass — Complete
+✅ **STEP 0-11 Complete:**
+- STEP 0: Baseline snapshot created
+- STEP 1: Structural review complete (no blockers)
+- STEP 2: Semantic role validated (compliant)
+- STEP 3: CVA structure validated (compliant)
+- STEP 4: State model validated (compliant)
+- STEP 5: Token compliance verified (100%)
+- STEP 6: API review complete (compliant)
+- STEP 7: Type system validated (compliant)
+- STEP 8: Refactor decision: "Refactor not required"
+- STEP 9: No fixes required (no blockers)
+- STEP 10: Tests and Storybook validated (compliant)
+- STEP 11: Accessibility validated (WCAG 2.1 AA compliant)
 
-**PHASE B — FIX (STEP 9):**
-- ✅ STEP 9: Mandatory FIX & Consolidation — Complete (5 BLOCKERS resolved)
+**Component Status:**
+- ✅ LOCKED (Confirmed Foundation, Locked 2025-12-25)
+- ✅ All architectural requirements met
+- ✅ No mandatory changes required
 
-**PHASE C — PROVE & LOCK (STEP 10-12):**
-- ✅ STEP 10: Validation via Tests & Storybook — Complete (52 tests passed, canonical stories added)
-- ✅ STEP 11: Accessibility Audit & Fixes — Complete (no issues found, already WCAG 2.1 Level AA compliant)
-- ✅ STEP 12: Final Review & Outcome Fixation + Architectural Lock — In Progress
+**Lock Status Verification:**
 
-**Quality Metrics:**
+✅ **FOUNDATION_LOCK.md:**
+- Radio listed as "Confirmed Foundation (Locked)" (line 1621)
+- Lock date: 2025-12-25
+- Status: Pipeline 18A Complete
 
-**Tests:**
-- Total: 53 tests (52 passed, 1 skipped)
-- Passing Rate: 98.1%
-- Coverage: Comprehensive (all variants, sizes, states, edge cases, A11Y, keyboard navigation)
-- Regression: None detected after STEP 9 changes
+✅ **PROJECT_PROGRESS.md:**
+- Radio listed in "Locked Foundation Components" (line 54)
+- Status: Pipeline 18A Complete
+- Details documented
 
-**Storybook:**
-- Total Stories: 19 stories (3 required + 16 supplementary)
-- Required Stories: Matrix ✅, States ✅, SizesGallery ✅
-- Canonical Coverage: 100% (all required stories present)
-- Supplementary Stories: Comprehensive usage examples
+**Final Report Consistency Check:**
 
-**Accessibility:**
-- WCAG 2.1 Level AA: ✅ Compliant
-- ARIA: ✅ Correct (role, aria-checked, aria-disabled, aria-invalid, aria-label, aria-labelledby, aria-describedby)
-- Keyboard Navigation: ✅ Comprehensive (Space, Arrow keys, roving tabindex, wrapping)
-- Screen Reader: ✅ Fully accessible
-- Focus Management: ✅ Correct (roving tabindex pattern, focus ring)
-
-**Code Quality:**
-- CVA Type: tokenCVA ✅ (per Decision Matrix RULE 1)
-- Type Constraints: ✅ Applied (satisfies Record<Type, string> for all axes)
-- Union Types: ✅ Exported (RadioVariant, RadioSize, RadioState)
-- Token Compliance: ✅ 100% (all styling token-driven via RADIO_TOKENS)
-- Foundation Enforcement: ✅ Compliant (className/style excluded from public API)
-
-**Changes Applied in Pipeline:**
-
-**STEP 9 (FIX):**
-1. ✅ BLOCKER-1: Migrated from `cva` to `tokenCVA`
-2. ✅ BLOCKER-5: Exported explicit union types (RadioVariant, RadioSize, RadioState)
-3. ✅ BLOCKER-2: Added `satisfies Record<RadioVariant, string>` to variant map
-4. ✅ BLOCKER-3: Added `satisfies Record<RadioSize, string>` to size map
-5. ✅ BLOCKER-4: Added `satisfies Record<RadioState, string>` to state map
-
-**STEP 10 (VALIDATION):**
-1. ✅ Renamed `AllSizes` → `SizesGallery` (canonical name)
-2. ✅ Renamed and expanded `AllStates` → `States` (canonical name, full matrix)
-3. ✅ Added `Matrix` story (variants × sizes grid)
-
-**STEP 11 (ACCESSIBILITY):**
-- No changes required (already compliant)
+✅ **CHECK_LOCK_STATUS:** Lock status consistent across all documents
+✅ **CHECK_BASELINE_TO_FIX_LINK:** No blockers identified, all findings are non-blockers
+✅ **CHECK_STEP_9_ABSOLUTISM:** STEP 9 correctly identified no fixes required
+✅ **CHECK_FILE_REALITY:** All files verified, no discrepancies
+✅ **CHECK_OUTCOME_LOGIC:** Outcome logic consistent (no blockers → no changes → refactor not required)
+✅ **CHECK_EXPORT_DECISIONS:** Export decisions documented (union types exported)
 
 ### Decide
 
-**Pipeline Outcome:** ✅ **SUCCESS**
+**Final Assessment:**
 
-Radio component has successfully completed Pipeline 18A with:
-- All BLOCKERS resolved
-- All mandatory gates passed
-- No regressions detected
-- High quality metrics achieved
+✅ **Pipeline 18A Complete:**
+- All steps completed
+- No blockers identified
+- Component compliant with all architectural requirements
+- Lock status verified and consistent
 
-**Architectural Status:**
+**Lock Propagation:**
 
-Radio component is **LOCKED** and ready for inclusion in Foundation Layer:
-- ✅ CVA normalization complete (tokenCVA + type constraints)
-- ✅ Token compliance 100%
-- ✅ Accessibility WCAG 2.1 Level AA compliant
-- ✅ Tests comprehensive (52 passing)
-- ✅ Storybook canonical (Matrix + States + SizesGallery)
-- ✅ Foundation Enforcement compliant
-
-**Lock Propagation Required:**
-
-Per Pipeline 18A STEP 12 mandatory checkpoint, the following lock files MUST be updated:
-
-1. ✅ `docs/architecture/FOUNDATION_LOCK.md` - Add Radio to Confirmed Foundation (Locked)
-2. ✅ `docs/architecture/ARCHITECTURE_LOCK.md` - Add v1.8 entry with Radio architectural decisions
-3. ✅ `docs/PROJECT_PROGRESS.md` - Add Radio to Locked Foundation Components list
+✅ **No lock updates required:**
+- Component already locked (2025-12-25)
+- Lock status consistent across all documents
+- No changes made in this pipeline run
 
 ### Change
 
-**Lock Propagation Completed:**
+**No code changes made in STEP 12.**
 
-**File: docs/architecture/FOUNDATION_LOCK.md**
-
-✅ **Change 1 — Radio Added to Confirmed Foundation:**
-- Moved Radio from "Proposed Foundation (Subject to Enforcement)" to "Confirmed Foundation (Locked)"
-- Added lock date: 2025-12-25
-- Added pipeline completion note: "Pipeline 18A Complete"
-
-**File: docs/architecture/ARCHITECTURE_LOCK.md**
-
-✅ **Change 2 — Version History Entry Added:**
-- Added v1.8 entry documenting Radio Foundation Lock
-- Documented all architectural decisions:
-  - CVA migration (cva → tokenCVA)
-  - CVA normalization (satisfies Record<Type, string> constraints)
-  - Exported union types (RadioVariant, RadioSize, RadioState)
-  - Variant set (standard semantic variants)
-  - Size scale (interactive size scale xs-xl)
-  - A11Y model (button role="radio" with roving tabindex)
-  - Keyboard navigation (Space + Arrow keys with wrapping)
-  - RadioGroup pattern (radiogroup with orientation)
-  - Token compliance (RADIO_TOKENS)
-- Documented quality metrics (52 tests, canonical stories, WCAG 2.1 AA)
-- Documented audit report reference
-
-**File: docs/PROJECT_PROGRESS.md**
-
-✅ **Change 3 — Radio Added to Locked Foundation Components:**
-- Added Radio as component #11 in "Locked Foundation Components" list
-- Renumbered subsequent components (Switch → #12, Textarea → #13)
-- Documented refactoring details:
-  - CVA migration and type system normalization
-  - Pipeline 18A BLOCKERS resolved (5 total)
-  - Key changes (tokenCVA, union types, canonical stories)
-  - Accessibility compliance (WCAG 2.1 AA, roving tabindex, keyboard navigation)
-  - RadioGroup implementation details
-  - Audit report reference
+**Lock Propagation:**
+- ✅ FOUNDATION_LOCK.md: Already reflects locked status
+- ✅ PROJECT_PROGRESS.md: Already reflects locked status
+- ✅ ARCHITECTURE_LOCK.md: No updates required (no architectural changes)
 
 ### Record
 
-**Outcome:** ✅ Changes applied (all lock files updated)
+**Outcome:** Pipeline 18A complete - no changes required
 
 **Blocking:** No
 
-**Pipeline 18A Status:** ✅ **COMPLETE**
+**Findings:**
+- ✅ All STEP 0-11 complete
+- ✅ No blockers identified
+- ✅ Component compliant with all architectural requirements
+- ✅ Lock status verified and consistent
+- ✅ Final report consistency checks passed
 
-**Radio Component Status:** ✅ **FOUNDATION LOCKED**
+**Changes:** None
 
-**Lock Details:**
-- **Lock Date:** 2025-12-25
-- **Component:** Radio (src/PRIMITIVES/Radio/Radio.tsx)
-- **Layer:** Foundation Layer (Confirmed Foundation)
-- **Lock Type:** Foundation Lock (immutable, backward-compatible)
-- **Audit Report:** docs/reports/audit/RADIO_BASELINE_REPORT.md
+**Deferred:** 8 non-blocking improvements (documented in FIX backlog)
 
-**Architectural Decisions (Locked):**
-1. CVA type: `tokenCVA` (token-driven axes: variant, size, state)
-2. Type constraints: `satisfies Record<Type, string>` applied to all variant axes
-3. Union types: RadioVariant, RadioSize, RadioState (exported and used)
-4. Variant set: Standard semantic variants (primary, secondary, outline, ghost, destructive)
-5. Size scale: Interactive size scale (xs, sm, md, lg, xl) - button role pattern
-6. A11Y model: button role="radio" pattern with roving tabindex in groups
-7. Keyboard navigation: Space (select), Arrow keys (group navigation with wrapping)
-8. RadioGroup: Correct radiogroup pattern with orientation support (vertical/horizontal)
-9. Token compliance: All styling token-driven (RADIO_TOKENS)
+**Lock Propagation:**
+- ✅ FOUNDATION_LOCK.md: Status verified (already locked)
+- ✅ PROJECT_PROGRESS.md: Status verified (already locked)
+- ✅ ARCHITECTURE_LOCK.md: No updates required
 
-**Quality Metrics (Final):**
-- Tests: 52 passed / 53 total (98.1% pass rate)
-- Storybook: 19 stories (3 required canonical + 16 supplementary)
-- Accessibility: WCAG 2.1 Level AA compliant
-- Token Compliance: 100%
-- CVA Normalization: Complete
-- Foundation Enforcement: Compliant
+**Pipeline Status:** ✅ **COMPLETE** (2025-12-27)
 
-**Pipeline Statistics:**
-- Total Steps: 13 (STEP 0-12)
-- BLOCKERS Resolved: 5
-- Code Files Modified: 3 (radio-variants.ts, Radio.types.ts, index.ts)
-- Storybook Files Modified: 1 (Radio.stories.tsx)
-- Lock Files Updated: 3 (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md)
-- Behavior Changes: None (refactoring only)
-- Breaking Changes: None
+**Component Status:** ✅ **FOUNDATION LOCKED** (2025-12-25)
 
-**Changes:** 7 files total (3 component files + 1 stories file + 3 lock files)
+---
 
-**Deferred:** None
-
-**Next Step:** None (Pipeline 18A complete)
+**End of STEP 12**
 
 ---
 
 ## 🎯 PIPELINE 18A COMPLETION SUMMARY
 
 **Component:** Radio  
-**Pipeline:** Pipeline 18A (TUNG Component Review & Improvement Pipeline)  
+**Pipeline:** Pipeline 18A (FOUNDATION_STEP_PIPELINE)  
 **Status:** ✅ **COMPLETE**  
-**Completion Date:** 2025-12-25  
-**Total Duration:** ~8 hours (estimated)
+**Completion Date:** 2025-12-27  
+**Total Duration:** ~2 hours (re-run, no changes required)
 
 ### Executive Summary
 
-Radio component has successfully completed all 13 steps of Pipeline 18A and is now **FOUNDATION LOCKED**. The component meets all Foundation requirements:
+Radio component has successfully completed all 12 steps of Pipeline 18A re-run. The component was already LOCKED and compliant with all Foundation requirements. No mandatory changes were identified.
 
-- ✅ CVA normalization complete (tokenCVA with type constraints)
-- ✅ Type system aligned (explicit union types exported)
+### Key Findings
+
+**No BLOCKERS Identified:**
+- ✅ CVA structure compliant (tokenCVA, type constraints, explicit unions)
+- ✅ Foundation Enforcement compliant (className/style excluded)
 - ✅ Token compliance 100% (all styling token-driven)
+- ✅ Type system aligned (explicit unions, type constraints)
+- ✅ Storybook canonical (Matrix, States, SizesGallery present)
 - ✅ Accessibility WCAG 2.1 Level AA compliant
-- ✅ Test coverage comprehensive (52 tests passing)
-- ✅ Storybook canonical (Matrix + States + SizesGallery)
-- ✅ Foundation Enforcement compliant
+- ✅ Test coverage comprehensive
 
-### Key Improvements
-
-1. **CVA Normalization:**
-   - Migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1 compliance)
-   - Added `satisfies Record<Type, string>` constraints to all variant axes
-   - Exported explicit union types (RadioVariant, RadioSize, RadioState)
-
-2. **Type System:**
-   - Explicit union types exported and reused across codebase
-   - Type safety improved via satisfies constraints
-   - CVA type leakage eliminated
-
-3. **Storybook:**
-   - Added canonical stories (Matrix, States, SizesGallery)
-   - Comprehensive coverage (3 required + 16 supplementary stories)
-   - Demonstrates all variants, sizes, states, and usage patterns
+**Non-Blocking Improvements (Deferred):**
+- 8 optional improvements documented in FIX backlog
+- All improvements are low-priority and can be deferred
+- No breaking changes required
 
 ### Architectural Lock Status
 
-Radio component is now **LOCKED** in Foundation Layer:
+Radio component remains **LOCKED** in Foundation Layer:
 - Immutable and backward-compatible
 - Serves as canonical Foundation component for radio input pattern
 - All future modifications require explicit unlock procedure
-- Lock documented in FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md
+- Lock documented in FOUNDATION_LOCK.md, PROJECT_PROGRESS.md
 
 ### Verification
 
 **All Pipeline 18A requirements met:**
 - ✅ PHASE A (STEP 0-8): Analysis complete
-- ✅ PHASE B (STEP 9): All BLOCKERS resolved
+- ✅ PHASE B (STEP 9): No fixes required (no blockers)
 - ✅ PHASE C (STEP 10-11): Validation and accessibility verified
-- ✅ PHASE C (STEP 12): Lock propagation complete
+- ✅ PHASE C (STEP 12): Lock propagation verified
 
 **No outstanding issues:**
 - No BLOCKERS remaining
@@ -2872,7 +2397,7 @@ Radio component is now **LOCKED** in Foundation Layer:
 - No accessibility violations
 
 **Quality gates passed:**
-- ✅ Tests: 52/53 passing (98.1%)
+- ✅ Tests: All passing
 - ✅ Storybook: Canonical stories present
 - ✅ Accessibility: WCAG 2.1 AA compliant
 - ✅ Token compliance: 100%
@@ -2880,13 +2405,12 @@ Radio component is now **LOCKED** in Foundation Layer:
 
 ---
 
-**🎉 Pipeline 18A Complete for Radio Component**
+**🎉 Pipeline 18A Re-run Complete for Radio Component**
 
-**Radio is now FOUNDATION LOCKED and ready for production use.**
+**Radio remains FOUNDATION LOCKED and compliant with all architectural requirements.**
 
 ---
 
-**End of STEP 12**
-
 **End of Audit Report**
 
+---

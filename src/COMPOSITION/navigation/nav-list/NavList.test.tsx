@@ -125,7 +125,7 @@ describe("NavList", () => {
         </NavList>,
       );
 
-      let list = screen.getByText("Item").closest("ol");
+      let list: HTMLElement | null = screen.getByText("Item").closest("ol");
       expect(list?.tagName).toBe("OL");
 
       rerender(

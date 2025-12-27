@@ -2,13 +2,19 @@ import * as React from "react";
 
 /**
  * CardBase Size Variant
+ * Maps to GlobalSize scale subset: sm | md
+ * - "sm" maps from legacy "compact"
+ * - "md" maps from legacy "default"
  */
-export type CardBaseSize = "default" | "compact";
+export type CardBaseSize = "sm" | "md";
 
 /**
  * CardBase Style Variant
+ * Maps to SurfaceVariant dictionary: default | elevated
+ * - "default" maps from legacy "default"
+ * - "elevated" maps from legacy "featured"
  */
-export type CardBaseVariant = "default" | "featured";
+export type CardBaseVariant = "default" | "elevated";
 
 /**
  * CardBase Root Component Props
@@ -16,7 +22,7 @@ export type CardBaseVariant = "default" | "featured";
 export interface CardBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Size variant - controls padding and gap
-   * @default "default"
+   * @default "md"
    */
   size?: CardBaseSize;
 
@@ -38,7 +44,7 @@ export interface CardBaseProps extends React.HTMLAttributes<HTMLDivElement> {
 export interface CardBaseImageWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Size variant - inherited from parent CardBase
-   * @default "default"
+   * @default "md"
    */
   size?: CardBaseSize;
 
@@ -54,7 +60,7 @@ export interface CardBaseImageWrapperProps extends React.HTMLAttributes<HTMLDivE
 export interface CardBaseContentWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Size variant - inherited from parent CardBase
-   * @default "default"
+   * @default "md"
    */
   size?: CardBaseSize;
 
@@ -70,7 +76,7 @@ export interface CardBaseContentWrapperProps extends React.HTMLAttributes<HTMLDi
 export interface CardBaseFooterWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Size variant - inherited from parent CardBase
-   * @default "default"
+   * @default "md"
    */
   size?: CardBaseSize;
 
