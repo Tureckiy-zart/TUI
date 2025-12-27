@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NavRoot } from "./NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
-  title: "Foundation Locked/Extension/Composition/Navigation/NavRoot",
+  title: "UI / Composition / Navigation / NavRoot",
   component: NavRoot,
   parameters: {
     layout: "padded",

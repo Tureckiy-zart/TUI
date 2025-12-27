@@ -18,7 +18,7 @@ import { OVERLAY_TOKENS } from "@/FOUNDATION/tokens/components/overlay";
  * Main drawer container with position, size, and transition support
  */
 export const drawerVariants = cva(
-  "fixed z-50 flex flex-col bg-background border border-border transform",
+  "fixed z-40 flex flex-col bg-background border border-border transform",
   {
     variants: {
       position: {

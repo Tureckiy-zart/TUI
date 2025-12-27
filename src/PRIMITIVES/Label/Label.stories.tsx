@@ -19,7 +19,7 @@ import { Label } from "./Label";
  */
 
 const meta: Meta<typeof Label> = {
-  title: "Foundation Locked/Label",
+  title: "UI / Primitives / Label",
   component: Label,
   parameters: {
     layout: "centered",

@@ -5,7 +5,7 @@ import { NavItem, NavList, NavSeparator, NavText } from "./Navigation";
 import { NavRoot } from "../NavRoot/NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
-  title: "Foundation Locked/Extension/Composition/Navigation/Navigation Primitives",
+  title: "UI / Composition / Navigation / Primitives",
   component: NavRoot,
   parameters: {
     layout: "padded",

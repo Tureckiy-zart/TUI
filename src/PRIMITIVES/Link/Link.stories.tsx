@@ -26,7 +26,7 @@ import { Link } from "./Link";
  */
 
 const meta: Meta<typeof Link> = {
-  title: "Foundation Locked/Link",
+  title: "UI / Primitives / Link",
   component: Link,
   parameters: {
     layout: "centered",

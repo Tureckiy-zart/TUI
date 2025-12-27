@@ -7,6 +7,7 @@
 "use client";
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Slider } from "@/COMPOSITION/controls/Slider";
 import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";
 import { Button } from "@/PRIMITIVES/Button";
 import { Checkbox } from "@/PRIMITIVES/Checkbox";
@@ -14,12 +15,11 @@ import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
 import { Link } from "@/PRIMITIVES/Link";
 import { Radio } from "@/PRIMITIVES/Radio";
-import { Slider } from "@/COMPOSITION/controls/Slider";
 import { Switch } from "@/PRIMITIVES/Switch";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "Foundation Locked/Composition/Motion/Interactivity States",
+  title: "UI / Composition / Motion / Interactivity States",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

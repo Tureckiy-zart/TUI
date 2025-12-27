@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Portal } from "./Portal";
 
 const meta: Meta<typeof Portal> = {
-  title: "Legacy Composition/Overlays/Portal",
+  title: "UI / Composition / Overlays / Portal",
   component: Portal,
   parameters: {
     layout: "centered",
@@ -38,7 +38,7 @@ export const Default: Story = {
         <Button onClick={() => setShow(!show)}>Toggle Portal Content</Button>
         {show && (
           <Portal>
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50">
               <div className="rounded-lg border bg-background p-lg shadow-lg">
                 <h2 className="mb-md text-lg font-semibold">Portal Content</h2>
                 <p className="mb-md text-sm text-muted-foreground">
@@ -102,7 +102,7 @@ export const SSR: Story = {
           safe for server-side rendering. On the server, it returns null.
         </p>
         <Portal>
-          <div className="fixed right-md top-md z-50 rounded-md bg-primary p-md text-primary-foreground">
+          <div className="fixed right-md top-md z-40 rounded-md bg-primary p-md text-primary-foreground">
             This only appears on the client side.
           </div>
         </Portal>

@@ -6,7 +6,7 @@ import { FilterBar, type FilterManager } from "./FilterBar";
 const fn = () => () => {};
 
 const meta: Meta<typeof FilterBar> = {
-  title: "Foundation Locked/Patterns/Filters/FilterBar",
+  title: "UI / Patterns / Filters / FilterBar",
   component: FilterBar,
   parameters: {
     layout: "padded",

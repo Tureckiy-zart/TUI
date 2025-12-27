@@ -7,7 +7,7 @@ import { Radio } from "./Radio";
 import { RadioGroup } from "./RadioGroup";
 
 const meta: Meta<typeof Radio> = {
-  title: "Foundation Locked/Primitives/Radio",
+  title: "UI / Primitives / Radio",
   component: Radio,
   parameters: {
     layout: "centered",

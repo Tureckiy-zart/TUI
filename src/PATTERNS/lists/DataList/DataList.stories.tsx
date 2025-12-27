@@ -7,7 +7,7 @@ import { Text } from "@/PRIMITIVES/Text";
 import { DataListItem, DataListLabel, DataListRoot, DataListValue } from "./index";
 
 const meta: Meta<typeof DataListRoot> = {
-  title: "Foundation Locked/Patterns/Lists/DataList",
+  title: "UI / Patterns / Lists / DataList",
   component: DataListRoot,
   tags: ["autodocs"],
   parameters: {

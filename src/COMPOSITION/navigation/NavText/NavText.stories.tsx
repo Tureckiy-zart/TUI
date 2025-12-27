@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NavText } from "./NavText";
 
 const meta: Meta<typeof NavText> = {
-  title: "Foundation Locked/Extension/Composition/Navigation/NavText",
+  title: "UI / Composition / Navigation / NavText",
   component: NavText,
   parameters: {
     layout: "padded",

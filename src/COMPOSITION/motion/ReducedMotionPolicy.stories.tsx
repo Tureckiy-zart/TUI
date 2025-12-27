@@ -15,7 +15,7 @@ import { Switch } from "@/PRIMITIVES/Switch";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "Foundation Locked/Composition/Motion/Reduced Motion Policy",
+  title: "UI / Composition / Motion / Reduced Motion Policy",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

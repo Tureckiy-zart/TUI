@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Backdrop } from "./Backdrop";
 
 const meta: Meta<typeof Backdrop> = {
-  title: "Foundation Locked/Composition/Overlays/Backdrop",
+  title: "UI / Composition / Overlays / Backdrop",
   component: Backdrop,
   parameters: {
     layout: "centered",
@@ -50,7 +50,7 @@ export const Default: Story = {
             variant="default"
             isVisible={show}
             onClick={() => setShow(false)}
-            className="fixed inset-0 z-50"
+            className="fixed inset-0 z-40"
           />
         )}
       </>
@@ -70,7 +70,7 @@ export const Blurred: Story = {
             variant="blurred"
             isVisible={show}
             onClick={() => setShow(false)}
-            className="fixed inset-0 z-50"
+            className="fixed inset-0 z-40"
           />
         )}
       </>
@@ -90,7 +90,7 @@ export const Transparent: Story = {
             variant="transparent"
             isVisible={show}
             onClick={() => setShow(false)}
-            className="fixed inset-0 z-50"
+            className="fixed inset-0 z-40"
           />
         )}
       </>
@@ -125,7 +125,7 @@ export const AllVariants: Story = {
           </Button>
         </div>
         <Backdrop variant={variant} isVisible={true} className="fixed inset-0 z-50" />
-        <div className="relative z-50 rounded-lg border bg-background p-lg shadow-lg">
+        <div className="relative z-40 rounded-lg border bg-background p-lg shadow-lg">
           <p className="text-sm text-muted-foreground">
             Current variant: <strong>{variant}</strong>
           </p>
@@ -150,7 +150,7 @@ export const WithContent: Story = {
               onClick={() => setShow(false)}
               className="fixed inset-0 z-40"
             />
-            <div className="fixed left-1/2 top-1/2 z-50 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-lg shadow-lg">
+            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-lg shadow-lg">
               <h2 className="mb-md text-lg font-semibold">Modal Content</h2>
               <p className="mb-md text-sm text-muted-foreground">
                 This modal has a blurred backdrop behind it.

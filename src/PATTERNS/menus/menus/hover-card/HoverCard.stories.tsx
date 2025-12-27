@@ -9,7 +9,7 @@ import { Bell, Calendar, Mail, User } from "lucide-react";
 import { HoverCardContent, HoverCardRoot, HoverCardTrigger } from ".";
 
 const meta: Meta<typeof HoverCardRoot> = {
-  title: "Foundation Locked/Patterns/Menus/HoverCard",
+  title: "UI / Patterns / Menus / HoverCard",
   component: HoverCardRoot,
   parameters: {
     layout: "centered",
