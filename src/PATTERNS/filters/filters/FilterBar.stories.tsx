@@ -3,7 +3,7 @@ import * as React from "react";
 import { FilterBar, type FilterManager } from "./FilterBar";
 
 // Mock function for story callbacks
-const fn = () => {};
+const fn = () => () => {};
 
 const meta: Meta<typeof FilterBar> = {
   title: "Foundation Locked/Patterns/Filters/FilterBar",
