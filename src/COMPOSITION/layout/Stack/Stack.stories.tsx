@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stack } from "./Stack";
 
 const meta: Meta<typeof Stack> = {
-  title: "Layout/Stack",
+  title: "Foundation Locked/Composition/Layout/Stack",
   component: Stack,
   parameters: {
     layout: "padded",

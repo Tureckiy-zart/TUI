@@ -9,7 +9,7 @@ import { Bell, Settings, User } from "lucide-react";
 import { PopoverWrapper } from "./Popover";
 
 const meta: Meta<typeof PopoverWrapper> = {
-  title: "Components/Overlays/Popover",
+  title: "Foundation Locked/Composition/Overlays/Popover",
   component: PopoverWrapper,
   parameters: {
     layout: "centered",
@@ -159,18 +159,6 @@ export const DifferentSizes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-md">
       <PopoverWrapper
-        size="xs"
-        content={
-          <div className="space-y-sm">
-            <h4 className="font-medium">Extra Small Popover</h4>
-            <p className="text-sm text-muted-foreground">Very compact content.</p>
-          </div>
-        }
-      >
-        <Button size="sm">XS</Button>
-      </PopoverWrapper>
-
-      <PopoverWrapper
         size="sm"
         content={
           <div className="space-y-sm">
@@ -210,25 +198,6 @@ export const DifferentSizes: Story = {
         }
       >
         <Button size="lg">Large</Button>
-      </PopoverWrapper>
-
-      <PopoverWrapper
-        size="xl"
-        content={
-          <div className="space-y-md">
-            <h4 className="font-medium">Extra Large Popover</h4>
-            <p className="text-sm text-muted-foreground">
-              Extra large popover with maximum space for extensive content and multiple sections.
-            </p>
-            <div className="space-y-sm">
-              <Badge>Feature</Badge>
-              <Badge variant="secondary">New</Badge>
-              <Badge variant="accent">Popular</Badge>
-            </div>
-          </div>
-        }
-      >
-        <Button size="lg">XL</Button>
       </PopoverWrapper>
     </div>
   ),
@@ -468,6 +437,147 @@ export const ModalVsNonModal: Story = {
       description: {
         story:
           "Shows the difference between modal and non-modal popovers. Modal popovers use role='dialog' and trap focus, while non-modal popovers allow interaction with the rest of the page.",
+      },
+    },
+  },
+};
+
+// Canonical Stories (Required per VARIANTS_SIZE_CANON.md)
+
+/**
+ * Matrix Story - REQUIRED for components with BOTH variant AND size props
+ * Shows all variants × all sizes in a grid layout
+ */
+export const Matrix: Story = {
+  name: "Matrix (Variants × Sizes)",
+  render: () => {
+    const variants: Array<
+      "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
+    > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-lg">
+        <div className="space-y-sm">
+          <h3 className="text-lg font-semibold">Popover Matrix</h3>
+          <p className="text-sm text-muted-foreground">
+            All variants × all sizes. Each cell shows a popover with that variant/size combination.
+          </p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="border border-border bg-muted p-sm text-left text-sm font-medium">
+                  Variant / Size
+                </th>
+                {sizes.map((size) => (
+                  <th
+                    key={size}
+                    className="border border-border bg-muted p-sm text-center text-sm font-medium"
+                  >
+                    {size}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {variants.map((variant) => (
+                <tr key={variant}>
+                  <td className="border border-border bg-muted p-sm text-sm font-medium">
+                    {variant}
+                  </td>
+                  {sizes.map((size) => (
+                    <td key={size} className="border border-border p-md text-center">
+                      <PopoverWrapper
+                        variant={variant}
+                        size={size}
+                        content={
+                          <div className="space-y-xs">
+                            <p className="text-sm font-medium">
+                              {variant} / {size}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              Popover with variant="{variant}" size="{size}"
+                            </p>
+                          </div>
+                        }
+                      >
+                        <Button size="sm" variant="outline">
+                          {variant.slice(0, 3)}
+                        </Button>
+                      </PopoverWrapper>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Canonical Matrix story showing all possible combinations of variants and sizes. Required per VARIANTS_SIZE_CANON.md for components with both variant and size props.",
+      },
+    },
+  },
+};
+
+/**
+ * LongContent Story - REQUIRED for overlay components
+ * Validates padding and maxWidth token behavior with long text
+ */
+export const LongContent: Story = {
+  name: "LongContent (Overlay Validation)",
+  render: () => (
+    <div className="space-y-lg">
+      <div className="space-y-sm">
+        <h3 className="text-lg font-semibold">Long Content Validation</h3>
+        <p className="text-sm text-muted-foreground">
+          Validates that popover padding and maxWidth tokens work correctly with long text content.
+          Required per VARIANTS_SIZE_CANON.md for overlay components.
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-md">
+        {(["sm", "md", "lg"] as const).map((size) => (
+          <PopoverWrapper
+            key={size}
+            size={size}
+            content={
+              <div className="space-y-sm">
+                <h4 className="font-semibold">Long Content Test ({size})</h4>
+                <p className="text-sm text-muted-foreground">
+                  This is a longer paragraph of text to validate that the popover padding and
+                  maxWidth tokens work correctly. The content should wrap naturally within the
+                  popover's width constraints, and the padding should remain consistent regardless
+                  of content length. This helps ensure that the token-driven styling system is
+                  working as expected for overlay components.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Additional paragraph to test multi-paragraph content. The spacing between
+                  paragraphs should be consistent and the overall layout should remain readable even
+                  with multiple blocks of text.
+                </p>
+              </div>
+            }
+          >
+            <Button size="sm" variant="outline">
+              {size} Size
+            </Button>
+          </PopoverWrapper>
+        ))}
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Canonical LongContent story validating padding and maxWidth token behavior. Required per VARIANTS_SIZE_CANON.md for overlay components to ensure proper token-driven styling with varied content lengths.",
       },
     },
   },

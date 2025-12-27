@@ -4,4 +4,4 @@
  * Token-driven skeleton loading component with multiple variants.
  */
 
-export { Skeleton, type SkeletonProps, skeletonVariants } from "./Skeleton";
+export { Skeleton, type SkeletonProps, type SkeletonVariant, skeletonVariants } from "./Skeleton";

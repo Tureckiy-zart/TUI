@@ -26,7 +26,7 @@ import { Link } from "./Link";
  */
 
 const meta: Meta<typeof Link> = {
-  title: "Components/Link",
+  title: "Foundation Locked/Link",
   component: Link,
   parameters: {
     layout: "centered",
@@ -165,6 +165,138 @@ export const States: Story = {
       description: {
         story:
           "Link states displayed side-by-side for visual comparison. Same variant (link) and size (md) used for fair comparison. Hover and focus-visible states require user interaction to observe.",
+      },
+    },
+  },
+};
+
+/**
+ * Matrix Story
+ *
+ * Displays all variants × all sizes grid for comprehensive visual comparison.
+ * REQUIRED per VARIANTS_SIZE_CANON.md when component has both size AND variant props.
+ *
+ * @axis variant × size
+ * @values All 7 variants × All 3 sizes (21 combinations)
+ */
+export const Matrix: Story = {
+  render: () => {
+    const variants: Array<
+      "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
+    > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-md">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr>
+              <th className="border border-border p-sm text-left">Variant / Size</th>
+              {sizes.map((size) => (
+                <th key={size} className="border border-border p-sm text-center">
+                  {size.toUpperCase()}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map((variant) => (
+              <tr key={variant}>
+                <td className="border border-border p-sm font-medium">{variant}</td>
+                {sizes.map((size) => (
+                  <td key={size} className="border border-border p-sm text-center">
+                    <Link
+                      variant={variant}
+                      size={size}
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Link
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Matrix showing all Link variants × all sizes. This comprehensive grid demonstrates all 21 combinations (7 variants × 3 sizes) for visual comparison. Navigation is disabled for Storybook demonstration.",
+      },
+    },
+  },
+};
+
+/**
+ * SizesGallery Story
+ *
+ * Displays all supported sizes with text, icon, and multi-line content.
+ * REQUIRED per SIZE_MAPPING_SPEC.md when component has public size prop.
+ *
+ * @axis size
+ * @values sm, md, lg
+ */
+export const SizesGallery: Story = {
+  render: () => {
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-lg">
+        {sizes.map((size) => (
+          <div key={size} className="space-y-sm">
+            <h3 className="text-sm font-medium">Size: {size.toUpperCase()}</h3>
+            <div className="flex flex-wrap items-center gap-md">
+              <Link href="#" size={size} onClick={(e) => e.preventDefault()}>
+                Text Only
+              </Link>
+              <Link
+                href="#"
+                size={size}
+                leftIcon={<span>←</span>}
+                onClick={(e) => e.preventDefault()}
+              >
+                With Left Icon
+              </Link>
+              <Link
+                href="#"
+                size={size}
+                rightIcon={<span>→</span>}
+                onClick={(e) => e.preventDefault()}
+              >
+                With Right Icon
+              </Link>
+              <Link
+                href="#"
+                size={size}
+                leftIcon={<span>←</span>}
+                rightIcon={<span>→</span>}
+                onClick={(e) => e.preventDefault()}
+              >
+                With Both Icons
+              </Link>
+              <div className="max-w-xs">
+                <Link href="#" size={size} onClick={(e) => e.preventDefault()}>
+                  Multi-line content that wraps to demonstrate size behavior with longer text
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "SizesGallery demonstrating all supported Link sizes (sm, md, lg) with various content types: text only, with left icon, with right icon, with both icons, and multi-line content. This demonstrates how size affects component dimensions and layout.",
       },
     },
   },

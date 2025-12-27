@@ -2,41 +2,22 @@
 
 /**
  * ============================================================================
- * ⏳ FOUNDATION · LEGACY · UNLOCKED_FOR_MIGRATION - Tabs Component
+ * 🔒 FOUNDATION · LOCKED - Tabs Component
  * ============================================================================
  *
- * **STATUS:** ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
- * **UNLOCK DATE:** 2025-12-19
- * **TASK:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
+ * **STATUS:** ✅ LOCKED (Pipeline 18A Complete, 2025-12-25)
+ * **LOCK DATE:** 2025-12-25
+ * **PIPELINE:** Pipeline 18A (Steps 0-12 complete)
  *
- * **UNLOCK RATIONALE:**
- * Tabs was declared as LOCKED but was implemented using legacy patterns and
- * never passed the canonical Foundation Step Pipeline (0–13). The current lock
- * is declarative only and blocks required migration.
- *
- * **MIGRATION PATH:**
- * Tabs will undergo canonical Foundation lock process (Steps 0–13) to ensure
- * full compliance with all Authority Contracts and canonical lifecycle
- * requirements, similar to Button/Link standards.
- *
- * **CONSTRAINTS DURING UNLOCK:**
- * - ❌ No public API expansion
- * - ❌ No new variants or sizes
- * - ❌ No behavior changes outside canonicalization
- * - ❌ No bypass of Authority Contracts
- * - ✅ Refactor strictly via Foundation Step Pipeline
- * - ✅ Canonical CVA, typing, and interaction refactor allowed
- * - ✅ Authority Contract alignment allowed
- *
- * **EXIT CRITERIA:**
- * - Component completes Steps 0–13
- * - Foundation lock report exists
- * - Public Type Surface is locked
- * - Component re-marked as FOUNDATION · LOCKED
+ * **LOCK RATIONALE:**
+ * Tabs has completed canonical Foundation Step Pipeline (Steps 0-12) and
+ * demonstrates full compliance with all Authority Contracts and canonical
+ * lifecycle requirements.
  *
  * **REFERENCE:**
- * - docs/architecture/FOUNDATION_LOCK.md (Legacy Foundation Components section)
+ * - docs/architecture/FOUNDATION_LOCK.md
  * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
+ * - docs/reports/audit/TABS_BASELINE_REPORT.md
  *
  * ============================================================================
  *
@@ -79,10 +60,10 @@
  */
 
 import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cva } from "class-variance-authority";
 import * as React from "react";
 
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TABS_TOKENS } from "@/FOUNDATION/tokens/components/tabs";
 import type {
@@ -138,119 +119,116 @@ const renderIconWrapper = (icon: React.ReactNode): React.ReactElement => {
 // CVA VARIANTS
 // ============================================================================
 
-const tabsListVariants = cva(
-  `inline-flex items-center justify-center outline-none data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col`,
-  {
-    variants: {
-      size: {
-        sm: `${TABS_TOKENS.size.sm.list.gap} ${TABS_TOKENS.size.sm.list.padding}`,
-        md: `${TABS_TOKENS.size.md.list.gap} ${TABS_TOKENS.size.md.list.padding}`,
-        lg: `${TABS_TOKENS.size.lg.list.gap} ${TABS_TOKENS.size.lg.list.padding}`,
-      } satisfies Record<TabsSizeToken, string>,
-      variant: {
-        underline: "",
-        pill: "",
-        segmented: `${TABS_TOKENS.variant.segmented.list.background} ${TABS_TOKENS.variant.segmented.list.padding} ${TABS_TOKENS.variant.segmented.list.radius}`,
-      } satisfies Record<TabsVariantToken, string>,
-    },
-    defaultVariants: {
-      size: "md",
-      variant: "underline",
-    },
+const tabsListVariants = tokenCVA({
+  base: `inline-flex items-center justify-center outline-none data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col`,
+  variants: {
+    size: {
+      sm: `${TABS_TOKENS.size.sm.list.gap} ${TABS_TOKENS.size.sm.list.padding}`,
+      md: `${TABS_TOKENS.size.md.list.gap} ${TABS_TOKENS.size.md.list.padding}`,
+      lg: `${TABS_TOKENS.size.lg.list.gap} ${TABS_TOKENS.size.lg.list.padding}`,
+    } satisfies Record<TabsSizeToken, string>,
+    variant: {
+      underline: "",
+      pill: "",
+      segmented: `${TABS_TOKENS.variant.segmented.list.background} ${TABS_TOKENS.variant.segmented.list.padding} ${TABS_TOKENS.variant.segmented.list.radius}`,
+    } satisfies Record<TabsVariantToken, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+    variant: "underline",
+  },
+});
 
-const tabsTriggerVariants = cva(
-  `inline-flex items-center justify-center whitespace-nowrap outline-none ${TABS_TOKENS.transition.colors} ${TABS_TOKENS.focus.ring} ${TABS_TOKENS.disabled.opacity} ${TABS_TOKENS.disabled.pointerEvents} ${TABS_TOKENS.disabled.cursor} relative`,
-  {
-    variants: {
-      size: {
-        sm: `${TABS_TOKENS.size.sm.trigger.height} ${TABS_TOKENS.size.sm.trigger.padding.horizontal} ${TABS_TOKENS.size.sm.trigger.padding.vertical} ${TABS_TOKENS.size.sm.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
-        md: `${TABS_TOKENS.size.md.trigger.height} ${TABS_TOKENS.size.md.trigger.padding.horizontal} ${TABS_TOKENS.size.md.trigger.padding.vertical} ${TABS_TOKENS.size.md.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
-        lg: `${TABS_TOKENS.size.lg.trigger.height} ${TABS_TOKENS.size.lg.trigger.padding.horizontal} ${TABS_TOKENS.size.lg.trigger.padding.vertical} ${TABS_TOKENS.size.lg.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
-      } satisfies Record<TabsSizeToken, string>,
-      variant: {
-        underline: cn(
-          TABS_TOKENS.variant.underline.trigger.default.background,
-          TABS_TOKENS.variant.underline.trigger.default.text,
-          TABS_TOKENS.variant.underline.trigger.default.border,
-          TABS_TOKENS.variant.underline.trigger.hover.background,
-          TABS_TOKENS.variant.underline.trigger.hover.text,
-          TABS_TOKENS.variant.underline.trigger.active.border,
-        ),
-        pill: cn(
-          TABS_TOKENS.variant.pill.trigger.default.background,
-          TABS_TOKENS.variant.pill.trigger.default.text,
-          TABS_TOKENS.variant.pill.trigger.default.border,
-          TABS_TOKENS.variant.pill.trigger.default.radius,
-          TABS_TOKENS.variant.pill.trigger.hover.background,
-          TABS_TOKENS.variant.pill.trigger.hover.text,
-          TABS_TOKENS.variant.pill.trigger.active.background,
-          TABS_TOKENS.variant.pill.trigger.active.text,
-          TABS_TOKENS.variant.pill.trigger.active.radius,
-        ),
-        segmented: cn(
-          TABS_TOKENS.variant.segmented.trigger.default.background,
-          TABS_TOKENS.variant.segmented.trigger.default.text,
-          TABS_TOKENS.variant.segmented.trigger.default.border,
-          TABS_TOKENS.variant.segmented.trigger.hover.background,
-          TABS_TOKENS.variant.segmented.trigger.hover.text,
-          TABS_TOKENS.variant.segmented.trigger.active.background,
-          TABS_TOKENS.variant.segmented.trigger.active.text,
-          TABS_TOKENS.variant.segmented.trigger.active.border,
-          TABS_TOKENS.variant.segmented.trigger.active.shadow,
-        ),
-      } satisfies Record<TabsVariantToken, string>,
-      tone: {
-        neutral: "",
-        primary: "",
-      } satisfies Record<TabsToneToken, string>,
+const tabsTriggerVariants = tokenCVA({
+  base: `inline-flex items-center justify-center whitespace-nowrap outline-none ${TABS_TOKENS.transition.colors} ${TABS_TOKENS.focus.ring} ${TABS_TOKENS.disabled.opacity} ${TABS_TOKENS.disabled.pointerEvents} ${TABS_TOKENS.disabled.cursor} relative`,
+  variants: {
+    size: {
+      sm: `${TABS_TOKENS.size.sm.trigger.height} ${TABS_TOKENS.size.sm.trigger.padding.horizontal} ${TABS_TOKENS.size.sm.trigger.padding.vertical} ${TABS_TOKENS.size.sm.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
+      md: `${TABS_TOKENS.size.md.trigger.height} ${TABS_TOKENS.size.md.trigger.padding.horizontal} ${TABS_TOKENS.size.md.trigger.padding.vertical} ${TABS_TOKENS.size.md.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
+      lg: `${TABS_TOKENS.size.lg.trigger.height} ${TABS_TOKENS.size.lg.trigger.padding.horizontal} ${TABS_TOKENS.size.lg.trigger.padding.vertical} ${TABS_TOKENS.size.lg.trigger.fontSize} ${TABS_TOKENS.trigger.fontWeight}`,
+    } satisfies Record<TabsSizeToken, string>,
+    variant: {
+      underline: cn(
+        TABS_TOKENS.variant.underline.trigger.default.background,
+        TABS_TOKENS.variant.underline.trigger.default.text,
+        TABS_TOKENS.variant.underline.trigger.default.border,
+        TABS_TOKENS.variant.underline.trigger.hover.background,
+        TABS_TOKENS.variant.underline.trigger.hover.text,
+        TABS_TOKENS.variant.underline.trigger.active.border,
+      ),
+      pill: cn(
+        TABS_TOKENS.variant.pill.trigger.default.background,
+        TABS_TOKENS.variant.pill.trigger.default.text,
+        TABS_TOKENS.variant.pill.trigger.default.border,
+        TABS_TOKENS.variant.pill.trigger.default.radius,
+        TABS_TOKENS.variant.pill.trigger.hover.background,
+        TABS_TOKENS.variant.pill.trigger.hover.text,
+        TABS_TOKENS.variant.pill.trigger.active.background,
+        TABS_TOKENS.variant.pill.trigger.active.text,
+        TABS_TOKENS.variant.pill.trigger.active.radius,
+      ),
+      segmented: cn(
+        TABS_TOKENS.variant.segmented.trigger.default.background,
+        TABS_TOKENS.variant.segmented.trigger.default.text,
+        TABS_TOKENS.variant.segmented.trigger.default.border,
+        TABS_TOKENS.variant.segmented.trigger.hover.background,
+        TABS_TOKENS.variant.segmented.trigger.hover.text,
+        TABS_TOKENS.variant.segmented.trigger.active.background,
+        TABS_TOKENS.variant.segmented.trigger.active.text,
+        TABS_TOKENS.variant.segmented.trigger.active.border,
+        TABS_TOKENS.variant.segmented.trigger.active.shadow,
+      ),
+    } satisfies Record<TabsVariantToken, string>,
+    tone: {
+      neutral: "",
+      primary: "",
+    } satisfies Record<TabsToneToken, string>,
+  },
+  compoundVariants: [
+    // Underline variant with indicator (CSS-based)
+    {
+      variant: "underline",
+      className: cn(
+        "after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0",
+        TABS_TOKENS.variant.underline.indicator.height,
+        TABS_TOKENS.variant.underline.indicator.background,
+        TABS_TOKENS.variant.underline.indicator.position,
+        TABS_TOKENS.variant.underline.indicator.transition,
+        "after:scale-x-0 data-[state=active]:after:scale-x-100",
+      ),
     },
-    compoundVariants: [
-      // Underline variant with indicator (CSS-based)
-      {
-        variant: "underline",
-        className: cn(
-          "after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0",
-          TABS_TOKENS.variant.underline.indicator.height,
-          TABS_TOKENS.variant.underline.indicator.background,
-          TABS_TOKENS.variant.underline.indicator.position,
-          TABS_TOKENS.variant.underline.indicator.transition,
-          "after:scale-x-0 data-[state=active]:after:scale-x-100",
-        ),
-      },
-      // Tone-based active states for underline - override default active states
-      {
-        variant: "underline",
-        tone: "primary",
-        className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.border} after:${TABS_TOKENS.tone.primary.indicator.background}`,
-      },
-      {
-        variant: "underline",
-        tone: "neutral",
-        className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.border} after:${TABS_TOKENS.tone.neutral.indicator.background}`,
-      },
-      // Tone-based active states for pill - override default active states
-      {
-        variant: "pill",
-        tone: "primary",
-        className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.background} data-[state=active]:${TABS_TOKENS.tone.primary.active.text}`,
-      },
-      {
-        variant: "pill",
-        tone: "neutral",
-        className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.background} data-[state=active]:${TABS_TOKENS.tone.neutral.active.text}`,
-      },
-    ],
-    defaultVariants: {
-      size: "md",
+    // Tone-based active states for underline - override default active states
+    {
       variant: "underline",
       tone: "primary",
+      className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.border} after:${TABS_TOKENS.tone.primary.indicator.background}`,
     },
+    {
+      variant: "underline",
+      tone: "neutral",
+      className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.border} after:${TABS_TOKENS.tone.neutral.indicator.background}`,
+    },
+    // Tone-based active states for pill - override default active states
+    {
+      variant: "pill",
+      tone: "primary",
+      className: `data-[state=active]:${TABS_TOKENS.tone.primary.active.background} data-[state=active]:${TABS_TOKENS.tone.primary.active.text}`,
+    },
+    {
+      variant: "pill",
+      tone: "neutral",
+      className: `data-[state=active]:${TABS_TOKENS.tone.neutral.active.background} data-[state=active]:${TABS_TOKENS.tone.neutral.active.text}`,
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    variant: "underline",
+    tone: "primary",
   },
-);
+});
 
-const tabsContentVariants = cva(`outline-none`, {
+const tabsContentVariants = tokenCVA({
+  base: `outline-none`,
   variants: {
     size: {
       sm: `${TABS_TOKENS.size.sm.content.padding} ${TABS_TOKENS.size.sm.content.marginTop}`,

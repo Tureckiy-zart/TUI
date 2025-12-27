@@ -9,7 +9,20 @@ import { Text } from "@/PRIMITIVES/Text";
 
 /**
  * Field Container Component
- * Provides spacing between field elements using Stack
+ *
+ * Provides vertical layout structure for form field elements with consistent spacing.
+ * Composes Label, Control wrapper, Description, and Error into a Stack layout.
+ *
+ * @example
+ * ```tsx
+ * <Field>
+ *   <Field.Label htmlFor="email">Email</Field.Label>
+ *   <Field.Control>
+ *     <Input id="email" type="email" />
+ *   </Field.Control>
+ *   <Field.Description>We'll never share your email.</Field.Description>
+ * </Field>
+ * ```
  */
 export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -26,7 +39,14 @@ Field.displayName = "Field";
 
 /**
  * Field Label Component
- * Wraps Label component with proper styling
+ *
+ * Wraps the Foundation Label component for form field labels.
+ * Delegates all behavior and styling to Label (Foundation component).
+ *
+ * @example
+ * ```tsx
+ * <Field.Label htmlFor="email">Email Address</Field.Label>
+ * ```
  */
 export interface FieldLabelProps extends React.ComponentProps<typeof Label> {}
 
@@ -38,7 +58,16 @@ FieldLabel.displayName = "FieldLabel";
 
 /**
  * Field Control Component
- * Wrapper for input/textarea/select controls
+ *
+ * Wrapper for form control elements (Input, Textarea, Select, etc.).
+ * Provides ref forwarding and className merging for control elements.
+ *
+ * @example
+ * ```tsx
+ * <Field.Control>
+ *   <Input id="email" type="email" />
+ * </Field.Control>
+ * ```
  */
 export interface FieldControlProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -55,7 +84,14 @@ FieldControl.displayName = "FieldControl";
 
 /**
  * Field Description Component
- * Helper text displayed below the control
+ *
+ * Helper text displayed below the control to provide additional context.
+ * Uses Text component with size="sm" and muted styling by default.
+ *
+ * @example
+ * ```tsx
+ * <Field.Description>We'll never share your email with anyone else.</Field.Description>
+ * ```
  */
 export interface FieldDescriptionProps extends React.ComponentProps<typeof Text> {}
 
@@ -67,14 +103,27 @@ FieldDescription.displayName = "FieldDescription";
 
 /**
  * Field Error Component
- * Error message displayed below the control
+ *
+ * Error message displayed below the control for validation feedback.
+ * Uses Text component with size="sm" wrapped in destructive color span.
+ *
+ * Note: Wrapper span with className="text-destructive" is used to apply
+ * destructive color without modifying Text component (Foundation component).
+ * This pattern allows Field (Composition component) to use className while
+ * respecting Foundation Enforcement rules for Text.
+ *
+ * @example
+ * ```tsx
+ * <Field.Error>Email is required</Field.Error>
+ * ```
  */
 export interface FieldErrorProps extends React.ComponentProps<typeof Text> {}
 
 const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
   ({ children, ...props }, ref) => {
-    // FieldError is a composition component (not Foundation), so it can use className
-    // Wraps Text with destructive color class for error styling (token-driven)
+    // Wrapper span applies destructive color via className (Composition layer pattern).
+    // Text component (Foundation) cannot accept className, so wrapper is used.
+    // This pattern respects Foundation Enforcement while allowing Composition flexibility.
     return (
       <span ref={ref} className="text-destructive">
         <Text size="sm" {...props}>

@@ -38,42 +38,25 @@ export function useTableContext(): TableContextValue {
  *
  * @example
  * ```tsx
- * <Table.Root
- *   data={users}
- *   columns={columns}
- *   rowKey="id"
- *   sortable
- * >
+ * <Table expandable>
  *   <Table.Header>
  *     <Table.Row>
- *       <Table.Head>Name</Table.Head>
+ *       <Table.Head sortable columnKey="name">Name</Table.Head>
+ *       <Table.Head>Email</Table.Head>
  *     </Table.Row>
  *   </Table.Header>
  *   <Table.Body>
  *     {users.map((user) => (
- *       <Table.Row key={user.id}>
+ *       <Table.Row key={user.id} expandable expanded={expanded.has(user.id)}>
  *         <Table.Cell>{user.name}</Table.Cell>
+ *         <Table.Cell>{user.email}</Table.Cell>
  *       </Table.Row>
  *     ))}
  *   </Table.Body>
- * </Table.Root>
+ * </Table>
  * ```
  */
-function TableRoot<T extends Record<string, unknown>>({
-  data: _data,
-  columns: _columns,
-  rowKey: _rowKey,
-  sortable: _sortable = false,
-  expandable = false,
-  renderExpandableContent,
-  loading: _loading = false,
-  emptyMessage: _emptyMessage = "No data available",
-  stickyHeader: _stickyHeader = false,
-  rowSize: _rowSize = "md",
-  className,
-  children,
-  ...props
-}: TableRootProps<T>) {
+function TableRoot({ expandable = false, className, children, ...props }: TableRootProps) {
   const [sortState, setSortState] = React.useState<SortState>({
     column: null,
     direction: null,
@@ -100,12 +83,8 @@ function TableRoot<T extends Record<string, unknown>>({
       expandedRows,
       toggleRow,
       expandable,
-      renderExpandableContent: renderExpandableContent as (
-        item: unknown,
-        index: number,
-      ) => React.ReactNode,
     }),
-    [sortState, expandedRows, toggleRow, expandable, renderExpandableContent],
+    [sortState, expandedRows, toggleRow, expandable],
   );
 
   return (
@@ -131,130 +110,27 @@ function TableRoot<T extends Record<string, unknown>>({
 TableRoot.displayName = "TableRoot";
 
 // Attach subcomponents to TableRoot
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Header = TableHeader;
+type TableRootWithSubcomponents = typeof TableRoot & {
+  Header: typeof TableHeader;
+  Head: typeof TableHead;
+  Body: typeof TableBody;
+  Row: typeof TableRow;
+  Cell: typeof TableCell;
+  SortIcon: typeof TableSortIcon;
+  Empty: typeof TableEmpty;
+  LoadingState: typeof TableLoadingState;
+  ExpandableContent: typeof TableExpandableContent;
+};
 
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Head = TableHead;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Body = TableBody;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Row = TableRow;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Cell = TableCell;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).SortIcon = TableSortIcon;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).Empty = TableEmpty;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).LoadingState = TableLoadingState;
-
-(
-  TableRoot as typeof TableRoot & {
-    Header: typeof TableHeader;
-    Head: typeof TableHead;
-    Body: typeof TableBody;
-    Row: typeof TableRow;
-    Cell: typeof TableCell;
-    SortIcon: typeof TableSortIcon;
-    Empty: typeof TableEmpty;
-    LoadingState: typeof TableLoadingState;
-    ExpandableContent: typeof TableExpandableContent;
-  }
-).ExpandableContent = TableExpandableContent;
+const TableRootWithSubcomponents = TableRoot as TableRootWithSubcomponents;
+TableRootWithSubcomponents.Header = TableHeader;
+TableRootWithSubcomponents.Head = TableHead;
+TableRootWithSubcomponents.Body = TableBody;
+TableRootWithSubcomponents.Row = TableRow;
+TableRootWithSubcomponents.Cell = TableCell;
+TableRootWithSubcomponents.SortIcon = TableSortIcon;
+TableRootWithSubcomponents.Empty = TableEmpty;
+TableRootWithSubcomponents.LoadingState = TableLoadingState;
+TableRootWithSubcomponents.ExpandableContent = TableExpandableContent;
 
 export { TableRoot };

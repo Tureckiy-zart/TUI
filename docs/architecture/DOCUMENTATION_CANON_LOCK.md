@@ -100,10 +100,12 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 **Contains:**
 - `tasks/` - Component creation checklists (`COMPONENT_CREATION_CHECKLIST.md`), feedback processes, component needs tracking, usage tracking, task index
 - `foundation/` - Foundation processes (`FOUNDATION_STEP_PIPELINE.md`)
+- `policies/` - Process policies and guard rules (`TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md`, `NO_DUPLICATION_POLICY.md`, `ESLINT_AUTOFIX_POLICY.md`, etc.)
 
 **Rules:**
 - ✅ Process definitions and workflows
 - ✅ Checklists and task management
+- ✅ Process policies and guard rules
 - ❌ Architecture rules MUST NOT be in this folder
 
 ### `docs/governance/`

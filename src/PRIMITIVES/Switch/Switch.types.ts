@@ -1,37 +1,42 @@
 "use client";
 
-import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { switchTrackVariants } from "./switch-variants";
+/**
+ * Switch variant type
+ * Supported variants from InteractiveVariant dictionary
+ */
+export type SwitchVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
+
+/**
+ * Switch size type
+ * Supported sizes from GlobalSize scale
+ */
+export type SwitchSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 /**
  * Switch Component Props
  *
  * Extends native button HTML attributes with variant props, checked state, and accessibility props.
  * Uses button role="switch" pattern for full keyboard accessibility.
+ *
+ * Foundation Enforcement: className and style props are excluded (Foundation components use token-driven styling only).
  */
-export interface SwitchProps
-  extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size" | "onChange">,
-    VariantProps<typeof switchTrackVariants> {
+export interface SwitchProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange" | "className" | "style"
+> {
   /**
    * Switch variant style
    * @default "primary"
    */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
+  variant?: SwitchVariant;
 
   /**
    * Switch size
    * @default "md"
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-
-  /**
-   * Switch state
-   * @default "default"
-   */
-  state?: "default" | "checked" | "disabled" | "error";
+  size?: SwitchSize;
 
   /**
    * Whether switch is checked (controlled)
@@ -42,6 +47,12 @@ export interface SwitchProps
    * Whether switch is disabled
    */
   disabled?: boolean;
+
+  /**
+   * Whether switch is in invalid/error state
+   * Used for form validation feedback
+   */
+  invalid?: boolean;
 
   /**
    * Callback fired when checked state changes

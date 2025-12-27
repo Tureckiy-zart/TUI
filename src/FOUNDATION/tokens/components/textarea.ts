@@ -78,39 +78,42 @@ export const TEXTAREA_TOKENS = {
   shadow: "shadow-sm", // Maps to elevationShadows.sm
 
   /**
-   * Variant-based tokens
-   * Border, background, and text colors for different variants
+   * Variant-based tokens (SurfaceVariant dictionary)
+   * Border, background, and text colors for different surface variants
    * All use CSS variable references for theme support
+   *
+   * Note: Textarea uses SurfaceVariant (not InteractiveVariant) because it's a
+   * form input surface that receives content, not an interactive control that triggers actions.
    */
   variant: {
-    primary: {
-      border: "border-[hsl(var(--tm-primary))]", // Primary border color
-      background: "bg-[hsl(var(--tm-primary))]", // Primary background
-      text: "text-[hsl(var(--tm-primary-foreground))]", // Primary text color
-      focus: "focus-visible:shadow-[var(--focus-ring-primary)]", // Primary focus ring
-    },
-    secondary: {
-      border: "border-[hsl(var(--tm-secondary))]", // Secondary border color
-      background: "bg-[hsl(var(--tm-secondary))]", // Secondary background
-      text: "text-[hsl(var(--tm-secondary-foreground))]", // Secondary text color
+    default: {
+      border: "border-[hsl(var(--input))]", // Default surface border color
+      background: "bg-transparent", // Transparent background
+      text: "text-[hsl(var(--foreground))]", // Default foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
-    outline: {
-      border: "border-[hsl(var(--input))]", // Input border color
+    elevated: {
+      border: "border-[hsl(var(--input))]", // Elevated surface border color
+      background: "bg-[hsl(var(--card))]", // Card background for elevated appearance
+      text: "text-[hsl(var(--card-foreground))]", // Card foreground text color
+      focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
+    },
+    outlined: {
+      border: "border-[hsl(var(--input))]", // Outlined surface border color (emphasized)
       background: "bg-transparent", // Transparent background
       text: "text-[hsl(var(--foreground))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
-    ghost: {
-      border: "border-transparent", // Transparent border
-      background: "bg-transparent", // Transparent background
+    filled: {
+      border: "border-transparent", // No border for filled variant
+      background: "bg-[hsl(var(--muted))]", // Muted background for filled appearance
       text: "text-[hsl(var(--foreground))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
-    destructive: {
-      border: "border-[hsl(var(--destructive))]", // Destructive border color
-      background: "bg-[hsl(var(--destructive))]", // Destructive background
-      text: "text-[hsl(var(--destructive-foreground))]", // Destructive text color
+    subtle: {
+      border: "border-transparent", // No border for subtle variant
+      background: "bg-transparent", // Transparent background
+      text: "text-[hsl(var(--muted-foreground))]", // Muted foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,

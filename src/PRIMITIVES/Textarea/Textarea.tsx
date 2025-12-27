@@ -2,118 +2,53 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
-import { TEXTAREA_TOKENS } from "@/FOUNDATION/tokens/components/textarea";
-
 import type { TextareaProps } from "./Textarea.types";
 import { textareaVariants } from "./textarea-variants";
 
 /**
  * Textarea Component
  *
- * A fully accessible, theme-aware textarea component with variant support,
- * character counter, and comprehensive state management.
+ * Strict low-level multiline form control primitive.
+ * Thin wrapper around native <textarea> element aligned with Input canonical model.
+ *
+ * State handling follows STATE_AUTHORITY pattern:
+ * - Invalid state: Use invalid={true} or aria-invalid={true} (native HTML attribute)
+ * - Disabled state: Use disabled={true} (native HTML attribute)
+ * - No separate "state" prop (states are derived from HTML attributes)
  *
  * @example
  * ```tsx
  * <Textarea
- *   variant="outline"
  *   size="md"
  *   placeholder="Enter text..."
- *   showCharacterCount
- *   maxLength={200}
  * />
+ *
+ * // Invalid state
+ * <Textarea
+ *   invalid={true}
+ *   aria-describedby="error-message"
+ * />
+ *
+ * // Disabled state
+ * <Textarea disabled />
  * ```
  */
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (
-    {
-      variant,
-      size,
-      state,
-      fullWidth,
-      disabled,
-      maxLength,
-      showCharacterCount = false,
-      value,
-      defaultValue,
-      "aria-invalid": ariaInvalid,
-      "aria-describedby": ariaDescribedBy,
-      ...props
-    },
-    ref,
-  ) => {
-    // Determine if textarea is in error state
-    const isError = state === "error" || ariaInvalid === true;
-    const isDisabled = disabled || state === "disabled";
-
-    // Map state to aria-invalid
-    const ariaInvalidValue = isError ? true : ariaInvalid;
-
-    // Generate unique ID for aria-describedby if error/success state
-    const generatedId = React.useId();
-    const [describedById] = React.useState(() => {
-      if (ariaDescribedBy) return ariaDescribedBy;
-      if (state === "error" || state === "success") {
-        return `textarea-${generatedId}-message`;
-      }
-      return undefined;
-    });
-
+  ({ size, invalid, disabled, "aria-invalid": ariaInvalid, ...props }, ref) => {
     // Compute textarea classes
     // className and style are forbidden from public API - only CVA output is used
-    const textareaClasses = textareaVariants({ variant, size, state, fullWidth });
+    // State styling (invalid, disabled) is handled via CSS pseudo-classes and data attributes
+    const textareaClasses = textareaVariants({ size });
 
-    // Get current value length for character counter
-    const currentValue = value ?? defaultValue ?? "";
-    const currentLength = typeof currentValue === "string" ? currentValue.length : 0;
+    // Map invalid prop to aria-invalid attribute
+    const ariaInvalidValue = invalid !== undefined ? invalid : ariaInvalid;
 
-    // Determine if character counter should be shown
-    const shouldShowCounter = showCharacterCount && maxLength !== undefined;
-
-    // If character counter is needed, wrap in container
-    if (shouldShowCounter) {
-      return (
-        <div className={cn("relative", fullWidth !== false && TEXTAREA_TOKENS.width.full)}>
-          <textarea
-            className={textareaClasses}
-            ref={ref}
-            disabled={isDisabled}
-            maxLength={maxLength}
-            value={value}
-            defaultValue={defaultValue}
-            aria-invalid={ariaInvalidValue}
-            aria-describedby={describedById}
-            {...props}
-          />
-          <div
-            className={cn(
-              "absolute",
-              TEXTAREA_TOKENS.message.position.bottom,
-              TEXTAREA_TOKENS.message.position.right,
-              TEXT_TOKENS.fontSize.xs,
-              TEXTAREA_TOKENS.message.color.default,
-              currentLength > maxLength && TEXTAREA_TOKENS.message.color.error,
-            )}
-          >
-            {currentLength} / {maxLength}
-          </div>
-        </div>
-      );
-    }
-
-    // No character counter - render textarea directly
     return (
       <textarea
         className={textareaClasses}
         ref={ref}
-        disabled={isDisabled}
-        maxLength={maxLength}
-        value={value}
-        defaultValue={defaultValue}
+        disabled={disabled}
         aria-invalid={ariaInvalidValue}
-        aria-describedby={describedById}
         {...props}
       />
     );

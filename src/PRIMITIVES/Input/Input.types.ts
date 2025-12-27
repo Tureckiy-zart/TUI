@@ -1,96 +1,50 @@
 "use client";
 
-import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { INPUT_TOKENS, type InputSize } from "@/FOUNDATION/tokens/components/input";
-import type { Responsive } from "@/types/responsive";
-
-import { inputVariants } from "./input-variants";
-
 /**
- * Input variant type derived from INPUT_TOKENS
+ * Input size type
  *
- * Available variants: "primary" | "secondary" | "outline" | "ghost" | "destructive"
+ * Available sizes: "sm" | "md" | "lg"
  *
  * @example
  * ```tsx
- * const variant: InputVariant = "outline";
+ * const size: InputSize = "md";
  * ```
  */
-export type InputVariant = keyof typeof INPUT_TOKENS.variant;
-
-// Re-export InputSize from tokens for consistency
-export type { InputSize };
+export type InputSize = "sm" | "md" | "lg";
 
 /**
  * Input Component Props
  *
- * Extends native input HTML attributes with variant props, icon slots, and accessibility props.
+ * Minimal native-aligned interface for low-level form control primitive.
+ * Extends native input HTML attributes with size and invalid props.
  */
-export interface InputProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "className" | "style">,
-    Omit<VariantProps<typeof inputVariants>, "variant" | "size"> {
-  /**
-   * Input variant style
-   *
-   * Supports responsive values:
-   * - Single value: `variant="outline"`
-   * - Responsive object: `variant={{ base: "outline", md: "primary" }}`
-   *
-   * @default "outline"
-   *
-   * @example
-   * ```tsx
-   * // Single value
-   * <Input variant="outline" />
-   *
-   * // Responsive
-   * <Input variant={{ base: "outline", md: "primary" }} />
-   * ```
-   */
-  variant?: Responsive<InputVariant>;
-
+export interface InputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "color"
+> {
   /**
    * Input size
-   *
-   * Supports responsive values:
-   * - Single value: `size="md"`
-   * - Responsive object: `size={{ base: "sm", md: "lg" }}`
    *
    * @default "md"
    *
    * @example
    * ```tsx
-   * // Single value
    * <Input size="md" />
-   *
-   * // Responsive
-   * <Input size={{ base: "sm", md: "lg" }} />
    * ```
    */
-  size?: Responsive<InputSize>;
+  size?: InputSize;
 
   /**
-   * Input state
-   * @default "default"
+   * Whether the input is in an invalid state
+   *
+   * Maps to aria-invalid attribute for accessibility.
+   *
+   * @example
+   * ```tsx
+   * <Input invalid />
+   * ```
    */
-  state?: "default" | "disabled" | "error" | "success";
-
-  /**
-   * Whether input should take full width
-   * @default true
-   */
-  fullWidth?: boolean;
-
-  /**
-   * Icon to display on the left side of the input
-   */
-  iconLeft?: React.ReactNode;
-
-  /**
-   * Icon to display on the right side of the input
-   */
-  iconRight?: React.ReactNode;
+  invalid?: boolean;
 }

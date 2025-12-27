@@ -1,52 +1,34 @@
 "use client";
 
-import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { textareaVariants } from "./textarea-variants";
+import type { TextareaSize } from "./textarea-variants";
 
 /**
  * Textarea Component Props
  *
- * Extends native textarea HTML attributes with variant props, character counter, and accessibility props.
+ * Strict low-level multiline form control primitive.
+ * Thin wrapper around native <textarea> element with minimal API.
+ *
+ * Note: className and style props are excluded per Foundation Enforcement rule.
+ * State styling (invalid, disabled) is handled via native HTML attributes (disabled, aria-invalid),
+ * not as separate variant axis (per STATE_AUTHORITY).
  */
-export interface TextareaProps
-  extends
-    Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "className" | "style">,
-    VariantProps<typeof textareaVariants> {
-  /**
-   * Textarea variant style
-   * @default "outline"
-   */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
-
+export interface TextareaProps extends Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "rows" | "className" | "style"
+> {
   /**
    * Textarea size
+   * Limited to sm, md, lg sizes for strict primitive model
    * @default "md"
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: TextareaSize;
 
   /**
-   * Textarea state
-   * @default "default"
-   */
-  state?: "default" | "disabled" | "error" | "success";
-
-  /**
-   * Whether textarea should take full width
-   * @default true
-   */
-  fullWidth?: boolean;
-
-  /**
-   * Maximum character length (for character counter)
-   */
-  maxLength?: number;
-
-  /**
-   * Show character counter
-   * Only displays when both showCharacterCount and maxLength are provided
+   * Invalid state indicator
+   * Maps to aria-invalid attribute for accessibility
    * @default false
    */
-  showCharacterCount?: boolean;
+  invalid?: boolean;
 }

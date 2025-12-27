@@ -150,10 +150,11 @@ There is exactly **one Foundation component per category**.
 - Select
 - ContextMenu
 - Toast
+- Button (**FINAL LOCK**)
 
 All Foundation components:
 
-- delegate behavior to Radix UI
+- delegate behavior to Radix UI (or native HTML elements)
 - expose token-driven visual APIs
 - are backward-compatible and locked
 
@@ -164,7 +165,6 @@ that rely strictly on tokens and shared semantics.
 
 Examples:
 
-- Button
 - Input / Textarea
 - Card / Badge
 - Layout primitives (Stack, Grid, Container)

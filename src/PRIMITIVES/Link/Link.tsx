@@ -41,6 +41,21 @@ const _LINK_SIZES = ["sm", "md", "lg"] as const;
  */
 export type LinkSize = (typeof _LINK_SIZES)[number];
 
+/**
+ * Icon wrapper CSS classes
+ * Shared constant to eliminate duplication across icon rendering
+ */
+const ICON_WRAPPER_CLASS = LINK_TOKENS.iconWrapper;
+
+/**
+ * Renders an icon with consistent wrapper styling
+ * Internal helper to eliminate duplication across icon rendering paths
+ */
+function renderIcon(icon: React.ReactNode): React.ReactElement | null {
+  if (!icon) return null;
+  return <span className={ICON_WRAPPER_CLASS}>{icon}</span>;
+}
+
 const linkVariants = tokenCVA({
   base: `${LINK_TOKENS.layout} ${LINK_TOKENS.fontWeight} ${LINK_TOKENS.transition.colors} ${LINK_TOKENS.focus.outline} ${LINK_TOKENS.focus.ring} ${LINK_TOKENS.focus.offset} ${LINK_TOKENS.state.disabled.pointerEvents} ${LINK_TOKENS.state.disabled.opacity}`,
   variants: {
@@ -129,9 +144,9 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         onClick={handleClick}
         {...props}
       >
-        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+        {renderIcon(leftIcon)}
         {children}
-        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+        {renderIcon(rightIcon)}
       </a>
     );
   },

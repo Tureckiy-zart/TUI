@@ -55,22 +55,16 @@ export {
 export {
   Toast,
   ToastAction,
-  type ToastActionData,
   ToastClose,
-  type ToastData,
   ToastDescription,
   type ToastProps,
   ToastRoot,
   type ToastRootProps,
   ToastTitle,
+  type ToastVariant,
   toastVariants,
 } from "./Toast";
-export {
-  type ToastOptions,
-  ToastProvider,
-  type ToastProviderProps,
-  useToast,
-} from "./ToastProvider";
+export { ToastProvider, type ToastProviderProps } from "./ToastProvider";
 export { type ToastPosition, ToastViewport, type ToastViewportProps } from "./ToastViewport";
 
 // Toaster

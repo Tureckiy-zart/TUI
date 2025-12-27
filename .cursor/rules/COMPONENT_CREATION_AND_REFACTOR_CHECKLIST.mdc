@@ -172,13 +172,25 @@ If verification fails → **FIX or REFUSE**.
 The AI MUST verify that:
 
 - Refactor is explicitly requested
-- Target component is NOT locked (check `docs/architecture/FOUNDATION_LOCK.md` and `docs/architecture/ARCHITECTURE_LOCK.md`)
+- Target component lock status is checked (check `docs/architecture/FOUNDATION_LOCK.md` and `docs/architecture/ARCHITECTURE_LOCK.md`)
 - Scope is limited to ONE component
 - The AI understands that **pipeline 18A is MANDATORY** for all refactoring work
 
+**Lock Status Check (MANDATORY):**
+
+- If component is LOCKED: Review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../docs/workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- If component is LOCKED and changes are required: Exception declaration is MANDATORY per policy
+- Exception must be declared in audit report STEP 8 before any code changes in STEP 9
+- See [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../../docs/workflows/policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) for exception template
+
+**Exception Requirements:**
+- Exception must include: reason, pipeline step, why lock is insufficient, risk assessment, rollback strategy
+- Exception must be declared BEFORE code changes
+- Changes must match exception scope (minimal delta only)
+
 If refactor legitimacy is unclear → **STOP and ASK**.
 
-If component is locked → **REFUSE immediately**.
+If component is locked and exception is not declared → **REFUSE immediately**.
 
 ---
 

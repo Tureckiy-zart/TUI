@@ -1,17 +1,28 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { ToastProvider, useToast } from "./ToastProvider";
+import React, { useState } from "react";
 
-const meta: Meta<typeof ToastProvider> = {
-  title: "UI/Foundation/Toast",
-  component: ToastProvider,
+import {
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastRoot,
+  ToastTitle,
+  ToastViewport,
+} from "./Toast";
+
+const meta: Meta<typeof ToastRoot> = {
+  title: "Foundation Locked/Composition/Overlays/Toast",
+  component: ToastRoot,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "🔒 FOUNDATION COMPONENT - Radix-based toast notification system with token-driven styling. All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal) is handled by Radix Toast primitives. Supports variants: default, success, info, warning, danger. Uses CSS animations with motion tokens and Radix data attributes.",
+          "🔒 FOUNDATION - Stateless UI renderer built on Radix Toast primitives with token-driven styling. All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal) is handled by Radix Toast primitives. Toast is stateless and requires controlled open/onOpenChange props. Supports variants: default, success, warning, error (visual only).",
       },
     },
   },
@@ -19,7 +30,9 @@ const meta: Meta<typeof ToastProvider> = {
   decorators: [
     (Story) => (
       <ToastProvider>
-        <Story />
+        <ToastViewport>
+          <Story />
+        </ToastViewport>
       </ToastProvider>
     ),
   ],
@@ -28,174 +41,292 @@ const meta: Meta<typeof ToastProvider> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ToastDemo() {
-  const toast = useToast();
+// ============================================================================
+// CANONICAL STORIES
+// ============================================================================
 
-  return (
-    <div className="space-y-sm">
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "Default Toast",
-            description: "This is a default toast notification.",
-          })
-        }
-        className="rounded-md bg-primary px-md py-sm text-primary-foreground"
-      >
-        Show Default Toast
-      </button>
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "Success",
-            description: "Operation completed successfully!",
-            variant: "success",
-          })
-        }
-        className="rounded-md bg-success px-md py-sm text-success-foreground"
-      >
-        Show Success Toast
-      </button>
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "Info",
-            description: "Here's some information for you.",
-            variant: "info",
-          })
-        }
-        className="rounded-md bg-info px-md py-sm text-info-foreground"
-      >
-        Show Info Toast
-      </button>
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "Warning",
-            description: "Please be careful with this action.",
-            variant: "warning",
-          })
-        }
-        className="rounded-md bg-warning px-md py-sm text-warning-foreground"
-      >
-        Show Warning Toast
-      </button>
-      <button
-        onClick={() =>
-          toast.toast({ title: "Error", description: "Something went wrong!", variant: "danger" })
-        }
-        className="rounded-md bg-destructive px-md py-sm text-destructive-foreground"
-      >
-        Show Error Toast
-      </button>
-    </div>
-  );
-}
-
-export const Default: Story = {
-  render: () => <ToastDemo />,
-};
-
-export const Success: Story = {
+/**
+ * Controlled Story (CANONICAL - REQUIRED)
+ * Demonstrates controlled usage pattern with open/onOpenChange props
+ * Required for stateless components with controlled state
+ */
+export const Controlled: Story = {
   render: () => {
-    const toast = useToast();
+    const [open, setOpen] = useState(false);
+
     return (
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "Success",
-            description: "Operation completed successfully!",
-            variant: "success",
-          })
-        }
-        className="rounded-md bg-success px-md py-sm text-success-foreground"
-      >
-        Show Success Toast
-      </button>
+      <div className="space-y-md">
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">Controlled Toast</h3>
+          <button
+            onClick={() => setOpen(true)}
+            className="rounded-md bg-primary px-md py-sm text-sm text-primary-foreground"
+          >
+            Show Toast
+          </button>
+        </div>
+        <ToastRoot open={open} onOpenChange={setOpen} variant="default">
+          <ToastTitle>Controlled Toast</ToastTitle>
+          <ToastDescription>This toast is controlled via open/onOpenChange props.</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+      </div>
     );
   },
 };
 
-export const WithAction: Story = {
+/**
+ * Variants Story (CANONICAL - REQUIRED)
+ * Demonstrates all visual variants
+ * Required by VARIANTS_SIZE_CANON.md for components with variants
+ */
+export const Variants: Story = {
   render: () => {
-    const toast = useToast();
+    const [defaultOpen, setDefaultOpen] = useState(false);
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [warningOpen, setWarningOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
+
     return (
-      <button
-        onClick={() =>
-          toast.toast({
-            title: "File Deleted",
-            description: "The file has been moved to trash.",
-            variant: "success",
-            action: {
-              label: "Undo",
-              onClick: () => {
-                toast.toast({ title: "File Restored", variant: "info" });
-              },
-            },
-          })
-        }
-        className="rounded-md bg-primary px-md py-sm text-primary-foreground"
-      >
-        Show Toast with Action
-      </button>
+      <div className="space-y-md">
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">All Variants</h3>
+          <div className="flex flex-wrap gap-sm">
+            <button
+              onClick={() => setDefaultOpen(true)}
+              className="rounded-md border border-border bg-background px-md py-sm text-sm"
+            >
+              Default
+            </button>
+            <button
+              onClick={() => setSuccessOpen(true)}
+              className="rounded-md bg-success px-md py-sm text-sm text-success-foreground"
+            >
+              Success
+            </button>
+            <button
+              onClick={() => setWarningOpen(true)}
+              className="rounded-md bg-warning px-md py-sm text-sm text-warning-foreground"
+            >
+              Warning
+            </button>
+            <button
+              onClick={() => setErrorOpen(true)}
+              className="rounded-md bg-destructive px-md py-sm text-sm text-destructive-foreground"
+            >
+              Error
+            </button>
+          </div>
+        </div>
+        <ToastRoot open={defaultOpen} onOpenChange={setDefaultOpen} variant="default">
+          <ToastTitle>Default Toast</ToastTitle>
+          <ToastDescription>This is a default toast notification.</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={successOpen} onOpenChange={setSuccessOpen} variant="success">
+          <ToastTitle>Success</ToastTitle>
+          <ToastDescription>Operation completed successfully!</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={warningOpen} onOpenChange={setWarningOpen} variant="warning">
+          <ToastTitle>Warning</ToastTitle>
+          <ToastDescription>Please be careful with this action.</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={errorOpen} onOpenChange={setErrorOpen} variant="error">
+          <ToastTitle>Error</ToastTitle>
+          <ToastDescription>Something went wrong!</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+      </div>
     );
   },
 };
 
-export const MultipleToasts: Story = {
+/**
+ * LongContent Story (CANONICAL - REQUIRED)
+ * Validates padding and maxWidth token behavior with long text
+ * Required by VARIANTS_SIZE_CANON.md for overlay components
+ */
+export const LongContent: Story = {
   render: () => {
-    const toast = useToast();
+    const [longTitleOpen, setLongTitleOpen] = useState(false);
+    const [longDescOpen, setLongDescOpen] = useState(false);
+    const [bothLongOpen, setBothLongOpen] = useState(false);
+    const [longWithActionOpen, setLongWithActionOpen] = useState(false);
+
+    const longTitle =
+      "This is a very long toast title that should wrap properly within the toast container";
+    const longDescription =
+      "This is a very long toast description that demonstrates how the toast component handles extended content. The text should wrap appropriately within the toast container, respecting the maxWidth and padding tokens. This ensures that even with lengthy content, the toast remains readable and visually consistent with the design system.";
+
     return (
-      <button
-        onClick={() => {
-          toast.toast({ title: "Toast 1", variant: "success" });
-          toast.toast({ title: "Toast 2", variant: "info" });
-          toast.toast({ title: "Toast 3", variant: "warning" });
-          toast.toast({ title: "Toast 4", variant: "danger" });
-        }}
-        className="rounded-md bg-primary px-md py-sm text-primary-foreground"
-      >
-        Show Multiple Toasts
-      </button>
+      <div className="space-y-md">
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">Long Title</h3>
+          <button
+            onClick={() => setLongTitleOpen(true)}
+            className="rounded-md border border-border bg-background px-md py-sm text-sm"
+          >
+            Show Long Title
+          </button>
+        </div>
+        <ToastRoot open={longTitleOpen} onOpenChange={setLongTitleOpen} variant="default">
+          <ToastTitle>{longTitle}</ToastTitle>
+          <ToastClose />
+        </ToastRoot>
+
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">Long Description</h3>
+          <button
+            onClick={() => setLongDescOpen(true)}
+            className="rounded-md bg-info px-md py-sm text-sm text-info-foreground"
+          >
+            Show Long Description
+          </button>
+        </div>
+        <ToastRoot open={longDescOpen} onOpenChange={setLongDescOpen} variant="default">
+          <ToastTitle>Long Content Toast</ToastTitle>
+          <ToastDescription>{longDescription}</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">Long Title + Long Description</h3>
+          <button
+            onClick={() => setBothLongOpen(true)}
+            className="rounded-md bg-warning px-md py-sm text-sm text-warning-foreground"
+          >
+            Show Both Long
+          </button>
+        </div>
+        <ToastRoot open={bothLongOpen} onOpenChange={setBothLongOpen} variant="warning">
+          <ToastTitle>{longTitle}</ToastTitle>
+          <ToastDescription>{longDescription}</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+
+        <div className="space-y-sm">
+          <h3 className="text-sm font-semibold">Long Content + Action</h3>
+          <button
+            onClick={() => setLongWithActionOpen(true)}
+            className="rounded-md bg-success px-md py-sm text-sm text-success-foreground"
+          >
+            Show Long + Action
+          </button>
+        </div>
+        <ToastRoot open={longWithActionOpen} onOpenChange={setLongWithActionOpen} variant="success">
+          <ToastTitle>{longTitle}</ToastTitle>
+          <ToastDescription>{longDescription}</ToastDescription>
+          <ToastAction altText="Dismiss" onClick={() => setLongWithActionOpen(false)}>
+            Dismiss
+          </ToastAction>
+          <ToastClose />
+        </ToastRoot>
+      </div>
     );
   },
 };
 
-export const AllVariants: Story = {
+// ============================================================================
+// USAGE EXAMPLES (NON-CANONICAL)
+// ============================================================================
+
+/**
+ * Basic Usage Example
+ * Demonstrates simple controlled toast usage pattern
+ */
+export const BasicUsage: Story = {
   render: () => {
-    const toast = useToast();
+    const [open, setOpen] = useState(false);
+
     return (
       <div className="space-y-sm">
         <button
-          onClick={() => toast.toast({ title: "Default", variant: "default" })}
-          className="block w-full rounded-md border border-border bg-background px-md py-sm"
+          onClick={() => setOpen(true)}
+          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
         >
-          Default
+          Show Basic Toast
         </button>
+        <ToastRoot open={open} onOpenChange={setOpen} variant="default">
+          <ToastTitle>Notification</ToastTitle>
+          <ToastDescription>This is a basic toast notification.</ToastDescription>
+          <ToastClose />
+        </ToastRoot>
+      </div>
+    );
+  },
+};
+
+/**
+ * With Action Example
+ * Demonstrates toast with action button
+ */
+export const WithAction: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div className="space-y-sm">
         <button
-          onClick={() => toast.toast({ title: "Success", variant: "success" })}
-          className="block w-full rounded-md bg-success px-md py-sm text-success-foreground"
+          onClick={() => setOpen(true)}
+          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
         >
-          Success
+          Show Toast with Action
         </button>
+        <ToastRoot open={open} onOpenChange={setOpen} variant="success">
+          <ToastTitle>File Deleted</ToastTitle>
+          <ToastDescription>The file has been moved to trash.</ToastDescription>
+          <ToastAction altText="Undo" onClick={() => setOpen(false)}>
+            Undo
+          </ToastAction>
+          <ToastClose />
+        </ToastRoot>
+      </div>
+    );
+  },
+};
+
+/**
+ * Multiple Toasts Example
+ * Demonstrates multiple toasts rendered simultaneously
+ */
+export const MultipleToasts: Story = {
+  render: () => {
+    const [toast1Open, setToast1Open] = useState(false);
+    const [toast2Open, setToast2Open] = useState(false);
+    const [toast3Open, setToast3Open] = useState(false);
+    const [toast4Open, setToast4Open] = useState(false);
+
+    return (
+      <div className="space-y-sm">
         <button
-          onClick={() => toast.toast({ title: "Info", variant: "info" })}
-          className="block w-full rounded-md bg-info px-md py-sm text-info-foreground"
+          onClick={() => {
+            setToast1Open(true);
+            setToast2Open(true);
+            setToast3Open(true);
+            setToast4Open(true);
+          }}
+          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
         >
-          Info
+          Show Multiple Toasts
         </button>
-        <button
-          onClick={() => toast.toast({ title: "Warning", variant: "warning" })}
-          className="block w-full rounded-md bg-warning px-md py-sm text-warning-foreground"
-        >
-          Warning
-        </button>
-        <button
-          onClick={() => toast.toast({ title: "Danger", variant: "danger" })}
-          className="block w-full rounded-md bg-destructive px-md py-sm text-destructive-foreground"
-        >
-          Danger
-        </button>
+        <ToastRoot open={toast1Open} onOpenChange={setToast1Open} variant="success">
+          <ToastTitle>Toast 1</ToastTitle>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={toast2Open} onOpenChange={setToast2Open} variant="default">
+          <ToastTitle>Toast 2</ToastTitle>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={toast3Open} onOpenChange={setToast3Open} variant="warning">
+          <ToastTitle>Toast 3</ToastTitle>
+          <ToastClose />
+        </ToastRoot>
+        <ToastRoot open={toast4Open} onOpenChange={setToast4Open} variant="error">
+          <ToastTitle>Toast 4</ToastTitle>
+          <ToastClose />
+        </ToastRoot>
       </div>
     );
   },

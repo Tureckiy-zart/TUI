@@ -11,7 +11,7 @@ import {
 } from "./index";
 
 const meta: Meta<typeof EmptyState> = {
-  title: "Components/Data/EmptyState",
+  title: "Legacy Patterns/States/EmptyState",
   component: EmptyState,
   tags: ["autodocs"],
   parameters: {

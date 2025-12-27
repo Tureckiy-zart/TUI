@@ -406,7 +406,7 @@ This step answers the question:
 
 * ✅ List ALL visual and behavioral props
 * ✅ Map EACH prop to an existing token domain
-* ✅ Document token requirements (spacing, color, radius, typography, motion, elevation)
+* ✅ Document token requirements (spacing, color, radius, typography, motion, elevation, gradients, opacity)
 * ✅ Verify ALL required tokens exist in token system
 * ✅ Use `Responsive<T>` where responsiveness is required
 
@@ -437,8 +437,9 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
   - Format: Markdown table with columns: `Prop Name | Token Domain | Token Type | Responsive? | Notes`
   - Example: `padding | spacing | SpacingToken | Yes (sm/md/lg) | Uses semanticSpacing.md`
 * **Token requirements document:**
-  - List ALL token domains used (spacing, color, radius, typography, motion, elevation)
-  - Verify each token exists in `src/FOUNDATION/tokens/`
+  - List ALL token domains used (Foundation tokens: spacing, color, radius, typography, motion, elevation, gradients, opacity)
+  - List Shared Component Tokens used (if applicable: ICON_TOKENS, FORM_TOKENS, etc.)
+  - Verify each token exists in `src/FOUNDATION/tokens/` or `src/tokens/components/`
 * **Token existence verification:**
   - Explicit statement: "All required tokens verified to exist in token system"
 * **Responsive token identification:**
@@ -459,7 +460,7 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 
 - [ ] ALL visual/behavioral props listed
 - [ ] EACH prop mapped to existing token domain
-- [ ] Token requirements documented (spacing/color/radius/typography/motion/elevation)
+- [ ] Token requirements documented (Foundation tokens: spacing/color/radius/typography/motion/elevation/gradients/opacity, Shared Component Tokens if applicable)
 - [ ] ALL required tokens verified to exist
 - [ ] `Responsive<T>` usage identified where needed
 - [ ] NO raw values in mapping
@@ -467,6 +468,7 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 
 ### Reference
 
+* [Token Authority](./TOKEN_AUTHORITY.md) — Token system structure and domain hierarchy
 * [Authority Navigation](./AUTHORITY_NAVIGATION.md) — Map of all Authority Contracts
 * [Spacing Authority](./SPACING_AUTHORITY.md) — Spacing tokens
 * [Radius Authority](./RADIUS_AUTHORITY.md) — Border radius tokens
@@ -494,6 +496,7 @@ This step answers the question:
 * ✅ Document API contract
 * ✅ Define variants (must use global variant dictionary)
 * ✅ Define sizes (must use global size scale: xs/sm/md/lg/xl/2xl/3xl)
+* ✅ Document size mapping table (if component has `size` prop)
 * ✅ Document prop descriptions and examples
 * ✅ Verify API complies with Authority Contracts
 
@@ -538,6 +541,12 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 * **Size definition (if applicable):**
   - MUST use global size scale: xs/sm/md/lg/xl/2xl/3xl
   - Document which sizes are supported and why
+* **Size mapping table (if component has `size` prop):**
+  - MUST document size-to-token mapping using SIZE_MAPPING_SPEC template
+  - MUST include all mandatory mapping keys (heightToken, paddingXToken, paddingYToken, textToken, radiusToken, gapToken, iconSizeToken, minWidthToken, hitAreaToken, maxWidthToken)
+  - MUST use token references only (no raw values)
+  - MUST document supported sizes subset
+  - Reference: [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) for template and requirements
 * **Prop descriptions and JSDoc examples:**
   - Each prop MUST have JSDoc comment
   - At least 1 usage example per prop
@@ -562,6 +571,9 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 - [ ] API contract documented
 - [ ] Variants use global variant dictionary (if applicable)
 - [ ] Sizes use global size scale (if applicable)
+- [ ] Size mapping table documented (if component has `size` prop)
+- [ ] Size mapping table follows SIZE_MAPPING_SPEC template
+- [ ] All mandatory mapping keys present in size mapping table
 - [ ] NO boolean style toggles without token backing
 - [ ] NO variant enums without token backing
 - [ ] NO invented size or variant names
@@ -571,6 +583,7 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 ### Reference
 
 * [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
+* [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract and template
 * [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension API rules
 * [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation Enforcement rules
 
@@ -705,7 +718,7 @@ This step answers the question:
 - [ ] CSS variables via token system
 - [ ] CVA pattern followed (if applicable)
 - [ ] State handling implemented (if applicable)
-- [ ] **SELF-CHECK:** Quick scan for raw values (colors like `#hex`, spacing like `16px`, sizes like `1rem`) — MUST be ZERO raw values before proceeding
+- [ ] **SELF-CHECK:** Quick scan for raw values (colors like `#hex`, spacing like `16px`, sizes like `1rem`, gradients like `linear-gradient(...)`, opacity like `0.5`) — MUST be ZERO raw values before proceeding
 - [ ] **SELF-CHECK:** Verify C2 token mapping followed (compare implementation against C2 token mapping table)
 - [ ] **SELF-CHECK:** Verify C3 API contract followed (compare implementation against C3 public props definition)
 - [ ] NO raw values in implementation

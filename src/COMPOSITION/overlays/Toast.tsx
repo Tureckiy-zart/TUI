@@ -2,196 +2,143 @@
 
 /**
  * ============================================================================
- * ⏳ FOUNDATION · LEGACY · UNLOCKED_FOR_MIGRATION - Toast Component
- * ============================================================================
- *
- * **STATUS:** ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
- * **UNLOCK DATE:** 2025-12-19
- * **TASK:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
- *
- * **UNLOCK RATIONALE:**
- * Toast was declared as LOCKED but was implemented using legacy patterns and
- * never passed the canonical Foundation Step Pipeline (0–13). The current lock
- * is declarative only and blocks required migration.
- *
- * **MIGRATION PATH:**
- * Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure
- * full compliance with all Authority Contracts and canonical lifecycle
- * requirements, similar to Button/Link standards.
- *
- * **CONSTRAINTS DURING UNLOCK:**
- * - ❌ No public API expansion
- * - ❌ No new variants or sizes
- * - ❌ No behavior changes outside canonicalization
- * - ❌ No bypass of Authority Contracts
- * - ✅ Refactor strictly via Foundation Step Pipeline
- * - ✅ Canonical CVA, typing, and interaction refactor allowed
- * - ✅ Authority Contract alignment allowed
- *
- * **EXIT CRITERIA:**
- * - Component completes Steps 0–13
- * - Foundation lock report exists
- * - Public Type Surface is locked
- * - Component re-marked as FOUNDATION · LOCKED
- *
- * **REFERENCE:**
- * - docs/architecture/FOUNDATION_LOCK.md (Legacy Foundation Components section)
- * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
- *
+ * 🔒 FOUNDATION COMPONENT - Toast Component
  * ============================================================================
  *
  * Toast Component
  *
- * Radix-based toast notification component with token-driven styling.
+ * Stateless UI renderer built on Radix Toast primitives with token-driven styling.
  * All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal)
  * is handled by Radix Toast primitives. Tenerife UI provides visual styling through tokens only.
+ *
+ * Toast is a stateless UI renderer. It does not manage notification logic, timing, queues, or imperative APIs.
+ * All state must be externally controlled via open/onOpenChange props.
  *
  * DO NOT reimplement Radix behavior (timers, focus logic, keyboard handling, portals).
  * All behavioral logic must delegate to Radix Toast primitives.
  *
- * Supports variants: default, success, info, warning, danger.
+ * Supports variants: default, success, warning, error (visual only).
  * Uses CSS animations with motion tokens and Radix data attributes.
  */
 
 import * as ToastPrimitives from "@radix-ui/react-toast";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import * as React from "react";
 
-import { getDelayMs } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { TOAST_TOKENS } from "@/FOUNDATION/tokens/components/toast";
-import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
+
+// ============================================================================
+// TYPES
+// ============================================================================
+
+/**
+ * Toast variant type
+ * Represents visual intent only (no behavior changes)
+ */
+export type ToastVariant = "default" | "success" | "warning" | "error";
+
+// ============================================================================
+// STYLING CONSTANTS
+// ============================================================================
+
+/**
+ * Shared action button styling
+ * Used by standalone ToastAction component
+ */
+const TOAST_ACTION_CLASSES =
+  "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+
+/**
+ * Shared close button styling
+ * Used by standalone ToastClose component
+ */
+const TOAST_CLOSE_CLASSES = [
+  TOAST_TOKENS.dismiss.position,
+  TOAST_TOKENS.dismiss.size,
+  TOAST_TOKENS.dismiss.radius,
+  TOAST_TOKENS.dismiss.padding,
+  TOAST_TOKENS.dismiss.colors.default,
+  TOAST_TOKENS.dismiss.states.default,
+  MOTION_TOKENS.transition.opacity,
+  TOAST_TOKENS.dismiss.colors.hover,
+  TOAST_TOKENS.dismiss.states.groupHover,
+  TOAST_TOKENS.dismiss.states.focus,
+  TOAST_TOKENS.dismiss.states.focusRing,
+].join(" ");
+
+/**
+ * Icon size for close button
+ */
+const TOAST_ICON_SIZE = "h-4 w-4";
 
 // ============================================================================
 // CVA VARIANTS
 // ============================================================================
 
-const toastVariants = cva(
-  `group pointer-events-auto relative flex items-center justify-between overflow-hidden border ${TOAST_TOKENS.width.full} ${TOAST_TOKENS.spacing.gap} ${MOTION_TOKENS.transition.all} ${TOAST_TOKENS.animation.radix.root} ${TOAST_TOKENS.animation.radix.state.open} ${TOAST_TOKENS.animation.radix.state.closed}`,
-  {
-    variants: {
-      variant: {
-        default: `${TOAST_TOKENS.surface.default} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
-        success: `${TOAST_TOKENS.surface.success} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
-        info: `${TOAST_TOKENS.surface.info} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
-        warning: `${TOAST_TOKENS.surface.warning} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
-        danger: `${TOAST_TOKENS.surface.danger} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
+const toastVariants = tokenCVA({
+  base: `group pointer-events-auto relative flex items-center justify-between overflow-hidden border ${TOAST_TOKENS.width.full} ${TOAST_TOKENS.spacing.gap} ${MOTION_TOKENS.transition.all} ${TOAST_TOKENS.animation.radix.root} ${TOAST_TOKENS.animation.radix.state.open} ${TOAST_TOKENS.animation.radix.state.closed}`,
+  variants: {
+    variant: {
+      default: `${TOAST_TOKENS.surface.default} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
+      success: `${TOAST_TOKENS.surface.success} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
+      warning: `${TOAST_TOKENS.surface.warning} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
+      error: `${TOAST_TOKENS.surface.danger} ${TOAST_TOKENS.radius.default} ${TOAST_TOKENS.shadow.default} ${TOAST_TOKENS.spacing.padding}`,
+    } satisfies Record<ToastVariant, string>,
   },
-);
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 // ============================================================================
 // TOAST ROOT
 // ============================================================================
-
-export interface ToastActionData {
-  label: string;
-  onClick: () => void;
-}
-
-export interface ToastData {
-  id: string;
-  title?: string;
-  description?: string;
-  variant?: "default" | "success" | "info" | "warning" | "danger";
-  action?: ToastActionData;
-  /**
-   * Toast duration - token-based
-   * Uses motion duration tokens
-   * Passed to Radix Toast.Root duration prop
-   */
-  duration?: ResponsiveDelay;
-}
 
 export interface ToastRootProps
   extends
     Omit<React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root>, "duration">,
     VariantProps<typeof toastVariants> {
   /**
-   * Toast data
+   * Controlled open state
+   * Must be provided externally - Toast does not own state
    */
-  toast: ToastData;
+  open: boolean;
+  /**
+   * Callback when open state changes
+   * Must be provided externally - Toast does not own state
+   */
+  onOpenChange: (open: boolean) => void;
+  /**
+   * Visual variant (visual only, no behavior changes)
+   */
+  variant?: ToastVariant;
+  /**
+   * Children (use ToastTitle, ToastDescription, ToastAction, ToastClose)
+   */
+  children: React.ReactNode;
 }
 
 /**
  * Toast Root component
- * Wrapper around Radix Toast.Root with token-based styling.
+ * Stateless UI renderer built on Radix Toast.Root with token-based styling.
  * Radix handles all behavior: swipe gestures, auto-dismiss, focus, keyboard, a11y.
+ * All state must be externally controlled via open/onOpenChange props.
  */
 const ToastRoot = React.forwardRef<HTMLLIElement, ToastRootProps>(
-  ({ toast, variant, className, ...props }, ref) => {
-    const toastVariant = variant || toast.variant || "default";
-
-    // Convert ResponsiveDelay to milliseconds for Radix
-    // Radix Toast.Root expects duration in milliseconds (behavioral prop, not visual)
-    // Default to 5000ms if no duration specified
-    const durationMs = toast.duration ? getDelayMs(toast.duration, 5000) : 5000;
-
+  ({ open, onOpenChange, variant = "default", className, children, ...props }, ref) => {
     return (
       <ToastPrimitives.Root
         ref={ref}
-        className={cn(toastVariants({ variant: toastVariant }), className)}
-        duration={durationMs}
+        open={open}
+        onOpenChange={onOpenChange}
+        className={cn(toastVariants({ variant }), className)}
         {...props}
       >
-        <div className={cn(TOAST_TOKENS.content.layout, TOAST_TOKENS.content.gap)}>
-          <div className={cn("flex-1", TOAST_TOKENS.content.verticalSpacing)}>
-            {toast.title && (
-              <ToastPrimitives.Title
-                className={cn(TOAST_TOKENS.title.fontSize, TOAST_TOKENS.title.fontWeight)}
-              >
-                {toast.title}
-              </ToastPrimitives.Title>
-            )}
-            {toast.description && (
-              <ToastPrimitives.Description
-                className={cn(TOAST_TOKENS.description.fontSize, TOAST_TOKENS.description.opacity)}
-              >
-                {toast.description}
-              </ToastPrimitives.Description>
-            )}
-            {toast.action && (
-              <div className="mt-sm">
-                <ToastPrimitives.Action
-                  altText={toast.action.label}
-                  onClick={toast.action.onClick}
-                  className={cn(
-                    "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-                    TOAST_TOKENS.action.height,
-                    TOAST_TOKENS.action.padding,
-                    TOAST_TOKENS.action.fontSize,
-                  )}
-                >
-                  {toast.action.label}
-                </ToastPrimitives.Action>
-              </div>
-            )}
-          </div>
-        </div>
-        <ToastPrimitives.Close
-          className={cn(
-            TOAST_TOKENS.dismiss.position,
-            TOAST_TOKENS.dismiss.size,
-            TOAST_TOKENS.dismiss.radius,
-            TOAST_TOKENS.dismiss.padding,
-            TOAST_TOKENS.dismiss.colors.default,
-            TOAST_TOKENS.dismiss.states.default,
-            MOTION_TOKENS.transition.opacity,
-            TOAST_TOKENS.dismiss.colors.hover,
-            TOAST_TOKENS.dismiss.states.groupHover,
-            TOAST_TOKENS.dismiss.states.focus,
-            TOAST_TOKENS.dismiss.states.focusRing,
-          )}
-          aria-label="Dismiss toast"
-        >
-          <X className="h-4 w-4" />
-        </ToastPrimitives.Close>
+        {children}
       </ToastPrimitives.Root>
     );
   },
@@ -199,7 +146,7 @@ const ToastRoot = React.forwardRef<HTMLLIElement, ToastRootProps>(
 ToastRoot.displayName = ToastPrimitives.Root.displayName;
 
 // ============================================================================
-// TOAST PRIMITIVES (Exposed for advanced usage)
+// TOAST PRIMITIVES (Exposed for composition)
 // ============================================================================
 
 /**
@@ -245,7 +192,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+      TOAST_ACTION_CLASSES,
       TOAST_TOKENS.action.height,
       TOAST_TOKENS.action.padding,
       TOAST_TOKENS.action.fontSize,
@@ -266,24 +213,11 @@ const ToastClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Close
     ref={ref}
-    className={cn(
-      TOAST_TOKENS.dismiss.position,
-      TOAST_TOKENS.dismiss.size,
-      TOAST_TOKENS.dismiss.radius,
-      TOAST_TOKENS.dismiss.padding,
-      TOAST_TOKENS.dismiss.colors.default,
-      TOAST_TOKENS.dismiss.states.default,
-      MOTION_TOKENS.transition.opacity,
-      TOAST_TOKENS.dismiss.colors.hover,
-      TOAST_TOKENS.dismiss.states.groupHover,
-      TOAST_TOKENS.dismiss.states.focus,
-      TOAST_TOKENS.dismiss.states.focusRing,
-      className,
-    )}
+    className={cn(TOAST_CLOSE_CLASSES, className)}
     aria-label="Dismiss toast"
     {...props}
   >
-    <X className="h-4 w-4" />
+    <X className={TOAST_ICON_SIZE} />
   </ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;
@@ -295,22 +229,26 @@ ToastClose.displayName = ToastPrimitives.Close.displayName;
 /**
  * Foundation Toast Components
  *
- * All components are intentionally exposed for advanced usage patterns:
+ * All components are stateless UI renderers built on Radix primitives:
+ *
+ * - ToastProvider: Thin wrapper around Radix Toast.Provider
+ *   Provides Radix context only, no state or business logic
  *
  * - ToastRoot: Main toast component (wraps Radix Toast.Root)
- *   Use this for controlled toast rendering with open/onOpenChange props
+ *   Requires controlled open/onOpenChange props
+ *   Uses children composition pattern
  *
  * - ToastTitle: Toast title component (wraps Radix Toast.Title)
- *   Exposed for custom toast layouts that need fine-grained control
+ *   Use as child of ToastRoot
  *
  * - ToastDescription: Toast description component (wraps Radix Toast.Description)
- *   Exposed for custom toast layouts that need fine-grained control
+ *   Use as child of ToastRoot
  *
  * - ToastAction: Toast action button (wraps Radix Toast.Action)
- *   Exposed for custom action button styling or placement
+ *   Use as child of ToastRoot
  *
  * - ToastClose: Toast close button (wraps Radix Toast.Close)
- *   Exposed for custom close button styling or placement
+ *   Use as child of ToastRoot
  *
  * - toastVariants: CVA variants for custom toast styling
  *   Exposed for extension components that need to style toasts differently
@@ -326,7 +264,7 @@ export { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle, toast
  *   Rationale: Previous API used `Toast` as the main component name.
  *   This alias allows existing code to continue working without changes.
  *   Note: This is a simple alias - no legacy behavior is preserved.
- *   The component is fully Radix-based regardless of which name is used.
+ *   The component is fully stateless regardless of which name is used.
  *
  * - ToastProps: Alias for ToastRootProps
  *   Rationale: Previous API used `ToastProps` as the type name.

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Timeline } from "./Timeline";
 
 const meta: Meta<typeof Timeline> = {
-  title: "Components/Timeline",
+  title: "Legacy Patterns/Lists/Timeline",
   component: Timeline,
   parameters: {
     layout: "padded",

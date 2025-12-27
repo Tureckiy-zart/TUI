@@ -97,73 +97,17 @@ export interface TableContextValue {
    * Whether table has expandable rows
    */
   expandable?: boolean;
-
-  /**
-   * Render function for expandable content
-   */
-  renderExpandableContent?: (item: unknown, index: number) => ReactNode;
 }
 
 /**
  * Table Root component props
  */
-export interface TableRootProps<
-  T = Record<string, unknown>,
-> extends React.HTMLAttributes<HTMLTableElement> {
-  /**
-   * Table data array
-   */
-  data: T[];
-
-  /**
-   * Column definitions
-   */
-  columns: TableColumn<T>[];
-
-  /**
-   * Key to use for row identification
-   */
-  rowKey: keyof T | ((item: T, index: number) => string | number);
-
-  /**
-   * Whether table supports sorting
-   * @default false
-   */
-  sortable?: boolean;
-
+export interface TableRootProps extends React.HTMLAttributes<HTMLTableElement> {
   /**
    * Whether table supports expandable rows
    * @default false
    */
   expandable?: boolean;
-
-  /**
-   * Render function for expandable content
-   */
-  renderExpandableContent?: (item: T, index: number) => ReactNode;
-
-  /**
-   * Whether table is in loading state
-   * @default false
-   */
-  loading?: boolean;
-
-  /**
-   * Empty state message (shown when data is empty)
-   */
-  emptyMessage?: string;
-
-  /**
-   * Whether header is sticky
-   * @default false
-   */
-  stickyHeader?: boolean;
-
-  /**
-   * Row size
-   * @default "md"
-   */
-  rowSize?: "sm" | "md" | "lg";
 }
 
 /**
@@ -225,11 +169,6 @@ export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement>
    * @default false
    */
   expandable?: boolean;
-
-  /**
-   * Row key (for expansion tracking)
-   */
-  rowKey?: string | number;
 
   /**
    * Whether row is expanded

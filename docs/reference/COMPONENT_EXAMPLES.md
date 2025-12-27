@@ -1,7 +1,7 @@
 # Extension Component Examples
 
 **Status:** Active  
-**Last Updated:** 2025-12-19  
+**Last Updated:** 2025-12-25  
 **Purpose:** Reference examples of Extension component patterns
 
 ---
@@ -11,6 +11,12 @@
 This document provides reference examples of Extension components organized by pattern type. Use these examples as patterns when creating new Extension components.
 
 **Key Principle:** All Extension components must follow these patterns. For architectural rules and Authority Contracts, see [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) and [AUTHORITY_NAVIGATION.md](../architecture/AUTHORITY_NAVIGATION.md). Deviations require architectural justification.
+
+**Reference Components for Complex Controls:**
+- **Button** (Foundation) - `src/PRIMITIVES/Button/Button.tsx` - Foundation layer reference for complex controls
+- **Slider** (Extension) - `src/COMPOSITION/controls/Slider/Slider.tsx` - Extension layer reference for complex controls
+  - Demonstrates token migration (cva → tokenCVA), token hole fixing, Extension vs Foundation distinction
+  - **Audit Report:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md` (Pipeline 18A Complete)
 
 ---
 
@@ -73,6 +79,36 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
 ### Control Components
 
 Control components are interactive elements that handle user input.
+
+#### Reference Examples for Complex Controls
+
+**Canonical Reference Components:** Use these components as reference patterns when creating complex control components:
+
+1. **Button** (Foundation) - `src/PRIMITIVES/Button/Button.tsx`
+   - **Reference Use Cases:**
+     - Token-driven styling with component-specific tokens (BUTTON_TOKENS)
+     - CVA usage with tokenCVA (for Foundation components)
+     - Foundation Enforcement pattern (no className/style props)
+     - Size and variant mapping via tokens
+     - Complete token compliance (100% token-driven)
+   
+2. **Slider** (Extension) - `src/COMPOSITION/controls/Slider/Slider.tsx`
+   - **Reference Use Cases:**
+     - **Token migration pattern:** Demonstrates proper tokenCVA migration (cva → tokenCVA)
+     - **Token hole fixing:** Shows how to replace raw Tailwind classes with component-specific tokens (SLIDER_TOKENS)
+     - **Extension vs Foundation distinction:** Clear example of Extension control (not Foundation)
+     - **Complex control pattern:** Multi-part component (root, track, range, thumb, marks) with separate CVA variants
+     - **Type system alignment:** Explicit union types with `satisfies Record<Type, string>` constraints
+     - **Orientation support:** Demonstrates compound variants with orientation × size
+     - **Complete token compliance:** All raw values replaced with SLIDER_TOKENS references
+   - **Audit Report:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md` (Pipeline 18A Complete)
+
+**Why These Are Reference Examples:**
+
+- **Button** demonstrates Foundation layer patterns (locked, immutable, canonical)
+- **Slider** demonstrates Extension layer patterns (evolvable, complex, token-compliant)
+- Both show complete token compliance and proper CVA usage
+- Both serve as examples for fixing token holes and ensuring architectural compliance
 
 #### Example: Input
 

@@ -49,11 +49,11 @@
  */
 
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
-import { cva } from "class-variance-authority";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import * as React from "react";
 
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { CONTEXT_MENU_TOKENS } from "@/FOUNDATION/tokens/components/context-menu";
 import type {
@@ -128,7 +128,7 @@ function getRadiusClass(token: RadiusToken | undefined): string | undefined {
  *   to tokens would be over-engineering for such a minimal aesthetic constant.
  *   WARNING: Do not refactor these animation offsets into the token system.
  */
-const contextMenuContentVariants = cva(
+const contextMenuContentVariants = tokenCVA(
   `z-50 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[2px] data-[side=left]:slide-in-from-right-[2px] data-[side=right]:slide-in-from-left-[2px] data-[side=top]:slide-in-from-bottom-[2px]`,
   {
     variants: {
@@ -136,7 +136,7 @@ const contextMenuContentVariants = cva(
         sm: `${CONTEXT_MENU_TOKENS.size.sm.content.padding} ${CONTEXT_MENU_TOKENS.size.sm.content.radius} ${CONTEXT_MENU_TOKENS.size.sm.content.minWidth}`,
         md: `${CONTEXT_MENU_TOKENS.size.md.content.padding} ${CONTEXT_MENU_TOKENS.size.md.content.radius} ${CONTEXT_MENU_TOKENS.size.md.content.minWidth}`,
         lg: `${CONTEXT_MENU_TOKENS.size.lg.content.padding} ${CONTEXT_MENU_TOKENS.size.lg.content.radius} ${CONTEXT_MENU_TOKENS.size.lg.content.minWidth}`,
-      },
+      } satisfies Record<ContextMenuSizeToken, string>,
     },
     defaultVariants: {
       size: "md",
@@ -144,7 +144,7 @@ const contextMenuContentVariants = cva(
   },
 );
 
-const contextMenuItemVariants = cva(
+const contextMenuItemVariants = tokenCVA(
   `relative flex cursor-default select-none items-center outline-none ${CONTEXT_MENU_TOKENS.item.focus.background} ${CONTEXT_MENU_TOKENS.item.focus.text} ${CONTEXT_MENU_TOKENS.item.disabled.pointerEvents} data-[disabled]:opacity-50`,
   {
     variants: {
@@ -152,12 +152,12 @@ const contextMenuItemVariants = cva(
         sm: `${CONTEXT_MENU_TOKENS.size.sm.item.padding.horizontal} ${CONTEXT_MENU_TOKENS.size.sm.item.padding.vertical} ${CONTEXT_MENU_TOKENS.item.radius} ${CONTEXT_MENU_TOKENS.size.sm.item.fontSize} ${CONTEXT_MENU_TOKENS.size.sm.item.height}`,
         md: `${CONTEXT_MENU_TOKENS.size.md.item.padding.horizontal} ${CONTEXT_MENU_TOKENS.size.md.item.padding.vertical} ${CONTEXT_MENU_TOKENS.item.radius} ${CONTEXT_MENU_TOKENS.size.md.item.fontSize} ${CONTEXT_MENU_TOKENS.size.md.item.height}`,
         lg: `${CONTEXT_MENU_TOKENS.size.lg.item.padding.horizontal} ${CONTEXT_MENU_TOKENS.size.lg.item.padding.vertical} ${CONTEXT_MENU_TOKENS.item.radius} ${CONTEXT_MENU_TOKENS.size.lg.item.fontSize} ${CONTEXT_MENU_TOKENS.size.lg.item.height}`,
-      },
+      } satisfies Record<ContextMenuSizeToken, string>,
       tone: {
         neutral: `${CONTEXT_MENU_TOKENS.item.tone.neutral.default.background} ${CONTEXT_MENU_TOKENS.item.tone.neutral.default.text} ${CONTEXT_MENU_TOKENS.item.tone.neutral.hover.background} ${CONTEXT_MENU_TOKENS.item.tone.neutral.hover.text}`,
         primary: `${CONTEXT_MENU_TOKENS.item.tone.primary.default.background} ${CONTEXT_MENU_TOKENS.item.tone.primary.default.text} ${CONTEXT_MENU_TOKENS.item.tone.primary.hover.background} ${CONTEXT_MENU_TOKENS.item.tone.primary.hover.text}`,
         destructive: `${CONTEXT_MENU_TOKENS.item.tone.destructive.default.background} ${CONTEXT_MENU_TOKENS.item.tone.destructive.default.text} ${CONTEXT_MENU_TOKENS.item.tone.destructive.hover.background} ${CONTEXT_MENU_TOKENS.item.tone.destructive.hover.text}`,
-      },
+      } satisfies Record<ContextMenuItemToneToken, string>,
     },
     defaultVariants: {
       size: "md",
@@ -177,7 +177,7 @@ const contextMenuItemVariants = cva(
  * - `[2px]` offset in slide-in animations: Same micro-interaction detail as Content.
  *   Consistent animation behavior across all menu levels. Do NOT refactor into tokens.
  */
-const contextMenuSubContentVariants = cva(
+const contextMenuSubContentVariants = tokenCVA(
   `z-50 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[2px] data-[side=left]:slide-in-from-right-[2px] data-[side=right]:slide-in-from-left-[2px] data-[side=top]:slide-in-from-bottom-[2px]`,
   {
     variants: {
@@ -185,7 +185,7 @@ const contextMenuSubContentVariants = cva(
         sm: `${CONTEXT_MENU_TOKENS.size.sm.content.padding} ${CONTEXT_MENU_TOKENS.size.sm.content.radius} ${CONTEXT_MENU_TOKENS.size.sm.content.minWidth}`,
         md: `${CONTEXT_MENU_TOKENS.size.md.content.padding} ${CONTEXT_MENU_TOKENS.size.md.content.radius} ${CONTEXT_MENU_TOKENS.size.md.content.minWidth}`,
         lg: `${CONTEXT_MENU_TOKENS.size.lg.content.padding} ${CONTEXT_MENU_TOKENS.size.lg.content.radius} ${CONTEXT_MENU_TOKENS.size.lg.content.minWidth}`,
-      },
+      } satisfies Record<ContextMenuSizeToken, string>,
     },
     defaultVariants: {
       size: "md",

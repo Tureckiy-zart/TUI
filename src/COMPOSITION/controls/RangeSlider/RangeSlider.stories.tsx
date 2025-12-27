@@ -3,7 +3,7 @@ import * as React from "react";
 import { RangeSlider } from "./RangeSlider";
 
 const meta: Meta<typeof RangeSlider> = {
-  title: "Controls/RangeSlider",
+  title: "Foundation Locked/Composition/Controls/RangeSlider",
   component: RangeSlider,
   tags: ["autodocs"],
   argTypes: {

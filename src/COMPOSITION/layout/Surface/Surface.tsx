@@ -3,41 +3,58 @@
 /**
  * Surface Container Component
  *
- * Token-driven surface component for elevation variants (flat, raised, sunken, outline, subtle).
- * Uses CVA for variants and maps strictly to SURFACE_TOKENS.
+ * Variant-driven surface elevation container component that extends Box to provide semantic,
+ * token-constrained surface styling through predefined variants. Surface bundles background,
+ * border, and shadow into cohesive elevation patterns (via SurfaceVariant dictionary),
+ * ensuring consistent visual hierarchy while maintaining a single-variant API.
+ *
+ * Surface IS: A variant-driven surface styling container, semantic abstraction over Box,
+ * token-constrained component that maps variants to SURFACE_TOKENS.
+ *
+ * Surface IS NOT: A generic container (Box), structured content container (Card),
+ * layout composition primitive (Stack/Flex/Grid), or interactive component.
+ *
+ * Uses tokenCVA for variants and maps strictly to SURFACE_TOKENS.
  * All styling uses tokens exclusively (no raw CSS values).
+ *
+ * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { SURFACE_TOKENS } from "@/FOUNDATION/tokens/components/surface";
 
 import { Box, type BoxProps } from "../Box";
 import type { ResponsiveRadius, ResponsiveSpacing } from "../layout.types";
 
-const surfaceVariants = cva("", {
+/**
+ * Surface variant type (canonical SurfaceVariant dictionary)
+ * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
+ */
+export type SurfaceVariantType = "default" | "elevated" | "outlined" | "filled" | "subtle";
+
+const surfaceVariants = tokenCVA({
   variants: {
     variant: {
-      flat: `${SURFACE_TOKENS.variant.flat.bg} ${SURFACE_TOKENS.variant.flat.border} ${SURFACE_TOKENS.variant.flat.shadow}`,
-      raised: `${SURFACE_TOKENS.variant.raised.bg} ${SURFACE_TOKENS.variant.raised.border} ${SURFACE_TOKENS.variant.raised.shadow}`,
-      sunken: `${SURFACE_TOKENS.variant.sunken.bg} ${SURFACE_TOKENS.variant.sunken.border} ${SURFACE_TOKENS.variant.sunken.shadow}`,
-      outline: `${SURFACE_TOKENS.variant.outline.bg} ${SURFACE_TOKENS.variant.outline.border} ${SURFACE_TOKENS.variant.outline.shadow}`,
+      default: `${SURFACE_TOKENS.variant.default.bg} ${SURFACE_TOKENS.variant.default.border} ${SURFACE_TOKENS.variant.default.shadow}`,
+      elevated: `${SURFACE_TOKENS.variant.elevated.bg} ${SURFACE_TOKENS.variant.elevated.border} ${SURFACE_TOKENS.variant.elevated.shadow}`,
+      outlined: `${SURFACE_TOKENS.variant.outlined.bg} ${SURFACE_TOKENS.variant.outlined.border} ${SURFACE_TOKENS.variant.outlined.shadow}`,
+      filled: `${SURFACE_TOKENS.variant.filled.bg} ${SURFACE_TOKENS.variant.filled.border} ${SURFACE_TOKENS.variant.filled.shadow}`,
       subtle: `${SURFACE_TOKENS.variant.subtle.bg} ${SURFACE_TOKENS.variant.subtle.border} ${SURFACE_TOKENS.variant.subtle.shadow}`,
-    },
+    } satisfies Record<SurfaceVariantType, string>,
   },
   defaultVariants: {
-    variant: "flat",
+    variant: "default",
   },
 });
 
-export interface SurfaceProps
-  extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p">, VariantProps<typeof surfaceVariants> {
+export interface SurfaceProps extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p"> {
   /**
-   * Surface variant
+   * Surface variant (canonical SurfaceVariant dictionary)
    */
-  variant?: "flat" | "raised" | "sunken" | "outline" | "subtle";
+  variant?: SurfaceVariantType;
 
   /**
    * Padding - token-based (sm, md, lg, xl)
@@ -56,7 +73,7 @@ export interface SurfaceProps
  * Surface component - elevation variant container
  */
 const Surface = React.forwardRef<HTMLDivElement, SurfaceProps>(
-  ({ variant = "flat", p, radius, className, ...props }, ref) => {
+  ({ variant = "default", p, radius, className, ...props }, ref) => {
     // Get default padding and radius from variant if not provided
     // Extract token name from class string (e.g., "p-md" -> "md")
     const variantPadding = SURFACE_TOKENS.variant[variant].padding;

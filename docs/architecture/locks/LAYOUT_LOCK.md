@@ -91,13 +91,17 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 8. Surface Component
-- **File:** `src/components/layout/Surface.tsx`
+- **File:** `src/COMPOSITION/layout/Surface/Surface.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
-- **Exports:** `Surface`, `SurfaceProps`, `surfaceVariants`
+- **Validated by Pipeline 18A:** 2025-12-26
+- **Exports:** `Surface`, `SurfaceProps`, `SurfaceVariantType`, `surfaceVariants`
 - **Role:** Surface elevation variant component extension of Box
-- **Responsibility:** Provides surface elevation variants (flat, raised, sunken) with token-based styling
-- **Uses:** Box internally as base container, CVA for variant management
+- **Responsibility:** Provides surface elevation variants (default, elevated, outlined, filled, subtle) with token-based styling
+- **Uses:** Box internally as base container, tokenCVA for variant management
+- **Pipeline 18A:** ✅ Complete (2025-12-26) - Component refactored, fully compliant with all architectural standards
+- **Breaking Changes:** Variant names changed (flat→default, raised→elevated, outline→outlined, sunken→filled, subtle→subtle) per VARIANTS_SIZE_CANON
+- **Audit Report:** `docs/reports/audit/SURFACE_BASELINE_REPORT.md`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ---

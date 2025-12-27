@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ConfirmDialog } from "./ConfirmDialog";
 
 const meta: Meta<typeof ConfirmDialog> = {
-  title: "Modals/ConfirmDialog",
+  title: "Legacy Composition/Overlays/ConfirmDialog",
   component: ConfirmDialog,
   parameters: {
     layout: "centered",

@@ -3,7 +3,12 @@
 import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { radioVariants } from "./radio-variants";
+import {
+  type RadioSize,
+  type RadioState,
+  type RadioVariant,
+  radioVariants,
+} from "./radio-variants";
 
 /**
  * Radio Component Props
@@ -22,19 +27,19 @@ export interface RadioProps
    * Radio variant style
    * @default "outline"
    */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
+  variant?: RadioVariant;
 
   /**
    * Radio size
    * @default "md"
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: RadioSize;
 
   /**
    * Radio state
    * @default "default"
    */
-  state?: "default" | "checked" | "disabled" | "error";
+  state?: RadioState;
 
   /**
    * Whether radio is checked (controlled)

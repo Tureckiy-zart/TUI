@@ -5,237 +5,329 @@
  * All visual properties use token unions exclusively.
  */
 
-import { cva } from "class-variance-authority";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
+import { RANGESLIDER_TOKENS } from "@/FOUNDATION/tokens/components/rangeslider";
+
+import type { RangeSliderOrientation, RangeSliderSize, RangeSliderVariant } from "./RangeSlider";
 
 /**
  * RangeSlider root container variants
  */
-const rangeSliderRootVariants = cva(
-  // Base styles
-  "relative flex touch-none select-none items-center",
-  {
-    variants: {
-      size: {
-        sm: "", // Container size for small (orientation-specific)
-        md: "", // Container size for medium (orientation-specific)
-        lg: "", // Container size for large (orientation-specific)
-      },
-      variant: {
-        primary: "",
-        secondary: "",
-        outline: "",
-      },
-      orientation: {
-        horizontal: "w-full flex-row",
-        vertical: "h-full flex-col",
-      },
-    },
-    compoundVariants: [
-      // Horizontal sizes (height)
-      { orientation: "horizontal", size: "sm", class: "h-4" },
-      { orientation: "horizontal", size: "md", class: "h-5" },
-      { orientation: "horizontal", size: "lg", class: "h-6" },
-      // Vertical sizes (width)
-      { orientation: "vertical", size: "sm", class: "w-4" },
-      { orientation: "vertical", size: "md", class: "w-5" },
-      { orientation: "vertical", size: "lg", class: "w-6" },
-    ],
-    defaultVariants: {
-      size: "md",
-      variant: "primary",
-      orientation: "horizontal",
-    },
+const rangeSliderRootVariants = tokenCVA({
+  base: "relative flex touch-none select-none items-center",
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+      lg: "",
+    } satisfies Record<RangeSliderSize, string>,
+    variant: {
+      primary: "",
+      secondary: "",
+      outline: "",
+    } satisfies Record<RangeSliderVariant, string>,
+    orientation: {
+      horizontal: "w-full flex-row",
+      vertical: "h-full flex-col",
+    } satisfies Record<RangeSliderOrientation, string>,
   },
-);
+  compoundVariants: [
+    // Horizontal sizes (height)
+    {
+      orientation: "horizontal",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.root.size.sm.height,
+    },
+    {
+      orientation: "horizontal",
+      size: "md",
+      class: RANGESLIDER_TOKENS.root.size.md.height,
+    },
+    {
+      orientation: "horizontal",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.root.size.lg.height,
+    },
+    // Vertical sizes (width)
+    {
+      orientation: "vertical",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.root.size.sm.width,
+    },
+    {
+      orientation: "vertical",
+      size: "md",
+      class: RANGESLIDER_TOKENS.root.size.md.width,
+    },
+    {
+      orientation: "vertical",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.root.size.lg.width,
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    variant: "primary",
+    orientation: "horizontal",
+  },
+});
 
 /**
  * RangeSlider track variants (background track)
  */
-const rangeSliderTrackVariants = cva(
-  // Base styles - rounded track with transition
-  "relative grow overflow-hidden rounded-full transition-colors",
-  {
-    variants: {
-      size: {
-        sm: "", // Track thickness (orientation-specific)
-        md: "", // Track thickness (orientation-specific)
-        lg: "", // Track thickness (orientation-specific)
-      },
-      variant: {
-        primary: "bg-primary-200 dark:bg-primary-800",
-        secondary: "bg-secondary-200 dark:bg-secondary-800",
-        outline: "bg-border",
-      },
-      orientation: {
-        horizontal: "w-full",
-        vertical: "h-full",
-      },
-    },
-    compoundVariants: [
-      // Horizontal track heights
-      { orientation: "horizontal", size: "sm", class: "h-1" },
-      { orientation: "horizontal", size: "md", class: "h-1.5" },
-      { orientation: "horizontal", size: "lg", class: "h-2" },
-      // Vertical track widths
-      { orientation: "vertical", size: "sm", class: "w-1" },
-      { orientation: "vertical", size: "md", class: "w-1.5" },
-      { orientation: "vertical", size: "lg", class: "w-2" },
-    ],
-    defaultVariants: {
-      size: "md",
-      variant: "primary",
-      orientation: "horizontal",
-    },
+const rangeSliderTrackVariants = tokenCVA({
+  base: "relative grow overflow-hidden rounded-full transition-colors",
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+      lg: "",
+    } satisfies Record<RangeSliderSize, string>,
+    variant: {
+      primary: RANGESLIDER_TOKENS.track.variant.primary,
+      secondary: RANGESLIDER_TOKENS.track.variant.secondary,
+      outline: RANGESLIDER_TOKENS.track.variant.outline,
+    } satisfies Record<RangeSliderVariant, string>,
+    orientation: {
+      horizontal: "w-full",
+      vertical: "h-full",
+    } satisfies Record<RangeSliderOrientation, string>,
   },
-);
+  compoundVariants: [
+    // Horizontal track heights
+    {
+      orientation: "horizontal",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.track.size.sm.height,
+    },
+    {
+      orientation: "horizontal",
+      size: "md",
+      class: RANGESLIDER_TOKENS.track.size.md.height,
+    },
+    {
+      orientation: "horizontal",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.track.size.lg.height,
+    },
+    // Vertical track widths
+    {
+      orientation: "vertical",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.track.size.sm.width,
+    },
+    {
+      orientation: "vertical",
+      size: "md",
+      class: RANGESLIDER_TOKENS.track.size.md.width,
+    },
+    {
+      orientation: "vertical",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.track.size.lg.width,
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    variant: "primary",
+    orientation: "horizontal",
+  },
+});
 
 /**
  * RangeSlider range variants (filled portion between thumbs)
  */
-const rangeSliderRangeVariants = cva(
-  // Base styles - absolute positioning for range fill
-  "absolute transition-colors",
-  {
-    variants: {
-      size: {
-        sm: "",
-        md: "",
-        lg: "",
-      },
-      variant: {
-        primary: "bg-primary-600 dark:bg-primary-500",
-        secondary: "bg-secondary-600 dark:bg-secondary-500",
-        outline: "bg-primary-600 dark:bg-primary-500",
-      },
-      orientation: {
-        horizontal: "h-full",
-        vertical: "w-full",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-      variant: "primary",
-      orientation: "horizontal",
-    },
+const rangeSliderRangeVariants = tokenCVA({
+  base: "absolute transition-colors",
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+      lg: "",
+    } satisfies Record<RangeSliderSize, string>,
+    variant: {
+      primary: RANGESLIDER_TOKENS.range.variant.primary,
+      secondary: RANGESLIDER_TOKENS.range.variant.secondary,
+      outline: RANGESLIDER_TOKENS.range.variant.outline,
+    } satisfies Record<RangeSliderVariant, string>,
+    orientation: {
+      horizontal: "h-full",
+      vertical: "w-full",
+    } satisfies Record<RangeSliderOrientation, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+    variant: "primary",
+    orientation: "horizontal",
+  },
+});
 
 /**
  * RangeSlider thumb variants (draggable handles)
  */
-const rangeSliderThumbVariants = cva(
-  // Base styles - circular thumb with focus ring
-  [
-    "block rounded-full border-2 transition-colors",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+const rangeSliderThumbVariants = tokenCVA({
+  base: [
+    "block rounded-full",
+    RANGESLIDER_TOKENS.thumb.border,
+    "transition-colors",
+    "focus-visible:outline-none",
+    RANGESLIDER_TOKENS.thumb.focusRing,
     "disabled:pointer-events-none disabled:opacity-50",
   ].join(" "),
-  {
-    variants: {
-      size: {
-        sm: "h-4 w-4", // Thumb size: 16px
-        md: "h-5 w-5", // Thumb size: 20px
-        lg: "h-6 w-6", // Thumb size: 24px
-      },
-      variant: {
-        primary: [
-          "border-primary-600 bg-background",
-          "dark:border-primary-500",
-          "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
-        ].join(" "),
-        secondary: [
-          "border-secondary-600 bg-background",
-          "dark:border-secondary-500",
-          "focus-visible:ring-secondary-600 dark:focus-visible:ring-secondary-500",
-        ].join(" "),
-        outline: [
-          "border-primary-600 bg-background",
-          "dark:border-primary-500",
-          "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
-        ].join(" "),
-      },
-    },
-    defaultVariants: {
-      size: "md",
-      variant: "primary",
-    },
+  variants: {
+    size: {
+      sm: `${RANGESLIDER_TOKENS.thumb.size.sm.height} ${RANGESLIDER_TOKENS.thumb.size.sm.width}`,
+      md: `${RANGESLIDER_TOKENS.thumb.size.md.height} ${RANGESLIDER_TOKENS.thumb.size.md.width}`,
+      lg: `${RANGESLIDER_TOKENS.thumb.size.lg.height} ${RANGESLIDER_TOKENS.thumb.size.lg.width}`,
+    } satisfies Record<RangeSliderSize, string>,
+    variant: {
+      primary: [
+        RANGESLIDER_TOKENS.thumb.variant.primary.border,
+        RANGESLIDER_TOKENS.thumb.variant.primary.background,
+        RANGESLIDER_TOKENS.thumb.variant.primary.focusRing,
+      ].join(" "),
+      secondary: [
+        RANGESLIDER_TOKENS.thumb.variant.secondary.border,
+        RANGESLIDER_TOKENS.thumb.variant.secondary.background,
+        RANGESLIDER_TOKENS.thumb.variant.secondary.focusRing,
+      ].join(" "),
+      outline: [
+        RANGESLIDER_TOKENS.thumb.variant.outline.border,
+        RANGESLIDER_TOKENS.thumb.variant.outline.background,
+        RANGESLIDER_TOKENS.thumb.variant.outline.focusRing,
+      ].join(" "),
+    } satisfies Record<RangeSliderVariant, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+    variant: "primary",
+  },
+});
 
 /**
  * RangeSlider mark variants (visual tick marks)
  */
-const rangeSliderMarkVariants = cva(
-  // Base styles - absolute positioned mark with dot
-  "absolute flex items-center justify-center pointer-events-none",
-  {
-    variants: {
-      size: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base",
-      },
-      orientation: {
-        horizontal: "flex-col top-full mt-1 -translate-x-1/2",
-        vertical: "flex-row left-full ml-1 -translate-y-1/2",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-      orientation: "horizontal",
-    },
+const rangeSliderMarkVariants = tokenCVA({
+  base: "absolute flex items-center justify-center pointer-events-none",
+  variants: {
+    size: {
+      sm: RANGESLIDER_TOKENS.mark.label.fontSize.sm,
+      md: RANGESLIDER_TOKENS.mark.label.fontSize.md,
+      lg: RANGESLIDER_TOKENS.mark.label.fontSize.lg,
+    } satisfies Record<RangeSliderSize, string>,
+    orientation: {
+      horizontal: "flex-col top-full -translate-x-1/2",
+      vertical: "flex-row left-full -translate-y-1/2",
+    } satisfies Record<RangeSliderOrientation, string>,
   },
-);
+  compoundVariants: [
+    {
+      orientation: "horizontal",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.sm,
+    },
+    {
+      orientation: "horizontal",
+      size: "md",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.md,
+    },
+    {
+      orientation: "horizontal",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.lg,
+    },
+    {
+      orientation: "vertical",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.sm,
+    },
+    {
+      orientation: "vertical",
+      size: "md",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.md,
+    },
+    {
+      orientation: "vertical",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.lg,
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    orientation: "horizontal",
+  },
+});
 
 /**
  * RangeSlider mark dot variants (the actual tick mark)
  */
-const rangeSliderMarkDotVariants = cva(
-  // Base styles - small circular dot
-  "rounded-full bg-border transition-colors",
-  {
-    variants: {
-      size: {
-        sm: "w-1 h-1",
-        md: "w-1.5 h-1.5",
-        lg: "w-2 h-2",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
+const rangeSliderMarkDotVariants = tokenCVA({
+  base: "rounded-full bg-border transition-colors",
+  variants: {
+    size: {
+      sm: `${RANGESLIDER_TOKENS.mark.dot.size.sm.height} ${RANGESLIDER_TOKENS.mark.dot.size.sm.width}`,
+      md: `${RANGESLIDER_TOKENS.mark.dot.size.md.height} ${RANGESLIDER_TOKENS.mark.dot.size.md.width}`,
+      lg: `${RANGESLIDER_TOKENS.mark.dot.size.lg.height} ${RANGESLIDER_TOKENS.mark.dot.size.lg.width}`,
+    } satisfies Record<RangeSliderSize, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 /**
  * RangeSlider mark label variants
  */
-const rangeSliderMarkLabelVariants = cva(
-  // Base styles - label text
-  "text-muted-foreground whitespace-nowrap",
-  {
-    variants: {
-      size: {
-        sm: "text-xs mt-1",
-        md: "text-sm mt-1.5",
-        lg: "text-base mt-2",
-      },
-      orientation: {
-        horizontal: "",
-        vertical: "ml-1",
-      },
-    },
-    compoundVariants: [
-      { orientation: "vertical", size: "sm", class: "ml-1 mt-0" },
-      { orientation: "vertical", size: "md", class: "ml-1.5 mt-0" },
-      { orientation: "vertical", size: "lg", class: "ml-2 mt-0" },
-    ],
-    defaultVariants: {
-      size: "md",
-      orientation: "horizontal",
-    },
+const rangeSliderMarkLabelVariants = tokenCVA({
+  base: "text-muted-foreground whitespace-nowrap",
+  variants: {
+    size: {
+      sm: RANGESLIDER_TOKENS.mark.label.fontSize.sm,
+      md: RANGESLIDER_TOKENS.mark.label.fontSize.md,
+      lg: RANGESLIDER_TOKENS.mark.label.fontSize.lg,
+    } satisfies Record<RangeSliderSize, string>,
+    orientation: {
+      horizontal: "",
+      vertical: "",
+    } satisfies Record<RangeSliderOrientation, string>,
   },
-);
+  compoundVariants: [
+    {
+      orientation: "horizontal",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.sm,
+    },
+    {
+      orientation: "horizontal",
+      size: "md",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.md,
+    },
+    {
+      orientation: "horizontal",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.mark.label.marginTop.lg,
+    },
+    {
+      orientation: "vertical",
+      size: "sm",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.sm,
+    },
+    {
+      orientation: "vertical",
+      size: "md",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.md,
+    },
+    {
+      orientation: "vertical",
+      size: "lg",
+      class: RANGESLIDER_TOKENS.mark.label.marginLeft.lg,
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    orientation: "horizontal",
+  },
+});
 
 /**
  * Combined range slider variants
@@ -246,9 +338,9 @@ export const rangeSliderVariants = ({
   variant,
   orientation,
 }: {
-  size?: "sm" | "md" | "lg";
-  variant?: "primary" | "secondary" | "outline";
-  orientation?: "horizontal" | "vertical";
+  size?: RangeSliderSize;
+  variant?: RangeSliderVariant;
+  orientation?: RangeSliderOrientation;
 }) => ({
   root: () => rangeSliderRootVariants({ size, variant, orientation }),
   track: () => rangeSliderTrackVariants({ size, variant, orientation }),

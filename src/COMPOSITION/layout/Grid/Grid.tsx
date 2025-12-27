@@ -45,6 +45,27 @@ import type {
 export interface GridProps extends Omit<BoxProps, "display" | "align" | "justify"> {
   /**
    * Number of columns (1-6, 12, or none)
+   *
+   * Can be a simple value, a responsive object, or combined with shorthand props (sm, md, lg, xl, 2xl).
+   * Merging behavior:
+   * - If `cols` is a simple value and shorthand props are provided, `cols` becomes the base value
+   * - If `cols` is undefined and shorthand props are provided, shorthand props are used directly
+   * - If `cols` is a responsive object and shorthand props are provided, they are merged together
+   *
+   * @example
+   * ```tsx
+   * // Simple value
+   * <Grid cols={3} />
+   *
+   * // Responsive object
+   * <Grid cols={{ base: 1, md: 2, lg: 3 }} />
+   *
+   * // Shorthand props (cols becomes base)
+   * <Grid cols={1} md={2} lg={3} />
+   *
+   * // Shorthand props only (no cols)
+   * <Grid sm={1} md={2} lg={3} />
+   * ```
    */
   cols?: ResponsiveColumns;
 
@@ -97,42 +118,6 @@ export interface GridProps extends Omit<BoxProps, "display" | "align" | "justify
    * Justify content
    */
   justify?: ResponsiveJustify;
-}
-
-/**
- * Get base value from responsive value
- */
-function getBaseValue<T>(
-  value:
-    | ResponsiveColumns
-    | ResponsiveRows
-    | ResponsiveFlow
-    | ResponsiveAlignment
-    | ResponsiveJustify
-    | T
-    | undefined,
-): T | undefined {
-  if (value === undefined || value === null) {
-    return undefined;
-  }
-
-  // Check if it's a responsive value object
-  if (typeof value === "object" && !Array.isArray(value) && value !== null) {
-    if ("base" in value && value.base !== undefined) {
-      return value.base as T;
-    }
-    if ("sm" in value && value.sm !== undefined) {
-      return value.sm as T;
-    }
-    if ("md" in value && value.md !== undefined) {
-      return value.md as T;
-    }
-    if ("lg" in value && value.lg !== undefined) {
-      return value.lg as T;
-    }
-  }
-
-  return value as T;
 }
 
 /**
@@ -257,13 +242,13 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
     }
 
     // Get base values
-    const baseColsValue = getBaseValue<1 | 2 | 3 | 4 | 5 | 6 | 12 | "none">(colsValue);
-    const rowsValue = getBaseValue<1 | 2 | 3 | 4 | 5 | 6 | "none">(rows);
-    const flowValue = getBaseValue<"row" | "col" | "dense" | "row-dense" | "col-dense">(flow);
-    const alignValue = getBaseValue<"start" | "end" | "center" | "baseline" | "stretch">(align);
-    const justifyValue = getBaseValue<"start" | "end" | "center" | "between" | "around" | "evenly">(
-      justify,
-    );
+    const baseColsValue = getBaseValueUtil<1 | 2 | 3 | 4 | 5 | 6 | 12 | "none">(colsValue);
+    const rowsValue = getBaseValueUtil<1 | 2 | 3 | 4 | 5 | 6 | "none">(rows);
+    const flowValue = getBaseValueUtil<"row" | "col" | "dense" | "row-dense" | "col-dense">(flow);
+    const alignValue = getBaseValueUtil<"start" | "end" | "center" | "baseline" | "stretch">(align);
+    const justifyValue = getBaseValueUtil<
+      "start" | "end" | "center" | "between" | "around" | "evenly"
+    >(justify);
 
     // Build responsive column classes
     const responsiveColClasses: string[] = [];

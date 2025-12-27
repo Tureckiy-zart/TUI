@@ -153,6 +153,8 @@ export type ResponsiveStackDirection = Responsive<StackDirectionValue>;
 export type ResponsiveShadow = ResponsiveShadowToken;
 
 /**
- * Surface variant values
+ * Surface variant values (canonical SurfaceVariant dictionary)
+ * @deprecated Use SurfaceVariant from Surface component instead
+ * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
  */
-export type SurfaceVariant = "flat" | "raised" | "sunken";
+export type SurfaceVariant = "default" | "elevated" | "outlined" | "filled" | "subtle";

@@ -40,7 +40,6 @@ export {
 // Component tokens
 export {
   ALERT_TOKENS,
-  type AlertVariant,
   BUTTON_TOKENS,
   type ButtonFontSize,
   type ButtonHeight,
@@ -275,8 +274,14 @@ export {
   type TextWeight,
 } from "./PRIMITIVES/Text";
 
-// Alert component (CVA-based, token-driven)
-export { Alert, type AlertProps, alertVariants } from "./PRIMITIVES/Alert";
+// Alert component (tokenCVA-based, token-driven)
+export {
+  Alert,
+  ALERT_VARIANTS,
+  type AlertProps,
+  type AlertVariant,
+  alertVariants,
+} from "./PRIMITIVES/Alert";
 
 // Link component (CVA-based, token-driven)
 export {
@@ -286,6 +291,9 @@ export {
   type LinkVariant,
   linkVariants,
 } from "./PRIMITIVES/Link";
+
+// NavLink component (Navigation primitive built on Link)
+export { NavLink, type NavLinkProps } from "./PRIMITIVES/NavLink";
 
 // Badge component (CVA-based, token-driven)
 export {
@@ -332,6 +340,18 @@ export {
   type SelectWidth,
 } from "./COMPOSITION/controls/Select";
 
+// Avatar component (Radix-based, token-driven)
+export {
+  Avatar,
+  AvatarGroup,
+  type AvatarGroupProps,
+  type AvatarGroupSpacing,
+  type AvatarProps,
+  type AvatarShape,
+  type AvatarSize,
+  type AvatarStatus,
+} from "./COMPOSITION/controls/Avatar";
+
 // Modal component (Radix-based, token-driven)
 export {
   Modal,
@@ -349,6 +369,7 @@ export {
   type ModalOverlayProps,
   ModalRoot,
   type ModalRootProps,
+  type ModalSize,
   ModalTitle,
   type ModalTitleProps,
   ModalTrigger,
@@ -379,7 +400,7 @@ export {
   type FieldProps,
 } from "./PRIMITIVES/Field";
 export { Input, type InputProps, inputVariants } from "./PRIMITIVES/Input";
-export { Label, type LabelProps, labelVariants } from "./PRIMITIVES/Label";
+export { Label, type LabelProps } from "./PRIMITIVES/Label";
 export {
   Radio,
   RadioGroup,
@@ -390,7 +411,30 @@ export {
 export { Textarea, type TextareaProps, textareaVariants } from "./PRIMITIVES/Textarea";
 
 // Skeleton component (token-driven)
-export { Skeleton, type SkeletonProps, skeletonVariants } from "./PRIMITIVES/Skeleton";
+export {
+  Skeleton,
+  type SkeletonProps,
+  type SkeletonVariant,
+  skeletonVariants,
+} from "./PRIMITIVES/Skeleton";
+
+// Progress component (token-driven)
+export { Progress, type ProgressProps, type ProgressSize } from "./PRIMITIVES/Progress";
+
+// Separator component (Radix-based, token-driven)
+export {
+  Separator,
+  type SeparatorProps,
+  separatorVariants,
+} from "./COMPOSITION/controls/Separator";
+
+// AspectRatio component (Radix-based, layout utility)
+export {
+  ASPECT_RATIO_PRESETS,
+  AspectRatio,
+  type AspectRatioPreset,
+  type AspectRatioProps,
+} from "./COMPOSITION/controls/AspectRatio";
 
 // ============================================================================
 // LAYOUT PRIMITIVES
@@ -601,13 +645,23 @@ export {
 // ============================================================================
 // NAVIGATION SYSTEM
 // ============================================================================
-// Navigation components (Tabs, SegmentedControl, Breadcrumbs, Pagination, Stepper)
+// Navigation components (Tabs, SegmentedControl, Breadcrumbs, Pagination, Stepper, NavRoot)
 export {
   type BreadcrumbItem,
   Breadcrumbs,
   type BreadcrumbsItemProps,
   type BreadcrumbsRootProps,
   type BreadcrumbsSeparatorProps,
+  NavItem,
+  type NavItemProps,
+  NavList,
+  type NavListProps,
+  NavRoot,
+  type NavRootProps,
+  NavSeparator,
+  type NavSeparatorProps,
+  NavText,
+  type NavTextProps,
   Pagination,
   type PaginationEllipsisProps,
   type PaginationItemProps,
@@ -617,8 +671,10 @@ export {
   SegmentedControl,
   type SegmentedControlItemProps,
   segmentedControlItemVariants,
+  type SegmentedControlOrientation,
   type SegmentedControlRootProps,
   segmentedControlRootVariants,
+  type SegmentedControlSize,
   Stepper,
   type StepperContentProps,
   type StepperIndicatorProps,

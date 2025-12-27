@@ -1,10 +1,10 @@
 "use client";
 
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TOOLTIP_TOKENS } from "@/FOUNDATION/tokens/components/tooltip";
 import type {
@@ -22,6 +22,18 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 /**
+ * Tooltip variant type - Explicit union (not derived from CVA)
+ */
+export type TooltipVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "outline"
+  | "ghost"
+  | "link"
+  | "destructive";
+
+/**
  * Tooltip Content Variants
  *
  * NOTE: This implementation is intentionally similar to Popover but not unified.
@@ -32,30 +44,23 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
  * - Structural similarity is acceptable but abstraction would reduce clarity
  * - Each component's variants are tightly coupled to its specific token definitions
  */
-const tooltipContentVariants = cva(
-  `z-50 overflow-hidden ${TOOLTIP_TOKENS.content.border.default} ${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
-  {
-    variants: {
-      variant: {
-        primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
-        secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-        accent: "border-accent/50 text-accent-foreground bg-accent/10",
-        outline: "bg-background text-foreground border-border",
-        ghost: "bg-transparent text-foreground border-transparent",
-        link: "bg-transparent text-primary border-transparent",
-        destructive: "border-destructive/50 text-destructive bg-destructive/10",
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-    },
+const tooltipContentVariants = tokenCVA({
+  base: `z-50 overflow-hidden ${TOOLTIP_TOKENS.content.border.default} ${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.radius.md} ${TOOLTIP_TOKENS.content.padding.horizontal} ${TOOLTIP_TOKENS.content.padding.vertical} ${TOOLTIP_TOKENS.content.fontSize.sm} ${TOOLTIP_TOKENS.content.shadow.md}`,
+  variants: {
+    variant: {
+      primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
+      secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
+      accent: "border-accent/50 text-accent-foreground bg-accent/10",
+      outline: "bg-background text-foreground border-border",
+      ghost: "bg-transparent text-foreground border-transparent",
+      link: "bg-transparent text-primary border-transparent",
+      destructive: "border-destructive/50 text-destructive bg-destructive/10",
+    } satisfies Record<TooltipVariant, string>,
   },
-);
-
-/**
- * Tooltip variant type
- */
-type TooltipVariant = VariantProps<typeof tooltipContentVariants>["variant"];
+  defaultVariants: {
+    variant: "primary",
+  },
+});
 
 /**
  * TooltipContent - Styled tooltip content component
@@ -68,11 +73,11 @@ const TooltipContent = React.forwardRef<
   Omit<
     React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
     "sideOffset" | "alignOffset"
-  > &
-    VariantProps<typeof tooltipContentVariants> & {
-      sideOffset?: ResponsiveSideOffset;
-      alignOffset?: ResponsiveAlignOffset;
-    }
+  > & {
+    variant?: TooltipVariant;
+    sideOffset?: ResponsiveSideOffset;
+    alignOffset?: ResponsiveAlignOffset;
+  }
 >(({ className, variant, sideOffset, alignOffset, ...props }, ref) => {
   // Resolve offset tokens to pixels
   // NOTE: Offset resolution pattern is intentionally duplicated in PopoverContent.
@@ -213,3 +218,4 @@ export function TooltipWrapper({
 }
 
 export { Tooltip, TooltipContent, tooltipContentVariants, TooltipProvider, TooltipTrigger };
+export type { TooltipVariant };

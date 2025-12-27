@@ -27,7 +27,7 @@ import { Button } from "./Button";
  */
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "Foundation Locked/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -334,13 +334,15 @@ export const Matrix: Story = {
           <div className="grid grid-cols-4 gap-md">
             <div></div>
             {sizes.map((size) => (
-              <div key={size} className="text-center text-xs text-muted-foreground">
+              <div key={size} className="text-center text-xs font-medium text-foreground">
                 {size}
               </div>
             ))}
             {variants.map((variant) => (
               <React.Fragment key={variant}>
-                <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
+                <div className="flex items-center text-xs font-medium text-foreground">
+                  {variant}
+                </div>
                 {sizes.map((size) => (
                   <div key={`${variant}-${size}`} className="flex items-center justify-center">
                     <Button variant={variant} size={size}>
@@ -358,13 +360,15 @@ export const Matrix: Story = {
           <div className="grid grid-cols-4 gap-md">
             <div></div>
             {sizes.map((size) => (
-              <div key={size} className="text-center text-xs text-muted-foreground">
+              <div key={size} className="text-center text-xs font-medium text-foreground">
                 {size}
               </div>
             ))}
             {variants.map((variant) => (
               <React.Fragment key={variant}>
-                <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
+                <div className="flex items-center text-xs font-medium text-foreground">
+                  {variant}
+                </div>
                 {sizes.map((size) => (
                   <div
                     key={`${variant}-${size}-disabled`}
@@ -385,13 +389,15 @@ export const Matrix: Story = {
           <div className="grid grid-cols-4 gap-md">
             <div></div>
             {sizes.map((size) => (
-              <div key={size} className="text-center text-xs text-muted-foreground">
+              <div key={size} className="text-center text-xs font-medium text-foreground">
                 {size}
               </div>
             ))}
             {variants.map((variant) => (
               <React.Fragment key={variant}>
-                <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
+                <div className="flex items-center text-xs font-medium text-foreground">
+                  {variant}
+                </div>
                 {sizes.map((size) => (
                   <div key={`${variant}-${size}-left`} className="flex items-center justify-center">
                     <Button variant={variant} size={size} leftIcon={<IconSearch />}>
@@ -409,13 +415,15 @@ export const Matrix: Story = {
           <div className="grid grid-cols-4 gap-md">
             <div></div>
             {sizes.map((size) => (
-              <div key={size} className="text-center text-xs text-muted-foreground">
+              <div key={size} className="text-center text-xs font-medium text-foreground">
                 {size}
               </div>
             ))}
             {variants.map((variant) => (
               <React.Fragment key={variant}>
-                <div className="flex items-center text-xs text-muted-foreground">{variant}</div>
+                <div className="flex items-center text-xs font-medium text-foreground">
+                  {variant}
+                </div>
                 {sizes.map((size) => (
                   <div
                     key={`${variant}-${size}-right`}
@@ -457,7 +465,7 @@ export const Interactions: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">asChild Composition</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           Button can render as a different element using the asChild prop (Radix Slot pattern).
         </p>
         <div className="flex flex-wrap items-center gap-md">
@@ -475,7 +483,7 @@ export const Interactions: Story = {
 
       <div>
         <h3 className="mb-md text-sm font-medium">Focus-Visible Behavior</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           Use keyboard navigation (Tab) to see focus-visible styling. Mouse clicks do not show
           focus-visible.
         </p>
@@ -489,7 +497,7 @@ export const Interactions: Story = {
 
       <div>
         <h3 className="mb-md text-sm font-medium">asChild with Icons</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           asChild works with icons by cloning the child element and injecting icons.
         </p>
         <div className="flex flex-wrap items-center gap-md">
@@ -528,7 +536,7 @@ export const Accessibility: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Keyboard Navigation & Focus-Visible</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           Use Tab key to navigate. Focus-visible styling appears only for keyboard navigation, not
           mouse clicks. Press Enter or Space to activate buttons.
         </p>
@@ -542,7 +550,7 @@ export const Accessibility: Story = {
 
       <div>
         <h3 className="mb-md text-sm font-medium">Disabled State</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           Disabled buttons cannot receive focus via keyboard navigation and do not respond to
           keyboard activation.
         </p>
@@ -562,7 +570,7 @@ export const Accessibility: Story = {
 
       <div>
         <h3 className="mb-md text-sm font-medium">Accessible Names</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           Buttons have accessible names from text content or aria-label. Icon-only buttons require
           aria-label.
         </p>
@@ -580,7 +588,7 @@ export const Accessibility: Story = {
 
       <div>
         <h3 className="mb-md text-sm font-medium">asChild Accessibility</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs font-medium text-foreground/90">
           asChild preserves accessible name and keyboard behavior. aria-* props are forwarded to the
           child element.
         </p>

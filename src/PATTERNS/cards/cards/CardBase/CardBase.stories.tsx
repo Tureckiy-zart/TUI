@@ -10,7 +10,7 @@ import {
 } from "./CardBase";
 
 const meta: Meta<typeof CardBase> = {
-  title: "Components/Cards/CardBase",
+  title: "Legacy Patterns/Cards/CardBase",
   component: CardBase,
   parameters: {
     layout: "centered",

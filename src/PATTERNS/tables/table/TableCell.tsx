@@ -11,6 +11,7 @@ import * as React from "react";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
 
+import { ALIGNMENT_CLASSES } from "./Table.constants";
 import type { TableCellProps } from "./Table.types";
 
 export type { TableCellProps };
@@ -24,12 +25,6 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
     const typographyClass = TABLE_TOKENS.typography.cell.fontSize;
     const fontWeightClass = TABLE_TOKENS.typography.cell.fontWeight;
 
-    const alignmentClasses = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    };
-
     return (
       <td
         ref={ref}
@@ -37,7 +32,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
           paddingClass,
           typographyClass,
           fontWeightClass,
-          alignmentClasses[align],
+          ALIGNMENT_CLASSES[align],
           className,
         )}
         role="cell"

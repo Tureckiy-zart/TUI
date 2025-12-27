@@ -3,7 +3,7 @@ import { fn } from "@storybook/test";
 import { FilterBar } from "./FilterBar";
 
 const meta: Meta<typeof FilterBar> = {
-  title: "Filters/FilterBar",
+  title: "Legacy Patterns/Filters/FilterBar",
   component: FilterBar,
   parameters: {
     layout: "padded",

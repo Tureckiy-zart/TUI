@@ -179,22 +179,25 @@ const RangeSlider = React.forwardRef<
     // Normalize marks to array of RangeSliderMark objects
     const normalizedMarks = React.useMemo(() => {
       if (!marks || marks.length === 0) return [];
-      return marks.map((m) => (typeof m === "number" ? { value: m } : m));
-    }, [marks]);
+      return marks
+        .map((m) => (typeof m === "number" ? { value: m } : m))
+        .filter((m) => m.value >= min && m.value <= max); // Filter out-of-bounds marks
+    }, [marks, min, max]);
 
     // Render marks
     const renderMarks = () => {
       if (normalizedMarks.length === 0) return null;
+      if (max === min) return null; // Prevent division by zero
 
       return (
         <div className="pointer-events-none absolute inset-0">
-          {normalizedMarks.map((markItem, idx) => {
+          {normalizedMarks.map((markItem) => {
             const percent = ((markItem.value - min) / (max - min)) * 100;
             const style =
               orientation === "horizontal" ? { left: `${percent}%` } : { bottom: `${percent}%` };
 
             return (
-              <div key={idx} className={cn(mark())} style={style}>
+              <div key={markItem.value} className={cn(mark())} style={style}>
                 <div className={cn(markDot())} />
                 {showMarkLabels && markItem.label && (
                   <div className={cn(markLabel())}>{markItem.label}</div>

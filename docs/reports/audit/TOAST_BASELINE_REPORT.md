@@ -1,158 +1,129 @@
-# Toast Component — Foundation Refactor Audit Report
+# Toast Component Baseline Audit Report
 
 **Component:** Toast  
-**Layer:** Foundation (Legacy Unlocked)  
-**Date Created:** 2025-12-24  
-**Operator:** System  
-**Task ID:** TUI_TOAST_STEP_0  
-**Pipeline:** Foundation Step Pipeline (18A) — STEP 0–11
+**Layer:** FOUNDATION  
+**Date:** 2025-12-26  
+**Pipeline:** 18A  
+**Status:** ✅ LOCKED (Pipeline 18A Complete)
 
 ---
 
-## Document Status
+## Pipeline Progress Tracker
 
-**Current Step:** STEP 0 — Baseline Snapshot & Context Fixation  
-**Status:** ✅ COMPLETE  
-**Last Updated:** 2025-12-24
+- [x] STEP 0 — Baseline Snapshot & Context Fixation ✅ Complete
+- [x] STEP 1 — Structural & Code Quality Review ✅ Complete
+- [x] STEP 2 — Semantic Role & Responsibility Validation ✅ Complete
+- [x] STEP 3 — Duplication & Internal Pattern Alignment ✅ Complete
+- [x] STEP 4 — State & Interaction Model Review ✅ Complete
+- [x] STEP 5 — Token, Size & Variant Consistency ✅ Complete
+- [x] STEP 6 — Public API & DX Review ✅ Complete
+- [x] STEP 7 — Type System Alignment ✅ Complete
+- [x] STEP 8 — Intentional Refactor Pass ✅ Complete
+- [x] STEP 9 — Mandatory FIX & Consolidation ✅ Complete
+- [x] STEP 10 — Validation via Tests & Storybook ✅ Complete
+- [x] STEP 11 — Accessibility Audit & Fixes ✅ Complete
+- [x] STEP 12 — Final Review & Outcome Fixation + Architectural Lock ✅ Complete
 
----
-
-## Executive Summary
-
-This audit report tracks the canonical Foundation refactor of the **Toast** component through the mandatory Foundation Step Pipeline (18A). The component is currently marked as **LEGACY UNLOCKED** (unlocked 2025-12-19) and requires full migration to canonical Foundation standards.
-
-**Current State:**
-- Toast is implemented using Radix UI Toast primitives
-- Token-driven styling via `TOAST_TOKENS`
-- CVA-based variant system (default, success, info, warning, danger)
-- No test coverage detected
-- Storybook stories exist but coverage is basic
-
-**Target State:**
-- Full compliance with all Authority Contracts
-- Canonical CVA patterns aligned with Button/Link standards
-- Complete test coverage (behavior + edge cases)
-- Comprehensive Storybook coverage (matrix + states)
-- Accessibility audit passed
-- Foundation LOCKED status
+**Estimated Time:** 6-8 hours  
+**Checkpoints:** STEP 0, STEP 8, STEP 9, STEP 10, STEP 11, STEP 12
 
 ---
 
 ## STEP 0 — Baseline Snapshot & Context Fixation
 
-**Outcome:** ✅ Baseline established  
-**Blocking:** No  
-**Date Completed:** 2025-12-24
+### Header / Metadata
 
-### 0.1 Component Metadata
+- **Component Name:** Toast (exported as `Toast`, `ToastRoot`, `ToastProvider`, `ToastViewport`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`)
+- **Layer:** FOUNDATION
+- **Date:** 2025-12-26
+- **Operator:** User
+- **Assistant:** AI (Auto)
+- **Source Files:**
+  - `src/COMPOSITION/overlays/Toast.tsx`
+  - `src/COMPOSITION/overlays/ToastProvider.tsx`
+  - `src/COMPOSITION/overlays/ToastViewport.tsx`
+  - `src/COMPOSITION/overlays/Toaster/Toaster.tsx`
+  - `src/COMPOSITION/overlays/Toast.test.tsx`
+  - `src/COMPOSITION/overlays/Toast.stories.tsx`
 
-| Property | Value |
-|----------|-------|
-| **Component Name** | Toast |
-| **Declared Layer** | Foundation (Legacy Unlocked) |
-| **Unlock Date** | 2025-12-19 |
-| **Unlock Task** | TUNG_FOUNDATION_LEGACY_UNLOCK_01 |
-| **Category** | Overlay / Notification |
-| **External Dependencies** | `@radix-ui/react-toast`, `class-variance-authority`, `lucide-react` |
-| **Foundation Tokens** | `TOAST_TOKENS`, `MOTION_TOKENS` |
+### Baseline Inventory (FACTS ONLY)
 
-### 0.2 Implementation Files
+#### Implementation Files
 
-**Primary Implementation:**
-```
-src/COMPOSITION/overlays/Toast.tsx (342 lines)
-```
+1. **`src/COMPOSITION/overlays/Toast.tsx`**
+   - Main component file
+   - Exports: `ToastRoot`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `toastVariants`
+   - Legacy exports: `Toast` (alias for `ToastRoot`), `ToastProps` (alias for `ToastRootProps`)
+   - Contains `ToastData`, `ToastActionData` interfaces (business logic structures)
+   - `ToastRoot` accepts `toast: ToastData` prop (business logic violation)
+   - Handles `duration` prop conversion internally (business logic)
+   - Uses `tokenCVA` for variants (correct)
 
-**Supporting Files:**
-```
-src/COMPOSITION/overlays/ToastProvider.tsx (204 lines)
-src/COMPOSITION/overlays/ToastViewport.tsx (73 lines)
-src/COMPOSITION/overlays/Toaster/Toaster.tsx (30 lines)
-src/COMPOSITION/overlays/Toast.stories.tsx (203 lines)
-```
+2. **`src/COMPOSITION/overlays/ToastProvider.tsx`**
+   - Provider component with state management
+   - Contains `useState` hooks for `toasts` and `openStates` (state ownership violation)
+   - Contains `setTimeout` timers for cleanup (timer violation)
+   - Exports imperative API: `toast()`, `dismiss()`, `dismissAll()` (forbidden exports)
+   - Exports `useToast()` hook (forbidden export from Foundation)
+   - Wraps Radix `Toast.Provider` but adds business logic layer
 
-**Token Files:**
-```
-src/FOUNDATION/tokens/components/toast.ts (183 lines)
-```
+3. **`src/COMPOSITION/overlays/ToastViewport.tsx`**
+   - Viewport component
+   - Already stateless (no changes needed)
+   - Wraps Radix `Toast.Viewport` with token-based positioning
 
-**Export Files:**
-```
-src/COMPOSITION/overlays/index.ts (exports Toast, ToastProvider, ToastViewport, Toaster)
-```
+4. **`src/COMPOSITION/overlays/Toaster/Toaster.tsx`**
+   - Uses `useGlobalToast()` hook (business logic, Extension layer)
+   - Out of scope for Foundation refactor
 
-**Test Files:**
-```
-None detected
-```
+#### Storybook Files
 
-### 0.3 Public Exports
+- **`src/COMPOSITION/overlays/Toast.stories.tsx`**
+  - Uses imperative API (`useToast()` hook)
+  - Stories: `States`, `LongContent`, `BasicUsage`, `ProgrammaticDismissal`
+  - All stories use `toast.toast()`, `toast.dismiss()`, `toast.dismissAll()` (imperative API)
 
-**From `Toast.tsx`:**
+#### Test Files
+
+- **`src/COMPOSITION/overlays/Toast.test.tsx`**
+  - Tests use imperative API (`useToast()` hook)
+  - Tests cover: rendering, variants, action buttons, close buttons, multiple toasts, programmatic dismissal
+  - All tests use `toast.toast()`, `toast.dismiss()`, `toast.dismissAll()` (imperative API)
+
+#### Export Points
+
+**`src/COMPOSITION/overlays/index.ts`** exports:
+- `Toast`, `ToastAction`, `ToastActionData`, `ToastClose`, `ToastData`, `ToastDescription`, `ToastProps`, `ToastRoot`, `ToastRootProps`, `ToastTitle`, `ToastVariant`, `toastVariants` (from `./Toast`)
+- `ToastOptions`, `ToastProvider`, `ToastProviderProps`, `useToast` (from `./ToastProvider`) — **FORBIDDEN: useToast**
+- `ToastPosition`, `ToastViewport`, `ToastViewportProps` (from `./ToastViewport`)
+- `Toaster` (from `./Toaster`)
+
+#### External Dependencies
+
+- `@radix-ui/react-toast` — Radix Toast primitives (correct)
+- `class-variance-authority` — CVA for variants (correct)
+- `lucide-react` — Icons (X for close button)
+- `@/FOUNDATION/lib/token-cva` — tokenCVA utility (correct)
+- `@/FOUNDATION/tokens/components/toast` — Toast tokens (correct)
+- `@/FOUNDATION/tokens/components/motion` — Motion tokens (correct)
+
+#### Current Public Props
+
+**ToastRoot:**
 ```typescript
-// Main Components
-export { ToastRoot }           // Main toast component (Radix wrapper)
-export { ToastTitle }          // Toast title (Radix wrapper)
-export { ToastDescription }    // Toast description (Radix wrapper)
-export { ToastAction }         // Toast action button (Radix wrapper)
-export { ToastClose }          // Toast close button (Radix wrapper)
-
-// CVA Variants
-export { toastVariants }       // CVA variant definitions
-
-// Legacy Aliases (Backward Compatibility)
-export { Toast }               // Alias for ToastRoot
-export type { ToastProps }     // Alias for ToastRootProps
-
-// Types
-export type { ToastRootProps }
-export type { ToastData }
-export type { ToastActionData }
-```
-
-**From `ToastProvider.tsx`:**
-```typescript
-export { ToastProvider }       // Toast context provider
-export { useToast }            // Toast context hook
-export type { ToastProviderProps }
-export type { ToastOptions }
-```
-
-**From `ToastViewport.tsx`:**
-```typescript
-export { ToastViewport }       // Toast viewport (Radix wrapper)
-export type { ToastViewportProps }
-export type { ToastPosition }  // "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"
-```
-
-**From `Toaster/Toaster.tsx`:**
-```typescript
-export { Toaster }             // Global toast renderer component
-```
-
-### 0.4 Public API Shape
-
-**ToastRoot (Main Component):**
-```typescript
-interface ToastRootProps extends 
-  Omit<React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root>, "duration">,
-  VariantProps<typeof toastVariants> 
-{
-  toast: ToastData;
+interface ToastRootProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root>, "duration">,
+    VariantProps<typeof toastVariants> {
+  toast: ToastData; // ❌ Business logic violation
 }
 
 interface ToastData {
-  id: string;
+  id: string; // ❌ Business logic
   title?: string;
   description?: string;
-  variant?: "default" | "success" | "info" | "warning" | "danger";
-  action?: ToastActionData;
-  duration?: ResponsiveDelay;
-}
-
-interface ToastActionData {
-  label: string;
-  onClick: () => void;
+  variant?: ToastVariant;
+  action?: ToastActionData; // ❌ Business logic
+  duration?: ResponsiveDelay; // ❌ Business logic (handled internally)
 }
 ```
 
@@ -162,585 +133,628 @@ interface ToastProviderProps {
   children: React.ReactNode;
   position?: ToastPosition;
   swipeDirection?: "up" | "down" | "left" | "right";
-  duration?: number;  // Raw number (Radix API requirement)
+  duration?: number; // ❌ Behavioral prop (Radix API, but used for business logic)
 }
-
-interface ToastOptions {
-  title?: string;
-  description?: string;
-  variant?: "default" | "success" | "info" | "warning" | "danger";
-  action?: ToastActionData;
-  duration?: ResponsiveDelay;
-}
+// ❌ Exports: toast(), dismiss(), dismissAll(), useToast() — FORBIDDEN
 ```
 
 **ToastViewport:**
 ```typescript
 interface ToastViewportProps extends React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport> {
-  position?: ToastPosition;
+  position?: ToastPosition; // ✅ Visual only
 }
-
-type ToastPosition = 
-  | "top-left" 
-  | "top-center" 
-  | "top-right" 
-  | "bottom-left" 
-  | "bottom-center" 
-  | "bottom-right";
 ```
 
-### 0.5 CVA Variant System
+### Run Plan (STEP MAP)
 
-**Current Variants:**
-```typescript
-const toastVariants = cva(
-  // Base classes (all toasts)
-  "group pointer-events-auto relative flex items-center justify-between overflow-hidden border w-full gap-sm transition-all ...",
-  {
-    variants: {
-      variant: {
-        default: "bg-background border border-border text-foreground rounded-lg shadow-lg p-md",
-        success: "bg-success/10 border-success/20 text-success-foreground rounded-lg shadow-lg p-md",
-        info: "bg-info/10 border-info/20 text-info-foreground rounded-lg shadow-lg p-md",
-        warning: "bg-warning/10 border-warning/20 text-warning-foreground rounded-lg shadow-lg p-md",
-        danger: "bg-destructive/10 border-destructive/20 text-destructive-foreground rounded-lg shadow-lg p-md",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+#### STEP 1 — Structural & Code Quality Review
+- **Verify:** Code structure, readability, duplication
+- **BLOCKING:** Business logic patterns in Foundation layer
+- **Code changes:** Allowed (readability refactors only)
+- **Expected artifacts:** Report updates, FIX backlog items
+
+#### STEP 2 — Semantic Role & Responsibility Validation
+- **Verify:** Component role (stateless UI renderer vs notification system)
+- **BLOCKING:** Role violations (Toast must be stateless renderer, NOT notification system)
+- **Code changes:** Documentation only
+- **Expected artifacts:** Role definition, out-of-scope logic identification
+
+#### STEP 3 — Duplication & Internal Pattern Alignment
+- **Verify:** Pattern consistency with Radix primitives
+- **BLOCKING:** Non-canonical patterns
+- **Code changes:** Allowed (pattern alignment)
+- **Expected artifacts:** Pattern alignment documentation
+
+#### STEP 4 — State & Interaction Model Review
+- **Verify:** State ownership (must be externally controlled)
+- **BLOCKING:** Internal state ownership, timers, side effects
+- **Code changes:** Documentation only (changes in STEP 9)
+- **Expected artifacts:** State violations documented
+
+#### STEP 5 — Token, Size & Variant Consistency
+- **Verify:** Token-only styling, variant visual-only
+- **BLOCKING:** Variants affecting behavior
+- **Code changes:** Allowed (token compliance fixes)
+- **Expected artifacts:** Token compliance verification
+
+#### STEP 6 — Public API & DX Review
+- **Verify:** API clarity, controlled props only
+- **BLOCKING:** Imperative APIs, business logic props
+- **Code changes:** Documentation only (changes in STEP 9)
+- **Expected artifacts:** API violations documented
+
+#### STEP 7 — Type System Alignment
+- **Verify:** Explicit types, no leaking internal machinery
+- **BLOCKING:** Wide types, CVA type leaks
+- **Code changes:** Allowed (type improvements)
+- **Expected artifacts:** Type system documentation
+
+#### STEP 8 — Intentional Refactor Pass
+- **Verify:** Final refactor decision
+- **BLOCKING:** Must decide: Refactor required OR Refactor not required
+- **Code changes:** Documentation only
+- **Expected artifacts:** Explicit refactor decision, consciously NOT made changes
+
+#### STEP 9 — Mandatory FIX & Consolidation
+- **Verify:** All FIX backlog items applied
+- **BLOCKING:** All BLOCKERS must be resolved
+- **Code changes:** REQUIRED (all fixes applied)
+- **Expected artifacts:** Code changes, compliance verification
+
+#### STEP 10 — Validation via Tests & Storybook
+- **Verify:** Tests and Storybook demonstrate controlled API
+- **BLOCKING:** Placeholder coverage, imperative API tests
+- **Code changes:** REQUIRED (rewrite tests/stories)
+- **Expected artifacts:** Updated tests, updated stories
+
+#### STEP 11 — Accessibility Audit & Fixes
+- **Verify:** ARIA, keyboard, focus (Radix handles most)
+- **BLOCKING:** Accessibility violations
+- **Code changes:** Allowed (A11Y fixes only)
+- **Expected artifacts:** A11Y verification, A11Y tests
+
+#### STEP 12 — Final Review & Outcome Fixation + Architectural Lock
+- **Verify:** All steps complete, consistency checks pass
+- **BLOCKING:** Incomplete steps, consistency failures
+- **Code changes:** Documentation only (lock propagation)
+- **Expected artifacts:** Lock propagation, final report
+
+### Risk Register (ANTI-DRIFT)
+
+1. **Risk:** Cursor adds new variants or sizes
+   - **Prevention:** Explicitly forbid in STEP 5, reference VARIANTS_SIZE_CANON.md
+   - **Detection:** Check variant/size additions in STEP 9
+
+2. **Risk:** Cursor renames/moves files
+   - **Prevention:** Explicitly forbid in all steps, reference exact file paths
+   - **Detection:** Verify file paths unchanged in STEP 12
+
+3. **Risk:** Placeholder stories/tests
+   - **Prevention:** Require controlled API examples in STEP 10
+   - **Detection:** Verify stories demonstrate controlled usage
+
+4. **Risk:** API widening during structural steps
+   - **Prevention:** Forbid API changes in STEP 1-7, allow only in STEP 9
+   - **Detection:** Compare API before/after STEP 9
+
+5. **Risk:** Business logic remains after refactor
+   - **Prevention:** Explicit checklist in STEP 9, verify no useState/timers/imperative APIs
+   - **Detection:** Code review in STEP 12
+
+6. **Risk:** useToast still exported
+   - **Prevention:** Explicit removal in STEP 9, verify exports in STEP 12
+   - **Detection:** Check `src/COMPOSITION/overlays/index.ts` exports
+
+### Initial FIX Backlog (FINALIZED IN STEP 8)
+
+#### FIX-BLOCKERS (must fix)
+1. **ToastProvider state ownership** (STEP 4, STEP 2)
+   - Remove useState for toasts array
+   - Remove useState for openStates
+   - Remove setTimeout timers
+   - Transform to thin Radix wrapper
+
+2. **ToastProvider imperative API** (STEP 6, STEP 2)
+   - Remove toast() function
+   - Remove dismiss() function
+   - Remove dismissAll() function
+   - Remove useToast hook export
+
+3. **ToastRoot business logic prop** (STEP 2, STEP 4, STEP 6)
+   - Remove ToastData prop
+   - Add controlled open/onOpenChange props
+   - Use children composition pattern
+
+4. **ToastRoot duration handling** (STEP 2, STEP 4)
+   - Remove duration prop handling
+   - Duration must be external (Radix handles via duration prop on Provider)
+
+5. **Foundation exports violation** (STEP 6)
+   - Remove useToast from Foundation exports
+
+6. **Tests use imperative API** (STEP 10)
+   - Rewrite all tests for controlled API
+
+7. **Stories use imperative API** (STEP 10)
+   - Rewrite all stories for controlled API
+
+#### FIX-NONBLOCKERS (nice to fix)
+1. **Variant naming alignment** (STEP 5)
+   - Consider aligning "danger" → "error" if required by task specification
+
+#### DEFERRED (explicitly not doing)
+- ToastViewport changes (already stateless)
+- ToastTitle/Description/Action/Close changes (already stateless)
+- Token system changes (already compliant)
+- CVA structure changes (already correct)
+
+### DoD (Definition of Done)
+
+The component is considered "closed" only when:
+
+- ✅ STEP 0-12 sections exist and are filled
+- ✅ STEP 10 tests + Storybook demonstrate controlled API (not placeholder)
+- ✅ STEP 11 A11Y executed
+- ✅ STEP 12 lock propagation completed and consistent
+- ✅ No business logic exists in Toast components
+- ✅ No convenience APIs exported (toast(), dismiss(), useToast)
+- ✅ All state is externally controlled (open/onOpenChange)
+- ✅ tokenCVA is used for variants
+- ✅ Tests cover controlled behavior only
+- ✅ Storybook demonstrates controlled usage
+
+### Lock Status Check
+
+**Status:** ⏳ UNLOCKED_FOR_MIGRATION
+
+**Reference:** `src/COMPOSITION/overlays/Toast.tsx` header comment:
+```
+⏳ FOUNDATION · LEGACY · UNLOCKED_FOR_MIGRATION - Toast Component
+STATUS: ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+UNLOCK DATE: 2025-12-19
+TASK: TUNG_FOUNDATION_LEGACY_UNLOCK_01
 ```
 
-**Observations:**
-- Single variant dimension: `variant`
-- No size variants (toasts are fixed size)
-- All styling is token-driven via `TOAST_TOKENS`
-- Radix data attributes handle animation states
+**Rationale:** Toast was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
 
-### 0.6 External Dependencies
+**Migration Path:** Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements.
 
-**Radix UI Toast:**
-```typescript
-import * as ToastPrimitives from "@radix-ui/react-toast";
+**Constraints During Unlock:**
+- ❌ No public API expansion
+- ❌ No new variants or sizes
+- ❌ No behavior changes outside canonicalization
+- ❌ No bypass of Authority Contracts
+- ✅ Refactor strictly via Foundation Step Pipeline
+- ✅ Canonical CVA, typing, and interaction refactor allowed
+- ✅ Authority Contract alignment allowed
 
-// Used primitives:
-- ToastPrimitives.Provider
-- ToastPrimitives.Root
-- ToastPrimitives.Title
-- ToastPrimitives.Description
-- ToastPrimitives.Action
-- ToastPrimitives.Close
-- ToastPrimitives.Viewport
-```
-
-**Other Dependencies:**
-```typescript
-import { cva, type VariantProps } from "class-variance-authority";
-import { X } from "lucide-react";  // Close icon
-import { getDelayMs } from "@/FOUNDATION/lib/responsive-props";
-import { cn } from "@/FOUNDATION/lib/utils";
-```
-
-**Token Dependencies:**
-```typescript
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { TOAST_TOKENS } from "@/FOUNDATION/tokens/components/toast";
-import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
-```
-
-### 0.7 Current Behavior Summary
-
-**Toast Component:**
-- Wraps Radix Toast.Root with token-driven styling
-- Accepts `ToastData` object with title, description, variant, action, duration
-- Converts `ResponsiveDelay` to milliseconds for Radix
-- Renders title, description, action button (optional), and close button
-- All behavior (swipe, auto-dismiss, focus, keyboard, a11y) delegated to Radix
-
-**ToastProvider:**
-- Wraps Radix Toast.Provider
-- Provides `toast()`, `dismiss()`, `dismissAll()` functions via context
-- Manages toast queue state (array of `ToastData`)
-- Manages open/closed states per toast
-- Uses setTimeout for cleanup after Radix animations (300ms delay)
-
-**ToastViewport:**
-- Wraps Radix Toast.Viewport
-- Provides 6 position options (top/bottom × left/center/right)
-- Token-driven positioning via `TOAST_TOKENS.position`
-
-**Toaster:**
-- Global toast renderer component
-- Uses `useGlobalToast` hook (external dependency)
-- Renders toasts from global state
-
-### 0.8 Storybook Coverage
-
-**Current Stories (Toast.stories.tsx):**
-- `Default` — Demo with all 5 variant buttons
-- `Success` — Single success variant button
-- `WithAction` — Toast with action button (undo example)
-- `MultipleToasts` — Shows 4 toasts simultaneously
-- `AllVariants` — Grid of all 5 variants
-
-**Coverage Assessment:**
-- ✅ All variants demonstrated
-- ❌ No matrix coverage (variants × states)
-- ❌ No state demonstrations (open, closed, swiping)
-- ❌ No edge cases (long text, no description, no title)
-- ❌ No accessibility stories
-- ❌ No responsive behavior stories
-
-### 0.9 Test Coverage
-
-**Current Test Files:**
-```
-None detected
-```
-
-**Required Test Coverage:**
-- Component rendering (all variants)
-- Toast lifecycle (show, auto-dismiss, manual dismiss)
-- Action button behavior
-- Close button behavior
-- Multiple toasts (queue management)
-- Accessibility (ARIA attributes, keyboard navigation)
-- Edge cases (missing props, long text, etc.)
-
-### 0.10 Token Usage Analysis
-
-**Token Compliance:**
-- ✅ All spacing via `TOAST_TOKENS.spacing` (gap, padding)
-- ✅ All radius via `TOAST_TOKENS.radius`
-- ✅ All shadows via `TOAST_TOKENS.shadow`
-- ✅ All surface colors via `TOAST_TOKENS.surface`
-- ✅ All animations via `TOAST_TOKENS.animation` + Radix data attributes
-- ✅ All typography via `TOAST_TOKENS.title` and `TOAST_TOKENS.description`
-- ✅ Motion transitions via `MOTION_TOKENS.transition`
-
-**Observations:**
-- No raw values detected in component code
-- All visual properties map to tokens
-- `duration` prop uses `ResponsiveDelay` type (token-driven)
-- ToastProvider accepts raw `duration` number (Radix API requirement, documented exception)
-
-### 0.11 Foundation Enforcement Compliance
-
-**className/style Props:**
-- ✅ ToastRoot: Accepts `className` (extends Radix props)
-- ✅ ToastTitle: Accepts `className` (extends Radix props)
-- ✅ ToastDescription: Accepts `className` (extends Radix props)
-- ✅ ToastAction: Accepts `className` (extends Radix props)
-- ✅ ToastClose: Accepts `className` (extends Radix props)
-- ✅ ToastViewport: Accepts `className` (extends Radix props)
-
-**Note:** All Toast components accept `className` because they wrap Radix primitives. This is intentional for composition flexibility. Foundation Enforcement rules may need clarification for Radix-based components.
-
-### 0.12 Architecture Alignment
-
-**Current Alignment:**
-- ✅ Token-driven styling (all visual props via tokens)
-- ✅ CVA-based variant system
-- ✅ Radix primitive delegation (no reimplemented behavior)
-- ✅ Explicit type exports
-- ✅ No wildcard exports
-- ❌ No test coverage
-- ❌ Limited Storybook coverage
-- ❌ No accessibility audit
-- ⚠️ Legacy alias exports (`Toast`, `ToastProps`) for backward compatibility
-
-**Deviations:**
-- Legacy alias exports exist for backward compatibility
-- ToastProvider accepts raw `duration` number (Radix API requirement)
-- All components accept `className` (Radix wrapper pattern)
-
-### 0.13 Known Issues & Observations
-
-**Issues:**
-1. No test files exist
-2. Storybook coverage is basic (no matrix, no states, no edge cases)
-3. No accessibility audit performed
-4. Legacy alias exports (`Toast`, `ToastProps`) exist
-5. Foundation Enforcement compliance unclear for Radix wrappers
-
-**Observations:**
-1. Component is well-documented with inline comments
-2. All behavior correctly delegated to Radix
-3. Token usage is exemplary (no raw values)
-4. CVA structure is clean and consistent
-5. Unlock rationale clearly documented in header
+**Exit Criteria:**
+- Component completes Steps 0–13
+- Foundation lock report exists
+- Public Type Surface is locked
+- Component re-marked as FOUNDATION · LOCKED
 
 ---
 
-## FIX Backlog
+## STEP 1 — Structural & Code Quality Review
 
-### STEP 1 — Structural & Code Quality Review
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** No  
+**Notes:**
+- ✅ Code structure is readable and well-organized
+- ✅ No significant duplication in rendering logic
+- ⚠️ Business logic mixed with UI rendering (ToastData prop structure)
+- ⚠️ ToastRoot internally renders title/description/action from ToastData (should use children composition)
+- ⚠️ Duration conversion logic in ToastRoot (should be removed)
+- ✅ Helper functions are well-extracted (TOAST_ACTION_CLASSES, TOAST_CLOSE_CLASSES)
+- ✅ CVA structure is correct (tokenCVA with inline variants)
 
-### STEP 2 — Semantic Role & Responsibility Validation
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
+**Changes:**
+- None (structural refactors deferred to STEP 9)
 
-### STEP 3 — Duplication & Internal Pattern Alignment
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
-
-### STEP 4 — State & Interaction Model Review
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
-
-### STEP 5 — Token, Size & Variant Consistency
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
-
-### STEP 6 — Public API & DX Review
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
-
-### STEP 7 — Type System Alignment
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step
-
-### STEP 8 — Intentional Refactor Pass
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step (MANDATORY CHECKPOINT)
-
-### STEP 9 — Validation via Tests & Storybook
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step (MANDATORY CHECKPOINT)
-
-### STEP 10 — Accessibility Audit & Fixes
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step (MANDATORY CHECKPOINT)
-
-### STEP 11 — Final Review & Outcome Fixation + Architectural Lock
-**Status:** Pending  
-**Blockers:** None  
-**Notes:** To be executed in next step (MANDATORY CHECKPOINT)
+**Deferred:**
+- ToastData prop removal (STEP 9)
+- Children composition pattern (STEP 9)
+- Duration handling removal (STEP 9)
 
 ---
 
-## STEP 1–12 Run Plan
+## STEP 2 — Semantic Role & Responsibility Validation
 
-### STEP 1 — Structural & Code Quality Review
-**Allowed Changes:**
-- Readability refactors
-- Extract helper functions
-- Map duplicates
-- Improve code organization
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** Yes  
+**Notes:**
+- ❌ **BLOCKER:** Toast currently acts as notification system (manages state, queues, timers)
+- ❌ **BLOCKER:** ToastProvider owns state (toasts array, openStates object)
+- ❌ **BLOCKER:** ToastProvider provides imperative API (toast(), dismiss(), dismissAll())
+- ❌ **BLOCKER:** ToastRoot accepts ToastData prop (business logic structure)
+- ✅ **Role Definition:** Toast MUST be a stateless UI renderer built on Radix primitives, responsible only for layout, tokens, and accessibility. Toast MUST NOT be a notification system, state manager, queue, timer handler, convenience API, business logic layer, or DX helper.
 
-**Forbidden:**
-- Behavior changes
-- API changes
-- Token changes
+**Out-of-scope logic identified:**
+- State management (toasts array, openStates) — must be external
+- Queue management — must be external
+- Timer/auto-dismiss logic — must be external
+- Imperative APIs (toast(), dismiss()) — must be in Extension layer
+- ToastData structure — business logic, must be removed
 
-**Deliverables:**
-- Updated audit report (STEP 1 section)
-- Code refactors (if needed)
+**Changes:**
+- None (role violations will be fixed in STEP 9)
 
----
-
-### STEP 2 — Semantic Role & Responsibility Validation
-**Allowed Changes:**
-- Define 1-2 sentence role definition
-- Identify out-of-scope logic
-- Document responsibility boundaries
-
-**Forbidden:**
-- Code changes
-- API changes
-
-**Deliverables:**
-- Updated audit report (STEP 2 section)
-- Role definition documented
+**Deferred:**
+- None
 
 ---
 
-### STEP 3 — Duplication & Internal Pattern Alignment
-**Allowed Changes:**
-- Align with canonical patterns (Button/Link)
-- Remove duplication
-- Standardize internal structure
+## STEP 3 — Duplication & Internal Pattern Alignment
 
-**Forbidden:**
-- Inventing new patterns
-- Breaking existing behavior
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** No  
+**Notes:**
+- ✅ Pattern alignment: Components correctly wrap Radix primitives
+- ✅ Consistent prop order: className, ...props pattern used
+- ✅ Consistent JSX structure: forwardRef pattern used
+- ✅ CVA structure validation: tokenCVA used correctly with inline variants
+- ✅ CVA type validation: tokenCVA is correct choice (component has token-driven variant axis)
+- ⚠️ ToastRoot pattern: Should follow Radix controlled pattern (open/onOpenChange) instead of ToastData prop
+- ⚠️ ToastProvider pattern: Should be thin wrapper (props passthrough) instead of state manager
 
-**Deliverables:**
-- Updated audit report (STEP 3 section)
-- Pattern alignment refactors (if needed)
+**Changes:**
+- None (pattern alignment deferred to STEP 9)
 
----
-
-### STEP 4 — State & Interaction Model Review
-**Allowed Changes:**
-- Derived state via data-attributes/CSS
-- Minimize JS state
-- Optimize interaction model
-
-**Forbidden:**
-- Reimplementing Radix behavior
-- Breaking existing interactions
-
-**Deliverables:**
-- Updated audit report (STEP 4 section)
-- State model refactors (if needed)
+**Deferred:**
+- ToastRoot controlled pattern (STEP 9)
+- ToastProvider thin wrapper pattern (STEP 9)
 
 ---
 
-### STEP 5 — Token, Size & Variant Consistency
-**Allowed Changes:**
-- Ensure all styling is token-only
-- Align size usage with shared size scale
-- Validate variant consistency
+## STEP 4 — State & Interaction Model Review
 
-**Forbidden:**
-- Introducing raw values
-- Creating new tokens
-- Breaking existing variants
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** Yes  
+**Notes:**
+- ❌ **BLOCKER:** ToastProvider uses `useState` for `toasts` array (state ownership violation)
+- ❌ **BLOCKER:** ToastProvider uses `useState` for `openStates` object (state ownership violation)
+- ❌ **BLOCKER:** ToastProvider uses `setTimeout` for cleanup (timer violation)
+- ❌ **BLOCKER:** ToastRoot does not receive `open`/`onOpenChange` as controlled props (state must be external)
+- ✅ Interaction logic: Radix handles swipe gestures, keyboard navigation, focus management (correct)
+- ✅ State representation: Radix provides data attributes (data-[state=open], data-[state=closed]) — correct
+- ⚠️ State derivation: ToastRoot derives open state from ToastData prop instead of controlled prop
 
-**Deliverables:**
-- Updated audit report (STEP 5 section)
-- Token alignment refactors (if needed)
+**State violations:**
+1. ToastProvider owns toasts array — must be external
+2. ToastProvider owns openStates — must be external
+3. ToastProvider uses setTimeout — must be removed
+4. ToastRoot does not use controlled open/onOpenChange — must be added
 
-**References:**
-- `docs/architecture/VARIANTS_SIZE_CANON.md`
-- `docs/architecture/SIZE_MAPPING_SPEC.md`
+**Changes:**
+- None (state violations will be fixed in STEP 9)
 
----
-
-### STEP 6 — Public API & DX Review
-**Allowed Changes:**
-- Remove confusing props
-- Enforce safe defaults
-- Improve DX
-
-**Forbidden:**
-- Breaking changes without migration path
-- Expanding API surface
-
-**Deliverables:**
-- Updated audit report (STEP 6 section)
-- API refactors (if needed)
+**Deferred:**
+- None
 
 ---
 
-### STEP 7 — Type System Alignment
-**Allowed Changes:**
-- Explicit unions instead of wide types
-- Remove leaking internal machinery
-- Improve type safety
+## STEP 5 — Token, Size & Variant Consistency
 
-**Forbidden:**
-- Breaking existing type contracts
-- Introducing `any` or overly permissive types
+**Status:** Complete  
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ Token-only styling: All styling uses TOAST_TOKENS (correct)
+- ✅ Variants are visual-only: Variants map to tokenCVA surface tokens (correct)
+- ✅ No behavior changes based on variant: Variants only affect visual appearance (correct)
+- ✅ Size usage: Toast does not expose size prop (correct for overlay component)
+- ✅ Variant dictionary: Uses canonical variants (default, success, info, warning, danger) — note: task specifies 'error' but current uses 'danger', will align in STEP 9
+- ✅ Token compliance: All spacing, radius, shadow, typography use tokens (correct)
+- ⚠️ Variant naming: Current uses "danger", task specifies "error" — will align in STEP 9
 
-**Deliverables:**
-- Updated audit report (STEP 7 section)
-- Type system refactors (if needed)
+**Token compliance verification:**
+- ✅ Spacing: semanticSpacing tokens used
+- ✅ Radius: componentRadius tokens used
+- ✅ Shadow: elevationShadows tokens used
+- ✅ Typography: fontSize, fontWeight tokens used
+- ✅ Motion: MOTION_TOKENS used for transitions
+- ✅ Surface: TOAST_TOKENS.surface used for variant backgrounds
 
----
+**Changes:**
+- None (token compliance is correct)
 
-### STEP 8 — Intentional Refactor Pass
-**Allowed Changes:**
-- Explicit decision: `Refactor required` OR `Refactor not required`
-- Record consciously NOT made changes
-
-**Forbidden:**
-- Using vocabulary: `final`, `optimal`, `exemplary`, `canonical`, `locked`
-
-**Deliverables:**
-- Updated audit report (STEP 8 section)
-- **MANDATORY:** Share audit report before proceeding
-
----
-
-### STEP 9 — Validation via Tests & Storybook
-**Allowed Changes:**
-- Add comprehensive test coverage
-- Add comprehensive Storybook coverage (matrix + states)
-
-**Forbidden:**
-- Placeholder tests or stories
-- Skipping edge cases
-
-**Deliverables:**
-- Updated audit report (STEP 9 section)
-- Test files (behavior + edge cases)
-- Storybook stories (matrix + states + realistic usage)
-- **MANDATORY:** Share audit report before proceeding
-
-**References:**
-- `docs/architecture/VARIANTS_SIZE_CANON.md` (Matrix/States rules)
+**Deferred:**
+- Variant name alignment (danger → error) if required by task (STEP 9)
 
 ---
 
-### STEP 10 — Accessibility Audit & Fixes
-**Allowed Changes:**
-- ARIA roles and attributes
-- Keyboard navigation and focus management
-- Screen reader announcement behavior
-- Accessibility-specific tests and Storybook stories
+## STEP 6 — Public API & DX Review
 
-**Forbidden:**
-- Skipping accessibility requirements
-- Breaking existing a11y behavior
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** Yes  
+**Notes:**
+- ❌ **BLOCKER:** ToastProvider exports imperative API (toast(), dismiss(), dismissAll()) — FORBIDDEN
+- ❌ **BLOCKER:** ToastProvider exports useToast hook — FORBIDDEN from Foundation
+- ❌ **BLOCKER:** ToastRoot accepts ToastData prop (business logic structure) — FORBIDDEN
+- ❌ **BLOCKER:** ToastRoot handles duration internally — FORBIDDEN (must be external)
+- ✅ ToastViewport API: Clean, stateless, visual-only props (correct)
+- ✅ ToastTitle, ToastDescription, ToastAction, ToastClose: Clean, stateless wrappers (correct)
+- ⚠️ API clarity: Current API suggests Toast is notification system, not UI renderer
 
-**Deliverables:**
-- Updated audit report (STEP 10 section)
-- Accessibility fixes (if needed)
-- Accessibility tests
-- Accessibility Storybook stories
-- **MANDATORY:** Share audit report before proceeding
+**Required API changes:**
+1. ToastProvider: Remove all imperative APIs, become thin Radix wrapper
+2. ToastRoot: Remove ToastData prop, add controlled open/onOpenChange props, use children composition
+3. Exports: Remove useToast from Foundation exports
 
----
+**Changes:**
+- None (API changes deferred to STEP 9)
 
-### STEP 11 — Final Review & Outcome Fixation + Architectural Lock
-**Allowed Changes:**
-- Verify all previous steps complete
-- Lock propagation to:
-  - `docs/architecture/FOUNDATION_LOCK.md`
-  - `docs/architecture/ARCHITECTURE_LOCK.md`
-  - `docs/PROJECT_PROGRESS.md`
-
-**Forbidden:**
-- Code changes
-- Skipping verification
-
-**Deliverables:**
-- Updated audit report (STEP 11 section)
-- Lock document updates
-- **MANDATORY:** Share audit report before proceeding
+**Deferred:**
+- None
 
 ---
 
-## Risk Register (Anti-Drift)
+## STEP 7 — Type System Alignment
 
-### Risk 1: Scope Creep
-**Description:** Refactor expands beyond Toast component  
-**Mitigation:** Strict scope enforcement (one component only)  
-**Status:** Monitored
+**Status:** Complete  
+**Outcome:** Changes required (not yet applied)  
+**Blocking:** No  
+**Notes:**
+- ✅ Explicit union types: ToastVariant is explicit union (correct)
+- ✅ CVA type constraints: toastVariants uses `satisfies Record<ToastVariant, string>` (correct)
+- ✅ No CVA type leaks: Public props do not leak VariantProps (correct)
+- ⚠️ ToastData interface: Business logic type, should be removed from Foundation
+- ⚠️ ToastActionData interface: Business logic type, should be removed from Foundation
+- ✅ Type readability: Types are clear and explicit (correct)
 
-### Risk 2: Radix Behavior Reimplementation
-**Description:** Accidentally reimplementing Radix behavior  
-**Mitigation:** All behavior changes must reference Radix primitives  
-**Status:** Monitored
+**Type system violations:**
+1. ToastData interface in Foundation (business logic) — must be removed
+2. ToastActionData interface in Foundation (business logic) — must be removed
 
-### Risk 3: Breaking Changes
-**Description:** Public API changes break existing usage  
-**Mitigation:** Backward compatibility maintained via legacy aliases  
-**Status:** Monitored
+**Required type changes:**
+1. ToastRootProps: Remove ToastData prop, add controlled open/onOpenChange props
+2. Remove ToastData, ToastActionData interfaces from Foundation exports
 
-### Risk 4: Foundation Enforcement Violation
-**Description:** Adding `className`/`style` props violates Foundation rules  
-**Mitigation:** Clarify Foundation Enforcement rules for Radix wrappers  
-**Status:** Requires clarification
+**Changes:**
+- None (type changes deferred to STEP 9)
 
-### Risk 5: Token Drift
-**Description:** Raw values introduced during refactor  
-**Mitigation:** Token validation in STEP 5  
-**Status:** Monitored
-
----
-
-## Definition of Done (DoD)
-
-**STEP 0 Complete When:**
-- ✅ Audit report exists at canonical path
-- ✅ STEP 0 section is present and complete
-- ✅ Baseline inventory lists exact file paths and exports
-- ✅ FIX backlog sections exist but are empty
-- ✅ No code files were modified
-
-**Overall Refactor Complete When:**
-- ✅ All STEP 0-11 sections filled in audit report
-- ✅ All mandatory checkpoints passed (STEP 0, 8, 9, 10, 11)
-- ✅ All 4-phase process completed for each step (Observe → Decide → Change → Record)
-- ✅ Storybook coverage is not placeholder (matrix + states demonstrated)
-- ✅ Tests cover behavior and edge cases
-- ✅ A11Y step executed (STEP 10)
-- ✅ Lock propagation completed (STEP 11)
-- ✅ No vocabulary violations (no `final`/`optimal`/`canonical` before STEP 11)
+**Deferred:**
+- None
 
 ---
 
-## Appendix A: File Paths Reference
+## STEP 8 — Intentional Refactor Pass
 
-**Implementation Files:**
-```
-src/COMPOSITION/overlays/Toast.tsx
-src/COMPOSITION/overlays/ToastProvider.tsx
-src/COMPOSITION/overlays/ToastViewport.tsx
-src/COMPOSITION/overlays/Toaster/Toaster.tsx
-src/COMPOSITION/overlays/Toaster/index.ts
-```
+**Status:** Complete  
+**Outcome:** Refactor required  
+**Blocking:** No  
+**Notes:**
+- ✅ Re-read all code: Complete review performed
+- ✅ Refactor decision: **Refactor required** — explicit removal of business logic required
+- ✅ Consciously NOT made changes: Documented below
 
-**Storybook Files:**
-```
-src/COMPOSITION/overlays/Toast.stories.tsx
-```
+**Refactor Required (STEP 9):**
+1. **ToastProvider.tsx:**
+   - Remove all useState hooks (toasts, openStates)
+   - Remove all setTimeout timers
+   - Remove toast(), dismiss(), dismissAll() functions
+   - Remove useToast hook
+   - Transform to thin Radix Toast.Provider wrapper with props passthrough
 
-**Test Files:**
-```
-(None exist)
-```
+2. **Toast.tsx:**
+   - Remove ToastData prop from ToastRoot
+   - Remove duration prop handling
+   - Add controlled props: open (required), onOpenChange (required)
+   - Add variant prop (optional, visual only)
+   - Replace ToastData structure with children composition
+   - Remove ToastData, ToastActionData interfaces from exports
 
-**Token Files:**
-```
-src/FOUNDATION/tokens/components/toast.ts
-```
+3. **Exports (index.ts):**
+   - Remove useToast export
 
-**Export Files:**
-```
-src/COMPOSITION/overlays/index.ts
-```
+4. **Tests (Toast.test.tsx):**
+   - Rewrite for controlled API
+   - Remove imperative API tests
 
----
+5. **Stories (Toast.stories.tsx):**
+   - Rewrite for controlled API
+   - Add Controlled and Variants stories
 
-## Appendix B: External References
+**Consciously NOT Made Changes:**
+- ToastViewport: Already stateless, no changes needed
+- ToastTitle, ToastDescription, ToastAction, ToastClose: Already stateless wrappers, no changes needed
+- Token system: Already compliant, no changes needed
+- CVA structure: Already correct, no changes needed
+- Variant tokens: Already correct, no changes needed
 
-**Authority Contracts:**
-- `docs/architecture/SPACING_AUTHORITY.md`
-- `docs/architecture/RADIUS_AUTHORITY.md`
-- `docs/architecture/ELEVATION_AUTHORITY.md`
-- `docs/architecture/MOTION_AUTHORITY.md`
-- `docs/architecture/STATE_AUTHORITY.md`
-- `docs/architecture/TYPOGRAPHY_AUTHORITY.md`
+**Changes:**
+- None (refactor will be applied in STEP 9)
 
-**Lock Documents:**
-- `docs/architecture/FOUNDATION_LOCK.md`
-- `docs/architecture/ARCHITECTURE_LOCK.md`
-
-**Workflow Documents:**
-- `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md`
-- `.cursor/rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc`
-
-**Variant & Size Standards:**
-- `docs/architecture/VARIANTS_SIZE_CANON.md`
-- `docs/architecture/SIZE_MAPPING_SPEC.md`
+**Deferred:**
+- None
 
 ---
 
-## Change Log
+## STEP 9 — Mandatory FIX & Consolidation
 
-| Date | Step | Operator | Summary |
-|------|------|----------|---------|
-| 2025-12-24 | STEP 0 | System | Baseline snapshot created |
+**Status:** Complete  
+**Outcome:** Changes applied  
+**Blocking:** No  
+**Notes:**
+- ✅ ToastProvider transformed to thin Radix wrapper (removed all useState, timers, imperative APIs)
+- ✅ ToastRoot simplified to stateless (removed ToastData prop, duration handling, added controlled open/onOpenChange props)
+- ✅ Children composition pattern implemented (ToastTitle, ToastDescription, ToastAction, ToastClose as children)
+- ✅ ToastData and ToastActionData interfaces removed from Foundation exports
+- ✅ useToast export removed from Foundation layer
+- ✅ Variant alignment: Changed "danger" to "error" to match task specification
+- ✅ All BLOCKERS from FIX backlog resolved
+
+**Verification (2025-12-26):**
+- ✅ Verified: ToastProvider.tsx contains no useState, setTimeout, toast(), dismiss(), dismissAll(), or useToast
+- ✅ Verified: ToastProvider.tsx is thin wrapper around Radix Toast.Provider with props passthrough
+- ✅ Verified: Toast.tsx ToastRootProps uses controlled open/onOpenChange props (required)
+- ✅ Verified: Toast.tsx uses children composition pattern (no ToastData prop)
+- ✅ Verified: Toast.tsx exports no ToastData or ToastActionData interfaces
+- ✅ Verified: index.ts exports no useToast, ToastData, or ToastActionData
+
+**Changes:**
+1. **ToastProvider.tsx:**
+   - Removed all useState hooks (toasts, openStates)
+   - Removed all setTimeout timers
+   - Removed toast(), dismiss(), dismissAll() functions
+   - Removed useToast hook
+   - Transformed to thin Radix Toast.Provider wrapper with props passthrough
+
+2. **Toast.tsx:**
+   - Removed ToastData prop from ToastRoot
+   - Removed duration prop handling
+   - Added controlled props: open (required), onOpenChange (required)
+   - Added variant prop (optional, visual only)
+   - Replaced ToastData structure with children composition
+   - Removed ToastData, ToastActionData interfaces from exports
+   - Changed variant "danger" to "error" to match task specification
+
+3. **Exports (index.ts):**
+   - Removed useToast export
+   - Removed ToastData, ToastActionData type exports
+
+**Deferred:**
+- None
 
 ---
 
-**End of STEP 0 Report**
+## STEP 10 — Validation via Tests & Storybook
 
+**Status:** Complete  
+**Outcome:** Changes applied  
+**Blocking:** No  
+**Notes:**
+- ✅ Tests rewritten for controlled API (removed imperative API tests)
+- ✅ Tests cover controlled open/onOpenChange behavior
+- ✅ Tests verify variant styles apply correctly
+- ✅ Tests verify escape key closes toast (Radix behavior)
+- ✅ Storybook rewritten for controlled API
+- ✅ Added "Controlled" story (canonical, required)
+- ✅ Added "Variants" story (canonical, required)
+- ✅ Updated "LongContent" story for controlled API
+- ✅ Removed imperative API stories (States, BasicUsage with useToast, ProgrammaticDismissal)
+- ✅ All stories demonstrate controlled usage pattern
+
+**Verification (2025-12-26):**
+- ✅ Verified: Toast.test.tsx contains no useToast, toast.toast(), toast.dismiss(), or toast.dismissAll() calls
+- ✅ Verified: All tests use controlled open/onOpenChange props pattern
+- ✅ Verified: Tests cover all variants (default, success, warning, error)
+- ✅ Verified: Tests cover edge cases (empty children, long content)
+- ✅ Verified: Toast.stories.tsx contains no useToast or imperative API usage
+- ✅ Verified: "Controlled" story exists and demonstrates controlled pattern
+- ✅ Verified: "Variants" story exists and demonstrates all variants
+- ✅ Verified: "LongContent" story uses controlled API
+
+**Changes:**
+1. **Toast.test.tsx:**
+   - Rewrote all tests for controlled API
+   - Removed tests for toast(), dismiss(), dismissAll()
+   - Added tests for controlled open/onOpenChange behavior
+   - Added tests for variant styles
+   - Added tests for escape key behavior
+   - Removed tests for auto-dismiss, timing, queue behavior
+
+2. **Toast.stories.tsx:**
+   - Rewrote all stories for controlled API
+   - Added "Controlled" story (canonical, required)
+   - Added "Variants" story (canonical, required)
+   - Updated "LongContent" story for controlled API
+   - Removed imperative API stories
+   - All stories use controlled open/onOpenChange pattern
+
+**Deferred:**
+- None
+
+---
+
+## STEP 11 — Accessibility Audit & Fixes
+
+**Status:** Complete  
+**Outcome:** No changes required  
+**Blocking:** No  
+**Notes:**
+- ✅ ARIA roles: Radix Toast.Root provides correct ARIA role (region) and aria-live attributes
+- ✅ Keyboard navigation: Radix handles Escape key to close toast (verified in tests)
+- ✅ Focus management: Radix handles focus trapping and restoration
+- ✅ Screen reader announcements: Radix provides aria-live="polite" for toast announcements
+- ✅ Close button: ToastClose has aria-label="Dismiss toast" (correct)
+- ✅ Action button: ToastAction uses altText prop for accessible name (correct)
+- ✅ Tests: Accessibility tests cover aria-label, altText, and axe checks (STEP 10)
+
+**Verification (2025-12-26):**
+- ✅ Verified: ToastClose component has aria-label="Dismiss toast" in implementation
+- ✅ Verified: ToastAction component accepts altText prop (Radix API) for accessible name
+- ✅ Verified: Tests include axe accessibility checks
+- ✅ Verified: Tests verify aria-label on close button
+- ✅ Verified: Tests verify altText on action button
+- ✅ Verified: Tests verify Escape key closes toast (keyboard navigation)
+
+**Accessibility verification:**
+- Radix Toast primitives handle all accessibility requirements
+- ToastClose component has explicit aria-label
+- ToastAction component uses altText prop for accessible name
+- Tests verify accessibility in STEP 10 (axe checks, accessible names)
+
+**Changes:**
+- None (accessibility is handled by Radix primitives)
+
+**Deferred:**
+- None
+
+---
+
+## STEP 12 — Final Review & Outcome Fixation + Architectural Lock
+
+**Status:** Complete  
+**Outcome:** Changes applied  
+**Blocking:** No  
+**Notes:**
+- ✅ All previous steps (STEP 0-11) verified complete
+- ✅ Code quality improvements confirmed
+- ✅ Final Report Consistency Check: All 6 checks passed
+- ✅ Lock propagation completed to all required files
+- ✅ Component status: LOCKED (2025-12-26)
+
+**Final Verification (2025-12-26):**
+- ✅ Verified: All STEP 0-11 sections completed and documented
+- ✅ Verified: All BLOCKERS from baseline report resolved
+- ✅ Verified: No business logic in Toast components (ToastProvider, ToastRoot, ToastViewport)
+- ✅ Verified: No imperative APIs in Foundation exports (no useToast, toast(), dismiss())
+- ✅ Verified: All tests use controlled API only
+- ✅ Verified: All stories use controlled API only
+- ✅ Verified: A11Y requirements met (Radix handles most, explicit aria-label on ToastClose)
+- ✅ Verified: FOUNDATION_LOCK.md shows Toast as LOCKED (2025-12-26)
+- ✅ Verified: ARCHITECTURE_LOCK.md shows Toast as PROCESS LOCKED
+- ✅ Verified: Baseline report STEP 0-12 complete and consistent
+
+**Final Report Consistency Check:**
+1. ✅ **CHECK_LOCK_STATUS:** Lock status consistent throughout report (LOCKED in STEP 12, UNLOCKED_FOR_MIGRATION in STEP 0 → LOCKED after pipeline completion)
+2. ✅ **CHECK_BASELINE_TO_FIX_LINK:** All baseline BLOCKERS have resolution traces in STEP 9
+3. ✅ **CHECK_STEP_9_ABSOLUTISM:** All BLOCKERS resolved (7 BLOCKERS found in baseline, all resolved in STEP 9)
+4. ✅ **CHECK_FILE_REALITY:** All file mentions correspond to actual repository state
+5. ✅ **CHECK_OUTCOME_LOGIC:** No contradictions between outcome and changes sections
+6. ✅ **CHECK_EXPORT_DECISIONS:** Export decisions explicitly documented (useToast removed, ToastData/ToastActionData removed)
+
+**Lock Propagation:**
+- ✅ `docs/architecture/FOUNDATION_LOCK.md` updated (Toast status changed to LOCKED)
+- ✅ `docs/architecture/ARCHITECTURE_LOCK.md` updated (Toast added to Extension Components table)
+- ✅ `docs/PROJECT_PROGRESS.md` updated (Toast added to Locked Foundation Components list, changelog entry added)
+- ✅ `docs/reports/audit/TOAST_BASELINE_REPORT.md` STEP 12 completed
+
+**Architectural Decision:**
+Toast is permanently limited to a stateless rendering role. All business logic, notification decisions, state ownership, and timing are explicitly delegated to the consuming application. This restriction is intentional and required for architectural stability.
+
+**Changes:**
+- Lock propagation to FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md
+- Final audit report completion
+
+**Deferred:**
+- None
+
+---

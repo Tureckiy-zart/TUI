@@ -54,3 +54,15 @@ export {
 
 // SearchBar
 export { SearchBar, type SearchBarProps } from "./SearchBar";
+
+// Navigation Primitives
+export { NavItem, type NavItemProps, NavRoot, type NavRootProps } from "./primitives";
+
+// NavList (standalone component)
+export { NavList, type NavListProps } from "./nav-list";
+
+// NavText (standalone component)
+export { NavText, type NavTextProps } from "./NavText";
+
+// NavSeparator (standalone component)
+export { NavSeparator, type NavSeparatorProps } from "./NavSeparator";

@@ -1,40 +1,39 @@
 "use client";
 
-import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { checkboxVariants } from "./checkbox-variants";
+import type { CheckboxSize, CheckboxState, CheckboxVariant } from "./checkbox-variants";
 
 /**
  * Checkbox Component Props
  *
  * Extends native button HTML attributes with variant props, checked state, and accessibility props.
  * Uses button role="checkbox" pattern for full keyboard accessibility.
+ *
+ * NOTE: Size scale restricted to sm|md|lg per canonical interactive size scale.
+ * VariantProps removed — public API uses explicit union types only.
  */
-export interface CheckboxProps
-  extends
-    Omit<
-      React.ButtonHTMLAttributes<HTMLButtonElement>,
-      "size" | "onChange" | "className" | "style"
-    >,
-    VariantProps<typeof checkboxVariants> {
+export interface CheckboxProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange" | "className" | "style"
+> {
   /**
    * Checkbox variant style
    * @default "outline"
    */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
+  variant?: CheckboxVariant;
 
   /**
-   * Checkbox size
+   * Checkbox size (canonical interactive scale: sm | md | lg)
    * @default "md"
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: CheckboxSize;
 
   /**
    * Checkbox state
    * @default "default"
    */
-  state?: "default" | "checked" | "indeterminate" | "error" | "disabled";
+  state?: CheckboxState;
 
   /**
    * Whether checkbox is checked (controlled)

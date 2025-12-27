@@ -12,6 +12,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
 
 import { useTableContext } from "./Table";
+import { ALIGNMENT_CLASSES } from "./Table.constants";
 import type { TableHeadProps } from "./Table.types";
 import { TableSortIcon } from "./TableSortIcon";
 
@@ -51,14 +52,19 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
     const typographyClass = TABLE_TOKENS.typography.header.fontSize;
     const fontWeightClass = TABLE_TOKENS.typography.header.fontWeight;
 
-    const alignmentClasses = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    };
-
     const isSorted = sortState.column === columnKey;
     const sortDirection = isSorted ? sortState.direction : null;
+
+    const handleKeyDown = React.useCallback(
+      (event: React.KeyboardEvent<HTMLTableCellElement>) => {
+        if (!sortable || !columnKey) return;
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleSort();
+        }
+      },
+      [sortable, columnKey, handleSort],
+    );
 
     return (
       <th
@@ -67,7 +73,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
           paddingClass,
           typographyClass,
           fontWeightClass,
-          alignmentClasses[align],
+          ALIGNMENT_CLASSES[align],
           TABLE_TOKENS.colors.border,
           TABLE_TOKENS.border.bottom,
           sortable && TABLE_TOKENS.sortable.cursor,
@@ -75,12 +81,14 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
           className,
         )}
         onClick={handleSort}
+        onKeyDown={handleKeyDown}
         aria-sort={(() => {
           if (sortDirection === "asc") return "ascending";
           if (sortDirection === "desc") return "descending";
           if (sortable) return "none";
           return undefined;
         })()}
+        tabIndex={sortable ? 0 : undefined}
         role="columnheader"
         {...props}
       >

@@ -1,34 +1,48 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { ALERT_TOKENS } from "@/FOUNDATION/tokens/components/alert";
 
-const alertVariants = cva(`${ALERT_TOKENS.radius} border ${ALERT_TOKENS.padding}`, {
+/**
+ * Alert variant values
+ *
+ * @public
+ */
+export const ALERT_VARIANTS = ["default", "primary", "secondary", "accent", "destructive"] as const;
+
+/**
+ * Alert variant type
+ *
+ * @public
+ */
+export type AlertVariant = (typeof ALERT_VARIANTS)[number];
+
+const alertVariants = tokenCVA({
+  base: `${ALERT_TOKENS.radius} ${ALERT_TOKENS.border} ${ALERT_TOKENS.padding}`,
   variants: {
     variant: {
-      default: "bg-muted border-border text-foreground",
-      // Canonical variants (Freeze API)
-      primary: "bg-primary/10 border-primary/20 text-primary-foreground",
-      secondary: "bg-secondary/10 border-secondary/20 text-secondary-foreground",
-      accent: "bg-accent/10 border-accent/20 text-accent-foreground",
-      destructive: "bg-destructive/10 border-destructive/20 text-destructive-foreground",
-      // Legacy semantic variants (deprecated, mapped to canonical)
-      success: "bg-accent/10 border-accent/20 text-accent-foreground",
-      warning: "bg-secondary/10 border-secondary/20 text-secondary-foreground",
-      danger: "bg-destructive/10 border-destructive/20 text-destructive-foreground",
-      info: "bg-primary/10 border-primary/20 text-primary-foreground",
-    },
+      default: `${ALERT_TOKENS.variant.default.background} ${ALERT_TOKENS.variant.default.border} ${ALERT_TOKENS.variant.default.text}`,
+      primary: `${ALERT_TOKENS.variant.primary.background} ${ALERT_TOKENS.variant.primary.border} ${ALERT_TOKENS.variant.primary.text}`,
+      secondary: `${ALERT_TOKENS.variant.secondary.background} ${ALERT_TOKENS.variant.secondary.border} ${ALERT_TOKENS.variant.secondary.text}`,
+      accent: `${ALERT_TOKENS.variant.accent.background} ${ALERT_TOKENS.variant.accent.border} ${ALERT_TOKENS.variant.accent.text}`,
+      destructive: `${ALERT_TOKENS.variant.destructive.background} ${ALERT_TOKENS.variant.destructive.border} ${ALERT_TOKENS.variant.destructive.text}`,
+    } satisfies Record<AlertVariant, string>,
   },
   defaultVariants: {
     variant: "default",
   },
 });
 
-export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof alertVariants> {}
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Alert variant style
+   * @default "default"
+   */
+  variant?: AlertVariant;
+}
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className, variant, ...props }, ref) => {

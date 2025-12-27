@@ -5,7 +5,7 @@
  */
 "use client";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -18,7 +18,7 @@ import { createTransition, shouldReduceMotion } from "./tas";
 import { useInView } from "./useInView";
 
 const meta: Meta = {
-  title: "Components/Animation/TAS",
+  title: "Foundation Locked/Composition/Motion/TAS",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -41,6 +41,203 @@ export default meta;
 type Story = StoryObj;
 
 /**
+ * Helper component to force animation restart on mount/key change
+ * Removes and re-adds animation class to trigger CSS animation restart
+ */
+function AnimatedBox({
+  className,
+  animationKey,
+  children,
+  ...props
+}: {
+  className?: string;
+  animationKey: string | number;
+  children: React.ReactNode;
+  [key: string]: unknown;
+}) {
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "TAS.stories.tsx:AnimatedBox:useEffect-entry",
+        message: "AnimatedBox useEffect called",
+        data: { animationKey, className, hasElement: !!elementRef.current },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A,F",
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    if (!elementRef.current || !className) {
+      // #region agent log
+      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          location: "TAS.stories.tsx:AnimatedBox:early-return",
+          message: "Early return - no element or className",
+          data: { hasElement: !!elementRef.current, className },
+          timestamp: Date.now(),
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "B",
+        }),
+      }).catch(() => {});
+      // #endregion
+      return;
+    }
+
+    const element = elementRef.current;
+    // Extract animation classes (tm-motion-* classes)
+    const animationClasses = className.split(" ").filter((cls) => cls.startsWith("tm-motion-"));
+
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "TAS.stories.tsx:AnimatedBox:animation-classes-extracted",
+        message: "Animation classes extracted",
+        data: { animationClasses, className, allClasses: className.split(" ") },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "B",
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    if (animationClasses.length === 0) {
+      // #region agent log
+      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          location: "TAS.stories.tsx:AnimatedBox:no-animation-classes",
+          message: "No animation classes found",
+          data: { className, allClasses: className.split(" ") },
+          timestamp: Date.now(),
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "B",
+        }),
+      }).catch(() => {});
+      // #endregion
+      return;
+    }
+
+    // Check computed styles before restart
+    const beforeStyles = window.getComputedStyle(element);
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "TAS.stories.tsx:AnimatedBox:before-restart",
+        message: "Before restarting animation",
+        data: {
+          animationClasses,
+          animationName: beforeStyles.animationName,
+          animationDuration: beforeStyles.animationDuration,
+          animationFillMode: beforeStyles.animationFillMode,
+          hasAnimation: beforeStyles.animationName !== "none",
+          opacity: beforeStyles.opacity,
+          transform: beforeStyles.transform,
+          elementClasses: Array.from(element.classList),
+        },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run3",
+        hypothesisId: "A,C,D,E",
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    // Force animation restart using animation cancel technique
+    // Get computed animation value before canceling
+    const computedStyles = window.getComputedStyle(element);
+    const animationValue = computedStyles.animation;
+
+    // Cancel animation by setting it to 'none' via inline style
+    element.style.animation = "none";
+
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "TAS.stories.tsx:AnimatedBox:after-cancel",
+        message: "After canceling animation",
+        data: {
+          animationClasses,
+          elementClasses: Array.from(element.classList),
+          animationValue,
+          animationName: window.getComputedStyle(element).animationName,
+        },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "run3",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    // Force reflow to ensure cancellation is applied
+    void element.offsetHeight;
+
+    // Re-add animation on next frame to restart
+    requestAnimationFrame(() => {
+      // Remove inline style to restore CSS class animation
+      element.style.animation = "";
+
+      // #region agent log
+      const afterStyles = window.getComputedStyle(element);
+      fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          location: "TAS.stories.tsx:AnimatedBox:after-restart",
+          message: "After restarting animation",
+          data: {
+            animationClasses,
+            elementClasses: Array.from(element.classList),
+            animationName: afterStyles.animationName,
+            animationDuration: afterStyles.animationDuration,
+            animationFillMode: afterStyles.animationFillMode,
+            animationTimingFunction: afterStyles.animationTimingFunction,
+            hasAnimation: afterStyles.animationName !== "none",
+            inlineAnimation: element.style.animation,
+            opacity: afterStyles.opacity,
+            transform: afterStyles.transform,
+            cssVariables: {
+              motionDurationNormal: afterStyles.getPropertyValue("--motion-duration-normal"),
+              motionEasingStandard: afterStyles.getPropertyValue("--motion-easing-standard"),
+            },
+          },
+          timestamp: Date.now(),
+          sessionId: "debug-session",
+          runId: "run3",
+          hypothesisId: "A,C,D,E",
+        }),
+      }).catch(() => {});
+      // #endregion
+    });
+  }, [animationKey, className]);
+
+  return (
+    <Box ref={elementRef} className={className} {...props}>
+      {children}
+    </Box>
+  );
+}
+
+/**
  * Fade Animation Presets
  */
 export const FadePresets: Story = {
@@ -56,11 +253,23 @@ export const FadePresets: Story = {
     });
 
     const animations = [
-      { id: "fadeIn" as const, label: "Fade In", preset: fadePresets.fadeIn() },
-      { id: "fadeInUp" as const, label: "Fade In Up", preset: fadePresets.fadeInUp() },
-      { id: "fadeInDown" as const, label: "Fade In Down", preset: fadePresets.fadeInDown() },
-      { id: "fadeInLeft" as const, label: "Fade In Left", preset: fadePresets.fadeInLeft() },
-      { id: "fadeInRight" as const, label: "Fade In Right", preset: fadePresets.fadeInRight() },
+      { id: "fadeIn" as const, label: "Fade In", getPreset: () => fadePresets.fadeIn() },
+      { id: "fadeInUp" as const, label: "Fade In Up", getPreset: () => fadePresets.fadeInUp() },
+      {
+        id: "fadeInDown" as const,
+        label: "Fade In Down",
+        getPreset: () => fadePresets.fadeInDown(),
+      },
+      {
+        id: "fadeInLeft" as const,
+        label: "Fade In Left",
+        getPreset: () => fadePresets.fadeInLeft(),
+      },
+      {
+        id: "fadeInRight" as const,
+        label: "Fade In Right",
+        getPreset: () => fadePresets.fadeInRight(),
+      },
     ];
 
     const boxStyle = {
@@ -74,40 +283,68 @@ export const FadePresets: Story = {
       <Stack spacing={6} align="center" style={{ maxWidth: "900px", width: "100%" }}>
         <Heading>Fade Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
-          {animations.map((animation) => (
-            <Stack key={animation.id} spacing={3} align="center">
-              <Box
-                key={keys[animation.id]}
-                p={6}
-                bg="card"
-                radius="lg"
-                className={cn(animation.preset.className)}
-                style={boxStyle}
-              >
-                <Text>{animation.label}</Text>
-              </Box>
-              <Button
-                onClick={() =>
-                  setKeys((prev) => ({
-                    ...prev,
-                    [animation.id]: prev[animation.id] + 1,
-                  }))
-                }
-                variant="outline"
-                size="sm"
-              >
-                Replay
-              </Button>
-            </Stack>
-          ))}
+          {animations.map((animation) => {
+            const presetResult = animation.getPreset();
+            const finalClassName = cn(presetResult.className);
+
+            // #region agent log
+            fetch("http://127.0.0.1:7243/ingest/ff5d1e20-0815-4ca0-af82-fcbd3cfa35b1", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                location: "TAS.stories.tsx:FadePresets:render",
+                message: "FadePresets animation render",
+                data: {
+                  animationId: animation.id,
+                  presetClassName: presetResult.className,
+                  finalClassName,
+                  classNameLength: finalClassName?.length || 0,
+                },
+                timestamp: Date.now(),
+                sessionId: "debug-session",
+                runId: "run1",
+                hypothesisId: "B",
+              }),
+            }).catch(() => {});
+            // #endregion
+
+            return (
+              <Stack key={animation.id} spacing={3} align="center">
+                <AnimatedBox
+                  key={keys[animation.id]}
+                  animationKey={keys[animation.id]}
+                  p={6}
+                  bg="card"
+                  radius="lg"
+                  className={finalClassName}
+                  style={boxStyle}
+                >
+                  <Text>{animation.label}</Text>
+                </AnimatedBox>
+                <Button
+                  onClick={() =>
+                    setKeys((prev) => ({
+                      ...prev,
+                      [animation.id]: prev[animation.id] + 1,
+                    }))
+                  }
+                  variant="outline"
+                  size="sm"
+                >
+                  Replay
+                </Button>
+              </Stack>
+            );
+          })}
         </Grid>
         <Stack spacing={3} align="center">
           <Button onClick={() => setShow(!show)} variant="outline">
             Toggle Fade Out
           </Button>
           {show && (
-            <Box
+            <AnimatedBox
               key={keys.fadeOut}
+              animationKey={keys.fadeOut}
               p={6}
               bg="destructive"
               radius="lg"
@@ -118,7 +355,7 @@ export const FadePresets: Story = {
               }}
             >
               <Text>Fade Out</Text>
-            </Box>
+            </AnimatedBox>
           )}
         </Stack>
       </Stack>
@@ -142,22 +379,22 @@ export const SlidePresets: Story = {
       {
         id: "slideInUp" as const,
         label: "Slide In Up",
-        preset: slidePresets.slideInUp(),
+        getPreset: () => slidePresets.slideInUp(),
       },
       {
         id: "slideInDown" as const,
         label: "Slide In Down",
-        preset: slidePresets.slideInDown(),
+        getPreset: () => slidePresets.slideInDown(),
       },
       {
         id: "slideInLeft" as const,
         label: "Slide In Left",
-        preset: slidePresets.slideInLeft(),
+        getPreset: () => slidePresets.slideInLeft(),
       },
       {
         id: "slideInRight" as const,
         label: "Slide In Right",
-        preset: slidePresets.slideInRight(),
+        getPreset: () => slidePresets.slideInRight(),
       },
     ];
 
@@ -165,37 +402,41 @@ export const SlidePresets: Story = {
       <Stack spacing={6} align="center" style={{ maxWidth: "800px", width: "100%" }}>
         <Heading>Slide Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
-          {animations.map((animation) => (
-            <Stack key={animation.id} spacing={3} align="center">
-              <Box
-                key={keys[animation.id]}
-                p={6}
-                bg="card"
-                radius="lg"
-                className={cn(animation.preset.className)}
-                style={{
-                  textAlign: "center",
-                  width: "100%",
-                  border: "1px solid hsl(var(--border))",
-                  boxShadow: "var(--shadow-sm)",
-                }}
-              >
-                <Text>{animation.label}</Text>
-              </Box>
-              <Button
-                onClick={() =>
-                  setKeys((prev) => ({
-                    ...prev,
-                    [animation.id]: prev[animation.id] + 1,
-                  }))
-                }
-                variant="outline"
-                size="sm"
-              >
-                Replay Animation
-              </Button>
-            </Stack>
-          ))}
+          {animations.map((animation) => {
+            const presetClassName = animation.getPreset().className;
+            return (
+              <Stack key={animation.id} spacing={3} align="center">
+                <AnimatedBox
+                  key={keys[animation.id]}
+                  animationKey={keys[animation.id]}
+                  p={6}
+                  bg="card"
+                  radius="lg"
+                  className={cn(presetClassName)}
+                  style={{
+                    textAlign: "center",
+                    width: "100%",
+                    border: "1px solid hsl(var(--border))",
+                    boxShadow: "var(--shadow-sm)",
+                  }}
+                >
+                  <Text>{animation.label}</Text>
+                </AnimatedBox>
+                <Button
+                  onClick={() =>
+                    setKeys((prev) => ({
+                      ...prev,
+                      [animation.id]: prev[animation.id] + 1,
+                    }))
+                  }
+                  variant="outline"
+                  size="sm"
+                >
+                  Replay Animation
+                </Button>
+              </Stack>
+            );
+          })}
         </Grid>
       </Stack>
     );
@@ -223,8 +464,9 @@ export const ScalePresets: Story = {
         <Heading>Scale Animation Presets</Heading>
         <Grid cols={2} gap={4} style={{ width: "100%" }}>
           <Stack spacing={3} align="center">
-            <Box
+            <AnimatedBox
               key={keys.scaleIn}
+              animationKey={keys.scaleIn}
               p={6}
               bg="card"
               radius="lg"
@@ -232,7 +474,7 @@ export const ScalePresets: Story = {
               style={boxStyle}
             >
               <Text>Scale In</Text>
-            </Box>
+            </AnimatedBox>
             <Button
               onClick={() => setKeys((prev) => ({ ...prev, scaleIn: prev.scaleIn + 1 }))}
               variant="outline"
@@ -379,10 +621,10 @@ export const SpringAnimations: Story = {
     });
 
     const animations = [
-      { id: "gentle" as const, label: "Gentle Scale", preset: scalePresets.scaleIn() },
-      { id: "wobbly" as const, label: "Scale In", preset: scalePresets.scaleIn() },
-      { id: "stiff" as const, label: "Scale In", preset: scalePresets.scaleIn() },
-      { id: "bouncy" as const, label: "Scale In", preset: scalePresets.scaleIn() },
+      { id: "gentle" as const, label: "Gentle Scale", getPreset: () => scalePresets.scaleIn() },
+      { id: "wobbly" as const, label: "Scale In", getPreset: () => scalePresets.scaleIn() },
+      { id: "stiff" as const, label: "Scale In", getPreset: () => scalePresets.scaleIn() },
+      { id: "bouncy" as const, label: "Scale In", getPreset: () => scalePresets.scaleIn() },
     ];
 
     const boxStyle = {
@@ -403,7 +645,7 @@ export const SpringAnimations: Story = {
                 p={6}
                 bg="card"
                 radius="lg"
-                className={cn(animation.preset.className)}
+                className={cn(animation.getPreset().className)}
                 style={boxStyle}
               >
                 <Text>{animation.label}</Text>

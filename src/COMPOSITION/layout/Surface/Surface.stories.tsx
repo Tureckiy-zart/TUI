@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Surface } from "./Surface";
 
 const meta: Meta<typeof Surface> = {
-  title: "Layout/Surface",
+  title: "Foundation Locked/Composition/Layout/Surface",
   component: Surface,
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          "Surface is a variant component extension of Box. It provides surface elevation variants (flat, raised, sunken) with token-based styling. Uses Box internally as the base container and CVA for variant management.",
+          "Surface is a variant component extension of Box. It provides surface elevation variants (default, elevated, outlined, filled, subtle) with token-based styling. Uses Box internally as the base container and tokenCVA for variant management.",
       },
     },
   },
@@ -17,11 +17,11 @@ const meta: Meta<typeof Surface> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["flat", "raised", "sunken"],
+      options: ["default", "elevated", "outlined", "filled", "subtle"],
       description: "Surface elevation variant",
       table: {
-        type: { summary: "SurfaceVariant" },
-        defaultValue: { summary: "flat" },
+        type: { summary: "SurfaceVariantType" },
+        defaultValue: { summary: "default" },
       },
     },
     radius: {
@@ -37,9 +37,9 @@ type Story = StoryObj<typeof Surface>;
 
 export const Default: Story = {
   args: {
-    variant: "flat",
+    variant: "default",
     p: "md",
-    children: "Surface with flat variant (default)",
+    children: "Surface with default variant",
   },
 };
 
@@ -47,21 +47,33 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Flat</h3>
-        <Surface variant="flat" p="md" radius="md">
-          Flat surface - no elevation
+        <h3 className="mb-sm text-lg font-semibold">Default</h3>
+        <Surface variant="default" p="md" radius="md">
+          Default surface - standard elevation
         </Surface>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Raised</h3>
-        <Surface variant="raised" p="md" radius="md">
-          Raised surface - elevated with shadow
+        <h3 className="mb-sm text-lg font-semibold">Elevated</h3>
+        <Surface variant="elevated" p="md" radius="md">
+          Elevated surface - raised with shadow
         </Surface>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Sunken</h3>
-        <Surface variant="sunken" p="md" radius="md">
-          Sunken surface - inset appearance
+        <h3 className="mb-sm text-lg font-semibold">Outlined</h3>
+        <Surface variant="outlined" p="md" radius="md">
+          Outlined surface - border-focused variant
+        </Surface>
+      </div>
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Filled</h3>
+        <Surface variant="filled" p="md" radius="md">
+          Filled surface - solid background
+        </Surface>
+      </div>
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Subtle</h3>
+        <Surface variant="subtle" p="md" radius="md">
+          Subtle surface - minimal background
         </Surface>
       </div>
     </div>
@@ -80,25 +92,25 @@ export const WithRadius: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: sm</h3>
-        <Surface variant="raised" p="md" radius="sm">
+        <Surface variant="elevated" p="md" radius="sm">
           Small radius
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: md</h3>
-        <Surface variant="raised" p="md" radius="md">
+        <Surface variant="elevated" p="md" radius="md">
           Medium radius
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: lg</h3>
-        <Surface variant="raised" p="md" radius="lg">
+        <Surface variant="elevated" p="md" radius="lg">
           Large radius
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: full</h3>
-        <Surface variant="raised" p="md" radius="full">
+        <Surface variant="elevated" p="md" radius="full">
           Full radius (pill)
         </Surface>
       </div>
@@ -118,19 +130,19 @@ export const WithSpacing: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: sm</h3>
-        <Surface variant="raised" p="sm" radius="md">
+        <Surface variant="elevated" p="sm" radius="md">
           Small padding
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: md</h3>
-        <Surface variant="raised" p="md" radius="md">
+        <Surface variant="elevated" p="md" radius="md">
           Medium padding
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: lg</h3>
-        <Surface variant="raised" p="lg" radius="md">
+        <Surface variant="elevated" p="lg" radius="md">
           Large padding
         </Surface>
       </div>
@@ -150,23 +162,29 @@ export const UseCases: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Card</h3>
-        <Surface variant="raised" p="lg" radius="lg">
+        <Surface variant="elevated" p="lg" radius="lg">
           <h4 className="mb-sm text-lg font-semibold">Card Title</h4>
-          <p className="text-sm text-muted-foreground">Card content with raised surface variant</p>
+          <p className="text-sm text-muted-foreground">
+            Card content with elevated surface variant
+          </p>
         </Surface>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Panel</h3>
-        <Surface variant="flat" p="md" radius="md">
+        <Surface variant="default" p="md" radius="md">
           <h4 className="mb-sm text-lg font-semibold">Panel Title</h4>
-          <p className="text-sm text-muted-foreground">Panel content with flat surface variant</p>
+          <p className="text-sm text-muted-foreground">
+            Panel content with default surface variant
+          </p>
         </Surface>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Inset Area</h3>
-        <Surface variant="sunken" p="md" radius="md">
-          <h4 className="mb-sm text-lg font-semibold">Inset Title</h4>
-          <p className="text-sm text-muted-foreground">Inset content with sunken surface variant</p>
+        <h3 className="mb-sm text-lg font-semibold">Filled Area</h3>
+        <Surface variant="filled" p="md" radius="md">
+          <h4 className="mb-sm text-lg font-semibold">Filled Title</h4>
+          <p className="text-sm text-muted-foreground">
+            Filled content with filled surface variant
+          </p>
         </Surface>
       </div>
     </div>

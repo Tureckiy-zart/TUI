@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
 import { tailwindThemeColors } from "./src/FOUNDATION/tokens/colors";
 import { tailwindMotionConfig } from "./src/FOUNDATION/tokens/motion";
+import { motionV2TailwindConfig } from "./src/FOUNDATION/tokens/motion/v2";
 import { tailwindRadiusConfig } from "./src/FOUNDATION/tokens/radius";
 import { tailwindShadowConfig } from "./src/FOUNDATION/tokens/shadows";
 import { tailwindSpacingConfig } from "./src/FOUNDATION/tokens/spacing";
 import { tailwindTypographyConfig } from "./src/FOUNDATION/tokens/typography";
+import preset from "./src/preset";
 
 // CRITICAL: Safelist MUST be inlined directly in config file
 // Tailwind requires safelist to be available at build time as a static array
@@ -118,6 +120,28 @@ const SAFELIST = [
   "focus-visible:ring-ring",
   "focus-visible:ring-primary",
   "focus-visible:ring-accent",
+  // Motion V2 utility classes (required for animations to work)
+  "tm-motion-fade-in",
+  "tm-motion-fade-out",
+  "tm-motion-scale-in",
+  "tm-motion-scale-out",
+  "tm-motion-slide-up",
+  "tm-motion-slide-down",
+  "tm-motion-slide-left",
+  "tm-motion-slide-right",
+  "tm-motion-fade-scale",
+  "tm-motion-fade-slide-up",
+  "tm-motion-fade-slide-down",
+  "tm-motion-fade-slide-left",
+  "tm-motion-fade-slide-right",
+  "tm-motion-fade-scale-out",
+  "tm-motion-fade-slide-up-out",
+  "tm-motion-fade-slide-down-out",
+  "tm-motion-fade-slide-left-out",
+  "tm-motion-fade-slide-right-out",
+  "tm-motion-hover-lift",
+  "tm-motion-hover-scale",
+  "tm-motion-tap-scale",
 ];
 
 const config: Config = {
@@ -147,14 +171,23 @@ const config: Config = {
       // Token-based border radius from tokens/radius
       borderRadius: tailwindRadiusConfig.borderRadius,
       // Token-based motion from tokens/motion
-      transitionDuration: tailwindMotionConfig.transitionDuration,
-      transitionTimingFunction: tailwindMotionConfig.transitionTimingFunction,
+      transitionDuration: {
+        ...tailwindMotionConfig.transitionDuration,
+        ...motionV2TailwindConfig.transitionDuration,
+      },
+      transitionTimingFunction: {
+        ...tailwindMotionConfig.transitionTimingFunction,
+        ...motionV2TailwindConfig.transitionTimingFunction,
+      },
       transitionProperty: tailwindMotionConfig.transitionProperty,
-      keyframes: tailwindMotionConfig.keyframes,
+      keyframes: {
+        ...(tailwindMotionConfig.keyframes as Record<string, any>),
+        ...(motionV2TailwindConfig.keyframes as Record<string, any>),
+      },
       animation: tailwindMotionConfig.animation,
     },
   },
-  plugins: [],
+  presets: [preset],
 };
 
 export default config;

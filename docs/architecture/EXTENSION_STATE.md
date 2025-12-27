@@ -1,6 +1,6 @@
 # TUI Extension Layer - Canonical State
 
-**Date:** 2025-12-16  
+**Date:** 2025-12-25  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -49,75 +49,100 @@ This document defines the canonical state of:
 
 ---
 
-## Foundation Layer (LOCKED)
+## Foundation Layer (UNLOCKED - Active Construction)
 
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Lock Date:** 2025-12-12  
+**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
 **Source of Truth:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)
 
-The following components are **LOCKED** and **IMMUTABLE**. They form the foundation of the UI system and must not be modified, extended, or replaced.
+The following components form the foundation of the UI system. Foundation layer is **UNLOCKED** for active construction to complete missing primitives before final lock.
 
-**Foundation Authorities are CLOSED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) are **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
+**Foundation Authorities remain LOCKED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) remain **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
+
+**Unlock Rules:**
+- ✅ Missing Foundation primitives can be added (Text, Input, Textarea, Link, Toast renderer, Modal)
+- ✅ Existing Foundation primitives can be refactored to reach canonical form
+- ✅ APIs can be adjusted to remove architectural mistakes
+- ✅ Missing contracts required by higher layers can be added
+- ❌ Business logic addition is **FORBIDDEN**
+- ❌ Framework-specific dependencies addition is **FORBIDDEN**
+- ❌ Convenience APIs addition is **FORBIDDEN**
+- ❌ Domain or navigation patterns addition is **FORBIDDEN**
+- ❌ Composition-level components addition is **FORBIDDEN**
+
+**Foundation layer is intentionally unlocked until all primitives reach canonical form.**
 
 ### Locked Components
 
 1. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx`
-   - **Status:** ✅ **LOCKED**
-   - **Lock Date:** 2025-12-20
-   - **Task:** TUNG_FOUNDATION_MODAL_STEP_13
-   - **Lock Report:** `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
-   - **Migration Completed:** Modal has completed canonical Foundation Step Pipeline (Steps 0–13) and is now locked
-   - **Public API:** Immutable — All props are token-based
-   - **Public Types:** Immutable — Type Surface is frozen
-   - **Unlock Policy:** Any changes require explicit Foundation Unlock procedure with new versioned pipeline (Steps 0–13)
-   - **Exports:** `Modal`, `ModalClose`, `ModalContent`, `ModalDescription`, `ModalFooter`, `ModalHeader`, `ModalOverlay`, `ModalRoot`, `ModalTitle`, `ModalTrigger`
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/MODAL_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Migration Complete:** Modal has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+   - **Key Changes:** CVA migrated (cva → tokenCVA), size restriction compliance (removed xl and fullscreen, sm | md | lg only), explicit union type exported (ModalSize), type constraints added (satisfies Record<ModalSize, string>)
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+   - **Exports:** `Modal`, `ModalClose`, `ModalContent`, `ModalDescription`, `ModalFooter`, `ModalHeader`, `ModalOverlay`, `ModalRoot`, `ModalTitle`, `ModalTrigger`, `ModalSize`
+   - **Types:** `ModalCloseProps`, `ModalContentProps`, `ModalDescriptionProps`, `ModalFooterProps`, `ModalHeaderProps`, `ModalOverlayProps`, `ModalRootProps`, `ModalSize`, `ModalTitleProps`, `ModalTriggerProps`
 
 2. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx`
-   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
-   - **Lock Date:** 2025-12-23
-   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, Second Pass Complete)
+   - **Lock Date:** 2025-12-25 (Second Pass)
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete, Second Pass 2025-12-25)
    - **Audit Report:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
-   - **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0–12) twice and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Second pass completed 2025-12-25 with documentation accuracy improvements.
    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
    - **Types:** `TabsContentProps`, `TabsListProps`, `TabsRootProps`, `TabsTriggerProps`
 
-3. **Select** - `src/components/select/Select.tsx`
-   - **Status:** FOUNDATION · LOCKED (FINALIZED)
-   - **Comment:** Implementation hardened, a11y verified (S1 + H1–H4 complete)
-   - **UNLOCK:** Any functional, behavioral, accessibility-semantic, or public API change requires formal **UNLOCK** (see `FOUNDATION_LOCK.md`, `FOUNDATION_LOCK_OPERATING_RULES.md`)
-   - **Rule:** DO NOT modify, extend, or create alternatives beyond LOCK-safe changes permitted by `FOUNDATION_LOCK_OPERATING_RULES.md`
-   - **Finalization Rule:** No extensions/variants/refactors of `Select` as standalone work. Only LOCK-safe bug/a11y fixes are permitted.
+3. **Select** - `src/COMPOSITION/controls/Select/Select.tsx`
+   - **Status:** ✅ **LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/SELECT_BASELINE_REPORT.md`
+   - **Lock Type:** FOUNDATION LOCK
+   - **Migration Complete:** Select has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Key Changes:** CVA migrated (cva → tokenCVA), type constraints added (satisfies Record<Type, string>), canonical stories added (Matrix, States, SizesGallery), default size resolution helper extracted
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `Select`, `SelectContent`, `SelectGroup`, `SelectIcon`, `SelectItem`, `SelectItemIndicator`, `SelectItemText`, `SelectLabel`, `SelectRoot`, `SelectSeparator`, `SelectTrigger`, `SelectValue`, `SelectViewport`
 
 4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
-   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
-   - **Unlock Date:** 2025-12-19
-   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
-   - **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-   - **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-   - **Constraints During Unlock:**
-     - ❌ No public API expansion
-     - ❌ No new variants or sizes
-     - ❌ No behavior changes outside canonicalization
-     - ❌ No bypass of Authority Contracts
-   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+     - Tone variants: neutral, primary, destructive (overlay-specific semantics)
+     - Size scale: sm, md, lg (overlay restriction compliant)
+     - Size inheritance pattern via Context (DX improvement)
+     - Radix delegation for all behavior (right-click, keyboard, focus, a11y)
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `ContextMenu`, `ContextMenuCheckboxItem`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuRoot`, `ContextMenuSeparator`, `ContextMenuSub`, `ContextMenuSubContent`, `ContextMenuSubTrigger`, `ContextMenuTrigger`
+   - **Types:** `ContextMenuCheckboxItemProps`, `ContextMenuContentProps`, `ContextMenuItemProps`, `ContextMenuLabelProps`, `ContextMenuRadioGroupProps`, `ContextMenuRadioItemProps`, `ContextMenuRootProps`, `ContextMenuSeparatorProps`, `ContextMenuSubContentProps`, `ContextMenuSubProps`, `ContextMenuSubTriggerProps`, `ContextMenuTriggerProps`
 
 5. **Toast** - `src/COMPOSITION/overlays/Toast.tsx`
-   - **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
-   - **Unlock Date:** 2025-12-19
-   - **Task:** TUNG_FOUNDATION_LEGACY_UNLOCK_01
-   - **Unlock Reason:** Toast was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-   - **Migration Path:** Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-   - **Constraints During Unlock:**
-     - ❌ No public API expansion
-     - ❌ No new variants or sizes
-     - ❌ No behavior changes outside canonicalization
-     - ❌ No bypass of Authority Contracts
-   - **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/TOAST_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Migration Complete:** Toast has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Key Decisions:**
+     - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+     - Explicit union type exported (`ToastVariant`), no CVA type leakage
+     - Type constraints applied (`satisfies Record<ToastVariant, string>`)
+     - Custom semantic variants: default, success, info, warning, danger (justified for notification component)
+     - No public size prop (fixed size appropriate for notification overlay)
+     - Radix delegation for all behavior (swipe, auto-dismiss, focus, keyboard, a11y)
+     - Token compliance: All styling via TOAST_TOKENS
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `Toast`, `ToastAction`, `ToastClose`, `ToastDescription`, `ToastRoot`, `ToastTitle`, `toastVariants`
+   - **Types:** `ToastActionData`, `ToastData`, `ToastProps`, `ToastRootProps`, `ToastVariant`
    - **Provider:** `ToastProvider`, `ToastViewport`, `useToast`
 
 6. **Button** - `src/PRIMITIVES/Button/Button.tsx`
@@ -132,21 +157,38 @@ The following components are **LOCKED** and **IMMUTABLE**. They form the foundat
    - **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
 
 7. **Link** - `src/PRIMITIVES/Link/Link.tsx`
-   - **Status:** ✅ **FINAL LOCK** (2025-12-18)
-   - **Rule:** DO NOT modify, extend, or create alternatives
-   - **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
+   - **Status:** ✅ **LOCKED** (2025-12-25)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/LINK_BASELINE_REPORT.md`
+   - **Lock Type:** FOUNDATION LOCK
+   - **Migration Complete:** Link has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+   - **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` (legacy process, superseded by audit report)
    - **Exports:** `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
 
-### Foundation Layer Rules
+### Foundation Layer Rules (Unlock Period)
 
-- **DO NOT** modify locked components
-- **DO NOT** create alternatives to locked components
-- **DO NOT** extend locked components beyond their documented API
-- **DO NOT** import locked components from non-canonical paths
-- **DO NOT** use internal implementation details of locked components
-- **DO NOT** modify Foundation Authority rules (Foundation Authorities are CLOSED and IMMUTABLE)
-- **DO NOT** override, bypass, or duplicate Foundation functionality
-- **MUST** comply with all Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation)
+**ALLOWED:**
+- ✅ Add missing Foundation primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
+- ✅ Refactor existing Foundation primitives to reach canonical form
+- ✅ Adjust APIs to remove architectural mistakes
+- ✅ Add missing contracts required by higher layers
+
+**FORBIDDEN:**
+- ❌ Add business logic
+- ❌ Add framework-specific dependencies
+- ❌ Add convenience APIs
+- ❌ Add domain or navigation patterns
+- ❌ Add composition-level components
+- ❌ Create alternatives to Foundation components
+- ❌ Import Foundation components from non-canonical paths
+- ❌ Use internal implementation details of Foundation components
+- ❌ Modify Foundation Authority rules (Foundation Authorities remain LOCKED and IMMUTABLE)
+- ❌ Override, bypass, or duplicate Foundation functionality
+
+**MUST:**
+- ✅ Comply with all Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation)
 
 ---
 
@@ -158,14 +200,38 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 ### Visual Components
 
-1. **Alert** - `src/components/ui/alert.tsx`
-   - Exports: `Alert`, `AlertProps`, `alertVariants`
+1. **Alert** - `src/PRIMITIVES/Alert/Alert.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-26
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/ALERT_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in PRIMITIVES layer, not Foundation lock)
+   - **Migration Complete:** Alert has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+   - **Key Changes:** CVA migrated (cva → tokenCVA), legacy variants removed (success, warning, danger, info), explicit union type exported (AlertVariant), type constraints added (satisfies Record<AlertVariant, string>), token structure updated
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+   - **Exports:** `Alert`, `AlertProps`, `AlertVariant`, `alertVariants`, `ALERT_VARIANTS`
 
 3. **Link** - `src/PRIMITIVES/Link/Link.tsx`
    - Exports: `Link`, `LinkProps`, `linkVariants`
 
 4. **Badge** - `src/PRIMITIVES/Badge/Badge.tsx`
-   - Exports: `Badge`, `BadgeProps`, `badgeVariants`
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-25
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/BADGE_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Extension component lock)
+   - **Component Type:** Extension Layer Primitive - Visual Component
+   - **Migration Complete:** Badge has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+   - **Purpose:** Visual label/tag component for displaying status indicators, categories, or metadata. Non-interactive display component.
+   - **Variants:** primary, secondary, accent, outline, ghost, link, destructive (InteractiveVariant compliant)
+   - **Size:** Fixed size (no size prop, correct for semi-interactive component per FOUNDATION_LOCK.md)
+   - **Token Compliance:** ✅ 100% (BADGE_TOKENS)
+   - **CVA Structure:** tokenCVA (Decision Matrix RULE 1 compliant)
+   - **Accessibility:** Non-interactive display component, accepts optional ARIA attributes
+   - **Test Coverage:** Comprehensive (Badge.test.tsx)
+   - **Storybook Coverage:** Compliant (all variants demonstrated)
+   - Exports: `Badge`, `BadgeProps`, `BadgeVariant`, `BADGE_VARIANTS`, `badgeVariants`
 
 5. **Icon** - `src/components/icon/Icon.tsx`
    - Exports: `Icon`, `IconProps`, `iconVariants`
@@ -201,10 +267,15 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** DO NOT modify, extend, or create alternatives
     - Exports: `Display`, `DisplayProps`, `displayVariants`
 
-12. **Heading** - `src/components/ui/heading.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
-    - **Rule:** DO NOT modify, extend, or create alternatives
-    - Exports: `Heading`, `HeadingProps`, `headingVariants`
+12. **Heading** - `src/PRIMITIVES/Heading/Heading.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-25)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-11 complete)
+    - **Audit Report:** `docs/reports/audit/HEADING_BASELINE_REPORT.md`
+    - **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Typography)
+    - **Migration Complete:** Heading has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Exports:** `Heading`, `HeadingProps`, `HeadingLevel`, `HeadingWeight`, `headingVariants`
 
 13. **Lead** - `src/components/ui/lead.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
@@ -219,9 +290,14 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 15. **Checkbox** - `src/components/checkbox/Checkbox.tsx`
     - Exports: `Checkbox`, `CheckboxProps`, `checkboxVariants`
 
-16. **Input** - `src/components/input/Input.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
-    - **Rule:** DO NOT modify, extend, or create alternatives
+16. **Input** - `src/PRIMITIVES/Input/Input.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-25)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-11 complete)
+    - **Audit Report:** `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+    - **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive)
+    - **Migration Complete:** Input has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - Exports: `Input`, `InputProps`, `InputSize`, `InputVariant`, `inputVariants`
 
 17. **Radio** - `src/components/radio/Radio.tsx`
@@ -233,10 +309,33 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 19. **Switch** - `src/components/switch/Switch.tsx`
     - Exports: `Switch`, `SwitchProps`, `switchHandleStateVariants`, `switchHandleVariants`, `switchTrackVariants`
 
-20. **Field** - `src/components/ui/field.tsx`
-    - Exports: `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
+20. **Field** - `src/PRIMITIVES/Field/Field.tsx`
+    - **Status:** ✅ **COMPOSITION READY** (Pipeline 18A Complete)
+    - **Completion Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/FIELD_BASELINE_REPORT.md`
+    - **Component Type:** Composition Primitive (Form Composition)
+    - **Layer:** COMPOSITION (not Foundation)
+    - **Quality:** High
+    - **Key Decisions:**
+      - Classification: Composition primitive (not Foundation)
+      - A11Y model: Manual association pattern (htmlFor + id + ARIA attributes)
+      - Fixed spacing="sm" (delegated to Stack)
+      - FieldError uses wrapper span for destructive color (respects Foundation Enforcement)
+      - No auto-generated IDs (explicit, flexible, standard HTML pattern)
+    - **Test Coverage:** 32 tests (comprehensive)
+    - **Storybook Coverage:** 11 stories (all use cases demonstrated)
+    - **Exports:** `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
 
 21. **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2025-12-26
+   - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/AVATAR_BASELINE_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Migration Complete:** Avatar has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+   - **Key Changes:** CVA migrated (cva → tokenCVA), token file created (AVATAR_TOKENS), type constraints added (satisfies Record<Type, string>), SizesGallery story added
+   - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - **Status:** ✅ **ALLOWED** (Extension Primitive)
     - **Type:** User Representation Primitive
     - **Purpose:** Displays user profile images with automatic fallback to initials or icon
@@ -259,14 +358,84 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Slider`, `SliderProps`, `SliderSize`, `SliderVariant`
 
 23. **RangeSlider** - `src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx`
-    - **Status:** ✅ **ALLOWED** (Extension Control)
-    - **Type:** Interactive Control Component
-    - **Purpose:** Numeric range selection via two draggable thumbs on track
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/RANGESLIDER_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension component lock)
+    - **Component Type:** Interactive Control Component
+    - **Migration Complete:** RangeSlider has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - **Radix Primitive:** `@radix-ui/react-slider` (with `minStepsBetweenThumbs`)
     - **Sizes:** `sm | md | lg` (Interactive Size Scale Authority)
     - **Variants:** `primary | secondary | outline` (InteractiveVariant subset)
     - **Use Cases:** Price range filters, date range selection, min-max value input
     - Exports: `RangeSlider`, `RangeSliderProps`, `RangeSliderSize`, `RangeSliderVariant`
+
+24. **Separator** - `src/COMPOSITION/controls/Separator/Separator.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/SEPARATOR_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension component lock)
+    - **Component Type:** Extension Layer Primitive - Layout Support
+    - **Migration Complete:** Separator has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Layout Support Primitive
+    - **Purpose:** Visual separator for content sections, menus, and lists
+    - **Radix Primitive:** `@radix-ui/react-separator`
+    - **Orientations:** `horizontal | vertical`
+    - **Colors:** `border | muted | primary | secondary | accent`
+    - **Thickness:** `1 | 2` (1px or 2px, tokenized via SEPARATOR_TOKENS)
+    - **Modes:** Semantic (role="separator") or Decorative (role="none")
+    - **Use Cases:** Section dividers, menu separators, list item separators, content blocks, form sections
+    - **Features:** Token-driven styling (tokenCVA, SEPARATOR_TOKENS), ARIA attributes, horizontal/vertical orientations, explicit union types (SeparatorColor, SeparatorThickness)
+    - **Key Decisions:**
+      - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+      - Component-specific tokens created for thickness (SEPARATOR_TOKENS)
+      - Explicit union types exported (SeparatorColor, SeparatorThickness)
+      - Type constraints applied (satisfies Record<Type, string>)
+      - VariantProps removed from public API (TYPING_STANDARD.md compliance)
+    - **Date Completed:** 2025-12-25
+    - Exports: `Separator`, `SeparatorProps`, `SeparatorColor`, `SeparatorThickness`, `separatorVariants`
+
+25. **Progress** - `src/PRIMITIVES/Progress/Progress.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/PROGRESS_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension component lock)
+    - **Component Type:** Extension Layer Primitive - Feedback
+    - **Migration Complete:** Progress has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Purpose:** Visual feedback for task/process completion. Displays filled bar proportional to completion percentage. Non-interactive display component.
+    - **Base Library:** Native HTML `<div>` elements (semantic HTML via ARIA)
+    - **Sizes:** `sm | md | lg` (Interactive Size Scale Authority subset)
+    - **Token Compliance:** ✅ 100% (PROGRESS_TOKENS)
+    - **Accessibility:** ARIA attributes (role="progressbar", aria-valuenow, aria-valuemin, aria-valuemax)
+    - **Use Cases:** File uploads, task completion, loading indicators, multi-step wizards
+    - Exports: `Progress`, `ProgressProps`, `ProgressSize`
+
+26. **AspectRatio** - `src/COMPOSITION/controls/AspectRatio/AspectRatio.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-25
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/ASPECTRATIO_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension component lock)
+    - **Component Type:** Extension Layer Primitive - Layout Support
+    - **Migration Complete:** AspectRatio has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Layout Support Primitive
+    - **Purpose:** Container that maintains a fixed aspect ratio for its content. Pure layout utility (no visual tokens).
+    - **Radix Primitive:** `@radix-ui/react-aspect-ratio`
+    - **Presets:** `square | video | cinema | portrait | photo | golden`
+    - **Custom Ratios:** Supports any numeric ratio (e.g., 16/9, 1.5, 0.75)
+    - **Use Cases:** Responsive images, embedded videos, cards with fixed aspect ratios, thumbnail grids
+    - **Features:** Pure layout utility, responsive by default, prevents layout shift
+    - **Token Compliance:** ✅ N/A (pure layout utility, no visual tokens needed)
+    - **Accessibility:** Minimal (child content accessibility preserved)
+    - **Date Completed:** 2025-12-25
+    - Exports: `AspectRatio`, `AspectRatioProps`, `AspectRatioPreset`, `ASPECT_RATIO_PRESETS`
 
 ### Layout Components
 
@@ -283,23 +452,27 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 - **Grid** → CSS Grid extension of Box
 - **Surface** → Surface elevation variant extension of Box
 
-19. **Box** - `src/components/layout/Box.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+19. **Box** - `src/COMPOSITION/layout/Box/Box.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Role:** Lowest-level layout primitive - pure, generic container
     - **Responsibility:** Spacing (padding/margin), visual properties (radius, shadow, background), element rendering (via `as` prop)
     - **Does NOT provide:** Layout composition semantics (display, flexDirection, gap, alignment)
     - **Use for:** Base container with styling only
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Box`, `BoxProps`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component validated, no changes required, fully compliant with all architectural standards
+    - **Audit Report:** `docs/reports/audit/BOX_BASELINE_REPORT.md`
 
-20. **Column** - `src/components/layout/Column.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+20. **Column** - `src/COMPOSITION/layout/Column/Column.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Role:** Semantic alias for Stack with vertical direction
     - **Responsibility:** Provides explicit vertical layout API
     - **Implementation:** Alias for `Stack` (shares implementation)
     - **Use for:** Semantic clarity when vertical layout intent is important
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Column`, `ColumnProps`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component validated, no changes required, fully compliant with all architectural standards
+    - **Audit Report:** `docs/reports/audit/COLUMN_BASELINE_REPORT.md`
 
 21. **Container** - `src/components/layout/Container.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
@@ -310,32 +483,38 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Container`, `ContainerProps`
 
-22. **Flex** - `src/components/layout/Flex.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+22. **Flex** - `src/COMPOSITION/layout/Flex/Flex.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Role:** Advanced flexbox container extension of Box
     - **Responsibility:** Full control over flexbox properties (direction, wrap, grow, shrink, basis, alignment, spacing)
     - **Uses:** Box internally as base container
     - **Use for:** Advanced flexbox control beyond Stack capabilities
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Flex`, `FlexProps`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component validated, no changes required, fully compliant with all architectural standards
+    - **Audit Report:** `docs/reports/audit/FLEX_BASELINE_REPORT.md`
 
-23. **Grid** - `src/components/layout/Grid.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+23. **Grid** - `src/COMPOSITION/layout/Grid/Grid.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Role:** CSS Grid container extension of Box
     - **Responsibility:** Full control over grid layout properties (columns, rows, gap, flow, alignment)
     - **Uses:** Box internally as base container
     - **Use for:** Two-dimensional layouts requiring precise row/column control
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Grid`, `GridProps`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component validated, refactored (removed duplicate function, added JSDoc), fully compliant with all architectural standards
+    - **Audit Report:** `docs/reports/audit/GRID_BASELINE_REPORT.md`
 
-24. **Row** - `src/components/layout/Row.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+24. **Row** - `src/COMPOSITION/layout/Row/Row.tsx`
+    - **Status:** ✅ **LOCKED** (validated by Pipeline 18A, 2025-12-26)
     - **Role:** Semantic alias for Stack with horizontal direction
     - **Responsibility:** Provides explicit horizontal layout API
     - **Implementation:** Alias for `Stack(direction="horizontal")` (shares implementation)
     - **Use for:** Semantic clarity when horizontal layout intent is important
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Row`, `RowProps`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component validated, no changes required, fully compliant with all architectural standards
+    - **Audit Report:** `docs/reports/audit/ROW_BASELINE_REPORT.md`
 
 25. **Stack** - `src/components/layout/Stack.tsx`
     - **Status:** ✅ **LOCKED** (2025-12-15)
@@ -347,14 +526,17 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Exports:** `Stack`, `StackProps`
 
-26. **Surface** - `src/components/layout/Surface.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-15)
+26. **Surface** - `src/COMPOSITION/layout/Surface/Surface.tsx`
+    - **Status:** ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Role:** Surface elevation variant component extension of Box
-    - **Responsibility:** Provides surface elevation variants (flat, raised, sunken) with token-based styling
-    - **Uses:** Box internally as base container, CVA for variant management
+    - **Responsibility:** Provides surface elevation variants (default, elevated, outlined, filled, subtle) with token-based styling
+    - **Uses:** Box internally as base container, tokenCVA for variant management
     - **Use for:** Semantic elevation variants
     - **Rule:** DO NOT modify, extend, or create alternatives
-    - **Exports:** `Surface`, `SurfaceProps`, `surfaceVariants`
+    - **Exports:** `Surface`, `SurfaceProps`, `SurfaceVariantType`, `surfaceVariants`
+    - **Pipeline 18A:** ✅ Complete (2025-12-26) - Component refactored (CVA migration to tokenCVA, variant dictionary alignment, type system improvements), fully compliant with all architectural standards
+    - **Breaking Changes:** Variant names changed (flat→default, raised→elevated, outline→outlined, sunken→filled, subtle→subtle) per VARIANTS_SIZE_CANON
+    - **Audit Report:** `docs/reports/audit/SURFACE_BASELINE_REPORT.md`
 
 ### Container Components
 
@@ -385,13 +567,14 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 ### Menu Components
 
 33. **Popover** - `src/COMPOSITION/overlays/Popover.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-21)
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Second Pass Complete, 2025-12-26)
     - **Rule:** DO NOT modify, extend, or create alternatives
-    - **Lock Report:** `docs/architecture/locks/TOOLTIP_POPOVER_LOCK.md`
-    - **Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+    - **Lock Report:** `docs/reports/audit/POPOVER_BASELINE_REPORT.md`
+    - **Pipeline:** Pipeline 18A First Pass (2025-12-25), Pipeline 18A Second Pass (2025-12-26)
     - **Public API:** Internal-only (not exported from `src/index.ts`)
+    - **Architectural Compliance:** ✅ 100% (overlay size restriction compliance achieved)
     - Exports: `Popover`, `PopoverTrigger`, `PopoverAnchor`, `PopoverContent`, `PopoverWrapper`, `popoverContentVariants`
-    - Types: `PopoverProps`, `PopoverVariant`, `PopoverSize`
+    - Types: `PopoverProps`, `PopoverVariant`, `PopoverSize` (restricted to `"sm" | "md" | "lg"` per overlay size restriction)
 
 34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C,  )
     - All Dropdown components and tokens fully removed
@@ -407,18 +590,32 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Types: `HoverCardContentProps`, `HoverCardRootProps`, `HoverCardTriggerProps`
 
 36. **Tooltip** - `src/COMPOSITION/overlays/Tooltip.tsx`
-    - **Status:** ✅ **LOCKED** (2025-12-21)
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
     - **Rule:** DO NOT modify, extend, or create alternatives
-    - **Lock Report:** `docs/architecture/locks/TOOLTIP_POPOVER_LOCK.md`
-    - **Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+    - **Lock Report:** `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md`
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** Tooltip has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Key Decisions:**
+      - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+      - Explicit union type exported (`TooltipVariant`), no CVA type leakage
+      - Type constraints applied (`satisfies Record<TooltipVariant, string>`)
+      - InteractiveVariant dictionary: primary, secondary, accent, outline, ghost, link, destructive
+      - No public size prop (fixed size appropriate for small informational overlay)
+      - Radix delegation for all behavior (hover, focus, keyboard, a11y)
+      - Storybook compliance: Required stories added (`States`, `LongContent` per VARIANTS_SIZE_CANON)
     - **Public API:** Internal-only (not exported from `src/index.ts`)
     - Exports: `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`, `TooltipWrapper`, `tooltipContentVariants`
     - Types: `TooltipProps`, `TooltipVariant`
 
 ### Data Display Components
 
-36. **Skeleton** - `src/components/data/skeleton/Skeleton.tsx`
-    - Exports: `Skeleton`, `SkeletonProps`, `skeletonVariants`
+36. **Skeleton** - `src/PRIMITIVES/Skeleton/Skeleton.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - Exports: `Skeleton`, `SkeletonProps`, `SkeletonVariant`, `skeletonVariants`
+    - **Pipeline 18A:** All BLOCKERS resolved (CVA migration cva → tokenCVA, type system improvements, explicit union types)
+    - **Key Changes:** tokenCVA migration, explicit SkeletonVariant type, type constraints (satisfies Record<SkeletonVariant, string>)
+    - **Audit Report:** `docs/reports/audit/SKELETON_BASELINE_REPORT.md`
 
 37. **EmptyState** - `src/components/data/empty-state/EmptyState.tsx`
     - Exports: `EmptyState`, `EmptyStateAction`, `EmptyStateDescription`, `EmptyStateIcon`, `EmptyStateTitle`
@@ -428,28 +625,224 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `DataList`, `DataListItem`, `DataListLabel`, `DataListRoot`, `DataListValue`
     - Types: `DataListItemProps`, `DataListLabelProps`, `DataListRootProps`, `DataListValueProps`
 
-39. **Table** - `src/components/data/table/Table.tsx`
-    - Exports: `Table`, `TableBody`, `TableCell`, `TableEmpty`, `TableExpandableContent`, `TableHead`, `TableHeader`, `TableLoadingState`, `TableRoot`, `TableRow`, `TableSortIcon`, `useTableContext`
+39. **Table** - `src/PATTERNS/tables/table/Table.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/TABLE_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in PATTERNS layer, not Foundation lock)
+    - **Migration Complete:** Table has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - Compound component pattern (not data-driven API)
+      - Alignment classes extracted to shared constant (`Table.constants.ts`)
+      - Subcomponent attachment pattern optimized (type alias instead of repetitive assertions)
+      - Keyboard navigation support for sortable columns (Enter/Space keys)
+      - Explicit union types for size (`sm | md | lg`) and alignment (`left | center | right`)
+      - All styling uses TABLE_TOKENS (no raw values)
+      - React Context for sharing sort/expansion state across subcomponents
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Purpose:** Interactive table component with sorting, expansion, and selection capabilities. Compound component pattern for displaying structured tabular data with built-in support for column sorting, row expansion, selection states, loading states, and empty states.
+    - Exports: `TableRoot as Table`, `useTableContext`, `TableHeader`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableSortIcon`, `TableEmpty`, `TableLoadingState`, `TableExpandableContent`
     - Types: `SortDirection`, `SortState`, `TableBodyProps`, `TableCellProps`, `TableColumn`, `TableContextValue`, `TableEmptyProps`, `TableExpandableContentProps`, `TableHeadProps`, `TableHeaderProps`, `TableLoadingStateProps`, `TableRootProps`, `TableRowProps`, `TableSortIconProps`
+
+40. **SimpleTable** - `src/PATTERNS/tables/SimpleTable/Table.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in PATTERNS layer, not Foundation lock)
+    - **Migration Complete:** SimpleTable has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - CVA migrated from no CVA to tokenCVA (Decision Matrix RULE 1 - component has token-driven size axis)
+      - Size prop added with `sm | md | lg` subset (per VARIANTS_SIZE_CANON.md)
+      - Explicit union type exported (`SimpleTableSize`), no CVA type leakage
+      - Type constraints applied (`satisfies Record<SimpleTableSize, string>`)
+      - SIMPLETABLE_TOKENS created for component-specific tokens
+      - All raw Tailwind classes replaced with tokens
+      - Semantic HTML structure with `scope="col"` on headers
+      - No variant prop (simple table doesn't need visual variants)
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Purpose:** Simple tabular data display component with column configuration. Renders a semantic HTML table based on data and column definitions. Does not handle sorting, filtering, or pagination (correct for "Simple" table).
+    - Exports: `Table`, `TableColumn`, `TableProps`, `SimpleTableSize`
+    - Types: `TableColumn`, `TableProps`, `SimpleTableSize`
 
 ### Navigation Components
 
-40. **SegmentedControl** - `src/components/navigation/segmented-control/SegmentedControl.tsx`
+40. **SegmentedControl** - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx`
     - Exports: `SegmentedControl`
-    - Types: `SegmentedControlItemProps`, `SegmentedControlRootProps`
+    - Types: `SegmentedControlItemProps`, `SegmentedControlRootProps`, `SegmentedControlSize`, `SegmentedControlOrientation`, `SegmentedControlState`
     - Variants: `segmentedControlItemVariants`, `segmentedControlRootVariants`
+    - Status: ✅ **PROCESS LOCKED** (validated by Pipeline 18A, 2025-12-26)
 
-41. **Breadcrumbs** - `src/components/navigation/breadcrumbs/Breadcrumbs.tsx`
-    - Exports: `Breadcrumbs`
+41. **Breadcrumbs** - `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/BREADCRUMBS_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** Breadcrumbs has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - No CVA structure (correct - component has no size/variant props)
+      - Token compliance: All styling via NAVIGATION_TOKENS
+      - Raw values "h-4 w-4" and "mx-1" are acceptable (standard Tailwind utilities)
+      - Compound API pattern (Breadcrumbs.Root, Breadcrumbs.Item, Breadcrumbs.Separator)
+      - States: default, disabled (via item.disabled), current (via aria-current="page")
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - Exports: `Breadcrumbs`, `Breadcrumbs.Root`, `Breadcrumbs.Item`, `Breadcrumbs.Separator`
     - Types: `BreadcrumbItem`, `BreadcrumbsItemProps`, `BreadcrumbsRootProps`, `BreadcrumbsSeparatorProps`
 
-42. **Pagination** - `src/components/navigation/pagination/Pagination.tsx`
+42. **Pagination** - `src/COMPOSITION/navigation/pagination/Pagination.tsx` ✅ LOCKED (validated by Pipeline 18A, 2025-12-26)
     - Exports: `Pagination`
     - Types: `PaginationEllipsisProps`, `PaginationItemProps`, `PaginationNextProps`, `PaginationPrevProps`, `PaginationRootProps`
+    - Status: LOCKED
+    - Lock Date: 2025-12-26
+    - Pipeline: 18A
 
-43. **Stepper** - `src/components/navigation/stepper/Stepper.tsx`
+43. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Audit Report:** `docs/reports/audit/STEPPER_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** Stepper has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - No CVA structure (correct - component has no size/variant props per Decision Matrix)
+      - Token compliance: All styling via NAVIGATION_TOKENS, MOTION_TOKENS, ICON_TOKENS
+      - Raw value "border-2" is acceptable (standard Tailwind utility, pattern seen in other components)
+      - Compound API pattern (Stepper.Root, Stepper.Item, Stepper.Indicator, Stepper.Label, Stepper.Content)
+      - States: active, completed, disabled (semantic process states for visualization)
+      - Helper functions extracted: getIndicatorStateClasses, renderIndicatorContent (reduced duplication)
+      - Accessibility: role="group", aria-label, aria-orientation, aria-current, aria-disabled
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - Exports: `Stepper`
     - Types: `StepperContentProps`, `StepperIndicatorProps`, `StepperItemProps`, `StepperLabelProps`, `StepperRootProps`, `StepperStep`
+
+44. **NavLink** - `src/PRIMITIVES/NavLink/NavLink.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVLINK_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in PRIMITIVES layer, Extension primitive)
+    - **Migration Complete:** NavLink has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - Navigation primitive built exclusively on Foundation Link component
+      - Stateless component reflecting externally provided navigation state via aria-current
+      - No routing logic or framework dependencies
+      - Minimal wrapper pattern (delegates all behavior to Link)
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Purpose:** Navigation primitive built on top of the Foundation Link component. Represents a navigational link and reflects externally provided navigation state via aria-current. NavLink does not perform routing, route matching, or state detection. NavLink is permanently limited to a stateless navigation primitive role and is intentionally isolated from routing frameworks, adapters, and business logic.
+    - Exports: `NavLink`, `NavLinkProps`
+    - Types: `NavLinkProps`
+
+45. **NavRoot** - `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVROOT_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** NavRoot has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Changes:** Duplicate NavRoot definition removed from Navigation.tsx, all exports point to standalone version, tests and stories consolidated, accessibility validated
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Extension Layer Primitive - Navigation Boundary
+    - **Purpose:** Pure semantic navigation boundary component with zero logic. Renders a `<nav>` element with required `aria-label` for accessibility. Provides a semantic wrapper that enforces accessibility while remaining a pure composition wrapper with no assumptions about navigation structure or styling.
+    - **Key Characteristics:**
+      - Zero logic, no visual styling, no navigation behavior
+      - Required `aria-label` prop (TypeScript enforced)
+      - Supports `asChild` pattern via Radix Slot for composition
+      - Extends `React.HTMLAttributes<HTMLElement>` for standard HTML nav attributes
+      - No variant, size, orientation, or other visual/behavioral props
+    - Exports: `NavRoot`, `NavRootProps`
+
+46. **NavList** - `src/COMPOSITION/navigation/nav-list/NavList.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVLIST_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Type:** Extension Layer Primitive - Navigation Structural
+    - **Purpose:** Pure semantic list container for navigation primitives. Renders either `<ol>` or `<ul>` element with correct HTML semantics. This component is a structural wrapper with no styling, layout, or logic.
+    - **Key Characteristics:**
+      - Zero logic, no visual styling, no navigation behavior
+      - Semantic list container for navigation (renders `<ol>` by default, `<ul>` when `as="ul"`)
+      - Supports `asChild` pattern via Radix Slot for composition
+      - Extends `Omit<React.OlHTMLAttributes<HTMLOListElement>, 'className' | 'style'>` (Foundation Enforcement compliant)
+      - No variant, size, orientation, divider, activeIndex, current, or other visual/behavioral props
+      - Does not render list items itself (pure composition container)
+    - **Key Decisions:**
+      - Pure structural component pattern (no styling, no logic, no state)
+      - Foundation Enforcement compliance (className/style excluded from public API)
+      - No size/variant props (correct for structural component)
+      - asChild pattern support via Radix Slot for composition
+      - Semantic HTML rendering (native `<ol>` and `<ul>` elements)
+    - Exports: `NavList`, `NavListProps`
+
+47. **Navigation Primitives** - `src/COMPOSITION/navigation/primitives/Navigation.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVIGATION_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** Navigation Primitives have completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrate full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - NavSeparator duplication removed from Navigation.tsx, aligned with NavText pattern (standalone component)
+      - Multiple primitives in one file is intentional design (grouped primitives)
+      - Stateless semantic primitives pattern (no state, no interaction logic)
+      - No size/variant props (correct for structural primitives)
+      - Token compliance: All styling via NAVIGATION_TOKENS
+      - Type system: Explicit types, no CVA-derived types
+    - **NavItem Architecture Hardening (2025-12-26):** ✅ VALIDATED - NavItem fully complies with all architectural hardening rules (TUNG_NAVITEM_FINALIZATION). Pure structural primitive with zero navigation logic, zero dependencies on other navigation primitives, framework-agnostic, composition-only. Ready for architectural lock. See `docs/reports/audit/NAVITEM_ARCHITECTURE_HARDENING_VALIDATION.md` for complete validation report.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Extension Layer Primitive - Navigation Structural
+    - **Components:**
+      - **NavList** - Structural list container (`<ol>` or `<ul>`)
+      - **NavItem** - Structural list item (`<li>` with asChild support)
+      - **NavText** - Imported from standalone component
+      - **NavSeparator** - Imported from standalone component (duplication removed)
+    - Exports: `NavList`, `NavItem`, `NavText`, `NavSeparator`, `NavListProps`, `NavItemProps`, `NavTextProps`, `NavSeparatorProps`
+
+48. **NavText** - `src/COMPOSITION/navigation/NavText/NavText.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVTEXT_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** NavText has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - No CVA structure (correct - component has no size/variant props per Decision Matrix)
+      - Token compliance: All styling via NAVIGATION_TOKENS.states.default.text
+      - Non-interactive navigation text primitive (not focusable, no role overrides)
+      - Stateless component (only passes through aria-current attribute)
+      - Supports asChild pattern via Radix Slot for composition
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Extension Layer Primitive - Navigation Text
+    - **Purpose:** Non-interactive navigation text primitive. Renders a semantic `<span>` element (or Slot if asChild) for non-clickable text in navigation structures. Supports `aria-current` attribute for indicating current page/location. This is a pure render-only primitive with no logic, state, or routing behavior.
+    - Exports: `NavText`, `NavTextProps`
+
+49. **NavSeparator** - `src/COMPOSITION/navigation/NavSeparator/NavSeparator.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/NAVSEPARATOR_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** NavSeparator has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+    - **Key Decisions:**
+      - No CVA structure (correct - component has no size/variant props per Decision Matrix)
+      - Token compliance: All styling via NAVIGATION_TOKENS
+      - Stateless component (no internal state)
+      - Purely decorative element (aria-hidden="true" always)
+      - Supports asChild pattern via Radix Slot (canonical composition pattern)
+      - Common props extracted to reduce duplication (STEP 1 improvement)
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Type:** Extension Layer Primitive - Navigation Visual
+    - **Purpose:** Purely visual navigation separator with no semantics or logic. Renders a decorative element with `aria-hidden="true"` to hide it from screen readers.
+    - **Key Characteristics:**
+      - Zero logic, no visual styling beyond token-based text styling, no navigation behavior
+      - Purely visual separator for navigation structures
+      - Supports `asChild` pattern via Radix Slot for composition
+      - Extends `React.HTMLAttributes<HTMLSpanElement>` for standard HTML span attributes
+      - Always has `aria-hidden="true"` (required for accessibility)
+      - Default content is "/" if children not provided
+      - No variant, size, orientation, role, aria-current, href, or interactive props
+      - Does not perform routing, state detection, or navigation logic
+    - Exports: `NavSeparator`, `NavSeparatorProps`
 
 ### Data Display Primitives
 
@@ -459,6 +852,27 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** This is the ONLY canonical card primitive. Use CardBase to build custom card components. Product/domain-specific cards (EventCard, VenueCard, etc.) are RESTRICTED.
     - Exports: `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
     - Types: `CardBaseContentWrapperProps`, `CardBaseFooterWrapperProps`, `CardBaseImageWrapperProps`, `CardBaseProps`, `CardBaseSize`, `CardBaseVariant`
+
+### Extension Utility Systems
+
+45. **TAS (Tenerife Animation System)** - `src/COMPOSITION/motion/animation/`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-26
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/TAS_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension Utility System)
+    - **Component Type:** Extension Utility System (not a React component)
+    - **Purpose:** Provides token-driven CSS animation utilities and presets with reduced motion support
+    - **Migration Complete:** TAS has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Key Changes:**
+      - Extracted common preset pattern to `createPreset` helper (eliminated 20+ duplicate patterns)
+      - Removed unused parameters from preset signatures (distance, scale, y)
+      - Simplified createStagger logic
+      - Added comprehensive test suite (tas.test.ts, presets.test.ts, utils.test.ts, useInView.test.tsx)
+      - Added documentation warnings for createTransition raw string fallback
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Exports:** Core functions (`createTransition`, `shouldReduceMotion`, `shouldEnableAnimations`), Presets (`fadePresets`, `slidePresets`, `scalePresets`, `hoverPresets`, `presets`, `createStagger`, `revealOnScroll`), Utilities (`resolveComponentAnimations`), React Hook (`useInView`), Types (`AnimationProps`, `ComponentAnimationConfig`, `PresetConfig`, `TransitionConfig`, `SpringConfig`, `Spring`, `Duration`, `Easing`, `Transition`, `UseInViewOptions`, `UseInViewReturn`)
+    - **Note:** TAS is an internal utility system used by Extension components. Not exported from `src/index.ts` (intentionally internal).
 
 ---
 
@@ -482,15 +896,16 @@ Higher-level component compositions that combine multiple Extension Layer compon
 Framework-specific adapter components that bridge external framework APIs with Foundation components. These components are **Extension-only** (not exported from `src/index.ts`) and are available for use within Next.js applications.
 
 1. **NextLinkAdapter** - `src/EXTENSIONS/next/NextLinkAdapter.tsx`
-   - **Status:** ✅ **PROCESS_LOCK**
-   - **Lock Date:** 2025-12-23
-   - **Pipeline 18A Completion:** 2025-12-23 (Steps 0-12 complete)
+   - **Status:** ✅ **PROCESS_LOCK** (Re-confirmed)
+   - **Lock Date:** 2025-12-23 (Initial), 2025-12-25 (Re-confirmed)
+   - **Pipeline 18A Completion:** 2025-12-25 (Steps 0-12 complete, full pipeline re-execution)
    - **Audit Report:** `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
    - **Lock Type:** PROCESS_LOCK (Extension component lock)
    - **Component Type:** Extension-level Framework Adapter
    - **Purpose:** Bridges Next.js `next/link` with Foundation `Link` component
    - **Rule:** Future modifications require new Pipeline 18A execution
    - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
+   - **Changes (2025-12-25 Pipeline):** Added 3 canonical Storybook stories (Matrix, States, SizesGallery) for VARIANTS_SIZE_CANON compliance. No component code changes required.
 
 ---
 
@@ -544,50 +959,45 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE - Use `Badge` from `src/PRIMITIVES/Badge/Badge.tsx` (exported) instead
 
-11. **Divider** - `src/PRIMITIVES/Divider/Divider.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE - RESTRICTED per API decision (TUI_API_DECISION_PRIMITIVES_EXPORT)
-    - **Rationale:** Minimal value over native HTML `<hr>`; token usage is basic; context-specific rather than universal UI primitive
-
-12. **Input** (primitive) - `src/components/primitives/Input.tsx`
+11. **Input** (primitive) - `src/components/primitives/Input.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE - Use `Input` from `src/components/input/Input.tsx` instead
 
-13. **Label** (primitive) - `src/components/primitives/Label.tsx`
+12. **Label** (primitive) - `src/components/primitives/Label.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE - Use `Label` from `src/components/ui/label.tsx` instead
 
-14. **Card** (primitive) - `src/components/primitives/Card.tsx`
+13. **Card** (primitive) - `src/components/primitives/Card.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE - Use `Card` from `src/components/containers/Card.tsx` instead
 
-15. **ThemeSwitch** - `src/components/primitives/ThemeSwitch.tsx`
+14. **ThemeSwitch** - `src/components/primitives/ThemeSwitch.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
 ### DO NOT USE - Overlay Components (Non-Canonical Variants)
 
-16. **Popover** (overlays variant) - `src/components/overlays/Popover.tsx`
+15. **Popover** (overlays variant) - `src/components/overlays/Popover.tsx`
     - **Status:** RESTRICTED (Legacy path)
     - **Note:** Popover is now locked at `src/COMPOSITION/overlays/Popover.tsx` (see Menu Components section)
     - **Rule:** DO NOT USE - Use `Popover` from `src/COMPOSITION/overlays/Popover.tsx` (LOCKED) instead
 
-17. **Tooltip** (overlays variant) - `src/components/overlays/Tooltip.tsx`
+16. **Tooltip** (overlays variant) - `src/components/overlays/Tooltip.tsx`
     - **Status:** RESTRICTED (Legacy path)
     - **Note:** Tooltip is now locked at `src/COMPOSITION/overlays/Tooltip.tsx` (see Menu Components section)
     - **Rule:** DO NOT USE - Use Tooltip from `src/COMPOSITION/overlays/Tooltip.tsx` (LOCKED) instead
 
-18. **OverlayPortal** - `src/components/overlays/OverlayPortal.tsx`
+17. **OverlayPortal** - `src/components/overlays/OverlayPortal.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
 ### DO NOT USE - Menu Components (Non-Canonical Variants)
 
-19. ~~**DropdownMenu** (menus variant)~~ - ❌ **REMOVED** (MIGRATION_12C)
+18. ~~**DropdownMenu** (menus variant)~~ - ❌ **REMOVED** (MIGRATION_12C)
     - **Status:** REMOVED
     - **Rule:** Fully removed from codebase
 
-20. **NavigationMenu** - `src/components/menus/NavigationMenu.tsx`
+19. **NavigationMenu** - `src/components/menus/NavigationMenu.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
@@ -698,9 +1108,9 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
-43. **Progress** - `src/components/feedback/Progress.tsx`
+43. **Progress** (legacy path) - `src/components/feedback/Progress.tsx`
     - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
+    - **Rule:** DO NOT USE - Use `Progress` from `src/PRIMITIVES/Progress/Progress.tsx` (PROCESS LOCKED) instead
 
 44. **Skeleton** (feedback variant) - `src/components/feedback/Skeleton.tsx`
     - **Status:** RESTRICTED
@@ -752,7 +1162,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 53. **Select** (legacy) - `src/components/select/legacy/select.tsx`
     - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE - Use `Select` from `src/components/select/Select.tsx` instead
+    - **Rule:** DO NOT USE - Use `Select` from `src/COMPOSITION/controls/Select/Select.tsx` instead
 
 54. **Textarea** (legacy) - `src/components/textarea/legacy/textarea.tsx`
     - **Status:** RESTRICTED
@@ -807,8 +1217,8 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
    - Assumptions about component availability are FORBIDDEN
 
 3. **Foundation components status**
-   - Modal is ✅ **LOCKED** (2025-12-20), Tabs is ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-23), ContextMenu is ✅ **LOCKED** (2025-12-22), Toast is ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration) - unlocked for canonical migration only
-   - Select is ⏳ **UNLOCKED** (Pending Canonical Lock)
+   - Modal is ✅ **LOCKED** (2025-12-20), Tabs is ✅ **PROCESS LOCKED** (Pipeline 18A Complete, Second Pass 2025-12-25), ContextMenu is ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25), Toast is ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+   - Select is ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
    - Button, Link are ✅ **FINAL LOCK** - DO NOT modify, extend, or create alternatives
    - DO NOT import from non-canonical paths
 
@@ -880,8 +1290,8 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 ## Document Status
 
 **Status:** FINAL  
-**Version:** 1.4  
-**Last Updated:** 2025-12-23  
+**Version:** 1.7  
+**Last Updated:** 2025-12-25  
 
 This document is **FINAL**. Any changes to this canonical state require explicit architectural review and approval. This document serves as the definitive law for UI component usage in the Extension Layer.
 
@@ -893,13 +1303,76 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 
 ## Version History
 
-- **v1.4** (2025-12-23): NextLinkAdapter PROCESS_LOCK Applied
+- **v1.7** (2025-12-25): Input Foundation Lock Complete
+  - Input status changed from LEGACY UNLOCKED to ✅ **LOCKED**
+  - Lock date: 2025-12-25
+  - Pipeline: Pipeline 18A (Steps 0-11 complete)
+  - Audit report: `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+  - Lock type: FOUNDATION LOCK (Foundation Layer Primitive)
+  - Migration complete: Input has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts
+  - Rule: Future structural modifications require re-entry into Pipeline 18A
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+
+- **v1.6** (2025-12-25): Input Legacy Unlock for Foundation Migration
+  - Input status changed from LOCKED to LEGACY UNLOCKED
+  - Unlock rationale: Input was declaratively locked without passing canonical Foundation Step Pipeline (0-11)
+  - Target status: FOUNDATION LOCK (Foundation Layer Primitive)
+  - Migration path: Canonical Foundation lock process (Pipeline 18A, Steps 0-11)
+  - Task: TUI_INPUT_FOUNDATION_PIPELINE_18A
+  - Path corrected: `src/components/input/Input.tsx` → `src/PRIMITIVES/Input/Input.tsx`
+  - Constraints applied: No API expansion, no new variants/sizes, canonicalization only
+  - Exit criteria: Complete Steps 0-11, Foundation lock report, Public Type Surface locked
+
+- **v1.6** (2025-12-25): NextLinkAdapter Pipeline 18A Re-execution & PROCESS_LOCK Re-confirmation
+  - NextLinkAdapter PROCESS_LOCK re-confirmed after full Pipeline 18A re-execution
+  - Pipeline 18A completed (Steps 0-12, full execution including STEP 9)
+  - Added 3 canonical Storybook stories (Matrix, States, SizesGallery) for VARIANTS_SIZE_CANON compliance
+  - No component code changes required (already compliant)
+  - Audit report: `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
+  - Lock re-confirmed: 2025-12-25
+
+- **v1.5** (2025-12-25): Primitives Roadmap Implementation - Separator & AspectRatio
+  - Added Separator component (Extension Primitive, Layout Support)
+  - Added AspectRatio component (Extension Primitive, Layout Support)
+  - Removed Divider from RESTRICTED list (replaced by Separator)
+  - Separator: Token-driven, Radix-based, horizontal/vertical orientations, semantic/decorative modes
+  - AspectRatio: Pure layout utility, Radix-based, preset ratios (square, video, cinema, portrait, photo, golden)
+  - Both components: 100% token compliance, full test coverage, Storybook stories complete
+  - Date Completed: 2025-12-25
+  - Completed per Primitives Full Pipeline plan
+
+- **v1.4** (2025-12-23): NextLinkAdapter PROCESS_LOCK Applied (Initial)
   - Added NextLinkAdapter to Framework Adapters section
   - NextLinkAdapter status updated to PROCESS_LOCK
   - Pipeline 18A completed (Steps 0-12, STEP 9 skipped)
   - Lock Date: 2025-12-23
   - Audit Report: `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md`
   - Completed per TUI_NEXTLINKADAPTER_STEP_12 task
+
+- **v1.5** (2025-12-25): Toast Pipeline 18A Complete
+  - Toast has completed canonical Foundation Step Pipeline (Steps 0–12)
+  - Toast status changed from LEGACY UNLOCKED to ✅ PROCESS LOCKED
+  - Lock Date: 2025-12-25
+  - Lock Type: PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+  - Audit Report: `docs/reports/audit/TOAST_BASELINE_REPORT.md`
+  - Component demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Decisions: CVA migrated cva → tokenCVA, explicit ToastVariant type exported, type constraints applied (satisfies Record<ToastVariant, string>), custom semantic variants (default/success/info/warning/danger), Radix delegation for all behavior
+
+- **v1.5** (2025-12-25): ContextMenu Pipeline 18A Complete
+  - ContextMenu has completed canonical Foundation Step Pipeline (Steps 0–12)
+  - ContextMenu status changed from LEGACY UNLOCKED to ✅ PROCESS LOCKED
+  - Lock Date: 2025-12-25
+  - Lock Type: PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+  - Audit Report: `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+  - Component demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Key Decisions: CVA migrated cva → tokenCVA, tone variants (neutral/primary/destructive), size inheritance via Context
+
+- **v1.5** (2025-12-25): Tabs Pipeline 18A Second Pass Complete
+  - Tabs has completed second pass of Pipeline 18A (Steps 0–12)
+  - Status comment updated to reflect LOCKED status (documentation accuracy fix)
+  - Lock Date: 2025-12-25 (Second Pass)
+  - Component remains PROCESS LOCKED with improved documentation accuracy
+  - Audit Report: `docs/reports/audit/TABS_BASELINE_REPORT.md` (updated with second pass)
 
 - **v1.4** (2025-12-23): Tabs Pipeline 18A Complete
   - Tabs has completed canonical Foundation Step Pipeline (Steps 0–12)

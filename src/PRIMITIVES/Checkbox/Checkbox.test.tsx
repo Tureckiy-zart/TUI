@@ -77,14 +77,6 @@ describe("Checkbox", () => {
   });
 
   describe("Sizes", () => {
-    it("renders xs size", () => {
-      const { container } = renderWithTheme(
-        <Checkbox size="xs" aria-label="Extra small checkbox" />,
-      );
-      const checkbox = container.querySelector('button[role="checkbox"]');
-      expect(checkbox).toBeInTheDocument();
-    });
-
     it("renders sm size", () => {
       const { container } = renderWithTheme(<Checkbox size="sm" aria-label="Small checkbox" />);
       const checkbox = container.querySelector('button[role="checkbox"]');
@@ -99,14 +91,6 @@ describe("Checkbox", () => {
 
     it("renders lg size", () => {
       const { container } = renderWithTheme(<Checkbox size="lg" aria-label="Large checkbox" />);
-      const checkbox = container.querySelector('button[role="checkbox"]');
-      expect(checkbox).toBeInTheDocument();
-    });
-
-    it("renders xl size", () => {
-      const { container } = renderWithTheme(
-        <Checkbox size="xl" aria-label="Extra large checkbox" />,
-      );
       const checkbox = container.querySelector('button[role="checkbox"]');
       expect(checkbox).toBeInTheDocument();
     });

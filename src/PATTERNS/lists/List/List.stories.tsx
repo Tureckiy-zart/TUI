@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { List } from "./List";
 
 const meta: Meta<typeof List> = {
-  title: "Components/List",
+  title: "Legacy Patterns/Lists/List",
   component: List,
   parameters: {
     layout: "padded",

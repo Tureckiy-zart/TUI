@@ -1,11 +1,12 @@
 # 🔒 TUI Tooltip / Popover / HoverCard Components Lock
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2025-12-21  
+**Last Updated:** 2025-12-25  
 **Status:** ✅ **LOCKED** - IMMUTABLE  
 **Layer:** UI / EXTENSION / LOCKED  
 **Priority:** CRITICAL  
-**Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete)
+**Pipeline:** TUNG_TOOLTIP_POPOVER_STEP_0-10 (Complete) + Pipeline 18A (Popover Complete)
 
 ---
 
@@ -42,13 +43,17 @@ The following Overlay components are **LOCKED** and **IMMUTABLE**:
 - **File:** `src/COMPOSITION/overlays/Popover.tsx`
 - **Stories:** `src/COMPOSITION/overlays/Popover.stories.tsx`
 - **Tests:** `src/COMPOSITION/overlays/Popover.test.tsx`
-- **Status:** ✅ **LOCKED**
+- **Status:** ✅ **LOCKED** + ✅ **Pipeline 18A Complete**
 - **Lock Date:** 2025-12-21
+- **Pipeline 18A Completion:** 2025-12-25
+- **Audit Report:** `docs/reports/audit/POPOVER_BASELINE_REPORT.md`
 - **Exports:** `Popover`, `PopoverTrigger`, `PopoverAnchor`, `PopoverContent`, `PopoverWrapper`, `popoverContentVariants`
 - **Types:** `PopoverProps`, `PopoverVariant`, `PopoverSize`
 - **Rule:** DO NOT modify, extend, or create alternatives
 - **Public API:** Internal-only (not exported from `src/index.ts`)
 - **Technology:** `@radix-ui/react-popover` (v1.1.2)
+- **CVA:** tokenCVA (migrated from cva per Pipeline 18A)
+- **Type System:** Explicit union types (no CVA leakage)
 
 ### 3. HoverCard Component
 - **Files:**
@@ -277,6 +282,15 @@ To unlock any locked component, utility, or token:
 ---
 
 ## 📝 Version History
+
+- **v1.1** (2025-12-25): Popover Pipeline 18A completion
+  - Popover completed full Pipeline 18A (Steps 0-12)
+  - CVA migration: cva → tokenCVA (Decision Matrix compliance)
+  - Type system: Explicit union types (no CVA leakage)
+  - Canonical stories added: Matrix, LongContent
+  - Accessibility audit complete (WCAG 2.1 Level AA)
+  - Audit report: `docs/reports/audit/POPOVER_BASELINE_REPORT.md`
+  - **Note:** Tooltip and HoverCard remain at previous lock status (TUNG_TOOLTIP_POPOVER_STEP_0-10)
 
 - **v1.0** (2025-12-21): Initial lock after completion of TUNG_TOOLTIP_POPOVER_STEP_0-10 pipeline
   - Tooltip, Popover, and HoverCard components locked

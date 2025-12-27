@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Portal } from "./Portal";
 
 const meta: Meta<typeof Portal> = {
-  title: "Components/Overlays/Portal",
+  title: "Legacy Composition/Overlays/Portal",
   component: Portal,
   parameters: {
     layout: "centered",

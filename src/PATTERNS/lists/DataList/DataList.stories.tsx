@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { DataListItem, DataListLabel, DataListRoot, DataListValue } from "./index";
 
 const meta: Meta<typeof DataListRoot> = {
-  title: "Components/Data/DataList",
+  title: "Legacy Patterns/Lists/DataList",
   component: DataListRoot,
   tags: ["autodocs"],
   parameters: {

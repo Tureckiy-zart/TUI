@@ -126,14 +126,14 @@ describe("Switch", () => {
       expect(switchElement).toHaveAttribute("aria-checked", "true");
     });
 
-    it("renders error state", () => {
-      renderWithTheme(<Switch state="error" aria-label="Error switch" />);
-      const switchElement = screen.getByRole("switch", { name: "Error switch" });
+    it("renders invalid state", () => {
+      renderWithTheme(<Switch invalid aria-label="Invalid switch" />);
+      const switchElement = screen.getByRole("switch", { name: "Invalid switch" });
       expect(switchElement).toHaveAttribute("aria-invalid", "true");
     });
 
     it("renders disabled state", () => {
-      renderWithTheme(<Switch state="disabled" aria-label="Disabled switch" />);
+      renderWithTheme(<Switch disabled aria-label="Disabled switch" />);
       const switchElement = screen.getByRole("switch", { name: "Disabled switch" });
       expect(switchElement).toBeDisabled();
       expect(switchElement).toHaveAttribute("aria-disabled", "true");
@@ -178,9 +178,9 @@ describe("Switch", () => {
       expect(switchElement).toHaveAttribute("aria-disabled", "true");
     });
 
-    it("has aria-invalid when in error state", () => {
-      renderWithTheme(<Switch state="error" aria-label="Error aria test" />);
-      const switchElement = screen.getByRole("switch", { name: "Error aria test" });
+    it("has aria-invalid when invalid", () => {
+      renderWithTheme(<Switch invalid aria-label="Invalid aria test" />);
+      const switchElement = screen.getByRole("switch", { name: "Invalid aria test" });
       expect(switchElement).toHaveAttribute("aria-invalid", "true");
     });
 

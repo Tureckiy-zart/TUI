@@ -16,7 +16,7 @@ import {
 } from "./index";
 
 const meta: Meta<typeof Table> = {
-  title: "Components/Data/Table",
+  title: "Legacy Patterns/Tables/Table",
   component: Table,
   tags: ["autodocs"],
   parameters: {
@@ -44,7 +44,7 @@ const sampleData = [
  */
 export const Basic: Story = {
   render: () => (
-    <Table data={sampleData} columns={[]} rowKey="id">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
@@ -72,7 +72,7 @@ export const Basic: Story = {
  */
 export const Sortable: Story = {
   render: () => (
-    <Table data={sampleData} columns={[]} rowKey="id" sortable>
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead sortable columnKey="name">
@@ -106,7 +106,7 @@ export const Sortable: Story = {
  */
 export const CellAlignment: Story = {
   render: () => (
-    <Table data={sampleData} columns={[]} rowKey="id">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead align="left">Name</TableHead>
@@ -132,7 +132,7 @@ export const CellAlignment: Story = {
  */
 export const CellSizes: Story = {
   render: () => (
-    <Table data={sampleData} columns={[]} rowKey="id">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead size="sm">Small</TableHead>
@@ -158,7 +158,7 @@ export const CellSizes: Story = {
  */
 export const SelectedRows: Story = {
   render: () => (
-    <Table data={sampleData} columns={[]} rowKey="id">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
@@ -199,7 +199,7 @@ export const ExpandableRows: Story = {
     };
 
     return (
-      <Table data={sampleData} columns={[]} rowKey="id" expandable>
+      <Table expandable>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -212,12 +212,7 @@ export const ExpandableRows: Story = {
             const isExpanded = expanded.has(user.id);
             return (
               <React.Fragment key={user.id}>
-                <TableRow
-                  expandable
-                  rowKey={user.id}
-                  expanded={isExpanded}
-                  onClick={() => toggleRow(user.id)}
-                >
+                <TableRow expandable expanded={isExpanded} onClick={() => toggleRow(user.id)}>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.role}</TableCell>
@@ -247,7 +242,7 @@ export const ExpandableRows: Story = {
  */
 export const Loading: Story = {
   render: () => (
-    <Table data={[]} columns={[]} rowKey="id" loading>
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
@@ -268,7 +263,7 @@ export const Loading: Story = {
  */
 export const Empty: Story = {
   render: () => (
-    <Table data={[]} columns={[]} rowKey="id" emptyMessage="No users found">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
@@ -290,7 +285,7 @@ export const Empty: Story = {
 export const StickyHeader: Story = {
   render: () => (
     <div className="h-96 overflow-auto">
-      <Table data={sampleData} columns={[]} rowKey="id" stickyHeader>
+      <Table>
         <TableHeader sticky>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -312,4 +307,151 @@ export const StickyHeader: Story = {
       </Table>
     </div>
   ),
+};
+
+/**
+ * Sizes gallery - demonstrates all size variants
+ */
+export const SizesGallery: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <h3 className="mb-4 text-sm font-medium">Small Size</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead size="sm">Name</TableHead>
+              <TableHead size="sm">Email</TableHead>
+              <TableHead size="sm">Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sampleData.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell size="sm">{user.name}</TableCell>
+                <TableCell size="sm">{user.email}</TableCell>
+                <TableCell size="sm">{user.role}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <div>
+        <h3 className="mb-4 text-sm font-medium">Medium Size (Default)</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead size="md">Name</TableHead>
+              <TableHead size="md">Email</TableHead>
+              <TableHead size="md">Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sampleData.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell size="md">{user.name}</TableCell>
+                <TableCell size="md">{user.email}</TableCell>
+                <TableCell size="md">{user.role}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <div>
+        <h3 className="mb-4 text-sm font-medium">Large Size</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead size="lg">Name</TableHead>
+              <TableHead size="lg">Email</TableHead>
+              <TableHead size="lg">Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sampleData.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell size="lg">{user.name}</TableCell>
+                <TableCell size="lg">{user.email}</TableCell>
+                <TableCell size="lg">{user.role}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  ),
+};
+
+/**
+ * States - demonstrates interactive states
+ */
+export const States: Story = {
+  render: () => {
+    const [expanded, setExpanded] = React.useState<Set<number>>(new Set());
+    const [selectedRow, setSelectedRow] = React.useState<number | null>(null);
+
+    const toggleRow = (id: number) => {
+      setExpanded((prev) => {
+        const next = new Set(prev);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
+        return next;
+      });
+    };
+
+    return (
+      <Table expandable>
+        <TableHeader>
+          <TableRow>
+            <TableHead sortable columnKey="name">
+              Name
+            </TableHead>
+            <TableHead sortable columnKey="email">
+              Email
+            </TableHead>
+            <TableHead sortable columnKey="role">
+              Role
+            </TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sampleData.map((user) => {
+            const isExpanded = expanded.has(user.id);
+            const isSelected = selectedRow === user.id;
+            return (
+              <React.Fragment key={user.id}>
+                <TableRow
+                  selected={isSelected}
+                  expandable
+                  expanded={isExpanded}
+                  onClick={() => {
+                    toggleRow(user.id);
+                    setSelectedRow(isSelected ? null : user.id);
+                  }}
+                >
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>{user.status}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableExpandableContent colSpan={4} expanded={isExpanded}>
+                    <div className="space-y-2">
+                      <p className="text-sm font-medium">Additional Information</p>
+                      <p className="text-sm text-muted-foreground">User ID: {user.id}</p>
+                      <p className="text-sm text-muted-foreground">Status: {user.status}</p>
+                    </div>
+                  </TableExpandableContent>
+                </TableRow>
+              </React.Fragment>
+            );
+          })}
+        </TableBody>
+      </Table>
+    );
+  },
 };

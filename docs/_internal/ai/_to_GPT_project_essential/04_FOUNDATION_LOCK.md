@@ -428,7 +428,7 @@ The following components constitute the **complete and final** Foundation layer.
 | **Modal**       | Overlays   | Radix Dialog      | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Tabs**        | Navigation | Radix Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 |
 | **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
+| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 |
 | **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
 | **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
 | **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
@@ -491,19 +491,22 @@ The following components constitute the **complete and final** Foundation layer.
 
 #### ContextMenu
 - **Location:** `src/COMPOSITION/overlays/ContextMenu/`
-- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuGroup`, `ContextMenuSeparator`
+- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuCheckboxItem`, `ContextMenuSeparator`, `ContextMenuSub`, `ContextMenuSubTrigger`, `ContextMenuSubContent`
 - **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
 - **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** ContextMenu was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** ContextMenu will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline and demonstrates full compliance with all Authority Contracts.
+- **Key Decisions:**
+  - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
+  - Tone variants: neutral, primary, destructive (overlay-specific semantics)
+  - Size scale: sm, md, lg (overlay restriction compliant)
+  - Size inheritance pattern via Context (DX improvement)
+  - Full Radix delegation (right-click, keyboard, focus, a11y)
+- **Quality Metrics:** 380 tests, 10 Storybook stories (3 canonical), 100% token compliance
+- **Future Changes:** Re-entry into Pipeline 18A required for structural modifications
 
 #### Toast
 - **Location:** `src/COMPOSITION/overlays/`
@@ -564,8 +567,8 @@ The following components constitute the **complete and final** Foundation layer.
 The following components were declared as LOCKED but were implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). They have been temporarily unlocked strictly for canonical migration:
 
 - **Modal** — Unlocked 2025-12-19
-- **Tabs** — Unlocked 2025-12-19
-- **ContextMenu** — Unlocked 2025-12-19
+- **Tabs** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-23
+- **ContextMenu** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-25
 - **Toast** — Unlocked 2025-12-19
 
 **Unlock Rationale:**
@@ -747,7 +750,7 @@ Foundation Components:
 - Modal (Radix Dialog wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Tabs (Radix Tabs wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-23)
 - Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
-- ContextMenu (Radix ContextMenu wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
+- ContextMenu (Radix ContextMenu wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-25)
 - Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
 - Button (Native button element - FINAL LOCK) - ✅ LOCKED
 - Link (Native anchor element) - ✅ LOCKED
@@ -938,7 +941,7 @@ If Interactive Size Scale Authority modifications are needed:
 | Modal           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Tabs            | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 | Pipeline Complete |
 | Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
-| ContextMenu     | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
+| ContextMenu     | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 | Pipeline Complete |
 | Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
 | Button          | ✅ FINAL LOCK |   | Immutable    |
 | Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |

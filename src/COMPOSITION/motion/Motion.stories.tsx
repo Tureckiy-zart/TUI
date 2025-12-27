@@ -10,7 +10,7 @@ import * as React from "react";
 import { useReducedMotion } from "@/FOUNDATION/theme/motion/useReducedMotion";
 
 const meta: Meta = {
-  title: "Components/Motion",
+  title: "Legacy Composition/Motion/Motion",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -198,7 +198,7 @@ export const ReducedMotion: Story = {
           </p>
         </div>
         <div className="flex h-32 w-64 items-center justify-center rounded-lg border bg-card">
-          <div className="tm-motion-fade-scale h-16 w-32 rounded bg-primary" />
+          <div className="h-16 w-32 rounded bg-primary tm-motion-fade-scale" />
         </div>
       </div>
     );

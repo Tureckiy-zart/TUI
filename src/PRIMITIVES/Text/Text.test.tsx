@@ -1,5 +1,6 @@
 import { screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import * as React from "react";
+import { describe, expect, it, vi } from "vitest";
 
 import { renderWithTheme } from "@/test/test-utils";
 
@@ -79,20 +80,20 @@ describe("Text", () => {
     });
   });
 
-  describe("Muted", () => {
-    it("applies muted styles when muted is true", () => {
-      const { container } = renderWithTheme(<Text muted>Muted Text</Text>);
+  describe("Tone", () => {
+    it("applies muted styles when tone is muted", () => {
+      const { container } = renderWithTheme(<Text tone="muted">Muted Text</Text>);
       const text = container.querySelector("span");
       expect(text).toHaveClass("text-muted-foreground");
     });
 
-    it("does not apply muted styles when muted is false", () => {
-      const { container } = renderWithTheme(<Text muted={false}>Normal Text</Text>);
+    it("does not apply muted styles when tone is default", () => {
+      const { container } = renderWithTheme(<Text tone="default">Normal Text</Text>);
       const text = container.querySelector("span");
       expect(text).not.toHaveClass("text-muted-foreground");
     });
 
-    it("defaults to not muted", () => {
+    it("defaults to default tone", () => {
       const { container } = renderWithTheme(<Text>Default Text</Text>);
       const text = container.querySelector("span");
       expect(text).not.toHaveClass("text-muted-foreground");
@@ -111,9 +112,9 @@ describe("Text", () => {
       expect(text).toHaveTextContent("Large Bold Text");
     });
 
-    it("renders with size, weight, and muted", () => {
+    it("renders with size, weight, and tone", () => {
       const { container } = renderWithTheme(
-        <Text size="sm" weight="medium" muted>
+        <Text size="sm" weight="medium" tone="muted">
           Small Medium Muted Text
         </Text>,
       );
@@ -132,14 +133,187 @@ describe("Text", () => {
     });
   });
 
+  describe("Edge Cases", () => {
+    it("handles empty children", () => {
+      const { container } = renderWithTheme(<Text />);
+      const text = container.querySelector("span");
+      expect(text).toBeInTheDocument();
+      expect(text).toBeEmptyDOMElement();
+    });
+
+    it("handles long text content", () => {
+      const longText = "Lorem ipsum ".repeat(100);
+      const { container } = renderWithTheme(<Text>{longText}</Text>);
+      const text = container.querySelector("span");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveTextContent(longText);
+    });
+
+    it("handles numeric children", () => {
+      renderWithTheme(<Text>{42}</Text>);
+      const text = screen.getByText("42");
+      expect(text).toBeInTheDocument();
+    });
+
+    it("handles React elements as children", () => {
+      renderWithTheme(
+        <Text>
+          Hello <strong>World</strong>
+        </Text>,
+      );
+      const text = screen.getByText(/Hello/);
+      expect(text).toBeInTheDocument();
+      const strong = text.querySelector("strong");
+      expect(strong).toBeInTheDocument();
+      expect(strong).toHaveTextContent("World");
+    });
+  });
+
+  describe("Prop Combinations", () => {
+    it("renders size and weight combinations", () => {
+      // Test a subset of combinations for performance
+      const { container: test1 } = renderWithTheme(
+        <Text size="xs" weight="normal">
+          xs-normal
+        </Text>,
+      );
+      expect(test1.querySelector("span")).toBeInTheDocument();
+
+      const { container: test2 } = renderWithTheme(
+        <Text size="md" weight="bold">
+          md-bold
+        </Text>,
+      );
+      expect(test2.querySelector("span")).toBeInTheDocument();
+
+      const { container: test3 } = renderWithTheme(
+        <Text size="xl" weight="semibold">
+          xl-semibold
+        </Text>,
+      );
+      expect(test3.querySelector("span")).toBeInTheDocument();
+    });
+
+    it("renders size and tone combinations", () => {
+      const { container: normalSm } = renderWithTheme(<Text size="sm">Normal</Text>);
+      expect(normalSm.querySelector("span")).not.toHaveClass("text-muted-foreground");
+
+      const { container: mutedSm } = renderWithTheme(
+        <Text size="sm" tone="muted">
+          Muted
+        </Text>,
+      );
+      expect(mutedSm.querySelector("span")).toHaveClass("text-muted-foreground");
+
+      const { container: normalLg } = renderWithTheme(<Text size="lg">Normal</Text>);
+      expect(normalLg.querySelector("span")).not.toHaveClass("text-muted-foreground");
+
+      const { container: mutedLg } = renderWithTheme(
+        <Text size="lg" tone="muted">
+          Muted
+        </Text>,
+      );
+      expect(mutedLg.querySelector("span")).toHaveClass("text-muted-foreground");
+    });
+  });
+
+  describe("HTML Attributes", () => {
+    it("forwards standard HTML attributes", () => {
+      const { container } = renderWithTheme(
+        <Text id="test-id" title="Test Title" data-testid="custom-test">
+          Text
+        </Text>,
+      );
+      const text = container.querySelector("span");
+      expect(text).toHaveAttribute("id", "test-id");
+      expect(text).toHaveAttribute("title", "Test Title");
+      expect(text).toHaveAttribute("data-testid", "custom-test");
+    });
+
+    it("forwards event handlers", () => {
+      const handleClick = vi.fn();
+      renderWithTheme(<Text onClick={handleClick}>Clickable Text</Text>);
+      const text = screen.getByText("Clickable Text");
+      text.click();
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("Polymorphic as prop", () => {
+    it("renders as span element by default", () => {
+      const { container } = renderWithTheme(<Text>Default span</Text>);
+      const text = container.querySelector("span");
+      expect(text).toBeInTheDocument();
+    });
+
+    it("renders as p element when as is p", () => {
+      const { container } = renderWithTheme(<Text as="p">Paragraph text</Text>);
+      const text = container.querySelector("p");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveTextContent("Paragraph text");
+    });
+
+    it("renders as label element when as is label", () => {
+      const { container } = renderWithTheme(<Text as="label">Label text</Text>);
+      const text = container.querySelector("label");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveTextContent("Label text");
+    });
+
+    it("renders as strong element when as is strong", () => {
+      const { container } = renderWithTheme(<Text as="strong">Strong text</Text>);
+      const text = container.querySelector("strong");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveTextContent("Strong text");
+    });
+
+    it("renders as em element when as is em", () => {
+      const { container } = renderWithTheme(<Text as="em">Emphasized text</Text>);
+      const text = container.querySelector("em");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveTextContent("Emphasized text");
+    });
+
+    it("applies styles correctly when using as prop", () => {
+      const { container } = renderWithTheme(
+        <Text as="p" size="lg" weight="bold" tone="muted">
+          Styled paragraph
+        </Text>,
+      );
+      const text = container.querySelector("p");
+      expect(text).toBeInTheDocument();
+      expect(text).toHaveClass("text-muted-foreground");
+    });
+  });
+
+  describe("Ref Forwarding", () => {
+    it("forwards ref to span element", () => {
+      const ref = React.createRef<HTMLSpanElement>();
+      renderWithTheme(<Text ref={ref}>Text with ref</Text>);
+      expect(ref.current).toBeInstanceOf(HTMLSpanElement);
+      expect(ref.current).toHaveTextContent("Text with ref");
+    });
+
+    it("forwards ref to p element when as is p", () => {
+      const ref = React.createRef<HTMLParagraphElement>();
+      renderWithTheme(
+        <Text as="p" ref={ref}>
+          Paragraph with ref
+        </Text>,
+      );
+      expect(ref.current).toBeInstanceOf(HTMLParagraphElement);
+      expect(ref.current).toHaveTextContent("Paragraph with ref");
+    });
+  });
+
   describe("Snapshot", () => {
     it("matches snapshot for default variant", () => {
       const { container } = renderWithTheme(<Text>Default Text</Text>);
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it("matches snapshot for muted variant", () => {
-      const { container } = renderWithTheme(<Text muted>Muted Text</Text>);
+    it("matches snapshot for muted tone", () => {
+      const { container } = renderWithTheme(<Text tone="muted">Muted Text</Text>);
       expect(container.firstChild).toMatchSnapshot();
     });
 
