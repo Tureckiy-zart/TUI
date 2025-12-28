@@ -382,18 +382,18 @@ describe("Drawer", () => {
     describe("Focus Restore", () => {
       it("restores focus to returnFocusRef when drawer closes", async () => {
         const user = userEventSetup();
-        const returnFocusRef = React.createRef<HTMLElement>();
+        const returnFocusRef = React.createRef<HTMLButtonElement>();
 
         const TestComponent = () => {
           const [open, setOpen] = React.useState(true);
 
           return (
             <>
-              <Button ref={returnFocusRef as React.RefObject<HTMLButtonElement>}>Trigger</Button>
+              <Button ref={returnFocusRef}>Trigger</Button>
               <Drawer
                 open={open}
                 onClose={() => setOpen(false)}
-                returnFocusRef={returnFocusRef}
+                returnFocusRef={returnFocusRef as React.RefObject<HTMLElement>}
                 titleId="test-title"
               >
                 <Drawer.Header>

@@ -204,7 +204,7 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
           ...event,
           currentTarget: event.currentTarget as unknown as HTMLButtonElement,
           target: event.target as unknown as HTMLButtonElement,
-        } as React.MouseEvent<HTMLButtonElement>;
+        } as unknown as React.MouseEvent<HTMLButtonElement>;
         onRemove(syntheticEvent);
       }
 
