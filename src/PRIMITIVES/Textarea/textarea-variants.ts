@@ -33,7 +33,7 @@ const DEFAULT_SIZE = "md" as const;
 export const textareaVariants = tokenCVA({
   base: [
     "flex",
-    "min-h-[80px]",
+    TEXTAREA_TOKENS.minHeight,
     "w-full",
     TEXTAREA_TOKENS.shadow,
     MOTION_TOKENS.transition.colors,

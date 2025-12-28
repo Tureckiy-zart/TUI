@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Textarea } from "./Textarea";
 
 const meta: Meta<typeof Textarea> = {
-  title: "Foundation Locked/Primitives/Textarea",
+  title: "UI / Primitives / Textarea",
   component: Textarea,
   parameters: {
     layout: "centered",

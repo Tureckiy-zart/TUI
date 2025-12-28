@@ -8,7 +8,7 @@ import { ToastProvider } from "./ToastProvider";
 import { ToastViewport } from "./ToastViewport";
 
 const meta: Meta<typeof ToastRoot> = {
-  title: "Foundation Locked/Composition/Overlays/Toast",
+  title: "UI / Composition / Overlays / Toast",
   component: ToastRoot,
   parameters: {
     layout: "centered",

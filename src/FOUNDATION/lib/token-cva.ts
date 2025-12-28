@@ -6,8 +6,13 @@
  *
  * @enforcement TUNG: tokenCVA introduction
  * @rule ALL visual properties MUST use token-based utilities
- * @rule NO raw Tailwind color/spacing/shadow classes allowed
+ * @rule NO raw Tailwind color/spacing classes allowed (ERROR level)
+ * @rule Dimension utilities are advisory (WARN level) until dimension token system exists
  * @rule CVA variants MUST reference component tokens
+ *
+ * Enforcement Policy:
+ * - ERROR: Spacing utilities (p-*, m-*, gap-*, space-*) MUST use semanticSpacing tokens
+ * - WARN: Dimension utilities (w-*, h-*, min-w-*, max-w-*, etc.) are allowed temporarily
  *
  * @example
  * ```typescript
@@ -70,43 +75,90 @@ export interface TokenCVAConfig<Variants extends Record<string, Record<string, C
 }
 
 /**
- * Forbidden Tailwind patterns that indicate hardcoded values
- * These patterns should not appear in token-based styling
+ * Enforcement Policy: tokenCVA Raw Utility Validation
+ *
+ * tokenCVA enforces token-based styling by validating Tailwind utility usage.
+ * Utilities are categorized into two enforcement levels:
+ *
+ * 1. ERROR (Forbidden): Spacing utilities MUST use semanticSpacing tokens
+ *    - p-*, px-*, py-*, pt-*, pb-*, pl-*, pr-*
+ *    - m-*, mx-*, my-*, mt-*, mb-*, ml-*, mr-*
+ *    - gap-*, space-x-*, space-y-*
+ *    Rationale: Spacing tokens exist and MUST be used via semanticSpacing.
+ *
+ * 2. WARN (Advisory): Dimension utilities are allowed until dimension token system exists
+ *    - w-*, h-*, min-w-*, max-w-*, min-h-*, max-h-*
+ *    - aspect-*, size-*
+ *    - vh/vw-based values, pixel-thin separators (h-[1px], h-[2px])
+ *    Rationale: Dimension tokens do not yet exist; raw utilities are allowed temporarily.
  *
  * Note: We allow semantic utilities (rounded-md, shadow-sm, h-8, etc.) as these
  * are legitimate token values that map to design system tokens. The validator
  * focuses on catching raw color utilities and arbitrary numeric values that
  * bypass the token system.
  */
-const FORBIDDEN_PATTERNS = [
+
+/**
+ * ERROR-level patterns: Forbidden spacing utilities
+ * These MUST be replaced with semanticSpacing tokens
+ */
+const FORBIDDEN_SPACING_PATTERNS = [
   // Raw color utilities (bg-red-500, text-blue-600, etc.)
   // These are always forbidden as they bypass the color token system
   /\b(bg|text|border|ring|outline)-(red|blue|green|yellow|purple|pink|indigo|gray|slate|zinc|neutral|stone|orange|amber|emerald|teal|cyan|sky|violet|fuchsia|rose)-\d+/,
   // Raw spacing utilities with arbitrary numbers (p-4, m-2, gap-3, etc.)
   // Allow semantic spacing tokens (px-sm, py-md, etc.) which use token names
-  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-(\d+|\[)/,
-  // Raw size utilities with arbitrary numbers (w-4, h-6, etc.)
-  // Allow semantic size tokens (h-8, w-9, etc.) which are standard design system values
-  // Only flag arbitrary values like w-[123px] or h-[calc(...)]
-  /\b(w|h|min-w|min-h|max-w|max-h)-\[/,
+  // Allow p-0, m-0, etc. as these are standard Tailwind classes for zero spacing
+  // Allow fractional values (0.5, 1.5, 2.5, 3.5) as these are standard Tailwind spacing classes used in tokens
+  // Note: Standard numeric values (p-4, m-2, etc.) are still flagged to encourage semantic tokens
+  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-((?!0$|0\.5$|1\.5$|2\.5$|3\.5$)\d+(\.\d+)?|\[)/,
 ] as const;
 
 /**
- * Check if a class string contains forbidden patterns
+ * WARN-level patterns: Allowed dimension utilities (advisory)
+ * These are allowed until a dimension token system is introduced
+ */
+const ADVISORY_DIMENSION_PATTERNS = [
+  // Raw size utilities with arbitrary numbers (w-4, h-6, etc.)
+  // Allow semantic size tokens (h-8, w-9, etc.) which are standard design system values
+  // Only flag arbitrary values like w-[123px] or h-[calc(...)]
+  // Allow viewport-relative values (vh, vw, %) and relative units (rem, em) as these are legitimate design system values
+  /\b(w|h|min-w|min-h|max-w|max-h)-\[(?!\d+(vh|vw|%|rem|em)\])/,
+] as const;
+
+/**
+ * Check if a class string contains forbidden or advisory patterns
  * Only runs in development mode for performance
+ *
+ * Enforcement levels:
+ * - ERROR: Forbidden spacing utilities (must use semanticSpacing tokens)
+ * - WARN: Advisory dimension utilities (allowed until dimension token system exists)
  */
 function validateTokenUsage(classes: string, context: string): void {
   if (process.env.NODE_ENV === "production") {
     return;
   }
 
-  for (const pattern of FORBIDDEN_PATTERNS) {
+  // Check for forbidden spacing utilities (ERROR level)
+  for (const pattern of FORBIDDEN_SPACING_PATTERNS) {
     if (pattern.test(classes)) {
-      console.warn(
-        `[tokenCVA] Potential hardcoded Tailwind utility detected in ${context}:\n` +
+      console.error(
+        `[tokenCVA] ERROR: Forbidden spacing utility detected in ${context}:\n` +
           `  "${classes}"\n` +
           `  Pattern: ${pattern}\n` +
-          `  Please use token-based utilities instead (e.g., from component tokens).`,
+          `  Spacing utilities MUST use semanticSpacing tokens (e.g., from component tokens).`,
+      );
+    }
+  }
+
+  // Check for advisory dimension utilities (WARN level)
+  for (const pattern of ADVISORY_DIMENSION_PATTERNS) {
+    if (pattern.test(classes)) {
+      console.warn(
+        `[tokenCVA] WARN: Dimension utility detected in ${context}:\n` +
+          `  "${classes}"\n` +
+          `  Pattern: ${pattern}\n` +
+          `  Dimension utilities are allowed until a dimension token system is introduced.`,
       );
     }
   }

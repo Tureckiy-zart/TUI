@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { IconGallery } from "./IconGallery";
 
 const meta: Meta<typeof IconGallery> = {
-  title: "Foundation Locked/Composition/Utilities/IconGallery",
+  title: "UI / Composition / Utilities / IconGallery",
   component: IconGallery,
   parameters: {
     layout: "padded",

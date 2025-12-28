@@ -100,14 +100,14 @@ export const SLIDER_TOKENS = {
         lg: "text-base", // Large: 16px
       },
       marginTop: {
-        sm: "mt-1", // Small: 4px
-        md: "mt-1.5", // Medium: 6px
-        lg: "mt-2", // Large: 8px
+        sm: "mt-xs", // Small: 4px - maps to semanticSpacing.xs
+        md: "mt-1.5", // Medium: 6px - standard Tailwind class (spacing[1.5])
+        lg: "mt-sm", // Large: 8px - maps to semanticSpacing.sm
       },
       marginLeft: {
-        sm: "ml-1", // Small: 4px (vertical)
-        md: "ml-1.5", // Medium: 6px (vertical)
-        lg: "ml-2", // Large: 8px (vertical)
+        sm: "ml-xs", // Small: 4px (vertical) - maps to semanticSpacing.xs
+        md: "ml-1.5", // Medium: 6px (vertical) - standard Tailwind class (spacing[1.5])
+        lg: "ml-sm", // Large: 8px (vertical) - maps to semanticSpacing.sm
       },
     },
   },

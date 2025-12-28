@@ -115,9 +115,9 @@ export {
   type MenuLabelPadding,
   type MenuSeparatorMargin,
   type MotionAnimation,
-  type MotionDuration,
-  type MotionEasing,
-  type MotionTransition,
+  type MotionDuration as ComponentMotionDuration,
+  type MotionEasing as ComponentMotionEasing,
+  type MotionTransition as ComponentMotionTransition,
   type MotionTransitionPreset,
   type NavigationItemPadding,
   type NavigationListGap,
@@ -193,39 +193,26 @@ export {
 // ============================================================================
 // MOTION
 // ============================================================================
-export type { Animation, Duration, Easing, Keyframe, Spring, Transition } from "./motion";
-
-export {
-  animations,
-  durations,
-  easings,
-  keyframes,
-  motionCSSVariables,
-  reducedMotion,
-  springs,
-  tailwindMotionConfig,
-  transitions,
-} from "./motion";
-
-// Motion V2 exports (explicit exports from motion/v2)
 export type {
-  MotionV2CombinedType,
-  MotionV2Duration,
-  MotionV2Easing,
-  MotionV2SlideDirection,
-  MotionV2Transition,
+  MotionCombinedType,
+  MotionDuration,
+  MotionEasing,
+  MotionSlideDirection,
+  MotionTransition,
 } from "./motion/v2";
 
 export {
-  motionV2CSSVariables,
-  motionV2Combined,
-  motionV2Durations,
-  motionV2Easings,
-  motionV2Fade,
-  motionV2Scale,
-  motionV2Slide,
-  motionV2TailwindConfig,
-  motionV2Transitions,
+  motionCSSVariables,
+  motionCombined,
+  motionDurations,
+  motionEasings,
+  motionFade,
+  motionReducedMotion,
+  motionScale,
+  motionSlide,
+  motionTailwindConfig,
+  motionTransitionProperty,
+  motionTransitions,
 } from "./motion/v2";
 
 // ============================================================================

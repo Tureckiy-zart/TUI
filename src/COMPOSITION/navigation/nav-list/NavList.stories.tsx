@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NavList } from "./NavList";
 
 const meta: Meta<typeof NavList> = {
-  title: "Foundation Locked/Extension/Composition/Navigation/NavList",
+  title: "UI / Composition / Navigation / NavList",
   component: NavList,
   parameters: {
     layout: "padded",

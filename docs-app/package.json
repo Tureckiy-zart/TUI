@@ -15,7 +15,7 @@
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^15.0.0",
-    "@tenerife.music/ui": "file:../tenerife.music-ui-1.0.3.tgz",
+    "@tenerife.music/ui": "file:..",
     "clsx": "^2.1.1",
     "flexsearch": "^0.7.43",
     "lucide-react": "^0.469.0",

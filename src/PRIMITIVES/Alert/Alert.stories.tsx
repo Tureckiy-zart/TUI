@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Alert, ALERT_VARIANTS, type AlertVariant } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "Foundation Locked/Primitives/Alert",
+  title: "UI / Primitives / Alert",
   component: Alert,
   parameters: {
     layout: "padded",

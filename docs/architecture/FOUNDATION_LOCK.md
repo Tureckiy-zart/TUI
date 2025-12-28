@@ -1847,6 +1847,12 @@ If Authority modifications are required in the future:
 - **[Button CVA Enforcement](../../docs_archive/deprecated/BUTTON_CVA_ENFORCEMENT.md)** — 🔒 **LOCKED** Button CVA enforcement rules (archived)
 - **[State Authority Matrix](./STATE_MATRIX.md)** — 🔒 **LOCKED** Universal state model for all interactive components
 - **[State Authority Contract](./STATE_AUTHORITY.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
+- **[Focus Authority](./FOCUS_AUTHORITY.md)** — 🔒 **LOCKED** Focus navigation mechanics (trap, restore, tab order, focus-visible indication)
+- **[Focus Lock](./locks/FOCUS_LOCK.v1.1.md)** — 🔒 **LOCKED** Focus system lock status and enforcement
+- **[A11Y Authority](./A11Y_AUTHORITY.md)** — 🔒 **LOCKED** Accessibility requirements (semantic roles, aria-* as API, keyboard-only operability, accessible names)
+- **[A11Y Lock](./locks/A11Y_LOCK.md)** — 🔒 **LOCKED** A11Y system lock status and enforcement
+- **[Input Authority](./INPUT_AUTHORITY.md)** — 🔒 **LOCKED** Input component contract (form controls, validation, keyboard parity)
+- **[Input Lock](./locks/INPUT_LOCK.md)** — 🔒 **LOCKED** Input system lock status and enforcement
 - **[Extension Authority Contract](./EXTENSION_AUTHORITY.md)** — ✅ **ACTIVE** Extension layer boundary contract
 - **[Foundation Lifecycle Process Index](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md)** — Human-readable navigation to Foundation component creation/refactor lifecycle process
 - **[ESLint Setup & Governance](./ESLINT_SETUP.md)** — ESLint as architectural enforcement (governance rules, autofix policy, scope boundaries)

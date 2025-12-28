@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NavSeparator } from "./NavSeparator";
 
 const meta: Meta<typeof NavSeparator> = {
-  title: "Foundation Locked/Extension/Composition/Navigation/NavSeparator",
+  title: "UI / Composition / Navigation / NavSeparator",
   component: NavSeparator,
   parameters: {
     layout: "padded",

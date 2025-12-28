@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Table } from "./Table";
 
 const meta: Meta<typeof Table> = {
-  title: "Foundation Locked/Patterns/Tables/SimpleTable",
+  title: "UI / Patterns / Tables / SimpleTable",
   component: Table,
   parameters: {
     layout: "padded",

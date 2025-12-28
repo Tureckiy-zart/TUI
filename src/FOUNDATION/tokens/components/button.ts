@@ -104,8 +104,9 @@ export const BUTTON_TOKENS = {
   /**
    * Padding token for icon-only buttons
    * Zero padding required for square dimensions (icon-only buttons have no text, so no padding needed)
+   * Uses p-0 which is a standard Tailwind class for zero spacing (spacing[0])
    */
-  paddingIconOnly: "p-0", // Zero padding for icon-only buttons (required for square dimensions)
+  paddingIconOnly: "p-0", // Zero padding for icon-only buttons (required for square dimensions) - standard Tailwind class
 
   /**
    * Font sizes by button size

@@ -58,6 +58,8 @@ The following table provides a high-level overview of all Authorities in the sys
 | **Elevation Authority** | Elevation | Elevation token usage (shadows, z-index) | Token | ✅ ACTIVE | [ELEVATION_AUTHORITY.md](./ELEVATION_AUTHORITY.md) |
 | **Layout Authority** | Layout | Layout structure and flow (WHERE elements are positioned) | Layout | ✅ LOCKED | [LAYOUT_AUTHORITY.md](./LAYOUT_AUTHORITY.md) |
 | **Interactive Size Scale Authority** | Interactive Size | Interactive size scale (hit-area, vertical rhythm, accessibility) | Interactive | ✅ LOCKED | [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) |
+| **Focus Authority** | Focus | Focus navigation (trap, restore, tab order) | Accessibility | ✅ LOCKED | [FOCUS_AUTHORITY.md](./FOCUS_AUTHORITY.md) |
+| **A11Y Authority** | Accessibility | Semantic roles, aria-* as API, keyboard-only operability, accessible names | Accessibility | ✅ LOCKED | [A11Y_AUTHORITY.md](./A11Y_AUTHORITY.md) |
 
 ### Authority Categories
 
@@ -78,6 +80,10 @@ The following table provides a high-level overview of all Authorities in the sys
 
 **Interactive Authorities:**
 - **Interactive Size Scale Authority** - Interactive size scale (hit-area, vertical rhythm, focus/keyboard accessibility, user interaction affordance)
+
+**Accessibility Authorities:**
+- **Focus Authority** - Focus navigation (trap, restore, tab order, focus-visible indication)
+- **A11Y Authority** - Semantic roles, aria-* as API, keyboard-only operability, accessible names
 
 ---
 
@@ -110,6 +116,11 @@ This table maps common development questions to the appropriate Authority:
 | "Can I use xs or xl for Button?" | **Interactive Size Scale Authority** | Forbids xs/xl for interactive components - only sm/md/lg allowed |
 | "Can I use size for typography?" | **Interactive Size Scale Authority** | Forbids using size for typography - typography has its own scale (xs, sm, md, lg, xl) |
 | "Can I use size for layout?" | **Interactive Size Scale Authority** | Forbids using size for layout - layout uses spacing tokens (padding, gap) |
+| "What semantic element should I use?" | **A11Y Authority** | Prefer native semantic elements; forbid div-as-button unless justified |
+| "Does my component need an accessible name?" | **A11Y Authority** | Every interactive control must have accessible name (label/aria-label/aria-labelledby) |
+| "Can I use aria-disabled on native disabled button?" | **A11Y Authority** | Forbids redundant ARIA on native elements - native semantics take precedence |
+| "How do I make my component keyboard-operable?" | **A11Y Authority** | All interactive components must be keyboard-operable (Tab, Enter/Space, Escape, Arrow keys) |
+| "How do I label my modal overlay?" | **A11Y Authority** | Modal overlays must have accessible names via aria-labelledby (wired to title) |
 
 ---
 
@@ -184,6 +195,20 @@ When developing a UI component, consult Authorities in this order:
 - Reference: [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md)
 - **Question:** "What size should my interactive component use?"
 - **Answer:** Canonical interactive size scale (`sm | md | lg`), component classification, forbidden sizes
+
+### 5. Accessibility Authorities
+
+**Step 11: Focus Authority**
+- Determine focus navigation mechanics (trap, restore, tab order)
+- Reference: [FOCUS_AUTHORITY.md](./FOCUS_AUTHORITY.md)
+- **Question:** "How should focus behave?"
+- **Answer:** Focus trap for modals, focus restore on close, tab order follows DOM
+
+**Step 12: A11Y Authority**
+- Determine accessibility requirements (semantic roles, accessible names, keyboard operability)
+- Reference: [A11Y_AUTHORITY.md](./A11Y_AUTHORITY.md)
+- **Question:** "What accessibility requirements does my component have?"
+- **Answer:** Semantic element choice, accessible name requirements, keyboard-only operability, ARIA usage rules
 
 ---
 
@@ -289,6 +314,39 @@ This section demonstrates how Authorities are consulted when developing a Button
 - Button does not define external layout context (that's the parent's responsibility)
 - Reference: [LAYOUT_AUTHORITY.md](./LAYOUT_AUTHORITY.md)
 
+### Step 10: Interactive Size Scale Authority
+
+**Question:** "What size should Button use?"
+
+**Authority:** Interactive Size Scale Authority  
+**Answer:** 
+- Use canonical interactive size scale: `sm | md | lg`
+- Button uses `sm`, `md`, `lg` sizes (forbidden: `xs`, `xl`)
+- Reference: [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md)
+
+### Step 11: Focus Authority
+
+**Question:** "How should Button handle focus?"
+
+**Authority:** Focus Authority  
+**Answer:** 
+- Button is focusable via Tab (native behavior)
+- Focus ring uses `:focus-visible` (not `:focus`)
+- Focus mechanics are browser-native (no custom focus management needed)
+- Reference: [FOCUS_AUTHORITY.md](./FOCUS_AUTHORITY.md)
+
+### Step 12: A11Y Authority
+
+**Question:** "What accessibility requirements does Button have?"
+
+**Authority:** A11Y Authority  
+**Answer:** 
+- Button uses native `<button>` element (semantic element)
+- Button gets accessible name from text content or aria-label
+- Icon-only buttons require aria-label
+- Button is keyboard-operable (Tab, Enter/Space - native behavior)
+- Reference: [A11Y_AUTHORITY.md](./A11Y_AUTHORITY.md)
+
 ### Authority Coordination Summary
 
 Button development follows this Authority coordination:
@@ -302,6 +360,9 @@ Button development follows this Authority coordination:
 7. **Motion Authority** → Defines transitions
 8. **Elevation Authority** → Defines shadows/focus rings
 9. **Layout Authority** → Defines internal structure
+10. **Interactive Size Scale Authority** → Defines interactive size scale
+11. **Focus Authority** → Defines focus navigation mechanics
+12. **A11Y Authority** → Defines accessibility requirements
 
 **Result:** Button component that follows all Authority rules and maintains design system consistency.
 
@@ -336,7 +397,8 @@ This document explicitly does NOT:
 - [Elevation Authority](./ELEVATION_AUTHORITY.md) - Elevation tokens
 - [Layout Authority](./LAYOUT_AUTHORITY.md) - Layout structure
 - [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale
-- [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale
+- [Focus Authority](./FOCUS_AUTHORITY.md) - Focus navigation mechanics
+- [A11Y Authority](./A11Y_AUTHORITY.md) - Accessibility (semantic roles, aria-*, keyboard operability, accessible names)
 
 ### Foundation Lock
 
@@ -354,6 +416,15 @@ This document explicitly does NOT:
 ---
 
 ## Version History
+
+- **v1.2** (2025-12-27): A11Y Authority Integration
+  - Added A11Y Authority to Authority Overview Table
+  - Added A11Y Authority to Accessibility Authorities category
+  - Added A11Y Authority questions to Question → Authority Mapping Table
+  - Added A11Y Authority to Authority Resolution Order (Step 12)
+  - Added A11Y Authority to Related Documents
+  - Updated Button Example Walkthrough with A11Y Authority step
+  - Completed integration per TUNG_A11Y_SYSTEM_V1 task
 
 - **v1.1** (2025-12-18): Interactive Size Scale Authority Integration
   - Added Interactive Size Scale Authority to Authority Overview Table
@@ -374,8 +445,8 @@ This document explicitly does NOT:
 ---
 
 **Status:** ✅ ACTIVE  
-**Version:** 1.1  
+**Version:** 1.2  
 **Date Created:** 2025-12-16  
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2025-12-27  
 **Priority:** HIGH  
 **Type:** META

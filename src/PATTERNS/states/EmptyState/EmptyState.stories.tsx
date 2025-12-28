@@ -11,7 +11,7 @@ import {
 } from "./index";
 
 const meta: Meta<typeof EmptyState> = {
-  title: "Foundation Locked/Patterns/States/EmptyState",
+  title: "UI / Patterns / States / EmptyState",
   component: EmptyState,
   tags: ["autodocs"],
   parameters: {

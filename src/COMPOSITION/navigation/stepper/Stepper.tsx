@@ -394,16 +394,19 @@ StepperLabel.displayName = "Stepper.Label";
  * Stepper.Content - Content area for step
  */
 const StepperContent = React.forwardRef<HTMLDivElement, StepperContentProps>(
-  ({ className, isActive, children, ...props }, ref) => {
+  ({ className, isActive, stepIndex: _stepIndex, children, ...props }, ref) => {
     if (!isActive) {
       return null;
     }
+
+    // Filter out non-DOM props (stepIndex is not a DOM attribute)
+    const { stepIndex: __stepIndex, ...domProps } = props as any;
 
     return (
       <div
         ref={ref}
         className={cn(NAVIGATION_TOKENS.spacing.content.marginTop, className)}
-        {...props}
+        {...domProps}
       >
         {children}
       </div>

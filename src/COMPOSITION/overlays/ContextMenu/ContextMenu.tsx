@@ -116,11 +116,11 @@ function getRadiusClass(token: RadiusToken | undefined): string | undefined {
  * ContextMenu Content Variants
  *
  * @note INTENTIONAL HARDCODED VALUES:
- * - `z-50`: z-index is intentionally hardcoded to ensure ContextMenu appears above
- *   all other UI elements. Radix ContextMenu provides layering guarantees via portal
- *   positioning, but we use z-50 as an explicit safeguard. This should NOT be moved
- *   to tokens as it represents a cross-component layering decision tied to Radix's
- *   portal strategy. Changing this value risks layering conflicts with other overlays.
+ * - `z-30`: z-index uses overlay layer (30) per ELEVATION_AUTHORITY. ContextMenu is an overlay
+ *   component and must use zIndex.overlay (30) to maintain proper stacking order.
+ *   Radix ContextMenu provides layering guarantees via portal positioning, but we use z-30
+ *   as an explicit safeguard per Authority Contract. This should NOT be moved to tokens
+ *   as it represents a cross-component layering decision tied to Radix's portal strategy.
  *
  * - `[2px]` offset in slide-in animations: This small 2px offset is intentionally
  *   hardcoded as a micro-interaction detail for entrance animations. It provides
@@ -129,7 +129,7 @@ function getRadiusClass(token: RadiusToken | undefined): string | undefined {
  *   WARNING: Do not refactor these animation offsets into the token system.
  */
 const contextMenuContentVariants = tokenCVA({
-  base: `z-50 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[2px] data-[side=left]:slide-in-from-right-[2px] data-[side=right]:slide-in-from-left-[2px] data-[side=top]:slide-in-from-bottom-[2px]`,
+  base: `z-30 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=left]:slide-in-from-right-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=right]:slide-in-from-left-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=top]:slide-in-from-bottom-${CONTEXT_MENU_TOKENS.content.animationOffset}`,
   variants: {
     size: {
       sm: `${CONTEXT_MENU_TOKENS.size.sm.content.padding} ${CONTEXT_MENU_TOKENS.size.sm.content.radius} ${CONTEXT_MENU_TOKENS.size.sm.content.minWidth}`,
@@ -166,15 +166,15 @@ const contextMenuItemVariants = tokenCVA({
  * ContextMenu SubContent Variants
  *
  * @note INTENTIONAL HARDCODED VALUES:
- * - `z-50`: Same rationale as ContextMenuContent - ensures submenus appear above
- *   other UI elements. Radix handles submenu layering via portals, but z-50 provides
- *   explicit layering guarantee. Do NOT move to tokens (see Content variants note).
+ * - `z-30`: Same rationale as ContextMenuContent - uses overlay layer (30) per ELEVATION_AUTHORITY.
+ *   Radix handles submenu layering via portals, but z-30 provides explicit layering guarantee
+ *   per Authority Contract. Do NOT move to tokens (see Content variants note).
  *
  * - `[2px]` offset in slide-in animations: Same micro-interaction detail as Content.
  *   Consistent animation behavior across all menu levels. Do NOT refactor into tokens.
  */
 const contextMenuSubContentVariants = tokenCVA({
-  base: `z-50 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[2px] data-[side=left]:slide-in-from-right-[2px] data-[side=right]:slide-in-from-left-[2px] data-[side=top]:slide-in-from-bottom-[2px]`,
+  base: `z-30 ${CONTEXT_MENU_TOKENS.content.border} ${CONTEXT_MENU_TOKENS.content.background} ${CONTEXT_MENU_TOKENS.content.text} ${CONTEXT_MENU_TOKENS.content.shadow} outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=left]:slide-in-from-right-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=right]:slide-in-from-left-${CONTEXT_MENU_TOKENS.content.animationOffset} data-[side=top]:slide-in-from-bottom-${CONTEXT_MENU_TOKENS.content.animationOffset}`,
   variants: {
     size: {
       sm: `${CONTEXT_MENU_TOKENS.size.sm.content.padding} ${CONTEXT_MENU_TOKENS.size.sm.content.radius} ${CONTEXT_MENU_TOKENS.size.sm.content.minWidth}`,

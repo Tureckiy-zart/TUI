@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs";
 
 const meta: Meta<typeof Breadcrumbs.Root> = {
-  title: "Foundation Locked/Composition/Navigation/Breadcrumbs",
+  title: "UI / Composition / Navigation / Breadcrumbs",
   component: Breadcrumbs.Root,
   parameters: {
     layout: "padded",

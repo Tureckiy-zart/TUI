@@ -117,7 +117,7 @@ function StoryRow({ children }: { children: React.ReactNode }) {
 }
 
 const meta: Meta<typeof Modal.Root> = {
-  title: "Foundation Locked/Composition/Overlays/Modal",
+  title: "UI / Composition / Overlays / Modal",
   component: Modal.Root,
   parameters: {
     layout: "centered",
@@ -715,6 +715,68 @@ export const LongContent: Story = {
       description: {
         story:
           "Validates padding and maxWidth token behavior with long text content. Required for overlay components per VARIANTS_SIZE_CANON.",
+      },
+    },
+  },
+};
+
+/**
+ * WithBody Story
+ * Demonstrates Modal.Body governed slot for scroll and padding
+ * Shows canonical usage pattern with Header → Body → Footer structure
+ */
+export const WithBody: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <>
+        <Modal.Root open={open} onOpenChange={setOpen}>
+          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Open Modal with Body
+          </Modal.Trigger>
+          <Modal.Content size="md">
+            <Modal.Header>
+              <Modal.Title>Modal with Body Slot</Modal.Title>
+              <Modal.Description>
+                This modal demonstrates the optional Modal.Body slot that provides governed scroll
+                and padding for body content.
+              </Modal.Description>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="space-y-4">
+                {Array.from({ length: 20 }, (_, i) => (
+                  <div key={i} className="rounded border p-4">
+                    <h3 className="mb-2 font-semibold">Section {i + 1}</h3>
+                    <p>
+                      This content is wrapped in Modal.Body, which provides governed scroll
+                      container (overflow-y-auto) and tokenized vertical padding (py-md).
+                    </p>
+                    <p className="mt-2">
+                      The Body slot centralizes scroll and padding ownership, eliminating the need
+                      for manual wrapper divs. Header and Footer remain fixed (non-scrollable).
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={() => setOpen(false)}>Confirm</Button>
+            </Modal.Footer>
+            <Modal.Close />
+          </Modal.Content>
+        </Modal.Root>
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates Modal.Body governed slot that provides canonical scroll container and padding separation from Header/Footer. Body is optional; legacy manual wrappers remain supported.",
       },
     },
   },

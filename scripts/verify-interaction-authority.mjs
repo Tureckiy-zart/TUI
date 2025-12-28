@@ -47,10 +47,65 @@ const VIOLATION_PATTERNS = [
       const beforeMatch = content.substring(0, matchIndex);
       const afterMatch = content.substring(matchIndex);
 
-      // Check if it's prefixed with disabled: or loading:
-      const prefixMatch = beforeMatch.match(/(disabled|loading|aria-busy):pointer-events-none\s*$/);
-      if (prefixMatch) {
-        return false; // Has prefix, not a violation
+      // Check if it's in base: template literal or CVA base property
+      const baseMatch = beforeMatch.match(/base:\s*`[^`]*$/s);
+      const cvaBaseMatch = beforeMatch.match(/base\s*[:=]\s*[^,}]*$/s);
+
+      if (!baseMatch && !cvaBaseMatch) {
+        return false; // Not in base definition, not a violation
+      }
+
+      // Get the base string content
+      let baseString = "";
+      if (baseMatch) {
+        // Extract the base string from template literal
+        const baseStart = baseMatch.index + baseMatch[0].indexOf("`") + 1;
+        const baseEnd = content.indexOf("`", baseStart);
+        if (baseEnd !== -1 && baseEnd >= matchIndex) {
+          baseString = content.substring(baseStart, Math.min(baseEnd, matchIndex + 100));
+        } else {
+          // Template literal might span multiple lines, get more context
+          baseString = content.substring(baseStart, matchIndex + 200);
+        }
+      } else if (cvaBaseMatch) {
+        // Extract the base string from CVA base property
+        const baseStart = cvaBaseMatch.index + cvaBaseMatch[0].indexOf("=") + 1;
+        const baseEnd = content.indexOf(",", baseStart);
+        const baseEndBrace = content.indexOf("}", baseStart);
+        const actualEnd =
+          baseEnd !== -1 && baseEndBrace !== -1
+            ? Math.min(baseEnd, baseEndBrace)
+            : baseEnd !== -1
+              ? baseEnd
+              : baseEndBrace;
+        if (actualEnd !== -1 && actualEnd >= matchIndex) {
+          baseString = content.substring(baseStart, Math.min(actualEnd, matchIndex + 100));
+        } else {
+          baseString = content.substring(baseStart, matchIndex + 200);
+        }
+      }
+
+      // Check if there's a valid prefix before pointer-events-none in the base string
+      // Valid prefixes: disabled:, loading:, aria-busy:, data-[disabled]:
+      const prefixPatterns = [
+        /(disabled|loading|aria-busy):pointer-events-none/,
+        /data-\[disabled\]:pointer-events-none/,
+      ];
+
+      for (const pattern of prefixPatterns) {
+        if (pattern.test(baseString)) {
+          // Verify the prefix is before this specific match
+          const prefixMatch = baseString.match(pattern);
+          if (prefixMatch && prefixMatch.index !== undefined) {
+            const prefixEndIndex = prefixMatch.index + prefixMatch[0].length;
+            const matchIndexInBase =
+              baseString.length -
+              (baseString.length - (matchIndex - (baseMatch?.index || cvaBaseMatch?.index || 0)));
+            if (prefixEndIndex <= matchIndexInBase + 50) {
+              return false; // Has valid prefix in base, not a violation
+            }
+          }
+        }
       }
 
       // Check if it's in icon wrapper context (allowed)
@@ -64,19 +119,8 @@ const VIOLATION_PATTERNS = [
         return false; // SVG selector, allowed
       }
 
-      // Check if it's in base: template literal
-      const baseMatch = beforeMatch.match(/base:\s*`[^`]*$/s);
-      if (baseMatch) {
-        return true; // In base definition, violation
-      }
-
-      // Check if it's in CVA base property
-      const cvaBaseMatch = beforeMatch.match(/base\s*[:=]\s*[^,}]*$/s);
-      if (cvaBaseMatch) {
-        return true; // In CVA base, violation
-      }
-
-      return false;
+      // In base definition without valid prefix, violation
+      return true;
     },
   },
   {

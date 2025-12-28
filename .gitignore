@@ -153,3 +153,8 @@ docs_archive/
 
 # Documentation backup folders (temporary backups)
 docs/backup_*/
+
+# Playwright test artifacts (generated on test run)
+playwright-report/
+test-results/
+.playwright/

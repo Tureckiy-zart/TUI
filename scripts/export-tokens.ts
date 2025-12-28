@@ -15,7 +15,7 @@ import { fileURLToPath } from "url";
 
 // Import all token modules
 import * as colors from "../src/FOUNDATION/tokens/colors";
-import * as motion from "../src/FOUNDATION/tokens/motion";
+import * as motion from "../src/FOUNDATION/tokens/motion/v2";
 import * as radius from "../src/FOUNDATION/tokens/radius";
 import * as shadows from "../src/FOUNDATION/tokens/shadows";
 import * as spacing from "../src/FOUNDATION/tokens/spacing";
@@ -467,19 +467,19 @@ function buildMotionTokens() {
   const motionTokens: Record<string, any> = {};
 
   // Durations
-  motionTokens.duration = { ...motion.durations };
+  motionTokens.duration = { ...motion.motionDurations };
 
   // Easings
-  motionTokens.easing = { ...motion.easings };
+  motionTokens.easing = { ...motion.motionEasings };
 
   // Transitions
-  motionTokens.transition = { ...motion.transitions };
+  motionTokens.transition = { ...motion.motionTransitions };
 
   // Keyframes (simplified - just names)
-  motionTokens.keyframes = Object.keys(motion.keyframes);
+  motionTokens.keyframes = Object.keys(motion.motionTailwindConfig.keyframes);
 
-  // Animations
-  motionTokens.animation = { ...motion.animations };
+  // CSS Variables
+  motionTokens.cssVariables = { ...motion.motionCSSVariables };
 
   return motionTokens;
 }

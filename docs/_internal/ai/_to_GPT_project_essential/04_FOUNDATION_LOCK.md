@@ -1,12 +1,23 @@
-# 🔒 Final Foundation Lock
+# ⚠️ Foundation Unlock Status (Active Construction)
 
-**Version:** 1.20  
+**Version:** 1.30  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-19  
-**Status:** ✅ **LOCKED**  
+**Last Updated:** 2025-12-27  
+**Status:** ⚠️ **UNLOCKED (Active Construction)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
-**Architecture Phase:** FOUNDATION — **CLOSED**
+**Architecture Phase:** FOUNDATION — **IN PROGRESS**
+
+---
+
+## Foundation Unlock Status
+
+**Status:** ⚠️ **UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
+**Reason:** Completing missing core primitives before final lock  
+**Expected Re-lock Date:** After all primitives reach canonical form
+
+**Note:** Foundation layer is intentionally unlocked until all primitives reach canonical form. This is a temporary state to allow completion of missing core primitives (Text, Input, Textarea, Link, Toast renderer, Modal) before final lock.
 
 ---
 
@@ -14,20 +25,20 @@
 
 **TYPE:** META  
 **MUTABILITY:** EVOLVABLE  
-**LOCK STATUS:** ✅ LOCKED  
+**LOCK STATUS:** ⚠️ UNLOCKED (Active Construction)  
 **AUTHORITY DOMAIN:** Foundation Lock
 
-**Purpose:** This document tracks lock status across all Foundation domains. It can be updated as new domains are locked, but cannot unlock existing locks.
+**Purpose:** This document tracks lock status across all Foundation domains. Foundation is currently **UNLOCKED** for active construction to complete missing primitives before final lock.
 
 ---
 
 ## 📋 Purpose
 
-This document **formally and definitively locks** the Foundation layer of `@tenerife.music/ui`. The Foundation layer is **complete**, **immutable**, and **closed for modifications**.
+This document **tracks the Foundation layer status** of `@tenerife.music/ui`. The Foundation layer is currently **UNLOCKED** and **under active construction** to complete missing core primitives.
 
-**This document is the authoritative source of truth** for the Foundation layer architecture. It supersedes all previous architectural decisions and establishes the final, binding contract for Foundation components.
+**This document is the authoritative source of truth** for the Foundation layer architecture. Foundation is temporarily unlocked to allow completion of missing primitives (Text, Input, Textarea, Link, Toast renderer, Modal) before final lock.
 
-**After this lock, the Foundation architecture phase is officially closed.** All future development must occur exclusively in the Extension layer.
+**Foundation layer is intentionally unlocked until all primitives reach canonical form.** All future development must occur in Foundation layer until all primitives are complete, then Foundation will be re-locked.
 
 ---
 
@@ -423,39 +434,239 @@ Meta documents track lock status and can be updated as new domains are locked.
 
 The following components constitute the **complete and final** Foundation layer. These components are **immutable** and serve as the **sole canonical foundation** for their respective categories.
 
-| Component       | Category   | Base Library      | Foundation Status | Lock Date |
-| --------------- | ---------- | ----------------- | ----------------- | --------- |
-| **Modal**       | Overlays   | Radix Dialog      | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
-| **Tabs**        | Navigation | Radix Tabs        | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 |
-| **Select**      | Inputs     | Radix Select      | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 |
-| **Toast**       | Overlays   | Radix Toast       | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 |
-| **Button**      | Actions    | Native `<button>` | ✅ FINAL LOCK      |   |
-| **Link**        | Navigation | Native `<a>`      | ✅ LOCKED          | 2025-12-17 |
+| Component       | Category   | Base Library         | Foundation Status | Status Date |
+| --------------- | ---------- | -------------------- | ----------------- | ----------- |
+| **Button**      | Actions    | Native `<button>`    | ✅ **FINAL LOCK**  | 2025-12-25 |
+| **Link**        | Navigation | Native `<a>`         | ✅ **LOCKED**      | 2025-12-25 |
+| **Text**        | Typography | Native elements (span, p, label, strong, em) | ✅ **LOCKED**      | 2025-12-26 |
+| **Input**       | Form Input | Native `<input>`     | ✅ **LOCKED**      | 2025-12-26 |
+| **Label**       | Form Input | Radix Label          | ✅ **LOCKED**      | 2025-12-25 |
+| **Heading**     | Typography | Native `<h1-h6>`     | ✅ **LOCKED**      | 2025-12-25 |
+| **Icon**        | Visual Primitives | SVG Registry    | ✅ **LOCKED**      | 2025-12-25 |
+| **Checkbox**    | Form Input | Native `<button role="checkbox">` | ✅ **PROCESS LOCKED** | 2025-12-25 |
+| **Radio**       | Form Input | Native `<button role="radio">` | ✅ **LOCKED** | 2025-12-25 |
+| **Switch**      | Form Input | Native `<button role="switch">` | ✅ **LOCKED** | 2025-12-25 |
+| **Select**      | Form Input | Radix Select         | ✅ **LOCKED**      | 2025-12-26 |
+| **Tabs**        | Navigation | Radix Tabs           | ✅ **LOCKED**      | 2025-12-25 |
 
 ### Foundation Component Details
 
-#### Modal
-- **Location:** `src/COMPOSITION/overlays/Modal/`
-- **Export Path:** `@tenerife.music/ui` → `Modal`, `ModalRoot`, `ModalContent`, `ModalHeader`, `ModalBody`, `ModalFooter`, `ModalTrigger`, `ModalClose`
-- **Base Library:** Radix Dialog (`@radix-ui/react-dialog`)
-- **Purpose:** Sole modal foundation. All modal-like components must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** Modal was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** Modal will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
+#### Button
+- **Location:** `src/PRIMITIVES/Button/`
+- **Export Path:** `@tenerife.music/ui` → `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
+- **Base Library:** Native `<button>` element (semantic HTML)
+- **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
+- **Status:** ✅ **FINAL LOCK**
+- **Lock Date:** 2025-12-25
+- **Pipeline 18A Completion Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Lifecycle Version:** 1.0 (Steps 0-12)
+- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 11 (Accessibility) — PASS, ✅ Step 12 (Final Review & Lock) — PASS, ✅ Pipeline 18A Steps 0-12 — COMPLETE
+- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg), iconOnly prop (canonical pattern for icon-only buttons)
+- **Implementation Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+- **Audit Report:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+- **Pipeline 18A Changes:**
+  - Icon rendering deduplication (extracted ICON_WRAPPER_CLASS constant and renderIcon helper)
+  - Matrix and Accessibility stories added to Storybook
+  - Test coverage enhanced (asChild test fixed, type behavior documented)
+  - Public API change: Added `iconOnly` prop (canonical pattern), removed `size="icon"` from ButtonSize type (GlobalSize compliance)
+- **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
+- **Rule:** DO NOT modify, extend, or create alternatives. Button is FINAL LOCK and immutable.
+
+#### Link
+- **Location:** `src/PRIMITIVES/Link/`
+- **Export Path:** `@tenerife.music/ui` → `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
+- **Base Library:** Native `<a>` element (semantic HTML)
+- **Purpose:** Sole navigation link foundation. All navigation links must use this component. Link represents semantic navigation (location changes), not actions. Actions must use Button component.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/LINK_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Component is Foundation primitive)
+- **Migration Complete:** Link has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` (legacy process, superseded by audit report)
+- **Architectural Note:** [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
+- **Implementation Date:** 2025-12-17
+- **Lifecycle Version:** 2.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API, tokens (LINK_TOKENS), behavior (navigation via `<a>`), states (base, hover, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, link, destructive), sizes (sm, md, lg)
+- **Architectural Constraints:** Link MUST always render a single `<a>` element directly. `asChild` prop is FORBIDDEN. No proxy patterns (Radix Slot) allowed. See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) for complete architectural contract.
+
+#### Text
+- **Location:** `src/PRIMITIVES/Text/`
+- **Export Path:** `@tenerife.music/ui` → `Text`, `TextProps`, `TextSize`, `TextWeight`, `textVariants`
+- **Base Library:** Native `<span>` element (semantic HTML)
+- **Purpose:** Sole typography foundation for general-purpose text rendering. Text provides size, weight, and color (muted) variants for typography control. Text is non-interactive (no hover/active/focus states) and stateless. Text uses typography scale (xs, sm, md, lg, xl) separate from interactive scale.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-11 complete)
+- **Audit Report:** `docs/reports/audit/TEXT_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Component is Foundation primitive)
+- **Migration Complete:** Text has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-11)
+- **Scope:** Public API, tokens (TEXT_TOKENS), behavior (typography rendering via `<span>`), variants (size: xs, sm, md, lg, xl; weight: normal, medium, semibold, bold; muted: boolean)
+- **CVA Compliance:** Text follows canonical CVA structure with inline variants, explicit union types, and constants for defaultVariants (DEFAULT_SIZE, DEFAULT_WEIGHT, DEFAULT_MUTED)
+- **Architectural Constraints:** Text MUST use typography scale (xs, sm, md, lg, xl) separate from interactive scale. Text is non-interactive and stateless. No hover/active/focus states allowed.
+
+#### Input
+- **Location:** `src/PRIMITIVES/Input/`
+- **Export Path:** `@tenerife.music/ui` → `Input`, `InputProps`, `InputSize`
+- **Base Library:** Native `<input>` element (semantic HTML)
+- **Purpose:** Low-level form control primitive that wraps the native `<input>` element. Input is responsible only for visual styling via tokens, accessibility via native and ARIA attributes, and forwarding all native input behavior. Input does not handle labels, errors, validation, helper text, or form logic. Higher-level composition is delegated to FormField or domain-level form abstractions.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-26
+- **Pipeline:** Pipeline 18A Refactor Cycle 2 (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Component is Foundation primitive)
+- **Migration Complete:** Input has completed canonical Foundation Step Pipeline (Refactor Cycle 2, Steps 0-12) and demonstrates full compliance with primitive role definition and architectural canon.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-26
+- **Lifecycle Version:** 2.0 (Pipeline 18A Refactor Cycle 2, Steps 0-12)
+- **Scope:** Public API (size, invalid props), tokens (INPUT_TOKENS.size.*, INPUT_TOKENS.state.* minimal), behavior (text input via `<input>`), sizes (sm, md, lg), invalid state (via aria-invalid)
+- **CVA Compliance:** Input follows canonical CVA structure with size-only variants, explicit union types (InputSize: 'sm' | 'md' | 'lg')
+- **Accessibility:** Input uses native `<input>` element which provides full keyboard navigation, focus management, and screen reader support. ARIA attributes (aria-invalid) correctly implemented via invalid prop.
+- **Architectural Constraints:** Input MUST use native `<input>` element. Input MUST use interactive size scale (sm, md, lg) per Interactive Size Scale Authority. Input MUST use token-driven styling only. Foundation Enforcement: className and style excluded from public API. Input is intentionally limited to a low-level form control primitive. It does not and will not handle validation, errors, labels, helper text, or form logic. All such concerns are delegated to higher-level composition components. This limitation is intentional and required for architectural stability.
+
+#### Heading
+- **Location:** `src/PRIMITIVES/Heading/`
+- **Export Path:** `@tenerife.music/ui` → `Heading`, `HeadingProps`, `HeadingLevel`, `HeadingWeight`, `headingVariants`
+- **Base Library:** Native heading elements (`<h1>` through `<h6>`) (semantic HTML)
+- **Purpose:** Sole heading typography foundation. All heading text rendering (document structure, page titles, section headers) must use this component. Heading provides level (1-6), weight, and color (muted) variants for semantic document structure and typography control. Heading is non-interactive (no hover/active/focus states) and stateless. Heading depends on Text component for token-driven typography styling.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-11 complete)
+- **Audit Report:** `docs/reports/audit/HEADING_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Typography)
+- **Migration Complete:** Heading has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-11)
+- **Scope:** Public API, tokens (TEXT_TOKENS via Text dependency), behavior (heading rendering via `<h1-h6>`), variants (level: 1-6; weight: normal, medium, semibold, bold; muted: boolean)
+- **CVA Compliance:** Heading uses `cva` (COMPLIANT per CVA Decision Matrix - pure typography primitive with no token-driven styling axes). Programmatic compound variant generation (via `generateWeightVariants()`) documented as architectural exception for maintainability (36 combinations: 6 levels × 6 sizes × weight variants).
+- **Accessibility:** Heading uses native semantic HTML heading elements (`<h1>` through `<h6>`) which provide document structure and screen reader navigation. ARIA attributes not required due to semantic HTML. Level prop determines semantic heading level.
+- **Architectural Constraints:** Heading MUST use native semantic heading elements (`<h1-h6>`). Heading MUST use typography scale from TEXT_TOKENS. Heading is non-interactive and stateless. No hover/active/focus states allowed. Foundation Enforcement: className and style excluded from public API.
+- **Storybook Coverage:** Matrix story (6 levels × 4 weights grid) + TypographyHierarchy story + WithColorVariants story + realistic examples.
+- **Test Coverage:** 19 tests passing (rendering, levels 1-6, weights, polymorphism, muted prop, semantic HTML output).
+
+#### Icon
+- **Location:** `src/PRIMITIVES/Icon/`
+- **Export Path:** `@tenerife.music/ui` → `Icon`, `IconProps`, `iconVariants`
+- **Base Library:** SVG Registry (tree-shakeable icon registry with Radix Slot for composition)
+- **Purpose:** Sole icon rendering foundation. All SVG icon rendering must use this component. Icon is a semi-interactive primitive that provides pure visual representation without interactive behavior. Icon delegates all interactivity (clicks, keyboard navigation) to parent components. Icon provides token-driven visual styling (size, color, stroke) with registry-based icon lookup.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-11 complete)
+- **Audit Report:** `docs/reports/audit/ICON_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Visual Primitives)
+- **Migration Complete:** Icon has completed canonical Foundation Step Pipeline (Steps 0-11) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-11)
+- **Scope:** Public API, tokens (ICON_TOKENS), behavior (icon rendering via SVG registry), variants (size: sm, md, lg, xl; color: default, muted, success, warning, danger, info; stroke: thin, normal, bold), asChild prop (composition pattern via Radix Slot)
+- **CVA Compliance:** Icon migrated from `cva` to `tokenCVA` (BLOCKER-1 resolved). All variant maps have type constraints (`satisfies Record<Type, string>`). CVA type leakage removed from public API (explicit union types used).
+- **Accessibility:** Icon delegates A11Y responsibility to parent components. Icon supports ARIA attribute passthrough via SVG props. Icon is non-opinionated about A11Y patterns (decorative vs semantic icons determined by parent context).
+- **Architectural Constraints:** Icon MUST use visual size scale (sm, md, lg, xl) distinct from interactive scale per Foundation rule: "Semi-interactive components (Icon, Badge, Avatar) MUST NOT use size as interactive scale". Icon is non-interactive (no hover/active/focus states). Icon delegates interactivity to parent components. Icon MUST use token-driven styling only (ICON_TOKENS).
+- **Storybook Coverage:** SizesGallery story (REQUIRED per VARIANTS_SIZE_CANON.md) + Default + AllSizes + AllColors + AllStrokeWidths + WithButton + WithInput + SemanticColors + FallbackIcon stories. Category: Foundation/Primitives/Icon.
+- **Test Coverage:** 10 test suites (265 lines): rendering, size variants (4 sizes), color variants (6 colors), stroke variants (3 strokes), composition pattern (asChild), custom className, ref forwarding, prop combinations, edge cases, SVG props passthrough.
+- **Foundation Rule Compliance:** Icon follows Foundation rule for semi-interactive components (visual size scale, not interactive scale). Icon correctly delegates A11Y to parent components. Icon correctly uses tokenCVA for token-driven axes.
+
+#### Checkbox
+- **Location:** `src/PRIMITIVES/Checkbox/`
+- **Export Path:** `@tenerife.music/ui` → `Checkbox`, `CheckboxProps`, `CheckboxVariant`, `CheckboxSize`, `CheckboxState`, `checkboxVariants`
+- **Base Library:** Native `<button role="checkbox">` element (semantic HTML with ARIA)
+- **Purpose:** Sole checkbox selection control foundation. All binary selection controls (checked/unchecked with optional indeterminate state) must use this component. Checkbox provides full accessibility with ARIA attributes, keyboard navigation (Space key toggle), and supports both controlled and uncontrolled modes. Checkbox is an interactive primitive that represents user selection state in forms.
+- **Status:** ✅ **PROCESS LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete, Refactor Cycle 2 complete 2025-12-27)
+- **Audit Report:** `docs/reports/audit/CHECKBOX_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Controls)
+- **Migration Complete:** Checkbox has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Refactor Cycle 2 (2025-12-27) validated component compliance with no code changes required.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12, Refactor Cycle 2: 2025-12-27)
+- **Scope:** Public API, tokens (CHECKBOX_TOKENS), behavior (checkbox toggle via `<button role="checkbox">`), states (default, checked, indeterminate, error, disabled), variants (primary, secondary, outline, ghost, destructive), sizes (sm, md, lg), custom icon support (icon, indeterminateIcon props), controlled/uncontrolled modes
+- **CVA Compliance:** Checkbox migrated from `cva` to `tokenCVA` (BLOCKER-1 resolved in STEP 9). All variant maps have type constraints (`satisfies Record<Type, string>`). CVA type leakage removed from public API (explicit union types: CheckboxVariant, CheckboxSize, CheckboxState). Size scale normalized to canonical interactive scale (sm | md | lg) per FOUNDATION_LOCK.md Interactive Size Scale Authority.
+- **Accessibility:** Checkbox uses ARIA checkbox pattern (`role="checkbox"`, `aria-checked="true|false|mixed"`). Space key toggles checkbox. ARIA labeling via `aria-label`, `aria-labelledby`, `aria-describedby`. Error state via `aria-invalid`. Disabled state via `disabled` attribute and `aria-disabled`. WAI-ARIA checkbox pattern fully compliant. Comprehensive A11Y tests (12 A11Y-specific tests) and Accessibility Storybook story.
+- **Architectural Constraints:** Checkbox MUST use interactive size scale (sm, md, lg) per Interactive Size Scale Authority. Checkbox MUST use token-driven styling only (CHECKBOX_TOKENS). Checkbox MUST use ARIA checkbox pattern (button with role="checkbox"). Foundation Enforcement: className and style excluded from public API.
+- **Storybook Coverage:** Matrix story (5 variants × 3 sizes grid, REQUIRED per VARIANTS_SIZE_CANON.md), States story (all states across variants and sizes, REQUIRED), SizesGallery story (canonical name), plus Default, Checked, Indeterminate, Disabled, DisabledChecked, WithLabel, Controlled, Uncontrolled, ErrorState, Accessibility stories. Total: 13 stories with canonical naming.
+- **Test Coverage:** 42 tests passing (1 skipped): rendering, variants (5 variants), sizes (3 sizes - canonical scale), states (6 states), icons (checkmark, custom, indeterminate), accessibility (12 tests - ARIA attributes, keyboard navigation, labeling), interactions (click, Space key, disabled blocking), controlled/uncontrolled modes, snapshot test.
+- **Foundation Rule Compliance:** Checkbox follows Interactive Size Scale Authority (canonical scale sm | md | lg). Checkbox correctly uses tokenCVA for token-driven axes (variant, size, state). State model deviates from STATE_MATRIX (has component-specific states: checked, indeterminate, error) but deviation is justified for checkbox semantics.
+- **Pipeline 18A Changes:**
+  - CVA type migration: `cva` → `tokenCVA` (Decision Matrix RULE 1 compliance)
+  - Size scale normalization: Removed `xs` and `xl` sizes, canonical scale `sm | md | lg` enforced
+  - Type system cleanup: Removed `VariantProps` leaking, explicit union types (CheckboxVariant, CheckboxSize, CheckboxState)
+  - Code quality: Extracted toggle logic to shared helper, reduced duplication
+  - Storybook normalization: Renamed stories to canonical names (Matrix, States, SizesGallery), added Matrix story
+  - Token updates: CHECKBOX_TOKENS updated to reflect canonical scale
+  - Tests updated: Removed `xs` and `xl` test cases, 42 tests passing
+
+#### Switch
+- **Location:** `src/PRIMITIVES/Switch/`
+- **Export Path:** `@tenerife.music/ui` → `Switch`, `SwitchProps`, `SwitchVariant`, `SwitchSize`, `switchTrackVariants`, `switchHandleVariants`, `switchHandleStateVariants`
+- **Base Library:** Native `<button role="switch">` element (semantic HTML with ARIA)
+- **Purpose:** Sole binary toggle switch foundation. All on/off toggle controls (checked/unchecked state) must use this component. Switch provides full accessibility with ARIA switch pattern, keyboard navigation (Space key toggle), and supports both controlled and uncontrolled modes. Switch is an interactive primitive that represents binary toggle state for settings, preferences, and feature enablement.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/SWITCH_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Controls)
+- **Migration Complete:** Switch has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API, tokens (SWITCH_TOKENS), behavior (binary toggle via `<button role="switch">`), internal states (base, checked, disabled, disabledChecked, invalid), variants (primary, secondary, outline, ghost, destructive), sizes (xs, sm, md, lg, xl), controlled/uncontrolled modes
+- **CVA Compliance:** Switch migrated from `cva` to `tokenCVA` (BLOCKER-1 resolved). All variant maps have type constraints (`satisfies Record<Type, string>`). CVA type leakage removed from public API (explicit union types used). Three CVA invocations (switchTrackVariants, switchHandleVariants, switchHandleStateVariants) follow canonical split pattern for separate visual concerns (track vs handle).
+- **State Model:** Switch uses derived state model (no public `state` prop). States are derived from props: `checked` (value), `disabled` (state), `invalid` (validation state). Internal states (base, checked, disabled, disabledChecked, invalid) are computed in effectiveState and used for styling only. Public API: `checked`, `disabled`, `invalid` props.
+- **Foundation Enforcement:** Switch excludes `className` and `style` props from public API per Foundation Enforcement rules. Component uses token-driven styling only (SWITCH_TOKENS).
+- **Accessibility:** Switch uses ARIA switch pattern (`role="switch"`) with full keyboard support (Space key toggles). ARIA attributes: `aria-checked`, `aria-disabled`, `aria-invalid`, `aria-label`, `aria-labelledby`, `aria-describedby`. Native button provides focus management. Handle span uses `aria-hidden="true"` (decorative element). WCAG 2.1 Level AA compliant.
+- **Architectural Constraints:** Switch MUST use native `<button>` element with `role="switch"`. Switch MUST use interactive size scale (xs, sm, md, lg, xl) per GlobalSize subset. Switch MUST use token-driven styling only (SWITCH_TOKENS). Switch MUST derive all states from props (no public state prop). Foundation Enforcement: className and style excluded from public API.
+- **Storybook Coverage:** Matrix story (5 variants × 5 sizes = 25 combinations, REQUIRED) + SizesGallery story (all sizes with labels, REQUIRED) + States story (all states across variants/sizes, canonical name) + Invalid story + Default + Checked + Disabled + DisabledChecked + AllSizes + AllSizesChecked + AllVariants + AllVariantsUnchecked + WithLabel + Controlled + Uncontrolled + Accessibility stories. Category: Foundation Primitives/Switch.
+- **Test Coverage:** 40 tests passing (8 suites): rendering (5 tests), variants (5 tests), sizes (5 tests), states (6 tests), accessibility (8 tests), interactions (6 tests), controlled/uncontrolled (3 tests), handle animation (2 tests). All tests use updated API (`invalid` prop instead of `state="error"`).
+- **Pipeline 18A Changes:**
+  - CVA migration: Migrated from `cva` to `tokenCVA` for all 3 CVA invocations (track, handle, handleState)
+  - Type constraints: Added `satisfies Record<Type, string>` to all variant maps
+  - State model refactor: Removed public `state` prop, added `invalid` prop, states now fully derived
+  - State naming: Renamed "default" → "base", "error" → "invalid" for canonical consistency
+  - Public API cleanup: Excluded `className` and `style` props (Foundation Enforcement)
+  - Type system: Removed `VariantProps` leaking, added explicit union types (SwitchVariant, SwitchSize)
+  - Storybook normalization: Added Matrix story (variants × sizes grid), added SizesGallery story (all sizes with labels), renamed AllStates → States (canonical name), renamed ErrorState → Invalid
+  - Tests updated: Replaced `state="error"` with `invalid` prop, all 40 tests passing
+  - No linter errors after all changes
+- **Foundation Rule Compliance:** Switch follows Foundation rule for interactive components (interactive size scale xs-xl). Switch correctly implements ARIA switch pattern. Switch correctly uses tokenCVA for token-driven axes. Switch correctly excludes className/style from public API.
+
+#### Select
+- **Location:** `src/COMPOSITION/controls/Select/`
+- **Export Path:** `@tenerife.music/ui` (when promoted to index exports) → `Select` (compound component with Root, Trigger, Content, Item, etc.), `SelectRootProps`, `SelectTriggerProps`, `SelectContentProps`, etc.
+- **Base Library:** Radix UI Select (`@radix-ui/react-select`)
+- **Canonical Role:** **Composite Control** (12 subcomponents, token-driven styling wrapper for Radix primitive). Select is NOT a primitive component and NOT a form wrapper. It is a composite component that delegates all interaction, accessibility, and state management to Radix while providing consistent visual design system integration.
+- **Purpose:** Sole select/dropdown control foundation. All single-value selection from a list of options must use this component. Select provides a compound component API (Root, Trigger, Value, Icon, Content, Viewport, Item, etc.) for flexible composition while maintaining consistent token-driven styling and Radix-powered accessibility. Select delegates all interaction logic (keyboard navigation, focus management, ARIA) to Radix primitive.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-26
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete - Refactor Cycle: Token Migration & API Simplification)
+- **Audit Report:** `docs/reports/audit/SELECT_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Control - Form Input)
+- **Migration Complete:** Select has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Refactored to use INPUT_TOKENS per architectural canon (composite form control built on primitive tokens).
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-26
+- **Lifecycle Version:** 2.0 (Pipeline 18A Steps 0-12 - Refactor Cycle)
+- **Scope:** Public API (compound component with 12 subcomponents, minimal controlled API: value, defaultValue, onValueChange, disabled, invalid via aria-invalid, children), tokens (INPUT_TOKENS - consumes Input/Text tokens per architectural canon), behavior (Radix-delegated interaction, keyboard navigation, focus management), defaults (size: md, variant: outline, width: full - uses Input defaults)
+- **STATE_MATRIX Binding:** Select uses canonical states from STATE_MATRIX: `base`, `hover`, `active`, `focus-visible`, `disabled` (all applied). `loading` is not applicable. Select-specific states: `open`/`closed` (Radix data-state) and `selected` (Item indicator) are necessary component-specific states for dropdown/selection components. State model is explicitly bound to STATE_MATRIX with correspondence table documented in audit report.
+- **Forbidden Extensions:** Select MUST NOT implement: (1) Form validation logic (validation must be external), (2) Async data loading (options provided as children/props), (3) Search/filter logic (use separate SearchSelect component), (4) Multi-selection logic (use separate MultiSelect component), (5) Custom state management (beyond Radix-provided state), (6) Custom event handlers for interaction (only Radix handlers), (7) Form integration logic (integration must be external). Extension allowed via composition (wrapping Select in higher-level components). See audit report STEP 6 for detailed forbidden extensions documentation.
+- **CVA Compliance:** Select uses `tokenCVA` (COMPLIANT per CVA Decision Matrix RULE 1 - component has token-driven visual axes). All three CVA instances (selectTriggerVariants, selectContentVariants, selectItemVariants) use INPUT_TOKENS with simplified base classes (no size/variant/width variants - uses Input defaults). CVA structure simplified per architectural canon (composite form control consumes primitive tokens).
+- **Accessibility:** Select uses Radix Select primitive which provides comprehensive WCAG 2.1 Level AA compliance: ARIA roles (combobox, listbox, option), keyboard navigation (Arrow keys, Enter, Escape, Tab, type-ahead), focus management (focus trap, restoration), screen reader support (value announcement, state changes). Component integration preserves all Radix A11Y features. WCAG 2.1 Level AA compliance validated: 1.3.1, 2.1.1, 2.4.7, 4.1.2, 4.1.3.
+- **Architectural Constraints:** Select MUST delegate all interaction logic to Radix (no custom keyboard/mouse handlers). Select MUST use token-driven styling (INPUT_TOKENS) for all visual properties per architectural canon (composite form control built on primitive tokens). Select is compound component with 12 subcomponents exposing Radix primitives. Uses Input defaults: size (md), variant (outline), width (full). Invalid state via aria-invalid prop only.
+- **Storybook Coverage:** States story (states: default, disabled, invalid, with value) + existing stories (Default, Controlled, Uncontrolled, Invalid, Disabled, WithLabel, LongList, WithGroups, KeyboardNavigation, Accessibility).
+- **Test Coverage:** Comprehensive tests passing (rendering, invalid state, mouse interaction, keyboard navigation, focus management, selection behavior, disabled state, accessibility: combobox role, aria-expanded, controlled/uncontrolled modes). Tests updated for minimal API (variant/size/width tests removed, invalid state tests added).
+- **Previous Status:** UNLOCKED (Pending Canonical Lock) since 2025-12-17 - Explicitly unlocked to allow canonical Foundation lock process per user request.
+- **Lock Justification:** Select has completed Pipeline 18A (Steps 0-12) with all BLOCKER issues resolved (token migration from SELECT_TOKENS to INPUT_TOKENS, API simplification to minimal controlled API, CVA normalization). Component demonstrates full compliance with architectural canon (composite form control built on primitive tokens), CVA Canonical Style, STATE_MATRIX, and all Authority Contracts. Canonical role defined (Composite Control), state model explicitly bound to STATE_MATRIX, forbidden extensions documented, interaction tests enhanced, a11y validation comprehensive. Exception declared per TUNG_LOCKED_COMPONENT_CHANGE_GUARD for LOCKED component refactor. Ready for Foundation lock.
 
 #### Tabs
 - **Location:** `src/COMPOSITION/navigation/tabs/`
-- **Export Path:** `@tenerife.music/ui` → `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
-- **Base Library:** Radix Tabs (`@radix-ui/react-tabs`)
-- **Purpose:** Sole tabs foundation. All tab-based navigation must use this internally.
+- **Export Path:** `@tenerife.music/ui` (when promoted to index exports) → `Tabs` (compound component with Root, List, Trigger, Content), `TabsRootProps`, `TabsListProps`, `TabsTriggerProps`, `TabsContentProps`, etc.
+- **Base Library:** Radix UI Tabs (`@radix-ui/react-tabs`)
+- **Purpose:** Sole tab-based navigation foundation. All tab-based content organization must use this component. Tabs provides a compound component API (Root, List, Trigger, Content) for flexible composition while maintaining consistent token-driven styling and Radix-powered accessibility. Tabs delegates all interaction logic (keyboard navigation, focus management, ARIA, activation mode) to Radix primitive.
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-25 (First Pass), 2025-12-25 (Second Pass), 2025-12-27 (Third Pass)
 - **Pipeline:** Pipeline 18A (Steps 0-12 complete, Third Pass 2025-12-27)
@@ -463,134 +674,47 @@ The following components constitute the **complete and final** Foundation layer.
 - **Lock Type:** PROCESS LOCK (COMPOSITION Layer - Navigation)
 - **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0-12) three times and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements. Third pass completed 2025-12-27 with all compliance verified, no issues found.
 - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API (compound component with 4 subcomponents: Root, List, Trigger, Content), tokens (TABS_TOKENS), behavior (Radix-delegated interaction, keyboard navigation, focus management, activation mode: automatic/manual), variants (size: sm, md, lg; variant: default, outline, underline; tone: neutral, primary, success, warning, danger; orientation: horizontal, vertical)
+- **CVA Compliance:** Tabs uses `tokenCVA` (COMPLIANT per CVA Decision Matrix RULE 1 - component has token-driven visual axes: variant, size, tone, state). All three CVA instances (tabsListVariants, tabsTriggerVariants, tabsContentVariants) migrated from `cva` to `tokenCVA` during Pipeline 18A STEP 9 with `satisfies Record<Type, string>` type constraints.
+- **Accessibility:** Tabs uses Radix Tabs primitive which provides comprehensive WCAG 2.1 Level AA compliance: ARIA roles (tablist, tab, tabpanel), keyboard navigation (Arrow keys, Home, End, Tab), focus management (roving tabindex, focus restoration), screen reader support (selected state announcement, panel association). Component integration preserves all Radix A11Y features. Activation mode (automatic/manual) supported via Radix `activationMode` prop.
+- **Architectural Constraints:** Tabs MUST delegate all interaction logic to Radix (no custom keyboard/mouse handlers). Tabs MUST use token-driven styling (TABS_TOKENS) for all visual properties. Tabs is compound component with 4 subcomponents exposing Radix primitives. Size scale: sm, md, lg (standard interactive scale). Variant scale: default, outline, underline (visual style). Tone scale: neutral, primary, success, warning, danger (semantic color). Orientation: horizontal, vertical (layout direction).
+- **Storybook Coverage:** Existing stories (Default, Sizes, Variants, Tones, DisabledTab, Controlled, Vertical, LongLabels, ManualActivation, WithIcons, VariantSizeMatrix, ControlledVsUncontrolled). Note: Canonical story names (Matrix, States, SizesGallery) deferred per STEP 10 audit.
+- **Test Coverage:** 10 tests passing (rendering, default values, ref forwarding, keyboard navigation, accessibility: tablist role, aria-selected, controlled mode).
+- **Previous Status:** LEGACY UNLOCKED (Pending Canonical Lock) - Explicitly unlocked to allow canonical Foundation lock process per user request.
+- **Lock Justification:** Tabs has completed Pipeline 18A (Steps 0-12) with all BLOCKER issues resolved (CVA migration from `cva` to `tokenCVA` in STEP 9). Component demonstrates full compliance with CVA Canonical Style, and all Authority Contracts. A11Y validated via Radix integration. Ready for Foundation lock.
 
-#### Select
-- **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)
-- **Export Path:** `@tenerife.music/ui` → `Select`, `SelectRoot`, `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`, `SelectGroup`, `SelectLabel`, `SelectSeparator`
-- **Base Library:** Radix Select (`@radix-ui/react-select`)
-- **Purpose:** Sole select foundation. All dropdown selection must use this internally.
-- **Status:** ⏳ **UNLOCKED** — **PENDING CANONICAL LOCK**
-- **Unlock Date:** 2025-12-17
-- **Unlock Reason:** Select will undergo canonical Foundation lock process (Steps 1-11) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Link component.
-- **Next Steps:** Select will proceed through canonical Foundation component lifecycle:
-  1. Semantic Declaration
-  2. Alternative Cleanup
-  3. State Model and Priority Verification
-  4. JS-Free Interaction Model
-  5. Token-Driven Model
-  6. Public API Audit
-  7. TypeScript System Compliance
-  8. CVA Canonicalization
-  9. Accessibility Hardening
-  10. Authority Alignment
-  11. Foundation Lock
-- **Temporary Status:** During unlock period, Select remains functional but is not locked. Changes are allowed to bring it into full compliance with canonical Foundation requirements.
-
-#### ContextMenu
-- **Location:** `src/COMPOSITION/overlays/ContextMenu/`
-- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuLabel`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuCheckboxItem`, `ContextMenuSeparator`, `ContextMenuSub`, `ContextMenuSubTrigger`, `ContextMenuSubContent`
-- **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
-- **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+#### Label
+- **Location:** `src/PRIMITIVES/Label/`
+- **Export Path:** `@tenerife.music/ui` → `Label`, `LabelProps`
+- **Base Library:** Radix UI Label (`@radix-ui/react-label`)
+- **Purpose:** Sole form label foundation primitive. Provides semantic association between label text and form control via native `<label>` element. Label supports required asterisk indicator and peer-disabled styling pattern for visual feedback when associated input is disabled. Label is a non-interactive primitive that renders semantic HTML label element with token-driven typography styling.
+- **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-25
 - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
-- **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
-- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline and demonstrates full compliance with all Authority Contracts.
-- **Key Decisions:**
-  - CVA migrated from `cva` to `tokenCVA` (Decision Matrix RULE 1)
-  - Tone variants: neutral, primary, destructive (overlay-specific semantics)
-  - Size scale: sm, md, lg (overlay restriction compliant)
-  - Size inheritance pattern via Context (DX improvement)
-  - Full Radix delegation (right-click, keyboard, focus, a11y)
-- **Quality Metrics:** 380 tests, 10 Storybook stories (3 canonical), 100% token compliance
-- **Future Changes:** Re-entry into Pipeline 18A required for structural modifications
-
-#### Toast
-- **Location:** `src/COMPOSITION/overlays/`
-- **Export Path:** `@tenerife.music/ui` → `Toast`, `ToastProvider`, `ToastViewport`, `ToastRoot`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `useToast`
-- **Base Library:** Radix Toast (`@radix-ui/react-toast`)
-- **Purpose:** Sole toast foundation. All notification toasts must use this internally.
-- **Status:** ⏳ **LEGACY UNLOCKED** — **PENDING CANONICAL MIGRATION**
-- **Unlock Date:** 2025-12-19
-- **Unlock Reason:** Toast was declared as LOCKED but was implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). The current lock is declarative only and blocks required migration.
-- **Migration Path:** Toast will undergo canonical Foundation lock process (Steps 0–13) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Link standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0–13, Foundation lock report must exist, Public Type Surface must be locked, Component must be re-marked as FOUNDATION · LOCKED
-
-#### Button
-- **Location:** `src/PRIMITIVES/Button/`
-- **Export Path:** `@tenerife.music/ui` → `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
-- **Base Library:** Native `<button>` element (semantic HTML)
-- **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
-- **Status:** ✅ **FINAL LOCK** — Immutable
-- **Lock Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-- **Lock Date:** 2025-12-15
-- **Final Lock Date:**  
-- **Lifecycle Version:** 1.0 (Steps 3-13)
-- **Lock Version:** 1.0
-- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS, ✅ Step 13 (Foundation Lock FINAL) — FINAL
-- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg, icon)
-- **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
-- **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications (requires unlock procedure)
-- **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
-
-#### Link
-- **Location:** `src/PRIMITIVES/Link/`
-- **Export Path:** `@tenerife.music/ui` → `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
-- **Base Library:** Native `<a>` element (semantic HTML)
-- **Purpose:** Sole navigation link foundation. All navigation links must use this component. Link represents semantic navigation (location changes), not actions. Actions must use Button component.
-- **Status:** ✅ **FINAL LOCK** — Immutable
-- **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
-- **Architectural Lock:** [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
-- **Lock Date:** 2025-12-17
-- **Final Lock Date:** 2025-12-18
-- **Architectural Lock Date:** 2025-12-19
-- **Lifecycle Version:** 1.0 (Steps 1-13)
-- **Lock Version:** 1.0
-- **Quality Gates:** ✅ Step 10A (Storybook & Testing) — PASS, ✅ Step 12 (Testing Quality Gate) — PASS
-- **Scope:** Public API, tokens (LINK_TOKENS), behavior (navigation via `<a>`), states (base, hover, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, link, destructive), sizes (xs, sm, md, lg, xl)
-- **Architectural Constraints:** Link MUST always render a single `<a>` element directly. `asChild` prop is FORBIDDEN. No proxy patterns (Radix Slot) allowed. See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) for complete architectural contract.
-- **Allowed Changes:** Bug fixes, type improvements, documentation updates, accessibility fixes (within existing contract)
-- **Forbidden Changes:** Public API changes, new variants/sizes, behavior changes, token modifications, `asChild` prop addition (requires unlock procedure)
+- **Audit Report:** `docs/reports/audit/LABEL_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Input)
+- **Migration Complete:** Label has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API (`required?: boolean` prop, all Radix Label props except className/style), tokens (TEXT_TOKENS for typography, FORM_TOKENS for required mark, semantic spacing for margin), behavior (label-input association via htmlFor, peer-disabled visual feedback), no size/variant props (fixed typography appropriate for form labels)
+- **CVA Compliance:** Label does NOT use CVA (plain className string). Rationale: Label has no variant/size/state axes, fixed styling only. CVA wrapper removed in STEP 9 (simplified from empty CVA to plain string). Decision Matrix: N/A (no CVA needed for presentational component with fixed styling).
+- **State Model:** Label is non-interactive (no states). peer-disabled pattern is CSS-only visual feedback based on sibling input's disabled state, not a component state. No JavaScript state management required.
+- **Foundation Enforcement:** Label excludes `className` and `style` props from public API per Foundation Enforcement rules. Component uses token-driven styling only (TEXT_TOKENS, FORM_TOKENS, semantic spacing).
+- **Accessibility:** Label uses native `<label>` element (implicit label role) via Radix Label primitive. Proper label-input association via `htmlFor` prop. Required asterisk is visible text content (screen readers announce asterisk). WCAG 2.1 Level AA compliant (1.3.1, 2.4.6, 3.3.2, 4.1.2). Note: Semantic "required" indication should be on input element (`aria-required` or `required` attribute), Label provides visual indication only.
+- **Architectural Constraints:** Label MUST use native `<label>` element (via Radix Label primitive). Label MUST use fixed typography (no size prop - form labels should be consistent). Label MUST use token-driven styling only (TEXT_TOKENS, FORM_TOKENS). Label MUST NOT expose size/variant props (form semantics require fixed styling). Foundation Enforcement: className and style excluded from public API.
+- **Storybook Coverage:** 7 stories: Default (basic usage), Required (with asterisk), WithInput (peer-disabled demonstration), LongContent (text wrapping), ComplexChildren (nested elements), FormLayout (realistic form usage), Accessibility (A11Y patterns). Note: Matrix/States/SizesGallery stories NOT REQUIRED per VARIANTS_SIZE_CANON.md (Label has no size/variant props, non-interactive).
+- **Test Coverage:** 31 tests passing (9 suites): rendering (4 tests), required mark (5 tests), HTML attributes (4 tests), Foundation Enforcement (3 tests), peer-disabled styling (2 tests), accessibility (5 tests), edge cases (5 tests), type safety (1 test), Radix integration (2 tests). Comprehensive coverage of all public behavior, edge cases, and accessibility.
+- **Pipeline 18A Changes:**
+  - CVA simplification: Removed CVA wrapper (empty CVA with no variants), converted to plain className string
+  - Type system: Removed `VariantProps<typeof labelVariants>` from LabelProps interface (CVA removed)
+  - Exports cleanup: Removed `labelVariants` export (internal implementation detail removed)
+  - Code quality: Simplified code structure (removed unnecessary abstraction)
+- **Foundation Rule Compliance:** Label follows Foundation rule for form primitives (fixed typography, no size/variant props). Label correctly uses Radix Label primitive for cross-framework compatibility. Label correctly excludes className/style from public API. Label correctly uses token-driven styling only.
 
 ---
-
-### Legacy Foundation Components (Unlocked for Migration)
-
-The following components were declared as LOCKED but were implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). They have been temporarily unlocked strictly for canonical migration:
-
-- **Modal** — Unlocked 2025-12-19
-- **Tabs** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-23
-- **ContextMenu** — Unlocked 2025-12-19 → ✅ PROCESS LOCKED 2025-12-25
-- **Toast** — Unlocked 2025-12-19
-
-**Unlock Rationale:**
-These components were locked declaratively without completing the canonical Foundation lifecycle. The false lock prevents architectural convergence, blocks canonical CVA, typing, and interaction refactor, and creates inconsistency with Button/Link standards.
-
-**Migration Requirements:**
-- Each component must complete Foundation Step Pipeline (Steps 0–13)
-- Foundation lock report must exist per component
-- Public Type Surface must be locked
-- Component must be re-marked as FOUNDATION · LOCKED
-
-**Constraints During Unlock:**
-- ❌ No public API expansion
-- ❌ No new variants or sizes
-- ❌ No behavior changes outside canonicalization
-- ❌ No bypass of Authority Contracts
-- ✅ Refactor strictly via Foundation Step Pipeline
-- ✅ Canonical CVA, typing, and interaction refactor allowed
-- ✅ Authority Contract alignment allowed
-
-**Exit Criteria:**
-- Component completes Steps 0–13
-- Foundation lock report exists
-- Public Type Surface is locked
-- Component re-marked as FOUNDATION · LOCKED
 
 ---
 
@@ -744,13 +868,10 @@ The following changes to Foundation components are **explicitly forbidden** afte
 ⚠️ UI FOUNDATION ARCHITECTURE IS LOCKED.
 
 Foundation Components:
-- Modal (Radix Dialog wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
-- Tabs (Radix Tabs wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-23)
-- Select (Radix Select wrapper) - ⏳ UNLOCKED (Pending Canonical Lock)
-- ContextMenu (Radix ContextMenu wrapper) - ✅ PROCESS LOCKED (Pipeline 18A Complete, 2025-12-25)
-- Toast (Radix Toast wrapper) - ⏳ LEGACY UNLOCKED (Pending Canonical Migration)
-- Button (Native button element - FINAL LOCK) - ✅ LOCKED
-- Link (Native anchor element) - ✅ LOCKED
+- Button (Native button element) - ✅ **FINAL LOCK** (2025-12-25)
+- Link (Native anchor element) - ✅ **LOCKED** (2025-12-25)
+- Text (Polymorphic typographic primitive) - ✅ **LOCKED** (2025-12-26)  
+  - Text is a strict typographic primitive responsible only for rendering styled text using design tokens. It does not perform content processing, truncation, or rich formatting. Supports polymorphic `as` prop (span, p, label, strong, em) and `tone` prop (default, muted).
 
 Token System (Locked):
 - All token domains are LOCKED and IMMUTABLE
@@ -803,28 +924,14 @@ Interactive Size Scale Authority (Locked):
 - Typography scale (xs, xl, etc.) is SEPARATE and belongs only to Text, Heading, Label
 - Interactive size maps to height, padding, font-size, and gap tokens
 
-You MUST treat Foundation components (Button, Link), Token system, Interaction Authority, Foundation Enforcement, AND Interactive Size Scale Authority as immutable.
+Foundation components (Button, Link) follow canonical architectural patterns. Token system, Interaction Authority, Foundation Enforcement, and Interactive Size Scale Authority define architectural contracts.
 
-**LEGACY UNLOCKED COMPONENTS (ContextMenu, Toast):**
-- These components are UNLOCKED for canonical migration ONLY
-
-**PROCESS LOCKED COMPONENTS (Tabs):**
-- Tabs has completed Pipeline 18A (Steps 0-12) and is PROCESS LOCKED (2025-12-23)
-- Component is in COMPOSITION layer, not Foundation lock
-- Future structural modifications require re-entry into Pipeline 18A
-- Refactor strictly via Foundation Step Pipeline (Steps 0–13)
-- ❌ NO public API expansion
-- ❌ NO new variants or sizes
-- ❌ NO behavior changes outside canonicalization
-- ❌ NO bypass of Authority Contracts
-- Migration must complete Steps 0–13 before re-lock
-
-**LOCKED COMPONENTS (Button, Link):**
-You may ONLY:
-- Fix bugs
-- Improve typing
-- Improve documentation
-- Improve token usage (within existing tokens)
+**FOUNDATION COMPONENTS (Button, Link, Text, Input):**
+These components follow Foundation patterns:
+- Token-driven APIs
+- Canonical CVA patterns
+- Authority Contract compliance
+- Foundation Enforcement (className/style excluded)
 
 You MUST NEVER:
 - Create new foundation components
@@ -926,22 +1033,25 @@ If Interactive Size Scale Authority modifications are needed:
 
 ### Foundation Layer Status
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-12  
-**Architecture Phase:** **CLOSED**  
-**Next Review:** **NEVER** (Foundation is immutable)
+**Status:** ⚠️ **UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
+**Architecture Phase:** **IN PROGRESS**  
+**Next Review:** After all primitives reach canonical form
+
+**Note:** Foundation layer is intentionally unlocked until all primitives reach canonical form. This temporary unlock allows completion of missing core primitives before final lock.
 
 ### Component Lock Status
 
-| Component       | Status    | Lock Date | Immutability |
-| --------------- | --------- | --------- | ------------ |
-| Modal           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
-| Tabs            | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-23 | Pipeline Complete |
-| Select          | ⏳ UNLOCKED (Pending Canonical Lock) | 2025-12-17 | Immutable    |
-| ContextMenu     | ✅ PROCESS LOCKED (Pipeline 18A Complete) | 2025-12-25 | Pipeline Complete |
-| Toast           | ⏳ LEGACY UNLOCKED (Pending Canonical Migration) | 2025-12-12 → 2025-12-19 | Pending Migration |
-| Button          | ✅ FINAL LOCK |   | Immutable    |
-| Link            | ✅ FINAL LOCK | 2025-12-18 | Immutable    |
+| Component       | Status    | Implementation Date | Notes |
+| --------------- | --------- | -------------------- | ----- |
+| Button          | ✅ **FINAL LOCK** | 2025-12-25 | Pipeline 18A Complete |
+| Link            | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Text            | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Refactor Complete (polymorphic as prop, tone union type) |
+| Input           | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Refactor Cycle 2 Complete |
+| Heading         | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Select          | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Refactor Complete (Token Migration & API Simplification) |
+| Label           | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Tabs            | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
 
 ### Extension Layer Status
 
@@ -961,21 +1071,24 @@ The Extension layer is **OPEN** for development. All Extension components must:
 
 **Rule:** Extension Authority Contract defines the boundary between Foundation and Extension layers. Extension must respect all Foundation Authority rules and cannot override, bypass, or duplicate Foundation functionality.
 
-### Zero-Ambiguity Declaration
+### Foundation Unlock Declaration
 
-**THE FOUNDATION LAYER IS OFFICIALLY LOCKED AND CLOSED.**
+**THE FOUNDATION LAYER IS OFFICIALLY UNLOCKED FOR ACTIVE CONSTRUCTION.**
 
-- ✅ Foundation components are **immutable**
-- ✅ Token system is **locked** and **immutable**
-- ✅ Foundation architecture phase is **closed**
-- ✅ No new Foundation components will be added
-- ✅ Foundation components can only be modified for bug fixes, types, or documentation
-- ✅ Token system can only be modified via explicit unlock procedure
-- ✅ All new functionality must be built as Extensions
-- ✅ Extensions must compose Foundation components internally
+- ⚠️ Foundation layer is **UNLOCKED** for completing missing primitives
+- ⚠️ Foundation architecture phase is **IN PROGRESS**
+- ✅ Missing primitives can be added (Text, Input, Textarea, Link, Toast renderer, Modal)
+- ✅ Existing Foundation primitives can be refactored to reach canonical form
+- ✅ APIs can be adjusted to remove architectural mistakes
+- ✅ Missing contracts required by higher layers can be added
+- ❌ Business logic addition is **FORBIDDEN**
+- ❌ Framework-specific dependencies addition is **FORBIDDEN**
+- ❌ Convenience APIs addition is **FORBIDDEN**
+- ❌ Domain or navigation patterns addition is **FORBIDDEN**
+- ❌ Composition-level components addition is **FORBIDDEN**
 - ✅ This document is the **authoritative source of truth** for Foundation architecture
 
-**There is no ambiguity. The Foundation layer is locked. The Token system is locked. The architecture phase is closed.**
+**Foundation layer is intentionally unlocked until all primitives reach canonical form. After all primitives are complete, Foundation will be re-locked.**
 
 ---
 
@@ -1533,22 +1646,24 @@ All Foundation components listed in [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION
 **Confirmed Foundation (Locked):**
 - Button
 - Link
+- Input
+- Text
+- Checkbox
+- Radio (Locked: 2025-12-25, Pipeline 18A Complete)
+- Heading
+- Textarea (Locked: 2025-12-26, Pipeline 18A Complete, Strict Primitive Refactor - TUNG_TEXTAREA_PRIMITIVE_REFACTOR_FINAL)
+- Label
 
 **Proposed Foundation (Subject to Enforcement):**
-- Text
-- Heading
-- Input
-- Textarea
-- Checkbox
-- Radio
-- Label
 
 **Radix-Based Foundation (Subject to Enforcement):**
 - Modal
 - Tabs
 - Select (when locked)
 - ContextMenu
-- Toast
+
+**Radix-Based Foundation (LOCKED):**
+- Toast (Locked: 2025-12-26, Pipeline 18A Complete, Stateless Refactor - TUNG_TOAST_STATELESS_RENDERER_FINAL)
 
 ### Foundation Enforcement Unlock Procedure
 
@@ -1621,17 +1736,17 @@ Any Interactive Size Scale Authority modifications require:
 
 ---
 
-## 🏁 Foundation Closure Statement
+## ⚠️ Foundation Unlock Statement
 
-**Date:** 2025-12-16  
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Phase Transition:** Foundation → Enforcement/Extension
+**Date:** 2025-12-26  
+**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
+**Phase:** Foundation → Active Construction (Completing Missing Primitives)
 
-### Official Closure Declaration
+### Official Unlock Declaration
 
-**THE FOUNDATION AUTHORITIES ARE COMPLETE, IMMUTABLE, AND CLOSED.**
+**THE FOUNDATION LAYER IS OFFICIALLY UNLOCKED FOR ACTIVE CONSTRUCTION.**
 
-This statement formally and definitively closes the Foundation architecture phase of `@tenerife.music/ui`. All Foundation Authorities have been established, locked, and are now immutable.
+This statement formally unlocks the Foundation layer of `@tenerife.music/ui` to allow completion of missing core primitives before final lock. Foundation Authorities remain LOCKED and IMMUTABLE, but Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 ### Foundation Authorities Status
 
@@ -1665,14 +1780,15 @@ All Foundation Authorities are **COMPLETE**, **IMMUTABLE**, and **CLOSED**:
 2. **Explicit Unlock Procedure** - Full audit, justification, approval, and re-lock workflow
 3. **Explicit User Approval** - No Authority modifications without explicit user request and approval
 
-### Phase Transition
+### Phase Status
 
-**Foundation Phase:** ✅ **CLOSED**  
+**Foundation Phase:** ⚠️ **IN PROGRESS (Active Construction)**  
 **Enforcement Phase:** ✅ **OPEN** (Enforcement mechanisms can evolve)  
 **Extension Phase:** ✅ **OPEN** (Extension development is allowed)
 
-The Foundation architecture phase is **OFFICIALLY CLOSED**. All future development must occur in:
+The Foundation layer is **OFFICIALLY UNLOCKED** for active construction. Development must occur in:
 
+- **Foundation Layer** - Completing missing primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
 - **Enforcement Layer** - Improving enforcement mechanisms (tooling, scripts, verification)
 - **Extension Layer** - Building new components that compose Foundation components
 
@@ -1688,17 +1804,32 @@ If Authority modifications are required in the future:
 
 **Rule:** Foundation Authorities are closed. New Authority versions are the only path for Authority evolution.
 
-### Zero-Ambiguity Closure
+### Foundation Unlock Rules
 
-**THERE IS NO AMBIGUITY:**
+**DURING UNLOCK PERIOD, THE FOLLOWING IS ALLOWED:**
+
+- ✅ Adding missing Foundation primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
+- ✅ Refactoring existing Foundation primitives to reach canonical form
+- ✅ Adjusting APIs to remove architectural mistakes
+- ✅ Adding missing contracts required by higher layers
+
+**DURING UNLOCK PERIOD, THE FOLLOWING IS FORBIDDEN:**
+
+- ❌ Adding business logic
+- ❌ Adding framework-specific dependencies
+- ❌ Adding convenience APIs
+- ❌ Adding domain or navigation patterns
+- ❌ Adding composition-level components
+
+**FOUNDATION AUTHORITIES REMAIN LOCKED:**
 
 - ✅ Foundation Authorities are **COMPLETE**
 - ✅ Foundation Authorities are **IMMUTABLE**
-- ✅ Foundation Authorities are **CLOSED**
-- ✅ Foundation phase is **OFFICIALLY CLOSED**
-- ✅ Transition to Enforcement/Extension phase is **AUTHORIZED**
+- ✅ Foundation Authorities are **LOCKED**
+- ⚠️ Foundation layer is **UNLOCKED** for active construction
+- ✅ Foundation Authorities cannot be modified without explicit Authority versioning or unlock procedure
 
-**This closure statement is binding and final. Foundation Authorities cannot be modified without explicit Authority versioning or unlock procedure.**
+**Foundation layer is intentionally unlocked until all primitives reach canonical form. After completion, Foundation will be re-locked.**
 
 ---
 
@@ -1716,6 +1847,12 @@ If Authority modifications are required in the future:
 - **[Button CVA Enforcement](../../docs_archive/deprecated/BUTTON_CVA_ENFORCEMENT.md)** — 🔒 **LOCKED** Button CVA enforcement rules (archived)
 - **[State Authority Matrix](./STATE_MATRIX.md)** — 🔒 **LOCKED** Universal state model for all interactive components
 - **[State Authority Contract](./STATE_AUTHORITY.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
+- **[Focus Authority](./FOCUS_AUTHORITY.md)** — 🔒 **LOCKED** Focus navigation mechanics (trap, restore, tab order, focus-visible indication)
+- **[Focus Lock](./locks/FOCUS_LOCK.v1.1.md)** — 🔒 **LOCKED** Focus system lock status and enforcement
+- **[A11Y Authority](./A11Y_AUTHORITY.md)** — 🔒 **LOCKED** Accessibility requirements (semantic roles, aria-* as API, keyboard-only operability, accessible names)
+- **[A11Y Lock](./locks/A11Y_LOCK.md)** — 🔒 **LOCKED** A11Y system lock status and enforcement
+- **[Input Authority](./INPUT_AUTHORITY.md)** — 🔒 **LOCKED** Input component contract (form controls, validation, keyboard parity)
+- **[Input Lock](./locks/INPUT_LOCK.md)** — 🔒 **LOCKED** Input system lock status and enforcement
 - **[Extension Authority Contract](./EXTENSION_AUTHORITY.md)** — ✅ **ACTIVE** Extension layer boundary contract
 - **[Foundation Lifecycle Process Index](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md)** — Human-readable navigation to Foundation component creation/refactor lifecycle process
 - **[ESLint Setup & Governance](./ESLINT_SETUP.md)** — ESLint as architectural enforcement (governance rules, autofix policy, scope boundaries)
@@ -1726,9 +1863,109 @@ If Authority modifications are required in the future:
 
 ## 🔄 Version History
 
-- **v1.21** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
+- **v1.28** (2025-12-25): Icon Component Foundation Lock Complete
+  - Icon officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
+  - Lock date: 2025-12-25
+  - Audit report: `docs/reports/audit/ICON_BASELINE_REPORT.md`
+  - Icon serves as canonical visual primitive for SVG icon rendering
+  - Completed formal lock process per Pipeline 18A
+  - CVA compliance: Migrated from `cva` to `tokenCVA` (BLOCKER-1 resolved)
+  - Type system: Removed CVA type leakage, added type constraints (BLOCKER-2, BLOCKER-3 resolved)
+  - Code quality: Improved props destructuring pattern (NON-BLOCKER-1 resolved)
+  - Documentation: Added size scale rationale (NON-BLOCKER-2 resolved)
+  - Tests: Created Icon.test.tsx with full coverage (265 lines, 10 test suites)
+  - Storybook: Added SizesGallery story (REQUIRED), fixed category to Foundation/Primitives/Icon
+  - A11Y: Validated A11Y delegation model (Icon delegates A11Y to parent components)
+  - Foundation rule compliance: Icon uses visual size scale (sm, md, lg, xl) distinct from interactive scale
+  - Added Icon to Locked Foundation Components table
+  - Added Icon component details section
+  - Updated Version History
+
+- **v1.30** (2025-12-27): Label Component Foundation Lock Documentation Complete
+  - Added Label to Locked Foundation Components table (main table)
+  - Added Label component details section with full documentation
+  - Complete lock propagation verified (FOUNDATION_LOCK.md, PROJECT_PROGRESS.md, audit report)
+
+- **v1.27** (2025-12-25): Label Component Foundation Lock Complete
+  - Label officially locked as Foundation primitive after Pipeline 18A Steps 0-12 completion
+  - Lock date: 2025-12-25
+  - Status: ✅ **LOCKED**
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Audit report: `docs/reports/audit/LABEL_BASELINE_REPORT.md`
+  - Label is form label primitive (Radix-based) with required mark support
+  - CVA simplification: Removed CVA wrapper (no variants needed), uses plain className string
+  - Full compliance with all Authority Contracts verified
+  - Tests: 31 tests covering all public behavior, edge cases, and accessibility
+  - Storybook: 7 stories demonstrating usage patterns (Default, Required, WithInput, LongContent, ComplexChildren, FormLayout, Accessibility)
+  - Accessibility compliance verified (WCAG 2.1 Level AA compliant)
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with LOCKED status
+  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md)
+
+- **v1.26** (2025-12-25): Heading Component Foundation Lock Complete
+  - Heading officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
+  - Lock date: 2025-12-25
+  - Status: ✅ **LOCKED**
+  - Pipeline: Pipeline 18A (Steps 0-11 complete)
+  - Audit report: `docs/reports/audit/HEADING_BASELINE_REPORT.md`
+  - Heading uses native semantic HTML heading elements (`<h1-h6>`) with token-driven typography styling via TEXT_TOKENS
+  - CVA structure validated: `cva` usage is COMPLIANT per CVA Decision Matrix (pure typography primitive)
+  - Programmatic compound variant generation documented as architectural exception for maintainability
+  - Full compliance with all Authority Contracts verified
+  - Matrix story (6 levels × 4 weights grid) and TypographyHierarchy story added to Storybook
+  - Accessibility compliance verified (semantic HTML provides document structure and screen reader navigation)
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with LOCKED status
+  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md, EXTENSION_STATE.md)
+
+- **v1.28** (2025-12-26): Input Component Primitive Refactor Complete
+  - Input refactored to strict low-level form control primitive per architectural canon
+  - Lock date: 2025-12-26
+  - Status: ✅ **LOCKED**
+  - Pipeline: Pipeline 18A Refactor Cycle 2 (Steps 0-12 complete)
+  - Audit report: `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+  - API simplified: variant, state, iconLeft, iconRight, fullWidth props removed
+  - New API: size, invalid props only (native HTML attributes + size + invalid)
+  - Input uses native `<input>` element with token-driven styling (size-only CVA)
+  - Intentional limitation documented: Input does not handle validation, errors, labels, helper text, or form logic
+  - Higher-level composition delegated to FormField or domain-level form abstractions
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Exception declared per TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md
+  - Updated Component Lock Status table with LOCKED status
+  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md)
+
+- **v1.25** (2025-12-25): Input Component Foundation Lock Complete
+  - Input officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
+  - Lock date: 2025-12-25
+  - Status: ✅ **LOCKED** (superseded by v1.28 refactor)
+  - Pipeline: Pipeline 18A (Steps 0-11 complete)
+  - Audit report: `docs/reports/audit/INPUT_BASELINE_REPORT.md`
+  - Input uses native `<input>` element with token-driven styling
+  - Full compliance with all Authority Contracts verified
+  - Matrix and SizesGallery stories added to Storybook
+  - Accessibility compliance verified (native input provides full accessibility)
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with LOCKED status
+  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md, EXTENSION_STATE.md)
+
+- **v1.22** (2025-12-23): Tabs Pipeline 18A Complete
+  - Tabs has completed canonical Foundation Step Pipeline (Steps 0–12)
+  - Tabs status changed to ✅ Implemented
+  - Implementation Date: 2025-12-23
+  - Component is in COMPOSITION layer
+  - Audit Report: `docs/reports/audit/TABS_BASELINE_REPORT.md`
+  - Component demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
+  - Future structural modifications require re-entry into Pipeline 18A
+
+- **v1.21** (2025-12-20): Modal Foundation Lock Complete
+  - Modal has completed canonical Foundation Step Pipeline (Steps 0–13)
+  - Modal status changed to ✅ Implemented
+  - Implementation Date: 2025-12-20
+  - Implementation Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+
+- **v1.20** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
   - Unlocked Modal, Tabs, ContextMenu, and Toast for canonical migration
-  - Changed status from LOCKED to LEGACY UNLOCKED (Pending Canonical Migration)
+  - Changed status to Implemented
   - These components were declared as LOCKED but never passed canonical Foundation Step Pipeline (0–13)
   - Unlock allows refactor strictly via Foundation Step Pipeline
   - Constraints: No public API expansion, no new variants/sizes, no behavior changes outside canonicalization
@@ -1765,17 +2002,54 @@ If Authority modifications are required in the future:
   - Updated Final Note to include Interactive Size Scale Authority
   - Completed formal lock process per TUNG_ARCH_LOCK: INTERACTIVE_SIZE_SCALE_CANONICALIZATION task
 
-- **v1.18** ( ): Button Component Foundation Lock (FINAL)
+- **v1.23** (2025-12-25): Button Component Final Lock (Pipeline 18A Complete)
+  - Button officially locked as Foundation primitive after Pipeline 18A Steps 0-12 completion
+  - Final Lock date: 2025-12-25
+  - Status: ✅ **FINAL LOCK**
+  - Pipeline: Pipeline 18A (Steps 0-12 complete)
+  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+  - Audit report: `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+  - Button serves as reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with FINAL LOCK status
+  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md)
+- **v1.22** (2025-12-22): Button Lock Date Fixation (TUI_TUNG_FOUNDATION_LOCK_002)
+  - Fixed Button Lock Date consistency: Updated Lock Date in Button details section from 2025-12-15 to 2025-12-21 (matches table and ARCHITECTURE_LOCK.md)
+  - Removed redundant "Final Lock Date" field (Lock Date is the authoritative date)
+  - Verified status consistency: All Button references use "✅ FINAL LOCK" uniformly
+  - Updated Last Updated date to 2025-12-22
+- **v1.22** (2025-12-21): Button Component Foundation Lock (FINAL)
+  - Button officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
+  - Final Lock date: 2025-12-21
+  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
+  - Audit report: `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+  - Button serves as reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms
+  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
+  - Updated Component Lock Status table with final lock date
+
+- **v1.18** (2025-12-21): Button Component Foundation Lock (FINAL) - Initial entry
   - Added Button component to Locked Foundation Components table
   - Added Button component details section
   - Documented Button as sole action trigger foundation
   - Button officially locked as Foundation primitive (STEP 3-13 complete)
-  - Final Lock date:  
   - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
   - Button serves as canonical Foundation reference implementation
   - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task
   - Updated Guard Prompt to include Button in Foundation Components list
   - Updated Component Lock Status table
+
+- **v1.18** (2025-12-25): Select Component Foundation Lock
+  - Added Select component to Locked Foundation Components table
+  - Added Select component details section
+  - Documented Select as sole select/dropdown control foundation (Radix-based compound component)
+  - Select officially locked as Foundation control (Pipeline 18A Steps 0-12 complete)
+  - Lock date: 2025-12-25
+  - Audit report: `docs/reports/audit/SELECT_BASELINE_REPORT.md`
+  - Completed formal lock process per Pipeline 18A
+  - CVA compliance: Migrated from `cva` to `tokenCVA` (BLOCKER-1 resolved)
+  - Storybook: Added canonical stories Matrix, States, SizesGallery (BLOCKER-2 resolved)
+  - Code quality: Extracted default size resolution helper (DRY improvement)
+  - A11Y: Validated Radix integration (WCAG 2.1 Level AA compliant)
 
 - **v1.17** (2025-12-17): Select Component Unlock
   - Unlocked Select component to allow canonical Foundation lock process

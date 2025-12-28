@@ -89,12 +89,28 @@ export function HoverCardRoot({
   // Resolve delay tokens to milliseconds
   const openDelayMs = React.useMemo(() => {
     const baseDelay = getBaseValue(openDelay);
-    return baseDelay ? getDurationMs(baseDelay) : 0;
+    if (!baseDelay) {
+      return 0;
+    }
+    // If baseDelay is a number, use it directly (for tests and direct numeric values)
+    if (typeof baseDelay === "number") {
+      return baseDelay;
+    }
+    // If baseDelay is a string token, convert it using getDurationMs
+    return getDurationMs(baseDelay);
   }, [openDelay]);
 
   const closeDelayMs = React.useMemo(() => {
     const baseDelay = getBaseValue(closeDelay);
-    return baseDelay ? getDurationMs(baseDelay) : 300; // Default 300ms
+    if (!baseDelay) {
+      return 300; // Default 300ms
+    }
+    // If baseDelay is a number, use it directly (for tests and direct numeric values)
+    if (typeof baseDelay === "number") {
+      return baseDelay;
+    }
+    // If baseDelay is a string token, convert it using getDurationMs
+    return getDurationMs(baseDelay);
   }, [closeDelay]);
 
   const isControlled = controlledOpen !== undefined;

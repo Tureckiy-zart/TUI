@@ -11,7 +11,7 @@
  * This is a FOUNDATION requirement for token-driven architectures.
  */
 
-import { mkdirSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import type { ColorToken } from "../src/FOUNDATION/tokens/types/index";
 

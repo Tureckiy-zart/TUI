@@ -31,7 +31,6 @@ export type {
   AnimationProps,
   ComponentAnimationConfig,
   PresetConfig,
-  Spring,
   SpringConfig,
   TransitionConfig,
 } from "./types";

@@ -11,7 +11,7 @@ import type { CONTEXT_MENU_TOKENS } from "../components/context-menu";
 import type { MODAL_TOKENS } from "../components/modal";
 import type { SELECT_TOKENS } from "../components/select";
 import type { TABS_TOKENS } from "../components/tabs";
-import type { durations, easings, transitions } from "../motion";
+import type { motionDurations, motionEasings, motionTransitions } from "../motion/v2";
 import type { borderRadius } from "../radius";
 import type {
   accentColoredShadows,
@@ -142,23 +142,26 @@ export type TextLineHeightToken = keyof typeof lineHeight;
 export type TextLetterSpacingToken = "tighter" | "tight" | "normal" | "wide" | "wider" | "widest";
 
 // ============================================================================
-// MOTION TOKENS
+// MOTION TOKENS (V2)
 // ============================================================================
 
 /**
  * Motion duration token keys
+ * Available: fast, normal, slow, reduced
  */
-export type MotionDurationToken = keyof typeof durations;
+export type MotionDurationToken = keyof typeof motionDurations;
 
 /**
  * Motion easing token keys
+ * Available: soft, standard, emphasized
  */
-export type MotionEasingToken = keyof typeof easings;
+export type MotionEasingToken = keyof typeof motionEasings;
 
 /**
  * Motion transition token keys
+ * Available: fast, normal, slow, soft, reduced
  */
-export type MotionTransitionToken = keyof typeof transitions;
+export type MotionTransitionToken = keyof typeof motionTransitions;
 
 /**
  * Combined motion token (duration, easing, or transition)

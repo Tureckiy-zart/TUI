@@ -27,7 +27,7 @@ import { Button } from "./Button";
  */
 
 const meta: Meta<typeof Button> = {
-  title: "Foundation Locked/Button",
+  title: "UI / Primitives / Button",
   component: Button,
   parameters: {
     layout: "centered",

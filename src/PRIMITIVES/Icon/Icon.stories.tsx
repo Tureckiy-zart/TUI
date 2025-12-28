@@ -8,7 +8,7 @@ import { Input } from "@/PRIMITIVES/Input";
 import { Icon } from "./Icon";
 
 const meta: Meta<typeof Icon> = {
-  title: "Foundation Locked/Primitives/Icon",
+  title: "UI / Primitives / Icon",
   component: Icon,
   parameters: {
     layout: "centered",

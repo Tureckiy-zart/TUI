@@ -17,8 +17,7 @@ import {
   type TextColors,
   textColors as baseTextColors,
 } from "@/FOUNDATION/tokens/colors";
-import { motionCSSVariables } from "@/FOUNDATION/tokens/motion";
-import { motionV2CSSVariables } from "@/FOUNDATION/tokens/motion/v2";
+import { motionCSSVariables } from "@/FOUNDATION/tokens/motion/v2";
 import { radiusCSSVariables } from "@/FOUNDATION/tokens/radius";
 import { shadowCSSVariables } from "@/FOUNDATION/tokens/shadows";
 import { spacingCSSVariables } from "@/FOUNDATION/tokens/spacing";
@@ -396,22 +395,13 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     console.error("[Theme] Failed to set destructive colors:", error);
   }
 
-  // Motion CSS variables (from motion tokens) - non-color, but wrap for consistency
+  // Motion CSS variables
   try {
     Object.entries(motionCSSVariables).forEach(([key, value]) => {
       root.style.setProperty(key, value);
     });
   } catch (error) {
     console.error("[Theme] Failed to set motion CSS variables:", error);
-  }
-
-  // Motion V2 CSS variables (from motion v2 tokens)
-  try {
-    Object.entries(motionV2CSSVariables).forEach(([key, value]) => {
-      root.style.setProperty(key, value);
-    });
-  } catch (error) {
-    console.error("[Theme] Failed to set motion V2 CSS variables:", error);
   }
 
   // Radius CSS variables (static, doesn't depend on mode)

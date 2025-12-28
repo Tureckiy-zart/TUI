@@ -1,1972 +1,2392 @@
-# 🔒 Final Foundation Lock
+🔧 Macro Execution Model (ADDED)
 
-**Version:** 1.23  
-**Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-25  
-**Status:** ✅ **LOCKED**  
-**Layer:** UI / ARCHITECTURE  
-**Priority:** CRITICAL  
-**Architecture Phase:** FOUNDATION — **CLOSED**
+This pipeline operates under a three-phase execution model.
+
+This model does not replace the step-by-step structure below.
+It defines how the steps are interpreted and sequenced in practice.
+
+PHASE A — ANALYZE (STEP 0–8)
+
+Purpose: understand and evaluate the current state.
+
+During this phase:
+
+the component is inspected, classified, and reasoned about,
+
+architectural and quality issues are identified,
+
+refactoring opportunities are discovered.
+
+Refactoring may occur in this phase only when explicitly allowed by the current STEP
+and must remain strictly scoped.
+
+The outcome of PHASE A is clarity, not finality.
+
+PHASE B — FIX (MANDATORY)
+
+Purpose: apply intentional code improvements based on findings from PHASE A.
+
+PHASE B is a required consolidation phase.
+It exists because code produced at scale cannot be trusted by default
+and must be deliberately improved to meet best practices.
+
+During this phase:
+
+identified issues are addressed,
+
+code readability, structure, and maintainability are improved,
+
+duplication is reduced where it introduces maintenance risk,
+
+confusing or incidental complexity is removed.
+
+PHASE B is executed explicitly as **STEP 9** in the step-by-step pipeline below.
+
+Skipping PHASE B is only allowed if the audit report explicitly records:
+
+No refactor required after STEP 8
+
+### Refactor Classification (REFERENCE)
+
+**Quality Refactor**
+
+Changes that improve readability, naming, internal structure,
+
+or reduce duplication **without altering component responsibilities
+
+or public API**.
+
+**Structural Refactor**
+
+Changes that alter component boundaries, responsibility distribution,
+
+file structure, or public surface.
+
+Quality refactors are expected during the FIX phase.
+
+Structural refactors are allowed **only** when explicitly declared,
+
+justified in the audit report, and re-validated against architectural constraints.
+
+PHASE C — PROVE & LOCK (STEP 10–12)
+
+Purpose: prove correctness, stability, and readiness for lock.
+
+During this phase:
+
+behavior is validated via tests,
+
+usage and intent are demonstrated via Storybook,
+
+accessibility is audited and corrected,
+
+final architectural decisions are recorded and locked.
+
+PHASE C assumes that the code has already been intentionally improved.
+
+Tests and Storybook are built on top of refactored code, not used as a substitute for refactoring.
+
+# **18A — Component Review & Improvement Pipeline (Refined)**
+
+**Canonical:** YES (single source of truth for the pipeline)
+
+> Note: **This pipeline document is not an audit report.** Audit reports are per-component files created in STEP 0 (e.g. `docs/reports/audit/BUTTON_BASELINE_REPORT.md`).
+> 
+> **Important:** This header applies only to the pipeline document; audit reports must not use 'canonical/locked/final' terminology until STEP 12.
+
+**Status:** ACTIVE (Refinement of existing process, not a replacement)
+
+**Scope:** Foundation / Extension components
+
+**Purpose:** Consistent, repeatable improvement of component quality, architecture, and usability.
+
+> This document is intentionally verbose. It is written as a **process control document**, not a checklist.
+>
+> The goal is not speed, but **predictable, high‑quality outcomes**.
 
 ---
 
-## Document Classification
+## 🔗 TUNG System
+This pipeline is based on the **TUNG (Task Unified Next-Gen)** system.
+The full system specification and task templates can be found here:
+- 📄 [TUNG System Specification](../tung_system_specification.md)
+- 📄 [TUNG Step Template](templates/FOUNDATION_STEP_TUNG_TEMPLATE.json)
 
-**TYPE:** META  
-**MUTABILITY:** EVOLVABLE  
-**LOCK STATUS:** ✅ LOCKED  
-**AUTHORITY DOMAIN:** Foundation Lock
-
-**Purpose:** This document tracks lock status across all Foundation domains. It can be updated as new domains are locked, but cannot unlock existing locks.
-
----
-
-## 📋 Purpose
-
-This document **formally and definitively locks** the Foundation layer of `@tenerife.music/ui`. The Foundation layer is **complete**, **immutable**, and **closed for modifications**.
-
-**This document is the authoritative source of truth** for the Foundation layer architecture. It supersedes all previous architectural decisions and establishes the final, binding contract for Foundation components.
-
-**After this lock, the Foundation architecture phase is officially closed.** All future development must occur exclusively in the Extension layer.
+## 🤖 AI Model Recommendations
+Each pipeline step has a recommended AI model for optimal execution.
+See the complete model usage guide:
+- 📄 [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
 
 ---
 
-## 📖 Authority Status Semantics
-
-This section defines the precise semantics of status terms used throughout Foundation Authority documents. These definitions eliminate ambiguity and ensure consistent interpretation across all Authority documentation.
-
-### Status Terms
-
-#### ACTIVE
-
-**Definition:** `ACTIVE` means the Authority is **in force and governs the system**.
-
-**Semantics:**
-- ✅ Authority rules are **currently enforced** and **actively applied**
-- ✅ Authority is **operational** and **binding** for all components
-- ✅ Authority **must be followed** by all implementations
-- ❌ **ACTIVE does NOT mean editable** - ACTIVE Authorities are still immutable
-- ❌ **ACTIVE does NOT mean unlocked** - ACTIVE Authorities still require unlock procedure for modifications
-
-**Usage:** ACTIVE status indicates that the Authority is the current, authoritative source of rules for its domain. All components must comply with ACTIVE Authorities.
-
-**Example:** `SPACING_AUTHORITY.md` has status `ACTIVE` - this means spacing rules are in force and must be followed, but the Authority document itself is still immutable and requires unlock procedure to modify.
-
-#### LOCKED
-
-**Definition:** `LOCKED` means the Authority content **cannot be modified without explicit unlock procedure**.
-
-**Semantics:**
-- ✅ Authority document content is **protected from modification**
-- ✅ Changes require **explicit unlock workflow** (justification, audit, approval)
-- ✅ Authority rules are **frozen** and **cannot be altered in-place**
-- ✅ LOCKED status is **stronger than ACTIVE** in terms of modification protection
-- ❌ **LOCKED does NOT mean inactive** - LOCKED Authorities are still in force and must be followed
-
-**Usage:** LOCKED status indicates that the Authority has completed formal lock process and is protected by unlock procedure requirements.
-
-**Example:** `INTERACTION_AUTHORITY.md` has status `LOCKED` - this means the document content cannot be modified without explicit unlock procedure, but the Authority rules are still in force and must be followed.
-
-#### IMMUTABLE
-
-**Definition:** `IMMUTABLE` means the Authority rules themselves **cannot be altered in-place**.
-
-**Semantics:**
-- ✅ Authority rules are **permanently fixed** in their current form
-- ✅ Rules cannot be **modified, removed, or reinterpreted** without new Authority version
-- ✅ IMMUTABLE is a **property of Authority rules**, not document status
-- ✅ All Foundation Authority rules are IMMUTABLE regardless of ACTIVE/LOCKED status
-- ❌ **IMMUTABLE does NOT mean unchangeable forever** - new Authority versions can be created
-
-**Usage:** IMMUTABLE describes the nature of Authority rules - they are fixed declarations of architectural law that cannot be modified in-place.
-
-**Example:** All Authority documents have `IMMUTABLE` mutability - this means their rules cannot be altered in-place, but new Authority versions can be created if needed.
-
-### Status vs Mutability
-
-**Important Distinction:**
-
-- **Status (ACTIVE/LOCKED)** = **Operational state** and **modification protection level**
-  - ACTIVE = Authority is in force (operational)
-  - LOCKED = Authority content is protected (modification protection)
-
-- **Mutability (IMMUTABLE/EVOLVABLE)** = **Rule changeability** and **document evolution capability**
-  - IMMUTABLE = Rules cannot be altered in-place (applies to Authority rules)
-  - EVOLVABLE = Document can evolve (applies to Enforcement/Reference/Meta documents)
-
-### Status Combinations
-
-**ACTIVE + IMMUTABLE:**
-- Authority is **in force** (ACTIVE)
-- Authority rules **cannot be altered in-place** (IMMUTABLE)
-- Authority document **can be modified** only via unlock procedure
-- **Example:** `SPACING_AUTHORITY.md` - spacing rules are in force, but rules themselves are immutable
-
-**LOCKED + IMMUTABLE:**
-- Authority content is **protected from modification** (LOCKED)
-- Authority rules **cannot be altered in-place** (IMMUTABLE)
-- Authority document **requires explicit unlock** for any modifications
-- **Example:** `INTERACTION_AUTHORITY.md` - interaction rules are locked and immutable
-
-**ACTIVE + EVOLVABLE:**
-- Document is **operational** (ACTIVE)
-- Document content **can evolve** (EVOLVABLE)
-- **Example:** `scripts/verify-interaction-authority.mjs` - script is active and can be enhanced
-
-### Key Principles
-
-1. **ACTIVE ≠ Editable**
-   - ACTIVE means "in force", not "can be edited"
-   - All ACTIVE Authorities are still immutable and require unlock procedure
-
-2. **LOCKED ≠ Inactive**
-   - LOCKED means "protected from modification", not "not in use"
-   - All LOCKED Authorities are still in force and must be followed
-
-3. **IMMUTABLE = Rule Immutability**
-   - IMMUTABLE applies to Authority rules themselves
-   - New Authority versions can be created, but existing rules cannot be altered in-place
-
-4. **Status and Mutability are Independent**
-   - ACTIVE/LOCKED describes operational state and protection level
-   - IMMUTABLE/EVOLVABLE describes rule changeability and document evolution
-
-### Authority Evolution Path
-
-If Authority modifications are required:
-
-1. **For ACTIVE Authorities:** Still require unlock procedure (ACTIVE does not mean editable)
-2. **For LOCKED Authorities:** Require explicit unlock procedure (LOCKED means protected)
-3. **For IMMUTABLE Rules:** Create new Authority version (existing rules cannot be altered in-place)
-
-**Rule:** All Foundation Authorities (regardless of ACTIVE/LOCKED status) are IMMUTABLE and require unlock procedure or new versioning for modifications.
-
-### Enforcement Document Semantics
-
-This subsection clarifies the semantics of LOCKED and EVOLVABLE statuses specifically for Enforcement documents, to eliminate false perception of Enforcement mechanisms as immutable.
-
-#### Law vs Mechanism Distinction
-
-**Fundamental Principle:**
-
-- **Authority Documents** define **WHAT** the rules are (architectural law)
-- **Enforcement Documents** define **HOW** rules are enforced (mechanisms and tools)
-
-**Authority = Law (IMMUTABLE):**
-- Authority documents declare architectural rules
-- Rules are immutable declarations of architectural law
-- Rules cannot be altered without unlock procedure or new versioning
-
-**Enforcement = Mechanism (EVOLVABLE):**
-- Enforcement documents describe enforcement mechanisms
-- Mechanisms can evolve to improve detection, accuracy, and coverage
-- Mechanisms can be improved without Authority unlock procedure
-
-#### LOCKED (Enforcement) Semantics
-
-**Definition:** `LOCKED` for Enforcement documents means **rules are binding, but mechanism is evolvable**.
-
-**Semantics:**
-- ✅ Enforcement rules are **binding** and **must be followed**
-- ✅ Enforcement mechanisms **can evolve** to improve tooling
-- ✅ Enforcement can be **enhanced** without Authority unlock procedure
-- ✅ Enforcement can be **improved** (better detection, accuracy, coverage)
-- ❌ **LOCKED (Enforcement) does NOT mean immutable** - mechanisms can change
-- ❌ **LOCKED (Enforcement) does NOT require Authority unlock** - mechanisms can evolve independently
-
-**Usage:** LOCKED status for Enforcement documents indicates that the enforcement rules are binding, but the mechanisms themselves can evolve as tooling improves.
-
-**Example:** `INTERACTION_AUTHORITY_GUARD_LAYER.md` has status `LOCKED` and mutability `EVOLVABLE` - this means:
-- The guard layer rules are binding (LOCKED)
-- The enforcement mechanisms can evolve (EVOLVABLE)
-- Mechanisms can be improved without unlocking Interaction Authority
-- Better detection patterns can be added without Authority modification
-
-#### EVOLVABLE (Enforcement) Semantics
-
-**Definition:** `EVOLVABLE` for Enforcement documents means **mechanisms can evolve without Authority unlock**.
-
-**Semantics:**
-- ✅ Enforcement mechanisms **can be improved** (better tooling, detection, accuracy)
-- ✅ Enforcement patterns **can evolve** (new verification methods, enhanced scripts)
-- ✅ Enforcement can be **enhanced** without Authority modification
-- ✅ Enforcement can be **updated** to improve coverage and accuracy
-- ❌ **EVOLVABLE does NOT mean Authority rules can change** - only mechanisms evolve
-- ❌ **EVOLVABLE does NOT allow Authority rule modifications** - Authority remains immutable
-
-**Usage:** EVOLVABLE mutability for Enforcement documents indicates that enforcement mechanisms can evolve to improve how rules are checked, but the underlying Authority rules remain immutable.
-
-**Example:** `scripts/verify-interaction-authority.mjs` has status `ACTIVE` and mutability `EVOLVABLE` - this means:
-- The script is operational (ACTIVE)
-- The script can be enhanced (EVOLVABLE)
-- Better verification methods can be added
-- Script improvements do not require Interaction Authority unlock
-
-#### Enforcement Evolution Rules
-
-**What Can Evolve (Without Authority Unlock):**
-
-- ✅ Enforcement mechanisms (scripts, tools, verification methods)
-- ✅ Detection patterns (better rule checking, enhanced coverage)
-- ✅ Tooling improvements (faster checks, better accuracy)
-- ✅ Verification methods (new testing approaches, enhanced validation)
-- ✅ Enforcement documentation (better examples, clearer instructions)
-
-**What Cannot Change (Requires Authority Unlock):**
-
-- ❌ Authority rules themselves (require Authority unlock)
-- ❌ What rules are enforced (require Authority modification)
-- ❌ Rule definitions (require Authority versioning)
-- ❌ Architectural law (require Authority unlock procedure)
-
-#### Key Principles for Enforcement
-
-1. **LOCKED (Enforcement) = Rules Binding, Mechanism Evolvable**
-   - Enforcement rules are binding and must be followed
-   - Enforcement mechanisms can evolve without Authority unlock
-
-2. **Authority Defines Law, Enforcement Defines Tools**
-   - Authority documents declare immutable architectural law
-   - Enforcement documents describe evolvable enforcement mechanisms
-
-3. **Enforcement Can Change Without Authority Unlock**
-   - Enforcement mechanisms can be improved independently
-   - Better tooling does not require Authority modification
-   - Enhanced detection does not require Authority unlock
-
-4. **Foundation Authority Remains Inviolable**
-   - Authority rules are immutable regardless of Enforcement evolution
-   - Enforcement changes do not affect Authority rules
-   - Authority unlock is only needed for rule modifications
-
-**Rule:** Enforcement documents are EVOLVABLE - their mechanisms can evolve to improve rule enforcement, but the underlying Authority rules remain immutable and inviolable.
-
-### Guard Layer Intent
-
-This subsection declares the intentional design and purpose of Guard Layer documents to prevent attempts to "optimize" or "simplify" them for human readability.
-
-#### Machine-Oriented Design
-
-**Fundamental Principle:**
-
-- **Guard Layer documents are optimized for AI enforcement, not human readability**
-- **Verbosity is intentional** - comprehensive coverage is prioritized over brevity
-- **Machine parsing is the primary concern** - human readability is secondary
-
-**Design Intent:**
-
-- ✅ Guard documents are **machine-readable** specifications for AI agents
-- ✅ Guard documents use **explicit, exhaustive patterns** for rule checking
-- ✅ Guard documents prioritize **completeness over conciseness**
-- ✅ Guard documents are **verbatim instruction sets** for automated enforcement
-- ❌ Guard documents are **NOT optimized for human reading**
-- ❌ Guard documents are **NOT meant to be concise or elegant**
-
-**Usage:** Guard Layer documents serve as comprehensive, machine-oriented specifications that AI agents can parse and apply mechanically. They are intentionally verbose to ensure complete coverage of all enforcement patterns.
-
-**Example:** `INTERACTION_AUTHORITY_GUARD_LAYER.md` is intentionally verbose with exhaustive pattern lists, explicit rule formulations, and comprehensive coverage - this verbosity ensures AI agents can mechanically check all interaction authority rules without ambiguity.
-
-#### Intentional Verbosity
-
-**Why Guard Documents Are Verbose:**
-
-1. **Complete Coverage** - Verbosity ensures all edge cases and patterns are explicitly covered
-2. **Machine Parsing** - Explicit formulations reduce ambiguity for AI agents
-3. **Mechanical Enforcement** - Comprehensive patterns enable automated rule checking
-4. **Zero Ambiguity** - Verbose specifications eliminate interpretation differences
-5. **AI Optimization** - Detailed instructions work better for AI agents than concise summaries
-
-**What Verbosity Provides:**
-
-- ✅ **Exhaustive pattern lists** - All forbidden/allowed patterns explicitly listed
-- ✅ **Explicit rule formulations** - Rules stated verbatim, not summarized
-- ✅ **Comprehensive examples** - Multiple examples for each pattern type
-- ✅ **Mechanical checkability** - Patterns that can be mechanically verified
-- ✅ **Zero interpretation** - No room for different interpretations
-
-**Rule:** Guard Layer verbosity is intentional and necessary for machine-oriented enforcement. Attempts to "optimize" or "simplify" Guard documents for human readability are forbidden.
-
-#### Human Refactoring Prohibition
-
-**Forbidden Actions:**
-
-- ❌ **Forbidden:** "Simplifying" Guard documents for readability
-- ❌ **Forbidden:** "Optimizing" Guard documents for human consumption
-- ❌ **Forbidden:** "Refactoring" Guard documents to be more concise
-- ❌ **Forbidden:** "Cleaning up" Guard documents for elegance
-- ❌ **Forbidden:** Removing "redundant" patterns or examples
-- ❌ **Forbidden:** Summarizing explicit rule formulations
-
-**Allowed Actions:**
-
-- ✅ **Allowed:** Adding new enforcement patterns (improving coverage)
-- ✅ **Allowed:** Enhancing detection mechanisms (better tooling)
-- ✅ **Allowed:** Improving verification methods (better accuracy)
-- ✅ **Allowed:** Adding more examples (better coverage)
-- ✅ **Allowed:** Clarifying ambiguous patterns (fixing errors)
-
-**Rule:** Human refactoring of Guard Layer documents for readability, conciseness, or elegance is **FORBIDDEN**. Guard documents can only be modified to improve enforcement coverage, detection accuracy, or fix errors - never for human readability optimization.
-
-#### Guard Layer vs Authority/Enforcement
-
-**Guard Layer (Machine-Oriented):**
-- Optimized for AI enforcement
-- Verbose and explicit
-- Comprehensive pattern coverage
-- Machine-readable specifications
-- Human readability is secondary
-
-**Authority Documents (Human-Oriented):**
-- Optimized for human understanding
-- Clear and concise
-- Conceptual rule definitions
-- Human-readable declarations
-- Machine parsing is secondary
-
-**Enforcement Documents (Hybrid):**
-- Balance between human and machine needs
-- Can be optimized for either audience
-- Tooling and mechanism descriptions
-- Flexible optimization approach
-
-**Rule:** Guard Layer documents are the only documents explicitly optimized for machine consumption. Authority documents are human-oriented, and Enforcement documents can balance both needs. Guard Layer must remain machine-optimized.
-
-#### Key Principles for Guard Layer
-
-1. **Machine-Oriented, Not Human-Optimized**
-   - Guard documents are optimized for AI enforcement
-   - Human readability is not a priority
-   - Verbosity is intentional and necessary
-
-2. **Verbosity is Intentional**
-   - Complete coverage requires verbosity
-   - Explicit patterns reduce ambiguity
-   - Comprehensive examples enable mechanical checking
-
-3. **Human Refactoring is Forbidden**
-   - Guard documents cannot be "simplified" for readability
-   - Guard documents cannot be "optimized" for human consumption
-   - Guard documents can only be enhanced for better enforcement
-
-4. **Guard Layer is Separate from Authority/Enforcement**
-   - Guard Layer is machine-oriented (unlike Authority)
-   - Guard Layer is machine-oriented (unlike most Enforcement)
-   - Guard Layer serves a unique purpose: AI enforcement specifications
-
-**Rule:** Guard Layer documents are machine-oriented enforcement specifications. Their verbosity is intentional, and human refactoring for readability is forbidden. Guard documents can only be modified to improve enforcement coverage, detection accuracy, or fix errors.
+## 🚀 Quick Start Guide
+
+**Before starting the pipeline:**
+1. Identify component name (use exported name, e.g., `Button`, not `button`)
+2. Determine layer: Foundation or Extension
+3. Prepare audit report path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+4. Open recommended AI model (see AI Models Usage Guide)
+
+**Pipeline execution order:**
+- **STEP 0** → Create baseline (Sonnet 4.5)
+- **STEP 1–8** → Analyze and document (Sonnet/Opus) [findings → FIX backlog]
+- **STEP 9** → Apply ALL fixes (Codex Max)
+- **STEP 10–12** → Validate and lock (Codex Max / GPT-5.2)
+
+**Mandatory checkpoints (must share audit report):**
+- ✅ STEP 0 (Baseline)
+- ✅ STEP 8 (Refactor Decision)
+- ✅ STEP 9 (FIX Consolidation)
+- ✅ STEP 10 (Tests & Storybook)
+- ✅ STEP 11 (Accessibility)
+- ✅ STEP 12 (Final Lock)
+
+**Estimated time:** 6-8 hours for typical component
 
 ---
 
-## Foundation Document Classification
+## 🗺️ Authority Navigation & Reference
 
-This section classifies all foundation documents by layer (Authority, Enforcement, Reference) and mutability status.
+This pipeline enforces compliance with Authority Contracts and architectural standards.
 
-### Authority Documents (Declarative Rules - IMMUTABLE)
+### Process Policies
 
-Authority documents define **what** the rules are. They are immutable declarations of architectural law.
+📄 [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) - Locked component change guard policy  
+📄 [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) - Exception declaration template  
+📄 [POLICIES_INDEX.md](../policies/POLICIES_INDEX.md) - Complete policies index
 
-| Document | Domain | Status | Mutability | Unlock Required |
-|----------|--------|--------|------------|-----------------|
-| INTERACTION_AUTHORITY.md | Interaction Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| STATE_AUTHORITY.md | State Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| STATE_MATRIX.md | State Authority Matrix | ✅ LOCKED | IMMUTABLE | Yes |
-| SPACING_AUTHORITY.md | Spacing Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| RADIUS_AUTHORITY.md | Radius Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| TYPOGRAPHY_AUTHORITY.md | Typography Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| MOTION_AUTHORITY.md | Motion Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| ELEVATION_AUTHORITY.md | Elevation Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| LAYOUT_AUTHORITY.md | Layout Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| EXTENSION_AUTHORITY.md | Extension Authority | ✅ ACTIVE | IMMUTABLE | Yes |
-| INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md | Interactive Size Scale Authority | ✅ LOCKED | IMMUTABLE | Yes |
-| TOKEN_AUTHORITY.md | Token System | ✅ LOCKED | IMMUTABLE | Yes |
-| ARCHITECTURE_RULES.md | Architecture Rules | ✅ ACTIVE | IMMUTABLE | Yes |
+### Complete Authority Map
 
-**Rule:** Authority documents define architectural law. They can only be modified via explicit unlock procedure with full audit.
+📖 [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) - Complete Authority navigation map (question → authority mapping)
 
-### Enforcement Documents (Mechanisms - EVOLVABLE)
+### State Authorities (WHAT/WHEN/HOW)
 
-Enforcement documents define **how** rules are enforced. They can evolve as tooling improves.
+- 📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - **WHAT** states exist (canonical set: base, hover, active, focus-visible, disabled, loading)
+- 📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - **WHEN** states activate (activation conditions, blocking rules, priority order)
+- 📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - **HOW** states represented (format, structure, naming, CSS variables)
 
-| Document | Domain | Status | Mutability | Notes |
-|----------|--------|--------|------------|-------|
-| INTERACTION_AUTHORITY_GUARD_LAYER.md | Interaction Authority | ✅ LOCKED | EVOLVABLE | Enforcement patterns can improve |
-| INTERACTION_AUTHORITY_HOVER_VERIFICATION.md | Interaction Authority | ✅ LOCKED | EVOLVABLE | Verification methods can improve |
-| BUTTON_CVA_ENFORCEMENT.md | Button CVA | ✅ LOCKED | EVOLVABLE | Enforcement mechanisms can improve |
-| scripts/verify-interaction-authority.mjs | Interaction Authority | ✅ ACTIVE | EVOLVABLE | Script can be enhanced |
+### Token Authorities
 
-**Rule:** Enforcement documents define how rules are checked. They can evolve to improve detection accuracy and coverage, but must not change the underlying rules they enforce.
+- 📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale (padding, margin, gap)
+- 📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography tokens (font-size, line-height, font-weight, letter-spacing, font-family)
+- 📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius token scale
+- 📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens (duration, easing, transitions)
+- 📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens (shadows, z-index layers)
 
-### Reference Documents (Implementation Examples - EVOLVABLE)
+### Size & Variant Authorities
 
-Reference documents show **examples** of correct implementation. They can be updated as reference implementations improve.
+- 📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale (xs..3xl) and variant naming dictionary
+- 📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract (how size maps to tokens)
 
-| Document | Domain | Status | Mutability | Notes |
-|----------|--------|--------|------------|-------|
-| INTERACTION_AUTHORITY_AUDIT.md | Interaction Authority | ✅ COMPLETE | EVOLVABLE | Can add more component audits |
-| Button component (button.tsx) | Interaction Authority | ✅ LOCKED | EVOLVABLE | Bug fixes, type improvements allowed |
+### Structural Authorities
 
-**Rule:** Reference documents show correct implementation patterns. They can be updated as reference implementations improve, but must maintain compliance with Authority rules.
+- 📖 [LAYOUT_AUTHORITY.md](../../architecture/LAYOUT_AUTHORITY.md) - Layout structure and flow (WHERE elements positioned)
 
-### Meta Documents (Lock Status - EVOLVABLE)
+### Lock Documents
 
-Meta documents track lock status and can be updated as new domains are locked.
+- 📖 [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation layer lock status
+- 📖 [ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) - Architectural decisions lock
+- 📖 [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) - Extension layer tracking
 
-| Document | Domain | Status | Mutability | Notes |
-|----------|--------|--------|------------|-------|
-| FOUNDATION_LOCK.md | Foundation Lock | ✅ LOCKED | EVOLVABLE | Can add new domain locks |
+### Reference Components for Complex Controls
 
-**Rule:** Meta documents track lock status. They can be updated as new domains are locked, but cannot unlock existing locks.
+- 📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Reference examples including **Button** (Foundation) and **Slider** (Extension) for complex controls
+  - **Button** (`src/PRIMITIVES/Button/Button.tsx`) - Foundation layer reference: token compliance, Foundation Enforcement
+  - **Slider** (`src/COMPOSITION/controls/Slider/Slider.tsx`) - Extension layer reference: token migration, token hole fixing, complex control patterns
+
+**Pipeline Compliance Rule:** Every step must validate against applicable Authority documents. Violations are blocking.
 
 ---
 
-## 🔒 Locked Foundation Components
+## 🎯 **0. Intent & Non‑Goals**
 
-The following components constitute the **complete and final** Foundation layer. These components are **immutable** and serve as the **sole canonical foundation** for their respective categories.
+### **Intent**
 
-| Component       | Category   | Base Library      | Foundation Status | Status Date |
-| --------------- | ---------- | ----------------- | ----------------- | ----------- |
-| **Modal**       | Overlays   | Radix Dialog      | ✅ **Implemented** | 2025-12-20 |
-| **Tabs**        | Navigation | Radix Tabs        | ✅ Implemented     | 2025-12-23 |
-| **Select**      | Inputs     | Radix Select      | ✅ Implemented     | 2025-12-17 |
-| **ContextMenu**  | Menus      | Radix ContextMenu | ✅ **Implemented** | 2025-12-22 |
-| **Toast**       | Overlays   | Radix Toast       | ✅ Implemented     | 2025-12-19 |
-| **Button**      | Actions    | Native `<button>` | ✅ **FINAL LOCK**  | 2025-12-25 |
-| **Link**        | Navigation | Native `<a>`      | ✅ Implemented     | 2025-12-17 |
+This pipeline defines **how a component must be reviewed, understood, improved, and validated**.
 
-### Foundation Component Details
+The outcome of every run:
 
-#### Modal
-- **Location:** `src/COMPOSITION/overlays/Modal/`
-- **Export Path:** `@tenerife.music/ui` → `Modal`, `ModalRoot`, `ModalContent`, `ModalHeader`, `ModalTitle`, `ModalDescription`, `ModalFooter`, `ModalTrigger`, `ModalClose`
-- **Base Library:** Radix Dialog (`@radix-ui/react-dialog`)
-- **Purpose:** Sole modal foundation. All modal-like components must use this internally.
-- **Status:** ✅ **Implemented**
-- **Implementation Date:** 2025-12-20
-- **Implementation Task:** `TUNG_FOUNDATION_MODAL_STEP_13`
-- **Implementation Report:** `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
-- **Migration Completed:** Modal has completed canonical Foundation Step Pipeline (Steps 0–13)
-- **Public API:** Token-based props
-- **Public Types:** Type Surface defined
+* the component is **better structured** than before,
 
-#### Tabs
-- **Location:** `src/COMPOSITION/navigation/tabs/`
-- **Export Path:** `@tenerife.music/ui` → `Tabs`, `TabsRoot`, `TabsList`, `TabsTrigger`, `TabsContent`
-- **Base Library:** Radix Tabs (`@radix-ui/react-tabs`)
-- **Purpose:** Sole tabs foundation. All tab-based navigation must use this internally.
-- **Status:** ✅ **Implemented** — **PIPELINE 18A COMPLETE**
-- **Implementation Date:** 2025-12-23
-- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
-- **Audit Report:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
-- **Migration Complete:** Tabs has completed canonical Foundation Step Pipeline (Steps 0–12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+* the code is **cleaner and more readable**,
 
-#### Select
-- **Location:** `src/components/select/` (will be moved to `src/PRIMITIVES/Select/` during canonical lock process)
-- **Export Path:** `@tenerife.music/ui` → `Select`, `SelectRoot`, `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`, `SelectGroup`, `SelectLabel`, `SelectSeparator`
-- **Base Library:** Radix Select (`@radix-ui/react-select`)
-- **Purpose:** Sole select foundation. All dropdown selection must use this internally.
-- **Status:** ✅ **Implemented**
-- **Implementation Date:** 2025-12-17
+* architectural violations are removed or explicitly documented,
 
-#### ContextMenu
-- **Location:** `src/COMPOSITION/overlays/ContextMenu/`
-- **Export Path:** `@tenerife.music/ui` → `ContextMenuRoot`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuCheckboxItem`, `ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuSeparator`, `ContextMenuLabel`, `ContextMenuSub`, `ContextMenuSubTrigger`, `ContextMenuSubContent`
-- **Base Library:** Radix ContextMenu (`@radix-ui/react-context-menu`)
-- **Purpose:** Sole context menu foundation. All right-click menus must use this internally.
-- **Status:** ✅ **Implemented**
-- **Implementation Date:** 2025-12-22
-- **Implementation Authority:** FOUNDATION PIPELINE
-- **Implementation Report:** `docs/reports/audit/CONTEXT_MENU_BASELINE_REPORT.md`
-- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline (Steps 0–13).
+* future maintenance becomes easier, not harder.
 
-#### Toast
-- **Location:** `src/COMPOSITION/overlays/`
-- **Export Path:** `@tenerife.music/ui` → `Toast`, `ToastProvider`, `ToastViewport`, `ToastRoot`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `useToast`
-- **Base Library:** Radix Toast (`@radix-ui/react-toast`)
-- **Purpose:** Sole toast foundation. All notification toasts must use this internally.
-- **Status:** ✅ **Implemented**
-- **Implementation Date:** 2025-12-19
+### **Non‑Goals**
 
-#### Button
-- **Location:** `src/PRIMITIVES/Button/`
-- **Export Path:** `@tenerife.music/ui` → `Button`, `ButtonProps`, `ButtonVariant`, `ButtonSize`
-- **Base Library:** Native `<button>` element (semantic HTML)
-- **Purpose:** Sole action trigger foundation. All user-initiated actions (submit, confirm, execute, activate) must use this component. Button represents actions, not navigation (use Link component) or toggle/state switching (use Switch/Checkbox components).
-- **Status:** ✅ **FINAL LOCK**
-- **Lock Date:** 2025-12-25
-- **Pipeline 18A Completion Date:** 2025-12-25
-- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
-- **Lifecycle Version:** 1.0 (Steps 0-12)
-- **Quality Gates:** ✅ Step 10 (Runtime / Interaction Tests) — PASS, ✅ Step 11 (Accessibility) — PASS, ✅ Step 12 (Final Review & Lock) — PASS, ✅ Pipeline 18A Steps 0-12 — COMPLETE
-- **Scope:** Public API, tokens (BUTTON_TOKENS), behavior (action trigger via `<button>`), states (base, hover, active, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, destructive), sizes (sm, md, lg), iconOnly prop (canonical pattern for icon-only buttons)
-- **Implementation Report:** `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-- **Audit Report:** `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
-- **Pipeline 18A Changes:**
-  - Icon rendering deduplication (extracted ICON_WRAPPER_CLASS constant and renderIcon helper)
-  - Matrix and Accessibility stories added to Storybook
-  - Test coverage enhanced (asChild test fixed, type behavior documented)
-  - Public API change: Added `iconOnly` prop (canonical pattern), removed `size="icon"` from ButtonSize type (GlobalSize compliance)
-- **Reference Role:** Button serves as canonical Foundation reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms.
-- **Rule:** DO NOT modify, extend, or create alternatives. Button is FINAL LOCK and immutable.
+This pipeline is **not**:
 
-#### Link
-- **Location:** `src/PRIMITIVES/Link/`
-- **Export Path:** `@tenerife.music/ui` → `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
-- **Base Library:** Native `<a>` element (semantic HTML)
-- **Purpose:** Sole navigation link foundation. All navigation links must use this component. Link represents semantic navigation (location changes), not actions. Actions must use Button component.
-- **Status:** ⏳ **LEGACY UNLOCKED** (Pending Canonical Migration)
-- **Unlock Date:** 2025-12-25
-- **Unlock Task:** TUNG_FOUNDATION_LINK_UNLOCK_18A
-- **Unlock Reason:** Link was locked via old process (STEP 1-13). Requires canonical migration via pipeline 18A (STEP 0-12) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements.
-- **Implementation Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` (legacy process)
-- **Architectural Note:** [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) — Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
-- **Implementation Date:** 2025-12-17
-- **Lifecycle Version:** 1.0 (Steps 1-13) — Legacy process
-- **Migration Path:** Link will undergo canonical Foundation Step Pipeline (Steps 0-12) to ensure full compliance with all Authority Contracts and canonical lifecycle requirements, similar to Button/Tabs standards.
-- **Constraints During Unlock:**
-  - ❌ No public API expansion
-  - ❌ No new variants or sizes
-  - ❌ No behavior changes outside canonicalization
-  - ❌ No bypass of Authority Contracts
-- **Exit Criteria:** Component must complete Steps 0-12, audit report must exist at `docs/reports/audit/LINK_BASELINE_REPORT.md`, component must be re-marked as FOUNDATION · LOCKED
-- **Scope:** Public API, tokens (LINK_TOKENS), behavior (navigation via `<a>`), states (base, hover, focus-visible, disabled), variants (primary, secondary, accent, outline, ghost, link, destructive), sizes (sm, md, lg)
-- **Architectural Constraints:** Link MUST always render a single `<a>` element directly. `asChild` prop is FORBIDDEN. No proxy patterns (Radix Slot) allowed. See [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md) for complete architectural contract.
+* a rewrite‑everything exercise,
+
+* a theoretical architecture essay,
+
+* a "find problems and stop" audit.
+
+If the pipeline ends without **actual code improvement**, it is considered a failure.
 
 ---
 
-### Legacy Foundation Components (Unlocked for Migration)
+## 📋 **1. General Execution Rules**
 
-The following components were declared as LOCKED but were implemented using legacy patterns and never passed the canonical Foundation Step Pipeline (0–13). They have been temporarily unlocked strictly for canonical migration:
+The following contract applies to all steps defined below.
 
-- **Modal** — ✅ **Implemented** (2025-12-20) — Migration complete
-- **Tabs** — ✅ **Implemented** (2025-12-23) — Pipeline 18A complete
-- **ContextMenu** — ✅ **Implemented** (2025-12-22) — Migration complete
-- **Toast** — ✅ **Implemented** (2025-12-19)
-- **Link** — ⏳ **LEGACY UNLOCKED** (2025-12-25) — Pending Pipeline 18A migration
+## 📐 Step Execution Contract (REFERENCE)
 
-**Unlock Rationale:**
-These components were locked declaratively without completing the canonical Foundation lifecycle. The false lock prevents architectural convergence, blocks canonical CVA, typing, and interaction refactor, and creates inconsistency with Button/Link standards.
+To prevent ambiguity and execution drift, **every STEP execution** must explicitly answer the following questions,
 
-**Migration Requirements:**
-- Each component must complete Foundation Step Pipeline (Steps 0–13)
-- Foundation lock report must exist per component
-- Public Type Surface must be locked
-- Component must be re-marked as FOUNDATION · LOCKED
+either in the audit report or in the step task description.
 
-**Constraints During Unlock:**
-- ❌ No public API expansion
-- ❌ No new variants or sizes
-- ❌ No behavior changes outside canonicalization
-- ❌ No bypass of Authority Contracts
-- ✅ Refactor strictly via Foundation Step Pipeline
-- ✅ Canonical CVA, typing, and interaction refactor allowed
-- ✅ Authority Contract alignment allowed
+### Mandatory Declarations
 
-**Exit Criteria:**
-- Component completes Steps 0–13
-- Foundation lock report exists
-- Public Type Surface is locked
-- Component re-marked as FOUNDATION · LOCKED
+For each STEP, the following must be clear:
 
----
+- **REPORT**
 
-## 🏛️ Core Architectural Rules
+- Is a detailed report required, or is a status statement sufficient?
 
-### Rule 1: Radix-First Behavior Delegation
+- **CODE CHANGES**
 
-**FOUNDATION COMPONENTS MUST DELEGATE ALL BEHAVIOR TO RADIX UI PRIMITIVES.**
+- Are code changes allowed in this step?
 
-- ✅ **ALLOWED:** Using Radix primitives for behavior (focus management, keyboard navigation, ARIA attributes, portal rendering, scroll locking)
-- ❌ **FORBIDDEN:** Implementing custom behavior that Radix already provides
-- ❌ **FORBIDDEN:** Reimplementing focus management, keyboard navigation, or ARIA attributes
-- ❌ **FORBIDDEN:** Custom portal or scroll locking implementations
+- If yes, what scope of changes is permitted?
 
-**Rationale:** Radix UI provides battle-tested, accessible behavior. Foundation components are thin wrappers that delegate behavior to Radix and provide token-driven styling.
+- If no, changes must be deferred to PHASE B (FIX).
 
-### Rule 2: Token-Driven Styling Only
+- **EXPECTED OUTPUT**
 
-**FOUNDATION COMPONENTS MUST USE TOKEN-BASED APIS FOR ALL VISUAL PROPERTIES.**
+- What constitutes successful completion of this step?
 
-- ✅ **ALLOWED:** Token unions for visual props (e.g., `variant: "default" | "outline" | "destructive"`)
-- ✅ **ALLOWED:** Design tokens for colors, spacing, shadows, radius, typography
-- ❌ **FORBIDDEN:** String or number-based visual props (e.g., `color: "blue"`, `padding: 16`)
-- ❌ **FORBIDDEN:** Raw CSS values in component props
-- ❌ **FORBIDDEN:** Inline styles for static styling
+- (e.g. classification only, applied refactor, validation artifacts)
 
-**Rationale:** Token-driven styling ensures consistency, theming support, and design system coherence.
+- **BLOCKING CONDITION**
 
-### Rule 3: Foundation vs Extension Separation
+- Does a failure in this step block further progress?
 
-**FOUNDATION AND EXTENSION LAYERS ARE STRICTLY SEPARATED.**
+- If yes, under what condition?
 
-- ✅ **ALLOWED:** Extensions that compose Foundation components internally
-- ✅ **ALLOWED:** Extensions that add domain-specific logic or UX patterns
-- ❌ **FORBIDDEN:** Extensions that duplicate Foundation functionality
-- ❌ **FORBIDDEN:** Extensions that bypass Foundation components
-- ❌ **FORBIDDEN:** Extensions named after Foundation components (e.g., `SimpleModal`, `BasicTabs`)
+### Enforcement Rule
 
-**Rationale:** Clear separation ensures Foundation stability and Extension flexibility.
+If any of the above is unclear or missing,
 
-### Rule 4: Token System Immutability
+the step is considered **not executed**, even if code was reviewed.
 
-**THE TOKEN SYSTEM IS LOCKED AND IMMUTABLE AS PART OF THE FOUNDATION ARCHITECTURE.**
+This contract exists to ensure that:
 
-- ✅ **ALLOWED:** Consumption of existing tokens by components
-- ✅ **ALLOWED:** Creation of new component token domains ONLY for new components with explicit approval
-- ❌ **FORBIDDEN:** Modifying token values in any domain
-- ❌ **FORBIDDEN:** Adding or removing token domains
-- ❌ **FORBIDDEN:** Merging or splitting existing domains
-- ❌ **FORBIDDEN:** Reinterpreting token semantics
-- ❌ **FORBIDDEN:** Changing domain ownership rules
+- analysis, refactoring, and validation are not mixed implicitly,
 
-**Rationale:** Token system immutability ensures design system consistency and prevents architectural drift. All token changes require explicit unlock procedure with full audit.
+- assistants and tooling follow the same execution logic,
 
----
+- future iterations of the pipeline remain predictable and repeatable.
 
-## ✅ Allowed Post-Lock Changes
+1. ✅ The pipeline is executed **top-to-bottom**, without reordering.
 
-The following changes to Foundation components are **explicitly allowed** after the lock:
+2. ✅ Each step has a clear purpose and stopping condition.
 
-### 1. Bug Fixes
-- ✅ Fixing bugs in Foundation components
-- ✅ Correcting incorrect behavior
-- ✅ Fixing accessibility issues
-- ✅ Fixing TypeScript errors
+3. ✅ Code **may be refactored during the pipeline**, but:
 
-### 2. Type Improvements
-- ✅ Improving TypeScript types
-- ✅ Adding missing type definitions
-- ✅ Fixing type errors
-- ✅ Adding JSDoc comments
+* behavior must not change unless explicitly allowed,
 
-### 3. Documentation Updates
-- ✅ Updating component documentation
-- ✅ Adding usage examples
-- ✅ Improving JSDoc comments
-- ✅ Updating Storybook stories
+* public API changes must be deliberate and documented.
 
-### 4. Token Usage Improvements
-- ✅ Improving token usage within components
-- ✅ Fixing token violations (using existing tokens correctly)
-- ⚠️ **RESTRICTED:** Adding missing token support (requires token system unlock if new tokens needed)
-- ✅ Improving token consistency (within existing token domains)
+4. ✅ Discovery, analysis, and refactoring are **part of the same process**, not separate activities.
 
-### 5. Non-Breaking API Additions
-- ✅ Adding new optional props (backward-compatible)
-- ✅ Adding new variants (backward-compatible)
-- ✅ Adding new subcomponents (backward-compatible)
-- ✅ Performance optimizations (non-breaking)
+5. ⚠️ **Mandatory reporting rule (CRITICAL):** every step **MUST end** by updating the component audit report file (the baseline report created in STEP 0).
 
-**All changes must maintain backward compatibility and not break existing APIs.**
+* If a step results in no changes, the report must explicitly state: `No changes required in this step`.
 
----
+* If changes were made, the report must include: what changed, why, and whether it is blocking or non-blocking.
 
-## 🚫 Forbidden Post-Lock Changes
+6. ⚠️ **Assistant review checkpoints (CRITICAL process control):** the assistant must remind the operator when it is recommended or mandatory to share the current audit report before proceeding.
 
-The following changes to Foundation components are **explicitly forbidden** after the lock:
+* **Mandatory to share the audit report (must not proceed without it):**
 
-### 1. Breaking API Changes
-- ❌ Removing props from Foundation components
-- ❌ Changing prop types in breaking ways
-- ❌ Removing subcomponents
-- ❌ Changing component behavior in breaking ways
+* STEP 0 (Baseline snapshot)
 
-### 2. New Foundation Components
-- ❌ Creating new Foundation components
-- ❌ Adding components to the Foundation layer
-- ❌ Promoting Extension components to Foundation
+* STEP 8 (Intentional refactor decision)
 
-### 3. Duplicate Foundation Components
-- ❌ Creating `SimpleModal`, `BasicTabs`, `OldSelect`, `LegacyToast`
-- ❌ Creating `ModalV2`, `TabsV2`, `SelectV2`
-- ❌ Creating any duplicate or alternative Foundation implementation
+* STEP 9 (Mandatory FIX & Consolidation)
 
-### 4. Foundation Component Modifications
-- ❌ Renaming Foundation components
-- ❌ Moving Foundation components to different locations
-- ❌ Changing Foundation component exports
-- ❌ Removing Foundation components
+* STEP 10 (Tests & Storybook validation)
 
-### 5. Behavior Reimplementation
-- ❌ Reimplementing Radix behavior
-- ❌ Custom focus management
-- ❌ Custom keyboard navigation
-- ❌ Custom ARIA attributes
+* STEP 11 (Accessibility audit & fixes)
 
-### 6. Non-Token Styling
-- ❌ Adding string or number-based visual props
-- ❌ Using raw CSS values in props
-- ❌ Inline styles for static styling
+* STEP 12 (Final review & architectural lock)
 
-### 7. Token System Modifications
-- ❌ Modifying token values in any domain
-- ❌ Adding or removing token domains
-- ❌ Merging or splitting existing domains
-- ❌ Reinterpreting token semantics
-- ❌ Changing domain ownership rules
-- ❌ Creating new token domains without explicit unlock procedure
+* **Recommended to share the audit report (strongly advised when changes are non-trivial):**
 
-**Any violation of these rules is considered an architectural breach.**
+* STEP 6 (Public API & DX)
+
+* STEP 7 (Type system alignment)
+
+* **Optional to share the audit report:**
+
+* STEP 1–5 (Structural / patterns / interaction / tokens)
+
+* The assistant must explicitly remind the operator at each checkpoint before issuing the next step task.
+
+7. ⚠️ **No skipped documentation (CRITICAL):** a step is not considered executed unless the audit report contains a clearly labeled section for that step.
+
+* If no work is required, the section must still exist and must contain: `No changes required in this step`.
+
+* The operator must not proceed to the next step if the current step section is missing.
+
+8. ⚠️ **Step gating rule (CRITICAL):** the assistant must not issue a TUNG for STEP N+1 unless STEP N is present in the report (even if it contains `No changes required`).
+
+9. ⚠️ **Blocker classification rule (CRITICAL):** every step section must include a clear outcome tag:
+
+* `Blocking: yes/no`
+
+* If `yes`, include a single-sentence reason.
+
+* If `no`, optionally mark items as `Deferred` with rationale.
+
+10. ⚠️ **Language consistency (CRITICAL):** the pipeline and all audit reports must use a single language per document. For this pipeline, English-only.
+
+* Emojis are **allowed and encouraged** as visual markers for readability, but must not replace words or structure.
+
+11. ⚠️ **Vocabulary guardrails (CRITICAL):** the following words/claims are prohibited in STEP 0–11 and may only appear in STEP 12:
+
+* `final`, `optimal`, `exemplary`, `canonical`, `locked`, `foundation-ready`.
+
+* Allowed phrasing in STEP 0–10:
+
+* `No issues detected in this step`
+
+* `Compliant at this stage`
+
+* `No changes required in this step`
+
+* `Behavior unchanged`
+
+12. ✅ **Work pattern inside each step (REQUIRED):** every step must follow the same internal order:
+
+1) **Observe** (what exists)
+
+2) **Decide** (what to do)
+
+3) **Change** (apply scoped refactor if allowed)
+
+4) **Record** (update audit report with blocker/non-blocker)
+
+* Skipping any sub-part is a process violation.
 
 ---
 
-## 🛡️ Enforcement
+## 🤖 **1A. Assistant-only Playbook (Internal Guidance)**
 
-### Guard Prompt (AI Enforcement)
+> Written **for the assistant (me)**. This is the missing "glue" that prevents Cursor from doing random stuff and prevents us from looping 12 times.
 
-**All AI assistants (including Cursor) MUST follow the Guard Prompt rules:**
+>
 
-```
-⚠️ UI FOUNDATION ARCHITECTURE IS LOCKED.
+> **Goal:** I can drop into any new chat, open 18A, and instantly generate high-quality TUNG JSON per step with minimal rework.
 
-Foundation Components:
-- Modal (Radix Dialog wrapper) - ✅ Implemented (2025-12-20)
-- Tabs (Radix Tabs wrapper) - ✅ Implemented (Pipeline 18A Complete, 2025-12-23)
-- Select (Radix Select wrapper) - ✅ Implemented
-- ContextMenu (Radix ContextMenu wrapper) - ✅ Implemented (2025-12-22)
-- Toast (Radix Toast wrapper) - ✅ Implemented
-- Button (Native button element) - ✅ **FINAL LOCK**
-- Link (Native anchor element) - ✅ Implemented
+---
 
-Token System (Locked):
-- All token domains are LOCKED and IMMUTABLE
-- Domain ownership rules are immutable
-- Shared vs component-specific separation is fixed
-- Token naming conventions are locked
+### **A. The 4‑phase step invariant (non‑negotiable)**
 
-Interaction Authority (Locked):
-- State priority order is FIXED: disabled > loading > active > hover > focus-visible > base
-- Activation conditions are immutable
-- Blocking rules are immutable
-- Required CSS patterns (prefixes, selectors) are immutable
-- Forbidden patterns (JS-driven states, raw pointer-events-none) are immutable
-- Verification requirements (iframe-only, DevTools invalidation) are immutable
-- Button component is the reference implementation
+Each STEP must complete **all four phases**:
 
-State Authority Matrix (Locked):
-- Canonical state set is FIXED: base, hover, active, focus-visible, disabled, loading (6 states only)
-- No component may define additional states beyond canonical set
-- State semantics are immutable
-- State priority order is immutable
-- Suppression rules are immutable
-- Button component is the reference implementation
+1. **Observe** → collect evidence (paths, exports, current API, current behavior)
 
-State Authority Contract (Locked):
-- State token model is FIXED: Component → Variant → State → Property → Value structure
-- CSS variable naming pattern is FIXED: --{component}-{variant}-{state}-{property}
-- Property suffix mapping is FIXED: background → bg, text → text, border → border, outline → outline, shadow → shadow
-- Value format is FIXED: HSL color string format required
-- Component obligations are immutable
-- No local state definitions allowed in components
+2. **Decide** → write a decision (what we change / what we do NOT change)
 
-Foundation Enforcement (Locked/Applied):
-- className and style props are FORBIDDEN in Foundation component public APIs
-- Foundation components MUST use Omit<React.*HTMLAttributes, "className" | "style"> pattern
-- TypeScript enforces exclusion at compile time
-- ESLint rules prevent regression (no-foundation-classname-style, no-foundation-open-htmlattributes)
-- Type-tests verify enforcement for all Foundation components
-- CI integration ensures violations fail the pipeline
-- All Foundation components are visually closed by design
+3. **Change** → apply scoped refactor (only if allowed in this step)
 
-Interactive Size Scale Authority (Locked):
-- size is an INTERACTIVE SCALE representing hit-area, vertical rhythm, focus/keyboard accessibility, user interaction affordance
-- Canonical interactive size scale is FIXED: "sm" | "md" | "lg" (defined by Button)
-- Button component is the canonical owner of the interactive size scale
-- xs and xl are FORBIDDEN for interactive components
-- Interactive components (Button, Link, Input, Select, Checkbox, Radio, Switch) MUST use canonical scale
-- Semi-interactive components (Icon, Badge, Avatar) MUST NOT use size as interactive scale
-- Non-interactive components (Card, Stack, Grid) MUST NOT use size at all
-- Typography scale (xs, xl, etc.) is SEPARATE and belongs only to Text, Heading, Label
-- Interactive size maps to height, padding, font-size, and gap tokens
+4. **Record** → update the audit report with blockers / non‑blockers
 
-Foundation components (Button, Link) follow canonical architectural patterns. Token system, Interaction Authority, Foundation Enforcement, and Interactive Size Scale Authority define architectural contracts.
+If any phase is missing → the step is **FAILED** even if code "looks fine".
 
-**FOUNDATION COMPONENTS (ContextMenu, Toast):**
-- These components follow canonical Foundation patterns
-- Implemented via Foundation Step Pipeline (Steps 0–13)
+---
 
-**FOUNDATION COMPONENTS (Tabs):**
-- Tabs has completed Pipeline 18A (Steps 0-12) (2025-12-23)
-- Component is in COMPOSITION layer
-- Follows Foundation architectural patterns
+### **B. Stable naming & paths (how I stop chaos)**
 
-**FOUNDATION COMPONENTS (Modal):**
-- Modal has completed canonical migration (Steps 0–13)
-- Implementation Date: 2025-12-20
-- Implementation Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+**Audit report path is mandatory and stable:**
 
-**FOUNDATION COMPONENTS (Button, Link):**
-These components follow Foundation patterns:
-- Token-driven APIs
-- Canonical CVA patterns
-- Authority Contract compliance
+* `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
 
-You MUST NEVER:
-- Create new foundation components
-- Suggest alternative implementations
-- Create Simple*, Basic*, Legacy*, V2* variants for foundation components
-- Reimplement behavior handled by Radix
-- Modify token values or domains
-- Add or remove token domains
-- Change token ownership rules
-- Modify Interaction Authority rules (priority order, activation conditions, blocking rules)
-- Modify State Authority Matrix (canonical state set, state semantics, priority order, suppression rules)
-- Modify State Authority Contract (state token model, naming rules, property mapping, value format)
-- Define component-specific states beyond canonical set (base, hover, active, focus-visible, disabled, loading)
-- Define local state mechanisms in components (all states must use state tokens)
-- Use JavaScript-driven interaction states (useState for hover/active/focus)
-- Use raw pointer-events-none in base state (only via disabled:/loading: prefixes)
-- Use focus: instead of focus-visible: for focus states
-- Add className or style props to Foundation component public APIs
-- Extend React.*HTMLAttributes directly without Omit<..., "className" | "style">
-- Bypass Foundation Enforcement (enforcement is LOCKED and APPLIED)
-- Add new interactive sizes (xs, xl, or custom sizes) to interactive components
-- Reintroduce xs/xl to Button or Link
-- Use size for typography or layout (use typography scale or spacing tokens instead)
-- Expand Button scale to fit other components (other components align with Button, not vice versa)
-- Use size prop for non-interactive components (use padding, gap, density, or variant instead)
+Rules:
 
-If new behavior or UX is required:
-- Create an EXTENSION component
-- EXTENSION must compose an existing foundation component
-- EXTENSION must NOT be named after a foundation component
-- EXTENSION must live outside foundation folders
+* Never create multiple reports for the same component.
 
-If token modifications are needed:
-- Token system modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/TOKEN_AUTHORITY.md
-- Reference: docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md (Note: File location may vary, check docs_archive)
+* Never place reports in random folders.
 
-If Interaction Authority modifications are needed:
-- Interaction Authority modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/INTERACTION_AUTHORITY.md
-- Reference: docs/architecture/INTERACTION_AUTHORITY_AUDIT.md
-- Reference: docs/architecture/INTERACTION_AUTHORITY_GUARD_LAYER.md
-- Reference: docs/architecture/INTERACTION_AUTHORITY_HOVER_VERIFICATION.md
+* If a report already exists elsewhere, we **move/redirect** to the canonical path in STEP 0.
 
-If State Authority Matrix modifications are needed:
-- State Authority Matrix modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/STATE_MATRIX.md
-- Reference: docs/architecture/STATE_AUTHORITY.md
-- Reference: docs/architecture/INTERACTION_AUTHORITY.md
+**Component inventory naming:** use the *actual exported name* (Button, Tooltip, Popover…), not "popup/pop-up".
 
-If State Authority Contract modifications are needed:
-- State Authority Contract modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/STATE_AUTHORITY.md
-- Reference: docs/architecture/STATE_MATRIX.md
-- Reference: docs/architecture/INTERACTION_AUTHORITY.md
+---
 
-If Foundation Enforcement modifications are needed:
-- Foundation Enforcement modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/FOUNDATION_CONTRACT.md
-- Reference: docs/architecture/FOUNDATION_COMPONENT_SCOPE.md
-- Reference: docs/architecture/FOUNDATION_LOCK.md (Foundation Enforcement Lock Status section)
-- Reference: docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md
-- Reference: docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md
+### **C. How I must write TUNG JSON (authoring contract)**
 
-If Interactive Size Scale Authority modifications are needed:
-- Interactive Size Scale Authority modifications require explicit UNLOCK + AUDIT workflow
-- Reference: docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md
-- Reference: docs/architecture/FOUNDATION_LOCK.md (Interactive Size Scale Authority Lock Status section)
-- Reference: src/PRIMITIVES/Button/Button.tsx (Reference implementation)
+Every TUNG I issue must include:
+
+* **Exact file paths** (no guessing; if unknown → STEP 0 first)
+
+* **Explicit forbidden actions** (DO NOT list)
+
+* **Explicit allowed scope** (Allowed list)
+
+* **Acceptance criteria** that are verifiable
+
+* **Mandatory audit report update** (STEP N section)
+
+* **Deliverables** (which files must change)
+
+If a TUNG is missing any of these → it's not a valid task.
+
+---
+
+### **D. Anti‑drift guardrails (must be repeated in every TUNG)**
+
+I must explicitly forbid:
+
+* Renaming files "to make it cleaner"
+
+* Moving files across layers/folders unless the step explicitly targets relocation
+
+* Adding new variants/sizes "for completeness"
+
+* Public API redesign during STEP 1–5
+
+* Declaring anything "final/canonical/locked" before STEP 12
+
+* Introducing new helper systems unless required (no new token systems, no new config frameworks)
+
+And I must explicitly allow only what the step allows.
+
+---
+
+### **E. Audit report format (must be enforced)**
+
+Each STEP section in the audit report must contain:
+
+* **Outcome:** `No changes required` | `Changes applied` | `Changes required (not applied)`
+
+* **Blocking:** `yes/no`
+
+* **Findings:** bullet list
+
+* **Changes:** bullet list (or `None`)
+
+* **Deferred:** bullet list (or `None`)
+
+Emoji markers are allowed for scanability:
+
+* ✅ done / correct
+
+* ⚠️ non‑blocking issue
+
+* ❌ blocker
+
+* 🧱 explicit blocker list
+
+* 🧾 report/decision note
+
+**Important:** emoji must be semantic markers, not decoration.
+
+---
+
+### **F. Mandatory "show me the report" checkpoints**
+
+To prevent loops, I must ask the operator to paste the current audit report after:
+
+* **Mandatory:** STEP 0, STEP 8, STEP 9, STEP 10, STEP 11, STEP 12
+
+* **Recommended:** STEP 5, STEP 6, STEP 7
+
+If a risky change happens unexpectedly, request the report immediately.
+
+---
+
+### **G. TUNG JSON skeleton (copy pattern)**
+
+💻
+```json
+{
+  "meta": {
+    "id": "TUI_<COMP>_STEP_<N>",
+    "title": "<COMP>: STEP <N> — <Step Name>",
+    "priority": "P0",
+    "mode": "CODE|DOCS|CODE+DOCS",
+    "scope": ["<COMP>"]
+  },
+  "axioms": [
+    "No step reordering.",
+    "No changes outside declared scope.",
+    "Audit report STEP <N> must be updated."
+  ],
+  "inputs": {
+    "files": ["<exact paths>"],
+    "report": "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
+  },
+  "constraints": {
+    "forbidden": ["<list>", "..."],
+    "allowed": ["<list>", "..."]
+  },
+  "tasks": [
+    {
+      "name": "Observe → Decide → Change → Record",
+      "steps": ["..."],
+      "acceptance": ["..."]
+    }
+  ],
+  "deliverables": [
+    "<changed files>",
+    "docs/reports/audit/<COMP>_BASELINE_REPORT.md"
+  ]
+}
 ```
 
-**If a request would violate these rules, AI assistants MUST REFUSE and explain why.**
+---
 
-### Tests and Stories as Usage Contracts
+### **H. Step‑by‑step TUNG guidance (what I must instruct Cursor to do)**
 
-**Tests and Storybook stories serve as usage contracts for Foundation components:**
+#### **STEP 0 — Baseline Snapshot & Context Fixation**
 
-- ✅ Tests define expected behavior
-- ✅ Stories document component usage
-- ✅ Breaking changes must update tests and stories
-- ✅ Tests and stories are part of the Foundation contract
+**I must demand:**
 
-**Violations of test contracts are architectural defects.**
+* exact file inventory (impl/tests/stories/exports)
 
-### Architectural Defect Classification
+* stable audit report path creation
 
-**Any violation of Foundation lock rules is classified as an architectural defect:**
+* layer identification (Foundation vs Extension)
 
-- ❌ Breaking API changes
-- ❌ Creating duplicate Foundation components
-- ❌ Modifying Foundation components in forbidden ways
-- ❌ Bypassing Foundation components in Extensions
+**I must forbid:** any code changes.
 
-**Architectural defects must be fixed immediately and are not acceptable in production code.**
+**Acceptance must include:**
+
+* report file exists at canonical path
+
+* STEP 0 section filled
+
+* list of exact paths and export points
 
 ---
 
-## 📊 Final Status
+#### **STEP 1 — Structural & Code Quality Review**
 
-### Foundation Layer Status
+**Allowed:** readability refactors, mapping duplicates, extracting internal helpers/components.
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-12  
-**Architecture Phase:** **CLOSED**  
-**Next Review:** **NEVER** (Foundation is immutable)
+**Forbidden:** behavior changes, API changes.
 
-### Component Lock Status
+**Acceptance must include:**
 
-| Component       | Status    | Implementation Date | Notes |
-| --------------- | --------- | -------------------- | ----- |
-| Modal           | ✅ **Implemented** | 2025-12-20 | Complete |
-| Tabs            | ✅ Implemented (Pipeline 18A Complete) | 2025-12-23 | Pipeline Complete |
-| Select          | ✅ Implemented | 2025-12-17 | Complete |
-| ContextMenu     | ✅ Implemented | 2025-12-22 | Complete |
-| Toast           | ✅ Implemented | 2025-12-19 | Complete |
-| Button          | ✅ **FINAL LOCK** | 2025-12-25 | Pipeline 18A Complete |
-| Link            | ✅ Implemented | 2025-12-18 | Complete |
+* no public API diff
 
-### Extension Layer Status
+* duplication reduced (named examples)
 
-**Status:** ✅ **OPEN** (Extension development is allowed)  
-**Authority Contract:** [Extension Authority Contract](./EXTENSION_AUTHORITY.md)
-
-The Extension layer is **OPEN** for development. All Extension components must:
-
-- ✅ Compose Foundation components internally
-- ✅ Comply with Extension Authority Contract
-- ✅ Follow all Foundation Authority rules
-- ✅ Not duplicate or bypass Foundation functionality
-- ✅ Not use Foundation component names
-- ✅ Use tokens according to Token Authority rules
-- ✅ Use canonical states according to State Authority
-- ✅ Use layout primitives according to Layout Authority
-
-**Rule:** Extension Authority Contract defines the boundary between Foundation and Extension layers. Extension must respect all Foundation Authority rules and cannot override, bypass, or duplicate Foundation functionality.
-
-### Zero-Ambiguity Declaration
-
-**THE FOUNDATION LAYER IS OFFICIALLY LOCKED AND CLOSED.**
-
-- ✅ Foundation components are **immutable**
-- ✅ Token system is **locked** and **immutable**
-- ✅ Foundation architecture phase is **closed**
-- ✅ No new Foundation components will be added
-- ✅ Foundation components can only be modified for bug fixes, types, or documentation
-- ✅ Token system can only be modified via explicit unlock procedure
-- ✅ All new functionality must be built as Extensions
-- ✅ Extensions must compose Foundation components internally
-- ✅ This document is the **authoritative source of truth** for Foundation architecture
-
-**There is no ambiguity. The Foundation layer is locked. The Token system is locked. The architecture phase is closed.**
+* report STEP 1 updated
 
 ---
 
-## 🔒 LOCK CHECKLIST (Mandatory)
+#### **STEP 2 — Semantic Role & Responsibility**
 
-**This checklist MUST be completed before any Foundation Authority domain can be locked. Locking is BLOCKED if any item fails.**
+**I must demand:** 1–2 sentence role definition + explicit out‑of‑scope list.
 
-- [ ] All Authority documents are declarative only (no tests, storybook steps, or implementation details)
-- [ ] Enforcement content exists outside Authority docs (Authority docs only reference enforcement docs)
-- [ ] All token authorities (Spacing, Typography, Radius, Motion, Elevation) have Canonical Scale Tables
-- [ ] All token authorities have Allowed Usage Patterns sections (3-6 bullet points)
-- [ ] All token authorities have Forbidden Patterns sections (minimum 5 examples each)
-- [ ] STATE_AUTHORITY.md has State Taxonomy section (Interaction vs Semantic/UI states)
-- [ ] STATE_AUTHORITY.md has State Legality Matrix (component vs state compatibility)
-- [ ] STATE_AUTHORITY.md has explicit State Precedence Rules (ordering and suppression)
-- [ ] INTERACTION_AUTHORITY.md has Separation Law section (Interaction vs State Authority boundaries)
-- [ ] No raw Tailwind examples in Allowed Patterns (raw Tailwind only appears in Forbidden Patterns)
-- [ ] All boundary and precedence rules are explicit and unambiguous
-- [ ] All Authority documents reference enforcement docs (do not include enforcement content)
-
-**Rule:** If any checklist item is not satisfied, the Foundation Authority domain cannot be locked. All items must be verified and checked before proceeding with lock.
-
-**Note:** This checklist is for locking **Foundation Authority domains** (Interaction, State, Spacing, Radius, Typography, Motion, Elevation, Layout). For creating or refactoring **Foundation components** (Modal, Tabs, Select, ContextMenu, Toast), see the canonical lifecycle defined in [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) (Section 10: Foundation Component Creation & Refactor Route — Canonical Lifecycle). For human-readable navigation to the lifecycle process, see [FOUNDATION_LIFECYCLE_PROCESS_INDEX.md](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md).
+**Forbidden:** new config flags that widen responsibility.
 
 ---
 
-## 🔒 Token System Lock Status
+#### **STEP 3 — Duplication & Internal Pattern Alignment**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-13  
-**Reference:** [Token System Documentation](./TOKEN_AUTHORITY.md)  
-**Final Audit:** [Token Domains Final Report](../../../docs_archive/reports/archive/archive/reports/other/TUI_TOKEN_DOMAINS_FINAL_REPORT.md) - **FINAL VERDICT: OK** (Note: File may be in docs_archive)
+**I must demand:** consistency with nearest canonical patterns.
 
-The **Token System** is also **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All token domains, ownership rules, and semantic classifications are frozen.
-
-### What Is Locked in Token System
-
-1. **All Token Domains** - No token domains may be added, removed, merged, or split
-2. **Domain Ownership Rules** - Component → token domain mappings are immutable
-3. **Shared vs Component-Specific Separation** - The distinction is fixed
-4. **Token Naming Conventions** - All naming patterns are locked
-5. **Duplication Rules** - Semantic over DRY principle is immutable
-
-### Token System Unlock Procedure
-
-Any token system modifications require:
-1. Explicit unlock task with justification
-2. Full audit of all token domains
-3. Explicit approval for changes
-4. Re-verification after changes
-5. Re-lock with updated documentation
-
-**Note:** Token system lock applies to **BOTH humans and AI agents**. Any request to modify locked token aspects **MUST** be refused with reference to the token lock.
+**Forbidden:** inventing new patterns.
 
 ---
 
-## 🔒 Interaction Authority Lock Status
+#### **STEP 4 — State & Interaction Model**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Interaction Authority Contract](./INTERACTION_AUTHORITY.md)  
-**Reference Component:** Button (`src/components/ui/button.tsx`)
+**I must demand:** derived state via data‑attributes/CSS where possible; minimal JS state.
 
-The **Interaction Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All interaction state rules, priority order, and enforcement mechanisms are frozen.
-
-### What Is Locked in Interaction Authority
-
-1. **State Priority Order** - Fixed: `disabled > loading > active > hover > focus-visible > base`
-2. **Activation Conditions** - Rules for when each state can activate are immutable
-3. **Blocking Rules** - Rules for what states block other states are immutable
-4. **Required Attributes** - Required props/attributes (`disabled`, `aria-busy`) are immutable
-5. **Required CSS Patterns** - CSS implementation patterns (prefixes, selectors) are immutable
-6. **Forbidden Patterns** - JavaScript-driven states, raw pointer-events-none patterns are immutable
-7. **Verification Requirements** - Iframe-only verification, DevTools invalidation rules are immutable
-
-### Interaction Authority Contract Documents
-
-The following documents are part of the locked Interaction Authority:
-
-- `docs/architecture/INTERACTION_AUTHORITY.md` - Canonical contract definition
-- `docs/architecture/INTERACTION_AUTHORITY_AUDIT.md` - Button component audit (reference implementation)
-- `docs/architecture/INTERACTION_AUTHORITY_GUARD_LAYER.md` - Mechanically checkable guard rules
-- `docs/architecture/INTERACTION_AUTHORITY_HOVER_VERIFICATION.md` - Iframe-only verification protocol
-
-### Automated Enforcement
-
-Interaction Authority is enforced via:
-
-- **Automated Script:** `scripts/verify-interaction-authority.mjs`
-  - Command: `pnpm verify:interaction-authority`
-  - Output: `artifacts/interaction-authority-report.md`
-  - Exit code: 0 (pass) or 1 (violations found)
-- **Code Review:** Guard layer rules in code review checklist
-- **Linting:** Future ESLint rules based on guard layer patterns
-
-### Interaction Authority Unlock Procedure
-
-Any Interaction Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all interactive components
-3. Explicit approval for changes
-4. Re-verification after changes (including manual browser testing)
-5. Re-lock with updated documentation
-
-**Note:** Interaction Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked interaction authority aspects **MUST** be refused with reference to the Interaction Authority lock.
-
-**Do not re-open Interaction Authority without explicit 'Unlock Interaction Authority' task approval.**
+**Forbidden:** custom interaction logic that duplicates platform/native behavior.
 
 ---
 
-## 🔒 Button CVA Enforcement Lock Status
+#### **STEP 5 — Token, Size & Variant Consistency**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-16  
-**Task:** C0_BUTTON_CVA_ENFORCEMENT  
-**Reference:** Button CVA Enforcement (document archived)  
-**Reference Component:** Button (`src/components/ui/button.tsx`)
+**I must demand:** token‑only; size scale subset justification; cross‑link to size canon docs.
 
-The **Button CVA Enforcement** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. Button serves as the **canonical reference implementation** for token-driven CVA patterns across the design system.
+**Forbidden:** component‑specific size scales; introducing `icon` as a size key.
 
-### What Is Locked in Button CVA Enforcement
+**Acceptance must include:**
 
-1. **CVA Enforcement Rules** - All CVA enforcement rules are immutable
-2. **Token-Only Variants** - CVA variants may only reference token-derived classes
-3. **No Raw Tailwind Colors** - Raw Tailwind color utilities are forbidden
-4. **State Matrix Authority** - All state classes must use State Matrix CSS variables
-5. **Interaction Authority Compliance** - All Interaction Authority rules must be respected
-6. **Reference Implementation** - Button is the canonical example for tokenCVA patterns
+* sizes listed and justified
 
-### Button CVA Enforcement Contract Documents
+* token compliance statement
 
-The following documents are part of the locked Button CVA Enforcement:
-
-- `docs/architecture/BUTTON_CVA_ENFORCEMENT.md` - Canonical CVA enforcement rules
-- `src/components/ui/button.tsx` - Reference implementation
-- `src/lib/token-cva.ts` - tokenCVA utility with validation
-
-### Automated Enforcement
-
-Button CVA Enforcement is enforced via:
-
-- **tokenCVA Validation:** Development mode validation of token usage
-- **Type Safety:** TypeScript enforces valid variant/size values
-- **Runtime Warnings:** Forbidden patterns trigger console warnings
-- **Code Review:** CVA enforcement rules in code review checklist
-
-### Button CVA Enforcement Unlock Procedure
-
-Any Button CVA Enforcement modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of Button CVA usage
-3. Explicit approval for changes
-4. Re-verification after changes
-5. Re-lock with updated documentation
-
-**Note:** Button CVA Enforcement lock applies to **BOTH humans and AI agents**. Any request to modify locked Button CVA enforcement aspects **MUST** be refused with reference to the Button CVA Enforcement lock.
-
-**Do not modify Button CVA without explicit 'Unlock Button CVA Enforcement' task approval.**
+* report STEP 5 updated
 
 ---
 
-## 🔒 State Authority Matrix Lock Status
+#### **STEP 6 — Public API & DX Review**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-16  
-**Version:** 1.0  
-**Reference:** [State Authority Matrix](./STATE_MATRIX.md)  
-**Reference Component:** Button (`src/components/ui/button.tsx`)
+**I must demand:** remove confusing props; enforce safe defaults; clear docs.
 
-The **State Authority Matrix** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. It establishes the universal state model that governs all interactive UI component states across the system.
-
-### What Is Locked in State Authority Matrix
-
-1. **Canonical State Set** - Exactly six states: `base`, `hover`, `active`, `focus-visible`, `disabled`, `loading`
-2. **State Semantics** - Definitions of what each state represents and when it applies
-3. **Priority Order** - Fixed priority: `disabled > loading > active > hover > focus-visible > base`
-4. **Suppression Rules** - Rules for which states block which other states
-5. **Component State Requirements** - All interactive components must use only canonical states
-6. **Reference Implementation** - Button component is the canonical example
-
-### State Authority Matrix Contract Documents
-
-The following documents are part of the locked State Authority Matrix:
-
-- `docs/architecture/STATE_MATRIX.md` - Canonical state matrix definition (WHAT states exist)
-- `docs/architecture/STATE_AUTHORITY.md` - State token model (HOW states are represented)
-- `docs/architecture/INTERACTION_AUTHORITY.md` - State activation rules (WHEN states activate)
-- `src/components/ui/button.tsx` - Reference implementation
-- `src/tokens/state-matrix.ts` - Technical State Matrix implementation
-
-### Relationship to Other Authorities
-
-The State Authority Matrix works in conjunction with:
-
-- **Interaction Authority Contract** - Defines WHEN states can activate (this Matrix defines WHAT states exist)
-- **State Authority Contract** - Defines HOW states are implemented (this Matrix defines HOW states relate)
-
-### State Authority Matrix Unlock Procedure
-
-Any State Authority Matrix modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all interactive components
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** State Authority Matrix lock applies to **BOTH humans and AI agents**. Any request to modify locked State Authority Matrix aspects **MUST** be refused with reference to the State Authority Matrix lock.
-
-**Do not modify State Authority Matrix without explicit 'Unlock State Authority Matrix' task approval.**
+**Critical:** any deliberate contract decision (example: default button type) must be written + migration note.
 
 ---
 
-## 🔒 State Authority Contract Lock Status
+#### **STEP 7 — Type System Alignment**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-16  
-**Version:** 1.0  
-**Reference:** [State Authority Contract](./STATE_AUTHORITY.md)
+**I must demand:** explicit unions; no internal CVA types leaking; readable types.
 
-The **State Authority Contract** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. It establishes the canonical HOW layer for state tokens: the format, structure, and naming rules for representing UI component states.
-
-### What Is Locked in State Authority Contract
-
-1. **State Token Model** - Canonical structure: Component → Variant → State → Property → Value
-2. **State Token Naming Rules** - CSS variable naming pattern: `--{component}-{variant}-{state}-{property}`
-3. **Property Suffix Mapping** - Fixed mapping: background → bg, text → text, border → border, outline → outline, shadow → shadow
-4. **State Priority Rules** - Reference-level priority order: `disabled > loading > active > hover > focus-visible > base`
-5. **Component Obligations** - Rules for how components must use state tokens
-6. **Value Format** - HSL color string format requirement
-
-### State Authority Contract Documents
-
-The following documents are part of the locked State Authority Contract:
-
-- `docs/architecture/STATE_AUTHORITY.md` - Canonical state token model (HOW layer)
-- `docs/architecture/STATE_MATRIX.md` - Canonical state set (WHAT layer, complementary)
-- `docs/architecture/INTERACTION_AUTHORITY.md` - State activation rules (WHEN layer, complementary)
-
-### Relationship to Other Authorities
-
-The State Authority Contract works in conjunction with:
-
-- **State Authority Matrix** - Defines WHAT states exist (this Contract defines HOW they are represented)
-- **Interaction Authority Contract** - Defines WHEN states activate (this Contract defines HOW they are represented)
-
-**Authority Hierarchy:**
-1. **State Authority Matrix** (WHAT) - Defines which states exist
-2. **Interaction Authority Contract** (WHEN) - Defines when states activate
-3. **State Authority Contract** (HOW) - This document - Defines how states are represented
-
-### State Authority Contract Unlock Procedure
-
-Any State Authority Contract modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all interactive components
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** State Authority Contract lock applies to **BOTH humans and AI agents**. Any request to modify locked State Authority Contract aspects **MUST** be refused with reference to the State Authority Contract lock.
-
-**Do not modify State Authority Contract without explicit 'Unlock State Authority Contract' task approval.**
+**Forbidden:** widening types "for convenience".
 
 ---
 
-## 🔒 Spacing Authority Lock Status
+#### **STEP 8 — Intentional Refactor Pass**
 
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Spacing Authority Contract](./SPACING_AUTHORITY.md)
+**Mandatory:** explicit decision recorded:
 
-The **Spacing Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All spacing token rules, canonical scales, and component requirements are frozen.
+* `Refactor required` + list
 
-### What Is Locked in Spacing Authority
+* OR `Refactor not required` + justification
 
-1. **Canonical Token Scale** - Base spacing scale (8px grid), semantic spacing, layout spacing are immutable
-2. **Component Rules** - Token-only spacing, grid system compliance, semantic preference rules are immutable
-3. **Forbidden Patterns** - Arbitrary spacing values, component-specific scales, grid violations are immutable
-4. **Semantic Mapping** - Layout pattern mapping rules are immutable
-
-### Spacing Authority Contract Documents
-
-The following documents are part of the locked Spacing Authority:
-
-- `docs/architecture/SPACING_AUTHORITY.md` - Canonical spacing contract definition
-
-### Spacing Authority Unlock Procedure
-
-Any Spacing Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all component spacing usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Spacing Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked spacing authority aspects **MUST** be refused with reference to the Spacing Authority lock.
-
-**Do not modify Spacing Authority without explicit 'Unlock Spacing Authority' task approval.**
+Also record **consciously NOT made changes**.
 
 ---
 
-## 🔒 Radius Authority Lock Status
+#### **STEP 9 — Mandatory FIX & Consolidation**
 
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Radius Authority Contract](./RADIUS_AUTHORITY.md)
+**I must demand:**
 
-The **Radius Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All border radius token rules, canonical scales, and component standards are frozen.
+* all FIX backlog items applied or explicitly deferred
 
-### What Is Locked in Radius Authority
+* compliance with existing system standards
 
-1. **Canonical Token Scale** - Base radius scale (none, xs, sm, md, lg, xl, 2xl, 3xl, full) is immutable
-2. **Component Standards** - Component-specific radius standards (button, card, input, badge, etc.) are immutable
-3. **Component Rules** - Token-only radius, scale system compliance, component standard preference rules are immutable
-4. **Forbidden Patterns** - Arbitrary radius values, inline border-radius, component-specific scales are immutable
+* explicit decision recorded in audit report
 
-### Radius Authority Contract Documents
+**Forbidden:** proceeding without completing FIX phase.
 
-The following documents are part of the locked Radius Authority:
+**Acceptance must include:**
 
-- `docs/architecture/RADIUS_AUTHORITY.md` - Canonical radius contract definition
+* all fixes applied or deferred with justification
 
-### Radius Authority Unlock Procedure
-
-Any Radius Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all component radius usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Radius Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked radius authority aspects **MUST** be refused with reference to the Radius Authority lock.
-
-**Do not modify Radius Authority without explicit 'Unlock Radius Authority' task approval.**
+* report STEP 9 updated
 
 ---
 
-## 🔒 Typography Authority Lock Status
+#### **STEP 10 — Validation via Tests & Storybook**
 
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Typography Authority Contract](./TYPOGRAPHY_AUTHORITY.md)
+**I must demand:**
 
-The **Typography Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All typography token rules, canonical scales, and semantic roles are frozen.
+* tests for public behavior and edge cases
 
-### What Is Locked in Typography Authority
+* Storybook demonstrates **matrix** (variants × sizes), states, and at least one realistic usage
 
-1. **Canonical Token Scale** - Font families, font sizes (fluid), font weights, line heights, letter spacing are immutable
-2. **Predefined Text Styles** - Display, heading (h1-h6), body, label, caption styles are immutable
-3. **Component Rules** - Token-only typography, semantic role preference, typography hierarchy rules are immutable
-4. **Forbidden Patterns** - Arbitrary typography values, component-specific scales, hierarchy violations are immutable
+**Forbidden:** one placeholder story + one shallow test.
 
-### Typography Authority Contract Documents
+**Acceptance must include:**
 
-The following documents are part of the locked Typography Authority:
+* tests added/updated
 
-- `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - Canonical typography contract definition
+* story matrix present
 
-### Typography Authority Unlock Procedure
-
-Any Typography Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all component typography usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Typography Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked typography authority aspects **MUST** be refused with reference to the Typography Authority lock.
-
-**Do not modify Typography Authority without explicit 'Unlock Typography Authority' task approval.**
+* report STEP 10 updated
 
 ---
 
-## 🔒 Motion Authority Lock Status
+#### **STEP 11 — Accessibility Audit & Fixes (MANDATORY)**
 
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Motion Authority Contract](./MOTION_AUTHORITY.md)
+**I must demand:** keyboard, focus, ARIA/role correctness + A11Y stories/tests.
 
-The **Motion Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All motion token rules, canonical durations, easings, transitions, and animations are frozen.
-
-### What Is Locked in Motion Authority
-
-1. **Canonical Token Scale** - Durations (100ms base unit), easings, transitions, keyframes, animations are immutable
-2. **Reduced Motion Support** - Reduced motion tokens and accessibility compliance rules are immutable
-3. **Component Rules** - Token-only motion, transition preference, reduced motion compliance rules are immutable
-4. **Forbidden Patterns** - Arbitrary motion values, component-specific scales, reduced motion violations are immutable
-
-### Motion Authority Contract Documents
-
-The following documents are part of the locked Motion Authority:
-
-- `docs/architecture/MOTION_AUTHORITY.md` - Canonical motion contract definition
-
-### Motion Authority Unlock Procedure
-
-Any Motion Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all component motion usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Motion Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked motion authority aspects **MUST** be refused with reference to the Motion Authority lock.
-
-**Do not modify Motion Authority without explicit 'Unlock Motion Authority' task approval.**
+**Risk:** this is the most code‑invasive step. Require strict scoping and proof.
 
 ---
 
-## 🔒 Elevation Authority Lock Status
+#### **STEP 12 — Final Review & Outcome Fixation + Architectural Lock**
 
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Elevation Authority Contract](./ELEVATION_AUTHORITY.md)
+**I must demand:**
 
-The **Elevation Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All elevation token rules, canonical shadows, z-index scale, and stacking order are frozen.
+* Final Report Consistency Check completion (6 mandatory checks)
 
-### What Is Locked in Elevation Authority
+* All consistency checks pass before Lock Propagation
 
-1. **Canonical Token Scale** - Elevation shadows, colored shadows, glow effects, focus rings are immutable
-2. **Z-Index Scale** - Canonical z-index layers (base, content, dropdown, sticky, overlay, modal, notification, tooltip, maximum) are immutable
-3. **Component Rules** - Token-only elevation, shadow preference, z-index layer assignment, stacking order compliance rules are immutable
-4. **Forbidden Patterns** - Arbitrary elevation values, component-specific scales, z-index stacking violations are immutable
+**Mandatory checks before Lock Propagation:**
+- Lock status consistency (single status throughout)
+- Baseline BLOCKER → STEP 9 resolution traceability
+- STEP 9 absolutism verification (explanations for exceptions)
+- File reality verification (mentions match actual state)
+- Outcome/changes logic consistency
+- Export decision documentation
 
-### Elevation Authority Contract Documents
+**Forbidden:** Proceeding to Lock Propagation if any consistency check fails
 
-The following documents are part of the locked Elevation Authority:
+**Acceptance must include:**
+- All 6 consistency checks verified passed
+- Audit report wording corrections applied (if any)
+- Lock Propagation completed only after consistency check pass
 
-- `docs/architecture/ELEVATION_AUTHORITY.md` - Canonical elevation contract definition
+Lock propagation targets (minimum):
 
-### Elevation Authority Unlock Procedure
+**Required files (all components):**
+* `docs/architecture/FOUNDATION_LOCK.md` — If component is Foundation layer
+* `docs/architecture/ARCHITECTURE_LOCK.md` — Architectural decisions and constraints
+* `docs/PROJECT_PROGRESS.md` — Project progress tracking
+* `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — Component audit report (final section)
 
-Any Elevation Authority modifications require:
+**Additional files (if applicable):**
+* `docs/architecture/EXTENSION_STATE.md` — If component is Extension layer
 
-1. Explicit unlock task with justification
-2. Full audit of all component elevation usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Elevation Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked elevation authority aspects **MUST** be refused with reference to the Elevation Authority lock.
-
-**Do not modify Elevation Authority without explicit 'Unlock Elevation Authority' task approval.**
-
----
-
-## 🔒 Layout Authority Lock Status
-
-**Status:** ✅ LOCKED  
-**Lock Date:** 2025-12-16  
-**Version:** 1.1  
-**Reference:** [Layout Authority Contract](./LAYOUT_AUTHORITY.md)
-
-The **Layout Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. All layout rules, canonical layout primitives, separation laws, and component contract rules are frozen.
-
-### What Is Locked in Layout Authority
-
-1. **Canonical Layout Primitives** - Stack, Inline, Grid, Container, Overlay primitives are immutable
-2. **Layout Taxonomy** - Canonical taxonomy of layout primitives is immutable
-3. **Separation Laws** - Layout vs Spacing, State, Interaction, Positioning separation rules are immutable
-4. **Component Contract Rules** - Components cannot define layout context rules are immutable
-5. **Precedence Rules** - Layout container over component structure precedence is immutable
-6. **Hard Rules** - Layout cannot be defined through spacing tokens, components cannot define external layout, flex/grid forbidden without abstraction, absolute positioning forbidden without contract, layout cannot depend on interaction or state - all immutable
-7. **Forbidden Patterns** - Inline flex/grid in components, absolute positioning without contract, layout through margin, layout context in UI components, direct display properties - all immutable
-
-### Layout Authority Contract Documents
-
-The following documents are part of the locked Layout Authority:
-
-- `docs/architecture/LAYOUT_AUTHORITY.md` - Canonical layout contract definition
-
-### Layout Authority Unlock Procedure
-
-Any Layout Authority modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all component layout usage
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Layout Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked layout authority aspects **MUST** be refused with reference to the Layout Authority lock.
-
-**Do not modify Layout Authority without explicit 'Unlock Layout Authority' task approval.**
+**Forbidden:** claiming locked if any doc/report contradicts reality.
 
 ---
 
-## 🔒 Foundation Enforcement Lock Status
+### **I. Minimum closure checklist (what "DONE" means)**
 
-**Status:** ✅ **LOCKED / APPLIED**  
-**Lock Date:** 2025-12-18  
-**Version:** 1.0  
-**Reference:** [Foundation Contract](./FOUNDATION_CONTRACT.md)  
-**Reference:** [Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)
+A component is considered **closed** only when:
 
-The **Foundation Enforcement** is **LOCKED** and **APPLIED** as part of the Foundation architecture. Foundation components are **visually closed by design** and exclude `className` and `style` props from their public APIs. This enforcement is **technically enforced** and **irreversible** without explicit unlock procedure.
+* Audit report has STEP 0–12 filled
 
-### What Is Locked in Foundation Enforcement
+* Inventory/canon docs do not contradict code
 
-1. **className Exclusion** - Foundation components MUST NOT accept `className` prop in public API
-2. **style Exclusion** - Foundation components MUST NOT accept `style` prop in public API
-3. **Omit Pattern Requirement** - Foundation components MUST use `Omit<React.*HTMLAttributes, "className" | "style">` pattern
-4. **TypeScript Enforcement** - All Foundation components exclude styling props at compile time
-5. **ESLint Rules** - Regression guards prevent reintroduction of styling escape hatches
-6. **Type-Tests** - Compile-time verification ensures enforcement compliance for all Foundation components
+* Storybook coverage is not placeholder (matrix + states)
 
-### Foundation Enforcement Contract Documents
+* Tests cover behavior
 
-The following documents are part of the locked Foundation Enforcement:
+* A11Y step executed
 
-- `docs/architecture/FOUNDATION_CONTRACT.md` - Canonical Foundation contract definition (FINAL/APPLIED)
-- `docs/architecture/FOUNDATION_COMPONENT_SCOPE.md` - Foundation component scope and inclusion criteria
-- `docs/reports/TUI_PHASE_3_FOUNDATION_LOCK_ENFORCEMENT_REPORT.md` - Phase 3 TypeScript enforcement implementation
-- `docs/reports/TUI_PHASE_4_FOUNDATION_REGRESSION_GUARDS_REPORT.md` - Phase 4 regression guards implementation
-
-### Enforcement Mechanisms
-
-Foundation Enforcement is enforced via:
-
-- **TypeScript:** All Foundation components use `Omit<HTMLAttributes<...>, "className" | "style">` to exclude styling props
-- **ESLint Rules:**
-  - `no-foundation-classname-style`: Blocks `className` and `style` props in Foundation component interfaces
-  - `no-foundation-open-htmlattributes`: Requires `Omit<React.*HTMLAttributes, "className" | "style">` instead of direct extension
-- **Type-Tests:** All 9 Foundation components have type-level tests that verify `className` and `style` are excluded
-- **CI Integration:** All enforcement checks run automatically in CI pipeline (`typecheck` and `lint:ci` scripts)
-
-**ESLint Governance:** For complete ESLint governance rules, autofix policy, and architectural enforcement principles, see [ESLINT_SETUP.md](./ESLINT_SETUP.md).
-
-### Foundation Components Subject to Enforcement
-
-All Foundation components listed in [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) are subject to Foundation Enforcement:
-
-**Confirmed Foundation (Locked):**
-- Button
-- Link
-
-**Proposed Foundation (Subject to Enforcement):**
-- Text
-- Heading
-- Input
-- Textarea
-- Checkbox
-- Radio
-- Label
-
-**Radix-Based Foundation (Subject to Enforcement):**
-- Modal
-- Tabs
-- Select (when locked)
-- ContextMenu
-- Toast
-
-### Foundation Enforcement Unlock Procedure
-
-Any Foundation Enforcement modifications require:
-
-1. Explicit unlock task with justification
-2. Full audit of all Foundation components
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
-
-**Note:** Foundation Enforcement lock applies to **BOTH humans and AI agents**. Any request to modify locked Foundation Enforcement aspects **MUST** be refused with reference to the Foundation Enforcement lock.
-
-**Do not modify Foundation Enforcement without explicit 'Unlock Foundation Enforcement' task approval.**
-
-### Integration with Component Lifecycle
-
-Foundation Enforcement verification is a **mandatory step** in the Foundation component lifecycle:
-
-- **Step 7.5: Internal Styling Integrity & className Isolation Verification** (see [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md))
-- **Step 7.6: Internal Styling Integrity & ESLint Scope Verification** (see [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md))
-- All Foundation components MUST pass enforcement verification (Steps 7.5 and 7.6) before Foundation Lock (Step 13)
-- Enforcement compliance is verified via ESLint rules, type-tests, CI integration, and ESLint scope governance
+* Lock propagation completed and consistent
 
 ---
 
-## 🔒 Interactive Size Scale Authority Lock Status
+## 📄 **2. Audit Report Contract (REQUIRED)**
 
-**Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-18  
-**Version:** 1.0  
-**Reference:** [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md)  
-**Reference Component:** Button (`src/PRIMITIVES/Button/Button.tsx`)
+This pipeline is enforced through a single continuously-updated audit report created in STEP 0.
 
-The **Interactive Size Scale Authority** is **LOCKED** and **IMMUTABLE** as part of the Foundation architecture. The canonical meaning, scope, and allowed usage of `size` across interactive components is frozen.
+### **File**
 
-### What Is Locked in Interactive Size Scale Authority
+* The audit report file path must be stable per component, e.g.:
 
-1. **Canonical Definition** - `size` is an INTERACTIVE SCALE representing hit-area, vertical rhythm, focus/keyboard accessibility, and user interaction affordance
-2. **Canonical Scale** - The ONLY allowed interactive size scale is `"sm" | "md" | "lg"` (defined by Button)
-3. **Component Classification** - Interactive components (Button, Link, Input, Select, etc.) MUST use canonical scale; Semi-interactive components MUST NOT use `size` as interactive scale; Non-interactive components MUST NOT use `size` at all
-4. **Scale Ownership** - Button component is the canonical owner of the interactive size scale
-5. **Forbidden Sizes** - `xs` and `xl` are FORBIDDEN for interactive components
-6. **Token Relationship** - Interactive `size` maps to height, padding, font-size, and gap tokens; Typography scale (`xs`, `xl`, etc.) is SEPARATE and belongs only to Text, Heading, Label
-7. **Reference Implementation** - Button component is the reference implementation
+* `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
 
-### Interactive Size Scale Authority Contract Documents
+### **Required section structure**
 
-The following documents are part of the locked Interactive Size Scale Authority:
+* The report must contain these top-level sections (even if empty):
 
-- `docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md` - Canonical interactive size scale contract definition
-- `src/PRIMITIVES/Button/Button.tsx` - Reference implementation (canonical owner of interactive size scale)
-- `src/PRIMITIVES/Link/Link.tsx` - Interactive component example (aligns with Button size scale)
+* `STEP 0` … `STEP 12`
 
-### Interactive Size Scale Authority Unlock Procedure
+### **Required fields per step**
 
-Any Interactive Size Scale Authority modifications require:
+Each `STEP N` section must include:
 
-1. Explicit unlock task with justification
-2. Full audit of all interactive components
-3. Impact analysis of proposed changes
-4. Explicit approval for changes
-5. Re-verification of all components after changes
-6. Re-lock with updated documentation
+* `Outcome:` one of `No changes required | Changes applied | Changes required (not yet applied)`
 
-**Note:** Interactive Size Scale Authority lock applies to **BOTH humans and AI agents**. Any request to modify locked Interactive Size Scale Authority aspects **MUST** be refused with reference to the Interactive Size Scale Authority lock.
+* `Blocking:` `yes/no`
 
-**Do not modify Interactive Size Scale Authority without explicit 'Unlock Interactive Size Scale Authority' task approval.**
+* `Notes:` 1–5 bullet points max
+
+* `Changes:` list of actual changes (or `None`)
+
+* `Deferred:` list of deferred items (or `None`)
+
+### **Emoji markers (READABILITY, OPTIONAL)**
+
+Emojis may be used to improve scanning and readability.
+
+**Recommended mapping (do not invent new meanings):**
+
+* ✅ for compliant / no issues / completed
+
+* ⚠️ for non-blocking issues / warnings
+
+* 🚫 for blockers
+
+* 🛠️ for changes applied
+
+* 🧾 for documentation/report updates
+
+Rules:
+
+* Emojis are optional; never rely on emojis alone.
+
+* Keep emoji usage minimal (1 per bullet/line max).
+
+* Emojis must not change the meaning of the text.
+
+### **Consistency rule (CRITICAL)**
+
+* If a change is mentioned in `Notes`, it must exist in `Changes` (or be marked `Deferred`).
+
+* If a step made code changes, it must include `Behavior unchanged` confirmation (unless the step explicitly allows behavior change).
+
+### **Final Consistency Verification (STEP 12)**
+
+Before STEP 12 completion, the audit report MUST pass 6 mandatory consistency checks:
+
+1. Lock status is unified and consistent throughout
+2. All baseline BLOCKERS have resolution traces in STEP 9
+3. Absolute claims in STEP 9 have explanatory context
+4. All file mentions correspond to actual repository state
+5. No logical contradictions between outcome and changes sections
+6. Export decisions are explicitly documented
+
+Any failure in these checks prevents STEP 12 completion.
 
 ---
 
-## 🏁 Foundation Closure Statement
+## 📸 **3. STEP 0 — Baseline Snapshot & Context Fixation**
 
-**Date:** 2025-12-16  
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Phase Transition:** Foundation → Enforcement/Extension
+### Goal
 
-### Official Closure Declaration
+Establish a **factual baseline** of what exists **right now** and create a single, large, self-contained audit report that:
+1) captures the baseline (what exists now),
+2) captures the intended run plan (what we expect to do in STEP 1–12),
+3) prevents execution drift and rework loops.
 
-**THE FOUNDATION AUTHORITIES ARE COMPLETE, IMMUTABLE, AND CLOSED.**
+This step answers the question:
 
-This statement formally and definitively closes the Foundation architecture phase of `@tenerife.music/ui`. All Foundation Authorities have been established, locked, and are now immutable.
+> "What exactly are we dealing with before we start improving anything?"
 
-### Foundation Authorities Status
+### Lock Status Check (MANDATORY)
 
-All Foundation Authorities are **COMPLETE**, **IMMUTABLE**, and **CLOSED**:
+**Before proceeding:** Verify component lock status:
 
-- ✅ **Interaction Authority** - LOCKED (State priority order, activation conditions, blocking rules)
-- ✅ **State Authority Matrix** - LOCKED (Canonical state set, state semantics, priority order)
-- ✅ **State Authority Contract** - LOCKED (State token model, naming rules, property mapping)
-- ✅ **Token System** - LOCKED (All token domains, ownership rules, semantic classifications)
-- ✅ **Spacing Authority** - LOCKED (Canonical spacing scale, component rules, forbidden patterns)
-- ✅ **Radius Authority** - LOCKED (Canonical radius scale, component standards, forbidden patterns)
-- ✅ **Typography Authority** - LOCKED (Canonical typography scale, semantic roles, forbidden patterns)
-- ✅ **Motion Authority** - LOCKED (Canonical motion tokens, durations, easings, forbidden patterns)
-- ✅ **Elevation Authority** - LOCKED (Canonical elevation tokens, z-index scale, forbidden patterns)
-- ✅ **Layout Authority** - LOCKED (Canonical layout primitives, separation laws, forbidden patterns)
-- ✅ **Interactive Size Scale Authority** - LOCKED (Canonical interactive size scale, component classification, forbidden sizes)
-- ✅ **Extension Authority Contract** - ACTIVE (Extension layer boundary contract)
+- Check `docs/architecture/FOUNDATION_LOCK.md` for Foundation components
+- Check `docs/architecture/EXTENSION_STATE.md` for Extension components
+- If component is LOCKED, review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- Document lock status in audit report STEP 0 section
 
-### Immutability Declaration
+**For LOCKED components:** Any changes require exception declaration per policy. See [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) for template.
 
-**Foundation Authorities are IMMUTABLE:**
+### Recommended Model
 
-- ❌ **NO** modifications to existing Authority rules
-- ❌ **NO** changes to Authority contracts
-- ❌ **NO** additions to Foundation Authority set
-- ❌ **NO** breaking changes to Authority structure
+**Sonnet 4.5** — Structured documentation and careful reading. No code changes required in this step.
 
-**Future changes to Foundation Authorities are ONLY possible through:**
+### Mandatory Output
 
-1. **Explicit Authority Versioning** - New Authority versions (e.g., `INTERACTION_AUTHORITY_CONTRACT_v2.md`)
-2. **Explicit Unlock Procedure** - Full audit, justification, approval, and re-lock workflow
-3. **Explicit User Approval** - No Authority modifications without explicit user request and approval
+Create/overwrite the audit report at the canonical path:
 
-### Phase Transition
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
 
-**Foundation Phase:** ✅ **CLOSED**  
-**Enforcement Phase:** ✅ **OPEN** (Enforcement mechanisms can evolve)  
-**Extension Phase:** ✅ **OPEN** (Extension development is allowed)
+### Required Sections in the Audit Report (all required)
 
-The Foundation architecture phase is **OFFICIALLY CLOSED**. All future development must occur in:
+STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
-- **Enforcement Layer** - Improving enforcement mechanisms (tooling, scripts, verification)
-- **Extension Layer** - Building new components that compose Foundation components
+0) **Pipeline Progress Tracker**
+   - Checklist of all steps (STEP 0-12)
+   - Estimated time per step
+   - Checkpoint markers
+   - Total estimated time
 
-### Authority Evolution Path
+1) **Header / Metadata**
+   - Component name (exported name)
+   - Layer (Foundation / Extension)
+   - Date, operator, assistant
+   - Source files (exact paths)
 
-If Authority modifications are required in the future:
+2) **Baseline Inventory (FACTS ONLY)**
+   - Implementation files
+   - Storybook files
+   - Test files
+   - Export points (barrels + root exports)
+   - External deps (Radix, etc.)
+   - Current public props (snapshot)
 
-1. **Create new Authority version** (e.g., `INTERACTION_AUTHORITY_CONTRACT_v2.md`)
-2. **Maintain backward compatibility** with existing Authority
-3. **Document migration path** from old to new Authority
-4. **Update all references** to new Authority version
-5. **Deprecate old Authority** (but keep for reference)
+3) **Run Plan (STEP MAP) — REQUIRED**
+   A short plan for each step (STEP 1–12) including:
+   - What will be verified
+   - What is considered BLOCKING
+   - Whether code changes are allowed in that step
+   - Expected artifacts (report updates, tests, stories, docs)
 
-**Rule:** Foundation Authorities are closed. New Authority versions are the only path for Authority evolution.
+   This is not "future work promises".
+   This is an execution map to prevent drift.
 
-### Zero-Ambiguity Closure
+4) **Risk Register (ANTI-DRIFT) — REQUIRED**
+   List the most likely failure modes for this component, e.g.:
+   - Cursor invents new variants/sizes
+   - Cursor renames/moves files
+   - Placeholder stories/tests
+   - API widening during structural steps
+   For each risk: prevention rule.
 
-**THERE IS NO AMBIGUITY:**
+5) **Initial FIX Backlog (EMPTY STRUCTURE) — REQUIRED**
+   Create placeholders:
+   - `FIX-BLOCKERS (must fix)`
+   - `FIX-NONBLOCKERS (nice to fix)`
+   - `DEFERRED (explicitly not doing)`
+   Items are filled in STEP 1–8 and executed in STEP 9.
 
-- ✅ Foundation Authorities are **COMPLETE**
-- ✅ Foundation Authorities are **IMMUTABLE**
-- ✅ Foundation Authorities are **CLOSED**
-- ✅ Foundation phase is **OFFICIALLY CLOSED**
-- ✅ Transition to Enforcement/Extension phase is **AUTHORIZED**
+6) **DoD (Definition of Done) — REQUIRED**
+   The component is considered "closed" only when:
+   - STEP 0–12 sections exist and are filled
+   - STEP 10 tests + Storybook are not placeholder
+   - STEP 11 A11Y executed
+   - STEP 12 lock propagation completed and consistent
 
-**This closure statement is binding and final. Foundation Authorities cannot be modified without explicit Authority versioning or unlock procedure.**
+### Constraints
+
+- STEP 0 MUST NOT change code.
+- STEP 0 MUST NOT rename or move files.
+- STEP 0 is BLOCKING if the report is missing any required section above.
+- This step **does not judge quality**.
+- This step prevents accidental refactoring of the wrong thing.
+
+### Example
+
+💡 If both `Tooltip.tsx` and `Popover.tsx` exist, this step must record that fact **before** any conclusions are made.
+
+### Step Completion Checklist
+
+Before proceeding to STEP 1, verify:
+- [ ] Audit report created at canonical path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- [ ] Pipeline Progress Tracker section exists
+- [ ] Header/Metadata section filled
+- [ ] Baseline Inventory documented (files, exports, deps, props)
+- [ ] Run Plan (STEP MAP) created
+- [ ] Risk Register (ANTI-DRIFT) filled
+- [ ] Initial FIX Backlog structure created
+- [ ] DoD (Definition of Done) documented
+- [ ] No code changes made
+- [ ] STEP 0 section in audit report filled
+- [ ] Checkpoint: Audit report shared with operator
+
+---
+
+## 🔍 **4. STEP 1 — Structural & Code Quality Review**
+
+### **Goal**
+
+Identify and remove **obvious structural problems** in the code.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
+
+### **What to Look For**
+
+* Repeated JSX blocks that should be mapped.
+
+* Conditional rendering that is hard to follow.
+
+* Copy‑paste fragments with minor differences.
+
+* Deeply nested logic without clear intent.
+
+### **What Is Allowed Here**
+
+* ✅ Refactoring for readability.
+
+* ✅ Extracting helpers or subcomponents.
+
+* ✅ Replacing repetition with iteration (`map`).
+
+### **What Is Not Allowed Here**
+
+* 🚫 Changing behavior.
+
+* 🚫 Redesigning API.
+
+### **Example**
+
+💡 Multiple similar tooltip content blocks → single mapped structure.
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 2, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 1 section exists
+- [ ] Outcome field filled (`No changes required` | `Changes applied` | `Changes required`)
+- [ ] Blocking field filled (`yes/no`)
+- [ ] Structural issues documented in FIX backlog
+- [ ] No behavior changes made
+- [ ] No API changes made
+- [ ] Model recommendation followed (Sonnet 4.5)
+
+---
+
+## 🎯 **5. STEP 2 — Semantic Role & Responsibility Validation**
+
+### **Goal**
+
+Ensure the component has a **clear, narrow responsibility**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural analysis and decision-making about component role and responsibility.
+
+### **Questions to Answer**
+
+* Is this component informational, interactive, or structural?
+
+* Does it try to behave as more than one thing?
+
+### **Actions**
+
+* Write a short role definition (1–2 sentences).
+
+* Identify logic that does not belong to this role.
+
+### **Refactoring Guidance**
+
+* Move misplaced logic out.
+
+* Reduce scope rather than adding configuration flags.
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 3, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 2 section exists
+- [ ] Role definition written (1-2 sentences)
+- [ ] Out-of-scope logic identified
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+
+---
+
+## 🔄 **6. STEP 3 — Duplication & Internal Pattern Alignment**
+
+### **Goal**
+
+Normalize internal patterns so the component behaves like a **first‑class citizen** of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
+
+### **Checks**
+
+* Consistent prop order.
+
+* Consistent JSX structure.
+
+* Consistent handling of children / trigger / content.
+
+* **CVA Structure Validation (MANDATORY):**
+  - ✅ Validate CVA structure against canonical style (see `CVA_CANONICAL_STYLE.md`)
+  - ✅ Check for forbidden patterns (variant maps in variables, function calls, conditional logic)
+  - ✅ Verify variants are defined inline within CVA config
+  - ✅ Verify single tokenCVA invocation per variant set
+  - ✅ **Validate CVA type against Decision Matrix** (tokenCVA vs cva selection)
+  - ✅ Document any deviations in audit report
+
+### **Refactoring Guidance**
+
+* Align structure with similar components.
+
+* Prefer one clear pattern over multiple "almost the same" ones.
+
+### **Reference (CRITICAL)**
+
+**CVA Canonical Style Authority:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern
+- Variants must be explicit and inspectable
+- No inline variant objects outside CVA config
+- No dynamic construction of variants
+- Single tokenCVA invocation per variant set
+- Variants defined inline ONLY inside tokenCVA
+- **CVA Usage Decision Matrix** - Mandatory rules for tokenCVA vs cva selection
+
+**CVA Usage Decision Matrix Rules:**
+- ✅ **RULE 1:** tokenCVA is REQUIRED for components with token-driven axes (variant, size, state)
+- ✅ **RULE 2:** cva is ALLOWED only for components without token-driven axes (boolean/presentational flags only)
+- ✅ **RULE 3:** Foundation components using cva MUST document explicit rationale in audit report
+
+**Common CVA Violations:**
+- ❌ Variant maps defined in separate variables (violates explicit variant requirement)
+- ❌ Function calls generating variant objects (violates declarative requirement)
+- ❌ Conditional spreading inside CVA config (violates static requirement)
+- ❌ Building CVA config dynamically (violates single invocation requirement)
+- ❌ Reusing variant objects across components (violates inline requirement)
+- ❌ Using cva for token-driven component (violates Decision Matrix RULE 1)
+- ❌ Using tokenCVA for boolean-only component without justification (violates Decision Matrix RULE 2)
+
+**Reference Examples:**
+- **Button** (`src/PRIMITIVES/Button/Button.tsx`) - Foundation component with tokenCVA, complete token compliance
+- **Slider** (`src/COMPOSITION/controls/Slider/Slider.tsx`) - Extension component with tokenCVA migration pattern (cva → tokenCVA), token hole fixing
+- 📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Complete reference examples
+
+**STEP 3 validates CVA structure against canonical style AND CVA Usage Decision Matrix. Non-canonical structure or incorrect CVA type selection is a BLOCKER.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 4, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 3 section exists
+- [ ] Pattern alignment issues documented
+- [ ] CVA structure validated against canonical style
+- [ ] CVA violations documented in FIX backlog (if any)
+- [ ] Findings documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+
+---
+
+## ⚡ **7. STEP 4 — State & Interaction Model Review**
+
+### **Goal**
+
+Confirm that interaction logic is **simple, predictable, and platform‑native**.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Analysis and documentation. Refactoring findings are recorded in FIX backlog and deferred to STEP 9.
+
+### **Checks**
+
+* What states exist and why.
+
+* Which states are derived vs explicit.
+
+* Whether JS is used where CSS or native behavior would suffice.
+
+### **Refactoring Guidance**
+
+* Remove unnecessary JS state.
+
+* Simplify interaction paths.
+
+### **Reference (CRITICAL)**
+
+**State Authorities (3-Layer System):**
+
+📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - **WHAT** states exist
+- Canonical state set: `base`, `hover`, `active`, `focus-visible`, `disabled`, `loading`
+- State relationships and mutual exclusivity rules
+
+📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - **WHEN** states activate
+- Activation conditions and blocking rules
+- Priority order: `disabled > loading > active > hover > focus-visible > base`
+- Browser-native interaction rules
+
+📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - **HOW** states represented
+- State token naming pattern: `--{component}-{variant}-{state}-{property}`
+- CSS variable structure and format
+- State representation as tokens
+
+**STEP 4 validates interaction logic against all three state authorities.**
+
+**Common Violations:**
+- ❌ Custom state invention (violates STATE_MATRIX)
+- ❌ JavaScript-driven hover/active (violates INTERACTION_AUTHORITY)
+- ❌ Incorrect state priority (violates INTERACTION_AUTHORITY)
+- ❌ Non-standard state naming (violates STATE_AUTHORITY)
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 5, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 4 section exists
+- [ ] State model documented
+- [ ] Interaction issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+
+---
+
+## 🎨 **8. STEP 5 — Token, Size & Variant Consistency**
+
+### **Goal**
+
+Ensure the component speaks the **same visual language** as the rest of the system.
+
+### **Recommended Model**
+
+**Sonnet 4.5** — Compliance validation and documentation.
+
+### **Checks**
+
+* Token‑only styling (no raw values).
+
+* Size usage aligned with the shared size scale.
+
+* Variants that represent real use cases, not implementation quirks.
+
+### **Refactoring Guidance**
+
+* Collapse near‑duplicate variants.
+
+* Remove custom size naming.
+
+### **Scope Boundary (CRITICAL)**
+
+⚠️ STEP 5 is a **compliance validation step**, not a final optimization step.
+
+* Allowed: `compliant`, `aligned`, `no issues detected at this stage`.
+
+* Prohibited: declaring `optimal`, `final`, or "no further refactoring will ever be required".
+
+### **Reference (CRITICAL)**
+
+**Size & Variant Canon:**
+
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale and variant naming dictionary
+- GlobalSize scale: `xs | sm | md | lg | xl | 2xl | 3xl`
+- InteractiveVariant dictionary: `primary | secondary | accent | outline | ghost | destructive | link`
+- SurfaceVariant dictionary: `default | elevated | outlined | filled | subtle`
+- Component subset declarations
+- Overlay size restriction: `sm | md | lg` only
+- Storybook requirements: Matrix and States stories
+
+📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract
+- Mandatory mapping keys: heightToken, paddingXToken, paddingYToken, textToken, radiusToken
+- Optional mapping keys: gapToken, iconSizeToken, minWidthToken, hitAreaToken, maxWidthToken
+- No raw values policy (token references only)
+- Storybook requirements: SizesGallery story
+
+**Token Authorities (Referenced by Size Mappings):**
+
+📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale
+- Canonical spacing scale: `spacing[0]`, `spacing[px]`, `spacing[1..8]`
+- Semantic spacing: `semanticSpacing.xs`, `semanticSpacing.sm`, `semanticSpacing.md`, `semanticSpacing.lg`, `semanticSpacing.xl`
+- Layout spacing: `layoutSpacing.section.*`, `layoutSpacing.container.*`, `layoutSpacing.grid.*`
+- Forbidden: raw pixel/rem values
+
+📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography token scale
+- Font size scale: `fontSize.xs`, `fontSize.sm`, `fontSize.base`, `fontSize.lg`, `fontSize.xl`, `fontSize["2xl"]`
+- Font family: `fontFamily.sans`, `fontFamily.display`
+- Font weight: `fontWeight.normal`, `fontWeight.medium`, `fontWeight.semibold`, `fontWeight.bold`
+- Line height: `lineHeight.tight`, `lineHeight.normal`, `lineHeight.relaxed`
+- Forbidden: raw font-size values
+
+📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius token scale
+- Base radius: `borderRadius.none`, `borderRadius.sm`, `borderRadius.md`, `borderRadius.lg`, `borderRadius.full`
+- Component radius: `componentRadius.button.*`, `componentRadius.input.*`, etc.
+- Forbidden: raw border-radius values
+
+📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens
+- Duration scale: `duration.fast`, `duration.normal`, `duration.slow`
+- Easing: `easing.default`, `easing.in`, `easing.out`, `easing.inOut`
+- Transition presets: `transitions.fast`, `transitions.normal`, `transitions.slow`
+- **Motion GAP rule:** All state/spatial changes must be evaluated for Motion GAP
+- **GAP resolution:** ADD MOTION, NO MOTION BY DESIGN, or DEFERRED (UNLOCKED only)
+- Forbidden: raw transition values, unresolved GAPs in LOCKED components
+
+📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens
+- Shadow scale: `elevationShadows.none`, `elevationShadows.sm`, `elevationShadows.md`, `elevationShadows.lg`
+- Z-index layers: `zIndex.base`, `zIndex.dropdown`, `zIndex.overlay`, `zIndex.modal`, `zIndex.notification`
+- Focus rings: `focusRings.default`
+- Forbidden: raw box-shadow/z-index values
+
+**STEP 5 Compliance Rules:**
+1. ✅ All sizes must use GlobalSize scale (component declares supported subset)
+2. ✅ All variants must use canonical variant dictionaries (InteractiveVariant or SurfaceVariant)
+3. ✅ Overlay components: restricted to `sm | md | lg` sizes only (CRITICAL rule)
+4. ✅ All mappings must reference tokens only (no raw values)
+5. ✅ Size mapping table required for all sized components
+6. ✅ Matrix story required if component has BOTH size AND variant props
+7. ✅ States story required if component has public state props/interactive behavior
+8. ✅ SizesGallery story required if component has public size prop
+
+**Common Violations:**
+- ❌ Using `size="icon"` (forbidden non-GlobalSize value, use `iconOnly={true}` instead)
+- ❌ Raw spacing values (e.g., `padding: "8px"` instead of `semanticSpacing.sm`)
+- ❌ Raw typography values (e.g., `fontSize: "14px"` instead of `fontSize.sm`)
+- ❌ Invented variant names (e.g., `variant="danger"` instead of `variant="destructive"`)
+- ❌ Overlay with `xs` or `xl` sizes (violates overlay restriction)
+- ❌ States encoded as variants (e.g., `variant="disabled"` instead of `disabled={true}`)
+
+**Validation Order:**
+1. Check GlobalSize compliance (VARIANTS_SIZE_CANON)
+2. Check variant dictionary compliance (VARIANTS_SIZE_CANON)
+3. Check size mapping table existence (SIZE_MAPPING_SPEC)
+4. Check token reference compliance (all Token Authorities)
+5. **Check Motion GAP resolution** (MOTION_AUTHORITY.md) - Evaluate all state/spatial changes for Motion GAP
+6. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 6, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 5 section exists
+- [ ] Token compliance validated
+- [ ] Size scale alignment checked
+- [ ] Variant issues documented in FIX backlog
+- [ ] Model recommendation followed (Sonnet 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
+---
+
+## 📚 **9. STEP 6 — Public API & DX Review**
+
+### **Goal**
+
+Make the component **easy to understand and hard to misuse**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Architectural judgment about public API design and developer experience.
+
+### **Checks**
+
+* Are all public props necessary?
+
+* Can the component be used correctly without reading its implementation?
+
+### **Refactoring Guidance**
+
+* Remove or rename unclear props.
+
+* Prefer composition over configuration.
+
+### **Scope Boundary (CRITICAL)**
+
+⚠️ STEP 6 evaluates the **current API quality**, but must not declare the API final.
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 7, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 6 section exists
+- [ ] Public API reviewed
+- [ ] DX issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
+---
+
+## 🔷 **10. STEP 7 — Type System Alignment**
+
+### **Goal**
+
+Use the type system as **a safety net and documentation tool**.
+
+### **Recommended Model**
+
+**Opus 4.5** — Type system analysis and reasoning.
+
+### **Checks**
+
+* Explicit unions instead of wide types.
+
+* No leaking of internal variant machinery.
+
+* Types readable without implementation context.
+
+* **CVA Structure & Type Alignment (MANDATORY):**
+  - ✅ Ensure CVA structure matches canonical variant/type layout (see `CVA_CANONICAL_STYLE.md`)
+  - ✅ Verify explicit union types exist (see `TYPING_STANDARD.md`)
+  - ✅ Verify `satisfies Record<Type, string>` constraints are present in CVA variant maps
+  - ✅ Ensure no CVA-derived types leak into public API
+  - ✅ Verify CVA structure supports explicit union types (variants inline, no intermediate objects)
+
+### **Refactoring Guidance**
+
+* Rewrite types for clarity.
+
+* Treat types as part of the public contract.
+
+### **Scope Boundary (CRITICAL)**
+
+⚠️ STEP 7 must not declare the type system `optimal` or `final`.
+
+### **Reference**
+
+**Type System Standards:**
+
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Size and variant type declarations
+- Component must declare supported sizes explicitly (e.g., `type ButtonSize = "sm" | "md" | "lg"`)
+- Component must declare supported variants explicitly (e.g., `type ButtonVariant = "primary" | "secondary" | ...`)
+- No invented type names outside canonical dictionaries
+
+**CVA Canonical Style Authority:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern
+- CVA structure must support explicit union types
+- Variant maps must use `satisfies Record<Type, string>` constraints
+- CVA structure must not leak into public API types
+- **CVA Usage Decision Matrix** - Mandatory rules for tokenCVA vs cva selection
+
+**CVA Usage Decision Matrix Validation:**
+- ✅ Components with token-driven axes (variant, size, state) MUST use tokenCVA
+- ✅ Components with only boolean/presentational flags MAY use cva
+- ✅ Foundation components using cva MUST document explicit rationale
+
+**Typing Standard:**
+
+📖 [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - Explicit union types requirement
+- Public props MUST reference explicit union types
+- CVA-derived types are FORBIDDEN in public APIs
+- Variant maps MUST be type-constrained with `satisfies Record<Type, string>`
+
+**Common Type Patterns:**
+
+✅ **Explicit Size/Variant Types:**
+```typescript
+export type ButtonSize = "sm" | "md" | "lg"; // Explicit GlobalSize subset
+export type ButtonVariant = "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive";
+```
+
+✅ **Props Interface:**
+```typescript
+export interface ButtonProps {
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  loading?: boolean;
+}
+```
+
+✅ **CVA with Type Constraints:**
+```typescript
+export const buttonVariants = tokenCVA({
+  variants: {
+    variant: {
+      primary: `${TOKENS.variant.primary.bg}`,
+      secondary: `${TOKENS.variant.secondary.bg}`,
+    } satisfies Record<ButtonVariant, string>, // Type constraint required
+  },
+});
+```
+
+❌ **Wide Types (Forbidden):**
+```typescript
+type ButtonSize = string; // Too wide, violates GlobalSize
+type ButtonVariant = string; // Too wide, violates variant dictionary
+```
+
+❌ **Leaking Internal Machinery (Forbidden):**
+```typescript
+export type ButtonProps = VariantProps<typeof buttonVariants>; // Leaks CVA internal types
+```
+
+❌ **CVA Without Type Constraints (Forbidden):**
+```typescript
+export const buttonVariants = tokenCVA({
+  variants: {
+    variant: {
+      primary: `${TOKENS.variant.primary.bg}`,
+      secondary: `${TOKENS.variant.secondary.bg}`,
+    }, // ❌ Missing satisfies Record<ButtonVariant, string>
+  },
+});
+```
+
+**STEP 7 validates that types are explicit, readable, aligned with canonical dictionaries, that CVA structure supports type system requirements, and that CVA type selection (tokenCVA vs cva) matches Decision Matrix. CVA structure violations and Decision Matrix violations are BLOCKERS.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 8, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 7 section exists
+- [ ] Type system reviewed
+- [ ] CVA structure validated for type alignment
+- [ ] Type constraints (`satisfies Record<Type, string>`) verified in CVA variant maps
+- [ ] Type issues documented in FIX backlog
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] Recommended checkpoint: Share audit report
+
+---
+
+## ✨ **11. STEP 8 — Intentional Refactor Pass**
+
+### **Goal**
+
+Perform a **final, focused quality sweep**.
+
+### **Locked Component Exception Check (MANDATORY)**
+
+**For LOCKED components:** Before deciding on refactor changes:
+
+- Review [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- If changes violate lock policy, declare exception using [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](../policies/LOCKED_CHANGE_EXCEPTION_TEMPLATE.md)
+- Document exception in audit report BEFORE proceeding to STEP 9
+- Exception must include: reason, pipeline step, why lock is insufficient, risk assessment, rollback strategy
+
+**Exception Declaration:** Must be completed in STEP 8 before any code changes in STEP 9.
+
+### **Recommended Model**
+
+**Opus 4.5** — Senior-level decision-making about what to fix in STEP 9.
+
+### **Guiding Question**
+
+> "If this code were reviewed today by a senior engineer, would it pass without comments?"
+
+### **Actions**
+
+* Re‑read all code.
+
+* Simplify naming and structure.
+
+* Remove remaining incidental complexity.
+
+### **Mandatory Outcome (CRITICAL)**
+
+⚠️ This step **must end** with an explicit decision recorded in the audit report:
+
+* `Refactor required` (with minimal scoped description)
+
+* or `Refactor not required` (with justification)
+
+Additionally, STEP 8 must record a list of **consciously NOT made changes**.
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 9, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 8 section exists
+- [ ] Explicit decision recorded: `Refactor required` OR `Refactor not required`
+- [ ] Consciously NOT made changes documented
+- [ ] FIX backlog finalized (all STEP 1-8 findings collected)
+- [ ] Model recommendation followed (Opus 4.5)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 9**
+
+---
+
+## 🛠️ **12. STEP 9 — Mandatory FIX & Consolidation (CRITICAL)**
+
+### **Goal**
+
+Apply all required fixes identified during STEP 1–8 to ensure full compliance
+
+with existing system standards before any validation or locking occurs.
+
+### **Locked Component Guard (MANDATORY)**
+
+**For LOCKED components:** Before applying ANY code changes:
+
+- ✅ Verify exception declaration exists in audit report (from STEP 8)
+- ✅ Verify exception follows [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) policy
+- ✅ Verify change scope matches exception declaration (minimal delta only)
+- ❌ **FORBIDDEN:** Changes without exception declaration
+- ❌ **FORBIDDEN:** Changes exceeding exception scope
+
+**Guard Enforcement:** If exception is missing or invalid, STOP and request exception declaration before proceeding.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Apply ALL fixes from backlog. Heavy code work including refactoring, structure improvements, and duplication removal.
+
+### **Scope**
+
+- Apply all items from the FIX backlog.
+
+- Improve readability, structure, and maintainability.
+
+- Remove duplication and incidental complexity.
+
+### **Constraints**
+
+- No new features.
+
+- No behavior changes unless explicitly required by fixes.
+
+- Public API changes are prohibited unless explicitly approved and documented.
+
+### **FIX Backlog**
+
+A FIX backlog must be explicitly defined in the audit report, containing:
+
+- architectural violations discovered during STEP 1–7,
+
+- code quality issues (readability, structure, naming, duplication),
+
+- refactors identified but not yet applied,
+
+- items consciously deferred with justification.
+
+### **Required Decision**
+
+The audit report **must include one of the following explicit outcomes**:
+
+- `Refactor required` — with a concrete list of fixes to be applied.
+
+- `No refactor required` — with a clear justification.
+
+If `Refactor required` is declared:
+
+- all listed fixes **must be applied** before proceeding,
+
+- affected steps **must be re-validated** and recorded.
+
+### **CVA Normalization (MANDATORY)**
+
+**If CVA structure deviates from canonical style, normalization is REQUIRED:**
+
+- ✅ Normalize CVA structure to canonical pattern (see `CVA_CANONICAL_STYLE.md`)
+- ✅ Remove intermediate variant objects
+- ✅ Inline all variant definitions within CVA config
+- ✅ Remove conditional logic from CVA config
+- ✅ Ensure single tokenCVA invocation per variant set
+- ✅ Verify `satisfies Record<Type, string>` constraints are present
+- ✅ **Normalize CVA type if non-canonical** (tokenCVA vs cva decision per Decision Matrix)
+
+**CVA Type Normalization Rules:**
+- ✅ If component has token-driven axes (variant, size, state) → **MUST** use tokenCVA
+- ✅ If component has only boolean/presentational flags → **MAY** use cva
+- ✅ If Foundation component uses cva → **MUST** document explicit rationale in audit report
+- ✅ If CVA type mismatch detected → **MUST** migrate to correct type before STEP 10
+
+**Blocking Condition:** Component cannot proceed to STEP 10 if CVA structure is non-canonical OR if CVA type does not match Decision Matrix requirements.
+
+**Reference:**
+
+📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern, forbidden patterns, and CVA Usage Decision Matrix
+
+### **FIX Sufficiency Criteria (REQUIRED)**
+
+The FIX phase is considered complete **only** when the component is fully compliant
+
+with all **existing system standards** applicable to its layer and scope.
+
+This includes, but is not limited to:
+
+- architectural and layering rules,
+
+- token and styling constraints,
+
+- public API and DX conventions,
+
+- type system rules and exposure boundaries,
+
+- **CVA canonical style compliance** (structure must match canonical pattern),
+
+- accessibility requirements where applicable.
+
+FIX completion is defined by **compliance**, not subjective cleanliness,
+
+personal preference, or perceived elegance.
+
+If compliance cannot be achieved without disproportionate changes,
+
+this must be explicitly recorded and escalated (see Failure Modes).
+
+### **Mandatory Outcome**
+
+All blocking and non-blocking FIX items must be resolved or explicitly deferred
+
+with justification in the audit report.
+
+Proceeding without completing this step is a **process violation**.
+
+This step exists to guarantee that:
+
+- tests do not validate poor code,
+
+- Storybook does not document accidental complexity,
+
+- the locked result reflects deliberate engineering decisions.
+
+### **STEP 9 Decision Flow**
+
+1. Review FIX backlog from STEP 1-8
+2. Classify fixes:
+   - **BLOCKERS** → must fix now
+   - **NON-BLOCKERS** → fix or defer with justification
+   - **DEFERRED** → explicitly document why not fixing
+3. Apply fixes (use Codex Max)
+4. Update audit report STEP 9 section
+5. **Checkpoint: Share report before STEP 10**
+
+**Exit condition:** All BLOCKERS resolved OR component marked "Not ready for Foundation"
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 10, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 9 section exists
+- [ ] All BLOCKERS from FIX backlog resolved
+- [ ] NON-BLOCKERS fixed or deferred with justification
+- [ ] CVA structure normalized to canonical style (if deviations existed)
+- [ ] CVA type normalized per Decision Matrix (tokenCVA vs cva selection validated)
+- [ ] Code quality improved (readability, structure, maintainability)
+- [ ] Duplication reduced
+- [ ] No new features added
+- [ ] Public API changes documented (if any)
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 10**
+
+---
+
+## Failure Modes & Exit Conditions (REFERENCE)
+
+If during execution it becomes clear that:
+
+- the required FIX scope is disproportionate to the component value,
+
+- the component violates foundational assumptions,
+
+- or the component is not suitable for Foundation status,
+
+the pipeline may be **stopped intentionally**.
+
+In such cases, the component must be explicitly marked as:
+
+`Not ready for Foundation`.
+
+Stopping the pipeline is a **valid outcome** and must be recorded
+
+in the audit report with a clear justification.
+
+---
+
+## ✅ **13. STEP 10 — Validation via Tests & Storybook**
+
+### **Goal**
+
+Prove that the improved component behaves as expected.
+
+Tests and Storybook are treated as **executable proof of the component contract**,
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — Code generation for tests and Storybook stories.
+
+
+not as auxiliary validation artifacts.
+
+If a behavior, variant, interaction, or constraint cannot be clearly demonstrated
+
+via tests or Storybook, the component is considered **incomplete** at this stage.
+
+### **Requirements**
+
+* Tests cover public behavior and edge cases.
+
+* Storybook demonstrates:
+
+ * all variants,
+
+ * all sizes,
+
+ * meaningful interaction examples.
+
+Minimal or placeholder coverage is not sufficient.
+
+### **Reference (CRITICAL)**
+
+**Storybook Requirements:**
+
+📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Canonical story names and requirements
+
+**Strict Story Requirements:**
+
+1. **Matrix Story** - **REQUIRED** ONLY when component publicly supports **BOTH** size AND variant props
+   - Name: `Matrix` (canonical, no other names allowed)
+   - Shows: All variants × all sizes grid
+   - Components with only size OR only variant: Matrix NOT REQUIRED
+
+2. **States Story** - **REQUIRED** ONLY when component has public states/interactive behavior
+   - Name: `States` (canonical, no other names allowed)
+   - Shows: All variants × all sizes × all states (default, disabled, loading, etc.)
+   - Non-interactive components: States NOT REQUIRED
+
+3. **SizesGallery Story** - **REQUIRED** when component exposes public `size` prop
+   - Name: `SizesGallery` (canonical)
+   - Shows: All supported sizes with text/icon/multi-line content
+   - Reference: [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md)
+
+4. **LongContent Story** - **REQUIRED** for Overlay components (Tooltip, Popover, etc.)
+   - Name: `LongContent` (canonical)
+   - Validates: padding and maxWidth token behavior with long text
+   - Required regardless of whether `size` prop exists
+
+**Story Naming Authority:**
+- ✅ Use canonical names only: `Matrix`, `States`, `SizesGallery`, `LongContent`
+- ❌ Forbidden names: `VariantsMatrix`, `AllStates`, `SizeMatrix`, `StateVariations`
+
+**Common Violations:**
+- ❌ Missing Matrix story when component has both size AND variant props
+- ❌ Missing States story for interactive components
+- ❌ Missing SizesGallery story for sized components
+- ❌ Using non-canonical story names
+- ❌ Placeholder stories (single example only)
+
+**Test Requirements:**
+
+✅ **Required Coverage:**
+- Public behavior and edge cases
+- All variant combinations (if applicable)
+- All size combinations (if applicable)
+- State transitions (disabled, loading, etc.)
+- Accessibility (keyboard navigation, ARIA attributes, screen reader behavior)
+
+❌ **Forbidden Patterns:**
+- Shallow tests (single "renders without crashing" test)
+- Missing edge case coverage
+- No accessibility tests
+
+**STEP 10 validates that tests and Storybook provide executable proof of component contract.**
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 11, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 10 section exists
+- [ ] Tests cover public behavior and edge cases
+- [ ] Storybook demonstrates all variants and sizes
+- [ ] Storybook includes meaningful interaction examples
+- [ ] No placeholder coverage
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 11**
+
+---
+
+## ♿ **14. STEP 11 — Accessibility Audit & Fixes (MANDATORY)**
+
+### **Goal**
+
+Make the component **accessible** and safe for keyboard and assistive technologies.
+
+### **Recommended Model**
+
+**GPT‑5.1 Codex Max** — A11Y correctness requires code-invasive changes (ARIA, keyboard navigation, focus management).
+
+### **Rationale (CRITICAL)**
+
+⚠️ Accessibility work is typically the most code‑invasive phase:
+
+* it touches real code paths,
+
+* it changes semantics (ARIA/roles), focus behavior, and keyboard flows,
+
+* it often introduces the largest set of changes.
+
+Therefore, accessibility **cannot** be treated as an optional follow‑up.
+
+### **Scope**
+
+* ARIA roles and attributes.
+
+* Keyboard navigation and focus management.
+
+* Screen reader announcement behavior.
+
+* Accessibility‑specific tests and Storybook stories.
+
+### **Important Notes**
+
+* This step may change code **only for accessibility correctness**.
+
+* Public API changes are still prohibited unless explicitly agreed and documented.
+
+### **Step Completion Checklist**
+
+Before proceeding to STEP 12, verify:
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 11 section exists
+- [ ] ARIA roles and attributes correct
+- [ ] Keyboard navigation working
+- [ ] Focus management implemented
+- [ ] Screen reader behavior tested
+- [ ] A11Y-specific tests added
+- [ ] A11Y-specific Storybook stories added
+- [ ] Model recommendation followed (Codex Max)
+- [ ] **MANDATORY checkpoint: Share audit report before STEP 12**
+
+---
+
+## 🔒 **15. STEP 12 — Final Review & Outcome Fixation + Architectural Lock**
+
+### **Goal**
+
+Formally conclude the pipeline and **lock the component status across all architectural authority documents**.
+
+### **Recommended Model**
+
+**GPT‑5.2** — Independent verification and final validation before locking.
+
+### **Constraints**
+
+- ✅ Lock propagation to ALL required files is **MANDATORY** (see Lock Propagation section).
+- ✅ Missing any required lock file update is a **BLOCKING** condition.
+- ✅ Pipeline completion requires verification of ALL lock file updates.
+- 🚫 Cannot mark STEP 12 complete without lock propagation.
+- 🚫 Cannot skip lock propagation for any component.
+
+### **Mandatory Lock Propagation Rule (NON-NEGOTIABLE)**
+
+🚫 **CRITICAL ENFORCEMENT:** Lock propagation to all required files is **MANDATORY** and **NON-NEGOTIABLE**.
+
+**This step CANNOT be considered complete** unless lock propagation is verified in ALL required files listed below.
+
+**Blocking Condition:** If any required lock file is not updated, STEP 12 is **INCOMPLETE** and the pipeline **CANNOT** be marked as finished.
+
+**Verification Requirement:** The assistant MUST verify that all lock files have been updated before marking STEP 12 complete.
+
+### **Actions**
+
+* Verify that all previous steps are complete.
+
+* Confirm code quality improvements.
+
+* Record final state and decisions.
+
+* **MANDATORY:** Perform Final Report Consistency Check before Lock Propagation (see Final Report Consistency Check section below).
+
+* **MANDATORY:** Propagate lock status to ALL required files (see Lock Propagation section below).
+
+### **Mandatory Final Report Consistency Check (CRITICAL)**
+
+⚠️ **This phase is BLOCKING** and must be completed before Lock Propagation.
+
+**Purpose:** Verify that the audit report is logically, terminologically, and factually consistent with the actual final state of the component before locking.
+
+**Scope:** Audit report only. Codebase and implementation MUST NOT be modified at this stage.
+
+**Execution Order:** This check MUST be performed before Lock Propagation. Lock Propagation cannot proceed if any consistency check fails.
+
+**Required Checks:**
+
+1. **CHECK_LOCK_STATUS** — Lock Status Consistency
+   - Verify: Lock status is unified and matches final state (LOCKED / PROCESS LOCKED)
+   - Forbidden: Contradictory statuses (e.g., NOT LOCKED in one section, LOCKED in another)
+   - Action: If contradiction found → correct wording, ensure single consistent status throughout report
+
+2. **CHECK_BASELINE_TO_FIX_LINK** — Baseline BLOCKER Resolution Traceability
+   - Verify: Every BLOCKER recorded in baseline (STEP 5 or earlier) has explicit textual link to its resolution in STEP 9 or reclassification as Accepted Exception
+   - Forbidden: BLOCKERS mentioned in baseline without resolution trace in STEP 9
+   - Action: Add explicit links or reclassification documentation
+
+3. **CHECK_STEP_9_ABSOLUTISM** — STEP 9 Absolutism Verification
+   - Verify: Formulations like "All BLOCKERS resolved" are only acceptable with explanation for exceptions or reclassifications
+   - Forbidden: Absolute claims without justification for any exceptions
+   - Action: Add explanatory context for any exceptions
+
+4. **CHECK_FILE_REALITY** — File Reality Verification
+   - Verify: All file mentions (tests, stories, tokens) correspond to actual repository state
+   - Forbidden: Mentions of "MISSING" if file exists, or claims of existence if file missing
+   - Action: Verify files exist at mentioned paths, correct status claims
+
+5. **CHECK_OUTCOME_LOGIC** — Outcome/Changes Logic Consistency
+   - Verify: Outcome / Changes sections contain no logical contradictions (e.g., "Changes required" + "Changes: None")
+   - Forbidden: Contradictory statements in outcome vs changes sections
+   - Action: Align outcome statements with actual changes listed
+
+6. **CHECK_EXPORT_DECISIONS** — Export Decision Documentation
+   - Verify: If component is intentionally not exported, this is explicitly recorded as architectural decision
+   - Forbidden: Silent non-export without documented reason
+   - Action: Document export decisions explicitly
+
+**Failure Policy:**
+
+⚠️ **CRITICAL ENFORCEMENT:** STEP 12 completion is **BLOCKED** until ALL 6 checks pass. Any failure in any check prevents Lock Propagation and prevents STEP 12 from being marked as complete.
+
+- **On Failure:** STEP 12 **CANNOT** be marked as complete. The pipeline **MUST NOT** proceed to Lock Propagation until all consistency checks pass.
+- **Allowed Actions (Audit Report Only):**
+  - Audit report wording correction (e.g., changing "NOT LOCKED" to "LOCKED" to match final state)
+  - Terminology alignment (e.g., ensuring consistent use of "LOCKED" vs "PROCESS LOCKED")
+  - Status clarification (e.g., adding explicit links from baseline BLOCKERS to STEP 9 resolution)
+  - Adding explanatory context for absolute claims (e.g., "All BLOCKERS resolved" → "All BLOCKERS resolved (0 BLOCKERS found in baseline)")
+  - Correcting file status claims (e.g., changing "MISSING tests" to "Tests created in STEP 10")
+  - Aligning outcome statements with changes (e.g., changing "Changes required" to "No changes required" if Changes: None)
+  - Documenting export decisions explicitly
+- **Forbidden Actions:**
+  - Code changes (component implementation, tests, stories)
+  - Token changes (token definitions, token usage)
+  - Reopening STEP 9 (cannot return to FIX phase)
+  - Modifying lock files before consistency check passes
+
+**Verification Checklist:**
+
+⚠️ **MANDATORY:** Before proceeding to Lock Propagation, ALL 6 checks MUST be verified and explicitly documented in the audit report STEP 12 section. Each check must show either "✅ PASS" or "❌ FAIL" with correction applied.
+
+**Verification Requirements:**
+
+1. **CHECK_LOCK_STATUS** — Lock Status Consistency
+   - **Verify:** Single consistent lock status throughout report (LOCKED / PROCESS LOCKED)
+   - **Typical Contradiction:** "NOT LOCKED" in baseline (STEP 0) but "LOCKED" in STEP 12
+   - **Fix:** Correct all mentions to match final state (e.g., change "NOT LOCKED" → "LOCKED" throughout report)
+   - **Documentation:** Explicitly state final lock status in STEP 12 section
+   - [ ] ✅ Verified: Single consistent lock status throughout report
+
+2. **CHECK_BASELINE_TO_FIX_LINK** — Baseline BLOCKER Resolution Traceability
+   - **Verify:** Every BLOCKER from baseline (STEP 0-7) has explicit textual link to resolution in STEP 9 or reclassification as Accepted Exception
+   - **Typical Contradiction:** BLOCKER mentioned in STEP 5 (e.g., "Missing type constraints") without explicit link to STEP 9 resolution
+   - **Fix:** Add explicit link in STEP 9 section (e.g., "Resolved BLOCKER from STEP 5: Added `satisfies Record<Type, string>` constraint")
+   - **Documentation:** List all baseline BLOCKERS and their resolution status in STEP 12 section
+   - [ ] ✅ Verified: All baseline BLOCKERS have resolution traces or explicit exception documentation
+
+3. **CHECK_STEP_9_ABSOLUTISM** — STEP 9 Absolutism Verification
+   - **Verify:** Formulations like "All BLOCKERS resolved" have explanatory context for any exceptions or reclassifications
+   - **Typical Contradiction:** "All BLOCKERS resolved" without explanation when some were deferred or reclassified
+   - **Fix:** Add explanatory context (e.g., "All BLOCKERS resolved (0 BLOCKERS found in baseline)" or "All BLOCKERS resolved; 2 NON-BLOCKERS deferred with justification")
+   - **Documentation:** Explicitly state resolution status with context in STEP 12 section
+   - [ ] ✅ Verified: Absolute claims have explanatory context
+
+4. **CHECK_FILE_REALITY** — File Reality Verification
+   - **Verify:** All file mentions (tests, stories, tokens) correspond to actual repository state
+   - **Typical Contradiction:** "MISSING tests" in baseline (STEP 0) but tests created in STEP 10, or "Tests exist" but file missing
+   - **Fix:** Verify files exist at mentioned paths, correct status claims (e.g., change "MISSING tests" → "Tests created in STEP 10: `src/Component/Component.test.tsx`")
+   - **Documentation:** List all file statuses and verify against repository in STEP 12 section
+   - [ ] ✅ Verified: All file mentions match repository state
+
+5. **CHECK_OUTCOME_LOGIC** — Outcome/Changes Logic Consistency
+   - **Verify:** Outcome / Changes sections contain no logical contradictions
+   - **Typical Contradiction:** Outcome: "Changes required" but Changes: None, or Outcome: "No changes required" but Changes: "Added tests"
+   - **Fix:** Align outcome statements with actual changes listed (e.g., if Changes: None, then Outcome: "No changes required")
+   - **Documentation:** Explicitly verify outcome matches changes in STEP 12 section
+   - [ ] ✅ Verified: No contradictions between outcome and changes sections
+
+6. **CHECK_EXPORT_DECISIONS** — Export Decision Documentation
+   - **Verify:** If component is intentionally not exported, this is explicitly recorded as architectural decision
+   - **Typical Contradiction:** Component not exported from `src/index.ts` without documented reason
+   - **Fix:** Document export decision explicitly (e.g., "Component intentionally not exported: Extension-only adapter per architecture rules")
+   - **Documentation:** Explicitly state export decision and rationale in STEP 12 section
+   - [ ] ✅ Verified: Export decisions explicitly documented
+
+**All 6 checks MUST pass before Lock Propagation can proceed.**
+
+**Completion Rule:** 
+
+⚠️ **MANDATORY:** Final Report Consistency Check is complete **ONLY** when ALL 6 checks pass. Any failure in any check is **BLOCKING** and prevents Lock Propagation.
+
+**STEP 12 is considered complete ONLY after:**
+1. All 6 consistency checks have passed (verified and documented in audit report)
+2. All contradictions found during checks have been corrected in audit report
+3. Lock Propagation has been completed (see Lock Propagation section below)
+4. All items in Step Completion Checklist (see below) have been verified
+
+**This check is an integral part of STEP 12 completion process.** It cannot be skipped, deferred, or marked as "optional". The assistant executing STEP 12 MUST verify all 6 checks before proceeding to Lock Propagation. See Step Completion Checklist section for complete verification requirements.
+
+### **Typical Contradictions & Fixes (REFERENCE)**
+
+This section provides examples of common contradictions found in audit reports and how to fix them. Use this as a reference when performing Final Report Consistency Check.
+
+#### **Contradiction 1: Lock Status Inconsistency**
+
+**Problem:** Component status is "NOT LOCKED" in baseline (STEP 0) but "LOCKED" in STEP 12, or status changes between sections without explanation.
+
+**Example:**
+- STEP 0: "Status: NOT LOCKED"
+- STEP 12: "Status: LOCKED" (without explanation of change)
+
+**Fix:**
+- Correct all mentions to match final state throughout report
+- Add explicit statement in STEP 12: "Component status: LOCKED (locked in STEP 12 after pipeline completion)"
+
+**Correct Formulation:**
+```
+STEP 0: "Status: NOT LOCKED (will be locked after pipeline completion)"
+STEP 12: "Status: LOCKED (locked in STEP 12 after pipeline completion)"
+```
+
+#### **Contradiction 2: BLOCKER Without Resolution Trace**
+
+**Problem:** BLOCKER mentioned in baseline (STEP 5 or earlier) without explicit link to its resolution in STEP 9.
+
+**Example:**
+- STEP 5: "❌ BLOCKER: Missing type constraints (`satisfies Record<Type, string>`)"
+- STEP 9: "All BLOCKERS resolved" (without mentioning which BLOCKER was resolved)
+
+**Fix:**
+- Add explicit link in STEP 9 section: "Resolved BLOCKER from STEP 5: Added `satisfies Record<ButtonVariant, string>` constraint"
+- Document in STEP 12: "All baseline BLOCKERS resolved: STEP 5 BLOCKER (type constraints) → resolved in STEP 9"
+
+**Correct Formulation:**
+```
+STEP 5: "❌ BLOCKER: Missing type constraints"
+STEP 9: "Resolved BLOCKER from STEP 5: Added `satisfies Record<ButtonVariant, string>` constraint"
+STEP 12: "All baseline BLOCKERS resolved: STEP 5 BLOCKER (type constraints) → resolved in STEP 9"
+```
+
+#### **Contradiction 3: "All BLOCKERS resolved" Without Context**
+
+**Problem:** Absolute claim "All BLOCKERS resolved" without explanation when some items were deferred or reclassified.
+
+**Example:**
+- STEP 9: "All BLOCKERS resolved"
+- But FIX backlog shows: "2 NON-BLOCKERS deferred"
+
+**Fix:**
+- Add explanatory context: "All BLOCKERS resolved (0 BLOCKERS found in baseline; 2 NON-BLOCKERS deferred with justification)"
+- Or: "All BLOCKERS resolved; 2 NON-BLOCKERS deferred (see Deferred section)"
+
+**Correct Formulation:**
+```
+STEP 9: "All BLOCKERS resolved (0 BLOCKERS found in baseline). 2 NON-BLOCKERS deferred with justification (see Deferred section)"
+```
+
+#### **Contradiction 4: File Status Mismatch**
+
+**Problem:** File mentioned as "MISSING" in baseline but created in STEP 10, or file claimed to exist but missing.
+
+**Example:**
+- STEP 0: "Tests: MISSING"
+- STEP 10: "Tests created: `src/Component/Component.test.tsx`"
+- STEP 12: Still mentions "MISSING tests" in baseline section
+
+**Fix:**
+- Update baseline section to reflect final state: "Tests: Created in STEP 10 (`src/Component/Component.test.tsx`)"
+- Or add note: "Baseline: Tests MISSING → Created in STEP 10"
+
+**Correct Formulation:**
+```
+STEP 0: "Tests: MISSING (will be created in STEP 10)"
+STEP 10: "Tests created: `src/Component/Component.test.tsx`"
+STEP 12: "File Reality Check: Tests exist at `src/Component/Component.test.tsx` (created in STEP 10)"
+```
+
+#### **Contradiction 5: Outcome/Changes Logic Mismatch**
+
+**Problem:** Outcome states "Changes required" but Changes: None, or vice versa.
+
+**Example:**
+- STEP 5: "Outcome: Changes required"
+- STEP 5: "Changes: None"
+
+**Fix:**
+- Align outcome with actual changes: If Changes: None, then Outcome: "No changes required"
+- Or if changes were made: Outcome: "Changes applied" + list actual changes
+
+**Correct Formulation:**
+```
+STEP 5: "Outcome: No changes required"
+STEP 5: "Changes: None"
+```
+
+Or:
+
+```
+STEP 5: "Outcome: Changes applied"
+STEP 5: "Changes: Added `satisfies Record<Type, string>` constraint to variant map"
+```
+
+#### **Contradiction 6: Silent Non-Export**
+
+**Problem:** Component not exported from `src/index.ts` without documented architectural decision.
+
+**Example:**
+- Component exists but not in `src/index.ts` exports
+- No explanation in audit report
+
+**Fix:**
+- Document export decision explicitly in STEP 12: "Component intentionally not exported: Extension-only adapter per architecture rules (see EXTENSION_STATE.md)"
+
+**Correct Formulation:**
+```
+STEP 12: "Export Decision: Component intentionally not exported from `src/index.ts`. Rationale: Extension-only framework adapter per architecture rules. Component is exported from `src/EXTENSIONS/next/index.ts` for Next.js-specific usage."
+```
+
+### **Mandatory Lock Propagation (CRITICAL)**
+
+⚠️ **This step is considered INCOMPLETE and BLOCKING** unless the locked status is propagated consistently to **ALL** required files listed below.
+
+**Failure to update any required file is a PROCESS VIOLATION** and prevents pipeline completion.
+
+**Required files (all components):**
+
+- 📖 [docs/architecture/FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) — **MANDATORY** if component is Foundation layer
+  - Add component to locked component list
+  - Document lock date and version
+  - **BLOCKING:** If Foundation component and this file is not updated → STEP 12 INCOMPLETE
+  
+- 📖 [docs/architecture/ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) — **MANDATORY** for all components
+  - Document architectural decisions made during pipeline
+  - Record any conscious trade-offs or deferred changes
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
+  
+- 📖 [docs/PROJECT_PROGRESS.md](../../PROJECT_PROGRESS.md) — **MANDATORY** for all components
+  - Update component status to "Locked" or "Foundation-Ready"
+  - Record completion date
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
+  
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` — **MANDATORY** for all components
+  - Complete STEP 12 section with final review outcome
+  - Mark all previous steps as verified
+  - **BLOCKING:** If this file is not updated → STEP 12 INCOMPLETE
+
+**Additional files (if applicable):**
+
+- 📖 [docs/architecture/EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) — **MANDATORY** if component is Extension layer
+  - Update component extension status
+  - Document extension-specific decisions
+  - **BLOCKING:** If Extension component and this file is not updated → STEP 12 INCOMPLETE
+
+**Lock Propagation Checklist (ALL ITEMS REQUIRED):**
+- [ ] FOUNDATION_LOCK.md updated (if Foundation component) — **MANDATORY**
+- [ ] ARCHITECTURE_LOCK.md updated with decisions — **MANDATORY**
+- [ ] PROJECT_PROGRESS.md updated with status — **MANDATORY**
+- [ ] Component audit report STEP 12 completed — **MANDATORY**
+- [ ] EXTENSION_STATE.md updated (if Extension component) — **MANDATORY**
+- [ ] All lock documents consistent (no contradictions) — **MANDATORY**
+
+**Note:** The component's layer (Foundation vs Extension) determines which lock files must be updated. Foundation components are locked in `FOUNDATION_LOCK.md`, Extension components are tracked in `EXTENSION_STATE.md`.
+
+**Verification:** Lock propagation is verified by cross-checking all documents for consistency. Any contradiction between documents is a BLOCKING issue.
+
+**Enforcement:** The assistant MUST verify completion of ALL checklist items before marking STEP 12 complete. Missing any item is a BLOCKING condition.
+
+### **Outcome**
+
+* Component accepted and locked (Foundation Lock),
+
+* or explicitly marked for further iteration.
+
+### **Step Completion Checklist**
+
+**⚠️ CRITICAL:** Before marking pipeline complete, ALL items below MUST be verified. Missing any item is a BLOCKING condition.
+
+- [ ] All 4 phases completed (Observe → Decide → Change → Record)
+- [ ] Audit report STEP 12 section exists
+- [ ] All previous steps (STEP 0-11) verified complete
+- [ ] Code quality improvements confirmed
+- [ ] **MANDATORY Final Report Consistency Check — ALL checks verified and documented:**
+  - [ ] Final Report Consistency Check executed **BEFORE** Lock Propagation — **REQUIRED**
+  - [ ] All 6 checks explicitly documented in audit report STEP 12 section with PASS/FAIL status — **REQUIRED**
+  - [ ] All contradictions found during checks corrected in audit report — **REQUIRED**
+  - [ ] CHECK_LOCK_STATUS: Lock status consistent throughout report — **REQUIRED**
+  - [ ] CHECK_BASELINE_TO_FIX_LINK: All baseline BLOCKERS have resolution traces — **REQUIRED**
+  - [ ] CHECK_STEP_9_ABSOLUTISM: Absolute claims have explanatory context — **REQUIRED**
+  - [ ] CHECK_FILE_REALITY: File mentions match repository state — **REQUIRED**
+  - [ ] CHECK_OUTCOME_LOGIC: No contradictions in outcome/changes — **REQUIRED**
+  - [ ] CHECK_EXPORT_DECISIONS: Export decisions explicitly documented — **REQUIRED**
+  - [ ] All 6 checks show ✅ PASS status — **REQUIRED** (any ❌ FAIL blocks completion)
+- [ ] **MANDATORY Lock Propagation — ALL files verified:**
+  - [ ] `docs/architecture/FOUNDATION_LOCK.md` updated (if Foundation component) — **REQUIRED**
+  - [ ] `docs/architecture/ARCHITECTURE_LOCK.md` updated — **REQUIRED**
+  - [ ] `docs/PROJECT_PROGRESS.md` updated — **REQUIRED**
+  - [ ] `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md` STEP 12 completed — **REQUIRED**
+  - [ ] `docs/architecture/EXTENSION_STATE.md` updated (if Extension component) — **REQUIRED**
+  - [ ] All lock documents cross-checked for consistency — **REQUIRED**
+- [ ] Model recommendation followed (GPT-5.2)
+- [ ] **MANDATORY checkpoint: Final audit report shared**
+
+**Completion Rule:** STEP 12 is considered complete ONLY when ALL checklist items are verified, including ALL lock file updates. Pipeline cannot be marked as finished without complete lock propagation.
+
+---
+
+---
+
+## 🔧 Troubleshooting
+
+### "Audit report section missing"
+**Problem:** Cannot proceed to STEP N+1 without STEP N section.
+
+**Solution:** Create STEP N section in audit report, even if it contains `No changes required in this step`.
+
+### "FIX backlog too large"
+**Problem:** Too many fixes identified in STEP 1-8.
+
+**Solution:** 
+- Consider splitting into multiple pipeline runs
+- Mark component "Not ready for Foundation" if fixes are disproportionate
+- Document decision in STEP 8 audit section
+
+### "Tests fail after STEP 9"
+**Problem:** Code changes in STEP 9 broke existing tests.
+
+**Solution:** 
+- Review STEP 9 changes for unintended behavior changes
+- Update tests in STEP 10, not during STEP 9
+- Document test updates in STEP 10 audit section
+
+### "A11Y changes break existing behavior"
+**Problem:** Accessibility fixes in STEP 11 changed component behavior.
+
+**Solution:** 
+- Document in STEP 11 audit section
+- May require re-validation in STEP 10
+- Ensure behavior changes are accessibility-required only
+
+### "Lock propagation incomplete"
+**Problem:** Not all lock files updated in STEP 12.
+
+**Solution:** Verify all required files updated:
+- `docs/architecture/FOUNDATION_LOCK.md` (if Foundation)
+- `docs/architecture/ARCHITECTURE_LOCK.md`
+- `docs/PROJECT_PROGRESS.md`
+- `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
+- `docs/architecture/EXTENSION_STATE.md` (if Extension)
+
+### "Audit report consistency check failed"
+**Problem:** One or more consistency checks failed in STEP 12.
+
+**Solution:**
+- Review failed check(s) and identify inconsistencies
+- Correct audit report wording only (no code changes allowed)
+- Re-run consistency checks
+- Document corrections in audit report
+- Cannot proceed to Lock Propagation until all checks pass
+
+### "Model recommendation not followed"
+**Problem:** Wrong AI model used for step.
+
+**Solution:** 
+- Check [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md)
+- Use recommended model for optimal results
+- Document if different model used with justification
+
+---
+
+## 📚 Reference Examples
+
+Successfully completed pipeline runs:
+
+**Reference Components for Complex Controls:**
+- **Button** (Foundation) - `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
+  - Foundation layer reference for complex controls
+  - Complete token compliance (BUTTON_TOKENS)
+  - Foundation Enforcement (no className/style props)
+- **Slider** (Extension) - `docs/reports/audit/SLIDER_BASELINE_REPORT.md`
+  - Extension layer reference for complex controls
+  - Token migration pattern (cva → tokenCVA)
+  - Token hole fixing (SLIDER_TOKENS, all raw values replaced)
+  - Complex multi-part component pattern (root, track, range, thumb, marks)
+  - Type system alignment (`satisfies Record<Type, string>`)
+
+📖 [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - Complete reference examples including **Button** (Foundation) and **Slider** (Extension)
+
+**Other Completed Pipeline Runs:**
+- **Tooltip:** `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md`
+- **Tabs:** `docs/reports/audit/TABS_BASELINE_REPORT.md`
+
+These reports demonstrate:
+- Complete STEP 0-12 structure
+- Proper FIX backlog usage
+- Checkpoint compliance
+- Lock propagation
+- Model recommendations followed
 
 ---
 
 ## 📚 Related Documents
 
-- **[Foundation Contract](./FOUNDATION_CONTRACT.md)** — 🔒 **FINAL/APPLIED** Foundation component contract (Foundation Enforcement is LOCKED)
-- **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
-- **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
-- **[Architecture Lock](./ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
-- **[Token System](./TOKEN_AUTHORITY.md)** — 🔒 **LOCKED** Token system documentation
-- **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
-- **Component Guidelines** — Component development guidelines (archived; file no longer available)
-- **[Cursor UI Rules](./ASSISTANT_DEVELOPMENT_RULES.md)** — Cursor AI development rules
-- **Token Domains Final Report** — Final token domain verification (FINAL VERDICT: OK) (archived; file no longer available)
-- **[Button CVA Enforcement](../../docs_archive/deprecated/BUTTON_CVA_ENFORCEMENT.md)** — 🔒 **LOCKED** Button CVA enforcement rules (archived)
-- **[State Authority Matrix](./STATE_MATRIX.md)** — 🔒 **LOCKED** Universal state model for all interactive components
-- **[State Authority Contract](./STATE_AUTHORITY.md)** — 🔒 **LOCKED** State token model (HOW layer) for representing UI component states
-- **[Extension Authority Contract](./EXTENSION_AUTHORITY.md)** — ✅ **ACTIVE** Extension layer boundary contract
-- **[Foundation Lifecycle Process Index](./FOUNDATION_LIFECYCLE_PROCESS_INDEX.md)** — Human-readable navigation to Foundation component creation/refactor lifecycle process
-- **[ESLint Setup & Governance](./ESLINT_SETUP.md)** — ESLint as architectural enforcement (governance rules, autofix policy, scope boundaries)
-- **[ESLint Rules Scope Matrix](./eslint_rules_scope_matrix.md)** — Canonical scope authority for ESLint rules
-- **[Link No AsChild Canonical Anchor](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md)** — 🔒 **LOCKED** Architectural lock: Link is a first-class semantic anchor; `asChild` pattern is FORBIDDEN
+### Authority Navigation
+
+- 📖 [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) - Complete Authority map and question → authority mapping table
+
+### State Authorities (WHAT/WHEN/HOW)
+
+- 📖 [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - WHAT states exist
+- 📖 [INTERACTION_AUTHORITY.md](../../architecture/INTERACTION_AUTHORITY.md) - WHEN states activate
+- 📖 [STATE_AUTHORITY.md](../../architecture/STATE_AUTHORITY.md) - HOW states represented
+
+### Token Authorities
+
+- 📖 [SPACING_AUTHORITY.md](../../architecture/SPACING_AUTHORITY.md) - Spacing token scale
+- 📖 [TYPOGRAPHY_AUTHORITY.md](../../architecture/TYPOGRAPHY_AUTHORITY.md) - Typography tokens
+- 📖 [RADIUS_AUTHORITY.md](../../architecture/RADIUS_AUTHORITY.md) - Border radius tokens
+- 📖 [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion/animation tokens
+- 📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens
+
+### Size & Variant Authorities
+
+- 📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Global size scale and variant naming dictionary
+- 📖 [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md) - Size-to-token mapping contract
+
+### Structural Authorities
+
+- 📖 [LAYOUT_AUTHORITY.md](../../architecture/LAYOUT_AUTHORITY.md) - Layout structure and flow
+
+### Lock Documents
+
+- 📖 [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation layer lock status
+- 📖 [ARCHITECTURE_LOCK.md](../../architecture/ARCHITECTURE_LOCK.md) - Architectural decisions lock
+- 📖 [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) - Extension layer tracking
+
+### Process Documents
+
+- 📖 [TUNG System Specification](../tung_system_specification.md) - Task Unified Next-Gen system
+- 📖 [AI Models Usage Guide](ai_models_usage_guide_for_pipeline_tung.md) - Model recommendations per step
+
+### Architecture Context
+
+- 📖 [ARCHITECTURE_CONTEXT.md](../../ARCHITECTURE_CONTEXT.md) - Global architecture overview
+- 📖 [ARCHITECTURE_RULES.md](../../architecture/ARCHITECTURE_RULES.md) - Architectural rules and constraints
 
 ---
 
-## 🔄 Version History
+## **Closing Note**
 
-- **v1.22** (2025-12-23): Tabs Pipeline 18A Complete
-  - Tabs has completed canonical Foundation Step Pipeline (Steps 0–12)
-  - Tabs status changed to ✅ Implemented
-  - Implementation Date: 2025-12-23
-  - Component is in COMPOSITION layer
-  - Audit Report: `docs/reports/audit/TABS_BASELINE_REPORT.md`
-  - Component demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements
-  - Future structural modifications require re-entry into Pipeline 18A
+This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
 
-- **v1.21** (2025-12-20): Modal Foundation Lock Complete
-  - Modal has completed canonical Foundation Step Pipeline (Steps 0–13)
-  - Modal status changed to ✅ Implemented
-  - Implementation Date: 2025-12-20
-  - Implementation Report: `docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md`
+Skipping steps or rushing execution will only reintroduce the problems this document is designed to eliminate.
 
-- **v1.20** (2025-12-19): Legacy Foundation Components Unlock for Canonical Migration
-  - Unlocked Modal, Tabs, ContextMenu, and Toast for canonical migration
-  - Changed status to Implemented
-  - These components were declared as LOCKED but never passed canonical Foundation Step Pipeline (0–13)
-  - Unlock allows refactor strictly via Foundation Step Pipeline
-  - Constraints: No public API expansion, no new variants/sizes, no behavior changes outside canonicalization
-  - Exit criteria: Complete Steps 0–13, Foundation lock report, Public Type Surface locked, re-marked as FOUNDATION · LOCKED
-  - Updated component locations to reflect actual paths (src/COMPOSITION/)
-  - Added Legacy Foundation Components section explaining unlock rationale and constraints
-  - Updated Guard Prompt to reflect legacy unlock status
-  - Annotated component source files with LEGACY FOUNDATION comments
-  - Completed formal unlock process per TUNG_FOUNDATION_LEGACY_UNLOCK_01 task
-
-- **v1.20** (2025-12-19): Link No AsChild Canonical Anchor Architectural Lock
-  - Added Link architectural lock: [LINK_NO_ASCHILD_CANONICAL_ANCHOR.md](./LINK_NO_ASCHILD_CANONICAL_ANCHOR.md)
-  - Link is formally locked as a first-class semantic anchor
-  - `asChild` pattern is FORBIDDEN for Link component
-  - Link MUST always render a single `<a>` element directly
-  - No proxy patterns (Radix Slot) allowed
-  - Updated Link component details section with architectural constraints
-  - Added Link architectural lock reference to Related Documents
-  - ESLint rule `no-link-aschild` added for enforcement
-  - Completed formal lock process per TUNG_ARCH_LOCK: LINK_NO_ASCHILD_CANONICAL_ANCHOR task
-
-- **v1.19** (2025-12-18): Interactive Size Scale Authority Lock Completion
-  - Added Interactive Size Scale Authority Contract to Authority Documents table
-  - Added Interactive Size Scale Authority Lock Status section
-  - Documented canonical interactive size scale (`sm | md | lg` defined by Button)
-  - Documented component classification (Interactive, Semi-interactive, Non-interactive)
-  - Documented forbidden sizes (`xs` and `xl` for interactive components)
-  - Documented token relationship (interactive size maps to height, padding, font-size, gap tokens)
-  - Documented separation from typography scale
-  - Added Interactive Size Scale Authority rules to Guard Prompt
-  - Referenced Button as canonical owner of interactive size scale
-  - Added Interactive Size Scale Authority unlock procedure documentation
-  - Updated Foundation Authorities Status to include Interactive Size Scale Authority
-  - Updated Final Note to include Interactive Size Scale Authority
-  - Completed formal lock process per TUNG_ARCH_LOCK: INTERACTIVE_SIZE_SCALE_CANONICALIZATION task
-
-- **v1.23** (2025-12-25): Button Component Final Lock (Pipeline 18A Complete)
-  - Button officially locked as Foundation primitive after Pipeline 18A Steps 0-12 completion
-  - Final Lock date: 2025-12-25
-  - Status: ✅ **FINAL LOCK**
-  - Pipeline: Pipeline 18A (Steps 0-12 complete)
-  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-  - Audit report: `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
-  - Button serves as reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms
-  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
-  - Updated Component Lock Status table with FINAL LOCK status
-  - Updated all lock documents (FOUNDATION_LOCK.md, ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md)
-- **v1.22** (2025-12-22): Button Lock Date Fixation (TUI_TUNG_FOUNDATION_LOCK_002)
-  - Fixed Button Lock Date consistency: Updated Lock Date in Button details section from 2025-12-15 to 2025-12-21 (matches table and ARCHITECTURE_LOCK.md)
-  - Removed redundant "Final Lock Date" field (Lock Date is the authoritative date)
-  - Verified status consistency: All Button references use "✅ FINAL LOCK" uniformly
-  - Updated Last Updated date to 2025-12-22
-- **v1.22** (2025-12-21): Button Component Foundation Lock (FINAL)
-  - Button officially locked as Foundation primitive after Pipeline 18A Steps 0-11 completion
-  - Final Lock date: 2025-12-21
-  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-  - Audit report: `docs/reports/audit/BUTTON_BASELINE_REPORT.md`
-  - Button serves as reference implementation for token-driven CVA patterns, Authority Contract compliance, and browser-native interaction mechanisms
-  - Completed formal lock process per Pipeline 18A (Component Review & Improvement Pipeline)
-  - Updated Component Lock Status table with final lock date
-
-- **v1.18** (2025-12-21): Button Component Foundation Lock (FINAL) - Initial entry
-  - Added Button component to Locked Foundation Components table
-  - Added Button component details section
-  - Documented Button as sole action trigger foundation
-  - Button officially locked as Foundation primitive (STEP 3-13 complete)
-  - Lock report: `docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md`
-  - Button serves as canonical Foundation reference implementation
-  - Completed formal lock process per TUI_BUTTON_STEP_13_FOUNDATION_LOCK_FINAL task
-  - Updated Guard Prompt to include Button in Foundation Components list
-  - Updated Component Lock Status table
-
-- **v1.17** (2025-12-17): Select Component Unlock
-  - Unlocked Select component to allow canonical Foundation lock process
-  - Changed Select status from LOCKED (FINALIZED) to UNLOCKED (Pending Canonical Lock)
-  - Select will undergo full canonical lifecycle (Steps 1-11) similar to Link
-  - Unlock date: 2025-12-17
-  - Unlock reason: Ensure full compliance with all Authority Contracts and canonical lifecycle requirements
-  - Completed unlock process per user request to prepare Select for canonical lock
-
-- **v1.16** (2025-12-17): Link Component Foundation Lock
-  - Added Link component to Locked Foundation Components table
-  - Added Link component details section
-  - Documented Link as sole navigation link foundation
-  - Link officially locked as Foundation primitive (STEP 1-11 complete)
-  - Lock date: 2025-12-17
-  - Lock report: `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
-  - Completed formal lock process per TUI_LINK_STEP_11_FOUNDATION_LOCK task
-
-- **v1.15** (2025-12-16): Visual Token Authorities Lock Completion
-  - Locked Spacing Authority (changed from ACTIVE to LOCKED)
-  - Locked Radius Authority (changed from ACTIVE to LOCKED)
-  - Locked Typography Authority (changed from ACTIVE to LOCKED)
-  - Locked Motion Authority (changed from ACTIVE to LOCKED)
-  - Locked Elevation Authority (changed from ACTIVE to LOCKED)
-  - Locked Layout Authority (changed from ACTIVE to LOCKED)
-  - Updated Authority Documents table to reflect LOCKED status
-  - Updated Foundation Closure Statement to reflect complete Foundation lock
-  - Completed symmetric closure of Foundation layer
-  - All visual Token Authorities are now LOCKED and require unlock procedure or versioning for modifications
-
-- **v1.14** (2025-12-16): Guard Layer Intent Declaration
-  - Added Guard Layer Intent subsection to Enforcement Document Semantics
-  - Declared Guard documents as machine-oriented, not human-readable
-  - Established that verbosity is intentional for AI enforcement
-  - Prohibited human refactoring of Guard documents for readability
-  - Documented distinction between Guard Layer (machine-oriented) and Authority/Enforcement (human-oriented)
-  - Clarified that Guard documents are optimized for AI parsing, not human consumption
-  - Established key principles: machine-oriented design, intentional verbosity, forbidden human refactoring
-  - Completed intent declaration per TUNG_GUARD_LAYER_INTENT_DECLARATION task
-
-- **v1.13** (2025-12-16): Enforcement Lock Semantics Clarification
-  - Added Enforcement Document Semantics subsection to Authority Status Semantics
-  - Clarified distinction between Law (Authority) and Mechanism (Enforcement)
-  - Defined LOCKED (Enforcement) semantics: rules binding, mechanism evolvable
-  - Defined EVOLVABLE (Enforcement) semantics: mechanisms can evolve without Authority unlock
-  - Documented what can evolve in Enforcement (mechanisms, tooling, detection patterns)
-  - Documented what cannot change in Enforcement (Authority rules require unlock)
-  - Established key principles: Authority defines law, Enforcement defines tools
-  - Eliminated false perception of Enforcement as immutable
-  - Completed semantics clarification per TUNG_ENFORCEMENT_LOCK_SEMANTICS task
-
-- **v1.12** (2025-12-16): Authority Status Semantics Unification
-  - Added Authority Status Semantics section
-  - Defined precise semantics for ACTIVE, LOCKED, and IMMUTABLE terms
-  - Explicitly stated that ACTIVE ≠ editable
-  - Clarified distinction between Status (operational state) and Mutability (rule changeability)
-  - Documented status combinations and key principles
-  - Eliminated terminological ambiguity between ACTIVE, LOCKED, and MUTABILITY
-  - Completed terminology unification per TUNG_AUTHORITY_STATUS_SEMANTICS_UNIFICATION task
-
-- **v1.11** (2025-12-16): Foundation Closure Statement
-  - Added Foundation Closure Statement section
-  - Formally declared Foundation Authorities as COMPLETE, IMMUTABLE, and CLOSED
-  - Documented Authority evolution path (new Authority versions only)
-  - Explicitly authorized transition to Enforcement/Extension phase
-  - Completed formal closure statement per TUNG_FINAL_FOUNDATION_CLOSURE_STATEMENT task
-
-- **v1.10** (2025-12-16): Extension Authority Contract Integration
-  - Added Extension Authority Contract to Authority Documents table
-  - Added Extension Layer Status section
-  - Added Extension Authority Contract reference to Related Documents
-  - Updated Final Note to mention Extension Authority Contract
-  - Documented Extension layer as OPEN with Authority Contract compliance requirements
-  - Completed formal integration per TUNG_EXTENSION_AUTHORITY_CONTRACT task
-
-- **v1.9** (2025-12-16): Layout Authority Contract Lock Completion
-  - Added Layout Authority Contract to Authority Documents table
-  - Added Layout Authority Lock Status section
-  - Documented canonical layout primitives (Stack, Inline, Grid, Container, Overlay)
-  - Documented separation laws (Layout vs Spacing, State, Interaction, Positioning)
-  - Documented component contract rules (components cannot define layout context)
-  - Documented precedence rules (layout container over component structure)
-  - Documented hard rules (immutable layout rules)
-  - Updated Final Note to include Layout Authority
-  - Completed formal lock process per TUNG_LAYOUT_AUTHORITY_CONTRACT_FOUNDATION task
-
-- **v1.8** (2025-12-16): State Authority Contract Lock Completion
-  - Added State Authority Contract Lock Status section
-  - Documented state token model (HOW layer) as canonical format and structure
-  - Added State Authority Contract rules to Guard Prompt
-  - Clarified separation between WHAT (State Authority Matrix), WHEN (Interaction Authority Contract), and HOW (State Authority Contract) layers
-  - Added State Authority Contract unlock procedure documentation
-  - Completed formal lock process per TUNG_LOCK_STATE_AUTHORITY_CONTRACT task
-
-- **v1.7** (2025-12-16): Token Authority Expansion - New Token Authorities
-  - Added Spacing Authority Contract to Authority Documents table
-  - Added Radius Authority Contract to Authority Documents table
-  - Added Typography Authority Contract to Authority Documents table
-  - Added Motion Authority Contract to Authority Documents table
-  - Added Elevation Authority Contract to Authority Documents table
-  - Added Lock Status sections for all new token authorities
-  - Updated Final Note to include new token authorities
-  - Completed formal expansion process per TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN task
-
-- **v1.6** (2025-12-16): Semantic Hardening - Authority Layer Clarifications
-  - Added explicit clarification that Button is semantic reference only (not visual/token authority)
-  - Added authority flow section describing WHAT/WHEN/HOW separation between authority layers
-  - Clarified focus-visible vs hover interaction for accessibility edge cases
-  - Explicitly stated that styling is subordinate to semantic authority layers
-  - **No rule changes** - documentation-only clarifications to eliminate ambiguity
-  - Completed per FND_SEMANTIC_HARDENING_01 task
-
-- **v1.5** (2025-12-16): State Authority Matrix Lock Completion
-  - Added State Authority Matrix to Authority Documents table
-  - Added State Authority Matrix Lock Status section
-  - Documented canonical state set (6 states) and priority order
-  - Added State Authority Matrix rules to Guard Prompt
-  - Referenced Button as canonical reference implementation
-  - Added State Authority Matrix unlock procedure documentation
-  - Completed formal lock process per FND_LOCK_STATE_AUTHORITY_MATRIX task
-
-- **v1.4** (2025-12-16): Button CVA Enforcement Lock Completion
-  - Added Button CVA Enforcement Lock Status section
-  - Documented Button as canonical reference implementation for tokenCVA patterns
-  - Added Button CVA Enforcement unlock procedure documentation
-  - Referenced Button CVA Enforcement documentation
-  - Completed formal lock process per C0_BUTTON_CVA_ENFORCEMENT task
-
-- **v1.3** (2025-12-16): Interaction Authority Formal Lock Completion
-  - Enhanced Guard Prompt to include Interaction Authority enforcement rules
-  - Added Interaction Authority to Final Note section
-  - Explicitly documented Interaction Authority forbidden patterns in Guard Prompt
-  - Formally declared Interaction Authority as locked and immutable
-  - Completed formal lock process per FND_LOCK_INTERACTION_AUTHORITY task
-
-- **v1.2** (2025-12-16): Interaction Authority Lock Integration
-  - Added Interaction Authority Lock Status section
-  - Documented Interaction Authority immutability as part of Foundation architecture
-  - Added Interaction Authority unlock procedure documentation
-  - Referenced automated enforcement script and guard layer rules
-
-- **v1.1** (2025-12-13): Token System Lock Integration
-  - Added Token System Lock Status section
-  - Documented token system immutability as part of Foundation architecture
-  - Added Rule 4: Token System Immutability
-  - Updated Guard Prompt to include token system lock enforcement
-  - Added token system unlock procedure documentation
-  - Updated related documents section with token system references
-
-- **v1.0** (2025-12-12): Final Foundation Lock
-  - Officially locked Foundation layer
-  - Documented all locked Foundation components
-  - Established immutable architectural rules
-  - Defined allowed and forbidden post-lock changes
-  - Created enforcement mechanisms
-  - Closed Foundation architecture phase
-
----
-
-## 📝 Final Note
-
-**After this lock, the UI Foundation architecture is considered complete and immutable.**
-
-All future work must occur in the **Extension layer**. Foundation components are **read-only** except for bug fixes, type improvements, and documentation updates. The **Token system is locked** and immutable - all token modifications require explicit unlock procedure with full audit. The **Interaction Authority is locked** and immutable - all interaction behavior rules, priority order, and enforcement mechanisms are frozen. The **State Authority Matrix is locked** and immutable - the canonical state set, state semantics, priority order, and suppression rules are frozen. The **State Authority Contract is locked** and immutable - the state token model, naming rules, property mapping, and component obligations are frozen. The **Spacing Authority is locked** and immutable - all spacing token rules, canonical scales, and component requirements are frozen. The **Radius Authority is locked** and immutable - all border radius token rules, canonical scales, and component standards are frozen. The **Typography Authority is locked** and immutable - all typography token rules, canonical scales, and semantic roles are frozen. The **Motion Authority is locked** and immutable - all motion token rules, canonical durations, easings, transitions, and animations are frozen. The **Elevation Authority is locked** and immutable - all elevation token rules, canonical shadows, z-index scale, and stacking order are frozen. The **Layout Authority is locked** and immutable - all layout rules, canonical layout primitives, separation laws, and component contract rules are frozen. The **Interactive Size Scale Authority is locked** and immutable - the canonical interactive size scale (`sm | md | lg`), component classification, and forbidden sizes are frozen. The **Foundation Enforcement is locked and applied** - Foundation components exclude `className` and `style` from public APIs, and this enforcement is technically enforced via TypeScript, ESLint rules, type-tests, and CI integration. Any changes to state model, interaction behavior, token system, token authorities, layout authority, interactive size scale authority, or Foundation Enforcement require explicit unlock procedure with full audit.
-
-New functionality must be built as **Extensions** that compose Foundation components and use existing locked tokens. All Extension components must comply with the **Extension Authority Contract**, which defines the boundary between Foundation and Extension layers and establishes that Extension cannot override, bypass, or duplicate Foundation functionality.
-
-**This is a binding architectural contract. Violations are considered architectural breaches.**
-
-**The Foundation architecture phase is officially closed. The Token system is locked. The Interaction Authority is locked. The State Authority Matrix is locked. The State Authority Contract is locked. The Spacing Authority is locked. The Radius Authority is locked. The Typography Authority is locked. The Motion Authority is locked. The Elevation Authority is locked. The Layout Authority is locked. The Interactive Size Scale Authority is locked. The Foundation Enforcement is locked and applied. The Extension Authority Contract is active and defines Extension layer boundaries.**
-
----
-
-**Status:** ✅ **LOCKED**  
-**Version:** 1.21  
-**Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-19  
-**Priority:** CRITICAL  
-**Architecture Phase:** **CLOSED**  
-**Next Review:** **NEVER** (Foundation is immutable)
+**Pipeline completion time:** 6-8 hours for typical component.
 

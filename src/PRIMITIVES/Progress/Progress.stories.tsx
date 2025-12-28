@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Progress, type ProgressSize } from "./Progress";
 
 const meta: Meta<typeof Progress> = {
-  title: "Foundation Locked/Primitives/Progress",
+  title: "UI / Primitives / Progress",
   component: Progress,
   parameters: {
     layout: "padded",

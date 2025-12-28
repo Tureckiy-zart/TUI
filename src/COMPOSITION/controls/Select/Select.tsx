@@ -10,6 +10,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
+import { SELECT_TOKENS } from "@/FOUNDATION/tokens/components/select";
 import { SEPARATOR_TOKENS } from "@/FOUNDATION/tokens/components/separator";
 import type { ResponsiveAlignOffset, ResponsiveSideOffset } from "@/FOUNDATION/tokens/types";
 
@@ -31,10 +32,12 @@ const selectTriggerVariants = tokenCVA({
 // Note: Content-specific tokens (maxHeight, minWidth, border, background, text, shadow) kept from SELECT_TOKENS
 // as they are dropdown-specific and not available in INPUT_TOKENS
 const selectContentVariants = tokenCVA({
-  base: `relative z-50 max-h-[384px] min-w-[128px] overflow-hidden ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.border.color} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} shadow-md outline-none p-sm ${POPOVER_TOKENS.content.radius.md} data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)] data-[side=left]:slide-in-from-right-[var(--spacing-sm)] data-[side=right]:slide-in-from-left-[var(--spacing-sm)] data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]`,
+  base: `relative z-50 ${SELECT_TOKENS.content.maxHeight} ${SELECT_TOKENS.content.minWidth} overflow-hidden ${POPOVER_TOKENS.content.border.default} ${POPOVER_TOKENS.content.border.color} ${POPOVER_TOKENS.content.background.default} ${POPOVER_TOKENS.content.text.default} ${SELECT_TOKENS.content.shadow} outline-none ${SELECT_TOKENS.content.padding.md} ${POPOVER_TOKENS.content.radius.md} data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)] data-[side=left]:slide-in-from-right-[var(--spacing-sm)] data-[side=right]:slide-in-from-left-[var(--spacing-sm)] data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]`,
 });
 
 // Select item uses Input tokens with default size (md)
+// Note: Radix UI Select.Item uses data-disabled attribute, not disabled attribute
+// Therefore we use data-[disabled]: prefix for disabled state styles
 const selectItemVariants = tokenCVA({
   base: `relative flex ${INPUT_TOKENS.width.full} cursor-default select-none items-center outline-none focus-visible:${INPUT_TOKENS.variant.primary.background} focus-visible:${INPUT_TOKENS.variant.primary.text} data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${INPUT_TOKENS.padding.horizontal.md} ${INPUT_TOKENS.padding.vertical.md} ${INPUT_TOKENS.radius.sm} ${INPUT_TOKENS.fontSize.sm}`,
 });

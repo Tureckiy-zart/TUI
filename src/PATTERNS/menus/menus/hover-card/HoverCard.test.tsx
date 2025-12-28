@@ -485,9 +485,7 @@ describe("HoverCard - Runtime / Interaction Tests", () => {
     it("forwards custom ARIA attributes to trigger", () => {
       renderWithTheme(
         <HoverCardRoot>
-          <HoverCardTrigger aria-label="Custom label">
-            <Button>Hover me</Button>
-          </HoverCardTrigger>
+          <HoverCardTrigger aria-label="Custom label">Hover me</HoverCardTrigger>
           <HoverCardContent>HoverCard content</HoverCardContent>
         </HoverCardRoot>,
       );

@@ -108,18 +108,18 @@ All design tokens are exported from the main entry point. These include:
 
 ### Motion Tokens
 
-- `durations` - Animation durations (instant, fast, normal, slow, slower, slowest, plus granular)
-- `easings` - Easing functions (linear, ease-in, ease-out, ease-in-out, bounce, elastic, Material Design)
-- `transitions` - Pre-configured transition combinations
-- `animations` - Animation presets
-- `keyframes` - Keyframe definitions (fade, slide, scale, spin, pulse, bounce, ping, shake)
-- `springs` - Spring animation configurations
-- `motionCSSVariables` - CSS variable mappings
-- `tailwindMotionConfig` - Tailwind motion configuration
-- `motionV2Durations`, `motionV2Easings`, `motionV2Transitions` - Motion V2 system
-- `motionV2Fade`, `motionV2Scale`, `motionV2Slide` - Motion V2 presets
+> **Note:** Motion V1 tokens were removed in version 2.0.0. Motion tokens are now canonical and LOCKED.
 
-**Type Exports:** `Duration`, `Easing`, `Transition`, `Animation`, `Keyframe`, `Spring`, `MotionV2Duration`, `MotionV2Easing`, `MotionV2Transition`, etc.
+- `motionDurations` - Animation durations (fast, normal, slow, reduced)
+- `motionEasings` - Easing functions (soft, standard, emphasized)
+- `motionTransitions` - Pre-configured transitions (fast, normal, slow, soft, reduced)
+- `motionCSSVariables` - CSS variable mappings (`--motion-duration-*`, `--motion-easing-*`, `--motion-transition-*`)
+- `motionTailwindConfig` - Tailwind motion configuration
+- `motionReducedMotion` - Reduced motion support (duration, easing, transition, mediaQuery)
+- `motionTransitionProperty` - Transition property mappings
+- `motionFade`, `motionScale`, `motionSlide`, `motionCombined` - Animation presets
+
+**Type Exports:** `MotionDuration`, `MotionEasing`, `MotionTransition`, `MotionSlideDirection`, `MotionCombinedType`
 
 ### Component Tokens
 
