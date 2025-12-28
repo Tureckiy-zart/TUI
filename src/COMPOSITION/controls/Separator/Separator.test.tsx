@@ -77,7 +77,7 @@ describe("Separator component", () => {
     it("should apply 2px thickness (horizontal)", () => {
       const { container } = render(<Separator orientation="horizontal" thickness="2" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("h-[2px]");
+      expect(element).toHaveClass("h-0.5");
     });
 
     it("should apply 1px thickness by default (vertical)", () => {
@@ -89,7 +89,7 @@ describe("Separator component", () => {
     it("should apply 2px thickness (vertical)", () => {
       const { container } = render(<Separator orientation="vertical" thickness="2" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("w-[2px]");
+      expect(element).toHaveClass("w-0.5");
     });
   });
 
@@ -130,8 +130,8 @@ describe("Separator component", () => {
     it("should use token-based sizing (tokenized thickness values)", () => {
       const { container } = render(<Separator />);
       const element = container.firstChild as HTMLElement;
-      // Verify token usage for sizing (h-px for 1px, h-[2px] for 2px via tokens)
-      expect(element.className).toMatch(/h-px|h-\[2px\]|w-px|w-\[2px\]|w-full|h-full/);
+      // Verify token usage for sizing (h-px for 1px, h-0.5 for 2px via tokens)
+      expect(element.className).toMatch(/h-px|h-0\.5|w-px|w-0\.5|w-full|h-full/);
     });
   });
 
@@ -139,14 +139,14 @@ describe("Separator component", () => {
     it("should apply correct classes for horizontal + thickness 2", () => {
       const { container } = render(<Separator orientation="horizontal" thickness="2" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("h-[2px]");
+      expect(element).toHaveClass("h-0.5");
       expect(element).toHaveClass("w-full");
     });
 
     it("should apply correct classes for vertical + thickness 2", () => {
       const { container } = render(<Separator orientation="vertical" thickness="2" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("w-[2px]");
+      expect(element).toHaveClass("w-0.5");
       expect(element).toHaveClass("h-full");
     });
   });
@@ -167,7 +167,7 @@ describe("Separator component", () => {
       expect(element).toHaveAttribute("data-orientation", "vertical");
       expect(element).toHaveAttribute("role", "separator");
       expect(element).toHaveClass("bg-accent/20");
-      expect(element).toHaveClass("w-[2px]");
+      expect(element).toHaveClass("w-0.5");
       expect(element).toHaveClass("custom");
     });
 
