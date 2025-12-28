@@ -98,6 +98,11 @@ export const CONTEXT_MENU_TOKENS = {
       outline: "bg-[hsl(var(--popover))] border-2 border-[hsl(var(--border))]",
       subtle: "bg-[hsl(var(--muted))]",
     },
+    /**
+     * Animation offset for slide-in animations
+     * Small 2px offset provides subtle visual feedback when menus slide in
+     */
+    animationOffset: "[2px]", // 2px offset for slide-in animations
   } as const,
 
   /**

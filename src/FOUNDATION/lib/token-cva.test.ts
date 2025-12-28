@@ -107,6 +107,7 @@ describe("tokenCVA", () => {
     const originalEnv = process.env.NODE_ENV;
 
     beforeEach(() => {
+      vi.spyOn(console, "error").mockImplementation(() => {});
       vi.spyOn(console, "warn").mockImplementation(() => {});
     });
 
@@ -115,27 +116,28 @@ describe("tokenCVA", () => {
       process.env.NODE_ENV = originalEnv;
     });
 
-    it("should warn about raw color utilities in development", () => {
+    it("should error about raw color utilities in development", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
         base: "bg-red-500 text-blue-600",
       });
 
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.error).toHaveBeenCalled();
     });
 
-    it("should warn about raw spacing utilities in development", () => {
+    it("should error about raw spacing utilities in development (ERROR level)", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
         base: "p-4 m-2 gap-3",
       });
 
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.error).toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalled();
     });
 
-    it("should warn about arbitrary size utilities in development", () => {
+    it("should warn about arbitrary size utilities in development (WARN level)", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
@@ -143,6 +145,7 @@ describe("tokenCVA", () => {
       });
 
       expect(console.warn).toHaveBeenCalled();
+      expect(console.error).not.toHaveBeenCalled();
     });
 
     it("should allow semantic shadow utilities (they are token values)", () => {
@@ -167,23 +170,40 @@ describe("tokenCVA", () => {
       expect(console.warn).not.toHaveBeenCalled();
     });
 
-    it("should warn about forbidden patterns in variants", () => {
+    it("should error about forbidden spacing patterns in variants", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
         base: "flex",
         variants: {
           variant: {
-            primary: "bg-red-500",
-            secondary: "bg-blue-600",
+            primary: "bg-red-500 p-4",
+            secondary: "bg-blue-600 m-2",
+          },
+        },
+      });
+
+      expect(console.error).toHaveBeenCalled();
+    });
+
+    it("should warn about dimension patterns in variants (advisory)", () => {
+      process.env.NODE_ENV = "development";
+
+      tokenCVA({
+        base: "flex",
+        variants: {
+          variant: {
+            primary: "w-[100px]",
+            secondary: "h-[50px]",
           },
         },
       });
 
       expect(console.warn).toHaveBeenCalled();
+      expect(console.error).not.toHaveBeenCalled();
     });
 
-    it("should warn about forbidden patterns in compound variants", () => {
+    it("should error about forbidden spacing patterns in compound variants", () => {
       process.env.NODE_ENV = "development";
 
       tokenCVA({
@@ -201,17 +221,18 @@ describe("tokenCVA", () => {
         ],
       });
 
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.error).toHaveBeenCalled();
     });
 
-    it("should not warn in production mode", () => {
+    it("should not warn or error in production mode", () => {
       process.env.NODE_ENV = "production";
 
       tokenCVA({
-        base: "bg-red-500 p-4",
+        base: "bg-red-500 p-4 w-[100px]",
       });
 
       expect(console.warn).not.toHaveBeenCalled();
+      expect(console.error).not.toHaveBeenCalled();
     });
 
     it("should not warn about token-based utilities", () => {

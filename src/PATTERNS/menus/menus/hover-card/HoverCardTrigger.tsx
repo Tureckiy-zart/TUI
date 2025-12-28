@@ -59,8 +59,26 @@ export const HoverCardTrigger = React.forwardRef<HTMLElement, HoverCardTriggerPr
       [onOpenChange, onBlur],
     );
 
+    // When asChild is true, exclude type from props to avoid conflicts with child element
+    const { type: _type, ...restProps } = props as any;
+
+    if (asChild) {
+      // When asChild is true, don't add type prop - child element will have its own type
+      const triggerProps = {
+        ...restProps,
+        ref,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: handleMouseLeave,
+        onFocus: handleFocus,
+        onBlur: handleBlur,
+        "aria-haspopup": "dialog" as const,
+      };
+      return <Slot {...triggerProps} />;
+    }
+
+    // When asChild is false, add type="button" for native button element
     const triggerProps = {
-      ...props,
+      ...restProps,
       ref,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
@@ -69,10 +87,6 @@ export const HoverCardTrigger = React.forwardRef<HTMLElement, HoverCardTriggerPr
       "aria-haspopup": "dialog" as const,
       type: "button" as const,
     };
-
-    if (asChild) {
-      return <Slot {...triggerProps} />;
-    }
 
     return <button {...(triggerProps as React.ButtonHTMLAttributes<HTMLButtonElement>)} />;
   },

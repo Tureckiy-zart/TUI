@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Motion API Naming (Canonical Cleanup)**:
+  - Renamed all Motion public API exports to remove `v2` suffix, reflecting canonical versionless API
+  - `motionV2Durations` → `motionDurations`
+  - `motionV2Easings` → `motionEasings`
+  - `motionV2Transitions` → `motionTransitions`
+  - `motionV2CSSVariables` → `motionCSSVariables`
+  - `motionV2TailwindConfig` → `motionTailwindConfig`
+  - `motionV2ReducedMotion` → `motionReducedMotion`
+  - `motionV2Fade` → `motionFade`
+  - `motionV2Scale` → `motionScale`
+  - `motionV2Slide` → `motionSlide`
+  - `motionV2Combined` → `motionCombined`
+  - **Reason:** Motion V1 is fully removed, Motion 2.x is LOCKED as canonical. Versioned naming is no longer needed.
+  - **Impact:** Import statements need to be updated. No behavior changes.
+
 ### Added
 
 - **Library Maturity Growth System**: Comprehensive system for controlled library growth
@@ -21,6 +38,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Usage tracking and feedback review processes
 
 ### Breaking Changes
+
+- **Motion V1 Tokens Removed (Major 2.0.0)**:
+  - ❌ **BREAKING:** All Motion V1 tokens completely removed from codebase
+    - **Removed file:** `src/FOUNDATION/tokens/motion.ts`
+    - **Removed exports:** `durations`, `easings`, `transitions`, `keyframes`, `animations`, `springs`, `motionCSSVariables`, `tailwindMotionConfig`, `reducedMotion`
+    - **Removed types:** `Duration`, `Easing`, `Transition`, `Keyframe`, `Animation`, `Spring`
+  - ❌ **BREAKING:** Legacy CSS variable names removed
+    - Removed: `--duration-instant`, `--duration-fast`, `--duration-normal`, `--duration-slow`, etc.
+    - Removed: `--ease-in`, `--ease-out`, `--ease-in-out`, `--ease-bounce`, etc.
+    - Removed: `--transition-fast`, `--transition-normal`, `--transition-slow`, etc.
+    - Use V2 names instead: `--motion-duration-fast`, `--motion-easing-standard`, `--motion-transition-normal`
+  - **Use Motion V2 tokens instead:**
+    - `durations` → `motionV2Durations`
+    - `easings` → `motionV2Easings`
+    - `transitions` → `motionV2Transitions`
+    - `motionCSSVariables` → `motionV2CSSVariables`
+    - `tailwindMotionConfig` → `motionV2TailwindConfig`
+    - `reducedMotion` → `motionV2ReducedMotion`
+  - **Reason:** Motion V2 is now the ONLY canonical motion system. Simplified architecture, single source of truth.
+  - **Severity:** HIGH (API removal)
+  - **Migration Difficulty:** MEDIUM (import changes required, API surface reduced)
+  - **Backward Compatibility:** ❌ NOT PROVIDED (by design - major version)
+  - **CI Guard:** `pnpm check:motion-v1` prevents V1 reintroduction
+  - **Migration Guide:** See [Motion V1 Inventory](./docs/reports/audit/MOTION_V1_INVENTORY.md) for migration details
+  - **Version Requirement:** MAJOR bump (v1.x → v2.0.0)
 
 - **Textarea Component API Migration (Foundation Pipeline 18A)**:
   - ❌ **BREAKING:** `state` prop removed - Use native HTML attributes instead
@@ -49,6 +91,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `Text` component `variant` prop (deprecated in v1.x)
 - `Stack`, `Row`, and `Column` components `gap` prop (deprecated in v1.x)
+- **Motion V1 tokens** - All Motion V1 exports removed. Use Motion V2 tokens:
+  - `durations` → `motionV2Durations`
+  - `easings` → `motionV2Easings`
+  - `transitions` → `motionV2Transitions`
+  - `keyframes`, `animations`, `springs` → use Motion V2 keyframes/presets
+  - `motionCSSVariables` → `motionV2CSSVariables`
+  - `tailwindMotionConfig` → `motionV2TailwindConfig`
+  - `reducedMotion` → `motionV2ReducedMotion`
 
 ## [1.2.0] - 2025-12-18
 

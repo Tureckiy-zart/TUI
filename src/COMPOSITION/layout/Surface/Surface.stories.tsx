@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Surface } from "./Surface";
 
 const meta: Meta<typeof Surface> = {
-  title: "Foundation Locked/Composition/Layout/Surface",
+  title: "UI / Composition / Layout / Surface",
   component: Surface,
   parameters: {
     layout: "padded",

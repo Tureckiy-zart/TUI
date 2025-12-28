@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Flex } from "./Flex";
 
 const meta: Meta<typeof Flex> = {
-  title: "Foundation Locked/Composition/Layout/Flex",
+  title: "UI / Composition / Layout / Flex",
   component: Flex,
   parameters: {
     layout: "padded",

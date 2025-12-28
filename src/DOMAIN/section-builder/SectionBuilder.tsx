@@ -502,13 +502,16 @@ export const SectionBuilder = React.forwardRef<HTMLElement, SectionBuilderProps>
     // Type-safe component rendering
     const ComponentAny = Component as any;
 
+    // Filter out non-DOM props that might be passed accidentally
+    const { flexDirection: _flexDirection, ...domProps } = props as any;
+
     return (
       <ComponentAny
         ref={ref}
         aria-label={ariaLabel}
         className={cn("relative", className)}
         style={mergedStyle}
-        {...props}
+        {...domProps}
       >
         <Box
           bg={bgResolution.bg}

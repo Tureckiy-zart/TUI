@@ -25,13 +25,13 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 
 ## 0. Current Foundation Status
 
-### Foundation Authorities: CLOSED and IMMUTABLE
+### Foundation Layer: UNLOCKED (Active Construction)
 
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Date:** 2025-12-16  
+**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
 **Source of Truth:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
 
-**The Foundation architecture phase is OFFICIALLY CLOSED.** All Foundation Authorities are **COMPLETE**, **IMMUTABLE**, and **LOCKED**:
+**The Foundation layer is OFFICIALLY UNLOCKED for active construction.** Foundation Authorities remain **COMPLETE**, **IMMUTABLE**, and **LOCKED**, but Foundation layer components can be added, refactored, or adjusted to reach canonical form:
 
 - ✅ **Interaction Authority** - LOCKED (State priority order, activation conditions, blocking rules)
 - ✅ **State Authority Matrix** - LOCKED (Canonical state set, state semantics, priority order)
@@ -44,6 +44,9 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 - ✅ **Elevation Authority** - LOCKED (Canonical elevation tokens, z-index scale, forbidden patterns)
 - ✅ **Layout Authority** - LOCKED (Canonical layout primitives, separation laws, forbidden patterns)
 - ✅ **Interactive Size Scale Authority** - LOCKED (Canonical interactive size scale, component classification, forbidden sizes)
+- ✅ **Focus Authority** - LOCKED (Focus navigation mechanics, trap, restore, tab order, focus-visible indication)
+- ✅ **A11Y Authority** - LOCKED (Accessibility requirements, semantic roles, aria-* as API, keyboard-only operability, accessible names)
+- ✅ **Input Authority** - LOCKED (Input component contract, form controls, validation, keyboard parity)
 - ✅ **Foundation Enforcement** - LOCKED / APPLIED (className/style exclusion, TypeScript/ESLint enforcement)
 - ✅ **Extension Authority Contract** - ACTIVE (Extension layer boundary contract)
 
@@ -62,15 +65,31 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 
 ### Current Development Phase
 
-**Foundation Phase:** ✅ **CLOSED**  
+**Foundation Phase:** ⚠️ **IN PROGRESS (Active Construction)**  
 **Enforcement Phase:** ✅ **OPEN** (Enforcement mechanisms can evolve)  
 **Extension Phase:** ✅ **OPEN** (Extension development is allowed)
 
-**All future development must occur in:**
+**Development must occur in:**
+- **Foundation Layer** - Completing missing primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
 - **Enforcement Layer** - Improving enforcement mechanisms (tooling, scripts, verification)
 - **Extension Layer** - Building new components that compose Foundation components
 
-**Rule:** Foundation Authorities are closed. Authority rules cannot be modified without explicit unlock procedure or new Authority versioning.
+### Unlock Rules
+
+**DURING UNLOCK PERIOD, THE FOLLOWING IS ALLOWED:**
+- ✅ Adding missing Foundation primitives
+- ✅ Refactoring existing Foundation primitives to reach canonical form
+- ✅ Adjusting APIs to remove architectural mistakes
+- ✅ Adding missing contracts required by higher layers
+
+**DURING UNLOCK PERIOD, THE FOLLOWING IS FORBIDDEN:**
+- ❌ Adding business logic
+- ❌ Adding framework-specific dependencies
+- ❌ Adding convenience APIs
+- ❌ Adding domain or navigation patterns
+- ❌ Adding composition-level components
+
+**Rule:** Foundation Authorities remain LOCKED and IMMUTABLE. Foundation layer is unlocked for completing missing primitives before final lock.
 
 ---
 
@@ -155,6 +174,8 @@ TenerifeUI explicitly **does not**:
 - **Separation of Concerns:** CVA handles variant logic; tokens handle actual styling values
 
 **Consequence:** CVA is used to **transport** variant selections to token-based styles. CVA does **NOT** replace the token system or allow hardcoded styles. All variant styles **MUST** reference design tokens.
+
+**CVA Canonical Style:** All CVA usage must follow the canonical structure pattern defined in `docs/architecture/CVA_CANONICAL_STYLE.md`. Variants must be explicit, inspectable, and defined inline within CVA config. No intermediate objects, no dynamic construction, no conditional logic inside CVA config.
 
 ---
 
@@ -395,16 +416,16 @@ src/
 
 ---
 
-## 4. Foundation Layer (LOCKED)
+## 4. Foundation Layer (UNLOCKED - Active Construction)
 
 ### Foundation Status
 
-**Status:** ✅ **FOUNDATION CLOSED**  
-**Lock Date:** 2025-12-12  
-**Architecture Phase:** **CLOSED** (Foundation phase is complete and immutable)  
+**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
+**Unlock Date:** 2025-12-26  
+**Architecture Phase:** **IN PROGRESS** (Foundation phase is under active construction)  
 **Source of Truth:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
 
-**The Foundation layer is OFFICIALLY CLOSED.** All Foundation Authorities are **LOCKED** and **IMMUTABLE**. Foundation components, Token System, and all Authority Contracts are frozen and cannot be modified without explicit unlock procedure.
+**The Foundation layer is OFFICIALLY UNLOCKED for active construction.** Foundation Authorities remain **LOCKED** and **IMMUTABLE**, but Foundation layer components can be added, refactored, or adjusted to reach canonical form. Foundation layer is intentionally unlocked until all primitives reach canonical form.
 
 ### The Five Foundation Components
 
@@ -432,19 +453,25 @@ The Foundation layer consists of **exactly five components**, one per category:
 - **Menus:** ContextMenu (sole context menu foundation)
 - **Overlays (Notifications):** Toast (sole toast foundation)
 
-**Consequence:** No new Foundation components may be added. No duplicates or alternatives (e.g., `SimpleModal`, `BasicTabs`, `ModalV2`) may be created. The Foundation layer is **closed**.
+**Consequence:** Missing Foundation primitives can be added. Existing Foundation primitives can be refactored to reach canonical form. The Foundation layer is **unlocked** for active construction until all primitives are complete.
 
-### Immutability Rules
+### Unlock Period Rules
 
-Foundation components are **immutable** and subject to the following rules:
+Foundation layer is **UNLOCKED** for active construction and subject to the following rules:
+
+**ALLOWED:**
+- ✅ Adding missing Foundation primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
+- ✅ Refactoring existing Foundation primitives to reach canonical form
+- ✅ Adjusting APIs to remove architectural mistakes
+- ✅ Adding missing contracts required by higher layers
 
 **FORBIDDEN:**
-- ❌ Breaking API changes (removing props, changing prop types, removing subcomponents)
-- ❌ Creating new Foundation components
+- ❌ Adding business logic
+- ❌ Adding framework-specific dependencies
+- ❌ Adding convenience APIs
+- ❌ Adding domain or navigation patterns
+- ❌ Adding composition-level components
 - ❌ Creating duplicate or alternative Foundation components (`SimpleModal`, `BasicTabs`, `OldSelect`, `LegacyToast`, `ModalV2`)
-- ❌ Renaming Foundation components
-- ❌ Moving Foundation components to different locations
-- ❌ Removing Foundation components
 - ❌ Reimplementing Radix behavior (focus management, keyboard navigation, ARIA attributes, portals, scroll locking)
 - ❌ Adding non-token styling (string/number-based visual props, raw CSS values, inline styles for static styling)
 
@@ -860,6 +887,8 @@ export interface ComponentProps {
 
 ### Legacy Component Policy
 
+**Reference:** For complete Legacy Component Policy, see [LEGACY_COMPONENT_POLICY.md](./workflows/policies/LEGACY_COMPONENT_POLICY.md).
+
 **Rule:** Legacy components **MUST NOT** be exported.
 
 **Legacy Component Handling:**
@@ -974,7 +1003,7 @@ The typing system consists of two documents with explicit priority ordering:
 11. **Export:** Add to public exports (if appropriate for public API)
 
 **Tools and Resources:**
-- **Component Generator:** `scripts/generate-extension-component.ts` - Generates component scaffold with templates
+- **Component Generator:** `scripts/generate-extension-component.ts` - CLI tool to generate component scaffold. Use: `pnpm run component:generate -- <ComponentName> [--category <category>]`
 - **Component Analysis:** `scripts/analyze-component-needs.ts` - Analyzes codebase for component patterns
 - **Feedback Collection:** `scripts/collect-usage-feedback.ts` - Collects and analyzes usage feedback
 - **Templates:** `templates/extension-component.*.template` - Component template files
@@ -1387,6 +1416,7 @@ This document is the **single source of truth** for TenerifeUI architecture. How
 - **`docs/reference/TYPING_SYSTEM.md`** - Typing system index and navigation guide (canonical entry point for typing rules)
 - **`docs/reference/TYPING_STANDARD.md`** - **MANDATORY** architectural standard for public API typing (REQUIRED, ENFORCED)
 - **`docs/reference/TYPESCRIPT_GENERAL_RULES.md`** - General TypeScript implementation rules (secondary to `TYPING_STANDARD.md`)
+- **`docs/architecture/CVA_CANONICAL_STYLE.md`** - **MANDATORY** canonical CVA structure pattern (REQUIRED, ENFORCED)
 
 ### Extension Component Development Resources
 

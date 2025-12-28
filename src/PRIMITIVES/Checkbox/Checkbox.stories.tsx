@@ -6,7 +6,7 @@ import * as React from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Foundation Locked/Primitives/Checkbox",
+  title: "UI / Primitives / Checkbox",
   component: Checkbox,
   parameters: {
     layout: "centered",

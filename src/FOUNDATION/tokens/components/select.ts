@@ -87,8 +87,8 @@ export const SELECT_TOKENS = {
     background: "bg-[hsl(var(--popover))]", // Background using CSS var
     text: "text-[hsl(var(--popover-foreground))]", // Text color using CSS var
     border: "border border-[hsl(var(--border))]", // Border color using CSS var
-    maxHeight: "max-h-[384px]", // Maximum height for scrollable content (24rem = 384px)
-    minWidth: "min-w-[128px]", // Minimum width (8rem = 128px)
+    maxHeight: "max-h-96", // Maximum height for scrollable content (24rem = 384px) - maps to spacing[96]
+    minWidth: "min-w-32", // Minimum width (8rem = 128px) - maps to spacing[32]
   } as const,
 
   /**

@@ -37,6 +37,7 @@ export default [
       "jest.config.*",
       "jest.setup.js",
       "scripts/**",
+      "playwright/**", // Playwright test files - configuration and test code
       "eslint-rules/**", // ESLint rule files - configuration, not source code
       "src/FOUNDATION/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
       "**/legacy/**", // Legacy files are excluded from token compliance

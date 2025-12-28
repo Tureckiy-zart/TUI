@@ -18,7 +18,7 @@ import { createTransition, shouldReduceMotion } from "./tas";
 import { useInView } from "./useInView";
 
 const meta: Meta = {
-  title: "Foundation Locked/Composition/Motion/TAS",
+  title: "UI / Composition / Motion / Animation / TAS",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

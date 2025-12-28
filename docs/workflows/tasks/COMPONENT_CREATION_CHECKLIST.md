@@ -297,6 +297,25 @@ All API design artifacts MUST be documented in **ONE** of the following location
 
 - [ ] **All props map to tokens**
   - [ ] Verified prop-to-token mapping
+
+### Motion GAP Evaluation (MANDATORY)
+
+- [ ] **Motion GAP evaluation completed**
+  - [ ] Identified all state/spatial changes (visibility, size/layout, selection/active state, user-triggered actions)
+  - [ ] Evaluated each change for Motion GAP (presence or absence of temporal feedback)
+  - [ ] Documented GAP resolution for each identified change
+
+- [ ] **GAP resolution documented**
+  - [ ] Each GAP resolved using one of three allowed outcomes:
+    - [ ] **ADD MOTION** — Canonical motion preset applied (`.tm-motion-*` utilities or motion tokens)
+    - [ ] **NO MOTION BY DESIGN** — Explicitly declared intentional absence with rationale
+    - [ ] **DEFERRED** — Postponed with documented rationale (UNLOCKED components only)
+  - [ ] No unresolved GAPs remain (LOCKED components must resolve all GAPs)
+
+- [ ] **GAP resolution documented in component**
+  - [ ] Inline comments or JSDoc explain motion decisions
+  - [ ] Storybook stories demonstrate motion behavior (if motion added)
+  - [ ] Storybook stories document "no motion by design" rationale (if applicable)
   - [ ] Confirmed token unions used
   - [ ] Verified Responsive<T> usage where needed
 

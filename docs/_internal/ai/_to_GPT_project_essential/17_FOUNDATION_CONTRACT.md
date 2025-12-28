@@ -229,6 +229,8 @@ Foundation components automatically adapt to theme changes through the token sys
 
 ## Versioning and Enforcement Policy
 
+**Reference:** For complete Versioning and Enforcement Policy, see [VERSIONING_ENFORCEMENT_POLICY.md](../../workflows/policies/VERSIONING_ENFORCEMENT_POLICY.md).
+
 ### Contract Versioning
 
 This contract is **version 1.0** and establishes the architectural invariant for Foundation components. Future versions of this contract may:

@@ -20,7 +20,7 @@ import { NavLink } from "./NavLink";
  */
 
 const meta: Meta<typeof NavLink> = {
-  title: "Foundation Locked/NavLink",
+  title: "UI / Primitives / NavLink",
   component: NavLink,
   parameters: {
     layout: "centered",

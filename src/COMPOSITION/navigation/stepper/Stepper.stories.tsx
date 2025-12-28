@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stepper, type StepperStep } from "./Stepper";
 
 const meta: Meta<typeof Stepper.Root> = {
-  title: "Foundation Locked/Composition/Navigation/Stepper",
+  title: "UI / Composition / Navigation / Stepper",
   component: Stepper.Root,
   parameters: {
     layout: "padded",

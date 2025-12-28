@@ -30,7 +30,7 @@ export function OverlayPortal({ children, container, className, style }: Overlay
   const targetContainer = container || document.body;
 
   return createPortal(
-    <div className={cn("fixed inset-0 z-50", className)} style={style}>
+    <div className={cn("fixed inset-0 z-40", className)} style={style}>
       {children}
     </div>,
     targetContainer,

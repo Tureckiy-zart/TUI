@@ -5,7 +5,7 @@
  * Supports CSS custom properties with media queries for efficient responsive styling.
  */
 
-import { durations } from "@/FOUNDATION/tokens/motion";
+import { motionDurations } from "@/FOUNDATION/tokens/motion/v2";
 import type {
   DelayToken,
   MotionDurationToken,
@@ -243,7 +243,7 @@ export function getResponsiveSpacingClass(
  * Used for setTimeout, delayDuration, etc.
  */
 export function getDurationMs(token: MotionDurationToken): number {
-  const duration = durations[token];
+  const duration = motionDurations[token as keyof typeof motionDurations];
   if (!duration) {
     return 0;
   }

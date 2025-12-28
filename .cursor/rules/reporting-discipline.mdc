@@ -1,0 +1,347 @@
+````markdown
+---
+alwaysApply: true
+title: Reporting Discipline (Cursor) - Hard Limits
+version: 1.1
+status: Active
+owner: Cursor AI
+priority: Critical
+scope: Global
+language: en
+last_updated: 2025-12-27
+---
+
+# Reporting Discipline (Cursor) — Hard Limits
+
+## Purpose
+
+This document defines **mandatory hard limits** on report artifacts that Cursor / AI may create when executing tasks.
+
+**CRITICAL:** This rule **does NOT modify** the canonical TUNG system specification (`docs/workflows/foundation/tung_system_specification.md`).  
+This rule **only constrains Cursor deliverables behavior** and report artifact creation.
+
+These rules exist to prevent:
+- Report spam (excessive documentation artifacts)
+- Information duplication across multiple files
+- Uncontrolled report proliferation
+- Token burn due to documentation noise
+
+Compliance is mandatory.
+
+---
+
+## Scope & Rule Resolution Context
+
+This rule applies to **ALL tasks** unless explicitly overridden via the override mechanism (R-CUR-8).
+
+This rule operates at the **Cursor behavior layer** and does not conflict with TUNG.  
+TUNG defines task structure and execution flow; this rule limits what **report files** Cursor creates as deliverables.
+
+If a task requests more artifacts than allowed by this rule, Cursor MUST:
+1) Consolidate into allowed files, and  
+2) Add a one-line note: **"Consolidated due to Reporting Discipline cap."**
+
+---
+
+## Definitions
+
+### Report artifact
+
+A **report artifact** is **any NEW markdown file** created as task evidence/notes under:
+- `docs/reports/**`
+- `docs/**/locks/**`
+- or any other documentation folder used for task reporting in this repository
+
+**NOT report artifacts:**
+- Code changes
+- Storybook stories
+- Tests (Playwright/Vitest)
+- CI/workflow configs
+- ESLint configs/rules
+- Commit messages / PR descriptions
+
+If Cursor is unsure whether a new file counts as a report artifact, it MUST assume it **does** and therefore consolidate.
+
+---
+
+## Hard Limits
+
+### R-CUR-1: Default Cap (MANDATORY)
+
+**MUST:** Maximum **2 NEW report artifacts** per task by default.
+
+**Enforcement:** If a task would create more than 2 new report files, Cursor MUST consolidate information into the allowed 2 files instead.
+
+---
+
+### R-CUR-2: Allowed Reports (MANDATORY)
+
+**MUST:** Only the following report types are allowed as NEW files (default mode):
+
+1) **`<ticket>_patch.md`** — What changed and why  
+   - Prefer ≤25 lines  
+   - Contains: implementation changes, rationale, key decisions  
+   - May embed as sections: targets, expected behavior, storybook steps, lock status notes
+
+2) **`<ticket>_verify.md`** — Commands run and PASS/FAIL summary  
+   - Prefer ≤25 lines  
+   - Contains: commands executed, test results, compliance status  
+   - **Single source of truth** for test execution claims (see R-CUR-6)
+
+**FORBIDDEN:** Any other report file types are forbidden unless explicitly allowed by R-CUR-4 or R-CUR-8.
+
+---
+
+### R-CUR-3: Forbidden Split (MANDATORY)
+
+**FORBIDDEN:** Standalone files for the following are forbidden:
+
+- `targets_*.md` — MUST embed in `patch.md` (Implementation Targets section)
+- `expected_behavior_*.md` — MUST embed in `patch.md` (Expected Behavior section)
+- `storybook_steps_*.md` — MUST embed in `patch.md` (Storybook Validation section) OR in Storybook story description
+- `release_notes_*.md` — MUST embed in `patch.md` (System Status Update section) OR in a Lock document (if applicable)
+
+**MUST:** Embed this information inside `patch.md` as sections, or place it in PR description or Storybook story description.
+
+**Rationale:** These are implementation details that belong in the patch document, not separate files.
+
+---
+
+### R-CUR-4: System-Doc Exception (MANDATORY)
+
+**MUST:** Versioned canonical system documents (Audit/GAP/Lock) may be produced **ONLY** when the task is explicitly marked as `SYSTEM_UPDATE` in task metadata.
+
+**Allowed canonical system doc types (when SYSTEM_UPDATE):**
+- `*_AUDIT_REPORT.v*.md` — Audit reports
+- `*_GAPS.v*.md` — GAP classifications
+- `*_LOCK.v*.md` — Lock documents
+
+**FORBIDDEN:** Creating canonical system docs for non-SYSTEM_UPDATE tasks.
+
+**FORBIDDEN:** Creating additional narration documents beyond the caps defined below.
+
+---
+
+### R-CUR-5: SYSTEM_UPDATE Cap (MANDATORY)
+
+**MUST:** For tasks explicitly marked as `SYSTEM_UPDATE`, maximum **4 NEW report artifacts** total.
+
+**Breakdown:**
+- 2 standard reports: `patch.md` + `verify.md` (as per R-CUR-2)
+- + up to 2 canonical system docs (as per R-CUR-4)
+
+**Canonical system docs allowance is LIMITED:**
+- **Up to 2 canonical system docs total** (choose the minimum necessary), typically:
+  - `LOCK` + (`AUDIT` **or** `GAPS`)
+- A **third** canonical system doc requires `REPORTING_OVERRIDE`.
+
+**FORBIDDEN:** Creating more than 4 total reports, even for SYSTEM_UPDATE tasks.
+
+**FORBIDDEN:** Creating additional narration documents beyond the 4 allowed.
+
+**Example (SYSTEM_UPDATE, ✅ allowed):**
+- `GAP3_patch.md` + `GAP3_verify.md` + `FOCUS_AUDIT_REPORT.v1.1.md` + `FOCUS_LOCK.v1.1.md` (4 total)
+
+**Example (❌ forbidden, 5 total):**
+- `GAP3_patch.md` + `GAP3_verify.md` + `FOCUS_AUDIT_REPORT.v1.1.md` + `FOCUS_LOCK.v1.1.md` + `GAP3_summary.md`
+
+---
+
+### R-CUR-6: Single Source of Truth (MANDATORY)
+
+**MUST:** `verify.md` is the **ONLY** document allowed to claim that tests ran or passed.
+
+**FORBIDDEN:** Other documents (including `patch.md`) may NOT claim test execution or PASS status unless `verify.md` explicitly confirms it.
+
+**Enforcement:** If `patch.md` mentions testing, it MUST reference `verify.md` as the source of truth.
+
+**Example:**
+- ✅ `verify.md`: "Playwright: ✅ PASS"
+- ✅ `patch.md`: "Testing: see verify.md"
+- ❌ `patch.md`: "Playwright: ✅ PASS" (without verify.md confirmation)
+
+---
+
+### R-CUR-7: No Duplication (MANDATORY)
+
+**FORBIDDEN:** Repeating the same information across multiple documents.
+
+**MUST:** If information must exist, keep it in `patch.md` only.  
+**EXCEPTION:** Verification results MUST exist only in `verify.md` (see R-CUR-6).
+
+**MUST:** Other documents may reference `patch.md` but must not duplicate its content.
+
+**Enforcement:** If information appears in multiple files, Cursor MUST consolidate into the correct single location and remove duplicates.
+
+---
+
+### R-CUR-8: Override Mechanism (MANDATORY)
+
+**MUST:** Exceeding the caps (R-CUR-1 or R-CUR-5) requires an **explicit flag** in task metadata:
+
+```json
+{
+  "meta": {
+    "REPORTING_OVERRIDE": true,
+    "REPORTING_OVERRIDE_REASON": "One-line justification here"
+  }
+}
+````
+
+**FORBIDDEN:** Creating extra report files without the override flag.
+
+**FORBIDDEN:** Using override without providing a one-line justification.
+
+**Override is exceptional:** repeated use across tasks is **FORBIDDEN** without explicit architect approval.
+
+If override is used, Cursor MUST include the one-line justification in PR description or execution log.
+
+---
+
+### R-CUR-9: Enforcement (MANDATORY)
+
+**MUST:** If caps are exceeded, the task is considered **FAILED** even if code works correctly.
+
+**MUST:** Cursor MUST consolidate reports instead of adding more files.
+
+**MUST:** Before marking a task as complete, Cursor MUST verify that report artifact count does not exceed limits.
+
+Task completion requires:
+
+1. Code works correctly
+2. Report artifact count ≤ cap (2 default, 4 for SYSTEM_UPDATE)
+3. No forbidden file types created
+4. No information duplication
+5. `verify.md` is the single source of truth for test execution claims
+
+If any condition fails, task is FAILED and must be fixed before completion.
+
+---
+
+## Decision Tree
+
+**Where to put information?**
+
+```
+Implementation details → patch.md
+Test results → verify.md (ONLY source of truth)
+Storybook steps → Storybook story description OR patch.md (Storybook Validation section)
+Release notes / status update → Lock doc OR patch.md (System Status Update section)
+Targets / Expected behavior → patch.md (embedded sections)
+Canonical system docs → Only if SYSTEM_UPDATE (count toward cap)
+```
+
+**Decision flow:**
+
+1. Is this test execution/result? → `verify.md` ONLY
+2. Is this implementation detail? → `patch.md` (embed as section)
+3. Is this canonical system doc? → Only if SYSTEM_UPDATE, count toward cap
+4. Would this create >2 files (or >4 for SYSTEM_UPDATE)? → Consolidate into existing files
+
+---
+
+## Examples
+
+### GOOD Deliverables (Default Task)
+
+**Task:** Fix GAP-3 Drawer focus issue
+
+**Deliverables:**
+
+* `GAP3_patch.md` (contains: changes, targets, expected behavior, storybook steps — embedded as sections)
+* `GAP3_verify.md` (contains: commands, PASS/FAIL results)
+
+**Total:** 2 files (within cap)
+
+---
+
+### GOOD Deliverables (SYSTEM_UPDATE Task)
+
+**Task:** Fix GAP-3 and re-lock Focus system (SYSTEM_UPDATE)
+
+**Deliverables:**
+
+* `GAP3_patch.md`
+* `GAP3_verify.md`
+* `FOCUS_AUDIT_REPORT.v1.1.md`
+* `FOCUS_LOCK.v1.1.md`
+
+**Total:** 4 files (within cap)
+
+---
+
+### BAD Deliverables (Default Task)
+
+**Task:** Fix GAP-3 Drawer focus issue
+
+**Deliverables:**
+
+* `GAP3_patch.md`
+* `GAP3_targets.md` (FORBIDDEN — should be in patch.md)
+* `GAP3_expected_behavior.md` (FORBIDDEN — should be in patch.md)
+* `GAP3_storybook_steps.md` (FORBIDDEN — should be in patch.md or story description)
+* `GAP3_release_notes.md` (FORBIDDEN — should be in patch.md or lock doc)
+* `GAP3_verify.md`
+
+**Total:** 6 files (EXCEEDS cap, task FAILED)
+
+**Fix:** Consolidate forbidden files into `patch.md` as sections.
+
+---
+
+### BAD Deliverables (Information Duplication)
+
+**Task:** Fix GAP-3 Drawer focus issue
+
+**Deliverables:**
+
+* `GAP3_patch.md` (claims "Playwright: ✅ PASS")
+* `GAP3_verify.md` (claims "Playwright: ✅ PASS")
+
+**Problem:** Test result claim exists in patch.md.
+**Fix:** `patch.md` must say "Testing: see verify.md" instead.
+
+---
+
+## Relationship to TUNG System
+
+**This rule does NOT modify the TUNG system specification.**
+
+* **TUNG** defines: task structure, execution flow, step definitions, subtask relationships
+* **This rule** defines: Cursor behavior for creating report artifacts as deliverables
+
+**Compatibility:**
+
+* TUNG tasks may specify deliverables, but Cursor MUST still respect R-CUR-1 through R-CUR-9
+* If a task specifies deliverables that violate this rule, Cursor MUST consolidate them
+* `SYSTEM_UPDATE` aligns with R-CUR-4 and R-CUR-5
+
+Reference: `docs/workflows/foundation/tung_system_specification.md` (unchanged by this rule)
+
+---
+
+## Enforcement Checklist
+
+Before marking any task as complete, Cursor MUST verify:
+
+* [ ] Report artifact count ≤ cap (2 default, 4 for SYSTEM_UPDATE)
+* [ ] Only allowed report types created (`patch.md`, `verify.md`, canonical system docs if SYSTEM_UPDATE)
+* [ ] No forbidden file types (`targets_*.md`, `expected_behavior_*.md`, `storybook_steps_*.md`, `release_notes_*.md`)
+* [ ] No information duplication (test results only in `verify.md`)
+* [ ] `verify.md` is single source of truth for test execution claims
+* [ ] Override flag present if caps exceeded (with justification)
+
+If any check fails, the task is FAILED and must be fixed.
+
+---
+
+## Final Enforcement Principle
+
+**Report discipline is mandatory.**
+
+If Cursor is unsure whether a report file is allowed, it MUST assume it is **FORBIDDEN** and consolidate into existing files.
+
+**When in doubt — CONSOLIDATE, don't CREATE.**
+
+**This rule is MANDATORY. Any work violating these limits is INVALID.**
+

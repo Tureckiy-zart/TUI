@@ -3,7 +3,7 @@ import * as React from "react";
 import { Slider } from "./Slider";
 
 const meta: Meta<typeof Slider> = {
-  title: "Foundation Locked/Composition/Controls/Slider",
+  title: "UI / Composition / Controls / Slider",
   component: Slider,
   tags: ["autodocs"],
   argTypes: {

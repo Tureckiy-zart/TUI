@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar, AvatarGroup, type AvatarShape, type AvatarSize } from "./Avatar.index";
 
 const meta: Meta<typeof Avatar> = {
-  title: "Foundation Locked/Composition/Controls/Avatar",
+  title: "UI / Composition / Controls / Avatar",
   component: Avatar,
   parameters: {
     layout: "centered",

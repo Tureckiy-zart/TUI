@@ -206,9 +206,10 @@ const rangeSliderThumbVariants = tokenCVA({
 
 /**
  * RangeSlider mark variants (visual tick marks)
+ * Note: pointer-events-none is applied via wrapper div in component, not in base state
  */
 const rangeSliderMarkVariants = tokenCVA({
-  base: "absolute flex items-center justify-center pointer-events-none",
+  base: "absolute flex items-center justify-center",
   variants: {
     size: {
       sm: RANGESLIDER_TOKENS.mark.label.fontSize.sm,

@@ -69,6 +69,9 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [ELEVATION_AUTHORITY.md](./architecture/ELEVATION_AUTHORITY.md) - Elevation rules
 - [LAYOUT_AUTHORITY.md](./architecture/LAYOUT_AUTHORITY.md) - Layout rules
 - [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Interactive size scale rules
+- [FOCUS_AUTHORITY.md](./architecture/FOCUS_AUTHORITY.md) - Focus navigation mechanics (trap, restore, tab order, focus-visible indication)
+- [A11Y_AUTHORITY.md](./architecture/A11Y_AUTHORITY.md) - Accessibility requirements (semantic roles, aria-* as API, keyboard-only operability, accessible names)
+- [INPUT_AUTHORITY.md](./architecture/INPUT_AUTHORITY.md) - Input component contract (form controls, validation, keyboard parity)
 - [TOKEN_AUTHORITY.md](./architecture/TOKEN_AUTHORITY.md) - Token system rules
 
 ### Extension Authority
@@ -95,6 +98,9 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 - [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives lock
 - [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
+- [architecture/locks/FOCUS_LOCK.v1.1.md](./architecture/locks/FOCUS_LOCK.v1.1.md) - Focus system lock
+- [architecture/locks/A11Y_LOCK.md](./architecture/locks/A11Y_LOCK.md) - A11Y system lock
+- [architecture/locks/INPUT_LOCK.md](./architecture/locks/INPUT_LOCK.md) - Input system lock
 
 ### Progress & Project Management
 
@@ -119,6 +125,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
 - [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
 - [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
+- [reference/MOTION_ANIMATIONS_GUIDE.md](./reference/MOTION_ANIMATIONS_GUIDE.md) - Motion animations working guide (implementation, troubleshooting, common pitfalls)
 - [reference/GRADIENT_EXCEPTIONS.md](./reference/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation
 
 ### CI/CD

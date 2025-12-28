@@ -4,17 +4,11 @@
  * Type definitions for TAS animation system
  */
 
-import type { Spring as SpringToken } from "@/FOUNDATION/tokens/motion";
 import type {
   ResponsiveAnimationPreset,
   ResponsiveDelay,
   ResponsiveMotion,
 } from "@/FOUNDATION/tokens/types";
-
-/**
- * Spring type re-exported for convenience
- */
-export type Spring = SpringToken;
 
 /**
  * Animation props for layout primitives
@@ -74,7 +68,7 @@ export interface PresetConfig {
    */
   delay?: ResponsiveDelay;
   ease?: string | number[];
-  spring?: Spring | SpringConfig;
+  spring?: SpringConfig;
   reducedMotion?: boolean | "auto";
 }
 

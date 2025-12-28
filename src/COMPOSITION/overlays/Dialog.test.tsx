@@ -198,6 +198,7 @@ describe("Dialog", () => {
       renderWithTheme(
         <Dialog open={true} onOpenChange={vi.fn()} descriptionId="custom-description-id">
           <DialogHeader>
+            <DialogTitle>Test Dialog</DialogTitle>
             <DialogDescription>Test Description</DialogDescription>
           </DialogHeader>
         </Dialog>,
@@ -318,6 +319,7 @@ describe("Dialog", () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
             <DialogHeader>
+              <DialogTitle>Test Dialog</DialogTitle>
               <DialogDescription>Test Description</DialogDescription>
             </DialogHeader>
           </Dialog>,
@@ -333,6 +335,7 @@ describe("Dialog", () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()} descriptionId="custom-description-id">
             <DialogHeader>
+              <DialogTitle>Test Dialog</DialogTitle>
               <DialogDescription>Test Description</DialogDescription>
             </DialogHeader>
           </Dialog>,
@@ -348,6 +351,7 @@ describe("Dialog", () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
             <DialogHeader>
+              <DialogTitle>Test Dialog</DialogTitle>
               <DialogDescription className="custom-description-class">
                 Test Description
               </DialogDescription>
@@ -367,6 +371,9 @@ describe("Dialog", () => {
       it("renders content correctly", async () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogBody>Body Content</DialogBody>
           </Dialog>,
         );
@@ -379,6 +386,9 @@ describe("Dialog", () => {
       it("accepts className prop", async () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogBody className="custom-body-class">Body Content</DialogBody>
           </Dialog>,
         );
@@ -395,6 +405,9 @@ describe("Dialog", () => {
       it("renders footer content correctly", async () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogFooter>
               <Button>Footer Button</Button>
             </DialogFooter>
@@ -409,6 +422,9 @@ describe("Dialog", () => {
       it("accepts className prop", async () => {
         renderWithTheme(
           <Dialog open={true} onOpenChange={vi.fn()}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogFooter className="custom-footer-class">
               <Button>Footer Button</Button>
             </DialogFooter>

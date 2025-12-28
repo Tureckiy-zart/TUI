@@ -1252,7 +1252,9 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 - Duration scale: `duration.fast`, `duration.normal`, `duration.slow`
 - Easing: `easing.default`, `easing.in`, `easing.out`, `easing.inOut`
 - Transition presets: `transitions.fast`, `transitions.normal`, `transitions.slow`
-- Forbidden: raw transition values
+- **Motion GAP rule:** All state/spatial changes must be evaluated for Motion GAP
+- **GAP resolution:** ADD MOTION, NO MOTION BY DESIGN, or DEFERRED (UNLOCKED only)
+- Forbidden: raw transition values, unresolved GAPs in LOCKED components
 
 📖 [ELEVATION_AUTHORITY.md](../../architecture/ELEVATION_AUTHORITY.md) - Elevation tokens
 - Shadow scale: `elevationShadows.none`, `elevationShadows.sm`, `elevationShadows.md`, `elevationShadows.lg`
@@ -1283,7 +1285,8 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 2. Check variant dictionary compliance (VARIANTS_SIZE_CANON)
 3. Check size mapping table existence (SIZE_MAPPING_SPEC)
 4. Check token reference compliance (all Token Authorities)
-5. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
+5. **Check Motion GAP resolution** (MOTION_AUTHORITY.md) - Evaluate all state/spatial changes for Motion GAP
+6. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
 
 ### **Step Completion Checklist**
 

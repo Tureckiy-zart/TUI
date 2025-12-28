@@ -307,7 +307,7 @@ The library now includes a comprehensive system for controlled growth:
 - `docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md` - Creation checklist
 - `docs/reference/COMPONENT_EXAMPLES.md` - Reference examples
 - `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` - Feedback collection process
-- `scripts/generate-extension-component.ts` - Component generator
+- `scripts/generate-extension-component.ts` - Component generator. Use: `pnpm run component:generate -- <ComponentName> [--category <category>]`
 - `scripts/analyze-component-needs.ts` - Pattern analysis
 - `scripts/collect-usage-feedback.ts` - Feedback collection
 

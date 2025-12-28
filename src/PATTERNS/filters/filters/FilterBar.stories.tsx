@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import * as React from "react";
 import { FilterBar, type FilterManager } from "./FilterBar";
 
+// Mock function for story callbacks
+const fn = () => () => {};
+
 const meta: Meta<typeof FilterBar> = {
-  title: "Foundation Locked/Patterns/Filters/FilterBar",
+  title: "UI / Patterns / Filters / FilterBar",
   component: FilterBar,
   parameters: {
     layout: "padded",

@@ -7,7 +7,7 @@ import * as React from "react";
 import { ContextMenu } from "./ContextMenu";
 
 const meta: Meta<typeof ContextMenu.Root> = {
-  title: "Foundation Locked/Composition/Overlays/ContextMenu",
+  title: "UI / Composition / Overlays / ContextMenu",
   component: ContextMenu.Root,
   parameters: {
     layout: "centered",
