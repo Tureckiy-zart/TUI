@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Motion API Naming (Canonical Cleanup)**:
+  - Renamed all Motion public API exports to remove `v2` suffix, reflecting canonical versionless API
+  - `motionV2Durations` → `motionDurations`
+  - `motionV2Easings` → `motionEasings`
+  - `motionV2Transitions` → `motionTransitions`
+  - `motionV2CSSVariables` → `motionCSSVariables`
+  - `motionV2TailwindConfig` → `motionTailwindConfig`
+  - `motionV2ReducedMotion` → `motionReducedMotion`
+  - `motionV2Fade` → `motionFade`
+  - `motionV2Scale` → `motionScale`
+  - `motionV2Slide` → `motionSlide`
+  - `motionV2Combined` → `motionCombined`
+  - **Reason:** Motion V1 is fully removed, Motion 2.x is LOCKED as canonical. Versioned naming is no longer needed.
+  - **Impact:** Import statements need to be updated. No behavior changes.
+
 ### Added
 
 - **Library Maturity Growth System**: Comprehensive system for controlled library growth

@@ -24,15 +24,15 @@
 ### 1. Token Definition (`src/FOUNDATION/tokens/motion/v2.ts`)
 
 Motion tokens define:
-- **Durations**: `motionV2Durations` (e.g., `normal: "250ms"`)
-- **Easings**: `motionV2Easings` (e.g., `standard: "cubic-bezier(0.4, 0, 0.2, 1)"`)
-- **Keyframes**: `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, etc.
-- **CSS Variables**: `motionV2CSSVariables` (e.g., `--motion-duration-normal`)
-- **Tailwind Config**: `motionV2TailwindConfig` (maps keyframes to Tailwind theme)
+- **Durations**: `motionDurations` (e.g., `normal: "250ms"`)
+- **Easings**: `motionEasings` (e.g., `standard: "cubic-bezier(0.4, 0, 0.2, 1)"`)
+- **Keyframes**: `motionFade`, `motionScale`, `motionSlide`, etc.
+- **CSS Variables**: `motionCSSVariables` (e.g., `--motion-duration-normal`)
+- **Tailwind Config**: `motionTailwindConfig` (maps keyframes to Tailwind theme)
 
 **Example:**
 ```typescript
-export const motionV2Scale = {
+export const motionScale = {
   in: {
     "0%": { opacity: "0", transform: "scale(0.95)" },
     "100%": { opacity: "1", transform: "scale(1)" },
@@ -53,7 +53,7 @@ export const motionV2Scale = {
 ```typescript
 keyframes: {
   ...(tailwindMotionConfig.keyframes as Record<string, any>),
-  ...(motionV2TailwindConfig.keyframes as Record<string, any>),
+  ...(motionTailwindConfig.keyframes as Record<string, any>),
 },
 ```
 
@@ -118,7 +118,7 @@ addUtilities({
 Motion CSS variables are applied synchronously **before** React render:
 
 ```typescript
-Object.entries(motionV2CSSVariables).forEach(([key, value]) => {
+Object.entries(motionCSSVariables).forEach(([key, value]) => {
   root.style.setProperty(key, value);
 });
 ```
@@ -166,7 +166,7 @@ This ensures variables like `--motion-duration-normal` are available when compon
 ### ❌ Problem: Keyframes defined but CSS not generated
 
 **Symptoms:**
-- Keyframes defined in `motionV2TailwindConfig.keyframes`
+- Keyframes defined in `motionTailwindConfig.keyframes`
 - No `@keyframes` rules in generated CSS
 - DevTools shows `animation-name: none`
 
@@ -182,7 +182,7 @@ This ensures variables like `--motion-duration-normal` are available when compon
 
 1. **Define keyframes** in `src/FOUNDATION/tokens/motion/v2.ts`:
    ```typescript
-   export const motionV2NewAnimation = {
+   export const motionNewAnimation = {
      in: {
        "0%": { opacity: "0", transform: "translateY(20px)" },
        "100%": { opacity: "1", transform: "translateY(0)" },
@@ -190,11 +190,11 @@ This ensures variables like `--motion-duration-normal` are available when compon
    };
    ```
 
-2. **Add to Tailwind config keyframes** in `motionV2TailwindConfig`:
+2. **Add to Tailwind config keyframes** in `motionTailwindConfig`:
    ```typescript
    keyframes: {
      // ... existing
-     "new-animation": motionV2NewAnimation.in,
+     "new-animation": motionNewAnimation.in,
    },
    ```
 

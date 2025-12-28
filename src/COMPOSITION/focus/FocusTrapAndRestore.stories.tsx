@@ -77,7 +77,11 @@ export const ModalFocusTrap: Story = {
           <Box className="rounded-lg border border-border p-md">
             <Stack spacing={4}>
               <Button variant="outline">Before Trigger (for Tab order)</Button>
-              <Button variant="primary" onClick={() => setIsOpen(true)}>
+              <Button
+                variant="primary"
+                onClick={() => setIsOpen(true)}
+                data-testid="focus-modal-open"
+              >
                 Open Modal (Focus Trap Demo)
               </Button>
               <Button variant="outline">After Trigger (cannot reach when modal open)</Button>
@@ -85,7 +89,7 @@ export const ModalFocusTrap: Story = {
           </Box>
 
           <Modal.Root open={isOpen} onOpenChange={setIsOpen}>
-            <Modal.Content>
+            <Modal.Content data-testid="focus-modal-dialog">
               <Modal.Header>
                 <Modal.Title>Focus Trap Active</Modal.Title>
                 <Modal.Description>
@@ -98,7 +102,11 @@ export const ModalFocusTrap: Story = {
                 <Input placeholder="Third focusable" />
               </Stack>
               <Modal.Footer>
-                <Button variant="outline" onClick={() => setIsOpen(false)}>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsOpen(false)}
+                  data-testid="focus-modal-close"
+                >
                   Cancel
                 </Button>
                 <Button variant="primary" onClick={() => setIsOpen(false)}>
@@ -129,6 +137,7 @@ export const FocusRestoreDemo: Story = {
   render: function FocusRestoreStory() {
     const [isOpen, setIsOpen] = useState(false);
     const [lastFocused, setLastFocused] = useState<string>("");
+    const triggerRef = useRef<HTMLElement>(null);
 
     const handleFocus = (e: React.FocusEvent) => {
       const target = e.target as HTMLElement;
@@ -153,7 +162,12 @@ export const FocusRestoreDemo: Story = {
           <Box className="rounded-lg border border-border p-md">
             <Stack spacing={4}>
               <Button variant="outline">Button A</Button>
-              <Button variant="primary" onClick={() => setIsOpen(true)}>
+              <Button
+                ref={triggerRef as React.RefObject<HTMLButtonElement>}
+                variant="primary"
+                onClick={() => setIsOpen(true)}
+                data-testid="focus-restore-trigger"
+              >
                 Button B - Modal Trigger (focus returns here)
               </Button>
               <Button variant="outline">Button C</Button>
@@ -161,7 +175,10 @@ export const FocusRestoreDemo: Story = {
           </Box>
 
           <Modal.Root open={isOpen} onOpenChange={setIsOpen}>
-            <Modal.Content>
+            <Modal.Content
+              data-testid="focus-modal-dialog"
+              triggerRef={triggerRef as React.RefObject<HTMLElement>}
+            >
               <Modal.Header>
                 <Modal.Title>Focus Restore Test</Modal.Title>
                 <Modal.Description>
@@ -169,7 +186,11 @@ export const FocusRestoreDemo: Story = {
                 </Modal.Description>
               </Modal.Header>
               <Modal.Footer>
-                <Button variant="outline" onClick={() => setIsOpen(false)}>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsOpen(false)}
+                  data-testid="focus-modal-close"
+                >
                   Close
                 </Button>
               </Modal.Footer>
@@ -404,6 +425,7 @@ export const EscapeKeyBehavior: Story = {
   name: "Escape Key",
   render: function EscapeKeyStory() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const modalTriggerRef = useRef<HTMLElement>(null);
 
     return (
       <Box className="p-lg">
@@ -416,13 +438,21 @@ export const EscapeKeyBehavior: Story = {
           </Box>
 
           <Box className="rounded-lg border border-border p-md">
-            <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+            <Button
+              ref={modalTriggerRef as React.RefObject<HTMLButtonElement>}
+              variant="primary"
+              onClick={() => setIsModalOpen(true)}
+              data-testid="focus-modal-open"
+            >
               Open Modal (Press Escape to close)
             </Button>
           </Box>
 
           <Modal.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <Modal.Content>
+            <Modal.Content
+              data-testid="focus-modal-dialog"
+              triggerRef={modalTriggerRef as React.RefObject<HTMLElement>}
+            >
               <Modal.Header>
                 <Modal.Title>Press Escape</Modal.Title>
                 <Modal.Description>

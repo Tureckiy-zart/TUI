@@ -123,7 +123,9 @@ export const FocusVisibleDemo: Story = {
                   Try both interactions:
                 </Text>
               </Box>
-              <Button variant="primary">Click me (no ring) → then Tab (ring appears)</Button>
+              <Button variant="primary" data-testid="focus-visible-test-button">
+                Click me (no ring) → then Tab (ring appears)
+              </Button>
               <Button variant="secondary">Another Button</Button>
               <Button variant="outline">Third Button</Button>
             </Stack>

@@ -71,8 +71,16 @@ const v1ImportPatterns = [
     description: "Import of tailwindMotionConfig (V1)",
   },
   {
-    pattern: "import.*motionCSSVariables[^V]",
-    description: "Import of motionCSSVariables (V1, not V2)",
+    pattern: "import.*\\bdurations\\b.*from",
+    description: "Import of 'durations' without 'motion' prefix (V1)",
+  },
+  {
+    pattern: "import.*\\beasings\\b.*from",
+    description: "Import of 'easings' without 'motion' prefix (V1)",
+  },
+  {
+    pattern: "import.*\\btransitions\\b.*from",
+    description: "Import of 'transitions' without 'motion' prefix (V1)",
   },
 ];
 
@@ -142,13 +150,13 @@ console.log("\n" + "=".repeat(60) + "\n");
 if (hasErrors) {
   console.log(`${RED}❌ Motion V1 patterns detected!${RESET}`);
   console.log("\nMotion V1 was removed in version 2.0.0 and should not be reintroduced.");
-  console.log("Please update the code to use Motion V2 tokens only:");
-  console.log("  - Use motionV2Durations instead of durations");
-  console.log("  - Use motionV2Easings instead of easings");
-  console.log("  - Use motionV2Transitions instead of transitions");
-  console.log("  - Use motionV2CSSVariables instead of motionCSSVariables");
-  console.log("  - Use motionV2ReducedMotion instead of reducedMotion");
-  console.log("  - Use motionV2TailwindConfig instead of tailwindMotionConfig");
+  console.log("Please update the code to use Motion tokens only:");
+  console.log("  - Use motionDurations instead of durations");
+  console.log("  - Use motionEasings instead of easings");
+  console.log("  - Use motionTransitions instead of transitions");
+  console.log("  - Use motionCSSVariables instead of motionCSSVariables");
+  console.log("  - Use motionReducedMotion instead of reducedMotion");
+  console.log("  - Use motionTailwindConfig instead of tailwindMotionConfig");
   console.log("\nSee docs/reports/audit/MOTION_V1_INVENTORY.md for migration details.\n");
   process.exit(1);
 } else {

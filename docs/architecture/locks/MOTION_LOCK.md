@@ -25,12 +25,12 @@ The following Motion system components are **LOCKED** and **IMMUTABLE**:
 
 ### 1. Motion Tokens
 
-#### Foundation Motion Tokens (V2 Only)
+#### Foundation Motion Tokens
 - **File:** `src/FOUNDATION/tokens/motion/v2.ts`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-27
-- **Exports:** `motionV2Durations`, `motionV2Easings`, `motionV2Transitions`, `motionV2Fade`, `motionV2Scale`, `motionV2Slide`, `motionV2Combined`, `motionV2CSSVariables`, `motionV2TailwindConfig`, `motionV2ReducedMotion`, `motionV2TransitionProperty`
-- **Role:** Canonical motion token definitions (V2 - ONLY)
+- **Exports:** `motionDurations`, `motionEasings`, `motionTransitions`, `motionFade`, `motionScale`, `motionSlide`, `motionCombined`, `motionCSSVariables`, `motionTailwindConfig`, `motionReducedMotion`, `motionTransitionProperty`
+- **Role:** Canonical motion token definitions
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 > **Note:** Motion V1 (`src/FOUNDATION/tokens/motion.ts`) was deleted in 2.0.0. See MOTION_V1_INVENTORY.md for removal details.

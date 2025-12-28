@@ -44,6 +44,9 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 - ✅ **Elevation Authority** - LOCKED (Canonical elevation tokens, z-index scale, forbidden patterns)
 - ✅ **Layout Authority** - LOCKED (Canonical layout primitives, separation laws, forbidden patterns)
 - ✅ **Interactive Size Scale Authority** - LOCKED (Canonical interactive size scale, component classification, forbidden sizes)
+- ✅ **Focus Authority** - LOCKED (Focus navigation mechanics, trap, restore, tab order, focus-visible indication)
+- ✅ **A11Y Authority** - LOCKED (Accessibility requirements, semantic roles, aria-* as API, keyboard-only operability, accessible names)
+- ✅ **Input Authority** - LOCKED (Input component contract, form controls, validation, keyboard parity)
 - ✅ **Foundation Enforcement** - LOCKED / APPLIED (className/style exclusion, TypeScript/ESLint enforcement)
 - ✅ **Extension Authority Contract** - ACTIVE (Extension layer boundary contract)
 

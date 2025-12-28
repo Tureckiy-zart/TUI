@@ -60,8 +60,11 @@ The AI MUST:
 The AI MUST NOT:
 - Invent missing requirements, APIs, tokens, or components
 - Apply patterns from other projects
-- Perform architectural “improvements” without explicit instruction
+- Perform architectural "improvements" without explicit instruction
 - Modify code or documents outside the current task scope
+- Use `className` or `style` props with Foundation components (Button, Text, Input, etc.) even in tests/stories
+  - Foundation components: `src/PRIMITIVES/**` - `className`/`style` FORBIDDEN
+  - Extension/Composition components: `src/COMPOSITION/**` - `className`/`style` ALLOWED (Box, Stack, etc.)
 
 The AI MUST follow all active execution checklists
 when creating or refactoring components,
@@ -171,6 +174,28 @@ This rule overrides all templates and examples.
 - ✅ Current system date
 - ✅ Date from `date +"%Y-%m-%d"` command
 - ✅ Actual current date when updating files
+
+---
+
+## Foundation Component className/style Rule (MANDATORY)
+
+**CRITICAL:** Foundation components (`src/PRIMITIVES/**`) MUST NEVER accept `className` or `style` props, even in:
+- Test files (`.test.tsx`)
+- Storybook stories (`.stories.tsx`)
+- Any other context
+
+**Foundation components include:** Button, Text, Input, Label, Heading, Checkbox, Radio, Switch, Link, etc.
+
+**Rule:**
+- ❌ **FORBIDDEN:** `<Text className="...">` - Foundation component, `className` not allowed
+- ✅ **ALLOWED:** `<Box className="...">` - Extension/Composition component, `className` allowed
+- ✅ **ALLOWED:** `<Stack className="...">` - Extension/Composition component, `className` allowed
+
+**Workaround for Foundation components:**
+- Use `Box` wrapper for spacing: `<Box mb={2}><Text>...</Text></Box>`
+- Use component props for styling: `<Text weight="semibold" tone="muted">` instead of `className="font-semibold text-muted"`
+
+**Reference:** Foundation Enforcement is FINAL/APPLIED and LOCKED. See `docs/architecture/FOUNDATION_LOCK.md`.
 
 ---
 

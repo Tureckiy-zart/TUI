@@ -278,6 +278,20 @@ export interface ModalContentProps extends Omit<
    * ```
    */
   surface?: SurfaceToken;
+  /**
+   * Ref to the trigger element for focus restore on close
+   *
+   * When provided, Modal will deterministically restore focus to this element
+   * when the modal closes (via close button or Escape key).
+   *
+   * @example
+   * ```tsx
+   * const triggerRef = useRef<HTMLButtonElement>(null);
+   * <Button ref={triggerRef}>Open Modal</Button>
+   * <Modal.Content triggerRef={triggerRef}>...</Modal.Content>
+   * ```
+   */
+  triggerRef?: React.RefObject<HTMLElement>;
 }
 
 /**
@@ -303,7 +317,19 @@ export interface ModalContentProps extends Omit<
  */
 const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
   (
-    { className, size = "md", width, height, padding, radius, surface, children, ...props },
+    {
+      className,
+      size = "md",
+      width,
+      height,
+      padding,
+      radius,
+      surface,
+      triggerRef,
+      children,
+      onCloseAutoFocus,
+      ...props
+    },
     ref,
   ) => {
     const baseSize = getBaseValue(size) ?? "md";
@@ -330,11 +356,28 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
     // Build surface classes
     const surfaceClass = baseSurface ? MODAL_TOKENS.surface[baseSurface] : undefined;
 
+    // Handle focus restore deterministically
+    const handleCloseAutoFocus = React.useCallback(
+      (event: Event) => {
+        // If triggerRef is provided, restore focus to it deterministically
+        if (triggerRef?.current) {
+          event.preventDefault();
+          triggerRef.current.focus();
+        } else if (onCloseAutoFocus) {
+          // Allow custom handler if provided
+          onCloseAutoFocus(event);
+        }
+        // Otherwise, let Radix handle default restore behavior
+      },
+      [triggerRef, onCloseAutoFocus],
+    );
+
     return (
       <DialogPrimitive.Portal>
         <ModalOverlay />
         <DialogPrimitive.Content
           ref={ref}
+          onCloseAutoFocus={handleCloseAutoFocus}
           className={cn(
             modalContentVariants({
               size: baseSize as ModalSize,
@@ -449,6 +492,66 @@ const ModalDescription = React.forwardRef<HTMLParagraphElement, ModalDescription
 ModalDescription.displayName = DialogPrimitive.Description.displayName;
 
 // ============================================================================
+// MODAL BODY
+// ============================================================================
+
+export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Body content
+   */
+  children?: React.ReactNode;
+}
+
+/**
+ * Modal Body component
+ *
+ * Optional governed slot for body content with scroll and padding.
+ *
+ * **When to use:**
+ * - When body content may overflow and needs scrolling
+ * - When you want governed padding separation from Header/Footer
+ *
+ * **What it owns:**
+ * - Body scroll container (overflow-y-auto)
+ * - Body vertical padding (py-md default)
+ * - Vertical separation from Header and Footer
+ *
+ * **What it does NOT own:**
+ * - ARIA roles (handled by Radix/Content)
+ * - Focus management (handled by Radix/Content)
+ * - Motion/animation (handled by Radix/Content)
+ *
+ * **Usage:**
+ * @example
+ * <Modal.Content>
+ *   <Modal.Header>...</Modal.Header>
+ *   <Modal.Body>
+ *     {/* Scrollable content *\/}
+ *   </Modal.Body>
+ *   <Modal.Footer>...</Modal.Footer>
+ * </Modal.Content>
+ *
+ * **Note:** Modal.Body is optional. Legacy patterns (manual scroll divs)
+ * are discouraged but not forbidden.
+ */
+const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
+  ({ className, children, ...props }, ref) => {
+    const paddingClass = getSpacingClass("py", "md"); // py-md (16px)
+
+    return (
+      <div
+        ref={ref}
+        className={cn("max-h-[60vh] overflow-y-auto", paddingClass, className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+ModalBody.displayName = "ModalBody";
+
+// ============================================================================
 // MODAL FOOTER
 // ============================================================================
 
@@ -532,6 +635,7 @@ ModalClose.displayName = DialogPrimitive.Close.displayName;
 // ============================================================================
 
 export {
+  ModalBody,
   ModalClose,
   ModalContent,
   ModalDescription,
@@ -553,7 +657,7 @@ export {
  * Radix Dialog-based modal component with token-driven styling.
  *
  * **Usage:**
- * ```tsx
+ * @example
  * <Modal.Root open={open} onOpenChange={setOpen}>
  *   <Modal.Trigger>Open</Modal.Trigger>
  *   <Modal.Content>
@@ -561,17 +665,19 @@ export {
  *       <Modal.Title>Title</Modal.Title>
  *       <Modal.Description>Description</Modal.Description>
  *     </Modal.Header>
- *     <div>Content</div>
+ *     <Modal.Body>
+ *       {/* Scrollable content *\/}
+ *     </Modal.Body>
  *     <Modal.Footer>
  *       <Modal.Close>Close</Modal.Close>
  *     </Modal.Footer>
  *     <Modal.Close />
  *   </Modal.Content>
  * </Modal.Root>
- * ```
  *
  * **Note:** Modal.Portal and Modal.Overlay are internal and should not be used directly.
  * ModalContent automatically handles portal and overlay rendering.
+ * Modal.Body is optional but recommended for scrollable content.
  */
 export const Modal = {
   Root: ModalRoot,
@@ -581,6 +687,7 @@ export const Modal = {
   Header: ModalHeader,
   Title: ModalTitle,
   Description: ModalDescription,
+  Body: ModalBody,
   Footer: ModalFooter,
   Close: ModalClose,
 };
