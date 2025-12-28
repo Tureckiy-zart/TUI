@@ -84,11 +84,15 @@ const FORBIDDEN_PATTERNS = [
   /\b(bg|text|border|ring|outline)-(red|blue|green|yellow|purple|pink|indigo|gray|slate|zinc|neutral|stone|orange|amber|emerald|teal|cyan|sky|violet|fuchsia|rose)-\d+/,
   // Raw spacing utilities with arbitrary numbers (p-4, m-2, gap-3, etc.)
   // Allow semantic spacing tokens (px-sm, py-md, etc.) which use token names
-  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-(\d+|\[)/,
+  // Allow p-0, m-0, etc. as these are standard Tailwind classes for zero spacing
+  // Allow fractional values (0.5, 1.5, 2.5, 3.5) as these are standard Tailwind spacing classes used in tokens
+  // Note: Standard numeric values (p-4, m-2, etc.) are still flagged to encourage semantic tokens
+  /\b(p|m|px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap|space-[xy])-((?!0$|0\.5$|1\.5$|2\.5$|3\.5$)\d+(\.\d+)?|\[)/,
   // Raw size utilities with arbitrary numbers (w-4, h-6, etc.)
   // Allow semantic size tokens (h-8, w-9, etc.) which are standard design system values
   // Only flag arbitrary values like w-[123px] or h-[calc(...)]
-  /\b(w|h|min-w|min-h|max-w|max-h)-\[/,
+  // Allow viewport-relative values (vh, vw, %) and relative units (rem, em) as these are legitimate design system values
+  /\b(w|h|min-w|min-h|max-w|max-h)-\[(?!\d+(vh|vw|%|rem|em)\])/,
 ] as const;
 
 /**

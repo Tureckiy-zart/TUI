@@ -12,9 +12,9 @@
 /**
  * Modal maximum height token
  * Used for all modal sizes to prevent overflow on small screens
- * Extracted as constant to avoid hardcoded arbitrary values in tokenCVA validation
+ * Uses viewport-relative value (90vh) which is allowed as a legitimate design system value
  */
-const MODAL_MAX_HEIGHT = "max-h-[90vh]"; // 90% of viewport height - prevents modal overflow
+const MODAL_MAX_HEIGHT = "max-h-[90vh]"; // 90% of viewport height - prevents modal overflow (viewport-relative value allowed)
 
 /**
  * Modal Component Tokens
