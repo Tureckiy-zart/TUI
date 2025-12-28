@@ -102,6 +102,37 @@ function getRadiusClass(token: RadiusToken | undefined): string | undefined {
   return `rounded-${String(token)}`;
 }
 
+/**
+ * Check if Modal.Description component exists in children
+ * Recursively searches through React children to find Description component
+ */
+function hasDescriptionInChildren(children: React.ReactNode): boolean {
+  let hasDescription = false;
+
+  React.Children.forEach(children, (child) => {
+    if (hasDescription) return;
+
+    if (React.isValidElement(child)) {
+      const childType = child.type as any;
+      const displayName = childType?.displayName || childType?.name;
+
+      // Check if this is Modal.Description (which has displayName from DialogPrimitive.Description)
+      if (displayName === DialogPrimitive.Description.displayName) {
+        hasDescription = true;
+        return;
+      }
+
+      // Recursively check children
+      const props = child.props as { children?: React.ReactNode };
+      if (props?.children) {
+        hasDescription = hasDescriptionInChildren(props.children);
+      }
+    }
+  });
+
+  return hasDescription;
+}
+
 // ============================================================================
 // CVA VARIANTS
 // ============================================================================
@@ -356,6 +387,19 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
     // Build surface classes
     const surfaceClass = baseSurface ? MODAL_TOKENS.surface[baseSurface] : undefined;
 
+    // Check if Description exists in children
+    const hasDescription = hasDescriptionInChildren(children);
+
+    // Set aria-describedby={undefined} if Description is not present and aria-describedby is not explicitly provided
+    // This prevents Radix UI Dialog warnings about missing Description
+    const hasExplicitAriaDescribedBy = "aria-describedby" in props;
+
+    // Prepare props: add aria-describedby={undefined} if needed to suppress Radix warning
+    const contentProps =
+      hasExplicitAriaDescribedBy || hasDescription
+        ? props // aria-describedby explicitly provided OR Description exists - use props as-is
+        : { ...props, "aria-describedby": undefined }; // No Description and no explicit aria-describedby - set to undefined
+
     // Handle focus restore deterministically
     const handleCloseAutoFocus = React.useCallback(
       (event: Event) => {
@@ -389,7 +433,7 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
             surfaceClass,
             className,
           )}
-          {...props}
+          {...contentProps}
         >
           {children}
         </DialogPrimitive.Content>
