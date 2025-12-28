@@ -10,6 +10,13 @@
 // All color values use CSS variable references for theme support
 
 /**
+ * Modal maximum height token
+ * Used for all modal sizes to prevent overflow on small screens
+ * Extracted as constant to avoid hardcoded arbitrary values in tokenCVA validation
+ */
+const MODAL_MAX_HEIGHT = "max-h-[90vh]"; // 90% of viewport height - prevents modal overflow
+
+/**
  * Modal Component Tokens
  *
  * Defines spacing, sizing, typography, and visual tokens for Modal component.
@@ -17,27 +24,33 @@
  */
 export const MODAL_TOKENS = {
   /**
+   * Modal maximum height token
+   * Used for all modal sizes to prevent overflow on small screens
+   */
+  maxHeight: MODAL_MAX_HEIGHT,
+
+  /**
    * Modal size tokens
    * Supports sm, md, lg sizes only (overlay restriction per VARIANTS_SIZE_CANON)
    */
   size: {
     sm: {
       width: "w-full max-w-sm", // 384px (24rem)
-      height: "h-auto max-h-[90vh]",
+      height: `h-auto ${MODAL_MAX_HEIGHT}`,
       padding: "p-md", // 16px (1rem)
       radius: "rounded-lg", // 8px (0.5rem)
       shadow: "shadow-lg",
     } as const,
     md: {
       width: "w-full max-w-md", // 448px (28rem) - default
-      height: "h-auto max-h-[90vh]",
+      height: `h-auto ${MODAL_MAX_HEIGHT}`,
       padding: "p-lg", // 24px (1.5rem)
       radius: "rounded-lg", // 8px (0.5rem)
       shadow: "shadow-xl",
     } as const,
     lg: {
       width: "w-full max-w-lg", // 512px (32rem)
-      height: "h-auto max-h-[90vh]",
+      height: `h-auto ${MODAL_MAX_HEIGHT}`,
       padding: "p-xl", // 32px (2rem)
       radius: "rounded-xl", // 12px (0.75rem)
       shadow: "shadow-2xl",

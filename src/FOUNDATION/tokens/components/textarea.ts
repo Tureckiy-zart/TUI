@@ -151,6 +151,12 @@ export const TEXTAREA_TOKENS = {
   } as const,
 
   /**
+   * Minimum height token
+   * Used for default textarea height
+   */
+  minHeight: "min-h-[80px]", // 80px - default minimum height for textarea
+
+  /**
    * Message tokens
    * Spacing, positioning, and styling for helper text and error messages
    */

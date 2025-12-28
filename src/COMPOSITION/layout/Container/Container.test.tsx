@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { render } from "@testing-library/react";
 import React from "react";
+import { describe, expect, it, vi } from "vitest";
 import { Container } from "./Container";
 
 describe("Container component", () => {
@@ -82,11 +83,24 @@ describe("Container component", () => {
     });
 
     it("should NOT accept flexDirection prop", () => {
+      // Suppress React warning about invalid DOM prop (this is expected for this test)
+      const originalError = console.error;
+      const consoleError = vi.spyOn(console, "error").mockImplementation((message) => {
+        // Suppress only the specific warning about flexDirection prop
+        if (typeof message === "string" && message.includes("flexDirection")) {
+          return;
+        }
+        // Allow other console.error calls to pass through
+        originalError(message);
+      });
+
       const { container } = render(
         <Container {...({ flexDirection: "row" } as any)}>Content</Container>,
       );
       const containerEl = container.firstChild as HTMLElement;
       expect(containerEl).not.toHaveClass("flex-row");
+
+      consoleError.mockRestore();
     });
 
     it("should NOT accept gap prop", () => {

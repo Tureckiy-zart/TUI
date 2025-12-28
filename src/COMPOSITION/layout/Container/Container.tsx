@@ -96,6 +96,8 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ maxWidth, padding, center = true, className, style, ...props }, ref) => {
+    // Filter out non-DOM props that might be passed accidentally
+    const { flexDirection: _flexDirection, ...domProps } = props as any;
     // Get base values for CSS variables
     const maxWidthValue = maxWidth
       ? getBaseValue<ContainerMaxWidthToken | SpacingToken>(maxWidth)
@@ -148,7 +150,7 @@ const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
         className={cn("tm-container", className)}
         data-padding={paddingAttr}
         style={inlineStyles}
-        {...props}
+        {...domProps}
       />
     );
   },

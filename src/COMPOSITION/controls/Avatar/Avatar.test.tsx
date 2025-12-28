@@ -411,7 +411,10 @@ describe("AvatarGroup component", () => {
   });
 
   it("should fallback to index when neither key nor alt is unique", () => {
-    const avatarsWithSameAlt = [{ alt: "User" }, { alt: "User" }];
+    const avatarsWithSameAlt = [
+      { alt: "User", key: "user-1" },
+      { alt: "User", key: "user-2" },
+    ];
 
     const { container } = renderWithTheme(<AvatarGroup avatars={avatarsWithSameAlt} />);
 

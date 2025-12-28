@@ -171,7 +171,9 @@ describe("Textarea", () => {
     });
 
     it("renders with value (controlled)", () => {
-      renderWithTheme(<Textarea placeholder="Controlled" value="Controlled value" />);
+      renderWithTheme(
+        <Textarea placeholder="Controlled" value="Controlled value" onChange={() => {}} />,
+      );
       const textarea = screen.getByPlaceholderText("Controlled");
       expect(textarea).toHaveValue("Controlled value");
     });
