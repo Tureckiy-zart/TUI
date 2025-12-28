@@ -579,7 +579,7 @@ Unlocked components (Extension layer, components in Pipeline 18A) **MUST** follo
 - 📖 [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - Explicit union types requirement (complements CVA structure)
 
 **Pipeline Documentation:**
-- 📖 [FOUNDATION_STEP_PIPELINE.md](../../workflows/foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A with CVA validation checkpoints
+- 📖 [COMPONENT_REFACTORING_PIPELINE.md](../../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A with CVA validation checkpoints
 
 **Architecture Context:**
 - 📖 [ARCHITECTURE_CONTEXT.md](../../ARCHITECTURE_CONTEXT.md) - References this document for CVA canonical style

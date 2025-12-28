@@ -1868,6 +1868,17 @@ No
 - Component serves as reference implementation
 - All architectural requirements met
 
+**Storybook Stories Summary:**
+- **Total Stories:** 8 stories
+  - Variants
+  - SizesGallery (canonical)
+  - IconOnly
+  - States (canonical)
+  - WithIcons
+  - Matrix (canonical)
+  - Interactions
+  - Accessibility
+
 ### Changes
 
 None (lock documents already reflect Button lock status from previous pipeline run)

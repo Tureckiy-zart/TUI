@@ -151,7 +151,7 @@ These documents define the TUNG (Task Unified Next-Gen) automation and task mana
 | `docs/workflows/tung_system_specification.md` | TUNG system specification and rules | **ACTIVE** |
 | `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | Canonical TUNG template for Foundation pipeline | **ACTIVE** |
 | `docs/workflows/example_task_master.json` | Example master task in TUNG format | **ACTIVE** |
-| `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` | Component Review & Improvement Pipeline (Step-by-step) | **ACTIVE** |
+| `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` | Component Refactoring Pipeline (Step-by-step) | **ACTIVE** |
 
 **Total:** 4 files
 
@@ -257,7 +257,7 @@ These documents provide API and integration references.
 | `docs/workflows/tung_system_specification.md` | TUNG System | Reference (ACTIVE) | System specification |
 | `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | TUNG System | Reference (ACTIVE) | JSON Step Template |
 | `docs/workflows/example_task_master.json` | TUNG System | Reference (ACTIVE) | Master Task Example |
-| `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` | Workflow | Reference (ACTIVE) | Step-by-step pipeline |
+| `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` | Workflow | Reference (ACTIVE) | Step-by-step pipeline |
 
 **Total:** 48 files
 

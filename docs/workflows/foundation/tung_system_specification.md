@@ -19,7 +19,7 @@ TUNG = **Task Unified Next-Gen** (расшифровка для документ
 ## 🔗 Связанные документы
 - 📄 [TUNG Template](foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json) — Основной шаблон для разработки Foundation-компонентов.
 - 📄 [Example Master Task](example_task_master.json) — Пример мастер-задачи в формате TUNG.
-- 📄 [Foundation Step Pipeline](foundation/FOUNDATION_STEP_PIPELINE.md) — Пошаговый пайплай реализации компонентов, работающий на базе TUNG.
+- 📄 [Component Refactoring Pipeline](foundation/COMPONENT_REFACTORING_PIPELINE.md) — Пошаговый пайплайн рефакторинга компонентов, работающий на базе TUNG.
 
 ---
 

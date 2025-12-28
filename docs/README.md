@@ -111,7 +111,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 - [workflows/tasks/COMPONENT_NEEDS_INVENTORY.md](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) - Component needs tracking and prioritization
 - [workflows/tasks/COMPONENT_CREATION_CHECKLIST.md](./workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) - Extension component creation checklist
-- [workflows/foundation/FOUNDATION_STEP_PIPELINE.md](./workflows/foundation/FOUNDATION_STEP_PIPELINE.md) - **Component Review & Improvement Pipeline (18A)** - Canonical process for refactoring existing components
+- [workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md](./workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) - **Component Refactoring Pipeline (18A)** - Canonical process for refactoring existing components
 - [workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md](./workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md) - Usage feedback collection process
 - [workflows/tasks/FEEDBACK_REVIEW_PROCESS.md](./workflows/tasks/FEEDBACK_REVIEW_PROCESS.md) - Feedback review and decision process
 - [workflows/tasks/COMPONENT_USAGE_TRACKING.md](./workflows/tasks/COMPONENT_USAGE_TRACKING.md) - Component usage tracking

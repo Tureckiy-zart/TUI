@@ -775,13 +775,38 @@ Each `STEP N` section must include:
 
 * `Outcome:` one of `No changes required | Changes applied | Changes required (not yet applied)`
 
-* `Blocking:` `yes/no`
+* `Blocking:` `yes/no` (with reason if `yes`)
 
-* `Notes:` 1–5 bullet points max
+* `Notes:` 2-5 bullet points max (key decisions, findings)
 
 * `Changes:` list of actual changes (or `None`)
 
+* `Artifacts:` links to created/modified files (or `None`)
+
 * `Deferred:` list of deferred items (or `None`)
+
+**Standardized Section Format Example:**
+```markdown
+## STEP N — Step Name
+
+**Outcome:** Changes applied  
+**Blocking:** no  
+**Notes:**
+- Key finding or decision point
+- Another important note
+- Reference to specific authority contract
+
+**Changes:**
+- List of actual changes made
+- Files modified or created
+
+**Artifacts:**
+- Links to created/modified files
+- Documentation references
+
+**Deferred:**
+- Items explicitly not addressed (with justification)
+```
 
 ### **Emoji markers (READABILITY, OPTIONAL)**
 
@@ -866,11 +891,35 @@ Create/overwrite the audit report at the canonical path:
 
 STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
-0) **Pipeline Progress Tracker**
-   - Checklist of all steps (STEP 0-12)
+0) **Pipeline Progress Tracker (MANDATORY)**
+   - Checklist of all steps (STEP 0-12) with status indicators
    - Estimated time per step
-   - Checkpoint markers
+   - Checkpoint markers (mandatory/recommended)
    - Total estimated time
+   
+   **Template:**
+   ```markdown
+   ## Pipeline Progress Tracker
+   
+   | Step | Name | Status | Estimated Time |
+   |------|------|--------|----------------|
+   | STEP 0 | Baseline Snapshot | ⬜ Pending | 30 min |
+   | STEP 1 | Structural & Code Quality | ⬜ Pending | 30 min |
+   | STEP 2 | Semantic Role & Responsibility | ⬜ Pending | 15 min |
+   | STEP 3 | Duplication & Pattern Alignment | ⬜ Pending | 30 min |
+   | STEP 4 | State & Interaction Model | ⬜ Pending | 30 min |
+   | STEP 5 | Token, Size & Variant | ⬜ Pending | 45 min |
+   | STEP 6 | Public API & DX | ⬜ Pending | 30 min |
+   | STEP 7 | Type System Alignment | ⬜ Pending | 30 min |
+   | STEP 8 | Intentional Refactor Pass | ⬜ Pending | 30 min |
+   | STEP 9 | Mandatory FIX | ⬜ Pending | 2 hours |
+   | STEP 10 | Tests & Storybook | ⬜ Pending | 2 hours |
+   | STEP 11 | Accessibility Audit | ⬜ Pending | 1 hour |
+   | STEP 12 | Final Review & Lock | ⬜ Pending | 30 min |
+   
+   **Total Estimated Time:** 8-10 hours
+   **Actual Time:** {to be filled on completion}
+   ```
 
 1) **Header / Metadata**
    - Component name (exported name)
@@ -934,7 +983,7 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
 Before proceeding to STEP 1, verify:
 - [ ] Audit report created at canonical path: `docs/reports/audit/<COMPONENT>_BASELINE_REPORT.md`
-- [ ] Pipeline Progress Tracker section exists
+- [ ] **Pipeline Progress Tracker section exists** with all steps (STEP 0-12) and estimated times
 - [ ] Header/Metadata section filled
 - [ ] Baseline Inventory documented (files, exports, deps, props)
 - [ ] Run Plan (STEP MAP) created
@@ -942,7 +991,7 @@ Before proceeding to STEP 1, verify:
 - [ ] Initial FIX Backlog structure created
 - [ ] DoD (Definition of Done) documented
 - [ ] No code changes made
-- [ ] STEP 0 section in audit report filled
+- [ ] STEP 0 section in audit report filled (using standardized format: Outcome, Blocking, Notes, Changes, Artifacts, Deferred)
 - [ ] Checkpoint: Audit report shared with operator
 
 ---
@@ -1135,11 +1184,26 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 
 * Whether JS is used where CSS or native behavior would suffice.
 
+* **Input Interaction Validation (MANDATORY for interactive components):**
+  - **Keyboard parity validation:**
+    - Every pointer interaction MUST have keyboard equivalent
+    - Enter/Space semantics correct for component type
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+  - **State blocking validation:**
+    - Disabled state blocks all activation events (pointer + keyboard)
+    - Loading state blocks pointer (if implemented)
+    - Readonly state blocks changes, allows focus
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+
 ### **Refactoring Guidance**
 
 * Remove unnecessary JS state.
 
 * Simplify interaction paths.
+
+* Ensure keyboard parity for all interactive elements.
+
+* Verify state blocking behavior (disabled/loading/readonly).
 
 ### **Reference (CRITICAL)**
 
@@ -1159,13 +1223,24 @@ Confirm that interaction logic is **simple, predictable, and platform‑native**
 - CSS variable structure and format
 - State representation as tokens
 
-**STEP 4 validates interaction logic against all three state authorities.**
+**Input Interaction Authority:**
+
+📖 [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md) - **Input interaction contracts**
+- Keyboard parity requirements (every pointer interaction MUST have keyboard equivalent)
+- Enter/Space semantics by component type
+- State blocking rules (disabled/loading/readonly)
+- Accidental interaction prevention
+
+**STEP 4 validates interaction logic against all three state authorities AND input interaction contracts.**
 
 **Common Violations:**
 - ❌ Custom state invention (violates STATE_MATRIX)
 - ❌ JavaScript-driven hover/active (violates INTERACTION_AUTHORITY)
 - ❌ Incorrect state priority (violates INTERACTION_AUTHORITY)
 - ❌ Non-standard state naming (violates STATE_AUTHORITY)
+- ❌ Missing keyboard parity (violates INPUT_AUTHORITY)
+- ❌ Incorrect Enter/Space semantics (violates INPUT_AUTHORITY)
+- ❌ Disabled/loading state not blocking interactions (violates INPUT_AUTHORITY)
 
 ### **Step Completion Checklist**
 
@@ -1173,6 +1248,7 @@ Before proceeding to STEP 5, verify:
 - [ ] All 4 phases completed (Observe → Decide → Change → Record)
 - [ ] Audit report STEP 4 section exists
 - [ ] State model documented
+- [ ] Input interaction validation completed (keyboard parity, Enter/Space semantics, state blocking)
 - [ ] Interaction issues documented in FIX backlog
 - [ ] Model recommendation followed (Sonnet 4.5)
 
@@ -1196,11 +1272,56 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 
 * Variants that represent real use cases, not implementation quirks.
 
+* **A11Y Requirements Evaluation (MANDATORY for interactive components):**
+  - **Accessible name evaluation:**
+    - Every interactive control MUST have accessible name
+    - Icon-only buttons: aria-label required
+    - Form inputs: label association required (htmlFor/aria-labelledby)
+    - Modal overlays: aria-labelledby required (via title)
+    - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+  - **Semantic role evaluation:**
+    - Native semantic elements preferred (`<button>`, `<a>`, `<input>`, etc.)
+    - Non-semantic elements MUST have `role` + `tabindex` + keyboard handlers if interactive
+    - Redundant ARIA forbidden (e.g., `aria-disabled` on native `disabled` button)
+    - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+
+* **Focus Behavior Evaluation (MANDATORY for interactive components):**
+  - **Focus trap requirements:**
+    - Modal overlays: MUST trap focus
+    - Non-modal overlays: MUST NOT trap focus
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Focus restore requirements:**
+    - Modal overlays: MUST restore focus to trigger on close
+    - Focus restore MUST be synchronous
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Tab order requirements:**
+    - DOM order = navigation order
+    - Roving tabindex for composite controls (Tabs, Select, Menu, RadioGroup)
+    - Positive tabindex forbidden
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Focus-visible styling:**
+    - `:focus-visible` pseudo-class MUST be used for focus rings
+    - `:focus` alone MUST NOT be used for focus rings
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+
+* **Loading State Evaluation (if applicable):**
+  - **Loading state requirements:**
+    - Loading state blocking behavior (pointer blocked, keyboard focus allowed)
+    - Loading indicator requirements (visual indicator, aria-busy)
+    - aria-busy attribute required
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+
 ### **Refactoring Guidance**
 
 * Collapse near‑duplicate variants.
 
 * Remove custom size naming.
+
+* Ensure accessible names for all interactive controls.
+
+* Verify focus behavior (trap, restore, tab order).
+
+* Verify loading state blocking behavior (if applicable).
 
 ### **Scope Boundary (CRITICAL)**
 
@@ -1286,7 +1407,10 @@ Ensure the component speaks the **same visual language** as the rest of the syst
 3. Check size mapping table existence (SIZE_MAPPING_SPEC)
 4. Check token reference compliance (all Token Authorities)
 5. **Check Motion GAP resolution** (MOTION_AUTHORITY.md) - Evaluate all state/spatial changes for Motion GAP
-6. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
+6. **Check A11Y requirements** (A11Y_AUTHORITY.md) - Accessible names, semantic roles, ARIA contracts
+7. **Check Focus behavior** (FOCUS_AUTHORITY.md) - Focus trap, restore, tab order, focus-visible
+8. **Check Loading state** (INPUT_AUTHORITY.md) - Loading blocking behavior, aria-busy (if applicable)
+9. Check Storybook story requirements (VARIANTS_SIZE_CANON + SIZE_MAPPING_SPEC)
 
 ### **Step Completion Checklist**
 
@@ -1295,6 +1419,9 @@ Before proceeding to STEP 6, verify:
 - [ ] Audit report STEP 5 section exists
 - [ ] Token compliance validated
 - [ ] Size scale alignment checked
+- [ ] A11Y requirements evaluated (if interactive component)
+- [ ] Focus behavior evaluated (if interactive component)
+- [ ] Loading state evaluated (if applicable)
 - [ ] Variant issues documented in FIX backlog
 - [ ] Model recommendation followed (Sonnet 4.5)
 - [ ] Recommended checkpoint: Share audit report
@@ -1317,11 +1444,58 @@ Make the component **easy to understand and hard to misuse**.
 
 * Can the component be used correctly without reading its implementation?
 
+* **Typing Standard Compliance (MANDATORY):**
+  - Public props MUST reference explicit union types (e.g., `type ButtonVariant = "primary" | "secondary"`)
+  - CVA-derived types FORBIDDEN in public API (e.g., `VariantProps<typeof buttonVariants>`)
+  - Variant maps MUST use `satisfies Record<Type, string>` constraints
+  - NO inline string unions in props (define explicit types first)
+  - NO `string` as variant/size type (must be explicit union)
+  - Reference: [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - **MANDATORY** architectural standard
+
+* **A11Y Contract Requirements (MANDATORY for interactive components):**
+  - Document accessible name requirements (visible label/aria-label/aria-labelledby/text content)
+  - Document ARIA props exposed in public API (aria-label, aria-labelledby, aria-describedby)
+  - Document semantic role requirements (native element preferred, role attribute if needed)
+  - For icon-only buttons: Document aria-label prop requirement
+  - For form inputs: Document label association (htmlFor/aria-labelledby)
+  - For modal overlays: Document aria-labelledby requirement (via title)
+  - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+
+* **Input Contract Requirements (MANDATORY for interactive components):**
+  - Document keyboard parity requirements (every pointer interaction MUST have keyboard equivalent)
+  - Document Enter/Space semantics (component-type specific)
+  - Document disabled state blocking (MUST block all activation events)
+  - Document loading state blocking (if loading state implemented)
+  - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+
 ### **Refactoring Guidance**
 
 * Remove or rename unclear props.
 
 * Prefer composition over configuration.
+
+* Ensure explicit union types for all variant/size props.
+
+* Document A11Y and Input contracts in public API.
+
+### **Reference (CRITICAL)**
+
+**Typing Standard:**
+
+📖 [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - **MANDATORY** for public API typing
+- Explicit union types required (e.g., `type ButtonVariant = "primary" | "secondary"`)
+- CVA-derived types FORBIDDEN in public API
+- Variant maps MUST use `satisfies Record<Type, string>` constraints
+
+**A11Y Contract:**
+- Document accessible name requirements
+- Document ARIA props exposed in public API
+- Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+
+**Input Contract:**
+- Document keyboard parity requirements
+- Document Enter/Space semantics
+- Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
 
 ### **Scope Boundary (CRITICAL)**
 
@@ -1333,6 +1507,9 @@ Before proceeding to STEP 7, verify:
 - [ ] All 4 phases completed (Observe → Decide → Change → Record)
 - [ ] Audit report STEP 6 section exists
 - [ ] Public API reviewed
+- [ ] TYPING_STANDARD compliance verified (explicit union types, no CVA-derived types)
+- [ ] A11Y contract documented (if interactive component)
+- [ ] Input contract documented (if interactive component)
 - [ ] DX issues documented in FIX backlog
 - [ ] Model recommendation followed (Opus 4.5)
 - [ ] Recommended checkpoint: Share audit report
@@ -1456,7 +1633,14 @@ export const buttonVariants = tokenCVA({
 });
 ```
 
-**STEP 7 validates that types are explicit, readable, aligned with canonical dictionaries, that CVA structure supports type system requirements, and that CVA type selection (tokenCVA vs cva) matches Decision Matrix. CVA structure violations and Decision Matrix violations are BLOCKERS.**
+**STEP 7 validates that types are explicit, readable, aligned with canonical dictionaries, that CVA structure supports type system requirements, and that CVA type selection (tokenCVA vs cva) matches Decision Matrix. CVA structure violations, Decision Matrix violations, and TYPING_STANDARD violations are BLOCKERS.**
+
+**TYPING_STANDARD Validation (MANDATORY):**
+- ✅ Verify explicit union types exist for all variant/size props (no `string` types)
+- ✅ Verify NO CVA-derived types in public API (`VariantProps<typeof variants>` forbidden)
+- ✅ Verify variant maps use `satisfies Record<Type, string>` constraints
+- ✅ Verify NO inline string unions in props (explicit types defined first)
+- ✅ Reference: [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md)
 
 ### **Step Completion Checklist**
 
@@ -1464,6 +1648,7 @@ Before proceeding to STEP 8, verify:
 - [ ] All 4 phases completed (Observe → Decide → Change → Record)
 - [ ] Audit report STEP 7 section exists
 - [ ] Type system reviewed
+- [ ] TYPING_STANDARD compliance verified (explicit union types, no CVA-derived types, satisfies constraints)
 - [ ] CVA structure validated for type alignment
 - [ ] Type constraints (`satisfies Record<Type, string>`) verified in CVA variant maps
 - [ ] Type issues documented in FIX backlog
@@ -1750,41 +1935,64 @@ Minimal or placeholder coverage is not sufficient.
 
 ### **Reference (CRITICAL)**
 
-**Storybook Requirements:**
+**Storybook Quality Standard (MANDATORY):**
+
+📖 [STORYBOOK_STORIES_STANDARD.md](../../reference/STORYBOOK_STORIES_STANDARD.md) - **MANDATORY** quality standard for all Storybook stories
+
+**Storybook Quality Standard Requirements:**
+- Title structure: `UI / {Layer} / {ComponentName}` (e.g., `UI / Foundation / Button`)
+- All stories have JSDoc comments
+- All stories have `parameters.docs.description.story`
+- Layout parameter is correct (centered/padded/fullscreen)
+- All public props in argTypes with descriptions
+- Internal props hidden (`control: false`, `table: { disable: true }`)
+- Story order follows canonical order (Default → SizesGallery → Matrix → States → LongContent → Use cases)
+
+**Canonical Story Requirements:**
 
 📖 [VARIANTS_SIZE_CANON.md](../../architecture/VARIANTS_SIZE_CANON.md) - Canonical story names and requirements
 
 **Strict Story Requirements:**
 
-1. **Matrix Story** - **REQUIRED** ONLY when component publicly supports **BOTH** size AND variant props
+1. **Default Story** - **REQUIRED** for all components
+   - Name: `Default` (canonical, MUST be first story)
+   - Shows: Basic usage example
+   - Must demonstrate component in typical use case
+
+2. **Matrix Story** - **REQUIRED** ONLY when component publicly supports **BOTH** size AND variant props
    - Name: `Matrix` (canonical, no other names allowed)
    - Shows: All variants × all sizes grid
    - Components with only size OR only variant: Matrix NOT REQUIRED
 
-2. **States Story** - **REQUIRED** ONLY when component has public states/interactive behavior
+3. **States Story** - **REQUIRED** ONLY when component has public states/interactive behavior
    - Name: `States` (canonical, no other names allowed)
    - Shows: All variants × all sizes × all states (default, disabled, loading, etc.)
    - Non-interactive components: States NOT REQUIRED
 
-3. **SizesGallery Story** - **REQUIRED** when component exposes public `size` prop
+4. **SizesGallery Story** - **REQUIRED** when component exposes public `size` prop
    - Name: `SizesGallery` (canonical)
    - Shows: All supported sizes with text/icon/multi-line content
    - Reference: [SIZE_MAPPING_SPEC.md](../../architecture/SIZE_MAPPING_SPEC.md)
 
-4. **LongContent Story** - **REQUIRED** for Overlay components (Tooltip, Popover, etc.)
+5. **LongContent Story** - **REQUIRED** for Overlay components (Tooltip, Popover, etc.)
    - Name: `LongContent` (canonical)
    - Validates: padding and maxWidth token behavior with long text
    - Required regardless of whether `size` prop exists
 
 **Story Naming Authority:**
-- ✅ Use canonical names only: `Matrix`, `States`, `SizesGallery`, `LongContent`
-- ❌ Forbidden names: `VariantsMatrix`, `AllStates`, `SizeMatrix`, `StateVariations`
+- ✅ Use canonical names only: `Default`, `Matrix`, `States`, `SizesGallery`, `LongContent`
+- ❌ Forbidden names: `VariantsMatrix`, `AllStates`, `SizeMatrix`, `StateVariations`, `Basic`, `Example`
 
 **Common Violations:**
+- ❌ Missing Default story (MUST be first story)
 - ❌ Missing Matrix story when component has both size AND variant props
 - ❌ Missing States story for interactive components
 - ❌ Missing SizesGallery story for sized components
 - ❌ Using non-canonical story names
+- ❌ Incorrect title structure (not `UI / {Layer} / {ComponentName}`)
+- ❌ Missing JSDoc comments on stories
+- ❌ Missing `parameters.docs.description.story` on stories
+- ❌ Missing or incomplete argTypes (all public props must be documented)
 - ❌ Placeholder stories (single example only)
 
 **Test Requirements:**
@@ -1811,6 +2019,14 @@ Before proceeding to STEP 11, verify:
 - [ ] Tests cover public behavior and edge cases
 - [ ] Storybook demonstrates all variants and sizes
 - [ ] Storybook includes meaningful interaction examples
+- [ ] **Storybook Quality Standard compliance verified:**
+  - [ ] Title structure: `UI / {Layer} / {ComponentName}`
+  - [ ] Default story exists and is first story
+  - [ ] Canonical story names used (Matrix, States, SizesGallery, LongContent)
+  - [ ] All stories have JSDoc comments
+  - [ ] All stories have `parameters.docs.description.story`
+  - [ ] Layout parameter is correct (centered/padded/fullscreen)
+  - [ ] All public props in argTypes with descriptions
 - [ ] No placeholder coverage
 - [ ] Model recommendation followed (Codex Max)
 - [ ] **MANDATORY checkpoint: Share audit report before STEP 11**
@@ -1841,13 +2057,81 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 
 ### **Scope**
 
-* ARIA roles and attributes.
+* **A11Y Authority Requirements (MANDATORY):**
+  - **Accessible names:**
+    - Every interactive control MUST have accessible name
+    - Icon-only buttons have aria-label
+    - Form inputs have associated labels (htmlFor/aria-labelledby)
+    - Modal overlays have aria-labelledby (via title)
+    - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+  - **Semantic roles:**
+    - Native semantic elements preferred (`<button>`, `<a>`, `<input>`, etc.)
+    - Non-semantic elements MUST have `role` + `tabindex` + keyboard handlers if interactive
+    - Redundant ARIA forbidden (e.g., `aria-disabled` on native `disabled` button)
+    - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
+  - **ARIA attributes:**
+    - ARIA attributes MUST match component state (aria-checked, aria-invalid, aria-disabled)
+    - ARIA attributes MUST NOT conflict with native semantics
+    - ARIA state attributes MUST match component state
+    - Reference: [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md)
 
-* Keyboard navigation and focus management.
+* **Focus Authority Requirements (MANDATORY):**
+  - **Focus trap:**
+    - Modal overlays: MUST trap focus
+    - Non-modal overlays: MUST NOT trap focus
+    - Focus trap MUST be invisible to screen readers
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Focus restore:**
+    - Modal overlays: MUST restore focus to trigger on close
+    - Focus restore MUST be synchronous
+    - Handle missing trigger gracefully
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Tab order:**
+    - DOM order = navigation order
+    - Roving tabindex for composite controls (Tabs, Select, Menu, RadioGroup)
+    - Positive tabindex forbidden
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
+  - **Focus-visible styling:**
+    - `:focus-visible` pseudo-class MUST be used for focus rings
+    - `:focus` alone MUST NOT be used for focus rings
+    - Focus rings MUST be visible in all color modes
+    - Reference: [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md)
 
-* Screen reader announcement behavior.
+* **Input Authority Requirements (MANDATORY):**
+  - **Keyboard parity:**
+    - Every pointer interaction MUST have keyboard equivalent
+    - Enter/Space semantics correct for component type
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+  - **State blocking:**
+    - Disabled state blocks all activation events (pointer + keyboard)
+    - Loading state blocks pointer (if implemented)
+    - Readonly state blocks changes, allows focus
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
+  - **Enter/Space semantics:**
+    - Button: Enter/Space activate
+    - Checkbox/Switch/Radio: Space toggles
+    - Link: Enter navigates, Space scrolls (native)
+    - Form input: Enter submits (in form), Space inserts character
+    - Reference: [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md)
 
-* Accessibility‑specific tests and Storybook stories.
+* **Accessibility-specific tests and Storybook stories:**
+  - A11Y tests (accessible names, ARIA states, redundant ARIA prevention)
+  - Focus tests (trap, restore, roving tabindex, tab order, focus-visible, Escape key)
+  - Input tests (keyboard parity, Enter/Space semantics, disabled/loading/readonly blocking)
+
+### **Reference (CRITICAL)**
+
+**A11Y Authority:**
+
+📖 [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md) - Accessibility rules (accessible names, ARIA contracts, semantic roles)
+
+**Focus Authority:**
+
+📖 [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md) - Focus navigation rules (trap, restore, roving tabindex, tab order)
+
+**Input Authority:**
+
+📖 [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md) - Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ### **Important Notes**
 
@@ -1860,11 +2144,23 @@ Therefore, accessibility **cannot** be treated as an optional follow‑up.
 Before proceeding to STEP 12, verify:
 - [ ] All 4 phases completed (Observe → Decide → Change → Record)
 - [ ] Audit report STEP 11 section exists
-- [ ] ARIA roles and attributes correct
-- [ ] Keyboard navigation working
-- [ ] Focus management implemented
-- [ ] Screen reader behavior tested
-- [ ] A11Y-specific tests added
+- [ ] **A11Y Authority requirements verified:**
+  - [ ] Accessible names verified (every interactive control has accessible name)
+  - [ ] Semantic roles correct (native elements preferred, redundant ARIA prevented)
+  - [ ] ARIA attributes match component state
+- [ ] **Focus Authority requirements verified:**
+  - [ ] Focus trap implemented (modal overlays) or not implemented (non-modal overlays)
+  - [ ] Focus restore implemented (modal overlays)
+  - [ ] Tab order follows DOM order
+  - [ ] Roving tabindex implemented (composite controls)
+  - [ ] Focus-visible styling implemented
+- [ ] **Input Authority requirements verified:**
+  - [ ] Keyboard parity verified (every pointer interaction has keyboard equivalent)
+  - [ ] Enter/Space semantics correct for component type
+  - [ ] Disabled/loading/readonly state blocking verified
+- [ ] A11Y-specific tests added (accessible names, ARIA states, redundant ARIA)
+- [ ] Focus-specific tests added (trap, restore, roving tabindex, tab order, focus-visible, Escape)
+- [ ] Input-specific tests added (keyboard parity, Enter/Space semantics, state blocking)
 - [ ] A11Y-specific Storybook stories added
 - [ ] Model recommendation followed (Codex Max)
 - [ ] **MANDATORY checkpoint: Share audit report before STEP 12**
@@ -2364,6 +2660,21 @@ These reports demonstrate:
 
 - 📖 [LAYOUT_AUTHORITY.md](../../architecture/LAYOUT_AUTHORITY.md) - Layout structure and flow
 
+### Accessibility & Interaction Authorities
+
+- 📖 [A11Y_AUTHORITY.md](../../architecture/A11Y_AUTHORITY.md) - Accessibility rules (accessible names, ARIA contracts, semantic roles)
+- 📖 [FOCUS_AUTHORITY.md](../../architecture/FOCUS_AUTHORITY.md) - Focus navigation rules (trap, restore, roving tabindex, tab order)
+- 📖 [INPUT_AUTHORITY.md](../../architecture/INPUT_AUTHORITY.md) - Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
+
+### Type System & Code Quality Standards
+
+- 📖 [TYPING_STANDARD.md](../../reference/TYPING_STANDARD.md) - Explicit union types requirement (no CVA-derived types in public API)
+- 📖 [CVA_CANONICAL_STYLE.md](../../architecture/CVA_CANONICAL_STYLE.md) - Canonical CVA structure pattern
+
+### Storybook Standards
+
+- 📖 [STORYBOOK_STORIES_STANDARD.md](../../reference/STORYBOOK_STORIES_STANDARD.md) - Quality standard for all Storybook stories (title structure, naming, documentation, layout, argTypes)
+
 ### Lock Documents
 
 - 📖 [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation layer lock status
@@ -2382,11 +2693,32 @@ These reports demonstrate:
 
 ---
 
+## 📝 Version History
+
+* **v1.1** (2025-12-28): Canon Compliance & Modern Standards Integration
+  * **ADDITION:** Added INPUT_AUTHORITY integration in STEP 4 (keyboard parity, Enter/Space semantics, state blocking)
+  * **ADDITION:** Added A11Y_AUTHORITY requirements evaluation in STEP 5 (accessible names, semantic roles, ARIA contracts)
+  * **ADDITION:** Added FOCUS_AUTHORITY requirements evaluation in STEP 5 (focus trap, restore, roving tabindex, tab order)
+  * **ADDITION:** Added loading state evaluation in STEP 5 (loading blocking behavior, aria-busy)
+  * **ADDITION:** Added TYPING_STANDARD reference in STEP 6 (explicit union types, no CVA-derived types)
+  * **ADDITION:** Added A11Y contract requirements in STEP 6 (accessible names, ARIA props, semantic roles)
+  * **ADDITION:** Added Input contract requirements in STEP 6 (keyboard parity, Enter/Space semantics, state blocking)
+  * **ADDITION:** Enhanced TYPING_STANDARD validation in STEP 7 (explicit union types, satisfies constraints)
+  * **ADDITION:** Integrated STORYBOOK_STORIES_STANDARD in STEP 10 (title structure, canonical names, documentation, layout, argTypes)
+  * **ADDITION:** Expanded STEP 11 with A11Y/Focus/Input Authority requirements (comprehensive accessibility validation)
+  * **ADDITION:** Added Pipeline Progress Tracker template in STEP 0 (STEP 0-12 checklist with estimated times)
+  * **ADDITION:** Standardized audit report section format (Outcome, Blocking, Notes, Changes, Artifacts, Deferred)
+  * **ADDITION:** Added new Authority Contracts to Related Documents (A11Y_AUTHORITY, FOCUS_AUTHORITY, INPUT_AUTHORITY, TYPING_STANDARD, STORYBOOK_STORIES_STANDARD)
+  * **RATIONALE:** Ensures pipeline compliance with all canonical Authority Contracts and modern business application quality standards
+  * **RISK LEVEL:** LOW (additive changes, improves compliance and quality, no breaking changes to existing pipeline flow)
+
+---
+
 ## **Closing Note**
 
 This pipeline exists to **prevent accidental complexity** and **raise the baseline quality** of the system over time.
 
 Skipping steps or rushing execution will only reintroduce the problems this document is designed to eliminate.
 
-**Pipeline completion time:** 6-8 hours for typical component.
+**Pipeline completion time:** 8-10 hours for typical component (updated from 6-8 hours to reflect expanded requirements).
 

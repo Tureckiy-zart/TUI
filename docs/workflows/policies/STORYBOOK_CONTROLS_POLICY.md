@@ -239,6 +239,6 @@ Controls policy is compliant when:
 
 ## Related Documents
 
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A reference (Step 11: Storybook Quality Gate)
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A reference (Step 11: Storybook Quality Gate)
 - [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation Lock reference
 

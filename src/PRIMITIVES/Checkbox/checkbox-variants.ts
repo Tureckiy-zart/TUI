@@ -12,7 +12,13 @@ import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
  */
 export type CheckboxVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
 export type CheckboxSize = "sm" | "md" | "lg";
-export type CheckboxState = "default" | "checked" | "indeterminate" | "error" | "disabled";
+export type CheckboxState =
+  | "default"
+  | "checked"
+  | "indeterminate"
+  | "error"
+  | "disabled"
+  | "disabledChecked";
 
 /**
  * Checkbox Variants
@@ -46,6 +52,7 @@ export const checkboxVariants = tokenCVA({
       indeterminate: `${CHECKBOX_TOKENS.state.border.indeterminate} ${CHECKBOX_TOKENS.state.background.indeterminate} ${CHECKBOX_TOKENS.state.text.indeterminate}`,
       error: `${CHECKBOX_TOKENS.state.border.error} ${CHECKBOX_TOKENS.state.background.default} ${CHECKBOX_TOKENS.state.text.default}`,
       disabled: `${CHECKBOX_TOKENS.state.border.disabled} ${CHECKBOX_TOKENS.state.background.disabled} ${CHECKBOX_TOKENS.state.text.disabled}`,
+      disabledChecked: `${CHECKBOX_TOKENS.state.border.disabled} ${CHECKBOX_TOKENS.state.background.disabledChecked} ${CHECKBOX_TOKENS.state.text.disabled}`,
     } satisfies Record<CheckboxState, string>,
   },
   defaultVariants: {

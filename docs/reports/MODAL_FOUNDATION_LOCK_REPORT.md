@@ -4173,5 +4173,5 @@ Modal component has **completed all steps** (0–13) and is now **LOCKED** as a 
 - Шаги 11-12: Контрольные точки качества (Storybook и Тестирование) — должны быть пройдены перед Foundation Lock
 - Шаг 13: Foundation Lock — формальная блокировка после прохождения всех проверок и контрольных точек качества
 
-**Ссылка на канонический жизненный цикл:** [FOUNDATION_STEP_PIPELINE.md](../workflows/foundation/FOUNDATION_STEP_PIPELINE.md)
+**Ссылка на канонический жизненный цикл:** [COMPONENT_REFACTORING_PIPELINE.md](../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md)
 

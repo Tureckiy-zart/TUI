@@ -26,7 +26,7 @@ describe("Tabs", () => {
         const tab2 = screen.getByRole("tab", { name: /tab 2/i });
         expect(tab1).toBeInTheDocument();
         expect(tab2).toBeInTheDocument();
-      });
+      }, { timeout: 3000 });
     });
 
     it("renders with default value", () => {

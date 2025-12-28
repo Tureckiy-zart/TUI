@@ -164,6 +164,6 @@ This policy applies retroactively to all future pipeline executions.
 ## Related Documents
 
 - [LOCKED_CHANGE_EXCEPTION_TEMPLATE.md](./LOCKED_CHANGE_EXCEPTION_TEMPLATE.md) - Template for exception declarations
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A integration
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A integration
 - [COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.md](../../../.cursor/rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc) - Cursor rules integration
 

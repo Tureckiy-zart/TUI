@@ -649,7 +649,7 @@ The AspectRatio component second pass is considered **COMPLETE** ONLY when:
 ## 🔗 References
 
 **Pipeline Documentation:**
-- [FOUNDATION_STEP_PIPELINE.md](../../workflows/foundation/FOUNDATION_STEP_PIPELINE.md) — Pipeline 18A
+- [COMPONENT_REFACTORING_PIPELINE.md](../../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) — Pipeline 18A
 
 **Extension State:**
 - [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) — Extension component tracking (v1.5, 2025-12-25)

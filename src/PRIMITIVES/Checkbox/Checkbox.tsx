@@ -59,6 +59,7 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     const isDisabled = disabled || state === "disabled";
     const isError = state === "error";
     const effectiveState = React.useMemo(() => {
+      if (isDisabled && checked) return "disabledChecked";
       if (isDisabled) return "disabled";
       if (isError) return "error";
       if (indeterminate) return "indeterminate";
@@ -75,9 +76,16 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     // Shared toggle logic (extracted to reduce duplication)
     const toggleChecked = React.useCallback(() => {
       if (!isControlled) {
-        setUncontrolledChecked((prev) => !prev);
+        // In uncontrolled mode, compute new value from previous state before calling callback
+        setUncontrolledChecked((prev) => {
+          const newValue = !prev;
+          onCheckedChange?.(newValue);
+          return newValue;
+        });
+      } else {
+        // In controlled mode, use inverted current value
+        onCheckedChange?.(!checked);
       }
-      onCheckedChange?.(!checked);
     }, [isControlled, checked, onCheckedChange]);
 
     // Handle click
@@ -118,23 +126,51 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     // Get icon size based on checkbox size
     const iconSize = size ? CHECKBOX_TOKENS.icon.size[size] : CHECKBOX_TOKENS.icon.size.md;
 
+    // Determine icon color based on variant and state
+    // For outline/ghost variants with transparent background, use primary color for visibility
+    // For other variants with colored background, use foreground color for contrast
+    const effectiveVariant = variant || "outline"; // Default variant is "outline"
+    const getIconColor = React.useCallback(() => {
+      if (isDisabled) {
+        return CHECKBOX_TOKENS.icon.color.disabled;
+      }
+      // For outline and ghost variants, use primary color (not foreground) for visibility on transparent background
+      if (effectiveVariant === "outline" || effectiveVariant === "ghost") {
+        return "text-[hsl(var(--tm-primary))]";
+      }
+      // For other variants with colored background, use foreground color for contrast
+      return CHECKBOX_TOKENS.state.text.checked;
+    }, [isDisabled, effectiveVariant]);
+
     // Render checkmark icon
     const renderIcon = () => {
       if (indeterminate) {
         if (indeterminateIcon) {
-          return indeterminateIcon;
+          // Wrap custom icon in container to maintain button size
+          return (
+            <span className={cn(iconSize, "flex items-center justify-center")} aria-hidden="true">
+              {indeterminateIcon}
+            </span>
+          );
         }
         // Default indeterminate indicator (horizontal line)
+        // Wrap in container with icon size to maintain button dimensions
+        // For outline/ghost variants, use primary color for visibility on transparent background
+        const indeterminateColor =
+          effectiveVariant === "outline" || effectiveVariant === "ghost"
+            ? "bg-[hsl(var(--tm-primary))]"
+            : CHECKBOX_TOKENS.indeterminate.color;
         return (
-          <span
-            className={cn(
-              CHECKBOX_TOKENS.indeterminate.width,
-              CHECKBOX_TOKENS.indeterminate.height,
-              CHECKBOX_TOKENS.indeterminate.color,
-              "block rounded-sm",
-            )}
-            aria-hidden="true"
-          />
+          <span className={cn(iconSize, "flex items-center justify-center")} aria-hidden="true">
+            <span
+              className={cn(
+                CHECKBOX_TOKENS.indeterminate.width,
+                CHECKBOX_TOKENS.indeterminate.height,
+                indeterminateColor,
+                "block rounded-sm",
+              )}
+            />
+          </span>
         );
       }
 
@@ -143,19 +179,22 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           return icon;
         }
         // Default checkmark icon
+        // Color depends on variant:
+        // - outline/ghost: use primary color (visible on transparent background)
+        // - others: use foreground color (visible on colored background)
+        const iconColor = getIconColor();
+        // Ensure color is always applied - if getIconColor returns undefined/null, use fallback
+        const finalIconColor = iconColor || CHECKBOX_TOKENS.state.text.checked;
         return (
           <IconCheck
-            className={cn(
-              iconSize,
-              CHECKBOX_TOKENS.icon.stroke,
-              isDisabled ? CHECKBOX_TOKENS.icon.color.disabled : CHECKBOX_TOKENS.icon.color.default,
-            )}
+            className={cn(iconSize, CHECKBOX_TOKENS.icon.stroke, finalIconColor)}
             aria-hidden={true}
           />
         );
       }
 
-      return null;
+      // Return invisible placeholder to maintain button size when unchecked
+      return <span className={cn(iconSize, "block")} aria-hidden="true" />;
     };
 
     return (

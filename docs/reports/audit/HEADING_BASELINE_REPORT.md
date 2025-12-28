@@ -633,7 +633,7 @@ The Heading component is considered **closed** only when:
 
 ### Authority References Consulted
 - ✅ `docs/architecture/CVA_CANONICAL_STYLE.md` - Decision Matrix (Heading: cva ALLOWED)
-- ✅ `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` - Pipeline 18A structure
+- ✅ `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` - Pipeline 18A structure
 - ✅ `docs/workflows/tasks/COMPONENT_ROADMAP_PRIMITIVES.md` - Heading roadmap entry
 
 ---
@@ -1442,7 +1442,7 @@ Tests  19 passed | 1 skipped (20)
 - `docs/architecture/FOUNDATION_LOCK.md` - ✅ Lock status verified
 
 ### Authority References Consulted
-- ✅ `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` - Pipeline 18A structure
+- ✅ `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` - Pipeline 18A structure
 - ✅ `docs/workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md` - Lock policy
 - ✅ `docs/architecture/FOUNDATION_LOCK.md` - Lock status verification
 

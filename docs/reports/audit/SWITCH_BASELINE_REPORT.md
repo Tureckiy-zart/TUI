@@ -2895,6 +2895,25 @@ _End of STEP 11 Accessibility Audit & Fixes_
 - ✅ **State Model Normalized** - Derived states only
 - ✅ **Canonical Stories** - Matrix, SizesGallery, States present
 
+**Storybook Stories Summary:**
+- **Total Stories:** 16 stories
+  - Default
+  - Checked
+  - Disabled
+  - DisabledChecked
+  - Matrix (canonical)
+  - SizesGallery (canonical)
+  - AllSizes
+  - AllSizesChecked
+  - AllVariants
+  - AllVariantsUnchecked
+  - States (canonical)
+  - WithLabel
+  - Controlled
+  - Uncontrolled
+  - Invalid
+  - Accessibility
+
 **Final Status:** ✅ **LOCKED** (Foundation Lock applied)
 
 **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Controls)

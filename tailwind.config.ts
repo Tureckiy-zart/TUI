@@ -156,6 +156,14 @@ const SAFELIST = [
   "animate-fade-slide-down-in",
   "animate-fade-slide-left-in",
   "animate-fade-slide-right-in",
+  // Spinner animations
+  "animate-spinner-linear",
+  "animate-spinner-bars",
+  "animate-spinner-wave",
+  "animate-spinner-ripple",
+  // Accordion animations
+  "animate-accordion-down",
+  "animate-accordion-up",
 ];
 
 const config: Config = {
@@ -188,7 +196,33 @@ const config: Config = {
       transitionDuration: motionTailwindConfig.transitionDuration,
       transitionTimingFunction: motionTailwindConfig.transitionTimingFunction,
       transitionProperty: motionTailwindConfig.transitionProperty,
-      keyframes: motionTailwindConfig.keyframes as Record<string, any>,
+      keyframes: {
+        ...(motionTailwindConfig.keyframes as Record<string, any>),
+        "spinner-linear": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(200%)" },
+        },
+        "spinner-bars": {
+          "0%, 40%, 100%": { transform: "scaleY(0.4)" },
+          "20%": { transform: "scaleY(1.0)" },
+        },
+        "spinner-wave": {
+          "0%, 40%, 100%": { transform: "translateY(0)" },
+          "20%": { transform: "translateY(-10px)" },
+        },
+        "spinner-ripple": {
+          "0%": { transform: "scale(0)", opacity: "1" },
+          "100%": { transform: "scale(1)", opacity: "0" },
+        },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
       animation: {
         // Motion V2 animations - MUST be here for Tailwind to generate @keyframes
         "fade-in": "fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
@@ -204,6 +238,12 @@ const config: Config = {
         "fade-slide-down-in": "fade-slide-down-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
         "fade-slide-left-in": "fade-slide-left-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
         "fade-slide-right-in": "fade-slide-right-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
+        "spinner-linear": "spinner-linear 1.5s ease-in-out infinite",
+        "spinner-bars": "spinner-bars 1.2s ease-in-out infinite",
+        "spinner-wave": "spinner-wave 1.2s ease-in-out infinite",
+        "spinner-ripple": "spinner-ripple 1.4s ease-out infinite",
+        "accordion-down": "accordion-down 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "accordion-up": "accordion-up 250ms cubic-bezier(0.4, 0, 0.2, 1)",
       },
     },
   },

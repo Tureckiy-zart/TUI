@@ -129,7 +129,7 @@ Pipeline 18B is an **efficiency-optimized variant** of the Foundation Step Pipel
 
 1. **REFINED_REFACTOR_PIPELINE_18B.md** — Full 18B specification (use this for execution)
 2. **REFACTOR_PIPELINE_STEP_COMPARISON.md** — Side-by-side comparison with selection guide
-3. **FOUNDATION_STEP_PIPELINE.md** (18A) — Original 13-step pipeline
+3. **COMPONENT_REFACTORING_PIPELINE.md** (18A) — Original 13-step pipeline
 
 ### Analysis Documents (Reference Only)
 

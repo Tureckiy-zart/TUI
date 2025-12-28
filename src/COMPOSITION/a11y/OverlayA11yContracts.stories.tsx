@@ -13,7 +13,7 @@ import { useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
 import { Dialog } from "@/COMPOSITION/overlays/Dialog";
-import { Drawer } from "@/COMPOSITION/overlays/Drawer";
+import { Drawer } from "@/COMPOSITION/overlays";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";

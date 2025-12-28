@@ -108,6 +108,23 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `Select`, `SelectContent`, `SelectGroup`, `SelectIcon`, `SelectItem`, `SelectItemIndicator`, `SelectItemText`, `SelectLabel`, `SelectRoot`, `SelectSeparator`, `SelectTrigger`, `SelectValue`, `SelectViewport`
 
+3.1. **MultiSelect** - `src/COMPOSITION/controls/MultiSelect/MultiSelect.tsx`
+   - **Status:** ✅ **ALLOWED** (Component Creation Pipeline C0-C10 Complete)
+   - **Creation Date:** 2025-12-28
+   - **Pipeline:** Component Creation Pipeline (Steps C0-C10 complete)
+   - **Creation Report:** `docs/reports/creation/MultiSelect_CREATION_REPORT.md`
+   - **Component Type:** Extension Layer Composite Control - Multi-selection dropdown
+   - **Purpose:** Multi-selection dropdown control with tag-based selection visualization. Composes Foundation Select and Checkbox with multiple value management and removable tags.
+   - **Foundation Composition:** Uses SelectRoot, SelectContent, SelectViewport from Foundation Select; Uses Checkbox from Foundation Primitives
+   - **Sizes:** sm, md, lg (canonical interactive size scale)
+   - **Token Compliance:** ✅ 100% (INPUT_TOKENS, SELECT_TOKENS, CHECKBOX_TOKENS, CHIP_TOKENS, MOTION_TOKENS, POPOVER_TOKENS)
+   - **CVA Structure:** tokenCVA (multiSelectTriggerVariants)
+   - **Accessibility:** aria-label/aria-labelledby, aria-multiselectable, aria-checked on items, keyboard navigation
+   - **Test Coverage:** Comprehensive (MultiSelect.test.tsx - behavior, edge cases, A11Y, focus, keyboard)
+   - **Storybook Coverage:** Compliant (Default, SizesGallery, States, LongContent, 5 use case stories)
+   - **Motion Compliance:** ✅ (MOTION_TOKENS.transitionPreset.colors, reduced motion supported)
+   - **Exports:** `MultiSelect`, `MultiSelectProps`, `MultiSelectOption`, `MultiSelectSize`
+
 4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
    - **Lock Date:** 2025-12-25
@@ -460,6 +477,26 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Date Completed:** 2025-12-25
     - Exports: `AspectRatio`, `AspectRatioProps`, `AspectRatioPreset`, `ASPECT_RATIO_PRESETS`
 
+27. **Chip** - `src/COMPOSITION/overlays/Chip/Chip.tsx`
+    - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
+    - **Creation Date:** 2025-12-28
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/CHIP_CREATION_REPORT.md`
+    - **Type:** Extension Layer Component - Visual/Interactive
+    - **Category:** controls (interactive control with optional modes)
+    - **Purpose:** Flexible component for displaying tags, filters, and selectable options with optional interactivity
+    - **Key Characteristics:**
+      - Multiple interaction modes (display/clickable/removable/selectable)
+      - Variant support (primary, secondary, accent, outline, ghost, destructive)
+      - Radius variants (sm, md, lg, pill)
+      - NO size prop (semi-interactive component per INTERACTIVE_SIZE_SCALE_AUTHORITY)
+      - Keyboard navigation (Enter/Space for activate, Delete/Backspace for remove)
+      - Accessibility: ARIA attributes, keyboard support, focus management
+      - Motion: Hover transitions via Motion tokens, reduced motion support
+      - Token-compliant: 100% token-based implementation (CHIP_TOKENS)
+    - **Use Cases:** Tags with deletion, filter chips, multi-select options, clickable categories, display-only status indicators
+    - Exports: `Chip`, `ChipProps`, `ChipVariant`, `ChipRadius`, `CHIP_VARIANTS`, `CHIP_RADIUS_VALUES`, `chipVariants`
+
 ### Layout Components
 
 **Status:** ✅ **LOCKED** (2025-12-15)  
@@ -611,6 +648,108 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - Exports: `Dialog`, `DialogBody`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogRoot`, `DialogTitle`
     - Types: `DialogBodyProps`, `DialogDescriptionProps`, `DialogFooterProps`, `DialogHeaderProps`, `DialogProps`, `DialogTitleProps`
+
+33. **Spinner** - `src/COMPOSITION/overlays/Spinner/Spinner.tsx`
+    - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
+    - **Creation Date:** 2025-12-28
+    - **Last Updated:** 2025-12-28 (Ring variant removed, subtle tone fixed)
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/SPINNER_CREATION_REPORT.md`
+    - **Type:** Extension Layer Component - Visual Feedback
+    - **Category:** overlays (loading feedback component)
+    - **Purpose:** Animated loading indicator for visual feedback during async operations
+    - **Key Characteristics:**
+      - Multiple visual variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple)
+      - Full size scale support (xs, sm, md, lg, xl, 2xl, 3xl)
+      - Tone variants (primary, muted, subtle) with CSS variable fallback support
+      - Easing variants (linear, ease-in, ease-out, ease-in-out) for animation timing
+      - Optional text label with configurable positioning (top, right, bottom, left)
+      - Motion animation via tokens
+      - Reduced motion support (`motion-reduce:animate-none`)
+      - Accessibility: role="status", aria-label, aria-live="polite"
+      - Token-compliant: 100% token-based implementation (SPINNER_TOKENS)
+    - **Use Cases:** Inline loading (buttons, inputs), page loading, data loading (tables, lists), overlay loading
+    - Exports: `Spinner`, `SpinnerEasing`, `SpinnerLabelPosition`, `SpinnerProps`, `SpinnerSize`, `SpinnerTone`, `SpinnerVariant`
+
+34. **Accordion** - `src/COMPOSITION/overlays/Accordion/Accordion.tsx`
+    - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
+    - **Creation Date:** 2025-12-28
+    - **Last Updated:** 2025-12-28 (Fixed click interaction issue - disabled tokens now use `disabled:` prefix)
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/ACCORDION_CREATION_REPORT.md`
+    - **Type:** Extension Layer Component - Composite Disclosure
+    - **Category:** overlays (interactive disclosure component)
+    - **Purpose:** Vertically stacked set of interactive headings that reveal/hide associated content panels
+    - **Key Characteristics:**
+      - Single and multiple open modes (type="single" | "multiple")
+      - Semantic variants (primary, secondary, accent, neutral)
+      - Size variants (sm, md, lg)
+      - Expand/collapse animations (`animate-accordion-down`, `animate-accordion-up`)
+      - Chevron icon with rotation transition
+      - Reduced motion support (via Tailwind keyframes)
+      - Accessibility: ARIA attributes (role="region", aria-expanded, aria-labelledby), keyboard navigation (Arrow Up/Down, Enter/Space)
+      - Token-compliant: 100% token-based implementation (ACCORDION_TOKENS)
+      - Radix delegation: All behavior (keyboard navigation, focus management, ARIA) delegated to Radix Accordion primitives
+      - **Interaction Fix (2025-12-28):** Disabled tokens now use `disabled:` prefix per INTERACTION_AUTHORITY, fixing click interaction issue
+    - **Use Cases:** FAQ sections, settings panels, navigation menus, multi-step forms, collapsible content sections
+    - Exports: `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionRoot`, `AccordionTrigger`
+    - Types: `AccordionContentProps`, `AccordionItemProps`, `AccordionRootProps`, `AccordionTriggerProps`, `AccordionVariant`, `AccordionSize`
+
+35. **FileUpload** - `src/COMPOSITION/overlays/FileUpload/FileUpload.tsx`
+    - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
+    - **Creation Date:** 2025-12-28
+    - **Last Updated:** 2025-12-28
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/FileUpload_CREATION_REPORT.md`
+    - **Type:** Extension Layer Component - Composite Form Control
+    - **Category:** overlays (file upload component, fallback from forms category)
+    - **Purpose:** File upload component with drag-and-drop, file preview, validation, and error handling
+    - **Key Characteristics:**
+      - Drag-and-drop file selection (HTML5 Drag and Drop API)
+      - File preview with thumbnails (images) and file info
+      - File validation (size, type, count)
+      - Controlled and uncontrolled modes
+      - Size variants (sm, md, lg)
+      - Visual variants (outline, filled)
+      - Multiple file selection support
+      - Error handling and display
+      - Disabled and loading states
+      - Motion animation (.tm-motion-fade-in for file appearance, transition.colors for drag-over)
+      - Reduced motion support (inherited from motion utilities)
+      - Accessibility: aria-label, aria-describedby, aria-busy, aria-invalid, aria-disabled
+      - Keyboard navigation (Enter/Space on dropzone, Tab navigation)
+      - Semantic HTML (role="button", role="list", role="listitem")
+      - Token-compliant: 100% token-based implementation (spacing, radius, color, typography, shadow, motion)
+      - Foundation composition: uses Button, Text components
+    - **Use Cases:** Image upload, document upload, profile picture upload, file attachments
+    - **Validation Features:** File size limits, file type restrictions, file count limits
+    - Types: `FileUploadError`, `FileUploadProps`, `FileUploadSize`, `FileUploadVariant`
+
+36. **Drawer** - `src/COMPOSITION/overlays/Drawer/Drawer.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2025-12-28
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Type:** Extension Layer Component - Overlay
+    - **Category:** overlays (drawer overlay component)
+    - **Purpose:** Side drawer overlay component with Portal, Backdrop, and focus trap support. Supports left, right, and bottom positions with size variants.
+    - **Key Characteristics:**
+      - Portal rendering for proper z-index stacking
+      - Focus trap (loops focus inside drawer)
+      - Escape key closes drawer
+      - Overlay click optionally closes (prop controlled)
+      - Theme-aware overlay opacity using tokens
+      - Token-driven shadows, border radius, and spacing
+      - Complete accessibility (role, aria-modal, aria-labelledby, aria-describedby)
+      - Initial focus on first interactive element
+      - Position variants: left, right, bottom
+      - Size variants: sm, md, lg
+      - Backdrop variants: default, blurred, transparent
+      - Compound component pattern (Drawer.Content, Drawer.Header, Drawer.Body, Drawer.Footer)
+      - Token-compliant: 100% token-based implementation (OVERLAY_TOKENS.drawer)
+      - Foundation composition: uses Portal, Backdrop components
+    - **Use Cases:** Side navigation, settings panels, filters, mobile menus
+    - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
+    - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
 
 ### Menu Components
 
@@ -779,15 +918,31 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Table`, `TableColumn`, `TableProps`, `SimpleTableSize`
     - Types: `TableColumn`, `TableProps`, `SimpleTableSize`
 
+### Overlay Components
+
+42. **Combobox** - `src/COMPOSITION/overlays/Combobox/Combobox.tsx`
+    - **Status:** ✅ **ALLOWED** (Extension Overlay)
+    - **Type:** Autocomplete Overlay
+    - **Purpose:** Autocomplete component with dropdown list supporting text input and option selection. Supports single-select and multi-select modes, client-side and server-side filtering.
+    - **Creation Date:** 2025-12-28
+    - **Creation Report:** `docs/reports/creation/COMBOBOX_CREATION_REPORT.md`
+    - **Sizes:** `sm | md | lg` (Interactive Size Scale)
+    - **Foundation Composition:** Input + Popover
+    - **Use Cases:** Search with autocomplete, tags input, large list selection with filtering
+    - **Features:** Single/multi-select, client/server filtering, keyboard navigation (Arrow keys, Enter, Escape), tags display for multi-select
+    - **A11Y:** role="combobox", aria-expanded, aria-autocomplete="list", aria-controls, aria-activedescendant
+    - Exports: `Combobox`, `ComboboxInput`, `ComboboxList`, `ComboboxRoot`
+    - Types: `ComboboxRootProps`, `ComboboxInputProps`, `ComboboxListProps`, `ComboboxOption`, `ComboboxSize`
+
 ### Navigation Components
 
-42. **SegmentedControl** - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx`
+43. **SegmentedControl** - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx`
     - Exports: `SegmentedControl`
     - Types: `SegmentedControlItemProps`, `SegmentedControlRootProps`, `SegmentedControlSize`, `SegmentedControlOrientation`, `SegmentedControlState`
     - Variants: `segmentedControlItemVariants`, `segmentedControlRootVariants`
     - Status: ✅ **PROCESS LOCKED** (validated by Pipeline 18A, 2025-12-26)
 
-43. **Breadcrumbs** - `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx`
+44. **Breadcrumbs** - `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -804,14 +959,14 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Breadcrumbs`, `Breadcrumbs.Root`, `Breadcrumbs.Item`, `Breadcrumbs.Separator`
     - Types: `BreadcrumbItem`, `BreadcrumbsItemProps`, `BreadcrumbsRootProps`, `BreadcrumbsSeparatorProps`
 
-44. **Pagination** - `src/COMPOSITION/navigation/pagination/Pagination.tsx` ✅ LOCKED (validated by Pipeline 18A, 2025-12-26)
+45. **Pagination** - `src/COMPOSITION/navigation/pagination/Pagination.tsx` ✅ LOCKED (validated by Pipeline 18A, 2025-12-26)
     - Exports: `Pagination`
     - Types: `PaginationEllipsisProps`, `PaginationItemProps`, `PaginationNextProps`, `PaginationPrevProps`, `PaginationRootProps`
     - Status: LOCKED
     - Lock Date: 2025-12-26
     - Pipeline: 18A
 
-45. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
+46. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
     - **Lock Date:** 2025-12-26
     - **Audit Report:** `docs/reports/audit/STEPPER_BASELINE_REPORT.md`
     - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
@@ -828,7 +983,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Stepper`
     - Types: `StepperContentProps`, `StepperIndicatorProps`, `StepperItemProps`, `StepperLabelProps`, `StepperRootProps`, `StepperStep`
 
-46. **NavLink** - `src/PRIMITIVES/NavLink/NavLink.tsx`
+47. **NavLink** - `src/PRIMITIVES/NavLink/NavLink.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -845,7 +1000,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `NavLink`, `NavLinkProps`
     - Types: `NavLinkProps`
 
-47. **NavRoot** - `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx`
+48. **NavRoot** - `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -864,7 +1019,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
       - No variant, size, orientation, or other visual/behavioral props
     - Exports: `NavRoot`, `NavRootProps`
 
-48. **NavList** - `src/COMPOSITION/navigation/nav-list/NavList.tsx`
+49. **NavList** - `src/COMPOSITION/navigation/nav-list/NavList.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -887,7 +1042,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
       - Semantic HTML rendering (native `<ol>` and `<ul>` elements)
     - Exports: `NavList`, `NavListProps`
 
-49. **Navigation Primitives** - `src/COMPOSITION/navigation/primitives/Navigation.tsx`
+50. **Navigation Primitives** - `src/COMPOSITION/navigation/primitives/Navigation.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -911,7 +1066,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
       - **NavSeparator** - Imported from standalone component (duplication removed)
     - Exports: `NavList`, `NavItem`, `NavText`, `NavSeparator`, `NavListProps`, `NavItemProps`, `NavTextProps`, `NavSeparatorProps`
 
-50. **NavText** - `src/COMPOSITION/navigation/NavText/NavText.tsx`
+51. **NavText** - `src/COMPOSITION/navigation/NavText/NavText.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -929,7 +1084,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Purpose:** Non-interactive navigation text primitive. Renders a semantic `<span>` element (or Slot if asChild) for non-clickable text in navigation structures. Supports `aria-current` attribute for indicating current page/location. This is a pure render-only primitive with no logic, state, or routing behavior.
     - Exports: `NavText`, `NavTextProps`
 
-49. **NavSeparator** - `src/COMPOSITION/navigation/NavSeparator/NavSeparator.tsx`
+52. **NavSeparator** - `src/COMPOSITION/navigation/NavSeparator/NavSeparator.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
     - **Lock Date:** 2025-12-26
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -1141,12 +1296,6 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 21. ~~**Dropdown**~~ - ❌ **REMOVED** (MIGRATION_12C)
     - **Status:** REMOVED
     - **Rule:** Fully removed from codebase
-
-### DO NOT USE - Drawer Component
-
-22. **Drawer** - `src/components/drawer/Drawer.tsx`
-    - **Status:** RESTRICTED
-    - **Rule:** DO NOT USE
 
 ### DO NOT USE - Section Components
 

@@ -136,7 +136,7 @@ describe("Button", () => {
         expect(lgContainer.querySelector("button")).toBeInTheDocument();
       });
 
-      it("iconOnly works with all variants", () => {
+      it("iconOnly works with all variants", async () => {
         const variants: Array<
           "primary" | "secondary" | "accent" | "outline" | "ghost" | "destructive"
         > = ["primary", "secondary", "accent", "outline", "ghost", "destructive"];
@@ -147,7 +147,10 @@ describe("Button", () => {
               <span>🔍</span>
             </Button>,
           );
-          expect(container.querySelector("button")).toBeInTheDocument();
+          const button = container.querySelector("button");
+          expect(button).toBeInTheDocument();
+          // Small delay to prevent test timeout
+          await new Promise((resolve) => setTimeout(resolve, 10));
         }
       });
 

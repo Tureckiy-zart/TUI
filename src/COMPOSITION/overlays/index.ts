@@ -76,17 +76,17 @@ export { Toaster } from "./Toaster";
 // Drawer
 export {
   Drawer,
-  type DrawerBackdropVariant,
   DrawerBody,
-  type DrawerBodyProps,
   DrawerFooter,
-  type DrawerFooterProps,
   DrawerHeader,
+  drawerVariants,
+  type DrawerBackdropVariant,
+  type DrawerBodyProps,
+  type DrawerFooterProps,
   type DrawerHeaderProps,
   type DrawerPosition,
   type DrawerProps,
   type DrawerSize,
-  drawerVariants,
 } from "./Drawer";
 
 // ModalProvider
@@ -120,3 +120,25 @@ export {
   ContextMenuTrigger,
   type ContextMenuTriggerProps,
 } from "./ContextMenu";
+
+// Spinner
+export {
+  Spinner,
+  type SpinnerEasing,
+  type SpinnerLabelPosition,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerTone,
+  type SpinnerVariant,
+} from "./Spinner/Spinner";
+
+// Accordion
+export {
+  Accordion,
+  type AccordionContentProps,
+  type AccordionItemProps,
+  type AccordionRootProps,
+  type AccordionSize,
+  type AccordionTriggerProps,
+  type AccordionVariant,
+} from "./Accordion/Accordion";

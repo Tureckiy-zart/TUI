@@ -805,7 +805,7 @@ None
 ## Authority References
 
 **Process:**
-- `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` - Pipeline 18A specification
+- `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` - Pipeline 18A specification
 
 **CVA & Pattern Authorities:**
 - `docs/architecture/CVA_CANONICAL_STYLE.md` - CVA structure & CVA Usage Decision Matrix (CRITICAL)

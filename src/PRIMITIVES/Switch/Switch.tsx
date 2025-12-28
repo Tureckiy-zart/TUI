@@ -70,6 +70,21 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     // Determine aria-checked value (switches only have true/false, not mixed)
     const ariaChecked = checked ? "true" : "false";
 
+    // Shared toggle logic (extracted to reduce duplication)
+    const toggleChecked = React.useCallback(() => {
+      if (!isControlled) {
+        // In uncontrolled mode, compute new value from previous state before calling callback
+        setUncontrolledChecked((prev) => {
+          const newValue = !prev;
+          onCheckedChange?.(newValue);
+          return newValue;
+        });
+      } else {
+        // In controlled mode, use inverted current value
+        onCheckedChange?.(!checked);
+      }
+    }, [isControlled, checked, onCheckedChange]);
+
     // Handle click
     const handleClick = React.useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,14 +93,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           return;
         }
 
-        if (!isControlled) {
-          setUncontrolledChecked((prev) => !prev);
-        }
-
-        onCheckedChange?.(!checked);
+        toggleChecked();
         onClick?.(event);
       },
-      [isDisabled, isControlled, checked, onCheckedChange, onClick],
+      [isDisabled, toggleChecked, onClick],
     );
 
     // Handle keyboard (Space key)
@@ -97,17 +108,12 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         if (event.key === " " || event.key === "Spacebar") {
           event.preventDefault();
           event.stopPropagation();
-
-          if (!isControlled) {
-            setUncontrolledChecked((prev) => !prev);
-          }
-
-          onCheckedChange?.(!checked);
+          toggleChecked();
         }
 
         onKeyDown?.(event);
       },
-      [isDisabled, isControlled, checked, onCheckedChange, onKeyDown],
+      [isDisabled, toggleChecked, onKeyDown],
     );
 
     // Compute track classes

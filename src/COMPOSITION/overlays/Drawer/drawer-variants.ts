@@ -4,6 +4,8 @@ import { cva } from "class-variance-authority";
 
 import { OVERLAY_TOKENS } from "@/FOUNDATION/tokens/components/overlay";
 
+import type { DrawerPosition, DrawerSize } from "./Drawer.types";
+
 /**
  * Drawer Variants
  *
@@ -11,6 +13,11 @@ import { OVERLAY_TOKENS } from "@/FOUNDATION/tokens/components/overlay";
  * Supports positions (left, right, bottom), sizes (sm, md, lg),
  * and transitions (appear, disappear).
  * All styling uses token-based values with CSS variable references.
+ *
+ * CVA_CANONICAL_STYLE compliance:
+ * - Variants defined inline within CVA config (no intermediate objects)
+ * - Variant maps use `satisfies Record<>` constraints
+ * - No dynamic construction or conditional logic inside CVA config
  */
 
 /**
@@ -25,16 +32,16 @@ export const drawerVariants = cva(
         left: "left-0 top-0 h-full",
         right: "right-0 top-0 h-full",
         bottom: "bottom-0 left-0 right-0",
-      },
+      } satisfies Record<DrawerPosition, string>,
       size: {
         sm: "",
         md: "",
         lg: "",
-      },
+      } satisfies Record<DrawerSize, string>,
       transition: {
         appear: "",
         disappear: "",
-      },
+      } satisfies Record<"appear" | "disappear", string>,
     },
     compoundVariants: [
       // Left position variants

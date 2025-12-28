@@ -1,8 +1,8 @@
 # Component Creation Pipeline (Canonical)
 
-**Version:** 1.2  
+**Version:** 1.5  
 **Date Created:** 2025-12-25  
-**Last Updated:** 2025-12-25  
+**Last Updated:** 2025-12-28  
 **Status:** ✅ **ACTIVE**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -49,7 +49,7 @@ This pipeline exists to:
 
 This pipeline is **NOT**:
 
-* A review/refactor pipeline (use [18A Component Review & Improvement Pipeline](../workflows/foundation/FOUNDATION_STEP_PIPELINE.md) for existing components)
+* A review/refactor pipeline (use [Component Refactoring Pipeline (18A)](../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) for existing components)
 * An audit pipeline (no audit report required)
 * A migration pipeline (no legacy component migration)
 * A fix pipeline (no code improvement of existing components)
@@ -62,7 +62,7 @@ This pipeline is **NOT**:
 
 ### Component Creation Pipeline (This Document) vs 18A Pipeline
 
-This Component Creation Pipeline is **strictly separated** from the [18A Component Review & Improvement Pipeline](../workflows/foundation/FOUNDATION_STEP_PIPELINE.md).
+This Component Creation Pipeline is **strictly separated** from the [Component Refactoring Pipeline (18A)](../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md).
 
 **When to use Component Creation Pipeline (C0-C10):**
 - ✅ Creating a **new component** from scratch
@@ -288,6 +288,7 @@ This step answers the question:
 * ✅ Verify component name does NOT conflict with Foundation components
 * ✅ Verify Extension layer is appropriate for this component
 * ✅ Document authority check results
+* ✅ **Create component creation report** at canonical path: `docs/reports/creation/{ComponentName}_CREATION_REPORT.md`
 
 ### Forbidden Actions
 
@@ -303,7 +304,8 @@ This step answers the question:
 
 ### Required Artifacts
 
-* Authority check results document (inline or separate file)
+* **Component creation report** created at: `docs/reports/creation/{ComponentName}_CREATION_REPORT.md`
+* Authority check results documented in report C0 section
 * Component existence verification
 * Lock status verification
 * Layer appropriateness verification
@@ -320,11 +322,12 @@ This step answers the question:
 
 ### Exit Criteria
 
+- [ ] Component creation report created at canonical path: `docs/reports/creation/{ComponentName}_CREATION_REPORT.md`
 - [ ] Component does NOT exist in codebase
 - [ ] Component is NOT locked in Foundation layer
 - [ ] Component name does NOT conflict with Foundation components
 - [ ] Extension layer is appropriate (verified against Extension Authority)
-- [ ] Authority check results documented
+- [ ] Authority check results documented in report C0 section
 
 ### Reference
 
@@ -385,6 +388,7 @@ This step answers the question:
 - [ ] Justification documented (why this component is needed)
 - [ ] Category identified (overlays/navigation/forms/data/etc.)
 - [ ] Classification matches existing project taxonomy
+- [ ] **Report C1 section updated** with classification, role, justification
 
 ### Reference
 
@@ -409,6 +413,11 @@ This step answers the question:
 * ✅ Document token requirements (spacing, color, radius, typography, motion, elevation, gradients, opacity)
 * ✅ Verify ALL required tokens exist in token system
 * ✅ Use `Responsive<T>` where responsiveness is required
+* ✅ **Evaluate Motion GAP** — Determine if component needs motion animations (see Motion GAP Evaluation below)
+* ✅ **Identify motion requirements** — Document which motion domains apply (Enter/Exit, Hover, Press/Tap, Focus/Keyboard, Expand/Collapse, Toast/Dialog, Loading/Progress)
+* ✅ **Evaluate A11Y requirements** — Determine accessibility requirements (accessible names, ARIA contracts, semantic roles)
+* ✅ **Evaluate Focus behavior** — Determine focus requirements (trap, restore, roving tabindex, tab order)
+* ✅ **Evaluate Loading states** — Determine if component needs loading/skeleton states and document them
 
 ### Forbidden Actions
 
@@ -444,6 +453,39 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
   - Explicit statement: "All required tokens verified to exist in token system"
 * **Responsive token identification:**
   - List which props use `Responsive<T>` and why
+* **Motion GAP evaluation (MANDATORY):**
+  - Evaluate if component has state/spatial changes that require motion
+  - Document Motion GAP resolution: ADD MOTION, NO MOTION BY DESIGN, or DEFERRED (unlocked only)
+  - If ADD MOTION: List which motion domains apply and which motion tokens/presets will be used
+  - If NO MOTION BY DESIGN: Document explicit justification for absence of motion
+  - Reference: [Motion Authority](./MOTION_AUTHORITY.md) — Motion GAP Rule
+* **Motion requirements document:**
+  - List motion domains that apply (Enter/Exit, Hover, Press/Tap, Focus/Keyboard, Expand/Collapse, Toast/Dialog, Loading/Progress)
+  - Document motion tokens/presets to be used (e.g., `.tm-motion-fade-in`, `transitions.fast`, `animations.spin`)
+  - Verify all motion tokens exist in `src/FOUNDATION/tokens/motion/v2.ts` or motion preset catalog
+  - Document reduced motion support requirements
+* **A11Y requirements evaluation (MANDATORY for interactive components):**
+  - Evaluate if component needs accessible name (every interactive control MUST have accessible name)
+  - Document accessible name source (visible label, aria-label, aria-labelledby, text content)
+  - For icon-only buttons: Document aria-label requirement
+  - For form inputs: Document label association requirement (htmlFor/aria-labelledby)
+  - For modal overlays: Document aria-labelledby requirement (via title)
+  - Document semantic role requirements (native element preferred, role attribute if needed)
+  - Reference: [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules
+* **Focus behavior evaluation (MANDATORY for interactive components):**
+  - Evaluate if component is modal overlay (MUST trap focus)
+  - Evaluate if component is non-modal overlay (MUST NOT trap focus)
+  - Evaluate if component needs focus restore on close
+  - Evaluate if component is composite control (needs roving tabindex)
+  - Document tab order requirements (DOM order = navigation order)
+  - Document focus-visible styling requirements
+  - Reference: [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules
+* **Loading state evaluation (if applicable):**
+  - Evaluate if component needs loading state (prop/variant)
+  - Document loading state blocking requirements (pointer blocked, keyboard focus allowed)
+  - Document loading indicator requirements (aria-busy, visual indicator)
+  - Document loading state token requirements (if applicable)
+  - Reference: [Input Authority](./INPUT_AUTHORITY.md) — Loading state blocking rules
 
 ### Blocking Condition
 
@@ -453,8 +495,15 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 * Token mapping is incomplete
 * Raw values are proposed instead of tokens
 * Token domains are ambiguous or conflicting
+* **Motion GAP evaluation incomplete** — Component has state/spatial changes but Motion GAP not evaluated
+* **Motion GAP unresolved** — Component has unresolved Motion GAP (for LOCKED components, only ADD MOTION or NO MOTION BY DESIGN allowed)
+* **A11Y requirements incomplete** — Interactive component but A11Y requirements not evaluated (accessible names, ARIA contracts)
+* **Focus behavior undefined** — Interactive component but focus behavior not evaluated (trap, restore, roving tabindex)
 
-**Action on BLOCKING:** Request a **separate task** for token creation, then restart this pipeline.
+**Action on BLOCKING:** 
+* If token doesn't exist: Request a **separate task** for token creation, then restart this pipeline.
+* If Motion GAP incomplete: Complete Motion GAP evaluation and document resolution.
+* If Motion GAP unresolved: Resolve Motion GAP (ADD MOTION or NO MOTION BY DESIGN), then proceed.
 
 ### Exit Criteria
 
@@ -463,8 +512,28 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 - [ ] Token requirements documented (Foundation tokens: spacing/color/radius/typography/motion/elevation/gradients/opacity, Shared Component Tokens if applicable)
 - [ ] ALL required tokens verified to exist
 - [ ] `Responsive<T>` usage identified where needed
+- [ ] **Motion GAP evaluated** — Component state/spatial changes assessed for motion requirements
+- [ ] **Motion GAP resolved** — Documented as ADD MOTION, NO MOTION BY DESIGN, or DEFERRED (unlocked only)
+- [ ] **Motion requirements documented** — Motion domains and tokens/presets identified (if motion needed)
+- [ ] **Motion tokens verified** — All motion tokens/presets exist in token system
+- [ ] **A11Y requirements evaluated** (if interactive component):
+  - Accessible name source documented (visible label/aria-label/aria-labelledby/text content)
+  - Icon-only buttons: aria-label requirement documented
+  - Form inputs: Label association requirement documented
+  - Modal overlays: aria-labelledby requirement documented
+  - Semantic role requirements documented
+- [ ] **Focus behavior evaluated** (if interactive component):
+  - Focus trap requirements documented (modal/non-modal)
+  - Focus restore requirements documented
+  - Roving tabindex requirements documented (if composite control)
+  - Tab order requirements documented
+- [ ] **Loading state evaluated** (if applicable):
+  - Loading state requirements documented
+  - Loading blocking requirements documented
+  - Loading indicator requirements documented
 - [ ] NO raw values in mapping
 - [ ] NO new tokens created
+- [ ] **Report C2 section updated** with token mapping, motion GAP evaluation, A11Y requirements, focus behavior, loading states, token requirements
 
 ### Reference
 
@@ -476,6 +545,9 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 * [Motion Authority](./MOTION_AUTHORITY.md) — Motion tokens
 * [Elevation Authority](./ELEVATION_AUTHORITY.md) — Elevation tokens
 * [State Authority](./STATE_AUTHORITY.md) — State representation
+* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -492,13 +564,16 @@ This step answers the question:
 ### Allowed Actions
 
 * ✅ Define public props (minimal and explicit)
-* ✅ Define types (exported explicitly)
+* ✅ Define types (exported explicitly) — **MUST follow TYPING_STANDARD** (explicit union types, no CVA-derived types)
 * ✅ Document API contract
-* ✅ Define variants (must use global variant dictionary)
-* ✅ Define sizes (must use global size scale: xs/sm/md/lg/xl/2xl/3xl)
+* ✅ Define variants (must use global variant dictionary) — **MUST use explicit union types** (not CVA-derived)
+* ✅ Define sizes (must use global size scale: xs/sm/md/lg/xl/2xl/3xl) — **MUST use explicit union types** (not CVA-derived)
 * ✅ Document size mapping table (if component has `size` prop)
 * ✅ Document prop descriptions and examples
 * ✅ Verify API complies with Authority Contracts
+* ✅ **Define A11Y contract** — Document accessible name requirements, ARIA props, semantic roles (per C2 A11Y evaluation)
+* ✅ **Define Input contract** — Document keyboard parity, Enter/Space semantics, disabled/loading blocking (per C2 Input evaluation)
+* ✅ **Define error states** — Document error state design and error recovery patterns (if component can fail)
 
 ### Forbidden Actions
 
@@ -530,6 +605,12 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 * **Type definitions (exported types):**
   - List ALL exported types
   - Include prop types, variant unions, size unions
+  - **MUST use explicit union types** (e.g., `export type ButtonVariant = "primary" | "secondary" | "accent"`)
+  - **FORBIDDEN:** CVA-derived types in public API (e.g., `VariantProps<typeof buttonVariants>`)
+  - **FORBIDDEN:** Inline string unions in props (define explicit types first)
+  - **FORBIDDEN:** `string` as variant/size type (must be explicit union)
+  - Variant maps MUST use `satisfies Record<VariantType, string>` constraints
+  - Reference: [Typing Standard](../reference/TYPING_STANDARD.md) — **MANDATORY** architectural standard
 * **API contract document:**
   - Component purpose (1-2 sentences)
   - Public props with descriptions
@@ -550,6 +631,24 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 * **Prop descriptions and JSDoc examples:**
   - Each prop MUST have JSDoc comment
   - At least 1 usage example per prop
+* **A11Y contract (if interactive component):**
+  - Document accessible name requirements (per C2 A11Y evaluation)
+  - Document ARIA props exposed in public API (aria-label, aria-labelledby, aria-describedby)
+  - Document semantic role requirements (native element preferred, role attribute if needed)
+  - For icon-only buttons: Document aria-label prop requirement
+  - For form inputs: Document label association (htmlFor/aria-labelledby)
+  - For modal overlays: Document aria-labelledby requirement (via title)
+  - Reference: [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules
+* **Input contract (if interactive component):**
+  - Document keyboard parity requirements (every pointer interaction MUST have keyboard equivalent)
+  - Document Enter/Space semantics (component-type specific)
+  - Document disabled state blocking (MUST block all activation events)
+  - Document loading state blocking (if loading state implemented)
+  - Reference: [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules
+* **Error state design (if component can fail):**
+  - Document error state representation (visual, ARIA, props)
+  - Document error recovery patterns (user actions, retry mechanisms)
+  - Document error state token requirements (if applicable)
 
 ### Blocking Condition
 
@@ -561,8 +660,13 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 * Variant enums exist without token backing
 * Invented size or variant names (not in global dictionary)
 * `className` or `style` props in Foundation component API
+* **TYPING_STANDARD violation** — Public API uses CVA-derived types, inline string unions, or `string` as variant/size type
+* **TYPING_STANDARD violation** — Variant maps do not use `satisfies Record<Type, string>` constraints
+* **A11Y contract incomplete** — Interactive component but A11Y contract not documented (accessible names, ARIA props)
+* **Input contract incomplete** — Interactive component but Input contract not documented (keyboard parity, Enter/Space semantics)
+* **Error state undefined** — Component can fail but error state design not documented
 
-**Action on BLOCKING:** Revise API design to comply with Authority Contracts, then proceed.
+**Action on BLOCKING:** Revise API design to comply with Authority Contracts and TYPING_STANDARD, then proceed.
 
 ### Exit Criteria
 
@@ -578,14 +682,34 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 - [ ] NO variant enums without token backing
 - [ ] NO invented size or variant names
 - [ ] NO `className` or `style` props (if Foundation component)
+- [ ] **TYPING_STANDARD compliance verified:**
+  - Explicit union types used (no CVA-derived types in public API)
+  - Variant maps use `satisfies Record<Type, string>` constraints
+  - NO inline string unions in props
+  - NO `string` as variant/size type
+- [ ] **A11Y contract documented** (if interactive component):
+  - Accessible name requirements documented
+  - ARIA props documented
+  - Semantic role requirements documented
+- [ ] **Input contract documented** (if interactive component):
+  - Keyboard parity requirements documented
+  - Enter/Space semantics documented
+  - Disabled/loading blocking documented
+- [ ] **Error state design documented** (if component can fail):
+  - Error state representation documented
+  - Error recovery patterns documented
 - [ ] API complies with all Authority Contracts
+- [ ] **Report C3 section updated** with API contract, types, variants, sizes, A11Y contract, Input contract, error state design
 
 ### Reference
 
+* [Typing Standard](../reference/TYPING_STANDARD.md) — **MANDATORY** architectural standard for public API typing (explicit union types, no CVA-derived types)
 * [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
 * [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract and template
 * [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension API rules
 * [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation Enforcement rules
+* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -652,6 +776,7 @@ This step answers the question:
 - [ ] `{ComponentName}.index.ts` created
 - [ ] Component placed in correct directory: `src/COMPOSITION/{categoryDir}/{ComponentName}/`
 - [ ] Generated scaffold structure reviewed and approved
+- [ ] **Report C4 section updated** with scaffold files created, directory structure
 
 ### Reference
 
@@ -676,8 +801,10 @@ This step answers the question:
 * ✅ Use token unions exclusively (no raw values)
 * ✅ Use `Responsive<T>` where needed
 * ✅ Use CSS variables via token system
-* ✅ Follow CVA pattern for variants (if applicable)
+* ✅ Follow CVA pattern for variants (if applicable) — **MUST follow CVA_CANONICAL_STYLE** (variants inline, no intermediate objects, `satisfies Record<>` constraints)
 * ✅ Implement state handling (if applicable)
+* ✅ **Apply motion tokens/presets** — Use motion tokens (`.tm-motion-*` utilities, `transitions.*`, `animations.*`) where motion is required (per C2 Motion GAP evaluation)
+* ✅ **Implement reduced motion support** — Ensure all motion respects `prefers-reduced-motion` preferences
 
 ### Forbidden Actions
 
@@ -687,6 +814,9 @@ This step answers the question:
 * ❌ NO new token creation
 * ❌ NO Foundation bypass (use Foundation components)
 * ❌ NO Radix primitives directly (use Foundation components)
+* ❌ **NO raw motion values** — No `transition-duration: 200ms`, `animation-duration: 450ms`, raw easing values, or inline motion styles
+* ❌ **NO custom keyframes** — No `@keyframes` definitions in component files
+* ❌ **NO physics-based motion** — No spring animations, inertia-based animations, or physics-based motion systems
 
 ### Code Changes Allowed
 
@@ -696,8 +826,16 @@ This step answers the question:
 
 * Complete component implementation
 * Token-based styling (no raw values)
-* CVA variant implementation (if applicable)
+* CVA variant implementation (if applicable):
+  - Variants defined inline within CVA config (no intermediate objects)
+  - Variant maps use `satisfies Record<VariantType, string>` constraints
+  - No dynamic construction or conditional logic inside CVA config
+  - Reference: [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern
 * State handling implementation (if applicable)
+* Motion implementation (if motion required per C2):
+  - Motion tokens/presets applied (`.tm-motion-*` utilities or motion tokens)
+  - Reduced motion support implemented
+  - Motion GAP resolved (motion applied or NO MOTION BY DESIGN documented)
 
 ### Blocking Condition
 
@@ -707,6 +845,9 @@ This step answers the question:
 * Token mapping design (C2) not followed
 * API contract (C3) not followed
 * Required tokens do not exist
+* **Motion GAP not resolved** — Component has state/spatial changes but motion not applied and NO MOTION BY DESIGN not documented
+* **Raw motion values used** — Raw duration/easing/transition values detected instead of motion tokens
+* **Reduced motion not supported** — Motion does not respect `prefers-reduced-motion` preferences
 
 **Action on BLOCKING:** Fix implementation to follow token mapping and API contract, then proceed.
 
@@ -716,14 +857,24 @@ This step answers the question:
 - [ ] Token unions used exclusively (no raw values)
 - [ ] `Responsive<T>` used where needed
 - [ ] CSS variables via token system
-- [ ] CVA pattern followed (if applicable)
+- [ ] CVA pattern followed (if applicable):
+  - Variants defined inline within CVA config (no intermediate objects)
+  - Variant maps use `satisfies Record<VariantType, string>` constraints
+  - No dynamic construction or conditional logic inside CVA config
+  - CVA_CANONICAL_STYLE compliance verified
 - [ ] State handling implemented (if applicable)
-- [ ] **SELF-CHECK:** Quick scan for raw values (colors like `#hex`, spacing like `16px`, sizes like `1rem`, gradients like `linear-gradient(...)`, opacity like `0.5`) — MUST be ZERO raw values before proceeding
+- [ ] **Motion implemented** (if motion required per C2):
+  - Motion tokens/presets applied (`.tm-motion-*` utilities or motion tokens from `src/FOUNDATION/tokens/motion/v2.ts`)
+  - Reduced motion support implemented (respects `prefers-reduced-motion`)
+  - Motion GAP resolved (motion applied or NO MOTION BY DESIGN documented)
+- [ ] **SELF-CHECK:** Quick scan for raw values (colors like `#hex`, spacing like `16px`, sizes like `1rem`, gradients like `linear-gradient(...)`, opacity like `0.5`, **motion like `200ms`, `cubic-bezier(...)`, `transition: all 250ms`**) — MUST be ZERO raw values before proceeding
 - [ ] **SELF-CHECK:** Verify C2 token mapping followed (compare implementation against C2 token mapping table)
 - [ ] **SELF-CHECK:** Verify C3 API contract followed (compare implementation against C3 public props definition)
-- [ ] NO raw values in implementation
+- [ ] **SELF-CHECK:** Verify motion compliance — No raw motion values, motion tokens used, reduced motion supported
+- [ ] NO raw values in implementation (including motion values)
 - [ ] Token mapping design (C2) followed
 - [ ] API contract (C3) followed
+- [ ] **Report C5 section updated** with implementation status, token usage summary
 
 **⚠️ CRITICAL:** If self-checks fail, FIX immediately before proceeding to C6. Do NOT defer token compliance to C9.
 
@@ -731,6 +882,8 @@ This step answers the question:
 
 * [Token Mapping Design (C2)](#c2--token-mapping-design) — Token requirements
 * [API Design & Contract (C3)](#c3--api-design--contract-definition) — Public API contract
+* [Motion Authority](./MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, motion presets
+* [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern (variants inline, `satisfies Record<>` constraints)
 
 ---
 
@@ -851,6 +1004,7 @@ This step answers the question:
 - [ ] NO behavior changes
 - [ ] NO API changes
 - [ ] NO token changes
+- [ ] **Report C6 section updated** with refinement status, Foundation composition (if applicable)
 
 **Note:** If this component does NOT compose Foundation components, mark Foundation Composition criteria as N/A and proceed.
 
@@ -876,19 +1030,27 @@ This step answers the question:
 
 ### Allowed Actions
 
-* ✅ Create Default story (basic usage)
-* ✅ Create Matrix story (if component has BOTH `size` AND `variant` props)
-* ✅ Create States story (if component has public state props: disabled, loading, error, etc.)
-* ✅ Create Sizes Gallery (if component has `size` prop)
-* ✅ Create Long Content story (if overlay component)
-* ✅ Create use case examples (**MINIMUM 2, MAXIMUM 5** real-world usage scenarios)
+* ✅ Create Default story (basic usage) — **MUST be first story**
+* ✅ Create Matrix story (if component has BOTH `size` AND `variant` props) — **MUST use canonical name `Matrix`**
+* ✅ Create States story (if component has public state props: disabled, loading, error, etc.) — **MUST use canonical name `States`**
+* ✅ Create Sizes Gallery (if component has `size` prop) — **MUST use canonical name `SizesGallery`**
+* ✅ Create Long Content story (if overlay component) — **MUST use canonical name `LongContent`**
+* ✅ Create use case examples (**MINIMUM 2, MAXIMUM 5** real-world usage scenarios) — **MUST use PascalCase descriptive names**
 * ✅ Demonstrate token usage (at least 1 story showing responsive token usage)
+* ✅ **Follow Storybook Stories Quality Standard** — All stories MUST comply with [STORYBOOK_STORIES_STANDARD.md](../reference/STORYBOOK_STORIES_STANDARD.md)
 
 ### Forbidden Actions
 
 * ❌ NO placeholder stories
 * ❌ NO incomplete stories
 * ❌ NO component implementation changes (stories only)
+* ❌ **NO non-canonical story names** — Use exact canonical names: `Default`, `Matrix`, `States`, `SizesGallery`, `LongContent` (case-sensitive)
+* ❌ **NO incorrect title structure** — Title MUST follow format: `UI / {Layer} / {ComponentName}`
+* ❌ **NO missing JSDoc comments** — All stories MUST have JSDoc comments
+* ❌ **NO missing documentation** — All stories MUST have `parameters.docs.description.story`
+* ❌ **NO incorrect story order** — Stories MUST appear in canonical order (Default → SizesGallery → Matrix → States → LongContent → Use cases)
+* ❌ **NO incorrect layout** — Layout MUST be appropriate (centered/padded/fullscreen)
+* ❌ **NO missing argTypes** — All public props MUST be in argTypes with descriptions
 
 ### Code Changes Allowed
 
@@ -896,12 +1058,19 @@ This step answers the question:
 
 ### Required Artifacts
 
-* Default story (basic usage)
-* Matrix story (if `size` AND `variant` props exist)
-* States story (if public state props exist)
-* Sizes Gallery (if `size` prop exists)
-* Long Content story (if overlay component)
-* Use case examples
+* Default story (basic usage) — **MUST be first story**
+* Matrix story (if `size` AND `variant` props exist) — **MUST use canonical name `Matrix`**
+* States story (if public state props exist) — **MUST use canonical name `States`**
+* Sizes Gallery (if `size` prop exists) — **MUST use canonical name `SizesGallery`**
+* Long Content story (if overlay component) — **MUST use canonical name `LongContent`**
+* Use case examples (minimum 2, maximum 5) — **MUST use PascalCase descriptive names**
+* **Storybook Quality Standard compliance:**
+  - Title structure: `UI / {Layer} / {ComponentName}`
+  - All stories have JSDoc comments
+  - All stories have `parameters.docs.description.story`
+  - Layout parameter is correct (centered/padded/fullscreen)
+  - All public props in argTypes with descriptions
+  - Story order follows canonical order
 
 ### Blocking Condition
 
@@ -912,23 +1081,45 @@ This step answers the question:
 * Matrix story missing (if `size` AND `variant` props exist)
 * States story missing (if public state props exist)
 * Sizes Gallery missing (if `size` prop exists)
+* **Storybook Quality Standard violations:**
+  - Title structure does not follow format: `UI / {Layer} / {ComponentName}`
+  - Canonical story names are incorrect (case-sensitive: `Default`, `Matrix`, `States`, `SizesGallery`, `LongContent`)
+  - Story order is incorrect (Default must be first, then canonical order)
+  - Missing JSDoc comments on stories
+  - Missing `parameters.docs.description.story` on stories
+  - Layout parameter missing or incorrect (centered/padded/fullscreen)
+  - Missing or incomplete argTypes (all public props must be documented)
+  - Use case stories exceed maximum (5) or below minimum (2)
 
-**Action on BLOCKING:** Complete all required stories, then proceed.
+**Action on BLOCKING:** Complete all required stories and ensure Storybook Quality Standard compliance, then proceed.
 
 ### Exit Criteria
 
-- [ ] Default story created
-- [ ] Matrix story created (if component has BOTH `size` AND `variant` props)
-- [ ] States story created (if component has public state props)
-- [ ] Sizes Gallery created (if component has `size` prop)
-- [ ] Long Content story created (if overlay component)
-- [ ] Use case examples included
+- [ ] Default story created (**MUST be first story**)
+- [ ] Matrix story created (if component has BOTH `size` AND `variant` props) — **MUST use canonical name `Matrix`**
+- [ ] States story created (if component has public state props) — **MUST use canonical name `States`**
+- [ ] Sizes Gallery created (if component has `size` prop) — **MUST use canonical name `SizesGallery`**
+- [ ] Long Content story created (if overlay component) — **MUST use canonical name `LongContent`**
+- [ ] Use case examples included (minimum 2, maximum 5) — **MUST use PascalCase descriptive names**
 - [ ] Token usage demonstrated
+- [ ] **Storybook Quality Standard compliance verified:**
+  - Title structure: `UI / {Layer} / {ComponentName}`
+  - Story order follows canonical order (Default → SizesGallery → Matrix → States → LongContent → Use cases)
+  - All stories have JSDoc comments
+  - All stories have `parameters.docs.description.story`
+  - Layout parameter is correct (centered/padded/fullscreen)
+  - All public props in argTypes with descriptions
+  - Internal props hidden (`control: false`, `table: { disable: true }`)
 - [ ] NO placeholder stories
 - [ ] NO incomplete stories
+- [ ] NO non-canonical story names
+- [ ] NO incorrect title structure
+- [ ] NO missing documentation
+- [ ] **Report C7 section updated** with stories created, coverage summary, quality standard compliance
 
 ### Reference
 
+* [Storybook Stories Quality Standard](../reference/STORYBOOK_STORIES_STANDARD.md) — **MANDATORY** quality standard for all Storybook stories (title structure, naming, documentation, layout, argTypes)
 * [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Matrix and States story requirements
 * [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Sizes Gallery and Long Content story requirements
 
@@ -948,11 +1139,36 @@ This step answers the question:
 
 * ✅ Write behavior tests (public props and their interactions)
 * ✅ Write edge case tests
-* ✅ Write A11Y tests (if interactive component)
+* ✅ Write A11Y tests (if interactive component):
+  - Test accessible names (every interactive control MUST have accessible name)
+  - Test icon-only buttons have aria-label
+  - Test form inputs have associated labels (htmlFor/aria-labelledby)
+  - Test modal overlays have aria-labelledby (via title)
+  - Test semantic roles (native element preferred, role attribute if needed)
+  - Test ARIA attributes match component state (aria-checked, aria-invalid, aria-disabled)
+  - Test redundant ARIA not present (no aria-disabled on native disabled button)
 * ✅ Write token compliance tests
-* ✅ Test ARIA roles and attributes (if interactive)
-* ✅ Test keyboard navigation (if interactive)
-* ✅ Test focus management (if interactive)
+* ✅ Test ARIA roles and attributes (if interactive):
+  - Test ARIA attributes exposed as props work correctly
+  - Test ARIA state attributes match component state
+  - Test ARIA attributes do not conflict with native semantics
+* ✅ Test keyboard navigation (if interactive):
+  - Test keyboard parity (every pointer interaction has keyboard equivalent)
+  - Test Enter/Space semantics (component-type specific)
+  - Test disabled state blocks all activation events (pointer + keyboard)
+  - Test loading state blocks pointer (if loading state implemented)
+  - Test readonly state blocks value changes but allows focus (if applicable)
+* ✅ Test focus management (if interactive):
+  - Test focus trap (if modal overlay)
+  - Test focus restore on close (if overlay)
+  - Test roving tabindex (if composite control)
+  - Test tab order follows DOM order
+  - Test focus-visible styling (keyboard-only indication)
+  - Test Escape closes overlays (if applicable)
+* ✅ **Write motion tests** (if component has motion animations):
+  - Test motion animations trigger correctly (enter/exit, hover, press/tap, focus, expand/collapse)
+  - Test reduced motion support (motion respects `prefers-reduced-motion` preferences)
+  - Verify motion tokens used (no raw motion values in implementation)
 
 ### Forbidden Actions
 
@@ -968,8 +1184,32 @@ This step answers the question:
 
 * Behavior tests (public props and their interactions)
 * Edge case tests
-* A11Y tests (if interactive component)
+* A11Y tests (if interactive component):
+  - Accessible name tests (visible label/aria-label/aria-labelledby/text content)
+  - Icon-only button aria-label tests
+  - Form input label association tests
+  - Modal overlay aria-labelledby tests
+  - Semantic role tests
+  - ARIA state attribute tests (aria-checked, aria-invalid, aria-disabled match state)
+  - Redundant ARIA prevention tests
+* Focus tests (if interactive component):
+  - Focus trap tests (modal overlays)
+  - Focus restore tests (overlays)
+  - Roving tabindex tests (composite controls)
+  - Tab order tests (DOM order = navigation order)
+  - Focus-visible styling tests
+  - Escape key tests (overlays)
+* Input tests (if interactive component):
+  - Keyboard parity tests (pointer interactions have keyboard equivalents)
+  - Enter/Space semantics tests (component-type specific)
+  - Disabled state blocking tests (all activation events blocked)
+  - Loading state blocking tests (pointer blocked, keyboard focus allowed)
+  - Readonly state tests (value changes blocked, focus allowed)
 * Token compliance tests
+* Motion tests (if component has motion animations):
+  - Motion animation behavior tests
+  - Reduced motion support tests
+  - Motion token compliance tests
 
 ### Blocking Condition
 
@@ -978,7 +1218,10 @@ This step answers the question:
 * Required tests are missing
 * Tests are placeholder or shallow
 * A11Y tests missing (if interactive component)
+* Focus tests missing (if interactive component)
+* Input tests missing (if interactive component)
 * Token compliance tests missing
+* Motion tests missing (if component has motion animations per C2)
 
 **Action on BLOCKING:** Complete all required tests, then proceed.
 
@@ -986,17 +1229,41 @@ This step answers the question:
 
 - [ ] Behavior tests written (public props and their interactions)
 - [ ] Edge case tests written
-- [ ] A11Y tests written (if interactive component)
+- [ ] **A11Y tests written** (if interactive component):
+  - Accessible names tested (visible label/aria-label/aria-labelledby/text content)
+  - Icon-only buttons: aria-label tested
+  - Form inputs: Label association tested (htmlFor/aria-labelledby)
+  - Modal overlays: aria-labelledby tested (via title)
+  - Semantic roles tested (native element preferred, role attribute if needed)
+  - ARIA state attributes tested (aria-checked, aria-invalid, aria-disabled match state)
+  - Redundant ARIA prevention tested
+- [ ] **Focus tests written** (if interactive component):
+  - Focus trap tested (if modal overlay)
+  - Focus restore tested (if overlay)
+  - Roving tabindex tested (if composite control)
+  - Tab order tested (DOM order = navigation order)
+  - Focus-visible styling tested
+  - Escape key tested (if overlay)
+- [ ] **Input tests written** (if interactive component):
+  - Keyboard parity tested (pointer interactions have keyboard equivalents)
+  - Enter/Space semantics tested (component-type specific)
+  - Disabled state blocking tested (all activation events blocked)
+  - Loading state blocking tested (if loading state implemented)
+  - Readonly state tested (if applicable: value changes blocked, focus allowed)
 - [ ] Token compliance tests written
-- [ ] ARIA roles and attributes tested (if interactive)
-- [ ] Keyboard navigation tested (if interactive)
-- [ ] Focus management tested (if interactive)
+- [ ] **Motion tests written** (if component has motion animations):
+  - Motion animations trigger correctly
+  - Reduced motion support verified
+  - Motion token compliance verified
 - [ ] NO placeholder tests
 - [ ] NO shallow tests
 
 ### Reference
 
 * [Component Creation Checklist](../workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) — Test coverage requirements
+* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -1017,6 +1284,8 @@ This step answers the question:
 * ✅ Verify `Responsive<T>` usage where needed
 * ✅ Verify token mapping design (C2) was followed
 * ✅ Document compliance verification results
+* ✅ **Validate motion compliance** — Verify motion tokens used (no raw motion values), Motion GAP resolved, reduced motion supported
+* ✅ **Scan for raw motion values** — Check for raw durations (`200ms`), easing (`cubic-bezier(...)`), transitions (`transition: all 250ms`), animations, inline motion styles
 
 ### Forbidden Actions
 
@@ -1030,18 +1299,26 @@ This step answers the question:
 ### Required Artifacts
 
 * Token compliance verification results
-* Raw values scan results
+* Raw values scan results (including motion values)
 * Token union verification results
 * `Responsive<T>` verification results
+* **Motion compliance verification results:**
+  - Motion tokens used (no raw motion values detected)
+  - Motion GAP resolved (motion applied or NO MOTION BY DESIGN documented)
+  - Reduced motion support verified
+  - Motion presets/tokens verified against Motion Authority
 
 ### Blocking Condition
 
 **BLOCKING:** If any of these conditions are true, the pipeline **MUST STOP**:
 
-* Raw values detected in component code
+* Raw values detected in component code (including motion values)
 * Token unions not used for visual props
 * `Responsive<T>` not used where needed
 * Token mapping design (C2) not followed
+* **Raw motion values detected** — Raw durations, easing, transitions, animations, or inline motion styles found
+* **Motion GAP unresolved** — Component has state/spatial changes but Motion GAP not resolved (motion not applied and NO MOTION BY DESIGN not documented)
+* **Reduced motion not supported** — Motion does not respect `prefers-reduced-motion` preferences
 
 **Action on BLOCKING:** Return to C5 (Token-Based Implementation), fix implementation, then retry C9.
 
@@ -1055,16 +1332,22 @@ This step answers the question:
 
 ### Exit Criteria
 
-- [ ] NO raw values in component code
+- [ ] NO raw values in component code (including motion values)
 - [ ] All visual props use token unions
 - [ ] `Responsive<T>` used where needed
 - [ ] Token mapping design (C2) followed
+- [ ] **Motion compliance verified:**
+  - NO raw motion values (durations, easing, transitions, animations, inline styles)
+  - Motion tokens/presets used (if motion required)
+  - Motion GAP resolved (motion applied or NO MOTION BY DESIGN documented)
+  - Reduced motion support verified
 - [ ] Compliance verification results documented
 
 ### Reference
 
 * [Token Mapping Design (C2)](#c2--token-mapping-design) — Original token requirements
 * [Authority Navigation](./AUTHORITY_NAVIGATION.md) — All Authority Contracts
+* [Motion Authority](./MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, forbidden patterns, motion presets
 
 ---
 
@@ -1128,6 +1411,7 @@ This step answers the question:
 - [ ] `docs/PROJECT_PROGRESS.md` updated (completion recorded)
 - [ ] Lock propagation completed
 - [ ] Component is officially registered and available for use
+- [ ] **Report C10 section updated** with export status, documentation updates, final status
 
 **For Foundation components** (rare for new components):
 - [ ] `docs/architecture/FOUNDATION_LOCK.md` updated
@@ -1213,57 +1497,105 @@ If pipeline fails at any step after C4 (scaffold generation), cleanup is require
 
 ## 📄 Artifact & Reporting Rules
 
-### NO Audit Report Required
+### Component Creation Report (MANDATORY)
 
-Unlike the 18A Component Review & Improvement Pipeline, this Component Creation Pipeline does **NOT** require a continuous audit report.
+This Component Creation Pipeline **REQUIRES** a continuous creation report to track progress and document decisions.
 
-**Why no audit report:**
-* We are creating from scratch, not auditing existing code
-* Design specification (C0-C3) serves as the "baseline"
-* Validation (C8-C10) serves as the "proof"
-* No FIX phase or refactor decisions to track
+**Report Purpose:**
+* Track progress through all steps (C0-C10)
+* Document design decisions (C0-C3)
+* Record implementation artifacts (C4-C6)
+* Validate completion (C7-C10)
+* Provide documentation trail for future reference
+
+**Report Structure:**
+* Compact format (target: 500-1000 lines total, not 3000-5000)
+* Focus on decisions and outcomes, not exhaustive analysis
+* Each step section: Outcome, Blocking, Notes, Changes, Artifacts
+
+### Report File Location
+
+**Canonical Path:** `docs/reports/creation/{ComponentName}_CREATION_REPORT.md`
+
+**Example:** `docs/reports/creation/ConfirmDialog_CREATION_REPORT.md`
+
+**Rule:** Report MUST be created in C0 and updated after each step (C0-C10).
+
+### Required Report Structure
+
+**Report Header (Created in C0):**
+* Component name, exported name, layer (Extension)
+* Pipeline version, date created, last updated
+* Pipeline progress tracker (C0-C10 checklist)
+
+**Report Sections (Updated after each step):**
+* **C0:** Authority & Lock Check — Authority verification, layer confirmation
+* **C1:** Component Classification — Type, role, justification, category
+* **C2:** Token Mapping Design — Token mapping table, motion GAP evaluation
+* **C3:** API Design & Contract — Public props, types, variants, sizes
+* **C4:** Component Scaffold — Scaffold files created, directory structure
+* **C5:** Token-Based Implementation — Implementation files, token usage
+* **C6:** Implementation Refinement — Foundation composition, code quality
+* **C7:** Storybook Stories — Stories created, coverage summary
+* **C8:** Tests — Tests created, coverage summary
+* **C9:** Token Compliance Validation — Compliance verification results
+* **C10:** Export Registration — Export status, documentation updates
+
+**Each Step Section Format:**
+* `Outcome:` `Complete` | `In Progress` | `Blocked`
+* `Blocking:` `yes/no` (with reason if `yes`)
+* `Notes:` 2-3 bullet points max (key decisions, findings)
+* `Changes:` List of actual changes (or `None`)
+* `Artifacts:` Links to created files/documents (or `None`)
 
 ### Required Artifacts per Step
 
 **C0: Authority & Lock Check**
-* Authority check results document
+* Component creation report created
+* Authority check results documented in report
 
 **C1: Component Classification & Justification**
-* Classification document
-* Role definition
-* Justification document
+* Classification documented in report
+* Role definition documented in report
+* Justification documented in report
 
 **C2: Token Mapping Design**
-* Token mapping table
-* Token requirements document
+* Token mapping table (in report or separate file)
+* Motion GAP evaluation documented in report
+* Token requirements documented in report
 
 **C3: API Design & Contract Definition**
-* Public API contract document
-* Type definitions
+* Public API contract (in report or separate file)
+* Type definitions documented in report
 
 **C4: Component Scaffold Generation**
 * Scaffold files (`.tsx`, `.stories.tsx`, `.test.tsx`, `index.ts`)
+* Scaffold status documented in report
 
 **C5: Token-Based Implementation**
 * Component implementation files
+* Implementation status documented in report
 
 **C6: Implementation Refinement**
 * Foundation composition implementation (if applicable)
 * Refined implementation
-* JSDoc comments
+* Refinement status documented in report
 
 **C7: Storybook Stories**
 * Story files (`.stories.tsx`)
+* Story coverage documented in report
 
 **C8: Tests**
 * Test files (`.test.tsx`)
+* Test coverage documented in report
 
 **C9: Token Compliance Validation**
-* Compliance verification results
+* Compliance verification results documented in report
 
 **C10: Export Registration & Lock Propagation**
 * Export updates (`src/index.ts`)
 * Documentation updates (`EXTENSION_STATE.md`, `PROJECT_PROGRESS.md`)
+* Registration status documented in report
 
 ### Reporting
 
@@ -1271,7 +1603,204 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 * Update `docs/PROJECT_PROGRESS.md` with completion record
 * Include: component name, date, pipeline version, completion status
 
-**NO intermediate reporting required** (unlike 18A checkpoints).
+**Report Update Rule:** Each step (C0-C10) MUST update its section in the component creation report before proceeding to the next step. The report serves as the documentation trail for the entire creation process.
+
+### Report Structure Template
+
+**Example Report Structure:**
+
+```markdown
+# {ComponentName} Component — Creation Report
+
+**Pipeline:** Component Creation Pipeline (C0-C10)  
+**Date Created:** YYYY-MM-DD  
+**Last Updated:** YYYY-MM-DD  
+**Component Name:** {ComponentName}  
+**Exported Name:** `{ComponentName}`  
+**Layer:** Extension  
+**Category:** {overlays/navigation/forms/data/layout/composite}
+
+## Pipeline Progress Tracker
+
+| Step | Name | Status | Estimated Time |
+|------|------|--------|----------------|
+| C0 | Authority & Lock Check | ✅ Complete | 15 min |
+| C1 | Component Classification | ✅ Complete | 15 min |
+| C2 | Token Mapping Design | ✅ Complete | 30 min |
+| C3 | API Design & Contract | ✅ Complete | 30 min |
+| C4 | Component Scaffold | ✅ Complete | 5 min |
+| C5 | Token-Based Implementation | ✅ Complete | 1-2 hours |
+| C6 | Implementation Refinement | ✅ Complete | 30 min |
+| C7 | Storybook Stories | ✅ Complete | 1 hour |
+| C8 | Tests | ✅ Complete | 1 hour |
+| C9 | Token Compliance Validation | ✅ Complete | 15 min |
+| C10 | Export Registration | ✅ Complete | 15 min |
+
+**Total Estimated Time:** 6 hours  
+**Actual Time:** {actual time}
+
+---
+
+## C0 — Authority & Lock Check
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Component does not exist in codebase
+- Extension layer appropriate for this component
+- No Foundation conflicts detected
+
+**Changes:** None  
+**Artifacts:** Report created
+
+---
+
+## C1 — Component Classification & Justification
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Classified as: Composite
+- Role: {1-2 sentence role definition}
+- Category: overlays
+
+**Changes:** None  
+**Artifacts:** Classification documented
+
+---
+
+## C2 — Token Mapping Design
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Token mapping table created
+- Motion GAP evaluated: ADD MOTION (fade-in/fade-out for enter/exit)
+- All required tokens verified to exist
+
+**Changes:** None  
+**Artifacts:** Token mapping table, Motion GAP evaluation
+
+---
+
+## C3 — API Design & Contract Definition
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Public props defined: {list key props}
+- Variants: {if applicable}
+- Sizes: {if applicable}
+
+**Changes:** None  
+**Artifacts:** API contract document
+
+---
+
+## C4 — Component Scaffold Generation
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Scaffold generator executed successfully
+- All files created in `src/COMPOSITION/{category}/{ComponentName}/`
+
+**Changes:** Scaffold files created  
+**Artifacts:** `{ComponentName}.tsx`, `{ComponentName}.stories.tsx`, `{ComponentName}.test.tsx`, `{ComponentName}.index.ts`
+
+---
+
+## C5 — Token-Based Implementation
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Component logic implemented
+- Token unions used exclusively
+- Motion tokens applied: `.tm-motion-fade-in`, `.tm-motion-fade-out`
+
+**Changes:** Component implementation completed  
+**Artifacts:** `src/COMPOSITION/{category}/{ComponentName}/{ComponentName}.tsx`
+
+---
+
+## C6 — Implementation Refinement
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Foundation composition: {if applicable}
+- Code quality improved: JSDoc added, helpers extracted
+
+**Changes:** Code refined, JSDoc added  
+**Artifacts:** Updated implementation file
+
+---
+
+## C7 — Storybook Stories
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Default story created
+- {Matrix/States/SizesGallery} stories created as required
+- Use case examples included
+
+**Changes:** Storybook stories created  
+**Artifacts:** `{ComponentName}.stories.tsx`
+
+---
+
+## C8 — Tests
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Behavior tests written
+- A11Y tests written (if interactive)
+- Motion tests written (if motion required)
+
+**Changes:** Tests created  
+**Artifacts:** `{ComponentName}.test.tsx`
+
+---
+
+## C9 — Token Compliance Validation
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- NO raw values detected
+- Motion compliance verified
+- All tokens verified
+
+**Changes:** None  
+**Artifacts:** Compliance verification results
+
+---
+
+## C10 — Export Registration & Lock Propagation
+
+**Outcome:** Complete  
+**Blocking:** no  
+**Notes:**
+- Component exported from `src/index.ts`
+- EXTENSION_STATE.md updated
+- PROJECT_PROGRESS.md updated
+
+**Changes:** Export and documentation updates  
+**Artifacts:** Updated `src/index.ts`, `EXTENSION_STATE.md`, `PROJECT_PROGRESS.md`
+
+---
+
+## Summary
+
+**Component Status:** ✅ Registered and available for use  
+**Pipeline Version:** 1.3  
+**Completion Date:** YYYY-MM-DD
+```
+
+**Report Size Target:** 500-1000 lines total (compact format, focus on decisions and outcomes)
 
 ---
 
@@ -1316,7 +1845,7 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 
 ### This Pipeline is NOT
 
-* ❌ A review pipeline → Use [18A Component Review & Improvement Pipeline](../workflows/foundation/FOUNDATION_STEP_PIPELINE.md)
+* ❌ A review pipeline → Use [Component Refactoring Pipeline (18A)](../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md)
 * ❌ An audit pipeline → Use 18A for auditing existing components
 * ❌ A refactoring pipeline → Use 18A for refactoring existing components
 * ❌ A migration pipeline → Use 18A for migrating legacy components
@@ -1326,7 +1855,7 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 
 * ❌ Analyze existing code → No existing code to analyze
 * ❌ Apply fixes to existing components → Use 18A for fixes
-* ❌ Create audit reports → No audit report required
+* ❌ Create audit reports → Use 18A for audit reports (this pipeline creates creation reports, not audit reports)
 * ❌ Refactor existing implementations → Use 18A for refactoring
 * ❌ Migrate legacy components → Use 18A for migration
 * ❌ Review existing component quality → Use 18A for review
@@ -1370,8 +1899,12 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 * [Motion Authority](./MOTION_AUTHORITY.md) — Motion tokens
 * [Elevation Authority](./ELEVATION_AUTHORITY.md) — Elevation tokens
 * [State Authority](./STATE_AUTHORITY.md) — State representation
+* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 * [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
 * [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract
+* [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — Mandatory CVA structure pattern
 
 ### Lock & State Documents
 
@@ -1381,18 +1914,55 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 
 ### Process Documents
 
-* [18A Component Review & Improvement Pipeline](../workflows/foundation/FOUNDATION_STEP_PIPELINE.md) — Pipeline for reviewing/refactoring existing components
+* [Component Refactoring Pipeline (18A)](../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) — Pipeline for reviewing/refactoring existing components
 * [Component Creation Checklist](../workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) — Detailed checklist for creating Extension components
 * [TUNG System Specification](../workflows/tung_system_specification.md) — Task system for AI agents
 
 ### Reference Documents
 
+* [Storybook Stories Quality Standard](../reference/STORYBOOK_STORIES_STANDARD.md) — **MANDATORY** quality standard for all Storybook stories
 * [Project Progress](../PROJECT_PROGRESS.md) — Project tracking
 * [Component Needs Inventory](../workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) — Component requirements
 
 ---
 
 ## 📝 Version History
+
+* **v1.5** (2025-12-28): Canon Compliance & Modern Standards Integration
+  * **ADDITION:** Added A11Y Authority integration in C2/C3 (accessible names, ARIA contracts, semantic roles)
+  * **ADDITION:** Added Focus Authority integration in C2/C3 (focus trap, restore, roving tabindex, tab order)
+  * **ADDITION:** Added Input Authority integration in C2/C3 (keyboard parity, Enter/Space semantics, state blocking)
+  * **ADDITION:** Added TYPING_STANDARD reference in C3 (explicit union types requirement, no CVA-derived types)
+  * **ADDITION:** Added CVA_CANONICAL_STYLE reference in C5 (variants inline, `satisfies Record<>` constraints)
+  * **ADDITION:** Added error state design requirement in C3 (error state representation, error recovery patterns)
+  * **ADDITION:** Added loading/skeleton state evaluation in C2 (loading state requirements, blocking requirements)
+  * **ADDITION:** Expanded C8 testing requirements (A11Y tests, Focus tests, Input tests with detailed coverage)
+  * **ADDITION:** Added blocking conditions for A11Y/Focus/Input/TYPING_STANDARD violations
+  * **ADDITION:** Added Authority Contract references throughout pipeline (A11Y, Focus, Input, Typing Standard, CVA Canonical Style)
+  * **RATIONALE:** Ensures components comply with all canonical Authority Contracts and modern business app standards
+  * **RISK LEVEL:** LOW (additive changes, improves compliance and quality)
+
+* **v1.4** (2025-12-28): Component Creation Report Requirements
+  * **ADDITION:** Added mandatory component creation report requirement
+  * **ADDITION:** Report created in C0, updated after each step (C0-C10)
+  * **ADDITION:** Compact report structure template (target: 500-1000 lines, not 3000-5000)
+  * **ADDITION:** Each step section format: Outcome, Blocking, Notes, Changes, Artifacts
+  * **ADDITION:** Report update requirement added to all step exit criteria (C0-C10)
+  * **ADDITION:** Report file location: `docs/reports/creation/{ComponentName}_CREATION_REPORT.md`
+  * **RATIONALE:** Provides documentation trail for component creation process, similar to 18A audit reports but more compact
+  * **RISK LEVEL:** LOW (additive changes, improves documentation)
+
+* **v1.3** (2025-12-28): Motion Animation Requirements Integration
+  * **ADDITION:** Added explicit Motion GAP evaluation requirement in C2 (Token Mapping Design)
+  * **ADDITION:** Added motion requirements documentation in C2 artifacts (motion domains, tokens/presets, reduced motion support)
+  * **ADDITION:** Added motion implementation requirements in C5 (Token-Based Implementation)
+  * **ADDITION:** Added motion compliance validation in C9 (Token Compliance Validation)
+  * **ADDITION:** Added motion testing requirements in C8 (Tests)
+  * **ADDITION:** Added blocking conditions for Motion GAP resolution and raw motion values
+  * **ADDITION:** Added motion compliance exit criteria in C2, C5, C8, C9
+  * **ADDITION:** Added references to Motion Authority throughout pipeline steps
+  * **RATIONALE:** Ensures all components created through pipeline properly evaluate and implement motion animations per Motion Authority Contract
+  * **RISK LEVEL:** LOW (additive changes, no breaking changes to existing pipeline flow)
 
 * **v1.2** (2025-12-25): Pipeline Optimization (12→11 Steps)
   * **OPTIMIZATION:** Reduced pipeline from 12 to 11 steps
@@ -1435,9 +2005,9 @@ Unlike the 18A Component Review & Improvement Pipeline, this Component Creation 
 ---
 
 **Status:** ✅ **ACTIVE**  
-**Version:** 1.2  
+**Version:** 1.5  
 **Date Created:** 2025-12-25  
-**Last Updated:** 2025-12-25 (Pipeline Optimization: 12→11 Steps)  
+**Last Updated:** 2025-12-28 (Canon Compliance & Modern Standards Integration)  
 **Priority:** CRITICAL  
 **Type:** PROCESS
 

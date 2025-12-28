@@ -14,7 +14,7 @@
 This audit report tracks the complete Pipeline 18A (STEP 0-11) execution for the Input component, documenting the migration from legacy lock to canonical Foundation Lock status. The report follows the mandatory 4-phase process (Observe → Decide → Change → Record) for each step and serves as the single source of truth for the Input component's Foundation canonicalization.
 
 **Authority References:**
-- [FOUNDATION_STEP_PIPELINE.md](../../_internal/ai/_to_GPT_project_essential/18_FOUNDATION_STEP_PIPELINE.md) - Canonical pipeline
+- [COMPONENT_REFACTORING_PIPELINE.md](../../_internal/ai/_to_GPT_project_essential/18_COMPONENT_REFACTORING_PIPELINE.md) - Canonical pipeline
 - [COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc](../../../.cursor/rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc) - Refactor checklist
 - [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation lock authority
 
@@ -2568,7 +2568,7 @@ state?: "default" | "disabled" | "error" | "success";
 
 **Reference Documents:**
 - [STATE_MATRIX.md](../../architecture/STATE_MATRIX.md) - Canonical state definitions
-- [FOUNDATION_STEP_PIPELINE.md](../../workflows/foundation/FOUNDATION_STEP_PIPELINE.md) - STEP 12 requirements
+- [COMPONENT_REFACTORING_PIPELINE.md](../../workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md) - STEP 12 requirements
 - STEP 2 role definition (this report) - Foundation for canonical role
 
 ### Phase 2: Decide

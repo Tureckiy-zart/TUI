@@ -6,7 +6,7 @@
 **Date Updated (Refactor Cycle 2):** 2025-12-27  
 **Operator:** User  
 **Assistant:** Claude Sonnet 4.5  
-**Pipeline Version:** 18A (FOUNDATION_STEP_PIPELINE.md)
+**Pipeline Version:** 18A (COMPONENT_REFACTORING_PIPELINE.md)
 
 ---
 
@@ -2473,7 +2473,26 @@ All STEP 1-8 analysis completed. No issues identified that require fixing. Compo
 - **NON-BLOCKERS Fixed:** 0 (no NON-BLOCKERS found)
 - **Code Changes:** 0 files modified (no changes required)
 - **Tests:** 41 passing (1 skipped - className test, correct)
-- **Storybook Stories:** 13 stories (all required stories present)
+- **Storybook Stories:** 19 stories total
+  - Default
+  - Checked
+  - Disabled
+  - DisabledChecked
+  - Indeterminate
+  - Matrix (canonical)
+  - SizesGallery (canonical)
+  - AllSizes
+  - AllSizesChecked
+  - AllVariants
+  - AllVariantsUnchecked
+  - States (canonical)
+  - WithLabel
+  - Controlled
+  - Uncontrolled
+  - IndeterminateControlled
+  - Error
+  - CustomIcons
+  - Accessibility
 - **Lock Documents Updated:** 0 (component already LOCKED, no updates needed)
 
 **Quality Gates:**

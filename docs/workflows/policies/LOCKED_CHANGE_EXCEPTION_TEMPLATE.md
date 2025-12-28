@@ -164,5 +164,5 @@ If change is accepted:
 ## Related Documents
 
 - [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](./TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) - Main policy document
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A reference
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A reference
 
