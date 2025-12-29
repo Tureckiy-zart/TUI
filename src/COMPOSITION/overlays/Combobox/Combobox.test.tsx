@@ -1,7 +1,6 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import * as React from "react";
 
 import { Combobox, ComboboxInput, ComboboxList } from "./Combobox";
 import type { ComboboxOption } from "./Combobox";
@@ -236,8 +235,6 @@ describe("Combobox", () => {
     });
 
     it("works in uncontrolled mode", async () => {
-      const user = userEvent.setup();
-
       render(
         <Combobox defaultValue="apple">
           <ComboboxInput placeholder="Search..." aria-label="Search" />

@@ -57,7 +57,7 @@ export interface NotificationCenterPanelProps {
   /**
    * Element to return focus to when panel closes
    */
-  returnFocusRef?: React.RefObject<HTMLElement>;
+  returnFocusRef?: React.RefObject<HTMLElement | null>;
 }
 
 /**

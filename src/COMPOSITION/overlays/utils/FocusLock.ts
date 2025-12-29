@@ -23,7 +23,7 @@ interface FocusLockOptions {
   /**
    * Element to return focus to when disabled
    */
-  returnFocusRef?: React.RefObject<HTMLElement>;
+  returnFocusRef?: React.RefObject<HTMLElement | null>;
 
   /**
    * Additional elements that should be focusable (e.g., portal elements)

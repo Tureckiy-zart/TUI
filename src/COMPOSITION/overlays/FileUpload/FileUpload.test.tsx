@@ -103,14 +103,13 @@ describe("FileUpload", () => {
 
       await waitFor(() => {
         expect(handleError).toHaveBeenCalled();
-        const error = handleError.mock.calls[0][0] as FileUploadError;
-        expect(error.type).toBe("file-too-large");
+        const error = handleError.mock.calls[0]?.[0] as FileUploadError;
+        expect(error?.type).toBe("file-too-large");
       });
     });
 
     it("validates file type and calls onError", async () => {
       const handleError = vi.fn();
-      const user = userEvent.setup();
 
       render(<FileUpload accept="image/*" onError={handleError} onFileSelect={() => {}} />);
 
@@ -144,8 +143,8 @@ describe("FileUpload", () => {
       await waitFor(
         () => {
           expect(handleError).toHaveBeenCalled();
-          const error = handleError.mock.calls[0][0] as FileUploadError;
-          expect(error.type).toBe("file-type-not-supported");
+          const error = handleError.mock.calls[0]?.[0] as FileUploadError;
+          expect(error?.type).toBe("file-type-not-supported");
         },
         { timeout: 3000 },
       );
@@ -181,8 +180,8 @@ describe("FileUpload", () => {
       await waitFor(
         () => {
           expect(handleError).toHaveBeenCalled();
-          const error = handleError.mock.calls[0][0] as FileUploadError;
-          expect(error.type).toBe("too-many-files");
+          const error = handleError.mock.calls[0]?.[0] as FileUploadError;
+          expect(error?.type).toBe("too-many-files");
         },
         { timeout: 3000 },
       );

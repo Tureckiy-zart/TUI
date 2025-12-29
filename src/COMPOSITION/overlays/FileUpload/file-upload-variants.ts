@@ -59,8 +59,6 @@ export const fileUploadDropzoneVariants = tokenCVA({
   defaultVariants: {
     variant: "outline",
     size: "md",
-    isDragActive: false,
-    hasError: false,
   },
 });
 

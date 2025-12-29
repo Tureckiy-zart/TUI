@@ -68,7 +68,7 @@ export interface DrawerProps extends Omit<
   /**
    * Element to return focus to when drawer closes
    */
-  returnFocusRef?: React.RefObject<HTMLElement>;
+  returnFocusRef?: React.RefObject<HTMLElement | null>;
 
   /**
    * ID for the drawer title (for aria-labelledby)

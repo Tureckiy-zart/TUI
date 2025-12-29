@@ -501,7 +501,6 @@ export function ComboboxList({
     onValueChange,
     value,
     multiple,
-    open,
     setOpen,
     size,
     setFilteredOptions,

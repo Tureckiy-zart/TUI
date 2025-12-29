@@ -34,7 +34,7 @@ export interface FileUploadError {
  * Extension component: className/style allowed but excluded from type definition
  * for consistency with FormData components pattern
  */
-export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue" | "onError"> {
   // === Basic Configuration ===
   /** Allow multiple file selection */
   multiple?: boolean;
