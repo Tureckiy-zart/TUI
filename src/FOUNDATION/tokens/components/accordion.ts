@@ -43,6 +43,7 @@ export const ACCORDION_TOKENS = {
    * Supports sm, md, lg sizes
    */
   trigger: {
+    width: "w-full", // Full width for trigger
     padding: {
       horizontal: {
         sm: "px-sm", // 8px (0.5rem)

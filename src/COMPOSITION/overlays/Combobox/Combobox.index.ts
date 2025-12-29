@@ -1,2 +1,2 @@
-export type { ComboboxProps } from "./Combobox";
+export type { ComboboxRootProps } from "./Combobox";
 export * from "./Combobox";

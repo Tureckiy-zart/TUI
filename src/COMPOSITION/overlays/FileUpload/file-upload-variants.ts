@@ -2,10 +2,11 @@
  * FileUpload Variants
  *
  * tokenCVA-based variant system for FileUpload component.
- * All styling uses token-based values with CSS variable references.
+ * All styling uses token-based values with semantic Tailwind classes.
  */
 
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
+import { FILE_UPLOAD_TOKENS } from "@/FOUNDATION/tokens/components/file-upload";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 
 import type { FileUploadSize, FileUploadVariant } from "./FileUpload.types";
@@ -26,41 +27,61 @@ export const fileUploadDropzoneVariants = tokenCVA({
   variants: {
     variant: {
       outline: `
-        border-[hsl(var(--border))]
-        bg-transparent
-        hover:border-[hsl(var(--accent))]
-        hover:bg-[hsl(var(--accent)/0.05)]
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.outline.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.outline.background}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.outline.hover.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.outline.hover.background}
       `,
       filled: `
-        border-[hsl(var(--border))]
-        bg-[hsl(var(--muted)/0.3)]
-        hover:border-[hsl(var(--accent))]
-        hover:bg-[hsl(var(--accent)/0.1)]
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.filled.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.filled.background}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.filled.hover.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.variant.filled.hover.background}
       `,
     } satisfies Record<FileUploadVariant, string>,
     size: {
-      sm: `h-32 px-md py-md rounded-md gap-sm`,
-      md: `h-40 px-lg py-lg rounded-lg gap-md`,
-      lg: `h-48 px-xl py-xl rounded-lg gap-md`,
+      sm: `
+        ${FILE_UPLOAD_TOKENS.dropzone.height.sm}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.horizontal.sm}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.vertical.sm}
+        ${FILE_UPLOAD_TOKENS.dropzone.radius.sm}
+        ${FILE_UPLOAD_TOKENS.dropzone.gap.sm}
+      `,
+      md: `
+        ${FILE_UPLOAD_TOKENS.dropzone.height.md}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.horizontal.md}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.vertical.md}
+        ${FILE_UPLOAD_TOKENS.dropzone.radius.md}
+        ${FILE_UPLOAD_TOKENS.dropzone.gap.md}
+      `,
+      lg: `
+        ${FILE_UPLOAD_TOKENS.dropzone.height.lg}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.horizontal.lg}
+        ${FILE_UPLOAD_TOKENS.dropzone.padding.vertical.lg}
+        ${FILE_UPLOAD_TOKENS.dropzone.radius.lg}
+        ${FILE_UPLOAD_TOKENS.dropzone.gap.lg}
+      `,
     } satisfies Record<FileUploadSize, string>,
     isDragActive: {
       true: `
-        border-[hsl(var(--accent))]
-        bg-[hsl(var(--accent)/0.1)]
+        ${FILE_UPLOAD_TOKENS.dropzone.state.dragActive.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.state.dragActive.background}
       `,
-    },
+      false: "",
+    } as const,
     hasError: {
       true: `
-        border-[hsl(var(--destructive))]
-        bg-[hsl(var(--destructive)/0.05)]
+        ${FILE_UPLOAD_TOKENS.dropzone.state.error.border}
+        ${FILE_UPLOAD_TOKENS.dropzone.state.error.background}
       `,
-    },
+      false: "",
+    } as const,
   },
   defaultVariants: {
-    variant: "outline",
-    size: "md",
-    isDragActive: false,
-    hasError: false,
+    variant: "outline" as const,
+    size: "md" as const,
+    isDragActive: false as any,
+    hasError: false as any,
   },
 });
 
@@ -70,18 +91,29 @@ export const fileUploadDropzoneVariants = tokenCVA({
  */
 export const fileUploadPreviewVariants = tokenCVA({
   base: `
-    relative flex items-center gap-sm
-    px-sm py-sm rounded-md
-    border border-[hsl(var(--border))]
-    bg-[hsl(var(--background))]
-    shadow-sm
+    relative flex items-center
+    ${FILE_UPLOAD_TOKENS.preview.padding.horizontal.md}
+    ${FILE_UPLOAD_TOKENS.preview.padding.vertical.md}
+    ${FILE_UPLOAD_TOKENS.preview.radius}
+    ${FILE_UPLOAD_TOKENS.preview.border}
+    ${FILE_UPLOAD_TOKENS.preview.background}
+    ${FILE_UPLOAD_TOKENS.preview.shadow}
     ${MOTION_TOKENS.transition.colors}
   `,
   variants: {
     size: {
-      sm: `text-xs gap-xs`,
-      md: `text-sm gap-sm`,
-      lg: `text-base gap-sm`,
+      sm: `
+        ${FILE_UPLOAD_TOKENS.preview.fontSize.sm}
+        ${FILE_UPLOAD_TOKENS.preview.gap.sm}
+      `,
+      md: `
+        ${FILE_UPLOAD_TOKENS.preview.fontSize.md}
+        ${FILE_UPLOAD_TOKENS.preview.gap.md}
+      `,
+      lg: `
+        ${FILE_UPLOAD_TOKENS.preview.fontSize.lg}
+        ${FILE_UPLOAD_TOKENS.preview.gap.lg}
+      `,
     } satisfies Record<FileUploadSize, string>,
   },
   defaultVariants: {
@@ -96,15 +128,15 @@ export const fileUploadPreviewVariants = tokenCVA({
 export const fileUploadThumbnailVariants = tokenCVA({
   base: `
     relative overflow-hidden
-    rounded-sm
-    bg-[hsl(var(--muted))]
+    ${FILE_UPLOAD_TOKENS.thumbnail.radius}
+    ${FILE_UPLOAD_TOKENS.thumbnail.background}
     flex-shrink-0
   `,
   variants: {
     size: {
-      sm: `size-8`,
-      md: `size-10`,
-      lg: `size-12`,
+      sm: FILE_UPLOAD_TOKENS.thumbnail.size.sm,
+      md: FILE_UPLOAD_TOKENS.thumbnail.size.md,
+      lg: FILE_UPLOAD_TOKENS.thumbnail.size.lg,
     } satisfies Record<FileUploadSize, string>,
   },
   defaultVariants: {

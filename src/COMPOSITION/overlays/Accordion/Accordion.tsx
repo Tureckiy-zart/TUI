@@ -102,7 +102,7 @@ const resolveVariant = (variant: AccordionVariant | undefined): AccordionVariant
 // ============================================================================
 
 const accordionTriggerVariants = tokenCVA({
-  base: `flex w-full items-center justify-between outline-none ${ACCORDION_TOKENS.transition.colors} ${ACCORDION_TOKENS.focus.ring} ${ACCORDION_TOKENS.disabled.opacity} ${ACCORDION_TOKENS.disabled.pointerEvents} ${ACCORDION_TOKENS.disabled.cursor}`,
+  base: `flex ${ACCORDION_TOKENS.trigger.width} items-center justify-between outline-none ${ACCORDION_TOKENS.transition.colors} ${ACCORDION_TOKENS.focus.ring} ${ACCORDION_TOKENS.disabled.opacity} ${ACCORDION_TOKENS.disabled.pointerEvents} ${ACCORDION_TOKENS.disabled.cursor}`,
   variants: {
     size: {
       sm: `${ACCORDION_TOKENS.size.sm.trigger.padding.horizontal} ${ACCORDION_TOKENS.size.sm.trigger.padding.vertical} ${ACCORDION_TOKENS.size.sm.trigger.fontSize} ${ACCORDION_TOKENS.trigger.fontWeight}`,
@@ -326,7 +326,7 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
         )}
         {...props}
       >
-        <div className={cn("pb-md pt-0")}>{children}</div>
+        <div className={cn("pb-4 pt-0")}>{children}</div>
       </AccordionPrimitive.Content>
     );
   },

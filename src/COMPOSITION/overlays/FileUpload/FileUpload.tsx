@@ -47,6 +47,7 @@
 
 import * as React from "react";
 
+import { Box } from "@/COMPOSITION/layout/Box/Box";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Button } from "@/PRIMITIVES/Button/Button";
 import { Text } from "@/PRIMITIVES/Text/Text";
@@ -63,7 +64,7 @@ import {
   fileUploadPreviewVariants,
   fileUploadThumbnailVariants,
 } from "./file-upload-variants";
-import type { FileUploadError, FileUploadProps } from "./FileUpload.types";
+import type { FileUploadProps } from "./FileUpload.types";
 
 /**
  * File Preview Item Component
@@ -96,7 +97,7 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
             <img src={previewUrl} alt={file.name} className="size-full object-cover" />
           ) : (
             <div className="flex size-full items-center justify-center">
-              <Text size="xs" className="text-[hsl(var(--muted-foreground))]">
+              <Text size="xs" tone="muted">
                 {file.name.split(".").pop()?.toUpperCase()}
               </Text>
             </div>
@@ -105,43 +106,42 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
 
         {/* File Info */}
         <div className="min-w-0 flex-1">
-          <Text
-            size={size === "lg" ? "sm" : "xs"}
-            weight="medium"
-            className="truncate text-[hsl(var(--foreground))]"
-          >
-            {file.name}
-          </Text>
-          <Text size="xs" className="text-[hsl(var(--muted-foreground))]">
+          <Box className="truncate">
+            <Text size={size === "lg" ? "sm" : "xs"} weight="medium">
+              {file.name}
+            </Text>
+          </Box>
+          <Text size="xs" tone="muted">
             {formatBytes(file.size)}
           </Text>
         </div>
 
         {/* Remove Button */}
-        <Button
-          type="button"
-          variant="ghost"
-          size={size}
-          onClick={onRemove}
-          disabled={disabled}
-          aria-label={`Remove ${file.name}`}
-          className="flex-shrink-0"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <Box className="flex-shrink-0">
+          <Button
+            type="button"
+            variant="ghost"
+            size={size}
+            onClick={onRemove}
+            disabled={disabled}
+            aria-label={`Remove ${file.name}`}
           >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </Button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </Button>
+        </Box>
       </div>
     );
   },
@@ -206,7 +206,6 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
         const fileArray = Array.from(newFiles);
         const validFiles: File[] = [];
-        let firstError: FileUploadError | null = null;
 
         // Validate file count
         const countError = validateFileCount(files, fileArray, maxFiles);
@@ -374,8 +373,16 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           {/* Upload Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={size === "lg" ? 48 : size === "sm" ? 32 : 40}
-            height={size === "lg" ? 48 : size === "sm" ? 32 : 40}
+            width={(() => {
+              if (size === "lg") return 48;
+              if (size === "sm") return 32;
+              return 40;
+            })()}
+            height={(() => {
+              if (size === "lg") return 48;
+              if (size === "sm") return 32;
+              return 40;
+            })()}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -391,20 +398,16 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
           {/* Text */}
           <div className="text-center">
-            <Text
-              size={size === "lg" ? "base" : "sm"}
-              weight="medium"
-              className="text-[hsl(var(--foreground))]"
-            >
+            <Text size={size === "lg" ? "sm" : "sm"} weight="medium">
               {isDragActive ? "Drop files here" : "Drop files or click to browse"}
             </Text>
             {accept && (
-              <Text size="xs" className="text-[hsl(var(--muted-foreground))]">
+              <Text size="xs" tone="muted">
                 Accepted: {accept}
               </Text>
             )}
             {maxSize && (
-              <Text size="xs" className="text-[hsl(var(--muted-foreground))]">
+              <Text size="xs" tone="muted">
                 Max size: {formatBytes(maxSize)}
               </Text>
             )}
@@ -425,14 +428,11 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
         {/* Error Message */}
         {errorMessage && (
-          <Text
-            size="sm"
-            className="mt-sm text-[hsl(var(--destructive))]"
-            role="alert"
-            aria-live="polite"
-          >
-            {errorMessage}
-          </Text>
+          <Box className="mt-sm">
+            <Text size="sm" role="alert" aria-live="polite">
+              {errorMessage}
+            </Text>
+          </Box>
         )}
 
         {/* File Previews */}

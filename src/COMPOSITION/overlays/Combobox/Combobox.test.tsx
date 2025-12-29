@@ -1,7 +1,6 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import * as React from "react";
 
 import { Combobox, ComboboxInput, ComboboxList } from "./Combobox";
 import type { ComboboxOption } from "./Combobox";
@@ -45,17 +44,23 @@ describe("Combobox", () => {
       await user.click(input);
 
       // Wait for dropdown to open
-      await waitFor(() => {
-        expect(input).toHaveAttribute("aria-expanded", "true");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(input).toHaveAttribute("aria-expanded", "true");
+        },
+        { timeout: 2000 },
+      );
 
       // Wait for options to be rendered
-      await waitFor(() => {
-        expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
-        expect(screen.getByRole("option", { name: /banana/i })).toBeInTheDocument();
-        expect(screen.getByRole("option", { name: /cherry/i })).toBeInTheDocument();
-        expect(screen.getByRole("option", { name: /date/i })).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
+          expect(screen.getByRole("option", { name: /banana/i })).toBeInTheDocument();
+          expect(screen.getByRole("option", { name: /cherry/i })).toBeInTheDocument();
+          expect(screen.getByRole("option", { name: /date/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
     });
   });
 
@@ -236,8 +241,6 @@ describe("Combobox", () => {
     });
 
     it("works in uncontrolled mode", async () => {
-      const user = userEvent.setup();
-
       render(
         <Combobox defaultValue="apple">
           <ComboboxInput placeholder="Search..." aria-label="Search" />
@@ -370,24 +373,36 @@ describe("Combobox", () => {
       });
 
       // Wait a bit for filteredOptions to be ready
-      await waitFor(() => {
-        expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
-      }, { timeout: 1000 });
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
+        },
+        { timeout: 1000 },
+      );
 
       await user.keyboard("{ArrowDown}");
-      await waitFor(() => {
-        expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
+        },
+        { timeout: 2000 },
+      );
 
       await user.keyboard("{ArrowDown}");
-      await waitFor(() => {
-        expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-1");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-1");
+        },
+        { timeout: 2000 },
+      );
 
       await user.keyboard("{ArrowUp}");
-      await waitFor(() => {
-        expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
+        },
+        { timeout: 2000 },
+      );
     });
 
     it("selects option with Enter", async () => {
@@ -411,19 +426,28 @@ describe("Combobox", () => {
       });
 
       // Wait a bit for filteredOptions to be ready
-      await waitFor(() => {
-        expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
-      }, { timeout: 1000 });
+      await waitFor(
+        () => {
+          expect(screen.getByRole("option", { name: /apple/i })).toBeInTheDocument();
+        },
+        { timeout: 1000 },
+      );
 
       await user.keyboard("{ArrowDown}");
-      await waitFor(() => {
-        expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(input).toHaveAttribute("aria-activedescendant", "combobox-option-0");
+        },
+        { timeout: 2000 },
+      );
 
       await user.keyboard("{Enter}");
-      await waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith("apple");
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          expect(handleChange).toHaveBeenCalledWith("apple");
+        },
+        { timeout: 2000 },
+      );
     });
 
     it("closes dropdown on Escape", async () => {

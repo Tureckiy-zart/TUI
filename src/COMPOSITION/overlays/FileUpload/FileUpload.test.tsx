@@ -103,20 +103,21 @@ describe("FileUpload", () => {
 
       await waitFor(() => {
         expect(handleError).toHaveBeenCalled();
-        const error = handleError.mock.calls[0][0] as FileUploadError;
+        const errorCall = handleError.mock.calls[0];
+        if (!errorCall) throw new Error("Error callback not called");
+        const error = errorCall[0] as FileUploadError;
         expect(error.type).toBe("file-too-large");
       });
     });
 
     it("validates file type and calls onError", async () => {
       const handleError = vi.fn();
-      const user = userEvent.setup();
 
       render(<FileUpload accept="image/*" onError={handleError} onFileSelect={() => {}} />);
 
-      const input = screen.getByRole("button", { name: /drop files/i }).querySelector(
-        'input[type="file"]',
-      ) as HTMLInputElement;
+      const input = screen
+        .getByRole("button", { name: /drop files/i })
+        .querySelector('input[type="file"]') as HTMLInputElement;
       const file = createMockFile("document.pdf", 1000, "application/pdf");
 
       // Create a FileList-like object manually for testing
@@ -144,7 +145,9 @@ describe("FileUpload", () => {
       await waitFor(
         () => {
           expect(handleError).toHaveBeenCalled();
-          const error = handleError.mock.calls[0][0] as FileUploadError;
+          const errorCall = handleError.mock.calls[0];
+          if (!errorCall) throw new Error("Error callback not called");
+          const error = errorCall[0] as FileUploadError;
           expect(error.type).toBe("file-type-not-supported");
         },
         { timeout: 3000 },
@@ -168,9 +171,9 @@ describe("FileUpload", () => {
       );
 
       // Use more specific selector to avoid multiple buttons (dropzone + remove button)
-      const input = screen.getByRole("button", { name: /drop files/i }).querySelector(
-        'input[type="file"]',
-      ) as HTMLInputElement;
+      const input = screen
+        .getByRole("button", { name: /drop files/i })
+        .querySelector('input[type="file"]') as HTMLInputElement;
       const files = [
         createMockFile("test1.jpg", 1000, "image/jpeg"),
         createMockFile("test2.jpg", 1000, "image/jpeg"),
@@ -181,7 +184,9 @@ describe("FileUpload", () => {
       await waitFor(
         () => {
           expect(handleError).toHaveBeenCalled();
-          const error = handleError.mock.calls[0][0] as FileUploadError;
+          const errorCall = handleError.mock.calls[0];
+          if (!errorCall) throw new Error("Error callback not called");
+          const error = errorCall[0] as FileUploadError;
           expect(error.type).toBe("too-many-files");
         },
         { timeout: 3000 },

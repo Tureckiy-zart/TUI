@@ -385,7 +385,7 @@ export {
   type FileUploadProps,
   type FileUploadSize,
   type FileUploadVariant,
-} from "./COMPOSITION/overlays/FileUpload";
+} from "./COMPOSITION/overlays/FileUpload/index";
 
 // Form components (CVA-based, token-driven)
 export {

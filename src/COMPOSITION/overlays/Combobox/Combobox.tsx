@@ -195,7 +195,7 @@ export function ComboboxRoot({
 
   // Store filtered options in context (will be set by ComboboxList)
   const [filteredOptions, setFilteredOptions] = React.useState<ComboboxOption[]>([]);
-  
+
   // Store all options for display value lookup
   const [allOptions, setAllOptions] = React.useState<ComboboxOption[]>([]);
 
@@ -501,7 +501,6 @@ export function ComboboxList({
     onValueChange,
     value,
     multiple,
-    open,
     setOpen,
     size,
     setFilteredOptions,
@@ -565,51 +564,53 @@ export function ComboboxList({
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
       <div id="combobox-list" role="listbox" className="max-h-[300px] overflow-y-auto p-1">
-        {loading ? (
-          <div className="p-4 text-center text-sm text-muted-foreground">Loading...</div>
-        ) : filteredOptions.length === 0 ? (
+        {loading && <div className="p-4 text-center text-sm text-muted-foreground">Loading...</div>}
+        {!loading && filteredOptions.length === 0 && (
           <div className="p-4 text-center text-sm text-muted-foreground">{emptyMessage}</div>
-        ) : (
-          filteredOptions.map((option, index) => {
-            const selected = isSelected(option.value, value);
-            const highlighted = index === highlightedIndex;
-            const label = option.label || option.value;
+        )}
+        {!loading && filteredOptions.length > 0 && (
+          <>
+            {filteredOptions.map((option, index) => {
+              const selected = isSelected(option.value, value);
+              const highlighted = index === highlightedIndex;
+              const label = option.label || option.value;
 
-            return (
-              <div
-                key={option.value}
-                id={`combobox-option-${index}`}
-                role="option"
-                aria-selected={selected}
-                aria-disabled={option.disabled}
-                className={cn(
-                  "relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors",
-                  highlighted && INPUT_TOKENS.variant.primary.background,
-                  highlighted && INPUT_TOKENS.variant.primary.text,
-                  !highlighted && "hover:bg-accent hover:text-accent-foreground",
-                  option.disabled && "pointer-events-none opacity-50",
-                  size === "sm" && INPUT_TOKENS.fontSize.sm,
-                  size === "md" && INPUT_TOKENS.fontSize.md,
-                  size === "lg" && INPUT_TOKENS.fontSize.lg,
-                )}
-                onClick={() => !option.disabled && handleSelect(option.value)}
-                onMouseEnter={() => setHighlightedIndex(index)}
-              >
-                {multiple && (
-                  <div
-                    className={cn(
-                      "flex h-4 w-4 items-center justify-center rounded-sm border",
-                      selected && "bg-primary text-primary-foreground",
-                    )}
-                  >
-                    {selected && <Check className="h-3 w-3" />}
-                  </div>
-                )}
-                <span className="flex-1">{label}</span>
-                {!multiple && selected && <Check className="h-4 w-4" />}
-              </div>
-            );
-          })
+              return (
+                <div
+                  key={option.value}
+                  id={`combobox-option-${index}`}
+                  role="option"
+                  aria-selected={selected}
+                  aria-disabled={option.disabled}
+                  className={cn(
+                    "relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors",
+                    highlighted && INPUT_TOKENS.variant.primary.background,
+                    highlighted && INPUT_TOKENS.variant.primary.text,
+                    !highlighted && "hover:bg-accent hover:text-accent-foreground",
+                    option.disabled && "pointer-events-none opacity-50",
+                    size === "sm" && INPUT_TOKENS.fontSize.sm,
+                    size === "md" && INPUT_TOKENS.fontSize.md,
+                    size === "lg" && INPUT_TOKENS.fontSize.lg,
+                  )}
+                  onClick={() => !option.disabled && handleSelect(option.value)}
+                  onMouseEnter={() => setHighlightedIndex(index)}
+                >
+                  {multiple && (
+                    <div
+                      className={cn(
+                        "flex h-4 w-4 items-center justify-center rounded-sm border",
+                        selected && "bg-primary text-primary-foreground",
+                      )}
+                    >
+                      {selected && <Check className="h-3 w-3" />}
+                    </div>
+                  )}
+                  <span className="flex-1">{label}</span>
+                  {!multiple && selected && <Check className="h-4 w-4" />}
+                </div>
+              );
+            })}
+          </>
         )}
       </div>
     </PopoverContent>

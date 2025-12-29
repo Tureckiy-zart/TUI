@@ -116,11 +116,11 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
         // Check if click is on backdrop (container) or backdrop element itself
         const target = event.target as HTMLElement;
         const currentTarget = event.currentTarget as HTMLElement;
-        
+
         // Click on container itself (empty space) or on backdrop element
         const isBackdropClick =
           target === currentTarget || target.getAttribute("aria-hidden") === "true";
-        
+
         if (isBackdropClick) {
           event.preventDefault();
           onClose();

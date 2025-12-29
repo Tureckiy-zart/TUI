@@ -15,4 +15,3 @@ export type {
   DrawerProps,
   DrawerSize,
 } from "./Drawer.types";
-

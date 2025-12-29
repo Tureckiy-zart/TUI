@@ -96,6 +96,7 @@ const largeOptionList: ComboboxOption[] = [
  * Default story demonstrating basic single-select usage with client-side filtering.
  */
 export const Default: Story = {
+  args: { children: null },
   render: () => {
     const [value, setValue] = React.useState<string>("");
 
@@ -121,6 +122,9 @@ export const Default: Story = {
  * SizesGallery demonstrates all available sizes (sm, md, lg).
  */
 export const SizesGallery: Story = {
+  args: {
+    children: null,
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div>
@@ -162,6 +166,9 @@ export const SizesGallery: Story = {
  * States demonstrates different component states (disabled, invalid, loading).
  */
 export const States: Story = {
+  args: {
+    children: null,
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div>
@@ -215,6 +222,7 @@ export const States: Story = {
  * MultiSelect demonstrates multi-select mode with tags.
  */
 export const MultiSelect: Story = {
+  args: { children: null },
   render: () => {
     const [value, setValue] = React.useState<string[]>([]);
 
@@ -246,6 +254,9 @@ export const MultiSelect: Story = {
  * ServerSideFiltering demonstrates server-side filtering with onSearch callback.
  */
 export const ServerSideFiltering: Story = {
+  args: {
+    children: null,
+  },
   render: () => {
     const [options, setOptions] = React.useState<ComboboxOption[]>(largeOptionList);
     const [loading, setLoading] = React.useState(false);
@@ -256,7 +267,7 @@ export const ServerSideFiltering: Story = {
       // Simulate API call
       setTimeout(() => {
         const filtered = largeOptionList.filter((opt) =>
-          opt.label.toLowerCase().includes(query.toLowerCase()),
+          opt.label?.toLowerCase().includes(query.toLowerCase()),
         );
         setOptions(filtered);
         setLoading(false);
@@ -290,6 +301,9 @@ export const ServerSideFiltering: Story = {
  * LargeList demonstrates combobox with a large list of options.
  */
 export const LargeList: Story = {
+  args: {
+    children: null,
+  },
   render: () => {
     const [value, setValue] = React.useState<string>("");
 
@@ -315,6 +329,9 @@ export const LargeList: Story = {
  * EmptyState demonstrates empty state when no options match the filter.
  */
 export const EmptyState: Story = {
+  args: {
+    children: null,
+  },
   render: () => (
     <div className="w-[300px]">
       <Combobox>
@@ -336,6 +353,9 @@ export const EmptyState: Story = {
  * WithDisabledOptions demonstrates options with disabled state.
  */
 export const WithDisabledOptions: Story = {
+  args: {
+    children: null,
+  },
   render: () => {
     const optionsWithDisabled: ComboboxOption[] = [
       { value: "apple", label: "Apple" },
