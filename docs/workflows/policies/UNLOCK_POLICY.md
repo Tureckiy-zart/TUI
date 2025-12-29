@@ -178,6 +178,6 @@ After unlock approval, update:
 - [FOUNDATION_LOCK.md](../../architecture/FOUNDATION_LOCK.md) - Foundation Lock reference
 - [FOUNDATION_LOCK_OPERATING_RULES.md](../../architecture/FOUNDATION_LOCK_OPERATING_RULES.md) - Operating rules for locked components
 - [EXTENSION_STATE.md](../../architecture/EXTENSION_STATE.md) - Extension component state
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A reference
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A reference
 - [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](./TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md) - Locked component change guard policy
 

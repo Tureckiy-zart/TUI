@@ -143,8 +143,8 @@
           "reason": "Foundation component contract and Foundation Enforcement (FINAL/APPLIED)"
         },
         {
-          "source": "docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md",
-          "target": "_to_GPT_project_essential/18_FOUNDATION_STEP_PIPELINE.md",
+          "source": "docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md",
+          "target": "_to_GPT_project_essential/18_COMPONENT_REFACTORING_PIPELINE.md",
           "priority": "CRITICAL",
           "reason": "Foundation component lifecycle pipeline (13-step process for Foundation components)"
         }
@@ -209,7 +209,7 @@
           "Token Authority examples (SPACING_AUTHORITY.md)",
           "Layout Authority (LAYOUT_AUTHORITY.md)",
           "Architecture rules (ARCHITECTURE_RULES.md)",
-          "Foundation lifecycle process (FOUNDATION_STEP_PIPELINE.md)"
+          "Foundation lifecycle process (COMPONENT_REFACTORING_PIPELINE.md)"
         ],
         "coverage_areas": [
           "Architecture (Foundation + Extension)",

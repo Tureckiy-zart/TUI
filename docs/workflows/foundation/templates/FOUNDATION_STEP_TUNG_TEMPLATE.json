@@ -634,7 +634,7 @@
     ],
     "foundation_reference": [
       "docs/foundation/FOUNDATION_REFERENCE.md - What is Foundation, when pipeline applies, what FINAL lock means",
-      "docs/foundation/FOUNDATION_STEP_PIPELINE.md - Detailed step-by-step pipeline documentation"
+      "docs/foundation/COMPONENT_REFACTORING_PIPELINE.md - Detailed step-by-step pipeline documentation"
     ]
   },
   "labels": [

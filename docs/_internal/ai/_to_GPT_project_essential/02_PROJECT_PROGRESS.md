@@ -668,7 +668,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 - **Status:** ✅ completed
 - **Date Updated:** 2025-12-23
-- **Summary:** TUNG (Task Unified Next-Gen) system formal documentation integrated. Created `tung_system_specification.md` and `example_task_master.json`. Established cross-references between specification, pipeline (`FOUNDATION_STEP_PIPELINE.md`), and templates. Updated canonical documentation inventory.
+- **Summary:** TUNG (Task Unified Next-Gen) system formal documentation integrated. Created `tung_system_specification.md` and `example_task_master.json`. Established cross-references between specification, pipeline (`COMPONENT_REFACTORING_PIPELINE.md`), and templates. Updated canonical documentation inventory.
 - **Notes:** TUNG is now the authoritative task formalization standard for AI-driven development in this project.
 
 ## Completed Tasks
@@ -751,7 +751,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Testing:** ✅ COMPREHENSIVE (408 lines, multiple test suites covering behavior, edge cases, accessibility, variants, sizes, orientation, marks)
 - **Storybook:** ✅ COMPLETE (Matrix, States, SizesGallery stories + additional use case stories)
 - **Audit Report:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md`
-- **Reference:** Foundation Step Pipeline 18A (`docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md`)
+- **Reference:** Foundation Step Pipeline 18A (`docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md`)
 
 ### Avatar & AvatarGroup Components (100% Complete, Pipeline 18A Complete)
 

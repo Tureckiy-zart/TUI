@@ -42,7 +42,7 @@ Deprecated items must be clearly marked with deprecation notices, include pointe
 
 **Example:**
 ```markdown
-**Canonical Source:** `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` - 18A Component Review & Improvement Pipeline (Refined)
+**Canonical Source:** `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` - Component Refactoring Pipeline (18A)
 ```
 
 ### Step 3: Keep for Historical Reference
@@ -88,7 +88,7 @@ Deprecated items must be clearly marked with deprecation notices, include pointe
 4. Update all cross-references
 
 **Example:**
-- `old_FOUNDATION_STEP_PIPELINE.md` → `FOUNDATION_STEP_PIPELINE.md`
+- `old_FOUNDATION_STEP_PIPELINE.md` → `COMPONENT_REFACTORING_PIPELINE.md`
 
 ### API Deprecation
 
@@ -153,9 +153,9 @@ Deprecated items must be clearly marked with deprecation notices, include pointe
 
 **Deprecation Notice:**
 ```markdown
-> 🕰️ **OUTDATED**: This document is superseded by [FOUNDATION_STEP_PIPELINE.md](./FOUNDATION_STEP_PIPELINE.md).
+> 🕰️ **OUTDATED**: This document is superseded by [COMPONENT_REFACTORING_PIPELINE.md](./COMPONENT_REFACTORING_PIPELINE.md).
 > 
-> **Canonical Source:** [FOUNDATION_STEP_PIPELINE.md](./FOUNDATION_STEP_PIPELINE.md) - 18A Component Review & Improvement Pipeline (Refined)
+> **Canonical Source:** [COMPONENT_REFACTORING_PIPELINE.md](./COMPONENT_REFACTORING_PIPELINE.md) - Component Refactoring Pipeline (18A)
 > 
 > This document is kept for historical reference only. All new work should reference the canonical pipeline document.
 ```

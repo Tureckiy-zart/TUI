@@ -736,7 +736,7 @@ The Progress component is considered **closed** only when:
 ### Authority References Consulted
 - ✅ `docs/architecture/VARIANTS_SIZE_CANON.md` - GlobalSize scale, Storybook requirements
 - ✅ `docs/architecture/CVA_CANONICAL_STYLE.md` - CVA Decision Matrix
-- ✅ `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` - Pipeline 18A structure
+- ✅ `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` - Pipeline 18A structure
 - ✅ `docs/workflows/tasks/COMPONENT_ROADMAP_PRIMITIVES.md` - Progress roadmap entry
 
 ---

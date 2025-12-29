@@ -728,7 +728,7 @@ Verify completion and propagate lock status.
 
 ### Core Pipeline Documents
 
-- `FOUNDATION_STEP_PIPELINE.md` (18A) — Original 13-step pipeline
+- `COMPONENT_REFACTORING_PIPELINE.md` (18A) — Original 13-step pipeline
 - `_ANALYSIS_18A_STEP_CONSOLIDATION.md` — Step-by-step consolidation analysis
 - `_DESIGN_18B_STRUCTURE.md` — 18B structure design document
 - `_MERGE_RATIONALE_AND_RISK_ANALYSIS.md` — Merge justification and risk analysis

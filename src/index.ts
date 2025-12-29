@@ -290,6 +290,17 @@ export {
   badgeVariants,
 } from "./PRIMITIVES/Badge";
 
+// Chip component (CVA-based, token-driven, Extension layer)
+export {
+  Chip,
+  CHIP_RADIUS_VALUES,
+  CHIP_VARIANTS,
+  type ChipProps,
+  type ChipRadius,
+  type ChipVariant,
+  chipVariants,
+} from "./COMPOSITION/overlays/Chip";
+
 // Typography components (CVA-based, token-driven)
 export { Heading, type HeadingProps, headingVariants } from "./PRIMITIVES/Heading";
 
@@ -321,6 +332,14 @@ export {
   SelectViewport,
   type SelectViewportProps,
 } from "./COMPOSITION/controls/Select";
+
+// MultiSelect component (Extension, composes Select + Checkbox, token-driven)
+export {
+  MultiSelect,
+  type MultiSelectOption,
+  type MultiSelectProps,
+  type MultiSelectSize,
+} from "./COMPOSITION/controls/MultiSelect/MultiSelect.index";
 
 // Avatar component (Radix-based, token-driven)
 export {
@@ -358,6 +377,15 @@ export {
   type ModalTriggerProps,
 } from "./COMPOSITION/overlays/Modal";
 // Note: ModalPortal is internal-only and not exported
+
+// FileUpload component (Extension composite)
+export {
+  FileUpload,
+  type FileUploadError,
+  type FileUploadProps,
+  type FileUploadSize,
+  type FileUploadVariant,
+} from "./COMPOSITION/overlays/FileUpload/index";
 
 // Form components (CVA-based, token-driven)
 export {
@@ -465,9 +493,16 @@ export {
 // ============================================================================
 // OVERLAY SYSTEM
 // ============================================================================
-// Overlay components (Portal, Backdrop, Dialog, Toast)
+// Overlay components (Portal, Backdrop, Dialog, Toast, Accordion)
 // Note: Modal is exported from ./components/modal, not ./components/overlays
 export {
+  Accordion,
+  type AccordionContentProps,
+  type AccordionItemProps,
+  type AccordionRootProps,
+  type AccordionSize,
+  type AccordionTriggerProps,
+  type AccordionVariant,
   Backdrop,
   type BackdropProps,
   Dialog,
@@ -485,6 +520,13 @@ export {
   type DialogTitleProps,
   Portal,
   type PortalProps,
+  Spinner,
+  type SpinnerEasing,
+  type SpinnerLabelPosition,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerTone,
+  type SpinnerVariant,
   Toast,
   type ToastAction,
   type ToastData,
@@ -498,6 +540,19 @@ export {
   type ToastViewportProps,
   useToast,
 } from "./COMPOSITION/overlays";
+
+// Combobox (Extension overlay component - autocomplete with dropdown)
+export {
+  Combobox,
+  ComboboxInput,
+  type ComboboxInputProps,
+  ComboboxList,
+  type ComboboxListProps,
+  type ComboboxOption,
+  ComboboxRoot,
+  type ComboboxRootProps,
+  type ComboboxSize,
+} from "./COMPOSITION/overlays/Combobox";
 
 // ============================================================================
 // NOTIFICATION SYSTEM

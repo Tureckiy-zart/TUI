@@ -5,7 +5,7 @@
 **Date Created:** 2025-12-27  
 **Operator:** tureckiy  
 **Assistant:** Auto (Claude Sonnet 4.5)  
-**Pipeline:** FOUNDATION_STEP_PIPELINE (18A)  
+**Pipeline:** COMPONENT_REFACTORING_PIPELINE (18A)  
 **Status:** ✅ Complete (Re-run)
 
 **Previous Pipeline Run:** 2025-12-25 (Complete, FOUNDATION LOCKED)
@@ -1896,6 +1896,28 @@ All findings documented.
 - NONBLOCK-7: Remove VariantProps to eliminate CVA type leakage (DX improvement)
 - NONBLOCK-8: Clarify state prop vs checked/disabled relationship (API design)
 
+**Storybook Stories Summary:**
+- **Total Stories:** 19 stories
+  - Default
+  - Checked
+  - Disabled
+  - DisabledChecked
+  - Matrix (canonical)
+  - SizesGallery (canonical)
+  - AllVariants
+  - States (canonical)
+  - RadioGroupBasic
+  - RadioGroupVertical
+  - RadioGroupHorizontal
+  - RadioGroupSizes
+  - WithLabel
+  - Controlled
+  - Uncontrolled
+  - ErrorState
+  - DisabledInGroup
+  - KeyboardNavigation
+  - Accessibility
+
 **Component Status:**
 - ✅ LOCKED (Confirmed Foundation, Locked 2025-12-25)
 - ✅ CVA structure compliant (tokenCVA, type constraints, explicit unions)
@@ -2349,7 +2371,7 @@ Component is already accessible.
 ## 🎯 PIPELINE 18A COMPLETION SUMMARY
 
 **Component:** Radio  
-**Pipeline:** Pipeline 18A (FOUNDATION_STEP_PIPELINE)  
+**Pipeline:** Pipeline 18A (COMPONENT_REFACTORING_PIPELINE)  
 **Status:** ✅ **COMPLETE**  
 **Completion Date:** 2025-12-27  
 **Total Duration:** ~2 hours (re-run, no changes required)

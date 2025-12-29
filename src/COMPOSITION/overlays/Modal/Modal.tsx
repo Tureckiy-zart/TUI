@@ -36,7 +36,7 @@
  *
  * **REFERENCE:**
  * - docs/architecture/FOUNDATION_LOCK.md (Legacy Foundation Components section)
- * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
+ * - docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md
  *
  * ============================================================================
  *

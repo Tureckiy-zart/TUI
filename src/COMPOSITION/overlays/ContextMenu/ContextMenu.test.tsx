@@ -42,7 +42,7 @@ describe("ContextMenu", () => {
           expect(screen.getByText("Copy")).toBeInTheDocument();
           expect(screen.getByText("Cut")).toBeInTheDocument();
         },
-        { timeout: 10000 },
+        { timeout: 5000 },
       );
     });
 

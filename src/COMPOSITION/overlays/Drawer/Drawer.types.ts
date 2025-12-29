@@ -2,11 +2,10 @@
  * Drawer Component Types
  *
  * TypeScript type definitions for Drawer component and its subcomponents.
+ * All types follow TYPING_STANDARD (explicit union types, no CVA-derived types).
  */
 
-import type { VariantProps } from "class-variance-authority";
-
-import type { drawerVariants } from "./drawer-variants";
+import * as React from "react";
 
 /**
  * Drawer position variants
@@ -27,13 +26,10 @@ export type DrawerBackdropVariant = "default" | "blurred" | "transparent";
  * Drawer Props
  * Main props interface for Drawer component
  */
-export interface DrawerProps
-  extends
-    Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      "onClick" | "role" | "aria-modal" | "aria-labelledby" | "aria-describedby"
-    >,
-    VariantProps<typeof drawerVariants> {
+export interface DrawerProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onClick" | "role" | "aria-modal" | "aria-labelledby" | "aria-describedby"
+> {
   /**
    * Whether drawer is open
    */

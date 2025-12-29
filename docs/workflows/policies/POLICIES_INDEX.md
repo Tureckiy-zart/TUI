@@ -162,7 +162,7 @@ Policies that define how governance reviews and retention work.
 - Complete public API: export all public components and types
 
 **Related:**
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline reference
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline reference
 
 ---
 
@@ -181,7 +181,7 @@ Policies that define how governance reviews and retention work.
 - Disabled controls for internal and non-controllable props
 
 **Related:**
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline Step 11 reference
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline Step 11 reference
 
 ---
 
@@ -300,6 +300,6 @@ Policies that define how governance reviews and retention work.
 ## Related Documents
 
 - [DOCUMENTATION_CANON_LOCK.md](../../architecture/DOCUMENTATION_CANON_LOCK.md) - Documentation structure
-- [FOUNDATION_STEP_PIPELINE.md](../foundation/FOUNDATION_STEP_PIPELINE.md) - Pipeline 18A reference
+- [COMPONENT_REFACTORING_PIPELINE.md](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - Pipeline 18A reference
 - [COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc](../../../.cursor/rules/COMPONENT_CREATION_AND_REFACTOR_CHECKLIST.mdc) - Cursor rules reference
 

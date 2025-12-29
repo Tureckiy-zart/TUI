@@ -3,7 +3,7 @@
 /**
  * Drawer Component
  *
- * Complete CVA-driven, tokenized, theme-aware drawer overlay with focus trap,
+ * Complete token-driven, theme-aware drawer overlay with focus trap,
  * keyboard controls, and portal rendering. Supports left, right, and bottom positions.
  *
  * Features:
@@ -17,6 +17,7 @@
  * - Initial focus on first interactive element
  * - Position variants: left, right, bottom
  * - Size variants: sm, md, lg
+ * - Motion animations (slide-in/out) with reduced motion support
  */
 
 import * as React from "react";
@@ -84,31 +85,10 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
       returnFocusRef,
     });
 
-    // Ensure initial focus when drawer opens
-    React.useEffect(() => {
-      if (open && contentRef.current) {
-        // Small delay to ensure DOM is ready
-        const timer = setTimeout(() => {
-          const focusableElements = contentRef.current?.querySelectorAll<HTMLElement>(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-          );
-          const firstElement = focusableElements?.[0];
-          if (firstElement) {
-            firstElement.focus();
-          } else {
-            // If no focusable element, focus the drawer container itself
-            contentRef.current?.focus();
-          }
-        }, 0);
-        return () => clearTimeout(timer);
-      }
-      return undefined;
-    }, [open]);
-
-    // Scroll lock
+    // Scroll lock - prevents body scroll when drawer is open
     useScrollLock({ enabled: open });
 
-    // Escape key handler
+    // Handle escape key
     React.useEffect(() => {
       if (!open || !closeOnEscape) {
         return;
@@ -129,48 +109,58 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
     // Handle backdrop click
     const handleBackdropClick = React.useCallback(
       (event: React.MouseEvent<HTMLDivElement>): void => {
-        if (closeOnBackdropClick && event.target === event.currentTarget) {
+        if (!closeOnBackdropClick) {
+          return;
+        }
+
+        // Check if click is on backdrop (container) or backdrop element itself
+        const target = event.target as HTMLElement;
+        const currentTarget = event.currentTarget as HTMLElement;
+
+        // Click on container itself (empty space) or on backdrop element
+        const isBackdropClick =
+          target === currentTarget || target.getAttribute("aria-hidden") === "true";
+
+        if (isBackdropClick) {
+          event.preventDefault();
           onClose();
         }
       },
       [closeOnBackdropClick, onClose],
     );
 
-    // Map backdropVariant to Backdrop variant
-    const backdropVariantMap: Record<DrawerBackdropVariant, "default" | "blurred" | "transparent"> =
-      {
-        default: "default",
-        blurred: "blurred",
-        transparent: "transparent",
+    // ARIA props
+    const ariaProps = React.useMemo(() => {
+      const props: Record<string, string> = {
+        role: "dialog",
+        "aria-modal": "true",
       };
 
-    const backdropVariantForBackdrop = backdropVariantMap[backdropVariant] || "default";
+      if (titleId) {
+        props["aria-labelledby"] = titleId;
+      }
 
-    // Build aria attributes
-    const ariaProps: React.HTMLAttributes<HTMLDivElement> = {
-      role: "dialog",
-      "aria-modal": "true",
-    };
+      if (descriptionId) {
+        props["aria-describedby"] = descriptionId;
+      }
 
-    if (titleId) {
-      ariaProps["aria-labelledby"] = titleId;
-    }
+      return props;
+    }, [titleId, descriptionId]);
 
-    if (descriptionId) {
-      ariaProps["aria-describedby"] = descriptionId;
-    }
+    // Map backdrop variant for Backdrop component
+    const backdropVariantForBackdrop: DrawerBackdropVariant = backdropVariant;
+
+    // Container classes for positioning
+    const containerClasses = cn(
+      "fixed inset-0 z-40 flex",
+      position === "left" && "items-start justify-start",
+      position === "right" && "items-start justify-end",
+      position === "bottom" && "flex items-end justify-center",
+    );
 
     if (!open) {
       return null;
     }
-
-    // Determine container classes based on position
-    const containerClasses = cn(
-      "fixed inset-0 z-40",
-      position === "left" && "flex items-start justify-start",
-      position === "right" && "flex items-start justify-end",
-      position === "bottom" && "flex items-end justify-center",
-    );
 
     return (
       <Portal>
@@ -203,6 +193,17 @@ DrawerContent.displayName = "DrawerContent";
 
 /**
  * Drawer Header - Header section with spacing
+ *
+ * Provides consistent spacing and layout for drawer header content.
+ * Uses token-based spacing (marginBottom, gap) from OVERLAY_TOKENS.drawer.spacing.header.
+ *
+ * @example
+ * ```tsx
+ * <Drawer.Header>
+ *   <Heading level={3} id="drawer-title">Drawer Title</Heading>
+ *   <Text size="sm" tone="muted">Optional description</Text>
+ * </Drawer.Header>
+ * ```
  */
 const DrawerHeader = React.forwardRef<HTMLDivElement, DrawerHeaderProps>(
   ({ className, ...props }, ref) => {
@@ -225,6 +226,17 @@ DrawerHeader.displayName = "DrawerHeader";
 
 /**
  * Drawer Body - Main content area
+ *
+ * Scrollable content area that takes remaining space in drawer.
+ * Uses flex-1 for layout and overflow-y-auto for scrolling.
+ *
+ * @example
+ * ```tsx
+ * <Drawer.Body>
+ *   <Text>Scrollable content goes here</Text>
+ *   {/* Long content that will scroll *\/}
+ * </Drawer.Body>
+ * ```
  */
 const DrawerBody = React.forwardRef<HTMLDivElement, DrawerBodyProps>(
   ({ className, ...props }, ref) => {
@@ -236,6 +248,18 @@ DrawerBody.displayName = "DrawerBody";
 
 /**
  * Drawer Footer - Footer section with layout
+ *
+ * Provides consistent spacing and responsive layout for drawer footer content.
+ * Uses token-based spacing (marginTop, gap) from OVERLAY_TOKENS.drawer.spacing.footer.
+ * Layout: flex-col-reverse on mobile, flex-row sm:justify-end on desktop.
+ *
+ * @example
+ * ```tsx
+ * <Drawer.Footer>
+ *   <Button variant="outline">Cancel</Button>
+ *   <Button variant="primary">Save</Button>
+ * </Drawer.Footer>
+ * ```
  */
 const DrawerFooter = React.forwardRef<HTMLDivElement, DrawerFooterProps>(
   ({ className, ...props }, ref) => {
@@ -256,7 +280,38 @@ const DrawerFooter = React.forwardRef<HTMLDivElement, DrawerFooterProps>(
 
 DrawerFooter.displayName = "DrawerFooter";
 
-// Attach subcomponents
+/**
+ * Drawer Component
+ *
+ * Complete drawer overlay component with compound subcomponents.
+ *
+ * **Usage:**
+ * @example
+ * ```tsx
+ * <Drawer open={isOpen} onClose={() => setIsOpen(false)} titleId="drawer-title">
+ *   <Drawer.Header>
+ *     <Heading level={3} id="drawer-title">Drawer Title</Heading>
+ *   </Drawer.Header>
+ *   <Drawer.Body>
+ *     <Text>Drawer content</Text>
+ *   </Drawer.Body>
+ *   <Drawer.Footer>
+ *     <Button onClick={() => setIsOpen(false)}>Close</Button>
+ *   </Drawer.Footer>
+ * </Drawer>
+ * ```
+ *
+ * **Subcomponents:**
+ * - `Drawer.Header` - Header section with spacing tokens
+ * - `Drawer.Body` - Scrollable main content area
+ * - `Drawer.Footer` - Footer section with responsive layout
+ *
+ * **Foundation Composition:**
+ * - Uses `Portal` for rendering outside DOM hierarchy
+ * - Uses `Backdrop` for overlay background
+ * - Uses `useFocusLock` for focus trap
+ * - Uses `useScrollLock` for body scroll lock
+ */
 const Drawer = Object.assign(DrawerContent, {
   Content: DrawerContent,
   Header: DrawerHeader,

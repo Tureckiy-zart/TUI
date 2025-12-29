@@ -2,7 +2,7 @@
 
 This document is deprecated and must not be used for new work.
 
-**Canonical pipeline:** [docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md](./FOUNDATION_STEP_PIPELINE.md)
+**Canonical pipeline:** [docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md](./COMPONENT_REFACTORING_PIPELINE.md)
 
 **Reason:** Replaced by refined pipeline with updated canon links.
 

@@ -16,7 +16,7 @@
  *
  * **REFERENCE:**
  * - docs/architecture/FOUNDATION_LOCK.md
- * - docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md
+ * - docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md
  * - docs/reports/audit/TABS_BASELINE_REPORT.md
  *
  * ============================================================================

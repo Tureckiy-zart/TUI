@@ -12,7 +12,7 @@ import { useRef, useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
 import { Dialog } from "@/COMPOSITION/overlays/Dialog";
-import { Drawer } from "@/COMPOSITION/overlays/Drawer";
+import { Drawer } from "@/COMPOSITION/overlays";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { PopoverWrapper } from "@/COMPOSITION/overlays/Popover";
 import { Button } from "@/PRIMITIVES/Button";

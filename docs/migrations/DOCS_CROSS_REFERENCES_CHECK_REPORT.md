@@ -24,7 +24,7 @@
 - `FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md` вместо `docs/architecture/FOUNDATION_COMPONENT_REPORT_TEMPLATE_v1.md`
 
 **Исправлено в:**
-- `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md` (6 ссылок)
+- `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` (6 ссылок)
 - `docs/_internal/ai/gpt_canon_context/GPT_PROJECT_SCOPE.md` (1 ссылка)
 
 ### 2. Неправильные пути к reference файлам
@@ -32,7 +32,7 @@
 **Проблема:** Ссылки на `docs/structure/TYPING_STANDARD.md` вместо `docs/reference/TYPING_STANDARD.md`.
 
 **Исправлено в:**
-- `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md`
+- `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md`
 - `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md`
 - `docs/_internal/ai/_to_GPT_project/README.md`
 - `docs/architecture/FOUNDATION_LIFECYCLE_PROCESS_INDEX.md`
@@ -53,7 +53,7 @@
 
 ### 1. Обновление относительных путей
 
-**Файл:** `docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md`
+**Файл:** `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md`
 
 Исправлены ссылки:
 - `FOUNDATION_LOCK.md` → `docs/architecture/FOUNDATION_LOCK.md`

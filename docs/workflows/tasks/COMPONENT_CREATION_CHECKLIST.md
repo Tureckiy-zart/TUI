@@ -10,9 +10,9 @@
 
 This checklist ensures all Extension components comply with architectural rules, Authority Contracts, and project standards. **All items must be verified before a component is considered complete.**
 
-> **Reference:** This checklist is aligned with the [Component Creation Pipeline (C0-C10)](../foundation/COMPONENT_CREATION_PIPELINE.md). All steps in this checklist correspond to pipeline steps C0-C10. **Note:** For refactoring existing components, use the [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) instead of this checklist. This checklist is for creating new components only.
+> **Reference:** This checklist is aligned with the [Component Creation Pipeline (C0-C10)](../foundation/COMPONENT_CREATION_PIPELINE.md). All steps in this checklist correspond to pipeline steps C0-C10. **Note:** For refactoring existing components, use the [Component Refactoring Pipeline (18A)](../foundation/COMPONENT_REFACTORING_PIPELINE.md) instead of this checklist. This checklist is for creating new components only.
 
-**Reference:** This checklist is based on the component lifecycle protocol for creating new components. For refactoring existing components, use the [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) instead. See [EXTENSION_AUTHORITY.md](../../architecture/EXTENSION_AUTHORITY.md) for Extension Authority Contract and [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) for all Authority Contracts.
+**Reference:** This checklist is based on the component lifecycle protocol for creating new components. For refactoring existing components, use the [Component Refactoring Pipeline (18A)](../foundation/COMPONENT_REFACTORING_PIPELINE.md) instead. See [EXTENSION_AUTHORITY.md](../../architecture/EXTENSION_AUTHORITY.md) for Extension Authority Contract and [AUTHORITY_NAVIGATION.md](../../architecture/AUTHORITY_NAVIGATION.md) for all Authority Contracts.
 
 ---
 
@@ -463,7 +463,7 @@ All API design artifacts MUST be documented in **ONE** of the following location
 - [Extension Canonical State](../../architecture/EXTENSION_STATE.md)
 - [Component Needs Inventory](./COMPONENT_NEEDS_INVENTORY.md)
 - [Component Examples Library](../../reference/COMPONENT_EXAMPLES.md) - **Reference examples including Button (Foundation) and Slider (Extension) for complex controls**
-- [Component Review & Improvement Pipeline (18A)](../foundation/FOUNDATION_STEP_PIPELINE.md) - **Canonical process for refactoring existing components**
+- [Component Refactoring Pipeline (18A)](../foundation/COMPONENT_REFACTORING_PIPELINE.md) - **Canonical process for refactoring existing components**
 - [Variants & Size Canon Authority](../../architecture/VARIANTS_SIZE_CANON.md) - **Global size scale and variant naming dictionary** (MANDATORY for components with size/variant props)
 - [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) - **Size-to-token mapping contract** (MANDATORY for components with `size` prop)
 - Component Generator Script: `scripts/generate-extension-component.ts` (see Component Scaffold Generation section above)
