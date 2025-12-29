@@ -28,11 +28,11 @@ import { X } from "lucide-react";
 import * as React from "react";
 
 import {
-  SelectTrigger as RadixSelectTrigger,
   SelectContent,
   SelectIcon,
   SelectItemText,
   SelectRoot,
+  SelectTrigger as RadixSelectTrigger,
   SelectViewport,
 } from "@/COMPOSITION/controls/Select/Select";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
@@ -164,6 +164,7 @@ const multiSelectTriggerVariants = tokenCVA({
  * - ✅ Focus management (focus restore, keyboard-only indication)
  */
 const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
+  // eslint-disable-next-line max-lines-per-function
   (
     {
       value: controlledValue,
@@ -317,28 +318,161 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       // This prevents Radix from closing the dropdown
     }, []);
 
+    // Handle dropdown open/close state
+    const handleOpenChange = React.useCallback((newOpen: boolean) => {
+      // Prevent closing dropdown when clicking inside (on items)
+      // Allow closing when clicking outside or pressing Escape
+      if (!newOpen && clickingInsideRef.current) {
+        // Clear any pending timeout
+        if (allowCloseTimeoutRef.current) {
+          clearTimeout(allowCloseTimeoutRef.current);
+          allowCloseTimeoutRef.current = null;
+        }
+        // Reset flag after a short delay to allow next interaction
+        allowCloseTimeoutRef.current = setTimeout(() => {
+          clickingInsideRef.current = false;
+          allowCloseTimeoutRef.current = null;
+        }, 100);
+        return; // Don't close
+      }
+      setIsOpen(newOpen);
+    }, []);
+
+    // Handle option select (keyboard navigation)
+    const handleOptionSelect = React.useCallback(
+      (optionValue: string, optionDisabled: boolean) =>
+        (e: React.SyntheticEvent<HTMLDivElement, Event>) => {
+          // Prevent default Select behavior (closing dropdown and setting single value)
+          e.preventDefault();
+          // Handle selection via onSelect (for keyboard navigation: Enter/Space)
+          if (!optionDisabled && !disabled) {
+            toggleOption(optionValue);
+          }
+        },
+      [disabled, toggleOption],
+    );
+
+    // Handle option pointer down
+    const handleOptionPointerDown = React.useCallback(
+      (optionValue: string, optionDisabled: boolean) => (e: React.PointerEvent) => {
+        const target = e.target as HTMLElement;
+        const clickedCheckbox = target.closest('button[role="checkbox"]');
+
+        if (clickedCheckbox) {
+          // Click was on checkbox - let checkbox handle it via onPointerDown
+          // Don't prevent default, let checkbox handle the event
+          clickingInsideRef.current = true;
+          return; // Don't prevent default, let checkbox handle
+        }
+
+        // Click was on text area
+        clickingInsideRef.current = true;
+        e.preventDefault(); // Prevent Radix from closing dropdown
+        if (!optionDisabled && !disabled) {
+          toggleOption(optionValue);
+        }
+        // Don't reset flag immediately - let onOpenChange handle it
+      },
+      [disabled, toggleOption],
+    );
+
+    // Handle checkbox change
+    const handleCheckboxChange = React.useCallback(
+      (optionValue: string, optionDisabled: boolean) => () => {
+        // Handle checkbox toggle (for both mouse and keyboard)
+        // Mark that we're clicking inside to prevent dropdown from closing
+        clickingInsideRef.current = true;
+        if (!optionDisabled && !disabled) {
+          toggleOption(optionValue);
+        }
+        // Don't reset flag immediately - let onOpenChange handle it via timeout
+      },
+      [disabled, toggleOption],
+    );
+
+    // Render option item
+    const renderOptionItem = React.useCallback(
+      (option: MultiSelectOption) => {
+        const isSelected = selectedValues.includes(option.value);
+        const optionDisabled = option.disabled || disabled;
+        return (
+          <SelectPrimitive.Item
+            key={option.value}
+            value={option.value}
+            disabled={optionDisabled}
+            onSelect={handleOptionSelect(option.value, optionDisabled)}
+            onPointerDown={handleOptionPointerDown(option.value, optionDisabled)}
+            className={cn(
+              "relative flex cursor-pointer select-none items-center gap-sm outline-none",
+              INPUT_TOKENS.padding.horizontal.md,
+              INPUT_TOKENS.padding.vertical.md,
+              INPUT_TOKENS.radius.sm,
+              INPUT_TOKENS.fontSize.sm,
+              "focus-visible:bg-accent focus-visible:text-accent-foreground",
+              "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+            )}
+          >
+            <Checkbox
+              checked={isSelected}
+              disabled={optionDisabled}
+              size="sm"
+              variant="outline"
+              aria-label={`Select ${option.label}`}
+              onCheckedChange={handleCheckboxChange(option.value, optionDisabled)}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                clickingInsideRef.current = true;
+              }}
+            />
+            <SelectItemText>{option.label}</SelectItemText>
+          </SelectPrimitive.Item>
+        );
+      },
+      [selectedValues, disabled, handleOptionSelect, handleOptionPointerDown, handleCheckboxChange],
+    );
+
+    // Render trigger content
+    const renderTriggerContent = React.useCallback(() => {
+      if (selectedValues.length === 0) {
+        return <span className="text-foreground opacity-70">{placeholder}</span>;
+      }
+      return (
+        <>
+          {visibleTags.map((option) => renderTagFn(option, () => removeValue(option.value)))}
+          {hiddenTagsCount > 0 && (
+            <span
+              className={cn(
+                CHIP_TOKENS.layout,
+                CHIP_TOKENS.padding.horizontal,
+                CHIP_TOKENS.padding.vertical,
+                CHIP_TOKENS.fontSize,
+                CHIP_TOKENS.fontWeight,
+                CHIP_TOKENS.radius.md,
+                CHIP_TOKENS.border,
+                CHIP_TOKENS.variant.outline.border,
+                CHIP_TOKENS.variant.outline.text,
+                CHIP_TOKENS.variant.outline.background,
+              )}
+            >
+              +{hiddenTagsCount} more
+            </span>
+          )}
+        </>
+      );
+    }, [
+      selectedValues.length,
+      placeholder,
+      visibleTags,
+      renderTagFn,
+      removeValue,
+      hiddenTagsCount,
+    ]);
+
     return (
       <div ref={ref} className="w-full">
         <SelectRoot
           open={isOpen}
-          onOpenChange={(newOpen) => {
-            // Prevent closing dropdown when clicking inside (on items)
-            // Allow closing when clicking outside or pressing Escape
-            if (!newOpen && clickingInsideRef.current) {
-              // Clear any pending timeout
-              if (allowCloseTimeoutRef.current) {
-                clearTimeout(allowCloseTimeoutRef.current);
-                allowCloseTimeoutRef.current = null;
-              }
-              // Reset flag after a short delay to allow next interaction
-              allowCloseTimeoutRef.current = setTimeout(() => {
-                clickingInsideRef.current = false;
-                allowCloseTimeoutRef.current = null;
-              }, 100);
-              return; // Don't close
-            }
-            setIsOpen(newOpen);
-          }}
+          onOpenChange={handleOpenChange}
           disabled={disabled}
           onValueChange={handleSelectValueChange}
         >
@@ -357,33 +491,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             aria-labelledby={ariaLabelledBy}
           >
             <div className="flex flex-1 flex-wrap items-center gap-xs overflow-hidden">
-              {selectedValues.length === 0 ? (
-                <span className="text-foreground opacity-70">{placeholder}</span>
-              ) : (
-                <>
-                  {visibleTags.map((option) =>
-                    renderTagFn(option, () => removeValue(option.value)),
-                  )}
-                  {hiddenTagsCount > 0 && (
-                    <span
-                      className={cn(
-                        CHIP_TOKENS.layout,
-                        CHIP_TOKENS.padding.horizontal,
-                        CHIP_TOKENS.padding.vertical,
-                        CHIP_TOKENS.fontSize,
-                        CHIP_TOKENS.fontWeight,
-                        CHIP_TOKENS.radius.md,
-                        CHIP_TOKENS.border,
-                        CHIP_TOKENS.variant.outline.border,
-                        CHIP_TOKENS.variant.outline.text,
-                        CHIP_TOKENS.variant.outline.background,
-                      )}
-                    >
-                      +{hiddenTagsCount} more
-                    </span>
-                  )}
-                </>
-              )}
+              {renderTriggerContent()}
             </div>
             <SelectIcon />
           </RadixSelectTrigger>
@@ -401,74 +509,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             )}
           >
             <SelectViewport aria-multiselectable="true">
-              {options.map((option) => {
-                const isSelected = selectedValues.includes(option.value);
-                return (
-                  <SelectPrimitive.Item
-                    key={option.value}
-                    value={option.value}
-                    disabled={option.disabled || disabled}
-                    onSelect={(e) => {
-                      // Prevent default Select behavior (closing dropdown and setting single value)
-                      e.preventDefault();
-                      // Handle selection via onSelect (for keyboard navigation: Enter/Space)
-                      if (!option.disabled && !disabled) {
-                        toggleOption(option.value);
-                      }
-                    }}
-                    onPointerDown={(e) => {
-                      const target = e.target as HTMLElement;
-                      const clickedCheckbox = target.closest('button[role="checkbox"]');
-
-                      if (clickedCheckbox) {
-                        // Click was on checkbox - let checkbox handle it via onPointerDown
-                        // Don't prevent default, let checkbox handle the event
-                        clickingInsideRef.current = true;
-                        return; // Don't prevent default, let checkbox handle
-                      }
-
-                      // Click was on text area
-                      clickingInsideRef.current = true;
-                      e.preventDefault(); // Prevent Radix from closing dropdown
-                      if (!option.disabled && !disabled) {
-                        toggleOption(option.value);
-                      }
-                      // Don't reset flag immediately - let onOpenChange handle it
-                    }}
-                    className={cn(
-                      "relative flex cursor-pointer select-none items-center gap-sm outline-none",
-                      INPUT_TOKENS.padding.horizontal.md,
-                      INPUT_TOKENS.padding.vertical.md,
-                      INPUT_TOKENS.radius.sm,
-                      INPUT_TOKENS.fontSize.sm,
-                      "focus-visible:bg-accent focus-visible:text-accent-foreground",
-                      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                    )}
-                  >
-                    <Checkbox
-                      checked={isSelected}
-                      disabled={option.disabled || disabled}
-                      size="sm"
-                      variant="outline"
-                      aria-label={`Select ${option.label}`}
-                      onCheckedChange={() => {
-                        // Handle checkbox toggle (for both mouse and keyboard)
-                        // Mark that we're clicking inside to prevent dropdown from closing
-                        clickingInsideRef.current = true;
-                        if (!option.disabled && !disabled) {
-                          toggleOption(option.value);
-                        }
-                        // Don't reset flag immediately - let onOpenChange handle it via timeout
-                      }}
-                      onPointerDown={(e) => {
-                        e.stopPropagation();
-                        clickingInsideRef.current = true;
-                      }}
-                    />
-                    <SelectItemText>{option.label}</SelectItemText>
-                  </SelectPrimitive.Item>
-                );
-              })}
+              {options.map(renderOptionItem)}
             </SelectViewport>
           </SelectContent>
         </SelectRoot>

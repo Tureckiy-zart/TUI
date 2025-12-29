@@ -113,9 +113,9 @@ describe("FileUpload", () => {
 
       render(<FileUpload accept="image/*" onError={handleError} onFileSelect={() => {}} />);
 
-      const input = screen.getByRole("button", { name: /drop files/i }).querySelector(
-        'input[type="file"]',
-      ) as HTMLInputElement;
+      const input = screen
+        .getByRole("button", { name: /drop files/i })
+        .querySelector('input[type="file"]') as HTMLInputElement;
       const file = createMockFile("document.pdf", 1000, "application/pdf");
 
       // Create a FileList-like object manually for testing
@@ -167,9 +167,9 @@ describe("FileUpload", () => {
       );
 
       // Use more specific selector to avoid multiple buttons (dropzone + remove button)
-      const input = screen.getByRole("button", { name: /drop files/i }).querySelector(
-        'input[type="file"]',
-      ) as HTMLInputElement;
+      const input = screen
+        .getByRole("button", { name: /drop files/i })
+        .querySelector('input[type="file"]') as HTMLInputElement;
       const files = [
         createMockFile("test1.jpg", 1000, "image/jpeg"),
         createMockFile("test2.jpg", 1000, "image/jpeg"),

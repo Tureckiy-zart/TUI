@@ -87,7 +87,7 @@ export function useFocusLock({
 
     const container = containerRef.current;
     const previousActiveElement = document.activeElement as HTMLElement;
-    
+
     // Capture returnFocusRef.current value at effect execution time
     // to avoid stale closure issues in cleanup function
     const returnFocusElement = returnFocusRef?.current;
@@ -197,7 +197,7 @@ export function useFocusLock({
             }
           }
         }
-        
+
         // Fallback to previous active element
         if (previousActiveElementRef.current) {
           const element = previousActiveElementRef.current;

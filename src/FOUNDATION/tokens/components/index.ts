@@ -86,6 +86,18 @@ export {
 // Form tokens
 export { FORM_TOKENS, type FormFieldSpacing, type FormLabelSpacing } from "./form";
 
+// FileUpload tokens
+export {
+  FILE_UPLOAD_TOKENS,
+  type FileUploadDropzoneGap,
+  type FileUploadDropzoneHeight,
+  type FileUploadDropzonePaddingHorizontal,
+  type FileUploadDropzonePaddingVertical,
+  type FileUploadDropzoneRadius,
+  type FileUploadPreviewFontSize,
+  type FileUploadThumbnailSize,
+} from "./file-upload";
+
 // Checkbox tokens
 export {
   CHECKBOX_TOKENS,
