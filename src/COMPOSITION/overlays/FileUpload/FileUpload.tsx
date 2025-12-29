@@ -371,22 +371,32 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           aria-disabled={disabled}
         >
           {/* Upload Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={size === "lg" ? 48 : size === "sm" ? 32 : 40}
-            height={size === "lg" ? 48 : size === "sm" ? 32 : 40}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-[hsl(var(--muted-foreground))]"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="17 8 12 3 7 8"></polyline>
-            <line x1="12" y1="3" x2="12" y2="15"></line>
-          </svg>
+          {(() => {
+            let iconSize = 40; // default (md)
+            if (size === "sm") {
+              iconSize = 32;
+            } else if (size === "lg") {
+              iconSize = 48;
+            }
+            return (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={iconSize}
+                height={iconSize}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-muted-foreground"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            );
+          })()}
 
           {/* Text */}
           <div className="text-center">
