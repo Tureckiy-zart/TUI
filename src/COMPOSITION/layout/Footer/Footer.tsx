@@ -99,6 +99,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
       ariaLabel,
       children,
       className,
+      style,
       ...props
     },
     ref,
@@ -107,8 +108,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
     const pyBaseValue = getBaseValue<typeof py>(py);
     const bgBaseValue = getBaseValue<ColorValue>(bg);
 
-    const style: React.CSSProperties = {
-      ...props.style,
+    const computedStyle: React.CSSProperties = {
       ...(pxBaseValue !== undefined && {
         paddingLeft: getSpacingCSSVar(String(pxBaseValue)),
         paddingRight: getSpacingCSSVar(String(pxBaseValue)),
@@ -120,13 +120,14 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
       ...(bgBaseValue !== undefined && {
         backgroundColor: getColorCSSVar(bgBaseValue),
       }),
+      ...style,
     };
 
     return (
       <footer
         ref={ref}
         className={cn("w-full", border && "border-t border-border", className)}
-        style={style}
+        style={Object.keys(computedStyle).length > 0 ? computedStyle : undefined}
         aria-label={ariaLabel}
         {...props}
       >

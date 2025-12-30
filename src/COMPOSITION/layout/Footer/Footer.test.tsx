@@ -130,4 +130,26 @@ describe("Footer component", () => {
       backgroundColor: "var(--background)",
     });
   });
+
+  it("should merge user style with computed styles without overriding", () => {
+    const { container } = render(
+      <Footer px="md" py="lg" bg="muted" style={{ color: "red", paddingTop: "20px" }}>
+        Content
+      </Footer>,
+    );
+    const footerEl = container.querySelector("footer");
+    // Computed styles should be preserved
+    expect(footerEl).toHaveStyle({
+      paddingLeft: "var(--spacing-md)",
+      paddingRight: "var(--spacing-md)",
+      backgroundColor: "var(--muted)",
+      // User's paddingTop should override computed paddingTop
+      paddingTop: "20px",
+      // But paddingBottom should remain from computed styles
+      paddingBottom: "var(--spacing-lg)",
+    });
+    // User style should be merged (color should be present and computed)
+    const computedColor = window.getComputedStyle(footerEl!).color;
+    expect(computedColor).toBe("rgb(255, 0, 0)");
+  });
 });
