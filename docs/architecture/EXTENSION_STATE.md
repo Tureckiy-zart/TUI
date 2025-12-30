@@ -598,6 +598,26 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Breaking Changes:** Variant names changed (flat→default, raised→elevated, outline→outlined, sunken→filled, subtle→subtle) per VARIANTS_SIZE_CANON
     - **Audit Report:** `docs/reports/audit/SURFACE_BASELINE_REPORT.md`
 
+27. **Footer** - `src/COMPOSITION/layout/Footer/Footer.tsx`
+    - **Status:** ✅ **ALLOWED** (Component Creation Pipeline C0-C10 Complete, 2025-12-30)
+    - **Creation Date:** 2025-12-30
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
+    - **Type:** Extension Layer Layout Component
+    - **Category:** layout
+    - **Purpose:** Page-level footer container for bottom content (copyright, links, navigation, metadata). Provides semantic `<footer>` element with flexible content slots (left, center, right).
+    - **Key Characteristics:**
+      - Semantic `<footer>` element (implicit role="contentinfo")
+      - Flexible content slots (left, center, right) or children prop
+      - Token-driven padding (px, py) and background color (bg)
+      - Optional top border
+      - Uses Stack internally for layout composition
+      - Responsive token support
+      - Motion: NO MOTION BY DESIGN (static layout container)
+    - **Token Compliance:** ✅ 100% (spacing tokens, color tokens)
+    - **Use Cases:** Page footers, application footers, copyright sections, navigation links, metadata display
+    - Exports: `Footer`, `FooterProps`
+
 ### Container Components
 
 27. **Card** - `src/components/containers/Card.tsx`

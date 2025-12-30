@@ -51,6 +51,9 @@ jobs:
       - name: Run lint checks
         run: pnpm lint:check
 
+      - name: Check App Router Compatibility
+        run: pnpm check:next-document
+
       - name: Run unit tests
         run: pnpm test
 
@@ -64,6 +67,7 @@ jobs:
         run: |
           echo "✅ Quality checks complete"
           echo "   • Linting"
+          echo "   • App Router compatibility"
           echo "   • Unit tests"
           echo "   • Motion integrity tests"
           echo "   • Accessibility (axe + contrast)"

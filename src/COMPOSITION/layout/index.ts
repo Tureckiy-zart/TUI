@@ -28,5 +28,8 @@ export {
 // Section
 export { Section, type SectionProps } from "./Section/Section";
 
+// Footer
+export { Footer, type FooterProps } from "./Footer";
+
 // Re-export shared types
 export type * from "./layout.types";
