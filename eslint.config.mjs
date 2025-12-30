@@ -151,6 +151,27 @@ export default [
       // require() вместо import - ошибка (используем ES6 modules)
       "@typescript-eslint/no-require-imports": "error",
 
+      // Запрет импортов из next/document (только для pages/_document.tsx, несовместимо с App Router)
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "next/document",
+              message:
+                "next/document should ONLY be used in pages/_document.tsx. UI library components must not import Html or any other component from next/document. This is incompatible with Next.js App Router.",
+            },
+          ],
+          patterns: [
+            {
+              group: ["next/document/*"],
+              message:
+                "next/document should ONLY be used in pages/_document.tsx. UI library components must not import from next/document. This is incompatible with Next.js App Router.",
+            },
+          ],
+        },
+      ],
+
       // Дублирующиеся импорты - предупреждение
       "no-duplicate-imports": "warn",
 
