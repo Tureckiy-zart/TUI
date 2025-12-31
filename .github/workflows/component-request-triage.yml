@@ -8,7 +8,7 @@ on:
 jobs:
   triage:
     runs-on: ubuntu-latest
-    if: github.event.issue.labels.*.name contains 'component-request'
+    if: github.event_name == 'issues' && contains(join(github.event.issue.labels.*.name, ','), 'component-request')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
