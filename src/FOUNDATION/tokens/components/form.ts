@@ -27,6 +27,11 @@ export const FORM_TOKENS = {
      * Color for required asterisk mark
      */
     requiredMark: "text-destructive", // Color for required asterisk
+    /**
+     * Disabled state styling for labels
+     * Uses explicit disabled semantic token for better accessibility
+     */
+    disabled: "peer-disabled:text-disabled-foreground", // Disabled text color using explicit disabled semantic token
   } as const,
 
   /**

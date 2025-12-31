@@ -1,5 +1,6 @@
 import { Link } from "@/PRIMITIVES/Link";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 import { Footer } from "./Footer";
 
 const meta: Meta<typeof Footer> = {
@@ -275,19 +276,11 @@ export const FullExample: Story = {
           </Link>
         </nav>
       }
-      right={
-        <div className="flex items-center gap-md">
-          <Link href="#" size="sm" variant="ghost">
-            Twitter
-          </Link>
-          <Link href="#" size="sm" variant="ghost">
-            Facebook
-          </Link>
-          <Link href="#" size="sm" variant="ghost">
-            Instagram
-          </Link>
-        </div>
-      }
+      socialLinks={[
+        { icon: <Twitter className="h-4 w-4" />, label: "Twitter", href: "#" },
+        { icon: <Facebook className="h-4 w-4" />, label: "Facebook", href: "#" },
+        { icon: <Instagram className="h-4 w-4" />, label: "Instagram", href: "#" },
+      ]}
     />
   ),
   parameters: {
@@ -315,6 +308,57 @@ export const WithChildren: Story = {
     docs: {
       description: {
         story: "Footer with children prop (alternative to left/center/right slots)",
+      },
+    },
+  },
+};
+
+/**
+ * Footer with social links
+ */
+export const WithSocialLinks: Story = {
+  render: () => (
+    <div className="space-y-lg">
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">With icons</h3>
+        <Footer
+          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          socialLinks={[
+            { icon: <Twitter className="h-4 w-4" />, label: "Twitter", href: "#" },
+            { icon: <Facebook className="h-4 w-4" />, label: "Facebook", href: "#" },
+            { icon: <Instagram className="h-4 w-4" />, label: "Instagram", href: "#" },
+          ]}
+        />
+      </div>
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Without icons (text only)</h3>
+        <Footer
+          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          socialLinks={[
+            { label: "Twitter", href: "#" },
+            { label: "Facebook", href: "#" },
+            { label: "Instagram", href: "#" },
+          ]}
+        />
+      </div>
+      <div>
+        <h3 className="mb-sm text-lg font-semibold">Mixed (some with icons, some without)</h3>
+        <Footer
+          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          socialLinks={[
+            { icon: <Twitter className="h-4 w-4" />, label: "Twitter", href: "#" },
+            { label: "Facebook", href: "#" },
+            { icon: <Instagram className="h-4 w-4" />, label: "Instagram", href: "#" },
+          ]}
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Footer with social links - demonstrates flexibility with icons and text-only options",
       },
     },
   },

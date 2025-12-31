@@ -186,6 +186,41 @@ Tokens are **immutable contracts**, not convenience variables.
 
 ---
 
+## 🎨 Theme Tooling
+
+TUI provides **build-time CLI tooling** for generating and validating themes.
+
+**Theme Tooling is a build-time compiler, not a runtime system.**
+
+- **Theme Generator** (`pnpm theme:generate`) — creates Theme Contract v1 compliant themes
+- **Theme Validator** (`pnpm theme:validate`) — validates themes against contract
+- **Parity Checker** (`pnpm theme:parity-check`) — ensures token consistency
+
+**Key Points:**
+
+- Themes are generated at **build time**, not runtime
+- All themes live in `src/EXTENSIONS/themes/` (canonical path)
+- Validation is **mandatory** — invalid themes cannot be committed (CI enforced)
+- UI library **never generates themes** — it only consumes pre-generated CSS
+
+**Quick Start:**
+
+```bash
+# Generate a theme
+pnpm theme:generate -- --palette my-brand --base-color "210 40% 50%" --modes light,dark
+
+# Validate themes
+pnpm theme:validate -- src/EXTENSIONS/themes/*.css
+```
+
+**Documentation:**
+
+- [Theme System — Contract & Tooling](tools/theme-contract/README.md) - **Complete guide** (start here)
+- [Theme Generator](tools/theme-generator/README.md) - Generator documentation
+- [Theme Validator](tools/theme-validator/README.md) - Validator documentation
+
+---
+
 ## 🧩 Domain-Specific Components
 
 The following components are **used internally** in Tenerife Music projects

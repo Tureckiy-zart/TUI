@@ -173,19 +173,19 @@ export const SWITCH_TOKENS = {
     track: {
       default: "bg-[hsl(var(--input))]", // Default track color using CSS var
       checked: "bg-[hsl(var(--tm-primary))]", // Checked state track
-      disabled: "bg-[hsl(var(--muted))]", // Disabled state track
-      disabledChecked: "bg-[hsl(var(--muted))]", // Disabled checked track
+      disabled: "bg-[hsl(var(--tm-disabled))]", // Disabled state track - uses explicit disabled semantic token
+      disabledChecked: "bg-[hsl(var(--tm-disabled))]", // Disabled checked track - uses explicit disabled semantic token
       error: "bg-[hsl(var(--destructive))]", // Error state track using CSS var
     },
     handle: {
       default: "bg-[hsl(var(--muted-foreground))]", // Default handle color using CSS var
       checked: "bg-[hsl(var(--tm-primary-foreground))]", // Checked state handle
-      disabled: "bg-[hsl(var(--muted-foreground))]", // Disabled state handle
-      disabledChecked: "bg-[hsl(var(--muted-foreground))]", // Disabled checked handle
+      disabled: "bg-[hsl(var(--tm-disabled-foreground))]", // Disabled state handle - uses explicit disabled semantic token
+      disabledChecked: "bg-[hsl(var(--tm-disabled-foreground))]", // Disabled checked handle - uses explicit disabled semantic token
       error: "bg-[hsl(var(--destructive-foreground))]", // Error state handle
     },
     opacity: {
-      disabled: "opacity-50", // Disabled opacity
+      disabled: "opacity-50", // Disabled opacity (may be used in addition to disabled tokens, not as replacement)
     },
   } as const,
 

@@ -139,11 +139,12 @@ export const LINK_TOKENS = {
 
   /**
    * Disabled state tokens
+   * Uses explicit disabled semantic tokens for better accessibility
    */
   state: {
     disabled: {
       pointerEvents: "disabled:pointer-events-none", // Disable pointer events
-      opacity: "disabled:opacity-50", // Disabled opacity
+      text: "disabled:text-[hsl(var(--tm-disabled-foreground))]", // Disabled text color using explicit disabled semantic token
     } as const,
   } as const,
 

@@ -9,7 +9,11 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
-    include: ["src/**/*.{test,spec}.{ts,tsx}", "eslint-rules/**/*.{test,spec}.{ts,tsx}"],
+    include: [
+      "src/**/*.{test,spec}.{ts,tsx}",
+      "eslint-rules/**/*.{test,spec}.{ts,tsx}",
+      "tools/**/*.{test,spec}.{ts,tsx}",
+    ],
     exclude: ["node_modules", "dist", ".storybook", "storybook-static", ...configDefaults.exclude],
     typecheck: {
       tsconfig: "./tsconfig.vitest.json",

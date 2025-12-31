@@ -9,10 +9,10 @@ import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
 /**
  * Label component styles (fixed, no variants)
- * Typography tokens + peer-disabled pattern
+ * Typography tokens + peer-disabled pattern using explicit disabled semantic tokens
  */
 const labelClassName =
-  `${TEXT_TOKENS.fontSize.sm} ${TEXT_TOKENS.fontWeight.medium} ${TEXT_TOKENS.lineHeight.none} peer-disabled:cursor-not-allowed peer-disabled:opacity-70` as const;
+  `${TEXT_TOKENS.fontSize.sm} ${TEXT_TOKENS.fontWeight.medium} ${TEXT_TOKENS.lineHeight.none} peer-disabled:cursor-not-allowed ${FORM_TOKENS.label.disabled}` as const;
 
 export interface LabelProps extends Omit<
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,

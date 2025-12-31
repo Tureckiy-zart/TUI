@@ -133,7 +133,7 @@ describe("Label", () => {
       const label = container.querySelector("label");
       // Verify peer-disabled classes are present
       expect(label).toHaveClass("peer-disabled:cursor-not-allowed");
-      expect(label).toHaveClass("peer-disabled:opacity-70");
+      expect(label).toHaveClass("peer-disabled:text-disabled-foreground");
     });
 
     it("renders with peer input (integration test)", () => {
@@ -147,7 +147,7 @@ describe("Label", () => {
       expect(label).toBeInTheDocument();
       // peer-disabled classes should be present (visual feedback when peer is disabled)
       expect(label).toHaveClass("peer-disabled:cursor-not-allowed");
-      expect(label).toHaveClass("peer-disabled:opacity-70");
+      expect(label).toHaveClass("peer-disabled:text-disabled-foreground");
     });
   });
 

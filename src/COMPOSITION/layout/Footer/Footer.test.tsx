@@ -46,19 +46,13 @@ describe("Footer component", () => {
   it("should apply horizontal padding using spacing tokens", () => {
     const { container } = render(<Footer px="md">Content</Footer>);
     const footerEl = container.querySelector("footer");
-    expect(footerEl).toHaveStyle({
-      paddingLeft: "var(--spacing-md)",
-      paddingRight: "var(--spacing-md)",
-    });
+    expect(footerEl).toHaveClass("px-md");
   });
 
   it("should apply vertical padding using spacing tokens", () => {
     const { container } = render(<Footer py="lg">Content</Footer>);
     const footerEl = container.querySelector("footer");
-    expect(footerEl).toHaveStyle({
-      paddingTop: "var(--spacing-lg)",
-      paddingBottom: "var(--spacing-lg)",
-    });
+    expect(footerEl).toHaveClass("py-lg");
   });
 
   it("should apply background color using color tokens", () => {
@@ -115,12 +109,7 @@ describe("Footer component", () => {
   it("should apply default padding values", () => {
     const { container } = render(<Footer>Content</Footer>);
     const footerEl = container.querySelector("footer");
-    expect(footerEl).toHaveStyle({
-      paddingLeft: "var(--spacing-md)",
-      paddingRight: "var(--spacing-md)",
-      paddingTop: "var(--spacing-lg)",
-      paddingBottom: "var(--spacing-lg)",
-    });
+    expect(footerEl).toHaveClass("px-md", "py-lg");
   });
 
   it("should apply default background color", () => {
@@ -133,23 +122,112 @@ describe("Footer component", () => {
 
   it("should merge user style with computed styles without overriding", () => {
     const { container } = render(
-      <Footer px="md" py="lg" bg="muted" style={{ color: "red", paddingTop: "20px" }}>
+      <Footer px="md" py="lg" bg="muted" style={{ color: "red" }}>
         Content
       </Footer>,
     );
     const footerEl = container.querySelector("footer");
-    // Computed styles should be preserved
+    // Padding classes should be present
+    expect(footerEl).toHaveClass("px-md", "py-lg");
+    // Background color should be in inline styles
     expect(footerEl).toHaveStyle({
-      paddingLeft: "var(--spacing-md)",
-      paddingRight: "var(--spacing-md)",
       backgroundColor: "var(--muted)",
-      // User's paddingTop should override computed paddingTop
-      paddingTop: "20px",
-      // But paddingBottom should remain from computed styles
-      paddingBottom: "var(--spacing-lg)",
     });
-    // User style should be merged (color should be present and computed)
+    // User style should be merged (color should be present, browser converts "red" to rgb)
     const computedColor = window.getComputedStyle(footerEl!).color;
     expect(computedColor).toBe("rgb(255, 0, 0)");
+  });
+
+  it("should apply responsive padding classes", () => {
+    const { container } = render(
+      <Footer px={{ base: "sm", lg: "xl" }} py={{ base: "md", lg: "2xl" }}>
+        Content
+      </Footer>,
+    );
+    const footerEl = container.querySelector("footer");
+    // Should have base classes
+    expect(footerEl).toHaveClass("px-sm", "py-md");
+    // Should have responsive classes
+    expect(footerEl).toHaveClass("lg:px-xl", "lg:py-2xl");
+  });
+
+  it("should render social links with icons", () => {
+    const { container } = render(
+      <Footer
+        socialLinks={[
+          { icon: <div data-testid="icon-1" />, label: "Test Link 1", href: "#1" },
+          { icon: <div data-testid="icon-2" />, label: "Test Link 2", href: "#2" },
+        ]}
+      />,
+    );
+    const footerEl = container.querySelector("footer");
+    expect(footerEl).toBeInTheDocument();
+
+    // Check that links are rendered
+    const links = container.querySelectorAll("a[href]");
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveAttribute("href", "#1");
+    expect(links[0]).toHaveAttribute("aria-label", "Test Link 1");
+    expect(links[1]).toHaveAttribute("href", "#2");
+    expect(links[1]).toHaveAttribute("aria-label", "Test Link 2");
+
+    // Check that icons are rendered
+    expect(container.querySelector('[data-testid="icon-1"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="icon-2"]')).toBeInTheDocument();
+  });
+
+  it("should render social links without icons (text only)", () => {
+    const { container } = render(
+      <Footer
+        socialLinks={[
+          { label: "Twitter", href: "#twitter" },
+          { label: "Facebook", href: "#facebook" },
+        ]}
+      />,
+    );
+    const footerEl = container.querySelector("footer");
+    expect(footerEl).toBeInTheDocument();
+
+    // Check that links are rendered with text labels
+    const links = container.querySelectorAll("a[href]");
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveAttribute("href", "#twitter");
+    expect(links[0]).toHaveAttribute("aria-label", "Twitter");
+    expect(links[0]).toHaveTextContent("Twitter");
+    expect(links[1]).toHaveAttribute("href", "#facebook");
+    expect(links[1]).toHaveAttribute("aria-label", "Facebook");
+    expect(links[1]).toHaveTextContent("Facebook");
+  });
+
+  it("should use custom aria-label when provided in social link", () => {
+    const { container } = render(
+      <Footer
+        socialLinks={[
+          { icon: <div />, label: "Twitter", href: "#", ariaLabel: "Follow us on Twitter" },
+        ]}
+      />,
+    );
+    const link = container.querySelector('a[href="#"]');
+    expect(link).toHaveAttribute("aria-label", "Follow us on Twitter");
+  });
+
+  it("should prioritize socialLinks over right prop", () => {
+    const { container } = render(
+      <Footer
+        right={<div data-testid="right-content">Right content</div>}
+        socialLinks={[{ label: "Social Link", href: "#" }]}
+      />,
+    );
+    // socialLinks should be rendered, not right prop
+    expect(container.querySelector('[data-testid="right-content"]')).not.toBeInTheDocument();
+    expect(container.querySelector('a[href="#"]')).toBeInTheDocument();
+    expect(container.querySelector('a[href="#"]')).toHaveTextContent("Social Link");
+  });
+
+  it("should render right prop when socialLinks is not provided", () => {
+    const { container } = render(
+      <Footer right={<div data-testid="right-content">Right content</div>} />,
+    );
+    expect(container.querySelector('[data-testid="right-content"]')).toBeInTheDocument();
   });
 });
