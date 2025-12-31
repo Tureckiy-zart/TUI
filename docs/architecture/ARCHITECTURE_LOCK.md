@@ -260,6 +260,34 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Popover** | `src/COMPOSITION/overlays/Popover.tsx` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/POPOVER_BASELINE_REPORT.md` |
 | **NextLinkAdapter** | `src/EXTENSIONS/next/NextLinkAdapter.tsx` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md` |
 
+### Extension Tooling (LOCKED)
+
+The following Extension layer build tooling has been audited and is **EXTENSION LOCKED**:
+
+| Tooling | Location | Status | Lock Date | Audit Report |
+|---------|----------|--------|-----------|--------------|
+| **Theme Tooling** | `tools/theme-generator/`, `tools/theme-validator/`, `tools/theme-contract/` | ✅ **EXTENSION LOCKED** | 2025-12-31 | `docs/reports/theme-tooling-audit/08_final_verdict.md` |
+
+**Theme Tooling Lock Summary:**
+
+- **Lock Document:** [EXTENSION_LOCK_THEME_TOOLING.md](./EXTENSION_LOCK_THEME_TOOLING.md)
+- **Audit Status:** FULL PASS (6/6 assumptions verified)
+- **Default Output Path:** `src/EXTENSIONS/themes/` (immutable)
+- **Validation:** Theme Contract v1 compliance (mandatory, no bypass)
+- **Write Guards:** No files written if validation fails
+- **CI Gates:** Pre-commit and CI workflow enforce validation
+
+**Locked Elements:**
+- CLI commands: `theme:generate`, `theme:validate`, `theme:parity-check`
+- Default output directory: `src/EXTENSIONS/themes/`
+- Validation rules (Theme Contract v1)
+- Parity check (token registry compliance)
+- No bypass flags allowed
+
+**Allowed:** Bug fixes, documentation updates, performance improvements (without changing API/behavior)
+
+**Forbidden:** Changing `DEFAULT_OUTPUT_DIR`, adding bypass flags, weakening validation rules, weakening CI gates
+
 **Key Architectural Decisions (EmptyState):**
 
 - **Compound Component Pattern:** Root component with Icon, Title, Description, Action subcomponents

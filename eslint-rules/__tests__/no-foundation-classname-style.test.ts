@@ -7,14 +7,12 @@
  * Test cases are minimal and cover only canonical scenarios from the scope matrix.
  */
 
-import { RuleTester } from "@typescript-eslint/utils/ts-eslint";
+import { RuleTester } from "@typescript-eslint/rule-tester";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noFoundationClassnameStyle } from "../no-foundation-classname-style";
 
 describe("no-foundation-classname-style", () => {
-  // RuleTester types don't fully support flat config format yet
-
   const ruleTester = new RuleTester({
     languageOptions: {
       parser: tseslint.parser,
@@ -23,7 +21,7 @@ describe("no-foundation-classname-style", () => {
         sourceType: "module",
       },
     },
-  } as any);
+  });
 
   ruleTester.run("no-foundation-classname-style", noFoundationClassnameStyle, {
     valid: [

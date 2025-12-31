@@ -598,6 +598,26 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Breaking Changes:** Variant names changed (flat→default, raised→elevated, outline→outlined, sunken→filled, subtle→subtle) per VARIANTS_SIZE_CANON
     - **Audit Report:** `docs/reports/audit/SURFACE_BASELINE_REPORT.md`
 
+27. **Footer** - `src/COMPOSITION/layout/Footer/Footer.tsx`
+    - **Status:** ✅ **ALLOWED** (Component Creation Pipeline C0-C10 Complete, 2025-12-30)
+    - **Creation Date:** 2025-12-30
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
+    - **Type:** Extension Layer Layout Component
+    - **Category:** layout
+    - **Purpose:** Page-level footer container for bottom content (copyright, links, navigation, metadata). Provides semantic `<footer>` element with flexible content slots (left, center, right).
+    - **Key Characteristics:**
+      - Semantic `<footer>` element (implicit role="contentinfo")
+      - Flexible content slots (left, center, right) or children prop
+      - Token-driven padding (px, py) and background color (bg)
+      - Optional top border
+      - Uses Stack internally for layout composition
+      - Responsive token support
+      - Motion: NO MOTION BY DESIGN (static layout container)
+    - **Token Compliance:** ✅ 100% (spacing tokens, color tokens)
+    - **Use Cases:** Page footers, application footers, copyright sections, navigation links, metadata display
+    - Exports: `Footer`, `FooterProps`
+
 ### Container Components
 
 27. **Card** - `src/components/containers/Card.tsx`
@@ -1149,6 +1169,30 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Rule:** Future structural modifications require re-entry into Pipeline 18A
     - **Exports:** Core functions (`createTransition`, `shouldReduceMotion`, `shouldEnableAnimations`), Presets (`fadePresets`, `slidePresets`, `scalePresets`, `hoverPresets`, `presets`, `createStagger`, `revealOnScroll`), Utilities (`resolveComponentAnimations`), React Hook (`useInView`), Types (`AnimationProps`, `ComponentAnimationConfig`, `PresetConfig`, `TransitionConfig`, `SpringConfig`, `Spring`, `Duration`, `Easing`, `Transition`, `UseInViewOptions`, `UseInViewReturn`)
     - **Note:** TAS is an internal utility system used by Extension components. Not exported from `src/index.ts` (intentionally internal).
+
+### Extension Build Tooling (LOCKED)
+
+Build-time tooling that is part of the Extension layer infrastructure. These tools are **EXTENSION LOCKED** and their behavior is immutable.
+
+1. **Theme Tooling** - `tools/theme-generator/`, `tools/theme-validator/`, `tools/theme-contract/`
+   - **Status:** ✅ **EXTENSION LOCKED**
+   - **Lock Date:** 2025-12-31
+   - **Lock Document:** `docs/architecture/EXTENSION_LOCK_THEME_TOOLING.md`
+   - **Audit Report:** `docs/reports/theme-tooling-audit/08_final_verdict.md`
+   - **Audit Status:** FULL PASS (6/6 assumptions verified)
+   - **Lock Type:** EXTENSION_LOCK (Build tooling lock)
+   - **Purpose:** Theme generation, validation, and parity checking for Theme Contract v1 compliance
+   - **CLI Commands:** `theme:generate`, `theme:validate`, `theme:parity-check`
+   - **Default Output:** `src/EXTENSIONS/themes/` (immutable)
+   - **Locked Elements:**
+     - Default output directory (`src/EXTENSIONS/themes/`)
+     - Validation rules (Theme Contract v1 compliance)
+     - Write guards (no files without validation)
+     - Parity check (token registry compliance)
+     - No bypass flags allowed
+   - **Allowed:** Bug fixes, documentation updates, performance improvements (without changing API/behavior)
+   - **Forbidden:** Changing `DEFAULT_OUTPUT_DIR`, adding bypass flags, weakening validation rules, weakening CI gates
+   - **Rule:** Behavioral modifications require explicit unlock procedure per `EXTENSION_LOCK_THEME_TOOLING.md`
 
 ---
 

@@ -7,6 +7,8 @@ import {
   type ChartColors,
   chartColors as baseChartColors,
   type ColorScale,
+  type DisabledColors,
+  disabledColors as baseDisabledColors,
   type Mode,
   primaryColors as basePrimaryColors,
   secondaryColors as baseSecondaryColors,
@@ -166,6 +168,11 @@ function getMergedTokens(_mode: Mode) {
     night: baseChartColors.night,
   };
 
+  const disabledColors: Record<Mode, DisabledColors> = {
+    day: baseDisabledColors.day,
+    night: baseDisabledColors.night,
+  };
+
   return {
     primaryColors,
     accentColors,
@@ -175,6 +182,7 @@ function getMergedTokens(_mode: Mode) {
     semanticColors,
     textColors,
     chartColors,
+    disabledColors,
   };
 }
 
@@ -216,6 +224,7 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     semanticColors,
     textColors,
     chartColors,
+    disabledColors,
   } = tokens;
 
   // Wrap each color group in try-catch to ensure all variables are set even if one group fails
@@ -393,6 +402,15 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--destructive-foreground", semantic.errorForeground);
   } catch (error) {
     console.error("[Theme] Failed to set destructive colors:", error);
+  }
+
+  // Disabled colors (from merged tokens) - Explicit semantic tokens for disabled state
+  try {
+    const disabled = disabledColors[mode];
+    root.style.setProperty("--tm-disabled", disabled.disabled);
+    root.style.setProperty("--tm-disabled-foreground", disabled.disabledForeground);
+  } catch (error) {
+    console.error("[Theme] Failed to set disabled colors:", error);
   }
 
   // Motion CSS variables

@@ -57,7 +57,7 @@ function renderIcon(icon: React.ReactNode): React.ReactElement | null {
 }
 
 const linkVariants = tokenCVA({
-  base: `${LINK_TOKENS.layout} ${LINK_TOKENS.fontWeight} ${LINK_TOKENS.transition.colors} ${LINK_TOKENS.focus.outline} ${LINK_TOKENS.focus.ring} ${LINK_TOKENS.focus.offset} ${LINK_TOKENS.state.disabled.pointerEvents} ${LINK_TOKENS.state.disabled.opacity}`,
+  base: `${LINK_TOKENS.layout} ${LINK_TOKENS.fontWeight} ${LINK_TOKENS.transition.colors} ${LINK_TOKENS.focus.outline} ${LINK_TOKENS.focus.ring} ${LINK_TOKENS.focus.offset} ${LINK_TOKENS.state.disabled.pointerEvents} ${LINK_TOKENS.state.disabled.text}`,
   variants: {
     variant: {
       primary: `${LINK_TOKENS.variant.primary.text} ${LINK_TOKENS.variant.primary.hover} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.primary.underline}`,

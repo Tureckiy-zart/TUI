@@ -51,6 +51,21 @@ jobs:
       - name: Run lint checks
         run: pnpm lint:check
 
+      - name: Check App Router Compatibility
+        run: pnpm check:next-document
+
+      - name: Theme Token Parity Check
+        run: pnpm theme:parity-check
+        continue-on-error: false
+
+      - name: Validate All Themes
+        run: pnpm theme:validate:all
+        continue-on-error: false
+
+      - name: Validate Extension Themes
+        run: pnpm theme:validate:extension
+        continue-on-error: false
+
       - name: Run unit tests
         run: pnpm test
 
@@ -64,6 +79,8 @@ jobs:
         run: |
           echo "✅ Quality checks complete"
           echo "   • Linting"
+          echo "   • App Router compatibility"
+          echo "   • Theme validation (parity + contract)"
           echo "   • Unit tests"
           echo "   • Motion integrity tests"
           echo "   • Accessibility (axe + contrast)"

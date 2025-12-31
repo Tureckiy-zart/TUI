@@ -1,0 +1,77 @@
+{
+  "task": "TUI_APP_UPGRADE_V201_MIGRATION",
+  "version": "1.0",
+  "layer": "App Upgrade",
+  "description": "Upgrade application to @tenerife.music/ui@2.0.1 and resolve all breaking changes related to Motion API, Textarea API, and deprecated props.",
+  "prerequisites": {
+    "must_be_ready": true,
+    "required_files": ["package.json"]
+  },
+  "steps": [
+    {
+      "title": "Update Library Version",
+      "actions": [
+        "Change '@tenerife.music/ui' version to '2.0.1' in package.json",
+        "Run 'pnpm install' to update dependencies"
+      ],
+      "expectation": "Package version is updated and node_modules are synced"
+    },
+    {
+      "title": "Motion API Naming Migration",
+      "actions": [
+        "Search and replace: 'motionV2Durations' -> 'motionDurations'",
+        "Search and replace: 'motionV2Easings' -> 'motionEasings'",
+        "Search and replace: 'motionV2Transitions' -> 'motionTransitions'",
+        "Search and replace: 'motionV2CSSVariables' -> 'motionCSSVariables'",
+        "Search and replace: 'motionV2TailwindConfig' -> 'motionTailwindConfig'",
+        "Search and replace: 'motionV2ReducedMotion' -> 'motionReducedMotion'",
+        "Search and replace: 'motionV2Fade' -> 'motionFade'",
+        "Search and replace: 'motionV2Scale' -> 'motionScale'",
+        "Search and replace: 'motionV2Slide' -> 'motionSlide'",
+        "Search and replace: 'motionV2Combined' -> 'motionCombined'",
+        "Update any CSS variables if they used versioned names (e.g., --motion-v2-duration -> --motion-duration)"
+      ],
+      "expectation": "No 'V2' suffix in Motion-related code"
+    },
+    {
+      "title": "Textarea Component Migration",
+      "actions": [
+        "Replace 'state=\"disabled\"' with 'disabled={true}'",
+        "Replace 'state=\"error\"' with 'aria-invalid={true}'",
+        "Update variants: 'primary' -> 'default', 'secondary' -> 'elevated', 'outline' -> 'outlined', 'ghost' -> 'subtle'",
+        "Remove 'state=\"success\"' and 'state=\"default\"' props",
+        "Ensure error messages are external and linked via 'aria-describedby' if necessary"
+      ],
+      "sources": ["docs/migrations/TEXTAREA_MIGRATION.md"],
+      "expectation": "Textarea usages comply with v2.0.1 API and STATE_AUTHORITY"
+    },
+    {
+      "title": "Cleanup Deprecated Props",
+      "actions": [
+        "In Stack, Row, and Column: replace 'gap' prop with 'spacing'",
+        "In Text: remove 'variant' prop and use 'muted' or semantic components instead"
+      ],
+      "expectation": "No deprecated props remaining in the codebase"
+    },
+    {
+      "title": "Create Initial Pages",
+      "actions": [
+        "Create a Home page template using new Layout components (Stack, Box) and Card components",
+        "Create an Events page template using List and EventCard components",
+        "Verify styling consistency and motion integration on new pages"
+      ],
+      "expectation": "Functional pages demonstrating the new library version"
+    }
+  ],
+  "success_criteria": [
+    "Application builds successfully without TypeScript or Lint errors",
+    "All Motion imports are versionless",
+    "Textarea uses native attributes for state and new variant names",
+    "Deprecated 'gap' and 'Text.variant' props are removed",
+    "Home and Events pages are rendered correctly using the updated library"
+  ],
+  "post_actions": [
+    "Run 'pnpm validate' to ensure consistency",
+    "Update PROJECT_PROGRESS.md with the migration status"
+  ]
+}

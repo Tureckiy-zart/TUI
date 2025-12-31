@@ -41,8 +41,8 @@ export const switchTrackVariants = tokenCVA({
     state: {
       base: `${SWITCH_TOKENS.state.track.default}`,
       checked: `${SWITCH_TOKENS.state.track.checked}`,
-      disabled: `${SWITCH_TOKENS.state.track.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
-      disabledChecked: `${SWITCH_TOKENS.state.track.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      disabled: `${SWITCH_TOKENS.state.track.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
+      disabledChecked: `${SWITCH_TOKENS.state.track.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
       invalid: `${SWITCH_TOKENS.state.track.error}`,
     } satisfies Record<SwitchTrackState, string>,
   },
@@ -145,12 +145,12 @@ export const switchHandleStateVariants = tokenCVA({
     {
       variant: "primary",
       state: "disabled",
-      class: `${SWITCH_TOKENS.state.handle.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "primary",
       state: "disabledChecked",
-      class: `${SWITCH_TOKENS.state.handle.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "primary",
@@ -171,12 +171,12 @@ export const switchHandleStateVariants = tokenCVA({
     {
       variant: "secondary",
       state: "disabled",
-      class: `${SWITCH_TOKENS.state.handle.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "secondary",
       state: "disabledChecked",
-      class: `${SWITCH_TOKENS.state.handle.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "secondary",
@@ -197,12 +197,12 @@ export const switchHandleStateVariants = tokenCVA({
     {
       variant: "outline",
       state: "disabled",
-      class: `${SWITCH_TOKENS.state.handle.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "outline",
       state: "disabledChecked",
-      class: `${SWITCH_TOKENS.state.handle.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "outline",
@@ -223,12 +223,12 @@ export const switchHandleStateVariants = tokenCVA({
     {
       variant: "ghost",
       state: "disabled",
-      class: `${SWITCH_TOKENS.state.handle.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "ghost",
       state: "disabledChecked",
-      class: `${SWITCH_TOKENS.state.handle.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "ghost",
@@ -249,12 +249,12 @@ export const switchHandleStateVariants = tokenCVA({
     {
       variant: "destructive",
       state: "disabled",
-      class: `${SWITCH_TOKENS.state.handle.disabled} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabled}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "destructive",
       state: "disabledChecked",
-      class: `${SWITCH_TOKENS.state.handle.disabledChecked} ${SWITCH_TOKENS.state.opacity.disabled}`,
+      class: `${SWITCH_TOKENS.state.handle.disabledChecked}`, // Uses explicit disabled semantic token (opacity removed for better a11y)
     },
     {
       variant: "destructive",

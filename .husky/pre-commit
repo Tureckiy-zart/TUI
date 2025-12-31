@@ -7,6 +7,55 @@ echo "🔧 PRE-COMMIT: Running auto-fixes on staged files..."
 
 # Запускаем lint-staged для автофикса измененных файлов
 # lint-staged автоматически добавит исправленные файлы в staging area
+# lint-staged также запускает theme:validate для измененных тем
 pnpm lint-staged
 
 echo "✅ Pre-commit auto-fixes completed!"
+
+# ============================================================================
+# Theme Token Parity Check
+# If CSS theme files are modified, ensure all themes have the same token set
+# ============================================================================
+
+# Check if any Foundation CSS theme files are staged
+STAGED_FOUNDATION_THEME_CSS=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/FOUNDATION/tokens/themes/.*\.css$' || true)
+
+# Check if any Extension theme files are staged
+STAGED_EXTENSION_THEMES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/EXTENSIONS/themes/.*\.(css|json|ts)$' || true)
+
+if [ -n "$STAGED_FOUNDATION_THEME_CSS" ] || [ -n "$STAGED_EXTENSION_THEMES" ]; then
+  echo ""
+  echo "🎨 PRE-COMMIT: Theme files detected, running parity check..."
+  
+  if ! pnpm theme:parity-check; then
+    echo ""
+    echo "❌ Theme token parity check failed!"
+    echo "💡 All theme CSS files must define exactly the same set of tokens."
+    echo "   See: src/FOUNDATION/tokens/required-tokens.ts"
+    echo ""
+    exit 1
+  fi
+  
+  echo "✅ Theme token parity check passed!"
+fi
+
+# ============================================================================
+# Extension Theme Validation
+# If Extension theme files are modified, validate them against Theme Contract v1
+# ============================================================================
+
+if [ -n "$STAGED_EXTENSION_THEMES" ]; then
+  echo ""
+  echo "🎨 PRE-COMMIT: Extension theme files detected, running validation..."
+  
+  if ! pnpm theme:validate:extension; then
+    echo ""
+    echo "❌ Extension theme validation failed!"
+    echo "💡 All Extension themes must comply with Theme Contract v1."
+    echo "   See: docs/theming/THEME_EXTENSION_CONTRACT.md"
+    echo ""
+    exit 1
+  fi
+  
+  echo "✅ Extension theme validation passed!"
+fi

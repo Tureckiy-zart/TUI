@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2025-12-30
+
+### Fixed
+
+- **Next.js App Router Compatibility**: Fixed Container and Section components to ensure they work correctly in Next.js App Router
+  - Verified that Container and Section render native HTML elements (`<div>` and `<section>`) without Html wrappers from `next/document`
+  - Added CI guard script (`check:next-document`) to prevent future imports from `next/document`
+  - Added ESLint rule to prevent `next/document` imports in UI library source code
+  - **Impact:** Container and Section components are now fully compatible with Next.js App Router Server Components and Client Components
+
 ### Changed
 
 - **Motion API Naming (Canonical Cleanup)**:

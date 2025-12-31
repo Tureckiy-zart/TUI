@@ -1,6 +1,6 @@
 # Documentation Canon Lock
 
-**Date:** 2025-12-19  
+**Date:** 2025-12-30  
 **Status:** 🔒 **LOCKED**  
 **Purpose:** Fix current documentation structure, naming rules, and roles as canonical to prevent future semantic drift and duplication
 
@@ -23,7 +23,7 @@ This lock document is the **single source of truth** for:
 - When and how documentation can change
 
 **Relationship to Architectural Locks:**
-- This document complements `FOUNDATION_LOCK.md` and `ARCHITECTURE_LOCK.md`
+- This document complements `FOUNDATION_LOCK.md`, `FOUNDATION_LOCK_THEME.md`, and `ARCHITECTURE_LOCK.md`
 - Documentation structure is part of the architectural foundation
 - Changes to documentation system require architectural decision
 
@@ -48,7 +48,7 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 **Contains:**
 - Authority Contracts (`*_AUTHORITY.md`)
-- Architecture Locks (`*_LOCK.md`, `ARCHITECTURE_STATE.md`)
+- Architecture Locks (`*_LOCK.md`, `ARCHITECTURE_STATE.md`, `FOUNDATION_LOCK_THEME.md`)
 - Architecture Rules (`ARCHITECTURE_RULES.md`, `EXTENSION_STATE.md`)
 - Assistant Rules (`ASSISTANT_RULES.md`, `ASSISTANT_DEVELOPMENT_RULES.md`)
 - Standards (`LINTING_STANDARD.md`)
@@ -82,6 +82,33 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - ✅ Typing standards and structural conventions
 - ❌ Architecture rules MUST NOT be in this folder
 
+### `docs/theming/`
+
+**Purpose:** Theme system architecture, token naming decisions, and migration guides
+
+**Contains:**
+- Theme system architecture (`THEME_SYSTEM_ARCHITECTURE.md`)
+- Token naming decisions (`TOKEN_NAMING_DECISION.md`)
+- Migration guides (`MIGRATION_GUIDE_THEME_TOKENS.md`)
+
+**Related Artifacts:**
+- `src/FOUNDATION/tokens/required-tokens.ts` - Canonical token registry (single source of truth for required semantic tokens)
+- `scripts/check-theme-token-parity.mjs` - Token parity checker (validates all theme files define same token set)
+
+**Token System Rules:**
+- ✅ All semantic tokens use `--tm-` prefix (Tenerife Music brand)
+- ✅ Foreground tokens use `-foreground` suffix (canonical, not `-fg`)
+- ✅ All themes must define identical token set (token parity requirement)
+- ✅ Components consume semantic tokens only (`--tm-bg`, `--tm-fg`, `--tm-primary`, etc.)
+- ✅ Foundation components must not branch on theme state (use semantic tokens only)
+- ✅ Legacy tokens derive from canonical tokens (one-way compat mapping)
+
+**Rules:**
+- ✅ Theme system documentation and architecture decisions ONLY
+- ✅ Token naming ADRs and migration guides
+- ❌ Component-specific theme usage MUST be in `reference/`
+- ❌ Architecture rules MUST NOT be in this folder
+
 ### `docs/architecture/locks/`
 
 **Purpose:** Component-specific locks
@@ -99,11 +126,13 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 **Contains:**
 - `tasks/` - Component creation checklists (`COMPONENT_CREATION_CHECKLIST.md`), feedback processes, component needs tracking, usage tracking, task index
-- `foundation/` - Foundation processes (`COMPONENT_REFACTORING_PIPELINE.md`)
+- `foundation/` - Foundation processes (`COMPONENT_REFACTORING_PIPELINE.md` - Pipeline 18A for component refactoring)
 - `policies/` - Process policies and guard rules (`TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md`, `NO_DUPLICATION_POLICY.md`, `ESLINT_AUTOFIX_POLICY.md`, etc.)
 
 **Rules:**
 - ✅ Process definitions and workflows
+- ✅ Component creation workflows (Component Creation Pipeline C0-C10)
+- ✅ Component refactoring workflows (Component Refactoring Pipeline 18A)
 - ✅ Checklists and task management
 - ✅ Process policies and guard rules
 - ❌ Architecture rules MUST NOT be in this folder
@@ -126,10 +155,13 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 **Contains:**
 - Project reports (`*_REPORT.md`)
-- `audit/` - Audit reports and analyses
+- `audit/` - Audit reports and analyses (Component Refactoring Pipeline 18A baseline reports)
+- `creation/` - Component creation reports (Component Creation Pipeline C0-C10 completion reports)
 
 **Rules:**
 - ✅ Historical reports and audits
+- ✅ Component refactoring reports (Pipeline 18A STEP 0-12 audit reports in `audit/` subdirectory)
+- ✅ Component creation reports (Component Creation Pipeline C0-C10 completion reports in `creation/` subdirectory)
 - ❌ Should NOT be part of primary reading route
 
 ### `docs/migrations/`
@@ -164,6 +196,7 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 **Contains:**
 - Architecture context (`ARCHITECTURE_CONTEXT.md`)
 - Foundation lock (`FOUNDATION_LOCK.md` - in `architecture/` subfolder)
+- Foundation theme lock (`FOUNDATION_LOCK_THEME.md` - Theme Contract v1)
 - Project orientation (`PROJECT_ORIENTATION.md`)
 - Progress tracking (`PROJECT_PROGRESS.md`)
 - Documentation inventory (`CANONICAL_DOCUMENTATION_INVENTORY.md`)
@@ -197,7 +230,8 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 ## Documentation Structure Freeze
 
 **Status:** 🔒 **FROZEN**  
-**Date:** 2025-12-19  
+**Freeze Date:** 2025-12-19 (Structure freeze date - structure remains frozen)  
+**Last Updated:** 2025-12-30  
 **Purpose:** Prevent structural drift and ensure all documentation changes respect canonical organization
 
 ### Freeze Declaration
@@ -216,32 +250,45 @@ The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This
    - **Boundary:** API documentation, integration guides, typing standards ONLY
    - **Forbidden:** Architecture rules or internal service documents
 
-3. **`docs/governance/`** - Governance review cycles and review templates
+3. **`docs/theming/`** - Theme system architecture, token naming decisions, and migration guides
+   - **Purpose:** Theme system documentation and architecture decisions
+   - **Boundary:** Theme system architecture, token naming ADRs, and migration guides ONLY
+   - **Contains:** Theme system docs, canonical token registry (`required-tokens.ts`), token parity checker script
+   - **Token System:** Single canonical contract (`data-theme` attribute), semantic tokens (`--tm-*`), token parity validation
+   - **Forbidden:** Component-specific theme usage or architecture rules
+
+4. **`docs/governance/`** - Governance review cycles and review templates
    - **Purpose:** Governance processes and review reports
    - **Boundary:** Governance workflows and review documentation ONLY
    - **Forbidden:** Architecture rules or primary reading route documents
 
-4. **`docs/workflows/`** - Process workflows, checklists, and library maturity system
+5. **`docs/workflows/`** - Process workflows, checklists, and library maturity system
    - **Purpose:** Process definitions, workflows, and task management
+   - **Contains:** 
+     - `foundation/` - Component Refactoring Pipeline 18A (STEP 0-12 for existing components)
+     - `tasks/` - Component Creation Pipeline C0-C10 checklists and workflows
    - **Boundary:** Workflow definitions and process documentation ONLY
    - **Forbidden:** Architecture rules or reference documentation
 
-5. **`docs/reports/`** - Reports and audit documentation
-   - **Purpose:** Historical reports and audit analyses
-   - **Boundary:** Project reports and audit documentation ONLY
+6. **`docs/reports/`** - Reports and audit documentation
+   - **Purpose:** Historical reports, audit analyses, component refactoring reports, and component creation reports
+   - **Boundary:** Project reports, audit documentation, component refactoring reports, and component creation reports ONLY
+   - **Contains:** 
+     - `audit/` subdirectory - Component Refactoring Pipeline 18A baseline reports (STEP 0-12 audit reports)
+     - `creation/` subdirectory - Component Creation Pipeline C0-C10 completion reports
    - **Forbidden:** Primary reading route documents or architecture rules
 
-6. **`docs/migrations/`** - Migration documentation
+7. **`docs/migrations/`** - Migration documentation
    - **Purpose:** Historical migration context and reports
    - **Boundary:** Migration documentation ONLY
    - **Forbidden:** Primary reading route documents or active architecture rules
 
-7. **`docs/_internal/`** - Internal service documents (AI context only)
+8. **`docs/_internal/`** - Internal service documents (AI context only)
    - **Purpose:** AI/Assistant-specific context and documentation
    - **Boundary:** Service documents for AI context ONLY
    - **Forbidden:** Reader-facing documentation or architecture rules
 
-8. **`docs/archive/`** - Archived documentation (if exists)
+9. **`docs/archive/`** - Archived documentation (if exists)
    - **Purpose:** Non-canonical, archived documentation
    - **Boundary:** Historical and deprecated documentation ONLY
    - **Forbidden:** Active canonical documentation
@@ -340,6 +387,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 **Examples:**
 - `ARCHITECTURE_CONTEXT.md` - Primary context document
 - `FOUNDATION_LOCK.md` - Foundation lock (in `architecture/` subfolder)
+- `FOUNDATION_LOCK_THEME.md` - Foundation lock for theme system (Theme Contract v1)
 - `ARCHITECTURE_LOCK.md` - Architecture lock
 - `ARCHITECTURE_STATE.md` - Architecture state
 
@@ -420,13 +468,15 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 #### Library Maturity & Growth Processes
 
-**Pattern:** `{PROCESS}_PROCESS.md` or `{TOPIC}_WORKFLOW.md` or `{TOPIC}_INVENTORY.md` or `{TOPIC}_CHECKLIST.md`
+**Pattern:** `{PROCESS}_PROCESS.md` or `{TOPIC}_WORKFLOW.md` or `{TOPIC}_INVENTORY.md` or `{TOPIC}_CHECKLIST.md` or `{TOPIC}_PIPELINE.md`
 
 **Examples:**
 - `FEEDBACK_COLLECTION_PROCESS.md`
 - `FEEDBACK_REVIEW_PROCESS.md`
 - `COMPONENT_NEEDS_INVENTORY.md`
 - `COMPONENT_CREATION_CHECKLIST.md`
+- `COMPONENT_CREATION_PIPELINE.md` - Component Creation Pipeline C0-C10
+- `COMPONENT_REFACTORING_PIPELINE.md` - Component Refactoring Pipeline 18A (STEP 0-12)
 - `COMPONENT_USAGE_TRACKING.md`
 
 **Forbidden:**
@@ -524,21 +574,22 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 - Override all other documentation for their domain
 - Status: **LOCKED** or **IMMUTABLE**
 
-**Documents (17 files):**
+**Documents (18 files):**
 
 1. `docs/ARCHITECTURE_CONTEXT.md` - IMMUTABLE
 2. `docs/architecture/FOUNDATION_LOCK.md` - LOCKED
-3. `docs/architecture/ARCHITECTURE_LOCK.md` - LOCKED
-4. `docs/architecture/ARCHITECTURE_STATE.md` - LOCKED
-5. `docs/architecture/INTERACTION_AUTHORITY.md` - LOCKED
-6. `docs/architecture/STATE_MATRIX.md` - LOCKED
-7. `docs/architecture/STATE_AUTHORITY.md` - LOCKED
-8. `docs/architecture/SPACING_AUTHORITY.md` - LOCKED
-9. `docs/architecture/RADIUS_AUTHORITY.md` - LOCKED
-10. `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - LOCKED
-11. `docs/architecture/MOTION_AUTHORITY.md` - LOCKED
-12. `docs/architecture/ELEVATION_AUTHORITY.md` - LOCKED
-13. `docs/architecture/LAYOUT_AUTHORITY.md` - LOCKED
+3. `docs/architecture/FOUNDATION_LOCK_THEME.md` - LOCKED (Theme Contract v1)
+4. `docs/architecture/ARCHITECTURE_LOCK.md` - LOCKED
+5. `docs/architecture/ARCHITECTURE_STATE.md` - LOCKED
+6. `docs/architecture/INTERACTION_AUTHORITY.md` - LOCKED
+7. `docs/architecture/STATE_MATRIX.md` - LOCKED
+8. `docs/architecture/STATE_AUTHORITY.md` - LOCKED
+9. `docs/architecture/SPACING_AUTHORITY.md` - LOCKED
+10. `docs/architecture/RADIUS_AUTHORITY.md` - LOCKED
+11. `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - LOCKED
+12. `docs/architecture/MOTION_AUTHORITY.md` - LOCKED
+13. `docs/architecture/ELEVATION_AUTHORITY.md` - LOCKED
+14. `docs/architecture/LAYOUT_AUTHORITY.md` - LOCKED
 14. `docs/architecture/TOKEN_AUTHORITY.md` - LOCKED
 15. `docs/architecture/EXTENSION_AUTHORITY.md` - ACTIVE (but still LAW - defines Extension boundaries)
 16. `docs/architecture/locks/LAYOUT_LOCK.md` - LOCKED
@@ -595,6 +646,8 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 4. `docs/reference/COMPONENTS_INVENTORY.md` - UI components inventory
 5. `docs/reference/INTEGRATION_GUIDE.md` - UI integration guide
 6. `docs/reference/COMPONENT_EXAMPLES.md` - Extension component examples
+
+**Note:** Theme system token documentation (architecture, naming decisions, migration) is in `docs/theming/`, not `reference/`. Token registry (`src/FOUNDATION/tokens/required-tokens.ts`) and parity checker (`scripts/check-theme-token-parity.mjs`) are implementation artifacts.
 
 **Change Policy:** ✅ **ALLOWED** for accuracy updates and API changes
 
@@ -808,17 +861,26 @@ This document fixes the current documentation system as canonical:
 - **Canonical folder structure** with clear purposes
 - **Mandatory naming patterns** for each semantic group
 - **Strict change policy** preventing drift and duplication
+- **Theme system documentation** in `docs/theming/` with canonical token registry and parity validation
+
+**Token System Integration:**
+- Canonical token registry: `src/FOUNDATION/tokens/required-tokens.ts` (single source of truth for required semantic tokens)
+- Token parity checker: `scripts/check-theme-token-parity.mjs` (CI validation script)
+- Theme system docs: `docs/theming/` (architecture, naming decisions, migration guides)
+- Token naming: `--tm-*` prefix with `-foreground` suffix (canonical spelling)
+- Token parity: All theme files must define identical token set (validated by parity checker)
 
 **This canon is LOCKED and must be followed for all documentation work.**
 
 ---
 
-**Last Updated:** 2025-12-19  
+**Last Updated:** 2025-12-30  
 **Status:** 🔒 **LOCKED**  
 **Related Documents:**
 - `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Complete inventory of 44 documents
 - `docs/DOCS_CANONICAL_NAMING_STANDARD.md` - Naming standard reference
 - `docs/DOCS_SEMANTIC_GROUPING_REPORT.md` - Semantic grouping analysis
 - `docs/architecture/FOUNDATION_LOCK.md` - Foundation layer lock
+- `docs/architecture/FOUNDATION_LOCK_THEME.md` - Foundation lock for theme system (Theme Contract v1)
 - `docs/architecture/ARCHITECTURE_LOCK.md` - Architecture lock
 

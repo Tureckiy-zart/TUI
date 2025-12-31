@@ -44,6 +44,15 @@ jobs:
       - name: Check Motion V1 Patterns
         run: pnpm check:motion-v1
 
+      - name: Theme Token Parity Check
+        run: pnpm theme:parity-check
+
+      - name: Validate All Themes
+        run: pnpm theme:validate:all
+
+      - name: Validate Extension Themes
+        run: pnpm theme:validate:extension
+
   build:
     name: Build Package [BLOCKING]
     runs-on: ubuntu-latest

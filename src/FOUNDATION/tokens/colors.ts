@@ -158,6 +158,27 @@ export const semanticColors: Record<Mode, SemanticColors> = {
 };
 
 /**
+ * Disabled color tokens
+ * Explicit colors for disabled UI elements
+ * Must meet contrast requirements for accessibility
+ */
+export type DisabledColors = {
+  disabled: string;
+  disabledForeground: string;
+};
+
+export const disabledColors: Record<Mode, DisabledColors> = {
+  day: {
+    disabled: "0 0% 96%", // Light gray background for disabled elements
+    disabledForeground: "0 0% 60%", // Medium gray text/icon color (meets WCAG AA contrast 4.5:1 against disabled background)
+  },
+  night: {
+    disabled: "240 5% 12%", // Dark gray background for disabled elements
+    disabledForeground: "240 5% 50%", // Medium gray text/icon color (meets WCAG AA contrast 4.5:1 against disabled background)
+  },
+};
+
+/**
  * Chart color tokens
  * Used for data visualization (charts, graphs)
  */
@@ -472,6 +493,12 @@ export const tailwindThemeColors = {
   muted: {
     DEFAULT: "hsl(var(--muted))",
     foreground: "hsl(var(--muted-foreground))",
+  },
+
+  // Disabled colors
+  disabled: {
+    DEFAULT: "hsl(var(--tm-disabled))",
+    foreground: "hsl(var(--tm-disabled-foreground))",
   },
 
   // Destructive colors (semantic error)
