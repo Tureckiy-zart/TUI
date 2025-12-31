@@ -15,71 +15,7 @@ A standalone build-time CLI tool for validating themes against Theme Contract v1
 
 ---
 
-## Mental Model
-
-```
-Theme Validator (CLI)
-        ↓
-Parse theme file (CSS/JSON/TS)
-        ↓
-Check Theme Contract v1 compliance:
-  - Completeness (all required tokens)
-  - Contract version (--tm-contract-version: 1)
-  - No extra tokens (unknown --tm-* tokens)
-  - Theme ID format (<palette>-<mode>)
-        ↓
-Exit code 0 (valid) or 1 (invalid)
-        ↓
-CI blocks merge on failure
-```
-
-**Key Points:**
-
-- Validator → enforces contract (can run anytime)
-- CI → uses validator as gate (blocks invalid themes)
-- Pre-commit → uses validator as gate (blocks invalid commits)
-
----
-
-## Canonical Path: `src/EXTENSIONS/themes/`
-
-**⚠️ CRITICAL:** Validator checks themes in `src/EXTENSIONS/themes/` by default.
-
-**Rules:**
-
-- ✅ Themes should be in `src/EXTENSIONS/themes/`
-- ❌ Themes in `src/FOUNDATION/tokens/themes/` are invalid (Foundation path is forbidden)
-- ❌ Themes outside canonical path violate architecture
-
-**Enforcement:**
-
-- CI validates themes in canonical location
-- Pre-commit hooks check canonical path
-- Validator can check any path, but canonical path is expected
-
----
-
-## README vs Reality Guarantee
-
-**This README describes actual behavior, not hypothetical or intended behavior.**
-
-**Guarantee:**
-
-- Every claim in this README is **verified** by audit artifacts (`docs/reports/theme-tooling-audit/`)
-- Every behavior described is **enforced** by CI, not advisory
-- Any discrepancy between README and actual behavior is a **bug** (report it)
-
-**Evidence:**
-
-- Audit artifacts (A1-A12) document actual CLI behavior
-- CI workflow enforces all safety guarantees
-- Pre-commit hooks enforce validation rules
-
-**If you find a discrepancy:**
-
-1. Check audit artifacts: `docs/reports/theme-tooling-audit/08_final_verdict.md`
-2. Run verification: `pnpm theme:validate -- --help`
-3. Report as bug if README contradicts actual behavior
+> **Mental Model, Canonical Path, File Naming Convention, README vs Reality Guarantee** — see [Theme System — Contract & Tooling](../theme-contract/README.md)
 
 ---
 
@@ -91,7 +27,7 @@ The Theme Validator checks theme files for compliance with Theme Contract v1. It
 
 - Standalone (no UI library dependency)
 - Supports CSS, JSON, and TypeScript theme formats
-- Validates all 48+ required `--tm-*` tokens
+- Validates all required `--tm-*` tokens
 - Checks theme ID format (`<palette>-<light|dark>`)
 - Verifies contract version marker
 - Human-readable and JSON output formats
@@ -110,7 +46,7 @@ The tool is built into the monorepo. No additional installation required.
 pnpm run theme:validate -- path/to/theme.css
 
 # Validate multiple files
-pnpm run theme:validate -- theme.light.css theme.dark.css
+pnpm run theme:validate -- theme.ocean-light.css theme.ocean-dark.css
 
 # Validate a JSON theme
 pnpm run theme:validate -- theme.json
@@ -145,7 +81,7 @@ Theme Validator - Theme Contract v1
 ✓ theme.css VALID
    Theme: ocean-light (ocean-light)
    Contract: v1
-   Tokens: 48/48 (complete)
+   Tokens: complete
 
 ────────────────────────────────────────
 ✓ Summary: 1 passed, 0 failed, 1 total
@@ -187,8 +123,8 @@ Output:
       },
       "tokens": {
         "complete": true,
-        "requiredCount": 48,
-        "foundCount": 48,
+        "requiredCount": "<N>",
+        "foundCount": "<N>",
         "missing": [],
         "extra": [],
         "duplicates": []
@@ -214,10 +150,10 @@ Theme Validator - Theme Contract v1
 
 ✗ incomplete-theme.css INVALID
    Theme: custom-light (custom-light)
-   Tokens: 40/48 (incomplete)
+   Tokens: incomplete
 
    Errors:
-   • Missing 8 required token(s): --tm-link, --tm-link-hover, ...
+   • Missing required token(s): --tm-link, --tm-link-hover, ...
 
 ────────────────────────────────────────
 ✗ Summary: 0 passed, 1 failed, 1 total
@@ -244,7 +180,7 @@ Theme validation failed. Fix the errors above.
   --tm-fg: 0 0% 9%;
   --tm-primary: 210 40% 26%;
   --tm-primary-foreground: 0 0% 100%;
-  /* ... all 48+ tokens ... */
+  /* ... all required tokens ... */
 }
 ```
 
@@ -307,7 +243,7 @@ Every theme must include:
 
 ### Required Tokens
 
-All themes must define exactly 48 required `--tm-*` tokens:
+All themes must define all required `--tm-*` tokens (see [Required Tokens Registry](../../src/FOUNDATION/tokens/required-tokens.ts)):
 
 | Category     | Count | Examples                                                        |
 | ------------ | ----- | --------------------------------------------------------------- |
@@ -379,69 +315,9 @@ const isValid = validateTheme(theme);
 
 ---
 
-## External User Flow
+---
 
-Complete step-by-step guide for external users:
-
-### Step 1: Validate Theme File
-
-```bash
-pnpm run theme:validate -- src/EXTENSIONS/themes/theme.my-brand-light.css
-```
-
-**What this does:** Validates theme file against Theme Contract v1.
-
-**Output (valid):**
-
-```
-✓ theme.my-brand-light.css VALID
-   Theme: my-brand-light (my-brand-light)
-   Contract: v1
-   Tokens: 46/46 (complete)
-```
-
-**Output (invalid):**
-
-```
-✗ theme.my-brand-light.css INVALID
-   Theme: my-brand-light (my-brand-light)
-   Tokens: 40/46 (incomplete)
-
-   Errors:
-   • Missing 6 required token(s): --tm-link, --tm-link-hover, ...
-```
-
-### Step 2: Fix Validation Errors
-
-If validation fails, fix the errors:
-
-- Missing tokens → add missing tokens
-- Extra tokens → remove unknown tokens
-- Invalid theme ID → fix palette name or mode
-- Wrong contract version → ensure `--tm-contract-version: 1`
-
-### Step 3: Re-validate
-
-```bash
-pnpm run theme:validate -- src/EXTENSIONS/themes/theme.my-brand-light.css
-```
-
-**Result:** Validation passes (exit code 0).
-
-### Step 4: Commit → CI
-
-```bash
-git add src/EXTENSIONS/themes/
-git commit -m "Add my-brand theme"
-git push
-```
-
-**What CI does:**
-
-1. Runs `theme:validate` on all theme files
-2. **Blocks merge if validation fails** (exit code 1)
-
-**Result:** Invalid themes cannot be merged (CI enforced).
+> **External User Flow** — see [Theme System — Contract & Tooling](../theme-contract/README.md#external-user-flow)
 
 ---
 

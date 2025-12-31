@@ -90,6 +90,27 @@ Understanding how Theme Tooling works:
 
 ---
 
+## File Naming Convention
+
+**Canonical Format:** `theme.<palette>-<mode>.css`
+
+**Examples:**
+
+- `theme.ocean-light.css`
+- `theme.my-brand-dark.css`
+- `theme.default-light.css`
+
+**Rules:**
+
+- `<palette>`: lowercase alphanumeric with hyphens, starting with a letter
+- `<mode>`: must be `light` or `dark`
+- Prefix `theme.` is mandatory
+- Extension `.css` for CSS format, `.ts` for TypeScript format
+
+**Source:** This format is enforced by the Theme Generator (`tools/theme-generator/src/generator.ts`).
+
+---
+
 ## README vs Reality Guarantee
 
 **This README describes actual behavior, not hypothetical or intended behavior.**
@@ -319,13 +340,14 @@ pnpm run theme:generate -- \
 
 ```text
 src/EXTENSIONS/themes/
-├── my-theme-light.css
-└── my-theme-dark.css
+├── theme.my-theme-light.css
+└── theme.my-theme-dark.css
 ```
 
 Example content:
 
 ```css
+/* File: theme.my-theme-light.css */
 :root[data-theme="my-theme-light"] {
   --tm-contract-version: 1;
 
@@ -349,7 +371,7 @@ Example content:
 Single file:
 
 ```bash
-pnpm run theme:validate -- src/EXTENSIONS/themes/my-theme-light.css
+pnpm run theme:validate -- src/EXTENSIONS/themes/theme.my-theme-light.css
 ```
 
 All themes:
@@ -367,7 +389,7 @@ pnpm run theme:validate -- src/EXTENSIONS/themes/*.css
 ### Import the CSS
 
 ```ts
-import "@/EXTENSIONS/themes/my-theme-light.css";
+import "@/EXTENSIONS/themes/theme.my-theme-light.css";
 ```
 
 ### Activate via `data-theme`
@@ -587,7 +609,7 @@ document.documentElement.setAttribute("data-theme", "my-brand-dark");
 
 **Location:** `tools/theme-generator/src/token-mapper.ts:329-408`
 
-**Issue:** All 46 token names are hardcoded in the `generateThemeTokens()` function rather than being dynamically derived from `REQUIRED_THEME_TOKENS`.
+**Issue:** Token names are hardcoded in the `generateThemeTokens()` function rather than being dynamically derived from `REQUIRED_THEME_TOKENS`.
 
 **Why This Is Acceptable:**
 

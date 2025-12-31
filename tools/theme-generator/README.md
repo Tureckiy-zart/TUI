@@ -16,47 +16,7 @@ A build-time CLI tool for generating Theme Contract v1 compliant themes for `@te
 
 ---
 
-## Mental Model
-
-```
-Theme Generator (CLI)
-        ↓
-In-memory theme generation
-        ↓
-Theme Contract validation (mandatory)
-        ↓
-Token parity check
-        ↓
-Files written to src/EXTENSIONS/themes/ (only if validation passes)
-        ↓
-UI imports CSS and switches via data-theme
-```
-
-**Key Points:**
-
-- Generator → produces files (build-time only)
-- Validation → enforces contract (mandatory, cannot skip)
-- Write guards → no files written if validation fails
-- CI → final authority (blocks invalid themes)
-
----
-
-## Canonical Path: `src/EXTENSIONS/themes/`
-
-**⚠️ CRITICAL:** `src/EXTENSIONS/themes/` is the **only canonical location** for generated themes.
-
-**Rules:**
-
-- ✅ **ONLY** `src/EXTENSIONS/themes/` is allowed (default path)
-- ❌ **NEVER** write themes to `src/FOUNDATION/tokens/themes/` (Foundation path is explicitly forbidden)
-- ❌ **NEVER** write themes outside `src/EXTENSIONS/themes/`
-- ❌ Any other path is considered an **error**
-
-**Enforcement:**
-
-- Default output directory is hardcoded to `src/EXTENSIONS/themes/`
-- CI validates that themes exist only in canonical location
-- Writing to Foundation layer violates Extension architecture
+> **Mental Model, Canonical Path, File Naming Convention** — see [Theme System — Contract & Tooling](../theme-contract/README.md)
 
 ---
 
@@ -66,7 +26,7 @@ The Theme Generator creates complete, validated CSS or TypeScript theme files fr
 
 **Key Features:**
 
-- Generates complete theme token sets (50+ tokens)
+- Generates complete theme token sets (all required tokens)
 - Supports light and dark modes
 - WCAG AA/AAA contrast compliance
 - Automatic color scale generation
@@ -188,7 +148,7 @@ Example CSS content:
   --tm-fg: 0 0% 9%;
   --tm-primary: 210 40% 26%;
   --tm-primary-foreground: 0 0% 100%;
-  /* ... all 50+ tokens ... */
+  /* ... all required tokens ... */
 }
 ```
 
@@ -314,27 +274,9 @@ Foreground colors are automatically selected (black or white) based on contrast 
 | Link         | 2      | `--tm-link`, `--tm-link-hover`                                              |
 | Selection    | 2      | `--tm-selection-bg`, `--tm-selection-foreground`                            |
 
-## README vs Reality Guarantee
+---
 
-**This README describes actual behavior, not hypothetical or intended behavior.**
-
-**Guarantee:**
-
-- Every claim in this README is **verified** by audit artifacts (`docs/reports/theme-tooling-audit/`)
-- Every behavior described is **enforced** by CI, not advisory
-- Any discrepancy between README and actual behavior is a **bug** (report it)
-
-**Evidence:**
-
-- Audit artifacts (A1-A12) document actual CLI behavior
-- CI workflow enforces all safety guarantees
-- Pre-commit hooks enforce validation rules
-
-**If you find a discrepancy:**
-
-1. Check audit artifacts: `docs/reports/theme-tooling-audit/08_final_verdict.md`
-2. Run verification: `pnpm theme:generate -- --dry-run`
-3. Report as bug if README contradicts actual behavior
+> **README vs Reality Guarantee** — see [Theme System — Contract & Tooling](../theme-contract/README.md#readme-vs-reality-guarantee)
 
 ---
 
@@ -429,88 +371,9 @@ Error: EACCES: permission denied
 
 **Solution:** Check write permissions for the output directory.
 
-## External User Flow
+---
 
-Complete step-by-step guide for external users:
-
-### Step 1: Install Dependencies
-
-```bash
-cd /path/to/your/project
-pnpm install
-```
-
-**What this does:** Installs Theme Generator CLI command (`theme:generate`).
-
-### Step 2: Generate Theme
-
-```bash
-pnpm run theme:generate -- \
-  --palette my-brand \
-  --base-color "210 40% 50%" \
-  --modes light,dark
-```
-
-**What this does:**
-
-1. Generates theme in memory
-2. Runs Theme Contract v1 validation
-3. Runs token parity check
-4. **Only if all checks pass** → writes files to `src/EXTENSIONS/themes/`
-
-**Output:**
-
-```
-src/EXTENSIONS/themes/
-├── theme.my-brand-light.css
-└── theme.my-brand-dark.css
-```
-
-### Step 3: Validate Output (Optional)
-
-```bash
-pnpm run theme:validate -- src/EXTENSIONS/themes/theme.my-brand-light.css
-```
-
-**What this does:** Validates theme file against Theme Contract v1 (redundant if generator passed, but useful for manual verification).
-
-### Step 4: Commit → CI
-
-```bash
-git add src/EXTENSIONS/themes/
-git commit -m "Add my-brand theme"
-git push
-```
-
-**What CI does:**
-
-1. Runs `theme:validate` on all theme files
-2. Runs `theme:parity-check` to ensure token consistency
-3. **Blocks merge if validation fails**
-
-**Result:** Invalid themes cannot be merged (CI enforced).
-
-### Step 5: Use via `data-theme`
-
-**Import CSS:**
-
-```ts
-import "@/EXTENSIONS/themes/theme.my-brand-light.css";
-```
-
-**Activate theme:**
-
-```html
-<html data-theme="my-brand-light"></html>
-```
-
-or dynamically:
-
-```ts
-document.documentElement.setAttribute("data-theme", "my-brand-dark");
-```
-
-**What this does:** UI runtime consumes pre-generated CSS. No generation logic runs at runtime.
+> **External User Flow** — see [Theme System — Contract & Tooling](../theme-contract/README.md#external-user-flow)
 
 ---
 
@@ -520,7 +383,7 @@ document.documentElement.setAttribute("data-theme", "my-brand-dark");
 
 **Location:** `src/token-mapper.ts:329-408`
 
-**Issue:** All 46 token names are hardcoded in the `generateThemeTokens()` function rather than being dynamically derived from `REQUIRED_THEME_TOKENS`.
+**Issue:** Token names are hardcoded in the `generateThemeTokens()` function rather than being dynamically derived from `REQUIRED_THEME_TOKENS`.
 
 **Why This Is Acceptable:**
 
