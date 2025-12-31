@@ -4,6 +4,7 @@
 Strict. Predictable. Built for system-level consistency.
 
 ![Release](https://img.shields.io/github/v/tag/Tureckiy-zart/tenerife-ui?style=for-the-badge&sort=semver)
+![Version](https://img.shields.io/badge/version-2.0.3-blue?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18+-blue?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
