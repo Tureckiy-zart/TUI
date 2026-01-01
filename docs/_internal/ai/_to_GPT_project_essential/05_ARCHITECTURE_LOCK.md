@@ -2,7 +2,7 @@
 
 **Version:** 1.6  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-27 (EmptyState Pipeline 18A Complete PROCESS LOCKED verified, List Pipeline 18A Complete PROCESS LOCKED verified, Slider Pipeline 18A Re-run Complete PROCESS LOCKED verified, Radio added to locked components table, NotificationCenter Pipeline 18A Complete PROCESS LOCKED verified)  
+**Last Updated:** 2025-12-28 (Gradient tokens fixes: ring.subtle token corrected, glass.light/dark Storybook demo improved)  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -70,6 +70,11 @@ The following components are **locked** and **immutable**:
 | **Tabs**        | Navigation | Radix Tabs        | ✅ **LOCKED**      | 2025-12-25 |
 | **Checkbox**    | Form Controls | Native `<button role="checkbox">` | ✅ **PROCESS LOCKED** | 2025-12-25 (Refactor Cycle 2: 2025-12-27) |
 | **Radio**       | Form Controls | Native `<button role="radio">` | ✅ **LOCKED** | 2025-12-25 |
+| **Switch**      | Form Controls | Native `<button role="switch">` | ✅ **LOCKED** | 2025-12-25 |
+| **Textarea**    | Form Controls | Native `<textarea>` | ✅ **LOCKED** | 2025-12-26 |
+| **Label**       | Form Input | Radix Label | ✅ **LOCKED** | 2025-12-25 |
+| **Select**      | Form Input | Radix Select | ✅ **LOCKED** | 2025-12-25 |
+| **Icon**        | Visual Primitives | SVG Registry | ✅ **LOCKED** | 2025-12-25 |
 
 **Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md.
 
@@ -229,6 +234,9 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Stack** | `src/COMPOSITION/layout/Stack/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/STACK_BASELINE_REPORT.md` |
 | **Column** | `src/COMPOSITION/layout/Column/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/COLUMN_BASELINE_REPORT.md` |
 | **Flex** | `src/COMPOSITION/layout/Flex/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/FLEX_BASELINE_REPORT.md` |
+| **Grid** | `src/COMPOSITION/layout/Grid/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/GRID_BASELINE_REPORT.md` |
+| **Surface** | `src/COMPOSITION/layout/Surface/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/SURFACE_BASELINE_REPORT.md` |
+| **Container** | `src/COMPOSITION/layout/Container/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/CONTAINER_BASELINE_REPORT.md` |
 | **Toast** | `src/COMPOSITION/overlays/Toast.tsx` | ✅ **LOCKED** | 2025-12-26 | `docs/reports/audit/TOAST_BASELINE_REPORT.md` |
 | **SimpleTable** | `src/PATTERNS/tables/SimpleTable/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md` |
 | **Table** | `src/PATTERNS/tables/table/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TABLE_BASELINE_REPORT.md` |
@@ -238,6 +246,47 @@ The following Extension layer components have successfully completed Pipeline 18
 | **IconGallery** | `src/COMPOSITION/utilities/IconGallery/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/ICONGALLERY_BASELINE_REPORT.md` |
 | **EmptyState** | `src/PATTERNS/states/EmptyState/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md` |
 | **NotificationCenter** | `src/DOMAIN/notifications/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
+| **Alert** | `src/PRIMITIVES/Alert/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/ALERT_BASELINE_REPORT.md` |
+| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **FilterBar** | `src/PATTERNS/filters/filters/FilterBar/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md` |
+| **HoverCard** | `src/PATTERNS/menus/menus/hover-card/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md` |
+| **NavRoot** | `src/COMPOSITION/navigation/NavRoot/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVROOT_BASELINE_REPORT.md` |
+| **NavLink** | `src/PRIMITIVES/NavLink/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVLINK_BASELINE_REPORT.md` |
+| **SegmentedControl** | `src/COMPOSITION/navigation/segmented-control/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SEGMENTEDCONTROL_BASELINE_REPORT.md` |
+| **Breadcrumbs** | `src/COMPOSITION/navigation/breadcrumbs/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/BREADCRUMBS_BASELINE_REPORT.md` |
+| **ContextMenu** | `src/COMPOSITION/overlays/ContextMenu/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md` |
+| **TAS** | `src/COMPOSITION/motion/animation/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TAS_BASELINE_REPORT.md` |
+| **Field** | `src/PRIMITIVES/Field/` | ✅ **COMPOSITION READY** | 2025-12-27 | `docs/reports/audit/FIELD_BASELINE_REPORT.md` |
+| **Popover** | `src/COMPOSITION/overlays/Popover.tsx` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/POPOVER_BASELINE_REPORT.md` |
+| **NextLinkAdapter** | `src/EXTENSIONS/next/NextLinkAdapter.tsx` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md` |
+
+### Extension Tooling (LOCKED)
+
+The following Extension layer build tooling has been audited and is **EXTENSION LOCKED**:
+
+| Tooling | Location | Status | Lock Date | Audit Report |
+|---------|----------|--------|-----------|--------------|
+| **Theme Tooling** | `tools/theme-generator/`, `tools/theme-validator/`, `tools/theme-contract/` | ✅ **EXTENSION LOCKED** | 2025-12-31 | `docs/reports/theme-tooling-audit/08_final_verdict.md` |
+
+**Theme Tooling Lock Summary:**
+
+- **Lock Document:** [EXTENSION_LOCK_THEME_TOOLING.md](./EXTENSION_LOCK_THEME_TOOLING.md)
+- **Audit Status:** FULL PASS (6/6 assumptions verified)
+- **Default Output Path:** `src/EXTENSIONS/themes/` (immutable)
+- **Validation:** Theme Contract v1 compliance (mandatory, no bypass)
+- **Write Guards:** No files written if validation fails
+- **CI Gates:** Pre-commit and CI workflow enforce validation
+
+**Locked Elements:**
+- CLI commands: `theme:generate`, `theme:validate`, `theme:parity-check`
+- Default output directory: `src/EXTENSIONS/themes/`
+- Validation rules (Theme Contract v1)
+- Parity check (token registry compliance)
+- No bypass flags allowed
+
+**Allowed:** Bug fixes, documentation updates, performance improvements (without changing API/behavior)
+
+**Forbidden:** Changing `DEFAULT_OUTPUT_DIR`, adding bypass flags, weakening validation rules, weakening CI gates
 
 **Key Architectural Decisions (EmptyState):**
 
@@ -1039,6 +1088,12 @@ Any token system modifications require:
 
 ## 🔄 Version History
 
+- **v1.12** (2025-12-28): Gradient Tokens Fixes
+  - Fixed `GRADIENT_TOKENS.ring.subtle` token: replaced `--muted` (background color) with `--muted-foreground` (text color) for proper visibility
+  - Updated Storybook demo for `glass.light` and `glass.dark`: added dark background (`from-gray-900 via-gray-800 to-gray-900`) for better visibility in Storybook gallery
+  - Token fix ensures `ring.subtle` gradient is visible on light backgrounds
+  - Storybook demo improvements ensure glass gradients are properly demonstrated
+
 - **v1.11** (2025-12-26): NavText Pipeline 18A Complete
   - NavText Pipeline 18A completed (Steps 0-12)
   - Component type: Extension Navigation Primitive - Navigation Text
@@ -1267,8 +1322,8 @@ New functionality must be built as **extensions** that compose foundation compon
 ---
 
 **Status:** ✅ **LOCKED** (Foundation CLOSED)  
-**Version:** 1.7  
+**Version:** 1.12  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-27  
+**Last Updated:** 2025-12-28  
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable)

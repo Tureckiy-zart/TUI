@@ -50,7 +50,7 @@ export const Default: Story = {
     maxWidth: "lg",
     padding: "md",
     children: (
-      <Box p="md" bg="muted" radius="md">
+      <Box px="md" py="md" bg="muted" radius="md">
         Container content with maxWidth="lg" and padding="md"
       </Box>
     ),
@@ -63,7 +63,7 @@ export const MaxWidthVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">MaxWidth: sm</h3>
         <Container maxWidth="sm" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Small container (sm)
           </Box>
         </Container>
@@ -71,7 +71,7 @@ export const MaxWidthVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">MaxWidth: md</h3>
         <Container maxWidth="md" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Medium container (md)
           </Box>
         </Container>
@@ -79,7 +79,7 @@ export const MaxWidthVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">MaxWidth: lg</h3>
         <Container maxWidth="lg" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Large container (lg)
           </Box>
         </Container>
@@ -87,7 +87,7 @@ export const MaxWidthVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">MaxWidth: xl</h3>
         <Container maxWidth="xl" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Extra large container (xl)
           </Box>
         </Container>
@@ -95,7 +95,7 @@ export const MaxWidthVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">MaxWidth: full</h3>
         <Container maxWidth="full" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Full width container
           </Box>
         </Container>
@@ -117,7 +117,7 @@ export const PaddingVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: sm</h3>
         <Container maxWidth="lg" padding="sm">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Container with small padding
           </Box>
         </Container>
@@ -125,7 +125,7 @@ export const PaddingVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: md</h3>
         <Container maxWidth="lg" padding="md">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Container with medium padding (default)
           </Box>
         </Container>
@@ -133,7 +133,7 @@ export const PaddingVariants: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: lg</h3>
         <Container maxWidth="lg" padding="lg">
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Container with large padding
           </Box>
         </Container>
@@ -155,7 +155,7 @@ export const Centering: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Centered (default)</h3>
         <Container maxWidth="lg" padding="md" center={true}>
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Centered container
           </Box>
         </Container>
@@ -163,7 +163,7 @@ export const Centering: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Not Centered</h3>
         <Container maxWidth="lg" padding="md" center={false}>
-          <Box p="md" bg="muted" radius="md">
+          <Box px="md" py="md" bg="muted" radius="md">
             Left-aligned container
           </Box>
         </Container>
@@ -183,13 +183,13 @@ export const WithLayoutComposition: Story = {
   render: () => (
     <Container maxWidth="lg" padding="md">
       <Stack direction="vertical" spacing="lg">
-        <Box p="md" bg="muted" radius="md">
+        <Box px="md" py="md" bg="muted" radius="md">
           Item 1
         </Box>
-        <Box p="md" bg="muted" radius="md">
+        <Box px="md" py="md" bg="muted" radius="md">
           Item 2
         </Box>
-        <Box p="md" bg="muted" radius="md">
+        <Box px="md" py="md" bg="muted" radius="md">
           Item 3
         </Box>
       </Stack>
@@ -212,10 +212,10 @@ export const ScopeLimitation: Story = {
         <h3 className="mb-sm text-lg font-semibold">✅ Correct: Container + Stack</h3>
         <Container maxWidth="lg" padding="md">
           <Stack direction="vertical" spacing="md">
-            <Box p="sm" bg="muted" radius="sm">
+            <Box px="sm" py="sm" bg="muted" radius="sm">
               Item 1
             </Box>
-            <Box p="sm" bg="muted" radius="sm">
+            <Box px="sm" py="sm" bg="muted" radius="sm">
               Item 2
             </Box>
           </Stack>

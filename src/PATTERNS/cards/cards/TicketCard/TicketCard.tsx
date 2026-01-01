@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
+import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
 import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
 import { cn, formatDate } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
@@ -35,37 +35,6 @@ import {
 } from "./TicketCard.variants";
 
 /**
- * Helper component to apply custom variant classes to Link
- * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
- */
-const LinkWithCustomVariant = React.forwardRef<
-  HTMLAnchorElement,
-  React.ComponentProps<typeof Link> & { customClassName: string }
->(({ customClassName, ...linkProps }, ref) => {
-  const anchorRef = React.useRef<HTMLAnchorElement>(null);
-  const mergedRef = React.useCallback(
-    (node: HTMLAnchorElement | null) => {
-      anchorRef.current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref && "current" in ref) {
-        (ref as { current: HTMLAnchorElement | null }).current = node;
-      }
-      if (node && customClassName) {
-        // Merge custom classes with Link's internal classes
-        const existingClasses = node.className.split(" ").filter(Boolean);
-        const customClasses = customClassName.split(" ").filter(Boolean);
-        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
-      }
-    },
-    [ref, customClassName],
-  );
-
-  return <Link {...linkProps} ref={mergedRef} />;
-});
-LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
-
-/**
  * TicketCard Component
  *
  * Domain-specific card component for displaying ticket information for Event/Artist/Venue context.
@@ -92,6 +61,8 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
       price,
       capacity,
       availability = "available",
+      soldOutLabel = "Sold Out",
+      availableSoonLabel = "Available Soon",
       imageUrl,
       href,
       purchaseUrl,
@@ -149,9 +120,9 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
     const getAvailabilityLabel = () => {
       switch (availability) {
         case "sold_out":
-          return "Sold Out";
+          return soldOutLabel;
         case "available_soon":
-          return "Available Soon";
+          return availableSoonLabel;
         case "available":
         default:
           return null;
@@ -184,7 +155,10 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
         >
           {/* Featured Badge */}
           {featured && featuredBadgeText && (
-            <div className={ticketCardBadgeVariants({ size })}>
+            <div
+              className={ticketCardBadgeVariants({ size })}
+              aria-label={`Featured ticket: ${featuredBadgeText}`}
+            >
               <span className={ticketCardBadgeSurfaceVariants({ variant: "featured" })}>
                 {featuredBadgeText}
               </span>
@@ -193,7 +167,10 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
           {/* VIP Badge */}
           {vipBadgeText && (
-            <div className={cn(ticketCardBadgeVariants({ size }), getVipBadgePosition())}>
+            <div
+              className={cn(ticketCardBadgeVariants({ size }), getVipBadgePosition())}
+              aria-label={`VIP ticket: ${vipBadgeText}`}
+            >
               <span className={ticketCardBadgeSurfaceVariants({ variant: "vip" })}>
                 {vipBadgeText}
               </span>
@@ -202,7 +179,10 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
           {/* Discount Badge */}
           {discountBadgeText && (
-            <div className={cn(ticketCardBadgeVariants({ size }), getDiscountBadgePosition())}>
+            <div
+              className={cn(ticketCardBadgeVariants({ size }), getDiscountBadgePosition())}
+              aria-label={`Discount: ${discountBadgeText}`}
+            >
               <span className={ticketCardBadgeSurfaceVariants({ variant: "discount" })}>
                 {discountBadgeText}
               </span>
@@ -231,12 +211,12 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                       size="xl"
                       color="muted"
                       className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden="true"
+                      aria-hidden={true}
                     />
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
-                <div className={ticketCardImageOverlayVariants({ size })} />
+                <div className={ticketCardImageOverlayVariants({ size })} aria-hidden={true} />
               </div>
             </CardBaseImageWrapper>
           )}
@@ -305,18 +285,28 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                   customClassName={ticketCardPurchaseButtonVariants({ size, disabled: false })}
                 >
                   {purchaseLabel}
-                  <IconArrowRight className={ticketCardPurchaseButtonIconVariants({ size })} />
+                  <IconArrowRight
+                    className={ticketCardPurchaseButtonIconVariants({ size })}
+                    aria-hidden={true}
+                  />
                 </LinkWithCustomVariant>
               )}
               {(!purchaseUrl || isPurchaseDisabled) && (
                 <div
+                  role="button"
+                  aria-label={purchaseLabel}
+                  aria-disabled={isPurchaseDisabled}
+                  tabIndex={isPurchaseDisabled ? -1 : 0}
                   className={cn(
                     "w-full",
                     ticketCardPurchaseButtonVariants({ size, disabled: isPurchaseDisabled }),
                   )}
                 >
                   {purchaseLabel}
-                  <IconArrowRight className={ticketCardPurchaseButtonIconVariants({ size })} />
+                  <IconArrowRight
+                    className={ticketCardPurchaseButtonIconVariants({ size })}
+                    aria-hidden={true}
+                  />
                 </div>
               )}
             </div>

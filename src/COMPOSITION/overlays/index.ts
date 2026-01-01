@@ -9,7 +9,7 @@
 export { Portal, type PortalProps } from "./Portal";
 
 // Backdrop
-export { Backdrop, type BackdropProps } from "./Backdrop";
+export { Backdrop, type BackdropProps, type BackdropVariant } from "./Backdrop";
 
 // Modal
 export {

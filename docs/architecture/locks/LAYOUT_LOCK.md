@@ -1,7 +1,8 @@
-# 🔒 TUI Layout Primitives Lock
+# 🔒 TUI Layout Primitives & Extension Layout Lock
 
-**Version:** 1.0  
+**Version:** 2.0  
 **Date Created:** 2025-12-15  
+**Last Updated:** 2026-01-01 (Extension Layout Components Lock)  
 **Status:** ✅ **LOCKED** - IMMUTABLE  
 **Layer:** UI / EXTENSION / LOCKED  
 **Priority:** CRITICAL
@@ -10,9 +11,12 @@
 
 ## 📋 Purpose
 
-This document **formally locks** the Layout Primitives component system of `@tenerife.music/ui`. After this lock, all Layout Primitives components, their APIs, responsibilities, and relationships are **immutable** and **closed for modifications**.
+This document **formally locks** the Layout Primitives component system and Extension Layout components of `@tenerife.music/ui`. After this lock, all Layout Primitives components and Extension Layout components, their APIs, responsibilities, and relationships are **immutable** and **closed for modifications**.
 
 **This is a binding architectural contract.** Any violation of these rules is considered an architectural breach.
+
+**Extension Layout Lock Date:** 2026-01-01  
+**Audit Report:** `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
 
 ---
 
@@ -245,7 +249,99 @@ If modifications to locked Layout Primitives components are required, the follow
 
 ---
 
+## 🔒 Extension Layout Components Lock
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-01  
+**Audit Report:** `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+
+The following Extension Layout components are **LOCKED** and **IMMUTABLE** after successful hard code review:
+
+### 9. Box (Extension)
+- **File:** `src/COMPOSITION/layout/Box/Box.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `Box`, `BoxProps`
+- **Role:** Lowest-level layout primitive - pure, generic container
+- **Responsibility:** Spacing (px/py/m/mx/my/mt/mr/mb/ml), visual properties (radius, shadow, bg), element rendering (via `as` prop)
+- **Does NOT provide:** Layout composition semantics (display, flexDirection, gap, alignment)
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 10. ContentShell
+- **File:** `src/COMPOSITION/layout/ContentShell/ContentShell.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `ContentShell`, `ContentShellProps`
+- **Role:** Body-level layout wrapper for structuring main page content
+- **Responsibility:** Provides structure for main page content with optional navigation, uses Container and Stack internally
+- **Does NOT manage:** Document structure (html, body, head), global providers, routing
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 11. Divider
+- **File:** `src/COMPOSITION/layout/Divider/Divider.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `Divider`, `dividerVariants`, `DividerOrientation`, `DividerProps`, `DividerTone`
+- **Role:** Layout component for visually separating sections and content blocks
+- **Responsibility:** Visual separation with orientation (horizontal/vertical), tone variants, optional inset padding (boolean)
+- **Does NOT provide:** Layout composition, spacing props (px, py, padding, gap)
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 12. Inset
+- **File:** `src/COMPOSITION/layout/Inset/Inset.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `Inset`, `InsetProps`
+- **Role:** Inner spacing wrapper primitive
+- **Responsibility:** Padding (all sides) via single `padding` prop, token-based spacing only
+- **Does NOT provide:** Layout direction, alignment, gap between children, px/py props
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 13. PageHeader
+- **File:** `src/COMPOSITION/layout/PageHeader/PageHeader.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `PageHeader`, `PageHeaderProps`
+- **Role:** Semantic composition component for structured page headers
+- **Responsibility:** Structured page header with predefined semantic slots (title, description, breadcrumbs, actions)
+- **Does NOT provide:** Layout props in public API, children prop
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 14. Section
+- **File:** `src/COMPOSITION/layout/Section/Section.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `Section`, `SectionProps`
+- **Role:** Page-level block container for vertical page rhythm
+- **Responsibility:** Vertical padding (spaceY) and spacing between content blocks (spacing), delegates to Stack
+- **Does NOT provide:** px/py/padding props, grid layout, variant-driven behavior
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 15. SidebarLayout
+- **File:** `src/COMPOSITION/layout/SidebarLayout/SidebarLayout.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `SidebarLayout`, `SidebarLayoutProps`, `SidebarPosition`, `SidebarWidth`, `CollapseBreakpoint`
+- **Role:** Page-level compositional layout for sidebar + content
+- **Responsibility:** Two-column layout with sidebar and main content, responsive collapse, semantic HTML (aside/main)
+- **Does NOT provide:** Low-level layout controls (px/py, grid columns directly)
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+### 16. StickyBar
+- **File:** `src/COMPOSITION/layout/StickyBar/StickyBar.tsx`
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-01
+- **Exports:** `StickyBar`, `stickyBarVariants`, `StickyBarPosition`, `StickyBarProps`, `StickyBarTone`
+- **Role:** Sticky layout container for persistent actions or contextual controls
+- **Responsibility:** CSS sticky positioning wrapper, composes Inset and Divider internally
+- **Does NOT provide:** Layout controls, page layout management, routing, scroll listeners
+- **Rule:** DO NOT modify, extend, or create alternatives
+
+---
+
 ## 📊 Lock Status
+
+### Layout Primitives (Original)
 
 | Component  | Status    | Lock Date | Immutability |
 | ---------- | --------- | --------- | ------------ |
@@ -258,8 +354,23 @@ If modifications to locked Layout Primitives components are required, the follow
 | Grid       | ✅ LOCKED | 2025-12-15 | Immutable    |
 | Surface    | ✅ LOCKED | 2025-12-15 | Immutable    |
 
+### Extension Layout Components
+
+| Component      | Status    | Lock Date | Immutability |
+| -------------- | --------- | --------- | ------------ |
+| Box (Extension)| ✅ LOCKED | 2026-01-01 | Immutable    |
+| ContentShell   | ✅ LOCKED | 2026-01-01 | Immutable    |
+| Divider        | ✅ LOCKED | 2026-01-01 | Immutable    |
+| Inset          | ✅ LOCKED | 2026-01-01 | Immutable    |
+| PageHeader     | ✅ LOCKED | 2026-01-01 | Immutable    |
+| Section        | ✅ LOCKED | 2026-01-01 | Immutable    |
+| SidebarLayout  | ✅ LOCKED | 2026-01-01 | Immutable    |
+| StickyBar      | ✅ LOCKED | 2026-01-01 | Immutable    |
+
 **Layout Primitives System Status:** ✅ **LOCKED**  
-**Lock Date:** 2025-12-15  
+**Layout Extension Layer Status:** ✅ **LOCKED**  
+**Primitives Lock Date:** 2025-12-15  
+**Extension Lock Date:** 2026-01-01  
 **Next Review:** Never (components are immutable)
 
 ---
@@ -268,6 +379,7 @@ If modifications to locked Layout Primitives components are required, the follow
 
 - **[Extension Canonical State](../EXTENSION_STATE.md)** - Component usage rules and responsibilities
 - **[Architecture Lock](../ARCHITECTURE_LOCK.md)** - Foundation and Extension lock status
+- **[Layout Layer Hard Code Review](../../reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md)** - Final audit report before Extension Layout lock (2026-01-01)
 - **Layout Standardization Report** — Standardization and cleanup report (archived; file no longer available)
 - **Layout Inventory and Audit Report** — Initial inventory and audit (archived; file no longer available)
 
@@ -314,8 +426,9 @@ All future work must respect this lock. Layout Primitives components are **read-
 ---
 
 **Status:** ✅ **LOCKED**  
-**Version:** 1.0  
+**Version:** 2.0  
 **Date Created:** 2025-12-15  
+**Last Updated:** 2026-01-01 (Extension Layout Components Lock)  
 **Priority:** CRITICAL  
 **Next Review:** Never (components are immutable)
 

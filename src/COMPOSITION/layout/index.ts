@@ -9,6 +9,7 @@ export * from "./Column";
 export * from "./Container";
 export * from "./Flex";
 export * from "./Grid";
+export * from "./Inset/Inset";
 export * from "./Row";
 export * from "./Stack";
 export * from "./Surface";
@@ -30,6 +31,45 @@ export { Section, type SectionProps } from "./Section/Section";
 
 // Footer
 export { Footer, type FooterProps } from "./Footer";
+
+// PageHeader
+export { PageHeader, type PageHeaderProps } from "./PageHeader";
+
+// ContentShell
+export { ContentShell, type ContentShellProps } from "./ContentShell/ContentShell";
+
+// SidebarLayout
+export {
+  type CollapseBreakpoint,
+  SidebarLayout,
+  type SidebarLayoutProps,
+  type SidebarPosition,
+  type SidebarWidth,
+} from "./SidebarLayout";
+
+// Divider
+export {
+  Divider,
+  type DividerOrientation,
+  type DividerProps,
+  type DividerTone,
+  dividerVariants,
+} from "./Divider/Divider";
+
+// StickyBar
+export {
+  StickyBar,
+  type StickyBarPosition,
+  type StickyBarProps,
+  type StickyBarTone,
+  stickyBarVariants,
+} from "./StickyBar/StickyBar";
+
+// Navbar
+export { Navbar, type NavbarProps } from "./Navbar";
+
+// LinkWithCustomVariant
+export { LinkWithCustomVariant } from "./LinkWithCustomVariant";
 
 // Re-export shared types
 export type * from "./layout.types";

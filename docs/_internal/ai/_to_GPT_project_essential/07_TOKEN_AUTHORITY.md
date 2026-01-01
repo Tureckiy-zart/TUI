@@ -59,8 +59,16 @@ Gradient tokens provide reusable gradient patterns that use token-based colors. 
 
 - **`GRADIENT_TOKENS.brand`** - Brand identity gradients (primary, reversed, featured)
 - **`GRADIENT_TOKENS.surface`** - Surface elevation gradients (elevated, muted)
-- **`GRADIENT_TOKENS.overlay`** - Overlay gradients for images (dark)
-- **`GRADIENT_TOKENS.text`** - Text gradient effects with bg-clip-text (brand, primary)
+- **`GRADIENT_TOKENS.overlay`** - Overlay gradients for images (dark, light, vignette)
+- **`GRADIENT_TOKENS.text`** - Text gradient effects with bg-clip-text (brand, primary, aurora, muted)
+- **`GRADIENT_TOKENS.semantic`** - Status indicator gradients (success, warning, error, info)
+- **`GRADIENT_TOKENS.skeleton`** - Loading state gradients (shimmer, pulse)
+- **`GRADIENT_TOKENS.glass`** - Glassmorphism gradients (light, dark, frost)
+- **`GRADIENT_TOKENS.interactive`** - Interactive state gradients (hover, active, focus)
+- **`GRADIENT_TOKENS.mesh`** - Modern multi-point gradients (aurora, sunset, neon)
+- **`GRADIENT_TOKENS.ring`** - Ring/spinner gradients (primary, muted, subtle)
+
+**Note (2025-12-28):** Fixed `GRADIENT_TOKENS.ring.subtle` token - replaced `--muted` (background color) with `--muted-foreground` (text color) for proper visibility on light backgrounds.
 
 **Usage:**
 ```typescript

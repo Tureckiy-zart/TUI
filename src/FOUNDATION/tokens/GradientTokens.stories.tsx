@@ -124,14 +124,20 @@ function GradientCard({
   // #endregion
 
   return (
-    <Box p="md" radius="lg" bg="card" className="flex flex-col gap-sm border border-border">
+    <Box
+      px="md"
+      py="md"
+      radius="lg"
+      bg="card"
+      className="flex flex-col gap-sm border border-border"
+    >
       <Box className="font-mono">
         <Text size="xs" tone="muted">
           {name}
         </Text>
       </Box>
       {isText ? (
-        <Box p="md" className="flex min-h-[80px] items-center justify-center">
+        <Box px="md" py="md" className="flex min-h-[80px] items-center justify-center">
           <span
             className={`${displayGradient} text-lg font-semibold`}
             // #region agent log
@@ -856,11 +862,11 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Hero Section Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Hero Section</Heading>
             <Text tone="muted">Brand gradient used in hero section background</Text>
-            <Box p="xl" radius="lg" className={GRADIENT_TOKENS.brand.primary}>
+            <Box px="xl" py="xl" radius="lg" className={GRADIENT_TOKENS.brand.primary}>
               <Box className="text-white">
                 <Heading level={2}>Welcome to Tenerife Music</Heading>
               </Box>
@@ -877,11 +883,11 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Text Gradient Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Gradient Text</Heading>
             <Text tone="muted">Text gradient applied to headings and featured text</Text>
-            <Box p="md">
+            <Box px="md" py="md">
               <Box className={GRADIENT_TOKENS.text.brand}>
                 <Heading level={2}>Featured Event</Heading>
               </Box>
@@ -898,7 +904,7 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Overlay Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Image Overlay</Heading>
             <Text tone="muted">Dark overlay gradient for text readability over images</Text>
@@ -927,13 +933,14 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Badge Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Featured Badge</Heading>
             <Text tone="muted">Semantic gradient used for status badges</Text>
             <Box className="flex flex-wrap gap-md">
               <Box
-                p="sm"
+                px="sm"
+                py="sm"
                 radius="full"
                 className={`${GRADIENT_TOKENS.semantic.success} inline-flex items-center`}
               >
@@ -944,7 +951,8 @@ export const UsageExamples: Story = {
                 </Box>
               </Box>
               <Box
-                p="sm"
+                px="sm"
+                py="sm"
                 radius="full"
                 className={`${GRADIENT_TOKENS.brand.featured} inline-flex items-center`}
               >
@@ -964,7 +972,7 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Skeleton Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Skeleton Loading</Heading>
             <Text tone="muted">Shimmer gradient for skeleton loading states</Text>
@@ -982,7 +990,7 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Glassmorphism Example */}
-        <Box p="lg" radius="xl" bg="card" className="border border-border">
+        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Glassmorphism</Heading>
             <Text tone="muted">Frosted glass effect using glass gradients</Text>
@@ -994,7 +1002,8 @@ export const UsageExamples: Story = {
               }}
             >
               <Box
-                p="lg"
+                px="lg"
+                py="lg"
                 className={`absolute inset-0 ${GRADIENT_TOKENS.glass.frost} backdrop-blur-sm`}
               >
                 <Box className="text-white">

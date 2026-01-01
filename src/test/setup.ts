@@ -53,6 +53,17 @@ afterEach(async () => {
   // Radix UI components (like Toast) use portals and async callbacks
   // that may try to access document after test completion
   if (typeof document !== "undefined") {
+    // Close all open Toast components before cleanup
+    // This prevents Radix UI from trying to access document in async callbacks
+    const openToasts = document.querySelectorAll('[data-state="open"][data-radix-toast-root]');
+    openToasts.forEach((toast) => {
+      // Set data-state to closed to trigger Radix UI cleanup
+      toast.setAttribute("data-state", "closed");
+      // Also trigger pointerdown event to ensure Radix UI handles the close
+      const closeEvent = new Event("pointerdown", { bubbles: true });
+      toast.dispatchEvent(closeEvent);
+    });
+
     // Remove all Radix UI portal containers
     const portals = document.querySelectorAll("[data-radix-portal]");
     portals.forEach((portal) => {
@@ -63,17 +74,28 @@ afterEach(async () => {
     toastViewports.forEach((viewport) => {
       viewport.remove();
     });
+    // Remove any toast roots that might be left behind
+    const toastRoots = document.querySelectorAll("[data-radix-toast-root]");
+    toastRoots.forEach((root) => {
+      root.remove();
+    });
   }
 
   // Wait for any pending async operations to complete
   // This allows Radix UI callbacks and React DOM operations to finish before cleanup
   // We use multiple ticks to ensure all pending operations complete
+  // Increased wait time for Radix UI Toast async callbacks
+  // Radix UI uses @radix-ui/react-use-callback-ref which creates async callbacks
+  // that may execute after test completion, so we need to wait longer
   if (typeof setTimeout !== "undefined") {
     // Wait for multiple event loop ticks to ensure all pending operations complete
     await new Promise((resolve) => setTimeout(resolve, 0));
     await new Promise((resolve) => setTimeout(resolve, 0));
-    // Additional wait for any delayed operations (e.g., Radix UI animations)
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    // Additional wait for any delayed operations (e.g., Radix UI animations and callbacks)
+    // Increased to 100ms to allow Radix UI Toast callbacks to complete
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    // Final wait to ensure all Radix UI Toast callbacks complete
+    await new Promise((resolve) => setTimeout(resolve, 0));
   }
 
   cleanup();

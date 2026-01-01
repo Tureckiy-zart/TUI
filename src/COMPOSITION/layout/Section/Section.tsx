@@ -3,10 +3,15 @@
 /**
  * Section Container Component
  *
- * Token-driven section component for page/landing layout composition.
- * Uses SECTION_TOKENS for padding and spacing.
+ * Section is a page-level block container for vertical page rhythm.
+ * Provides vertical padding between page sections and spacing between content blocks.
  * Uses Stack internally for content block composition.
  * All styling uses tokens exclusively (no raw CSS values).
+ *
+ * Section IS: A page-level block container for vertical rhythm
+ * Section IS NOT: A grid layout component, a variant-driven component, or a layout composition primitive
+ *
+ * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
  */
 
 import * as React from "react";
@@ -20,10 +25,10 @@ export interface SectionProps extends Omit<StackProps, "py" | "spacing"> {
   /**
    * Vertical padding - token-based
    * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
-   * @example padding="md"
-   * @example padding={{ base: "sm", lg: "xl" }}
+   * @example spaceY="md"
+   * @example spaceY={{ base: "sm", lg: "xl" }}
    */
-  padding?: ResponsiveSpacing;
+  spaceY?: ResponsiveSpacing;
 
   /**
    * Spacing for content blocks - token-based
@@ -43,12 +48,12 @@ export interface SectionProps extends Omit<StackProps, "py" | "spacing"> {
  * Section component - page/landing layout container
  */
 const Section = React.forwardRef<HTMLDivElement, SectionProps>(
-  ({ padding = "md", spacing, className, as, ...props }, ref) => {
+  ({ spaceY = "md", spacing, className, as, ...props }, ref) => {
     return (
       <Stack
         ref={ref}
         as={as ?? "section"}
-        py={padding}
+        py={spaceY}
         spacing={spacing}
         className={cn("w-full", className)}
         {...props}

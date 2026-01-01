@@ -1,8 +1,8 @@
 # 🔒 Tenerife UI Architecture Lock
 
-**Version:** 1.6  
+**Version:** 1.7  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-28 (Gradient tokens fixes: ring.subtle token corrected, glass.light/dark Storybook demo improved)  
+**Last Updated:** 2026-01-01 (CardBase second pass complete, Card analysis in progress)  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -214,6 +214,8 @@ The following Extension layer components have successfully completed Pipeline 18
 |-----------|----------|--------|-----------|--------------|
 | **Portal** | `src/COMPOSITION/overlays/Portal.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/PORTAL_BASELINE_REPORT.md` |
 | **Dialog** | `src/COMPOSITION/overlays/Dialog.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/DIALOG_BASELINE_REPORT.md` |
+| **Backdrop** | `src/COMPOSITION/overlays/Backdrop.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/BACKDROP_BASELINE_REPORT.md` |
+| **Navbar** | `src/COMPOSITION/layout/Navbar/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/NAVBAR_BASELINE_REPORT.md` |
 | **Progress** | `src/PRIMITIVES/Progress/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/PROGRESS_BASELINE_REPORT.md` |
 | **Separator** | `src/COMPOSITION/controls/Separator/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/SEPARATOR_BASELINE_REPORT.md` |
 | **AspectRatio** | `src/COMPOSITION/controls/AspectRatio/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/ASPECTRATIO_BASELINE_REPORT.md` |
@@ -229,7 +231,7 @@ The following Extension layer components have successfully completed Pipeline 18
 | **NavList** | `src/COMPOSITION/navigation/nav-list/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVLIST_BASELINE_REPORT.md` |
 | **NavSeparator** | `src/COMPOSITION/navigation/NavSeparator/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVSEPARATOR_BASELINE_REPORT.md` |
 | **NavText** | `src/COMPOSITION/navigation/NavText/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVTEXT_BASELINE_REPORT.md` |
-| **Box** | `src/COMPOSITION/layout/Box/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/BOX_BASELINE_REPORT.md` |
+| **Box** | `src/COMPOSITION/layout/Box/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26, Extension Lock 2026-01-01) | `docs/reports/audit/BOX_BASELINE_REPORT.md`, `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
 | **Row** | `src/COMPOSITION/layout/Row/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/ROW_BASELINE_REPORT.md` |
 | **Stack** | `src/COMPOSITION/layout/Stack/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/STACK_BASELINE_REPORT.md` |
 | **Column** | `src/COMPOSITION/layout/Column/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/COLUMN_BASELINE_REPORT.md` |
@@ -237,6 +239,14 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Grid** | `src/COMPOSITION/layout/Grid/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/GRID_BASELINE_REPORT.md` |
 | **Surface** | `src/COMPOSITION/layout/Surface/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/SURFACE_BASELINE_REPORT.md` |
 | **Container** | `src/COMPOSITION/layout/Container/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/CONTAINER_BASELINE_REPORT.md` |
+| **ContentShell** | `src/COMPOSITION/layout/ContentShell/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Divider** | `src/COMPOSITION/layout/Divider/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Inset** | `src/COMPOSITION/layout/Inset/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **PageHeader** | `src/COMPOSITION/layout/PageHeader/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Section** | `src/COMPOSITION/layout/Section/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **SidebarLayout** | `src/COMPOSITION/layout/SidebarLayout/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **StickyBar** | `src/COMPOSITION/layout/StickyBar/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Navbar** | `src/COMPOSITION/layout/Navbar/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/NAVBAR_BASELINE_REPORT.md` |
 | **Toast** | `src/COMPOSITION/overlays/Toast.tsx` | ✅ **LOCKED** | 2025-12-26 | `docs/reports/audit/TOAST_BASELINE_REPORT.md` |
 | **SimpleTable** | `src/PATTERNS/tables/SimpleTable/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md` |
 | **Table** | `src/PATTERNS/tables/table/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TABLE_BASELINE_REPORT.md` |
@@ -247,7 +257,9 @@ The following Extension layer components have successfully completed Pipeline 18
 | **EmptyState** | `src/PATTERNS/states/EmptyState/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md` |
 | **NotificationCenter** | `src/DOMAIN/notifications/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
 | **Alert** | `src/PRIMITIVES/Alert/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/ALERT_BASELINE_REPORT.md` |
-| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 (Second Pass: 2026-01-01) | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **VenueCard** | `src/PATTERNS/cards/cards/VenueCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/VENUECARD_BASELINE_REPORT.md` |
+| **PromoCard** | `src/PATTERNS/cards/cards/PromoCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROMOCARD_BASELINE_REPORT.md` |
 | **FilterBar** | `src/PATTERNS/filters/filters/FilterBar/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md` |
 | **HoverCard** | `src/PATTERNS/menus/menus/hover-card/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md` |
 | **NavRoot** | `src/COMPOSITION/navigation/NavRoot/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVROOT_BASELINE_REPORT.md` |
@@ -259,6 +271,11 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Field** | `src/PRIMITIVES/Field/` | ✅ **COMPOSITION READY** | 2025-12-27 | `docs/reports/audit/FIELD_BASELINE_REPORT.md` |
 | **Popover** | `src/COMPOSITION/overlays/Popover.tsx` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/POPOVER_BASELINE_REPORT.md` |
 | **NextLinkAdapter** | `src/EXTENSIONS/next/NextLinkAdapter.tsx` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md` |
+| **EventCard** | `src/DOMAIN/sections/EventCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/EVENTCARD_BASELINE_REPORT.md` |
+| **CategoryCard** | `src/PATTERNS/cards/cards/CategoryCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/CATEGORYCARD_BASELINE_REPORT.md` |
+| **ProfileCard** | `src/DOMAIN/auth/auth/ProfileCard.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` |
+| **ArtistCard** | `src/PATTERNS/cards/cards/ArtistCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/ARTISTCARD_BASELINE_REPORT.md` |
+| **TicketCard** | `src/PATTERNS/cards/cards/TicketCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/TICKETCARD_BASELINE_REPORT.md` |
 
 ### Extension Tooling (LOCKED)
 
@@ -498,8 +515,28 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Type Deduplication:** Removed duplicate `SkeletonProps` definition (deleted Skeleton.types.ts)
 - **Storybook Compliance:** Stories demonstrate all variants and realistic usage (Matrix/States/SizesGallery not required - component has only variant prop, non-interactive)
 
+**Key Architectural Decisions (VenueCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
+- **Size Scale Alignment:** Changed from custom sizes `"default" | "compact"` to global scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
+- **Variant Scale Alignment:** Changed from custom variant `"featured"` to SurfaceVariant dictionary `"elevated"` per VARIANTS_SIZE_CANON.md
+- **Type Constraints:** Added `satisfies Record<VenueCardSize, string>` and `satisfies Record<VenueCardVariant, string>` constraints to all CVA variant maps
+- **CardBase Integration:** Component correctly uses CardBase for layout structure, sizes/variants now align directly with CardBase types
+- **Backward Compatibility:** Maintained `featured` prop support (maps to `"elevated"` variant) for backward compatibility
+- **Token Compliance:** 100% token usage (DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS)
+- **Accessibility:** WCAG 2.1 Level AA compliant (semantic HTML, ARIA attributes, screen reader support)
+- **Test Coverage:** Comprehensive test suite (30+ test cases covering public behavior, edge cases, accessibility)
+- **Storybook Compliance:** Matrix, States, SizesGallery, and Accessibility stories per VARIANTS_SIZE_CANON.md requirements
+
 **Key Architectural Decisions (CardBase):**
 
+**Second Pass (2026-01-01):**
+- Joint analysis with Card component confirmed architectural separation is correct
+- CardBase (PATTERNS layer) vs Card (COMPOSITION layer) serve different purposes
+- No changes required - component remains PROCESS LOCKED
+- Audit Report: `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` (Second Pass section)
+
+**First Pass (2025-12-27):**
 - **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
 - **Size Scale Alignment:** Mapped custom sizes `"default" | "compact"` → GlobalSize scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
 - **Variant Dictionary Alignment:** Mapped custom variants `"default" | "featured"` → SurfaceVariant dictionary `"default" | "elevated"` per VARIANTS_SIZE_CANON.md
@@ -510,6 +547,50 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Breaking Changes:** Size prop changed from `"default" | "compact"` to `"sm" | "md"`, variant prop changed from `"default" | "featured"` to `"default" | "elevated"`
 - **Storybook Compliance:** Added canonical stories (Matrix, SizesGallery) per VARIANTS_SIZE_CANON.md requirements
 - **Test Coverage:** Comprehensive test suite created covering all public behavior, variants, sizes, and subcomponents
+
+**Key Architectural Decisions (CategoryCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: size, variant)
+- **Type Constraints:** Added `satisfies Record<CategoryCardSize, string>`, `satisfies Record<CategoryCardVariant, string>` constraints to all CVA variant maps
+- **Component Role:** Domain-specific card component for displaying category information. Uses CardBase for layout composition and handles category-specific presentation logic (featured badges, image display, navigation)
+- **CardBase Composition:** Uses CardBase pattern consistently (CardBaseImageWrapper, CardBaseContentWrapper)
+- **Size Mapping:** Maps CategoryCardSize (`"sm" | "md"`) to CardBaseSize (`"sm" | "md"`) directly (no conversion needed after alignment)
+- **Variant Mapping:** Maps CategoryCardVariant (`"default" | "elevated"`) to CardBaseVariant (`"default" | "elevated"`) directly (no conversion needed after alignment)
+- **Token Compliance:** Uses DOMAIN_TOKENS, ICON_TOKENS, MOTION_TOKENS, TEXT_TOKENS for all styling (100% token compliance achieved)
+- **Semantic HTML:** Uses `<Heading level={3}>`, `<img>` with alt text, `<Link>` for navigation
+- **Accessibility:** WCAG 2.1 Level A/AA compliant (semantic HTML, proper ARIA usage, keyboard navigation via Link component)
+- **Test Coverage:** Comprehensive test suite created (27 tests covering API contract, sizes, variants, content display, image display, featured badge, links, edge cases, accessibility)
+- **Storybook Compliance:** Created canonical stories (Matrix, SizesGallery, States, RealisticUsage, Accessibility) per VARIANTS_SIZE_CANON.md requirements
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
+
+**Key Architectural Decisions (PromoCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
+- **Size Scale Alignment:** Changed from custom sizes `"default" | "compact"` to global scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
+- **Variant Scale Alignment:** Changed from custom variant `"featured"` to SurfaceVariant dictionary `"elevated"` per VARIANTS_SIZE_CANON.md
+- **Type Constraints:** Added `satisfies Record<PromoCardSize, string>` and `satisfies Record<PromoCardVariant, string>` constraints to all CVA variant maps
+- **CardBase Integration:** Component correctly uses CardBase for layout structure, sizes/variants now align directly with CardBase types
+- **Backward Compatibility:** Maintained `featured` prop support (maps to `"elevated"` variant) for backward compatibility
+- **Token Compliance:** 100% token usage (DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, GRADIENT_TOKENS)
+- **Accessibility:** WCAG 2.1 Level AA compliant (semantic HTML, ARIA attributes, screen reader support)
+- **Test Coverage:** Comprehensive test suite (30+ test cases covering public behavior, edge cases, accessibility)
+- **Storybook Compliance:** Matrix, States, SizesGallery, and Accessibility stories per VARIANTS_SIZE_CANON.md requirements
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
+
+**Key Architectural Decisions (EventCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: size, variant)
+- **Type Constraints:** Added `satisfies Record<EventCardSize, string>`, `satisfies Record<EventCardLayout, string>`, and `satisfies Record<EventCardVariant, string>` constraints to all 10 CVA variant maps
+- **Component Role:** Domain-specific card component for displaying event information. Uses CardBase for layout composition and handles event-specific presentation logic (featured badges, ticket links, image display)
+- **CardBase Composition:** Uses CardBase pattern consistently (CardBaseImageWrapper, CardBaseContentWrapper, CardBaseFooterWrapper)
+- **Size Mapping:** Maps EventCardSize (`"default" | "compact"`) to CardBaseSize (`"md" | "sm"`) internally
+- **Variant Mapping:** Maps EventCardVariant (`"default" | "featured"`) to CardBaseVariant (`"default" | "elevated"`) internally
+- **Token Compliance:** Uses DOMAIN_TOKENS, CARD_TOKENS, TEXT_TOKENS, ICON_TOKENS, GRADIENT_TOKENS for all styling
+- **Semantic HTML:** Uses `<Heading level={3}>`, `<time>`, `<address>` elements for accessibility
+- **Accessibility:** Removed `role="text"` from metadata items (semantic elements provide sufficient accessibility), icons properly hidden with `aria-hidden={true}`, images have alt text
+- **Test Coverage:** Comprehensive test suite created (27 tests covering API contract, sizes, variants, content display, image display, featured badge, links, edge cases)
+- **Storybook Compliance:** Created canonical stories (Matrix, SizesGallery, States) per VARIANTS_SIZE_CANON.md requirements, plus additional realistic usage examples
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
 
 **Key Architectural Decisions (Flex):**
 
@@ -1008,6 +1089,7 @@ The following public components are **IMPLEMENTED** after completing their audit
 | NextLinkAdapter | Extension  | ✅ **PROCESS LOCKED** | 2025-12-25  | Framework adapter component. Pipeline 18A re-executed (Steps 0-12 complete, full execution). PROCESS_LOCK re-confirmed. Extension-only (not exported from main library). |
 | Portal | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | SSR-safe portal utility component. Pipeline 18A complete (Steps 0-12). Utility component (no visual tokens, no size/variant props), SSR-safe mounting pattern, wrapper div necessary for ref forwarding. |
 | Dialog | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | Semantic wrapper over Modal (Foundation). Pipeline 18A complete (Steps 0-12). Provides Dialog.Header, Dialog.Title, Dialog.Description, Dialog.Body, Dialog.Footer subcomponents. Automatic aria-labelledby and aria-describedby management. |
+| Backdrop | Composition | ✅ **PROCESS LOCKED** | 2026-01-01 | Visual backdrop component for overlay components (Modal, Dialog). Pipeline 18A complete (Steps 0-12). Token-driven styling with variant support (default, blurred, transparent). Stateless component with CSS-based animation. |
 | Toast | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Notification overlay component. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling. |
 | ContextMenu | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Right-click context menu overlay. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling, full keyboard navigation and ARIA support. |
 
@@ -1297,6 +1379,13 @@ Any token system modifications require:
   - Updated Guard Prompt to include token system lock enforcement
   - Added token system unlock procedure documentation
   - Updated related documents section with token system references
+
+- **v1.7** (2026-01-01): Layout Extension Layer Lock
+  - Locked Extension Layout components (ContentShell, Divider, Inset, PageHeader, Section, SidebarLayout, StickyBar)
+  - Added Extension Layout components to locked components table
+  - Updated Box lock status with Extension Lock reference
+  - All components locked after successful hard code review
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
 
 - **v1.0** (2025-12-12): Initial Architecture Lock
   - Locked foundation components (Modal, Tabs, Select, ContextMenu, Toast)

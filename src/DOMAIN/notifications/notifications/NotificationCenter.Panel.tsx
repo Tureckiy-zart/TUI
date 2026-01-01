@@ -6,6 +6,26 @@
  * Side drawer panel for displaying notification center.
  * Uses Surface + Portal + Backdrop with slide animation from right.
  * Includes header, grouped lists, scrollable area, focus management, and keyboard support.
+ *
+ * ## Architectural Semantics: Panel ≠ Card
+ *
+ * This component follows **Panel semantics**, not Card semantics.
+ *
+ * **Panel Responsibilities:**
+ * - Overlay orchestration (Portal, Backdrop, Focus, Keyboard, Gestures)
+ * - Layout orchestration (scroll container, header/content separation)
+ * - Content orchestration (grouping, auto-collapse, empty state)
+ * - Delegates content rendering to specialized components (List, Item)
+ *
+ * **MUST NOT be converted to Card/CardBase:**
+ * - Panel is an **overlay orchestrator** that manages interaction and layout
+ * - Card is a **content container** with explicit semantic sections (header/body/footer)
+ * - Mixing these semantics creates architectural confusion
+ *
+ * **Architectural Decision:** This is a canonical architectural rule established by
+ * [ADR_overlay_panel_not_card.md](../../../../docs/architecture/decisions/ADR_overlay_panel_not_card.md).
+ *
+ * **Reference:** See ADR for complete rationale and decision rule for future panels.
  */
 
 import { X } from "lucide-react";
@@ -19,6 +39,7 @@ import { useFocusLock } from "@/COMPOSITION/overlays/utils/FocusLock";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { useSwipe } from "@/FOUNDATION/theme/motion/gestures";
 import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
+import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import { Button } from "@/PRIMITIVES/Button";
 
 import { NotificationCenterDismissAll } from "./NotificationCenter.DismissAll";
@@ -221,12 +242,16 @@ export const NotificationCenterPanel = React.forwardRef<
             {/* Header */}
             <div
               className={cn(
+                // Header divider: border-b is acceptable here as divider semantics
+                // No generic border token exists in system (DIVIDER_TOKENS is for Divider component only)
                 "flex items-center justify-between border-b",
                 NOTIFICATION_TOKENS.panel.spacing.headerPadding,
               )}
             >
-              <h2 className="text-lg font-semibold">Notifications</h2>
-              <div className="flex items-center gap-xs">
+              <h2 className={cn(TEXT_TOKENS.fontSize.lg, TEXT_TOKENS.fontWeight.semibold)}>
+                Notifications
+              </h2>
+              <div className={cn("flex items-center", NOTIFICATION_TOKENS.spacing.gap)}>
                 <NotificationCenterDismissAll />
                 <Button variant="ghost" iconOnly onClick={onClose} aria-label="Close notifications">
                   <X className="h-4 w-4" />

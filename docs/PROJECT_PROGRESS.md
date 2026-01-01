@@ -236,6 +236,20 @@ The following Extension layer components have successfully completed Pipeline 18
    - **Key Decisions:** No CVA structure (correct for no size/variant props), token compliance via NAVIGATION_TOKENS, compound API pattern
    - **States:** default, disabled (via item.disabled), current (via aria-current="page")
    - **Audit Report:** `docs/reports/audit/BREADCRUMBS_BASELINE_REPORT.md`
+4. **SearchBar** - `src/COMPOSITION/navigation/SearchBar/SearchBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
+   - **Layer:** COMPOSITION (navigation layer)
+   - **Semantic Role:** COMPOSITION_NAVIGATION_SEARCH_AUTOCOMPLETE
+   - **Pipeline 18A:** All steps (0-12) completed successfully
+   - **Key Decisions:**
+     - Code quality improved (helpers extracted: `selectSuggestion`, `closeSuggestions`, memoization added, switch statement)
+     - Token compliance achieved (z-index fixed: `z-50` → `z-10`, other tokens verified compliant)
+     - No size/variant props (correct - component does not need variants)
+     - Uncontrolled component pattern (manages own input state)
+     - Composes SearchInput (PATTERNS) and Button (PRIMITIVES)
+   - **Test Coverage:** Comprehensive (375 lines, all public behavior and edge cases covered)
+   - **Storybook Coverage:** 6 stories (default, without suggestions, many suggestions, filtered, states, realistic usage)
+   - **Accessibility:** Keyboard navigation complete (ArrowUp/Down, Enter, Escape), proper focus management, ARIA enhancements identified for future improvement
+   - **Audit Report:** `docs/reports/audit/SEARCHBAR_BASELINE_REPORT.md`
 3. **SegmentedControl** - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
    - **Refactored:** CVA migrated (cva → tokenCVA), type system normalized (VariantProps removed, explicit union types exported), type constraints applied (satisfies Record<Type, string>)
    - **Pipeline 18A:** All 7 BLOCKERS resolved (CVA migration, type system fixes × 3, size mapping table, tests, Storybook compliance)
@@ -315,7 +329,18 @@ The following Extension layer components have successfully completed Pipeline 18
 10. **Stack** - `src/COMPOSITION/layout/Stack/Stack.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
     - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
-11. **Flex** - `src/COMPOSITION/layout/Flex/Flex.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
+11. **Card** - `src/COMPOSITION/layout/Card/Card.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
+    - **Pipeline 18A:** All steps complete (0-12), all blockers resolved
+    - **Key Accomplishments:** Eliminated string parsing anti-pattern (helper functions created), removed hardcoded classes (constants/props used), reduced code duplication, created comprehensive test coverage, created comprehensive Storybook coverage, verified accessibility compliance
+    - **Key Decisions:** Token-driven card container with Header, Body, Footer subcomponents, size-based token defaults (sm, md, lg), helper functions for token extraction (extractPaddingFromToken, extractRadiusFromToken, extractShadowFromToken, extractSpacingFromToken), CARD_BASE_CLASSES constant for base styling, no CVA required (size-based defaults, not variant-driven)
+    - **Component Role:** COMPOSITION_LAYOUT_CARD_CONTAINER (generic, size-based card container)
+    - **Relationship with CardBase:** Architectural separation confirmed - CardBase (PATTERNS, specialized patterns) vs Card (COMPOSITION, generic layouts). Different purposes, different layers, no architectural violation.
+    - **Token Compliance:** ✅ 100% (CARD_TOKENS, all styling uses tokens exclusively)
+    - **Test Coverage:** Comprehensive (Card.test.tsx - 20+ test cases covering rendering, sizes, props, subcomponents, token extraction)
+    - **Storybook Coverage:** Compliant (6 stories: Default, Matrix, SizesGallery, WithSubcomponents, RealisticUsage, WithCustomProps)
+    - **Accessibility:** ✅ Compliant (non-interactive component, semantic HTML, no ARIA violations)
+    - **Audit Report:** `docs/reports/audit/CARD_BASELINE_REPORT.md`
+12. **Flex** - `src/COMPOSITION/layout/Flex/Flex.tsx` — ✅ **LOCKED** (2025-12-15, validated by Pipeline 18A 2025-12-26)
     - **Status:** Component was already LOCKED, Pipeline 18A validated existing state
     - **Pipeline 18A:** All steps complete (0-12), no BLOCKERS found, refactor not required
     - **Key Decisions:** Advanced flexbox container (full control over flexbox properties), no CVA required (correct per Decision Matrix - no token-driven axes), 100% token compliance (gap uses spacing tokens, basis accepts tokens and semantic CSS values), non-interactive (no states), Extension API (allows className/style)
@@ -391,6 +416,25 @@ The following Composition layer components have successfully completed Pipeline 
    - **Storybook:** Compliant (Default, CustomContainer, SSR stories - no Matrix/States/SizesGallery/LongContent needed for utility component)
    - **Audit Report:** `docs/reports/audit/PORTAL_BASELINE_REPORT.md`
    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+
+1a. **Backdrop** - `src/COMPOSITION/overlays/Backdrop.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
+   - **Lock Date:** 2026-01-01
+   - **Pipeline 18A Completion:** 2026-01-01 (Steps 0-12 complete)
+   - **Audit Report:** `docs/reports/audit/BACKDROP_BASELINE_REPORT.md`
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Extension Overlay Component
+   - **Purpose:** Overlay backdrop component for modal and dialog overlays. Provides visual backdrop with optional blur and transparency variants.
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Key Decisions:**
+     - CVA migration: `cva` → `tokenCVA` (Decision Matrix RULE 1 compliance)
+     - Type system: Explicit union type `BackdropVariant` exported, type constraint added
+     - Token compliance: 100% token usage (OVERLAY_TOKENS.backdrop.*)
+     - Stateless component: No internal state, all state controlled externally
+     - Accessibility: `aria-hidden="true"` always set (correct for backdrop)
+   - **Test Coverage:** 25 tests (comprehensive: rendering, props, ref forwarding, accessibility, variants, animation, edge cases)
+   - **Storybook Coverage:** 6 stories (Default, Blurred, Transparent, AllVariants, WithContent, LongContent - canonical)
+   - **Exports:** `Backdrop`, `BackdropProps`, `BackdropVariant`
 
 2. **Toast** - `src/COMPOSITION/overlays/Toast.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
 3. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Re-run Complete, 2025-12-27)
@@ -537,8 +581,8 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
 
 3. **Field** - `src/PRIMITIVES/Field/Field.tsx`
-   - **Status:** ✅ **COMPOSITION READY**
-   - **Completion Date:** 2025-12-27
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2026-01-01
    - **Pipeline 18A Completion:** 2025-12-27 (Third Pass: Steps 0-12 complete, no changes required)
    - **Audit Report:** `docs/reports/audit/FIELD_BASELINE_REPORT.md`
    - **Component Type:** Composition Primitive (Form Composition)
@@ -2713,11 +2757,74 @@ _No tasks in progress currently._
 
 ---
 
-### L4_CATEGORY_CARD - CategoryCard Component Refactoring
+### CARD_18A_REFACTOR - Card Component Pipeline 18A Refactoring & Lock
 
-- **Status:** ✅ completed
-- **Date Completed:** 2025-12-12
-- **Summary:** Successfully refactored CategoryCard component to use domain tokens (CARD_TOKENS, DOMAIN_TOKENS) and CVA architecture. All hardcoded visual values replaced with tokens. Component properly implements icon and label sections using semantic tokens. Component is exported and ready for use.
+- **Status:** ✅ completed (PROCESS LOCKED)
+- **Date Completed:** 2026-01-01
+- **Lock Date:** 2026-01-01
+- **Summary:** Successfully completed Pipeline 18A refactoring for Card component and applied PROCESS LOCKED status. Eliminated architectural smells (string.replace, hardcoded classes), created helper functions for token extraction, added comprehensive tests and Storybook coverage, verified accessibility compliance, applied lock without conflicts with CardBase.
+- **Key Accomplishments:**
+  - ✅ Eliminated string parsing anti-pattern (7 instances → helper functions)
+  - ✅ Removed hardcoded classes (2 instances → constants/props)
+  - ✅ Reduced code duplication (4 instances → helper functions)
+  - ✅ Created comprehensive test coverage (Card.test.tsx - 20+ test cases)
+  - ✅ Created comprehensive Storybook coverage (Card.stories.tsx - 6 stories)
+  - ✅ Verified accessibility compliance (non-interactive component, semantic HTML)
+  - ✅ Applied PROCESS LOCKED status (all consistency checks passed)
+  - ✅ No conflicts with CardBase (different layers, different purposes)
+- **Pipeline 18A:**
+  - ✅ STEP 0: Baseline Snapshot - Complete
+  - ✅ STEP 1: Structural & Code Quality Review - Complete
+  - ✅ STEP 2: Semantic Role Validation - Complete
+  - ✅ STEP 3: Pattern Alignment - Complete
+  - ✅ STEP 4: State & Interaction Model Review - Complete
+  - ✅ STEP 5: Token Consistency - Complete
+  - ✅ STEP 6: Public API Review - Complete
+  - ✅ STEP 7: Type System Alignment - Complete
+  - ✅ STEP 8: Intentional Refactor Pass - Complete
+  - ✅ STEP 9: Mandatory FIX - Complete
+  - ✅ STEP 10: Tests & Storybook - Complete
+  - ✅ STEP 11: Accessibility Audit - Complete
+  - ✅ STEP 12: Final Review & Lock - Complete
+- **Helper Functions Created:**
+  - `extractPaddingFromToken()` - extracts padding from "p-*" tokens
+  - `extractRadiusFromToken()` - extracts radius from "rounded-*" tokens
+  - `extractShadowFromToken()` - extracts shadow from "shadow-*" tokens (handles "shadow" → "xs")
+  - `extractSpacingFromToken()` - extracts spacing from "space-y-*" tokens
+  - `CARD_BASE_CLASSES` - constant for Card base styling
+- **Code Changes:**
+  - Replaced all `string.replace()` calls with helper functions
+  - Extracted hardcoded classes to `CARD_BASE_CLASSES` constant
+  - Replaced CardFooter hardcoded `"items-center"` with Row `align="center"` prop
+  - Consolidated token extraction logic in helper functions
+- **Test Coverage:**
+  - Component rendering (Card, CardHeader, CardBody, CardFooter)
+  - Size prop behavior (sm, md, lg)
+  - Prop overrides (radius, shadow, p)
+  - Subcomponent attachment (Card.Header, Card.Body, Card.Footer)
+  - Ref forwarding, className merging, Box props forwarding
+- **Storybook Coverage:**
+  - Default, Matrix (all sizes), SizesGallery (visual comparison)
+  - WithSubcomponents (Header/Body/Footer combinations)
+  - RealisticUsage (real-world examples), WithCustomProps (prop overrides)
+- **Files Created:**
+  - `src/COMPOSITION/layout/Card/Card.test.tsx` - comprehensive test suite
+  - `src/COMPOSITION/layout/Card/Card.stories.tsx` - comprehensive stories
+  - `docs/reports/audit/CARD_BASELINE_REPORT.md` - audit report
+- **Files Modified:**
+  - `src/COMPOSITION/layout/Card/Card.tsx` - refactored with helper functions
+- **Component Status:**
+  - ✅ **LOCK READY** - Pipeline 18A complete, all quality gates passed
+  - ✅ No conflicts with CardBase (different layers, different purposes)
+  - ✅ Ready for use
+
+---
+
+### L4_CATEGORY_CARD - CategoryCard Component Pipeline 18A
+
+- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+- **Date Completed:** 2026-01-01
+- **Summary:** CategoryCard component completed full Pipeline 18A (Component Review & Improvement Pipeline). Component migrated to tokenCVA, aligned size/variant props with global scale and canonical dictionaries, comprehensive tests and Storybook stories created, full A11Y compliance verified. Component is PROCESS LOCKED and ready for production use.
 - **Key Accomplishments:**
   - ✅ Refactored existing CategoryCard component in `src/components/cards/CategoryCard/`
   - ✅ Replaced all hardcoded visual values with tokens
@@ -2784,6 +2891,48 @@ _No tasks in progress currently._
 - **Next Steps:**
   - Component is ready for use
   - Maintains consistency with other domain card components (EventCard, VenueCard, ArtistCard)
+
+---
+
+### L4_PROFILE_CARD - ProfileCard Component Pipeline 18A
+
+- **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+- **Date Completed:** 2026-01-01
+- **Summary:** ProfileCard component completed full Pipeline 18A (Component Review & Improvement Pipeline). Component refactored with size/variant props, Avatar component integration, forwardRef pattern migration, comprehensive tests and Storybook stories created, full A11Y compliance verified. Component is PROCESS LOCKED and ready for production use.
+- **Key Accomplishments:**
+  - ✅ Refactored existing ProfileCard component in `src/DOMAIN/auth/auth/ProfileCard.tsx`
+  - ✅ Added size prop (`sm | md | lg`) with default `md`
+  - ✅ Added variant prop (`default | elevated`) with default `default`
+  - ✅ Migrated to forwardRef pattern for ref forwarding
+  - ✅ Replaced avatar div with Avatar component from COMPOSITION/controls/Avatar
+  - ✅ Removed unused `cn` import
+  - ✅ Extended React.HTMLAttributes<HTMLDivElement> for HTML attributes support
+  - ✅ Created explicit union types: ProfileCardSize, ProfileCardVariant
+  - ✅ Exported types: ProfileCardProps, ProfileCardSize, ProfileCardVariant
+  - ✅ Used Stack component for spacing (token-driven)
+  - ✅ Full token compliance achieved (via Card component props)
+- **Token System:**
+  - Uses CARD_TOKENS via Card component (shadow, size, radius, padding)
+  - Uses Stack component for spacing (token-driven spacing prop)
+  - Uses Avatar component (uses AVATAR_TOKENS internally)
+  - All hardcoded values replaced with tokens or props
+- **Component Structure:**
+  - Uses Card (COMPOSITION) directly (appropriate for simple card structure)
+  - Uses CardBody for content section
+  - Uses Stack for vertical spacing
+  - Uses Avatar component for avatar rendering
+  - Uses Heading (h3) for name
+  - Uses Text component for email
+- **Files Modified:**
+  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Complete refactor applied
+- **Files Created:**
+  - `src/DOMAIN/auth/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
+  - `src/DOMAIN/auth/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
+  - `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` - Complete audit report
+- **Component Status:**
+  - ✅ **PROCESS LOCKED** - Pipeline 18A complete, all quality gates passed
+  - ✅ Ready for use
+- **Audit Report:** `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md`
 
 ---
 
@@ -2878,6 +3027,50 @@ _No tasks in progress currently._
 - **Next Steps:**
   - Component is ready for use
   - Maintains consistency with other domain card components (EventCard, VenueCard, ArtistCard, CategoryCard)
+
+---
+
+### TUNG_DOMAIN_CARDS_STABILITY_LOCK - Domain Cards Stability Lock
+
+- **Status:** ✅ completed
+- **Date Completed:** 2026-01-01
+- **Layer:** DOMAIN / PATTERNS
+- **Summary:** Формально закрыт Phase 1 упрощения доменных карточек и стабилизированы все доменные карточки. API, ответственности и архитектурные границы заморожены.
+- **Components Locked:**
+  - EventCard (`src/DOMAIN/sections/EventCard/`)
+  - ProfileCard (`src/DOMAIN/auth/auth/ProfileCard.tsx`)
+  - VenueCard (`src/PATTERNS/cards/cards/VenueCard/`)
+  - ArtistCard (`src/PATTERNS/cards/cards/ArtistCard/`)
+  - TicketCard (`src/PATTERNS/cards/cards/TicketCard/`)
+  - CategoryCard (`src/PATTERNS/cards/cards/CategoryCard/`)
+  - PromoCard (`src/PATTERNS/cards/cards/PromoCard/`)
+- **Phase 1 Completion:**
+  - ✅ LinkWithCustomVariant извлечен в shared utility (`src/COMPOSITION/layout/LinkWithCustomVariant.tsx`)
+  - ✅ Неиспользуемые варианты удалены (4 варианта: VenueCard - 3, ArtistCard - 1)
+  - ✅ Хардкод значения заменены на токены (PromoCard: font-semibold → TEXT_TOKENS.fontWeight.semibold)
+- **Stability Rules:**
+  - API заморожен (no breaking changes)
+  - Варианты и размеры заморожены (no new variants/sizes)
+  - Архитектурные границы заморожены (no layout primitives inside cards)
+  - CardBase API заморожен (no changes)
+- **Phase 2 Status:** DEFERRED (не планируется в ближайшее время)
+- **Allowed Changes:**
+  - Исправления багов без визуальных изменений
+  - Обновления токенов, если они не влияют на семантику
+  - Внутренние рефакторы с нулевым изменением API и поведения
+- **Forbidden Changes:**
+  - Новые доменные карточки без явного TUNG
+  - Новые варианты или размеры для существующих карточек
+  - Изменения API CardBase
+  - Layout примитивы внутри доменных карточек
+  - Архитектурные изменения без процедуры разблокировки
+- **Reference Documents:**
+  - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md`
+  - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md`
+  - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md`
+- **Next Steps:**
+  - Переход к следующему UI домену (Lists / Tables / Navigation)
+  - Доменные карточки считаются стабильными и готовы к использованию
 
 ---
 
@@ -3097,6 +3290,61 @@ _No tasks in progress currently._
 - **Status:** ✅ completed
 - **Date Completed:** 2025-12-13
 - **Summary:** Re-verified token domain system after PromoCard fix. Confirmed all violations resolved and token system is compliant.
+
+---
+
+### TUNG_DOMAIN_CARDS_SIMPLIFICATION_AUDIT (100% Complete)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2025-01-20
+- **Summary:** Successfully audited and simplified all domain-level Card components by extracting shared utilities, removing unused variants, and fixing hardcoded values. All cards now use CardBase or Card composition patterns correctly without changing visual output or UX.
+- **Scope:**
+  - Audited 7 domain cards: EventCard, ProfileCard, VenueCard, ArtistCard, TicketCard, CategoryCard, PromoCard
+  - Extracted LinkWithCustomVariant helper to shared utility
+  - Removed unused variants from VenueCard, ArtistCard, TicketCard
+  - Fixed hardcoded values in ProfileCard and PromoCard
+- **Key Achievements:**
+  - ✅ Created comprehensive inventory document (DOMAIN_CARDS_INVENTORY.md)
+  - ✅ Created duplication map document (DOMAIN_CARDS_DUPLICATION_MAP.md)
+  - ✅ Created decisions document (DOMAIN_CARDS_DECISIONS.md)
+  - ✅ Extracted LinkWithCustomVariant to `src/COMPOSITION/layout/LinkWithCustomVariant.tsx`
+  - ✅ Updated all 3 cards using LinkWithCustomVariant (EventCard, TicketCard, PromoCard)
+  - ✅ Removed 6 unused variants (venueCardTitleVariants, venueCardDescriptionVariants, venueCardLocationTextVariants, artistCardGenresVariants, ticketCardTitleVariants, ticketCardCapacityVariants)
+  - ✅ Fixed hardcoded `shadow-md` and `p-md` in ProfileCard (now uses Card props)
+  - ✅ Fixed hardcoded `font-semibold` in PromoCard (now uses TEXT_TOKENS.fontWeight.semibold)
+  - ✅ All cards maintain visual output unchanged
+  - ✅ All tests pass, no linter errors
+- **Code Reduction:**
+  - ~120 lines of duplicated LinkWithCustomVariant code removed
+  - ~60 lines of unused variant code removed
+  - Total: ~180 lines of code removed
+- **Files Created:**
+  - `src/COMPOSITION/layout/LinkWithCustomVariant.tsx` - Shared utility component
+  - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md` - Complete inventory
+  - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md` - Duplication analysis
+  - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md` - Simplification decisions
+- **Files Modified:**
+  - `src/COMPOSITION/layout/index.ts` - Added LinkWithCustomVariant export
+  - `src/DOMAIN/sections/EventCard/EventCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx` - Uses shared LinkWithCustomVariant, fixed font-semibold
+  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Fixed hardcoded shadow-md and p-md
+  - `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` - Removed 3 unused variants
+  - `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts` - Removed 1 unused variant
+  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts` - Removed 2 unused variants
+- **Audit Documents:**
+  - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md` - Complete inventory of all 7 cards
+  - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md` - Detailed duplication analysis
+  - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md` - Simplification decisions for each card
+- **Verification:**
+  - ✅ TypeScript: PASSED
+  - ✅ ESLint: PASSED
+  - ✅ Visual output: UNCHANGED (verified via code review)
+  - ✅ All cards use CardBase or Card composition correctly
+  - ✅ No layout primitives used inside domain cards
+  - ✅ Duplicated helper code extracted to shared utility
+  - ✅ Unused variants removed
+  - ✅ Hardcoded values replaced with tokens/props
 - **Verification Steps:**
   - ✅ Re-scanned all component imports for cross-domain violations
   - ✅ Verified PromoCard no longer imports `BUTTON_TOKENS`
@@ -3607,10 +3855,23 @@ Added cross-references to Interactive Size Scale Authority Contract in all relat
   - Key Characteristics: Zero logic, no visual styling, no navigation behavior, pure structural wrapper, Foundation Enforcement compliant (no className/style props)
   - Migration: Created as standalone component following strict architectural requirements (TUNG_NAVLIST_CREATION)
 
-- ✅ **CardBase** - Pipeline 18A Complete (2025-12-27)
+- ✅ **CardBase** - Pipeline 18A Complete (2025-12-27), Second Pass Complete (2026-01-01)
   - Component: CardBase
   - Type: Extension Layer Primitive - Layout Composition
   - Location: `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+  - Second Pass: Joint analysis with Card component (2026-01-01) confirmed architectural separation is correct. No changes required. Component remains PROCESS LOCKED.
+
+- ⏳ **Card** - Pipeline 18A Analysis Complete (2026-01-01), FIX Phase Pending
+  - Component: Card
+  - Type: Extension Layer Composition - Layout
+  - Location: `src/COMPOSITION/layout/Card/Card.tsx`
+  - Audit Report: `docs/reports/audit/CARD_BASELINE_REPORT.md`
+  - Status: ⏳ IN PROGRESS (Steps 0-8 complete, Steps 9-12 pending)
+  - Analysis Date: 2026-01-01
+  - Current Status: Analysis phase complete (STEP 0-8). Quality refactor required (STEP 9). Tests and Storybook missing (STEP 10). Not ready for lock.
+  - Key Findings: Token extraction logic duplication, hardcoded className values, API overlap with Box (radius/shadow/p props), missing tests and Storybook stories
+  - Required Actions: Extract token extraction helper, replace hardcoded values with tokens, create tests and Storybook stories (Matrix, SizesGallery)
+  - Relationship with CardBase: Joint analysis confirmed architectural separation - CardBase (PATTERNS, specialized patterns) vs Card (COMPOSITION, generic layouts). Different purposes, different layers, no architectural violation.
 
 - ✅ **HoverCard** - Pipeline 18A Complete (2025-12-27)
   - Component: HoverCard
@@ -3686,6 +3947,110 @@ Added cross-references to Interactive Size Scale Authority Contract in all relat
   - Use Cases: Search with autocomplete, tags input, large list selection with filtering
   - Exports: `Combobox`, `ComboboxInput`, `ComboboxList`, `ComboboxRoot`
   - Types: `ComboboxRootProps`, `ComboboxInputProps`, `ComboboxListProps`, `ComboboxOption`, `ComboboxSize`
+
+- ✅ **ContentShell** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: ContentShell
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/ContentShell/`
+  - Creation Report: `docs/reports/creation/ContentShell_CREATION_REPORT.md`
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Body-level layout wrapper для структурирования основного контента страницы с опциональной навигацией. Позволяет собирать экраны из ContentShell → PageHeader → Section.
+  - Foundation Composition: N/A (uses layout primitives: Container, Stack)
+  - Token Compliance: ✅ 100% (ResponsiveSpacing for contentPadding)
+  - Key Characteristics: Semantic `<main>` element, optional navigation (nav prop), token-based contentPadding (ResponsiveSpacing), uses Container and Stack internally
+  - Use Cases: Структурирование страниц приложения, объединение навигации и контента, создание консистентной структуры экранов
+  - API Reference: `docs/architecture/LAYOUT_API_RESOLUTION.md` (Resolution 4: ContentShell Responsibility)
+  - Exports: `ContentShell`, `ContentShellProps`
+  - Types: `ContentShellProps`
+
+- ✅ **Divider** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: Divider
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/Divider/`
+  - Creation Report: `docs/reports/creation/Divider_CREATION_REPORT.md`
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Layout component for visually separating sections and content blocks. Supports horizontal and vertical orientations, tone variants, and optional inset padding.
+  - Foundation Composition: N/A (layout component, does not use Foundation components)
+  - Token Compliance: ✅ 100% (spacing tokens, color tokens, layout tokens via DIVIDER_TOKENS)
+  - Key Characteristics: Layout component (not control), horizontal/vertical orientations, tone variants (border, muted, primary, secondary, accent), inset padding pattern (boolean), semantic `<hr>` for horizontal, `<div>` for vertical, decorative element (role="none", aria-hidden="true")
+  - Motion: NO MOTION BY DESIGN (static layout component)
+  - Use Cases: Separating sections, dividing content blocks, visual content separation
+  - API: `orientation?: "horizontal" | "vertical"`, `tone?: "border" | "muted" | "primary" | "secondary" | "accent"`, `inset?: boolean`
+  - Forbidden Props: px, py, color, size, thickness, children
+  - Exports: `Divider`, `dividerVariants`
+  - Types: `DividerOrientation`, `DividerProps`, `DividerTone`
+
+- ✅ **Inset** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: Inset
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/Inset/`
+  - Creation Report: `docs/reports/creation/Inset_CREATION_REPORT.md`
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Inner spacing wrapper primitive for any content without controlling layout direction, alignment, or gap between children. A thin layout primitive for inner spacing only.
+  - Foundation Composition: N/A (layout primitive, does not use Foundation components)
+  - Token Compliance: ✅ 100% (spacing tokens only)
+  - Key Characteristics: Layout primitive (not composition component), single responsibility (inner spacing wrapper), does NOT control layout direction/alignment/gap, does NOT duplicate Stack gap behavior, does NOT duplicate Box px/py props, does NOT duplicate Section vertical padding
+  - Motion: NO MOTION BY DESIGN (pure layout wrapper, no state/spatial changes)
+  - Use Cases: Wrapping content with inner spacing, wrapping Card/Stack components, responsive padding
+  - API: `padding?: ResponsiveSpacing`
+  - Forbidden Props: px, py, gap, size, align, direction, spacing
+  - Exports: `Inset`, `InsetProps`
+
+- ✅ **SidebarLayout** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: SidebarLayout
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/SidebarLayout/`
+  - Creation Report: `docs/reports/creation/SidebarLayout_CREATION_REPORT.md`
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Page-level compositional layout for pages with a sidebar and main content. Uses Grid internally for two-column layout and Stack for vertical collapse.
+  - Foundation Composition: Composes Foundation components (Box, Stack)
+  - Token Compliance: ✅ 100% (spacing tokens, breakpoint tokens, CSS variables)
+  - Key Characteristics: Page-level compositional layout component, two-column layout with sidebar and content, sidebar rendered as `<aside>`, content as `<main>` (semantic HTML), token-based sidebar width (sm=256px, md=320px, lg=384px), token-based gap spacing (ResponsiveSpacing), optional collapse behavior (responsive breakpoint-based), sidebar position (left/right)
+  - Motion: NO MOTION BY DESIGN (layout collapse is structural change, not interactive transition)
+  - Use Cases: Page layouts with sidebar navigation, article layouts with sidebars, responsive two-column layouts
+  - API: `sidebar: React.ReactNode`, `children: React.ReactNode`, `sidebarPosition?: "left" | "right"`, `sidebarWidth?: "sm" | "md" | "lg"`, `gap?: ResponsiveSpacing`, `collapseAt?: "sm" | "md" | "lg" | "xl"`
+  - Forbidden Props: px, py, padding, paddingX, paddingY, grid, columns, rows, align, justify
+  - Exports: `SidebarLayout`, `SidebarLayoutProps`, `SidebarPosition`, `SidebarWidth`, `CollapseBreakpoint`
+
+- ✅ **StickyBar** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: StickyBar
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/StickyBar/`
+  - Creation Report: `docs/reports/creation/StickyBar_CREATION_REPORT.md`
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Minimal sticky layout container for persistent actions or contextual controls without managing page layout or routing. A thin layout wrapper for CSS sticky positioning.
+  - Foundation Composition: Composes Inset for internal spacing, composes Divider for visual separation (optional)
+  - Token Compliance: ✅ 100% (spacing tokens, color tokens, elevation tokens)
+  - Key Characteristics: Layout primitive (not a composition component), single responsibility (sticky layout container), does NOT manage page layout or routing, does NOT act as Header/Footer/Navigation replacement, does NOT introduce scroll listeners or JS-driven behavior, pure CSS sticky positioning (`position: sticky`), token-driven styling (background, z-index, spacing)
+  - Motion: NO MOTION BY DESIGN (pure layout wrapper, no state/spatial changes)
+  - Use Cases: Persistent action buttons, contextual controls, sticky toolbars
+  - API: `position?: "top" | "bottom"`, `tone?: "default" | "elevated" | "muted"`, `divider?: boolean`, `children: React.ReactNode`
+  - Forbidden Props: px, py, padding, gap, align, justify, height, offset, zIndex (raw), scroll, onScroll
+  - Exports: `StickyBar`, `stickyBarVariants`, `StickyBarPosition`, `StickyBarProps`, `StickyBarTone`
+- Component: SidebarLayout
+  - Type: Extension Layer Layout Component
+  - Location: `src/COMPOSITION/layout/SidebarLayout/`
+  - Creation Report: `docs/reports/creation/SidebarLayout_CREATION_REPORT.md`
+  - Status: ✅ ALLOWED (Extension Component)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
+  - Features: Page-level compositional layout for pages with a sidebar and main content. Uses Grid internally for two-column layout and Stack for vertical collapse.
+  - Foundation Composition: Uses Box and Stack components internally
+  - Token Compliance: ✅ 100% (spacing tokens, breakpoint tokens, CSS variables)
+  - Key Characteristics: Two-column layout with sidebar and content, semantic HTML (<aside>, <main>), token-based sidebar width (sm=256px, md=320px, lg=384px), token-based gap spacing, optional collapse behavior (responsive breakpoint-based), sidebar position (left/right), Motion: NO MOTION BY DESIGN
+  - Use Cases: Page layouts with sidebar navigation, article layouts with sidebars, responsive two-column layouts
+  - API: `sidebar: React.ReactNode`, `children: React.ReactNode`, `sidebarPosition?: "left" | "right"`, `sidebarWidth?: "sm" | "md" | "lg"`, `gap?: ResponsiveSpacing`, `collapseAt?: "sm" | "md" | "lg" | "xl"`
+  - Forbidden Props: px, py, padding, paddingX, paddingY, grid, columns, rows, align, justify
+  - Exports: `SidebarLayout`, `SidebarLayoutProps`, `SidebarPosition`, `SidebarWidth`, `CollapseBreakpoint`
 
 ---
 
@@ -3792,6 +4157,135 @@ _Upgrade Layer (U1-U6, U9-U13) and subsequent layers pending. See master_tasks.j
   - **Exports:** `Footer`, `FooterProps`
   - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
   - **Registered:** ✅ EXTENSION_STATE.md updated, src/COMPOSITION/layout/index.ts export added
+
+- ✅ **Navbar** - Layout Extension Layer Lock Complete (2026-01-01)
+  - Component: Navbar
+  - Type: Extension Layer Layout Component - Navigation Container
+  - Location: `src/COMPOSITION/layout/Navbar/`
+  - Audit Report: `docs/reports/audit/NAVBAR_BASELINE_REPORT.md`
+  - Status: ✅ PROCESS LOCKED (Pipeline 18A Complete, 2026-01-01)
+  - Pipeline: Pipeline 18A (Steps 0-12 complete, 2026-01-01)
+  - Features: Navigation container component providing semantic `<nav>` wrapper with left/right/children slots. Uses layout primitives internally (Box, Stack) for token-based styling.
+  - Foundation Composition: Uses layout primitives (Box, Stack) internally
+  - Token Compliance: ✅ 100% (token-based spacing via Box px/py props)
+  - Key Characteristics: Semantic `<nav>` element, slot-based API (left/right/children), token-based spacing, stateless container, no size/variant props
+  - Use Cases: Page-level navigation containers, navigation bars embedded in ContentShell, sticky navigation with StickyBar
+  - API Reference: `docs/architecture/LAYOUT_API_RESOLUTION.md` (Resolution 4: ContentShell Responsibility - Navbar used as nav prop)
+  - Exports: `Navbar`, `NavbarProps`
+  - Types: `NavbarProps`
+  - Test Coverage: Comprehensive (15 tests covering rendering, slots, aria-label, HTML attributes)
+  - Storybook Coverage: Compliant (Default, WithAllSlots, WithChildrenOnly, InsideContentShell, WithStickyBar, WithCustomAriaLabel)
+
+---
+
+## Layout Extension Layer Lock (2026-01-01)
+
+- ✅ **Layout Extension Layer Lock Complete**
+  - **Date:** 2026-01-01
+  - **Lock Type:** Extension Layer Component Lock
+  - **Audit Report:** `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+  - **Lock Document:** `docs/architecture/locks/LAYOUT_LOCK.md`
+  - **Status:** ✅ **LOCKED** - All 8 layout extension components are frozen
+  - **Locked Components:**
+    1. Box (Extension) - `src/COMPOSITION/layout/Box/Box.tsx`
+    2. ContentShell - `src/COMPOSITION/layout/ContentShell/ContentShell.tsx`
+    3. Divider - `src/COMPOSITION/layout/Divider/Divider.tsx`
+    4. Inset - `src/COMPOSITION/layout/Inset/Inset.tsx`
+    5. PageHeader - `src/COMPOSITION/layout/PageHeader/PageHeader.tsx`
+    6. Section - `src/COMPOSITION/layout/Section/Section.tsx`
+    7. SidebarLayout - `src/COMPOSITION/layout/SidebarLayout/SidebarLayout.tsx`
+    8. StickyBar - `src/COMPOSITION/layout/StickyBar/StickyBar.tsx`
+  - **Lock Rules:**
+    - No new props allowed
+    - No prop renaming allowed
+    - No semantic responsibility changes allowed
+    - Internal refactors allowed only if behavior and API remain identical
+    - No visual behavior changes without unlock procedure
+  - **Forbidden Actions:**
+    - Adding convenience props
+    - Expanding layout responsibilities
+    - Merging layout logic into semantic components
+    - Introducing alternative layout variants
+  - **Allowed Actions:**
+    - Bug fixes that do not affect public API
+    - Internal refactoring with zero behavior change
+    - Token value adjustments if they do not alter semantics
+  - **Next Steps:** Proceed to next architecture layer, disallow new layout components without new expansion TUNG
+
+---
+
+## TUNG_CANONICALIZE_ADR_OVERLAY_PANEL_NOT_CARD: ADR Overlay Panel ≠ Card Canonicalization
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2025-12-19  
+**Type:** Architecture  
+**Priority:** HIGH
+
+### Summary
+
+Successfully canonicalized ADR_overlay_panel_not_card across architecture, contracts, and code. ADR is now a binding part of TenerifeUI canon via cross-references in architecture indexes, contracts, affected components, and progress tracking.
+
+### Completed Tasks
+
+1. **Architecture Index Integration** ✅
+   - Added ADR_overlay_panel_not_card to `docs/architecture/ARCHITECTURE_DOCUMENTS_AUDIT.md`
+   - Entry appears in "Reference & Context Documents" section
+   - Explicitly states: Overlay semantics, Panel ≠ Card/CardBase
+   - Relative link to ADR file is correct
+
+2. **Foundation / Composition Contracts** ✅
+   - Added reference to ADR in `docs/architecture/FOUNDATION_CONTRACT.md`
+   - Explicit rule forbidding Card/CardBase for overlay orchestration
+   - Direct reference to ADR_overlay_panel_not_card
+   - No modification of existing authority rules
+
+3. **Card / CardBase Reverse References** ✅
+   - Created `src/COMPOSITION/layout/Card/README.md`
+   - Clear "Non-applicable use cases" section
+   - Statement that Card/CardBase MUST NOT be used for overlays
+   - Link to ADR_overlay_panel_not_card
+
+4. **Inline Architectural Guard in Code** ✅
+   - Added inline architectural comment to `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+   - Top-level comment explains Panel semantics
+   - Explicit "MUST NOT be converted to Card/CardBase"
+   - Direct path reference to ADR file
+
+5. **Overlay Pattern Canonization** ✅
+   - Created `docs/architecture/PATTERNS_OVERLAY.md`
+   - Overlay Panel Pattern documented
+   - ADR referenced as binding rule
+   - Clear DO / DON'T list for future panels
+
+6. **Progress & Master Task Fixation** ✅
+   - Recorded ADR canonicalization in this file (PROJECT_PROGRESS.md)
+   - Entry stating ADR_overlay_panel_not_card is CANONICALIZED
+   - Cross-links noted (Architecture, Contracts, Code)
+   - No open TODOs remain for this ADR
+
+### Files Modified
+
+- `docs/architecture/ARCHITECTURE_DOCUMENTS_AUDIT.md` - Added ADR entry
+- `docs/architecture/FOUNDATION_CONTRACT.md` - Added forbidden pattern rule
+- `src/COMPOSITION/layout/Card/README.md` - Created with reverse reference
+- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` - Added inline guard
+- `docs/architecture/PATTERNS_OVERLAY.md` - Created overlay pattern documentation
+- `docs/PROJECT_PROGRESS.md` - Recorded canonicalization
+
+### Definition of Done
+
+✅ ADR is linked from architecture index  
+✅ ADR is referenced as a constraint in Foundation/Composition contracts  
+✅ Card/CardBase docs explicitly forbid overlay usage with ADR reference  
+✅ NotificationCenter.Panel contains inline architectural guard  
+✅ Overlay pattern doc references ADR  
+✅ Project progress reflects ADR as canonical and closed
+
+### Status
+
+✅ **CANONICALIZED** - ADR_overlay_panel_not_card is now a binding part of TenerifeUI canon. All overlay panel components must follow Panel semantics, not Card semantics.
+
+**Reference:** [ADR_overlay_panel_not_card.md](./architecture/decisions/ADR_overlay_panel_not_card.md)
 
 ---
 

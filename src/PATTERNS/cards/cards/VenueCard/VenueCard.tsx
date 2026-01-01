@@ -19,7 +19,7 @@ import { Icon } from "@/PRIMITIVES/Icon";
 import { Link } from "@/PRIMITIVES/Link";
 import { Text } from "@/PRIMITIVES/Text";
 
-import type { VenueCardProps } from "./VenueCard.types";
+import type { VenueCardProps, VenueCardSize, VenueCardVariant } from "./VenueCard.types";
 import {
   venueCardBadgeVariants,
   venueCardFooterBorderVariants,
@@ -29,6 +29,20 @@ import {
   venueCardMetadataRowVariants,
   venueCardVariants,
 } from "./VenueCard.variants";
+
+/**
+ * Validates that a required string prop is non-empty.
+ * Throws an error with component name prefix if validation fails.
+ */
+function validateRequiredString(
+  value: string | undefined,
+  propName: string,
+  componentName: string,
+): void {
+  if (!value || value.trim() === "") {
+    throw new Error(`${componentName}: "${propName}" prop is required and cannot be empty`);
+  }
+}
 
 /**
  * VenueCard Component
@@ -48,200 +62,209 @@ import {
  * />
  * ```
  */
-export const VenueCard: React.FC<VenueCardProps> = ({
-  name,
-  description,
-  location,
-  capacity,
-  imageUrl,
-  href,
-  eventsCount = 0,
-  featured = false,
-  showImage = true,
-  eventsLabel,
-  popularBadgeText,
-  capacityLabel,
-  size = "default",
-  variant = "default",
-  className,
-  animation,
-  ...props
-}) => {
-  if (!name || name.trim() === "") {
-    throw new Error('VenueCard: "name" prop is required and cannot be empty');
-  }
-  if (!eventsLabel || eventsLabel.trim() === "") {
-    throw new Error('VenueCard: "eventsLabel" prop is required and cannot be empty');
-  }
-  if (!capacityLabel || capacityLabel.trim() === "") {
-    throw new Error('VenueCard: "capacityLabel" prop is required and cannot be empty');
-  }
+export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
+  (
+    {
+      name,
+      description,
+      location,
+      capacity,
+      imageUrl,
+      href,
+      eventsCount = 0,
+      featured = false,
+      showImage = true,
+      eventsLabel,
+      popularBadgeText,
+      capacityLabel,
+      size = "default",
+      variant = "default",
+      className,
+      animation,
+      ...props
+    },
+    ref,
+  ) => {
+    validateRequiredString(name, "name", "VenueCard");
+    validateRequiredString(eventsLabel, "eventsLabel", "VenueCard");
+    validateRequiredString(capacityLabel, "capacityLabel", "VenueCard");
 
-  // Resolve animation props with defaults
-  const animationProps = resolveComponentAnimations({
-    animation: animation?.animation || "fadeInUp",
-    hoverAnimation: animation?.hoverAnimation || "hoverLift",
-    animationProps: animation?.animationProps,
-  });
+    // Resolve animation props with defaults
+    const animationProps = resolveComponentAnimations({
+      animation: animation?.animation || "fadeInUp",
+      hoverAnimation: animation?.hoverAnimation || "hoverLift",
+      animationProps: animation?.animationProps,
+    });
 
-  // Determine variant: use explicit variant prop or derive from featured
-  const cardVariant = variant || (featured ? "featured" : "default");
+    // Determine variant: use explicit variant prop or derive from featured
+    // Map featured boolean to elevated variant for backward compatibility
+    const cardVariant: VenueCardVariant = variant || (featured ? "elevated" : "default");
 
-  // Map VenueCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
-  const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+    // Use VenueCard sizes directly (now aligned with CardBase sizes: sm | md)
+    const cardBaseSize: VenueCardSize = (size || "md") as VenueCardSize;
 
-  // Map VenueCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
-  const cardBaseVariant: "default" | "elevated" =
-    cardVariant === "featured" ? "elevated" : "default";
+    // Use VenueCard variants directly (now aligned with CardBase variants: default | elevated)
+    const cardBaseVariant: VenueCardVariant = cardVariant;
 
-  return (
-    <Box {...animationProps}>
-      <CardBase
-        size={cardBaseSize}
-        variant={cardBaseVariant}
-        className={cn(venueCardVariants({ size, variant }), className)}
-        {...props}
-      >
-        {/* Featured Badge */}
-        {featured && popularBadgeText && (
-          <div
-            className={cn(
-              "absolute z-10",
-              size === "compact"
-                ? DOMAIN_TOKENS.badges.position.compact
-                : DOMAIN_TOKENS.badges.position.default,
-            )}
-          >
-            <span className={venueCardBadgeVariants({ size, variant: "featured" })}>
-              {popularBadgeText}
-            </span>
-          </div>
-        )}
-
-        {/* Image Section */}
-        {showImage && (
-          <CardBaseImageWrapper size={cardBaseSize}>
-            <div className={cn("w-full", venueCardImagePlaceholderVariants({ size }))}>
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt={name}
-                  className={cn("h-full w-full", venueCardImageTransformVariants({ size }))}
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
-                  <Icon
-                    name="info"
-                    size="xl"
-                    color="muted"
-                    className={ICON_TOKENS.sizes["4xl"]}
-                    aria-hidden="true"
-                  />
-                </div>
+    return (
+      <Box ref={ref} {...animationProps} className={className} {...props}>
+        <CardBase
+          size={cardBaseSize}
+          variant={cardBaseVariant}
+          className={venueCardVariants({ size: cardBaseSize, variant: cardVariant })}
+        >
+          {/* Featured Badge */}
+          {(featured || cardVariant === "elevated") && popularBadgeText && (
+            <div
+              className={cn(
+                "absolute z-10",
+                cardBaseSize === "sm"
+                  ? DOMAIN_TOKENS.badges.position.compact
+                  : DOMAIN_TOKENS.badges.position.default,
               )}
-              {/* Image Overlay on Hover */}
-              <div className={venueCardImageOverlayVariants({ size })} />
-            </div>
-          </CardBaseImageWrapper>
-        )}
-
-        {/* Content Section */}
-        <CardBaseContentWrapper size={cardBaseSize}>
-          {/* Title */}
-          <Heading level={3}>
-            {href ? (
-              <Link href={href} variant="ghost">
-                {name}
-              </Link>
-            ) : (
-              name
-            )}
-          </Heading>
-
-          {/* Description */}
-          {description && (
-            <Text size="sm" tone="muted">
-              {description}
-            </Text>
-          )}
-
-          {/* Location Metadata */}
-          {location && (
-            <div className={cn("flex flex-col", DOMAIN_TOKENS.metadata.spacing.vertical)}>
-              <div className={venueCardMetadataRowVariants({ size })}>
-                <Icon
-                  name="location"
-                  size="sm"
-                  color="muted"
-                  className={ICON_TOKENS.sizes.sm}
-                  aria-hidden="true"
-                />
-                <Text size="xs" tone="muted">
-                  {location}
-                </Text>
-              </div>
+            >
+              <span
+                className={venueCardBadgeVariants({ size: cardBaseSize, variant: "elevated" })}
+                aria-label={`Featured venue: ${popularBadgeText}`}
+              >
+                {popularBadgeText}
+              </span>
             </div>
           )}
-        </CardBaseContentWrapper>
 
-        {/* Footer Section */}
-        {(eventsCount > 0 || capacity) && (
-          <CardBaseFooterWrapper size={cardBaseSize}>
-            <div className={venueCardFooterBorderVariants({ size })}>
-              <div className={cn("flex items-center justify-between", TEXT_TOKENS.fontSize.xs)}>
-                {/* Events Count */}
-                {eventsCount > 0 && (
-                  <div
+          {/* Image Section */}
+          {showImage && (
+            <CardBaseImageWrapper size={cardBaseSize}>
+              <div
+                className={cn("w-full", venueCardImagePlaceholderVariants({ size: cardBaseSize }))}
+              >
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={name}
                     className={cn(
-                      "flex items-center",
-                      DOMAIN_TOKENS.metadata.spacing.horizontal,
-                      DOMAIN_TOKENS.metadata.text.primary,
-                      TEXT_TOKENS.fontWeight.medium,
+                      "h-full w-full",
+                      venueCardImageTransformVariants({ size: cardBaseSize }),
                     )}
-                  >
-                    <Icon
-                      name="calendar"
-                      size="sm"
-                      color="default"
-                      className={ICON_TOKENS.sizes.sm}
-                      aria-hidden="true"
-                    />
-                    <Text size="xs" weight="medium">
-                      {eventsCount} {eventsLabel}
-                    </Text>
-                  </div>
-                )}
-
-                {/* Capacity */}
-                {capacity && (
-                  <div
-                    className={cn(
-                      "flex items-center",
-                      DOMAIN_TOKENS.metadata.spacing.horizontal,
-                      DOMAIN_TOKENS.priceCapacity.text.secondary,
-                    )}
-                  >
-                    {/* Using info icon as placeholder since users icon doesn't exist in registry */}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center">
+                    {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
                     <Icon
                       name="info"
-                      size="sm"
+                      size="xl"
                       color="muted"
-                      className={ICON_TOKENS.sizes.sm}
+                      className={ICON_TOKENS.sizes["4xl"]}
                       aria-hidden="true"
                     />
-                    <Text size="xs" tone="muted">
-                      {capacityLabel} {capacity}
-                    </Text>
                   </div>
                 )}
+                {/* Image Overlay on Hover */}
+                <div
+                  className={venueCardImageOverlayVariants({ size: cardBaseSize })}
+                  aria-hidden="true"
+                />
               </div>
-            </div>
-          </CardBaseFooterWrapper>
-        )}
-      </CardBase>
-    </Box>
-  );
-};
+            </CardBaseImageWrapper>
+          )}
+
+          {/* Content Section */}
+          <CardBaseContentWrapper size={cardBaseSize}>
+            {/* Title */}
+            <Heading level={3}>
+              {href ? (
+                <Link href={href} variant="ghost">
+                  {name}
+                </Link>
+              ) : (
+                name
+              )}
+            </Heading>
+
+            {/* Description */}
+            {description && (
+              <Text size="sm" tone="muted">
+                {description}
+              </Text>
+            )}
+
+            {/* Location Metadata */}
+            {location && (
+              <div className={cn("flex flex-col", DOMAIN_TOKENS.metadata.spacing.vertical)}>
+                <div className={venueCardMetadataRowVariants({ size: cardBaseSize })}>
+                  <Icon
+                    name="location"
+                    size="sm"
+                    color="muted"
+                    className={ICON_TOKENS.sizes.sm}
+                    aria-hidden="true"
+                  />
+                  <Text size="xs" tone="muted">
+                    {location}
+                  </Text>
+                </div>
+              </div>
+            )}
+          </CardBaseContentWrapper>
+
+          {/* Footer Section */}
+          {(eventsCount > 0 || capacity) && (
+            <CardBaseFooterWrapper size={cardBaseSize}>
+              <div className={venueCardFooterBorderVariants({ size: cardBaseSize })}>
+                <div className={cn("flex items-center justify-between", TEXT_TOKENS.fontSize.xs)}>
+                  {/* Events Count */}
+                  {eventsCount > 0 && (
+                    <div
+                      className={cn(
+                        "flex items-center",
+                        DOMAIN_TOKENS.metadata.spacing.horizontal,
+                        DOMAIN_TOKENS.metadata.text.primary,
+                        TEXT_TOKENS.fontWeight.medium,
+                      )}
+                    >
+                      <Icon
+                        name="calendar"
+                        size="sm"
+                        color="default"
+                        className={ICON_TOKENS.sizes.sm}
+                        aria-hidden="true"
+                      />
+                      <Text size="xs" weight="medium">
+                        {eventsCount} {eventsLabel}
+                      </Text>
+                    </div>
+                  )}
+
+                  {/* Capacity */}
+                  {capacity && (
+                    <div
+                      className={cn(
+                        "flex items-center",
+                        DOMAIN_TOKENS.metadata.spacing.horizontal,
+                        DOMAIN_TOKENS.priceCapacity.text.secondary,
+                      )}
+                    >
+                      {/* Using info icon as placeholder since users icon doesn't exist in registry */}
+                      <Icon
+                        name="info"
+                        size="sm"
+                        color="muted"
+                        className={ICON_TOKENS.sizes.sm}
+                        aria-hidden="true"
+                      />
+                      <Text size="xs" tone="muted">
+                        {capacityLabel} {capacity}
+                      </Text>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </CardBaseFooterWrapper>
+          )}
+        </CardBase>
+      </Box>
+    );
+  },
+);
 
 VenueCard.displayName = "VenueCard";

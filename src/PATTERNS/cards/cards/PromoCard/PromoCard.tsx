@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
+import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
 import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
@@ -20,44 +20,13 @@ import { Icon } from "@/PRIMITIVES/Icon";
 import { Link } from "@/PRIMITIVES/Link";
 import { Text } from "@/PRIMITIVES/Text";
 
-import type { PromoCardProps } from "./PromoCard.types";
+import type { PromoCardProps, PromoCardSize, PromoCardVariant } from "./PromoCard.types";
 import {
   promoCardBadgeSurfaceVariants,
   promoCardBadgeVariants,
   promoCardCtaButtonIconVariants,
   promoCardCtaButtonVariants,
 } from "./PromoCard.variants";
-
-/**
- * Helper component to apply custom variant classes to Link
- * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
- */
-const LinkWithCustomVariant = React.forwardRef<
-  HTMLAnchorElement,
-  React.ComponentProps<typeof Link> & { customClassName: string }
->(({ customClassName, ...linkProps }, ref) => {
-  const anchorRef = React.useRef<HTMLAnchorElement>(null);
-  const mergedRef = React.useCallback(
-    (node: HTMLAnchorElement | null) => {
-      anchorRef.current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref && "current" in ref) {
-        (ref as { current: HTMLAnchorElement | null }).current = node;
-      }
-      if (node && customClassName) {
-        // Merge custom classes with Link's internal classes
-        const existingClasses = node.className.split(" ").filter(Boolean);
-        const customClasses = customClassName.split(" ").filter(Boolean);
-        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
-      }
-    },
-    [ref, customClassName],
-  );
-
-  return <Link {...linkProps} ref={mergedRef} />;
-});
-LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
 
 /**
  * PromoCard Component
@@ -88,7 +57,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
       featured = false,
       showImage = true,
       featuredBadgeText,
-      size = "default",
+      size = "md",
       variant,
       className,
       animation,
@@ -104,14 +73,14 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
     });
 
     // Determine variant: use explicit variant prop or derive from featured
-    const cardVariant = variant || (featured ? "featured" : "default");
+    // Map featured boolean to elevated variant for backward compatibility
+    const cardVariant: PromoCardVariant = variant || (featured ? "elevated" : "default");
 
-    // Map PromoCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
-    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+    // Use PromoCard sizes directly (now aligned with CardBase sizes: sm | md)
+    const cardBaseSize: PromoCardSize = (size || "md") as PromoCardSize;
 
-    // Map PromoCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
-    const cardBaseVariant: "default" | "elevated" =
-      cardVariant === "featured" ? "elevated" : "default";
+    // Use PromoCard variants directly (now aligned with CardBase variants: default | elevated)
+    const cardBaseVariant: PromoCardVariant = cardVariant;
 
     return (
       <Box {...animationProps}>
@@ -123,9 +92,9 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           {...props}
         >
           {/* Featured Badge */}
-          {featured && featuredBadgeText && (
-            <div className={promoCardBadgeVariants({ size })}>
-              <span className={promoCardBadgeSurfaceVariants({ variant: "featured" })}>
+          {(featured || cardVariant === "elevated") && featuredBadgeText && (
+            <div className={promoCardBadgeVariants({ size: cardBaseSize })}>
+              <span className={promoCardBadgeSurfaceVariants({ variant: "elevated" })}>
                 {featuredBadgeText}
               </span>
             </div>
@@ -196,16 +165,20 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
               {ctaUrl && (
                 <LinkWithCustomVariant
                   href={ctaUrl}
-                  customClassName={promoCardCtaButtonVariants({ size })}
+                  customClassName={promoCardCtaButtonVariants({ size: cardBaseSize })}
                 >
                   {ctaLabel}
-                  <IconArrowRight className={promoCardCtaButtonIconVariants({ size })} />
+                  <IconArrowRight
+                    className={promoCardCtaButtonIconVariants({ size: cardBaseSize })}
+                  />
                 </LinkWithCustomVariant>
               )}
               {!ctaUrl && (
-                <div className={cn("w-full", promoCardCtaButtonVariants({ size }))}>
+                <div className={cn("w-full", promoCardCtaButtonVariants({ size: cardBaseSize }))}>
                   {ctaLabel}
-                  <IconArrowRight className={promoCardCtaButtonIconVariants({ size })} />
+                  <IconArrowRight
+                    className={promoCardCtaButtonIconVariants({ size: cardBaseSize })}
+                  />
                 </div>
               )}
             </div>

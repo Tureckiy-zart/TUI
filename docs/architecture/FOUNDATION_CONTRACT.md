@@ -142,6 +142,23 @@ Any mechanism that allows consumers to inject arbitrary CSS classes is forbidden
 **Status:** ❌ **FORBIDDEN**
 
 Any mechanism that allows consumers to inject arbitrary inline styles is forbidden. This includes:
+
+### 5. Card/CardBase for Overlay Orchestration
+
+**Status:** ❌ **FORBIDDEN**
+
+**Rationale:**
+- Card and CardBase components are **content containers** with explicit semantic sections (header, body, footer)
+- Overlay Panel components are **overlay orchestrators** that manage Portal, Backdrop, Focus, Keyboard, and Gestures
+- Mixing these semantics creates architectural confusion and breaks responsibility separation
+
+**Enforcement Status:** ✅ **CANONICAL** - Architectural Decision Record (ADR) establishes this as binding rule.
+
+**Authority:** [ADR_overlay_panel_not_card.md](./decisions/ADR_overlay_panel_not_card.md) - Overlay Panel ≠ Card/CardBase
+
+**Rule:** Overlay Panel components (e.g., `NotificationCenter.Panel`) MUST NOT be converted to Card or CardBase. Panel semantics are fundamentally different from Card semantics. Panels handle overlay orchestration (Portal, Backdrop, Focus, Keyboard, Gestures), while Cards handle content organization and display.
+
+Any mechanism that allows consumers to inject arbitrary inline styles is forbidden. This includes:
 - `style` prop (see above)
 - Any prop that accepts arbitrary style objects
 

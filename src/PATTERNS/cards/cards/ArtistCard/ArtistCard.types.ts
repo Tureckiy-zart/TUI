@@ -4,13 +4,15 @@ import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/ty
 
 /**
  * ArtistCard Size Variant
+ * Canonical vocabulary aligned with VARIANTS_SIZE_CANON.md
  */
-export type ArtistCardSize = "default" | "compact";
+export type ArtistCardSize = "sm" | "md";
 
 /**
  * ArtistCard Style Variant
+ * Canonical vocabulary aligned with VARIANTS_SIZE_CANON.md
  */
-export type ArtistCardVariant = "default" | "featured";
+export type ArtistCardVariant = "default" | "elevated";
 
 /**
  * Props for ArtistCard component.
@@ -41,9 +43,9 @@ export interface ArtistCardProps extends React.HTMLAttributes<HTMLDivElement> {
   followersLabel: string;
   /** Label for plays count (required) */
   playsLabel: string;
-  /** Size variant - controls padding and gap */
+  /** Size variant - controls padding and gap (canonical: sm, md) */
   size?: ArtistCardSize;
-  /** Style variant - controls visual appearance */
+  /** Style variant - controls visual appearance (canonical: default, elevated) */
   variant?: ArtistCardVariant;
   /** Animation configuration for entrance and hover animations */
   animation?: ComponentAnimationConfig;

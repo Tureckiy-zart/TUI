@@ -12,8 +12,9 @@ import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
  * ArtistCard Variants
  *
  * CVA-based variant system for ArtistCard component.
- * Supports size variants (default, compact) and style variants (default, featured).
+ * Supports size variants (sm, md) and style variants (default, elevated).
  * All styling uses token-based values from DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, and MOTION_TOKENS.
+ * Canonical vocabulary aligned with VARIANTS_SIZE_CANON.md
  */
 
 /**
@@ -23,16 +24,16 @@ import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 export const artistCardVariants = cva("group relative", {
   variants: {
     size: {
-      default: "",
-      compact: "",
+      sm: "",
+      md: "",
     },
     variant: {
       default: "",
-      featured: "",
+      elevated: "",
     },
   },
   defaultVariants: {
-    size: "default",
+    size: "md",
     variant: "default",
   },
 });
@@ -47,12 +48,12 @@ export const artistCardBadgeVariants = cva(
   {
     variants: {
       size: {
-        default: DOMAIN_TOKENS.badges.position.default, // Default positioning - maps to semanticSpacing.md (12px)
-        compact: DOMAIN_TOKENS.badges.position.compact, // Compact positioning - maps to semanticSpacing.sm (8px)
+        md: DOMAIN_TOKENS.badges.position.default, // Medium positioning - maps to semanticSpacing.md (12px)
+        sm: DOMAIN_TOKENS.badges.position.compact, // Small positioning - maps to semanticSpacing.sm (8px)
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -67,17 +68,17 @@ export const artistCardBadgeSurfaceVariants = cva(
   {
     variants: {
       size: {
-        default: DOMAIN_TOKENS.badges.size.md,
-        compact: DOMAIN_TOKENS.badges.size.sm,
+        md: DOMAIN_TOKENS.badges.size.md,
+        sm: DOMAIN_TOKENS.badges.size.sm,
       },
       variant: {
         default: DOMAIN_TOKENS.badges.surface.default,
-        featured: DOMAIN_TOKENS.badges.surface.featured,
+        elevated: DOMAIN_TOKENS.badges.surface.featured,
       },
     },
     defaultVariants: {
-      size: "default",
-      variant: "featured",
+      size: "md",
+      variant: "elevated",
     },
   },
 );
@@ -93,12 +94,12 @@ export const artistCardImageOverlayVariants = cva(
   {
     variants: {
       size: {
-        default: "",
-        compact: "",
+        sm: "",
+        md: "",
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -114,12 +115,12 @@ export const artistCardImageTransformVariants = cva(
   {
     variants: {
       size: {
-        default: "",
-        compact: "",
+        sm: "",
+        md: "",
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -134,12 +135,12 @@ export const artistCardMetadataVariants = cva(
   {
     variants: {
       size: {
-        default: "",
-        compact: "",
+        sm: "",
+        md: "",
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -154,12 +155,12 @@ export const artistCardMetadataItemVariants = cva(
   {
     variants: {
       size: {
-        default: "",
-        compact: "",
+        sm: "",
+        md: "",
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -174,32 +175,12 @@ export const artistCardMetadataIconVariants = cva(
   {
     variants: {
       size: {
-        default: "",
-        compact: "",
+        sm: "",
+        md: "",
       },
     },
     defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * Genres display variant
- * Uses DOMAIN_TOKENS.metadata for text styling
- */
-export const artistCardGenresVariants = cva(
-  // Base classes - genres text styling
-  `${DOMAIN_TOKENS.metadata.text.secondary} ${TEXT_TOKENS.fontSize.xs}`,
-  {
-    variants: {
-      size: {
-        default: "",
-        compact: "",
-      },
-    },
-    defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );
@@ -214,12 +195,12 @@ export const artistCardFooterBorderVariants = cva(
   {
     variants: {
       size: {
-        default: DOMAIN_TOKENS.spacing.footer.paddingTopDefault, // Default padding top - references semanticSpacing.sm (8px) via Tailwind
-        compact: DOMAIN_TOKENS.spacing.footer.paddingTopCompact, // Compact padding top - references semanticSpacing.xs (4px) via Tailwind
+        md: DOMAIN_TOKENS.spacing.footer.paddingTopDefault, // Medium padding top - references semanticSpacing.sm (8px) via Tailwind
+        sm: DOMAIN_TOKENS.spacing.footer.paddingTopCompact, // Small padding top - references semanticSpacing.xs (4px) via Tailwind
       },
     },
     defaultVariants: {
-      size: "default",
+      size: "md",
     },
   },
 );

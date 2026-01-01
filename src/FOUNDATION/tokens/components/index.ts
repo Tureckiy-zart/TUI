@@ -307,6 +307,9 @@ export { PROGRESS_TOKENS, type ProgressHeight } from "./progress";
 // Separator tokens
 export { SEPARATOR_TOKENS } from "./separator";
 
+// StickyBar tokens
+export { STICKYBAR_TOKENS, type StickyBarPosition, type StickyBarTone } from "./stickybar";
+
 // Slider tokens
 export { SLIDER_TOKENS } from "./slider";
 

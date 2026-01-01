@@ -33,11 +33,26 @@ import {
 } from "./ArtistCard.variants";
 
 /**
+ * Validates that a required string prop is non-empty.
+ * Throws an error with component name prefix if validation fails.
+ */
+function validateRequiredString(
+  value: string | undefined,
+  propName: string,
+  componentName: string,
+): void {
+  if (!value || value.trim() === "") {
+    throw new Error(`${componentName}: "${propName}" prop is required and cannot be empty`);
+  }
+}
+
+/**
  * ArtistCard Component
  *
  * Domain-specific card component for displaying artist information.
  * Uses CardBase for layout and DOMAIN_TOKENS for all styling.
- * Supports size variants (default, compact) and style variants (default, featured).
+ * Supports size variants (sm, md) and style variants (default, elevated).
+ * Canonical vocabulary aligned with VARIANTS_SIZE_CANON.md
  *
  * @example
  * ```tsx
@@ -66,7 +81,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
       popularBadgeText,
       followersLabel,
       playsLabel,
-      size = "default",
+      size = "md",
       variant,
       className,
       animation,
@@ -74,15 +89,9 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
     },
     ref,
   ) => {
-    if (!name || name.trim() === "") {
-      throw new Error('ArtistCard: "name" prop is required and cannot be empty');
-    }
-    if (!followersLabel || followersLabel.trim() === "") {
-      throw new Error('ArtistCard: "followersLabel" prop is required and cannot be empty');
-    }
-    if (!playsLabel || playsLabel.trim() === "") {
-      throw new Error('ArtistCard: "playsLabel" prop is required and cannot be empty');
-    }
+    validateRequiredString(name, "name", "ArtistCard");
+    validateRequiredString(followersLabel, "followersLabel", "ArtistCard");
+    validateRequiredString(playsLabel, "playsLabel", "ArtistCard");
 
     // Resolve animation props with defaults
     const animationProps = resolveComponentAnimations({
@@ -92,14 +101,11 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
     });
 
     // Determine variant: use explicit variant prop or derive from featured
-    const cardVariant = variant || (featured ? "featured" : "default");
+    // Use canonical values directly (no mapping needed)
+    const cardBaseVariant: "default" | "elevated" = variant || (featured ? "elevated" : "default");
 
-    // Map ArtistCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
-    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
-
-    // Map ArtistCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
-    const cardBaseVariant: "default" | "elevated" =
-      cardVariant === "featured" ? "elevated" : "default";
+    // Use canonical size directly (no mapping needed)
+    const cardBaseSize: "sm" | "md" = size || "md";
 
     return (
       <Box {...animationProps}>
@@ -107,13 +113,16 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
           ref={ref}
           size={cardBaseSize}
           variant={cardBaseVariant}
-          className={cn(artistCardVariants({ size, variant }), className)}
+          className={cn(artistCardVariants({ size, variant: cardBaseVariant }), className)}
           {...props}
         >
           {/* Featured Badge */}
           {featured && popularBadgeText && (
             <div className={artistCardBadgeVariants({ size })}>
-              <span className={artistCardBadgeSurfaceVariants({ size, variant: "featured" })}>
+              <span
+                className={artistCardBadgeSurfaceVariants({ size, variant: "elevated" })}
+                aria-label={`Featured artist: ${popularBadgeText}`}
+              >
                 {popularBadgeText}
               </span>
             </div>

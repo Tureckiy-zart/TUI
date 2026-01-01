@@ -4,13 +4,15 @@ import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/ty
 
 /**
  * VenueCard Size Variant
+ * Uses global size scale subset: sm | md
  */
-export type VenueCardSize = "default" | "compact";
+export type VenueCardSize = "sm" | "md";
 
 /**
  * VenueCard Style Variant
+ * Uses SurfaceVariant dictionary: default | elevated
  */
-export type VenueCardVariant = "default" | "featured";
+export type VenueCardVariant = "default" | "elevated";
 
 /**
  * Props for VenueCard component.

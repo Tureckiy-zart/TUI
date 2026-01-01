@@ -1,8 +1,8 @@
 # ⚠️ Foundation Unlock Status (Active Construction)
 
-**Version:** 1.30  
+**Version:** 1.31  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-27  
+**Last Updated:** 2025-12-28 (Gradient tokens fixes: GRADIENT_TOKENS.ring.subtle corrected from --muted to --muted-foreground, glass.light/dark Storybook demo improved)  
 **Status:** ⚠️ **UNLOCKED (Active Construction)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -1051,6 +1051,10 @@ If Interactive Size Scale Authority modifications are needed:
 | Heading         | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
 | Select          | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Refactor Complete (Token Migration & API Simplification) |
 | Label           | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Icon            | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Radio           | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Re-run Complete |
+| Switch          | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Re-run Complete |
+| Textarea        | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Complete, Strict Primitive Refactor |
 | Tabs            | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
 
 ### Extension Layer Status
@@ -2198,6 +2202,12 @@ If Authority modifications are required in the future:
   - Updated Guard Prompt to include token system lock enforcement
   - Added token system unlock procedure documentation
   - Updated related documents section with token system references
+
+- **v1.31** (2025-12-28): Gradient Tokens Fixes
+  - Fixed `GRADIENT_TOKENS.ring.subtle` token: replaced `--muted` (background color) with `--muted-foreground` (text color) for proper visibility
+  - Updated Storybook demo for `glass.light` and `glass.dark`: added dark background for better visibility in Storybook gallery
+  - Token fix ensures `ring.subtle` gradient is visible on light backgrounds
+  - Storybook demo improvements ensure glass gradients are properly demonstrated
 
 - **v1.0** (2025-12-12): Final Foundation Lock
   - Officially locked Foundation layer

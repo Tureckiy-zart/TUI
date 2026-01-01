@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
 import { SearchInput } from "@/PATTERNS/filters/filters/SearchInput";
@@ -13,6 +13,9 @@ export interface SearchBarProps {
   suggestions?: string[];
   onSuggestionSelect?: (suggestion: string) => void;
 }
+
+// Blur delay constant for allowing click on suggestion before blur fires
+const BLUR_DELAY_MS = 200;
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder,
@@ -45,41 +48,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     // Delay to allow click on suggestion
     setTimeout(() => {
       if (typeof document !== "undefined" && !searchRef.current?.contains(document.activeElement)) {
-        setIsFocused(false);
-        setSelectedIndex(-1);
+        closeSuggestions();
       }
-    }, 200);
+    }, BLUR_DELAY_MS);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (suggestions.length === 0) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : prev));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-    } else if (e.key === "Enter" && selectedIndex >= 0 && selectedIndex < suggestions.length) {
-      e.preventDefault();
-      const selected = suggestions[selectedIndex];
-      if (selected) {
-        setValue(selected);
-        handleChange(selected);
-        onSuggestionSelect?.(selected);
-        setIsFocused(false);
-      }
-    } else if (e.key === "Escape") {
-      setIsFocused(false);
-      setSelectedIndex(-1);
-    }
+  const closeSuggestions = () => {
+    setIsFocused(false);
+    setSelectedIndex(-1);
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setValue(suggestion);
+  const selectSuggestion = (suggestion: string) => {
     handleChange(suggestion);
     onSuggestionSelect?.(suggestion);
     setIsFocused(false);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    selectSuggestion(suggestion);
   };
 
   // Close suggestions when clicking outside
@@ -88,8 +74,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsFocused(false);
-        setSelectedIndex(-1);
+        closeSuggestions();
       }
     };
 
@@ -97,9 +82,51 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const filteredSuggestions = suggestions.filter((suggestion) =>
-    suggestion.toLowerCase().includes(value.toLowerCase()),
-  );
+  const filteredSuggestions = useMemo(() => {
+    return suggestions.filter((suggestion) =>
+      suggestion.toLowerCase().includes(value.toLowerCase()),
+    );
+  }, [suggestions, value]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (filteredSuggestions.length === 0) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setSelectedIndex((prev) => {
+          const nextIndex = prev < filteredSuggestions.length - 1 ? prev + 1 : prev;
+          // If starting from -1, go to 0 (first suggestion)
+          return prev === -1 ? 0 : nextIndex;
+        });
+        break;
+
+      case "ArrowUp":
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+        break;
+
+      case "Enter":
+        e.preventDefault();
+        // If no suggestion is selected, select the first one
+        const indexToUse = selectedIndex >= 0 ? selectedIndex : 0;
+        if (indexToUse >= 0 && indexToUse < filteredSuggestions.length) {
+          const selected = filteredSuggestions[indexToUse];
+          if (selected) {
+            selectSuggestion(selected);
+          }
+        }
+        break;
+
+      case "Escape":
+        e.preventDefault();
+        closeSuggestions();
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <div ref={searchRef} className={cn("relative w-full max-w-sm", className)}>
@@ -118,7 +145,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         )}
       />
       {isFocused && filteredSuggestions.length > 0 && (
-        <div className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-popover shadow-lg">
+        <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-popover shadow-lg">
           {filteredSuggestions.map((suggestion) => (
             <Button
               key={suggestion}
