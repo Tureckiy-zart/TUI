@@ -4,11 +4,14 @@
 Strict. Predictable. Built for system-level consistency.
 
 ![Release](https://img.shields.io/github/v/tag/Tureckiy-zart/tenerife-ui?style=for-the-badge&sort=semver)
-![Version](https://img.shields.io/badge/version-2.0.4-blue?style=for-the-badge)
+![npm version](https://img.shields.io/npm/v/@tenerife.music/ui?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18+-blue?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+**Current Release:** [v2.0.3](CHANGELOG.md#203---2025-12-31) (npm)  
+**Next Release:** v2.0.4 (Unreleased) — See [CHANGELOG](CHANGELOG.md#unreleased)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" alt="TUI Banner" />
@@ -247,6 +250,24 @@ Contributions are welcome **within the boundaries of the system**.
 > token ownership rules, and canonical constraints.
 
 Architectural discussions take precedence over visual changes.
+
+### Release Discipline
+
+This project follows strict version canon synchronization rules:
+
+- **npm registry** (`@tenerife.music/ui`) is the single source of truth for published versions
+- Only versions published to npm may appear in CHANGELOG with publication dates
+- Unreleased versions must be labeled as `[Unreleased]`, not as current version
+- All releases must go through the automated release process (no manual edits)
+
+**Verify versions:**
+
+```bash
+npm view @tenerife.music/ui version
+npm view @tenerife.music/ui versions --json
+```
+
+See [CHANGELOG Version Canon Rules](CHANGELOG.md#version-canon-rules) and [Release Process](docs/RELEASE_PROCESS.md) for details.
 
 ### Creating New Components
 
