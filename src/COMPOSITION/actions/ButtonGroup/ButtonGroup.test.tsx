@@ -132,26 +132,24 @@ describe("ButtonGroup component", () => {
       expect(group).toHaveAttribute("role", "group");
     });
 
-    it("should have aria-orientation='vertical' when orientation is vertical", () => {
-      const { container } = render(
+    it("should not have aria-orientation attribute (not valid for role='group' per ARIA spec)", () => {
+      const { container: verticalContainer } = render(
         <ButtonGroup orientation="vertical">
           <Button>Button 1</Button>
           <Button>Button 2</Button>
         </ButtonGroup>,
       );
-      const group = container.firstChild as HTMLElement;
-      expect(group).toHaveAttribute("aria-orientation", "vertical");
-    });
+      const verticalGroup = verticalContainer.firstChild as HTMLElement;
+      expect(verticalGroup).not.toHaveAttribute("aria-orientation");
 
-    it("should not have aria-orientation when orientation is horizontal", () => {
-      const { container } = render(
+      const { container: horizontalContainer } = render(
         <ButtonGroup orientation="horizontal">
           <Button>Button 1</Button>
           <Button>Button 2</Button>
         </ButtonGroup>,
       );
-      const group = container.firstChild as HTMLElement;
-      expect(group).not.toHaveAttribute("aria-orientation");
+      const horizontalGroup = horizontalContainer.firstChild as HTMLElement;
+      expect(horizontalGroup).not.toHaveAttribute("aria-orientation");
     });
   });
 

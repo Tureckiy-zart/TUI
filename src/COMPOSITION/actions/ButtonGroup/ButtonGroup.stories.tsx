@@ -33,7 +33,7 @@ const meta: Meta<typeof ButtonGroup> = {
     docs: {
       description: {
         component:
-          'ButtonGroup is a composition component that groups multiple Button components for semantic and behavioral consistency. It provides layout alignment (horizontal/vertical), shared prop propagation (size, variant, disabled), and accessibility semantics (role="group", aria-orientation).',
+          'ButtonGroup is a composition component that groups multiple Button components for semantic and behavioral consistency. It provides layout alignment (horizontal/vertical), shared prop propagation (size, variant, disabled), and accessibility semantics (role="group").',
       },
     },
   },
@@ -178,7 +178,7 @@ export const Horizontal: Story = {
  * Vertical Story
  *
  * Displays vertical ButtonGroup layout.
- * Shows vertical orientation behavior with aria-orientation attribute.
+ * Shows vertical orientation behavior via CSS flex-direction.
  *
  * @axis orientation
  * @values vertical
@@ -209,7 +209,7 @@ export const Vertical: Story = {
     docs: {
       description: {
         story:
-          'Vertical ButtonGroup layout. Buttons are arranged in a column with spacing between them. Includes aria-orientation="vertical" for accessibility.',
+          "Vertical ButtonGroup layout. Buttons are arranged in a column with spacing between them. Orientation is conveyed visually via CSS flex-direction.",
       },
     },
   },

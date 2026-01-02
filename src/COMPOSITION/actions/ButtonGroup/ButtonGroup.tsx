@@ -10,7 +10,7 @@
  * @semantic_definition ButtonGroup is a composition component that groups multiple Button components
  *                     for semantic and behavioral consistency. It provides layout alignment,
  *                     shared prop propagation (size, variant, disabled), and accessibility
- *                     semantics (role="group", aria-orientation).
+ *                     semantics (role="group").
  *
  * @status NEW COMPONENT (2025-12-19)
  * @layer COMPOSITION
@@ -125,7 +125,9 @@ export interface ButtonGroupProps extends Omit<StackProps, "spacing" | "directio
  * ButtonGroup Component Implementation
  *
  * Uses Stack for layout composition and Context for prop propagation.
- * Provides accessibility semantics (role="group", aria-orientation).
+ * Provides accessibility semantics (role="group").
+ * Note: aria-orientation is not valid for role="group" per ARIA spec.
+ * Orientation is conveyed visually via CSS flex-direction.
  */
 const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
   (
@@ -156,10 +158,15 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     // Convert orientation to Stack direction
     const direction = orientation === "vertical" ? "vertical" : "horizontal";
 
+    // Explicitly exclude aria-orientation from props (not valid for role="group" per ARIA spec)
+     
+    const { "aria-orientation": _ariaOrientation, ...restProps } = props;
+
     // Accessibility attributes
+    // Note: aria-orientation is not valid for role="group" per ARIA spec
+    // Orientation is conveyed visually via CSS flex-direction
     const accessibilityProps = {
       role: "group" as const,
-      ...(orientation === "vertical" && { "aria-orientation": "vertical" as const }),
     };
 
     // Render with Context Provider
@@ -173,7 +180,7 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           justify={justify}
           className={className}
           {...accessibilityProps}
-          {...props}
+          {...restProps}
         />
       </ButtonGroupContext.Provider>
     );
