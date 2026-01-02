@@ -339,9 +339,10 @@ describe("Menu", () => {
         expect(screen.getByText("Copy")).toBeInTheDocument();
       });
 
-      // Focus the item first, then press Enter
+      // Click on the item to focus it (userEvent.click properly handles React state updates)
+      // Then press Enter to activate
       const item = screen.getByRole("menuitem", { name: "Copy" });
-      item.focus();
+      await user.click(item);
       await user.keyboard("{Enter}");
 
       await waitFor(() => {
