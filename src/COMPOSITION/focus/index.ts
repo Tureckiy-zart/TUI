@@ -1,8 +1,10 @@
 /**
- * Focus System - Storybook Stories Only
+ * Focus System Exports
  *
- * This module contains Storybook stories demonstrating focus behavior.
- * There are no runtime components to export.
+ * Runtime components and Storybook stories for focus management.
+ *
+ * Runtime Components:
+ * - FocusTrap - Reusable focus containment utility
  *
  * Stories:
  * - FocusOverview.stories.tsx - Keyboard navigation patterns
@@ -13,5 +15,4 @@
  * Reference: docs/architecture/FOCUS_AUTHORITY.md
  */
 
-// This module is Storybook-only. No runtime exports.
-export {};
+export * from "./FocusTrap";

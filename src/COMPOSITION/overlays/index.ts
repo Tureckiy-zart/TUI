@@ -156,6 +156,24 @@ export {
   PopoverWrapper,
 } from "./Popover";
 
+// Dropdown
+export {
+  Dropdown,
+  DROPDOWN_TOKENS,
+  DropdownContent,
+  type DropdownContentProps,
+  DropdownItem,
+  type DropdownItemPadding,
+  type DropdownItemProps,
+  DropdownRoot,
+  type DropdownRootProps,
+  DropdownSeparator,
+  type DropdownSeparatorProps,
+  DropdownTrigger,
+  type DropdownTriggerProps,
+  POPOVER_TOKENS,
+} from "./Dropdown";
+
 // Tooltip
 export {
   Tooltip,

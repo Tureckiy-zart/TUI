@@ -40,6 +40,10 @@ export const MENU_TOKENS = {
       md: "h-10", // 40px - maps to spacing[10]
       lg: "h-12", // 48px - maps to spacing[12]
     } as const,
+    focus: {
+      background: "focus-visible:bg-accent/10", // Focus background using token
+      text: "focus-visible:text-accent-foreground", // Focus text using token
+    } as const,
   } as const,
 
   /**

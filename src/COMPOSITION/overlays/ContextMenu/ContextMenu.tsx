@@ -42,10 +42,26 @@
  *
  * ContextMenu Component
  *
- * Radix-based context menu component with token-driven styling.
+ * Radix-based context menu component for secondary actions triggered by right-click
+ * or long-press gestures. ContextMenu provides full ARIA menu semantics and is intended
+ * for contextual actions that appear at cursor/pointer position.
+ *
+ * **What ContextMenu IS:**
+ * - Right-click menus (secondary actions on elements)
+ * - Long-press menus (mobile/touch interfaces)
+ * - Contextual actions at cursor/pointer position
+ * - Secondary action menus (not primary navigation)
+ *
+ * **What ContextMenu IS NOT:**
+ * - Generic dropdown (explicit trigger click) → Use `Dropdown`
+ * - Explicit menu (user-invoked via button) → Use `Menu`
+ * - Primary navigation menus → Use `Menu`
+ *
  * All behavior (pointer, keyboard, focus, ARIA, positioning, collision handling)
  * is handled by Radix ContextMenu. Tenerife UI provides visual styling through
  * tokens only. This is a strict wrapper pattern - no custom behavior logic.
+ *
+ * @see docs/reference/COMPONENT_USAGE_MATRIX.md for usage boundaries
  */
 
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";

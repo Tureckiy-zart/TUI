@@ -659,3 +659,4 @@ All cards except ProfileCard use `Box` as animation wrapper:
 3. Create decisions document (DOMAIN_CARDS_DECISIONS.md)
 4. Apply simplifications while maintaining visual output
 
+

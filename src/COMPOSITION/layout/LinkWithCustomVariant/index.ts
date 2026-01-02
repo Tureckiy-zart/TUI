@@ -1,0 +1,1 @@
+export { LinkWithCustomVariant } from "./LinkWithCustomVariant";

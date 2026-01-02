@@ -9,9 +9,11 @@ export * from "./Column";
 export * from "./Container";
 export * from "./Flex";
 export * from "./Grid";
+export * from "./Inline";
 export * from "./Inset/Inset";
 export * from "./List/List.index";
 export * from "./ListItem/ListItem.index";
+export * from "./Panel";
 export * from "./Row";
 export * from "./Stack";
 export * from "./Surface";
@@ -66,6 +68,9 @@ export {
   type StickyBarTone,
   stickyBarVariants,
 } from "./StickyBar/StickyBar";
+
+// Spacer
+export { Spacer, type SpacerOrientation, type SpacerProps } from "./Spacer";
 
 // Navbar
 export { Navbar, type NavbarProps } from "./Navbar";
