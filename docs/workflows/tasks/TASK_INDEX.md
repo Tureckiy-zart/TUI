@@ -226,7 +226,7 @@ D1 → D2 → D3 → D4 → D5 → D6 → D7
 | **A6**  | Create Feature component         | C8, C9         | pending |
 | **A7**  | Create CTA component             | C1, C8         | pending |
 | **A8**  | Create Modal component           | F4-F7          | pending |
-| **A9**  | ~~Create Dropdown component~~    | C4, F4, F6     | ❌ **CANCELLED** - Dropdown removed (MIGRATION_12C) |
+| **A9**  | Create Dropdown component    | C4, F4, F6     | ✅ **COMPLETE** - Dropdown PROCESS LOCKED (DX, Navigation and Surface Layers Lock, 2026-01-02) |
 | **A10** | Create Avatar component          | F5             | pending |
 | **A11** | Create Skeleton Loader component | F6             | pending |
 

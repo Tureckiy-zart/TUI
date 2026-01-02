@@ -99,6 +99,11 @@ export {
   OVERLAY_TOKENS,
   type OverlayBackdropVariant,
   type OverlayModalSize,
+  PANEL_TOKENS,
+  type PanelPadding,
+  type PanelRadius,
+  type PanelShadow,
+  type PanelTone,
   POPOVER_TOKENS,
   type PopoverArrowOffset,
   type PopoverArrowSize,
@@ -251,6 +256,12 @@ export {
 // Button component (CVA-based, token-driven)
 export { Button, type ButtonProps } from "./PRIMITIVES/Button";
 
+// ButtonGroup component (composition component for grouping buttons)
+export { ButtonGroup, type ButtonGroupProps, useButtonGroupContext } from "./COMPOSITION/actions";
+
+// IconButton component (thin wrapper over Button with iconOnly={true})
+export { IconButton, type IconButtonProps } from "./PRIMITIVES/IconButton";
+
 // Text component (CVA-based, token-driven)
 export {
   Text,
@@ -259,6 +270,9 @@ export {
   textVariants,
   type TextWeight,
 } from "./PRIMITIVES/Text";
+
+// HelperText component (thin wrapper over Text with form description defaults)
+export { HelperText, type HelperTextProps } from "./PRIMITIVES/HelperText";
 
 // Alert component (tokenCVA-based, token-driven)
 export {
@@ -401,6 +415,7 @@ export {
   type SliderVariant,
 } from "./COMPOSITION/controls/Slider";
 export { Checkbox, type CheckboxProps, checkboxVariants } from "./PRIMITIVES/Checkbox";
+export { ErrorText, type ErrorTextProps } from "./PRIMITIVES/ErrorText";
 export {
   Field,
   type FieldControlProps,
@@ -409,6 +424,7 @@ export {
   type FieldLabelProps,
   type FieldProps,
 } from "./PRIMITIVES/Field";
+export { FormGroup, type FormGroupProps } from "./PRIMITIVES/FormGroup";
 export { Input, type InputProps, inputVariants } from "./PRIMITIVES/Input";
 export { Label, type LabelProps } from "./PRIMITIVES/Label";
 export {
@@ -418,6 +434,7 @@ export {
   type RadioProps,
   radioVariants,
 } from "./PRIMITIVES/Radio";
+export { Switch, type SwitchProps } from "./PRIMITIVES/Switch";
 export { Textarea, type TextareaProps, textareaVariants } from "./PRIMITIVES/Textarea";
 
 // Skeleton component (token-driven)
@@ -446,6 +463,26 @@ export {
   type AspectRatioProps,
 } from "./COMPOSITION/controls/AspectRatio";
 
+// Spinner component (visual feedback, loading indicator)
+export {
+  Spinner,
+  type SpinnerEasing,
+  type SpinnerLabelPosition,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerTone,
+  type SpinnerVariant,
+} from "./COMPOSITION/controls/Spinner/Spinner";
+
+// VisuallyHidden component (DX/A11y utility, non-visual)
+export {
+  VisuallyHidden,
+  type VisuallyHiddenProps,
+} from "./COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
+
+// FocusTrap component (focus containment utility)
+export { FocusTrap, type FocusTrapProps } from "./COMPOSITION/focus/FocusTrap/FocusTrap.index";
+
 // ============================================================================
 // LAYOUT PRIMITIVES
 // ============================================================================
@@ -467,6 +504,8 @@ export {
   type FlexProps,
   Grid,
   type GridProps,
+  Inline,
+  type InlineProps,
   Inset,
   type InsetProps,
   List,
@@ -479,6 +518,8 @@ export {
   type ListProps,
   Navbar,
   type NavbarProps,
+  Panel,
+  type PanelProps,
   Row,
   type RowProps,
   SidebarLayout,
@@ -552,13 +593,6 @@ export {
   type DialogTitleProps,
   Portal,
   type PortalProps,
-  Spinner,
-  type SpinnerEasing,
-  type SpinnerLabelPosition,
-  type SpinnerProps,
-  type SpinnerSize,
-  type SpinnerTone,
-  type SpinnerVariant,
   Toast,
   type ToastAction,
   type ToastData,
@@ -598,6 +632,23 @@ export {
   type PopoverVariant,
   PopoverWrapper,
 } from "./COMPOSITION/overlays/Popover";
+
+// Dropdown (composition over Popover)
+export {
+  Dropdown,
+  DROPDOWN_TOKENS,
+  DropdownContent,
+  type DropdownContentProps,
+  DropdownItem,
+  type DropdownItemPadding,
+  type DropdownItemProps,
+  DropdownRoot,
+  type DropdownRootProps,
+  DropdownSeparator,
+  type DropdownSeparatorProps,
+  DropdownTrigger,
+  type DropdownTriggerProps,
+} from "./COMPOSITION/overlays/Dropdown";
 
 // Tooltip (Radix-based, token-driven)
 export {
@@ -746,6 +797,21 @@ export {
   type BreadcrumbsItemProps,
   type BreadcrumbsRootProps,
   type BreadcrumbsSeparatorProps,
+  Menu,
+  MenuContent,
+  type MenuContentProps,
+  MenuGroup,
+  type MenuGroupProps,
+  MenuItem,
+  type MenuItemProps,
+  MenuLabel,
+  type MenuLabelProps,
+  MenuRoot,
+  type MenuRootProps,
+  MenuSeparator,
+  type MenuSeparatorProps,
+  MenuTrigger,
+  type MenuTriggerProps,
   NavItem,
   type NavItemProps,
   NavList,

@@ -145,7 +145,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         )}
       />
       {isFocused && filteredSuggestions.length > 0 && (
-        <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-popover shadow-lg">
+        <div
+          className="absolute z-30 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-popover shadow-lg"
+          // z-30: z-index uses overlay layer (30) per ELEVATION_AUTHORITY.
+          // SearchBar suggestions dropdown must use zIndex.overlay (30) to ensure
+          // proper stacking above other page elements (sticky navigation, content, etc.)
+        >
           {filteredSuggestions.map((suggestion) => (
             <Button
               key={suggestion}

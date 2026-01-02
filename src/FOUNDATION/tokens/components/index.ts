@@ -121,6 +121,15 @@ export {
   type SurfaceVariant,
 } from "./surface";
 
+// Panel tokens
+export {
+  PANEL_TOKENS,
+  type PanelPadding,
+  type PanelRadius,
+  type PanelShadow,
+  type PanelTone,
+} from "./panel";
+
 // Text tokens
 export {
   TEXT_TOKENS,

@@ -512,3 +512,4 @@ return (
 3. Apply simplifications while maintaining visual output
 4. Verify no regressions in Storybook snapshots
 
+

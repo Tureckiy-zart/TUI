@@ -2,21 +2,21 @@
 
 **Status:** Active  
 **Created:** 2025-12-25  
-**Last Updated:** 2026-01-01 (PageHeader Component Creation Pipeline C0-C10 Complete CREATED verified)  
+**Last Updated:** 2026-01-02 (DX, Navigation and Surface Layers Lock — Post-Audit)  
 **Purpose:** Complete overview of ALL primitives in Tenerife UI library  
-**Total Primitives:** 24 components (including Navigation Primitives group)  
-**Progress:** 24/24 primitives documented (100%)
+**Total Primitives:** 25 components (including Navigation Primitives group and IconButton)  
+**Progress:** 25/25 primitives documented (100%)
 
 **Current State:**
-- ✅ 9 Implemented (Foundation Layer) - Button, Link, Input, Text, Select, Label, Heading, Icon, Checkbox
-- ✅ 15 Implemented/Completed (Extension Layer)
+- ✅ 10 Implemented (Foundation Layer) - Button, IconButton, Link, Input, Text, Select, Label, Heading, Icon, Checkbox
+- ✅ 16 Implemented/Completed (Extension Layer)
 - ✅ 0 Needs Token Migration (All components token-compliant)
 
 ---
 
 ## Document Purpose
 
-This roadmap provides comprehensive details for **ALL 24 primitives** in the Tenerife UI library:
+This roadmap provides comprehensive details for **ALL 25 primitives** in the Tenerife UI library:
 - **Foundation primitives** (Foundation Layer - core primitives)
 - **Implemented primitives** (Extension Layer - available for use)
 - **Completed primitives** (Recently completed with full documentation)
@@ -30,7 +30,8 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 
 **CRITICAL (Foundation Layer) - Implement First:**
 1. Button ✅ **FOUNDATION LOCK** (Action foundation) — Locked 2025-12-25
-2. Link ✅ **FOUNDATION LOCK** (Navigation foundation) — Locked 2025-12-25
+2. IconButton ✅ **FOUNDATION LOCK** (Action foundation - icon-only wrapper) — Locked 2026-01-02
+3. Link ✅ **FOUNDATION LOCK** (Navigation foundation) — Locked 2025-12-25
 3. Input ✅ **FOUNDATION LOCK** (Form foundation) — Locked 2025-12-25
 4. Text ✅ **FOUNDATION LOCK** (Typography foundation) — Locked 2025-12-25
 5. Select ✅ **FOUNDATION LOCK** (Form foundation) — Locked 2025-12-25
@@ -66,22 +67,23 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 
 | Category | Components | Status Distribution |
 |----------|-----------|---------------------|
-| **Actions & Interaction** | Button (**FOUNDATION LOCK**), Link (**FOUNDATION LOCK**), NavLink (**PROCESS LOCKED**), Checkbox (**PROCESS LOCKED**), Switch (**FOUNDATION LOCK**), Radio (**FOUNDATION LOCK**) | 6 Implemented, 4 FOUNDATION LOCK, 2 PROCESS LOCKED |
+| **Actions & Interaction** | Button (**FOUNDATION LOCK**), IconButton (**FOUNDATION LOCK**), Link (**FOUNDATION LOCK**), NavLink (**PROCESS LOCKED**), Checkbox (**PROCESS LOCKED**), Switch (**FOUNDATION LOCK**), Radio (**FOUNDATION LOCK**) | 7 Implemented, 5 FOUNDATION LOCK, 2 PROCESS LOCKED |
 | **Navigation Primitives** | NavLink (**PROCESS LOCKED**), NavItem (**PROCESS LOCKED**), NavList (**PROCESS LOCKED**), NavRoot (**PROCESS LOCKED**), NavText (**PROCESS LOCKED**), NavSeparator (**PROCESS LOCKED**), Tabs (**PROCESS LOCKED**), Pagination (**PROCESS LOCKED**), SegmentedControl (**ALLOWED**), Stepper (**PROCESS LOCKED**) | 10 Implemented, 9 PROCESS LOCKED, 1 ALLOWED |
 | **Display & Feedback** | Icon (**FOUNDATION LOCK**), Badge (**PROCESS LOCKED**), Alert (**PROCESS LOCKED**), Skeleton (**PROCESS LOCKED**), Progress (**PROCESS LOCKED**), Timeline (**PROCESS LOCKED**) | 6 Implemented, 1 FOUNDATION LOCK, 5 PROCESS LOCKED |
-| **Input & Forms** | Input (**FOUNDATION LOCK**), Textarea (**FOUNDATION LOCK**), Field (**COMPOSITION READY**), Label (**FOUNDATION LOCK**), Select (**FOUNDATION LOCK**) | 5 Implemented, 4 FOUNDATION LOCK, 1 COMPOSITION READY |
+| **Input & Forms** | Input (**FOUNDATION LOCK**), Textarea (**FOUNDATION LOCK**), Field (**COMPOSITION READY**), Label (**FOUNDATION LOCK**), Select (**FOUNDATION LOCK**), FormGroup (**FOUNDATION LOCK**), HelperText (**FOUNDATION LOCK**), ErrorText (**FOUNDATION LOCK**) | 8 Implemented, 7 FOUNDATION LOCK, 1 COMPOSITION READY |
 | **Typography** | Text (**FOUNDATION LOCK**), Heading (**FOUNDATION LOCK**) | 2 Implemented, 2 FOUNDATION LOCK |
 | **User Representation** | Avatar (**PROCESS LOCKED**) | 1 Implemented, 1 PROCESS LOCKED |
-| **Layout Support** | Separator, AspectRatio, Box (**LOCKED**), Stack (**LOCKED**), Row (**LOCKED** validated by Pipeline 18A 2025-12-26), Column (**LOCKED** validated by Pipeline 18A 2025-12-26), Container (**LOCKED** validated by Pipeline 18A 2025-12-26), Flex (**LOCKED** validated by Pipeline 18A 2025-12-26), Grid (**LOCKED** validated by Pipeline 18A 2025-12-26), Surface (**LOCKED** validated by Pipeline 18A 2025-12-26), Section (**PROCESS LOCKED** validated by Pipeline 18A 2026-01-01), Footer (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-30), PageHeader (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2026-01-01) | 13 Completed (8 LOCKED, 1 PROCESS LOCKED, 2 CREATED) |
+| **Layout Support** | Separator, AspectRatio, Box (**LOCKED**), Stack (**LOCKED**), Row (**LOCKED** validated by Pipeline 18A 2025-12-26), Column (**LOCKED** validated by Pipeline 18A 2025-12-26), Container (**LOCKED** validated by Pipeline 18A 2025-12-26), Flex (**LOCKED** validated by Pipeline 18A 2025-12-26), Grid (**LOCKED** validated by Pipeline 18A 2025-12-26), Surface (**LOCKED** validated by Pipeline 18A 2025-12-26), Section (**LOCKED** validated by Pipeline 18A 2026-01-01), Inline (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Panel (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Spacer (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Footer (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-30), PageHeader (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2026-01-01) | 16 Completed (9 LOCKED, 3 PROCESS LOCKED, 2 CREATED) |
 | **Controls** | RangeSlider (**PROCESS LOCKED**), Slider (**PROCESS LOCKED**), Chip (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), MultiSelect (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28) | 4 Implemented, 2 PROCESS LOCKED, 2 CREATED |
-| **Overlays & Menus** | Portal (**PROCESS LOCKED**), Dialog (**PROCESS LOCKED**), Modal (**PROCESS LOCKED**), HoverCard (**PROCESS LOCKED**), Tooltip (**PROCESS LOCKED**), Popover (**PROCESS LOCKED**), ContextMenu (**PROCESS LOCKED**), Toast (**PROCESS LOCKED**), Drawer (**PROCESS LOCKED**), Backdrop (**ALLOWED**), Accordion (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), Spinner (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), FileUpload (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), Combobox (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28) | 14 Implemented, 9 PROCESS LOCKED, 1 ALLOWED, 4 CREATED |
+| **Overlays & Menus** | Portal (**PROCESS LOCKED**), Dialog (**PROCESS LOCKED**), Modal (**PROCESS LOCKED**), HoverCard (**PROCESS LOCKED**), Tooltip (**PROCESS LOCKED**), Popover (**PROCESS LOCKED**), ContextMenu (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Toast (**PROCESS LOCKED**), Drawer (**PROCESS LOCKED**), Backdrop (**ALLOWED**), Menu (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Dropdown (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), Accordion (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), Spinner (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), FileUpload (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28), Combobox (**CREATED** - Component Creation Pipeline C0-C10 Complete, 2025-12-28) | 16 Implemented, 11 PROCESS LOCKED, 1 ALLOWED, 4 CREATED |
 | **Notifications** | NotificationCenter (**PROCESS LOCKED**) | 1 Implemented, 1 PROCESS LOCKED |
+| **DX/A11y Utilities** | VisuallyHidden (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02), FocusTrap (**PROCESS LOCKED** - DX, Navigation and Surface Layers Lock, 2026-01-02) | 2 Implemented, 2 PROCESS LOCKED |
 
-**Total:** 24 primitives + 4 controls + 14 overlays + 8 data display + 1 notification system + 10 navigation components + 1 extension + 3 layout components
-- ✅ **65 Implemented/Completed** (all primitives, controls, overlays, data display, navigation, notification, extension, and layout components available for use)
-- ✅ **12 FOUNDATION LOCKED** (Button, Link, Input, Text, Select, Label, Heading, Icon, Radio, Switch, Textarea)
-- ✅ **47 PROCESS LOCKED** (Checkbox, NavLink, NavItem, NavList, NavRoot, NavText, NavSeparator, Navigation Primitives, Progress, Skeleton, AspectRatio, Separator, Badge, Avatar, Alert, RangeSlider, Slider, Portal, Dialog, Modal, HoverCard, Tooltip, Popover, ContextMenu, Toast, Drawer, Timeline, List, DataList, EmptyState, FilterBar, CardBase, Table, SimpleTable, NotificationCenter, Tabs, Pagination, Stepper, NextLinkAdapter, Section)
-- ✅ **8 CREATED** (Chip, MultiSelect, Accordion, Spinner, FileUpload, Combobox, Footer, PageHeader)
+**Total:** 25 primitives + 4 controls + 16 overlays + 8 data display + 1 notification system + 10 navigation components + 1 extension + 6 layout components + 2 DX/A11y utilities + 1 action component
+- ✅ **74 Implemented/Completed** (all primitives, controls, overlays, data display, navigation, notification, extension, layout components, DX/A11y utilities, and action components available for use)
+- ✅ **16 FOUNDATION LOCKED** (Button, IconButton, Link, Input, Text, Select, Label, Heading, Icon, Radio, Switch, Textarea, FormGroup, HelperText, ErrorText)
+- ✅ **52 PROCESS LOCKED** (Checkbox, NavLink, NavItem, NavList, NavRoot, NavText, NavSeparator, Navigation Primitives, Progress, Skeleton, AspectRatio, Separator, Badge, Avatar, Alert, RangeSlider, Slider, Portal, Dialog, Modal, HoverCard, Tooltip, Popover, ContextMenu, Toast, Drawer, Timeline, List, DataList, EmptyState, FilterBar, CardBase, Table, SimpleTable, NotificationCenter, Tabs, Pagination, Stepper, NextLinkAdapter, Section, Inline, Panel, Spacer, VisuallyHidden, FocusTrap, Menu, Dropdown, ButtonGroup)
+- ✅ **6 CREATED** (Chip, MultiSelect, Accordion, Spinner, FileUpload, Combobox, Footer, PageHeader)
 - ✅ **2 ALLOWED** (Backdrop, SegmentedControl)
 
 --
@@ -91,6 +93,7 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 | Primitive | Category | Status | Location | Priority | Order |
 |-----------|----------|--------|----------|----------|-------|
 | **Button** | Action | ✅ **FOUNDATION LOCK** | `src/PRIMITIVES/Button/` | CRITICAL | 1 |
+| **IconButton** | Action | ✅ **FOUNDATION LOCK** | `src/PRIMITIVES/IconButton/` | CRITICAL | 1a |
 | **Link** | Navigation | ✅ **FOUNDATION LOCK** | `src/PRIMITIVES/Link/` | CRITICAL | 2 |
 | **Input** | Form | ⏳ **IN PROGRESS** (Pipeline 18A) | `src/PRIMITIVES/Input/` | CRITICAL | 3 |
 | **Text** | Typography | ✅ **FOUNDATION LOCK** | `src/PRIMITIVES/Text/` | CRITICAL | 4 |
@@ -121,7 +124,7 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 | **Tabs** | Navigation | ✅ **PROCESS LOCKED** (Pipeline 18A Third Pass Complete, 2025-12-27)<br/>**Audit:** `docs/reports/audit/TABS_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/navigation/tabs/` | HIGH | 23 |
 | **Slider** | Control | ✅ **PROCESS LOCKED** (Pipeline 18A Re-run Complete, 2025-12-27)<br/>**Audit:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/controls/Slider/` | HIGH | 24 |
 | **Accordion** | Overlay | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)<br/>**Creation Report:** `docs/reports/creation/ACCORDION_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/overlays/Accordion/` | HIGH | 25 |
-| **Spinner** | Overlay | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)<br/>**Creation Report:** `docs/reports/creation/SPINNER_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/overlays/Spinner/` | HIGH | 26 |
+| **Spinner** | Control | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)<br/>**Creation Report:** `docs/reports/creation/SPINNER_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/controls/Spinner/` | HIGH | 26 |
 | **FileUpload** | Overlay | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)<br/>**Creation Report:** `docs/reports/creation/FileUpload_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/overlays/FileUpload/` | HIGH | 27 |
 | **Backdrop** | Overlay | ✅ **ALLOWED** (Extension Composition over Modal)<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/overlays/Backdrop.tsx` | HIGH | 28 |
 | **Pagination** | Navigation | ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/navigation/pagination/` | HIGH | 29 |
@@ -144,6 +147,18 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 | **NextLinkAdapter** | Extension | ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/EXTENSIONS/next/` | HIGH | 46 |
 | **Drawer** | Overlay | ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-28)<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/overlays/Drawer/` | HIGH | 47 |
 | **Footer** | Layout | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-30)<br/>**Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/layout/Footer/` | HIGH | 48 |
+| **PageHeader** | Layout | ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2026-01-01)<br/>**Creation Report:** `docs/reports/creation/PageHeader_CREATION_REPORT.md`<br/>**Lock:** `docs/architecture/EXTENSION_STATE.md` | `src/COMPOSITION/layout/PageHeader/` | HIGH | 49 |
+| **VisuallyHidden** | DX/A11y Utility | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/VISUALLYHIDDEN_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/a11y/VisuallyHidden/` | HIGH | 50 |
+| **FocusTrap** | DX/A11y Utility | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/FOCUSTRAP_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/focus/FocusTrap/` | HIGH | 51 |
+| **FormGroup** | Form | ✅ **FOUNDATION LOCK** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/FORMGROUP_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/FOUNDATION_LOCK.md` | `src/PRIMITIVES/FormGroup/` | HIGH | 52 |
+| **HelperText** | Form | ✅ **FOUNDATION LOCK** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/HELPERTEXT_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/FOUNDATION_LOCK.md` | `src/PRIMITIVES/HelperText/` | HIGH | 53 |
+| **ErrorText** | Form | ✅ **FOUNDATION LOCK** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/ERRORTEXT_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/FOUNDATION_LOCK.md` | `src/PRIMITIVES/ErrorText/` | HIGH | 54 |
+| **ButtonGroup** | Action | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/BUTTONGROUP_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/actions/ButtonGroup/` | HIGH | 55 |
+| **Inline** | Layout | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/INLINE_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/layout/Inline/` | HIGH | 56 |
+| **Spacer** | Layout | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/SPACER_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/layout/Spacer/` | HIGH | 57 |
+| **Panel** | Layout | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/PANEL_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/layout/Panel/` | HIGH | 58 |
+| **Menu** | Navigation | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/MENU_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/navigation/Menu/` | HIGH | 59 |
+| **Dropdown** | Overlay | ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)<br/>**Audit Report:** `docs/reports/audit/DROPDOWN_BASELINE_REPORT.md`<br/>**Lock:** `docs/architecture/ARCHITECTURE_LOCK.md` | `src/COMPOSITION/overlays/Dropdown/` | HIGH | 60 |
 
 ### MEDIUM Priority (Nice to Have)
 | Primitive | Category | Status | Location | Priority | Order |
@@ -153,12 +168,12 @@ This roadmap provides comprehensive details for **ALL 24 primitives** in the Ten
 | **AspectRatio** | Layout | ✅ **PROCESS LOCKED** (Pipeline 18A Third Pass Complete, 2025-12-26) | `src/COMPOSITION/controls/AspectRatio/` | MEDIUM | 22 |
 
 **Summary:**
-- ✅ **65 Implemented/Completed** (all components ready for use)
+- ✅ **74 Implemented/Completed** (all components ready for use)
 - ✅ **0 Needs Review** (All components token-compliant)
 
-**Total:** 65 components (24 primitives + 4 controls + 14 overlays + 8 data display + 1 notification + 10 navigation + 1 extension + 3 layout)  
-**Completion:** 65/65 documented (100%)  
-**Token Compliance:** 65/65 (100%)
+**Total:** 74 components (25 primitives + 4 controls + 16 overlays + 8 data display + 1 notification + 10 navigation + 1 extension + 6 layout + 2 DX/A11y utilities + 1 action component)  
+**Completion:** 74/74 documented (100%)  
+**Token Compliance:** 74/74 (100%)
 
 ---
 

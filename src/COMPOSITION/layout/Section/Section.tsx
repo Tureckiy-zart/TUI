@@ -3,14 +3,25 @@
 /**
  * Section Container Component
  *
- * Section is a page-level block container for vertical page rhythm.
+ * Section is a page-level block container for vertical page rhythm and semantic separation.
  * Provides vertical padding between page sections and spacing between content blocks.
  * Uses Stack internally for content block composition.
  * All styling uses tokens exclusively (no raw CSS values).
  *
- * Section IS: A page-level block container for vertical rhythm
- * Section IS NOT: A grid layout component, a variant-driven component, or a layout composition primitive
+ * **What Section IS:**
+ * - Page-level block container for vertical page rhythm
+ * - Semantic separation between major page sections
+ * - Container for page-level blocks (landing pages, content pages)
+ * - Can contain Panel components (Panel inside Section is allowed)
  *
+ * **What Section IS NOT:**
+ * - Content grouping inside a page → Use `Panel` for grouping related content
+ * - Visual identity responsibility → Section is structural, not visual
+ * - Grid layout component → Section uses Stack internally, not Grid
+ * - Variant-driven component → Section is structural, not variant-driven
+ * - Nested inside Panel → Section is page-level, Panel is page-internal
+ *
+ * @see docs/reference/COMPONENT_USAGE_MATRIX.md for usage boundaries and nesting rules
  * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
  */
 

@@ -121,17 +121,6 @@ export {
   type ContextMenuTriggerProps,
 } from "./ContextMenu";
 
-// Spinner
-export {
-  Spinner,
-  type SpinnerEasing,
-  type SpinnerLabelPosition,
-  type SpinnerProps,
-  type SpinnerSize,
-  type SpinnerTone,
-  type SpinnerVariant,
-} from "./Spinner/Spinner";
-
 // Accordion
 export {
   Accordion,
@@ -155,6 +144,23 @@ export {
   type PopoverVariant,
   PopoverWrapper,
 } from "./Popover";
+
+// Dropdown
+export {
+  Dropdown,
+  DROPDOWN_TOKENS,
+  DropdownContent,
+  type DropdownContentProps,
+  DropdownItem,
+  type DropdownItemPadding,
+  type DropdownItemProps,
+  DropdownRoot,
+  type DropdownRootProps,
+  DropdownSeparator,
+  type DropdownSeparatorProps,
+  DropdownTrigger,
+  type DropdownTriggerProps,
+} from "./Dropdown";
 
 // Tooltip
 export {

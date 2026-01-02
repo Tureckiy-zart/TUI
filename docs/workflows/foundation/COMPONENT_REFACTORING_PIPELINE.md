@@ -1,4 +1,4 @@
-🔧 Macro Execution Model (ADDED)
+## 🔧 Macro Execution Model
 
 This pipeline operates under a three-phase execution model.
 
@@ -103,6 +103,35 @@ Tests and Storybook are built on top of refactored code, not used as a substitut
 > This document is intentionally verbose. It is written as a **process control document**, not a checklist.
 >
 > The goal is not speed, but **predictable, high‑quality outcomes**.
+
+---
+
+## Table of Contents
+
+- [Macro Execution Model](#macro-execution-model)
+- [Quick Start Guide](#-quick-start-guide)
+- [Authority Navigation & Reference](#️-authority-navigation--reference)
+- [Intent & Non-Goals](#-0-intent--nongoals)
+- [General Execution Rules](#-1-general-execution-rules)
+- [Assistant-only Playbook](#-1a-assistant-only-playbook-internal-guidance)
+- [Audit Report Contract](#-2-audit-report-contract-required)
+- [STEP 0 — Baseline Snapshot & Context Fixation](#-3-step-0--baseline-snapshot--context-fixation)
+- [STEP 1 — Structural & Code Quality Review](#-4-step-1--structural--code-quality-review)
+- [STEP 2 — Semantic Role & Responsibility Validation](#-5-step-2--semantic-role--responsibility-validation)
+- [STEP 3 — Duplication & Internal Pattern Alignment](#-6-step-3--duplication--internal-pattern-alignment)
+- [STEP 4 — State & Interaction Model Review](#-7-step-4--state--interaction-model-review)
+- [STEP 5 — Token, Size & Variant Consistency](#-8-step-5--token-size--variant-consistency)
+- [STEP 6 — Public API & DX Review](#-9-step-6--public-api--dx-review)
+- [STEP 7 — Type System Alignment](#-10-step-7--type-system-alignment)
+- [STEP 8 — Intentional Refactor Pass](#-11-step-8--intentional-refactor-pass)
+- [STEP 9 — Mandatory FIX & Consolidation](#-12-step-9--mandatory-fix--consolidation-critical)
+- [STEP 10 — Validation via Tests & Storybook](#-13-step-10--validation-via-tests--storybook)
+- [STEP 11 — Accessibility Audit & Fixes](#-14-step-11--accessibility-audit--fixes-mandatory)
+- [STEP 12 — Final Review & Outcome Fixation + Architectural Lock](#-15-step-12--final-review--outcome-fixation--architectural-lock)
+- [Troubleshooting](#-troubleshooting)
+- [Reference Examples](#-reference-examples)
+- [Related Documents](#-related-documents)
+- [Version History](#-version-history)
 
 ---
 
@@ -336,7 +365,7 @@ This contract exists to ensure that:
 
 9. ⚠️ **Blocker classification rule (CRITICAL):** every step section must include a clear outcome tag:
 
-* `Blocking: yes/no`
+* `BLOCKING: yes/no`
 
 * If `yes`, include a single-sentence reason.
 
@@ -368,7 +397,7 @@ This contract exists to ensure that:
 
 3) **Change** (apply scoped refactor if allowed)
 
-4) **Record** (update audit report with blocker/non-blocker)
+4) **Record** (update audit report with BLOCKER/non-BLOCKER)
 
 * Skipping any sub-part is a process violation.
 
@@ -394,7 +423,7 @@ Each STEP must complete **all four phases**:
 
 3. **Change** → apply scoped refactor (only if allowed in this step)
 
-4. **Record** → update the audit report with blockers / non‑blockers
+4. **Record** → update the audit report with BLOCKERS / non‑BLOCKERS
 
 If any phase is missing → the step is **FAILED** even if code "looks fine".
 
@@ -464,7 +493,7 @@ Each STEP section in the audit report must contain:
 
 * **Outcome:** `No changes required` | `Changes applied` | `Changes required (not applied)`
 
-* **Blocking:** `yes/no`
+* **BLOCKING:** `yes/no`
 
 * **Findings:** bullet list
 
@@ -478,9 +507,9 @@ Emoji markers are allowed for scanability:
 
 * ⚠️ non‑blocking issue
 
-* ❌ blocker
+* ❌ BLOCKER
 
-* 🧱 explicit blocker list
+* 🧱 explicit BLOCKER list
 
 * 🧾 report/decision note
 
@@ -775,7 +804,7 @@ Each `STEP N` section must include:
 
 * `Outcome:` one of `No changes required | Changes applied | Changes required (not yet applied)`
 
-* `Blocking:` `yes/no` (with reason if `yes`)
+* `BLOCKING:` `yes/no` (with reason if `yes`)
 
 * `Notes:` 2-5 bullet points max (key decisions, findings)
 
@@ -790,7 +819,7 @@ Each `STEP N` section must include:
 ## STEP N — Step Name
 
 **Outcome:** Changes applied  
-**Blocking:** no  
+**BLOCKING:** no  
 **Notes:**
 - Key finding or decision point
 - Another important note
@@ -816,7 +845,7 @@ Emojis may be used to improve scanning and readability.
 
 * ✅ for compliant / no issues / completed
 
-* ⚠️ for non-blocking issues / warnings
+* ⚠️ for non-BLOCKING issues / warnings
 
 * 🚫 for blockers
 
@@ -938,7 +967,7 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 3) **Run Plan (STEP MAP) — REQUIRED**
    A short plan for each step (STEP 1–12) including:
    - What will be verified
-   - What is considered BLOCKING
+   - What is considered BLOCKING (blocking condition)
    - Whether code changes are allowed in that step
    - Expected artifacts (report updates, tests, stories, docs)
 
@@ -971,7 +1000,7 @@ STEP 0 MUST produce a "Full Audit Report" with the following sections:
 
 - STEP 0 MUST NOT change code.
 - STEP 0 MUST NOT rename or move files.
-- STEP 0 is BLOCKING if the report is missing any required section above.
+- STEP 0 is BLOCKING (blocking condition) if the report is missing any required section above.
 - This step **does not judge quality**.
 - This step prevents accidental refactoring of the wrong thing.
 
@@ -991,7 +1020,7 @@ Before proceeding to STEP 1, verify:
 - [ ] Initial FIX Backlog structure created
 - [ ] DoD (Definition of Done) documented
 - [ ] No code changes made
-- [ ] STEP 0 section in audit report filled (using standardized format: Outcome, Blocking, Notes, Changes, Artifacts, Deferred)
+- [ ] STEP 0 section in audit report filled (using standardized format: Outcome, BLOCKING, Notes, Changes, Artifacts, Deferred)
 - [ ] Checkpoint: Audit report shared with operator
 
 ---
@@ -1040,7 +1069,7 @@ Before proceeding to STEP 2, verify:
 - [ ] All 4 phases completed (Observe → Decide → Change → Record)
 - [ ] Audit report STEP 1 section exists
 - [ ] Outcome field filled (`No changes required` | `Changes applied` | `Changes required`)
-- [ ] Blocking field filled (`yes/no`)
+- [ ] BLOCKING field filled (`yes/no`)
 - [ ] Structural issues documented in FIX backlog
 - [ ] No behavior changes made
 - [ ] No API changes made

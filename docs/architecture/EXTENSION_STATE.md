@@ -354,7 +354,37 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Storybook Coverage:** 11 stories (all use cases demonstrated)
     - **Exports:** `Field`, `FieldProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`, `FieldLabelProps`
 
-21. **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
+### Action Components
+
+21. **ButtonGroup** - `src/COMPOSITION/actions/ButtonGroup/ButtonGroup.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Creation Date:** 2026-01-02
+    - **Refactoring Date:** 2026-01-02
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete) → Pipeline 18A (STEP 0-12 complete)
+    - **Baseline Report:** `docs/reports/audit/BUTTONGROUP_BASELINE_REPORT.md`
+    - **Component Type:** Extension Layer Component - Action Composition
+    - **Category:** actions
+    - **Purpose:** Semantic and behavioral grouping of multiple Button components. Provides layout alignment (horizontal/vertical), shared prop propagation (size, variant, disabled), and accessibility semantics (role="group", aria-orientation).
+    - **Key Characteristics:**
+      - Composes Button (Foundation, LOCKED) and Stack (Layout primitive, LOCKED)
+      - Context-based prop propagation (size, variant, disabled)
+      - Token-based spacing only (Spacing Authority compliance)
+      - Accessibility: role="group", aria-orientation for vertical
+      - Layout Authority compliance: Uses Stack for layout composition
+      - VARIANTS_SIZE_CANON compliance: GlobalSize (sm | md | lg)
+    - **Composition Pattern:**
+      - Uses Stack for layout (horizontal/vertical via orientation prop)
+      - Provides Context for prop propagation (ready for future Button enhancement)
+      - Button props override ButtonGroup props (prop precedence)
+    - **Use Cases:** Action button groups, form button groups, toolbar button groups, navigation button groups
+    - **API:** `orientation?: "horizontal" | "vertical"`, `size?: "sm" | "md" | "lg"`, `variant?: ButtonVariant`, `disabled?: boolean`, `spacing?: SpacingValue`, `align?: AlignmentValue`, `justify?: JustifyValue`
+    - **Token Compliance:** ✅ 100% (token-based spacing only)
+    - **Accessibility:** ✅ Compliant (role="group", aria-orientation, keyboard navigation delegated to Button)
+    - **Test Coverage:** Comprehensive (ButtonGroup.test.tsx - rendering, orientation, spacing, accessibility, context propagation, Stack props, ref forwarding, Button integration)
+    - **Storybook Coverage:** Compliant (Horizontal, Vertical, Sizes, Variants, Spacing, Disabled, Mixed stories)
+    - Exports: `ButtonGroup`, `ButtonGroupProps`, `useButtonGroupContext`
+
+22. **Avatar** - `src/COMPOSITION/controls/Avatar/Avatar.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
    - **Lock Date:** 2025-12-26
    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -478,7 +508,45 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Date Completed:** 2025-12-25
     - Exports: `AspectRatio`, `AspectRatioProps`, `AspectRatioPreset`, `ASPECT_RATIO_PRESETS`
 
-27. **Chip** - `src/COMPOSITION/overlays/Chip/Chip.tsx`
+27. **VisuallyHidden** - `src/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/VISUALLYHIDDEN_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Extension component lock)
+    - **Component Type:** Extension Layer Utility - DX/A11y Primitive
+    - **Migration Complete:** VisuallyHidden has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Purpose:** Provides accessible names for interactive elements without visual display. Hides content visually while keeping it accessible to screen readers.
+    - **Implementation:** Custom CSS pattern (standard visually-hidden: position absolute, 1px size, clip-path inset)
+    - **Features:** Supports Radix Slot pattern via asChild prop, ref forwarding, standard HTML attributes
+    - **Token Compliance:** ✅ N/A (component intentionally non-visual, no visual tokens needed)
+    - **Motion Compliance:** ✅ NO MOTION BY DESIGN (component is static, no state/spatial changes)
+    - **Accessibility:** Utility for providing accessible names to other elements (icon-only buttons, form helpers)
+    - **Use Cases:** Icon-only button labels, form input helper text, screen reader-only content
+    - **Test Coverage:** Comprehensive (VisuallyHidden.test.tsx - behavior, ref forwarding, DOM assertions, asChild, A11Y tests)
+    - **Storybook Coverage:** Compliant (Default, IconButtonLabel, FormLabelHelper stories, title structure: UI / Composition / VisuallyHidden)
+    - Exports: `VisuallyHidden`, `VisuallyHiddenProps`
+
+28. **FocusTrap** - `src/COMPOSITION/focus/FocusTrap/FocusTrap.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Creation Date:** 2026-01-02
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete, 2026-01-02) → Pipeline 18A (STEP 0-12 complete, 2026-01-02)
+    - **Creation Report:** `docs/reports/creation/FocusTrap_CREATION_REPORT.md`
+    - **Audit Report:** `docs/reports/audit/FOCUSTRAP_BASELINE_REPORT.md`
+    - **Component Type:** Extension Layer Utility - Focus Management Primitive
+    - **Purpose:** Reusable focus containment utility for accessibility-critical components. Traps focus within children subtree using Tab/Shift+Tab cycling.
+    - **Implementation:** Programmatic focus management via useEffect, Tab/Shift+Tab event listeners, focusable elements detection
+    - **Features:** Initial focus via initialFocusRef, focus restore on unmount/active=false, Escape key callback, loop mode (wrap Tab/Shift+Tab)
+    - **Token Compliance:** ✅ N/A (component intentionally non-visual, no visual tokens needed)
+    - **Motion Compliance:** ✅ NO MOTION BY DESIGN (programmatic focus management, no visual animations)
+    - **Accessibility:** Works with screen readers through standard focus management. Component is invisible wrapper (no accessible name, no ARIA roles needed)
+    - **Use Cases:** Modal overlays (must trap focus), drawer overlays (must trap focus), menu dropdowns (may trap focus), dialog overlays (must trap focus)
+    - **Test Coverage:** Comprehensive (FocusTrap.test.tsx - behavior, edge cases, A11Y, focus, input)
+    - **Storybook Coverage:** Compliant (Default, States, WithInitialFocus, WithEscapeHandler, WithoutLoop, ModalScenario stories)
+    - Exports: `FocusTrap`, `FocusTrapProps`
+
+29. **Chip** - `src/COMPOSITION/overlays/Chip/Chip.tsx`
     - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
     - **Creation Date:** 2025-12-28
     - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
@@ -819,6 +887,83 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Types:** `StickyBarPosition`, `StickyBarProps`, `StickyBarTone`
     - **Rule:** DO NOT modify, extend, or create alternatives. All modifications require explicit unlock procedure.
 
+34. **Spacer** - `src/COMPOSITION/layout/Spacer/Spacer.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete), Pipeline 18A (Steps 0-12 complete)
+    - **Creation Report:** `docs/reports/creation/SPACER_CREATION_REPORT.md`
+    - **Audit Report:** `docs/reports/audit/SPACER_BASELINE_REPORT.md`
+    - **Type:** Extension Layer Layout Component - Utility Spacing Inserter
+    - **Category:** layout
+    - **Purpose:** Pure utility component for inserting spacing between elements. Provides single-axis spacing (vertical or horizontal) using spacing tokens only. No layout logic beyond spacing insertion.
+    - **Key Characteristics:**
+      - Utility spacing inserter (not a layout composition component)
+      - Single-axis spacing only (vertical or horizontal)
+      - No layout logic beyond spacing insertion
+      - No margin/padding props (uses width/height directly)
+      - No responsive behavior (single token value)
+      - No variant/state props (pure utility)
+      - Decorative element (aria-hidden="true", role="none")
+      - Non-interactive component
+      - Token-only styling (uses getSpacingCSSVar exclusively)
+      - Motion: NO MOTION BY DESIGN (no state/spatial changes)
+    - **Token Compliance:** ✅ 100% (spacing tokens only, no raw values)
+    - **Use Cases:** Spacing between Stack items, spacing between sections, custom spacing insertion
+    - **API:** `orientation?: "horizontal" | "vertical"` (default: "vertical"), `size: SpacingToken` (required)
+    - **Forbidden Props:** className, style, margin, padding, responsive props, variant props
+    - **Exports:** `Spacer`, `SpacerProps`, `SpacerOrientation`
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Pipeline 18A:** All steps complete (0-12), no refactor required (component already high quality), tests and Storybook stories created
+
+35. **Inline** - `src/COMPOSITION/layout/Inline/Inline.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete), Pipeline 18A (Steps 0-12 complete)
+    - **Creation Report:** `docs/reports/creation/INLINE_CREATION_REPORT.md`
+    - **Audit Report:** `docs/reports/audit/INLINE_BASELINE_REPORT.md`
+    - **Type:** Extension Layer Layout Component - DX Enhancer
+    - **Category:** layout
+    - **Purpose:** DX-enhancer for inline-flex layout composition. Provides a simple, token-based API for creating inline-flex containers with semantic spacing between items.
+    - **Key Characteristics:**
+      - Uses `inline-flex` display (inline-level flex container)
+      - Token-only spacing (no raw values)
+      - No state, no interaction, no variants
+      - Minimal API: `gap`, `align`, `wrap`, `asChild`
+      - Supports `forwardRef` for ref forwarding
+      - Does NOT use Box internally (renders div directly)
+      - Does NOT accept `className` or `style` props
+      - Motion: NO MOTION BY DESIGN (pure layout wrapper, no state/spatial changes)
+    - **Token Compliance:** ✅ 100% (spacing tokens only, no raw values)
+    - **Use Cases:** Inline content that should flow with text (badges, tags, inline buttons), inline-flex layouts where items should wrap naturally, simple horizontal inline flows with spacing
+    - **API:** `gap?: ResponsiveSpacing`, `align?: "start" | "center" | "end" | "baseline"`, `wrap?: boolean`, `asChild?: boolean`
+    - **Forbidden Props:** className, style
+    - **Exports:** `Inline`, `InlineProps`
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Pipeline 18A:** All steps complete (0-12), component ready for production use
+
+36. **Panel** - `src/COMPOSITION/layout/Panel/Panel.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/PANEL_BASELINE_REPORT.md`
+    - **Type:** Extension Layer Layout Component - Surface Container
+    - **Category:** layout
+    - **Purpose:** Lightweight structural surface container for grouping related content inside a page. Panel provides surface styling without interactivity, sitting semantically between Box (generic container) and Card (structured content container).
+    - **Key Characteristics:**
+      - Lightweight structural surface container
+      - Semantic upgrade over Box (adds surface styling)
+      - Non-interactive container (no onClick, no interactive states)
+      - Can be nested inside Section components
+      - Token-driven styling via PANEL_TOKENS
+      - Uses tokenCVA for variant styling
+      - Motion: NO MOTION BY DESIGN (pure layout container, no state/spatial changes)
+    - **Token Compliance:** ✅ 100% (PANEL_TOKENS used throughout)
+    - **Use Cases:** Form sections, settings panels, grouped content sections, non-interactive content containers
+    - **API:** `tone?: PanelTone`, `padding?: ResponsiveSpacing`, `radius?: ResponsiveRadius`, Box props forwarded
+    - **Exports:** `Panel`, `PanelProps`, `panelVariants`, `PanelTone`
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - **Pipeline 18A:** All steps complete (0-12), component ready for production use
+
 ### Container Components
 
 27. **Card** - `src/COMPOSITION/layout/Card/Card.tsx`
@@ -903,14 +1048,14 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Dialog`, `DialogBody`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogRoot`, `DialogTitle`
     - Types: `DialogBodyProps`, `DialogDescriptionProps`, `DialogFooterProps`, `DialogHeaderProps`, `DialogProps`, `DialogTitleProps`
 
-33. **Spinner** - `src/COMPOSITION/overlays/Spinner/Spinner.tsx`
+33. **Spinner** - `src/COMPOSITION/controls/Spinner/Spinner.tsx`
     - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
     - **Creation Date:** 2025-12-28
-    - **Last Updated:** 2025-12-28 (Ring variant removed, subtle tone fixed)
+    - **Last Updated:** 2026-01-02 (Moved from overlays/ to controls/)
     - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
     - **Creation Report:** `docs/reports/creation/SPINNER_CREATION_REPORT.md`
     - **Type:** Extension Layer Component - Visual Feedback
-    - **Category:** overlays (loading feedback component)
+    - **Category:** controls (visual feedback component)
     - **Purpose:** Animated loading indicator for visual feedback during async operations
     - **Key Characteristics:**
       - Multiple visual variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple)
@@ -1057,6 +1202,32 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Public API:** Internal-only (not exported from `src/index.ts`)
     - Exports: `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`, `TooltipWrapper`, `tooltipContentVariants`
     - Types: `TooltipProps`, `TooltipVariant`
+
+37. **Dropdown** - `src/COMPOSITION/overlays/Dropdown/Dropdown.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/DROPDOWN_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Migration Complete:** Dropdown has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+    - **Key Decisions:**
+      - Delegation pattern: Dropdown delegates overlay behavior to Popover (Root, Trigger, Content)
+      - Custom implementation: DropdownItem and DropdownSeparator are custom implementations (not delegated)
+      - Token compliance: 100% token usage (DROPDOWN_TOKENS, POPOVER_TOKENS)
+      - Type system: Explicit types, no CVA type leakage (no CVA usage - direct className composition)
+      - API clarity: Redundant props removed (children, disabled, onClick from DropdownItemProps; className from DropdownSeparatorProps)
+      - Storybook compliance: Required stories added (Default, Matrix, States, SizesGallery, LongContent per VARIANTS_SIZE_CANON)
+      - Test coverage: Comprehensive test suite with accessibility, keyboard navigation, and edge cases
+      - Accessibility: Native button semantics, ARIA attributes, keyboard parity
+    - **Type:** Extension Composition over Popover
+    - **Purpose:** Generic action container that provides semantic subcomponents for action lists. Composes Popover for overlay behavior and keyboard accessibility. NOT a Menu component - generic container for actions without form semantics or menu-specific ARIA roles.
+    - **Compound Component Pattern:** Dropdown.Root, Dropdown.Trigger, Dropdown.Content, Dropdown.Item, Dropdown.Separator
+    - **Sizes:** DropdownContent supports `sm | md | lg` (PopoverSize, overlay size restriction compliant)
+    - **Variants:** DropdownContent supports PopoverVariant (primary, secondary, accent, outline, ghost, link, destructive)
+    - **Use Cases:** Action lists, dropdown menus, contextual actions, command palettes
+    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
+    - Exports: `Dropdown`, `DropdownRoot`, `DropdownTrigger`, `DropdownContent`, `DropdownItem`, `DropdownSeparator`, `DROPDOWN_TOKENS`, `POPOVER_TOKENS`
+    - Types: `DropdownRootProps`, `DropdownTriggerProps`, `DropdownContentProps`, `DropdownItemProps`, `DropdownSeparatorProps`, `DropdownItemPadding`
 
 ### Data Display Components
 
@@ -1676,6 +1847,33 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
       - Storybook coverage: 6 stories (default, states, realistic usage)
       - Accessibility: Keyboard navigation complete, ARIA enhancements identified for future improvement
     - **Rule:** USE — component ready for production use
+
+46. **Menu** - `src/COMPOSITION/navigation/Menu/Menu.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Lock Date:** 2026-01-02
+    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+    - **Audit Report:** `docs/reports/audit/MENU_BASELINE_REPORT.md`
+    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+    - **Semantic Role:** COMPOSITION_NAVIGATION_MENU
+    - **Purpose:** Radix DropdownMenu-based component for action/navigation lists. Menu provides action/navigation lists with proper ARIA menu semantics (role="menu", role="menuitem"). Usable as a base for context menus, dropdown actions, and command-like UIs, but must not duplicate Select, Popover, or ContextMenu responsibilities.
+    - **Key Characteristics:**
+      - Strict Radix wrapper pattern (all behavior delegated to Radix DropdownMenu)
+      - Compound component pattern (Menu with subcomponents: Root, Trigger, Content, Item, Separator, Group, Label)
+      - Token-driven styling via MENU_TOKENS (no custom behavior logic)
+      - Size props: MenuContent padding ("sm" | "md"), MenuItem padding ("xs" | "sm" | "md"), MenuItem height ("sm" | "md" | "lg")
+      - Non-modal overlay (does not trap focus, restores focus to trigger on close)
+      - Keyboard navigation: ArrowUp/Down, Home/End, Enter/Space, Escape, typeahead (handled by Radix)
+      - Accessibility: Full ARIA support, keyboard parity, focus management (handled by Radix)
+    - **Key Decisions:**
+      - No refactor required (code quality already high)
+      - CVA structure is canonical (variants inline, type constraints present, tokenCVA used correctly)
+      - Type system well-aligned (explicit unions, no CVA-derived types)
+      - Token compliance verified (all values use tokens or CSS variables)
+      - Storybook stories updated (Default, SizesGallery, LongContent added per canonical requirements)
+      - A11Y, Focus, and Input requirements met (Radix handles all accessibility)
+    - **Rule:** USE — component ready for production use
+    - Exports: `Menu`, `MenuRoot`, `MenuTrigger`, `MenuContent`, `MenuItem`, `MenuSeparator`, `MenuGroup`, `MenuLabel`
+    - Types: `MenuRootProps`, `MenuTriggerProps`, `MenuContentProps`, `MenuItemProps`, `MenuSeparatorProps`, `MenuGroupProps`, `MenuLabelProps`
 
 ### DO NOT USE - Image Components
 

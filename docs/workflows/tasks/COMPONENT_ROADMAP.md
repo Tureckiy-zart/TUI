@@ -2,10 +2,10 @@
 
 **Status:** Active  
 **Created:** 2025-12-25  
-**Last Updated:** 2025-12-28 (Combobox Component Creation Pipeline C0-C10 Complete CREATED verified, MultiSelect Component Creation Pipeline C0-C10 Complete CREATED verified, Chip Component Creation Pipeline C0-C10 Complete CREATED verified, Accordion Component Creation Pipeline C0-C10 Complete CREATED verified, Bug Fix: disabled tokens now use `disabled:` prefix per INTERACTION_AUTHORITY)  
+**Last Updated:** 2026-01-02 (DX, Navigation and Surface Layers Lock — Post-Audit)  
 **Purpose:** Comprehensive roadmap for developing missing components in Tenerife UI library
 
-**Latest Progress:** Combobox CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), MultiSelect CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), Chip CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), NotificationCenter PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), Timeline PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), List PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), CardBase PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), Tabs PROCESS LOCKED (Pipeline 18A Third Pass Complete, 2025-12-27), ContextMenu PROCESS LOCKED (Pipeline 18A Complete, 2025-12-25), Pagination LOCKED (2025-12-26), Breadcrumbs PROCESS LOCKED (2025-12-26), Stepper PROCESS LOCKED (2025-12-26), Separator, Avatar, AspectRatio PROCESS LOCKED (2025-12-25/2025-12-26)
+**Latest Progress:** DX, Navigation and Surface Layers Lock Complete (2026-01-02) — VisuallyHidden, FocusTrap, Inline, Spacer, HelperText, ErrorText, IconButton, ButtonGroup, FormGroup, Menu, Dropdown, ContextMenu, Panel, Section PROCESS LOCKED/LOCKED. Combobox CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), MultiSelect CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), Chip CREATED (Component Creation Pipeline C0-C10 Complete, 2025-12-28), NotificationCenter PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), Timeline PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), List PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), CardBase PROCESS LOCKED (Pipeline 18A Complete, 2025-12-27), Tabs PROCESS LOCKED (Pipeline 18A Third Pass Complete, 2025-12-27), ContextMenu PROCESS LOCKED (Pipeline 18A Complete, 2025-12-25), Pagination LOCKED (2025-12-26), Breadcrumbs PROCESS LOCKED (2025-12-26), Stepper PROCESS LOCKED (2025-12-26), Separator, Avatar, AspectRatio PROCESS LOCKED (2025-12-25/2025-12-26)
 
 ---
 
@@ -22,24 +22,38 @@ This document provides a prioritized roadmap for developing components needed to
 ### ✅ Already Implemented
 
 **Foundation Components (LOCKED):**
-- Button, Link, Input, Text, Select, Label, Heading, Icon, Checkbox, Radio, Switch, Textarea
+- Button, IconButton, Link, Input, Text, Select, Label, Heading, Icon, Checkbox, Radio, Switch, Textarea, FormGroup, HelperText, ErrorText
 
 **Composition Components (PROCESS LOCKED):**
 - Modal ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
 - Tabs ✅ **PROCESS LOCKED** (Pipeline 18A Complete, Third Pass 2025-12-27)
 - Select ✅ **LOCKED** (Pipeline 18A Complete, 2025-12-25)
-- ContextMenu ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
+- ContextMenu ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
   - **Location:** `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
   - **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
-  - **Lock Date:** 2025-12-25
+  - **Lock Date:** 2025-12-25 (DX, Navigation and Surface Layers Lock: 2026-01-02)
   - **Key Decisions:** CVA migrated cva → tokenCVA (Decision Matrix RULE 1), tone variants (neutral/primary/destructive), size inheritance via Context, full Radix delegation
+- Menu ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
+  - **Location:** `src/COMPOSITION/navigation/Menu/Menu.tsx`
+  - **Audit Report:** `docs/reports/audit/MENU_BASELINE_REPORT.md`
+  - **Lock Date:** 2026-01-02
+- Dropdown ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
+  - **Location:** `src/COMPOSITION/overlays/Dropdown/Dropdown.tsx`
+  - **Audit Report:** `docs/reports/audit/DROPDOWN_BASELINE_REPORT.md`
+  - **Lock Date:** 2026-01-02
 - Toast ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
 
 **Primitives:**
-- Badge, Icon, Alert, Checkbox, Input, Radio, Textarea, Switch, Field, Progress, Skeleton, Text, Heading, Label
+- Badge, Icon, Alert, Checkbox, Input, Radio, Textarea, Switch, Field, Progress, Skeleton, Text, Heading, Label, IconButton ✅ **LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), FormGroup ✅ **LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), HelperText ✅ **LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), ErrorText ✅ **LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
+
+**Actions:**
+- ButtonGroup ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
+
+**DX/A11y Utilities:**
+- VisuallyHidden ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), FocusTrap ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
 
 **Layout:**
-- Box, Stack, Grid, Flex, Container, Row, Column, Surface
+- Box, Stack, Grid, Flex, Container, Row, Column, Surface, Section ✅ **LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), Inline ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), Panel ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02), Spacer ✅ **PROCESS LOCKED** (DX, Navigation and Surface Layers Lock, 2026-01-02)
 
 **Overlays:**
 - Dialog ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)

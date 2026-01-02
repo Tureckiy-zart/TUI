@@ -68,3 +68,22 @@ export { NavText, type NavTextProps } from "./NavText/NavText";
 
 // NavSeparator (standalone component)
 export { NavSeparator, type NavSeparatorProps } from "./NavSeparator/NavSeparator";
+
+// Menu
+export {
+  Menu,
+  MenuContent,
+  type MenuContentProps,
+  MenuGroup,
+  type MenuGroupProps,
+  MenuItem,
+  type MenuItemProps,
+  MenuLabel,
+  type MenuLabelProps,
+  MenuRoot,
+  type MenuRootProps,
+  MenuSeparator,
+  type MenuSeparatorProps,
+  MenuTrigger,
+  type MenuTriggerProps,
+} from "./Menu/Menu.index";
