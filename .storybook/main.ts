@@ -23,8 +23,9 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       define: {
         // Polyfill process.env for Next.js compatibility in Storybook
+        // Use actual build mode instead of hard-coding development
         "process.env": JSON.stringify({
-          NODE_ENV: "development",
+          NODE_ENV: config.mode || process.env.NODE_ENV || "development",
         }),
       },
       resolve: {
