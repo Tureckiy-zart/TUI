@@ -13,7 +13,7 @@ export * from "./Inline";
 export * from "./Inset/Inset";
 export * from "./List/List.index";
 export * from "./ListItem/ListItem.index";
-export * from "./Panel";
+export * from "./Panel/Panel.index";
 export * from "./Row";
 export * from "./Stack";
 export * from "./Surface";

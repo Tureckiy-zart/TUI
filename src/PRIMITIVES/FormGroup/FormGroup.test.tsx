@@ -56,8 +56,12 @@ describe("FormGroup", () => {
       const childWrapper = screen.getByTestId("child-wrapper");
       // Child should be direct child of fieldset (no extra wrapper)
       expect(fieldset.contains(childWrapper)).toBe(true);
-      // Check that child is not wrapped in Stack (Stack should only wrap description/error)
-      const stackElements = container.querySelectorAll('[class*="flex"]');
+      // Check that Stack is not rendered when there's no description/error
+      // Stack uses flex-col class, check for direct children of fieldset with flex-col
+      const fieldsetChildren = Array.from(fieldset.children);
+      const stackElements = fieldsetChildren.filter((child) =>
+        child.className.includes("flex-col"),
+      );
       // Stack should only exist if description/error are present
       expect(stackElements.length).toBe(0);
     });
@@ -228,9 +232,12 @@ describe("FormGroup", () => {
       // Children should be direct children of fieldset
       expect(fieldset.contains(child1)).toBe(true);
       expect(fieldset.contains(child2)).toBe(true);
-      // No Stack wrapper around children
-      const stacks = container.querySelectorAll('[class*="flex"]');
-      expect(stacks.length).toBe(0);
+      // No Stack wrapper around children - check for flex-col direct children of fieldset
+      const fieldsetChildren = Array.from(fieldset.children);
+      const stackElements = fieldsetChildren.filter((child) =>
+        child.className.includes("flex-col"),
+      );
+      expect(stackElements.length).toBe(0);
     });
 
     it("uses Stack only for description and error", () => {
@@ -243,15 +250,16 @@ describe("FormGroup", () => {
         </FormGroup>,
       );
       const fieldset = screen.getByRole("group");
-      // Stack should exist for description/error
-      const stacks = container.querySelectorAll('[class*="flex"]');
-      expect(stacks.length).toBeGreaterThan(0);
       // Description and error should be inside Stack
       const description = screen.getByText("Description");
       const error = screen.getByText("Error");
       // Both should be wrapped in the same Stack container
       const stackParent = description.parentElement;
       expect(stackParent).toBe(error.parentElement);
+      // Stack should be a direct child of fieldset
+      expect(fieldset.contains(stackParent)).toBe(true);
+      // Stack should have flex-col class
+      expect(stackParent?.className).toContain("flex-col");
     });
 
     it("maintains layout transparency for user-provided children", () => {
@@ -285,21 +293,19 @@ describe("FormGroup", () => {
     });
 
     it("works without description and error", () => {
-      renderWithTheme(
+      const { container } = renderWithTheme(
         <FormGroup>
           <Input placeholder="Test input" />
         </FormGroup>,
       );
       const fieldset = screen.getByRole("group");
       expect(fieldset).toBeInTheDocument();
-      // No Stack should be rendered
-      const { container } = renderWithTheme(
-        <FormGroup>
-          <Input placeholder="Test input" />
-        </FormGroup>,
+      // No Stack should be rendered - check for flex-col direct children of fieldset
+      const fieldsetChildren = Array.from(fieldset.children);
+      const stackElements = fieldsetChildren.filter((child) =>
+        child.className.includes("flex-col"),
       );
-      const stacks = container.querySelectorAll('[class*="flex"]');
-      expect(stacks.length).toBe(0);
+      expect(stackElements.length).toBe(0);
     });
 
     it("works with only description", () => {

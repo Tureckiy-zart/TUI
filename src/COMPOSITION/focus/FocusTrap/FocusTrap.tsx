@@ -46,7 +46,7 @@ export interface FocusTrapProps {
    * Ref to element that should receive initial focus
    * If not provided, first focusable child receives focus
    */
-  initialFocusRef?: React.RefObject<HTMLElement>;
+  initialFocusRef?: React.RefObject<HTMLElement | null>;
 
   /**
    * Whether to restore focus to previous element on unmount/active=false
@@ -133,25 +133,42 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
   ) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const previousActiveElementRef = React.useRef<HTMLElement | null>(null);
+    const activeRef = React.useRef(active);
+
+    // Update activeRef when active changes
+    React.useEffect(() => {
+      activeRef.current = active;
+    }, [active]);
 
     // Merge refs
     React.useImperativeHandle(ref, () => containerRef.current as HTMLDivElement);
 
     React.useEffect(() => {
-      if (!active || !containerRef.current) {
+      if (!containerRef.current) {
         return;
       }
 
       const container = containerRef.current;
+
+      // When active is false, ensure no event listeners are attached
+      // and no focus management is performed
+      if (!active) {
+        // Cleanup will handle removal if active was previously true
+        return;
+      }
+
       const previousActiveElement = document.activeElement as HTMLElement;
 
       // Copy ref value to avoid stale closure in cleanup
       const initialFocusElement = initialFocusRef?.current;
 
-      // Store the previously focused element
-      if (previousActiveElement && container.contains(previousActiveElement)) {
+      // Store the previously focused element only if it's outside the container
+      // This preserves the element that was focused before trap activation
+      if (previousActiveElement && !container.contains(previousActiveElement)) {
         previousActiveElementRef.current = previousActiveElement;
-      } else {
+      } else if (!previousActiveElementRef.current) {
+        // If no previous element stored and current element is inside container,
+        // store it anyway (edge case for initial mount)
         previousActiveElementRef.current = previousActiveElement;
       }
 
@@ -170,10 +187,20 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
       // Initial update
       updateFocusableElements();
 
-      // Focus initial element
+      // Focus initial element only if there are focusable elements
       const focusTimeoutId = setTimeout(() => {
+        // Check if still active (may have changed)
+        if (!activeRef.current) {
+          return;
+        }
+
         // Recalculate focusable elements before focusing (DOM might have changed)
         updateFocusableElements();
+
+        // Don't try to focus if there are no focusable elements
+        if (focusableElements.length === 0) {
+          return;
+        }
 
         // Use initialFocusRef if provided, otherwise use first focusable element
         const targetElement = initialFocusRef?.current || firstElement;
@@ -181,8 +208,17 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
         if (targetElement && container.contains(targetElement)) {
           // Use another setTimeout to ensure focus can be set
           setTimeout(() => {
+            // Check if still active (may have changed)
+            if (!activeRef.current) {
+              return;
+            }
+
             // Recalculate again to ensure we have the latest elements
             updateFocusableElements();
+            // Check again if we have focusable elements
+            if (focusableElements.length === 0) {
+              return;
+            }
             const latestTargetElement = initialFocusRef?.current || firstElement;
             if (latestTargetElement && container.contains(latestTargetElement)) {
               latestTargetElement.focus();
@@ -205,6 +241,12 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
           return;
         }
 
+        // If active is false, don't trap focus - allow normal Tab behavior
+        // Use activeRef to get the current value, as active in closure may be stale
+        if (!activeRef.current) {
+          return;
+        }
+
         // Update focusable elements in case DOM changed
         updateFocusableElements();
 
@@ -213,14 +255,20 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
         }
 
         const isShiftTab = event.shiftKey;
-        const currentIndex = focusableElements.indexOf(document.activeElement as HTMLElement);
+        const currentActiveElement = document.activeElement as HTMLElement;
+        const currentIndex = focusableElements.indexOf(currentActiveElement);
+
+        // Only trap focus if current focus is within the container
+        if (!container.contains(currentActiveElement)) {
+          return;
+        }
 
         if (loop) {
-          if (isShiftTab && document.activeElement === firstElement) {
+          if (isShiftTab && currentActiveElement === firstElement) {
             // Shift+Tab: wrap to last
             event.preventDefault();
             lastElement?.focus();
-          } else if (!isShiftTab && document.activeElement === lastElement) {
+          } else if (!isShiftTab && currentActiveElement === lastElement) {
             // Tab: wrap to first
             event.preventDefault();
             firstElement?.focus();
@@ -230,34 +278,44 @@ const FocusTrap = React.forwardRef<HTMLDivElement, FocusTrapProps>(
             currentIndex < focusableElements.length - 1
           ) {
             // Tab: focus next element
+            event.preventDefault();
             const nextIndex = currentIndex + 1;
             focusableElements[nextIndex]?.focus();
           } else if (isShiftTab && currentIndex > 0) {
             // Shift+Tab: focus previous element
+            event.preventDefault();
             const prevIndex = currentIndex - 1;
             focusableElements[prevIndex]?.focus();
+          } else if (currentIndex === -1) {
+            // Focus is inside container but not in our list - focus first element
+            event.preventDefault();
+            firstElement?.focus();
           }
-        } else {
+        } else if (isShiftTab && currentActiveElement === firstElement) {
           // No loop: prevent wrapping
-          if (isShiftTab && document.activeElement === firstElement) {
-            // Shift+Tab at first: prevent default (stay at first)
-            event.preventDefault();
-          } else if (!isShiftTab && document.activeElement === lastElement) {
-            // Tab at last: prevent default (stay at last)
-            event.preventDefault();
-          } else if (
-            !isShiftTab &&
-            currentIndex >= 0 &&
-            currentIndex < focusableElements.length - 1
-          ) {
-            // Tab: focus next element
-            const nextIndex = currentIndex + 1;
-            focusableElements[nextIndex]?.focus();
-          } else if (isShiftTab && currentIndex > 0) {
-            // Shift+Tab: focus previous element
-            const prevIndex = currentIndex - 1;
-            focusableElements[prevIndex]?.focus();
-          }
+          // Shift+Tab at first: prevent default (stay at first)
+          event.preventDefault();
+        } else if (!isShiftTab && currentActiveElement === lastElement) {
+          // Tab at last: prevent default (stay at last)
+          event.preventDefault();
+        } else if (
+          !isShiftTab &&
+          currentIndex >= 0 &&
+          currentIndex < focusableElements.length - 1
+        ) {
+          // Tab: focus next element
+          event.preventDefault();
+          const nextIndex = currentIndex + 1;
+          focusableElements[nextIndex]?.focus();
+        } else if (isShiftTab && currentIndex > 0) {
+          // Shift+Tab: focus previous element
+          event.preventDefault();
+          const prevIndex = currentIndex - 1;
+          focusableElements[prevIndex]?.focus();
+        } else if (currentIndex === -1) {
+          // Focus is inside container but not in our list - focus first element
+          event.preventDefault();
+          firstElement?.focus();
         }
       }
 

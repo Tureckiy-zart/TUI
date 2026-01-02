@@ -86,4 +86,4 @@ export {
   type MenuSeparatorProps,
   MenuTrigger,
   type MenuTriggerProps,
-} from "./Menu";
+} from "./Menu/Menu.index";

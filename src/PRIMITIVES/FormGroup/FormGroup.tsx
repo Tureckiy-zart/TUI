@@ -91,22 +91,48 @@ const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>(
     const descriptionId = description ? `formgroup-${groupId}-description` : undefined;
     const errorId = error ? `formgroup-${groupId}-error` : undefined;
 
+    // Clone description and error to add ID and aria-describedby if they are React elements
+    // Otherwise wrap in a div
+    const descriptionWithId = description ? (
+      React.isValidElement(description) ? (
+        React.cloneElement(
+          description as React.ReactElement,
+          {
+            id: descriptionId,
+            "aria-describedby": descriptionId,
+          } as React.HTMLAttributes<HTMLElement>,
+        )
+      ) : (
+        <div id={descriptionId} aria-describedby={descriptionId}>
+          {description}
+        </div>
+      )
+    ) : null;
+
+    const errorWithId = error ? (
+      React.isValidElement(error) ? (
+        React.cloneElement(
+          error as React.ReactElement,
+          {
+            id: errorId,
+            "aria-describedby": errorId,
+          } as React.HTMLAttributes<HTMLElement>,
+        )
+      ) : (
+        <div id={errorId} aria-describedby={errorId}>
+          {error}
+        </div>
+      )
+    ) : null;
+
     return (
       <fieldset ref={ref} disabled={disabled} aria-required={required || undefined} {...props}>
         {legend && <legend>{legend}</legend>}
         {children}
-        {(description || error) && (
+        {(descriptionWithId || errorWithId) && (
           <Stack direction="vertical" spacing="sm">
-            {description && (
-              <div id={descriptionId} aria-describedby={descriptionId}>
-                {description}
-              </div>
-            )}
-            {error && (
-              <div id={errorId} aria-describedby={errorId}>
-                {error}
-              </div>
-            )}
+            {descriptionWithId}
+            {errorWithId}
           </Stack>
         )}
       </fieldset>
