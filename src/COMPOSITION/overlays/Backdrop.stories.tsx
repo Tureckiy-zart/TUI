@@ -163,3 +163,78 @@ export const WithContent: Story = {
     );
   },
 };
+
+/**
+ * LongContent Story (CANONICAL - REQUIRED)
+ * Validates backdrop behavior with long content in overlay
+ * Required by VARIANTS_SIZE_CANON.md for overlay components
+ */
+export const LongContent: Story = {
+  render: () => {
+    const [show, setShow] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setShow(!show)}>Show Modal with Long Content</Button>
+        {show && (
+          <>
+            <Backdrop
+              variant="blurred"
+              isVisible={show}
+              onClick={() => setShow(false)}
+              className="fixed inset-0 z-40"
+            />
+            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-lg shadow-lg">
+              <h2 className="mb-md text-lg font-semibold">Terms and Conditions</h2>
+              <div className="max-h-[400px] space-y-md overflow-y-auto text-sm">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur.
+                </p>
+                <p>
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
+                  voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+                  ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                </p>
+                <p>
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+                  quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+                  porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+                  velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam
+                  aliquam quaerat voluptatem.
+                </p>
+                <p>
+                  Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+                  laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
+                  reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel
+                  illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                </p>
+                <p>
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                  praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+                  excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+                  officia deserunt mollitia animi, id est laborum et dolorum fuga.
+                </p>
+              </div>
+              <div className="mt-md flex justify-end">
+                <Button onClick={() => setShow(false)}>Close</Button>
+              </div>
+            </div>
+          </>
+        )}
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "**Canonical LongContent Story:** Validates backdrop behavior with long content in overlay. This story is required per VARIANTS_SIZE_CANON.md for overlay components. Demonstrates backdrop with modal containing long scrollable content.",
+      },
+    },
+  },
+};

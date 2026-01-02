@@ -1,0 +1,162 @@
+"use client";
+
+/**
+ * List Component
+ *
+ * Structural list container that composes Stack with optional Divider injection.
+ * Provides semantic ul/ol/div list structures without domain semantics.
+ *
+ * **What List IS:**
+ * - Vertical list container composing Stack + Divider
+ * - Semantic HTML wrapper (ul/ol/div) with proper accessibility
+ * - Token-driven spacing via Stack composition
+ * - Optional divider injection between items
+ *
+ * **What List IS NOT:**
+ * - NOT domain-specific (no title/description/content styling)
+ * - NOT interactive control (interactivity delegated to child components)
+ * - NOT reimplementation of Stack (composes Stack directly)
+ * - NOT duplication of Divider (reuses Divider component)
+ *
+ * @example
+ * ```tsx
+ * <List as="ul" gap="md">
+ *   <ListItem>Item 1</ListItem>
+ *   <ListItem>Item 2</ListItem>
+ * </List>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <List as="ul" divided dividerInset>
+ *   <ListItem>Item 1</ListItem>
+ *   <ListItem>Item 2</ListItem>
+ * </List>
+ * ```
+ */
+
+import * as React from "react";
+
+import type { SpacingToken } from "@/FOUNDATION/tokens/types";
+
+import { Divider, type DividerTone } from "../Divider/Divider";
+import { Stack } from "../Stack";
+
+/**
+ * List polymorphic element type
+ * Explicit union type for List component `as` prop
+ */
+export type ListAs = "ul" | "ol" | "div";
+
+/**
+ * List component props
+ *
+ * Structural list container that composes Stack with optional Divider injection.
+ * Provides semantic ul/ol/div list structures without domain semantics.
+ */
+export interface ListProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Polymorphic element type (ul/ol/div)
+   * @default "div"
+   */
+  as?: ListAs;
+
+  /**
+   * Spacing between list items (passed to Stack)
+   * Token-based spacing value
+   * @default undefined (Stack default)
+   */
+  gap?: SpacingToken;
+
+  /**
+   * Inject Divider between list items
+   * When true, Divider is injected between items (not after last item)
+   * @default false
+   */
+  divided?: boolean;
+
+  /**
+   * Add inset padding to dividers (passed to Divider inset prop)
+   * @default false
+   */
+  dividerInset?: boolean;
+
+  /**
+   * Color tone for dividers (passed to Divider tone prop)
+   * @default "border"
+   */
+  dividerTone?: DividerTone;
+
+  /**
+   * List items (typically ListItem components)
+   */
+  children: React.ReactNode;
+}
+
+/**
+ * List component
+ *
+ * COMPLIANCE NOTES:
+ * - ✅ Composes Stack (no duplication)
+ * - ✅ Reuses Divider (no duplication)
+ * - ✅ Token-based spacing via Stack composition
+ * - ✅ Semantic ul/ol/div with proper accessibility
+ * - ✅ Polymorphic `as` prop for semantic HTML
+ * - ✅ NO raw values (all styling via tokens)
+ * - ✅ NO domain semantics (structural only)
+ * - ✅ Motion GAP: NO MOTION BY DESIGN (static container)
+ */
+const List = React.forwardRef<HTMLElement, ListProps>(
+  (
+    {
+      as = "div",
+      gap,
+      divided = false,
+      dividerInset = false,
+      dividerTone = "border",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    // Convert children to array for processing
+    const childrenArray = React.Children.toArray(children);
+
+    // If divided, inject Divider between items (not after last item)
+    const content = divided
+      ? childrenArray.reduce<React.ReactNode[]>((acc, child, index) => {
+          acc.push(child);
+          // Add divider after each item except the last
+          if (index < childrenArray.length - 1) {
+            acc.push(
+              <Divider
+                key={`divider-${index}`}
+                orientation="horizontal"
+                tone={dividerTone}
+                inset={dividerInset}
+              />,
+            );
+          }
+          return acc;
+        }, [])
+      : children;
+
+    // Compose Stack as base container
+    return (
+      <Stack
+        ref={ref as React.Ref<HTMLDivElement>}
+        as={as}
+        direction="vertical"
+        spacing={gap}
+        role={as === "div" ? "list" : undefined}
+        {...(props as React.HTMLAttributes<HTMLDivElement>)}
+      >
+        {content}
+      </Stack>
+    );
+  },
+);
+
+List.displayName = "List";
+
+export { List };

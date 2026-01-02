@@ -8,31 +8,36 @@
  * Uses CSS animations with motion tokens.
  */
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { OVERLAY_TOKENS } from "@/FOUNDATION/tokens/components/overlay";
 
-const backdropVariants = cva("fixed inset-0 z-40 transition-opacity", {
+/**
+ * Backdrop variant type - Explicit union (not derived from CVA)
+ */
+export type BackdropVariant = "default" | "blurred" | "transparent";
+
+const backdropVariants = tokenCVA({
+  base: "fixed inset-0 z-40 transition-opacity",
   variants: {
     variant: {
       default: `${OVERLAY_TOKENS.backdrop.default.bg} ${OVERLAY_TOKENS.backdrop.default.opacity}`,
       blurred: `${OVERLAY_TOKENS.backdrop.blurred.bg} ${OVERLAY_TOKENS.backdrop.blurred.opacity} ${OVERLAY_TOKENS.backdrop.blurred.backdropFilter}`,
       transparent: `${OVERLAY_TOKENS.backdrop.transparent.bg} ${OVERLAY_TOKENS.backdrop.transparent.opacity}`,
-    },
+    } satisfies Record<BackdropVariant, string>,
   },
   defaultVariants: {
     variant: "default",
   },
 });
 
-export interface BackdropProps
-  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof backdropVariants> {
+export interface BackdropProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Backdrop variant
    */
-  variant?: "default" | "blurred" | "transparent";
+  variant?: BackdropVariant;
 
   /**
    * Whether backdrop is visible (for animation)

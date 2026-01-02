@@ -79,27 +79,6 @@ export const ticketCardBadgeSurfaceVariants = cva(
 );
 
 /**
- * TicketCard Title Variants
- *
- * CVA-based variant system for card title.
- * Uses TEXT_TOKENS and DOMAIN_TOKENS.text for styling.
- */
-export const ticketCardTitleVariants = cva(
-  `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.fontWeight.bold} ${MOTION_TOKENS.transition.colors} ${DOMAIN_TOKENS.text.hover.primary} ${DOMAIN_TOKENS.text.lineClamp.two}`,
-  {
-    variants: {
-      size: {
-        default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-        compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
  * TicketCard Date Variants
  *
  * CVA-based variant system for date display.
@@ -170,26 +149,6 @@ export const ticketCardPriceVariants = cva(
       size: {
         default: TEXT_TOKENS.fontSize.lg, // Default size
         compact: TEXT_TOKENS.fontSize.md, // Compact size
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * Capacity text variant
- * Uses DOMAIN_TOKENS.priceCapacity.text.secondary for styling
- */
-export const ticketCardCapacityVariants = cva(
-  // Base classes - capacity text color
-  `${DOMAIN_TOKENS.priceCapacity.text.secondary}`,
-  {
-    variants: {
-      size: {
-        default: TEXT_TOKENS.fontSize.sm, // Default size
-        compact: TEXT_TOKENS.fontSize.xs, // Compact size
       },
     },
     defaultVariants: {

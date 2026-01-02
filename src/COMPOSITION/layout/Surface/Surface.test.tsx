@@ -55,7 +55,13 @@ describe("Surface component", () => {
   it("should apply custom padding prop", () => {
     const { container } = render(<Surface p="lg">Content</Surface>);
     const surface = container.firstChild as HTMLElement;
-    expect(surface).toHaveStyle({ padding: "var(--spacing-lg)" });
+    // Box uses px and py, so padding is applied via paddingLeft, paddingRight, paddingTop, paddingBottom
+    expect(surface).toHaveStyle({
+      paddingLeft: "var(--spacing-lg)",
+      paddingRight: "var(--spacing-lg)",
+      paddingTop: "var(--spacing-lg)",
+      paddingBottom: "var(--spacing-lg)",
+    });
   });
 
   it("should apply custom radius prop", () => {
@@ -67,8 +73,13 @@ describe("Surface component", () => {
   it("should use default padding from variant when p prop is not provided", () => {
     const { container } = render(<Surface variant="default">Content</Surface>);
     const surface = container.firstChild as HTMLElement;
-    // Default variant has "p-md" - should extract "md" and apply
-    expect(surface).toHaveStyle({ padding: "var(--spacing-md)" });
+    // Default variant has "p-md" - should extract "md" and apply via px/py
+    expect(surface).toHaveStyle({
+      paddingLeft: "var(--spacing-md)",
+      paddingRight: "var(--spacing-md)",
+      paddingTop: "var(--spacing-md)",
+      paddingBottom: "var(--spacing-md)",
+    });
   });
 
   it("should use default radius from variant when radius prop is not provided", () => {
@@ -85,7 +96,13 @@ describe("Surface component", () => {
       </Surface>,
     );
     const surface = container.firstChild as HTMLElement;
-    expect(surface).toHaveStyle({ padding: "var(--spacing-lg)" });
+    // Box uses px and py, so padding is applied via paddingLeft, paddingRight, paddingTop, paddingBottom
+    expect(surface).toHaveStyle({
+      paddingLeft: "var(--spacing-lg)",
+      paddingRight: "var(--spacing-lg)",
+      paddingTop: "var(--spacing-lg)",
+      paddingBottom: "var(--spacing-lg)",
+    });
   });
 
   it("should override variant default radius with radius prop", () => {

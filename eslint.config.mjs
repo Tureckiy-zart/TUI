@@ -315,6 +315,13 @@ export default [
       "tenerife-ui-architecture/no-foundation-open-htmlattributes": "error",
 
       // ═══════════════════════════════════════════════════════════
+      // LIST USAGE ENFORCEMENT - CANONICAL COMPONENTS
+      // ═══════════════════════════════════════════════════════════
+
+      // Enforce usage of canonical List/ListItem components for vertical lists
+      "tenerife-ui-architecture/no-ad-hoc-lists": "error",
+
+      // ═══════════════════════════════════════════════════════════
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES
       // ═══════════════════════════════════════════════════════════
 

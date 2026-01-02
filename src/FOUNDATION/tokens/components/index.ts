@@ -258,9 +258,6 @@ export { SIMPLETABLE_TOKENS, type SimpleTableSize } from "./simple-table";
 // DataList tokens (isolated domain)
 export { DATA_LIST_TOKENS, type DataListLabelWidth, type DataListRowPadding } from "./data-list";
 
-// List tokens (isolated domain)
-export { LIST_TOKENS } from "./list";
-
 // EmptyState tokens (isolated domain)
 export {
   EMPTY_STATE_TOKENS,
@@ -306,6 +303,9 @@ export { PROGRESS_TOKENS, type ProgressHeight } from "./progress";
 
 // Separator tokens
 export { SEPARATOR_TOKENS } from "./separator";
+
+// StickyBar tokens
+export { STICKYBAR_TOKENS, type StickyBarPosition, type StickyBarTone } from "./stickybar";
 
 // Slider tokens
 export { SLIDER_TOKENS } from "./slider";

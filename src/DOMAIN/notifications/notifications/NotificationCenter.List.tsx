@@ -4,15 +4,14 @@
  * NotificationCenter.List Component
  *
  * Vertical list container for notifications.
- * Uses Stack component with token-based spacing.
+ * Uses canonical List component with token-based spacing.
  * Provides proper ARIA roles for accessibility.
  */
 
 import * as React from "react";
 
-import { Stack } from "@/COMPOSITION/layout";
+import { List } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
-import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
 
 export interface NotificationCenterListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
@@ -34,16 +33,16 @@ export const NotificationCenterList = React.forwardRef<
   NotificationCenterListProps
 >(({ children, className, "aria-label": ariaLabel, ...props }, ref) => {
   return (
-    <Stack
+    <List
       ref={ref as any}
       as="ul"
-      role="list"
+      gap="sm"
       aria-label={ariaLabel || "Notifications"}
-      className={cn("list-none", NOTIFICATION_TOKENS.spacing.gap, className)}
+      className={cn("list-none", className)}
       {...(props as any)}
     >
       {children}
-    </Stack>
+    </List>
   );
 });
 

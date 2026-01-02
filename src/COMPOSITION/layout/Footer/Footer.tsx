@@ -7,6 +7,11 @@
  * Provides semantic <footer> element with flexible content slots (left, center, right).
  * Uses Stack internally for layout composition.
  * All styling uses tokens exclusively (no raw CSS values).
+ *
+ * Footer uses slot-based layout API (left/center/right, px/py, border, bg).
+ * This pattern is distinct from semantic components like PageHeader.
+ *
+ * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
  */
 
 import * as React from "react";

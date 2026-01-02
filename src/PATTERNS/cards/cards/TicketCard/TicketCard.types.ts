@@ -32,6 +32,10 @@ export interface TicketCardProps {
   capacity?: string;
   /** Availability status */
   availability?: TicketAvailability;
+  /** Label for "Sold Out" state (optional, defaults to "Sold Out") */
+  soldOutLabel?: string;
+  /** Label for "Available Soon" state (optional, defaults to "Available Soon") */
+  availableSoonLabel?: string;
   /** Image URL (optional) */
   imageUrl?: string;
   /** Link URL for ticket details (optional) */

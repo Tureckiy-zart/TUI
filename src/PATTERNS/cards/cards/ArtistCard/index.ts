@@ -10,7 +10,6 @@ export {
   artistCardBadgeSurfaceVariants,
   artistCardBadgeVariants,
   artistCardFooterBorderVariants,
-  artistCardGenresVariants,
   artistCardImageOverlayVariants,
   artistCardImageTransformVariants,
   artistCardMetadataIconVariants,

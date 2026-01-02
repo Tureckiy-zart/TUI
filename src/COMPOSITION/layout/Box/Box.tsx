@@ -15,7 +15,7 @@
  * @example
  * ```tsx
  * // Basic container with padding
- * <Box p="md" radius="lg" bg="background">
+ * <Box px="md" py="md" radius="lg" bg="background">
  *   Content
  * </Box>
  *
@@ -57,11 +57,6 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: keyof React.JSX.IntrinsicElements;
 
   /**
-   * Padding (all sides) - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
-   */
-  p?: ResponsiveSpacing;
-
-  /**
    * Padding horizontal (left + right)
    */
   px?: ResponsiveSpacing;
@@ -70,26 +65,6 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * Padding vertical (top + bottom)
    */
   py?: ResponsiveSpacing;
-
-  /**
-   * Padding top
-   */
-  pt?: ResponsiveSpacing;
-
-  /**
-   * Padding right
-   */
-  pr?: ResponsiveSpacing;
-
-  /**
-   * Padding bottom
-   */
-  pb?: ResponsiveSpacing;
-
-  /**
-   * Padding left
-   */
-  pl?: ResponsiveSpacing;
 
   /**
    * Margin (all sides) - token-based
@@ -166,13 +141,8 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
   (
     {
       as: Component = "div",
-      p,
       px,
       py,
-      pt,
-      pr,
-      pb,
-      pl,
       m,
       mx,
       my,
@@ -190,13 +160,8 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
     ref,
   ) => {
     // Get base values for CSS variables
-    const pValue = getBaseValue<SpacingValue>(p);
     const pxValue = getBaseValue<SpacingValue>(px);
     const pyValue = getBaseValue<SpacingValue>(py);
-    const ptValue = getBaseValue<SpacingValue>(pt);
-    const prValue = getBaseValue<SpacingValue>(pr);
-    const pbValue = getBaseValue<SpacingValue>(pb);
-    const plValue = getBaseValue<SpacingValue>(pl);
     const mValue = getBaseValue<SpacingValue>(m);
     const mxValue = getBaseValue<SpacingValue>(mx);
     const myValue = getBaseValue<SpacingValue>(my);
@@ -210,25 +175,14 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
     // Build inline styles with CSS variables
     // Convert spacing values to strings (numeric keys like 0, 1, 2 are valid but need string conversion)
     const inlineStyles: React.CSSProperties = {
-      ...(pValue !== undefined && { padding: getSpacingCSSVar(String(pValue)) }),
-      ...(!p &&
-        pxValue !== undefined && {
-          paddingLeft: getSpacingCSSVar(String(pxValue)),
-          paddingRight: getSpacingCSSVar(String(pxValue)),
-        }),
-      ...(!p &&
-        pyValue !== undefined && {
-          paddingTop: getSpacingCSSVar(String(pyValue)),
-          paddingBottom: getSpacingCSSVar(String(pyValue)),
-        }),
-      ...(!p && !py && ptValue !== undefined && { paddingTop: getSpacingCSSVar(String(ptValue)) }),
-      ...(!p &&
-        !px &&
-        prValue !== undefined && { paddingRight: getSpacingCSSVar(String(prValue)) }),
-      ...(!p &&
-        !py &&
-        pbValue !== undefined && { paddingBottom: getSpacingCSSVar(String(pbValue)) }),
-      ...(!p && !px && plValue !== undefined && { paddingLeft: getSpacingCSSVar(String(plValue)) }),
+      ...(pxValue !== undefined && {
+        paddingLeft: getSpacingCSSVar(String(pxValue)),
+        paddingRight: getSpacingCSSVar(String(pxValue)),
+      }),
+      ...(pyValue !== undefined && {
+        paddingTop: getSpacingCSSVar(String(pyValue)),
+        paddingBottom: getSpacingCSSVar(String(pyValue)),
+      }),
       ...(mValue !== undefined && { margin: getSpacingCSSVar(String(mValue)) }),
       ...(!m &&
         mxValue !== undefined && {

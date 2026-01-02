@@ -96,7 +96,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Component Locks
 
-- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives lock
+- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives and Extension Layout components lock
 - [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
 - [architecture/locks/FOCUS_LOCK.v1.1.md](./architecture/locks/FOCUS_LOCK.v1.1.md) - Focus system lock
 - [architecture/locks/A11Y_LOCK.md](./architecture/locks/A11Y_LOCK.md) - A11Y system lock

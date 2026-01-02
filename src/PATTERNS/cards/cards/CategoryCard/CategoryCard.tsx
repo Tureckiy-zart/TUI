@@ -18,7 +18,7 @@ import { Icon } from "@/PRIMITIVES/Icon";
 import { Link } from "@/PRIMITIVES/Link";
 import { Text } from "@/PRIMITIVES/Text";
 
-import type { CategoryCardProps } from "./CategoryCard.types";
+import type { CategoryCardProps, CategoryCardVariant } from "./CategoryCard.types";
 import {
   categoryCardBadgeSurfaceVariants,
   categoryCardBadgeVariants,
@@ -49,7 +49,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
       featured = false,
       showImage = true,
       featuredBadgeText,
-      size = "default",
+      size = "md",
       variant,
       className,
       animation,
@@ -65,14 +65,13 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
     });
 
     // Determine variant: use explicit variant prop or derive from featured
-    const cardVariant = variant || (featured ? "featured" : "default");
+    const cardVariant: CategoryCardVariant = variant || (featured ? "elevated" : "default");
 
-    // Map CategoryCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
-    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+    // Map CategoryCardSize to CardBaseSize: "sm" -> "sm", "md" -> "md" (direct mapping)
+    const cardBaseSize: "sm" | "md" = size || "md";
 
-    // Map CategoryCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
-    const cardBaseVariant: "default" | "elevated" =
-      cardVariant === "featured" ? "elevated" : "default";
+    // Map CategoryCardVariant to CardBaseVariant: "default" -> "default", "elevated" -> "elevated" (direct mapping)
+    const cardBaseVariant: "default" | "elevated" = cardVariant;
 
     return (
       <Box {...animationProps}>
@@ -86,7 +85,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
           {/* Featured Badge */}
           {featured && featuredBadgeText && (
             <div className={categoryCardBadgeVariants({ size })}>
-              <span className={categoryCardBadgeSurfaceVariants({ variant: "featured" })}>
+              <span className={categoryCardBadgeSurfaceVariants({ variant: "elevated" })}>
                 {featuredBadgeText}
               </span>
             </div>
