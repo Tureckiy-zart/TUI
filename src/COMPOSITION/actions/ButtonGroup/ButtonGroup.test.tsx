@@ -151,6 +151,23 @@ describe("ButtonGroup component", () => {
       const horizontalGroup = horizontalContainer.firstChild as HTMLElement;
       expect(horizontalGroup).not.toHaveAttribute("aria-orientation");
     });
+
+    it("should exclude aria-orientation even if passed via props", () => {
+      // Test that aria-orientation is excluded even if someone tries to pass it
+      // This ensures the destructuring in ButtonGroup works correctly
+      const { container } = render(
+        <ButtonGroup
+          orientation="vertical"
+          {...({ "aria-orientation": "vertical" } as React.HTMLAttributes<HTMLDivElement>)}
+        >
+          <Button>Button 1</Button>
+          <Button>Button 2</Button>
+        </ButtonGroup>,
+      );
+      const group = container.firstChild as HTMLElement;
+      expect(group).toHaveAttribute("role", "group");
+      expect(group).not.toHaveAttribute("aria-orientation");
+    });
   });
 
   describe("Context Propagation", () => {
