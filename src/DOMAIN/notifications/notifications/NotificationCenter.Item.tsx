@@ -11,6 +11,7 @@
 import { AlertCircle, Bell, CheckCircle2, FileText, Info, X, XCircle } from "lucide-react";
 import * as React from "react";
 
+import { ListItem } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
 import { Button } from "@/PRIMITIVES/Button";
@@ -104,19 +105,20 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
     const descriptionId = `${itemId}-description`;
 
     return (
-      <li
+      <ListItem
         ref={ref}
-        role="listitem"
+        as="li"
+        interactive={!!onClick}
         aria-labelledby={notification.title ? titleId : undefined}
         aria-describedby={notification.description ? descriptionId : undefined}
         className={cn(
-          "group relative flex items-start gap-sm rounded-md border transition-colors",
+          "group relative gap-sm rounded-md border",
           NOTIFICATION_TOKENS.item.padding,
           NOTIFICATION_TOKENS.item.radius,
           NOTIFICATION_TOKENS.shadow.item,
           NOTIFICATION_TOKENS.surface[variant],
           !isRead && "ring-1 ring-primary/20",
-          onClick && "cursor-pointer hover:bg-accent/50",
+          onClick && "hover:bg-accent/50", // Override ListItem's hover:bg-muted/50 with original hover color
           className,
         )}
         onClick={handleClick}
@@ -169,7 +171,7 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
             <X className="h-4 w-4" />
           </Button>
         )}
-      </li>
+      </ListItem>
     );
   },
 );

@@ -15,13 +15,6 @@ const meta: Meta<typeof Box> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    p: {
-      control: { type: "text" },
-      description: "Padding (all sides) - uses spacing tokens",
-      table: {
-        type: { summary: "SpacingValue | ResponsiveValue<SpacingValue>" },
-      },
-    },
     bg: {
       control: { type: "text" },
       description: "Background color - uses color tokens",
@@ -51,8 +44,9 @@ export const Default: Story = {
 
 export const WithPadding: Story = {
   args: {
-    p: 4,
-    children: "Box with padding (p=4)",
+    px: 4,
+    py: 4,
+    children: "Box with padding (px=4, py=4)",
   },
 };
 
@@ -68,43 +62,43 @@ export const WithBackground: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: background</h3>
-        <Box bg="background" p={4} radius="md">
+        <Box bg="background" px={4} py={4} radius="md">
           Box with background color
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: card</h3>
-        <Box bg="card" p={4} radius="md">
+        <Box bg="card" px={4} py={4} radius="md">
           Box with card background
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: muted</h3>
-        <Box bg="muted" p={4} radius="md">
+        <Box bg="muted" px={4} py={4} radius="md">
           Box with muted background
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: primary</h3>
-        <Box bg="primary" p={4} radius="md" className="text-primary-foreground">
+        <Box bg="primary" px={4} py={4} radius="md" className="text-primary-foreground">
           Box with primary background
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: secondary</h3>
-        <Box bg="secondary" p={4} radius="md" className="text-secondary-foreground">
+        <Box bg="secondary" px={4} py={4} radius="md" className="text-secondary-foreground">
           Box with secondary background
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: accent</h3>
-        <Box bg="accent" p={4} radius="md" className="text-accent-foreground">
+        <Box bg="accent" px={4} py={4} radius="md" className="text-accent-foreground">
           Box with accent background
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: destructive</h3>
-        <Box bg="destructive" p={4} radius="md" className="text-destructive-foreground">
+        <Box bg="destructive" px={4} py={4} radius="md" className="text-destructive-foreground">
           Box with destructive background
         </Box>
       </div>
@@ -124,31 +118,31 @@ export const WithRadius: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: none</h3>
-        <Box radius="none" bg="muted" p={4}>
+        <Box radius="none" bg="muted" px={4} py={4}>
           No radius
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: sm</h3>
-        <Box radius="sm" bg="muted" p={4}>
+        <Box radius="sm" bg="muted" px={4} py={4}>
           Small radius
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: md</h3>
-        <Box radius="md" bg="muted" p={4}>
+        <Box radius="md" bg="muted" px={4} py={4}>
           Medium radius (default)
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: lg</h3>
-        <Box radius="lg" bg="muted" p={4}>
+        <Box radius="lg" bg="muted" px={4} py={4}>
           Large radius
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Radius: full</h3>
-        <Box radius="full" bg="muted" p={4}>
+        <Box radius="full" bg="muted" px={4} py={4}>
           Full radius (pill)
         </Box>
       </div>
@@ -166,12 +160,6 @@ export const WithRadius: Story = {
 export const DirectionalSpacing: Story = {
   render: () => (
     <div className="space-y-lg">
-      <div>
-        <h3 className="mb-sm text-lg font-semibold">Custom padding: pt=4, pr=6, pb=8, pl=2</h3>
-        <Box pt={4} pr={6} pb={8} pl={2} bg="muted">
-          Custom padding on all sides
-        </Box>
-      </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Horizontal and vertical: px=4, py=6</h3>
         <Box px={4} py={6} bg="muted">
@@ -200,31 +188,31 @@ export const SemanticSpacing: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: xs</h3>
-        <Box p="xs" bg="muted">
+        <Box px="xs" py="xs" bg="muted">
           Extra small padding
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: sm</h3>
-        <Box p="sm" bg="muted">
+        <Box px="sm" py="sm" bg="muted">
           Small padding
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: md</h3>
-        <Box p="md" bg="muted">
+        <Box px="md" py="md" bg="muted">
           Medium padding
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: lg</h3>
-        <Box p="lg" bg="muted">
+        <Box px="lg" py="lg" bg="muted">
           Large padding
         </Box>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: xl</h3>
-        <Box p="xl" bg="muted">
+        <Box px="xl" py="xl" bg="muted">
           Extra large padding
         </Box>
       </div>
@@ -242,13 +230,13 @@ export const SemanticSpacing: Story = {
 export const AsDifferentElement: Story = {
   render: () => (
     <div className="space-y-lg">
-      <Box as="section" p={4} bg="muted">
+      <Box as="section" px={4} py={4} bg="muted">
         Box as section element
       </Box>
-      <Box as="article" p={4} bg="muted">
+      <Box as="article" px={4} py={4} bg="muted">
         Box as article element
       </Box>
-      <Box as="aside" p={4} bg="muted">
+      <Box as="aside" px={4} py={4} bg="muted">
         Box as aside element
       </Box>
     </div>
@@ -264,7 +252,8 @@ export const AsDifferentElement: Story = {
 
 export const ResponsivePadding: Story = {
   args: {
-    p: { base: 2, md: 4, lg: 6 },
+    px: { base: 2, md: 4, lg: 6 },
+    py: { base: 2, md: 4, lg: 6 },
     bg: "muted",
     children: "Responsive padding (base=2, md=4, lg=6)",
   },
@@ -279,7 +268,8 @@ export const ResponsivePadding: Story = {
 
 export const CombinedProps: Story = {
   args: {
-    p: 6,
+    px: 6,
+    py: 6,
     m: 4,
     bg: "background",
     radius: "lg",

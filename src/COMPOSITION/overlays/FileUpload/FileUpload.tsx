@@ -47,6 +47,7 @@
 
 import * as React from "react";
 
+import { List, ListItem } from "@/COMPOSITION/layout";
 import { Box } from "@/COMPOSITION/layout/Box";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Button } from "@/PRIMITIVES/Button/Button";
@@ -439,18 +440,18 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
         {/* File Previews */}
         {files.length > 0 && (
-          <div className="mt-md space-y-sm" role="list" aria-live="polite">
+          <List as="div" gap="sm" className="mt-md" aria-live="polite">
             {files.map((file, index) => (
-              <div key={`${file.name}-${index}`} role="listitem">
+              <ListItem key={`${file.name}-${index}`} as="div">
                 <FilePreviewItem
                   file={file}
                   size={size}
                   onRemove={() => handleRemove(file)}
                   disabled={disabled}
                 />
-              </div>
+              </ListItem>
             ))}
-          </div>
+          </List>
         )}
       </div>
     );

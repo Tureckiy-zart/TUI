@@ -146,7 +146,8 @@ export const FadePresets: Story = {
                 <AnimatedBox
                   key={keys[animation.id]}
                   animationKey={keys[animation.id]}
-                  p={6}
+                  px={6}
+                  py={6}
                   bg="card"
                   radius="lg"
                   className={finalClassName}
@@ -178,7 +179,8 @@ export const FadePresets: Story = {
             <AnimatedBox
               key={keys.fadeOut}
               animationKey={keys.fadeOut}
-              p={6}
+              px={6}
+              py={6}
               bg="destructive"
               radius="lg"
               className={cn(fadePresets.fadeOut().className)}
@@ -242,7 +244,8 @@ export const SlidePresets: Story = {
                 <AnimatedBox
                   key={keys[animation.id]}
                   animationKey={keys[animation.id]}
-                  p={6}
+                  px={6}
+                  py={6}
                   bg="card"
                   radius="lg"
                   className={cn(presetClassName)}
@@ -300,7 +303,8 @@ export const ScalePresets: Story = {
             <AnimatedBox
               key={keys.scaleIn}
               animationKey={keys.scaleIn}
-              p={6}
+              px={6}
+              py={6}
               bg="card"
               radius="lg"
               className={cn(scalePresets.scaleIn().className)}
@@ -317,7 +321,8 @@ export const ScalePresets: Story = {
             </Button>
           </Stack>
           <Box
-            p={6}
+            px={6}
+            py={6}
             bg="card"
             radius="lg"
             className={cn(scalePresets.scaleUp().className)}
@@ -326,7 +331,8 @@ export const ScalePresets: Story = {
             <Text>Hover to Scale Up</Text>
           </Box>
           <Box
-            p={6}
+            px={6}
+            py={6}
             bg="card"
             radius="lg"
             className={cn(scalePresets.scaleDown().className)}
@@ -364,7 +370,8 @@ export const LayoutPrimitives: Story = {
 
         <Box
           key={`box-${key}`}
-          p={6}
+          px={6}
+          py={6}
           bg="card"
           radius="lg"
           className={cn(fadePresets.fadeIn().className)}
@@ -380,13 +387,31 @@ export const LayoutPrimitives: Story = {
           wrap="wrap"
           className={cn(slidePresets.slideInLeft().className)}
         >
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Flex Item 1</Text>
           </Box>
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Flex Item 2</Text>
           </Box>
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Flex Item 3</Text>
           </Box>
         </Flex>
@@ -398,7 +423,8 @@ export const LayoutPrimitives: Story = {
           className={cn(slidePresets.slideInUp().className)}
         >
           <Box
-            p={4}
+            px={4}
+            py={4}
             bg="muted"
             radius="md"
             style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
@@ -406,7 +432,8 @@ export const LayoutPrimitives: Story = {
             <Text>Grid 1</Text>
           </Box>
           <Box
-            p={4}
+            px={4}
+            py={4}
             bg="muted"
             radius="md"
             style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
@@ -414,7 +441,8 @@ export const LayoutPrimitives: Story = {
             <Text>Grid 2</Text>
           </Box>
           <Box
-            p={4}
+            px={4}
+            py={4}
             bg="muted"
             radius="md"
             style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
@@ -424,13 +452,31 @@ export const LayoutPrimitives: Story = {
         </Grid>
 
         <Stack key={`stack-${key}`} spacing={3} className={cn(fadePresets.fadeIn().className)}>
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Stack Item 1</Text>
           </Box>
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Stack Item 2</Text>
           </Box>
-          <Box p={4} bg="muted" radius="md" style={{ border: "1px solid hsl(var(--border))" }}>
+          <Box
+            px={4}
+            py={4}
+            bg="muted"
+            radius="md"
+            style={{ border: "1px solid hsl(var(--border))" }}
+          >
             <Text>Stack Item 3</Text>
           </Box>
         </Stack>
@@ -475,7 +521,8 @@ export const SpringAnimations: Story = {
             <Stack key={animation.id} spacing={3} align="center">
               <Box
                 key={keys[animation.id]}
-                p={6}
+                px={6}
+                py={6}
                 bg="card"
                 radius="lg"
                 className={cn(animation.getPreset().className)}
@@ -539,7 +586,8 @@ export const RevealOnScroll: Story = {
         <Box
           ref={ref as React.Ref<HTMLDivElement>}
           key={`item-${item.id}-${keyValue}-${manualTriggerValue}`}
-          p={6}
+          px={6}
+          py={6}
           bg="card"
           radius="lg"
           className={cn(shouldAnimate ? animationConfig.className : "")}
@@ -609,7 +657,8 @@ export const RevealOnScroll: Story = {
             </Button>
           </Flex>
           <Box
-            p={4}
+            px={4}
+            py={4}
             bg="muted"
             radius="md"
             style={{
@@ -656,7 +705,8 @@ export const ReducedMotion: Story = {
       <Stack spacing={6} align="center" style={{ maxWidth: "600px", width: "100%" }}>
         <Heading>Reduced Motion Support</Heading>
         <Box
-          p={6}
+          px={6}
+          py={6}
           bg={prefersReducedMotion ? "destructive" : "semantic-success"}
           radius="lg"
           style={{
@@ -677,7 +727,8 @@ export const ReducedMotion: Story = {
           will be disabled when reduced motion is enabled.
         </Text>
         <Box
-          p={6}
+          px={6}
+          py={6}
           bg="card"
           radius="lg"
           className={cn(fadePresets.fadeIn().className)}
@@ -735,7 +786,8 @@ export const CustomTransitions: Story = {
             <Stack key={transitionConfig.id} spacing={3} align="center">
               <Box
                 key={keys[transitionConfig.id]}
-                p={6}
+                px={6}
+                py={6}
                 bg="card"
                 radius="lg"
                 className={cn(fadePresets.fadeInLeft().className)}
@@ -782,7 +834,8 @@ export const InteractiveAnimations: Story = {
         <Text>Hover, focus, and tap interactions</Text>
         <Flex gap={4} wrap="wrap" justify="center">
           <Box
-            p={6}
+            px={6}
+            py={6}
             bg="card"
             radius="lg"
             className={cn(hoverPresets.hoverLift().className, hoverPresets.tapScale().className)}
@@ -791,7 +844,8 @@ export const InteractiveAnimations: Story = {
             <Text>Hover & Tap</Text>
           </Box>
           <Box
-            p={6}
+            px={6}
+            py={6}
             bg="card"
             radius="lg"
             className={cn(

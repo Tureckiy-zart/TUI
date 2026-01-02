@@ -300,7 +300,16 @@ These provide contextual information, historical records, or implementation guid
    - **Key sections:** Decision matrix, component analysis, rationale
    - **When to read:** When understanding why certain components are public/internal, when making similar decisions
 
-4. **ARCHITECTURE_LOCK.md**
+4. **decisions/ADR_overlay_panel_not_card.md**
+   - **Type:** Reference / Architectural Decision Record (ADR)
+   - **Status:** ✅ DECIDED (Canonical)
+   - **Priority:** HIGH
+   - **Purpose:** Canonical decision that Overlay Panel components are NOT Card or CardBase components. Panels are overlay orchestrators (Portal, Backdrop, Focus, Keyboard, Gestures), while Cards are content containers with explicit semantic sections.
+   - **Key sections:** Panel vs Card responsibilities, semantic differences, decision rule for future panels
+   - **When to read:** When creating or refactoring overlay panel components, when deciding between Panel and Card semantics
+   - **Reference:** [ADR_overlay_panel_not_card.md](./decisions/ADR_overlay_panel_not_card.md)
+
+5. **ARCHITECTURE_LOCK.md**
    - **Type:** Lock Document
    - **Status:** LOCKED
    - **Priority:** HIGH

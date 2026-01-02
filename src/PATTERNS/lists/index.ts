@@ -5,5 +5,4 @@
  */
 
 export * from "./DataList";
-export * from "./List";
 export * from "./Timeline";

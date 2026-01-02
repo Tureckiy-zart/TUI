@@ -90,7 +90,8 @@ const Surface = React.forwardRef<HTMLDivElement, SurfaceProps>(
       <Box
         ref={ref}
         className={cn(surfaceVariants({ variant }), className)}
-        p={paddingValue}
+        px={paddingValue}
+        py={paddingValue}
         radius={radiusValue}
         {...props}
       />

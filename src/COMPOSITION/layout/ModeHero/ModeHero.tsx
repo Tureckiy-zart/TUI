@@ -39,7 +39,8 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
   return (
     <Box
       radius="lg"
-      p="lg"
+      px="lg"
+      py="lg"
       className={cn("text-primary-foreground", className)}
       style={{
         background: "linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))",

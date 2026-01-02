@@ -44,13 +44,13 @@ export const Default: Story = {
     spacing: "md",
     children: (
       <>
-        <Box p="sm" bg="muted" radius="sm">
+        <Box px="sm" py="sm" bg="muted" radius="sm">
           Item 1
         </Box>
-        <Box p="sm" bg="muted" radius="sm">
+        <Box px="sm" py="sm" bg="muted" radius="sm">
           Item 2
         </Box>
-        <Box p="sm" bg="muted" radius="sm">
+        <Box px="sm" py="sm" bg="muted" radius="sm">
           Item 3
         </Box>
       </>
@@ -64,13 +64,13 @@ export const WithSpacing: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: sm</h3>
         <Column spacing="sm">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 3
           </Box>
         </Column>
@@ -78,13 +78,13 @@ export const WithSpacing: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: md</h3>
         <Column spacing="md">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 3
           </Box>
         </Column>
@@ -92,13 +92,13 @@ export const WithSpacing: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Spacing: lg</h3>
         <Column spacing="lg">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 3
           </Box>
         </Column>
@@ -120,10 +120,10 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Start</h3>
         <Column align="start" spacing="md">
-          <Box p="sm" bg="muted" radius="sm" className="w-32">
+          <Box px="sm" py="sm" bg="muted" radius="sm" className="w-32">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm" className="w-32">
+          <Box px="sm" py="sm" bg="muted" radius="sm" className="w-32">
             Item 2
           </Box>
         </Column>
@@ -131,10 +131,10 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Center</h3>
         <Column align="center" spacing="md">
-          <Box p="sm" bg="muted" radius="sm" className="w-32">
+          <Box px="sm" py="sm" bg="muted" radius="sm" className="w-32">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm" className="w-32">
+          <Box px="sm" py="sm" bg="muted" radius="sm" className="w-32">
             Item 2
           </Box>
         </Column>
@@ -142,10 +142,10 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Justify: Between</h3>
         <Column justify="between" spacing="md" className="h-64">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
         </Column>
@@ -167,10 +167,10 @@ export const SemanticAlias: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Column (semantic alias)</h3>
         <Column spacing="md">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
         </Column>
@@ -178,10 +178,10 @@ export const SemanticAlias: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Equivalent Stack</h3>
         <Box className="flex flex-col gap-[var(--spacing-md)]">
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 1
           </Box>
-          <Box p="sm" bg="muted" radius="sm">
+          <Box px="sm" py="sm" bg="muted" radius="sm">
             Item 2
           </Box>
         </Box>

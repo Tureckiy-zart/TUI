@@ -4,13 +4,19 @@ import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/ty
 
 /**
  * PromoCard Size Variant
+ * Maps to GlobalSize scale subset: sm | md
+ * - "sm" maps from legacy "compact"
+ * - "md" maps from legacy "default"
  */
-export type PromoCardSize = "default" | "compact";
+export type PromoCardSize = "sm" | "md";
 
 /**
  * PromoCard Style Variant
+ * Maps to SurfaceVariant dictionary: default | elevated
+ * - "default" maps from legacy "default"
+ * - "elevated" maps from legacy "featured"
  */
-export type PromoCardVariant = "default" | "featured";
+export type PromoCardVariant = "default" | "elevated";
 
 /**
  * Props for PromoCard component.
