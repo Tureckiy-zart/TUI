@@ -92,6 +92,11 @@ export const noAdHocLists = createRule<Options, MessageIds>({
 
         // Check for direct <li> usage
         if (name.type === TSESTree.AST_NODE_TYPES.JSXIdentifier && name.name === "li") {
+          // Allow exception files (ListItem, Timeline, Breadcrumbs, Navigation)
+          if (isExceptionFile(filename)) {
+            return;
+          }
+
           // Check if parent is ListItem component (allow nested li in ListItem if needed)
           const parent = node.parent?.parent;
           if (parent && parent.type === TSESTree.AST_NODE_TYPES.JSXElement) {
@@ -151,6 +156,11 @@ export const noAdHocLists = createRule<Options, MessageIds>({
           name.type === TSESTree.AST_NODE_TYPES.JSXIdentifier &&
           (name.name === "div" || name.name === "Box")
         ) {
+          // Allow exception files (ListItem, Stepper)
+          if (isExceptionFile(filename)) {
+            return;
+          }
+
           for (const attr of node.attributes) {
             if (attr.type !== TSESTree.AST_NODE_TYPES.JSXAttribute) continue;
 
@@ -194,6 +204,28 @@ function isTestFile(filename: string): boolean {
     filename.endsWith(".spec.tsx") ||
     filename.endsWith(".spec.ts")
   );
+}
+
+/**
+ * Check if file is an exception to the no-ad-hoc-lists rule
+ * These files are allowed to use <li> and role="listitem" directly
+ * because they are specialized patterns or the canonical components themselves
+ */
+function isExceptionFile(filename: string): boolean {
+  const normalized = path.normalize(filename);
+  const exceptionFiles = [
+    "ListItem.tsx", // Сам компонент ListItem
+    "Timeline.tsx", // Timeline исключение (ADR)
+    "Stepper.tsx", // Stepper исключение (ADR)
+    "Breadcrumbs.tsx", // Breadcrumbs навигационный компонент
+    "Navigation.tsx", // NavItem - часть NavList (ADR)
+  ];
+
+  // Check if filename ends with any exception file (works with both absolute and relative paths)
+  return exceptionFiles.some((file) => {
+    const filePath = path.sep + file;
+    return normalized.endsWith(file) || normalized.endsWith(filePath);
+  });
 }
 
 /**

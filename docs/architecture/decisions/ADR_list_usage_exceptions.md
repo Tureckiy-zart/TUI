@@ -1,8 +1,8 @@
 # Architecture Decision: List Usage Exceptions
 
 **Decision ID:** `ADR_list_usage_exceptions`  
-**Version:** 1.0  
-**Date:** 2026-01-01  
+**Version:** 1.1  
+**Date:** 2026-01-02  
 **Status:** ✅ **DECIDED**  
 **Authority:** This decision is canonical and binding
 
@@ -18,6 +18,8 @@ This document records the architectural decision that **certain specialized patt
 - DataList component (definition list `<dl>/<dt>/<dd>`)
 - NavList component (navigation-specific semantics)
 - Stepper component (step indicators with navigation semantics)
+- Breadcrumbs component (navigation breadcrumb pattern)
+- Navigation primitives (NavItem - part of NavList)
 
 ---
 
@@ -158,6 +160,64 @@ This decision documents these exceptions to prevent confusion and ensure consist
 **Navigation Semantics:** Step indicators are part of navigation flow and have specialized ARIA patterns for step navigation.
 
 **Enforcement:** Explicitly documented as out of scope in `FORBIDDEN_PATTERNS.md`.
+
+---
+
+### 6. Breadcrumbs Component
+
+**Component:** `Breadcrumbs` (`src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx`)
+
+**Pattern:**
+```tsx
+<nav aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, index) => (
+      <li key={index}>
+        {item.href ? (
+          <Link href={item.href}>{item.label}</Link>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+        {index < items.length - 1 && <Separator />}
+      </li>
+    ))}
+  </ol>
+</nav>
+```
+
+**Reason:** Breadcrumbs is a specialized navigation pattern for displaying navigation hierarchy. It uses `<nav>` and `<ol>` with `<li>` for breadcrumb items, which is semantically correct for navigation breadcrumbs.
+
+**Navigation Semantics:** Breadcrumbs have specific ARIA patterns for navigation hierarchy and use semantic HTML (`<nav>`, `<ol>`, `<li>`) that is appropriate for navigation patterns.
+
+**ARIA Specification:** [WAI-ARIA Breadcrumb Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)
+
+**Enforcement:** Explicitly documented as exception in ESLint rule `no-ad-hoc-lists`.
+
+---
+
+### 7. Navigation Primitives (NavItem)
+
+**Component:** `NavItem` (`src/COMPOSITION/navigation/primitives/Navigation.tsx`)
+
+**Pattern:**
+```tsx
+<NavList>
+  <NavItem>
+    <NavText>Home</NavText>
+  </NavItem>
+  <NavItem>
+    <NavText>About</NavText>
+  </NavItem>
+</NavList>
+```
+
+**Reason:** NavItem is part of NavList, which is already an exception. NavItem is used inside NavList to create navigation lists and renders as `<li>` element. This is a navigation-specific primitive that provides structural navigation list items.
+
+**Navigation Semantics:** NavItem is a structural navigation primitive that works with NavList to create navigation patterns. It provides navigation-specific behavior and structure that differs from general lists.
+
+**Relationship:** NavItem is part of the NavList exception but is explicitly documented here for clarity.
+
+**Enforcement:** Explicitly documented as exception in ESLint rule `no-ad-hoc-lists`.
 
 ---
 
@@ -320,7 +380,10 @@ This decision documents these exceptions to prevent confusion and ensure consist
 - **DataList Component:** `src/PATTERNS/lists/DataList/DataList.tsx`
 - **NavList Component:** `src/COMPOSITION/navigation/nav-list/NavList.tsx`
 - **Stepper Component:** `src/COMPOSITION/navigation/stepper/Stepper.tsx`
+- **Breadcrumbs Component:** `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx`
+- **Navigation Primitives (NavItem):** `src/COMPOSITION/navigation/primitives/Navigation.tsx`
 - **WAI-ARIA Combobox Pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+- **WAI-ARIA Breadcrumb Pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
 
 ---
 
@@ -328,5 +391,5 @@ This decision documents these exceptions to prevent confusion and ensure consist
 
 ✅ **DECIDED** - This decision is canonical and binding. The listed patterns are exceptions to the List/ListItem enforcement rule.
 
-**Last Updated:** 2026-01-01
+**Last Updated:** 2026-01-02
 
