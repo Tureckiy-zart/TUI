@@ -190,12 +190,9 @@ export const WithDescriptionAndError: Story = {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="card-number">Card Number</Label>
-            <Input
-              id="card-number"
-              placeholder="1234 5678 9012 3456"
-              invalid
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="card-number" placeholder="1234 5678 9012 3456" invalid />
+            </Box>
           </div>
           <div style={{ display: "flex", gap: "1rem" }}>
             <div style={{ flex: 1 }}>

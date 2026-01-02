@@ -171,7 +171,6 @@ export {
   type DropdownSeparatorProps,
   DropdownTrigger,
   type DropdownTriggerProps,
-  POPOVER_TOKENS,
 } from "./Dropdown";
 
 // Tooltip

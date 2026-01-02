@@ -644,7 +644,6 @@ export {
   type DropdownSeparatorProps,
   DropdownTrigger,
   type DropdownTriggerProps,
-  POPOVER_TOKENS,
 } from "./COMPOSITION/overlays/Dropdown";
 
 // Tooltip (Radix-based, token-driven)

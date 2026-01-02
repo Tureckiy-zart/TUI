@@ -345,7 +345,7 @@ describe("IconButton", () => {
         <IconButton icon={<IconSearch />} aria-label="Search" />,
       );
       const results = await axeCheck(container);
-      expect(results).toHaveNoViolations();
+      (expect(results) as any).toHaveNoViolations();
     });
   });
 
@@ -387,9 +387,8 @@ describe("IconButton", () => {
     });
 
     it("handles empty aria-label gracefully", () => {
-      // TypeScript will error at compile time, but runtime should handle it
+      // Empty string is technically valid for string type, but not recommended for accessibility
       expect(() => {
-        // @ts-expect-error - Testing empty aria-label
         renderWithTheme(<IconButton icon={<IconSearch />} aria-label="" />);
       }).not.toThrow();
     });

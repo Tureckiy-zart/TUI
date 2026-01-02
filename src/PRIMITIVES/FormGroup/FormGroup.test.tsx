@@ -240,7 +240,7 @@ describe("FormGroup", () => {
     });
 
     it("uses Stack only for description and error", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup
           description={<Text size="sm">Description</Text>}
           error={<Text size="sm">Error</Text>}
@@ -262,7 +262,7 @@ describe("FormGroup", () => {
     });
 
     it("maintains layout transparency for user-provided children", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             <Input placeholder="Grid 1" />
@@ -292,7 +292,7 @@ describe("FormGroup", () => {
     });
 
     it("works without description and error", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup>
           <Input placeholder="Test input" />
         </FormGroup>,
