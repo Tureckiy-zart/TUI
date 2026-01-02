@@ -324,7 +324,7 @@ describe("tokenCVA", () => {
         base: ["flex", "items-center"],
         variants: {
           size: {
-            sm: ["text-sm", "p-2"],
+            sm: ["text-sm", "bg-primary"],
           },
         },
       });

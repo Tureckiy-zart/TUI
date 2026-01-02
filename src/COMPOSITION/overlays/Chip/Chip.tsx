@@ -189,12 +189,33 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
     // Determine if chip is interactive (has onClick handler)
     const isInteractive = !disabled && !!onClick;
 
-    // Determine element type: button if interactive, div if display-only
-    const Component = isInteractive ? "button" : "div";
+    // Determine element type:
+    // - If interactive AND removable: use div with role="button" (can't nest buttons)
+    // - If interactive but not removable: use button (native semantics)
+    // - If not interactive: use div (display-only)
+    const useButtonElement = isInteractive && !removable;
+    const Component = useButtonElement ? "button" : "div";
 
     // Handle keyboard events for interactive chips
     const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
       if (disabled) return;
+
+      // Enter/Space triggers onClick (for interactive chips using div with role="button")
+      if (
+        !useButtonElement &&
+        isInteractive &&
+        onClick &&
+        (event.key === "Enter" || event.key === " ")
+      ) {
+        event.preventDefault();
+        const syntheticEvent = {
+          ...event,
+          currentTarget: event.currentTarget as unknown as HTMLElement,
+          target: event.target as unknown as HTMLElement,
+        } as unknown as React.MouseEvent<HTMLElement>;
+        onClick(syntheticEvent);
+        return;
+      }
 
       // Delete/Backspace triggers onRemove (if removable)
       if ((event.key === "Delete" || event.key === "Backspace") && removable && onRemove) {
@@ -208,7 +229,7 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
         onRemove(syntheticEvent);
       }
 
-      // Enter/Space triggers onClick (for interactive chips, handled by button element)
+      // Enter/Space triggers onClick (for interactive chips using button element)
       // Native button element handles this automatically
     };
 
@@ -223,7 +244,8 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
     return (
       <Component
         ref={ref as any}
-        type={isInteractive ? "button" : undefined}
+        type={useButtonElement ? "button" : undefined}
+        role={!useButtonElement && isInteractive ? "button" : undefined}
         className={cn(
           chipVariants({ variant, radius }),
           isInteractive && CHIP_TOKENS.interactive.cursor,
@@ -235,7 +257,7 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
         )}
         onClick={!disabled ? onClick : undefined}
         onKeyDown={handleKeyDown}
-        disabled={disabled}
+        disabled={useButtonElement ? disabled : undefined}
         aria-label={ariaLabel}
         aria-pressed={selected ? "true" : ariaPressed}
         aria-disabled={disabled}

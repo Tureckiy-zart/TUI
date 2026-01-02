@@ -1,5 +1,6 @@
 "use client";
 
+import { ListItem } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TIMELINE_TOKENS } from "@/FOUNDATION/tokens/components/timeline";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -21,7 +22,7 @@ export function Timeline({ items, className }: TimelineProps) {
   return (
     <ol className={cn(TIMELINE_TOKENS.spacing.gap, className)} role="list">
       {items.map((item, index) => (
-        <li key={item.id} className="relative flex">
+        <ListItem key={item.id} className="relative flex">
           <div className="flex flex-col items-center" aria-hidden="true">
             <div
               className={cn(
@@ -54,7 +55,7 @@ export function Timeline({ items, className }: TimelineProps) {
               </Text>
             )}
           </div>
-        </li>
+        </ListItem>
       ))}
     </ol>
   );

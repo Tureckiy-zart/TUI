@@ -10,6 +10,7 @@
 import { ChevronRight } from "lucide-react";
 import * as React from "react";
 
+import { ListItem } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { NAVIGATION_TOKENS } from "@/FOUNDATION/tokens/components/navigation";
 import { Link } from "@/PRIMITIVES/Link";
@@ -134,9 +135,9 @@ BreadcrumbsRoot.displayName = "Breadcrumbs.Root";
 const BreadcrumbsItem = React.forwardRef<HTMLLIElement, BreadcrumbsItemProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <li ref={ref} className={cn("flex items-center", className)} {...props}>
+      <ListItem ref={ref} className={cn("flex items-center", className)} {...props}>
         {children}
-      </li>
+      </ListItem>
     );
   },
 );

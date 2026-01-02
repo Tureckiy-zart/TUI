@@ -228,10 +228,10 @@ describe("Stepper", () => {
 
   describe("Ref Forwarding", () => {
     it("forwards ref correctly to StepperRoot", () => {
-      const ref = React.createRef<HTMLDivElement>();
+      const ref = React.createRef<HTMLOListElement>();
       renderWithTheme(<Stepper.Root ref={ref} steps={defaultSteps} activeStep={1} />);
 
-      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toBeInstanceOf(HTMLOListElement);
     });
 
     it("forwards ref correctly to StepperContent", () => {
