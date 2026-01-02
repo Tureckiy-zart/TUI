@@ -9,6 +9,7 @@ import "@testing-library/jest-dom/vitest";
 import { screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
 import { Button } from "@/PRIMITIVES/Button";
 import { renderWithTheme, userEventSetup } from "@/test/test-utils";
 
@@ -535,7 +536,13 @@ describe("Dialog", () => {
 
   describe("Edge Cases", () => {
     it("handles empty children gracefully", async () => {
-      renderWithTheme(<Dialog open={true} onOpenChange={vi.fn()}></Dialog>);
+      renderWithTheme(
+        <Dialog open={true} onOpenChange={vi.fn()}>
+          <VisuallyHidden>
+            <DialogTitle>Empty Dialog</DialogTitle>
+          </VisuallyHidden>
+        </Dialog>,
+      );
 
       await waitFor(() => {
         expect(screen.getByRole("dialog")).toBeInTheDocument();
