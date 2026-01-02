@@ -21,8 +21,19 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
+      define: {
+        // Polyfill process.env for Next.js compatibility in Storybook
+        "process.env": JSON.stringify({
+          NODE_ENV: "development",
+        }),
+      },
       resolve: {
         alias: [
+          // Mock next/link for Storybook to avoid "process is not defined" errors
+          {
+            find: "next/link",
+            replacement: resolve(__dirname, "./mocks/next-link.tsx"),
+          },
           // Explicit logical-layer aliases (defensive; keeps "@/layer" stable)
           {
             find: /^@\/FOUNDATION(\/.*)?$/,
