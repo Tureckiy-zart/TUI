@@ -77,7 +77,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
       eventsLabel,
       popularBadgeText,
       capacityLabel,
-      size = "default",
+      size = "md",
       variant = "default",
       className,
       animation,
