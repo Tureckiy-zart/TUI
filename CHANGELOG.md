@@ -15,12 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-**Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
-
-## [2.0.4]
-
-**Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
-
 ### Added
 
 - **New Form & Utility Components** added to the public API:
@@ -67,15 +61,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Accessibility**:
   - Removed invalid `aria-orientation` usage in **ButtonGroup**.
   - Improved contrast and visual clarity in **PriceRangeSlider**.
+  - Fixed accessibility warnings in Dialog component tests by adding hidden Modal.Title for Radix UI validation
+  - Fixed HTML validation error in ErrorText test (div cannot be child of p element)
+  - Fixed React act() warning in Menu keyboard navigation test by using userEvent methods instead of direct focus() calls
 
 - **TypeScript & Tests**:
   - Fixed type errors in Storybook stories and tests.
   - Resolved FocusTrap export path and type compatibility issues.
   - Fixed nested button warnings and React `act()` test issues.
 
+- **CI/CD**:
+  - Fixed duplicate quality checks in CI/CD workflow for feature branches (removed push trigger, kept only pull_request)
+
 - **Storybook**:
   - Added `next/link` mock to prevent runtime errors.
   - Improved story configuration and developer experience.
+  - Fixed hardcoded NODE_ENV in Storybook configuration to properly detect production builds
 
 ### Changed
 
