@@ -251,13 +251,19 @@ describe("FileUpload", () => {
     it("file list has semantic HTML with role=list", async () => {
       const file = createMockFile("test.jpg", 1000, "image/jpeg");
 
+      let container: HTMLElement;
       await act(async () => {
-        render(<FileUpload value={[file]} onFileSelect={() => {}} />);
+        const { container: renderedContainer } = render(
+          <FileUpload value={[file]} onFileSelect={() => {}} />,
+        );
+        container = renderedContainer;
       });
 
-      const list = screen.getByRole("list");
-      expect(list).toBeInTheDocument();
-      expect(screen.getByRole("listitem")).toBeInTheDocument();
+      await waitFor(() => {
+        const list = screen.getByRole("list");
+        expect(list).toBeInTheDocument();
+        expect(screen.getByRole("listitem")).toBeInTheDocument();
+      });
     });
   });
 
@@ -368,8 +374,10 @@ describe("FileUpload", () => {
         );
       });
 
-      const removeButton = screen.getByLabelText(/remove test\.jpg/i);
-      expect(removeButton).toBeDisabled();
+      await waitFor(() => {
+        const removeButton = screen.getByLabelText(/remove test\.jpg/i);
+        expect(removeButton).toBeDisabled();
+      });
     });
   });
 
