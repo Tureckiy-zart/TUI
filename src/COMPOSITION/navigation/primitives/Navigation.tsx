@@ -31,6 +31,8 @@
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
+import { ListItem } from "@/COMPOSITION/layout";
+
 // Import NavSeparator from standalone component
 import { NavSeparator, type NavSeparatorProps } from "../NavSeparator/NavSeparator";
 // Import NavText from standalone component
@@ -148,9 +150,9 @@ export const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
     }
 
     return (
-      <li ref={ref} className={className} {...props}>
+      <ListItem ref={ref} className={className} {...props}>
         {children}
-      </li>
+      </ListItem>
     );
   },
 );

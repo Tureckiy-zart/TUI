@@ -10,6 +10,7 @@
 import { Check } from "lucide-react";
 import * as React from "react";
 
+import { ListItem } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
@@ -46,7 +47,7 @@ export interface StepperStep {
   disabled?: boolean;
 }
 
-export interface StepperRootProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StepperRootProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * Array of steps
    */
@@ -70,7 +71,7 @@ export interface StepperRootProps extends React.HTMLAttributes<HTMLDivElement> {
   showNumbers?: boolean;
 }
 
-export interface StepperItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StepperItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * Step data
    */
@@ -203,7 +204,7 @@ function renderIndicatorContent(
 /**
  * Stepper.Root - Main stepper container
  */
-const StepperRoot = React.forwardRef<HTMLDivElement, StepperRootProps>(
+const StepperRoot = React.forwardRef<HTMLOListElement, StepperRootProps>(
   (
     {
       steps,
@@ -219,18 +220,18 @@ const StepperRoot = React.forwardRef<HTMLDivElement, StepperRootProps>(
     const safeActiveStep = Math.min(Math.max(0, activeStep), steps.length - 1);
 
     return (
-      <div
-        ref={ref}
+      <ol
+        ref={ref as React.Ref<HTMLOListElement>}
         role="group"
         aria-label="Progress steps"
         aria-orientation={orientation}
         className={cn(
-          "flex",
+          "flex list-none",
           orientation === "horizontal" ? "flex-row items-start" : "flex-col",
           NAVIGATION_TOKENS.spacing.listGap.md,
           className,
         )}
-        {...props}
+        {...(props as React.HTMLAttributes<HTMLOListElement>)}
       >
         {steps.map((step, index) => {
           const isActive = index === safeActiveStep;
@@ -249,7 +250,7 @@ const StepperRoot = React.forwardRef<HTMLDivElement, StepperRootProps>(
           );
         })}
         {children}
-      </div>
+      </ol>
     );
   },
 );
@@ -262,7 +263,7 @@ interface StepperItemPropsInternal extends StepperItemProps {
   orientation?: "horizontal" | "vertical";
 }
 
-const StepperItem = React.forwardRef<HTMLDivElement, StepperItemPropsInternal>(
+const StepperItem = React.forwardRef<HTMLLIElement, StepperItemPropsInternal>(
   (
     {
       className,
@@ -277,9 +278,8 @@ const StepperItem = React.forwardRef<HTMLDivElement, StepperItemPropsInternal>(
     ref,
   ) => {
     return (
-      <div
+      <ListItem
         ref={ref}
-        role="listitem"
         className={cn(
           "flex items-start",
           orientation === "horizontal" ? "flex-col" : "flex-row",
@@ -297,7 +297,7 @@ const StepperItem = React.forwardRef<HTMLDivElement, StepperItemPropsInternal>(
           showNumber={showNumber}
         />
         <StepperLabel label={step.label} description={step.description} isActive={isActive} />
-      </div>
+      </ListItem>
     );
   },
 );
