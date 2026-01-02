@@ -15,4 +15,4 @@
  * Reference: docs/architecture/FOCUS_AUTHORITY.md
  */
 
-export * from "./FocusTrap";
+export * from "./FocusTrap/FocusTrap";

@@ -35,7 +35,6 @@ describe("FocusTrap", () => {
       const input1 = screen.getByPlaceholderText("Input 1");
       const input2 = screen.getByPlaceholderText("Input 2");
       const insideButton = screen.getByRole("button", { name: "Inside Button" });
-      const outsideButton = screen.getByRole("button", { name: "Outside Button" });
 
       // Focus should be on first focusable element
       await waitFor(() => {
