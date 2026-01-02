@@ -2,6 +2,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Box } from "@/COMPOSITION/layout/Box";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
 import { Text } from "@/PRIMITIVES/Text";
@@ -85,11 +86,15 @@ export const Default: Story = {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="first-name">First Name</Label>
-            <Input id="first-name" placeholder="Enter first name" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="first-name" placeholder="Enter first name" />
+            </Box>
           </div>
           <div>
             <Label htmlFor="last-name">Last Name</Label>
-            <Input id="last-name" placeholder="Enter last name" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="last-name" placeholder="Enter last name" />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -114,21 +119,15 @@ export const WithDescription: Story = {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="email" type="email" placeholder="you@example.com" />
+            </Box>
           </div>
           <div>
             <Label htmlFor="phone">Phone</Label>
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="+1 (555) 000-0000"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -145,30 +144,23 @@ export const WithError: Story = {
       <FormGroup
         legend="Account Settings"
         error={
-          <Text size="sm" style={{ color: "hsl(var(--destructive))" }}>
-            Please correct the errors above before continuing.
-          </Text>
+          <Box className="text-destructive">
+            <Text size="sm">Please correct the errors above before continuing.</Text>
+          </Box>
         }
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              placeholder="Enter username"
-              invalid
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="username" placeholder="Enter username" invalid />
+            </Box>
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter password"
-              invalid
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="password" type="password" placeholder="Enter password" invalid />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -190,9 +182,9 @@ export const WithDescriptionAndError: Story = {
           </Text>
         }
         error={
-          <Text size="sm" style={{ color: "hsl(var(--destructive))" }}>
-            Please verify your payment information.
-          </Text>
+          <Box className="text-destructive">
+            <Text size="sm">Please verify your payment information.</Text>
+          </Box>
         }
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -208,11 +200,15 @@ export const WithDescriptionAndError: Story = {
           <div style={{ display: "flex", gap: "1rem" }}>
             <div style={{ flex: 1 }}>
               <Label htmlFor="expiry">Expiry</Label>
-              <Input id="expiry" placeholder="MM/YY" invalid style={{ marginTop: "0.5rem" }} />
+              <Box mt="xs">
+                <Input id="expiry" placeholder="MM/YY" invalid />
+              </Box>
             </div>
             <div style={{ flex: 1 }}>
               <Label htmlFor="cvv">CVV</Label>
-              <Input id="cvv" placeholder="123" invalid style={{ marginTop: "0.5rem" }} />
+              <Box mt="xs">
+                <Input id="cvv" placeholder="123" invalid />
+              </Box>
             </div>
           </div>
         </div>
@@ -231,21 +227,15 @@ export const Disabled: Story = {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="disabled-street">Street Address</Label>
-            <Input
-              id="disabled-street"
-              placeholder="123 Main St"
-              disabled
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="disabled-street" placeholder="123 Main St" disabled />
+            </Box>
           </div>
           <div>
             <Label htmlFor="disabled-city">City</Label>
-            <Input
-              id="disabled-city"
-              placeholder="New York"
-              disabled
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="disabled-city" placeholder="New York" disabled />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -265,22 +255,17 @@ export const Required: Story = {
             <Label htmlFor="required-name" required>
               Full Name
             </Label>
-            <Input
-              id="required-name"
-              placeholder="Enter your full name"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="required-name" placeholder="Enter your full name" />
+            </Box>
           </div>
           <div>
             <Label htmlFor="required-email" required>
               Email Address
             </Label>
-            <Input
-              id="required-email"
-              type="email"
-              placeholder="you@example.com"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input id="required-email" type="email" placeholder="you@example.com" />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -303,31 +288,33 @@ export const Accessibility: Story = {
           </Text>
         }
         error={
-          <Text size="sm" style={{ color: "hsl(var(--destructive))" }} id="error-example">
-            This error message is automatically linked via aria-errormessage.
-          </Text>
+          <Box className="text-destructive" id="error-example">
+            <Text size="sm">This error message is automatically linked via aria-errormessage.</Text>
+          </Box>
         }
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="accessible-input">Input with Description</Label>
-            <Input
-              id="accessible-input"
-              placeholder="Focus to hear description"
-              aria-describedby="description-example"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input
+                id="accessible-input"
+                placeholder="Focus to hear description"
+                aria-describedby="description-example"
+              />
+            </Box>
           </div>
           <div>
             <Label htmlFor="accessible-error-input">Input with Error</Label>
-            <Input
-              id="accessible-error-input"
-              placeholder="Focus to hear error"
-              invalid
-              aria-invalid="true"
-              aria-errormessage="error-example"
-              style={{ marginTop: "0.5rem" }}
-            />
+            <Box mt="xs">
+              <Input
+                id="accessible-error-input"
+                placeholder="Focus to hear error"
+                invalid
+                aria-invalid="true"
+                aria-errormessage="error-example"
+              />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -355,11 +342,15 @@ export const WithoutLegend: Story = {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div>
             <Label htmlFor="no-legend-1">Field 1</Label>
-            <Input id="no-legend-1" placeholder="Enter value" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="no-legend-1" placeholder="Enter value" />
+            </Box>
           </div>
           <div>
             <Label htmlFor="no-legend-2">Field 2</Label>
-            <Input id="no-legend-2" placeholder="Enter value" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="no-legend-2" placeholder="Enter value" />
+            </Box>
           </div>
         </div>
       </FormGroup>
@@ -386,11 +377,15 @@ export const LayoutTransparency: Story = {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <div>
             <Label htmlFor="grid-1">Field 1</Label>
-            <Input id="grid-1" placeholder="Grid column 1" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="grid-1" placeholder="Grid column 1" />
+            </Box>
           </div>
           <div>
             <Label htmlFor="grid-2">Field 2</Label>
-            <Input id="grid-2" placeholder="Grid column 2" style={{ marginTop: "0.5rem" }} />
+            <Box mt="xs">
+              <Input id="grid-2" placeholder="Grid column 2" />
+            </Box>
           </div>
         </div>
       </FormGroup>

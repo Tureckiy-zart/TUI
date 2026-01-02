@@ -102,14 +102,14 @@ export const Default: Story = {
   name: "Default",
   render: function DefaultStory() {
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Focus Trap Demo</Heading>
           <Text size="sm">
             Press Tab to cycle through focusable elements. Focus stays trapped within the box.
           </Text>
           <FocusTrap>
-            <Stack gap={2}>
+            <Stack spacing={2}>
               <Input placeholder="First input" />
               <Input placeholder="Second input" />
               <Button>First Button</Button>
@@ -138,8 +138,8 @@ export const States: Story = {
     const [active, setActive] = useState(true);
 
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Focus Trap States</Heading>
           <Text size="sm">
             Toggle focus trap active/inactive. When inactive, focus can escape the trapped area.
@@ -148,7 +148,7 @@ export const States: Story = {
             {active ? "Deactivate Focus Trap" : "Activate Focus Trap"}
           </Button>
           <FocusTrap active={active}>
-            <Stack gap={2}>
+            <Stack spacing={2}>
               <Input placeholder="Trapped input 1" />
               <Input placeholder="Trapped input 2" />
               <Button>Trapped Button</Button>
@@ -176,15 +176,15 @@ export const WithInitialFocus: Story = {
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Initial Focus</Heading>
           <Text size="sm">
             Focus trap with initial focus set to a specific element. The second input receives focus
             when trap activates.
           </Text>
           <FocusTrap initialFocusRef={inputRef}>
-            <Stack gap={2}>
+            <Stack spacing={2}>
               <Input placeholder="First input (not focused)" />
               <Input ref={inputRef} placeholder="Second input (focused initially)" />
               <Button>Button</Button>
@@ -213,8 +213,8 @@ export const WithEscapeHandler: Story = {
 
     if (!isOpen) {
       return (
-        <Box p={4} border="1px solid" borderColor="border">
-          <Stack gap={4}>
+        <Box px={4} py={4} className="border border-border">
+          <Stack spacing={4}>
             <Heading level={3}>Focus Trap Closed</Heading>
             <Button onClick={() => setIsOpen(true)}>Open Focus Trap</Button>
           </Stack>
@@ -223,12 +223,12 @@ export const WithEscapeHandler: Story = {
     }
 
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Focus Trap with Escape</Heading>
           <Text size="sm">Press Escape to close the focus trap.</Text>
           <FocusTrap onEscape={() => setIsOpen(false)}>
-            <Stack gap={2}>
+            <Stack spacing={2}>
               <Input placeholder="Input 1" />
               <Input placeholder="Input 2" />
               <Button onClick={() => setIsOpen(false)}>Close</Button>
@@ -254,15 +254,15 @@ export const WithoutLoop: Story = {
   name: "Without Loop",
   render: function WithoutLoopStory() {
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Focus Trap Without Loop</Heading>
           <Text size="sm">
             Focus trap with loop disabled. Tab/Shift+Tab does not wrap (stays at first/last
             element).
           </Text>
           <FocusTrap loop={false}>
-            <Stack gap={2}>
+            <Stack spacing={2}>
               <Input placeholder="First input" />
               <Input placeholder="Second input" />
               <Button>Button</Button>
@@ -291,8 +291,8 @@ export const ModalScenario: Story = {
     const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     return (
-      <Box p={4} border="1px solid" borderColor="border">
-        <Stack gap={4}>
+      <Box px={4} py={4} className="border border-border">
+        <Stack spacing={4}>
           <Heading level={3}>Modal-like Scenario</Heading>
           <Text size="sm">
             Demonstrates FocusTrap usage in a modal-like scenario with backdrop and close button.
@@ -301,34 +301,25 @@ export const ModalScenario: Story = {
 
           {isOpen && (
             <Box
-              position="fixed"
-              top={0}
-              left={0}
-              right={0}
-              bottom={0}
-              bg="overlay"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              zIndex={50}
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
             >
               <Box
-                p={6}
-                bg="bg"
-                border="1px solid"
-                borderColor="border"
-                borderRadius="md"
-                minWidth="400px"
+                px={6}
+                py={6}
+                bg="background"
+                className="rounded-md border border-border"
+                style={{ minWidth: "400px" }}
               >
                 <FocusTrap initialFocusRef={closeButtonRef} onEscape={() => setIsOpen(false)}>
-                  <Stack gap={4}>
+                  <Stack spacing={4}>
                     <Heading level={2}>Modal Title</Heading>
                     <Text>This is a modal-like scenario using FocusTrap.</Text>
-                    <Stack gap={2}>
+                    <Stack spacing={2}>
                       <Input placeholder="Input 1" />
                       <Input placeholder="Input 2" />
                     </Stack>
-                    <Stack direction="row" gap={2} justifyContent="flex-end">
+                    <Stack direction="horizontal" spacing={2} justify="end">
                       <Button variant="outline" onClick={() => setIsOpen(false)}>
                         Cancel
                       </Button>

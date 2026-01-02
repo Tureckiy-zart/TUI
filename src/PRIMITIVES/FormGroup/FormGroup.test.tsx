@@ -3,7 +3,6 @@ import React from "react";
 import { describe, expect, it } from "vitest";
 
 import { Input } from "@/PRIMITIVES/Input";
-import { Label } from "@/PRIMITIVES/Label";
 import { Text } from "@/PRIMITIVES/Text";
 import { renderWithTheme } from "@/test/test-utils";
 
@@ -45,7 +44,7 @@ describe("FormGroup", () => {
     });
 
     it("renders children without additional wrappers", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup>
           <div data-testid="child-wrapper">
             <Input placeholder="Test input" />
@@ -113,7 +112,7 @@ describe("FormGroup", () => {
 
   describe("Accessibility", () => {
     it("generates unique ID for description", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup description={<Text size="sm">Description 1</Text>}>
           <Input placeholder="Test" />
         </FormGroup>,
@@ -125,7 +124,7 @@ describe("FormGroup", () => {
     });
 
     it("generates unique ID for error", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup error={<Text size="sm">Error 1</Text>}>
           <Input placeholder="Test" />
         </FormGroup>,
@@ -137,7 +136,7 @@ describe("FormGroup", () => {
     });
 
     it("generates different IDs for multiple FormGroups", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <>
           <FormGroup description={<Text size="sm">Description 1</Text>}>
             <Input placeholder="Test 1" />
@@ -220,7 +219,7 @@ describe("FormGroup", () => {
 
   describe("Layout", () => {
     it("does not wrap children in Stack", () => {
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <FormGroup>
           <div data-testid="child-1">Child 1</div>
           <div data-testid="child-2">Child 2</div>

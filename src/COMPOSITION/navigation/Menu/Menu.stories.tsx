@@ -2,7 +2,6 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Copy, Edit, MoreVertical, Share, Trash2 } from "lucide-react";
-import * as React from "react";
 
 import { Menu } from "./Menu";
 
@@ -58,60 +57,8 @@ const meta: Meta<typeof Menu.Root> = {
         disable: true,
       },
     },
-    // MenuContent props
-    "content.padding": {
-      control: { type: "select" },
-      options: ["sm", "md"],
-      description: "MenuContent padding variant (token-based)",
-      table: {
-        type: { summary: '"sm" | "md"' },
-        defaultValue: { summary: '"md"' },
-        category: "MenuContent",
-      },
-    },
-    // MenuItem props
-    "item.padding": {
-      control: { type: "select" },
-      options: ["xs", "sm", "md"],
-      description: "MenuItem padding variant (token-based)",
-      table: {
-        type: { summary: '"xs" | "sm" | "md"' },
-        defaultValue: { summary: '"md"' },
-        category: "MenuItem",
-      },
-    },
-    "item.height": {
-      control: { type: "select" },
-      options: ["sm", "md", "lg"],
-      description: "MenuItem height variant (token-based)",
-      table: {
-        type: { summary: '"sm" | "md" | "lg"' },
-        defaultValue: { summary: '"md"' },
-        category: "MenuItem",
-      },
-    },
-    // MenuSeparator props
-    "separator.margin": {
-      control: { type: "select" },
-      options: ["sm", "md"],
-      description: "MenuSeparator margin variant (token-based)",
-      table: {
-        type: { summary: '"sm" | "md"' },
-        defaultValue: { summary: '"sm"' },
-        category: "MenuSeparator",
-      },
-    },
-    // MenuLabel props
-    "label.padding": {
-      control: { type: "select" },
-      options: ["sm", "md"],
-      description: "MenuLabel padding variant (token-based)",
-      table: {
-        type: { summary: '"sm" | "md"' },
-        defaultValue: { summary: '"md"' },
-        category: "MenuLabel",
-      },
-    },
+    // MenuContent, MenuItem, MenuSeparator, and MenuLabel props are handled via component composition
+    // Props are set directly on the respective components (MenuContent, MenuItem, MenuSeparator, MenuLabel)
   },
 };
 

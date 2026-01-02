@@ -1,7 +1,6 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
-import * as React from "react";
 
 import { Button } from "@/PRIMITIVES/Button/Button";
 import { ButtonGroup } from "./ButtonGroup";

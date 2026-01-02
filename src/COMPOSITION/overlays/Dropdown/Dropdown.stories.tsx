@@ -1,8 +1,7 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { Copy, Edit, MoreVertical, Share, Trash2 } from "lucide-react";
-import * as React from "react";
+import { Copy, Edit, Share, Trash2 } from "lucide-react";
 
 import { Button } from "@/PRIMITIVES/Button";
 
