@@ -10,6 +10,8 @@ export * from "./Container";
 export * from "./Flex";
 export * from "./Grid";
 export * from "./Inset/Inset";
+export * from "./List/List.index";
+export * from "./ListItem/ListItem.index";
 export * from "./Row";
 export * from "./Stack";
 export * from "./Surface";

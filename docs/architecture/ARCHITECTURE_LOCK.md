@@ -1,8 +1,8 @@
 # 🔒 Tenerife UI Architecture Lock
 
-**Version:** 1.7  
+**Version:** 1.8  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-01 (CardBase second pass complete, Card analysis in progress)  
+**Last Updated:** 2026-01-02 (List System FINAL LOCK — CLOSED)  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -241,6 +241,8 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Container** | `src/COMPOSITION/layout/Container/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/CONTAINER_BASELINE_REPORT.md` |
 | **ContentShell** | `src/COMPOSITION/layout/ContentShell/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
 | **Divider** | `src/COMPOSITION/layout/Divider/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **List** | `src/COMPOSITION/layout/List/` | ✅ **LOCKED** | 2026-01-02 | `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md` |
+| **ListItem** | `src/COMPOSITION/layout/ListItem/` | ✅ **LOCKED** | 2026-01-02 | `docs/reports/audit/LISTITEM_BASELINE_REPORT.md` |
 | **Inset** | `src/COMPOSITION/layout/Inset/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
 | **PageHeader** | `src/COMPOSITION/layout/PageHeader/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
 | **Section** | `src/COMPOSITION/layout/Section/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
@@ -304,6 +306,124 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 **Allowed:** Bug fixes, documentation updates, performance improvements (without changing API/behavior)
 
 **Forbidden:** Changing `DEFAULT_OUTPUT_DIR`, adding bypass flags, weakening validation rules, weakening CI gates
+
+---
+
+## 🔒 List System Lock (CLOSED)
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Priority:** CRITICAL  
+**Topic Status:** **CLOSED** — No further changes allowed without explicit UNLOCK
+
+### Lock Scope
+
+The List System consists of the following **LOCKED** components:
+
+- **List** (`src/COMPOSITION/layout/List/`) — Structural list container
+- **ListItem** (`src/COMPOSITION/layout/ListItem/`) — Structural list item wrapper
+
+### Composition Dependencies
+
+The List System composes the following **LOCKED** components:
+
+- **Divider** (`src/COMPOSITION/layout/Divider/`) — Used for optional item separation
+- **Stack** (`src/COMPOSITION/layout/Stack/`) — Used for vertical flow and spacing
+- **Inset** (`src/COMPOSITION/layout/Inset/`) — May be used with List for padding
+
+### Explicit Exceptions
+
+The following components are **explicitly excluded** from List System enforcement:
+
+- **Timeline** (`src/PATTERNS/lists/Timeline/`) — Specialized chronological list pattern
+- **Stepper** (`src/COMPOSITION/navigation/stepper/`) — Navigation stepper pattern
+- **NavList** (`src/COMPOSITION/navigation/nav-list/`) — Navigation-specific list pattern
+- **DataList** (`src/PATTERNS/lists/DataList/`) — Data description list pattern
+- **Tree** (if exists) — Hierarchical tree structure pattern
+
+These components use specialized patterns that intentionally differ from the canonical List/ListItem components.
+
+### Affected Domains
+
+The List System is used in the following domains:
+
+- **NotificationCenter** — Uses List/ListItem for notification lists
+- **FileUpload** — Uses List/ListItem for file preview lists
+- **All vertical content collections** — Must use canonical List/ListItem components
+
+### Enforcement
+
+**ESLint Rule:** `tenerife-ui-architecture/no-ad-hoc-lists`  
+**Status:** ✅ **MANDATORY**  
+**Rule File:** `eslint-rules/no-ad-hoc-lists.ts`  
+**Configuration:** `eslint.config.mjs` (line 322)
+
+**Forbidden Patterns:**
+- Direct `<li>` usage outside ListItem component
+- `role="list"` on div/Box/Stack components (except exceptions)
+- `role="listitem"` on div/Box components (except exceptions)
+- Ad-hoc list rendering patterns that bypass canonical components
+
+**Reference Documentation:**
+- `docs/reference/FORBIDDEN_PATTERNS.md` — Complete list of forbidden patterns
+- `docs/architecture/decisions/ADR_list_usage_exceptions.md` — Exception documentation
+
+### Audit Reports
+
+The following audit reports document the List System implementation and usage:
+
+- **Baseline Reports:**
+  - `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md` — List component baseline (Pipeline 18A complete)
+  - `docs/reports/audit/LISTITEM_BASELINE_REPORT.md` — ListItem component baseline (Pipeline 18A complete)
+
+- **Usage Audit Reports:**
+  - `docs/reports/audit/LIST_USAGE_INVENTORY.md` — Complete inventory of list usage patterns
+  - `docs/reports/audit/LIST_USAGE_CLASSIFICATION.md` — Classification of findings (A/B/C/D)
+  - `docs/reports/audit/LIST_USAGE_ENFORCEMENT_VERIFICATION.md` — Final verification of enforcement
+
+- **Creation Reports:**
+  - `docs/reports/creation/List_CREATION_REPORT.md` — List component creation (Pipeline C0-C10)
+
+### Architectural Rules
+
+**Rule 1: No Alternative List Implementations**
+
+- ❌ **FORBIDDEN:** Creating alternative list components that duplicate List/ListItem functionality
+- ❌ **FORBIDDEN:** Using Stack/Box/div with role="list" for vertical lists (except exceptions)
+- ❌ **FORBIDDEN:** Direct `<li>` usage outside ListItem component (except exceptions)
+- ✅ **ALLOWED:** Using canonical List/ListItem components for all vertical lists
+- ✅ **ALLOWED:** Exceptions explicitly listed above (Timeline, Stepper, NavList, DataList, Tree)
+
+**Rule 2: List System is CLOSED**
+
+- The List System architecture is **CLOSED** and **immutable**
+- No API changes allowed without explicit UNLOCK
+- No new list components allowed without explicit UNLOCK
+- No alternative implementations allowed
+
+**Rule 3: Migration Requirement**
+
+- All existing vertical lists must use canonical List/ListItem components
+- Migration completed per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
+- ESLint rule enforces compliance going forward
+
+### Unlock Policy
+
+**Changes are allowed ONLY with EXPLICIT UNLOCK TUNG and require:**
+
+1. **Architectural Justification** — Why the change is architecturally necessary
+2. **Impact Analysis** — Analysis of impact on existing codebase
+3. **Migration Plan** — Plan for migrating existing usage if API changes
+
+**Unlock is reserved for:** Critical architectural changes that cannot be accommodated within the existing canonical List System model.
+
+### Final Verdict
+
+**LIST SYSTEM — CLOSED**
+
+The List System is formally locked as a closed architectural topic. All vertical lists must use the canonical List/ListItem components. No alternative implementations are allowed. ESLint enforcement is mandatory and prevents violations.
+
+---
 
 **Key Architectural Decisions (EmptyState):**
 
@@ -619,7 +739,53 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Accessibility:** Native HTML list semantics are correctly announced by screen readers, ARIA attributes correctly passed through
 - **Pipeline Outcome:** Component validated by Pipeline 18A, no changes required, fully compliant with all architectural standards
 
-**Key Architectural Decisions (List):**
+**Key Architectural Decisions (List - COMPOSITION/layout):**
+
+- **Structural List Container:** Composes Stack for vertical flow and spacing, reuses Divider for optional item separation
+- **Polymorphic Element Support:** Supports ul/ol/div via `as` prop for semantic HTML flexibility
+- **Optional Divider Injection:** `divided` prop injects Divider between items (not after last item)
+- **Token Compliance:** ✅ 100% (spacing tokens via Stack composition, color tokens via Divider)
+- **No CVA Required:** Correctly does not use CVA per Decision Matrix (no token-driven axes: no variant, no size, no state)
+- **Semantic HTML:** Uses ul/ol/div with role="list" for div elements (Chromium accessibility)
+- **Motion:** NO MOTION BY DESIGN (static container)
+- **Foundation Composition:** Stack (spacing, layout), Divider (visual separation)
+- **No Domain Semantics:** Structural only, no content styling
+- **Pipeline:** Component Creation Pipeline C0-C10 complete (2026-01-01), Pipeline 18A complete (2026-01-02)
+- **Creation Report:** `docs/reports/creation/List_CREATION_REPORT.md`
+- **Audit Report:** `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md`
+- **Pipeline 18A Outcome:** Component already in excellent shape - all quality checks passed, no fixes required. Full compliance with architectural standards verified.
+
+**Key Architectural Decisions (ListItem - COMPOSITION/layout):**
+
+- **Structural List Item Wrapper:** Semantic li/div elements with interactive/disabled states
+- **Polymorphic Element Support:** Supports li/div via `as` prop for semantic HTML flexibility
+- **Interactive Variant:** Hover transition and focus-visible ring via tokenCVA
+- **Disabled Variant:** Opacity and pointer-events-none for disabled state
+- **Alignment Prop:** start/center for flexbox alignment (explicit `ListItemAlign` type)
+- **Token Compliance:** ✅ 100% (tokenCVA variants, Tailwind utilities)
+- **Motion:** ADD MOTION (interactive variant uses transition-colors)
+- **Reduced Motion Support:** transition-colors respects prefers-reduced-motion
+- **Accessibility:** role="listitem" added for div elements
+- **No Domain Semantics:** Structural only, no content styling
+- **Type System:** Explicit union types (`ListItemAs`, `ListItemAlign`), CVA type constraints (`satisfies Record<Type, string>`)
+- **CVA Compliance:** tokenCVA with canonical structure (variants inline, type constraints)
+- **Pipeline:** Component Creation Pipeline C0-C10 complete (2026-01-01), Pipeline 18A complete (2026-01-01)
+- **Audit Report:** `docs/reports/audit/LISTITEM_BASELINE_REPORT.md`
+
+**Key Architectural Decisions (List System - FINAL LOCK):**
+
+- **System Status:** ✅ **CLOSED** — List System is formally locked as a closed architectural topic (2026-01-02)
+- **Components Locked:** List (COMPOSITION/layout) and ListItem (COMPOSITION/layout) are LOCKED (FINAL LOCK)
+- **No Alternative Implementations:** Creating alternative list components that duplicate List/ListItem functionality is FORBIDDEN
+- **Enforcement:** ESLint rule `no-ad-hoc-lists` is MANDATORY and prevents violations
+- **Migration Complete:** All existing vertical lists migrated to canonical List/ListItem components per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
+- **Explicit Exceptions:** Timeline, Stepper, NavList, DataList, Tree are explicitly excluded from enforcement
+- **Composition Dependencies:** List System composes Divider, Stack, and Inset (all LOCKED)
+- **Affected Domains:** NotificationCenter, FileUpload, and all vertical content collections use canonical components
+- **Unlock Policy:** Changes require EXPLICIT UNLOCK TUNG with architectural justification, impact analysis, and migration plan
+- **Final Verdict:** LIST SYSTEM — CLOSED (no further changes allowed without explicit UNLOCK)
+
+**Key Architectural Decisions (List - PATTERNS/lists):**
 
 - **Simple List Display Pattern:** Component is intentionally simple, no compound component pattern needed (unlike DataList which uses compound pattern for flexibility)
 - **Token Compliance:** LIST_TOKENS file created, all raw Tailwind classes replaced with tokens (100% token compliance achieved)
@@ -1170,6 +1336,22 @@ Any token system modifications require:
 
 ## 🔄 Version History
 
+- **v1.8** (2026-01-02): List System FINAL LOCK — CLOSED
+  - List System formally locked as closed architectural topic
+  - List and ListItem components changed from PROCESS LOCKED to LOCKED (FINAL LOCK)
+  - Added List System Lock section with complete documentation:
+    - Lock scope (List, ListItem components)
+    - Composition dependencies (Divider, Stack, Inset)
+    - Explicit exceptions (Timeline, Stepper, NavList, DataList, Tree)
+    - Affected domains (NotificationCenter, FileUpload, all vertical content collections)
+    - Enforcement (ESLint rule `no-ad-hoc-lists` is MANDATORY)
+    - Audit reports references (baseline, usage, creation reports)
+    - Architectural rules (no alternative implementations, CLOSED status, migration requirement)
+    - Unlock policy (requires EXPLICIT UNLOCK TUNG)
+  - Updated LAYOUT_AUTHORITY.md with List System Lock Status section
+  - Final verdict: LIST SYSTEM — CLOSED
+  - Lock Date: 2026-01-02
+
 - **v1.12** (2025-12-28): Gradient Tokens Fixes
   - Fixed `GRADIENT_TOKENS.ring.subtle` token: replaced `--muted` (background color) with `--muted-foreground` (text color) for proper visibility
   - Updated Storybook demo for `glass.light` and `glass.dark`: added dark background (`from-gray-900 via-gray-800 to-gray-900`) for better visibility in Storybook gallery
@@ -1411,8 +1593,8 @@ New functionality must be built as **extensions** that compose foundation compon
 ---
 
 **Status:** ✅ **LOCKED** (Foundation CLOSED)  
-**Version:** 1.12  
+**Version:** 1.8  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-28  
+**Last Updated:** 2026-01-02 (List System FINAL LOCK — CLOSED)  
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable)

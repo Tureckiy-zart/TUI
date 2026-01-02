@@ -600,7 +600,59 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Breaking Changes:** Variant names changed (flat→default, raised→elevated, outline→outlined, sunken→filled, subtle→subtle) per VARIANTS_SIZE_CANON
     - **Audit Report:** `docs/reports/audit/SURFACE_BASELINE_REPORT.md`
 
-27. **Footer** - `src/COMPOSITION/layout/Footer/Footer.tsx`
+27. **List** - `src/COMPOSITION/layout/List/List.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-02)
+    - **Creation Date:** 2026-01-01
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete), Pipeline 18A (Complete, 2026-01-02)
+    - **Creation Report:** `docs/reports/creation/List_CREATION_REPORT.md`
+    - **Audit Report:** `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md`
+    - **Type:** Extension Layer Layout Component - Structural List Container
+    - **Category:** layout (list structures)
+    - **Purpose:** Structural list container that composes Stack with optional Divider injection. Provides semantic ul/ol/div list structures without domain semantics.
+    - **Key Characteristics:**
+      - Composes Stack as base container (no duplication)
+      - Reuses Divider for item separation (no duplication)
+      - Polymorphic `as` prop (ul/ol/div) for semantic HTML
+      - Optional divider injection between items (divided prop)
+      - Divider inset and tone customization
+      - Token-driven spacing via Stack composition
+      - role="list" added for div elements (Chromium accessibility)
+      - Motion: NO MOTION BY DESIGN (static container)
+      - Token Compliance: ✅ 100% (spacing tokens via Stack, color tokens via Divider)
+      - NO domain semantics (structural only)
+    - **Foundation Composition:** Stack (spacing, layout), Divider (visual separation)
+    - **Use Cases:** Navigation lists, menu lists, notification lists, settings lists, data lists (without domain styling)
+    - Exports: `List`, `ListAs`, `ListProps`
+    - Types: `ListAs` ("ul" | "ol" | "div"), `ListProps`
+
+28. **ListItem** - `src/COMPOSITION/layout/ListItem/ListItem.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
+    - **Creation Date:** 2026-01-01
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete), Pipeline 18A (Steps 0-12 complete)
+    - **Creation Report:** `docs/reports/creation/ListItem_CREATION_REPORT.md`
+    - **Audit Report:** `docs/reports/audit/LISTITEM_BASELINE_REPORT.md`
+    - **Type:** Extension Layer Layout Component - Structural List Item
+    - **Category:** layout (list structures)
+    - **Purpose:** Structural list item wrapper with interactive/disabled states, no content styling. Provides semantic li/div elements with proper accessibility and state handling.
+    - **Key Characteristics:**
+      - Polymorphic `as` prop (li/div) for semantic HTML
+      - Interactive variant (hover transition, focus-visible ring)
+      - Disabled variant (opacity, pointer-events-none)
+      - Alignment prop (start/center for flexbox alignment)
+      - Token-driven motion (transition-colors for interactive variant)
+      - Reduced motion support (transition-colors respects prefers-reduced-motion)
+      - role="listitem" added for div elements (accessibility)
+      - Motion: ADD MOTION (interactive variant uses transition-colors)
+      - Token Compliance: ✅ 100% (tokenCVA variants, Tailwind utilities)
+      - NO domain semantics (structural only)
+    - **Foundation Composition:** None (standalone structural primitive)
+    - **Use Cases:** Interactive list items, navigation items, menu items, notification items, settings items
+    - Exports: `ListItem`, `listItemVariants`, `ListItemAlign`, `ListItemAs`, `ListItemProps`
+    - Types: `ListItemAs` ("li" | "div"), `ListItemAlign` ("start" | "center"), `ListItemProps`
+    - **Pipeline 18A:** All BLOCKERS resolved (type constraints added, explicit `ListItemAlign` type created)
+    - **Key Improvements:** CVA type constraints (`satisfies Record<Type, string>`), explicit union types, code quality improvements
+
+29. **Footer** - `src/COMPOSITION/layout/Footer/Footer.tsx`
     - **Status:** ✅ **ALLOWED** (Component Creation Pipeline C0-C10 Complete, 2025-12-30)
     - **Creation Date:** 2025-12-30
     - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
@@ -620,7 +672,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - **Use Cases:** Page footers, application footers, copyright sections, navigation links, metadata display
     - Exports: `Footer`, `FooterProps`
 
-28. **PageHeader** - `src/COMPOSITION/layout/PageHeader/PageHeader.tsx`
+30. **PageHeader** - `src/COMPOSITION/layout/PageHeader/PageHeader.tsx`
     - **Status:** ✅ **LOCKED** (Layout Extension Layer Lock, 2026-01-01)
     - **Creation Date:** 2026-01-01
     - **Lock Date:** 2026-01-01
@@ -635,7 +687,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
       - Uses Foundation components internally (Heading, Text, Breadcrumbs)
     - **Rule:** DO NOT modify, extend, or create alternatives. All modifications require explicit unlock procedure.
 
-29. **ContentShell** - `src/COMPOSITION/layout/ContentShell/ContentShell.tsx`
+31. **ContentShell** - `src/COMPOSITION/layout/ContentShell/ContentShell.tsx`
     - **Status:** ✅ **LOCKED** (Layout Extension Layer Lock, 2026-01-01)
     - **Creation Date:** 2026-01-01
     - **Lock Date:** 2026-01-01

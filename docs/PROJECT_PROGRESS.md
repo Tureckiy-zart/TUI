@@ -743,6 +743,94 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 
 ## Completed Tasks
 
+### List and ListItem Components - Component Creation Pipeline (C0-C10)
+
+- **Status:** ✅ completed
+- **Date Completed:** 2026-01-01
+- **Summary:** Successfully created List and ListItem structural layout components via Component Creation Pipeline (C0-C10). List composes Stack with optional Divider injection for semantic ul/ol/div lists. ListItem provides interactive/disabled states with tokenCVA variants. Both components are token-compliant (100%), Foundation-composing (Stack + Divider), and fully tested. List component completed Pipeline 18A (2026-01-02) and is PROCESS LOCKED. ListItem component completed Pipeline 18A (2026-01-01) and is PROCESS LOCKED.
+- **Key Achievements:**
+  - ✅ List component created (Stack + Divider composition, no duplication)
+  - ✅ ListItem component created (tokenCVA variants: interactive, disabled, align)
+  - ✅ Token compliance: 100% (spacing via Stack, colors via Divider, motion via transition-colors)
+  - ✅ Motion GAP resolved: List (NO MOTION BY DESIGN), ListItem (ADD MOTION - transition-colors)
+  - ✅ Foundation composition verified (Stack + Divider reused, not duplicated)
+  - ✅ Storybook stories created (List: 6 stories, ListItem: 5 stories)
+  - ✅ Tests created (List: 16 tests, ListItem: 21 tests)
+  - ✅ NO raw values detected (colors, spacing, motion)
+  - ✅ Old domain-specific List deleted from PATTERNS layer
+  - ✅ Exported from root barrel (src/index.ts)
+  - ✅ Registered in EXTENSION_STATE.md
+- **Files Created:**
+  - Created: `src/COMPOSITION/layout/List/List.tsx`
+  - Created: `src/COMPOSITION/layout/List/List.stories.tsx`
+  - Created: `src/COMPOSITION/layout/List/List.test.tsx`
+  - Created: `src/COMPOSITION/layout/List/List.index.ts`
+  - Created: `src/COMPOSITION/layout/ListItem/ListItem.tsx`
+  - Created: `src/COMPOSITION/layout/ListItem/ListItem.stories.tsx`
+  - Created: `src/COMPOSITION/layout/ListItem/ListItem.test.tsx`
+  - Created: `src/COMPOSITION/layout/ListItem/ListItem.index.ts`
+  - Created: `docs/reports/creation/List_CREATION_REPORT.md`
+  - Created: `docs/reports/creation/ListItem_CREATION_REPORT.md`
+- **Files Deleted:**
+  - Deleted: `src/PATTERNS/lists/List/List.tsx` (old domain-specific List)
+  - Deleted: `src/PATTERNS/lists/List/index.ts`
+  - Deleted: `src/FOUNDATION/tokens/components/list.ts` (old domain-specific tokens)
+- **Files Modified:**
+  - Updated: `src/COMPOSITION/layout/index.ts` (exports)
+  - Updated: `src/index.ts` (exports)
+  - Updated: `src/PATTERNS/lists/index.ts` (removed old List export)
+  - Updated: `docs/architecture/EXTENSION_STATE.md` (registered List and ListItem)
+  - Updated: `docs/PROJECT_PROGRESS.md` (this completion record)
+- **Creation Reports:**
+  - `docs/reports/creation/List_CREATION_REPORT.md`
+  - `docs/reports/creation/ListItem_CREATION_REPORT.md`
+- **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+- **Task:** TUNG_LIST_LISTITEM_COMPOSITION
+- **Notes:** List and ListItem are Extension layer structural layout components. Provide reusable list primitives without domain semantics. Compose Foundation components (Stack, Divider) without duplication.
+
+### ListItem Component - Pipeline 18A Refactoring
+
+- **Status:** ✅ completed
+- **Date Completed:** 2026-01-01
+- **Summary:** ListItem component successfully completed Pipeline 18A (Steps 0-12) and is now **PROCESS LOCKED**. All BLOCKER issues resolved: CVA type constraints added (`satisfies Record<Type, string>`), explicit `ListItemAlign` type created. Code quality improved: unused variable removed. Type system improvements: explicit union types, no CVA-derived types in public API. Component fully compliant with all architectural standards.
+- **Key Accomplishments:**
+  - ✅ STEP 0-12 completed (full Pipeline 18A execution)
+  - ✅ CVA compliance: Type constraints added to all variant maps (`satisfies Record<Type, string>`)
+  - ✅ Type system: Explicit `ListItemAlign` type created and used in `align` prop
+  - ✅ Code quality: Removed unused `Component` variable
+  - ✅ Tests: Comprehensive coverage (rendering, states, alignment, accessibility, motion compliance, edge cases)
+  - ✅ Storybook: Canonical stories (Default, States), use case stories (Interactive, Disabled, AlignmentVariants)
+  - ✅ A11Y: Validated (semantic roles, ARIA attributes, focus-visible styling)
+  - ✅ Lock propagation: ARCHITECTURE_LOCK.md, PROJECT_PROGRESS.md, EXTENSION_STATE.md, audit report updated
+- **Audit Report:** `docs/reports/audit/LISTITEM_BASELINE_REPORT.md`
+- **Lock Files Updated:** ARCHITECTURE_LOCK.md v1.8, PROJECT_PROGRESS.md, EXTENSION_STATE.md
+- **Component Details:** Structural list item wrapper (polymorphic li/div), tokenCVA variants (interactive, disabled, align), explicit union types (`ListItemAs`, `ListItemAlign`), 100% token compliance
+- **Commit Hash:** (pending commit)
+
+---
+
+### List Component - Pipeline 18A Refactoring
+
+- **Status:** ✅ completed
+- **Date Completed:** 2026-01-02
+- **Summary:** Successfully completed Pipeline 18A refactoring for List component. Component was already in excellent shape - all quality checks passed, no fixes required. Component demonstrates full compliance with architectural standards, comprehensive test coverage (13 tests), complete Storybook stories (6 stories), and WCAG 2.1 Level A accessibility compliance.
+- **Key Achievements:**
+  - ✅ All Pipeline 18A steps completed (STEP 0-12)
+  - ✅ Component quality verified (no structural issues, no code quality problems)
+  - ✅ Token compliance: 100% (uses Stack/Divider tokens via composition)
+  - ✅ Test coverage: Comprehensive (13 tests covering public behavior and edge cases)
+  - ✅ Storybook coverage: Complete (6 stories demonstrating all features)
+  - ✅ Accessibility: WCAG 2.1 Level A compliant (semantic HTML, ARIA attributes)
+  - ✅ Type system: Explicit types, no type leakage, correct polymorphic types
+  - ✅ Public API: Clear, minimal, well-documented
+  - ✅ Component marked as PROCESS LOCKED
+- **Audit Report:** `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md`
+- **Pipeline:** Pipeline 18A (Complete, 2026-01-02)
+- **Task:** TUNG_LIST_PIPELINE_18A
+- **Notes:** Component was already compliant with all architectural requirements. No refactoring was needed - component demonstrates excellent code quality and follows all best practices.
+
+---
+
 ### Heading Component - Foundation Lock (Pipeline 18A)
 
 - **Status:** ✅ completed
