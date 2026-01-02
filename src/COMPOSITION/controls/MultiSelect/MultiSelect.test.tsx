@@ -256,7 +256,9 @@ describe("MultiSelect", () => {
       );
 
       const removeButton = screen.getByLabelText("Remove Option 1");
-      expect(removeButton).toBeDisabled();
+      // span with role="button" uses aria-disabled instead of disabled attribute
+      expect(removeButton).toHaveAttribute("aria-disabled", "true");
+      expect(removeButton).toHaveAttribute("tabIndex", "-1");
     });
 
     it("renders disabled options correctly", async () => {
