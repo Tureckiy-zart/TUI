@@ -179,6 +179,44 @@ export interface SidebarLayoutProps extends Omit<React.HTMLAttributes<HTMLDivEle
    * ```
    */
   collapseAt?: CollapseBreakpoint;
+
+  /**
+   * ARIA label for the sidebar (<aside>) element
+   * Required when multiple SidebarLayout components are used on the same page
+   * to ensure unique landmarks
+   *
+   * @default undefined
+   *
+   * @example
+   * ```tsx
+   * <SidebarLayout
+   *   sidebar={<Nav />}
+   *   sidebarAriaLabel="Main navigation"
+   * >
+   *   <Content />
+   * </SidebarLayout>
+   * ```
+   */
+  sidebarAriaLabel?: string;
+
+  /**
+   * ARIA label for the main content (<main>) element
+   * Required when multiple SidebarLayout components are used on the same page
+   * to ensure unique landmarks
+   *
+   * @default undefined
+   *
+   * @example
+   * ```tsx
+   * <SidebarLayout
+   *   sidebar={<Nav />}
+   *   mainAriaLabel="Article content"
+   * >
+   *   <Content />
+   * </SidebarLayout>
+   * ```
+   */
+  mainAriaLabel?: string;
 }
 
 /**
@@ -200,6 +238,8 @@ const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
       sidebarWidth = "md",
       gap = "md",
       collapseAt,
+      sidebarAriaLabel,
+      mainAriaLabel,
       className,
       style,
       ...props
@@ -225,6 +265,10 @@ const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
       ...style,
     };
 
+    // Build accessibility attributes for sidebar and main
+    const sidebarProps = sidebarAriaLabel ? { "aria-label": sidebarAriaLabel } : {};
+    const mainProps = mainAriaLabel ? { "aria-label": mainAriaLabel } : {};
+
     // If collapseAt is provided, use responsive approach with two layouts
     if (collapseAt) {
       return (
@@ -237,25 +281,27 @@ const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
           <div className={`grid hidden ${collapseAt}:grid`} style={gridStyles}>
             {sidebarPosition === "left" ? (
               <>
-                <aside>{sidebar}</aside>
-                <main>{children}</main>
+                <aside {...sidebarProps}>{sidebar}</aside>
+                <main {...mainProps}>{children}</main>
               </>
             ) : (
               <>
-                <main>{children}</main>
-                <aside>{sidebar}</aside>
+                <main {...mainProps}>{children}</main>
+                <aside {...sidebarProps}>{sidebar}</aside>
               </>
             )}
           </div>
 
           {/* Below breakpoint: Stack layout (shown below breakpoint) */}
+          {/* Note: Both layouts use the same aria-label props to ensure consistency
+              and avoid duplicate landmark violations when both are in DOM */}
           <Stack
             direction="vertical"
             spacing={gap}
             className={cn("flex", "flex-col", `${collapseAt}:hidden`)}
           >
-            <aside>{sidebar}</aside>
-            <main>{children}</main>
+            <aside {...sidebarProps}>{sidebar}</aside>
+            <main {...mainProps}>{children}</main>
           </Stack>
         </Box>
       );
@@ -266,13 +312,13 @@ const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
       <Box ref={ref} className={cn("grid", className)} style={gridStyles} {...props}>
         {sidebarPosition === "left" ? (
           <>
-            <aside>{sidebar}</aside>
-            <main>{children}</main>
+            <aside {...sidebarProps}>{sidebar}</aside>
+            <main {...mainProps}>{children}</main>
           </>
         ) : (
           <>
-            <main>{children}</main>
-            <aside>{sidebar}</aside>
+            <main {...mainProps}>{children}</main>
+            <aside {...sidebarProps}>{sidebar}</aside>
           </>
         )}
       </Box>

@@ -159,7 +159,7 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     const direction = orientation === "vertical" ? "vertical" : "horizontal";
 
     // Explicitly exclude aria-orientation from props (not valid for role="group" per ARIA spec)
-     
+
     const { "aria-orientation": _ariaOrientation, ...restProps } = props;
 
     // Accessibility attributes

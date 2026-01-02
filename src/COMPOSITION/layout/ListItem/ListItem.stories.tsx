@@ -83,9 +83,11 @@ type Story = StoryObj<typeof ListItem>;
  * Demonstrates basic ListItem usage with simple text content.
  */
 export const Default: Story = {
-  args: {
-    children: "Static list item with text content",
-  },
+  render: () => (
+    <List as="ul">
+      <ListItem>Static list item with text content</ListItem>
+    </List>
+  ),
   parameters: {
     docs: {
       description: {
@@ -101,18 +103,19 @@ export const Default: Story = {
  * Demonstrates interactive ListItem with hover transition and focus-visible styling.
  */
 export const Interactive: Story = {
-  args: {
-    interactive: true,
-    children: (
-      <div className="flex items-center gap-3 p-3">
-        <div className="h-10 w-10 rounded-full bg-muted" />
-        <div>
-          <div className="font-medium">Interactive item</div>
-          <div className="text-sm text-muted-foreground">Hover to see transition</div>
+  render: () => (
+    <List as="ul">
+      <ListItem interactive>
+        <div className="flex items-center gap-3 p-3">
+          <div className="h-10 w-10 rounded-full bg-muted" />
+          <div>
+            <div className="font-medium">Interactive item</div>
+            <div className="text-sm text-muted-foreground">Hover to see transition</div>
+          </div>
         </div>
-      </div>
-    ),
-  },
+      </ListItem>
+    </List>
+  ),
   parameters: {
     docs: {
       description: {
@@ -129,18 +132,19 @@ export const Interactive: Story = {
  * Demonstrates disabled ListItem with reduced opacity and disabled pointer events.
  */
 export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: (
-      <div className="flex items-center gap-3 p-3">
-        <div className="h-10 w-10 rounded-full bg-muted" />
-        <div>
-          <div className="font-medium">Disabled item</div>
-          <div className="text-sm text-muted-foreground">This item is disabled</div>
+  render: () => (
+    <List as="ul">
+      <ListItem disabled>
+        <div className="flex items-center gap-3 p-3">
+          <div className="h-10 w-10 rounded-full bg-muted" />
+          <div>
+            <div className="font-medium">Disabled item</div>
+            <div className="text-sm text-muted-foreground">This item is disabled</div>
+          </div>
         </div>
-      </div>
-    ),
-  },
+      </ListItem>
+    </List>
+  ),
   parameters: {
     docs: {
       description: {
@@ -157,7 +161,7 @@ export const Disabled: Story = {
  */
 export const States: Story = {
   render: () => (
-    <List gap="md" divided>
+    <List as="ul" gap="md" divided>
       <ListItem>
         <div className="p-3">
           <div className="font-medium">Default state</div>
@@ -197,7 +201,7 @@ export const States: Story = {
  */
 export const AlignmentVariants: Story = {
   render: () => (
-    <List gap="lg" divided>
+    <List as="ul" gap="lg" divided>
       <ListItem align="start">
         <div className="flex gap-3">
           <div className="h-16 w-16 rounded-lg bg-muted" />
