@@ -7,15 +7,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 2026-01-02
+
+### Added
+
+- **New Form & Utility Components** added to the public API:
+  - **IconButton** — icon-only button variant built on top of Button
+  - **HelperText** — semantic helper text for form fields
+  - **ErrorText** — semantic error message component for validation feedback
+  - **FormGroup** — grouping component for related form controls
+  - **Switch** — toggle switch component for boolean inputs
+
+- **New Layout Components** for building structured page layouts:
+  - **List** and **ListItem** — canonical components for vertical lists
+  - **Divider** — visual separator with orientation and tone variants
+  - **Inline** — inline horizontal layout primitive
+  - **Inset** — padding utility for consistent inner spacing
+  - **Navbar** — top-level navigation bar component
+  - **Panel** — container component with padding, radius, and elevation variants
+  - **SidebarLayout** — layout with configurable sidebar
+  - **Spacer** — flexible spacing utility
+  - **StickyBar** — sticky container for persistent UI elements
+  - **ContentShell** — content wrapper for page layouts
+  - **PageHeader** — standardized page header component
+
+- **Overlay & Menu Components**:
+  - **Popover** — contextual overlay component (now exported from main entry)
+  - **Tooltip** — hover-based helper component (now exported from main entry)
+  - **Dropdown** — selection menu built on Popover
+  - **Menu** — menu system for navigation and action lists
+
+- **Accessibility & Interaction Utilities**:
+  - **VisuallyHidden** — screen reader–only utility
+  - **FocusTrap** — focus containment utility for overlays and modals
+  - **ButtonGroup** — grouping component for related buttons
+
+- **New Token Exports**:
+  - `PANEL_TOKENS`
+  - `DROPDOWN_TOKENS`
+  - `STICKYBAR_TOKENS`
+
+---
+
+### Fixed
+
+- **Exports**:
+  - Fixed missing exports for **Popover** and **Tooltip** from the main package entry.
+
+- **Accessibility**:
+  - Removed invalid `aria-orientation` usage in **ButtonGroup**.
+  - Improved contrast and visual clarity in **PriceRangeSlider**.
+
+- **TypeScript & Tests**:
+  - Fixed type errors in Storybook stories and tests.
+  - Resolved FocusTrap export path and type compatibility issues.
+  - Fixed nested button warnings and React `act()` test issues.
+
+- **Storybook**:
+  - Added `next/link` mock to prevent runtime errors.
+  - Improved story configuration and developer experience.
+
+---
+
 ### Changed
 
-- **List System FINAL LOCK**: List and ListItem components locked as closed architectural topic (2026-01-02)
-  - List (`src/COMPOSITION/layout/List/`) and ListItem (`src/COMPOSITION/layout/ListItem/`) changed from PROCESS LOCKED to LOCKED (FINAL LOCK)
-  - No alternative list implementations allowed - all vertical lists must use canonical List/ListItem components
-  - ESLint rule `no-ad-hoc-lists` is mandatory and prevents violations
-  - Explicit exceptions: Timeline, Stepper, NavList, DataList, Tree (specialized patterns)
-  - Migration complete: All existing vertical lists migrated to canonical components
-  - Unlock policy: Changes require EXPLICIT UNLOCK TUNG with architectural justification, impact analysis, and migration plan
+- **Canonical List Components**:
+  - `List` and `ListItem` are now the recommended components for all vertical lists.
+  - Existing internal list usages have been migrated to these components.
+
+- **Spinner Classification**:
+  - Spinner component is now categorized under **controls** instead of **overlays**.
+  - Public API remains unchanged — no breaking changes for consumers.
+
+- **Storybook Improvements**:
+  - Enhanced visual clarity and interaction feedback in Flex, Grid, and Stack stories.
+
+---
+
+### Internal
+
+- List system finalized as a closed architectural topic.
+- ESLint enforcement added to prevent ad-hoc list implementations.
+- Foundation lock sweep documentation finalized.
+- Internal refactoring and code quality improvements.
 
 ## [2.0.2] - 2025-12-30
 
@@ -29,20 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Motion API Naming (Canonical Cleanup)**:
-  - Renamed all Motion public API exports to remove `v2` suffix, reflecting canonical versionless API
-  - `motionV2Durations` → `motionDurations`
-  - `motionV2Easings` → `motionEasings`
-  - `motionV2Transitions` → `motionTransitions`
-  - `motionV2CSSVariables` → `motionCSSVariables`
-  - `motionV2TailwindConfig` → `motionTailwindConfig`
-  - `motionV2ReducedMotion` → `motionReducedMotion`
-  - `motionV2Fade` → `motionFade`
-  - `motionV2Scale` → `motionScale`
-  - `motionV2Slide` → `motionSlide`
-  - `motionV2Combined` → `motionCombined`
-  - **Reason:** Motion V1 is fully removed, Motion 2.x is LOCKED as canonical. Versioned naming is no longer needed.
-  - **Impact:** Import statements need to be updated. No behavior changes.
+- **Motion API**: Renamed Motion exports to remove `v2` suffix (e.g., `motionV2Durations` → `motionDurations`, `motionV2Easings` → `motionEasings`). Update import statements — no behavior changes.
 
 ### Added
 
@@ -59,30 +120,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
-- **Motion V1 Tokens Removed (Major 2.0.0)**:
-  - ❌ **BREAKING:** All Motion V1 tokens completely removed from codebase
-    - **Removed file:** `src/FOUNDATION/tokens/motion.ts`
-    - **Removed exports:** `durations`, `easings`, `transitions`, `keyframes`, `animations`, `springs`, `motionCSSVariables`, `tailwindMotionConfig`, `reducedMotion`
-    - **Removed types:** `Duration`, `Easing`, `Transition`, `Keyframe`, `Animation`, `Spring`
-  - ❌ **BREAKING:** Legacy CSS variable names removed
-    - Removed: `--duration-instant`, `--duration-fast`, `--duration-normal`, `--duration-slow`, etc.
-    - Removed: `--ease-in`, `--ease-out`, `--ease-in-out`, `--ease-bounce`, etc.
-    - Removed: `--transition-fast`, `--transition-normal`, `--transition-slow`, etc.
-    - Use V2 names instead: `--motion-duration-fast`, `--motion-easing-standard`, `--motion-transition-normal`
-  - **Use Motion V2 tokens instead:**
-    - `durations` → `motionV2Durations`
-    - `easings` → `motionV2Easings`
-    - `transitions` → `motionV2Transitions`
-    - `motionCSSVariables` → `motionV2CSSVariables`
-    - `tailwindMotionConfig` → `motionV2TailwindConfig`
-    - `reducedMotion` → `motionV2ReducedMotion`
-  - **Reason:** Motion V2 is now the ONLY canonical motion system. Simplified architecture, single source of truth.
-  - **Severity:** HIGH (API removal)
-  - **Migration Difficulty:** MEDIUM (import changes required, API surface reduced)
-  - **Backward Compatibility:** ❌ NOT PROVIDED (by design - major version)
-  - **CI Guard:** `pnpm check:motion-v1` prevents V1 reintroduction
-  - **Migration Guide:** See [Motion V1 Inventory](./docs/reports/audit/MOTION_V1_INVENTORY.md) for migration details
-  - **Version Requirement:** MAJOR bump (v1.x → v2.0.0)
+- **Motion V1 Tokens Removed**: All Motion V1 tokens and CSS variables have been removed. Use Motion V2 tokens instead:
+  - Exports: `durations` → `motionV2Durations`, `easings` → `motionV2Easings`, `transitions` → `motionV2Transitions`, etc.
+  - CSS variables: `--duration-fast` → `--motion-duration-fast`, `--ease-in` → `--motion-easing-standard`, etc.
+  - See [Motion V1 Inventory](./docs/reports/audit/MOTION_V1_INVENTORY.md) for complete migration guide.
 
 - **Textarea Component API Migration (Foundation Pipeline 18A)**:
   - ❌ **BREAKING:** `state` prop removed - Use native HTML attributes instead
@@ -111,14 +152,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `Text` component `variant` prop (deprecated in v1.x)
 - `Stack`, `Row`, and `Column` components `gap` prop (deprecated in v1.x)
-- **Motion V1 tokens** - All Motion V1 exports removed. Use Motion V2 tokens:
-  - `durations` → `motionV2Durations`
-  - `easings` → `motionV2Easings`
-  - `transitions` → `motionV2Transitions`
-  - `keyframes`, `animations`, `springs` → use Motion V2 keyframes/presets
-  - `motionCSSVariables` → `motionV2CSSVariables`
-  - `tailwindMotionConfig` → `motionV2TailwindConfig`
-  - `reducedMotion` → `motionV2ReducedMotion`
+- Motion V1 tokens (see Breaking Changes above)
 
 ## [1.2.0] - 2025-12-18
 
@@ -140,96 +174,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Foundation enforcement is now technically impossible to bypass without explicit rule changes
 - No manual review needed to catch violations - CI will fail on any regression attempt
-
-## [1.0.11] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.10] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.9] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.6] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.5] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
 
 ## [1.0.4] - 2025-12-10
 
