@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -138,7 +138,9 @@ describe("FileUpload", () => {
 
       // Trigger change event manually to bypass browser accept filtering in tests
       const changeEvent = new Event("change", { bubbles: true });
-      input.dispatchEvent(changeEvent);
+      await act(async () => {
+        input.dispatchEvent(changeEvent);
+      });
 
       await waitFor(
         () => {
@@ -249,7 +251,9 @@ describe("FileUpload", () => {
     it("file list has semantic HTML with role=list", async () => {
       const file = createMockFile("test.jpg", 1000, "image/jpeg");
 
-      render(<FileUpload value={[file]} onFileSelect={() => {}} />);
+      await act(async () => {
+        render(<FileUpload value={[file]} onFileSelect={() => {}} />);
+      });
 
       const list = screen.getByRole("list");
       expect(list).toBeInTheDocument();
@@ -353,14 +357,16 @@ describe("FileUpload", () => {
       const file = createMockFile("test.jpg", 1000, "image/jpeg");
       const handleFileRemove = vi.fn();
 
-      render(
-        <FileUpload
-          disabled
-          value={[file]}
-          onFileRemove={handleFileRemove}
-          onFileSelect={() => {}}
-        />,
-      );
+      await act(async () => {
+        render(
+          <FileUpload
+            disabled
+            value={[file]}
+            onFileRemove={handleFileRemove}
+            onFileSelect={() => {}}
+          />,
+        );
+      });
 
       const removeButton = screen.getByLabelText(/remove test\.jpg/i);
       expect(removeButton).toBeDisabled();

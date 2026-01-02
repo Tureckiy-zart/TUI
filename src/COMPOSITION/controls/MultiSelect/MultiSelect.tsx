@@ -259,51 +259,67 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
 
     // Default tag renderer
     const defaultRenderTag = React.useCallback(
-      (option: MultiSelectOption, onRemove: () => void) => (
-        <span
-          key={option.value}
-          className={cn(
-            CHIP_TOKENS.layout,
-            CHIP_TOKENS.padding.horizontal,
-            CHIP_TOKENS.padding.vertical,
-            CHIP_TOKENS.fontSize,
-            CHIP_TOKENS.fontWeight,
-            CHIP_TOKENS.radius.md,
-            CHIP_TOKENS.border,
-            CHIP_TOKENS.variant.outline.border,
-            CHIP_TOKENS.variant.outline.text,
-            CHIP_TOKENS.variant.outline.hover,
-            CHIP_TOKENS.transition.colors,
-            CHIP_TOKENS.variant.outline.background,
-          )}
-        >
-          {option.label}
-          <button
-            type="button"
-            onPointerDown={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onRemove();
-            }}
-            disabled={disabled}
-            aria-label={`Remove ${option.label}`}
+      (option: MultiSelectOption, onRemove: () => void) => {
+        const handleRemove = (
+          e: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>,
+        ) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onRemove();
+        };
+
+        const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+          if (e.key === "Enter" || e.key === " ") {
+            handleRemove(e);
+          }
+        };
+
+        return (
+          <span
+            key={option.value}
             className={cn(
-              "inline-flex items-center justify-center",
-              CHIP_TOKENS.removeButton.size,
-              CHIP_TOKENS.removeButton.padding,
-              CHIP_TOKENS.removeButton.hover,
-              CHIP_TOKENS.removeButton.transition,
-              CHIP_TOKENS.radius.pill,
-              CHIP_TOKENS.focus.outline,
-              CHIP_TOKENS.focus.ring,
-              CHIP_TOKENS.disabled.opacity,
-              CHIP_TOKENS.disabled.cursor,
+              CHIP_TOKENS.layout,
+              CHIP_TOKENS.padding.horizontal,
+              CHIP_TOKENS.padding.vertical,
+              CHIP_TOKENS.fontSize,
+              CHIP_TOKENS.fontWeight,
+              CHIP_TOKENS.radius.md,
+              CHIP_TOKENS.border,
+              CHIP_TOKENS.variant.outline.border,
+              CHIP_TOKENS.variant.outline.text,
+              CHIP_TOKENS.variant.outline.hover,
+              CHIP_TOKENS.transition.colors,
+              CHIP_TOKENS.variant.outline.background,
             )}
           >
-            <X className={CHIP_TOKENS.removeButton.size} />
-          </button>
-        </span>
-      ),
+            {option.label}
+            <span
+              role="button"
+              tabIndex={disabled ? -1 : 0}
+              aria-label={`Remove ${option.label}`}
+              aria-disabled={disabled}
+              onPointerDown={handleRemove}
+              onKeyDown={handleKeyDown}
+              className={cn(
+                "inline-flex items-center justify-center",
+                CHIP_TOKENS.removeButton.size,
+                CHIP_TOKENS.removeButton.padding,
+                CHIP_TOKENS.removeButton.hover,
+                CHIP_TOKENS.removeButton.transition,
+                CHIP_TOKENS.radius.pill,
+                CHIP_TOKENS.focus.outline,
+                CHIP_TOKENS.focus.ring,
+                CHIP_TOKENS.disabled.opacity,
+                CHIP_TOKENS.disabled.cursor,
+                disabled && "pointer-events-none cursor-not-allowed",
+                !disabled && "cursor-pointer",
+              )}
+            >
+              <X className={CHIP_TOKENS.removeButton.size} />
+            </span>
+          </span>
+        );
+      },
       [disabled],
     );
 
