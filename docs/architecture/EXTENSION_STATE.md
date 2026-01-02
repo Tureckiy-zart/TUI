@@ -1048,14 +1048,14 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Exports: `Dialog`, `DialogBody`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogRoot`, `DialogTitle`
     - Types: `DialogBodyProps`, `DialogDescriptionProps`, `DialogFooterProps`, `DialogHeaderProps`, `DialogProps`, `DialogTitleProps`
 
-33. **Spinner** - `src/COMPOSITION/overlays/Spinner/Spinner.tsx`
+33. **Spinner** - `src/COMPOSITION/controls/Spinner/Spinner.tsx`
     - **Status:** ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
     - **Creation Date:** 2025-12-28
-    - **Last Updated:** 2025-12-28 (Ring variant removed, subtle tone fixed)
+    - **Last Updated:** 2026-01-02 (Moved from overlays/ to controls/)
     - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
     - **Creation Report:** `docs/reports/creation/SPINNER_CREATION_REPORT.md`
     - **Type:** Extension Layer Component - Visual Feedback
-    - **Category:** overlays (loading feedback component)
+    - **Category:** controls (visual feedback component)
     - **Purpose:** Animated loading indicator for visual feedback during async operations
     - **Key Characteristics:**
       - Multiple visual variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple)

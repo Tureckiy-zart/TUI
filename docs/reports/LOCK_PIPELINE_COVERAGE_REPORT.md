@@ -148,7 +148,7 @@ Components created via Component Creation Pipeline (NOT Pipeline 18A refactor):
 | MultiSelect | `src/COMPOSITION/controls/MultiSelect/` | 2025-12-28 | ✅ | CREATED |
 | PageHeader | `src/COMPOSITION/layout/PageHeader/` | 2026-01-01 | ✅ | CREATED |
 | ContentShell | `src/COMPOSITION/layout/ContentShell/` | 2026-01-01 | ✅ | CREATED |
-| Spinner | `src/COMPOSITION/overlays/Spinner/` | 2025-12-28 | ✅ | CREATED |
+| Spinner | `src/COMPOSITION/controls/Spinner/` | 2025-12-28 | ✅ | CREATED |
 
 **Note:** Components created via C0-C10 Pipeline have creation reports in `docs/reports/creation/` instead of baseline reports in `docs/reports/audit/`.
 

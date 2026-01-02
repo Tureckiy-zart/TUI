@@ -4301,10 +4301,10 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **Spinner** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
   - Component: Spinner
   - Type: Extension Layer Component - Visual Feedback
-  - Category: overlays (loading feedback component)
-  - Location: `src/COMPOSITION/overlays/Spinner/Spinner.tsx`
+  - Category: controls (visual feedback component)
+  - Location: `src/COMPOSITION/controls/Spinner/Spinner.tsx`
   - Status: ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete)
-  - Last Updated: 2025-12-28 (Ring variant removed, subtle tone fixed with CSS variable fallback)
+  - Last Updated: 2026-01-02 (Moved from overlays/ to controls/)
   - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
   - Creation Report: `docs/reports/creation/SPINNER_CREATION_REPORT.md`
   - Features:

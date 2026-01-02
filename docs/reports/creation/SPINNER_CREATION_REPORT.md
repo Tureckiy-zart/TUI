@@ -2,11 +2,11 @@
 
 **Pipeline:** Component Creation Pipeline (C0-C10)  
 **Date Created:** 2025-12-28  
-**Last Updated:** 2025-12-28  
+**Last Updated:** 2026-01-02 (Moved from overlays/ to controls/)  
 **Component Name:** Spinner  
 **Exported Name:** `Spinner`  
 **Layer:** Extension  
-**Category:** overlays
+**Category:** controls
 
 ## Pipeline Progress Tracker
 
@@ -51,7 +51,7 @@
 **Notes:**
 - Classified as: Visual Component / Feedback / Loading Indicator
 - Role: Circular animated loading indicator for visual feedback during async operations
-- Category: overlays (loading feedback component)
+- Category: controls (visual feedback component)
 - Justification: Essential feedback component for loading states across all use cases (inline loading in buttons/inputs, page loading, data loading in tables/lists, overlay loading over content)
 
 **Changes:** None  
@@ -182,7 +182,7 @@ export interface SpinnerProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
 **Blocking:** no  
 **Notes:**
 - Scaffold generator executed successfully
-- All files created in `src/COMPOSITION/overlays/Spinner/`
+- All files created in `src/COMPOSITION/controls/Spinner/` (moved from overlays/ on 2026-01-02)
 - Generated scaffold structure reviewed
 
 **Changes:** Scaffold files created  
@@ -311,7 +311,7 @@ export interface SpinnerProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
 **Outcome:** Complete  
 **Blocking:** no  
 **Notes:**
-- Component exported from `src/COMPOSITION/overlays/index.ts` (verified)
+- Component exported from `src/COMPOSITION/controls/index.ts` (verified, moved from overlays/)
 - Component exported from `src/index.ts` (verified)
 - Types exported: Spinner, SpinnerEasing, SpinnerLabelPosition, SpinnerProps, SpinnerSize, SpinnerTone, SpinnerVariant (verified)
 - Component added to `docs/architecture/EXTENSION_STATE.md` (Overlay Components section, entry #33)

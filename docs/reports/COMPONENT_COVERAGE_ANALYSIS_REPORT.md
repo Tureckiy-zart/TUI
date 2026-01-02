@@ -126,7 +126,7 @@ This report analyzes the library's component coverage against a canonical minima
 - ✅ `Alert` — `src/PRIMITIVES/Alert/`
 - ✅ `Badge` — `src/PRIMITIVES/Badge/`
 - ✅ `Progress` — `src/PRIMITIVES/Progress/`
-- ✅ `Spinner` — `src/COMPOSITION/overlays/Spinner/`
+- ✅ `Spinner` — `src/COMPOSITION/controls/Spinner/`
 - ✅ `Skeleton` — `src/PRIMITIVES/Skeleton/`
 
 **Coverage:** 100% (6/6)

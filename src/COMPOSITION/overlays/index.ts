@@ -121,17 +121,6 @@ export {
   type ContextMenuTriggerProps,
 } from "./ContextMenu";
 
-// Spinner
-export {
-  Spinner,
-  type SpinnerEasing,
-  type SpinnerLabelPosition,
-  type SpinnerProps,
-  type SpinnerSize,
-  type SpinnerTone,
-  type SpinnerVariant,
-} from "./Spinner/Spinner";
-
 // Accordion
 export {
   Accordion,

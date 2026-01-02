@@ -463,6 +463,17 @@ export {
   type AspectRatioProps,
 } from "./COMPOSITION/controls/AspectRatio";
 
+// Spinner component (visual feedback, loading indicator)
+export {
+  Spinner,
+  type SpinnerEasing,
+  type SpinnerLabelPosition,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerTone,
+  type SpinnerVariant,
+} from "./COMPOSITION/controls/Spinner/Spinner";
+
 // VisuallyHidden component (DX/A11y utility, non-visual)
 export {
   VisuallyHidden,
@@ -582,13 +593,6 @@ export {
   type DialogTitleProps,
   Portal,
   type PortalProps,
-  Spinner,
-  type SpinnerEasing,
-  type SpinnerLabelPosition,
-  type SpinnerProps,
-  type SpinnerSize,
-  type SpinnerTone,
-  type SpinnerVariant,
   Toast,
   type ToastAction,
   type ToastData,
