@@ -5,44 +5,116 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+> **NO QUICK FIXES POLICY**
+>
+> Do not edit versioned entries manually.
+> All released sections are immutable.
+>
+> All changes must go through the automated release process
+> defined in `docs/RELEASE_PROCESS.md`.
+
 ## [Unreleased]
+
+**Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
+
+## [2.0.4]
+
+**Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
+
+### Added
+
+- **New Form & Utility Components** added to the public API:
+  - **IconButton** — icon-only button variant built on top of Button
+  - **HelperText** — semantic helper text for form fields
+  - **ErrorText** — semantic error message component for validation feedback
+  - **FormGroup** — grouping component for related form controls
+  - **Switch** — toggle switch component for boolean inputs
+
+- **New Layout Components** for building structured page layouts:
+  - **List** and **ListItem** — canonical components for vertical lists
+  - **Divider** — visual separator with orientation and tone variants
+  - **Inline** — inline horizontal layout primitive
+  - **Inset** — padding utility for consistent inner spacing
+  - **Navbar** — top-level navigation bar component
+  - **Panel** — container component with padding, radius, and elevation variants
+  - **SidebarLayout** — layout with configurable sidebar
+  - **Spacer** — flexible spacing utility
+  - **StickyBar** — sticky container for persistent UI elements
+  - **ContentShell** — content wrapper for page layouts
+  - **PageHeader** — standardized page header component
+
+- **Overlay & Menu Components**:
+  - **Popover** — contextual overlay component (now exported from main entry)
+  - **Tooltip** — hover-based helper component (now exported from main entry)
+  - **Dropdown** — selection menu built on Popover
+  - **Menu** — menu system for navigation and action lists
+
+- **Accessibility & Interaction Utilities**:
+  - **VisuallyHidden** — screen reader–only utility
+  - **FocusTrap** — focus containment utility for overlays and modals
+  - **ButtonGroup** — grouping component for related buttons
+
+- **New Token Exports**:
+  - `PANEL_TOKENS`
+  - `DROPDOWN_TOKENS`
+  - `STICKYBAR_TOKENS`
+
+### Fixed
+
+- **Exports**:
+  - Fixed missing exports for **Popover** and **Tooltip** from the main package entry.
+
+- **Accessibility**:
+  - Removed invalid `aria-orientation` usage in **ButtonGroup**.
+  - Improved contrast and visual clarity in **PriceRangeSlider**.
+
+- **TypeScript & Tests**:
+  - Fixed type errors in Storybook stories and tests.
+  - Resolved FocusTrap export path and type compatibility issues.
+  - Fixed nested button warnings and React `act()` test issues.
+
+- **Storybook**:
+  - Added `next/link` mock to prevent runtime errors.
+  - Improved story configuration and developer experience.
 
 ### Changed
 
-- **List System FINAL LOCK**: List and ListItem components locked as closed architectural topic (2026-01-02)
-  - List (`src/COMPOSITION/layout/List/`) and ListItem (`src/COMPOSITION/layout/ListItem/`) changed from PROCESS LOCKED to LOCKED (FINAL LOCK)
-  - No alternative list implementations allowed - all vertical lists must use canonical List/ListItem components
-  - ESLint rule `no-ad-hoc-lists` is mandatory and prevents violations
-  - Explicit exceptions: Timeline, Stepper, NavList, DataList, Tree (specialized patterns)
-  - Migration complete: All existing vertical lists migrated to canonical components
-  - Unlock policy: Changes require EXPLICIT UNLOCK TUNG with architectural justification, impact analysis, and migration plan
+- **Canonical List Components**:
+  - `List` and `ListItem` are now the recommended components for all vertical lists.
+  - Existing internal list usages have been migrated to these components.
 
-## [2.0.2] - 2025-12-30
+- **Spinner Classification**:
+  - Spinner component is now categorized under **controls** instead of **overlays**.
+  - Public API remains unchanged — no breaking changes for consumers.
+
+- **Storybook Improvements**:
+  - Enhanced visual clarity and interaction feedback in Flex, Grid, and Stack stories.
+
+## [2.0.3] - 2025-12-31
+
+### Changed
+
+- Patch release with internal improvements and bug fixes.
+
+## [2.0.1] - 2025-12-29
+
+### Changed
+
+- Patch release with internal improvements and bug fixes.
+
+## [2.0.0] - 2025-12-28
 
 ### Fixed
 
 - **Next.js App Router Compatibility**: Fixed Container and Section components to ensure they work correctly in Next.js App Router
-  - Verified that Container and Section render native HTML elements (`<div>` and `<section>`) without Html wrappers from `next/document`
+  - Container and Section now render native HTML elements (`<div>` and `<section>`) without Html wrappers from `next/document`
   - Added CI guard script (`check:next-document`) to prevent future imports from `next/document`
   - Added ESLint rule to prevent `next/document` imports in UI library source code
   - **Impact:** Container and Section components are now fully compatible with Next.js App Router Server Components and Client Components
 
 ### Changed
 
-- **Motion API Naming (Canonical Cleanup)**:
-  - Renamed all Motion public API exports to remove `v2` suffix, reflecting canonical versionless API
-  - `motionV2Durations` → `motionDurations`
-  - `motionV2Easings` → `motionEasings`
-  - `motionV2Transitions` → `motionTransitions`
-  - `motionV2CSSVariables` → `motionCSSVariables`
-  - `motionV2TailwindConfig` → `motionTailwindConfig`
-  - `motionV2ReducedMotion` → `motionReducedMotion`
-  - `motionV2Fade` → `motionFade`
-  - `motionV2Scale` → `motionScale`
-  - `motionV2Slide` → `motionSlide`
-  - `motionV2Combined` → `motionCombined`
-  - **Reason:** Motion V1 is fully removed, Motion 2.x is LOCKED as canonical. Versioned naming is no longer needed.
-  - **Impact:** Import statements need to be updated. No behavior changes.
+- **Motion API**: Renamed Motion exports to remove `v2` suffix (e.g., `motionV2Durations` → `motionDurations`, `motionV2Easings` → `motionEasings`). Update import statements — no behavior changes.
 
 ### Added
 
@@ -59,177 +131,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
-- **Motion V1 Tokens Removed (Major 2.0.0)**:
-  - ❌ **BREAKING:** All Motion V1 tokens completely removed from codebase
-    - **Removed file:** `src/FOUNDATION/tokens/motion.ts`
-    - **Removed exports:** `durations`, `easings`, `transitions`, `keyframes`, `animations`, `springs`, `motionCSSVariables`, `tailwindMotionConfig`, `reducedMotion`
-    - **Removed types:** `Duration`, `Easing`, `Transition`, `Keyframe`, `Animation`, `Spring`
-  - ❌ **BREAKING:** Legacy CSS variable names removed
-    - Removed: `--duration-instant`, `--duration-fast`, `--duration-normal`, `--duration-slow`, etc.
-    - Removed: `--ease-in`, `--ease-out`, `--ease-in-out`, `--ease-bounce`, etc.
-    - Removed: `--transition-fast`, `--transition-normal`, `--transition-slow`, etc.
-    - Use V2 names instead: `--motion-duration-fast`, `--motion-easing-standard`, `--motion-transition-normal`
-  - **Use Motion V2 tokens instead:**
-    - `durations` → `motionV2Durations`
-    - `easings` → `motionV2Easings`
-    - `transitions` → `motionV2Transitions`
-    - `motionCSSVariables` → `motionV2CSSVariables`
-    - `tailwindMotionConfig` → `motionV2TailwindConfig`
-    - `reducedMotion` → `motionV2ReducedMotion`
-  - **Reason:** Motion V2 is now the ONLY canonical motion system. Simplified architecture, single source of truth.
-  - **Severity:** HIGH (API removal)
-  - **Migration Difficulty:** MEDIUM (import changes required, API surface reduced)
-  - **Backward Compatibility:** ❌ NOT PROVIDED (by design - major version)
-  - **CI Guard:** `pnpm check:motion-v1` prevents V1 reintroduction
-  - **Migration Guide:** See [Motion V1 Inventory](./docs/reports/audit/MOTION_V1_INVENTORY.md) for migration details
-  - **Version Requirement:** MAJOR bump (v1.x → v2.0.0)
+- **Motion V1 Tokens Removed**: All Motion V1 tokens and CSS variables have been removed. Use Motion tokens instead:
+  - Exports: `durations` → `motionDurations`, `easings` → `motionEasings`, `transitions` → `motionTransitions`
+  - CSS variables: `--duration-fast` → `--motion-duration-fast`, `--ease-in` → `--motion-easing-standard`
+  - See [Motion V1 Inventory](./docs/reports/audit/MOTION_V1_INVENTORY.md) for complete migration guide.
 
-- **Textarea Component API Migration (Foundation Pipeline 18A)**:
-  - ❌ **BREAKING:** `state` prop removed - Use native HTML attributes instead
-    - `state="disabled"` → `disabled={true}` (native HTML attribute)
-    - `state="error"` → `aria-invalid={true}` (native ARIA attribute)
-    - `state="success"` → removed (validation feedback should be external)
-    - `state="default"` → removed (implicit, no prop needed)
-  - ❌ **BREAKING:** Variant dictionary changed from InteractiveVariant to SurfaceVariant
-    - `variant="primary"` → `variant="default"`
-    - `variant="secondary"` → `variant="elevated"`
-    - `variant="outline"` → `variant="outlined"` (name normalized)
-    - `variant="ghost"` → `variant="subtle"`
-    - `variant="destructive"` → removed (use `aria-invalid` for error state)
-  - **Reason:** Foundation Authority compliance (CVA_CANONICAL_STYLE, VARIANTS_SIZE_CANON, STATE_AUTHORITY)
-  - **Severity:** HIGH (API changes required)
-  - **Migration Difficulty:** EASY (straightforward mappings, visual parity preserved)
-  - **Backward Compatibility:** ❌ NOT PROVIDED (by design, violates Authority)
-  - **Migration Guide:** See [Textarea Migration Guide](./docs/migrations/TEXTAREA_MIGRATION.md) for detailed migration instructions
-  - **Version Requirement:** MAJOR bump required (v1.x → v2.0.0) per Semantic Versioning
+- **Textarea Component API Changes**: The Textarea component API has been updated for consistency:
+  - `state` prop removed — use native HTML attributes (`disabled`, `aria-invalid`) instead
+  - Variant names changed: `primary` → `default`, `secondary` → `elevated`, `outline` → `outlined`, `ghost` → `subtle`
+  - `destructive` variant removed — use `aria-invalid` for error state
+  - See [Textarea Migration Guide](./docs/migrations/TEXTAREA_MIGRATION.md) for detailed migration instructions.
 
-- **Removed deprecated `Text.variant` prop**: Use `muted` prop for muted text, or use semantic components for other semantic colors. See [Migration Guide](../docs/migrations/MIGRATION_V2_DEPRECATED_API_REMOVAL.md) for details.
-- **Removed deprecated `Stack.gap`, `Row.gap`, and `Column.gap` props**: Use `spacing` prop instead (canonical). Simply replace `gap` with `spacing` - values and behavior remain the same.
-- **Updated `FieldError` internal implementation**: No public API changes, but internal implementation now uses canonical approaches instead of deprecated APIs.
+- **Removed deprecated `Text.variant` prop**: Use `muted` prop for muted text, or use semantic components for other semantic colors. See [Migration Guide](./docs/migrations/MIGRATION_V2_DEPRECATED_API_REMOVAL.md) for details.
+
+- **Removed deprecated `Stack.gap`, `Row.gap`, and `Column.gap` props**: Use `spacing` prop instead. Simply replace `gap` with `spacing` — values and behavior remain the same.
 
 ### Removed
 
 - `Text` component `variant` prop (deprecated in v1.x)
 - `Stack`, `Row`, and `Column` components `gap` prop (deprecated in v1.x)
-- **Motion V1 tokens** - All Motion V1 exports removed. Use Motion V2 tokens:
-  - `durations` → `motionV2Durations`
-  - `easings` → `motionV2Easings`
-  - `transitions` → `motionV2Transitions`
-  - `keyframes`, `animations`, `springs` → use Motion V2 keyframes/presets
-  - `motionCSSVariables` → `motionV2CSSVariables`
-  - `tailwindMotionConfig` → `motionV2TailwindConfig`
-  - `reducedMotion` → `motionV2ReducedMotion`
+- Motion V1 tokens (see Breaking Changes above)
 
-## [1.2.0] - 2025-12-18
+## [1.2.1] - 2025-12-19
+
+### Changed
+
+- Patch release with internal improvements and bug fixes.
+
+## [1.2.0] - 2025-12-19
 
 ### Added
 
-- **Foundation Regression Guards (Phase 4)**: Technical enforcement to prevent reintroduction of styling escape hatches
-  - ESLint rule `no-foundation-classname-style`: Blocks `className` and `style` props in Foundation component interfaces
-  - ESLint rule `no-foundation-open-htmlattributes`: Requires `Omit<React.*HTMLAttributes, "className" | "style">` instead of direct extension
-  - Type-level tests for all 9 Foundation components (Button, Link, Text, Heading, Input, Textarea, Checkbox, Radio, Label)
-  - Type tests use `@ts-expect-error` to ensure `className` and `style` are rejected at compile time
+- **Component API Stability**: Added compile-time and lint-time protection to prevent unintended API changes in core components
+  - Type-level tests ensure `className` and `style` props are not accepted on Foundation components
   - All guards are enforced in CI via `typecheck` and `lint:ci` scripts
 
 ### Changed
 
-- Foundation components now have compile-time and lint-time protection against regression
-- Type-test files are excluded from ESLint linting (added `**/*.type-test.tsx` to ignore patterns)
+- Core components now have compile-time and lint-time protection against regression
+- Type-test files are excluded from ESLint linting
 
 ### Security
 
-- Foundation enforcement is now technically impossible to bypass without explicit rule changes
-- No manual review needed to catch violations - CI will fail on any regression attempt
+- Component API enforcement is now technically impossible to bypass without explicit rule changes
+- No manual review needed to catch violations — CI will fail on any regression attempt
 
-## [1.0.11] - 2025-12-11
-
-### Added
-
-- TBD
+## [1.1.1] - 2025-12-17
 
 ### Changed
 
-- TBD
+- Patch release with internal improvements and bug fixes.
 
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.10] - 2025-12-11
-
-### Added
-
-- TBD
+## [1.1.0] - 2025-12-17
 
 ### Changed
 
-- TBD
+- Minor release with internal improvements and bug fixes.
 
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.9] - 2025-12-11
-
-### Added
-
-- TBD
+## [1.0.16] - 2025-12-16
 
 ### Changed
 
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.6] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
-
-## [1.0.5] - 2025-12-11
-
-### Added
-
-- TBD
-
-### Changed
-
-- TBD
-
-### Fixed
-
-- TBD
-
-### Removed
-
-- TBD
+- Patch releases (versions 1.0.1 through 1.0.16) with incremental improvements, bug fixes, and internal refactoring.
 
 ## [1.0.4] - 2025-12-10
 
@@ -250,11 +213,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated vitest configuration to use vite defineConfig instead of vitest/config
 - Improved TypeScript type checking for test files
 
-## [1.0.3] - 2025-12-10
+## [1.0.3] - 2025-12-08
 
 ### Added
 
-- **L3 Card Layer Complete**: Full migration of card components to token-driven architecture
+- **Card Components**: Full migration of card components to token-driven architecture
   - CardBase component with CVA variant system
   - DOMAIN_TOKENS for domain-specific card styling
   - Six domain card components: EventCard, VenueCard, ArtistCard, TicketCard, PromoCard, CategoryCard
@@ -272,11 +235,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Legacy EventCard.tsx and VenueCard.tsx files (replaced with new token-driven implementations)
 
-## [0.0.1] -
+## [1.0.0] - 2025-11-23
+
+### Changed
+
+- Initial stable release (v1.0.0).
+
+## [0.0.7] - 2025-11-19
 
 ### Added
 
-- Initial release of @tenerife.music/ui package
+- Initial release of @tenerife.music/ui package (versions 0.0.3 through 0.0.7)
 - 74+ React components extracted from Tenerife.Music monorepo
 - Day/Night theme support
 - TypeScript definitions
@@ -323,4 +292,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[0.0.1]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v0.0.1
+## Version Canon Rules
+
+This changelog follows strict version canon synchronization rules:
+
+1. **Canonical Source**: npm registry (`@tenerife.music/ui`) is the single source of truth for published versions
+2. **Changelog Requirements**: Only versions published to npm may appear in CHANGELOG with publication dates
+3. **Version Format**: Follows Semantic Versioning (semver.org)
+4. **Date Format**: Uses ISO 8601 (YYYY-MM-DD), must match actual npm publish date from `npm view @tenerife.music/ui time`
+5. **Unreleased Section**: Use `[Unreleased]` for future changes not yet published to npm
+6. **Internal Versions**: Versions not published to npm are considered internal and should not appear in public CHANGELOG
+7. **No Retroactive Changes**: Published version entries must not be modified retroactively
+8. **Chronological Order**: Versions are ordered newest to oldest, matching npm publish order
+
+To verify version synchronization:
+
+```bash
+npm view @tenerife.music/ui versions --json
+npm view @tenerife.music/ui time --json
+```
+
+---
+
+[0.0.7]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v0.0.7
+[1.0.0]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.0.0
+[1.0.3]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.0.3
+[1.0.4]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.0.4
+[1.0.16]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.0.16
+[1.1.0]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.1.0
+[1.1.1]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.1.1
+[1.2.0]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.2.0
+[1.2.1]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v1.2.1
+[2.0.0]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v2.0.0
+[2.0.1]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v2.0.1
+[2.0.3]: https://github.com/tenerife-music/tenerife-ui/releases/tag/v2.0.3

@@ -10,6 +10,7 @@
 
 import * as React from "react";
 
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
 import { Row } from "@/COMPOSITION/layout/Row";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -46,6 +47,32 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
   // Collect titleId and descriptionId from children to pass to Modal.Content
   let actualTitleId: string | undefined;
   let actualDescriptionId: string | undefined;
+  let hasDialogTitle = false;
+
+  // First pass: check for DialogTitle in children (before processing)
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child)) {
+      const childDisplayName = (child.type as any)?.displayName;
+      if (childDisplayName === "DialogTitle") {
+        hasDialogTitle = true;
+        actualTitleId = finalTitleId;
+      }
+      if (childDisplayName === "DialogHeader") {
+        React.Children.forEach((child as any).props.children, (grandchild: any) => {
+          if (React.isValidElement(grandchild)) {
+            const grandchildDisplayName = (grandchild.type as any)?.displayName;
+            if (grandchildDisplayName === "DialogTitle") {
+              hasDialogTitle = true;
+              actualTitleId = finalTitleId;
+            }
+            if (grandchildDisplayName === "DialogDescription") {
+              actualDescriptionId = finalDescriptionId;
+            }
+          }
+        });
+      }
+    }
+  });
 
   const processedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
@@ -75,29 +102,16 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
     return child;
   });
 
-  // Also check children recursively for DialogTitle/DialogDescription
-  React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child)) {
-      const childDisplayName = (child.type as any)?.displayName;
-      if (childDisplayName === "DialogHeader") {
-        React.Children.forEach((child as any).props.children, (grandchild: any) => {
-          if (React.isValidElement(grandchild)) {
-            const grandchildDisplayName = (grandchild.type as any)?.displayName;
-            if (grandchildDisplayName === "DialogTitle") {
-              actualTitleId = finalTitleId;
-            }
-            if (grandchildDisplayName === "DialogDescription") {
-              actualDescriptionId = finalDescriptionId;
-            }
-          }
-        });
-      }
-    }
-  });
-
   return (
     <Modal.Root {...props}>
       <Modal.Content aria-labelledby={actualTitleId} aria-describedby={actualDescriptionId}>
+        {/* Add hidden Modal.Title for Radix UI validation when DialogTitle is present */}
+        {/* This must be rendered first so Radix UI can detect it synchronously */}
+        {hasDialogTitle && actualTitleId && (
+          <VisuallyHidden>
+            <Modal.Title id={actualTitleId}>Dialog</Modal.Title>
+          </VisuallyHidden>
+        )}
         {processedChildren}
         <Modal.Close />
       </Modal.Content>

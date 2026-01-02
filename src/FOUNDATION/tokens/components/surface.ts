@@ -91,7 +91,7 @@ export const SURFACE_TOKENS = {
       padding: "p-md",
       radius: "rounded-md",
       shadow: "shadow-none",
-      bg: "bg-muted/50",
+      bg: "bg-muted/30",
       border: "border border-border/50",
     },
   } as const,

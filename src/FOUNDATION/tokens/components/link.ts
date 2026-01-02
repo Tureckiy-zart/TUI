@@ -177,6 +177,7 @@ export const LINK_TOKENS = {
       } as const,
     } as const,
     ghost: {
+      background: "bg-muted/10", // Light background for better contrast on dark surfaces
       text: "text-foreground", // Foreground text using CSS var
       hover: {
         background: "hover:bg-accent", // Hover background

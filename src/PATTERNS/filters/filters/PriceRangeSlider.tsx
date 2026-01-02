@@ -118,14 +118,22 @@ export function PriceRangeSlider({
   };
 
   const handleSliderChange = (type: "min" | "max", sliderValue: number) => {
+    const clampedValue = Math.max(min, Math.min(max, sliderValue));
+
     if (type === "min") {
-      const newMin = Math.max(min, Math.min(max, sliderValue));
-      const newMax = value.max ? Math.max(newMin, value.max) : null;
-      onChange({ min: newMin, max: newMax });
+      // When changing min, ensure it doesn't exceed current max (or max if max is not set)
+      const currentMax = value.max !== null ? value.max : max;
+      const finalMin = Math.min(clampedValue, currentMax);
+      // Keep max value if it was set, otherwise set it to max
+      const finalMax = value.max !== null ? currentMax : null;
+      onChange({ min: finalMin, max: finalMax });
     } else {
-      const newMax = Math.max(min, Math.min(max, sliderValue));
-      const newMin = value.min ? Math.min(newMax, value.min) : null;
-      onChange({ min: newMin, max: newMax });
+      // When changing max, ensure it doesn't go below current min (or min if min is not set)
+      const currentMin = value.min !== null ? value.min : min;
+      const finalMax = Math.max(clampedValue, currentMin);
+      // Keep min value if it was set, otherwise set it to min
+      const finalMin = value.min !== null ? currentMin : null;
+      onChange({ min: finalMin, max: finalMax });
     }
   };
 
@@ -145,8 +153,8 @@ export function PriceRangeSlider({
         <div className="flex items-center space-x-sm">
           <div className="flex-1">
             <Label htmlFor={minPriceId}>{minLabel}</Label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+            <div className="relative [&>input]:pl-8">
+              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-muted-foreground">
                 {currency}
               </span>
               <Input
@@ -164,8 +172,8 @@ export function PriceRangeSlider({
           </div>
           <div className="flex-1">
             <Label htmlFor={maxPriceId}>{maxLabel}</Label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+            <div className="relative [&>input]:pl-8">
+              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-muted-foreground">
                 {currency}
               </span>
               <Input
@@ -186,7 +194,20 @@ export function PriceRangeSlider({
 
       {/* Slider */}
       <div className="space-y-sm">
-        <div className="relative">
+        <div className="relative h-2">
+          {/* Track background */}
+          <div className="absolute h-2 w-full rounded-full bg-muted" />
+
+          {/* Active range */}
+          <div
+            className="absolute h-2 rounded-full bg-primary"
+            style={{
+              left: `${((minSliderValue - min) / (max - min)) * 100}%`,
+              width: `${((maxSliderValue - minSliderValue) / (max - min)) * 100}%`,
+            }}
+          />
+
+          {/* Min slider */}
           <input
             type="range"
             id={`${minPriceId}-slider`}
@@ -196,9 +217,15 @@ export function PriceRangeSlider({
             step={step}
             value={minSliderValue}
             onChange={(e) => handleSliderChange("min", parseInt(e.target.value))}
-            className="slider-thumb absolute h-2 w-full cursor-pointer appearance-none bg-transparent"
+            onInput={(e) =>
+              handleSliderChange("min", parseInt((e.target as HTMLInputElement).value))
+            }
+            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-sm"
+            style={{ zIndex: 2 }}
             aria-label={minAriaLabel}
           />
+
+          {/* Max slider */}
           <input
             type="range"
             id={`${maxPriceId}-slider`}
@@ -208,18 +235,13 @@ export function PriceRangeSlider({
             step={step}
             value={maxSliderValue}
             onChange={(e) => handleSliderChange("max", parseInt(e.target.value))}
-            className="slider-thumb absolute h-2 w-full cursor-pointer appearance-none bg-transparent"
+            onInput={(e) =>
+              handleSliderChange("max", parseInt((e.target as HTMLInputElement).value))
+            }
+            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-sm"
+            style={{ zIndex: 3 }}
             aria-label={maxAriaLabel}
           />
-          <div className="h-2 rounded-full bg-muted">
-            <div
-              className="h-2 rounded-full bg-primary"
-              style={{
-                left: `${((minSliderValue - min) / (max - min)) * 100}%`,
-                width: `${((maxSliderValue - minSliderValue) / (max - min)) * 100}%`,
-              }}
-            />
-          </div>
         </div>
         <div className="flex justify-between text-xs text-muted-foreground">
           <span>

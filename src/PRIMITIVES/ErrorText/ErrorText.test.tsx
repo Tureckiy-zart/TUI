@@ -189,11 +189,9 @@ describe("ErrorText", () => {
     it("renders complex content", () => {
       renderWithTheme(
         <ErrorText>
-          <div>
-            <span>Multiple</span>
-            <span>error</span>
-            <span>parts</span>
-          </div>
+          <span>Multiple</span>
+          <span>error</span>
+          <span>parts</span>
         </ErrorText>,
       );
       const error = screen.getByRole("alert");

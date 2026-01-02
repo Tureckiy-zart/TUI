@@ -212,7 +212,7 @@ export const BUTTON_TOKENS = {
       } as const,
     } as const,
     ghost: {
-      background: "bg-transparent", // Transparent background
+      background: "bg-muted/10", // Light background for better contrast on dark surfaces
       text: "text-foreground", // Foreground text using CSS var
       hover: {
         background: "hover:bg-[hsl(var(--button-ghost-hover-bg))]", // Ghost hover background - CSS variable from State Matrix
