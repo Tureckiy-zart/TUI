@@ -66,6 +66,22 @@ const meta: Meta<typeof SidebarLayout> = {
         defaultValue: { summary: "undefined" },
       },
     },
+    sidebarAriaLabel: {
+      control: { type: "text" },
+      description:
+        "ARIA label for the sidebar (<aside>) element. Required when multiple SidebarLayout components are used on the same page to ensure unique landmarks.",
+      table: {
+        type: { summary: "string | undefined" },
+      },
+    },
+    mainAriaLabel: {
+      control: { type: "text" },
+      description:
+        "ARIA label for the main content (<main>) element. Required when multiple SidebarLayout components are used on the same page to ensure unique landmarks.",
+      table: {
+        type: { summary: "string | undefined" },
+      },
+    },
   },
 };
 
@@ -110,6 +126,7 @@ export const Default: Story = {
 
 /**
  * SizesGallery demonstrates all sidebarWidth values (sm, md, lg).
+ * Each layout has unique aria-label to ensure accessibility compliance when multiple layouts are used on the same page.
  */
 export const SizesGallery: Story = {
   render: () => (
@@ -118,11 +135,13 @@ export const SizesGallery: Story = {
         <h3 style={{ marginBottom: "1rem" }}>Small Sidebar (256px)</h3>
         <SidebarLayout
           sidebar={
-            <Box px="md" py="lg" as="nav" radius="md">
-              <nav>Small Sidebar</nav>
+            <Box px="md" py="lg" radius="md">
+              Small Sidebar
             </Box>
           }
           sidebarWidth="sm"
+          sidebarAriaLabel="Small sidebar navigation"
+          mainAriaLabel="Main content with small sidebar (256px width)"
         >
           <Box px="md" py="lg">
             <p>Main content with small sidebar (256px width)</p>
@@ -135,10 +154,12 @@ export const SizesGallery: Story = {
         <SidebarLayout
           sidebar={
             <Box px="md" py="lg" bg="card" radius="md">
-              <nav>Medium Sidebar</nav>
+              Medium Sidebar
             </Box>
           }
           sidebarWidth="md"
+          sidebarAriaLabel="Medium sidebar navigation"
+          mainAriaLabel="Main content with medium sidebar (320px width) - default"
         >
           <Box px="md" py="lg">
             <p>Main content with medium sidebar (320px width) - default</p>
@@ -151,10 +172,12 @@ export const SizesGallery: Story = {
         <SidebarLayout
           sidebar={
             <Box px="md" py="lg" bg="card" radius="md">
-              <nav>Large Sidebar</nav>
+              Large Sidebar
             </Box>
           }
           sidebarWidth="lg"
+          sidebarAriaLabel="Large sidebar navigation"
+          mainAriaLabel="Main content with large sidebar (384px width)"
         >
           <Box px="md" py="lg">
             <p>Main content with large sidebar (384px width)</p>
@@ -166,7 +189,8 @@ export const SizesGallery: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Demonstrates all sidebarWidth values: sm (256px), md (320px), lg (384px)",
+        story:
+          "Demonstrates all sidebarWidth values: sm (256px), md (320px), lg (384px). Each layout has unique aria-label to ensure accessibility compliance when multiple layouts are used on the same page.",
       },
     },
   },
@@ -187,6 +211,8 @@ export const States: Story = {
             </Box>
           }
           sidebarPosition="left"
+          sidebarAriaLabel="Left sidebar navigation"
+          mainAriaLabel="Main content with left sidebar"
         >
           <Box px="md" py="lg">
             <p>Main content with left sidebar (default position)</p>
@@ -203,6 +229,8 @@ export const States: Story = {
             </Box>
           }
           sidebarPosition="right"
+          sidebarAriaLabel="Right sidebar navigation"
+          mainAriaLabel="Main content with right sidebar"
         >
           <Box px="md" py="lg">
             <p>Main content with right sidebar</p>
@@ -214,7 +242,8 @@ export const States: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Demonstrates sidebarPosition values: left (default) and right",
+        story:
+          "Demonstrates sidebarPosition values: left (default) and right. Each layout has unique aria-label to ensure accessibility compliance when multiple layouts are used on the same page.",
       },
     },
   },

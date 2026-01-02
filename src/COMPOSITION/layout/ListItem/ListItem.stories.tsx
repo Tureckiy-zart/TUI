@@ -138,8 +138,8 @@ export const Disabled: Story = {
         <div className="flex items-center gap-3 p-3">
           <div className="h-10 w-10 rounded-full bg-muted" />
           <div>
-            <div className="font-medium">Disabled item</div>
-            <div className="text-sm text-muted-foreground">This item is disabled</div>
+            <div className="font-medium text-disabled-foreground">Disabled item</div>
+            <div className="text-sm text-disabled-foreground">This item is disabled</div>
           </div>
         </div>
       </ListItem>
@@ -148,7 +148,8 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Disabled list item with reduced opacity and disabled pointer events.",
+        story:
+          "Disabled list item with reduced opacity and disabled pointer events. Text uses disabled-foreground token for proper contrast.",
       },
     },
   },
@@ -178,8 +179,8 @@ export const States: Story = {
 
       <ListItem disabled>
         <div className="p-3">
-          <div className="font-medium">Disabled state</div>
-          <div className="text-sm text-muted-foreground">Reduced opacity, no pointer events</div>
+          <div className="font-medium text-disabled-foreground">Disabled state</div>
+          <div className="text-sm text-disabled-foreground">Reduced opacity, no pointer events</div>
         </div>
       </ListItem>
     </List>

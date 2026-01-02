@@ -299,9 +299,89 @@ describe("SidebarLayout component", () => {
       const main = container.querySelector("main");
       const gridContainer = container.firstChild as HTMLElement;
 
-      // DOM order = navigation order (main before aside for right position)
+      // DOM order = navigation order (main before aside)
       expect(gridContainer.children[0]).toBe(main);
       expect(gridContainer.children[1]).toBe(aside);
+    });
+
+    it("should apply sidebarAriaLabel to <aside> element when provided", () => {
+      const { container } = render(
+        <SidebarLayout sidebar={<div>Sidebar</div>} sidebarAriaLabel="Main navigation sidebar">
+          <div>Content</div>
+        </SidebarLayout>,
+      );
+
+      const aside = container.querySelector("aside");
+      expect(aside).toHaveAttribute("aria-label", "Main navigation sidebar");
+    });
+
+    it("should apply mainAriaLabel to <main> element when provided", () => {
+      const { container } = render(
+        <SidebarLayout sidebar={<div>Sidebar</div>} mainAriaLabel="Article content">
+          <div>Content</div>
+        </SidebarLayout>,
+      );
+
+      const main = container.querySelector("main");
+      expect(main).toHaveAttribute("aria-label", "Article content");
+    });
+
+    it("should apply both sidebarAriaLabel and mainAriaLabel when provided", () => {
+      const { container } = render(
+        <SidebarLayout
+          sidebar={<div>Sidebar</div>}
+          sidebarAriaLabel="Left sidebar navigation"
+          mainAriaLabel="Main content area"
+        >
+          <div>Content</div>
+        </SidebarLayout>,
+      );
+
+      const aside = container.querySelector("aside");
+      const main = container.querySelector("main");
+      expect(aside).toHaveAttribute("aria-label", "Left sidebar navigation");
+      expect(main).toHaveAttribute("aria-label", "Main content area");
+    });
+
+    it("should apply aria-label to both layouts when collapseAt is provided", () => {
+      const { container } = render(
+        <SidebarLayout
+          sidebar={<div>Sidebar</div>}
+          collapseAt="md"
+          sidebarAriaLabel="Navigation sidebar"
+          mainAriaLabel="Main content"
+        >
+          <div>Content</div>
+        </SidebarLayout>,
+      );
+
+      // Both grid and stack layouts should have aria-label
+      const asides = container.querySelectorAll("aside");
+      const mains = container.querySelectorAll("main");
+
+      expect(asides).toHaveLength(2); // One in grid, one in stack
+      expect(mains).toHaveLength(2); // One in grid, one in stack
+
+      // All should have the same aria-label
+      asides.forEach((aside) => {
+        expect(aside).toHaveAttribute("aria-label", "Navigation sidebar");
+      });
+      mains.forEach((main) => {
+        expect(main).toHaveAttribute("aria-label", "Main content");
+      });
+    });
+
+    it("should not apply aria-label when props are not provided", () => {
+      const { container } = render(
+        <SidebarLayout sidebar={<div>Sidebar</div>}>
+          <div>Content</div>
+        </SidebarLayout>,
+      );
+
+      const aside = container.querySelector("aside");
+      const main = container.querySelector("main");
+      expect(aside).not.toHaveAttribute("aria-label");
+      expect(main).not.toHaveAttribute("aria-label");
     });
   });
 
