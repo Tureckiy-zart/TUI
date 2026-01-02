@@ -142,3 +142,28 @@ export {
   type AccordionTriggerProps,
   type AccordionVariant,
 } from "./Accordion/Accordion";
+
+// Popover
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  popoverContentVariants,
+  type PopoverProps,
+  type PopoverSize,
+  PopoverTrigger,
+  type PopoverVariant,
+  PopoverWrapper,
+} from "./Popover";
+
+// Tooltip
+export {
+  Tooltip,
+  TooltipContent,
+  tooltipContentVariants,
+  type TooltipProps,
+  TooltipProvider,
+  TooltipTrigger,
+  type TooltipVariant,
+  TooltipWrapper,
+} from "./Tooltip";

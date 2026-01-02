@@ -586,6 +586,31 @@ export {
   type ComboboxSize,
 } from "./COMPOSITION/overlays/Combobox";
 
+// Popover (Radix-based, token-driven)
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  popoverContentVariants,
+  type PopoverProps,
+  type PopoverSize,
+  PopoverTrigger,
+  type PopoverVariant,
+  PopoverWrapper,
+} from "./COMPOSITION/overlays/Popover";
+
+// Tooltip (Radix-based, token-driven)
+export {
+  Tooltip,
+  TooltipContent,
+  tooltipContentVariants,
+  type TooltipProps,
+  TooltipProvider,
+  TooltipTrigger,
+  type TooltipVariant,
+  TooltipWrapper,
+} from "./COMPOSITION/overlays/Tooltip";
+
 // ============================================================================
 // NOTIFICATION SYSTEM
 // ============================================================================
