@@ -43,21 +43,38 @@ export function SearchInput({
 
   const [localValue, setLocalValue] = React.useState(value);
   const debouncedValue = useDebounce(localValue, debounceMs);
+  const prevValueRef = React.useRef(value);
+  const isInternalChangeRef = React.useRef(false);
 
+  // Sync localValue with value prop when it changes externally (programmatically)
   React.useEffect(() => {
-    setLocalValue(value);
+    if (prevValueRef.current !== value) {
+      // Value prop changed externally - update localValue synchronously
+      isInternalChangeRef.current = true;
+      setLocalValue(value);
+      prevValueRef.current = value;
+      // Reset flag after a microtask to allow state update to complete
+      Promise.resolve().then(() => {
+        isInternalChangeRef.current = false;
+      });
+    }
   }, [value]);
 
+  // Only call onChange with debounced value when user types (not when value prop changes externally)
   React.useEffect(() => {
-    onChange(debouncedValue);
+    if (!isInternalChangeRef.current) {
+      onChange(debouncedValue);
+    }
   }, [debouncedValue, onChange]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
+    isInternalChangeRef.current = false;
     setLocalValue(newValue);
   };
 
   const handleClear = () => {
+    isInternalChangeRef.current = false;
     setLocalValue("");
     onChange("");
     onClear?.();

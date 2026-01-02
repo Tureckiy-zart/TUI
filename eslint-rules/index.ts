@@ -5,6 +5,7 @@
  * for the @tenerife.music/ui component library.
  */
 
+import { noAdHocLists } from "./no-ad-hoc-lists";
 import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
 import noInteractiveWithoutKeyboard from "./no-interactive-without-keyboard";
@@ -31,5 +32,7 @@ export default {
     // Focus System v1 rules
     "no-interactive-without-keyboard": noInteractiveWithoutKeyboard,
     "require-focus-visible": requireFocusVisible,
+    // List usage enforcement
+    "no-ad-hoc-lists": noAdHocLists,
   },
 };

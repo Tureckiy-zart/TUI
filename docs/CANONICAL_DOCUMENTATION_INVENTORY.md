@@ -106,7 +106,7 @@ These documents define lock status for specific component categories.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/architecture/locks/LAYOUT_LOCK.md` | Layout primitives lock - Component lock document | **LOCKED** |
+| `docs/architecture/locks/LAYOUT_LOCK.md` | Layout primitives and Extension Layout components lock - Component lock document | **LOCKED** |
 | `docs/architecture/locks/TEXT_LOCK.md` | Text/typography components lock - Component lock document | **LOCKED** |
 
 **Total:** 2 files

@@ -1,34 +1,36 @@
 "use client";
 
-import { cva } from "class-variance-authority";
-
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
+import type { VenueCardSize, VenueCardVariant } from "./VenueCard.types";
+
 /**
  * VenueCard Variants
  *
- * CVA-based variant system for VenueCard component.
- * Supports size variants (default, compact) and style variants (default, featured).
+ * TokenCVA-based variant system for VenueCard component.
+ * Supports size variants (sm, md) and style variants (default, elevated).
  * All styling uses token-based values from DOMAIN_TOKENS, TEXT_TOKENS, and MOTION_TOKENS.
  *
  * Note: VenueCard uses CardBase for layout structure, so these variants are primarily
  * for any VenueCard-specific styling that extends beyond CardBase.
  */
-export const venueCardVariants = cva("group relative", {
+export const venueCardVariants = tokenCVA({
+  base: "group relative",
   variants: {
     size: {
-      default: "",
-      compact: "",
-    },
+      sm: "",
+      md: "",
+    } satisfies Record<VenueCardSize, string>,
     variant: {
       default: "",
-      featured: "",
-    },
+      elevated: "",
+    } satisfies Record<VenueCardVariant, string>,
   },
   defaultVariants: {
-    size: "default",
+    size: "md",
     variant: "default",
   },
 });
@@ -36,184 +38,118 @@ export const venueCardVariants = cva("group relative", {
 /**
  * VenueCard Badge Variants
  *
- * CVA-based variant system for featured badge.
+ * TokenCVA-based variant system for featured badge.
  * Uses DOMAIN_TOKENS.badges for all styling.
  */
-export const venueCardBadgeVariants = cva(
-  `inline-flex items-center ${DOMAIN_TOKENS.badges.radius} ${DOMAIN_TOKENS.badges.shadow} ${TEXT_TOKENS.fontSize.xs} ${TEXT_TOKENS.fontWeight.semibold} ${DOMAIN_TOKENS.badges.text.color}`,
-  {
-    variants: {
-      size: {
-        default: DOMAIN_TOKENS.badges.size.md,
-        compact: DOMAIN_TOKENS.badges.size.sm,
-      },
-      variant: {
-        default: DOMAIN_TOKENS.badges.surface.default,
-        featured: DOMAIN_TOKENS.badges.surface.featured,
-      },
-    },
-    defaultVariants: {
-      size: "default",
-      variant: "featured",
-    },
-  },
-);
-
-/**
- * VenueCard Image Overlay Variants
- *
- * CVA-based variant system for image overlay on hover.
- * Uses DOMAIN_TOKENS.image.overlay and MOTION_TOKENS.
- */
-export const venueCardImageOverlayVariants = cva(
-  `absolute inset-0 ${DOMAIN_TOKENS.image.overlay.gradient} opacity-0 ${MOTION_TOKENS.transition.opacity} ${MOTION_TOKENS.duration.normal} group-hover:opacity-100`,
-  {
-    variants: {
-      size: {
-        default: "",
-        compact: "",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * VenueCard Image Transform Variants
- *
- * CVA-based variant system for image scale on hover.
- * Uses DOMAIN_TOKENS.motion.hover and MOTION_TOKENS.
- */
-export const venueCardImageTransformVariants = cva(
-  `object-cover ${MOTION_TOKENS.transition.transform} ${MOTION_TOKENS.duration.slow} ${DOMAIN_TOKENS.motion.hover.scale}`,
-  {
-    variants: {
-      size: {
-        default: "",
-        compact: "",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * VenueCard Image Placeholder Variants
- *
- * CVA-based variant system for image placeholder gradient.
- * Uses DOMAIN_TOKENS.image.placeholder for styling.
- */
-export const venueCardImagePlaceholderVariants = cva(
-  `relative overflow-hidden ${DOMAIN_TOKENS.image.placeholder.gradient}`,
-  {
-    variants: {
-      size: {
-        default: "",
-        compact: "",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * VenueCard Title Variants
- *
- * CVA-based variant system for card title.
- * Uses TEXT_TOKENS and DOMAIN_TOKENS.text for styling.
- */
-export const venueCardTitleVariants = cva(
-  `${TEXT_TOKENS.fontSize.lg} ${TEXT_TOKENS.fontWeight.bold} ${MOTION_TOKENS.transition.colors} ${DOMAIN_TOKENS.text.hover.primary} ${DOMAIN_TOKENS.text.lineClamp.two}`,
-  {
-    variants: {
-      size: {
-        default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-        compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  },
-);
-
-/**
- * VenueCard Description Variants
- *
- * CVA-based variant system for card description.
- * Uses DOMAIN_TOKENS.text.lineClamp for text truncation.
- */
-export const venueCardDescriptionVariants = cva(`${DOMAIN_TOKENS.text.lineClamp.two}`, {
+export const venueCardBadgeVariants = tokenCVA({
+  base: `inline-flex items-center ${DOMAIN_TOKENS.badges.radius} ${DOMAIN_TOKENS.badges.shadow} ${TEXT_TOKENS.fontSize.xs} ${TEXT_TOKENS.fontWeight.semibold} ${DOMAIN_TOKENS.badges.text.color}`,
   variants: {
     size: {
-      default: DOMAIN_TOKENS.spacing.section.subtitleToMetadata,
-      compact: DOMAIN_TOKENS.spacing.section.titleToSubtitle,
-    },
+      sm: DOMAIN_TOKENS.badges.size.sm,
+      md: DOMAIN_TOKENS.badges.size.md,
+    } satisfies Record<VenueCardSize, string>,
+    variant: {
+      default: DOMAIN_TOKENS.badges.surface.default,
+      elevated: DOMAIN_TOKENS.badges.surface.featured,
+    } satisfies Record<VenueCardVariant, string>,
   },
   defaultVariants: {
-    size: "default",
+    size: "md",
+    variant: "elevated",
   },
 });
 
 /**
- * VenueCard Location Text Variants
+ * VenueCard Image Overlay Variants
  *
- * CVA-based variant system for location text.
- * Uses DOMAIN_TOKENS.text.lineClamp for single line truncation.
+ * TokenCVA-based variant system for image overlay on hover.
+ * Uses DOMAIN_TOKENS.image.overlay and MOTION_TOKENS.
  */
-export const venueCardLocationTextVariants = cva(`${DOMAIN_TOKENS.text.lineClamp.one}`, {
+export const venueCardImageOverlayVariants = tokenCVA({
+  base: `absolute inset-0 ${DOMAIN_TOKENS.image.overlay.gradient} opacity-0 ${MOTION_TOKENS.transition.opacity} ${MOTION_TOKENS.duration.normal} group-hover:opacity-100`,
   variants: {
     size: {
-      default: "",
-      compact: "",
-    },
+      sm: "",
+      md: "",
+    } satisfies Record<VenueCardSize, string>,
   },
   defaultVariants: {
-    size: "default",
+    size: "md",
+  },
+});
+
+/**
+ * VenueCard Image Transform Variants
+ *
+ * TokenCVA-based variant system for image scale on hover.
+ * Uses DOMAIN_TOKENS.motion.hover and MOTION_TOKENS.
+ */
+export const venueCardImageTransformVariants = tokenCVA({
+  base: `object-cover ${MOTION_TOKENS.transition.transform} ${MOTION_TOKENS.duration.slow} ${DOMAIN_TOKENS.motion.hover.scale}`,
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+    } satisfies Record<VenueCardSize, string>,
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+/**
+ * VenueCard Image Placeholder Variants
+ *
+ * TokenCVA-based variant system for image placeholder gradient.
+ * Uses DOMAIN_TOKENS.image.placeholder for styling.
+ */
+export const venueCardImagePlaceholderVariants = tokenCVA({
+  base: `relative overflow-hidden ${DOMAIN_TOKENS.image.placeholder.gradient}`,
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+    } satisfies Record<VenueCardSize, string>,
+  },
+  defaultVariants: {
+    size: "md",
   },
 });
 
 /**
  * VenueCard Metadata Row Variants
  *
- * CVA-based variant system for metadata display rows.
+ * TokenCVA-based variant system for metadata display rows.
  * Uses DOMAIN_TOKENS.metadata for spacing and text colors.
  */
-export const venueCardMetadataRowVariants = cva(
-  `flex items-center ${DOMAIN_TOKENS.metadata.spacing.horizontal} ${DOMAIN_TOKENS.metadata.text.secondary} ${TEXT_TOKENS.fontSize.xs}`,
-  {
-    variants: {
-      size: {
-        default: "",
-        compact: "",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
+export const venueCardMetadataRowVariants = tokenCVA({
+  base: `flex items-center ${DOMAIN_TOKENS.metadata.spacing.horizontal} ${DOMAIN_TOKENS.metadata.text.secondary} ${TEXT_TOKENS.fontSize.xs}`,
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+    } satisfies Record<VenueCardSize, string>,
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 /**
  * VenueCard Footer Border Variants
  *
- * CVA-based variant system for footer border separator.
+ * TokenCVA-based variant system for footer border separator.
  * Uses semantic border tokens and DOMAIN_TOKENS for spacing.
  */
-export const venueCardFooterBorderVariants = cva("border-t border-border", {
+export const venueCardFooterBorderVariants = tokenCVA({
+  base: "border-t border-border",
   variants: {
     size: {
-      default: DOMAIN_TOKENS.spacing.footer.paddingTopDefault, // References semanticSpacing.sm (8px) via Tailwind
-      compact: DOMAIN_TOKENS.spacing.footer.paddingTopCompact, // References semanticSpacing.xs (4px) via Tailwind
-    },
+      sm: DOMAIN_TOKENS.spacing.footer.paddingTopCompact, // References semanticSpacing.xs (4px) via Tailwind
+      md: DOMAIN_TOKENS.spacing.footer.paddingTopDefault, // References semanticSpacing.sm (8px) via Tailwind
+    } satisfies Record<VenueCardSize, string>,
   },
   defaultVariants: {
-    size: "default",
+    size: "md",
   },
 });

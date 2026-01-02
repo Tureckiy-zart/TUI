@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **List System FINAL LOCK**: List and ListItem components locked as closed architectural topic (2026-01-02)
+  - List (`src/COMPOSITION/layout/List/`) and ListItem (`src/COMPOSITION/layout/ListItem/`) changed from PROCESS LOCKED to LOCKED (FINAL LOCK)
+  - No alternative list implementations allowed - all vertical lists must use canonical List/ListItem components
+  - ESLint rule `no-ad-hoc-lists` is mandatory and prevents violations
+  - Explicit exceptions: Timeline, Stepper, NavList, DataList, Tree (specialized patterns)
+  - Migration complete: All existing vertical lists migrated to canonical components
+  - Unlock policy: Changes require EXPLICIT UNLOCK TUNG with architectural justification, impact analysis, and migration plan
+
 ## [2.0.2] - 2025-12-30
 
 ### Fixed

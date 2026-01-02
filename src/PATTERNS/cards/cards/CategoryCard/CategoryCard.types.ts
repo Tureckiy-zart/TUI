@@ -4,13 +4,19 @@ import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/ty
 
 /**
  * CategoryCard Size Variant
+ * Maps to GlobalSize scale subset: sm | md
+ * - "sm" maps from legacy "compact"
+ * - "md" maps from legacy "default"
  */
-export type CategoryCardSize = "default" | "compact";
+export type CategoryCardSize = "sm" | "md";
 
 /**
  * CategoryCard Style Variant
+ * Maps to SurfaceVariant dictionary: default | elevated
+ * - "default" maps from legacy "default"
+ * - "elevated" maps from legacy "featured"
  */
-export type CategoryCardVariant = "default" | "featured";
+export type CategoryCardVariant = "default" | "elevated";
 
 /**
  * Props for CategoryCard component.

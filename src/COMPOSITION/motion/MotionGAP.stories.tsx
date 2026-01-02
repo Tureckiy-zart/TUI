@@ -374,7 +374,7 @@ export const NoMotionByDesign: Story = {
               <Box>
                 <Heading level={2}>Section</Heading>
                 <Box className="mt-2">
-                  <Section padding="md" className="rounded-lg border bg-muted">
+                  <Section spaceY="md" className="rounded-lg border bg-muted">
                     <Stack spacing={2}>
                       <Heading level={3}>Section Title</Heading>
                       <Text>

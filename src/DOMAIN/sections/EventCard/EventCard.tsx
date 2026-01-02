@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
+import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
 import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
@@ -32,37 +32,6 @@ import {
   eventCardTicketButtonVariants,
   eventCardVariants,
 } from "./EventCard.variants";
-
-/**
- * Helper component to apply custom variant classes to Link
- * Since Foundation Link doesn't accept className, we use a ref callback to apply custom classes
- */
-const LinkWithCustomVariant = React.forwardRef<
-  HTMLAnchorElement,
-  React.ComponentProps<typeof Link> & { customClassName: string }
->(({ customClassName, ...linkProps }, ref) => {
-  const anchorRef = React.useRef<HTMLAnchorElement>(null);
-  const mergedRef = React.useCallback(
-    (node: HTMLAnchorElement | null) => {
-      anchorRef.current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref && "current" in ref) {
-        (ref as { current: HTMLAnchorElement | null }).current = node;
-      }
-      if (node && customClassName) {
-        // Merge custom classes with Link's internal classes
-        const existingClasses = node.className.split(" ").filter(Boolean);
-        const customClasses = customClassName.split(" ").filter(Boolean);
-        node.className = [...new Set([...existingClasses, ...customClasses])].join(" ");
-      }
-    },
-    [ref, customClassName],
-  );
-
-  return <Link {...linkProps} ref={mergedRef} />;
-});
-LinkWithCustomVariant.displayName = "LinkWithCustomVariant";
 
 /**
  * EventCard Component
@@ -122,11 +91,11 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
     const cardVariant = variant || (featured ? "featured" : "default");
 
     // Map EventCardSize to CardBaseSize: "default" -> "md", "compact" -> "sm"
-    const cardBaseSize: "sm" | "md" = size === "compact" ? "sm" : "md";
+    const cardBaseSize = size === "compact" ? ("sm" as const) : ("md" as const);
 
     // Map EventCardVariant to CardBaseVariant: "default" -> "default", "featured" -> "elevated"
-    const cardBaseVariant: "default" | "elevated" =
-      cardVariant === "featured" ? "elevated" : "default";
+    const cardBaseVariant =
+      cardVariant === "featured" ? ("elevated" as const) : ("default" as const);
 
     return (
       <Box {...animationProps}>
@@ -212,7 +181,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
             {/* Metadata Rows */}
             <div className={eventCardMetadataVariants({ size })}>
               {date && (
-                <div className={eventCardMetadataItemVariants({ size })} role="text">
+                <div className={eventCardMetadataItemVariants({ size })}>
                   <IconCalendar
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
@@ -223,7 +192,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                 </div>
               )}
               {venueName && (
-                <div className={eventCardMetadataItemVariants({ size })} role="text">
+                <div className={eventCardMetadataItemVariants({ size })}>
                   <IconLocation
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}

@@ -1,0 +1,575 @@
+{
+  "meta": {
+    "reportId": "TUI_LOCK_PIPELINE_COVERAGE_AUDIT_01",
+    "date": "2026-01-01",
+    "status": "COMPLETE",
+    "mode": "DOCS"
+  },
+  "summary": {
+    "totalComponentsAudited": 84,
+    "fullEvidence": 75,
+    "withLockReport": 5,
+    "createdViaC0C10": 9,
+    "noBaselineReport": 0,
+    "criticalMismatches": 0
+  },
+  "evidenceStatusCounts": {
+    "FULL_0_12_WITH_LOCK_REPORT": 5,
+    "FULL_0_12_COMPLETE": 70,
+    "PARTIAL_STEPS": 0,
+    "BASELINE_ONLY": 0,
+    "NONE": 0,
+    "CREATED_C0_C10": 9
+  },
+  "foundationLocked": [
+    {
+      "name": "Button",
+      "path": "src/PRIMITIVES/Button/Button.tsx",
+      "lockStatus": "FINAL LOCK",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": "docs/reports/BUTTON_FOUNDATION_LOCK_REPORT.md",
+      "evidenceStatus": "FULL_0_12_WITH_LOCK_REPORT"
+    },
+    {
+      "name": "Link",
+      "path": "src/PRIMITIVES/Link/Link.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": "docs/reports/LINK_FOUNDATION_LOCK_REPORT.md",
+      "evidenceStatus": "FULL_0_12_WITH_LOCK_REPORT"
+    },
+    {
+      "name": "Text",
+      "path": "src/PRIMITIVES/Text/Text.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Input",
+      "path": "src/PRIMITIVES/Input/Input.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": "docs/reports/INPUT_FOUNDATION_LOCK_REPORT.md",
+      "evidenceStatus": "FULL_0_12_WITH_LOCK_REPORT"
+    },
+    {
+      "name": "Heading",
+      "path": "src/PRIMITIVES/Heading/Heading.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Icon",
+      "path": "src/PRIMITIVES/Icon/Icon.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Label",
+      "path": "src/PRIMITIVES/Label/Label.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Checkbox",
+      "path": "src/PRIMITIVES/Checkbox/Checkbox.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Radio",
+      "path": "src/PRIMITIVES/Radio/Radio.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Switch",
+      "path": "src/PRIMITIVES/Switch/Switch.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Textarea",
+      "path": "src/PRIMITIVES/Textarea/Textarea.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Select",
+      "path": "src/COMPOSITION/controls/Select/Select.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Tabs",
+      "path": "src/COMPOSITION/navigation/tabs/Tabs.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Toast",
+      "path": "src/COMPOSITION/overlays/Toast.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": null,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    }
+  ],
+  "extensionProcessLocked": [
+    {
+      "name": "Alert",
+      "path": "src/PRIMITIVES/Alert/Alert.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Badge",
+      "path": "src/PRIMITIVES/Badge/Badge.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Progress",
+      "path": "src/PRIMITIVES/Progress/Progress.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Skeleton",
+      "path": "src/PRIMITIVES/Skeleton/Skeleton.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Field",
+      "path": "src/PRIMITIVES/Field/Field.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Modal",
+      "path": "src/COMPOSITION/overlays/Modal/Modal.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": "docs/reports/MODAL_FOUNDATION_LOCK_REPORT.md",
+      "evidenceStatus": "FULL_0_12_WITH_LOCK_REPORT"
+    },
+    {
+      "name": "Dialog",
+      "path": "src/COMPOSITION/overlays/Dialog.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Portal",
+      "path": "src/COMPOSITION/overlays/Portal.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Backdrop",
+      "path": "src/COMPOSITION/overlays/Backdrop.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Tooltip",
+      "path": "src/COMPOSITION/overlays/Tooltip.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "lockReport": "docs/reports/TOOLTIP_POPOVER_FOUNDATION_LOCK_REPORT.md",
+      "evidenceStatus": "FULL_0_12_WITH_LOCK_REPORT"
+    },
+    {
+      "name": "Popover",
+      "path": "src/COMPOSITION/overlays/Popover.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "ContextMenu",
+      "path": "src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Avatar",
+      "path": "src/COMPOSITION/controls/Avatar/Avatar.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Separator",
+      "path": "src/COMPOSITION/controls/Separator/Separator.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "AspectRatio",
+      "path": "src/COMPOSITION/controls/AspectRatio/AspectRatio.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Slider",
+      "path": "src/COMPOSITION/controls/Slider/Slider.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "RangeSlider",
+      "path": "src/COMPOSITION/controls/RangeSlider/RangeSlider.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Card",
+      "path": "src/COMPOSITION/layout/Card/Card.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "EventCard",
+      "path": "src/DOMAIN/sections/EventCard/EventCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "ProfileCard",
+      "path": "src/DOMAIN/auth/auth/ProfileCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "VenueCard",
+      "path": "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "PromoCard",
+      "path": "src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "CategoryCard",
+      "path": "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "ArtistCard",
+      "path": "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "TicketCard",
+      "path": "src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    }
+  ],
+  "layoutLocked": [
+    {
+      "name": "Box",
+      "path": "src/COMPOSITION/layout/Box/Box.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Stack",
+      "path": "src/COMPOSITION/layout/Stack/Stack.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Flex",
+      "path": "src/COMPOSITION/layout/Flex/Flex.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Grid",
+      "path": "src/COMPOSITION/layout/Grid/Grid.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Row",
+      "path": "src/COMPOSITION/layout/Row/Row.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Column",
+      "path": "src/COMPOSITION/layout/Column/Column.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Container",
+      "path": "src/COMPOSITION/layout/Container/Container.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Surface",
+      "path": "src/COMPOSITION/layout/Surface/Surface.tsx",
+      "lockStatus": "LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Section",
+      "path": "src/COMPOSITION/layout/Section/Section.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    },
+    {
+      "name": "Navbar",
+      "path": "src/COMPOSITION/layout/Navbar/Navbar.tsx",
+      "lockStatus": "PROCESS LOCKED",
+      "baselineReport": true,
+      "step0to12Complete": true,
+      "evidenceStatus": "FULL_0_12_COMPLETE"
+    }
+  ],
+  "createdViaC0C10": [
+    {
+      "name": "Accordion",
+      "path": "src/COMPOSITION/overlays/Accordion/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/ACCORDION_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "Chip",
+      "path": "src/COMPOSITION/overlays/Chip/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/CHIP_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "Combobox",
+      "path": "src/COMPOSITION/overlays/Combobox/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/COMBOBOX_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "Drawer",
+      "path": "src/COMPOSITION/overlays/Drawer/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/Drawer_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "FileUpload",
+      "path": "src/COMPOSITION/overlays/FileUpload/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/FileUpload_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "Footer",
+      "path": "src/COMPOSITION/layout/Footer/",
+      "creationDate": "2025-12-30",
+      "creationReport": "docs/reports/creation/Footer_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "MultiSelect",
+      "path": "src/COMPOSITION/controls/MultiSelect/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/MultiSelect_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "PageHeader",
+      "path": "src/COMPOSITION/layout/PageHeader/",
+      "creationDate": "2026-01-01",
+      "creationReport": "docs/reports/creation/PageHeader_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "ContentShell",
+      "path": "src/COMPOSITION/layout/ContentShell/",
+      "creationDate": "2026-01-01",
+      "creationReport": "docs/reports/creation/ContentShell_CREATION_REPORT.md",
+      "status": "CREATED"
+    },
+    {
+      "name": "Spinner",
+      "path": "src/COMPOSITION/overlays/Spinner/",
+      "creationDate": "2025-12-28",
+      "creationReport": "docs/reports/creation/SPINNER_CREATION_REPORT.md",
+      "status": "CREATED"
+    }
+  ],
+  "componentsWithoutBaselineReport": [
+    {
+      "name": "ModeHero",
+      "path": "src/COMPOSITION/layout/ModeHero/",
+      "layer": "COMPOSITION",
+      "reason": "Specialized layout"
+    },
+    {
+      "name": "ModalProvider",
+      "path": "src/COMPOSITION/overlays/ModalProvider/",
+      "layer": "COMPOSITION",
+      "reason": "Provider pattern"
+    },
+    {
+      "name": "Toaster",
+      "path": "src/COMPOSITION/overlays/Toaster/",
+      "layer": "COMPOSITION",
+      "reason": "Toast wrapper"
+    },
+    {
+      "name": "ToastProvider",
+      "path": "src/COMPOSITION/overlays/ToastProvider.tsx",
+      "layer": "COMPOSITION",
+      "reason": "Provider pattern"
+    },
+    {
+      "name": "ToastViewport",
+      "path": "src/COMPOSITION/overlays/ToastViewport.tsx",
+      "layer": "COMPOSITION",
+      "reason": "Viewport utility"
+    },
+    {
+      "name": "OverlayPortal",
+      "path": "src/COMPOSITION/overlays/OverlayPortal.tsx",
+      "layer": "COMPOSITION",
+      "reason": "Utility component"
+    }
+  ],
+  "mismatches": [],
+  "riskFlags": {
+    "radixPublicApiLeakage": false,
+    "cvaVariantPropsLeakage": false,
+    "typingStandardCompliance": true
+  },
+  "nextActions": [
+    {
+      "priority": "P1",
+      "component": "Toaster",
+      "path": "src/COMPOSITION/overlays/Toaster/",
+      "reason": "Toast system wrapper"
+    },
+    {
+      "priority": "P2",
+      "component": "ModeHero",
+      "path": "src/COMPOSITION/layout/ModeHero/",
+      "reason": "Specialized layout"
+    },
+    {
+      "priority": "P3",
+      "component": "ModalProvider",
+      "path": "src/COMPOSITION/overlays/ModalProvider/",
+      "reason": "Provider pattern"
+    }
+  ]
+}
+

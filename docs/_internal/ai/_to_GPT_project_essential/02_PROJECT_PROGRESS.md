@@ -142,6 +142,32 @@ The following Extension layer components have successfully completed Pipeline 18
      - Comprehensive test coverage (all subcomponents, composition, accessibility, edge cases)
    - **Quality:** Comprehensive test suite (Dialog.test.tsx), Storybook stories (LongContent required and validated)
 
+1a. **Drawer** - `src/COMPOSITION/overlays/Drawer/Drawer.tsx` — ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete, 2025-12-28)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Extension Overlay Component
+   - **Pipeline:** Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+   - **Purpose:** Side drawer overlay component with Portal, Backdrop, and focus trap support
+   - **Key Characteristics:**
+     - Portal rendering for proper z-index stacking
+     - Focus trap (loops focus inside drawer)
+     - Escape key closes drawer
+     - Overlay click optionally closes (prop controlled)
+     - Theme-aware overlay opacity using tokens
+     - Token-driven shadows, border radius, and spacing
+     - Complete accessibility (role, aria-modal, aria-labelledby, aria-describedby)
+     - Initial focus on first interactive element
+     - Position variants: left, right, bottom
+     - Size variants: sm, md, lg
+     - Backdrop variants: default, blurred, transparent
+     - Compound component pattern (Drawer.Content, Drawer.Header, Drawer.Body, Drawer.Footer)
+     - Token-compliant: 100% token-based implementation (OVERLAY_TOKENS.drawer)
+     - Foundation composition: uses Portal, Backdrop components
+     - Motion animations: slide-in/out with reduced motion support
+   - **Use Cases:** Side navigation, settings panels, filters, mobile menus
+   - **Creation Report:** `docs/reports/creation/Drawer_CREATION_REPORT.md`
+   - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
+   - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
+
 2. **Table** - `src/PATTERNS/tables/table/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
    - **Layer:** PATTERNS (Extension layer)
    - **Type:** Interactive table component with sorting, expansion, and selection capabilities
@@ -366,6 +392,12 @@ The following Composition layer components have successfully completed Pipeline 
    - **Audit Report:** `docs/reports/audit/PORTAL_BASELINE_REPORT.md`
    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
 
+1a. **Backdrop** - `src/COMPOSITION/overlays/Backdrop.tsx` — ✅ **PROCESS LOCKED** (2026-01-01)
+   - **Layer:** COMPOSITION (overlays)
+   - **Type:** Extension Overlay Component
+   - **Purpose:** Overlay backdrop component for modal and dialog overlays. Provides visual backdrop with optional blur and transparency variants.
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+
 2. **Toast** - `src/COMPOSITION/overlays/Toast.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25)
 3. **Slider** - `src/COMPOSITION/controls/Slider/Slider.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-25; Re-run Complete, 2025-12-27)
    - **Layer:** COMPOSITION (overlays)
@@ -511,8 +543,8 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Exports:** `NextLinkAdapter`, `NextLinkAdapterProps` (Extension-only, not exported from `src/index.ts`)
 
 3. **Field** - `src/PRIMITIVES/Field/Field.tsx`
-   - **Status:** ✅ **COMPOSITION READY**
-   - **Completion Date:** 2025-12-27
+   - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
+   - **Lock Date:** 2026-01-01
    - **Pipeline 18A Completion:** 2025-12-27 (Third Pass: Steps 0-12 complete, no changes required)
    - **Audit Report:** `docs/reports/audit/FIELD_BASELINE_REPORT.md`
    - **Component Type:** Composition Primitive (Form Composition)
@@ -751,7 +783,7 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
 - **Testing:** ✅ COMPREHENSIVE (408 lines, multiple test suites covering behavior, edge cases, accessibility, variants, sizes, orientation, marks)
 - **Storybook:** ✅ COMPLETE (Matrix, States, SizesGallery stories + additional use case stories)
 - **Audit Report:** `docs/reports/audit/SLIDER_BASELINE_REPORT.md`
-- **Reference:** Foundation Step Pipeline 18A (`docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md`)
+- **Reference:** Component Refactoring Pipeline 18A (`docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md`)
 
 ### Avatar & AvatarGroup Components (100% Complete, Pipeline 18A Complete)
 
@@ -3335,6 +3367,163 @@ Added cross-references to Interactive Size Scale Authority Contract in all relat
 
 ## Component Creation Completions
 
+### Spinner Component (2025-12-28)
+
+- ✅ **Spinner** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
+  - Component: Spinner
+  - Type: Extension Layer Component - Visual Feedback
+  - Category: overlays (loading feedback component)
+  - Location: `src/COMPOSITION/overlays/Spinner/Spinner.tsx`
+  - Status: ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete)
+  - Last Updated: 2025-12-28 (Ring variant removed, subtle tone fixed with CSS variable fallback)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Creation Report: `docs/reports/creation/SPINNER_CREATION_REPORT.md`
+  - Features:
+    - Multiple visual variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple)
+    - Full size scale support (xs, sm, md, lg, xl, 2xl, 3xl)
+    - Tone variants (primary, muted, subtle) with CSS variable fallback support
+    - Easing variants (linear, ease-in, ease-out, ease-in-out) for animation timing
+    - Optional text label with configurable positioning (top, right, bottom, left)
+    - Motion animation via tokens
+    - Reduced motion support (`motion-reduce:animate-none`)
+    - Accessibility: role="status", aria-label, aria-live="polite"
+  - Use Cases: Inline loading (buttons, inputs), page loading, data loading (tables, lists), overlay loading
+  - Token Compliance: ✅ 100% (SPINNER_TOKENS created, all visual properties token-based)
+  - Key Artifacts:
+    - Component: `Spinner.tsx`
+    - Tokens: `src/FOUNDATION/tokens/components/spinner.ts`
+    - Stories: `Spinner.stories.tsx` (Default, SizesGallery, States, WithLabel, use cases)
+    - Tests: `Spinner.test.tsx` (behavior, accessibility, motion, token compliance)
+  - Exports: `Spinner`, `SpinnerEasing`, `SpinnerLabelPosition`, `SpinnerProps`, `SpinnerSize`, `SpinnerTone`, `SpinnerVariant`
+
+### Accordion Component (2025-12-28)
+
+- ✅ **Accordion** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
+  - Component: Accordion
+  - Type: Extension Layer Component - Composite Disclosure
+  - Category: overlays (interactive disclosure component)
+  - Location: `src/COMPOSITION/overlays/Accordion/Accordion.tsx`
+  - Status: ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Creation Report: `docs/reports/creation/ACCORDION_CREATION_REPORT.md`
+  - **Bug Fix (2025-12-28):** Fixed click interaction issue - disabled tokens now use `disabled:` prefix per INTERACTION_AUTHORITY
+  - Features:
+    - Single and multiple open modes (type="single" | "multiple")
+    - Semantic variants (primary, secondary, accent, neutral)
+    - Size variants (sm, md, lg)
+    - Expand/collapse animations (`animate-accordion-down`, `animate-accordion-up`)
+    - Chevron icon with rotation transition
+    - Reduced motion support (via Tailwind keyframes)
+    - Accessibility: ARIA attributes (role="region", aria-expanded, aria-labelledby), keyboard navigation (Arrow Up/Down, Enter/Space)
+    - Radix delegation: All behavior (keyboard navigation, focus management, ARIA) delegated to Radix Accordion primitives
+  - Use Cases: FAQ sections, settings panels, navigation menus, multi-step forms, collapsible content sections
+  - Token Compliance: ✅ 100% (ACCORDION_TOKENS created, all visual properties token-based, disabled tokens use `disabled:` prefix)
+  - Key Artifacts:
+    - Component: `Accordion.tsx`
+    - Tokens: `src/FOUNDATION/tokens/components/accordion.ts` (disabled tokens fixed with `disabled:` prefix)
+    - Stories: `Accordion.stories.tsx` (Default, Matrix, States, SizesGallery, LongContent, FAQ, SettingsPanel)
+    - Tests: `Accordion.test.tsx` (behavior, A11Y, focus, input, edge cases)
+  - Exports: `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionRoot`, `AccordionTrigger`
+  - Types: `AccordionContentProps`, `AccordionItemProps`, `AccordionRootProps`, `AccordionTriggerProps`, `AccordionVariant`, `AccordionSize`
+
+### Chip Component (2025-12-28)
+
+- ✅ **Chip** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
+  - Component: Chip
+  - Type: Extension Layer Component - Visual/Interactive
+  - Category: controls (interactive control with optional modes)
+  - Location: `src/COMPOSITION/overlays/Chip/Chip.tsx`
+  - Status: ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Creation Report: `docs/reports/creation/CHIP_CREATION_REPORT.md`
+  - Features:
+    - Multiple interaction modes: display-only, clickable (onClick), removable (onRemove), selectable (selected state)
+    - Variant support (primary, secondary, accent, outline, ghost, destructive)
+    - Radius variants (sm, md, lg, pill)
+    - NO size prop (semi-interactive component per INTERACTIVE_SIZE_SCALE_AUTHORITY)
+    - Keyboard navigation: Enter/Space (activate), Delete/Backspace (remove)
+    - Accessibility: ARIA attributes (role="button", aria-pressed, aria-disabled), accessible names, semantic roles
+    - Motion: Hover transitions via MOTION_TOKENS, reduced motion support
+    - Focus management: focus-visible styling, keyboard-only indication, tab order
+  - Use Cases: Tags with deletion, filter chips, multi-select options, clickable categories, display-only status indicators
+  - Token Compliance: ✅ 100% (CHIP_TOKENS created, all visual properties token-based, no raw values)
+  - Key Artifacts:
+    - Component: `Chip.tsx`
+    - Tokens: `src/FOUNDATION/tokens/components/chip.ts` (layout, padding, radius, typography, variants, motion, focus, disabled, remove button)
+    - Stories: `Chip.stories.tsx` (Default, States, DisplayChips, ClickableChips, RemovableChips, SelectableChips, RadiusVariants, CombinedUseCases - 8 stories total)
+    - Tests: `Chip.test.tsx` (44 test cases: behavior, edge cases, A11Y, focus, input/keyboard, variants, radius, motion)
+  - Exports: `Chip`, `ChipProps`, `ChipVariant`, `ChipRadius`, `CHIP_VARIANTS`, `CHIP_RADIUS_VALUES`, `chipVariants`
+  - Types: `ChipVariant` (`primary | secondary | accent | outline | ghost | destructive`), `ChipRadius` (`sm | md | lg | pill`)
+  - Date Completed: 2025-12-28
+
+### Drawer Component (2025-12-28)
+
+- ✅ **Drawer** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
+  - Component: Drawer
+  - Type: Extension Layer Component - Overlay
+  - Category: overlays (side drawer overlay component)
+  - Creation Date: 2025-12-28
+  - Last Updated: 2025-12-28
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Creation Report: `docs/reports/creation/Drawer_CREATION_REPORT.md`
+  - Features:
+    - Portal rendering for proper z-index stacking
+    - Focus trap (loops focus inside drawer)
+    - Escape key closes drawer
+    - Overlay click optionally closes (prop controlled)
+    - Theme-aware overlay opacity using tokens
+    - Token-driven shadows, border radius, and spacing
+    - Complete accessibility (role="dialog", aria-modal="true", aria-labelledby, aria-describedby)
+    - Initial focus on first interactive element
+    - Position variants: left, right, bottom
+    - Size variants: sm, md, lg
+    - Backdrop variants: default, blurred, transparent
+    - Compound component pattern (Drawer.Content, Drawer.Header, Drawer.Body, Drawer.Footer)
+    - Motion animations: slide-in/out with reduced motion support (OVERLAY_TOKENS.drawer.animation)
+    - Token-compliant: 100% token-based implementation (OVERLAY_TOKENS.drawer)
+    - Foundation composition: uses Portal, Backdrop components, useFocusLock, useScrollLock utilities
+  - Use Cases: Side navigation, settings panels, filters, mobile menus
+  - Key Artifacts:
+    - Component: `Drawer.tsx`
+    - Types: `Drawer.types.ts`
+    - Variants: `drawer-variants.ts` (CVA_CANONICAL_STYLE compliant)
+    - Stories: `Drawer.stories.tsx` (Default, SizesGallery, States, LongContent, NavigationDrawer, SettingsDrawer, FilterDrawer)
+    - Tests: `Drawer.test.tsx` (behavior, A11Y, focus, input, motion, token compliance)
+  - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
+  - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
+
+### FileUpload Component (2025-12-28)
+
+- ✅ **FileUpload** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)
+  - Component: FileUpload
+  - Type: Extension Layer Component - Composite Form Control
+  - Category: overlays (file upload component, fallback from forms category)
+  - Creation Date: 2025-12-28
+  - Last Updated: 2025-12-28
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Creation Report: `docs/reports/creation/FileUpload_CREATION_REPORT.md`
+  - Features:
+    - Drag-and-drop file selection (HTML5 Drag and Drop API)
+    - File preview with thumbnails (images) and file info
+    - File validation (size, type, count)
+    - Controlled and uncontrolled modes
+    - Size variants (sm, md, lg)
+    - Visual variants (outline, filled)
+    - Multiple file selection support
+    - Error handling and display
+    - Disabled and loading states
+    - Motion animation (.tm-motion-fade-in for file appearance, transition.colors for drag-over)
+    - Reduced motion support (inherited from motion utilities)
+    - Accessibility: aria-label, aria-describedby, aria-busy, aria-invalid, aria-disabled
+    - Keyboard navigation (Enter/Space on dropzone, Tab navigation)
+    - Semantic HTML (role="button", role="list", role="listitem")
+    - Token-compliant: 100% token-based implementation (spacing, radius, color, typography, shadow, motion)
+    - Foundation composition: uses Button, Text components
+  - Use Cases: Image upload, document upload, profile picture upload, file attachments
+  - Validation Features: File size limits, file type restrictions, file count limits
+  - Exports: FileUpload, FileUploadError, FileUploadProps, FileUploadSize, FileUploadVariant
+  - Date Completed: 2025-12-28
+
 ### Navigation Primitives (2025-12-26)
 
 - ✅ **NavRoot** - Foundation Step Pipeline 18A (Steps 0-12 complete, 2025-12-26)
@@ -3488,6 +3677,22 @@ Added cross-references to Interactive Size Scale Authority Contract in all relat
   - Hooks: `useNotificationCenter`, `useNotificationCenterContext`
   - Types: `GroupByFunction`, `NotificationChannel`, `NotificationContextType`, `NotificationData`, `NotificationOptions`, `NotificationVariant`, and all component prop types
 
+- ✅ **Combobox** - Component Creation Pipeline (C0-C10) Complete (2025-12-28)
+  - Component: Combobox
+  - Type: Extension Layer Overlay - Autocomplete
+  - Location: `src/COMPOSITION/overlays/Combobox/`
+  - Creation Report: `docs/reports/creation/COMBOBOX_CREATION_REPORT.md`
+  - Status: ✅ ALLOWED (Extension Component)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2025-12-28)
+  - Features: Autocomplete with dropdown list, single-select and multi-select modes, client-side and server-side filtering, keyboard navigation (Arrow keys, Enter, Escape), tags display for multi-select
+  - Foundation Composition: Input + Popover
+  - Token Compliance: ✅ 100% (INPUT_TOKENS, POPOVER_TOKENS, SPACING_TOKENS)
+  - Key Characteristics: Compound component pattern (Root, Input, List), controlled/uncontrolled modes, loading states, disabled options, accessible (role="combobox", aria-expanded, aria-autocomplete)
+  - Sizes: `sm | md | lg` (Interactive Size Scale)
+  - Use Cases: Search with autocomplete, tags input, large list selection with filtering
+  - Exports: `Combobox`, `ComboboxInput`, `ComboboxList`, `ComboboxRoot`
+  - Types: `ComboboxRootProps`, `ComboboxInputProps`, `ComboboxListProps`, `ComboboxOption`, `ComboboxSize`
+
 ---
 
 ## Library Maturity Growth System
@@ -3527,6 +3732,72 @@ A comprehensive system for controlled library growth has been implemented:
 ## Pending Tasks
 
 _Upgrade Layer (U1-U6, U9-U13) and subsequent layers pending. See master_tasks.json for full task list._
+
+---
+
+## Token System Updates
+
+### Gradient Tokens Fixes (2025-12-28)
+
+- ✅ **Fixed `GRADIENT_TOKENS.ring.subtle` token**
+  - **Issue:** Token used `--muted` (background color) instead of `--muted-foreground` (text color)
+  - **Fix:** Replaced `--muted` with `--muted-foreground` in `src/FOUNDATION/tokens/gradients.ts`
+  - **Impact:** `ring.subtle` gradient is now visible on light backgrounds
+  - **Location:** `src/FOUNDATION/tokens/gradients.ts` (line 270)
+
+- ✅ **Improved Storybook demo for glass gradients**
+  - **Issue:** `glass.light` and `glass.dark` gradients were not visible on white background in Storybook
+  - **Fix:** Added dark background (`from-gray-900 via-gray-800 to-gray-900`) for `glass.light` and `glass.dark` in Storybook demo
+  - **Impact:** Glass gradients are now properly demonstrated in Storybook gallery
+  - **Location:** `src/FOUNDATION/tokens/GradientTokens.stories.tsx`
+  - **Note:** This is a Storybook-only change for demonstration purposes; actual tokens remain unchanged
+
+---
+
+## Component Creation
+
+### MultiSelect Component (2025-12-28)
+
+- ✅ **MultiSelect Component Created**
+  - **Date:** 2025-12-28
+  - **Pipeline:** Component Creation Pipeline (Steps C0-C10 complete)
+  - **Location:** `src/COMPOSITION/controls/MultiSelect/MultiSelect.tsx`
+  - **Type:** Extension Layer Composite Control
+  - **Purpose:** Multi-selection dropdown control with tag-based selection visualization
+  - **Foundation Composition:** Composes SelectRoot, SelectContent, SelectViewport from Foundation Select; Uses Checkbox from Foundation Primitives
+  - **Size Scale:** sm, md, lg (canonical interactive size scale)
+  - **Token Compliance:** ✅ 100% (INPUT_TOKENS, SELECT_TOKENS, CHECKBOX_TOKENS, CHIP_TOKENS, MOTION_TOKENS, POPOVER_TOKENS)
+  - **CVA Structure:** tokenCVA (multiSelectTriggerVariants)
+  - **Accessibility:** aria-label/aria-labelledby, aria-multiselectable, aria-checked on items, keyboard navigation
+  - **Test Coverage:** Comprehensive (behavior, edge cases, A11Y, focus, keyboard)
+  - **Storybook Coverage:** Compliant (Default, SizesGallery, States, LongContent, 5 use case stories)
+  - **Motion Compliance:** ✅ (MOTION_TOKENS.transitionPreset.colors, reduced motion supported)
+  - **Exports:** `MultiSelect`, `MultiSelectProps`, `MultiSelectOption`, `MultiSelectSize`
+  - **Creation Report:** `docs/reports/creation/MultiSelect_CREATION_REPORT.md`
+  - **Registered:** ✅ EXTENSION_STATE.md updated, src/index.ts export added
+
+### Footer Component (2025-12-30)
+
+- ✅ **Footer Component Created**
+  - **Date:** 2025-12-30
+  - **Pipeline:** Component Creation Pipeline (Steps C0-C10 complete)
+  - **Location:** `src/COMPOSITION/layout/Footer/Footer.tsx`
+  - **Type:** Extension Layer Layout Component
+  - **Purpose:** Page-level footer container for bottom content (copyright, links, navigation, metadata). Provides semantic `<footer>` element with flexible content slots (left, center, right).
+  - **Key Characteristics:**
+    - Semantic `<footer>` element (implicit role="contentinfo")
+    - Flexible content slots (left, center, right) or children prop
+    - Token-driven padding (px, py) and background color (bg)
+    - Optional top border
+    - Uses Stack internally for layout composition
+    - Responsive token support
+    - Motion: NO MOTION BY DESIGN (static layout container)
+  - **Token Compliance:** ✅ 100% (spacing tokens, color tokens)
+  - **Test Coverage:** Comprehensive (render, props, a11y, token compliance)
+  - **Storybook Coverage:** Compliant (Default, WithSlots, WithBorder, ResponsivePadding, FullExample, WithChildren)
+  - **Exports:** `Footer`, `FooterProps`
+  - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
+  - **Registered:** ✅ EXTENSION_STATE.md updated, src/COMPOSITION/layout/index.ts export added
 
 ---
 
