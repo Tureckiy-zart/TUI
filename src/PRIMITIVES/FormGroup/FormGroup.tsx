@@ -91,39 +91,31 @@ const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>(
     const descriptionId = description ? `formgroup-${groupId}-description` : undefined;
     const errorId = error ? `formgroup-${groupId}-error` : undefined;
 
-    // Clone description and error to add ID and aria-describedby if they are React elements
-    // Otherwise wrap in a div
-    const descriptionWithId = description ? (
-      React.isValidElement(description) ? (
-        React.cloneElement(
-          description as React.ReactElement,
-          {
-            id: descriptionId,
-            "aria-describedby": descriptionId,
-          } as React.HTMLAttributes<HTMLElement>,
-        )
-      ) : (
-        <div id={descriptionId} aria-describedby={descriptionId}>
-          {description}
-        </div>
-      )
-    ) : null;
+    // Helper function to add ID and aria-describedby to description/error
+    const addIdToElement = (element: React.ReactNode, id: string | undefined): React.ReactNode => {
+      if (!element || !id) {
+        return null;
+      }
 
-    const errorWithId = error ? (
-      React.isValidElement(error) ? (
-        React.cloneElement(
-          error as React.ReactElement,
+      if (React.isValidElement(element)) {
+        return React.cloneElement(
+          element as React.ReactElement,
           {
-            id: errorId,
-            "aria-describedby": errorId,
+            id,
+            "aria-describedby": id,
           } as React.HTMLAttributes<HTMLElement>,
-        )
-      ) : (
-        <div id={errorId} aria-describedby={errorId}>
-          {error}
+        );
+      }
+
+      return (
+        <div id={id} aria-describedby={id}>
+          {element}
         </div>
-      )
-    ) : null;
+      );
+    };
+
+    const descriptionWithId = addIdToElement(description, descriptionId);
+    const errorWithId = addIdToElement(error, errorId);
 
     return (
       <fieldset ref={ref} disabled={disabled} aria-required={required || undefined} {...props}>
