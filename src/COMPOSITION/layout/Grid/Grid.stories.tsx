@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Grid } from "./Grid";
 
+// Helper style for card items with proper text color
+const cardItemStyle = { color: "hsl(var(--card-foreground))" };
+
 const meta: Meta<typeof Grid> = {
   title: "UI / Composition / Layout / Grid",
   component: Grid,
@@ -62,12 +65,42 @@ export const Default: Story = {
     gap: 4,
     children: (
       <>
-        <div className="rounded-md border bg-card p-md">Item 1</div>
-        <div className="rounded-md border bg-card p-md">Item 2</div>
-        <div className="rounded-md border bg-card p-md">Item 3</div>
-        <div className="rounded-md border bg-card p-md">Item 4</div>
-        <div className="rounded-md border bg-card p-md">Item 5</div>
-        <div className="rounded-md border bg-card p-md">Item 6</div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 1
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 2
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 3
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 4
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 5
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 6
+        </div>
       </>
     ),
   },
@@ -82,14 +115,54 @@ export const ResponsiveColumns: Story = {
     gap: 4,
     children: (
       <>
-        <div className="rounded-md border bg-card p-md">Item 1</div>
-        <div className="rounded-md border bg-card p-md">Item 2</div>
-        <div className="rounded-md border bg-card p-md">Item 3</div>
-        <div className="rounded-md border bg-card p-md">Item 4</div>
-        <div className="rounded-md border bg-card p-md">Item 5</div>
-        <div className="rounded-md border bg-card p-md">Item 6</div>
-        <div className="rounded-md border bg-card p-md">Item 7</div>
-        <div className="rounded-md border bg-card p-md">Item 8</div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 1
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 2
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 3
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 4
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 5
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 6
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 7
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Item 8
+        </div>
       </>
     ),
   },
@@ -109,33 +182,93 @@ export const TokenBasedGaps: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Gap: xs (1) - uses CSS variables</h3>
         <Grid cols={3} gap={1}>
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 1
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 2
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Gap: md (4) - uses CSS variables</h3>
         <Grid cols={3} gap={4}>
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 1
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 2
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Gap: xl (8) - uses CSS variables</h3>
         <Grid cols={3} gap={8}>
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 1
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 2
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Gap: semantic lg - uses CSS variables</h3>
         <Grid cols={3} gap="lg">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 1
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 2
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 3
+          </div>
         </Grid>
       </div>
     </div>
@@ -156,32 +289,69 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Start</h3>
         <Grid cols={3} gap={4} align="start" className="h-32">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="h-20 rounded-md border bg-card p-md">Tall Item</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 1
+          </div>
+          <div
+            className="h-20 cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Tall Item
+          </div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Center</h3>
         <Grid cols={3} gap={4} align="center" className="h-32">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="h-20 rounded-md border bg-card p-md">Tall Item</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 1
+          </div>
+          <div
+            className="h-20 cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Tall Item
+          </div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Justify: Between</h3>
         <Grid cols={3} gap={4} justify="between">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
-          <div className="rounded-md border bg-card p-md">Item 3</div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 1
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 2
+          </div>
+          <div
+            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            style={cardItemStyle}
+          >
+            Item 3
+          </div>
         </Grid>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Justify: Center</h3>
         <Grid cols={3} gap={4} justify="center">
-          <div className="rounded-md border bg-card p-md">Item 1</div>
-          <div className="rounded-md border bg-card p-md">Item 2</div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 1
+          </div>
+          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+            Item 2
+          </div>
         </Grid>
       </div>
     </div>
@@ -196,14 +366,37 @@ export const MixedContent: Story = {
     gap: 4,
     children: (
       <>
-        <div className="col-span-full rounded-md border bg-card p-lg">
+        <div
+          className="col-span-full cursor-pointer rounded-md border bg-card p-lg tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
           <h2 className="text-2xl font-bold">Featured Section</h2>
           <p className="text-muted-foreground">This spans all columns</p>
         </div>
-        <div className="rounded-md border bg-card p-md">Card 1</div>
-        <div className="rounded-md border bg-card p-md">Card 2</div>
-        <div className="rounded-md border bg-card p-md">Card 3</div>
-        <div className="rounded-md border bg-card p-md">Card 4</div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Card 1
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Card 2
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Card 3
+        </div>
+        <div
+          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          style={cardItemStyle}
+        >
+          Card 4
+        </div>
       </>
     ),
   },
