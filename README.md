@@ -10,8 +10,8 @@ Strict. Predictable. Built for system-level consistency.
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Current Release:** [v2.0.3](CHANGELOG.md#203---2025-12-31) (npm)  
-**Next Release:** v2.0.4 (Unreleased) — See [CHANGELOG](CHANGELOG.md#unreleased)
+**Current Release:** [v2.0.5](CHANGELOG.md#205) (npm)  
+**Next Release:** [Unreleased] — See [CHANGELOG](CHANGELOG.md#unreleased)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" alt="TUI Banner" />
