@@ -1,8 +1,8 @@
 # 🔒 Tenerife UI Architecture Lock
 
-**Version:** 1.6  
+**Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-28 (Gradient tokens fixes: ring.subtle token corrected, glass.light/dark Storybook demo improved)  
+**Last Updated:** 2026-01-02 (DX, Navigation and Surface layers lock — post-audit)  
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -16,6 +16,10 @@ This document **formally locks** the UI foundation architecture of `@tenerife.mu
 **This is a binding architectural contract.** Any violation of these rules is considered an architectural breach.
 
 > 🔒 **Final Foundation Lock:** For the authoritative, definitive Foundation lock document, see **[FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)**. The Final Foundation Lock document is the **single source of truth** for the locked Foundation layer and officially closes the Foundation architecture phase.
+
+**Foundation Component Lock Sweep:** Foundation component lock status was verified and confirmed on 2026-01-02 (Task TUI_FOUNDATION_LOCK_SWEEP_01). All 19 Foundation components (16 LOCKED + 3 DISCREPANCY resolved) have been verified against architecture rules, Public API canon, token authority, and pipeline requirements. See `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_STATUS.md` and `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_VIOLATIONS.md` for detailed verification results.
+
+**Foundation Component Lock Sweep Finalization:** Foundation Component Lock Sweep was formally finalized on 2026-01-02 (Task TUI_FOUNDATION_LOCK_SWEEP_FINAL_01). All 21 Foundation components have been confirmed as locked, compliant, and immutable. Foundation layer is complete, compliant, and officially finalized. See `docs/architecture/FOUNDATION_LOCK.md` (section "Foundation Component Lock Sweep Finalization") for the complete list of finalized components and verification results.
 
 **Foundation Status:** ✅ **FOUNDATION CLOSED** (2025-12-16)  
 **All Foundation Authorities are CLOSED and IMMUTABLE.** Foundation architecture phase is officially closed.
@@ -63,6 +67,7 @@ The following components are **locked** and **immutable**:
 | Component       | Category   | Base Library      | Foundation Status | Status Date |
 | --------------- | ---------- | ----------------- | ----------------- | ----------- |
 | **Button**      | Actions    | Native `<button>` | ✅ **FINAL LOCK**  | 2025-12-25 |
+| **IconButton**   | Actions    | Native `<button>` (via Button) | ✅ **LOCKED** | 2026-01-02 |
 | **Link**        | Navigation | Native `<a>`      | ✅ **LOCKED**      | 2025-12-25 |
 | **Text**        | Typography | Polymorphic elements (span, p, label, strong, em) | ✅ **LOCKED**      | 2025-12-26 |
 | **Input**       | Primitives | Native `<input>`  | ✅ **LOCKED**      | 2025-12-26 |
@@ -73,10 +78,16 @@ The following components are **locked** and **immutable**:
 | **Switch**      | Form Controls | Native `<button role="switch">` | ✅ **LOCKED** | 2025-12-25 |
 | **Textarea**    | Form Controls | Native `<textarea>` | ✅ **LOCKED** | 2025-12-26 |
 | **Label**       | Form Input | Radix Label | ✅ **LOCKED** | 2025-12-25 |
+| **FormGroup**   | Form Input | Native `<fieldset>` | ✅ **LOCKED** | 2026-01-02 |
+| **HelperText**  | Form Input | Native `<p>` (via Text) | ✅ **LOCKED** | 2026-01-02 |
+| **ErrorText**   | Form Input | Native `<p>` (via Text) | ✅ **LOCKED** | 2026-01-02 |
 | **Select**      | Form Input | Radix Select | ✅ **LOCKED** | 2025-12-25 |
 | **Icon**        | Visual Primitives | SVG Registry | ✅ **LOCKED** | 2025-12-25 |
+| **Modal**       | Overlays   | Radix Dialog | ✅ **PROCESS LOCKED** | 2025-12-25 |
+| **ContextMenu** | Overlays   | Radix ContextMenu | ✅ **PROCESS LOCKED** | 2025-12-25 |
+| **Toast**       | Overlays   | Radix Toast | ✅ **LOCKED** | 2025-12-26 |
 
-**Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md.
+**Note:** Foundation is CLOSED; specific components may be temporarily unlocked as LEGACY UNLOCKED strictly for canonical migration. Canonical truth: FOUNDATION_LOCK.md. **Foundation Component Lock Sweep (2026-01-02):** All Foundation components verified and confirmed. See FOUNDATION_LOCK.md for complete list.
 
 ### Foundation Component Rules
 
@@ -214,11 +225,15 @@ The following Extension layer components have successfully completed Pipeline 18
 |-----------|----------|--------|-----------|--------------|
 | **Portal** | `src/COMPOSITION/overlays/Portal.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/PORTAL_BASELINE_REPORT.md` |
 | **Dialog** | `src/COMPOSITION/overlays/Dialog.tsx` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/DIALOG_BASELINE_REPORT.md` |
+| **Backdrop** | `src/COMPOSITION/overlays/Backdrop.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/BACKDROP_BASELINE_REPORT.md` |
+| **Navbar** | `src/COMPOSITION/layout/Navbar/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/NAVBAR_BASELINE_REPORT.md` |
 | **Progress** | `src/PRIMITIVES/Progress/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/PROGRESS_BASELINE_REPORT.md` |
 | **Separator** | `src/COMPOSITION/controls/Separator/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/SEPARATOR_BASELINE_REPORT.md` |
 | **AspectRatio** | `src/COMPOSITION/controls/AspectRatio/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/ASPECTRATIO_BASELINE_REPORT.md` |
 | **Badge** | `src/PRIMITIVES/Badge/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/BADGE_BASELINE_REPORT.md` |
 | **Tooltip** | `src/COMPOSITION/overlays/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/TOOLTIP_BASELINE_REPORT.md` |
+| **Dropdown** | `src/COMPOSITION/overlays/Dropdown/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/DROPDOWN_BASELINE_REPORT.md` |
+| **Spacer** | `src/COMPOSITION/layout/Spacer/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/SPACER_BASELINE_REPORT.md` |
 | **Slider** | `src/COMPOSITION/controls/Slider/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/SLIDER_BASELINE_REPORT.md` |
 | **RangeSlider** | `src/COMPOSITION/controls/RangeSlider/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/RANGESLIDER_BASELINE_REPORT.md` |
 | **Modal** | `src/COMPOSITION/overlays/Modal/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/MODAL_BASELINE_REPORT.md` |
@@ -229,7 +244,7 @@ The following Extension layer components have successfully completed Pipeline 18
 | **NavList** | `src/COMPOSITION/navigation/nav-list/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVLIST_BASELINE_REPORT.md` |
 | **NavSeparator** | `src/COMPOSITION/navigation/NavSeparator/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVSEPARATOR_BASELINE_REPORT.md` |
 | **NavText** | `src/COMPOSITION/navigation/NavText/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVTEXT_BASELINE_REPORT.md` |
-| **Box** | `src/COMPOSITION/layout/Box/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/BOX_BASELINE_REPORT.md` |
+| **Box** | `src/COMPOSITION/layout/Box/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26, Extension Lock 2026-01-01) | `docs/reports/audit/BOX_BASELINE_REPORT.md`, `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
 | **Row** | `src/COMPOSITION/layout/Row/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/ROW_BASELINE_REPORT.md` |
 | **Stack** | `src/COMPOSITION/layout/Stack/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/STACK_BASELINE_REPORT.md` |
 | **Column** | `src/COMPOSITION/layout/Column/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/COLUMN_BASELINE_REPORT.md` |
@@ -237,6 +252,18 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Grid** | `src/COMPOSITION/layout/Grid/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/GRID_BASELINE_REPORT.md` |
 | **Surface** | `src/COMPOSITION/layout/Surface/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/SURFACE_BASELINE_REPORT.md` |
 | **Container** | `src/COMPOSITION/layout/Container/` | ✅ **LOCKED** | 2025-12-15 (validated 2025-12-26) | `docs/reports/audit/CONTAINER_BASELINE_REPORT.md` |
+| **ContentShell** | `src/COMPOSITION/layout/ContentShell/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Divider** | `src/COMPOSITION/layout/Divider/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **List** | `src/COMPOSITION/layout/List/` | ✅ **LOCKED** | 2026-01-02 | `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md` |
+| **ListItem** | `src/COMPOSITION/layout/ListItem/` | ✅ **LOCKED** | 2026-01-02 | `docs/reports/audit/LISTITEM_BASELINE_REPORT.md` |
+| **Inset** | `src/COMPOSITION/layout/Inset/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **PageHeader** | `src/COMPOSITION/layout/PageHeader/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Section** | `src/COMPOSITION/layout/Section/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **SidebarLayout** | `src/COMPOSITION/layout/SidebarLayout/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **StickyBar** | `src/COMPOSITION/layout/StickyBar/` | ✅ **LOCKED** | 2026-01-01 | `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md` |
+| **Navbar** | `src/COMPOSITION/layout/Navbar/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/NAVBAR_BASELINE_REPORT.md` |
+| **Panel** | `src/COMPOSITION/layout/Panel/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/PANEL_BASELINE_REPORT.md` |
+| **ButtonGroup** | `src/COMPOSITION/actions/ButtonGroup/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/BUTTONGROUP_BASELINE_REPORT.md` |
 | **Toast** | `src/COMPOSITION/overlays/Toast.tsx` | ✅ **LOCKED** | 2025-12-26 | `docs/reports/audit/TOAST_BASELINE_REPORT.md` |
 | **SimpleTable** | `src/PATTERNS/tables/SimpleTable/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SIMPLETABLE_BASELINE_REPORT.md` |
 | **Table** | `src/PATTERNS/tables/table/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TABLE_BASELINE_REPORT.md` |
@@ -244,21 +271,112 @@ The following Extension layer components have successfully completed Pipeline 18
 | **List** | `src/PATTERNS/lists/List/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/LIST_BASELINE_REPORT.md` |
 | **Timeline** | `src/PATTERNS/lists/Timeline/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/TIMELINE_BASELINE_REPORT.md` |
 | **IconGallery** | `src/COMPOSITION/utilities/IconGallery/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/ICONGALLERY_BASELINE_REPORT.md` |
+| **Inline** | `src/COMPOSITION/layout/Inline/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/INLINE_BASELINE_REPORT.md` |
 | **EmptyState** | `src/PATTERNS/states/EmptyState/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md` |
 | **NotificationCenter** | `src/DOMAIN/notifications/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
 | **Alert** | `src/PRIMITIVES/Alert/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/ALERT_BASELINE_REPORT.md` |
-| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 (Second Pass: 2026-01-01) | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **VenueCard** | `src/PATTERNS/cards/cards/VenueCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/VENUECARD_BASELINE_REPORT.md` |
+| **PromoCard** | `src/PATTERNS/cards/cards/PromoCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROMOCARD_BASELINE_REPORT.md` |
 | **FilterBar** | `src/PATTERNS/filters/filters/FilterBar/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md` |
 | **HoverCard** | `src/PATTERNS/menus/menus/hover-card/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md` |
 | **NavRoot** | `src/COMPOSITION/navigation/NavRoot/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVROOT_BASELINE_REPORT.md` |
 | **NavLink** | `src/PRIMITIVES/NavLink/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVLINK_BASELINE_REPORT.md` |
 | **SegmentedControl** | `src/COMPOSITION/navigation/segmented-control/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SEGMENTEDCONTROL_BASELINE_REPORT.md` |
 | **Breadcrumbs** | `src/COMPOSITION/navigation/breadcrumbs/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/BREADCRUMBS_BASELINE_REPORT.md` |
+| **Menu** | `src/COMPOSITION/navigation/Menu/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/MENU_BASELINE_REPORT.md` |
 | **ContextMenu** | `src/COMPOSITION/overlays/ContextMenu/` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md` |
 | **TAS** | `src/COMPOSITION/motion/animation/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/TAS_BASELINE_REPORT.md` |
 | **Field** | `src/PRIMITIVES/Field/` | ✅ **COMPOSITION READY** | 2025-12-27 | `docs/reports/audit/FIELD_BASELINE_REPORT.md` |
 | **Popover** | `src/COMPOSITION/overlays/Popover.tsx` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/POPOVER_BASELINE_REPORT.md` |
 | **NextLinkAdapter** | `src/EXTENSIONS/next/NextLinkAdapter.tsx` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md` |
+| **EventCard** | `src/DOMAIN/sections/EventCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/EVENTCARD_BASELINE_REPORT.md` |
+| **CategoryCard** | `src/PATTERNS/cards/cards/CategoryCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/CATEGORYCARD_BASELINE_REPORT.md` |
+| **ProfileCard** | `src/DOMAIN/auth/auth/ProfileCard.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` |
+| **VisuallyHidden** | `src/COMPOSITION/a11y/VisuallyHidden/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/VISUALLYHIDDEN_BASELINE_REPORT.md` |
+| **FocusTrap** | `src/COMPOSITION/focus/FocusTrap/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/FOCUSTRAP_BASELINE_REPORT.md` |
+| **ArtistCard** | `src/PATTERNS/cards/cards/ArtistCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/ARTISTCARD_BASELINE_REPORT.md` |
+| **TicketCard** | `src/PATTERNS/cards/cards/TicketCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/TICKETCARD_BASELINE_REPORT.md` |
+
+---
+
+## 🔒 DX, Navigation and Surface Layers Lock (Post-Audit)
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Priority:** CRITICAL  
+**Topic Status:** **CLOSED** — No further changes allowed without explicit UNLOCK
+
+### Lock Scope
+
+The following components from DX, Navigation, and Surface layers have been **formally locked** after successful audit and Pipeline 18A completion:
+
+#### DX Core Utils
+
+- **VisuallyHidden** (`src/COMPOSITION/a11y/VisuallyHidden/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **FocusTrap** (`src/COMPOSITION/focus/FocusTrap/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+
+#### DX Enhancers
+
+- **Inline** (`src/COMPOSITION/layout/Inline/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **Spacer** (`src/COMPOSITION/layout/Spacer/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **HelperText** (`src/PRIMITIVES/HelperText/`) — ✅ **LOCKED** (2026-01-02)
+- **ErrorText** (`src/PRIMITIVES/ErrorText/`) — ✅ **LOCKED** (2026-01-02)
+
+#### Actions Core
+
+- **IconButton** (`src/PRIMITIVES/IconButton/`) — ✅ **LOCKED** (2026-01-02)
+- **ButtonGroup** (`src/COMPOSITION/actions/ButtonGroup/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+
+#### Forms Core
+
+- **FormGroup** (`src/PRIMITIVES/FormGroup/`) — ✅ **LOCKED** (2026-01-02)
+
+#### Navigation
+
+- **Menu** (`src/COMPOSITION/navigation/Menu/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **Dropdown** (`src/COMPOSITION/overlays/Dropdown/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **ContextMenu** (`src/COMPOSITION/overlays/ContextMenu/`) — ✅ **PROCESS LOCKED** (2025-12-25)
+
+#### Surface
+
+- **Panel** (`src/COMPOSITION/layout/Panel/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+- **Section** (`src/COMPOSITION/layout/Section/`) — ✅ **LOCKED** (2026-01-01)
+- **Row** (`src/COMPOSITION/layout/Row/`) — ✅ **LOCKED** (2025-12-26)
+- **List** (`src/COMPOSITION/layout/List/`) — ✅ **PROCESS LOCKED** (2026-01-02)
+
+#### Overlays Core
+
+- **Tooltip** (`src/COMPOSITION/overlays/Tooltip/`) — ✅ **PROCESS LOCKED** (2025-12-25)
+- **Modal** (`src/COMPOSITION/overlays/Modal/`) — ✅ **PROCESS LOCKED** (2025-12-25)
+
+### Lock Rules
+
+**Public API:**
+- ❌ No new props allowed
+- ❌ No prop renaming allowed
+- ❌ No prop removal allowed
+- ❌ No semantic responsibility changes
+
+**Semantic Boundaries:**
+- ❌ No overlap between locked components allowed
+- ❌ No alternative components with similar responsibility allowed
+
+**Modification Requirements:**
+- ✅ Future changes require explicit unlock TUNG (TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md)
+- ✅ Exception declaration required before any modifications
+- ✅ All changes must match exception scope (minimal delta only)
+
+### Explicit Non-Goals
+
+The following components are **explicitly excluded** from this lock:
+
+- **DataGrid** — Not included in lock scope
+- **Disclosure** — Not included in lock scope
+- **ToggleGroup** — Not included in lock scope
+- **Polymorphic** — Not included in lock scope
+
+---
 
 ### Extension Tooling (LOCKED)
 
@@ -287,6 +405,124 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 **Allowed:** Bug fixes, documentation updates, performance improvements (without changing API/behavior)
 
 **Forbidden:** Changing `DEFAULT_OUTPUT_DIR`, adding bypass flags, weakening validation rules, weakening CI gates
+
+---
+
+## 🔒 List System Lock (CLOSED)
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Priority:** CRITICAL  
+**Topic Status:** **CLOSED** — No further changes allowed without explicit UNLOCK
+
+### Lock Scope
+
+The List System consists of the following **LOCKED** components:
+
+- **List** (`src/COMPOSITION/layout/List/`) — Structural list container
+- **ListItem** (`src/COMPOSITION/layout/ListItem/`) — Structural list item wrapper
+
+### Composition Dependencies
+
+The List System composes the following **LOCKED** components:
+
+- **Divider** (`src/COMPOSITION/layout/Divider/`) — Used for optional item separation
+- **Stack** (`src/COMPOSITION/layout/Stack/`) — Used for vertical flow and spacing
+- **Inset** (`src/COMPOSITION/layout/Inset/`) — May be used with List for padding
+
+### Explicit Exceptions
+
+The following components are **explicitly excluded** from List System enforcement:
+
+- **Timeline** (`src/PATTERNS/lists/Timeline/`) — Specialized chronological list pattern
+- **Stepper** (`src/COMPOSITION/navigation/stepper/`) — Navigation stepper pattern
+- **NavList** (`src/COMPOSITION/navigation/nav-list/`) — Navigation-specific list pattern
+- **DataList** (`src/PATTERNS/lists/DataList/`) — Data description list pattern
+- **Tree** (if exists) — Hierarchical tree structure pattern
+
+These components use specialized patterns that intentionally differ from the canonical List/ListItem components.
+
+### Affected Domains
+
+The List System is used in the following domains:
+
+- **NotificationCenter** — Uses List/ListItem for notification lists
+- **FileUpload** — Uses List/ListItem for file preview lists
+- **All vertical content collections** — Must use canonical List/ListItem components
+
+### Enforcement
+
+**ESLint Rule:** `tenerife-ui-architecture/no-ad-hoc-lists`  
+**Status:** ✅ **MANDATORY**  
+**Rule File:** `eslint-rules/no-ad-hoc-lists.ts`  
+**Configuration:** `eslint.config.mjs` (line 322)
+
+**Forbidden Patterns:**
+- Direct `<li>` usage outside ListItem component
+- `role="list"` on div/Box/Stack components (except exceptions)
+- `role="listitem"` on div/Box components (except exceptions)
+- Ad-hoc list rendering patterns that bypass canonical components
+
+**Reference Documentation:**
+- `docs/reference/FORBIDDEN_PATTERNS.md` — Complete list of forbidden patterns
+- `docs/architecture/decisions/ADR_list_usage_exceptions.md` — Exception documentation
+
+### Audit Reports
+
+The following audit reports document the List System implementation and usage:
+
+- **Baseline Reports:**
+  - `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md` — List component baseline (Pipeline 18A complete)
+  - `docs/reports/audit/LISTITEM_BASELINE_REPORT.md` — ListItem component baseline (Pipeline 18A complete)
+
+- **Usage Audit Reports:**
+  - `docs/reports/audit/LIST_USAGE_INVENTORY.md` — Complete inventory of list usage patterns
+  - `docs/reports/audit/LIST_USAGE_CLASSIFICATION.md` — Classification of findings (A/B/C/D)
+  - `docs/reports/audit/LIST_USAGE_ENFORCEMENT_VERIFICATION.md` — Final verification of enforcement
+
+- **Creation Reports:**
+  - `docs/reports/creation/List_CREATION_REPORT.md` — List component creation (Pipeline C0-C10)
+
+### Architectural Rules
+
+**Rule 1: No Alternative List Implementations**
+
+- ❌ **FORBIDDEN:** Creating alternative list components that duplicate List/ListItem functionality
+- ❌ **FORBIDDEN:** Using Stack/Box/div with role="list" for vertical lists (except exceptions)
+- ❌ **FORBIDDEN:** Direct `<li>` usage outside ListItem component (except exceptions)
+- ✅ **ALLOWED:** Using canonical List/ListItem components for all vertical lists
+- ✅ **ALLOWED:** Exceptions explicitly listed above (Timeline, Stepper, NavList, DataList, Tree)
+
+**Rule 2: List System is CLOSED**
+
+- The List System architecture is **CLOSED** and **immutable**
+- No API changes allowed without explicit UNLOCK
+- No new list components allowed without explicit UNLOCK
+- No alternative implementations allowed
+
+**Rule 3: Migration Requirement**
+
+- All existing vertical lists must use canonical List/ListItem components
+- Migration completed per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
+- ESLint rule enforces compliance going forward
+
+### Unlock Policy
+
+**Changes are allowed ONLY with EXPLICIT UNLOCK TUNG and require:**
+
+1. **Architectural Justification** — Why the change is architecturally necessary
+2. **Impact Analysis** — Analysis of impact on existing codebase
+3. **Migration Plan** — Plan for migrating existing usage if API changes
+
+**Unlock is reserved for:** Critical architectural changes that cannot be accommodated within the existing canonical List System model.
+
+### Final Verdict
+
+**LIST SYSTEM — CLOSED**
+
+The List System is formally locked as a closed architectural topic. All vertical lists must use the canonical List/ListItem components. No alternative implementations are allowed. ESLint enforcement is mandatory and prevents violations.
+
+---
 
 **Key Architectural Decisions (EmptyState):**
 
@@ -498,8 +734,28 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Type Deduplication:** Removed duplicate `SkeletonProps` definition (deleted Skeleton.types.ts)
 - **Storybook Compliance:** Stories demonstrate all variants and realistic usage (Matrix/States/SizesGallery not required - component has only variant prop, non-interactive)
 
+**Key Architectural Decisions (VenueCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
+- **Size Scale Alignment:** Changed from custom sizes `"default" | "compact"` to global scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
+- **Variant Scale Alignment:** Changed from custom variant `"featured"` to SurfaceVariant dictionary `"elevated"` per VARIANTS_SIZE_CANON.md
+- **Type Constraints:** Added `satisfies Record<VenueCardSize, string>` and `satisfies Record<VenueCardVariant, string>` constraints to all CVA variant maps
+- **CardBase Integration:** Component correctly uses CardBase for layout structure, sizes/variants now align directly with CardBase types
+- **Backward Compatibility:** Maintained `featured` prop support (maps to `"elevated"` variant) for backward compatibility
+- **Token Compliance:** 100% token usage (DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS)
+- **Accessibility:** WCAG 2.1 Level AA compliant (semantic HTML, ARIA attributes, screen reader support)
+- **Test Coverage:** Comprehensive test suite (30+ test cases covering public behavior, edge cases, accessibility)
+- **Storybook Compliance:** Matrix, States, SizesGallery, and Accessibility stories per VARIANTS_SIZE_CANON.md requirements
+
 **Key Architectural Decisions (CardBase):**
 
+**Second Pass (2026-01-01):**
+- Joint analysis with Card component confirmed architectural separation is correct
+- CardBase (PATTERNS layer) vs Card (COMPOSITION layer) serve different purposes
+- No changes required - component remains PROCESS LOCKED
+- Audit Report: `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` (Second Pass section)
+
+**First Pass (2025-12-27):**
 - **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
 - **Size Scale Alignment:** Mapped custom sizes `"default" | "compact"` → GlobalSize scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
 - **Variant Dictionary Alignment:** Mapped custom variants `"default" | "featured"` → SurfaceVariant dictionary `"default" | "elevated"` per VARIANTS_SIZE_CANON.md
@@ -510,6 +766,50 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Breaking Changes:** Size prop changed from `"default" | "compact"` to `"sm" | "md"`, variant prop changed from `"default" | "featured"` to `"default" | "elevated"`
 - **Storybook Compliance:** Added canonical stories (Matrix, SizesGallery) per VARIANTS_SIZE_CANON.md requirements
 - **Test Coverage:** Comprehensive test suite created covering all public behavior, variants, sizes, and subcomponents
+
+**Key Architectural Decisions (CategoryCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: size, variant)
+- **Type Constraints:** Added `satisfies Record<CategoryCardSize, string>`, `satisfies Record<CategoryCardVariant, string>` constraints to all CVA variant maps
+- **Component Role:** Domain-specific card component for displaying category information. Uses CardBase for layout composition and handles category-specific presentation logic (featured badges, image display, navigation)
+- **CardBase Composition:** Uses CardBase pattern consistently (CardBaseImageWrapper, CardBaseContentWrapper)
+- **Size Mapping:** Maps CategoryCardSize (`"sm" | "md"`) to CardBaseSize (`"sm" | "md"`) directly (no conversion needed after alignment)
+- **Variant Mapping:** Maps CategoryCardVariant (`"default" | "elevated"`) to CardBaseVariant (`"default" | "elevated"`) directly (no conversion needed after alignment)
+- **Token Compliance:** Uses DOMAIN_TOKENS, ICON_TOKENS, MOTION_TOKENS, TEXT_TOKENS for all styling (100% token compliance achieved)
+- **Semantic HTML:** Uses `<Heading level={3}>`, `<img>` with alt text, `<Link>` for navigation
+- **Accessibility:** WCAG 2.1 Level A/AA compliant (semantic HTML, proper ARIA usage, keyboard navigation via Link component)
+- **Test Coverage:** Comprehensive test suite created (27 tests covering API contract, sizes, variants, content display, image display, featured badge, links, edge cases, accessibility)
+- **Storybook Compliance:** Created canonical stories (Matrix, SizesGallery, States, RealisticUsage, Accessibility) per VARIANTS_SIZE_CANON.md requirements
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
+
+**Key Architectural Decisions (PromoCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: variant, size)
+- **Size Scale Alignment:** Changed from custom sizes `"default" | "compact"` to global scale `"sm" | "md"` per VARIANTS_SIZE_CANON.md
+- **Variant Scale Alignment:** Changed from custom variant `"featured"` to SurfaceVariant dictionary `"elevated"` per VARIANTS_SIZE_CANON.md
+- **Type Constraints:** Added `satisfies Record<PromoCardSize, string>` and `satisfies Record<PromoCardVariant, string>` constraints to all CVA variant maps
+- **CardBase Integration:** Component correctly uses CardBase for layout structure, sizes/variants now align directly with CardBase types
+- **Backward Compatibility:** Maintained `featured` prop support (maps to `"elevated"` variant) for backward compatibility
+- **Token Compliance:** 100% token usage (DOMAIN_TOKENS, TEXT_TOKENS, ICON_TOKENS, GRADIENT_TOKENS)
+- **Accessibility:** WCAG 2.1 Level AA compliant (semantic HTML, ARIA attributes, screen reader support)
+- **Test Coverage:** Comprehensive test suite (30+ test cases covering public behavior, edge cases, accessibility)
+- **Storybook Compliance:** Matrix, States, SizesGallery, and Accessibility stories per VARIANTS_SIZE_CANON.md requirements
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
+
+**Key Architectural Decisions (EventCard):**
+
+- **CVA Migration:** Migrated from `cva` to `tokenCVA` per CVA Usage Decision Matrix RULE 1 (component has token-driven axes: size, variant)
+- **Type Constraints:** Added `satisfies Record<EventCardSize, string>`, `satisfies Record<EventCardLayout, string>`, and `satisfies Record<EventCardVariant, string>` constraints to all 10 CVA variant maps
+- **Component Role:** Domain-specific card component for displaying event information. Uses CardBase for layout composition and handles event-specific presentation logic (featured badges, ticket links, image display)
+- **CardBase Composition:** Uses CardBase pattern consistently (CardBaseImageWrapper, CardBaseContentWrapper, CardBaseFooterWrapper)
+- **Size Mapping:** Maps EventCardSize (`"default" | "compact"`) to CardBaseSize (`"md" | "sm"`) internally
+- **Variant Mapping:** Maps EventCardVariant (`"default" | "featured"`) to CardBaseVariant (`"default" | "elevated"`) internally
+- **Token Compliance:** Uses DOMAIN_TOKENS, CARD_TOKENS, TEXT_TOKENS, ICON_TOKENS, GRADIENT_TOKENS for all styling
+- **Semantic HTML:** Uses `<Heading level={3}>`, `<time>`, `<address>` elements for accessibility
+- **Accessibility:** Removed `role="text"` from metadata items (semantic elements provide sufficient accessibility), icons properly hidden with `aria-hidden={true}`, images have alt text
+- **Test Coverage:** Comprehensive test suite created (27 tests covering API contract, sizes, variants, content display, image display, featured badge, links, edge cases)
+- **Storybook Compliance:** Created canonical stories (Matrix, SizesGallery, States) per VARIANTS_SIZE_CANON.md requirements, plus additional realistic usage examples
+- **Extension API:** Allows className prop (Extension component, different from Foundation Enforcement)
 
 **Key Architectural Decisions (Flex):**
 
@@ -538,7 +838,53 @@ The following Extension layer build tooling has been audited and is **EXTENSION 
 - **Accessibility:** Native HTML list semantics are correctly announced by screen readers, ARIA attributes correctly passed through
 - **Pipeline Outcome:** Component validated by Pipeline 18A, no changes required, fully compliant with all architectural standards
 
-**Key Architectural Decisions (List):**
+**Key Architectural Decisions (List - COMPOSITION/layout):**
+
+- **Structural List Container:** Composes Stack for vertical flow and spacing, reuses Divider for optional item separation
+- **Polymorphic Element Support:** Supports ul/ol/div via `as` prop for semantic HTML flexibility
+- **Optional Divider Injection:** `divided` prop injects Divider between items (not after last item)
+- **Token Compliance:** ✅ 100% (spacing tokens via Stack composition, color tokens via Divider)
+- **No CVA Required:** Correctly does not use CVA per Decision Matrix (no token-driven axes: no variant, no size, no state)
+- **Semantic HTML:** Uses ul/ol/div with role="list" for div elements (Chromium accessibility)
+- **Motion:** NO MOTION BY DESIGN (static container)
+- **Foundation Composition:** Stack (spacing, layout), Divider (visual separation)
+- **No Domain Semantics:** Structural only, no content styling
+- **Pipeline:** Component Creation Pipeline C0-C10 complete (2026-01-01), Pipeline 18A complete (2026-01-02)
+- **Creation Report:** `docs/reports/creation/List_CREATION_REPORT.md`
+- **Audit Report:** `docs/reports/audit/LIST_COMPOSITION_BASELINE_REPORT.md`
+- **Pipeline 18A Outcome:** Component already in excellent shape - all quality checks passed, no fixes required. Full compliance with architectural standards verified.
+
+**Key Architectural Decisions (ListItem - COMPOSITION/layout):**
+
+- **Structural List Item Wrapper:** Semantic li/div elements with interactive/disabled states
+- **Polymorphic Element Support:** Supports li/div via `as` prop for semantic HTML flexibility
+- **Interactive Variant:** Hover transition and focus-visible ring via tokenCVA
+- **Disabled Variant:** Opacity and pointer-events-none for disabled state
+- **Alignment Prop:** start/center for flexbox alignment (explicit `ListItemAlign` type)
+- **Token Compliance:** ✅ 100% (tokenCVA variants, Tailwind utilities)
+- **Motion:** ADD MOTION (interactive variant uses transition-colors)
+- **Reduced Motion Support:** transition-colors respects prefers-reduced-motion
+- **Accessibility:** role="listitem" added for div elements
+- **No Domain Semantics:** Structural only, no content styling
+- **Type System:** Explicit union types (`ListItemAs`, `ListItemAlign`), CVA type constraints (`satisfies Record<Type, string>`)
+- **CVA Compliance:** tokenCVA with canonical structure (variants inline, type constraints)
+- **Pipeline:** Component Creation Pipeline C0-C10 complete (2026-01-01), Pipeline 18A complete (2026-01-01)
+- **Audit Report:** `docs/reports/audit/LISTITEM_BASELINE_REPORT.md`
+
+**Key Architectural Decisions (List System - FINAL LOCK):**
+
+- **System Status:** ✅ **CLOSED** — List System is formally locked as a closed architectural topic (2026-01-02)
+- **Components Locked:** List (COMPOSITION/layout) and ListItem (COMPOSITION/layout) are LOCKED (FINAL LOCK)
+- **No Alternative Implementations:** Creating alternative list components that duplicate List/ListItem functionality is FORBIDDEN
+- **Enforcement:** ESLint rule `no-ad-hoc-lists` is MANDATORY and prevents violations
+- **Migration Complete:** All existing vertical lists migrated to canonical List/ListItem components per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
+- **Explicit Exceptions:** Timeline, Stepper, NavList, DataList, Tree are explicitly excluded from enforcement
+- **Composition Dependencies:** List System composes Divider, Stack, and Inset (all LOCKED)
+- **Affected Domains:** NotificationCenter, FileUpload, and all vertical content collections use canonical components
+- **Unlock Policy:** Changes require EXPLICIT UNLOCK TUNG with architectural justification, impact analysis, and migration plan
+- **Final Verdict:** LIST SYSTEM — CLOSED (no further changes allowed without explicit UNLOCK)
+
+**Key Architectural Decisions (List - PATTERNS/lists):**
 
 - **Simple List Display Pattern:** Component is intentionally simple, no compound component pattern needed (unlike DataList which uses compound pattern for flexibility)
 - **Token Compliance:** LIST_TOKENS file created, all raw Tailwind classes replaced with tokens (100% token compliance achieved)
@@ -1008,6 +1354,7 @@ The following public components are **IMPLEMENTED** after completing their audit
 | NextLinkAdapter | Extension  | ✅ **PROCESS LOCKED** | 2025-12-25  | Framework adapter component. Pipeline 18A re-executed (Steps 0-12 complete, full execution). PROCESS_LOCK re-confirmed. Extension-only (not exported from main library). |
 | Portal | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | SSR-safe portal utility component. Pipeline 18A complete (Steps 0-12). Utility component (no visual tokens, no size/variant props), SSR-safe mounting pattern, wrapper div necessary for ref forwarding. |
 | Dialog | Composition | ✅ **PROCESS LOCKED** | 2025-12-27 | Semantic wrapper over Modal (Foundation). Pipeline 18A complete (Steps 0-12). Provides Dialog.Header, Dialog.Title, Dialog.Description, Dialog.Body, Dialog.Footer subcomponents. Automatic aria-labelledby and aria-describedby management. |
+| Backdrop | Composition | ✅ **PROCESS LOCKED** | 2026-01-01 | Visual backdrop component for overlay components (Modal, Dialog). Pipeline 18A complete (Steps 0-12). Token-driven styling with variant support (default, blurred, transparent). Stateless component with CSS-based animation. |
 | Toast | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Notification overlay component. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling. |
 | ContextMenu | Composition | ✅ **PROCESS LOCKED** | 2025-12-25 | Right-click context menu overlay. Pipeline 18A complete (Steps 0-12). Radix-based with token-driven styling, full keyboard navigation and ARIA support. |
 
@@ -1075,6 +1422,123 @@ Any token system modifications require:
 
 ---
 
+## 🔒 File Structure Canon Lock (LOCKED)
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Priority:** CRITICAL  
+**Source of Truth:** [`docs/architecture/ARCHITECTURE_STATE.md`](./ARCHITECTURE_STATE.md)
+
+The **File Structure Canon** is **LOCKED** and **IMMUTABLE**. The current directory structure is declared **CANONICAL** and **MUST NOT** change without explicit unlock procedure.
+
+### What Is Locked
+
+**Canonical Root Directories (LOCKED):**
+
+1. **`src/FOUNDATION/`** - Foundation layer (tokens and theme system)
+   - **Status:** ✅ **LOCKED** - Immutable
+   - **Purpose:** Tokens only for active components
+   - **Rule:** FOUNDATION tokens **MUST NOT** exist without active components
+
+2. **`src/PRIMITIVES/`** - Primitives layer
+   - **Status:** ✅ **LOCKED** - Canonical structure
+   - **Purpose:** Atomic UI components, no orchestration
+   - **Rule:** PRIMITIVES **MUST NOT** contain orchestration logic or overlay infrastructure
+
+3. **`src/COMPOSITION/`** - Composition layer
+   - **Status:** ✅ **LOCKED** - Canonical structure
+   - **Purpose:** Layout, overlays, interaction orchestration
+   - **Sub-layers:**
+     - `COMPOSITION/overlays/` - All overlay components (LOCKED)
+     - `COMPOSITION/layout/` - Layout components (LOCKED)
+     - `COMPOSITION/navigation/` - Navigation components (LOCKED)
+     - `COMPOSITION/controls/` - Control components (LOCKED)
+   - **Rule:** All overlays **MUST** live in COMPOSITION layer only
+
+4. **`src/PATTERNS/`** - Patterns layer
+   - **Status:** ✅ **LOCKED** - Canonical structure
+   - **Purpose:** Business/UI patterns (no overlays)
+   - **Rule:** PATTERNS **MUST NOT** define overlay primitives or overlay infrastructure
+
+5. **`src/DOMAIN/`** - Domain layer
+   - **Status:** ✅ **LOCKED** - Canonical structure
+   - **Purpose:** App-specific sections
+
+### Lock Rules
+
+**FORBIDDEN Actions (without unlock):**
+
+1. ❌ **No new top-level `src/` directories** - Cannot create new root directories without unlock procedure
+2. ❌ **No cross-layer file relocation** - Cannot move files between layers without unlock procedure
+3. ❌ **No documentation contradicting ARCHITECTURE_STATE.md** - All documentation must align with canonical structure
+4. ❌ **No structural changes without unlock** - Any structural modification requires explicit unlock procedure
+
+**REQUIRED Compliance:**
+
+1. ✅ **ARCHITECTURE_STATE.md is the sole source of truth** - All structure references must align with ARCHITECTURE_STATE.md
+2. ✅ **Documentation consistency** - All architecture documents must reference correct canonical paths
+3. ✅ **Layer boundaries enforced** - Components must be placed in correct layers per ARCHITECTURE_STATE.md
+4. ✅ **No orphan files** - All files must be properly organized within canonical structure
+
+### File Structure Unlock Procedure
+
+Any structural changes require explicit unlock procedure:
+
+**Step 1: Explicit Unlock Request**
+- Create explicit task with justification
+- Document why the change is necessary
+- Identify all affected directories and files
+
+**Step 2: Full Structure Audit**
+- Complete audit of all affected directories
+- Document impact of proposed changes
+- Identify migration path if applicable
+
+**Step 3: Approval**
+- Receive explicit approval for unlock
+- Receive explicit approval for changes
+- Document approval decision
+
+**Step 4: Implementation**
+- Implement changes following canonical rules
+- Update all affected documentation
+- Verify no regressions introduced
+
+**Step 5: Re-lock**
+- Update ARCHITECTURE_STATE.md with new canonical state
+- Update ARCHITECTURE_CONTEXT.md if needed
+- Re-apply lock with updated documentation
+- Verify architecture stability
+
+**Rule:** Unlock **MUST** be explicit and documented. No silent unlocks allowed.
+
+### Enforcement
+
+**This lock applies to:**
+- ✅ **Humans** - All developers and maintainers
+- ✅ **AI agents** - All AI assistants and automated tools
+- ✅ **CI/CD systems** - All automated verification systems
+
+**Violation Handling:**
+- Any structural change without unlock is considered an **architectural violation**
+- Violations must be **refused immediately** with reference to this lock
+- Violations must be **documented** and **reverted** if discovered
+
+### Verification
+
+**Status:** ✅ **VERIFIED** (2026-01-02)
+
+**Verification Results:**
+- ✅ Documentation consistency verified (ARCHITECTURE_CONTEXT.md matches ARCHITECTURE_STATE.md)
+- ✅ No orphan files remain in src/COMPOSITION
+- ✅ No empty or undocumented component folders remain
+- ✅ All components correctly placed in canonical layers
+- ✅ Readiness status confirmed: READY FOR STRUCTURE LOCK
+
+**Reference:** [TUI File Structure Audit Report](../../reports/audit/TUI_FILE_STRUCTURE_AUDIT_REPORT.md)
+
+---
+
 ## 📖 Related Documents
 
 - **[Final Foundation Lock](./FOUNDATION_LOCK.md)** - 🔒 **Authoritative Foundation lock document** (single source of truth)
@@ -1087,6 +1551,22 @@ Any token system modifications require:
 ---
 
 ## 🔄 Version History
+
+- **v1.8** (2026-01-02): List System FINAL LOCK — CLOSED
+  - List System formally locked as closed architectural topic
+  - List and ListItem components changed from PROCESS LOCKED to LOCKED (FINAL LOCK)
+  - Added List System Lock section with complete documentation:
+    - Lock scope (List, ListItem components)
+    - Composition dependencies (Divider, Stack, Inset)
+    - Explicit exceptions (Timeline, Stepper, NavList, DataList, Tree)
+    - Affected domains (NotificationCenter, FileUpload, all vertical content collections)
+    - Enforcement (ESLint rule `no-ad-hoc-lists` is MANDATORY)
+    - Audit reports references (baseline, usage, creation reports)
+    - Architectural rules (no alternative implementations, CLOSED status, migration requirement)
+    - Unlock policy (requires EXPLICIT UNLOCK TUNG)
+  - Updated LAYOUT_AUTHORITY.md with List System Lock Status section
+  - Final verdict: LIST SYSTEM — CLOSED
+  - Lock Date: 2026-01-02
 
 - **v1.12** (2025-12-28): Gradient Tokens Fixes
   - Fixed `GRADIENT_TOKENS.ring.subtle` token: replaced `--muted` (background color) with `--muted-foreground` (text color) for proper visibility
@@ -1298,12 +1778,180 @@ Any token system modifications require:
   - Added token system unlock procedure documentation
   - Updated related documents section with token system references
 
+- **v1.7** (2026-01-01): Layout Extension Layer Lock
+  - Locked Extension Layout components (ContentShell, Divider, Inset, PageHeader, Section, SidebarLayout, StickyBar)
+  - Added Extension Layout components to locked components table
+  - Updated Box lock status with Extension Lock reference
+  - All components locked after successful hard code review
+  - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
+
+- **v1.8** (2026-01-02): VisuallyHidden Component Pipeline 18A Complete
+  - Added VisuallyHidden to Extension Layer (a11y utilities)
+  - VisuallyHidden status: PROCESS LOCKED (Extension component lock)
+  - Pipeline 18A completed (Steps 0-12)
+  - Completion Date: 2026-01-02
+  - Audit Report: `docs/reports/audit/VISUALLYHIDDEN_BASELINE_REPORT.md`
+  - Architectural decisions:
+    - Component type: Utility component (non-interactive a11y wrapper)
+    - Inline styles acceptable: Component uses inline styles with structural CSS properties (position absolute, 1px size, clip-path inset) for visually-hidden pattern
+    - Rationale: Visually-hidden pattern requires specific structural CSS values (1px size, -1 margin) that cannot be tokenized
+    - Decision: Acceptable exception for structural CSS properties in visually-hidden pattern (no visual tokens needed)
+    - No size/variant props: Component is intentionally single-purpose utility (correct design)
+    - No CVA structure: Component does not use CVA (Decision Matrix RULE 2 - no token-driven axes, uses inline styles instead)
+    - Non-interactive wrapper: Component does not handle user interactions, does not interfere with parent accessibility
+  - Quality: High (comprehensive test suite, A11Y tests added, Storybook compliant)
+  - Completed per Pipeline 18A
+
+- **v1.9** (2026-01-02): FocusTrap Component Pipeline 18A Complete
+  - Added FocusTrap to Extension Layer (focus utilities)
+  - FocusTrap status: PROCESS LOCKED (Extension component lock)
+  - Pipeline 18A completed (Steps 0-12)
+  - Completion Date: 2026-01-02
+  - Audit Report: `docs/reports/audit/FOCUSTRAP_BASELINE_REPORT.md`
+  - Architectural decisions:
+    - Component type: Utility component (non-visual focus management wrapper)
+    - No visual tokens: Component is intentionally non-visual (invisible wrapper, no visual styling)
+    - NO MOTION BY DESIGN: Component uses programmatic focus management (no visual animations)
+    - No size/variant props: Component is utility, not visual component (correct design)
+    - No CVA structure: Component does not use CVA (Decision Matrix RULE 2 - no token-driven axes, non-visual component)
+    - Focus management: Component traps Tab/Shift+Tab within children, manages initial focus, restores focus on unmount
+    - Keyboard parity: Tab/Shift+Tab for focus navigation (keyboard-only interaction, no pointer equivalent needed)
+    - Escape semantics: Optional callback, no-op if not provided (matches INPUT_AUTHORITY.md)
+    - State blocking: active=false disables focus trap (matches INPUT_AUTHORITY.md)
+    - Focus trap compliance: Matches FOCUS_AUTHORITY.md requirements (F-TRAP-1, F-TRAP-3, F-RESTORE-1, F-RESTORE-2, F-TAB-1)
+    - A11Y compliance: Component is invisible wrapper, no accessible name/ARIA roles required
+  - Quality: High (comprehensive test suite, A11Y tests, Focus tests, Input tests, Storybook compliant)
+  - Completed per Pipeline 18A
+
+- **v1.11** (2026-01-02): ButtonGroup Action Composition Component Pipeline 18A Complete
+  - Added ButtonGroup to Extension Layer (actions category)
+  - ButtonGroup status: PROCESS LOCKED (Extension component)
+  - Pipeline 18A completed (Steps 0-12)
+  - Completion Date: 2026-01-02
+  - Audit Report: `docs/reports/audit/BUTTONGROUP_BASELINE_REPORT.md`
+  - Architectural decisions:
+    - Component type: Extension Action Composition Component (groups multiple Button components)
+    - Composition pattern: Uses Stack for layout, Context for prop propagation
+    - No CVA usage: Composition component using Stack (Decision Matrix RULE 2 - no token-driven axes, correct)
+    - Size/variant propagation: Props propagated via Context (size, variant, disabled)
+    - No own variants: ButtonGroup does not have own size/variant variants (correct - propagates to Button)
+    - Token compliance: Token-based spacing only (SpacingValue type)
+    - Accessibility: role="group", aria-orientation for vertical (correct ARIA usage)
+    - Non-interactive: Delegates all interaction to Button components (correct responsibility boundary)
+    - Story requirements: Default story added (STORYBOOK_STORIES_STANDARD compliance)
+    - Matrix/States/SizesGallery: NOT REQUIRED (size/variant are propagated, not own variants)
+  - Quality: High (comprehensive test coverage, Storybook compliant, A11Y compliant)
+  - Completed per Pipeline 18A
+
 - **v1.0** (2025-12-12): Initial Architecture Lock
   - Locked foundation components (Modal, Tabs, Select, ContextMenu, Toast)
   - Defined extension layer rules
   - Established naming conventions
   - Created Storybook structure rules
   - Defined Cursor AI rules
+
+---
+
+## 🔒 Public API Lock
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Authority:** This lock is binding and immutable without explicit unlock procedure
+
+### Public Entry Point
+
+**Rule:** `src/index.ts` is the **ONLY** public entry point for the library.
+
+**Forbidden:**
+- ❌ Deep imports from internal paths
+- ❌ Direct imports from barrel files
+- ❌ Package subpath exports (unless explicitly documented)
+
+**Allowed:**
+- ✅ Import from main entry point: `import { Button } from "@tenerife.music/ui"`
+- ✅ Tree-shaking supported (all exports are ES modules)
+
+### Export Rules
+
+**Foundation Components:**
+- ✅ **ALL Foundation components MUST be exported**
+- ✅ All Foundation components listed in `FOUNDATION_LOCK.md` are exported
+- ✅ No Foundation component duplicates allowed
+- ✅ No alternative Foundation implementations allowed
+
+**Extension Components:**
+- ✅ Extension components **MAY be exported** if listed as ALLOWED in `EXTENSION_STATE.md`
+- ❌ RESTRICTED components **MUST NOT** be exported
+- ❌ Internal-only components **MUST NOT** be exported
+
+**Design Tokens:**
+- ✅ All design tokens are exported (~180+ exports)
+- ✅ Token types and values are exported
+- ✅ Token utility functions are exported
+
+**Forbidden Exports:**
+- ❌ Radix UI primitives (direct exports)
+- ❌ Internal implementation details
+- ❌ Legacy components
+- ❌ Duplicate Foundation components
+- ❌ RESTRICTED Extension components
+
+### Type System Rules
+
+**Required:**
+- ✅ Explicit union types for all variant/size props
+- ✅ No CVA-derived types in public API (`VariantProps<typeof cvaVariants>`)
+- ✅ No `string` widening for variant/size props
+- ✅ No `any` types in public API
+
+**CVA Variants:**
+- ⚠️ CVA variants **MAY be exported** ONLY if required for Extension composition
+- ⚠️ Each exported variant must be verified for Extension composition needs
+
+### Barrel Export Policy
+
+**Rule:** `export *` is **FORBIDDEN** in public entry point.
+
+**Required:**
+- ✅ Explicit exports only: `export { Button, type ButtonProps } from "./PRIMITIVES/Button"`
+- ❌ Wildcard exports: `export * from "./PRIMITIVES/Button"`
+
+### Unlock Procedure
+
+**Rule:** Any change to `src/index.ts` requires explicit unlock procedure.
+
+**Unlock Steps:**
+1. Create unlock task with justification
+2. Perform full API audit
+3. Approve change
+4. Apply change
+5. Update contract and re-lock
+
+**Breaking Changes:**
+- Breaking API changes require major version procedure
+- Migration guide required
+- Version number bump (major version)
+
+### Related Documents
+
+- **Public API Contract:** `docs/architecture/PUBLIC_API_CONTRACT.md`
+- **Audit Report:** `docs/reports/audit/TUI_PUBLIC_API_AUDIT_REPORT.md`
+- **Foundation Lock:** `docs/architecture/FOUNDATION_LOCK.md` (Foundation Component Lock Sweep Finalization section)
+- **Foundation Lock Sweep Finalization:** `docs/architecture/FOUNDATION_LOCK.md` (Task TUI_FOUNDATION_LOCK_SWEEP_FINAL_01, finalized 2026-01-02)
+- **Extension State:** `docs/architecture/EXTENSION_STATE.md`
+- **Barrel Policy:** `docs/workflows/policies/BARREL_POLICY.md`
+- **Legacy Policy:** `docs/workflows/policies/LEGACY_COMPONENT_POLICY.md`
+
+### Lock Status
+
+**Status:** ✅ **LOCKED**  
+**Lock Date:** 2026-01-02  
+**Total Exports:** ~600+ (components + types + tokens + variants)  
+**Foundation Components:** 20  
+**Extension Components:** ~60+  
+**Compliance Rate:** 98% (minor issues only)
+
+**This lock applies to humans and AI agents. Public API canon is a hard contract for consumers and maintainers.**
 
 ---
 
@@ -1321,9 +1969,9 @@ New functionality must be built as **extensions** that compose foundation compon
 
 ---
 
-**Status:** ✅ **LOCKED** (Foundation CLOSED)  
-**Version:** 1.12  
+**Status:** ✅ **LOCKED** (Foundation CLOSED, Foundation Lock Sweep FINALIZED, Public API LOCKED)  
+**Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2025-12-28  
+**Last Updated:** 2026-01-02 (Foundation Component Lock Sweep Finalization, Public API Canon Lock)  
 **Priority:** CRITICAL  
-**Next Review:** Never (foundation is immutable)
+**Next Review:** Never (foundation is immutable, Foundation Lock Sweep finalized, Public API is locked)

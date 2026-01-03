@@ -660,3 +660,4 @@ All cards except ProfileCard use `Box` as animation wrapper:
 4. Apply simplifications while maintaining visual output
 
 
+

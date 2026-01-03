@@ -3,7 +3,8 @@
 **Status:** ✅ LOCKED  
 **Priority:** BLOCKER  
 **Date Created:** 2025-12-16  
-**Version:** 1.1  
+**Last Updated:** 2026-01-02 (List System FINAL LOCK)  
+**Version:** 1.2  
 **Enforcement:** TUNG_LAYOUT_AUTHORITY_CONTRACT_FOUNDATION
 
 ---
@@ -109,7 +110,41 @@ The Layout Authority recognizes the following canonical layout primitives:
    - **Flow:** Absolute or fixed positioning context
    - **Use case:** Modals, tooltips, dropdowns, floating elements
 
-**Rule:** These five primitives are the canonical set. Components must use these primitives or their semantic aliases (Column, Row) for layout composition.
+6. **List** - Structural list container composing Stack with optional Divider injection
+   - **Purpose:** Semantic list container (ul/ol/div) with optional divider separation
+   - **Flow:** Vertical flow via Stack composition
+   - **Use case:** Navigation lists, menu lists, notification lists, settings lists
+   - **Composition:** Composes Stack (spacing, layout) and Divider (visual separation)
+   - **Note:** Legacy domain-specific List in PATTERNS/lists removed. This is the canonical structural list primitive.
+
+7. **ListItem** - Structural list item wrapper with interactive/disabled states
+   - **Purpose:** Semantic list item element (li/div) with state handling
+   - **Flow:** List item within List container
+   - **Use case:** Interactive list items, navigation items, menu items, notification items
+   - **Composition:** Standalone structural primitive with tokenCVA variants
+
+**Rule:** These seven primitives (Stack, Inline, Grid, Container, Overlay, List, ListItem) are the canonical set. Components must use these primitives or their semantic aliases (Column, Row) for layout composition.
+
+### List System Lock Status
+
+**Status:** ✅ **LOCKED** (2026-01-02)  
+**Topic Status:** **CLOSED** — No further changes allowed without explicit UNLOCK
+
+The List System (List and ListItem components) is **canonical and immutable**. These components provide the **sole foundation** for all vertical list structures in the design system.
+
+**Explicit Exceptions:**
+
+The following components use specialized patterns and are **explicitly excluded** from List System enforcement:
+
+- **Timeline** (`src/PATTERNS/lists/Timeline/`) — Specialized chronological list pattern
+- **Stepper** (`src/COMPOSITION/navigation/stepper/`) — Navigation stepper pattern
+- **NavList** (`src/COMPOSITION/navigation/nav-list/`) — Navigation-specific list pattern
+- **DataList** (`src/PATTERNS/lists/DataList/`) — Data description list pattern
+- **Tree** (if exists) — Hierarchical tree structure pattern
+
+**Rule:** All vertical lists MUST use canonical List/ListItem components. No alternative implementations are allowed. Exceptions are explicitly listed above.
+
+**Reference:** See `docs/architecture/ARCHITECTURE_LOCK.md` — List System Lock section for complete lock documentation.
 
 ---
 
@@ -185,6 +220,24 @@ This section provides declarative examples of allowed layout usage (without code
 - Layout primitives can be nested
 - Each primitive maintains its own layout responsibility
 - Composition creates complex layout structures
+
+### Pattern 6: List for Semantic List Structures
+**Allowed:** Using List component for semantic list containers with optional divider separation
+- List provides semantic ul/ol/div structures
+- List composes Stack for vertical flow and spacing
+- Optional Divider injection between items via divided prop
+- Spacing controlled by Spacing Authority tokens via Stack composition
+- Use for navigation lists, menu lists, notification lists, settings lists
+- **Lock Status:** ✅ **LOCKED** (2026-01-02) — List System is CLOSED, no alternative implementations allowed
+
+### Pattern 7: ListItem for List Item Elements
+**Allowed:** Using ListItem component for semantic list item elements with interactive/disabled states
+- ListItem provides semantic li/div elements
+- Interactive variant supports hover transitions and focus-visible ring
+- Disabled variant provides opacity and pointer-events-none
+- Alignment prop controls flexbox alignment (start/center)
+- Use for interactive list items, navigation items, menu items, notification items
+- **Lock Status:** ✅ **LOCKED** (2026-01-02) — List System is CLOSED, no alternative implementations allowed
 
 **Rule:** These patterns are allowed because they use canonical layout primitives and maintain separation from spacing, state, and interaction concerns.
 

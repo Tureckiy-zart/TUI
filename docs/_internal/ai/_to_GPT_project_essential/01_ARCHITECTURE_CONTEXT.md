@@ -204,7 +204,7 @@ TenerifeUI uses a **two-layer architecture** that separates **infrastructure** (
 | **Status** | ✅ LOCKED (immutable) | ✅ OPEN (evolvable) |
 | **Purpose** | Infrastructure, canonical behavior | Domain logic, opinionated UX |
 | **Components** | Exactly 5 (Modal, Tabs, Select, ContextMenu, Toast) | Unlimited (any composable component) |
-| **Location** | `src/components/modal/`, `src/components/navigation/tabs/`, etc. | `src/components/modals/`, `src/components/extensions/`, etc. |
+| **Location** | `src/COMPOSITION/overlays/Modal/`, `src/COMPOSITION/navigation/tabs/`, etc. | `src/COMPOSITION/`, `src/PATTERNS/`, `src/DOMAIN/`, etc. |
 | **Naming** | Reserved names (Modal, Tabs, Select, ContextMenu, Toast) | Descriptive, intent-based names (ConfirmDialog, NotificationCenter) |
 | **Exports** | Stable, backward-compatible | May evolve or change |
 | **Breaking Changes** | ❌ FORBIDDEN | ✅ ALLOWED (with migration path) |
@@ -216,19 +216,30 @@ TenerifeUI uses a **two-layer architecture** that separates **infrastructure** (
 
 ## 3.1. Directory Structure
 
+**Source of Truth:** The canonical directory structure is defined in [`docs/architecture/ARCHITECTURE_STATE.md`](./architecture/ARCHITECTURE_STATE.md). This section provides a summary aligned with the canonical structure.
+
 ### Component Organization
 
-The TenerifeUI directory structure reflects the two-layer architecture model. Foundation components are in dedicated folders, while Extensions are organized by domain or functionality.
+The TenerifeUI directory structure uses a layer-based architecture model with five canonical layers: FOUNDATION, PRIMITIVES, COMPOSITION, PATTERNS, and DOMAIN. Components are organized by their architectural role and purpose.
 
 **Foundation Component Locations:**
 
 ```
-src/components/
-├── modal/                    # 🔒 FOUNDATION: Modal (Radix Dialog)
-│   ├── Modal.tsx
-│   ├── Modal.stories.tsx
-│   ├── Modal.test.tsx
-│   └── index.ts
+src/COMPOSITION/
+├── overlays/
+│   ├── Modal/                # 🔒 FOUNDATION: Modal (Radix Dialog)
+│   │   ├── Modal.tsx
+│   │   ├── Modal.stories.tsx
+│   │   ├── Modal.test.tsx
+│   │   └── index.ts
+│   │
+│   ├── ContextMenu/          # 🔒 FOUNDATION: ContextMenu (Radix ContextMenu)
+│   │   ├── ContextMenu.tsx
+│   │   ├── ContextMenu.stories.tsx
+│   │   ├── ContextMenu.test.tsx
+│   │   └── index.ts
+│   │
+│   └── Toast.tsx             # 🔒 FOUNDATION: Toast (Radix Toast)
 │
 ├── navigation/
 │   └── tabs/                 # 🔒 FOUNDATION: Tabs (Radix Tabs)
@@ -236,121 +247,188 @@ src/components/
 │       ├── Tabs.stories.tsx
 │       └── index.ts
 │
-├── select/                   # 🔒 FOUNDATION: Select (Radix Select)
-│   ├── Select.tsx
-│   ├── Select.stories.tsx
-│   ├── index.ts
-│   └── legacy/               # Archived (not exported)
-│
-├── menus/
-│   └── context-menu/         # 🔒 FOUNDATION: ContextMenu (Radix ContextMenu)
-│       ├── ContextMenu.tsx
-│       ├── ContextMenu.stories.tsx
-│       ├── ContextMenu.test.tsx
-│       └── index.ts
-│
-└── overlays/
-    └── Toast.tsx             # 🔒 FOUNDATION: Toast (Radix Toast)
+└── controls/
+    └── Select/               # 🔒 FOUNDATION: Select (Radix Select)
+        ├── Select.tsx
+        ├── Select.stories.tsx
+        └── index.ts
 ```
 
-**Extension Component Locations:**
+**Component Layer Locations:**
 
 ```
-src/components/
-├── modals/                   # ✅ EXTENSION: Modal Extensions
-│   ├── ConfirmDialog.tsx     # Uses Modal internally
-│   ├── ConfirmDialog.stories.tsx
-│   └── ModalProvider.tsx
+src/
+├── PRIMITIVES/               # Atomic UI components, no orchestration
+│   ├── Button/
+│   ├── Input/
+│   ├── Textarea/
+│   ├── Checkbox/
+│   ├── Radio/
+│   ├── Switch/
+│   ├── Badge/
+│   ├── Alert/
+│   ├── Heading/
+│   ├── Text/
+│   ├── Icon/
+│   ├── Progress/
+│   ├── Skeleton/
+│   ├── Field/
+│   ├── Label/
+│   ├── Link/
+│   ├── ErrorText/
+│   ├── HelperText/
+│   ├── FormGroup/
+│   ├── IconButton/
+│   └── NavLink/
 │
-├── notifications/            # ✅ EXTENSION: Toast Extensions
-│   ├── NotificationCenter.tsx  # Uses Toast internally
-│   ├── NotificationCenter.*.tsx
-│   └── useNotificationCenter.tsx
+├── COMPOSITION/              # Layout, overlays, interaction orchestration
+│   ├── overlays/             # All overlay components
+│   │   ├── Modal/            # 🔒 FOUNDATION
+│   │   ├── ContextMenu/      # 🔒 FOUNDATION
+│   │   ├── Toast.tsx         # 🔒 FOUNDATION
+│   │   ├── Dialog.tsx        # Semantic wrapper over Modal
+│   │   ├── Popover.tsx
+│   │   ├── Tooltip.tsx
+│   │   ├── Backdrop.tsx
+│   │   ├── Accordion/
+│   │   ├── Combobox/
+│   │   ├── Drawer/
+│   │   ├── Dropdown/
+│   │   └── ...
+│   │
+│   ├── layout/               # Layout components
+│   │   ├── Card/
+│   │   ├── Flex/
+│   │   ├── Grid/
+│   │   ├── Stack/
+│   │   ├── Container/
+│   │   ├── Box/
+│   │   ├── Column/
+│   │   ├── Row/
+│   │   ├── Inline/
+│   │   ├── Inset/
+│   │   ├── List/
+│   │   ├── ListItem/
+│   │   ├── Divider/
+│   │   ├── Spacer/
+│   │   ├── Section/
+│   │   ├── Panel/
+│   │   ├── Surface/
+│   │   ├── ContentShell/
+│   │   ├── Navbar/
+│   │   ├── Footer/
+│   │   ├── PageHeader/
+│   │   ├── SidebarLayout/
+│   │   ├── StickyBar/
+│   │   └── ...
+│   │
+│   ├── navigation/           # Navigation components
+│   │   ├── tabs/             # 🔒 FOUNDATION
+│   │   ├── breadcrumbs/
+│   │   ├── pagination/
+│   │   ├── segmented-control/
+│   │   ├── stepper/
+│   │   ├── Menu/
+│   │   ├── nav-list/
+│   │   ├── NavRoot/
+│   │   ├── NavSeparator/
+│   │   ├── NavText/
+│   │   ├── SearchBar/
+│   │   └── ...
+│   │
+│   ├── controls/             # Control components
+│   │   ├── Select/           # 🔒 FOUNDATION
+│   │   ├── MultiSelect/
+│   │   ├── Slider/
+│   │   ├── RangeSlider/
+│   │   ├── Avatar/
+│   │   ├── AspectRatio/
+│   │   ├── Separator/
+│   │   └── ...
+│   │
+│   ├── actions/              # Action components
+│   │   └── ButtonGroup/
+│   │
+│   ├── a11y/                 # Accessibility components
+│   │   └── VisuallyHidden/
+│   │
+│   ├── focus/                # Focus management
+│   │   └── FocusTrap/
+│   │
+│   ├── motion/               # Motion and animation
+│   │   └── animation/
+│   │
+│   └── utilities/            # Utility components
+│       └── IconGallery/
 │
-├── overlays/                 # ✅ EXTENSION: Other Overlays (NOT Foundation Toast)
-│   ├── Dialog.tsx            # Uses Modal internally
-│   ├── Popover.tsx
-│   ├── Tooltip.tsx
-│   ├── Backdrop.tsx
-│   └── Toast.tsx             # 🔒 FOUNDATION (only this file)
+├── PATTERNS/                 # Business/UI patterns (no overlays)
+│   ├── cards/                # Card patterns
+│   │   └── cards/
+│   │       ├── CardBase/
+│   │       ├── ArtistCard/
+│   │       ├── VenueCard/
+│   │       └── ...
+│   │
+│   ├── filters/              # Filter components
+│   │   └── filters/
+│   │
+│   ├── lists/                # List patterns
+│   │   ├── DataList/
+│   │   └── Timeline/
+│   │
+│   ├── tables/               # Table patterns
+│   │   ├── SimpleTable/
+│   │   └── table/
+│   │
+│   ├── menus/                # Menu patterns (uses COMPOSITION/overlays)
+│   │   └── menus/
+│   │
+│   └── states/               # State components
+│       ├── EmptyState/
+│       ├── LoadingState/
+│       └── ConsentBanner/
 │
-├── menus/                    # ✅ EXTENSION: Menu Extensions (NOT Foundation ContextMenu)
-│   ├── ~~dropdown/~~         # ✅ REMOVED (MIGRATION_12C)
-│   ├── ~~DropdownMenu.tsx~~  # ✅ REMOVED (MIGRATION_12C)
-│   ├── hover-card/           # ✅ Uses COMPOSITION/overlays/Popover (Radix-based)
-│   ├── ~~popover/~~          # ✅ REMOVED (MIGRATION_12D - migrated to COMPOSITION/overlays/Popover)
-│   └── context-menu/         # 🔒 FOUNDATION (only this subfolder)
-│
-├── navigation/               # ✅ EXTENSION: Navigation Extensions (NOT Foundation Tabs)
-│   ├── tabs/                 # 🔒 FOUNDATION (only this subfolder)
-│   ├── breadcrumbs/
-│   ├── pagination/
-│   ├── segmented-control/
-│   ├── stepper/
-│   ├── Breadcrumbs.tsx
-│   └── Pagination.tsx
-│
-├── ui/                       # ✅ EXTENSION: Primitive Components
-│   ├── button.tsx
-│   ├── input.tsx
-│   ├── card.tsx
-│   ├── badge.tsx
-│   └── ... (other primitives)
-│
-├── layout/                   # ✅ EXTENSION: Layout Components
-│   ├── Flex.tsx
-│   ├── Grid.tsx
-│   ├── Stack.tsx
-│   ├── Container.tsx
-│   └── ...
-│
-├── cards/                    # ✅ EXTENSION: Card Components
-│   ├── CardBase/
-│   ├── ArtistCard/
-│   ├── VenueCard/
-│   └── ...
-│
-├── data/                     # ✅ EXTENSION: Data Display
-│   ├── Table.tsx
-│   ├── List.tsx
-│   ├── Timeline.tsx
-│   └── ...
-│
-└── filters/                  # ✅ EXTENSION: Filter Components
-    ├── FilterBar.tsx
-    ├── DateRangePicker.tsx
-    └── ...
+└── DOMAIN/                   # App-specific sections
+    ├── admin/
+    ├── auth/
+    ├── notifications/
+    ├── sections/
+    └── section-builder/
 ```
 
 **Token System Locations:**
 
 ```
 src/
-├── tokens/                   # Design Token Definitions
-│   ├── spacing.ts
-│   ├── colors.ts
-│   ├── radius.ts
-│   ├── typography.ts
-│   ├── shadows.ts
-│   ├── motion.ts
-│   ├── opacity.ts
-│   ├── types/
-│   │   └── index.ts          # Token union types
-│   └── components/           # Component-specific tokens
-│       ├── button.ts
-│       ├── card.ts
+├── FOUNDATION/               # Foundation layer (tokens and theme)
+│   ├── tokens/               # Design Token Definitions
+│   │   ├── spacing.ts
+│   │   ├── colors.ts
+│   │   ├── radius.ts
+│   │   ├── typography.ts
+│   │   ├── shadows.ts
+│   │   ├── motion.ts
+│   │   ├── opacity.ts
+│   │   ├── types/
+│   │   │   └── index.ts      # Token union types
+│   │   └── components/       # Component-specific tokens
+│   │       ├── button.ts
+│   │       ├── card.ts
+│   │       └── ...
+│   │
+│   └── theme/                # Theme System
+│       ├── ThemeProvider.tsx
+│       ├── colors.ts
+│       ├── spacing.ts
+│       ├── typography.ts
 │       └── ...
-│
-├── theme/                    # Theme System
-│   ├── ThemeProvider.tsx
-│   ├── colors.ts
-│   ├── spacing.ts
-│   ├── typography.ts
-│   └── ...
 │
 └── themes/                   # Theme Definitions
     ├── default.ts
     ├── dark.ts
+    ├── brand.ts
+    ├── minimal.ts
+    ├── neon.ts
     └── ...
 ```
 
@@ -360,59 +438,76 @@ src/
 src/
 ├── hooks/                    # React Hooks
 │   ├── useToast.ts
+│   ├── useLocalToast.ts
+│   ├── useGlobalToast.ts
 │   ├── useModal.ts
-│   └── ...
-│
-├── lib/                      # Utility Libraries
-│   ├── responsive-props.ts   # Responsive<T> utilities
-│   ├── utils.ts
-│   └── a11y.ts
+│   └── useDebounce.ts
 │
 ├── types/                    # Type Definitions
 │   └── responsive.ts         # Responsive<T> type
 │
 ├── icons/                    # Icon Components
+│   ├── IconArrowRight.tsx
+│   ├── IconCalendar.tsx
+│   ├── IconCheck.tsx
+│   ├── IconChevronDown.tsx
 │   └── ...
 │
-└── animation/                # Animation Utilities
-    └── ...
+├── styles/                   # Global styles
+│   └── globals.css
+│
+├── test/                     # Test utilities
+│   ├── setup.ts
+│   ├── test-utils.tsx
+│   └── custom-matchers.ts
+│
+└── EXTENSIONS/               # Framework-specific extensions
+    └── next/
+        └── NextLinkAdapter.tsx
 ```
 
 ### Directory Naming Conventions
 
-**Foundation Folders:**
-- Use singular, descriptive names: `modal/`, `select/`
-- Foundation folders contain ONLY Foundation components
-- Foundation folders may contain nested structure (e.g., `navigation/tabs/`)
+**Layer-Based Structure:**
+- **FOUNDATION:** Tokens and theme system only (`src/FOUNDATION/`)
+- **PRIMITIVES:** Atomic UI components (`src/PRIMITIVES/`)
+- **COMPOSITION:** Layout, overlays, navigation, controls (`src/COMPOSITION/`)
+- **PATTERNS:** Business/UI patterns (`src/PATTERNS/`)
+- **DOMAIN:** App-specific sections (`src/DOMAIN/`)
 
-**Extension Folders:**
-- Use plural for collections: `modals/`, `notifications/`, `cards/`
-- Use descriptive domain names: `filters/`, `data/`, `layout/`
-- Extension folders may contain multiple related components
+**Component Organization:**
+- Each component has its own folder with component files
+- Component folders contain: `ComponentName.tsx`, `ComponentName.stories.tsx`, `ComponentName.test.tsx`, `index.ts`
+- Sub-layers organize related components (e.g., `COMPOSITION/overlays/`, `COMPOSITION/layout/`)
 
-**Legacy Folders:**
-- Legacy code is stored in `legacy/` subfolders
+**Legacy Components:**
+- Legacy code is stored in `legacy/` subfolders when needed
 - Legacy folders are NOT exported in public API
-- Examples: `input/legacy/`, `select/legacy/`, `textarea/legacy/`
+- Legacy components are deprecated and should not be used in new code
 
 ### Key Rules for Directory Structure
 
-1. **Foundation folders are reserved for Foundation components only**
-   - ❌ Extensions cannot be placed in Foundation folders
-   - ✅ Extensions use separate folders (e.g., `modals/` not `modal/`)
+1. **Layer boundaries are strictly enforced**
+   - ❌ Components cannot be placed in incorrect layers
+   - ✅ Components must be placed in the correct layer based on their purpose
+   - **Reference:** See [`docs/architecture/ARCHITECTURE_STATE.md`](./architecture/ARCHITECTURE_STATE.md) for canonical layer definitions
 
-2. **Foundation components have dedicated folders**
-   - Each Foundation component has its own folder
-   - Foundation folders may contain nested subfolders if needed
+2. **Foundation components are locked**
+   - Foundation components (Modal, Tabs, Select, ContextMenu, Toast) are immutable
+   - Foundation components live in `COMPOSITION/` layer
+   - Foundation components cannot be duplicated or replaced
 
-3. **Extensions are organized by domain or functionality**
-   - Related Extensions are grouped together
-   - Domain-specific Extensions use descriptive folder names
+3. **Overlays must live in COMPOSITION layer only**
+   - All overlay components (Popover, Modal, ContextMenu, Toast, Dialog, Tooltip) are in `COMPOSITION/overlays/`
+   - ❌ Overlays cannot be defined in PATTERNS layer
+   - ✅ PATTERNS may use overlays from COMPOSITION but cannot define overlay primitives
 
-4. **Tokens are centralized in `src/tokens/`**
-   - Token definitions are in `src/tokens/`
-   - Token types are in `src/tokens/types/`
-   - Component-specific tokens are in `src/tokens/components/`
+4. **Tokens are centralized in FOUNDATION layer**
+   - Token definitions are in `src/FOUNDATION/tokens/`
+   - Token types are in `src/FOUNDATION/tokens/types/`
+   - Component-specific tokens are in `src/FOUNDATION/tokens/components/`
+   - Theme system is in `src/FOUNDATION/theme/`
+   - Theme definitions are in `src/themes/` (root level)
 
 ---
 
@@ -433,11 +528,11 @@ The Foundation layer consists of **exactly five components**, one per category:
 
 | Component | Category | Base Library | Location | Status |
 |-----------|----------|--------------|----------|--------|
-| **Modal** | Overlays | Radix Dialog | `src/components/modal/` | ✅ LOCKED |
-| **Tabs** | Navigation | Radix Tabs | `src/components/navigation/tabs/` | ✅ LOCKED |
-| **Select** | Inputs | Radix Select | `src/components/select/` | ✅ LOCKED (FINALIZED) |
-| **ContextMenu** | Menus | Radix ContextMenu | `src/components/menus/context-menu/` | ✅ LOCKED |
-| **Toast** | Overlays | Radix Toast | `src/components/overlays/Toast.tsx` | ✅ LOCKED |
+| **Modal** | Overlays | Radix Dialog | `src/COMPOSITION/overlays/Modal/` | ✅ LOCKED |
+| **Tabs** | Navigation | Radix Tabs | `src/COMPOSITION/navigation/tabs/` | ✅ LOCKED |
+| **Select** | Inputs | Radix Select | `src/COMPOSITION/controls/Select/` | ✅ LOCKED (FINALIZED) |
+| **ContextMenu** | Menus | Radix ContextMenu | `src/COMPOSITION/overlays/ContextMenu/` | ✅ LOCKED |
+| **Toast** | Overlays | Radix Toast | `src/COMPOSITION/overlays/Toast.tsx` | ✅ LOCKED |
 
 **Lock Date:** 2025-12-12  
 **Architecture Phase:** **CLOSED** (Foundation phase is complete and immutable)
@@ -541,7 +636,7 @@ Extensions **MUST NOT**:
 - ❌ Bypass Foundation components (e.g., using Radix Dialog directly instead of `Modal`)
 - ❌ Be named after Foundation components (e.g., `SimpleModal`, `BasicTabs`, `OldSelect`, `LegacyToast`, `ModalV2`)
 - ❌ Use Foundation component names (e.g., `Modal`, `Tabs`, `Select`, `ContextMenu`, `Toast` are reserved)
-- ❌ Live in Foundation component folders (e.g., `src/components/modal/ConfirmDialog.tsx` is forbidden)
+- ❌ Live in Foundation component folders (e.g., `src/COMPOSITION/overlays/Modal/ConfirmDialog.tsx` is forbidden)
 
 ### Naming Rules
 
@@ -574,17 +669,17 @@ Extensions **MUST NOT**:
 **Extensions MUST live outside Foundation component folders:**
 
 **✅ VALID Locations:**
-- `src/components/modals/` - Extension modals (e.g., `ConfirmDialog.tsx`)
-- `src/components/extensions/` - General extensions
-- `src/components/patterns/` - Pattern-based extensions
-- `src/components/overlays/` - Extension overlays (but NOT Foundation Toast)
-- `src/components/notifications/` - Notification extensions
+- `src/COMPOSITION/overlays/` - Extension overlays (e.g., `Dialog.tsx`, but NOT Foundation Modal/Toast)
+- `src/COMPOSITION/layout/` - Layout components
+- `src/COMPOSITION/navigation/` - Navigation components (but NOT Foundation Tabs)
+- `src/PATTERNS/` - Business/UI patterns
+- `src/DOMAIN/` - Domain-specific components
 
 **❌ INVALID Locations:**
-- `src/components/modal/ConfirmDialog.tsx` - Inside Foundation folder
-- `src/components/navigation/tabs/CustomTabs.tsx` - Inside Foundation folder
-- `src/components/select/MultiSelect.tsx` - Inside Foundation folder
-- `src/components/menus/context-menu/UserMenu.tsx` - Inside Foundation folder (use `src/components/menus/` instead)
+- `src/COMPOSITION/overlays/Modal/ConfirmDialog.tsx` - Inside Foundation folder
+- `src/COMPOSITION/navigation/tabs/CustomTabs.tsx` - Inside Foundation folder
+- `src/COMPOSITION/controls/Select/MultiSelect.tsx` - Inside Foundation folder
+- `src/COMPOSITION/overlays/ContextMenu/UserMenu.tsx` - Inside Foundation folder (use `src/PATTERNS/menus/` instead)
 
 **Foundation folders are reserved for Foundation components only.**
 
@@ -647,7 +742,7 @@ Extensions **MUST NOT**:
 - Component-specific: `card`, `modal`, `popover`, `tooltip`
 - Token Type: `ShadowToken` or `Responsive<ShadowToken>`
 
-**Token Type Location:** All token union types are defined in `src/tokens/types/index.ts`
+**Token Type Location:** All token union types are defined in `src/FOUNDATION/tokens/types/index.ts`
 
 ### Token Unions in Component APIs
 
@@ -696,7 +791,7 @@ export interface ButtonProps {
 ### How Tokens Map to CSS Variables
 
 **Token-to-CSS Mapping:**
-- Tokens are defined in `src/tokens/` (TypeScript token objects)
+- Tokens are defined in `src/FOUNDATION/tokens/` (TypeScript token objects)
 - Tokens are converted to CSS variables via Tailwind preset (`src/preset.ts`)
 - CSS variables are generated at build time (e.g., `--spacing-md`, `--color-primary`)
 - Components reference CSS variables in styles (via Tailwind classes or direct CSS variable usage)
@@ -898,9 +993,9 @@ export interface ComponentProps {
 - Legacy components may be kept for reference but must not be used in new code
 
 **Examples of Legacy Directories:**
-- `src/components/input/legacy/` - Archived input components
-- `src/components/select/legacy/` - Archived select components
-- `src/components/textarea/legacy/` - Archived textarea components
+- `src/PRIMITIVES/Input/legacy/` - Archived input components (if exists)
+- `src/COMPOSITION/controls/Select/legacy/` - Archived select components (if exists)
+- `src/PRIMITIVES/Textarea/legacy/` - Archived textarea components (if exists)
 
 **Rationale:** Legacy components violate token-driven architecture and should not be part of the public API. Keeping them in `legacy/` folders allows reference without polluting the public API.
 
@@ -1015,8 +1110,8 @@ The typing system consists of two documents with explicit priority ordering:
 **Example:**
 ```typescript
 // ✅ CORRECT - Extension component
-// src/components/modals/ConfirmDialog.tsx
-import { Modal, ModalRoot, ModalContent } from "@/components/modal";
+// src/COMPOSITION/overlays/Dialog.tsx (or src/PATTERNS/...)
+import { Modal, ModalRoot, ModalContent } from "@/COMPOSITION/overlays/Modal";
 
 export const ConfirmDialog = ({ onConfirm, onCancel, ... }) => {
   return (
@@ -1034,7 +1129,7 @@ export const ConfirmDialog = ({ onConfirm, onCancel, ... }) => {
 **Architecture violations are treated as defects and must be fixed immediately:**
 
 **Common Violations:**
-- ❌ Duplicate Foundation components (e.g., `src/components/ui/toast.tsx` when Foundation Toast exists)
+- ❌ Duplicate Foundation components (e.g., `src/PRIMITIVES/Toast.tsx` when Foundation Toast exists in `src/COMPOSITION/overlays/Toast.tsx`)
 - ❌ Hardcoded Tailwind utilities in component code (visual properties)
 - ❌ Extensions bypassing Foundation components (using Radix directly)
 - ❌ Extensions using Foundation component names (e.g., `SimpleModal`)
@@ -1260,9 +1355,10 @@ TenerifeUI explicitly **will never**:
 **Example:**
 ```typescript
 // ✅ CORRECT - New domain Extension
-// src/components/forms/FormModal.tsx
-import { Modal, ModalRoot, ModalContent } from "@/components/modal";
-import { Input, Button } from "@/components/ui";
+// src/PATTERNS/forms/FormModal.tsx (or src/DOMAIN/...)
+import { Modal, ModalRoot, ModalContent } from "@/COMPOSITION/overlays/Modal";
+import { Input } from "@/PRIMITIVES/Input";
+import { Button } from "@/PRIMITIVES/Button";
 
 export const FormModal = ({ fields, onSubmit, ... }) => {
   return (

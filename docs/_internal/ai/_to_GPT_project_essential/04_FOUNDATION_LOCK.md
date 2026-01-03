@@ -437,6 +437,7 @@ The following components constitute the **complete and final** Foundation layer.
 | Component       | Category   | Base Library         | Foundation Status | Status Date |
 | --------------- | ---------- | -------------------- | ----------------- | ----------- |
 | **Button**      | Actions    | Native `<button>`    | ✅ **FINAL LOCK**  | 2025-12-25 |
+| **IconButton**  | Actions    | Native `<button>` (via Button) | ✅ **LOCKED** | 2026-01-02 |
 | **Link**        | Navigation | Native `<a>`         | ✅ **LOCKED**      | 2025-12-25 |
 | **Text**        | Typography | Native elements (span, p, label, strong, em) | ✅ **LOCKED**      | 2025-12-26 |
 | **Input**       | Form Input | Native `<input>`     | ✅ **LOCKED**      | 2025-12-26 |
@@ -447,7 +448,84 @@ The following components constitute the **complete and final** Foundation layer.
 | **Radio**       | Form Input | Native `<button role="radio">` | ✅ **LOCKED** | 2025-12-25 |
 | **Switch**      | Form Input | Native `<button role="switch">` | ✅ **LOCKED** | 2025-12-25 |
 | **Select**      | Form Input | Radix Select         | ✅ **LOCKED**      | 2025-12-26 |
+| **FormGroup**   | Form Input | Native `<fieldset>` | ✅ **LOCKED**      | 2026-01-02 |
+| **HelperText**  | Form Input | Native `<p>` (via Text) | ✅ **LOCKED**      | 2026-01-02 |
+| **ErrorText**   | Form Input | Native `<p>` (via Text) | ✅ **LOCKED**      | 2026-01-02 |
 | **Tabs**        | Navigation | Radix Tabs           | ✅ **LOCKED**      | 2025-12-25 |
+| **Modal**       | Overlays   | Radix Dialog         | ✅ **PROCESS LOCKED** | 2025-12-25 |
+| **ContextMenu** | Overlays   | Radix ContextMenu    | ✅ **PROCESS LOCKED** | 2025-12-25 |
+| **Toast**       | Overlays   | Radix Toast          | ✅ **LOCKED**      | 2025-12-26 |
+
+## ✅ Foundation Component Lock Sweep Finalization
+
+**Status:** ✅ **FOUNDATION LOCK SWEEP FINALIZED**  
+**Finalization Date:** 2026-01-02  
+**Task ID:** TUI_FOUNDATION_LOCK_SWEEP_FINAL_01  
+**Authority:** This finalization is binding and immutable without explicit unlock procedure
+
+### Finalized Foundation Components (21)
+
+The following 21 components constitute the **complete and finalized** Foundation layer. All components have been verified for compliance with architecture rules, Public API canon, token authority, and pipeline requirements.
+
+1. **Button** - Actions (Native `<button>`)
+2. **IconButton** - Actions (Native `<button>` via Button)
+3. **Text** - Typography (Native elements)
+4. **HelperText** - Form Input (Native `<p>` via Text)
+5. **Alert** - Feedback (Native elements)
+6. **Link** - Navigation (Native `<a>`)
+7. **NavLink** - Navigation (Native `<a>` via Link)
+8. **Badge** - Visual Primitives (Native elements)
+9. **Heading** - Typography (Native `<h1-h6>`)
+10. **Checkbox** - Form Input (Native `<button role="checkbox">`)
+11. **Radio** - Form Input (Native `<button role="radio">`)
+12. **Switch** - Form Input (Native `<button role="switch">`)
+13. **Input** - Form Input (Native `<input>`)
+14. **Textarea** - Form Input (Native `<textarea>`)
+15. **Skeleton** - Visual Primitives (Native elements)
+16. **Progress** - Visual Primitives (Native elements)
+17. **Icon** - Visual Primitives (SVG Registry)
+18. **Label** - Form Input (Radix Label)
+19. **ErrorText** - Form Input (Native `<p>` via Text)
+20. **Field** - Form Input (Native `<fieldset>` composition)
+21. **FormGroup** - Form Input (Native `<fieldset>`)
+
+### Verification Results
+
+**All 21 Foundation components verified:**
+- ✅ Component location (PRIMITIVES) correct
+- ✅ Export from `src/index.ts` verified (single export, all types exported)
+- ✅ Public API compliance (Foundation Enforcement: className/style excluded)
+- ✅ Token usage compliance (all visual props use token unions, no raw values)
+- ✅ CVA usage compliance (tokenCVA vs cva matches Decision Matrix)
+- ✅ Storybook and test coverage verified
+
+**Public API Compliance:**
+- ✅ All 21 Foundation components exported from `src/index.ts`
+- ✅ Public API Audit Report: `docs/reports/audit/TUI_PUBLIC_API_AUDIT_REPORT.md` (Status: COMPLETE, READY FOR LOCK)
+- ✅ No unresolved findings in Public API audit
+
+**Previous Sweep Reference:**
+- Initial verification completed: TUI_FOUNDATION_LOCK_SWEEP_01 (2026-01-02)
+- Status Report: `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_STATUS.md`
+- Violations Report: `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_VIOLATIONS.md`
+
+### Finalization Statement
+
+**Foundation layer is complete, compliant, and immutable.**
+
+All 21 Foundation components have been verified and confirmed as locked. The Foundation layer is officially finalized and closed for modifications. Any future changes to Foundation components require explicit Foundation unlock procedure with full audit and justification.
+
+**This finalization applies to humans and AI agents equally.** Foundation components are read-only except for bug fixes, type improvements, and documentation updates.
+
+### Related Documents
+
+- **Public API Audit:** `docs/reports/audit/TUI_PUBLIC_API_AUDIT_REPORT.md`
+- **Previous Sweep Status:** `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_STATUS.md`
+- **Previous Sweep Violations:** `docs/reports/foundation/TUI_FOUNDATION_LOCK_SWEEP_01_VIOLATIONS.md`
+- **Architecture Lock:** `docs/architecture/ARCHITECTURE_LOCK.md`
+- **Public API Contract:** `docs/architecture/PUBLIC_API_CONTRACT.md`
+
+---
 
 ### Foundation Component Details
 
@@ -662,6 +740,66 @@ The following components constitute the **complete and final** Foundation layer.
 - **Previous Status:** UNLOCKED (Pending Canonical Lock) since 2025-12-17 - Explicitly unlocked to allow canonical Foundation lock process per user request.
 - **Lock Justification:** Select has completed Pipeline 18A (Steps 0-12) with all BLOCKER issues resolved (token migration from SELECT_TOKENS to INPUT_TOKENS, API simplification to minimal controlled API, CVA normalization). Component demonstrates full compliance with architectural canon (composite form control built on primitive tokens), CVA Canonical Style, STATE_MATRIX, and all Authority Contracts. Canonical role defined (Composite Control), state model explicitly bound to STATE_MATRIX, forbidden extensions documented, interaction tests enhanced, a11y validation comprehensive. Exception declared per TUNG_LOCKED_COMPONENT_CHANGE_GUARD for LOCKED component refactor. Ready for Foundation lock.
 
+#### FormGroup
+- **Location:** `src/PRIMITIVES/FormGroup/`
+- **Export Path:** `@tenerife.music/ui` → `FormGroup`, `FormGroupProps`
+- **Base Library:** Native `<fieldset>` element (semantic HTML)
+- **Canonical Role:** **FOUNDATION_PRIMITIVE_FORM_GROUPING** - Semantic wrapper for grouping related form fields using native HTML fieldset/legend. Provides optional description and error slots with automatic ID generation for accessibility. FormGroup is layout-transparent for children - it does not manage layout inside children. It only guarantees vertical flow for its own semantic elements (description, error).
+- **Purpose:** Sole form field grouping foundation. All semantic grouping of related form fields must use this component. FormGroup uses native `<fieldset>` and conditional `<legend>` for accessibility and semantic grouping. Provides automatic ID generation for description/error (aria-describedby). Layout-transparent for user-provided children.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-02
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/FORMGROUP_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Input)
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2026-01-02
+- **Scope:** Public API (legend, description, error, disabled, required, children), behavior (native fieldset disabled propagation, aria-required, automatic ID generation), defaults (all optional props default to undefined/false)
+- **STATE_MATRIX Binding:** FormGroup uses canonical states from STATE_MATRIX: `base`, `disabled` (via native fieldset disabled attribute). No hover/active/focus states (semantic wrapper, not interactive). State model is explicitly bound to STATE_MATRIX.
+- **Forbidden Extensions:** FormGroup MUST NOT implement: (1) Layout management for children (layout-transparent), (2) Validation logic (validation must be external), (3) Form state management (state management must be external), (4) Input registration (registration must be external), (5) Visual framing/card styling (use Card/Surface components), (6) Custom layout control inside children (user controls layout).
+- **CVA Compliance:** FormGroup does not use CVA (COMPLIANT per CVA Decision Matrix - component is semantic wrapper without token-driven visual axes). Uses Stack component with token spacing for description/error vertical flow only.
+- **Accessibility:** FormGroup uses native HTML `<fieldset>`/`<legend>` for semantic grouping. Provides automatic ID generation for description/error (aria-describedby). Disabled state propagates to all form controls via fieldset disabled attribute. Required state reflected via aria-required on fieldset. WCAG 2.1 Level AA compliance validated: 1.3.1, 2.4.7, 4.1.2.
+- **Architectural Constraints:** FormGroup MUST remain layout-transparent for children (no wrappers around children). FormGroup MUST use native HTML fieldset/legend for semantic grouping. FormGroup MUST use token-based spacing only (via Stack component). FormGroup MUST NOT manage layout inside children (user controls layout).
+
+#### HelperText
+- **Location:** `src/PRIMITIVES/HelperText/`
+- **Export Path:** `@tenerife.music/ui` → `HelperText`, `HelperTextProps`
+- **Base Library:** Native `<p>` element (via Text component wrapper)
+- **Canonical Role:** **FOUNDATION_PRIMITIVE_FORM_DESCRIPTION** - Presentational DX helper for form descriptions. Provides a thin wrapper around Text component with sensible defaults for helper text use cases. HelperText is standalone (not tied to Field composition) and purely presentational.
+- **Purpose:** Sole form description helper foundation. All standalone form descriptions (outside Field composition) must use this component. HelperText provides sensible defaults (size="sm", tone="muted", as="p") for helper text use cases. HelperText is accessible via aria-describedby.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-02
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/HELPERTEXT_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Input)
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2026-01-02
+- **Scope:** Public API (size, tone, as props with defaults), behavior (thin wrapper over Text component), defaults (size="sm", tone="muted", as="p")
+- **STATE_MATRIX Binding:** HelperText is non-interactive (presentational only). No states required (stateless component).
+- **Forbidden Extensions:** HelperText MUST NOT implement: (1) Validation logic (validation must be external), (2) Error handling (error handling must be external), (3) Required/optional semantics (semantics must be external), (4) Form state awareness (state management must be external), (5) Business logic (pure presentational), (6) Coupling to Field internals (standalone component), (7) New token domains (uses TEXT_TOKENS via Text component), (8) Hardcoded colors or spacing (token-only via Text component).
+- **CVA Compliance:** HelperText does not use CVA directly (COMPLIANT per CVA Decision Matrix - component wraps Text component, does not use CVA). Text component uses `cva`, but HelperText does not interact with CVA.
+- **Accessibility:** HelperText uses native HTML `<p>` element by default (semantic HTML). Supports aria-describedby, aria-label, aria-labelledby via Text props. No redundant ARIA needed (uses native HTML semantics).
+- **Architectural Constraints:** HelperText MUST remain a thin wrapper over Text component. HelperText MUST provide sensible defaults (size="sm", tone="muted", as="p"). HelperText MUST be standalone (not tied to Field composition). HelperText MUST use token-only styling (via Text component). Foundation Enforcement: className and style excluded from public API.
+
+#### ErrorText
+- **Location:** `src/PRIMITIVES/ErrorText/`
+- **Export Path:** `@tenerife.music/ui` → `ErrorText`, `ErrorTextProps`
+- **Base Library:** Native `<p>` element (via Text component wrapper)
+- **Canonical Role:** **FOUNDATION_PRIMITIVE_FORM_ERROR_MESSAGE** - Presentational error message primitive for form validation feedback. Provides accessible error messaging with role="alert" and aria-live="polite" for screen reader announcements. ErrorText is standalone (not tied to Field composition) and purely presentational.
+- **Purpose:** Sole error message foundation. All standalone error messages (outside Field composition) must use this component. ErrorText provides destructive color styling and ARIA attributes (role="alert", aria-live="polite") for screen reader announcements. ErrorText is accessible via aria-describedby linking from form controls.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2026-01-02
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/ERRORTEXT_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Primitive - Form Input)
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2026-01-02
+- **Scope:** Public API (children, id, asChild props), behavior (thin wrapper over Text component with destructive styling and ARIA attributes), ARIA attributes (role="alert", aria-live="polite")
+- **STATE_MATRIX Binding:** ErrorText is non-interactive (presentational only). No states required (stateless component).
+- **Forbidden Extensions:** ErrorText MUST NOT implement: (1) Validation logic (validation must be external), (2) Error handling (error handling must be external), (3) Form state management (state management must be external), (4) Business logic (pure presentational), (5) Coupling to Field internals (standalone component), (6) New token domains (uses TEXT_TOKENS via Text component, uses text-destructive semantic color token), (7) Hardcoded colors or spacing (token-only via Text component and semantic color tokens).
+- **CVA Compliance:** ErrorText does not use CVA directly (COMPLIANT per CVA Decision Matrix - component wraps Text component, does not use CVA). Text component uses `cva`, but ErrorText does not interact with CVA.
+- **Accessibility:** ErrorText uses native HTML `<p>` element (semantic HTML). Applies role="alert" and aria-live="polite" for screen reader announcements. Supports aria-describedby linking via id prop. WCAG 2.1 Level AA compliance validated: 1.3.1, 2.4.7, 4.1.2, 4.1.3.
+- **Architectural Constraints:** ErrorText MUST remain a thin wrapper over Text component. ErrorText MUST provide destructive color styling (text-destructive token). ErrorText MUST apply ARIA attributes (role="alert", aria-live="polite"). ErrorText MUST be standalone (not tied to Field composition). ErrorText MUST use token-only styling (via Text component and semantic color tokens). Foundation Enforcement: className and style excluded from public API.
+
 #### Tabs
 - **Location:** `src/COMPOSITION/navigation/tabs/`
 - **Export Path:** `@tenerife.music/ui` (when promoted to index exports) → `Tabs` (compound component with Root, List, Trigger, Content), `TabsRootProps`, `TabsListProps`, `TabsTriggerProps`, `TabsContentProps`, etc.
@@ -714,7 +852,62 @@ The following components constitute the **complete and final** Foundation layer.
   - Code quality: Simplified code structure (removed unnecessary abstraction)
 - **Foundation Rule Compliance:** Label follows Foundation rule for form primitives (fixed typography, no size/variant props). Label correctly uses Radix Label primitive for cross-framework compatibility. Label correctly excludes className/style from public API. Label correctly uses token-driven styling only.
 
----
+#### Modal
+- **Location:** `src/COMPOSITION/overlays/Modal/`
+- **Export Path:** `@tenerife.music/ui` → `Modal` (compound component with Root, Trigger, Overlay, Content, Header, Title, Description, Footer, Close), `ModalRootProps`, `ModalTriggerProps`, `ModalOverlayProps`, `ModalContentProps`, `ModalHeaderProps`, `ModalTitleProps`, `ModalDescriptionProps`, `ModalFooterProps`, `ModalCloseProps`, `ModalSize`
+- **Base Library:** Radix UI Dialog (`@radix-ui/react-dialog`)
+- **Purpose:** Sole modal dialog foundation. All modal dialogs (overlays that require user interaction) must use this component. Modal provides a compound component API (Root, Trigger, Overlay, Content, Header, Title, Description, Footer, Close) for flexible composition while maintaining consistent token-driven styling and Radix-powered accessibility. Modal delegates all interaction logic (keyboard navigation, focus management, ARIA, scroll locking) to Radix primitive.
+- **Status:** ✅ **PROCESS LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/MODAL_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Overlay - Modal Dialog)
+- **Migration Complete:** Modal has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API (compound component with 9 subcomponents), tokens (MODAL_TOKENS), behavior (Radix-delegated interaction, keyboard navigation, focus management, scroll locking), variants (size: sm, md, lg, xl; width, height, padding, radius, surface via responsive props)
+- **CVA Compliance:** Modal uses `tokenCVA` (COMPLIANT per CVA Decision Matrix RULE 1 - component has token-driven visual axes). All CVA instances migrated from `cva` to `tokenCVA` during Pipeline 18A STEP 9.
+- **Accessibility:** Modal uses Radix Dialog primitive which provides comprehensive WCAG 2.1 Level AA compliance: ARIA roles (dialog), keyboard navigation (Escape key, Tab, focus trap), focus management (focus restoration, focus trap), screen reader support (title/description announcement). Component integration preserves all Radix A11Y features.
+- **Architectural Constraints:** Modal MUST delegate all interaction logic to Radix (no custom keyboard/mouse handlers). Modal MUST use token-driven styling (MODAL_TOKENS) for all visual properties. Modal is compound component with 9 subcomponents exposing Radix primitives. Size scale: sm, md, lg, xl (overlay size scale).
+
+#### ContextMenu
+- **Location:** `src/COMPOSITION/overlays/ContextMenu/`
+- **Export Path:** `@tenerife.music/ui` → `ContextMenu` (compound component with Root, Trigger, Content, Item, CheckboxItem, RadioGroup, RadioItem, Separator, Label, Sub, SubTrigger, SubContent), `ContextMenuRootProps`, `ContextMenuTriggerProps`, `ContextMenuContentProps`, `ContextMenuItemProps`, etc.
+- **Base Library:** Radix UI ContextMenu (`@radix-ui/react-context-menu`)
+- **Purpose:** Sole context menu foundation. All right-click context menus must use this component. ContextMenu provides a compound component API (Root, Trigger, Content, Item, CheckboxItem, RadioGroup, RadioItem, Separator, Label, Sub, SubTrigger, SubContent) for flexible composition while maintaining consistent token-driven styling and Radix-powered accessibility. ContextMenu delegates all interaction logic (right-click detection, keyboard navigation, focus management, ARIA) to Radix primitive.
+- **Status:** ✅ **PROCESS LOCKED**
+- **Lock Date:** 2025-12-25
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/CONTEXTMENU_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Overlay - Context Menu)
+- **Migration Complete:** ContextMenu has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-25
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API (compound component with 12 subcomponents), tokens (CONTEXT_MENU_TOKENS), behavior (Radix-delegated interaction, keyboard navigation, focus management), variants (size: sm, md, lg; width: auto, sm, md, lg, xl; tone: neutral, primary, destructive; padding, radius, surface via responsive props)
+- **CVA Compliance:** ContextMenu uses `tokenCVA` (COMPLIANT per CVA Decision Matrix RULE 1 - component has token-driven visual axes). All CVA instances migrated from `cva` to `tokenCVA` during Pipeline 18A STEP 9.
+- **Accessibility:** ContextMenu uses Radix ContextMenu primitive which provides comprehensive WCAG 2.1 Level AA compliance: ARIA roles (menu, menuitem, menuitemcheckbox, menuitemradio), keyboard navigation (Arrow keys, Home, End, Enter, Escape), focus management (focus trap, restoration), screen reader support (state announcement, menu association). Component integration preserves all Radix A11Y features.
+- **Architectural Constraints:** ContextMenu MUST delegate all interaction logic to Radix (no custom keyboard/mouse handlers). ContextMenu MUST use token-driven styling (CONTEXT_MENU_TOKENS) for all visual properties. ContextMenu is compound component with 12 subcomponents exposing Radix primitives. Size scale: sm, md, lg (overlay size scale).
+
+#### Toast
+- **Location:** `src/COMPOSITION/overlays/Toast.tsx`
+- **Export Path:** `@tenerife.music/ui` → `Toast` (compound component with Root, Title, Description, Action, Close), `ToastRoot`, `ToastProvider`, `ToastViewport`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `ToastRootProps`, `ToastProviderProps`, `ToastViewportProps`, `ToastTitleProps`, `ToastDescriptionProps`, `ToastActionProps`, `ToastCloseProps`
+- **Base Library:** Radix UI Toast (`@radix-ui/react-toast`)
+- **Purpose:** Sole toast notification foundation. All toast notifications (temporary, non-blocking messages) must use this component. Toast provides a compound component API (Root, Title, Description, Action, Close) and provider/viewport pattern for flexible composition while maintaining consistent token-driven styling and Radix-powered accessibility. Toast delegates all interaction logic (keyboard navigation, focus management, ARIA, swipe gestures) to Radix primitive.
+- **Status:** ✅ **LOCKED**
+- **Lock Date:** 2025-12-26
+- **Pipeline:** Pipeline 18A (Steps 0-12 complete)
+- **Audit Report:** `docs/reports/audit/TOAST_BASELINE_REPORT.md`
+- **Lock Type:** FOUNDATION LOCK (Foundation Layer Overlay - Toast Notification)
+- **Migration Complete:** Toast has completed canonical Foundation Step Pipeline (Steps 0-12) and demonstrates full compliance with all Authority Contracts and canonical lifecycle requirements.
+- **Rule:** Future structural modifications require re-entry into Pipeline 18A
+- **Implementation Date:** 2025-12-26
+- **Lifecycle Version:** 1.0 (Pipeline 18A Steps 0-12)
+- **Scope:** Public API (compound component with 5 subcomponents, Provider, Viewport), tokens (TOAST_TOKENS), behavior (Radix-delegated interaction, keyboard navigation, focus management, swipe gestures), variants (variant: default, success, warning, danger, info)
+- **CVA Compliance:** Toast uses `tokenCVA` (COMPLIANT per CVA Decision Matrix RULE 1 - component has token-driven visual axes). All CVA instances use `tokenCVA` with token-driven variants.
+- **Accessibility:** Toast uses Radix Toast primitive which provides comprehensive WCAG 2.1 Level AA compliance: ARIA roles (region, status), keyboard navigation (Escape key), focus management (focus restoration), screen reader support (announcement, live region). Component integration preserves all Radix A11Y features.
+- **Architectural Constraints:** Toast MUST delegate all interaction logic to Radix (no custom keyboard/mouse handlers). Toast MUST use token-driven styling (TOAST_TOKENS) for all visual properties. Toast is compound component with 5 subcomponents exposing Radix primitives. ToastProvider provides imperative API (useToast hook) for Extension layer composition.
 
 ---
 
@@ -1055,7 +1248,14 @@ If Interactive Size Scale Authority modifications are needed:
 | Radio           | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Re-run Complete |
 | Switch          | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Re-run Complete |
 | Textarea        | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Complete, Strict Primitive Refactor |
+| IconButton      | ✅ **LOCKED** | 2026-01-02 | Pipeline 18A Complete |
+| FormGroup       | ✅ **LOCKED** | 2026-01-02 | Pipeline 18A Complete |
+| HelperText      | ✅ **LOCKED** | 2026-01-02 | Pipeline 18A Complete |
+| ErrorText       | ✅ **LOCKED** | 2026-01-02 | Pipeline 18A Complete |
 | Tabs            | ✅ **LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Modal           | ✅ **PROCESS LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| ContextMenu     | ✅ **PROCESS LOCKED** | 2025-12-25 | Pipeline 18A Complete |
+| Toast           | ✅ **LOCKED** | 2025-12-26 | Pipeline 18A Complete |
 
 ### Extension Layer Status
 
