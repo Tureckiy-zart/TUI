@@ -6,6 +6,9 @@
 **Date:** 2026-01-02  
 **Audit Reference:** `docs/reports/audit/QUICK_AUDIT_NAV_SURFACE.md`
 
+**Related Documents:**
+- [NAVIGATION_CANON.md](./NAVIGATION_CANON.md) - Navigation system architecture (Navbar zones, responsive rules, composition)
+
 ---
 
 ## Navigation Overlays

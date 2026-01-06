@@ -506,6 +506,15 @@ The following audit reports document the List System implementation and usage:
 - Migration completed per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
 - ESLint rule enforces compliance going forward
 
+**Rule 4: Interactive Wrapper Layout Contract**
+
+- ✅ **LOCKED** (2026-01-06) - Interactive Wrapper Layout Contract is a mandatory architectural rule
+- Interactive components that can wrap layout content (Card, Panel, Box) MUST use block-level layout (block or flex), not inline or inline-flex
+- This contract prevents layout bugs when interactive components wrap layout content in grid/flex containers
+- All wrapper-capable interactive components MUST comply with this contract
+- Changes require explicit unlock task with architectural justification and impact analysis
+- **Reference:** [INTERACTIVE_WRAPPER_LAYOUT_RULE.md](./INTERACTIVE_WRAPPER_LAYOUT_RULE.md)
+
 ### Unlock Policy
 
 **Changes are allowed ONLY with EXPLICIT UNLOCK TUNG and require:**

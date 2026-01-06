@@ -16,7 +16,7 @@ const meta: Meta<typeof Navbar> = {
     docs: {
       description: {
         component:
-          "Navigation container component providing semantic `<nav>` wrapper with left/right/children slots for navigation content. Uses layout primitives internally (Stack, Box) for token-based styling. Navbar IS a navigation container, NOT a layout primitive.",
+          "Navigation container component with canonical zone model (Left / Center / Right). Uses layout primitives internally (Stack, Box) for token-based styling. Navbar IS a navigation container, NOT a layout primitive. See docs/reference/NAVIGATION_CANON.md for zone responsibilities.",
       },
     },
   },
@@ -24,21 +24,28 @@ const meta: Meta<typeof Navbar> = {
   argTypes: {
     left: {
       control: false,
-      description: "Left content slot",
+      description: "Left zone: Logo, brand identity, mobile menu trigger",
+      table: {
+        type: { summary: "React.ReactNode" },
+      },
+    },
+    center: {
+      control: false,
+      description: "Center zone: Primary navigation links, NavigationMenu, Tabs",
       table: {
         type: { summary: "React.ReactNode" },
       },
     },
     right: {
       control: false,
-      description: "Right content slot",
+      description: "Right zone: User menu, auth actions, language selector, theme toggle",
       table: {
         type: { summary: "React.ReactNode" },
       },
     },
     children: {
       control: false,
-      description: "Center/alternative content",
+      description: "Alternative center content (deprecated, use center prop instead)",
       table: {
         type: { summary: "React.ReactNode" },
       },
@@ -97,16 +104,16 @@ export const Default: Story = {
 };
 
 /**
- * Navbar with all slots (left, right, children)
+ * Navbar with all three zones (left, center, right) - canonical pattern
  */
-export const WithAllSlots: Story = {
+export const WithAllZones: Story = {
   args: {
     left: (
       <Link href="#" size="md" variant="ghost">
         Logo
       </Link>
     ),
-    children: (
+    center: (
       <nav style={{ display: "flex", gap: "1rem" }}>
         <Link href="#" size="sm" variant="ghost">
           Home
@@ -134,18 +141,54 @@ export const WithAllSlots: Story = {
     docs: {
       description: {
         story:
-          "Navbar with all three slots: left (Logo), center (children - navigation links), and right (buttons)",
+          "Canonical pattern: Navbar with all three zones - left (Logo), center (navigation links), right (actions). Uses explicit center prop.",
       },
     },
   },
 };
 
 /**
- * Navbar with children only (no left/right slots)
+ * Navbar with children (backward compatibility)
  */
-export const WithChildrenOnly: Story = {
+export const WithChildrenBackwardCompat: Story = {
   args: {
+    left: (
+      <Link href="#" size="md" variant="ghost">
+        Logo
+      </Link>
+    ),
     children: (
+      <nav style={{ display: "flex", gap: "1rem" }}>
+        <Link href="#" size="sm" variant="ghost">
+          Home
+        </Link>
+        <Link href="#" size="sm" variant="ghost">
+          Products
+        </Link>
+      </nav>
+    ),
+    right: (
+      <Button variant="primary" size="sm">
+        Sign In
+      </Button>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Backward compatibility: children prop renders as center zone. For new code, use explicit center prop instead.",
+      },
+    },
+  },
+};
+
+/**
+ * Navbar with center zone only
+ */
+export const WithCenterOnly: Story = {
+  args: {
+    center: (
       <nav style={{ display: "flex", gap: "1rem", justifyContent: "center", width: "100%" }}>
         <Link href="#" size="sm" variant="ghost">
           Home
@@ -162,7 +205,7 @@ export const WithChildrenOnly: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Navbar with children slot only, centered navigation links",
+        story: "Navbar with center zone only - centered navigation links",
       },
     },
   },
