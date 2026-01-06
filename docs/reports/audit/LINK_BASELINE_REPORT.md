@@ -1526,5 +1526,54 @@ Formally conclude the pipeline and lock the component status across all architec
 
 ---
 
+## Layout Contract Fix for variant='link' (2025-12-25)
+
+### Problem
+
+Link component with `variant='link'` was using `inline-flex` display (`LINK_TOKENS.layout`), which prevented it from working correctly as a wrapper for block elements (e.g., Card) in grid/flex compositions. When Link wrapped Card components, it didn't stretch to full width and didn't properly propagate height in flex/grid containers.
+
+### Solution
+
+Modified the layout tokens for `variant='link'` to use block-level display semantics (`display: block`, `width: 100%`) instead of inline-flex, while preserving text-only link usage.
+
+### Changes Applied
+
+1. **Added `layoutBlock` token** to `LINK_TOKENS`:
+   - New token: `layoutBlock: "block w-full"` - Block-level layout for link variant wrapper usage
+   - Located in `src/FOUNDATION/tokens/components/link.ts`
+
+2. **Updated Link component CVA variants**:
+   - Removed `layout` from base CVA classes
+   - Added `layout` to all variants except `link`
+   - Added `layoutBlock` to `variant='link'` specifically
+   - Located in `src/PRIMITIVES/Link/Link.tsx`
+
+3. **Behavior Changes**:
+   - `variant='link'` now uses `block w-full` layout (block-level, full width)
+   - All other variants continue using `inline-flex items-center justify-center whitespace-nowrap`
+   - Text-only links with `variant='link'` continue to work correctly
+   - Link wrapping Card components now stretches to full width in grid/flex containers
+   - Height propagation works correctly inside flex/grid
+
+### Impact
+
+- ✅ Link with `variant='link'` now stretches full width inside grid and flex containers
+- ✅ Cards wrapped in Link align correctly in grid
+- ✅ No visual overlap or clipping
+- ✅ No regression in text-only link usage
+- ✅ Height propagation works correctly inside flex/grid
+
+### Files Modified
+
+- `src/FOUNDATION/tokens/components/link.ts` - Added `layoutBlock` token
+- `src/PRIMITIVES/Link/Link.tsx` - Updated CVA variants to use `layoutBlock` for `variant='link'`
+
+### Task Reference
+
+- **Task ID:** TUI_LINK_LAYOUT_CONTRACT_FIX
+- **Date:** 2025-12-25
+
+---
+
 **End of Baseline Report**
 

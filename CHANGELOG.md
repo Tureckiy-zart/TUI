@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+## [2.0.6]
+
+### Changed
+
+- **Architecture**: Interactive Wrapper Layout Contract formally locked as mandatory architectural rule
+  - Contract requires block-level layout for interactive components that wrap layout content (Card, Panel, Box)
+  - Contract cross-referenced from Layout Authority and Architecture Lock documents
+  - All violations resolved (Chip component classified as atomic, Link component already fixed)
+  - See: `docs/architecture/INTERACTIVE_WRAPPER_LAYOUT_RULE.md`
+
 ## [2.0.5]
 
 ### Added
@@ -94,6 +104,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Storybook Improvements**:
   - Enhanced visual clarity and interaction feedback in Flex, Grid, and Stack stories.
+
+- **Documentation**:
+  - Updated README.md to reflect current release version (changed from v2.0.3 to v2.0.5).
 
 ## [2.0.3] - 2025-12-31
 

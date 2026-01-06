@@ -66,7 +66,12 @@ export const LINK_TOKENS = {
    * Base layout utilities for link component
    */
   layout: "inline-flex items-center justify-center whitespace-nowrap", // Base layout for link container
-
+  /**
+   * Block-level layout token for variant='link'
+   * Used when Link needs to wrap block elements (e.g., Card) in grid/flex compositions
+   * Provides block display with full width for proper layout contract
+   */
+  layoutBlock: "block w-full", // Block-level layout for link variant wrapper usage
   /**
    * Font weight token
    * References foundation typography fontWeight tokens from Typography Authority

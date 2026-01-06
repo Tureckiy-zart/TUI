@@ -132,21 +132,30 @@ This document tracks the complete Foundation Step Pipeline (18A) execution for t
 ```typescript
 interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   left?: React.ReactNode;
+  center?: React.ReactNode;  // NEW: Explicit center zone (2026-01-04)
   right?: React.ReactNode;
-  children?: React.ReactNode;
+  children?: React.ReactNode; // Backward compatibility, renders as center
   ariaLabel?: string;
 }
 ```
 
-**Prop Count:** 4 explicit props + HTMLAttributes passthrough
+**Prop Count:** 5 explicit props + HTMLAttributes passthrough
 - Required: 0 props
-- Optional: 4 props (`left`, `right`, `children`, `ariaLabel`)
+- Optional: 5 props (`left`, `center`, `right`, `children`, `ariaLabel`)
 
 **Default Values:**
 - `ariaLabel`: `"Primary navigation"` (default provided)
 - `left`: `undefined`
+- `center`: `undefined`
 - `right`: `undefined`
 - `children`: `undefined`
+
+**Zone Model (2026-01-04):**
+- Left zone: Logo, brand identity, mobile menu trigger
+- Center zone: Primary navigation links, NavigationMenu, Tabs
+- Right zone: User menu, auth actions, language selector, theme toggle
+
+See `docs/reference/NAVIGATION_CANON.md` for complete zone architecture.
 
 ### Component Structure
 
