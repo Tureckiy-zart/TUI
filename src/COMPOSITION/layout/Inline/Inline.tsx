@@ -6,10 +6,40 @@
  * Inline is a DX-enhancer for inline-flex layout composition.
  * It provides semantic spacing between items and handles inline-flex layout.
  *
+ * @enforcement TUNG_INLINE_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL spacing values MUST be token-based (ResponsiveSpacing)
+ * - Inline uses token-based spacing values converted to CSS variables
+ * - NO raw Tailwind classes allowed (component uses inline styles with token values)
+ * - gap prop uses ResponsiveSpacing (token-based)
+ * - Spacing values are converted to CSS variables via getSpacingCSSVar
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - gap uses ResponsiveSpacing (token-based, converted to CSS variables)
+ * - NO raw Tailwind spacing classes (gap-4, p-2, etc.) allowed
+ *
+ * Layout Authority Rules:
+ * - Inline provides inline-flex layout composition
+ * - Alignment and wrap are handled via Tailwind classes (layout utilities)
+ * - NO raw Tailwind layout classes for spacing (gap uses CSS variables)
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Inline uses spacing token system exclusively
+ * - Layout Authority: Inline provides inline-flex layout composition
+ *
+ * Token-only contract:
+ * - gap accepts ResponsiveSpacing (token-based)
+ * - All spacing values are converted to CSS variables
+ * - No raw Tailwind spacing classes are used (component uses inline styles with token values)
+ * - TypeScript enforces valid ResponsiveSpacing values at compile time
+ *
  * Inline is NOT a replacement for Stack. Use Stack for flex (block-level) layouts,
  * use Inline for inline-flex (inline-level) layouts.
- *
- * All spacing uses token-based values only.
  *
  * @example
  * ```tsx

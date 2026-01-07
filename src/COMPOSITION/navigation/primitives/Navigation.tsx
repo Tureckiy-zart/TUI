@@ -7,6 +7,39 @@
  * for navigation patterns. These components are pure HTML wrappers with no
  * routing, state, or business logic.
  *
+ * @enforcement TUNG_NAVIGATION_PRIMITIVES_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - Navigation primitives are composition components that delegate styling to composed components
+ * - NavList is a pure structural component with no direct styling
+ * - NavItem composes ListItem component (delegates styling to LISTITEM_TOKENS)
+ * - NavText and NavSeparator are standalone components with their own token enforcement
+ * - ALL styling is delegated to composed components (ListItem, NavText, NavSeparator)
+ * - NO raw Tailwind classes allowed (components delegate styling)
+ *
+ * Composition Authority Rules:
+ * - NavList composes native HTML elements (<ol>, <ul>) with no styling
+ * - NavItem composes ListItem component for styling
+ * - NavText and NavSeparator are standalone components with NAVIGATION_TOKENS
+ * - Styling is delegated to all composed components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: Navigation primitives use ListItem component which handles layout via LISTITEM_TOKENS
+ * - Spacing Authority: Navigation primitives use token-based spacing values via composed components
+ * - Color Authority: Navigation primitives do not apply colors directly (delegated to composed components)
+ * - Typography Authority: Navigation primitives use typography token system via NavText component
+ *
+ * Token-only contract:
+ * - Navigation primitives have minimal direct token usage (composition components)
+ * - All styling occurs through composed components:
+ *   - NavItem uses ListItem component (LISTITEM_TOKENS)
+ *   - NavText uses NAVIGATION_TOKENS (standalone component)
+ *   - NavSeparator uses NAVIGATION_TOKENS (standalone component)
+ * - All composed components handle token enforcement
+ *
  * @semantic_role EXTENSION_PRIMITIVE_NAVIGATION
  *
  * @semantic_definition

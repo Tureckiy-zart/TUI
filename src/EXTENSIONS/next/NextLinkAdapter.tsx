@@ -24,9 +24,8 @@ export interface NextLinkAdapterProps extends Omit<LinkProps, "href"> {
  * NextLinkAdapter
  *
  * A compatibility adapter that bridges Next.js `next/link` with TenerifeUI `Link`.
- * This adapter resolves the "nested <a> tag" hydration error common in Next.js 13+
- * by utilizing the `legacyBehavior` pattern, allowing Foundation Link (which is an <a>)
- * to function as the child of NextLink.
+ * This adapter allows Foundation Link (which is an <a>) to function as the child of NextLink.
+ * Next.js 13+ automatically handles <a> children without creating nested anchors.
  *
  * @example
  * ```tsx
@@ -48,8 +47,6 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
         scroll={scroll}
         shallow={shallow}
         locale={locale}
-        passHref
-        legacyBehavior
       >
         <Link ref={ref} href={hrefString} {...props} />
       </NextLink>

@@ -1,5 +1,47 @@
 "use client";
 
+/**
+ * Select Component
+ *
+ * @enforcement TUNG_SELECT_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in SELECT_TOKENS and INPUT_TOKENS
+ * - Select is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Select MUST react to token changes - changing tokens/colors.ts MUST change Select appearance
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in SELECT_TOKENS
+ * - Select is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Select MUST react to token changes - changing tokens/colors.ts MUST change Select appearance
+ *
+ * Semantic tokens (text-foreground, bg-muted) are ALLOWED as they reference Color Authority CSS variables.
+ * These tokens are part of the semantic color system and are used consistently across PRIMITIVES components.
+ *
+ * Token-only contract:
+ * - All colors are defined in SELECT_TOKENS (src/FOUNDATION/tokens/components/select.ts)
+ * - SELECT_TOKENS reference foundation tokens from tokens/colors.ts
+ * - Select trigger uses INPUT_TOKENS for consistency with Input component
+ * - No raw Tailwind color classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid size values at compile time
+ *
+ * className and style props:
+ * - className and style are forbidden from public API - only CVA output and token-based classes are used
+ * - Foundation Enforcement is FINAL/APPLIED and LOCKED
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ */
+
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import * as React from "react";
@@ -65,7 +107,7 @@ SelectRoot.displayName = SelectPrimitive.Root.displayName;
 
 export interface SelectTriggerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
-  "size" | "variant" | "width"
+  "className" | "style" | "size" | "variant" | "width"
 > {
   /**
    * Invalid state - uses aria-invalid
@@ -74,7 +116,7 @@ export interface SelectTriggerProps extends Omit<
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, "aria-invalid": ariaInvalid, ...props }, ref) => {
+  ({ "aria-invalid": ariaInvalid, ...props }, ref) => {
     return (
       <SelectPrimitive.Trigger
         ref={ref}
@@ -85,7 +127,6 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
           // Add state-based styling via data attributes
           "data-[state=open]:border-ring",
           "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
-          className,
         )}
         {...props}
       />
@@ -98,57 +139,53 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 // SELECT VALUE
 // ============================================================================
 
-export interface SelectValueProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Value
+export interface SelectValueProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value>,
+  "className" | "style"
 > {}
 
-const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <SelectPrimitive.Value
-        ref={ref}
-        className={cn(
-          "truncate",
-          // Placeholder styling with sufficient contrast (WCAG AA)
-          // Radix adds data-placeholder attribute when showing placeholder text
-          "data-[placeholder]:text-foreground data-[placeholder]:opacity-70",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-);
+const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(({ ...props }, ref) => {
+  return (
+    <SelectPrimitive.Value
+      ref={ref}
+      className={cn(
+        "truncate",
+        // Placeholder styling with sufficient contrast (WCAG AA)
+        // Radix adds data-placeholder attribute when showing placeholder text
+        "data-[placeholder]:text-foreground data-[placeholder]:opacity-70",
+      )}
+      {...props}
+    />
+  );
+});
 SelectValue.displayName = SelectPrimitive.Value.displayName;
 
 // ============================================================================
 // SELECT ICON
 // ============================================================================
 
-export interface SelectIconProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Icon
+export interface SelectIconProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Icon>,
+  "className" | "style"
 > {}
 
-const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <SelectPrimitive.Icon ref={ref} asChild {...props}>
-        <ChevronDown
-          className={cn(
-            INPUT_TOKENS.icon.size,
-            INPUT_TOKENS.icon.color,
-            "shrink-0 opacity-50",
-            MOTION_TOKENS.transition.transform,
-            MOTION_TOKENS.duration["200"],
-            MOTION_TOKENS.easing.out,
-            "data-[state=open]:rotate-180",
-            className,
-          )}
-        />
-      </SelectPrimitive.Icon>
-    );
-  },
-);
+const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(({ ...props }, ref) => {
+  return (
+    <SelectPrimitive.Icon ref={ref} asChild {...props}>
+      <ChevronDown
+        className={cn(
+          INPUT_TOKENS.icon.size,
+          INPUT_TOKENS.icon.color,
+          "shrink-0 opacity-50",
+          MOTION_TOKENS.transition.transform,
+          MOTION_TOKENS.duration["200"],
+          MOTION_TOKENS.easing.out,
+          "data-[state=open]:rotate-180",
+        )}
+      />
+    </SelectPrimitive.Icon>
+  );
+});
 SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 
 // ============================================================================
@@ -157,7 +194,7 @@ SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 
 export interface SelectContentProps extends Omit<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
-  "sideOffset" | "alignOffset"
+  "className" | "style" | "sideOffset" | "alignOffset"
 > {
   /**
    * Side offset - token-based
@@ -170,7 +207,7 @@ export interface SelectContentProps extends Omit<
 }
 
 const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
-  ({ className, sideOffset, alignOffset, position = "popper", ...props }, ref) => {
+  ({ sideOffset, alignOffset, position = "popper", ...props }, ref) => {
     // Resolve offset tokens to pixels
     const sideOffsetPx = React.useMemo(() => {
       const baseOffset = getBaseValue(sideOffset);
@@ -193,7 +230,6 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
             selectContentVariants(),
             position === "popper" &&
               "data-[side=bottom]:translate-y-[var(--spacing-xs)] data-[side=left]:-translate-x-[var(--spacing-xs)] data-[side=right]:translate-x-[var(--spacing-xs)] data-[side=top]:-translate-y-[var(--spacing-xs)]",
-            className,
           )}
           {...props}
         >
@@ -209,12 +245,13 @@ SelectContent.displayName = SelectPrimitive.Content.displayName;
 // SELECT VIEWPORT
 // ============================================================================
 
-export interface SelectViewportProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Viewport
+export interface SelectViewportProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport>,
+  "className" | "style"
 > {}
 
 const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
-  ({ className, ...props }, ref) => {
+  ({ ...props }, ref) => {
     return (
       <SelectPrimitive.Viewport
         ref={ref}
@@ -222,7 +259,6 @@ const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
           INPUT_TOKENS.padding.horizontal.md,
           INPUT_TOKENS.padding.vertical.md,
           "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
-          className,
         )}
         {...props}
       />
@@ -235,17 +271,19 @@ SelectViewport.displayName = SelectPrimitive.Viewport.displayName;
 // SELECT ITEM
 // ============================================================================
 
-export interface SelectItemProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Item
+export interface SelectItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>,
+  "className" | "style"
 > {}
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ children, ...props }, ref) => {
     return (
-      <SelectPrimitive.Item ref={ref} className={cn(selectItemVariants(), className)} {...props}>
+      <SelectPrimitive.Item ref={ref} className={cn(selectItemVariants())} {...props}>
         <span
           className={cn(
-            "absolute left-sm flex items-center justify-center",
+            "absolute flex items-center justify-center",
+            SELECT_TOKENS.item.indicator.position,
             INPUT_TOKENS.icon.size,
           )}
         >
@@ -264,13 +302,14 @@ SelectItem.displayName = SelectPrimitive.Item.displayName;
 // SELECT ITEM TEXT
 // ============================================================================
 
-export interface SelectItemTextProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.ItemText
+export interface SelectItemTextProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemText>,
+  "className" | "style"
 > {}
 
 const SelectItemText = React.forwardRef<HTMLSpanElement, SelectItemTextProps>(
-  ({ className, ...props }, ref) => {
-    return <SelectPrimitive.ItemText ref={ref} className={className} {...props} />;
+  ({ ...props }, ref) => {
+    return <SelectPrimitive.ItemText ref={ref} {...props} />;
   },
 );
 SelectItemText.displayName = SelectPrimitive.ItemText.displayName;
@@ -279,14 +318,15 @@ SelectItemText.displayName = SelectPrimitive.ItemText.displayName;
 // SELECT ITEM INDICATOR
 // ============================================================================
 
-export interface SelectItemIndicatorProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.ItemIndicator
+export interface SelectItemIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator>,
+  "className" | "style"
 > {}
 
 const SelectItemIndicator = React.forwardRef<HTMLSpanElement, SelectItemIndicatorProps>(
-  ({ className, ...props }, ref) => {
+  ({ ...props }, ref) => {
     return (
-      <SelectPrimitive.ItemIndicator ref={ref} className={className} {...props}>
+      <SelectPrimitive.ItemIndicator ref={ref} {...props}>
         <Check className={cn(INPUT_TOKENS.icon.size)} />
       </SelectPrimitive.ItemIndicator>
     );
@@ -298,16 +338,21 @@ SelectItemIndicator.displayName = SelectPrimitive.ItemIndicator.displayName;
 // SELECT SEPARATOR
 // ============================================================================
 
-export interface SelectSeparatorProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Separator
+export interface SelectSeparatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>,
+  "className" | "style"
 > {}
 
 const SelectSeparator = React.forwardRef<HTMLDivElement, SelectSeparatorProps>(
-  ({ className, ...props }, ref) => {
+  ({ ...props }, ref) => {
     return (
       <SelectPrimitive.Separator
         ref={ref}
-        className={cn("-mx-xs my-xs", SEPARATOR_TOKENS.thickness["1"], "bg-muted", className)}
+        className={cn(
+          "-mx-xs my-xs",
+          SEPARATOR_TOKENS.thickness["1"],
+          SELECT_TOKENS.separator.background,
+        )}
         {...props}
       />
     );
@@ -319,44 +364,42 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 // SELECT GROUP
 // ============================================================================
 
-export interface SelectGroupProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Group
+export interface SelectGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group>,
+  "className" | "style"
 > {}
 
-const SelectGroup = React.forwardRef<HTMLDivElement, SelectGroupProps>(
-  ({ className, ...props }, ref) => {
-    return <SelectPrimitive.Group ref={ref} className={className} {...props} />;
-  },
-);
+const SelectGroup = React.forwardRef<HTMLDivElement, SelectGroupProps>(({ ...props }, ref) => {
+  return <SelectPrimitive.Group ref={ref} {...props} />;
+});
 SelectGroup.displayName = SelectPrimitive.Group.displayName;
 
 // ============================================================================
 // SELECT LABEL
 // ============================================================================
 
-export interface SelectLabelProps extends React.ComponentPropsWithoutRef<
-  typeof SelectPrimitive.Label
+export interface SelectLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>,
+  "className" | "style"
 > {}
 
-const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <SelectPrimitive.Label
-        ref={ref}
-        className={cn(
-          INPUT_TOKENS.padding.horizontal.md,
-          INPUT_TOKENS.padding.vertical.md,
-          INPUT_TOKENS.fontSize.sm,
-          "font-semibold",
-          // Text color with sufficient contrast (WCAG AA)
-          "text-foreground",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-);
+const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(({ ...props }, ref) => {
+  return (
+    <SelectPrimitive.Label
+      ref={ref}
+      className={cn(
+        INPUT_TOKENS.padding.horizontal.md,
+        INPUT_TOKENS.padding.vertical.md,
+        INPUT_TOKENS.fontSize.sm,
+        SELECT_TOKENS.label.fontWeight,
+        // Text color with sufficient contrast (WCAG AA)
+        // Uses semantic token text-foreground (Color Authority)
+        "text-foreground",
+      )}
+      {...props}
+    />
+  );
+});
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
 // ============================================================================

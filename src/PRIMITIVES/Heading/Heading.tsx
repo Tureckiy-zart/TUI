@@ -1,8 +1,56 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
+/**
+ * Heading Component
+ *
+ * Heading is a Foundation primitive component for semantic typography headings (h1-h6).
+ * It provides token-based typography styling with semantic level mapping, weight variants,
+ * and muted state support. Heading uses the display font family (Clash Display) for
+ * visual distinction from body text.
+ *
+ * Heading does NOT provide layout composition, spacing, or color customization beyond
+ * semantic tokens. For layout composition, use Stack or Box components. For custom
+ * typography styling, use Text component.
+ *
+ * All typography uses token-based values only (no raw Tailwind typography classes).
+ *
+ * @component Heading
+ * @see {@link ./Heading.stories.tsx} - Storybook examples
+ *
+ * @example
+ * // Basic heading with default level (h1)
+ * <Heading>Main Title</Heading>
+ *
+ * @example
+ * // Specific heading level
+ * <Heading level={2}>Section Title</Heading>
+ * <Heading level={3}>Subsection Title</Heading>
+ *
+ * @example
+ * // With custom weight override
+ * <Heading level={1} weight="normal">Light Heading</Heading>
+ * <Heading level={2} weight="semibold">Semibold Heading</Heading>
+ *
+ * @example
+ * // Muted heading variant
+ * <Heading level={3} muted>Secondary Heading</Heading>
+ *
+ * @example
+ * // Render as different HTML element while keeping level styling
+ * <Heading level={1} as="h2">Styled as h1, rendered as h2</Heading>
+ *
+ * @example
+ * // Complete heading hierarchy
+ * <Stack direction="vertical" spacing="md">
+ *   <Heading level={1}>Main Title</Heading>
+ *   <Heading level={2}>Section Title</Heading>
+ *   <Heading level={3}>Subsection Title</Heading>
+ * </Stack>
+ */
+
 import * as React from "react";
 
+import { tokenCVA, type VariantProps } from "@/FOUNDATION/lib/token-cva";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
 /**
@@ -116,7 +164,48 @@ const generateWeightVariants = (): Array<{
   return variants;
 };
 
-const headingVariants = cva("font-display text-foreground", {
+/**
+ * Heading CVA Variants
+ *
+ * @enforcement TUNG_HEADING_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL typography-related classes MUST be token-based utilities only
+ * - NO raw Tailwind typography classes (text-*, font-*, leading-*, tracking-*) allowed outside TEXT_TOKENS
+ * - ALL typography logic MUST be centralized in TEXT_TOKENS
+ * - Heading is NOT a source of typography - all typography comes from Typography Authority (TEXT_TOKENS)
+ * - Heading MUST react to token changes - changing TEXT_TOKENS MUST change Heading appearance
+ *
+ * Typography Authority Rules:
+ * - ALL typography classes MUST reference TEXT_TOKENS (fontSize, fontWeight, lineHeight, letterSpacing)
+ * - NO raw Tailwind typography utilities allowed
+ * - All typography values come from Typography Authority via TEXT_TOKENS
+ *
+ * Color Authority Rules:
+ * - Text colors use semantic tokens: text-foreground, text-muted-foreground
+ * - NO raw Tailwind color classes (text-red-*, text-blue-*, etc.) allowed
+ * - All colors come from Color Authority via semantic tokens
+ *
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY.md
+ * @see docs/architecture/TOKEN_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Typography Authority: Heading uses TEXT_TOKENS for all typography values
+ * - Color Authority: Heading uses semantic color tokens (text-foreground, text-muted-foreground)
+ *
+ * Token-only contract:
+ * - All typography values are defined in TEXT_TOKENS (src/FOUNDATION/tokens/components/text.ts)
+ * - TEXT_TOKENS reference foundation tokens from Typography Authority
+ * - No raw Tailwind typography classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid level/weight values at compile time
+ *
+ * className and style props:
+ * - className and style are forbidden from public API - only CVA output is used
+ * - Foundation Enforcement is FINAL/APPLIED and LOCKED
+ */
+const headingVariants = tokenCVA({
+  base: "font-display text-foreground",
   variants: {
     level: levelVariants,
     weight: {
@@ -133,24 +222,49 @@ const headingVariants = cva("font-display text-foreground", {
   compoundVariants: generateWeightVariants(),
   defaultVariants: {
     level: 1,
-    muted: false,
+    muted: "false" as "false",
   },
 });
 
+/**
+ * Heading Component Props
+ *
+ * @enforcement TUNG_HEADING_TOKEN_ENFORCEMENT
+ * @rule level prop is restricted to 1 | 2 | 3 | 4 | 5 | 6
+ * @rule weight prop is restricted to "normal" | "medium" | "semibold" | "bold" (Typography Authority values)
+ * @rule className prop cannot override typography classes (tokenCVA validation in dev mode)
+ * @rule Heading is fully token-based - no raw Tailwind typography/colors allowed
+ */
 export interface HeadingProps
   extends
     Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style">,
-    VariantProps<typeof headingVariants> {
+    Omit<VariantProps<typeof headingVariants>, "muted"> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  muted?: boolean;
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ level = 1, weight, muted, as, children, ...props }, ref) => {
     const Component = (as || `h${level}`) as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-    // className and style are forbidden from public API - only CVA output is used
+    // Token enforcement: className and style are forbidden from public API - only CVA output is used
+    // All typography values come from TEXT_TOKENS (Typography Authority)
+    // All colors come from semantic tokens (Color Authority)
+    // Convert boolean muted to string for CVA compatibility
+    let mutedValue: "true" | "false" | undefined;
+    if (muted === undefined) {
+      mutedValue = undefined;
+    } else {
+      mutedValue = muted ? "true" : "false";
+    }
     return (
-      <Component ref={ref} className={headingVariants({ level, weight, muted })} {...props}>
+      <Component
+        ref={ref}
+        className={headingVariants({ level, weight, muted: mutedValue } as Parameters<
+          typeof headingVariants
+        >[0])}
+        {...props}
+      >
         {children}
       </Component>
     );

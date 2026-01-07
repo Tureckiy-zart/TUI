@@ -6,6 +6,50 @@
  * Displays multiple avatars with overlap effect.
  * Shows a maximum number of avatars and indicates remaining count.
  *
+ * @enforcement TUNG_AVATARGROUP_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - AvatarGroup is a composition component that delegates styling to Avatar component
+ * - ALL styling is delegated to Avatar component (AVATAR_TOKENS)
+ * - AvatarGroup uses spacing variants for overlap effect (negative margin)
+ * - Spacing variants use Tailwind spacing utilities (-space-x-*) for overlap
+ * - Border styling uses token-based border classes (border-2 border-background)
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Layout utilities (flex, items-center) are ALLOWED
+ *
+ * Composition Authority Rules:
+ * - AvatarGroup composes Avatar component for avatar styling
+ * - Styling is delegated to Avatar component (AVATAR_TOKENS)
+ * - AvatarGroup provides overlap spacing via negative margin
+ *
+ * Spacing Authority Rules:
+ * - Spacing variants use Tailwind spacing utilities for overlap (-space-x-2, -space-x-3, -space-x-4)
+ * - These are layout utilities for overlap effect, not visual spacing tokens
+ * - Border spacing uses token-based border classes (border-2)
+ * - NO raw Tailwind spacing classes for visual properties allowed
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Border color uses token-based border classes (border-background)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: AvatarGroup uses layout utilities for overlap effect
+ * - Spacing Authority: AvatarGroup uses spacing utilities for overlap (negative margin)
+ * - Color Authority: AvatarGroup uses token-based border color (border-background)
+ * - Avatar Authority: AvatarGroup delegates avatar styling to Avatar component (AVATAR_TOKENS)
+ *
+ * Token-only contract:
+ * - AvatarGroup has minimal direct token usage (composition component)
+ * - All avatar styling occurs through Avatar component (AVATAR_TOKENS)
+ * - Overlap spacing uses Tailwind spacing utilities (-space-x-*) as layout utilities
+ * - Border styling uses token-based border classes
+ * - Avatar component handles token enforcement for all avatar properties
+ *
  * @example
  * ```tsx
  * <AvatarGroup
@@ -92,14 +136,6 @@ const spacingVariants: Record<AvatarGroupSpacing, string> = {
 
 /**
  * AvatarGroup component
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Composes Avatar component internally
- * - ✅ Token-based spacing (negative margin via -space-x-*)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Smart key management with fallback chain
- * - ✅ Development-mode warnings for edge cases
  */
 export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
   ({ avatars, max, size = "md", shape = "circle", spacing = "normal", className }, ref) => {

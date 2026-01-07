@@ -50,6 +50,50 @@ const capitalize = (str: string): string => {
  *
  * Visual catalog component that displays icons in various layouts.
  * Supports grid, sizes, and colors display modes.
+ *
+ * @enforcement TUNG_ICONGALLERY_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - IconGallery is a composition component that delegates ALL styling to composed components
+ * - ALL styling is delegated to Box, Grid, Stack, Row, Icon, and Text components
+ * - IconGallery does NOT use tokens directly
+ * - Layout components (Grid, Stack, Row) handle layout styling via their respective tokens
+ * - Box component handles container styling via BOX_TOKENS
+ * - Icon component handles icon styling via ICON_TOKENS
+ * - Text component handles typography styling via TEXT_TOKENS
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - IconGallery composes Box component for container styling
+ * - IconGallery composes Grid component for grid layout
+ * - IconGallery composes Stack component for vertical/horizontal stacking
+ * - IconGallery composes Row component for horizontal layout
+ * - IconGallery composes Icon component (Foundation) for icon rendering
+ * - IconGallery composes Text component (Foundation) for text rendering
+ * - Styling is delegated to all composed components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: IconGallery uses Grid, Stack, Row components which handle layout via their tokens
+ * - Spacing Authority: IconGallery uses token-based spacing values via Stack, Grid, Row components
+ * - Color Authority: IconGallery does not apply colors directly (delegated to Icon and Text components)
+ * - Typography Authority: IconGallery does not apply typography directly (delegated to Text component)
+ * - Icon Authority: IconGallery uses Icon component which handles icon styling via ICON_TOKENS
+ *
+ * Token-only contract:
+ * - IconGallery has no direct token usage (composition component)
+ * - All styling occurs through composed components:
+ *   - Box component handles container styling (BOX_TOKENS)
+ *   - Grid component handles grid layout (GRID_TOKENS)
+ *   - Stack component handles stacking layout (STACK_TOKENS)
+ *   - Row component handles horizontal layout (ROW_TOKENS)
+ *   - Icon component handles icon styling (ICON_TOKENS)
+ *   - Text component handles typography styling (TEXT_TOKENS)
+ * - All composed components handle token enforcement
  */
 const IconGallery = React.forwardRef<HTMLDivElement, IconGalleryProps>(
   ({ icons, mode = "grid", iconSize = "xl", iconColor = "default", className, ...props }, ref) => {

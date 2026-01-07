@@ -6,6 +6,34 @@
  * Container that maintains a fixed aspect ratio for its content.
  * Useful for responsive images, videos, and cards.
  *
+ * @enforcement TUNG_ASPECTRATIO_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - AspectRatio is a pure layout utility component with no direct styling
+ * - ALL styling is delegated to Radix AspectRatio primitive
+ * - AspectRatio does NOT use tokens directly (no visual representation)
+ * - Radix AspectRatio handles aspect ratio calculation via CSS
+ * - NO raw Tailwind classes allowed (component has no styling)
+ *
+ * Composition Authority Rules:
+ * - AspectRatio composes Radix AspectRatio primitive
+ * - Styling is delegated to Radix component
+ * - AspectRatio provides aspect ratio calculation only
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: AspectRatio provides layout structure only, styling delegated to Radix
+ * - Color Authority: AspectRatio does not apply colors (delegated to Radix)
+ * - Typography Authority: AspectRatio does not apply typography (delegated to Radix)
+ * - Spacing Authority: AspectRatio does not apply spacing (delegated to Radix)
+ *
+ * Token-only contract:
+ * - AspectRatio has no token usage (pure layout utility component)
+ * - All styling occurs through Radix AspectRatio primitive
+ * - AspectRatio provides aspect ratio calculation via CSS aspect-ratio property
+ * - This is a layout utility component, not a visual component
+ *
  * @example
  * ```tsx
  * // 16:9 aspect ratio (video)
@@ -61,13 +89,6 @@ export interface AspectRatioProps extends React.ComponentPropsWithoutRef<
 
 /**
  * AspectRatio component
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses @radix-ui/react-aspect-ratio for behavior
- * - ✅ Pure layout utility (no visual tokens needed)
- * - ✅ Supports custom ratios and common presets
- * - ✅ Responsive by default
- * - ✅ Follows Extension Authority Contract
  */
 const AspectRatio = React.forwardRef<
   React.ElementRef<typeof AspectRatioPrimitive.Root>,

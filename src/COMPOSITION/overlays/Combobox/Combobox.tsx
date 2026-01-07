@@ -6,6 +6,52 @@
  * Autocomplete component with dropdown list supporting text input and option selection.
  * Supports single-select and multi-select modes, client-side and server-side filtering.
  *
+ * @enforcement TUNG_COMBOBOX_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use INPUT_TOKENS and POPOVER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Combobox composes Popover and Input components (delegates styling to them)
+ * - Input styling uses INPUT_TOKENS
+ * - Popover styling uses POPOVER_TOKENS
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from INPUT_TOKENS for input styling
+ * - Colors come from POPOVER_TOKENS for popover content styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing is delegated to Popover and Input components
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography is delegated to Input component
+ * - NO raw Tailwind typography classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Combobox uses color token system exclusively via INPUT_TOKENS and POPOVER_TOKENS
+ * - Spacing Authority: Combobox uses spacing token system exclusively via composed components
+ * - Typography Authority: Combobox uses typography token system exclusively via Input component
+ * - Layout Authority: Combobox composes Popover and Input components
+ *
+ * Token-only contract:
+ * - Input styling uses INPUT_TOKENS (src/FOUNDATION/tokens/components/input.ts)
+ * - Popover styling uses POPOVER_TOKENS (src/FOUNDATION/tokens/components/popover.ts)
+ * - Combobox composes Popover and Input components which handle all styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - TypeScript enforces valid size values at compile time
+ *
  * @example
  * ```tsx
  * // Single-select with client-side filtering

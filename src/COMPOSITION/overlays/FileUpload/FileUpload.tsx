@@ -6,6 +6,62 @@
  * Extension composite component for file upload with drag-and-drop,
  * file preview, validation, and progress tracking.
  *
+ * @enforcement TUNG_FILEUPLOAD_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use FILE_UPLOAD_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (fileUploadDropzoneVariants, fileUploadPreviewVariants, fileUploadThumbnailVariants)
+ * - Size variants use FILE_UPLOAD_TOKENS.dropzone.height and padding
+ * - Error message uses FILE_UPLOAD_TOKENS.message.error.textColor
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from FILE_UPLOAD_TOKENS for dropzone, preview, and message styling
+ * - Dropzone variant colors use FILE_UPLOAD_TOKENS.dropzone.variant
+ * - Dropzone state colors use FILE_UPLOAD_TOKENS.dropzone.state
+ * - Error message color uses FILE_UPLOAD_TOKENS.message.error.textColor
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses FILE_UPLOAD_TOKENS.dropzone.padding (horizontal and vertical)
+ * - Gap uses FILE_UPLOAD_TOKENS.dropzone.gap
+ * - Preview padding uses FILE_UPLOAD_TOKENS.preview.padding
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses FILE_UPLOAD_TOKENS.dropzone.radius[size]
+ * - Preview radius uses FILE_UPLOAD_TOKENS.preview.radius
+ * - Thumbnail radius uses FILE_UPLOAD_TOKENS.thumbnail.radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: FileUpload uses color token system exclusively via FILE_UPLOAD_TOKENS
+ * - Spacing Authority: FileUpload uses spacing token system exclusively via FILE_UPLOAD_TOKENS
+ * - Radius Authority: FileUpload uses radius token system exclusively via FILE_UPLOAD_TOKENS
+ * - Elevation Authority: FileUpload uses shadow tokens via FILE_UPLOAD_TOKENS
+ * - Layout Authority: FileUpload composes Box, List, ListItem, Button, and Text components
+ *
+ * Token-only contract:
+ * - All styling is defined in FILE_UPLOAD_TOKENS (src/FOUNDATION/tokens/components/file-upload.ts)
+ * - FILE_UPLOAD_TOKENS reference foundation tokens from spacing, radius, color, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ *
  * Features:
  * - Drag-and-drop file selection
  * - File preview with thumbnails (for images)
@@ -50,6 +106,7 @@ import * as React from "react";
 import { List, ListItem } from "@/COMPOSITION/layout";
 import { Box } from "@/COMPOSITION/layout/Box";
 import { cn } from "@/FOUNDATION/lib/utils";
+import { FILE_UPLOAD_TOKENS } from "@/FOUNDATION/tokens/components/file-upload";
 import { Button } from "@/PRIMITIVES/Button/Button";
 import { Text } from "@/PRIMITIVES/Text/Text";
 
@@ -182,6 +239,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       className,
+      style,
       ...props
     },
     ref,
@@ -346,7 +404,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
     );
 
     return (
-      <div ref={ref} className={className} {...props}>
+      <div ref={ref} className={cn(className)} style={style} {...props}>
         {/* Dropzone */}
         <div
           className={cn(
@@ -431,7 +489,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
         {/* Error Message */}
         {errorMessage && (
-          <Box mt="sm" className="text-[hsl(var(--destructive))]">
+          <Box mt="sm" className={FILE_UPLOAD_TOKENS.message.error.textColor}>
             <Text size="sm" role="alert" aria-live="polite">
               {errorMessage}
             </Text>

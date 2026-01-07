@@ -6,10 +6,45 @@
  * SidebarLayout is a page-level compositional layout for pages with a sidebar and main content.
  * Uses Grid internally for two-column layout and Stack for vertical collapse.
  *
+ * @enforcement TUNG_SIDEBARLAYOUT_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - SidebarLayout is a composition component that delegates layout styling to Box and Stack components
+ * - ALL spacing values MUST be token-based (gap, sidebarWidth use token-based values)
+ * - SidebarLayout uses token-based spacing values for gap (ResponsiveSpacing)
+ * - SidebarLayout uses token-based spacing values for sidebarWidth (sm | md | lg mapped to spacing tokens)
+ * - SidebarLayout composes Box and Stack components (delegates styling to them)
+ * - NO raw Tailwind classes allowed (component uses token-based CSS variables)
+ *
+ * Composition Authority Rules:
+ * - SidebarLayout composes Box component for container styling
+ * - SidebarLayout composes Stack component for vertical collapse layout
+ * - Styling is delegated to Box and Stack components
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Gap uses ResponsiveSpacing (token-based, converted to CSS variables)
+ * - Sidebar width uses SidebarWidth (sm | md | lg) mapped to spacing tokens
+ * - NO raw Tailwind spacing classes (gap-4, p-2, etc.) allowed
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: SidebarLayout uses Box and Stack components which handle layout via their tokens
+ * - Spacing Authority: SidebarLayout uses spacing token system exclusively
+ * - Color Authority: SidebarLayout does not apply colors (delegated to Box)
+ * - Typography Authority: SidebarLayout does not apply typography (delegated to Box)
+ *
+ * Token-only contract:
+ * - SidebarLayout uses token-based spacing values for gap (ResponsiveSpacing)
+ * - SidebarLayout uses token-based spacing values for sidebarWidth (mapped to spacing tokens)
+ * - All spacing values are converted to CSS variables
+ * - Box and Stack components handle token enforcement
+ * - TypeScript enforces valid sidebarWidth and gap values at compile time
+ *
  * SidebarLayout IS: A page-level compositional layout component
  * SidebarLayout IS NOT: A low-level layout control (px/py, grid columns directly), a padding/spacing wrapper, or a section rhythm manager
- *
- * All spacing values use tokens only.
  *
  * @example
  * ```tsx
@@ -221,13 +256,6 @@ export interface SidebarLayoutProps extends Omit<React.HTMLAttributes<HTMLDivEle
 
 /**
  * SidebarLayout component - page-level compositional layout
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Composes Foundation components (Box, Stack)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Uses semantic HTML (<aside>, <main>)
- * - ✅ Motion: NO MOTION BY DESIGN (layout collapse is structural change, not interactive transition)
  */
 const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
   (

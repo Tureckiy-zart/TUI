@@ -364,6 +364,42 @@ Predefined text styles provide complete typography combinations for common use c
 
 ---
 
+## Semantic Size Aliasing Prevention
+
+**Rule:** In FOUNDATION components, each semantic typography size variant (xs, sm, md, lg, xl, etc.) MUST resolve to a unique visual font-size token.
+
+**Scope:** Applies to all FOUNDATION components exposing fontSize or size variants in `src/FOUNDATION/tokens/components/`.
+
+**Rationale:** Semantic size aliasing erodes API trust, breaks Typography Authority compliance, and leads to unpredictable UI behavior where developers expect different visual sizes but receive identical rendering.
+
+**Enforcement:** Automated regression test (`src/FOUNDATION/lib/typography-size-aliasing-guard.test.ts`) validates all FOUNDATION component token mappings.
+
+**Exception Policy:** No exceptions allowed in FOUNDATION. EXTENSION components may compress sizes for design reasons, but FOUNDATION must maintain semantic honesty.
+
+**Example Violation:**
+```typescript
+// ❌ FORBIDDEN: Multiple semantic sizes map to same visual token
+fontSize: {
+  xs: "text-xs",
+  sm: "text-xs", // ❌ Aliasing: sm maps to same token as xs
+  md: "text-sm",
+  lg: "text-sm", // ❌ Aliasing: lg maps to same token as md
+}
+```
+
+**Example Compliance:**
+```typescript
+// ✅ CORRECT: Each semantic size maps to distinct visual token
+fontSize: {
+  xs: "text-xs",
+  sm: "text-sm", // ✅ Distinct from xs
+  md: "text-base", // ✅ Distinct from sm
+  lg: "text-lg", // ✅ Distinct from md
+}
+```
+
+---
+
 ## Token System Integration
 
 ### Source of Truth

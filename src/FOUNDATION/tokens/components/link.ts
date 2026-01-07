@@ -4,6 +4,32 @@
  * Component-level design tokens for Link component.
  * Maps foundation tokens (spacing, typography, radius, motion) to link-specific usage.
  *
+ * @component Link
+ * @see {@link ../PRIMITIVES/Link/Link.tsx} - Link component implementation
+ * @see {@link ../PRIMITIVES/Link/Link.stories.tsx} - Storybook examples
+ *
+ * @example
+ * // Basic usage
+ * <Link href="/about">About</Link>
+ *
+ * @example
+ * // With variant
+ * <Link href="/login" variant="primary">Login</Link>
+ *
+ * @example
+ * // With size
+ * <Link href="/signup" size="lg">Sign Up</Link>
+ *
+ * @example
+ * // With icons
+ * <Link href="/profile" leftIcon={<UserIcon />} rightIcon={<ArrowIcon />}>
+ *   Profile
+ * </Link>
+ *
+ * @example
+ * // Disabled state
+ * <Link href="/disabled" disabled>Disabled Link</Link>
+ *
  * All values reference foundation tokens to ensure consistency across the design system.
  *
  * Authority Compliance:
@@ -23,16 +49,22 @@ import { MOTION_TOKENS } from "./motion";
 // Foundation tokens are referenced in comments for documentation
 // Actual values use Tailwind utility classes that map to these foundation tokens
 
-/**
- * Link Component Tokens
- *
- * Defines all spacing, sizing, typography, and visual tokens for Link component.
- * Values are mapped to Tailwind utility classes for direct use in component variants.
- */
 export const LINK_TOKENS = {
   /**
    * Link heights by size
    * Maps to Tailwind height utilities
+   *
+   * @example
+   * // Small size link
+   * <Link href="/link" size="sm">Small Link</Link>
+   *
+   * @example
+   * // Medium size link (default)
+   * <Link href="/link" size="md">Medium Link</Link>
+   *
+   * @example
+   * // Large size link
+   * <Link href="/link" size="lg">Large Link</Link>
    */
   height: {
     xs: "h-7", // 28px (1.75rem)
@@ -45,6 +77,12 @@ export const LINK_TOKENS = {
   /**
    * Link padding by size
    * Horizontal and vertical padding values
+   *
+   * @example
+   * // Padding is automatically applied based on size prop
+   * <Link href="/link" size="sm">Small Link</Link> // Uses px-sm py-xs
+   * <Link href="/link" size="md">Medium Link</Link> // Uses px-md py-sm
+   * <Link href="/link" size="lg">Large Link</Link> // Uses px-lg py-sm
    */
   padding: {
     horizontal: {
@@ -67,11 +105,11 @@ export const LINK_TOKENS = {
    */
   layout: "inline-flex items-center justify-center whitespace-nowrap", // Base layout for link container
   /**
-   * Block-level layout token for variant='link'
+   * Block-level layout token for variant='wrapper' (and deprecated variant='link')
    * Used when Link needs to wrap block elements (e.g., Card) in grid/flex compositions
    * Provides block display with full width for proper layout contract
    */
-  layoutBlock: "block w-full", // Block-level layout for link variant wrapper usage
+  layoutBlock: "block w-full", // Block-level layout for wrapper variant (and deprecated link variant)
   /**
    * Font weight token
    * References foundation typography fontWeight tokens from Typography Authority
@@ -84,6 +122,12 @@ export const LINK_TOKENS = {
   /**
    * Icon wrapper layout
    * Layout utilities for icon containers
+   *
+   * @example
+   * // Icons are automatically wrapped with proper layout
+   * <Link href="/profile" leftIcon={<UserIcon />} rightIcon={<ArrowIcon />}>
+   *   Profile
+   * </Link>
    */
   iconWrapper: "inline-flex items-center", // Layout for left/right icon wrappers
 
@@ -93,13 +137,30 @@ export const LINK_TOKENS = {
    *
    * @rule All fontSize values reference Typography Authority tokens
    * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+   *
+   * @example
+   * // Small font size (14px)
+   * <Link href="/link" size="sm">Small Text</Link>
+   *
+   * @example
+   * // Medium font size (16px, default)
+   * <Link href="/link" size="md">Medium Text</Link>
+   *
+   * @example
+   * // Large font size (18px)
+   * <Link href="/link" size="lg">Large Text</Link>
    */
   fontSize: {
+    /** Extra small font size (~12px) */
     xs: "text-xs", // References fontSize.xs[0] from Typography Authority (~12px)
-    sm: "text-xs", // References fontSize.xs[0] from Typography Authority (~12px)
-    md: "text-sm", // References fontSize.sm[0] from Typography Authority (~14px)
-    lg: "text-sm", // References fontSize.sm[0] from Typography Authority (~14px)
-    xl: "text-base", // References fontSize.base[0] from Typography Authority (~16px)
+    /** Small font size (~14px) */
+    sm: "text-sm", // References fontSize.sm[0] from Typography Authority (~14px)
+    /** Medium font size (~16px, default) */
+    md: "text-base", // References fontSize.base[0] from Typography Authority (~16px)
+    /** Large font size (~18px) */
+    lg: "text-lg", // References fontSize.lg[0] from Typography Authority (~18px)
+    /** Extra large font size (~20px) */
+    xl: "text-xl", // References fontSize.xl[0] from Typography Authority (~20px)
   } as const,
 
   /**
@@ -135,6 +196,14 @@ export const LINK_TOKENS = {
    *
    * @rule Focus MUST use focus-visible: prefix (keyboard navigation only)
    * @rule Focus MUST be blocked when disabled={true}
+   *
+   * @example
+   * // Focus ring appears automatically on keyboard navigation (Tab key)
+   * <Link href="/link">Focusable Link</Link>
+   *
+   * @example
+   * // Focus is disabled when link is disabled
+   * <Link href="/link" disabled>Disabled Link</Link>
    */
   focus: {
     ring: "focus-visible:ring-2 focus-visible:ring-ring", // Focus ring using semantic ring color
@@ -145,6 +214,16 @@ export const LINK_TOKENS = {
   /**
    * Disabled state tokens
    * Uses explicit disabled semantic tokens for better accessibility
+   *
+   * @example
+   * // Disabled link with proper accessibility attributes
+   * <Link href="/disabled" disabled>Disabled Link</Link>
+   *
+   * @example
+   * // Disabled link prevents navigation and removes from tab order
+   * <Link href="/action" disabled onClick={handleClick}>
+   *   Cannot Click
+   * </Link>
    */
   state: {
     disabled: {
@@ -156,22 +235,76 @@ export const LINK_TOKENS = {
   /**
    * Color tokens for link variants
    * Uses semantic color tokens that map to CSS variables
+   *
+   * @example
+   * // Primary variant - emphasized link with primary color
+   * <Link href="/cta" variant="primary">Get Started</Link>
+   *
+   * @example
+   * // Secondary variant - muted link style
+   * <Link href="/info" variant="secondary">Learn More</Link>
+   *
+   * @example
+   * // Accent variant - accent color link
+   * <Link href="/feature" variant="accent">Explore Feature</Link>
+   *
+   * @example
+   * // Outline variant - bordered link button
+   * <Link href="/action" variant="outline">Action</Link>
+   *
+   * @example
+   * // Ghost variant - subtle background link
+   * <Link href="/menu" variant="ghost">Menu Item</Link>
+   *
+   * @example
+   * // Text variant (default) - inline text link
+   * <Link href="/about" variant="text">About Us</Link>
+   *
+   * @example
+   * // Wrapper variant - block-level wrapper for cards
+   * <Link href="/article" variant="wrapper">
+   *   <Card>Article Content</Card>
+   * </Link>
+   *
+   * @example
+   * // Destructive variant - danger/delete actions
+   * <Link href="/delete" variant="destructive">Delete</Link>
    */
   variant: {
+    /**
+     * Primary variant - emphasized link with primary color
+     * @example
+     * <Link href="/cta" variant="primary">Get Started</Link>
+     */
     primary: {
       text: "text-primary", // Primary text using CSS var
       hover: "hover:text-primary/80", // Primary hover text
       underline: "hover:underline", // Underline on hover
     } as const,
+    /**
+     * Secondary variant - muted link style
+     * @example
+     * <Link href="/info" variant="secondary">Learn More</Link>
+     */
     secondary: {
       text: "text-secondary", // Secondary text using CSS var
       hover: "hover:underline", // Underline on hover
     } as const,
+    /**
+     * Accent variant - accent color link
+     * @example
+     * <Link href="/feature" variant="accent">Explore Feature</Link>
+     */
     accent: {
       text: "text-accent", // Accent text using CSS var (accent color, not accent-foreground)
       hover: "hover:text-accent/80", // Accent hover text
       underline: "hover:underline", // Underline on hover
     } as const,
+    /**
+     * Outline variant - bordered link button
+     * @example
+     * <Link href="/action" variant="outline">Action</Link>
+     */
     outline: {
       border: "border border-input", // Input border using CSS var
       background: "bg-background", // Background using CSS var
@@ -181,6 +314,11 @@ export const LINK_TOKENS = {
         text: "hover:text-accent-foreground", // Hover text
       } as const,
     } as const,
+    /**
+     * Ghost variant - subtle background link
+     * @example
+     * <Link href="/menu" variant="ghost">Menu Item</Link>
+     */
     ghost: {
       background: "bg-muted/10", // Light background for better contrast on dark surfaces
       text: "text-foreground", // Foreground text using CSS var
@@ -189,10 +327,21 @@ export const LINK_TOKENS = {
         text: "hover:text-accent-foreground", // Hover text
       } as const,
     } as const,
+    /**
+     * Link variant (deprecated) - use 'wrapper' instead
+     * @deprecated Use variant='wrapper' instead
+     * @example
+     * <Link href="/article" variant="link">Article</Link>
+     */
     link: {
       text: "text-primary", // Primary text using CSS var
       hover: "hover:underline", // Underline on hover
     } as const,
+    /**
+     * Destructive variant - danger/delete actions
+     * @example
+     * <Link href="/delete" variant="destructive">Delete</Link>
+     */
     destructive: {
       text: "text-destructive", // Destructive text using CSS var
       hover: "hover:text-destructive/80", // Destructive hover text

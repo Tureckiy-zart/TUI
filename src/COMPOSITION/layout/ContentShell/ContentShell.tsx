@@ -8,10 +8,40 @@
  * Uses Container for width constraint and padding.
  * Uses Stack for vertical composition of nav + content.
  *
+ * @enforcement TUNG_CONTENTSHELL_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ContentShell is a composition component that delegates ALL styling to Container and Stack components
+ * - ALL styling is delegated to Container component (width constraint, padding) and Stack component (layout)
+ * - ContentShell does NOT use tokens directly
+ * - Container component handles width constraint and padding via token-based values
+ * - Stack component handles layout styling via STACK_TOKENS
+ * - contentPadding prop uses token-based spacing values (ResponsiveSpacing)
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - ContentShell composes Container component for width constraint and padding
+ * - ContentShell composes Stack component for vertical layout
+ * - Styling is delegated to Container and Stack components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
+ *
+ * Authority Compliance:
+ * - Layout Authority: ContentShell uses Container and Stack components which handle layout via their tokens
+ * - Spacing Authority: ContentShell uses token-based spacing values via Container component
+ * - Color Authority: ContentShell does not apply colors (delegated to Container)
+ * - Typography Authority: ContentShell does not apply typography (delegated to Container)
+ *
+ * Token-only contract:
+ * - ContentShell has no direct token usage (composition component)
+ * - All styling occurs through Container component (token-based) and Stack component (STACK_TOKENS)
+ * - Container and Stack components handle token enforcement
+ * - contentPadding prop uses token-based values (semanticSpacing tokens)
+ *
  * ContentShell IS: A body-level layout wrapper for structuring page content
  * ContentShell IS NOT: A document-level wrapper (html/body), a global provider manager, or a routing component
- *
- * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
  *
  * @example
  * ```tsx
@@ -67,14 +97,6 @@ export interface ContentShellProps extends Omit<React.HTMLAttributes<HTMLElement
 
 /**
  * ContentShell component - body-level layout wrapper
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Composes layout primitives (Container, Stack)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Uses semantic HTML (<main> element)
- * - ✅ Does NOT manage document structure (html, body, head)
- * - ✅ Does NOT manage global providers or settings
  */
 const ContentShell = React.forwardRef<HTMLElement, ContentShellProps>(
   ({ nav, children, contentPadding, className, ...props }, ref) => {

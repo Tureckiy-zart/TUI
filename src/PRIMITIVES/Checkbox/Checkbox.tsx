@@ -1,20 +1,57 @@
 "use client";
 
-import * as React from "react";
-
-import { cn } from "@/FOUNDATION/lib/utils";
-import { CHECKBOX_TOKENS } from "@/FOUNDATION/tokens/components/checkbox";
-import { IconCheck } from "@/icons";
-
-import type { CheckboxProps } from "./Checkbox.types";
-import { checkboxVariants } from "./checkbox-variants";
-
 /**
  * Checkbox Component
  *
  * A fully accessible, theme-aware checkbox component with variant support,
  * keyboard navigation, and comprehensive state management.
  * Uses button role="checkbox" pattern for full accessibility.
+ *
+ * @enforcement TUNG_CHECKBOX_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in CHECKBOX_TOKENS
+ * - Checkbox is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Checkbox MUST react to token changes - changing tokens/colors.ts MUST change Checkbox appearance
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in CHECKBOX_TOKENS
+ * - Checkbox is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Checkbox MUST react to token changes - changing tokens/colors.ts MUST change Checkbox appearance
+ *
+ * Icon Color Rules:
+ * - For variants with colored background (primary, secondary, destructive): use foreground color for contrast
+ * - For variants with transparent background (outline, ghost): use primary color for visibility
+ * - All icon colors MUST come from CHECKBOX_TOKENS.icon.color or CHECKBOX_TOKENS.variant[].text
+ * - NO raw Tailwind color classes in icon rendering logic
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Checkbox uses MOTION_TOKENS.transitionPreset for transitions
+ * - Radius Authority: Checkbox references componentRadius.checkbox for border radius
+ * - State Authority: Checkbox uses State Matrix CSS variables for all states
+ * - Interaction Authority: Checkbox follows Interaction Authority Contract for state priority
+ *
+ * Token-only contract:
+ * - All colors are defined in CHECKBOX_TOKENS (src/FOUNDATION/tokens/components/checkbox.ts)
+ * - CHECKBOX_TOKENS reference foundation tokens from tokens/colors.ts
+ * - No raw Tailwind color classes (bg-red-500, text-blue-600, etc.) are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ *
+ * className and style props:
+ * - className and style are forbidden from public API - only CVA output is used
+ * - Foundation Enforcement is FINAL/APPLIED and LOCKED
  *
  * @example
  * ```tsx
@@ -27,6 +64,16 @@ import { checkboxVariants } from "./checkbox-variants";
  * />
  * ```
  */
+
+import * as React from "react";
+
+import { cn } from "@/FOUNDATION/lib/utils";
+import { CHECKBOX_TOKENS } from "@/FOUNDATION/tokens/components/checkbox";
+import { IconCheck } from "@/icons";
+
+import type { CheckboxProps } from "./Checkbox.types";
+import { checkboxVariants } from "./checkbox-variants";
+
 const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
   (
     {
@@ -126,23 +173,11 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     // Get icon size based on checkbox size
     const iconSize = size ? CHECKBOX_TOKENS.icon.size[size] : CHECKBOX_TOKENS.icon.size.md;
 
-    // Determine icon color based on variant and state
-    // For outline/ghost variants with transparent background, use primary color for visibility
-    // For other variants with colored background, use foreground color for contrast
-    const effectiveVariant = variant || "outline"; // Default variant is "outline"
-    const getIconColor = React.useCallback(() => {
-      if (isDisabled) {
-        return CHECKBOX_TOKENS.icon.color.disabled;
-      }
-      // For outline and ghost variants, use primary color (not foreground) for visibility on transparent background
-      if (effectiveVariant === "outline" || effectiveVariant === "ghost") {
-        return "text-[hsl(var(--tm-primary))]";
-      }
-      // For other variants with colored background, use foreground color for contrast
-      return CHECKBOX_TOKENS.state.text.checked;
-    }, [isDisabled, effectiveVariant]);
+    // Determine effective variant (default is "outline")
+    const effectiveVariant = variant || "outline";
 
     // Render checkmark icon
+    // All icon colors MUST come from CHECKBOX_TOKENS - NO raw Tailwind classes
     const renderIcon = () => {
       if (indeterminate) {
         if (indeterminateIcon) {
@@ -156,10 +191,13 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         // Default indeterminate indicator (horizontal line)
         // Wrap in container with icon size to maintain button dimensions
         // For outline/ghost variants, use primary color for visibility on transparent background
-        const indeterminateColor =
-          effectiveVariant === "outline" || effectiveVariant === "ghost"
-            ? "bg-[hsl(var(--tm-primary))]"
-            : CHECKBOX_TOKENS.indeterminate.color;
+        // For other variants, use foreground color for contrast on colored background
+        let indeterminateColor: string = CHECKBOX_TOKENS.indeterminate.color;
+        if (effectiveVariant === "outline") {
+          indeterminateColor = CHECKBOX_TOKENS.indeterminate.colorOutline;
+        } else if (effectiveVariant === "ghost") {
+          indeterminateColor = CHECKBOX_TOKENS.indeterminate.colorGhost;
+        }
         return (
           <span className={cn(iconSize, "flex items-center justify-center")} aria-hidden="true">
             <span
@@ -180,14 +218,20 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         }
         // Default checkmark icon
         // Color depends on variant:
-        // - outline/ghost: use primary color (visible on transparent background)
-        // - others: use foreground color (visible on colored background)
-        const iconColor = getIconColor();
-        // Ensure color is always applied - if getIconColor returns undefined/null, use fallback
-        const finalIconColor = iconColor || CHECKBOX_TOKENS.state.text.checked;
+        // - outline/ghost: use primary color (visible on transparent background) from CHECKBOX_TOKENS.icon.color
+        // - others: use foreground color (visible on colored background) from CHECKBOX_TOKENS.state.text.checked
+        // All colors MUST come from CHECKBOX_TOKENS - NO raw Tailwind classes
+        let iconColor: string = CHECKBOX_TOKENS.state.text.checked;
+        if (isDisabled) {
+          iconColor = CHECKBOX_TOKENS.icon.color.disabled;
+        } else if (effectiveVariant === "outline") {
+          iconColor = CHECKBOX_TOKENS.icon.color.checkedOutline;
+        } else if (effectiveVariant === "ghost") {
+          iconColor = CHECKBOX_TOKENS.icon.color.checkedGhost;
+        }
         return (
           <IconCheck
-            className={cn(iconSize, CHECKBOX_TOKENS.icon.stroke, finalIconColor)}
+            className={cn(iconSize, CHECKBOX_TOKENS.icon.stroke, iconColor)}
             aria-hidden={true}
           />
         );

@@ -16,7 +16,9 @@ const _LINK_VARIANTS = [
   "accent",
   "outline",
   "ghost",
+  "text",
   "link",
+  "wrapper",
   "destructive",
 ] as const;
 
@@ -65,7 +67,12 @@ const linkVariants = tokenCVA({
       accent: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.accent.text} ${LINK_TOKENS.variant.accent.hover} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.accent.underline}`,
       outline: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.outline.border} ${LINK_TOKENS.variant.outline.background} ${LINK_TOKENS.variant.outline.text} ${LINK_TOKENS.radius} ${LINK_TOKENS.variant.outline.hover.background} ${LINK_TOKENS.variant.outline.hover.text}`,
       ghost: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.ghost.background} ${LINK_TOKENS.variant.ghost.text} ${LINK_TOKENS.variant.ghost.hover.background} ${LINK_TOKENS.variant.ghost.hover.text} ${LINK_TOKENS.radius}`,
+      text: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.link.text} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.link.hover}`,
+      /**
+       * @deprecated Use variant='wrapper' instead. This variant is kept for backward compatibility and will be removed in a future major version.
+       */
       link: `${LINK_TOKENS.layoutBlock} ${LINK_TOKENS.variant.link.text} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.link.hover}`,
+      wrapper: `${LINK_TOKENS.layoutBlock} ${LINK_TOKENS.variant.link.text} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.link.hover}`,
       destructive: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.destructive.text} ${LINK_TOKENS.variant.destructive.hover} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.destructive.underline}`,
     } satisfies Record<LinkVariant, string>,
     size: {
@@ -75,7 +82,7 @@ const linkVariants = tokenCVA({
     } satisfies Record<LinkSize, string>,
   },
   defaultVariants: {
-    variant: "link",
+    variant: "text",
     size: "md",
   },
 });
@@ -86,7 +93,7 @@ export interface LinkProps extends Omit<
 > {
   /**
    * Link variant style
-   * @default "link"
+   * @default "text"
    */
   variant?: LinkVariant;
   /**

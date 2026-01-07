@@ -7,6 +7,36 @@
  * width constraint and horizontal padding. It does NOT provide layout composition
  * behaviors (flex, grid, alignment). For layout composition, use Stack, Flex, or Grid.
  *
+ * @enforcement TUNG_CONTAINER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use token-based values
+ * - ALL spacing values MUST be token-based
+ * - maxWidth uses ContainerMaxWidthToken or SpacingToken (token unions)
+ * - padding uses SpacingToken (token-based)
+ * - NO raw Tailwind classes allowed (component uses inline styles with token values)
+ * - Container uses CSS-layer class .tm-container with token-based padding
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - maxWidth uses ContainerMaxWidthToken or SpacingToken (mapped to CSS values)
+ * - padding uses SpacingToken (converted to CSS variables)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Container uses spacing token system exclusively
+ * - Layout Authority: Container provides width constraint and horizontal padding only
+ *
+ * Token-only contract:
+ * - maxWidth accepts ContainerMaxWidthToken or SpacingToken (token unions)
+ * - padding accepts SpacingToken (token-based)
+ * - All values are converted to CSS variables or mapped to token-based CSS values
+ * - No raw Tailwind classes are used (component uses inline styles with token values)
+ * - TypeScript enforces valid token values at compile time
+ *
  * Container uses CSS-layer class .tm-container with token-based padding and max-width.
  *
  * @example

@@ -8,16 +8,9 @@
  * Note: This token domain maintains semantic separation from INPUT_TOKENS to allow
  * independent evolution. Values are currently identical to INPUT_TOKENS but may diverge
  * in the future without affecting Input component.
- */
-
-// Foundation tokens are referenced in comments for documentation
-// All color values use CSS variable references for theme support
-
-/**
- * Textarea Component Tokens
  *
- * Defines spacing, sizing, typography, and visual tokens for Textarea component.
- * All colors use CSS variable references (hsl(var(--token))) for theme-aware styling.
+ * All values reference foundation tokens to ensure consistency across the design system.
+ * Values are mapped to Tailwind utility classes for direct use in component variants.
  */
 export const TEXTAREA_TOKENS = {
   /**
@@ -60,8 +53,8 @@ export const TEXTAREA_TOKENS = {
     xs: "text-xs", // Maps to fontSize.xs[0]
     sm: "text-sm", // Maps to fontSize.sm[0]
     md: "text-base", // Maps to fontSize.base[0] - default
-    lg: "text-base", // Maps to fontSize.base[0]
-    xl: "text-lg", // Maps to fontSize.lg[0]
+    lg: "text-lg", // Maps to fontSize.lg[0]
+    xl: "text-xl", // Maps to fontSize.xl[0]
   } as const,
 
   /**
@@ -128,6 +121,7 @@ export const TEXTAREA_TOKENS = {
       default: "border-[hsl(var(--input))]", // Default border color using CSS var
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
       error: "border-[hsl(var(--destructive))]", // Error state border using CSS var
+      ariaInvalid: '[aria-invalid="true"]:border-[hsl(var(--destructive))]', // Error state border via aria-invalid attribute
       success: "border-[hsl(var(--semantic-success))]", // Success state border using CSS var
       disabled: "border-[hsl(var(--input))]", // Disabled state border (same as default)
     },
@@ -212,7 +206,7 @@ export const TEXTAREA_TOKENS = {
         vertical: "py-sm",
       },
       radius: "rounded-md",
-      fontSize: "text-base",
+      fontSize: "text-lg",
       shadow: "shadow-sm",
     },
     xl: {
@@ -221,7 +215,7 @@ export const TEXTAREA_TOKENS = {
         vertical: "py-md",
       },
       radius: "rounded-lg",
-      fontSize: "text-lg",
+      fontSize: "text-xl",
       shadow: "shadow-sm",
     },
   } as const,

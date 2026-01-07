@@ -8,16 +8,69 @@
  * border, and shadow into cohesive elevation patterns (via SurfaceVariant dictionary),
  * ensuring consistent visual hierarchy while maintaining a single-variant API.
  *
+ * @enforcement TUNG_SURFACE_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use SURFACE_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (surfaceVariants)
+ * - Variant styling uses SURFACE_TOKENS.variant (bg, border, shadow, padding, radius)
+ * - Surface composes Box component (delegates additional styling to Box)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from SURFACE_TOKENS.variant for variant styling
+ * - Background colors use SURFACE_TOKENS.variant[variant].bg
+ * - Border colors use SURFACE_TOKENS.variant[variant].border
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses SURFACE_TOKENS.variant[variant].padding
+ * - Padding can be overridden via p prop (token-based)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses SURFACE_TOKENS.variant[variant].radius
+ * - Radius can be overridden via radius prop (token-based)
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Elevation Authority Rules:
+ * - ALL shadow values MUST come from shadow token system
+ * - Shadows use SURFACE_TOKENS.variant[variant].shadow
+ * - NO raw Tailwind shadow classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
+ *
+ * Authority Compliance:
+ * - Color Authority: Surface uses color token system exclusively via SURFACE_TOKENS
+ * - Spacing Authority: Surface uses spacing token system exclusively via SURFACE_TOKENS
+ * - Radius Authority: Surface uses radius token system exclusively via SURFACE_TOKENS
+ * - Elevation Authority: Surface uses shadow tokens via SURFACE_TOKENS
+ * - Layout Authority: Surface composes Box component
+ *
+ * Token-only contract:
+ * - All styling is defined in SURFACE_TOKENS (src/FOUNDATION/tokens/components/surface.ts)
+ * - SURFACE_TOKENS reference foundation tokens from spacing, radius, color, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius/shadow classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant values at compile time
+ *
  * Surface IS: A variant-driven surface styling container, semantic abstraction over Box,
  * token-constrained component that maps variants to SURFACE_TOKENS.
  *
  * Surface IS NOT: A generic container (Box), structured content container (Card),
  * layout composition primitive (Stack/Flex/Grid), or interactive component.
- *
- * Uses tokenCVA for variants and maps strictly to SURFACE_TOKENS.
- * All styling uses tokens exclusively (no raw CSS values).
- *
- * @see docs/architecture/VARIANTS_SIZE_CANON.md for canonical variant dictionary
  */
 
 import * as React from "react";

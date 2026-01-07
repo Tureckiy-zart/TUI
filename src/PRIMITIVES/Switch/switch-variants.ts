@@ -12,12 +12,50 @@ import type { SwitchSize, SwitchVariant } from "./Switch.types";
 type SwitchTrackState = "base" | "checked" | "disabled" | "disabledChecked" | "invalid";
 
 /**
- * Switch Variants
+ * Switch Track CVA Variants
  *
- * tokenCVA-based variant system for Switch component.
- * Supports variants (primary, secondary, outline, ghost, destructive),
- * sizes (xs, sm, md, lg, xl), and internal states (base, checked, disabled, invalid).
- * All styling uses token-based values with CSS variable references.
+ * @enforcement Token-driven CVA system using tokenCVA
+ * @enforcement TUNG_SWITCH_CVA_ENFORCEMENT
+ *
+ * CVA Enforcement Rules:
+ * - CVA may ONLY reference token-derived classes
+ * - NO raw Tailwind color utilities (bg-red-*, text-blue-*, etc.)
+ * - NO direct hover/active utilities outside State Matrix
+ * - NO inline conditional class concatenation
+ * - NO per-variant Tailwind overrides
+ * - Structural utilities (flex, items-center, etc.) are ALLOWED
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in SWITCH_TOKENS
+ * - Switch is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Switch MUST react to token changes - changing tokens/colors.ts MUST change Switch appearance
+ *
+ * State Matrix Authority Rules:
+ * - ALL state classes (disabled, invalid) MUST use State Matrix CSS variables
+ * - NO raw Tailwind state utilities (disabled:bg-gray-500, aria-invalid:border-red-500)
+ * - States react to Color Authority changes automatically through State Matrix
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Switch uses MOTION_TOKENS.transition for transitions
+ * - Radius Authority: Switch references SWITCH_TOKENS.track[].radius for border radius
+ * - State Authority: Switch uses State Matrix CSS variables for all states
+ * - Color Authority: Switch uses CSS variable references (--foreground, --primary, --destructive, etc.)
+ *
+ * Token-only contract:
+ * - All colors are defined in SWITCH_TOKENS (src/FOUNDATION/tokens/components/switch.ts)
+ * - SWITCH_TOKENS reference foundation tokens from tokens/colors.ts
+ * - No raw Tailwind color classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size/state values at compile time
  *
  * Switch consists of a track (container) and handle (thumb) that slides within the track.
  */
@@ -54,10 +92,14 @@ export const switchTrackVariants = tokenCVA({
 });
 
 /**
- * Switch Handle Variants
+ * Switch Handle CVA Variants
  *
- * tokenCVA-based variant system for Switch handle (thumb).
+ * @enforcement Token-driven CVA system using tokenCVA
+ * @enforcement TUNG_SWITCH_CVA_ENFORCEMENT
+ *
+ * Handle positioning and sizing variants.
  * The handle is positioned absolutely within the track and slides on toggle.
+ * All positioning and sizing uses token-based values.
  */
 export const switchHandleVariants = tokenCVA({
   base: `absolute ${SWITCH_TOKENS.handle.position.left} ${SWITCH_TOKENS.handle.position.top} ${SWITCH_TOKENS.handle.position.center} ${SWITCH_TOKENS.transition.handle}`,
@@ -108,9 +150,13 @@ export const switchHandleVariants = tokenCVA({
 });
 
 /**
- * Switch Handle State Variants
+ * Switch Handle State CVA Variants
  *
- * Color variants for the handle based on state.
+ * @enforcement Token-driven CVA system using tokenCVA
+ * @enforcement TUNG_SWITCH_CVA_ENFORCEMENT
+ *
+ * Color variants for the handle based on state and variant.
+ * All colors MUST come from SWITCH_TOKENS - NO raw Tailwind color classes allowed.
  */
 export const switchHandleStateVariants = tokenCVA({
   base: "",

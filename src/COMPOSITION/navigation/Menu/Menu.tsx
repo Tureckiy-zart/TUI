@@ -7,6 +7,67 @@
  * Menu provides full ARIA menu semantics (role="menuitem") and is intended for
  * primary navigation, command palettes, and explicit user-triggered action lists.
  *
+ * @enforcement TUNG_MENU_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use MENU_TOKENS and POPOVER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (menuContentVariants, menuItemVariants, etc.)
+ * - Content styling uses MENU_TOKENS.content and POPOVER_TOKENS.content
+ * - Item styling uses MENU_TOKENS.item
+ * - Label styling uses MENU_TOKENS.label
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from MENU_TOKENS for menu-specific styling
+ * - Colors come from POPOVER_TOKENS for popover content styling
+ * - Item colors use MENU_TOKENS.item for item styling
+ * - Label colors use MENU_TOKENS.label.color.mutedForeground
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses MENU_TOKENS.content.padding
+ * - Item padding uses MENU_TOKENS.item.padding
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography uses MENU_TOKENS for content and item typography
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses MENU_TOKENS.content.radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Menu uses color token system exclusively via MENU_TOKENS and POPOVER_TOKENS
+ * - Spacing Authority: Menu uses spacing token system exclusively via MENU_TOKENS
+ * - Typography Authority: Menu uses typography token system exclusively via MENU_TOKENS
+ * - Radius Authority: Menu uses radius token system exclusively via MENU_TOKENS
+ * - Elevation Authority: Menu uses shadow tokens via MENU_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in MENU_TOKENS (src/FOUNDATION/tokens/components/menu.ts)
+ * - Popover styling uses POPOVER_TOKENS (src/FOUNDATION/tokens/components/popover.ts)
+ * - MENU_TOKENS reference foundation tokens from spacing, radius, color, typography, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid padding values at compile time
+ *
  * **What Menu IS:**
  * - Explicit user-invoked action/navigation lists (click on trigger to open)
  * - Full ARIA menu semantics (role="menuitem", keyboard navigation)
@@ -335,7 +396,7 @@ const MenuLabel = React.forwardRef<
         menuLabelVariants({
           padding,
         }),
-        "text-[hsl(var(--muted-foreground))]",
+        MENU_TOKENS.label.textColor,
         className,
       )}
       {...props}

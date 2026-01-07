@@ -4,13 +4,9 @@
  * Component-level design tokens for FileUpload component.
  * Maps foundation tokens (spacing, typography, radius, shadows) to file-upload-specific usage.
  * All color values use semantic Tailwind classes that map to CSS variables.
- */
-
-/**
- * FileUpload Component Tokens
  *
- * Defines spacing, sizing, typography, and visual tokens for FileUpload component.
- * All colors use semantic Tailwind classes (border-border, bg-background, etc.) for theme-aware styling.
+ * All values reference foundation tokens to ensure consistency across the design system.
+ * Values are mapped to Tailwind utility classes for direct use in component variants.
  */
 export const FILE_UPLOAD_TOKENS = {
   /**
@@ -148,9 +144,9 @@ export const FILE_UPLOAD_TOKENS = {
      * Maps to foundation typography fontSize tokens
      */
     fontSize: {
-      sm: "text-xs", // Maps to fontSize.xs[0]
-      md: "text-sm", // Maps to fontSize.sm[0]
-      lg: "text-sm", // Maps to fontSize.sm[0] (not text-base per lint rule)
+      sm: "text-sm", // Maps to fontSize.sm[0]
+      md: "text-base", // Maps to fontSize.base[0]
+      lg: "text-lg", // Maps to fontSize.lg[0]
     } as const,
   } as const,
 
@@ -177,6 +173,16 @@ export const FILE_UPLOAD_TOKENS = {
      * Thumbnail background
      */
     background: "bg-muted", // Muted background
+  } as const,
+
+  /**
+   * Message tokens
+   * Error and helper message styling
+   */
+  message: {
+    error: {
+      textColor: "text-[hsl(var(--destructive))]", // Error message text color
+    },
   } as const,
 } as const;
 
