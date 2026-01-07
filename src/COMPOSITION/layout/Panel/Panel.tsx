@@ -7,6 +7,64 @@
  * Panel provides surface styling without interactivity, sitting semantically
  * between Box (generic container) and Card (structured content container).
  *
+ * @enforcement TUNG_PANEL_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use PANEL_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (panelVariants)
+ * - Tone styling uses PANEL_TOKENS.tone (bg, border, shadow, padding, radius)
+ * - Panel composes Box component (delegates additional styling to Box)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from PANEL_TOKENS.tone for tone styling
+ * - Background colors use PANEL_TOKENS.tone[tone].bg
+ * - Border colors use PANEL_TOKENS.tone[tone].border
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses PANEL_TOKENS.tone[tone].padding
+ * - Padding can be overridden via padding prop (token-based)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses PANEL_TOKENS.tone[tone].radius
+ * - Radius can be overridden via radius prop (token-based)
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Elevation Authority Rules:
+ * - ALL shadow values MUST come from shadow token system
+ * - Shadows use PANEL_TOKENS.tone[tone].shadow
+ * - NO raw Tailwind shadow classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Panel uses color token system exclusively via PANEL_TOKENS
+ * - Spacing Authority: Panel uses spacing token system exclusively via PANEL_TOKENS
+ * - Radius Authority: Panel uses radius token system exclusively via PANEL_TOKENS
+ * - Elevation Authority: Panel uses shadow tokens via PANEL_TOKENS
+ * - Layout Authority: Panel composes Box component
+ *
+ * Token-only contract:
+ * - All styling is defined in PANEL_TOKENS (src/FOUNDATION/tokens/components/panel.ts)
+ * - PANEL_TOKENS reference foundation tokens from spacing, radius, color, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius/shadow classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid tone values at compile time
+ *
  * **What Panel IS:**
  * - Lightweight structural surface container for grouping related content inside a page
  * - Semantic upgrade over Box (adds surface styling)
@@ -110,15 +168,6 @@ export interface PanelProps extends Omit<BoxProps, "bg" | "shadow" | "radius" | 
 
 /**
  * Panel component - lightweight structural surface container
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Composes Box (allowed)
- * - ✅ Does NOT compose Card or CardBase (forbidden)
- * - ✅ No interactivity (no onClick, no interactive states)
- * - ✅ Surface tone only (no semantic colors)
- * - ✅ Elevation below Card
- * - ✅ Follows Extension Authority Contract
  */
 const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
   ({ padding, radius, tone = "default", className, ...props }, ref) => {

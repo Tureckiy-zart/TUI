@@ -1,4 +1,5 @@
 "use client";
+import { Card } from "@/COMPOSITION/layout/Card";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Link } from "./Link";
 
@@ -19,7 +20,7 @@ import { Link } from "./Link";
  * ✅ All Link variants displayed comparatively
  *
  * Stories Structure:
- * - Variants: 4 variants (link/default, secondary/muted, accent, destructive/danger)
+ * - Variants: 4 variants (text/default, secondary/muted, accent, destructive/danger)
  * - UnderlineModes: Variants demonstrating different underline behaviors
  * - States: Default and disabled states
  * - AsChild: Link always renders as anchor (composition demonstration)
@@ -33,7 +34,7 @@ const meta: Meta<typeof Link> = {
     docs: {
       description: {
         component:
-          "Link component for navigation and interactive text. Supports 7 canonical variants and 3 sizes.",
+          "Link component for navigation and interactive text. Supports 9 canonical variants and 3 sizes. Default variant 'text' renders inline (inline-flex) for text and navigation links. Variant 'wrapper' is for layout wrapper use cases (block-level layout). Variant 'link' is deprecated (use 'wrapper' instead).",
       },
     },
   },
@@ -41,11 +42,21 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"],
+      options: [
+        "primary",
+        "secondary",
+        "accent",
+        "outline",
+        "ghost",
+        "text",
+        "link",
+        "wrapper",
+        "destructive",
+      ],
       description: "Link variant style",
       table: {
         type: { summary: "LinkVariant" },
-        defaultValue: { summary: "link" },
+        defaultValue: { summary: "text" },
       },
     },
     size: {
@@ -74,7 +85,7 @@ type Story = StoryObj<typeof Link>;
  * All variants use the same size (md) and content for fair comparison.
  *
  * @axis variant
- * @values link (default), secondary (muted), accent, destructive (danger)
+ * @values text (default), secondary (muted), accent, destructive (danger)
  */
 export const Variants: Story = {
   render: () => (
@@ -98,7 +109,7 @@ export const Variants: Story = {
     docs: {
       description: {
         story:
-          "Link variants displayed side-by-side for visual comparison. Same size (md) and content used for fair comparison. Navigation is disabled for Storybook demonstration.",
+          "Link variants displayed side-by-side for visual comparison. Default variant='text' is inline (inline-flex). Same size (md) and content used for fair comparison. Navigation is disabled for Storybook demonstration.",
       },
     },
   },
@@ -111,7 +122,7 @@ export const Variants: Story = {
  * Shows variants that demonstrate always, hover, and none underline modes.
  *
  * @axis underline
- * @values always (primary variant), hover (link variant), none (secondary variant)
+ * @values always (primary variant), hover (text variant), none (secondary variant)
  */
 export const UnderlineModes: Story = {
   render: () => (
@@ -119,7 +130,7 @@ export const UnderlineModes: Story = {
       <Link variant="primary" href="#" onClick={(e) => e.preventDefault()}>
         Link
       </Link>
-      <Link variant="link" href="#" onClick={(e) => e.preventDefault()}>
+      <Link variant="text" href="#" onClick={(e) => e.preventDefault()}>
         Link
       </Link>
       <Link variant="secondary" href="#" onClick={(e) => e.preventDefault()}>
@@ -132,7 +143,7 @@ export const UnderlineModes: Story = {
     docs: {
       description: {
         story:
-          "Link variants demonstrating different underline behaviors: primary (underline on hover), link (underline on hover), secondary (no underline). Hover over links to see underline behavior.",
+          "Link variants demonstrating different underline behaviors: primary (underline on hover), text (underline on hover, default inline), secondary (no underline). Note: variant='wrapper' is for wrapper use cases (block-level). Variant 'link' is deprecated (use 'wrapper' instead). Hover over links to see underline behavior.",
       },
     },
   },
@@ -142,7 +153,7 @@ export const UnderlineModes: Story = {
  * States Story
  *
  * Displays Link states (default, disabled) for visual comparison.
- * All states use the same variant (link) and size (md) for fair comparison.
+ * All states use the same variant (text, default) and size (md) for fair comparison.
  * Note: Hover and focus-visible are CSS states that require user interaction to observe.
  *
  * @axis state
@@ -164,7 +175,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "Link states displayed side-by-side for visual comparison. Same variant (link) and size (md) used for fair comparison. Hover and focus-visible states require user interaction to observe.",
+          "Link states displayed side-by-side for visual comparison. Same variant (text, default inline) and size (md) used for fair comparison. Hover and focus-visible states require user interaction to observe.",
       },
     },
   },
@@ -182,8 +193,26 @@ export const States: Story = {
 export const Matrix: Story = {
   render: () => {
     const variants: Array<
-      "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
-    > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
+      | "primary"
+      | "secondary"
+      | "accent"
+      | "outline"
+      | "ghost"
+      | "text"
+      | "link"
+      | "wrapper"
+      | "destructive"
+    > = [
+      "primary",
+      "secondary",
+      "accent",
+      "outline",
+      "ghost",
+      "text",
+      "link",
+      "wrapper",
+      "destructive",
+    ];
     const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
 
     return (
@@ -227,7 +256,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix showing all Link variants × all sizes. This comprehensive grid demonstrates all 21 combinations (7 variants × 3 sizes) for visual comparison. Navigation is disabled for Storybook demonstration.",
+          "Matrix showing all Link variants × all sizes. This comprehensive grid demonstrates all 27 combinations (9 variants × 3 sizes) for visual comparison. Default variant='text' is inline (inline-flex), variant='wrapper' is block-level (block w-full) for wrapper use cases. Variant 'link' is deprecated (use 'wrapper' instead). Navigation is disabled for Storybook demonstration.",
       },
     },
   },
@@ -297,6 +326,89 @@ export const SizesGallery: Story = {
       description: {
         story:
           "SizesGallery demonstrating all supported Link sizes (sm, md, lg) with various content types: text only, with left icon, with right icon, with both icons, and multi-line content. This demonstrates how size affects component dimensions and layout.",
+      },
+    },
+  },
+};
+
+/**
+ * Wrapper Story
+ *
+ * Demonstrates Link with variant='wrapper' wrapping layout content (Card).
+ * This shows the block-level layout behavior for wrapper use cases.
+ *
+ * @axis composition
+ * @values wrapper (block-level layout)
+ */
+export const Wrapper: Story = {
+  render: () => (
+    <div className="space-y-lg">
+      <div>
+        <h3 className="mb-sm text-sm font-medium">Wrapper Variant (Block-level)</h3>
+        <div className="grid grid-cols-1 gap-md md:grid-cols-2">
+          <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
+            <Card>
+              <Card.Header>
+                <h4 className="text-lg font-semibold">Event Title</h4>
+                <p className="text-sm text-muted-foreground">Event description</p>
+              </Card.Header>
+              <Card.Body>
+                <p className="text-sm">
+                  This card is wrapped by a Link with variant='wrapper'. The entire card is
+                  clickable and uses block-level layout.
+                </p>
+              </Card.Body>
+            </Card>
+          </Link>
+          <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
+            <Card>
+              <Card.Header>
+                <h4 className="text-lg font-semibold">Another Event</h4>
+                <p className="text-sm text-muted-foreground">Another description</p>
+              </Card.Header>
+              <Card.Body>
+                <p className="text-sm">
+                  Wrapper variant ensures proper width stretching in grid/flex containers.
+                </p>
+              </Card.Body>
+            </Card>
+          </Link>
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-sm text-sm font-medium">Comparison: Text (Inline) vs Wrapper (Block)</h3>
+        <div className="space-y-md">
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">
+              Text variant (default, inline-flex):
+            </p>
+            <Link href="#" onClick={(e) => e.preventDefault()}>
+              This is an inline text link
+            </Link>
+          </div>
+          <div>
+            <p className="mb-sm text-xs text-muted-foreground">Wrapper variant (block-level):</p>
+            <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
+              <Card>
+                <Card.Body>
+                  <p className="text-sm">
+                    This entire card is wrapped by Link with variant='wrapper'
+                  </p>
+                </Card.Body>
+              </Card>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: "padded",
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Link with variant='wrapper' wrapping Card components. Demonstrates block-level layout behavior for wrapper use cases. The wrapper variant uses 'block w-full' layout to properly stretch in grid/flex containers. Note: variant='link' is deprecated (use 'wrapper' instead).",
       },
     },
   },

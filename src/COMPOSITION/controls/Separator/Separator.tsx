@@ -6,6 +6,45 @@
  * Visual separator for content sections, menus, and lists.
  * Supports both semantic and decorative modes with horizontal/vertical orientations.
  *
+ * @enforcement TUNG_SEPARATOR_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use SEPARATOR_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL thickness values MUST use SEPARATOR_TOKENS.thickness and SEPARATOR_TOKENS.width
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Orientation variants use SEPARATOR_TOKENS for thickness/width
+ * - Color variants use semantic Tailwind classes
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors use semantic Tailwind classes (bg-border, bg-muted, bg-primary/20, etc.)
+ * - Color variants map to semantic color tokens
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Thickness uses SEPARATOR_TOKENS.thickness[thickness] for horizontal orientation
+ * - Width uses SEPARATOR_TOKENS.width[thickness] for vertical orientation
+ * - NO raw Tailwind spacing classes (h-1, w-1, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Separator uses color token system exclusively via semantic Tailwind classes
+ * - Spacing Authority: Separator uses spacing token system exclusively via SEPARATOR_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in SEPARATOR_TOKENS (src/FOUNDATION/tokens/components/separator.ts)
+ * - SEPARATOR_TOKENS reference foundation tokens from spacing and color systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid orientation/color/thickness values at compile time
+ *
  * @example
  * ```tsx
  * // Horizontal separator (default)

@@ -46,6 +46,62 @@
  * or long-press gestures. ContextMenu provides full ARIA menu semantics and is intended
  * for contextual actions that appear at cursor/pointer position.
  *
+ * @enforcement TUNG_CONTEXTMENU_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use CONTEXT_MENU_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Size variants use CONTEXT_MENU_TOKENS.size
+ * - Width variants use CONTEXT_MENU_TOKENS.width
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from CONTEXT_MENU_TOKENS for content and item styling
+ * - Item tone variants use CONTEXT_MENU_TOKENS.item.tone
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses CONTEXT_MENU_TOKENS.content.padding
+ * - Item spacing uses CONTEXT_MENU_TOKENS.item spacing
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography uses CONTEXT_MENU_TOKENS for content and item typography
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses CONTEXT_MENU_TOKENS.content.radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: ContextMenu uses color token system exclusively via CONTEXT_MENU_TOKENS
+ * - Spacing Authority: ContextMenu uses spacing token system exclusively via CONTEXT_MENU_TOKENS
+ * - Typography Authority: ContextMenu uses typography token system exclusively via CONTEXT_MENU_TOKENS
+ * - Radius Authority: ContextMenu uses radius token system exclusively via CONTEXT_MENU_TOKENS
+ * - Elevation Authority: ContextMenu uses shadow tokens via CONTEXT_MENU_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in CONTEXT_MENU_TOKENS (src/FOUNDATION/tokens/components/context-menu.ts)
+ * - CONTEXT_MENU_TOKENS reference foundation tokens from spacing, radius, color, typography, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid size/width/tone values at compile time
+ *
  * **What ContextMenu IS:**
  * - Right-click menus (secondary actions on elements)
  * - Long-press menus (mobile/touch interfaces)

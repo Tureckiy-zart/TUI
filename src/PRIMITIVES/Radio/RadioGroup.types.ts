@@ -39,7 +39,10 @@ export interface RadioGroupContextValue {
  *
  * Container component for Radio buttons with keyboard navigation and state management.
  */
-export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RadioGroupProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
   /**
    * Controlled value
    */

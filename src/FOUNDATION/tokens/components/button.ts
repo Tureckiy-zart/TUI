@@ -4,6 +4,38 @@
  * Component-level design tokens for Button component.
  * Maps foundation tokens (spacing, typography, radius, shadows, motion) to button-specific usage.
  *
+ * @component Button
+ * @see {@link ../PRIMITIVES/Button/Button.tsx} - Button component implementation
+ * @see {@link ../PRIMITIVES/Button/Button.stories.tsx} - Storybook examples
+ *
+ * @example
+ * // Basic usage
+ * <Button>Click Me</Button>
+ *
+ * @example
+ * // With variant
+ * <Button variant="primary">Primary Button</Button>
+ *
+ * @example
+ * // With size
+ * <Button size="lg">Large Button</Button>
+ *
+ * @example
+ * // With icons
+ * <Button leftIcon={<IconSearch />} rightIcon={<IconArrowRight />}>
+ *   Search
+ * </Button>
+ *
+ * @example
+ * // Icon-only button
+ * <Button iconOnly size="md" aria-label="Search">
+ *   <IconSearch />
+ * </Button>
+ *
+ * @example
+ * // Disabled state
+ * <Button disabled>Disabled Button</Button>
+ *
  * All values reference foundation tokens to ensure consistency across the design system.
  *
  * Authority Compliance:
@@ -36,6 +68,18 @@ export const BUTTON_TOKENS = {
   /**
    * Button heights by size
    * Maps to Tailwind height utilities: h-8, h-9, h-10
+   *
+   * @example
+   * // Small size button (32px height)
+   * <Button size="sm">Small Button</Button>
+   *
+   * @example
+   * // Medium size button (36px height, default)
+   * <Button size="md">Medium Button</Button>
+   *
+   * @example
+   * // Large size button (40px height)
+   * <Button size="lg">Large Button</Button>
    */
   height: {
     sm: "h-8", // 32px (2rem)
@@ -46,6 +90,12 @@ export const BUTTON_TOKENS = {
   /**
    * Button padding by size
    * Horizontal and vertical padding values
+   *
+   * @example
+   * // Padding is automatically applied based on size prop
+   * <Button size="sm">Small Button</Button> // Uses px-sm py-xs
+   * <Button size="md">Medium Button</Button> // Uses px-md py-sm
+   * <Button size="lg">Large Button</Button> // Uses px-lg py-md
    */
   padding: {
     horizontal: {
@@ -63,6 +113,12 @@ export const BUTTON_TOKENS = {
   /**
    * Gap between icon and text by size
    * Scales with button size for visual consistency
+   *
+   * @example
+   * // Gap is automatically applied between icon and text
+   * <Button size="sm" leftIcon={<IconSearch />}>Search</Button> // Uses gap-xs
+   * <Button size="md" leftIcon={<IconSearch />}>Search</Button> // Uses gap-sm
+   * <Button size="lg" leftIcon={<IconSearch />}>Search</Button> // Uses gap-md
    */
   gap: {
     sm: "gap-xs", // 4px (0.25rem) - smaller gap for small buttons
@@ -84,6 +140,12 @@ export const BUTTON_TOKENS = {
    * Icon size within buttons by button size
    * Scales proportionally with button size for visual balance
    * Contains full SVG selector classes for direct use in CVA
+   *
+   * @example
+   * // Icon size scales automatically with button size
+   * <Button size="sm" leftIcon={<IconSearch />}>Search</Button> // Icon: 14px
+   * <Button size="md" leftIcon={<IconSearch />}>Search</Button> // Icon: 16px
+   * <Button size="lg" leftIcon={<IconSearch />}>Search</Button> // Icon: 20px
    */
   iconSize: {
     sm: "[&_svg]:w-3.5 [&_svg]:h-3.5", // 14px (0.875rem) - smaller icon for small buttons
@@ -94,6 +156,12 @@ export const BUTTON_TOKENS = {
   /**
    * Width tokens
    * Used for icon-only buttons (square buttons with equal width and height)
+   *
+   * @example
+   * // Width matches height for icon-only buttons
+   * <Button iconOnly size="sm" aria-label="Search"><IconSearch /></Button> // 32x32px
+   * <Button iconOnly size="md" aria-label="Search"><IconSearch /></Button> // 36x36px
+   * <Button iconOnly size="lg" aria-label="Search"><IconSearch /></Button> // 40x40px
    */
   width: {
     sm: "w-8", // 32px (2rem) - matches height.sm for square icon-only buttons
@@ -105,6 +173,12 @@ export const BUTTON_TOKENS = {
    * Padding token for icon-only buttons
    * Zero padding required for square dimensions (icon-only buttons have no text, so no padding needed)
    * Uses p-0 which is a standard Tailwind class for zero spacing (spacing[0])
+   *
+   * @example
+   * // Icon-only buttons use zero padding for square dimensions
+   * <Button iconOnly size="md" aria-label="Search">
+   *   <IconSearch />
+   * </Button>
    */
   paddingIconOnly: "p-0", // Zero padding for icon-only buttons (required for square dimensions) - standard Tailwind class
 
@@ -115,10 +189,25 @@ export const BUTTON_TOKENS = {
    * @enforcement TUNG_TOKEN_AUTHORITY_EXPANSION_PLAN
    * @rule All fontSize values reference Typography Authority tokens
    * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+   *
+   * @example
+   * // Small font size (~12px)
+   * <Button size="sm">Small Text</Button>
+   *
+   * @example
+   * // Medium font size (~14px, default)
+   * <Button size="md">Medium Text</Button>
+   *
+   * @example
+   * // Large font size (~16px)
+   * <Button size="lg">Large Text</Button>
    */
   fontSize: {
+    /** Small font size (~12px) */
     sm: "text-xs", // References fontSize.xs[0] from Typography Authority (~12px)
+    /** Medium font size (~14px, default) */
     md: "text-sm", // References fontSize.sm[0] from Typography Authority (~14px)
+    /** Large font size (~16px) */
     lg: "text-base", // References fontSize.base[0] from Typography Authority (~16px)
   } as const,
 
@@ -156,9 +245,38 @@ export const BUTTON_TOKENS = {
    * @rule Active MUST activate only on mousedown, NOT on hover
    * @rule Focus MUST activate only on keyboard navigation, NOT on mouse click
    *
+   * @example
+   * // Primary variant - emphasized button with shadow (default)
+   * <Button variant="primary">Get Started</Button>
+   *
+   * @example
+   * // Secondary variant - secondary button style
+   * <Button variant="secondary">Learn More</Button>
+   *
+   * @example
+   * // Accent variant - accent color button
+   * <Button variant="accent">Explore Feature</Button>
+   *
+   * @example
+   * // Outline variant - bordered button
+   * <Button variant="outline">Cancel</Button>
+   *
+   * @example
+   * // Ghost variant - subtle background button
+   * <Button variant="ghost">Menu Item</Button>
+   *
+   * @example
+   * // Destructive variant - danger/delete actions
+   * <Button variant="destructive">Delete</Button>
+   *
    * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
    */
   variant: {
+    /**
+     * Primary variant - emphasized button with shadow (default variant)
+     * @example
+     * <Button variant="primary">Get Started</Button>
+     */
     primary: {
       background: "bg-[hsl(var(--button-primary-base-bg))]", // Primary base background - CSS variable from State Matrix
       text: "text-primary-foreground", // Primary text using CSS var
@@ -171,6 +289,11 @@ export const BUTTON_TOKENS = {
       } as const,
       loading: "bg-[hsl(var(--button-primary-loading-bg))]", // Primary loading - CSS variable from State Matrix (Priority 2: blocks hover/active, used with aria-busy/data-loading when implemented)
     } as const,
+    /**
+     * Secondary variant - secondary button style
+     * @example
+     * <Button variant="secondary">Learn More</Button>
+     */
     secondary: {
       background: "bg-secondary", // Secondary background using CSS var
       text: "text-secondary-foreground", // Secondary text using CSS var
@@ -181,6 +304,11 @@ export const BUTTON_TOKENS = {
         text: "disabled:text-[hsl(var(--button-secondary-disabled-text))]", // Disabled text - CSS variable from State Matrix
       } as const,
     } as const,
+    /**
+     * Accent variant - accent color button
+     * @example
+     * <Button variant="accent">Explore Feature</Button>
+     */
     accent: {
       background: "bg-accent", // Accent background using CSS var
       text: "text-accent-foreground", // Accent text using CSS var
@@ -191,6 +319,11 @@ export const BUTTON_TOKENS = {
         text: "disabled:text-[hsl(var(--button-accent-disabled-text))]", // Disabled text - CSS variable from State Matrix
       } as const,
     } as const,
+    /**
+     * Outline variant - bordered button
+     * @example
+     * <Button variant="outline">Cancel</Button>
+     */
     outline: {
       border: "border border-input", // Input border using CSS var
       background: "bg-background", // Background using CSS var
@@ -211,6 +344,11 @@ export const BUTTON_TOKENS = {
         border: "disabled:border-[hsl(var(--button-outline-disabled-border))]", // Disabled border - CSS variable from State Matrix
       } as const,
     } as const,
+    /**
+     * Ghost variant - subtle background button
+     * @example
+     * <Button variant="ghost">Menu Item</Button>
+     */
     ghost: {
       background: "bg-muted/10", // Light background for better contrast on dark surfaces
       text: "text-foreground", // Foreground text using CSS var
@@ -227,6 +365,11 @@ export const BUTTON_TOKENS = {
         text: "disabled:text-[hsl(var(--button-ghost-disabled-text))]", // Disabled text - CSS variable from State Matrix
       } as const,
     } as const,
+    /**
+     * Destructive variant - danger/delete actions
+     * @example
+     * <Button variant="destructive">Delete</Button>
+     */
     destructive: {
       background: "bg-destructive", // Destructive background using CSS var
       text: "text-destructive-foreground", // Destructive text using CSS var
@@ -284,6 +427,16 @@ export const BUTTON_TOKENS = {
      * @rule Active is FORBIDDEN when disabled={true}
      * @rule Focus is FORBIDDEN when disabled={true} (for interactions)
      *
+     * @example
+     * // Disabled button with proper accessibility attributes
+     * <Button disabled>Disabled Button</Button>
+     *
+     * @example
+     * // Disabled button prevents all interactions (hover, active, focus)
+     * <Button disabled onClick={handleClick}>
+     *   Cannot Click
+     * </Button>
+     *
      * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
      */
     disabled: {
@@ -304,6 +457,14 @@ export const BUTTON_TOKENS = {
      * @rule Focus MUST use focus-visible: prefix (keyboard navigation only)
      * @rule Focus MUST be blocked when disabled={true}
      * @rule Focus MUST NOT activate on mouse click
+     *
+     * @example
+     * // Focus ring appears automatically on keyboard navigation (Tab key)
+     * <Button>Focusable Button</Button>
+     *
+     * @example
+     * // Focus is disabled when button is disabled
+     * <Button disabled>Disabled Button</Button>
      *
      * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
      */

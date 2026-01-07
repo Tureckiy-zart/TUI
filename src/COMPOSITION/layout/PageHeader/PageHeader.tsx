@@ -8,7 +8,48 @@
  * Uses Foundation components (Heading, Text, Breadcrumbs) for semantic content.
  * Composes layout primitives internally but does not expose layout props.
  *
+ * @enforcement TUNG_PAGEHEADER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - PageHeader is a composition component that delegates ALL styling to composed components
+ * - ALL styling is delegated to Container, Flex, Stack, Heading, Text, and Breadcrumbs components
+ * - PageHeader does NOT use tokens directly
+ * - Container component handles width constraint and padding via token-based values
+ * - Flex component handles layout via FLEX_TOKENS
+ * - Stack component handles layout via STACK_TOKENS
+ * - Heading, Text, and Breadcrumbs components handle their own token enforcement
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - PageHeader composes Container component for width constraint
+ * - PageHeader composes Flex component for layout
+ * - PageHeader composes Stack component for vertical layout
+ * - PageHeader composes Heading component (Foundation) for title
+ * - PageHeader composes Text component (Foundation) for description
+ * - PageHeader composes Breadcrumbs component for navigation
+ * - Styling is delegated to all composed components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
  * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
+ *
+ * Authority Compliance:
+ * - Layout Authority: PageHeader uses Container, Flex, and Stack components which handle layout via their tokens
+ * - Spacing Authority: PageHeader uses token-based spacing values via composed components
+ * - Typography Authority: PageHeader uses typography token system via Heading and Text components
+ * - Color Authority: PageHeader does not apply colors directly (delegated to composed components)
+ *
+ * Token-only contract:
+ * - PageHeader has no direct token usage (composition component)
+ * - All styling occurs through composed components:
+ *   - Container component handles width constraint (token-based)
+ *   - Flex component handles layout (FLEX_TOKENS)
+ *   - Stack component handles layout (STACK_TOKENS)
+ *   - Heading component handles typography (HEADING_TOKENS)
+ *   - Text component handles typography (TEXT_TOKENS)
+ *   - Breadcrumbs component handles navigation styling (BREADCRUMBS_TOKENS)
+ * - All composed components handle token enforcement
  *
  * @example
  * ```tsx
@@ -73,14 +114,6 @@ export interface PageHeaderProps extends Omit<
 
 /**
  * PageHeader component - semantic page header with structured slots
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Composes Foundation components (Heading, Text, Breadcrumbs)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Uses layout primitives internally (Container, Stack, Flex)
- * - ✅ Does NOT expose layout props in public API
- * - ✅ Does NOT accept children prop
  */
 const PageHeader = React.forwardRef<HTMLElement, PageHeaderProps>(
   (

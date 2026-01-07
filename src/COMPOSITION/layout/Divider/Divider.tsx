@@ -9,6 +9,46 @@
  * Divider is a layout component (not a control). It does NOT replace Separator,
  * which is a control component with Radix primitive for semantic separation.
  *
+ * @enforcement TUNG_DIVIDER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use DIVIDER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (dividerVariants)
+ * - Orientation uses DIVIDER_TOKENS.width.full and height.full
+ * - Tone variants use DIVIDER_TOKENS.tone
+ * - Inset padding uses DIVIDER_TOKENS.inset
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from DIVIDER_TOKENS.tone for tone variants
+ * - Tone variants use DIVIDER_TOKENS.tone (border, muted, primary, secondary, accent)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Inset padding uses DIVIDER_TOKENS.inset (horizontal and vertical)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Divider uses color token system exclusively via DIVIDER_TOKENS
+ * - Spacing Authority: Divider uses spacing token system exclusively via DIVIDER_TOKENS
+ * - Layout Authority: Divider provides layout separation functionality
+ *
+ * Token-only contract:
+ * - All styling is defined in DIVIDER_TOKENS (src/FOUNDATION/tokens/components/divider.ts)
+ * - DIVIDER_TOKENS reference foundation tokens from spacing and color systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid orientation/tone values at compile time
+ *
  * @example
  * ```tsx
  * // Horizontal divider (default)
@@ -134,19 +174,6 @@ export interface DividerProps {
 
 /**
  * Divider component
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token-based styling (tokenCVA, DIVIDER_TOKENS)
- * - ✅ Supports horizontal and vertical orientations
- * - ✅ Supports tone variants (border, muted, primary, secondary, accent)
- * - ✅ Supports inset padding pattern (boolean)
- * - ✅ Uses semantic `<hr>` element for horizontal divider
- * - ✅ Uses `<div>` element for vertical divider
- * - ✅ Decorative element (role="none" or aria-hidden="true")
- * - ✅ Follows Extension Authority Contract
- * - ✅ Explicit union types (DividerOrientation, DividerTone)
- * - ✅ Type constraints (satisfies Record<Type, string>)
- * - ✅ NO forbidden props (px, py, color, size, thickness, children)
  */
 const Divider = React.forwardRef<HTMLHRElement | HTMLDivElement, DividerProps>(
   ({ orientation = "horizontal", tone = "border", inset = false, ...props }, ref) => {

@@ -6,6 +6,50 @@
  * Structural list item wrapper with interactive/disabled states, no content styling.
  * Provides semantic li/div elements with proper accessibility and state handling.
  *
+ * @enforcement TUNG_LISTITEM_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use tokenCVA for variants
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL motion-related classes MUST use motion tokens
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - NO raw motion values allowed (must use motion tokens)
+ * - Structural utilities (flex, w-full, items-*, etc.) are ALLOWED
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Hover background uses semantic Tailwind class (hover:bg-muted/50)
+ * - Focus ring uses semantic Tailwind classes (focus-visible:ring-ring)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion-related classes MUST use motion tokens
+ * - Interactive variant uses transition-colors (motion token)
+ * - NO raw motion values allowed
+ *
+ * State Authority Rules:
+ * - ALL state classes (hover, focus-visible, disabled) MUST use State Matrix CSS variables
+ * - Disabled state uses opacity and pointer-events utilities
+ * - NO raw Tailwind state utilities outside State Matrix
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: ListItem uses color token system exclusively via semantic Tailwind classes
+ * - Motion Authority: ListItem uses motion tokens for transitions
+ * - State Authority: ListItem uses State Matrix CSS variables for states
+ * - Layout Authority: ListItem follows layout composition patterns
+ *
+ * Token-only contract:
+ * - All styling is defined via tokenCVA variants
+ * - Variants use semantic Tailwind classes that map to CSS variables
+ * - No raw Tailwind color classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant values at compile time
+ *
  * **What ListItem IS:**
  * - Structural list item wrapper (li/div)
  * - Interactive/disabled state handling via tokenCVA

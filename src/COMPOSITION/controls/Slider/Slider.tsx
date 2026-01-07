@@ -6,6 +6,58 @@
  * A fully accessible, token-driven slider component for numeric value control.
  * Built on Radix UI Slider primitive with variant and size support.
  *
+ * @enforcement TUNG_SLIDER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use SLIDER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (sliderVariants)
+ * - Size variants use SLIDER_TOKENS.root.size, track.size, thumb.size
+ * - Variant colors use SLIDER_TOKENS.track.variant, range.variant, thumb.variant
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from SLIDER_TOKENS for track, range, and thumb styling
+ * - Track variant colors use SLIDER_TOKENS.track.variant
+ * - Range variant colors use SLIDER_TOKENS.range.variant
+ * - Thumb variant colors use SLIDER_TOKENS.thumb.variant
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Root size uses SLIDER_TOKENS.root.size (height/width)
+ * - Track size uses SLIDER_TOKENS.track.size (height/width)
+ * - Thumb size uses SLIDER_TOKENS.thumb.size (height/width)
+ * - Mark spacing uses SLIDER_TOKENS.mark.label.marginTop and marginLeft
+ * - NO raw Tailwind spacing classes (h-4, w-4, p-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Mark label typography uses SLIDER_TOKENS.mark.label.fontSize
+ * - NO raw Tailwind typography classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Slider uses color token system exclusively via SLIDER_TOKENS
+ * - Spacing Authority: Slider uses spacing token system exclusively via SLIDER_TOKENS
+ * - Typography Authority: Slider uses typography token system exclusively via SLIDER_TOKENS
+ * - Layout Authority: Slider composes Radix Slider primitive
+ *
+ * Token-only contract:
+ * - All styling is defined in SLIDER_TOKENS (src/FOUNDATION/tokens/components/slider.ts)
+ * - SLIDER_TOKENS reference foundation tokens from spacing, color, and typography systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size/orientation values at compile time
+ *
  * @example
  * ```tsx
  * <Slider
@@ -125,14 +177,6 @@ export interface SliderProps {
 
 /**
  * Slider component
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (SLIDER_TOKENS, no raw values)
- * - ✅ Uses Radix UI Slider primitive
- * - ✅ Follows Extension Authority Contract
- * - ✅ Interactive Size Scale Authority (sm/md/lg)
- * - ✅ InteractiveVariant subset (primary/secondary/outline)
- * - ✅ tokenCVA pattern for variants and sizes (Decision Matrix RULE 1 compliance)
  */
 const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
   (

@@ -4,16 +4,9 @@
  * Component-level design tokens for Select component.
  * Maps foundation tokens (spacing, typography, radius, shadows) to select-specific usage.
  * All color values use CSS variables for theme-aware styling.
- */
-
-// Foundation tokens are referenced in comments for documentation
-// All color values use CSS variable references for theme support
-
-/**
- * Select Component Tokens
  *
- * Defines spacing, sizing, typography, and visual tokens for Select component.
- * All colors use CSS variable references (hsl(var(--token))) for theme-aware styling.
+ * All values reference foundation tokens to ensure consistency across the design system.
+ * Values are mapped to Tailwind utility classes for direct use in component variants.
  */
 export const SELECT_TOKENS = {
   /**
@@ -55,8 +48,8 @@ export const SELECT_TOKENS = {
       xs: "text-xs", // Maps to fontSize.xs[0]
       sm: "text-sm", // Maps to fontSize.sm[0]
       md: "text-base", // Maps to fontSize.base[0] - default
-      lg: "text-base", // Maps to fontSize.base[0]
-      xl: "text-lg", // Maps to fontSize.lg[0]
+      lg: "text-lg", // Maps to fontSize.lg[0]
+      xl: "text-xl", // Maps to fontSize.xl[0]
     },
     icon: {
       size: "size-4", // 16px (1rem)
@@ -121,9 +114,9 @@ export const SELECT_TOKENS = {
     fontSize: {
       xs: "text-xs", // Maps to fontSize.xs[0]
       sm: "text-sm", // Maps to fontSize.sm[0]
-      md: "text-sm", // Maps to fontSize.sm[0] - default
-      lg: "text-sm", // Maps to fontSize.sm[0]
-      xl: "text-base", // Maps to fontSize.base[0]
+      md: "text-base", // Maps to fontSize.base[0] - default
+      lg: "text-lg", // Maps to fontSize.lg[0]
+      xl: "text-xl", // Maps to fontSize.xl[0]
     },
     indicator: {
       size: "size-4", // 16px (1rem)
@@ -166,9 +159,9 @@ export const SELECT_TOKENS = {
     fontSize: {
       xs: "text-xs", // Maps to fontSize.xs[0]
       sm: "text-sm", // Maps to fontSize.sm[0]
-      md: "text-sm", // Maps to fontSize.sm[0] - default
-      lg: "text-sm", // Maps to fontSize.sm[0]
-      xl: "text-base", // Maps to fontSize.base[0]
+      md: "text-base", // Maps to fontSize.base[0] - default
+      lg: "text-lg", // Maps to fontSize.lg[0]
+      xl: "text-xl", // Maps to fontSize.xl[0]
     },
     fontWeight: "font-semibold", // Semibold weight for labels
   } as const,
@@ -337,7 +330,7 @@ export const SELECT_TOKENS = {
           horizontal: "px-sm",
           vertical: "py-xs",
         },
-        fontSize: "text-sm",
+        fontSize: "text-base",
       },
       content: {
         padding: "p-sm",
@@ -352,14 +345,14 @@ export const SELECT_TOKENS = {
           vertical: "py-sm",
         },
         radius: "rounded-md",
-        fontSize: "text-base",
+        fontSize: "text-lg",
       },
       item: {
         padding: {
           horizontal: "px-md",
           vertical: "py-sm",
         },
-        fontSize: "text-sm",
+        fontSize: "text-lg",
       },
       content: {
         padding: "p-md",
@@ -374,14 +367,14 @@ export const SELECT_TOKENS = {
           vertical: "py-md",
         },
         radius: "rounded-lg",
-        fontSize: "text-lg",
+        fontSize: "text-xl",
       },
       item: {
         padding: {
           horizontal: "px-lg",
           vertical: "py-sm",
         },
-        fontSize: "text-base",
+        fontSize: "text-xl",
       },
       content: {
         padding: "p-lg",

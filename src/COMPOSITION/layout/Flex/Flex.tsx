@@ -10,7 +10,43 @@
  * Use Flex when you need advanced flexbox control beyond what Stack provides.
  * For simple vertical/horizontal layouts, prefer Stack.
  *
- * All spacing values use tokens only.
+ * @enforcement TUNG_FLEX_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL spacing values MUST be token-based (ResponsiveSpacing)
+ * - Gap prop accepts ResponsiveSpacing (semantic spacing tokens: xs, sm, md, lg, xl, etc.)
+ * - Basis prop accepts ResponsiveFlexBasis (spacing tokens or semantic CSS values)
+ * - NO raw CSS spacing values allowed
+ * - NO raw numeric values allowed
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - Basis is applied via inline styles using CSS variables (--spacing-*) or semantic CSS values
+ * - Structural utilities (flex, flex-row, flex-col, items-*, justify-*, etc.) are ALLOWED
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Gap prop accepts ResponsiveSpacing (semantic spacing tokens: xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - NO raw Tailwind gap classes (gap-4, gap-md, etc.) allowed
+ *
+ * Layout Authority Rules:
+ * - Flex uses CSS Flexbox layout system
+ * - Direction, wrap, grow, shrink use Tailwind flex utilities
+ * - Alignment and justification use Tailwind flex utilities (items-*, justify-*)
+ * - Basis uses spacing tokens via CSS variables or semantic CSS values
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Flex uses spacing token system exclusively for gap and basis via CSS variables
+ * - Layout Authority: Flex follows CSS Flexbox layout composition patterns
+ *
+ * Token-only contract:
+ * - All spacing values are defined in spacing token system (src/FOUNDATION/tokens/spacing.ts)
+ * - Spacing tokens reference foundation spacing scale (8px grid system)
+ * - Gap and basis are applied via inline styles using CSS variables (--spacing-*)
+ * - No raw CSS spacing values are allowed
+ * - TypeScript enforces valid spacing token values at compile time
  *
  * @example
  * ```tsx

@@ -8,6 +8,50 @@
  * Uses button role="radio" pattern for full accessibility.
  * Can be used standalone or within RadioGroup for group behavior.
  *
+ * @enforcement TUNG_RADIO_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in RADIO_TOKENS
+ * - Radio is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Radio MUST react to token changes - changing tokens/colors.ts MUST change Radio appearance
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in RADIO_TOKENS
+ * - Radio is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Radio MUST react to token changes - changing tokens/colors.ts MUST change Radio appearance
+ *
+ * Dot Color Rules:
+ * - Dot colors MUST come from RADIO_TOKENS.dot.color
+ * - NO raw Tailwind color classes in dot rendering logic
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Radio uses MOTION_TOKENS.transition for transitions
+ * - Radius Authority: Radio references componentRadius.radio for border radius
+ * - State Authority: Radio uses State Matrix CSS variables for all states
+ * - Interaction Authority: Radio follows Interaction Authority Contract for state priority
+ *
+ * Token-only contract:
+ * - All colors are defined in RADIO_TOKENS (src/FOUNDATION/tokens/components/radio.ts)
+ * - RADIO_TOKENS reference foundation tokens from tokens/colors.ts
+ * - No raw Tailwind color classes (bg-red-500, text-blue-600, etc.) are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ *
+ * className and style props:
+ * - className and style are forbidden from public API - only CVA output is used
+ * - Foundation Enforcement is FINAL/APPLIED and LOCKED
+ *
  * @example
  * ```tsx
  * <RadioGroup value={value} onValueChange={setValue}>

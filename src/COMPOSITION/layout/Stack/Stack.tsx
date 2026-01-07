@@ -7,7 +7,32 @@
  * It provides semantic spacing between items and handles flexbox layout composition.
  * Uses Box internally as the base container.
  *
- * All spacing uses token-based values only.
+ * @enforcement TUNG_STACK_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL spacing values MUST be token-based (ResponsiveSpacing)
+ * - NO raw CSS spacing values allowed
+ * - Spacing uses getSpacingCSSVar() to convert tokens to CSS variables
+ * - Structural utilities (flex, flex-row, flex-col, items-*, justify-*) are ALLOWED
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing prop accepts ResponsiveSpacing (semantic spacing tokens: xs, sm, md, lg, xl, etc.)
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - NO raw Tailwind gap classes (gap-4, gap-md, etc.) allowed
+ *
+ * Token-only contract:
+ * - All spacing values are defined in spacing token system (src/FOUNDATION/tokens/spacing.ts)
+ * - Spacing tokens reference foundation spacing scale (8px grid system)
+ * - No raw CSS spacing values are allowed
+ * - TypeScript enforces valid spacing token values at compile time
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Stack uses spacing token system exclusively
+ * - Layout Authority: Stack follows layout composition patterns
  *
  * @example
  * ```tsx
@@ -104,20 +129,16 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
       className,
     );
 
-    // Handle gap via inline style
+    // Build inline styles with CSS variables
     const inlineStyles: React.CSSProperties = {
       ...(gapBaseValue !== undefined && { gap: getSpacingCSSVar(String(gapBaseValue)) }),
-      ...style,
     };
 
-    return (
-      <Box
-        ref={ref}
-        className={flexClasses}
-        style={Object.keys(inlineStyles).length > 0 ? inlineStyles : undefined}
-        {...props}
-      />
-    );
+    // Build final style combining inline styles and passed style prop
+    const finalStyle =
+      Object.keys(inlineStyles).length > 0 || style ? { ...inlineStyles, ...style } : undefined;
+
+    return <Box ref={ref} className={flexClasses} style={finalStyle} {...props} />;
   },
 );
 

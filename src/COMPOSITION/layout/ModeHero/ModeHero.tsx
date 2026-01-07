@@ -1,5 +1,53 @@
 "use client";
 
+/**
+ * ModeHero Component
+ *
+ * Hero section component for displaying day and night mode information.
+ * Provides a gradient background with two cards for day and night modes.
+ *
+ * @enforcement TUNG_MODEHERO_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ModeHero is a composition component that delegates ALL styling to composed components
+ * - ALL styling is delegated to Box, Card, CardBody, Heading, and Text components
+ * - ModeHero does NOT use tokens directly
+ * - Box component handles container styling via BOX_TOKENS
+ * - Card and CardBody components handle card styling via CARD_TOKENS
+ * - Heading component handles heading styling via HEADING_TOKENS
+ * - Text component handles text styling via TEXT_TOKENS
+ * - Gradient background uses CSS custom properties (hsl(var(--primary)), hsl(var(--accent)))
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - ModeHero composes Box component for container styling
+ * - ModeHero composes Card and CardBody components for card styling
+ * - ModeHero composes Heading component (Foundation) for heading styling
+ * - ModeHero composes Text component (Foundation) for text styling
+ * - Styling is delegated to all composed components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: ModeHero uses Box, Card, and CardBody components which handle layout via their tokens
+ * - Color Authority: ModeHero uses color token system via CSS custom properties and composed components
+ * - Spacing Authority: ModeHero uses token-based spacing values via Box and Card components
+ * - Typography Authority: ModeHero uses typography token system via Heading and Text components
+ *
+ * Token-only contract:
+ * - ModeHero has no direct token usage (composition component)
+ * - All styling occurs through composed components:
+ *   - Box component handles container styling (BOX_TOKENS)
+ *   - Card component handles card styling (CARD_TOKENS)
+ *   - Heading component handles heading styling (HEADING_TOKENS)
+ *   - Text component handles text styling (TEXT_TOKENS)
+ * - Gradient background uses CSS custom properties (token-based color values)
+ * - All composed components handle token enforcement
+ */
+
 import React from "react";
 
 import { Box } from "@/COMPOSITION/layout/Box";

@@ -7,6 +7,66 @@
  * Provides multiple visual variants (circle/dots/bounce/linear/bars/pulse/wave/orbit/bars-horizontal/ripple), size variants (xs/sm/md/lg/xl/2xl/3xl),
  * tone variants (primary/muted/subtle), and optional text label with configurable positioning.
  *
+ * @enforcement TUNG_SPINNER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use SPINNER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL motion values MUST use MOTION_TOKENS (via SPINNER_TOKENS.animation)
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Size variants use SPINNER_TOKENS.size
+ * - Tone variants use SPINNER_TOKENS.tone
+ * - Border colors use SPINNER_TOKENS.borderColor
+ * - Background colors use SPINNER_TOKENS.background and SPINNER_TOKENS.linearTrackBackground
+ * - Animation variants use SPINNER_TOKENS.animationVariants
+ * - Easing uses SPINNER_TOKENS.easing
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from SPINNER_TOKENS.tone for tone variants
+ * - Border colors use SPINNER_TOKENS.borderColor[tone]
+ * - Text colors use SPINNER_TOKENS.tone[tone]
+ * - Background colors use SPINNER_TOKENS.background and SPINNER_TOKENS.linearTrackBackground
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Size uses SPINNER_TOKENS.size[size] (maps to spacing tokens)
+ * - Label gap uses SPINNER_TOKENS.labelGap[size]
+ * - Dot gap uses SPINNER_TOKENS.dotGap[size]
+ * - NO raw Tailwind spacing classes (w-4, h-4, gap-2, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses SPINNER_TOKENS.radius (rounded-full for circle variants)
+ * - NO raw Tailwind radius classes (rounded-full, rounded-md, etc.) allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - Animations use SPINNER_TOKENS.animationVariants (spin, pulse, bounce, linear, bars, wave, ripple)
+ * - Easing uses SPINNER_TOKENS.easing
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Spinner uses color token system exclusively via SPINNER_TOKENS
+ * - Spacing Authority: Spinner uses spacing token system exclusively via SPINNER_TOKENS
+ * - Radius Authority: Spinner uses radius token system exclusively via SPINNER_TOKENS
+ * - Motion Authority: Spinner uses motion tokens for animations via SPINNER_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in SPINNER_TOKENS (src/FOUNDATION/tokens/components/spinner.ts)
+ * - SPINNER_TOKENS reference foundation tokens from spacing, radius, color, and motion systems
+ * - Gradient tokens reference GRADIENT_TOKENS for ring variants
+ * - No raw Tailwind color/spacing/radius classes are allowed
+ * - TypeScript enforces valid variant/size/tone values at compile time
+ *
  * @semantic_role EXTENSION_VISUAL_FEEDBACK
  *
  * @semantic_definition
@@ -414,7 +474,7 @@ function renderLinearVariant(
         trackWidth,
         trackHeight,
         SPINNER_TOKENS.radius,
-        "bg-[hsl(var(--muted))]",
+        SPINNER_TOKENS.linearTrackBackground,
         "overflow-hidden",
         "relative",
       )}

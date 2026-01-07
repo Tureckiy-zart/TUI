@@ -7,6 +7,52 @@
  * Dropdown is NOT a Menu component - it's a generic container for actions without
  * form semantics or menu-specific ARIA roles.
  *
+ * @enforcement TUNG_DROPDOWN_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use DROPDOWN_TOKENS and POPOVER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Dropdown composes Popover component (delegates overlay styling to Popover)
+ * - Item styling uses DROPDOWN_TOKENS for item-specific styling
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from DROPDOWN_TOKENS for item styling
+ * - Colors come from POPOVER_TOKENS for popover content styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing is delegated to Popover component
+ * - Item spacing uses DROPDOWN_TOKENS
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography is delegated to Popover component
+ * - NO raw Tailwind typography classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Dropdown uses color token system exclusively via DROPDOWN_TOKENS and POPOVER_TOKENS
+ * - Spacing Authority: Dropdown uses spacing token system exclusively via composed components
+ * - Typography Authority: Dropdown uses typography token system exclusively via composed components
+ * - Layout Authority: Dropdown composes Popover component
+ *
+ * Token-only contract:
+ * - Item styling uses DROPDOWN_TOKENS (src/COMPOSITION/overlays/Dropdown/Dropdown.tokens.ts)
+ * - Popover styling uses POPOVER_TOKENS (src/FOUNDATION/tokens/components/popover.ts)
+ * - Dropdown composes Popover component which handles overlay styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - TypeScript enforces valid variant/size values at compile time
+ *
  * **What Dropdown IS:**
  * - Generic action container (trigger + floating list abstraction)
  * - Semantic wrapper over Popover

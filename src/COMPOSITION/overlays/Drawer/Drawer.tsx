@@ -6,6 +6,64 @@
  * Complete token-driven, theme-aware drawer overlay with focus trap,
  * keyboard controls, and portal rendering. Supports left, right, and bottom positions.
  *
+ * @enforcement TUNG_DRAWER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use OVERLAY_TOKENS and drawerVariants as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - ALL motion values MUST use motion tokens
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (drawerVariants)
+ * - Size variants use OVERLAY_TOKENS for drawer sizing
+ * - Position variants use drawerVariants for positioning
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from OVERLAY_TOKENS for drawer content styling
+ * - Backdrop colors use OVERLAY_TOKENS for overlay styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses OVERLAY_TOKENS for drawer content padding
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses OVERLAY_TOKENS for drawer content radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use motion tokens
+ * - Animations use motion tokens for slide-in/out transitions
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Drawer uses color token system exclusively via OVERLAY_TOKENS
+ * - Spacing Authority: Drawer uses spacing token system exclusively via OVERLAY_TOKENS
+ * - Radius Authority: Drawer uses radius token system exclusively via OVERLAY_TOKENS
+ * - Motion Authority: Drawer uses motion tokens for animations
+ * - Elevation Authority: Drawer uses shadow tokens via OVERLAY_TOKENS
+ * - Layout Authority: Drawer composes Backdrop and Portal components
+ *
+ * Token-only contract:
+ * - All styling is defined in OVERLAY_TOKENS (src/FOUNDATION/tokens/components/overlay.ts)
+ * - Drawer variants use drawerVariants (src/COMPOSITION/overlays/Drawer/drawer-variants.ts)
+ * - OVERLAY_TOKENS reference foundation tokens from spacing, radius, color, motion, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid position/size values at compile time
+ *
  * Features:
  * - Portal rendering for proper z-index stacking
  * - Focus trap (loops focus inside drawer)

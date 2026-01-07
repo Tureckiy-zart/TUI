@@ -10,10 +10,10 @@
 
 This audit systematically reviewed all interactive components in FOUNDATION and EXTENSION layers to identify violations of the Interactive Wrapper Layout Contract. The contract requires that interactive components capable of wrapping layout content (Card, Panel, Box) must use block-level layout, not inline or inline-flex.
 
-**Reference Fix:** Link component (`variant='link'`) was fixed to use `layoutBlock: "block w-full"` instead of `inline-flex` when wrapping Card components in grid/flex containers. See [LINK_BASELINE_REPORT.md](./LINK_BASELINE_REPORT.md) (lines 1529-1575).
+**Reference Fix:** Link component uses variant-based layout: `variant='text'` (default, inline) for atomic text links, `variant='link'` (block-level) for wrapper use cases. See [LINK_BASELINE_REPORT.md](./LINK_BASELINE_REPORT.md) (lines 1529-1575).
 
 **Key Findings:**
-- ✅ **1 component already fixed:** Link (`variant='link'`)
+- ✅ **1 component fixed:** Link (`variant='text'` default inline, `variant='link'` wrapper block-level)
 - ⚠️ **1 potential violation identified:** Chip (uses `inline-flex`, wrapper-capable)
 - ✅ **4 components safe:** NavLink, MenuItem, DropdownItem, Button (atomic)
 - ✅ **2 components excluded:** NavItem, NavText (non-interactive)
@@ -31,8 +31,9 @@ This audit systematically reviewed all interactive components in FOUNDATION and 
 **Status:** ✅ **FIXED**
 
 **Layout Tokens:**
-- `variant='link'`: Uses `layoutBlock: "block w-full"` ([link.ts](src/FOUNDATION/tokens/components/link.ts), line 74)
-- All other variants: Use `layout: "inline-flex items-center justify-center whitespace-nowrap"` ([link.ts](src/FOUNDATION/tokens/components/link.ts), line 68)
+- `variant='text'` (default): Uses `layout: "inline-flex items-center justify-center whitespace-nowrap"` ([link.ts](src/FOUNDATION/tokens/components/link.ts), line 68) - atomic inline usage
+- `variant='link'`: Uses `layoutBlock: "block w-full"` ([link.ts](src/FOUNDATION/tokens/components/link.ts), line 74) - wrapper block-level usage
+- All other variants: Use `layout: "inline-flex items-center justify-center whitespace-nowrap"` ([link.ts](src/FOUNDATION/tokens/components/link.ts), line 68) - atomic usage
 
 **Classification:** Wrapper-capable (can wrap Card/Panel/Box)
 
@@ -41,7 +42,14 @@ This audit systematically reviewed all interactive components in FOUNDATION and 
 - Updated CVA variants to use `layoutBlock` for `variant='link'` specifically
 - All other variants continue using `inline-flex` (atomic usage)
 
-**Usage Context:** Link with `variant='link'` is intended to wrap Card components in grid/flex compositions. The fix ensures proper width stretching and height propagation.
+**Refinement Applied:** 2026-01-06 (variant refinement)
+- Added `variant='text'` as explicit inline variant (uses `layout` token)
+- Changed default variant from `'link'` to `'text'` to prevent breaking changes
+- Reserved `variant='link'` exclusively for wrapper use cases (uses `layoutBlock` token)
+
+**Usage Context:** 
+- Default Link (`variant='text'`) renders inline (inline-flex) for text and navigation links
+- Link with `variant='link'` is intended to wrap Card components in grid/flex compositions. The block-level layout ensures proper width stretching and height propagation.
 
 ---
 
@@ -56,7 +64,7 @@ This audit systematically reviewed all interactive components in FOUNDATION and 
 **Analysis:**
 - NavLink is a thin wrapper around Link component
 - Passes all props to Link, including `variant`
-- Inherits Link's layout contract (block-level for `variant='link'`, inline-flex for others)
+- Inherits Link's layout contract (block-level for `variant='link'`, inline-flex for default `variant='text'` and other atomic variants)
 - No additional layout tokens or overrides
 
 **Conclusion:** Safe - inherits correct layout contract from Link.
@@ -183,12 +191,13 @@ This audit systematically reviewed all interactive components in FOUNDATION and 
 
 | Component | Layout | Status | Notes |
 |-----------|--------|--------|-------|
-| Link (`variant='link'`) | `block w-full` | ✅ Fixed | Uses `layoutBlock` token |
+| Link (`variant='text'`, default) | `inline-flex` | ✅ Safe | Atomic inline usage (default) |
+| Link (`variant='link'`) | `block w-full` | ✅ Fixed | Uses `layoutBlock` token for wrapper |
 | Link (other variants) | `inline-flex` | ✅ Safe | Atomic usage (button-like) |
 | NavLink | Inherits Link | ✅ Safe | Delegates to Link |
 | MenuItem | `flex` | ✅ Safe | Block-level flex |
 | DropdownItem | `w-full` | ✅ Safe | Block-level button |
-| Chip | `inline-flex` | ⚠️ Potential violation | Requires contract clarification |
+| Chip | `inline-flex` | ✅ Safe | Atomic component (contract clarified) |
 
 ---
 
@@ -220,13 +229,14 @@ This audit systematically reviewed all interactive components in FOUNDATION and 
 
 The following components are safe and do not require changes:
 
-1. **Link** (`variant='link'`) - ✅ Fixed (uses `layoutBlock`)
-2. **Link** (other variants) - ✅ Safe (atomic usage)
-3. **NavLink** - ✅ Safe (inherits Link's contract)
-4. **Button** - ✅ Safe (atomic component)
-5. **MenuItem** - ✅ Safe (uses `flex`, not `inline-flex`)
-6. **DropdownItem** - ✅ Safe (uses `w-full`, block-level)
-7. **Chip** - ✅ Safe (atomic component, contract clarified)
+1. **Link** (`variant='text'`, default) - ✅ Safe (atomic inline usage)
+2. **Link** (`variant='link'`) - ✅ Fixed (uses `layoutBlock` for wrapper)
+3. **Link** (other variants) - ✅ Safe (atomic usage)
+4. **NavLink** - ✅ Safe (inherits Link's contract)
+5. **Button** - ✅ Safe (atomic component)
+6. **MenuItem** - ✅ Safe (uses `flex`, not `inline-flex`)
+7. **DropdownItem** - ✅ Safe (uses `w-full`, block-level)
+8. **Chip** - ✅ Safe (atomic component, contract clarified)
 
 ---
 

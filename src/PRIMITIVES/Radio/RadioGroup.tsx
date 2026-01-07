@@ -10,6 +10,7 @@
 
 import * as React from "react";
 
+import { getSpacingCSSVar } from "@/FOUNDATION/lib/responsive-props";
 import { cn } from "@/FOUNDATION/lib/utils";
 
 import type { RadioGroupContextValue, RadioGroupProps } from "./RadioGroup.types";
@@ -48,7 +49,6 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       name: propName,
       orientation = "vertical",
       size,
-      className,
       children,
       ...props
     },
@@ -90,6 +90,12 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       [value, handleValueChange, name, orientation, size],
     );
 
+    // Use token-based spacing for gap (md = 16px from semanticSpacing)
+    // Uses inline styles with CSS variables for token-based spacing
+    const gapStyle: React.CSSProperties = {
+      gap: getSpacingCSSVar("md"),
+    };
+
     return (
       <RadioGroupContext.Provider value={contextValue}>
         <div
@@ -97,11 +103,10 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           role="radiogroup"
           aria-orientation={orientation ?? "vertical"}
           className={cn(
-            orientation === "horizontal"
-              ? "flex flex-row items-center gap-md"
-              : "flex flex-col gap-md",
-            className,
+            "flex",
+            orientation === "horizontal" ? "flex-row items-center" : "flex-col",
           )}
+          style={gapStyle}
           {...props}
         >
           {children}

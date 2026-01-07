@@ -6,11 +6,36 @@
  * Inset provides canonical inner spacing wrapper for any content without controlling
  * layout direction, alignment, or gap between children.
  *
+ * @enforcement TUNG_INSET_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL spacing values MUST be token-based (ResponsiveSpacing)
+ * - Inset uses token-based spacing values converted to CSS variables
+ * - NO raw Tailwind classes allowed (component uses inline styles with token values)
+ * - padding prop uses ResponsiveSpacing (token-based)
+ * - Spacing values are converted to CSS variables via getSpacingCSSVar
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - padding uses ResponsiveSpacing (token-based, converted to CSS variables)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Inset uses spacing token system exclusively
+ * - Layout Authority: Inset provides inner spacing only (no layout logic)
+ *
+ * Token-only contract:
+ * - padding accepts ResponsiveSpacing (token-based)
+ * - All spacing values are converted to CSS variables
+ * - No raw Tailwind classes are used (component uses inline styles with token values)
+ * - TypeScript enforces valid ResponsiveSpacing values at compile time
+ *
  * Inset IS: A thin layout primitive for inner spacing only
  * Inset IS NOT: A layout composition component (use Stack for gap), a variant-driven component,
  * or a replacement for Box (px/py) or Section (vertical padding)
- *
- * All spacing uses token-based values only.
  *
  * @example
  * ```tsx
@@ -49,14 +74,6 @@ export interface InsetProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Inset component - inner spacing wrapper primitive
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Does NOT duplicate Stack gap behavior
- * - ✅ Does NOT duplicate Box px/py props
- * - ✅ Does NOT duplicate Section vertical padding
- * - ✅ Motion: NO MOTION BY DESIGN (pure layout wrapper, no state/spatial changes)
  */
 const Inset = React.forwardRef<HTMLDivElement, InsetProps>(
   ({ padding, className, style, ...props }, ref) => {

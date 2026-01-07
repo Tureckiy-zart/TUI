@@ -83,7 +83,7 @@ export const Overview: Story = {
               </Box>
               <Flex gap={4} wrap="wrap">
                 <Link href="#">Default Link</Link>
-                <Link href="#" variant="link">
+                <Link href="#" variant="wrapper">
                   Underline Link
                 </Link>
                 <Link href="#" variant="ghost">

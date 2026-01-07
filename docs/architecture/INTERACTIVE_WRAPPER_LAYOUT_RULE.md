@@ -29,7 +29,7 @@ This document formally defines the **Interactive Wrapper Layout Contract** - a m
 
 **Problem Statement:** Interactive components using inline or inline-flex layout break grid/flex compositions when wrapping block-level content. This contract ensures proper layout behavior.
 
-**Reference Case:** Link component (`variant='link'`) was fixed to use block-level layout when wrapping Card components. See [LINK_BASELINE_REPORT.md](../reports/audit/LINK_BASELINE_REPORT.md) (lines 1529-1575).
+**Reference Case:** Link component uses variant-based layout: `variant='text'` (default, inline) for atomic text links, `variant='wrapper'` (block-level) for wrapper use cases. Variant `'link'` is deprecated (use `'wrapper'` instead). See [LINK_BASELINE_REPORT.md](../reports/audit/LINK_BASELINE_REPORT.md) (lines 1529-1575).
 
 ---
 
@@ -92,10 +92,15 @@ export const LINK_TOKENS = {
 const linkVariants = tokenCVA({
   variants: {
     variant: {
-      link: `${LINK_TOKENS.layoutBlock} ...`, // Block-level for wrapper
+      text: `${LINK_TOKENS.layout} ...`, // Inline-flex for atomic (default)
+      wrapper: `${LINK_TOKENS.layoutBlock} ...`, // Block-level for wrapper
+      link: `${LINK_TOKENS.layoutBlock} ...`, // Deprecated alias for wrapper
       primary: `${LINK_TOKENS.layout} ...`, // Inline-flex for atomic
       // ... other variants
     },
+  },
+  defaultVariants: {
+    variant: "text", // Default is inline for text links
   },
 });
 ```
@@ -103,12 +108,15 @@ const linkVariants = tokenCVA({
 **Usage:**
 ```tsx
 // ✅ CORRECT: Link wrapping Card (uses layoutBlock)
-<Link href="/event" variant="link">
+<Link href="/event" variant="wrapper">
   <Card>
     <CardHeader>Event Title</CardHeader>
     <CardBody>Event description</CardBody>
   </Card>
 </Link>
+
+// ✅ CORRECT: Link as atomic text link (uses inline-flex, default)
+<Link href="/about">About Us</Link>
 
 // ✅ CORRECT: Link as atomic button (uses inline-flex)
 <Link href="/signup" variant="primary" size="lg">
@@ -116,7 +124,10 @@ const linkVariants = tokenCVA({
 </Link>
 ```
 
-**Result:** Link with `variant='link'` stretches to full width in grid/flex containers, properly wrapping Card content.
+**Result:** 
+- Default Link (`variant='text'`) renders inline (inline-flex) for text and navigation links
+- Link with `variant='wrapper'` stretches to full width in grid/flex containers, properly wrapping Card content
+- `variant='link'` is deprecated (use `variant='wrapper'` instead) but remains functional for backward compatibility
 
 ---
 
@@ -155,6 +166,28 @@ const buttonVariants = tokenCVA({
 ```
 
 **Rationale:** Button is semantically an atomic action trigger, not a wrapper. It does not wrap Card/Panel/Box content.
+
+**Example: Link Component (Default Atomic)**
+
+```tsx
+// ✅ CORRECT: Default Link is atomic and inline
+<Link href="/about">About Us</Link> // Uses variant='text' (default), inline-flex
+
+// ✅ CORRECT: Explicit atomic variant
+<Link href="/about" variant="text">About Us</Link> // Explicit inline variant
+
+// ✅ CORRECT: Wrapper variant for layout wrapping
+<Link href="/event" variant="wrapper">
+  <Card>Event Content</Card>
+</Link> // Uses variant='wrapper', block-level
+
+// ⚠️ DEPRECATED: Use variant='wrapper' instead
+<Link href="/event" variant="link">
+  <Card>Event Content</Card>
+</Link> // Deprecated, but still functional
+```
+
+**Rationale:** Default Link (`variant='text'`) is semantically an atomic text link, not a wrapper. It renders inline (inline-flex) for proper text flow and navigation layouts. Use `variant='wrapper'` for layout wrapper use cases.
 
 ---
 
@@ -233,6 +266,8 @@ const componentVariants = tokenCVA({
       // Atomic variants use layout
       primary: `${COMPONENT_TOKENS.layout} ...`,
       secondary: `${COMPONENT_TOKENS.layout} ...`,
+      // Deprecated variants (if any) should be aliases
+      // link: `${COMPONENT_TOKENS.layoutBlock} ...`, // Deprecated alias for wrapper
     },
   },
 });

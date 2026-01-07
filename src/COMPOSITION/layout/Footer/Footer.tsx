@@ -8,10 +8,52 @@
  * Uses Stack internally for layout composition.
  * All styling uses tokens exclusively (no raw CSS values).
  *
+ * @enforcement TUNG_FOOTER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - Footer is a composition component that delegates layout styling to Stack component
+ * - ALL spacing values MUST be token-based (px, py props use ResponsiveSpacing)
+ * - ALL color values MUST be token-based (bg prop uses ColorValue)
+ * - Footer uses token-based spacing values for padding (xs | sm | md | lg | xl | 2xl)
+ * - Footer uses token-based color values for background (ColorValue)
+ * - NO raw Tailwind classes allowed (component uses token-based Tailwind classes)
+ *
+ * Composition Authority Rules:
+ * - Footer composes Stack component for layout
+ * - Footer composes Link component (Foundation) for social links
+ * - Styling is delegated to Stack and Link components
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Background color uses ColorValue (token-based)
+ * - Border color uses token-based border classes
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses ResponsiveSpacing (token-based)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
+ *
+ * Authority Compliance:
+ * - Layout Authority: Footer uses Stack component which handles layout via STACK_TOKENS
+ * - Spacing Authority: Footer uses spacing token system exclusively
+ * - Color Authority: Footer uses color token system exclusively
+ * - Typography Authority: Footer does not apply typography (delegated to Link component)
+ *
+ * Token-only contract:
+ * - Footer uses token-based spacing values for padding (ResponsiveSpacing)
+ * - Footer uses token-based color values for background (ColorValue)
+ * - All spacing and color values are converted to CSS variables or token-based Tailwind classes
+ * - Stack component handles token enforcement for layout
+ * - Link component handles token enforcement for social links
+ *
  * Footer uses slot-based layout API (left/center/right, px/py, border, bg).
  * This pattern is distinct from semantic components like PageHeader.
- *
- * @see docs/architecture/LAYOUT_API_RESOLUTION.md for API decisions
  */
 
 import * as React from "react";

@@ -46,6 +46,36 @@ describe("Textarea", () => {
       const textarea = container.querySelector("textarea");
       expect(textarea).toBeInTheDocument();
     });
+
+    it("applies distinct fontSize classes for each size", () => {
+      const { container: smContainer } = renderWithTheme(
+        <Textarea size="sm" placeholder="Small" />,
+      );
+      const { container: mdContainer } = renderWithTheme(
+        <Textarea size="md" placeholder="Medium" />,
+      );
+      const { container: lgContainer } = renderWithTheme(
+        <Textarea size="lg" placeholder="Large" />,
+      );
+
+      const smTextarea = smContainer.querySelector("textarea");
+      const mdTextarea = mdContainer.querySelector("textarea");
+      const lgTextarea = lgContainer.querySelector("textarea");
+
+      // Verify each size uses distinct base fontSize class
+      expect(smTextarea?.className).toContain("text-sm");
+      expect(mdTextarea?.className).toContain("text-base");
+      expect(lgTextarea?.className).toContain("text-lg");
+
+      // Verify no size aliasing for base classes (each size must be distinct)
+      // Note: md size uses responsive fontSize (text-base md:text-sm), so md:text-sm is expected
+      expect(smTextarea?.className).not.toContain("text-base");
+      expect(smTextarea?.className).not.toContain("text-lg");
+      // md has text-base as base and md:text-sm as responsive, so we only check base classes
+      expect(mdTextarea?.className).not.toContain(" text-lg");
+      expect(lgTextarea?.className).not.toContain("text-sm");
+      expect(lgTextarea?.className).not.toContain("text-base");
+    });
   });
 
   describe("States", () => {

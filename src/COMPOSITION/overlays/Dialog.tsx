@@ -6,6 +6,50 @@
  * Semantic modal wrapper built on Modal component.
  * Provides Dialog.Header, Dialog.Title, Dialog.Description, Dialog.Body, Dialog.Footer subcomponents.
  * Full A11y compliance with aria-labelledby and aria-describedby.
+ *
+ * @enforcement TUNG_DIALOG_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use OVERLAY_TOKENS, ICON_TOKENS, and TEXT_TOKENS
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL typography classes MUST use TEXT_TOKENS
+ * - ALL icon styling MUST use ICON_TOKENS
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - NO raw typography values allowed
+ * - Dialog composes Modal component (delegates overlay styling to Modal)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from OVERLAY_TOKENS for overlay styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography classes MUST use TEXT_TOKENS
+ * - Typography is applied via Heading and Text components
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Icon Authority Rules:
+ * - ALL icon styling MUST use ICON_TOKENS
+ * - Icon sizes and colors come from ICON_TOKENS
+ * - NO raw Tailwind icon classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Dialog uses color token system exclusively via OVERLAY_TOKENS
+ * - Typography Authority: Dialog uses typography token system exclusively via TEXT_TOKENS
+ * - Icon Authority: Dialog uses icon token system exclusively via ICON_TOKENS
+ * - Layout Authority: Dialog composes Modal, Row, and other layout components
+ *
+ * Token-only contract:
+ * - All styling is defined in OVERLAY_TOKENS (src/FOUNDATION/tokens/components/overlay.ts)
+ * - Typography uses TEXT_TOKENS (src/FOUNDATION/tokens/components/text.ts)
+ * - Icons use ICON_TOKENS (src/FOUNDATION/tokens/components/icon.ts)
+ * - Dialog composes Modal component which handles overlay styling
+ * - No raw Tailwind color/typography classes are allowed
+ * - TypeScript enforces valid token values at compile time
  */
 
 import * as React from "react";

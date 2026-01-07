@@ -18,7 +18,49 @@ import {
  *
  * The switch consists of a track (container) and handle (thumb) that slides within the track.
  *
- * Foundation Enforcement: This component excludes className and style props (token-driven styling only).
+ * @enforcement TUNG_SWITCH_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in SWITCH_TOKENS
+ * - Switch is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Switch MUST react to token changes - changing tokens/colors.ts MUST change Switch appearance
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in SWITCH_TOKENS
+ * - Switch is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Switch MUST react to token changes - changing tokens/colors.ts MUST change Switch appearance
+ *
+ * Handle Color Rules:
+ * - Handle colors MUST come from SWITCH_TOKENS.variant[].handle or SWITCH_TOKENS.state.handle
+ * - NO raw Tailwind color classes in handle rendering logic
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Switch uses MOTION_TOKENS.transition for transitions
+ * - Radius Authority: Switch references componentRadius.switch for border radius
+ * - State Authority: Switch uses State Matrix CSS variables for all states
+ * - Interaction Authority: Switch follows Interaction Authority Contract for state priority
+ *
+ * Token-only contract:
+ * - All colors are defined in SWITCH_TOKENS (src/FOUNDATION/tokens/components/switch.ts)
+ * - SWITCH_TOKENS reference foundation tokens from tokens/colors.ts
+ * - No raw Tailwind color classes (bg-red-500, text-blue-600, etc.) are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ *
+ * className and style props:
+ * - className and style are forbidden from public API - only CVA output is used
+ * - Foundation Enforcement is FINAL/APPLIED and LOCKED
  *
  * @example
  * ```tsx
@@ -120,11 +162,13 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const trackClasses = switchTrackVariants({ variant, size, state: effectiveState });
 
     // Compute handle classes
+    // Convert boolean checked to string for CVA compatibility
+    const checkedValue: "true" | "false" = checked ? "true" : "false";
     const handleClasses = [
       switchHandleVariants({
-        size,
-        checked: ((checked ?? false) ? "true" : "false") as unknown as boolean,
-      }),
+        size: size || "md",
+        checked: checkedValue,
+      } as unknown as Parameters<typeof switchHandleVariants>[0]),
       switchHandleStateVariants({
         variant: variant || "primary",
         state: effectiveState,

@@ -45,6 +45,55 @@
  * Radix-based modal component with token-driven styling.
  * All behavior (focus trap, keyboard navigation, a11y, portal) is handled by Radix Dialog.
  * Tenerife UI provides visual styling through tokens only.
+ *
+ * @enforcement TUNG_MODAL_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use MODAL_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Size variants use MODAL_TOKENS.size
+ * - Width and height variants use MODAL_TOKENS.width and MODAL_TOKENS.height
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from MODAL_TOKENS for content styling
+ * - Backdrop colors use MODAL_TOKENS for overlay styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses MODAL_TOKENS.content.padding
+ * - Footer alignment uses MODAL_TOKENS.footer.align
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses MODAL_TOKENS.content.radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Modal uses color token system exclusively via MODAL_TOKENS
+ * - Spacing Authority: Modal uses spacing token system exclusively via MODAL_TOKENS
+ * - Radius Authority: Modal uses radius token system exclusively via MODAL_TOKENS
+ * - Elevation Authority: Modal uses shadow tokens via MODAL_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in MODAL_TOKENS (src/FOUNDATION/tokens/components/modal.ts)
+ * - MODAL_TOKENS reference foundation tokens from spacing, radius, color, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid size/width/height values at compile time
  */
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";

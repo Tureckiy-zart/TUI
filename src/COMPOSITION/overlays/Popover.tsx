@@ -1,5 +1,56 @@
 "use client";
 
+/**
+ * Popover Component
+ *
+ * @enforcement TUNG_POPOVER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use POPOVER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Size variants use POPOVER_TOKENS.content.width and padding
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from POPOVER_TOKENS.content for content styling
+ * - Variant colors use semantic Tailwind classes (border-secondary/50, text-accent-foreground, etc.)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses POPOVER_TOKENS.content.padding[size]
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses POPOVER_TOKENS.content.radius[size]
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Popover uses color token system exclusively via POPOVER_TOKENS
+ * - Spacing Authority: Popover uses spacing token system exclusively via POPOVER_TOKENS
+ * - Radius Authority: Popover uses radius token system exclusively via POPOVER_TOKENS
+ * - Elevation Authority: Popover uses shadow tokens via POPOVER_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in POPOVER_TOKENS (src/FOUNDATION/tokens/components/popover.ts)
+ * - POPOVER_TOKENS reference foundation tokens from spacing, radius, color, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ */
+
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as React from "react";
 

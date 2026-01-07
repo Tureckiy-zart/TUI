@@ -35,6 +35,34 @@ export interface NavRootProps extends React.HTMLAttributes<HTMLElement> {
  * while remaining a pure composition wrapper with no assumptions about navigation
  * structure or styling.
  *
+ * @enforcement TUNG_NAVROOT_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - NavRoot is a pure structural component with no direct styling
+ * - ALL styling is delegated to child components (NavLink, NavList, NavItem, etc.)
+ * - NavRoot does NOT use tokens directly (no visual representation)
+ * - Child components handle all token-based styling via NAVIGATION_TOKENS
+ * - NO raw Tailwind classes allowed (component has no styling)
+ *
+ * Composition Authority Rules:
+ * - NavRoot composes semantic HTML element (`<nav>`) only
+ * - Styling is delegated to child navigation components
+ * - NavRoot provides semantic boundary and accessibility, children provide styling
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: NavRoot provides semantic structure only, styling delegated to children
+ * - Color Authority: NavRoot does not apply colors (delegated to children)
+ * - Typography Authority: NavRoot does not apply typography (delegated to children)
+ * - Spacing Authority: NavRoot does not apply spacing (delegated to children)
+ * - Accessibility Authority: NavRoot enforces required aria-label for accessibility
+ *
+ * Token-only contract:
+ * - NavRoot has no token usage (pure structural component)
+ * - All styling occurs through child components which use NAVIGATION_TOKENS
+ * - Child components (NavLink, NavList, NavItem, NavText, NavSeparator) handle token enforcement
+ *
  * **What NavRoot IS:**
  * - Semantic navigation root
  * - Accessibility boundary (enforces aria-label)

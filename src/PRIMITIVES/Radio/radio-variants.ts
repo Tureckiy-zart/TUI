@@ -13,12 +13,50 @@ export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type RadioState = "default" | "checked" | "disabled" | "error";
 
 /**
- * Radio Variants
+ * Radio CVA Variants
  *
- * tokenCVA-based variant system for Radio component.
- * Supports variants (primary, secondary, outline, ghost, destructive),
- * sizes (xs, sm, md, lg, xl), and states (default, checked, disabled, error).
- * All styling uses token-based values with CSS variable references.
+ * @enforcement Token-driven CVA system using tokenCVA
+ * @enforcement TUNG_RADIO_CVA_ENFORCEMENT
+ *
+ * CVA Enforcement Rules:
+ * - CVA may ONLY reference token-derived classes
+ * - NO raw Tailwind color utilities (bg-red-*, text-blue-*, etc.)
+ * - NO direct hover/active utilities outside State Matrix
+ * - NO inline conditional class concatenation
+ * - NO per-variant Tailwind overrides
+ * - Structural utilities (flex, items-center, etc.) are ALLOWED
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - ALL color logic MUST be centralized in RADIO_TOKENS
+ * - Radio is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
+ * - Radio MUST react to token changes - changing tokens/colors.ts MUST change Radio appearance
+ *
+ * State Matrix Authority Rules:
+ * - ALL state classes (disabled, error) MUST use State Matrix CSS variables
+ * - NO raw Tailwind state utilities (disabled:bg-gray-500, aria-invalid:border-red-500)
+ * - States react to Color Authority changes automatically through State Matrix
+ *
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Motion Authority: Radio uses MOTION_TOKENS.transition for transitions
+ * - Radius Authority: Radio references RADIO_TOKENS.size[].radius for border radius
+ * - State Authority: Radio uses State Matrix CSS variables for all states
+ * - Color Authority: Radio uses CSS variable references (--foreground, --primary, --destructive, etc.)
+ *
+ * Token-only contract:
+ * - All colors are defined in RADIO_TOKENS (src/FOUNDATION/tokens/components/radio.ts)
+ * - RADIO_TOKENS reference foundation tokens from tokens/colors.ts
+ * - No raw Tailwind color classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size/state values at compile time
  *
  * Uses tokenCVA (not cva) because component has token-driven axes (variant, size, state).
  * Per CVA Usage Decision Matrix RULE 1: tokenCVA is REQUIRED for token-driven axes.

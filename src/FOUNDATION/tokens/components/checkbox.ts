@@ -128,8 +128,11 @@ export const CHECKBOX_TOKENS = {
     },
     stroke: "stroke-2", // 2px stroke width for checkmark
     color: {
-      default: "text-[hsl(var(--tm-primary-foreground))]", // Default checkmark color
+      default: "text-[hsl(var(--tm-primary-foreground))]", // Default checkmark color (for variants with colored background)
       disabled: "text-[hsl(var(--muted-foreground))]", // Disabled checkmark color
+      // For outline/ghost variants with transparent background, use primary color for visibility
+      checkedOutline: "text-[hsl(var(--tm-primary))]", // Checked state icon color for outline variant
+      checkedGhost: "text-[hsl(var(--tm-primary))]", // Checked state icon color for ghost variant
     },
   } as const,
 
@@ -140,7 +143,10 @@ export const CHECKBOX_TOKENS = {
   indeterminate: {
     width: "w-2", // Width of indeterminate indicator
     height: "h-0.5", // Height of indeterminate indicator (horizontal line)
-    color: "bg-[hsl(var(--tm-primary-foreground))]", // Color of indeterminate indicator
+    color: "bg-[hsl(var(--tm-primary-foreground))]", // Color of indeterminate indicator (for variants with colored background)
+    // For outline/ghost variants with transparent background, use primary color for visibility
+    colorOutline: "bg-[hsl(var(--tm-primary))]", // Indeterminate indicator color for outline variant
+    colorGhost: "bg-[hsl(var(--tm-primary))]", // Indeterminate indicator color for ghost variant
   } as const,
 
   /**
