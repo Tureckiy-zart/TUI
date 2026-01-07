@@ -11,6 +11,81 @@
  * All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal)
  * is handled by Radix Toast primitives. Tenerife UI provides visual styling through tokens only.
  *
+ * @enforcement TUNG_TOAST_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use TOAST_TOKENS and MOTION_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - ALL motion values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (toastVariants)
+ * - Variant styling uses TOAST_TOKENS.surface, radius, shadow, spacing
+ * - Motion uses MOTION_TOKENS.transition and TOAST_TOKENS.animation
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from TOAST_TOKENS.surface for variant styling
+ * - Surface colors use TOAST_TOKENS.surface (default, success, warning, error)
+ * - Dismiss button colors use TOAST_TOKENS.dismiss.colors
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses TOAST_TOKENS.spacing.padding
+ * - Gap uses TOAST_TOKENS.spacing.gap
+ * - NO raw Tailwind spacing classes (p-4, gap-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Title typography uses TOAST_TOKENS.title (fontSize, fontWeight)
+ * - Description typography uses TOAST_TOKENS.description (fontSize, opacity)
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses TOAST_TOKENS.radius.default
+ * - Dismiss button radius uses TOAST_TOKENS.dismiss.radius
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Elevation Authority Rules:
+ * - ALL shadow values MUST come from shadow token system
+ * - Shadows use TOAST_TOKENS.shadow.default
+ * - NO raw Tailwind shadow classes allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST come from motion token system
+ * - Transitions use MOTION_TOKENS.transition
+ * - Animations use TOAST_TOKENS.animation (radix.root, radix.state)
+ * - NO raw Tailwind motion classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/MOTION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Toast uses color token system exclusively via TOAST_TOKENS
+ * - Spacing Authority: Toast uses spacing token system exclusively via TOAST_TOKENS
+ * - Typography Authority: Toast uses typography token system exclusively via TOAST_TOKENS
+ * - Radius Authority: Toast uses radius token system exclusively via TOAST_TOKENS
+ * - Elevation Authority: Toast uses shadow tokens via TOAST_TOKENS
+ * - Motion Authority: Toast uses motion tokens via MOTION_TOKENS and TOAST_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in TOAST_TOKENS (src/FOUNDATION/tokens/components/toast.ts)
+ * - Motion styling is defined in MOTION_TOKENS (src/FOUNDATION/tokens/components/motion.ts)
+ * - TOAST_TOKENS and MOTION_TOKENS reference foundation tokens from all relevant systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius/shadow/motion classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant values at compile time
+ *
  * Toast is a stateless UI renderer. It does not manage notification logic, timing, queues, or imperative APIs.
  * All state must be externally controlled via open/onOpenChange props.
  *

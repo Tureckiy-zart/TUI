@@ -57,6 +57,59 @@
  * Radix-based tabs component with token-driven styling.
  * All behavior (keyboard navigation, focus management, a11y) is handled by Radix.
  * Tenerife UI provides visual styling through tokens only.
+ *
+ * @enforcement TUNG_TABS_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use TABS_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (tabsVariants)
+ * - Variant styling uses TABS_TOKENS (underline, pill, segmented)
+ * - Size styling uses TABS_TOKENS (sm, md, lg)
+ * - Tone styling uses TABS_TOKENS (neutral, primary)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from TABS_TOKENS for variant, size, and tone styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing uses TABS_TOKENS (padding, gap)
+ * - NO raw Tailwind spacing classes (p-4, gap-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography uses TABS_TOKENS (fontSize, fontWeight)
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses TABS_TOKENS (borderRadius)
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Tabs uses color token system exclusively via TABS_TOKENS
+ * - Spacing Authority: Tabs uses spacing token system exclusively via TABS_TOKENS
+ * - Typography Authority: Tabs uses typography token system exclusively via TABS_TOKENS
+ * - Radius Authority: Tabs uses radius token system exclusively via TABS_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in TABS_TOKENS (src/FOUNDATION/tokens/components/tabs.ts)
+ * - TABS_TOKENS reference foundation tokens from spacing, color, typography, and radius systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size/tone values at compile time
  */
 
 import * as TabsPrimitive from "@radix-ui/react-tabs";

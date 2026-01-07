@@ -60,6 +60,79 @@ describe("Link", () => {
     });
   });
 
+  describe("Layout Behavior", () => {
+    it("renders default Link as inline (inline-flex)", () => {
+      const { container } = renderWithTheme(<Link href="/test">Default Link</Link>);
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      // Default variant='text' should use inline-flex layout
+      expect(link?.className).toContain("inline-flex");
+      expect(link?.className).not.toContain("block");
+      expect(link?.className).not.toContain("w-full");
+    });
+
+    it("renders variant='text' as inline (inline-flex)", () => {
+      const { container } = renderWithTheme(
+        <Link href="/test" variant="text">
+          Text Link
+        </Link>,
+      );
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      // variant='text' should use inline-flex layout
+      expect(link?.className).toContain("inline-flex");
+      expect(link?.className).not.toContain("block");
+      expect(link?.className).not.toContain("w-full");
+    });
+
+    it("renders variant='wrapper' as block-level (block w-full)", () => {
+      const { container } = renderWithTheme(
+        <Link href="/test" variant="wrapper">
+          Wrapper Link
+        </Link>,
+      );
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      // variant='wrapper' should use block-level layout for wrapper use cases
+      expect(link?.className).toContain("block");
+      expect(link?.className).toContain("w-full");
+      expect(link?.className).not.toContain("inline-flex");
+    });
+
+    it("renders variant='link' as block-level (deprecated alias for wrapper)", () => {
+      const { container } = renderWithTheme(
+        <Link href="/test" variant="link">
+          Wrapper Link
+        </Link>,
+      );
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      // variant='link' (deprecated) should use block-level layout, identical to wrapper
+      expect(link?.className).toContain("block");
+      expect(link?.className).toContain("w-full");
+      expect(link?.className).not.toContain("inline-flex");
+    });
+
+    it("variant='link' behaves identically to variant='wrapper'", () => {
+      const { container: containerLink } = renderWithTheme(
+        <Link href="/test" variant="link">
+          Deprecated Link
+        </Link>,
+      );
+      const { container: containerWrapper } = renderWithTheme(
+        <Link href="/test" variant="wrapper">
+          Wrapper Link
+        </Link>,
+      );
+      const linkElement = containerLink.querySelector("a");
+      const wrapperElement = containerWrapper.querySelector("a");
+      expect(linkElement).toBeInTheDocument();
+      expect(wrapperElement).toBeInTheDocument();
+      // Both should have identical class names (same layout tokens)
+      expect(linkElement?.className).toBe(wrapperElement?.className);
+    });
+  });
+
   describe("Variants", () => {
     it("accepts and renders primary variant", () => {
       renderWithTheme(
@@ -111,9 +184,39 @@ describe("Link", () => {
       expect(link).toBeInTheDocument();
     });
 
-    it("accepts and renders link variant (default)", () => {
-      renderWithTheme(<Link href="#">Link</Link>);
-      const link = screen.getByRole("link", { name: /link/i });
+    it("accepts and renders text variant (default)", () => {
+      renderWithTheme(<Link href="#">Text</Link>);
+      const link = screen.getByRole("link", { name: /text/i });
+      expect(link).toBeInTheDocument();
+    });
+
+    it("accepts and renders text variant explicitly", () => {
+      renderWithTheme(
+        <Link href="#" variant="text">
+          Text Link
+        </Link>,
+      );
+      const link = screen.getByRole("link", { name: /text link/i });
+      expect(link).toBeInTheDocument();
+    });
+
+    it("accepts and renders wrapper variant", () => {
+      renderWithTheme(
+        <Link href="#" variant="wrapper">
+          Wrapper Variant
+        </Link>,
+      );
+      const link = screen.getByRole("link", { name: /wrapper variant/i });
+      expect(link).toBeInTheDocument();
+    });
+
+    it("accepts and renders link variant (deprecated)", () => {
+      renderWithTheme(
+        <Link href="#" variant="link">
+          Link Variant
+        </Link>,
+      );
+      const link = screen.getByRole("link", { name: /link variant/i });
       expect(link).toBeInTheDocument();
     });
 
@@ -211,7 +314,9 @@ describe("Link", () => {
         "accent",
         "outline",
         "ghost",
+        "text",
         "link",
+        "wrapper",
         "destructive",
       ] as const;
       variants.forEach((variant) => {
@@ -280,6 +385,41 @@ describe("Link", () => {
       expect(link).toBeInTheDocument();
       // Verify size classes are applied (check for lg size classes)
       expect(link?.className).toContain("h-10"); // lg height
+    });
+
+    it("applies distinct fontSize classes for each size", () => {
+      const { container: smContainer } = renderWithTheme(
+        <Link href="/test" size="sm">
+          Small Link
+        </Link>,
+      );
+      const { container: mdContainer } = renderWithTheme(
+        <Link href="/test" size="md">
+          Medium Link
+        </Link>,
+      );
+      const { container: lgContainer } = renderWithTheme(
+        <Link href="/test" size="lg">
+          Large Link
+        </Link>,
+      );
+
+      const smLink = smContainer.querySelector("a");
+      const mdLink = mdContainer.querySelector("a");
+      const lgLink = lgContainer.querySelector("a");
+
+      // Verify each size uses distinct fontSize class
+      expect(smLink?.className).toContain("text-sm");
+      expect(mdLink?.className).toContain("text-base");
+      expect(lgLink?.className).toContain("text-lg");
+
+      // Verify no size aliasing (each size must be distinct)
+      expect(smLink?.className).not.toContain("text-base");
+      expect(smLink?.className).not.toContain("text-lg");
+      expect(mdLink?.className).not.toContain("text-sm");
+      expect(mdLink?.className).not.toContain("text-lg");
+      expect(lgLink?.className).not.toContain("text-sm");
+      expect(lgLink?.className).not.toContain("text-base");
     });
 
     it("prevents nested anchor elements", () => {
@@ -517,8 +657,26 @@ describe("Link", () => {
 
     it("maintains variant and size API contract", () => {
       const variants: Array<
-        "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
-      > = ["primary", "secondary", "accent", "outline", "ghost", "link", "destructive"];
+        | "primary"
+        | "secondary"
+        | "accent"
+        | "outline"
+        | "ghost"
+        | "text"
+        | "link"
+        | "wrapper"
+        | "destructive"
+      > = [
+        "primary",
+        "secondary",
+        "accent",
+        "outline",
+        "ghost",
+        "text",
+        "link",
+        "wrapper",
+        "destructive",
+      ];
       const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
 
       variants.forEach((variant) => {

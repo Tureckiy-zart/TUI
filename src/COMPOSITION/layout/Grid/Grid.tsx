@@ -10,7 +10,41 @@
  * Use Grid for two-dimensional layouts that require precise control over
  * both rows and columns. For one-dimensional layouts, prefer Stack or Flex.
  *
- * All spacing values use tokens only.
+ * @enforcement TUNG_GRID_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL spacing values MUST be token-based (ResponsiveSpacing)
+ * - Gap prop accepts ResponsiveSpacing (semantic spacing tokens: xs, sm, md, lg, xl, etc.)
+ * - NO raw CSS spacing values allowed
+ * - NO raw numeric values allowed
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - Structural utilities (grid, grid-cols-*, grid-rows-*, etc.) are ALLOWED
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Gap prop accepts ResponsiveSpacing (semantic spacing tokens: xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - NO raw Tailwind gap classes (gap-4, gap-md, etc.) allowed
+ *
+ * Layout Authority Rules:
+ * - Grid uses CSS Grid layout system
+ * - Column and row definitions use Tailwind grid utilities (grid-cols-*, grid-rows-*)
+ * - Alignment and justification use Tailwind flex utilities (items-*, justify-*)
+ * - Flow direction uses Tailwind grid-flow utilities
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: Grid uses spacing token system exclusively for gap via CSS variables
+ * - Layout Authority: Grid follows CSS Grid layout composition patterns
+ *
+ * Token-only contract:
+ * - All spacing values are defined in spacing token system (src/FOUNDATION/tokens/spacing.ts)
+ * - Spacing tokens reference foundation spacing scale (8px grid system)
+ * - Gap is applied via inline styles using CSS variables (--spacing-*)
+ * - No raw CSS spacing values are allowed
+ * - TypeScript enforces valid spacing token values at compile time
  *
  * @example
  * ```tsx

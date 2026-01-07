@@ -5,6 +5,70 @@
  *
  * Token-driven pagination component with smart page range calculation.
  * Supports keyboard navigation and full accessibility.
+ *
+ * @enforcement TUNG_PAGINATION_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use NAVIGATION_TOKENS, ICON_TOKENS, and MOTION_TOKENS
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - ALL icon styling MUST use ICON_TOKENS
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Spacing uses NAVIGATION_TOKENS.spacing
+ * - Typography uses NAVIGATION_TOKENS.typography
+ * - States use NAVIGATION_TOKENS.states
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from NAVIGATION_TOKENS.states for button styling
+ * - Default state uses NAVIGATION_TOKENS.states.default
+ * - Selected state uses NAVIGATION_TOKENS.states.selected
+ * - Disabled state uses NAVIGATION_TOKENS.states.disabled
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Gap uses NAVIGATION_TOKENS.spacing.listGap
+ * - NO raw Tailwind spacing classes (gap-4, gap-md, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography uses NAVIGATION_TOKENS.typography
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - Transitions use MOTION_TOKENS.transition.colors
+ * - NO raw motion values allowed
+ *
+ * Icon Authority Rules:
+ * - ALL icon styling MUST use ICON_TOKENS
+ * - Icon sizes use ICON_TOKENS.sizes
+ * - NO raw Tailwind icon classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Pagination uses color token system exclusively via NAVIGATION_TOKENS
+ * - Spacing Authority: Pagination uses spacing token system exclusively via NAVIGATION_TOKENS
+ * - Typography Authority: Pagination uses typography token system exclusively via NAVIGATION_TOKENS
+ * - Motion Authority: Pagination uses motion tokens for transitions
+ * - Icon Authority: Pagination uses icon token system exclusively via ICON_TOKENS
+ * - Layout Authority: Pagination composes ListItem and other layout components
+ *
+ * Token-only contract:
+ * - All styling is defined in NAVIGATION_TOKENS (src/FOUNDATION/tokens/components/navigation.ts)
+ * - Icon styling uses ICON_TOKENS (src/FOUNDATION/tokens/components/icon.ts)
+ * - Motion uses MOTION_TOKENS (src/FOUNDATION/tokens/components/motion.ts)
+ * - NAVIGATION_TOKENS reference foundation tokens from spacing, color, and typography systems
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - TypeScript enforces valid token values at compile time
  */
 
 import { ChevronLeft, ChevronRight } from "lucide-react";

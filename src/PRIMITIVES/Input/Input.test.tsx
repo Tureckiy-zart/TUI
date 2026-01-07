@@ -41,6 +41,30 @@ describe("Input", () => {
       const input = container.querySelector("input");
       expect(input).toBeInTheDocument();
     });
+
+    it("applies distinct fontSize classes for each size", () => {
+      const { container: smContainer } = renderWithTheme(<Input size="sm" placeholder="Small" />);
+      const { container: mdContainer } = renderWithTheme(<Input size="md" placeholder="Medium" />);
+      const { container: lgContainer } = renderWithTheme(<Input size="lg" placeholder="Large" />);
+
+      const smInput = smContainer.querySelector("input");
+      const mdInput = mdContainer.querySelector("input");
+      const lgInput = lgContainer.querySelector("input");
+
+      // Verify each size uses distinct base fontSize class
+      expect(smInput?.className).toContain("text-sm");
+      expect(mdInput?.className).toContain("text-base");
+      expect(lgInput?.className).toContain("text-lg");
+
+      // Verify no size aliasing for base classes (each size must be distinct)
+      // Note: md size uses responsive fontSize (text-base md:text-sm), so md:text-sm is expected
+      expect(smInput?.className).not.toContain("text-base");
+      expect(smInput?.className).not.toContain("text-lg");
+      // md has text-base as base and md:text-sm as responsive, so we only check base classes
+      expect(mdInput?.className).not.toContain(" text-lg");
+      expect(lgInput?.className).not.toContain("text-sm");
+      expect(lgInput?.className).not.toContain("text-base");
+    });
   });
 
   describe("States", () => {

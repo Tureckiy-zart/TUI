@@ -9,6 +9,36 @@
  * This component uses the standard visually-hidden CSS pattern to hide content
  * from visual users while maintaining accessibility for assistive technologies.
  *
+ * @enforcement TUNG_VISUALLYHIDDEN_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - VisuallyHidden INTENTIONALLY does NOT use tokens (by design)
+ * - Component uses inline CSS styles for accessibility-specific hiding
+ * - Inline styles are required for the visually-hidden pattern (position, clip-path, etc.)
+ * - NO visual tokens are used (component has no visual representation)
+ * - NO Tailwind classes are used (uses inline styles only)
+ * - This is an exception to token enforcement for accessibility reasons
+ *
+ * Accessibility Authority Rules:
+ * - Component uses standard visually-hidden CSS pattern
+ * - Inline styles are required for cross-browser compatibility
+ * - Component is intentionally non-visual (no color, spacing, typography tokens)
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: VisuallyHidden uses inline CSS for structural positioning only
+ * - Color Authority: VisuallyHidden does not apply colors (intentionally non-visual)
+ * - Typography Authority: VisuallyHidden does not apply typography (intentionally non-visual)
+ * - Spacing Authority: VisuallyHidden does not apply spacing (intentionally non-visual)
+ * - Accessibility Authority: VisuallyHidden provides screen reader accessibility via inline CSS
+ *
+ * Token-only contract:
+ * - VisuallyHidden intentionally does NOT use tokens (exception for accessibility)
+ * - Component uses inline CSS styles for the visually-hidden pattern
+ * - This is a deliberate exception to token enforcement for accessibility requirements
+ * - Inline styles are required for cross-browser compatibility of the hiding pattern
+ *
  * @example
  * ```tsx
  * // Basic usage - screen reader only text
@@ -65,14 +95,6 @@ export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElemen
  *
  * Provides accessible names for interactive elements without visual display.
  * Uses standard visually-hidden CSS pattern (position absolute, 1px size, clip-path).
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses structural CSS properties only (no visual tokens - component intentionally non-visual)
- * - ✅ NO MOTION BY DESIGN (component is static, no state/spatial changes)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Supports Radix Slot pattern via asChild prop
- * - ✅ Does NOT duplicate Foundation functionality
- * - ✅ Does NOT use Tailwind visual utilities (uses inline styles)
  */
 const VisuallyHidden = React.forwardRef<HTMLSpanElement, VisuallyHiddenProps>(
   ({ asChild = false, style, ...props }, ref) => {

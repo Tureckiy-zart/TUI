@@ -126,8 +126,9 @@ A component is **✅ ALIGNED** when it:
 **Layer:** PRIMITIVES  
 **Class:** Interactive  
 **Size Keys:** `sm`, `md`, `lg`  
-**Variant Keys:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`  
-**Defaults:** `variant="link"`, `size="md"`  
+**Variant Keys:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `text`, `link`, `destructive`  
+**Defaults:** `variant="text"` (inline), `size="md"`  
+**Note:** Variant `link` is reserved for wrapper use cases (block-level layout)  
 **States:** `disabled`  
 **Special Modes/Props:** None  
 **Storybook Coverage:**

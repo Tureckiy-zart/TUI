@@ -44,9 +44,9 @@
  * @audit docs/reports/audit/TEXT_BASELINE_REPORT.md
  */
 
-import { cva } from "class-variance-authority";
 import * as React from "react";
 
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
 /**
@@ -110,7 +110,8 @@ const DEFAULT_SIZE = "md" as const;
 const DEFAULT_WEIGHT = "normal" as const;
 const DEFAULT_TONE = "default" as const;
 
-const textVariants = cva("text-foreground", {
+const textVariants = tokenCVA({
+  base: "text-foreground",
   variants: {
     size: {
       xs: TEXT_TOKENS.fontSize.xs,

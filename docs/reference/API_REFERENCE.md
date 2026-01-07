@@ -192,12 +192,31 @@ Foundation UI components built on shadcn/ui primitives with Tenerife branding an
 - **Types:** `InputProps`, `inputVariants`
 - **Variants:** `default`, `filled`, `outline`
 - **Sizes:** `sm`, `md`, `lg`
+- **Size Mappings:**
+  | Size | Font Size Token | Visual Size |
+  |------|-----------------|-------------|
+  | sm   | `text-sm`       | ~14px       |
+  | md   | `text-base`     | ~16px       |
+  | lg   | `text-lg`       | ~18px       |
+  
+  **Note:** Each size maps to a distinct visual font size per [Typography Authority](../architecture/TYPOGRAPHY_AUTHORITY.md). No size aliasing.
 - **States:** `success`, `error`, `warning`, `disabled`
 
 ### Textarea
 
 - **Component:** `Textarea`
 - **Types:** `TextareaProps`, `textareaVariants`
+- **Sizes:** `sm`, `md`, `lg` (public API), `xs`, `xl` (tokens available)
+- **Size Mappings:**
+  | Size | Font Size Token | Visual Size |
+  |------|-----------------|-------------|
+  | xs   | `text-xs`       | ~12px       |
+  | sm   | `text-sm`       | ~14px       |
+  | md   | `text-base`     | ~16px       |
+  | lg   | `text-lg`       | ~18px       |
+  | xl   | `text-xl`       | ~20px       |
+  
+  **Note:** Each size maps to a distinct visual font size per [Typography Authority](../architecture/TYPOGRAPHY_AUTHORITY.md). No size aliasing.
 - **Features:** Auto-resizing, validation states
 
 ### Checkbox
@@ -261,9 +280,20 @@ Foundation UI components built on shadcn/ui primitives with Tenerife branding an
 - **Status:** 🔒 **FOUNDATION LOCKED** - See [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md)
 - **Component:** `Link`
 - **Types:** `LinkProps`, `linkVariants`
-- **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `link`, `destructive`
-- **Sizes:** `xs`, `sm`, `md`, `lg`, `xl`
-- **Features:** Icon support (leftIcon, rightIcon), asChild support, focus-visible ring
+- **Variants:** `primary`, `secondary`, `accent`, `outline`, `ghost`, `text` (default, inline), `wrapper` (layout wrapper, block-level), `link` (deprecated alias for wrapper), `destructive`
+- **Sizes:** `sm`, `md`, `lg` (public API), `xs`, `xl` (tokens available)
+- **Size Mappings:**
+  | Size | Font Size Token | Visual Size |
+  |------|-----------------|-------------|
+  | xs   | `text-xs`       | ~12px       |
+  | sm   | `text-sm`       | ~14px       |
+  | md   | `text-base`     | ~16px       |
+  | lg   | `text-lg`       | ~18px       |
+  | xl   | `text-xl`       | ~20px       |
+  
+  **Note:** Each size maps to a distinct visual font size per [Typography Authority](../architecture/TYPOGRAPHY_AUTHORITY.md). No size aliasing.
+- **Features:** Icon support (leftIcon, rightIcon), focus-visible ring
+- **Note:** Default variant `text` renders inline (inline-flex) for text and navigation links. Variant `wrapper` is for layout wrapper use cases (block-level, wraps Card/Panel/Box). Variant `link` is deprecated (use `wrapper` instead).
 
 ### Badge
 
@@ -524,6 +554,28 @@ Radix-based select component with token-driven styling.
 - `SelectLabel` - Select label
 - `SelectGroup` - Select option group
 - `SelectSeparator` - Select separator
+- **Sizes:** `xs`, `sm`, `md`, `lg`, `xl` (tokens available)
+- **Size Mappings:**
+  
+  **Trigger:**
+  | Size | Font Size Token | Visual Size |
+  |------|-----------------|-------------|
+  | xs   | `text-xs`       | ~12px       |
+  | sm   | `text-sm`       | ~14px       |
+  | md   | `text-base`     | ~16px       |
+  | lg   | `text-lg`       | ~18px       |
+  | xl   | `text-xl`       | ~20px       |
+  
+  **Item & Label:**
+  | Size | Font Size Token | Visual Size |
+  |------|-----------------|-------------|
+  | xs   | `text-xs`       | ~12px       |
+  | sm   | `text-sm`       | ~14px       |
+  | md   | `text-base`     | ~16px       |
+  | lg   | `text-lg`       | ~18px       |
+  | xl   | `text-xl`       | ~20px       |
+  
+  **Note:** Each size maps to a distinct visual font size per [Typography Authority](../architecture/TYPOGRAPHY_AUTHORITY.md). No size aliasing.
 
 **Types:** `SelectRootProps`, `SelectTriggerProps`, `SelectValueProps`, `SelectIconProps`, `SelectContentProps`, `SelectViewportProps`, `SelectItemProps`, `SelectItemTextProps`, `SelectItemIndicatorProps`, `SelectLabelProps`, `SelectGroupProps`, `SelectSeparatorProps`, `SelectSize`, `SelectState`, `SelectVariant`, `SelectWidth`
 

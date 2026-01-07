@@ -5,6 +5,76 @@
  *
  * Token-driven segmented control component with radio group pattern.
  * Supports keyboard navigation and full accessibility.
+ *
+ * @enforcement TUNG_SEGMENTEDCONTROL_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use NAVIGATION_TOKENS and MOTION_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (segmentedControlRootVariants, segmentedControlItemVariants)
+ * - Size variants use NAVIGATION_TOKENS.sizes
+ * - State variants use NAVIGATION_TOKENS.states
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from NAVIGATION_TOKENS.states for item styling
+ * - Default state uses NAVIGATION_TOKENS.states.default
+ * - Selected state uses NAVIGATION_TOKENS.states.selected
+ * - Hover state uses NAVIGATION_TOKENS.states.hover
+ * - Container background uses NAVIGATION_TOKENS.container.background.muted
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Gap uses NAVIGATION_TOKENS.spacing.listGap.xs
+ * - Padding uses NAVIGATION_TOKENS.container.padding.xs
+ * - Item padding uses NAVIGATION_TOKENS.sizes[size].padding
+ * - NO raw Tailwind spacing classes (gap-4, gap-md, p-4, px-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Font size uses NAVIGATION_TOKENS.sizes[size].fontSize
+ * - Font weight uses NAVIGATION_TOKENS.typography.fontWeight.medium
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses NAVIGATION_TOKENS.radius.default
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - Transitions use MOTION_TOKENS.transition.all
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: SegmentedControl uses color token system exclusively via NAVIGATION_TOKENS
+ * - Spacing Authority: SegmentedControl uses spacing token system exclusively via NAVIGATION_TOKENS
+ * - Typography Authority: SegmentedControl uses typography token system exclusively via NAVIGATION_TOKENS
+ * - Radius Authority: SegmentedControl uses radius token system exclusively via NAVIGATION_TOKENS
+ * - Motion Authority: SegmentedControl uses motion tokens for transitions
+ * - Elevation Authority: SegmentedControl uses shadow tokens via NAVIGATION_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in NAVIGATION_TOKENS (src/FOUNDATION/tokens/components/navigation.ts)
+ * - Motion uses MOTION_TOKENS (src/FOUNDATION/tokens/components/motion.ts)
+ * - NAVIGATION_TOKENS reference foundation tokens from spacing, radius, color, typography, motion, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid size/orientation values at compile time
  */
 
 import * as React from "react";

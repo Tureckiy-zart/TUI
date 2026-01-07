@@ -6,6 +6,58 @@
  * A fully accessible, token-driven range slider component for numeric range selection.
  * Built on Radix UI Slider primitive with two thumbs for min-max range control.
  *
+ * @enforcement TUNG_RANGESLIDER_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use RANGESLIDER_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (rangeSliderVariants)
+ * - Size variants use RANGESLIDER_TOKENS.root.size, track.size, thumb.size
+ * - Variant colors use RANGESLIDER_TOKENS.track.variant, range.variant, thumb.variant
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from RANGESLIDER_TOKENS for track, range, and thumb styling
+ * - Track variant colors use RANGESLIDER_TOKENS.track.variant
+ * - Range variant colors use RANGESLIDER_TOKENS.range.variant
+ * - Thumb variant colors use RANGESLIDER_TOKENS.thumb.variant
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Root size uses RANGESLIDER_TOKENS.root.size (height/width)
+ * - Track size uses RANGESLIDER_TOKENS.track.size (height/width)
+ * - Thumb size uses RANGESLIDER_TOKENS.thumb.size (height/width)
+ * - Mark spacing uses RANGESLIDER_TOKENS.mark.label.marginTop and marginLeft
+ * - NO raw Tailwind spacing classes (h-4, w-4, p-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Mark label typography uses RANGESLIDER_TOKENS.mark.label.fontSize
+ * - NO raw Tailwind typography classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: RangeSlider uses color token system exclusively via RANGESLIDER_TOKENS
+ * - Spacing Authority: RangeSlider uses spacing token system exclusively via RANGESLIDER_TOKENS
+ * - Typography Authority: RangeSlider uses typography token system exclusively via RANGESLIDER_TOKENS
+ * - Layout Authority: RangeSlider composes Radix Slider primitive
+ *
+ * Token-only contract:
+ * - All styling is defined in RANGESLIDER_TOKENS (src/FOUNDATION/tokens/components/rangeslider.ts)
+ * - RANGESLIDER_TOKENS reference foundation tokens from spacing, color, and typography systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size/orientation values at compile time
+ *
  * @example
  * ```tsx
  * <RangeSlider
@@ -127,14 +179,6 @@ export interface RangeSliderProps {
 
 /**
  * RangeSlider component
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Uses Radix UI Slider primitive with minStepsBetweenThumbs
- * - ✅ Follows Extension Authority Contract
- * - ✅ Interactive Size Scale Authority (sm/md/lg)
- * - ✅ InteractiveVariant subset (primary/secondary/outline)
- * - ✅ CVA pattern for variants and sizes
  */
 const RangeSlider = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,

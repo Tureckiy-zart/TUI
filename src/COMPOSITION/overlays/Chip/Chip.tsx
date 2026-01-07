@@ -6,6 +6,69 @@
  * A flexible component for displaying tags, filters, and selectable options.
  * Supports multiple interaction modes: display-only, clickable, removable, and selectable.
  *
+ * @enforcement TUNG_CHIP_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use CHIP_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL motion values MUST use motion tokens
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Radius variants use CHIP_TOKENS.radius
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from CHIP_TOKENS.variant for variant styling
+ * - Variant colors use CHIP_TOKENS.variant[variant].border, background, text, hover
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses CHIP_TOKENS.padding (horizontal and vertical)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Font size uses CHIP_TOKENS.fontSize
+ * - Font weight uses CHIP_TOKENS.fontWeight
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses CHIP_TOKENS.radius[radius]
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use motion tokens
+ * - Transitions use CHIP_TOKENS.transition.colors
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Chip uses color token system exclusively via CHIP_TOKENS
+ * - Spacing Authority: Chip uses spacing token system exclusively via CHIP_TOKENS
+ * - Typography Authority: Chip uses typography token system exclusively via CHIP_TOKENS
+ * - Radius Authority: Chip uses radius token system exclusively via CHIP_TOKENS
+ * - Motion Authority: Chip uses motion tokens for transitions
+ * - Interaction Authority: Chip follows Interaction Authority Contract for state priority
+ *
+ * Token-only contract:
+ * - All styling is defined in CHIP_TOKENS (src/FOUNDATION/tokens/components/chip.ts)
+ * - CHIP_TOKENS reference foundation tokens from spacing, radius, color, typography, and motion systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/radius values at compile time
+ *
  * Features:
  * - Display mode: Simple visual tag (like Badge)
  * - Clickable mode: Interactive chip with onClick handler

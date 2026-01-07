@@ -17,6 +17,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+### Fixed
+
+- **Typography Size Scale**: Restored semantic typography size mappings in FOUNDATION components
+  - Fixed 8 canon violations where distinct semantic sizes (xs, sm, md, lg, xl) mapped to identical visual font sizes
+  - **Link**: Restored distinct mappings (sm→text-sm, md→text-base, lg→text-lg, xl→text-xl)
+  - **Input**: Fixed lg size mapping (lg→text-lg instead of text-base)
+  - **Textarea**: Fixed lg and xl size mappings (lg→text-lg, xl→text-xl)
+  - **Select**: Fixed trigger, item, and label fontSize mappings for all sizes (md→text-base, lg→text-lg, xl→text-xl)
+  - **FileUpload**: Fixed all preview fontSize mappings (sm→text-sm, md→text-base, lg→text-lg)
+  - All FOUNDATION typography components now fully comply with Typography Authority
+  - Added regression tests preventing future size aliasing
+  - See: `docs/reports/audit/TYPOGRAPHY_SEMANTIC_SIZE_DRIFT_AUDIT.md`
+
+### Changed
+
+- **Link Component**: Refined variant model to prevent breaking changes
+  - Added `variant='text'` as explicit inline variant (default)
+  - Changed default variant from `'link'` to `'text'` to ensure inline behavior for text and navigation links
+  - Reserved `variant='link'` exclusively for wrapper use cases (block-level layout)
+  - Default Link now renders inline (inline-flex) instead of block-level
+  - Wrapper use cases (wrapping Card/Panel/Box) require explicit `variant='link'`
+  - See: `docs/architecture/INTERACTIVE_WRAPPER_LAYOUT_RULE.md`
+
 ## [2.0.6]
 
 ### Changed

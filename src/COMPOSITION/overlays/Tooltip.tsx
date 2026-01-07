@@ -1,5 +1,64 @@
 "use client";
 
+/**
+ * Tooltip Component
+ *
+ * @enforcement TUNG_TOOLTIP_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use TOOLTIP_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL shadow values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Tooltip has no size variants (inappropriate for small informational content)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from TOOLTIP_TOKENS.content for content styling
+ * - Variant colors use semantic Tailwind classes (border-secondary/50, text-accent-foreground, etc.)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses TOOLTIP_TOKENS.content.padding (horizontal and vertical)
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Font size uses TOOLTIP_TOKENS.content.fontSize.sm
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Radius Authority Rules:
+ * - ALL radius values MUST come from radius token system
+ * - Radius uses TOOLTIP_TOKENS.content.radius.md
+ * - NO raw Tailwind radius classes (rounded-md, rounded-lg, etc.) allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/RADIUS_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Tooltip uses color token system exclusively via TOOLTIP_TOKENS
+ * - Spacing Authority: Tooltip uses spacing token system exclusively via TOOLTIP_TOKENS
+ * - Typography Authority: Tooltip uses typography token system exclusively via TOOLTIP_TOKENS
+ * - Radius Authority: Tooltip uses radius token system exclusively via TOOLTIP_TOKENS
+ * - Elevation Authority: Tooltip uses shadow tokens via TOOLTIP_TOKENS
+ *
+ * Token-only contract:
+ * - All styling is defined in TOOLTIP_TOKENS (src/FOUNDATION/tokens/components/tooltip.ts)
+ * - TOOLTIP_TOKENS reference foundation tokens from spacing, radius, color, typography, and shadow systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography/radius classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant values at compile time
+ */
+
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 

@@ -6,11 +6,57 @@
  * StickyBar provides minimal sticky layout container for persistent actions or contextual controls
  * without managing page layout or routing.
  *
+ * @enforcement TUNG_STICKYBAR_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use STICKYBAR_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling (stickyBarVariants)
+ * - Position variants use STICKYBAR_TOKENS.position
+ * - Tone variants use STICKYBAR_TOKENS.tone
+ * - zIndex uses STICKYBAR_TOKENS.zIndex (from ELEVATION_AUTHORITY)
+ * - StickyBar composes Divider and Inset components (delegates styling to them)
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from STICKYBAR_TOKENS.tone for tone variants
+ * - Tone variants use STICKYBAR_TOKENS.tone (default, elevated, muted)
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing is delegated to Inset component
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Elevation Authority Rules:
+ * - ALL z-index values MUST come from elevation token system
+ * - zIndex uses STICKYBAR_TOKENS.zIndex (zIndex.sticky from ELEVATION_AUTHORITY)
+ * - NO raw Tailwind z-index classes allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: StickyBar uses color token system exclusively via STICKYBAR_TOKENS
+ * - Spacing Authority: StickyBar uses spacing token system exclusively via Inset component
+ * - Elevation Authority: StickyBar uses z-index tokens via STICKYBAR_TOKENS
+ * - Layout Authority: StickyBar composes Divider and Inset components
+ *
+ * Token-only contract:
+ * - All styling is defined in STICKYBAR_TOKENS (src/FOUNDATION/tokens/components/stickybar.ts)
+ * - STICKYBAR_TOKENS reference foundation tokens from spacing, color, and elevation systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/z-index classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid position/tone values at compile time
+ *
  * StickyBar IS: A thin layout wrapper for CSS sticky positioning
  * StickyBar IS NOT: A Header/Footer/Navigation replacement, a scroll listener component,
  * or a component that manages page layout or routing
- *
- * All styling uses tokens exclusively (no raw CSS values).
  *
  * @example
  * ```tsx
@@ -116,17 +162,6 @@ export interface StickyBarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * StickyBar component - sticky layout container
- *
- * COMPLIANCE NOTES:
- * - ✅ Uses token system exclusively (no raw values)
- * - ✅ Follows Extension Authority Contract
- * - ✅ Uses CSS sticky positioning (no JS-driven behavior)
- * - ✅ Composes Inset for internal spacing
- * - ✅ Composes Divider for visual separation
- * - ✅ Motion: NO MOTION BY DESIGN (pure layout wrapper, no state/spatial changes)
- * - ✅ Explicit union types (StickyBarPosition, StickyBarTone)
- * - ✅ Type constraints (satisfies Record<Type, string>)
- * - ✅ Does NOT duplicate Header/Footer/Navigation functionality
  */
 const StickyBar = React.forwardRef<HTMLDivElement, StickyBarProps>(
   (

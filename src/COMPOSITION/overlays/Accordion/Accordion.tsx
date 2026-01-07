@@ -6,6 +6,61 @@
  * Vertically stacked set of interactive headings that reveal/hide associated content panels.
  * Provides accessible disclosure pattern with keyboard navigation and ARIA support.
  *
+ * @enforcement TUNG_ACCORDION_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use ACCORDION_TOKENS as the single source of truth
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL radius values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - Size variants use ACCORDION_TOKENS for sizing
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from ACCORDION_TOKENS for trigger and content styling
+ * - Variant colors use semantic Tailwind classes
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Padding uses ACCORDION_TOKENS for trigger and content padding
+ * - NO raw Tailwind spacing classes (p-4, px-2, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Font sizes use ACCORDION_TOKENS for trigger and content typography
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - Transitions use MOTION_TOKENS for animation
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
+ *
+ * Authority Compliance:
+ * - Color Authority: Accordion uses color token system exclusively via ACCORDION_TOKENS
+ * - Spacing Authority: Accordion uses spacing token system exclusively via ACCORDION_TOKENS
+ * - Typography Authority: Accordion uses typography token system exclusively via ACCORDION_TOKENS
+ * - Motion Authority: Accordion uses motion tokens for transitions
+ * - Interaction Authority: Accordion follows Interaction Authority Contract for state priority
+ *
+ * Token-only contract:
+ * - All styling is defined in ACCORDION_TOKENS (src/FOUNDATION/tokens/components/accordion.ts)
+ * - ACCORDION_TOKENS reference foundation tokens from spacing, radius, color, typography, and motion systems
+ * - Variants use tokenCVA for type-safe styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid variant/size values at compile time
+ *
  * @semantic_role EXTENSION_COMPOSITE_DISCLOSURE
  *
  * @semantic_definition

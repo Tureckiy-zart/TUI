@@ -8,6 +8,64 @@
  * - Selected values displayed as removable tags/chips in the trigger
  * - Full keyboard navigation and accessibility support
  *
+ * @enforcement TUNG_MULTISELECT_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use SELECT_TOKENS, CHIP_TOKENS, INPUT_TOKENS, POPOVER_TOKENS, and MOTION_TOKENS
+ * - ALL color-related classes MUST be token-based utilities only
+ * - ALL spacing values MUST be token-based
+ * - ALL typography values MUST be token-based
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
+ * - Variants use tokenCVA for type-safe styling
+ * - MultiSelect composes Select component (delegates styling to SELECT_TOKENS)
+ * - Chip styling uses CHIP_TOKENS for selected value tags
+ *
+ * Color Authority Rules:
+ * - ALL color-related classes MUST be token-based utilities only
+ * - Colors come from SELECT_TOKENS for select styling
+ * - Colors come from CHIP_TOKENS for chip/tag styling
+ * - Colors come from POPOVER_TOKENS for popover content styling
+ * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Spacing is delegated to Select and Chip components
+ * - NO raw Tailwind spacing classes (p-4, px-2, gap-4, etc.) allowed
+ *
+ * Typography Authority Rules:
+ * - ALL typography values MUST come from typography token system
+ * - Typography is delegated to Select and Chip components
+ * - NO raw Tailwind typography classes allowed
+ *
+ * Motion Authority Rules:
+ * - ALL motion values MUST use MOTION_TOKENS
+ * - Transitions use MOTION_TOKENS for animations
+ * - NO raw motion values allowed
+ *
+ * @see docs/architecture/COLOR_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/TYPOGRAPHY_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/MOTION_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Color Authority: MultiSelect uses color token system exclusively via SELECT_TOKENS, CHIP_TOKENS, and POPOVER_TOKENS
+ * - Spacing Authority: MultiSelect uses spacing token system exclusively via composed components
+ * - Typography Authority: MultiSelect uses typography token system exclusively via composed components
+ * - Motion Authority: MultiSelect uses motion tokens for transitions
+ * - Layout Authority: MultiSelect composes Select, Chip, and Checkbox components
+ *
+ * Token-only contract:
+ * - Select styling uses SELECT_TOKENS (src/FOUNDATION/tokens/components/select.ts)
+ * - Chip styling uses CHIP_TOKENS (src/FOUNDATION/tokens/components/chip.ts)
+ * - Popover styling uses POPOVER_TOKENS (src/FOUNDATION/tokens/components/popover.ts)
+ * - Motion uses MOTION_TOKENS (src/FOUNDATION/tokens/components/motion.ts)
+ * - MultiSelect composes Select component which handles most styling
+ * - No raw Tailwind color/spacing/typography classes are allowed
+ * - tokenCVA validates token usage in development mode
+ * - TypeScript enforces valid size values at compile time
+ *
  * @example
  * ```tsx
  * <MultiSelect
@@ -28,11 +86,9 @@ import { X } from "lucide-react";
 import * as React from "react";
 
 import {
-  SelectContent,
   SelectIcon,
   SelectItemText,
   SelectRoot,
-  SelectTrigger as RadixSelectTrigger,
   SelectViewport,
 } from "@/COMPOSITION/controls/Select/Select";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
@@ -492,7 +548,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
           disabled={disabled}
           onValueChange={handleSelectValueChange}
         >
-          <RadixSelectTrigger
+          <SelectPrimitive.Trigger
             className={cn(
               multiSelectTriggerVariants({ size }),
               INPUT_TOKENS.variant.outline.border,
@@ -510,24 +566,39 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               {renderTriggerContent()}
             </div>
             <SelectIcon />
-          </RadixSelectTrigger>
-          <SelectContent
-            className={cn(
-              SELECT_TOKENS.content.padding.md,
-              SELECT_TOKENS.content.radius.md,
-              SELECT_TOKENS.content.shadow,
-              SELECT_TOKENS.content.maxHeight,
-              SELECT_TOKENS.content.minWidth,
-              POPOVER_TOKENS.content.border.default,
-              POPOVER_TOKENS.content.border.color,
-              POPOVER_TOKENS.content.background.default,
-              POPOVER_TOKENS.content.text.default,
-            )}
-          >
-            <SelectViewport aria-multiselectable="true">
-              {options.map(renderOptionItem)}
-            </SelectViewport>
-          </SelectContent>
+          </SelectPrimitive.Trigger>
+          <SelectPrimitive.Portal>
+            <SelectPrimitive.Content
+              position="popper"
+              className={cn(
+                "relative z-50 overflow-hidden outline-none",
+                SELECT_TOKENS.content.maxHeight,
+                SELECT_TOKENS.content.minWidth,
+                POPOVER_TOKENS.content.border.default,
+                POPOVER_TOKENS.content.border.color,
+                POPOVER_TOKENS.content.background.default,
+                POPOVER_TOKENS.content.text.default,
+                SELECT_TOKENS.content.shadow,
+                SELECT_TOKENS.content.padding.md,
+                POPOVER_TOKENS.content.radius.md,
+                "data-[state=open]:animate-in data-[state=closed]:animate-out",
+                "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+                "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+                "data-[side=bottom]:slide-in-from-top-[var(--spacing-sm)]",
+                "data-[side=left]:slide-in-from-right-[var(--spacing-sm)]",
+                "data-[side=right]:slide-in-from-left-[var(--spacing-sm)]",
+                "data-[side=top]:slide-in-from-bottom-[var(--spacing-sm)]",
+                "data-[side=bottom]:translate-y-[var(--spacing-xs)]",
+                "data-[side=left]:-translate-x-[var(--spacing-xs)]",
+                "data-[side=right]:translate-x-[var(--spacing-xs)]",
+                "data-[side=top]:-translate-y-[var(--spacing-xs)]",
+              )}
+            >
+              <SelectViewport aria-multiselectable="true">
+                {options.map(renderOptionItem)}
+              </SelectViewport>
+            </SelectPrimitive.Content>
+          </SelectPrimitive.Portal>
         </SelectRoot>
       </div>
     );

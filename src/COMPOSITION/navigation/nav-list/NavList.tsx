@@ -6,6 +6,33 @@
  * Pure semantic list container for navigation primitives.
  * Renders either `<ol>` or `<ul>` element with correct HTML semantics.
  *
+ * @enforcement TUNG_NAVLIST_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - NavList is a pure structural component with no direct styling
+ * - ALL styling is delegated to child components (NavItem, NavLink, etc.)
+ * - NavList does NOT use tokens directly (no visual representation)
+ * - Child components handle all token-based styling via NAVIGATION_TOKENS
+ * - NO raw Tailwind classes allowed (component has no styling)
+ *
+ * Composition Authority Rules:
+ * - NavList composes semantic HTML elements (`<ol>`, `<ul>`) only
+ * - Styling is delegated to child navigation components
+ * - NavList provides structure, children provide styling
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: NavList provides semantic structure only, styling delegated to children
+ * - Color Authority: NavList does not apply colors (delegated to children)
+ * - Typography Authority: NavList does not apply typography (delegated to children)
+ * - Spacing Authority: NavList does not apply spacing (delegated to children)
+ *
+ * Token-only contract:
+ * - NavList has no token usage (pure structural component)
+ * - All styling occurs through child components which use NAVIGATION_TOKENS
+ * - Child components (NavItem, NavLink, NavText, NavSeparator) handle token enforcement
+ *
  * **What NavList IS:**
  * - Semantic list container for navigation
  * - Structural wrapper for NavItem

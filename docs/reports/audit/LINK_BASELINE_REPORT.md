@@ -91,7 +91,7 @@ Establish a factual baseline snapshot of the Link component before any analysis 
 **LinkProps:**
 - Extends `Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "style">`
 - Custom props:
-  - `variant?: LinkVariant` - Link variant style (default: "link")
+  - `variant?: LinkVariant` - Link variant style (default: "text")
   - `size?: LinkSize` - Link size (default: "md")
   - `leftIcon?: React.ReactNode` - Icon to display on the left side
   - `rightIcon?: React.ReactNode` - Icon to display on the right side
@@ -100,9 +100,11 @@ Establish a factual baseline snapshot of the Link component before any analysis 
 - **Foundation Enforcement:** `className` and `style` props are explicitly excluded from public API
 
 **Default Props:**
-- `variant`: "link"
+- `variant`: "text" (inline variant for text and navigation links)
 - `size`: "md"
 - `disabled`: false
+
+**Note:** Variant `'link'` is reserved for wrapper use cases (block-level layout when wrapping Card/Panel/Box). Default variant `'text'` renders inline (inline-flex) for proper text flow.
 
 **Implicit Behavior:**
 - Link always renders a semantic `<a>` element (no asChild support)
@@ -956,9 +958,10 @@ Ensure the component speaks the same visual language as the rest of the system. 
 
 **InteractiveVariant Compliance:**
 - ✅ All variants align with InteractiveVariant dictionary
-- ✅ Variants: `primary | secondary | accent | outline | ghost | link | destructive`
+- ✅ Variants: `primary | secondary | accent | outline | ghost | text | link | destructive`
 - ✅ No custom/invented variant names
-- ✅ Default variant is `link` (canonical)
+- ✅ Default variant is `text` (inline variant for text and navigation links)
+- ✅ Variant `link` is reserved for wrapper use cases (block-level layout)
 
 **Variant Usage:**
 - ✅ All 7 variants are properly implemented
@@ -1030,7 +1033,7 @@ Make the component easy to understand and hard to misuse.
 #### Public Props Review
 
 **All Public Props:**
-- `variant?: LinkVariant` - Clear, well-documented, safe default ("link")
+- `variant?: LinkVariant` - Clear, well-documented, safe default ("text" - inline variant)
 - `size?: LinkSize` - Clear, well-documented, safe default ("md")
 - `leftIcon?: React.ReactNode` - Clear purpose, optional
 - `rightIcon?: React.ReactNode` - Clear purpose, optional
@@ -1042,6 +1045,7 @@ Make the component easy to understand and hard to misuse.
 - ✅ All props have JSDoc comments
 - ✅ Default values are safe and documented
 - ✅ No confusing prop names
+- ✅ Variant `link` is explicitly documented as wrapper-only (block-level)
 
 **API Usability:**
 - ✅ Component can be used correctly without reading implementation
@@ -1052,7 +1056,7 @@ Make the component easy to understand and hard to misuse.
 
 **Ease of Use:**
 - ✅ Simple API (5 custom props + standard HTML attributes)
-- ✅ Clear defaults (variant="link", size="md")
+- ✅ Clear defaults (variant="text" for inline links, size="md")
 - ✅ Icon support is intuitive (leftIcon/rightIcon)
 - ✅ Disabled state is clear and accessible
 
@@ -1572,6 +1576,118 @@ Modified the layout tokens for `variant='link'` to use block-level display seman
 
 - **Task ID:** TUI_LINK_LAYOUT_CONTRACT_FIX
 - **Date:** 2025-12-25
+
+---
+
+## Variant Refinement: Text Default, Link Wrapper-Only (2026-01-06)
+
+### Problem
+
+After the layout contract fix, `variant='link'` became block-level for wrapper use cases. However, since `variant='link'` remained the default variant, all default Link usages unintentionally became block-level, breaking inline text, navigation, and list layouts.
+
+### Solution
+
+Introduced an explicit inline variant named `'text'` and made it the default. Reserved `variant='link'` exclusively for layout wrapper use cases.
+
+### Changes Applied
+
+1. **Added `variant='text'` variant**:
+   - New variant: `text` - Inline variant for atomic text links
+   - Uses `LINK_TOKENS.layout` (inline-flex) for proper inline behavior
+   - Uses same styling tokens as `variant='link'` (text and hover colors)
+   - Located in `src/PRIMITIVES/Link/Link.tsx`
+
+2. **Changed default variant**:
+   - Changed `defaultVariants.variant` from `"link"` to `"text"`
+   - Updated JSDoc comment to reflect new default
+   - Located in `src/PRIMITIVES/Link/Link.tsx`
+
+3. **Variant behavior**:
+   - `variant='text'` (default): Uses `inline-flex` layout (atomic inline usage)
+   - `variant='link'`: Uses `block w-full` layout (wrapper block-level usage)
+   - All other variants: Continue using `inline-flex` (atomic usage)
+
+### Impact
+
+- ✅ Default Link renders as inline text link (inline-flex)
+- ✅ Inline text and navigation links are not stretched to full width
+- ✅ Wrapper use cases require explicit `variant='link'`
+- ✅ No breaking changes for existing wrapper usages (they already use explicit `variant='link'`)
+- ✅ Prevents implicit breaking changes in future
+
+### Files Modified
+
+- `src/PRIMITIVES/Link/Link.tsx` - Added `text` variant, changed default to `text`
+- `src/PRIMITIVES/Link/Link.test.tsx` - Updated tests for new default variant
+- `src/PRIMITIVES/Link/Link.stories.tsx` - Updated Storybook stories
+- `docs/reference/API_REFERENCE.md` - Updated API documentation
+- `docs/architecture/INTERACTIVE_WRAPPER_LAYOUT_RULE.md` - Updated architecture rule examples
+- `docs/reports/audit/INTERACTIVE_WRAPPER_LAYOUT_AUDIT.md` - Updated audit report
+
+### Task Reference
+
+- **Task ID:** TUI_LINK_VARIANT_TEXT_DEFAULT_WRAPPER_FIX
+- **Date:** 2026-01-06
+
+---
+
+## Variant Rename: Link → Wrapper with Deprecation (2025-12-19)
+
+### Problem
+
+The Link component used `variant='link'` to represent a block-level layout wrapper for cards and panels. While technically correct, the name `'link'` is semantically misleading, as it implies a standard text link. This creates cognitive overhead and long-term maintainability risk.
+
+### Solution
+
+Introduced a new variant named `'wrapper'` to explicitly represent layout-wrapping Link usage. Marked existing `variant='link'` as deprecated alias during a transition period for backward compatibility.
+
+### Changes Applied
+
+1. **Added `variant='wrapper'` variant**:
+   - New variant: `wrapper` - Explicit layout wrapper variant for cards, panels, grid items
+   - Uses `LINK_TOKENS.layoutBlock` (block w-full) for block-level layout
+   - Uses same styling tokens as `variant='link'` (text and hover colors)
+   - Located in `src/PRIMITIVES/Link/Link.tsx`
+
+2. **Deprecated `variant='link'`**:
+   - `variant='link'` remains functional as alias for `wrapper`
+   - Marked with `@deprecated` JSDoc comment
+   - Uses identical tokens as `wrapper` variant
+   - Will be removed in a future major version
+
+3. **Variant behavior**:
+   - `variant='text'` (default): Uses `inline-flex` layout (atomic inline usage)
+   - `variant='wrapper'`: Uses `block w-full` layout (wrapper block-level usage)
+   - `variant='link'` (deprecated): Uses `block w-full` layout (identical to wrapper, backward compatible)
+   - All other variants: Continue using `inline-flex` (atomic usage)
+
+### Impact
+
+- ✅ `variant='wrapper'` clearly communicates semantic intent
+- ✅ Aligns with Interactive Wrapper Layout Contract naming
+- ✅ `variant='link'` remains functional for backward compatibility
+- ✅ No breaking changes for existing usages
+- ✅ Internal usages migrated to `wrapper` variant
+- ✅ Documentation and architecture rules updated
+
+### Files Modified
+
+- `src/PRIMITIVES/Link/Link.tsx` - Added `wrapper` variant, deprecated `link` variant
+- `src/FOUNDATION/tokens/components/link.ts` - Updated `layoutBlock` token comments
+- `src/COMPOSITION/navigation/breadcrumbs/Breadcrumbs.tsx` - Migrated to `variant='wrapper'`
+- `src/PRIMITIVES/Link/Link.test.tsx` - Added tests for `wrapper`, updated tests for deprecated `link`
+- `src/PRIMITIVES/Link/Link.stories.tsx` - Added `wrapper` to argTypes, updated descriptions
+- `src/COMPOSITION/motion/InteractivityStates.stories.tsx` - Updated examples to use `wrapper`
+- `src/EXTENSIONS/next/NextLinkAdapter.stories.tsx` - Updated examples to use `wrapper`
+- `src/COMPOSITION/overlays/Tooltip.stories.tsx` - Updated examples to use `wrapper`
+- `src/COMPOSITION/overlays/Popover.stories.tsx` - Updated examples to use `wrapper`
+- `docs/reference/API_REFERENCE.md` - Updated API documentation with `wrapper` and deprecated `link`
+- `docs/architecture/INTERACTIVE_WRAPPER_LAYOUT_RULE.md` - Updated architecture rule examples and documentation
+
+### Task Reference
+
+- **Task ID:** TUI_LINK_VARIANT_WRAPPER_RENAME_WITH_DEPRECATION
+- **Date:** 2025-12-19
 
 ---
 

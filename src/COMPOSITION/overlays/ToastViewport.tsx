@@ -9,6 +9,50 @@
  * Radix Toast.Viewport handles portal rendering internally.
  * Tenerife UI provides visual styling and positioning through tokens only.
  *
+ * @enforcement TUNG_TOASTVIEWPORT_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ALL styling MUST use TOAST_TOKENS as the single source of truth
+ * - ALL spacing values MUST be token-based
+ * - ALL positioning values MUST be token-based
+ * - NO raw Tailwind spacing classes (p-4, gap-2, etc.) allowed
+ * - Position classes use TOAST_TOKENS.position.spacing (top, bottom, left, right)
+ * - Gap uses TOAST_TOKENS.spacing.gap
+ * - z-index uses token-based value (z-[100] from ELEVATION_AUTHORITY)
+ * - ToastViewport composes Radix Toast.Viewport (delegates portal rendering to Radix)
+ *
+ * Spacing Authority Rules:
+ * - ALL spacing values MUST come from spacing token system
+ * - Positioning uses TOAST_TOKENS.position.spacing (top, bottom, left, right)
+ * - Gap uses TOAST_TOKENS.spacing.gap
+ * - NO raw Tailwind spacing classes (p-4, gap-2, etc.) allowed
+ *
+ * Elevation Authority Rules:
+ * - ALL z-index values MUST come from elevation token system
+ * - z-index uses z-[100] (token-based value from ELEVATION_AUTHORITY)
+ * - NO raw Tailwind z-index classes allowed
+ *
+ * Layout Authority Rules:
+ * - Layout utilities (flex, flex-col, items-center) are ALLOWED
+ * - Layout is structural, not visual styling
+ *
+ * @see docs/architecture/SPACING_AUTHORITY_CONTRACT.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Spacing Authority: ToastViewport uses spacing token system exclusively via TOAST_TOKENS
+ * - Elevation Authority: ToastViewport uses z-index tokens via ELEVATION_AUTHORITY
+ * - Layout Authority: ToastViewport provides layout structure for toast positioning
+ *
+ * Token-only contract:
+ * - All styling is defined in TOAST_TOKENS (src/FOUNDATION/tokens/components/toast.ts)
+ * - TOAST_TOKENS reference foundation tokens from spacing and elevation systems
+ * - Position classes use TOAST_TOKENS.position.spacing for all positioning
+ * - Gap uses TOAST_TOKENS.spacing.gap
+ * - No raw Tailwind spacing/z-index classes are allowed
+ * - TypeScript enforces valid position values at compile time
+ *
  * This component is locked as a foundation component per UI_ARCHITECTURE_LOCK.md.
  * DO NOT reimplement portal logic - Radix handles this internally.
  */

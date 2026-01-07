@@ -178,6 +178,12 @@ export const SPINNER_TOKENS = {
   } as const,
 
   /**
+   * Linear track background color token
+   * Background color for the linear spinner track
+   */
+  linearTrackBackground: "bg-[hsl(var(--muted))]", // Muted background color for linear track
+
+  /**
    * Ring gradient tokens
    * Conic gradient for ring variant spinner
    * References GRADIENT_TOKENS.ring for consistency

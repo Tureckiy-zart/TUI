@@ -1,5 +1,45 @@
 "use client";
 
+/**
+ * SearchBar Component
+ *
+ * Search bar component with suggestions dropdown.
+ * Provides search input with autocomplete suggestions and keyboard navigation.
+ *
+ * @enforcement TUNG_SEARCHBAR_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - SearchBar is a composition component that delegates ALL styling to composed components
+ * - ALL styling is delegated to SearchInput (PATTERNS) and Button (Foundation) components
+ * - SearchBar does NOT use tokens directly
+ * - SearchInput component handles input styling via its token system
+ * - Button component handles button styling via BUTTON_TOKENS
+ * - Dropdown styling uses token-based classes (z-index, border, bg, shadow)
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - SearchBar composes SearchInput component (PATTERNS) for input functionality
+ * - SearchBar composes Button component (Foundation) for suggestion buttons
+ * - Styling is delegated to SearchInput and Button components
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/ELEVATION_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: SearchBar uses SearchInput and Button components which handle layout via their tokens
+ * - Elevation Authority: SearchBar uses z-index tokens for dropdown (zIndex.overlay = 30)
+ * - Color Authority: SearchBar does not apply colors directly (delegated to composed components)
+ * - Typography Authority: SearchBar does not apply typography (delegated to composed components)
+ *
+ * Token-only contract:
+ * - SearchBar has no direct token usage (composition component)
+ * - All styling occurs through composed components:
+ *   - SearchInput component handles input styling (PATTERNS token system)
+ *   - Button component handles button styling (BUTTON_TOKENS)
+ * - Dropdown uses token-based classes for z-index, border, background, and shadow
+ * - All composed components handle token enforcement
+ */
+
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";

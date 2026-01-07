@@ -9,6 +9,36 @@
  * This component provides a composable API for focus trap functionality,
  * making it easy to add focus containment to modals, drawers, menus, and other overlays.
  *
+ * @enforcement TUNG_FOCUSTRAP_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - FocusTrap is a pure logical component with NO visual representation
+ * - FocusTrap does NOT use tokens (no styling, no visual output)
+ * - Component provides focus management logic only (keyboard navigation, focus trapping)
+ * - NO Tailwind classes are used (component has no DOM output)
+ * - Component wraps children but does not apply any styling
+ * - This is a behavioral/logical component, not a visual component
+ *
+ * Accessibility Authority Rules:
+ * - Component provides focus trap functionality for accessibility
+ * - Focus management is handled via JavaScript event listeners
+ * - Component does not affect visual styling of children
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: FocusTrap does not apply layout (pure logical component)
+ * - Color Authority: FocusTrap does not apply colors (no visual representation)
+ * - Typography Authority: FocusTrap does not apply typography (no visual representation)
+ * - Spacing Authority: FocusTrap does not apply spacing (no visual representation)
+ * - Accessibility Authority: FocusTrap provides focus management for accessibility
+ *
+ * Token-only contract:
+ * - FocusTrap has no token usage (pure logical component)
+ * - Component provides focus management logic only
+ * - All visual styling is handled by child components
+ * - This is a behavioral component, not a visual component
+ *
  * @example
  * ```tsx
  * // Basic usage

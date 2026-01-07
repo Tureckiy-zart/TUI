@@ -6,6 +6,40 @@
  * Semantic and behavioral grouping of multiple Button components.
  * Provides layout alignment, shared size/variant propagation, and proper accessibility semantics.
  *
+ * @enforcement TUNG_BUTTONGROUP_TOKEN_ENFORCEMENT
+ *
+ * Token Enforcement Rules:
+ * - ButtonGroup is a composition component that delegates ALL styling to composed components
+ * - ALL styling is delegated to Stack component (layout) and Button components (visual)
+ * - ButtonGroup does NOT use tokens directly
+ * - Stack component handles layout styling via STACK_TOKENS
+ * - Button components handle visual styling via BUTTON_TOKENS
+ * - Spacing prop uses token-based spacing values (xs | sm | md | lg | xl)
+ * - NO raw Tailwind classes allowed (component delegates styling)
+ *
+ * Composition Authority Rules:
+ * - ButtonGroup composes Stack component for layout
+ * - ButtonGroup composes Button components (Foundation, LOCKED) for visual styling
+ * - Styling is delegated to Stack and Button components
+ * - ButtonGroup provides prop propagation via Context API
+ *
+ * @see docs/architecture/LAYOUT_AUTHORITY.md
+ * @see docs/architecture/SPACING_AUTHORITY.md
+ *
+ * Authority Compliance:
+ * - Layout Authority: ButtonGroup uses Stack component which handles layout via STACK_TOKENS
+ * - Spacing Authority: ButtonGroup uses token-based spacing values via Stack component
+ * - Color Authority: ButtonGroup does not apply colors (delegated to Button components)
+ * - Typography Authority: ButtonGroup does not apply typography (delegated to Button components)
+ * - Accessibility Authority: ButtonGroup provides role="group" for accessibility semantics
+ *
+ * Token-only contract:
+ * - ButtonGroup has no direct token usage (composition component)
+ * - All styling occurs through Stack component (STACK_TOKENS) and Button components (BUTTON_TOKENS)
+ * - Stack component handles token enforcement for layout
+ * - Button components handle token enforcement for visual styling
+ * - Spacing prop uses token-based values (semanticSpacing tokens)
+ *
  * @semantic_role COMPOSITION_ACTION_GROUP
  * @semantic_definition ButtonGroup is a composition component that groups multiple Button components
  *                     for semantic and behavioral consistency. It provides layout alignment,

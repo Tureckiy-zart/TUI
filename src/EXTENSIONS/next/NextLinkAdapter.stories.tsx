@@ -132,8 +132,8 @@ export const VariantComparison: Story = {
       <NextLinkAdapter href="/ghost" variant="ghost">
         Ghost Variant
       </NextLinkAdapter>
-      <NextLinkAdapter href="/link" variant="link">
-        Link Variant (default)
+      <NextLinkAdapter href="/wrapper" variant="wrapper">
+        Wrapper Variant
       </NextLinkAdapter>
       <NextLinkAdapter href="/destructive" variant="destructive">
         Destructive Variant
