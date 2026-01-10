@@ -109,11 +109,11 @@ export const SWITCH_TOKENS = {
   variant: {
     primary: {
       track: {
-        unchecked: "bg-[hsl(var(--input))]", // Input border color when unchecked
+        unchecked: "bg-[hsl(var(--background))]", // White background when unchecked
         checked: "bg-[hsl(var(--tm-primary))]", // Primary color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted color when unchecked
+        unchecked: "bg-[hsl(var(--muted-foreground))]", // Muted foreground color for handle when unchecked (visible on white background)
         checked: "bg-[hsl(var(--tm-primary-foreground))]", // Primary foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-primary)]", // Primary focus ring

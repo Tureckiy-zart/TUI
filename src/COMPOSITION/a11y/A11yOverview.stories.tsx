@@ -7,6 +7,7 @@
  * Reference: docs/architecture/A11Y_AUTHORITY.md
  */
 "use client";
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
@@ -16,7 +17,7 @@ import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
 import { Link } from "@/PRIMITIVES/Link";
-import { Radio } from "@/PRIMITIVES/Radio";
+import { Radio, RadioGroup } from "@/PRIMITIVES/Radio";
 import { Switch } from "@/PRIMITIVES/Switch";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -71,7 +72,7 @@ export const SemanticRoles: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-border bg-white p-md text-black">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">
@@ -80,11 +81,13 @@ export const SemanticRoles: Story = {
                   </Text>
                 </Box>
                 <Stack spacing={2}>
-                  <Button variant="primary">Native Button</Button>
+                  <Box className="[&_button]:!text-black">
+                    <Button variant="primary">Native Button</Button>
+                  </Box>
                   <Link href="#" variant="primary">
                     Native Link
                   </Link>
-                  <Box className="flex items-center gap-2">
+                  <Box className="flex items-center gap-2 text-black">
                     <Label htmlFor="demo-input">Label</Label>
                     <Input id="demo-input" placeholder="Native Input" />
                   </Box>
@@ -134,6 +137,8 @@ export const SemanticRoles: Story = {
 export const KeyboardOnly: Story = {
   name: "Keyboard Only",
   render: function KeyboardOnlyStory() {
+    const [radioValue, setRadioValue] = React.useState<string>("option1");
+
     return (
       <Box className="p-lg">
         <Stack spacing={6}>
@@ -147,7 +152,7 @@ export const KeyboardOnly: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-border bg-white p-md text-black">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">
@@ -156,7 +161,9 @@ export const KeyboardOnly: Story = {
                   </Text>
                 </Box>
                 <Stack spacing={2}>
-                  <Button variant="primary">Tab to focus</Button>
+                  <Box className="[&_button]:!text-black">
+                    <Button variant="primary">Tab to focus</Button>
+                  </Box>
                   <Input placeholder="Tab to focus" />
                   <Link href="#" variant="primary">
                     Tab to focus
@@ -171,7 +178,9 @@ export const KeyboardOnly: Story = {
                   </Text>
                 </Box>
                 <Stack spacing={2}>
-                  <Button variant="primary">Press Enter or Space</Button>
+                  <Box className="[&_button]:!text-black">
+                    <Button variant="primary">Press Enter or Space</Button>
+                  </Box>
                   <Link href="#" variant="primary">
                     Press Enter to activate
                   </Link>
@@ -185,9 +194,15 @@ export const KeyboardOnly: Story = {
                   </Text>
                 </Box>
                 <Box className="flex items-center gap-4">
-                  <Radio aria-label="Option 1" />
-                  <Radio aria-label="Option 2" />
-                  <Radio aria-label="Option 3" />
+                  <RadioGroup
+                    value={radioValue}
+                    onValueChange={setRadioValue}
+                    orientation="horizontal"
+                  >
+                    <Radio value="option1" aria-label="Option 1" />
+                    <Radio value="option2" aria-label="Option 2" />
+                    <Radio value="option3" aria-label="Option 3" />
+                  </RadioGroup>
                   <Text size="sm">Use Arrow keys to navigate</Text>
                 </Box>
               </Box>
