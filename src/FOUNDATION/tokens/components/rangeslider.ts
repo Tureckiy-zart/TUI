@@ -61,9 +61,9 @@ export const RANGESLIDER_TOKENS = {
       },
     },
     variant: {
-      primary: "bg-primary-200 dark:bg-primary-800",
-      secondary: "bg-secondary-200 dark:bg-secondary-800",
-      outline: "bg-border",
+      primary: "bg-muted/50 dark:bg-muted/30",
+      secondary: "bg-muted/50 dark:bg-muted/30",
+      outline: "bg-muted/50 dark:bg-muted/30",
     },
   },
 
@@ -72,9 +72,9 @@ export const RANGESLIDER_TOKENS = {
    */
   range: {
     variant: {
-      primary: "bg-primary-600 dark:bg-primary-500",
-      secondary: "bg-secondary-600 dark:bg-secondary-500",
-      outline: "bg-primary-600 dark:bg-primary-500",
+      primary: "bg-accent-600 dark:bg-accent-500",
+      secondary: "bg-accent-600 dark:bg-accent-500",
+      outline: "bg-accent-600 dark:bg-accent-500",
     },
   },
 

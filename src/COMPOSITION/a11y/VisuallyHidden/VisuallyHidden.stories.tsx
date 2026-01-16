@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Input } from "@/PRIMITIVES/Input";
+import { Label } from "@/PRIMITIVES/Label";
 import { VisuallyHidden } from "./VisuallyHidden";
 
 const meta: Meta<typeof VisuallyHidden> = {
@@ -74,7 +76,7 @@ export const IconButtonLabel: Story = {
   render: () => (
     <button
       type="button"
-      className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-purple-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label="Close dialog"
     >
       <svg
@@ -110,18 +112,17 @@ export const IconButtonLabel: Story = {
  */
 export const FormLabelHelper: Story = {
   render: () => (
-    <div className="space-y-2">
-      <label htmlFor="email-input" className="block text-sm font-medium">
-        Email
-      </label>
-      <input
-        id="email-input"
-        type="email"
-        className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        placeholder="Enter your email"
-        aria-describedby="email-helper"
-      />
-      <VisuallyHidden id="email-helper">Please enter a valid email address</VisuallyHidden>
+    <div className="rounded-lg border border-border bg-white p-md text-black">
+      <div className="space-y-2 [&_input]:!text-black">
+        <Label htmlFor="email-input">Email</Label>
+        <Input
+          id="email-input"
+          type="email"
+          placeholder="Enter your email"
+          aria-describedby="email-helper"
+        />
+        <VisuallyHidden id="email-helper">Please enter a valid email address</VisuallyHidden>
+      </div>
     </div>
   ),
   parameters: {

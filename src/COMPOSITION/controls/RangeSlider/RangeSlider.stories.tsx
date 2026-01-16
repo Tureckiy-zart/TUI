@@ -6,6 +6,9 @@ const meta: Meta<typeof RangeSlider> = {
   title: "UI / Composition / Controls / RangeSlider",
   component: RangeSlider,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
   argTypes: {
     variant: {
       control: "select",
@@ -86,7 +89,7 @@ export const Matrix: Story = {
           <div key={variant} className="grid grid-cols-4 items-center gap-4">
             <div className="text-sm font-medium">{variant}</div>
             {sizes.map((size) => (
-              <div key={`${variant}-${size}`} className="w-full">
+              <div key={`${variant}-${size}`} className="w-full max-w-4xl">
                 <RangeSlider
                   variant={variant}
                   size={size}
@@ -130,7 +133,7 @@ export const States: Story = {
                 <div className="text-sm font-medium">{size}</div>
                 <div className="flex items-center gap-4">
                   {states.map((state) => (
-                    <div key={state.name} className="flex-1 space-y-1">
+                    <div key={state.name} className="max-w-4xl flex-1 space-y-1">
                       <div className="text-xs text-muted-foreground">{state.name}</div>
                       <RangeSlider
                         variant={variant}
@@ -166,7 +169,7 @@ export const SizesGallery: Story = {
           <h3 className="mb-4 text-lg font-semibold">Size Comparison</h3>
           <div className="space-y-6">
             {sizes.map((size) => (
-              <div key={size} className="space-y-2">
+              <div key={size} className="max-w-4xl space-y-2">
                 <div className="text-sm font-medium">{size}</div>
                 <RangeSlider
                   size={size}
@@ -192,7 +195,7 @@ export const PriceRangeFilter: Story = {
     const [priceRange, setPriceRange] = React.useState<[number, number]>([100, 500]);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="max-w-4xl space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Price Range</label>
           <span className="text-sm text-muted-foreground">
@@ -223,7 +226,7 @@ export const DateRangeSelection: Story = {
     const [dateRange, setDateRange] = React.useState<[number, number]>([7, 30]);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="max-w-4xl space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Date Range</label>
           <span className="text-sm text-muted-foreground">
@@ -254,7 +257,7 @@ export const TemperatureRange: Story = {
     const [tempRange, setTempRange] = React.useState<[number, number]>([18, 24]);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="max-w-4xl space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Temperature Range</label>
           <span className="text-sm text-muted-foreground">
@@ -285,7 +288,7 @@ export const AgeRangeFilter: Story = {
     const [ageRange, setAgeRange] = React.useState<[number, number]>([18, 65]);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="max-w-4xl space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Age Range</label>
           <span className="text-sm text-muted-foreground">
@@ -386,7 +389,7 @@ export const WithMarks: Story = {
     const [range, setRange] = React.useState<[number, number]>([25, 75]);
 
     return (
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-4xl space-y-8">
         <div>
           <span className="mb-2 block text-sm text-muted-foreground">
             {range[0]}-{range[1]}
@@ -414,7 +417,7 @@ export const WithMarksAndLabels: Story = {
     const [range, setRange] = React.useState<[number, number]>([25, 75]);
 
     return (
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-4xl space-y-8">
         <div>
           <span className="mb-4 block text-sm text-muted-foreground">
             {range[0]}-{range[1]}
@@ -449,7 +452,7 @@ export const CustomMarkLabels: Story = {
     const [range, setRange] = React.useState<[number, number]>([33, 66]);
 
     return (
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-4xl space-y-8">
         <div>
           <span className="mb-4 block text-sm text-muted-foreground">
             Price Range: ${range[0]}-${range[1]}

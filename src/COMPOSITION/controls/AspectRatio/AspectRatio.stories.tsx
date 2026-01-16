@@ -111,11 +111,13 @@ export const Video: Story = {
   render: () => (
     <div className="w-full max-w-2xl">
       <AspectRatio preset="video">
-        <img
-          src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1600&h=900&fit=crop"
-          alt="Code on screen"
+        <video
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          controls
           className="h-full w-full rounded-md object-cover"
-        />
+        >
+          Your browser does not support the video tag.
+        </video>
       </AspectRatio>
     </div>
   ),

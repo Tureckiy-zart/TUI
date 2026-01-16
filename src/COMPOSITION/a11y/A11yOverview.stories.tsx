@@ -87,7 +87,7 @@ export const SemanticRoles: Story = {
                   <Link href="#" variant="primary">
                     Native Link
                   </Link>
-                  <Box className="flex items-center gap-2 text-black">
+                  <Box className="flex items-center gap-2 text-black [&_input]:!text-black">
                     <Label htmlFor="demo-input">Label</Label>
                     <Input id="demo-input" placeholder="Native Input" />
                   </Box>
@@ -164,7 +164,9 @@ export const KeyboardOnly: Story = {
                   <Box className="[&_button]:!text-black">
                     <Button variant="primary">Tab to focus</Button>
                   </Box>
-                  <Input placeholder="Tab to focus" />
+                  <Box className="[&_input]:!text-black">
+                    <Input placeholder="Tab to focus" />
+                  </Box>
                   <Link href="#" variant="primary">
                     Tab to focus
                   </Link>
