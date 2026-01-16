@@ -399,7 +399,7 @@ export const AccessibilityDemo: Story = {
  */
 export const UserProfileCard: Story = {
   render: () => (
-    <div className="w-80 rounded-lg border border-border bg-white p-6 text-black">
+    <div className="w-80 rounded-lg border border-border bg-white p-6 [&_h4]:!text-black [&_p.text-sm]:!text-gray-500 [&_p]:!text-gray-600">
       <Stack spacing="md" align="center">
         <Avatar
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
@@ -408,13 +408,9 @@ export const UserProfileCard: Story = {
           status="online"
         />
         <Stack spacing="xs" align="center">
-          <Heading level={4} className="text-black">
-            John Doe
-          </Heading>
-          <Text tone="muted" className="text-gray-600">
-            Senior Software Engineer
-          </Text>
-          <Text size="sm" tone="muted" className="text-gray-500">
+          <Heading level={4}>John Doe</Heading>
+          <Text tone="muted">Senior Software Engineer</Text>
+          <Text size="sm" tone="muted">
             San Francisco, CA
           </Text>
         </Stack>
