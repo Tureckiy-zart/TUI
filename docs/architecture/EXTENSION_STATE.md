@@ -1,6 +1,7 @@
 # TUI Extension Layer - Canonical State
 
 **Date:** 2025-12-27  
+**Last Updated:** 2026-01-17  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -49,30 +50,22 @@ This document defines the canonical state of:
 
 ---
 
-## Foundation Layer (UNLOCKED - Active Construction)
+## Foundation Layer (CLOSED - Finalized)
 
-**Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
-**Unlock Date:** 2025-12-26  
+**Status:** ? **FOUNDATION CLOSED (Finalized)**  
+**Finalization Date:** 2026-01-02  
 **Source of Truth:** [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md)
 
-The following components form the foundation of the UI system. Foundation layer is **UNLOCKED** for active construction to complete missing primitives before final lock.
+The following components form the foundation of the UI system. Foundation layer is **CLOSED** and finalized.
 
 **Foundation Authorities remain LOCKED:** All Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation) remain **LOCKED** and **IMMUTABLE**. **Foundation Enforcement** (className/style exclusion) is **LOCKED / APPLIED**. Extension components **MUST** comply with all Foundation Authority rules and **CANNOT** modify or override Foundation functionality.
 
-**Unlock Rules:**
-- ✅ Missing Foundation primitives can be added (Text, Input, Textarea, Link, Toast renderer, Modal)
-- ✅ Existing Foundation primitives can be refactored to reach canonical form
-- ✅ APIs can be adjusted to remove architectural mistakes
-- ✅ Missing contracts required by higher layers can be added
-- ❌ Business logic addition is **FORBIDDEN**
-- ❌ Framework-specific dependencies addition is **FORBIDDEN**
-- ❌ Convenience APIs addition is **FORBIDDEN**
-- ❌ Domain or navigation patterns addition is **FORBIDDEN**
-- ❌ Composition-level components addition is **FORBIDDEN**
-
-**Foundation layer is intentionally unlocked until all primitives reach canonical form.**
-
-### Locked Components
+**Foundation Change Rules:**
+- ? Changes require explicit unlock approval and audit
+- ? Documentation updates are allowed when they do not alter behavior
+- ? Type safety improvements are allowed only with unlock approval
+- ? New Foundation components without unlock
+- ? Breaking API changes without unlock`r`n`r`n### Locked Components
 
 1. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
@@ -160,7 +153,6 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Rule:** Future structural modifications require re-entry into Pipeline 18A
    - **Exports:** `Toast`, `ToastAction`, `ToastClose`, `ToastDescription`, `ToastRoot`, `ToastTitle`, `toastVariants`
    - **Types:** `ToastActionData`, `ToastData`, `ToastProps`, `ToastRootProps`, `ToastVariant`
-   - **Provider:** `ToastProvider`, `ToastViewport`, `useToast`
 
 6. **Button** - `src/PRIMITIVES/Button/Button.tsx`
    - **Status:** ✅ **FINAL LOCK** ( )
@@ -184,29 +176,20 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Lock Report:** `docs/reports/LINK_FOUNDATION_LOCK_REPORT.md` (legacy process, superseded by audit report)
    - **Exports:** `Link`, `LinkProps`, `LinkSize`, `LinkVariant`, `linkVariants`
 
-### Foundation Layer Rules (Unlock Period)
+### Foundation Layer Rules (Closed)
 
-**ALLOWED:**
-- ✅ Add missing Foundation primitives (Text, Input, Textarea, Link, Toast renderer, Modal)
-- ✅ Refactor existing Foundation primitives to reach canonical form
-- ✅ Adjust APIs to remove architectural mistakes
-- ✅ Add missing contracts required by higher layers
+**ALLOWED (only with explicit unlock approval):**
+- ? Bug fixes that preserve public API
+- ? Type safety improvements
+- ? Documentation updates tied to Foundation components
 
-**FORBIDDEN:**
-- ❌ Add business logic
-- ❌ Add framework-specific dependencies
-- ❌ Add convenience APIs
-- ❌ Add domain or navigation patterns
-- ❌ Add composition-level components
-- ❌ Create alternatives to Foundation components
-- ❌ Import Foundation components from non-canonical paths
-- ❌ Use internal implementation details of Foundation components
-- ❌ Modify Foundation Authority rules (Foundation Authorities remain LOCKED and IMMUTABLE)
-- ❌ Override, bypass, or duplicate Foundation functionality
+**FORBIDDEN without unlock:**
+- ? New Foundation components
+- ? Breaking API changes
+- ? New token domains or authority changes
 
 **MUST:**
-- ✅ Comply with all Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation)
-
+- ? Comply with all Foundation Authority Contracts (Interaction, State, Layout, Token, Spacing, Radius, Typography, Motion, Elevation)
 ---
 
 ## Extension Layer - Canonical Components (ALLOWED)
@@ -1163,7 +1146,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - Types: `PopoverProps`, `PopoverVariant`, `PopoverSize` (restricted to `"sm" | "md" | "lg"` per overlay size restriction)
 
 34. ~~**DropdownMenu**~~ ✅ **REMOVED** (MIGRATION_12C,  )
-    - All Dropdown components and tokens fully removed
+    - DropdownMenu removed; Dropdown component remains active in COMPOSITION/overlays
     - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 
 35. **HoverCard** - `src/PATTERNS/menus/menus/hover-card/`
@@ -1762,12 +1745,6 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
-### DO NOT USE - Dropdown Component
-
-21. ~~**Dropdown**~~ - ❌ **REMOVED** (MIGRATION_12C)
-    - **Status:** REMOVED
-    - **Rule:** Fully removed from codebase
-
 ### DO NOT USE - Section Components
 
 23. **SectionBuilder** - `src/components/SectionBuilder.tsx`
@@ -2238,3 +2215,4 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 ---
 
 **End of Canonical State Document**
+

@@ -34,7 +34,7 @@ export function useLocalToast(): UseToastReturn {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const dismiss = useCallback((toastId: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== toastId));
+    setToasts((prev: Toast[]) => prev.filter((toast) => toast.id !== toastId));
   }, []);
 
   const toast = useCallback(
@@ -46,7 +46,7 @@ export function useLocalToast(): UseToastReturn {
         ...toastData,
       };
 
-      setToasts((prev) => [...prev, newToast]);
+      setToasts((prev: Toast[]) => [...prev, newToast]);
 
       // Auto dismiss after duration
       if (durationMs > 0) {
@@ -76,11 +76,19 @@ export function useLocalToast(): UseToastReturn {
 export { useLocalToast as useToast };
 
 // Hook for managing multiple toast contexts
-export function useToastManager() {
+export interface UseToastManagerReturn {
+  toasts: Toast[];
+  toast: (toast: Omit<Toast, "id">) => string;
+  dismiss: (toastId: string) => void;
+  dismissAll: () => void;
+  updateToast: (toastId: string, updates: Partial<Toast>) => void;
+}
+
+export function useToastManager(): UseToastManagerReturn {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const dismiss = useCallback((toastId: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== toastId));
+    setToasts((prev: Toast[]) => prev.filter((toast) => toast.id !== toastId));
   }, []);
 
   const toast = useCallback(
@@ -92,7 +100,7 @@ export function useToastManager() {
         ...toastData,
       };
 
-      setToasts((prev) => [...prev, newToast]);
+      setToasts((prev: Toast[]) => [...prev, newToast]);
 
       // Auto dismiss after duration
       if (durationMs > 0) {
@@ -111,7 +119,7 @@ export function useToastManager() {
   }, []);
 
   const updateToast = useCallback((toastId: string, updates: Partial<Toast>) => {
-    setToasts((prev) =>
+    setToasts((prev: Toast[]) =>
       prev.map((toast) => (toast.id === toastId ? { ...toast, ...updates } : toast)),
     );
   }, []);

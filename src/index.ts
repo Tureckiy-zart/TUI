@@ -604,8 +604,11 @@ export {
   type ToastProviderProps,
   ToastViewport,
   type ToastViewportProps,
-  useToast,
 } from "./COMPOSITION/overlays";
+
+// Canonical toast hooks (preferred over deprecated useToast)
+export { useGlobalToast } from "./hooks/useGlobalToast";
+export { useLocalToast } from "./hooks/useToast";
 
 // Combobox (Extension overlay component - autocomplete with dropdown)
 export {

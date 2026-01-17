@@ -110,7 +110,7 @@ These are not preferences. These are decisions.
 
 **Dropdown is removed.** Dropdown components and tokens were removed (MIGRATION_12C). Use Select or ContextMenu instead. Reintroducing Dropdown is forbidden.
 
-**Canonical toast hooks are `useLocalToast` and `useGlobalToast`.** Legacy `useToast` exports are deprecated. New code must use canonical hooks.
+**Canonical toast hooks are `useLocalToast` and `useGlobalToast`.** Legacy `useToast` aliases are internal-only and not exported from the public API. New code must use canonical hooks.
 
 **Single source of overlay truth.** All overlays must be imported from `src/COMPOSITION/overlays/` canonical locations. Duplicate implementations or non-canonical paths are forbidden.
 
@@ -136,7 +136,7 @@ These are not preferences. These are decisions.
 
 **Do not add tokens without components.** Foundation tokens must correspond to active components. Orphaned tokens are forbidden.
 
-**Do not reintroduce removed concepts.** Dropdown, legacy Card in PRIMITIVES, and legacy useToast exports are explicitly forbidden. Check `docs/architecture/ARCHITECTURE_LOCK.md` before adding anything.
+**Do not reintroduce removed concepts.** Dropdown, legacy Card in PRIMITIVES, and legacy useToast aliases are explicitly forbidden. Check `docs/architecture/ARCHITECTURE_LOCK.md` before adding anything.
 
 **Do not add overlay infrastructure to PATTERNS.** Overlays live in COMPOSITION only. PATTERNS may compose overlays but cannot define overlay primitives.
 
@@ -222,4 +222,5 @@ This document is the primary architectural entrypoint. It is designed to remain 
 ---
 
 **End of Architecture Document**
+
 

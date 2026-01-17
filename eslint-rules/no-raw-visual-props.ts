@@ -85,7 +85,7 @@ const EXCLUDED_PROP_PATTERNS = [
  */
 const EXCLUDED_FILE_PATTERNS = [
   /Table\.types\.ts$/, // TableColumn.width is a documented exception
-  /animation\/types\.ts$/, // ComponentAnimationConfig.animation and hoverAnimation allow string for custom CSS
+  /animation[\/\\]types\.ts$/, // ComponentAnimationConfig.animation and hoverAnimation allow string for custom CSS
 ] as const;
 
 /**
@@ -304,15 +304,15 @@ export default createRule<Options, MessageIds>({
       const filePath = context.getFilename();
       if (isExcludedFile(filePath)) {
         // TableColumn.width is a documented exception
-        if (filePath.includes("Table.types.ts") && propName === "width") {
+        if (/Table\.types\.ts$/.test(filePath) && propName === "width") {
           return;
         }
         // ComponentAnimationConfig.animation is a documented exception (allows ResponsiveAnimationPreset | string for custom CSS)
-        if (filePath.includes("animation/types.ts") && propName === "animation") {
+        if (/animation[\/\\]types\.ts$/.test(filePath) && propName === "animation") {
           return;
         }
         // ComponentAnimationConfig.hoverAnimation is a documented exception (allows string for custom CSS classes)
-        if (filePath.includes("animation/types.ts") && propName === "hoverAnimation") {
+        if (/animation[\/\\]types\.ts$/.test(filePath) && propName === "hoverAnimation") {
           return;
         }
       }

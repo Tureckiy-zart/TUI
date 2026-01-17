@@ -81,8 +81,11 @@ function isUiLibrarySource(filename: string) {
 
   return (
     normalized.includes("/tenerife-ui/") ||
+    normalized.includes("\\tenerife-ui\\") ||
     normalized.includes("/packages/ui/") ||
-    normalized.includes("/src/ui/")
+    normalized.includes("\\packages\\ui\\") ||
+    normalized.includes("/src/ui/") ||
+    normalized.includes("\\src\\ui\\")
   );
 }
 

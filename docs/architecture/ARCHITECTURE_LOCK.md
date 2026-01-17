@@ -2,7 +2,7 @@
 
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-02 (DX, Navigation and Surface layers lock — post-audit)  
+**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -147,10 +147,7 @@ The following components are **locked** and **immutable**:
 - Canonical implementations:
   - ✅ `hooks/useLocalToast.ts` - Component-scoped toast management
   - ✅ `hooks/useGlobalToast.ts` - App-wide toast management
-- Backward compatibility maintained via deprecated exports:
-  - `hooks/useToast.ts` - Exports `useLocalToast` (deprecated)
-  - `hooks/use-toast.ts` - Exports `useGlobalToast` (deprecated)
-
+- Legacy alias exists in `hooks/useToast.ts` (internal-only; not exported from the public API)\r?\n
 **FOUNDATION TOKENS RULE:**
 - FOUNDATION tokens **only exist for active components**
 - No orphaned tokens (all tokens must correspond to active components)
@@ -1981,6 +1978,7 @@ New functionality must be built as **extensions** that compose foundation compon
 **Status:** ✅ **LOCKED** (Foundation CLOSED, Foundation Lock Sweep FINALIZED, Public API LOCKED)  
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-02 (Foundation Component Lock Sweep Finalization, Public API Canon Lock)  
+**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable, Foundation Lock Sweep finalized, Public API is locked)
+
