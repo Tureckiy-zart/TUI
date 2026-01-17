@@ -1,26 +1,25 @@
 # Documentation Canon Lock
 
-**Date:** 2025-12-30  
-**Status:** 🔒 **LOCKED**  
-**Purpose:** Fix current documentation structure, naming rules, and roles as canonical to prevent future semantic drift and duplication
+**Date:** 2026-01-17  
+**Status:** **ACTIVE**    
+**Purpose:** Define documentation structure, naming rules, and roles to prevent semantic drift and duplication
 
 ---
 
 ## Purpose
 
-This document fixes the current documentation system as **canonical** and **immutable**. It prevents:
+This document defines the current documentation system as **canonical**. It prevents:
 
 - **Semantic drift** - Documents diverging from their intended purpose
 - **Duplication** - Multiple documents covering the same semantic meaning
 - **Naming chaos** - Inconsistent naming patterns and historical artifacts
 - **Structural entropy** - Files placed in wrong folders or created without architectural decision
 
-This lock document is the **single source of truth** for:
-- What documentation exists and why
-- Where documentation belongs
-- How documentation must be named
-- What role each document serves
-- When and how documentation can change
+This document is the **single source of truth** for:
+- Documentation structure and roles
+- Naming rules and placement
+- Change policy for documentation
+- Canonical list authority (see docs/CANONICAL_DOCUMENTATION_INVENTORY.md)
 
 **Relationship to Architectural Locks:**
 - This document complements `FOUNDATION_LOCK.md`, `FOUNDATION_LOCK_THEME.md`, and `ARCHITECTURE_LOCK.md`
@@ -35,13 +34,12 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 ### Root: `docs/`
 
-**Purpose:** Contains ONLY canonical, authoritative, and active documentation (44 files)
+**Purpose:** Contains canonical and supporting documentation. The canonical list is maintained in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`.
 
 **Rules:**
-- ✅ All files in `docs/` are considered ACTIVE and CANONICAL
-- ❌ Non-canonical documentation MUST be in `docs_archive/`
-- ❌ Historical reports, audits, and deprecated docs MUST be archived
-
+- �?: Canonical documents are defined by `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
+- �?: Non-canonical documents may exist in `docs/` but are not authoritative
+- �?? Historical reports, audits, and deprecated docs SHOULD be archived
 ### `docs/architecture/`
 
 **Purpose:** Authority Contracts, Architecture Rules, Locks, and architectural guidelines
@@ -217,28 +215,28 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Legacy guides and outdated documentation
 - Migration documentation (historical context only)
 - Deprecated documents and code reviews
-- Cursor/AI task results and experimental documents
+- assistant task results and experimental documents
 
 **Rules:**
 - ❌ **NEVER** use `docs_archive/` as source of truth
 - ❌ **NEVER** reference archived documents for canonical rules
-- ❌ **NEVER** use archived documents for AI/Cursor context
+- ❌ **NEVER** use archived documents for assistant context
 - ✅ **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
 
 ---
 
-## Documentation Structure Freeze
+## Documentation Structure Governance
 
-**Status:** 🔒 **FROZEN**  
-**Freeze Date:** 2025-12-19 (Structure freeze date - structure remains frozen)  
-**Last Updated:** 2025-12-30  
+**Status:** **ACTIVE**    
+**Baseline Date:** 2025-12-19 (Structure freeze date - structure remains frozen)  
+**Last Updated:** 2026-01-17  
 **Purpose:** Prevent structural drift and ensure all documentation changes respect canonical organization
 
 ### Freeze Declaration
 
-The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This structure represents the single source of truth for documentation organization.
+The current structure of `docs/` directory is **CANONICAL** and **controlled**. This structure represents the single source of truth for documentation organization.
 
-**The following top-level directories are FROZEN:**
+**The following top-level directories are CANONICAL:**
 
 1. **`docs/architecture/`** - Authority Contracts, Architecture Rules, Locks, and architectural guidelines
    - **Purpose:** Contains immutable LAW documents and active GUIDE documents
@@ -295,7 +293,7 @@ The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This
 
 ### Structural Change Policy
 
-**CRITICAL RULE:** Any structural changes to `docs/` directory structure **MUST** be made through modification of this document (`DOCUMENTATION_CANON_LOCK.md`) first.
+**Rule:** Any structural changes to `docs/` directory structure must be made through modification of this document (`DOCUMENTATION_CANON_LOCK.md`) first.
 
 **Process for Structural Changes:**
 
@@ -320,7 +318,7 @@ The current structure of `docs/` directory is **FROZEN** and **CANONICAL**. This
    - Verify all links are valid
    - Verify no files are in unauthorized locations
 
-**Forbidden Without Lock Update:**
+**Disallowed Without Update:**
 
 - ❌ Creating new top-level directories in `docs/`
 - ❌ Moving documents between top-level directories
@@ -562,7 +560,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 ## Document Roles
 
-All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, **REFERENCE**, and **META**.
+All canonical documents are classified into four roles: **LAW**, **GUIDE**, **REFERENCE**, and **META**.
 
 ### LAW (Immutable Rules)
 
@@ -572,9 +570,9 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 - Define canonical scales, forbidden patterns, and component obligations
 - Serve as single source of truth for domain decisions
 - Override all other documentation for their domain
-- Status: **LOCKED** or **IMMUTABLE**
+- **Status:** **ACTIVE**    
 
-**Documents (18 files):**
+**Documents (see inventory):**
 
 1. `docs/ARCHITECTURE_CONTEXT.md` - IMMUTABLE
 2. `docs/architecture/FOUNDATION_LOCK.md` - LOCKED
@@ -605,9 +603,9 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 - Define how to work within the architecture
 - Provide development guidelines and checklists
 - Establish processes and workflows
-- Status: **ACTIVE**
+- **Status:** **ACTIVE**    
 
-**Documents (15 files):**
+**Documents (see inventory):**
 
 1. `docs/architecture/AUTHORITY_NAVIGATION.md` - Navigation and mental models
 2. `docs/architecture/ARCHITECTURE_RULES.md` - Architecture rules reference
@@ -636,9 +634,9 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 - Integration guides and examples
 - Component inventories and catalogs
 - Developer-facing reference material
-- Status: **ACTIVE**
+- **Status:** **ACTIVE**    
 
-**Documents (6 files):**
+**Documents (see inventory):**
 
 1. `docs/reference/API_REFERENCE.md` - Public API reference
 2. `docs/reference/TOKENS_EXPORT_REFERENCE.md` - Design tokens export reference
@@ -660,9 +658,9 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 - Project orientation and current state
 - Entry points for different audiences
 - Documentation hub functionality
-- Status: **ACTIVE**
+- **Status:** **ACTIVE**    
 
-**Documents (6 files):**
+**Documents (see inventory):**
 
 1. `docs/README.md` - Main README, documentation hub
 2. `docs/ASSISTANT_README.md` - Assistant-specific README
@@ -674,7 +672,7 @@ All 44 canonical documents are classified into four roles: **LAW**, **GUIDE**, *
 
 **Change Policy:** ✅ **ALLOWED** for inventory updates and progress tracking
 
-**Note:** `docs/architecture/CANONICAL_STATE_FINAL.md` is **ARCHIVED** and not counted in the 44 canonical documents.
+**Note:** `docs/architecture/CANONICAL_STATE_FINAL.md` is **ARCHIVED** and not counted in the canonical documents.
 
 ---
 
@@ -813,9 +811,9 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 This documentation canon is **mandatory** and **strictly enforced**.
 
-### AI/Cursor Assistant Requirements
+### Assistant Requirements
 
-AI/Cursor assistants **MUST**:
+Assistants **MUST**:
 - ✅ Follow this canon when creating or modifying documentation
 - ✅ Refuse tasks that violate naming rules
 - ✅ Refuse tasks that violate folder structure
@@ -823,7 +821,7 @@ AI/Cursor assistants **MUST**:
 - ✅ Verify compliance before creating new documentation
 - ✅ Reference this document when documentation questions arise
 
-AI/Cursor assistants **MUST NOT**:
+Assistants **MUST NOT**:
 - ❌ Create documentation that violates naming rules
 - ❌ Place documentation in wrong folders
 - ❌ Modify LAW documents
@@ -854,14 +852,14 @@ Before completing any documentation task, verify:
 
 ## Summary
 
-This document fixes the current documentation system as canonical:
+This document defines the documentation system as canonical:
 
-- **44 canonical documents** organized into **12 semantic groups**
-- **4 document roles:** LAW (17), GUIDE (15), REFERENCE (6), META (6)
+- **Canonical documents listed** in docs/CANONICAL_DOCUMENTATION_INVENTORY.md${nl}- **4 document roles:** LAW, GUIDE, REFERENCE, META (see inventory)
+- **Authoritative decisions:** LAW documents (see roles in the inventory)
 - **Canonical folder structure** with clear purposes
 - **Mandatory naming patterns** for each semantic group
 - **Strict change policy** preventing drift and duplication
-- **Theme system documentation** in `docs/theming/` with canonical token registry and parity validation
+- **Theme system documentation** in docs/theming/ with canonical token registry and parity validation
 
 **Token System Integration:**
 - Canonical token registry: `src/FOUNDATION/tokens/required-tokens.ts` (single source of truth for required semantic tokens)
@@ -870,14 +868,14 @@ This document fixes the current documentation system as canonical:
 - Token naming: `--tm-*` prefix with `-foreground` suffix (canonical spelling)
 - Token parity: All theme files must define identical token set (validated by parity checker)
 
-**This canon is LOCKED and must be followed for all documentation work.**
+**This canon is ACTIVE and must be followed for all documentation work.**
 
 ---
 
-**Last Updated:** 2025-12-30  
-**Status:** 🔒 **LOCKED**  
+**Last Updated:** 2026-01-17  
+**Status:** **ACTIVE**    
 **Related Documents:**
-- `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Complete inventory of 44 documents
+- `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Complete inventory of canonical documents
 - `docs/DOCS_CANONICAL_NAMING_STANDARD.md` - Naming standard reference
 - `docs/DOCS_SEMANTIC_GROUPING_REPORT.md` - Semantic grouping analysis
 - `docs/architecture/FOUNDATION_LOCK.md` - Foundation layer lock

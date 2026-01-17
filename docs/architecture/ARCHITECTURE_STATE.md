@@ -1,6 +1,7 @@
 # Canonical Architecture Lock
 
 **Date:** 2025-12-17  
+**Last Updated:** 2026-01-17  
 **Status:** ✅ **LOCKED**  
 **Authority:** This document defines the FINAL, CANONICAL architecture state of TenerifeUI.  
 **Purpose:** Prevent regression into legacy/duplicate structures and lock resolved architectural decisions.
@@ -127,19 +128,15 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 
 **Rule:** Toast **MUST** be imported from `COMPOSITION/overlays/Toast` only.
 
-### ❌ Dropdown
+### ? Dropdown
 
-**Status:** ❌ **REMOVED** (MIGRATION_12C)
+**Canonical Implementation:** `COMPOSITION/overlays/Dropdown/` (composes Popover)
 
-**Removed Components:**
-- ❌ `COMPOSITION/overlays/Dropdown/` - REMOVED
-- ❌ `PATTERNS/menus/menus/dropdown/` - REMOVED
+**Status:** ? **PROCESS LOCKED** (2026-01-02)
 
-**Removed Tokens:**
-- ❌ `DROPDOWN_TOKENS` - REMOVED from FOUNDATION
-- ❌ `DropdownItemSize`, `DropdownMenuSize`, `DropdownTriggerSize`, `DropdownVariant` - REMOVED
+**Tokens:** `DROPDOWN_TOKENS` (active)
 
-**Rule:** Dropdown components and tokens **MUST NOT** be reintroduced. Use Select or ContextMenu instead.
+**Rule:** Dropdown **MUST** be imported from `COMPOSITION/overlays/Dropdown` only. Do not create alternate Dropdown implementations.
 
 ---
 
@@ -165,7 +162,7 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 
 ### ✅ useLocalToast
 
-**Canonical Implementation:** `hooks/useLocalToast.ts`
+**Canonical Implementation:** `hooks/useToast.ts` (exports `useLocalToast`)
 
 **Status:** ✅ **CANONICAL** - Component-scoped toast management
 
@@ -179,15 +176,14 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 
 **Rule:** Use `useGlobalToast` for app-wide toast management.
 
-### ⚠️ Legacy Exports (Deprecated)
+### ? Legacy Alias (Internal Only)
 
-**Status:** ⚠️ **DEPRECATED** - Backward compatibility only
+**Status:** ? **DEPRECATED** - Internal-only alias
 
-**Exports:**
-- `hooks/useToast.ts` - Exports `useLocalToast` (deprecated)
-- `hooks/use-toast.ts` - Exports `useGlobalToast` (deprecated)
+**Alias:**
+- `hooks/useToast.ts` - Exports `useLocalToast` as `useToast` (internal-only)
 
-**Rule:** Legacy `useToast` exports **MUST NOT** be used in new code. New usage **MUST** use canonical hooks (`useLocalToast`, `useGlobalToast`).
+**Rule:** Legacy alias is not exported from the public API. New usage **MUST** use canonical hooks (useLocalToast, useGlobalToast).
 
 ---
 
@@ -198,9 +194,9 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 **MANDATORY:** FOUNDATION tokens **MUST NOT** exist without active components.
 
 **Removed Tokens:**
-- ❌ `DROPDOWN_TOKENS` - REMOVED (no active Dropdown component)
 
 **Active Tokens:**
+- ? `DROPDOWN_TOKENS` - Active (used by COMPOSITION/overlays/Dropdown)
 - ✅ `POPOVER_TOKENS` - Active (used by COMPOSITION/overlays/Popover)
 - ✅ `CONTEXT_MENU_TOKENS` - Active (used by COMPOSITION/overlays/ContextMenu)
 - ✅ `CARD_TOKENS` - Active (used by COMPOSITION/layout/Card)
@@ -213,49 +209,6 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 ## Forbidden Regressions (LOCKED)
 
 The following are **EXPLICITLY FORBIDDEN** and **MUST NOT** be reintroduced:
-
-### ❌ Dropdown Components and Tokens
-
-**FORBIDDEN:**
-- ❌ Creating Dropdown components in any layer
-- ❌ Creating Dropdown tokens in FOUNDATION
-- ❌ Exporting Dropdown from public API
-- ❌ Using Dropdown in new code
-
-**Rationale:** Dropdown was removed (MIGRATION_12C). Use Select or ContextMenu instead.
-
-### ❌ Legacy Card in PRIMITIVES
-
-**FORBIDDEN:**
-- ❌ Creating Card component in PRIMITIVES layer
-- ❌ Reintroducing legacy PRIMITIVES/Card
-
-**Rationale:** Legacy PRIMITIVES/Card was removed (MIGRATION_12A). Use COMPOSITION/layout/Card instead.
-
-### ❌ Overlay Infrastructure in PATTERNS
-
-**FORBIDDEN:**
-- ❌ Adding overlay primitives to PATTERNS layer
-- ❌ Creating Popover, Modal, ContextMenu, or Toast in PATTERNS
-- ❌ Adding overlay infrastructure to PATTERNS
-
-**Rationale:** Overlays **MUST** live in COMPOSITION layer only. PATTERNS is for business/UI patterns, not overlay primitives.
-
-### ❌ Legacy useToast Exports in New Code
-
-**FORBIDDEN:**
-- ❌ Using `useToast` from `hooks/useToast.ts` in new code
-- ❌ Using `useToast` from `hooks/use-toast.ts` in new code
-
-**Rationale:** Legacy exports are deprecated. New code **MUST** use canonical hooks (`useLocalToast`, `useGlobalToast`).
-
-### ❌ Tokens Without Components
-
-**FORBIDDEN:**
-- ❌ Creating tokens in FOUNDATION without active components
-- ❌ Creating orphaned tokens
-
-**Rationale:** Tokens **MUST** correspond to active components. Orphaned tokens create maintenance burden.
 
 ---
 
@@ -427,4 +380,6 @@ Any future change must be intentional, explicit, and reviewable.
 ---
 
 **End of Canonical Lock Document**
+
+
 

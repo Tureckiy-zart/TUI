@@ -1,6 +1,6 @@
 # Canonical Documentation Inventory
 
-**Date:** 2025-12-30
+**Date:** 2026-01-17
 **Status:** ✅ Complete  
 **Total Canonical Documents:** 50  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
@@ -11,12 +11,14 @@
 
 ### Purpose
 
-This document provides a complete and authoritative inventory of all canonical documentation files currently present in the `docs/` directory. This inventory serves as:
+This document provides a complete inventory of canonical documentation files. This inventory serves as:
 
 - **Single source of truth** for what documentation is considered canonical
-- **Reference guide** for AI/Cursor assistants to understand the documentation surface
+- **Reference guide** for assistants to understand the documentation surface
 - **Verification checklist** to ensure no canonical documents are missing
 - **Navigation aid** for developers and maintainers
+
+**Canonical list authority:** This inventory defines the canonical list. Authoritative decisions live in LAW documents per `docs/architecture/DOCUMENTATION_CANON_LOCK.md`.
 
 ### Total Count
 
@@ -26,9 +28,9 @@ This document provides a complete and authoritative inventory of all canonical d
 
 This inventory reflects the state **after** the documentation archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001), where:
 
-- All non-canonical documentation (153+ files) has been moved to `docs_archive/`
-- Only canonical, authoritative, and active documentation remains in `docs/`
-- `docs_archive/` is excluded from git tracking and AI/Cursor context
+- Non-canonical documentation may be archived under `docs_archive/`
+- Canonical and supporting documentation may exist in `docs/`; canonical files are listed here
+- `docs_archive/` is excluded from git tracking and canonical information
 
 ---
 
@@ -148,7 +150,7 @@ These documents define the TUNG (Task Unified Next-Gen) automation and task mana
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/workflows/tung_system_specification.md` | TUNG system specification and rules | **ACTIVE** |
+| `docs/workflows/foundation/tung_system_specification.md` | TUNG system specification and rules | **ACTIVE** |
 | `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | Canonical TUNG template for Foundation pipeline | **ACTIVE** |
 | `docs/workflows/example_task_master.json` | Example master task in TUNG format | **ACTIVE** |
 | `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` | Component Refactoring Pipeline (Step-by-step) | **ACTIVE** |
@@ -163,12 +165,12 @@ These documents provide API and integration references.
 
 | Path | Description | Status |
 |------|-------------|--------|
-| `docs/reference/public-api.md` | Public API reference - API reference | **ACTIVE** |
-| `docs/reference/design_tokens_export.md` | Design tokens export reference - API reference | **ACTIVE** |
-| `docs/reference/token-map-overview.md` | Token map overview - API reference | **ACTIVE** |
-| `docs/reference/UI_COMPONENTS_INVENTORY.md` | UI components inventory - Reference documentation | **ACTIVE** |
-| `docs/reference/UI_INTEGRATION.md` | UI integration guide - Integration reference | **ACTIVE** |
-| `docs/reference/EXTENSION_COMPONENT_EXAMPLES.md` | Extension component examples and patterns - Reference examples for Extension components | **ACTIVE** |
+| `docs/reference/API_REFERENCE.md` | Public API reference - API reference | **ACTIVE** |
+| `docs/reference/TOKENS_EXPORT_REFERENCE.md` | Design tokens export reference - API reference | **ACTIVE** |
+| `docs/reference/TOKENS_OVERVIEW.md` | Token map overview - API reference | **ACTIVE** |
+| `docs/reference/COMPONENTS_INVENTORY.md` | UI components inventory - Reference documentation | **ACTIVE** |
+| `docs/reference/INTEGRATION_GUIDE.md` | UI integration guide - Integration reference | **ACTIVE** |
+| `docs/reference/COMPONENT_EXAMPLES.md` | Extension component examples and patterns - Reference examples for Extension components | **ACTIVE** |
 
 **Total:** 6 files
 
@@ -200,7 +202,7 @@ These documents provide API and integration references.
 | Path | Description | Status |
 |------|-------------|--------|
 | `docs/README.md` | Main README - documentation hub - Documentation index | **ACTIVE** |
-| `docs/README_GPT.md` | GPT-specific README - GPT context reference | **ACTIVE** |
+| `docs/ASSISTANT_README.md` | GPT-specific README - GPT context reference | **ACTIVE** |
 
 **Total:** 2 files
 
@@ -256,20 +258,20 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback collection process |
 | `docs/workflows/tasks/FEEDBACK_REVIEW_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback review process |
 | `docs/workflows/tasks/COMPONENT_USAGE_TRACKING.md` | Library Maturity | Reference (ACTIVE) | Usage tracking |
-| `docs/reference/public-api.md` | Reference | Reference (ACTIVE) | API reference |
-| `docs/reference/design_tokens_export.md` | Reference | Reference (ACTIVE) | Tokens export |
-| `docs/reference/token-map-overview.md` | Reference | Reference (ACTIVE) | Token map |
-| `docs/reference/UI_COMPONENTS_INVENTORY.md` | Reference | Reference (ACTIVE) | Components inventory |
-| `docs/reference/UI_INTEGRATION.md` | Reference | Reference (ACTIVE) | Integration guide |
-| `docs/reference/EXTENSION_COMPONENT_EXAMPLES.md` | Reference | Reference (ACTIVE) | Component examples |
+| `docs/reference/API_REFERENCE.md` | Reference | Reference (ACTIVE) | API reference |
+| `docs/reference/TOKENS_EXPORT_REFERENCE.md` | Reference | Reference (ACTIVE) | Tokens export |
+| `docs/reference/TOKENS_OVERVIEW.md` | Reference | Reference (ACTIVE) | Token map |
+| `docs/reference/COMPONENTS_INVENTORY.md` | Reference | Reference (ACTIVE) | Components inventory |
+| `docs/reference/INTEGRATION_GUIDE.md` | Reference | Reference (ACTIVE) | Integration guide |
+| `docs/reference/COMPONENT_EXAMPLES.md` | Reference | Reference (ACTIVE) | Component examples |
 | `docs/reference/TYPING_STANDARD.md` | Structure & Standards | Reference (ACTIVE) | Typing standard |
 | `docs/reference/GRADIENT_EXCEPTIONS.md` | UI Exceptions | Reference (ACTIVE) | Gradient exceptions |
 | `docs/CI_CD_OVERVIEW.md` | CI/CD | Reference (ACTIVE) | CI/CD overview |
 | `docs/README.md` | Entry Point | Reference (ACTIVE) | Documentation index |
-| `docs/README_GPT.md` | Entry Point | Reference (ACTIVE) | GPT context |
+| `docs/ASSISTANT_README.md` | Entry Point | Reference (ACTIVE) | GPT context |
 | `docs/architecture/DOCUMENTATION_CANON_LOCK.md` | META | Lock (LOCKED) | Documentation structure lock - Single source of truth |
 | `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` | META | Reference (ACTIVE) | This document - Documentation inventory |
-| `docs/workflows/tung_system_specification.md` | TUNG System | Reference (ACTIVE) | System specification |
+| `docs/workflows/foundation/tung_system_specification.md` | TUNG System | Reference (ACTIVE) | System specification |
 | `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | TUNG System | Reference (ACTIVE) | JSON Step Template |
 | `docs/workflows/example_task_master.json` | TUNG System | Reference (ACTIVE) | Master Task Example |
 | `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` | Workflow | Reference (ACTIVE) | Step-by-step pipeline |
@@ -281,25 +283,24 @@ These documents serve as entry points, track progress, or document the documenta
 ## 4. Final Statement
 
 > **This document reflects the full and complete set of canonical documentation files currently present in `docs/`.**  
-> **Any documentation not listed here is non-canonical and resides outside the active documentation surface.**
+> **Any documentation not listed here is non-canonical, even if it resides in `docs/`.**
 
 ### Verification
 
-- ✅ All 50 files from `docs/` are listed
-- ✅ File count matches actual `docs/` count (50 files)
-- ✅ Categories are clear and non-overlapping
-- ✅ No references to archived content
-- ✅ All files are canonical, authoritative, or active documentation
-- ✅ Library Maturity Growth System documents included
+- ??: Canonical files listed in this inventory
+- ??: Paths resolve within `docs/`
+- ??: Categories are clear and non-overlapping
+- ??: No archived content referenced as canonical
+- ??: Library Maturity Growth System documents included
 
 ### Usage
 
-- **For AI/Cursor:** Use this inventory to understand the complete documentation surface without scanning directories
+- **For Assistants:** Use this inventory to understand the canonical documentation surface
 - **For Developers:** Use this inventory to verify canonical documentation status
 - **For Maintainers:** Use this inventory to ensure no canonical documents are missing or misplaced
 
 ---
 
-**Last Updated:** 2025-12-23  
+**Last Updated:** 2026-01-17  
 **Inventory Version:** 1.2  
 **Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06, TUNG_SYSTEM_INTEGRATION

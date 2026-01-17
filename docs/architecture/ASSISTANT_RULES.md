@@ -1,6 +1,6 @@
 # TUI Cursor Guard Rules
 
-**Date:** 2025-12-16  
+**Date:** 2025-12-16  `r`n**Last Updated:** 2026-01-17  
 **Status:** CANONICAL - MANDATORY ENFORCEMENT  
 **Authority:** This document defines mandatory guard rules for all Cursor/AI work on `@tenerife.music/ui` to prevent architectural drift, token misuse, and cross-layer violations.
 
@@ -133,11 +133,11 @@ If Authority modifications are required:
 
 #### Locked Components
 
-1. **Modal** - `src/components/modal/Modal.tsx`
-2. **Tabs** - `src/components/navigation/tabs/Tabs.tsx`
-3. **Select** - `src/components/select/Select.tsx`
-4. **ContextMenu** - `src/components/context-menu/ContextMenu.tsx`
-5. **Toast** - `src/components/overlays/Toast.tsx`
+1. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx`
+2. **Tabs** - `src/COMPOSITION/navigation/tabs/Tabs.tsx`
+3. **Select** - `src/COMPOSITION/controls/Select/Select.tsx`
+4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
+5. **Toast** - `src/COMPOSITION/overlays/Toast.tsx`
 
 #### Foundation Layer Rules
 
@@ -279,22 +279,22 @@ export const Dialog = ({ ... }) => {
 **✅ CORRECT:**
 ```typescript
 // Input component
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 
 // Select component
-import { SELECT_TOKENS } from "@/tokens/components/select";
+import { SELECT_TOKENS } from "@/FOUNDATION/tokens/components/select";
 
 // Textarea component
-import { TEXTAREA_TOKENS } from "@/tokens/components/textarea";
+import { TEXTAREA_TOKENS } from "@/FOUNDATION/tokens/components/textarea";
 ```
 
 **❌ INCORRECT:**
 ```typescript
 // Select using Input tokens - FORBIDDEN
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 
 // Textarea using Input tokens - FORBIDDEN
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 ```
 
 ### Rule 2: No Cross-Domain Dependencies
@@ -304,13 +304,13 @@ import { INPUT_TOKENS } from "@/tokens/components/input";
 **✅ CORRECT:**
 ```typescript
 // Textarea has its own tokens
-import { TEXTAREA_TOKENS } from "@/tokens/components/textarea";
+import { TEXTAREA_TOKENS } from "@/FOUNDATION/tokens/components/textarea";
 ```
 
 **❌ INCORRECT:**
 ```typescript
 // Textarea using Input tokens - FORBIDDEN
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 ```
 
 ### Rule 3: Token Domain Encapsulation
@@ -358,7 +358,7 @@ export const TEXTAREA_TOKENS = {
 **❌ INCORRECT:**
 ```typescript
 // Reusing Input tokens in Textarea because they look similar - FORBIDDEN
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 // Using INPUT_TOKENS in Textarea component
 ```
 
@@ -394,7 +394,7 @@ export const TEXTAREA_TOKENS = {
 **✅ CORRECT:**
 ```typescript
 // FORM_TOKENS for shared form semantics
-import { FORM_TOKENS } from "@/tokens/components/form";
+import { FORM_TOKENS } from "@/FOUNDATION/tokens/components/form";
 
 <Label required>
   {required && <span className={FORM_TOKENS.label.requiredMark}>*</span>}
@@ -427,7 +427,7 @@ import { FORM_TOKENS } from "@/tokens/components/form";
 **❌ INCORRECT:**
 ```typescript
 // Divider using Input tokens for basic utility - FORBIDDEN
-import { INPUT_TOKENS } from "@/tokens/components/input";
+import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 <div className={cn(INPUT_TOKENS.width.full, className)} />
 ```
 
@@ -627,8 +627,8 @@ The Link component's `disabled` prop decision serves as a canonical precedent:
 
 ```
 ## Files to be modified:
-- src/components/input/Input.tsx
-- src/tokens/components/input.ts
+- src/PRIMITIVES/Input/Input.tsx
+- src/FOUNDATION/tokens/components/input.ts
 
 ## Files to be read (for context):
 - docs/architecture/TOKEN_AUTHORITY.md
@@ -684,12 +684,12 @@ The Link component's `disabled` prop decision serves as a canonical precedent:
 ## Task Completion Report
 
 ### Changed Files
-- `src/components/input/Input.tsx` - Updated to use INPUT_TOKENS
-- `src/tokens/components/input.ts` - Removed Select tokens
+- `src/PRIMITIVES/Input/Input.tsx` - Updated to use INPUT_TOKENS
+- `src/FOUNDATION/tokens/components/input.ts` - Removed Select tokens
 
 ### Unchanged Files (Verified)
-- `src/components/select/Select.tsx` - Verified no changes needed
-- `src/tokens/components/select.ts` - Verified no changes needed
+- `src/COMPOSITION/controls/Select/Select.tsx` - Verified no changes needed
+- `src/FOUNDATION/tokens/components/select.ts` - Verified no changes needed
 
 ### Verification Steps
 1. ✅ TypeScript compilation passes
@@ -847,8 +847,8 @@ Before completing any task, verify:
 - Solution: Update to use INPUT_TOKENS exclusively
 
 ## Files to be modified:
-- src/components/input/Input.tsx
-- src/tokens/components/input.ts (if needed)
+- src/PRIMITIVES/Input/Input.tsx
+- src/FOUNDATION/tokens/components/input.ts (if needed)
 
 ## Files to be read:
 - docs/architecture/TOKEN_AUTHORITY.md
@@ -907,7 +907,7 @@ Your request is ambiguous regarding:
 - Task scope: Is this limited to Select only, or should I also fix related components?
 
 **Please clarify:**
-1. Which Select component should be fixed? (src/components/select/Select.tsx or legacy?)
+1. Which Select component should be fixed? (src/COMPOSITION/controls/Select/Select.tsx or legacy?)
 2. What specific token violations exist?
 3. Should this task be limited to Select component only (no side refactors)?
 
@@ -967,7 +967,6 @@ Your request is ambiguous regarding:
 
 **MANDATORY:**
 - ❌ **NEVER** use `useToast` from `hooks/useToast.ts` in new code
-- ❌ **NEVER** use `useToast` from `hooks/use-toast.ts` in new code
 
 **Rationale:** Legacy exports are deprecated. New code **MUST** use canonical hooks (`useLocalToast`, `useGlobalToast`).
 
@@ -1090,3 +1089,4 @@ This document is **MANDATORY**. Any work violating these rules is **INVALID**. T
 ---
 
 **End of Guard Rules Document**
+

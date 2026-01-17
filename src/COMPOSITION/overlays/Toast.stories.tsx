@@ -3,9 +3,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle } from "./Toast";
+import {
+  ToastAction,
+  ToastClose,
+  ToastDescription,
+  ToastRoot,
+  ToastTitle,
+  type ToastVariant,
+} from "./Toast";
 import { ToastProvider } from "./ToastProvider";
 import { ToastViewport } from "./ToastViewport";
+import { useGlobalToast } from "@/hooks/useGlobalToast";
+import { useLocalToast } from "@/hooks/useLocalToast";
 
 const meta: Meta<typeof ToastRoot> = {
   title: "UI / Composition / Overlays / Toast",
@@ -320,6 +329,107 @@ export const MultipleToasts: Story = {
           <ToastTitle>Toast 4</ToastTitle>
           <ToastClose />
         </ToastRoot>
+      </div>
+    );
+  },
+};
+
+/**
+ * Local Hook Example
+ * Demonstrates useLocalToast hook with controlled ToastRoot rendering
+ */
+export const LocalHookUsage: Story = {
+  render: () => {
+    const { toasts, toast, dismiss } = useLocalToast();
+
+    return (
+      <div className="space-y-sm">
+        <button
+          onClick={() =>
+            toast({
+              type: "success",
+              title: "Local Toast",
+              description: "This toast is scoped to the component.",
+            })
+          }
+          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
+        >
+          Show Local Toast
+        </button>
+        {toasts.map((toastData) => {
+          const variant: ToastVariant = toastData.type === "info" ? "default" : toastData.type;
+          return (
+            <ToastRoot
+              key={toastData.id}
+              open={true}
+              onOpenChange={(open) => {
+                if (!open) {
+                  dismiss(toastData.id);
+                }
+              }}
+              variant={variant}
+            >
+              {toastData.title && <ToastTitle>{toastData.title}</ToastTitle>}
+              {toastData.description && (
+                <ToastDescription>{toastData.description}</ToastDescription>
+              )}
+              {toastData.action && (
+                <ToastAction onClick={toastData.action.onClick} altText={toastData.action.label}>
+                  {toastData.action.label}
+                </ToastAction>
+              )}
+              <ToastClose />
+            </ToastRoot>
+          );
+        })}
+      </div>
+    );
+  },
+};
+
+/**
+ * Global Hook Example
+ * Demonstrates useGlobalToast hook with shared toast state
+ */
+export const GlobalHookUsage: Story = {
+  render: () => {
+    const { toasts, toast, dismiss } = useGlobalToast();
+
+    return (
+      <div className="space-y-sm">
+        <button
+          onClick={() =>
+            toast({
+              variant: "warning",
+              title: "Global Toast",
+              description: "This toast is shared across the app.",
+            })
+          }
+          className="rounded-md bg-warning px-md py-sm text-warning-foreground"
+        >
+          Show Global Toast
+        </button>
+        {toasts.map((toastData) => (
+          <ToastRoot
+            key={toastData.id}
+            open={true}
+            onOpenChange={(open) => {
+              if (!open) {
+                dismiss(toastData.id);
+              }
+            }}
+            variant={toastData.variant ?? "default"}
+          >
+            {toastData.title && <ToastTitle>{toastData.title}</ToastTitle>}
+            {toastData.description && <ToastDescription>{toastData.description}</ToastDescription>}
+            {toastData.action && (
+              <ToastAction onClick={toastData.action.onClick} altText={toastData.action.label}>
+                {toastData.action.label}
+              </ToastAction>
+            )}
+            <ToastClose />
+          </ToastRoot>
+        ))}
       </div>
     );
   },

@@ -1,6 +1,6 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2026-01-17  
 **Purpose:** Central documentation hub for the TUI component library
 
 ---
@@ -10,22 +10,21 @@
 
 ---
 
-## 📖 Canonical Context
+## Canonical Context
 
-This project uses a single canonical internal context.
+`docs/ARCHITECTURE_CONTEXT.md` is the primary source of truth for:
+- architecture
+- design decisions
+- Foundation vs Extension rules
+- token system
+- styling constraints
+- public API rules
+- future evolution
 
-You MUST treat `docs/ARCHITECTURE_CONTEXT.md` as the only source of truth for:
-– architecture
-– design decisions
-– Foundation vs Extension rules
-– token system
-– styling constraints
-– public API rules
-– future evolution
-
-Do NOT infer architecture from any other files.
-Do NOT ask clarifying questions already answered there.
-Assume all architectural decisions are final unless explicitly changed in that document.
+Canonical documents are listed in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`.
+Authoritative decisions live in LAW documents per `docs/architecture/DOCUMENTATION_CANON_LOCK.md`.
+Use other canonical documents as needed and resolve conflicts using the
+document resolution order defined by project rules.
 
 **Important:** Foundation Authorities are **CLOSED** and **IMMUTABLE**. Do not request modifications to Authority Contracts. Only Enforcement mechanisms and Extension components can be developed.
 

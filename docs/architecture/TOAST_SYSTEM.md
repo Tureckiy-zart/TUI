@@ -7,7 +7,6 @@ The Tenerife UI toast system provides two distinct patterns for displaying toast
 1. **Local Toast** (`useLocalToast`) - Component-scoped toast management
 2. **Global Toast** (`useGlobalToast`) - App-wide toast management via global state
 
-Additionally, there is a **Context Toast** (`useToast` from `ToastProvider`) - Provider-based toast management using React Context.
 
 ---
 
@@ -123,58 +122,9 @@ function MyComponent() {
 
 ---
 
-## Context Toast (`useToast` from `ToastProvider`)
-
-### What is a Context Toast?
-
-A **Context Toast** uses React Context to provide toast functionality within a `ToastProvider` boundary. It's a provider-based pattern that works with Radix UI Toast primitives.
-
-### Characteristics
-
-- **State Management**: React Context API
-- **Scope**: Provider-scoped - works within `ToastProvider` boundary
-- **Lifecycle**: Managed by the provider component
-- **Use Case**: When you need Radix-based toast functionality with provider boundaries
-
-### API
-
-```typescript
-import { ToastProvider, useToast } from "@/COMPOSITION/overlays/ToastProvider";
-
-function App() {
-  return (
-    <ToastProvider>
-      <MyComponent />
-    </ToastProvider>
-  );
-}
-
-function MyComponent() {
-  const { toast } = useToast();
-
-  const handleClick = () => {
-    toast({
-      title: "Success!",
-      description: "Operation completed",
-      variant: "success",
-    });
-  };
-
-  return <button onClick={handleClick}>Click me</button>;
-}
-```
-
-### When to Use
-
-- ✅ When you need Radix UI Toast primitives
-- ✅ When you need provider-scoped toast management
-- ✅ When you need advanced toast features (swipe gestures, animations, etc.)
-
----
-
 ## Comparison Table
 
-| Feature | Local Toast | Global Toast | Context Toast |
+| Feature | Local Toast | Global Toast |
 |---------|------------|--------------|---------------|
 | **State Management** | `useState` | Global dispatch | React Context |
 | **Scope** | Component | App-wide | Provider |
@@ -187,48 +137,25 @@ function MyComponent() {
 
 ## Migration Guide
 
-### From `useToast` (deprecated) to `useLocalToast`
+### Legacy Aliases (Internal Only)
 
-```typescript
-// ❌ Old (deprecated)
-import { useToast } from "@/hooks/useToast";
-
-// ✅ New (canonical)
-import { useLocalToast } from "@/hooks/useLocalToast";
-// Or from the original file (still works):
-import { useLocalToast } from "@/hooks/useToast";
-```
-
-### From `useToast` (deprecated) to `useGlobalToast`
-
-```typescript
-// ❌ Old (deprecated)
-import { useToast } from "@/hooks/use-toast";
-
-// ✅ New (canonical)
-import { useGlobalToast } from "@/hooks/useGlobalToast";
-// Or from the original file (still works):
-import { useGlobalToast } from "@/hooks/use-toast";
-```
-
-> **Note**: The deprecated `useToast` exports remain available for backward compatibility but will be removed in a future version. Always use the canonical names: `useLocalToast` and `useGlobalToast`.
-
----
+- `useToast` is a deprecated alias of `useLocalToast` inside `hooks/useToast.ts`.
+- Legacy aliases are **not exported** from the public API.
+- Always use `useLocalToast` or `useGlobalToast` from the public API.
 
 ## Best Practices
 
 1. **Choose the Right Pattern**
    - Use `useLocalToast` for component-specific notifications
    - Use `useGlobalToast` for app-wide notifications
-   - Use `useToast` from `ToastProvider` for Radix-based toasts
-
+   - 
 2. **Don't Mix Patterns**
    - Avoid using multiple toast systems in the same component
    - Stick to one pattern per use case
 
 3. **Naming Clarity**
    - Always use canonical names: `useLocalToast`, `useGlobalToast`
-   - Avoid deprecated `useToast` imports from hooks
+  - Avoid legacy `useToast` aliases from internal hooks
 
 4. **Performance**
    - Local toasts are lightweight and isolated
@@ -306,54 +233,4 @@ function Navigation() {
   return <button onClick={handleLogout}>Logout</button>;
 }
 ```
-
-### Example 3: Context Toast (Provider-Based)
-
-```typescript
-import { ToastProvider, useToast } from "@/COMPOSITION/overlays/ToastProvider";
-
-function App() {
-  return (
-    <ToastProvider>
-      <MyComponent />
-    </ToastProvider>
-  );
-}
-
-function MyComponent() {
-  const { toast } = useToast();
-
-  return (
-    <button
-      onClick={() =>
-        toast({
-          title: "Success",
-          variant: "success",
-        })
-      }
-    >
-      Show Toast
-    </button>
-  );
-}
-```
-
----
-
-## Summary
-
-- **`useLocalToast`**: Component-scoped, isolated state, use for component-specific notifications
-- **`useGlobalToast`**: App-wide, shared state, use for global notifications
-- **`useToast` (from ToastProvider)**: Provider-scoped, Radix-based, use for advanced toast features
-
-Always prefer canonical names (`useLocalToast`, `useGlobalToast`) over deprecated `useToast` imports from hooks.
-
-## Canonical Exports
-
-The toast hooks are available via canonical export files:
-
-- **`@/hooks/useLocalToast`** - Canonical export for local toast hook
-- **`@/hooks/useGlobalToast`** - Canonical export for global toast hook
-
-These files re-export from the original implementation files (`useToast.ts` and `use-toast.ts`) and provide clear, unambiguous naming. The original files remain available for backward compatibility, but the deprecated `useToast` exports should not be used in new code.
 

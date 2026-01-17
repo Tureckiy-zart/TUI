@@ -1,8 +1,8 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2025-12-19  
+**Last Updated:** 2026-01-17  
 **Purpose:** Central documentation hub for the TUI component library  
-**Total Files:** 44 (all canonical and authoritative)
+**Canonical List:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
 
 ---
 
@@ -10,19 +10,19 @@
 
 ### Active Documentation (`docs/`)
 
-**This directory (`docs/`) contains ONLY canonical, authoritative, and active documentation (44 files):**
+**This directory (`docs/`) contains canonical and supporting documentation. The canonical list is defined in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`:**
 
-- ✅ **Canonical Documents** - Single source of truth for architecture and decisions
+- ✅ **Canonical Documents** - Canonical inventory and roles; authoritative decisions live in LAW documents
 - ✅ **Authority Contracts** - Immutable Foundation and Extension authority rules
 - ✅ **Architecture Rules** - Active architecture guidelines and locks
 - ✅ **Reference Documentation** - Current API and integration references
 - ✅ **Progress Tracking** - Active project progress and task management
 
-**All files in `docs/` are considered ACTIVE and CANONICAL.**
+**Only files listed in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` are canonical.**
 
 ### Archived Documentation (`docs_archive/`)
 
-**⚠️ CRITICAL: `docs_archive/` is NOT source of truth and MUST NOT be used for canonical context.**
+**⚠️ CRITICAL: `docs_archive/` is NOT source of truth and MUST NOT be used for canonical information.**
 
 The `docs_archive/` directory contains:
 - ❌ Historical reports and audits (one-time analysis)
@@ -34,11 +34,11 @@ The `docs_archive/` directory contains:
 **Rules:**
 - ❌ **NEVER** use `docs_archive/` as source of truth
 - ❌ **NEVER** reference archived documents for canonical rules
-- ❌ **NEVER** use archived documents for AI/Cursor context
-- ✅ **ALWAYS** use `docs/` for canonical and authoritative information
+- ❌ **NEVER** use archived documents for canonical information
+- ✅ **ALWAYS** use `docs/` for canonical information
 - ✅ **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
 
-**For canonical architecture, Authority rules, and active documentation, use ONLY `docs/`.**
+**For canonical architecture, Authority rules, and active documentation, use ONLY `docs/` and the inventory.**
 
 ---
 
@@ -132,7 +132,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 - [CI_CD_OVERVIEW.md](./CI_CD_OVERVIEW.md) - CI/CD overview
 
-### AI Context
+### Assistant Context
 
 - [ASSISTANT_README.md](./ASSISTANT_README.md) - GPT-specific context reference
 
@@ -140,7 +140,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ## 📁 Documentation Structure
 
-This directory contains **ONLY canonical and active documentation** (44 files total):
+This directory contains canonical and supporting documentation. The canonical list is defined in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`:
 
 ```
 docs/
@@ -175,13 +175,13 @@ docs/
 └── ASSISTANT_README.md     # GPT-specific context
 ```
 
-**Note:** Historical reports, audits, legacy guides, and deprecated documentation have been moved to `docs_archive/` (excluded from git and AI context).
+**Note:** Historical reports, audits, legacy guides, and deprecated documentation have been moved to `docs_archive/` (excluded from git and canonical information).
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### For AI/Cursor Assistants
+### For Assistants
 
 1. **Start with:** [ARCHITECTURE_CONTEXT.md](./ARCHITECTURE_CONTEXT.md) - Single source of truth
 2. **Check Foundation status:** [architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
@@ -265,7 +265,7 @@ See [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) for Extensio
 
 **Single Source of Truth for Documentation Structure:**
 
-The structure of `docs/` directory is **FROZEN** and **CANONICAL**. All structural questions must be resolved by reference to:
+The structure of `docs/` directory is **CANONICAL** and **controlled**. All structural questions must be resolved by reference to:
 
 - **[architecture/DOCUMENTATION_CANON_LOCK.md](./architecture/DOCUMENTATION_CANON_LOCK.md)** - **Single source of truth** for documentation structure, naming rules, and organization
 
@@ -297,10 +297,10 @@ For questions about documentation:
 
 ---
 
-**Last Updated:** 2025-12-19  
+**Last Updated:** 2026-01-17  
 **Documentation Version:** 3.2  
-**Total Canonical Files:** 44  
-**Archive Status:** Isolated (excluded from git and AI context)
+**Canonical Documents:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`  
+**Archive Status:** Isolated (excluded from git and canonical information)
 
 ### Library Maturity Growth System
 

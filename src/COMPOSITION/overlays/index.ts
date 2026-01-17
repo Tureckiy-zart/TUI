@@ -68,7 +68,6 @@ export {
 } from "./Toast";
 export { ToastProvider, type ToastProviderProps } from "./ToastProvider";
 export { type ToastPosition, ToastViewport, type ToastViewportProps } from "./ToastViewport";
-export { useToast } from "@/hooks/useToast";
 
 // Toaster
 export { Toaster } from "./Toaster";
