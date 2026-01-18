@@ -27,7 +27,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Background color uses ColorValue (token-based)
  * - Border color uses token-based border classes
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -264,7 +264,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
         ref={ref}
         className={cn(
           "w-full",
-          border && "border-t border-border",
+          border && "border-t border-[hsl(var(--tm-border-default))]",
           ...pxClasses,
           ...pyClasses,
           className,

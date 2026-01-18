@@ -94,7 +94,7 @@ export const States: Story = {
             placeholder="Invalid state"
             defaultValue="Invalid content"
           />
-          <p id="error-message-1" className="text-sm text-[hsl(var(--destructive))]">
+          <p id="error-message-1" className="text-sm text-[hsl(var(--tm-destructive))]">
             This field contains invalid content
           </p>
         </div>
@@ -107,7 +107,7 @@ export const States: Story = {
             placeholder="Invalid state via aria-invalid"
             defaultValue="Invalid content"
           />
-          <p id="error-message-2" className="text-sm text-[hsl(var(--destructive))]">
+          <p id="error-message-2" className="text-sm text-[hsl(var(--tm-destructive))]">
             This field contains invalid content
           </p>
         </div>
@@ -200,7 +200,7 @@ export const Accessibility: Story = {
     <div className="flex w-64 flex-col gap-md">
       <div>
         <Textarea placeholder="Input with error" invalid aria-describedby="error-message-1" />
-        <p id="error-message-1" className="mt-1 text-sm text-[hsl(var(--destructive))]">
+        <p id="error-message-1" className="mt-1 text-sm text-[hsl(var(--tm-destructive))]">
           This field is required
         </p>
       </div>
@@ -213,7 +213,7 @@ export const Accessibility: Story = {
           aria-invalid={true}
           aria-describedby="error-message-2"
         />
-        <p id="error-message-2" className="mt-1 text-sm text-[hsl(var(--destructive))]">
+        <p id="error-message-2" className="mt-1 text-sm text-[hsl(var(--tm-destructive))]">
           This field contains an error
         </p>
       </div>

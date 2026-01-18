@@ -142,7 +142,7 @@ export const venueCardMetadataRowVariants = tokenCVA({
  * Uses semantic border tokens and DOMAIN_TOKENS for spacing.
  */
 export const venueCardFooterBorderVariants = tokenCVA({
-  base: "border-t border-border",
+  base: "border-t border-[hsl(var(--tm-border-default))]",
   variants: {
     size: {
       sm: DOMAIN_TOKENS.spacing.footer.paddingTopCompact, // References semanticSpacing.xs (4px) via Tailwind

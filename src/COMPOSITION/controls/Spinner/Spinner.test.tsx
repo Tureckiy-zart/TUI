@@ -159,9 +159,9 @@ describe("Spinner", () => {
         expect(spinnerCircle).toBeInTheDocument();
         // Verify tone token classes are applied
         const toneClasses: Record<SpinnerTone, string> = {
-          primary: "border-[hsl(var(--primary))]",
-          muted: "border-[hsl(var(--muted-foreground))]",
-          subtle: "border-[hsl(var(--muted))]",
+          primary: "border-[hsl(var(--tm-primary))]",
+          muted: "border-[hsl(var(--tm-text-muted))]",
+          subtle: "border-[hsl(var(--tm-muted))]",
         };
         expect(spinnerCircle).toHaveClass(toneClasses[tone]);
       });
@@ -172,9 +172,9 @@ describe("Spinner", () => {
         expect(dotsContainer).toBeInTheDocument();
         // Verify dots are rendered with tone
         const toneClasses: Record<SpinnerTone, string> = {
-          primary: "text-[hsl(var(--primary))]",
-          muted: "text-[hsl(var(--muted-foreground))]",
-          subtle: "text-[hsl(var(--muted))]",
+          primary: "text-[hsl(var(--tm-primary))]",
+          muted: "text-[hsl(var(--tm-text-muted))]",
+          subtle: "text-[hsl(var(--tm-muted))]",
         };
         const firstDot = dotsContainer?.firstElementChild;
         expect(firstDot).toHaveClass(toneClasses[tone]);
@@ -186,9 +186,9 @@ describe("Spinner", () => {
         expect(linearBar).toBeInTheDocument();
         // Verify bar has tone class
         const toneClasses: Record<SpinnerTone, string> = {
-          primary: "text-[hsl(var(--primary))]",
-          muted: "text-[hsl(var(--muted-foreground))]",
-          subtle: "text-[hsl(var(--muted))]",
+          primary: "text-[hsl(var(--tm-primary))]",
+          muted: "text-[hsl(var(--tm-text-muted))]",
+          subtle: "text-[hsl(var(--tm-muted))]",
         };
         expect(linearBar).toHaveClass(toneClasses[tone]);
       });
@@ -197,7 +197,7 @@ describe("Spinner", () => {
     it("uses default tone (primary) when tone is not provided", () => {
       const { container } = renderWithTheme(<Spinner variant="circle" />);
       const spinnerCircle = container.querySelector("div[role='status'] > div > div");
-      expect(spinnerCircle).toHaveClass("border-[hsl(var(--primary))]");
+      expect(spinnerCircle).toHaveClass("border-[hsl(var(--tm-primary))]");
     });
   });
 
@@ -434,7 +434,7 @@ describe("Spinner", () => {
     it("uses token-based tone classes", () => {
       const { container } = renderWithTheme(<Spinner tone="primary" />);
       const spinnerCircle = container.querySelector("div[role='status'] > div > div");
-      expect(spinnerCircle).toHaveClass("border-[hsl(var(--primary))]"); // SPINNER_TOKENS.borderColor.primary
+      expect(spinnerCircle).toHaveClass("border-[hsl(var(--tm-primary))]"); // SPINNER_TOKENS.borderColor.primary
     });
 
     it("uses token-based border classes", () => {
@@ -489,7 +489,7 @@ describe("Spinner", () => {
       const spinnerCircle = container.querySelector("div[role='status'] > div > div");
       expect(spinnerCircle).toBeInTheDocument();
       // Should fallback to default tone (primary)
-      expect(spinnerCircle).toHaveClass("border-[hsl(var(--primary))]");
+      expect(spinnerCircle).toHaveClass("border-[hsl(var(--tm-primary))]");
     });
   });
 

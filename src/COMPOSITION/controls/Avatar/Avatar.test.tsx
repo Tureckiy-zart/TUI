@@ -158,7 +158,7 @@ describe("Avatar component", () => {
   it("should render offline status with correct color", () => {
     const { container } = renderWithTheme(<Avatar alt="John Doe" status="offline" />);
 
-    const statusDot = container.querySelector('[class*="bg-muted"]');
+    const statusDot = container.querySelector('[class*="bg-[hsl(var(--tm-muted))]"]');
     expect(statusDot).toBeInTheDocument();
   });
 

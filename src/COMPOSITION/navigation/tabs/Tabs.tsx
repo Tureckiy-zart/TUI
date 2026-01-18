@@ -75,7 +75,7 @@
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from TABS_TOKENS for variant, size, and tone styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

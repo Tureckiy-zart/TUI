@@ -125,7 +125,11 @@ export const Simulation: Story = {
             </Box>
           </Box>
 
-          <Flex justify="between" align="center" className="rounded-lg bg-muted p-md">
+          <Flex
+            justify="between"
+            align="center"
+            className="rounded-lg bg-[hsl(var(--tm-muted))] p-md"
+          >
             <Flex align="center" gap={4}>
               <Switch
                 checked={reducedMotion}
@@ -155,13 +159,13 @@ export const Simulation: Story = {
                   immediately).
                 </Text>
               </Box>
-              <Box className="flex h-32 items-center justify-center rounded bg-muted">
+              <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
                 <AnimatedBox
                   key={keys.fadeIn}
                   animationKey={keys.fadeIn}
                   className="tm-motion-fade-in"
                 >
-                  <Box className="h-16 w-16 rounded bg-primary" />
+                  <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
@@ -180,13 +184,13 @@ export const Simulation: Story = {
                   transition).
                 </Text>
               </Box>
-              <Box className="flex h-32 items-center justify-center rounded bg-muted">
+              <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
                 <AnimatedBox
                   key={keys.scaleIn}
                   animationKey={keys.scaleIn}
                   className="tm-motion-scale-in"
                 >
-                  <Box className="h-16 w-16 rounded bg-primary" />
+                  <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
@@ -205,13 +209,13 @@ export const Simulation: Story = {
                   transition).
                 </Text>
               </Box>
-              <Box className="flex h-32 items-center justify-center overflow-hidden rounded bg-muted">
+              <Box className="flex h-32 items-center justify-center overflow-hidden rounded bg-[hsl(var(--tm-muted))]">
                 <AnimatedBox
                   key={keys.slideUp}
                   animationKey={keys.slideUp}
                   className="tm-motion-slide-up"
                 >
-                  <Box className="h-16 w-16 rounded bg-primary" />
+                  <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
@@ -230,10 +234,10 @@ export const Simulation: Story = {
                   transition).
                 </Text>
               </Box>
-              <Box className="flex h-32 items-center justify-center rounded bg-muted">
+              <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
                 <Box
                   key={keys.hoverLift}
-                  className="h-16 w-16 cursor-pointer rounded bg-primary tm-motion-hover-lift"
+                  className="h-16 w-16 cursor-pointer rounded bg-[hsl(var(--tm-primary))] tm-motion-hover-lift"
                 />
               </Box>
               <Box className="mt-2">

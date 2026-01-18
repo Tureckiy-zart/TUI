@@ -512,7 +512,7 @@ export const VariantSizeMatrix: Story = {
         <h3 className="mb-md text-base font-semibold">Underline Variant</h3>
         <div className="flex flex-col gap-lg">
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Small (sm)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="underline" size="sm">
                 <Tabs.Trigger value="tab1" variant="underline" size="sm">
@@ -525,7 +525,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Medium (md)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="underline" size="md">
                 <Tabs.Trigger value="tab1" variant="underline" size="md">
@@ -538,7 +538,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Large (lg)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="underline" size="lg">
                 <Tabs.Trigger value="tab1" variant="underline" size="lg">
@@ -556,7 +556,7 @@ export const VariantSizeMatrix: Story = {
         <h3 className="mb-md text-base font-semibold">Pill Variant</h3>
         <div className="flex flex-col gap-lg">
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Small (sm)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="pill" size="sm">
                 <Tabs.Trigger value="tab1" variant="pill" size="sm">
@@ -569,7 +569,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Medium (md)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="pill" size="md">
                 <Tabs.Trigger value="tab1" variant="pill" size="md">
@@ -582,7 +582,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Large (lg)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="pill" size="lg">
                 <Tabs.Trigger value="tab1" variant="pill" size="lg">
@@ -600,7 +600,7 @@ export const VariantSizeMatrix: Story = {
         <h3 className="mb-md text-base font-semibold">Segmented Variant</h3>
         <div className="flex flex-col gap-lg">
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Small (sm)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Small (sm)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="segmented" size="sm">
                 <Tabs.Trigger value="tab1" variant="segmented" size="sm">
@@ -613,7 +613,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Medium (md)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Medium (md)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="segmented" size="md">
                 <Tabs.Trigger value="tab1" variant="segmented" size="md">
@@ -626,7 +626,7 @@ export const VariantSizeMatrix: Story = {
             </Tabs.Root>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Large (lg)</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">Large (lg)</p>
             <Tabs.Root defaultValue="tab1">
               <Tabs.List variant="segmented" size="lg">
                 <Tabs.Trigger value="tab1" variant="segmented" size="lg">
@@ -662,7 +662,7 @@ export const ControlledVsUncontrolled: Story = {
       <div className="flex flex-col gap-xl">
         <div>
           <h3 className="mb-md text-base font-semibold">Controlled Mode</h3>
-          <p className="mb-sm text-sm text-muted-foreground">
+          <p className="mb-sm text-sm text-[hsl(var(--tm-text-muted))]">
             Value is managed externally via state. Current value: <strong>{controlledValue}</strong>
           </p>
           <Tabs.Root value={controlledValue} onValueChange={setControlledValue}>
@@ -684,7 +684,7 @@ export const ControlledVsUncontrolled: Story = {
         </div>
         <div>
           <h3 className="mb-md text-base font-semibold">Uncontrolled Mode</h3>
-          <p className="mb-sm text-sm text-muted-foreground">
+          <p className="mb-sm text-sm text-[hsl(var(--tm-text-muted))]">
             Value is managed internally by Radix. Use <code className="text-xs">defaultValue</code>{" "}
             to set initial state.
           </p>

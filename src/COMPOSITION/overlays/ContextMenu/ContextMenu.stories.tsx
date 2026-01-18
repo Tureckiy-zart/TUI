@@ -437,7 +437,7 @@ export const Matrix: Story = {
             <div className="flex flex-wrap gap-6">
               {sizes.map((size) => (
                 <div key={`${tone}-${size}`} className="flex flex-col gap-2">
-                  <p className="text-xs text-muted-foreground">size={size}</p>
+                  <p className="text-xs text-[hsl(var(--tm-text-muted))]">size={size}</p>
                   <div className="flex h-[150px] items-center justify-center rounded-lg border border-dashed p-4">
                     <ContextMenu.Root>
                       <ContextMenu.Trigger className="rounded-md border px-3 py-1.5 text-sm">
@@ -497,7 +497,7 @@ export const States: Story = {
             <div className="flex flex-wrap gap-6">
               {sizes.map((size) => (
                 <div key={`${tone}-${size}`} className="flex flex-col gap-2">
-                  <p className="text-xs text-muted-foreground">size={size}</p>
+                  <p className="text-xs text-[hsl(var(--tm-text-muted))]">size={size}</p>
                   <div className="flex h-[200px] items-center justify-center rounded-lg border border-dashed p-4">
                     <ContextMenu.Root>
                       <ContextMenu.Trigger className="rounded-md border px-3 py-1.5 text-sm">

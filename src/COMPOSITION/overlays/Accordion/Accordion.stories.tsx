@@ -418,7 +418,7 @@ export const SettingsPanel: Story = {
                 <label className="mb-xs block text-sm font-medium">Display Name</label>
                 <input
                   type="text"
-                  className="w-full rounded-md border border-border px-md py-sm"
+                  className="w-full rounded-md border border-[hsl(var(--tm-border-default))] px-md py-sm"
                   defaultValue="John Doe"
                 />
               </div>
@@ -426,7 +426,7 @@ export const SettingsPanel: Story = {
                 <label className="mb-xs block text-sm font-medium">Email</label>
                 <input
                   type="email"
-                  className="w-full rounded-md border border-border px-md py-sm"
+                  className="w-full rounded-md border border-[hsl(var(--tm-border-default))] px-md py-sm"
                   defaultValue="john@example.com"
                 />
               </div>

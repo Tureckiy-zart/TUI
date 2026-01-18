@@ -9,7 +9,7 @@ describe("Footer component", () => {
     const { container } = render(<Footer>Content</Footer>);
     const footerEl = container.querySelector("footer");
     expect(footerEl).toBeInTheDocument();
-    expect(footerEl).toHaveClass("w-full", "border-t", "border-border");
+    expect(footerEl).toHaveClass("w-full", "border-t", "border-[hsl(var(--tm-border-default))]");
   });
 
   it("should render footer with left slot", () => {
@@ -66,13 +66,13 @@ describe("Footer component", () => {
   it("should show border by default", () => {
     const { container } = render(<Footer>Content</Footer>);
     const footerEl = container.querySelector("footer");
-    expect(footerEl).toHaveClass("border-t", "border-border");
+    expect(footerEl).toHaveClass("border-t", "border-[hsl(var(--tm-border-default))]");
   });
 
   it("should hide border when border=false", () => {
     const { container } = render(<Footer border={false}>Content</Footer>);
     const footerEl = container.querySelector("footer");
-    expect(footerEl).not.toHaveClass("border-t", "border-border");
+    expect(footerEl).not.toHaveClass("border-t", "border-[hsl(var(--tm-border-default))]");
   });
 
   it("should apply aria-label when provided", () => {

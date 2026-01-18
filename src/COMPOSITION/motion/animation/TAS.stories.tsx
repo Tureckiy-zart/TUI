@@ -129,7 +129,7 @@ export const FadePresets: Story = {
     const boxStyle = {
       minWidth: "150px",
       textAlign: "center" as const,
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 
@@ -252,7 +252,7 @@ export const SlidePresets: Story = {
                   style={{
                     textAlign: "center",
                     width: "100%",
-                    border: "1px solid hsl(var(--border))",
+                    border: "1px solid hsl(var(--tm-border-default))",
                     boxShadow: "var(--shadow-sm)",
                   }}
                 >
@@ -291,7 +291,7 @@ export const ScalePresets: Story = {
     const boxStyle = {
       minWidth: "150px",
       textAlign: "center" as const,
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 
@@ -355,7 +355,7 @@ export const LayoutPrimitives: Story = {
 
     const boxStyle = {
       textAlign: "center" as const,
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 
@@ -392,7 +392,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Flex Item 1</Text>
           </Box>
@@ -401,7 +401,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Flex Item 2</Text>
           </Box>
@@ -410,7 +410,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Flex Item 3</Text>
           </Box>
@@ -427,7 +427,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
+            style={{ ...boxStyle, border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Grid 1</Text>
           </Box>
@@ -436,7 +436,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
+            style={{ ...boxStyle, border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Grid 2</Text>
           </Box>
@@ -445,7 +445,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ ...boxStyle, border: "1px solid hsl(var(--border))" }}
+            style={{ ...boxStyle, border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Grid 3</Text>
           </Box>
@@ -457,7 +457,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Stack Item 1</Text>
           </Box>
@@ -466,7 +466,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Stack Item 2</Text>
           </Box>
@@ -475,7 +475,7 @@ export const LayoutPrimitives: Story = {
             py={4}
             bg="muted"
             radius="md"
-            style={{ border: "1px solid hsl(var(--border))" }}
+            style={{ border: "1px solid hsl(var(--tm-border-default))" }}
           >
             <Text>Stack Item 3</Text>
           </Box>
@@ -508,7 +508,7 @@ export const SpringAnimations: Story = {
 
     const boxStyle = {
       textAlign: "center" as const,
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 
@@ -596,7 +596,7 @@ export const RevealOnScroll: Story = {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            border: "1px solid hsl(var(--border))",
+            border: "1px solid hsl(var(--tm-border-default))",
             boxShadow: "var(--shadow-sm)",
           }}
         >
@@ -662,7 +662,7 @@ export const RevealOnScroll: Story = {
             bg="muted"
             radius="md"
             style={{
-              border: "1px solid hsl(var(--border))",
+              border: "1px solid hsl(var(--tm-border-default))",
               maxWidth: "600px",
             }}
           >
@@ -712,7 +712,7 @@ export const ReducedMotion: Story = {
           style={{
             textAlign: "center",
             width: "100%",
-            border: "2px solid hsl(var(--border))",
+            border: "2px solid hsl(var(--tm-border-default))",
             boxShadow: "var(--shadow-sm)",
           }}
         >
@@ -735,7 +735,7 @@ export const ReducedMotion: Story = {
           style={{
             width: "100%",
             textAlign: "center",
-            border: "1px solid hsl(var(--border))",
+            border: "1px solid hsl(var(--tm-border-default))",
             boxShadow: "var(--shadow-sm)",
           }}
         >
@@ -773,7 +773,7 @@ export const CustomTransitions: Story = {
 
     const boxStyle = {
       textAlign: "center" as const,
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 
@@ -824,7 +824,7 @@ export const InteractiveAnimations: Story = {
       cursor: "pointer" as const,
       textAlign: "center" as const,
       minWidth: "150px",
-      border: "1px solid hsl(var(--border))",
+      border: "1px solid hsl(var(--tm-border-default))",
       boxShadow: "var(--shadow-sm)",
     };
 

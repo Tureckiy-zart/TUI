@@ -172,7 +172,7 @@ export const Matrix: Story = {
         <div className="grid grid-cols-3 gap-md">
           {/* Row: sm size */}
           <div className="flex flex-col gap-sm">
-            <div className="text-xs font-medium text-muted-foreground">sm</div>
+            <div className="text-xs font-medium text-[hsl(var(--tm-text-muted))]">sm</div>
             <IconButton icon={<IconSearch />} aria-label="Primary sm" variant="primary" size="sm" />
             <IconButton
               icon={<IconSearch />}
@@ -192,7 +192,7 @@ export const Matrix: Story = {
           </div>
           {/* Row: md size */}
           <div className="flex flex-col gap-sm">
-            <div className="text-xs font-medium text-muted-foreground">md</div>
+            <div className="text-xs font-medium text-[hsl(var(--tm-text-muted))]">md</div>
             <IconButton icon={<IconSearch />} aria-label="Primary md" variant="primary" size="md" />
             <IconButton
               icon={<IconSearch />}
@@ -212,7 +212,7 @@ export const Matrix: Story = {
           </div>
           {/* Row: lg size */}
           <div className="flex flex-col gap-sm">
-            <div className="text-xs font-medium text-muted-foreground">lg</div>
+            <div className="text-xs font-medium text-[hsl(var(--tm-text-muted))]">lg</div>
             <IconButton icon={<IconSearch />} aria-label="Primary lg" variant="primary" size="lg" />
             <IconButton
               icon={<IconSearch />}
@@ -376,7 +376,7 @@ export const Accessibility: Story = {
           <IconButton icon={<IconMenu />} aria-label="Open navigation menu" />
           <IconButton icon={<IconCheck />} aria-label="Confirm action" />
         </div>
-        <p className="mt-md text-xs text-muted-foreground">
+        <p className="mt-md text-xs text-[hsl(var(--tm-text-muted))]">
           All IconButton instances require aria-label prop. TypeScript will error if aria-label is
           missing.
         </p>
@@ -387,7 +387,7 @@ export const Accessibility: Story = {
           <IconButton icon={<IconSearch />} aria-label="Search (focusable)" />
           <IconButton icon={<IconClose />} aria-label="Close (focusable)" disabled />
         </div>
-        <p className="mt-md text-xs text-muted-foreground">
+        <p className="mt-md text-xs text-[hsl(var(--tm-text-muted))]">
           IconButton is keyboard accessible via Tab key. Disabled buttons are not focusable. Focus
           ring is provided by Button component.
         </p>
@@ -397,7 +397,7 @@ export const Accessibility: Story = {
         <div className="flex flex-wrap items-center gap-md">
           <IconButton icon={<IconSearch />} aria-label="Search for items" />
         </div>
-        <p className="mt-md text-xs text-muted-foreground">
+        <p className="mt-md text-xs text-[hsl(var(--tm-text-muted))]">
           Screen readers will announce the aria-label text. Icon content is not announced since
           IconButton has no visible text.
         </p>

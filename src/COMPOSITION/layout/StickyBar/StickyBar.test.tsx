@@ -39,7 +39,7 @@ describe("StickyBar component", () => {
       </StickyBar>,
     );
     let stickyBar = container.firstChild as HTMLElement;
-    expect(stickyBar).toHaveClass("bg-background");
+    expect(stickyBar).toHaveClass("bg-[hsl(var(--tm-surface-base))]");
 
     rerender(
       <StickyBar tone="elevated">
@@ -47,7 +47,7 @@ describe("StickyBar component", () => {
       </StickyBar>,
     );
     stickyBar = container.firstChild as HTMLElement;
-    expect(stickyBar).toHaveClass("bg-card", "shadow-sm");
+    expect(stickyBar).toHaveClass("bg-[hsl(var(--tm-surface-raised))]", "shadow-sm");
 
     rerender(
       <StickyBar tone="muted">
@@ -55,7 +55,7 @@ describe("StickyBar component", () => {
       </StickyBar>,
     );
     stickyBar = container.firstChild as HTMLElement;
-    expect(stickyBar).toHaveClass("bg-muted/50");
+    expect(stickyBar).toHaveClass("bg-[hsl(var(--tm-muted))]/50");
   });
 
   it("should apply z-index via inline style (zIndex.sticky = 20)", () => {
@@ -113,7 +113,7 @@ describe("StickyBar component", () => {
     );
     let stickyBar = container.firstChild as HTMLElement;
     let divider = stickyBar.querySelector("hr");
-    expect(divider).toHaveClass("bg-muted");
+    expect(divider).toHaveClass("bg-[hsl(var(--tm-muted))]");
 
     rerender(
       <StickyBar divider tone="default">
@@ -122,7 +122,7 @@ describe("StickyBar component", () => {
     );
     stickyBar = container.firstChild as HTMLElement;
     divider = stickyBar.querySelector("hr");
-    expect(divider).toHaveClass("bg-border");
+    expect(divider).toHaveClass("bg-[hsl(var(--tm-border-default))]");
 
     rerender(
       <StickyBar divider tone="elevated">
@@ -131,7 +131,7 @@ describe("StickyBar component", () => {
     );
     stickyBar = container.firstChild as HTMLElement;
     divider = stickyBar.querySelector("hr");
-    expect(divider).toHaveClass("bg-border");
+    expect(divider).toHaveClass("bg-[hsl(var(--tm-border-default))]");
   });
 
   it("should wrap children in Inset component", () => {
@@ -190,7 +190,12 @@ describe("StickyBar component", () => {
     );
     const stickyBar = container.firstChild as HTMLElement;
     // Verify token-based classes are used
-    expect(stickyBar).toHaveClass("bg-card", "shadow-sm", "sticky", "bottom-0");
+    expect(stickyBar).toHaveClass(
+      "bg-[hsl(var(--tm-surface-raised))]",
+      "shadow-sm",
+      "sticky",
+      "bottom-0",
+    );
     // Verify z-index is applied via inline style (token value)
     expect(stickyBar).toHaveStyle({ zIndex: 20 });
   });
@@ -231,6 +236,6 @@ describe("StickyBar component", () => {
       </StickyBar>,
     );
     const stickyBar = container.firstChild as HTMLElement;
-    expect(stickyBar).toHaveClass("bg-background");
+    expect(stickyBar).toHaveClass("bg-[hsl(var(--tm-surface-base))]");
   });
 });

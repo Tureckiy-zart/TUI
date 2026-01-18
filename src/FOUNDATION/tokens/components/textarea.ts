@@ -80,33 +80,33 @@ export const TEXTAREA_TOKENS = {
    */
   variant: {
     default: {
-      border: "border-[hsl(var(--input))]", // Default surface border color
+      border: "border-[hsl(var(--tm-surface-base))]", // Default surface border color
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Default foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Default foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     elevated: {
-      border: "border-[hsl(var(--input))]", // Elevated surface border color
-      background: "bg-[hsl(var(--card))]", // Card background for elevated appearance
-      text: "text-[hsl(var(--card-foreground))]", // Card foreground text color
+      border: "border-[hsl(var(--tm-surface-base))]", // Elevated surface border color
+      background: "bg-[hsl(var(--tm-surface-raised))]", // Card background for elevated appearance
+      text: "text-[hsl(var(--tm-text-primary))]", // Card foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     outlined: {
-      border: "border-[hsl(var(--input))]", // Outlined surface border color (emphasized)
+      border: "border-[hsl(var(--tm-surface-base))]", // Outlined surface border color (emphasized)
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     filled: {
       border: "border-transparent", // No border for filled variant
-      background: "bg-[hsl(var(--muted))]", // Muted background for filled appearance
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      background: "bg-[hsl(var(--tm-muted))]", // Muted background for filled appearance
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     subtle: {
       border: "border-transparent", // No border for subtle variant
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--muted-foreground))]", // Muted foreground text color
+      text: "text-[hsl(var(--tm-text-muted))]", // Muted foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,
@@ -118,20 +118,20 @@ export const TEXTAREA_TOKENS = {
    */
   state: {
     border: {
-      default: "border-[hsl(var(--input))]", // Default border color using CSS var
+      default: "border-[hsl(var(--tm-surface-base))]", // Default border color using CSS var
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
-      error: "border-[hsl(var(--destructive))]", // Error state border using CSS var
-      ariaInvalid: '[aria-invalid="true"]:border-[hsl(var(--destructive))]', // Error state border via aria-invalid attribute
+      error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
+      ariaInvalid: '[aria-invalid="true"]:border-[hsl(var(--tm-destructive))]', // Error state border via aria-invalid attribute
       success: "border-[hsl(var(--semantic-success))]", // Success state border using CSS var
-      disabled: "border-[hsl(var(--input))]", // Disabled state border (same as default)
+      disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
     },
     background: {
       default: "bg-transparent", // Default background
       disabled: "bg-transparent", // Disabled background (same as default)
     },
     text: {
-      default: "text-[hsl(var(--foreground))]", // Default text color using CSS var
-      placeholder: "placeholder:text-[hsl(var(--muted-foreground))]", // Placeholder text color using CSS var
+      default: "text-[hsl(var(--tm-text-primary))]", // Default text color using CSS var
+      placeholder: "placeholder:text-[hsl(var(--tm-text-muted))]", // Placeholder text color using CSS var
       disabled: "disabled:opacity-50", // Disabled text opacity
     },
   } as const,
@@ -161,8 +161,8 @@ export const TEXTAREA_TOKENS = {
       right: "right-sm", // 8px (0.5rem) - right position for character counter
     },
     color: {
-      default: "text-[hsl(var(--muted-foreground))]", // Default message color
-      error: "text-[hsl(var(--destructive))]", // Error message color
+      default: "text-[hsl(var(--tm-text-muted))]", // Default message color
+      error: "text-[hsl(var(--tm-destructive))]", // Error message color
       success: "text-[hsl(var(--semantic-success))]", // Success message color
     },
   } as const,

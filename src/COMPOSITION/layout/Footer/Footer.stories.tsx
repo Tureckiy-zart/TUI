@@ -95,7 +95,7 @@ type Story = StoryObj<typeof Footer>;
  */
 export const Default: Story = {
   args: {
-    left: <div className="text-sm text-muted-foreground">© 2025 Tenerife Music</div>,
+    left: <div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025 Tenerife Music</div>,
     center: (
       <nav className="flex gap-md">
         <Link href="#" size="sm">
@@ -109,7 +109,7 @@ export const Default: Story = {
         </Link>
       </nav>
     ),
-    right: <div className="text-sm text-muted-foreground">v1.0.0</div>,
+    right: <div className="text-sm text-[hsl(var(--tm-text-muted))]">v1.0.0</div>,
   },
   parameters: {
     docs: {
@@ -128,7 +128,9 @@ export const WithSlots: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Left Slot Only</h3>
-        <Footer left={<div className="text-sm text-muted-foreground">Copyright © 2025</div>} />
+        <Footer
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">Copyright © 2025</div>}
+        />
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Center Slot Only</h3>
@@ -147,12 +149,14 @@ export const WithSlots: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Right Slot Only</h3>
-        <Footer right={<div className="text-sm text-muted-foreground">Social Links</div>} />
+        <Footer
+          right={<div className="text-sm text-[hsl(var(--tm-text-muted))]">Social Links</div>}
+        />
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">All Three Slots</h3>
         <Footer
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
           center={
             <nav className="flex gap-md">
               <Link href="#" size="sm">
@@ -160,7 +164,7 @@ export const WithSlots: Story = {
               </Link>
             </nav>
           }
-          right={<div className="text-sm text-muted-foreground">Info</div>}
+          right={<div className="text-sm text-[hsl(var(--tm-text-muted))]">Info</div>}
         />
       </div>
     </div>
@@ -182,11 +186,17 @@ export const WithBorder: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">With Border (default)</h3>
-        <Footer border={true} left={<div className="text-sm text-muted-foreground">© 2025</div>} />
+        <Footer
+          border={true}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
+        />
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Without Border</h3>
-        <Footer border={false} left={<div className="text-sm text-muted-foreground">© 2025</div>} />
+        <Footer
+          border={false}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
+        />
       </div>
     </div>
   ),
@@ -207,14 +217,14 @@ export const ResponsivePadding: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Default Padding (px="md", py="lg")</h3>
-        <Footer left={<div className="text-sm text-muted-foreground">© 2025</div>} />
+        <Footer left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>} />
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Small Padding (px="sm", py="md")</h3>
         <Footer
           px="sm"
           py="md"
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
         />
       </div>
       <div>
@@ -222,7 +232,7 @@ export const ResponsivePadding: Story = {
         <Footer
           px="xl"
           py="2xl"
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
         />
       </div>
       <div>
@@ -230,9 +240,9 @@ export const ResponsivePadding: Story = {
         <Footer
           px={{ base: "sm", lg: "xl" }}
           py={{ base: "md", lg: "2xl" }}
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
         />
-        <p className="mt-sm text-xs text-muted-foreground">
+        <p className="mt-sm text-xs text-[hsl(var(--tm-text-muted))]">
           Resize viewport to see responsive padding change
         </p>
       </div>
@@ -256,7 +266,7 @@ export const FullExample: Story = {
       px={{ base: "md", lg: "xl" }}
       py={{ base: "lg", lg: "xl" }}
       left={
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-[hsl(var(--tm-text-muted))]">
           © 2025 Tenerife Music. All rights reserved.
         </div>
       }
@@ -299,8 +309,8 @@ export const WithChildren: Story = {
   render: () => (
     <Footer>
       <div className="flex w-full items-center justify-between">
-        <div className="text-sm text-muted-foreground">© 2025</div>
-        <div className="text-sm text-muted-foreground">Custom footer content</div>
+        <div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>
+        <div className="text-sm text-[hsl(var(--tm-text-muted))]">Custom footer content</div>
       </div>
     </Footer>
   ),
@@ -322,7 +332,7 @@ export const WithSocialLinks: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">With icons</h3>
         <Footer
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
           socialLinks={[
             { icon: <Twitter className="h-4 w-4" />, label: "Twitter", href: "#" },
             { icon: <Facebook className="h-4 w-4" />, label: "Facebook", href: "#" },
@@ -333,7 +343,7 @@ export const WithSocialLinks: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Without icons (text only)</h3>
         <Footer
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
           socialLinks={[
             { label: "Twitter", href: "#" },
             { label: "Facebook", href: "#" },
@@ -344,7 +354,7 @@ export const WithSocialLinks: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Mixed (some with icons, some without)</h3>
         <Footer
-          left={<div className="text-sm text-muted-foreground">© 2025</div>}
+          left={<div className="text-sm text-[hsl(var(--tm-text-muted))]">© 2025</div>}
           socialLinks={[
             { icon: <Twitter className="h-4 w-4" />, label: "Twitter", href: "#" },
             { label: "Facebook", href: "#" },

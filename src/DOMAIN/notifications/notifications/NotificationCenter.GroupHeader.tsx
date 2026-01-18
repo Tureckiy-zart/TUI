@@ -58,7 +58,7 @@ export const NotificationCenterGroupHeader = React.forwardRef<
         )}
         {...props}
       >
-        <h3 className="text-sm font-semibold text-foreground">{label}</h3>
+        <h3 className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">{label}</h3>
         {collapsible && onToggleCollapse && (
           <Button
             variant="ghost"

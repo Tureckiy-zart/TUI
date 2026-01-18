@@ -202,7 +202,12 @@ export const States: Story = {
 export const LoginForm: Story = {
   render: () => (
     <div
-      style={{ width: "360px", padding: "2rem", border: "1px solid #e5e7eb", borderRadius: "8px" }}
+      style={{
+        width: "360px",
+        padding: "2rem",
+        border: "1px solid hsl(var(--tm-border-default))",
+        borderRadius: "8px",
+      }}
     >
       <h2 style={{ marginBottom: "1.5rem", fontSize: "1.5rem", fontWeight: 600 }}>Sign In</h2>
 
@@ -255,7 +260,7 @@ export const MultiLineField: Story = {
               width: "100%",
               padding: "0.5rem 0.75rem",
               borderRadius: "0.375rem",
-              border: "1px solid #d1d5db",
+              border: "1px solid hsl(var(--tm-border-default))",
               fontSize: "0.875rem",
               lineHeight: "1.5",
               resize: "vertical",
@@ -276,7 +281,12 @@ export const MultiLineField: Story = {
 export const FieldInFormContext: Story = {
   render: () => (
     <div
-      style={{ width: "480px", padding: "2rem", border: "1px solid #e5e7eb", borderRadius: "8px" }}
+      style={{
+        width: "480px",
+        padding: "2rem",
+        border: "1px solid hsl(var(--tm-border-default))",
+        borderRadius: "8px",
+      }}
     >
       <h2 style={{ marginBottom: "1.5rem", fontSize: "1.5rem", fontWeight: 600 }}>
         Create Account

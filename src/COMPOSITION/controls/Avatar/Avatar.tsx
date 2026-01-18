@@ -25,7 +25,7 @@
  * - Colors come from AVATAR_TOKENS for fallback and status styling
  * - Fallback colors use AVATAR_TOKENS.fallbackColors (bg and text)
  * - Status colors use AVATAR_TOKENS.statusColor (online, offline, busy)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -173,7 +173,7 @@ export interface AvatarProps {
  * - ✅ Follows Extension Authority Contract
  * - ✅ Token-based sizing (h-*, w-*)
  * - ✅ Token-based radius (rounded-full, rounded-md)
- * - ✅ Token-based colors (bg-muted, text-muted-foreground, bg-semantic-*)
+ * - ✅ Token-based colors (bg-[hsl(var(--tm-muted))], text-[hsl(var(--tm-text-muted))], bg-semantic-*)
  * - ✅ Enhanced accessibility with computed aria-label
  */
 const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, AvatarProps>(

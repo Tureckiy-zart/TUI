@@ -9,6 +9,7 @@
  * must define exactly this set of tokens. The token parity checker script
  * compares theme files against this registry to ensure consistency.
  *
+ * @see docs/theming/TM_TOKEN_CONTRACT_V1.md - Canon TM token contract v1
  * @see docs/theming/TOKEN_NAMING_DECISION.md - Token naming decision
  * @see docs/theming/THEME_SYSTEM_ARCHITECTURE.md - Theme system architecture
  * @see scripts/check-theme-token-parity.mjs - Parity checker script
@@ -23,81 +24,39 @@
  * }
  */
 export const REQUIRED_THEME_TOKENS = [
-  // Background tokens
-  "--tm-bg",
-  "--tm-bg-elev-1",
-  "--tm-bg-elev-2",
-  "--tm-overlay",
-  "--tm-scrim",
+  // Surface tokens
+  "--tm-surface-base",
+  "--tm-surface-raised",
+  "--tm-surface-overlay",
 
-  // Foreground/text tokens
-  "--tm-fg",
-  "--tm-fg-muted",
-  "--tm-fg-subtle",
+  // Text tokens
+  "--tm-text-primary",
+  "--tm-text-secondary",
+  "--tm-text-muted",
+  "--tm-text-inverse",
 
   // Border tokens
-  "--tm-border",
+  "--tm-border-default",
   "--tm-border-strong",
-  "--tm-separator",
 
-  // Focus and shadow tokens
-  "--tm-ring",
-  "--tm-shadow-color",
-  "--tm-ring-offset",
-  "--tm-shadow-1",
-  "--tm-shadow-2",
+  // Focus tokens
+  "--tm-focus-ring",
 
-  // Primary brand color tokens
+  // Color tokens
   "--tm-primary",
   "--tm-primary-foreground",
-  "--tm-primary-hover",
-
-  // Secondary brand color tokens
   "--tm-secondary",
   "--tm-secondary-foreground",
-  "--tm-secondary-hover",
-
-  // Accent color tokens
   "--tm-accent",
   "--tm-accent-foreground",
-  "--tm-accent-hover",
-
-  // Destructive/error color tokens
   "--tm-destructive",
   "--tm-destructive-foreground",
-  "--tm-destructive-hover",
-
-  // Success color tokens
-  "--tm-success",
-  "--tm-success-foreground",
-  "--tm-success-hover",
-
-  // Warning color tokens
-  "--tm-warning",
-  "--tm-warning-foreground",
-  "--tm-warning-hover",
-
-  // Info color tokens
-  "--tm-info",
-  "--tm-info-foreground",
-  "--tm-info-hover",
-
-  // Muted color tokens
   "--tm-muted",
   "--tm-muted-foreground",
 
-  // Disabled state tokens
+  // State tokens
   "--tm-disabled",
   "--tm-disabled-foreground",
-
-  // Link tokens (optional but recommended)
-  "--tm-link",
-  "--tm-link-hover",
-
-  // Selection tokens (optional but recommended)
-  // Note: --tm-selection-fg is deprecated, use --tm-selection-foreground instead
-  "--tm-selection-bg",
-  "--tm-selection-foreground",
 ] as const;
 
 /**

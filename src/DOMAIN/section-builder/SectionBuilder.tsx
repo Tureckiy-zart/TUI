@@ -45,14 +45,14 @@ function resolveBackground(background: BackgroundConfig | undefined): {
 
   if (background.type === "surface") {
     // Surface colors use CSS variables set by theme system
-    // Map to CSS variable format: hsl(var(--surface-*))
+    // Map to CSS variable format: hsl(var(--tm-surface-*))
     const surfaceVarMap: Record<string, string> = {
-      base: "hsl(var(--surface-base))",
-      elevated1: "hsl(var(--surface-elevated1))",
-      elevated2: "hsl(var(--surface-elevated2))",
-      elevated3: "hsl(var(--surface-elevated3))",
-      overlay: "hsl(var(--surface-overlay))",
-      glass: "hsl(var(--surface-glass))",
+      base: "hsl(var(--tm-surface-base))",
+      elevated1: "hsl(var(--tm-surface-raised))",
+      elevated2: "hsl(var(--tm-surface-raised))",
+      elevated3: "hsl(var(--tm-surface-overlay))",
+      overlay: "hsl(var(--tm-surface-overlay))",
+      glass: "hsl(var(--tm-surface-overlay))",
     };
 
     const bgColor = surfaceVarMap[background.variant];

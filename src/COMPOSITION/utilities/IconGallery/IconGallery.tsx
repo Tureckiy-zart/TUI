@@ -123,7 +123,13 @@ const IconGallery = React.forwardRef<HTMLDivElement, IconGalleryProps>(
           {...props}
         >
           {iconList.map((name) => (
-            <Box key={name} className="border border-border" px="md" py="md" radius="md">
+            <Box
+              key={name}
+              className="border border-[hsl(var(--tm-border-default))]"
+              px="md"
+              py="md"
+              radius="md"
+            >
               <Stack direction="vertical" spacing="xs" align="center">
                 <Icon name={name} size={iconSize} color={iconColor} />
                 <Text size="xs" weight="medium">

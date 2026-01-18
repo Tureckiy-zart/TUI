@@ -90,7 +90,7 @@ describe("ErrorText", () => {
     it("applies destructive color styling", () => {
       renderWithTheme(<ErrorText>Destructive error</ErrorText>);
       const error = screen.getByRole("alert");
-      expect(error).toHaveClass("text-destructive");
+      expect(error).toHaveClass("text-[hsl(var(--tm-destructive))]");
     });
   });
 
@@ -131,7 +131,7 @@ describe("ErrorText", () => {
       );
       const customError = screen.getByTestId("custom-error");
       // Slot merges className with child element
-      expect(customError).toHaveClass("text-destructive");
+      expect(customError).toHaveClass("text-[hsl(var(--tm-destructive))]");
     });
 
     it("forwards ref to Slot child element when asChild is true", () => {

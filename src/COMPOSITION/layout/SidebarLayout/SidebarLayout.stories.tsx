@@ -316,7 +316,7 @@ export const RightSidebarPage: Story = {
     sidebar: (
       <Box px="md" py="lg" bg="card" radius="md" style={{ height: "100%" }}>
         <h2 style={{ margin: 0, marginBottom: "1rem" }}>Sidebar</h2>
-        <p style={{ fontSize: "0.875rem", color: "var(--color-text-muted)" }}>
+        <p style={{ fontSize: "0.875rem", color: "var(--color-text-[hsl(var(--tm-text-muted))])" }}>
           Additional information or actions can be placed in the right sidebar.
         </p>
       </Box>
@@ -353,7 +353,13 @@ export const CollapsibleLayout: Story = {
     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
       <div>
         <h3 style={{ marginBottom: "1rem" }}>Collapse at md breakpoint (768px)</h3>
-        <p style={{ marginBottom: "1rem", fontSize: "0.875rem", color: "var(--color-text-muted)" }}>
+        <p
+          style={{
+            marginBottom: "1rem",
+            fontSize: "0.875rem",
+            color: "var(--color-text-[hsl(var(--tm-text-muted))])",
+          }}
+        >
           Resize the viewport below 768px to see the layout collapse to vertical stack.
         </p>
         <SidebarLayout

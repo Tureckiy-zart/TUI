@@ -39,31 +39,31 @@ describe("Separator component", () => {
     it("should apply border color by default", () => {
       const { container } = render(<Separator />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-border");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-border-default))]");
     });
 
     it("should apply muted color variant", () => {
       const { container } = render(<Separator color="muted" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-muted");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-muted))]");
     });
 
     it("should apply primary color variant", () => {
       const { container } = render(<Separator color="primary" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-primary/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-primary))]/20");
     });
 
     it("should apply secondary color variant", () => {
       const { container } = render(<Separator color="secondary" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-secondary/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-secondary))]/20");
     });
 
     it("should apply accent color variant", () => {
       const { container } = render(<Separator color="accent" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-accent/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-accent))]/20");
     });
   });
 
@@ -123,8 +123,8 @@ describe("Separator component", () => {
     it("should use token-based color classes (no raw values)", () => {
       const { container } = render(<Separator color="primary" />);
       const element = container.firstChild as HTMLElement;
-      // Verify token usage (bg-primary/20 is token-based)
-      expect(element.className).toMatch(/bg-(border|muted|primary|secondary|accent)/);
+      // Verify token usage (bg-[hsl(var(--tm-primary))]/20 is token-based)
+      expect(element.className).toContain("bg-[hsl(var(--tm-");
     });
 
     it("should use token-based sizing (tokenized thickness values)", () => {
@@ -166,7 +166,7 @@ describe("Separator component", () => {
       expect(element).toBeInTheDocument();
       expect(element).toHaveAttribute("data-orientation", "vertical");
       expect(element).toHaveAttribute("role", "separator");
-      expect(element).toHaveClass("bg-accent/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-accent))]/20");
       expect(element).toHaveClass("w-0.5");
       expect(element).toHaveClass("custom");
     });

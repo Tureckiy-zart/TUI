@@ -102,7 +102,7 @@ export const Default: Story = {
   name: "Default",
   render: function DefaultStory() {
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Focus Trap Demo</Heading>
           <Text size="sm">
@@ -138,7 +138,7 @@ export const States: Story = {
     const [active, setActive] = useState(true);
 
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Focus Trap States</Heading>
           <Text size="sm">
@@ -176,7 +176,7 @@ export const WithInitialFocus: Story = {
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Initial Focus</Heading>
           <Text size="sm">
@@ -213,7 +213,7 @@ export const WithEscapeHandler: Story = {
 
     if (!isOpen) {
       return (
-        <Box px={4} py={4} className="border border-border">
+        <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
           <Stack spacing={4}>
             <Heading level={3}>Focus Trap Closed</Heading>
             <Button onClick={() => setIsOpen(true)}>Open Focus Trap</Button>
@@ -223,7 +223,7 @@ export const WithEscapeHandler: Story = {
     }
 
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Focus Trap with Escape</Heading>
           <Text size="sm">Press Escape to close the focus trap.</Text>
@@ -254,7 +254,7 @@ export const WithoutLoop: Story = {
   name: "Without Loop",
   render: function WithoutLoopStory() {
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Focus Trap Without Loop</Heading>
           <Text size="sm">
@@ -291,7 +291,7 @@ export const ModalScenario: Story = {
     const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     return (
-      <Box px={4} py={4} className="border border-border">
+      <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
         <Stack spacing={4}>
           <Heading level={3}>Modal-like Scenario</Heading>
           <Text size="sm">
@@ -308,7 +308,7 @@ export const ModalScenario: Story = {
                 px={6}
                 py={6}
                 bg="background"
-                className="rounded-md border border-border"
+                className="rounded-md border border-[hsl(var(--tm-border-default))]"
                 style={{ minWidth: "400px" }}
               >
                 <FocusTrap initialFocusRef={closeButtonRef} onEscape={() => setIsOpen(false)}>

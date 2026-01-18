@@ -16,7 +16,7 @@
  * - Card and CardBody components handle card styling via CARD_TOKENS
  * - Heading component handles heading styling via HEADING_TOKENS
  * - Text component handles text styling via TEXT_TOKENS
- * - Gradient background uses CSS custom properties (hsl(var(--primary)), hsl(var(--accent)))
+ * - Gradient background uses CSS custom properties (hsl(var(--tm-primary)), hsl(var(--tm-accent)))
  * - NO raw Tailwind classes allowed (component delegates styling)
  *
  * Composition Authority Rules:
@@ -89,9 +89,9 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
       radius="lg"
       px="lg"
       py="lg"
-      className={cn("text-primary-foreground", className)}
+      className={cn("text-[hsl(var(--tm-primary-foreground))]", className)}
       style={{
-        background: "linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))",
+        background: "linear-gradient(to right, hsl(var(--tm-primary)), hsl(var(--tm-accent)))",
       }}
     >
       <div className="mx-auto max-w-4xl text-center">

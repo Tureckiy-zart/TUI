@@ -128,9 +128,14 @@ export const Matrix: Story = {
       <div className="space-y-lg">
         {/* Header row */}
         <div className="grid grid-cols-5 items-center gap-md">
-          <div className="text-sm font-semibold text-foreground">Level / Weight</div>
+          <div className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">
+            Level / Weight
+          </div>
           {weights.map((weight) => (
-            <div key={weight} className="text-sm font-semibold capitalize text-foreground">
+            <div
+              key={weight}
+              className="text-sm font-semibold capitalize text-[hsl(var(--tm-text-primary))]"
+            >
               {weight}
             </div>
           ))}
@@ -139,7 +144,7 @@ export const Matrix: Story = {
         {/* Level rows */}
         {levels.map((level) => (
           <div key={level} className="grid grid-cols-5 items-baseline gap-md">
-            <div className="text-sm font-semibold text-foreground">h{level}</div>
+            <div className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">h{level}</div>
             {weights.map((weight) => (
               <Heading key={`${level}-${weight}`} level={level} weight={weight}>
                 Heading
@@ -160,26 +165,32 @@ export const TypographyHierarchy: Story = {
   render: () => (
     <article className="max-w-2xl space-y-md">
       <Heading level={1}>Article Title (h1)</Heading>
-      <p className="text-sm text-foreground/80">
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">
         Introduction paragraph explaining the main topic of the article.
       </p>
 
       <Heading level={2}>Main Section (h2)</Heading>
-      <p className="text-sm text-foreground/80">
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">
         Content for the main section with detailed explanation.
       </p>
 
       <Heading level={3}>Subsection (h3)</Heading>
-      <p className="text-sm text-foreground/80">Subsection content with more specific details.</p>
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">
+        Subsection content with more specific details.
+      </p>
 
       <Heading level={4}>Minor Point (h4)</Heading>
-      <p className="text-sm text-foreground/80">A minor point under the subsection.</p>
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">
+        A minor point under the subsection.
+      </p>
 
       <Heading level={5}>Detail (h5)</Heading>
-      <p className="text-sm text-foreground/80">Detailed information.</p>
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">Detailed information.</p>
 
       <Heading level={6}>Fine Print (h6)</Heading>
-      <p className="text-sm text-foreground/80">Additional fine print details.</p>
+      <p className="text-sm text-[hsl(var(--tm-text-primary))]/80">
+        Additional fine print details.
+      </p>
     </article>
   ),
 };

@@ -273,7 +273,7 @@ export const Accessibility: Story = {
       <div className="space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Semantic HTML Structure</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             PromoCard uses semantic HTML elements (h3 for heading, img with alt text, link for
             navigation) for proper screen reader support.
           </p>
@@ -289,7 +289,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Decorative Elements Hidden</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Decorative icons and overlays are marked with aria-hidden="true" to prevent screen
             reader announcement.
           </p>
@@ -302,7 +302,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Featured Badge</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Featured badge displays when featured prop is true or variant is elevated.
           </p>
           <PromoCard
@@ -317,7 +317,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Image Alt Text</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Images include descriptive alt text matching the promo title for screen reader support.
           </p>
           <PromoCard

@@ -141,7 +141,7 @@ export const AllVariants: Story = {
  */
 export const CardLoading: Story = {
   render: () => (
-    <div className="w-80 space-y-4 rounded-xl border border-border p-6">
+    <div className="w-80 space-y-4 rounded-xl border border-[hsl(var(--tm-border-default))] p-6">
       <div className="flex items-center gap-4">
         <Skeleton variant="circle" />
         <div className="flex-1 space-y-2">

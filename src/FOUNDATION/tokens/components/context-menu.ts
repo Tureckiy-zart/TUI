@@ -87,16 +87,17 @@ export const CONTEXT_MENU_TOKENS = {
    * ContextMenu content tokens
    */
   content: {
-    background: "bg-[hsl(var(--popover))]", // Background using CSS var
-    text: "text-[hsl(var(--popover-foreground))]", // Text color using CSS var
-    border: "border border-[hsl(var(--border))]", // Border color using CSS var
+    background: "bg-[hsl(var(--tm-surface-overlay))]", // Background using CSS var
+    text: "text-[hsl(var(--tm-text-primary))]", // Text color using CSS var
+    border: "border border-[hsl(var(--tm-border-default))]", // Border color using CSS var
     shadow: "shadow-lg", // Maps to elevationShadows.lg
     surface: {
-      flat: "bg-[hsl(var(--popover))]",
-      raised: "bg-[hsl(var(--popover))] shadow-lg",
-      sunken: "bg-[hsl(var(--muted))]",
-      outline: "bg-[hsl(var(--popover))] border-2 border-[hsl(var(--border))]",
-      subtle: "bg-[hsl(var(--muted))]",
+      flat: "bg-[hsl(var(--tm-surface-overlay))]",
+      raised: "bg-[hsl(var(--tm-surface-overlay))] shadow-lg",
+      sunken: "bg-[hsl(var(--tm-muted))]",
+      outline:
+        "bg-[hsl(var(--tm-surface-overlay))] border-2 border-[hsl(var(--tm-border-default))]",
+      subtle: "bg-[hsl(var(--tm-muted))]",
     },
     /**
      * Animation offset for slide-in animations
@@ -111,8 +112,8 @@ export const CONTEXT_MENU_TOKENS = {
   item: {
     radius: "rounded-sm", // 4px (0.25rem)
     focus: {
-      background: "focus-visible:bg-[hsl(var(--accent))]", // Focus background using CSS var
-      text: "focus-visible:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
+      background: "focus-visible:bg-[hsl(var(--tm-accent))]", // Focus background using CSS var
+      text: "focus-visible:text-[hsl(var(--tm-accent-foreground))]", // Focus text using CSS var
     },
     disabled: {
       opacity: "opacity-50", // Disabled opacity
@@ -122,31 +123,31 @@ export const CONTEXT_MENU_TOKENS = {
       neutral: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--accent))]",
-          text: "hover:text-[hsl(var(--accent-foreground))]",
+          background: "hover:bg-[hsl(var(--tm-accent))]",
+          text: "hover:text-[hsl(var(--tm-accent-foreground))]",
         },
       },
       primary: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--primary))]",
+          text: "text-[hsl(var(--tm-primary))]",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--primary))]",
-          text: "hover:text-[hsl(var(--primary-foreground))]",
+          background: "hover:bg-[hsl(var(--tm-primary))]",
+          text: "hover:text-[hsl(var(--tm-primary-foreground))]",
         },
       },
       destructive: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--destructive))]",
+          text: "text-[hsl(var(--tm-destructive))]",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--destructive))]",
-          text: "hover:text-[hsl(var(--destructive-foreground))]",
+          background: "hover:bg-[hsl(var(--tm-destructive))]",
+          text: "hover:text-[hsl(var(--tm-destructive-foreground))]",
         },
       },
     },
@@ -158,7 +159,7 @@ export const CONTEXT_MENU_TOKENS = {
   separator: {
     margin: "my-xs", // 4px vertical margin
     height: "h-px", // 1px height
-    color: "bg-[hsl(var(--border))]", // Border color using CSS var
+    color: "bg-[hsl(var(--tm-border-default))]", // Border color using CSS var
   } as const,
 
   /**
@@ -170,7 +171,7 @@ export const CONTEXT_MENU_TOKENS = {
       md: "px-md py-sm", // 16px horizontal, 8px vertical - default
     },
     textStyle: "text-sm font-semibold", // Maps to fontSize.sm and fontWeight.semibold
-    color: "text-[hsl(var(--muted-foreground))]", // Muted text color
+    color: "text-[hsl(var(--tm-text-muted))]", // Muted text color
   } as const,
 
   /**

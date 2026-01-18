@@ -264,7 +264,7 @@ export const NotificationCenterPanel = React.forwardRef<
               className={cn("flex-1 overflow-y-auto", NOTIFICATION_TOKENS.panel.spacing.padding)}
             >
               {Object.keys(grouped).length === 0 ? (
-                <div className="flex h-full items-center justify-center text-muted-foreground">
+                <div className="flex h-full items-center justify-center text-[hsl(var(--tm-text-muted))]">
                   No notifications
                 </div>
               ) : (

@@ -20,9 +20,9 @@
  *
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
- * - Colors use semantic Tailwind classes (bg-border, bg-muted, bg-primary/20, etc.)
+ * - Colors use semantic Tailwind classes (bg-[hsl(var(--tm-border-default))], bg-[hsl(var(--tm-muted))], bg-[hsl(var(--tm-primary))]/20, etc.)
  * - Color variants map to semantic color tokens
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -89,7 +89,7 @@ export type SeparatorThickness = "1" | "2";
  */
 const separatorVariants = tokenCVA({
   // Base styles - common to all separators
-  base: "shrink-0 bg-border",
+  base: "shrink-0 bg-[hsl(var(--tm-border-default))]",
   variants: {
     /**
      * Orientation of the separator
@@ -104,11 +104,11 @@ const separatorVariants = tokenCVA({
      * Color variant
      */
     color: {
-      border: "bg-border",
-      muted: "bg-muted",
-      primary: "bg-primary/20",
-      secondary: "bg-secondary/20",
-      accent: "bg-accent/20",
+      border: "bg-[hsl(var(--tm-border-default))]",
+      muted: "bg-[hsl(var(--tm-muted))]",
+      primary: "bg-[hsl(var(--tm-primary))]/20",
+      secondary: "bg-[hsl(var(--tm-secondary))]/20",
+      accent: "bg-[hsl(var(--tm-accent))]/20",
     } satisfies Record<SeparatorColor, string>,
     /**
      * Thickness variant

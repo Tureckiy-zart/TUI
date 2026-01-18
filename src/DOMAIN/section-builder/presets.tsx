@@ -200,12 +200,12 @@ export function createFeatureGridConfig(props: FeatureGridPresetProps): SectionB
     content: (
       <div className="space-y-md">
         {feature.icon && (
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[hsl(var(--tm-primary))]/10 text-[hsl(var(--tm-primary))]">
             {feature.icon}
           </div>
         )}
         <h3 className="text-xl font-semibold">{feature.title}</h3>
-        <p className="text-muted-foreground">{feature.description}</p>
+        <p className="text-[hsl(var(--tm-text-muted))]">{feature.description}</p>
         {feature.content}
       </div>
     ),
@@ -357,10 +357,12 @@ export function createTestimonialConfig(props: TestimonialPresetProps): SectionB
   const items: SectionSlotValue[] = testimonials.map((testimonial) => ({
     type: "text",
     content: (
-      <div className="rounded-lg border bg-card p-lg shadow-sm">
+      <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-lg shadow-sm">
         <div className="space-y-md">
           {/* Quote */}
-          <blockquote className="text-lg italic text-foreground">{testimonial.quote}</blockquote>
+          <blockquote className="text-lg italic text-[hsl(var(--tm-text-primary))]">
+            {testimonial.quote}
+          </blockquote>
 
           {/* Rating */}
           {testimonial.rating && (
@@ -368,7 +370,11 @@ export function createTestimonialConfig(props: TestimonialPresetProps): SectionB
               {Array.from({ length: 5 }).map((_, i) => (
                 <span
                   key={i}
-                  className={i < testimonial.rating! ? "text-yellow-500" : "text-muted"}
+                  className={
+                    i < testimonial.rating!
+                      ? "text-[hsl(var(--tm-primary))]"
+                      : "text-[hsl(var(--tm-text-muted))]"
+                  }
                 >
                   ★
                 </span>
@@ -384,7 +390,7 @@ export function createTestimonialConfig(props: TestimonialPresetProps): SectionB
             <div>
               <div className="font-semibold">{testimonial.author}</div>
               {testimonial.role && (
-                <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                <div className="text-sm text-[hsl(var(--tm-text-muted))]">{testimonial.role}</div>
               )}
             </div>
           </div>

@@ -23,7 +23,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from CHIP_TOKENS.variant for variant styling
  * - Variant colors use CHIP_TOKENS.variant[variant].border, background, text, hover
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -315,7 +315,7 @@ const Chip = React.forwardRef<HTMLElement, ChipProps>(
           disabled && CHIP_TOKENS.disabled.opacity,
           disabled && CHIP_TOKENS.disabled.cursor,
           disabled && CHIP_TOKENS.disabled.pointerEvents,
-          selected && "ring-2 ring-ring ring-offset-2", // Visual selected state
+          selected && "ring-2 ring-[hsl(var(--tm-focus-ring))] ring-offset-2", // Visual selected state
           className,
         )}
         onClick={!disabled ? onClick : undefined}

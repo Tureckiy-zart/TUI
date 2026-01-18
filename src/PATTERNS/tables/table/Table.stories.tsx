@@ -221,7 +221,9 @@ export const ExpandableRows: Story = {
                   <TableExpandableContent colSpan={3} expanded={isExpanded}>
                     <div className="space-y-2">
                       <p className="text-sm font-medium">Additional Information</p>
-                      <p className="text-sm text-muted-foreground">Status: {user.status}</p>
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                        Status: {user.status}
+                      </p>
                       <Button size="sm" variant="outline">
                         View Details
                       </Button>
@@ -442,8 +444,10 @@ export const States: Story = {
                   <TableExpandableContent colSpan={4} expanded={isExpanded}>
                     <div className="space-y-2">
                       <p className="text-sm font-medium">Additional Information</p>
-                      <p className="text-sm text-muted-foreground">User ID: {user.id}</p>
-                      <p className="text-sm text-muted-foreground">Status: {user.status}</p>
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">User ID: {user.id}</p>
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                        Status: {user.status}
+                      </p>
                     </div>
                   </TableExpandableContent>
                 </TableRow>

@@ -131,7 +131,7 @@ export const States: Story = {
                 <div className="flex items-center gap-4">
                   {states.map((state) => (
                     <div key={state.name} className="flex-1 space-y-1">
-                      <div className="text-xs text-muted-foreground">{state.name}</div>
+                      <div className="text-xs text-[hsl(var(--tm-text-muted))]">{state.name}</div>
                       <RangeSlider
                         variant={variant}
                         size={size}
@@ -195,7 +195,7 @@ export const PriceRangeFilter: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Price Range</label>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             ${priceRange[0]} - ${priceRange[1]}
           </span>
         </div>
@@ -226,7 +226,7 @@ export const DateRangeSelection: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Date Range</label>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {dateRange[0]} - {dateRange[1]} days
           </span>
         </div>
@@ -257,7 +257,7 @@ export const TemperatureRange: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Temperature Range</label>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {tempRange[0]}°C - {tempRange[1]}°C
           </span>
         </div>
@@ -288,7 +288,7 @@ export const AgeRangeFilter: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Age Range</label>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {ageRange[0]} - {ageRange[1]} years
           </span>
         </div>
@@ -334,7 +334,7 @@ export const VerticalOrientation: Story = {
     return (
       <div className="flex h-64 items-center gap-8">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -347,7 +347,7 @@ export const VerticalOrientation: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -360,7 +360,7 @@ export const VerticalOrientation: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -388,7 +388,7 @@ export const WithMarks: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-2 block text-sm text-muted-foreground">
+          <span className="mb-2 block text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -416,7 +416,7 @@ export const WithMarksAndLabels: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-4 block text-sm text-muted-foreground">
+          <span className="mb-4 block text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -451,7 +451,7 @@ export const CustomMarkLabels: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-4 block text-sm text-muted-foreground">
+          <span className="mb-4 block text-sm text-[hsl(var(--tm-text-muted))]">
             Price Range: ${range[0]}-${range[1]}
           </span>
           <RangeSlider
@@ -485,7 +485,7 @@ export const VerticalWithMarks: Story = {
     return (
       <div className="flex h-64 items-center gap-8">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider
@@ -499,7 +499,7 @@ export const VerticalWithMarks: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
           <RangeSlider

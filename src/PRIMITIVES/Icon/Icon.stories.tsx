@@ -92,19 +92,19 @@ export const AllSizes: Story = {
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-xs">
         <Icon name="search" size="sm" />
-        <span className="text-xs font-medium text-foreground">sm</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">sm</span>
       </div>
       <div className="flex flex-col items-center gap-xs">
         <Icon name="search" size="md" />
-        <span className="text-xs font-medium text-foreground">md</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">md</span>
       </div>
       <div className="flex flex-col items-center gap-xs">
         <Icon name="search" size="lg" />
-        <span className="text-xs font-medium text-foreground">lg</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">lg</span>
       </div>
       <div className="flex flex-col items-center gap-xs">
         <Icon name="search" size="xl" />
-        <span className="text-xs font-medium text-foreground">xl</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">xl</span>
       </div>
     </div>
   ),
@@ -146,15 +146,15 @@ export const AllStrokeWidths: Story = {
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-xs">
         <Icon name="check" stroke="thin" size="lg" />
-        <span className="text-xs font-medium text-foreground">thin</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">thin</span>
       </div>
       <div className="flex flex-col items-center gap-xs">
         <Icon name="check" stroke="normal" size="lg" />
-        <span className="text-xs font-medium text-foreground">normal</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">normal</span>
       </div>
       <div className="flex flex-col items-center gap-xs">
         <Icon name="check" stroke="bold" size="lg" />
-        <span className="text-xs font-medium text-foreground">bold</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">bold</span>
       </div>
     </div>
   ),
@@ -186,7 +186,7 @@ export const WithInput: Story = {
         <Icon
           name="search"
           size="sm"
-          className="absolute left-sm top-1/2 -translate-y-1/2 text-foreground/70"
+          className="absolute left-sm top-1/2 -translate-y-1/2 text-[hsl(var(--tm-text-primary))]/70"
         />
         <Input placeholder="Search..." />
       </div>
@@ -220,7 +220,7 @@ export const SemanticColors: Story = {
 export const FallbackIcon: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
-      <p className="text-sm font-medium text-foreground/90">
+      <p className="text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
         Invalid icon name falls back to error icon:
       </p>
       <Icon name={"invalidName" as any} size="lg" />
@@ -238,7 +238,7 @@ export const SizesGallery: Story = {
       {/* Size scale demonstration */}
       <div>
         <h3 className="mb-md text-lg font-semibold">Icon Size Scale</h3>
-        <p className="mb-lg text-sm text-muted-foreground">
+        <p className="mb-lg text-sm text-[hsl(var(--tm-text-muted))]">
           Icon uses a visual size scale (sm, md, lg, xl) distinct from interactive components. Per
           Foundation rule: "Semi-interactive components (Icon, Badge, Avatar) MUST NOT use size as
           interactive scale"
@@ -247,22 +247,22 @@ export const SizesGallery: Story = {
           <div className="flex flex-col items-center gap-sm">
             <Icon name="search" size="sm" />
             <span className="text-xs font-medium">sm</span>
-            <span className="text-xs text-muted-foreground">12px</span>
+            <span className="text-xs text-[hsl(var(--tm-text-muted))]">12px</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Icon name="search" size="md" />
             <span className="text-xs font-medium">md</span>
-            <span className="text-xs text-muted-foreground">16px (default)</span>
+            <span className="text-xs text-[hsl(var(--tm-text-muted))]">16px (default)</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Icon name="search" size="lg" />
             <span className="text-xs font-medium">lg</span>
-            <span className="text-xs text-muted-foreground">20px</span>
+            <span className="text-xs text-[hsl(var(--tm-text-muted))]">20px</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Icon name="search" size="xl" />
             <span className="text-xs font-medium">xl</span>
-            <span className="text-xs text-muted-foreground">24px</span>
+            <span className="text-xs text-[hsl(var(--tm-text-muted))]">24px</span>
           </div>
         </div>
       </div>

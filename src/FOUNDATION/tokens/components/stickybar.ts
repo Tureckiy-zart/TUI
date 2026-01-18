@@ -38,9 +38,9 @@ export const STICKYBAR_TOKENS = {
    * Maps to background color tokens and elevation shadows
    */
   tone: {
-    default: "bg-background",
-    elevated: "bg-card shadow-sm",
-    muted: "bg-muted/50",
+    default: "bg-[hsl(var(--tm-surface-base))]",
+    elevated: "bg-[hsl(var(--tm-surface-raised))] shadow-sm",
+    muted: "bg-[hsl(var(--tm-muted))]/50",
   } as const,
 } as const;
 

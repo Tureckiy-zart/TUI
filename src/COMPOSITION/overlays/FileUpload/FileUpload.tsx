@@ -25,7 +25,7 @@
  * - Dropzone variant colors use FILE_UPLOAD_TOKENS.dropzone.variant
  * - Dropzone state colors use FILE_UPLOAD_TOKENS.dropzone.state
  * - Error message color uses FILE_UPLOAD_TOKENS.message.error.textColor
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -448,7 +448,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-muted-foreground"
+                className="text-[hsl(var(--tm-text-muted))]"
               >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="17 8 12 3 7 8"></polyline>

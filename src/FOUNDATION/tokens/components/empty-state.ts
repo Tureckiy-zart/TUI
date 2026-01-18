@@ -47,7 +47,7 @@ export const EMPTY_STATE_TOKENS = {
       md: "size-12", // 48px (3rem)
       lg: "size-16", // 64px (4rem)
     },
-    container: "flex items-center justify-center text-muted-foreground", // Icon container styles
+    container: "flex items-center justify-center text-[hsl(var(--tm-text-muted))]-foreground", // Icon container styles
   } as const,
 
   /**
@@ -63,7 +63,7 @@ export const EMPTY_STATE_TOKENS = {
     description: {
       fontSize: "text-sm", // Maps to fontSize.sm[0]
       fontWeight: "font-normal", // Maps to fontWeight.normal
-      color: "text-muted-foreground", // Description text color
+      color: "text-[hsl(var(--tm-text-muted))]-foreground", // Description text color
       maxWidth: "max-w-md", // Maximum width for description
     },
   } as const,

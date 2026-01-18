@@ -449,16 +449,16 @@ export const NavigationDrawer: Story = {
           </Drawer.Header>
           <Drawer.Body>
             <nav className="space-y-sm">
-              <a href="#" className="block rounded-md px-md py-sm hover:bg-muted">
+              <a href="#" className="block rounded-md px-md py-sm hover:bg-[hsl(var(--tm-muted))]">
                 Home
               </a>
-              <a href="#" className="block rounded-md px-md py-sm hover:bg-muted">
+              <a href="#" className="block rounded-md px-md py-sm hover:bg-[hsl(var(--tm-muted))]">
                 About
               </a>
-              <a href="#" className="block rounded-md px-md py-sm hover:bg-muted">
+              <a href="#" className="block rounded-md px-md py-sm hover:bg-[hsl(var(--tm-muted))]">
                 Services
               </a>
-              <a href="#" className="block rounded-md px-md py-sm hover:bg-muted">
+              <a href="#" className="block rounded-md px-md py-sm hover:bg-[hsl(var(--tm-muted))]">
                 Contact
               </a>
             </nav>
@@ -608,11 +608,11 @@ export const FilterDrawer: Story = {
                 <div className="space-y-sm">
                   <input
                     type="date"
-                    className="w-full rounded-md border border-border px-md py-sm"
+                    className="w-full rounded-md border border-[hsl(var(--tm-border-default))] px-md py-sm"
                   />
                   <input
                     type="date"
-                    className="w-full rounded-md border border-border px-md py-sm"
+                    className="w-full rounded-md border border-[hsl(var(--tm-border-default))] px-md py-sm"
                   />
                 </div>
               </div>

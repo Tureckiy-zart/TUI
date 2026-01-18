@@ -84,7 +84,7 @@ export const Controlled: Story = {
             </Select.Viewport>
           </Select.Content>
         </Select.Root>
-        <p className="text-sm text-muted-foreground">Selected: {value ?? "none"}</p>
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">Selected: {value ?? "none"}</p>
       </div>
     );
   },
@@ -334,7 +334,7 @@ export const WithGroups: Story = {
 export const KeyboardNavigation: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
         Use keyboard to navigate: Enter/Space to open, Arrow keys to navigate, Enter to select,
         Escape to close
       </p>
@@ -636,7 +636,7 @@ export const SizesGallery: Story = {
 export const Accessibility: Story = {
   render: () => (
     <div className="flex w-64 flex-col gap-md">
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
         Select provides full keyboard navigation and ARIA support via Radix Select primitive.
       </p>
       <Select.Root>

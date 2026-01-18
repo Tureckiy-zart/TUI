@@ -143,7 +143,7 @@ export const Overview: Story = {
           </Stack>
 
           {/* Instructions */}
-          <Box className="mt-8 rounded-lg bg-muted p-md">
+          <Box className="mt-8 rounded-lg bg-[hsl(var(--tm-muted))] p-md">
             <Heading level={3}>Testing Instructions</Heading>
             <Stack spacing={2} className="mt-2">
               <Box>

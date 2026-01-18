@@ -215,8 +215,8 @@ describe("Field", () => {
         </Field>,
       );
       const error = screen.getByText("Destructive error");
-      // Wrapper span has text-destructive class
-      expect(error.parentElement).toHaveClass("text-destructive");
+      // Wrapper span has tm-destructive class
+      expect(error.parentElement).toHaveClass("text-[hsl(var(--tm-destructive))]");
     });
 
     it("uses small size by default", () => {

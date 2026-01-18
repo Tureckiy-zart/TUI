@@ -195,7 +195,7 @@ export const WithContent: Story = {
       <Container maxWidth="lg">
         <Box px="lg" py="lg" bg="background" radius="lg" className="border">
           <h2 className="mb-md text-2xl font-bold">Section Title</h2>
-          <p className="mb-md text-muted-foreground">
+          <p className="mb-md text-[hsl(var(--tm-text-muted))]">
             This is a realistic example of Section usage with Container and content blocks.
           </p>
         </Box>
@@ -203,7 +203,7 @@ export const WithContent: Story = {
       <Container maxWidth="lg">
         <Box px="lg" py="lg" bg="background" radius="lg" className="border">
           <h3 className="mb-md text-xl font-semibold">Subsection</h3>
-          <p className="text-muted-foreground">
+          <p className="text-[hsl(var(--tm-text-muted))]">
             Another content block with proper spacing from the previous block.
           </p>
         </Box>

@@ -67,14 +67,14 @@ const DEFAULT_SIZE = "md" as const;
  * - Typography Authority: Textarea references TEXTAREA_TOKENS.fontSize for text sizing
  * - Spacing Authority: Textarea references TEXTAREA_TOKENS.padding for padding values
  * - State Authority: Textarea uses State Matrix CSS variables for all states
- * - Color Authority: Textarea uses CSS variable references (--foreground, --input, --destructive, etc.)
+ * - Color Authority: Textarea uses `--tm-*` variables and `--semantic-*` for validation states
  *
  * Color tokens used (all from TEXTAREA_TOKENS, which reference tokens/colors.ts):
- * - border-[hsl(var(--input))] - Default border color
+ * - border-[hsl(var(--tm-surface-base))] - Default border color
  * - bg-transparent - Transparent background
- * - text-[hsl(var(--foreground))] - Default text color
- * - placeholder:text-[hsl(var(--muted-foreground))] - Placeholder text color
- * - border-[hsl(var(--destructive))] - Error state border color
+ * - text-[hsl(var(--tm-text-primary))] - Default text color
+ * - placeholder:text-[hsl(var(--tm-text-muted))] - Placeholder text color
+ * - border-[hsl(var(--tm-destructive))] - Error state border color
  * - focus-visible:shadow-[var(--focus-ring-default)] - Focus ring
  * - All state styling uses CSS variable references for theme support
  *

@@ -317,7 +317,7 @@ export const ControlledMode: Story = {
           placeholder="Select fruits..."
           aria-label="Controlled multi-select"
         />
-        <div className="mt-md text-sm text-muted-foreground">
+        <div className="mt-md text-sm text-[hsl(var(--tm-text-muted))]">
           Selected: {selected.length > 0 ? selected.join(", ") : "None"}
         </div>
       </div>
@@ -414,7 +414,7 @@ export const CustomRenderTag: Story = {
     renderTag: (option, onRemove) => (
       <span
         key={option.value}
-        className="inline-flex items-center gap-xs rounded-full bg-primary px-sm py-xs text-xs font-semibold text-primary-foreground"
+        className="inline-flex items-center gap-xs rounded-full bg-[hsl(var(--tm-primary))] px-sm py-xs text-xs font-semibold text-[hsl(var(--tm-primary-foreground))]"
       >
         🍎 {option.label}
         <button

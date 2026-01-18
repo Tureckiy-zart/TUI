@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Grid } from "./Grid";
 
 // Helper style for card items with proper text color
-const cardItemStyle = { color: "hsl(var(--card-foreground))" };
+const cardItemStyle = { color: "hsl(var(--tm-text-primary))" };
 
 const meta: Meta<typeof Grid> = {
   title: "UI / Composition / Layout / Grid",
@@ -66,37 +66,37 @@ export const Default: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 4
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 5
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 6
@@ -116,49 +116,49 @@ export const ResponsiveColumns: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 4
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 5
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 6
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 7
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 8
@@ -183,19 +183,19 @@ export const TokenBasedGaps: Story = {
         <h3 className="mb-sm text-lg font-semibold">Gap: xs (1) - uses CSS variables</h3>
         <Grid cols={3} gap={1}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -206,19 +206,19 @@ export const TokenBasedGaps: Story = {
         <h3 className="mb-sm text-lg font-semibold">Gap: md (4) - uses CSS variables</h3>
         <Grid cols={3} gap={4}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -229,19 +229,19 @@ export const TokenBasedGaps: Story = {
         <h3 className="mb-sm text-lg font-semibold">Gap: xl (8) - uses CSS variables</h3>
         <Grid cols={3} gap={8}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -252,19 +252,19 @@ export const TokenBasedGaps: Story = {
         <h3 className="mb-sm text-lg font-semibold">Gap: semantic lg - uses CSS variables</h3>
         <Grid cols={3} gap="lg">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -289,16 +289,16 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Start</h3>
         <Grid cols={3} gap={4} align="start" className="h-32">
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 1
           </div>
           <div
-            className="h-20 cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="h-20 cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Tall Item
           </div>
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 3
           </div>
         </Grid>
@@ -306,16 +306,16 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Align: Center</h3>
         <Grid cols={3} gap={4} align="center" className="h-32">
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 1
           </div>
           <div
-            className="h-20 cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="h-20 cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Tall Item
           </div>
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 3
           </div>
         </Grid>
@@ -324,19 +324,19 @@ export const Alignment: Story = {
         <h3 className="mb-sm text-lg font-semibold">Justify: Between</h3>
         <Grid cols={3} gap={4} justify="between">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -346,10 +346,10 @@ export const Alignment: Story = {
       <div>
         <h3 className="mb-sm text-lg font-semibold">Justify: Center</h3>
         <Grid cols={3} gap={4} justify="center">
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 1
           </div>
-          <div className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale">
+          <div className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale">
             Item 2
           </div>
         </Grid>
@@ -367,32 +367,32 @@ export const MixedContent: Story = {
     children: (
       <>
         <div
-          className="col-span-full cursor-pointer rounded-md border bg-card p-lg tm-motion-hover-lift tm-motion-tap-scale"
+          className="col-span-full cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-lg tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           <h2 className="text-2xl font-bold">Featured Section</h2>
-          <p className="text-muted-foreground">This spans all columns</p>
+          <p className="text-[hsl(var(--tm-text-muted))]">This spans all columns</p>
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Card 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Card 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Card 3
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Card 4

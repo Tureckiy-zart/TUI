@@ -118,7 +118,7 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
           NOTIFICATION_TOKENS.shadow.item,
           NOTIFICATION_TOKENS.surface[variant],
           !isRead && "ring-1 ring-primary/20",
-          onClick && "hover:bg-accent/50", // Override ListItem's hover:bg-muted/50 with original hover color
+          onClick && "hover:bg-[hsl(var(--tm-accent))]/50", // Override ListItem's hover:bg-[hsl(var(--tm-muted))]/50 with original hover color
           className,
         )}
         onClick={handleClick}
@@ -126,22 +126,27 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
       >
         {/* Icon */}
         <div className="flex-shrink-0">
-          <Icon className={cn(NOTIFICATION_TOKENS.item.iconSize, "text-foreground/70")} />
+          <Icon
+            className={cn(
+              NOTIFICATION_TOKENS.item.iconSize,
+              "text-[hsl(var(--tm-text-primary))]/70",
+            )}
+          />
         </div>
 
         {/* Content */}
         <div className="min-w-0 flex-1 space-y-xs">
           {notification.title && (
-            <div id={titleId} className="text-sm font-semibold text-foreground">
+            <div id={titleId} className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">
               {notification.title}
             </div>
           )}
           {notification.description && (
-            <div id={descriptionId} className="text-sm text-foreground/80">
+            <div id={descriptionId} className="text-sm text-[hsl(var(--tm-text-primary))]/80">
               {notification.description}
             </div>
           )}
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-[hsl(var(--tm-text-muted))]">
             {formatRelativeTime(notification.timestamp)}
           </div>
           {notification.action && (

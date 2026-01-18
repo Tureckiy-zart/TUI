@@ -154,7 +154,7 @@ export function PriceRangeSlider({
           <div className="flex-1">
             <Label htmlFor={minPriceId}>{minLabel}</Label>
             <div className="relative [&>input]:pl-8">
-              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-muted-foreground">
+              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]">
                 {currency}
               </span>
               <Input
@@ -173,7 +173,7 @@ export function PriceRangeSlider({
           <div className="flex-1">
             <Label htmlFor={maxPriceId}>{maxLabel}</Label>
             <div className="relative [&>input]:pl-8">
-              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-muted-foreground">
+              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]">
                 {currency}
               </span>
               <Input
@@ -196,11 +196,11 @@ export function PriceRangeSlider({
       <div className="space-y-sm">
         <div className="relative h-2">
           {/* Track background */}
-          <div className="absolute h-2 w-full rounded-full bg-muted" />
+          <div className="absolute h-2 w-full rounded-full bg-[hsl(var(--tm-muted))]" />
 
           {/* Active range */}
           <div
-            className="absolute h-2 rounded-full bg-primary"
+            className="absolute h-2 rounded-full bg-[hsl(var(--tm-primary))]"
             style={{
               left: `${((minSliderValue - min) / (max - min)) * 100}%`,
               width: `${((maxSliderValue - minSliderValue) / (max - min)) * 100}%`,
@@ -220,7 +220,7 @@ export function PriceRangeSlider({
             onInput={(e) =>
               handleSliderChange("min", parseInt((e.target as HTMLInputElement).value))
             }
-            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-sm"
+            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[hsl(var(--tm-primary))] [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[hsl(var(--tm-primary))] [&::-webkit-slider-thumb]:shadow-sm"
             style={{ zIndex: 2 }}
             aria-label={minAriaLabel}
           />
@@ -238,12 +238,12 @@ export function PriceRangeSlider({
             onInput={(e) =>
               handleSliderChange("max", parseInt((e.target as HTMLInputElement).value))
             }
-            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-sm"
+            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[hsl(var(--tm-primary))] [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[hsl(var(--tm-primary))] [&::-webkit-slider-thumb]:shadow-sm"
             style={{ zIndex: 3 }}
             aria-label={maxAriaLabel}
           />
         </div>
-        <div className="flex justify-between text-xs text-muted-foreground">
+        <div className="flex justify-between text-xs text-[hsl(var(--tm-text-muted))]">
           <span>
             {currency}
             {min}
@@ -256,7 +256,7 @@ export function PriceRangeSlider({
       </div>
 
       <div className="flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">
+        <span className="text-sm text-[hsl(var(--tm-text-muted))]">
           {value.min !== null || value.max !== null
             ? `${currency}${value.min || min} - ${currency}${value.max || max}`
             : anyPriceLabel}
@@ -264,7 +264,7 @@ export function PriceRangeSlider({
         <button
           type="button"
           onClick={clearRange}
-          className="text-xs text-muted-foreground hover:text-foreground"
+          className="text-xs text-[hsl(var(--tm-text-muted))] hover:text-[hsl(var(--tm-text-primary))]"
         >
           {clearLabel}
         </button>

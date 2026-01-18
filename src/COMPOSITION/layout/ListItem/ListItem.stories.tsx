@@ -107,10 +107,10 @@ export const Interactive: Story = {
     <List as="ul">
       <ListItem interactive>
         <div className="flex items-center gap-3 p-3">
-          <div className="h-10 w-10 rounded-full bg-muted" />
+          <div className="h-10 w-10 rounded-full bg-[hsl(var(--tm-muted))]" />
           <div>
             <div className="font-medium">Interactive item</div>
-            <div className="text-sm text-muted-foreground">Hover to see transition</div>
+            <div className="text-sm text-[hsl(var(--tm-text-muted))]">Hover to see transition</div>
           </div>
         </div>
       </ListItem>
@@ -136,7 +136,7 @@ export const Disabled: Story = {
     <List as="ul">
       <ListItem disabled>
         <div className="flex items-center gap-3 p-3">
-          <div className="h-10 w-10 rounded-full bg-muted" />
+          <div className="h-10 w-10 rounded-full bg-[hsl(var(--tm-muted))]" />
           <div>
             <div className="font-medium text-disabled-foreground">Disabled item</div>
             <div className="text-sm text-disabled-foreground">This item is disabled</div>
@@ -166,14 +166,14 @@ export const States: Story = {
       <ListItem>
         <div className="p-3">
           <div className="font-medium">Default state</div>
-          <div className="text-sm text-muted-foreground">Static list item</div>
+          <div className="text-sm text-[hsl(var(--tm-text-muted))]">Static list item</div>
         </div>
       </ListItem>
 
       <ListItem interactive>
         <div className="p-3">
           <div className="font-medium">Interactive state</div>
-          <div className="text-sm text-muted-foreground">Hover to see transition</div>
+          <div className="text-sm text-[hsl(var(--tm-text-muted))]">Hover to see transition</div>
         </div>
       </ListItem>
 
@@ -205,13 +205,13 @@ export const AlignmentVariants: Story = {
     <List as="ul" gap="lg" divided>
       <ListItem align="start">
         <div className="flex gap-3">
-          <div className="h-16 w-16 rounded-lg bg-muted" />
+          <div className="h-16 w-16 rounded-lg bg-[hsl(var(--tm-muted))]" />
           <div>
             <div className="font-medium">Align: start (default)</div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-[hsl(var(--tm-text-muted))]">
               Content is aligned to the start (top)
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-[hsl(var(--tm-text-muted))]">
               Second line to demonstrate alignment
             </div>
           </div>
@@ -220,10 +220,12 @@ export const AlignmentVariants: Story = {
 
       <ListItem align="center">
         <div className="flex gap-3">
-          <div className="h-16 w-16 rounded-lg bg-muted" />
+          <div className="h-16 w-16 rounded-lg bg-[hsl(var(--tm-muted))]" />
           <div>
             <div className="font-medium">Align: center</div>
-            <div className="text-sm text-muted-foreground">Content is vertically centered</div>
+            <div className="text-sm text-[hsl(var(--tm-text-muted))]">
+              Content is vertically centered
+            </div>
           </div>
         </div>
       </ListItem>

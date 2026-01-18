@@ -164,7 +164,7 @@ export const UseCases: Story = {
         <h3 className="mb-sm text-lg font-semibold">Card</h3>
         <Surface variant="elevated" p="lg" radius="lg">
           <h4 className="mb-sm text-lg font-semibold">Card Title</h4>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Card content with elevated surface variant
           </p>
         </Surface>
@@ -173,7 +173,7 @@ export const UseCases: Story = {
         <h3 className="mb-sm text-lg font-semibold">Panel</h3>
         <Surface variant="default" p="md" radius="md">
           <h4 className="mb-sm text-lg font-semibold">Panel Title</h4>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Panel content with default surface variant
           </p>
         </Surface>
@@ -182,7 +182,7 @@ export const UseCases: Story = {
         <h3 className="mb-sm text-lg font-semibold">Filled Area</h3>
         <Surface variant="filled" p="md" radius="md">
           <h4 className="mb-sm text-lg font-semibold">Filled Title</h4>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Filled content with filled surface variant
           </p>
         </Surface>

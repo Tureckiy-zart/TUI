@@ -27,7 +27,7 @@
  * - Selected state uses NAVIGATION_TOKENS.states.selected
  * - Hover state uses NAVIGATION_TOKENS.states.hover
  * - Container background uses NAVIGATION_TOKENS.container.background.muted
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

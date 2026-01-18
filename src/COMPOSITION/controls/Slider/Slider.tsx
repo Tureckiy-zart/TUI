@@ -24,7 +24,7 @@
  * - Track variant colors use SLIDER_TOKENS.track.variant
  * - Range variant colors use SLIDER_TOKENS.range.variant
  * - Thumb variant colors use SLIDER_TOKENS.thumb.variant
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

@@ -41,46 +41,46 @@ describe("Alert", () => {
       const { container } = renderWithTheme(<Alert variant="default">Default Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toBeInTheDocument();
-      expect(alert).toHaveClass("bg-muted");
-      expect(alert).toHaveClass("border-border");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-muted))]");
+      expect(alert).toHaveClass("border-[hsl(var(--tm-border-default))]");
     });
 
     it("renders primary variant", () => {
       const { container } = renderWithTheme(<Alert variant="primary">Primary Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toBeInTheDocument();
-      expect(alert).toHaveClass("bg-primary/10");
-      expect(alert).toHaveClass("border-primary/20");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-primary))]/10");
+      expect(alert).toHaveClass("border-[hsl(var(--tm-primary))]/20");
     });
 
     it("renders secondary variant", () => {
       const { container } = renderWithTheme(<Alert variant="secondary">Secondary Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toBeInTheDocument();
-      expect(alert).toHaveClass("bg-secondary/10");
-      expect(alert).toHaveClass("border-secondary/20");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-secondary))]/10");
+      expect(alert).toHaveClass("border-[hsl(var(--tm-secondary))]/20");
     });
 
     it("renders accent variant", () => {
       const { container } = renderWithTheme(<Alert variant="accent">Accent Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toBeInTheDocument();
-      expect(alert).toHaveClass("bg-accent/10");
-      expect(alert).toHaveClass("border-accent/20");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-accent))]/10");
+      expect(alert).toHaveClass("border-[hsl(var(--tm-accent))]/20");
     });
 
     it("renders destructive variant", () => {
       const { container } = renderWithTheme(<Alert variant="destructive">Destructive Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toBeInTheDocument();
-      expect(alert).toHaveClass("bg-destructive/10");
-      expect(alert).toHaveClass("border-destructive/20");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-destructive))]/10");
+      expect(alert).toHaveClass("border-[hsl(var(--tm-destructive))]/20");
     });
 
     it("uses default variant when variant is not specified", () => {
       const { container } = renderWithTheme(<Alert>Default Alert</Alert>);
       const alert = container.querySelector('[role="alert"]');
-      expect(alert).toHaveClass("bg-muted");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-muted))]");
     });
   });
 
@@ -126,7 +126,7 @@ describe("Alert", () => {
       );
       const alert = container.querySelector('[role="alert"]');
       expect(alert).toHaveClass("custom-alert");
-      expect(alert).toHaveClass("bg-primary/10");
+      expect(alert).toHaveClass("bg-[hsl(var(--tm-primary))]/10");
     });
   });
 

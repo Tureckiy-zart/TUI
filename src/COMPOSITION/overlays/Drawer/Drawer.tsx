@@ -24,7 +24,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from OVERLAY_TOKENS for drawer content styling
  * - Backdrop colors use OVERLAY_TOKENS for overlay styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

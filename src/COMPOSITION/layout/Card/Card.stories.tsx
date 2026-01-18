@@ -73,7 +73,7 @@ export const Matrix: Story = {
         <Card size="sm">
           <Card.Header>
             <h4 className="text-lg font-semibold">Card Header</h4>
-            <p className="text-sm text-muted-foreground">Subtitle or description</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Subtitle or description</p>
           </Card.Header>
           <Card.Body>
             <p>Card body content with small size padding.</p>
@@ -88,7 +88,7 @@ export const Matrix: Story = {
         <Card size="md">
           <Card.Header>
             <h4 className="text-lg font-semibold">Card Header</h4>
-            <p className="text-sm text-muted-foreground">Subtitle or description</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Subtitle or description</p>
           </Card.Header>
           <Card.Body>
             <p>Card body content with medium size padding (default).</p>
@@ -103,7 +103,7 @@ export const Matrix: Story = {
         <Card size="lg">
           <Card.Header>
             <h4 className="text-lg font-semibold">Card Header</h4>
-            <p className="text-sm text-muted-foreground">Subtitle or description</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Subtitle or description</p>
           </Card.Header>
           <Card.Body>
             <p>Card body content with large size padding.</p>
@@ -194,7 +194,7 @@ export const WithSubcomponents: Story = {
         <Card>
           <Card.Header>
             <h4 className="text-lg font-semibold">Card Title</h4>
-            <p className="text-sm text-muted-foreground">Card subtitle or description</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Card subtitle or description</p>
           </Card.Header>
           <Card.Body>
             <p>Card body content goes here. This is the main content area of the card.</p>
@@ -210,7 +210,7 @@ export const WithSubcomponents: Story = {
         <Card>
           <Card.Header>
             <h4 className="text-lg font-semibold">Header Only</h4>
-            <p className="text-sm text-muted-foreground">No body or footer</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">No body or footer</p>
           </Card.Header>
         </Card>
       </div>
@@ -252,7 +252,7 @@ export const RealisticUsage: Story = {
         <Card size="md">
           <Card.Header>
             <h4 className="text-lg font-semibold">Product Name</h4>
-            <p className="text-sm text-muted-foreground">Product category</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Product category</p>
           </Card.Header>
           <Card.Body>
             <p className="text-sm">Product description and details go here.</p>
@@ -269,7 +269,9 @@ export const RealisticUsage: Story = {
         <Card size="lg">
           <Card.Header>
             <h4 className="text-lg font-semibold">Account Settings</h4>
-            <p className="text-sm text-muted-foreground">Manage your account preferences</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              Manage your account preferences
+            </p>
           </Card.Header>
           <Card.Body>
             <div className="space-y-sm">

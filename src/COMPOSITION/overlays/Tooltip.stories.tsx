@@ -36,7 +36,7 @@ export const LongContent: Story = {
   name: "LongContent",
   render: () => (
     <div className="space-y-md">
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
         This story validates padding and maxWidth token behavior with long text content.
       </p>
       <div className="flex gap-md">
@@ -125,7 +125,7 @@ export const WithFormElements: Story = {
             content="We'll never share your email with anyone else."
             variant="primary"
           >
-            <Info className="h-4 w-4 text-muted-foreground" />
+            <Info className="h-4 w-4 text-[hsl(var(--tm-text-muted))]" />
           </TooltipWrapper>
         </div>
         <Input id="email" type="email" placeholder="Enter your email" />
@@ -135,7 +135,7 @@ export const WithFormElements: Story = {
         <div className="flex items-center gap-sm">
           <Label htmlFor="password">Password</Label>
           <TooltipWrapper content="Password must be at least 8 characters long" variant="secondary">
-            <HelpCircle className="h-4 w-4 text-muted-foreground" />
+            <HelpCircle className="h-4 w-4 text-[hsl(var(--tm-text-muted))]" />
           </TooltipWrapper>
         </div>
         <Input id="password" type="password" placeholder="Enter your password" />
@@ -194,10 +194,14 @@ export const KeyboardAccessibility: Story = {
   name: "Keyboard Accessibility",
   render: () => (
     <div className="space-y-md">
-      <p className="text-sm text-muted-foreground">
-        Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
-        buttons and see tooltips appear. Press{" "}
-        <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+        Use{" "}
+        <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">Tab</kbd>{" "}
+        to focus buttons and see tooltips appear. Press{" "}
+        <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">
+          Escape
+        </kbd>{" "}
+        to dismiss.
       </p>
       <div className="flex gap-md">
         <TooltipWrapper content="This tooltip appears on focus">
@@ -251,10 +255,14 @@ export const States: Story = {
       </div>
       <div className="space-y-md">
         <h3 className="text-sm font-semibold">Focus States</h3>
-        <p className="text-sm text-muted-foreground">
-          Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
-          buttons and see tooltips appear. Press{" "}
-          <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+          Use{" "}
+          <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">Tab</kbd>{" "}
+          to focus buttons and see tooltips appear. Press{" "}
+          <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">
+            Escape
+          </kbd>{" "}
+          to dismiss.
         </p>
         <div className="flex gap-md">
           <TooltipWrapper content="Tooltip for primary button" variant="primary">

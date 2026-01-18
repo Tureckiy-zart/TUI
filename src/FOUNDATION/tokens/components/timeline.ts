@@ -56,7 +56,7 @@ export const TIMELINE_TOKENS = {
      * Dot border color
      * Maps to background color token
      */
-    borderColor: "border-background",
+    borderColor: "border-[hsl(var(--tm-surface-base))]",
 
     /**
      * Dot background color

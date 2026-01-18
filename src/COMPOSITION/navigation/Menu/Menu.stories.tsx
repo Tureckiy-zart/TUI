@@ -112,7 +112,7 @@ export const SizesGallery: Story = {
           <div className="flex gap-4">
             {(["sm", "md"] as const).map((padding) => (
               <div key={padding} className="space-y-2">
-                <p className="text-xs text-muted-foreground">Padding: {padding}</p>
+                <p className="text-xs text-[hsl(var(--tm-text-muted))]">Padding: {padding}</p>
                 <Menu>
                   <Menu.Trigger className="flex items-center gap-2 rounded-md border px-4 py-2">
                     <span>Open Menu</span>
@@ -404,25 +404,40 @@ export const KeyboardNavigation: Story = {
             </Menu.Content>
           </Menu>
         </div>
-        <div className="rounded-md bg-muted p-4 text-sm">
+        <div className="rounded-md bg-[hsl(var(--tm-muted))] p-4 text-sm">
           <p className="mb-2 font-semibold">Keyboard Navigation:</p>
           <ul className="list-inside list-disc space-y-1">
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Enter</kbd> or{" "}
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Space</kbd> - Activate
-              item
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Enter
+              </kbd>{" "}
+              or{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Space
+              </kbd>{" "}
+              - Activate item
             </li>
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">↑</kbd> /{" "}
-              <kbd className="rounded border bg-background px-1.5 py-0.5">↓</kbd> - Navigate items
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↑</kbd>{" "}
+              /{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↓</kbd>{" "}
+              - Navigate items
             </li>
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Home</kbd> /{" "}
-              <kbd className="rounded border bg-background px-1.5 py-0.5">End</kbd> - First/Last
-              item
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Home
+              </kbd>{" "}
+              /{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                End
+              </kbd>{" "}
+              - First/Last item
             </li>
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Esc</kbd> - Close menu
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Esc
+              </kbd>{" "}
+              - Close menu
             </li>
             <li>Typeahead - Type to search items (Radix default)</li>
           </ul>

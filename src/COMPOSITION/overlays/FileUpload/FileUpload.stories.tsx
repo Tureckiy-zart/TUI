@@ -247,7 +247,9 @@ export const DragAndDrop: Story = {
           }}
         />
         {files.length > 0 && (
-          <div className="text-sm text-muted-foreground">{files.length} file(s) selected</div>
+          <div className="text-sm text-[hsl(var(--tm-text-muted))]">
+            {files.length} file(s) selected
+          </div>
         )}
       </div>
     );

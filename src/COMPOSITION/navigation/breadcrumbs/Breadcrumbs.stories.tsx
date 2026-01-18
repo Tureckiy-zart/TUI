@@ -81,7 +81,7 @@ export const CustomSeparator: Story = {
   render: () => (
     <Breadcrumbs.Root
       items={defaultItems}
-      separator={<span className="mx-1 text-muted-foreground">/</span>}
+      separator={<span className="mx-1 text-[hsl(var(--tm-text-muted))]">/</span>}
     />
   ),
 };

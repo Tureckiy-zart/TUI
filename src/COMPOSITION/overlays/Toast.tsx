@@ -31,7 +31,7 @@
  * - Colors come from TOAST_TOKENS.surface for variant styling
  * - Surface colors use TOAST_TOKENS.surface (default, success, warning, error)
  * - Dismiss button colors use TOAST_TOKENS.dismiss.colors
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -146,7 +146,7 @@ export type ToastOptions = Partial<ToastData>;
  * Used by standalone ToastAction component
  */
 const TOAST_ACTION_CLASSES =
-  "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex shrink-0 items-center justify-center rounded-md border bg-transparent font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--tm-focus-ring))] disabled:pointer-events-none disabled:opacity-50";
 
 /**
  * Shared close button styling

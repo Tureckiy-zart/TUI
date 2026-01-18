@@ -182,7 +182,7 @@ const generateWeightVariants = (): Array<{
  * - All typography values come from Typography Authority via TEXT_TOKENS
  *
  * Color Authority Rules:
- * - Text colors use semantic tokens: text-foreground, text-muted-foreground
+ * - Text colors use semantic tokens: text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-muted))]
  * - NO raw Tailwind color classes (text-red-*, text-blue-*, etc.) allowed
  * - All colors come from Color Authority via semantic tokens
  *
@@ -191,7 +191,7 @@ const generateWeightVariants = (): Array<{
  *
  * Authority Compliance:
  * - Typography Authority: Heading uses TEXT_TOKENS for all typography values
- * - Color Authority: Heading uses semantic color tokens (text-foreground, text-muted-foreground)
+ * - Color Authority: Heading uses semantic color tokens (text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-muted))])
  *
  * Token-only contract:
  * - All typography values are defined in TEXT_TOKENS (src/FOUNDATION/tokens/components/text.ts)
@@ -205,7 +205,7 @@ const generateWeightVariants = (): Array<{
  * - Foundation Enforcement is FINAL/APPLIED and LOCKED
  */
 const headingVariants = tokenCVA({
-  base: "font-display text-foreground",
+  base: "font-display text-[hsl(var(--tm-text-primary))]",
   variants: {
     level: levelVariants,
     weight: {
@@ -215,7 +215,7 @@ const headingVariants = tokenCVA({
       bold: TEXT_TOKENS.fontWeight.bold,
     },
     muted: {
-      true: "text-muted-foreground",
+      true: "text-[hsl(var(--tm-text-muted))]",
       false: "",
     },
   },

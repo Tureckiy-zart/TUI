@@ -1,26 +1,9 @@
 "use client";
 
-import {
-  accentColors as baseAccentColors,
-  baseColors as baseBaseColors,
-  type BaseColorTokens,
-  type ChartColors,
-  chartColors as baseChartColors,
-  type ColorScale,
-  type DisabledColors,
-  disabledColors as baseDisabledColors,
-  type Mode,
-  primaryColors as basePrimaryColors,
-  secondaryColors as baseSecondaryColors,
-  type SemanticColors,
-  semanticColors as baseSemanticColors,
-  type SurfaceColors,
-  surfaceColors as baseSurfaceColors,
-  type TextColors,
-  textColors as baseTextColors,
-} from "@/FOUNDATION/tokens/colors";
+import { type Mode } from "@/FOUNDATION/tokens/colors";
 import { motionCSSVariables } from "@/FOUNDATION/tokens/motion/v2";
 import { radiusCSSVariables } from "@/FOUNDATION/tokens/radius";
+import { REQUIRED_THEME_TOKENS } from "@/FOUNDATION/tokens/required-tokens";
 import { shadowCSSVariables } from "@/FOUNDATION/tokens/shadows";
 import { spacingCSSVariables } from "@/FOUNDATION/tokens/spacing";
 import { typographyCSSVariables } from "@/FOUNDATION/tokens/typography";
@@ -34,6 +17,7 @@ import {
 import type { ThemeOverride } from "@/themes/types";
 
 import { updateStateMatrixFromTokens } from "./applyStateMatrix";
+import { buildTmRuntimeValues, getMergedTokens } from "./runtimeTmSnapshot";
 
 const MODE_ATTRIBUTE = "data-mode";
 const THEME_ATTRIBUTE = "data-theme-name";
@@ -116,77 +100,6 @@ export async function loadThemeOverride(
 }
 
 /**
- * Merge color scale with overrides
- */
-function mergeColorScale(base: ColorScale, override?: Partial<ColorScale>): ColorScale {
-  if (!override) return base;
-  return { ...base, ...override };
-}
-
-/**
- * Merge object with overrides
- */
-function mergeObject<T extends Record<string, unknown>>(base: T, override?: Partial<T>): T {
-  if (!override) return base;
-  return { ...base, ...override };
-}
-
-/**
- * Get merged tokens with theme overrides applied
- */
-function getMergedTokens(_mode: Mode) {
-  const override = currentThemeOverride;
-
-  // Merge color scales
-  const primaryColors = mergeColorScale(basePrimaryColors, override?.primaryColors);
-  const accentColors = mergeColorScale(baseAccentColors, override?.accentColors);
-  const secondaryColors = mergeColorScale(baseSecondaryColors, override?.secondaryColors);
-
-  // Merge mode-specific tokens
-  const baseColors: Record<Mode, BaseColorTokens> = {
-    day: mergeObject(baseBaseColors.day, override?.baseColorsDay),
-    night: mergeObject(baseBaseColors.night, override?.baseColorsNight),
-  };
-
-  const surfaceColors: Record<Mode, SurfaceColors> = {
-    day: mergeObject(baseSurfaceColors.day, override?.surfaceColorsDay),
-    night: mergeObject(baseSurfaceColors.night, override?.surfaceColorsNight),
-  };
-
-  const semanticColors: Record<Mode, SemanticColors> = {
-    day: mergeObject(baseSemanticColors.day, override?.semanticColorsDay),
-    night: mergeObject(baseSemanticColors.night, override?.semanticColorsNight),
-  };
-
-  const textColors: Record<Mode, TextColors> = {
-    day: mergeObject(baseTextColors.day, override?.textColorsDay),
-    night: mergeObject(baseTextColors.night, override?.textColorsNight),
-  };
-
-  const chartColors: Record<Mode, ChartColors> = {
-    day: baseChartColors.day,
-    night: baseChartColors.night,
-  };
-
-  const disabledColors: Record<Mode, DisabledColors> = {
-    day: baseDisabledColors.day,
-    night: baseDisabledColors.night,
-  };
-
-  return {
-    primaryColors,
-    accentColors,
-    secondaryColors,
-    baseColors,
-    surfaceColors,
-    semanticColors,
-    textColors,
-    chartColors,
-    disabledColors,
-  };
-}
-
-/**
  * Update CSS variables from tokens with theme overrides
  * All values come from token system merged with theme overrides
  */
@@ -209,7 +122,7 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
   // Get merged tokens - wrap in try-catch to ensure function continues even if token retrieval fails
   let tokens;
   try {
-    tokens = getMergedTokens(mode);
+    tokens = getMergedTokens({ themeOverride: currentThemeOverride });
   } catch (error) {
     console.error("[Theme] Failed to get merged tokens:", error);
     return; // Cannot proceed without tokens
@@ -224,8 +137,44 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     semanticColors,
     textColors,
     chartColors,
-    disabledColors,
   } = tokens;
+
+  const tmRuntimeValues = buildTmRuntimeValues(mode, tokens);
+
+  try {
+    Object.entries(tmRuntimeValues).forEach(([token, value]) => {
+      root.style.setProperty(token, value);
+    });
+  } catch (error) {
+    console.error("[Theme] Failed to set TM runtime tokens:", error);
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const missing: string[] = [];
+    const empty: string[] = [];
+
+    REQUIRED_THEME_TOKENS.forEach((token) => {
+      if (!(token in tmRuntimeValues)) {
+        missing.push(token);
+        return;
+      }
+
+      const value = tmRuntimeValues[token];
+      if (typeof value !== "string" || value.trim().length === 0) {
+        empty.push(token);
+      }
+    });
+
+    if (missing.length || empty.length) {
+      const details = [
+        missing.length ? `missing: ${missing.join(", ")}` : null,
+        empty.length ? `empty: ${empty.join(", ")}` : null,
+      ]
+        .filter(Boolean)
+        .join(" | ");
+      throw new Error(`[Theme] Required TM tokens incomplete (${details})`);
+    }
+  }
 
   // Wrap each color group in try-catch to ensure all variables are set even if one group fails
   // Base colors (from merged tokens) - CRITICAL: must be set first
@@ -278,7 +227,7 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--text-primary", text.primary);
     root.style.setProperty("--text-secondary", text.secondary);
     root.style.setProperty("--text-tertiary", text.tertiary);
-    root.style.setProperty("--text-muted", text.muted);
+    root.style.setProperty("--text-[hsl(var(--tm-text-muted))]", text.muted);
     root.style.setProperty("--text-inverse", text.inverse);
   } catch (error) {
     console.error("[Theme] Failed to set text colors:", error);
@@ -347,34 +296,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     console.error("[Theme] Failed to set secondary color scale:", error);
   }
 
-  // Tenerife brand colors (from merged tokens) - CRITICAL: These are the main semantic colors
-  // Rebalanced for semantic strength: using 600/700/800 levels instead of 500/hardcoded values
-  // Button Color Rebalance v1: Adjusted color scale values for better perceptual contrast (min 16 L* delta between variants)
-  try {
-    if (mode === "day") {
-      // Day mode: Use secondary color (cyan) as primary
-      // Primary: secondary-800 (L* ~22) - darkened for dominance, ensures 22 L* delta from secondary
-      root.style.setProperty("--tm-primary", secondaryColors[800]);
-      root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
-      // Secondary: secondary-600 (L* ~44) - lightened for better contrast vs primary, ensures 15 L* delta from accent
-      root.style.setProperty("--tm-secondary", secondaryColors[600]);
-      root.style.setProperty("--tm-secondary-foreground", "0 0% 100%");
-      // Accent: accent-600 (L* ~59) - lightened for clear distinction from secondary
-      root.style.setProperty("--tm-accent", accentColors[600]);
-      root.style.setProperty("--tm-accent-foreground", "0 0% 100%");
-    } else {
-      // Night mode: Use darker accent color (purple) as primary for better contrast
-      root.style.setProperty("--tm-primary", accentColors[600]); // Use 600 instead of 500 for better contrast
-      root.style.setProperty("--tm-primary-foreground", "0 0% 100%");
-      root.style.setProperty("--tm-secondary", "240 10% 7%");
-      root.style.setProperty("--tm-secondary-foreground", "0 0% 89.8%");
-      root.style.setProperty("--tm-accent", "240 10% 10%");
-      root.style.setProperty("--tm-accent-foreground", "0 0% 89.8%");
-    }
-  } catch (error) {
-    console.error("[Theme] Failed to set Tenerife brand colors:", error);
-  }
-
   // Muted colors (from merged tokens)
   try {
     const base = baseColors[mode];
@@ -402,15 +323,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--destructive-foreground", semantic.errorForeground);
   } catch (error) {
     console.error("[Theme] Failed to set destructive colors:", error);
-  }
-
-  // Disabled colors (from merged tokens) - Explicit semantic tokens for disabled state
-  try {
-    const disabled = disabledColors[mode];
-    root.style.setProperty("--tm-disabled", disabled.disabled);
-    root.style.setProperty("--tm-disabled-foreground", disabled.disabledForeground);
-  } catch (error) {
-    console.error("[Theme] Failed to set disabled colors:", error);
   }
 
   // Motion CSS variables
@@ -517,7 +429,7 @@ export function initThemeSync(defaultMode: Mode = "day", storageKey: string = "t
   updateStateMatrixFromTokens(mode);
 
   // Set body styles
-  const tokens = getMergedTokens(mode);
+  const tokens = getMergedTokens({ themeOverride: currentThemeOverride });
   const { background, foreground } = tokens.baseColors[mode];
   const { body } = document;
   if (body) {
@@ -581,7 +493,7 @@ export async function applyDocumentTheme(
   updateStateMatrixFromTokens(mode);
 
   // Set body data attribute and styles (using merged tokens)
-  const tokens = getMergedTokens(mode);
+  const tokens = getMergedTokens({ themeOverride: currentThemeOverride });
   const { background, foreground } = tokens.baseColors[mode];
   if (body) {
     body.dataset.mode = mode;

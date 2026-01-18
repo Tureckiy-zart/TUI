@@ -39,9 +39,9 @@ export const Default: Story = {
         {show && (
           <Portal>
             <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50">
-              <div className="rounded-lg border bg-background p-lg shadow-lg">
+              <div className="rounded-lg border bg-[hsl(var(--tm-surface-base))] p-lg shadow-lg">
                 <h2 className="mb-md text-lg font-semibold">Portal Content</h2>
-                <p className="mb-md text-sm text-muted-foreground">
+                <p className="mb-md text-sm text-[hsl(var(--tm-text-muted))]">
                   This content is rendered via Portal outside the normal DOM hierarchy.
                 </p>
                 <Button onClick={() => setShow(false)}>Close</Button>
@@ -61,7 +61,7 @@ export const CustomContainer: Story = {
 
     return (
       <>
-        <div className="rounded-lg border border-border p-lg">
+        <div className="rounded-lg border border-[hsl(var(--tm-border-default))] p-lg">
           <p className="mb-md text-sm">
             Custom container (the portal will render into the box below):
           </p>
@@ -70,12 +70,12 @@ export const CustomContainer: Story = {
             ref={(el) => {
               containerRef[0] = el;
             }}
-            className="mt-md min-h-[200px] rounded-md border-2 border-dashed border-border bg-muted/50"
+            className="mt-md min-h-[200px] rounded-md border-2 border-dashed border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/50"
           />
         </div>
         {show && containerRef[0] && (
           <Portal container={containerRef[0]}>
-            <div className="rounded-md bg-primary p-md text-primary-foreground">
+            <div className="rounded-md bg-[hsl(var(--tm-primary))] p-md text-[hsl(var(--tm-primary-foreground))]">
               This content is portaled into the custom container above.
             </div>
           </Portal>
@@ -97,12 +97,12 @@ export const SSR: Story = {
   render: () => {
     return (
       <div className="space-y-md">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
           The Portal component checks for window/document availability before rendering, making it
           safe for server-side rendering. On the server, it returns null.
         </p>
         <Portal>
-          <div className="fixed right-md top-md z-40 rounded-md bg-primary p-md text-primary-foreground">
+          <div className="fixed right-md top-md z-40 rounded-md bg-[hsl(var(--tm-primary))] p-md text-[hsl(var(--tm-primary-foreground))]">
             This only appears on the client side.
           </div>
         </Portal>

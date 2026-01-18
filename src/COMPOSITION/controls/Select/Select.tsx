@@ -19,7 +19,7 @@
  * - Select is NOT a source of color - all colors come from Color Authority (tokens/colors.ts)
  * - Select MUST react to token changes - changing tokens/colors.ts MUST change Select appearance
  *
- * Semantic tokens (text-foreground, bg-muted) are ALLOWED as they reference Color Authority CSS variables.
+ * Semantic tokens (text-[hsl(var(--tm-text-primary))], bg-[hsl(var(--tm-muted))]) are ALLOWED as they reference Color Authority CSS variables.
  * These tokens are part of the semantic color system and are used consistently across PRIMITIVES components.
  *
  * Token-only contract:
@@ -125,7 +125,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
           selectTriggerVariants(),
           // Radix provides data-state attributes automatically
           // Add state-based styling via data attributes
-          "data-[state=open]:border-ring",
+          "data-[state=open]:border-[hsl(var(--tm-focus-ring))]",
           "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
         )}
         {...props}
@@ -152,7 +152,7 @@ const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(({ ...pr
         "truncate",
         // Placeholder styling with sufficient contrast (WCAG AA)
         // Radix adds data-placeholder attribute when showing placeholder text
-        "data-[placeholder]:text-foreground data-[placeholder]:opacity-70",
+        "data-[placeholder]:text-[hsl(var(--tm-text-primary))] data-[placeholder]:opacity-70",
       )}
       {...props}
     />
@@ -393,8 +393,8 @@ const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(({ ...pro
         INPUT_TOKENS.fontSize.sm,
         SELECT_TOKENS.label.fontWeight,
         // Text color with sufficient contrast (WCAG AA)
-        // Uses semantic token text-foreground (Color Authority)
-        "text-foreground",
+        // Uses semantic token text-[hsl(var(--tm-text-primary))] (Color Authority)
+        "text-[hsl(var(--tm-text-primary))]",
       )}
       {...props}
     />

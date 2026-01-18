@@ -117,7 +117,9 @@ export const WithContent: Story = {
           <Stepper.Content stepIndex={1} isActive={true}>
             <div className="rounded-md border p-4">
               <h3 className="font-semibold">Step 2 Content</h3>
-              <p className="text-sm text-muted-foreground">This is the content for step 2.</p>
+              <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                This is the content for step 2.
+              </p>
             </div>
           </Stepper.Content>
         </Stepper.Root>
@@ -175,10 +177,10 @@ export const Accessibility: Story = {
       <div className="space-y-8">
         <div>
           <h3 className="mb-4 text-sm font-semibold">ARIA Attributes</h3>
-          <p className="mb-4 text-sm text-muted-foreground">
+          <p className="mb-4 text-sm text-[hsl(var(--tm-text-muted))]">
             Stepper uses proper ARIA attributes for screen readers:
           </p>
-          <ul className="mb-4 list-inside list-disc text-sm text-muted-foreground">
+          <ul className="mb-4 list-inside list-disc text-sm text-[hsl(var(--tm-text-muted))]">
             <li>role="group" on root container</li>
             <li>aria-label="Progress steps" on root container</li>
             <li>aria-orientation for horizontal/vertical layout</li>
@@ -190,7 +192,7 @@ export const Accessibility: Story = {
         </div>
         <div>
           <h3 className="mb-4 text-sm font-semibold">Screen Reader Announcement</h3>
-          <p className="mb-4 text-sm text-muted-foreground">
+          <p className="mb-4 text-sm text-[hsl(var(--tm-text-muted))]">
             Screen readers will announce: "Progress steps, horizontal orientation. Step 1,
             completed. Step 2, current step. Step 3, pending. Step 4, disabled."
           </p>

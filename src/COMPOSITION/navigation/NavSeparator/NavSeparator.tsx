@@ -20,7 +20,7 @@
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from NAVIGATION_TOKENS.states.default.text
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Typography Authority Rules:
  * - ALL typography values MUST come from typography token system

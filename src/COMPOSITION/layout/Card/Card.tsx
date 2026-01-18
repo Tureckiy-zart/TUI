@@ -28,9 +28,9 @@
  *
  * Color Authority Rules:
  * - ALL color values MUST come from color token system
- * - Border and background colors use semantic Tailwind classes (border-border, bg-card, text-card-foreground)
+ * - Border and background colors use semantic Tailwind classes (border-[hsl(var(--tm-border-default))], bg-[hsl(var(--tm-surface-raised))], text-[hsl(var(--tm-text-primary))])
  * - Colors map to CSS variables via Tailwind semantic classes
- * - NO raw Tailwind color classes (bg-red-500, border-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, border-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Radius Authority Rules:
  * - ALL radius values MUST come from radius token system
@@ -132,7 +132,8 @@ function extractSpacingFromToken(token: string): ResponsiveSpacing {
  * Card base styling classes (border, background, text color)
  * Uses semantic Tailwind classes that map to CSS variables
  */
-const CARD_BASE_CLASSES = "border border-border bg-card text-card-foreground";
+const CARD_BASE_CLASSES =
+  "border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-raised))] text-[hsl(var(--tm-text-primary))]";
 
 export interface CardProps extends Omit<BoxProps, "radius" | "shadow" | "p"> {
   /**

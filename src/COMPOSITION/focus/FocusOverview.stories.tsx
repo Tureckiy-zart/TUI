@@ -70,7 +70,7 @@ export const TabOrderDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="primary">1. First Button</Button>
               <Input placeholder="2. Text Input" />
@@ -116,7 +116,7 @@ export const FocusVisibleDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box className="mb-2">
                 <Text size="sm" weight="semibold">
@@ -175,14 +175,14 @@ export const RovingTabindexDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Before Tab Group</Button>
 
               <Box
                 role="tablist"
                 aria-label="Demo tabs"
-                className="flex gap-2 rounded-md bg-muted p-1"
+                className="flex gap-2 rounded-md bg-[hsl(var(--tm-muted))] p-1"
               >
                 {items.map((item, index) => (
                   <button
@@ -194,8 +194,8 @@ export const RovingTabindexDemo: Story = {
                     onClick={() => setSelected(index)}
                     className={`rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                       selected === index
-                        ? "bg-background text-foreground shadow-sm"
-                        : "text-muted-foreground hover:bg-background/50"
+                        ? "bg-[hsl(var(--tm-surface-base))] text-[hsl(var(--tm-text-primary))] shadow-sm"
+                        : "text-[hsl(var(--tm-text-muted))] hover:bg-[hsl(var(--tm-surface-base))]/50"
                     }`}
                   >
                     {item}
@@ -207,7 +207,7 @@ export const RovingTabindexDemo: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Rule T-ORD-3:</strong> Composite controls MUST use roving tabindex. Selected
               item has tabindex=0, others have tabindex=-1. Arrow keys move focus.
@@ -232,7 +232,7 @@ export const KeyboardParityDemo: Story = {
     const BadExample = () => (
       <div
         onClick={() => setClickCount((c) => c + 1)}
-        className="cursor-pointer rounded-md bg-destructive/20 px-4 py-2 text-destructive"
+        className="cursor-pointer rounded-md bg-[hsl(var(--tm-destructive))]/20 px-4 py-2 text-destructive"
       >
         ❌ BAD: div with onClick only (not focusable)
       </div>
@@ -275,7 +275,7 @@ export const KeyboardParityDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <BadExample />
               <GoodExample />
@@ -283,7 +283,7 @@ export const KeyboardParityDemo: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
             <Text size="sm">
               <strong>Forbidden Pattern:</strong> Interactive div/span without keyboard parity
               (tabindex, role, onKeyDown). Always prefer semantic HTML elements.
@@ -320,7 +320,7 @@ export const CompleteNavigationDemo: Story = {
           <Box
             as="nav"
             aria-label="Demo navigation"
-            className="rounded-lg border border-border p-md"
+            className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md"
           >
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
@@ -335,7 +335,7 @@ export const CompleteNavigationDemo: Story = {
           </Box>
 
           {/* Form Section */}
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
                 Form Section
@@ -354,7 +354,7 @@ export const CompleteNavigationDemo: Story = {
           </Box>
 
           {/* Actions Section */}
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
                 Actions

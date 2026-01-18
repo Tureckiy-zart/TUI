@@ -80,7 +80,7 @@ export const KeyboardParityDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -162,7 +162,7 @@ export const EnterSpaceSemantics: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={6}>
               <Box>
                 <Box mb={2}>
@@ -276,7 +276,7 @@ export const DisabledStateBlocking: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -374,7 +374,7 @@ export const LoadingStateBehavior: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -432,7 +432,7 @@ export const ReadonlyStateBehavior: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -536,7 +536,7 @@ export const DoubleTriggerPrevention: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -623,7 +623,7 @@ export const InputGAPGallery: Story = {
             </Text>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Text size="sm" weight="semibold">
                 Components Verified:

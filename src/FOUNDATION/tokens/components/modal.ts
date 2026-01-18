@@ -70,9 +70,9 @@ export const MODAL_TOKENS = {
    */
   content: {
     shadow: "shadow-xl", // Default shadow
-    background: "bg-[hsl(var(--background))]", // Background using CSS var
-    text: "text-[hsl(var(--foreground))]", // Text color using CSS var
-    border: "border border-[hsl(var(--border))]", // Border color using CSS var
+    background: "bg-[hsl(var(--tm-surface-overlay))]", // Background using CSS var
+    text: "text-[hsl(var(--tm-text-primary))]", // Text color using CSS var
+    border: "border border-[hsl(var(--tm-border-default))]", // Border color using CSS var
     position: "fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]", // Centered positioning
   } as const,
 
@@ -137,7 +137,7 @@ export const MODAL_TOKENS = {
       md: "text-sm", // 14px (0.875rem) - default
       lg: "text-base", // 16px (1rem)
     },
-    color: "text-[hsl(var(--muted-foreground))]", // Muted text color using CSS var
+    color: "text-[hsl(var(--tm-text-muted))]", // Muted text color using CSS var
   } as const,
 
   /**
@@ -185,11 +185,11 @@ export const MODAL_TOKENS = {
    * Surface variant tokens
    */
   surface: {
-    flat: "bg-[hsl(var(--background))]",
-    raised: "bg-[hsl(var(--card))] shadow-lg",
-    sunken: "bg-[hsl(var(--muted))]",
-    outline: "bg-[hsl(var(--background))] border-2 border-[hsl(var(--border))]",
-    subtle: "bg-[hsl(var(--muted))]",
+    flat: "bg-[hsl(var(--tm-surface-base))]",
+    raised: "bg-[hsl(var(--tm-surface-raised))] shadow-lg",
+    sunken: "bg-[hsl(var(--tm-muted))]",
+    outline: "bg-[hsl(var(--tm-surface-base))] border-2 border-[hsl(var(--tm-border-default))]",
+    subtle: "bg-[hsl(var(--tm-muted))]",
   } as const,
 } as const;
 

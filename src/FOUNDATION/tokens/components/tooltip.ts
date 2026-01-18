@@ -30,7 +30,7 @@ export const TOOLTIP_TOKENS = {
       default: "bg-popover", // Background using token
     } as const,
     text: {
-      default: "text-popover-foreground", // Text color using token
+      default: "text-[hsl(var(--tm-text-primary))]", // Text color using token
     } as const,
     padding: {
       horizontal: "px-sm", // 8px horizontal - maps to semanticSpacing.sm

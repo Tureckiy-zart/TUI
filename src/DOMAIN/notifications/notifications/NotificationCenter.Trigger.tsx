@@ -54,7 +54,7 @@ export const NotificationCenterTrigger = React.forwardRef<
         {showBadge && unreadCount > 0 && (
           <span
             className={cn(
-              "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-semibold text-destructive-foreground",
+              "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(var(--tm-destructive))] text-xs font-semibold text-[hsl(var(--tm-destructive-foreground))]",
             )}
             aria-hidden="true"
           >

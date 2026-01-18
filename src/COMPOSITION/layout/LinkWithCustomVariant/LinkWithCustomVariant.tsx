@@ -47,7 +47,7 @@ import { Link } from "@/PRIMITIVES/Link";
  * ```tsx
  * <LinkWithCustomVariant
  *   href="/tickets"
- *   customClassName="inline-flex items-center bg-primary text-white px-4 py-2 rounded-md"
+ *   customClassName="inline-flex items-center bg-[hsl(var(--tm-primary))] text-white px-4 py-2 rounded-md"
  * >
  *   Buy Tickets
  * </LinkWithCustomVariant>

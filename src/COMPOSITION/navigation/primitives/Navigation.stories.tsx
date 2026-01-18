@@ -129,7 +129,9 @@ export const NavItemWithAsChild: Story = {
           <NavText>Standard item</NavText>
         </NavItem>
         <NavItem asChild>
-          <div style={{ padding: "8px", border: "1px dashed #ccc" }}>Custom item via asChild</div>
+          <div style={{ padding: "8px", border: "1px dashed hsl(var(--tm-border-default))" }}>
+            Custom item via asChild
+          </div>
         </NavItem>
         <NavItem>
           <NavText>Another standard item</NavText>

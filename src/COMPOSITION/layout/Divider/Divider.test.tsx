@@ -33,31 +33,31 @@ describe("Divider component", () => {
     it("should apply border tone by default", () => {
       const { container } = render(<Divider />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-border");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-border-default))]");
     });
 
     it("should apply muted tone variant", () => {
       const { container } = render(<Divider tone="muted" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-muted");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-muted))]");
     });
 
     it("should apply primary tone variant", () => {
       const { container } = render(<Divider tone="primary" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-primary/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-primary))]/20");
     });
 
     it("should apply secondary tone variant", () => {
       const { container } = render(<Divider tone="secondary" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-secondary/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-secondary))]/20");
     });
 
     it("should apply accent tone variant", () => {
       const { container } = render(<Divider tone="accent" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-accent/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-accent))]/20");
     });
   });
 
@@ -131,8 +131,8 @@ describe("Divider component", () => {
     it("should use token-based color classes (no raw values)", () => {
       const { container } = render(<Divider tone="primary" />);
       const element = container.firstChild as HTMLElement;
-      // Verify token usage (bg-primary/20 is token-based)
-      expect(element.className).toMatch(/bg-(border|muted|primary|secondary|accent)/);
+      // Verify token usage (bg-[hsl(var(--tm-primary))]/20 is token-based)
+      expect(element.className).toContain("bg-[hsl(var(--tm-");
     });
 
     it("should use token-based sizing (tokenized width/height values)", () => {
@@ -174,7 +174,7 @@ describe("Divider component", () => {
       const element = container.firstChild as HTMLElement;
       expect(element).toHaveClass("h-px");
       expect(element).toHaveClass("w-full");
-      expect(element).toHaveClass("bg-primary/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-primary))]/20");
       expect(element).toHaveClass("px-md");
     });
   });
@@ -185,7 +185,7 @@ describe("Divider component", () => {
       const element = container.firstChild as HTMLElement;
       expect(element).toBeInTheDocument();
       expect(element.tagName).toBe("DIV");
-      expect(element).toHaveClass("bg-accent/20");
+      expect(element).toHaveClass("bg-[hsl(var(--tm-accent))]/20");
       expect(element).toHaveClass("h-full");
       expect(element).toHaveClass("w-px");
       expect(element).toHaveClass("py-md");

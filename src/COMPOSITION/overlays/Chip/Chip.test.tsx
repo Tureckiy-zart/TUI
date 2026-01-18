@@ -392,25 +392,25 @@ describe("Chip", () => {
     it("applies primary variant styling (default)", () => {
       const { container } = render(<Chip>Primary Chip</Chip>);
       const chip = container.firstChild;
-      expect(chip).toHaveClass("bg-primary");
+      expect(chip).toHaveClass("bg-[hsl(var(--tm-primary))]");
     });
 
     it("applies secondary variant styling", () => {
       const { container } = render(<Chip variant="secondary">Secondary Chip</Chip>);
       const chip = container.firstChild;
-      expect(chip).toHaveClass("bg-secondary");
+      expect(chip).toHaveClass("bg-[hsl(var(--tm-secondary))]");
     });
 
     it("applies accent variant styling", () => {
       const { container } = render(<Chip variant="accent">Accent Chip</Chip>);
       const chip = container.firstChild;
-      expect(chip).toHaveClass("bg-accent");
+      expect(chip).toHaveClass("bg-[hsl(var(--tm-accent))]");
     });
 
     it("applies outline variant styling", () => {
       const { container } = render(<Chip variant="outline">Outline Chip</Chip>);
       const chip = container.firstChild;
-      expect(chip).toHaveClass("border-border");
+      expect(chip).toHaveClass("border-[hsl(var(--tm-border-default))]");
     });
 
     it("applies ghost variant styling", () => {
@@ -422,7 +422,7 @@ describe("Chip", () => {
     it("applies destructive variant styling", () => {
       const { container } = render(<Chip variant="destructive">Destructive Chip</Chip>);
       const chip = container.firstChild;
-      expect(chip).toHaveClass("bg-destructive");
+      expect(chip).toHaveClass("bg-[hsl(var(--tm-destructive))]");
     });
   });
 
@@ -472,7 +472,7 @@ describe("Chip", () => {
         </Chip>,
       );
       const chip = container.firstChild;
-      expect(chip).toHaveClass("hover:bg-primary/80");
+      expect(chip).toHaveClass("hover:bg-[hsl(var(--tm-primary))]/80");
     });
   });
 });

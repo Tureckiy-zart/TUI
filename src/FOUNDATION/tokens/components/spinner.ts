@@ -46,9 +46,9 @@ export const SPINNER_TOKENS = {
    * Maps to semantic color tokens via CSS variables
    */
   tone: {
-    primary: "text-[hsl(var(--primary))]", // Primary color - default tone
-    muted: "text-[hsl(var(--muted-foreground))]", // Muted color - subtle tone
-    subtle: "text-[hsl(var(--muted))]", // Subtle color - very subtle tone
+    primary: "text-[hsl(var(--tm-primary))]", // Primary color - default tone
+    muted: "text-[hsl(var(--tm-text-muted))]", // Muted color - subtle tone
+    subtle: "text-[hsl(var(--tm-muted))]", // Subtle color - very subtle tone
   } as const,
 
   /**
@@ -89,9 +89,9 @@ export const SPINNER_TOKENS = {
    * Spinner uses border color for the visible arc, background is transparent
    */
   borderColor: {
-    primary: "border-[hsl(var(--primary))]", // Primary border color
-    muted: "border-[hsl(var(--muted-foreground))]", // Muted border color
-    subtle: "border-[hsl(var(--muted))]", // Subtle border color
+    primary: "border-[hsl(var(--tm-primary))]", // Primary border color
+    muted: "border-[hsl(var(--tm-text-muted))]", // Muted border color
+    subtle: "border-[hsl(var(--tm-muted))]", // Subtle border color
   } as const,
 
   /**
@@ -181,7 +181,7 @@ export const SPINNER_TOKENS = {
    * Linear track background color token
    * Background color for the linear spinner track
    */
-  linearTrackBackground: "bg-[hsl(var(--muted))]", // Muted background color for linear track
+  linearTrackBackground: "bg-[hsl(var(--tm-muted))]", // Muted background color for linear track
 
   /**
    * Ring gradient tokens

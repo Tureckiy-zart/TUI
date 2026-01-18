@@ -21,7 +21,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from OVERLAY_TOKENS.backdrop for variant styling
  * - Background colors use OVERLAY_TOKENS.backdrop[variant].bg
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Motion Authority Rules:
  * - ALL motion values MUST come from motion token system

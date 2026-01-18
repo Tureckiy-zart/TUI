@@ -52,7 +52,7 @@ export interface ErrorTextProps extends Omit<
 const ErrorText = React.forwardRef<HTMLParagraphElement, ErrorTextProps>(
   ({ children, id, asChild = false, ...props }, ref) => {
     // Build base classes: destructive color styling
-    const baseClasses = "text-destructive";
+    const baseClasses = "text-[hsl(var(--tm-destructive))]";
 
     // If asChild, use Slot pattern for composition
     // Slot applies attributes to the child element directly

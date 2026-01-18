@@ -84,11 +84,11 @@ export const FocusTracker: Story = {
           </Box>
 
           {/* Focus Monitor */}
-          <Box className="sticky top-4 z-10 rounded-lg border border-primary bg-primary/10 p-md">
+          <Box className="sticky top-4 z-10 rounded-lg border border-[hsl(var(--tm-primary))] bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm" weight="semibold">
               Currently Focused:
             </Text>
-            <Box className="font-mono text-primary">
+            <Box className="font-mono text-[hsl(var(--tm-primary))]">
               <Text>{focusedElement}</Text>
             </Box>
             <Box className="mt-2">
@@ -99,7 +99,7 @@ export const FocusTracker: Story = {
           </Box>
 
           {/* Interactive Elements */}
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={3}>
               <Button variant="outline" data-focus-label="Button 1">
                 Button 1
@@ -142,7 +142,7 @@ export const VisualVsDomOrder: Story = {
           </Box>
 
           {/* Normal Order */}
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
                 Normal DOM Order (1 → 2 → 3):
@@ -199,7 +199,7 @@ export const VisualVsDomOrder: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
             <Text size="sm">
               <strong>Warning:</strong> Using CSS order/flex-direction-reverse creates visual vs
               logical order mismatch. This can confuse keyboard users who expect visual order.
@@ -230,7 +230,7 @@ export const CompositeControlsDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Before Tabs</Button>
 
@@ -271,7 +271,7 @@ export const CompositeControlsDemo: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Expected behavior:</strong>
               <br />
@@ -309,7 +309,7 @@ export const DisabledElementsDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={3}>
               <Button variant="outline">1. Enabled</Button>
               <Button variant="outline" disabled>
@@ -361,7 +361,7 @@ export const TabindexDemo: Story = {
               <div
                 tabIndex={0}
                 role="button"
-                className="cursor-pointer rounded-md bg-background px-4 py-2 focus-visible:ring-2 focus-visible:ring-ring"
+                className="cursor-pointer rounded-md bg-[hsl(var(--tm-surface-base))] px-4 py-2 focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Custom focusable div
               </div>
@@ -370,7 +370,7 @@ export const TabindexDemo: Story = {
           </Box>
 
           {/* Programmatic only */}
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
                 ✅ Allowed (tabindex="-1"):
@@ -384,7 +384,7 @@ export const TabindexDemo: Story = {
             <Box className="flex gap-2">
               <div
                 tabIndex={-1}
-                className="rounded-md bg-muted px-4 py-2 focus-visible:ring-2 focus-visible:ring-ring"
+                className="rounded-md bg-[hsl(var(--tm-muted))] px-4 py-2 focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Programmatic focus only
               </div>
@@ -401,7 +401,7 @@ export const TabindexDemo: Story = {
           </Box>
 
           {/* Forbidden */}
-          <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
                 ❌ FORBIDDEN (positive tabindex):
@@ -413,8 +413,12 @@ export const TabindexDemo: Story = {
               </Text>
             </Box>
             <Box className="flex gap-2 opacity-50">
-              <code className="rounded bg-destructive/20 px-2 py-1 text-sm">tabindex="1"</code>
-              <code className="rounded bg-destructive/20 px-2 py-1 text-sm">tabindex="99"</code>
+              <code className="rounded bg-[hsl(var(--tm-destructive))]/20 px-2 py-1 text-sm">
+                tabindex="1"
+              </code>
+              <code className="rounded bg-[hsl(var(--tm-destructive))]/20 px-2 py-1 text-sm">
+                tabindex="99"
+              </code>
             </Box>
           </Box>
 

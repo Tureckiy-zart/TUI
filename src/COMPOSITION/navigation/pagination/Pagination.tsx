@@ -26,7 +26,7 @@
  * - Default state uses NAVIGATION_TOKENS.states.default
  * - Selected state uses NAVIGATION_TOKENS.states.selected
  * - Disabled state uses NAVIGATION_TOKENS.states.disabled
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -207,7 +207,7 @@ const paginationNavButtonStyles = cn(
   NAVIGATION_TOKENS.sizes.md.padding.vertical,
   NAVIGATION_TOKENS.radius.default,
   NAVIGATION_TOKENS.sizes.md.fontSize,
-  "border border-input",
+  NAVIGATION_TOKENS.states.default.border,
   MOTION_TOKENS.transition.colors,
   `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
 );
@@ -311,11 +311,10 @@ const PaginationItem = React.forwardRef<HTMLButtonElement, PaginationItemProps>(
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
           NAVIGATION_TOKENS.typography.fontWeight.medium,
-          "border",
           MOTION_TOKENS.transition.colors,
           isCurrent
             ? `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border} ${NAVIGATION_TOKENS.shadow.sm}`
-            : `${NAVIGATION_TOKENS.states.default.border} border-input ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
+            : `${NAVIGATION_TOKENS.states.default.border} ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
           className,

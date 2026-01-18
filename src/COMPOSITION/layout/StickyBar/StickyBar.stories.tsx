@@ -82,7 +82,11 @@ export const Default: Story = {
         <Stack spacing="sm" direction="horizontal" align="center" justify="end">
           <button
             type="button"
-            style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+            style={{
+              padding: "0.5rem 1rem",
+              border: "1px solid hsl(var(--tm-border-default))",
+              borderRadius: "4px",
+            }}
           >
             Cancel
           </button>
@@ -124,7 +128,11 @@ export const TopPosition: Story = {
           <span>Contextual controls</span>
           <button
             type="button"
-            style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+            style={{
+              padding: "0.5rem 1rem",
+              border: "1px solid hsl(var(--tm-border-default))",
+              borderRadius: "4px",
+            }}
           >
             Action
           </button>
@@ -160,7 +168,11 @@ export const WithDivider: Story = {
         <Stack spacing="sm" direction="horizontal" align="center" justify="end">
           <button
             type="button"
-            style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+            style={{
+              padding: "0.5rem 1rem",
+              border: "1px solid hsl(var(--tm-border-default))",
+              borderRadius: "4px",
+            }}
           >
             Cancel
           </button>
@@ -214,7 +226,11 @@ export const ToneVariants: Story = {
             <span>Default tone</span>
             <button
               type="button"
-              style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+              style={{
+                padding: "0.5rem 1rem",
+                border: "1px solid hsl(var(--tm-border-default))",
+                borderRadius: "4px",
+              }}
             >
               Action
             </button>
@@ -234,7 +250,11 @@ export const ToneVariants: Story = {
             <span>Elevated tone</span>
             <button
               type="button"
-              style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+              style={{
+                padding: "0.5rem 1rem",
+                border: "1px solid hsl(var(--tm-border-default))",
+                borderRadius: "4px",
+              }}
             >
               Action
             </button>
@@ -254,7 +274,11 @@ export const ToneVariants: Story = {
             <span>Muted tone</span>
             <button
               type="button"
-              style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+              style={{
+                padding: "0.5rem 1rem",
+                border: "1px solid hsl(var(--tm-border-default))",
+                borderRadius: "4px",
+              }}
             >
               Action
             </button>
@@ -287,7 +311,7 @@ export const UseCaseActions: Story = {
           style={{
             marginTop: "2rem",
             padding: "1rem",
-            border: "1px solid #ccc",
+            border: "1px solid hsl(var(--tm-border-default))",
             borderRadius: "4px",
           }}
         >
@@ -299,7 +323,11 @@ export const UseCaseActions: Story = {
         <Stack spacing="sm" direction="horizontal" align="center" justify="end">
           <button
             type="button"
-            style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+            style={{
+              padding: "0.5rem 1rem",
+              border: "1px solid hsl(var(--tm-border-default))",
+              borderRadius: "4px",
+            }}
           >
             Cancel
           </button>
@@ -342,7 +370,11 @@ export const UseCaseContextual: Story = {
           <Stack spacing="xs" direction="horizontal">
             <button
               type="button"
-              style={{ padding: "0.5rem 1rem", border: "1px solid #ccc", borderRadius: "4px" }}
+              style={{
+                padding: "0.5rem 1rem",
+                border: "1px solid hsl(var(--tm-border-default))",
+                borderRadius: "4px",
+              }}
             >
               Clear
             </button>
@@ -367,7 +399,7 @@ export const UseCaseContextual: Story = {
           style={{
             marginTop: "2rem",
             padding: "1rem",
-            border: "1px solid #ccc",
+            border: "1px solid hsl(var(--tm-border-default))",
             borderRadius: "4px",
           }}
         >

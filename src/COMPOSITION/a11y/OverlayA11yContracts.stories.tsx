@@ -74,7 +74,7 @@ export const ModalLabeling: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="primary" onClick={() => setOpen(true)}>
                 Open Modal
@@ -137,7 +137,7 @@ export const DialogLabeling: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="primary" onClick={() => setOpen(true)}>
                 Open Dialog
@@ -198,7 +198,7 @@ export const EscapeKeyContract: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">
@@ -279,7 +279,7 @@ export const FocusManagementReference: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">
@@ -303,7 +303,7 @@ export const FocusManagementReference: Story = {
                 </Box>
                 <Text size="sm">
                   See{" "}
-                  <code className="rounded bg-muted px-1 py-0.5">
+                  <code className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5">
                     UI / Composition / Motion / Focus / Focus Trap And Restore
                   </code>{" "}
                   for detailed focus trap and restore demonstrations.
@@ -317,7 +317,7 @@ export const FocusManagementReference: Story = {
               <strong>Reference:</strong> Focus navigation mechanics are defined in{" "}
               <a
                 href="../../../../docs/architecture/FOCUS_AUTHORITY.md"
-                className="text-primary underline"
+                className="text-[hsl(var(--tm-primary))] underline"
               >
                 FOCUS_AUTHORITY.md
               </a>

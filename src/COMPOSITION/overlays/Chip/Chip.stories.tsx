@@ -284,7 +284,7 @@ export const RemovableChips: Story = {
           ))}
         </div>
         {tags.length === 0 && (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             All tags removed. Refresh to see them again.
           </p>
         )}
@@ -469,7 +469,7 @@ export const CombinedUseCases: Story = {
             ))}
           </div>
           {filters.length === 0 && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
               No active filters. Refresh to see them again.
             </p>
           )}
@@ -517,7 +517,7 @@ export const CombinedUseCases: Story = {
             ))}
           </div>
           {tags.length === 0 && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
               All tags removed. Refresh to see them again.
             </p>
           )}

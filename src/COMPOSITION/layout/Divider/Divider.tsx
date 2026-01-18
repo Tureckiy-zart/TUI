@@ -25,7 +25,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from DIVIDER_TOKENS.tone for tone variants
  * - Tone variants use DIVIDER_TOKENS.tone (border, muted, primary, secondary, accent)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

@@ -28,7 +28,7 @@ export const Default: Story = {
       <HoverCardContent>
         <div className="space-y-sm">
           <h4 className="font-medium leading-none">User Profile</h4>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             This is a hover card that appears on hover and stays open while hovering over the
             content.
           </p>
@@ -52,25 +52,25 @@ export const WithUserProfile: Story = {
       <HoverCardContent className="w-80">
         <div className="space-y-md">
           <div className="flex items-start gap-md">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <User className="h-6 w-6 text-primary" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[hsl(var(--tm-primary))]/10">
+              <User className="h-6 w-6 text-[hsl(var(--tm-primary))]" />
             </div>
             <div className="space-y-xs">
               <h4 className="font-medium leading-none">John Doe</h4>
-              <p className="text-sm text-muted-foreground">@johndoe</p>
+              <p className="text-sm text-[hsl(var(--tm-text-muted))]">@johndoe</p>
               <p className="text-sm">Software Engineer at Company</p>
             </div>
           </div>
           <div className="flex gap-md text-sm">
             <div className="flex items-center gap-xs">
-              <Mail className="h-4 w-4 text-muted-foreground" />
-              <span className="text-muted-foreground">1,234</span>
-              <span className="text-muted-foreground">followers</span>
+              <Mail className="h-4 w-4 text-[hsl(var(--tm-text-muted))]" />
+              <span className="text-[hsl(var(--tm-text-muted))]">1,234</span>
+              <span className="text-[hsl(var(--tm-text-muted))]">followers</span>
             </div>
             <div className="flex items-center gap-xs">
-              <User className="h-4 w-4 text-muted-foreground" />
-              <span className="text-muted-foreground">567</span>
-              <span className="text-muted-foreground">following</span>
+              <User className="h-4 w-4 text-[hsl(var(--tm-text-muted))]" />
+              <span className="text-[hsl(var(--tm-text-muted))]">567</span>
+              <span className="text-[hsl(var(--tm-text-muted))]">following</span>
             </div>
           </div>
         </div>
@@ -95,15 +95,15 @@ export const WithCardContent: Story = {
           </CardHeader>
           <CardBody className="space-y-sm">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Date</span>
+              <span className="text-sm text-[hsl(var(--tm-text-muted))]">Date</span>
               <span className="text-sm font-medium">Dec 21, 2024</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Time</span>
+              <span className="text-sm text-[hsl(var(--tm-text-muted))]">Time</span>
               <span className="text-sm font-medium">3:00 PM</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Status</span>
+              <span className="text-sm text-[hsl(var(--tm-text-muted))]">Status</span>
               <Badge variant="secondary">Scheduled</Badge>
             </div>
           </CardBody>
@@ -123,7 +123,9 @@ export const DifferentVariants: Story = {
         <HoverCardContent variant="primary">
           <div className="space-y-sm">
             <h4 className="font-medium">Primary HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This is a primary variant hover card.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              This is a primary variant hover card.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -135,7 +137,9 @@ export const DifferentVariants: Story = {
         <HoverCardContent variant="secondary">
           <div className="space-y-sm">
             <h4 className="font-medium">Secondary HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This is a secondary variant hover card.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              This is a secondary variant hover card.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -147,7 +151,9 @@ export const DifferentVariants: Story = {
         <HoverCardContent variant="accent">
           <div className="space-y-sm">
             <h4 className="font-medium">Accent HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This is an accent variant hover card.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              This is an accent variant hover card.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -165,7 +171,7 @@ export const DifferentSizes: Story = {
         <HoverCardContent size="sm">
           <div className="space-y-sm">
             <h4 className="font-medium">Small HoverCard</h4>
-            <p className="text-sm text-muted-foreground">Compact content.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">Compact content.</p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -177,7 +183,9 @@ export const DifferentSizes: Story = {
         <HoverCardContent size="md">
           <div className="space-y-sm">
             <h4 className="font-medium">Medium HoverCard</h4>
-            <p className="text-sm text-muted-foreground">Standard sized content with more space.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              Standard sized content with more space.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -189,7 +197,7 @@ export const DifferentSizes: Story = {
         <HoverCardContent size="lg">
           <div className="space-y-md">
             <h4 className="font-medium">Large HoverCard</h4>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
               Large hover card with plenty of space for complex content.
             </p>
             <div className="space-y-sm">
@@ -213,7 +221,9 @@ export const DifferentPositions: Story = {
         <HoverCardContent side="top">
           <div className="space-y-sm">
             <h4 className="font-medium">Top HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This appears above the trigger.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              This appears above the trigger.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -225,7 +235,7 @@ export const DifferentPositions: Story = {
         <HoverCardContent side="right">
           <div className="space-y-sm">
             <h4 className="font-medium">Right HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This appears to the right.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">This appears to the right.</p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -237,7 +247,9 @@ export const DifferentPositions: Story = {
         <HoverCardContent side="bottom">
           <div className="space-y-sm">
             <h4 className="font-medium">Bottom HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This appears below the trigger.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              This appears below the trigger.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -249,7 +261,7 @@ export const DifferentPositions: Story = {
         <HoverCardContent side="left">
           <div className="space-y-sm">
             <h4 className="font-medium">Left HoverCard</h4>
-            <p className="text-sm text-muted-foreground">This appears to the left.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">This appears to the left.</p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -267,7 +279,9 @@ export const CustomDelays: Story = {
         <HoverCardContent>
           <div className="space-y-sm">
             <h4 className="font-medium">Fast HoverCard</h4>
-            <p className="text-sm text-muted-foreground">Opens immediately and closes quickly.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              Opens immediately and closes quickly.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -279,7 +293,9 @@ export const CustomDelays: Story = {
         <HoverCardContent>
           <div className="space-y-sm">
             <h4 className="font-medium">Slow HoverCard</h4>
-            <p className="text-sm text-muted-foreground">Opens and closes with longer delays.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              Opens and closes with longer delays.
+            </p>
           </div>
         </HoverCardContent>
       </HoverCardRoot>
@@ -302,32 +318,34 @@ export const WithNotifications: Story = {
         <div className="space-y-sm">
           <div className="space-y-sm">
             <h4 className="font-medium">Notifications</h4>
-            <p className="text-sm text-muted-foreground">You have 3 new notifications.</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+              You have 3 new notifications.
+            </p>
           </div>
           <div className="space-y-sm">
-            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
-              <Bell className="mt-0.5 h-4 w-4 text-primary" />
+            <div className="flex items-start gap-sm rounded-md bg-[hsl(var(--tm-muted))]/50 p-sm">
+              <Bell className="mt-0.5 h-4 w-4 text-[hsl(var(--tm-primary))]" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">New message</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-[hsl(var(--tm-text-muted))]">
                   You received a new message from John.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
+            <div className="flex items-start gap-sm rounded-md bg-[hsl(var(--tm-muted))]/50 p-sm">
               <Bell className="mt-0.5 h-4 w-4 text-accent" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">Task completed</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-[hsl(var(--tm-text-muted))]">
                   Your task "Update documentation" is done.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-sm rounded-md bg-muted/50 p-sm">
+            <div className="flex items-start gap-sm rounded-md bg-[hsl(var(--tm-muted))]/50 p-sm">
               <Bell className="mt-0.5 h-4 w-4 text-secondary" />
               <div className="space-y-xs">
                 <p className="text-sm font-medium">Reminder</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-[hsl(var(--tm-text-muted))]">
                   Don't forget about the team meeting at 3 PM.
                 </p>
               </div>
@@ -355,7 +373,7 @@ export const Matrix: Story = {
       <div className="space-y-lg">
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">HoverCard Matrix</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             All variants × all sizes. Each cell shows a hover card with that variant/size
             combination.
           </p>
@@ -364,13 +382,13 @@ export const Matrix: Story = {
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="border border-border bg-muted p-sm text-left text-sm font-medium">
+                <th className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-left text-sm font-medium">
                   Variant / Size
                 </th>
                 {sizes.map((size) => (
                   <th
                     key={size}
-                    className="border border-border bg-muted p-sm text-center text-sm font-medium"
+                    className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-center text-sm font-medium"
                   >
                     {size}
                   </th>
@@ -380,11 +398,14 @@ export const Matrix: Story = {
             <tbody>
               {variants.map((variant) => (
                 <tr key={variant}>
-                  <td className="border border-border bg-muted p-sm text-sm font-medium">
+                  <td className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-sm font-medium">
                     {variant}
                   </td>
                   {sizes.map((size) => (
-                    <td key={size} className="border border-border p-md text-center">
+                    <td
+                      key={size}
+                      className="border border-[hsl(var(--tm-border-default))] p-md text-center"
+                    >
                       <HoverCardRoot>
                         <HoverCardTrigger>
                           <Button size="sm" variant="outline">
@@ -396,7 +417,7 @@ export const Matrix: Story = {
                             <p className="text-sm font-medium">
                               {variant} / {size}
                             </p>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-[hsl(var(--tm-text-muted))]">
                               HoverCard with variant="{variant}" size="{size}"
                             </p>
                           </div>
@@ -440,7 +461,9 @@ export const States: Story = {
             <HoverCardContent variant="primary">
               <div className="space-y-sm">
                 <h4 className="font-medium">Primary HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Primary variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Primary variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -452,7 +475,9 @@ export const States: Story = {
             <HoverCardContent variant="secondary">
               <div className="space-y-sm">
                 <h4 className="font-medium">Secondary HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Secondary variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Secondary variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -464,7 +489,9 @@ export const States: Story = {
             <HoverCardContent variant="accent">
               <div className="space-y-sm">
                 <h4 className="font-medium">Accent HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Accent variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Accent variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -476,7 +503,9 @@ export const States: Story = {
             <HoverCardContent variant="outline">
               <div className="space-y-sm">
                 <h4 className="font-medium">Outline HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Outline variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Outline variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -488,7 +517,9 @@ export const States: Story = {
             <HoverCardContent variant="ghost">
               <div className="space-y-sm">
                 <h4 className="font-medium">Ghost HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Ghost variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Ghost variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -500,7 +531,7 @@ export const States: Story = {
             <HoverCardContent variant="link">
               <div className="space-y-sm">
                 <h4 className="font-medium">Link HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Link variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">Link variant hover card.</p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -512,7 +543,9 @@ export const States: Story = {
             <HoverCardContent variant="destructive">
               <div className="space-y-sm">
                 <h4 className="font-medium">Destructive HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Destructive variant hover card.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Destructive variant hover card.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -521,10 +554,14 @@ export const States: Story = {
 
       <div className="space-y-md">
         <h3 className="text-lg font-semibold">Focus States</h3>
-        <p className="text-sm text-muted-foreground">
-          Use <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Tab</kbd> to focus
-          buttons and see hover cards appear. Press{" "}
-          <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd> to dismiss.
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+          Use{" "}
+          <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">Tab</kbd>{" "}
+          to focus buttons and see hover cards appear. Press{" "}
+          <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">
+            Escape
+          </kbd>{" "}
+          to dismiss.
         </p>
         <div className="flex gap-md">
           <HoverCardRoot>
@@ -534,7 +571,9 @@ export const States: Story = {
             <HoverCardContent variant="primary">
               <div className="space-y-sm">
                 <h4 className="font-medium">Primary HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Hover card for primary button.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Hover card for primary button.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -546,7 +585,9 @@ export const States: Story = {
             <HoverCardContent variant="outline">
               <div className="space-y-sm">
                 <h4 className="font-medium">Outline HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Hover card for outline button.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Hover card for outline button.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -558,7 +599,9 @@ export const States: Story = {
             <HoverCardContent variant="ghost">
               <div className="space-y-sm">
                 <h4 className="font-medium">Ghost HoverCard</h4>
-                <p className="text-sm text-muted-foreground">Hover card for ghost button.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Hover card for ghost button.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -575,7 +618,9 @@ export const States: Story = {
             <HoverCardContent variant="primary">
               <div className="space-y-sm">
                 <h4 className="font-medium">Controlled Open</h4>
-                <p className="text-sm text-muted-foreground">Hover card controlled to stay open.</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                  Hover card controlled to stay open.
+                </p>
               </div>
             </HoverCardContent>
           </HoverCardRoot>
@@ -587,7 +632,7 @@ export const States: Story = {
             <HoverCardContent variant="primary">
               <div className="space-y-sm">
                 <h4 className="font-medium">Controlled Closed</h4>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                   Hover card controlled to stay closed.
                 </p>
               </div>
@@ -620,7 +665,7 @@ export const SizesGallery: Story = {
       <div className="space-y-lg">
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">HoverCard Sizes Gallery</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             All supported sizes with different content types
           </p>
         </div>
@@ -639,7 +684,7 @@ export const SizesGallery: Story = {
                   <HoverCardContent size={size}>
                     <div className="space-y-sm">
                       <h4 className="font-medium">{size} Size</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                         This is a {size} hover card with text content.
                       </p>
                     </div>
@@ -663,10 +708,12 @@ export const SizesGallery: Story = {
                   <HoverCardContent size={size}>
                     <div className="space-y-sm">
                       <div className="flex items-center gap-sm">
-                        <User className="h-4 w-4 text-primary" />
+                        <User className="h-4 w-4 text-[hsl(var(--tm-primary))]" />
                         <h4 className="font-medium">{size} Size with Icon</h4>
                       </div>
-                      <p className="text-sm text-muted-foreground">Hover card with icon content.</p>
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+                        Hover card with icon content.
+                      </p>
                     </div>
                   </HoverCardContent>
                 </HoverCardRoot>
@@ -687,11 +734,11 @@ export const SizesGallery: Story = {
                   <HoverCardContent size={size}>
                     <div className="space-y-sm">
                       <h4 className="font-medium">{size} Multi-line</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                         This is a {size} hover card with multi-line content. It demonstrates how the
                         hover card handles longer text content that wraps across multiple lines.
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                         Additional paragraph to test spacing and layout with multiple text blocks.
                       </p>
                     </div>
@@ -725,7 +772,7 @@ export const LongContent: Story = {
     <div className="space-y-lg">
       <div className="space-y-sm">
         <h3 className="text-lg font-semibold">Long Content Validation</h3>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
           Validates that hover card padding and maxWidth tokens work correctly with long text
           content. Required per VARIANTS_SIZE_CANON.md for overlay components.
         </p>
@@ -741,14 +788,14 @@ export const LongContent: Story = {
             <HoverCardContent size={size}>
               <div className="space-y-sm">
                 <h4 className="font-semibold">Long Content Test ({size})</h4>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                   This is a longer paragraph of text to validate that the hover card padding and
                   maxWidth tokens work correctly. The content should wrap naturally within the hover
                   card's width constraints, and the padding should remain consistent regardless of
                   content length. This helps ensure that the token-driven styling system is working
                   as expected for overlay components.
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                   Additional paragraph to test multi-paragraph content. The spacing between
                   paragraphs should be consistent and the overall layout should remain readable even
                   with multiple blocks of text.

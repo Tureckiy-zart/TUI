@@ -22,7 +22,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from DROPDOWN_TOKENS for item styling
  * - Colors come from POPOVER_TOKENS for popover content styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

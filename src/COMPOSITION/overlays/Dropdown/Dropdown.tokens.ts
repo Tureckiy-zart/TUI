@@ -50,16 +50,16 @@ export const DROPDOWN_TOKENS = {
      * Maps to surface tokens for hover background
      */
     hover: {
-      background: "hover:bg-accent", // Accent background on hover
-      text: "hover:text-accent-foreground", // Accent text on hover
+      background: "hover:bg-[hsl(var(--tm-accent))]", // Accent background on hover
+      text: "hover:text-[hsl(var(--tm-accent-foreground))]", // Accent text on hover
     } as const,
     /**
      * Focus state tokens
      * Maps to focus ring tokens
      */
     focus: {
-      background: "focus-visible:bg-accent", // Focus background
-      text: "focus-visible:text-accent-foreground", // Focus text
+      background: "focus-visible:bg-[hsl(var(--tm-accent))]", // Focus background
+      text: "focus-visible:text-[hsl(var(--tm-accent-foreground))]", // Focus text
       outline: "focus-visible:outline-none", // Remove default outline
     } as const,
     /**
@@ -90,7 +90,7 @@ export const DROPDOWN_TOKENS = {
      * Color token for separator line
      * Maps to border color token
      */
-    color: "bg-border", // Border color using token
+    color: "bg-[hsl(var(--tm-border-default))]", // Border color using token
   } as const,
 } as const;
 

@@ -28,7 +28,7 @@
  * - Colors come from POPOVER_TOKENS for popover content styling
  * - Item colors use MENU_TOKENS.item for item styling
  * - Label colors use MENU_TOKENS.label.color.mutedForeground
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -142,7 +142,7 @@ const menuContentVariants = tokenCVA({
 
 const menuItemVariants = tokenCVA({
   // eslint-disable-next-line no-restricted-syntax -- accent colors are part of design system, focus states use standard Tailwind accent utilities
-  base: `relative flex cursor-default select-none items-center outline-none focus-visible:bg-accent/10 focus-visible:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+  base: `relative flex cursor-default select-none items-center outline-none focus-visible:bg-[hsl(var(--tm-accent))]/10 focus-visible:text-[hsl(var(--tm-accent-foreground))] data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
   variants: {
     padding: {
       xs: MENU_TOKENS.item.padding.xs,

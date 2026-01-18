@@ -74,7 +74,7 @@ export const ModalFocusTrap: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Before Trigger (for Tab order)</Button>
               <Button
@@ -159,7 +159,7 @@ export const FocusRestoreDemo: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Button A</Button>
               <Button
@@ -197,7 +197,7 @@ export const FocusRestoreDemo: Story = {
             </Modal.Content>
           </Modal.Root>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Rule F-REST-1:</strong> Modal overlays MUST restore focus on close. Watch the
               "Last focused" indicator after closing the modal.
@@ -230,7 +230,7 @@ export const DialogFocusBehavior: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Button variant="primary" onClick={() => setIsOpen(true)}>
               Open Dialog
             </Button>
@@ -303,7 +303,7 @@ export const DrawerFocusBehavior: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Button
               ref={triggerRef as React.RefObject<HTMLButtonElement>}
               variant="primary"
@@ -353,7 +353,7 @@ export const DrawerFocusBehavior: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Note:</strong> Drawer uses custom focus implementation (useFocusLock). Pass
               returnFocusRef prop to restore focus correctly. Container focus is programmatic only
@@ -383,7 +383,7 @@ export const PopoverNoTrap: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Button Before</Button>
 
@@ -405,7 +405,7 @@ export const PopoverNoTrap: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Rule F-TRAP-2:</strong> Non-modal overlays MUST NOT trap focus. This is an
               ACCEPTABLE Focus GAP - see FocusGAPGallery.
@@ -437,7 +437,7 @@ export const EscapeKeyBehavior: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Button
               ref={modalTriggerRef as React.RefObject<HTMLButtonElement>}
               variant="primary"

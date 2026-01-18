@@ -51,11 +51,11 @@ export const Default: Story = {
   },
   render: (args) => (
     <div className="flex flex-col items-start">
-      <Box px="md" py="sm" className="rounded bg-muted">
+      <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
         Item 1
       </Box>
       <Spacer {...args} />
-      <Box px="md" py="sm" className="rounded bg-muted">
+      <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
         Item 2
       </Box>
     </div>
@@ -79,60 +79,60 @@ export const SizesGallery: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Semantic Spacing Tokens</h3>
-        <div className="flex flex-col items-start rounded border border-border p-md">
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+        <div className="flex flex-col items-start rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             xs spacing
           </Box>
           <Spacer size="xs" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             sm spacing
           </Box>
           <Spacer size="sm" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             md spacing
           </Box>
           <Spacer size="md" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             lg spacing
           </Box>
           <Spacer size="lg" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             xl spacing
           </Box>
         </div>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Base Spacing Tokens</h3>
-        <div className="flex flex-col items-start rounded border border-border p-md">
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+        <div className="flex flex-col items-start rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             Base 2 (8px)
           </Box>
           <Spacer size={2} />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             Base 4 (16px)
           </Box>
           <Spacer size={4} />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             Base 6 (24px)
           </Box>
           <Spacer size={6} />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             Base 8 (32px)
           </Box>
         </div>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Layout Spacing Tokens</h3>
-        <div className="flex flex-col items-start rounded border border-border p-md">
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+        <div className="flex flex-col items-start rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             section-sm
           </Box>
           <Spacer size="section-sm" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             section-md
           </Box>
           <Spacer size="section-md" />
-          <Box px="md" py="xs" className="rounded bg-muted text-sm">
+          <Box px="md" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
             section-lg
           </Box>
         </div>
@@ -156,16 +156,16 @@ export const SizesGallery: Story = {
  */
 export const HorizontalSpacer: Story = {
   render: () => (
-    <div className="flex items-center rounded border border-border p-md">
-      <Box px="sm" py="xs" className="rounded bg-muted text-sm">
+    <div className="flex items-center rounded border border-[hsl(var(--tm-border-default))] p-md">
+      <Box px="sm" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
         Item 1
       </Box>
       <Spacer orientation="horizontal" size="md" />
-      <Box px="sm" py="xs" className="rounded bg-muted text-sm">
+      <Box px="sm" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
         Item 2
       </Box>
       <Spacer orientation="horizontal" size="lg" />
-      <Box px="sm" py="xs" className="rounded bg-muted text-sm">
+      <Box px="sm" py="xs" className="rounded bg-[hsl(var(--tm-muted))] text-sm">
         Item 3
       </Box>
     </div>
@@ -189,31 +189,35 @@ export const WithStackItems: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Vertical Spacing</h3>
-        <div className="rounded border border-border p-md">
-          <Box px="md" py="sm" className="rounded bg-muted">
+        <div className="rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Section 1
           </Box>
           <Spacer size="lg" />
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Section 2
           </Box>
           <Spacer size="md" />
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Section 3
           </Box>
         </div>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">In Stack Composition</h3>
-        <Stack direction="vertical" spacing="sm" className="rounded border border-border p-md">
-          <Box px="md" py="sm" className="rounded bg-muted">
+        <Stack
+          direction="vertical"
+          spacing="sm"
+          className="rounded border border-[hsl(var(--tm-border-default))] p-md"
+        >
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Stack Item 1
           </Box>
           <Spacer size="md" />
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Stack Item 2 (with custom spacing via Spacer)
           </Box>
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Stack Item 3 (uses Stack spacing)
           </Box>
         </Stack>
@@ -240,24 +244,24 @@ export const LayoutSpacingTokens: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Section Spacing</h3>
-        <div className="flex flex-col items-start rounded border border-border p-md">
-          <Box px="md" py="sm" className="rounded bg-muted">
+        <div className="flex flex-col items-start rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Section Header
           </Box>
           <Spacer size="section-md" />
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Section Content
           </Box>
         </div>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Container Spacing</h3>
-        <div className="flex flex-col items-start rounded border border-border p-md">
-          <Box px="md" py="sm" className="rounded bg-muted">
+        <div className="flex flex-col items-start rounded border border-[hsl(var(--tm-border-default))] p-md">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Container Top
           </Box>
           <Spacer size="container-lg" />
-          <Box px="md" py="sm" className="rounded bg-muted">
+          <Box px="md" py="sm" className="rounded bg-[hsl(var(--tm-muted))]">
             Container Bottom
           </Box>
         </div>

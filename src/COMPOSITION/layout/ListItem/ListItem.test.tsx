@@ -66,7 +66,7 @@ describe("ListItem", () => {
       const listItem = container.querySelector("li");
       expect(listItem?.className).toContain("cursor-pointer");
       expect(listItem?.className).toContain("transition-colors");
-      expect(listItem?.className).toContain("hover:bg-muted/50");
+      expect(listItem?.className).toContain("hover:bg-[hsl(var(--tm-muted))]/50");
     });
 
     it("applies focus-visible styling for interactive items", () => {
@@ -74,7 +74,7 @@ describe("ListItem", () => {
       const listItem = container.querySelector("li");
       expect(listItem?.className).toContain("focus-visible:outline-none");
       expect(listItem?.className).toContain("focus-visible:ring-2");
-      expect(listItem?.className).toContain("focus-visible:ring-ring");
+      expect(listItem?.className).toContain("focus-visible:ring-[hsl(var(--tm-focus-ring))]");
     });
   });
 

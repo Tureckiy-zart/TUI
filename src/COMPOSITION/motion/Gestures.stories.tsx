@@ -53,17 +53,19 @@ export const SwipeToDismissToast: Story = {
 
     if (!isVisible) {
       return (
-        <div className="rounded-lg border bg-card p-4">
-          <p className="text-muted-foreground">Toast dismissed! Will reappear in 1 second.</p>
+        <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-4">
+          <p className="text-[hsl(var(--tm-text-muted))]">
+            Toast dismissed! Will reappear in 1 second.
+          </p>
         </div>
       );
     }
 
     return (
       <div className="w-96 space-y-4">
-        <div className="rounded-lg border bg-card p-4">
+        <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-4">
           <p className="mb-2 font-semibold">Swipe Gesture Info:</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             {isSwiping
               ? `Swiping ${direction} (${Math.round(distance)}px)`
               : swipeInfo || "Swipe left or right to dismiss"}
@@ -71,7 +73,7 @@ export const SwipeToDismissToast: Story = {
         </div>
         <div
           {...handlers}
-          className="group pointer-events-auto relative flex w-full items-center justify-between gap-sm overflow-hidden rounded-lg border bg-background p-md shadow-lg"
+          className="group pointer-events-auto relative flex w-full items-center justify-between gap-sm overflow-hidden rounded-lg border bg-[hsl(var(--tm-surface-base))] p-md shadow-lg"
         >
           <div className="flex flex-1 items-start gap-sm">
             <div className="flex-1 space-y-xs">
@@ -113,17 +115,17 @@ export const SwipeDirections: Story = {
 
     return (
       <div className="w-96 space-y-4">
-        <div className="rounded-lg border bg-card p-4">
+        <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-4">
           <p className="mb-2 font-semibold">Swipe Detection:</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             {isSwiping ? `Swiping ${direction} (${Math.round(distance)}px)` : swipeInfo}
           </p>
         </div>
         <div
           {...handlers}
-          className="flex h-48 w-full cursor-grab items-center justify-center rounded-lg border bg-card active:cursor-grabbing"
+          className="flex h-48 w-full cursor-grab items-center justify-center rounded-lg border bg-[hsl(var(--tm-surface-raised))] active:cursor-grabbing"
         >
-          <p className="text-muted-foreground">Swipe in any direction</p>
+          <p className="text-[hsl(var(--tm-text-muted))]">Swipe in any direction</p>
         </div>
       </div>
     );
@@ -154,8 +156,10 @@ export const NotificationPanelSwipe: Story = {
 
     if (!isOpen) {
       return (
-        <div className="rounded-lg border bg-card p-4">
-          <p className="text-muted-foreground">Panel closed! Will reopen in 2 seconds.</p>
+        <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-4">
+          <p className="text-[hsl(var(--tm-text-muted))]">
+            Panel closed! Will reopen in 2 seconds.
+          </p>
           <Button onClick={() => setIsOpen(true)}>Reopen Panel</Button>
         </div>
       );
@@ -163,9 +167,9 @@ export const NotificationPanelSwipe: Story = {
 
     return (
       <div className="w-96 space-y-4">
-        <div className="rounded-lg border bg-card p-4">
+        <div className="rounded-lg border bg-[hsl(var(--tm-surface-raised))] p-4">
           <p className="mb-2 font-semibold">Panel Swipe Info:</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             {isSwiping
               ? `Swiping right (${Math.round(distance)}px)`
               : swipeInfo || "Swipe right to close panel"}
@@ -173,7 +177,7 @@ export const NotificationPanelSwipe: Story = {
         </div>
         <div
           {...handlers}
-          className="fixed right-0 top-0 z-50 h-full w-80 border-l bg-card shadow-xl tm-motion-fade-slide-right"
+          className="fixed right-0 top-0 z-50 h-full w-80 border-l bg-[hsl(var(--tm-surface-raised))] shadow-xl tm-motion-fade-slide-right"
         >
           <div className="border-b p-4">
             <div className="flex items-center justify-between">
@@ -189,7 +193,7 @@ export const NotificationPanelSwipe: Story = {
             </div>
           </div>
           <div className="p-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
               Swipe right from the left edge to close this panel.
             </p>
           </div>

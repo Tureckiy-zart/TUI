@@ -62,7 +62,7 @@ export const Controlled: Story = {
           <h3 className="text-sm font-semibold">Controlled Toast</h3>
           <button
             onClick={() => setOpen(true)}
-            className="rounded-md bg-primary px-md py-sm text-sm text-primary-foreground"
+            className="rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-sm text-[hsl(var(--tm-primary-foreground))]"
           >
             Show Toast
           </button>
@@ -96,7 +96,7 @@ export const Variants: Story = {
           <div className="flex flex-wrap gap-sm">
             <button
               onClick={() => setDefaultOpen(true)}
-              className="rounded-md border border-border bg-background px-md py-sm text-sm"
+              className="rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
             >
               Default
             </button>
@@ -114,7 +114,7 @@ export const Variants: Story = {
             </button>
             <button
               onClick={() => setErrorOpen(true)}
-              className="rounded-md bg-destructive px-md py-sm text-sm text-destructive-foreground"
+              className="rounded-md bg-[hsl(var(--tm-destructive))] px-md py-sm text-sm text-destructive-foreground"
             >
               Error
             </button>
@@ -168,7 +168,7 @@ export const LongContent: Story = {
           <h3 className="text-sm font-semibold">Long Title</h3>
           <button
             onClick={() => setLongTitleOpen(true)}
-            className="rounded-md border border-border bg-background px-md py-sm text-sm"
+            className="rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
           >
             Show Long Title
           </button>
@@ -246,7 +246,7 @@ export const BasicUsage: Story = {
       <div className="space-y-sm">
         <button
           onClick={() => setOpen(true)}
-          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
+          className="rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-[hsl(var(--tm-primary-foreground))]"
         >
           Show Basic Toast
         </button>
@@ -272,7 +272,7 @@ export const WithAction: Story = {
       <div className="space-y-sm">
         <button
           onClick={() => setOpen(true)}
-          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
+          className="rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-[hsl(var(--tm-primary-foreground))]"
         >
           Show Toast with Action
         </button>
@@ -309,7 +309,7 @@ export const MultipleToasts: Story = {
             setToast3Open(true);
             setToast4Open(true);
           }}
-          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
+          className="rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-[hsl(var(--tm-primary-foreground))]"
         >
           Show Multiple Toasts
         </button>
@@ -352,7 +352,7 @@ export const LocalHookUsage: Story = {
               description: "This toast is scoped to the component.",
             })
           }
-          className="rounded-md bg-primary px-md py-sm text-primary-foreground"
+          className="rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-[hsl(var(--tm-primary-foreground))]"
         >
           Show Local Toast
         </button>
