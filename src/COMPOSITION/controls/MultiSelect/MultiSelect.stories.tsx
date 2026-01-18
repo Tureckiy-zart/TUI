@@ -8,10 +8,10 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import * as React from "react";
 import { X } from "lucide-react";
-import { MultiSelect } from "./MultiSelect";
+import * as React from "react";
 import type { MultiSelectOption } from "./MultiSelect";
+import { MultiSelect } from "./MultiSelect";
 
 // ============================================================================
 // META
@@ -31,7 +31,54 @@ const meta: Meta<typeof MultiSelect> = {
           "Multi-selection dropdown control with tag-based selection visualization. Composes Foundation Select and Checkbox with multiple value management and removable tags.",
       },
     },
+    // Global styles for dropdown (rendered via Portal)
+    backgrounds: { disable: true },
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{`
+          [data-radix-select-content] {
+            background-color: white !important;
+            color: white !important;
+            border-width: 1px !important;
+          }
+          [data-radix-select-viewport] {
+            background-color: white !important;
+          }
+          [data-radix-select-item] {
+            color: black !important;
+            border: 1px solid rgb(147, 51, 234) !important;
+            border-color: rgb(147, 51, 234) !important;
+            border-radius: 2px !important;
+            margin: 2px 0 !important;
+            padding: 4px 8px !important;
+          }
+          [data-radix-select-item] * {
+            color: white !important;
+          }
+          [data-radix-select-item]:hover {
+            background-color: rgb(147, 51, 234) !important;
+            background: rgb(147, 51, 234) !important;
+          }
+          [data-radix-select-item]:hover * {
+            color: white !important;
+          }
+          [data-radix-select-item][data-highlighted] {
+            background-color: rgb(147, 51, 234) !important;
+            background: rgb(147, 51, 234) !important;
+          }
+          [data-radix-select-item][data-highlighted] * {
+            color: white !important;
+          }
+          [data-radix-select-item][data-disabled] {
+            opacity: 0.5 !important;
+          }
+        `}</style>
+        <Story />
+      </>
+    ),
+  ],
   tags: ["autodocs"],
   argTypes: {
     value: {
