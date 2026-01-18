@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Progress, type ProgressSize } from "./Progress";
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -95,7 +95,7 @@ export const Default: Story = {
 };
 
 /**
- * Matrix Story - All variants × all sizes
+ * Matrix Story - All variants - all sizes
  * REQUIRED per VARIANTS_SIZE_CANON.md (component has both size AND variant props)
  */
 export const Matrix: Story = {

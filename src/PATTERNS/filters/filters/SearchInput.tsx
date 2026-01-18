@@ -92,6 +92,7 @@ export function SearchInput({
         value={localValue}
         onChange={handleInputChange}
         placeholder={placeholder}
+        data-has-icon="true"
         // Filter out props that don't exist in InputProps
         {...(Object.fromEntries(
           Object.entries(props).filter(([key]) => !["height", "width", "size"].includes(key)),

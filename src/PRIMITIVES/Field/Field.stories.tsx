@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "@/PRIMITIVES/Button";
@@ -226,7 +226,7 @@ export const LoginForm: Story = {
             Password
           </Field.Label>
           <Field.Control>
-            <Input id="login-password" type="password" placeholder="••••••••" />
+            <Input id="login-password" type="password" placeholder="********" />
           </Field.Control>
           <Field.Description>
             <a href="#" style={{ color: "#3b82f6", textDecoration: "none" }}>
@@ -317,7 +317,7 @@ export const FieldInFormContext: Story = {
             Password
           </Field.Label>
           <Field.Control>
-            <Input id="signup-password" type="password" placeholder="••••••••" />
+            <Input id="signup-password" type="password" placeholder="********" />
           </Field.Control>
           <Field.Description>Must be at least 8 characters long.</Field.Description>
         </Field>
@@ -327,7 +327,7 @@ export const FieldInFormContext: Story = {
             Confirm Password
           </Field.Label>
           <Field.Control>
-            <Input id="signup-confirm" type="password" placeholder="••••••••" />
+            <Input id="signup-confirm" type="password" placeholder="********" />
           </Field.Control>
         </Field>
 

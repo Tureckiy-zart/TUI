@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
@@ -101,7 +101,7 @@ export const DisabledChecked: Story = {
 
 /**
  * Matrix Story (Canonical - REQUIRED)
- * Demonstrates all variants × all sizes grid.
+ * Demonstrates all variants - all sizes grid.
  * Required by VARIANTS_SIZE_CANON.md for components with both variant and size props.
  */
 export const Matrix: Story = {
@@ -347,7 +347,7 @@ export const States: Story = {
       </div>
       <div>
         <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
-          All Sizes × States
+          All Sizes - States
         </h3>
         <div className="grid grid-cols-5 gap-md">
           {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (

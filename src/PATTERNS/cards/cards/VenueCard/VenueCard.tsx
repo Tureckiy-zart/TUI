@@ -169,7 +169,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
           )}
 
           {/* Content Section */}
-          <CardBaseContentWrapper size={cardBaseSize}>
+          <CardBaseContentWrapper size={cardBaseSize} spacing={cardBaseSize === "sm" ? "sm" : "md"}>
             {/* Title */}
             <Heading level={3}>
               {href ? (

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Copy, Edit, FileText, MoreVertical, Share, Trash2 } from "lucide-react";
@@ -408,7 +408,7 @@ export const Sizes: Story = {
 };
 
 /**
- * Matrix: All tones × all sizes grid
+ * Matrix: All tones - all sizes grid
  *
  * **Canonical Story (Required per VARIANTS_SIZE_CANON.md)**
  *
@@ -429,7 +429,7 @@ export const Matrix: Story = {
 
     return (
       <div className="flex flex-col gap-8 p-8">
-        <h2 className="text-lg font-semibold">Matrix: All Tones × All Sizes</h2>
+        <h2 className="text-lg font-semibold">Matrix: All Tones - All Sizes</h2>
 
         {tones.map((tone) => (
           <div key={tone} className="flex flex-col gap-4">
@@ -462,14 +462,14 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "**Canonical Matrix Story:** Demonstrates all tone variants (neutral, primary, destructive) × all size variants (sm, md, lg). This story is required per VARIANTS_SIZE_CANON.md for components with both size and tone props. Use this to verify visual consistency across all combinations.",
+          "**Canonical Matrix Story:** Demonstrates all tone variants (neutral, primary, destructive) - all size variants (sm, md, lg). This story is required per VARIANTS_SIZE_CANON.md for components with both size and tone props. Use this to verify visual consistency across all combinations.",
       },
     },
   },
 };
 
 /**
- * States: All tones × all sizes × all states
+ * States: All tones - all sizes - all states
  *
  * **Canonical Story (Required per VARIANTS_SIZE_CANON.md)**
  *
@@ -489,7 +489,7 @@ export const States: Story = {
 
     return (
       <div className="flex flex-col gap-8 p-8">
-        <h2 className="text-lg font-semibold">States: All Tones × All Sizes × All States</h2>
+        <h2 className="text-lg font-semibold">States: All Tones - All Sizes - All States</h2>
 
         {tones.map((tone) => (
           <div key={tone} className="flex flex-col gap-4">
@@ -527,7 +527,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "**Canonical States Story:** Demonstrates all tone variants × all size variants × all interaction states (default, disabled, hover, focus-visible). This story is required per VARIANTS_SIZE_CANON.md for interactive components. Hover and focus states are CSS-driven (no JS state). Use this to verify state styling consistency.",
+          "**Canonical States Story:** Demonstrates all tone variants - all size variants - all interaction states (default, disabled, hover, focus-visible). This story is required per VARIANTS_SIZE_CANON.md for interactive components. Hover and focus states are CSS-driven (no JS state). Use this to verify state styling consistency.",
       },
     },
   },

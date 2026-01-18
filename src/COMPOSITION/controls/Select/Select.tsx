@@ -279,12 +279,15 @@ export interface SelectItemProps extends Omit<
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   ({ children, ...props }, ref) => {
     return (
-      <SelectPrimitive.Item ref={ref} className={cn(selectItemVariants())} {...props}>
+      <SelectPrimitive.Item
+        ref={ref}
+        className={cn(selectItemVariants(), SELECT_TOKENS.trigger.icon.gap)}
+        {...props}
+      >
         <span
           className={cn(
-            "absolute flex items-center justify-center",
-            SELECT_TOKENS.item.indicator.position,
-            INPUT_TOKENS.icon.size,
+            "inline-flex items-center justify-center",
+            SELECT_TOKENS.item.indicator.size,
           )}
         >
           <SelectPrimitive.ItemIndicator>

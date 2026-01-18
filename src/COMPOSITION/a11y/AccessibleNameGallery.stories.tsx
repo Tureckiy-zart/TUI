@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Accessible Name Gallery
  *
  * Demonstrates correct accessible naming patterns across primitives.
@@ -91,7 +91,7 @@ export const ButtonNames: Story = {
                   </Text>
                 </Box>
                 <Button iconOnly aria-label="Close dialog" variant="primary">
-                  ×
+                  -
                 </Button>
                 <Box className="mt-2">
                   <Text size="sm" tone="muted">

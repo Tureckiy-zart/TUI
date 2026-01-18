@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Focus Overview - Governance Showcase
  *
  * Demonstrates keyboard-only navigation patterns across the design system.
@@ -65,7 +65,7 @@ export const TabOrderDemo: Story = {
             <Heading level={2}>Tab Order Demonstration</Heading>
             <Box className="mt-2">
               <Text tone="muted">
-                Press Tab to navigate. Focus should follow DOM order (1 → 2 → 3 → 4 → 5).
+                Press Tab to navigate. Focus should follow DOM order (1 to 2 to 3 to 4 to 5).
               </Text>
             </Box>
           </Box>
@@ -124,7 +124,7 @@ export const FocusVisibleDemo: Story = {
                 </Text>
               </Box>
               <Button variant="primary" data-testid="focus-visible-test-button">
-                Click me (no ring) → then Tab (ring appears)
+                Click me (no ring), then Tab (ring appears)
               </Button>
               <Button variant="secondary">Another Button</Button>
               <Button variant="outline">Third Button</Button>
@@ -170,7 +170,7 @@ export const RovingTabindexDemo: Story = {
             <Heading level={2}>Roving Tabindex Demonstration</Heading>
             <Box className="mt-2">
               <Text tone="muted">
-                Tab enters the group → Arrow keys navigate → Tab exits the group.
+                Tab enters the group, arrow keys navigate, Tab exits the group.
               </Text>
             </Box>
           </Box>
@@ -234,7 +234,7 @@ export const KeyboardParityDemo: Story = {
         onClick={() => setClickCount((c) => c + 1)}
         className="cursor-pointer rounded-md bg-[hsl(var(--tm-destructive))]/20 px-4 py-2 text-destructive"
       >
-        ❌ BAD: div with onClick only (not focusable)
+        BAD BAD: div with onClick only (not focusable)
       </div>
     );
 
@@ -252,14 +252,14 @@ export const KeyboardParityDemo: Story = {
         }}
         className="cursor-pointer rounded-md bg-success/20 px-4 py-2 text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        ✅ GOOD: div with role, tabIndex, and keyboard handler
+        OK GOOD: div with role, tabIndex, and keyboard handler
       </div>
     );
 
     // Best example: use button
     const BestExample = () => (
       <Button variant="primary" onClick={() => setClickCount((c) => c + 1)}>
-        ✅ BEST: Use semantic button element
+        OK BEST: Use semantic button element
       </Button>
     );
 

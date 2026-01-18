@@ -76,11 +76,28 @@ const linkVariants = tokenCVA({
       destructive: `${LINK_TOKENS.layout} ${LINK_TOKENS.variant.destructive.text} ${LINK_TOKENS.variant.destructive.hover} ${LINK_TOKENS.underlineOffset} ${LINK_TOKENS.variant.destructive.underline}`,
     } satisfies Record<LinkVariant, string>,
     size: {
-      sm: `${LINK_TOKENS.height.sm} ${LINK_TOKENS.fontSize.sm} ${LINK_TOKENS.padding.horizontal.sm} ${LINK_TOKENS.padding.vertical.xs}`,
-      md: `${LINK_TOKENS.height.md} ${LINK_TOKENS.fontSize.md} ${LINK_TOKENS.padding.horizontal.md} ${LINK_TOKENS.padding.vertical.sm}`,
-      lg: `${LINK_TOKENS.height.lg} ${LINK_TOKENS.fontSize.lg} ${LINK_TOKENS.padding.horizontal.lg} ${LINK_TOKENS.padding.vertical.sm}`,
+      sm: "",
+      md: "",
+      lg: "",
     } satisfies Record<LinkSize, string>,
   },
+  compoundVariants: [
+    {
+      variant: ["primary", "secondary", "accent", "outline", "ghost", "text", "destructive"],
+      size: "sm",
+      class: `${LINK_TOKENS.height.sm} ${LINK_TOKENS.fontSize.sm} ${LINK_TOKENS.padding.horizontal.sm} ${LINK_TOKENS.padding.vertical.xs}`,
+    },
+    {
+      variant: ["primary", "secondary", "accent", "outline", "ghost", "text", "destructive"],
+      size: "md",
+      class: `${LINK_TOKENS.height.md} ${LINK_TOKENS.fontSize.md} ${LINK_TOKENS.padding.horizontal.md} ${LINK_TOKENS.padding.vertical.sm}`,
+    },
+    {
+      variant: ["primary", "secondary", "accent", "outline", "ghost", "text", "destructive"],
+      size: "lg",
+      class: `${LINK_TOKENS.height.lg} ${LINK_TOKENS.fontSize.lg} ${LINK_TOKENS.padding.horizontal.lg} ${LINK_TOKENS.padding.vertical.sm}`,
+    },
+  ],
   defaultVariants: {
     variant: "text",
     size: "md",

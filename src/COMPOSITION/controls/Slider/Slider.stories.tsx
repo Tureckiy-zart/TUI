@@ -1,11 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import { Slider } from "./Slider";
 
 const meta: Meta<typeof Slider> = {
   title: "UI / Composition / Controls / Slider",
   component: Slider,
+  parameters: {
+    layout: "padded",
+  },
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-5xl">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     variant: {
       control: "select",
@@ -57,7 +67,7 @@ export const Default: Story = {
 
 /**
  * Matrix Story
- * Demonstrates all variant × size combinations (3 variants × 3 sizes = 9 combinations)
+ * Demonstrates all variant - size combinations (3 variants - 3 sizes = 9 combinations)
  * REQUIRED: Component has BOTH size AND variant props
  */
 export const Matrix: Story = {
@@ -86,7 +96,7 @@ export const Matrix: Story = {
           <div key={variant} className="grid grid-cols-4 items-center gap-4">
             <div className="text-sm font-medium">{variant}</div>
             {sizes.map((size) => (
-              <div key={`${variant}-${size}`} className="w-full">
+              <div key={`${variant}-${size}`} className="w-full min-w-[200px]">
                 <Slider
                   variant={variant}
                   size={size}
@@ -130,7 +140,7 @@ export const States: Story = {
                 <div className="text-sm font-medium">{size}</div>
                 <div className="flex items-center gap-4">
                   {states.map((state) => (
-                    <div key={state.name} className="flex-1 space-y-1">
+                    <div key={state.name} className="min-w-[200px] flex-1 space-y-1">
                       <div className="text-xs text-[hsl(var(--tm-text-muted))]">{state.name}</div>
                       <Slider
                         variant={variant}
@@ -296,7 +306,7 @@ export const VerticalOrientation: Story = {
 
     return (
       <div className="flex h-64 items-center gap-8">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
@@ -307,7 +317,7 @@ export const VerticalOrientation: Story = {
             aria-label="Vertical slider small"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
@@ -318,7 +328,7 @@ export const VerticalOrientation: Story = {
             aria-label="Vertical slider medium"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
@@ -437,7 +447,7 @@ export const VerticalWithMarks: Story = {
 
     return (
       <div className="flex h-64 items-center gap-8">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
@@ -449,7 +459,7 @@ export const VerticalWithMarks: Story = {
             aria-label="Vertical slider with marks"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"

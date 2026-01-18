@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -110,13 +110,11 @@ type Story = StoryObj<typeof ButtonGroup>;
  */
 export const Default: Story = {
   render: () => (
-    <div className="[&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
-      <ButtonGroup>
-        <Button>Save</Button>
-        <Button>Cancel</Button>
-        <Button>Delete</Button>
-      </ButtonGroup>
-    </div>
+    <ButtonGroup>
+      <Button>Save</Button>
+      <Button>Cancel</Button>
+      <Button>Delete</Button>
+    </ButtonGroup>
   ),
   parameters: {
     docs: {
@@ -138,7 +136,7 @@ export const Default: Story = {
  */
 export const Horizontal: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Primary Variant</h3>
         <ButtonGroup variant="primary">
@@ -187,7 +185,7 @@ export const Horizontal: Story = {
  */
 export const Vertical: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Vertical Primary</h3>
         <ButtonGroup orientation="vertical" variant="primary">
@@ -228,7 +226,7 @@ export const Vertical: Story = {
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Small (sm)</h3>
         <ButtonGroup size="sm" variant="primary">
@@ -277,7 +275,7 @@ export const Sizes: Story = {
  */
 export const Variants: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Primary</h3>
         <ButtonGroup variant="primary">
@@ -344,7 +342,7 @@ export const Variants: Story = {
  */
 export const Spacing: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Extra Small (xs)</h3>
         <ButtonGroup spacing="xs" variant="primary">
@@ -409,7 +407,7 @@ export const Spacing: Story = {
  */
 export const Disabled: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Group Disabled</h3>
         <ButtonGroup disabled variant="primary">
@@ -450,7 +448,7 @@ export const Disabled: Story = {
  */
 export const Mixed: Story = {
   render: () => (
-    <div className="space-y-lg [&_button:hover]:!bg-purple-600 [&_button:hover]:!text-white">
+    <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Size Override</h3>
         <p className="mb-md text-xs text-[hsl(var(--tm-text-muted))]">

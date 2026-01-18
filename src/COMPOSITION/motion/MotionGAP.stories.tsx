@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Motion GAP - Governance Showcase
  *
  * Educational showcase demonstrating the Motion GAP concept through visual examples.
@@ -28,9 +28,9 @@ const meta: Meta = {
           **Motion GAP** is a state where a component undergoes a perceivable state or spatial change without temporal feedback (motion/animation).
           
           This showcase demonstrates:
-          - ❌ Unresolved GAP: State change without motion (problematic)
-          - ✅ GAP resolved with motion: Canonical motion preset applied (correct)
-          - 🚫 No motion by design: Structural components where motion is intentionally absent (correct)
+          - Example: Unresolved GAP (problematic, intentional demo)
+          - Example: GAP resolved with motion (canonical preset applied)
+          - Example: No motion by design (structural components, motion intentionally absent)
           
           **Reference:** See [Motion Authority Contract](../../../../docs/architecture/MOTION_AUTHORITY.md#motion-gap) for complete GAP definition and resolution rules.
           
@@ -93,16 +93,16 @@ export const Overview: Story = {
                 <Text size="sm">Change types that trigger GAP evaluation:</Text>
                 <Stack spacing={2} className="mt-2">
                   <Box>
-                    <Text size="sm">• Visibility changes (enter/exit animations)</Text>
+                    <Text size="sm">- Visibility changes (enter/exit animations)</Text>
                   </Box>
                   <Box>
-                    <Text size="sm">• Size or layout changes</Text>
+                    <Text size="sm">- Size or layout changes</Text>
                   </Box>
                   <Box>
-                    <Text size="sm">• Selection or active state changes</Text>
+                    <Text size="sm">- Selection or active state changes</Text>
                   </Box>
                   <Box>
-                    <Text size="sm">• User-triggered action feedback</Text>
+                    <Text size="sm">- User-triggered action feedback</Text>
                   </Box>
                 </Stack>
               </Box>
@@ -196,7 +196,7 @@ export const UnresolvedGAP: Story = {
       <Box className="p-lg">
         <Stack spacing={6}>
           <Box>
-            <Heading level={1}>❌ GAP: State change without temporal feedback</Heading>
+            <Heading level={1}>Example: Unresolved GAP (no temporal feedback)</Heading>
             <Box className="mt-2">
               <Text tone="muted">
                 Notice the abrupt appearance/disappearance - this is a Motion GAP. The component
@@ -264,7 +264,7 @@ export const ResolvedWithMotion: Story = {
       <Box className="p-lg">
         <Stack spacing={6}>
           <Box>
-            <Heading level={1}>✅ GAP resolved: motion communicates change</Heading>
+            <Heading level={1}> GAP resolved: motion communicates change</Heading>
             <Box className="mt-2">
               <Text tone="muted">
                 Same component with canonical motion preset applied. The state change is now
@@ -343,11 +343,11 @@ export const NoMotionByDesign: Story = {
       <Box className="p-lg">
         <Stack spacing={6}>
           <Box>
-            <Heading level={1}>🚫 No motion by design (structural component)</Heading>
+            <Heading level={1}>Example: No motion by design (not a GAP)</Heading>
             <Box className="mt-2">
               <Text tone="muted">
-                Structural components don't change state - motion is not applicable here. This is
-                NOT a GAP - it's intentional absence.
+                Structural components don't change state, so motion is not applicable. This is an
+                intentional absence, not a Motion GAP.
               </Text>
             </Box>
           </Box>

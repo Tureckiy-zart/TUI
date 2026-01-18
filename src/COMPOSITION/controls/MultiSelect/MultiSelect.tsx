@@ -192,7 +192,7 @@ export interface MultiSelectProps {
 // ============================================================================
 
 const multiSelectTriggerVariants = tokenCVA({
-  base: `flex items-center gap-xs outline-none focus-visible:outline-none disabled:cursor-not-allowed ${MOTION_TOKENS.transitionPreset.colors}`,
+  base: `flex items-center gap-xs outline-none focus-visible:outline-none disabled:cursor-not-allowed ${MOTION_TOKENS.transitionPreset.colors} ${INPUT_TOKENS.width.full}`,
   variants: {
     size: {
       sm: `${INPUT_TOKENS.height.sm} ${INPUT_TOKENS.padding.horizontal.sm} ${INPUT_TOKENS.padding.vertical.sm} ${INPUT_TOKENS.radius.sm} ${INPUT_TOKENS.fontSize.sm}`,
@@ -562,7 +562,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
           >
-            <div className="flex flex-1 flex-wrap items-center gap-xs overflow-hidden">
+            <div className="flex min-w-0 flex-1 flex-wrap items-center gap-xs overflow-hidden">
               {renderTriggerContent()}
             </div>
             <SelectIcon />

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Focus Order Playground - Interactive Demo
  *
  * Provides an interactive environment to explore and test tab order behavior.
@@ -93,7 +93,7 @@ export const FocusTracker: Story = {
             </Box>
             <Box className="mt-2">
               <Text size="xs" tone="muted">
-                History: {focusHistory.join(" → ") || "Start tabbing..."}
+                History: {focusHistory.join(" -> ") || "Start tabbing..."}
               </Text>
             </Box>
           </Box>
@@ -145,7 +145,7 @@ export const VisualVsDomOrder: Story = {
           <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
-                Normal DOM Order (1 → 2 → 3):
+                Normal DOM Order (1 to 2 to 3):
               </Text>
             </Box>
             <Box className="flex gap-2">
@@ -164,7 +164,7 @@ export const VisualVsDomOrder: Story = {
             </Box>
             <Box className="mb-2">
               <Text size="xs" tone="muted">
-                Visually: 3 → 2 → 1, but Tab order: 1 → 2 → 3 (DOM order)
+                Visually: 3 to 2 to 1, but Tab order: 1 to 2 to 3 (DOM order)
               </Text>
             </Box>
             <Box className="flex flex-row-reverse gap-2">
@@ -324,7 +324,7 @@ export const DisabledElementsDemo: Story = {
 
           <Box className="rounded-lg border border-success/30 bg-success/10 p-md">
             <Text size="sm">
-              <strong>Tab order:</strong> 1 → 3 → 4 → 6 (disabled elements skipped)
+              <strong>Tab order:</strong> 1 to 3 to 4 to 6 (disabled elements skipped)
             </Text>
           </Box>
         </Stack>
@@ -354,7 +354,7 @@ export const TabindexDemo: Story = {
           <Box className="rounded-lg border border-success/30 bg-success/10 p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
-                ✅ Allowed (tabindex="0"):
+                OK Allowed (tabindex="0"):
               </Text>
             </Box>
             <Box className="flex gap-2">
@@ -373,7 +373,7 @@ export const TabindexDemo: Story = {
           <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
-                ✅ Allowed (tabindex="-1"):
+                OK Allowed (tabindex="-1"):
               </Text>
             </Box>
             <Box className="mb-2">
@@ -404,7 +404,7 @@ export const TabindexDemo: Story = {
           <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
             <Box className="mb-2">
               <Text size="sm" weight="semibold">
-                ❌ FORBIDDEN (positive tabindex):
+                BAD FORBIDDEN (positive tabindex):
               </Text>
             </Box>
             <Box className="mb-2">

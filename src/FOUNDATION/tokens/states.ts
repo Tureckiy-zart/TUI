@@ -123,14 +123,14 @@ export function getButtonStateMatrix(
   surfaceColors: SurfaceColors,
 ): ComponentStateContract<StateMatrix> {
   // Primary states: use darker shades for hover/active, lighter for disabled
-  // Base primary uses ~50 (lighter for better visibility), hover uses 700, active uses 800, focus uses 50 (same as base for now), disabled uses 300, loading uses 50
-  const primaryBase = primaryColors[100]; // Base primary background (lighter for better visibility)
+  // Base primary uses ~600, hover uses 700, active uses 800, focus uses 600 (same as base for now), disabled uses 300, loading uses 600
+  const primaryBase = primaryColors[600]; // Base primary background
   const primaryHover = primaryColors[700]; // Darker for hover feedback
   const primaryActive = primaryColors[800]; // Even darker for pressed feedback
-  const primaryFocus = primaryColors[50]; // Focus uses base color (can be adjusted if needed)
+  const primaryFocus = primaryColors[600]; // Focus uses base color (can be adjusted if needed)
   const primaryDisabledBg = primaryColors[300]; // Lighter for disabled (muted)
   const primaryDisabledText = primaryColors[400]; // Slightly darker text for disabled
-  const primaryLoading = primaryColors[50]; // Loading state uses base color
+  const primaryLoading = primaryColors[600]; // Loading state uses base color
 
   // Secondary states: similar pattern
   const secondaryHover = secondaryColors[700];

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Motion Overview - Audit Dashboard
  *
  * Comprehensive dashboard showing all motion presets side-by-side with replay controls.
@@ -116,109 +116,109 @@ export const Overview: Story = {
         id: "fadeIn",
         name: "Fade In",
         className: "tm-motion-fade-in",
-        description: "Opacity: 0 → 1",
+        description: "Opacity: 0 -> 1",
       },
       {
         id: "fadeOut",
         name: "Fade Out",
         className: "tm-motion-fade-out",
-        description: "Opacity: 1 → 0",
+        description: "Opacity: 1 -> 0",
       },
       {
         id: "scaleIn",
         name: "Scale In",
         className: "tm-motion-scale-in",
-        description: "Scale: 0.95 → 1, Opacity: 0 → 1",
+        description: "Scale: 0.95 -> 1, Opacity: 0 -> 1",
       },
       {
         id: "scaleOut",
         name: "Scale Out",
         className: "tm-motion-scale-out",
-        description: "Scale: 1 → 0.95, Opacity: 1 → 0",
+        description: "Scale: 1 -> 0.95, Opacity: 1 -> 0",
       },
       {
         id: "slideUp",
         name: "Slide Up",
         className: "tm-motion-slide-up",
-        description: "TranslateY: 100% → 0, Opacity: 0 → 1",
+        description: "TranslateY: 100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "slideDown",
         name: "Slide Down",
         className: "tm-motion-slide-down",
-        description: "TranslateY: -100% → 0, Opacity: 0 → 1",
+        description: "TranslateY: -100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "slideLeft",
         name: "Slide Left",
         className: "tm-motion-slide-left",
-        description: "TranslateX: 100% → 0, Opacity: 0 → 1",
+        description: "TranslateX: 100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "slideRight",
         name: "Slide Right",
         className: "tm-motion-slide-right",
-        description: "TranslateX: -100% → 0, Opacity: 0 → 1",
+        description: "TranslateX: -100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "fadeScale",
         name: "Fade Scale",
         className: "tm-motion-fade-scale",
-        description: "Scale: 0.95 → 1, Opacity: 0 → 1",
+        description: "Scale: 0.95 -> 1, Opacity: 0 -> 1",
       },
       {
         id: "fadeSlideUp",
         name: "Fade Slide Up",
         className: "tm-motion-fade-slide-up",
-        description: "TranslateY: 100% → 0, Opacity: 0 → 1",
+        description: "TranslateY: 100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "fadeSlideDown",
         name: "Fade Slide Down",
         className: "tm-motion-fade-slide-down",
-        description: "TranslateY: -100% → 0, Opacity: 0 → 1",
+        description: "TranslateY: -100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "fadeSlideLeft",
         name: "Fade Slide Left",
         className: "tm-motion-fade-slide-left",
-        description: "TranslateX: 100% → 0, Opacity: 0 → 1",
+        description: "TranslateX: 100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "fadeSlideRight",
         name: "Fade Slide Right",
         className: "tm-motion-fade-slide-right",
-        description: "TranslateX: -100% → 0, Opacity: 0 → 1",
+        description: "TranslateX: -100% -> 0, Opacity: 0 -> 1",
       },
       {
         id: "fadeScaleOut",
         name: "Fade Scale Out",
         className: "tm-motion-fade-scale-out",
-        description: "Scale: 1 → 0.95, Opacity: 1 → 0",
+        description: "Scale: 1 -> 0.95, Opacity: 1 -> 0",
       },
       {
         id: "fadeSlideUpOut",
         name: "Fade Slide Up Out",
         className: "tm-motion-fade-slide-up-out",
-        description: "TranslateY: 0 → 100%, Opacity: 1 → 0",
+        description: "TranslateY: 0 -> 100%, Opacity: 1 -> 0",
       },
       {
         id: "fadeSlideDownOut",
         name: "Fade Slide Down Out",
         className: "tm-motion-fade-slide-down-out",
-        description: "TranslateY: 0 → -100%, Opacity: 1 → 0",
+        description: "TranslateY: 0 -> -100%, Opacity: 1 -> 0",
       },
       {
         id: "fadeSlideLeftOut",
         name: "Fade Slide Left Out",
         className: "tm-motion-fade-slide-left-out",
-        description: "TranslateX: 0 → 100%, Opacity: 1 → 0",
+        description: "TranslateX: 0 -> 100%, Opacity: 1 -> 0",
       },
       {
         id: "fadeSlideRightOut",
         name: "Fade Slide Right Out",
         className: "tm-motion-fade-slide-right-out",
-        description: "TranslateX: 0 → -100%, Opacity: 1 → 0",
+        description: "TranslateX: 0 -> -100%, Opacity: 1 -> 0",
       },
     ];
 
@@ -241,7 +241,7 @@ export const Overview: Story = {
                 compatibility.
               </Text>
             </Box>
-            <Button onClick={replayAll}>🔄 Replay All Animations</Button>
+            <Button onClick={replayAll}>Replay All Animations</Button>
           </Flex>
 
           <Grid cols={3} gap={4}>

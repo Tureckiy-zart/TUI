@@ -1,4 +1,4 @@
-/**
+﻿/**
  * A11Y Overview - Governance Showcase
  *
  * Demonstrates accessibility patterns across the design system.

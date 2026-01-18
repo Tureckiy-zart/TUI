@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Copy, Edit, Share, Trash2 } from "lucide-react";
@@ -150,11 +150,11 @@ export const SizesGallery: Story = {
 
 /**
  * Matrix Story - REQUIRED for components with BOTH size AND variant props
- * Shows all variants × all sizes in a grid layout
+ * Shows all variants - all sizes in a grid layout
  * Reference: VARIANTS_SIZE_CANON.md
  */
 export const Matrix: Story = {
-  name: "Matrix (Variants × Sizes)",
+  name: "Matrix (Variants - Sizes)",
   render: () => {
     const variants: Array<
       "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
@@ -166,7 +166,7 @@ export const Matrix: Story = {
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">Dropdown Matrix</h3>
           <p className="text-sm text-[hsl(var(--tm-text-muted))]">
-            All variants × all sizes. Each cell shows a dropdown with that variant/size combination.
+            All variants - all sizes. Each cell shows a dropdown with that variant/size combination.
           </p>
         </div>
         <div className="overflow-x-auto">
@@ -230,7 +230,7 @@ export const Matrix: Story = {
 
 /**
  * States Story - REQUIRED for components with public states/interactive behavior
- * Shows all variants × all sizes × all states (default, disabled, etc.)
+ * Shows all variants - all sizes - all states (default, disabled, etc.)
  * Reference: VARIANTS_SIZE_CANON.md
  */
 export const States: Story = {
@@ -478,9 +478,9 @@ export const KeyboardNavigation: Story = {
               - Activate item
             </li>
             <li>
-              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↑</kbd>{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">^</kbd>{" "}
               /{" "}
-              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↓</kbd>{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">v</kbd>{" "}
               - Navigate items (via Popover)
             </li>
             <li>

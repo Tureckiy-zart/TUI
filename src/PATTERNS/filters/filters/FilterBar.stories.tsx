@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import { FilterBar, type FilterManager } from "./FilterBar";
 
@@ -116,9 +116,11 @@ function useStoryFilterManager(initialState?: Partial<FilterManager>): FilterMan
       summary.push(`Date: ${start} - ${end}`);
     }
     if (priceRange.min !== null || priceRange.max !== null) {
-      const min = priceRange.min ?? 0;
-      const max = priceRange.max ?? "∞";
-      summary.push(`Price: €${min} - €${max}`);
+      const min = priceRange.min;
+      const max = priceRange.max;
+      const minLabel = min === null ? "Any" : `$${min}`;
+      const maxLabel = max === null ? "Any" : `$${max}`;
+      summary.push(`Price: ${minLabel} - ${maxLabel}`);
     }
     return summary;
   }, [search, category, dateRange, priceRange]);

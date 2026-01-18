@@ -1,9 +1,12 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { TicketCard } from "./TicketCard";
 import type { TicketCardSize, TicketCardVariant } from "./TicketCard.types";
+
+const DEFAULT_IMAGE_URL =
+  "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800&h=500&fit=crop";
 
 const meta: Meta<typeof TicketCard> = {
   title: "UI / Patterns / Cards / TicketCard",
@@ -33,7 +36,7 @@ const meta: Meta<typeof TicketCard> = {
     },
     price: {
       control: { type: "text" },
-      description: "Price display string with currency (e.g., '€20', optional)",
+      description: "Price display string with currency (e.g., '$20', optional)",
     },
     capacity: {
       control: { type: "text" },
@@ -128,15 +131,16 @@ export const Default: Story = {
   args: {
     title: "VIP Ticket",
     date: "2024-12-25",
-    price: "€50",
+    price: "$50",
     capacity: "10 tickets left",
     purchaseLabel: "Buy Now",
     purchaseUrl: "https://example.com/purchase",
+    imageUrl: DEFAULT_IMAGE_URL,
   },
 };
 
 /**
- * Matrix Story - All variants × all sizes
+ * Matrix Story - All variants - all sizes
  * REQUIRED per VARIANTS_SIZE_CANON.md (component has both size AND variant props)
  */
 export const Matrix: Story = {
@@ -152,9 +156,10 @@ export const Matrix: Story = {
               key={`${size}-${variant}`}
               title={`${size} ${variant} Ticket`}
               date="2024-12-25"
-              price="€50"
+              price="$50"
               capacity="10 tickets left"
               purchaseLabel="Buy Now"
+              imageUrl={DEFAULT_IMAGE_URL}
               size={size}
               variant={variant}
               className="w-[300px]"
@@ -177,51 +182,56 @@ export const States: Story = {
         <TicketCard
           title="Featured Ticket"
           date="2024-12-25"
-          price="€50"
+          price="$50"
           capacity="10 tickets left"
           purchaseLabel="Buy Now"
           featured={true}
           featuredBadgeText="Featured"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
         <TicketCard
           title="VIP Ticket"
           date="2024-12-25"
-          price="€100"
+          price="$100"
           capacity="5 tickets left"
           purchaseLabel="Buy Now"
           vipBadgeText="VIP"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
         <TicketCard
           title="Discounted Ticket"
           date="2024-12-25"
-          price="€30"
+          price="$30"
           capacity="20 tickets left"
           purchaseLabel="Buy Now"
           discountBadgeText="20% OFF"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
         <TicketCard
           title="Sold Out Ticket"
           date="2024-12-25"
-          price="€50"
+          price="$50"
           purchaseLabel="Buy Now"
           availability="sold_out"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
         <TicketCard
           title="Available Soon Ticket"
           date="2024-12-25"
-          price="€50"
+          price="$50"
           purchaseLabel="Buy Now"
           availability="available_soon"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
         <TicketCard
           title="Ticket Without Image"
           date="2024-12-25"
-          price="€50"
+          price="$50"
           capacity="10 tickets left"
           purchaseLabel="Buy Now"
           showImage={false}
@@ -230,14 +240,20 @@ export const States: Story = {
         <TicketCard
           title="Ticket With Link"
           date="2024-12-25"
-          price="€50"
+          price="$50"
           capacity="10 tickets left"
           purchaseLabel="Buy Now"
           href="/tickets/1"
           purchaseUrl="https://example.com/purchase"
+          imageUrl={DEFAULT_IMAGE_URL}
           className="w-[300px]"
         />
-        <TicketCard title="Minimal Ticket" purchaseLabel="Buy Now" className="w-[300px]" />
+        <TicketCard
+          title="Minimal Ticket"
+          purchaseLabel="Buy Now"
+          imageUrl={DEFAULT_IMAGE_URL}
+          className="w-[300px]"
+        />
       </div>
     );
   },
@@ -257,9 +273,10 @@ export const SizesGallery: Story = {
             key={size}
             title={`${size} Ticket`}
             date="2024-12-25"
-            price="€50"
+            price="$50"
             capacity="10 tickets left"
             purchaseLabel="Buy Now"
+            imageUrl={DEFAULT_IMAGE_URL}
             size={size}
             className="w-[300px]"
           />
@@ -276,10 +293,11 @@ export const Compact: Story = {
   args: {
     title: "Compact Ticket",
     date: "2024-12-25",
-    price: "€30",
+    price: "$30",
     capacity: "5 tickets left",
     purchaseLabel: "Buy Now",
     size: "compact",
+    imageUrl: DEFAULT_IMAGE_URL,
   },
 };
 
@@ -290,11 +308,12 @@ export const Featured: Story = {
   args: {
     title: "Featured Ticket",
     date: "2024-12-25",
-    price: "€100",
+    price: "$100",
     capacity: "3 tickets left",
     purchaseLabel: "Buy Now",
     featured: true,
     featuredBadgeText: "Featured",
+    imageUrl: DEFAULT_IMAGE_URL,
   },
 };
 
@@ -315,11 +334,12 @@ export const Accessibility: Story = {
           <TicketCard
             title="VIP Ticket"
             date="2024-12-25"
-            price="€50"
+            price="$50"
             capacity="10 tickets left"
             purchaseLabel="Buy Now"
             href="/tickets/1"
             purchaseUrl="https://example.com/purchase"
+            imageUrl={DEFAULT_IMAGE_URL}
             className="w-[300px]"
           />
         </div>
@@ -333,9 +353,10 @@ export const Accessibility: Story = {
           <TicketCard
             title="VIP Ticket"
             date="2024-12-25"
-            price="€50"
+            price="$50"
             capacity="10 tickets left"
             purchaseLabel="Buy Now"
+            imageUrl={DEFAULT_IMAGE_URL}
             className="w-[300px]"
           />
         </div>
@@ -348,13 +369,14 @@ export const Accessibility: Story = {
           <TicketCard
             title="VIP Ticket"
             date="2024-12-25"
-            price="€100"
+            price="$100"
             capacity="5 tickets left"
             purchaseLabel="Buy Now"
             featured={true}
             featuredBadgeText="Featured"
             vipBadgeText="VIP"
             discountBadgeText="20% OFF"
+            imageUrl={DEFAULT_IMAGE_URL}
             className="w-[300px]"
           />
         </div>
@@ -368,9 +390,10 @@ export const Accessibility: Story = {
           <TicketCard
             title="Sold Out Ticket"
             date="2024-12-25"
-            price="€50"
+            price="$50"
             purchaseLabel="Buy Now"
             availability="sold_out"
+            imageUrl={DEFAULT_IMAGE_URL}
             className="w-[300px]"
           />
         </div>

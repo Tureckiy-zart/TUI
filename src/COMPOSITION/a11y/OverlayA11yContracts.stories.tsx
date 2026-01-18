@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Overlay A11Y Contracts
  *
  * Demonstrates accessibility contracts for overlay components (Modal, Dialog, Drawer).
@@ -288,10 +288,10 @@ export const FocusManagementReference: Story = {
                   </Text>
                 </Box>
                 <Stack spacing={2} className="list-inside list-disc">
-                  <Text size="sm">• Focus trap MUST be implemented for modal overlays</Text>
-                  <Text size="sm">• Focus MUST move to first interactive element on open</Text>
-                  <Text size="sm">• Focus MUST restore to trigger element on close</Text>
-                  <Text size="sm">• Tab/Shift+Tab MUST cycle within trap boundary</Text>
+                  <Text size="sm">- Focus trap MUST be implemented for modal overlays</Text>
+                  <Text size="sm">- Focus MUST move to first interactive element on open</Text>
+                  <Text size="sm">- Focus MUST restore to trigger element on close</Text>
+                  <Text size="sm">- Tab/Shift+Tab MUST cycle within trap boundary</Text>
                 </Stack>
               </Box>
 

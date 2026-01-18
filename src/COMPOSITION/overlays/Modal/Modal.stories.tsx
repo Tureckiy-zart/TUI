@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
@@ -11,8 +11,8 @@ import { Button } from "@/PRIMITIVES/Button";
 // ============================================================================
 
 /**
- * ModalExample - локальный helper для stories
- * ⚠️ ВАЖНО: файл только для Storybook, не экспортируется из библиотеки, не считается public API
+ * ModalExample - local helper for stories
+ * IMPORTANT: Storybook-only helper. Not exported from library and not part of public API.
  */
 type ModalExampleProps = {
   title?: string;
@@ -80,8 +80,8 @@ function ModalExample({
 }
 
 /**
- * StoryGrid - вертикальное сравнение (grid layout)
- * ⚠️ Inline styles допустимы здесь, потому что это Storybook layout, не компонент.
+ * StoryGrid - vertical comparison (grid layout)
+ * Inline styles are allowed here because this is Storybook layout, not a component.
  */
 function StoryGrid({ children }: { children: React.ReactNode }) {
   return (
@@ -98,8 +98,8 @@ function StoryGrid({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * StoryRow - горизонтальное сравнение (flex layout)
- * ⚠️ Inline styles допустимы здесь, потому что это Storybook layout, не компонент.
+ * StoryRow - horizontal comparison (flex layout)
+ * Inline styles are allowed here because this is Storybook layout, not a component.
  */
 function StoryRow({ children }: { children: React.ReactNode }) {
   return (
@@ -725,7 +725,7 @@ export const LongContent: Story = {
 /**
  * WithBody Story
  * Demonstrates Modal.Body governed slot for scroll and padding
- * Shows canonical usage pattern with Header → Body → Footer structure
+ * Shows canonical usage pattern with Header -> Body -> Footer structure
  */
 export const WithBody: Story = {
   render: () => {

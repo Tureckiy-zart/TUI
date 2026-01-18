@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import {
   Spinner,
   type SpinnerEasing,
@@ -120,7 +120,7 @@ export const SizesGallery: Story = {
 
 /**
  * Matrix story (REQUIRED by VARIANTS_SIZE_CANON)
- * Demonstrates all variants × all sizes × all tones
+ * Demonstrates all variants - all sizes - all tones
  */
 export const Matrix: Story = {
   render: () => {
@@ -166,7 +166,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "**Canonical Matrix Story:** Demonstrates all variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple) × all sizes (xs, sm, md, lg, xl, 2xl, 3xl) × all tones (primary, muted, subtle). This story is required per VARIANTS_SIZE_CANON.md for components with variant, size, and tone props.",
+          "**Canonical Matrix Story:** Demonstrates all variants (circle, dots, bounce, linear, bars, pulse, wave, orbit, bars-horizontal, ripple) - all sizes (xs, sm, md, lg, xl, 2xl, 3xl) - all tones (primary, muted, subtle). This story is required per VARIANTS_SIZE_CANON.md for components with variant, size, and tone props.",
       },
     },
   },
@@ -174,7 +174,7 @@ export const Matrix: Story = {
 
 /**
  * States story (REQUIRED by VARIANTS_SIZE_CANON)
- * Demonstrates all tone variants × all size variants for default (circle) variant
+ * Demonstrates all tone variants - all size variants for default (circle) variant
  */
 export const States: Story = {
   render: () => {
@@ -203,7 +203,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "**Canonical States Story:** Demonstrates all tone variants (primary, muted, subtle) × all size variants (xs, sm, md, lg, xl, 2xl, 3xl) for circle variant. This story is required per VARIANTS_SIZE_CANON.md for components with both size and tone props.",
+          "**Canonical States Story:** Demonstrates all tone variants (primary, muted, subtle) - all size variants (xs, sm, md, lg, xl, 2xl, 3xl) for circle variant. This story is required per VARIANTS_SIZE_CANON.md for components with both size and tone props.",
       },
     },
   },

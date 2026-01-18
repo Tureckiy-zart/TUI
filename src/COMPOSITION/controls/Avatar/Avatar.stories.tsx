@@ -1,4 +1,4 @@
-import { Stack } from "@/COMPOSITION/layout/Stack";
+﻿import { Stack } from "@/COMPOSITION/layout/Stack";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -85,8 +85,8 @@ export const WithStatus: Story = {
 };
 
 /**
- * Matrix story: All size × shape combinations
- * 6 sizes × 2 shapes = 12 combinations
+ * Matrix story: All size - shape combinations
+ * 6 sizes - 2 shapes = 12 combinations
  */
 export const Matrix: Story = {
   render: () => {
@@ -282,9 +282,9 @@ export const FallbackStates: Story = {
   render: () => (
     <Stack spacing="lg" className="p-4">
       <Heading level={2}>Fallback States</Heading>
-      <Text>Demonstrates different fallback behaviors</Text>
+      <Text>Shows how Avatar picks a fallback when an image is missing or fails.</Text>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-8">
         <Stack spacing="sm" align="center">
           <Avatar
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
@@ -292,31 +292,45 @@ export const FallbackStates: Story = {
             size="lg"
           />
           <Text size="sm" tone="muted">
-            With Image
+            Image present
+          </Text>
+        </Stack>
+
+        <Stack spacing="sm" align="center">
+          <Avatar
+            src="https://images.unsplash.com/photo-0000000000000-does-not-exist?w=100&h=100&fit=crop"
+            alt="Broken Image"
+            size="lg"
+          />
+          <Text size="sm" tone="muted">
+            Image fails to load (fallback)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Alice Brown" size="lg" />
           <Text size="sm" tone="muted">
-            Initials (AB)
+            No image: initials (AB)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Bob" size="lg" />
           <Text size="sm" tone="muted">
-            Single Initial (B)
+            No image: single initial (B)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="User" fallback="?" size="lg" />
           <Text size="sm" tone="muted">
-            Custom Fallback
+            Custom fallback (?)
           </Text>
         </Stack>
       </div>
+      <Text size="sm" tone="muted">
+        Note: If image fails to load, Avatar falls back to initials or custom fallback.
+      </Text>
     </Stack>
   ),
   parameters: {
@@ -330,70 +344,96 @@ export const FallbackStates: Story = {
 };
 
 /**
+ * Image fails to load (explicit example)
+ */
+export const ImageFailsToLoad: Story = {
+  render: () => (
+    <Stack spacing="md" className="p-4">
+      <Heading level={2}>Image Fallback (Broken URL)</Heading>
+      <Text size="sm" tone="muted">
+        This example forces an image load failure to show the fallback behavior clearly.
+      </Text>
+      <Stack spacing="sm" align="center">
+        <Avatar
+          src="https://images.unsplash.com/photo-0000000000000-does-not-exist?w=100&h=100&fit=crop"
+          alt="Broken Image"
+          size="lg"
+        />
+        <Text size="sm" tone="muted">
+          Broken image URL, fallback shown
+        </Text>
+      </Stack>
+    </Stack>
+  ),
+};
+
+/**
  * NEW: Accessibility Demonstration (10/10 Feature)
  * Shows how aria-labels work with and without status
  */
 export const AccessibilityDemo: Story = {
   render: () => (
-    <Stack spacing="lg" className="max-w-3xl p-4">
+    <Stack spacing="md" className="max-w-3xl p-4">
       <Heading level={2}>Accessibility Features</Heading>
-      <Text>
-        Each Avatar has a computed aria-label for screen readers. Inspect the DOM or use a screen
-        reader to hear the full context.
+      <Text size="sm" tone="muted">
+        aria-label is computed from name + optional status. Use a screen reader or inspect the
+        element to verify.
       </Text>
 
-      <Stack
-        spacing="md"
-        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
-      >
-        <Heading level={4}>Without Status</Heading>
-        <Text size="sm" tone="muted">
-          aria-label: "John Doe"
-        </Text>
-        <Avatar
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
-          alt="John Doe"
-          size="lg"
-        />
-      </Stack>
+      <div className="grid gap-md sm:grid-cols-2">
+        <Stack
+          spacing="sm"
+          className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-4"
+        >
+          <Heading level={4}>Without Status</Heading>
+          <Text size="sm" tone="muted">
+            aria-label: <span className="font-mono">"John Doe"</span>
+          </Text>
+          <Avatar
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+            alt="John Doe"
+            size="lg"
+          />
+        </Stack>
 
-      <Stack
-        spacing="md"
-        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
-      >
-        <Heading level={4}>With Status: Online</Heading>
-        <Text size="sm" tone="muted">
-          aria-label: "Jane Smith (online)"
-        </Text>
-        <Avatar
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
-          alt="Jane Smith"
-          size="lg"
-          status="online"
-        />
-      </Stack>
+        <Stack
+          spacing="sm"
+          className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-4"
+        >
+          <Heading level={4}>Status: Online</Heading>
+          <Text size="sm" tone="muted">
+            aria-label: <span className="font-mono">"Jane Smith (online)"</span>
+          </Text>
+          <Avatar
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+            alt="Jane Smith"
+            size="lg"
+            status="online"
+          />
+        </Stack>
 
-      <Stack
-        spacing="md"
-        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
-      >
-        <Heading level={4}>With Status: Busy</Heading>
-        <Text size="sm" tone="muted">
-          aria-label: "Bob Wilson (busy)"
-        </Text>
-        <Avatar alt="Bob Wilson" size="lg" status="busy" />
-      </Stack>
+        <Stack
+          spacing="sm"
+          className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-4"
+        >
+          <Heading level={4}>Status: Busy</Heading>
+          <Text size="sm" tone="muted">
+            aria-label: <span className="font-mono">"Bob Wilson (busy)"</span>
+          </Text>
+          <Avatar alt="Bob Wilson" size="lg" status="busy" />
+        </Stack>
 
-      <Stack
-        spacing="md"
-        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
-      >
-        <Heading level={4}>With Status: Offline</Heading>
-        <Text size="sm" tone="muted">
-          aria-label: "Carol White (offline)"
-        </Text>
-        <Avatar alt="Carol White" size="lg" status="offline" />
-      </Stack>
+        <Stack
+          spacing="sm"
+          className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-4"
+        >
+          <Heading level={4}>Status: Offline</Heading>
+          <Text size="sm" tone="muted">
+            aria-label: <span className="font-mono">"Carol White (offline)"</span>
+          </Text>
+          <Avatar alt="Carol White" size="lg" status="offline" />
+        </Stack>
+      </div>
     </Stack>
   ),
   parameters: {

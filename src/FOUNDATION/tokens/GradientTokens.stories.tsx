@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * Gradient Tokens Storybook Gallery
@@ -751,22 +751,22 @@ export const ByCategory: Story = {
             {
               name: "GRADIENT_TOKENS.brand.primary",
               value: GRADIENT_TOKENS.brand.primary,
-              description: "Horizontal primary → accent",
+              description: "Horizontal primary -> accent",
             },
             {
               name: "GRADIENT_TOKENS.brand.primaryVertical",
               value: GRADIENT_TOKENS.brand.primaryVertical,
-              description: "Vertical primary → accent",
+              description: "Vertical primary -> accent",
             },
             {
               name: "GRADIENT_TOKENS.brand.primaryDiagonal",
               value: GRADIENT_TOKENS.brand.primaryDiagonal,
-              description: "Diagonal primary → accent",
+              description: "Diagonal primary -> accent",
             },
             {
               name: "GRADIENT_TOKENS.brand.reversed",
               value: GRADIENT_TOKENS.brand.reversed,
-              description: "Reversed accent → primary",
+              description: "Reversed accent -> primary",
             },
             {
               name: "GRADIENT_TOKENS.brand.featured",

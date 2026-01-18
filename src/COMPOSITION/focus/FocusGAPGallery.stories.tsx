@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Focus GAP Gallery - Governance Showcase
  *
  * Demonstrates all ACCEPTABLE Focus GAPs in the design system.
@@ -48,7 +48,7 @@ const meta: Meta = {
           - GAP-2: Toast tab order insertion
           - GAP-4: Stepper non-interactive steps
           
-          **Note:** GAP-3 (Drawer focus-visible) is classified as BUG and not shown here.
+          **Note:** GAP-3 (Drawer focus-visible) is a known issue and is not shown here.
           
           **Reference:** See [FOCUS_GAPS.md](../../../../docs/reports/audit/FOCUS_GAPS.md)
         `,
@@ -91,17 +91,17 @@ export const Overview: Story = {
               <Stack spacing={3} className="mt-4">
                 <Box className="rounded-md border border-success/30 bg-success/10 p-sm">
                   <Text size="sm">
-                    <strong>GAP-1:</strong> Popover Non-Modal — Focus can leave popover
+                    <strong>GAP-1:</strong> Popover Non-Modal - Focus can leave popover
                   </Text>
                 </Box>
                 <Box className="rounded-md border border-success/30 bg-success/10 p-sm">
                   <Text size="sm">
-                    <strong>GAP-2:</strong> Toast Tab Order — Toast appears in tab order
+                    <strong>GAP-2:</strong> Toast Tab Order - Toast appears in tab order
                   </Text>
                 </Box>
                 <Box className="rounded-md border border-success/30 bg-success/10 p-sm">
                   <Text size="sm">
-                    <strong>GAP-4:</strong> Stepper Read-Only — Steps not keyboard-navigable
+                    <strong>GAP-4:</strong> Stepper Read-Only - Steps not keyboard-navigable
                   </Text>
                 </Box>
               </Stack>
@@ -112,7 +112,8 @@ export const Overview: Story = {
               <Box className="mt-2">
                 <Text size="sm">
                   <strong>GAP-3:</strong> Drawer focus-visible inconsistency is classified as
-                  <strong> BUG</strong>, not ACCEPTABLE GAP. It must be fixed before FOCUS_LOCK.
+                  <strong> Known issue</strong>, not an acceptable gap. It must be fixed before
+                  FOCUS_LOCK.
                 </Text>
               </Box>
             </Box>
@@ -173,12 +174,12 @@ export const GAP1_PopoverNonModal: Story = {
             <Heading level={3}>Why This GAP is Acceptable</Heading>
             <Stack spacing={2} className="mt-2">
               <Text size="sm">
-                • Popover is a <strong>non-modal</strong> overlay pattern by design
+                - Popover is a <strong>non-modal</strong> overlay pattern by design
               </Text>
-              <Text size="sm">• Non-modal overlays allow interaction with surrounding content</Text>
-              <Text size="sm">• Focus trap would contradict the semantic purpose of Popover</Text>
-              <Text size="sm">• Matches native HTML {"<details>/<summary>"} behavior</Text>
-              <Text size="sm">• Radix Popover intentionally does not trap focus</Text>
+              <Text size="sm">- Non-modal overlays allow interaction with surrounding content</Text>
+              <Text size="sm">- Focus trap would contradict the semantic purpose of Popover</Text>
+              <Text size="sm">- Matches native HTML {"<details>/<summary>"} behavior</Text>
+              <Text size="sm">- Radix Popover intentionally does not trap focus</Text>
             </Stack>
           </Box>
 
@@ -241,12 +242,12 @@ export const GAP2_ToastTabOrder: Story = {
               <Heading level={3}>Why This GAP is Acceptable</Heading>
               <Stack spacing={2} className="mt-2">
                 <Text size="sm">
-                  • Toast notifications appear asynchronously and must be accessible
+                  - Toast notifications appear asynchronously and must be accessible
                 </Text>
-                <Text size="sm">• Inserting into DOM necessarily affects tab order</Text>
-                <Text size="sm">• Removing Toast from tab order would make it inaccessible</Text>
-                <Text size="sm">• Current behavior matches OS-level notification patterns</Text>
-                <Text size="sm">• WAI-ARIA recommends allowing keyboard access to alerts</Text>
+                <Text size="sm">- Inserting into DOM necessarily affects tab order</Text>
+                <Text size="sm">- Removing Toast from tab order would make it inaccessible</Text>
+                <Text size="sm">- Current behavior matches OS-level notification patterns</Text>
+                <Text size="sm">- WAI-ARIA recommends allowing keyboard access to alerts</Text>
               </Stack>
             </Box>
 
@@ -325,14 +326,14 @@ export const GAP4_StepperReadOnly: Story = {
             <Heading level={3}>Why This GAP is Acceptable</Heading>
             <Stack spacing={2} className="mt-2">
               <Text size="sm">
-                • Stepper is a <strong>read-only progress indicator</strong>
+                - Stepper is a <strong>read-only progress indicator</strong>
               </Text>
-              <Text size="sm">• Steps represent state, not interactive controls</Text>
+              <Text size="sm">- Steps represent state, not interactive controls</Text>
               <Text size="sm">
-                • Navigation is handled by external controls (Next/Prev buttons)
+                - Navigation is handled by external controls (Next/Prev buttons)
               </Text>
-              <Text size="sm">• Adding interactivity would change Stepper's semantic purpose</Text>
-              <Text size="sm">• Active step is announced via aria-current="step"</Text>
+              <Text size="sm">- Adding interactivity would change Stepper's semantic purpose</Text>
+              <Text size="sm">- Active step is announced via aria-current="step"</Text>
             </Stack>
           </Box>
 
@@ -388,7 +389,7 @@ export const Summary: Story = {
                   <td className="px-4 py-2">Focus can leave popover (non-modal)</td>
                   <td className="px-4 py-2">
                     <span className="rounded bg-success/20 px-2 py-0.5 text-success">
-                      ✅ ACCEPTABLE
+                      ACCEPTABLE
                     </span>
                   </td>
                 </tr>
@@ -398,17 +399,7 @@ export const Summary: Story = {
                   <td className="px-4 py-2">Toast appears in tab order</td>
                   <td className="px-4 py-2">
                     <span className="rounded bg-success/20 px-2 py-0.5 text-success">
-                      ✅ ACCEPTABLE
-                    </span>
-                  </td>
-                </tr>
-                <tr className="border-b border-[hsl(var(--tm-border-default))]/50">
-                  <td className="px-4 py-2 font-mono">GAP-3</td>
-                  <td className="px-4 py-2">Drawer</td>
-                  <td className="px-4 py-2">Focus-visible inconsistency</td>
-                  <td className="px-4 py-2">
-                    <span className="rounded bg-[hsl(var(--tm-destructive))]/20 px-2 py-0.5 text-destructive">
-                      ❌ BUG
+                      ACCEPTABLE
                     </span>
                   </td>
                 </tr>
@@ -418,12 +409,19 @@ export const Summary: Story = {
                   <td className="px-4 py-2">Steps not keyboard-navigable</td>
                   <td className="px-4 py-2">
                     <span className="rounded bg-success/20 px-2 py-0.5 text-success">
-                      ✅ ACCEPTABLE
+                      ACCEPTABLE
                     </span>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </Box>
+
+          <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
+            <Text size="sm">
+              <strong>Known bug (excluded from Acceptable):</strong> GAP-3 (Drawer focus-visible
+              inconsistency). Tracked separately and must be fixed before FOCUS_LOCK.
+            </Text>
           </Box>
 
           <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">

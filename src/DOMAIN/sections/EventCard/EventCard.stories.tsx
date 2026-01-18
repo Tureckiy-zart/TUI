@@ -1,9 +1,12 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { EventCard } from "./EventCard";
 import type { EventCardSize, EventCardVariant } from "./EventCard.types";
+
+const DEFAULT_IMAGE_URL =
+  "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800&h=500&fit=crop";
 
 const meta: Meta<typeof EventCard> = {
   title: "UI / Domain / EventCard",
@@ -37,7 +40,7 @@ const meta: Meta<typeof EventCard> = {
     },
     price: {
       control: { type: "text" },
-      description: "Price display string with currency (e.g., '€20 - €50', optional)",
+      description: "Price display string with currency (e.g., '$20 - $50', optional)",
     },
     imageUrl: {
       control: { type: "text" },
@@ -114,8 +117,8 @@ export const Default: Story = {
     description: "Join us for an amazing summer music festival with top artists",
     date: "2024-07-15",
     venueName: "Central Park",
-    price: "€50 - €150",
-    imageUrl: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800",
+    price: "$50 - $150",
+    imageUrl: DEFAULT_IMAGE_URL,
     getTicketsLabel: "Get Tickets",
   },
   parameters: {
@@ -128,7 +131,7 @@ export const Default: Story = {
 };
 
 /**
- * Matrix Story - All variants × all sizes
+ * Matrix Story - All variants - all sizes
  * REQUIRED per VARIANTS_SIZE_CANON.md (component has both size AND variant props)
  */
 export const Matrix: Story = {
@@ -146,7 +149,8 @@ export const Matrix: Story = {
               description="Event description"
               date="2024-07-15"
               venueName="Venue Name"
-              price="€50"
+              price="$50"
+              imageUrl={DEFAULT_IMAGE_URL}
               getTicketsLabel="Get Tickets"
               size={size}
               variant={variant}
@@ -162,7 +166,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix of all EventCard variants × sizes. Demonstrates all combinations of size (default, compact) and variant (default, featured) props.",
+          "Matrix of all EventCard variants - sizes. Demonstrates all combinations of size (default, compact) and variant (default, featured) props.",
       },
     },
   },
@@ -185,7 +189,8 @@ export const SizesGallery: Story = {
             description="Event description"
             date="2024-07-15"
             venueName="Venue Name"
-            price="€50"
+            price="$50"
+            imageUrl={DEFAULT_IMAGE_URL}
             getTicketsLabel="Get Tickets"
             size={size}
             className="w-[300px]"
@@ -218,7 +223,8 @@ export const States: Story = {
           description="This is a featured event with badge"
           date="2024-07-15"
           venueName="Central Park"
-          price="€50"
+          price="$50"
+          imageUrl={DEFAULT_IMAGE_URL}
           featured={true}
           featuredBadgeText="Featured"
           getTicketsLabel="Get Tickets"
@@ -229,7 +235,7 @@ export const States: Story = {
           description="This event has no image"
           date="2024-07-15"
           venueName="Venue Name"
-          price="€50"
+          price="$50"
           showImage={false}
           getTicketsLabel="Get Tickets"
           className="w-[300px]"
@@ -240,6 +246,7 @@ export const States: Story = {
           date="2024-07-15"
           venueName="Venue Name"
           ticketUrl="https://example.com/tickets"
+          imageUrl={DEFAULT_IMAGE_URL}
           getTicketsLabel="Buy Tickets"
           className="w-[300px]"
         />
@@ -248,14 +255,16 @@ export const States: Story = {
           description="This event title links to detail page"
           date="2024-07-15"
           venueName="Venue Name"
-          price="€50"
+          price="$50"
           href="/events/1"
+          imageUrl={DEFAULT_IMAGE_URL}
           getTicketsLabel="Get Tickets"
           className="w-[300px]"
         />
         <EventCard
           title="Minimal Event"
           description="Event with minimal information"
+          imageUrl={DEFAULT_IMAGE_URL}
           getTicketsLabel="Get Tickets"
           className="w-[300px]"
         />
@@ -282,7 +291,8 @@ export const Compact: Story = {
     description: "This is a compact size event card",
     date: "2024-07-15",
     venueName: "Venue Name",
-    price: "€50",
+    price: "$50",
+    imageUrl: DEFAULT_IMAGE_URL,
     size: "compact",
     getTicketsLabel: "Get Tickets",
   },
@@ -304,7 +314,8 @@ export const Featured: Story = {
     description: "This is a featured event with special styling",
     date: "2024-07-15",
     venueName: "Central Park",
-    price: "€50 - €150",
+    price: "$50 - $150",
+    imageUrl: DEFAULT_IMAGE_URL,
     featured: true,
     featuredBadgeText: "Featured",
     getTicketsLabel: "Get Tickets",
@@ -328,7 +339,7 @@ export const WithImage: Story = {
     description: "This event has an image",
     date: "2024-07-15",
     venueName: "Venue Name",
-    price: "€50",
+    price: "$50",
     imageUrl: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800",
     getTicketsLabel: "Get Tickets",
   },
@@ -350,7 +361,7 @@ export const WithoutImage: Story = {
     description: "This event has no image (shows placeholder)",
     date: "2024-07-15",
     venueName: "Venue Name",
-    price: "€50",
+    price: "$50",
     showImage: true,
     getTicketsLabel: "Get Tickets",
   },
@@ -374,6 +385,7 @@ export const WithTicketLink: Story = {
     date: "2024-07-15",
     venueName: "Venue Name",
     ticketUrl: "https://example.com/tickets",
+    imageUrl: DEFAULT_IMAGE_URL,
     getTicketsLabel: "Buy Tickets",
   },
   parameters: {
@@ -395,8 +407,9 @@ export const WithDetailLink: Story = {
     description: "This event title links to detail page",
     date: "2024-07-15",
     venueName: "Venue Name",
-    price: "€50",
+    price: "$50",
     href: "/events/1",
+    imageUrl: DEFAULT_IMAGE_URL,
     getTicketsLabel: "Get Tickets",
   },
   parameters: {
@@ -419,7 +432,8 @@ export const LongContent: Story = {
       "This is a very long description that might wrap to multiple lines and test how the component handles longer text content. It should still look good and be readable.",
     date: "2024-07-15",
     venueName: "Very Long Venue Name That Might Also Wrap",
-    price: "€20 - €200",
+    price: "$20 - $200",
+    imageUrl: DEFAULT_IMAGE_URL,
     getTicketsLabel: "Get Tickets",
   },
   parameters: {

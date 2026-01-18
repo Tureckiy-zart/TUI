@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { ASPECT_RATIO_PRESETS, AspectRatio } from "./AspectRatio";
 
 const meta: Meta<typeof AspectRatio> = {
@@ -111,13 +111,11 @@ export const Video: Story = {
   render: () => (
     <div className="w-full max-w-2xl">
       <AspectRatio preset="video">
-        <video
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          controls
+        <img
+          src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1600&h=900&fit=crop"
+          alt="Code on screen"
           className="h-full w-full rounded-md object-cover"
-        >
-          Your browser does not support the video tag.
-        </video>
+        />
       </AspectRatio>
     </div>
   ),
@@ -303,22 +301,34 @@ export const VideoEmbed: Story = {
  */
 export const ProfileCards: Story = {
   render: () => (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-      {Array.from({ length: 6 }).map((_, index) => (
-        <div key={index} className="space-y-2">
-          <AspectRatio preset="square">
-            <img
-              src={`https://i.pravatar.cc/300?img=${index + 1}`}
-              alt={`User ${index + 1}`}
-              className="h-full w-full rounded-full object-cover"
-            />
-          </AspectRatio>
-          <div className="text-center">
-            <p className="text-sm font-medium">User {index + 1}</p>
-            <p className="text-xs text-[hsl(var(--tm-text-muted))]">@user{index + 1}</p>
+    <div className="space-y-md">
+      <div className="space-y-2">
+        <h3 className="text-lg font-semibold">Profile Cards (Square Avatar Crop)</h3>
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+          AspectRatio keeps each avatar square while the image is masked into a circle. Names and
+          handles are aligned under the image.
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="space-y-2 rounded-md border border-[hsl(var(--tm-border-default))] p-sm"
+          >
+            <AspectRatio preset="square">
+              <img
+                src={`https://i.pravatar.cc/300?img=${index + 1}`}
+                alt={`User ${index + 1}`}
+                className="h-full w-full rounded-full object-cover"
+              />
+            </AspectRatio>
+            <div className="text-center">
+              <p className="text-sm font-medium">User {index + 1}</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">@user{index + 1}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   ),
 };

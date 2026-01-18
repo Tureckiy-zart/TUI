@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tenerife Animation System (TAS) Storybook Showcase
  *
  * Comprehensive stories demonstrating all TAS features, presets, and accessibility.
@@ -643,7 +643,7 @@ export const RevealOnScroll: Story = {
               variant="primary"
               size="md"
             >
-              🎬 Trigger All Animations
+              Trigger All Animations
             </Button>
             <Button
               onClick={() => {
@@ -653,7 +653,7 @@ export const RevealOnScroll: Story = {
               variant="outline"
               size="md"
             >
-              🔄 Reset All
+              Reset All
             </Button>
           </Flex>
           <Box
@@ -667,8 +667,8 @@ export const RevealOnScroll: Story = {
             }}
           >
             <Text>
-              💡 Tip: Scroll down slowly to see each element animate as it enters the viewport, or
-              use the "Trigger All Animations" button to animate all elements at once.
+              Tip: Scroll down slowly to see each element animate as it enters the viewport, or use
+              the "Trigger All Animations" button to animate all elements at once.
             </Text>
           </Box>
         </Stack>

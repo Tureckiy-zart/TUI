@@ -1,11 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import { RangeSlider } from "./RangeSlider";
 
 const meta: Meta<typeof RangeSlider> = {
   title: "UI / Composition / Controls / RangeSlider",
   component: RangeSlider,
+  parameters: {
+    layout: "padded",
+  },
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-5xl">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     variant: {
       control: "select",
@@ -57,7 +67,7 @@ export const Default: Story = {
 
 /**
  * Matrix Story
- * Demonstrates all variant × size combinations (3 variants × 3 sizes = 9 combinations)
+ * Demonstrates all variant - size combinations (3 variants - 3 sizes = 9 combinations)
  * REQUIRED: Component has BOTH size AND variant props
  */
 export const Matrix: Story = {
@@ -86,7 +96,7 @@ export const Matrix: Story = {
           <div key={variant} className="grid grid-cols-4 items-center gap-4">
             <div className="text-sm font-medium">{variant}</div>
             {sizes.map((size) => (
-              <div key={`${variant}-${size}`} className="w-full">
+              <div key={`${variant}-${size}`} className="w-full min-w-[200px]">
                 <RangeSlider
                   variant={variant}
                   size={size}
@@ -130,7 +140,7 @@ export const States: Story = {
                 <div className="text-sm font-medium">{size}</div>
                 <div className="flex items-center gap-4">
                   {states.map((state) => (
-                    <div key={state.name} className="flex-1 space-y-1">
+                    <div key={state.name} className="min-w-[200px] flex-1 space-y-1">
                       <div className="text-xs text-[hsl(var(--tm-text-muted))]">{state.name}</div>
                       <RangeSlider
                         variant={variant}
@@ -258,7 +268,7 @@ export const TemperatureRange: Story = {
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Temperature Range</label>
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
-            {tempRange[0]}°C - {tempRange[1]}°C
+            {tempRange[0]} deg C - {tempRange[1]} deg C
           </span>
         </div>
         <RangeSlider
@@ -333,7 +343,7 @@ export const VerticalOrientation: Story = {
 
     return (
       <div className="flex h-64 items-center gap-8">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
@@ -346,7 +356,7 @@ export const VerticalOrientation: Story = {
             aria-label="Vertical range slider small"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
@@ -359,7 +369,7 @@ export const VerticalOrientation: Story = {
             aria-label="Vertical range slider medium"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
@@ -484,7 +494,7 @@ export const VerticalWithMarks: Story = {
 
     return (
       <div className="flex h-64 items-center gap-8">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>
@@ -498,7 +508,7 @@ export const VerticalWithMarks: Story = {
             aria-label="Vertical range slider with marks"
           />
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">
             {range[0]}-{range[1]}
           </span>

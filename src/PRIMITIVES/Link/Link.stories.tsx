@@ -1,5 +1,6 @@
-"use client";
+﻿"use client";
 import { Card } from "@/COMPOSITION/layout/Card";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Link } from "./Link";
 
@@ -11,13 +12,13 @@ import { Link } from "./Link";
  * @task TUNG_FOUNDATION_LINK_STORYBOOK
  *
  * Quality Gate Requirements:
- * ✅ One axis per story (variant, underline, state, composition)
- * ✅ Comparative layout (all variants displayed simultaneously)
- * ✅ Only public API used (no internal imports or Radix usage exposed)
- * ✅ No navigation or routing logic
- * ✅ No UX or business scenarios
- * ✅ Neutral href used (#) with navigation disabled
- * ✅ All Link variants displayed comparatively
+ * OK One axis per story (variant, underline, state, composition)
+ * OK Comparative layout (all variants displayed simultaneously)
+ * OK Only public API used (no internal imports or Radix usage exposed)
+ * OK No navigation or routing logic
+ * OK No UX or business scenarios
+ * OK Neutral href used (#) with navigation disabled
+ * OK All Link variants displayed comparatively
  *
  * Stories Structure:
  * - Variants: 4 variants (text/default, secondary/muted, accent, destructive/danger)
@@ -184,11 +185,11 @@ export const States: Story = {
 /**
  * Matrix Story
  *
- * Displays all variants × all sizes grid for comprehensive visual comparison.
+ * Displays all variants - all sizes grid for comprehensive visual comparison.
  * REQUIRED per VARIANTS_SIZE_CANON.md when component has both size AND variant props.
  *
- * @axis variant × size
- * @values All 7 variants × All 3 sizes (21 combinations)
+ * @axis variant - size
+ * @values All 9 variants - All 3 sizes (27 combinations)
  */
 export const Matrix: Story = {
   render: () => {
@@ -266,7 +267,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix showing all Link variants × all sizes. This comprehensive grid demonstrates all 27 combinations (9 variants × 3 sizes) for visual comparison. Default variant='text' is inline (inline-flex), variant='wrapper' is block-level (block w-full) for wrapper use cases. Variant 'link' is deprecated (use 'wrapper' instead). Navigation is disabled for Storybook demonstration.",
+          "Matrix showing all Link variants - all sizes. This comprehensive grid demonstrates all 27 combinations (9 variants - 3 sizes) for visual comparison. Default variant='text' is inline (inline-flex), variant='wrapper' is block-level (block w-full) for wrapper use cases. Variant 'link' is deprecated (use 'wrapper' instead). Navigation is disabled for Storybook demonstration.",
       },
     },
   },
@@ -297,7 +298,7 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                leftIcon={<span>←</span>}
+                leftIcon={<span>{"<-"}</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Left Icon
@@ -305,7 +306,7 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                rightIcon={<span>→</span>}
+                rightIcon={<span>{"->"}</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Right Icon
@@ -313,8 +314,8 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                leftIcon={<span>←</span>}
-                rightIcon={<span>→</span>}
+                leftIcon={<span>{"<-"}</span>}
+                rightIcon={<span>{"->"}</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Both Icons
@@ -352,12 +353,12 @@ export const SizesGallery: Story = {
  */
 export const Wrapper: Story = {
   render: () => (
-    <div className="space-y-lg">
-      <div>
-        <h3 className="mb-sm text-sm font-medium">Wrapper Variant (Block-level)</h3>
+    <Stack spacing="lg">
+      <Stack spacing="sm">
+        <h3 className="text-sm font-medium">Wrapper Variant (Block-level)</h3>
         <div className="grid grid-cols-1 gap-md md:grid-cols-2">
           <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
-            <Card>
+            <Card className="h-full">
               <Card.Header>
                 <h4 className="text-lg font-semibold">Event Title</h4>
                 <p className="text-sm text-[hsl(var(--tm-text-muted))]">Event description</p>
@@ -371,7 +372,7 @@ export const Wrapper: Story = {
             </Card>
           </Link>
           <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
-            <Card>
+            <Card className="h-full">
               <Card.Header>
                 <h4 className="text-lg font-semibold">Another Event</h4>
                 <p className="text-sm text-[hsl(var(--tm-text-muted))]">Another description</p>
@@ -384,12 +385,12 @@ export const Wrapper: Story = {
             </Card>
           </Link>
         </div>
-      </div>
-      <div>
-        <h3 className="mb-sm text-sm font-medium">Comparison: Text (Inline) vs Wrapper (Block)</h3>
-        <div className="space-y-md">
+      </Stack>
+      <Stack spacing="sm">
+        <h3 className="text-sm font-medium">Comparison: Text (Inline) vs Wrapper (Block)</h3>
+        <Stack spacing="md">
           <div>
-            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">
+            <p className="mb-xs text-xs text-[hsl(var(--tm-text-muted))]">
               Text variant (default, inline-flex):
             </p>
             <Link href="#" onClick={(e) => e.preventDefault()}>
@@ -397,7 +398,7 @@ export const Wrapper: Story = {
             </Link>
           </div>
           <div>
-            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">
+            <p className="mb-xs text-xs text-[hsl(var(--tm-text-muted))]">
               Wrapper variant (block-level):
             </p>
             <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
@@ -410,9 +411,9 @@ export const Wrapper: Story = {
               </Card>
             </Link>
           </div>
-        </div>
-      </div>
-    </div>
+        </Stack>
+      </Stack>
+    </Stack>
   ),
   parameters: {
     layout: "padded",

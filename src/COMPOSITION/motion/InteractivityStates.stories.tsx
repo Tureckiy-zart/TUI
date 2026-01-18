@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Interactivity States - Audit Dashboard
  *
  * Shows hover/active/focus-visible states for core interactive components in one view.

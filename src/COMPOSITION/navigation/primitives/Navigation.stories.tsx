@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { NavItem, NavList, NavSeparator, NavText } from "./Navigation";
 
 // NavRoot is now a standalone component
@@ -204,12 +204,12 @@ export const NavSeparatorCustom: Story = {
       <NavList>
         <NavItem>
           <NavText>Home</NavText>
-          <NavSeparator>→</NavSeparator>
+          <NavSeparator>/</NavSeparator>
           <NavText>About</NavText>
         </NavItem>
         <NavItem>
           <NavText>Products</NavText>
-          <NavSeparator>•</NavSeparator>
+          <NavSeparator>|</NavSeparator>
           <NavText>Details</NavText>
         </NavItem>
       </NavList>

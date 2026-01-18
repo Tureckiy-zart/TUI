@@ -71,7 +71,7 @@ const DEFAULT_SIZE = "md" as const;
  * - Input CVA is immutable - changes require explicit unlock task
  */
 export const inputVariants = tokenCVA({
-  base: `flex ${TEXT_TOKENS.fontSize.sm} file:font-medium ${INPUT_TOKENS.file.text} disabled:cursor-not-allowed focus-visible:outline-none ${MOTION_TOKENS.transition.colors} ${INPUT_TOKENS.shadow} file:border-0 file:bg-transparent ${INPUT_TOKENS.state.border.default} ${INPUT_TOKENS.state.background.default} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.border.focus} [aria-invalid="true"]:${INPUT_TOKENS.state.border.error.replace("border-", "")}`,
+  base: `flex ${TEXT_TOKENS.fontSize.sm} file:font-medium ${INPUT_TOKENS.file.text} disabled:cursor-not-allowed focus-visible:outline-none ${MOTION_TOKENS.transition.colors} ${INPUT_TOKENS.shadow} file:border-0 file:bg-transparent ${INPUT_TOKENS.state.border.default} ${INPUT_TOKENS.state.background.default} ${INPUT_TOKENS.state.text.default} ${INPUT_TOKENS.state.text.placeholder} ${INPUT_TOKENS.state.border.focus} [aria-invalid="true"]:${INPUT_TOKENS.state.border.error.replace("border-", "")} data-[has-icon=true]:${INPUT_TOKENS.icon.paddingLeft}`,
   variants: {
     size: {
       sm: `${INPUT_TOKENS.size.sm.height} ${INPUT_TOKENS.size.sm.padding.horizontal} ${INPUT_TOKENS.size.sm.padding.vertical} ${INPUT_TOKENS.size.sm.radius} ${INPUT_TOKENS.size.sm.fontSize}`,

@@ -1,4 +1,4 @@
-import { Button } from "@/PRIMITIVES/Button";
+﻿import { Button } from "@/PRIMITIVES/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Container } from "../Container";
 import { PageHeader } from "../PageHeader";
@@ -140,7 +140,7 @@ export const WithContentPadding: Story = {
 };
 
 /**
- * Full example: ContentShell → PageHeader → Section.
+ * Full example: ContentShell -> PageHeader -> Section.
  */
 export const FullExample: Story = {
   args: {
@@ -204,7 +204,7 @@ export const FullExample: Story = {
     docs: {
       description: {
         story:
-          "Complete example demonstrating ContentShell → PageHeader → Section composition pattern",
+          "Complete example demonstrating ContentShell -> PageHeader -> Section composition pattern",
       },
     },
   },

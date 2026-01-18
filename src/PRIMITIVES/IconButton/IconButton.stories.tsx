@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { IconCheck, IconClose, IconMenu, IconSearch } from "@/icons";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -12,11 +12,11 @@ import { IconButton } from "./IconButton";
  * @task TUI_ICONBUTTON_CREATE
  *
  * Quality Gate Requirements:
- * ✅ One axis per story (variant, size, state)
- * ✅ Comparative layout (all variants/sizes displayed simultaneously)
- * ✅ Only public API used (no internal imports or Button internals exposed)
- * ✅ No UX or business scenarios
- * ✅ All IconButton variants displayed comparatively
+ * OK One axis per story (variant, size, state)
+ * OK Comparative layout (all variants/sizes displayed simultaneously)
+ * OK Only public API used (no internal imports or Button internals exposed)
+ * OK No UX or business scenarios
+ * OK All IconButton variants displayed comparatively
  *
  * Stories Structure:
  * - Basic: Simple icon button usage
@@ -157,18 +157,18 @@ export const SizesGallery: Story = {
 /**
  * Matrix Story
  *
- * Displays all IconButton variants × sizes in a grid for visual comparison.
+ * Displays all IconButton variants - sizes in a grid for visual comparison.
  * Demonstrates all combinations of variants and sizes.
  *
  * @canonical VARIANTS_SIZE_CANON - Matrix story (REQUIRED for components with both size AND variant props)
- * @axis variant × size
- * @values All variants × All sizes
+ * @axis variant - size
+ * @values All variants - All sizes
  */
 export const Matrix: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-md text-sm font-medium">All Variants × All Sizes</h3>
+        <h3 className="mb-md text-sm font-medium">All Variants - All Sizes</h3>
         <div className="grid grid-cols-3 gap-md">
           {/* Row: sm size */}
           <div className="flex flex-col gap-sm">
@@ -239,7 +239,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix demonstration showing all variants × all sizes combinations. This comprehensive view helps verify visual consistency across all IconButton combinations. All styling is delegated to Button component.",
+          "Matrix demonstration showing all variants - all sizes combinations. This comprehensive view helps verify visual consistency across all IconButton combinations. All styling is delegated to Button component.",
       },
     },
   },

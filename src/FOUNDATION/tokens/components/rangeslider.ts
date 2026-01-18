@@ -29,15 +29,15 @@ export const RANGESLIDER_TOKENS = {
     size: {
       sm: {
         height: "h-4", // Small: 16px
-        width: "w-4", // Small: 16px (vertical)
+        width: "w-6", // Small: 24px (vertical)
       },
       md: {
         height: "h-5", // Medium: 20px - DEFAULT
-        width: "w-5", // Medium: 20px (vertical)
+        width: "w-7", // Medium: 28px (vertical)
       },
       lg: {
         height: "h-6", // Large: 24px
-        width: "w-6", // Large: 24px (vertical)
+        width: "w-8", // Large: 32px (vertical)
       },
     },
   },
@@ -49,21 +49,21 @@ export const RANGESLIDER_TOKENS = {
     size: {
       sm: {
         height: "h-1", // Small: 4px
-        width: "w-1", // Small: 4px (vertical)
+        width: "w-1.5", // Small: 6px (vertical)
       },
       md: {
         height: "h-1.5", // Medium: 6px - DEFAULT
-        width: "w-1.5", // Medium: 6px (vertical)
+        width: "w-2", // Medium: 8px (vertical)
       },
       lg: {
         height: "h-2", // Large: 8px
-        width: "w-2", // Large: 8px (vertical)
+        width: "w-2.5", // Large: 10px (vertical)
       },
     },
     variant: {
-      primary: "bg-muted/50 dark:bg-muted/30",
-      secondary: "bg-muted/50 dark:bg-muted/30",
-      outline: "bg-muted/50 dark:bg-muted/30",
+      primary: "bg-primary-200 dark:bg-primary-800",
+      secondary: "bg-secondary-200 dark:bg-secondary-800",
+      outline: "bg-border",
     },
   },
 
@@ -72,9 +72,9 @@ export const RANGESLIDER_TOKENS = {
    */
   range: {
     variant: {
-      primary: "bg-accent-600 dark:bg-accent-500",
-      secondary: "bg-accent-600 dark:bg-accent-500",
-      outline: "bg-accent-600 dark:bg-accent-500",
+      primary: "bg-primary-600 dark:bg-primary-500",
+      secondary: "bg-secondary-600 dark:bg-secondary-500",
+      outline: "bg-primary-600 dark:bg-primary-500",
     },
   },
 

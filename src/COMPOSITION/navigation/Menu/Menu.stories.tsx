@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Copy, Edit, MoreVertical, Share, Trash2 } from "lucide-react";
@@ -418,9 +418,9 @@ export const KeyboardNavigation: Story = {
               - Activate item
             </li>
             <li>
-              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↑</kbd>{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">^</kbd>{" "}
               /{" "}
-              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↓</kbd>{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">v</kbd>{" "}
               - Navigate items
             </li>
             <li>

@@ -540,7 +540,7 @@ export const tailwindThemeColors = {
     primary: `hsl(var(--text-primary))`,
     secondary: `hsl(var(--text-secondary))`,
     tertiary: `hsl(var(--text-tertiary))`,
-    muted: `hsl(var(--text-[hsl(var(--tm-text-muted))]))`,
+    muted: `hsl(var(--tm-text-muted))`,
     destructive: `hsl(var(--destructive))`,
     accent: `hsl(var(--tm-accent))`,
     inverse: `hsl(var(--text-inverse))`,

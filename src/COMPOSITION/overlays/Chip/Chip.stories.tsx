@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * Chip Storybook Stories
@@ -227,19 +227,19 @@ export const ClickableChips: Story = {
     return (
       <div className="flex flex-wrap gap-2">
         <Chip variant="primary" onClick={() => setClicked("Primary")}>
-          Primary Filter {clicked === "Primary" && "✓"}
+          Primary Filter {clicked === "Primary" && " (selected)"}
         </Chip>
         <Chip variant="secondary" onClick={() => setClicked("Secondary")}>
-          Secondary Filter {clicked === "Secondary" && "✓"}
+          Secondary Filter {clicked === "Secondary" && " (selected)"}
         </Chip>
         <Chip variant="accent" onClick={() => setClicked("Accent")}>
-          Accent Filter {clicked === "Accent" && "✓"}
+          Accent Filter {clicked === "Accent" && " (selected)"}
         </Chip>
         <Chip variant="outline" onClick={() => setClicked("Outline")}>
-          Outline Filter {clicked === "Outline" && "✓"}
+          Outline Filter {clicked === "Outline" && " (selected)"}
         </Chip>
         <Chip variant="ghost" onClick={() => setClicked("Ghost")}>
-          Ghost Filter {clicked === "Ghost" && "✓"}
+          Ghost Filter {clicked === "Ghost" && " (selected)"}
         </Chip>
       </div>
     );
@@ -495,7 +495,7 @@ export const CombinedUseCases: Story = {
                 }}
               >
                 {genre.charAt(0).toUpperCase() + genre.slice(1)}
-                {selectedGenres.has(genre) && " ✓"}
+                {selectedGenres.has(genre) && " (selected)"}
               </Chip>
             ))}
           </div>

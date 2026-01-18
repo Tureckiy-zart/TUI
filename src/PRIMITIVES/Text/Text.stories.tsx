@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
@@ -158,7 +158,7 @@ export const Matrix: Story = {
         <div>
           <div className="mb-md">
             <Text size="lg" weight="bold">
-              Size × Weight Matrix
+              Size - Weight Matrix
             </Text>
           </div>
           <div className="space-y-md">

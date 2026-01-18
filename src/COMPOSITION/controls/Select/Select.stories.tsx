@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
@@ -367,9 +367,9 @@ export const KeyboardNavigation: Story = {
 
 /**
  * Matrix Story (CANONICAL)
- * Required per VARIANTS_SIZE_CANON.md - Shows all states × usage patterns
+ * Required per VARIANTS_SIZE_CANON.md - Shows all states - usage patterns
  * Canonical name: "Matrix"
- * Note: Select has no variant/size props, so Matrix shows all states × usage patterns
+ * Note: Select has no variant/size props, so Matrix shows all states - usage patterns
  */
 export const Matrix: Story = {
   render: () => {
@@ -410,7 +410,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Canonical Matrix story showing all states × usage patterns. This story is REQUIRED per VARIANTS_SIZE_CANON.md. Select has no variant/size props, so Matrix demonstrates all states (default, with value, disabled, invalid).",
+          "Canonical Matrix story showing all states - usage patterns. This story is REQUIRED per VARIANTS_SIZE_CANON.md. Select has no variant/size props, so Matrix demonstrates all states (default, with value, disabled, invalid).",
       },
     },
   },

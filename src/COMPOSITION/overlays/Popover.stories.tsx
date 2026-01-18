@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
+﻿import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -466,10 +466,10 @@ export const ModalVsNonModal: Story = {
 
 /**
  * Matrix Story - REQUIRED for components with BOTH variant AND size props
- * Shows all variants × all sizes in a grid layout
+ * Shows all variants - all sizes in a grid layout
  */
 export const Matrix: Story = {
-  name: "Matrix (Variants × Sizes)",
+  name: "Matrix (Variants - Sizes)",
   render: () => {
     const variants: Array<
       "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
@@ -481,7 +481,7 @@ export const Matrix: Story = {
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">Popover Matrix</h3>
           <p className="text-sm text-[hsl(var(--tm-text-muted))]">
-            All variants × all sizes. Each cell shows a popover with that variant/size combination.
+            All variants - all sizes. Each cell shows a popover with that variant/size combination.
           </p>
         </div>
         <div className="overflow-x-auto">

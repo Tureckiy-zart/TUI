@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 
 import { NextLinkAdapter } from "./NextLinkAdapter";
 
@@ -73,7 +73,7 @@ export const Disabled: Story = {
 export const WithLeftIcon: Story = {
   args: {
     href: "/back",
-    leftIcon: <span>←</span>,
+    leftIcon: <span>{"<-"}</span>,
     children: "Go Back",
   },
 };
@@ -81,7 +81,7 @@ export const WithLeftIcon: Story = {
 export const WithRightIcon: Story = {
   args: {
     href: "/forward",
-    rightIcon: <span>→</span>,
+    rightIcon: <span>{"->"}</span>,
     children: "Go Forward",
   },
 };
@@ -89,8 +89,8 @@ export const WithRightIcon: Story = {
 export const WithBothIcons: Story = {
   args: {
     href: "/navigate",
-    leftIcon: <span>←</span>,
-    rightIcon: <span>→</span>,
+    leftIcon: <span>{"<-"}</span>,
+    rightIcon: <span>{"->"}</span>,
     children: "Navigate",
   },
 };
@@ -144,7 +144,7 @@ export const VariantComparison: Story = {
 
 /**
  * Matrix Story (Canonical)
- * Demonstrates all variants × all sizes grid
+ * Demonstrates all variants - all sizes grid
  * Required per VARIANTS_SIZE_CANON.md for components with both size AND variant props
  */
 export const Matrix: Story = {
@@ -186,7 +186,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Canonical Matrix story showing all variants × all sizes. Required per VARIANTS_SIZE_CANON for components with both size and variant props.",
+          "Canonical Matrix story showing all variants - all sizes. Required per VARIANTS_SIZE_CANON for components with both size and variant props.",
       },
     },
   },
@@ -194,7 +194,7 @@ export const Matrix: Story = {
 
 /**
  * States Story (Canonical)
- * Demonstrates all variants × all sizes × all states
+ * Demonstrates all variants - all sizes - all states
  * Required per VARIANTS_SIZE_CANON.md for interactive components
  */
 export const States: Story = {
@@ -248,7 +248,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "Canonical States story showing all variants × all sizes × all states (default, disabled). Required per VARIANTS_SIZE_CANON for interactive components.",
+          "Canonical States story showing all variants - all sizes - all states (default, disabled). Required per VARIANTS_SIZE_CANON for interactive components.",
       },
     },
   },
@@ -266,13 +266,13 @@ export const SizesGallery: Story = {
       { label: "Short", content: "Link" },
       { label: "Medium", content: "Navigation Link" },
       { label: "Long", content: "Extended Navigation Link Text" },
-      { label: "With Left Icon", content: "Back", leftIcon: <span>←</span> },
-      { label: "With Right Icon", content: "Next", rightIcon: <span>→</span> },
+      { label: "With Left Icon", content: "Back", leftIcon: <span>{"<-"}</span> },
+      { label: "With Right Icon", content: "Next", rightIcon: <span>{"->"}</span> },
       {
         label: "With Both Icons",
         content: "Navigate",
-        leftIcon: <span>←</span>,
-        rightIcon: <span>→</span>,
+        leftIcon: <span>{"<-"}</span>,
+        rightIcon: <span>{"->"}</span>,
       },
     ];
 

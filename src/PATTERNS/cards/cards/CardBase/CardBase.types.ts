@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import type { StackProps } from "@/COMPOSITION/layout";
+
 /**
  * CardBase Size Variant
  * Maps to GlobalSize scale subset: sm | md
@@ -57,7 +59,10 @@ export interface CardBaseImageWrapperProps extends React.HTMLAttributes<HTMLDivE
 /**
  * CardBase ContentWrapper Props
  */
-export interface CardBaseContentWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardBaseContentWrapperProps extends Omit<
+  StackProps,
+  "direction" | "display" | "flexDirection"
+> {
   /**
    * Size variant - inherited from parent CardBase
    * @default "md"
