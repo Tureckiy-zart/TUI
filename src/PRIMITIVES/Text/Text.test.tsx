@@ -84,19 +84,19 @@ describe("Text", () => {
     it("applies muted styles when tone is muted", () => {
       const { container } = renderWithTheme(<Text tone="muted">Muted Text</Text>);
       const text = container.querySelector("span");
-      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("does not apply muted styles when tone is default", () => {
       const { container } = renderWithTheme(<Text tone="default">Normal Text</Text>);
       const text = container.querySelector("span");
-      expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("defaults to default tone", () => {
       const { container } = renderWithTheme(<Text>Default Text</Text>);
       const text = container.querySelector("span");
-      expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
@@ -120,7 +120,7 @@ describe("Text", () => {
       );
       const text = container.querySelector("span");
       expect(text).toBeInTheDocument();
-      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
@@ -199,32 +199,24 @@ describe("Text", () => {
 
     it("renders size and tone combinations", () => {
       const { container: normalSm } = renderWithTheme(<Text size="sm">Normal</Text>);
-      expect(normalSm.querySelector("span")).not.toHaveClass(
-        "text-[hsl(var(--tm-text-muted))]-foreground",
-      );
+      expect(normalSm.querySelector("span")).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
 
       const { container: mutedSm } = renderWithTheme(
         <Text size="sm" tone="muted">
           Muted
         </Text>,
       );
-      expect(mutedSm.querySelector("span")).toHaveClass(
-        "text-[hsl(var(--tm-text-muted))]-foreground",
-      );
+      expect(mutedSm.querySelector("span")).toHaveClass("text-[hsl(var(--tm-text-muted))]");
 
       const { container: normalLg } = renderWithTheme(<Text size="lg">Normal</Text>);
-      expect(normalLg.querySelector("span")).not.toHaveClass(
-        "text-[hsl(var(--tm-text-muted))]-foreground",
-      );
+      expect(normalLg.querySelector("span")).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
 
       const { container: mutedLg } = renderWithTheme(
         <Text size="lg" tone="muted">
           Muted
         </Text>,
       );
-      expect(mutedLg.querySelector("span")).toHaveClass(
-        "text-[hsl(var(--tm-text-muted))]-foreground",
-      );
+      expect(mutedLg.querySelector("span")).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
@@ -293,7 +285,7 @@ describe("Text", () => {
       );
       const text = container.querySelector("p");
       expect(text).toBeInTheDocument();
-      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 

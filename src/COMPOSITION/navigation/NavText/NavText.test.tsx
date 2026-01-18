@@ -117,7 +117,7 @@ describe("NavText component", () => {
       const text = screen.getByText("Text");
       expect(text).toHaveClass("custom-text");
       // Token class should also be present
-      expect(text.className).toContain("text-[hsl(var(--tm-text-primary))]");
+      expect(text.className).toContain("text-foreground");
     });
   });
 

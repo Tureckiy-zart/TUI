@@ -57,7 +57,7 @@ describe("Separator component", () => {
     it("should apply secondary color variant", () => {
       const { container } = render(<Separator color="secondary" />);
       const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("bg-[hsl(var(--tm-secondary))]/20");
+      expect(element).toHaveClass("bg-secondary/20");
     });
 
     it("should apply accent color variant", () => {

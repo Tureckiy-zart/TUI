@@ -31,7 +31,7 @@ describe("HelperText", () => {
     it("applies default tone (muted)", () => {
       const { container } = renderWithTheme(<HelperText>Muted helper text</HelperText>);
       const paragraph = container.querySelector("p");
-      expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
@@ -95,7 +95,7 @@ describe("HelperText", () => {
         <HelperText tone="default">Default tone helper text</HelperText>,
       );
       const paragraph = container.querySelector("p");
-      expect(paragraph).not.toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(paragraph).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("allows as prop override", () => {
@@ -117,7 +117,7 @@ describe("HelperText", () => {
     it("uses tone='muted' as default", () => {
       const { container } = renderWithTheme(<HelperText>Default tone helper text</HelperText>);
       const paragraph = container.querySelector("p");
-      expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("uses as='p' as default", () => {

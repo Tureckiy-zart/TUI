@@ -330,6 +330,25 @@ export const FallbackStates: Story = {
 };
 
 /**
+ * Image fails to load (forced fallback)
+ */
+export const ImageFailsToLoad: Story = {
+  args: {
+    src: "https://example.invalid/avatar.png",
+    alt: "Broken Image",
+    size: "lg",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Forces an image load failure to show the fallback behavior when the image cannot be loaded.",
+      },
+    },
+  },
+};
+
+/**
  * NEW: Accessibility Demonstration (10/10 Feature)
  * Shows how aria-labels work with and without status
  */

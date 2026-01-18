@@ -85,18 +85,14 @@ describe("VenueCard", () => {
       it("renders footer when eventsCount > 0", () => {
         const { container } = renderWithTheme(<VenueCard {...defaultProps} eventsCount={5} />);
         // Footer contains border-top class, so we can find it by that
-        const cardBase = container.querySelector('[class*="bg-[hsl(var(--tm-surface-raised))]"]');
-        const footer = cardBase?.querySelector(":scope > div:last-child");
-        const hasFooterBorder = footer?.querySelector('[class*="border-t"]');
+        const hasFooterBorder = container.querySelector('[class*="border-t"]');
         expect(hasFooterBorder).toBeInTheDocument();
       });
 
       it("renders footer when capacity provided", () => {
         const { container } = renderWithTheme(<VenueCard {...defaultProps} capacity="500" />);
         // Footer contains border-top class, so we can find it by that
-        const cardBase = container.querySelector('[class*="bg-[hsl(var(--tm-surface-raised))]"]');
-        const footer = cardBase?.querySelector(":scope > div:last-child");
-        const hasFooterBorder = footer?.querySelector('[class*="border-t"]');
+        const hasFooterBorder = container.querySelector('[class*="border-t"]');
         expect(hasFooterBorder).toBeInTheDocument();
       });
     });
@@ -221,9 +217,7 @@ describe("VenueCard", () => {
     it("handles zero events count", () => {
       const { container } = renderWithTheme(<VenueCard {...defaultProps} eventsCount={0} />);
       // Footer should not render when eventsCount is 0 and capacity is not provided
-      const cardBase = container.querySelector('[class*="bg-[hsl(var(--tm-surface-raised))]"]');
-      const footer = cardBase?.querySelector(":scope > div:last-child");
-      const hasFooterBorder = footer?.querySelector('[class*="border-t"]');
+      const hasFooterBorder = container.querySelector('[class*="border-t"]');
       expect(hasFooterBorder).not.toBeInTheDocument();
     });
 

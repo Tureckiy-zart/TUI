@@ -109,7 +109,7 @@ describe("Heading", () => {
         </Heading>,
       );
       const heading = container.querySelector("h2");
-      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("does not apply muted styles when muted is false", () => {
@@ -119,13 +119,13 @@ describe("Heading", () => {
         </Heading>,
       );
       const heading = container.querySelector("h2");
-      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("defaults to not muted", () => {
       const { container } = renderWithTheme(<Heading level={2}>Default Heading</Heading>);
       const heading = container.querySelector("h2");
-      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
@@ -152,7 +152,7 @@ describe("Heading", () => {
       const heading = container.querySelector("h3");
       expect(heading).toBeInTheDocument();
       expect(heading).toHaveTextContent("Combined Props Heading");
-      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
   });
 
