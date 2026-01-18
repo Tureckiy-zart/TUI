@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -67,7 +67,7 @@ export const Default: Story = {
 };
 
 /**
- * Matrix Story - All variants - all sizes
+ * Matrix Story - All variants × all sizes
  * REQUIRED per VARIANTS_SIZE_CANON.md (component has both size AND variant props)
  */
 export const Matrix: Story = {
@@ -100,7 +100,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix demonstrating all variant - size combinations. REQUIRED per VARIANTS_SIZE_CANON.md.",
+          "Matrix demonstrating all variant × size combinations. REQUIRED per VARIANTS_SIZE_CANON.md.",
       },
     },
   },
@@ -227,18 +227,18 @@ export const Accessibility: Story = {
             avatar="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
           />
           <div className="mt-4 text-xs text-[hsl(var(--tm-text-muted))]">
-            <p>OK Uses semantic Heading (h3) for name</p>
-            <p>OK Uses semantic Text component for email</p>
-            <p>OK Avatar has aria-label for screen readers</p>
-            <p>OK Proper heading hierarchy (h3 for card title)</p>
+            <p>✅ Uses semantic Heading (h3) for name</p>
+            <p>✅ Uses semantic Text component for email</p>
+            <p>✅ Avatar has aria-label for screen readers</p>
+            <p>✅ Proper heading hierarchy (h3 for card title)</p>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <div className="text-sm font-semibold">Without Avatar</div>
           <ProfileCard name="Jane Smith" email="jane@example.com" />
           <div className="mt-4 text-xs text-[hsl(var(--tm-text-muted))]">
-            <p>OK Component works without avatar (no accessibility issues)</p>
-            <p>OK All content is accessible via screen readers</p>
+            <p>✅ Component works without avatar (no accessibility issues)</p>
+            <p>✅ All content is accessible via screen readers</p>
           </div>
         </div>
       </div>

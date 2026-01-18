@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { IconCheck } from "@/icons";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -14,16 +14,16 @@ import { Checkbox } from "./Checkbox";
  * @task CREATE_CHECKBOX_STORYBOOK_STORIES
  *
  * Quality Gate Requirements:
- * OK One axis per story (variant, size, state, indeterminate)
- * OK Comparative layout (all variants displayed simultaneously)
- * OK Only public API used (no internal imports or Radix usage exposed)
- * OK No UX or business scenarios
- * OK No navigation or routing logic
- * OK All Checkbox variants displayed comparatively
+ * ✅ One axis per story (variant, size, state, indeterminate)
+ * ✅ Comparative layout (all variants displayed simultaneously)
+ * ✅ Only public API used (no internal imports or Radix usage exposed)
+ * ✅ No UX or business scenarios
+ * ✅ No navigation or routing logic
+ * ✅ All Checkbox variants displayed comparatively
  *
  * Stories Structure:
  * - Default/Checked/Disabled: Basic states
- * - Matrix: 5 variants - 3 sizes grid (REQUIRED per VARIANTS_SIZE_CANON.md)
+ * - Matrix: 5 variants × 3 sizes grid (REQUIRED per VARIANTS_SIZE_CANON.md)
  * - SizesGallery: All sizes with labels (REQUIRED per VARIANTS_SIZE_CANON.md)
  * - States: All states (default, checked, indeterminate, disabled, error)
  * - AllVariants/AllSizes: Comparative views
@@ -160,7 +160,7 @@ export const Indeterminate: Story = {
 
 /**
  * Matrix Story (Canonical - REQUIRED)
- * Demonstrates all variants - all sizes grid.
+ * Demonstrates all variants × all sizes grid.
  * Required by VARIANTS_SIZE_CANON.md for components with both variant and size props.
  */
 export const Matrix: Story = {
@@ -416,7 +416,7 @@ export const States: Story = {
       </div>
       <div>
         <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
-          All Sizes - States
+          All Sizes × States
         </h3>
         <div className="grid grid-cols-3 gap-md">
           {(["sm", "md", "lg"] as const).map((size) => (
@@ -570,7 +570,7 @@ export const CustomIcons: Story = {
           <label className="flex cursor-pointer items-center gap-sm">
             <Checkbox
               checked
-              icon={<span className="text-lg">x</span>}
+              icon={<span className="text-lg">✓</span>}
               aria-labelledby="custom-icon-label-2"
             />
             <span id="custom-icon-label-2">Custom text checkmark</span>
@@ -595,7 +595,7 @@ export const CustomIcons: Story = {
           <label className="flex cursor-pointer items-center gap-sm">
             <Checkbox
               indeterminate
-              indeterminateIcon={<span className="text-lg font-bold">-</span>}
+              indeterminateIcon={<span className="text-lg font-bold">—</span>}
               aria-labelledby="custom-indeterminate-label-2"
             />
             <span id="custom-indeterminate-label-2">Custom text indeterminate</span>

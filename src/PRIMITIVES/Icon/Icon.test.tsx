@@ -66,14 +66,14 @@ describe("Icon", () => {
       render(<Icon name="search" color="default" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]");
+      expect(icon).toHaveClass("text-foreground");
     });
 
     it("renders with muted color", () => {
       render(<Icon name="search" color="muted" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-[hsl(var(--tm-text-muted))]");
+      expect(icon).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
     });
 
     it("renders with success color", () => {
@@ -94,7 +94,7 @@ describe("Icon", () => {
       render(<Icon name="error" color="danger" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-[hsl(var(--tm-destructive))]");
+      expect(icon).toHaveClass("text-destructive");
     });
 
     it("renders with info color", () => {
@@ -107,7 +107,7 @@ describe("Icon", () => {
     it("uses default color when color prop not provided", () => {
       render(<Icon name="search" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
-      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]"); // default is default
+      expect(icon).toHaveClass("text-foreground"); // default is default
     });
   });
 
@@ -193,7 +193,7 @@ describe("Icon", () => {
       render(<Icon name="error" color="danger" stroke="thin" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-[hsl(var(--tm-destructive))]"); // danger color
+      expect(icon).toHaveClass("text-destructive"); // danger color
       expect(icon).toHaveClass("stroke-[1px]"); // thin stroke
     });
   });
@@ -211,7 +211,7 @@ describe("Icon", () => {
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
       expect(icon).toHaveClass("h-4", "w-4"); // md size (default)
-      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]"); // default color
+      expect(icon).toHaveClass("text-foreground"); // default color
       expect(icon).toHaveClass("stroke-[1.5px]"); // normal stroke (default)
     });
   });

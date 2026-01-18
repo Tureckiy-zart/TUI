@@ -1,4 +1,4 @@
-﻿import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
+import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
 import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
@@ -359,7 +359,7 @@ export const WithNotifications: Story = {
 
 /**
  * Matrix Story - REQUIRED for components with both variant AND size props
- * Shows all variants - all sizes grid
+ * Shows all variants × all sizes grid
  */
 export const Matrix: Story = {
   name: "Matrix",
@@ -374,7 +374,7 @@ export const Matrix: Story = {
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">HoverCard Matrix</h3>
           <p className="text-sm text-[hsl(var(--tm-text-muted))]">
-            All variants - all sizes. Each cell shows a hover card with that variant/size
+            All variants × all sizes. Each cell shows a hover card with that variant/size
             combination.
           </p>
         </div>
@@ -445,7 +445,7 @@ export const Matrix: Story = {
 
 /**
  * States Story - REQUIRED for interactive components
- * Shows all variants - all sizes - all states
+ * Shows all variants × all sizes × all states
  */
 export const States: Story = {
   name: "States",

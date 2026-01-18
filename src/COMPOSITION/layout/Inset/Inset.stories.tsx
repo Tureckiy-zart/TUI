@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Box } from "../Box";
 import { Stack } from "../Stack";
 import { Inset } from "./Inset";
@@ -177,7 +177,7 @@ export const ResponsivePadding: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Responsive: sm to lg</h3>
+        <h3 className="mb-sm text-lg font-semibold">Responsive: sm → lg</h3>
         <Inset
           padding={{ base: "sm", lg: "lg" }}
           className="border border-[hsl(var(--tm-border-default))]"
@@ -186,7 +186,7 @@ export const ResponsivePadding: Story = {
         </Inset>
       </div>
       <div>
-        <h3 className="mb-sm text-lg font-semibold">Responsive: md to xl</h3>
+        <h3 className="mb-sm text-lg font-semibold">Responsive: md → xl</h3>
         <Inset
           padding={{ base: "md", lg: "xl" }}
           className="border border-[hsl(var(--tm-border-default))]"

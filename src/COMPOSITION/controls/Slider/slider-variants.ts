@@ -62,8 +62,8 @@ const sliderTrackVariants = tokenCVA({
       lg: "", // Track thickness (orientation-specific)
     } satisfies Record<SliderSize, string>,
     variant: {
-      primary: "bg-[hsl(var(--tm-primary))]/20",
-      secondary: "bg-[hsl(var(--tm-secondary))]/20",
+      primary: "bg-[hsl(var(--tm-primary))]-200 dark:bg-[hsl(var(--tm-primary))]-800",
+      secondary: "bg-secondary-200 dark:bg-secondary-800",
       outline: "bg-[hsl(var(--tm-border-default))]",
     } satisfies Record<SliderVariant, string>,
     orientation: {
@@ -101,9 +101,9 @@ const sliderRangeVariants = tokenCVA({
       lg: "",
     } satisfies Record<SliderSize, string>,
     variant: {
-      primary: "bg-[hsl(var(--tm-primary))]",
-      secondary: "bg-[hsl(var(--tm-secondary))]",
-      outline: "bg-[hsl(var(--tm-primary))]",
+      primary: "bg-[hsl(var(--tm-primary))]-600 dark:bg-[hsl(var(--tm-primary))]-500",
+      secondary: "bg-secondary-600 dark:bg-secondary-500",
+      outline: "bg-[hsl(var(--tm-primary))]-600 dark:bg-[hsl(var(--tm-primary))]-500",
     } satisfies Record<SliderVariant, string>,
     orientation: {
       horizontal: "h-full",
@@ -135,16 +135,19 @@ const sliderThumbVariants = tokenCVA({
     } satisfies Record<SliderSize, string>,
     variant: {
       primary: [
-        "border-[hsl(var(--tm-primary))] bg-[hsl(var(--tm-surface-base))]",
-        "focus-visible:ring-[hsl(var(--tm-primary))]",
+        "border-[hsl(var(--tm-primary))]-600 bg-[hsl(var(--tm-surface-base))]",
+        "dark:border-[hsl(var(--tm-primary))]-500",
+        "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
       ].join(" "),
       secondary: [
-        "border-[hsl(var(--tm-secondary))] bg-[hsl(var(--tm-surface-base))]",
-        "focus-visible:ring-[hsl(var(--tm-secondary))]",
+        "border-[hsl(var(--tm-secondary))]/60 bg-[hsl(var(--tm-surface-base))]",
+        "dark:border-secondary-500",
+        "focus-visible:ring-secondary-600 dark:focus-visible:ring-secondary-500",
       ].join(" "),
       outline: [
-        "border-[hsl(var(--tm-primary))] bg-[hsl(var(--tm-surface-base))]",
-        "focus-visible:ring-[hsl(var(--tm-primary))]",
+        "border-[hsl(var(--tm-primary))]-600 bg-[hsl(var(--tm-surface-base))]",
+        "dark:border-[hsl(var(--tm-primary))]-500",
+        "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
       ].join(" "),
     } satisfies Record<SliderVariant, string>,
   },

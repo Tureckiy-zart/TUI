@@ -107,7 +107,7 @@ const separatorVariants = tokenCVA({
       border: "bg-[hsl(var(--tm-border-default))]",
       muted: "bg-[hsl(var(--tm-muted))]",
       primary: "bg-[hsl(var(--tm-primary))]/20",
-      secondary: "bg-[hsl(var(--tm-secondary))]/20",
+      secondary: "bg-secondary/20",
       accent: "bg-[hsl(var(--tm-accent))]/20",
     } satisfies Record<SeparatorColor, string>,
     /**

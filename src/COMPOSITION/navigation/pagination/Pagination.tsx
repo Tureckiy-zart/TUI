@@ -207,7 +207,7 @@ const paginationNavButtonStyles = cn(
   NAVIGATION_TOKENS.sizes.md.padding.vertical,
   NAVIGATION_TOKENS.radius.default,
   NAVIGATION_TOKENS.sizes.md.fontSize,
-  NAVIGATION_TOKENS.states.default.border,
+  "border border-[hsl(var(--tm-border-default))]",
   MOTION_TOKENS.transition.colors,
   `${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
 );
@@ -311,10 +311,11 @@ const PaginationItem = React.forwardRef<HTMLButtonElement, PaginationItemProps>(
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
           NAVIGATION_TOKENS.typography.fontWeight.medium,
+          "border",
           MOTION_TOKENS.transition.colors,
           isCurrent
             ? `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border} ${NAVIGATION_TOKENS.shadow.sm}`
-            : `${NAVIGATION_TOKENS.states.default.border} ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
+            : `${NAVIGATION_TOKENS.states.default.border} border-[hsl(var(--tm-border-default))] ${NAVIGATION_TOKENS.states.default.background} ${NAVIGATION_TOKENS.states.default.text} ${NAVIGATION_TOKENS.states.hover.background} ${NAVIGATION_TOKENS.states.hover.text}`,
           disabled && NAVIGATION_TOKENS.states.disabled.cursor,
           focusRing,
           className,
