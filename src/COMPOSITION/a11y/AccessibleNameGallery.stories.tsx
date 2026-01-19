@@ -68,7 +68,7 @@ export const ButtonNames: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">
@@ -133,7 +133,7 @@ export const FormInputNames: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={6}>
               <Box>
                 <Box className="mb-2">
@@ -234,7 +234,7 @@ export const CustomControlNames: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box className="mb-2">

@@ -174,7 +174,7 @@ describe("FeatureSection component", () => {
 
   it("should apply theme-aware icon container classes", () => {
     const { container } = render(<FeatureSection features={sampleFeatures} />);
-    const iconContainers = container.querySelectorAll('[class*="bg-primary/10"]');
+    const iconContainers = container.querySelectorAll('[class*="bg-[hsl(var(--tm-primary))]/10"]');
     expect(iconContainers.length).toBe(sampleFeatures.length);
   });
 });

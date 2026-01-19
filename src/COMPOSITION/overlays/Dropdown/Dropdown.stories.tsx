@@ -165,7 +165,7 @@ export const Matrix: Story = {
       <div className="space-y-lg">
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">Dropdown Matrix</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             All variants × all sizes. Each cell shows a dropdown with that variant/size combination.
           </p>
         </div>
@@ -173,13 +173,13 @@ export const Matrix: Story = {
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="border border-border bg-muted p-sm text-left text-sm font-medium">
+                <th className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-left text-sm font-medium">
                   Variant / Size
                 </th>
                 {sizes.map((size) => (
                   <th
                     key={size}
-                    className="border border-border bg-muted p-sm text-center text-sm font-medium"
+                    className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-center text-sm font-medium"
                   >
                     {size}
                   </th>
@@ -189,11 +189,14 @@ export const Matrix: Story = {
             <tbody>
               {variants.map((variant) => (
                 <tr key={variant}>
-                  <td className="border border-border bg-muted p-sm text-sm font-medium">
+                  <td className="border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))] p-sm text-sm font-medium">
                     {variant}
                   </td>
                   {sizes.map((size) => (
-                    <td key={size} className="border border-border p-md text-center">
+                    <td
+                      key={size}
+                      className="border border-[hsl(var(--tm-border-default))] p-md text-center"
+                    >
                       <Dropdown.Root>
                         <Dropdown.Trigger asChild>
                           <Button size="sm" variant="outline">
@@ -237,7 +240,7 @@ export const States: Story = {
       <div className="space-y-lg">
         <div className="space-y-sm">
           <h3 className="text-lg font-semibold">Dropdown States</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             All states for DropdownItem: default, disabled. Each dropdown demonstrates different
             item states.
           </p>
@@ -461,21 +464,30 @@ export const KeyboardNavigation: Story = {
             </Dropdown.Content>
           </Dropdown.Root>
         </div>
-        <div className="rounded-md bg-muted p-4 text-sm">
+        <div className="rounded-md bg-[hsl(var(--tm-muted))] p-4 text-sm">
           <p className="mb-2 font-semibold">Keyboard Navigation:</p>
           <ul className="list-inside list-disc space-y-1">
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Enter</kbd> or{" "}
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Space</kbd> - Activate
-              item
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Enter
+              </kbd>{" "}
+              or{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Space
+              </kbd>{" "}
+              - Activate item
             </li>
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">↑</kbd> /{" "}
-              <kbd className="rounded border bg-background px-1.5 py-0.5">↓</kbd> - Navigate items
-              (via Popover)
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↑</kbd>{" "}
+              /{" "}
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">↓</kbd>{" "}
+              - Navigate items (via Popover)
             </li>
             <li>
-              <kbd className="rounded border bg-background px-1.5 py-0.5">Esc</kbd> - Close dropdown
+              <kbd className="rounded border bg-[hsl(var(--tm-surface-base))] px-1.5 py-0.5">
+                Esc
+              </kbd>{" "}
+              - Close dropdown
             </li>
             <li>Typeahead - Type to search items (via Popover)</li>
           </ul>

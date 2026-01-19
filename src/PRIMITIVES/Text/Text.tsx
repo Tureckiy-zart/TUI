@@ -111,7 +111,7 @@ const DEFAULT_WEIGHT = "normal" as const;
 const DEFAULT_TONE = "default" as const;
 
 const textVariants = tokenCVA({
-  base: "text-foreground",
+  base: "text-[hsl(var(--tm-text-primary))]",
   variants: {
     size: {
       xs: TEXT_TOKENS.fontSize.xs,
@@ -128,7 +128,7 @@ const textVariants = tokenCVA({
     } satisfies Record<TextWeight, string>,
     tone: {
       default: "",
-      muted: "text-muted-foreground",
+      muted: "text-[hsl(var(--tm-text-muted))]",
     } satisfies Record<TextTone, string>,
   },
   defaultVariants: {

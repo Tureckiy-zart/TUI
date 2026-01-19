@@ -133,23 +133,23 @@ export const SizesGallery: Story = {
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-sm">
         <Radio size="xs" checked aria-label="Extra small radio" />
-        <span className="text-xs font-medium text-foreground">xs</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">xs</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="sm" checked aria-label="Small radio" />
-        <span className="text-xs font-medium text-foreground">sm</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">sm</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="md" checked aria-label="Medium radio" />
-        <span className="text-xs font-medium text-foreground">md</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">md</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="lg" checked aria-label="Large radio" />
-        <span className="text-xs font-medium text-foreground">lg</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">lg</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Radio size="xl" checked aria-label="Extra large radio" />
-        <span className="text-xs font-medium text-foreground">xl</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">xl</span>
       </div>
     </div>
   ),
@@ -387,7 +387,7 @@ export const Controlled: Story = {
             </span>
           </div>
         </RadioGroup>
-        <p className="text-sm font-medium text-foreground">Selected: {value}</p>
+        <p className="text-sm font-medium text-[hsl(var(--tm-text-primary))]">Selected: {value}</p>
       </div>
     );
   },
@@ -461,19 +461,19 @@ export const KeyboardNavigation: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Keyboard Navigation in RadioGroup</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
-          Use <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowUp</kbd> /{" "}
-          <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowDown</kbd> to navigate between
-          options in vertical groups.
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
+          Use <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowUp</kbd> /{" "}
+          <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowDown</kbd> to
+          navigate between options in vertical groups.
         </p>
-        <p className="mb-md text-sm font-medium text-foreground/90">
-          Use <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowLeft</kbd> /{" "}
-          <kbd className="rounded bg-muted px-1 py-0.5 text-xs">ArrowRight</kbd> in horizontal
-          groups.
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
+          Use <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowLeft</kbd>{" "}
+          / <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowRight</kbd>{" "}
+          in horizontal groups.
         </p>
-        <p className="mb-md text-sm font-medium text-foreground/90">
-          Press <kbd className="rounded bg-muted px-1 py-0.5 text-xs">Space</kbd> to select the
-          focused radio.
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
+          Press <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">Space</kbd>{" "}
+          to select the focused radio.
         </p>
         <RadioGroup defaultValue="option1" orientation="vertical">
           <div className="flex items-center gap-sm">
@@ -499,7 +499,7 @@ export const Accessibility: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Screen Reader Support</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           All radios have proper ARIA attributes for screen readers. Use aria-label or
           aria-labelledby for labels.
         </p>
@@ -511,7 +511,7 @@ export const Accessibility: Story = {
       </div>
       <div>
         <h3 className="mb-md text-lg font-semibold">With Labels</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           Use aria-labelledby to associate radios with visible labels.
         </p>
         <RadioGroup defaultValue="label-1">

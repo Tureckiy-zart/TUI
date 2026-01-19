@@ -62,9 +62,9 @@ const sliderTrackVariants = tokenCVA({
       lg: "", // Track thickness (orientation-specific)
     } satisfies Record<SliderSize, string>,
     variant: {
-      primary: "bg-primary-200 dark:bg-primary-800",
+      primary: "bg-[hsl(var(--tm-primary))]-200 dark:bg-[hsl(var(--tm-primary))]-800",
       secondary: "bg-secondary-200 dark:bg-secondary-800",
-      outline: "bg-border",
+      outline: "bg-[hsl(var(--tm-border-default))]",
     } satisfies Record<SliderVariant, string>,
     orientation: {
       horizontal: "w-full",
@@ -101,9 +101,9 @@ const sliderRangeVariants = tokenCVA({
       lg: "",
     } satisfies Record<SliderSize, string>,
     variant: {
-      primary: "bg-primary-600 dark:bg-primary-500",
+      primary: "bg-[hsl(var(--tm-primary))]-600 dark:bg-[hsl(var(--tm-primary))]-500",
       secondary: "bg-secondary-600 dark:bg-secondary-500",
-      outline: "bg-primary-600 dark:bg-primary-500",
+      outline: "bg-[hsl(var(--tm-primary))]-600 dark:bg-[hsl(var(--tm-primary))]-500",
     } satisfies Record<SliderVariant, string>,
     orientation: {
       horizontal: "h-full",
@@ -135,18 +135,18 @@ const sliderThumbVariants = tokenCVA({
     } satisfies Record<SliderSize, string>,
     variant: {
       primary: [
-        "border-primary-600 bg-background",
-        "dark:border-primary-500",
+        "border-[hsl(var(--tm-primary))]-600 bg-[hsl(var(--tm-surface-base))]",
+        "dark:border-[hsl(var(--tm-primary))]-500",
         "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
       ].join(" "),
       secondary: [
-        "border-secondary-600 bg-background",
+        "border-[hsl(var(--tm-secondary))]/60 bg-[hsl(var(--tm-surface-base))]",
         "dark:border-secondary-500",
         "focus-visible:ring-secondary-600 dark:focus-visible:ring-secondary-500",
       ].join(" "),
       outline: [
-        "border-primary-600 bg-background",
-        "dark:border-primary-500",
+        "border-[hsl(var(--tm-primary))]-600 bg-[hsl(var(--tm-surface-base))]",
+        "dark:border-[hsl(var(--tm-primary))]-500",
         "focus-visible:ring-primary-600 dark:focus-visible:ring-primary-500",
       ].join(" "),
     } satisfies Record<SliderVariant, string>,
@@ -220,7 +220,7 @@ const sliderMarkVariants = tokenCVA({
  */
 const sliderMarkDotVariants = tokenCVA({
   // Base styles - small circular dot
-  base: "rounded-full bg-border transition-colors",
+  base: "rounded-full bg-[hsl(var(--tm-border-default))] transition-colors",
   variants: {
     size: {
       sm: `${SLIDER_TOKENS.mark.dot.size.sm.width} ${SLIDER_TOKENS.mark.dot.size.sm.height}`,
@@ -238,7 +238,7 @@ const sliderMarkDotVariants = tokenCVA({
  */
 const sliderMarkLabelVariants = tokenCVA({
   // Base styles - label text
-  base: "text-muted-foreground whitespace-nowrap",
+  base: "text-[hsl(var(--tm-text-muted))] whitespace-nowrap",
   variants: {
     size: {
       sm: SLIDER_TOKENS.mark.label.fontSize.sm,

@@ -67,7 +67,7 @@ describe("Label", () => {
     it("asterisk has correct styling classes", () => {
       const { container } = renderWithTheme(<Label required>Email</Label>);
       const asterisk = container.querySelector("span");
-      expect(asterisk).toHaveClass("text-destructive");
+      expect(asterisk).toHaveClass("text-[hsl(var(--tm-destructive))]");
       expect(asterisk).toHaveClass("ml-xs");
     });
   });

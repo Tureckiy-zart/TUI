@@ -145,7 +145,7 @@ export const INPUT_TOKENS = {
    * Styling for file input elements
    */
   file: {
-    text: "text-[hsl(var(--foreground))]", // File input text color using CSS var
+    text: "text-[hsl(var(--tm-text-primary))]", // File input text color using CSS var
   } as const,
 
   /**
@@ -191,23 +191,23 @@ export const INPUT_TOKENS = {
     },
     /** Outline variant tokens (default) */
     outline: {
-      border: "border-[hsl(var(--input))]", // Input border color
+      border: "border-[hsl(var(--tm-surface-base))]", // Input border color
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     /** Ghost variant tokens */
     ghost: {
       border: "border-transparent", // Transparent border
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     /** Destructive variant tokens */
     destructive: {
-      border: "border-[hsl(var(--destructive))]", // Destructive border color
-      background: "bg-[hsl(var(--destructive))]", // Destructive background
-      text: "text-[hsl(var(--destructive-foreground))]", // Destructive text color
+      border: "border-[hsl(var(--tm-destructive))]", // Destructive border color
+      background: "bg-[hsl(var(--tm-destructive))]", // Destructive background
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,
@@ -244,15 +244,15 @@ export const INPUT_TOKENS = {
   state: {
     border: {
       /** Default border color */
-      default: "border-[hsl(var(--input))]", // Default border color using CSS var
+      default: "border-[hsl(var(--tm-surface-base))]", // Default border color using CSS var
       /** Focus ring shadow */
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
       /** Error state border (when invalid prop is true) */
-      error: "border-[hsl(var(--destructive))]", // Error state border using CSS var
+      error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
       /** Success state border */
       success: "border-[hsl(var(--semantic-success))]", // Success state border using CSS var
       /** Disabled state border */
-      disabled: "border-[hsl(var(--input))]", // Disabled state border (same as default)
+      disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
     },
     background: {
       /** Default transparent background */
@@ -262,9 +262,9 @@ export const INPUT_TOKENS = {
     },
     text: {
       /** Default text color */
-      default: "text-[hsl(var(--foreground))]", // Default text color using CSS var
+      default: "text-[hsl(var(--tm-text-primary))]", // Default text color using CSS var
       /** Placeholder text color */
-      placeholder: "placeholder:text-[hsl(var(--muted-foreground))]", // Placeholder text color using CSS var
+      placeholder: "placeholder:text-[hsl(var(--tm-text-muted))]", // Placeholder text color using CSS var
       /** Disabled text opacity */
       disabled: "disabled:opacity-50", // Disabled text opacity
     },
@@ -300,7 +300,7 @@ export const INPUT_TOKENS = {
     /** Right padding when icon on right (24px) */
     paddingRight: "pr-lg", // 24px (1.5rem) - padding when icon on right
     /** Icon color (muted foreground) */
-    color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
+    color: "text-[hsl(var(--tm-text-muted))]", // Icon color using CSS variable
     position: {
       /** Left position */
       left: "left-0", // Position left
@@ -379,9 +379,9 @@ export const INPUT_TOKENS = {
     },
     color: {
       /** Default helper text color (muted foreground) */
-      default: "text-[hsl(var(--muted-foreground))]", // Default message color
+      default: "text-[hsl(var(--tm-text-muted))]", // Default message color
       /** Error message color (destructive) */
-      error: "text-[hsl(var(--destructive))]", // Error message color
+      error: "text-[hsl(var(--tm-destructive))]", // Error message color
       /** Success message color (semantic success) */
       success: "text-[hsl(var(--semantic-success))]", // Success message color
     },

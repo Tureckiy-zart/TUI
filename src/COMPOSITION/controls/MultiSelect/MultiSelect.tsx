@@ -26,7 +26,7 @@
  * - Colors come from SELECT_TOKENS for select styling
  * - Colors come from CHIP_TOKENS for chip/tag styling
  * - Colors come from POPOVER_TOKENS for popover content styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -480,7 +480,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               INPUT_TOKENS.padding.vertical.md,
               INPUT_TOKENS.radius.sm,
               INPUT_TOKENS.fontSize.sm,
-              "focus-visible:bg-accent focus-visible:text-accent-foreground",
+              "focus-visible:bg-[hsl(var(--tm-accent))] focus-visible:text-[hsl(var(--tm-accent-foreground))]",
               "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
             )}
           >
@@ -506,7 +506,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     // Render trigger content
     const renderTriggerContent = React.useCallback(() => {
       if (selectedValues.length === 0) {
-        return <span className="text-foreground opacity-70">{placeholder}</span>;
+        return <span className="text-[hsl(var(--tm-text-primary))] opacity-70">{placeholder}</span>;
       }
       return (
         <>
@@ -556,7 +556,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               INPUT_TOKENS.variant.outline.text,
               INPUT_TOKENS.variant.outline.focus,
               "justify-start",
-              "data-[state=open]:border-ring",
+              "data-[state=open]:border-[hsl(var(--tm-focus-ring))]",
             )}
             disabled={disabled}
             aria-label={ariaLabel}

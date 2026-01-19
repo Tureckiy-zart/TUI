@@ -48,7 +48,7 @@ type SwitchTrackState = "base" | "checked" | "disabled" | "disabledChecked" | "i
  * - Motion Authority: Switch uses MOTION_TOKENS.transition for transitions
  * - Radius Authority: Switch references SWITCH_TOKENS.track[].radius for border radius
  * - State Authority: Switch uses State Matrix CSS variables for all states
- * - Color Authority: Switch uses CSS variable references (--foreground, --primary, --destructive, etc.)
+ * - Color Authority: Switch uses `--tm-*` variables and `--semantic-*` for validation states
  *
  * Token-only contract:
  * - All colors are defined in SWITCH_TOKENS (src/FOUNDATION/tokens/components/switch.ts)

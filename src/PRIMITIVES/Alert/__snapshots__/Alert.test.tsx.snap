@@ -2,7 +2,7 @@
 
 exports[`Alert > Snapshot > matches snapshot for default variant 1`] = `
 <div
-  class="rounded-lg border p-md bg-muted border-border text-foreground"
+  class="rounded-lg border p-md bg-[hsl(var(--tm-muted))] border-[hsl(var(--tm-border-default))] text-[hsl(var(--tm-text-primary))]"
   role="alert"
 >
   Default Alert
@@ -11,7 +11,7 @@ exports[`Alert > Snapshot > matches snapshot for default variant 1`] = `
 
 exports[`Alert > Snapshot > matches snapshot for destructive variant 1`] = `
 <div
-  class="rounded-lg border p-md bg-destructive/10 border-destructive/20 text-destructive-foreground"
+  class="rounded-lg border p-md bg-[hsl(var(--tm-destructive))]/10 border-[hsl(var(--tm-destructive))]/20 text-[hsl(var(--tm-destructive-foreground))]"
   role="alert"
 >
   Destructive Alert
@@ -20,7 +20,7 @@ exports[`Alert > Snapshot > matches snapshot for destructive variant 1`] = `
 
 exports[`Alert > Snapshot > matches snapshot for primary variant 1`] = `
 <div
-  class="rounded-lg border p-md bg-primary/10 border-primary/20 text-primary-foreground"
+  class="rounded-lg border p-md bg-[hsl(var(--tm-primary))]/10 border-[hsl(var(--tm-primary))]/20 text-[hsl(var(--tm-primary-foreground))]"
   role="alert"
 >
   Primary Alert

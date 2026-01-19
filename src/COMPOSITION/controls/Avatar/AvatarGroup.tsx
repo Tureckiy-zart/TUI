@@ -13,7 +13,7 @@
  * - ALL styling is delegated to Avatar component (AVATAR_TOKENS)
  * - AvatarGroup uses spacing variants for overlap effect (negative margin)
  * - Spacing variants use Tailwind spacing utilities (-space-x-*) for overlap
- * - Border styling uses token-based border classes (border-2 border-background)
+ * - Border styling uses token-based border classes (border-2 border-[hsl(var(--tm-surface-base))])
  * - NO raw Tailwind color classes (bg-red-*, text-blue-*, etc.) allowed
  * - Layout utilities (flex, items-center) are ALLOWED
  *
@@ -30,8 +30,8 @@
  *
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
- * - Border color uses token-based border classes (border-background)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - Border color uses token-based border classes (border-[hsl(var(--tm-surface-base))])
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * @see docs/architecture/LAYOUT_AUTHORITY.md
  * @see docs/architecture/SPACING_AUTHORITY.md
@@ -40,7 +40,7 @@
  * Authority Compliance:
  * - Layout Authority: AvatarGroup uses layout utilities for overlap effect
  * - Spacing Authority: AvatarGroup uses spacing utilities for overlap (negative margin)
- * - Color Authority: AvatarGroup uses token-based border color (border-background)
+ * - Color Authority: AvatarGroup uses token-based border color (border-[hsl(var(--tm-surface-base))])
  * - Avatar Authority: AvatarGroup delegates avatar styling to Avatar component (AVATAR_TOKENS)
  *
  * Token-only contract:
@@ -157,7 +157,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             fallback={avatar.fallback}
             size={size}
             shape={shape}
-            className="border-2 border-background"
+            className="border-2 border-[hsl(var(--tm-surface-base))]"
           />
         ))}
 
@@ -167,7 +167,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             fallback={`+${remainingCount}`}
             size={size}
             shape={shape}
-            className="border-2 border-background"
+            className="border-2 border-[hsl(var(--tm-surface-base))]"
           />
         )}
       </div>

@@ -2,7 +2,7 @@
 
 exports[`Heading > Snapshot > matches snapshot for default variant 1`] = `
 <h1
-  class="font-display text-foreground text-5xl font-bold leading-tight tracking-tight"
+  class="font-display text-[hsl(var(--tm-text-primary))] text-5xl font-bold leading-tight tracking-tight"
 >
   Default Heading
 </h1>
@@ -10,7 +10,7 @@ exports[`Heading > Snapshot > matches snapshot for default variant 1`] = `
 
 exports[`Heading > Snapshot > matches snapshot for muted variant 1`] = `
 <h2
-  class="font-display text-foreground text-4xl font-bold leading-tight tracking-tight text-muted-foreground"
+  class="font-display text-[hsl(var(--tm-text-primary))] text-4xl font-bold leading-tight tracking-tight text-[hsl(var(--tm-text-muted))]"
 >
   Muted Heading
 </h2>

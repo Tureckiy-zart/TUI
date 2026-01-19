@@ -109,56 +109,56 @@ export const SWITCH_TOKENS = {
   variant: {
     primary: {
       track: {
-        unchecked: "bg-[hsl(var(--input))]", // Input border color when unchecked
+        unchecked: "bg-[hsl(var(--tm-surface-base))]", // Input border color when unchecked
         checked: "bg-[hsl(var(--tm-primary))]", // Primary color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted color when unchecked
+        unchecked: "bg-[hsl(var(--tm-muted))]", // Muted color when unchecked
         checked: "bg-[hsl(var(--tm-primary-foreground))]", // Primary foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-primary)]", // Primary focus ring
     },
     secondary: {
       track: {
-        unchecked: "bg-[hsl(var(--input))]", // Input border color when unchecked
+        unchecked: "bg-[hsl(var(--tm-surface-base))]", // Input border color when unchecked
         checked: "bg-[hsl(var(--tm-secondary))]", // Secondary color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted color when unchecked
+        unchecked: "bg-[hsl(var(--tm-muted))]", // Muted color when unchecked
         checked: "bg-[hsl(var(--tm-secondary-foreground))]", // Secondary foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     outline: {
       track: {
-        unchecked: "bg-[hsl(var(--input))]", // Input border color when unchecked
+        unchecked: "bg-[hsl(var(--tm-surface-base))]", // Input border color when unchecked
         checked: "bg-[hsl(var(--tm-primary))]", // Primary color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted color when unchecked
+        unchecked: "bg-[hsl(var(--tm-muted))]", // Muted color when unchecked
         checked: "bg-[hsl(var(--tm-primary-foreground))]", // Primary foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     ghost: {
       track: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted background when unchecked
+        unchecked: "bg-[hsl(var(--tm-muted))]", // Muted background when unchecked
         checked: "bg-[hsl(var(--tm-primary))]", // Primary color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted-foreground))]", // Muted foreground when unchecked
+        unchecked: "bg-[hsl(var(--tm-text-muted))]", // Muted foreground when unchecked
         checked: "bg-[hsl(var(--tm-primary-foreground))]", // Primary foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     destructive: {
       track: {
-        unchecked: "bg-[hsl(var(--input))]", // Input border color when unchecked
-        checked: "bg-[hsl(var(--destructive))]", // Destructive color when checked
+        unchecked: "bg-[hsl(var(--tm-surface-base))]", // Input border color when unchecked
+        checked: "bg-[hsl(var(--tm-destructive))]", // Destructive color when checked
       },
       handle: {
-        unchecked: "bg-[hsl(var(--muted))]", // Muted color when unchecked
-        checked: "bg-[hsl(var(--destructive-foreground))]", // Destructive foreground when checked
+        unchecked: "bg-[hsl(var(--tm-muted))]", // Muted color when unchecked
+        checked: "bg-[hsl(var(--tm-destructive-foreground))]", // Destructive foreground when checked
       },
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
@@ -171,18 +171,18 @@ export const SWITCH_TOKENS = {
    */
   state: {
     track: {
-      default: "bg-[hsl(var(--input))]", // Default track color using CSS var
+      default: "bg-[hsl(var(--tm-surface-base))]", // Default track color using CSS var
       checked: "bg-[hsl(var(--tm-primary))]", // Checked state track
       disabled: "bg-[hsl(var(--tm-disabled))]", // Disabled state track - uses explicit disabled semantic token
       disabledChecked: "bg-[hsl(var(--tm-disabled))]", // Disabled checked track - uses explicit disabled semantic token
-      error: "bg-[hsl(var(--destructive))]", // Error state track using CSS var
+      error: "bg-[hsl(var(--tm-destructive))]", // Error state track using CSS var
     },
     handle: {
-      default: "bg-[hsl(var(--muted-foreground))]", // Default handle color using CSS var
+      default: "bg-[hsl(var(--tm-text-muted))]", // Default handle color using CSS var
       checked: "bg-[hsl(var(--tm-primary-foreground))]", // Checked state handle
       disabled: "bg-[hsl(var(--tm-disabled-foreground))]", // Disabled state handle - uses explicit disabled semantic token
       disabledChecked: "bg-[hsl(var(--tm-disabled-foreground))]", // Disabled checked handle - uses explicit disabled semantic token
-      error: "bg-[hsl(var(--destructive-foreground))]", // Error state handle
+      error: "bg-[hsl(var(--tm-destructive-foreground))]", // Error state handle
     },
     opacity: {
       disabled: "opacity-50", // Disabled opacity (may be used in addition to disabled tokens, not as replacement)

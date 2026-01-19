@@ -65,7 +65,7 @@ export interface TextareaProps extends Omit<
    * State handling follows STATE_AUTHORITY pattern:
    * - Invalid state is derived from HTML attributes, not a separate variant axis
    * - Use invalid={true} or aria-invalid={true} (native HTML attribute)
-   * - Error styling uses CSS variable: border-[hsl(var(--destructive))]
+   * - Error styling uses CSS variable: border-[hsl(var(--tm-destructive))]
    *
    * @default false
    *

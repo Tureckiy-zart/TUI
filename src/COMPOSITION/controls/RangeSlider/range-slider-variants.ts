@@ -263,7 +263,7 @@ const rangeSliderMarkVariants = tokenCVA({
  * RangeSlider mark dot variants (the actual tick mark)
  */
 const rangeSliderMarkDotVariants = tokenCVA({
-  base: "rounded-full bg-border transition-colors",
+  base: "rounded-full bg-[hsl(var(--tm-border-default))] transition-colors",
   variants: {
     size: {
       sm: `${RANGESLIDER_TOKENS.mark.dot.size.sm.height} ${RANGESLIDER_TOKENS.mark.dot.size.sm.width}`,
@@ -280,7 +280,7 @@ const rangeSliderMarkDotVariants = tokenCVA({
  * RangeSlider mark label variants
  */
 const rangeSliderMarkLabelVariants = tokenCVA({
-  base: "text-muted-foreground whitespace-nowrap",
+  base: "text-[hsl(var(--tm-text-muted))] whitespace-nowrap",
   variants: {
     size: {
       sm: RANGESLIDER_TOKENS.mark.label.fontSize.sm,

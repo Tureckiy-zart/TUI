@@ -23,7 +23,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from ACCORDION_TOKENS for trigger and content styling
  * - Variant colors use semantic Tailwind classes
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

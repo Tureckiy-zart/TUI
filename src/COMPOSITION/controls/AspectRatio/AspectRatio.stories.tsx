@@ -67,14 +67,14 @@ export const Matrix: Story = {
           <div key={preset} className="space-y-2">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium capitalize">{preset}</h4>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">
                 {ASPECT_RATIO_PRESETS[preset].toFixed(3)}
               </p>
             </div>
             <div className="w-full max-w-md">
               <AspectRatio preset={preset}>
-                <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-border bg-muted">
-                  <p className="text-sm text-muted-foreground">
+                <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]">
+                  <p className="text-sm text-[hsl(var(--tm-text-muted))]">
                     {preset} ({ASPECT_RATIO_PRESETS[preset].toFixed(3)})
                   </p>
                 </div>
@@ -199,8 +199,8 @@ export const CustomRatio: Story = {
         <h4 className="text-sm font-medium">2:1 (Wide)</h4>
         <div className="w-full max-w-2xl">
           <AspectRatio ratio={2 / 1}>
-            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-border bg-muted">
-              <p className="text-sm text-muted-foreground">2:1 ratio</p>
+            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]">
+              <p className="text-sm text-[hsl(var(--tm-text-muted))]">2:1 ratio</p>
             </div>
           </AspectRatio>
         </div>
@@ -210,8 +210,8 @@ export const CustomRatio: Story = {
         <h4 className="text-sm font-medium">3:2</h4>
         <div className="w-full max-w-lg">
           <AspectRatio ratio={3 / 2}>
-            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-border bg-muted">
-              <p className="text-sm text-muted-foreground">3:2 ratio</p>
+            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]">
+              <p className="text-sm text-[hsl(var(--tm-text-muted))]">3:2 ratio</p>
             </div>
           </AspectRatio>
         </div>
@@ -221,8 +221,8 @@ export const CustomRatio: Story = {
         <h4 className="text-sm font-medium">1:2 (Tall)</h4>
         <div className="w-full max-w-xs">
           <AspectRatio ratio={1 / 2}>
-            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-border bg-muted">
-              <p className="text-sm text-muted-foreground">1:2 ratio</p>
+            <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-dashed border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]">
+              <p className="text-sm text-[hsl(var(--tm-text-muted))]">1:2 ratio</p>
             </div>
           </AspectRatio>
         </div>
@@ -313,7 +313,7 @@ export const ProfileCards: Story = {
           </AspectRatio>
           <div className="text-center">
             <p className="text-sm font-medium">User {index + 1}</p>
-            <p className="text-xs text-muted-foreground">@user{index + 1}</p>
+            <p className="text-xs text-[hsl(var(--tm-text-muted))]">@user{index + 1}</p>
           </div>
         </div>
       ))}

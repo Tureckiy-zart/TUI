@@ -67,21 +67,21 @@ export const CHECKBOX_TOKENS = {
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     outline: {
-      border: "border-[hsl(var(--input))]", // Input border color
+      border: "border-[hsl(var(--tm-surface-base))]", // Input border color
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color (for checkmark)
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color (for checkmark)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     ghost: {
       border: "border-transparent", // Transparent border
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color (for checkmark)
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color (for checkmark)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     destructive: {
-      border: "border-[hsl(var(--destructive))]", // Destructive border color
-      background: "bg-[hsl(var(--destructive))]", // Destructive background
-      text: "text-[hsl(var(--destructive-foreground))]", // Destructive text color (for checkmark)
+      border: "border-[hsl(var(--tm-destructive))]", // Destructive border color
+      background: "bg-[hsl(var(--tm-destructive))]", // Destructive background
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text color (for checkmark)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,
@@ -93,11 +93,11 @@ export const CHECKBOX_TOKENS = {
    */
   state: {
     border: {
-      default: "border-[hsl(var(--input))]", // Default border color using CSS var
+      default: "border-[hsl(var(--tm-surface-base))]", // Default border color using CSS var
       checked: "border-[hsl(var(--tm-primary))]", // Checked state border
       indeterminate: "border-[hsl(var(--tm-primary))]", // Indeterminate state border
-      error: "border-[hsl(var(--destructive))]", // Error state border using CSS var
-      disabled: "border-[hsl(var(--input))]", // Disabled state border (same as default)
+      error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
+      disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
     },
     background: {
@@ -105,10 +105,10 @@ export const CHECKBOX_TOKENS = {
       checked: "bg-[hsl(var(--tm-primary))]", // Checked state background
       indeterminate: "bg-[hsl(var(--tm-primary))]", // Indeterminate state background
       disabled: "bg-transparent", // Disabled background (same as default)
-      disabledChecked: "bg-[hsl(var(--muted))]", // Disabled checked background
+      disabledChecked: "bg-[hsl(var(--tm-muted))]", // Disabled checked background
     },
     text: {
-      default: "text-[hsl(var(--foreground))]", // Default text color using CSS var
+      default: "text-[hsl(var(--tm-text-primary))]", // Default text color using CSS var
       checked: "text-[hsl(var(--tm-primary-foreground))]", // Checked state text (for checkmark)
       indeterminate: "text-[hsl(var(--tm-primary-foreground))]", // Indeterminate state text
       disabled: "disabled:opacity-50", // Disabled text opacity
@@ -129,7 +129,7 @@ export const CHECKBOX_TOKENS = {
     stroke: "stroke-2", // 2px stroke width for checkmark
     color: {
       default: "text-[hsl(var(--tm-primary-foreground))]", // Default checkmark color (for variants with colored background)
-      disabled: "text-[hsl(var(--muted-foreground))]", // Disabled checkmark color
+      disabled: "text-[hsl(var(--tm-text-muted))]", // Disabled checkmark color
       // For outline/ghost variants with transparent background, use primary color for visibility
       checkedOutline: "text-[hsl(var(--tm-primary))]", // Checked state icon color for outline variant
       checkedGhost: "text-[hsl(var(--tm-primary))]", // Checked state icon color for ghost variant

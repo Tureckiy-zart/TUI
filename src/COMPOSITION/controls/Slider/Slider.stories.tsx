@@ -131,7 +131,7 @@ export const States: Story = {
                 <div className="flex items-center gap-4">
                   {states.map((state) => (
                     <div key={state.name} className="flex-1 space-y-1">
-                      <div className="text-xs text-muted-foreground">{state.name}</div>
+                      <div className="text-xs text-[hsl(var(--tm-text-muted))]">{state.name}</div>
                       <Slider
                         variant={variant}
                         size={size}
@@ -195,7 +195,7 @@ export const VolumeControl: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Volume</label>
-          <span className="text-sm text-muted-foreground">{volume}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{volume}%</span>
         </div>
         <Slider
           variant="primary"
@@ -224,7 +224,7 @@ export const PriceFilter: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Maximum Price</label>
-          <span className="text-sm text-muted-foreground">${maxPrice}</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">${maxPrice}</span>
         </div>
         <Slider
           variant="secondary"
@@ -253,7 +253,7 @@ export const BrightnessControl: Story = {
       <div className="max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Brightness</label>
-          <span className="text-sm text-muted-foreground">{brightness}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{brightness}%</span>
         </div>
         <Slider
           variant="outline"
@@ -297,7 +297,7 @@ export const VerticalOrientation: Story = {
     return (
       <div className="flex h-64 items-center gap-8">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">{value}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
             size="sm"
@@ -308,7 +308,7 @@ export const VerticalOrientation: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">{value}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
             size="md"
@@ -319,7 +319,7 @@ export const VerticalOrientation: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">{value}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
             size="lg"
@@ -345,7 +345,7 @@ export const WithMarks: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-2 block text-sm text-muted-foreground">{value}%</span>
+          <span className="mb-2 block text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             value={value}
             onValueChange={setValue}
@@ -371,7 +371,7 @@ export const WithMarksAndLabels: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-4 block text-sm text-muted-foreground">{value}%</span>
+          <span className="mb-4 block text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             value={value}
             onValueChange={setValue}
@@ -404,7 +404,9 @@ export const CustomMarkLabels: Story = {
     return (
       <div className="w-full max-w-md space-y-8">
         <div>
-          <span className="mb-4 block text-sm text-muted-foreground">Volume: {value}%</span>
+          <span className="mb-4 block text-sm text-[hsl(var(--tm-text-muted))]">
+            Volume: {value}%
+          </span>
           <Slider
             value={value}
             onValueChange={setValue}
@@ -436,7 +438,7 @@ export const VerticalWithMarks: Story = {
     return (
       <div className="flex h-64 items-center gap-8">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">{value}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
             value={value}
@@ -448,7 +450,7 @@ export const VerticalWithMarks: Story = {
           />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">{value}%</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">{value}%</span>
           <Slider
             orientation="vertical"
             value={value}

@@ -74,7 +74,7 @@ export const IconButtonLabel: Story = {
   render: () => (
     <button
       type="button"
-      className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="inline-flex items-center justify-center rounded-md p-2 text-[hsl(var(--tm-text-primary))] hover:bg-[hsl(var(--tm-muted))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label="Close dialog"
     >
       <svg
@@ -117,7 +117,7 @@ export const FormLabelHelper: Story = {
       <input
         id="email-input"
         type="email"
-        className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="block w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-3 py-2 text-sm ring-offset-background placeholder:text-[hsl(var(--tm-text-muted))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         placeholder="Enter your email"
         aria-describedby="email-helper"
       />

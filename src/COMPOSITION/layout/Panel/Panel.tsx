@@ -25,7 +25,7 @@
  * - Colors come from PANEL_TOKENS.tone for tone styling
  * - Background colors use PANEL_TOKENS.tone[tone].bg
  * - Border colors use PANEL_TOKENS.tone[tone].border
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

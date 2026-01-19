@@ -125,8 +125,8 @@ export const AllVariants: Story = {
           </Button>
         </div>
         <Backdrop variant={variant} isVisible={true} className="fixed inset-0 z-50" />
-        <div className="relative z-40 rounded-lg border bg-background p-lg shadow-lg">
-          <p className="text-sm text-muted-foreground">
+        <div className="relative z-40 rounded-lg border bg-[hsl(var(--tm-surface-base))] p-lg shadow-lg">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Current variant: <strong>{variant}</strong>
           </p>
         </div>
@@ -150,9 +150,9 @@ export const WithContent: Story = {
               onClick={() => setShow(false)}
               className="fixed inset-0 z-40"
             />
-            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-lg shadow-lg">
+            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-[hsl(var(--tm-surface-base))] p-lg shadow-lg">
               <h2 className="mb-md text-lg font-semibold">Modal Content</h2>
-              <p className="mb-md text-sm text-muted-foreground">
+              <p className="mb-md text-sm text-[hsl(var(--tm-text-muted))]">
                 This modal has a blurred backdrop behind it.
               </p>
               <Button onClick={() => setShow(false)}>Close</Button>
@@ -184,7 +184,7 @@ export const LongContent: Story = {
               onClick={() => setShow(false)}
               className="fixed inset-0 z-40"
             />
-            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-lg shadow-lg">
+            <div className="fixed left-1/2 top-1/2 z-40 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-[hsl(var(--tm-surface-base))] p-lg shadow-lg">
               <h2 className="mb-md text-lg font-semibold">Terms and Conditions</h2>
               <div className="max-h-[400px] space-y-md overflow-y-auto text-sm">
                 <p>

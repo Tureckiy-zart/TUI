@@ -223,7 +223,7 @@ function A11yDemo() {
         <Button onClick={() => notify.error("Accessible error message")}>Error</Button>
       </div>
       <NotificationCenter.Panel isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-[hsl(var(--tm-text-muted))]">
         Use keyboard: Tab to navigate, Escape to close, Arrow keys in panel
       </p>
     </div>

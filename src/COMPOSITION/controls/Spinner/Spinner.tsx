@@ -29,7 +29,7 @@
  * - Border colors use SPINNER_TOKENS.borderColor[tone]
  * - Text colors use SPINNER_TOKENS.tone[tone]
  * - Background colors use SPINNER_TOKENS.background and SPINNER_TOKENS.linearTrackBackground
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -299,33 +299,30 @@ function getLabelGap(size: SpinnerSize): "xs" | "sm" | "md" | "lg" {
 /**
  * Get color value from CSS variable with fallback support
  * Handles both formats: ready hsl() values and raw HSL numbers
- * Tries multiple variable names for compatibility
  * Walks up the DOM tree to find the nearest ancestor with the variable set,
  * then falls back to document root
  */
 function getColorFromCSSVariable(element: HTMLElement, tone: SpinnerTone): string {
-  const varNamesByTone: Record<SpinnerTone, string[]> = {
-    primary: ["--primary", "--tm-primary"],
-    muted: ["--muted-foreground"],
-    subtle: ["--muted", "--muted-foreground"], // Fallback to muted-foreground if --muted is not found
+  const varNameByTone: Record<SpinnerTone, string> = {
+    primary: "--tm-primary",
+    muted: "--tm-text-muted",
+    subtle: "--tm-muted",
   };
 
-  const varNames = varNamesByTone[tone];
+  const varName = varNameByTone[tone];
 
   // Walk up the DOM tree to find nearest ancestor with the variable set
   let currentElement: HTMLElement | null = element;
   while (currentElement) {
     const computedStyle = window.getComputedStyle(currentElement);
-    for (const varName of varNames) {
-      const value = computedStyle.getPropertyValue(varName).trim();
-      if (value) {
-        // If value already starts with 'hsl(' or 'rgb(', return as is
-        if (value.startsWith("hsl(") || value.startsWith("rgb(")) {
-          return value;
-        }
-        // Otherwise wrap in hsl()
-        return `hsl(${value})`;
+    const value = computedStyle.getPropertyValue(varName).trim();
+    if (value) {
+      // If value already starts with 'hsl(' or 'rgb(', return as is
+      if (value.startsWith("hsl(") || value.startsWith("rgb(")) {
+        return value;
       }
+      // Otherwise wrap in hsl()
+      return `hsl(${value})`;
     }
     currentElement = currentElement.parentElement;
   }
@@ -871,19 +868,6 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
             } else if (ref) {
               (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
             }
-            // Inherit CSS variables from parent for custom color support
-            if (el) {
-              const parent = el.parentElement;
-              if (parent) {
-                const parentStyle = window.getComputedStyle(parent);
-                const cssVarPrimary = parentStyle.getPropertyValue("--primary");
-                if (cssVarPrimary) {
-                  el.style.setProperty("--primary", cssVarPrimary);
-                  el.style.setProperty("--muted-foreground", cssVarPrimary);
-                  el.style.setProperty("--muted", cssVarPrimary);
-                }
-              }
-            }
           }}
           role="status"
           aria-label={accessibleLabel}
@@ -908,19 +892,6 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
             ref(el);
           } else if (ref) {
             (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
-          }
-          // Inherit CSS variables from parent for custom color support
-          if (el) {
-            const parent = el.parentElement;
-            if (parent) {
-              const parentStyle = window.getComputedStyle(parent);
-              const cssVarPrimary = parentStyle.getPropertyValue("--primary");
-              if (cssVarPrimary) {
-                el.style.setProperty("--primary", cssVarPrimary);
-                el.style.setProperty("--muted-foreground", cssVarPrimary);
-                el.style.setProperty("--muted", cssVarPrimary);
-              }
-            }
           }
         }}
         role="status"

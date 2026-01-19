@@ -277,7 +277,7 @@ export function FilterBar({
 
       {/* Active Filters Summary */}
       {hasActiveFilters && (
-        <div className="rounded-lg bg-muted/50 p-sm">
+        <div className="rounded-lg bg-[hsl(var(--tm-muted))]/50 p-sm">
           <div className="mb-sm text-sm font-medium">{activeFiltersLabel}</div>
           <div className="flex flex-wrap gap-sm">
             {getFilterSummary().map((filter, index) => (

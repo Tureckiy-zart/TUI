@@ -28,7 +28,7 @@ describe("HeroSection component", () => {
   it("should apply full-width variant by default", () => {
     const { container } = render(<HeroSection title="Test Title" />);
     const section = container.querySelector("section");
-    expect(section).toHaveClass("bg-background");
+    expect(section).toHaveClass("bg-[hsl(var(--tm-surface-base))]");
   });
 
   it("should apply split variant", () => {
@@ -39,10 +39,10 @@ describe("HeroSection component", () => {
 
   it("should apply background variants", () => {
     const { container: container1 } = render(<HeroSection title="Test" background="muted" />);
-    expect(container1.querySelector("section")).toHaveClass("bg-muted");
+    expect(container1.querySelector("section")).toHaveClass("bg-[hsl(var(--tm-muted))]");
 
     const { container: container2 } = render(<HeroSection title="Test" background="card" />);
-    expect(container2.querySelector("section")).toHaveClass("bg-card");
+    expect(container2.querySelector("section")).toHaveClass("bg-[hsl(var(--tm-surface-raised))]");
   });
 
   it("should apply custom className", () => {

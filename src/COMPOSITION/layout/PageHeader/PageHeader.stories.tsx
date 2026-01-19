@@ -203,7 +203,7 @@ export const ReactNodeTitle: Story = {
     title: (
       <>
         <span>Custom </span>
-        <span className="text-primary">Title</span>
+        <span className="text-[hsl(var(--tm-primary))]">Title</span>
       </>
     ),
     description: "Title can be a ReactNode for custom formatting",

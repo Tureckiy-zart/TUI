@@ -1,43 +1,45 @@
-﻿# Формат темы (runtime-реализация)
+# Theme Tokens Format (runtime implementation)
 
-Этот документ описывает **фактическую** систему темы в текущем коде. Сейчас тема применяется **в рантайме** через JS и установку CSS‑переменных, а не через готовые CSS‑файлы тем.
+This document describes the actual theme system in the current code. The theme
+is applied at runtime via JS and CSS variable assignment, not via prebuilt theme
+CSS files.
 
-## Что является темой сейчас
+## What a theme is today
 
-- **Тема = набор JS‑токенов + overrides**, применяемых в `applyDocumentTheme()`.
-- CSS‑переменные выставляются функцией `updateCSSVariablesFromTokens()`.
-- CSS‑файлы тем из `src/EXTENSIONS/themes/` сейчас **не используются** в рантайме.
+- **Theme = JS token set + overrides**, applied in `applyDocumentTheme()`.
+- CSS variables are set by `updateCSSVariablesFromTokens()`.
+- Theme CSS files in `src/EXTENSIONS/themes/` are not used at runtime.
 
-**Кодовая база:**
+**Code locations:**
 - `src/FOUNDATION/theme/applyMode.ts`
 - `src/FOUNDATION/theme/ThemeProvider.tsx`
-- `src/themes/*` (описания тем и брендов)
+- `src/themes/*` (themes and brands)
 
-## Атрибуты DOM
+## DOM attributes
 
-Текущая схема атрибутов на `<html>`:
+Current attribute scheme on `<html>`:
 
 - `data-mode`: `day | night`
 - `data-theme-name`: `default | dark | brand`
-- `data-theme`: дублирует `data-mode` (используется как вторичный атрибут)
+- `data-theme`: duplicates `data-mode` (secondary attribute)
 
-Это соответствует текущей логике в `applyMode.ts`.
+This matches the logic in `applyMode.ts`.
 
-## Где задаются значения токенов
+## Where token values come from
 
-`updateCSSVariablesFromTokens(mode)` выставляет CSS‑переменные на `document.documentElement`:
+`updateCSSVariablesFromTokens(mode)` sets CSS variables on `document.documentElement`:
 
-- **Legacy базовые переменные:** `--background`, `--foreground`, `--card`, `--popover`, `--border`, `--ring`, и т.д.
-- **Surface/Text/Semantic группы:** `--surface-*`, `--text-*`, `--semantic-*`, `--chart-*`
-- **Цветовые шкалы:** `--primary-*`, `--secondary-*`, `--accent-*`
-- **Semantic TM‑токены (частично):** `--tm-primary`, `--tm-primary-foreground`, `--tm-secondary`, `--tm-accent`, `--tm-disabled`, `--tm-disabled-foreground`
+- **Legacy base variables:** `--background`, `--foreground`, `--card`, `--popover`, `--border`, `--ring`, etc.
+- **Surface/Text/Semantic groups:** `--surface-*`, `--text-*`, `--semantic-*`, `--chart-*`
+- **Color scales:** `--primary-*`, `--secondary-*`, `--accent-*`
+- **Semantic TM tokens:** 100% REQUIRED Canon Core v1 `--tm-*` (dev-guard on missing/empty in dev)
 
-Полный список выставляемых переменных находится в:
+The full list of emitted variables is in:
 - `src/FOUNDATION/theme/applyMode.ts`
 
-## Источники токенов
+## Token sources
 
-Токены берутся из JS‑объектов в `src/FOUNDATION/tokens/*` и могут быть переопределены темой:
+Tokens come from JS objects in `src/FOUNDATION/tokens/*` and can be overridden by themes:
 
 - `src/FOUNDATION/tokens/colors.ts`
 - `src/FOUNDATION/tokens/motion/v2`
@@ -46,9 +48,9 @@
 - `src/FOUNDATION/tokens/shadows.ts`
 - `src/FOUNDATION/tokens/typography.ts`
 
-## Темы и бренды
+## Themes and brands
 
-Текущие темы и бренды находятся в `src/themes`:
+Current themes and brands live in `src/themes`:
 
 - `src/themes/default.ts`
 - `src/themes/dark.ts`
@@ -56,29 +58,42 @@
 - `src/themes/neon.ts`
 - `src/themes/minimal.ts`
 
-`ThemeProvider` регистрирует бренды и умеет применять бренд‑оверрайды через `brand_engine`.
+`ThemeProvider` registers brands and applies brand overrides via `brand_engine`.
 
-## Реестр required-tokens.ts
+## required-tokens.ts registry
 
-`src/FOUNDATION/tokens/required-tokens.ts` — **реестр для tooling/контракта**, а не для текущего runtime.
-На данный момент рантайм **не выставляет полный список** `--tm-*` токенов из реестра.
+`src/FOUNDATION/tokens/required-tokens.ts` is the tooling/contract registry.
+Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+Missing/empty required tokens trigger a dev-time error (dev-guard).
+Build-time validation runs via `theme:validate:tm` and writes
+`artifacts/reports/TM_CONTRACT_COVERAGE_REPORT.md`.
 
-## Быстрый пример использования
+## Runtime Invariants
+
+Runtime snapshot = the merged token map used to compute required `--tm-*` values.
+
+- `applyMode` emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens synchronously on `document.documentElement`.
+- `required-tokens.ts` is the required registry for the contract.
+- Dev-guard validates `REQUIRED_THEME_TOKENS` and throws on missing/empty required tokens in development.
+- Build-time validator (`theme:validate:tm`) checks every (mode x themeName x brandId + none) combo and fails CI on any gap.
+- Shared snapshot assembly lives in `src/FOUNDATION/theme/runtimeTmSnapshot.ts` and is used by runtime and build-time validation.
+- Derived/product/detail tokens are not REQUIRED (see `docs/theming/TM_TOKEN_CONTRACT_V1.md`).
+
+## Quick example
 
 ```ts
 import { ThemeProvider } from "@/FOUNDATION/theme";
 
-// ThemeProvider управляет data-mode/data-theme-name и применяет CSS переменные
+// ThemeProvider manages data-mode/data-theme-name and applies CSS variables
 ```
 
 ```html
 <html data-mode="day" data-theme="day" data-theme-name="default"></html>
 ```
 
-## Проверка факта
-
-Если нужно подтвердить текущую схему:
+## How to verify
 
 - `src/FOUNDATION/theme/applyMode.ts`
 - `src/FOUNDATION/theme/ThemeProvider.tsx`
 - `src/themes/*`
+

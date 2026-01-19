@@ -79,7 +79,7 @@ export const WithNavigation: Story = {
         style={{
           padding: "1rem",
           backgroundColor: "var(--color-surface-elevated-1)",
-          borderBottom: "1px solid var(--color-border)",
+          borderBottom: "1px solid hsl(var(--tm-border-default))",
         }}
       >
         <Container>
@@ -149,7 +149,7 @@ export const FullExample: Story = {
         style={{
           padding: "1rem",
           backgroundColor: "var(--color-surface-elevated-1)",
-          borderBottom: "1px solid var(--color-border)",
+          borderBottom: "1px solid hsl(var(--tm-border-default))",
         }}
       >
         <Container>

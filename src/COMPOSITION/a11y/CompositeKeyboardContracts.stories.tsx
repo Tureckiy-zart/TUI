@@ -67,7 +67,7 @@ export const TabsKeyboard: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Tabs.Root defaultValue="tab1">
                 <Tabs.List>
@@ -121,7 +121,7 @@ export const SelectKeyboard: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Select.Root value={value} onValueChange={setValue}>
                 <Select.Trigger aria-label="Choose an option">
@@ -169,7 +169,7 @@ export const RadioGroupKeyboard: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box className="flex flex-col gap-2">
                 <Radio
@@ -225,7 +225,7 @@ export const RovingTabindexReference: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Box>
                 <Box mb={2}>
@@ -251,7 +251,7 @@ export const RovingTabindexReference: Story = {
                   See{" "}
                   <a
                     href="../../../../docs/architecture/FOCUS_AUTHORITY.md"
-                    className="text-primary underline"
+                    className="text-[hsl(var(--tm-primary))] underline"
                   >
                     FOCUS_AUTHORITY.md
                   </a>{" "}
@@ -267,7 +267,7 @@ export const RovingTabindexReference: Story = {
               are defined in{" "}
               <a
                 href="../../../../docs/architecture/FOCUS_AUTHORITY.md"
-                className="text-primary underline"
+                className="text-[hsl(var(--tm-primary))] underline"
               >
                 FOCUS_AUTHORITY.md
               </a>

@@ -225,7 +225,7 @@ export const ScopeLimitation: Story = {
         <h3 className="mb-sm text-lg font-semibold">
           ❌ Incorrect: Container does NOT support layout props
         </h3>
-        <p className="mb-sm text-sm text-muted-foreground">
+        <p className="mb-sm text-sm text-[hsl(var(--tm-text-muted))]">
           Container does NOT have display, flexDirection, gap, align, justify props. Use Stack,
           Flex, or Grid for layout composition.
         </p>

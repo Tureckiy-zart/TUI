@@ -40,9 +40,9 @@ export const SIMPLETABLE_TOKENS = {
    */
   typography: {
     header: {
-      sm: "text-xs font-medium text-muted-foreground", // Maps to fontSize.xs, fontWeight.medium
-      md: "text-sm font-medium text-muted-foreground", // Maps to fontSize.sm, fontWeight.medium
-      lg: "text-base font-medium text-muted-foreground", // Maps to fontSize.base, fontWeight.medium
+      sm: "text-xs font-medium text-[hsl(var(--tm-text-muted))]-foreground", // Maps to fontSize.xs, fontWeight.medium
+      md: "text-sm font-medium text-[hsl(var(--tm-text-muted))]-foreground", // Maps to fontSize.sm, fontWeight.medium
+      lg: "text-base font-medium text-[hsl(var(--tm-text-muted))]-foreground", // Maps to fontSize.base, fontWeight.medium
     },
     cell: {
       sm: "text-xs", // Maps to fontSize.xs

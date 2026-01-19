@@ -76,7 +76,7 @@ export const Overview: Story = {
           </Box>
 
           <Stack spacing={6}>
-            <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+            <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
               <Heading level={2}>What is a Focus GAP?</Heading>
               <Box className="mt-2">
                 <Text>
@@ -107,7 +107,7 @@ export const Overview: Story = {
               </Stack>
             </Box>
 
-            <Box className="rounded-lg border border-destructive/30 bg-destructive/10 p-md">
+            <Box className="rounded-lg border border-[hsl(var(--tm-destructive))]/30 bg-[hsl(var(--tm-destructive))]/10 p-md">
               <Heading level={3}>Excluded from Gallery</Heading>
               <Box className="mt-2">
                 <Text size="sm">
@@ -142,7 +142,7 @@ export const GAP1_PopoverNonModal: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">1. Button Before</Button>
 
@@ -182,7 +182,7 @@ export const GAP1_PopoverNonModal: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>User Impact:</strong> Users can Tab away from open Popover. Popover remains
               open until explicitly dismissed (click outside, Escape key).
@@ -216,7 +216,7 @@ export const GAP2_ToastTabOrder: Story = {
               </Box>
             </Box>
 
-            <Box className="rounded-lg border border-border p-md">
+            <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
               <Stack spacing={4}>
                 <Button variant="outline">1. Button Before</Button>
 
@@ -250,7 +250,7 @@ export const GAP2_ToastTabOrder: Story = {
               </Stack>
             </Box>
 
-            <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+            <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
               <Text size="sm">
                 <strong>User Impact:</strong> Users may encounter Toast unexpectedly in tab order.
                 Toast is dismissible via action button, close button, or auto-dismiss.
@@ -289,7 +289,7 @@ export const GAP4_StepperReadOnly: Story = {
             </Box>
           </Box>
 
-          <Box className="rounded-lg border border-border p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
               <Button variant="outline">Button Before Stepper</Button>
 
@@ -336,7 +336,7 @@ export const GAP4_StepperReadOnly: Story = {
             </Stack>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>User Impact:</strong> Users cannot Tab to step indicators. Step state is
               communicated via visual indicators and aria-current attribute for screen readers.
@@ -374,7 +374,7 @@ export const Summary: Story = {
           <Box className="overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="border-b border-border">
+                <tr className="border-b border-[hsl(var(--tm-border-default))]">
                   <th className="px-4 py-2 text-left font-semibold">GAP ID</th>
                   <th className="px-4 py-2 text-left font-semibold">Component</th>
                   <th className="px-4 py-2 text-left font-semibold">Description</th>
@@ -382,7 +382,7 @@ export const Summary: Story = {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-border/50">
+                <tr className="border-b border-[hsl(var(--tm-border-default))]/50">
                   <td className="px-4 py-2 font-mono">GAP-1</td>
                   <td className="px-4 py-2">Popover</td>
                   <td className="px-4 py-2">Focus can leave popover (non-modal)</td>
@@ -392,7 +392,7 @@ export const Summary: Story = {
                     </span>
                   </td>
                 </tr>
-                <tr className="border-b border-border/50">
+                <tr className="border-b border-[hsl(var(--tm-border-default))]/50">
                   <td className="px-4 py-2 font-mono">GAP-2</td>
                   <td className="px-4 py-2">Toast</td>
                   <td className="px-4 py-2">Toast appears in tab order</td>
@@ -402,12 +402,12 @@ export const Summary: Story = {
                     </span>
                   </td>
                 </tr>
-                <tr className="border-b border-border/50">
+                <tr className="border-b border-[hsl(var(--tm-border-default))]/50">
                   <td className="px-4 py-2 font-mono">GAP-3</td>
                   <td className="px-4 py-2">Drawer</td>
                   <td className="px-4 py-2">Focus-visible inconsistency</td>
                   <td className="px-4 py-2">
-                    <span className="rounded bg-destructive/20 px-2 py-0.5 text-destructive">
+                    <span className="rounded bg-[hsl(var(--tm-destructive))]/20 px-2 py-0.5 text-destructive">
                       ❌ BUG
                     </span>
                   </td>
@@ -426,12 +426,12 @@ export const Summary: Story = {
             </table>
           </Box>
 
-          <Box className="rounded-lg border border-primary/30 bg-primary/10 p-md">
+          <Box className="rounded-lg border border-[hsl(var(--tm-primary))]/30 bg-[hsl(var(--tm-primary))]/10 p-md">
             <Text size="sm">
               <strong>Reference:</strong> See{" "}
               <a
                 href="../../../../docs/reports/audit/FOCUS_GAPS.md"
-                className="text-primary underline"
+                className="text-[hsl(var(--tm-primary))] underline"
               >
                 FOCUS_GAPS.md
               </a>{" "}

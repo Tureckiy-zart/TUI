@@ -1,47 +1,49 @@
-﻿# ADR: Disabled Semantic Tokens (runtime)
+# ADR: Disabled Semantic Tokens (runtime)
 
 **Date:** 2025-12-30  
 **Last Updated:** 2026-01-17  
 **Status:** Accepted and Implemented  
-**Decision:** В рантайме используются явные disabled‑токены
+**Decision:** Runtime uses explicit disabled tokens
 
 ---
 
-## Контекст
+## Context
 
-В UI есть состояние disabled, которое должно быть доступно как явные токены, а не как opacity‑трюк. Это необходимо для доступности и стабильной семантики.
+Disabled state must be expressed with explicit tokens rather than opacity tricks.
+This is required for accessibility and stable semantics.
 
 ---
 
-## Реальное состояние
+## Current state
 
-В текущем рантайме выставляются:
+Runtime emits:
 
 - `--tm-disabled`
 - `--tm-disabled-foreground`
 
-Источники:
+Sources:
 - `src/FOUNDATION/tokens/colors.ts`
 - `src/FOUNDATION/theme/applyMode.ts`
 
 ---
 
-## Что это НЕ означает
+## What this means
 
-- Это **не означает**, что полный Theme Contract v1 включён в рантайм.
-- Реестр `required-tokens.ts` остаётся build‑time/contract референсом.
+- Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+- Missing/empty required tokens trigger a dev-time error (dev-guard).
+- `required-tokens.ts` remains the build-time/contract reference.
 
 ---
 
 ## Rationale
 
-- Прозрачность через opacity не даёт стабильной семантики
-- Disabled должен быть контролируемым цветом
-- Лучше для WCAG и enterprise‑требований
+- Opacity does not provide stable semantics
+- Disabled state must be controlled as a color token
+- Better for WCAG and enterprise requirements
 
 ---
 
-## Проверка факта
+## Verification
 
-- `src/FOUNDATION/theme/applyMode.ts` (установка CSS‑переменных)
-- `src/FOUNDATION/tokens/colors.ts` (значения для disabled)
+- `src/FOUNDATION/theme/applyMode.ts` (CSS variable assignment)
+- `src/FOUNDATION/tokens/colors.ts` (disabled values)

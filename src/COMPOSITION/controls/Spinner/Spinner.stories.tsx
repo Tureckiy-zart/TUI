@@ -99,7 +99,7 @@ export const SizesGallery: Story = {
             <h3 className="text-sm font-semibold capitalize">Size: {size}</h3>
             <div className="flex items-center gap-md">
               <Spinner size={size} tone="primary" />
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-[hsl(var(--tm-text-muted))]">
                 {size === "md" ? "(default)" : ""}
               </span>
             </div>
@@ -151,7 +151,7 @@ export const Matrix: Story = {
                   {sizes.map((size) => (
                     <div key={size} className="flex flex-col items-center gap-sm">
                       <Spinner variant={variant} size={size} tone={tone} />
-                      <span className="text-xs text-muted-foreground">{size}</span>
+                      <span className="text-xs text-[hsl(var(--tm-text-muted))]">{size}</span>
                     </div>
                   ))}
                 </div>
@@ -190,7 +190,7 @@ export const States: Story = {
               {sizes.map((size) => (
                 <div key={size} className="flex flex-col items-center gap-sm">
                   <Spinner variant="circle" size={size} tone={tone} />
-                  <span className="text-xs text-muted-foreground">{size}</span>
+                  <span className="text-xs text-[hsl(var(--tm-text-muted))]">{size}</span>
                 </div>
               ))}
             </div>
@@ -267,7 +267,9 @@ export const VariantGallery: Story = {
               {(["primary", "muted", "subtle"] as SpinnerTone[]).map((tone) => (
                 <div key={tone} className="flex flex-col items-center gap-sm">
                   <Spinner variant={variant} size="lg" tone={tone} />
-                  <span className="text-xs capitalize text-muted-foreground">{tone}</span>
+                  <span className="text-xs capitalize text-[hsl(var(--tm-text-muted))]">
+                    {tone}
+                  </span>
                 </div>
               ))}
             </div>
@@ -295,17 +297,17 @@ export const ToneVariants: Story = {
     const tones: Array<{ tone: SpinnerTone; bgColor: string; label: string }> = [
       {
         tone: "primary",
-        bgColor: "hsl(var(--primary) / 0.1)",
+        bgColor: "hsl(var(--tm-primary) / 0.1)",
         label: "Primary (Blue)",
       },
       {
         tone: "muted",
-        bgColor: "hsl(var(--muted-foreground) / 0.1)",
+        bgColor: "hsl(var(--tm-text-muted) / 0.1)",
         label: "Muted (Gray)",
       },
       {
         tone: "subtle",
-        bgColor: "hsl(var(--muted) / 0.1)",
+        bgColor: "hsl(var(--tm-muted) / 0.1)",
         label: "Subtle (Light Gray)",
       },
     ];
@@ -320,7 +322,7 @@ export const ToneVariants: Story = {
           >
             <Spinner variant="circle" size="lg" tone={tone} />
             <span className="text-xs font-medium capitalize">{label}</span>
-            <span className="text-xs text-muted-foreground">Tone: {tone}</span>
+            <span className="text-xs text-[hsl(var(--tm-text-muted))]">Tone: {tone}</span>
           </div>
         ))}
       </div>
@@ -338,7 +340,7 @@ export const InlineLoading: Story = {
       <div className="space-y-md">
         <div className="flex items-center gap-md">
           <button
-            className="flex items-center gap-sm rounded-md bg-primary px-md py-sm text-sm text-primary-foreground hover:bg-primary/90"
+            className="flex items-center gap-sm rounded-md bg-[hsl(var(--tm-primary))] px-md py-sm text-sm text-[hsl(var(--tm-primary-foreground))] hover:bg-[hsl(var(--tm-primary))]/90"
             disabled
           >
             <Spinner size="sm" tone="primary" />
@@ -351,7 +353,7 @@ export const InlineLoading: Story = {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full rounded-md border border-input bg-background px-md py-sm text-sm"
+              className="w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
               disabled
             />
             <div className="absolute right-md top-1/2 -translate-y-1/2">
@@ -381,7 +383,7 @@ export const PageLoading: Story = {
       <div className="flex min-h-[400px] items-center justify-center">
         <div className="flex flex-col items-center gap-md">
           <Spinner size="xl" tone="primary" />
-          <span className="text-sm text-muted-foreground">Loading page content...</span>
+          <span className="text-sm text-[hsl(var(--tm-text-muted))]">Loading page content...</span>
         </div>
       </div>
     );
@@ -404,13 +406,13 @@ export const DataLoading: Story = {
     return (
       <div className="space-y-md">
         <div className="rounded-md border">
-          <div className="border-b bg-muted/50 px-md py-sm">
+          <div className="border-b bg-[hsl(var(--tm-muted))]/50 px-md py-sm">
             <h3 className="text-sm font-semibold">Data Table</h3>
           </div>
           <div className="flex min-h-[200px] items-center justify-center">
             <div className="flex flex-col items-center gap-md">
               <Spinner size="lg" tone="muted" />
-              <span className="text-sm text-muted-foreground">Loading data...</span>
+              <span className="text-sm text-[hsl(var(--tm-text-muted))]">Loading data...</span>
             </div>
           </div>
         </div>
@@ -446,13 +448,13 @@ export const OverlayLoading: Story = {
   render: () => {
     return (
       <div className="relative min-h-[300px]">
-        <div className="rounded-md border bg-card p-lg">
+        <div className="rounded-md border bg-[hsl(var(--tm-surface-raised))] p-lg">
           <h3 className="mb-md text-lg font-semibold">Content Area</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             This is the main content area. When loading, an overlay appears with a spinner.
           </p>
         </div>
-        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-md bg-background/80 backdrop-blur-sm">
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-md bg-[hsl(var(--tm-surface-base))]/80 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-md">
             <Spinner size="xl" tone="primary" />
             <span className="text-sm font-medium">Processing...</span>
@@ -487,7 +489,9 @@ export const EasingVariants: Story = {
               {(["circle", "dots", "bounce", "linear"] as SpinnerVariant[]).map((variant) => (
                 <div key={variant} className="flex flex-col items-center gap-sm">
                   <Spinner variant={variant} size="lg" tone="primary" easing={easing} />
-                  <span className="text-xs capitalize text-muted-foreground">{variant}</span>
+                  <span className="text-xs capitalize text-[hsl(var(--tm-text-muted))]">
+                    {variant}
+                  </span>
                 </div>
               ))}
             </div>
@@ -557,9 +561,9 @@ export const ColorfulVariants: Story = {
                   <div
                     ref={(el) => {
                       if (el) {
-                        el.style.setProperty("--primary", colorVariant.color);
-                        el.style.setProperty("--muted-foreground", colorVariant.color);
-                        el.style.setProperty("--muted", colorVariant.color);
+                        el.style.setProperty("--tm-primary", colorVariant.color);
+                        el.style.setProperty("--tm-text-muted", colorVariant.color);
+                        el.style.setProperty("--tm-muted", colorVariant.color);
                       }
                     }}
                   >
@@ -567,7 +571,7 @@ export const ColorfulVariants: Story = {
                   </div>
                   <span className="text-sm font-medium capitalize">{colorVariant.name}</span>
                   <span
-                    className="text-xs text-muted-foreground"
+                    className="text-xs text-[hsl(var(--tm-text-muted))]"
                     style={{ color: colorVariant.color }}
                   >
                     {colorVariant.color}

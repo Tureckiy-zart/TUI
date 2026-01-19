@@ -80,7 +80,7 @@ export const Matrix: Story = {
         {variants.map((variant) =>
           sizes.map((size) => (
             <div key={`${variant}-${size}`} className="flex flex-col gap-2">
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-[hsl(var(--tm-text-muted))]">
                 {variant} / {size}
               </div>
               <ProfileCard
@@ -226,7 +226,7 @@ export const Accessibility: Story = {
             email="john@example.com"
             avatar="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
           />
-          <div className="mt-4 text-xs text-muted-foreground">
+          <div className="mt-4 text-xs text-[hsl(var(--tm-text-muted))]">
             <p>✅ Uses semantic Heading (h3) for name</p>
             <p>✅ Uses semantic Text component for email</p>
             <p>✅ Avatar has aria-label for screen readers</p>
@@ -236,7 +236,7 @@ export const Accessibility: Story = {
         <div className="flex flex-col gap-2">
           <div className="text-sm font-semibold">Without Avatar</div>
           <ProfileCard name="Jane Smith" email="jane@example.com" />
-          <div className="mt-4 text-xs text-muted-foreground">
+          <div className="mt-4 text-xs text-[hsl(var(--tm-text-muted))]">
             <p>✅ Component works without avatar (no accessibility issues)</p>
             <p>✅ All content is accessible via screen readers</p>
           </div>

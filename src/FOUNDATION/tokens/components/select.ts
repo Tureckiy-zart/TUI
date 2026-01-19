@@ -54,7 +54,7 @@ export const SELECT_TOKENS = {
     icon: {
       size: "size-4", // 16px (1rem)
       gap: "gap-sm", // 8px (0.5rem)
-      color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
+      color: "text-[hsl(var(--tm-text-muted))]", // Icon color using CSS variable
     },
   } as const,
 
@@ -77,9 +77,9 @@ export const SELECT_TOKENS = {
       xl: "rounded-lg", // 8px (0.5rem)
     },
     shadow: "shadow-md", // Maps to elevationShadows.md
-    background: "bg-[hsl(var(--popover))]", // Background using CSS var
-    text: "text-[hsl(var(--popover-foreground))]", // Text color using CSS var
-    border: "border border-[hsl(var(--border))]", // Border color using CSS var
+    background: "bg-[hsl(var(--tm-surface-overlay))]", // Background using CSS var
+    text: "text-[hsl(var(--tm-text-primary))]", // Text color using CSS var
+    border: "border border-[hsl(var(--tm-border-default))]", // Border color using CSS var
     maxHeight: "max-h-96", // Maximum height for scrollable content (24rem = 384px) - maps to spacing[96]
     minWidth: "min-w-32", // Minimum width (8rem = 128px) - maps to spacing[32]
   } as const,
@@ -123,12 +123,12 @@ export const SELECT_TOKENS = {
       position: "left-sm", // 8px (0.5rem) from left
     },
     focus: {
-      background: "focus-visible:bg-[hsl(var(--accent))]", // Focus background using CSS var
-      text: "focus-visible:text-[hsl(var(--accent-foreground))]", // Focus text using CSS var
+      background: "focus-visible:bg-[hsl(var(--tm-accent))]", // Focus background using CSS var
+      text: "focus-visible:text-[hsl(var(--tm-accent-foreground))]", // Focus text using CSS var
     },
     selected: {
-      background: "bg-[hsl(var(--accent))]", // Selected background using CSS var
-      text: "text-[hsl(var(--accent-foreground))]", // Selected text using CSS var
+      background: "bg-[hsl(var(--tm-accent))]", // Selected background using CSS var
+      text: "text-[hsl(var(--tm-accent-foreground))]", // Selected text using CSS var
     },
     disabled: {
       opacity: "opacity-50", // Disabled opacity
@@ -187,7 +187,7 @@ export const SELECT_TOKENS = {
       },
     },
     height: "h-px", // 1px height
-    background: "bg-[hsl(var(--muted))]", // Background using CSS var
+    background: "bg-[hsl(var(--tm-muted))]", // Background using CSS var
   } as const,
 
   /**
@@ -209,21 +209,21 @@ export const SELECT_TOKENS = {
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     outline: {
-      border: "border-[hsl(var(--input))]", // Input border color
+      border: "border-[hsl(var(--tm-surface-base))]", // Input border color
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     ghost: {
       border: "border-transparent", // Transparent border
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     destructive: {
-      border: "border-[hsl(var(--destructive))]", // Destructive border color
-      background: "bg-[hsl(var(--destructive))]", // Destructive background
-      text: "text-[hsl(var(--destructive-foreground))]", // Destructive text color
+      border: "border-[hsl(var(--tm-destructive))]", // Destructive border color
+      background: "bg-[hsl(var(--tm-destructive))]", // Destructive background
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text color
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,
@@ -235,22 +235,22 @@ export const SELECT_TOKENS = {
    */
   state: {
     default: {
-      border: "border-[hsl(var(--input))]", // Default border color using CSS var
+      border: "border-[hsl(var(--tm-surface-base))]", // Default border color using CSS var
       background: "bg-transparent", // Default background
-      text: "text-[hsl(var(--foreground))]", // Default text color using CSS var
+      text: "text-[hsl(var(--tm-text-primary))]", // Default text color using CSS var
     },
     disabled: {
-      border: "border-[hsl(var(--input))]", // Disabled state border (same as default)
+      border: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
       background: "bg-transparent", // Disabled background (same as default)
-      text: "text-[hsl(var(--foreground))] disabled:opacity-50", // Disabled text opacity
+      text: "text-[hsl(var(--tm-text-primary))] disabled:opacity-50", // Disabled text opacity
       cursor: "cursor-not-allowed", // Disabled cursor
     },
     open: {
-      border: "border-[hsl(var(--ring))]", // Open state border
+      border: "border-[hsl(var(--tm-focus-ring))]", // Open state border
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
     },
     closed: {
-      border: "border-[hsl(var(--input))]", // Closed state border
+      border: "border-[hsl(var(--tm-surface-base))]", // Closed state border
     },
   } as const,
 

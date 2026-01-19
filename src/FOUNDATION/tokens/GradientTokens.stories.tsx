@@ -59,10 +59,10 @@ function getDemoGradient(name: string, originalGradient: string): string {
 
   // Interactive gradients - increase opacity for visibility
   if (name.includes("interactive.hover")) {
-    return "bg-gradient-to-r from-primary/30 to-accent/30";
+    return "bg-gradient-to-r from-[hsl(var(--tm-primary))]/30 to-accent/30";
   }
   if (name.includes("interactive.active")) {
-    return "bg-gradient-to-r from-primary/40 to-accent/40";
+    return "bg-gradient-to-r from-[hsl(var(--tm-primary))]/40 to-accent/40";
   }
   if (name.includes("interactive.focus")) {
     return "bg-gradient-to-r from-ring/40 to-ring/30";
@@ -129,7 +129,7 @@ function GradientCard({
       py="md"
       radius="lg"
       bg="card"
-      className="flex flex-col gap-sm border border-border"
+      className="flex flex-col gap-sm border border-[hsl(var(--tm-border-default))]"
     >
       <Box className="font-mono">
         <Text size="xs" tone="muted">
@@ -177,7 +177,7 @@ function GradientCard({
         </Box>
       ) : needsDarkBackground ? (
         <Box
-          className="relative min-h-[120px] overflow-hidden rounded-md border border-border/50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+          className="relative min-h-[120px] overflow-hidden rounded-md border border-[hsl(var(--tm-border-default))]/50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
           // #region agent log
           ref={(parentEl) => {
             if (parentEl) {
@@ -251,7 +251,7 @@ function GradientCard({
         </Box>
       ) : needsColoredBackground ? (
         <Box
-          className="relative min-h-[120px] overflow-hidden rounded-md border border-border/50 bg-gradient-to-br from-primary via-accent to-secondary"
+          className="relative min-h-[120px] overflow-hidden rounded-md border border-[hsl(var(--tm-border-default))]/50 bg-gradient-to-br from-[hsl(var(--tm-primary))] via-[hsl(var(--tm-accent))] to-[hsl(var(--tm-secondary))]"
           // #region agent log
           ref={(parentEl) => {
             if (parentEl) {
@@ -325,7 +325,7 @@ function GradientCard({
         </Box>
       ) : (
         <Box
-          className={`${displayGradient} min-h-[120px] rounded-md border border-border/50`}
+          className={`${displayGradient} min-h-[120px] rounded-md border border-[hsl(var(--tm-border-default))]/50`}
           // #region agent log
           ref={(el) => {
             if (el) {
@@ -862,7 +862,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Hero Section Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Hero Section</Heading>
             <Text tone="muted">Brand gradient used in hero section background</Text>
@@ -883,7 +889,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Text Gradient Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Gradient Text</Heading>
             <Text tone="muted">Text gradient applied to headings and featured text</Text>
@@ -904,7 +916,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Overlay Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Image Overlay</Heading>
             <Text tone="muted">Dark overlay gradient for text readability over images</Text>
@@ -912,7 +930,7 @@ export const UsageExamples: Story = {
               className="relative min-h-[200px] overflow-hidden rounded-lg"
               style={{
                 background:
-                  "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)",
+                  "linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)",
               }}
             >
               <Box className={`absolute inset-0 ${GRADIENT_TOKENS.overlay.dark}`} />
@@ -933,7 +951,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Badge Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Featured Badge</Heading>
             <Text tone="muted">Semantic gradient used for status badges</Text>
@@ -972,7 +996,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Skeleton Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Skeleton Loading</Heading>
             <Text tone="muted">Shimmer gradient for skeleton loading states</Text>
@@ -990,7 +1020,13 @@ export const UsageExamples: Story = {
         </Box>
 
         {/* Glassmorphism Example */}
-        <Box px="lg" py="lg" radius="xl" bg="card" className="border border-border">
+        <Box
+          px="lg"
+          py="lg"
+          radius="xl"
+          bg="card"
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Glassmorphism</Heading>
             <Text tone="muted">Frosted glass effect using glass gradients</Text>
@@ -998,7 +1034,7 @@ export const UsageExamples: Story = {
               className="relative min-h-[150px] overflow-hidden rounded-lg"
               style={{
                 background:
-                  "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)",
+                  "linear-gradient(135deg, hsl(var(--tm-primary)) 0%, hsl(var(--tm-accent)) 100%)",
               }}
             >
               <Box

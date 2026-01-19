@@ -18,9 +18,9 @@
  *
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
- * - Hover background uses semantic Tailwind class (hover:bg-muted/50)
- * - Focus ring uses semantic Tailwind classes (focus-visible:ring-ring)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - Hover background uses semantic Tailwind class (hover:bg-[hsl(var(--tm-muted))]/50)
+ * - Focus ring uses semantic Tailwind classes (focus-visible:ring-[hsl(var(--tm-focus-ring))])
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Motion Authority Rules:
  * - ALL motion-related classes MUST use motion tokens
@@ -153,7 +153,7 @@ const listItemVariants = tokenCVA({
      */
     interactive: {
       false: "", // Static item (no hover)
-      true: "cursor-pointer transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", // Interactive item (hover + focus)
+      true: "cursor-pointer transition-colors hover:bg-[hsl(var(--tm-muted))]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--tm-focus-ring))]", // Interactive item (hover + focus)
     } satisfies Record<"false" | "true", string>,
     /**
      * Disabled state variant

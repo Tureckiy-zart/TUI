@@ -19,8 +19,8 @@
  * Color Authority Rules:
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from TOOLTIP_TOKENS.content for content styling
- * - Variant colors use semantic Tailwind classes (border-secondary/50, text-accent-foreground, etc.)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - Variant colors use semantic Tailwind classes (border-secondary/50, text-[hsl(var(--tm-accent-foreground))], etc.)
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -109,11 +109,14 @@ const tooltipContentVariants = tokenCVA({
     variant: {
       primary: `${TOOLTIP_TOKENS.content.background.default} ${TOOLTIP_TOKENS.content.text.default} ${TOOLTIP_TOKENS.content.border.color}`,
       secondary: "border-secondary/50 text-secondary-foreground bg-secondary/10",
-      accent: "border-accent/50 text-accent-foreground bg-accent/10",
-      outline: "bg-background text-foreground border-border",
-      ghost: "bg-transparent text-foreground border-transparent",
-      link: "bg-transparent text-primary border-transparent",
-      destructive: "border-destructive/50 text-destructive bg-destructive/10",
+      accent:
+        "border-[hsl(var(--tm-accent))]/50 text-[hsl(var(--tm-accent-foreground))] bg-[hsl(var(--tm-accent))]/10",
+      outline:
+        "bg-[hsl(var(--tm-surface-base))] text-[hsl(var(--tm-text-primary))] border-[hsl(var(--tm-border-default))]",
+      ghost: "bg-transparent text-[hsl(var(--tm-text-primary))] border-transparent",
+      link: "bg-transparent text-[hsl(var(--tm-primary))] border-transparent",
+      destructive:
+        "border-[hsl(var(--tm-destructive))]/50 text-[hsl(var(--tm-destructive))] bg-[hsl(var(--tm-destructive))]/10",
     } satisfies Record<TooltipVariant, string>,
   },
   defaultVariants: {

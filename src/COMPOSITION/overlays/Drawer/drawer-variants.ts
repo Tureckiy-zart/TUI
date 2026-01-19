@@ -25,7 +25,7 @@ import type { DrawerPosition, DrawerSize } from "./Drawer.types";
  * Main drawer container with position, size, and transition support
  */
 export const drawerVariants = cva(
-  "fixed z-40 flex flex-col bg-background border border-border transform outline-none",
+  "fixed z-40 flex flex-col bg-[hsl(var(--tm-surface-base))] border border-[hsl(var(--tm-border-default))] transform outline-none",
   {
     variants: {
       position: {

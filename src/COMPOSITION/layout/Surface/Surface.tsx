@@ -26,7 +26,7 @@
  * - Colors come from SURFACE_TOKENS.variant for variant styling
  * - Background colors use SURFACE_TOKENS.variant[variant].bg
  * - Border colors use SURFACE_TOKENS.variant[variant].border
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

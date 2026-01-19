@@ -105,7 +105,7 @@ const getVariantClasses = (variant: keyof typeof BUTTON_TOKENS.variant): string 
  *
  * State Matrix Authority Rules:
  * - ALL state classes (hover, active, disabled) MUST use State Matrix CSS variables
- * - NO raw Tailwind state utilities (hover:bg-primary/80, active:opacity-50)
+ * - NO raw Tailwind state utilities (hover:bg-[hsl(var(--tm-primary))]/80, active:opacity-50)
  * - States react to Color Authority changes automatically through State Matrix
  *
  * Interaction Authority Contract (TUNG_INTERACTION_AUTHORITY_FOUNDATION):
@@ -139,10 +139,10 @@ const getVariantClasses = (variant: keyof typeof BUTTON_TOKENS.variant): string 
  * - Interaction Authority: Button follows Interaction Authority Contract for state priority
  *
  * Color tokens used (all from BUTTON_TOKENS, which reference tokens/colors.ts):
- * - bg-primary, bg-secondary, bg-accent, bg-destructive, bg-background, bg-muted
- * - text-primary-foreground, text-secondary-foreground, text-accent-foreground, text-destructive-foreground, text-foreground
- * - border-input, border-accent
- * - ring-ring (token-based focus ring)
+ * - bg-[hsl(var(--tm-primary))], bg-secondary, bg-[hsl(var(--tm-accent))], bg-[hsl(var(--tm-destructive))], bg-[hsl(var(--tm-surface-base))], bg-[hsl(var(--tm-muted))]
+ * - text-[hsl(var(--tm-primary-foreground))], text-secondary-foreground, text-[hsl(var(--tm-accent-foreground))], text-[hsl(var(--tm-destructive-foreground))], text-[hsl(var(--tm-text-primary))]
+ * - border-[hsl(var(--tm-border-default))], border-[hsl(var(--tm-accent))]
+ * - ring-[hsl(var(--tm-focus-ring))] (token-based focus ring)
  * - All hover/active/disabled states use State Matrix CSS variables (--button-*-hover-bg, etc.)
  *
  * Type-level enforcement:

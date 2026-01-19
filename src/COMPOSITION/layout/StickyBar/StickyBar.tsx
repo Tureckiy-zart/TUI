@@ -23,7 +23,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from STICKYBAR_TOKENS.tone for tone variants
  * - Tone variants use STICKYBAR_TOKENS.tone (default, elevated, muted)
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

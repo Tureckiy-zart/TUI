@@ -184,7 +184,7 @@ export const ticketCardAvailabilityVariants = cva(
  */
 export const ticketCardFooterVariants = cva(
   // Base classes - border top, spacing
-  "border-t border-border",
+  "border-t border-[hsl(var(--tm-border-default))]",
   {
     variants: {
       size: {

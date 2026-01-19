@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stack } from "./Stack";
 
 // Helper style for card items with proper text color
-const cardItemStyle = { color: "hsl(var(--card-foreground))" };
+const cardItemStyle = { color: "hsl(var(--tm-text-primary))" };
 
 const meta: Meta<typeof Stack> = {
   title: "UI / Composition / Layout / Stack",
@@ -46,19 +46,19 @@ export const Default: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3
@@ -75,19 +75,19 @@ export const Vertical: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3
@@ -111,19 +111,19 @@ export const Horizontal: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3
@@ -147,19 +147,19 @@ export const SpacingVariants: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing: xs (1)</h3>
         <Stack spacing={1}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -170,19 +170,19 @@ export const SpacingVariants: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing: md (4)</h3>
         <Stack spacing={4}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -193,19 +193,19 @@ export const SpacingVariants: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing: xl (8)</h3>
         <Stack spacing={8}>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -216,19 +216,19 @@ export const SpacingVariants: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing: semantic lg</h3>
         <Stack spacing="lg">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -254,19 +254,19 @@ export const Alignment: Story = {
         <h3 className="mb-sm text-lg font-semibold">Align: Start</h3>
         <Stack direction="horizontal" align="start" spacing="md">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -277,19 +277,19 @@ export const Alignment: Story = {
         <h3 className="mb-sm text-lg font-semibold">Align: Center</h3>
         <Stack direction="horizontal" align="center" spacing="md">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -300,13 +300,13 @@ export const Alignment: Story = {
         <h3 className="mb-sm text-lg font-semibold">Justify: Between</h3>
         <Stack direction="horizontal" justify="between" spacing="md" className="h-32">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
@@ -331,19 +331,19 @@ export const TokenBasedSpacing: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing Token: md</h3>
         <Stack spacing="md">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -354,19 +354,19 @@ export const TokenBasedSpacing: Story = {
         <h3 className="mb-sm text-lg font-semibold">Spacing Token: lg</h3>
         <Stack spacing="lg">
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 1
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 2
           </div>
           <div
-            className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+            className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
             style={cardItemStyle}
           >
             Item 3
@@ -393,19 +393,19 @@ export const AllProps: Story = {
     children: (
       <>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 1
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 2
         </div>
         <div
-          className="cursor-pointer rounded-md border bg-card p-md tm-motion-hover-lift tm-motion-tap-scale"
+          className="cursor-pointer rounded-md border bg-[hsl(var(--tm-surface-raised))] p-md tm-motion-hover-lift tm-motion-tap-scale"
           style={cardItemStyle}
         >
           Item 3

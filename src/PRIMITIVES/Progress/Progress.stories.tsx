@@ -86,7 +86,9 @@ export const SizesGallery: Story = {
             <div className="space-y-xs">
               {progressValues.map((value) => (
                 <div key={value} className="space-y-xs">
-                  <div className="text-xs font-medium text-foreground">{value}%</div>
+                  <div className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">
+                    {value}%
+                  </div>
                   <Progress value={value} size={size} />
                 </div>
               ))}
@@ -142,7 +144,7 @@ export const Interactive: Story = {
                 onClick={() => setSize(s)}
                 className={`rounded px-sm py-xs text-sm ${
                   size === s
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
@@ -186,7 +188,9 @@ export const UploadProgress: Story = {
         <div>
           <div className="mb-sm flex items-center justify-between">
             <span className="text-sm font-medium">Uploading file.pdf</span>
-            <span className="text-sm font-medium text-foreground">{uploadProgress}%</span>
+            <span className="text-sm font-medium text-[hsl(var(--tm-text-primary))]">
+              {uploadProgress}%
+            </span>
           </div>
           <Progress value={uploadProgress} size="md" />
         </div>
@@ -194,7 +198,7 @@ export const UploadProgress: Story = {
         <button
           onClick={startUpload}
           disabled={isUploading}
-          className="rounded bg-primary px-md py-sm text-sm text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded bg-[hsl(var(--tm-primary))] px-md py-sm text-sm text-[hsl(var(--tm-primary-foreground))] hover:bg-[hsl(var(--tm-primary))]/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isUploading ? "Uploading..." : "Start Upload"}
         </button>
@@ -220,7 +224,9 @@ export const MultiStepWizard: Story = {
             <span className="text-sm font-medium">
               Step {currentStep} of {totalSteps}
             </span>
-            <span className="text-sm font-medium text-foreground">{Math.round(progress)}%</span>
+            <span className="text-sm font-medium text-[hsl(var(--tm-text-primary))]">
+              {Math.round(progress)}%
+            </span>
           </div>
           <Progress value={progress} size="md" />
         </div>
@@ -236,7 +242,7 @@ export const MultiStepWizard: Story = {
           <button
             onClick={() => setCurrentStep(Math.min(totalSteps, currentStep + 1))}
             disabled={currentStep === totalSteps}
-            className="rounded bg-primary px-md py-sm text-sm text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded bg-[hsl(var(--tm-primary))] px-md py-sm text-sm text-[hsl(var(--tm-primary-foreground))] hover:bg-[hsl(var(--tm-primary))]/90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {currentStep === totalSteps ? "Complete" : "Next"}
           </button>

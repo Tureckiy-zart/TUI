@@ -87,7 +87,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
 
   return (
     <section
-      className={cn("w-full bg-muted py-xl transition-colors", className)}
+      className={cn("w-full bg-[hsl(var(--tm-muted))] py-xl transition-colors", className)}
       aria-label="Call to action section"
     >
       <div className="container mx-auto px-lg">

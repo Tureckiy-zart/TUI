@@ -30,11 +30,11 @@ export const DIVIDER_TOKENS = {
    * Maps tone variants to background color classes
    */
   tone: {
-    border: "bg-border", // Border color (default)
-    muted: "bg-muted", // Muted color
-    primary: "bg-primary/20", // Primary color with opacity
-    secondary: "bg-secondary/20", // Secondary color with opacity
-    accent: "bg-accent/20", // Accent color with opacity
+    border: "bg-[hsl(var(--tm-border-default))]", // Border color (default)
+    muted: "bg-[hsl(var(--tm-muted))]", // Muted color
+    primary: "bg-[hsl(var(--tm-primary))]/20", // Primary color with opacity
+    secondary: "bg-[hsl(var(--tm-secondary))]/20", // Secondary color with opacity
+    accent: "bg-[hsl(var(--tm-accent))]/20", // Accent color with opacity
   } as const,
 
   /**

@@ -1,69 +1,81 @@
-﻿# Theme Extension Contract (runtime)
+# Theme Extension Contract (runtime)
 
 **Date:** 2025-12-30  
 **Last Updated:** 2026-01-17  
 **Status:** CURRENT (runtime implementation)  
-**Purpose:** Как расширяется тема в текущем коде
+**Purpose:** How themes are extended in the current code
 
 ---
 
-## Ключевая реальность
+## Key reality
 
-Сейчас расширение темы происходит **через бренды и оверрайды** в `src/themes/*`, а не через CSS‑файлы тем.
+Theme extension currently happens via brands and overrides in `src/themes/*`,
+not via theme CSS files.
 
-- Бренды загружаются через `brand_engine`
-- Оверрайды применяются в `applyDocumentTheme()`
-- CSS‑файлы из `src/EXTENSIONS/themes/` не используются
+- Brands are loaded through `brand_engine`
+- Overrides are applied in `applyDocumentTheme()`
+- CSS files in `src/EXTENSIONS/themes/` are not used
 
 ---
 
-## Как добавить новый бренд (фактический путь)
+## How to add a new brand (current path)
 
-1) Создать файл в `src/themes/` (например, `ocean.ts`).
-2) Описать `ThemeOverride` (цветовые шкалы и семантические токены).
-3) Зарегистрировать бренд в `ThemeProvider` (как это сделано для `neon` и `minimal`).
-4) Указывать бренд через `setBrand(brandId)`.
+1) Create a file in `src/themes/` (for example, `ocean.ts`).
+2) Define a `ThemeOverride` (color scales and semantic tokens).
+3) Register the brand in `ThemeProvider` (as done for `neon` and `minimal`).
+4) Set the brand via `setBrand(brandId)`.
 
-**Кодовые точки:**
+**Code locations:**
 - `src/themes/brand_engine.ts`
 - `src/themes/types.ts`
 - `src/FOUNDATION/theme/ThemeProvider.tsx`
 
 ---
 
-## Какие токены реально задействованы
+## Which tokens are actually used
 
-`updateCSSVariablesFromTokens()` выставляет набор legacy и semantic токенов, включая:
+`updateCSSVariablesFromTokens()` emits legacy and semantic tokens, including:
 
-- `--background`, `--foreground`, `--border`, `--ring`, …
+- `--background`, `--foreground`, `--border`, `--ring`, ...
 - `--surface-*`, `--text-*`, `--semantic-*`
 - `--primary-*`, `--secondary-*`, `--accent-*`
-- часть `--tm-*` (`--tm-primary`, `--tm-secondary`, `--tm-accent`, `--tm-disabled`, …)
+- Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens (dev-guard on missing/empty in dev)
 
-Полный список — `src/FOUNDATION/theme/applyMode.ts`.
-
----
-
-## Про `--tm-*` и extension‑tokens
-
-`--tm-*` сейчас используются частично и задаются рантаймом.  
-Клиентские `--tmx-*` токены **не используются** в рантайме по умолчанию и не проверяются.
-
-Если хотите использовать свои CSS‑переменные, делайте это в продуктовой части и не полагайтесь на рантайм‑контракт.
+The full list is in `src/FOUNDATION/theme/applyMode.ts`.
 
 ---
 
-## Что НЕ является текущей реальностью
+## About `--tm-*` and extension tokens
 
-- CSS‑файлы тем вида `theme.<palette>-<mode>.css`
+Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+Missing/empty required tokens trigger a dev-time error (dev-guard).
+Client `--tmx-*` tokens are not used by default at runtime and are not validated.
+
+If you want to use custom CSS variables, do so in product code and do not rely
+on the runtime contract.
+
+---
+
+## Validation and coverage
+
+- Build-time validator: `theme:validate:tm` (`scripts/theme/validate-tm-contract.ts`)
+- Snapshot assembly shared in `src/FOUNDATION/theme/runtimeTmSnapshot.ts`
+- Themes/brands registry: `src/themes/registry.ts`
+- Coverage report: `artifacts/reports/TM_CONTRACT_COVERAGE_REPORT.md`
+
+---
+
+## Not current reality
+
+- Theme CSS files like `theme.<palette>-<mode>.css`
 - `data-theme="<palette>-<mode>"`
-- обязательный parity‑check по CSS‑файлам тем
+- mandatory parity checks for theme CSS files
 
-Эти вещи относятся к tooling/контракту и сейчас не управляют рантаймом.
+These belong to tooling/contract and do not drive runtime today.
 
 ---
 
-## Где смотреть правду
+## Where to verify
 
 - `src/FOUNDATION/theme/applyMode.ts`
 - `src/FOUNDATION/theme/ThemeProvider.tsx`

@@ -170,7 +170,7 @@ export const Overview: Story = {
                     href="../../../../docs/architecture/MOTION_AUTHORITY.md#motion-gap"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary underline"
+                    className="text-[hsl(var(--tm-primary))] underline"
                   >
                     Motion Authority Contract - Motion GAP Section
                   </a>
@@ -219,7 +219,7 @@ export const UnresolvedGAP: Story = {
               </Button>
 
               {isExpanded && (
-                <Box className="rounded-lg border bg-muted p-md">
+                <Box className="rounded-lg border bg-[hsl(var(--tm-muted))] p-md">
                   <Stack spacing={2}>
                     <Heading level={3}>Content Panel</Heading>
                     <Text>
@@ -278,9 +278,11 @@ export const ResolvedWithMotion: Story = {
               <Box>
                 <Text size="sm" tone="muted">
                   This expand/collapse component uses canonical motion preset{" "}
-                  <code className="rounded bg-muted px-1 py-0.5 text-xs">tm-motion-fade-scale</code>{" "}
+                  <code className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">
+                    tm-motion-fade-scale
+                  </code>{" "}
                   for enter and{" "}
-                  <code className="rounded bg-muted px-1 py-0.5 text-xs">
+                  <code className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">
                     tm-motion-fade-scale-out
                   </code>{" "}
                   for exit.
@@ -292,7 +294,7 @@ export const ResolvedWithMotion: Story = {
               </Button>
 
               {isExpanded ? (
-                <Box className="rounded-lg border bg-muted p-md tm-motion-fade-scale">
+                <Box className="rounded-lg border bg-[hsl(var(--tm-muted))] p-md tm-motion-fade-scale">
                   <Stack spacing={2}>
                     <Heading level={3}>Content Panel</Heading>
                     <Text>
@@ -362,7 +364,7 @@ export const NoMotionByDesign: Story = {
               <Box>
                 <Heading level={2}>Container</Heading>
                 <Box className="mt-2">
-                  <Container className="rounded-lg border bg-muted p-md">
+                  <Container className="rounded-lg border bg-[hsl(var(--tm-muted))] p-md">
                     <Text>
                       Container is a structural layout component. It provides consistent width and
                       padding but doesn't change state. No motion needed - this is intentional.
@@ -374,7 +376,7 @@ export const NoMotionByDesign: Story = {
               <Box>
                 <Heading level={2}>Section</Heading>
                 <Box className="mt-2">
-                  <Section spaceY="md" className="rounded-lg border bg-muted">
+                  <Section spaceY="md" className="rounded-lg border bg-[hsl(var(--tm-muted))]">
                     <Stack spacing={2}>
                       <Heading level={3}>Section Title</Heading>
                       <Text>
@@ -391,13 +393,13 @@ export const NoMotionByDesign: Story = {
                 <Heading level={2}>Static Content Blocks</Heading>
                 <Box className="mt-2">
                   <Stack spacing={4}>
-                    <Box className="rounded-lg border bg-muted p-md">
+                    <Box className="rounded-lg border bg-[hsl(var(--tm-muted))] p-md">
                       <Text>
                         Static text blocks, headings, and content containers don't change state.
                         They are always visible and don't require motion.
                       </Text>
                     </Box>
-                    <Box className="rounded-lg border bg-muted p-md">
+                    <Box className="rounded-lg border bg-[hsl(var(--tm-muted))] p-md">
                       <Text>
                         Layout primitives like Box, Stack, Flex, and Grid are structural. They
                         organize content but don't animate by themselves.

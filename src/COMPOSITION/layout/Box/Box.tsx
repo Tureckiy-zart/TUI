@@ -33,7 +33,7 @@
  * - ALL color values MUST come from color token system
  * - Background color prop accepts ResponsiveColor (semantic color tokens)
  * - Colors are applied via inline styles using CSS variables (--color-*)
- * - NO raw Tailwind color classes (bg-red-500, bg-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, bg-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Radius Authority Rules:
  * - ALL radius values MUST come from radius token system
@@ -308,7 +308,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * <Box bg="muted">Content</Box>
    * @example
    * // Primary background
-   * <Box bg="primary" className="text-primary-foreground">Content</Box>
+   * <Box bg="primary" className="text-[hsl(var(--tm-primary-foreground))]">Content</Box>
    * @example
    * // Responsive value
    * <Box bg={{ base: "background", md: "card" }}>Content</Box>

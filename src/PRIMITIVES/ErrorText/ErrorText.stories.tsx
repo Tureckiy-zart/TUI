@@ -89,7 +89,7 @@ export const WithAsChild: Story = {
   render: () => (
     <div style={{ width: "320px" }}>
       <ErrorText asChild>
-        <div className="rounded-md border border-destructive/50 bg-destructive/10 p-2">
+        <div className="rounded-md border border-[hsl(var(--tm-destructive))]/50 bg-[hsl(var(--tm-destructive))]/10 p-2">
           Custom error container with ErrorText semantics
         </div>
       </ErrorText>

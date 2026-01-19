@@ -2,7 +2,7 @@
 
 exports[`Textarea > Snapshot > matches snapshot for default textarea 1`] = `
 <textarea
-  class="flex min-h-20 w-full shadow-sm transition-colors disabled:cursor-not-allowed focus-visible:outline-none resize-y border-[hsl(var(--input))] bg-transparent text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus-visible:shadow-[var(--focus-ring-default)] border-[hsl(var(--input))] bg-transparent text-[hsl(var(--foreground))] focus-visible:shadow-[var(--focus-ring-default)] [aria-invalid="true"]:border-[hsl(var(--destructive))] px-sm py-xs rounded-md text-base md:text-sm"
+  class="flex min-h-20 w-full shadow-sm transition-colors disabled:cursor-not-allowed focus-visible:outline-none resize-y border-[hsl(var(--tm-surface-base))] bg-transparent text-[hsl(var(--tm-text-primary))] placeholder:text-[hsl(var(--tm-text-muted))] focus-visible:shadow-[var(--focus-ring-default)] border-[hsl(var(--tm-surface-base))] bg-transparent text-[hsl(var(--tm-text-primary))] focus-visible:shadow-[var(--focus-ring-default)] [aria-invalid="true"]:border-[hsl(var(--tm-destructive))] px-sm py-xs rounded-md text-base md:text-sm"
   placeholder="Snapshot test"
 />
 `;

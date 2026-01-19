@@ -185,7 +185,7 @@ export const SemanticAlias: Story = {
             Item 2
           </Box>
         </Box>
-        <p className="mt-sm text-sm text-muted-foreground">
+        <p className="mt-sm text-sm text-[hsl(var(--tm-text-muted))]">
           Column is equivalent to Stack (default vertical direction)
         </p>
       </div>

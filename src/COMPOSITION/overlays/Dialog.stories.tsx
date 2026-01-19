@@ -72,7 +72,7 @@ export const Confirmation: Story = {
             </DialogDescription>
           </DialogHeader>
           <DialogBody>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">
               This will permanently delete the item from your account.
             </p>
           </DialogBody>
@@ -109,7 +109,7 @@ export const FormDialog: Story = {
                 <input
                   type="text"
                   placeholder="Enter name"
-                  className="w-full rounded-md border border-border bg-background px-md py-sm"
+                  className="w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm"
                 />
               </div>
               <div>
@@ -117,7 +117,7 @@ export const FormDialog: Story = {
                 <textarea
                   placeholder="Enter description"
                   rows={4}
-                  className="w-full rounded-md border border-border bg-background px-md py-sm"
+                  className="w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm"
                 />
               </div>
             </div>

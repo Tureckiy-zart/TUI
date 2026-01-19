@@ -56,7 +56,7 @@ export const WithCustomProps: Story = {
       mode="grid"
       iconSize="lg"
       iconColor="muted"
-      className="border-2 border-primary"
+      className="border-2 border-[hsl(var(--tm-primary))]"
     />
   ),
 };

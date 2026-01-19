@@ -308,7 +308,7 @@ export const Accessibility: Story = {
       <div className="space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Semantic HTML Structure</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             TicketCard uses semantic HTML elements (h3 for heading, time for date, img with alt
             text, link for navigation) for proper screen reader support.
           </p>
@@ -326,7 +326,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Decorative Elements Hidden</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Decorative icons and overlays are marked with aria-hidden="true" to prevent screen
             reader announcement.
           </p>
@@ -342,7 +342,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Badge ARIA Labels</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Badges have descriptive aria-label attributes for screen reader users.
           </p>
           <TicketCard
@@ -361,7 +361,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Disabled State Accessibility</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Disabled purchase buttons have proper ARIA attributes (aria-disabled, tabIndex) for
             keyboard navigation and screen readers.
           </p>

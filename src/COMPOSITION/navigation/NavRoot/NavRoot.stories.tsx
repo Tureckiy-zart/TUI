@@ -72,7 +72,7 @@ export const AsChild: Story = {
     "aria-label": "Footer navigation",
     asChild: true,
     children: (
-      <footer style={{ padding: "1rem", borderTop: "1px solid #ccc" }}>
+      <footer style={{ padding: "1rem", borderTop: "1px solid hsl(var(--tm-border-default))" }}>
         <ul style={{ listStyle: "none", padding: 0, display: "flex", gap: "1rem" }}>
           <li>
             <a href="/">Home</a>

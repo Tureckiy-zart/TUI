@@ -174,13 +174,17 @@ export const Matrix: Story = {
           <div /> {/* Empty corner */}
           {sizes.map((size) => (
             <div key={size} className="flex items-center justify-center">
-              <span className="text-xs font-semibold text-foreground/80">{size}</span>
+              <span className="text-xs font-semibold text-[hsl(var(--tm-text-primary))]/80">
+                {size}
+              </span>
             </div>
           ))}
           {variants.map((variant) => (
             <React.Fragment key={variant}>
               <div className="flex items-center">
-                <span className="text-xs font-semibold text-foreground/80">{variant}</span>
+                <span className="text-xs font-semibold text-[hsl(var(--tm-text-primary))]/80">
+                  {variant}
+                </span>
               </div>
               {sizes.map((size) => (
                 <div key={size} className="flex items-center justify-center">
@@ -212,12 +216,17 @@ export const SizesGallery: Story = {
     return (
       <div className="flex flex-col gap-lg">
         <div>
-          <h3 className="mb-md text-sm font-semibold text-foreground/70">Unchecked Sizes</h3>
+          <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+            Unchecked Sizes
+          </h3>
           <div className="flex flex-col gap-md">
             {sizes.map((size) => (
               <label key={size} className="flex cursor-pointer items-center gap-md">
                 <Checkbox size={size} aria-labelledby={`unchecked-${size}-label`} />
-                <span id={`unchecked-${size}-label`} className="text-sm text-foreground">
+                <span
+                  id={`unchecked-${size}-label`}
+                  className="text-sm text-[hsl(var(--tm-text-primary))]"
+                >
                   {size.toUpperCase()} size checkbox - Accept terms and conditions
                 </span>
               </label>
@@ -225,12 +234,17 @@ export const SizesGallery: Story = {
           </div>
         </div>
         <div>
-          <h3 className="mb-md text-sm font-semibold text-foreground/70">Checked Sizes</h3>
+          <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+            Checked Sizes
+          </h3>
           <div className="flex flex-col gap-md">
             {sizes.map((size) => (
               <label key={size} className="flex cursor-pointer items-center gap-md">
                 <Checkbox size={size} checked aria-labelledby={`checked-${size}-label`} />
-                <span id={`checked-${size}-label`} className="text-sm text-foreground">
+                <span
+                  id={`checked-${size}-label`}
+                  className="text-sm text-[hsl(var(--tm-text-primary))]"
+                >
                   {size.toUpperCase()} size checkbox - Terms accepted
                 </span>
               </label>
@@ -238,7 +252,9 @@ export const SizesGallery: Story = {
           </div>
         </div>
         <div>
-          <h3 className="mb-md text-sm font-semibold text-foreground/70">Indeterminate Sizes</h3>
+          <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+            Indeterminate Sizes
+          </h3>
           <div className="flex flex-col gap-md">
             {sizes.map((size) => (
               <label key={size} className="flex cursor-pointer items-center gap-md">
@@ -247,7 +263,10 @@ export const SizesGallery: Story = {
                   indeterminate
                   aria-labelledby={`indeterminate-${size}-label`}
                 />
-                <span id={`indeterminate-${size}-label`} className="text-sm text-foreground">
+                <span
+                  id={`indeterminate-${size}-label`}
+                  className="text-sm text-[hsl(var(--tm-text-primary))]"
+                >
                   {size.toUpperCase()} size checkbox - Some items selected
                 </span>
               </label>
@@ -264,15 +283,15 @@ export const AllSizes: Story = {
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="sm" aria-label="Small checkbox" />
-        <span className="text-xs font-medium text-foreground">sm</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">sm</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="md" aria-label="Medium checkbox" />
-        <span className="text-xs font-medium text-foreground">md</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">md</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="lg" aria-label="Large checkbox" />
-        <span className="text-xs font-medium text-foreground">lg</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">lg</span>
       </div>
     </div>
   ),
@@ -283,15 +302,15 @@ export const AllSizesChecked: Story = {
     <div className="flex items-center gap-md">
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="sm" checked aria-label="Small checked checkbox" />
-        <span className="text-xs font-medium text-foreground">sm</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">sm</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="md" checked aria-label="Medium checked checkbox" />
-        <span className="text-xs font-medium text-foreground">md</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">md</span>
       </div>
       <div className="flex flex-col items-center gap-sm">
         <Checkbox size="lg" checked aria-label="Large checked checkbox" />
-        <span className="text-xs font-medium text-foreground">lg</span>
+        <span className="text-xs font-medium text-[hsl(var(--tm-text-primary))]">lg</span>
       </div>
     </div>
   ),
@@ -360,23 +379,25 @@ export const States: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
       <div>
-        <h3 className="mb-md text-sm font-semibold text-foreground/70">Primary Variant</h3>
+        <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+          Primary Variant
+        </h3>
         <div className="flex flex-wrap gap-md">
           <div className="flex flex-col items-center gap-sm">
             <Checkbox variant="primary" aria-label="Primary default state" />
-            <span className="text-xs text-foreground/60">Default</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Default</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Checkbox variant="primary" checked aria-label="Primary checked state" />
-            <span className="text-xs text-foreground/60">Checked</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Checked</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Checkbox variant="primary" indeterminate aria-label="Primary indeterminate state" />
-            <span className="text-xs text-foreground/60">Indeterminate</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Indeterminate</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Checkbox variant="primary" disabled aria-label="Primary disabled state" />
-            <span className="text-xs text-foreground/60">Disabled</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Disabled</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Checkbox
@@ -385,20 +406,24 @@ export const States: Story = {
               disabled
               aria-label="Primary disabled checked state"
             />
-            <span className="text-xs text-foreground/60">Disabled Checked</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Disabled Checked</span>
           </div>
           <div className="flex flex-col items-center gap-sm">
             <Checkbox variant="primary" state="error" aria-label="Primary error state" />
-            <span className="text-xs text-foreground/60">Error</span>
+            <span className="text-xs text-[hsl(var(--tm-text-primary))]/60">Error</span>
           </div>
         </div>
       </div>
       <div>
-        <h3 className="mb-md text-sm font-semibold text-foreground/70">All Sizes × States</h3>
+        <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+          All Sizes × States
+        </h3>
         <div className="grid grid-cols-3 gap-md">
           {(["sm", "md", "lg"] as const).map((size) => (
             <div key={size} className="flex flex-col gap-sm">
-              <span className="text-xs font-semibold text-foreground/80">{size}</span>
+              <span className="text-xs font-semibold text-[hsl(var(--tm-text-primary))]/80">
+                {size}
+              </span>
               <Checkbox size={size} aria-label={`${size} default`} />
               <Checkbox size={size} checked aria-label={`${size} checked`} />
               <Checkbox size={size} indeterminate aria-label={`${size} indeterminate`} />
@@ -530,7 +555,9 @@ export const CustomIcons: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
       <div>
-        <h3 className="mb-md text-sm font-semibold text-foreground/70">Custom Check Icon</h3>
+        <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
+          Custom Check Icon
+        </h3>
         <div className="flex flex-col gap-md">
           <label className="flex cursor-pointer items-center gap-sm">
             <Checkbox
@@ -551,7 +578,7 @@ export const CustomIcons: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-md text-sm font-semibold text-foreground/70">
+        <h3 className="mb-md text-sm font-semibold text-[hsl(var(--tm-text-primary))]/70">
           Custom Indeterminate Icon
         </h3>
         <div className="flex flex-col gap-md">
@@ -584,9 +611,9 @@ export const Accessibility: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Keyboard Navigation</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
-          Press <kbd className="rounded bg-muted px-1 py-0.5 text-xs">Space</kbd> to toggle the
-          checkbox.
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
+          Press <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">Space</kbd>{" "}
+          to toggle the checkbox.
         </p>
         <div className="flex flex-col gap-sm">
           <label className="flex cursor-pointer items-center gap-sm">
@@ -597,7 +624,7 @@ export const Accessibility: Story = {
       </div>
       <div>
         <h3 className="mb-md text-lg font-semibold">Screen Reader Support</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           All checkboxes have proper ARIA attributes for screen readers. Indeterminate state uses
           aria-checked="mixed".
         </p>
@@ -610,7 +637,7 @@ export const Accessibility: Story = {
       </div>
       <div>
         <h3 className="mb-md text-lg font-semibold">ARIA Labelledby</h3>
-        <p className="mb-md text-sm font-medium text-foreground/90">
+        <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           Using aria-labelledby to associate checkbox with label element.
         </p>
         <div className="flex flex-col gap-sm">

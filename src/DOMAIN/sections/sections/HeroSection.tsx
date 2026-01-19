@@ -42,9 +42,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   background = "default",
 }) => {
   const backgroundClasses = {
-    default: "bg-background",
-    muted: "bg-muted",
-    card: "bg-card",
+    default: "bg-[hsl(var(--tm-surface-base))]",
+    muted: "bg-[hsl(var(--tm-muted))]",
+    card: "bg-[hsl(var(--tm-surface-raised))]",
   };
 
   const isSplit = variant === "split";

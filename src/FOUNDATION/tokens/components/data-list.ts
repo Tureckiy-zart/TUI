@@ -81,7 +81,7 @@ export const DATA_LIST_TOKENS = {
    * For DataList value styling
    */
   value: {
-    color: "text-muted-foreground", // Value text color
+    color: "text-[hsl(var(--tm-text-muted))]-foreground", // Value text color
     flex: "flex-1", // Value flex grow
   } as const,
 } as const;

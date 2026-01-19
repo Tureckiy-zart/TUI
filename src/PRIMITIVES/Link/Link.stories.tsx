@@ -220,9 +220,14 @@ export const Matrix: Story = {
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="border border-border p-sm text-left">Variant / Size</th>
+              <th className="border border-[hsl(var(--tm-border-default))] p-sm text-left">
+                Variant / Size
+              </th>
               {sizes.map((size) => (
-                <th key={size} className="border border-border p-sm text-center">
+                <th
+                  key={size}
+                  className="border border-[hsl(var(--tm-border-default))] p-sm text-center"
+                >
                   {size.toUpperCase()}
                 </th>
               ))}
@@ -231,9 +236,14 @@ export const Matrix: Story = {
           <tbody>
             {variants.map((variant) => (
               <tr key={variant}>
-                <td className="border border-border p-sm font-medium">{variant}</td>
+                <td className="border border-[hsl(var(--tm-border-default))] p-sm font-medium">
+                  {variant}
+                </td>
                 {sizes.map((size) => (
-                  <td key={size} className="border border-border p-sm text-center">
+                  <td
+                    key={size}
+                    className="border border-[hsl(var(--tm-border-default))] p-sm text-center"
+                  >
                     <Link
                       variant={variant}
                       size={size}
@@ -350,7 +360,7 @@ export const Wrapper: Story = {
             <Card>
               <Card.Header>
                 <h4 className="text-lg font-semibold">Event Title</h4>
-                <p className="text-sm text-muted-foreground">Event description</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">Event description</p>
               </Card.Header>
               <Card.Body>
                 <p className="text-sm">
@@ -364,7 +374,7 @@ export const Wrapper: Story = {
             <Card>
               <Card.Header>
                 <h4 className="text-lg font-semibold">Another Event</h4>
-                <p className="text-sm text-muted-foreground">Another description</p>
+                <p className="text-sm text-[hsl(var(--tm-text-muted))]">Another description</p>
               </Card.Header>
               <Card.Body>
                 <p className="text-sm">
@@ -379,7 +389,7 @@ export const Wrapper: Story = {
         <h3 className="mb-sm text-sm font-medium">Comparison: Text (Inline) vs Wrapper (Block)</h3>
         <div className="space-y-md">
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">
               Text variant (default, inline-flex):
             </p>
             <Link href="#" onClick={(e) => e.preventDefault()}>
@@ -387,7 +397,9 @@ export const Wrapper: Story = {
             </Link>
           </div>
           <div>
-            <p className="mb-sm text-xs text-muted-foreground">Wrapper variant (block-level):</p>
+            <p className="mb-sm text-xs text-[hsl(var(--tm-text-muted))]">
+              Wrapper variant (block-level):
+            </p>
             <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
               <Card>
                 <Card.Body>

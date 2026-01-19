@@ -103,7 +103,7 @@ describe("List", () => {
       const divider = container.querySelector("hr");
       expect(divider).toBeInTheDocument();
       // Divider should have primary tone class (via tokenCVA)
-      expect(divider?.className).toContain("bg-primary");
+      expect(divider?.className).toContain("bg-[hsl(var(--tm-primary))]/20");
     });
 
     it("forwards dividerInset prop to Divider", () => {

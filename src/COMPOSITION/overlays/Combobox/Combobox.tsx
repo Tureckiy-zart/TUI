@@ -22,7 +22,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from INPUT_TOKENS for input styling
  * - Colors come from POPOVER_TOKENS for popover content styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -610,9 +610,13 @@ export function ComboboxList({
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
       <div id="combobox-list" role="listbox" className="max-h-[300px] overflow-y-auto p-1">
-        {loading && <div className="p-4 text-center text-sm text-muted-foreground">Loading...</div>}
+        {loading && (
+          <div className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">Loading...</div>
+        )}
         {!loading && filteredOptions.length === 0 && (
-          <div className="p-4 text-center text-sm text-muted-foreground">{emptyMessage}</div>
+          <div className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">
+            {emptyMessage}
+          </div>
         )}
         {!loading && filteredOptions.length > 0 && (
           <>
@@ -632,7 +636,8 @@ export function ComboboxList({
                     "relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors",
                     highlighted && INPUT_TOKENS.variant.primary.background,
                     highlighted && INPUT_TOKENS.variant.primary.text,
-                    !highlighted && "hover:bg-accent hover:text-accent-foreground",
+                    !highlighted &&
+                      "hover:bg-[hsl(var(--tm-accent))] hover:text-[hsl(var(--tm-accent-foreground))]",
                     option.disabled && "pointer-events-none opacity-50",
                     size === "sm" && INPUT_TOKENS.fontSize.sm,
                     size === "md" && INPUT_TOKENS.fontSize.md,
@@ -645,7 +650,8 @@ export function ComboboxList({
                     <div
                       className={cn(
                         "flex h-4 w-4 items-center justify-center rounded-sm border",
-                        selected && "bg-primary text-primary-foreground",
+                        selected &&
+                          "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]",
                       )}
                     >
                       {selected && <Check className="h-3 w-3" />}

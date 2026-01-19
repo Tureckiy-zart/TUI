@@ -342,7 +342,10 @@ export const AccessibilityDemo: Story = {
         reader to hear the full context.
       </Text>
 
-      <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
+      <Stack
+        spacing="md"
+        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
+      >
         <Heading level={4}>Without Status</Heading>
         <Text size="sm" tone="muted">
           aria-label: "John Doe"
@@ -354,7 +357,10 @@ export const AccessibilityDemo: Story = {
         />
       </Stack>
 
-      <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
+      <Stack
+        spacing="md"
+        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
+      >
         <Heading level={4}>With Status: Online</Heading>
         <Text size="sm" tone="muted">
           aria-label: "Jane Smith (online)"
@@ -367,7 +373,10 @@ export const AccessibilityDemo: Story = {
         />
       </Stack>
 
-      <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
+      <Stack
+        spacing="md"
+        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
+      >
         <Heading level={4}>With Status: Busy</Heading>
         <Text size="sm" tone="muted">
           aria-label: "Bob Wilson (busy)"
@@ -375,7 +384,10 @@ export const AccessibilityDemo: Story = {
         <Avatar alt="Bob Wilson" size="lg" status="busy" />
       </Stack>
 
-      <Stack spacing="md" className="rounded-lg border border-border bg-muted/30 p-6">
+      <Stack
+        spacing="md"
+        className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
+      >
         <Heading level={4}>With Status: Offline</Heading>
         <Text size="sm" tone="muted">
           aria-label: "Carol White (offline)"
@@ -399,7 +411,7 @@ export const AccessibilityDemo: Story = {
  */
 export const UserProfileCard: Story = {
   render: () => (
-    <div className="w-80 rounded-lg border border-border bg-card p-6">
+    <div className="w-80 rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-raised))] p-6">
       <Stack spacing="md" align="center">
         <Avatar
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
@@ -621,7 +633,7 @@ export const TeamMembersGrid: Story = {
             key={member.name}
             spacing="sm"
             align="center"
-            className="rounded-lg border border-border p-4"
+            className="rounded-lg border border-[hsl(var(--tm-border-default))] p-4"
           >
             <Avatar alt={member.name} size="lg" status={member.status} />
             <Stack spacing="xs" align="center">

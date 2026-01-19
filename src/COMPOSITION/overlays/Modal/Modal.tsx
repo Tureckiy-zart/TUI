@@ -63,7 +63,7 @@
  * - ALL color-related classes MUST be token-based utilities only
  * - Colors come from MODAL_TOKENS for content styling
  * - Backdrop colors use MODAL_TOKENS for overlay styling
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system
@@ -710,7 +710,7 @@ const ModalClose = React.forwardRef<HTMLButtonElement, ModalCloseProps>(
           MODAL_TOKENS.close.radius,
           MODAL_TOKENS.close.opacity.default,
           MODAL_TOKENS.close.opacity.hover,
-          "ring-offset-background transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
+          "ring-offset-[hsl(var(--tm-surface-base))] transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--tm-focus-ring))] focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-[hsl(var(--tm-accent))] data-[state=open]:text-[hsl(var(--tm-text-muted))]",
           className,
         )}
         {...props}

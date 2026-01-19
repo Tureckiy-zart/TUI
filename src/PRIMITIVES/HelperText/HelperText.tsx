@@ -102,7 +102,7 @@ export interface HelperTextProps extends Omit<
  *
  * Token usage:
  * - All tokens via Text component (TEXT_TOKENS)
- * - Color via text-muted-foreground (tone="muted")
+ * - Color via text-[hsl(var(--tm-text-muted))] (tone="muted")
  * - Size via text-sm (size="sm")
  * - No new tokens created (reuse existing)
  */

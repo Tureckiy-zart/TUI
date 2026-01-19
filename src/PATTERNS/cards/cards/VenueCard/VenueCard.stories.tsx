@@ -305,7 +305,7 @@ export const Accessibility: Story = {
       <div className="space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Semantic HTML Structure</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             VenueCard uses semantic HTML elements (h3 for heading, img with alt text, link for
             navigation) for proper screen reader support.
           </p>
@@ -324,7 +324,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Decorative Elements Hidden</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Decorative icons and overlays are marked with aria-hidden="true" to prevent screen
             reader announcement.
           </p>
@@ -341,7 +341,7 @@ export const Accessibility: Story = {
 
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Featured Badge with ARIA Label</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Featured badge includes aria-label for screen reader announcement.
           </p>
           <VenueCard

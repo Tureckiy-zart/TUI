@@ -451,7 +451,7 @@ export const Mixed: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-md text-sm font-medium">Size Override</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs text-[hsl(var(--tm-text-muted))]">
           Group size is md, but individual buttons can override
         </p>
         <ButtonGroup size="md" variant="primary">
@@ -462,7 +462,7 @@ export const Mixed: Story = {
       </div>
       <div>
         <h3 className="mb-md text-sm font-medium">Variant Override</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs text-[hsl(var(--tm-text-muted))]">
           Group variant is primary, but individual buttons can override
         </p>
         <ButtonGroup variant="primary">
@@ -473,7 +473,7 @@ export const Mixed: Story = {
       </div>
       <div>
         <h3 className="mb-md text-sm font-medium">Mixed Sizes and Variants</h3>
-        <p className="mb-md text-xs text-muted-foreground">
+        <p className="mb-md text-xs text-[hsl(var(--tm-text-muted))]">
           Complex combination with different sizes and variants
         </p>
         <ButtonGroup spacing="md">
@@ -490,7 +490,9 @@ export const Mixed: Story = {
       </div>
       <div>
         <h3 className="mb-md text-sm font-medium">Vertical with Alignment</h3>
-        <p className="mb-md text-xs text-muted-foreground">Vertical layout with center alignment</p>
+        <p className="mb-md text-xs text-[hsl(var(--tm-text-muted))]">
+          Vertical layout with center alignment
+        </p>
         <ButtonGroup orientation="vertical" align="center" spacing="md" variant="outline">
           <Button>Option 1</Button>
           <Button>Option 2</Button>

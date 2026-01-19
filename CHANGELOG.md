@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+### Added
+
+- **Canon Core v1 Theming**: Runtime emitted 100% REQUIRED `--tm-*` tokens and dev-guard enforced missing/empty required tokens
+- **Build-Time Validation**: CI gate validated token coverage for all mode/theme/brand combinations
+- **Legacy CSS Var Guard**: Guard blocked non-`--tm-*` usage in runtime components
+- **Semantic Layer Governance**: `--semantic-*` was marked TEMPORARY and restricted to feedback/validation
+- **TM Validation Artifacts**: Registry/snapshot modules, validator script, and migration reports were added
+
 ### Fixed
 
 - **Typography Size Scale**: Restored semantic typography size mappings in FOUNDATION components
@@ -39,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Default Link now renders inline (inline-flex) instead of block-level
   - Wrapper use cases (wrapping Card/Panel/Box) require explicit `variant='link'`
   - See: `docs/architecture/INTERACTIVE_WRAPPER_LAYOUT_RULE.md`
+- **Component Migration**: Form, surface, and overlay components stopped reading legacy CSS vars and used `--tm-*` only
 
 ## [2.0.6]
 

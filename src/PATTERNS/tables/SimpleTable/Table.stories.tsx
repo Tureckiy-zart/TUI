@@ -46,7 +46,7 @@ export const WithCustomRender: Story = {
           <span
             className={`rounded px-sm py-xs text-xs ${
               value === "Admin"
-                ? "bg-destructive/20 text-destructive-foreground"
+                ? "bg-[hsl(var(--tm-destructive))]/20 text-destructive-foreground"
                 : value === "Moderator"
                   ? "bg-secondary/20 text-secondary-foreground"
                   : "bg-accent/20 text-accent-foreground"
@@ -97,7 +97,9 @@ export const States: Story = {
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 text-lg font-semibold">Default State</h3>
-        <p className="mb-2 text-sm text-muted-foreground">Hover over rows to see hover state</p>
+        <p className="mb-2 text-sm text-[hsl(var(--tm-text-muted))]">
+          Hover over rows to see hover state
+        </p>
         <Table data={sampleData} columns={basicColumns} rowKey="id" />
       </div>
     </div>

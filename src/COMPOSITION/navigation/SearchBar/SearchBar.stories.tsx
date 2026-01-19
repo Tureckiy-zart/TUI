@@ -156,7 +156,7 @@ export const States: Story = {
       <div>
         <h3 className="mb-2 text-sm font-medium">Focused (interactive)</h3>
         <SearchBar placeholder="Search..." suggestions={defaultSuggestions} />
-        <p className="mt-2 text-xs text-muted-foreground">
+        <p className="mt-2 text-xs text-[hsl(var(--tm-text-muted))]">
           Click the input to see focused state with suggestions dropdown
         </p>
       </div>
@@ -195,15 +195,15 @@ export const RealisticUsage: Story = {
           }}
         />
         {selectedSuggestion && (
-          <div className="rounded-md bg-muted p-4">
+          <div className="rounded-md bg-[hsl(var(--tm-muted))] p-4">
             <p className="text-sm font-medium">Selected:</p>
-            <p className="text-sm text-muted-foreground">{selectedSuggestion}</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">{selectedSuggestion}</p>
           </div>
         )}
         {searchQuery && !selectedSuggestion && (
-          <div className="rounded-md bg-muted p-4">
+          <div className="rounded-md bg-[hsl(var(--tm-muted))] p-4">
             <p className="text-sm font-medium">Searching for:</p>
-            <p className="text-sm text-muted-foreground">{searchQuery}</p>
+            <p className="text-sm text-[hsl(var(--tm-text-muted))]">{searchQuery}</p>
           </div>
         )}
       </div>

@@ -78,7 +78,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
               <CardBody className="p-lg">
                 <div className="space-y-md">
                   {/* Icon */}
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[hsl(var(--tm-primary))]/10 text-[hsl(var(--tm-primary))]">
                     {feature.icon}
                   </div>
 

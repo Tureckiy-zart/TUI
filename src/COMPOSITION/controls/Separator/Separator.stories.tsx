@@ -78,26 +78,26 @@ export const Matrix: Story = {
 
         {/* Thickness 1 */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">Thickness: 1px</h4>
+          <h4 className="text-sm font-medium text-[hsl(var(--tm-text-muted))]">Thickness: 1px</h4>
           <div className="space-y-3">
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Border</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Border</p>
               <Separator orientation="horizontal" color="border" thickness="1" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Muted</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Muted</p>
               <Separator orientation="horizontal" color="muted" thickness="1" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Primary</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Primary</p>
               <Separator orientation="horizontal" color="primary" thickness="1" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Secondary</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Secondary</p>
               <Separator orientation="horizontal" color="secondary" thickness="1" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Accent</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Accent</p>
               <Separator orientation="horizontal" color="accent" thickness="1" />
             </div>
           </div>
@@ -105,26 +105,26 @@ export const Matrix: Story = {
 
         {/* Thickness 2 */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">Thickness: 2px</h4>
+          <h4 className="text-sm font-medium text-[hsl(var(--tm-text-muted))]">Thickness: 2px</h4>
           <div className="space-y-3">
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Border</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Border</p>
               <Separator orientation="horizontal" color="border" thickness="2" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Muted</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Muted</p>
               <Separator orientation="horizontal" color="muted" thickness="2" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Primary</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Primary</p>
               <Separator orientation="horizontal" color="primary" thickness="2" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Secondary</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Secondary</p>
               <Separator orientation="horizontal" color="secondary" thickness="2" />
             </div>
             <div>
-              <p className="mb-2 text-xs text-muted-foreground">Accent</p>
+              <p className="mb-2 text-xs text-[hsl(var(--tm-text-muted))]">Accent</p>
               <Separator orientation="horizontal" color="accent" thickness="2" />
             </div>
           </div>
@@ -137,26 +137,26 @@ export const Matrix: Story = {
 
         {/* Thickness 1 */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">Thickness: 1px</h4>
+          <h4 className="text-sm font-medium text-[hsl(var(--tm-text-muted))]">Thickness: 1px</h4>
           <div className="flex h-20 gap-4">
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Border</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Border</p>
               <Separator orientation="vertical" color="border" thickness="1" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Muted</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Muted</p>
               <Separator orientation="vertical" color="muted" thickness="1" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Primary</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Primary</p>
               <Separator orientation="vertical" color="primary" thickness="1" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Secondary</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Secondary</p>
               <Separator orientation="vertical" color="secondary" thickness="1" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Accent</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Accent</p>
               <Separator orientation="vertical" color="accent" thickness="1" />
             </div>
           </div>
@@ -164,26 +164,26 @@ export const Matrix: Story = {
 
         {/* Thickness 2 */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">Thickness: 2px</h4>
+          <h4 className="text-sm font-medium text-[hsl(var(--tm-text-muted))]">Thickness: 2px</h4>
           <div className="flex h-20 gap-4">
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Border</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Border</p>
               <Separator orientation="vertical" color="border" thickness="2" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Muted</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Muted</p>
               <Separator orientation="vertical" color="muted" thickness="2" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Primary</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Primary</p>
               <Separator orientation="vertical" color="primary" thickness="2" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Secondary</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Secondary</p>
               <Separator orientation="vertical" color="secondary" thickness="2" />
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-muted-foreground">Accent</p>
+              <p className="text-xs text-[hsl(var(--tm-text-muted))]">Accent</p>
               <Separator orientation="vertical" color="accent" thickness="2" />
             </div>
           </div>
@@ -201,7 +201,7 @@ export const States: Story = {
     <div className="space-y-6">
       <div>
         <h4 className="mb-2 text-sm font-medium">Semantic Separator (role="separator")</h4>
-        <p className="mb-4 text-sm text-muted-foreground">
+        <p className="mb-4 text-sm text-[hsl(var(--tm-text-muted))]">
           Has semantic meaning, announced by screen readers
         </p>
         <div className="space-y-2">
@@ -213,7 +213,7 @@ export const States: Story = {
 
       <div>
         <h4 className="mb-2 text-sm font-medium">Decorative Separator (role="none")</h4>
-        <p className="mb-4 text-sm text-muted-foreground">
+        <p className="mb-4 text-sm text-[hsl(var(--tm-text-muted))]">
           Purely visual, not announced by screen readers
         </p>
         <div className="space-y-2">
@@ -234,7 +234,9 @@ export const FormSections: Story = {
     <div className="max-w-md space-y-6 rounded-lg border p-6">
       <div className="space-y-2">
         <h3 className="text-lg font-semibold">Personal Information</h3>
-        <p className="text-sm text-muted-foreground">Enter your personal details below</p>
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+          Enter your personal details below
+        </p>
       </div>
 
       <Separator />
@@ -262,7 +264,9 @@ export const FormSections: Story = {
 
       <div className="space-y-2">
         <h3 className="text-lg font-semibold">Account Settings</h3>
-        <p className="text-sm text-muted-foreground">Configure your account preferences</p>
+        <p className="text-sm text-[hsl(var(--tm-text-muted))]">
+          Configure your account preferences
+        </p>
       </div>
 
       <Separator />
@@ -318,7 +322,7 @@ export const ContentBlocks: Story = {
     <div className="max-w-2xl space-y-6">
       <article className="space-y-3">
         <h2 className="text-2xl font-bold">Introduction</h2>
-        <p className="text-muted-foreground">
+        <p className="text-[hsl(var(--tm-text-muted))]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua.
         </p>
@@ -328,7 +332,7 @@ export const ContentBlocks: Story = {
 
       <article className="space-y-3">
         <h2 className="text-2xl font-bold">Main Content</h2>
-        <p className="text-muted-foreground">
+        <p className="text-[hsl(var(--tm-text-muted))]">
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
           commodo consequat.
         </p>
@@ -338,7 +342,7 @@ export const ContentBlocks: Story = {
 
       <article className="space-y-3">
         <h2 className="text-2xl font-bold">Conclusion</h2>
-        <p className="text-muted-foreground">
+        <p className="text-[hsl(var(--tm-text-muted))]">
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
           nulla pariatur.
         </p>

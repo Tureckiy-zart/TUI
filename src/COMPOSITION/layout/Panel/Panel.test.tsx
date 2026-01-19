@@ -33,7 +33,7 @@ describe("Panel component", () => {
     const panel = container.firstChild as HTMLElement;
     expect(panel).toBeInTheDocument();
     // Should have muted background class
-    expect(panel).toHaveClass("bg-muted");
+    expect(panel).toHaveClass("bg-[hsl(var(--tm-muted))]");
   });
 
   it("should apply subtle tone", () => {
@@ -41,7 +41,7 @@ describe("Panel component", () => {
     const panel = container.firstChild as HTMLElement;
     expect(panel).toBeInTheDocument();
     // Should have subtle background class
-    expect(panel).toHaveClass("bg-muted/50");
+    expect(panel).toHaveClass("bg-[hsl(var(--tm-muted))]/50");
   });
 
   it("should apply custom padding prop", () => {
@@ -178,22 +178,22 @@ describe("Panel component", () => {
   it("should apply tone background and border classes", () => {
     const { container } = render(<Panel tone="default">Content</Panel>);
     const panel = container.firstChild as HTMLElement;
-    // Default tone should have bg-background and border classes
-    expect(panel).toHaveClass("bg-background");
+    // Default tone should have bg-[hsl(var(--tm-surface-base))] and border classes
+    expect(panel).toHaveClass("bg-[hsl(var(--tm-surface-base))]");
     expect(panel).toHaveClass("border");
   });
 
   it("should apply muted tone background and border classes", () => {
     const { container } = render(<Panel tone="muted">Content</Panel>);
     const panel = container.firstChild as HTMLElement;
-    expect(panel).toHaveClass("bg-muted");
+    expect(panel).toHaveClass("bg-[hsl(var(--tm-muted))]");
     expect(panel).toHaveClass("border");
   });
 
   it("should apply subtle tone background and border classes", () => {
     const { container } = render(<Panel tone="subtle">Content</Panel>);
     const panel = container.firstChild as HTMLElement;
-    expect(panel).toHaveClass("bg-muted/50");
+    expect(panel).toHaveClass("bg-[hsl(var(--tm-muted))]/50");
     expect(panel).toHaveClass("border");
   });
 });

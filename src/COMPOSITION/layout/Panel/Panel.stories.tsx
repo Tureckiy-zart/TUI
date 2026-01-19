@@ -179,7 +179,7 @@ export const FormSection: Story = {
             </Text>
             <input
               type="text"
-              className="mt-xs w-full rounded-md border border-border bg-background px-sm py-xs"
+              className="mt-xs w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-sm py-xs"
               placeholder="Enter value"
             />
           </div>
@@ -189,7 +189,7 @@ export const FormSection: Story = {
             </Text>
             <input
               type="text"
-              className="mt-xs w-full rounded-md border border-border bg-background px-sm py-xs"
+              className="mt-xs w-full rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-sm py-xs"
               placeholder="Enter value"
             />
           </div>
@@ -286,7 +286,7 @@ export const ComparisonWithCard: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Card (heavier)</h3>
-        <div className="rounded-xl border border-border bg-card p-lg shadow">
+        <div className="rounded-xl border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-raised))] p-lg shadow">
           <Text>Card has stronger visual hierarchy with shadow</Text>
         </div>
       </div>
@@ -324,22 +324,24 @@ export const Matrix: Story = {
           <div className="space-y-md">
             {tones.map((tone) => (
               <div key={tone}>
-                <h4 className="mb-sm text-xs font-medium capitalize text-foreground/80">
+                <h4 className="mb-sm text-xs font-medium capitalize text-[hsl(var(--tm-text-primary))]/80">
                   {tone} Tone
                 </h4>
                 <div className="grid grid-cols-4 gap-md">
-                  <div className="text-xs font-medium text-foreground/80">Radius</div>
+                  <div className="text-xs font-medium text-[hsl(var(--tm-text-primary))]/80">
+                    Radius
+                  </div>
                   {radii.map((radius) => (
                     <div
                       key={radius}
-                      className="text-center text-xs font-medium text-foreground/80"
+                      className="text-center text-xs font-medium text-[hsl(var(--tm-text-primary))]/80"
                     >
                       {radius}
                     </div>
                   ))}
                   {paddings.map((padding) => (
                     <React.Fragment key={padding}>
-                      <div className="flex items-center text-xs font-medium text-foreground/80">
+                      <div className="flex items-center text-xs font-medium text-[hsl(var(--tm-text-primary))]/80">
                         Padding: {padding}
                       </div>
                       {radii.map((radius) => (

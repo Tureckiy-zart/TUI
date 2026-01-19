@@ -34,7 +34,7 @@ export const ACCORDION_TOKENS = {
       lg: "rounded-md", // 6px (0.375rem)
     },
     border: {
-      default: "border border-[hsl(var(--border))]",
+      default: "border border-[hsl(var(--tm-border-default))]",
     },
   } as const,
 
@@ -69,7 +69,7 @@ export const ACCORDION_TOKENS = {
         lg: "size-5", // 20px (1.25rem)
       },
       gap: "gap-sm", // 8px (0.5rem)
-      color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
+      color: "text-[hsl(var(--tm-text-muted))]", // Icon color using CSS variable
     },
   } as const,
 
@@ -99,84 +99,84 @@ export const ACCORDION_TOKENS = {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
           border: "border-transparent",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--muted))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-muted))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
         open: {
-          background: "data-[state=open]:bg-[hsl(var(--muted))]",
-          text: "data-[state=open]:text-[hsl(var(--foreground))]",
+          background: "data-[state=open]:bg-[hsl(var(--tm-muted))]",
+          text: "data-[state=open]:text-[hsl(var(--tm-text-primary))]",
         },
       },
       content: {
-        background: "bg-[hsl(var(--background))]",
-        text: "text-[hsl(var(--foreground))]",
+        background: "bg-[hsl(var(--tm-surface-base))]",
+        text: "text-[hsl(var(--tm-text-primary))]",
       },
     },
     secondary: {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
           border: "border-transparent",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--muted))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-muted))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
         open: {
-          background: "data-[state=open]:bg-[hsl(var(--muted))]",
-          text: "data-[state=open]:text-[hsl(var(--foreground))]",
+          background: "data-[state=open]:bg-[hsl(var(--tm-muted))]",
+          text: "data-[state=open]:text-[hsl(var(--tm-text-primary))]",
         },
       },
       content: {
-        background: "bg-[hsl(var(--background))]",
-        text: "text-[hsl(var(--foreground))]",
+        background: "bg-[hsl(var(--tm-surface-base))]",
+        text: "text-[hsl(var(--tm-text-primary))]",
       },
     },
     accent: {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--accent-foreground))]",
+          text: "text-[hsl(var(--tm-accent-foreground))]",
           border: "border-transparent",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--accent))]",
-          text: "hover:text-[hsl(var(--accent-foreground))]",
+          background: "hover:bg-[hsl(var(--tm-accent))]",
+          text: "hover:text-[hsl(var(--tm-accent-foreground))]",
         },
         open: {
-          background: "data-[state=open]:bg-[hsl(var(--accent))]",
-          text: "data-[state=open]:text-[hsl(var(--accent-foreground))]",
+          background: "data-[state=open]:bg-[hsl(var(--tm-accent))]",
+          text: "data-[state=open]:text-[hsl(var(--tm-accent-foreground))]",
         },
       },
       content: {
-        background: "bg-[hsl(var(--accent))]",
-        text: "text-[hsl(var(--accent-foreground))]",
+        background: "bg-[hsl(var(--tm-accent))]",
+        text: "text-[hsl(var(--tm-accent-foreground))]",
       },
     },
     neutral: {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--muted-foreground))]",
+          text: "text-[hsl(var(--tm-text-muted))]",
           border: "border-transparent",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--muted))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-muted))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
         open: {
-          background: "data-[state=open]:bg-[hsl(var(--muted))]",
-          text: "data-[state=open]:text-[hsl(var(--foreground))]",
+          background: "data-[state=open]:bg-[hsl(var(--tm-muted))]",
+          text: "data-[state=open]:text-[hsl(var(--tm-text-primary))]",
         },
       },
       content: {
-        background: "bg-[hsl(var(--muted))]",
-        text: "text-[hsl(var(--foreground))]",
+        background: "bg-[hsl(var(--tm-muted))]",
+        text: "text-[hsl(var(--tm-text-primary))]",
       },
     },
   } as const,
@@ -243,7 +243,7 @@ export const ACCORDION_TOKENS = {
    * Focus ring tokens for accessibility
    */
   focus: {
-    ring: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2",
+    ring: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--tm-focus-ring))] focus-visible:ring-offset-2",
   } as const,
 
   /**

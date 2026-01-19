@@ -5,6 +5,7 @@
  * All styling uses token-based values with CSS variable references.
  */
 
+import { focusRing } from "@/FOUNDATION/lib/a11y";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { FILE_UPLOAD_TOKENS } from "@/FOUNDATION/tokens/components/file-upload";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
@@ -21,7 +22,7 @@ export const fileUploadDropzoneVariants = tokenCVA({
     border-2 border-dashed
     ${MOTION_TOKENS.transition.colors}
     cursor-pointer
-    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+    ${focusRing}
     disabled:cursor-not-allowed disabled:opacity-50
   `,
   variants: {

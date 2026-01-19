@@ -160,7 +160,7 @@ describe("PageHeader component", () => {
       />,
     );
     // Text is split across multiple elements, check textContent
-    const description = container.querySelector("span[class*='text-muted']");
+    const description = container.querySelector("span[class*='text-[hsl(var(--tm-text-muted))]']");
     expect(description?.textContent).toBe("Custom Description");
   });
 

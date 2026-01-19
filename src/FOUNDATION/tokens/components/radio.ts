@@ -76,21 +76,21 @@ export const RADIO_TOKENS = {
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     outline: {
-      border: "border-[hsl(var(--input))]", // Input border color
+      border: "border-[hsl(var(--tm-surface-base))]", // Input border color
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color (for dot)
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color (for dot)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     ghost: {
       border: "border-transparent", // Transparent border
       background: "bg-transparent", // Transparent background
-      text: "text-[hsl(var(--foreground))]", // Foreground text color (for dot)
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text color (for dot)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
     destructive: {
-      border: "border-[hsl(var(--destructive))]", // Destructive border color
-      background: "bg-[hsl(var(--destructive))]", // Destructive background
-      text: "text-[hsl(var(--destructive-foreground))]", // Destructive text color (for dot)
+      border: "border-[hsl(var(--tm-destructive))]", // Destructive border color
+      background: "bg-[hsl(var(--tm-destructive))]", // Destructive background
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text color (for dot)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Default focus ring
     },
   } as const,
@@ -102,20 +102,20 @@ export const RADIO_TOKENS = {
    */
   state: {
     border: {
-      default: "border-[hsl(var(--input))]", // Default border color using CSS var
+      default: "border-[hsl(var(--tm-surface-base))]", // Default border color using CSS var
       checked: "border-[hsl(var(--tm-primary))]", // Checked state border
-      error: "border-[hsl(var(--destructive))]", // Error state border using CSS var
-      disabled: "border-[hsl(var(--input))]", // Disabled state border (same as default)
+      error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
+      disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
     },
     background: {
       default: "bg-transparent", // Default background
       checked: "bg-[hsl(var(--tm-primary))]", // Checked state background
       disabled: "bg-transparent", // Disabled background (same as default)
-      disabledChecked: "bg-[hsl(var(--muted))]", // Disabled checked background
+      disabledChecked: "bg-[hsl(var(--tm-muted))]", // Disabled checked background
     },
     text: {
-      default: "text-[hsl(var(--foreground))]", // Default text color using CSS var
+      default: "text-[hsl(var(--tm-text-primary))]", // Default text color using CSS var
       checked: "text-[hsl(var(--tm-primary-foreground))]", // Checked state text (for dot)
       disabled: "disabled:opacity-50", // Disabled text opacity
     },
@@ -135,7 +135,7 @@ export const RADIO_TOKENS = {
     },
     color: {
       default: "bg-[hsl(var(--tm-primary-foreground))]", // Default dot color
-      disabled: "bg-[hsl(var(--muted-foreground))]", // Disabled dot color
+      disabled: "bg-[hsl(var(--tm-text-muted))]", // Disabled dot color
     },
     radius: "rounded-full", // Fully circular dot
   } as const,

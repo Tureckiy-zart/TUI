@@ -170,7 +170,7 @@ export const Default: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Modal
           </Modal.Trigger>
           <Modal.Content>
@@ -211,7 +211,7 @@ export const States: Story = {
       <div className="space-y-8">
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">All Sizes (Open State)</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             Demonstrates all size variants in open state. Use keyboard navigation (Tab, Escape) to
             interact with modals.
           </p>
@@ -227,9 +227,11 @@ export const States: Story = {
                   </Modal.Header>
                   <div className="py-4">
                     <p>Modal content for {size} size variant.</p>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-2 text-sm text-[hsl(var(--tm-text-muted))]">
                       Press{" "}
-                      <kbd className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Escape</kbd>{" "}
+                      <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 font-mono text-xs">
+                        Escape
+                      </kbd>{" "}
                       to close or use the close button.
                     </p>
                   </div>
@@ -268,7 +270,7 @@ export const WithTitleAndDescription: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Modal
           </Modal.Trigger>
           <Modal.Content>
@@ -302,7 +304,7 @@ export const WithFooter: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Modal with Footer
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -351,7 +353,7 @@ export const Controlled: Story = {
         <div className="flex flex-col gap-4">
           <div className="flex gap-2">
             <button
-              className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+              className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]"
               onClick={() => setOpen(true)}
             >
               Open Modal
@@ -409,7 +411,7 @@ export const Uncontrolled: Story = {
     return (
       <>
         <Modal.Root defaultOpen={false}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -666,7 +668,7 @@ export const LongContent: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Long Content Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -732,7 +734,7 @@ export const WithBody: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Modal with Body
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -792,7 +794,7 @@ export const NonModal: Story = {
     return (
       <>
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[hsl(var(--tm-text-muted))]">
             This is background content. When the modal is open, you can still interact with this
             content because modal=false.
           </p>
@@ -804,7 +806,7 @@ export const NonModal: Story = {
           </button>
         </div>
         <Modal.Root open={open} onOpenChange={setOpen} modal={false}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Non-Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -843,7 +845,7 @@ export const PreventCloseOnEscape: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Prevent Escape Modal
           </Modal.Trigger>
           <Modal.Content
@@ -899,7 +901,7 @@ export const PreventCloseOnOutsideClick: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Prevent Outside Click Modal
           </Modal.Trigger>
           <Modal.Content
@@ -957,7 +959,7 @@ export const PreventCloseOnOutsideInteraction: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Prevent Outside Interaction Modal
           </Modal.Trigger>
           <Modal.Content
@@ -1017,7 +1019,7 @@ export const WithForm: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Form Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1079,7 +1081,7 @@ export const WithForm: Story = {
                 </button>
                 <button
                   type="submit"
-                  className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                  className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]"
                 >
                   Submit
                 </button>
@@ -1110,7 +1112,7 @@ export const MultipleActions: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Multiple Actions Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1138,7 +1140,7 @@ export const MultipleActions: Story = {
                   Save Draft
                 </button>
                 <button
-                  className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                  className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]"
                   onClick={() => setOpen(false)}
                 >
                   Publish
@@ -1171,7 +1173,7 @@ export const TitleOnly: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Title Only Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1206,7 +1208,7 @@ export const ContentOnly: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Content Only Modal
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1242,7 +1244,7 @@ export const ConfirmationDialog: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Confirmation Dialog
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1263,7 +1265,7 @@ export const ConfirmationDialog: Story = {
                 Cancel
               </button>
               <button
-                className="rounded-md bg-destructive px-4 py-2 text-destructive-foreground"
+                className="rounded-md bg-[hsl(var(--tm-destructive))] px-4 py-2 text-destructive-foreground"
                 onClick={() => {
                   alert("Item deleted!");
                   setOpen(false);
@@ -1298,7 +1300,7 @@ export const AlertDialog: Story = {
     return (
       <>
         <Modal.Root open={open} onOpenChange={setOpen}>
-          <Modal.Trigger className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+          <Modal.Trigger className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]">
             Open Alert Dialog
           </Modal.Trigger>
           <Modal.Content size="md">
@@ -1313,7 +1315,7 @@ export const AlertDialog: Story = {
             </div>
             <Modal.Footer align="right">
               <button
-                className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+                className="rounded-md bg-[hsl(var(--tm-primary))] px-4 py-2 text-[hsl(var(--tm-primary-foreground))]"
                 onClick={() => setOpen(false)}
               >
                 OK

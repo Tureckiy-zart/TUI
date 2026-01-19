@@ -101,7 +101,7 @@ export const CHIP_TOKENS = {
    * @rule Focus MUST be blocked when disabled={true}
    */
   focus: {
-    ring: "focus-visible:ring-2 focus-visible:ring-ring", // Focus ring using semantic ring color
+    ring: "focus-visible:ring-2 focus-visible:ring-[hsl(var(--tm-focus-ring))]", // Focus ring using semantic ring color
     outline: "focus-visible:outline-none", // Remove default outline (replaced by ring)
     offset: "focus-visible:ring-offset-2", // Ring offset
   } as const,
@@ -145,45 +145,45 @@ export const CHIP_TOKENS = {
   variant: {
     primary: {
       border: "border-transparent", // Transparent border
-      background: "bg-primary", // Primary background using CSS var
-      text: "text-primary-foreground", // Primary text using CSS var
-      hover: "hover:bg-primary/80", // Primary hover background
-      selected: "bg-primary", // Selected state (same as default for primary)
+      background: "bg-[hsl(var(--tm-primary))]", // Primary background using CSS var
+      text: "text-[hsl(var(--tm-primary-foreground))]", // Primary text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-primary))]/80", // Primary hover background
+      selected: "bg-[hsl(var(--tm-primary))]", // Selected state (same as default for primary)
     } as const,
     secondary: {
       border: "border-transparent", // Transparent border
-      background: "bg-secondary", // Secondary background using CSS var
-      text: "text-secondary-foreground", // Secondary text using CSS var
-      hover: "hover:bg-secondary/80", // Secondary hover background
-      selected: "bg-secondary", // Selected state (same as default for secondary)
+      background: "bg-[hsl(var(--tm-secondary))]", // Secondary background using CSS var
+      text: "text-[hsl(var(--tm-secondary-foreground))]", // Secondary text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-secondary))]/80", // Secondary hover background
+      selected: "bg-[hsl(var(--tm-secondary))]", // Selected state (same as default for secondary)
     } as const,
     accent: {
       border: "border-transparent", // Transparent border
-      background: "bg-accent", // Accent background using CSS var
-      text: "text-accent-foreground", // Accent text using CSS var
-      hover: "hover:bg-accent/80", // Accent hover background
-      selected: "bg-accent", // Selected state (same as default for accent)
+      background: "bg-[hsl(var(--tm-accent))]", // Accent background using CSS var
+      text: "text-[hsl(var(--tm-accent-foreground))]", // Accent text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-accent))]/80", // Accent hover background
+      selected: "bg-[hsl(var(--tm-accent))]", // Selected state (same as default for accent)
     } as const,
     outline: {
-      border: "border-border", // Border using CSS var
+      border: "border-[hsl(var(--tm-border-default))]", // Border using CSS var
       background: "", // No background
-      text: "text-foreground", // Foreground text using CSS var
-      hover: "hover:bg-accent/10", // Subtle hover background
-      selected: "bg-accent/20", // Selected state with background
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-accent))]/10", // Subtle hover background
+      selected: "bg-[hsl(var(--tm-accent))]/20", // Selected state with background
     } as const,
     ghost: {
       border: "border-transparent", // Transparent border
       background: "bg-transparent", // Transparent background
-      text: "text-foreground", // Foreground text using CSS var
-      hover: "hover:bg-accent/10", // Ghost hover background
-      selected: "bg-accent/20", // Selected state with background
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-accent))]/10", // Ghost hover background
+      selected: "bg-[hsl(var(--tm-accent))]/20", // Selected state with background
     } as const,
     destructive: {
       border: "border-transparent", // Transparent border
-      background: "bg-destructive", // Destructive background using CSS var
-      text: "text-destructive-foreground", // Destructive text using CSS var
-      hover: "hover:bg-destructive/80", // Destructive hover background
-      selected: "bg-destructive", // Selected state (same as default for destructive)
+      background: "bg-[hsl(var(--tm-destructive))]", // Destructive background using CSS var
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-destructive))]/80", // Destructive hover background
+      selected: "bg-[hsl(var(--tm-destructive))]", // Selected state (same as default for destructive)
     } as const,
   } as const,
 } as const;

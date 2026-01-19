@@ -78,31 +78,31 @@ export const WrappingContent: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: xs</h3>
-        <Inset padding="xs" className="border border-border">
+        <Inset padding="xs" className="border border-[hsl(var(--tm-border-default))]">
           Content with extra small padding
         </Inset>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: sm</h3>
-        <Inset padding="sm" className="border border-border">
+        <Inset padding="sm" className="border border-[hsl(var(--tm-border-default))]">
           Content with small padding
         </Inset>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: md</h3>
-        <Inset padding="md" className="border border-border">
+        <Inset padding="md" className="border border-[hsl(var(--tm-border-default))]">
           Content with medium padding
         </Inset>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: lg</h3>
-        <Inset padding="lg" className="border border-border">
+        <Inset padding="lg" className="border border-[hsl(var(--tm-border-default))]">
           Content with large padding
         </Inset>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Padding: xl</h3>
-        <Inset padding="xl" className="border border-border">
+        <Inset padding="xl" className="border border-[hsl(var(--tm-border-default))]">
           Content with extra large padding
         </Inset>
       </div>
@@ -124,15 +124,15 @@ export const WrappingContent: Story = {
  */
 export const WrappingStack: Story = {
   render: () => (
-    <Inset padding="lg" className="border border-border">
+    <Inset padding="lg" className="border border-[hsl(var(--tm-border-default))]">
       <Stack direction="vertical" spacing="md">
-        <Box px="sm" py="sm" className="bg-muted">
+        <Box px="sm" py="sm" className="bg-[hsl(var(--tm-muted))]">
           Stack item 1
         </Box>
-        <Box px="sm" py="sm" className="bg-muted">
+        <Box px="sm" py="sm" className="bg-[hsl(var(--tm-muted))]">
           Stack item 2
         </Box>
-        <Box px="sm" py="sm" className="bg-muted">
+        <Box px="sm" py="sm" className="bg-[hsl(var(--tm-muted))]">
           Stack item 3
         </Box>
       </Stack>
@@ -153,7 +153,7 @@ export const WrappingStack: Story = {
  */
 export const WrappingBox: Story = {
   render: () => (
-    <Inset padding="md" className="border border-border">
+    <Inset padding="md" className="border border-[hsl(var(--tm-border-default))]">
       <Box px="lg" py="lg" bg="card" radius="md">
         Box content with inner spacing from Inset
       </Box>
@@ -178,13 +178,19 @@ export const ResponsivePadding: Story = {
     <div className="space-y-lg">
       <div>
         <h3 className="mb-sm text-lg font-semibold">Responsive: sm → lg</h3>
-        <Inset padding={{ base: "sm", lg: "lg" }} className="border border-border">
+        <Inset
+          padding={{ base: "sm", lg: "lg" }}
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           Content with responsive padding (sm on mobile, lg on large screens)
         </Inset>
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Responsive: md → xl</h3>
-        <Inset padding={{ base: "md", lg: "xl" }} className="border border-border">
+        <Inset
+          padding={{ base: "md", lg: "xl" }}
+          className="border border-[hsl(var(--tm-border-default))]"
+        >
           Content with responsive padding (md on mobile, xl on large screens)
         </Inset>
       </div>

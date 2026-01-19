@@ -107,7 +107,7 @@ FieldDescription.displayName = "FieldDescription";
  * Error message displayed below the control for validation feedback.
  * Uses Text component with size="sm" wrapped in destructive color span.
  *
- * Note: Wrapper span with className="text-destructive" is used to apply
+ * Note: Wrapper span with className="text-[hsl(var(--tm-destructive))]" is used to apply
  * destructive color without modifying Text component (Foundation component).
  * This pattern allows Field (Composition component) to use className while
  * respecting Foundation Enforcement rules for Text.
@@ -125,7 +125,7 @@ const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
     // Text component (Foundation) cannot accept className, so wrapper is used.
     // This pattern respects Foundation Enforcement while allowing Composition flexibility.
     return (
-      <span ref={ref} className="text-destructive">
+      <span ref={ref} className="text-[hsl(var(--tm-destructive))]">
         <Text size="sm" {...props}>
           {children}
         </Text>

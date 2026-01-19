@@ -105,7 +105,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   }
 
   return (
-    <div className={cn("rounded-lg bg-background p-lg shadow-lg", className)}>
+    <div className={cn("rounded-lg bg-[hsl(var(--tm-surface-base))] p-lg shadow-lg", className)}>
       <div className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-4">
         <div>
           <label className="mb-sm block text-sm font-medium">{searchLabel}</label>

@@ -54,7 +54,7 @@ export const TABS_TOKENS = {
     icon: {
       size: "size-4", // 16px (1rem)
       gap: "gap-sm", // 8px (0.5rem)
-      color: "text-[hsl(var(--muted-foreground))]", // Icon color using CSS variable
+      color: "text-[hsl(var(--tm-text-muted))]", // Icon color using CSS variable
     },
   } as const,
 
@@ -76,7 +76,7 @@ export const TABS_TOKENS = {
     },
     background: {
       transparent: "bg-transparent",
-      muted: "bg-[hsl(var(--muted))]",
+      muted: "bg-[hsl(var(--tm-muted))]",
     },
   } as const,
 
@@ -107,22 +107,22 @@ export const TABS_TOKENS = {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
           border: "border-transparent",
         },
         active: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
-          border: "border-b-2 border-[hsl(var(--primary))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
+          border: "border-b-2 border-[hsl(var(--tm-primary))]",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--muted))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-muted))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
       },
       indicator: {
         height: "h-0.5", // 2px underline
-        background: "bg-[hsl(var(--primary))]",
+        background: "bg-[hsl(var(--tm-primary))]",
         position: "absolute bottom-0 left-0 right-0",
         transition: `${MOTION_TOKENS.transition.all} ${MOTION_TOKENS.duration["200"]} ${MOTION_TOKENS.easing.out}`,
       },
@@ -132,44 +132,44 @@ export const TABS_TOKENS = {
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
           border: "border-transparent",
           radius: "rounded-full",
         },
         active: {
-          background: "bg-[hsl(var(--primary))]",
-          text: "text-[hsl(var(--primary-foreground))]",
+          background: "bg-[hsl(var(--tm-primary))]",
+          text: "text-[hsl(var(--tm-primary-foreground))]",
           border: "border-transparent",
           radius: "rounded-full",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--muted))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-muted))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
       },
     },
     segmented: {
       // Segmented variant - container with borders
       list: {
-        background: "bg-[hsl(var(--muted))]",
+        background: "bg-[hsl(var(--tm-muted))]",
         padding: "p-xs", // 4px padding
         radius: "rounded-md",
       },
       trigger: {
         default: {
           background: "bg-transparent",
-          text: "text-[hsl(var(--foreground))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
           border: "border-transparent",
         },
         active: {
-          background: "bg-[hsl(var(--background))]",
-          text: "text-[hsl(var(--foreground))]",
-          border: "border-[hsl(var(--border))]",
+          background: "bg-[hsl(var(--tm-surface-base))]",
+          text: "text-[hsl(var(--tm-text-primary))]",
+          border: "border-[hsl(var(--tm-border-default))]",
           shadow: "shadow-sm",
         },
         hover: {
-          background: "hover:bg-[hsl(var(--background))]",
-          text: "hover:text-[hsl(var(--foreground))]",
+          background: "hover:bg-[hsl(var(--tm-surface-base))]",
+          text: "hover:text-[hsl(var(--tm-text-primary))]",
         },
       },
     },
@@ -182,22 +182,22 @@ export const TABS_TOKENS = {
   tone: {
     neutral: {
       active: {
-        background: "bg-[hsl(var(--muted))]",
-        text: "text-[hsl(var(--foreground))]",
-        border: "border-[hsl(var(--border))]",
+        background: "bg-[hsl(var(--tm-muted))]",
+        text: "text-[hsl(var(--tm-text-primary))]",
+        border: "border-[hsl(var(--tm-border-default))]",
       },
       indicator: {
-        background: "bg-[hsl(var(--foreground))]",
+        background: "bg-[hsl(var(--tm-text-primary))]",
       },
     },
     primary: {
       active: {
-        background: "bg-[hsl(var(--primary))]",
-        text: "text-[hsl(var(--primary-foreground))]",
-        border: "border-[hsl(var(--primary))]",
+        background: "bg-[hsl(var(--tm-primary))]",
+        text: "text-[hsl(var(--tm-primary-foreground))]",
+        border: "border-[hsl(var(--tm-primary))]",
       },
       indicator: {
-        background: "bg-[hsl(var(--primary))]",
+        background: "bg-[hsl(var(--tm-primary))]",
       },
     },
   } as const,
@@ -217,7 +217,7 @@ export const TABS_TOKENS = {
    * Focus ring tokens for accessibility
    */
   focus: {
-    ring: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2",
+    ring: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--tm-focus-ring))] focus-visible:ring-offset-2",
   } as const,
 
   /**

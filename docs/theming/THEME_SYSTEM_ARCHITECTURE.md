@@ -1,45 +1,64 @@
-﻿# Theme System Architecture (runtime)
+# Theme System Architecture (runtime)
 
 **Date:** 2025-12-30  
 **Last Updated:** 2026-01-17  
 **Status:** CURRENT (runtime implementation)  
-**Purpose:** Описывает **фактическую** архитектуру темы в текущем коде
+**Purpose:** Describes the actual theme architecture in the current code
 
 ---
 
-## Ключевая реальность
+## Key reality
 
-Сейчас тема применяется **в рантайме** через JS и установку CSS‑переменных.  
-CSS‑файлы тем (`theme.*.css`) в рантайме **не используются**.
+The theme is applied at runtime via JS and CSS variable assignment.  
+Theme CSS files (`theme.*.css`) are not used at runtime.
+
+## Current state
+
+- REQUIRED Canon Core v1 `--tm-*` coverage is complete at runtime.
+- A build-time validator (`theme:validate:tm`) is enforced in CI.
+- Next steps focus on migrating components off legacy tokens.
 
 ---
 
-## Каноническая модель (как есть в коде)
+## Canonical model (as implemented)
 
-### Атрибуты DOM
+### DOM attributes
 
-`applyDocumentTheme()` выставляет атрибуты на `<html>`:
+`applyDocumentTheme()` sets attributes on `<html>`:
 
 - `data-mode`: `day | night`
 - `data-theme-name`: `default | dark | brand`
-- `data-theme`: дублирует `data-mode` (используется как вторичный атрибут)
-- `class="dark"`: ставится при `night` для Tailwind
+- `data-theme`: duplicates `data-mode` (secondary attribute)
+- `class="dark"`: set for `night` for Tailwind
 
-### Источник токенов
+### Token sources
 
-Токены — это JS‑объекты в `src/FOUNDATION/tokens/*`.  
-Они объединяются с оверрайдами темы/бренда и применяются в `updateCSSVariablesFromTokens()`.
+Tokens are JS objects in `src/FOUNDATION/tokens/*`.  
+They are merged with theme/brand overrides and applied in `updateCSSVariablesFromTokens()`.
 
-### Применение токенов
+### Token application
 
-`updateCSSVariablesFromTokens(mode)` синхронно выставляет CSS‑переменные:
+`updateCSSVariablesFromTokens(mode)` synchronously sets CSS variables:
 
-- legacy переменные (`--background`, `--foreground`, `--border`, `--ring`, …)
-- surface/text/semantic группы (`--surface-*`, `--text-*`, `--semantic-*`)
+- legacy variables (`--background`, `--foreground`, `--border`, `--ring`, ...)
+- surface/text/semantic groups (`--surface-*`, `--text-*`, `--semantic-*`)
 - color scales (`--primary-*`, `--secondary-*`, `--accent-*`)
-- часть `--tm-*` токенов (`--tm-primary`, `--tm-secondary`, `--tm-accent`, `--tm-disabled`, …)
+- Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens (dev-guard on missing/empty in dev)
 
-Полный список выставляемых переменных — в `src/FOUNDATION/theme/applyMode.ts`.
+The full list of emitted variables is in `src/FOUNDATION/theme/applyMode.ts`.
+
+---
+
+## Runtime Invariants
+
+Runtime snapshot = the merged token map used to compute required `--tm-*` values.
+
+- `applyMode` emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens synchronously on `document.documentElement`.
+- `src/FOUNDATION/tokens/required-tokens.ts` is the required registry for the contract.
+- Dev-guard validates `REQUIRED_THEME_TOKENS` and throws on missing/empty required tokens in development.
+- Build-time validator (`theme:validate:tm`) checks every (mode x themeName x brandId + none) combo and fails CI on any gap.
+- Shared snapshot assembly lives in `src/FOUNDATION/theme/runtimeTmSnapshot.ts` and is used by runtime and build-time validation.
+- Derived/product/detail tokens are not REQUIRED (see `docs/theming/TM_TOKEN_CONTRACT_V1.md`).
 
 ---
 
@@ -47,48 +66,56 @@ CSS‑файлы тем (`theme.*.css`) в рантайме **не исполь�
 
 `ThemeProvider`:
 
-- хранит `mode` (`day|night`) и `theme` (`default|dark|brand`)
-- читает и пишет `localStorage` (`tm_mode`, `tm_theme`, `tm_brand`)
-- вызывает `applyDocumentTheme()` при изменениях
-- регистрирует дефолтные бренды (`neon`, `minimal`)
+- stores `mode` (`day|night`) and `theme` (`default|dark|brand`)
+- reads and writes `localStorage` (`tm_mode`, `tm_theme`, `tm_brand`)
+- calls `applyDocumentTheme()` on changes
+- registers default brands (`neon`, `minimal`)
 
-Файл: `src/FOUNDATION/theme/ThemeProvider.tsx`
+File: `src/FOUNDATION/theme/ThemeProvider.tsx`
 
 ---
 
-## Темы и бренды
+## Themes and brands
 
-Темы/бренды описаны в `src/themes/*`:
+Themes/brands are defined in `src/themes/*`:
 
 - `default.ts`, `dark.ts`, `brand.ts`
 - `neon.ts`, `minimal.ts`
 
-Бренд‑оверрайды применяются через `src/themes/brand_engine.ts`.
+Brand overrides are applied via `src/themes/brand_engine.ts`.
 
 ---
 
-## SSR и синхронная инициализация
+## SSR and sync initialization
 
-Для ранней инициализации есть `initThemeSync()` в `applyMode.ts`:
+For early init there is `initThemeSync()` in `applyMode.ts`:
 
-- читает `data-mode` или `localStorage`
-- синхронно выставляет CSS‑переменные
-- применяется до первого рендера
+- reads `data-mode` or `localStorage`
+- synchronously sets CSS variables
+- runs before first render
 
-`ThemeProvider` — client‑only компонент.
-
----
-
-## Theme Contract v1 и registry
-
-`src/FOUNDATION/tokens/required-tokens.ts` — реестр для tooling/контракта.  
-Он **не используется** как источник для рантайм‑выставления токенов.
+`ThemeProvider` is a client-only component.
 
 ---
 
-## Где смотреть правду
+## Theme Contract v1 and registry
+
+`src/FOUNDATION/tokens/required-tokens.ts` is the tooling/contract registry.  
+Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+Missing/empty required tokens trigger a dev-time error (dev-guard).
+Build-time validation is enforced by `scripts/theme/validate-tm-contract.ts`.
+Coverage report: `artifacts/reports/TM_CONTRACT_COVERAGE_REPORT.md`.
+
+---
+
+## Where to verify
 
 - `src/FOUNDATION/theme/applyMode.ts`
+- `src/FOUNDATION/theme/runtimeTmSnapshot.ts`
 - `src/FOUNDATION/theme/ThemeProvider.tsx`
 - `src/FOUNDATION/tokens/*`
 - `src/themes/*`
+- `src/themes/registry.ts`
+- `scripts/theme/validate-tm-contract.ts`
+- `.github/workflows/quality.yml`
+

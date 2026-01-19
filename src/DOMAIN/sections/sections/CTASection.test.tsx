@@ -220,7 +220,7 @@ describe("CTASection component", () => {
   it("should apply token-based background", () => {
     const { container } = render(<CTASection headline="Get Started" />);
     const section = container.querySelector("section");
-    expect(section).toHaveClass("bg-muted");
+    expect(section).toHaveClass("bg-[hsl(var(--tm-muted))]");
   });
 
   it("should apply token-based spacing", () => {

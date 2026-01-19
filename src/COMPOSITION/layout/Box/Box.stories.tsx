@@ -80,7 +80,13 @@ export const WithBackground: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">Background: primary</h3>
-        <Box bg="primary" px={4} py={4} radius="md" className="text-primary-foreground">
+        <Box
+          bg="primary"
+          px={4}
+          py={4}
+          radius="md"
+          className="text-[hsl(var(--tm-primary-foreground))]"
+        >
           Box with primary background
         </Box>
       </div>

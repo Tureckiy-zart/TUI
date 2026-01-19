@@ -27,7 +27,7 @@
  * - Completed state uses NAVIGATION_TOKENS.states.selected
  * - Default state uses NAVIGATION_TOKENS.states.default
  * - Disabled state uses NAVIGATION_TOKENS.states.disabled
- * - NO raw Tailwind color classes (bg-red-500, text-primary, etc.) allowed
+ * - NO raw Tailwind color classes (bg-red-500, text-[hsl(var(--tm-primary))], etc.) allowed
  *
  * Spacing Authority Rules:
  * - ALL spacing values MUST come from spacing token system

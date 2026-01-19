@@ -133,7 +133,7 @@ export const eventCardMetadataIconVariants = tokenCVA({
  * Uses DOMAIN_TOKENS for border and spacing
  */
 export const eventCardFooterVariants = tokenCVA({
-  base: "border-t border-border",
+  base: "border-t border-[hsl(var(--tm-border-default))]",
   variants: {
     size: {
       default: DOMAIN_TOKENS.spacing.footer.paddingTopDefault,

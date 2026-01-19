@@ -89,7 +89,7 @@ export const WithInput: Story = {
           id="username-input"
           type="text"
           placeholder="Enter username"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -101,7 +101,7 @@ export const WithInput: Story = {
           id="email-input"
           type="email"
           placeholder="Enter email"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -112,9 +112,9 @@ export const WithInput: Story = {
           type="text"
           placeholder="Disabled"
           disabled
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm disabled:cursor-not-allowed disabled:opacity-50"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm disabled:cursor-not-allowed disabled:opacity-50"
         />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-[hsl(var(--tm-text-muted))]">
           Note: Label shows peer-disabled styling (cursor-not-allowed, opacity-70)
         </p>
       </div>
@@ -149,15 +149,16 @@ export const ComplexChildren: Story = {
     <div className="flex flex-col gap-md">
       <Label>
         <span className="font-semibold">Username</span>
-        <span className="text-muted-foreground"> (optional)</span>
+        <span className="text-[hsl(var(--tm-text-muted))]"> (optional)</span>
       </Label>
 
       <Label required>
-        <span>Email</span> <em className="text-muted-foreground">Address</em>
+        <span>Email</span> <em className="text-[hsl(var(--tm-text-muted))]">Address</em>
       </Label>
 
       <Label>
-        Password <span className="text-xs text-muted-foreground">(min. 8 characters)</span>
+        Password{" "}
+        <span className="text-xs text-[hsl(var(--tm-text-muted))]">(min. 8 characters)</span>
       </Label>
     </div>
   ),
@@ -178,7 +179,7 @@ export const FormLayout: Story = {
           id="form-name"
           type="text"
           placeholder="John Doe"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -190,7 +191,7 @@ export const FormLayout: Story = {
           id="form-email"
           type="email"
           placeholder="john@example.com"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -200,7 +201,7 @@ export const FormLayout: Story = {
           id="form-phone"
           type="tel"
           placeholder="+1 (555) 000-0000"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -212,7 +213,7 @@ export const FormLayout: Story = {
           id="form-message"
           placeholder="Enter your message"
           rows={4}
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
       </div>
 
@@ -220,7 +221,7 @@ export const FormLayout: Story = {
         <input
           id="form-terms"
           type="checkbox"
-          className="peer h-4 w-4 rounded border border-input"
+          className="peer h-4 w-4 rounded border border-[hsl(var(--tm-border-default))]"
         />
         <Label htmlFor="form-terms" required>
           I agree to the terms and conditions
@@ -243,9 +244,11 @@ export const Accessibility: Story = {
           id="a11y-input-1"
           type="text"
           placeholder="Click label to focus"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
-        <p className="text-xs text-muted-foreground">Clicking the label will focus the input</p>
+        <p className="text-xs text-[hsl(var(--tm-text-muted))]">
+          Clicking the label will focus the input
+        </p>
       </div>
 
       <div className="flex flex-col gap-xs">
@@ -257,9 +260,11 @@ export const Accessibility: Story = {
           type="text"
           placeholder="Required input"
           aria-required="true"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
-        <p className="text-xs text-muted-foreground">Asterisk is visible to screen readers</p>
+        <p className="text-xs text-[hsl(var(--tm-text-muted))]">
+          Asterisk is visible to screen readers
+        </p>
       </div>
 
       <div className="flex flex-col gap-xs">
@@ -270,9 +275,9 @@ export const Accessibility: Story = {
           id="a11y-input-3"
           type="text"
           placeholder="With custom aria-label"
-          className="peer rounded-md border border-input bg-background px-md py-sm text-sm"
+          className="peer rounded-md border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-surface-base))] px-md py-sm text-sm"
         />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-[hsl(var(--tm-text-muted))]">
           Label has custom aria-label for screen readers
         </p>
       </div>

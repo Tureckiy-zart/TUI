@@ -90,13 +90,16 @@ export function DateRangePicker({
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-xs w-full rounded-md border bg-popover p-sm shadow-lg">
+        <div className="absolute left-0 top-full z-50 mt-xs w-full rounded-md border bg-[hsl(var(--tm-surface-overlay))] p-sm shadow-lg">
           <div className="space-y-sm">
             <div className="text-sm font-medium">{selectDateRangeLabel}</div>
             <div className="grid grid-cols-7 gap-xs text-xs">
               {/* Calendar header */}
               {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
-                <div key={day} className="p-sm text-center font-medium text-muted-foreground">
+                <div
+                  key={day}
+                  className="p-sm text-center font-medium text-[hsl(var(--tm-text-muted))]"
+                >
                   {day}
                 </div>
               ))}
@@ -114,9 +117,10 @@ export function DateRangePicker({
                   <button
                     key={i}
                     className={cn(
-                      "h-8 w-8 rounded text-sm hover:bg-accent",
-                      isSelected && "bg-primary text-primary-foreground",
-                      isInRange && "bg-accent/50",
+                      "h-8 w-8 rounded text-sm hover:bg-[hsl(var(--tm-accent))]",
+                      isSelected &&
+                        "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]",
+                      isInRange && "bg-[hsl(var(--tm-accent))]/50",
                     )}
                     onClick={() => handleDateSelect(date)}
                   >

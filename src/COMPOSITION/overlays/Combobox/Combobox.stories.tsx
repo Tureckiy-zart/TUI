@@ -231,7 +231,7 @@ export const MultiSelect: Story = {
           />
           <Combobox.List options={sampleOptions} />
         </Combobox>
-        <div className="mt-2 text-sm text-muted-foreground">
+        <div className="mt-2 text-sm text-[hsl(var(--tm-text-muted))]">
           Selected: {value.length === 0 ? "None" : value.join(", ")}
         </div>
       </div>

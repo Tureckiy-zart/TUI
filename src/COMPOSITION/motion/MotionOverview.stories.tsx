@@ -254,13 +254,13 @@ export const Overview: Story = {
                       {preset.description}
                     </Text>
                   </Box>
-                  <Box className="flex h-32 items-center justify-center rounded bg-muted">
+                  <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
                     <AnimatedBox
                       key={keys[preset.id as keyof typeof keys]}
                       animationKey={keys[preset.id as keyof typeof keys]}
                       className={preset.className}
                     >
-                      <Box className="h-16 w-16 rounded bg-primary" />
+                      <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
                     </AnimatedBox>
                   </Box>
                   <Button

@@ -1,4 +1,4 @@
-﻿# Token Naming Decision (ADR) — current reality
+# Token Naming Decision (ADR) - current reality
 
 **Date:** 2025-12-30  
 **Last Updated:** 2026-01-17  
@@ -7,60 +7,62 @@
 
 ---
 
-## Reality Check (важно)
+## Reality Check (important)
 
-- В рантайме **используется смесь legacy и `--tm-*` токенов**.
-- `--tm-*` выставляются **частично** (primary/secondary/accent/disabled и др.).
-- `required-tokens.ts` — **реестр для tooling**, а не источник для рантайма.
-
----
-
-## Контекст
-
-Нужен стабильный префикс для семантических CSS‑переменных. Выбран префикс `--tm-` (Tenerife Music). Решение остаётся валидным, но **в рантайме внедрено не полностью**.
+- Runtime uses a mix of legacy and `--tm-*` tokens.
+- Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+- Missing/empty required tokens trigger a dev-time error (dev-guard).
 
 ---
 
-## Решение
+## Context
+
+We need a stable prefix for semantic CSS variables. The `--tm-` prefix (Tenerife Music)
+remains valid and is fully applied for REQUIRED tokens at runtime.
+
+---
+
+## Decision
 
 **Primary Prefix:** `--tm-`
 
-**Причины:**
-- brand‑tied
-- короткий
-- уже используется частично
+**Reasons:**
+- brand-tied
+- short
+- already used in runtime for REQUIRED tokens
 
 ---
 
-## Текущая реализация (факты)
+## Current implementation (facts)
 
-Что реально выставляется в рантайме:
+What is emitted at runtime:
 
-- `--tm-primary`, `--tm-primary-foreground`
-- `--tm-secondary`, `--tm-secondary-foreground`
-- `--tm-accent`, `--tm-accent-foreground`
-- `--tm-disabled`, `--tm-disabled-foreground`
+- 100% REQUIRED Canon Core v1 `--tm-*` tokens (see `required-tokens.ts`)
+- Missing/empty required tokens trigger a dev-time error (dev-guard)
 
-Источник: `src/FOUNDATION/theme/applyMode.ts`
+Source: `src/FOUNDATION/theme/applyMode.ts`
 
 ---
 
-## Реестр required-tokens.ts
+## required-tokens.ts registry
 
-`src/FOUNDATION/tokens/required-tokens.ts` — реестр для build‑time tooling.  
-Он **не отражает** текущий набор CSS‑переменных, выставляемых в рантайме.
-
----
-
-## Правила именования (актуальные)
-
-- Для новых семантических токенов — только `--tm-*`
-- Суффикс `-foreground` — канонический
-- Суффикс `-fg` — deprecated, не использовать в новом коде
+`src/FOUNDATION/tokens/required-tokens.ts` is the build-time tooling/contract registry.  
+Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens via `applyMode`.
+Missing/empty required tokens trigger a dev-time error (dev-guard).
+Build-time validator `theme:validate:tm` generates
+`artifacts/reports/TM_CONTRACT_COVERAGE_REPORT.md` and fails CI on gaps.
 
 ---
 
-## Где смотреть правду
+## Naming rules (current)
+
+- For new semantic tokens, use only `--tm-*`.
+- The `-foreground` suffix is canonical.
+- The `-fg` suffix is deprecated and should not be used in new code.
+
+---
+
+## Where to verify
 
 - `src/FOUNDATION/theme/applyMode.ts`
 - `src/FOUNDATION/tokens/colors.ts`

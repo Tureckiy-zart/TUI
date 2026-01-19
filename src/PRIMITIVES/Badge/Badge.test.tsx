@@ -30,49 +30,56 @@ describe("Badge component", () => {
       const { container } = render(<Badge>Primary</Badge>);
       const element = container.firstChild as HTMLElement;
       // Primary variant should have primary background and text classes
-      expect(element.className).toMatch(/bg-primary|text-primary-foreground/);
+      expect(element).toHaveClass("bg-[hsl(var(--tm-primary))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-primary-foreground))]");
     });
 
     it("should apply primary variant explicitly", () => {
       const { container } = render(<Badge variant="primary">Primary</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/bg-primary|text-primary-foreground/);
+      expect(element).toHaveClass("bg-[hsl(var(--tm-primary))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-primary-foreground))]");
     });
 
     it("should apply secondary variant", () => {
       const { container } = render(<Badge variant="secondary">Secondary</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/bg-secondary|text-secondary-foreground/);
+      expect(element).toHaveClass("bg-[hsl(var(--tm-secondary))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-secondary-foreground))]");
     });
 
     it("should apply accent variant", () => {
       const { container } = render(<Badge variant="accent">Accent</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/bg-accent|text-accent-foreground/);
+      expect(element).toHaveClass("bg-[hsl(var(--tm-accent))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-accent-foreground))]");
     });
 
     it("should apply outline variant", () => {
       const { container } = render(<Badge variant="outline">Outline</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/border-border|text-foreground/);
+      expect(element).toHaveClass("border-[hsl(var(--tm-border-default))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-text-primary))]");
     });
 
     it("should apply ghost variant", () => {
       const { container } = render(<Badge variant="ghost">Ghost</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/bg-transparent|text-foreground/);
+      expect(element).toHaveClass("bg-transparent");
+      expect(element).toHaveClass("text-[hsl(var(--tm-text-primary))]");
     });
 
     it("should apply link variant", () => {
       const { container } = render(<Badge variant="link">Link</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/text-primary/);
+      expect(element).toHaveClass("text-[hsl(var(--tm-primary))]");
     });
 
     it("should apply destructive variant", () => {
       const { container } = render(<Badge variant="destructive">Destructive</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/bg-destructive|text-destructive-foreground/);
+      expect(element).toHaveClass("bg-[hsl(var(--tm-destructive))]");
+      expect(element).toHaveClass("text-[hsl(var(--tm-destructive-foreground))]");
     });
   });
 
@@ -108,10 +115,9 @@ describe("Badge component", () => {
     it("should use token-based color classes (no raw values)", () => {
       const { container } = render(<Badge variant="primary">Badge</Badge>);
       const element = container.firstChild as HTMLElement;
-      // Verify token usage (bg-primary, text-primary-foreground are token-based)
-      expect(element.className).toMatch(
-        /bg-(primary|secondary|accent|destructive|transparent)|text-(primary|secondary|accent|destructive|foreground)/,
-      );
+      // Verify token usage (bg-[hsl(var(--tm-*))) is token-based)
+      expect(element.className).toContain("bg-[hsl(var(--tm-");
+      expect(element.className).toContain("text-[hsl(var(--tm-");
     });
 
     it("should use token-based motion classes", () => {
@@ -201,20 +207,20 @@ describe("Badge component", () => {
     it("should include hover state classes in variants", () => {
       const { container } = render(<Badge variant="primary">Primary</Badge>);
       const element = container.firstChild as HTMLElement;
-      // Primary variant should have hover:bg-primary/80 class
-      expect(element.className).toMatch(/hover:bg-primary/);
+      // Primary variant should have hover:bg-[hsl(var(--tm-primary))]/80 class
+      expect(element.className).toMatch(/hover:bg-\[hsl\(var\(--tm-primary\)\)\]/);
     });
 
     it("should include hover state for secondary variant", () => {
       const { container } = render(<Badge variant="secondary">Secondary</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/hover:bg-secondary/);
+      expect(element.className).toMatch(/hover:bg-\[hsl\(var\(--tm-secondary\)\)\]/);
     });
 
     it("should include hover state for ghost variant", () => {
       const { container } = render(<Badge variant="ghost">Ghost</Badge>);
       const element = container.firstChild as HTMLElement;
-      expect(element.className).toMatch(/hover:bg-accent/);
+      expect(element.className).toMatch(/hover:bg-\[hsl\(var\(--tm-accent\)\)\]/);
     });
 
     it("should include hover underline for link variant", () => {

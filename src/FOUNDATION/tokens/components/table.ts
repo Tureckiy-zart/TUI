@@ -163,7 +163,7 @@ export const TABLE_TOKENS = {
     cursor: "cursor-pointer select-none", // Sortable cursor
     container: "flex items-center", // Sortable header container
     icon: {
-      base: "inline-flex size-4 items-center text-muted-foreground transition-transform", // Sort icon base styles
+      base: "inline-flex size-4 items-center text-[hsl(var(--tm-text-muted))]-foreground transition-transform", // Sort icon base styles
       rotated: "rotate-180", // Rotated state (descending)
       inactive: "opacity-30", // Inactive state (no sort)
     },

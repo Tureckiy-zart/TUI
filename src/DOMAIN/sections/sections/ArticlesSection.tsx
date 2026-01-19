@@ -48,7 +48,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
           className="rounded-lg border p-lg transition-shadow hover:shadow-md"
         >
           {article.imageUrl && (
-            <div className="mb-md h-[var(--spacing-3xl)] w-full rounded-md bg-muted" />
+            <div className="mb-md h-[var(--spacing-3xl)] w-full rounded-md bg-[hsl(var(--tm-muted))]" />
           )}
           <div className="space-y-sm">
             <Heading level={2}>
