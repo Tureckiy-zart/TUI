@@ -17,6 +17,7 @@ REPORT_DIR="artifacts"
 REPORT_FILE="${REPORT_DIR}/lint-report.md"
 PRETTIER_LOG="${REPORT_DIR}/prettier.log"
 PRETTIER_DIFF_LOG="${REPORT_DIR}/prettier-diff.log"
+ESLINT_LOG="${REPORT_DIR}/eslint.log"
 TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
 
 # Create artifacts directory if it doesn't exist
@@ -43,7 +44,7 @@ echo ""
 
 # === ESLINT CHECK ===
 echo "📋 Running ESLint (strict mode, max-warnings=0)..."
-if ESLINT_OUTPUT=$(pnpm eslint . --max-warnings=0 --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**' --ignore-pattern 'docs_archive/**' 2>&1); then
+if pnpm run lint:strict 2>&1 | tee "${ESLINT_LOG}"; then
   # ESLint passed
   {
     echo "## ESLINT ERRORS"
@@ -57,6 +58,7 @@ else
   # ESLint failed
   ESLINT_EXIT=$?
   EXIT_CODE=1
+  ESLINT_OUTPUT=1
   
   # Count errors and warnings from output (ensure numeric values)
   ESLINT_ERRORS=$(echo "${ESLINT_OUTPUT}" | grep -oE "[0-9]+ error" | grep -oE "[0-9]+" | head -1)
@@ -92,6 +94,7 @@ if ! pnpm prettier --check . 2>&1 | tee "${PRETTIER_LOG}"; then
   # Prettier failed
   PRETTIER_EXIT=$?
   EXIT_CODE=1
+  ESLINT_OUTPUT=1
   
   # Count files with issues
   PRETTIER_ERRORS=$(grep -c "would reformat" "${PRETTIER_LOG}" 2>/dev/null || echo "0")
