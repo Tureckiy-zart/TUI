@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Bell, Settings, User } from "lucide-react";
@@ -646,7 +646,7 @@ export const VariantSizeMatrix: Story = {
     docs: {
       description: {
         story:
-          "Complete variant and size matrix showing all combinations (underline/pill/segmented × sm/md/lg).",
+          "Complete variant and size matrix showing all combinations (underline/pill/segmented - sm/md/lg).",
       },
     },
   },

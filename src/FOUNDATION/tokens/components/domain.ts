@@ -42,8 +42,8 @@ export const DOMAIN_TOKENS = {
      * Maps to semantic color tokens
      */
     bg: {
-      default: "bg-[hsl(var(--tm-surface-raised))]", // Default card background - maps to surface raised
-      hover: "hover:bg-[hsl(var(--tm-surface-raised))]/95", // Hover state background with 95% opacity
+      default: "bg-card", // Default card background - maps to semantic color tokens
+      hover: "hover:bg-card/95", // Hover state background with 95% opacity
     } as const,
 
     /**
@@ -51,8 +51,8 @@ export const DOMAIN_TOKENS = {
      * Maps to semantic border tokens
      */
     border: {
-      default: "border border-[hsl(var(--tm-border-default))]", // Default border - maps to tm border
-      hover: "hover:border-[hsl(var(--tm-primary))]/20", // Hover state border with primary color at 20% opacity
+      default: "border border-border", // Default border - maps to semantic border tokens
+      hover: "hover:border-primary/20", // Hover state border with primary color at 20% opacity
     } as const,
 
     /**
@@ -212,7 +212,7 @@ export const DOMAIN_TOKENS = {
      * Used for interactive text elements like titles
      */
     hover: {
-      primary: "group-hover:text-[hsl(var(--tm-primary))]", // Hover state for primary text color
+      primary: "group-hover:text-primary", // Hover state for primary text color
     } as const,
 
     /**
@@ -237,8 +237,8 @@ export const DOMAIN_TOKENS = {
      * Maps to semantic text color tokens
      */
     text: {
-      primary: "text-[hsl(var(--tm-text-primary))]", // Primary metadata text - maps to tm text
-      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary metadata text - maps to tm muted text
+      primary: "text-foreground", // Primary metadata text - maps to semantic text color
+      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary metadata text - maps to semantic muted text color
     } as const,
 
     /**
@@ -303,7 +303,7 @@ export const DOMAIN_TOKENS = {
      * References GRADIENT_TOKENS.brand.featured for featured badges
      */
     surface: {
-      default: "bg-[hsl(var(--tm-primary))]", // Default badge background - maps to tm primary
+      default: "bg-primary", // Default badge background - maps to semantic primary color
       featured: GRADIENT_TOKENS.brand.featured, // Featured badge gradient
     } as const,
 
@@ -340,8 +340,8 @@ export const DOMAIN_TOKENS = {
      * Maps to semantic text color tokens
      */
     text: {
-      primary: "text-[hsl(var(--tm-text-primary))]", // Primary price/capacity text - maps to tm text
-      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary price/capacity text - maps to tm muted text
+      primary: "text-foreground", // Primary price/capacity text - maps to semantic text color
+      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary price/capacity text - maps to semantic muted text color
     } as const,
 
     /**
@@ -500,9 +500,9 @@ export const DOMAIN_TOKENS = {
        */
       variant: {
         primary: {
-          background: "bg-[hsl(var(--tm-primary))]", // Primary background using CSS var
-          text: "text-[hsl(var(--tm-primary-foreground))]", // Primary text using CSS var
-          hover: "hover:bg-[hsl(var(--tm-primary))]/90", // Primary hover using CSS var
+          background: "bg-primary", // Primary background using CSS var
+          text: "text-primary-foreground", // Primary text using CSS var
+          hover: "hover:bg-primary/90", // Primary hover using CSS var
         } as const,
       } as const,
 

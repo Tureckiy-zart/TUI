@@ -68,7 +68,7 @@ export const AVATAR_TOKENS = {
    */
   statusColor: {
     online: "bg-semantic-success", // Green
-    offline: "bg-[hsl(var(--tm-muted))]", // Gray
+    offline: "bg-muted", // Gray
     busy: "bg-semantic-warning", // Yellow/Orange
   } as const,
 
@@ -76,7 +76,7 @@ export const AVATAR_TOKENS = {
    * Avatar fallback background and text colors
    */
   fallbackColors: {
-    bg: "bg-[hsl(var(--tm-muted))]",
+    bg: "bg-muted",
     text: "text-[hsl(var(--tm-text-muted))]",
   } as const,
 

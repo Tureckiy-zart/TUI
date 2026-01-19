@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
@@ -24,7 +24,7 @@ const meta: Meta<typeof ToastRoot> = {
     docs: {
       description: {
         component:
-          "🔒 FOUNDATION - Stateless UI renderer built on Radix Toast primitives with token-driven styling. All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal) is handled by Radix Toast primitives. Toast is stateless and requires controlled open/onOpenChange props. Supports variants: default, success, warning, error (visual only).",
+          "FOUNDATION - Stateless UI renderer built on Radix Toast primitives with token-driven styling. All behavior (swipe gestures, auto-dismiss, focus management, keyboard navigation, a11y, portal) is handled by Radix Toast primitives. Toast is stateless and requires controlled open/onOpenChange props. Supports variants: default, success, warning, error (visual only).",
       },
     },
   },

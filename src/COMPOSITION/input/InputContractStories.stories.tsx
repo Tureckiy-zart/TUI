@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Input Contract Stories - Governance Showcase
  *
  * Demonstrates input interaction contracts across the design system.
@@ -629,16 +629,16 @@ export const InputGAPGallery: Story = {
                 Components Verified:
               </Text>
               <ul className="list-inside list-disc space-y-1 text-sm">
-                <li>Button - ✅ Keyboard parity, Enter/Space activate</li>
-                <li>Link - ✅ Keyboard parity, Enter navigates</li>
-                <li>Checkbox - ✅ Keyboard parity, Space toggles</li>
-                <li>Switch - ✅ Keyboard parity, Space toggles</li>
-                <li>Radio - ✅ Keyboard parity, Space selects, Arrow keys navigate</li>
-                <li>Input - ✅ Keyboard parity, Enter submits, Space inserts</li>
-                <li>Textarea - ✅ Keyboard parity, Enter newline, Space inserts</li>
-                <li>Select - ✅ Keyboard parity, Enter opens, Arrow keys navigate</li>
-                <li>Slider - ✅ Keyboard parity, Arrow keys adjust</li>
-                <li>Tabs - ✅ Keyboard parity, Enter/Space activate, Arrow keys navigate</li>
+                <li>Button - OK Keyboard parity, Enter/Space activate</li>
+                <li>Link - OK Keyboard parity, Enter navigates</li>
+                <li>Checkbox - OK Keyboard parity, Space toggles</li>
+                <li>Switch - OK Keyboard parity, Space toggles</li>
+                <li>Radio - OK Keyboard parity, Space selects, Arrow keys navigate</li>
+                <li>Input - OK Keyboard parity, Enter submits, Space inserts</li>
+                <li>Textarea - OK Keyboard parity, Enter newline, Space inserts</li>
+                <li>Select - OK Keyboard parity, Enter opens, Arrow keys navigate</li>
+                <li>Slider - OK Keyboard parity, Arrow keys adjust</li>
+                <li>Tabs - OK Keyboard parity, Enter/Space activate, Arrow keys navigate</li>
               </ul>
             </Stack>
           </Box>

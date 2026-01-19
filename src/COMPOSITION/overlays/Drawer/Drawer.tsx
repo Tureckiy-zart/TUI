@@ -80,6 +80,7 @@
 
 import * as React from "react";
 
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { OVERLAY_TOKENS } from "@/FOUNDATION/tokens/components/overlay";
 
@@ -118,6 +119,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
     },
     ref,
   ) => {
+    const fallbackTitleId = React.useId();
     const contentRef = React.useRef<HTMLDivElement>(null);
     const combinedRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -194,16 +196,14 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
         "aria-modal": "true",
       };
 
-      if (titleId) {
-        props["aria-labelledby"] = titleId;
-      }
+      props["aria-labelledby"] = titleId || fallbackTitleId;
 
       if (descriptionId) {
         props["aria-describedby"] = descriptionId;
       }
 
       return props;
-    }, [titleId, descriptionId]);
+    }, [titleId, descriptionId, fallbackTitleId]);
 
     // Map backdrop variant for Backdrop component
     const backdropVariantForBackdrop: DrawerBackdropVariant = backdropVariant;
@@ -239,6 +239,11 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerPropsType>(
             {...ariaProps}
             {...props}
           >
+            {!titleId && (
+              <VisuallyHidden>
+                <h2 id={fallbackTitleId}>Drawer</h2>
+              </VisuallyHidden>
+            )}
             {children}
           </div>
         </div>

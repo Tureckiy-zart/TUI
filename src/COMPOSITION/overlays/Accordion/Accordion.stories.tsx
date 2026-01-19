@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -167,7 +167,7 @@ export const SizesGallery: Story = {
 };
 
 /**
- * Variants × Sizes Matrix (4 variants × 3 sizes = 12 combinations)
+ * Variants - Sizes Matrix (4 variants - 3 sizes = 12 combinations)
  * Reference: VARIANTS_SIZE_CANON.md
  */
 export const Matrix: Story = {
@@ -213,7 +213,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Complete variants × sizes matrix demonstrating all 12 combinations (4 variants × 3 sizes).",
+          "Complete variants - sizes matrix demonstrating all 12 combinations (4 variants - 3 sizes).",
       },
     },
   },

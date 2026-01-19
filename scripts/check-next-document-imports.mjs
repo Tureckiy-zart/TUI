@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * Next.js App Router Compatibility Guard Script
  *
  * This script checks for forbidden Next.js imports that are incompatible with App Router:
  * - next/document: Should ONLY be used in pages/_document.tsx (Pages Router only)
- * - next/head: Should be replaced with next/head metadata API in App Router
+ * - next/head: Should be replaced with metadata API in App Router
  * - next/router: Should be replaced with next/navigation in App Router
  *
  * UI library components must not import these modules as they break App Router compatibility.
@@ -12,49 +12,136 @@
  * Usage: pnpm check:next-document
  */
 
-import { execSync } from "child_process";
+import { spawnSync } from "child_process";
+import { readdirSync, readFileSync, statSync } from "fs";
+import { join } from "path";
 
-// Colors for console output
 const RED = "\x1b[31m";
 const GREEN = "\x1b[32m";
-const YELLOW = "\x1b[33m";
 const RESET = "\x1b[0m";
 
-console.log("\n🔍 Checking for App Router incompatible Next.js imports...\n");
+const SOURCE_DIR = "src";
+const DEFAULT_EXCLUDES = ["node_modules", ".git", "dist", "docs-app"];
+
+function getSourceFiles(dir, extensions, excludeDirs) {
+  const entries = readdirSync(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    if (excludeDirs.includes(entry.name)) {
+      continue;
+    }
+
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getSourceFiles(fullPath, extensions, excludeDirs));
+      continue;
+    }
+
+    if (extensions.some((ext) => entry.name.endsWith(ext))) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+function runFallbackSearch(pattern, description, extensions, excludeDirs) {
+  let regex;
+  try {
+    regex = new RegExp(pattern, "m");
+  } catch (error) {
+    console.error(`${RED}Invalid regex pattern for ${description}.${RESET}`);
+    console.error(String(error));
+    process.exit(1);
+  }
+
+  const files = getSourceFiles(SOURCE_DIR, extensions, excludeDirs);
+  const matches = [];
+
+  for (const file of files) {
+    let content;
+    try {
+      content = readFileSync(file, "utf-8");
+    } catch (error) {
+      continue;
+    }
+
+    const lines = content.split(/\r?\n/);
+    lines.forEach((line, index) => {
+      if (regex.test(line)) {
+        matches.push(`${file}:${index + 1}:${line}`);
+      }
+    });
+  }
+
+  if (matches.length) {
+    console.log(`${RED}Found forbidden import: ${description}${RESET}`);
+    console.log(`  Pattern: ${pattern}`);
+    console.log("  Matches:");
+    matches.forEach((line) => {
+      console.log(`    ${line}`);
+    });
+    console.log("");
+    return true;
+  }
+
+  return false;
+}
+
+function runRg(pattern, description, fileGlobs, excludeDirs = []) {
+  const extensions = fileGlobs
+    .map((glob) => glob.replace("*", ""))
+    .filter((ext) => ext.startsWith("."));
+  const args = ["-n", "--no-messages", "--hidden"];
+  fileGlobs.forEach((glob) => {
+    args.push("-g", glob);
+  });
+  excludeDirs.forEach((dir) => {
+    args.push("-g", `!**/${dir}/**`);
+  });
+  args.push("-e", pattern, SOURCE_DIR);
+
+  const result = spawnSync("rg", args, { encoding: "utf-8" });
+
+  if (result.error) {
+    if (result.error.code === "ENOENT") {
+      return runFallbackSearch(pattern, description, extensions, excludeDirs);
+    }
+    console.error(`${RED}rg failed to run. Install ripgrep and ensure it is in PATH.${RESET}`);
+    console.error(result.error.message);
+    process.exit(1);
+  }
+
+  if (result.status === 0 && result.stdout.trim()) {
+    console.log(`${RED}Found forbidden import: ${description}${RESET}`);
+    console.log(`  Pattern: ${pattern}`);
+    console.log("  Matches:");
+    result.stdout
+      .trim()
+      .split("\n")
+      .forEach((line) => {
+        console.log(`    ${line}`);
+      });
+    console.log("");
+    return true;
+  }
+
+  if (result.status !== 0 && result.status !== 1) {
+    console.error(`${RED}rg failed with exit code ${result.status}.${RESET}`);
+    if (result.stderr) {
+      console.error(result.stderr.trim());
+    }
+    process.exit(1);
+  }
+
+  return false;
+}
+
+console.log("\nChecking for App Router incompatible Next.js imports...\n");
 
 let hasErrors = false;
 
-/**
- * Run a grep command and return results
- */
-function grepCheck(pattern, description, excludePatterns = []) {
-  try {
-    // Build exclude patterns for grep
-    const excludeArgs = excludePatterns.map((p) => `--exclude-dir=${p}`).join(" ");
-
-    // Escape pattern for shell
-    const escapedPattern = pattern.replace(/"/g, '\\"');
-    const cmd = `grep -rn "${escapedPattern}" src/ ${excludeArgs} --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" 2>/dev/null || true`;
-    const result = execSync(cmd, { encoding: "utf-8" }).trim();
-
-    if (result) {
-      console.log(`${RED}❌ Found forbidden import: ${description}${RESET}`);
-      console.log(`   Pattern: ${pattern}`);
-      console.log(`   Matches:`);
-      result.split("\n").forEach((line) => {
-        console.log(`     ${line}`);
-      });
-      console.log("");
-      return true;
-    }
-    return false;
-  } catch (error) {
-    // grep returns exit code 1 if no matches - that's fine
-    return false;
-  }
-}
-
-// Check for direct imports from next/document
 const documentImportPatterns = [
   {
     pattern: "from [\"']next/document[\"']",
@@ -82,7 +169,6 @@ const documentImportPatterns = [
   },
 ];
 
-// Check for direct imports from next/head
 const headImportPatterns = [
   {
     pattern: "from [\"']next/head[\"']",
@@ -98,7 +184,6 @@ const headImportPatterns = [
   },
 ];
 
-// Check for direct imports from next/router
 const routerImportPatterns = [
   {
     pattern: "from [\"']next/router[\"']",
@@ -122,33 +207,6 @@ const routerImportPatterns = [
   },
 ];
 
-console.log("📦 Checking for next/document imports...\n");
-
-documentImportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist", "docs-app"])) {
-    hasErrors = true;
-  }
-});
-
-console.log("\n📦 Checking for next/head imports...\n");
-
-headImportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist", "docs-app"])) {
-    hasErrors = true;
-  }
-});
-
-console.log("\n📦 Checking for next/router imports...\n");
-
-routerImportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist", "docs-app"])) {
-    hasErrors = true;
-  }
-});
-
-// Check for dynamic imports
-console.log("\n🔄 Checking for dynamic imports...\n");
-
 const dynamicImportPatterns = [
   {
     pattern: "import.*next/document",
@@ -164,15 +222,6 @@ const dynamicImportPatterns = [
   },
 ];
 
-dynamicImportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist", "docs-app"])) {
-    hasErrors = true;
-  }
-});
-
-// Check for Html component usage (case-insensitive)
-console.log("\n🏷️  Checking for Html component usage...\n");
-
 const htmlUsagePatterns = [
   {
     pattern: "<Html",
@@ -184,24 +233,54 @@ const htmlUsagePatterns = [
   },
 ];
 
-htmlUsagePatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist", "docs-app"])) {
+console.log("Checking for next/document imports...\n");
+
+documentImportPatterns.forEach(({ pattern, description }) => {
+  if (runRg(pattern, description, ["*.ts", "*.tsx", "*.js", "*.jsx"], DEFAULT_EXCLUDES)) {
     hasErrors = true;
   }
 });
 
-// Summary
+console.log("\nChecking for next/head imports...\n");
+
+headImportPatterns.forEach(({ pattern, description }) => {
+  if (runRg(pattern, description, ["*.ts", "*.tsx", "*.js", "*.jsx"], DEFAULT_EXCLUDES)) {
+    hasErrors = true;
+  }
+});
+
+console.log("\nChecking for next/router imports...\n");
+
+routerImportPatterns.forEach(({ pattern, description }) => {
+  if (runRg(pattern, description, ["*.ts", "*.tsx", "*.js", "*.jsx"], DEFAULT_EXCLUDES)) {
+    hasErrors = true;
+  }
+});
+
+console.log("\nChecking for dynamic imports...\n");
+
+dynamicImportPatterns.forEach(({ pattern, description }) => {
+  if (runRg(pattern, description, ["*.ts", "*.tsx", "*.js", "*.jsx"], DEFAULT_EXCLUDES)) {
+    hasErrors = true;
+  }
+});
+
+console.log("\nChecking for Html component usage...\n");
+
+htmlUsagePatterns.forEach(({ pattern, description }) => {
+  if (runRg(pattern, description, ["*.ts", "*.tsx", "*.js", "*.jsx"], DEFAULT_EXCLUDES)) {
+    hasErrors = true;
+  }
+});
+
 console.log("\n" + "=".repeat(60) + "\n");
 
 if (hasErrors) {
-  console.log(`${RED}❌ App Router incompatible imports detected!${RESET}`);
+  console.log(`${RED}App Router incompatible imports detected.${RESET}`);
   console.log("\nThe following Next.js modules are incompatible with App Router:");
-  console.log("  • next/document - Should ONLY be used in pages/_document.tsx (Pages Router only)");
-  console.log("  • next/head - Should be replaced with metadata API in App Router");
-  console.log("  • next/router - Should be replaced with next/navigation in App Router");
-  console.log(
-    "\nUI library components must not import these modules as they break App Router compatibility.",
-  );
+  console.log("  - next/document (Pages Router only)");
+  console.log("  - next/head (use metadata API in App Router)");
+  console.log("  - next/router (use next/navigation)");
   console.log("\nTo fix:");
   console.log("  1. Remove all imports from 'next/document', 'next/head', and 'next/router'");
   console.log("  2. Replace <Html> wrappers with native HTML elements (<div>, <section>, etc.)");
@@ -212,15 +291,15 @@ if (hasErrors) {
   console.log("  5. Ensure components work in both Server and Client Components");
   console.log("\nReferences:");
   console.log(
-    "  • https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required",
+    "  - https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required",
   );
-  console.log("  • https://nextjs.org/docs/app/api-reference/functions/generate-metadata");
-  console.log("  • https://nextjs.org/docs/app/api-reference/navigation\n");
+  console.log("  - https://nextjs.org/docs/app/api-reference/functions/generate-metadata");
+  console.log("  - https://nextjs.org/docs/app/api-reference/navigation\n");
   process.exit(1);
-} else {
-  console.log(`${GREEN}✓ No App Router incompatible imports detected. Codebase is clean.${RESET}`);
-  console.log(`  ✓ No next/document imports`);
-  console.log(`  ✓ No next/head imports`);
-  console.log(`  ✓ No next/router imports\n`);
-  process.exit(0);
 }
+
+console.log(`${GREEN}No App Router incompatible imports detected. Codebase is clean.${RESET}`);
+console.log("  - No next/document imports");
+console.log("  - No next/head imports");
+console.log("  - No next/router imports\n");
+process.exit(0);

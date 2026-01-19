@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Composite Keyboard Contracts
  *
  * Demonstrates keyboard navigation contracts for composite controls (Tabs, Select, Menu).
@@ -15,7 +15,7 @@ import { Box, Stack } from "@/COMPOSITION/layout";
 import { Select } from "@/COMPOSITION/controls/Select";
 import { Tabs } from "@/COMPOSITION/navigation/tabs";
 import { Heading } from "@/PRIMITIVES/Heading";
-import { Radio } from "@/PRIMITIVES/Radio";
+import { Radio, RadioGroup } from "@/PRIMITIVES/Radio";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
@@ -106,7 +106,7 @@ export const TabsKeyboard: Story = {
 export const SelectKeyboard: Story = {
   name: "Select Keyboard",
   render: function SelectKeyboardStory() {
-    const [value, setValue] = useState<string | undefined>(undefined);
+    const [value, setValue] = useState<string>("option1");
 
     return (
       <Box className="p-lg">
@@ -171,26 +171,26 @@ export const RadioGroupKeyboard: Story = {
 
           <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
-              <Box className="flex flex-col gap-2">
-                <Radio
-                  value="option1"
-                  checked={value === "option1"}
-                  onCheckedChange={() => setValue("option1")}
-                  aria-label="Option 1"
-                />
-                <Radio
-                  value="option2"
-                  checked={value === "option2"}
-                  onCheckedChange={() => setValue("option2")}
-                  aria-label="Option 2"
-                />
-                <Radio
-                  value="option3"
-                  checked={value === "option3"}
-                  onCheckedChange={() => setValue("option3")}
-                  aria-label="Option 3"
-                />
-              </Box>
+              <Text size="sm" tone="muted">
+                Start with Option 1 selected. Use Arrow keys to move focus and selection.
+              </Text>
+              <RadioGroup value={value} onValueChange={setValue} orientation="vertical">
+                <label className="flex items-center gap-sm">
+                  <Radio value="option1" aria-labelledby="radio-kb-1" />
+                  <span id="radio-kb-1">Option 1 (start here)</span>
+                </label>
+                <label className="flex items-center gap-sm">
+                  <Radio value="option2" aria-labelledby="radio-kb-2" />
+                  <span id="radio-kb-2">Option 2</span>
+                </label>
+                <label className="flex items-center gap-sm">
+                  <Radio value="option3" aria-labelledby="radio-kb-3" />
+                  <span id="radio-kb-3">Option 3</span>
+                </label>
+              </RadioGroup>
+              <Text size="sm" tone="muted">
+                Selected: {value ?? "none"}
+              </Text>
             </Stack>
           </Box>
 
@@ -234,10 +234,10 @@ export const RovingTabindexReference: Story = {
                   </Text>
                 </Box>
                 <Stack spacing={2} className="list-inside list-disc">
-                  <Text size="sm">• Only selected/active item has tabindex="0"</Text>
-                  <Text size="sm">• Other items have tabindex="-1"</Text>
-                  <Text size="sm">• Arrow keys move focus and update tabindex</Text>
-                  <Text size="sm">• Tab key focuses the active item only</Text>
+                  <Text size="sm">- Only selected/active item has tabindex="0"</Text>
+                  <Text size="sm">- Other items have tabindex="-1"</Text>
+                  <Text size="sm">- Arrow keys move focus and update tabindex</Text>
+                  <Text size="sm">- Tab key focuses the active item only</Text>
                 </Stack>
               </Box>
 

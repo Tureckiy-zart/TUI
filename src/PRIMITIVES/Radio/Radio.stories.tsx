@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
@@ -97,7 +97,7 @@ export const Matrix: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
       <div>
-        <h3 className="mb-md text-sm font-semibold">Variants × Sizes Matrix</h3>
+        <h3 className="mb-md text-sm font-semibold">Variants - Sizes Matrix</h3>
         <div className="grid grid-cols-6 gap-md">
           <div className="text-xs font-medium">Size →</div>
           {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
@@ -187,7 +187,7 @@ export const States: Story = {
     <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-sm font-semibold">
-          States Matrix (All Variants × All Sizes × All States)
+          States Matrix (All Variants - All Sizes - All States)
         </h3>
         <div className="grid grid-cols-5 gap-md">
           {(["primary", "secondary", "outline", "ghost", "destructive"] as const).map((variant) => (
@@ -371,19 +371,19 @@ export const Controlled: Story = {
           <div className="flex items-center gap-sm">
             <Radio value="option1" aria-labelledby="controlled-label-1" />
             <span id="controlled-label-1">
-              Option 1 (Current: {value === "option1" ? "✓" : ""})
+              Option 1 (Current: {value === "option1" ? "selected" : ""})
             </span>
           </div>
           <div className="flex items-center gap-sm">
             <Radio value="option2" aria-labelledby="controlled-label-2" />
             <span id="controlled-label-2">
-              Option 2 (Current: {value === "option2" ? "✓" : ""})
+              Option 2 (Current: {value === "option2" ? "selected" : ""})
             </span>
           </div>
           <div className="flex items-center gap-sm">
             <Radio value="option3" aria-labelledby="controlled-label-3" />
             <span id="controlled-label-3">
-              Option 3 (Current: {value === "option3" ? "✓" : ""})
+              Option 3 (Current: {value === "option3" ? "selected" : ""})
             </span>
           </div>
         </RadioGroup>

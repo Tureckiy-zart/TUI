@@ -89,7 +89,7 @@ export const NOTIFICATION_TOKENS = {
     warning: "bg-warning/10 border-warning/20 text-warning-foreground",
     danger: "bg-destructive/10 border-destructive/20 text-destructive-foreground",
     system: "bg-muted border-border text-foreground",
-    log: "bg-background border-border/50 text-[hsl(var(--tm-text-muted))]-foreground",
+    log: "bg-background border-border/50 text-[hsl(var(--tm-text-muted))]",
     default: "bg-background border border-border text-foreground",
   } as const,
 

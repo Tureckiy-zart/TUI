@@ -1,4 +1,4 @@
-/**
+﻿/**
  * FocusTrap Component - Storybook Stories
  *
  * Demonstrates focus trap functionality for accessibility-critical components.

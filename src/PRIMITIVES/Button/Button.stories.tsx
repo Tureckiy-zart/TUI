@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { IconArrowRight, IconCheck, IconSearch } from "@/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
@@ -12,12 +12,12 @@ import { Button } from "./Button";
  * @task TUNG_FOUNDATION_BUTTON_STORYBOOK
  *
  * Quality Gate Requirements:
- * ✅ One axis per story (variant, size, state, icon)
- * ✅ Comparative layout (all variants displayed simultaneously)
- * ✅ Only public API used (no internal imports or Radix usage exposed)
- * ✅ No UX or business scenarios
- * ✅ No navigation or routing logic
- * ✅ All Button variants displayed comparatively
+ * OK One axis per story (variant, size, state, icon)
+ * OK Comparative layout (all variants displayed simultaneously)
+ * OK Only public API used (no internal imports or Radix usage exposed)
+ * OK No UX or business scenarios
+ * OK No navigation or routing logic
+ * OK All Button variants displayed comparatively
  *
  * Stories Structure:
  * - Variants: All 6 variants (primary, secondary, accent, outline, ghost, destructive)
@@ -193,7 +193,7 @@ export const SizesGallery: Story = {
  * Displays icon-only buttons across all supported sizes.
  * Demonstrates the canonical way to create icon-only buttons using the iconOnly prop.
  *
- * @axis iconOnly × size
+ * @axis iconOnly - size
  * @values iconOnly={true} with sizes sm, md, lg
  */
 export const IconOnly: Story = {
@@ -458,7 +458,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Comprehensive matrix displaying all variants × sizes combinations. Includes normal, disabled, icon-left, and icon-right states. For icon-only buttons, see the IconOnly story.",
+          "Comprehensive matrix displaying all variants - sizes combinations. Includes normal, disabled, icon-left, and icon-right states. For icon-only buttons, see the IconOnly story.",
       },
     },
   },
@@ -588,7 +588,7 @@ export const Accessibility: Story = {
         </p>
         <div className="flex flex-wrap items-center gap-md">
           <Button>Button with text</Button>
-          <Button aria-label="Close dialog">×</Button>
+          <Button aria-label="Close dialog">-</Button>
           <Button iconOnly aria-label="Search">
             <IconSearch />
           </Button>

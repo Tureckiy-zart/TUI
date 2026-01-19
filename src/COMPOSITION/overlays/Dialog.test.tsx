@@ -9,7 +9,7 @@ import "@testing-library/jest-dom/vitest";
 import { screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { Button } from "@/PRIMITIVES/Button";
 import { renderWithTheme, userEventSetup } from "@/test/test-utils";
 
@@ -244,6 +244,15 @@ describe("Dialog", () => {
       await waitFor(() => {
         expect(screen.getByRole("dialog")).toBeInTheDocument();
       });
+    });
+  });
+  describe("Typing", () => {
+    it("does not accept className or style on DialogTitle", () => {
+      // @ts-expect-error DialogTitle forbids className to protect Foundation Heading.
+      <DialogTitle className="forbidden-class">Forbidden</DialogTitle>;
+      // @ts-expect-error DialogTitle forbids style to protect Foundation Heading.
+      <DialogTitle style={{ color: "red" }}>Forbidden</DialogTitle>;
+      expect(true).toBe(true);
     });
   });
 
@@ -530,6 +539,21 @@ describe("Dialog", () => {
         const title = screen.getByRole("heading", { name: "Test Dialog" });
         expect(title).toHaveAttribute("id");
         expect(dialog).toHaveAttribute("aria-labelledby", title.getAttribute("id"));
+      });
+    });
+
+    it("provides a fallback title and aria-labelledby when DialogTitle is absent", async () => {
+      renderWithTheme(
+        <Dialog open={true} onOpenChange={vi.fn()}>
+          <DialogBody>Body Content</DialogBody>
+        </Dialog>,
+      );
+
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
+        const fallbackTitle = screen.getByText("Dialog");
+        expect(fallbackTitle).toHaveAttribute("id");
+        expect(dialog).toHaveAttribute("aria-labelledby", fallbackTitle.getAttribute("id"));
       });
     });
   });

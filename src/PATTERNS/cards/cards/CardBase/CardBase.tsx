@@ -76,11 +76,14 @@ CardBaseImageWrapper.displayName = "CardBaseImageWrapper";
  * Spacing is controlled by parent CardBase size variant.
  */
 const CardBaseContentWrapper = React.forwardRef<HTMLDivElement, CardBaseContentWrapperProps>(
-  ({ size = "md", className, children, ...props }, ref) => {
+  ({ size = "md", spacing, className, children, ...props }, ref) => {
+    const resolvedSpacing = spacing ?? (size === "sm" ? "xs" : "sm");
+
     return (
       <Stack
         ref={ref}
         direction="vertical"
+        spacing={resolvedSpacing}
         className={cn(cardBaseContentVariants({ size }), className)}
         {...props}
       >

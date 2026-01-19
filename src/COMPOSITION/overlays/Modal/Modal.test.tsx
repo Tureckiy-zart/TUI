@@ -299,6 +299,23 @@ describe("Modal - Runtime / Interaction Tests", () => {
         expect(dialog.getAttribute("aria-describedby")).toBe(description.id);
       });
     });
+
+    it("adds fallback Title and aria-labelledby when Title is absent", async () => {
+      renderWithTheme(
+        <Modal.Root defaultOpen>
+          <Modal.Content>
+            <Modal.Header />
+          </Modal.Content>
+        </Modal.Root>,
+      );
+
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
+        const fallbackTitle = screen.getByText("Dialog");
+        expect(fallbackTitle).toHaveAttribute("id");
+        expect(dialog).toHaveAttribute("aria-labelledby", fallbackTitle.getAttribute("id"));
+      });
+    });
   });
 
   // ============================================================================

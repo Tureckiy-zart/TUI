@@ -100,6 +100,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import * as React from "react";
 
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -180,6 +181,35 @@ function hasDescriptionInChildren(children: React.ReactNode): boolean {
   });
 
   return hasDescription;
+}
+
+/**
+ * Check if Modal.Title component exists in children
+ * Recursively searches through React children to find Title component
+ */
+function hasTitleInChildren(children: React.ReactNode): boolean {
+  let hasTitle = false;
+
+  React.Children.forEach(children, (child) => {
+    if (hasTitle) return;
+
+    if (React.isValidElement(child)) {
+      const childType = child.type as any;
+      const displayName = childType?.displayName || childType?.name;
+
+      if (displayName === DialogPrimitive.Title.displayName) {
+        hasTitle = true;
+        return;
+      }
+
+      const props = child.props as { children?: React.ReactNode };
+      if (props?.children) {
+        hasTitle = hasTitleInChildren(props.children);
+      }
+    }
+  });
+
+  return hasTitle;
 }
 
 // ============================================================================
@@ -438,16 +468,20 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
 
     // Check if Description exists in children
     const hasDescription = hasDescriptionInChildren(children);
+    const hasTitle = hasTitleInChildren(children);
+    const fallbackTitleId = React.useId();
 
     // Set aria-describedby={undefined} if Description is not present and aria-describedby is not explicitly provided
     // This prevents Radix UI Dialog warnings about missing Description
     const hasExplicitAriaDescribedBy = "aria-describedby" in props;
+    const hasExplicitAriaLabelledBy = "aria-labelledby" in props;
 
     // Prepare props: add aria-describedby={undefined} if needed to suppress Radix warning
-    const contentProps =
-      hasExplicitAriaDescribedBy || hasDescription
-        ? props // aria-describedby explicitly provided OR Description exists - use props as-is
-        : { ...props, "aria-describedby": undefined }; // No Description and no explicit aria-describedby - set to undefined
+    const contentProps = {
+      ...props,
+      ...(hasExplicitAriaDescribedBy || hasDescription ? null : { "aria-describedby": undefined }),
+      ...(hasExplicitAriaLabelledBy || hasTitle ? null : { "aria-labelledby": fallbackTitleId }),
+    };
 
     // Handle focus restore deterministically
     const handleCloseAutoFocus = React.useCallback(
@@ -484,6 +518,11 @@ const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
           )}
           {...contentProps}
         >
+          {!hasTitle && !hasExplicitAriaLabelledBy && (
+            <VisuallyHidden>
+              <DialogPrimitive.Title id={fallbackTitleId}>Dialog</DialogPrimitive.Title>
+            </VisuallyHidden>
+          )}
           {children}
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>

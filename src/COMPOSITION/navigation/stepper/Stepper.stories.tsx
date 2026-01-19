@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Stepper, type StepperStep } from "./Stepper";
 
 const meta: Meta<typeof Stepper.Root> = {
@@ -95,10 +95,30 @@ export const WithoutNumbers: Story = {
 export const WithIcons: Story = {
   render: () => {
     const steps: StepperStep[] = [
-      { id: "step1", label: "Account", description: "Create account", icon: <span>👤</span> },
-      { id: "step2", label: "Profile", description: "Set up profile", icon: <span>📝</span> },
-      { id: "step3", label: "Verify", description: "Verify email", icon: <span>✉️</span> },
-      { id: "step4", label: "Complete", description: "You're done!", icon: <span>✅</span> },
+      {
+        id: "step1",
+        label: "Account",
+        description: "Create account",
+        icon: <span aria-hidden="true">A</span>,
+      },
+      {
+        id: "step2",
+        label: "Profile",
+        description: "Set up profile",
+        icon: <span aria-hidden="true">P</span>,
+      },
+      {
+        id: "step3",
+        label: "Verify",
+        description: "Verify email",
+        icon: <span aria-hidden="true">V</span>,
+      },
+      {
+        id: "step4",
+        label: "Complete",
+        description: "All done",
+        icon: <span aria-hidden="true">OK</span>,
+      },
     ];
     return <Stepper.Root steps={steps} activeStep={1} />;
   },

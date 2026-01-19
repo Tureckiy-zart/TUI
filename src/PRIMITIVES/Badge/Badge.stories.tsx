@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./Badge";
 
@@ -97,10 +97,10 @@ export const AllVariants: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div className="flex flex-wrap gap-md">
-      <Badge variant="primary">🚀 New</Badge>
-      <Badge variant="accent">✅ Success</Badge>
-      <Badge variant="destructive">⚠️ Error</Badge>
-      <Badge variant="secondary">ℹ️ Info</Badge>
+      <Badge variant="primary">New</Badge>
+      <Badge variant="accent">Success</Badge>
+      <Badge variant="destructive">Error</Badge>
+      <Badge variant="secondary">Info</Badge>
     </div>
   ),
 };

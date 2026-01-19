@@ -94,7 +94,7 @@ describe("NavSeparator component", () => {
       const separator = screen.getByText("/");
       expect(separator).toHaveClass("custom-separator");
       // Token class should also be present
-      expect(separator.className).toContain("text-[hsl(var(--tm-text-primary))]");
+      expect(separator.className).toContain("text-foreground");
     });
   });
 

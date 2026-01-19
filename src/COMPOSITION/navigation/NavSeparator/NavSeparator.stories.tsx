@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { NavSeparator } from "./NavSeparator";
 
 const meta: Meta<typeof NavSeparator> = {
@@ -51,9 +51,9 @@ export const CustomContent: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
       <span>Home</span>
-      <NavSeparator>→</NavSeparator>
+      <NavSeparator>/</NavSeparator>
       <span>About</span>
-      <NavSeparator>•</NavSeparator>
+      <NavSeparator>|</NavSeparator>
       <span>Products</span>
       <NavSeparator>-</NavSeparator>
       <span>Details</span>

@@ -52,9 +52,10 @@
  * - TypeScript enforces valid token values at compile time
  */
 
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as React from "react";
 
-import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { Row } from "@/COMPOSITION/layout/Row";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -131,6 +132,7 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
       }
       // For standalone DialogTitle or DialogDescription
       if (childDisplayName === "DialogTitle") {
+        hasDialogTitle = true;
         actualTitleId = finalTitleId;
         return React.cloneElement(child as React.ReactElement<any>, {
           titleId: finalTitleId,
@@ -145,15 +147,16 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
     }
     return child;
   });
+  if (!hasDialogTitle) {
+    actualTitleId = finalTitleId;
+  }
 
   return (
     <Modal.Root {...props}>
       <Modal.Content aria-labelledby={actualTitleId} aria-describedby={actualDescriptionId}>
-        {/* Add hidden Modal.Title for Radix UI validation when DialogTitle is present */}
-        {/* This must be rendered first so Radix UI can detect it synchronously */}
-        {hasDialogTitle && actualTitleId && (
+        {!hasDialogTitle && (
           <VisuallyHidden>
-            <Modal.Title id={actualTitleId}>Dialog</Modal.Title>
+            <DialogPrimitive.Title id={finalTitleId}>Dialog</DialogPrimitive.Title>
           </VisuallyHidden>
         )}
         {processedChildren}
@@ -215,17 +218,21 @@ DialogHeader.displayName = "DialogHeader";
 /**
  * Dialog Title - h2 with aria-labelledby
  */
-export interface DialogTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface DialogTitleProps extends Omit<
+  React.HTMLAttributes<HTMLHeadingElement>,
+  "className" | "style"
+> {
   titleId?: string;
 }
 
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ titleId, children, ...props }, ref) => {
-    // className is forbidden on Foundation components - DialogTitle uses only token-driven props
     return (
-      <Heading ref={ref} as="h2" level={4} weight="semibold" id={titleId} {...props}>
-        {children}
-      </Heading>
+      <DialogPrimitive.Title asChild>
+        <Heading ref={ref} as="h2" level={4} weight="semibold" id={titleId} {...props}>
+          {children}
+        </Heading>
+      </DialogPrimitive.Title>
     );
   },
 );
@@ -242,14 +249,16 @@ export interface DialogDescriptionProps extends React.HTMLAttributes<HTMLParagra
 const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
   ({ descriptionId, className, children, ...props }, ref) => {
     return (
-      <p
-        ref={ref}
-        id={descriptionId}
-        className={cn(TEXT_TOKENS.fontSize.sm, ICON_TOKENS.colors.muted, className)}
-        {...props}
-      >
-        {children}
-      </p>
+      <DialogPrimitive.Description asChild>
+        <p
+          ref={ref}
+          id={descriptionId}
+          className={cn(TEXT_TOKENS.fontSize.sm, ICON_TOKENS.colors.muted, className)}
+          {...props}
+        >
+          {children}
+        </p>
+      </DialogPrimitive.Description>
     );
   },
 );

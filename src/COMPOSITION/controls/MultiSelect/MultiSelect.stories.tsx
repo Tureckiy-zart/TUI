@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * MultiSelect Storybook Stories
@@ -122,6 +122,12 @@ const meta: Meta<typeof MultiSelect> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const withFixedWidth = (StoryComponent: React.FC) => (
+  <div className="w-full max-w-sm">
+    <StoryComponent />
+  </div>
+);
+
 // ============================================================================
 // SHARED OPTIONS
 // ============================================================================
@@ -173,6 +179,7 @@ export const Default: Story = {
     placeholder: "Select fruits...",
     "aria-label": "Fruit selector",
   },
+  decorators: [withFixedWidth],
 };
 
 /**
@@ -182,7 +189,7 @@ export const Default: Story = {
 export const SizesGallery: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Size: sm</h3>
         <MultiSelect
           options={fruits}
@@ -192,7 +199,7 @@ export const SizesGallery: Story = {
           aria-label="Small multi-select"
         />
       </div>
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Size: md (default)</h3>
         <MultiSelect
           options={fruits}
@@ -202,7 +209,7 @@ export const SizesGallery: Story = {
           aria-label="Medium multi-select"
         />
       </div>
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Size: lg</h3>
         <MultiSelect
           options={fruits}
@@ -230,7 +237,7 @@ export const SizesGallery: Story = {
 export const States: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Empty (no selection)</h3>
         <MultiSelect
           options={fruits}
@@ -238,7 +245,7 @@ export const States: Story = {
           aria-label="Empty multi-select"
         />
       </div>
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">With selection</h3>
         <MultiSelect
           options={fruits}
@@ -247,7 +254,7 @@ export const States: Story = {
           aria-label="Multi-select with selection"
         />
       </div>
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Disabled</h3>
         <MultiSelect
           options={fruits}
@@ -257,7 +264,7 @@ export const States: Story = {
           aria-label="Disabled multi-select"
         />
       </div>
-      <div>
+      <div className="w-full max-w-sm">
         <h3 className="mb-sm text-sm font-semibold">Disabled (empty)</h3>
         <MultiSelect
           options={fruits}
@@ -288,6 +295,7 @@ export const LongContent: Story = {
     placeholder: "Select options...",
     "aria-label": "Long content multi-select",
   },
+  decorators: [withFixedWidth],
   parameters: {
     docs: {
       description: {
@@ -309,7 +317,7 @@ export const ControlledMode: Story = {
   render: () => {
     const [selected, setSelected] = React.useState<string[]>(["apple", "banana"]);
     return (
-      <div>
+      <div className="w-full max-w-sm">
         <MultiSelect
           options={fruits}
           value={selected}
@@ -343,6 +351,7 @@ export const WithManySelected: Story = {
     placeholder: "Select options...",
     "aria-label": "Multi-select with many selected",
   },
+  decorators: [withFixedWidth],
   parameters: {
     docs: {
       description: {
@@ -365,6 +374,7 @@ export const MaxTagsLimit: Story = {
     placeholder: "Select options...",
     "aria-label": "Multi-select with max tags limit",
   },
+  decorators: [withFixedWidth],
   parameters: {
     docs: {
       description: {
@@ -392,6 +402,7 @@ export const DisabledOptions: Story = {
     placeholder: "Select fruits...",
     "aria-label": "Multi-select with disabled options",
   },
+  decorators: [withFixedWidth],
   parameters: {
     docs: {
       description: {
@@ -416,7 +427,7 @@ export const CustomRenderTag: Story = {
         key={option.value}
         className="inline-flex items-center gap-xs rounded-full bg-[hsl(var(--tm-primary))] px-sm py-xs text-xs font-semibold text-[hsl(var(--tm-primary-foreground))]"
       >
-        🍎 {option.label}
+        {option.label}
         <button
           type="button"
           onClick={(e) => {
@@ -431,11 +442,12 @@ export const CustomRenderTag: Story = {
       </span>
     ),
   },
+  decorators: [withFixedWidth],
   parameters: {
     docs: {
       description: {
         story:
-          "Demonstrates custom tag rendering with renderTag prop. Tags styled with primary variant and emoji prefix.",
+          "Demonstrates custom tag rendering with renderTag prop. Tags use a custom primary-style pill and remove button.",
       },
     },
   },

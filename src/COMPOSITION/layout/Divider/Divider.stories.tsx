@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Divider } from "./Divider";
 
 const meta: Meta<typeof Divider> = {
@@ -36,7 +36,7 @@ const meta: Meta<typeof Divider> = {
     inset: {
       control: { type: "boolean" },
       description:
-        "Add inset padding (spacing from edges). false/undefined → divider на всю ширину контейнера, true → divider с внутренним отступом (по дизайн-токену)",
+        "Add inset padding (spacing from edges). false/undefined -> divider spans full container width, true -> divider uses inset padding (token-based spacing).",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "false" },

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Box } from "../Box";
 import { Stack } from "../Stack";
 import { Container } from "./Container";
@@ -209,7 +209,7 @@ export const ScopeLimitation: Story = {
   render: () => (
     <div className="space-y-lg">
       <div>
-        <h3 className="mb-sm text-lg font-semibold">✅ Correct: Container + Stack</h3>
+        <h3 className="mb-sm text-lg font-semibold">Correct Example (Container + Stack)</h3>
         <Container maxWidth="lg" padding="md">
           <Stack direction="vertical" spacing="md">
             <Box px="sm" py="sm" bg="muted" radius="sm">
@@ -223,7 +223,7 @@ export const ScopeLimitation: Story = {
       </div>
       <div>
         <h3 className="mb-sm text-lg font-semibold">
-          ❌ Incorrect: Container does NOT support layout props
+          Incorrect Example (for illustration only - not a bug)
         </h3>
         <p className="mb-sm text-sm text-[hsl(var(--tm-text-muted))]">
           Container does NOT have display, flexDirection, gap, align, justify props. Use Stack,

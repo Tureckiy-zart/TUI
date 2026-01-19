@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import { SegmentedControl } from "./SegmentedControl";
 
@@ -46,7 +46,7 @@ export const Default: Story = {
 
 /**
  * States Story (CANONICAL - REQUIRED)
- * Demonstrates all sizes × all states (default, selected, disabled)
+ * Demonstrates all sizes - all states (default, selected, disabled)
  * REQUIRED per VARIANTS_SIZE_CANON.md for interactive components
  */
 export const States: Story = {
@@ -117,7 +117,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "Canonical States story showing all sizes × all states (default, selected, disabled). This story is REQUIRED per VARIANTS_SIZE_CANON.md for interactive components.",
+          "Canonical States story showing all sizes - all states (default, selected, disabled). This story is REQUIRED per VARIANTS_SIZE_CANON.md for interactive components.",
       },
     },
   },

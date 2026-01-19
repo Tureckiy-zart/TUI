@@ -106,28 +106,28 @@ export const NAVIGATION_TOKENS = {
   states: {
     default: {
       background: "bg-transparent",
-      text: "text-[hsl(var(--tm-text-primary))]",
-      border: "border border-transparent",
+      text: "text-foreground",
+      border: "border-transparent",
     },
     hover: {
-      background: "hover:bg-[hsl(var(--tm-accent))]",
-      text: "hover:text-[hsl(var(--tm-accent-foreground))]",
-      border: "hover:border-[hsl(var(--tm-accent))]",
+      background: "hover:bg-accent",
+      text: "hover:text-accent-foreground",
+      border: "hover:border-accent",
     },
     active: {
-      background: "bg-[hsl(var(--tm-accent))]",
-      text: "text-[hsl(var(--tm-accent-foreground))]",
-      border: "border border-[hsl(var(--tm-accent))]",
+      background: "bg-accent",
+      text: "text-accent-foreground",
+      border: "border-accent",
     },
     selected: {
-      background: "bg-[hsl(var(--tm-primary))]",
-      text: "text-[hsl(var(--tm-primary-foreground))]",
-      border: "border border-[hsl(var(--tm-primary))]",
+      background: "bg-primary",
+      text: "text-primary-foreground",
+      border: "border-primary",
     },
     disabled: {
       background: "bg-transparent",
       text: "text-[hsl(var(--tm-text-muted))] disabled:opacity-50",
-      border: "border border-transparent",
+      border: "border-transparent",
       cursor: "disabled:cursor-not-allowed",
     },
   } as const,
@@ -140,7 +140,7 @@ export const NAVIGATION_TOKENS = {
     height: "h-0.5", // 2px - thin underline
     radius: "rounded-full", // Fully rounded
     transition: "transition-all duration-normal ease-out", // Maps to motion tokens
-    background: "bg-[hsl(var(--tm-primary))]", // Primary color for indicator
+    background: "bg-primary", // Primary color for indicator
     position: "absolute bottom-0 left-0 right-0", // Position at bottom
   } as const,
 
@@ -158,7 +158,7 @@ export const NAVIGATION_TOKENS = {
    * Focus ring tokens for accessibility
    */
   focus: {
-    ring: "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--tm-focus-ring))] focus-visible:ring-offset-2",
+    ring: "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2",
     ringOffset: "focus-visible:ring-offset-2",
   } as const,
 
@@ -168,7 +168,7 @@ export const NAVIGATION_TOKENS = {
    */
   container: {
     background: {
-      muted: "bg-[hsl(var(--tm-muted))]", // Muted background for container
+      muted: "bg-muted", // Muted background for container
     } as const,
     padding: {
       xs: "p-xs", // 4px padding
@@ -180,7 +180,7 @@ export const NAVIGATION_TOKENS = {
    * Border color tokens
    */
   border: {
-    muted: "border-[hsl(var(--tm-text-muted))]", // Muted border color
+    muted: "border-muted-foreground", // Muted border color
   } as const,
 } as const;
 

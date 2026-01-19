@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -188,7 +188,7 @@ export const WithInput: Story = {
           size="sm"
           className="absolute left-sm top-1/2 -translate-y-1/2 text-[hsl(var(--tm-text-primary))]/70"
         />
-        <Input placeholder="Search..." />
+        <Input placeholder="Search..." data-has-icon="true" />
       </div>
     </div>
   ),

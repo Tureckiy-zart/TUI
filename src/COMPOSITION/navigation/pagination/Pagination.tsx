@@ -311,6 +311,7 @@ const PaginationItem = React.forwardRef<HTMLButtonElement, PaginationItemProps>(
           NAVIGATION_TOKENS.radius.default,
           NAVIGATION_TOKENS.sizes.md.fontSize,
           NAVIGATION_TOKENS.typography.fontWeight.medium,
+          "border",
           MOTION_TOKENS.transition.colors,
           isCurrent
             ? `${NAVIGATION_TOKENS.states.selected.background} ${NAVIGATION_TOKENS.states.selected.text} ${NAVIGATION_TOKENS.states.selected.border} ${NAVIGATION_TOKENS.shadow.sm}`

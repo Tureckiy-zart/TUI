@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Heading } from "./Heading";
 
 const meta: Meta<typeof Heading> = {
@@ -112,7 +112,7 @@ export const CustomElement: Story = {
 /**
  * Matrix story (REQUIRED by VARIANTS_SIZE_CANON)
  * Demonstrates all combinations of levels (1-6) and weights (normal, medium, semibold, bold)
- * Total: 24 combinations (6 levels × 4 weights)
+ * Total: 24 combinations (6 levels - 4 weights)
  */
 export const Matrix: Story = {
   render: () => {

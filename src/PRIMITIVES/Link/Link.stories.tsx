@@ -1,5 +1,6 @@
-"use client";
+﻿"use client";
 import { Card } from "@/COMPOSITION/layout/Card";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Link } from "./Link";
 
@@ -11,13 +12,13 @@ import { Link } from "./Link";
  * @task TUNG_FOUNDATION_LINK_STORYBOOK
  *
  * Quality Gate Requirements:
- * ✅ One axis per story (variant, underline, state, composition)
- * ✅ Comparative layout (all variants displayed simultaneously)
- * ✅ Only public API used (no internal imports or Radix usage exposed)
- * ✅ No navigation or routing logic
- * ✅ No UX or business scenarios
- * ✅ Neutral href used (#) with navigation disabled
- * ✅ All Link variants displayed comparatively
+ * - One axis per story (variant, underline, state, composition)
+ * - Comparative layout (all variants displayed simultaneously)
+ * - Only public API used (no internal imports or Radix usage exposed)
+ * - No navigation or routing logic
+ * - No UX or business scenarios
+ * - Neutral href used (#) with navigation disabled
+ * - All Link variants displayed comparatively
  *
  * Stories Structure:
  * - Variants: 4 variants (text/default, secondary/muted, accent, destructive/danger)
@@ -184,11 +185,11 @@ export const States: Story = {
 /**
  * Matrix Story
  *
- * Displays all variants × all sizes grid for comprehensive visual comparison.
+ * Displays all variants x all sizes grid for comprehensive visual comparison.
  * REQUIRED per VARIANTS_SIZE_CANON.md when component has both size AND variant props.
  *
- * @axis variant × size
- * @values All 7 variants × All 3 sizes (21 combinations)
+ * @axis variant x size
+ * @values All 7 variants x All 3 sizes (21 combinations)
  */
 export const Matrix: Story = {
   render: () => {
@@ -266,7 +267,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "Matrix showing all Link variants × all sizes. This comprehensive grid demonstrates all 27 combinations (9 variants × 3 sizes) for visual comparison. Default variant='text' is inline (inline-flex), variant='wrapper' is block-level (block w-full) for wrapper use cases. Variant 'link' is deprecated (use 'wrapper' instead). Navigation is disabled for Storybook demonstration.",
+          "Matrix showing all Link variants x all sizes. This comprehensive grid demonstrates all 27 combinations (9 variants x 3 sizes) for visual comparison. Default variant='text' is inline (inline-flex), variant='wrapper' is block-level (block w-full) for wrapper use cases. Variant 'link' is deprecated (use 'wrapper' instead). Navigation is disabled for Storybook demonstration.",
       },
     },
   },
@@ -297,7 +298,7 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                leftIcon={<span>←</span>}
+                leftIcon={<span>L</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Left Icon
@@ -305,7 +306,7 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                rightIcon={<span>→</span>}
+                rightIcon={<span>R</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Right Icon
@@ -313,8 +314,8 @@ export const SizesGallery: Story = {
               <Link
                 href="#"
                 size={size}
-                leftIcon={<span>←</span>}
-                rightIcon={<span>→</span>}
+                leftIcon={<span>L</span>}
+                rightIcon={<span>R</span>}
                 onClick={(e) => e.preventDefault()}
               >
                 With Both Icons
@@ -359,27 +360,35 @@ export const Wrapper: Story = {
           <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
             <Card>
               <Card.Header>
-                <h4 className="text-lg font-semibold">Event Title</h4>
-                <p className="text-sm text-[hsl(var(--tm-text-muted))]">Event description</p>
+                <Stack spacing="xs">
+                  <h4 className="text-lg font-semibold">Event Title</h4>
+                  <p className="text-sm text-[hsl(var(--tm-text-muted))]">Event description</p>
+                </Stack>
               </Card.Header>
               <Card.Body>
-                <p className="text-sm">
-                  This card is wrapped by a Link with variant='wrapper'. The entire card is
-                  clickable and uses block-level layout.
-                </p>
+                <Stack spacing="xs">
+                  <p className="text-sm">
+                    This card is wrapped by a Link with variant='wrapper'. The entire card is
+                    clickable and uses block-level layout.
+                  </p>
+                </Stack>
               </Card.Body>
             </Card>
           </Link>
           <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
             <Card>
               <Card.Header>
-                <h4 className="text-lg font-semibold">Another Event</h4>
-                <p className="text-sm text-[hsl(var(--tm-text-muted))]">Another description</p>
+                <Stack spacing="xs">
+                  <h4 className="text-lg font-semibold">Another Event</h4>
+                  <p className="text-sm text-[hsl(var(--tm-text-muted))]">Another description</p>
+                </Stack>
               </Card.Header>
               <Card.Body>
-                <p className="text-sm">
-                  Wrapper variant ensures proper width stretching in grid/flex containers.
-                </p>
+                <Stack spacing="xs">
+                  <p className="text-sm">
+                    Wrapper variant ensures proper width stretching in grid/flex containers.
+                  </p>
+                </Stack>
               </Card.Body>
             </Card>
           </Link>
@@ -403,9 +412,11 @@ export const Wrapper: Story = {
             <Link href="#" variant="wrapper" onClick={(e) => e.preventDefault()}>
               <Card>
                 <Card.Body>
-                  <p className="text-sm">
-                    This entire card is wrapped by Link with variant='wrapper'
-                  </p>
+                  <Stack spacing="xs">
+                    <p className="text-sm">
+                      This entire card is wrapped by Link with variant='wrapper'
+                    </p>
+                  </Stack>
                 </Card.Body>
               </Card>
             </Link>

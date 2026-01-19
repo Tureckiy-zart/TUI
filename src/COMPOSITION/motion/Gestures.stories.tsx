@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Gesture System Stories
  *
  * Demonstrates swipe gesture detection for dismissible components.

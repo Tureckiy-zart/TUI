@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Reduced Motion Policy - Audit Dashboard
  *
  * Demonstrates reduced motion support and proves motion disables correctly.
@@ -254,20 +254,20 @@ export const Simulation: Story = {
             <Stack spacing={2} className="mt-2">
               <Box>
                 <Text size="sm">
-                  ✅ All motion presets use CSS variables that automatically respect
+                  OK All motion presets use CSS variables that automatically respect
                   prefers-reduced-motion
                 </Text>
               </Box>
               <Box>
-                <Text size="sm">✅ Durations collapse to 0ms when reduced motion is enabled</Text>
+                <Text size="sm">OK Durations collapse to 0ms when reduced motion is enabled</Text>
               </Box>
               <Box>
                 <Text size="sm">
-                  ✅ No animations are forced on users who prefer reduced motion
+                  OK No animations are forced on users who prefer reduced motion
                 </Text>
               </Box>
               <Box>
-                <Text size="sm">✅ WCAG 2.1 Level AA compliant (respects user preferences)</Text>
+                <Text size="sm">OK WCAG 2.1 Level AA compliant (respects user preferences)</Text>
               </Box>
             </Stack>
           </Box>

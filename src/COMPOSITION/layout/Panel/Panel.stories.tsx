@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Text } from "@/PRIMITIVES/Text";
 import { Stack } from "../Stack";
@@ -304,12 +304,12 @@ export const ComparisonWithCard: Story = {
 /**
  * Matrix Story
  *
- * Demonstrates all tone × padding × radius combinations in a grid layout.
+ * Demonstrates all tone - padding - radius combinations in a grid layout.
  * Panel has tone (variant), padding, and radius props, so this matrix shows
  * all visual combinations for comprehensive comparison.
  *
  * Note: Panel does not have a canonical "size" prop, so this matrix demonstrates
- * tone × padding × radius combinations instead of the standard variant × size matrix.
+ * tone - padding - radius combinations instead of the standard variant - size matrix.
  */
 export const Matrix: Story = {
   render: () => {
@@ -320,7 +320,7 @@ export const Matrix: Story = {
     return (
       <div className="space-y-lg">
         <div>
-          <h3 className="mb-md text-sm font-semibold">Tone × Padding × Radius Matrix</h3>
+          <h3 className="mb-md text-sm font-semibold">Tone - Padding - Radius Matrix</h3>
           <div className="space-y-md">
             {tones.map((tone) => (
               <div key={tone}>
@@ -368,7 +368,7 @@ export const Matrix: Story = {
     docs: {
       description: {
         story:
-          "**Matrix Story:** Demonstrates all tone × padding × radius combinations. Shows comprehensive visual comparison of all Panel prop combinations.",
+          "**Matrix Story:** Demonstrates all tone - padding - radius combinations. Shows comprehensive visual comparison of all Panel prop combinations.",
       },
     },
   },

@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+## [2.1.0]
+
 ### Added
 
 - **Canon Core v1 Theming**: Runtime emitted 100% REQUIRED `--tm-*` tokens and dev-guard enforced missing/empty required tokens

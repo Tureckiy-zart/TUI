@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Focus Trap and Restore - Governance Showcase
  *
  * Demonstrates focus trap and focus restore behavior for modal overlays.
@@ -343,13 +343,13 @@ export const DrawerFocusBehavior: Story = {
             <Heading level={3}>Focus-Visible Compliance (GAP-3 Fixed)</Heading>
             <Stack spacing={2} className="mt-2">
               <Text size="sm">
-                ✅ Interactive elements show focus ring when focused via keyboard
+                - Interactive elements show focus ring when focused via keyboard
               </Text>
               <Text size="sm">
-                ✅ Drawer container does NOT show focus ring (outline-none applied)
+                - Drawer container does NOT show focus ring (outline-none applied)
               </Text>
-              <Text size="sm">✅ Focus trap cycles Tab/Shift+Tab within Drawer boundary</Text>
-              <Text size="sm">✅ Focus restores to trigger button on close</Text>
+              <Text size="sm">- Focus trap cycles Tab/Shift+Tab within Drawer boundary</Text>
+              <Text size="sm">- Focus restores to trigger button on close</Text>
             </Stack>
           </Box>
 

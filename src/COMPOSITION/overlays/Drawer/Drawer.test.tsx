@@ -263,6 +263,21 @@ describe("Drawer", () => {
         expect(drawer).toHaveAttribute("aria-labelledby", "drawer-title");
       });
 
+      it("provides fallback title and aria-labelledby when titleId is absent", () => {
+        renderWithTheme(
+          <Drawer open={true} onClose={() => {}}>
+            <Drawer.Body>
+              <Text>Body</Text>
+            </Drawer.Body>
+          </Drawer>,
+        );
+
+        const drawer = screen.getByRole("dialog");
+        const fallbackTitle = screen.getByText("Drawer");
+        expect(fallbackTitle).toHaveAttribute("id");
+        expect(drawer).toHaveAttribute("aria-labelledby", fallbackTitle.getAttribute("id"));
+      });
+
       it("has accessible description via descriptionId and aria-describedby", () => {
         renderWithTheme(
           <Drawer

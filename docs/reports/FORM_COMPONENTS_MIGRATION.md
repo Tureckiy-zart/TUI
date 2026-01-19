@@ -1,4 +1,3 @@
-```markdown
 # Form Components Migration
 
 **Status:** IN PROGRESS (visual verification pending)
@@ -73,5 +72,3 @@
 ## Final Status
 
 - IN PROGRESS (visual verification pending)
-
-```

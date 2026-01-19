@@ -1,9 +1,12 @@
-"use client";
+﻿"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { VenueCard } from "./VenueCard";
 import type { VenueCardSize, VenueCardVariant } from "./VenueCard.types";
+
+const DEFAULT_IMAGE_URL =
+  "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop";
 
 const meta: Meta<typeof VenueCard> = {
   title: "UI / Patterns / Cards / VenueCard",
@@ -100,7 +103,7 @@ export const Default: Story = {
     description: "A beautiful concert venue in the heart of the city",
     location: "123 Main Street, City Center",
     capacity: "500",
-    imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400",
+    imageUrl: DEFAULT_IMAGE_URL,
     eventsCount: 12,
     eventsLabel: "events",
     capacityLabel: "Capacity",
@@ -110,7 +113,7 @@ export const Default: Story = {
 };
 
 /**
- * Matrix Story - All variants × all sizes
+ * Matrix Story - All variants - all sizes
  * REQUIRED per VARIANTS_SIZE_CANON.md (component has both size AND variant props)
  */
 export const Matrix: Story = {
@@ -133,7 +136,7 @@ export const Matrix: Story = {
               capacityLabel="Capacity"
               size={size}
               variant={variant}
-              imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300"
+              imageUrl={DEFAULT_IMAGE_URL}
             />
           )),
         )}
@@ -164,7 +167,7 @@ export const SizesGallery: Story = {
               eventsLabel="events"
               capacityLabel="Capacity"
               size={size}
-              imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+              imageUrl={DEFAULT_IMAGE_URL}
             />
           </div>
         ))}
@@ -191,6 +194,7 @@ export const States: Story = {
             eventsCount={5}
             eventsLabel="events"
             capacityLabel="Capacity"
+            imageUrl={DEFAULT_IMAGE_URL}
           />
         </div>
 
@@ -207,6 +211,7 @@ export const States: Story = {
             featured
             popularBadgeText="Popular"
             variant="elevated"
+            imageUrl={DEFAULT_IMAGE_URL}
           />
         </div>
 
@@ -220,7 +225,7 @@ export const States: Story = {
             eventsCount={5}
             eventsLabel="events"
             capacityLabel="Capacity"
-            imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+            imageUrl={DEFAULT_IMAGE_URL}
           />
         </div>
 
@@ -249,6 +254,7 @@ export const States: Story = {
             eventsLabel="events"
             capacityLabel="Capacity"
             href="/venue/1"
+            imageUrl={DEFAULT_IMAGE_URL}
           />
         </div>
 

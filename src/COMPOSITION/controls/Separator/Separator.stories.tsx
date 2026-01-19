@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react";
 import { Separator } from "./Separator";
 
 const meta: Meta<typeof Separator> = {
@@ -67,7 +67,7 @@ export const Default: Story = {
 };
 
 /**
- * Matrix: Orientations × Colors × Thickness
+ * Matrix: Orientations - Colors - Thickness
  */
 export const Matrix: Story = {
   render: () => (
