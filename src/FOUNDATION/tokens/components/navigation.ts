@@ -126,7 +126,7 @@ export const NAVIGATION_TOKENS = {
     },
     disabled: {
       background: "bg-transparent",
-      text: "text-[hsl(var(--tm-text-muted))]-foreground disabled:opacity-50",
+      text: "text-[hsl(var(--tm-text-muted))] disabled:opacity-50",
       border: "border-transparent",
       cursor: "disabled:cursor-not-allowed",
     },

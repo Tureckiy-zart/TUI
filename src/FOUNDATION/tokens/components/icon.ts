@@ -48,7 +48,7 @@ export const ICON_TOKENS = {
    */
   colors: {
     default: "text-foreground", // Default foreground color
-    muted: "text-[hsl(var(--tm-text-muted))]-foreground", // Muted foreground color
+    muted: "text-[hsl(var(--tm-text-muted))]", // Muted foreground color
     success: "text-success", // Semantic success color
     warning: "text-warning", // Semantic warning color
     danger: "text-destructive", // Semantic destructive/danger color

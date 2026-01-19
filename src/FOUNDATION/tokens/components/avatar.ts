@@ -77,7 +77,7 @@ export const AVATAR_TOKENS = {
    */
   fallbackColors: {
     bg: "bg-muted",
-    text: "text-[hsl(var(--tm-text-muted))]-foreground",
+    text: "text-[hsl(var(--tm-text-muted))]",
   } as const,
 
   /**

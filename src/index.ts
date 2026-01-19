@@ -475,10 +475,7 @@ export {
 } from "./COMPOSITION/controls/Spinner/Spinner";
 
 // VisuallyHidden component (DX/A11y utility, non-visual)
-export {
-  VisuallyHidden,
-  type VisuallyHiddenProps,
-} from "./COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
+export { VisuallyHidden, type VisuallyHiddenProps } from "./COMPOSITION/a11y/VisuallyHidden";
 
 // FocusTrap component (focus containment utility)
 export { FocusTrap, type FocusTrapProps } from "./COMPOSITION/focus/FocusTrap/FocusTrap.index";

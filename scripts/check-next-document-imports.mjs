@@ -13,6 +13,8 @@
  */
 
 import { spawnSync } from "child_process";
+import { readdirSync, readFileSync, statSync } from "fs";
+import { join } from "path";
 
 const RED = "\x1b[31m";
 const GREEN = "\x1b[32m";
@@ -21,7 +23,76 @@ const RESET = "\x1b[0m";
 const SOURCE_DIR = "src";
 const DEFAULT_EXCLUDES = ["node_modules", ".git", "dist", "docs-app"];
 
+function getSourceFiles(dir, extensions, excludeDirs) {
+  const entries = readdirSync(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    if (excludeDirs.includes(entry.name)) {
+      continue;
+    }
+
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getSourceFiles(fullPath, extensions, excludeDirs));
+      continue;
+    }
+
+    if (extensions.some((ext) => entry.name.endsWith(ext))) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+function runFallbackSearch(pattern, description, extensions, excludeDirs) {
+  let regex;
+  try {
+    regex = new RegExp(pattern, "m");
+  } catch (error) {
+    console.error(`${RED}Invalid regex pattern for ${description}.${RESET}`);
+    console.error(String(error));
+    process.exit(1);
+  }
+
+  const files = getSourceFiles(SOURCE_DIR, extensions, excludeDirs);
+  const matches = [];
+
+  for (const file of files) {
+    let content;
+    try {
+      content = readFileSync(file, "utf-8");
+    } catch (error) {
+      continue;
+    }
+
+    const lines = content.split(/\r?\n/);
+    lines.forEach((line, index) => {
+      if (regex.test(line)) {
+        matches.push(`${file}:${index + 1}:${line}`);
+      }
+    });
+  }
+
+  if (matches.length) {
+    console.log(`${RED}Found forbidden import: ${description}${RESET}`);
+    console.log(`  Pattern: ${pattern}`);
+    console.log("  Matches:");
+    matches.forEach((line) => {
+      console.log(`    ${line}`);
+    });
+    console.log("");
+    return true;
+  }
+
+  return false;
+}
+
 function runRg(pattern, description, fileGlobs, excludeDirs = []) {
+  const extensions = fileGlobs
+    .map((glob) => glob.replace("*", ""))
+    .filter((ext) => ext.startsWith("."));
   const args = ["-n", "--no-messages", "--hidden"];
   fileGlobs.forEach((glob) => {
     args.push("-g", glob);
@@ -34,6 +105,9 @@ function runRg(pattern, description, fileGlobs, excludeDirs = []) {
   const result = spawnSync("rg", args, { encoding: "utf-8" });
 
   if (result.error) {
+    if (result.error.code === "ENOENT") {
+      return runFallbackSearch(pattern, description, extensions, excludeDirs);
+    }
     console.error(`${RED}rg failed to run. Install ripgrep and ensure it is in PATH.${RESET}`);
     console.error(result.error.message);
     process.exit(1);

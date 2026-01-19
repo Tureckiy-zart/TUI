@@ -55,7 +55,7 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as React from "react";
 
-import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden/VisuallyHidden";
+import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { Row } from "@/COMPOSITION/layout/Row";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { cn } from "@/FOUNDATION/lib/utils";

@@ -73,7 +73,7 @@ describe("Icon", () => {
       render(<Icon name="search" color="muted" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-[hsl(var(--tm-text-muted))]-foreground");
+      expect(icon).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
     it("renders with success color", () => {

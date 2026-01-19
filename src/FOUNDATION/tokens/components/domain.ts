@@ -238,7 +238,7 @@ export const DOMAIN_TOKENS = {
      */
     text: {
       primary: "text-foreground", // Primary metadata text - maps to semantic text color
-      secondary: "text-[hsl(var(--tm-text-muted))]-foreground", // Secondary metadata text - maps to semantic muted text color
+      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary metadata text - maps to semantic muted text color
     } as const,
 
     /**
@@ -246,7 +246,7 @@ export const DOMAIN_TOKENS = {
      * Maps to ICON_TOKENS for sizes and colors
      */
     icon: {
-      default: "text-[hsl(var(--tm-text-muted))]-foreground", // Default icon color - maps to ICON_TOKENS.colors.muted
+      default: "text-[hsl(var(--tm-text-muted))]", // Default icon color - maps to ICON_TOKENS.colors.muted
       sizeSm: ICON_TOKENS.sizes.md, // Small icon size - references ICON_TOKENS.sizes.md (16px)
     } as const,
 
@@ -341,7 +341,7 @@ export const DOMAIN_TOKENS = {
      */
     text: {
       primary: "text-foreground", // Primary price/capacity text - maps to semantic text color
-      secondary: "text-[hsl(var(--tm-text-muted))]-foreground", // Secondary price/capacity text - maps to semantic muted text color
+      secondary: "text-[hsl(var(--tm-text-muted))]", // Secondary price/capacity text - maps to semantic muted text color
     } as const,
 
     /**
