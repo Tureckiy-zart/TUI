@@ -10,7 +10,7 @@ Strict. Predictable. Built for system-level consistency.
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Current Release:** [v2.0.6](CHANGELOG.md#206) (npm)  
+**Current Release:** [v2.1.0](CHANGELOG.md#210) (npm)  
 **Next Release:** [Unreleased] — See [CHANGELOG](CHANGELOG.md#unreleased)
 
 <p align="center">
