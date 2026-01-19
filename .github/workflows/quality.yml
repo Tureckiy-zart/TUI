@@ -30,8 +30,8 @@ jobs:
           node-version: 22
           cache: "pnpm"
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
 
       - name: Lint Check
         run: ./scripts/lint-ci.sh
