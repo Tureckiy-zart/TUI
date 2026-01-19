@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * Motion V1 Guard Script
  *
@@ -8,59 +8,71 @@
  * Usage: pnpm check:motion-v1
  */
 
-import { execSync } from "child_process";
+import { spawnSync } from "child_process";
+import { existsSync } from "fs";
 
-// Colors for console output
 const RED = "\x1b[31m";
 const GREEN = "\x1b[32m";
-const YELLOW = "\x1b[33m";
 const RESET = "\x1b[0m";
 
-console.log("\n🔍 Checking for Motion V1 patterns...\n");
+const SOURCE_DIR = "src";
+const DEFAULT_EXCLUDES = ["node_modules", ".git", "dist", "docs-app"];
+
+function runRg(pattern, description, fileGlobs, excludeDirs = []) {
+  const args = ["-n", "--no-messages", "--hidden"];
+  fileGlobs.forEach((glob) => {
+    args.push("-g", glob);
+  });
+  excludeDirs.forEach((dir) => {
+    args.push("-g", `!**/${dir}/**`);
+  });
+  args.push("-e", pattern, SOURCE_DIR);
+
+  const result = spawnSync("rg", args, { encoding: "utf-8" });
+
+  if (result.error) {
+    console.error(`${RED}rg failed to run. Install ripgrep and ensure it is in PATH.${RESET}`);
+    console.error(result.error.message);
+    process.exit(1);
+  }
+
+  if (result.status === 0 && result.stdout.trim()) {
+    console.log(`${RED}Found Motion V1 pattern: ${description}${RESET}`);
+    console.log(`  Pattern: ${pattern}`);
+    console.log("  Matches:");
+    result.stdout
+      .trim()
+      .split("\n")
+      .forEach((line) => {
+        console.log(`    ${line}`);
+      });
+    console.log("");
+    return true;
+  }
+
+  if (result.status !== 0 && result.status !== 1) {
+    console.error(`${RED}rg failed with exit code ${result.status}.${RESET}`);
+    if (result.stderr) {
+      console.error(result.stderr.trim());
+    }
+    process.exit(1);
+  }
+
+  return false;
+}
+
+console.log("\nChecking for Motion V1 patterns...\n");
 
 let hasErrors = false;
 
-/**
- * Run a grep command and return results
- */
-function grepCheck(pattern, description, excludePatterns = []) {
-  try {
-    // Build exclude patterns for grep
-    const excludeArgs = excludePatterns.map((p) => `--exclude-dir=${p}`).join(" ");
-
-    const cmd = `grep -rn "${pattern}" src/ ${excludeArgs} --include="*.ts" --include="*.tsx" 2>/dev/null || true`;
-    const result = execSync(cmd, { encoding: "utf-8" }).trim();
-
-    if (result) {
-      console.log(`${RED}❌ Found Motion V1 pattern: ${description}${RESET}`);
-      console.log(`   Pattern: ${pattern}`);
-      console.log(`   Matches:`);
-      result.split("\n").forEach((line) => {
-        console.log(`     ${line}`);
-      });
-      console.log("");
-      return true;
-    }
-    return false;
-  } catch (error) {
-    // grep returns exit code 1 if no matches - that's fine
-    return false;
-  }
-}
-
-// Check for V1 file existence
-try {
-  execSync("ls src/FOUNDATION/tokens/motion.ts 2>/dev/null", {
-    encoding: "utf-8",
-  });
-  console.log(`${RED}❌ Motion V1 file exists: src/FOUNDATION/tokens/motion.ts${RESET}`);
-  console.log("   This file should have been deleted in 2.0.0. Please remove it.\n");
+if (existsSync("src/FOUNDATION/tokens/motion.ts")) {
+  console.log(`${RED}Motion V1 file exists: src/FOUNDATION/tokens/motion.ts${RESET}`);
+  console.log("  This file should have been deleted in 2.0.0. Please remove it.\n");
   hasErrors = true;
-} catch (error) {
-  console.log(`${GREEN}✓ Motion V1 file does not exist (expected)${RESET}`);
+} else {
+  console.log(`${GREEN}Motion V1 file does not exist (expected).${RESET}`);
 }
 
-// Check for V1 imports
 const v1ImportPatterns = [
   {
     pattern: 'from.*tokens/motion\\"$',
@@ -84,15 +96,14 @@ const v1ImportPatterns = [
   },
 ];
 
-console.log("\n📦 Checking for V1 imports...\n");
+console.log("\nChecking for V1 imports...\n");
 
 v1ImportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist"])) {
+  if (runRg(pattern, description, ["*.ts", "*.tsx"], DEFAULT_EXCLUDES)) {
     hasErrors = true;
   }
 });
 
-// Check for V1 CSS variable names (legacy format)
 const v1CSSVarPatterns = [
   {
     pattern: '"--duration-instant"',
@@ -112,15 +123,14 @@ const v1CSSVarPatterns = [
   },
 ];
 
-console.log("\n🎨 Checking for V1 CSS variable patterns...\n");
+console.log("\nChecking for V1 CSS variable patterns...\n");
 
 v1CSSVarPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist"])) {
+  if (runRg(pattern, description, ["*.ts", "*.tsx"], DEFAULT_EXCLUDES)) {
     hasErrors = true;
   }
 });
 
-// Check for V1 exports
 const v1ExportPatterns = [
   {
     pattern: "export.*animations.*from",
@@ -136,19 +146,18 @@ const v1ExportPatterns = [
   },
 ];
 
-console.log("\n📤 Checking for V1 exports...\n");
+console.log("\nChecking for V1 exports...\n");
 
 v1ExportPatterns.forEach(({ pattern, description }) => {
-  if (grepCheck(pattern, description, ["node_modules", ".git", "dist"])) {
+  if (runRg(pattern, description, ["*.ts", "*.tsx"], DEFAULT_EXCLUDES)) {
     hasErrors = true;
   }
 });
 
-// Summary
 console.log("\n" + "=".repeat(60) + "\n");
 
 if (hasErrors) {
-  console.log(`${RED}❌ Motion V1 patterns detected!${RESET}`);
+  console.log(`${RED}Motion V1 patterns detected.${RESET}`);
   console.log("\nMotion V1 was removed in version 2.0.0 and should not be reintroduced.");
   console.log("Please update the code to use Motion tokens only:");
   console.log("  - Use motionDurations instead of durations");
@@ -159,7 +168,7 @@ if (hasErrors) {
   console.log("  - Use motionTailwindConfig instead of tailwindMotionConfig");
   console.log("\nSee docs/reports/audit/MOTION_V1_INVENTORY.md for migration details.\n");
   process.exit(1);
-} else {
-  console.log(`${GREEN}✓ No Motion V1 patterns detected. Codebase is V2-only.${RESET}\n`);
-  process.exit(0);
 }
+
+console.log(`${GREEN}No Motion V1 patterns detected. Codebase is V2-only.${RESET}\n`);
+process.exit(0);
