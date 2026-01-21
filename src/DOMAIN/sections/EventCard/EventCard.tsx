@@ -123,7 +123,10 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
               <div
-                className={cn("relative w-full overflow-hidden", DOMAIN_TOKENS.surface.bg.default)}
+                className={cn(
+                  "relative h-full w-full overflow-hidden",
+                  DOMAIN_TOKENS.surface.bg.default,
+                )}
               >
                 {imageUrl ? (
                   <img

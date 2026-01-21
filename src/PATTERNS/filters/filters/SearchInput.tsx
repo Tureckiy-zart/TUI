@@ -80,10 +80,12 @@ export function SearchInput({
     onClear?.();
   };
 
+  const hasRightIcon = showClearButton && localValue;
+
   return (
     <div className={cn("relative", className)}>
       <Search
-        className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[hsl(var(--tm-text-muted))]"
+        className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-[hsl(var(--tm-text-muted))]"
         aria-hidden="true"
       />
       <Input
@@ -93,21 +95,25 @@ export function SearchInput({
         onChange={handleInputChange}
         placeholder={placeholder}
         data-has-icon="true"
+        data-has-right-icon={hasRightIcon ? "true" : undefined}
         // Filter out props that don't exist in InputProps
         {...(Object.fromEntries(
           Object.entries(props).filter(([key]) => !["height", "width", "size"].includes(key)),
         ) as Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "value" | "onChange">)}
       />
-      {showClearButton && localValue && (
-        <Button
-          type="button"
-          variant="ghost"
-          iconOnly
-          onClick={handleClear}
-          aria-label="Clear search"
-        >
-          <X className="h-3 w-3" aria-hidden="true" />
-        </Button>
+      {hasRightIcon && (
+        <div className="absolute right-1 top-1/2 z-10 -translate-y-1/2">
+          <Button
+            type="button"
+            variant="ghost"
+            iconOnly
+            size="sm"
+            onClick={handleClear}
+            aria-label="Clear search"
+          >
+            <X className="h-3 w-3" aria-hidden="true" />
+          </Button>
+        </div>
       )}
     </div>
   );

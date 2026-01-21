@@ -126,6 +126,10 @@ export const SELECT_TOKENS = {
       background: "focus-visible:bg-[hsl(var(--tm-accent))]", // Focus background using CSS var
       text: "focus-visible:text-[hsl(var(--tm-accent-foreground))]", // Focus text using CSS var
     },
+    hover: {
+      background: "hover:bg-[hsl(var(--tm-accent))]", // Hover background using CSS var
+      text: "hover:text-[hsl(var(--tm-accent-foreground))]", // Hover text using CSS var
+    },
     selected: {
       background: "bg-[hsl(var(--tm-accent))]", // Selected background using CSS var
       text: "text-[hsl(var(--tm-accent-foreground))]", // Selected text using CSS var

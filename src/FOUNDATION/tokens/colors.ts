@@ -80,8 +80,8 @@ export const secondaryColors: ColorScale = {
   300: "173 100% 70%",
   400: "173 100% 55%",
   500: "173 100% 45%", // Adjusted for better scale progression
-  600: "173 100% 44%", // Default secondary - rebalanced for better contrast vs primary (L* ~44, was 38)
-  700: "173 95% 32%", // Active state - rebalanced for semantic strength (L* ~32)
+  600: "173 100% 58%", // Default secondary - increased lightness for WCAG AA contrast in night mode (was 44%)
+  700: "173 95% 52%", // Active state - increased lightness for WCAG AA contrast in night mode (was 32%)
   800: "173 90% 22%", // Primary variant - darkened for dominance (L* ~22, was 26)
   900: "173 85% 20%",
   950: "173 80% 12%",
@@ -138,18 +138,18 @@ export const semanticColors: Record<Mode, SemanticColors> = {
   day: {
     success: "142 70% 28%", // Darker green for better contrast
     successForeground: "0 0% 100%",
-    error: "0 80% 40%", // Richer red for contrast
-    errorForeground: "0 0% 100%",
+    error: "0 80% 38%", // Adjusted for WCAG AA contrast: white text on error (≥3.0) and error on white (≥4.5)
+    errorForeground: "0 0% 100%", // White text for buttons (maintains contrast on error background)
     warning: "38 92% 50%", // Orange
     warningForeground: "0 0% 9%",
-    info: "199 89% 48%", // Blue
+    info: "199 89% 42%", // Blue - reduced lightness for WCAG AA contrast (was 48%)
     infoForeground: "0 0% 100%",
   },
   night: {
-    success: "142 70% 45%",
+    success: "142 70% 37%", // Reduced lightness for WCAG AA contrast with white text (was 45%)
     successForeground: "0 0% 100%",
-    error: "0 62.8% 30.6%", // Darker red
-    errorForeground: "0 0% 98%",
+    error: "0 78.5% 54.00%", // Increased saturation and adjusted lightness for WCAG AA contrast ≥4.5:1 on dark background and for white text on error (was 62.8% s, 30.6% l)
+    errorForeground: "0 0% 100%", // Pure white for maximum contrast on error background (was 98%)
     warning: "38 92% 33%", // Darker orange for WCAG AA contrast with white text
     warningForeground: "0 0% 100%", // Light foreground for dark theme readability
     info: "199 89% 35%", // Darker blue for WCAG AA contrast with white text

@@ -23,7 +23,7 @@ import { Dropdown } from "./Dropdown";
  * - Native button semantics for items
  */
 const meta: Meta<typeof Dropdown.Root> = {
-  title: "UI / Extension / Dropdown",
+  title: "UI / Composition / Overlays / Dropdown",
   component: Dropdown.Root,
   parameters: {
     layout: "centered",

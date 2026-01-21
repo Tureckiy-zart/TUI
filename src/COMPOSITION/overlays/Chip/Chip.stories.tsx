@@ -6,12 +6,12 @@
  * Demonstrates Chip component in all its modes and use cases.
  */
 
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 import { Chip } from "./Chip";
 
 const meta: Meta<typeof Chip> = {
-  title: "UI / Extension / Chip",
+  title: "UI / Composition / Overlays / Chip",
   component: Chip,
   parameters: {
     layout: "centered",

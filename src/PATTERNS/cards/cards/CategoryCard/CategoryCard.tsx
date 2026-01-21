@@ -96,7 +96,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
             <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn(
-                  "relative w-full overflow-hidden",
+                  "relative h-full w-full overflow-hidden",
                   DOMAIN_TOKENS.image.placeholder.gradient,
                 )}
               >

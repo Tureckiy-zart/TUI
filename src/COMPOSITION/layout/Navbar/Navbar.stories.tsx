@@ -1,15 +1,15 @@
 ﻿import { Button } from "@/PRIMITIVES/Button";
 import { Link } from "@/PRIMITIVES/Link";
 import type { Meta, StoryObj } from "@storybook/react";
-import { ContentShell } from "../ContentShell/ContentShell";
 import { Container } from "../Container";
+import { ContentShell } from "../ContentShell/ContentShell";
 import { PageHeader } from "../PageHeader";
 import { Section } from "../Section";
 import { StickyBar } from "../StickyBar/StickyBar";
 import { Navbar } from "./Navbar";
 
 const meta: Meta<typeof Navbar> = {
-  title: "UI / Extension / Layout / Navbar",
+  title: "UI / Composition / Layout / Navbar",
   component: Navbar,
   parameters: {
     layout: "padded",

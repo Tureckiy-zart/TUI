@@ -641,6 +641,8 @@ Any Layout Authority modifications require:
 - [STATE_AUTHORITY.md](./STATE_AUTHORITY.md) - Defines component states (separate from layout)
 - [INTERACTION_AUTHORITY.md](./INTERACTION_AUTHORITY.md) - Defines interaction timing (separate from layout)
 - [INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) - Defines interactive size scale (separate from layout)
+- 🔒 Interactive Wrapper Layout Contract  
+  See: [INTERACTIVE_WRAPPER_LAYOUT_RULE.md](./INTERACTIVE_WRAPPER_LAYOUT_RULE.md)
 - [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) - Foundation layer lock status
 
 **Note:** Non-interactive components (Card, Stack, Grid) MUST NOT use `size` prop. Layout uses spacing tokens (padding, gap) instead. See [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) for interactive component sizing rules.

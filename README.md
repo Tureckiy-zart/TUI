@@ -62,6 +62,7 @@ that means it is working as intended.
 ---
 
 > ⚠️ **Status:** The Foundation layer is locked and stable. Extension components may evolve.
+> A11Y (including contrast) is architecturally finalized and locked. See: [`docs/architecture/locks/A11Y_LOCK.md`](docs/architecture/locks/A11Y_LOCK.md)
 > This system is actively developed for real production usage.
 
 ---
@@ -118,14 +119,15 @@ export default function App() {
 
 ## 📚 Documentation
 
-| Document                  | Description                           |
-| ------------------------- | ------------------------------------- |
-| **Complete Guide**        | System overview and usage principles  |
-| Tokens Guide              | Design token structure and philosophy |
-| Theme Guide               | Theme configuration and modes         |
-| **Architecture Lock**     | Canonical architectural constraints   |
-| **Final Foundation Lock** | Authoritative source of truth         |
-| Storybook                 | Component examples and contracts      |
+| Document                  | Description                             |
+| ------------------------- | --------------------------------------- |
+| **Complete Guide**        | System overview and usage principles    |
+| Tokens Guide              | Design token structure and philosophy   |
+| Theme Guide               | Theme configuration and modes           |
+| **Architecture Lock**     | Canonical architectural constraints     |
+| **Final Foundation Lock** | Authoritative source of truth           |
+| **A11Y Lock**             | Accessibility system lock (WCAG 2.1 AA) |
+| Storybook                 | Component examples and contracts        |
 
 ### Development Resources
 

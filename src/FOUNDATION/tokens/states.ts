@@ -14,10 +14,59 @@ import {
   primaryColors,
   secondaryColors,
   semanticColors,
+  textColors,
   type BaseColorTokens,
   type SurfaceColors,
 } from "./colors";
 import type { ComponentStateContract, StateMatrix } from "./state-matrix";
+
+/**
+ * Helper function to extract lightness from HSL color string
+ * HSL format: "h s% l%" (e.g., "210 40% 50%")
+ * Returns lightness value as number (0-100)
+ */
+function getLightness(hsl: string): number {
+  const parts = hsl.trim().split(/\s+/);
+  if (parts.length < 3 || !parts[2]) {
+    return 0;
+  }
+  const lRaw = parts[2];
+  return parseFloat(lRaw.replace("%", ""));
+}
+
+/**
+ * Helper function to determine if background is light or dark
+ * Returns true if background is light (lightness > 50%), false if dark
+ */
+function isLightBackground(hsl: string): boolean {
+  return getLightness(hsl) > 50;
+}
+
+/**
+ * Helper function to select appropriate text color based on background lightness
+ * Ensures sufficient contrast: light background needs dark text, dark background needs light text
+ *
+ * In day mode: foreground is dark, inverse is light
+ * In night mode: foreground is light, inverse is dark
+ *
+ * So for contrast:
+ * - Light background → dark text → day: foreground, night: inverse
+ * - Dark background → light text → day: inverse, night: foreground
+ */
+function selectTextColorByBackground(
+  background: string,
+  foreground: string,
+  inverse: string,
+  mode: Mode,
+): string {
+  if (isLightBackground(background)) {
+    // Light background needs dark text
+    return mode === "day" ? foreground : inverse;
+  } else {
+    // Dark background needs light text
+    return mode === "day" ? inverse : foreground;
+  }
+}
 
 /**
  * Button State Matrix
@@ -129,27 +178,43 @@ export function getButtonStateMatrix(
   const primaryActive = primaryColors[800]; // Even darker for pressed feedback
   const primaryFocus = primaryColors[600]; // Focus uses base color (can be adjusted if needed)
   const primaryDisabledBg = primaryColors[300]; // Lighter for disabled (muted)
-  const primaryDisabledText = primaryColors[400]; // Slightly darker text for disabled
+  const primaryDisabledText = selectTextColorByBackground(
+    primaryDisabledBg,
+    baseColors.foreground,
+    textColors[mode].inverse,
+    mode,
+  ); // Disabled text uses normal foreground token, selected by background lightness (disabled semantics expressed via behavior, not color)
   const primaryLoading = primaryColors[600]; // Loading state uses base color
 
   // Secondary states: similar pattern
+  const secondaryBase = secondaryColors[600]; // Base secondary background
   const secondaryHover = secondaryColors[700];
   const secondaryActive = secondaryColors[800];
   const secondaryDisabledBg = secondaryColors[300];
-  const secondaryDisabledText = secondaryColors[400];
+  const secondaryDisabledText = selectTextColorByBackground(
+    secondaryDisabledBg,
+    baseColors.foreground,
+    textColors[mode].inverse,
+    mode,
+  ); // Disabled text uses normal foreground token, selected by background lightness (disabled semantics expressed via behavior, not color)
 
   // Accent states: similar pattern
   const accentHover = accentColors[700];
   const accentActive = accentColors[800];
   const accentDisabledBg = accentColors[300];
-  const accentDisabledText = accentColors[400];
+  const accentDisabledText = selectTextColorByBackground(
+    accentDisabledBg,
+    baseColors.foreground,
+    textColors[mode].inverse,
+    mode,
+  ); // Disabled text uses normal foreground token, selected by background lightness (disabled semantics expressed via behavior, not color)
 
   // Outline states: use accent colors for hover/active, muted for disabled
   const outlineHoverBg = accentColors[600]; // Accent background on hover
-  const outlineHoverText = accentColors[950]; // Dark accent text
+  const outlineHoverText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
   const outlineHoverBorder = accentColors[600]; // Accent border
   const outlineActiveBg = accentColors[700]; // Darker accent for active
-  const outlineActiveText = accentColors[950];
+  const outlineActiveText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
   const outlineActiveBorder = accentColors[700];
   const outlineDisabledBg = baseColors.background; // Unchanged background
   const outlineDisabledText = baseColors.foreground; // Muted foreground
@@ -177,9 +242,27 @@ export function getButtonStateMatrix(
         },
         hover: {
           background: primaryHover,
+          text:
+            mode === "day"
+              ? "0 0% 100%"
+              : selectTextColorByBackground(
+                  primaryHover,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
         },
         active: {
           background: primaryActive,
+          text:
+            mode === "day"
+              ? "0 0% 100%"
+              : selectTextColorByBackground(
+                  primaryActive,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
         },
         focus: {
           background: primaryFocus,
@@ -193,11 +276,38 @@ export function getButtonStateMatrix(
         },
       },
       secondary: {
+        base: {
+          background: secondaryBase,
+          text:
+            mode === "day"
+              ? baseColors.foreground
+              : selectTextColorByBackground(
+                  secondaryBase,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
+        },
         hover: {
           background: secondaryHover,
+          text:
+            mode === "day"
+              ? baseColors.foreground
+              : selectTextColorByBackground(
+                  secondaryHover,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
         },
         active: {
           background: secondaryActive,
+          text: selectTextColorByBackground(
+            secondaryActive,
+            baseColors.foreground,
+            textColors[mode].inverse,
+            mode,
+          ), // Text color based on background lightness
         },
         disabled: {
           background: secondaryDisabledBg,
@@ -207,9 +317,27 @@ export function getButtonStateMatrix(
       accent: {
         hover: {
           background: accentHover,
+          text:
+            mode === "day"
+              ? textColors.day.inverse
+              : selectTextColorByBackground(
+                  accentHover,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
         },
         active: {
           background: accentActive,
+          text:
+            mode === "day"
+              ? textColors.day.inverse
+              : selectTextColorByBackground(
+                  accentActive,
+                  baseColors.foreground,
+                  textColors[mode].inverse,
+                  mode,
+                ), // Text color based on background lightness, not day/night
         },
         disabled: {
           background: accentDisabledBg,

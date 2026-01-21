@@ -104,7 +104,10 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
               <div
-                className={cn("relative w-full overflow-hidden", GRADIENT_TOKENS.surface.elevated)}
+                className={cn(
+                  "relative h-full w-full overflow-hidden",
+                  GRADIENT_TOKENS.surface.elevated,
+                )}
               >
                 {imageUrl ? (
                   <img

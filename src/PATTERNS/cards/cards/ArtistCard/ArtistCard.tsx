@@ -133,6 +133,7 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
             <CardBaseImageWrapper size={cardBaseSize}>
               <div
                 className={cn(
+                  "h-full",
                   ARTIST_TOKENS.image.container.layout,
                   DOMAIN_TOKENS.image.placeholder.gradient,
                 )}

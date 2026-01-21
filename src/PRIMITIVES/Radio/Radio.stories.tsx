@@ -65,34 +65,6 @@ const meta: Meta<typeof Radio> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    "aria-label": "Default radio",
-  },
-};
-
-export const Checked: Story = {
-  args: {
-    checked: true,
-    "aria-label": "Checked radio",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    "aria-label": "Disabled radio",
-  },
-};
-
-export const DisabledChecked: Story = {
-  args: {
-    checked: true,
-    disabled: true,
-    "aria-label": "Disabled checked radio",
-  },
-};
-
 export const Matrix: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
@@ -155,33 +127,6 @@ export const SizesGallery: Story = {
   ),
 };
 
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-md">
-      <div className="flex items-center gap-md">
-        <Radio variant="primary" checked aria-label="Primary radio" />
-        <span>Primary</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio variant="secondary" checked aria-label="Secondary radio" />
-        <span>Secondary</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio variant="outline" checked aria-label="Outline radio" />
-        <span>Outline</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio variant="ghost" checked aria-label="Ghost radio" />
-        <span>Ghost</span>
-      </div>
-      <div className="flex items-center gap-md">
-        <Radio variant="destructive" checked aria-label="Destructive radio" />
-        <span>Destructive</span>
-      </div>
-    </div>
-  ),
-};
-
 export const States: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
@@ -189,50 +134,58 @@ export const States: Story = {
         <h3 className="mb-md text-sm font-semibold">
           States Matrix (All Variants - All Sizes - All States)
         </h3>
+        <p className="mb-md text-xs text-[hsl(var(--tm-text-primary))]/70">
+          Interactive examples: Default states are clickable. Other states (checked, disabled,
+          error) are shown for visual reference.
+        </p>
         <div className="grid grid-cols-5 gap-md">
           {(["primary", "secondary", "outline", "ghost", "destructive"] as const).map((variant) => (
-            <div key={variant} className="flex flex-col gap-sm">
-              <h4 className="text-xs font-medium capitalize">{variant}</h4>
-              {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
-                <div key={size} className="flex flex-col gap-xs">
-                  <div className="flex items-center gap-xs">
-                    <Radio
-                      variant={variant}
-                      size={size}
-                      aria-label={`${variant} ${size} default`}
-                    />
-                    <span className="text-xs">default</span>
+            <RadioGroup key={variant} defaultValue={`${variant}-xs-default`} orientation="vertical">
+              <div className="flex flex-col gap-sm">
+                <h4 className="text-xs font-medium capitalize">{variant}</h4>
+                {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+                  <div key={size} className="flex flex-col gap-xs">
+                    <div className="flex items-center gap-xs">
+                      <Radio
+                        variant={variant}
+                        size={size}
+                        value={`${variant}-${size}-default`}
+                        aria-label={`${variant} ${size} default`}
+                      />
+                      <span className="text-xs">default</span>
+                    </div>
+                    <div className="flex items-center gap-xs">
+                      <Radio
+                        variant={variant}
+                        size={size}
+                        checked
+                        disabled
+                        aria-label={`${variant} ${size} checked`}
+                      />
+                      <span className="text-xs">checked</span>
+                    </div>
+                    <div className="flex items-center gap-xs">
+                      <Radio
+                        variant={variant}
+                        size={size}
+                        disabled
+                        aria-label={`${variant} ${size} disabled`}
+                      />
+                      <span className="text-xs">disabled</span>
+                    </div>
+                    <div className="flex items-center gap-xs">
+                      <Radio
+                        variant={variant}
+                        size={size}
+                        state="error"
+                        aria-label={`${variant} ${size} error`}
+                      />
+                      <span className="text-xs">error</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-xs">
-                    <Radio
-                      variant={variant}
-                      size={size}
-                      checked
-                      aria-label={`${variant} ${size} checked`}
-                    />
-                    <span className="text-xs">checked</span>
-                  </div>
-                  <div className="flex items-center gap-xs">
-                    <Radio
-                      variant={variant}
-                      size={size}
-                      disabled
-                      aria-label={`${variant} ${size} disabled`}
-                    />
-                    <span className="text-xs">disabled</span>
-                  </div>
-                  <div className="flex items-center gap-xs">
-                    <Radio
-                      variant={variant}
-                      size={size}
-                      state="error"
-                      aria-label={`${variant} ${size} error`}
-                    />
-                    <span className="text-xs">error</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </RadioGroup>
           ))}
         </div>
       </div>
@@ -240,227 +193,163 @@ export const States: Story = {
   ),
 };
 
-export const RadioGroupBasic: Story = {
-  render: () => (
-    <RadioGroup defaultValue="option1">
-      <div className="flex items-center gap-sm">
-        <Radio value="option1" aria-labelledby="radio-label-1" />
-        <span id="radio-label-1">Option 1</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option2" aria-labelledby="radio-label-2" />
-        <span id="radio-label-2">Option 2</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option3" aria-labelledby="radio-label-3" />
-        <span id="radio-label-3">Option 3</span>
-      </div>
-    </RadioGroup>
-  ),
-};
-
-export const RadioGroupVertical: Story = {
-  render: () => (
-    <RadioGroup defaultValue="option1" orientation="vertical">
-      <div className="flex items-center gap-sm">
-        <Radio value="option1" aria-labelledby="vertical-label-1" />
-        <span id="vertical-label-1">Option 1</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option2" aria-labelledby="vertical-label-2" />
-        <span id="vertical-label-2">Option 2</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option3" aria-labelledby="vertical-label-3" />
-        <span id="vertical-label-3">Option 3</span>
-      </div>
-    </RadioGroup>
-  ),
-};
-
-export const RadioGroupHorizontal: Story = {
-  render: () => (
-    <RadioGroup defaultValue="option1" orientation="horizontal">
-      <div className="flex items-center gap-sm">
-        <Radio value="option1" aria-labelledby="horizontal-label-1" />
-        <span id="horizontal-label-1">Option 1</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option2" aria-labelledby="horizontal-label-2" />
-        <span id="horizontal-label-2">Option 2</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option3" aria-labelledby="horizontal-label-3" />
-        <span id="horizontal-label-3">Option 3</span>
-      </div>
-    </RadioGroup>
-  ),
-};
-
-export const RadioGroupSizes: Story = {
-  render: () => (
-    <div className="flex flex-col gap-lg">
-      <div>
-        <h3 className="mb-md text-sm font-semibold">Small</h3>
-        <RadioGroup defaultValue="small-1" size="sm">
-          <div className="flex items-center gap-sm">
-            <Radio value="small-1" aria-labelledby="small-label-1" />
-            <span id="small-label-1">Option 1</span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="small-2" aria-labelledby="small-label-2" />
-            <span id="small-label-2">Option 2</span>
-          </div>
-        </RadioGroup>
-      </div>
-      <div>
-        <h3 className="mb-md text-sm font-semibold">Medium (default)</h3>
-        <RadioGroup defaultValue="medium-1" size="md">
-          <div className="flex items-center gap-sm">
-            <Radio value="medium-1" aria-labelledby="medium-label-1" />
-            <span id="medium-label-1">Option 1</span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="medium-2" aria-labelledby="medium-label-2" />
-            <span id="medium-label-2">Option 2</span>
-          </div>
-        </RadioGroup>
-      </div>
-      <div>
-        <h3 className="mb-md text-sm font-semibold">Large</h3>
-        <RadioGroup defaultValue="large-1" size="lg">
-          <div className="flex items-center gap-sm">
-            <Radio value="large-1" aria-labelledby="large-label-1" />
-            <span id="large-label-1">Option 1</span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="large-2" aria-labelledby="large-label-2" />
-            <span id="large-label-2">Option 2</span>
-          </div>
-        </RadioGroup>
-      </div>
-    </div>
-  ),
-};
-
-export const WithLabel: Story = {
-  render: () => (
-    <div className="flex flex-col gap-md">
-      <label className="flex cursor-pointer items-center gap-sm">
-        <Radio aria-labelledby="label-1" />
-        <span id="label-1">Choose option 1</span>
-      </label>
-      <label className="flex cursor-pointer items-center gap-sm">
-        <Radio checked aria-labelledby="label-2" />
-        <span id="label-2">Choose option 2</span>
-      </label>
-      <label className="flex cursor-pointer items-center gap-sm">
-        <Radio aria-labelledby="label-3" />
-        <span id="label-3">Choose option 3</span>
-      </label>
-    </div>
-  ),
-};
-
-export const Controlled: Story = {
+export const Interactive: Story = {
   render: () => {
-    const [value, setValue] = React.useState("option1");
+    const [orientation, setOrientation] = React.useState<"vertical" | "horizontal">("vertical");
+    const [controlledValue, setControlledValue] = React.useState("controlled-1");
+
     return (
-      <div className="flex flex-col gap-md">
-        <RadioGroup value={value} onValueChange={setValue}>
-          <div className="flex items-center gap-sm">
-            <Radio value="option1" aria-labelledby="controlled-label-1" />
-            <span id="controlled-label-1">
-              Option 1 (Current: {value === "option1" ? "selected" : ""})
-            </span>
+      <div className="flex flex-col gap-lg">
+        <div>
+          <h3 className="mb-md text-sm font-semibold">Orientation</h3>
+          <div className="mb-md flex gap-sm">
+            <button
+              type="button"
+              onClick={() => setOrientation("vertical")}
+              className={`rounded px-2 py-1 text-xs ${
+                orientation === "vertical"
+                  ? "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]"
+                  : "bg-[hsl(var(--tm-muted))]"
+              }`}
+            >
+              Vertical
+            </button>
+            <button
+              type="button"
+              onClick={() => setOrientation("horizontal")}
+              className={`rounded px-2 py-1 text-xs ${
+                orientation === "horizontal"
+                  ? "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]"
+                  : "bg-[hsl(var(--tm-muted))]"
+              }`}
+            >
+              Horizontal
+            </button>
           </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="option2" aria-labelledby="controlled-label-2" />
-            <span id="controlled-label-2">
-              Option 2 (Current: {value === "option2" ? "selected" : ""})
-            </span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="option3" aria-labelledby="controlled-label-3" />
-            <span id="controlled-label-3">
-              Option 3 (Current: {value === "option3" ? "selected" : ""})
-            </span>
-          </div>
-        </RadioGroup>
-        <p className="text-sm font-medium text-[hsl(var(--tm-text-primary))]">Selected: {value}</p>
+          <RadioGroup defaultValue="orientation-1" orientation={orientation}>
+            <div className="flex items-center gap-sm">
+              <Radio value="orientation-1" aria-labelledby="orientation-label-1" />
+              <span id="orientation-label-1">Option 1</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="orientation-2" aria-labelledby="orientation-label-2" />
+              <span id="orientation-label-2">Option 2</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="orientation-3" aria-labelledby="orientation-label-3" />
+              <span id="orientation-label-3">Option 3</span>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <h3 className="mb-md text-sm font-semibold">Controlled</h3>
+          <RadioGroup value={controlledValue} onValueChange={setControlledValue}>
+            <div className="flex items-center gap-sm">
+              <Radio value="controlled-1" aria-labelledby="controlled-label-1" />
+              <span id="controlled-label-1">
+                Option 1 {controlledValue === "controlled-1" && "(selected)"}
+              </span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="controlled-2" aria-labelledby="controlled-label-2" />
+              <span id="controlled-label-2">
+                Option 2 {controlledValue === "controlled-2" && "(selected)"}
+              </span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="controlled-3" aria-labelledby="controlled-label-3" />
+              <span id="controlled-label-3">
+                Option 3 {controlledValue === "controlled-3" && "(selected)"}
+              </span>
+            </div>
+          </RadioGroup>
+          <p className="mt-sm text-xs text-[hsl(var(--tm-text-primary))]/70">
+            Selected: {controlledValue}
+          </p>
+        </div>
+
+        <div>
+          <h3 className="mb-md text-sm font-semibold">Uncontrolled</h3>
+          <RadioGroup defaultValue="uncontrolled-2">
+            <div className="flex items-center gap-sm">
+              <Radio value="uncontrolled-1" aria-labelledby="uncontrolled-label-1" />
+              <span id="uncontrolled-label-1">Option 1</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="uncontrolled-2" aria-labelledby="uncontrolled-label-2" />
+              <span id="uncontrolled-label-2">Option 2 (default)</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="uncontrolled-3" aria-labelledby="uncontrolled-label-3" />
+              <span id="uncontrolled-label-3">Option 3</span>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <h3 className="mb-md text-sm font-semibold">With Label</h3>
+          <RadioGroup defaultValue="label-2">
+            <label className="flex cursor-pointer items-center gap-sm">
+              <Radio value="label-1" aria-labelledby="label-text-1" />
+              <span id="label-text-1">Choose option 1</span>
+            </label>
+            <label className="flex cursor-pointer items-center gap-sm">
+              <Radio value="label-2" aria-labelledby="label-text-2" />
+              <span id="label-text-2">Choose option 2</span>
+            </label>
+            <label className="flex cursor-pointer items-center gap-sm">
+              <Radio value="label-3" aria-labelledby="label-text-3" />
+              <span id="label-text-3">Choose option 3</span>
+            </label>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <h3 className="mb-md text-sm font-semibold">With Disabled Item</h3>
+          <RadioGroup defaultValue="disabled-group-1">
+            <div className="flex items-center gap-sm">
+              <Radio value="disabled-group-1" aria-labelledby="disabled-group-label-1" />
+              <span id="disabled-group-label-1">Option 1 (enabled)</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="disabled-group-2" disabled aria-labelledby="disabled-group-label-2" />
+              <span id="disabled-group-label-2">Option 2 (disabled)</span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio value="disabled-group-3" aria-labelledby="disabled-group-label-3" />
+              <span id="disabled-group-label-3">Option 3 (enabled)</span>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <h3 className="mb-md text-sm font-semibold">Error State</h3>
+          <RadioGroup defaultValue="error-1">
+            <div className="flex items-center gap-sm">
+              <Radio state="error" value="error-1" aria-labelledby="error-label-1" />
+              <span id="error-label-1" className="text-[hsl(var(--tm-destructive))]">
+                This field has an error
+              </span>
+            </div>
+            <div className="flex items-center gap-sm">
+              <Radio state="error" checked value="error-2" aria-labelledby="error-label-2" />
+              <span id="error-label-2" className="text-[hsl(var(--tm-destructive))]">
+                Error state with checked
+              </span>
+            </div>
+          </RadioGroup>
+        </div>
       </div>
     );
   },
 };
 
-export const Uncontrolled: Story = {
-  render: () => {
-    return (
-      <div className="flex flex-col gap-md">
-        <RadioGroup defaultValue="option2">
-          <div className="flex items-center gap-sm">
-            <Radio value="option1" aria-labelledby="uncontrolled-label-1" />
-            <span id="uncontrolled-label-1">Option 1</span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="option2" aria-labelledby="uncontrolled-label-2" />
-            <span id="uncontrolled-label-2">Option 2 (default)</span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <Radio value="option3" aria-labelledby="uncontrolled-label-3" />
-            <span id="uncontrolled-label-3">Option 3</span>
-          </div>
-        </RadioGroup>
-      </div>
-    );
-  },
-};
-
-export const ErrorState: Story = {
-  render: () => (
-    <div className="flex flex-col gap-md">
-      <RadioGroup>
-        <div className="flex items-center gap-sm">
-          <Radio state="error" value="option1" aria-labelledby="error-label-1" />
-          <span id="error-label-1" className="text-destructive">
-            This field has an error
-          </span>
-        </div>
-        <div className="flex items-center gap-sm">
-          <Radio state="error" checked value="option2" aria-labelledby="error-label-2" />
-          <span id="error-label-2" className="text-destructive">
-            Error state with checked
-          </span>
-        </div>
-      </RadioGroup>
-    </div>
-  ),
-};
-
-export const DisabledInGroup: Story = {
-  render: () => (
-    <RadioGroup defaultValue="option1">
-      <div className="flex items-center gap-sm">
-        <Radio value="option1" aria-labelledby="disabled-label-1" />
-        <span id="disabled-label-1">Option 1 (enabled)</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option2" disabled aria-labelledby="disabled-label-2" />
-        <span id="disabled-label-2">Option 2 (disabled)</span>
-      </div>
-      <div className="flex items-center gap-sm">
-        <Radio value="option3" aria-labelledby="disabled-label-3" />
-        <span id="disabled-label-3">Option 3 (enabled)</span>
-      </div>
-    </RadioGroup>
-  ),
-};
-
-export const KeyboardNavigation: Story = {
+export const Accessibility: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
       <div>
-        <h3 className="mb-md text-lg font-semibold">Keyboard Navigation in RadioGroup</h3>
+        <h3 className="mb-md text-lg font-semibold">Keyboard Navigation</h3>
         <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           Use <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowUp</kbd> /{" "}
           <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">ArrowDown</kbd> to
@@ -475,28 +364,22 @@ export const KeyboardNavigation: Story = {
           Press <kbd className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">Space</kbd>{" "}
           to select the focused radio.
         </p>
-        <RadioGroup defaultValue="option1" orientation="vertical">
+        <RadioGroup defaultValue="kb-1" orientation="vertical">
           <div className="flex items-center gap-sm">
-            <Radio value="option1" aria-labelledby="kb-label-1" />
+            <Radio value="kb-1" aria-labelledby="kb-label-1" />
             <span id="kb-label-1">Option 1 - Focus here and use arrow keys</span>
           </div>
           <div className="flex items-center gap-sm">
-            <Radio value="option2" aria-labelledby="kb-label-2" />
+            <Radio value="kb-2" aria-labelledby="kb-label-2" />
             <span id="kb-label-2">Option 2</span>
           </div>
           <div className="flex items-center gap-sm">
-            <Radio value="option3" aria-labelledby="kb-label-3" />
+            <Radio value="kb-3" aria-labelledby="kb-label-3" />
             <span id="kb-label-3">Option 3</span>
           </div>
         </RadioGroup>
       </div>
-    </div>
-  ),
-};
 
-export const Accessibility: Story = {
-  render: () => (
-    <div className="flex flex-col gap-lg">
       <div>
         <h3 className="mb-md text-lg font-semibold">Screen Reader Support</h3>
         <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
@@ -509,19 +392,20 @@ export const Accessibility: Story = {
           <Radio value="a11y-3" aria-label="Third radio with aria-label" />
         </RadioGroup>
       </div>
+
       <div>
-        <h3 className="mb-md text-lg font-semibold">With Labels</h3>
+        <h3 className="mb-md text-lg font-semibold">With Visible Labels</h3>
         <p className="mb-md text-sm font-medium text-[hsl(var(--tm-text-primary))]/90">
           Use aria-labelledby to associate radios with visible labels.
         </p>
-        <RadioGroup defaultValue="label-1">
+        <RadioGroup defaultValue="a11y-label-1">
           <div className="flex items-center gap-sm">
-            <Radio value="label-1" aria-labelledby="a11y-label-1" />
-            <span id="a11y-label-1">Radio with visible label</span>
+            <Radio value="a11y-label-1" aria-labelledby="a11y-visible-label-1" />
+            <span id="a11y-visible-label-1">Radio with visible label</span>
           </div>
           <div className="flex items-center gap-sm">
-            <Radio value="label-2" aria-labelledby="a11y-label-2" />
-            <span id="a11y-label-2">Another radio with visible label</span>
+            <Radio value="a11y-label-2" aria-labelledby="a11y-visible-label-2" />
+            <span id="a11y-visible-label-2">Another radio with visible label</span>
           </div>
         </RadioGroup>
       </div>

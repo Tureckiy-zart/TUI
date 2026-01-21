@@ -136,7 +136,10 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
               <div
-                className={cn("w-full", venueCardImagePlaceholderVariants({ size: cardBaseSize }))}
+                className={cn(
+                  "h-full w-full",
+                  venueCardImagePlaceholderVariants({ size: cardBaseSize }),
+                )}
               >
                 {imageUrl ? (
                   <img
