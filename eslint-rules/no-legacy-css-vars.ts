@@ -171,15 +171,20 @@ function reportForbidden(context: RuleContextType, node: TSESTree.Node, text: st
       const fixed = buildFixedText(text, forbiddenVars);
       if (!fixed) return null;
 
-      const sourceCode = context.getSourceCode();
-      const nodeText = sourceCode.getText(node);
-
-      if (node.type === "TemplateElement") {
+      if (node.type === "TemplateLiteral") {
+        if (node.expressions.length > 0 || node.quasis.length !== 1) {
+          return null;
+        }
         const escaped = escapeForTemplateRaw(fixed);
         if (!escaped) return null;
-        return fixer.replaceText(node, escaped);
+        return fixer.replaceText(node, `\`${escaped}\``);
       }
 
+      if (node.type === "TemplateElement") {
+        return null;
+      }
+
+      const nodeText = sourceCode.getText(node);
       return fixer.replaceText(node, wrapWithOriginalQuotes(nodeText, fixed));
     },
   });
@@ -202,8 +207,19 @@ export default createRule<Options, MessageIds>({
   defaultOptions: [],
   create(context) {
     function checkTemplateLiteral(node: TSESTree.TemplateLiteral): void {
+      if (node.expressions.length === 0 && node.quasis.length === 1) {
+        const raw = node.quasis[0]?.value?.raw;
+        if (raw !== undefined) {
+          reportForbidden(context, node, raw);
+        }
+        return;
+      }
+
       for (const quasi of node.quasis) {
-        reportForbidden(context, quasi, quasi.value.raw);
+        const raw = quasi.value?.raw;
+        if (raw !== undefined) {
+          reportForbidden(context, quasi, raw);
+        }
       }
     }
 
