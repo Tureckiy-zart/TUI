@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+### Changed
+
+- Calibration: textColors.day.secondary for AA on elevated surfaces
+- Calibration: disabledForeground (day/night) for WCAG AA compliance
+- Result: A11Y contrast = 100% PASS
+
 ## [2.1.0]
 
 ### Added

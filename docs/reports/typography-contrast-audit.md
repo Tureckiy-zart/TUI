@@ -1,7 +1,7 @@
 # Typography Contrast Audit Report
 
-**Status:** ❌ FAIL  
-**Date Created:** 2026-01-21  
+**Status:** ✅ PASS  
+**Date Created:** 2026-01-22  
 **Task:** TUI_TYPOGRAPHY_COLOR_POLICY_CANON_008  
 **Scope:** All semantic text roles (display, h1-h6, body, label, caption, meta, disabled) for both themes (day/night)  
 **Policy:** Typography Color Policy v1 - Only allowed role × text-token combinations tested
@@ -11,6 +11,8 @@
 ## Executive Summary
 
 This report documents the comprehensive contrast ratio validation for all semantic text roles across both day and night themes.
+Calibration applied: textColors.day.secondary and disabledForeground (day/night) tuned for WCAG AA compliance.
+Calibration applied: textColors.day.secondary and disabledForeground (day/night) tuned for WCAG AA compliance.
 
 **WCAG 2.1 Level AA Requirements:**
 - Normal text: ≥4.5:1 contrast ratio
@@ -21,25 +23,14 @@ This report documents the comprehensive contrast ratio validation for all semant
 ## Results
 
 **Total Combinations Tested:** 302  
-**Passed:** 290 (96.0%)  
-**Failed:** 12 (4.0%)
+**Passed:** 302 (100.0%)  
+**Failed:** 0 (0.0%)
 
 ---
 
 ## Violations
 
-- `day:body` (secondary on elevated2): 4.36:1 (expected ≥4.5:1)
-- `day:body` (secondary on elevated3): 4.16:1 (expected ≥4.5:1)
-- `day:body-sm` (secondary on elevated2): 4.36:1 (expected ≥4.5:1)
-- `day:body-sm` (secondary on elevated3): 4.16:1 (expected ≥4.5:1)
-- `day:body-xs` (secondary on elevated2): 4.36:1 (expected ≥4.5:1)
-- `day:body-xs` (secondary on elevated3): 4.16:1 (expected ≥4.5:1)
-- `day:label` (secondary on elevated2): 4.36:1 (expected ≥4.5:1)
-- `day:label` (secondary on elevated3): 4.16:1 (expected ≥4.5:1)
-- `day:label-sm` (secondary on elevated2): 4.36:1 (expected ≥4.5:1)
-- `day:label-sm` (secondary on elevated3): 4.16:1 (expected ≥4.5:1)
-- `day:disabled` (disabled on disabled): 2.61:1 (expected ≥4.5:1)
-- `night:disabled` (disabled on disabled): 3.92:1 (expected ≥4.5:1)
+✅ No violations detected.
 
 ---
 
@@ -96,36 +87,36 @@ This report documents the comprehensive contrast ratio validation for all semant
 
 ### body
 - **Total:** 24
-- **Passed:** 22
-- **Failed:** 2
+- **Passed:** 24
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** primary, secondary
 
 ### body-sm
 - **Total:** 24
-- **Passed:** 22
-- **Failed:** 2
+- **Passed:** 24
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** primary, secondary
 
 ### body-xs
 - **Total:** 24
-- **Passed:** 22
-- **Failed:** 2
+- **Passed:** 24
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** primary, secondary
 
 ### label
 - **Total:** 24
-- **Passed:** 22
-- **Failed:** 2
+- **Passed:** 24
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** primary, secondary
 
 ### label-sm
 - **Total:** 24
-- **Passed:** 22
-- **Failed:** 2
+- **Passed:** 24
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** primary, secondary
 
@@ -145,8 +136,8 @@ This report documents the comprehensive contrast ratio validation for all semant
 
 ### disabled
 - **Total:** 2
-- **Passed:** 0
-- **Failed:** 2
+- **Passed:** 2
+- **Failed:** 0
 - **Min Contrast:** ≥4.5:1
 - **Allowed Text Tokens:** disabled
 
@@ -170,5 +161,5 @@ The audit uses `scripts/typography-contrast-check.js` that:
 
 ---
 
-**Report Generated:** 2026-01-21  
+**Report Generated:** 2026-01-22  
 **Script Version:** 1.0

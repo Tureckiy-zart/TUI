@@ -170,11 +170,11 @@ export type DisabledColors = {
 export const disabledColors: Record<Mode, DisabledColors> = {
   day: {
     disabled: "0 0% 96%", // Light gray background for disabled elements
-    disabledForeground: "0 0% 60%", // Medium gray text/icon color (meets WCAG AA contrast 4.5:1 against disabled background)
+    disabledForeground: "0 0% 44%", // Darker gray text/icon color (WCAG AA on disabled background)
   },
   night: {
     disabled: "240 5% 12%", // Dark gray background for disabled elements
-    disabledForeground: "240 5% 50%", // Medium gray text/icon color (meets WCAG AA contrast 4.5:1 against disabled background)
+    disabledForeground: "240 5% 58%", // Lighter gray text/icon color (WCAG AA on disabled background)
   },
 };
 
@@ -222,7 +222,7 @@ export type TextColors = {
 export const textColors: Record<Mode, TextColors> = {
   day: {
     primary: "0 0% 9%", // Almost black (neutral-900 equivalent)
-    secondary: "0 0% 45%", // Medium gray
+    secondary: "0 0% 42%", // Medium gray - reduced lightness for AA contrast on elevated surfaces
     tertiary: "0 0% 65%", // Light gray
     muted: "0 0% 42%", // Muted gray - adjusted for WCAG AA contrast (4.5:1) on surface.elevated2
     inverse: "0 0% 100%", // White (for dark backgrounds)
