@@ -380,8 +380,8 @@ export const INPUT_TOKENS = {
     color: {
       /** Default helper text color (muted foreground) */
       default: "text-[hsl(var(--tm-text-muted))]", // Default message color
-      /** Error message color (destructive) */
-      error: "text-[hsl(var(--tm-destructive))]", // Error message color
+      /** Error message color (destructive) - uses semantic foreground token */
+      error: "text-[hsl(var(--tm-destructive-foreground))]", // Error message color using semantic foreground token
       /** Success message color (semantic success) */
       success: "text-[hsl(var(--semantic-success))]", // Success message color
     },

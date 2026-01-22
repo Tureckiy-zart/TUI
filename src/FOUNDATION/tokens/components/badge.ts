@@ -152,6 +152,30 @@ export const BADGE_TOKENS = {
       text: "text-[hsl(var(--tm-destructive-foreground))]", // Destructive text using CSS var
       hover: "hover:bg-[hsl(var(--tm-destructive))]/80", // Destructive hover background
     } as const,
+    success: {
+      border: "border-transparent", // Transparent border
+      background: "bg-[hsl(var(--semantic-success))]", // Success background using CSS var
+      text: "text-[hsl(var(--semantic-success-foreground))]", // Success text using semantic foreground token
+      hover: "hover:bg-[hsl(var(--semantic-success))]/80", // Success hover background
+    } as const,
+    info: {
+      border: "border-transparent", // Transparent border
+      background: "bg-[hsl(var(--semantic-info))]", // Info background using CSS var
+      text: "text-[hsl(var(--semantic-info-foreground))]", // Info text using semantic foreground token
+      hover: "hover:bg-[hsl(var(--semantic-info))]/80", // Info hover background
+    } as const,
+    warning: {
+      border: "border-transparent", // Transparent border
+      background: "bg-[hsl(var(--semantic-warning))]", // Warning background using CSS var
+      text: "text-[hsl(var(--semantic-warning-foreground))]", // Warning text using CSS var
+      hover: "hover:bg-[hsl(var(--semantic-warning))]/80", // Warning hover background
+    } as const,
+    error: {
+      border: "border-transparent", // Transparent border
+      background: "bg-[hsl(var(--tm-destructive))]", // Error background using CSS var (same as destructive)
+      text: "text-[hsl(var(--tm-destructive-foreground))]", // Error text using CSS var
+      hover: "hover:bg-[hsl(var(--tm-destructive))]/80", // Error hover background
+    } as const,
   } as const,
 } as const;
 

@@ -4,7 +4,7 @@ import { Stack } from "../Stack";
 import { Spacer } from "./Spacer";
 
 const meta: Meta<typeof Spacer> = {
-  title: "UI / Extension / Spacer",
+  title: "UI / Composition / Layout / Spacer",
   component: Spacer,
   parameters: {
     layout: "centered",

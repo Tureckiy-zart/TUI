@@ -424,6 +424,13 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
       }
     };
 
+    const handleClear = () => {
+      if (!multiple && typeof value === "string" && value) {
+        onValueChange?.("");
+        setInputValue("");
+      }
+    };
+
     // Display selected values for single-select
     const displayValue = React.useMemo(() => {
       if (!multiple && typeof value === "string" && value && !inputValue) {
@@ -439,7 +446,7 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
         <PopoverTrigger asChild>
           <div
             className={cn(
-              "relative flex flex-wrap items-center gap-1",
+              "relative flex items-center gap-1",
               size === "sm" && INPUT_TOKENS.padding.horizontal.sm,
               size === "md" && INPUT_TOKENS.padding.horizontal.md,
               size === "lg" && INPUT_TOKENS.padding.horizontal.lg,
@@ -497,17 +504,35 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
               }
               className={cn(
                 "min-w-[120px] flex-1 border-none focus-visible:ring-0 focus-visible:ring-offset-0",
+                INPUT_TOKENS.icon.paddingRight,
               )}
               {...props}
             />
 
-            {/* Chevron icon */}
-            <ChevronDown
-              className={cn(
-                "h-4 w-4 opacity-50 transition-transform",
-                open && "rotate-180 transform",
+            {/* Icons container */}
+            <div className="flex items-center gap-1">
+              {/* Clear icon for single-select with value */}
+              {!multiple && typeof value === "string" && value && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClear();
+                  }}
+                  className="hover:opacity-70"
+                >
+                  <X className="h-4 w-4 opacity-50" />
+                </button>
               )}
-            />
+
+              {/* Chevron icon */}
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 opacity-50 transition-transform",
+                  open && "rotate-180 transform",
+                )}
+              />
+            </div>
           </div>
         </PopoverTrigger>
       </div>

@@ -2,7 +2,7 @@
 
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-02 (DX, Navigation and Surface layers lock — post-audit)  
+**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -147,10 +147,7 @@ The following components are **locked** and **immutable**:
 - Canonical implementations:
   - ✅ `hooks/useLocalToast.ts` - Component-scoped toast management
   - ✅ `hooks/useGlobalToast.ts` - App-wide toast management
-- Backward compatibility maintained via deprecated exports:
-  - `hooks/useToast.ts` - Exports `useLocalToast` (deprecated)
-  - `hooks/use-toast.ts` - Exports `useGlobalToast` (deprecated)
-
+- Legacy alias exists in `hooks/useToast.ts` (internal-only; not exported from the public API)\r?\n
 **FOUNDATION TOKENS RULE:**
 - FOUNDATION tokens **only exist for active components**
 - No orphaned tokens (all tokens must correspond to active components)
@@ -505,6 +502,15 @@ The following audit reports document the List System implementation and usage:
 - All existing vertical lists must use canonical List/ListItem components
 - Migration completed per LIST_USAGE_ENFORCEMENT_VERIFICATION.md
 - ESLint rule enforces compliance going forward
+
+**Rule 4: Interactive Wrapper Layout Contract**
+
+- ✅ **LOCKED** (2026-01-06) - Interactive Wrapper Layout Contract is a mandatory architectural rule
+- Interactive components that can wrap layout content (Card, Panel, Box) MUST use block-level layout (block or flex), not inline or inline-flex
+- This contract prevents layout bugs when interactive components wrap layout content in grid/flex containers
+- All wrapper-capable interactive components MUST comply with this contract
+- Changes require explicit unlock task with architectural justification and impact analysis
+- **Reference:** [INTERACTIVE_WRAPPER_LAYOUT_RULE.md](./INTERACTIVE_WRAPPER_LAYOUT_RULE.md)
 
 ### Unlock Policy
 
@@ -1972,6 +1978,7 @@ New functionality must be built as **extensions** that compose foundation compon
 **Status:** ✅ **LOCKED** (Foundation CLOSED, Foundation Lock Sweep FINALIZED, Public API LOCKED)  
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-02 (Foundation Component Lock Sweep Finalization, Public API Canon Lock)  
+**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable, Foundation Lock Sweep finalized, Public API is locked)
+

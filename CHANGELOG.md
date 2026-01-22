@@ -26,6 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Legacy CSS Var Guard**: Guard blocked non-`--tm-*` usage in runtime components
 - **Semantic Layer Governance**: `--semantic-*` was marked TEMPORARY and restricted to feedback/validation
 - **TM Validation Artifacts**: Registry/snapshot modules, validator script, and migration reports were added
+- **A11Y Contrast Architecture Lock**: Fully normalized token-driven contrast system (WCAG 2.1 AA)
+  - Runtime-aligned a11y contrast validation tooling
+  - Canonical day/night foreground selection logic
+  - Disabled state contrast policy finalized
+  - One mathematically justified accepted exception documented
+  - Contrast governance locked at Foundation level
+  - See: `docs/architecture/locks/A11Y_LOCK.md`
 
 ### Fixed
 

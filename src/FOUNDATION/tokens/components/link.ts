@@ -278,7 +278,7 @@ export const LINK_TOKENS = {
      */
     primary: {
       text: "text-primary", // Primary text using CSS var
-      hover: "hover:text-primary/80", // Primary hover text
+      hover: "hover:underline", // Hover effect via underline only (color unchanged per canon)
       underline: "hover:underline", // Underline on hover
     } as const,
     /**
@@ -297,7 +297,7 @@ export const LINK_TOKENS = {
      */
     accent: {
       text: "text-accent", // Accent text using CSS var (accent color, not accent-foreground)
-      hover: "hover:text-accent/80", // Accent hover text
+      hover: "hover:underline", // Hover effect via underline only (color unchanged per canon)
       underline: "hover:underline", // Underline on hover
     } as const,
     /**
@@ -343,8 +343,8 @@ export const LINK_TOKENS = {
      * <Link href="/delete" variant="destructive">Delete</Link>
      */
     destructive: {
-      text: "text-destructive", // Destructive text using CSS var
-      hover: "hover:text-destructive/80", // Destructive hover text
+      text: "text-destructive", // Destructive text using semantic foreground token
+      hover: "hover:underline", // Hover effect via underline only (color unchanged per canon)
       underline: "hover:underline", // Underline on hover
     } as const,
   } as const,
