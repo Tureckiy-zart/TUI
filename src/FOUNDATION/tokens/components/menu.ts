@@ -92,7 +92,7 @@ export const MENU_TOKENS = {
       md: "px-md py-sm", // 16px horizontal, 8px vertical - maps to semanticSpacing.md/sm
     } as const,
     textStyle: "text-sm font-semibold", // Maps to fontSize.sm and fontWeight.semibold
-    textColor: "text-[hsl(var(--muted-foreground))]", // Muted foreground text color for labels
+    textColor: "text-[hsl(var(--tm-muted-foreground))]", // Muted foreground text color for labels
   } as const,
 
   /**

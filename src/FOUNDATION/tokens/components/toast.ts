@@ -61,7 +61,8 @@ export const TOAST_TOKENS = {
     info: "bg-info/10 border-info/20 text-info-foreground",
     warning: "bg-warning/10 border-warning/20 text-warning-foreground",
     danger: "bg-destructive/10 border-destructive/20 text-destructive-foreground",
-    default: "bg-background border border-border text-foreground",
+    default:
+      "bg-[hsl(var(--tm-surface-base))] border border-[hsl(var(--tm-border-default))] text-[hsl(var(--tm-text-primary))]",
   } as const,
 
   /**
@@ -164,8 +165,8 @@ export const TOAST_TOKENS = {
     padding: "p-xs", // Dismiss button padding
     transition: "transition-opacity", // Maps to MOTION_TOKENS.transition.opacity
     colors: {
-      default: "text-foreground/50", // Default text color with 50% opacity
-      hover: "hover:text-foreground", // Hover text color
+      default: "text-[hsl(var(--tm-text-primary))]/50", // Default text color with 50% opacity
+      hover: "hover:text-[hsl(var(--tm-text-primary))]", // Hover text color
     } as const,
     states: {
       default: "opacity-0", // Default opacity (hidden)

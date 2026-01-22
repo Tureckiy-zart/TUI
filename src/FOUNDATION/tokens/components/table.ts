@@ -91,7 +91,7 @@ export const TABLE_TOKENS = {
    * Uses semantic color tokens
    */
   colors: {
-    border: "border-border", // Border color
+    border: "border-[hsl(var(--tm-border-default))]", // Border color
     rowHover: "hover:bg-muted/50", // Row hover background
     rowSelected: "bg-muted", // Selected row background
   } as const,
@@ -116,7 +116,7 @@ export const TABLE_TOKENS = {
    * For sticky header positioning and styling
    */
   sticky: {
-    header: "sticky top-0 z-10 bg-background", // Sticky header styles
+    header: "sticky top-0 z-10 bg-[hsl(var(--tm-surface-base))]", // Sticky header styles
   } as const,
 
   /**

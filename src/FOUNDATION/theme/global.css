@@ -1,12 +1,12 @@
 @import "./colors.css";
 
 * {
-  border-color: hsl(var(--border));
+  border-color: hsl(var(--tm-border-default));
 }
 
 body {
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
+  color: hsl(var(--tm-text-primary));
+  background: hsl(var(--tm-surface-base));
 }
 
 /* Theme transition */
@@ -19,7 +19,7 @@ body {
 
 /* Focus styles */
 :focus-visible {
-  outline: var(--spacing-0-5) solid hsl(var(--ring));
+  outline: var(--spacing-0-5) solid hsl(var(--tm-focus-ring));
   outline-offset: var(--spacing-0-5);
 }
 
@@ -29,20 +29,20 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: hsl(var(--tm-muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground));
+  background: hsl(var(--tm-muted-foreground));
   border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--accent-foreground));
+  background: hsl(var(--tm-accent-foreground));
 }
 
 /* Selection styles */
 ::selection {
-  background: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
+  background: hsl(var(--tm-accent));
+  color: hsl(var(--tm-accent-foreground));
 }

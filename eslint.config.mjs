@@ -27,10 +27,6 @@ export default [
       "docs/**",
       ".cursor/**", // Cursor IDE configuration files
       "docs_archive/**",
-      "**/*.stories.tsx",
-      "**/*.stories.ts",
-      "**/*.stories.js",
-      "**/*.stories.jsx",
       "*.config.{ts,js,mjs,cjs}",
       "vite.config.ts",
       "tailwind.config.ts",
@@ -40,24 +36,26 @@ export default [
       "tools/**", // Build-time tools (theme-generator, etc.)
       "playwright/**", // Playwright test files - configuration and test code
       "eslint-rules/**", // ESLint rule files - configuration, not source code
-      "src/FOUNDATION/tokens/**", // Allow tokens to contain Tailwind classes (they're the source of truth)
       "**/legacy/**", // Legacy files are excluded from token compliance
-
-      // =================================================================
-      //  🧪 FULL TESTS EXCLUSION — исключить тесты из линтинга полностью
-      // =================================================================
-      "**/*.test.ts",
-      "**/*.test.tsx",
-      "**/*.spec.ts",
-      "**/*.spec.tsx",
-      "**/*.type-test.tsx", // Type-level tests for Foundation components
-      "**/__tests__/**",
-      "**/tests/**",
     ],
   },
   {
     name: "base",
     files: ["**/*.{ts,tsx}"],
+    ignores: [
+      "src/FOUNDATION/tokens/**",
+      "**/*.stories.tsx",
+      "**/*.stories.ts",
+      "**/*.stories.js",
+      "**/*.stories.jsx",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/*.type-test.tsx",
+      "**/__tests__/**",
+      "**/tests/**",
+    ],
     plugins: {
       react: reactPlugin,
       "react-hooks": reactHooks,
@@ -65,6 +63,7 @@ export default [
       "unused-imports": unusedImports,
       "@typescript-eslint": tseslint.plugin,
       "tenerife-ui-architecture": tenerifeUiArchitecture,
+      tm: tenerifeUiArchitecture,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -322,6 +321,13 @@ export default [
       "tenerife-ui-architecture/no-ad-hoc-lists": "error",
 
       // ═══════════════════════════════════════════════════════════
+      // TYPOGRAPHY COLOR POLICY ENFORCEMENT
+      // ═══════════════════════════════════════════════════════════
+
+      // Enforce Typography Color Policy v1 - forbid invalid role × text-token combinations
+      "tenerife-ui-architecture/typography-color-policy": "error",
+
+      // ═══════════════════════════════════════════════════════════
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES
       // ═══════════════════════════════════════════════════════════
 
@@ -436,7 +442,81 @@ export default [
         },
       ],
     },
-  }, // Prettier integration (disables conflicting ESLint rules)
+  },
+  {
+    name: "tm-legacy-css-vars",
+    files: ["src/**/*.{ts,tsx}"],
+    plugins: {
+      tm: tenerifeUiArchitecture,
+      "@typescript-eslint": tseslint.plugin,
+    },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        allowDefaultProject: true,
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    rules: {
+      "tm/no-legacy-css-vars": "error",
+    },
+  },
+  {
+    name: "tm-no-raw-tailwind-colors-tests",
+    files: ["src/**/*.{ts,tsx}"],
+    plugins: {
+      "tenerife-ui-architecture": tenerifeUiArchitecture,
+    },
+    rules: {
+      "tenerife-ui-architecture/no-raw-tailwind-colors": "error",
+    },
+  },
+  {
+    // ═══════════════════════════════════════════════════════════
+    // TEST FILES - MINIMAL CONFIGURATION
+    // ═══════════════════════════════════════════════════════════
+    // Test files need @typescript-eslint/no-unused-vars for eslint-disable comments
+    name: "test-files",
+    files: [
+      "**/*.test.{ts,tsx}",
+      "**/*.spec.{ts,tsx}",
+      "**/*.type-test.{ts,tsx}",
+      "**/__tests__/**/*.{ts,tsx}",
+      "**/tests/**/*.{ts,tsx}",
+    ],
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    rules: {
+      // Enable @typescript-eslint/no-unused-vars for test files
+      // This allows eslint-disable-next-line comments to work
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+  // Prettier integration (disables conflicting ESLint rules)
   prettierConfig,
   ...storybook.configs["flat/recommended"],
 ];

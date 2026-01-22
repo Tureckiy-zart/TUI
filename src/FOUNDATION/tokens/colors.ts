@@ -328,12 +328,12 @@ export const cssVariableColorTokens: Record<Mode, ColorTokens> = {
     primaryForeground: "hsl(var(--tm-primary-foreground))",
     secondary: "hsl(var(--tm-secondary))",
     secondaryForeground: "hsl(var(--tm-secondary-foreground))",
-    muted: "hsl(var(--muted))",
-    mutedForeground: "hsl(var(--muted-foreground))",
+    muted: "hsl(var(--tm-muted))",
+    mutedForeground: "hsl(var(--tm-muted-foreground))",
     accent: "hsl(var(--tm-accent))",
     accentForeground: "hsl(var(--tm-accent-foreground))",
-    destructive: `hsl(${semanticColors.day.error})`,
-    destructiveForeground: semanticColors.day.errorForeground,
+    destructive: "hsl(var(--tm-destructive))",
+    destructiveForeground: "hsl(var(--tm-destructive-foreground))",
     chart1: `hsl(${chartColors.day.chart1})`,
     chart2: `hsl(${chartColors.day.chart2})`,
     chart3: `hsl(${chartColors.day.chart3})`,
@@ -346,12 +346,12 @@ export const cssVariableColorTokens: Record<Mode, ColorTokens> = {
     primaryForeground: "hsl(var(--tm-primary-foreground))",
     secondary: "hsl(var(--tm-secondary))",
     secondaryForeground: "hsl(var(--tm-secondary-foreground))",
-    muted: "hsl(var(--muted))",
-    mutedForeground: "hsl(var(--muted-foreground))",
+    muted: "hsl(var(--tm-muted))",
+    mutedForeground: "hsl(var(--tm-muted-foreground))",
     accent: "hsl(var(--tm-accent))",
     accentForeground: "hsl(var(--tm-accent-foreground))",
-    destructive: `hsl(${semanticColors.night.error})`,
-    destructiveForeground: semanticColors.night.errorForeground,
+    destructive: "hsl(var(--tm-destructive))",
+    destructiveForeground: "hsl(var(--tm-destructive-foreground))",
     chart1: `hsl(${chartColors.night.chart1})`,
     chart2: `hsl(${chartColors.night.chart2})`,
     chart3: `hsl(${chartColors.night.chart3})`,
@@ -423,19 +423,19 @@ export const colorCSSVariables = {
  */
 export const tailwindThemeColors = {
   // Base colors
-  background: "hsl(var(--background))",
-  foreground: "hsl(var(--foreground))",
+  background: "hsl(var(--tm-surface-base))",
+  foreground: "hsl(var(--tm-text-primary))",
 
   // Card colors
   card: {
-    DEFAULT: "hsl(var(--card))",
-    foreground: "hsl(var(--card-foreground))",
+    DEFAULT: "hsl(var(--tm-surface-raised))",
+    foreground: "hsl(var(--tm-text-primary))",
   },
 
   // Popover colors
   popover: {
-    DEFAULT: "hsl(var(--popover))",
-    foreground: "hsl(var(--popover-foreground))",
+    DEFAULT: "hsl(var(--tm-surface-overlay))",
+    foreground: "hsl(var(--tm-text-primary))",
   },
 
   // Primary colors (using CSS variables)
@@ -491,8 +491,8 @@ export const tailwindThemeColors = {
 
   // Muted colors
   muted: {
-    DEFAULT: "hsl(var(--muted))",
-    foreground: "hsl(var(--muted-foreground))",
+    DEFAULT: "hsl(var(--tm-muted))",
+    foreground: "hsl(var(--tm-muted-foreground))",
   },
 
   // Disabled colors
@@ -503,8 +503,8 @@ export const tailwindThemeColors = {
 
   // Destructive colors (semantic error)
   destructive: {
-    DEFAULT: "hsl(var(--destructive))",
-    foreground: "hsl(var(--destructive-foreground))",
+    DEFAULT: "hsl(var(--tm-destructive))",
+    foreground: "hsl(var(--tm-destructive-foreground))",
   },
 
   // Semantic colors
@@ -527,29 +527,29 @@ export const tailwindThemeColors = {
 
   // Surface colors
   surface: {
-    base: `hsl(var(--surface-base))`,
-    elevated1: `hsl(var(--surface-elevated1))`,
-    elevated2: `hsl(var(--surface-elevated2))`,
-    elevated3: `hsl(var(--surface-elevated3))`,
-    overlay: `hsl(var(--surface-overlay))`,
-    glass: `hsl(var(--surface-glass))`,
+    base: `hsl(var(--tm-surface-base))`,
+    elevated1: `hsl(var(--tm-surface-raised))`,
+    elevated2: `hsl(var(--tm-surface-raised))`,
+    elevated3: `hsl(var(--tm-surface-raised))`,
+    overlay: `hsl(var(--tm-surface-overlay))`,
+    glass: `hsl(var(--tm-surface-overlay))`,
   },
 
   // Text colors
   text: {
-    primary: `hsl(var(--text-primary))`,
-    secondary: `hsl(var(--text-secondary))`,
-    tertiary: `hsl(var(--text-tertiary))`,
-    muted: `hsl(var(--text-[hsl(var(--tm-text-muted))]))`,
-    destructive: `hsl(var(--destructive))`,
+    primary: `hsl(var(--tm-text-primary))`,
+    secondary: `hsl(var(--tm-text-secondary))`,
+    tertiary: `hsl(var(--tm-text-muted))`,
+    muted: `hsl(var(--tm-text-muted))`,
+    destructive: `hsl(var(--tm-destructive))`,
     accent: `hsl(var(--tm-accent))`,
-    inverse: `hsl(var(--text-inverse))`,
+    inverse: `hsl(var(--tm-text-inverse))`,
   },
 
   // Border and input
-  border: "hsl(var(--border))",
-  input: "hsl(var(--input))",
-  ring: "hsl(var(--ring))",
+  border: "hsl(var(--tm-border-default))",
+  input: "hsl(var(--tm-border-default))",
+  ring: "hsl(var(--tm-focus-ring))",
 
   // Chart colors (using CSS variables)
   chart: {

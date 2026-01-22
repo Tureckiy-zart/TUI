@@ -1348,6 +1348,42 @@ Any token system modifications require:
 
 ---
 
+## 🔒 TM-Only Runtime Lock
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Runtime CSS variable model, theme injection, token runtime contract  
+**Authority:** REQUIRED_THEME_TOKENS (`src/FOUNDATION/tokens/required-tokens.ts`)
+
+**Verification:** `docs/reports/TM_ONLY_RUNTIME_VERIFICATION_003.md`  
+**Runtime Evidence:**  
+- `docs/reports/runtime-css-vars.snapshot.txt` (Day)  
+- `docs/reports/runtime-css-vars.night.snapshot.txt` (Night)  
+- `docs/reports/runtime-css-vars.check.txt` (legacy/missing/empty verification)  
+- `docs/reports/runtime-css-vars.diff.txt` (Day ↔ Night diff)  
+- `docs/reports/a11y-contrast.output.txt` (A11Y contrast stdout+stderr)
+
+**Accepted A11Y Exception:** `night:button.destructive.disabled` (contrast 4.39:1, see `docs/architecture/locks/A11Y_LOCK.md`)
+
+**Enforcement:** ESLint rule `tm/no-legacy-css-vars` (P0, error, **ENFORCED_STRICT**)
+**Detection Contract:** только реальные `var(--x)` usage; unknown prefix suffix → error without autofix
+
+### Rules (Binding)
+
+1. **Единственный допустимый runtime contract:** `--tm-*`
+2. **REQUIRED_THEME_TOKENS = runtime truth** (полный и единственный список обязательных color/runtime токенов)
+3. **Запрещены legacy vars** (`--background`, `--muted`, `--destructive`, `--surface-*`, `--text-*`, `--border`, `--input`, `--ring`, и аналоги)
+4. **Запрещены alias bridge и fallback mapping** (любые параллельные token-каналы)
+5. **Изменения runtime tokens** допускаются только через новый TUNG + verification + lock update
+
+### Locked Subjects
+
+- Runtime CSS variable model
+- Theme injection (`applyMode.ts`)
+- `colors.ts` adapter contract (tm-only)
+- Global CSS token usage (tm-only)
+
+---
+
 ## 🔒 Interaction Authority Lock Status
 
 **Status:** ✅ **LOCKED**  
@@ -2420,5 +2456,3 @@ New functionality must be built as **Extensions** that compose Foundation compon
 **Priority:** CRITICAL  
 **Architecture Phase:** FOUNDATION **COMPLETE**
 **Next Review:** **NEVER** (Foundation is immutable)
-
-

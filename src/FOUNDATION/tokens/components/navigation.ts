@@ -106,7 +106,7 @@ export const NAVIGATION_TOKENS = {
   states: {
     default: {
       background: "bg-transparent",
-      text: "text-foreground",
+      text: "text-[hsl(var(--tm-text-primary))]",
       border: "border-transparent",
     },
     hover: {

@@ -345,6 +345,15 @@ export const textStyles = {
     lineHeight: lineHeight.normal,
     letterSpacing: letterSpacing.wide,
   },
+
+  // Meta styles (for helper, placeholder, metadata text)
+  meta: {
+    fontFamily: fontFamily.sans.join(", "),
+    fontSize: fontSize.sm[0],
+    fontWeight: fontWeight.normal,
+    lineHeight: lineHeight.normal,
+    letterSpacing: letterSpacing.wide,
+  },
 } as const;
 
 /**
@@ -479,8 +488,9 @@ export type CanonicalLetterSpacing = "tight" | "normal" | "wide";
 /**
  * Canonical text color tokens
  * Semantic text colors for typography components
+ * @see docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md
  */
-export type CanonicalTextColor = "primary" | "secondary" | "muted" | "destructive" | "accent";
+export type CanonicalTextColor = "primary" | "secondary" | "muted" | "inverse" | "disabled";
 
 /**
  * Font size mapping for md (maps to base)
@@ -489,6 +499,163 @@ export const fontSizeWithMd = {
   ...fontSize,
   md: fontSize.base,
 } as const;
+
+/**
+ * Typography Role Policy
+ * Defines allowed text tokens for each typography role
+ * @see docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md
+ */
+export type TypographyRoleMetadata = {
+  allowedText: readonly CanonicalTextColor[];
+  minContrast: number | "inherits";
+  category?: "display" | "heading" | "body" | "label" | "caption" | "meta" | "disabled";
+  notes?: string;
+};
+
+export const typographyRolePolicy = {
+  display: {
+    allowedText: ["primary", "inverse"] as const,
+    minContrast: 3.0,
+    category: "display" as const,
+    notes: "inverse only on dark surfaces",
+  },
+  h1: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  h2: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  h3: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  h4: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  h5: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  h6: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 3.0,
+    category: "heading" as const,
+  },
+  body: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 4.5,
+    category: "body" as const,
+  },
+  "body-sm": {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 4.5,
+    category: "body" as const,
+  },
+  "body-xs": {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 4.5,
+    category: "body" as const,
+  },
+  label: {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 4.5,
+    category: "label" as const,
+  },
+  "label-sm": {
+    allowedText: ["primary", "secondary"] as const,
+    minContrast: 4.5,
+    category: "label" as const,
+  },
+  caption: {
+    allowedText: ["primary"] as const,
+    minContrast: 4.5,
+    category: "caption" as const,
+  },
+  meta: {
+    allowedText: ["muted"] as const,
+    minContrast: 4.5,
+    category: "meta" as const,
+  },
+  disabled: {
+    allowedText: ["disabled"] as const,
+    minContrast: "inherits" as const,
+    category: "disabled" as const,
+    notes: "follows A11Y disabled policy",
+  },
+} as const satisfies Record<keyof typeof textStyles | "disabled", TypographyRoleMetadata>;
+
+/**
+ * Typography Role Policy Type Helpers
+ * Type-level enforcement for Typography Color Policy v1
+ * @see docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md
+ */
+
+/**
+ * Typography Role union type
+ * All valid typography roles
+ */
+export type TypographyRole = keyof typeof typographyRolePolicy;
+
+/**
+ * Text Token union type
+ * All valid text color tokens
+ */
+export type TextToken = CanonicalTextColor;
+
+/**
+ * Role-to-Allowed-Text mapping type
+ * Maps each role to its allowed text tokens
+ */
+export type RoleAllowedTextMap = {
+  [K in TypographyRole]: (typeof typographyRolePolicy)[K]["allowedText"][number];
+};
+
+/**
+ * Helper type: Get allowed text tokens for a role
+ * @example
+ * type DisplayAllowed = AllowedTextForRole<"display">; // "primary" | "inverse"
+ * type BodyAllowed = AllowedTextForRole<"body">; // "primary" | "secondary"
+ */
+export type AllowedTextForRole<R extends TypographyRole> =
+  (typeof typographyRolePolicy)[R]["allowedText"][number];
+
+/**
+ * Helper type: Check if text token is allowed for role
+ * @example
+ * type Valid = IsAllowedTextToken<"body", "primary">; // true
+ * type Invalid = IsAllowedTextToken<"caption", "secondary">; // false
+ */
+export type IsAllowedTextToken<R extends TypographyRole, T extends TextToken> =
+  T extends AllowedTextForRole<R> ? true : false;
+
+/**
+ * Conditional type: RoleTextToken
+ * Only allows text tokens that are valid for the given role
+ * @example
+ * type BodyTextToken = RoleTextToken<"body">; // "primary" | "secondary"
+ * type CaptionTextToken = RoleTextToken<"caption">; // "primary"
+ */
+export type RoleTextToken<R extends TypographyRole> = AllowedTextForRole<R>;
+
+/**
+ * Runtime helper: Check if text token is allowed for role
+ * @param role - Typography role
+ * @param token - Text color token
+ * @returns true if token is allowed for role, false otherwise
+ */
+export function isAllowedTextToken(role: TypographyRole, token: TextToken): boolean {
+  const policy = typographyRolePolicy[role];
+  if (!policy) return false;
+  return (policy.allowedText as readonly string[]).includes(token);
+}
 
 /**
  * Type Exports

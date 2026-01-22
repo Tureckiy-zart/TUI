@@ -163,6 +163,7 @@ The following A11Y System components are **LOCKED** and **IMMUTABLE**:
 - Disabled policy fixed
 - Link hover canon enforced
 - A11Y contrast tooling aligned with runtime
+- TM-only runtime token source enforced (no legacy CSS var bridge)
 - Semantic color palette optimized to WCAG limits
 - 1 accepted exception documented (night:button.destructive.disabled)
 
@@ -402,4 +403,3 @@ Contrast is no longer an active development area.
 **Last Updated:** 2026-01-21  
 **Version:** 1.1  
 **Lock Status:** ✅ **LOCKED** - All components meet accessibility standards. All GAPs are ACCEPTABLE. A11Y contrast system is architecturally locked with 1 accepted exception. System is immutable.
-

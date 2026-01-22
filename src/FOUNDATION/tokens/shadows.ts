@@ -97,7 +97,7 @@ export const glowEffects = {
  * Used for keyboard focus indicators (accessibility)
  */
 export const focusRings = {
-  default: "0 0 0 3px hsl(var(--ring) / 0.5)",
+  default: "0 0 0 3px hsl(var(--tm-focus-ring) / 0.5)",
   primary: "0 0 0 3px hsl(var(--primary-500) / 0.3)",
   accent: "0 0 0 3px hsl(var(--accent-500) / 0.3)",
   "focus-primary": "0 0 0 3px hsl(var(--primary-500) / 0.3)",
@@ -250,7 +250,7 @@ export const tailwindShadowConfig = {
 
   // Ring color (for focus rings)
   ringColor: {
-    DEFAULT: "hsl(var(--ring) / 0.5)",
+    DEFAULT: "hsl(var(--tm-focus-ring) / 0.5)",
     primary: "hsl(var(--primary-500) / 0.3)",
     accent: "hsl(var(--accent-500) / 0.3)",
     "focus-primary": "hsl(var(--primary-500) / 0.3)",

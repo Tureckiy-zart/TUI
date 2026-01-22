@@ -181,7 +181,7 @@ export const FILE_UPLOAD_TOKENS = {
    */
   message: {
     error: {
-      textColor: "text-[hsl(var(--destructive))]", // Error message text color
+      textColor: "text-[hsl(var(--tm-destructive))]", // Error message text color
     },
   } as const,
 } as const;

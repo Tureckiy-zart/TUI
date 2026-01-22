@@ -192,13 +192,14 @@ export const GRADIENT_TOKENS = {
      */
     dark: "bg-gradient-to-br from-black/10 to-black/5",
     /**
-     * Frost glass gradient: surface-glass with varying opacity
-     * Used for frosted glass effects using surface-glass token
+     * Frost glass gradient: tm-surface-overlay with varying opacity
+     * Used for frosted glass effects using surface overlay token
      * Uses arbitrary values with CSS variables
-     * Note: Since --surface-glass already contains opacity, we use it directly
+     * DERIVED (visual-only): This is a visual-only derived token that references --tm-surface-overlay
      * For gradient effect, we create a subtle transition using the same color
      */
-    frost: "bg-gradient-to-br from-[hsl(var(--surface-glass))] to-[hsl(var(--surface-glass))]",
+    frost:
+      "bg-gradient-to-br from-[hsl(var(--tm-surface-overlay))] to-[hsl(var(--tm-surface-overlay))]",
   } as const,
 
   /**
@@ -258,17 +259,17 @@ export const GRADIENT_TOKENS = {
     primary:
       "bg-gradient-to-r from-[hsl(var(--tm-primary))] via-[hsl(var(--tm-primary))] to-transparent",
     /**
-     * Muted ring gradient: muted-foreground → muted-foreground → transparent
+     * Muted ring gradient: tm-muted-foreground → tm-muted-foreground → transparent
      * Used for muted ring spinners and subtle loading indicators
      */
     muted:
-      "bg-gradient-to-r from-[hsl(var(--muted-foreground))] via-[hsl(var(--muted-foreground))] to-transparent",
+      "bg-gradient-to-r from-[hsl(var(--tm-muted-foreground))] via-[hsl(var(--tm-muted-foreground))] to-transparent",
     /**
-     * Subtle ring gradient: muted-foreground → muted-foreground → transparent
+     * Subtle ring gradient: tm-muted-foreground → tm-muted-foreground → transparent
      * Used for subtle ring spinners and minimal loading indicators
      */
     subtle:
-      "bg-gradient-to-r from-[hsl(var(--muted-foreground))] via-[hsl(var(--muted-foreground))] to-transparent",
+      "bg-gradient-to-r from-[hsl(var(--tm-muted-foreground))] via-[hsl(var(--tm-muted-foreground))] to-transparent",
   } as const,
 } as const;
 

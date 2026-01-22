@@ -211,10 +211,10 @@ export function getButtonStateMatrix(
 
   // Outline states: use accent colors for hover/active, muted for disabled
   const outlineHoverBg = accentColors[600]; // Accent background on hover
-  const outlineHoverText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
+  const outlineHoverText = mode === "day" ? textColors[mode].inverse : textColors.night.primary; // White for day (onAccent), light gray for night
   const outlineHoverBorder = accentColors[600]; // Accent border
   const outlineActiveBg = accentColors[700]; // Darker accent for active
-  const outlineActiveText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
+  const outlineActiveText = mode === "day" ? textColors[mode].inverse : textColors.night.primary; // White for day (onAccent), light gray for night
   const outlineActiveBorder = accentColors[700];
   const outlineDisabledBg = baseColors.background; // Unchanged background
   const outlineDisabledText = baseColors.foreground; // Muted foreground
@@ -225,6 +225,9 @@ export function getButtonStateMatrix(
   const ghostHoverText = baseColors.foreground; // Foreground text
   const ghostActiveBg = surfaceColors.elevated2; // Darker muted for active
   const ghostActiveText = baseColors.foreground;
+  // EXPLICIT_EXCEPTION: transparent literal for ghost disabled background
+  // Transparent is the only allowed literal value for backgrounds (per token policy)
+  // This cannot be replaced with a token as it represents the absence of background
   const ghostDisabledBg = "transparent"; // Transparent background
   const ghostDisabledText = baseColors.foreground; // Muted foreground
 
@@ -244,7 +247,7 @@ export function getButtonStateMatrix(
           background: primaryHover,
           text:
             mode === "day"
-              ? "0 0% 100%"
+              ? textColors.day.inverse
               : selectTextColorByBackground(
                   primaryHover,
                   baseColors.foreground,
@@ -256,7 +259,7 @@ export function getButtonStateMatrix(
           background: primaryActive,
           text:
             mode === "day"
-              ? "0 0% 100%"
+              ? textColors.day.inverse
               : selectTextColorByBackground(
                   primaryActive,
                   baseColors.foreground,

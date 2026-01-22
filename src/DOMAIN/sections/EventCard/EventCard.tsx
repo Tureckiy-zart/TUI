@@ -176,7 +176,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}
@@ -189,7 +189,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
                   />
-                  <Text size="xs" tone="muted">
+                  <Text size="xs" typographyRole="meta" color="muted">
                     <time dateTime={date}>{date}</time>
                   </Text>
                 </div>
@@ -200,7 +200,7 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
                   />
-                  <Text size="xs" tone="muted">
+                  <Text size="xs" typographyRole="meta" color="muted">
                     <address>{venueName}</address>
                   </Text>
                 </div>

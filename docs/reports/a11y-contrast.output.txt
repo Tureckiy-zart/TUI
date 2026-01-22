@@ -1,0 +1,7 @@
+
+> @tenerife.music/ui@2.1.0 a11y:contrast /home/tureckiy/Projects/TenerifeMusic/tenerife-ui
+> tsx scripts/a11y-contrast-check.js
+
+❌ Accessibility contrast violations detected:
+ - night:button.destructive.disabled text: 4.39 (expected ≥ 4.5)
+ ELIFECYCLE  Command failed with exit code 1.

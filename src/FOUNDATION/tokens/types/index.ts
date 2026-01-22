@@ -80,7 +80,7 @@ export type ShadowToken =
 /**
  * Semantic color token keys
  * Only semantic colors are allowed (no raw palette colors)
- * These map to CSS variables like --background, --primary, etc.
+ * These map to CSS variables like --tm-surface-base, --tm-primary, etc.
  * Semantic colors map to --semantic-* CSS variables
  */
 export type ColorToken =

@@ -290,6 +290,8 @@ describe("tokenCVA", () => {
 
       const props: VariantProps = { size: "sm" };
       expect(props).toBeDefined();
+      // Call the function to verify it works, not just for type checking
+      expect(variants(props)).toBeDefined();
     });
   });
 

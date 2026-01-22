@@ -62,6 +62,7 @@
     "test:a11y": "vitest run a11y.test",
     "test:focus": "playwright test --config=playwright/playwright.config.ts",
     "a11y:contrast": "tsx scripts/a11y-contrast-check.js",
+    "typography:contrast-check": "node scripts/typography-contrast-check.js",
     "lint": "eslint . --ext .ts,.tsx --fix --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**' --ignore-pattern 'docs_archive/**'",
     "lint:check": "eslint . --ext .ts,.tsx --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**' --ignore-pattern 'docs_archive/**'",
     "lint:ci": "bash ./scripts/lint-ci.sh",
