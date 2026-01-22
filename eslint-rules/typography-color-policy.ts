@@ -414,9 +414,10 @@ export default createRule<Options, MessageIds>({
 
         if (!isTextComponent) return;
 
-        // Find typographyRole and color attributes
+        // Find typographyRole, color, and tone attributes
         let typographyRole: string | null = null;
         let color: string | null = null;
+        let tone: string | null = null;
 
         for (const attr of node.attributes) {
           if (attr.type !== "JSXAttribute") continue;
@@ -444,26 +445,38 @@ export default createRule<Options, MessageIds>({
             ) {
               color = attr.value.expression.value;
             }
+          } else if (attrName === "tone") {
+            if (attr.value?.type === "Literal" && typeof attr.value.value === "string") {
+              tone = attr.value.value;
+            } else if (
+              attr.value?.type === "JSXExpressionContainer" &&
+              attr.value.expression.type === "Literal" &&
+              typeof attr.value.expression.value === "string"
+            ) {
+              tone = attr.value.expression.value;
+            }
           }
         }
 
-        // Check if typographyRole and color combination is valid
-        if (typographyRole && color) {
-          if (isForbiddenCombination(typographyRole, color)) {
+        const effectiveColor = color ?? tone;
+
+        // Check if typographyRole and color/tone combination is valid
+        if (typographyRole && effectiveColor) {
+          if (isForbiddenCombination(typographyRole, effectiveColor)) {
             const allowed = ROLE_ALLOWED_TEXT[typographyRole]?.join(", ") || "none";
             context.report({
               node,
               messageId: "forbiddenCombination",
               data: {
                 role: typographyRole,
-                color,
+                color: effectiveColor,
                 allowed,
               },
             });
           }
 
           // Check muted for readable roles
-          if (color === "muted" && isReadableRole(typographyRole)) {
+          if (effectiveColor === "muted" && isReadableRole(typographyRole)) {
             context.report({
               node,
               messageId: "mutedForReadable",
@@ -471,7 +484,7 @@ export default createRule<Options, MessageIds>({
           }
 
           // Check tertiary for readable roles
-          if (color === "tertiary" && isReadableRole(typographyRole)) {
+          if (effectiveColor === "tertiary" && isReadableRole(typographyRole)) {
             context.report({
               node,
               messageId: "tertiaryForReadable",

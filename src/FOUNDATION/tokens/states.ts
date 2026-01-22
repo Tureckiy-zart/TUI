@@ -234,8 +234,20 @@ export function getButtonStateMatrix(
   // Destructive states: use error colors from semantic tokens
   const destructiveHover = semanticColors[mode].error; // Error color for hover
   const destructiveActive = semanticColors[mode].error; // Error color for active
-  const destructiveDisabledBg = semanticColors[mode].error; // Error color
-  const destructiveDisabledText = semanticColors[mode].errorForeground; // Error foreground
+  // For disabled, use darker error variant to ensure WCAG AA contrast
+  // Parse error color and reduce lightness for disabled state
+  const errorParts = semanticColors[mode].error.trim().split(/\s+/);
+  const errorH = errorParts[0] || "0";
+  const errorS = errorParts[1] || "78.5%";
+  const errorL = parseFloat((errorParts[2] || "54%").replace("%", ""));
+  // Reduce lightness by 20% for disabled to ensure WCAG AA contrast ≥4.5:1
+  const destructiveDisabledBg = `${errorH} ${errorS} ${Math.max(10, errorL - 20)}%`;
+  const destructiveDisabledText = selectTextColorByBackground(
+    destructiveDisabledBg,
+    baseColors.foreground,
+    textColors[mode].inverse,
+    mode,
+  ); // Disabled text selected by background lightness for WCAG AA contrast
 
   return {
     button: {
