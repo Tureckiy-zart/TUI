@@ -307,8 +307,8 @@ export const LINK_TOKENS = {
      */
     outline: {
       border: "border border-input", // Input border using CSS var
-      background: "bg-background", // Background using CSS var
-      text: "text-foreground", // Foreground text using CSS var
+      background: "bg-[hsl(var(--tm-surface-base))]", // Background using CSS var
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text using CSS var
       hover: {
         background: "hover:bg-accent", // Hover background
         text: "hover:text-accent-foreground", // Hover text
@@ -321,7 +321,7 @@ export const LINK_TOKENS = {
      */
     ghost: {
       background: "bg-muted/10", // Light background for better contrast on dark surfaces
-      text: "text-foreground", // Foreground text using CSS var
+      text: "text-[hsl(var(--tm-text-primary))]", // Foreground text using CSS var
       hover: {
         background: "hover:bg-accent", // Hover background
         text: "hover:text-accent-foreground", // Hover text

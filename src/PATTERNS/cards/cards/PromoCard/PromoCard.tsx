@@ -156,7 +156,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}

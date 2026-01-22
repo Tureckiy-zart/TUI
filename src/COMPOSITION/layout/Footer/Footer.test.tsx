@@ -59,7 +59,7 @@ describe("Footer component", () => {
     const { container } = render(<Footer bg="muted">Content</Footer>);
     const footerEl = container.querySelector("footer");
     expect(footerEl).toHaveStyle({
-      backgroundColor: "var(--muted)",
+      backgroundColor: "var(--tm-muted)",
     });
   });
 
@@ -116,7 +116,7 @@ describe("Footer component", () => {
     const { container } = render(<Footer>Content</Footer>);
     const footerEl = container.querySelector("footer");
     expect(footerEl).toHaveStyle({
-      backgroundColor: "var(--background)",
+      backgroundColor: "var(--tm-surface-base)",
     });
   });
 
@@ -131,7 +131,7 @@ describe("Footer component", () => {
     expect(footerEl).toHaveClass("px-md", "py-lg");
     // Background color should be in inline styles
     expect(footerEl).toHaveStyle({
-      backgroundColor: "var(--muted)",
+      backgroundColor: "var(--tm-muted)",
     });
     // User style should be merged (color should be present, browser converts "red" to rgb)
     const computedColor = window.getComputedStyle(footerEl!).color;

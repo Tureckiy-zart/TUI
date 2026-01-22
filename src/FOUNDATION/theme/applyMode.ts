@@ -128,16 +128,7 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     return; // Cannot proceed without tokens
   }
 
-  const {
-    primaryColors,
-    accentColors,
-    secondaryColors,
-    baseColors,
-    surfaceColors,
-    semanticColors,
-    textColors,
-    chartColors,
-  } = tokens;
+  const { primaryColors, accentColors, secondaryColors, semanticColors, chartColors } = tokens;
 
   const tmRuntimeValues = buildTmRuntimeValues(mode, tokens);
 
@@ -177,34 +168,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
   }
 
   // Wrap each color group in try-catch to ensure all variables are set even if one group fails
-  // Base colors (from merged tokens) - CRITICAL: must be set first
-  try {
-    const base = baseColors[mode];
-    root.style.setProperty("--background", base.background);
-    root.style.setProperty("--foreground", base.foreground);
-    root.style.setProperty("--card", base.card);
-    root.style.setProperty("--card-foreground", base.cardForeground);
-    root.style.setProperty("--popover", base.popover);
-    root.style.setProperty("--popover-foreground", base.popoverForeground);
-    root.style.setProperty("--border", base.border);
-    root.style.setProperty("--input", base.input);
-    root.style.setProperty("--ring", base.ring);
-  } catch (error) {
-    console.error("[Theme] Failed to set base colors:", error);
-  }
-
-  // Surface colors (from merged tokens)
-  try {
-    const surface = surfaceColors[mode];
-    root.style.setProperty("--surface-base", surface.base);
-    root.style.setProperty("--surface-elevated1", surface.elevated1);
-    root.style.setProperty("--surface-elevated2", surface.elevated2);
-    root.style.setProperty("--surface-elevated3", surface.elevated3);
-    root.style.setProperty("--surface-overlay", surface.overlay);
-    root.style.setProperty("--surface-glass", surface.glass);
-  } catch (error) {
-    console.error("[Theme] Failed to set surface colors:", error);
-  }
 
   // Semantic colors (from merged tokens)
   try {
@@ -219,18 +182,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--semantic-info-foreground", semantic.infoForeground);
   } catch (error) {
     console.error("[Theme] Failed to set semantic colors:", error);
-  }
-
-  // Text colors (from merged tokens)
-  try {
-    const text = textColors[mode];
-    root.style.setProperty("--text-primary", text.primary);
-    root.style.setProperty("--text-secondary", text.secondary);
-    root.style.setProperty("--text-tertiary", text.tertiary);
-    root.style.setProperty("--text-[hsl(var(--tm-text-muted))]", text.muted);
-    root.style.setProperty("--text-inverse", text.inverse);
-  } catch (error) {
-    console.error("[Theme] Failed to set text colors:", error);
   }
 
   // Chart colors (from merged tokens)
@@ -294,35 +245,6 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
     root.style.setProperty("--secondary-950", secondaryColors[950]);
   } catch (error) {
     console.error("[Theme] Failed to set secondary color scale:", error);
-  }
-
-  // Muted colors (from merged tokens)
-  try {
-    const base = baseColors[mode];
-    root.style.setProperty("--muted", base.card);
-    root.style.setProperty("--muted-foreground", base.cardForeground);
-  } catch (error) {
-    console.error("[Theme] Failed to set muted colors:", error);
-  }
-
-  // Accent aliases (for compatibility with components using --accent and --accent-foreground)
-  // These are aliases for --tm-accent and --tm-accent-foreground
-  try {
-    const accentValue = mode === "day" ? accentColors[600] : "240 10% 10%";
-    const accentForegroundValue = mode === "day" ? "0 0% 100%" : "0 0% 89.8%";
-    root.style.setProperty("--accent", accentValue);
-    root.style.setProperty("--accent-foreground", accentForegroundValue);
-  } catch (error) {
-    console.error("[Theme] Failed to set accent aliases:", error);
-  }
-
-  // Destructive colors (from merged semantic error) - CRITICAL
-  try {
-    const semantic = semanticColors[mode];
-    root.style.setProperty("--destructive", semantic.error);
-    root.style.setProperty("--destructive-foreground", semantic.errorForeground);
-  } catch (error) {
-    console.error("[Theme] Failed to set destructive colors:", error);
   }
 
   // Motion CSS variables

@@ -96,7 +96,7 @@ describe("Box component", () => {
   it("should apply background color using CSS variables", () => {
     const { container } = render(<Box bg="background">Content</Box>);
     const box = container.firstChild as HTMLElement;
-    expect(box).toHaveStyle({ backgroundColor: "var(--background)" });
+    expect(box).toHaveStyle({ backgroundColor: "var(--tm-surface-base)" });
   });
 
   it("should apply border radius using tokens", () => {
@@ -204,7 +204,7 @@ describe("Box component", () => {
       };
       expect(boxProps).toBeDefined();
       // @ts-expect-error - display should not exist
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       const _display = boxProps.display;
     });
 
@@ -214,7 +214,7 @@ describe("Box component", () => {
         py: "md",
       };
       // @ts-expect-error - flexDirection should not exist
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       const _flexDirection = boxProps.flexDirection;
     });
 
@@ -224,7 +224,7 @@ describe("Box component", () => {
         py: "md",
       };
       // @ts-expect-error - gap should not exist
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       const _gap = boxProps.gap;
     });
 
@@ -234,7 +234,7 @@ describe("Box component", () => {
         py: "md",
       };
       // @ts-expect-error - align should not exist
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       const _align = boxProps.align;
     });
 
@@ -244,7 +244,7 @@ describe("Box component", () => {
         py: "md",
       };
       // @ts-expect-error - justify should not exist
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       const _justify = boxProps.justify;
     });
 
@@ -261,7 +261,7 @@ describe("Box component", () => {
         paddingTop: "var(--spacing-md)",
         paddingBottom: "var(--spacing-md)",
         margin: "var(--spacing-sm)",
-        backgroundColor: "var(--background)",
+        backgroundColor: "var(--tm-surface-base)",
         borderRadius: "var(--radius-lg)",
       });
       expect(box).toHaveClass("shadow-md");

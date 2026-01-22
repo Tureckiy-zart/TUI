@@ -66,7 +66,7 @@ describe("Icon", () => {
       render(<Icon name="search" color="default" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass("text-foreground");
+      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]");
     });
 
     it("renders with muted color", () => {
@@ -107,7 +107,7 @@ describe("Icon", () => {
     it("uses default color when color prop not provided", () => {
       render(<Icon name="search" data-testid="icon" />);
       const icon = screen.getByTestId("icon");
-      expect(icon).toHaveClass("text-foreground"); // default is default
+      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]"); // default is default
     });
   });
 
@@ -211,7 +211,7 @@ describe("Icon", () => {
       const icon = screen.getByTestId("icon");
       expect(icon).toBeInTheDocument();
       expect(icon).toHaveClass("h-4", "w-4"); // md size (default)
-      expect(icon).toHaveClass("text-foreground"); // default color
+      expect(icon).toHaveClass("text-[hsl(var(--tm-text-primary))]"); // default color
       expect(icon).toHaveClass("stroke-[1.5px]"); // normal stroke (default)
     });
   });

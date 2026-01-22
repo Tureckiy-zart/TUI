@@ -118,7 +118,7 @@ describe("useInView", () => {
     try {
       const hookResult = renderHook(() => useInView());
       result = hookResult.result.current;
-    } catch (error) {
+    } catch {
       // If rendering fails due to React DOM requiring window, that's expected
       // We just verify the hook logic doesn't crash
     }

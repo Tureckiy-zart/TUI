@@ -47,7 +47,7 @@ export const ICON_TOKENS = {
    * Maps to semantic text color tokens
    */
   colors: {
-    default: "text-foreground", // Default foreground color
+    default: "text-[hsl(var(--tm-text-primary))]", // Default foreground color
     muted: "text-[hsl(var(--tm-text-muted))]", // Muted foreground color
     success: "text-success", // Semantic success color
     warning: "text-warning", // Semantic warning color

@@ -64,7 +64,7 @@ export const SIMPLETABLE_TOKENS = {
    */
   border: {
     bottom: "border-b", // Border bottom for rows and headers
-    color: "border-border", // Border color
+    color: "border-[hsl(var(--tm-border-default))]", // Border color
   } as const,
 
   /**

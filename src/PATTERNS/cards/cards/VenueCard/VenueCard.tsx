@@ -186,7 +186,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}
@@ -202,7 +202,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                     className={ICON_TOKENS.sizes.sm}
                     aria-hidden="true"
                   />
-                  <Text size="xs" tone="muted">
+                  <Text size="xs" typographyRole="meta" color="muted">
                     {location}
                   </Text>
                 </div>
@@ -255,7 +255,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                         className={ICON_TOKENS.sizes.sm}
                         aria-hidden="true"
                       />
-                      <Text size="xs" tone="muted">
+                      <Text size="xs" typographyRole="meta" color="muted">
                         {capacityLabel} {capacity}
                       </Text>
                     </div>

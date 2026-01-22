@@ -107,6 +107,50 @@ export function getColorCSSVar(key: string): string {
     return key;
   }
 
+  const legacyMap: Record<string, string> = {
+    background: "--tm-surface-base",
+    foreground: "--tm-text-primary",
+    card: "--tm-surface-raised",
+    "card-foreground": "--tm-text-primary",
+    popover: "--tm-surface-overlay",
+    "popover-foreground": "--tm-text-primary",
+    muted: "--tm-muted",
+    "muted-foreground": "--tm-muted-foreground",
+    destructive: "--tm-destructive",
+    "destructive-foreground": "--tm-destructive-foreground",
+    border: "--tm-border-default",
+    ring: "--tm-focus-ring",
+    input: "--tm-border-default",
+    primary: "--tm-primary",
+    "primary-foreground": "--tm-primary-foreground",
+    secondary: "--tm-secondary",
+    "secondary-foreground": "--tm-secondary-foreground",
+    accent: "--tm-accent",
+    "accent-foreground": "--tm-accent-foreground",
+    disabled: "--tm-disabled",
+    "disabled-foreground": "--tm-disabled-foreground",
+  };
+
+  const mapped = legacyMap[key];
+  if (mapped) {
+    return `var(${mapped})`;
+  }
+
+  if (key.startsWith("surface-")) {
+    const suffix = key.replace("surface-", "");
+    if (suffix === "base") return "var(--tm-surface-base)";
+    if (suffix === "overlay" || suffix === "glass") return "var(--tm-surface-overlay)";
+    if (suffix.startsWith("elevated") || suffix === "raised") return "var(--tm-surface-raised)";
+  }
+
+  if (key.startsWith("text-")) {
+    const suffix = key.replace("text-", "");
+    if (suffix === "primary") return "var(--tm-text-primary)";
+    if (suffix === "secondary") return "var(--tm-text-secondary)";
+    if (suffix === "muted" || suffix === "tertiary") return "var(--tm-text-muted)";
+    if (suffix === "inverse") return "var(--tm-text-inverse)";
+  }
+
   // Handle semantic color tokens
   return `var(--${key})`;
 }

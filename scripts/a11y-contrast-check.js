@@ -187,7 +187,12 @@ const dayDestructiveText = semanticColors.day.errorForeground;
 addPair("day:button.destructive.base text", dayDestructiveText, dayDestructiveBg, true);
 addPair("day:button.destructive.hover text", dayDestructiveText, dayDestructiveBg, true);
 addPair("day:button.destructive.active text", dayDestructiveText, dayDestructiveBg, true);
-addPair("day:button.destructive.disabled text", dayDestructiveText, dayDestructiveBg);
+// Use values from getButtonStateMatrix for disabled state (uses darker background and selectTextColorByBackground)
+addPair(
+  "day:button.destructive.disabled text",
+  dayButtonStates.button.destructive.disabled.text,
+  dayButtonStates.button.destructive.disabled.background,
+);
 
 // Button states - Night mode
 // Use getButtonStateMatrix to get actual colors from states.ts
@@ -323,7 +328,12 @@ const nightDestructiveText = semanticColors.night.errorForeground;
 addPair("night:button.destructive.base text", nightDestructiveText, nightDestructiveBg, true);
 addPair("night:button.destructive.hover text", nightDestructiveText, nightDestructiveBg, true);
 addPair("night:button.destructive.active text", nightDestructiveText, nightDestructiveBg, true);
-addPair("night:button.destructive.disabled text", nightDestructiveText, nightDestructiveBg);
+// Use values from getButtonStateMatrix for disabled state (uses darker background and selectTextColorByBackground)
+addPair(
+  "night:button.destructive.disabled text",
+  nightButtonStates.button.destructive.disabled.text,
+  nightButtonStates.button.destructive.disabled.background,
+);
 
 // Link states - Day mode
 // Links don't change color on hover per canon (hover effect is underline only)

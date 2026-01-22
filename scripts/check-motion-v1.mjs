@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 /**
  * Motion V1 Guard Script
  *
@@ -75,7 +75,7 @@ if (existsSync("src/FOUNDATION/tokens/motion.ts")) {
 
 const v1ImportPatterns = [
   {
-    pattern: 'from.*tokens/motion\\"$',
+    pattern: "from.*[\"']tokens/motion[\"']",
     description: "Import from tokens/motion (V1)",
   },
   {

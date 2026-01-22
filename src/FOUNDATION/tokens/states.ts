@@ -211,10 +211,10 @@ export function getButtonStateMatrix(
 
   // Outline states: use accent colors for hover/active, muted for disabled
   const outlineHoverBg = accentColors[600]; // Accent background on hover
-  const outlineHoverText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
+  const outlineHoverText = mode === "day" ? textColors[mode].inverse : textColors.night.primary; // White for day (onAccent), light gray for night
   const outlineHoverBorder = accentColors[600]; // Accent border
   const outlineActiveBg = accentColors[700]; // Darker accent for active
-  const outlineActiveText = mode === "day" ? textColors[mode].inverse : "0 0% 89.8%"; // White for day (onAccent), light gray for night
+  const outlineActiveText = mode === "day" ? textColors[mode].inverse : textColors.night.primary; // White for day (onAccent), light gray for night
   const outlineActiveBorder = accentColors[700];
   const outlineDisabledBg = baseColors.background; // Unchanged background
   const outlineDisabledText = baseColors.foreground; // Muted foreground
@@ -225,14 +225,29 @@ export function getButtonStateMatrix(
   const ghostHoverText = baseColors.foreground; // Foreground text
   const ghostActiveBg = surfaceColors.elevated2; // Darker muted for active
   const ghostActiveText = baseColors.foreground;
+  // EXPLICIT_EXCEPTION: transparent literal for ghost disabled background
+  // Transparent is the only allowed literal value for backgrounds (per token policy)
+  // This cannot be replaced with a token as it represents the absence of background
   const ghostDisabledBg = "transparent"; // Transparent background
   const ghostDisabledText = baseColors.foreground; // Muted foreground
 
   // Destructive states: use error colors from semantic tokens
   const destructiveHover = semanticColors[mode].error; // Error color for hover
   const destructiveActive = semanticColors[mode].error; // Error color for active
-  const destructiveDisabledBg = semanticColors[mode].error; // Error color
-  const destructiveDisabledText = semanticColors[mode].errorForeground; // Error foreground
+  // For disabled, use darker error variant to ensure WCAG AA contrast
+  // Parse error color and reduce lightness for disabled state
+  const errorParts = semanticColors[mode].error.trim().split(/\s+/);
+  const errorH = errorParts[0] || "0";
+  const errorS = errorParts[1] || "78.5%";
+  const errorL = parseFloat((errorParts[2] || "54%").replace("%", ""));
+  // Reduce lightness by 20% for disabled to ensure WCAG AA contrast ≥4.5:1
+  const destructiveDisabledBg = `${errorH} ${errorS} ${Math.max(10, errorL - 20)}%`;
+  const destructiveDisabledText = selectTextColorByBackground(
+    destructiveDisabledBg,
+    baseColors.foreground,
+    textColors[mode].inverse,
+    mode,
+  ); // Disabled text selected by background lightness for WCAG AA contrast
 
   return {
     button: {
@@ -244,7 +259,7 @@ export function getButtonStateMatrix(
           background: primaryHover,
           text:
             mode === "day"
-              ? "0 0% 100%"
+              ? textColors.day.inverse
               : selectTextColorByBackground(
                   primaryHover,
                   baseColors.foreground,
@@ -256,7 +271,7 @@ export function getButtonStateMatrix(
           background: primaryActive,
           text:
             mode === "day"
-              ? "0 0% 100%"
+              ? textColors.day.inverse
               : selectTextColorByBackground(
                   primaryActive,
                   baseColors.foreground,
