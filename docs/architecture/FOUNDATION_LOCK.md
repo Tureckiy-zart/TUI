@@ -1386,8 +1386,9 @@ Any token system modifications require:
 
 **Status:** ✅ **LOCKED (RE-LOCKED)**  
 **Scope:** colors / a11y  
-**Reason:** WCAG AA alignment after secondary + disabled calibration  
+**Reason:** WCAG 2.1 AA alignment after secondary + disabled calibration  
 **TUNG:** TUI_TOKENS_COLOR_021, TUI_TOKENS_COLOR_022, TUI_TOKENS_COLOR_023, TUI_TOKENS_A11Y_024  
+**Lock task:** TUI_TOKENS_LOCK_025  
 **Statement:** Color token calibration completed. All A11Y contrast checks pass without exceptions.
 
 ---
