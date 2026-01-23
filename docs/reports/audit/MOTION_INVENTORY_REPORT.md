@@ -191,7 +191,7 @@ This report provides a comprehensive inventory of all motion-related code patter
   - Tailwind animation utilities
 - **Domain:** All domains
 - **Compliance:** ✅ **A - Token-driven**
-- **Mechanism:** Token CSS variables (`var(--motion-duration-*)`, `var(--motion-easing-*)`)
+- **Mechanism:** Token CSS variables (`var(--tm-motion-duration-*)`, `var(--tm-motion-easing-*)`)
 - **Status:** Compliant
 
 ---
@@ -269,9 +269,9 @@ This report provides a comprehensive inventory of all motion-related code patter
 
 | Usage | Files | Count | Compliance |
 |-------|-------|-------|------------|
-| `var(--motion-duration-*)` | `preset.ts` | 18+ | ✅ Compliant |
-| `var(--motion-easing-*)` | `preset.ts` | 18+ | ✅ Compliant |
-| `var(--motion-transition-*)` | `preset.ts` | 5+ | ✅ Compliant |
+| `var(--tm-motion-duration-*)` | `preset.ts` | 18+ | ✅ Compliant |
+| `var(--tm-motion-easing-*)` | `preset.ts` | 18+ | ✅ Compliant |
+| `var(--tm-motion-transition-*)` | `preset.ts` | 5+ | ✅ Compliant |
 
 ### tm-motion Utilities
 

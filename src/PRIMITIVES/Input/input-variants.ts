@@ -57,7 +57,7 @@ const DEFAULT_SIZE = "md" as const;
  * - Typography Authority: Input references TEXT_TOKENS.fontSize for text sizing
  * - Spacing Authority: Input references INPUT_TOKENS.padding for padding values
  * - State Authority: Input uses State Matrix CSS variables for all states
- * - Color Authority: Input uses `--tm-*` variables and `--semantic-*` for validation states
+ * - Color Authority: Input uses `--tm-*` variables and `--tm-status-*` for validation states
  *
  * Token-only contract:
  * - All colors are defined in INPUT_TOKENS (src/FOUNDATION/tokens/components/input.ts)

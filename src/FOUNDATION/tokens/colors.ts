@@ -509,20 +509,20 @@ export const tailwindThemeColors = {
 
   // Semantic colors
   success: {
-    DEFAULT: `hsl(var(--semantic-success))`,
-    foreground: `hsl(var(--semantic-success-foreground))`,
+    DEFAULT: `hsl(var(--tm-status-success))`,
+    foreground: `hsl(var(--tm-status-success-foreground))`,
   },
   error: {
-    DEFAULT: `hsl(var(--semantic-error))`,
-    foreground: `hsl(var(--semantic-error-foreground))`,
+    DEFAULT: `hsl(var(--tm-status-error))`,
+    foreground: `hsl(var(--tm-status-error-foreground))`,
   },
   warning: {
-    DEFAULT: `hsl(var(--semantic-warning))`,
-    foreground: `hsl(var(--semantic-warning-foreground))`,
+    DEFAULT: `hsl(var(--tm-status-warning))`,
+    foreground: `hsl(var(--tm-status-warning-foreground))`,
   },
   info: {
-    DEFAULT: `hsl(var(--semantic-info))`,
-    foreground: `hsl(var(--semantic-info-foreground))`,
+    DEFAULT: `hsl(var(--tm-status-info))`,
+    foreground: `hsl(var(--tm-status-info-foreground))`,
   },
 
   // Surface colors

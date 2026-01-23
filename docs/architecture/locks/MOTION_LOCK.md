@@ -164,7 +164,7 @@ The following motion domains are **LOCKED** and **IMMUTABLE**:
 
 The following mechanisms are **LOCKED** and **IMMUTABLE**:
 
-1. **Token CSS Variables** - `var(--motion-duration-*)`, `var(--motion-easing-*)`
+1. **Token CSS Variables** - `var(--tm-motion-duration-*)`, `var(--tm-motion-easing-*)`
 2. **tm-motion Utilities** - `.tm-motion-*` classes
 3. **Tailwind Motion Utilities** - Token-based Tailwind utilities (`duration-normal`, `ease-out`)
 

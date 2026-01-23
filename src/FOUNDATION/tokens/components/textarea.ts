@@ -122,7 +122,7 @@ export const TEXTAREA_TOKENS = {
       focus: "focus-visible:shadow-[var(--focus-ring-default)]", // Focus ring using CSS var
       error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
       ariaInvalid: '[aria-invalid="true"]:border-[hsl(var(--tm-destructive))]', // Error state border via aria-invalid attribute
-      success: "border-[hsl(var(--semantic-success))]", // Success state border using CSS var
+      success: "border-success", // Success state border using CSS var
       disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
     },
     background: {
@@ -163,7 +163,7 @@ export const TEXTAREA_TOKENS = {
     color: {
       default: "text-[hsl(var(--tm-text-muted))]", // Default message color
       error: "text-[hsl(var(--tm-destructive))]", // Error message color
-      success: "text-[hsl(var(--semantic-success))]", // Success message color
+      success: "text-success", // Success message color
     },
   } as const,
 

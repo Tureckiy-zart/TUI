@@ -57,7 +57,7 @@ export const TOAST_TOKENS = {
    * Maps to SURFACE_TOKENS for background colors
    */
   surface: {
-    success: "bg-success/10 border-success/20 text-[hsl(var(--semantic-success-foreground))]", // Success text using semantic foreground token
+    success: "bg-success/10 border-success/20 text-success-foreground", // Success text using semantic foreground token
     info: "bg-info/10 border-info/20 text-info-foreground",
     warning: "bg-warning/10 border-warning/20 text-warning-foreground",
     danger: "bg-destructive/10 border-destructive/20 text-destructive-foreground",

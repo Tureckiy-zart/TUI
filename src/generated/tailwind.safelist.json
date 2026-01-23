@@ -28,8 +28,8 @@
   "text-popover-foreground",
   "text-primary-foreground",
   "text-secondary-foreground",
-  "text-semantic-error-foreground",
-  "text-semantic-info-foreground",
-  "text-semantic-success-foreground",
-  "text-semantic-warning-foreground"
+  "text-error-foreground",
+  "text-info-foreground",
+  "text-success-foreground",
+  "text-warning-foreground"
 ]

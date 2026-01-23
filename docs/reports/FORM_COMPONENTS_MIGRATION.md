@@ -5,7 +5,7 @@
 ## Scope
 
 - Components: Input, Textarea, Select, Checkbox, Radio, Switch
-- Policy: only `--tm-*` in components; `--semantic-*` allowed only for validation/feedback
+- Policy: only `--tm-*` in components; `--tm-status-*` allowed only for validation/feedback
 - Out of scope: runtime/bridge logic
 
 ## Components Processed
@@ -14,14 +14,14 @@
 
 - Legacy vars removed: `--foreground`, `--input`, `--muted-foreground`, `--destructive`, `--destructive-foreground`
 - TM tokens used: `--tm-text-primary`, `--tm-surface-base`, `--tm-text-muted`, `--tm-destructive`, `--tm-destructive-foreground`, `--tm-primary`, `--tm-primary-foreground`, `--tm-secondary`, `--tm-secondary-foreground`
-- Semantic tokens kept: `--semantic-success`
+- Semantic tokens kept: `--tm-status-success`
 - Updated token source: `src/FOUNDATION/tokens/components/input.ts`
 
 ### Textarea
 
 - Legacy vars removed: `--input`, `--foreground`, `--card`, `--card-foreground`, `--muted`, `--muted-foreground`, `--destructive`
 - TM tokens used: `--tm-surface-base`, `--tm-text-primary`, `--tm-surface-raised`, `--tm-muted`, `--tm-text-muted`, `--tm-destructive`
-- Semantic tokens kept: `--semantic-success`
+- Semantic tokens kept: `--tm-status-success`
 - Updated token source: `src/FOUNDATION/tokens/components/textarea.ts`
 
 ### Select
@@ -55,7 +55,7 @@
 ## Legacy Usage Audit
 
 - No legacy `--background`/`--card`/`--border`/`--ring`/`--input`/`--foreground` usage remains in form component tokens or implementations.
-- Allowed `--semantic-*` usage retained for validation/feedback: `--semantic-success` (Input, Textarea).
+- Allowed `--tm-status-*` usage retained for validation/feedback: `--tm-status-success` (Input, Textarea).
 
 ## Remaining Work
 

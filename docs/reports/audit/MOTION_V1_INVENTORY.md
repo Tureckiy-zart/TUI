@@ -134,16 +134,16 @@ Pattern: `--duration-*`, `--ease-*`, `--transition-*`
 
 ### V2 CSS Variable Names (to keep)
 
-Pattern: `--motion-*`
+Pattern: `--tm-motion-*`
 
 **Durations:**
-- `--motion-duration-fast`, `--motion-duration-normal`, `--motion-duration-slow`, `--motion-duration-reduced`
+- `--tm-motion-duration-fast`, `--tm-motion-duration-normal`, `--tm-motion-duration-slow`, `--tm-motion-duration-reduced`
 
 **Easings:**
-- `--motion-easing-soft`, `--motion-easing-standard`, `--motion-easing-emphasized`
+- `--tm-motion-easing-soft`, `--tm-motion-easing-standard`, `--tm-motion-easing-emphasized`
 
 **Transitions:**
-- `--motion-transition-fast`, `--motion-transition-normal`, `--motion-transition-slow`, `--motion-transition-soft`, `--motion-transition-reduced`
+- `--tm-motion-transition-fast`, `--tm-motion-transition-normal`, `--tm-motion-transition-slow`, `--tm-motion-transition-soft`, `--tm-motion-transition-reduced`
 
 ---
 

@@ -129,6 +129,14 @@ export function getColorCSSVar(key: string): string {
     "accent-foreground": "--tm-accent-foreground",
     disabled: "--tm-disabled",
     "disabled-foreground": "--tm-disabled-foreground",
+    success: "--tm-status-success",
+    "success-foreground": "--tm-status-success-foreground",
+    error: "--tm-status-error",
+    "error-foreground": "--tm-status-error-foreground",
+    warning: "--tm-status-warning",
+    "warning-foreground": "--tm-status-warning-foreground",
+    info: "--tm-status-info",
+    "info-foreground": "--tm-status-info-foreground",
   };
 
   const mapped = legacyMap[key];

@@ -29,7 +29,7 @@
         "Search and replace: 'motionV2Scale' -> 'motionScale'",
         "Search and replace: 'motionV2Slide' -> 'motionSlide'",
         "Search and replace: 'motionV2Combined' -> 'motionCombined'",
-        "Update any CSS variables if they used versioned names (e.g., --motion-v2-duration -> --motion-duration)"
+        "Update any CSS variables if they used versioned names (e.g., --tm-motion-v2-duration -> --tm-motion-duration)"
       ],
       "expectation": "No 'V2' suffix in Motion-related code"
     },

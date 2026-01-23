@@ -5,7 +5,7 @@
  *
  * Heading is a Foundation primitive component for semantic typography headings (h1-h6).
  * It provides token-based typography styling with semantic level mapping, weight variants,
- * and muted state support. Heading uses the display font family (Clash Display) for
+ * and color role support. Heading uses the display font family (Clash Display) for
  * visual distinction from body text.
  *
  * Heading does NOT provide layout composition, spacing, or color customization beyond
@@ -33,7 +33,7 @@
  *
  * @example
  * // Muted heading variant
- * <Heading level={3} muted>Secondary Heading</Heading>
+ * <Heading level={3} color="secondary">Secondary Heading</Heading>
  *
  * @example
  * // Render as different HTML element while keeping level styling
@@ -182,7 +182,7 @@ const generateWeightVariants = (): Array<{
  * - All typography values come from Typography Authority via TEXT_TOKENS
  *
  * Color Authority Rules:
- * - Text colors use semantic tokens: text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-muted))]
+ * - Text colors use semantic tokens: text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-secondary))]
  * - NO raw Tailwind color classes (text-red-*, text-blue-*, etc.) allowed
  * - All colors come from Color Authority via semantic tokens
  *
@@ -191,7 +191,7 @@ const generateWeightVariants = (): Array<{
  *
  * Authority Compliance:
  * - Typography Authority: Heading uses TEXT_TOKENS for all typography values
- * - Color Authority: Heading uses semantic color tokens (text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-muted))])
+ * - Color Authority: Heading uses semantic color tokens (text-[hsl(var(--tm-text-primary))], text-[hsl(var(--tm-text-secondary))])
  *
  * Token-only contract:
  * - All typography values are defined in TEXT_TOKENS (src/FOUNDATION/tokens/components/text.ts)
@@ -214,15 +214,15 @@ const headingVariants = tokenCVA({
       semibold: TEXT_TOKENS.fontWeight.semibold,
       bold: TEXT_TOKENS.fontWeight.bold,
     },
-    muted: {
-      true: "text-[hsl(var(--tm-text-muted))]",
-      false: "",
+    color: {
+      primary: "",
+      secondary: "text-[hsl(var(--tm-text-secondary))]",
     },
   },
   compoundVariants: generateWeightVariants(),
   defaultVariants: {
     level: 1,
-    muted: "false" as "false",
+    color: "primary",
   },
 });
 
@@ -237,34 +237,20 @@ const headingVariants = tokenCVA({
  */
 export interface HeadingProps
   extends
-    Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style">,
-    Omit<VariantProps<typeof headingVariants>, "muted"> {
+    Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style" | "color">,
+    VariantProps<typeof headingVariants> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  muted?: boolean;
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ level = 1, weight, muted, as, children, ...props }, ref) => {
+  ({ level = 1, weight, color, as, children, ...props }, ref) => {
     const Component = (as || `h${level}`) as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
     // Token enforcement: className and style are forbidden from public API - only CVA output is used
     // All typography values come from TEXT_TOKENS (Typography Authority)
     // All colors come from semantic tokens (Color Authority)
-    // Convert boolean muted to string for CVA compatibility
-    let mutedValue: "true" | "false" | undefined;
-    if (muted === undefined) {
-      mutedValue = undefined;
-    } else {
-      mutedValue = muted ? "true" : "false";
-    }
     return (
-      <Component
-        ref={ref}
-        className={headingVariants({ level, weight, muted: mutedValue } as Parameters<
-          typeof headingVariants
-        >[0])}
-        {...props}
-      >
+      <Component ref={ref} className={headingVariants({ level, weight, color })} {...props}>
         {children}
       </Component>
     );

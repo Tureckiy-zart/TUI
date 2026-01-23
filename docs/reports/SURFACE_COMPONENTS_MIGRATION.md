@@ -5,7 +5,7 @@ Status: IN_PROGRESS
 ## Scope
 - Components: modal, context-menu, tabs, accordion
 - Rule: use only `--tm-*` tokens
-- Forbidden: any `--semantic-*` usage
+- Forbidden: any `--tm-status-*` usage
 
 ## Component Changes
 

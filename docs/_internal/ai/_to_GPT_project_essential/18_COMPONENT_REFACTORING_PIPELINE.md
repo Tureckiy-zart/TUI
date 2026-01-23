@@ -117,7 +117,7 @@ Tests and Storybook are built on top of refactored code, not used as a substitut
 - [Audit Report Contract](#-2-audit-report-contract-required)
 - [STEP 0 — Baseline Snapshot & Context Fixation](#-3-step-0--baseline-snapshot--context-fixation)
 - [STEP 1 — Structural & Code Quality Review](#-4-step-1--structural--code-quality-review)
-- [STEP 2 — Semantic Role & Responsibility Validation](#-5-step-2--semantic-role--responsibility-validation)
+- [STEP 2 — Semantic Role & Responsibility Validation](#-5-step-2--tm-status-role--responsibility-validation)
 - [STEP 3 — Duplication & Internal Pattern Alignment](#-6-step-3--duplication--internal-pattern-alignment)
 - [STEP 4 — State & Interaction Model Review](#-7-step-4--state--interaction-model-review)
 - [STEP 5 — Token, Size & Variant Consistency](#-8-step-5--token-size--variant-consistency)

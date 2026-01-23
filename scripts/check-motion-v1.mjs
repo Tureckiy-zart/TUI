@@ -115,7 +115,7 @@ const v1CSSVarPatterns = [
   },
   {
     pattern: '"--ease-in"[^-]',
-    description: "Legacy CSS variable --ease-in (not --motion-easing)",
+    description: "Legacy CSS variable --ease-in (not --tm-motion-easing)",
   },
   {
     pattern: '"--transition-fast"[^\\}]',

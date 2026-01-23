@@ -220,7 +220,7 @@ DialogHeader.displayName = "DialogHeader";
  */
 export interface DialogTitleProps extends Omit<
   React.HTMLAttributes<HTMLHeadingElement>,
-  "className" | "style"
+  "className" | "style" | "color"
 > {
   titleId?: string;
 }

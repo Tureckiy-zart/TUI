@@ -490,7 +490,17 @@ export type CanonicalLetterSpacing = "tight" | "normal" | "wide";
  * Semantic text colors for typography components
  * @see docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md
  */
-export type CanonicalTextColor = "primary" | "secondary" | "muted" | "inverse" | "disabled";
+export type CanonicalTextColor =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "muted"
+  | "inverse"
+  | "disabled"
+  | "success"
+  | "warning"
+  | "error"
+  | "info";
 
 /**
  * Font size mapping for md (maps to base)
@@ -508,7 +518,7 @@ export const fontSizeWithMd = {
 export type TypographyRoleMetadata = {
   allowedText: readonly CanonicalTextColor[];
   minContrast: number | "inherits";
-  category?: "display" | "heading" | "body" | "label" | "caption" | "meta" | "disabled";
+  category?: "display" | "heading" | "body" | "label" | "caption" | "meta" | "status" | "disabled";
   notes?: string;
 };
 
@@ -580,9 +590,15 @@ export const typographyRolePolicy = {
     category: "caption" as const,
   },
   meta: {
-    allowedText: ["muted"] as const,
+    allowedText: ["muted", "tertiary"] as const,
     minContrast: 4.5,
     category: "meta" as const,
+  },
+  status: {
+    allowedText: ["success", "warning", "error", "info"] as const,
+    minContrast: 4.5,
+    category: "status" as const,
+    notes: "status colors for explicit status messaging only",
   },
   disabled: {
     allowedText: ["disabled"] as const,
@@ -590,7 +606,10 @@ export const typographyRolePolicy = {
     category: "disabled" as const,
     notes: "follows A11Y disabled policy",
   },
-} as const satisfies Record<keyof typeof textStyles | "disabled", TypographyRoleMetadata>;
+} as const satisfies Record<
+  keyof typeof textStyles | "status" | "disabled",
+  TypographyRoleMetadata
+>;
 
 /**
  * Typography Role Policy Type Helpers

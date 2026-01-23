@@ -21,7 +21,8 @@ type MessageIds =
   | "forbiddenCombination"
   | "inverseOnLight"
   | "mutedForReadable"
-  | "tertiaryForReadable";
+  | "tertiaryForReadable"
+  | "inlineColor";
 
 type Options = [];
 
@@ -40,7 +41,8 @@ const ROLE_ALLOWED_TEXT: Record<string, readonly string[]> = {
   label: ["primary", "secondary"],
   "label-sm": ["primary", "secondary"],
   caption: ["primary"],
-  meta: ["muted"],
+  meta: ["muted", "tertiary"],
+  status: ["success", "warning", "error", "info"],
   disabled: ["disabled"],
 };
 
@@ -50,25 +52,31 @@ const READABLE_ROLES = ["body", "body-sm", "body-xs", "caption", "label", "label
 // Patterns to detect role usage
 const ROLE_PATTERNS = [
   // textStyles.role
-  /textStyles\.(display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta)/g,
+  /textStyles\.(display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)/g,
   // role="..." in JSX
-  /role=["'](display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta)["']/g,
+  /role=["'](display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)["']/g,
   // className with role indicators
-  /(?:className|class)=["'][^"']*\b(text-(?:display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta))\b/g,
+  /(?:className|class)=["'][^"']*\b(text-(?:display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status))\b/g,
 ];
 
 // Patterns to detect text color usage
 const TEXT_COLOR_PATTERNS = [
   // textColors.token
   /textColors\.(primary|secondary|tertiary|muted|inverse|disabled)/g,
+  // status colors
+  /semanticColors\.(success|warning|error|info)/g,
   // --tm-text-* CSS vars
   /--tm-text-(primary|secondary|tertiary|muted|inverse|disabled)/g,
+  // --tm-status-* CSS vars
+  /--tm-status-(success|warning|error|info)/g,
   // text-[hsl(var(--tm-text-*))]
   /text-\[hsl\(var\(--tm-text-(primary|secondary|tertiary|muted|inverse|disabled)\)\)\]/g,
+  // text-[hsl(var(--tm-status-*))]
+  /text-\[hsl\(var\(--tm-status-(success|warning|error|info)\)\)\]/g,
   // tone="..." in JSX
   /tone=["'](primary|secondary|tertiary|muted|inverse|disabled)["']/g,
   // color="..." in JSX (Text component)
-  /color=["'](primary|secondary|tertiary|muted|inverse|disabled)["']/g,
+  /color=["'](primary|secondary|tertiary|muted|inverse|disabled|success|warning|error|info)["']/g,
 ];
 
 // Patterns to detect light surfaces (for inverse prohibition)
@@ -133,6 +141,8 @@ export default createRule<Options, MessageIds>({
         "Typography Color Policy violation: 'muted' text is forbidden for readable roles (body, caption, label). Use 'meta' role instead.",
       tertiaryForReadable:
         "Typography Color Policy violation: 'tertiary' text is forbidden for readable roles. Use 'secondary' or 'meta' role instead.",
+      inlineColor:
+        "Typography Color Policy violation: inline style color is forbidden for typography components. Use typography roles and color tokens instead.",
     },
     fixable: undefined,
     schema: [],
@@ -203,15 +213,16 @@ export default createRule<Options, MessageIds>({
         // - styled.div`color: hsl(var(--tm-text-primary));`
         // - css`color: hsl(var(--tm-text-muted));`
         const cssInJsColorMatch = text.match(
-          /color\s*:\s*hsl\(var\(--tm-text-(primary|secondary|tertiary|muted|inverse|disabled)\)\)/g,
+          /color\s*:\s*hsl\(var\(--tm-(?:text|status)-(primary|secondary|tertiary|muted|inverse|disabled|success|warning|error|info)\)\)/g,
         );
         if (cssInJsColorMatch) {
           for (const match of cssInJsColorMatch) {
             const colorMatch = match.match(
-              /--tm-text-(primary|secondary|tertiary|muted|inverse|disabled)/,
+              /--tm-(?:text|status)-(primary|secondary|tertiary|muted|inverse|disabled|success|warning|error|info)/,
             );
-            if (colorMatch && colorMatch[1]) {
-              colors.push(colorMatch[1]);
+            if (colorMatch) {
+              const value = colorMatch[0].replace("--tm-text-", "").replace("--tm-status-", "");
+              colors.push(value);
             }
           }
         }
@@ -279,10 +290,12 @@ export default createRule<Options, MessageIds>({
                   // Extract color from template literal like `hsl(var(--tm-text-primary))`
                   const templateText = prop.value.quasis.map((q) => q.value.raw).join("");
                   const colorMatch = templateText.match(
-                    /--tm-text-(primary|secondary|tertiary|muted|inverse|disabled)/,
+                    /--tm-(?:text|status)-(primary|secondary|tertiary|muted|inverse|disabled|success|warning|error|info)/,
                   );
-                  if (colorMatch && colorMatch[1]) {
-                    colorValue = colorMatch[1];
+                  if (colorMatch) {
+                    colorValue = colorMatch[0]
+                      .replace("--tm-text-", "")
+                      .replace("--tm-status-", "");
                   }
                 }
                 break;
@@ -290,9 +303,19 @@ export default createRule<Options, MessageIds>({
             }
 
             if (colorValue) {
-              // Check if this is a Text component or has typography role context
+              // Check if this is a Text/Heading component or has typography role context
               const parent = node.parent;
               if (parent?.type === "JSXOpeningElement") {
+                const parentName =
+                  parent.name.type === "JSXIdentifier" ? parent.name.name : undefined;
+                if (parentName === "Text" || parentName === "Heading") {
+                  context.report({
+                    node,
+                    messageId: "inlineColor",
+                  });
+                  return;
+                }
+
                 let typographyRole: string | null = null;
                 for (const attr of parent.attributes) {
                   if (attr.type !== "JSXAttribute") continue;

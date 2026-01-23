@@ -8,10 +8,10 @@ exports[`Heading > Snapshot > matches snapshot for default variant 1`] = `
 </h1>
 `;
 
-exports[`Heading > Snapshot > matches snapshot for muted variant 1`] = `
+exports[`Heading > Snapshot > matches snapshot for secondary color 1`] = `
 <h2
-  class="font-display text-[hsl(var(--tm-text-primary))] text-4xl font-bold leading-tight tracking-tight text-[hsl(var(--tm-text-muted))]"
+  class="font-display text-[hsl(var(--tm-text-primary))] text-4xl font-bold leading-tight tracking-tight text-[hsl(var(--tm-text-secondary))]"
 >
-  Muted Heading
+  Secondary Heading
 </h2>
 `;

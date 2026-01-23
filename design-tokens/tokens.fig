@@ -129,11 +129,11 @@
       "type": "color"
     },
     "color.secondary.600": {
-      "value": "#000000",
+      "value": "#292929",
       "type": "color"
     },
     "color.secondary.700": {
-      "value": "#040404",
+      "value": "#101010",
       "type": "color"
     },
     "color.secondary.800": {
@@ -217,7 +217,7 @@
       "type": "color"
     },
     "color.semantic.error": {
-      "value": "#141414",
+      "value": "#131313",
       "type": "color"
     },
     "color.semantic.errorForeground": {
@@ -233,7 +233,7 @@
       "type": "color"
     },
     "color.semantic.info": {
-      "value": "#0d0d0d",
+      "value": "#0c0c0c",
       "type": "color"
     },
     "color.semantic.infoForeground": {
@@ -245,7 +245,7 @@
       "type": "color"
     },
     "color.text.secondary": {
-      "value": "#737373",
+      "value": "#6b6b6b",
       "type": "color"
     },
     "color.text.tertiary": {
@@ -258,6 +258,14 @@
     },
     "color.text.inverse": {
       "value": "#ffffff",
+      "type": "color"
+    },
+    "color.disabled.disabled": {
+      "value": "#f5f5f5",
+      "type": "color"
+    },
+    "color.disabled.disabledForeground": {
+      "value": "#707070",
       "type": "color"
     },
     "spacing.base.0": {
@@ -659,11 +667,11 @@
       "type": "color"
     },
     "color.secondary.600": {
-      "value": "#000000",
+      "value": "#292929",
       "type": "color"
     },
     "color.secondary.700": {
-      "value": "#040404",
+      "value": "#101010",
       "type": "color"
     },
     "color.secondary.800": {
@@ -739,7 +747,7 @@
       "type": "color"
     },
     "color.semantic.success": {
-      "value": "#222222",
+      "value": "#1c1c1c",
       "type": "color"
     },
     "color.semantic.successForeground": {
@@ -747,11 +755,11 @@
       "type": "color"
     },
     "color.semantic.error": {
-      "value": "#1d1d1d",
+      "value": "#2e2e2e",
       "type": "color"
     },
     "color.semantic.errorForeground": {
-      "value": "#fafafa",
+      "value": "#ffffff",
       "type": "color"
     },
     "color.semantic.warning": {
@@ -788,6 +796,14 @@
     },
     "color.text.inverse": {
       "value": "#171717",
+      "type": "color"
+    },
+    "color.disabled.disabled": {
+      "value": "#1d1d1d",
+      "type": "color"
+    },
+    "color.disabled.disabledForeground": {
+      "value": "#8f8f8f",
       "type": "color"
     },
     "spacing.base.0": {

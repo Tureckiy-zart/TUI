@@ -30,7 +30,7 @@ This matches the logic in `applyMode.ts`.
 `updateCSSVariablesFromTokens(mode)` sets CSS variables on `document.documentElement`:
 
 - **Legacy base variables:** `--background`, `--foreground`, `--card`, `--popover`, `--border`, `--ring`, etc.
-- **Surface/Text/Semantic groups:** `--surface-*`, `--text-*`, `--semantic-*`, `--chart-*`
+- **Surface/Text/Semantic groups:** `--surface-*`, `--text-*`, `--tm-status-*`, `--chart-*`
 - **Color scales:** `--primary-*`, `--secondary-*`, `--accent-*`
 - **Semantic TM tokens:** 100% REQUIRED Canon Core v1 `--tm-*` (dev-guard on missing/empty in dev)
 

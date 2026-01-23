@@ -1365,7 +1365,8 @@ Any token system modifications require:
 **Accepted A11Y Exception:** `night:button.destructive.disabled` (contrast 4.39:1, see `docs/architecture/locks/A11Y_LOCK.md`)
 
 **Enforcement:** ESLint rule `tm/no-legacy-css-vars` (P0, error, **ENFORCED_STRICT**)
-**Detection Contract:** только реальные `var(--x)` usage; unknown prefix suffix → error without autofix
+**Detection Contract:** только реальные `var(--x)` usage для цветов; unknown prefix suffix → error without autofix
+**Scope Clarification:** strict tm-only enforcement применяется **только к color vars**. Non-color vars (spacing/radius/layout/radix/implementation) временно разрешены и не являются каноничными.
 
 ### Rules (Binding)
 
@@ -1390,6 +1391,43 @@ Any token system modifications require:
 **TUNG:** TUI_TOKENS_COLOR_021, TUI_TOKENS_COLOR_022, TUI_TOKENS_COLOR_023, TUI_TOKENS_A11Y_024  
 **Lock task:** TUI_TOKENS_LOCK_025  
 **Statement:** Color token calibration completed. All A11Y contrast checks pass without exceptions.
+
+---
+
+## 🔒 Typography Color Policy v1 Lock
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Typography color roles, allowed text-token combinations, status colors  
+**Authority:** `docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md`  
+**Task:** TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020  
+**Enforcement:** ESLint rule `typography-color-policy` (P1, error, **ENFORCED**)
+
+**Rules (Binding):**
+1. **Text colors must use canonical roles** (`primary`, `secondary`, `tertiary`, `muted`, `inverse`, `disabled`, `status`)
+2. **Status colors are restricted** to explicit status messaging only
+3. **Readable roles forbid muted/tertiary** (use `secondary` or `meta`)
+4. **No arbitrary text colors** (no custom CSS vars or raw colors)
+
+---
+
+## Typography Color Enforcement
+
+**Status:** ✅ **LOCKED**
+
+**Policy:**
+- Text and Heading components do not accept arbitrary colors
+- Only semantic color roles are allowed: `primary`, `secondary`, `disabled`, `inverse`, `status` (via explicit status role)
+- Inline `style.color` is forbidden for text components
+
+**Rationale:**
+- Typography color is part of visual hierarchy and accessibility
+- Color selection must be a consequence of role, not an ad-hoc decision
+
+**Enforcement:**
+- ESLint rule: `typography-color-policy`
+- Component API restrictions (Text / Heading)
+
+**Change Control:** Any change requires a new Foundation TUNG.
 
 ---
 

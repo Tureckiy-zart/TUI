@@ -104,9 +104,14 @@ export type TextTone = (typeof _TEXT_TONES)[number];
 const TEXT_COLOR_CLASSES: Record<TextToken, string> = {
   primary: "text-[hsl(var(--tm-text-primary))]",
   secondary: "text-[hsl(var(--tm-text-secondary))]",
+  tertiary: "text-[hsl(var(--tm-text-muted))]",
   muted: "text-[hsl(var(--tm-text-muted))]",
   inverse: "text-[hsl(var(--tm-text-inverse))]",
   disabled: "text-[hsl(var(--tm-disabled-foreground))]",
+  success: "text-[hsl(var(--tm-status-success))]",
+  warning: "text-[hsl(var(--tm-status-warning))]",
+  error: "text-[hsl(var(--tm-status-error))]",
+  info: "text-[hsl(var(--tm-status-info))]",
 } as const;
 
 /**
@@ -149,9 +154,14 @@ const textVariants = tokenCVA({
     color: {
       primary: TEXT_COLOR_CLASSES.primary,
       secondary: TEXT_COLOR_CLASSES.secondary,
+      tertiary: TEXT_COLOR_CLASSES.tertiary,
       muted: TEXT_COLOR_CLASSES.muted,
       inverse: TEXT_COLOR_CLASSES.inverse,
       disabled: TEXT_COLOR_CLASSES.disabled,
+      success: TEXT_COLOR_CLASSES.success,
+      warning: TEXT_COLOR_CLASSES.warning,
+      error: TEXT_COLOR_CLASSES.error,
+      info: TEXT_COLOR_CLASSES.info,
     } satisfies Record<TextToken, string>,
   },
   defaultVariants: {

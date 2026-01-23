@@ -101,31 +101,21 @@ describe("Heading", () => {
     });
   });
 
-  describe("Muted", () => {
-    it("applies muted styles when muted is true", () => {
+  describe("Color", () => {
+    it("applies secondary styles when color is secondary", () => {
       const { container } = renderWithTheme(
-        <Heading level={2} muted>
-          Muted Heading
+        <Heading level={2} color="secondary">
+          Secondary Heading
         </Heading>,
       );
       const heading = container.querySelector("h2");
-      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]");
+      expect(heading).toHaveClass("text-[hsl(var(--tm-text-secondary))]");
     });
 
-    it("does not apply muted styles when muted is false", () => {
-      const { container } = renderWithTheme(
-        <Heading level={2} muted={false}>
-          Normal Heading
-        </Heading>,
-      );
+    it("defaults to primary when color is not provided", () => {
+      const { container } = renderWithTheme(<Heading level={2}>Normal Heading</Heading>);
       const heading = container.querySelector("h2");
-      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
-    });
-
-    it("defaults to not muted", () => {
-      const { container } = renderWithTheme(<Heading level={2}>Default Heading</Heading>);
-      const heading = container.querySelector("h2");
-      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
+      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-secondary))]");
     });
   });
 
@@ -143,16 +133,16 @@ describe("Heading", () => {
   });
 
   describe("Combined Props", () => {
-    it("renders with level, weight, and muted", () => {
+    it("renders with level, weight, and secondary color", () => {
       const { container } = renderWithTheme(
-        <Heading level={3} weight="semibold" muted>
+        <Heading level={3} weight="semibold" color="secondary">
           Combined Props Heading
         </Heading>,
       );
       const heading = container.querySelector("h3");
       expect(heading).toBeInTheDocument();
       expect(heading).toHaveTextContent("Combined Props Heading");
-      expect(heading).toHaveClass("text-[hsl(var(--tm-text-muted))]");
+      expect(heading).toHaveClass("text-[hsl(var(--tm-text-secondary))]");
     });
   });
 
@@ -171,10 +161,10 @@ describe("Heading", () => {
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it("matches snapshot for muted variant", () => {
+    it("matches snapshot for secondary color", () => {
       const { container } = renderWithTheme(
-        <Heading level={2} muted>
-          Muted Heading
+        <Heading level={2} color="secondary">
+          Secondary Heading
         </Heading>,
       );
       expect(container.firstChild).toMatchSnapshot();

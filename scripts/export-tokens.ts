@@ -263,6 +263,19 @@ function buildColorTokens() {
   });
   nightColors.text = nightText;
 
+  // Disabled colors
+  const dayDisabled: Record<string, string> = {};
+  Object.entries(colors.disabledColors.day).forEach(([key, value]) => {
+    dayDisabled[key] = hslToHex(`hsl(${value})`);
+  });
+  dayColors.disabled = dayDisabled;
+
+  const nightDisabled: Record<string, string> = {};
+  Object.entries(colors.disabledColors.night).forEach(([key, value]) => {
+    nightDisabled[key] = hslToHex(`hsl(${value})`);
+  });
+  nightColors.disabled = nightDisabled;
+
   return { day: dayColors, night: nightColors };
 }
 

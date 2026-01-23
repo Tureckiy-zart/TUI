@@ -67,7 +67,7 @@ const DEFAULT_SIZE = "md" as const;
  * - Typography Authority: Textarea references TEXTAREA_TOKENS.fontSize for text sizing
  * - Spacing Authority: Textarea references TEXTAREA_TOKENS.padding for padding values
  * - State Authority: Textarea uses State Matrix CSS variables for all states
- * - Color Authority: Textarea uses `--tm-*` variables and `--semantic-*` for validation states
+ * - Color Authority: Textarea uses `--tm-*` variables and `--tm-status-*` for validation states
  *
  * Color tokens used (all from TEXTAREA_TOKENS, which reference tokens/colors.ts):
  * - border-[hsl(var(--tm-surface-base))] - Default border color

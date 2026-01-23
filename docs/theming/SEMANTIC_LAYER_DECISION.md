@@ -1,11 +1,11 @@
 # Semantic Layer Decision (TEMPORARY)
 
 **Status:** TEMPORARY_ALLOWED
-**Scope:** Runtime and component usage rules for `--semantic-*`
+**Scope:** Runtime and component usage rules for `--tm-status-*`
 
 ## Decision
 
-`--semantic-*` tokens are a temporary layer outside Canon Core v1. They are not required,
+`--tm-status-*` tokens are a temporary layer outside Canon Core v1. They are not required,
 not part of the Canon Core contract, and must not be treated as a substitute for `--tm-*`.
 
 ## Allowed Usage
@@ -23,14 +23,14 @@ not part of the Canon Core contract, and must not be treated as a substitute for
 
 ## Governance Rules
 
-- `--semantic-*` MUST NOT be used as a substitute for `--tm-*`.
-- `--semantic-*` MUST NOT be mapped implicitly to `--tm-*`.
-- `--semantic-*` MUST NOT be used in base components.
-- `--semantic-*` MAY be used only where semantic meaning is explicit and user-facing.
+- `--tm-status-*` MUST NOT be used as a substitute for `--tm-*`.
+- `--tm-status-*` MUST NOT be mapped implicitly to `--tm-*`.
+- `--tm-status-*` MUST NOT be used in base components.
+- `--tm-status-*` MAY be used only where semantic meaning is explicit and user-facing.
 
 ## Enforcement
 
-- Legacy guard allows `--semantic-*` explicitly while forbidding legacy vars.
+- Legacy guard allows `--tm-status-*` explicitly while forbidding legacy vars.
 - Component reviews must flag semantic usage outside the allowed scope.
 
 ## Future Paths (no commitment)
@@ -44,7 +44,7 @@ not part of the Canon Core contract, and must not be treated as a substitute for
 
 **Outcome**
 - `--tm-success`, `--tm-error`, `--tm-warning` introduced as a TM extension.
-- `--semantic-*` deprecated and removed.
+- `--tm-status-*` deprecated and removed.
 
 ### Path B: Semantic Layer Removal
 
@@ -53,11 +53,11 @@ not part of the Canon Core contract, and must not be treated as a substitute for
 - No strong need for a global semantic contract.
 
 **Outcome**
-- `--semantic-*` deprecated.
+- `--tm-status-*` deprecated.
 - Usage removed component by component.
 - No replacement in TM system.
 
 ## Compatibility Notes
 
 - This decision does not change Canon Core v1 or TM_TOKEN_CONTRACT_V1.
-- `--semantic-*` remains non-required and outside the Canon Core contract.
+- `--tm-status-*` remains non-required and outside the Canon Core contract.

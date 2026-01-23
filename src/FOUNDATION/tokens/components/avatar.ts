@@ -67,9 +67,9 @@ export const AVATAR_TOKENS = {
    * Maps to semantic color utilities
    */
   statusColor: {
-    online: "bg-semantic-success", // Green
+    online: "bg-success", // Green
     offline: "bg-muted", // Gray
-    busy: "bg-semantic-warning", // Yellow/Orange
+    busy: "bg-warning", // Yellow/Orange
   } as const,
 
   /**

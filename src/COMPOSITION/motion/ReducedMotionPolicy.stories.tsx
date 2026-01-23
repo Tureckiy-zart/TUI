@@ -93,13 +93,13 @@ export const Simulation: Story = {
       // Simulate prefers-reduced-motion by updating CSS variables
       const root = document.documentElement;
       if (reducedMotion) {
-        root.style.setProperty("--motion-duration-fast", "0ms");
-        root.style.setProperty("--motion-duration-normal", "0ms");
-        root.style.setProperty("--motion-duration-slow", "0ms");
+        root.style.setProperty("--tm-motion-duration-fast", "0ms");
+        root.style.setProperty("--tm-motion-duration-normal", "0ms");
+        root.style.setProperty("--tm-motion-duration-slow", "0ms");
       } else {
-        root.style.setProperty("--motion-duration-fast", "150ms");
-        root.style.setProperty("--motion-duration-normal", "250ms");
-        root.style.setProperty("--motion-duration-slow", "350ms");
+        root.style.setProperty("--tm-motion-duration-fast", "150ms");
+        root.style.setProperty("--tm-motion-duration-normal", "250ms");
+        root.style.setProperty("--tm-motion-duration-slow", "350ms");
       }
     }, [reducedMotion]);
 

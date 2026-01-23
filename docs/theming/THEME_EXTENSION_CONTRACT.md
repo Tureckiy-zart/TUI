@@ -37,7 +37,7 @@ not via theme CSS files.
 `updateCSSVariablesFromTokens()` emits legacy and semantic tokens, including:
 
 - `--background`, `--foreground`, `--border`, `--ring`, ...
-- `--surface-*`, `--text-*`, `--semantic-*`
+- `--surface-*`, `--text-*`, `--tm-status-*`
 - `--primary-*`, `--secondary-*`, `--accent-*`
 - Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens (dev-guard on missing/empty in dev)
 

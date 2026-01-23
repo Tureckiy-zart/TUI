@@ -172,14 +172,14 @@ export function updateCSSVariablesFromTokens(mode: Mode) {
   // Semantic colors (from merged tokens)
   try {
     const semantic = semanticColors[mode];
-    root.style.setProperty("--semantic-success", semantic.success);
-    root.style.setProperty("--semantic-success-foreground", semantic.successForeground);
-    root.style.setProperty("--semantic-error", semantic.error);
-    root.style.setProperty("--semantic-error-foreground", semantic.errorForeground);
-    root.style.setProperty("--semantic-warning", semantic.warning);
-    root.style.setProperty("--semantic-warning-foreground", semantic.warningForeground);
-    root.style.setProperty("--semantic-info", semantic.info);
-    root.style.setProperty("--semantic-info-foreground", semantic.infoForeground);
+    root.style.setProperty("--tm-status-success", semantic.success);
+    root.style.setProperty("--tm-status-success-foreground", semantic.successForeground);
+    root.style.setProperty("--tm-status-error", semantic.error);
+    root.style.setProperty("--tm-status-error-foreground", semantic.errorForeground);
+    root.style.setProperty("--tm-status-warning", semantic.warning);
+    root.style.setProperty("--tm-status-warning-foreground", semantic.warningForeground);
+    root.style.setProperty("--tm-status-info", semantic.info);
+    root.style.setProperty("--tm-status-info-foreground", semantic.infoForeground);
   } catch (error) {
     console.error("[Theme] Failed to set semantic colors:", error);
   }

@@ -1004,7 +1004,7 @@ The State Authority Contract defines exactly six canonical states:
 - **Implementation:** Via `state` prop: `"error"` and `"success"`
 - **Evidence:** 
   - `INPUT_TOKENS.state.border.error`: `border-[hsl(var(--destructive))]`
-  - `INPUT_TOKENS.state.border.success`: `border-[hsl(var(--semantic-success))]`
+  - `INPUT_TOKENS.state.border.success`: `border-[hsl(var(--tm-status-success))]`
   - CVA variants: `state: { error: "...", success: "..." }`
 - **Classification:** Semantic validation states (not canonical interaction states)
 - **Compliance:** ✅ Acceptable — Semantic states coexist with canonical states

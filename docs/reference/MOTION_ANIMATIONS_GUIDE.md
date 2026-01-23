@@ -27,7 +27,7 @@ Motion tokens define:
 - **Durations**: `motionDurations` (e.g., `normal: "250ms"`)
 - **Easings**: `motionEasings` (e.g., `standard: "cubic-bezier(0.4, 0, 0.2, 1)"`)
 - **Keyframes**: `motionFade`, `motionScale`, `motionSlide`, etc.
-- **CSS Variables**: `motionCSSVariables` (e.g., `--motion-duration-normal`)
+- **CSS Variables**: `motionCSSVariables` (e.g., `--tm-motion-duration-normal`)
 - **Tailwind Config**: `motionTailwindConfig` (maps keyframes to Tailwind theme)
 
 **Example:**
@@ -105,7 +105,7 @@ Custom `.tm-motion-*` utilities are added via Tailwind plugin:
 ```typescript
 addUtilities({
   ".tm-motion-scale-in": {
-    animation: `scale-in var(--motion-duration-normal) var(--motion-easing-standard) both`,
+    animation: `scale-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
   },
   // ... other utilities
 });
@@ -123,7 +123,7 @@ Object.entries(motionCSSVariables).forEach(([key, value]) => {
 });
 ```
 
-This ensures variables like `--motion-duration-normal` are available when components render.
+This ensures variables like `--tm-motion-duration-normal` are available when components render.
 
 ---
 
@@ -145,7 +145,7 @@ This ensures variables like `--motion-duration-normal` are available when compon
 1. Add `animate-*` class to safelist in `tailwind.config.ts`
 2. Ensure `animation` shorthand includes `both`:
    ```typescript
-   animation: `scale-in var(--motion-duration-normal) var(--motion-easing-standard) both`
+   animation: `scale-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`
    ```
 3. Use string values in keyframes:
    ```typescript
@@ -217,7 +217,7 @@ This ensures variables like `--motion-duration-normal` are available when compon
 5. **Add custom utility** in `src/preset.ts` (if needed):
    ```typescript
    ".tm-motion-new-animation": {
-     animation: `new-animation var(--motion-duration-normal) var(--motion-easing-standard) both`,
+     animation: `new-animation var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
    },
    ```
 
@@ -271,7 +271,7 @@ __checkKeyframes()
 
 3. **Check CSS variables:**
    - DevTools → Elements → Select `:root` or `html`
-   - Styles tab → Check `--motion-duration-normal`, `--motion-easing-standard`
+   - Styles tab → Check `--tm-motion-duration-normal`, `--tm-motion-easing-standard`
 
 ---
 

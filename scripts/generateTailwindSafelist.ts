@@ -39,14 +39,14 @@ const SEMANTIC_COLOR_TOKENS: ColorToken[] = [
   "border",
   "input",
   "ring",
-  "semantic-success",
-  "semantic-success-foreground",
-  "semantic-error",
-  "semantic-error-foreground",
-  "semantic-warning",
-  "semantic-warning-foreground",
-  "semantic-info",
-  "semantic-info-foreground",
+  "success",
+  "success-foreground",
+  "error",
+  "error-foreground",
+  "warning",
+  "warning-foreground",
+  "info",
+  "info-foreground",
 ];
 
 /**
@@ -75,10 +75,10 @@ const TEXT_TOKENS: ColorToken[] = [
   "muted-foreground",
   "card-foreground",
   "popover-foreground",
-  "semantic-success-foreground",
-  "semantic-error-foreground",
-  "semantic-warning-foreground",
-  "semantic-info-foreground",
+  "success-foreground",
+  "error-foreground",
+  "warning-foreground",
+  "info-foreground",
 ];
 
 /**
