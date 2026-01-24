@@ -17,11 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+## [2.1.1] - 2026-01-24
+
 ### Changed
 
 - Calibration: textColors.day.secondary for AA on elevated surfaces
 - Calibration: disabledForeground (day/night) for WCAG AA compliance
 - Result: A11Y contrast = 100% PASS
+- Typography rhythm enforcement: lint rules tightened for line-height, leading, and margin spacing
+- Theme cleanup: removed lineHeight overrides to align with rhythm policy
+- Foundation audits: token system and component coverage reports added
+- Decision snapshot: component token coverage interpretation locked (no-op)
 
 ## [2.1.0]
 

@@ -71,26 +71,11 @@ export const neonBrand: BrandPackage = {
             bold: "800", // Extra bold
           },
           fontSize: {
-            xs: [
-              "clamp(0.875rem, 0.8rem + 0.25vw, 1rem)",
-              { lineHeight: "1.25rem", letterSpacing: "0.025em" },
-            ], // Larger than default
-            sm: [
-              "clamp(1rem, 0.95rem + 0.25vw, 1.125rem)",
-              { lineHeight: "1.5rem", letterSpacing: "0em" },
-            ], // Larger
-            base: [
-              "clamp(1.125rem, 1rem + 0.5vw, 1.25rem)",
-              { lineHeight: "1.75rem", letterSpacing: "-0.025em" },
-            ], // Larger
-            lg: [
-              "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
-              { lineHeight: "1.75rem", letterSpacing: "-0.025em" },
-            ], // Larger
-            xl: [
-              "clamp(1.5rem, 1.25rem + 1.25vw, 2rem)",
-              { lineHeight: "2rem", letterSpacing: "-0.05em" },
-            ], // Larger
+            xs: ["clamp(0.875rem, 0.8rem + 0.25vw, 1rem)", { letterSpacing: "0.025em" }], // Larger than default
+            sm: ["clamp(1rem, 0.95rem + 0.25vw, 1.125rem)", { letterSpacing: "0em" }], // Larger
+            base: ["clamp(1.125rem, 1rem + 0.5vw, 1.25rem)", { letterSpacing: "-0.025em" }], // Larger
+            lg: ["clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)", { letterSpacing: "-0.025em" }], // Larger
+            xl: ["clamp(1.5rem, 1.25rem + 1.25vw, 2rem)", { letterSpacing: "-0.05em" }], // Larger
           },
         },
         // Spacing overrides - larger spacing for breathing room
@@ -217,26 +202,11 @@ export const neonBrand: BrandPackage = {
             bold: "800",
           },
           fontSize: {
-            xs: [
-              "clamp(0.875rem, 0.8rem + 0.25vw, 1rem)",
-              { lineHeight: "1.25rem", letterSpacing: "0.025em" },
-            ],
-            sm: [
-              "clamp(1rem, 0.95rem + 0.25vw, 1.125rem)",
-              { lineHeight: "1.5rem", letterSpacing: "0em" },
-            ],
-            base: [
-              "clamp(1.125rem, 1rem + 0.5vw, 1.25rem)",
-              { lineHeight: "1.75rem", letterSpacing: "-0.025em" },
-            ],
-            lg: [
-              "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
-              { lineHeight: "1.75rem", letterSpacing: "-0.025em" },
-            ],
-            xl: [
-              "clamp(1.5rem, 1.25rem + 1.25vw, 2rem)",
-              { lineHeight: "2rem", letterSpacing: "-0.05em" },
-            ],
+            xs: ["clamp(0.875rem, 0.8rem + 0.25vw, 1rem)", { letterSpacing: "0.025em" }],
+            sm: ["clamp(1rem, 0.95rem + 0.25vw, 1.125rem)", { letterSpacing: "0em" }],
+            base: ["clamp(1.125rem, 1rem + 0.5vw, 1.25rem)", { letterSpacing: "-0.025em" }],
+            lg: ["clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)", { letterSpacing: "-0.025em" }],
+            xl: ["clamp(1.5rem, 1.25rem + 1.25vw, 2rem)", { letterSpacing: "-0.05em" }],
           },
         },
         // Spacing overrides - same as day

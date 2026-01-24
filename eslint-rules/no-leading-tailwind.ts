@@ -26,7 +26,8 @@ type Options = [];
 const TYPOGRAPHY_COMPONENTS = ["Text", "Heading", "Label"] as const;
 
 // Pattern to detect leading-* classes
-const LEADING_CLASS_PATTERN = /\bleading-(none|tight|snug|normal|relaxed|loose|\[[^\]]+\])\b/g;
+const LEADING_CLASS_PATTERN =
+  /(?:^|\s)(leading-(?:none|tight|snug|normal|relaxed|loose|\[[^\]]+\]))(?=\s|$)/g;
 
 export default createRule<Options, MessageIds>({
   name: "no-leading-tailwind",
@@ -122,13 +123,7 @@ export default createRule<Options, MessageIds>({
               classNameValue = attr.value.value;
             }
           } else if (attr.value?.type === TSESTree.AST_NODE_TYPES.JSXExpressionContainer) {
-            const expr = attr.value.expression;
-            if (expr.type === TSESTree.AST_NODE_TYPES.Literal && typeof expr.value === "string") {
-              classNameValue = expr.value;
-            } else if (expr.type === TSESTree.AST_NODE_TYPES.TemplateLiteral) {
-              // Template literal - check all quasis
-              classNameValue = expr.quasis.map((q) => q.value.raw).join("");
-            }
+            classNameValue = resolveStringFromExpression(attr.value.expression, context);
           }
 
           if (!classNameValue) continue;
@@ -204,4 +199,54 @@ function isPublicUiEntry(source: string): boolean {
     source === "@tenerife.music/ui" ||
     source.startsWith("@tenerife.music/ui/")
   );
+}
+
+function resolveStringFromExpression(
+  expr: TSESTree.Expression,
+  context: TSESTree.TSESLint.RuleContext<MessageIds, Options>,
+): string | null {
+  if (expr.type === TSESTree.AST_NODE_TYPES.Literal && typeof expr.value === "string") {
+    return expr.value;
+  }
+
+  if (expr.type === TSESTree.AST_NODE_TYPES.TemplateLiteral && expr.expressions.length === 0) {
+    return expr.quasis.map((q) => q.value.raw).join("");
+  }
+
+  if (expr.type === TSESTree.AST_NODE_TYPES.Identifier) {
+    return resolveIdentifierString(expr.name, expr, context);
+  }
+
+  return null;
+}
+
+function resolveIdentifierString(
+  name: string,
+  node: TSESTree.Node,
+  context: TSESTree.TSESLint.RuleContext<MessageIds, Options>,
+): string | null {
+  const sourceCode = context.getSourceCode();
+  let scope = sourceCode.getScope(node);
+  while (scope) {
+    const variable = scope.variables.find((v) => v.name === name);
+    if (variable) {
+      for (const def of variable.defs) {
+        if (def.type !== "Variable" || def.node.type !== "VariableDeclarator") continue;
+        const init = def.node.init;
+        if (!init) continue;
+        if (init.type === TSESTree.AST_NODE_TYPES.Literal && typeof init.value === "string") {
+          return init.value;
+        }
+        if (
+          init.type === TSESTree.AST_NODE_TYPES.TemplateLiteral &&
+          init.expressions.length === 0
+        ) {
+          return init.quasis.map((q) => q.value.raw).join("");
+        }
+      }
+      break;
+    }
+    scope = scope.upper;
+  }
+  return null;
 }
