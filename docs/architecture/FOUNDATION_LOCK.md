@@ -1400,7 +1400,7 @@ Any token system modifications require:
 
 ## 🔒 TYPOGRAPHY (FULL LOCK)
 
-**Status:** ✅ **LOCKED**
+**Status:** ✅ **LOCKED (ENFORCED)**
 
 **Scope:**
 - Typography tokens: `src/FOUNDATION/tokens/typography.ts` (fontSizes, lineHeights, letterSpacings, fontFamilies, textStyles)
@@ -1417,6 +1417,9 @@ Any token system modifications require:
 - TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020
 - TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_001, TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_002
 - TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_ENFORCEMENT_V1_003
+  - 003A: line-height enforcement
+  - 003B: leading-* enforcement
+  - 003C: paragraph margin enforcement
 
 **Rules (Binding) — Color:**
 1. Text colors must use canonical roles (`primary`, `secondary`, `tertiary`, `muted`, `inverse`, `disabled`, `status`)
