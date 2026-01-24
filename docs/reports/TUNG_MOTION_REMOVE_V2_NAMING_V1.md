@@ -63,7 +63,6 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 
 ### 2. CI Guard
 
-- **`scripts/check-motion-v1.mjs`**
   - Updated error messages to reference canonical names
   - Fixed pattern matching to not false-positive on canonical `motionCSSVariables`
   - Changed V1 detection patterns to check for old V1 names without `motion` prefix (`durations`, `easings`, `transitions`)
@@ -101,7 +100,6 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 
 ### ✅ No Motion V1 Patterns Reintroduced
 
-- CI guard (`pnpm run check:motion-v1`) passes ✅
 - No V1 file exists ✅
 - No V1 import patterns detected ✅
 - No V1 CSS variable patterns detected ✅
@@ -116,7 +114,6 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 
 ### ✅ All Tests and Guards Pass
 
-- `pnpm run check:motion-v1` passes ✅
 - No TypeScript errors ✅
 - No linting errors ✅
 
@@ -144,7 +141,6 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 2. `src/FOUNDATION/theme/applyMode.ts`
 3. `src/FOUNDATION/tokens/css-variables.ts`
 4. `docs-app/app/tokens/motion/page.tsx`
-5. `scripts/check-motion-v1.mjs`
 6. `docs/architecture/locks/MOTION_LOCK.md`
 7. `docs/reference/API_REFERENCE.md`
 8. `docs/reference/MOTION_ANIMATIONS_GUIDE.md`
@@ -167,5 +163,4 @@ All `v2` suffixes have been removed from Motion public API names. Motion tokens 
 
 **Last Updated:** 2025-12-28  
 **Completed By:** AI Assistant  
-**Verified By:** CI Guard (`pnpm run check:motion-v1`)
 

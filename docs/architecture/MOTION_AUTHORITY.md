@@ -867,7 +867,6 @@ Any Motion Authority modifications require:
   - Removed legacy CSS variable names (`--duration-*`, `--ease-*`, `--transition-*`)
   - Motion system is now singular and versionless
   - Updated Token System Integration section
-  - Added CI guard script (`pnpm check:motion-v1`) to prevent V1 reintroduction
 
 - **v1.4** (2025-12-27): Motion Audit and Lock - Escape Hatch Policy
   - Added Escape Hatch Policy section

@@ -454,7 +454,6 @@ Documentation aligned with Motion 2.0.0 (V1 fully removed). All references to Mo
   - Removed Motion V1 tokens (motion.ts deleted)
   - Motion system is now singular and versionless
   - Updated lock to reflect singular architecture
-  - Added CI guard: `pnpm check:motion-v1`
 
 - **v1.0** (2025-12-27): Initial Motion System Lock
   - Locked motion tokens
