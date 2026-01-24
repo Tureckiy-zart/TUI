@@ -188,6 +188,7 @@ const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, A
     return (
       <AvatarPrimitive.Root
         ref={ref}
+        role="img"
         aria-label={ariaLabel}
         className={cn(avatarVariants({ size, shape }), className)}
       >

@@ -146,15 +146,6 @@ describe("Heading", () => {
     });
   });
 
-  describe("Custom className", () => {
-    it.skip("applies custom className", () => {
-      // Foundation components do not support className prop
-      const { container } = renderWithTheme(<Heading level={2}>Heading</Heading>);
-      const heading = container.querySelector("h2");
-      expect(heading).not.toHaveClass("custom-class");
-    });
-  });
-
   describe("Snapshot", () => {
     it("matches snapshot for default variant", () => {
       const { container } = renderWithTheme(<Heading level={1}>Default Heading</Heading>);

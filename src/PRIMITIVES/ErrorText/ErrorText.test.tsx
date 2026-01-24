@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import * as React from "react";
 import { describe, expect, it } from "vitest";
 
-import { renderWithTheme } from "@/test/test-utils";
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
 import { ErrorText } from "./ErrorText";
 
@@ -83,6 +83,14 @@ describe("ErrorText", () => {
       const error = screen.getByRole("alert");
       expect(input).toHaveAttribute("aria-describedby", "test-error");
       expect(error).toHaveAttribute("id", "test-error");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <ErrorText id="err1">This field is required</ErrorText>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

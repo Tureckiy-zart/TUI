@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { describe, expect, it, vi } from "vitest";
-import { renderWithTheme } from "../../../test/test-utils";
+import { axeCheck, renderWithTheme } from "../../../test/test-utils";
+
 import { Avatar } from "./Avatar";
 import { AvatarGroup } from "./AvatarGroup";
 
@@ -218,6 +219,12 @@ describe("Avatar component", () => {
 
     const avatar = container.querySelector('[aria-label="John Doe"]');
     expect(avatar).toBeInTheDocument();
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = renderWithTheme(<Avatar alt="John Doe" />);
+    const results = await axeCheck(container);
+    expect(results.violations).toHaveLength(0);
   });
 
   // ============================================================================

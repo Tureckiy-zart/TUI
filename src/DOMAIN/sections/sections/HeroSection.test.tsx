@@ -119,13 +119,6 @@ describe("HeroSection component", () => {
     expect(container.querySelector('[data-testid="media"]')).not.toBeInTheDocument();
   });
 
-  it.skip("should apply responsive classes", () => {
-    // Foundation components do not support className prop
-    const { container } = render(<HeroSection title="Test" variant="full-width" />);
-    const heading = container.querySelector("h1");
-    expect(heading).toBeInTheDocument();
-  });
-
   it("should apply transition classes for theme awareness", () => {
     const { container } = render(<HeroSection title="Test" />);
     const section = container.querySelector("section");

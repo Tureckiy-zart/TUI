@@ -3,7 +3,7 @@ import { screen, waitFor } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "../../../test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "../../../test/test-utils";
 
 import { Select } from "./Select";
 
@@ -797,6 +797,24 @@ describe("Select", () => {
       // Radix Select handles all ARIA attributes automatically
       const trigger = screen.getByRole("combobox");
       expect(trigger).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <Select.Root>
+          <Select.Trigger aria-label="Choose option">
+            <Select.Value placeholder="Select an option" />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Viewport>
+              <Select.Item value="option1">Option 1</Select.Item>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

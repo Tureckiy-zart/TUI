@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
+
 import { Slider } from "./Slider";
 
 describe("Slider", () => {
@@ -185,6 +188,12 @@ describe("Slider", () => {
       // Radix uses data-disabled instead of aria-disabled
       expect(slider).toHaveAttribute("data-disabled");
     });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(<Slider defaultValue={50} aria-label="Volume" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
   });
 
   describe("State Tests", () => {
@@ -204,10 +213,12 @@ describe("Slider", () => {
       );
 
       const slider = screen.getByRole("slider");
+      // Keyboard: arrows must not trigger onValueChange
       slider.focus();
       await user.keyboard("{ArrowRight}");
-
-      // Should not call onChange when disabled
+      expect(handleChange).not.toHaveBeenCalled();
+      // Click/pointer must not trigger onValueChange
+      await user.click(slider);
       expect(handleChange).not.toHaveBeenCalled();
     });
   });

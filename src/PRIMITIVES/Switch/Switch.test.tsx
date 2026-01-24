@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Switch } from "./Switch";
 
@@ -210,6 +210,18 @@ describe("Switch", () => {
       );
       const switchElement = screen.getByRole("switch", { name: "Described switch" });
       expect(switchElement).toHaveAttribute("aria-describedby", "description");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(<Switch aria-label="Sample switch" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when disabled", async () => {
+      const { container } = renderWithTheme(<Switch disabled aria-label="Disabled switch" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
+
 import { RangeSlider } from "./RangeSlider";
 
 describe("RangeSlider", () => {
@@ -278,6 +281,14 @@ describe("RangeSlider", () => {
         expect(slider).toHaveAttribute("data-disabled");
       });
     });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <RangeSlider defaultValue={[25, 75]} aria-label="Price range" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
   });
 
   describe("State Tests", () => {
@@ -304,10 +315,12 @@ describe("RangeSlider", () => {
       );
 
       const sliders = screen.getAllByRole("slider");
+      // Keyboard: arrows must not trigger onValueChange
       sliders[0]!.focus();
       await user.keyboard("{ArrowRight}");
-
-      // Should not call onChange when disabled
+      expect(handleChange).not.toHaveBeenCalled();
+      // Click/pointer must not trigger onValueChange
+      await user.click(sliders[0]!);
       expect(handleChange).not.toHaveBeenCalled();
     });
   });

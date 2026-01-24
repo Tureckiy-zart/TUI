@@ -25,7 +25,7 @@ describe("Pagination accessibility", () => {
     expect(currentPage).toHaveAttribute("aria-current", "page");
 
     const results = await axe(container);
-    (expect(results) as any).toHaveNoViolations();
+    expect(results.violations).toHaveLength(0);
   });
 
   it("allows keyboard users to move between pages", async () => {

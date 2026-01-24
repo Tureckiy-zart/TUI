@@ -328,6 +328,40 @@ describe("FileUpload", () => {
     });
   });
 
+  describe("Variants", () => {
+    it("renders outline variant", () => {
+      render(<FileUpload variant="outline" aria-label="Outline" />);
+      const dropzone = screen.getByRole("button", { name: /outline/i });
+      expect(dropzone).toBeInTheDocument();
+    });
+
+    it("renders filled variant", () => {
+      render(<FileUpload variant="filled" aria-label="Filled" />);
+      const dropzone = screen.getByRole("button", { name: /filled/i });
+      expect(dropzone).toBeInTheDocument();
+    });
+  });
+
+  describe("Sizes", () => {
+    it("renders sm size", () => {
+      render(<FileUpload size="sm" aria-label="Small" />);
+      const dropzone = screen.getByRole("button", { name: /small/i });
+      expect(dropzone).toBeInTheDocument();
+    });
+
+    it("renders md size", () => {
+      render(<FileUpload size="md" aria-label="Medium" />);
+      const dropzone = screen.getByRole("button", { name: /medium/i });
+      expect(dropzone).toBeInTheDocument();
+    });
+
+    it("renders lg size", () => {
+      render(<FileUpload size="lg" aria-label="Large" />);
+      const dropzone = screen.getByRole("button", { name: /large/i });
+      expect(dropzone).toBeInTheDocument();
+    });
+  });
+
   describe("State Tests", () => {
     it("disabled state blocks file selection", async () => {
       const handleFileSelect = vi.fn();

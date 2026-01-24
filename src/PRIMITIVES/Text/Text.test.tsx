@@ -124,15 +124,6 @@ describe("Text", () => {
     });
   });
 
-  describe("Custom className", () => {
-    it.skip("applies custom className", () => {
-      // Foundation components do not support className prop
-      const { container } = renderWithTheme(<Text>Text</Text>);
-      const text = container.querySelector("span");
-      expect(text).not.toHaveClass("custom-class");
-    });
-  });
-
   describe("Edge Cases", () => {
     it("handles empty children", () => {
       const { container } = renderWithTheme(<Text />);

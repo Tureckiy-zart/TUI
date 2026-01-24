@@ -362,13 +362,13 @@ describe("Button", () => {
     it("passes axe accessibility checks", async () => {
       const { container } = renderWithTheme(<Button>Accessible Button</Button>);
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
 
     it("passes axe accessibility checks when disabled", async () => {
       const { container } = renderWithTheme(<Button disabled>Disabled Button</Button>);
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
 
     it("passes axe accessibility checks with aria-label", async () => {
@@ -378,7 +378,7 @@ describe("Button", () => {
         </Button>,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
   });
 

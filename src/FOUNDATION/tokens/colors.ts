@@ -224,7 +224,7 @@ export const textColors: Record<Mode, TextColors> = {
     primary: "0 0% 9%", // Almost black (neutral-900 equivalent)
     secondary: "0 0% 38%", // Medium gray for secondary text
     tertiary: "0 0% 65%", // Light gray
-    muted: "0 0% 55%", // Muted gray for low-emphasis text
+    muted: "0 0% 40%", // Muted gray for low-emphasis text (AA on elevated surfaces)
     inverse: "0 0% 100%", // White (for dark backgrounds)
   },
   night: {

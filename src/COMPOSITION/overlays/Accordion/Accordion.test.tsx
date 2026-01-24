@@ -3,7 +3,7 @@ import { screen, waitFor } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "../../../test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "../../../test/test-utils";
 
 import { Accordion } from "./Accordion";
 
@@ -451,6 +451,21 @@ describe("Accordion", () => {
 
       const trigger = screen.getByRole("button", { name: /what is tenerife music\?/i });
       expect(trigger).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <Accordion.Root type="single" collapsible defaultValue="item-1">
+          <Accordion.Item value="item-1">
+            <Accordion.Trigger variant="primary" size="md">
+              Item 1
+            </Accordion.Trigger>
+            <Accordion.Content>Content 1</Accordion.Content>
+          </Accordion.Item>
+        </Accordion.Root>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

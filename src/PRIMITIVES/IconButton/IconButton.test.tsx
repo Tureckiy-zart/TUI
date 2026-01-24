@@ -345,7 +345,7 @@ describe("IconButton", () => {
         <IconButton icon={<IconSearch />} aria-label="Search" />,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
   });
 
