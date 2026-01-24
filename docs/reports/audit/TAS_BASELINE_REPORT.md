@@ -311,7 +311,7 @@ TAS (Tenerife Animation System)
 
 **CSS Class Mapping:**
 - Presets return CSS class names (e.g., `"tm-motion-fade-in"`)
-- Classes map to Motion Tokens V2 CSS utilities
+- Classes map to Motion Tokens CSS utilities
 - All classes prefixed with `tm-motion-*`
 
 **Reference:** [MOTION_AUTHORITY.md](../../architecture/MOTION_AUTHORITY.md) - Motion Authority Contract (LOCKED)

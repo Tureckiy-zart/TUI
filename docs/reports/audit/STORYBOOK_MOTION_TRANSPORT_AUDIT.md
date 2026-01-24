@@ -96,12 +96,12 @@ The audit followed a systematic 7-step process:
 **Findings:**
 
 1. **Motion Token Definitions:**
-   - Motion V2: `src/FOUNDATION/tokens/motion/v2.ts` → `motionV2CSSVariables`
+   - Motion V2: `src/FOUNDATION/tokens/motion.ts` → `motionV2CSSVariables`
    - Legacy Motion: `src/FOUNDATION/tokens/motion.ts` → `motionCSSVariables`
 
 2. **CSS Variable Application:**
    - `src/FOUNDATION/theme/applyMode.ts:updateCSSVariablesFromTokens()` (lines 399-415)
-   - Motion V2 variables applied: lines 408-415
+   - Motion variables applied: lines 408-415
    - Legacy motion variables applied: lines 399-406
 
 3. **Initialization:**
@@ -111,7 +111,7 @@ The audit followed a systematic 7-step process:
 4. **Diagnostic Helper Created:**
    - `__checkMotionVars()` helper function added to preview.tsx
    - Verifies all motion CSS variables are present and non-zero
-   - Checks both V2 and legacy motion variables
+   - Checks both and legacy motion variables
    - Detects `prefers-reduced-motion` status
 
 **Expected Variables:**
@@ -161,7 +161,7 @@ The audit followed a systematic 7-step process:
 3. **Keyframes Generation:**
    - Keyframes defined in:
      - `src/FOUNDATION/tokens/motion.ts` → `keyframes` object
-     - `src/FOUNDATION/tokens/motion/v2.ts` → `motionV2TailwindConfig.keyframes`
+     - `src/FOUNDATION/tokens/motion.ts` → `motionV2TailwindConfig.keyframes`
    - Mapped to Tailwind config: `tailwind.config.ts:183-186`
 
 **Verification Required:**
@@ -393,7 +393,7 @@ Based on the audit findings, the motion transport chain appears to be correctly 
 Use this checklist to verify motion transport in Storybook:
 
 - [ ] Run `__checkMotionVars()` in Storybook console
-- [ ] Verify all motion V2 variables are present
+- [ ] Verify all motion variables are present
 - [ ] Verify all legacy motion variables are present
 - [ ] Verify no variables have zero duration (except `--tm-motion-duration-reduced`)
 - [ ] Check `prefers-reduced-motion` status
@@ -432,7 +432,7 @@ The motion transport infrastructure is correctly configured. The most likely fai
 ## Files Verified (No Changes)
 
 1. `src/FOUNDATION/tokens/motion.ts` - Motion tokens and CSS variables
-2. `src/FOUNDATION/tokens/motion/v2.ts` - Motion V2 tokens and CSS variables
+2. `src/FOUNDATION/tokens/motion.ts` - Motion tokens and CSS variables
 3. `src/FOUNDATION/theme/applyMode.ts` - CSS variable application
 4. `tailwind.config.ts` - Tailwind configuration and safelist
 5. `src/preset.ts` - Motion utility classes

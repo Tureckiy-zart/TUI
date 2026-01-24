@@ -39,6 +39,10 @@ This document **tracks the Foundation layer status** of `@tenerife.music/ui`. Th
 
 **Foundation layer is finalized; any changes require explicit unlock procedure.**
 
+**Typography Font Supply Note:** Font delivery is **out of Foundation scope**. Fonts are consumer-owned;
+Foundation typography must remain valid with system fallbacks. Any change to this rule requires a new
+Foundation contract.
+
 ---
 
 ## 📖 Authority Status Semantics
@@ -1394,40 +1398,64 @@ Any token system modifications require:
 
 ---
 
-## 🔒 Typography Color Policy v1 Lock
-
-**Status:** ✅ **LOCKED**  
-**Scope:** Typography color roles, allowed text-token combinations, status colors  
-**Authority:** `docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md`  
-**Task:** TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020  
-**Enforcement:** ESLint rule `typography-color-policy` (P1, error, **ENFORCED**)
-
-**Rules (Binding):**
-1. **Text colors must use canonical roles** (`primary`, `secondary`, `tertiary`, `muted`, `inverse`, `disabled`, `status`)
-2. **Status colors are restricted** to explicit status messaging only
-3. **Readable roles forbid muted/tertiary** (use `secondary` or `meta`)
-4. **No arbitrary text colors** (no custom CSS vars or raw colors)
-
----
-
-## Typography Color Enforcement
+## 🔒 TYPOGRAPHY (FULL LOCK)
 
 **Status:** ✅ **LOCKED**
 
-**Policy:**
-- Text and Heading components do not accept arbitrary colors
-- Only semantic color roles are allowed: `primary`, `secondary`, `disabled`, `inverse`, `status` (via explicit status role)
-- Inline `style.color` is forbidden for text components
+**Scope:**
+- Typography tokens: `src/FOUNDATION/tokens/typography.ts` (fontSizes, lineHeights, letterSpacings, fontFamilies, textStyles)
+- Text color roles (TYPOGRAPHY_COLOR_POLICY_v1)
+- Line-height and rhythm (TYPOGRAPHY_RHYTHM_POLICY_v1)
+- Paragraph spacing (container-applied, not on text components)
+- Components (API locked): Text, Heading, and any future text-primitive
+
+**Authority:**
+- `docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md`
+- `docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md`
+
+**Tasks (TUNG):**
+- TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020
+- TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_001, TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_002
+- TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_ENFORCEMENT_V1_003
+
+**Rules (Binding) — Color:**
+1. Text colors must use canonical roles (`primary`, `secondary`, `tertiary`, `muted`, `inverse`, `disabled`, `status`)
+2. Status colors are restricted to explicit status messaging only
+3. Readable roles forbid muted/tertiary (use `secondary` or `meta`)
+4. No arbitrary text colors (no custom CSS vars or raw colors)
+5. Text and Heading do not accept arbitrary colors; only semantic color roles; inline `style.color` is forbidden
+
+**Rules (Binding) — Rhythm:**
+1. Line-height must use canonical tokens (`none`, `tight`, `snug`, `normal`, `relaxed`, `loose`)
+2. Each typography role has a canonical line-height (defined in rhythm policy)
+3. Raw line-height values are forbidden (no numeric values, rem/px values, or inline styles)
+4. No per-component line-height decisions (line-height comes from role policy)
+5. Rhythm is token-defined only (no theme overrides, no component overrides)
+6. No inline or Tailwind rhythm overrides on text components
+7. Paragraph rhythm is container-applied via role context (e.g. Box, Stack), not directly on text components
+8. Text and Heading do not accept `margin`, `gap`, `leading`, or custom `lineHeight` props; TextProps and HeadingProps do not expose `lineHeight`, `leading`, or `margin`
 
 **Rationale:**
-- Typography color is part of visual hierarchy and accessibility
-- Color selection must be a consequence of role, not an ad-hoc decision
+- Typography color and rhythm are part of visual hierarchy, vertical rhythm, and accessibility
+- Color and line-height selection must be a consequence of role, not an ad-hoc decision
+- Consistent vertical rhythm requires role-based line-height and container-applied paragraph spacing
 
 **Enforcement:**
-- ESLint rule: `typography-color-policy`
-- Component API restrictions (Text / Heading)
+- ESLint: `typography-color-policy`, `typography-rhythm-policy`, `no-raw-line-height`, `no-raw-line-height-scale`, `no-leading-tailwind`, `no-text-margin-spacing`
+- Type system: `typographyRhythmPolicy` in `src/FOUNDATION/tokens/typography.ts`; Text and Heading derive line-height from `textStyles` (role-based)
+- Component API: Text and Heading restrictions (no `lineHeight`, `leading`, `margin`, `style.color`, `style.lineHeight`)
 
-**Change Control:** Any change requires a new Foundation TUNG.
+**Forbidden (no exceptions):**
+- Any changes to: fontSizes, lineHeights, letterSpacings; allowed color roles; Text/Heading behavior; ESLint rule permissions
+- `style={{ color }}`, `style={{ lineHeight }}`
+- Tailwind `leading-*` on typography
+- margin-top / margin-bottom on text components
+- Any "exceptions for a specific case"
+
+**Allowed (only via Foundation TUNG):**
+- New text size, new line-height, new color role — only via new TUNG, with policy + enforcement update; no hotfixes
+
+**Change Control:** Any modification requires a new Foundation TUNG.
 
 ---
 

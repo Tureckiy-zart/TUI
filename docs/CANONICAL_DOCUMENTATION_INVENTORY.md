@@ -67,8 +67,9 @@ Foundation Authority Contracts define immutable rules for the design system. All
 | `docs/architecture/LAYOUT_AUTHORITY.md` | Canonical layout primitives, separation laws, forbidden patterns | **LOCKED** |
 | `docs/architecture/TOKEN_AUTHORITY.md` | Token system definition, ownership rules, semantic classifications | **LOCKED** |
 | `docs/architecture/EXTENSION_AUTHORITY.md` | Extension layer boundary contract | **ACTIVE** |
+| `docs/architecture/TYPOGRAPHY_CONTRACT.md` | Typography foundation contract (contrast, rhythm, font supply) | **ACTIVE** |
 
-**Total:** 11 files (10 Foundation + 1 Extension)
+**Total:** 12 files (10 Foundation + 1 Extension + 1 Contract)
 
 ---
 
@@ -239,6 +240,7 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/architecture/LAYOUT_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
 | `docs/architecture/TOKEN_AUTHORITY.md` | Authority Contract | Authority (LOCKED) | Foundation Authority |
 | `docs/architecture/EXTENSION_AUTHORITY.md` | Authority Contract | Authority (ACTIVE) | Extension boundary |
+| `docs/architecture/TYPOGRAPHY_CONTRACT.md` | Authority Contract | Contract (ACTIVE) | Typography foundation contract |
 | `docs/architecture/AUTHORITY_NAVIGATION.md` | Authority Navigation | Reference (ACTIVE) | Authority navigation |
 | `docs/architecture/ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | Canonical architecture lock |
 | `docs/architecture/ARCHITECTURE_LOCK.md` | Architecture Rules | Lock (LOCKED) | **PRIMARY CANONICAL SOURCE** - Architecture lock (supersedes CANONICAL_STATE_FINAL.md) |

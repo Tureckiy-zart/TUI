@@ -43,7 +43,7 @@ This report analyzes the library's component coverage against a canonical minima
 - ✅ Radius — `src/FOUNDATION/tokens/radius.ts`
 - ✅ Typography — `src/FOUNDATION/tokens/typography.ts`
 - ✅ Elevation / Shadow — `src/FOUNDATION/tokens/shadows.ts`
-- ✅ Motion (durations, easing) — `src/FOUNDATION/tokens/motion/v2.ts`
+- ✅ Motion (durations, easing) — `src/FOUNDATION/tokens/motion.ts`
 - ✅ Z-index scale — Defined in `docs/architecture/ELEVATION_AUTHORITY.md` (zIndex.base, zIndex.content, zIndex.dropdown, zIndex.sticky, zIndex.overlay, zIndex.modal, zIndex.notification, zIndex.tooltip, zIndex.maximum)
 
 **Location:** `src/FOUNDATION/tokens/`

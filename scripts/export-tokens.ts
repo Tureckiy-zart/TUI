@@ -15,7 +15,7 @@ import { fileURLToPath } from "url";
 
 // Import all token modules
 import * as colors from "../src/FOUNDATION/tokens/colors";
-import * as motion from "../src/FOUNDATION/tokens/motion/v2";
+import * as motion from "../src/FOUNDATION/tokens/motion";
 import * as radius from "../src/FOUNDATION/tokens/radius";
 import * as shadows from "../src/FOUNDATION/tokens/shadows";
 import * as spacing from "../src/FOUNDATION/tokens/spacing";

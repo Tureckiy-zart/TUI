@@ -2,7 +2,7 @@
  * Tenerife Animation System Presets
  *
  * Reusable animation presets for common UI patterns.
- * All presets use CSS Motion Tokens V2 and respect reduced motion preferences.
+ * All presets use CSS Motion Tokens and respect reduced motion preferences.
  */
 "use client";
 import { shouldReduceMotion } from "./tas";

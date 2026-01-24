@@ -45,7 +45,7 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 
 ### 1. Source Code
 
-- **`src/FOUNDATION/tokens/motion/v2.ts`**
+- **`src/FOUNDATION/tokens/motion.ts`**
   - Removed `motionV2CSSVariables` alias export
   - All exports now use canonical names without `v2` suffix
 
@@ -140,7 +140,7 @@ All `motionV2*` exports have been renamed to canonical `motion*` names:
 
 ## Files Modified
 
-1. `src/FOUNDATION/tokens/motion/v2.ts`
+1. `src/FOUNDATION/tokens/motion.ts`
 2. `src/FOUNDATION/theme/applyMode.ts`
 3. `src/FOUNDATION/tokens/css-variables.ts`
 4. `docs-app/app/tokens/motion/page.tsx`

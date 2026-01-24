@@ -2,11 +2,7 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
 import { tailwindThemeColors } from "./FOUNDATION/tokens/colors";
-import {
-  motionDurations,
-  motionEasings,
-  motionTailwindConfig,
-} from "./FOUNDATION/tokens/motion/v2";
+import { motionDurations, motionEasings, motionTailwindConfig } from "./FOUNDATION/tokens/motion";
 import { tailwindRadiusConfig } from "./FOUNDATION/tokens/radius";
 import { tailwindShadowConfig } from "./FOUNDATION/tokens/shadows";
 import { tailwindSpacingConfig } from "./FOUNDATION/tokens/spacing";
@@ -106,14 +102,38 @@ const preset: Partial<Config> = {
         ".tm-motion-slide-up": {
           animation: `slide-up-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
         },
+        ".tm-motion-slide-up-in": {
+          animation: `slide-up-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-up-out": {
+          animation: `slide-up-out var(--tm-motion-duration-fast) var(--tm-motion-easing-standard) both`,
+        },
         ".tm-motion-slide-down": {
           animation: `slide-down-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-down-in": {
+          animation: `slide-down-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-down-out": {
+          animation: `slide-down-out var(--tm-motion-duration-fast) var(--tm-motion-easing-standard) both`,
         },
         ".tm-motion-slide-left": {
           animation: `slide-left-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
         },
+        ".tm-motion-slide-left-in": {
+          animation: `slide-left-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-left-out": {
+          animation: `slide-left-out var(--tm-motion-duration-fast) var(--tm-motion-easing-standard) both`,
+        },
         ".tm-motion-slide-right": {
           animation: `slide-right-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-right-in": {
+          animation: `slide-right-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both`,
+        },
+        ".tm-motion-slide-right-out": {
+          animation: `slide-right-out var(--tm-motion-duration-fast) var(--tm-motion-easing-standard) both`,
         },
         // Compound animations
         ".tm-motion-fade-scale": {

@@ -1,7 +1,7 @@
 "use client";
 
 import { type Mode } from "@/FOUNDATION/tokens/colors";
-import { motionCSSVariables } from "@/FOUNDATION/tokens/motion/v2";
+import { motionCSSVariables } from "@/FOUNDATION/tokens/motion";
 import { radiusCSSVariables } from "@/FOUNDATION/tokens/radius";
 import { REQUIRED_THEME_TOKENS } from "@/FOUNDATION/tokens/required-tokens";
 import { shadowCSSVariables } from "@/FOUNDATION/tokens/shadows";

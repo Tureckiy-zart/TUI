@@ -749,10 +749,10 @@ All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` prefer
 ### Source of Truth
 
 **Canonical Token Definitions:**
-- Location: `src/FOUNDATION/tokens/motion/v2.ts` - **ONLY MOTION TOKEN FILE**
+- Location: `src/FOUNDATION/tokens/motion.ts` - **ONLY MOTION TOKEN FILE**
 - Exports: `motionDurations`, `motionEasings`, `motionTransitions`, `motionFade`, `motionScale`, `motionSlide`, `motionCombined`, `motionReducedMotion`, `motionCSSVariables`, `motionTailwindConfig`
 
-**Rule:** The motion token file (`src/FOUNDATION/tokens/motion/v2.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
+**Rule:** The motion token file (`src/FOUNDATION/tokens/motion.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
 
 **Note:** Motion V1 was permanently removed in version 2.0.0. The motion system is singular and versionless post-2.0.0. Any references to Motion V1 in code, comments, examples, or documentation are incorrect and must be removed.
 

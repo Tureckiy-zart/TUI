@@ -102,6 +102,12 @@ export default function App() {
 > 📖 **Note:** This example demonstrates API shape only. Understanding the system
 > requires familiarity with tokens, variants, and architectural constraints.
 
+### Fonts (Optional)
+
+TUI ships with **system font fallbacks** by default. We do **not** bundle or require fonts.
+If you want canonical visuals, you can load Inter / Clash Display / Satoshi in your app,
+but this is optional.
+
 ---
 
 ## ✨ Key Characteristics
@@ -124,6 +130,7 @@ export default function App() {
 | **Complete Guide**        | System overview and usage principles    |
 | Tokens Guide              | Design token structure and philosophy   |
 | Theme Guide               | Theme configuration and modes           |
+| Fonts Guide               | Optional font setup                     |
 | **Architecture Lock**     | Canonical architectural constraints     |
 | **Final Foundation Lock** | Authoritative source of truth           |
 | **A11Y Lock**             | Accessibility system lock (WCAG 2.1 AA) |

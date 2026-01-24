@@ -42,7 +42,7 @@ The full list of emitted variables is in:
 Tokens come from JS objects in `src/FOUNDATION/tokens/*` and can be overridden by themes:
 
 - `src/FOUNDATION/tokens/colors.ts`
-- `src/FOUNDATION/tokens/motion/v2`
+- `src/FOUNDATION/tokens/motion`
 - `src/FOUNDATION/tokens/spacing.ts`
 - `src/FOUNDATION/tokens/radius.ts`
 - `src/FOUNDATION/tokens/shadows.ts`

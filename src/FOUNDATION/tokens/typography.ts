@@ -5,6 +5,9 @@
  * Includes: font families (Inter, Satoshi, Clash Display), fluid type scale using clamp(),
  * font weights, line heights, letter spacing, and predefined text styles.
  *
+ * NOTE: Fonts are consumer-owned. This library does NOT ship font files and does NOT
+ * assume display fonts are available at runtime. System fallbacks must remain valid.
+ *
  * @see docs/tenerife_audit/design_system.md - typography system section
  */
 
@@ -83,6 +86,15 @@ export const fontFamily = {
  * min: smallest size (mobile)
  * preferred: fluid calculation
  * max: largest size (desktop)
+ *
+ * **IMPORTANT:** The line-height values in fontSize tuples (e.g., fontSize.xs[1].lineHeight)
+ * are INTERNAL-ONLY and used exclusively for Tailwind config generation.
+ * Do NOT use these directly in components. Instead:
+ * - Use `textStyles` for complete typography styles (includes line-height from role policy)
+ * - Use `lineHeight` tokens directly (lineHeight.none, lineHeight.tight, etc.)
+ * - Follow Typography Rhythm Policy v1 for role-based line-height assignments
+ *
+ * @see docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md
  */
 export const fontSize = {
   // text-xs: 12px base, scales from 0.75rem to 0.875rem
@@ -674,6 +686,173 @@ export function isAllowedTextToken(role: TypographyRole, token: TextToken): bool
   const policy = typographyRolePolicy[role];
   if (!policy) return false;
   return (policy.allowedText as readonly string[]).includes(token);
+}
+
+/**
+ * Typography Rhythm Policy
+ * Defines canonical line-height token for each typography role
+ * @see docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md
+ */
+export type TypographyRhythmRoleMetadata = {
+  lineHeight: keyof typeof lineHeight;
+  category?: "display" | "heading" | "body" | "label" | "caption" | "meta" | "status" | "disabled";
+  notes?: string;
+};
+
+export const typographyRhythmPolicy = {
+  display: {
+    lineHeight: "none" as const,
+    category: "display" as const,
+    notes: "Hero sections, tight spacing",
+  },
+  h1: {
+    lineHeight: "tight" as const,
+    category: "heading" as const,
+    notes: "Primary heading, compact spacing",
+  },
+  h2: {
+    lineHeight: "tight" as const,
+    category: "heading" as const,
+    notes: "Secondary heading, compact spacing",
+  },
+  h3: {
+    lineHeight: "snug" as const,
+    category: "heading" as const,
+    notes: "Section heading, slightly compact",
+  },
+  h4: {
+    lineHeight: "snug" as const,
+    category: "heading" as const,
+    notes: "Subsection heading, slightly compact",
+  },
+  h5: {
+    lineHeight: "normal" as const,
+    category: "heading" as const,
+    notes: "Minor heading, balanced spacing",
+  },
+  h6: {
+    lineHeight: "normal" as const,
+    category: "heading" as const,
+    notes: "Smallest heading, balanced spacing",
+  },
+  body: {
+    lineHeight: "relaxed" as const,
+    category: "body" as const,
+    notes: "Main body text, spacious for readability",
+  },
+  "body-sm": {
+    lineHeight: "normal" as const,
+    category: "body" as const,
+    notes: "Small body text, balanced spacing",
+  },
+  "body-xs": {
+    lineHeight: "normal" as const,
+    category: "body" as const,
+    notes: "Extra small body text, balanced spacing",
+  },
+  label: {
+    lineHeight: "normal" as const,
+    category: "label" as const,
+    notes: "Form labels, balanced spacing",
+  },
+  "label-sm": {
+    lineHeight: "normal" as const,
+    category: "label" as const,
+    notes: "Small labels, balanced spacing",
+  },
+  caption: {
+    lineHeight: "normal" as const,
+    category: "caption" as const,
+    notes: "Supporting text, balanced spacing",
+  },
+  meta: {
+    lineHeight: "normal" as const,
+    category: "meta" as const,
+    notes: "Helper/placeholder/meta text, balanced spacing",
+  },
+  status: {
+    lineHeight: "normal" as const,
+    category: "status" as const,
+    notes: "Status messaging, balanced spacing",
+  },
+  disabled: {
+    lineHeight: "normal" as const,
+    category: "disabled" as const,
+    notes: "Disabled text, balanced spacing",
+  },
+} as const satisfies Record<
+  keyof typeof textStyles | "status" | "disabled",
+  TypographyRhythmRoleMetadata
+>;
+
+/**
+ * Typography Rhythm Policy Type Helpers
+ * Type-level enforcement for Typography Rhythm Policy v1
+ * @see docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md
+ */
+
+/**
+ * Typography Rhythm Role union type
+ * All valid typography roles (same as TypographyRole)
+ */
+export type TypographyRhythmRole = keyof typeof typographyRhythmPolicy;
+
+/**
+ * Line-height Token union type
+ * All valid line-height tokens
+ */
+export type LineHeightToken = keyof typeof lineHeight;
+
+/**
+ * Role-to-Line-Height mapping type
+ * Maps each role to its canonical line-height token
+ */
+export type RoleLineHeightMap = {
+  [K in TypographyRhythmRole]: (typeof typographyRhythmPolicy)[K]["lineHeight"];
+};
+
+/**
+ * Helper type: Get line-height token for a role
+ * @example
+ * type DisplayLineHeight = LineHeightForRole<"display">; // "none"
+ * type BodyLineHeight = LineHeightForRole<"body">; // "relaxed"
+ */
+export type LineHeightForRole<R extends TypographyRhythmRole> =
+  (typeof typographyRhythmPolicy)[R]["lineHeight"];
+
+/**
+ * Helper type: Check if line-height token matches role policy
+ * @example
+ * type Valid = IsValidLineHeightForRole<"body", "relaxed">; // true
+ * type Invalid = IsValidLineHeightForRole<"body", "tight">; // false
+ */
+export type IsValidLineHeightForRole<R extends TypographyRhythmRole, L extends LineHeightToken> =
+  L extends LineHeightForRole<R> ? true : false;
+
+/**
+ * Runtime helper: Get line-height token for role
+ * @param role - Typography role
+ * @returns Canonical line-height token for the role
+ */
+export function getLineHeightForRole(role: TypographyRhythmRole): LineHeightToken {
+  const policy = typographyRhythmPolicy[role];
+  if (!policy) return "normal"; // Default fallback
+  return policy.lineHeight;
+}
+
+/**
+ * Runtime helper: Check if line-height token matches role policy
+ * @param role - Typography role
+ * @param lineHeightToken - Line-height token to check
+ * @returns true if line-height token matches role policy, false otherwise
+ */
+export function isValidLineHeightForRole(
+  role: TypographyRhythmRole,
+  lineHeightToken: LineHeightToken,
+): boolean {
+  const policy = typographyRhythmPolicy[role];
+  if (!policy) return false;
+  return policy.lineHeight === lineHeightToken;
 }
 
 /**

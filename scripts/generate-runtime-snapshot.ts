@@ -22,7 +22,7 @@ import {
   semanticColors,
   surfaceColors,
 } from "../src/FOUNDATION/tokens/colors";
-import { motionCSSVariables } from "../src/FOUNDATION/tokens/motion/v2";
+import { motionCSSVariables } from "../src/FOUNDATION/tokens/motion";
 import { radiusCSSVariables } from "../src/FOUNDATION/tokens/radius";
 import { shadowCSSVariables } from "../src/FOUNDATION/tokens/shadows";
 import { spacingCSSVariables } from "../src/FOUNDATION/tokens/spacing";

@@ -62,7 +62,7 @@ The Foundation token and theme system is **largely compliant** with Authority do
 | `spacing.ts` | Spacing system (base scale, semantic, layout) | SPACING_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `radius.ts` | Border radius system | RADIUS_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `shadows.ts` | Shadow and elevation system | ELEVATION_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
-| `motion/v2.ts` | Motion system (durations, easings, transitions) | MOTION_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
+| `motion.ts` | Motion system (durations, easings, transitions) | MOTION_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `opacity.ts` | Opacity tokens | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `gradients.ts` | Gradient tokens | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `states.ts` | State tokens (hover, active, disabled) | STATE_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
@@ -85,7 +85,7 @@ The Foundation token and theme system is **largely compliant** with Authority do
 | `colors.ts` | Theme color re-exports | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `spacing.ts` | Theme spacing (legacy) | SPACING_AUTHORITY | ⚠️ Minor | P2: Duplicate of tokens/spacing.ts | ⚠️ Deprecate |
 | `typography.ts` | Theme typography (legacy) | TYPOGRAPHY_AUTHORITY | ⚠️ Minor | P2: Duplicate of tokens/typography.ts | ⚠️ Deprecate |
-| `motion.ts` | Theme motion (legacy) | MOTION_AUTHORITY | ⚠️ Minor | P2: Duplicate of tokens/motion/v2.ts | ⚠️ Deprecate |
+| `motion.ts` | Theme motion (legacy) | MOTION_AUTHORITY | ⚠️ Minor | P2: Duplicate of tokens/motion.ts | ⚠️ Deprecate |
 | `registry.ts` | Theme registry | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `schema.ts` | Theme schema validation | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
 | `loader.ts` | Theme loader | TOKEN_AUTHORITY | ✅ Canonical | None | ✅ Ready for LOCK |
@@ -182,7 +182,7 @@ The Foundation token and theme system is **largely compliant** with Authority do
 
 **Location:** `src/FOUNDATION/theme/motion.ts`
 
-**Issue:** Duplicates motion tokens from `src/FOUNDATION/tokens/motion/v2.ts` with different structure.
+**Issue:** Duplicates motion tokens from `src/FOUNDATION/tokens/motion.ts` with different structure.
 
 **Impact:** Minor - creates confusion but doesn't break functionality.
 

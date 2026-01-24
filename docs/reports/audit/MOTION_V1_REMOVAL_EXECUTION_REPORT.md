@@ -79,7 +79,7 @@ Motion V1 has been completely removed from the codebase. All Motion V1 tokens, i
 - **Files Updated:**
   - `docs/architecture/locks/MOTION_LOCK.md` - Version history updated
 
-### ✅ BONUS: DX Simplification - Remove V2 Prefixes
+### ✅ BONUS: DX Simplification - Remove Prefixes
 - **Status:** Complete
 - **Action:** Renamed all `motionV2*` → `motion*` and `MotionV2*` → `Motion*`
 - **Result:** Cleaner API without version prefixes
@@ -113,7 +113,7 @@ Motion V1 has been completely removed from the codebase. All Motion V1 tokens, i
 ## Files Modified
 
 ### Core Token Files:
-- `src/FOUNDATION/tokens/motion/v2.ts` - Renamed all exports (removed V2 prefix)
+- `src/FOUNDATION/tokens/motion.ts` - Renamed all exports (removed prefix)
 - `src/FOUNDATION/tokens/index.ts` - Updated exports
 - `src/index.ts` - Updated exports
 

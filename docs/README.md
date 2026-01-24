@@ -73,6 +73,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [A11Y_AUTHORITY.md](./architecture/A11Y_AUTHORITY.md) - Accessibility requirements (semantic roles, aria-* as API, keyboard-only operability, accessible names)
 - [INPUT_AUTHORITY.md](./architecture/INPUT_AUTHORITY.md) - Input component contract (form controls, validation, keyboard parity)
 - [TOKEN_AUTHORITY.md](./architecture/TOKEN_AUTHORITY.md) - Token system rules
+- [TYPOGRAPHY_CONTRACT.md](./architecture/TYPOGRAPHY_CONTRACT.md) - Typography foundation contract (contrast, rhythm, font supply)
 
 ### Extension Authority
 

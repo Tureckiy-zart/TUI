@@ -133,8 +133,16 @@ export function getMergedTokens(overrides: ThemeOverrideInputs = {}) {
 type MergedTokens = ReturnType<typeof getMergedTokens>;
 
 export function buildTmRuntimeValues(mode: Mode, tokens: MergedTokens): Record<string, string> {
-  const { surfaceColors, textColors, baseColors, semanticColors, disabledColors } = tokens;
-  const { accentColors, secondaryColors } = tokens;
+  const {
+    surfaceColors,
+    textColors,
+    baseColors,
+    semanticColors,
+    disabledColors,
+    primaryColors,
+    accentColors,
+    secondaryColors,
+  } = tokens;
 
   const surface = surfaceColors[mode];
   const text = textColors[mode];
@@ -143,12 +151,12 @@ export function buildTmRuntimeValues(mode: Mode, tokens: MergedTokens): Record<s
   const disabled = disabledColors[mode];
   const isDay = mode === "day";
 
-  const primary = isDay ? secondaryColors[800] : accentColors[600];
+  const primary = isDay ? primaryColors[700] : primaryColors[600];
   const primaryForeground = "0 0% 100%";
-  const secondary = isDay ? secondaryColors[600] : "240 10% 7%";
-  const secondaryForeground = isDay ? "0 0% 100%" : "0 0% 89.8%";
-  const accent = isDay ? accentColors[600] : "240 10% 10%";
-  const accentForeground = isDay ? "0 0% 100%" : "0 0% 89.8%";
+  const secondary = secondaryColors[600];
+  const secondaryForeground = "0 0% 100%";
+  const accent = accentColors[600];
+  const accentForeground = "0 0% 100%";
 
   return {
     "--tm-surface-base": surface.base,
@@ -166,8 +174,8 @@ export function buildTmRuntimeValues(mode: Mode, tokens: MergedTokens): Record<s
     "--tm-accent-foreground": accentForeground,
     "--tm-destructive": semantic.error,
     "--tm-destructive-foreground": semantic.errorForeground,
-    "--tm-muted": base.card,
-    "--tm-muted-foreground": base.cardForeground,
+    "--tm-muted": surface.elevated2,
+    "--tm-muted-foreground": text.muted,
     "--tm-border-default": base.border,
     "--tm-border-strong": base.foreground,
     "--tm-focus-ring": base.ring,

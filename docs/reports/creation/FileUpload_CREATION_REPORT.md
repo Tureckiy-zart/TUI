@@ -155,7 +155,7 @@
 - `.tm-motion-fade-out` — File preview removal animation
 - `transitions.fast` — Drag-over state transition (background, border colors)
 - `transitions.colors` — Error state appearance
-- Motion token reference: `src/FOUNDATION/tokens/motion/v2.ts`
+- Motion token reference: `src/FOUNDATION/tokens/motion.ts`
 
 **Reduced Motion Support:**
 - All motion animations will respect `prefers-reduced-motion` media query

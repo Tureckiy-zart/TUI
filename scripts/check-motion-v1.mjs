@@ -9,7 +9,6 @@
  */
 
 import { spawnSync } from "child_process";
-import { existsSync } from "fs";
 
 const RED = "\x1b[31m";
 const GREEN = "\x1b[32m";
@@ -65,19 +64,7 @@ console.log("\nChecking for Motion V1 patterns...\n");
 
 let hasErrors = false;
 
-if (existsSync("src/FOUNDATION/tokens/motion.ts")) {
-  console.log(`${RED}Motion V1 file exists: src/FOUNDATION/tokens/motion.ts${RESET}`);
-  console.log("  This file should have been deleted in 2.0.0. Please remove it.\n");
-  hasErrors = true;
-} else {
-  console.log(`${GREEN}Motion V1 file does not exist (expected).${RESET}`);
-}
-
 const v1ImportPatterns = [
-  {
-    pattern: "from.*[\"']tokens/motion[\"']",
-    description: "Import from tokens/motion (V1)",
-  },
   {
     pattern: "import.*tailwindMotionConfig",
     description: "Import of tailwindMotionConfig (V1)",
@@ -170,5 +157,7 @@ if (hasErrors) {
   process.exit(1);
 }
 
-console.log(`${GREEN}No Motion V1 patterns detected. Codebase is V2-only.${RESET}\n`);
+console.log(
+  `${GREEN}No Motion V1 patterns detected. Canonical motion at tokens/motion.ts.${RESET}\n`,
+);
 process.exit(0);

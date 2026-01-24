@@ -39,39 +39,39 @@ This report identifies all remaining Motion V1 references in the codebase before
 
 ### 1. Build Configuration
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
 | `tailwind.config.ts` | 3 | `tailwindMotionConfig` | Use `motionV2TailwindConfig` only |
 | `src/preset.ts` | 5 | `tailwindMotionConfig` | Use `motionV2TailwindConfig` only |
 
 ### 2. Theme System
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
 | `src/FOUNDATION/theme/applyMode.ts` | 20 | `motionCSSVariables` | Use `motionV2CSSVariables` only |
 
 ### 3. Animation System (TAS)
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
-| `src/COMPOSITION/motion/animation/tas.ts` | 11-19 | `Duration`, `durations`, `Easing`, `easings`, `reducedMotion`, `Transition`, `transitions` | Migrate to V2 or inline values |
+| `src/COMPOSITION/motion/animation/tas.ts` | 11-19 | `Duration`, `durations`, `Easing`, `easings`, `reducedMotion`, `Transition`, `transitions` | Migrate to or inline values |
 | `src/COMPOSITION/motion/animation/types.ts` | 7 | `Spring` (type) | **DELETE** (Framer Motion not used) |
 
 ### 4. Utility Functions
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
 | `src/FOUNDATION/lib/responsive-props.ts` | 8 | `durations` | Use `motionV2Durations` |
 
 ### 5. Export Scripts
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
-| `scripts/export-tokens.ts` | 18 | `* as motion` | Remove V1 export or keep V2 only |
+| `scripts/export-tokens.ts` | 18 | `* as motion` | Remove V1 export or keep only |
 
 ### 6. CSS Variables Aggregator
 
-| File | Line | Import | V2 Migration |
+| File | Line | Import | Migration |
 |------|------|--------|--------------|
 | `src/FOUNDATION/tokens/css-variables.ts` | 9 | `motionCSSVariables` | Use `motionV2CSSVariables` |
 
@@ -92,7 +92,7 @@ This report identifies all remaining Motion V1 references in the codebase before
 
 ### Files with V1 Type References
 
-| File | Line | Type | V2 Migration |
+| File | Line | Type | Migration |
 |------|------|------|--------------|
 | `src/FOUNDATION/tokens/types/index.ts` | 151 | `MotionDurationToken = keyof typeof durations` | Change to `keyof typeof motionV2Durations` |
 
@@ -132,7 +132,7 @@ Pattern: `--duration-*`, `--ease-*`, `--transition-*`
 - `--transition-slow-in`, `--transition-slow-out`, `--transition-slow-in-out`
 - `--transition-bounce`, `--transition-elastic`
 
-### V2 CSS Variable Names (to keep)
+### CSS Variable Names (to keep)
 
 Pattern: `--tm-motion-*`
 
@@ -161,8 +161,8 @@ Pattern: `--tm-motion-*`
 
 6. **`src/FOUNDATION/theme/applyMode.ts`** → Remove V1 CSS vars application
 7. **`src/FOUNDATION/tokens/css-variables.ts`** → Remove V1 vars from aggregation
-8. **`src/COMPOSITION/motion/animation/tas.ts`** → Full migration to V2 tokens
-9. **`src/FOUNDATION/lib/responsive-props.ts`** → Use V2 durations
+8. **`src/COMPOSITION/motion/animation/tas.ts`** → Full migration to tokens
+9. **`src/FOUNDATION/lib/responsive-props.ts`** → Use durations
 10. **`src/FOUNDATION/tokens/types/index.ts`** → Update type definitions
 
 ### Low Priority (Cleanup)
@@ -189,5 +189,5 @@ ls src/FOUNDATION/tokens/motion.ts 2>/dev/null && echo "ERROR: V1 file exists" |
 ---
 
 **Report Status:** ✅ Complete  
-**Next Step:** STEP 1 - Migrate all V1 imports to V2 equivalents
+**Next Step:** STEP 1 - Migrate all V1 imports to equivalents
 

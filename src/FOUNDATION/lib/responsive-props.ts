@@ -5,7 +5,7 @@
  * Supports CSS custom properties with media queries for efficient responsive styling.
  */
 
-import { motionDurations } from "@/FOUNDATION/tokens/motion/v2";
+import { motionDurations } from "@/FOUNDATION/tokens/motion";
 import type {
   DelayToken,
   MotionDurationToken,

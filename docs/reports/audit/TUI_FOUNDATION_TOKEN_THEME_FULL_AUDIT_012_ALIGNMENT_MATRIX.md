@@ -30,9 +30,9 @@ This matrix provides a canonical alignment view of all token categories, their f
 | **Shadows** | `shadows.ts` | ELEVATION_AUTHORITY | Primitive | `--shadow-*` | ✅ Canonical |
 | **Shadows (Elevation)** | `shadows.ts` | ELEVATION_AUTHORITY | Derived | Via elevationShadows | ✅ Canonical |
 | **Shadows (Focus)** | `shadows.ts` | A11Y_LOCK | Derived | Via focusRings | ✅ Canonical |
-| **Motion (Duration)** | `motion/v2.ts` | MOTION_AUTHORITY | Primitive | `--duration-*` | ✅ Canonical |
-| **Motion (Easing)** | `motion/v2.ts` | MOTION_AUTHORITY | Primitive | `--ease-*` | ✅ Canonical |
-| **Motion (Transition)** | `motion/v2.ts` | MOTION_AUTHORITY | Derived | Via motionTransitions (combines duration + easing) | ✅ Canonical |
+| **Motion (Duration)** | `motion.ts` | MOTION_AUTHORITY | Primitive | `--duration-*` | ✅ Canonical |
+| **Motion (Easing)** | `motion.ts` | MOTION_AUTHORITY | Primitive | `--ease-*` | ✅ Canonical |
+| **Motion (Transition)** | `motion.ts` | MOTION_AUTHORITY | Derived | Via motionTransitions (combines duration + easing) | ✅ Canonical |
 | **Opacity** | `opacity.ts` | TOKEN_AUTHORITY | Primitive | Via Tailwind classes | ✅ Canonical |
 | **Gradients** | `gradients.ts` | TOKEN_AUTHORITY | Derived | Via GRADIENT_TOKENS (references color tokens) | ✅ Canonical |
 | **States** | `states.ts` | STATE_AUTHORITY | Derived | `--{component}-{variant}-{state}-{property}` | ✅ Canonical |

@@ -69,6 +69,20 @@ All typography tokens are defined in `src/FOUNDATION/tokens/typography.ts` and v
 
 **Verification:** ✅ All font families match TYPOGRAPHY_AUTHORITY specifications.
 
+### 1.2.1 Font Supply Responsibility (Contract)
+
+**Decision:** Fonts are consumer-owned. The library does **not** ship fonts and does **not** assume
+display font availability at runtime.
+
+**Rules:**
+- Typography tokens must remain valid with system fallbacks.
+- No `@font-face` declarations are allowed in Foundation.
+- No font binaries are shipped in the repository.
+
+**Non-goals:**
+- Providing or bundling font files.
+- Enforcing font installation in consuming apps.
+
 ### 1.3 Font Size Scale
 
 **Fluid Typography Scale (using clamp()):**
@@ -307,6 +321,8 @@ All semantic text roles are defined in `textStyles` object in `src/FOUNDATION/to
 ---
 
 ## 3. Vertical Rhythm
+
+**Policy Reference:** `docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md`
 
 ### 3.1 Baseline Unit
 

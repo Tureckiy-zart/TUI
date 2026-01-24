@@ -12,7 +12,7 @@ import type {
 
 /**
  * Animation props for layout primitives
- * Returns CSS class names for Motion Tokens V2 animations
+ * Returns CSS class names for Motion Tokens animations
  */
 export interface AnimationProps {
   /**

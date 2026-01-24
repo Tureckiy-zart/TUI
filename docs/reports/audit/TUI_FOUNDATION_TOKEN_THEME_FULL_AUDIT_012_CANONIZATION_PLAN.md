@@ -29,7 +29,7 @@ No P0 (BLOCKER) issues were identified. Phase 1 is complete.
 **Files to Modify:**
 - `src/FOUNDATION/theme/spacing.ts` - Re-export from `src/FOUNDATION/tokens/spacing.ts` or deprecate
 - `src/FOUNDATION/theme/typography.ts` - Re-export from `src/FOUNDATION/tokens/typography.ts` or deprecate
-- `src/FOUNDATION/theme/motion.ts` - Re-export from `src/FOUNDATION/tokens/motion/v2.ts` or deprecate
+- `src/FOUNDATION/theme/motion.ts` - Re-export from `src/FOUNDATION/tokens/motion.ts` or deprecate
 
 **Action Plan:**
 1. Check if these files are imported anywhere
@@ -349,7 +349,7 @@ None identified.
 - ✅ `spacing.ts`
 - ✅ `radius.ts`
 - ✅ `shadows.ts`
-- ✅ `motion/v2.ts`
+- ✅ `motion/motion.ts`
 - ✅ `opacity.ts`
 - ✅ `gradients.ts`
 - ✅ `states.ts`

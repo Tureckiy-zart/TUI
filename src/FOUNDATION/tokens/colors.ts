@@ -222,16 +222,16 @@ export type TextColors = {
 export const textColors: Record<Mode, TextColors> = {
   day: {
     primary: "0 0% 9%", // Almost black (neutral-900 equivalent)
-    secondary: "0 0% 42%", // Medium gray - reduced lightness for AA contrast on elevated surfaces
+    secondary: "0 0% 38%", // Medium gray for secondary text
     tertiary: "0 0% 65%", // Light gray
-    muted: "0 0% 42%", // Muted gray - adjusted for WCAG AA contrast (4.5:1) on surface.elevated2
+    muted: "0 0% 55%", // Muted gray for low-emphasis text
     inverse: "0 0% 100%", // White (for dark backgrounds)
   },
   night: {
     primary: "0 0% 89.8%", // Light gray (#e5e7eb)
-    secondary: "240 5% 64.9%", // Medium gray
+    secondary: "240 5% 70%", // Medium gray for secondary text
     tertiary: "240 5% 50%", // Darker gray
-    muted: "240 5% 64.9%", // Muted gray
+    muted: "240 5% 58%", // Muted gray for low-emphasis text
     inverse: "0 0% 9%", // Almost black (for light backgrounds)
   },
 };

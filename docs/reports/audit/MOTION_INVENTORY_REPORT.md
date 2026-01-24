@@ -16,7 +16,7 @@ This report provides a comprehensive inventory of all motion-related code patter
 **Key Findings:**
 - ✅ **Compliant:** Most motion usage is token-driven via `.tm-motion-*` utilities and `MOTION_TOKENS`
 - ⚠️ **Non-Compliant:** Some components use raw duration/easing values (checkbox, radio)
-- ✅ **Well-Structured:** Motion tokens are properly organized in `src/FOUNDATION/tokens/motion/` and `src/FOUNDATION/tokens/motion/v2.ts`
+- ✅ **Well-Structured:** Motion tokens are properly organized in `src/FOUNDATION/tokens/motion.ts`
 - ✅ **Utilities:** Comprehensive `.tm-motion-*` utilities defined in `src/preset.ts`
 
 ---

@@ -192,7 +192,7 @@ export const VolumeControl: Story = {
     const [volume, setVolume] = React.useState(75);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="w-full max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Volume</label>
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">{volume}%</span>
@@ -221,7 +221,7 @@ export const PriceFilter: Story = {
     const [maxPrice, setMaxPrice] = React.useState(500);
 
     return (
-      <div className="max-w-md space-y-4">
+      <div className="w-full max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">Maximum Price</label>
           <span className="text-sm text-[hsl(var(--tm-text-muted))]">${maxPrice}</span>

@@ -21,7 +21,7 @@
 
 ## How Animations Work in This Codebase
 
-### 1. Token Definition (`src/FOUNDATION/tokens/motion/v2.ts`)
+### 1. Token Definition (`src/FOUNDATION/tokens/motion.ts`)
 
 Motion tokens define:
 - **Durations**: `motionDurations` (e.g., `normal: "250ms"`)
@@ -180,7 +180,7 @@ This ensures variables like `--tm-motion-duration-normal` are available when com
 
 ### Step-by-Step Checklist
 
-1. **Define keyframes** in `src/FOUNDATION/tokens/motion/v2.ts`:
+1. **Define keyframes** in `src/FOUNDATION/tokens/motion.ts`:
    ```typescript
    export const motionNewAnimation = {
      in: {
@@ -290,7 +290,7 @@ __checkKeyframes()
 
 - [Motion System Authority Contract](../architecture/MOTION_AUTHORITY.md) - Motion system authority contract
 - [Token System Overview](./TOKENS_OVERVIEW.md) - Token system overview
-- `src/FOUNDATION/tokens/motion/v2.ts` - Motion V2 token definitions
+- `src/FOUNDATION/tokens/motion.ts` - Motion token definitions
 - `tailwind.config.ts` - Tailwind configuration with safelist
 - `src/preset.ts` - Custom Tailwind utilities
 

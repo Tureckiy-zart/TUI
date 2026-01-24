@@ -53,7 +53,7 @@ rg -n -e "--background" -e "--foreground" -e "--card" -e "--popover" \
 
 ---
 
-### V2 — applyMode.ts: отсутствие legacy setProperty + tm-only runtime
+### — applyMode.ts: отсутствие legacy setProperty + tm-only runtime
 
 **Метод:** manual + grep  
 **Проверки:**

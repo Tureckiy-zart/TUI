@@ -11,7 +11,7 @@ import type { CONTEXT_MENU_TOKENS } from "../components/context-menu";
 import type { MODAL_TOKENS } from "../components/modal";
 import type { SELECT_TOKENS } from "../components/select";
 import type { TABS_TOKENS } from "../components/tabs";
-import type { motionDurations, motionEasings, motionTransitions } from "../motion/v2";
+import type { motionDurations, motionEasings, motionTransitions } from "../motion";
 import type { borderRadius } from "../radius";
 import type {
   accentColoredShadows,

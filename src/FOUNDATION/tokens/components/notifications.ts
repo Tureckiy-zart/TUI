@@ -107,30 +107,30 @@ export const NOTIFICATION_TOKENS = {
 
   /**
    * Animation tokens for notification enter/exit animations
-   * Maps to Motion V2 utility classes
-   * Uses CSS-only animations from motion/v2.ts
+   * Maps to Motion utility classes
+   * Uses CSS-only animations from motion.ts
    */
   animation: {
     enter: {
-      slideInRight: "tm-motion-fade-slide-right", // Motion V2 fade + slide right
-      fadeIn: "tm-motion-fade-in", // Motion V2 fade in
-      combined: "tm-motion-fade-slide-right", // Motion V2 fade + slide right
+      slideInRight: "tm-motion-fade-slide-right", // Motion fade + slide right
+      fadeIn: "tm-motion-fade-in", // Motion fade in
+      combined: "tm-motion-fade-slide-right", // Motion fade + slide right
     } as const,
     exit: {
-      slideOutRight: "tm-motion-fade-slide-right-out", // Motion V2 fade + slide right out
-      fadeOut: "tm-motion-fade-out", // Motion V2 fade out
-      combined: "tm-motion-fade-slide-right-out", // Motion V2 fade + slide right out
+      slideOutRight: "tm-motion-fade-slide-right-out", // Motion fade + slide right out
+      fadeOut: "tm-motion-fade-out", // Motion fade out
+      combined: "tm-motion-fade-slide-right-out", // Motion fade + slide right out
     } as const,
     panel: {
       enter: {
-        slideInRight: "tm-motion-fade-slide-right", // Motion V2 panel slide in from right
-        fadeIn: "tm-motion-fade-in", // Motion V2 panel fade in
-        combined: "tm-motion-fade-slide-right", // Motion V2 panel fade + slide right
+        slideInRight: "tm-motion-fade-slide-right", // Motion panel slide in from right
+        fadeIn: "tm-motion-fade-in", // Motion panel fade in
+        combined: "tm-motion-fade-slide-right", // Motion panel fade + slide right
       } as const,
       exit: {
-        slideOutRight: "tm-motion-fade-slide-right-out", // Motion V2 panel slide out to right
-        fadeOut: "tm-motion-fade-out", // Motion V2 panel fade out
-        combined: "tm-motion-fade-slide-right-out", // Motion V2 panel fade + slide right out
+        slideOutRight: "tm-motion-fade-slide-right-out", // Motion panel slide out to right
+        fadeOut: "tm-motion-fade-out", // Motion panel fade out
+        combined: "tm-motion-fade-slide-right-out", // Motion panel fade + slide right out
       } as const,
     } as const,
   } as const,

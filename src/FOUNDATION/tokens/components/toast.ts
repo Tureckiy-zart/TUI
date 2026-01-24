@@ -67,20 +67,20 @@ export const TOAST_TOKENS = {
 
   /**
    * Animation tokens for toast enter/exit animations
-   * Maps to Motion V2 utility classes and Radix data attributes
-   * Uses CSS-only animations from motion/v2.ts
+   * Maps to Motion utility classes and Radix data attributes
+   * Uses CSS-only animations from motion.ts
    * Radix Toast provides data-[state=open] and data-[state=closed] attributes
    */
   animation: {
     enter: {
-      slideUp: "tm-motion-fade-slide-up", // Motion V2 fade + slide up
-      fadeIn: "tm-motion-fade-in", // Motion V2 fade in
-      combined: "tm-motion-fade-slide-right", // Motion V2 fade + slide right (for toast from right)
+      slideUp: "tm-motion-fade-slide-up", // Motion fade + slide up
+      fadeIn: "tm-motion-fade-in", // Motion fade in
+      combined: "tm-motion-fade-slide-right", // Motion fade + slide right (for toast from right)
     } as const,
     exit: {
-      slideOutRight: "tm-motion-fade-slide-left-out", // Motion V2 fade + slide left out
-      fadeOut: "tm-motion-fade-out", // Motion V2 fade out
-      combined: "tm-motion-fade-slide-left-out", // Motion V2 fade + slide left out
+      slideOutRight: "tm-motion-fade-slide-left-out", // Motion fade + slide left out
+      fadeOut: "tm-motion-fade-out", // Motion fade out
+      combined: "tm-motion-fade-slide-left-out", // Motion fade + slide left out
     } as const,
     /**
      * Radix Toast data attribute classes
