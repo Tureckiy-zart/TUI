@@ -51,11 +51,11 @@ const FORBIDDEN_COLOR_PATTERNS = [
  */
 const ALLOWED_TOKEN_PATTERNS = [
   // Background tokens
-  /^bg-(primary|secondary|accent|destructive|muted|background|card|popover)(\/\d+)?$/,
+  /^bg-(primary|secondary|accent|destructive|muted|background|card|popover|success|error|warning|info)(\/\d+)?$/,
   // Text tokens
-  /^text-(primary-foreground|secondary-foreground|accent-foreground|destructive-foreground|foreground|muted-foreground|card-foreground|popover-foreground|semantic-success-foreground|semantic-error-foreground|semantic-warning-foreground|semantic-info-foreground)(\/\d+)?$/,
+  /^text-(primary-foreground|secondary-foreground|accent-foreground|destructive-foreground|foreground|muted-foreground|card-foreground|popover-foreground|success|success-foreground|error|error-foreground|warning|warning-foreground|info|info-foreground)(\/\d+)?$/,
   // Border tokens
-  /^border-(primary|secondary|accent|destructive|muted|border|input|ring)(\/\d+)?$/,
+  /^border-(primary|secondary|accent|destructive|muted|border|input|ring|success|error|warning|info)(\/\d+)?$/,
   // Ring tokens
   /^ring-(primary|secondary|accent|destructive|muted|ring)(\/\d+)?$/,
   // Outline tokens

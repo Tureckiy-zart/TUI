@@ -9,8 +9,8 @@ import { beforeEach, describe, expect, it } from "vitest";
 beforeEach(() => {
   // Set up CSS variables for tests
   const root = document.documentElement;
-  root.style.setProperty("--motion-duration-fast", "150ms");
-  root.style.setProperty("--motion-easing-standard", "cubic-bezier(0.4, 0, 0.2, 1)");
+  root.style.setProperty("--tm-motion-duration-fast", "150ms");
+  root.style.setProperty("--tm-motion-easing-standard", "cubic-bezier(0.4, 0, 0.2, 1)");
 });
 
 describe("Interactivity Integrity", () => {
@@ -20,7 +20,7 @@ describe("Interactivity Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-hover-lift {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
         .tm-motion-hover-lift:hover {
           transform: scale(1.05) translateY(-0.3125rem);
@@ -47,7 +47,7 @@ describe("Interactivity Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-hover-scale {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
         .tm-motion-hover-scale:hover {
           transform: scale(1.05);
@@ -74,7 +74,7 @@ describe("Interactivity Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-hover-lift {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
       `;
       document.head.appendChild(style);
@@ -99,7 +99,7 @@ describe("Interactivity Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-tap-scale {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
         .tm-motion-tap-scale:active {
           transform: scale(0.95);
@@ -126,7 +126,7 @@ describe("Interactivity Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-tap-scale {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
       `;
       document.head.appendChild(style);
@@ -171,7 +171,7 @@ describe("Interactivity Integrity", () => {
   describe("Transition Properties", () => {
     it("should use CSS variables for transition duration", () => {
       const root = document.documentElement;
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-fast");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-fast");
 
       // Verify CSS variable is set
       expect(varValue).toBeTruthy();
@@ -180,7 +180,7 @@ describe("Interactivity Integrity", () => {
 
     it("should use CSS variables for transition timing function", () => {
       const root = document.documentElement;
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-easing-standard");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-easing-standard");
 
       // Verify CSS variable is set
       expect(varValue).toBeTruthy();

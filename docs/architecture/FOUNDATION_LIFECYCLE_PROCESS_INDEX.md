@@ -25,6 +25,7 @@ This document provides **human-readable navigation** to the Foundation component
 - [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md) — Foundation lock status and rules (includes Foundation Enforcement Lock Status)
 - [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) — Foundation Contract (FINAL/APPLIED — Foundation Enforcement is LOCKED)
 - [FOUNDATION_COMPONENT_SCOPE.md](./FOUNDATION_COMPONENT_SCOPE.md) — Foundation component scope (FINAL/APPLIED)
+- [FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md](./FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md) — Component token coverage decision snapshot (interpretation lock)
 - [ARCHITECTURE_CONTEXT.md](../ARCHITECTURE_CONTEXT.md) — Canonical architecture context
 - [TYPING_STANDARD.md](../reference/TYPING_STANDARD.md) — TypeScript typing standard
 
@@ -322,4 +323,3 @@ Steps 11-12 (Storybook and Testing Quality Gates) are **BLOCKING** requirements.
 **Note:** With Steps 7.5 and 7.6 addition, the lifecycle now effectively has 13.5 steps (Steps 7.5 and 7.6 are mandatory but numbered as 7.5 and 7.6 to maintain step sequence). The lifecycle structure remains: Steps 1-10 (Architectural Validation, including Steps 7.5 and 7.6), Steps 11-12 (Quality Gates), Step 13 (Foundation Lock).
 
 See [FOUNDATION_LOCK_OPERATING_RULES.md](./FOUNDATION_LOCK_OPERATING_RULES.md) for details on lifecycle expansions and backward compatibility.
-

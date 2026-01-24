@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import * as React from "react";
 import { describe, expect, it } from "vitest";
 
-import { renderWithTheme } from "@/test/test-utils";
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
 import { HelperText } from "./HelperText";
 
@@ -59,7 +59,7 @@ describe("HelperText", () => {
     it("can be referenced via aria-describedby from other elements", () => {
       const { container } = renderWithTheme(
         <>
-          <input aria-describedby="helper-id" />
+          <input aria-describedby="helper-id" aria-label="Input" />
           <HelperText id="helper-id">Helper text for input</HelperText>
         </>,
       );
@@ -67,6 +67,14 @@ describe("HelperText", () => {
       const helperText = container.querySelector("p");
       expect(input).toHaveAttribute("aria-describedby", "helper-id");
       expect(helperText).toHaveAttribute("id", "helper-id");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <HelperText id="h1">Enter your email address</HelperText>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

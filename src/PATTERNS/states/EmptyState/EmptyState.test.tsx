@@ -298,7 +298,7 @@ describe("EmptyState", () => {
         </EmptyState>,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
 
     it("passes axe accessibility checks for custom icon", async () => {
@@ -311,7 +311,7 @@ describe("EmptyState", () => {
         </EmptyState>,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
 
     it("passes axe accessibility checks with aria attributes", async () => {
@@ -321,7 +321,7 @@ describe("EmptyState", () => {
         </EmptyState>,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
 
     it("passes axe accessibility checks without title", async () => {
@@ -332,7 +332,7 @@ describe("EmptyState", () => {
         </EmptyState>,
       );
       const results = await axeCheck(container);
-      (expect(results) as any).toHaveNoViolations();
+      expect(results.violations).toHaveLength(0);
     });
   });
 

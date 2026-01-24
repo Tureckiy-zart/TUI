@@ -88,19 +88,47 @@ export const Simulation: Story = {
       slideUp: 0,
       hoverLift: 0,
     });
+    const defaultDurationsRef = useRef<{
+      fast: string;
+      normal: string;
+      slow: string;
+    } | null>(null);
+    const [defaultDurations, setDefaultDurations] = useState<{
+      fast: string;
+      normal: string;
+      slow: string;
+    } | null>(null);
 
     useEffect(() => {
       // Simulate prefers-reduced-motion by updating CSS variables
       const root = document.documentElement;
-      if (reducedMotion) {
-        root.style.setProperty("--motion-duration-fast", "0ms");
-        root.style.setProperty("--motion-duration-normal", "0ms");
-        root.style.setProperty("--motion-duration-slow", "0ms");
-      } else {
-        root.style.setProperty("--motion-duration-fast", "150ms");
-        root.style.setProperty("--motion-duration-normal", "250ms");
-        root.style.setProperty("--motion-duration-slow", "350ms");
+      if (!defaultDurationsRef.current) {
+        const computed = getComputedStyle(root);
+        const fast = computed.getPropertyValue("--tm-motion-duration-fast").trim() || "200ms";
+        const normal = computed.getPropertyValue("--tm-motion-duration-normal").trim() || "400ms";
+        const slow = computed.getPropertyValue("--tm-motion-duration-slow").trim() || "600ms";
+        defaultDurationsRef.current = { fast, normal, slow };
+        setDefaultDurations(defaultDurationsRef.current);
       }
+
+      const defaults = defaultDurationsRef.current;
+      if (!defaults) return;
+
+      if (reducedMotion) {
+        root.style.setProperty("--tm-motion-duration-fast", "0ms");
+        root.style.setProperty("--tm-motion-duration-normal", "0ms");
+        root.style.setProperty("--tm-motion-duration-slow", "0ms");
+      } else {
+        root.style.setProperty("--tm-motion-duration-fast", defaults.fast);
+        root.style.setProperty("--tm-motion-duration-normal", defaults.normal);
+        root.style.setProperty("--tm-motion-duration-slow", defaults.slow);
+      }
+
+      return () => {
+        root.style.setProperty("--tm-motion-duration-fast", defaults.fast);
+        root.style.setProperty("--tm-motion-duration-normal", defaults.normal);
+        root.style.setProperty("--tm-motion-duration-slow", defaults.slow);
+      };
     }, [reducedMotion]);
 
     const replayAll = () => {
@@ -170,7 +198,10 @@ export const Simulation: Story = {
               </Box>
               <Box className="mt-2">
                 <Text size="xs" tone="muted">
-                  Duration: {reducedMotion ? "0ms (instant)" : "250ms (normal)"}
+                  Duration:{" "}
+                  {reducedMotion
+                    ? "0ms (instant)"
+                    : `${defaultDurations?.normal ?? "400ms"} (normal)`}
                 </Text>
               </Box>
             </Box>
@@ -195,7 +226,10 @@ export const Simulation: Story = {
               </Box>
               <Box className="mt-2">
                 <Text size="xs" tone="muted">
-                  Duration: {reducedMotion ? "0ms (instant)" : "250ms (normal)"}
+                  Duration:{" "}
+                  {reducedMotion
+                    ? "0ms (instant)"
+                    : `${defaultDurations?.normal ?? "400ms"} (normal)`}
                 </Text>
               </Box>
             </Box>
@@ -220,7 +254,10 @@ export const Simulation: Story = {
               </Box>
               <Box className="mt-2">
                 <Text size="xs" tone="muted">
-                  Duration: {reducedMotion ? "0ms (instant)" : "250ms (normal)"}
+                  Duration:{" "}
+                  {reducedMotion
+                    ? "0ms (instant)"
+                    : `${defaultDurations?.normal ?? "400ms"} (normal)`}
                 </Text>
               </Box>
             </Box>

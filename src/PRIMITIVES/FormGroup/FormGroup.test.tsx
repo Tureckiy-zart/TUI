@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import { Input } from "@/PRIMITIVES/Input";
 import { Text } from "@/PRIMITIVES/Text";
-import { renderWithTheme } from "@/test/test-utils";
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
 import { FormGroup } from "./FormGroup";
 
@@ -214,6 +214,16 @@ describe("FormGroup", () => {
       const error = screen.getByText("Test error");
       const errorId = error.getAttribute("id");
       expect(error).toHaveAttribute("aria-describedby", errorId);
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <FormGroup legend="Newsletter">
+          <Input placeholder="Email" aria-label="Email" />
+        </FormGroup>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

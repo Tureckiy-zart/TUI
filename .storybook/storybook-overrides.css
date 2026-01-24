@@ -192,3 +192,44 @@ h6.text-gray-900 {
 .sb-bar h6 {
   color: #0a0a0a !important;
 }
+
+/* ============================================
+ * Night Mode Reset - Allow theme tokens to drive color
+ * ============================================
+ * Prevent Storybook overrides from forcing dark text on dark surfaces.
+ */
+
+:root[data-mode="night"] .sbdocs,
+:root[data-mode="night"] .sbdocs *,
+:root[data-mode="night"] .docs-story,
+:root[data-mode="night"] .docs-story *,
+:root[data-mode="night"] .sb-story,
+:root[data-mode="night"] .sb-story *,
+:root[data-mode="night"] [data-testid="story"],
+:root[data-mode="night"] [data-testid="story"] *,
+:root[data-mode="night"] .sb-main-padded,
+:root[data-mode="night"] .sb-main-padded *,
+:root[data-mode="night"] .sb-main-centered,
+:root[data-mode="night"] .sb-main-centered * {
+  color: inherit !important;
+}
+
+/* ============================================
+ * Storybook Motion Override (for dev preview)
+ * ============================================
+ * Ensure motion utilities are visible in Storybook even when
+ * prefers-reduced-motion is enabled at OS level.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-story *,
+  [data-testid="story"] *,
+  .sbdocs *,
+  .docs-story *,
+  .sb-main-padded *,
+  .sb-main-centered * {
+    animation-duration: revert !important;
+    animation-iteration-count: revert !important;
+    transition-duration: revert !important;
+  }
+}

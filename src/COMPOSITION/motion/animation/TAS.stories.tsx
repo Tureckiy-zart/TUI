@@ -707,7 +707,7 @@ export const ReducedMotion: Story = {
         <Box
           px={6}
           py={6}
-          bg={prefersReducedMotion ? "destructive" : "semantic-success"}
+          bg={prefersReducedMotion ? "destructive" : "success"}
           radius="lg"
           style={{
             textAlign: "center",

@@ -135,23 +135,23 @@ export const OVERLAY_TOKENS = {
 
   /**
    * Animation tokens for overlay enter/exit animations
-   * Maps to Motion V2 utility classes
-   * Uses CSS-only animations from motion/v2.ts
+   * Maps to Motion utility classes
+   * Uses CSS-only animations from motion.ts
    */
   animation: {
     enter: {
-      duration: "duration-normal", // 250ms - maps to motion V2 durations.normal
-      easing: "ease-out", // Maps to motion V2 easings.standard
-      keyframes: "tm-motion-fade-in", // Motion V2 fade in
-      scale: "tm-motion-scale-in", // Motion V2 scale in
-      combined: "tm-motion-fade-scale", // Motion V2 fade + scale
+      duration: "duration-normal", // 250ms - maps to motion durations.normal
+      easing: "ease-out", // Maps to motion easings.standard
+      keyframes: "tm-motion-fade-in", // Motion fade in
+      scale: "tm-motion-scale-in", // Motion scale in
+      combined: "tm-motion-fade-scale", // Motion fade + scale
     } as const,
     exit: {
-      duration: "duration-fast", // 150ms - maps to motion V2 durations.fast
-      easing: "ease-in", // Maps to motion V2 easings.standard
-      keyframes: "tm-motion-fade-out", // Motion V2 fade out
-      scale: "tm-motion-scale-out", // Motion V2 scale out
-      combined: "tm-motion-fade-scale-out", // Motion V2 fade + scale out
+      duration: "duration-fast", // 150ms - maps to motion durations.fast
+      easing: "ease-in", // Maps to motion easings.standard
+      keyframes: "tm-motion-fade-out", // Motion fade out
+      scale: "tm-motion-scale-out", // Motion scale out
+      combined: "tm-motion-fade-scale-out", // Motion fade + scale out
     } as const,
   } as const,
 

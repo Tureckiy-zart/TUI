@@ -184,7 +184,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 - `--tm-accent`, `--tm-accent-foreground`
 - `--surface-{level}`
 - `--text-{type}`
-- `--semantic-{type}` (success, error, warning, info)
+- `--tm-status-{type}` (success, error, warning, info)
 
 ---
 

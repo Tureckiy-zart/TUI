@@ -9,17 +9,17 @@ import { beforeEach, describe, expect, it } from "vitest";
 beforeEach(() => {
   // Set up CSS variables for tests
   const root = document.documentElement;
-  root.style.setProperty("--motion-duration-fast", "150ms");
-  root.style.setProperty("--motion-duration-normal", "250ms");
-  root.style.setProperty("--motion-duration-slow", "350ms");
-  root.style.setProperty("--motion-duration-reduced", "0ms");
+  root.style.setProperty("--tm-motion-duration-fast", "150ms");
+  root.style.setProperty("--tm-motion-duration-normal", "250ms");
+  root.style.setProperty("--tm-motion-duration-slow", "350ms");
+  root.style.setProperty("--tm-motion-duration-reduced", "0ms");
 });
 
 describe("Reduced Motion", () => {
   describe("CSS Variables", () => {
     it("should have reduced motion duration variable", () => {
       const root = document.documentElement;
-      const reduced = getComputedStyle(root).getPropertyValue("--motion-duration-reduced");
+      const reduced = getComputedStyle(root).getPropertyValue("--tm-motion-duration-reduced");
 
       expect(reduced).toBeTruthy();
       expect(reduced.trim()).toBe("0ms");
@@ -29,35 +29,35 @@ describe("Reduced Motion", () => {
       const root = document.documentElement;
 
       // Set reduced motion
-      root.style.setProperty("--motion-duration-fast", "0ms");
-      root.style.setProperty("--motion-duration-normal", "0ms");
-      root.style.setProperty("--motion-duration-slow", "0ms");
+      root.style.setProperty("--tm-motion-duration-fast", "0ms");
+      root.style.setProperty("--tm-motion-duration-normal", "0ms");
+      root.style.setProperty("--tm-motion-duration-slow", "0ms");
 
-      const fast = getComputedStyle(root).getPropertyValue("--motion-duration-fast");
-      const normal = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
-      const slow = getComputedStyle(root).getPropertyValue("--motion-duration-slow");
+      const fast = getComputedStyle(root).getPropertyValue("--tm-motion-duration-fast");
+      const normal = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
+      const slow = getComputedStyle(root).getPropertyValue("--tm-motion-duration-slow");
 
       expect(fast.trim()).toBe("0ms");
       expect(normal.trim()).toBe("0ms");
       expect(slow.trim()).toBe("0ms");
 
       // Reset
-      root.style.removeProperty("--motion-duration-fast");
-      root.style.removeProperty("--motion-duration-normal");
-      root.style.removeProperty("--motion-duration-slow");
+      root.style.removeProperty("--tm-motion-duration-fast");
+      root.style.removeProperty("--tm-motion-duration-normal");
+      root.style.removeProperty("--tm-motion-duration-slow");
     });
   });
 
   describe("Animation Durations", () => {
     it("should collapse animation duration to 0ms when reduced motion is enabled", () => {
       const root = document.documentElement;
-      root.style.setProperty("--motion-duration-normal", "0ms");
+      root.style.setProperty("--tm-motion-duration-normal", "0ms");
 
       // Inject animation styles
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-fade-in {
-          animation: fade-in var(--motion-duration-normal) var(--motion-easing-standard) both;
+          animation: fade-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both;
         }
         @keyframes fade-in {
           from { opacity: 0; }
@@ -71,23 +71,23 @@ describe("Reduced Motion", () => {
       document.body.appendChild(element);
 
       // Verify CSS variable is 0ms
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
       expect(varValue.trim()).toBe("0ms");
 
       document.body.removeChild(element);
       document.head.removeChild(style);
-      root.style.setProperty("--motion-duration-normal", "250ms");
+      root.style.setProperty("--tm-motion-duration-normal", "250ms");
     });
 
     it("should collapse transition duration to 0ms when reduced motion is enabled", () => {
       const root = document.documentElement;
-      root.style.setProperty("--motion-duration-fast", "0ms");
+      root.style.setProperty("--tm-motion-duration-fast", "0ms");
 
       // Inject transition styles
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-hover-lift {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
       `;
       document.head.appendChild(style);
@@ -97,12 +97,12 @@ describe("Reduced Motion", () => {
       document.body.appendChild(element);
 
       // Verify CSS variable is 0ms
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-fast");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-fast");
       expect(varValue.trim()).toBe("0ms");
 
       document.body.removeChild(element);
       document.head.removeChild(style);
-      root.style.setProperty("--motion-duration-fast", "150ms");
+      root.style.setProperty("--tm-motion-duration-fast", "150ms");
     });
   });
 
@@ -119,13 +119,13 @@ describe("Reduced Motion", () => {
   describe("Animation Behavior", () => {
     it("should not animate when duration is 0ms", () => {
       const root = document.documentElement;
-      root.style.setProperty("--motion-duration-normal", "0ms");
+      root.style.setProperty("--tm-motion-duration-normal", "0ms");
 
       // Inject animation styles
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-fade-in {
-          animation: fade-in var(--motion-duration-normal) var(--motion-easing-standard) both;
+          animation: fade-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both;
         }
         @keyframes fade-in {
           from { opacity: 0; }
@@ -139,25 +139,25 @@ describe("Reduced Motion", () => {
       document.body.appendChild(element);
 
       // Verify CSS variable is 0ms
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
       expect(varValue.trim()).toBe("0ms");
 
       document.body.removeChild(element);
       document.head.removeChild(style);
-      root.style.setProperty("--motion-duration-normal", "250ms");
+      root.style.setProperty("--tm-motion-duration-normal", "250ms");
     });
   });
 
   describe("Transition Behavior", () => {
     it("should not transition when duration is 0ms", () => {
       const root = document.documentElement;
-      root.style.setProperty("--motion-duration-fast", "0ms");
+      root.style.setProperty("--tm-motion-duration-fast", "0ms");
 
       // Inject transition styles
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-hover-lift {
-          transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+          transition: transform var(--tm-motion-duration-fast) var(--tm-motion-easing-standard);
         }
       `;
       document.head.appendChild(style);
@@ -167,12 +167,12 @@ describe("Reduced Motion", () => {
       document.body.appendChild(element);
 
       // Verify CSS variable is 0ms
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-fast");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-fast");
       expect(varValue.trim()).toBe("0ms");
 
       document.body.removeChild(element);
       document.head.removeChild(style);
-      root.style.setProperty("--motion-duration-fast", "150ms");
+      root.style.setProperty("--tm-motion-duration-fast", "150ms");
     });
   });
 });

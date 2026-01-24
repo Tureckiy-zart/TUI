@@ -9,7 +9,7 @@ const meta: Meta<typeof Heading> = {
     docs: {
       description: {
         component:
-          "Heading component for semantic headings (h1-h6). Supports 6 levels, 4 weight variants, and muted state. Uses display font family for levels 1-2.",
+          "Heading component for semantic headings (h1-h6). Supports 6 levels, 4 weight variants, and color roles. Uses display font family for levels 1-2.",
       },
     },
   },
@@ -32,12 +32,13 @@ const meta: Meta<typeof Heading> = {
         type: { summary: "normal | medium | semibold | bold" },
       },
     },
-    muted: {
-      control: { type: "boolean" },
-      description: "Muted text color",
+    color: {
+      control: { type: "select" },
+      options: ["primary", "secondary"],
+      description: "Text color role",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: "primary | secondary" },
+        defaultValue: { summary: "primary" },
       },
     },
   },
@@ -85,12 +86,12 @@ export const AllWeights: Story = {
   ),
 };
 
-export const Muted: Story = {
+export const Secondary: Story = {
   render: () => (
     <div className="space-y-md">
       <Heading level={2}>Normal Heading</Heading>
-      <Heading level={2} muted>
-        Muted Heading
+      <Heading level={2} color="secondary">
+        Secondary Heading
       </Heading>
     </div>
   ),

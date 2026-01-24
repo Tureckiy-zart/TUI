@@ -14,9 +14,9 @@
  * Optimized for smooth CSS transitions
  */
 export const motionDurations = {
-  fast: "150ms", // Quick interactions
-  normal: "250ms", // Default transitions
-  slow: "350ms", // Emphasized animations
+  fast: "250ms", // Quick interactions
+  normal: "450ms", // Default transitions
+  slow: "650ms", // Emphasized animations
   reduced: "0ms", // For prefers-reduced-motion
 } as const;
 
@@ -182,22 +182,22 @@ export const motionCombined = {
  */
 export const motionCSSVariables = {
   // Durations
-  "--motion-duration-fast": motionDurations.fast,
-  "--motion-duration-normal": motionDurations.normal,
-  "--motion-duration-slow": motionDurations.slow,
-  "--motion-duration-reduced": motionDurations.reduced,
+  "--tm-motion-duration-fast": motionDurations.fast,
+  "--tm-motion-duration-normal": motionDurations.normal,
+  "--tm-motion-duration-slow": motionDurations.slow,
+  "--tm-motion-duration-reduced": motionDurations.reduced,
 
   // Easings
-  "--motion-easing-soft": motionEasings.soft,
-  "--motion-easing-standard": motionEasings.standard,
-  "--motion-easing-emphasized": motionEasings.emphasized,
+  "--tm-motion-easing-soft": motionEasings.soft,
+  "--tm-motion-easing-standard": motionEasings.standard,
+  "--tm-motion-easing-emphasized": motionEasings.emphasized,
 
   // Transitions
-  "--motion-transition-fast": motionTransitions.fast,
-  "--motion-transition-normal": motionTransitions.normal,
-  "--motion-transition-slow": motionTransitions.slow,
-  "--motion-transition-soft": motionTransitions.soft,
-  "--motion-transition-reduced": motionTransitions.reduced,
+  "--tm-motion-transition-fast": motionTransitions.fast,
+  "--tm-motion-transition-normal": motionTransitions.normal,
+  "--tm-motion-transition-slow": motionTransitions.slow,
+  "--tm-motion-transition-soft": motionTransitions.soft,
+  "--tm-motion-transition-reduced": motionTransitions.reduced,
 } as const;
 
 /**

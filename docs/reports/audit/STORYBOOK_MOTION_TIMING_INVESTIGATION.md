@@ -198,7 +198,7 @@ if (typeof window !== "undefined") {
   
   // Verify variables are set before proceeding
   const root = document.documentElement;
-  const motionVar = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
+  const motionVar = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
   if (!motionVar || motionVar.trim() === "") {
     console.error("[Motion] CSS variables not set before React render!");
     // Option: Retry or throw error

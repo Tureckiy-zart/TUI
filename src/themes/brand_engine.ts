@@ -446,13 +446,6 @@ export function applyBrandOverrides(brand: BrandPackage, mode: Mode): void {
       });
     }
 
-    // Line heights
-    if (overrides.typography.lineHeight) {
-      Object.entries(overrides.typography.lineHeight).forEach(([key, value]) => {
-        root.style.setProperty(`--brand-${namespace}-line-height-${key}`, value);
-      });
-    }
-
     // Letter spacing
     if (overrides.typography.letterSpacing) {
       Object.entries(overrides.typography.letterSpacing).forEach(([key, value]) => {

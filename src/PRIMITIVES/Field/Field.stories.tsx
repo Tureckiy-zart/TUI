@@ -1,5 +1,5 @@
-﻿"use client";
-import type { Meta, StoryObj } from "@storybook/react";
+"use client";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Button } from "@/PRIMITIVES/Button";
 import { Input } from "@/PRIMITIVES/Input";
@@ -262,7 +262,6 @@ export const MultiLineField: Story = {
               borderRadius: "0.375rem",
               border: "1px solid hsl(var(--tm-border-default))",
               fontSize: "0.875rem",
-              lineHeight: "1.5",
               resize: "vertical",
             }}
           />

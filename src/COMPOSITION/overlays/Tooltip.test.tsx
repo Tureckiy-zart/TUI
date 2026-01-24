@@ -21,7 +21,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
 import { Button } from "@/PRIMITIVES/Button";
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { TooltipProvider, TooltipWrapper } from "./Tooltip";
 
@@ -156,6 +156,18 @@ describe("Tooltip - Runtime / API Contract Tests", () => {
         if (tooltip && tooltip.id) {
           expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
         }
+      });
+
+      it("passes axe accessibility checks", async () => {
+        const { container } = renderWithTheme(
+          <TooltipProvider>
+            <TooltipWrapper content="Tooltip" open={true}>
+              <Button>Hover me</Button>
+            </TooltipWrapper>
+          </TooltipProvider>,
+        );
+        const results = await axeCheck(container);
+        expect(results.violations).toHaveLength(0);
       });
     });
 

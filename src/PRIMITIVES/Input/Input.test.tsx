@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Input } from "./Input";
 
@@ -147,6 +147,32 @@ describe("Input", () => {
       expect(input).toHaveAttribute("name", "test-input");
       expect(input).toHaveValue("test value");
       expect(input).toHaveAttribute("readonly");
+    });
+  });
+
+  describe("Accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <Input placeholder="Enter text" aria-label="Sample input" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when disabled", async () => {
+      const { container } = renderWithTheme(
+        <Input disabled placeholder="Enter" aria-label="Disabled input" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when invalid", async () => {
+      const { container } = renderWithTheme(
+        <Input invalid placeholder="Invalid" aria-label="Invalid input" aria-describedby="err-1" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 });

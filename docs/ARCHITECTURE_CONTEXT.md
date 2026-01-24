@@ -1179,6 +1179,14 @@ export const ConfirmDialog = ({ onConfirm, onCancel, ... }) => {
 
 **Rationale:** Foundation provides stable infrastructure that cannot change. Extensions provide flexible domain functionality that can evolve.
 
+### Component Token Coverage
+
+- **Decision Snapshot:**
+  [`FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md`](./architecture/FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md)
+
+This snapshot records the accepted interpretation of component token coverage in the FOUNDATION layer, including intentional tokenless components and optional token boundaries.
+No code changes were made as a result of this decision.
+
 ---
 
 ## 10. Non-Goals
@@ -1567,5 +1575,3 @@ This document is the **single source of truth** for TenerifeUI architecture. How
   - Established 12-section structure covering all architectural aspects
   - Created authoritative, declarative rules for AI and human maintainers
   - Replaced fragmented documentation with single source of truth
-
-

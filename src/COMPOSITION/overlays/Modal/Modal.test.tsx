@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 
@@ -54,6 +54,29 @@ describe("Modal - Runtime / Interaction Tests", () => {
       );
 
       const trigger = screen.getByRole("button", { name: /open modal/i });
+      await user.click(trigger);
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+    });
+
+    it("Modal opens when Trigger asChild (custom element) is clicked", async () => {
+      const user = userEventSetup();
+      renderWithTheme(
+        <Modal.Root>
+          <Modal.Trigger asChild>
+            <button type="button">Custom trigger</button>
+          </Modal.Trigger>
+          <Modal.Content>
+            <Modal.Header>
+              <Modal.Title>Test Modal</Modal.Title>
+            </Modal.Header>
+          </Modal.Content>
+        </Modal.Root>,
+      );
+
+      const trigger = screen.getByRole("button", { name: /custom trigger/i });
       await user.click(trigger);
 
       await waitFor(() => {
@@ -315,6 +338,26 @@ describe("Modal - Runtime / Interaction Tests", () => {
         expect(fallbackTitle).toHaveAttribute("id");
         expect(dialog).toHaveAttribute("aria-labelledby", fallbackTitle.getAttribute("id"));
       });
+    });
+
+    it("passes axe accessibility checks when dialog is open", async () => {
+      const { container } = renderWithTheme(
+        <Modal.Root defaultOpen>
+          <Modal.Content>
+            <Modal.Header>
+              <Modal.Title>Axe Test Modal</Modal.Title>
+              <Modal.Description>Description for axe</Modal.Description>
+            </Modal.Header>
+          </Modal.Content>
+        </Modal.Root>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

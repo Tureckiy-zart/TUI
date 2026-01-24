@@ -1,7 +1,8 @@
 import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
+
 import { MultiSelect } from "./MultiSelect";
 import type { MultiSelectOption } from "./MultiSelect";
 
@@ -347,6 +348,14 @@ describe("MultiSelect", () => {
 
       const removeButton = screen.getByLabelText("Remove Option 1");
       expect(removeButton).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <MultiSelect options={testOptions} aria-label="Choose options" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

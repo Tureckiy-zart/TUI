@@ -41,7 +41,7 @@ They are merged with theme/brand overrides and applied in `updateCSSVariablesFro
 `updateCSSVariablesFromTokens(mode)` synchronously sets CSS variables:
 
 - legacy variables (`--background`, `--foreground`, `--border`, `--ring`, ...)
-- surface/text/semantic groups (`--surface-*`, `--text-*`, `--semantic-*`)
+- surface/text/semantic groups (`--surface-*`, `--text-*`, `--tm-status-*`)
 - color scales (`--primary-*`, `--secondary-*`, `--accent-*`)
 - Runtime emits 100% of REQUIRED Canon Core v1 `--tm-*` tokens (dev-guard on missing/empty in dev)
 

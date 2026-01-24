@@ -103,7 +103,7 @@ Each semantic color has a foreground variant for text:
 <div className="text-error" />
 
 // CSS variables
-<div style={{ backgroundColor: "hsl(var(--semantic-success))" }} />
+<div style={{ backgroundColor: "hsl(var(--tm-status-success))" }} />
 
 // Token references
 import { semanticColors } from "@/FOUNDATION/tokens/colors";

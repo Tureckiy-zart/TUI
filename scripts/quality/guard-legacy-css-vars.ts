@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-// Temporary allowance for --semantic-* is governed by docs/theming/SEMANTIC_LAYER_DECISION.md.
-const ALLOWED_PREFIXES = ["--tm-", "--semantic-"];
+// Temporary allowance for --tm-status-* is governed by docs/theming/SEMANTIC_LAYER_DECISION.md.
+const ALLOWED_PREFIXES = ["--tm-", "--tm-status-"];
 const ROOT = process.cwd();
 const TARGET_DIRS = [
   path.join(ROOT, "src", "components"),
@@ -75,7 +75,7 @@ for (const file of allFiles) {
 
 if (violations.length > 0) {
   console.error("Legacy CSS var guard failed.");
-  console.error("Only --tm-* and temporary --semantic-* are allowed in components.");
+  console.error("Only --tm-* and temporary --tm-status-* are allowed in components.");
   console.error(
     "Exception policy: docs/theming/SEMANTIC_LAYER_DECISION.md (temporary semantic usage).",
   );

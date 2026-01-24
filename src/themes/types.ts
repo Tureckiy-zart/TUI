@@ -25,7 +25,6 @@ import type {
   FontSize,
   FontWeight,
   LetterSpacing,
-  LineHeight,
   TextStyle,
 } from "@/FOUNDATION/tokens/typography";
 
@@ -41,19 +40,12 @@ export interface TypographyOverrides {
   /**
    * Override font sizes
    */
-  fontSize?: Partial<
-    Record<FontSize, string | [string, { lineHeight: string; letterSpacing: string }]>
-  >;
+  fontSize?: Partial<Record<FontSize, string | [string, { letterSpacing?: string }]>>;
 
   /**
    * Override font weights
    */
   fontWeight?: Partial<Record<FontWeight, string>>;
-
-  /**
-   * Override line heights
-   */
-  lineHeight?: Partial<Record<LineHeight, string>>;
 
   /**
    * Override letter spacing
@@ -70,7 +62,6 @@ export interface TypographyOverrides {
         fontFamily?: string;
         fontSize?: string;
         fontWeight?: string;
-        lineHeight?: string;
         letterSpacing?: string;
       }
     >

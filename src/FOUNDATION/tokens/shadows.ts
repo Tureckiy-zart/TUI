@@ -188,8 +188,8 @@ export const componentShadowMapping = {
   },
   toast: {
     default: elevationShadows.lg,
-    success: "0 10px 15px -3px hsl(var(--semantic-success) / 0.3)",
-    error: "0 10px 15px -3px hsl(var(--semantic-error) / 0.3)",
+    success: "0 10px 15px -3px hsl(var(--tm-status-success) / 0.3)",
+    error: "0 10px 15px -3px hsl(var(--tm-status-error) / 0.3)",
   },
 } as const;
 

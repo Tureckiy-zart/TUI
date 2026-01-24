@@ -231,7 +231,7 @@ export const INPUT_TOKENS = {
    *
    * @example
    * // Success state (if supported)
-   * // Uses semantic-success border color
+   * // Uses success border color
    *
    * @example
    * // Disabled state
@@ -250,7 +250,7 @@ export const INPUT_TOKENS = {
       /** Error state border (when invalid prop is true) */
       error: "border-[hsl(var(--tm-destructive))]", // Error state border using CSS var
       /** Success state border */
-      success: "border-[hsl(var(--semantic-success))]", // Success state border using CSS var
+      success: "border-success", // Success state border using CSS var
       /** Disabled state border */
       disabled: "border-[hsl(var(--tm-surface-base))]", // Disabled state border (same as default)
     },
@@ -383,7 +383,7 @@ export const INPUT_TOKENS = {
       /** Error message color (destructive) - uses semantic foreground token */
       error: "text-[hsl(var(--tm-destructive-foreground))]", // Error message color using semantic foreground token
       /** Success message color (semantic success) */
-      success: "text-[hsl(var(--semantic-success))]", // Success message color
+      success: "text-success", // Success message color
     },
   } as const,
 

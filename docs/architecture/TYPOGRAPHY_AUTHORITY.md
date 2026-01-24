@@ -25,6 +25,9 @@ This document defines the canonical Typography Authority contract for all UI com
 
 **Key Principle:** All typography values must come from the canonical typography token system. Components cannot introduce arbitrary typography values that break typography hierarchy and readability.
 
+**Font Supply Note:** Fonts are consumer-owned. The system does not ship fonts or assume display font availability.
+Typography tokens must remain valid with system fallbacks. See `docs/architecture/TYPOGRAPHY_CONTRACT.md`.
+
 ---
 
 ## Canonical Token Scale Table

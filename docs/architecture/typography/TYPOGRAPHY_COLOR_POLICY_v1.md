@@ -4,7 +4,7 @@
 **Priority:** P0  
 **Date Created:** 2026-01-21  
 **Version:** 1.0  
-**Task:** TUI_TYPOGRAPHY_COLOR_POLICY_CANON_008
+**Task:** TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020
 
 ---
 
@@ -24,7 +24,7 @@
 
 This document establishes the Typography Color Policy v1, which:
 
-1. **Defines canonical text tokens** - Primary, secondary, muted, inverse, disabled
+1. **Defines canonical text tokens** - Primary, secondary, tertiary, muted, inverse, disabled, status
 2. **Maps roles to allowed text tokens** - Each typography role explicitly declares which text tokens it may use
 3. **Eliminates impossible combinations** - Architecturally forbidden role × text-token combinations are impossible by design
 4. **Enforces A11Y compliance** - All combinations must meet WCAG 2.1 Level AA contrast requirements
@@ -70,6 +70,12 @@ All three documents work together to ensure complete typography governance.
 - Night mode: Medium gray (`240 5% 64.9%`)
 - **Usage:** Secondary content, headings, body text, labels
 
+**Tertiary Text Token:**
+- `tertiary` - Lowest emphasis text token for meta-only usage
+- Day mode: Light gray (`0 0% 65%`)
+- Night mode: Darker gray (`240 5% 50%`)
+- **Usage:** Meta text only (helper, placeholder, metadata)
+
 **Muted Text Token:**
 - `muted` - Muted text color for subtle content
 - Day mode: Muted gray (`0 0% 42%`)
@@ -90,6 +96,12 @@ All three documents work together to ensure complete typography governance.
 - Night mode: Medium gray (`240 5% 50%`)
 - **Usage:** Disabled text only
 - **Contrast:** Inherits from A11Y disabled policy
+
+**Status Text Tokens:**
+- `success`, `warning`, `error`, `info` - Status text colors for explicit status messaging
+- Source: `--tm-status-*` tokens
+- **Usage:** Status labels, alerts, toasts, validation messages
+- **Restriction:** Must NOT be used as general body/label text colors
 
 **Rule:** All text tokens must come from the canonical text token system. Components cannot introduce arbitrary text colors.
 
@@ -114,7 +126,8 @@ All three documents work together to ensure complete typography governance.
 | `label` | `primary`, `secondary` | 4.5 | Label | Normal text |
 | `label-sm` | `primary`, `secondary` | 4.5 | Label | Normal text |
 | `caption` | `primary` | 4.5 | Caption | Normal text, only primary |
-| `meta` | `muted` | 4.5 | Meta | Helper/placeholder/meta text only |
+| `meta` | `muted`, `tertiary` | 4.5 | Meta | Helper/placeholder/meta text only |
+| `status` | `success`, `warning`, `error`, `info` | 4.5 | Status | Explicit status text only |
 | `disabled` | `disabled` | inherits | Disabled | Follows A11Y disabled policy |
 
 ### Role Definitions
@@ -180,15 +193,24 @@ All three documents work together to ensure complete typography governance.
 #### Meta Role
 
 **Role:** `meta`  
-**Allowed Text Tokens:** `muted`  
+**Allowed Text Tokens:** `muted`, `tertiary`  
 **Min Contrast:** 4.5 (normal text)  
 **Category:** `meta`
 
 **Usage:** Helper text, placeholder text, metadata, subtle annotations
 
-**Restriction:** Only `muted` text token allowed
+**Restriction:** Only `muted` or `tertiary` text tokens allowed
 
-**Prohibited:** `primary`, `secondary`, `tertiary`, `inverse`
+**Prohibited:** `primary`, `secondary`, `inverse`
+
+#### Status Role
+
+**Role:** `status`  
+**Allowed Text Tokens:** `success`, `warning`, `error`, `info`  
+**Min Contrast:** 4.5 (normal text)  
+**Category:** `status`  
+**Usage:** Explicit status messaging only  
+**Restriction:** Must NOT be used for regular body/label text
 
 #### Disabled Role
 
@@ -266,12 +288,10 @@ const isAllowed = typographyRolePolicy.body.allowedText.includes("primary");
 - Dramatic reduction in false-positive failures
 - Report shows only real A11Y violations
 
-### ESLint Enforcement (Future)
+### ESLint Enforcement
 
-**Planned Rules:**
-- `typography-role-color-policy` - Enforce allowed text tokens per role
-- `forbid-inverse-on-light` - Prevent inverse on light surfaces
-- `forbid-muted-for-readable` - Prevent muted for body/caption/label
+**Active Rule:**
+- `typography-color-policy` - Enforces allowed role × text-token combinations and forbids muted/tertiary for readable roles
 
 ---
 

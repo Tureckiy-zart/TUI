@@ -69,10 +69,10 @@ export const TAILWIND_COLOR_SAFELIST = [
   "text-muted-foreground",
   "text-card-foreground",
   "text-popover-foreground",
-  "text-semantic-success-foreground",
-  "text-semantic-error-foreground",
-  "text-semantic-warning-foreground",
-  "text-semantic-info-foreground",
+  "text-success-foreground",
+  "text-error-foreground",
+  "text-warning-foreground",
+  "text-info-foreground",
 
   // Text - opacity variants (50, 75, 80, 85, 90, 95)
   "text-primary-foreground/50",

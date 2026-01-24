@@ -298,6 +298,8 @@ export default [
       "tenerife-ui-architecture/no-raw-font-size-scale": "error",
       // Enforce canonical line-height scale values
       "tenerife-ui-architecture/no-raw-line-height-scale": "error",
+      // Forbid raw line-height usage outside typography tokens
+      "tenerife-ui-architecture/no-raw-line-height": "error",
       // Enforce canonical shadow/elevation scale values
       "tenerife-ui-architecture/no-raw-shadow-elevation-scale": "error",
       // Enforce canonical motion duration and easing scale values
@@ -326,6 +328,17 @@ export default [
 
       // Enforce Typography Color Policy v1 - forbid invalid role × text-token combinations
       "tenerife-ui-architecture/typography-color-policy": "error",
+
+      // ═══════════════════════════════════════════════════════════
+      // TYPOGRAPHY RHYTHM POLICY ENFORCEMENT
+      // ═══════════════════════════════════════════════════════════
+
+      // Enforce Typography Rhythm Policy v1 - forbid raw line-height values and role × line-height mismatches
+      "tenerife-ui-architecture/typography-rhythm-policy": "error",
+      // Enforce Typography Rhythm Policy v1 - forbid Tailwind leading-* classes on typography components
+      "tenerife-ui-architecture/no-leading-tailwind": "error",
+      // Enforce Typography Rhythm Policy v1 - forbid margin spacing (mt-*/mb-*) on typography components
+      "tenerife-ui-architecture/no-text-margin-spacing": "error",
 
       // ═══════════════════════════════════════════════════════════
       // TOKEN COMPLIANCE - FORBID HARDCODED TAILWIND UTILITIES

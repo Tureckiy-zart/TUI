@@ -6,7 +6,7 @@
  */
 
 import { colorCSSVariables } from "./colors";
-import { motionCSSVariables } from "./motion/v2";
+import { motionCSSVariables } from "./motion";
 import { radiusCSSVariables } from "./radius";
 import { shadowCSSVariables } from "./shadows";
 import { spacingCSSVariables } from "./spacing";

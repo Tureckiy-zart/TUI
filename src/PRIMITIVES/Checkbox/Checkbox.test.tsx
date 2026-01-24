@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Checkbox } from "./Checkbox";
 
@@ -245,6 +245,24 @@ describe("Checkbox", () => {
       const checkbox = screen.getByRole("checkbox", { name: "Described checkbox" });
       expect(checkbox).toHaveAttribute("aria-describedby", "description");
     });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(<Checkbox aria-label="Sample checkbox" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when disabled", async () => {
+      const { container } = renderWithTheme(<Checkbox disabled aria-label="Disabled checkbox" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when checked", async () => {
+      const { container } = renderWithTheme(<Checkbox checked aria-label="Checked checkbox" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
   });
 
   describe("Interactions", () => {
@@ -346,15 +364,6 @@ describe("Checkbox", () => {
 
       await user.click(checkbox);
       expect(checkbox).toHaveAttribute("aria-checked", "true");
-    });
-  });
-
-  describe("ClassName merging", () => {
-    it.skip("merges custom className", () => {
-      // Foundation components do not support className prop
-      const { container } = renderWithTheme(<Checkbox aria-label="Custom class" />);
-      const checkbox = container.querySelector('button[role="checkbox"]');
-      expect(checkbox).not.toHaveClass("custom-class");
     });
   });
 

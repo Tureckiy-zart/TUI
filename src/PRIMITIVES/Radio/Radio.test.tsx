@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Radio } from "./Radio";
 import { RadioGroup } from "./RadioGroup";
@@ -218,6 +218,18 @@ describe("Radio", () => {
       );
       const radio = screen.getByRole("radio", { name: "Described radio" });
       expect(radio).toHaveAttribute("aria-describedby", "description");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(<Radio aria-label="Sample radio" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when disabled", async () => {
+      const { container } = renderWithTheme(<Radio disabled aria-label="Disabled radio" />);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 
@@ -521,15 +533,6 @@ describe("Radio", () => {
       );
       const group = container.firstChild as HTMLElement;
       expect(group).toHaveClass("flex-col");
-    });
-  });
-
-  describe("ClassName merging", () => {
-    it.skip("merges custom className", () => {
-      // Foundation components do not support className prop
-      const { container } = renderWithTheme(<Radio aria-label="Custom class" />);
-      const radio = container.querySelector('button[role="radio"]');
-      expect(radio).not.toHaveClass("custom-class");
     });
   });
 });

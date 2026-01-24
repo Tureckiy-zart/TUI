@@ -180,7 +180,7 @@ describe("Box component", () => {
 
   it("should handle layout spacing tokens", () => {
     const { container } = render(
-      <Box px={"grid-md" as any} py={"grid-md" as any}>
+      <Box px="grid-md" py="grid-md">
         Content
       </Box>,
     );

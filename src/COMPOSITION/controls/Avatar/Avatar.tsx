@@ -173,7 +173,7 @@ export interface AvatarProps {
  * - ✅ Follows Extension Authority Contract
  * - ✅ Token-based sizing (h-*, w-*)
  * - ✅ Token-based radius (rounded-full, rounded-md)
- * - ✅ Token-based colors (bg-[hsl(var(--tm-muted))], text-[hsl(var(--tm-text-muted))], bg-semantic-*)
+ * - ✅ Token-based colors (bg-[hsl(var(--tm-muted))], text-[hsl(var(--tm-text-muted))], bg-success/bg-warning)
  * - ✅ Enhanced accessibility with computed aria-label
  */
 const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, AvatarProps>(
@@ -188,6 +188,7 @@ const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, A
     return (
       <AvatarPrimitive.Root
         ref={ref}
+        role="img"
         aria-label={ariaLabel}
         className={cn(avatarVariants({ size, shape }), className)}
       >

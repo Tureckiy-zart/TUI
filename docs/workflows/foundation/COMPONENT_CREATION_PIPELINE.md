@@ -462,7 +462,7 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 * **Motion requirements document:**
   - List motion domains that apply (Enter/Exit, Hover, Press/Tap, Focus/Keyboard, Expand/Collapse, Toast/Dialog, Loading/Progress)
   - Document motion tokens/presets to be used (e.g., `.tm-motion-fade-in`, `transitions.fast`, `animations.spin`)
-  - Verify all motion tokens exist in `src/FOUNDATION/tokens/motion/v2.ts` or motion preset catalog
+  - Verify all motion tokens exist in `src/FOUNDATION/tokens/motion.ts` or motion preset catalog
   - Document reduced motion support requirements
 * **A11Y requirements evaluation (MANDATORY for interactive components):**
   - Evaluate if component needs accessible name (every interactive control MUST have accessible name)
@@ -864,7 +864,7 @@ This step answers the question:
   - CVA_CANONICAL_STYLE compliance verified
 - [ ] State handling implemented (if applicable)
 - [ ] **Motion implemented** (if motion required per C2):
-  - Motion tokens/presets applied (`.tm-motion-*` utilities or motion tokens from `src/FOUNDATION/tokens/motion/v2.ts`)
+  - Motion tokens/presets applied (`.tm-motion-*` utilities or motion tokens from `src/FOUNDATION/tokens/motion.ts`)
   - Reduced motion support implemented (respects `prefers-reduced-motion`)
   - Motion GAP resolved (motion applied or NO MOTION BY DESIGN documented)
 - [ ] **SELF-CHECK:** Quick scan for raw values (colors like `#hex`, spacing like `16px`, sizes like `1rem`, gradients like `linear-gradient(...)`, opacity like `0.5`, **motion like `200ms`, `cubic-bezier(...)`, `transition: all 250ms`**) — MUST be ZERO raw values before proceeding

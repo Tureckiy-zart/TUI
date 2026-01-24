@@ -535,6 +535,20 @@ describe("Link", () => {
     });
   });
 
+  describe("Ref forwarding", () => {
+    it("forwards ref to anchor element", () => {
+      const ref = { current: null as HTMLAnchorElement | null };
+      renderWithTheme(
+        <Link href="/ref-test" ref={ref}>
+          Ref Link
+        </Link>,
+      );
+      const link = screen.getByRole("link", { name: /ref link/i });
+      expect(ref.current).toBe(link);
+      expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
+    });
+  });
+
   describe("Keyboard Interaction", () => {
     it("can receive focus", () => {
       renderWithTheme(<Link href="/focusable">Focusable</Link>);

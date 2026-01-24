@@ -65,8 +65,8 @@ The following violations are documented as **KNOWN_FALSE_POSITIVES** because the
 **Reason:** These elements use semantic colors with opacity backgrounds (`bg-success/10`, `bg-info/10`) which affect contrast calculation. The script checks foreground against solid background, but runtime uses semi-transparent backgrounds.
 
 **Runtime Behavior:** 
-- Toast success: Uses `bg-success/10 border-success/20 text-[hsl(var(--semantic-success-foreground))]` - semi-transparent background
-- Badge success/info: Uses `bg-[hsl(var(--semantic-success))]` with `text-[hsl(var(--semantic-success-foreground))]` - solid background
+- Toast success: Uses `bg-success/10 border-success/20 text-[hsl(var(--tm-status-success-foreground))]` - semi-transparent background
+- Badge success/info: Uses `bg-[hsl(var(--tm-status-success))]` with `text-[hsl(var(--tm-status-success-foreground))]` - solid background
 
 **Status:** ⚠️ **PARTIAL FALSE POSITIVE** - Toast uses opacity backgrounds which improve contrast in runtime, but badge violations are real
 

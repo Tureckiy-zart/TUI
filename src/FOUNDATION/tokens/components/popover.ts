@@ -71,12 +71,12 @@ export const POPOVER_TOKENS = {
 
   /**
    * Animation tokens for popover enter/exit animations
-   * Maps to Motion V2 utility classes
-   * Uses CSS-only animations from motion/v2.ts
+   * Maps to Motion utility classes
+   * Uses CSS-only animations from motion.ts
    */
   animation: {
-    enter: "tm-motion-fade-scale", // Motion V2 fade + scale animation
-    exit: "tm-motion-fade-scale-out", // Motion V2 fade + scale exit animation
+    enter: "tm-motion-fade-scale", // Motion fade + scale animation
+    exit: "tm-motion-fade-scale-out", // Motion fade + scale exit animation
   } as const,
 } as const;
 

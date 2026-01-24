@@ -15,7 +15,7 @@ import { fileURLToPath } from "url";
 
 // Import all token modules
 import * as colors from "../src/FOUNDATION/tokens/colors";
-import * as motion from "../src/FOUNDATION/tokens/motion/v2";
+import * as motion from "../src/FOUNDATION/tokens/motion";
 import * as radius from "../src/FOUNDATION/tokens/radius";
 import * as shadows from "../src/FOUNDATION/tokens/shadows";
 import * as spacing from "../src/FOUNDATION/tokens/spacing";
@@ -262,6 +262,19 @@ function buildColorTokens() {
     nightText[key] = hslToHex(`hsl(${value})`);
   });
   nightColors.text = nightText;
+
+  // Disabled colors
+  const dayDisabled: Record<string, string> = {};
+  Object.entries(colors.disabledColors.day).forEach(([key, value]) => {
+    dayDisabled[key] = hslToHex(`hsl(${value})`);
+  });
+  dayColors.disabled = dayDisabled;
+
+  const nightDisabled: Record<string, string> = {};
+  Object.entries(colors.disabledColors.night).forEach(([key, value]) => {
+    nightDisabled[key] = hslToHex(`hsl(${value})`);
+  });
+  nightColors.disabled = nightDisabled;
 
   return { day: dayColors, night: nightColors };
 }

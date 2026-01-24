@@ -1,34 +1,73 @@
 import "@testing-library/jest-dom/vitest";
-import { render } from "@testing-library/react";
-import React from "react";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
+
 import { {{ComponentName}} } from "./{{ComponentName}}";
 
-describe("{{ComponentName}} component", () => {
-  it("should render {{componentName}} with default props", () => {
-    const { container } = render(
-      <{{ComponentName}}>
-        Content
-      </{{ComponentName}}>,
-    );
-    const element = container.firstChild;
-    expect(element).toBeInTheDocument();
+describe("{{ComponentName}}", () => {
+  describe("Rendering", () => {
+    it("renders with default props", () => {
+      const { container } = render(<{{ComponentName}}>Content</{{ComponentName}}>);
+      const element = container.firstChild;
+      expect(element).toBeInTheDocument();
+    });
+
+    // Add if component uses forwardRef:
+    // it("forwards ref to root element", () => {
+    //   const ref = { current: null as HTMLElement | null };
+    //   render(<{{ComponentName}} ref={ref}>Content</{{ComponentName}}>);
+    //   expect(ref.current).toBeInstanceOf(HTMLElement);
+    // });
   });
 
-  // TODO: Add tests for:
-  // - Token-based props (spacing, colors, etc.)
-  // - Responsive behavior
-  // - Foundation composition (if applicable)
-  // - Accessibility
-  // - Edge cases
+  // Add if component has variant prop:
+  // describe("Variants", () => {
+  //   it("renders each variant", () => {
+  //     const variants = ["primary", "secondary"] as const;
+  //     variants.forEach((v) => {
+  //       const { unmount } = render(<{{ComponentName}} variant={v}>Content</{{ComponentName}}>);
+  //       expect(screen.getByText("Content")).toBeInTheDocument();
+  //       unmount();
+  //     });
+  //   });
+  // });
 
-  it("should apply token-based styling", () => {
-    // TODO: Test token usage
-    // Example from Stack.test.tsx:
-    // const { container } = render(<{{ComponentName}} spacing="md">Content</{{ComponentName}}>);
-    // const element = container.firstChild as HTMLElement;
-    // expect(element).toHaveStyle({ gap: "var(--spacing-md)" });
+  // Add if component has size prop:
+  // describe("Sizes", () => {
+  //   it("renders each size", () => {
+  //     const sizes = ["sm", "md", "lg"] as const;
+  //     sizes.forEach((s) => {
+  //       const { unmount } = render(<{{ComponentName}} size={s}>Content</{{ComponentName}}>);
+  //       expect(screen.getByText("Content")).toBeInTheDocument();
+  //       unmount();
+  //     });
+  //   });
+  // });
+
+  // Add if component has disabled/loading/invalid:
+  // describe("States", () => {
+  //   it("applies disabled state", () => { ... });
+  // });
+
+  describe("Accessibility", () => {
+    it("passes axe when rendered with required attributes", async () => {
+      const { container } = renderWithTheme(
+        <{{ComponentName}} aria-label="Test {{componentName}}">Content</{{ComponentName}}>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
   });
 
-  // TODO: Add more test cases following existing patterns
+  // Add if component is interactive:
+  // describe("Interactions", () => {
+  //   it("handles click", async () => { ... });
+  // });
+
+  // Add if component has asChild prop:
+  // describe("asChild", () => {
+  //   it("renders as child element when asChild is true", () => { ... });
+  // });
 });
-

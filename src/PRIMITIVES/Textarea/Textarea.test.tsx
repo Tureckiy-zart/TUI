@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { Textarea } from "./Textarea";
 
@@ -124,6 +124,35 @@ describe("Textarea", () => {
   });
 
   describe("Accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <Textarea placeholder="Enter text" aria-label="Sample textarea" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when disabled", async () => {
+      const { container } = renderWithTheme(
+        <Textarea disabled placeholder="Enter" aria-label="Disabled textarea" />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe when invalid", async () => {
+      const { container } = renderWithTheme(
+        <Textarea
+          invalid
+          placeholder="Invalid"
+          aria-label="Invalid textarea"
+          aria-describedby="err-1"
+        />,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
     it("supports aria-invalid attribute", () => {
       renderWithTheme(<Textarea aria-invalid={true} placeholder="Invalid textarea" />);
       const textarea = screen.getByPlaceholderText("Invalid textarea");

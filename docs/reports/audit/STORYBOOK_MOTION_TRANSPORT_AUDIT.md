@@ -96,12 +96,12 @@ The audit followed a systematic 7-step process:
 **Findings:**
 
 1. **Motion Token Definitions:**
-   - Motion V2: `src/FOUNDATION/tokens/motion/v2.ts` → `motionV2CSSVariables`
+   - Motion V2: `src/FOUNDATION/tokens/motion.ts` → `motionV2CSSVariables`
    - Legacy Motion: `src/FOUNDATION/tokens/motion.ts` → `motionCSSVariables`
 
 2. **CSS Variable Application:**
    - `src/FOUNDATION/theme/applyMode.ts:updateCSSVariablesFromTokens()` (lines 399-415)
-   - Motion V2 variables applied: lines 408-415
+   - Motion variables applied: lines 408-415
    - Legacy motion variables applied: lines 399-406
 
 3. **Initialization:**
@@ -111,18 +111,18 @@ The audit followed a systematic 7-step process:
 4. **Diagnostic Helper Created:**
    - `__checkMotionVars()` helper function added to preview.tsx
    - Verifies all motion CSS variables are present and non-zero
-   - Checks both V2 and legacy motion variables
+   - Checks both and legacy motion variables
    - Detects `prefers-reduced-motion` status
 
 **Expected Variables:**
 
 **Motion V2:**
-- `--motion-duration-fast` (150ms)
-- `--motion-duration-normal` (250ms)
-- `--motion-duration-slow` (350ms)
-- `--motion-duration-reduced` (0ms)
-- `--motion-easing-soft`, `--motion-easing-standard`, `--motion-easing-emphasized`
-- `--motion-transition-fast`, `--motion-transition-normal`, `--motion-transition-slow`, `--motion-transition-soft`, `--motion-transition-reduced`
+- `--tm-motion-duration-fast` (150ms)
+- `--tm-motion-duration-normal` (250ms)
+- `--tm-motion-duration-slow` (350ms)
+- `--tm-motion-duration-reduced` (0ms)
+- `--tm-motion-easing-soft`, `--tm-motion-easing-standard`, `--tm-motion-easing-emphasized`
+- `--tm-motion-transition-fast`, `--tm-motion-transition-normal`, `--tm-motion-transition-slow`, `--tm-motion-transition-soft`, `--tm-motion-transition-reduced`
 
 **Legacy Motion:**
 - `--duration-fast`, `--duration-normal`, `--duration-slow`
@@ -132,7 +132,7 @@ The audit followed a systematic 7-step process:
 **Verification Required:**
 - Run `__checkMotionVars()` in Storybook console
 - Verify all variables are present on `document.documentElement`
-- Verify values are non-zero (except `--motion-duration-reduced`)
+- Verify values are non-zero (except `--tm-motion-duration-reduced`)
 - Check timing: variables should be set before first React render
 
 **Potential Issue:**
@@ -161,7 +161,7 @@ The audit followed a systematic 7-step process:
 3. **Keyframes Generation:**
    - Keyframes defined in:
      - `src/FOUNDATION/tokens/motion.ts` → `keyframes` object
-     - `src/FOUNDATION/tokens/motion/v2.ts` → `motionV2TailwindConfig.keyframes`
+     - `src/FOUNDATION/tokens/motion.ts` → `motionV2TailwindConfig.keyframes`
    - Mapped to Tailwind config: `tailwind.config.ts:183-186`
 
 **Verification Required:**
@@ -206,7 +206,7 @@ The audit followed a systematic 7-step process:
 
 4. **Preset Integration:**
    - `src/preset.ts:92-197` defines motion utility classes via Tailwind plugin
-   - Utilities use CSS variables: `var(--motion-duration-normal)`, `var(--motion-easing-standard)`
+   - Utilities use CSS variables: `var(--tm-motion-duration-normal)`, `var(--tm-motion-easing-standard)`
 
 **Verification Required:**
 - Inspect compiled CSS for `.tm-motion-*` classes
@@ -318,7 +318,7 @@ Based on the audit findings, the motion transport chain appears to be correctly 
 
 4. **CSS Variable Reference in Utilities (LOW PROBABILITY)**
    - **Issue:** Motion utilities reference CSS variables that may not be set at compile time
-   - **Evidence:** `preset.ts` utilities use `var(--motion-duration-normal)` etc.
+   - **Evidence:** `preset.ts` utilities use `var(--tm-motion-duration-normal)` etc.
    - **Verification:** Check if utilities resolve correctly at runtime
    - **Fix:** Ensure CSS variables are set before utilities are applied
 
@@ -393,9 +393,9 @@ Based on the audit findings, the motion transport chain appears to be correctly 
 Use this checklist to verify motion transport in Storybook:
 
 - [ ] Run `__checkMotionVars()` in Storybook console
-- [ ] Verify all motion V2 variables are present
+- [ ] Verify all motion variables are present
 - [ ] Verify all legacy motion variables are present
-- [ ] Verify no variables have zero duration (except `--motion-duration-reduced`)
+- [ ] Verify no variables have zero duration (except `--tm-motion-duration-reduced`)
 - [ ] Check `prefers-reduced-motion` status
 - [ ] Open smoke test story and verify animations
 - [ ] Check DevTools computed styles for transition/animation properties
@@ -432,7 +432,7 @@ The motion transport infrastructure is correctly configured. The most likely fai
 ## Files Verified (No Changes)
 
 1. `src/FOUNDATION/tokens/motion.ts` - Motion tokens and CSS variables
-2. `src/FOUNDATION/tokens/motion/v2.ts` - Motion V2 tokens and CSS variables
+2. `src/FOUNDATION/tokens/motion.ts` - Motion tokens and CSS variables
 3. `src/FOUNDATION/theme/applyMode.ts` - CSS variable application
 4. `tailwind.config.ts` - Tailwind configuration and safelist
 5. `src/preset.ts` - Motion utility classes

@@ -16,7 +16,7 @@ import {
   motionReducedMotion,
   type MotionTransition,
   motionTransitions,
-} from "@/FOUNDATION/tokens/motion/v2";
+} from "@/FOUNDATION/tokens/motion";
 
 // Re-export types with simpler names for backward compatibility
 export type Duration = MotionDuration;
@@ -143,7 +143,7 @@ export function shouldReduceMotion(override?: boolean | "auto"): boolean {
 
 /**
  * Create CSS transition from tokens
- * Returns transition string using Motion V2 tokens
+ * Returns transition string using Motion tokens
  */
 export function createTransition(
   transitionName?: Transition,

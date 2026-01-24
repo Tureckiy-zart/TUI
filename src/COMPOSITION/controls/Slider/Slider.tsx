@@ -260,14 +260,13 @@ const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, S
         step={step}
         disabled={disabled}
         orientation={orientation}
-        aria-label={ariaLabel}
         name={name}
       >
         <SliderPrimitive.Track className={cn(track())}>
           <SliderPrimitive.Range className={cn(range())} />
           {renderMarks()}
         </SliderPrimitive.Track>
-        <SliderPrimitive.Thumb className={cn(thumb())} />
+        <SliderPrimitive.Thumb className={cn(thumb())} aria-label={ariaLabel} />
       </SliderPrimitive.Root>
     );
   },

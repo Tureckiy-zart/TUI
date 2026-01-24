@@ -16,13 +16,22 @@ const createRule = ESLintUtils.RuleCreator(
     `https://github.com/Tureckiy-zart/tenerife-ui/blob/main/docs/architecture/LINTING_RULES.md#${name}`,
 );
 
-type MessageIds = "legacyCssVar";
+type MessageIds = "forbidden";
 
 type Options = [];
 
 type RuleContextType = Parameters<ReturnType<typeof createRule<Options, MessageIds>>["create"]>[0];
 
-// Explicit policy: exact legacy vars map to tm-only equivalents.
+/**
+ * FOUNDATION CANON:
+ * Allowed CSS variables:
+ *  - --tm-*
+ *  - --tm-status-*
+ * Everything else is forbidden.
+ */
+const ALLOWED_VAR_REGEX = /^--tm-(status-)?[a-z0-9-]+$/;
+
+// Known legacy -> tm mappings allowed for autofix ONLY when 1:1 mapping exists.
 const LEGACY_TO_TM_MAP: Record<string, string> = {
   "--background": "--tm-surface-base",
   "--foreground": "--tm-text-primary",
@@ -35,54 +44,53 @@ const LEGACY_TO_TM_MAP: Record<string, string> = {
   "--border": "--tm-border-default",
   "--ring": "--tm-focus-ring",
   "--input": "--tm-border-default",
-};
-
-const EXACT_LEGACY_VARS = new Set(Object.keys(LEGACY_TO_TM_MAP));
-
-const LEGACY_PREFIXES = ["--surface-", "--text-"] as const;
-
-// Explicit policy: only listed suffixes are eligible for autofix mapping.
-// EXPLICIT_POLICY: prefix fallback mapping (only these suffixes are allowed for autofix).
-const SURFACE_SUFFIX_MAP: Record<string, string> = {
-  base: "--tm-surface-base",
-  raised: "--tm-surface-raised",
-  elevated1: "--tm-surface-raised",
-  elevated2: "--tm-surface-raised",
-  elevated3: "--tm-surface-raised",
-  overlay: "--tm-surface-overlay",
-  glass: "--tm-surface-overlay",
-};
-
-// EXPLICIT_POLICY: text prefix mappings (unknown suffix => error, no fix).
-const TEXT_SUFFIX_MAP: Record<string, string> = {
-  primary: "--tm-text-primary",
-  secondary: "--tm-text-secondary",
-  muted: "--tm-text-muted",
-  tertiary: "--tm-text-muted",
-  inverse: "--tm-text-inverse",
+  "--semantic-success": "--tm-status-success",
+  "--semantic-success-foreground": "--tm-status-success-foreground",
+  "--semantic-error": "--tm-status-error",
+  "--semantic-error-foreground": "--tm-status-error-foreground",
+  "--semantic-warning": "--tm-status-warning",
+  "--semantic-warning-foreground": "--tm-status-warning-foreground",
+  "--semantic-info": "--tm-status-info",
+  "--semantic-info-foreground": "--tm-status-info-foreground",
+  "--motion-duration-fast": "--tm-motion-duration-fast",
+  "--motion-duration-normal": "--tm-motion-duration-normal",
+  "--motion-duration-slow": "--tm-motion-duration-slow",
+  "--motion-duration-reduced": "--tm-motion-duration-reduced",
+  "--motion-easing-soft": "--tm-motion-easing-soft",
+  "--motion-easing-standard": "--tm-motion-easing-standard",
+  "--motion-easing-emphasized": "--tm-motion-easing-emphasized",
+  "--motion-transition-fast": "--tm-motion-transition-fast",
+  "--motion-transition-normal": "--tm-motion-transition-normal",
+  "--motion-transition-slow": "--tm-motion-transition-slow",
+  "--motion-transition-soft": "--tm-motion-transition-soft",
+  "--motion-transition-reduced": "--tm-motion-transition-reduced",
 };
 
 const EXPLICIT_EXCEPTION = "EXPLICIT_EXCEPTION";
 
-const CSS_VAR_USAGE_REGEX = /var\(\s*(--[a-zA-Z0-9-]+)\s*\)/g;
+const LEGACY_COLOR_NAMES = new Set([
+  "--background",
+  "--foreground",
+  "--card",
+  "--popover",
+  "--muted",
+  "--muted-foreground",
+  "--destructive",
+  "--destructive-foreground",
+  "--border",
+  "--ring",
+  "--input",
+  "--semantic-success",
+  "--semantic-success-foreground",
+  "--semantic-error",
+  "--semantic-error-foreground",
+  "--semantic-warning",
+  "--semantic-warning-foreground",
+  "--semantic-info",
+  "--semantic-info-foreground",
+]);
 
-function resolveLegacyVar(name: string): string | null {
-  if (LEGACY_TO_TM_MAP[name]) {
-    return LEGACY_TO_TM_MAP[name];
-  }
-
-  if (name.startsWith("--surface-")) {
-    const suffix = name.replace("--surface-", "");
-    return SURFACE_SUFFIX_MAP[suffix] ?? null;
-  }
-
-  if (name.startsWith("--text-")) {
-    const suffix = name.replace("--text-", "");
-    return TEXT_SUFFIX_MAP[suffix] ?? null;
-  }
-
-  return null;
-}
+const LEGACY_COLOR_PREFIXES = ["--surface-", "--text-"] as const;
 
 function hasExplicitException(
   node: TSESTree.Node,
@@ -94,35 +102,49 @@ function hasExplicitException(
   return comments.some((comment: TSESTree.Comment) => comment.value.includes(EXPLICIT_EXCEPTION));
 }
 
-function findLegacyVarUsages(text: string): string[] {
+function isAllowedCssVar(name: string): boolean {
+  return ALLOWED_VAR_REGEX.test(name);
+}
+
+function isColorVariable(name: string): boolean {
+  if (name.startsWith("--tm-")) {
+    return !name.startsWith("--tm-motion-");
+  }
+
+  if (LEGACY_COLOR_NAMES.has(name)) {
+    return true;
+  }
+
+  return LEGACY_COLOR_PREFIXES.some((prefix) => name.startsWith(prefix));
+}
+
+function extractCssVars(text: string): string[] {
   if (!text.includes("var(")) return [];
 
-  const legacy: string[] = [];
-  CSS_VAR_USAGE_REGEX.lastIndex = 0;
+  const vars: string[] = [];
+  const varCallRegex = /var\(([^)]+)\)/g;
+  let match: RegExpExecArray | null;
 
-  for (const match of text.matchAll(CSS_VAR_USAGE_REGEX)) {
-    const name = match[1];
-    if (!name) continue;
-    if (name.startsWith("--tm-")) continue;
-
-    if (EXACT_LEGACY_VARS.has(name)) {
-      legacy.push(name);
-      continue;
-    }
-
-    if (LEGACY_PREFIXES.some((prefix) => name.startsWith(prefix))) {
-      legacy.push(name);
+  while ((match = varCallRegex.exec(text))) {
+    const inside = match[1];
+    if (!inside) continue;
+    const parts = inside.split(",").map((part) => part.trim());
+    for (const part of parts) {
+      const tokenMatch = part.match(/^(--[a-zA-Z0-9-_]+)$/);
+      if (tokenMatch && tokenMatch[1]) {
+        vars.push(tokenMatch[1]);
+      }
     }
   }
 
-  return legacy;
+  return vars;
 }
 
 function buildFixedText(text: string, forbiddenVars: string[]): string | null {
   let fixed = text;
 
   for (const legacy of forbiddenVars) {
-    const replacement = resolveLegacyVar(legacy);
+    const replacement = LEGACY_TO_TM_MAP[legacy];
     if (!replacement) {
       return null;
     }
@@ -160,12 +182,18 @@ function reportForbidden(context: RuleContextType, node: TSESTree.Node, text: st
     return;
   }
 
-  const forbiddenVars = findLegacyVarUsages(text);
+  const vars = extractCssVars(text);
+  if (vars.length === 0) return;
+
+  const colorVars = vars.filter((name) => isColorVariable(name));
+  if (colorVars.length === 0) return;
+
+  const forbiddenVars = colorVars.filter((name) => !isAllowedCssVar(name));
   if (forbiddenVars.length === 0) return;
 
   context.report({
     node,
-    messageId: "legacyCssVar",
+    messageId: "forbidden",
     data: { variable: forbiddenVars.join(", ") },
     fix(fixer) {
       const fixed = buildFixedText(text, forbiddenVars);
@@ -195,11 +223,11 @@ export default createRule<Options, MessageIds>({
   meta: {
     type: "problem",
     docs: {
-      description: "Forbids legacy CSS variables and enforces tm-only runtime color tokens",
+      description: "Forbids non-tm CSS variables and enforces strict tm-only runtime contract",
     },
     messages: {
-      legacyCssVar:
-        "Legacy CSS variable '{{variable}}' is forbidden. Use tm-only tokens (var(--tm-*)).",
+      forbidden:
+        "CSS variable '{{variable}}' is forbidden. Only --tm-* and --tm-status-* are allowed.",
     },
     schema: [],
     fixable: "code",
@@ -215,12 +243,8 @@ export default createRule<Options, MessageIds>({
         return;
       }
 
-      for (const quasi of node.quasis) {
-        const raw = quasi.value?.raw;
-        if (raw !== undefined) {
-          reportForbidden(context, quasi, raw);
-        }
-      }
+      const raw = context.getSourceCode().getText(node);
+      reportForbidden(context, node, raw);
     }
 
     return {
@@ -230,6 +254,17 @@ export default createRule<Options, MessageIds>({
         }
       },
       TemplateLiteral: checkTemplateLiteral,
+      JSXAttribute(node) {
+        const value = node.value;
+        if (value && value.type === "Literal" && typeof value.value === "string") {
+          reportForbidden(context, node, value.value);
+        }
+      },
+      TaggedTemplateExpression(node) {
+        if (node.quasi) {
+          checkTemplateLiteral(node.quasi);
+        }
+      },
     };
   },
 });

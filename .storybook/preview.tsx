@@ -5,7 +5,7 @@ import "./storybook-overrides.css";
 import type { Preview } from "@storybook/react-vite";
 import React from "react";
 
-import { initThemeSync } from "../src/FOUNDATION/theme/applyMode";
+import { applyDocumentTheme, initThemeSync } from "../src/FOUNDATION/theme/applyMode";
 import {
   __checkStateMatrix,
   updateStateMatrixFromTokens,
@@ -16,8 +16,12 @@ import { ThemeProvider } from "../src/FOUNDATION/theme/ThemeProvider";
 // This ensures Button and other components have token-driven colors on initial render
 // Called at module top-level (NOT in decorators, hooks, or effects) for immediate execution
 // Uses initThemeSync which properly sets DOM attributes, classes, and CSS variables
+const STORYBOOK_MODE_KEY = "tm_mode_storybook";
+const STORYBOOK_THEME_KEY = "tm_theme_storybook";
+const STORYBOOK_BRAND_KEY = "tm_brand_storybook";
+
 if (typeof window !== "undefined") {
-  initThemeSync("day", "tm_mode");
+  initThemeSync("day", STORYBOOK_MODE_KEY);
 
   // Synchronous state matrix initialization - sets CSS variables BEFORE first React render
   // This ensures all components have token-driven states on initial render
@@ -274,7 +278,7 @@ if (typeof window !== "undefined") {
 
     const root = document.documentElement;
 
-    // Motion V2 CSS variables (primary motion system)
+    // Motion CSS variables (primary motion system)
     const motionV2Vars = [
       "--motion-duration-fast",
       "--motion-duration-normal",
@@ -367,11 +371,11 @@ if (typeof window !== "undefined") {
 
     // Log summary
     if (v2Result.allPresent && !v2Result.anyZero && !prefersReducedMotion) {
-      console.log("✅ [Motion] All motion V2 variables present and non-zero");
+      console.log("✅ [Motion] All motion variables present and non-zero");
     } else {
       console.error("❌ [Motion] Issues detected:");
       if (!v2Result.allPresent) {
-        console.error("  - Missing motion V2 variables");
+        console.error("  - Missing motion variables");
       }
       if (v2Result.anyZero || legacyResult.anyZero) {
         console.error("  - Some duration variables are zero");
@@ -438,18 +442,47 @@ const preview: Preview = {
       },
     },
   },
+  globalTypes: {
+    themeMode: {
+      name: "Mode",
+      description: "Theme mode",
+      defaultValue: "day",
+      toolbar: {
+        icon: "circlehollow",
+        items: [
+          { value: "day", title: "Day" },
+          { value: "night", title: "Night" },
+        ],
+      },
+    },
+  },
 
   decorators: [
-    (Story) => (
-      <ThemeProvider defaultMode="day">
-        <div style={{ padding: "2rem" }}>
-          <Story />
-        </div>
-      </ThemeProvider>
-    ),
+    (Story, context) => {
+      const mode = (context.globals.themeMode || "day") as "day" | "night";
+
+      React.useEffect(() => {
+        void applyDocumentTheme(mode, "default", null);
+      }, [mode]);
+
+      return (
+        <ThemeProvider
+          defaultMode={mode}
+          enableSystem={false}
+          storageKey={STORYBOOK_MODE_KEY}
+          themeStorageKey={STORYBOOK_THEME_KEY}
+          brandStorageKey={STORYBOOK_BRAND_KEY}
+        >
+          <div style={{ padding: "2rem" }}>
+            <Story />
+          </div>
+        </ThemeProvider>
+      );
+    },
   ],
 
   initialGlobals: {
+    themeMode: "day",
     backgrounds: {
       value: "light",
     },

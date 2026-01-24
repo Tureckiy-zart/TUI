@@ -207,6 +207,24 @@ interface CardProps {
 }
 ```
 
+### `tenerife-ui-architecture/no-raw-line-height`
+
+**Severity:** `error`
+
+**Description:** Forbids raw line-height usage (inline `style.lineHeight` and CSS-in-JS `line-height:`). Line-height must be derived from Foundation typography tokens.
+
+### `tenerife-ui-architecture/no-leading-tailwind`
+
+**Severity:** `error`
+
+**Description:** Forbids Tailwind `leading-*` classes on typography components (`Text`, `Heading`, `Label`). Line-height is controlled by typography roles and tokens.
+
+### `tenerife-ui-architecture/no-text-margin-spacing`
+
+**Severity:** `error`
+
+**Description:** Forbids paragraph spacing via `mt-*`/`mb-*` or inline `marginTop`/`marginBottom` on `Text` and `Heading`. Paragraph rhythm must be applied by container components.
+
 ## Related Rules
 
 This rule works alongside other token compliance rules in `eslint.config.mjs`:

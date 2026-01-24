@@ -3,7 +3,7 @@ import React from "react";
 import { describe, expect, it } from "vitest";
 
 import { Input } from "@/PRIMITIVES/Input";
-import { renderWithTheme } from "@/test/test-utils";
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
 import { Field } from "./Field";
 
@@ -335,6 +335,20 @@ describe("Field", () => {
       expect(input).toHaveAttribute("aria-invalid", "true");
       expect(input).toHaveAttribute("aria-errormessage", "password-error");
       expect(error).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <Field>
+          <Field.Label htmlFor="email">Email</Field.Label>
+          <Field.Control>
+            <Input id="email" placeholder="Enter email" />
+          </Field.Control>
+          <Field.Description id="email-desc">We'll never share your email.</Field.Description>
+        </Field>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

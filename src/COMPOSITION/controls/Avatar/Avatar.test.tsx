@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { describe, expect, it, vi } from "vitest";
-import { renderWithTheme } from "../../../test/test-utils";
+import { axeCheck, renderWithTheme } from "../../../test/test-utils";
+
 import { Avatar } from "./Avatar";
 import { AvatarGroup } from "./AvatarGroup";
 
@@ -151,7 +152,7 @@ describe("Avatar component", () => {
   it("should render online status with correct color", () => {
     const { container } = renderWithTheme(<Avatar alt="John Doe" status="online" />);
 
-    const statusDot = container.querySelector('[class*="bg-semantic-success"]');
+    const statusDot = container.querySelector('[class*="bg-success"]');
     expect(statusDot).toBeInTheDocument();
   });
 
@@ -165,7 +166,7 @@ describe("Avatar component", () => {
   it("should render busy status with correct color", () => {
     const { container } = renderWithTheme(<Avatar alt="John Doe" status="busy" />);
 
-    const statusDot = container.querySelector('[class*="bg-semantic-warning"]');
+    const statusDot = container.querySelector('[class*="bg-warning"]');
     expect(statusDot).toBeInTheDocument();
   });
 
@@ -218,6 +219,12 @@ describe("Avatar component", () => {
 
     const avatar = container.querySelector('[aria-label="John Doe"]');
     expect(avatar).toBeInTheDocument();
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = renderWithTheme(<Avatar alt="John Doe" />);
+    const results = await axeCheck(container);
+    expect(results.violations).toHaveLength(0);
   });
 
   // ============================================================================

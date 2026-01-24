@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it } from "vitest";
 
-import { renderWithTheme } from "@/test/test-utils";
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
 import { Label } from "./Label";
 
@@ -193,6 +193,17 @@ describe("Label", () => {
       );
       const label = screen.getByText("Email");
       expect(label).toHaveAttribute("aria-labelledby", "label-text");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = renderWithTheme(
+        <div>
+          <Label htmlFor="ax-input">Username</Label>
+          <input id="ax-input" />
+        </div>,
+      );
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

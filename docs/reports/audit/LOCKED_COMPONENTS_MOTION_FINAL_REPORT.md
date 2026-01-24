@@ -187,5 +187,5 @@ The motion coverage audit reveals a **well-designed and consistent motion system
 - [LOCKED_COMPONENTS_MOTION_VERDICT.md](./LOCKED_COMPONENTS_MOTION_VERDICT.md) - Intent validation verdicts
 - [LOCKED_COMPONENTS_STORYBOOK_GAPS.md](./LOCKED_COMPONENTS_STORYBOOK_GAPS.md) - Storybook coverage assessment
 - [Motion Authority](../../architecture/MOTION_AUTHORITY.md) - Motion system guidelines
-- [Motion Tokens](../../../src/FOUNDATION/tokens/motion/v2.ts) - Motion token definitions
+- [Motion Tokens](../../../src/FOUNDATION/tokens/motion.ts) - Motion token definitions
 

@@ -26,14 +26,14 @@ The following Motion system components are **LOCKED** and **IMMUTABLE**:
 ### 1. Motion Tokens
 
 #### Foundation Motion Tokens
-- **File:** `src/FOUNDATION/tokens/motion/v2.ts`
+- **File:** `src/FOUNDATION/tokens/motion.ts`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-27
 - **Exports:** `motionDurations`, `motionEasings`, `motionTransitions`, `motionFade`, `motionScale`, `motionSlide`, `motionCombined`, `motionCSSVariables`, `motionTailwindConfig`, `motionReducedMotion`, `motionTransitionProperty`
 - **Role:** Canonical motion token definitions
 - **Rule:** DO NOT modify, extend, or create alternatives
 
-> **Note:** Motion V1 (`src/FOUNDATION/tokens/motion.ts`) was deleted in 2.0.0. See MOTION_V1_INVENTORY.md for removal details.
+> **Note:** Motion V1 content was removed in 2.0.0. `src/FOUNDATION/tokens/motion.ts` is the canonical motion tokens file. See MOTION_V1_INVENTORY.md for removal details.
 
 #### Component Motion Tokens
 - **File:** `src/FOUNDATION/tokens/components/motion.ts`
@@ -136,7 +136,7 @@ The following hierarchy is **LOCKED** and **IMMUTABLE**:
 
 ```
 Motion Authority Contract (docs/architecture/MOTION_AUTHORITY.md)
-  ├── Motion Tokens (src/FOUNDATION/tokens/motion/v2.ts) [ONLY]
+  ├── Motion Tokens (src/FOUNDATION/tokens/motion.ts) [ONLY]
   ├── Component Tokens (src/FOUNDATION/tokens/components/motion.ts)
   ├── Motion Presets (src/preset.ts)
   │   └── .tm-motion-* utilities
@@ -164,7 +164,7 @@ The following motion domains are **LOCKED** and **IMMUTABLE**:
 
 The following mechanisms are **LOCKED** and **IMMUTABLE**:
 
-1. **Token CSS Variables** - `var(--motion-duration-*)`, `var(--motion-easing-*)`
+1. **Token CSS Variables** - `var(--tm-motion-duration-*)`, `var(--tm-motion-easing-*)`
 2. **tm-motion Utilities** - `.tm-motion-*` classes
 3. **Tailwind Motion Utilities** - Token-based Tailwind utilities (`duration-normal`, `ease-out`)
 
@@ -341,7 +341,7 @@ Before requesting unlock, ensure:
 
 | Component | Status | Lock Date | Immutability |
 |-----------|--------|-----------|--------------|
-| Motion Tokens V2 | ✅ LOCKED | 2025-12-27 | Immutable |
+| Motion Tokens | ✅ LOCKED | 2025-12-27 | Immutable |
 | Component Motion Tokens | ✅ LOCKED | 2025-12-27 | Immutable |
 | Motion Presets (preset.ts) | ✅ LOCKED | 2025-12-27 | Immutable |
 | TAS Presets | ✅ LOCKED | 2025-12-27 | Immutable |

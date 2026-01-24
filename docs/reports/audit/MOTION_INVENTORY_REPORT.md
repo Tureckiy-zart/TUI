@@ -16,7 +16,7 @@ This report provides a comprehensive inventory of all motion-related code patter
 **Key Findings:**
 - ✅ **Compliant:** Most motion usage is token-driven via `.tm-motion-*` utilities and `MOTION_TOKENS`
 - ⚠️ **Non-Compliant:** Some components use raw duration/easing values (checkbox, radio)
-- ✅ **Well-Structured:** Motion tokens are properly organized in `src/FOUNDATION/tokens/motion/` and `src/FOUNDATION/tokens/motion/v2.ts`
+- ✅ **Well-Structured:** Motion tokens are properly organized in `src/FOUNDATION/tokens/motion.ts`
 - ✅ **Utilities:** Comprehensive `.tm-motion-*` utilities defined in `src/preset.ts`
 
 ---
@@ -191,7 +191,7 @@ This report provides a comprehensive inventory of all motion-related code patter
   - Tailwind animation utilities
 - **Domain:** All domains
 - **Compliance:** ✅ **A - Token-driven**
-- **Mechanism:** Token CSS variables (`var(--motion-duration-*)`, `var(--motion-easing-*)`)
+- **Mechanism:** Token CSS variables (`var(--tm-motion-duration-*)`, `var(--tm-motion-easing-*)`)
 - **Status:** Compliant
 
 ---
@@ -269,9 +269,9 @@ This report provides a comprehensive inventory of all motion-related code patter
 
 | Usage | Files | Count | Compliance |
 |-------|-------|-------|------------|
-| `var(--motion-duration-*)` | `preset.ts` | 18+ | ✅ Compliant |
-| `var(--motion-easing-*)` | `preset.ts` | 18+ | ✅ Compliant |
-| `var(--motion-transition-*)` | `preset.ts` | 5+ | ✅ Compliant |
+| `var(--tm-motion-duration-*)` | `preset.ts` | 18+ | ✅ Compliant |
+| `var(--tm-motion-easing-*)` | `preset.ts` | 18+ | ✅ Compliant |
+| `var(--tm-motion-transition-*)` | `preset.ts` | 5+ | ✅ Compliant |
 
 ### tm-motion Utilities
 

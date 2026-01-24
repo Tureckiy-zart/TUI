@@ -49,7 +49,7 @@ export type RadioState = "default" | "checked" | "disabled" | "error";
  * - Motion Authority: Radio uses MOTION_TOKENS.transition for transitions
  * - Radius Authority: Radio references RADIO_TOKENS.size[].radius for border radius
  * - State Authority: Radio uses State Matrix CSS variables for all states
- * - Color Authority: Radio uses `--tm-*` variables and `--semantic-*` for validation states
+ * - Color Authority: Radio uses `--tm-*` variables and `--tm-status-*` for validation states
  *
  * Token-only contract:
  * - All colors are defined in RADIO_TOKENS (src/FOUNDATION/tokens/components/radio.ts)

@@ -18,7 +18,7 @@ import { screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { Button } from "@/PRIMITIVES/Button";
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import { PopoverWrapper } from "./Popover";
 
@@ -232,6 +232,25 @@ describe("Popover - Runtime / Interaction Tests", () => {
           expect(dialog).toBeInTheDocument();
           expect(dialog).toHaveTextContent("Popover content");
         });
+      });
+
+      it("passes axe accessibility checks when open", async () => {
+        const user = userEventSetup();
+        const { container } = renderWithTheme(
+          <PopoverWrapper content={<div>Popover content</div>}>
+            <Button>Open Popover</Button>
+          </PopoverWrapper>,
+        );
+
+        const trigger = screen.getByRole("button", { name: /open popover/i });
+        await user.click(trigger);
+
+        await waitFor(() => {
+          expect(screen.getByText("Popover content")).toBeInTheDocument();
+        });
+
+        const results = await axeCheck(container);
+        expect(results.violations).toHaveLength(0);
       });
     });
 

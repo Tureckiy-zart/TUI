@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import { tailwindThemeColors } from "./src/FOUNDATION/tokens/colors";
-import { motionTailwindConfig } from "./src/FOUNDATION/tokens/motion/v2";
+import { motionTailwindConfig } from "./src/FOUNDATION/tokens/motion";
 import { tailwindRadiusConfig } from "./src/FOUNDATION/tokens/radius";
 import { tailwindShadowConfig } from "./src/FOUNDATION/tokens/shadows";
 import { tailwindSpacingConfig } from "./src/FOUNDATION/tokens/spacing";
@@ -54,10 +54,10 @@ const SAFELIST = [
   "text-muted-foreground",
   "text-card-foreground",
   "text-popover-foreground",
-  "text-semantic-success-foreground",
-  "text-semantic-error-foreground",
-  "text-semantic-warning-foreground",
-  "text-semantic-info-foreground",
+  "text-success-foreground",
+  "text-error-foreground",
+  "text-warning-foreground",
+  "text-info-foreground",
   // Text - opacity variants
   "text-primary-foreground/50",
   "text-primary-foreground/75",
@@ -119,7 +119,7 @@ const SAFELIST = [
   "focus-visible:ring-ring",
   "focus-visible:ring-primary",
   "focus-visible:ring-accent",
-  // Motion V2 utility classes (required for animations to work)
+  // Motion utility classes (required for animations to work)
   "tm-motion-fade-in",
   "tm-motion-fade-out",
   "tm-motion-scale-in",
@@ -152,10 +152,19 @@ const SAFELIST = [
   "animate-slide-left-in",
   "animate-slide-right-in",
   "animate-fade-scale-in",
+  "animate-fade-scale-out",
   "animate-fade-slide-up-in",
+  "animate-fade-slide-up-out",
   "animate-fade-slide-down-in",
+  "animate-fade-slide-down-out",
   "animate-fade-slide-left-in",
+  "animate-fade-slide-left-out",
   "animate-fade-slide-right-in",
+  "animate-fade-slide-right-out",
+  "animate-slide-up-out",
+  "animate-slide-down-out",
+  "animate-slide-left-out",
+  "animate-slide-right-out",
   // Spinner animations
   "animate-spinner-linear",
   "animate-spinner-bars",
@@ -224,7 +233,7 @@ const config: Config = {
         },
       },
       animation: {
-        // Motion V2 animations - MUST be here for Tailwind to generate @keyframes
+        // Motion animations - MUST be here for Tailwind to generate @keyframes
         "fade-in": "fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",
         "fade-out": "fade-out 150ms cubic-bezier(0.4, 0, 0.2, 1) both",
         "scale-in": "scale-in 250ms cubic-bezier(0.4, 0, 0.2, 1) both",

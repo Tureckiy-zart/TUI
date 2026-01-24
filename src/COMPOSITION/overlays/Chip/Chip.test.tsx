@@ -12,6 +12,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
+
+import { axeCheck, renderWithTheme } from "@/test/test-utils";
+
 import { Chip } from "./Chip";
 
 describe("Chip", () => {
@@ -252,6 +255,18 @@ describe("Chip", () => {
 
       const chip = screen.getByRole("button");
       expect(chip).toHaveAttribute("aria-pressed", "mixed");
+    });
+
+    it("passes axe accessibility checks (display mode)", async () => {
+      const { container } = renderWithTheme(<Chip>Display Chip</Chip>);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
+    });
+
+    it("passes axe accessibility checks (interactive mode)", async () => {
+      const { container } = renderWithTheme(<Chip onClick={() => {}}>Clickable Chip</Chip>);
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

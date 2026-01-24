@@ -11,7 +11,7 @@ import type { CONTEXT_MENU_TOKENS } from "../components/context-menu";
 import type { MODAL_TOKENS } from "../components/modal";
 import type { SELECT_TOKENS } from "../components/select";
 import type { TABS_TOKENS } from "../components/tabs";
-import type { motionDurations, motionEasings, motionTransitions } from "../motion/v2";
+import type { motionDurations, motionEasings, motionTransitions } from "../motion";
 import type { borderRadius } from "../radius";
 import type {
   accentColoredShadows,
@@ -81,7 +81,7 @@ export type ShadowToken =
  * Semantic color token keys
  * Only semantic colors are allowed (no raw palette colors)
  * These map to CSS variables like --tm-surface-base, --tm-primary, etc.
- * Semantic colors map to --semantic-* CSS variables
+ * Status colors map to --tm-status-* CSS variables
  */
 export type ColorToken =
   | "background"
@@ -103,14 +103,14 @@ export type ColorToken =
   | "border"
   | "input"
   | "ring"
-  | "semantic-success"
-  | "semantic-success-foreground"
-  | "semantic-error"
-  | "semantic-error-foreground"
-  | "semantic-warning"
-  | "semantic-warning-foreground"
-  | "semantic-info"
-  | "semantic-info-foreground";
+  | "success"
+  | "success-foreground"
+  | "error"
+  | "error-foreground"
+  | "warning"
+  | "warning-foreground"
+  | "info"
+  | "info-foreground";
 
 /**
  * Surface variant token keys

@@ -1,11 +1,11 @@
-﻿/**
+/**
  * Motion Overview - Audit Dashboard
  *
  * Comprehensive dashboard showing all motion presets side-by-side with replay controls.
  * This story serves as the canonical visual checker for motion health.
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useRef, useState } from "react";
 
 import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";
@@ -224,67 +224,69 @@ export const Overview: Story = {
 
     return (
       <Box className="p-lg">
-        <Stack spacing={6}>
-          <Box>
-            <Heading level={1}>Motion Presets Overview</Heading>
+        <Flex gap={6} align="start" wrap="nowrap">
+          <Stack spacing={6} style={{ flex: 1, minWidth: 0 }}>
             <Box>
-              <Text tone="muted">
-                Complete catalog of all motion presets. Use replay controls to test animations.
-              </Text>
+              <Heading level={1}>Motion Presets Overview</Heading>
+              <Box>
+                <Text typographyRole="meta" color="muted">
+                  Complete catalog of all motion presets. Use replay controls to test animations.
+                </Text>
+              </Box>
             </Box>
-          </Box>
 
-          <Flex justify="between" align="center">
             <Box>
               <Text>
                 All presets use CSS variables for duration and easing, ensuring reduced motion
                 compatibility.
               </Text>
             </Box>
-            <Button onClick={replayAll}>Replay All Animations</Button>
-          </Flex>
 
-          <Grid cols={3} gap={4}>
-            {presets.map((preset) => (
-              <Box key={preset.id} className="rounded-lg border p-md">
-                <Stack spacing={3}>
-                  <Heading level={3}>{preset.name}</Heading>
-                  <Box>
-                    <Text size="sm" tone="muted">
-                      {preset.description}
-                    </Text>
-                  </Box>
-                  <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
-                    <AnimatedBox
-                      key={keys[preset.id as keyof typeof keys]}
-                      animationKey={keys[preset.id as keyof typeof keys]}
-                      className={preset.className}
+            <Grid cols={3} gap={4}>
+              {presets.map((preset) => (
+                <Box key={preset.id} className="rounded-lg border p-md">
+                  <Stack spacing={3}>
+                    <Heading level={3}>{preset.name}</Heading>
+                    <Box>
+                      <Text size="sm" typographyRole="meta" color="muted">
+                        {preset.description}
+                      </Text>
+                    </Box>
+                    <Box className="flex h-32 items-center justify-center rounded bg-[hsl(var(--tm-muted))]">
+                      <AnimatedBox
+                        key={keys[preset.id as keyof typeof keys]}
+                        animationKey={keys[preset.id as keyof typeof keys]}
+                        className={preset.className}
+                      >
+                        <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
+                      </AnimatedBox>
+                    </Box>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setKeys((prev) => ({
+                          ...prev,
+                          [preset.id]: prev[preset.id as keyof typeof prev] + 1,
+                        }));
+                      }}
                     >
-                      <Box className="h-16 w-16 rounded bg-[hsl(var(--tm-primary))]" />
-                    </AnimatedBox>
-                  </Box>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => {
-                      setKeys((prev) => ({
-                        ...prev,
-                        [preset.id]: prev[preset.id as keyof typeof prev] + 1,
-                      }));
-                    }}
-                  >
-                    Replay
-                  </Button>
-                  <Box className="font-mono">
-                    <Text size="xs" tone="muted">
-                      {preset.className}
-                    </Text>
-                  </Box>
-                </Stack>
-              </Box>
-            ))}
-          </Grid>
-        </Stack>
+                      Replay
+                    </Button>
+                    <Box className="font-mono">
+                      <Text size="xs" typographyRole="meta" color="muted">
+                        {preset.className}
+                      </Text>
+                    </Box>
+                  </Stack>
+                </Box>
+              ))}
+            </Grid>
+          </Stack>
+          <Box style={{ flexShrink: 0 }}>
+            <Button onClick={replayAll}>Replay All Animations</Button>
+          </Box>
+        </Flex>
       </Box>
     );
   },

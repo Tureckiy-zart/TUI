@@ -11,7 +11,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { Button } from "@/PRIMITIVES/Button";
-import { renderWithTheme, userEventSetup } from "@/test/test-utils";
+import { axeCheck, renderWithTheme, userEventSetup } from "@/test/test-utils";
 
 import {
   Dialog,
@@ -555,6 +555,24 @@ describe("Dialog", () => {
         expect(fallbackTitle).toHaveAttribute("id");
         expect(dialog).toHaveAttribute("aria-labelledby", fallbackTitle.getAttribute("id"));
       });
+    });
+
+    it("passes axe accessibility checks when dialog is open", async () => {
+      const { container } = renderWithTheme(
+        <Dialog open={true} onOpenChange={vi.fn()}>
+          <DialogHeader>
+            <DialogTitle>Axe Test Dialog</DialogTitle>
+            <DialogDescription>Description for axe</DialogDescription>
+          </DialogHeader>
+        </Dialog>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+      });
+
+      const results = await axeCheck(container);
+      expect(results.violations).toHaveLength(0);
     });
   });
 

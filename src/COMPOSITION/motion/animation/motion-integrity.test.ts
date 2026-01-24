@@ -10,18 +10,18 @@ describe("Motion Integrity", () => {
   beforeEach(() => {
     // Set up CSS variables for tests
     const root = document.documentElement;
-    root.style.setProperty("--motion-duration-fast", "150ms");
-    root.style.setProperty("--motion-duration-normal", "250ms");
-    root.style.setProperty("--motion-duration-slow", "350ms");
-    root.style.setProperty("--motion-easing-standard", "cubic-bezier(0.4, 0, 0.2, 1)");
+    root.style.setProperty("--tm-motion-duration-fast", "150ms");
+    root.style.setProperty("--tm-motion-duration-normal", "250ms");
+    root.style.setProperty("--tm-motion-duration-slow", "350ms");
+    root.style.setProperty("--tm-motion-easing-standard", "cubic-bezier(0.4, 0, 0.2, 1)");
   });
 
   describe("CSS Variables", () => {
     it("should have motion duration CSS variables defined", () => {
       const root = document.documentElement;
-      const fast = getComputedStyle(root).getPropertyValue("--motion-duration-fast");
-      const normal = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
-      const slow = getComputedStyle(root).getPropertyValue("--motion-duration-slow");
+      const fast = getComputedStyle(root).getPropertyValue("--tm-motion-duration-fast");
+      const normal = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
+      const slow = getComputedStyle(root).getPropertyValue("--tm-motion-duration-slow");
 
       // In test environment, variables may be empty if not set, so we check they're set
       expect(fast).toBeTruthy();
@@ -31,12 +31,12 @@ describe("Motion Integrity", () => {
 
     it("should have motion easing CSS variables defined", () => {
       const root = document.documentElement;
-      root.style.setProperty("--motion-easing-soft", "cubic-bezier(0.22, 1, 0.36, 1)");
-      root.style.setProperty("--motion-easing-emphasized", "cubic-bezier(0.2, 0, 0, 1)");
+      root.style.setProperty("--tm-motion-easing-soft", "cubic-bezier(0.22, 1, 0.36, 1)");
+      root.style.setProperty("--tm-motion-easing-emphasized", "cubic-bezier(0.2, 0, 0, 1)");
 
-      const standard = getComputedStyle(root).getPropertyValue("--motion-easing-standard");
-      const soft = getComputedStyle(root).getPropertyValue("--motion-easing-soft");
-      const emphasized = getComputedStyle(root).getPropertyValue("--motion-easing-emphasized");
+      const standard = getComputedStyle(root).getPropertyValue("--tm-motion-easing-standard");
+      const soft = getComputedStyle(root).getPropertyValue("--tm-motion-easing-soft");
+      const emphasized = getComputedStyle(root).getPropertyValue("--tm-motion-easing-emphasized");
 
       expect(standard).toBeTruthy();
       expect(soft).toBeTruthy();
@@ -50,7 +50,7 @@ describe("Motion Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-fade-in {
-          animation: fade-in var(--motion-duration-normal) var(--motion-easing-standard) both;
+          animation: fade-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both;
         }
         @keyframes fade-in {
           from { opacity: 0; }
@@ -97,13 +97,13 @@ describe("Motion Integrity", () => {
     it("should have non-zero duration when reduced motion is false", () => {
       // Set reduced motion to false
       const root = document.documentElement;
-      root.style.setProperty("--motion-duration-normal", "250ms");
+      root.style.setProperty("--tm-motion-duration-normal", "250ms");
 
       // Create style with animation
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-fade-in {
-          animation: fade-in var(--motion-duration-normal) var(--motion-easing-standard) both;
+          animation: fade-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both;
         }
         @keyframes fade-in {
           from { opacity: 0; }
@@ -118,7 +118,7 @@ describe("Motion Integrity", () => {
 
       // In test environment, duration may be "0s" if animation not fully applied
       // So we verify the CSS variable is set instead
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
       expect(varValue).toBeTruthy();
       expect(varValue.trim()).toBe("250ms");
 
@@ -128,7 +128,7 @@ describe("Motion Integrity", () => {
 
     it("should use CSS variables for duration", () => {
       const root = document.documentElement;
-      const varValue = getComputedStyle(root).getPropertyValue("--motion-duration-normal");
+      const varValue = getComputedStyle(root).getPropertyValue("--tm-motion-duration-normal");
 
       // Verify CSS variable is set
       expect(varValue).toBeTruthy();
@@ -142,7 +142,7 @@ describe("Motion Integrity", () => {
       const style = document.createElement("style");
       style.textContent = `
         .tm-motion-fade-in {
-          animation: fade-in var(--motion-duration-normal) var(--motion-easing-standard) both;
+          animation: fade-in var(--tm-motion-duration-normal) var(--tm-motion-easing-standard) both;
         }
       `;
       document.head.appendChild(style);

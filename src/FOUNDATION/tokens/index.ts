@@ -203,7 +203,7 @@ export type {
   MotionEasing,
   MotionSlideDirection,
   MotionTransition,
-} from "./motion/v2";
+} from "./motion";
 
 export {
   motionCSSVariables,
@@ -217,7 +217,7 @@ export {
   motionTailwindConfig,
   motionTransitionProperty,
   motionTransitions,
-} from "./motion/v2";
+} from "./motion";
 
 // ============================================================================
 // RADIUS

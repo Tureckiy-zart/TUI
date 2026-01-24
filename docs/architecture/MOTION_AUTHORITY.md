@@ -50,7 +50,7 @@ Motion in the design system is organized into seven primary domains:
 
 Motion MUST be implemented using only the following mechanisms:
 
-1. **Token CSS Variables** - Motion values via CSS custom properties (e.g., `var(--motion-duration-normal)`, `var(--motion-easing-standard)`)
+1. **Token CSS Variables** - Motion values via CSS custom properties (e.g., `var(--tm-motion-duration-normal)`, `var(--tm-motion-easing-standard)`)
 2. **tm-motion Utilities** - Pre-configured Tailwind utility classes (e.g., `.tm-motion-fade-in`, `.tm-motion-hover-lift`, `.tm-motion-tap-scale`)
 3. **Tailwind Motion Utilities** - Standard Tailwind transition/animation utilities that reference motion tokens (e.g., `transition-all duration-normal ease-out`)
 
@@ -538,116 +538,116 @@ This section documents all canonical motion presets available via `.tm-motion-*`
 
 #### Fade Animations
 - `.tm-motion-fade-in` - Fade in (opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: General enter animations, overlays
   
 - `.tm-motion-fade-out` - Fade out (opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: General exit animations, overlays
 
 #### Scale Animations
 - `.tm-motion-scale-in` - Scale in (scale: 0.95 → 1, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Modal dialogs, popovers, cards
   
 - `.tm-motion-scale-out` - Scale out (scale: 1 → 0.95, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Modal dialogs, popovers, cards
 
 #### Slide Animations
 - `.tm-motion-slide-up` - Slide up (translateY: 100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Toast notifications, bottom sheets
   
 - `.tm-motion-slide-down` - Slide down (translateY: -100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Dropdowns, top sheets
   
 - `.tm-motion-slide-left` - Slide left (translateX: 100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
   
 - `.tm-motion-slide-right` - Slide right (translateX: -100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
 
 #### Compound Animations
 - `.tm-motion-fade-scale` - Fade + scale in (scale: 0.95 → 1, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Modal dialogs, emphasized enter animations
   
 - `.tm-motion-fade-slide-up` - Fade + slide up (translateY: 100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Toast notifications, bottom sheets
   
 - `.tm-motion-fade-slide-down` - Fade + slide down (translateY: -100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Dropdowns, top sheets
   
 - `.tm-motion-fade-slide-left` - Fade + slide left (translateX: 100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
   
 - `.tm-motion-fade-slide-right` - Fade + slide right (translateX: -100% → 0, opacity: 0 → 1)
-  - Duration: `var(--motion-duration-normal)` (250ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-normal)` (250ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
 
 #### Exit Animations
 - `.tm-motion-fade-scale-out` - Fade + scale out (scale: 1 → 0.95, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Modal dialogs, emphasized exit animations
   
 - `.tm-motion-fade-slide-up-out` - Fade + slide up out (translateY: 0 → 100%, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Toast notifications, bottom sheets
   
 - `.tm-motion-fade-slide-down-out` - Fade + slide down out (translateY: 0 → -100%, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Dropdowns, top sheets
   
 - `.tm-motion-fade-slide-left-out` - Fade + slide left out (translateX: 0 → 100%, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
   
 - `.tm-motion-fade-slide-right-out` - Fade + slide right out (translateX: 0 → -100%, opacity: 1 → 0)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Side panels, drawers
 
 ### Interactive State Presets
 
 #### Hover Animations
 - `.tm-motion-hover-lift` - Hover lift effect (scale: 1 → 1.05, translateY: 0 → -0.3125rem)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Cards, buttons, interactive elements
   
 - `.tm-motion-hover-scale` - Hover scale effect (scale: 1 → 1.05)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Icons, avatars, small interactive elements
 
 #### Tap/Active Animations
 - `.tm-motion-tap-scale` - Tap/active scale effect (scale: 1 → 0.95)
-  - Duration: `var(--motion-duration-fast)` (150ms)
-  - Easing: `var(--motion-easing-standard)`
+  - Duration: `var(--tm-motion-duration-fast)` (150ms)
+  - Easing: `var(--tm-motion-easing-standard)`
   - Use: Buttons, interactive elements, press feedback
 
 ### Preset Usage Guidelines
@@ -718,7 +718,7 @@ All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` prefer
 - Animations become instant transitions
 - No motion is forced on users who prefer reduced motion
 
-**Implementation:** CSS variables (`var(--motion-duration-*)`) are dynamically updated by `ThemeProvider` based on user preferences.
+**Implementation:** CSS variables (`var(--tm-motion-duration-*)`) are dynamically updated by `ThemeProvider` based on user preferences.
 
 ---
 
@@ -749,10 +749,10 @@ All `.tm-motion-*` presets automatically respect `prefers-reduced-motion` prefer
 ### Source of Truth
 
 **Canonical Token Definitions:**
-- Location: `src/FOUNDATION/tokens/motion/v2.ts` - **ONLY MOTION TOKEN FILE**
+- Location: `src/FOUNDATION/tokens/motion.ts` - **ONLY MOTION TOKEN FILE**
 - Exports: `motionDurations`, `motionEasings`, `motionTransitions`, `motionFade`, `motionScale`, `motionSlide`, `motionCombined`, `motionReducedMotion`, `motionCSSVariables`, `motionTailwindConfig`
 
-**Rule:** The motion token file (`src/FOUNDATION/tokens/motion/v2.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
+**Rule:** The motion token file (`src/FOUNDATION/tokens/motion.ts`) is the single source of truth for all motion values. Components MUST reference tokens from this file, never define their own motion values.
 
 **Note:** Motion V1 was permanently removed in version 2.0.0. The motion system is singular and versionless post-2.0.0. Any references to Motion V1 in code, comments, examples, or documentation are incorrect and must be removed.
 

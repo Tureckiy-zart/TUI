@@ -33,8 +33,8 @@ The Motion system audit is **COMPLETE** and the system is **READY FOR LOCK**. Th
 - ✅ Granular duration options available
 
 **Weaknesses:**
-- ⚠️ Two token systems (V1 and V2) - could be confusing (but V2 is preferred)
-- ⚠️ Some components use V1, some use V2 (not fully migrated)
+- ⚠️ Two token systems (V1 and V2) - could be confusing (but is preferred)
+- ⚠️ Some components use V1, some use (not fully migrated)
 
 **Recommendations:**
 - Consider documenting migration path from V1 to V2
