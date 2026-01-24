@@ -135,6 +135,7 @@ export default createRule<Options, MessageIds>({
     // Check string literals
     function checkStringLiteral(node: TSESTree.Literal): void {
       if (typeof node.value !== "string") return;
+      if (isNonTypographyJsxStyleLiteral(node)) return;
 
       const text = node.value;
       const rawLineHeights = extractRawLineHeights(text);
@@ -167,6 +168,7 @@ export default createRule<Options, MessageIds>({
             node,
             messageId: "cssInJsLineHeight",
           });
+          return;
         }
       }
 
@@ -212,57 +214,53 @@ export default createRule<Options, MessageIds>({
                 lineHeightValue = prop.value.quasis.map((q) => q.value.raw).join("");
               }
 
-              if (lineHeightValue && isRawLineHeightValue(lineHeightValue)) {
-                // Check if this is a Text/Heading component
-                const parent = node.parent;
-                if (parent?.type === "JSXOpeningElement") {
-                  const parentName =
-                    parent.name.type === "JSXIdentifier" ? parent.name.name : undefined;
-                  if (parentName === "Text" || parentName === "Heading") {
-                    context.report({
-                      node: prop.value,
-                      messageId: "inlineLineHeight",
-                    });
-                    return;
+              if (!lineHeightValue) continue;
+
+              const parent = node.parent;
+              if (parent?.type !== "JSXOpeningElement") continue;
+              const parentName =
+                parent.name.type === "JSXIdentifier" ? parent.name.name : undefined;
+
+              if (parentName !== "Text" && parentName !== "Heading") {
+                continue;
+              }
+
+              let typographyRole: string | null = null;
+              for (const attr of parent.attributes) {
+                if (attr.type !== "JSXAttribute") continue;
+                if (attr.name.type === "JSXIdentifier" && attr.name.name === "typographyRole") {
+                  if (attr.value?.type === "Literal" && typeof attr.value.value === "string") {
+                    typographyRole = attr.value.value;
+                  } else if (
+                    attr.value?.type === "JSXExpressionContainer" &&
+                    attr.value.expression.type === "Literal" &&
+                    typeof attr.value.expression.value === "string"
+                  ) {
+                    typographyRole = attr.value.expression.value;
                   }
                 }
+              }
 
-                // Check for typography role context
-                let typographyRole: string | null = null;
-                if (parent?.type === "JSXOpeningElement") {
-                  for (const attr of parent.attributes) {
-                    if (attr.type !== "JSXAttribute") continue;
-                    if (attr.name.type === "JSXIdentifier" && attr.name.name === "typographyRole") {
-                      if (attr.value?.type === "Literal" && typeof attr.value.value === "string") {
-                        typographyRole = attr.value.value;
-                      }
-                    }
-                  }
-                }
-
-                if (typographyRole) {
-                  const expected = getExpectedLineHeight(typographyRole);
-                  if (expected && lineHeightValue !== expected) {
-                    context.report({
-                      node: prop.value,
-                      messageId: "roleMismatch",
-                      data: {
-                        role: typographyRole,
-                        lineHeight: lineHeightValue,
-                        expected,
-                      },
-                    });
-                  }
-                } else {
+              if (typographyRole) {
+                const expected = getExpectedLineHeight(typographyRole);
+                if (expected && lineHeightValue !== expected) {
                   context.report({
                     node: prop.value,
-                    messageId: "rawLineHeight",
+                    messageId: "roleMismatch",
                     data: {
-                      value: lineHeightValue,
+                      role: typographyRole,
+                      lineHeight: lineHeightValue,
+                      expected,
                     },
                   });
                 }
+                return;
               }
+
+              context.report({
+                node: prop.value,
+                messageId: "inlineLineHeight",
+              });
             }
           }
         }
@@ -347,27 +345,17 @@ export default createRule<Options, MessageIds>({
 
       // Check if line-height matches role policy
       if (typographyRole && lineHeightValue) {
-        if (isRawLineHeightValue(lineHeightValue)) {
-          const expected = getExpectedLineHeight(typographyRole);
-          if (expected) {
-            context.report({
-              node,
-              messageId: "roleMismatch",
-              data: {
-                role: typographyRole,
-                lineHeight: lineHeightValue,
-                expected,
-              },
-            });
-          } else {
-            context.report({
-              node,
-              messageId: "rawLineHeight",
-              data: {
-                value: lineHeightValue,
-              },
-            });
-          }
+        const expected = getExpectedLineHeight(typographyRole);
+        if (expected && lineHeightValue !== expected) {
+          context.report({
+            node,
+            messageId: "roleMismatch",
+            data: {
+              role: typographyRole,
+              lineHeight: lineHeightValue,
+              expected,
+            },
+          });
         }
       } else if (lineHeightValue && isRawLineHeightValue(lineHeightValue)) {
         context.report({
@@ -385,6 +373,59 @@ export default createRule<Options, MessageIds>({
       TemplateLiteral: checkTemplateLiteral,
       JSXAttribute: checkJSXAttribute,
       JSXOpeningElement: checkJSXOpeningElement,
+      Property(node) {
+        if (node.key.type !== "Identifier") return;
+        if (node.key.name !== "lineHeight" && node.key.name !== "line-height") return;
+        if (isJsxStyleProperty(node)) return;
+
+        let value: string | null = null;
+        if (node.value.type === "Literal") {
+          if (typeof node.value.value === "string" || typeof node.value.value === "number") {
+            value = String(node.value.value);
+          }
+        } else if (node.value.type === "TemplateLiteral") {
+          value = node.value.quasis.map((q) => q.value.raw).join("");
+        }
+
+        if (value && isRawLineHeightValue(value)) {
+          context.report({
+            node: node.value,
+            messageId: "rawLineHeight",
+            data: {
+              value,
+            },
+          });
+        }
+      },
     };
   },
 });
+
+function isNonTypographyJsxStyleLiteral(node: TSESTree.Literal): boolean {
+  const parent = node.parent;
+  if (!parent || parent.type !== "Property") return false;
+  if (parent.key.type !== "Identifier" || parent.key.name !== "lineHeight") return false;
+  const objectExpr = parent.parent;
+  if (!objectExpr || objectExpr.type !== "ObjectExpression") return false;
+  const jsxExpr = objectExpr.parent;
+  if (!jsxExpr || jsxExpr.type !== "JSXExpressionContainer") return false;
+  const jsxAttr = jsxExpr.parent;
+  if (!jsxAttr || jsxAttr.type !== "JSXAttribute") return false;
+  if (jsxAttr.name.type !== "JSXIdentifier" || jsxAttr.name.name !== "style") return false;
+  const jsxOpening = jsxAttr.parent;
+  if (!jsxOpening || jsxOpening.type !== "JSXOpeningElement") return false;
+  const name = jsxOpening.name;
+  if (name.type !== "JSXIdentifier") return false;
+  return name.name !== "Text" && name.name !== "Heading";
+}
+
+function isJsxStyleProperty(node: TSESTree.Property): boolean {
+  const objectExpr = node.parent;
+  if (!objectExpr || objectExpr.type !== "ObjectExpression") return false;
+  const jsxExpr = objectExpr.parent;
+  if (!jsxExpr || jsxExpr.type !== "JSXExpressionContainer") return false;
+  const jsxAttr = jsxExpr.parent;
+  if (!jsxAttr || jsxAttr.type !== "JSXAttribute") return false;
+  if (jsxAttr.name.type !== "JSXIdentifier" || jsxAttr.name.name !== "style") return false;
+  return true;
+}

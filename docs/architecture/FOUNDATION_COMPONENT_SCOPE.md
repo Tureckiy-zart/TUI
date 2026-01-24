@@ -14,6 +14,12 @@ This document defines **which components are considered Foundation** and therefo
 
 **This document is the authoritative source of truth** for Foundation component scope. All components listed in this document **MUST comply with the Foundation Contract** as enforced by [FOUNDATION_CONTRACT.md](./FOUNDATION_CONTRACT.md) and [FOUNDATION_LOCK.md](./FOUNDATION_LOCK.md).
 
+## Policy: When Component Tokens Are NOT Required
+
+Component tokens are NOT required for structural, layout, or utility components
+that do not introduce new visual semantics. Direct use of foundation tokens is
+the correct pattern in those cases.
+
 ---
 
 ## Status: FINAL / APPLIED
@@ -483,4 +489,3 @@ This document works in conjunction with:
 **Priority:** CRITICAL  
 **Enforcement:** ✅ LOCKED (Foundation Contract enforcement is APPLIED)  
 **Next Review:** NEVER (Foundation enforcement is immutable unless unlock procedure is executed)
-
