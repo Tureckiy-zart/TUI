@@ -11,6 +11,7 @@
  */
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+import type { RuleContext } from "@typescript-eslint/utils/ts-eslint";
 import path from "path";
 
 const createRule = ESLintUtils.RuleCreator(
@@ -123,7 +124,10 @@ export default createRule<Options, MessageIds>({
               classNameValue = attr.value.value;
             }
           } else if (attr.value?.type === TSESTree.AST_NODE_TYPES.JSXExpressionContainer) {
-            classNameValue = resolveStringFromExpression(attr.value.expression, context);
+            const ex = attr.value.expression;
+            if (ex.type !== TSESTree.AST_NODE_TYPES.JSXEmptyExpression) {
+              classNameValue = resolveStringFromExpression(ex, context);
+            }
           }
 
           if (!classNameValue) continue;
@@ -203,14 +207,14 @@ function isPublicUiEntry(source: string): boolean {
 
 function resolveStringFromExpression(
   expr: TSESTree.Expression,
-  context: TSESTree.TSESLint.RuleContext<MessageIds, Options>,
+  context: RuleContext<MessageIds, Options>,
 ): string | null {
   if (expr.type === TSESTree.AST_NODE_TYPES.Literal && typeof expr.value === "string") {
     return expr.value;
   }
 
   if (expr.type === TSESTree.AST_NODE_TYPES.TemplateLiteral && expr.expressions.length === 0) {
-    return expr.quasis.map((q) => q.value.raw).join("");
+    return expr.quasis.map((q: TSESTree.TemplateElement) => q.value.raw).join("");
   }
 
   if (expr.type === TSESTree.AST_NODE_TYPES.Identifier) {
@@ -223,12 +227,12 @@ function resolveStringFromExpression(
 function resolveIdentifierString(
   name: string,
   node: TSESTree.Node,
-  context: TSESTree.TSESLint.RuleContext<MessageIds, Options>,
+  context: RuleContext<MessageIds, Options>,
 ): string | null {
   const sourceCode = context.getSourceCode();
   let scope = sourceCode.getScope(node);
   while (scope) {
-    const variable = scope.variables.find((v) => v.name === name);
+    const variable = scope.variables.find((v: { name: string }) => v.name === name);
     if (variable) {
       for (const def of variable.defs) {
         if (def.type !== "Variable" || def.node.type !== "VariableDeclarator") continue;
@@ -241,12 +245,14 @@ function resolveIdentifierString(
           init.type === TSESTree.AST_NODE_TYPES.TemplateLiteral &&
           init.expressions.length === 0
         ) {
-          return init.quasis.map((q) => q.value.raw).join("");
+          return init.quasis.map((q: TSESTree.TemplateElement) => q.value.raw).join("");
         }
       }
       break;
     }
-    scope = scope.upper;
+    const next = scope.upper;
+    if (!next) break;
+    scope = next;
   }
   return null;
 }
