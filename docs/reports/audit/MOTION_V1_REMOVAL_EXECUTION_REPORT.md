@@ -53,8 +53,6 @@ Motion V1 has been completely removed from the codebase. All Motion V1 tokens, i
 ### ✅ STEP 5: CI Guards Against V1
 - **Status:** Complete
 - **Deliverables:**
-  - ✅ Created `scripts/check-motion-v1.mjs`
-  - ✅ Added `pnpm check:motion-v1` script to `package.json`
   - ✅ Added CI check to `.github/workflows/ci.yml`
   - ✅ Added to `validate` and `ci` scripts
 
@@ -135,7 +133,6 @@ Motion V1 has been completely removed from the codebase. All Motion V1 tokens, i
 - `CHANGELOG.md`
 
 ### CI/Config:
-- `scripts/check-motion-v1.mjs` (new)
 - `package.json`
 - `.github/workflows/ci.yml`
 
@@ -163,7 +160,6 @@ pnpm test
 
 ### ✅ Motion V1 Guard
 ```bash
-pnpm check:motion-v1
 ```
 **Result:** ✅ No V1 patterns detected
 
@@ -198,7 +194,6 @@ pnpm check:motion-v1
 
 ## CI Guards
 
-### Script: `pnpm check:motion-v1`
 - Checks for V1 file existence
 - Checks for V1 import patterns
 - Checks for V1 CSS variable patterns

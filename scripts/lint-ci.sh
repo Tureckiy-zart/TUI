@@ -157,18 +157,19 @@ fi
 echo ""
 
 # === SUMMARY ===
-# Ensure all variables are numeric before arithmetic (default to 0 if empty or non-numeric)
-ESLINT_ERRORS=${ESLINT_ERRORS:-0}
-ESLINT_WARNINGS=${ESLINT_WARNINGS:-0}
-PRETTIER_ERRORS=${PRETTIER_ERRORS:-0}
+normalize_int() {
+  local value="${1:-0}"
+  value="$(printf "%s" "${value}" | tr -cd '0-9')"
+  if [ -z "${value}" ]; then
+    value="0"
+  fi
+  echo "${value}"
+}
 
-# Convert to integers explicitly (handle any non-numeric values)
-ESLINT_ERRORS=$((ESLINT_ERRORS + 0))
-ESLINT_WARNINGS=$((ESLINT_WARNINGS + 0))
-PRETTIER_ERRORS=$((PRETTIER_ERRORS + 0))
-
-# Calculate total issues (using proper arithmetic)
-TOTAL_ISSUES=$((ESLINT_ERRORS + ESLINT_WARNINGS + PRETTIER_ERRORS))
+ESLINT_ERRORS="$(normalize_int "${ESLINT_ERRORS:-0}")"
+ESLINT_WARNINGS="$(normalize_int "${ESLINT_WARNINGS:-0}")"
+PRETTIER_ERRORS="$(normalize_int "${PRETTIER_ERRORS:-0}")"
+TOTAL_ISSUES=$((10#${ESLINT_ERRORS} + 10#${ESLINT_WARNINGS} + 10#${PRETTIER_ERRORS}))
 
 {
   echo "## SUMMARY"

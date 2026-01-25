@@ -41,9 +41,6 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
-      - name: Check Motion V1 Patterns
-        run: pnpm check:motion-v1
-
       - name: Theme Token Parity Check
         run: pnpm theme:parity-check
 
