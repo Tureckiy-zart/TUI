@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Input } from "./Input";
 
@@ -96,6 +96,52 @@ export const SizesGallery: Story = {
       description: {
         story:
           "SizesGallery demonstrates all supported Input sizes (sm, md, lg) for visual comparison.",
+      },
+    },
+  },
+};
+
+/**
+ * States Story
+ *
+ * Displays Input in all public states: default, disabled, invalid.
+ * Required per VARIANTS_SIZE_CANON for components with public interactive states.
+ *
+ * @canonical VARIANTS_SIZE_CANON - States story (REQUIRED for components with disabled, invalid, etc.)
+ */
+export const States: Story = {
+  render: () => (
+    <div className="flex w-64 flex-col gap-lg">
+      <div>
+        <h3 className="mb-md text-sm font-medium">Default</h3>
+        <Input placeholder="Enter text..." defaultValue="Normal input" />
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">Disabled</h3>
+        <Input placeholder="Enter text..." defaultValue="Disabled" disabled />
+      </div>
+      <div>
+        <h3 className="mb-md text-sm font-medium">Invalid</h3>
+        <Input
+          placeholder="Enter email"
+          defaultValue="invalid-email"
+          invalid
+          aria-describedby="input-states-error"
+        />
+        <span
+          id="input-states-error"
+          className="mt-xs block text-sm text-[hsl(var(--tm-destructive))]"
+        >
+          Please enter a valid email address.
+        </span>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "States demonstrates Input in default, disabled, and invalid (aria-invalid) states. Invalid state uses aria-describedby for a11y.",
       },
     },
   },

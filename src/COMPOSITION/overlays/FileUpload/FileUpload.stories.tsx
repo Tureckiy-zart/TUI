@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import { FileUpload } from "./FileUpload";
@@ -189,6 +189,47 @@ export const SizesGallery: Story = {
       description: {
         story:
           "Gallery of all size variants. Reference: VARIANTS_SIZE_CANON.md for size scale standards.",
+      },
+    },
+  },
+};
+
+/**
+ * Matrix Story
+ *
+ * Variant × size matrix (outline | filled) × (sm | md | lg).
+ * Required per VARIANTS_SIZE_CANON for components with both size and variant props.
+ *
+ * @canonical VARIANTS_SIZE_CANON - Matrix story (REQUIRED when component has both size and variant)
+ */
+export const Matrix: Story = {
+  render: () => {
+    const variants: Array<"outline" | "filled"> = ["outline", "filled"];
+    const sizes: Array<"sm" | "md" | "lg"> = ["sm", "md", "lg"];
+
+    return (
+      <div className="space-y-xl">
+        {variants.map((variant) => (
+          <div key={variant}>
+            <h3 className="mb-md text-sm font-medium capitalize">{variant}</h3>
+            <div className="grid grid-cols-1 gap-lg sm:grid-cols-3">
+              {sizes.map((size) => (
+                <div key={size}>
+                  <div className="mb-xs text-xs text-[hsl(var(--tm-text-muted))]">{size}</div>
+                  <FileUpload variant={variant} size={size} onFileSelect={() => {}} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Matrix of all variant × size combinations (outline, filled) × (sm, md, lg). Reference: VARIANTS_SIZE_CANON.md.",
       },
     },
   },
