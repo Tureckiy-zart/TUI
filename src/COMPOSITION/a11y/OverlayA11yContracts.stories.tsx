@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Overlay A11Y Contracts
  *
  * Demonstrates accessibility contracts for overlay components (Modal, Dialog, Drawer).
@@ -67,7 +67,7 @@ export const ModalLabeling: Story = {
           <Box>
             <Heading level={2}>Modal Labeling Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Modal overlays MUST have accessible names via aria-labelledby (wired to
                 Modal.Title).
               </Text>
@@ -130,7 +130,7 @@ export const DialogLabeling: Story = {
           <Box>
             <Heading level={2}>Dialog Labeling Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Dialog component provides automatic aria-labelledby/aria-describedby wiring via
                 Dialog.Title and Dialog.Description.
               </Text>
@@ -192,7 +192,7 @@ export const EscapeKeyContract: Story = {
           <Box>
             <Heading level={2}>Escape Key Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Escape key MUST close overlays (Modal, Dialog, Drawer, Popover, Tooltip).
               </Text>
             </Box>
@@ -272,7 +272,7 @@ export const FocusManagementReference: Story = {
           <Box>
             <Heading level={2}>Focus Management</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Focus trap and restore mechanics are governed by FOCUS_AUTHORITY. See Focus stories
                 for detailed demonstrations.
               </Text>

@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { Stack } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
 import { Label } from "@/PRIMITIVES/Label";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -24,17 +23,21 @@ import { Text } from "@/PRIMITIVES/Text";
  * </Field>
  * ```
  */
-export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
+  children: React.ReactNode;
+}
 
-const Field = React.forwardRef<HTMLDivElement, FieldProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Stack ref={ref} spacing="sm" className={cn(className)} {...props}>
-        {children}
-      </Stack>
-    );
-  },
-);
+const Field = React.forwardRef<HTMLDivElement, FieldProps>(({ children, ...props }, ref) => {
+  // className and style are forbidden from public API - only token-based className is used
+  return (
+    <Stack ref={ref} spacing="sm" {...props}>
+      {children}
+    </Stack>
+  );
+});
 Field.displayName = "Field";
 
 /**
@@ -69,12 +72,18 @@ FieldLabel.displayName = "FieldLabel";
  * </Field.Control>
  * ```
  */
-export interface FieldControlProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldControlProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
+  children: React.ReactNode;
+}
 
 const FieldControl = React.forwardRef<HTMLDivElement, FieldControlProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ children, ...props }, ref) => {
+    // className and style are forbidden from public API - only token-based className is used
     return (
-      <div ref={ref} className={cn(className)} {...props}>
+      <div ref={ref} {...props}>
         {children}
       </div>
     );

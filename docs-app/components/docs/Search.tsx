@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@tenerife.music/ui";
+import { Input, Box } from "@tenerife.music/ui";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -58,7 +58,7 @@ export function Search() {
   };
 
   return (
-    <div className="relative w-64">
+    <Box className="relative w-64">
       <Input
         type="search"
         placeholder="Search docs... (Cmd/Ctrl+K)"
@@ -67,7 +67,6 @@ export function Search() {
         onFocus={() => query.length > 2 && setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}
         onKeyDown={handleKeyDown}
-        className="w-full focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-label="Search documentation"
         aria-autocomplete="list"
         aria-expanded={isOpen}
@@ -105,6 +104,6 @@ export function Search() {
           ))}
         </div>
       )}
-    </div>
+    </Box>
   );
 }

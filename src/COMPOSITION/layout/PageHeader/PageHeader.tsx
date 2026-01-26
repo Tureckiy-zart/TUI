@@ -151,7 +151,7 @@ const PageHeader = React.forwardRef<HTMLElement, PageHeaderProps>(
                 </Heading>
               )}
               {hasDescription && (
-                <Text size="md" tone="muted">
+                <Text size="md" typographyRole="meta" color="muted">
                   {description}
                 </Text>
               )}

@@ -264,7 +264,7 @@ DrawerContent.displayName = "DrawerContent";
  * ```tsx
  * <Drawer.Header>
  *   <Heading level={3} id="drawer-title">Drawer Title</Heading>
- *   <Text size="sm" tone="muted">Optional description</Text>
+ *   <Text size="sm" typographyRole="meta" color="muted">Optional description</Text>
  * </Drawer.Header>
  * ```
  */

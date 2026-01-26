@@ -12,7 +12,7 @@
  *
  * **What HelperText IS:**
  * - Thin presentational wrapper over Text component
- * - DX helper with sensible defaults (size="sm", tone="muted", as="p")
+ * - DX helper with sensible defaults (size="sm", typographyRole="meta", color="muted", as="p")
  * - Standalone component (not tied to Field composition)
  * - Accessible via aria-describedby
  * - Token-only styling (via Text component)
@@ -40,26 +40,17 @@
 
 import * as React from "react";
 
-import {
-  Text,
-  type TextAsElement,
-  type TextProps,
-  type TextSize,
-  type TextTone,
-} from "@/PRIMITIVES/Text";
+import { Text, type TextAsElement, type TextProps, type TextSize } from "@/PRIMITIVES/Text";
 
 /**
  * HelperText component props
  *
  * Extends TextProps but excludes className/style (Foundation Enforcement)
- * and allows optional overrides for size, tone, and as props.
+ * and allows optional overrides for size and as props.
  *
  * @public
  */
-export interface HelperTextProps extends Omit<
-  TextProps,
-  "className" | "style" | "size" | "tone" | "as"
-> {
+export interface HelperTextProps extends Omit<TextProps, "className" | "style" | "size" | "as"> {
   /**
    * Typography size scale (default: "sm")
    * Override default small size if needed
@@ -67,16 +58,11 @@ export interface HelperTextProps extends Omit<
   size?: TextSize;
 
   /**
-   * Text color tone (default: "muted")
-   * Override default muted tone if needed
-   */
-  tone?: TextTone;
-
-  /**
    * HTML element to render (default: "p")
    * Override default paragraph element if needed
    */
   as?: TextAsElement;
+  // tone prop removed - use typographyRole + color from TextProps instead
 }
 
 /**
@@ -84,7 +70,7 @@ export interface HelperTextProps extends Omit<
  *
  * Thin wrapper over Text component with sensible defaults for helper text:
  * - size="sm" (small text for helper descriptions)
- * - tone="muted" (muted color for secondary information)
+ * - typographyRole="meta" + color="muted" (muted color for secondary information)
  * - as="p" (paragraph element for semantic description)
  *
  * All other Text props are forwarded (except className/style per Foundation Enforcement).
@@ -102,13 +88,15 @@ export interface HelperTextProps extends Omit<
  *
  * Token usage:
  * - All tokens via Text component (TEXT_TOKENS)
- * - Color via text-[hsl(var(--tm-text-muted))] (tone="muted")
+ * - Color via typographyRole="meta" + color="muted" (role-based color enforcement)
  * - Size via text-sm (size="sm")
  * - No new tokens created (reuse existing)
  */
 const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
-  ({ size = "sm", tone = "muted", as = "p", ...props }, ref) => {
-    return <Text ref={ref} size={size} tone={tone} as={as} {...props} />;
+  ({ size = "sm", as = "p", ...props }, ref) => {
+    // tone prop removed - use typographyRole + color from TextProps instead
+    // Default: typographyRole="meta" + color="muted" for muted helper text
+    return <Text ref={ref} size={size} as={as} typographyRole="meta" color="muted" {...props} />;
   },
 );
 HelperText.displayName = "HelperText";

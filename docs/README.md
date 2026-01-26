@@ -95,6 +95,17 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [LINTING_STANDARD.md](./architecture/LINTING_STANDARD.md) - Linting standards
 - [TOOLING_DECISIONS.md](./architecture/TOOLING_DECISIONS.md) - Tooling decisions
 
+### Closed System v2 Documentation
+
+**Status:** ✅ **CANONICAL** - Closed System v2 is finalized and locked (Phase F complete)
+
+- [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) - **Canonical index** - Single source of truth for Closed System v2 documentation
+- [architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md) - Phase A: Problem definition
+- [architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md) - Phase B: Architecture model and principles
+- [architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) - Phase F: Lock declaration (current phase status)
+
+**All canonical documents are immutable after merge. See the canonical index for complete documentation set.**
+
 ### Component Locks
 
 - [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives and Extension Layout components lock
@@ -188,6 +199,7 @@ docs/
 2. **Check Foundation status:** [architecture/FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md)
 3. **Consult Authority Contracts:** [architecture/AUTHORITY_NAVIGATION.md](./architecture/AUTHORITY_NAVIGATION.md) for navigation
 4. **Verify component status:** [architecture/EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md)
+5. **Closed System v2:** [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) - Canonical documentation index
 
 ### For Developers
 
@@ -220,6 +232,12 @@ See [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) for complete archite
 Extension components are composable and may use Foundation components internally. They provide domain-specific functionality and can be created, modified, or deleted without affecting the Foundation layer.
 
 See [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) for Extension layer rules.
+
+### Closed System v2
+
+Closed System v2 is the architectural model that ensures system closure across Foundation, COMPOSITION, and Extension layers. All phases (A-F) are **COMPLETE** and **LOCKED**.
+
+See [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) for complete canonical documentation.
 
 ---
 

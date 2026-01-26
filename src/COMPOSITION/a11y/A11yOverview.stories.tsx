@@ -1,4 +1,4 @@
-﻿/**
+/**
  * A11Y Overview - Governance Showcase
  *
  * Demonstrates accessibility patterns across the design system.
@@ -65,7 +65,7 @@ export const SemanticRoles: Story = {
           <Box>
             <Heading level={2}>Semantic Elements</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 All interactive elements use correct semantic HTML or proper ARIA roles.
               </Text>
             </Box>
@@ -140,7 +140,7 @@ export const KeyboardOnly: Story = {
           <Box>
             <Heading level={2}>Keyboard-Only Operability</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 All interactive elements can be operated using only keyboard (no mouse/touch
                 required).
               </Text>

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Accessible Name Gallery
  *
  * Demonstrates correct accessible naming patterns across primitives.
@@ -62,7 +62,7 @@ export const ButtonNames: Story = {
           <Box>
             <Heading level={2}>Button Accessible Names</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Buttons get accessible names from text content or aria-label.
               </Text>
             </Box>
@@ -78,7 +78,7 @@ export const ButtonNames: Story = {
                 </Box>
                 <Button variant="primary">Submit Form</Button>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Submit Form"
                   </Text>
                 </Box>
@@ -94,7 +94,7 @@ export const ButtonNames: Story = {
                   -
                 </Button>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Close dialog" (required for icon-only buttons)
                   </Text>
                 </Box>
@@ -126,7 +126,7 @@ export const FormInputNames: Story = {
           <Box>
             <Heading level={2}>Form Input Accessible Names</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Form inputs require associated labels via Label component, aria-label, or
                 aria-labelledby.
               </Text>
@@ -146,7 +146,7 @@ export const FormInputNames: Story = {
                   <Input id="email-1" type="email" />
                 </Box>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Email" (via htmlFor/id association)
                   </Text>
                 </Box>
@@ -161,7 +161,7 @@ export const FormInputNames: Story = {
                 <Label id="email-label-2">Email Address</Label>
                 <Input aria-labelledby="email-label-2" type="email" />
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Email Address" (via aria-labelledby)
                   </Text>
                 </Box>
@@ -175,7 +175,7 @@ export const FormInputNames: Story = {
                 </Box>
                 <Input aria-label="Email address" type="email" />
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Email address" (via aria-label)
                   </Text>
                 </Box>
@@ -195,7 +195,7 @@ export const FormInputNames: Story = {
                   <Field.Description>We'll never share your email.</Field.Description>
                 </Field>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Email" (via Field.Label composition)
                   </Text>
                 </Box>
@@ -227,7 +227,7 @@ export const CustomControlNames: Story = {
           <Box>
             <Heading level={2}>Custom Control Accessible Names</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Custom controls (Checkbox, Radio, Switch) require aria-label or aria-labelledby as
                 they have no visible label.
               </Text>
@@ -248,7 +248,7 @@ export const CustomControlNames: Story = {
                   <Radio aria-label="Option A" />
                 </Box>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible names provided via aria-label
                   </Text>
                 </Box>
@@ -265,7 +265,7 @@ export const CustomControlNames: Story = {
                   <Label id="terms-label">Accept terms</Label>
                 </Box>
                 <Box className="mt-2">
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Accessible name: "Accept terms" (via aria-labelledby)
                   </Text>
                 </Box>

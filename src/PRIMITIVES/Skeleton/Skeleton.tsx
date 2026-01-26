@@ -10,7 +10,6 @@
 import * as React from "react";
 
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { cn } from "@/FOUNDATION/lib/utils";
 import { DATA_TOKENS } from "@/FOUNDATION/tokens/components/data";
 
 /**
@@ -35,7 +34,10 @@ const skeletonVariants = tokenCVA({
   },
 });
 
-export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SkeletonProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
   /**
    * Skeleton variant style
    * @default "text"
@@ -59,11 +61,12 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  */
 const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
-  ({ className, variant, "aria-hidden": ariaHidden = true, ...props }, ref) => {
+  ({ variant, "aria-hidden": ariaHidden = true, ...props }, ref) => {
+    // className and style are forbidden from public API - only CVA output is used
     return (
       <div
         ref={ref}
-        className={cn(skeletonVariants({ variant }), className)}
+        className={skeletonVariants({ variant })}
         aria-hidden={ariaHidden}
         {...props}
       />

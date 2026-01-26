@@ -155,7 +155,7 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
             <img src={previewUrl} alt={file.name} className="size-full object-cover" />
           ) : (
             <div className="flex size-full items-center justify-center">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {file.name.split(".").pop()?.toUpperCase()}
               </Text>
             </div>
@@ -169,7 +169,7 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
               {file.name}
             </Text>
           </Box>
-          <Text size="xs" tone="muted">
+          <Text size="xs" typographyRole="meta" color="muted">
             {formatBytes(file.size)}
           </Text>
         </div>
@@ -463,12 +463,12 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               {isDragActive ? "Drop files here" : "Drop files or click to browse"}
             </Text>
             {accept && (
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Accepted: {accept}
               </Text>
             )}
             {maxSize && (
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Max size: {formatBytes(maxSize)}
               </Text>
             )}

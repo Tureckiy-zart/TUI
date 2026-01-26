@@ -902,7 +902,7 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
         <Stack direction={stackDirection} spacing={labelGap} align="center">
           {shouldReverse ? (
             <>
-              <Text size={labelTextSize} tone="muted">
+              <Text size={labelTextSize} typographyRole="meta" color="muted">
                 {label}
               </Text>
               {spinnerElement}
@@ -910,7 +910,7 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           ) : (
             <>
               {spinnerElement}
-              <Text size={labelTextSize} tone="muted">
+              <Text size={labelTextSize} typographyRole="meta" color="muted">
                 {label}
               </Text>
             </>

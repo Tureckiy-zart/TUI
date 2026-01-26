@@ -1,0 +1,73 @@
+{
+  "audit_date": "2026-01-26",
+  "scope": {
+    "scanned_directory": "docs-app",
+    "files_scanned": 177,
+    "total_violations": 4
+  },
+  "violations": [
+    {
+      "violation_class": "V3_UTILITY_BASED_STYLING",
+      "count": 4,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "MAJOR": 4,
+        "MINOR": 0,
+        "INFO": 0
+      },
+      "affected_files": [
+        "docs-app/app/page.tsx",
+        "docs-app/components/docs/CodeBlock.tsx",
+        "docs-app/components/docs/Search.tsx"
+      ],
+      "confidence": "HIGH",
+      "findings": [
+        {
+          "file": "docs-app/app/page.tsx",
+          "line": 9,
+          "column": 7,
+          "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "docs-app/app/page.tsx",
+          "line": 66,
+          "column": 11,
+          "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "docs-app/components/docs/CodeBlock.tsx",
+          "line": 41,
+          "column": 7,
+          "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "docs-app/components/docs/Search.tsx",
+          "line": 60,
+          "column": 11,
+          "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        }
+      ]
+    }
+  ],
+  "readiness_assessment": {
+    "eslint_guards_ready": true,
+    "blocking_issues": [
+      "0 CRITICAL violations",
+      "4 MAJOR violations (V3: utility-based styling) remain"
+    ],
+    "recommendations": [
+      "Fix V3 violations for clean activation",
+      "Use Foundation layout components (Stack, Box, Container) for wrappers",
+      "Test thoroughly after migration"
+    ],
+    "activation_strategy": "CRITICAL resolved; guards ready pending MAJOR cleanup (recommended)"
+  }
+}

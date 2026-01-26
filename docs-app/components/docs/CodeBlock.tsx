@@ -42,8 +42,8 @@ export function CodeBlock({ children, language, className }: CodeBlockProps) {
         <Button
           variant="ghost"
           iconOnly
+          size="sm"
           onClick={handleCopy}
-          className="h-8 w-8"
           aria-label="Copy code"
         >
           {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}

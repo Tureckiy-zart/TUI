@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Focus Order Playground - Interactive Demo
  *
  * Provides an interactive environment to explore and test tab order behavior.
@@ -79,7 +79,9 @@ export const FocusTracker: Story = {
           <Box>
             <Heading level={2}>Focus Tracker</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Tab through elements. The tracker shows focus order history.</Text>
+              <Text typographyRole="meta" color="muted">
+                Tab through elements. The tracker shows focus order history.
+              </Text>
             </Box>
           </Box>
 
@@ -92,7 +94,7 @@ export const FocusTracker: Story = {
               <Text>{focusedElement}</Text>
             </Box>
             <Box className="mt-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 History: {focusHistory.join(" -> ") || "Start tabbing..."}
               </Text>
             </Box>
@@ -137,7 +139,9 @@ export const VisualVsDomOrder: Story = {
           <Box>
             <Heading level={2}>Visual vs DOM Order</Heading>
             <Box className="mt-2">
-              <Text tone="muted">CSS flex order changes visual position but NOT tab order.</Text>
+              <Text typographyRole="meta" color="muted">
+                CSS flex order changes visual position but NOT tab order.
+              </Text>
             </Box>
           </Box>
 
@@ -163,7 +167,7 @@ export const VisualVsDomOrder: Story = {
               </Text>
             </Box>
             <Box className="mb-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Visually: 3 to 2 to 1, but Tab order: 1 to 2 to 3 (DOM order)
               </Text>
             </Box>
@@ -182,7 +186,7 @@ export const VisualVsDomOrder: Story = {
               </Text>
             </Box>
             <Box className="mb-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Visual order differs from tab order. This can confuse keyboard users!
               </Text>
             </Box>
@@ -224,7 +228,7 @@ export const CompositeControlsDemo: Story = {
           <Box>
             <Heading level={2}>Composite Controls</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Tab enters group, Arrow keys navigate within, Tab exits group.
               </Text>
             </Box>
@@ -305,7 +309,9 @@ export const DisabledElementsDemo: Story = {
           <Box>
             <Heading level={2}>Disabled Elements</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Disabled elements are skipped in tab order.</Text>
+              <Text typographyRole="meta" color="muted">
+                Disabled elements are skipped in tab order.
+              </Text>
             </Box>
           </Box>
 
@@ -346,7 +352,9 @@ export const TabindexDemo: Story = {
           <Box>
             <Heading level={2}>Tabindex Values</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Only tabindex="0" and tabindex="-1" are allowed.</Text>
+              <Text typographyRole="meta" color="muted">
+                Only tabindex="0" and tabindex="-1" are allowed.
+              </Text>
             </Box>
           </Box>
 
@@ -377,7 +385,7 @@ export const TabindexDemo: Story = {
               </Text>
             </Box>
             <Box className="mb-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Not in tab order, but can receive programmatic focus.
               </Text>
             </Box>
@@ -408,7 +416,7 @@ export const TabindexDemo: Story = {
               </Text>
             </Box>
             <Box className="mb-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 This creates unpredictable tab order. Never use tabindex {">"} 0.
               </Text>
             </Box>

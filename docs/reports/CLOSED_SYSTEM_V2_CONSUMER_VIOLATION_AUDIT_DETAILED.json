@@ -1,0 +1,44 @@
+{
+  "findings": [
+    {
+      "violation_class": "V3_UTILITY_BASED_STYLING",
+      "file": "docs-app/app/page.tsx",
+      "line": 9,
+      "column": 7,
+      "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+      "code_snippet": "export default function HomePage() {\n  return (\n    <PageShell>\n      <div className=\"container mx-auto px-4 py-16\">\n        <div className=\"mx-auto max-w-3xl\">\n          <h1 className=\"mb-6 font-display text-5xl font-bold\">Tenerife UI Documentation</h1>\n          <p className=\"mb-8 text-xl text-muted-foreground\">",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V3_UTILITY_BASED_STYLING",
+      "file": "docs-app/app/page.tsx",
+      "line": 66,
+      "column": 11,
+      "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+      "code_snippet": "            </Link>\n          </div>\n\n          <div className=\"flex gap-4\">\n            <Link href=\"/getting-started\">\n              <Button>Get Started</Button>\n            </Link>",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V3_UTILITY_BASED_STYLING",
+      "file": "docs-app/components/docs/CodeBlock.tsx",
+      "line": 41,
+      "column": 7,
+      "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+      "code_snippet": "\n  return (\n    <div className={cn(\"group relative\", className)}>\n      <div className=\"absolute right-2 top-2 z-10\">\n        <Button\n          variant=\"ghost\"\n          iconOnly",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V3_UTILITY_BASED_STYLING",
+      "file": "docs-app/components/docs/Search.tsx",
+      "line": 60,
+      "column": 11,
+      "message": "Tailwind utility classes on wrapper element 'div' containing Foundation components",
+      "code_snippet": "    }\n  };\n\n  return (\n    <div className=\"relative w-64\">\n      <Input\n        type=\"search\"",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    }
+  ]
+}

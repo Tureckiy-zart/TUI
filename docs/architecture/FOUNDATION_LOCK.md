@@ -2137,6 +2137,7 @@ If Authority modifications are required in the future:
 - **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
 - **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[Architecture Lock](./ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
+- **[Closed System v2 Canon Documentation Lock](./closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
 - **[Token System](./TOKEN_AUTHORITY.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
 - **Component Guidelines** — Component development guidelines (archived; file no longer available)

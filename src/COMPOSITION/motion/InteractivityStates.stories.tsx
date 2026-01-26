@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Interactivity States - Audit Dashboard
  *
  * Shows hover/active/focus-visible states for core interactive components in one view.
@@ -49,7 +49,7 @@ export const Overview: Story = {
           <Box>
             <Heading level={1}>Interactivity States Overview</Heading>
             <Box>
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Hover, active, and focus-visible states for core interactive components. Use
                 keyboard navigation (Tab) to test focus states.
               </Text>
@@ -61,7 +61,7 @@ export const Overview: Story = {
             <Box>
               <Heading level={2}>Buttons</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   Hover: Lift/scale effect | Active: Press feedback | Focus: Visible ring
                 </Text>
               </Box>
@@ -77,7 +77,7 @@ export const Overview: Story = {
             <Box>
               <Heading level={2}>Links</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   Hover: Underline/color change | Focus: Visible ring
                 </Text>
               </Box>
@@ -96,7 +96,7 @@ export const Overview: Story = {
             <Box>
               <Heading level={2}>Form Controls</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   Hover: Border/background change | Active: Press feedback | Focus: Visible ring
                 </Text>
               </Box>
@@ -117,7 +117,7 @@ export const Overview: Story = {
             <Box>
               <Heading level={2}>Interactive Elements</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   Hover: Lift/scale effect | Active: Press feedback | Focus: Visible ring
                 </Text>
               </Box>
@@ -125,7 +125,7 @@ export const Overview: Story = {
                 <Box className="cursor-pointer rounded-lg border p-md tm-motion-hover-lift tm-motion-tap-scale">
                   <Text weight="semibold">Hover Lift Card</Text>
                   <Box>
-                    <Text size="sm" tone="muted">
+                    <Text size="sm" typographyRole="meta" color="muted">
                       Hover to lift, click to scale
                     </Text>
                   </Box>
@@ -133,7 +133,7 @@ export const Overview: Story = {
                 <Box className="cursor-pointer rounded-lg border p-md tm-motion-hover-scale tm-motion-tap-scale">
                   <Text weight="semibold">Hover Scale Card</Text>
                   <Box>
-                    <Text size="sm" tone="muted">
+                    <Text size="sm" typographyRole="meta" color="muted">
                       Hover to scale, click to press
                     </Text>
                   </Box>
@@ -162,7 +162,7 @@ export const Overview: Story = {
                 </Text>
               </Box>
               <Box>
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   All states should provide smooth transitions using motion tokens.
                 </Text>
               </Box>
@@ -185,7 +185,7 @@ export const ButtonStates: Story = {
           <Box>
             <Heading level={1}>Button Interaction States</Heading>
             <Box>
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Detailed view of button states: base, hover, active, focus-visible, disabled
               </Text>
             </Box>
@@ -197,7 +197,7 @@ export const ButtonStates: Story = {
               <Stack spacing={4} className="mt-4">
                 <Button variant="primary">Base State</Button>
                 <Box>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Hover: Background darkens, slight lift
                     <br />
                     Active: Background darkens further, slight scale down
@@ -213,7 +213,7 @@ export const ButtonStates: Story = {
               <Stack spacing={4} className="mt-4">
                 <Button variant="secondary">Base State</Button>
                 <Box>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Hover: Background lightens, slight lift
                     <br />
                     Active: Background lightens further, slight scale down

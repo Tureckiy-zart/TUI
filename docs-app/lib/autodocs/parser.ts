@@ -28,7 +28,6 @@ import { sanitizeType } from "./utils/sanitizeType";
 let ts: typeof import("typescript") | null = null;
 
 try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   ts = require("typescript");
 } catch {
   console.warn("typescript package not found. Install it for full parser support.");

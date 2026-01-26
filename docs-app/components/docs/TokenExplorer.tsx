@@ -26,10 +26,9 @@ export function TokenExplorer({ title, description, children }: TokenExplorerPro
 
 interface CopyButtonProps {
   value: string;
-  className?: string;
 }
 
-export function CopyButton({ value, className }: CopyButtonProps) {
+export function CopyButton({ value }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -48,8 +47,8 @@ export function CopyButton({ value, className }: CopyButtonProps) {
     <Button
       variant="ghost"
       iconOnly
+      size="sm"
       onClick={handleCopy}
-      className={cn("h-6 w-6", className)}
       aria-label="Copy value"
     >
       {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
