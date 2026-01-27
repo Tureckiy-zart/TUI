@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Box } from "@/COMPOSITION/layout/Box";
 import { Input } from "@/PRIMITIVES/Input";
@@ -111,7 +111,7 @@ export const WithDescription: Story = {
       <FormGroup
         legend="Contact Information"
         description={
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             We'll never share your contact information with third parties.
           </Text>
         }
@@ -177,7 +177,7 @@ export const WithDescriptionAndError: Story = {
       <FormGroup
         legend="Payment Information"
         description={
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             All fields are required to complete your purchase.
           </Text>
         }
@@ -280,7 +280,7 @@ export const Accessibility: Story = {
       <FormGroup
         legend="Accessibility Example"
         description={
-          <Text size="sm" tone="muted" id="description-example">
+          <Text size="sm" typographyRole="meta" color="muted" id="description-example">
             This description is automatically linked via aria-describedby.
           </Text>
         }
@@ -365,7 +365,7 @@ export const LayoutTransparency: Story = {
       <FormGroup
         legend="Layout Transparency Example"
         description={
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             FormGroup does not control layout inside children
           </Text>
         }

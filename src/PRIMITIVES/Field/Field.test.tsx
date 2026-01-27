@@ -114,18 +114,6 @@ describe("Field", () => {
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
     });
 
-    it("accepts className prop", () => {
-      renderWithTheme(
-        <Field>
-          <Field.Control className="custom-class">
-            <Input placeholder="Test" />
-          </Field.Control>
-        </Field>,
-      );
-      const input = screen.getByPlaceholderText("Test");
-      expect(input.parentElement).toHaveClass("custom-class");
-    });
-
     it("wraps input correctly", () => {
       renderWithTheme(
         <Field>
@@ -354,7 +342,11 @@ describe("Field", () => {
 
   describe("Edge Cases", () => {
     it("renders with empty children", () => {
-      const { container } = renderWithTheme(<Field />);
+      const { container } = renderWithTheme(
+        <Field>
+          <Field.Label>Test</Field.Label>
+        </Field>,
+      );
       expect(container.firstChild).toBeInTheDocument();
     });
 
@@ -387,16 +379,6 @@ describe("Field", () => {
       );
       expect(screen.getByText("Error 1")).toBeInTheDocument();
       expect(screen.getByText("Error 2")).toBeInTheDocument();
-    });
-
-    it("accepts custom className", () => {
-      const { container } = renderWithTheme(
-        <Field className="custom-field">
-          <Field.Label>Test</Field.Label>
-        </Field>,
-      );
-      // Field renders as Stack, which renders as div
-      expect(container.firstChild).toHaveClass("custom-field");
     });
 
     it("accepts data attributes", () => {

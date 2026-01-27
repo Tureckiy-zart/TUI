@@ -121,13 +121,9 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
-                    <Icon
-                      name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden="true"
-                    />
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" size="xl" color="muted" aria-hidden="true" />
+                    </Box>
                   </div>
                 )}
                 {/* Image Overlay on Hover */}

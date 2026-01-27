@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@tenerife.music/ui";
+import { Button, Box } from "@tenerife.music/ui";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 
@@ -37,8 +37,8 @@ export function CodeBlock({ children, language, className }: CodeBlockProps) {
   };
 
   return (
-    <div className={cn("group relative", className)}>
-      <div className="absolute right-2 top-2 z-10">
+    <Box className={cn("group relative", className)}>
+      <Box className="absolute z-10" mr={2} mt={2}>
         <Button
           variant="ghost"
           iconOnly
@@ -48,10 +48,10 @@ export function CodeBlock({ children, language, className }: CodeBlockProps) {
         >
           {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
         </Button>
-      </div>
+      </Box>
       <pre className="overflow-x-auto rounded-lg bg-muted p-4">
         <code className={language ? `language-${language}` : ""}>{children}</code>
       </pre>
-    </div>
+    </Box>
   );
 }

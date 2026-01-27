@@ -68,6 +68,7 @@
     "lint:ci": "bash ./scripts/lint-ci.sh",
     "lint:rules": "bash -c 'start=$(date +%s); echo \"lint:rules старт\"; echo \"lint:rules files:\"; rg --files -g \"*.ts\" -g \"!**/*.config.*\" -g \"!**/*.mjs\" eslint-rules; count=$(rg --files -g \"*.ts\" -g \"!**/*.config.*\" -g \"!**/*.mjs\" eslint-rules | wc -l); echo \"lint:rules count: ${count}\"; eslint --config eslint-rules/eslint.config.mjs --format stylish eslint-rules; status=$?; end=$(date +%s); echo \"lint:rules time: $((end-start))s\"; if [ $status -eq 0 ]; then echo \"lint:rules PASS\"; else echo \"lint:rules FAIL\"; fi; exit $status'",
     "lint:consumer": "eslint --config eslint.consumer.config.mjs docs-app",
+    "audit:consumer-violations": "tsx scripts/audit-consumer-violations.ts",
     "format:check": "prettier . --check",
     "check:theme-tokens": "node scripts/check-theme-token-parity.mjs",
     "validate": "pnpm typecheck && pnpm lint:check && pnpm format:check && pnpm check:next-document && pnpm check:theme-tokens",

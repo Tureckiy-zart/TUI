@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import { Button } from "@/PRIMITIVES/Button";
 import { Field } from "@/PRIMITIVES/Field";
 import { Input } from "@/PRIMITIVES/Input";
@@ -41,7 +41,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   }
 
   return (
-    <div className={cn("space-y-md", className)}>
+    <Stack spacing="md" className={className}>
       <Field>
         <Field.Label>{emailLabel}</Field.Label>
         <Field.Control>
@@ -55,6 +55,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         </Field.Control>
       </Field>
       <Button>{loginButtonText}</Button>
-    </div>
+    </Stack>
   );
 };

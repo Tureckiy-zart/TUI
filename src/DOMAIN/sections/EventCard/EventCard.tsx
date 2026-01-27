@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
+import { Box, LinkWithCustomVariant, Stack } from "@/COMPOSITION/layout";
 import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
@@ -112,17 +112,17 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
         >
           {/* Featured Badge */}
           {featured && featuredBadgeText && (
-            <div className={eventCardBadgeVariants({ size })}>
-              <span className={eventCardBadgeSurfaceVariants({ variant: "featured" })}>
+            <Box className={eventCardBadgeVariants({ size })}>
+              <Box className={eventCardBadgeSurfaceVariants({ variant: "featured" })}>
                 {featuredBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "relative h-full w-full overflow-hidden",
                   DOMAIN_TOKENS.surface.bg.default,
@@ -139,25 +139,26 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                     )}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
-                    <Icon
-                      name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden="true"
-                    />
-                  </div>
+                  <Stack
+                    direction="horizontal"
+                    align="center"
+                    justify="center"
+                    className="h-full w-full"
+                  >
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" size="xl" color="muted" aria-hidden="true" />
+                    </Box>
+                  </Stack>
                 )}
                 {/* Image Overlay on Hover */}
-                <div
+                <Box
                   className={cn(
                     "absolute inset-0 opacity-0 group-hover:opacity-100",
                     DOMAIN_TOKENS.motion.hover.transition,
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
-              </div>
+              </Box>
             </CardBaseImageWrapper>
           )}
 
@@ -182,9 +183,9 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
             )}
 
             {/* Metadata Rows */}
-            <div className={eventCardMetadataVariants({ size })}>
+            <Box className={eventCardMetadataVariants({ size })}>
               {date && (
-                <div className={eventCardMetadataItemVariants({ size })}>
+                <Box className={eventCardMetadataItemVariants({ size })}>
                   <IconCalendar
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
@@ -192,10 +193,10 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                   <Text size="xs" typographyRole="meta" color="muted">
                     <time dateTime={date}>{date}</time>
                   </Text>
-                </div>
+                </Box>
               )}
               {venueName && (
-                <div className={eventCardMetadataItemVariants({ size })}>
+                <Box className={eventCardMetadataItemVariants({ size })}>
                   <IconLocation
                     className={eventCardMetadataIconVariants({ size })}
                     aria-hidden={true}
@@ -203,14 +204,14 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                   <Text size="xs" typographyRole="meta" color="muted">
                     <address>{venueName}</address>
                   </Text>
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
           </CardBaseContentWrapper>
 
           {/* Footer Section */}
           <CardBaseFooterWrapper size={cardBaseSize}>
-            <div className={cn("w-full", eventCardFooterVariants({ size }))}>
+            <Box className={cn("w-full", eventCardFooterVariants({ size }))}>
               {ticketUrl && (
                 <LinkWithCustomVariant
                   href={ticketUrl}
@@ -226,13 +227,15 @@ export const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
                 </LinkWithCustomVariant>
               )}
               {!ticketUrl && price && (
-                <div className="text-right">
+                <Box className="text-right">
                   <Text size={size === "compact" ? "md" : "lg"} weight="bold">
-                    <span className={eventCardPriceVariants({ size })}>{price}</span>
+                    <Box as="span" className={eventCardPriceVariants({ size })}>
+                      {price}
+                    </Box>
                   </Text>
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
           </CardBaseFooterWrapper>
         </CardBase>
       </Box>

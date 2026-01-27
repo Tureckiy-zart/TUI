@@ -40,6 +40,10 @@ export const NotificationCenterTrigger = React.forwardRef<
   const { getUnreadCount } = useNotificationCenterContext();
   const unreadCount = getUnreadCount();
 
+  // Filter out component-specific props before forwarding to Button
+  // This ensures only valid ButtonProps are passed, preventing prop smuggling
+  const buttonProps: Omit<NotificationCenterTriggerProps, "showBadge"> = props;
+
   return (
     <Button
       ref={ref}
@@ -47,7 +51,7 @@ export const NotificationCenterTrigger = React.forwardRef<
       iconOnly
       onClick={onClick}
       aria-label={`Open notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
-      {...props}
+      {...buttonProps}
     >
       <span className="relative">
         <Bell className="h-5 w-5" />

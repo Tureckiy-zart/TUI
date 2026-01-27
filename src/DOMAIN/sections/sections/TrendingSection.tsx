@@ -68,9 +68,13 @@ export const TrendingSection: React.FC<TrendingSectionProps> = ({
       <CardBody className="p-lg">
         <Heading level={2}>{title}</Heading>
         {loading ? (
-          <Text tone="muted">{loadingText}</Text>
+          <Text typographyRole="meta" color="muted">
+            {loadingText}
+          </Text>
         ) : (
-          <Text tone="muted">{contentText}</Text>
+          <Text typographyRole="meta" color="muted">
+            {contentText}
+          </Text>
         )}
       </CardBody>
     </Card>

@@ -3,6 +3,7 @@
 import { Filter, X } from "lucide-react";
 import * as React from "react";
 
+import { Box, Inline } from "@/COMPOSITION/layout";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
@@ -188,9 +189,11 @@ export function FilterBar({
 
         {hasActiveFilters && (
           <div className="flex items-center gap-sm">
-            <Badge variant="secondary" className="gap-xs">
-              <Filter className="h-3 w-3" />
-              {getFilterSummary().length} {filtersLabel}
+            <Badge variant="secondary">
+              <Inline gap="xs" align="center">
+                <Filter className="h-3 w-3" />
+                {getFilterSummary().length} {filtersLabel}
+              </Inline>
             </Badge>
             <Button variant="outline" size="sm" onClick={clearAllFilters}>
               <X className="h-3 w-3" />
@@ -281,9 +284,9 @@ export function FilterBar({
           <div className="mb-sm text-sm font-medium">{activeFiltersLabel}</div>
           <div className="flex flex-wrap gap-sm">
             {getFilterSummary().map((filter, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                {filter}
-              </Badge>
+              <Box key={index} className="text-xs">
+                <Badge variant="outline">{filter}</Badge>
+              </Box>
             ))}
           </div>
         </div>

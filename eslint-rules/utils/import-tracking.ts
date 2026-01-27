@@ -2,7 +2,7 @@
  * Utilities for tracking imports from UI library entry
  */
 
-import type { TSESTree } from "@typescript-eslint/types";
+import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/utils";
 import { isPublicUiEntry } from "./consumer-code-detection";
 import { isFoundationComponent } from "./foundation-component-list";
 
@@ -22,15 +22,18 @@ export class FoundationImportTracker {
     if (!isPublicUiEntry(source)) return;
 
     for (const spec of node.specifiers) {
-      if (spec.type === TSESTree.AST_NODE_TYPES.ImportSpecifier) {
-        const importedName = spec.imported.name;
-        const localName = spec.local.name;
+      if (spec.type === AST_NODE_TYPES.ImportSpecifier) {
+        // spec.imported can be Identifier or StringLiteral
+        if (spec.imported.type === AST_NODE_TYPES.Identifier) {
+          const importedName = spec.imported.name;
+          const localName = spec.local.name;
 
-        // Track if the imported component is a Foundation component
-        if (isFoundationComponent(importedName)) {
-          this.foundationImports.add(localName);
+          // Track if the imported component is a Foundation component
+          if (isFoundationComponent(importedName)) {
+            this.foundationImports.add(localName);
+          }
         }
-      } else if (spec.type === TSESTree.AST_NODE_TYPES.ImportDefaultSpecifier) {
+      } else if (spec.type === AST_NODE_TYPES.ImportDefaultSpecifier) {
         // Handle default imports - check if the module name suggests Foundation
         // This is less precise but covers cases like `import Button from "@tenerife.music/ui/components/Button"`
         const localName = spec.local.name;

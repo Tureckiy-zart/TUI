@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import { Button } from "@/PRIMITIVES/Button";
 import { Field } from "@/PRIMITIVES/Field";
 import { Input } from "@/PRIMITIVES/Input";
@@ -51,7 +51,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   }
 
   return (
-    <div className={cn("space-y-md", className)}>
+    <Stack spacing="md" className={className}>
       <Field>
         <Field.Label>{nameLabel}</Field.Label>
         <Field.Control>
@@ -71,6 +71,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         </Field.Control>
       </Field>
       <Button>{registerButtonText}</Button>
-    </div>
+    </Stack>
   );
 };

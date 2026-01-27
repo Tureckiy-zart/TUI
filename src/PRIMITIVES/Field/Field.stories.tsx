@@ -374,12 +374,12 @@ export const ValidationError: Story = {
 export const CustomSpacing: Story = {
   render: () => (
     <div style={{ width: "320px" }}>
-      <Field className="gap-4">
+      <Field>
         <Field.Label htmlFor="custom-spacing">Custom Spacing</Field.Label>
         <Field.Control>
           <Input id="custom-spacing" placeholder="Field with larger spacing" />
         </Field.Control>
-        <Field.Description>This field uses custom gap spacing via className.</Field.Description>
+        <Field.Description>This field demonstrates default spacing.</Field.Description>
       </Field>
     </div>
   ),

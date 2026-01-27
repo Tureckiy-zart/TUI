@@ -26,7 +26,6 @@ import {
   artistCardFooterBorderVariants,
   artistCardImageOverlayVariants,
   artistCardImageTransformVariants,
-  artistCardMetadataIconVariants,
   artistCardMetadataItemVariants,
   artistCardMetadataVariants,
   artistCardVariants,
@@ -150,13 +149,9 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                 ) : (
                   <div className={ARTIST_TOKENS.image.placeholder.container}>
                     {/* Placeholder icon - using info as fallback since music/artist icon doesn't exist in registry */}
-                    <Icon
-                      name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden="true"
-                    />
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" size="xl" color="muted" aria-hidden="true" />
+                    </Box>
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
@@ -180,14 +175,14 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}
 
             {/* Genres */}
             {genres && (
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {genres}
               </Text>
             )}
@@ -197,28 +192,16 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
               <div className={artistCardMetadataVariants({ size })}>
                 {followers !== undefined && (
                   <div className={artistCardMetadataItemVariants({ size })}>
-                    <Icon
-                      name="info"
-                      size="sm"
-                      color="muted"
-                      className={artistCardMetadataIconVariants({ size })}
-                      aria-hidden="true"
-                    />
-                    <Text size="xs" tone="muted">
+                    <Icon name="info" size="sm" color="muted" aria-hidden="true" />
+                    <Text size="xs" typographyRole="meta" color="muted">
                       {followers.toLocaleString()} {followersLabel}
                     </Text>
                   </div>
                 )}
                 {plays !== undefined && (
                   <div className={artistCardMetadataItemVariants({ size })}>
-                    <Icon
-                      name="info"
-                      size="sm"
-                      color="muted"
-                      className={artistCardMetadataIconVariants({ size })}
-                      aria-hidden="true"
-                    />
-                    <Text size="xs" tone="muted">
+                    <Icon name="info" size="sm" color="muted" aria-hidden="true" />
+                    <Text size="xs" typographyRole="meta" color="muted">
                       {plays.toLocaleString()} {playsLabel}
                     </Text>
                   </div>

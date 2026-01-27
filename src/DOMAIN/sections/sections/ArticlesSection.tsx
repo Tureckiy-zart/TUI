@@ -2,7 +2,9 @@
 
 import React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { Box } from "@/COMPOSITION/layout/Box";
+import { Stack } from "@/COMPOSITION/layout/Stack";
+import { Surface } from "@/COMPOSITION/layout/Surface";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Link } from "@/PRIMITIVES/Link";
 import { Text } from "@/PRIMITIVES/Text";
@@ -41,24 +43,27 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
   }
 
   return (
-    <div className={cn("space-y-lg", className)}>
+    <Stack spacing="lg" className={className}>
       {articles.map((article, index) => (
-        <article
+        <Surface
           key={article.href || index}
-          className="rounded-lg border p-lg transition-shadow hover:shadow-md"
+          variant="elevated"
+          p="lg"
+          className="transition-shadow hover:shadow-md"
+          as="article"
         >
           {article.imageUrl && (
-            <div className="mb-md h-[var(--spacing-3xl)] w-full rounded-md bg-[hsl(var(--tm-muted))]" />
+            <Box mb="md" className="h-[var(--spacing-3xl)] w-full rounded-md" bg="muted" />
           )}
-          <div className="space-y-sm">
+          <Stack spacing="sm">
             <Heading level={2}>
               <Link href={article.href} variant="ghost">
                 {article.title}
               </Link>
             </Heading>
-            {article.description && <Text tone="muted">{article.description}</Text>}
+            {article.description && <Text color="muted">{article.description}</Text>}
             {article.date && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" color="muted">
                 {article.date}
               </Text>
             )}
@@ -66,9 +71,9 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({
             <Link href={article.href} variant="primary">
               {readMoreLabel} →
             </Link>
-          </div>
-        </article>
+          </Stack>
+        </Surface>
       ))}
-    </div>
+    </Stack>
   );
 };

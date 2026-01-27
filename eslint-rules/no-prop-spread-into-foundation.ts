@@ -77,7 +77,6 @@ export const noPropSpreadIntoFoundation = ESLintUtils.RuleCreator(
      * ----------------------------------------- */
 
     const importTracker = new FoundationImportTracker();
-    const foundationComponents = importTracker.getFoundationImports();
 
     return {
       ImportDeclaration(node) {
@@ -90,6 +89,9 @@ export const noPropSpreadIntoFoundation = ESLintUtils.RuleCreator(
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
 
         if (!importTracker.isFoundationImport(name.name)) return;
+
+        // Get Foundation components dynamically (after imports are processed)
+        const foundationComponents = importTracker.getFoundationImports();
 
         // Check for spread attributes
         for (const attr of node.attributes) {
@@ -106,15 +108,11 @@ export const noPropSpreadIntoFoundation = ESLintUtils.RuleCreator(
               continue;
             }
 
-            // Check if variable has type annotation (requires type checking)
-            // For now, we'll be conservative and only flag generic names
-            const genericNames = ["props", "rest", "otherProps", "additionalProps", "extraProps"];
-            if (genericNames.includes(spreadName.toLowerCase())) {
-              context.report({
-                node: attr,
-                messageId: "noPropSpreadIntoFoundation",
-              });
-            }
+            // Flag all untyped prop spreads (not explicitly typed as Foundation props)
+            context.report({
+              node: attr,
+              messageId: "noPropSpreadIntoFoundation",
+            });
           } else if (argument.type === TSESTree.AST_NODE_TYPES.ObjectExpression) {
             // Direct object spread - always allow (explicit props)
             continue;

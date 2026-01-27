@@ -1,9 +1,9 @@
 # Closed System v2 — Canonical Documentation Index
 
 **Project:** @tenerife.music/ui  
-**Version:** 1.0  
+**Version:** 1.1  
 **Date Created:** 2026-01-26  
-**Last Updated:** 2026-01-26  
+**Last Updated:** 2026-01-27  
 **Status:** ✅ **CANONICAL & LOCKED**  
 **Authority:** HIGHEST  
 **Mutability:** IMMUTABLE_AFTER_MERGE  
@@ -40,6 +40,7 @@ The following documents constitute the **complete and final** canonical set for 
 | [CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md](./CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md) | C1 | Mechanism categories, responsibility boundaries, impact surfaces | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md](./CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md) | C2 | Principle-to-mechanism traceability, risk coverage | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_READINESS_GATES.md](./CLOSED_SYSTEM_V2_READINESS_GATES.md) | C3 | Readiness validation, phase transition authorization | ✅ CANONICAL |
+| [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md) | J.1 | Typography semantics boundaries, semantic vs presentational usage rules | ✅ CANONICAL |
 
 ### Phase Lock Declarations
 
@@ -50,8 +51,9 @@ The following documents constitute the **complete and final** canonical set for 
 | [CLOSED_SYSTEM_V2_PHASE_D_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_D_LOCK.md) | D | Phase D lock declaration (API / Types / Enforcement / Runtime) | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PHASE_E_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_E_LOCK.md) | E | Phase E lock declaration (COMPOSITION Migration) | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) | F | Phase F lock declaration (Extension Layer Adoption) | ✅ CANONICAL |
+| [CLOSED_SYSTEM_V2_PHASE_I_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_I_LOCK.md) | I | Phase I lock declaration (Product Scope Migration - Screens) | ✅ CANONICAL |
 
-**Total Canonical Documents:** 8 files
+**Total Canonical Documents:** 10 files
 
 ---
 
@@ -198,10 +200,11 @@ The following documents are **NOT** part of the canonical set and are marked as 
 2. **Problem definition:** [CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md)
 3. **Architecture model:** [CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md)
 4. **Current phase status:** [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md)
+5. **Semantics canons:** [CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md](./CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md) (Phase H), [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md) (Phase J.1)
 
 ### Document Flow
 
-**Phase A → B → C → D → E → F:**
+**Phase A → B → C → D → E → F → H → J:**
 
 1. **Phase A:** [CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md)
 2. **Phase B:** [CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md)
@@ -211,6 +214,9 @@ The following documents are **NOT** part of the canonical set and are marked as 
 6. **Phase D:** [CLOSED_SYSTEM_V2_PHASE_D_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_D_LOCK.md) + [PHASE_D_COMPLETION_REPORT.md](../../reports/closed-system/PHASE_D_COMPLETION_REPORT.md)
 7. **Phase E:** [CLOSED_SYSTEM_V2_PHASE_E_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_E_LOCK.md) + [CLOSED_SYSTEM_V2_PHASE_E_COMPOSITION_MIGRATION_REPORT.md](./CLOSED_SYSTEM_V2_PHASE_E_COMPOSITION_MIGRATION_REPORT.md)
 8. **Phase F:** [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) + [CLOSED_SYSTEM_V2_PHASE_F_EXTENSION_ADOPTION_REPORT.md](./CLOSED_SYSTEM_V2_PHASE_F_EXTENSION_ADOPTION_REPORT.md)
+9. **Phase H:** [CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md](./CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md) + [CLOSED_SYSTEM_V2_PHASE_H_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_H_LOCK.md)
+10. **Phase I:** [CLOSED_SYSTEM_V2_PHASE_I_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_I_LOCK.md) + [CLOSED_SYSTEM_V2_PHASE_I_MIGRATION_REPORT.md](../../reports/CLOSED_SYSTEM_V2_PHASE_I_MIGRATION_REPORT.md)
+11. **Phase J.1:** [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md)
 
 ### By Document Type
 
@@ -220,11 +226,13 @@ The following documents are **NOT** part of the canonical set and are marked as 
 - Mechanism Categories (Phase C1)
 - Principle-to-Mechanism Mapping (Phase C2)
 - Readiness Gates (Phase C3)
+- Typography Semantics Canon (Phase J.1)
 
 **Phase Locks:**
 - Phase D Lock
 - Phase E Lock
 - Phase F Lock
+- Phase I Lock
 
 **Supporting Reports:**
 - Phase D Completion Report
@@ -301,6 +309,6 @@ The following documents are **NOT** part of the canonical set and are marked as 
 
 ---
 
-**Last Updated:** 2026-01-26  
-**Canonical Index Version:** 1.0  
-**Task ID:** TUI_CSV2_CANONICALIZATION_011
+**Last Updated:** 2026-01-27  
+**Canonical Index Version:** 1.2  
+**Task ID:** TUI_CSV2_LOCK_PHASE_I_022

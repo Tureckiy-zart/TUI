@@ -155,13 +155,13 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
         // Handle muted variant - other variants are no longer supported
         const isMuted = typoConfig.variant === "muted";
         return (
-          <Text size={textSize} tone={isMuted ? "muted" : "default"}>
+          <Text size={textSize} color={isMuted ? "muted" : "default"}>
             {content}
           </Text>
         );
       }
       // If content is ReactNode, render it directly
-      return <div className={className}>{content}</div>;
+      return <Box className={className}>{content}</Box>;
     }
 
     if (slot.type === "media") {
@@ -170,12 +170,12 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
       const aspectRatioValue = getBaseValue(aspectRatio);
 
       return (
-        <div
+        <Box
           className={cn("w-full", className)}
           style={aspectRatioValue ? { aspectRatio: String(aspectRatioValue) } : undefined}
         >
           {content}
-        </div>
+        </Box>
       );
     }
 
@@ -210,16 +210,16 @@ function resolveSlot(slot: SectionSlotValue | undefined): React.ReactNode {
 
     if (typeof content === "string") {
       return (
-        <div className={className} style={style}>
+        <Box className={className} style={style}>
           <Text>{content}</Text>
-        </div>
+        </Box>
       );
     }
 
     return (
-      <div className={className} style={style}>
+      <Box className={className} style={style}>
         {content}
-      </div>
+      </Box>
     );
   }
 
@@ -259,19 +259,19 @@ function resolveSplitLayout(config: Extract<LayoutConfig, { type: "split" }>): R
       {/* Left content or media */}
       {contentFirst ? (
         <>
-          {left && <div className="min-w-0 flex-1">{resolveSlot(left)}</div>}
+          {left && <Box className="min-w-0 flex-1">{resolveSlot(left)}</Box>}
           {media && (
-            <div className={cn("min-w-0 flex-1", imagePosition === "left" && "order-first")}>
+            <Box className={cn("min-w-0 flex-1", imagePosition === "left" && "order-first")}>
               {resolveSlot(media)}
-            </div>
+            </Box>
           )}
-          {right && <div className="min-w-0 flex-1">{resolveSlot(right)}</div>}
+          {right && <Box className="min-w-0 flex-1">{resolveSlot(right)}</Box>}
         </>
       ) : (
         <>
-          {media && <div className="min-w-0 flex-1">{resolveSlot(media)}</div>}
-          {left && <div className="min-w-0 flex-1">{resolveSlot(left)}</div>}
-          {right && <div className="min-w-0 flex-1">{resolveSlot(right)}</div>}
+          {media && <Box className="min-w-0 flex-1">{resolveSlot(media)}</Box>}
+          {left && <Box className="min-w-0 flex-1">{resolveSlot(left)}</Box>}
+          {right && <Box className="min-w-0 flex-1">{resolveSlot(right)}</Box>}
         </>
       )}
     </Flex>
@@ -520,14 +520,14 @@ export const SectionBuilder = React.forwardRef<HTMLElement, SectionBuilderProps>
           className="relative w-full"
           style={bgResolution.style}
         >
-          {headerSlot && <div className="mb-lg">{headerSlot}</div>}
-          {bodySlot && <div className="mb-lg">{bodySlot}</div>}
+          {headerSlot && <Box mb="lg">{headerSlot}</Box>}
+          {bodySlot && <Box mb="lg">{bodySlot}</Box>}
           {layoutContent}
-          {footerSlot && <div className="mt-lg">{footerSlot}</div>}
+          {footerSlot && <Box mt="lg">{footerSlot}</Box>}
           {overlaySlot && (
-            <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+            <Box className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
               {overlaySlot}
-            </div>
+            </Box>
           )}
         </Box>
       </ComponentAny>

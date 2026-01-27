@@ -153,13 +153,9 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
                     {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
-                    <Icon
-                      name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden="true"
-                    />
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" size="xl" color="muted" aria-hidden="true" />
+                    </Box>
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
@@ -195,13 +191,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
             {location && (
               <div className={cn("flex flex-col", DOMAIN_TOKENS.metadata.spacing.vertical)}>
                 <div className={venueCardMetadataRowVariants({ size: cardBaseSize })}>
-                  <Icon
-                    name="location"
-                    size="sm"
-                    color="muted"
-                    className={ICON_TOKENS.sizes.sm}
-                    aria-hidden="true"
-                  />
+                  <Icon name="location" size="sm" color="muted" aria-hidden="true" />
                   <Text size="xs" typographyRole="meta" color="muted">
                     {location}
                   </Text>
@@ -225,13 +215,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                         TEXT_TOKENS.fontWeight.medium,
                       )}
                     >
-                      <Icon
-                        name="calendar"
-                        size="sm"
-                        color="default"
-                        className={ICON_TOKENS.sizes.sm}
-                        aria-hidden="true"
-                      />
+                      <Icon name="calendar" size="sm" color="default" aria-hidden="true" />
                       <Text size="xs" weight="medium">
                         {eventsCount} {eventsLabel}
                       </Text>
@@ -248,13 +232,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                       )}
                     >
                       {/* Using info icon as placeholder since users icon doesn't exist in registry */}
-                      <Icon
-                        name="info"
-                        size="sm"
-                        color="muted"
-                        className={ICON_TOKENS.sizes.sm}
-                        aria-hidden="true"
-                      />
+                      <Icon name="info" size="sm" color="muted" aria-hidden="true" />
                       <Text size="xs" typographyRole="meta" color="muted">
                         {capacityLabel} {capacity}
                       </Text>

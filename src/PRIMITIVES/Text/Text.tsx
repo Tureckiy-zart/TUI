@@ -128,7 +128,6 @@ export type TextAsElement = "span" | "p" | "label" | "strong" | "em";
  */
 const DEFAULT_SIZE = "md" as const;
 const DEFAULT_WEIGHT = "normal" as const;
-const DEFAULT_TONE = "default" as const;
 
 const textVariants = tokenCVA({
   base: "text-[hsl(var(--tm-text-primary))]",
@@ -146,10 +145,6 @@ const textVariants = tokenCVA({
       semibold: TEXT_TOKENS.fontWeight.semibold,
       bold: TEXT_TOKENS.fontWeight.bold,
     } satisfies Record<TextWeight, string>,
-    tone: {
-      default: "",
-      muted: "text-[hsl(var(--tm-text-muted))]",
-    } satisfies Record<TextTone, string>,
     // Role-based color variant (enforced via TypeScript generic)
     color: {
       primary: TEXT_COLOR_CLASSES.primary,
@@ -167,7 +162,6 @@ const textVariants = tokenCVA({
   defaultVariants: {
     size: DEFAULT_SIZE,
     weight: DEFAULT_WEIGHT,
-    tone: DEFAULT_TONE,
   },
 });
 

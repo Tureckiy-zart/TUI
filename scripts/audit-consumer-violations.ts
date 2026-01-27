@@ -10,7 +10,7 @@
  * - V5: Prop smuggling via untyped spreads
  *
  * Usage: pnpm tsx scripts/audit-consumer-violations.ts [directory]
- * Default: docs-app/
+ * Default: src/
  */
 
 import { readFileSync, readdirSync, existsSync, statSync, writeFileSync, mkdirSync } from "fs";
@@ -30,7 +30,7 @@ import {
 import { isPublicUiEntry } from "../eslint-rules/utils/consumer-code-detection.js";
 import { hasTailwindUtilities } from "../eslint-rules/utils/tailwind-utilities.js";
 
-const DEFAULT_SCAN_DIR = join(__dirname, "../docs-app");
+const DEFAULT_SCAN_DIR = join(__dirname, "../src");
 const OUTPUT_DIR = join(__dirname, "../docs/reports");
 
 /**
@@ -55,7 +55,14 @@ class FoundationImportTracker {
   private importMap = new Map<string, string>(); // localName -> importedName
 
   processImport(source: string, specifiers: Array<{ imported: string; local: string }>): void {
-    if (!isPublicUiEntry(source)) return;
+    // Support both public UI entry and internal imports (@/COMPOSITION, @/PRIMITIVES)
+    const isPublicEntry = isPublicUiEntry(source);
+    const isInternalImport =
+      source.startsWith("@/COMPOSITION") ||
+      source.startsWith("@/PRIMITIVES") ||
+      source.startsWith("@/FOUNDATION");
+
+    if (!isPublicEntry && !isInternalImport) return;
 
     for (const spec of specifiers) {
       if (FOUNDATION_COMPONENTS.has(spec.imported as any)) {
@@ -700,12 +707,21 @@ function main() {
     }),
   };
 
-  const jsonPath = join(OUTPUT_DIR, "CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json");
+  // Determine output filename based on scan directory
+  const isDomainScan = scanDir.includes("src/DOMAIN") || scanDir.includes("DOMAIN");
+  const jsonFilename = isDomainScan
+    ? "CLOSED_SYSTEM_V2_PHASE_I_VIOLATION_AUDIT.json"
+    : "CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json";
+  const detailedFilename = isDomainScan
+    ? "CLOSED_SYSTEM_V2_PHASE_I_VIOLATION_AUDIT_DETAILED.json"
+    : "CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_DETAILED.json";
+
+  const jsonPath = join(OUTPUT_DIR, jsonFilename);
   writeFileSync(jsonPath, JSON.stringify(jsonOutput, null, 2));
   console.log(`💾 JSON report saved to: ${relative(process.cwd(), jsonPath)}`);
 
   // Also save detailed findings for report generation
-  const detailedPath = join(OUTPUT_DIR, "CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_DETAILED.json");
+  const detailedPath = join(OUTPUT_DIR, detailedFilename);
   writeFileSync(detailedPath, JSON.stringify({ findings: allFindings }, null, 2));
   console.log(`💾 Detailed findings saved to: ${relative(process.cwd(), detailedPath)}`);
 

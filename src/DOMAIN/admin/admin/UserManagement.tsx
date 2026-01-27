@@ -25,7 +25,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ title, content, 
     <Card className={cn("shadow-md", className)}>
       <CardBody className="p-lg">
         <Heading level={2}>{title}</Heading>
-        <Text tone="muted">{content}</Text>
+        <Text typographyRole="meta" color="muted">
+          {content}
+        </Text>
       </CardBody>
     </Card>
   );

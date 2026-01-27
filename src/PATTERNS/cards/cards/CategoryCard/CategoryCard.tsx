@@ -112,11 +112,9 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
-                    <Icon
-                      name="info"
-                      className={cn(ICON_TOKENS.sizes["4xl"], ICON_TOKENS.colors.muted)}
-                      aria-hidden="true"
-                    />
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" color="muted" aria-hidden="true" />
+                    </Box>
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
@@ -147,7 +145,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}

@@ -2,8 +2,13 @@
 
 import React from "react";
 
+import { Box } from "@/COMPOSITION/layout/Box";
 import { Card, CardBody } from "@/COMPOSITION/layout/Card";
-import { cn } from "@/FOUNDATION/lib/utils";
+import { Container } from "@/COMPOSITION/layout/Container";
+import { Grid } from "@/COMPOSITION/layout/Grid";
+import type { ResponsiveColumns } from "@/COMPOSITION/layout/layout.types";
+import { Section } from "@/COMPOSITION/layout/Section";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -51,49 +56,51 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
     return null;
   }
 
-  const gridCols = {
-    1: "grid-cols-1",
-    2: "grid-cols-1 md:grid-cols-2",
-    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+  const gridColsMap: Record<1 | 2 | 3 | 4, ResponsiveColumns> = {
+    1: { base: 1 },
+    2: { base: 1, md: 2 },
+    3: { base: 1, md: 2, lg: 3 },
+    4: { base: 1, md: 2, lg: 4 },
   };
 
+  const gridCols = gridColsMap[columns];
+
   return (
-    <section className={cn("w-full py-xl", className)} aria-label="Features section">
-      <div className="container mx-auto px-lg">
+    <Section spaceY="xl" className={className} aria-label="Features section">
+      <Container padding="lg">
         {(title || description) && (
-          <header className="mb-xl text-center">
+          <Box mb="xl" className="text-center" as="header">
             {title && <Heading level={2}>{title}</Heading>}
             {description && (
-              <Text size="lg" tone="muted">
+              <Text size="lg" color="muted">
                 {description}
               </Text>
             )}
-          </header>
+          </Box>
         )}
 
-        <div className={cn("grid gap-lg", gridCols[columns])}>
+        <Grid cols={gridCols} gap="lg">
           {features.map((feature, index) => (
             <Card key={index} className="transition-shadow hover:shadow-md">
               <CardBody className="p-lg">
-                <div className="space-y-md">
+                <Stack spacing="md">
                   {/* Icon */}
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[hsl(var(--tm-primary))]/10 text-[hsl(var(--tm-primary))]">
+                  <Box className="flex h-12 w-12 items-center justify-center rounded-lg bg-[hsl(var(--tm-primary))]/10 text-[hsl(var(--tm-primary))]">
                     {feature.icon}
-                  </div>
+                  </Box>
 
                   {/* Title */}
                   <Heading level={3}>{feature.title}</Heading>
 
                   {/* Description */}
-                  <Text tone="muted">{feature.description}</Text>
-                </div>
+                  <Text color="muted">{feature.description}</Text>
+                </Stack>
               </CardBody>
             </Card>
           ))}
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Container>
+    </Section>
   );
 };
 

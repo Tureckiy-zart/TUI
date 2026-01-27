@@ -206,13 +206,9 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
-                    <Icon
-                      name="info"
-                      size="xl"
-                      color="muted"
-                      className={ICON_TOKENS.sizes["4xl"]}
-                      aria-hidden={true}
-                    />
+                    <Box className={ICON_TOKENS.sizes["4xl"]}>
+                      <Icon name="info" size="xl" color="muted" aria-hidden={true} />
+                    </Box>
                   </div>
                 )}
                 {/* Image Overlay on Hover */}
@@ -243,7 +239,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
             {/* Description */}
             {description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {description}
               </Text>
             )}
@@ -257,7 +253,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                   </Text>
                 )}
                 {capacity && (
-                  <Text size={size === "compact" ? "xs" : "sm"} tone="muted">
+                  <Text size={size === "compact" ? "xs" : "sm"} typographyRole="meta" color="muted">
                     {capacity}
                   </Text>
                 )}
@@ -267,7 +263,11 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
             {/* Availability Indicator */}
             {availabilityLabel && (
               <div className={ticketCardAvailabilityVariants({ availability })}>
-                <Text size="xs" tone={availability === "sold_out" ? "muted" : "default"}>
+                <Text
+                  size="xs"
+                  typographyRole="meta"
+                  color={availability === "sold_out" ? "muted" : "primary"}
+                >
                   {availabilityLabel}
                 </Text>
               </div>

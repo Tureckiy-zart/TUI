@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Stack } from "@/COMPOSITION/layout";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -143,7 +143,7 @@ export const UserProfile: Story = {
       <DataListItem>
         <DataListLabel>Status</DataListLabel>
         <DataListValue>
-          <Text size="xs" tone="muted">
+          <Text size="xs" typographyRole="meta" color="muted">
             Active
           </Text>
         </DataListValue>
@@ -201,7 +201,7 @@ export const ProductInfo: Story = {
 export const Responsive: Story = {
   render: () => (
     <Stack spacing="md">
-      <Text size="sm" tone="muted">
+      <Text size="sm" typographyRole="meta" color="muted">
         Resize the viewport to see the responsive behavior. On mobile, labels appear above values.
         On desktop (md breakpoint and above), labels appear on the left with fixed width.
       </Text>

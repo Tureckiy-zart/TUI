@@ -2,6 +2,11 @@
 
 import React from "react";
 
+import { Container } from "@/COMPOSITION/layout/Container";
+import { Grid } from "@/COMPOSITION/layout/Grid";
+import { Row } from "@/COMPOSITION/layout/Row";
+import { Section } from "@/COMPOSITION/layout/Section";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Button, type ButtonProps } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -86,43 +91,52 @@ export const CTASection: React.FC<CTASectionProps> = ({
   };
 
   return (
-    <section
-      className={cn("w-full bg-[hsl(var(--tm-muted))] py-xl transition-colors", className)}
+    <Section
+      spaceY="xl"
+      className={cn("bg-[hsl(var(--tm-muted))] transition-colors", className)}
       aria-label="Call to action section"
     >
-      <div className="container mx-auto px-lg">
-        <div
-          className={cn(
-            isCentered
-              ? "mx-auto max-w-3xl text-center"
-              : "grid grid-cols-1 gap-lg md:grid-cols-2 md:items-center",
-          )}
-        >
-          {/* Content Area */}
-          <div className={cn("space-y-md", isCentered && "flex flex-col items-center")}>
-            <Heading level={2}>{headline}</Heading>
-            {description && (
-              <Text size={isCentered ? "lg" : "md"} tone="muted">
-                {description}
-              </Text>
-            )}
-          </div>
-
-          {/* Actions Area */}
-          {(primaryAction || secondaryAction) && (
-            <div
-              className={cn(
-                "flex flex-wrap gap-md",
-                isCentered ? "justify-center" : "justify-start md:justify-end",
+      <Container padding="lg">
+        {isCentered ? (
+          <Container maxWidth="3xl" className="text-center">
+            <Stack spacing="md" direction="vertical" align="center">
+              <Heading level={2}>{headline}</Heading>
+              {description && (
+                <Text size="lg" color="muted">
+                  {description}
+                </Text>
               )}
-            >
-              {primaryAction && renderAction(primaryAction, true)}
-              {secondaryAction && renderAction(secondaryAction, false)}
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
+              {(primaryAction || secondaryAction) && (
+                <Row wrap spacing="md" justify="center">
+                  {primaryAction && renderAction(primaryAction, true)}
+                  {secondaryAction && renderAction(secondaryAction, false)}
+                </Row>
+              )}
+            </Stack>
+          </Container>
+        ) : (
+          <Grid cols={{ base: 1, md: 2 }} gap="lg" align="center">
+            {/* Content Area */}
+            <Stack spacing="md" direction="vertical">
+              <Heading level={2}>{headline}</Heading>
+              {description && (
+                <Text size="md" color="muted">
+                  {description}
+                </Text>
+              )}
+            </Stack>
+
+            {/* Actions Area */}
+            {(primaryAction || secondaryAction) && (
+              <Row wrap spacing="md" justify="end" className="justify-start md:justify-end">
+                {primaryAction && renderAction(primaryAction, true)}
+                {secondaryAction && renderAction(secondaryAction, false)}
+              </Row>
+            )}
+          </Grid>
+        )}
+      </Container>
+    </Section>
   );
 };
 

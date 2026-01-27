@@ -1,0 +1,192 @@
+{
+  "audit_metadata": {
+    "task_id": "TUI_CSV2_PHASE_H_LAYOUT_SEMANTICS_AUDIT_018",
+    "date": "2026-01-26",
+    "status": "COMPLETE",
+    "scope": {
+      "in_scope": ["src/DOMAIN/**", "src/PATTERNS/**"],
+      "out_of_scope": ["docs-app/**", "src/COMPOSITION/layout/*.tsx", "*.stories.tsx", "*.test.tsx"]
+    }
+  },
+  "pattern_summary": [
+    {
+      "pattern_id": "H1",
+      "description": "Box as Stack",
+      "risk": "MAJOR",
+      "count": 0,
+      "files": [],
+      "confidence": "HIGH",
+      "classification": {
+        "VALID": 0,
+        "DEBT": 0,
+        "VIOLATION": 0
+      }
+    },
+    {
+      "pattern_id": "H2",
+      "description": "Stack as Visual Container",
+      "risk": "MAJOR",
+      "count": 0,
+      "files": [],
+      "confidence": "HIGH",
+      "classification": {
+        "VALID": 0,
+        "DEBT": 0,
+        "VIOLATION": 0
+      }
+    },
+    {
+      "pattern_id": "H3",
+      "description": "Container as Generic Wrapper",
+      "risk": "MINOR_TO_MAJOR",
+      "count": 0,
+      "files": [],
+      "confidence": "HIGH",
+      "classification": {
+        "VALID": 0,
+        "DEBT": 0,
+        "VIOLATION": 0
+      }
+    },
+    {
+      "pattern_id": "H4",
+      "description": "Nested Stack без изменения ответственности",
+      "risk": "MINOR",
+      "count": 0,
+      "files": [],
+      "confidence": "HIGH",
+      "classification": {
+        "VALID": 0,
+        "DEBT": 0,
+        "VIOLATION": 0
+      }
+    },
+    {
+      "pattern_id": "H5",
+      "description": "DOM-Driven Layout Intent",
+      "risk": "MAJOR_TO_CRITICAL",
+      "count": 9,
+      "files": [
+        "src/DOMAIN/section-builder/SectionBuilder.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
+        "src/DOMAIN/sections/sections/FeatureSection.tsx",
+        "src/DOMAIN/sections/sections/CTASection.tsx",
+        "src/DOMAIN/sections/sections/HeroSection.tsx"
+      ],
+      "confidence": "HIGH",
+      "classification": {
+        "VALID": 0,
+        "DEBT": 2,
+        "VIOLATION": 7
+      },
+      "findings": [
+        {
+          "id": "H5-001",
+          "file": "src/DOMAIN/section-builder/SectionBuilder.tsx",
+          "lines": [523, 526],
+          "risk": "MAJOR",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-002",
+          "file": "src/DOMAIN/section-builder/SectionBuilder.tsx",
+          "lines": [527, 531],
+          "risk": "MINOR",
+          "classification": "DEBT"
+        },
+        {
+          "id": "H5-003",
+          "file": "src/DOMAIN/section-builder/SectionBuilder.tsx",
+          "lines": [262, 274],
+          "risk": "MAJOR",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-004",
+          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+          "lines": [243, 260],
+          "risk": "MAJOR",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-005",
+          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+          "lines": [263, 267],
+          "risk": "MINOR",
+          "classification": "DEBT"
+        },
+        {
+          "id": "H5-006",
+          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+          "lines": [128, 138],
+          "risk": "MAJOR",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-007",
+          "file": "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
+          "lines": [196, 217],
+          "risk": "MAJOR",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-008",
+          "file": "src/DOMAIN/sections/sections/FeatureSection.tsx",
+          "lines": [75],
+          "risk": "CRITICAL",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-009",
+          "file": "src/DOMAIN/sections/sections/CTASection.tsx",
+          "lines": [94, 118],
+          "risk": "CRITICAL",
+          "classification": "VIOLATION"
+        },
+        {
+          "id": "H5-010",
+          "file": "src/DOMAIN/sections/sections/HeroSection.tsx",
+          "lines": [57, 78],
+          "risk": "CRITICAL",
+          "classification": "VIOLATION"
+        }
+      ]
+    }
+  ],
+  "overall_statistics": {
+    "total_findings": 9,
+    "by_risk": {
+      "CRITICAL": 3,
+      "MAJOR": 5,
+      "MINOR": 1,
+      "INFO": 0
+    },
+    "by_classification": {
+      "VALID": 0,
+      "DEBT": 2,
+      "VIOLATION": 7
+    },
+    "by_pattern": {
+      "H1": 0,
+      "H2": 0,
+      "H3": 0,
+      "H4": 0,
+      "H5": 9
+    },
+    "files_affected": 6,
+    "total_files_scanned": 13
+  },
+  "stage_2_readiness": {
+    "recommendation": "NO-GO",
+    "rationale": "7 VIOLATION findings (including 3 CRITICAL) indicate significant layout semantics debt. Section components (FeatureSection, CTASection, HeroSection) completely bypass Foundation layout primitives. Migration required before Stage 2 escalation.",
+    "required_actions": [
+      "Complete migration of section components (Task 1) - HIGH priority",
+      "Complete migration of notification components (Task 3) - MEDIUM priority",
+      "Verify no new violations introduced",
+      "Re-audit after migrations complete"
+    ],
+    "timeline_estimate": "3-5 days before Stage 2 escalation"
+  }
+}

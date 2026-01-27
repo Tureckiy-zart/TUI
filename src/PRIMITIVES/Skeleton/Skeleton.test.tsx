@@ -89,25 +89,6 @@ describe("Skeleton component", () => {
   });
 
   // ============================================================================
-  // className Prop Tests
-  // ============================================================================
-
-  it("should merge className prop with variant classes", () => {
-    const { container } = renderWithTheme(<Skeleton className="custom-class" />);
-
-    const skeleton = container.querySelector("div");
-    expect(skeleton).toHaveClass("custom-class");
-  });
-
-  it("should apply both variant and custom className", () => {
-    const { container } = renderWithTheme(<Skeleton variant="circle" className="custom-class" />);
-
-    const skeleton = container.querySelector("div");
-    expect(skeleton).toBeInTheDocument();
-    expect(skeleton).toHaveClass("custom-class");
-  });
-
-  // ============================================================================
   // HTML Attributes Tests
   // ============================================================================
 
@@ -161,7 +142,7 @@ describe("Skeleton component", () => {
           <Skeleton variant="circle" />
           <div className="flex-1 space-y-2">
             <Skeleton variant="text" />
-            <Skeleton variant="text" className="w-3/4" />
+            <Skeleton variant="text" />
           </div>
         </div>
         <Skeleton variant="block" />

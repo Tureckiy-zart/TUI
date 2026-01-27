@@ -127,6 +127,11 @@ TenerifeUI uses **layer-based architecture** with 5 canonical layers:
 - `docs/architecture/FOUNDATION_LOCK.md` — Foundation layer lock
 - `docs/architecture/ARCHITECTURE_LOCK.md` — architectural decisions lock
 
+### Closed System v2
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md` — canonical documentation index
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md` — Layout Semantics Canon (Phase H)
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md` — Typography Semantics Canon (Phase J.1)
+
 ### Authority Contracts
 Complete list in `docs/architecture/AUTHORITY_NAVIGATION.md`:
 - ELEVATION_AUTHORITY.md
@@ -285,7 +290,7 @@ Refactoring **MUST** follow Pipeline 18A:
 
 ## 🔄 Updates
 
-**Last Updated:** 2026-01-26  
+**Last Updated:** 2026-01-27  
 **Project Version:** 2.1.1  
 **Status:** Feature Development Mode
 

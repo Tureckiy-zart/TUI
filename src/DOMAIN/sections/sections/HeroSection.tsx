@@ -2,6 +2,12 @@
 
 import React from "react";
 
+import { Box } from "@/COMPOSITION/layout/Box";
+import { Container } from "@/COMPOSITION/layout/Container";
+import { Grid } from "@/COMPOSITION/layout/Grid";
+import { Row } from "@/COMPOSITION/layout/Row";
+import { Section } from "@/COMPOSITION/layout/Section";
+import { Stack } from "@/COMPOSITION/layout/Stack";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
@@ -50,51 +56,85 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const isSplit = variant === "split";
 
   return (
-    <section
-      className={cn("w-full transition-colors", backgroundClasses[background], className)}
+    <Section
+      spaceY="xl"
+      className={cn("transition-colors", backgroundClasses[background], className)}
       aria-label="Hero section"
     >
-      <div
-        className={cn(
-          "container mx-auto px-lg py-xl",
-          isSplit
-            ? "grid grid-cols-1 gap-lg md:grid-cols-2 md:items-center lg:gap-xl"
-            : "flex flex-col items-center justify-center text-center",
-        )}
-      >
-        {/* Content Area */}
-        <div className={cn("flex flex-col", isSplit ? "space-y-md" : "max-w-3xl space-y-lg")}>
-          <header className="space-y-md">
-            <Heading level={1}>{title}</Heading>
-            {description && (
-              <Text size={isSplit ? "lg" : "xl"} tone="muted">
-                {description}
-              </Text>
-            )}
-          </header>
-
-          {actions && (
-            <div
-              className={cn("flex flex-wrap gap-md", isSplit ? "justify-start" : "justify-center")}
-            >
-              {actions}
-            </div>
-          )}
-        </div>
-
-        {/* Media Area */}
-        {media && (
-          <div
-            className={cn(
-              "flex items-center justify-center",
-              isSplit ? "order-first md:order-last" : "mt-lg",
-            )}
+      <Container padding="lg">
+        {isSplit ? (
+          <Grid
+            cols={{ base: 1, md: 2 }}
+            gap={{ base: "lg", lg: "xl" }}
+            align="center"
+            className="text-center"
           >
-            <div className="w-full max-w-full overflow-hidden rounded-lg">{media}</div>
-          </div>
+            {/* Content Area */}
+            <Stack spacing="md" direction="vertical">
+              <Stack spacing="md" direction="vertical" as="header">
+                <Heading level={1}>{title}</Heading>
+                {description && (
+                  <Text size="lg" color="muted">
+                    {description}
+                  </Text>
+                )}
+              </Stack>
+
+              {actions && (
+                <Row wrap spacing="md" justify="start">
+                  {actions}
+                </Row>
+              )}
+            </Stack>
+
+            {/* Media Area */}
+            {media && (
+              <Stack
+                direction="horizontal"
+                align="center"
+                justify="center"
+                className="order-first md:order-last"
+              >
+                <Box className="w-full max-w-full overflow-hidden rounded-lg">{media}</Box>
+              </Stack>
+            )}
+          </Grid>
+        ) : (
+          <Stack
+            direction="vertical"
+            align="center"
+            justify="center"
+            spacing="lg"
+            className="text-center"
+          >
+            {/* Content Area */}
+            <Stack spacing="lg" direction="vertical" className="max-w-3xl">
+              <Stack spacing="md" direction="vertical" as="header">
+                <Heading level={1}>{title}</Heading>
+                {description && (
+                  <Text size="xl" color="muted">
+                    {description}
+                  </Text>
+                )}
+              </Stack>
+
+              {actions && (
+                <Row wrap spacing="md" justify="center">
+                  {actions}
+                </Row>
+              )}
+            </Stack>
+
+            {/* Media Area */}
+            {media && (
+              <Box mt="lg" className="w-full max-w-full overflow-hidden rounded-lg">
+                {media}
+              </Box>
+            )}
+          </Stack>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 

@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Input } from "@/PRIMITIVES/Input";
 
@@ -51,15 +51,6 @@ const meta: Meta<typeof HelperText> = {
       table: {
         type: { summary: "TextSize" },
         defaultValue: { summary: "sm" },
-      },
-    },
-    tone: {
-      control: { type: "select" },
-      options: ["default", "muted"],
-      description: "Text color tone (default: muted)",
-      table: {
-        type: { summary: "TextTone" },
-        defaultValue: { summary: "muted" },
       },
     },
     as: {

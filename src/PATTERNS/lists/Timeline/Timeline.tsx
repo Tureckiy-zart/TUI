@@ -46,11 +46,11 @@ export function Timeline({ items, className }: TimelineProps) {
           </div>
           <div className={cn(TIMELINE_TOKENS.content.marginLeft, "flex-1")}>
             <Heading level={3}>{item.title}</Heading>
-            <Text size="sm" tone="muted">
+            <Text size="sm" typographyRole="meta" color="muted">
               {item.date}
             </Text>
             {item.description && (
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {item.description}
               </Text>
             )}

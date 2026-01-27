@@ -13,11 +13,11 @@
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
 import { isConsumerCode } from "./utils/consumer-code-detection";
-import { FoundationImportTracker } from "./utils/import-tracking";
 import {
   getFoundationAlternatives,
   HTML_TO_FOUNDATION_MAP,
 } from "./utils/foundation-component-list";
+import { FoundationImportTracker } from "./utils/import-tracking";
 
 type MessageIds = "noRawHtmlWhenFoundationExists";
 
@@ -77,7 +77,9 @@ export const noRawHtmlWhenFoundationExists = ESLintUtils.RuleCreator(
 
         // Only check HTML elements (lowercase identifiers)
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
-        if (name.name[0] === name.name[0].toUpperCase()) return; // React components are PascalCase
+        if (!name.name || name.name.length === 0) return;
+        // Skip React components (PascalCase - first letter is uppercase)
+        if (name.name[0] && name.name[0] === name.name[0].toUpperCase()) return;
 
         const htmlElement = name.name.toLowerCase();
 

@@ -71,6 +71,7 @@
 import { Check, ChevronDown, X } from "lucide-react";
 import * as React from "react";
 
+import { Box } from "@/COMPOSITION/layout";
 import { Popover, PopoverContent, PopoverTrigger } from "@/COMPOSITION/overlays/Popover";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
@@ -485,29 +486,32 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
             )}
 
             {/* Input field */}
-            <Input
-              ref={inputRef}
-              size={size}
-              value={displayValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              placeholder={placeholder}
-              disabled={disabled}
-              aria-invalid={ariaInvalid}
-              aria-label={ariaLabel}
-              role="combobox"
-              aria-expanded={open}
-              aria-autocomplete="list"
-              aria-controls="combobox-list"
-              aria-activedescendant={
-                highlightedIndex >= 0 ? `combobox-option-${highlightedIndex}` : undefined
-              }
+            <Box
               className={cn(
                 "min-w-[120px] flex-1 border-none focus-visible:ring-0 focus-visible:ring-offset-0",
                 INPUT_TOKENS.icon.paddingRight,
               )}
-              {...props}
-            />
+            >
+              <Input
+                ref={inputRef}
+                size={size}
+                value={displayValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder={placeholder}
+                disabled={disabled}
+                aria-invalid={ariaInvalid}
+                aria-label={ariaLabel}
+                role="combobox"
+                aria-expanded={open}
+                aria-autocomplete="list"
+                aria-controls="combobox-list"
+                aria-activedescendant={
+                  highlightedIndex >= 0 ? `combobox-option-${highlightedIndex}` : undefined
+                }
+                {...props}
+              />
+            </Box>
 
             {/* Icons container */}
             <div className="flex items-center gap-1">

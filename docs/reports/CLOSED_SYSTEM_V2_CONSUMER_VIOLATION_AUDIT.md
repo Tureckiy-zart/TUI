@@ -123,18 +123,22 @@ This audit diagnoses consumer-level violations of Closed System v2 architecture 
 |----------------|-------|----------|-------|-------|------|----------------|
 | V1_CLASSNAME_ON_FOUNDATION | 0 | 0 | 0 | 0 | 0 | 0 |
 | V2_STYLE_ON_FOUNDATION | 0 | 0 | 0 | 0 | 0 | 0 |
-| V3_UTILITY_BASED_STYLING | 4 | 0 | 4 | 0 | 0 | 3 |
+| V3_UTILITY_BASED_STYLING | 0 | 0 | 0 | 0 | 0 | 0 |
 | V4_RAW_HTML_REPLACEMENT | 0 | 0 | 0 | 0 | 0 | 0 |
 | V5_PROP_SMUGGLING | 0 | 0 | 0 | 0 | 0 | 0 |
 | V6_WRAPPER_INTENT_OVERRIDE | 0 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **4** | **0** | **4** | **0** | **0** | **3** |
+| **Total** | **0** | **0** | **0** | **0** | **0** | **0** |
 
 **Files Scanned:** 177  
-**Total Violations:** 4
+**Total Violations:** 0
 
 ### Patch: TUI_CSV2_FIX_CRITICAL_CLASSNAME_014
 
 V1 CRITICAL violations (className on Foundation Button/Input) were removed in consumer code: `CodeBlock.tsx`, `Search.tsx`, `TokenExplorer.tsx`. Styling replaced with sanctioned props (`size="sm"` for icon-only Buttons) or removed (Input). Audit re-run confirms CRITICAL = 0; `eslint_guards_ready` set to true (pending MAJOR).
+
+### Patch: TUI_CSV2_PHASE_G_LAYOUT_NORMALIZATION_016
+
+V3 MAJOR violations (utility-based styling wrappers) were removed in consumer code: `page.tsx`, `CodeBlock.tsx`, `Search.tsx`. Utility-based wrapper divs replaced with Foundation layout components (Container, Stack, Box). All 4 V3 violations resolved; `eslint_guards_ready` for Stage 2 upgrade to error.
 
 ---
 
@@ -208,79 +212,12 @@ No violations detected. ✅
 
 ---
 
-### V3: Utility-Based Styling (4 violations)
+### V3: Utility-Based Styling (0 violations)
 
-#### Finding 1: page.tsx (Container)
-- **File:** `docs-app/app/page.tsx`
-- **Line:** 9
-- **Issue:** Tailwind utility classes on wrapper `div` containing Foundation Button components
-- **Code:**
-  ```tsx
-  <div className="container mx-auto px-4 py-16">  // ❌ Violation
-    <div className="mx-auto max-w-3xl">
-      {/* ... */}
-      <Button>Get Started</Button>
-    </div>
-  </div>
-  ```
-- **Severity:** MAJOR
-- **Confidence:** HIGH
-- **Recommendation:** Use Foundation `Container` or `Stack` components for layout
+No violations detected. ✅
 
-#### Finding 2: page.tsx (Flex wrapper)
-- **File:** `docs-app/app/page.tsx`
-- **Line:** 66
-- **Issue:** Tailwind utility classes on wrapper `div` containing Foundation Button components
-- **Code:**
-  ```tsx
-  <div className="flex gap-4">  // ❌ Violation
-    <Link href="/getting-started">
-      <Button>Get Started</Button>
-    </Link>
-    <Link href="/components">
-      <Button variant="outline">Browse Components</Button>
-    </Link>
-  </div>
-  ```
-- **Severity:** MAJOR
-- **Confidence:** HIGH
-- **Recommendation:** Use Foundation `Stack` or `Flex` components for layout
-
-#### Finding 3: CodeBlock.tsx
-- **File:** `docs-app/components/docs/CodeBlock.tsx`
-- **Line:** 41
-- **Issue:** Tailwind utility classes on wrapper `div` containing Foundation Button component
-- **Code:**
-  ```tsx
-  <div className={cn("group relative", className)}>  // ❌ Violation
-    <div className="absolute right-2 top-2 z-10">
-      <Button variant="ghost" iconOnly onClick={handleCopy}>
-        {/* ... */}
-      </Button>
-    </div>
-  </div>
-  ```
-- **Severity:** MAJOR
-- **Confidence:** HIGH
-- **Recommendation:** Use Foundation layout components for positioning
-
-#### Finding 4: Search.tsx
-- **File:** `docs-app/components/docs/Search.tsx`
-- **Line:** 60
-- **Issue:** Tailwind utility classes on wrapper `div` containing Foundation Input component
-- **Code:**
-  ```tsx
-  <div className="relative w-64">  // ❌ Violation
-    <Input
-      type="search"
-      placeholder="Search docs... (Cmd/Ctrl+K)"
-      // ...
-    />
-  </div>
-  ```
-- **Severity:** MAJOR
-- **Confidence:** HIGH
-- **Recommendation:** Use Foundation `Box` or layout components for container styling
+**Phase G Migration Complete:**
+All V3 violations were resolved in Phase G — Layout Normalization (TUI_CSV2_PHASE_G_LAYOUT_NORMALIZATION_016). Utility-based wrapper divs in `page.tsx`, `CodeBlock.tsx`, and `Search.tsx` were replaced with Foundation layout components (Container, Stack, Box).
 
 ---
 
@@ -320,21 +257,17 @@ After manual inspection of wrapper components and custom abstractions in `docs-a
 
 ## Severity Assessment
 
-### CRITICAL (3 violations)
+### CRITICAL (0 violations)
 
-All V1 violations (className on Foundation) are classified as CRITICAL because they:
-- Directly violate the Foundation Contract
-- Bypass the token system
-- Create parallel styling channels
-- Are explicitly forbidden by Closed System v2
+No CRITICAL violations detected. ✅
 
-### MAJOR (4 violations)
+**Historical Note:** V1 violations (className on Foundation) were resolved in TUI_CSV2_FIX_CRITICAL_CLASSNAME_014.
 
-All V3 violations (utility-based styling) are classified as MAJOR because they:
-- Create parallel styling systems
-- Bypass Foundation layout components
-- Are likely to create maintenance issues
-- Violate the Single Expression Surface principle
+### MAJOR (0 violations)
+
+No MAJOR violations detected. ✅
+
+**Historical Note:** V3 violations (utility-based styling) were resolved in TUI_CSV2_PHASE_G_LAYOUT_NORMALIZATION_016.
 
 ### MINOR (0 violations)
 
@@ -372,30 +305,27 @@ The following ESLint rules are already implemented:
 
 ### Readiness for Activation
 
-**Status:** ⚠️ **CONDITIONAL READINESS**
+**Status:** ✅ **READY FOR FULL ACTIVATION**
 
-**Blocking Issues:**
-1. **7 active violations** in `docs-app/` would cause ESLint errors if guards are activated
-2. **3 CRITICAL violations** (V1) must be resolved before activation
-3. **4 MAJOR violations** (V3) should be resolved for clean activation
+**All Violations Resolved:**
+1. ✅ **0 CRITICAL violations** — V1 violations resolved in TUI_CSV2_FIX_CRITICAL_CLASSNAME_014
+2. ✅ **0 MAJOR violations** — V3 violations resolved in TUI_CSV2_PHASE_G_LAYOUT_NORMALIZATION_016
+3. ✅ **0 total violations** — All consumer code compliant with Closed System v2
+
+**Activation Status:**
+- **Stage 1 (CRITICAL):** ✅ Active as **error** (no violations)
+- **Stage 2 (MAJOR layout):** ✅ Ready to upgrade from **warn** to **error** (no violations)
+- **Pre-staged (V4):** ✅ Active as **error** (no violations)
 
 **Recommendations:**
 
-1. **Before Activation:**
-   - Fix all 3 V1 violations (className on Foundation)
-   - Fix all 4 V3 violations (utility-based styling)
-   - Verify no regressions in functionality
+1. **Upgrade Stage 2 ESLint Guard:**
+   - Change `no-utility-classes-near-foundation` from `warn` to `error` in `eslint.consumer.config.mjs`
+   - Update `docs/architecture/closed-system/CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md`
 
-2. **Activation Strategy:**
-   - Option A: Fix violations first, then activate guards (recommended)
-   - Option B: Activate guards with warnings, migrate gradually
-   - Option C: Activate guards only for new code (via ESLint overrides)
-
-3. **Migration Path:**
-   - Create migration tasks for each violation
-   - Use Foundation layout components (Stack, Box, Container) for wrappers
-   - Use Foundation component props instead of className
-   - Test thoroughly after migration
+2. **Monitor for Regressions:**
+   - Continue running `pnpm lint:consumer` in CI
+   - Re-run audit periodically to catch new violations
 
 ### Guard Effectiveness
 
@@ -451,20 +381,26 @@ The following ESLint rules are already implemented:
 
 ## Conclusion
 
-The audit identified **7 violations** across **6 files** in `docs-app/`:
-- **3 CRITICAL** violations (V1: className on Foundation)
-- **4 MAJOR** violations (V3: utility-based styling)
+The audit identified **0 violations** in `docs-app/`:
+- **0 CRITICAL** violations (V1: className on Foundation) — ✅ Resolved in TUI_CSV2_FIX_CRITICAL_CLASSNAME_014
+- **0 MAJOR** violations (V3: utility-based styling) — ✅ Resolved in TUI_CSV2_PHASE_G_LAYOUT_NORMALIZATION_016
 - **0 violations** for V2, V4, V5, V6
 
 **Key Findings:**
-1. All violations are fixable using Foundation component props and layout components
-2. No architectural blockers identified
-3. ESLint guards are ready for activation after fixing violations
-4. Violations are concentrated in documentation components (CodeBlock, Search, TokenExplorer)
+1. ✅ All violations have been resolved using Foundation component props and layout components
+2. ✅ No architectural blockers identified
+3. ✅ ESLint guards are ready for full activation (Stage 2 can be upgraded to error)
+4. ✅ Consumer code is fully compliant with Closed System v2 architecture
 
-**Readiness:** ⚠️ **CONDITIONAL** - Guards can be activated after fixing 7 violations.
+**Migration Summary:**
+- **Phase G Complete:** All utility-based wrapper layouts migrated to Foundation Container / Stack / Box
+- **Files Migrated:** `page.tsx`, `CodeBlock.tsx`, `Search.tsx`
+- **Violations Resolved:** 4 V3 violations (MAJOR)
+
+**Readiness:** ✅ **FULLY READY** - All guards can be activated as errors. Stage 2 ESLint guard ready for upgrade from warn to error.
 
 ---
 
 **Audit Completed:** 2026-01-26  
-**Next Review:** After violation fixes and guard activation
+**Last Updated:** 2026-01-26 (Phase G — Layout Normalization complete)  
+**Next Review:** Monitor for regressions, upgrade Stage 2 ESLint guard to error

@@ -75,7 +75,9 @@ export const ProfileCard = React.forwardRef<HTMLDivElement, ProfileCardProps>(
           <Stack spacing="md">
             {avatar && <Avatar src={avatar} alt={name} size="md" />}
             <Heading level={3}>{name}</Heading>
-            <Text tone="muted">{email}</Text>
+            <Text typographyRole="meta" color="muted">
+              {email}
+            </Text>
           </Stack>
         </CardBody>
       </Card>

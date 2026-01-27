@@ -80,20 +80,28 @@ describe("Text", () => {
     });
   });
 
-  describe("Tone", () => {
-    it("applies muted styles when tone is muted", () => {
-      const { container } = renderWithTheme(<Text tone="muted">Muted Text</Text>);
+  describe("Color", () => {
+    it("applies muted color when typographyRole is meta and color is muted", () => {
+      const { container } = renderWithTheme(
+        <Text typographyRole="meta" color="muted">
+          Muted Text
+        </Text>,
+      );
       const text = container.querySelector("span");
       expect(text).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
-    it("does not apply muted styles when tone is default", () => {
-      const { container } = renderWithTheme(<Text tone="default">Normal Text</Text>);
+    it("does not apply muted color when color is primary", () => {
+      const { container } = renderWithTheme(
+        <Text typographyRole="body" color="primary">
+          Normal Text
+        </Text>,
+      );
       const text = container.querySelector("span");
       expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });
 
-    it("defaults to default tone", () => {
+    it("defaults to primary color", () => {
       const { container } = renderWithTheme(<Text>Default Text</Text>);
       const text = container.querySelector("span");
       expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
@@ -112,9 +120,9 @@ describe("Text", () => {
       expect(text).toHaveTextContent("Large Bold Text");
     });
 
-    it("renders with size, weight, and tone", () => {
+    it("renders with size, weight, and color", () => {
       const { container } = renderWithTheme(
-        <Text size="sm" weight="medium" tone="muted">
+        <Text size="sm" weight="medium" typographyRole="meta" color="muted">
           Small Medium Muted Text
         </Text>,
       );
@@ -188,12 +196,12 @@ describe("Text", () => {
       expect(test3.querySelector("span")).toBeInTheDocument();
     });
 
-    it("renders size and tone combinations", () => {
+    it("renders size and color combinations", () => {
       const { container: normalSm } = renderWithTheme(<Text size="sm">Normal</Text>);
       expect(normalSm.querySelector("span")).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
 
       const { container: mutedSm } = renderWithTheme(
-        <Text size="sm" tone="muted">
+        <Text size="sm" typographyRole="meta" color="muted">
           Muted
         </Text>,
       );
@@ -203,7 +211,7 @@ describe("Text", () => {
       expect(normalLg.querySelector("span")).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
 
       const { container: mutedLg } = renderWithTheme(
-        <Text size="lg" tone="muted">
+        <Text size="lg" typographyRole="meta" color="muted">
           Muted
         </Text>,
       );
@@ -270,7 +278,7 @@ describe("Text", () => {
 
     it("applies styles correctly when using as prop", () => {
       const { container } = renderWithTheme(
-        <Text as="p" size="lg" weight="bold" tone="muted">
+        <Text as="p" size="lg" weight="bold" typographyRole="meta" color="muted">
           Styled paragraph
         </Text>,
       );
@@ -306,8 +314,12 @@ describe("Text", () => {
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it("matches snapshot for muted tone", () => {
-      const { container } = renderWithTheme(<Text tone="muted">Muted Text</Text>);
+    it("matches snapshot for muted color", () => {
+      const { container } = renderWithTheme(
+        <Text typographyRole="meta" color="muted">
+          Muted Text
+        </Text>,
+      );
       expect(container.firstChild).toMatchSnapshot();
     });
 

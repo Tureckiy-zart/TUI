@@ -54,6 +54,10 @@ export const NotificationCenterDismissAll = React.forwardRef<
     return null;
   }
 
+  // Filter out component-specific props before forwarding to Button
+  // This ensures only valid ButtonProps are passed, preventing prop smuggling
+  const buttonProps: Omit<NotificationCenterDismissAllProps, "confirm" | "confirmMessage"> = props;
+
   // className is forbidden on Foundation components - NotificationCenterDismissAll uses only token-driven props
   return (
     <Button
@@ -62,7 +66,7 @@ export const NotificationCenterDismissAll = React.forwardRef<
       size="sm"
       onClick={handleClick}
       aria-label="Clear all notifications"
-      {...props}
+      {...buttonProps}
     >
       Clear all
     </Button>
