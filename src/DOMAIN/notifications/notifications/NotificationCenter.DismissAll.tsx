@@ -9,7 +9,7 @@
 
 import * as React from "react";
 
-import { Button } from "@/PRIMITIVES/Button";
+import { Button } from "@/index";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 

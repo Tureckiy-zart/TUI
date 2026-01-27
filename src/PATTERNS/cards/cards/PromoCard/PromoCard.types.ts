@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/types";
+import type { ComponentAnimationConfig } from "@/index";
 
 /**
  * PromoCard Size Variant

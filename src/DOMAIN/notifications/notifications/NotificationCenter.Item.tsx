@@ -11,10 +11,7 @@
 import { AlertCircle, Bell, CheckCircle2, FileText, Info, X, XCircle } from "lucide-react";
 import * as React from "react";
 
-import { ListItem } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
-import { Button } from "@/PRIMITIVES/Button";
+import { Button, cn, ListItem, NOTIFICATION_TOKENS } from "@/index";
 
 import type { NotificationData, NotificationVariant } from "./NotificationCenter.types";
 

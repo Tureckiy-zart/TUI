@@ -31,16 +31,18 @@
 import { X } from "lucide-react";
 import * as React from "react";
 
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { Surface } from "@/COMPOSITION/layout/Surface";
-import { Backdrop } from "@/COMPOSITION/overlays/Backdrop";
-import { Portal } from "@/COMPOSITION/overlays/Portal";
-import { useFocusLock } from "@/COMPOSITION/overlays/utils/FocusLock";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { useSwipe } from "@/FOUNDATION/theme/motion/gestures";
-import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
-import { Button } from "@/PRIMITIVES/Button";
+import {
+  Backdrop,
+  Button,
+  cn,
+  NOTIFICATION_TOKENS,
+  Portal,
+  Stack,
+  Surface,
+  TEXT_TOKENS,
+  useFocusLock,
+  useSwipe,
+} from "@/index";
 
 import { NotificationCenterDismissAll } from "./NotificationCenter.DismissAll";
 import { NotificationCenterGroupHeader } from "./NotificationCenter.GroupHeader";

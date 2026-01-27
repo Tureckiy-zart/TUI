@@ -2,22 +2,26 @@
 
 import * as React from "react";
 
-import { Box, LinkWithCustomVariant, Stack } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
 import { IconArrowRight, IconCalendar, IconLocation } from "@/icons";
+import {
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  LinkWithCustomVariant,
+  resolveComponentAnimations,
+  Stack,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { EventCardProps } from "./EventCard.types";
 import {

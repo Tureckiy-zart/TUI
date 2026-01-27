@@ -8,8 +8,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { EMPTY_STATE_TOKENS } from "@/FOUNDATION/tokens/components/empty-state";
+import { cn, EMPTY_STATE_TOKENS } from "@/index";
 
 export interface EmptyStateActionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

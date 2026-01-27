@@ -93,10 +93,61 @@ export interface HelperTextProps extends Omit<TextProps, "className" | "style" |
  * - No new tokens created (reuse existing)
  */
 const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
-  ({ size = "sm", as = "p", ...props }, ref) => {
+  (
+    {
+      size = "sm",
+      as = "p",
+      children,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    },
+    ref,
+  ) => {
     // tone prop removed - use typographyRole + color from TextProps instead
     // Default: typographyRole="meta" + color="muted" for muted helper text
-    return <Text ref={ref} size={size} as={as} typographyRole="meta" color="muted" {...props} />;
+    return (
+      <Text
+        ref={ref}
+        size={size}
+        as={as}
+        typographyRole="meta"
+        color="muted"
+        id={id}
+        title={title}
+        role={role}
+        dir={dir}
+        lang={lang}
+        tabIndex={tabIndex}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-live={ariaLive}
+        aria-atomic={ariaAtomic}
+        aria-busy={ariaBusy}
+      >
+        {children}
+      </Text>
+    );
   },
 );
 HelperText.displayName = "HelperText";

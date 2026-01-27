@@ -8,8 +8,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
+import { cn, TABLE_TOKENS } from "@/index";
 import { EmptyState, EmptyStateIcon, EmptyStateTitle } from "@/PATTERNS/states/EmptyState";
 
 import type { TableEmptyProps } from "./Table.types";

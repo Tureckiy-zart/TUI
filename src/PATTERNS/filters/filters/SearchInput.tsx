@@ -3,10 +3,8 @@
 import { Search, X } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
 import { useDebounce } from "@/hooks/useDebounce";
-import { Button } from "@/PRIMITIVES/Button";
-import { Input } from "@/PRIMITIVES/Input";
+import { Box, Button, Input } from "@/index";
 
 export interface SearchInputProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -27,10 +25,34 @@ export function SearchInput({
   placeholder,
   showClearButton = true,
   debounceMs = 300,
-  className,
   id,
   name,
-  ...props
+  autoComplete,
+  autoFocus,
+  readOnly,
+  required,
+  onBlur,
+  onFocus,
+  onKeyDown,
+  onKeyUp,
+  onKeyPress,
+  onInput,
+  enterKeyHint,
+  inputMode,
+  maxLength,
+  minLength,
+  pattern,
+  form,
+  tabIndex,
+  title,
+  dir,
+  lang,
+  spellCheck,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
+  "aria-required": ariaRequired,
+  "aria-errormessage": ariaErrorMessage,
 }: SearchInputProps) {
   // Generate unique ID if not provided (must be called before any early returns)
   const generatedId = React.useId();
@@ -83,7 +105,7 @@ export function SearchInput({
   const hasRightIcon = showClearButton && localValue;
 
   return (
-    <div className={cn("relative", className)}>
+    <Box>
       <Search
         className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-[hsl(var(--tm-text-muted))]"
         aria-hidden="true"
@@ -93,16 +115,38 @@ export function SearchInput({
         name={inputName}
         value={localValue}
         onChange={handleInputChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        onKeyPress={onKeyPress}
+        onInput={onInput}
         placeholder={placeholder}
+        autoComplete={autoComplete}
+        autoFocus={autoFocus}
+        readOnly={readOnly}
+        required={required}
+        enterKeyHint={enterKeyHint}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        minLength={minLength}
+        pattern={pattern}
+        form={form}
+        tabIndex={tabIndex}
+        title={title}
+        dir={dir}
+        lang={lang}
+        spellCheck={spellCheck}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-required={ariaRequired}
+        aria-errormessage={ariaErrorMessage}
         data-has-icon="true"
         data-has-right-icon={hasRightIcon ? "true" : undefined}
-        // Filter out props that don't exist in InputProps
-        {...(Object.fromEntries(
-          Object.entries(props).filter(([key]) => !["height", "width", "size"].includes(key)),
-        ) as Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "value" | "onChange">)}
       />
       {hasRightIcon && (
-        <div className="absolute right-1 top-1/2 z-10 -translate-y-1/2">
+        <Box>
           <Button
             type="button"
             variant="ghost"
@@ -113,9 +157,9 @@ export function SearchInput({
           >
             <X className="h-3 w-3" aria-hidden="true" />
           </Button>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

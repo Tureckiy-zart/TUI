@@ -22,8 +22,6 @@ export default [
       ".storybook/**",
       "storybook-static/**",
       ".next/**",
-      "docs-app/.next/**",
-      "docs-app/**", // Documentation app - allow demo code
       "docs/**",
       ".cursor/**", // Cursor IDE configuration files
       "docs_archive/**",
@@ -525,6 +523,36 @@ export default [
           varsIgnorePattern: "^_",
           args: "after-used",
           argsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+  {
+    // ═══════════════════════════════════════════════════════════
+    // CONSUMER IMPORT GUARD - POST-CLOSURE SAFETY NET
+    // ═══════════════════════════════════════════════════════════
+    // Prevent deep imports in consumer code (DOMAIN, PATTERNS)
+    // This is a post-closure safety net, not part of canonical enforcement
+    name: "consumer-import-guard",
+    files: ["src/DOMAIN/**/*.{ts,tsx}", "src/PATTERNS/**/*.{ts,tsx}"],
+    ignores: ["**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "@/FOUNDATION/**",
+                "@/PRIMITIVES/**",
+                "@/COMPOSITION/**",
+                "@/TOKENS/**",
+                "@/UTILS/**",
+              ],
+              message:
+                "Deep imports are forbidden. Use public API via '@/index' or '@tenerife.music/ui'.",
+            },
+          ],
         },
       ],
     },

@@ -8,7 +8,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { cn } from "@/index";
 
 import type { TableBodyProps } from "./Table.types";
 

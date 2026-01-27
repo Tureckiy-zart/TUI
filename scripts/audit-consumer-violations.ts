@@ -725,6 +725,35 @@ function main() {
   writeFileSync(detailedPath, JSON.stringify({ findings: allFindings }, null, 2));
   console.log(`💾 Detailed findings saved to: ${relative(process.cwd(), detailedPath)}`);
 
+  // Check for CRITICAL violations (CI compliance gate)
+  // Note: Stage 1 rules (V1, V2, V4, V5) are marked as CRITICAL severity
+  const criticalFindings = allFindings.filter((f) => f.severity === "CRITICAL");
+
+  if (criticalFindings.length > 0) {
+    console.log("");
+    console.log("❌ CRITICAL violations found — CI will fail");
+    console.log(`   Total CRITICAL: ${criticalFindings.length}`);
+    console.log("");
+    console.log("📋 CRITICAL violations summary:");
+    for (const finding of criticalFindings.slice(0, 10)) {
+      console.log(
+        `   ${finding.file}:${finding.line}:${finding.column} — ${finding.violation_class} (${finding.severity})`,
+      );
+    }
+    if (criticalFindings.length > 10) {
+      console.log(`   ... and ${criticalFindings.length - 10} more`);
+    }
+    console.log("");
+    console.log("💡 Fix violations using canonical patterns:");
+    console.log(
+      "   See: docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md",
+    );
+    process.exit(1);
+  } else {
+    console.log("");
+    console.log("✅ No CRITICAL violations — CI will pass");
+  }
+
   return { findings: allFindings, summary: jsonOutput };
 }
 

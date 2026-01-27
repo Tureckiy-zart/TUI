@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { StackProps } from "@/COMPOSITION/layout";
+import type { StackProps } from "@/index";
 
 /**
  * CardBase Size Variant

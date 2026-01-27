@@ -2,15 +2,18 @@
 
 import React from "react";
 
-import { Box } from "@/COMPOSITION/layout/Box";
-import { Card, CardBody } from "@/COMPOSITION/layout/Card";
-import { Container } from "@/COMPOSITION/layout/Container";
-import { Grid } from "@/COMPOSITION/layout/Grid";
-import type { ResponsiveColumns } from "@/COMPOSITION/layout/layout.types";
-import { Section } from "@/COMPOSITION/layout/Section";
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import {
+  Box,
+  Card,
+  CardBody,
+  Container,
+  Grid,
+  Heading,
+  type ResponsiveColumns,
+  Section,
+  Stack,
+  Text,
+} from "@/index";
 
 export interface FeatureItem {
   icon: React.ReactNode;

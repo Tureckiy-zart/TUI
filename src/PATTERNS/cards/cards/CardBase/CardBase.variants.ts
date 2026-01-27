@@ -1,7 +1,6 @@
 "use client";
 
-import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
+import { DOMAIN_TOKENS, tokenCVA } from "@/index";
 
 import type { CardBaseSize, CardBaseVariant } from "./CardBase.types";
 

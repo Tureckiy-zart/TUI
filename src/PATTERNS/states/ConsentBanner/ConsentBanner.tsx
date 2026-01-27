@@ -2,9 +2,7 @@
 
 import React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Button } from "@/PRIMITIVES/Button";
-import { Text } from "@/PRIMITIVES/Text";
+import { Box, Button, cn, Text } from "@/index";
 
 export interface ConsentBannerProps {
   className?: string;
@@ -25,7 +23,7 @@ export const ConsentBanner: React.FC<ConsentBannerProps> = ({
   }
 
   return (
-    <div
+    <Box
       className={cn(
         "rounded-lg bg-[hsl(var(--tm-primary))] p-md text-[hsl(var(--tm-primary-foreground))]",
         className,
@@ -33,6 +31,6 @@ export const ConsentBanner: React.FC<ConsentBannerProps> = ({
     >
       <Text>{message}</Text>
       <Button>{acceptLabel}</Button>
-    </div>
+    </Box>
   );
 };

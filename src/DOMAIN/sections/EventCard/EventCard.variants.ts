@@ -1,10 +1,6 @@
 "use client";
 
-import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { CARD_TOKENS } from "@/FOUNDATION/tokens/components/card";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
-import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
+import { CARD_TOKENS, DOMAIN_TOKENS, GRADIENT_TOKENS, TEXT_TOKENS, tokenCVA } from "@/index";
 
 import type { EventCardLayout, EventCardSize, EventCardVariant } from "./EventCard.types";
 

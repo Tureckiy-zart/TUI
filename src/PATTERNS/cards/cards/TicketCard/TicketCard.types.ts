@@ -1,4 +1,4 @@
-import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/types";
+import type { ComponentAnimationConfig } from "@/index";
 
 /**
  * TicketCard Size Variant

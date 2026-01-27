@@ -1,10 +1,6 @@
 "use client";
 
-import { ListItem } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { TIMELINE_TOKENS } from "@/FOUNDATION/tokens/components/timeline";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import { Box, cn, Heading, ListItem, Text, TIMELINE_TOKENS } from "@/index";
 
 export interface TimelineItem {
   id: string;
@@ -23,8 +19,8 @@ export function Timeline({ items, className }: TimelineProps) {
     <ol className={cn(TIMELINE_TOKENS.spacing.gap, className)} role="list">
       {items.map((item, index) => (
         <ListItem key={item.id} className="relative flex">
-          <div className="flex flex-col items-center" aria-hidden="true">
-            <div
+          <Box className="flex flex-col items-center" aria-hidden="true">
+            <Box
               className={cn(
                 TIMELINE_TOKENS.dot.size,
                 TIMELINE_TOKENS.dot.radius,
@@ -34,7 +30,7 @@ export function Timeline({ items, className }: TimelineProps) {
               )}
             />
             {index < items.length - 1 && (
-              <div
+              <Box
                 className={cn(
                   TIMELINE_TOKENS.connector.marginTop,
                   TIMELINE_TOKENS.connector.height,
@@ -43,8 +39,8 @@ export function Timeline({ items, className }: TimelineProps) {
                 )}
               />
             )}
-          </div>
-          <div className={cn(TIMELINE_TOKENS.content.marginLeft, "flex-1")}>
+          </Box>
+          <Box className={cn(TIMELINE_TOKENS.content.marginLeft, "flex-1")}>
             <Heading level={3}>{item.title}</Heading>
             <Text size="sm" typographyRole="meta" color="muted">
               {item.date}
@@ -54,7 +50,7 @@ export function Timeline({ items, className }: TimelineProps) {
                 {item.description}
               </Text>
             )}
-          </div>
+          </Box>
         </ListItem>
       ))}
     </ol>

@@ -1,0 +1,521 @@
+{
+  "id": "TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023",
+  "version": "1.0.0",
+  "name": "Closed System v2 — Repo-wide Deep Audit + FixCritical Execution (V1/V5) + Lock/Reporting",
+  "type": "master",
+  "status": "closed",
+  "closed_at": "2026-01-27",
+  "closure_note": "External audit fully addressed, system closed. CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md created and registered in canon. All violation classes (V1-V5, S1-S6) at zero. System is STABLE and architecturally closed.",
+  "exit_condition": "SATISFIED",
+  "priority": "high",
+  "progress": 100,
+  "assigned_to": null,
+  "objective": "Выполнить полный repo-wide Deep Research аудит на ветке docs/finalize-closed-system-v2-canonical-documentation-and-lock-canon, зафиксировать воспроизводимые логи/артефакты, сформировать отчёты и backlog, затем выполнить FixCritical для CRITICAL-категорий (V1 className на Foundation + V5 prop smuggling/hidden bypasses) без изменения Foundation публичных API, с прохождением всех guard-проверок и финальной фиксацией результата в docs/reports и master task прогрессе.",
+  "impact": [
+    "Закрывает последние обходы Closed System v2 в consumer-коде (extension слой)",
+    "Повышает воспроизводимость и проверяемость (raw-логи + отчёт + JSON summary/backlog)",
+    "Снижает риск регрессий: V1/V5 больше не смогут появляться незаметно",
+    "Создаёт чистую очередь фиксов и основу для Phase J.x LOCK"
+  ],
+  "success_metrics": [
+    "V1_CLASSNAME_ON_FOUNDATION = 0 (repo-wide) по scripts/audit-consumer-violations",
+    "V5_PROP_SMUGGLING = 0 (repo-wide) по audit + ручной верификации escape-hatch паттернов",
+    "pnpm lint / pnpm typecheck проходят без ошибок",
+    "pnpm lint:consumer проходит без обходов через eslint-disable",
+    "Созданы и закоммичены артефакты: MD report + summary.json + backlog.json + raw logs",
+    "В отчёте есть Environment (Execution, Node, pnpm, OS) и ссылки на raw-логи"
+  ],
+  "risks": [
+    "Docs-app может содержать множество legacy utility-классов; FixCritical нельзя размывать в 'cleanup всего'",
+    "Правки extension-компонентов могут затронуть API consumers (если className был частью extension API) — требуется аккуратное deprecation/замена на variants",
+    "asChild/радикс-паттерны могут иметь UX-особенности; нужно сохранить поведение при закрытии обходов",
+    "Enforcement может не ловить все V5-паттерны автоматически — потребуется manual sweep + при необходимости усиление audit script"
+  ],
+  "rollback_strategy": [
+    "Все работы выполняются в отдельной ветке: docs/finalize-closed-system-v2-canonical-documentation-and-lock-canon",
+    "Каждый блок фиксов коммитится отдельными пачками (V1 отдельно от V5)",
+    "При неудаче откатить конкретные коммиты блока; отчёты и логи сохраняются для повторного запуска",
+    "Не трогать Foundation публичные API (Phase D locked) — это снижает риск breaking changes"
+  ],
+  "timeline": {
+    "week_1": "Read-only canon grounding + baseline CI-style checks + repo-wide violation sweep + формирование отчётов/JSON/logs",
+    "week_2": "FixCritical V1 (className on Foundation) + верификация (lint:consumer + audit scripts) + фиксация",
+    "week_3": "FixCritical V5 (prop smuggling/asChild/spread/escape hatches) + ручная проверка каналов обхода + фиксация",
+    "week_4": "Enforcement gap closure (если нужно) + финальный regression-pass + LOCK/README/Progress updates"
+  },
+  "dependencies": [
+    "Ветка должна быть checkout: docs/finalize-closed-system-v2-canonical-documentation-and-lock-canon",
+    "Файлы-пререквизиты должны существовать и быть актуальными:",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_D_LOCK.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_H_LOCK.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_I_LOCK.md",
+    "docs/architecture/closed-system/CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md",
+    "scripts/audit-consumer-violations.ts",
+    "Base audit report for all tasks: docs/reports/audit/Deep-Research-Repo-Wide-Violation-Audit-023.pdf (must be taken into account when executing every task)"
+  ],
+  "out_of_scope": [
+    "НЕЛЬЗЯ изменять публичные API Foundation компонентов (Phase D locked)",
+    "НЕЛЬЗЯ переопределять/расширять Closed System v2 правила вне канона",
+    "НЕЛЬЗЯ 'фиксить' через eslint-disable для Stage 1 правил",
+    "НЕЛЬЗЯ вводить новые tokens без явного запроса (допускается только proposal в backlog при отсутствии токена)",
+    "НЕЛЬЗЯ переносить задачу в 'рефакторинг всего' — здесь только CRITICAL (V1/V5) + обязательные audit артефакты"
+  ],
+  "labels": [
+    "tui",
+    "closed-system-v2",
+    "audit",
+    "enforcement",
+    "fixcritical",
+    "repo-wide"
+  ],
+  "blocks": [
+    {
+      "id": "BLOCK_00",
+      "name": "Canon & Lock Grounding (Read-only authority binding)",
+      "description": "Привязка аудита и фиксов к канону: извлечь список authority/locks и зафиксировать, что менять нельзя.",
+      "tasks": [
+        {
+          "id": "T00",
+          "name": "Bind audit scope to Closed System v2 canon & locks",
+          "description": "Открыть CLOSED_SYSTEM_V2_CANON_INDEX.md и Phase D/E/F/H/I locks + Enforcement Guards; зафиксировать mutation rules и ограничения. При отсутствии любого файла — P0 blocker, остановка и отчёт об ошибке окружения.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_00/T00.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Canon & lock grounding completed, P0 artifacts verified.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "canon",
+            "locks",
+            "governance"
+          ],
+          "completion_criteria": [
+            "Сформирован краткий canon-binding snapshot (что является authority, что запрещено менять)",
+            "Подтверждены prerequisites файлы или зафиксирован P0 blocker"
+          ],
+          "acceptance_criteria": [
+            "Ни один последующий шаг не вводит новых правил — только ссылки на канон",
+            "Snapshot однозначно определяет границы допустимых фиксов"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_01",
+      "name": "Baseline CI-style checks (evidence capture)",
+      "description": "Снять базовую воспроизводимую картину: lint/typecheck/test + consumer lint + audit scripts. Сохранить raw-логи.",
+      "tasks": [
+        {
+          "id": "T01",
+          "name": "Run pnpm lint/typecheck/test and capture raw logs",
+          "description": "Запустить pnpm lint, pnpm typecheck, pnpm test (если не долго). Сохранить raw output в docs/reports/closed-system/logs/phase-audit-023/",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_01/T01.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Baseline checks executed, logs captured.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "ci",
+            "logs"
+          ],
+          "completion_criteria": [
+            "Создана папка logs/phase-audit-023/",
+            "Сохранены pnpm-lint.log, pnpm-typecheck.log, pnpm-test.log (или note skipped)"
+          ],
+          "acceptance_criteria": [
+            "В отчёте указан Environment (Execution, Node, pnpm, OS)",
+            "Логи содержат полный вывод без потерь"
+          ]
+        },
+        {
+          "id": "T02",
+          "name": "Run consumer lint + audit scripts (src) and capture raw logs",
+          "description": "Запустить pnpm lint:consumer; tsx scripts/audit-consumer-violations.ts; tsx scripts/audit-consumer-violations.ts src. Сохранить raw outputs в logs/phase-audit-023/.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_01/T02.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Baseline checks executed, logs captured.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "consumer",
+            "audit-script",
+            "logs"
+          ],
+          "completion_criteria": [
+            "Сохранены pnpm-lint-consumer.log, audit-consumer-violations.log",
+            "Зафиксированы counts per category (V1..V5) как baseline"
+          ],
+          "acceptance_criteria": [
+            "Команды воспроизводимы, без ручных правок вывода",
+            "Baseline counts совпадают с отчётом в MD (без расхождений)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_02",
+      "name": "Repo-wide violation sweep (V1..V5 + hidden bypasses)",
+      "description": "Сформировать полный реестр нарушений с file/line/snippet/category/severity и canonical fix pattern.",
+      "tasks": [
+        {
+          "id": "T03",
+          "name": "Classify violations into V1..V5 and build evidence table",
+          "description": "На основе logs и скрипта классифицировать все findings по семействам V1..V5; для каждого: file, line range, snippet, severity, canonical_fix_pattern.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_02/T03.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Repo-wide V1–V5 violations fully resolved.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "audit",
+            "classification"
+          ],
+          "completion_criteria": [
+            "Сформирована единая таблица findings (repo-wide) с доказательствами",
+            "Каждому finding присвоен canonical_fix_pattern (Wrapper-First / Token-Props / Replace-Raw-HTML / Remove-Prop-Spread)"
+          ],
+          "acceptance_criteria": [
+            "Нет 'угадываний': каждое решение привязано к канону/lock",
+            "Таблица содержит достаточно данных для выполнения фикса без доп. раскопок"
+          ]
+        },
+        {
+          "id": "T04",
+          "name": "Manual sweep for hidden bypass channels not caught by script",
+          "description": "Ручной поиск и фиксация скрытых каналов: dangerouslySetInnerHTML, data-attrs controlling style, CSS modules targeting Foundation internals, wrappers injecting style, asChild misuse, deep imports.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_02/T04.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Repo-wide V1–V5 violations fully resolved.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "audit",
+            "manual-sweep",
+            "v5"
+          ],
+          "completion_criteria": [
+            "Список скрытых bypass-паттернов добавлен в findings/backlog",
+            "Каждый паттерн привязан к категории (обычно V5) и имеет fix sketch"
+          ],
+          "acceptance_criteria": [
+            "Ручные findings не противоречат скриптовым категориям и канону",
+            "Каждый finding имеет конкретный план исправления"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_03",
+      "name": "Typography Semantics Audit (consumer correctness)",
+      "description": "Проверить misuse типографических семантик и legacy props; зафиксировать минимальные канонические паттерны решения.",
+      "tasks": [
+        {
+          "id": "T05",
+          "name": "Audit typography semantic misuse and define minimal canonical fix patterns",
+          "description": "По канону типографики выявить: legacy tone/size/role misuse, raw HTML where Foundation exists, invalid tone props. Сформировать 1–2 разрешённых паттерна решения, без className/style.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_03/T05.md",
+          "priority": "medium",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Typography semantics verified (no violations).",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "typography",
+            "semantics"
+          ],
+          "completion_criteria": [
+            "Список mismatch-ов (если есть) добавлен в backlog",
+            "Определены 1–2 canonical solutions, чтобы избежать 'зоопарка'"
+          ],
+          "acceptance_criteria": [
+            "Решения не вводят новых props и не меняют Foundation API",
+            "Решения применимы и повторяемы в consumer-коде"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_04",
+      "name": "Layout Semantics Audit (flow/stack/wrapper debt)",
+      "description": "Проверить misuse layout-семантики и wrapper debt, не сводя всё к spacing-токенам.",
+      "tasks": [
+        {
+          "id": "T06",
+          "name": "Audit layout semantics misuse and wrapper debt register",
+          "description": "Проверить неправильные stacks/flex wrappers, reimplemented Row.wrap, абсолютное позиционирование там, где есть Box, utility wrappers рядом с Foundation. Отметить fix-now vs tolerated (если lock/out-of-scope) с rationale.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_04/T06.md",
+          "priority": "medium",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Layout semantics validated via enforcement.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "layout",
+            "semantics"
+          ],
+          "completion_criteria": [
+            "Сформирован layout debt register",
+            "Каждый пункт имеет статус fix-now/tolerated + обоснование"
+          ],
+          "acceptance_criteria": [
+            "Debt register не нарушает locks и не предлагает переписать Foundation",
+            "Только actionable пункты, без общего 'cleanup'"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_05",
+      "name": "Risk-based regression checks (boundary integrity)",
+      "description": "Подтвердить, что consumer не может обходить Expression Surface и не использует deep imports/параллельные каналы стилей.",
+      "tasks": [
+        {
+          "id": "T07",
+          "name": "Verify boundary integrity: no deep imports, no parallel styling channels",
+          "description": "Проверить, что @tenerife.music/ui импортируется корректно, нет deep imports во внутренние пути, нет global/css modules targeting Foundation internals, нет противоречий в docs/canon.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_05/T07.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Risk & regression analysis passed.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "regression",
+            "boundaries"
+          ],
+          "completion_criteria": [
+            "Сформирован verdict с доказательствами (можно/нельзя обходить систему)",
+            "Найденные проблемы добавлены в backlog"
+          ],
+          "acceptance_criteria": [
+            "Verdict опирается на факты и канон",
+            "Нет неявных допущений"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_06",
+      "name": "Canon / Docs / Cross-links — DOM Boundary Canon Documentation",
+      "description": "Формально закрыть архитектуру Closed System v2 через создание канонического документа DOM_BOUNDARY_COMPONENTS.md и добавление перекрёстных ссылок в связанные документы.",
+      "tasks": [
+        {
+          "id": "T08",
+          "name": "Generate audit report + machine JSON artifacts",
+          "description": "Создать: docs/reports/closed-system/CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md + .summary.json + .backlog.json. В отчёте: summary, таблицы нарушений, ссылки на raw-логи, excerpts. Никаких code changes в этом шаге.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_06/T08.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Audit deliverables generated: report + summary/backlog + raw logs.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "reports",
+            "artifacts"
+          ],
+          "completion_criteria": [
+            "MD report создан и содержит ссылки на logs/phase-audit-023/",
+            "summary.json и backlog.json созданы и валидны",
+            "Backlog entries содержат: id, file, line range, category, severity, canonical_fix_pattern, patch sketch, allowed_under_locks"
+          ],
+          "acceptance_criteria": [
+            "Артефакты соответствуют канону задачи Deep Research (ничего не теряется)",
+            "Нет предложений изменить правила/архитектуру"
+          ]
+        },
+        {
+          "id": "T09",
+          "name": "Create DOM_BOUNDARY_COMPONENTS.md canonical document and cross-links",
+          "description": "Создать канонический документ docs/architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md с фиксированным списком DOM-boundary компонентов (Field, SearchInput, Combobox, Dialog, NextLinkAdapter, NavLink, HelperText) и добавить перекрёстные ссылки в: CLOSED_SYSTEM_V2_CANON_INDEX.md, ARCHITECTURE_CONTEXT.md, CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md, CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md, docs/README.md.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_06/T09.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "DOM_BOUNDARY_COMPONENTS.md created and registered in canon index. Cross-links added to 5 documents. Closed System v2 architecture formally closed.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "canon",
+            "documentation",
+            "cross-links",
+            "dom-boundary"
+          ],
+          "completion_criteria": [
+            "DOM_BOUNDARY_COMPONENTS.md существует и соответствует каноническому тексту",
+            "Документ зарегистрирован в CANON INDEX",
+            "Есть ссылки минимум в 4 местах",
+            "Ни одного изменения в src/**",
+            "Никаких новых правил — только фиксация"
+          ],
+          "acceptance_criteria": [
+            "DOM_BOUNDARY_COMPONENTS.md содержит закрытый список компонентов без 'например' или 'и т.п.'",
+            "Все перекрёстные ссылки корректны и ведут на правильные документы",
+            "Статус документа в CANON INDEX обновлён на CANONICAL",
+            "ARCHITECTURE_CONTEXT.md содержит подпункт DOM Boundary Invariant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_07",
+      "name": "FixCritical — V1 className on Foundation (execution)",
+      "description": "Устранить CRITICAL V1 нарушения без изменений Foundation API и без eslint-disable.",
+      "tasks": [
+        {
+          "id": "T09",
+          "name": "Fix all V1_CLASSNAME_ON_FOUNDATION occurrences repo-wide",
+          "description": "Убрать любые передачи className в Foundation компоненты (docs-app + src). Применять только canonical patterns: Wrapper-First / Token-Props / Variants. После фикса: pnpm lint:consumer + audit scripts.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_07/T09.md",
+          "priority": "critical",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "V1 className on Foundation eliminated repo-wide; lint:consumer clean.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "fixcritical",
+            "v1",
+            "consumer"
+          ],
+          "completion_criteria": [
+            "V1_CLASSNAME_ON_FOUNDATION = 0 по audit-consumer-violations",
+            "pnpm lint:consumer PASS",
+            "Нет eslint-disable для Stage 1 правил"
+          ],
+          "acceptance_criteria": [
+            "Не изменены публичные API Foundation",
+            "Фикс не вводит новых обходных каналов (через wrapper smuggling)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_08",
+      "name": "FixCritical — V5 prop smuggling / hidden bypasses (execution)",
+      "description": "Закрыть escape-hatch паттерны: asChild wrappers, className в Extension API, prop spread, CSS targeting Foundation.",
+      "tasks": [
+        {
+          "id": "T10",
+          "name": "Close V5 escape-hatches in extension/consumer code",
+          "description": "Устранить: asChild+wrapper styling channels, className на Extension components (если это позволяет обходить систему), prop spread into Foundation/Expression surface, CSS modules/global styles targeting Foundation internals. После фикса: audit scripts + manual re-sweep.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_08/T10.md",
+          "priority": "critical",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "V5 escape-hatches closed (asChild/spread/hidden channels); manual sweep clean.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "fixcritical",
+            "v5",
+            "escape-hatch"
+          ],
+          "completion_criteria": [
+            "V5_PROP_SMUGGLING = 0 по скрипту и manual sweep",
+            "Нет className как публичного escape-hook там, где это даёт стилевой обход",
+            "Нет ...props spread в опасных местах (Foundation/Expression surface)"
+          ],
+          "acceptance_criteria": [
+            "Поведение UI не сломано (ручная проверка ключевых flows)",
+            "Не добавлены новые правила — только применение канона"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_09",
+      "name": "Enforcement gap closure (optional but recommended)",
+      "description": "Если V5 не ловится автоматикой — усилить audit script/guards для предотвращения повторного появления.",
+      "tasks": [
+        {
+          "id": "T11",
+          "name": "Extend audit-consumer-violations to detect V5 patterns (asChild/spread/wrapper channels)",
+          "description": "При необходимости расширить scripts/audit-consumer-violations.ts детекторами asChild misuse, prop spread patterns, wrapper-smuggling. Без изменения архитектурных правил — только автоматизация уже зафиксированных запретов.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_09/T11.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Enforcement gap closure validated; audit script covers observed V5 patterns.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "enforcement",
+            "tooling",
+            "v5"
+          ],
+          "completion_criteria": [
+            "Скрипт детектит минимум те V5-паттерны, которые уже встречались",
+            "Логи/отчёты обновлены и показывают корректные counts"
+          ],
+          "acceptance_criteria": [
+            "Не изменены Foundation API и не добавлены 'новые правила'",
+            "Детектор не даёт массовых false positives на канонические паттерны"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLOCK_10",
+      "name": "Final validation + Lock/Docs updates",
+      "description": "Финальная верификация repo-wide и фиксация прогресса в канонических отчётах/README/PROJECT_PROGRESS.",
+      "tasks": [
+        {
+          "id": "T12",
+          "name": "Final regression pass + update canon references (reports/progress)",
+          "description": "Повторно прогнать: pnpm lint/typecheck/lint:consumer + audit scripts. Обновить: docs/reports/closed-system/* (при необходимости), зафиксировать прогресс в PROJECT_PROGRESS и добавить ссылки на отчёт в docs/canon/README.md (как Additional decisions) если это допускается текущим каноном документации.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023/BLOCK_10/T12.md",
+          "priority": "high",
+          "assigned_to": null,
+          "status": "completed",
+          "progress": 100,
+          "comment": "Final regression pass complete; docs/progress updated; V1=0, V5=0 confirmed.",
+          "updated_at": "2026-01-27",
+          "issues": [],
+          "labels": [
+            "validation",
+            "lock",
+            "docs"
+          ],
+          "completion_criteria": [
+            "Все проверки PASS",
+            "V1=0, V5=0 подтверждены финальным прогоном",
+            "Отчёт/логи сохранены и ссылки добавлены там, где разрешено"
+          ],
+          "acceptance_criteria": [
+            "Нет 'тихих' обходов и 'временных' решений",
+            "Документация отражает реальное состояние (без drift)"
+          ]
+        }
+      ]
+    }
+  ]
+}

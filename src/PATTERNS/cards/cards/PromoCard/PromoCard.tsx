@@ -2,23 +2,26 @@
 
 import * as React from "react";
 
-import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { GRADIENT_TOKENS } from "@/FOUNDATION/tokens/gradients";
 import { IconArrowRight } from "@/icons";
+import {
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  GRADIENT_TOKENS,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  LinkWithCustomVariant,
+  resolveComponentAnimations,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { PromoCardProps, PromoCardSize, PromoCardVariant } from "./PromoCard.types";
 import {
@@ -93,17 +96,17 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
         >
           {/* Featured Badge */}
           {(featured || cardVariant === "elevated") && featuredBadgeText && (
-            <div className={promoCardBadgeVariants({ size: cardBaseSize })}>
-              <span className={promoCardBadgeSurfaceVariants({ variant: "elevated" })}>
+            <Box className={promoCardBadgeVariants({ size: cardBaseSize })}>
+              <Box className={promoCardBadgeSurfaceVariants({ variant: "elevated" })}>
                 {featuredBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "relative h-full w-full overflow-hidden",
                   GRADIENT_TOKENS.surface.elevated,
@@ -120,20 +123,20 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
                     )}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
+                  <Box className="flex h-full w-full items-center justify-center">
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
                       <Icon name="info" size="xl" color="muted" aria-hidden="true" />
                     </Box>
-                  </div>
+                  </Box>
                 )}
                 {/* Image Overlay on Hover */}
-                <div
+                <Box
                   className={cn(
                     "absolute inset-0 opacity-0 transition-opacity duration-normal group-hover:opacity-100",
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
-              </div>
+              </Box>
             </CardBaseImageWrapper>
           )}
 
@@ -160,7 +163,7 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
 
           {/* Footer Section */}
           <CardBaseFooterWrapper size={cardBaseSize}>
-            <div className="w-full">
+            <Box className="w-full">
               {ctaUrl && (
                 <LinkWithCustomVariant
                   href={ctaUrl}
@@ -173,14 +176,14 @@ export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
                 </LinkWithCustomVariant>
               )}
               {!ctaUrl && (
-                <div className={cn("w-full", promoCardCtaButtonVariants({ size: cardBaseSize }))}>
+                <Box className={cn("w-full", promoCardCtaButtonVariants({ size: cardBaseSize }))}>
                   {ctaLabel}
                   <IconArrowRight
                     className={promoCardCtaButtonIconVariants({ size: cardBaseSize })}
                   />
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
           </CardBaseFooterWrapper>
         </CardBase>
       </Box>

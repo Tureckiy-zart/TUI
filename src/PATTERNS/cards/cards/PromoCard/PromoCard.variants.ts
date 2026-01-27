@@ -1,9 +1,6 @@
 "use client";
 
-import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { DOMAIN_TOKENS, ICON_TOKENS, TEXT_TOKENS, tokenCVA } from "@/index";
 
 import type { PromoCardSize, PromoCardVariant } from "./PromoCard.types";
 

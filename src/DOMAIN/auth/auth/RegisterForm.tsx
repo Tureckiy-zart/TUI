@@ -2,10 +2,7 @@
 
 import React from "react";
 
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { Button } from "@/PRIMITIVES/Button";
-import { Field } from "@/PRIMITIVES/Field";
-import { Input } from "@/PRIMITIVES/Input";
+import { Button, Field, Input, Stack } from "@/index";
 
 interface RegisterFormProps {
   nameLabel: string;

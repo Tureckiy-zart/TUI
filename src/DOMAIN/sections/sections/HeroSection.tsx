@@ -2,15 +2,7 @@
 
 import React from "react";
 
-import { Box } from "@/COMPOSITION/layout/Box";
-import { Container } from "@/COMPOSITION/layout/Container";
-import { Grid } from "@/COMPOSITION/layout/Grid";
-import { Row } from "@/COMPOSITION/layout/Row";
-import { Section } from "@/COMPOSITION/layout/Section";
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import { Box, cn, Container, Grid, Heading, Row, Section, Stack, Text } from "@/index";
 
 export interface HeroSectionProps {
   variant?: "full-width" | "split";

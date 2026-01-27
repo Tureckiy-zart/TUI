@@ -2,22 +2,26 @@
 
 import * as React from "react";
 
-import { Box, LinkWithCustomVariant } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn, formatDate } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
 import { IconArrowRight } from "@/icons";
+import {
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  formatDate,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  LinkWithCustomVariant,
+  resolveComponentAnimations,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { TicketCardProps } from "./TicketCard.types";
 import {
@@ -155,44 +159,44 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
         >
           {/* Featured Badge */}
           {featured && featuredBadgeText && (
-            <div
+            <Box
               className={ticketCardBadgeVariants({ size })}
               aria-label={`Featured ticket: ${featuredBadgeText}`}
             >
-              <span className={ticketCardBadgeSurfaceVariants({ variant: "featured" })}>
+              <Box className={ticketCardBadgeSurfaceVariants({ variant: "featured" })}>
                 {featuredBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* VIP Badge */}
           {vipBadgeText && (
-            <div
+            <Box
               className={cn(ticketCardBadgeVariants({ size }), getVipBadgePosition())}
               aria-label={`VIP ticket: ${vipBadgeText}`}
             >
-              <span className={ticketCardBadgeSurfaceVariants({ variant: "vip" })}>
+              <Box className={ticketCardBadgeSurfaceVariants({ variant: "vip" })}>
                 {vipBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Discount Badge */}
           {discountBadgeText && (
-            <div
+            <Box
               className={cn(ticketCardBadgeVariants({ size }), getDiscountBadgePosition())}
               aria-label={`Discount: ${discountBadgeText}`}
             >
-              <span className={ticketCardBadgeSurfaceVariants({ variant: "discount" })}>
+              <Box className={ticketCardBadgeSurfaceVariants({ variant: "discount" })}>
                 {discountBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "relative h-full w-full overflow-hidden",
                   DOMAIN_TOKENS.image.placeholder.gradient,
@@ -205,15 +209,15 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                     className={cn("h-full w-full", ticketCardImageTransformVariants({ size }))}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
+                  <Box className="flex h-full w-full items-center justify-center">
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
                       <Icon name="info" size="xl" color="muted" aria-hidden={true} />
                     </Box>
-                  </div>
+                  </Box>
                 )}
                 {/* Image Overlay on Hover */}
-                <div className={ticketCardImageOverlayVariants({ size })} aria-hidden={true} />
-              </div>
+                <Box className={ticketCardImageOverlayVariants({ size })} aria-hidden={true} />
+              </Box>
             </CardBaseImageWrapper>
           )}
 
@@ -246,7 +250,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
 
             {/* Price + Capacity Layout */}
             {(price || capacity) && (
-              <div className={ticketCardPriceCapacityContainerVariants({ size })}>
+              <Box className={ticketCardPriceCapacityContainerVariants({ size })}>
                 {price && (
                   <Text size={size === "compact" ? "md" : "lg"} weight="bold">
                     {price}
@@ -257,12 +261,12 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                     {capacity}
                   </Text>
                 )}
-              </div>
+              </Box>
             )}
 
             {/* Availability Indicator */}
             {availabilityLabel && (
-              <div className={ticketCardAvailabilityVariants({ availability })}>
+              <Box className={ticketCardAvailabilityVariants({ availability })}>
                 <Text
                   size="xs"
                   typographyRole="meta"
@@ -270,13 +274,13 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                 >
                   {availabilityLabel}
                 </Text>
-              </div>
+              </Box>
             )}
           </CardBaseContentWrapper>
 
           {/* Footer Section */}
           <CardBaseFooterWrapper size={cardBaseSize}>
-            <div className={cn("w-full", ticketCardFooterVariants({ size }))}>
+            <Box className={cn("w-full", ticketCardFooterVariants({ size }))}>
               {purchaseUrl && !isPurchaseDisabled && (
                 <LinkWithCustomVariant
                   href={purchaseUrl}
@@ -292,7 +296,7 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                 </LinkWithCustomVariant>
               )}
               {(!purchaseUrl || isPurchaseDisabled) && (
-                <div
+                <Box
                   role="button"
                   aria-label={purchaseLabel}
                   aria-disabled={isPurchaseDisabled}
@@ -307,9 +311,9 @@ export const TicketCard = React.forwardRef<HTMLDivElement, TicketCardProps>(
                     className={ticketCardPurchaseButtonIconVariants({ size })}
                     aria-hidden={true}
                   />
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
           </CardBaseFooterWrapper>
         </CardBase>
       </Box>

@@ -2,10 +2,7 @@
 
 import React from "react";
 
-import { Card, CardBody } from "@/COMPOSITION/layout/Card";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import { Card, CardBody, cn, Heading, Text } from "@/index";
 
 interface DashboardProps {
   title: string;

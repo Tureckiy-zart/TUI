@@ -10,7 +10,7 @@
 
 import * as React from "react";
 
-import { getDelayMs } from "@/FOUNDATION/lib/responsive-props";
+import { getDelayMs } from "@/index";
 
 import type {
   GroupByFunction,

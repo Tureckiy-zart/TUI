@@ -11,9 +11,7 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
-import { Button } from "@/PRIMITIVES/Button";
+import { Button, cn, NOTIFICATION_TOKENS } from "@/index";
 
 export interface NotificationCenterGroupHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

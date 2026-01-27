@@ -2,22 +2,24 @@
 
 import React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import {
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  resolveComponentAnimations,
+  Text,
+  TEXT_TOKENS,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { VenueCardProps, VenueCardSize, VenueCardVariant } from "./VenueCard.types";
 import {
@@ -115,7 +117,7 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
         >
           {/* Featured Badge */}
           {(featured || cardVariant === "elevated") && popularBadgeText && (
-            <div
+            <Box
               className={cn(
                 "absolute z-10",
                 cardBaseSize === "sm"
@@ -123,19 +125,19 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                   : DOMAIN_TOKENS.badges.position.default,
               )}
             >
-              <span
+              <Box
                 className={venueCardBadgeVariants({ size: cardBaseSize, variant: "elevated" })}
                 aria-label={`Featured venue: ${popularBadgeText}`}
               >
                 {popularBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "h-full w-full",
                   venueCardImagePlaceholderVariants({ size: cardBaseSize }),
@@ -151,19 +153,19 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                     )}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
+                  <Box className="flex h-full w-full items-center justify-center">
                     {/* Placeholder icon - using info as fallback since building icon doesn't exist */}
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
                       <Icon name="info" size="xl" color="muted" aria-hidden="true" />
                     </Box>
-                  </div>
+                  </Box>
                 )}
                 {/* Image Overlay on Hover */}
-                <div
+                <Box
                   className={venueCardImageOverlayVariants({ size: cardBaseSize })}
                   aria-hidden="true"
                 />
-              </div>
+              </Box>
             </CardBaseImageWrapper>
           )}
 
@@ -189,25 +191,25 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
 
             {/* Location Metadata */}
             {location && (
-              <div className={cn("flex flex-col", DOMAIN_TOKENS.metadata.spacing.vertical)}>
-                <div className={venueCardMetadataRowVariants({ size: cardBaseSize })}>
+              <Box className={cn("flex flex-col", DOMAIN_TOKENS.metadata.spacing.vertical)}>
+                <Box className={venueCardMetadataRowVariants({ size: cardBaseSize })}>
                   <Icon name="location" size="sm" color="muted" aria-hidden="true" />
                   <Text size="xs" typographyRole="meta" color="muted">
                     {location}
                   </Text>
-                </div>
-              </div>
+                </Box>
+              </Box>
             )}
           </CardBaseContentWrapper>
 
           {/* Footer Section */}
           {(eventsCount > 0 || capacity) && (
             <CardBaseFooterWrapper size={cardBaseSize}>
-              <div className={venueCardFooterBorderVariants({ size: cardBaseSize })}>
-                <div className={cn("flex items-center justify-between", TEXT_TOKENS.fontSize.xs)}>
+              <Box className={venueCardFooterBorderVariants({ size: cardBaseSize })}>
+                <Box className={cn("flex items-center justify-between", TEXT_TOKENS.fontSize.xs)}>
                   {/* Events Count */}
                   {eventsCount > 0 && (
-                    <div
+                    <Box
                       className={cn(
                         "flex items-center",
                         DOMAIN_TOKENS.metadata.spacing.horizontal,
@@ -219,12 +221,12 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                       <Text size="xs" weight="medium">
                         {eventsCount} {eventsLabel}
                       </Text>
-                    </div>
+                    </Box>
                   )}
 
                   {/* Capacity */}
                   {capacity && (
-                    <div
+                    <Box
                       className={cn(
                         "flex items-center",
                         DOMAIN_TOKENS.metadata.spacing.horizontal,
@@ -236,10 +238,10 @@ export const VenueCard = React.forwardRef<HTMLDivElement, VenueCardProps>(
                       <Text size="xs" typographyRole="meta" color="muted">
                         {capacityLabel} {capacity}
                       </Text>
-                    </div>
+                    </Box>
                   )}
-                </div>
-              </div>
+                </Box>
+              </Box>
             </CardBaseFooterWrapper>
           )}
         </CardBase>

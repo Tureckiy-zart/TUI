@@ -9,8 +9,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DATA_LIST_TOKENS } from "@/FOUNDATION/tokens/components/data-list";
+import { cn, DATA_LIST_TOKENS } from "@/index";
 
 import type { DataListRootProps } from "./DataList.types";
 import { DataListItem } from "./DataListItem";

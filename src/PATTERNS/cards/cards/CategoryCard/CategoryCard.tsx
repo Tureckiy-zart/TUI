@@ -2,21 +2,23 @@
 
 import * as React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
+import {
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  MOTION_TOKENS,
+  resolveComponentAnimations,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { CategoryCardProps, CategoryCardVariant } from "./CategoryCard.types";
 import {
@@ -84,17 +86,17 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
         >
           {/* Featured Badge */}
           {featured && featuredBadgeText && (
-            <div className={categoryCardBadgeVariants({ size })}>
-              <span className={categoryCardBadgeSurfaceVariants({ variant: "elevated" })}>
+            <Box className={categoryCardBadgeVariants({ size })}>
+              <Box className={categoryCardBadgeSurfaceVariants({ variant: "elevated" })}>
                 {featuredBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "relative h-full w-full overflow-hidden",
                   DOMAIN_TOKENS.image.placeholder.gradient,
@@ -111,14 +113,14 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                     )}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
+                  <Box className="flex h-full w-full items-center justify-center">
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
                       <Icon name="info" color="muted" aria-hidden="true" />
                     </Box>
-                  </div>
+                  </Box>
                 )}
                 {/* Image Overlay on Hover */}
-                <div
+                <Box
                   className={cn(
                     "absolute inset-0 opacity-0 group-hover:opacity-100",
                     MOTION_TOKENS.transition.opacity,
@@ -126,7 +128,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
-              </div>
+              </Box>
             </CardBaseImageWrapper>
           )}
 

@@ -2,16 +2,19 @@
 
 import React from "react";
 
-import { Container } from "@/COMPOSITION/layout/Container";
-import { Grid } from "@/COMPOSITION/layout/Grid";
-import { Row } from "@/COMPOSITION/layout/Row";
-import { Section } from "@/COMPOSITION/layout/Section";
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Button, type ButtonProps } from "@/PRIMITIVES/Button";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
+import {
+  Button,
+  type ButtonProps,
+  cn,
+  Container,
+  Grid,
+  Heading,
+  Link,
+  Row,
+  Section,
+  Stack,
+  Text,
+} from "@/index";
 
 export interface CTASectionProps {
   headline: React.ReactNode;

@@ -31,8 +31,61 @@ export interface NavLinkProps extends LinkProps {
  * @public
  */
 export const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
-  ({ current, ...props }, ref) => {
-    return <Link {...props} ref={ref} aria-current={current ? "page" : undefined} />;
+  (
+    {
+      current,
+      href,
+      variant,
+      size,
+      leftIcon,
+      rightIcon,
+      disabled,
+      onClick,
+      target,
+      rel,
+      download,
+      tabIndex,
+      title,
+      role,
+      onFocus,
+      onBlur,
+      onMouseEnter,
+      onMouseLeave,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      children,
+    },
+    ref,
+  ) => {
+    return (
+      <Link
+        ref={ref}
+        href={href}
+        variant={variant}
+        size={size}
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
+        disabled={disabled}
+        onClick={onClick}
+        target={target}
+        rel={rel}
+        download={download}
+        tabIndex={tabIndex}
+        title={title}
+        role={role}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-current={current ? "page" : undefined}
+      >
+        {children}
+      </Link>
+    );
   },
 );
 

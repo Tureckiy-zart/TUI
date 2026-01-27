@@ -13,13 +13,19 @@
 
 import * as React from "react";
 
-import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";
-import type { ResponsiveColor } from "@/COMPOSITION/layout/layout.types";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { getBaseValue, getRadiusCSSVar } from "@/FOUNDATION/lib/responsive-props";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import {
+  Box,
+  cn,
+  Flex,
+  getBaseValue,
+  getRadiusCSSVar,
+  Grid,
+  Heading,
+  resolveComponentAnimations,
+  type ResponsiveColor,
+  Stack,
+  Text,
+} from "@/index";
 
 import type {
   BackgroundConfig,

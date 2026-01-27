@@ -35,13 +35,14 @@ These ESLint rules apply **only to consumer code**, not to library source:
 
 ## How Consumer Guards Run
 
-Consumer guards use a **dedicated ESLint config** and apply **only to `docs-app/**`**:
+**Note:** Consumer guards were previously configured for `docs-app/**`, but `docs-app` has been removed. Consumer guards are currently not active.
 
-- **Config:** `eslint.consumer.config.mjs` (project root)
-- **Command:** `pnpm lint:consumer`
-- **CI:** `pnpm lint:consumer` runs in the quality job after `pnpm lint`
+If consumer code is added in the future, guards can be reactivated by:
+- Creating a dedicated ESLint config for consumer code
+- Configuring the guard rules to apply to consumer directories
+- Adding a `lint:consumer` command to run guards
 
-Guards are **not** run on `src/` (Foundation, COMPOSITION, Extension). Main `pnpm lint` uses `eslint.config.mjs` and continues to ignore `docs-app/**`; consumer guards run only via `lint:consumer`.
+Guards are **not** run on `src/` (Foundation, COMPOSITION, Extension). Main `pnpm lint` uses `eslint.config.mjs`.
 
 ---
 
@@ -61,11 +62,11 @@ Guards use a **staged activation** model (TUI_CSV2_ESLINT_GUARDS_STAGED_ACTIVATI
 
 | Rule | Stage | Severity | Applies to |
 |------|-------|----------|------------|
-| `tui/no-classname-on-foundation` | 1 | error | Consumer (`docs-app/**`) |
-| `tui/no-style-on-foundation` | 1 | error | Consumer (`docs-app/**`) |
-| `tui/no-prop-spread-into-foundation` | 1 | error | Consumer (`docs-app/**`) |
-| `tui/no-utility-classes-near-foundation` | 2 | warn | Consumer (`docs-app/**`) |
-| `tui/no-raw-html-when-foundation-exists` | — | error | Consumer (`docs-app/**`) |
+| `tui/no-classname-on-foundation` | 1 | error | Consumer code |
+| `tui/no-style-on-foundation` | 1 | error | Consumer code |
+| `tui/no-prop-spread-into-foundation` | 1 | error | Consumer code |
+| `tui/no-utility-classes-near-foundation` | 2 | warn | Consumer code |
+| `tui/no-raw-html-when-foundation-exists` | — | error | Consumer code |
 
 ---
 
@@ -228,6 +229,11 @@ const buttonProps: ButtonProps = { variant: "primary" };
 
 **Rationale:** Untyped prop spreads can bypass type checking and inject forbidden props (e.g., `className`, `style`). Explicit typing ensures only sanctioned props are passed.
 
+**DOM-boundary reference:** See [DOM_BOUNDARY_COMPONENTS.md](./DOM_BOUNDARY_COMPONENTS.md) for the fixed DOM-boundary component list referenced by V5.
+
+**Rationale:**
+See [DOM_BOUNDARY_COMPONENTS.md](./DOM_BOUNDARY_COMPONENTS.md) for canonical DOM-boundary definition.
+
 ---
 
 ## Allowed Exceptions Policy
@@ -320,11 +326,14 @@ const buttonProps: ButtonProps = { variant: "primary" };
 ## Related Documents
 
 - [CLOSED_SYSTEM_V2_CANON_INDEX.md](./CLOSED_SYSTEM_V2_CANON_INDEX.md) - Canonical documentation index
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) - System closure rationale and change control policy (explains why enforcement guards are necessary)
+- [CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md](./CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md) - Continuous enforcement mechanisms, ERROR/WARN levels, CI integration
+- [CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md](./CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md) - Canonical fix patterns registry (Wrapper First, Token Props)
 - [CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md) - Architecture model
 - [FOUNDATION_CONTRACT.md](../FOUNDATION_CONTRACT.md) - Foundation component contract
 - [FOUNDATION_LOCK.md](../FOUNDATION_LOCK.md) - Foundation lock status
 
 ---
 
-**Last Updated:** 2026-01-26  
+**Last Updated:** 2026-01-27  
 **Task ID:** TUI_CSV2_ESLINT_GUARDS_STAGED_ACTIVATION_015

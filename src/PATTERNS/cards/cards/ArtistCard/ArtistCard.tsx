@@ -2,22 +2,24 @@
 
 import * as React from "react";
 
-import { Box } from "@/COMPOSITION/layout";
-import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens";
-import { ARTIST_TOKENS } from "@/FOUNDATION/tokens/components/artist";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import {
+  ARTIST_TOKENS,
+  Box,
+  cn,
+  DOMAIN_TOKENS,
+  Heading,
+  Icon,
+  ICON_TOKENS,
+  Link,
+  resolveComponentAnimations,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
 } from "@/PATTERNS/cards/cards/CardBase";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Icon } from "@/PRIMITIVES/Icon";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
 
 import type { ArtistCardProps } from "./ArtistCard.types";
 import {
@@ -117,20 +119,20 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
         >
           {/* Featured Badge */}
           {featured && popularBadgeText && (
-            <div className={artistCardBadgeVariants({ size })}>
-              <span
+            <Box className={artistCardBadgeVariants({ size })}>
+              <Box
                 className={artistCardBadgeSurfaceVariants({ size, variant: "elevated" })}
                 aria-label={`Featured artist: ${popularBadgeText}`}
               >
                 {popularBadgeText}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {/* Image Section */}
           {showImage && (
             <CardBaseImageWrapper size={cardBaseSize}>
-              <div
+              <Box
                 className={cn(
                   "h-full",
                   ARTIST_TOKENS.image.container.layout,
@@ -147,16 +149,16 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
                     )}
                   />
                 ) : (
-                  <div className={ARTIST_TOKENS.image.placeholder.container}>
+                  <Box className={ARTIST_TOKENS.image.placeholder.container}>
                     {/* Placeholder icon - using info as fallback since music/artist icon doesn't exist in registry */}
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
                       <Icon name="info" size="xl" color="muted" aria-hidden="true" />
                     </Box>
-                  </div>
+                  </Box>
                 )}
                 {/* Image Overlay on Hover */}
-                <div className={artistCardImageOverlayVariants({ size })} />
-              </div>
+                <Box className={artistCardImageOverlayVariants({ size })} />
+              </Box>
             </CardBaseImageWrapper>
           )}
 
@@ -189,33 +191,33 @@ export const ArtistCard = React.forwardRef<HTMLDivElement, ArtistCardProps>(
 
             {/* Metadata Rows (Followers, Plays) */}
             {(followers !== undefined || plays !== undefined) && (
-              <div className={artistCardMetadataVariants({ size })}>
+              <Box className={artistCardMetadataVariants({ size })}>
                 {followers !== undefined && (
-                  <div className={artistCardMetadataItemVariants({ size })}>
+                  <Box className={artistCardMetadataItemVariants({ size })}>
                     <Icon name="info" size="sm" color="muted" aria-hidden="true" />
                     <Text size="xs" typographyRole="meta" color="muted">
                       {followers.toLocaleString()} {followersLabel}
                     </Text>
-                  </div>
+                  </Box>
                 )}
                 {plays !== undefined && (
-                  <div className={artistCardMetadataItemVariants({ size })}>
+                  <Box className={artistCardMetadataItemVariants({ size })}>
                     <Icon name="info" size="sm" color="muted" aria-hidden="true" />
                     <Text size="xs" typographyRole="meta" color="muted">
                       {plays.toLocaleString()} {playsLabel}
                     </Text>
-                  </div>
+                  </Box>
                 )}
-              </div>
+              </Box>
             )}
           </CardBaseContentWrapper>
 
           {/* Footer Section - Currently empty but structure in place for future extensions */}
           {(followers !== undefined || plays !== undefined) && (
             <CardBaseFooterWrapper size={cardBaseSize}>
-              <div className={artistCardFooterBorderVariants({ size })}>
+              <Box className={artistCardFooterBorderVariants({ size })}>
                 {/* Footer content can be added here if needed in the future */}
-              </div>
+              </Box>
             </CardBaseFooterWrapper>
           )}
         </CardBase>

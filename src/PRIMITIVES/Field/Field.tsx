@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Stack } from "@/COMPOSITION/layout";
+import { Box, Stack } from "@/COMPOSITION/layout";
 import { Label } from "@/PRIMITIVES/Label";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -53,10 +53,58 @@ Field.displayName = "Field";
  */
 export interface FieldLabelProps extends React.ComponentProps<typeof Label> {}
 
-const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>((props, ref) => {
-  // className is forbidden on Foundation components - FieldLabel passes props directly to Label
-  return <Label ref={ref} {...props} />;
-});
+const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
+  (
+    {
+      children,
+      htmlFor,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      onClick,
+      onFocus,
+      onBlur,
+      onMouseDown,
+      onMouseUp,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-required": ariaRequired,
+      "aria-invalid": ariaInvalid,
+    },
+    ref,
+  ) => {
+    return (
+      <Label
+        ref={ref}
+        htmlFor={htmlFor}
+        id={id}
+        title={title}
+        role={role}
+        dir={dir}
+        lang={lang}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-required={ariaRequired}
+        aria-invalid={ariaInvalid}
+      >
+        {children}
+      </Label>
+    );
+  },
+);
 FieldLabel.displayName = "FieldLabel";
 
 /**
@@ -83,9 +131,9 @@ const FieldControl = React.forwardRef<HTMLDivElement, FieldControlProps>(
   ({ children, ...props }, ref) => {
     // className and style are forbidden from public API - only token-based className is used
     return (
-      <div ref={ref} {...props}>
+      <Box ref={ref} {...props}>
         {children}
-      </div>
+      </Box>
     );
   },
 );
@@ -104,10 +152,61 @@ FieldControl.displayName = "FieldControl";
  */
 export interface FieldDescriptionProps extends React.ComponentProps<typeof Text> {}
 
-const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>((props, ref) => {
-  // className is forbidden on Foundation components - FieldDescription uses only token-driven props
-  return <Text ref={ref} size="sm" typographyRole="meta" color="muted" {...props} />;
-});
+const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>(
+  (
+    {
+      children,
+      as,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    },
+    ref,
+  ) => {
+    return (
+      <Text
+        ref={ref}
+        as={as}
+        size="sm"
+        typographyRole="meta"
+        color="muted"
+        id={id}
+        title={title}
+        role={role}
+        dir={dir}
+        lang={lang}
+        tabIndex={tabIndex}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-live={ariaLive}
+        aria-atomic={ariaAtomic}
+        aria-busy={ariaBusy}
+      >
+        {children}
+      </Text>
+    );
+  },
+);
 FieldDescription.displayName = "FieldDescription";
 
 /**
@@ -129,16 +228,63 @@ FieldDescription.displayName = "FieldDescription";
 export interface FieldErrorProps extends React.ComponentProps<typeof Text> {}
 
 const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
-  ({ children, ...props }, ref) => {
+  (
+    {
+      children,
+      as,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    },
+    ref,
+  ) => {
     // Wrapper span applies destructive color via className (Composition layer pattern).
     // Text component (Foundation) cannot accept className, so wrapper is used.
     // This pattern respects Foundation Enforcement while allowing Composition flexibility.
     return (
-      <span ref={ref} className="text-[hsl(var(--tm-destructive))]">
-        <Text size="sm" {...props}>
+      <Box
+        as="span"
+        ref={ref as React.Ref<HTMLDivElement>}
+        className="text-[hsl(var(--tm-destructive))]"
+      >
+        <Text
+          as={as}
+          size="sm"
+          id={id}
+          title={title}
+          role={role}
+          dir={dir}
+          lang={lang}
+          tabIndex={tabIndex}
+          onClick={onClick}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-live={ariaLive}
+          aria-atomic={ariaAtomic}
+          aria-busy={ariaBusy}
+        >
           {children}
         </Text>
-      </span>
+      </Box>
     );
   },
 );

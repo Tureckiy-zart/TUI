@@ -10,8 +10,7 @@
 import { Bell } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Button } from "@/PRIMITIVES/Button";
+import { Button, cn } from "@/index";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 

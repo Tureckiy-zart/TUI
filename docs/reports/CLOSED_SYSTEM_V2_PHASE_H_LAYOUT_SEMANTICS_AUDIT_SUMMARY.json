@@ -5,7 +5,7 @@
     "status": "COMPLETE",
     "scope": {
       "in_scope": ["src/DOMAIN/**", "src/PATTERNS/**"],
-      "out_of_scope": ["docs-app/**", "src/COMPOSITION/layout/*.tsx", "*.stories.tsx", "*.test.tsx"]
+      "out_of_scope": ["src/COMPOSITION/layout/*.tsx", "*.stories.tsx", "*.test.tsx"]
     }
   },
   "pattern_summary": [

@@ -8,7 +8,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { cn, TABLE_TOKENS } from "@/index";
 
 import type { TableHeaderProps } from "./Table.types";
 
@@ -17,7 +17,6 @@ export type { TableHeaderProps };
 /**
  * Table Header component
  */
-import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
 
 const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
   ({ sticky = false, className, ...props }, ref) => {

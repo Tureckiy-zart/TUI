@@ -4,8 +4,7 @@
  * Type definitions for Notification Center components.
  */
 
-import type { ToastData } from "@/COMPOSITION/overlays/Toast";
-import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
+import type { ResponsiveDelay, ToastData } from "@/index";
 
 /**
  * Notification channel types

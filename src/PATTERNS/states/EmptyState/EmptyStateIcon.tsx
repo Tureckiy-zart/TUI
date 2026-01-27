@@ -8,11 +8,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import {
-  EMPTY_STATE_TOKENS,
-  type EmptyStateIconSize,
-} from "@/FOUNDATION/tokens/components/empty-state";
+import { cn, EMPTY_STATE_TOKENS, type EmptyStateIconSize } from "@/index";
 
 export interface EmptyStateIconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

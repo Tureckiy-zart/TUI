@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
+import { cn } from "@/index";
 
 export interface LanguageOption {
   code: string;

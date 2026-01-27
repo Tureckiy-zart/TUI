@@ -23,13 +23,13 @@
   "text-accent-foreground",
   "text-card-foreground",
   "text-destructive-foreground",
+  "text-error-foreground",
   "text-foreground",
+  "text-info-foreground",
   "text-muted-foreground",
   "text-popover-foreground",
   "text-primary-foreground",
   "text-secondary-foreground",
-  "text-error-foreground",
-  "text-info-foreground",
   "text-success-foreground",
   "text-warning-foreground"
 ]

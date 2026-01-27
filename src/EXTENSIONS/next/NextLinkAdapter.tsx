@@ -35,7 +35,39 @@ export interface NextLinkAdapterProps extends Omit<LinkProps, "href"> {
  * ```
  */
 export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapterProps>(
-  ({ href, prefetch, replace, scroll, shallow, locale, ...props }, ref) => {
+  (
+    {
+      href,
+      prefetch,
+      replace,
+      scroll,
+      shallow,
+      locale,
+      variant,
+      size,
+      leftIcon,
+      rightIcon,
+      disabled,
+      onClick,
+      target,
+      rel,
+      download,
+      tabIndex,
+      title,
+      role,
+      onFocus,
+      onBlur,
+      onMouseEnter,
+      onMouseLeave,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-current": ariaCurrent,
+      "aria-disabled": ariaDisabled,
+      children,
+    },
+    ref,
+  ) => {
     // Convert Next.js href to string for Foundation Link
     const hrefString = typeof href === "string" ? href : href.pathname || String(href);
 
@@ -48,7 +80,33 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
         shallow={shallow}
         locale={locale}
       >
-        <Link ref={ref} href={hrefString} {...props} />
+        <Link
+          ref={ref}
+          href={hrefString}
+          variant={variant}
+          size={size}
+          leftIcon={leftIcon}
+          rightIcon={rightIcon}
+          disabled={disabled}
+          onClick={onClick}
+          target={target}
+          rel={rel}
+          download={download}
+          tabIndex={tabIndex}
+          title={title}
+          role={role}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-current={ariaCurrent}
+          aria-disabled={ariaDisabled}
+        >
+          {children}
+        </Link>
       </NextLink>
     );
   },

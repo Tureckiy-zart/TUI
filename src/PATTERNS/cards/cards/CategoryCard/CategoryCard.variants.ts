@@ -1,8 +1,6 @@
 "use client";
 
-import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { DOMAIN_TOKENS, TEXT_TOKENS, tokenCVA } from "@/index";
 
 import type { CategoryCardSize, CategoryCardVariant } from "./CategoryCard.types";
 

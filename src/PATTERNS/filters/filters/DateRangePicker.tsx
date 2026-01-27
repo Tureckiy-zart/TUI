@@ -4,8 +4,7 @@ import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Button } from "@/PRIMITIVES/Button";
+import { Box, Button } from "@/index";
 
 export interface DateRange {
   from: Date | undefined;
@@ -19,7 +18,6 @@ export interface DateRangePickerProps {
   selectDateRangeLabel: string;
   clearLabel: string;
   closeLabel: string;
-  className?: string;
   disabled?: boolean;
 }
 
@@ -30,7 +28,6 @@ export function DateRangePicker({
   selectDateRangeLabel,
   clearLabel,
   closeLabel,
-  className,
   disabled = false,
 }: DateRangePickerProps) {
   if (!placeholder || placeholder.trim() === "") {
@@ -83,65 +80,52 @@ export function DateRangePicker({
   };
 
   return (
-    <div className={cn("relative", className)}>
+    <Box>
       <Button variant="outline" onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
         <CalendarIcon className="mr-sm h-4 w-4" />
         {formatDateRange(value)}
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-xs w-full rounded-md border bg-[hsl(var(--tm-surface-overlay))] p-sm shadow-lg">
-          <div className="space-y-sm">
-            <div className="text-sm font-medium">{selectDateRangeLabel}</div>
-            <div className="grid grid-cols-7 gap-xs text-xs">
+        <Box>
+          <Box>
+            <Box>{selectDateRangeLabel}</Box>
+            <Box>
               {/* Calendar header */}
               {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
-                <div
+                <Box
                   key={day}
                   className="p-sm text-center font-medium text-[hsl(var(--tm-text-muted))]"
                 >
                   {day}
-                </div>
+                </Box>
               ))}
 
               {/* Calendar days - simplified version */}
               {Array.from({ length: 35 }, (_, i) => {
                 const date = new Date();
                 date.setDate(date.getDate() - date.getDay() + i);
-                const isSelected =
-                  (value.from && date.toDateString() === value.from.toDateString()) ||
-                  (value.to && date.toDateString() === value.to.toDateString());
-                const isInRange = value.from && value.to && date > value.from && date < value.to;
 
                 return (
-                  <button
-                    key={i}
-                    className={cn(
-                      "h-8 w-8 rounded text-sm hover:bg-[hsl(var(--tm-accent))]",
-                      isSelected &&
-                        "bg-[hsl(var(--tm-primary))] text-[hsl(var(--tm-primary-foreground))]",
-                      isInRange && "bg-[hsl(var(--tm-accent))]/50",
-                    )}
-                    onClick={() => handleDateSelect(date)}
-                  >
+                  <Button key={i} variant="ghost" size="sm" onClick={() => handleDateSelect(date)}>
                     {date.getDate()}
-                  </button>
+                  </Button>
                 );
               })}
-            </div>
+            </Box>
 
-            <div className="flex justify-between pt-sm">
+            <Box>
               <Button variant="outline" size="sm" onClick={clearRange}>
                 {clearLabel}
               </Button>
               <Button variant="outline" size="sm" onClick={() => setIsOpen(false)}>
                 {closeLabel}
               </Button>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

@@ -9,7 +9,7 @@
 
 import * as React from "react";
 
-import { PopoverContent } from "@/COMPOSITION/overlays/Popover";
+import { PopoverContent } from "@/index";
 
 import { useHoverCardContext } from "./HoverCardRoot";
 

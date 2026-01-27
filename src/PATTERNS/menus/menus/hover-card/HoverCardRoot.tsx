@@ -9,9 +9,7 @@
 
 import * as React from "react";
 
-import { Popover } from "@/COMPOSITION/overlays/Popover";
-import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
-import type { ResponsiveDelay } from "@/FOUNDATION/tokens/types";
+import { getBaseValue, getDurationMs, Popover, type ResponsiveDelay } from "@/index";
 
 export interface HoverCardContextValue {
   onOpenChange: (open: boolean) => void;

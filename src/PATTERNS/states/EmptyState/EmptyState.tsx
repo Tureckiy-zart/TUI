@@ -10,10 +10,7 @@
 
 import * as React from "react";
 
-import { Stack } from "@/COMPOSITION";
-import { Surface } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { EMPTY_STATE_TOKENS } from "@/FOUNDATION/tokens/components/empty-state";
+import { cn, EMPTY_STATE_TOKENS, Stack, Surface } from "@/index";
 
 import { EmptyStateAction } from "./EmptyStateAction";
 import { EmptyStateDescription } from "./EmptyStateDescription";

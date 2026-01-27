@@ -3,10 +3,7 @@
 import { Filter, X } from "lucide-react";
 import * as React from "react";
 
-import { Box, Inline } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Badge } from "@/PRIMITIVES/Badge";
-import { Button } from "@/PRIMITIVES/Button";
+import { Badge, Box, Button, Inline } from "@/index";
 
 import { DateRangePicker } from "./DateRangePicker";
 import { FilterSelect } from "./FilterSelect";
@@ -178,17 +175,17 @@ export function FilterBar({
   };
 
   return (
-    <div className={cn("space-y-md", className)}>
+    <Box className={className}>
       {/* Search and Active Filters */}
-      <div className="flex flex-col gap-md sm:flex-row">
+      <Box>
         {showSearch && (
-          <div className="flex-1">
+          <Box>
             <SearchInput value={search} onChange={setSearch} placeholder={searchPlaceholder} />
-          </div>
+          </Box>
         )}
 
         {hasActiveFilters && (
-          <div className="flex items-center gap-sm">
+          <Box>
             <Badge variant="secondary">
               <Inline gap="xs" align="center">
                 <Filter className="h-3 w-3" />
@@ -199,12 +196,12 @@ export function FilterBar({
               <X className="h-3 w-3" />
               {clearAllLabel}
             </Button>
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
 
       {/* Filter Controls */}
-      <div className="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-4">
+      <Box>
         {showCategory && categories.length > 0 && (
           <FilterSelect
             value={category}
@@ -216,7 +213,7 @@ export function FilterBar({
         )}
 
         {showDateRange && (
-          <div className="space-y-sm">
+          <Box>
             <label className={LABEL_CLASS_NAME}>{dateRangeLabel}</label>
             <DateRangePicker
               value={{
@@ -229,7 +226,7 @@ export function FilterBar({
               clearLabel={dateClearLabel}
               closeLabel={dateCloseLabel}
             />
-          </div>
+          </Box>
         )}
 
         {showPriceRange && (
@@ -251,7 +248,7 @@ export function FilterBar({
         )}
 
         {showSorting && (
-          <div className="space-y-sm">
+          <Box>
             <label className={LABEL_CLASS_NAME}>{sortByLabel}</label>
             <FilterSelect
               value={`${sortBy}-${sortOrder}`}
@@ -274,30 +271,30 @@ export function FilterBar({
                 )}
               placeholder={sortByPlaceholder}
             />
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
 
       {/* Active Filters Summary */}
       {hasActiveFilters && (
-        <div className="rounded-lg bg-[hsl(var(--tm-muted))]/50 p-sm">
-          <div className="mb-sm text-sm font-medium">{activeFiltersLabel}</div>
-          <div className="flex flex-wrap gap-sm">
+        <Box>
+          <Box>{activeFiltersLabel}</Box>
+          <Box>
             {getFilterSummary().map((filter, index) => (
               <Box key={index} className="text-xs">
                 <Badge variant="outline">{filter}</Badge>
               </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 
 // Compact version for mobile
-export function FilterBarCompact({ className, ...props }: FilterBarProps) {
-  return <FilterBar className={cn("space-y-sm", className)} {...props} />;
+export function FilterBarCompact(props: FilterBarProps) {
+  return <FilterBar {...props} />;
 }
 
 // Re-export types for consumer convenience

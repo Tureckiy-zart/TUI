@@ -36,11 +36,15 @@ The following documents constitute the **complete and final** canonical set for 
 | Document | Phase | Description | Status |
 |----------|-------|-------------|--------|
 | [CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md) | A | Problem definition, violation classes, sources of errors | ✅ CANONICAL |
+| [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) | A/B | System closure rationale, problem classes prevented, change control policy | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md) | B | Architecture principles, boundary model, governance constraints | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md](./CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md) | C1 | Mechanism categories, responsibility boundaries, impact surfaces | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md](./CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md) | C2 | Principle-to-mechanism traceability, risk coverage | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_READINESS_GATES.md](./CLOSED_SYSTEM_V2_READINESS_GATES.md) | C3 | Readiness validation, phase transition authorization | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md) | J.1 | Typography semantics boundaries, semantic vs presentational usage rules | ✅ CANONICAL |
+| [CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md](./CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md) | J.1 | Continuous enforcement mechanisms, ERROR/WARN levels, CI integration | ✅ CANONICAL |
+| [CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md](./CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md) | J.1 | Canonical fix patterns registry, Wrapper First, Token Props | ✅ CANONICAL |
+| [DOM_BOUNDARY_COMPONENTS.md](./DOM_BOUNDARY_COMPONENTS.md) | J.1 | Fixed DOM-boundary component list and invariants | ✅ CANONICAL |
 
 ### Phase Lock Declarations
 
@@ -53,7 +57,7 @@ The following documents constitute the **complete and final** canonical set for 
 | [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) | F | Phase F lock declaration (Extension Layer Adoption) | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PHASE_I_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_I_LOCK.md) | I | Phase I lock declaration (Product Scope Migration - Screens) | ✅ CANONICAL |
 
-**Total Canonical Documents:** 10 files
+**Total Canonical Documents:** 14 files
 
 ---
 
@@ -216,7 +220,7 @@ The following documents are **NOT** part of the canonical set and are marked as 
 8. **Phase F:** [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) + [CLOSED_SYSTEM_V2_PHASE_F_EXTENSION_ADOPTION_REPORT.md](./CLOSED_SYSTEM_V2_PHASE_F_EXTENSION_ADOPTION_REPORT.md)
 9. **Phase H:** [CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md](./CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md) + [CLOSED_SYSTEM_V2_PHASE_H_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_H_LOCK.md)
 10. **Phase I:** [CLOSED_SYSTEM_V2_PHASE_I_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_I_LOCK.md) + [CLOSED_SYSTEM_V2_PHASE_I_MIGRATION_REPORT.md](../../reports/CLOSED_SYSTEM_V2_PHASE_I_MIGRATION_REPORT.md)
-11. **Phase J.1:** [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md)
+11. **Phase J.1:** [CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md](./CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md) + [CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md](./CLOSED_SYSTEM_V2_CONTINUOUS_ENFORCEMENT.md) + [CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md](./CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md)
 
 ### By Document Type
 
@@ -227,6 +231,9 @@ The following documents are **NOT** part of the canonical set and are marked as 
 - Principle-to-Mechanism Mapping (Phase C2)
 - Readiness Gates (Phase C3)
 - Typography Semantics Canon (Phase J.1)
+- Continuous Enforcement (Phase J.1)
+- Canonical Fix Patterns (Phase J.1)
+- DOM Boundary Components (Phase J.1)
 
 **Phase Locks:**
 - Phase D Lock
@@ -310,5 +317,5 @@ The following documents are **NOT** part of the canonical set and are marked as 
 ---
 
 **Last Updated:** 2026-01-27  
-**Canonical Index Version:** 1.2  
-**Task ID:** TUI_CSV2_LOCK_PHASE_I_022
+**Canonical Index Version:** 1.3  
+**Task ID:** TUI_CSV2_PHASE_J1_CONTINUOUS_ENFORCEMENT_021

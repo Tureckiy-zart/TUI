@@ -4,7 +4,7 @@
  * TypeScript interfaces and types for DataList component.
  */
 
-import type { ResponsiveSpacing } from "@/COMPOSITION";
+import type { ResponsiveSpacing } from "@/index";
 
 /**
  * DataList Root component props

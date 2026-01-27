@@ -1,0 +1,166 @@
+{
+  "audit_date": "2026-01-27",
+  "task_id": "TUI_CSV2_BLOCK_09_5_DETACHED_STRUCTURAL_AUDIT",
+  "status": "completed",
+  "mode": "DETACHED_AUDIT_ONLY",
+  "scope": {
+    "included": ["src/**", "styles/**"],
+    "excluded": ["**/*.stories.*", "**/*.test.*", "docs/**"]
+  },
+  "vectors": {
+    "S1": {
+      "name": "CSS targeting Foundation internals",
+      "status": "no_findings",
+      "count": 0,
+      "findings": []
+    },
+    "S2": {
+      "name": "Deep imports",
+      "status": "fixed",
+      "count": 0,
+      "severity": "CRITICAL",
+      "fix_date": "2026-01-27",
+      "fix_task_id": "TUI_CSV2_S2_DEEP_IMPORTS_MIGRATION_FIX_025",
+      "findings": [
+        {
+          "id": "S2-001",
+          "type": "systematic_violation",
+          "status": "fixed",
+          "description": "Consumer code (src/DOMAIN/** and src/PATTERNS/**) uses deep imports from internal paths (@/PRIMITIVES, @/FOUNDATION, @/COMPOSITION) instead of public API",
+          "affected_files_count": 113,
+          "migrated_files_count": 84,
+          "affected_files": [
+            "src/DOMAIN/sections/sections/TrendingSection.tsx",
+            "src/DOMAIN/auth/auth/ProfileCard.tsx",
+            "src/DOMAIN/admin/admin/Dashboard.tsx",
+            "src/DOMAIN/admin/admin/UserManagement.tsx",
+            "src/DOMAIN/sections/sections/FeatureSection.tsx",
+            "src/DOMAIN/sections/sections/CTASection.tsx",
+            "src/DOMAIN/sections/EventCard/EventCard.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.DismissAll.tsx",
+            "src/DOMAIN/section-builder/SectionBuilder.tsx",
+            "src/DOMAIN/sections/sections/ArticlesSection.tsx",
+            "src/DOMAIN/sections/sections/HeroSection.tsx",
+            "src/DOMAIN/auth/auth/RegisterForm.tsx",
+            "src/DOMAIN/auth/auth/LoginForm.tsx",
+            "src/DOMAIN/controls/LanguageSelector/LanguageSelector.tsx",
+            "src/DOMAIN/sections/EventCard/EventCard.variants.ts",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.List.tsx",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.types.ts",
+            "src/DOMAIN/notifications/notifications/NotificationCenter.Provider.tsx",
+            "src/DOMAIN/sections/EventCard/EventCard.types.ts",
+            "src/DOMAIN/section-builder/types.ts",
+            "src/PATTERNS/filters/filters/DateRangePicker.tsx",
+            "src/PATTERNS/states/ConsentBanner/ConsentBanner.tsx",
+            "src/PATTERNS/lists/Timeline/Timeline.tsx",
+            "src/PATTERNS/filters/filters/PriceRangeSlider.tsx",
+            "src/PATTERNS/filters/filters/FilterBar.tsx",
+            "src/PATTERNS/filters/filters/SearchInput.tsx",
+            "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx",
+            "src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx",
+            "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
+            "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
+            "src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx",
+            "src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx",
+            "src/PATTERNS/lists/DataList/DataList.stories.tsx",
+            "src/PATTERNS/tables/table/TableLoadingState.tsx",
+            "src/PATTERNS/states/LoadingState/VenueCardSkeleton/VenueCardSkeleton.tsx",
+            "src/PATTERNS/states/LoadingState/EventCardSkeleton/EventCardSkeleton.tsx",
+            "src/PATTERNS/cards/cards/CardBase/CardBase.tsx",
+            "src/PATTERNS/cards/cards/CardBase/CardBase.types.ts",
+            "src/PATTERNS/filters/filters/SearchFilters.tsx",
+            "src/PATTERNS/filters/filters/FilterSelect.tsx",
+            "src/PATTERNS/menus/menus/NavigationMenu.tsx",
+            "src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts",
+            "src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts",
+            "src/PATTERNS/cards/cards/VenueCard/VenueCard.types.ts",
+            "src/PATTERNS/cards/cards/TicketCard/TicketCard.types.ts",
+            "src/PATTERNS/cards/cards/PromoCard/PromoCard.types.ts",
+            "src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts",
+            "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.types.ts",
+            "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts",
+            "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.types.ts",
+            "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts",
+            "src/PATTERNS/tables/table/TableRow.tsx",
+            "src/PATTERNS/tables/SimpleTable/Table.tsx",
+            "src/PATTERNS/tables/table/TableCell.tsx",
+            "src/PATTERNS/tables/table/TableHead.tsx",
+            "src/PATTERNS/tables/table/Table.tsx",
+            "src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx",
+            "src/PATTERNS/states/EmptyState/EmptyStateIcon.tsx",
+            "src/PATTERNS/states/EmptyState/EmptyState.types.ts",
+            "src/PATTERNS/states/EmptyState/EmptyState.tsx",
+            "src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx",
+            "src/PATTERNS/lists/DataList/DataListLabel.tsx",
+            "src/PATTERNS/lists/DataList/DataList.tsx",
+            "src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts",
+            "src/PATTERNS/tables/table/TableBody.tsx",
+            "src/PATTERNS/tables/table/TableHeader.tsx",
+            "src/PATTERNS/tables/table/TableExpandableContent.tsx",
+            "src/PATTERNS/tables/table/TableSortIcon.tsx",
+            "src/PATTERNS/tables/table/TableEmpty.tsx",
+            "src/PATTERNS/lists/DataList/DataListItem.tsx",
+            "src/PATTERNS/lists/DataList/DataListValue.tsx",
+            "src/PATTERNS/states/LoadingState/DomainSkeleton/Skeleton.tsx",
+            "src/PATTERNS/states/EmptyState/EmptyStateTitle.tsx",
+            "src/PATTERNS/states/EmptyState/EmptyStateAction.tsx",
+            "src/PATTERNS/states/EmptyState/EmptyStateDescription.tsx",
+            "src/PATTERNS/lists/DataList/DataList.types.ts"
+          ],
+          "pattern": "import { ... } from '@/PRIMITIVES/...' | '@/FOUNDATION/...' | '@/COMPOSITION/...'",
+          "recommendation": "Migrate to public API imports from '@tenerife.music/ui' or 'src/index.ts'"
+        }
+      ]
+    },
+    "S3": {
+      "name": "asChild / cloneElement bypass",
+      "status": "no_findings",
+      "count": 0,
+      "findings": []
+    },
+    "S4": {
+      "name": "Inline style / CSS-in-JS residue",
+      "status": "no_findings",
+      "count": 0,
+      "findings": []
+    },
+    "S5": {
+      "name": "Token bypass",
+      "status": "no_findings",
+      "count": 0,
+      "findings": []
+    },
+    "S6": {
+      "name": "Canon drift",
+      "status": "no_findings",
+      "count": 0,
+      "findings": []
+    }
+  },
+  "total_findings": 0,
+  "critical_findings": 0,
+  "summary": {
+    "vectors_checked": 6,
+    "vectors_with_findings": 0,
+    "vectors_clean": 6,
+    "overall_status": "all_clean"
+  },
+  "recommendations": [
+    {
+      "priority": "CRITICAL",
+      "action": "Fix S2 deep imports violation",
+      "description": "Migrate all deep imports in src/DOMAIN/** and src/PATTERNS/** to public API imports",
+      "estimated_impact": "High - affects 113+ files, requires systematic refactoring"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Enhance enforcement",
+      "description": "Add ESLint rule to detect deep imports in consumer code",
+      "estimated_impact": "Medium - prevents future violations"
+    }
+  ]
+}

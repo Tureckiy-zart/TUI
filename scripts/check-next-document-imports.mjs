@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 /**
  * Next.js App Router Compatibility Guard Script
  *
@@ -21,7 +21,7 @@ const GREEN = "\x1b[32m";
 const RESET = "\x1b[0m";
 
 const SOURCE_DIR = "src";
-const DEFAULT_EXCLUDES = ["node_modules", ".git", "dist", "docs-app"];
+const DEFAULT_EXCLUDES = ["node_modules", ".git", "dist"];
 
 function getSourceFiles(dir, extensions, excludeDirs) {
   const entries = readdirSync(dir, { withFileTypes: true });

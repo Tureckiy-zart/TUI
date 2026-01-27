@@ -2,11 +2,7 @@
 
 import { cva } from "class-variance-authority";
 
-import { ARTIST_TOKENS } from "@/FOUNDATION/tokens/components/artist";
-import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { ARTIST_TOKENS, DOMAIN_TOKENS, ICON_TOKENS, MOTION_TOKENS, TEXT_TOKENS } from "@/index";
 
 /**
  * ArtistCard Variants

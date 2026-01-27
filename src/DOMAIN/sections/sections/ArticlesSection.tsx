@@ -2,12 +2,7 @@
 
 import React from "react";
 
-import { Box } from "@/COMPOSITION/layout/Box";
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { Surface } from "@/COMPOSITION/layout/Surface";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Link } from "@/PRIMITIVES/Link";
-import { Text } from "@/PRIMITIVES/Text";
+import { Box, Heading, Link, Stack, Surface, Text } from "@/index";
 
 /**
  * Item interface for ArticlesSection component.

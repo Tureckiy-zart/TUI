@@ -2,9 +2,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/FOUNDATION/lib/utils";
-import { Input } from "@/PRIMITIVES/Input";
-import { Label } from "@/PRIMITIVES/Label";
+import { Box, Button, Input, Label } from "@/index";
 
 export interface PriceRange {
   min: number | null;
@@ -25,7 +23,6 @@ export interface PriceRangeSliderProps {
   clearLabel: string;
   minAriaLabel: string;
   maxAriaLabel: string;
-  className?: string;
 }
 
 export function PriceRangeSlider({
@@ -42,7 +39,6 @@ export function PriceRangeSlider({
   clearLabel,
   minAriaLabel,
   maxAriaLabel,
-  className,
 }: PriceRangeSliderProps) {
   if (typeof min !== "number" || isNaN(min)) {
     throw new Error('PriceRangeSlider: "min" prop is required and must be a number');
@@ -147,16 +143,19 @@ export function PriceRangeSlider({
   const maxSliderValue = value.max || max;
 
   return (
-    <div className={cn("space-y-md", className)}>
-      <div className="space-y-sm">
+    <Box>
+      <Box>
         <Label>{priceRangeLabel}</Label>
-        <div className="flex items-center space-x-sm">
-          <div className="flex-1">
+        <Box>
+          <Box>
             <Label htmlFor={minPriceId}>{minLabel}</Label>
-            <div className="relative [&>input]:pl-8">
-              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]">
+            <Box>
+              <Box
+                as="span"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]"
+              >
                 {currency}
-              </span>
+              </Box>
               <Input
                 id={minPriceId}
                 name={`min-price-${minPriceId}`}
@@ -168,14 +167,17 @@ export function PriceRangeSlider({
                 max={max}
                 step={step}
               />
-            </div>
-          </div>
-          <div className="flex-1">
+            </Box>
+          </Box>
+          <Box>
             <Label htmlFor={maxPriceId}>{maxLabel}</Label>
-            <div className="relative [&>input]:pl-8">
-              <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]">
+            <Box>
+              <Box
+                as="span"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-[hsl(var(--tm-text-muted))]"
+              >
                 {currency}
-              </span>
+              </Box>
               <Input
                 id={maxPriceId}
                 name={`max-price-${maxPriceId}`}
@@ -187,19 +189,19 @@ export function PriceRangeSlider({
                 max={max}
                 step={step}
               />
-            </div>
-          </div>
-        </div>
-      </div>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Slider */}
-      <div className="space-y-sm">
-        <div className="relative h-2">
+      <Box>
+        <Box>
           {/* Track background */}
-          <div className="absolute h-2 w-full rounded-full bg-[hsl(var(--tm-muted))]" />
+          <Box className="absolute h-2 w-full rounded-full bg-[hsl(var(--tm-muted))]" />
 
           {/* Active range */}
-          <div
+          <Box
             className="absolute h-2 rounded-full bg-[hsl(var(--tm-primary))]"
             style={{
               left: `${((minSliderValue - min) / (max - min)) * 100}%`,
@@ -208,7 +210,7 @@ export function PriceRangeSlider({
           />
 
           {/* Min slider */}
-          <input
+          <Input
             type="range"
             id={`${minPriceId}-slider`}
             name={`min-price-slider-${minPriceId}`}
@@ -220,13 +222,11 @@ export function PriceRangeSlider({
             onInput={(e) =>
               handleSliderChange("min", parseInt((e.target as HTMLInputElement).value))
             }
-            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[hsl(var(--tm-primary))] [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[hsl(var(--tm-primary))] [&::-webkit-slider-thumb]:shadow-sm"
-            style={{ zIndex: 2 }}
             aria-label={minAriaLabel}
           />
 
           {/* Max slider */}
-          <input
+          <Input
             type="range"
             id={`${maxPriceId}-slider`}
             name={`max-price-slider-${maxPriceId}`}
@@ -238,38 +238,32 @@ export function PriceRangeSlider({
             onInput={(e) =>
               handleSliderChange("max", parseInt((e.target as HTMLInputElement).value))
             }
-            className="absolute h-2 w-full cursor-pointer appearance-none bg-transparent [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[hsl(var(--tm-primary))] [&::-moz-range-thumb]:shadow-sm [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[hsl(var(--tm-primary))] [&::-webkit-slider-thumb]:shadow-sm"
-            style={{ zIndex: 3 }}
             aria-label={maxAriaLabel}
           />
-        </div>
-        <div className="flex justify-between text-xs text-[hsl(var(--tm-text-muted))]">
-          <span>
+        </Box>
+        <Box>
+          <Box as="span">
             {currency}
             {min}
-          </span>
-          <span>
+          </Box>
+          <Box as="span">
             {currency}
             {max}
-          </span>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-[hsl(var(--tm-text-muted))]">
+      <Box>
+        <Box as="span">
           {value.min !== null || value.max !== null
             ? `${currency}${value.min || min} - ${currency}${value.max || max}`
             : anyPriceLabel}
-        </span>
-        <button
-          type="button"
-          onClick={clearRange}
-          className="text-xs text-[hsl(var(--tm-text-muted))] hover:text-[hsl(var(--tm-text-primary))]"
-        >
+        </Box>
+        <Button type="button" variant="ghost" size="sm" onClick={clearRange}>
           {clearLabel}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 }
 

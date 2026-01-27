@@ -100,6 +100,8 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 **Status:** ✅ **CANONICAL** - Closed System v2 is finalized and locked (Phase F complete)
 
 - [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) - **Canonical index** - Single source of truth for Closed System v2 documentation
+- [architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) - **Why the system is closed** - System closure rationale, problem classes prevented, change control policy
+- [architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md](./architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md) - **DOM boundary** - Fixed DOM-boundary component list (canonical)
 - [architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md) - Phase A: Problem definition
 - [architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md) - Phase B: Architecture model and principles
 - [architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) - Phase F: Lock declaration (current phase status)

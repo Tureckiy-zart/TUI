@@ -18,7 +18,7 @@ This audit identifies and documents latent layout semantics debt (flow/Stack/Con
 - ✅ Nested layout responsibility boundaries
 
 **Out of Scope:**
-- ❌ `docs-app/**` — consumer code (audited separately in Phase G)
+- ❌ Consumer code — audited separately in Phase G
 - ❌ Foundation implementation (`src/COMPOSITION/layout/*.tsx` — locked)
 - ❌ COMPOSITION implementation (locked)
 - ❌ Extension implementation (locked)

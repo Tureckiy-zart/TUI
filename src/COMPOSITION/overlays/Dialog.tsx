@@ -226,10 +226,62 @@ export interface DialogTitleProps extends Omit<
 }
 
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ titleId, children, ...props }, ref) => {
+  (
+    {
+      titleId,
+      children,
+      role,
+      tabIndex,
+      title,
+      dir,
+      lang,
+      onClick,
+      onMouseDown,
+      onMouseUp,
+      onMouseEnter,
+      onMouseLeave,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    },
+    ref,
+  ) => {
     return (
       <DialogPrimitive.Title asChild>
-        <Heading ref={ref} as="h2" level={4} weight="semibold" id={titleId} {...props}>
+        <Heading
+          ref={ref}
+          as="h2"
+          level={4}
+          weight="semibold"
+          id={titleId}
+          role={role}
+          tabIndex={tabIndex}
+          title={title}
+          dir={dir}
+          lang={lang}
+          onClick={onClick}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-live={ariaLive}
+          aria-atomic={ariaAtomic}
+          aria-busy={ariaBusy}
+        >
           {children}
         </Heading>
       </DialogPrimitive.Title>

@@ -2,11 +2,7 @@
 
 import * as React from "react";
 
-import { Avatar } from "@/COMPOSITION/controls/Avatar";
-import { Card, CardBody } from "@/COMPOSITION/layout/Card";
-import { Stack } from "@/COMPOSITION/layout/Stack";
-import { Heading } from "@/PRIMITIVES/Heading";
-import { Text } from "@/PRIMITIVES/Text";
+import { Avatar, Card, CardBody, Heading, Stack, Text } from "@/index";
 
 /**
  * ProfileCard Size Variant
