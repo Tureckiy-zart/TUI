@@ -72,8 +72,8 @@ All three documents work together to ensure complete typography governance.
 
 **Tertiary Text Token:**
 - `tertiary` - Lowest emphasis text token for meta-only usage
-- Day mode: Light gray (`0 0% 65%`)
-- Night mode: Darker gray (`240 5% 50%`)
+- Day mode: Light gray (`0 0% 42%`) - adjusted for WCAG AA contrast (4.5:1) on all light surfaces
+- Night mode: Darker gray (`240 5% 53%`) - adjusted for WCAG AA contrast (4.5:1) on dark elevated surfaces
 - **Usage:** Meta text only (helper, placeholder, metadata)
 
 **Muted Text Token:**

@@ -428,7 +428,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx",
-          "line": 135,
+          "line": 130,
           "column": 18,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -436,7 +436,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx",
-          "line": 168,
+          "line": 163,
           "column": 14,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -444,7 +444,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx",
-          "line": 181,
+          "line": 176,
           "column": 18,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -588,7 +588,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 167,
+          "line": 162,
           "column": 18,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -596,7 +596,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 197,
+          "line": 192,
           "column": 16,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -604,7 +604,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 198,
+          "line": 193,
           "column": 18,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -612,7 +612,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 216,
+          "line": 206,
           "column": 16,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -620,7 +620,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 217,
+          "line": 207,
           "column": 18,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -628,7 +628,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 220,
+          "line": 210,
           "column": 22,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
@@ -636,7 +636,7 @@
         },
         {
           "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-          "line": 242,
+          "line": 227,
           "column": 22,
           "message": "Raw HTML tag 'div' should be replaced with Foundation component (Text)",
           "severity": "MAJOR",
