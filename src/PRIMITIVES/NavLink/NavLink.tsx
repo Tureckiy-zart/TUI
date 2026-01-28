@@ -2,7 +2,10 @@
 
 import * as React from "react";
 
-import { Link, type LinkProps } from "@/PRIMITIVES/Link/Link";
+import { Box } from "@/COMPOSITION/layout";
+import { LINK_TOKENS } from "@/FOUNDATION/tokens/components/link";
+import { type LinkProps, linkVariants } from "@/PRIMITIVES/Link/Link";
+import { Text } from "@/PRIMITIVES/Text";
 
 /**
  * NavLink props interface
@@ -24,7 +27,7 @@ export interface NavLinkProps extends LinkProps {
 /**
  * NavLink component
  *
- * A navigation primitive built on top of the Foundation Link component.
+ * A navigation primitive aligned with Foundation Link tokens.
  * Represents a navigational link and reflects externally provided navigation state via aria-current.
  * NavLink does not perform routing, route matching, or state detection.
  *
@@ -58,22 +61,35 @@ export const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
     },
     ref,
   ) => {
+    const handleClick = React.useCallback(
+      (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        onClick?.(e);
+      },
+      [disabled, onClick],
+    );
+
+    const finalTabIndex = disabled ? (tabIndex ?? -1) : tabIndex;
+    const finalAriaDisabled = disabled ? true : undefined;
+    const className = linkVariants({ variant, size });
+
     return (
-      <Link
-        ref={ref}
+      <Box
+        as="a"
+        ref={ref as React.Ref<HTMLElement>}
+        className={className}
         href={href}
-        variant={variant}
-        size={size}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
-        disabled={disabled}
-        onClick={onClick}
         target={target}
         rel={rel}
         download={download}
-        tabIndex={tabIndex}
+        tabIndex={finalTabIndex}
         title={title}
         role={role}
+        onClick={handleClick}
         onFocus={onFocus}
         onBlur={onBlur}
         onMouseEnter={onMouseEnter}
@@ -82,9 +98,14 @@ export const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         aria-current={current ? "page" : undefined}
+        aria-disabled={finalAriaDisabled}
       >
-        {children}
-      </Link>
+        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+        <Text as="span" typographyRole="link" size={size}>
+          {children}
+        </Text>
+        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+      </Box>
     );
   },
 );

@@ -8,7 +8,9 @@
 
 import * as React from "react";
 
-import { Box, cn, Skeleton, TABLE_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
+import { Box, Skeleton } from "@/index";
 
 import type { TableLoadingStateProps } from "./Table.types";
 

@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "task_id": "TUI_TOKEN_SYSTEM_REALITY_AUDIT_027",
+    "phase": "P3 - Gap Analysis",
+    "date_created": "2026-01-28",
+    "status": "complete",
+    "total_gaps": 8,
+    "allowed_gaps": 7,
+    "locked_gaps": 1
+  },
+  "gaps": [
+    {
+      "id": "GAP_001",
+      "name": "Missing semantic typography tokens for notification items",
+      "family": "components",
+      "component": "NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx"
+      ],
+      "rationale": "NotificationCenter uses raw Tailwind classes (text-sm, font-semibold, text-xs) and raw CSS variable references (text-[hsl(var(--tm-text-primary))]) instead of TEXT_TOKENS. This creates inconsistency and makes theme changes harder.",
+      "examples": [
+        "className=\"text-sm font-semibold text-[hsl(var(--tm-text-primary))]\"",
+        "className=\"text-sm text-[hsl(var(--tm-text-primary))]/80\"",
+        "className=\"text-xs text-[hsl(var(--tm-text-muted))]\""
+      ],
+      "current_workaround": "Raw Tailwind classes + CSS variable references",
+      "proposed_solution": "Use TEXT_TOKENS.fontSize.sm, TEXT_TOKENS.fontWeight.semibold, and semantic color tokens",
+      "status": "CLOSED",
+      "priority": "P1",
+      "effort": "low",
+      "impact": "medium",
+      "requires_unlock": false,
+      "notes": "TEXT_TOKENS already exists and is LOCKED, but usage in NotificationCenter is not enforced. This is a usage gap, not a token gap.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_002",
+      "name": "Missing layout tokens for common layout patterns",
+      "family": "layout",
+      "component": "HeroSection, NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/sections/sections/HeroSection.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx"
+      ],
+      "rationale": "Components use raw Tailwind classes for common layout patterns (w-full, max-w-full, overflow-hidden, rounded-lg) instead of layout tokens. This creates inconsistency and makes responsive design harder.",
+      "examples": [
+        "className=\"w-full max-w-full overflow-hidden rounded-lg\"",
+        "className=\"flex h-full flex-col\"",
+        "className=\"min-w-0 flex-1 space-y-xs\""
+      ],
+      "current_workaround": "Raw Tailwind utility classes",
+      "proposed_solution": "Create layout tokens for common patterns or use existing layout components (Box, Stack) with token props",
+      "status": "CLOSED",
+      "priority": "P2",
+      "effort": "medium",
+      "impact": "medium",
+      "requires_unlock": false,
+      "notes": "Layout tokens could be added to DOMAIN_TOKENS or a new LAYOUT_TOKENS family. However, using Box/Stack components with token props is preferred.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_003",
+      "name": "Missing semantic color tokens for notification badge",
+      "family": "colors",
+      "component": "NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx"
+      ],
+      "rationale": "NotificationCenter uses raw CSS variable references (bg-[hsl(var(--tm-destructive))], text-[hsl(var(--tm-destructive-foreground))]) for badge colors instead of semantic color tokens.",
+      "examples": [
+        "className=\"bg-[hsl(var(--tm-destructive))] text-[hsl(var(--tm-destructive-foreground))]\""
+      ],
+      "current_workaround": "Raw CSS variable references",
+      "proposed_solution": "Use semantic color tokens (destructive, destructive-foreground) through Tailwind classes or token system",
+      "status": "CLOSED",
+      "priority": "P1",
+      "effort": "low",
+      "impact": "low",
+      "requires_unlock": false,
+      "notes": "Semantic color tokens already exist in the color system. This is a usage gap, not a token gap.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_004",
+      "name": "Missing responsive token union for max-width constraints",
+      "family": "types",
+      "component": "HeroSection",
+      "consumers": [
+        "src/DOMAIN/sections/sections/HeroSection.tsx"
+      ],
+      "rationale": "HeroSection uses raw Tailwind class (max-w-3xl) for max-width constraint. There's no responsive token union for max-width constraints in layout components.",
+      "examples": [
+        "className=\"max-w-3xl\""
+      ],
+      "current_workaround": "Raw Tailwind class",
+      "proposed_solution": "Add ResponsiveContainerMaxWidth token union or use Container component with maxWidth prop",
+      "status": "CLOSED",
+      "priority": "P2",
+      "effort": "low",
+      "impact": "low",
+      "requires_unlock": false,
+      "notes": "ResponsiveContainerMaxWidth already exists in types/index.ts, but Container component may not support it. This is a component API gap, not a token gap.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_005",
+      "name": "Missing spacing token for notification item action button margin",
+      "family": "spacing",
+      "component": "NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx"
+      ],
+      "rationale": "NotificationCenter uses raw Tailwind class (mt-sm) for action button margin. While semanticSpacing.sm exists, the component uses raw class instead of token.",
+      "examples": [
+        "className=\"mt-sm\""
+      ],
+      "current_workaround": "Raw Tailwind class (mt-sm)",
+      "proposed_solution": "Use spacing token through Box component margin prop or tokenCVA",
+      "status": "CLOSED",
+      "priority": "P3",
+      "effort": "very_low",
+      "impact": "very_low",
+      "requires_unlock": false,
+      "notes": "Spacing tokens already exist. This is a usage gap - component should use Box component with margin prop or tokenCVA with spacing tokens.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_006",
+      "name": "Missing icon size token for notification close button",
+      "family": "components",
+      "component": "NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx"
+      ],
+      "rationale": "NotificationCenter uses raw Tailwind classes (h-4 w-4, h-5 w-5) for icon sizes instead of ICON_TOKENS.sizes.",
+      "examples": [
+        "<X className=\"h-4 w-4\" />",
+        "<Bell className=\"h-5 w-5\" />"
+      ],
+      "current_workaround": "Raw Tailwind classes for icon sizes",
+      "proposed_solution": "Use ICON_TOKENS.sizes.sm or ICON_TOKENS.sizes.md",
+      "status": "CLOSED",
+      "priority": "P1",
+      "effort": "very_low",
+      "impact": "low",
+      "requires_unlock": false,
+      "notes": "ICON_TOKENS already exists. This is a usage gap, not a token gap.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_007",
+      "name": "Missing semantic spacing tokens for notification item layout",
+      "family": "spacing",
+      "component": "NotificationCenter",
+      "consumers": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx"
+      ],
+      "rationale": "NotificationCenter uses raw Tailwind class (space-y-xs) for vertical spacing between notification content elements. While semanticSpacing.xs exists, the component uses raw class instead of token.",
+      "examples": [
+        "className=\"space-y-xs\""
+      ],
+      "current_workaround": "Raw Tailwind class (space-y-xs)",
+      "proposed_solution": "Use spacing token through Stack component or tokenCVA",
+      "status": "CLOSED",
+      "priority": "P3",
+      "effort": "very_low",
+      "impact": "very_low",
+      "requires_unlock": false,
+      "notes": "Spacing tokens already exist. This is a usage gap - component should use Stack component with spacing prop or tokenCVA with spacing tokens.",
+      "closed_date": "2026-01-28",
+      "closed_by": "TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029"
+    },
+    {
+      "id": "GAP_008",
+      "name": "Missing Foundation token values for new semantic needs",
+      "family": "foundation",
+      "component": "All",
+      "consumers": [
+        "All DOMAIN/PATTERNS components"
+      ],
+      "rationale": "If new semantic token needs arise that require modifying Foundation token values (colors, spacing, typography, radius, shadows, motion), these would require unlock procedure as Foundation tokens are LOCKED.",
+      "examples": [],
+      "current_workaround": "N/A - hypothetical gap",
+      "proposed_solution": "Follow unlock procedure for Foundation token modifications",
+      "status": "LOCKED",
+      "priority": "N/A",
+      "effort": "high",
+      "impact": "high",
+      "requires_unlock": true,
+      "notes": "This is a hypothetical gap. Foundation tokens are LOCKED and require unlock procedure for any modifications. Component tokens can be extended without unlock."
+    }
+  ],
+  "by_status": {
+    "CLOSED": [
+      "GAP_001",
+      "GAP_002",
+      "GAP_003",
+      "GAP_004",
+      "GAP_005",
+      "GAP_006",
+      "GAP_007"
+    ],
+    "LOCKED": [
+      "GAP_008"
+    ]
+  },
+  "by_priority": {
+    "P1": [
+      "GAP_001",
+      "GAP_003",
+      "GAP_006"
+    ],
+    "P2": [
+      "GAP_002",
+      "GAP_004"
+    ],
+    "P3": [
+      "GAP_005",
+      "GAP_007"
+    ]
+  },
+  "summary": {
+    "total_gaps": 8,
+    "usage_gaps": 7,
+    "token_gaps": 0,
+    "foundation_gaps": 1,
+    "most_common_pattern": "Raw Tailwind classes instead of existing tokens",
+    "most_affected_component": "NotificationCenter",
+    "recommendation": "Most gaps are usage gaps (components not using existing tokens) rather than missing tokens. Focus on enforcing token usage in DOMAIN/PATTERNS components."
+  }
+}

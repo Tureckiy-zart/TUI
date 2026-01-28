@@ -3,7 +3,7 @@
 **Project:** @tenerife.music/ui  
 **Version:** 1.0  
 **Date Created:** 2026-01-27  
-**Last Updated:** 2026-01-27  
+**Last Updated:** 2026-01-28 (Runtime Utilities Boundary Lock - TUNG-028)  
 **Status:** ✅ **CANONICAL**  
 **Authority:** HIGHEST  
 **Mutability:** IMMUTABLE_AFTER_MERGE  
@@ -254,6 +254,121 @@ Closed System v2 is **not** "just a component library." It is an **architectural
 
 ---
 
+## Runtime Hygiene Rules
+
+### Foundation Token Import Hygiene
+
+**Rule:** Inside the library (PATTERNS, COMPOSITION, PRIMITIVES, DOMAIN), Foundation component tokens MUST be imported directly from `@/FOUNDATION/tokens/components/**`, NOT from the public barrel (`@/index`).
+
+**Reason:** Direct token imports prevent runtime cycles and order-dependent initialization failures (e.g., `SIMPLETABLE_TOKENS.padding === undefined`). Importing tokens through the public barrel can create circular dependencies that cause partial initialization.
+
+**Scope:** This is a hygiene rule that applies to internal library code (DOMAIN, PATTERNS, COMPOSITION, PRIMITIVES). External consumer code should continue using the public API (`@/index` or `@tenerife.music/ui`).
+
+**Enforcement:** This rule is enforced via ESLint rule `no-token-imports-from-index` in the `consumer-import-guard` configuration block (`eslint.config.mjs`). The rule explicitly forbids importing Foundation component tokens (CARD_TOKENS, DOMAIN_TOKENS, TABLE_TOKENS, etc.) from `@/index` in DOMAIN/PATTERNS files and provides clear error messages directing developers to use the direct import path.
+
+**Token Import Classes:** The system distinguishes between two classes of tokens with different import requirements:
+
+- **Component Tokens (Class A):** Tokens located in `@/FOUNDATION/tokens/components/**` (e.g., CARD_TOKENS, DOMAIN_TOKENS, TABLE_TOKENS, TEXT_TOKENS, BUTTON_TOKENS, INPUT_TOKENS). These tokens MUST be imported directly from `@/FOUNDATION/tokens/components/**` and MUST NOT be imported from `@/index` to prevent runtime cycles.
+
+- **Foundation Tokens (Class B):** Tokens located in `@/FOUNDATION/tokens/**` outside the `components/**` directory (e.g., GRADIENT_TOKENS, colors, spacing, typography, radius, shadows, motion, opacity, states). These tokens MUST be imported from `@/index` and MUST NOT be deep-imported from `@/FOUNDATION/tokens/**` (except `components/**`).
+
+This class split ensures that each token class has exactly one valid import path in consumer code (DOMAIN/PATTERNS), preventing contradictory enforcement and eliminating edge-case oscillation for non-component tokens.
+
+**Task Reference:** TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026 (token import class split resolution)
+
+**Anti-Oscillation Protection:** The ESLint configuration includes explicit comments and rule enforcement to prevent Cursor and other auto-fix tools from rewriting correct token imports back to `@/index`. This prevents import oscillation where tools repeatedly change imports between `@/index` and `@/FOUNDATION/tokens/components/**`.
+
+**Task References:**
+- TUI_CSV2_FOUNDATION_TOKEN_IMPORT_HYGIENE_2 (original hygiene rule)
+- TUI_CSV2_IMPORT_OSCILLATION_ROOT_CAUSE_001 (enforcement and anti-oscillation fix)
+- TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026 (token import class split resolution)
+
+### Foundation Runtime Utilities
+
+**Definition:** Foundation Runtime Utilities are runtime helper functions used by both Foundation components and consumer code. Examples include `tokenCVA` (token-based class variance authority utility) and `cn` (class name utility).
+
+**Why utilities bypass @/index:**
+
+- `@/index` is public-only and must NOT export runtime utilities
+- Runtime utilities must be imported directly from `@/FOUNDATION/lib/*` to avoid runtime cycles
+- This maintains clear separation between public API and internal runtime utilities
+- Direct imports prevent import oscillation and order-dependent initialization failures
+
+**Relation to import oscillation:**
+
+- Import oscillation was caused by mutually exclusive ESLint rules allowing no valid import path for runtime utilities
+- Runtime utilities were exported from `@/index` while `no-restricted-imports` blocked imports from `@/FOUNDATION/lib/**`
+- This created a contradiction where no valid import path existed
+- TUNG-028 resolves this by removing runtime utilities from `@/index` and allowing direct imports from `@/FOUNDATION/lib/*`
+
+**Import rule:**
+
+- **Consumer code (DOMAIN/PATTERNS):** MUST import Foundation Runtime Utilities directly from `@/FOUNDATION/lib/*` (e.g., `@/FOUNDATION/lib/token-cva`, `@/FOUNDATION/lib/utils`). Imports from `@/index` are forbidden.
+- **Foundation internal code (PRIMITIVES/COMPOSITION):** Can import utilities from `@/FOUNDATION/lib/**` directly (same as consumer code).
+- **ESLint enforcement:** The `no-runtime-utils-from-index` rule in the `consumer-import-guard` configuration block explicitly forbids runtime utility imports from `@/index` in DOMAIN/PATTERNS files.
+
+**Enforcement:**
+
+This rule is enforced via ESLint `no-runtime-utils-from-index` in the `consumer-import-guard` configuration block (`eslint.config.mjs`). The rule explicitly forbids importing Foundation Runtime Utilities from `@/index` in DOMAIN/PATTERNS files and provides clear error messages directing developers to use the direct import path from `@/FOUNDATION/lib/*`.
+
+**Anti-Oscillation Protection:**
+
+The ESLint configuration includes explicit comments and rule enforcement to prevent Cursor and other auto-fix tools from rewriting correct utility imports back to `@/index`. This prevents import oscillation where tools repeatedly change imports between `@/index` and `@/FOUNDATION/lib/**`.
+
+**Task Reference:** TUNG-028 (Lock Index Is Public-Only - Import Invariant v2)
+
+### Clarification: Allowed Imports from `@/index`
+
+The `@/index` entrypoint is the **public UI API** of the system.
+
+The following imports from `@/index` are explicitly **ALLOWED** inside `src/DOMAIN/**` and `src/PATTERNS/**`:
+
+- UI components (e.g. `Box`, `Button`, `Text`, `Skeleton`)
+- Layout and composition components
+- Public types that do not create runtime dependencies
+
+The following imports from `@/index` are **FORBIDDEN**:
+
+- Runtime utilities (`tokenCVA`, `cn`, animation helpers)
+- Foundation internals
+- Any value that participates in runtime evaluation or token resolution
+
+This clarification exists to prevent **automated refactors** from incorrectly replacing valid UI imports and causing architectural drift.
+
+### Runtime Utilities Boundary (LOCKED)
+
+Runtime utilities are private Foundation details and are excluded
+from the public index.
+
+Enforced by:
+- ESLint: `no-runtime-utils-from-index`
+- Foundation Lock: Runtime Utilities Are Private (TUNG-028)
+
+**Reference:** See [FOUNDATION_LOCK.md](../FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+
+**Distinction from Foundation Tokens:**
+
+Foundation Runtime Utilities are distinct from Foundation Tokens:
+- **Runtime Utilities:** Must be imported from `@/FOUNDATION/lib/*` in consumer code (forbidden from `@/index`)
+- **Component Tokens:** Must be imported from `@/FOUNDATION/tokens/components/**` in consumer code (forbidden from `@/index`)
+- **Foundation Tokens:** Must be imported from `@/index` in consumer code (forbidden from `@/FOUNDATION/tokens/**` except `components/**`)
+
+This distinction ensures each class has exactly one valid import path in consumer code, preventing contradictory enforcement and eliminating oscillation.
+
+### Import Oscillation Prevention
+
+**Status:** ✅ **RESOLVED_AND_LOCKED**
+
+Import oscillation between `@/index` and `@/FOUNDATION/tokens/components/**` has been eliminated through explicit ESLint rule enforcement. The system is now protected against automatic rewriting of correct token imports by Cursor and other auto-fix tools.
+
+**Rationale:** This protection is fixed as a system invariant to prevent regression and ensure runtime stability. Without explicit enforcement, auto-fix tools would repeatedly rewrite imports between the two paths, causing uncertainty and potential runtime failures.
+
+**Enforcement Mechanism:** Custom ESLint rule `no-token-imports-from-index` explicitly forbids Foundation component token imports from `@/index` in DOMAIN/PATTERNS files, with clear error messages directing developers to use the correct import path. The rule is not auto-fixable, preventing tools from automatically "correcting" the intentional direct import pattern.
+
+**Resolution Report:** See [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](../../reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md) for complete analysis, root cause investigation, and resolution details.
+
+---
+
 ## Related Documents
 
 ### Canonical Architecture Documents
@@ -296,6 +411,6 @@ Closed System v2 is **not** "just a component library." It is an **architectural
 
 ---
 
-**Last Updated:** 2026-01-27  
+**Last Updated:** 2026-01-28 (Runtime Utilities Boundary Lock - TUNG-028)  
 **Canonical Status:** ✅ **LOCKED**  
 **Task ID:** TUI_CSV2_BLOCK_10_STOP_LINE_AND_CLOSURE

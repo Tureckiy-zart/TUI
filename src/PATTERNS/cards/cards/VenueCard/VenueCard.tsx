@@ -2,18 +2,11 @@
 
 import React from "react";
 
-import {
-  Box,
-  cn,
-  DOMAIN_TOKENS,
-  Heading,
-  Icon,
-  ICON_TOKENS,
-  Link,
-  resolveComponentAnimations,
-  Text,
-  TEXT_TOKENS,
-} from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
+import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
+import { Box, Heading, Icon, Link, resolveComponentAnimations, Text } from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,

@@ -2,7 +2,10 @@
 
 import React from "react";
 
-import { Box, cn, DATA_TOKENS, DOMAIN_TOKENS, Skeleton } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { DATA_TOKENS } from "@/FOUNDATION/tokens/components/data";
+import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
+import { Box, Skeleton } from "@/index";
 
 export interface EventCardSkeletonProps {
   className?: string;

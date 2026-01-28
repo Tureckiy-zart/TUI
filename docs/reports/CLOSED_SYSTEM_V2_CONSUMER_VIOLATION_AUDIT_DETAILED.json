@@ -1,3 +1,54 @@
 {
-  "findings": []
+  "findings": [
+    {
+      "violation_class": "V4_RAW_HTML_REPLACEMENT",
+      "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/EXTENSIONS/next/NextLinkAdapter.tsx",
+      "line": 125,
+      "column": 25,
+      "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+      "code_snippet": "          aria-current={ariaCurrent}\n          aria-disabled={finalAriaDisabled}\n        >\n          {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}\n          <Text as=\"span\" typographyRole=\"link\" size={size}>\n            {children}\n          </Text>",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V4_RAW_HTML_REPLACEMENT",
+      "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/EXTENSIONS/next/NextLinkAdapter.tsx",
+      "line": 129,
+      "column": 26,
+      "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+      "code_snippet": "          <Text as=\"span\" typographyRole=\"link\" size={size}>\n            {children}\n          </Text>\n          {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}\n        </Box>\n      </NextLink>\n    );",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V5_PROP_SMUGGLING",
+      "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/Field/Field.tsx",
+      "line": 104,
+      "column": 28,
+      "message": "Untyped prop spread 'props' into Foundation component 'Label'",
+      "code_snippet": "        aria-describedby={ariaDescribedBy}\n        aria-required={ariaRequired}\n        aria-invalid={ariaInvalid}\n        required={required}\n        {...props}\n      >\n        {children}",
+      "severity": "MAJOR",
+      "confidence": "MEDIUM"
+    },
+    {
+      "violation_class": "V4_RAW_HTML_REPLACEMENT",
+      "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/NavLink/NavLink.tsx",
+      "line": 103,
+      "column": 23,
+      "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+      "code_snippet": "        aria-current={current ? \"page\" : undefined}\n        aria-disabled={finalAriaDisabled}\n      >\n        {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}\n        <Text as=\"span\" typographyRole=\"link\" size={size}>\n          {children}\n        </Text>",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    },
+    {
+      "violation_class": "V4_RAW_HTML_REPLACEMENT",
+      "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/NavLink/NavLink.tsx",
+      "line": 107,
+      "column": 24,
+      "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+      "code_snippet": "        <Text as=\"span\" typographyRole=\"link\" size={size}>\n          {children}\n        </Text>\n        {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}\n      </Box>\n    );\n  },",
+      "severity": "MAJOR",
+      "confidence": "HIGH"
+    }
+  ]
 }

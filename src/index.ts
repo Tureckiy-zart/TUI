@@ -890,9 +890,11 @@ export {
 // ============================================================================
 // UTILITIES
 // ============================================================================
-// Utility functions for class merging and date formatting
+// Utility functions for date formatting and general utilities
+// Note: cn is a runtime utility and must NOT be exported from @/index.
+// Runtime utilities must be imported directly from @/FOUNDATION/lib/utils.
+// See TUNG-028: Lock Index Is Public-Only (Import Invariant v2)
 export {
-  cn,
   debounce,
   formatDate,
   formatDateTime,
@@ -909,8 +911,9 @@ export {
   getRadiusCSSVar,
 } from "./FOUNDATION/lib/responsive-props";
 
-// TokenCVA utility
-export { tokenCVA } from "./FOUNDATION/lib/token-cva";
+// Note: tokenCVA is a runtime utility and must NOT be exported from @/index.
+// Runtime utilities must be imported directly from @/FOUNDATION/lib/token-cva.
+// See TUNG-028: Lock Index Is Public-Only (Import Invariant v2)
 
 // Overlay utilities
 export { useFocusLock } from "./COMPOSITION/overlays/utils/FocusLock";

@@ -2,10 +2,10 @@
 
 import React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
 import {
   Button,
   type ButtonProps,
-  cn,
   Container,
   Grid,
   Heading,

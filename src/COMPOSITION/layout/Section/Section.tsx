@@ -58,10 +58,14 @@ import * as React from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
 
+import type { BoxElement } from "../Box";
 import type { ResponsiveSpacing } from "../layout.types";
 import { Stack, type StackProps } from "../Stack";
 
-export interface SectionProps extends Omit<StackProps, "py" | "spacing"> {
+export type SectionProps<E extends BoxElement = "section"> = Omit<
+  StackProps<E>,
+  "py" | "spacing"
+> & {
   /**
    * Vertical padding - token-based
    * Accepts spacing tokens (xs, sm, md, lg, xl, 2xl, etc.) or responsive object
@@ -77,22 +81,17 @@ export interface SectionProps extends Omit<StackProps, "py" | "spacing"> {
    * @example spacing={{ base: "sm", lg: "xl" }}
    */
   spacing?: ResponsiveSpacing;
-
-  /**
-   * Render as different HTML element
-   */
-  as?: keyof React.JSX.IntrinsicElements;
-}
+};
 
 /**
  * Section component - page/landing layout container
  */
-const Section = React.forwardRef<HTMLDivElement, SectionProps>(
-  ({ spaceY = "md", spacing, className, as, ...props }, ref) => {
+const SectionComponent = React.forwardRef<HTMLElement, SectionProps>(
+  ({ spaceY = "md", spacing, className, as = "section", ...props }, ref) => {
     return (
       <Stack
         ref={ref}
-        as={as ?? "section"}
+        as={as}
         py={spaceY}
         spacing={spacing}
         className={cn("w-full", className)}
@@ -101,6 +100,14 @@ const Section = React.forwardRef<HTMLDivElement, SectionProps>(
     );
   },
 );
+
+SectionComponent.displayName = "Section";
+
+const Section = SectionComponent as typeof SectionComponent & {
+  <E extends BoxElement = "section">(
+    props: SectionProps<E> & { ref?: React.Ref<HTMLElement> },
+  ): React.ReactElement;
+};
 
 Section.displayName = "Section";
 

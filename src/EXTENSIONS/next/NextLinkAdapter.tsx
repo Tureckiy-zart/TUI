@@ -3,7 +3,10 @@
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 import * as React from "react";
 
-import { Link, type LinkProps } from "@/PRIMITIVES/Link";
+import { Box } from "@/COMPOSITION/layout";
+import { LINK_TOKENS } from "@/FOUNDATION/tokens/components/link";
+import { type LinkProps, linkVariants } from "@/PRIMITIVES/Link";
+import { Text } from "@/PRIMITIVES/Text";
 
 export interface NextLinkAdapterProps extends Omit<LinkProps, "href"> {
   /**
@@ -23,8 +26,8 @@ export interface NextLinkAdapterProps extends Omit<LinkProps, "href"> {
 /**
  * NextLinkAdapter
  *
- * A compatibility adapter that bridges Next.js `next/link` with TenerifeUI `Link`.
- * This adapter allows Foundation Link (which is an <a>) to function as the child of NextLink.
+ * A compatibility adapter that bridges Next.js `next/link` with TenerifeUI link tokens.
+ * This adapter renders a single <a> element as the child of NextLink.
  * Next.js 13+ automatically handles <a> children without creating nested anchors.
  *
  * @example
@@ -71,6 +74,23 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
     // Convert Next.js href to string for Foundation Link
     const hrefString = typeof href === "string" ? href : href.pathname || String(href);
 
+    // Ensure aria-disabled is set when disabled={true}, even if not explicitly passed
+    const finalAriaDisabled = disabled ? true : ariaDisabled;
+    const finalTabIndex = disabled ? (tabIndex ?? -1) : tabIndex;
+    const className = linkVariants({ variant, size });
+
+    const handleClick = React.useCallback(
+      (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        onClick?.(e);
+      },
+      [disabled, onClick],
+    );
+
     return (
       <NextLink
         href={href}
@@ -80,21 +100,18 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
         shallow={shallow}
         locale={locale}
       >
-        <Link
-          ref={ref}
+        <Box
+          as="a"
+          ref={ref as React.Ref<HTMLElement>}
+          className={className}
           href={hrefString}
-          variant={variant}
-          size={size}
-          leftIcon={leftIcon}
-          rightIcon={rightIcon}
-          disabled={disabled}
-          onClick={onClick}
           target={target}
           rel={rel}
           download={download}
-          tabIndex={tabIndex}
+          tabIndex={finalTabIndex}
           title={title}
           role={role}
+          onClick={handleClick}
           onFocus={onFocus}
           onBlur={onBlur}
           onMouseEnter={onMouseEnter}
@@ -103,10 +120,14 @@ export const NextLinkAdapter = React.forwardRef<HTMLAnchorElement, NextLinkAdapt
           aria-labelledby={ariaLabelledBy}
           aria-describedby={ariaDescribedBy}
           aria-current={ariaCurrent}
-          aria-disabled={ariaDisabled}
+          aria-disabled={finalAriaDisabled}
         >
-          {children}
-        </Link>
+          {leftIcon && <span className={LINK_TOKENS.iconWrapper}>{leftIcon}</span>}
+          <Text as="span" typographyRole="link" size={size}>
+            {children}
+          </Text>
+          {rightIcon && <span className={LINK_TOKENS.iconWrapper}>{rightIcon}</span>}
+        </Box>
       </NextLink>
     );
   },

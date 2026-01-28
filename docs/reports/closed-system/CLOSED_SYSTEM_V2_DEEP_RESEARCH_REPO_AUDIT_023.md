@@ -342,6 +342,19 @@ See: [docs/architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md](../../architec
 - Any future changes require a new audit task (no ad-hoc modifications allowed)
 - System closure rationale: [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](../../architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md)
 
+### STOP LINE: Token Import Class Split (TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026)
+
+**Status:** ✅ **RESOLVED**
+
+The ESLint token import class split (task TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026) prevents contradictory guidance and removes oscillation edge-case for non-component tokens. The system now distinguishes between:
+
+- **Component Tokens:** Must be imported directly from `@/FOUNDATION/tokens/components/**` (forbidden from `@/index`)
+- **Foundation Tokens:** Must be imported from `@/index` (forbidden as deep-imports)
+
+This split ensures each token class has exactly one valid import path in consumer code, eliminating the oscillation edge-case where foundation tokens (e.g., GRADIENT_TOKENS) were incorrectly included in the component token forbidden list, causing contradictory ESLint enforcement.
+
+**Reference:** See [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md) for complete resolution details.
+
 ### References
 
 - Consumer audit summary: `docs/reports/CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json`

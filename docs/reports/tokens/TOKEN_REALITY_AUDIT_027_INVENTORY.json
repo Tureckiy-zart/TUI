@@ -1,0 +1,617 @@
+{
+  "metadata": {
+    "task_id": "TUI_TOKEN_SYSTEM_REALITY_AUDIT_027",
+    "phase": "P1 - Token Inventory",
+    "date_created": "2026-01-28",
+    "status": "complete",
+    "total_token_families": 10,
+    "total_component_tokens": 48,
+    "total_exports_from_index": 360
+  },
+  "families": {
+    "colors": {
+      "file": "src/FOUNDATION/tokens/colors.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "BaseColorTokens",
+          "ChartColors",
+          "ColorScale",
+          "ColorTokens",
+          "Mode",
+          "SemanticColors",
+          "SurfaceColors",
+          "TextColors"
+        ],
+        "constants": [
+          "accentColors",
+          "baseColors",
+          "chartColors",
+          "colorCSSVariables",
+          "cssVariableColorTokens",
+          "primaryColors",
+          "secondaryColors",
+          "semanticColors",
+          "surfaceColors",
+          "tailwindThemeColors",
+          "textColors"
+        ]
+      },
+      "token_structure": {
+        "primaryColors": "ColorScale (50-950)",
+        "accentColors": "ColorScale (50-950)",
+        "secondaryColors": "ColorScale (50-950)",
+        "surfaceColors": "Record<Mode, SurfaceColors>",
+        "semanticColors": "Record<Mode, SemanticColors>",
+        "textColors": "Record<Mode, TextColors>",
+        "baseColors": "Record<Mode, BaseColorTokens>",
+        "chartColors": "Record<Mode, ChartColors>",
+        "disabledColors": "Record<Mode, DisabledColors>"
+      }
+    },
+    "spacing": {
+      "file": "src/FOUNDATION/tokens/spacing.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "ComponentSpacing",
+          "ContainerSpacing",
+          "GridSpacing",
+          "SectionSpacing",
+          "SemanticSpacing",
+          "Spacing",
+          "StackSpacing"
+        ],
+        "constants": [
+          "layoutSpacing",
+          "semanticSpacing",
+          "spacing",
+          "spacingCSSVariables",
+          "tailwindSpacingConfig"
+        ]
+      },
+      "token_structure": {
+        "spacing": "Numeric scale (0-96) + px",
+        "semanticSpacing": "Named tokens (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, none)",
+        "layoutSpacing": {
+          "section": "Section spacing tokens",
+          "container": "Container spacing tokens",
+          "grid": "Grid spacing tokens",
+          "stack": "Stack spacing tokens",
+          "component": "Component spacing tokens"
+        }
+      }
+    },
+    "typography": {
+      "file": "src/FOUNDATION/tokens/typography.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "CanonicalFontSize",
+          "CanonicalFontWeight",
+          "CanonicalLetterSpacing",
+          "CanonicalLineHeight",
+          "CanonicalTextColor",
+          "FontFamily",
+          "FontSize",
+          "FontWeight",
+          "LetterSpacing",
+          "LineHeight",
+          "TextStyle"
+        ],
+        "constants": [
+          "fontFamily",
+          "fontSize",
+          "fontSizeWithMd",
+          "fontWeight",
+          "letterSpacing",
+          "lineHeight",
+          "tailwindTypographyConfig",
+          "textStyles",
+          "typographyCSSVariables"
+        ]
+      },
+      "token_structure": {
+        "fontFamily": "sans, satoshi, display, serif, mono",
+        "fontSize": "xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl (fluid clamp)",
+        "fontWeight": "normal, medium, semibold, bold",
+        "lineHeight": "tight, normal, loose",
+        "letterSpacing": "tighter, tight, normal, wide, wider, widest",
+        "textStyles": "Predefined text style combinations"
+      }
+    },
+    "radius": {
+      "file": "src/FOUNDATION/tokens/radius.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "BorderRadius",
+          "ComponentRadius"
+        ],
+        "constants": [
+          "borderRadius",
+          "componentRadius",
+          "radiusCSSVariables",
+          "tailwindRadiusConfig"
+        ]
+      },
+      "token_structure": {
+        "borderRadius": "none, xs, sm, DEFAULT/base, md, lg, xl, 2xl, 3xl, full",
+        "componentRadius": {
+          "button": "sm, md, lg, pill",
+          "card": "sm, md, lg, xl",
+          "input": "sm, md, lg",
+          "badge": "sm, md, lg, pill",
+          "avatar": "sm, md, lg, square",
+          "modal": "sm, md, lg, xl",
+          "tooltip": "sm, md",
+          "toast": "sm, md, lg",
+          "chip": "sm, md, lg, pill",
+          "image": "none, sm, md, lg, xl, full"
+        }
+      }
+    },
+    "shadows": {
+      "file": "src/FOUNDATION/tokens/shadows.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "ColoredShadow",
+          "ElevationShadow",
+          "FocusRing",
+          "GlowEffect"
+        ],
+        "constants": [
+          "accentColoredShadows",
+          "componentShadowMapping",
+          "elevationShadows",
+          "focusRings",
+          "glowEffects",
+          "primaryColoredShadows",
+          "shadowBase",
+          "shadowCSSVariables",
+          "shadowOpacity",
+          "tailwindShadowConfig"
+        ]
+      },
+      "token_structure": {
+        "elevationShadows": "none, xs, sm, md, lg, xl, 2xl",
+        "primaryColoredShadows": "xs, sm, md, lg, xl, 2xl",
+        "accentColoredShadows": "xs, sm, md, lg, xl, 2xl",
+        "glowEffects": "glow-primary, glow-primary-subtle, glow-primary-medium, glow-primary-strong, glow-accent, glow-accent-subtle, glow-accent-medium, glow-accent-strong",
+        "focusRings": "default, subtle, medium, strong"
+      }
+    },
+    "motion": {
+      "file": "src/FOUNDATION/tokens/motion.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "MotionCombinedType",
+          "MotionDuration",
+          "MotionEasing",
+          "MotionSlideDirection",
+          "MotionTransition"
+        ],
+        "constants": [
+          "motionCSSVariables",
+          "motionCombined",
+          "motionDurations",
+          "motionEasings",
+          "motionFade",
+          "motionReducedMotion",
+          "motionScale",
+          "motionSlide",
+          "motionTailwindConfig",
+          "motionTransitionProperty",
+          "motionTransitions"
+        ]
+      },
+      "token_structure": {
+        "motionDurations": "fast (250ms), normal (450ms), slow (650ms), reduced (0ms)",
+        "motionEasings": "soft, standard, emphasized",
+        "motionTransitions": "fast, normal, slow, soft, reduced",
+        "motionFade": "in, out",
+        "motionScale": "in, out",
+        "motionSlide": "up, down, left, right (each with in/out)"
+      }
+    },
+    "gradients": {
+      "file": "src/FOUNDATION/tokens/gradients.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "GradientBrand",
+          "GradientSurface",
+          "GradientOverlay",
+          "GradientText",
+          "GradientSemantic",
+          "GradientSkeleton",
+          "GradientGlass",
+          "GradientInteractive",
+          "GradientMesh",
+          "GradientRing"
+        ],
+        "constants": [
+          "GRADIENT_TOKENS"
+        ]
+      },
+      "token_structure": {
+        "GRADIENT_TOKENS": {
+          "brand": "primary, primaryVertical, primaryDiagonal, reversed, featured",
+          "surface": "elevated, muted",
+          "overlay": "dark, light, darkBottom, vignette",
+          "text": "brand, primary, aurora, muted",
+          "semantic": "success, warning, error, info",
+          "skeleton": "shimmer, pulse",
+          "glass": "light, dark, frost",
+          "interactive": "hover, active, focus",
+          "mesh": "aurora, sunset, neon",
+          "ring": "primary, muted, subtle"
+        }
+      }
+    },
+    "state-matrix": {
+      "file": "src/FOUNDATION/tokens/state-matrix.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "UIState",
+          "UIStateProperty",
+          "StateMatrix",
+          "ComponentStateContract"
+        ],
+        "constants": []
+      },
+      "token_structure": {
+        "UIState": "base, hover, active, focus, disabled, loading",
+        "UIStateProperty": "background, text, border, outline, shadow"
+      }
+    },
+    "opacity": {
+      "file": "src/FOUNDATION/tokens/opacity.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [],
+        "constants": []
+      },
+      "token_structure": {}
+    },
+    "types": {
+      "file": "src/FOUNDATION/tokens/types/index.ts",
+      "status": "LOCKED",
+      "exports": {
+        "types": [
+          "AlignOffsetToken",
+          "AnimationPresetToken",
+          "AspectRatioToken",
+          "ColorToken",
+          "ContainerMaxWidthToken",
+          "ContainerPaddingToken",
+          "DelayToken",
+          "FlexBasisToken",
+          "LayoutSpaceToken",
+          "ModalFooterAlignToken",
+          "ModalHeightToken",
+          "ModalSizeToken",
+          "ModalWidthToken",
+          "MotionDurationToken",
+          "MotionEasingToken",
+          "MotionToken",
+          "MotionTransitionToken",
+          "RadiusToken",
+          "ResponsiveAlignOffset",
+          "ResponsiveAnimationPreset",
+          "ResponsiveAspectRatio",
+          "ResponsiveColor",
+          "ResponsiveContainerMaxWidth",
+          "ResponsiveContainerPadding",
+          "ResponsiveDelay",
+          "ResponsiveFlexBasis",
+          "ResponsiveModalHeight",
+          "ResponsiveModalSize",
+          "ResponsiveModalWidth",
+          "ResponsiveMotion",
+          "ResponsiveRadius",
+          "ResponsiveSelectSize",
+          "ResponsiveSelectWidth",
+          "ResponsiveShadow",
+          "ResponsiveSideOffset",
+          "ResponsiveSpace",
+          "ResponsiveSurface",
+          "ResponsiveTextLineHeight",
+          "ResponsiveTextSize",
+          "ResponsiveTextWeight",
+          "SelectSizeToken",
+          "SelectStateToken",
+          "SelectVariantToken",
+          "SelectWidthToken",
+          "ShadowToken",
+          "SideOffsetToken",
+          "SpaceToken",
+          "SpacingToken",
+          "SurfaceToken",
+          "TextLetterSpacingToken",
+          "TextLineHeightToken",
+          "TextSizeToken",
+          "TextWeightToken"
+        ],
+        "constants": []
+      }
+    }
+  },
+  "component_tokens": {
+    "ACCORDION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/accordion.ts",
+      "status": "EXTENDABLE",
+      "exports": ["ACCORDION_TOKENS", "AccordionSizeToken", "AccordionVariantToken"]
+    },
+    "ALERT_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/alert.ts",
+      "status": "EXTENDABLE",
+      "exports": ["ALERT_TOKENS"]
+    },
+    "ARTIST_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/artist.ts",
+      "status": "EXTENDABLE",
+      "exports": ["ARTIST_TOKENS", "ArtistCardFooterBorder", "ArtistCardImageContainer", "ArtistCardImagePlaceholder", "ArtistCardImageSizing"]
+    },
+    "AVATAR_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/avatar.ts",
+      "status": "EXTENDABLE",
+      "exports": ["AVATAR_TOKENS", "AvatarTokenSize", "AvatarTokenShape", "AvatarTokenStatus"]
+    },
+    "BADGE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/badge.ts",
+      "status": "EXTENDABLE",
+      "exports": ["BADGE_TOKENS", "BadgeVariant"]
+    },
+    "BUTTON_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/button.ts",
+      "status": "LOCKED",
+      "exports": ["BUTTON_TOKENS", "ButtonFontSize", "ButtonHeight", "ButtonPaddingHorizontal", "ButtonPaddingVertical", "ButtonShadow"]
+    },
+    "CARD_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/card.ts",
+      "status": "EXTENDABLE",
+      "exports": ["CARD_TOKENS", "CardPadding", "CardRadius", "CardShadow", "CardSize", "CardSpacingVertical"]
+    },
+    "CHECKBOX_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/checkbox.ts",
+      "status": "LOCKED",
+      "exports": ["CHECKBOX_TOKENS", "CheckboxSize", "CheckboxState", "CheckboxVariant"]
+    },
+    "CHIP_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/chip.ts",
+      "status": "EXTENDABLE",
+      "exports": ["CHIP_TOKENS"]
+    },
+    "CODE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/code.ts",
+      "status": "LOCKED",
+      "exports": ["CODE_TOKENS"]
+    },
+    "CONTEXT_MENU_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/context-menu.ts",
+      "status": "EXTENDABLE",
+      "exports": ["CONTEXT_MENU_TOKENS"]
+    },
+    "DATA_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/data.ts",
+      "status": "EXTENDABLE",
+      "exports": ["DATA_TOKENS", "SkeletonAnimation", "SkeletonBackground", "SkeletonVariant"]
+    },
+    "DATA_LIST_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/data-list.ts",
+      "status": "EXTENDABLE",
+      "exports": ["DATA_LIST_TOKENS", "DataListLabelWidth", "DataListRowPadding"]
+    },
+    "DIVIDER_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/divider.ts",
+      "status": "EXTENDABLE",
+      "exports": ["DIVIDER_TOKENS", "DividerHeight", "DividerWidth"]
+    },
+    "DOMAIN_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/domain.ts",
+      "status": "EXTENDABLE",
+      "exports": ["DOMAIN_TOKENS", "DomainCardBadge", "DomainCardImage", "DomainCardLayout", "DomainCardMetadata", "DomainCardMotion", "DomainCardPriceCapacity", "DomainCardSkeleton", "DomainCardSkeletonContentWidth", "DomainCardSurface"]
+    },
+    "EMPTY_STATE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/empty-state.ts",
+      "status": "EXTENDABLE",
+      "exports": ["EMPTY_STATE_TOKENS", "EmptyStateAlignment", "EmptyStateIconSize"]
+    },
+    "FILE_UPLOAD_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/file-upload.ts",
+      "status": "EXTENDABLE",
+      "exports": ["FILE_UPLOAD_TOKENS", "FileUploadDropzoneGap", "FileUploadDropzoneHeight", "FileUploadDropzonePaddingHorizontal", "FileUploadDropzonePaddingVertical", "FileUploadDropzoneRadius", "FileUploadPreviewFontSize", "FileUploadThumbnailSize"]
+    },
+    "FORM_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/form.ts",
+      "status": "EXTENDABLE",
+      "exports": ["FORM_TOKENS", "FormFieldSpacing", "FormLabelSpacing"]
+    },
+    "ICON_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/icon.ts",
+      "status": "EXTENDABLE",
+      "exports": ["ICON_TOKENS", "IconColor", "IconSize", "IconStroke"]
+    },
+    "INPUT_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/input.ts",
+      "status": "LOCKED",
+      "exports": ["INPUT_TOKENS", "InputFontSize", "InputHeight", "InputPaddingHorizontal", "InputPaddingVertical", "InputRadius", "InputSize"]
+    },
+    "LINK_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/link.ts",
+      "status": "EXTENDABLE",
+      "exports": ["LINK_TOKENS", "LinkFontSize", "LinkHeight", "LinkPaddingHorizontal", "LinkPaddingVertical"]
+    },
+    "MENU_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/menu.ts",
+      "status": "EXTENDABLE",
+      "exports": ["MENU_TOKENS", "MenuContentMinWidth", "MenuContentPadding", "MenuContentRadius", "MenuContentShadow", "MenuIndicatorOffset", "MenuIndicatorSize", "MenuItemGap", "MenuItemHeight", "MenuItemPadding", "MenuItemRadius", "MenuLabelPadding", "MenuSeparatorMargin"]
+    },
+    "MODAL_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/modal.ts",
+      "status": "EXTENDABLE",
+      "exports": ["MODAL_TOKENS"]
+    },
+    "MOTION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/motion.ts",
+      "status": "EXTENDABLE",
+      "exports": ["MOTION_TOKENS", "MotionAnimation", "MotionDuration", "MotionEasing", "MotionTransition", "MotionTransitionPreset"]
+    },
+    "NAVIGATION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/navigation.ts",
+      "status": "EXTENDABLE",
+      "exports": ["NAVIGATION_TOKENS", "NavigationItemPadding", "NavigationListGap", "NavigationRadius", "NavigationShadow", "NavigationSize", "NavigationState"]
+    },
+    "NOTIFICATION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/notifications.ts",
+      "status": "EXTENDABLE",
+      "exports": ["NOTIFICATION_TOKENS", "NotificationPanelWidth", "NotificationVariant"]
+    },
+    "OVERLAY_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/overlay.ts",
+      "status": "EXTENDABLE",
+      "exports": ["OVERLAY_TOKENS", "OverlayBackdropVariant", "OverlayModalSize"]
+    },
+    "PAGINATION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/pagination.ts",
+      "status": "EXTENDABLE",
+      "exports": ["PAGINATION_TOKENS", "PaginationSize", "PaginationState"]
+    },
+    "PANEL_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/panel.ts",
+      "status": "EXTENDABLE",
+      "exports": ["PANEL_TOKENS", "PanelPadding", "PanelRadius", "PanelShadow", "PanelTone"]
+    },
+    "POPOVER_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/popover.ts",
+      "status": "EXTENDABLE",
+      "exports": ["POPOVER_TOKENS", "PopoverArrowOffset", "PopoverArrowSize", "PopoverContentPadding", "PopoverContentRadius", "PopoverContentShadow", "PopoverContentWidth"]
+    },
+    "PROGRESS_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/progress.ts",
+      "status": "EXTENDABLE",
+      "exports": ["PROGRESS_TOKENS", "ProgressHeight"]
+    },
+    "RADIO_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/radio.ts",
+      "status": "LOCKED",
+      "exports": ["RADIO_TOKENS", "RadioSize", "RadioState", "RadioVariant"]
+    },
+    "RANGESLIDER_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/rangeslider.ts",
+      "status": "EXTENDABLE",
+      "exports": ["RANGESLIDER_TOKENS"]
+    },
+    "SECTION_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/section.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SECTION_TOKENS", "SectionGap", "SectionPadding"]
+    },
+    "SELECT_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/select.ts",
+      "status": "LOCKED",
+      "exports": ["SELECT_TOKENS"]
+    },
+    "SEPARATOR_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/separator.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SEPARATOR_TOKENS"]
+    },
+    "SIMPLETABLE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/simple-table.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SIMPLETABLE_TOKENS", "SimpleTableSize"]
+    },
+    "SLIDER_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/slider.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SLIDER_TOKENS"]
+    },
+    "SPINNER_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/spinner.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SPINNER_TOKENS", "SpinnerLabelGapToken", "SpinnerSizeToken", "SpinnerToneToken"]
+    },
+    "STICKYBAR_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/stickybar.ts",
+      "status": "EXTENDABLE",
+      "exports": ["STICKYBAR_TOKENS", "StickyBarPosition", "StickyBarTone"]
+    },
+    "SURFACE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/surface.ts",
+      "status": "EXTENDABLE",
+      "exports": ["SURFACE_TOKENS", "SurfacePadding", "SurfaceRadius", "SurfaceShadow", "SurfaceVariant"]
+    },
+    "SWITCH_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/switch.ts",
+      "status": "LOCKED",
+      "exports": ["SWITCH_TOKENS", "SwitchSize", "SwitchState", "SwitchVariant"]
+    },
+    "TABLE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/table.ts",
+      "status": "EXTENDABLE",
+      "exports": ["TABLE_TOKENS", "TableCellPadding", "TableGap", "TableHeaderPadding", "TableRowHeight", "TableShadow"]
+    },
+    "TABS_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/tabs.ts",
+      "status": "EXTENDABLE",
+      "exports": ["TABS_TOKENS"]
+    },
+    "TEXT_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/text.ts",
+      "status": "LOCKED",
+      "exports": ["TEXT_TOKENS", "TextFontSize", "TextFontWeight", "TextLetterSpacing", "TextLineHeight"]
+    },
+    "TEXTAREA_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/textarea.ts",
+      "status": "LOCKED",
+      "exports": ["TEXTAREA_TOKENS", "TextareaFontSize", "TextareaPaddingHorizontal", "TextareaPaddingVertical", "TextareaRadius", "TextareaSize", "TextareaState", "TextareaVariant"]
+    },
+    "TIMELINE_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/timeline.ts",
+      "status": "EXTENDABLE",
+      "exports": ["TIMELINE_TOKENS"]
+    },
+    "TOAST_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/toast.ts",
+      "status": "EXTENDABLE",
+      "exports": ["TOAST_TOKENS", "ToastVariant"]
+    },
+    "TOOLTIP_TOKENS": {
+      "file": "src/FOUNDATION/tokens/components/tooltip.ts",
+      "status": "EXTENDABLE",
+      "exports": ["TOOLTIP_TOKENS", "TooltipContentRadius", "TooltipContentShadow"]
+    }
+  },
+  "exports": {
+    "from_index": {
+      "total_exports": 360,
+      "type_exports": 120,
+      "const_exports": 240,
+      "exported_from_components": 48,
+      "exported_from_foundation": 10
+    },
+    "dead_exports": [],
+    "duplicates": []
+  },
+  "notes": {
+    "locked_component_tokens": [
+      "BUTTON_TOKENS",
+      "CHECKBOX_TOKENS",
+      "CODE_TOKENS",
+      "INPUT_TOKENS",
+      "RADIO_TOKENS",
+      "SELECT_TOKENS",
+      "SWITCH_TOKENS",
+      "TEXT_TOKENS",
+      "TEXTAREA_TOKENS"
+    ],
+    "extendable_component_tokens": "All other component tokens (39 tokens) are extendable",
+    "foundation_tokens_all_locked": "All Foundation token families are LOCKED",
+    "token_union_types": "All token union types are in src/FOUNDATION/tokens/types/index.ts (54 types)"
+  }
+}

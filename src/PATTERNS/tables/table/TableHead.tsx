@@ -8,7 +8,8 @@
 
 import * as React from "react";
 
-import { cn, TABLE_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
 
 import { useTableContext } from "./Table";
 import { ALIGNMENT_CLASSES } from "./Table.constants";

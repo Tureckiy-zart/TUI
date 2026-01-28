@@ -106,7 +106,7 @@ import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { PANEL_TOKENS, type PanelTone } from "@/FOUNDATION/tokens/components/panel";
 
-import { Box, type BoxProps } from "../Box";
+import { Box, type BoxElement, type BoxProps } from "../Box";
 import type { ResponsiveRadius, ResponsiveSpacing } from "../layout.types";
 
 /**
@@ -146,7 +146,10 @@ const panelVariants = tokenCVA({
   },
 });
 
-export interface PanelProps extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p" | "px" | "py"> {
+export type PanelProps<E extends BoxElement = "div"> = Omit<
+  BoxProps<E>,
+  "bg" | "shadow" | "radius" | "p" | "px" | "py"
+> & {
   /**
    * Padding - token-based (sm, md, lg)
    * Overrides default tone padding
@@ -164,12 +167,12 @@ export interface PanelProps extends Omit<BoxProps, "bg" | "shadow" | "radius" | 
    * Determines background and border styling
    */
   tone?: PanelTone;
-}
+};
 
 /**
  * Panel component - lightweight structural surface container
  */
-const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
+const PanelComponent = React.forwardRef<HTMLElement, PanelProps>(
   ({ padding, radius, tone = "default", className, ...props }, ref) => {
     // Get tokens from tone for padding/radius defaults
     const toneTokens = PANEL_TOKENS.tone[tone];
@@ -190,6 +193,14 @@ const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
     );
   },
 );
+
+PanelComponent.displayName = "Panel";
+
+const Panel = PanelComponent as typeof PanelComponent & {
+  <E extends BoxElement = "div">(
+    props: PanelProps<E> & { ref?: React.Ref<HTMLElement> },
+  ): React.ReactElement;
+};
 
 Panel.displayName = "Panel";
 

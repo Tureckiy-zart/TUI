@@ -13,9 +13,9 @@
 
 import * as React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
 import {
   Box,
-  cn,
   Flex,
   getBaseValue,
   getRadiusCSSVar,

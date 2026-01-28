@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { cn } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
 
 import { type DateRange, DateRangePicker } from "./DateRangePicker";
 import { FilterSelect } from "./FilterSelect";

@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { Card, CardBody, cn, Heading, Text } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { Card, CardBody, Heading, Text } from "@/index";
 
 /**
  * Item interface for TrendingSection component.

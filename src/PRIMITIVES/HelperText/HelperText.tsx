@@ -97,6 +97,8 @@ const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
     {
       size = "sm",
       as = "p",
+      typographyRole = "meta",
+      color = "muted",
       children,
       id,
       title,
@@ -115,35 +117,42 @@ const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
       "aria-live": ariaLive,
       "aria-atomic": ariaAtomic,
       "aria-busy": ariaBusy,
+      ...textProps
     },
     ref,
   ) => {
     // tone prop removed - use typographyRole + color from TextProps instead
     // Default: typographyRole="meta" + color="muted" for muted helper text
+    // Allow override of typographyRole and color via props
+    const domProps = {
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+
     return (
       <Text
-        ref={ref}
-        size={size}
         as={as}
-        typographyRole="meta"
-        color="muted"
-        id={id}
-        title={title}
-        role={role}
-        dir={dir}
-        lang={lang}
-        tabIndex={tabIndex}
-        onClick={onClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        aria-live={ariaLive}
-        aria-atomic={ariaAtomic}
-        aria-busy={ariaBusy}
+        size={size}
+        typographyRole={typographyRole}
+        color={color}
+        ref={ref}
+        {...domProps}
+        {...textProps}
       >
         {children}
       </Text>

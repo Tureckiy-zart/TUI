@@ -533,29 +533,115 @@ export default [
     // ═══════════════════════════════════════════════════════════
     // Prevent deep imports in consumer code (DOMAIN, PATTERNS)
     // This is a post-closure safety net, not part of canonical enforcement
+    //
+    // TUNG-029: ALLOWED imports from @/index (LOCKED)
+    // @/index is the public UI API. The following imports from @/index are explicitly
+    // ALLOWED in DOMAIN/PATTERNS: UI components (Box, Button, Text, Skeleton),
+    // layout and composition components, public UI types that do not create runtime deps.
+    // These imports are canonical and valid; they MUST NOT be "normalized" to deep
+    // imports or removed. Do not refactor or replace them.
+    //
+    // ⚠️ CRITICAL ANTI-OSCILLATION RULE ⚠️
+    // Foundation component tokens (CARD_TOKENS, DOMAIN_TOKENS, TABLE_TOKENS, etc.)
+    // MUST be imported directly from @/FOUNDATION/tokens/components/**,
+    // NOT from @/index barrel export.
+    //
+    // REASON: Importing tokens via @/index creates runtime cycles and causes
+    // order-dependent initialization failures (e.g., SIMPLETABLE_TOKENS.padding === undefined).
+    // Direct imports from @/FOUNDATION/tokens/components/** prevent these cycles.
+    //
+    // ENFORCEMENT: The 'no-token-imports-from-index' rule explicitly forbids token imports
+    // from @/index in DOMAIN/PATTERNS files. This rule must NOT be auto-fixed by Cursor
+    // or other tools - the direct import path is intentional and required.
+    //
+    // CANONICAL REFERENCE:
+    // - CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md (Foundation Token Import Hygiene section)
+    // - Task: TUI_CSV2_FOUNDATION_TOKEN_IMPORT_HYGIENE_2
+    // - Task: TUI_CSV2_IMPORT_OSCILLATION_ROOT_CAUSE_001
+    //
+    // DO NOT attempt to "fix" token imports by changing them to @/index.
+    // DO NOT silence this rule with disable comments.
+    // The direct import path is the correct, canonical solution.
     name: "consumer-import-guard",
     files: ["src/DOMAIN/**/*.{ts,tsx}", "src/PATTERNS/**/*.{ts,tsx}"],
     ignores: ["**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
     rules: {
+      // Explicitly forbid Foundation component token imports from @/index
+      // This prevents import oscillation and enforces canonical import hygiene
+      "tenerife-ui-architecture/no-token-imports-from-index": "error",
+      // Explicitly forbid Foundation runtime utilities imports from @/index
+      // Runtime utilities must be imported directly from @/FOUNDATION/lib/* to avoid runtime cycles
+      // This enforces that @/index is public-only and runtime utilities bypass the barrel export
+      "tenerife-ui-architecture/no-runtime-utils-from-index": "error",
       "no-restricted-imports": [
         "error",
         {
           patterns: [
+            // Block FOUNDATION deep imports, but allow tokens/components
             {
               group: [
-                "@/FOUNDATION/**",
-                "@/PRIMITIVES/**",
-                "@/COMPOSITION/**",
-                "@/TOKENS/**",
-                "@/UTILS/**",
+                "@/FOUNDATION/tokens/types/**",
+                "@/FOUNDATION/tokens/index.ts",
+                "@/FOUNDATION/tokens/colors.ts",
+                "@/FOUNDATION/tokens/spacing.ts",
+                "@/FOUNDATION/tokens/typography.ts",
+                "@/FOUNDATION/tokens/radius.ts",
+                "@/FOUNDATION/tokens/shadows.ts",
+                "@/FOUNDATION/tokens/motion.ts",
+                "@/FOUNDATION/tokens/state-matrix.ts",
+                "@/FOUNDATION/tokens/states.ts",
+                "@/FOUNDATION/tokens/theme.ts",
+                "@/FOUNDATION/tokens/css-variables.ts",
+                "@/FOUNDATION/tokens/gradients.ts",
+                // Block extension-less and deep path variants for gradients
+                "@/FOUNDATION/tokens/gradients",
+                "@/FOUNDATION/tokens/gradients.*",
+                "@/FOUNDATION/tokens/**/gradients",
+                "@/FOUNDATION/tokens/**/gradients.*",
+                "@/FOUNDATION/tokens/opacity.ts",
+                "@/FOUNDATION/tokens/required-tokens.ts",
+                "@/FOUNDATION/**/index.ts",
               ],
               message:
-                "Deep imports are forbidden. Use public API via '@/index' or '@tenerife.music/ui'.",
+                "Deep imports from FOUNDATION are forbidden. '@/index' is ALLOWED for UI components, layout/composition, and public UI types; FORBIDDEN for runtime utilities (use @/FOUNDATION/lib/*) and component tokens (use @/FOUNDATION/tokens/components/**). Use '@/index' or '@tenerife.music/ui' for UI. Exception: component tokens from '@/FOUNDATION/tokens/components/**' only (see TUI_CSV2_FOUNDATION_TOKEN_IMPORT_HYGIENE_2).",
+            },
+            // ⚠️ TUNG-028: Index Is Public-Only (Import Invariant v2) ⚠️
+            // Foundation Runtime Utilities (tokenCVA, cn, etc.) MUST be imported
+            // directly from @/FOUNDATION/lib/*, NOT from @/index.
+            //
+            // REASON: @/index is public-only and must NOT export runtime utilities.
+            // Runtime utilities must bypass the barrel export to avoid runtime cycles
+            // and maintain clear separation between public API and internal runtime utilities.
+            //
+            // ENFORCEMENT: The 'no-runtime-utils-from-index' rule explicitly forbids runtime utility imports
+            // from @/index in DOMAIN/PATTERNS files. Runtime utilities must be imported directly
+            // from @/FOUNDATION/lib/* (e.g., @/FOUNDATION/lib/token-cva, @/FOUNDATION/lib/utils).
+            //
+            // CANONICAL REFERENCE:
+            // - CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md (Foundation Runtime Utilities section)
+            // - Task: TUNG-028: Lock Index Is Public-Only (Import Invariant v2)
+            //
+            // DO NOT attempt to "fix" utility imports by changing them to @/index.
+            // DO NOT silence this rule with disable comments.
+            // The direct import path from @/FOUNDATION/lib/* is the correct, canonical solution.
+            {
+              group: ["@/FOUNDATION/**/*.test.*", "@/FOUNDATION/**/*.spec.*"],
+              message: "Test files are internal-only and must not be imported.",
+            },
+            {
+              group: ["@/PRIMITIVES/**", "@/COMPOSITION/**", "@/TOKENS/**", "@/UTILS/**"],
+              message:
+                "Deep imports are forbidden. Use public API via '@/index' or '@tenerife.music/ui'. '@/index' is ALLOWED for UI components, layout/composition, and public UI types; FORBIDDEN for runtime utilities and component tokens.",
             },
           ],
         },
       ],
     },
+    // TUNG-029: Import rules auto-fix prohibition
+    // Import-related rules (no-restricted-imports, no-token-imports-from-index,
+    // no-runtime-utils-from-index) MUST NOT be auto-fixed for imports. Agents MUST
+    // STOP if classification (ALLOWED vs FORBIDDEN from @/index) is unclear. Do NOT
+    // perform bulk or speculative import rewrites.
   },
   // Prettier integration (disables conflicting ESLint rules)
   prettierConfig,

@@ -1,6 +1,8 @@
 "use client";
 
-import { Box, cn, Heading, ListItem, Text, TIMELINE_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { TIMELINE_TOKENS } from "@/FOUNDATION/tokens/components/timeline";
+import { Box, Heading, ListItem, Text } from "@/index";
 
 export interface TimelineItem {
   id: string;

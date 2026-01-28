@@ -1,8 +1,8 @@
 # ? Foundation Lock Status (Finalized)
 
-**Version:** 1.31  
+**Version:** 1.32  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Canon alignment with Foundation finalization)  
+**Last Updated:** 2026-01-28 (Runtime Utilities Lock - TUNG-028)  
 **Status:** ? **LOCKED (Foundation Closed)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -1395,6 +1395,36 @@ Any token system modifications require:
 **TUNG:** TUI_TOKENS_COLOR_021, TUI_TOKENS_COLOR_022, TUI_TOKENS_COLOR_023, TUI_TOKENS_A11Y_024  
 **Lock task:** TUI_TOKENS_LOCK_025  
 **Statement:** Color token calibration completed. All A11Y contrast checks pass without exceptions.
+
+---
+
+## 🔒 LOCK: Runtime Utilities Are Private (TUNG-028)
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Runtime utilities (`tokenCVA`, `cn`) import boundaries  
+**Task:** TUNG-028
+
+**Invariant**  
+Runtime utilities (`tokenCVA`, `cn`) are **private Foundation implementation details**.
+
+**Rules**
+- MUST NOT be imported from `@/index`
+- MUST NOT be exported via `@/index`
+- MUST be imported directly from:
+  - `@/FOUNDATION/lib/token-cva`
+  - `@/FOUNDATION/lib/utils`
+
+**Rationale**
+- Prevent SSR / test runtime cycles
+- Keep `@/index` as public API only
+- Avoid import oscillation and auto-rewrites
+
+**Enforcement**
+- ESLint rule: `no-runtime-utils-from-index`
+- Scope: `DOMAIN/**`, `PATTERNS/**`
+
+**Status**: LOCKED  
+**Introduced by**: TUNG-028
 
 ---
 

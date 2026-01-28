@@ -271,6 +271,123 @@ The Public API canon for Tenerife UI has been established and locked. `src/index
 
 ---
 
+## Closed System v2 — Post-Closure Stabilization Tasks
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Completion Date:** 2026-01-28
+
+### Summary
+
+Additional stabilization tasks completed after initial closure to resolve import oscillation issues, normalize token usage, and establish final architectural locks.
+
+### Completed Tasks
+
+#### TUI_CSV2_IMPORT_OSCILLATION_ROOT_CAUSE_001
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+
+- ✅ Resolved import oscillation between `@/index` and `@/FOUNDATION/tokens/components/**`
+- ✅ Created ESLint rule `no-token-imports-from-index` to enforce canonical import pattern
+- ✅ Added anti-oscillation protection in ESLint configuration
+- ✅ Eliminated runtime cycles and order-dependent initialization failures
+
+#### TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+
+- ✅ Resolved conflict between ESLint rules for token imports
+- ✅ Introduced clear class split: Component Tokens vs Foundation Tokens
+- ✅ Component Tokens: Must import from `@/FOUNDATION/tokens/components/**` (forbidden from `@/index`)
+- ✅ Foundation Tokens: Must import from `@/index` (forbidden as deep-imports)
+- ✅ Each class now has exactly one valid import path, eliminating oscillation
+
+#### TUNG-028: Runtime Utilities Are Private
+**Status:** ✅ **LOCKED**  
+**Date:** 2026-01-28  
+**Lock Document:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+
+- ✅ Runtime utilities (`tokenCVA`, `cn`) declared private Foundation implementation details
+- ✅ Removed runtime utilities from `@/index` exports
+- ✅ Created ESLint rule `no-runtime-utils-from-index` to enforce direct imports
+- ✅ Runtime utilities must be imported from `@/FOUNDATION/lib/*` (forbidden from `@/index`)
+- ✅ Locked in FOUNDATION_LOCK.md as architectural invariant
+- ✅ Clarified allowed imports from `@/index`: UI components (Box, Button, Text, Skeleton) are allowed in DOMAIN/PATTERNS, while runtime utilities are forbidden. This prevents automated refactors from incorrectly replacing valid UI imports.
+
+#### TUI_CSV2_FOUNDATION_RUNTIME_UTILITIES_ENFORCEMENT_027
+**Status:** ✅ **RESOLVED_AND_LOCKED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+
+- ✅ Eliminated import oscillation for Foundation Runtime Utilities
+- ✅ Canonized runtime utilities import pattern
+- ✅ Protected from deep imports in consumer code
+
+#### TOKEN_REALITY_AUDIT_027
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Reports:**
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
+- [TOKEN_REALITY_AUDIT_027_CANON_BINDING.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_CANON_BINDING.md)
+- [TOKEN_REALITY_AUDIT_027_QUALITY.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_QUALITY.md)
+
+- ✅ Comprehensive audit of token usage across codebase
+- ✅ Identified gaps in token usage (7 ALLOWED gaps documented)
+- ✅ Created inventory and usage reports
+- ✅ Established canonical binding for token system
+
+#### TUI_CSV2_FULL_TOKEN_SYSTEM_AUDIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+
+- ✅ Full token system audit completed
+- ✅ Verified token coverage and usage patterns
+- ✅ Documented token system state
+
+#### TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+
+- ✅ Normalized token usage in consumer files
+- ✅ Replaced raw utility classes with token props and Foundation API
+- ✅ Closed all 7 ALLOWED gaps from TOKEN_REALITY_AUDIT_027
+- ✅ Replaced raw Tailwind classes with Text, Heading, Box, Stack, Row, Container components
+- ✅ Ensured compliance with Typography Semantics Canon
+
+### New ESLint Rules
+
+- ✅ **`no-token-imports-from-index`** — Enforces direct imports for component tokens
+- ✅ **`no-runtime-utils-from-index`** — Enforces direct imports for runtime utilities
+
+### Key Results
+
+- ✅ **Import Oscillation:** Eliminated through explicit ESLint enforcement
+- ✅ **Token Import Classes:** Clear split established (Component Tokens vs Foundation Tokens)
+- ✅ **Runtime Utilities:** Locked as private Foundation details
+- ✅ **Token Usage:** Normalized across all consumer files
+- ✅ **Architectural Locks:** Finalized in FOUNDATION_LOCK.md
+
+### References
+
+**Architecture Documents:**
+- [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+- [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) — Public Index Boundary
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — Runtime Utilities Boundary
+
+**Audit Reports:**
+- [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+- [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+- [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+- [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+- [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
+
+---
+
 ## ⚠️ UI Foundation Unlock Status
 
 **Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  

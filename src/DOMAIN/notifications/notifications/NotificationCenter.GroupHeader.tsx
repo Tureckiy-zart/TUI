@@ -11,7 +11,10 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import * as React from "react";
 
-import { Button, cn, NOTIFICATION_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
+import { Button, Heading, Row } from "@/index";
 
 export interface NotificationCenterGroupHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -47,16 +50,16 @@ export const NotificationCenterGroupHeader = React.forwardRef<
     ref,
   ) => {
     return (
-      <div
+      <Row
         ref={ref}
-        className={cn(
-          "flex items-center justify-between",
-          NOTIFICATION_TOKENS.spacing.paddingVertical,
-          className,
-        )}
+        align="center"
+        justify="between"
+        className={cn(NOTIFICATION_TOKENS.spacing.paddingVertical, className)}
         {...props}
       >
-        <h3 className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">{label}</h3>
+        <Heading level={3} weight="semibold">
+          {label}
+        </Heading>
         {collapsible && onToggleCollapse && (
           <Button
             variant="ghost"
@@ -65,10 +68,14 @@ export const NotificationCenterGroupHeader = React.forwardRef<
             aria-label={collapsed ? "Expand group" : "Collapse group"}
             aria-expanded={!collapsed}
           >
-            {collapsed ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
+            {collapsed ? (
+              <ChevronDown className={ICON_TOKENS.sizes.md} />
+            ) : (
+              <ChevronUp className={ICON_TOKENS.sizes.md} />
+            )}
           </Button>
         )}
-      </div>
+      </Row>
     );
   },
 );

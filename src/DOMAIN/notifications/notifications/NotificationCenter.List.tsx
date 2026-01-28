@@ -10,7 +10,8 @@
 
 import * as React from "react";
 
-import { cn, List } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { List } from "@/index";
 
 export interface NotificationCenterListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**

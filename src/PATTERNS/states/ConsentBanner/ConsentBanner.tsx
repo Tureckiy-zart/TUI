@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { Box, Button, cn, Text } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { Box, Button, Text } from "@/index";
 
 export interface ConsentBannerProps {
   className?: string;

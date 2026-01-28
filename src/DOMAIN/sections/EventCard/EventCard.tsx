@@ -2,14 +2,14 @@
 
 import * as React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
+import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
+import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
 import { IconArrowRight, IconCalendar, IconLocation } from "@/icons";
 import {
   Box,
-  cn,
-  DOMAIN_TOKENS,
   Heading,
   Icon,
-  ICON_TOKENS,
   Link,
   LinkWithCustomVariant,
   resolveComponentAnimations,

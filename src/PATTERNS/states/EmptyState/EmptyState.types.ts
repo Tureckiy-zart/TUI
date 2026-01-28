@@ -6,7 +6,7 @@
 
 import type { ReactNode } from "react";
 
-import type { EmptyStateIconSize } from "@/index";
+import type { EmptyStateIconSize } from "@/FOUNDATION/tokens/components/empty-state";
 
 /**
  * EmptyState root component props

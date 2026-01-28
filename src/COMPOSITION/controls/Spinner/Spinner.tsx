@@ -865,9 +865,9 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           ref={(el) => {
             // Apply ref from parent
             if (typeof ref === "function") {
-              ref(el);
-            } else if (ref) {
-              (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+              ref(el as HTMLDivElement | null);
+            } else if (ref && "current" in ref) {
+              (ref as { current: HTMLDivElement | null }).current = el as HTMLDivElement | null;
             }
           }}
           role="status"
@@ -890,9 +890,9 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
         ref={(el) => {
           // Apply ref from parent
           if (typeof ref === "function") {
-            ref(el);
-          } else if (ref) {
-            (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+            ref(el as HTMLDivElement | null);
+          } else if (ref && "current" in ref) {
+            (ref as { current: HTMLDivElement | null }).current = el as HTMLDivElement | null;
           }
         }}
         role="status"

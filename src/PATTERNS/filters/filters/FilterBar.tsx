@@ -3,6 +3,7 @@
 import { Filter, X } from "lucide-react";
 import * as React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
 import { Badge, Box, Button, Inline } from "@/index";
 
 import { DateRangePicker } from "./DateRangePicker";
@@ -294,7 +295,8 @@ export function FilterBar({
 
 // Compact version for mobile
 export function FilterBarCompact(props: FilterBarProps) {
-  return <FilterBar {...props} />;
+  const { className, ...rest } = props;
+  return <FilterBar {...rest} className={cn("space-y-sm", className)} />;
 }
 
 // Re-export types for consumer convenience

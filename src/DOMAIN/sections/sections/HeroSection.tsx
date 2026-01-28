@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { Box, cn, Container, Grid, Heading, Row, Section, Stack, Text } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { Box, Container, Grid, Heading, Row, Section, Stack, Text } from "@/index";
 
 export interface HeroSectionProps {
   variant?: "full-width" | "split";
@@ -63,7 +64,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           >
             {/* Content Area */}
             <Stack spacing="md" direction="vertical">
-              <Stack spacing="md" direction="vertical" as="header">
+              <Stack as="header" spacing="md" direction="vertical">
                 <Heading level={1}>{title}</Heading>
                 {description && (
                   <Text size="lg" color="muted">
@@ -100,22 +101,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="text-center"
           >
             {/* Content Area */}
-            <Stack spacing="lg" direction="vertical" className="max-w-3xl">
-              <Stack spacing="md" direction="vertical" as="header">
-                <Heading level={1}>{title}</Heading>
-                {description && (
-                  <Text size="xl" color="muted">
-                    {description}
-                  </Text>
+            <Container maxWidth="3xl" center={false} padding="none">
+              <Stack spacing="lg" direction="vertical">
+                <Stack as="header" spacing="md" direction="vertical">
+                  <Heading level={1}>{title}</Heading>
+                  {description && (
+                    <Text size="xl" color="muted">
+                      {description}
+                    </Text>
+                  )}
+                </Stack>
+
+                {actions && (
+                  <Row wrap spacing="md" justify="center">
+                    {actions}
+                  </Row>
                 )}
               </Stack>
-
-              {actions && (
-                <Row wrap spacing="md" justify="center">
-                  {actions}
-                </Row>
-              )}
-            </Stack>
+            </Container>
 
             {/* Media Area */}
             {media && (

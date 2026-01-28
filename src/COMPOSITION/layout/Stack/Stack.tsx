@@ -55,10 +55,13 @@ import * as React from "react";
 import { getBaseValue, getSpacingCSSVar } from "@/FOUNDATION/lib/responsive-props";
 import { cn } from "@/FOUNDATION/lib/utils";
 
-import { Box, type BoxProps } from "../Box";
+import { Box, type BoxElement, type BoxProps } from "../Box";
 import type { ResponsiveSpacing, SpacingValue } from "../layout.types";
 
-export interface StackProps extends Omit<BoxProps, "display" | "flexDirection" | "gap"> {
+export type StackProps<E extends BoxElement = "div"> = Omit<
+  BoxProps<E>,
+  "display" | "flexDirection" | "gap"
+> & {
   /**
    * Stack direction - vertical (column) or horizontal (row)
    * @default "vertical"
@@ -80,7 +83,7 @@ export interface StackProps extends Omit<BoxProps, "display" | "flexDirection" |
    * Justify content
    */
   justify?: "start" | "end" | "center" | "between" | "around" | "evenly";
-}
+};
 
 /**
  * Convert align to Tailwind class
@@ -116,7 +119,7 @@ function justifyToClass(
 /**
  * Stack component - primary layout composition primitive
  */
-const Stack = React.forwardRef<HTMLDivElement, StackProps>(
+const StackComponent = React.forwardRef<HTMLElement, StackProps>(
   ({ direction = "vertical", spacing, align, justify, className, style, ...props }, ref) => {
     const gapBaseValue = getBaseValue<SpacingValue>(spacing);
 
@@ -141,6 +144,14 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
     return <Box ref={ref} className={flexClasses} style={finalStyle} {...props} />;
   },
 );
+
+StackComponent.displayName = "Stack";
+
+const Stack = StackComponent as typeof StackComponent & {
+  <E extends BoxElement = "div">(
+    props: StackProps<E> & { ref?: React.Ref<HTMLElement> },
+  ): React.ReactElement;
+};
 
 Stack.displayName = "Stack";
 

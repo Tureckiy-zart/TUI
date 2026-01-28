@@ -17,7 +17,8 @@
 
 import * as React from "react";
 
-import { cn, Stack } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { Stack } from "@/index";
 
 import type {
   CardBaseContentWrapperProps,

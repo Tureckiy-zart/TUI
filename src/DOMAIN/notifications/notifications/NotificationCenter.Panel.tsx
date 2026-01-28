@@ -31,15 +31,19 @@
 import { X } from "lucide-react";
 import * as React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
+import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
 import {
   Backdrop,
+  Box,
   Button,
-  cn,
-  NOTIFICATION_TOKENS,
+  Heading,
   Portal,
+  Row,
   Stack,
   Surface,
-  TEXT_TOKENS,
+  Text,
   useFocusLock,
   useSwipe,
 } from "@/index";
@@ -239,64 +243,73 @@ export const NotificationCenterPanel = React.forwardRef<
           <Surface
             ref={ref}
             variant="elevated"
-            className={cn("flex h-full flex-col", NOTIFICATION_TOKENS.panel.radius.default)}
+            className={cn("h-full", NOTIFICATION_TOKENS.panel.radius.default)}
           >
-            {/* Header */}
-            <div
-              className={cn(
-                // Header divider: border-b is acceptable here as divider semantics
-                // No generic border token exists in system (DIVIDER_TOKENS is for Divider component only)
-                "flex items-center justify-between border-b",
-                NOTIFICATION_TOKENS.panel.spacing.headerPadding,
-              )}
-            >
-              <h2 className={cn(TEXT_TOKENS.fontSize.lg, TEXT_TOKENS.fontWeight.semibold)}>
-                Notifications
-              </h2>
-              <div className={cn("flex items-center", NOTIFICATION_TOKENS.spacing.gap)}>
-                <NotificationCenterDismissAll />
-                <Button variant="ghost" iconOnly onClick={onClose} aria-label="Close notifications">
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+            <Stack direction="vertical" className="h-full">
+              {/* Header */}
+              <Row
+                align="center"
+                justify="between"
+                className={cn(
+                  // Header divider: border-b is acceptable here as divider semantics
+                  // No generic border token exists in system (DIVIDER_TOKENS is for Divider component only)
+                  "border-b",
+                  NOTIFICATION_TOKENS.panel.spacing.headerPadding,
+                )}
+              >
+                <Heading level={2} weight="semibold">
+                  Notifications
+                </Heading>
+                <Row align="center" spacing="sm">
+                  <NotificationCenterDismissAll />
+                  <Button
+                    variant="ghost"
+                    iconOnly
+                    onClick={onClose}
+                    aria-label="Close notifications"
+                  >
+                    <X className={ICON_TOKENS.sizes.md} />
+                  </Button>
+                </Row>
+              </Row>
 
-            {/* Scrollable content */}
-            <div
-              className={cn("flex-1 overflow-y-auto", NOTIFICATION_TOKENS.panel.spacing.padding)}
-            >
-              {Object.keys(grouped).length === 0 ? (
-                <div className="flex h-full items-center justify-center text-[hsl(var(--tm-text-muted))]">
-                  No notifications
-                </div>
-              ) : (
-                <Stack spacing="md">
-                  {Object.entries(grouped).map(([groupKey, groupNotifications]) => {
-                    const isCollapsed = collapsedGroups.has(groupKey);
-                    return (
-                      <div key={groupKey}>
-                        <NotificationCenterGroupHeader
-                          label={groupKey}
-                          collapsed={isCollapsed}
-                          onToggleCollapse={() => toggleGroup(groupKey)}
-                          collapsible={autoCollapse}
-                        />
-                        {!isCollapsed && (
-                          <NotificationCenterList aria-label={`${groupKey} notifications`}>
-                            {groupNotifications.map((notification) => (
-                              <NotificationCenterItem
-                                key={notification.id}
-                                notification={notification}
-                              />
-                            ))}
-                          </NotificationCenterList>
-                        )}
-                      </div>
-                    );
-                  })}
-                </Stack>
-              )}
-            </div>
+              {/* Scrollable content */}
+              <Box
+                className={cn("flex-1 overflow-y-auto", NOTIFICATION_TOKENS.panel.spacing.padding)}
+              >
+                {Object.keys(grouped).length === 0 ? (
+                  <Stack direction="vertical" align="center" justify="center" className="h-full">
+                    <Text color="muted">No notifications</Text>
+                  </Stack>
+                ) : (
+                  <Stack spacing="md">
+                    {Object.entries(grouped).map(([groupKey, groupNotifications]) => {
+                      const isCollapsed = collapsedGroups.has(groupKey);
+                      return (
+                        <Box key={groupKey}>
+                          <NotificationCenterGroupHeader
+                            label={groupKey}
+                            collapsed={isCollapsed}
+                            onToggleCollapse={() => toggleGroup(groupKey)}
+                            collapsible={autoCollapse}
+                          />
+                          {!isCollapsed && (
+                            <NotificationCenterList aria-label={`${groupKey} notifications`}>
+                              {groupNotifications.map((notification) => (
+                                <NotificationCenterItem
+                                  key={notification.id}
+                                  notification={notification}
+                                />
+                              ))}
+                            </NotificationCenterList>
+                          )}
+                        </Box>
+                      );
+                    })}
+                  </Stack>
+                )}
+              </Box>
+            </Stack>
           </Surface>
         </div>
       </Portal>

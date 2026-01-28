@@ -8,7 +8,8 @@
 
 import * as React from "react";
 
-import { cn, DATA_LIST_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { DATA_LIST_TOKENS } from "@/FOUNDATION/tokens/components/data-list";
 
 export interface DataListValueProps extends React.HTMLAttributes<HTMLElement> {
   /**

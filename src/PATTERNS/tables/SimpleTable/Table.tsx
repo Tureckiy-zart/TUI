@@ -21,7 +21,9 @@
 
 import React from "react";
 
-import { cn, SIMPLETABLE_TOKENS, tokenCVA } from "@/index";
+import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { SIMPLETABLE_TOKENS } from "@/FOUNDATION/tokens/components/simple-table";
 
 // ============================================================================
 // TYPES

@@ -11,7 +11,10 @@
 import { AlertCircle, Bell, CheckCircle2, FileText, Info, X, XCircle } from "lucide-react";
 import * as React from "react";
 
-import { Button, cn, ListItem, NOTIFICATION_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
+import { NOTIFICATION_TOKENS } from "@/FOUNDATION/tokens/components/notifications";
+import { Box, Button, ListItem, Stack, Text } from "@/index";
 
 import type { NotificationData, NotificationVariant } from "./NotificationCenter.types";
 
@@ -122,32 +125,32 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
         {...props}
       >
         {/* Icon */}
-        <div className="flex-shrink-0">
+        <Box className="flex-shrink-0">
           <Icon
             className={cn(
               NOTIFICATION_TOKENS.item.iconSize,
               "text-[hsl(var(--tm-text-primary))]/70",
             )}
           />
-        </div>
+        </Box>
 
         {/* Content */}
-        <div className="min-w-0 flex-1 space-y-xs">
+        <Stack spacing="xs" className="min-w-0 flex-1">
           {notification.title && (
-            <div id={titleId} className="text-sm font-semibold text-[hsl(var(--tm-text-primary))]">
+            <Text id={titleId} size="sm" weight="semibold" color="primary">
               {notification.title}
-            </div>
+            </Text>
           )}
           {notification.description && (
-            <div id={descriptionId} className="text-sm text-[hsl(var(--tm-text-primary))]/80">
+            <Text id={descriptionId} size="sm" color="secondary">
               {notification.description}
-            </div>
+            </Text>
           )}
-          <div className="text-xs text-[hsl(var(--tm-text-muted))]">
+          <Text size="xs" color="muted">
             {formatRelativeTime(notification.timestamp)}
-          </div>
+          </Text>
           {notification.action && (
-            <div className="mt-sm">
+            <Box mt="sm">
               <Button
                 variant="outline"
                 size="sm"
@@ -158,9 +161,9 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
               >
                 {notification.action.label}
               </Button>
-            </div>
+            </Box>
           )}
-        </div>
+        </Stack>
 
         {/* Close button */}
         {onDismiss && (
@@ -170,7 +173,7 @@ export const NotificationCenterItem = React.forwardRef<HTMLLIElement, Notificati
             onClick={handleDismiss}
             aria-label="Dismiss notification"
           >
-            <X className="h-4 w-4" />
+            <X className={ICON_TOKENS.sizes.md} />
           </Button>
         )}
       </ListItem>

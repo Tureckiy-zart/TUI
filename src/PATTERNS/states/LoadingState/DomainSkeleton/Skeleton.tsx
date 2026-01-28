@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { cn, DOMAIN_TOKENS } from "@/index";
+import { cn } from "@/FOUNDATION/lib/utils";
+import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 
 export interface DomainSkeletonProps {
   className?: string;

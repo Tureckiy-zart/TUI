@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "task_id": "TUI_TOKEN_SYSTEM_REALITY_AUDIT_027",
+    "phase": "P2 - Usage Analysis",
+    "date_created": "2026-01-28",
+    "status": "complete",
+    "total_token_imports": 189,
+    "total_consumer_files_using_tokens": 37
+  },
+  "token_usage": {
+    "BUTTON_TOKENS": {
+      "total_references": 52,
+      "foundation_usage": 47,
+      "consumer_usage": 4,
+      "composition_usage": 1,
+      "files": [
+        "src/PRIMITIVES/Button/Button.tsx",
+        "src/PRIMITIVES/IconButton/IconButton.tsx",
+        "src/COMPOSITION/overlays/Dialog.tsx"
+      ],
+      "category": "high_usage",
+      "usage_type": "direct_imports"
+    },
+    "INPUT_TOKENS": {
+      "total_references": 71,
+      "foundation_usage": 24,
+      "consumer_usage": 47,
+      "composition_usage": 0,
+      "files": [
+        "src/PRIMITIVES/Input/Input.tsx",
+        "src/COMPOSITION/forms/SearchInput.tsx"
+      ],
+      "category": "high_usage",
+      "usage_type": "direct_imports"
+    },
+    "TEXT_TOKENS": {
+      "total_references": 125,
+      "foundation_usage": 72,
+      "consumer_usage": 53,
+      "composition_usage": 0,
+      "files": [
+        "src/PRIMITIVES/Text/Text.tsx",
+        "src/PRIMITIVES/Heading/Heading.tsx",
+        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts",
+        "src/DOMAIN/sections/EventCard/EventCard.variants.ts"
+      ],
+      "category": "very_high_usage",
+      "usage_type": "direct_imports"
+    },
+    "ICON_TOKENS": {
+      "total_references": 86,
+      "foundation_usage": 28,
+      "consumer_usage": 57,
+      "composition_usage": 1,
+      "files": [
+        "src/PRIMITIVES/Icon/Icon.tsx",
+        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx",
+        "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
+        "src/DOMAIN/sections/EventCard/EventCard.tsx"
+      ],
+      "category": "high_usage",
+      "usage_type": "direct_imports"
+    },
+    "TABLE_TOKENS": {
+      "total_references": 69,
+      "foundation_usage": 13,
+      "consumer_usage": 54,
+      "composition_usage": 2,
+      "files": [
+        "src/PATTERNS/tables/table/Table.tsx",
+        "src/PATTERNS/tables/table/TableHeader.tsx",
+        "src/PATTERNS/tables/table/TableCell.tsx",
+        "src/PATTERNS/tables/table/TableRow.tsx"
+      ],
+      "category": "high_usage",
+      "usage_type": "direct_imports"
+    },
+    "DOMAIN_TOKENS": {
+      "total_references": 217,
+      "foundation_usage": 17,
+      "consumer_usage": 205,
+      "composition_usage": 0,
+      "files": [
+        "src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts",
+        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts",
+        "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
+        "src/DOMAIN/sections/EventCard/EventCard.variants.ts"
+      ],
+      "category": "very_high_usage",
+      "usage_type": "direct_imports"
+    },
+    "SIMPLETABLE_TOKENS": {
+      "total_references": 16,
+      "foundation_usage": 4,
+      "consumer_usage": 11,
+      "composition_usage": 1,
+      "files": [
+        "src/PATTERNS/tables/SimpleTable/Table.tsx"
+      ],
+      "category": "medium_usage",
+      "usage_type": "direct_imports"
+    },
+    "DATA_LIST_TOKENS": {
+      "total_references": 22,
+      "foundation_usage": 7,
+      "consumer_usage": 14,
+      "composition_usage": 1,
+      "files": [
+        "src/PATTERNS/lists/DataList/DataList.tsx",
+        "src/PATTERNS/lists/DataList/DataListLabel.tsx",
+        "src/PATTERNS/lists/DataList/DataListValue.tsx"
+      ],
+      "category": "medium_usage",
+      "usage_type": "direct_imports"
+    },
+    "EMPTY_STATE_TOKENS": {
+      "total_references": 24,
+      "foundation_usage": 6,
+      "consumer_usage": 17,
+      "composition_usage": 1,
+      "files": [
+        "src/PATTERNS/states/EmptyState/EmptyState.tsx",
+        "src/PATTERNS/states/EmptyState/EmptyStateTitle.tsx",
+        "src/PATTERNS/states/EmptyState/EmptyStateIcon.tsx",
+        "src/PATTERNS/states/EmptyState/EmptyStateDescription.tsx"
+      ],
+      "category": "medium_usage",
+      "usage_type": "direct_imports"
+    },
+    "TIMELINE_TOKENS": {
+      "total_references": 8,
+      "foundation_usage": 0,
+      "consumer_usage": 8,
+      "composition_usage": 0,
+      "files": [
+        "src/PATTERNS/lists/Timeline/Timeline.tsx"
+      ],
+      "category": "low_usage",
+      "usage_type": "direct_imports"
+    },
+    "NOTIFICATION_TOKENS": {
+      "total_references": 45,
+      "foundation_usage": 0,
+      "consumer_usage": 45,
+      "composition_usage": 0,
+      "files": [
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx"
+      ],
+      "category": "medium_usage",
+      "usage_type": "direct_imports"
+    }
+  },
+  "hot_tokens": [
+    {
+      "token": "DOMAIN_TOKENS",
+      "total_references": 217,
+      "consumer_usage": 205,
+      "reason": "Used extensively in card components (CardBase, CategoryCard, ArtistCard, EventCard)"
+    },
+    {
+      "token": "TEXT_TOKENS",
+      "total_references": 125,
+      "consumer_usage": 53,
+      "reason": "Used for typography styling across all components"
+    },
+    {
+      "token": "ICON_TOKENS",
+      "total_references": 86,
+      "consumer_usage": 57,
+      "reason": "Used for icon sizing in cards and other components"
+    },
+    {
+      "token": "TABLE_TOKENS",
+      "total_references": 69,
+      "consumer_usage": 54,
+      "reason": "Used in Table component and related patterns"
+    },
+    {
+      "token": "INPUT_TOKENS",
+      "total_references": 71,
+      "consumer_usage": 47,
+      "reason": "Used in Input component and SearchInput composition"
+    }
+  ],
+  "cold_tokens": [
+    {
+      "token": "TIMELINE_TOKENS",
+      "total_references": 8,
+      "consumer_usage": 8,
+      "reason": "Only used in Timeline component, limited usage"
+    },
+    {
+      "token": "SIMPLETABLE_TOKENS",
+      "total_references": 16,
+      "consumer_usage": 11,
+      "reason": "Only used in SimpleTable component"
+    }
+  ],
+  "raw_escapes": {
+    "total_detected": 50,
+    "examples": [
+      {
+        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "line": 138,
+        "pattern": "className=\"text-sm font-semibold text-[hsl(var(--tm-text-primary))]\"",
+        "issue": "Raw Tailwind classes instead of TEXT_TOKENS",
+        "suggested_token": "TEXT_TOKENS.fontSize.sm + TEXT_TOKENS.fontWeight.semibold"
+      },
+      {
+        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "line": 143,
+        "pattern": "className=\"text-sm text-[hsl(var(--tm-text-primary))]/80\"",
+        "issue": "Raw Tailwind classes with opacity instead of token",
+        "suggested_token": "TEXT_TOKENS.fontSize.sm + semantic color token"
+      },
+      {
+        "file": "src/DOMAIN/sections/sections/HeroSection.tsx",
+        "line": 90,
+        "pattern": "className=\"w-full max-w-full overflow-hidden rounded-lg\"",
+        "issue": "Raw Tailwind classes for layout/radius",
+        "suggested_token": "Layout tokens + radius tokens"
+      },
+      {
+        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx",
+        "line": 55,
+        "pattern": "className=\"relative\"",
+        "issue": "Raw Tailwind utility class",
+        "suggested_token": "Layout token or component token"
+      }
+    ],
+    "categories": {
+      "typography_escapes": 15,
+      "layout_escapes": 20,
+      "spacing_escapes": 10,
+      "color_escapes": 5
+    }
+  },
+  "usage_by_layer": {
+    "foundation": {
+      "total_imports": 189,
+      "internal_usage": 120,
+      "description": "Foundation components use tokens internally"
+    },
+    "primitives": {
+      "total_imports": 150,
+      "internal_usage": 150,
+      "description": "PRIMITIVES components use tokens for styling"
+    },
+    "composition": {
+      "total_imports": 25,
+      "internal_usage": 25,
+      "description": "COMPOSITION components use tokens for composition"
+    },
+    "domain": {
+      "total_imports": 180,
+      "consumer_usage": 180,
+      "description": "DOMAIN components use tokens as consumers"
+    },
+    "patterns": {
+      "total_imports": 200,
+      "consumer_usage": 200,
+      "description": "PATTERNS components use tokens as consumers"
+    }
+  },
+  "import_patterns": {
+    "direct_imports": {
+      "pattern": "from \"@/FOUNDATION/tokens/components/**\"",
+      "count": 189,
+      "description": "Direct imports from token component files (correct pattern for DOMAIN/PATTERNS)"
+    },
+    "public_api_imports": {
+      "pattern": "from \"@/index\" or \"@tenerife.music/ui\"",
+      "count": 0,
+      "description": "Public API imports (should not be used for tokens in DOMAIN/PATTERNS per hygiene rule)"
+    }
+  },
+  "findings": {
+    "high_usage_tokens": [
+      "DOMAIN_TOKENS (217 references, 205 consumer)",
+      "TEXT_TOKENS (125 references, 53 consumer)",
+      "ICON_TOKENS (86 references, 57 consumer)",
+      "TABLE_TOKENS (69 references, 54 consumer)",
+      "INPUT_TOKENS (71 references, 47 consumer)"
+    ],
+    "low_usage_tokens": [
+      "TIMELINE_TOKENS (8 references)",
+      "SIMPLETABLE_TOKENS (16 references)"
+    ],
+    "raw_escape_patterns": [
+      "Raw Tailwind typography classes (text-sm, font-semibold) instead of TEXT_TOKENS",
+      "Raw Tailwind layout classes (w-full, max-w-full) instead of layout tokens",
+      "Raw Tailwind spacing classes (space-y-xs) instead of spacing tokens",
+      "Raw CSS variable references (text-[hsl(var(--tm-text-primary))]) instead of semantic tokens"
+    ],
+    "token_coverage": {
+      "well_covered": [
+        "Card components (DOMAIN_TOKENS extensively used)",
+        "Table components (TABLE_TOKENS, SIMPLETABLE_TOKENS used)",
+        "Typography (TEXT_TOKENS used in most text components)",
+        "Icons (ICON_TOKENS used for sizing)"
+      ],
+      "gaps_detected": [
+        "NotificationCenter uses raw Tailwind classes for typography",
+        "HeroSection uses raw Tailwind classes for layout",
+        "Some components use raw CSS variable references instead of semantic tokens"
+      ]
+    }
+  }
+}

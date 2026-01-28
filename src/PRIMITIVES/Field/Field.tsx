@@ -75,6 +75,8 @@ const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
       "aria-describedby": ariaDescribedBy,
       "aria-required": ariaRequired,
       "aria-invalid": ariaInvalid,
+      required,
+      ...props
     },
     ref,
   ) => {
@@ -99,6 +101,8 @@ const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
         aria-describedby={ariaDescribedBy}
         aria-required={ariaRequired}
         aria-invalid={ariaInvalid}
+        required={required}
+        {...props}
       >
         {children}
       </Label>
@@ -174,36 +178,37 @@ const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps
       "aria-live": ariaLive,
       "aria-atomic": ariaAtomic,
       "aria-busy": ariaBusy,
+      ...textProps
     },
     ref,
   ) => {
+    const domProps = {
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+    const element = as ?? "span";
+
     return (
-      <Text
-        ref={ref}
-        as={as}
-        size="sm"
-        typographyRole="meta"
-        color="muted"
-        id={id}
-        title={title}
-        role={role}
-        dir={dir}
-        lang={lang}
-        tabIndex={tabIndex}
-        onClick={onClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        aria-live={ariaLive}
-        aria-atomic={ariaAtomic}
-        aria-busy={ariaBusy}
-      >
-        {children}
-      </Text>
+      <Box as={element} ref={ref as React.Ref<HTMLDivElement>} {...domProps}>
+        <Text as="span" size="sm" typographyRole="meta" color="muted" {...textProps}>
+          {children}
+        </Text>
+      </Box>
     );
   },
 );
@@ -249,39 +254,42 @@ const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
       "aria-live": ariaLive,
       "aria-atomic": ariaAtomic,
       "aria-busy": ariaBusy,
+      ...textProps
     },
     ref,
   ) => {
     // Wrapper span applies destructive color via className (Composition layer pattern).
     // Text component (Foundation) cannot accept className, so wrapper is used.
     // This pattern respects Foundation Enforcement while allowing Composition flexibility.
+    const domProps = {
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+    const element = as ?? "span";
+
     return (
       <Box
-        as="span"
+        as={element}
         ref={ref as React.Ref<HTMLDivElement>}
         className="text-[hsl(var(--tm-destructive))]"
+        {...domProps}
       >
-        <Text
-          as={as}
-          size="sm"
-          id={id}
-          title={title}
-          role={role}
-          dir={dir}
-          lang={lang}
-          tabIndex={tabIndex}
-          onClick={onClick}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onKeyDown={onKeyDown}
-          onKeyUp={onKeyUp}
-          aria-label={ariaLabel}
-          aria-labelledby={ariaLabelledBy}
-          aria-describedby={ariaDescribedBy}
-          aria-live={ariaLive}
-          aria-atomic={ariaAtomic}
-          aria-busy={ariaBusy}
-        >
+        <Text as="span" size="sm" {...textProps}>
           {children}
         </Text>
       </Box>
