@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Bell, Settings, User } from "lucide-react";
@@ -503,9 +503,14 @@ export const WithIcons: Story = {
 };
 
 /**
- * Variant and size matrix - all combinations side-by-side
+ * Matrix Story
+ *
+ * Variant × size matrix (underline | pill | segmented) × (sm | md | lg).
+ * Required per VARIANTS_SIZE_CANON for components with both size and variant props.
+ *
+ * @canonical VARIANTS_SIZE_CANON - Matrix story (REQUIRED when component has both size and variant)
  */
-export const VariantSizeMatrix: Story = {
+export const Matrix: Story = {
   render: () => (
     <div className="flex flex-col gap-xl">
       <div>
@@ -646,7 +651,7 @@ export const VariantSizeMatrix: Story = {
     docs: {
       description: {
         story:
-          "Complete variant and size matrix showing all combinations (underline/pill/segmented - sm/md/lg).",
+          "Matrix of all variant × size combinations (underline, pill, segmented) × (sm, md, lg). Reference: VARIANTS_SIZE_CANON.md.",
       },
     },
   },
