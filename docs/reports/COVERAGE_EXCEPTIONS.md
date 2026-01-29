@@ -12,58 +12,108 @@ This document formally locks areas where full test coverage is architecturally m
 
 ### 1. Pure Token Definition Files
 
-**Scope:** `src/FOUNDATION/tokens/**`
+**Scope:** Pure token constant definitions under `src/FOUNDATION/tokens/` (see Files list below)
 
 **Rationale:**
+
 - These files contain pure token definitions (objects, constants, type definitions)
 - No runtime logic or behavior to test
 - Token values are validated through TypeScript types and runtime smoke tests
 - Full behavioral testing would require visual regression testing, which is out of scope
 
 **Coverage Strategy:**
+
 - Execution-only import coverage is sufficient
 - Importing these files in tests verifies they can be loaded without errors
 - No behavioral assertions required
 
 **Files:**
-- `src/FOUNDATION/tokens/**/*.ts` (all token definition files)
-- Token component files (e.g., `button.ts`, `input.ts`, etc.)
+
+- `src/FOUNDATION/tokens/colors.ts`
+- `src/FOUNDATION/tokens/spacing.ts`
+- `src/FOUNDATION/tokens/opacity.ts`
+- `src/FOUNDATION/tokens/motion.ts`
+- `src/FOUNDATION/tokens/radius.ts`
+- `src/FOUNDATION/tokens/shadows.ts`
+- `src/FOUNDATION/tokens/gradients.ts`
+- `src/FOUNDATION/tokens/theme.ts`
+- `src/FOUNDATION/tokens/types/index.ts`
+- `src/FOUNDATION/tokens/components/**/*.ts`
+
+**Explicitly not included (runtime logic or tooling):**
+
+- `src/FOUNDATION/tokens/required-tokens.ts`
+- `src/FOUNDATION/tokens/css-variables.ts`
+- `src/FOUNDATION/tokens/state-matrix.ts`
+- `src/FOUNDATION/tokens/states.ts`
+- `src/FOUNDATION/tokens/typography.ts`
+- `src/FOUNDATION/tokens/index.ts`
+- `src/FOUNDATION/tokens/GradientTokens.stories.tsx`
 
 ### 2. Static Theme Exports
 
-**Scope:** `src/themes/*.ts`
+**Scope:** Static theme-only files in `src/themes/` (see Files list below)
 
 **Rationale:**
+
 - These files export static theme configuration objects
 - No runtime logic or behavior to test
 - Theme structure is validated through schema validation (tested in Foundation runtime smoke tests)
 - Theme values are validated through TypeScript types
 
 **Coverage Strategy:**
+
 - Execution-only import coverage is sufficient
 - Importing these files in tests verifies they can be loaded without errors
 - No behavioral assertions required
 
 **Files:**
+
 - `src/themes/default.ts`
 - `src/themes/dark.ts`
 - `src/themes/brand.ts`
 - `src/themes/minimal.ts`
 - `src/themes/neon.ts`
-- Other static theme files
+- `src/themes/--help.ts`
+
+**Explicitly not included (logic or wiring):**
+
+- `src/themes/brand_engine.ts`
+- `src/themes/registry.ts`
+- `src/themes/index.ts`
+- `src/themes/types.ts`
 
 ### 3. Type-Only Exports
 
 **Scope:** All `export type` statements
 
 **Rationale:**
+
 - TypeScript types are compile-time only
 - No runtime behavior to test
 - Type correctness is verified through TypeScript compilation
 
 **Coverage Strategy:**
+
 - No coverage required (types are erased at runtime)
 - Type correctness is verified through `tsc --noEmit`
+
+### 4. Barrel Export Modules (Index Files)
+
+**Scope:** `src/**/index.ts` and `src/**/*.index.ts`
+
+**Rationale:**
+
+- These files are pure re-export barrels (public API wiring), not behavior
+- The execution contract is: “import does not crash”
+- With v8 coverage, re-export-only ESM modules are frequently reported as 0% (no executable statements),
+  which makes numeric thresholds impossible without adding artificial runtime code (forbidden by policy)
+
+**Coverage Strategy:**
+
+- Excluded from numeric coverage thresholds
+- Verified via execution-only import tests:
+  - `src/__tests__/index-public-api-execution.test.ts`
 
 ## Coverage Requirements
 
