@@ -8,8 +8,8 @@ import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
-import { FilterSelect } from "@/PATTERNS/filters/FilterSelect";
 import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/DateRangePicker";
+import { FilterSelect } from "@/PATTERNS/filters/FilterSelect";
 import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/PriceRangeSlider";
 import { SearchFilters } from "@/PATTERNS/filters/SearchFilters";
 import {
