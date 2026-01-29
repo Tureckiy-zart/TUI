@@ -17,9 +17,9 @@ Phase J.2 successfully normalized token usage in consumer files by replacing raw
 ### J2_01: Replace Raw Utility Styling with Existing Tokens
 
 **Files Modified:**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.Item.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.Trigger.tsx`
 
 **Changes:**
 - Replaced raw Tailwind typography classes (`text-sm`, `font-semibold`, `text-xs`) with Text component using size and weight props
@@ -31,8 +31,8 @@ Phase J.2 successfully normalized token usage in consumer files by replacing raw
 ### J2_02: Normalize Typography Token Usage
 
 **Files Modified:**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.Item.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx`
 
 **Changes:**
 - Replaced all raw typography classes with Text component for semantic typography
@@ -42,8 +42,8 @@ Phase J.2 successfully normalized token usage in consumer files by replacing raw
 ### J2_03: Remove Residual Utility-Based Layout Patterns
 
 **Files Modified:**
-- `src/DOMAIN/sections/sections/HeroSection.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+- `src/DOMAIN/sections/HeroSection.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
 
 **Changes:**
 - Replaced `max-w-3xl` with Container component using maxWidth="3xl" prop

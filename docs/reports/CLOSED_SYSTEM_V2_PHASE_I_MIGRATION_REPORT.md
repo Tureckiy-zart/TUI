@@ -196,27 +196,27 @@ Phase I migration successfully migrated all product screens in `src/DOMAIN/` fro
 ## Files Modified
 
 ### Forms (2 files)
-- `src/DOMAIN/auth/auth/LoginForm.tsx`
-- `src/DOMAIN/auth/auth/RegisterForm.tsx`
+- `src/DOMAIN/auth/LoginForm.tsx`
+- `src/DOMAIN/auth/RegisterForm.tsx`
 
 ### Sections (4 files)
-- `src/DOMAIN/sections/sections/HeroSection.tsx`
-- `src/DOMAIN/sections/sections/FeatureSection.tsx`
-- `src/DOMAIN/sections/sections/CTASection.tsx`
-- `src/DOMAIN/sections/sections/ArticlesSection.tsx`
+- `src/DOMAIN/sections/HeroSection.tsx`
+- `src/DOMAIN/sections/FeatureSection.tsx`
+- `src/DOMAIN/sections/CTASection.tsx`
+- `src/DOMAIN/sections/ArticlesSection.tsx`
 
 ### Cards (1 file)
-- `src/DOMAIN/sections/EventCard/EventCard.tsx`
+- `src/PATTERNS/cards/EventCard/EventCard.tsx`
 
 ### Complex Components (2 files)
 - `src/DOMAIN/section-builder/SectionBuilder.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.DismissAll.tsx`
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.DismissAll.tsx`
+- `src/DOMAIN/notifications/NotificationCenter.Trigger.tsx`
 
 ### Test Files (3 files)
-- `src/DOMAIN/sections/sections/FeatureSection.test.tsx`
-- `src/DOMAIN/sections/sections/HeroSection.test.tsx`
-- `src/DOMAIN/sections/sections/CTASection.test.tsx`
+- `src/DOMAIN/sections/FeatureSection.test.tsx`
+- `src/DOMAIN/sections/HeroSection.test.tsx`
+- `src/DOMAIN/sections/CTASection.test.tsx`
 
 ---
 

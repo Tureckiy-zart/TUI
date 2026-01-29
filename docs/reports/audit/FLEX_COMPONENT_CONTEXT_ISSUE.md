@@ -69,10 +69,10 @@ src/index.ts (line 503)
 2. `ButtonGroupContext` - `src/COMPOSITION/actions/ButtonGroup/ButtonGroup.tsx`
 3. `ComboboxContext` - `src/COMPOSITION/overlays/Combobox/Combobox.tsx`
 4. `TableContext` - `src/PATTERNS/tables/table/Table.tsx`
-5. `HoverCardContext` - `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx`
+5. `HoverCardContext` - `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx`
 6. `DataListContext` - `src/PATTERNS/lists/DataList/DataList.tsx`
 7. `ThemeContext` - `src/FOUNDATION/theme/ThemeProvider.tsx` ⚠️ **Top-level export**
-8. `NotificationContext` - `src/DOMAIN/notifications/notifications/NotificationCenter.Provider.tsx`
+8. `NotificationContext` - `src/DOMAIN/notifications/NotificationCenter.Provider.tsx`
 9. `SegmentedControlContext` - `src/COMPOSITION/navigation/segmented-control/SegmentedControl.tsx`
 10. `RadioGroupContext` - `src/PRIMITIVES/Radio/RadioGroup.tsx`
 11. `ModalContext` - `src/COMPOSITION/overlays/ModalProvider/ModalProvider.tsx`

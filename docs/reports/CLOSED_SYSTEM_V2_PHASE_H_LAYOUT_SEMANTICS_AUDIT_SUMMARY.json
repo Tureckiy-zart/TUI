@@ -68,12 +68,12 @@
       "count": 9,
       "files": [
         "src/DOMAIN/section-builder/SectionBuilder.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
-        "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
-        "src/DOMAIN/sections/sections/FeatureSection.tsx",
-        "src/DOMAIN/sections/sections/CTASection.tsx",
-        "src/DOMAIN/sections/sections/HeroSection.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Panel.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
+        "src/PATTERNS/cards/VenueCard/VenueCard.tsx",
+        "src/DOMAIN/sections/FeatureSection.tsx",
+        "src/DOMAIN/sections/CTASection.tsx",
+        "src/DOMAIN/sections/HeroSection.tsx"
       ],
       "confidence": "HIGH",
       "classification": {
@@ -105,49 +105,49 @@
         },
         {
           "id": "H5-004",
-          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+          "file": "src/DOMAIN/notifications/NotificationCenter.Panel.tsx",
           "lines": [243, 260],
           "risk": "MAJOR",
           "classification": "VIOLATION"
         },
         {
           "id": "H5-005",
-          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
+          "file": "src/DOMAIN/notifications/NotificationCenter.Panel.tsx",
           "lines": [263, 267],
           "risk": "MINOR",
           "classification": "DEBT"
         },
         {
           "id": "H5-006",
-          "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+          "file": "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
           "lines": [128, 138],
           "risk": "MAJOR",
           "classification": "VIOLATION"
         },
         {
           "id": "H5-007",
-          "file": "src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx",
+          "file": "src/PATTERNS/cards/VenueCard/VenueCard.tsx",
           "lines": [196, 217],
           "risk": "MAJOR",
           "classification": "VIOLATION"
         },
         {
           "id": "H5-008",
-          "file": "src/DOMAIN/sections/sections/FeatureSection.tsx",
+          "file": "src/DOMAIN/sections/FeatureSection.tsx",
           "lines": [75],
           "risk": "CRITICAL",
           "classification": "VIOLATION"
         },
         {
           "id": "H5-009",
-          "file": "src/DOMAIN/sections/sections/CTASection.tsx",
+          "file": "src/DOMAIN/sections/CTASection.tsx",
           "lines": [94, 118],
           "risk": "CRITICAL",
           "classification": "VIOLATION"
         },
         {
           "id": "H5-010",
-          "file": "src/DOMAIN/sections/sections/HeroSection.tsx",
+          "file": "src/DOMAIN/sections/HeroSection.tsx",
           "lines": [57, 78],
           "risk": "CRITICAL",
           "classification": "VIOLATION"

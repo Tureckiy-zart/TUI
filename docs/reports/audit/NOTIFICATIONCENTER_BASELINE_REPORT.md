@@ -45,21 +45,21 @@
 **Exported Name:** `NotificationCenter` (compound component)  
 **Layer:** DOMAIN (Extension Composition)  
 **Status:** ALLOWED (not LOCKED)  
-**Location:** `src/DOMAIN/notifications/notifications/`
+**Location:** `src/DOMAIN/notifications/`
 
 **Source Files:**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.tsx` - Main compound export
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Provider.tsx` - State provider
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` - Side drawer panel
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx` - Open button
-- `src/DOMAIN/notifications/notifications/NotificationCenter.List.tsx` - List container
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx` - Notification item
-- `src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx` - Group header
-- `src/DOMAIN/notifications/notifications/NotificationCenter.DismissAll.tsx` - Clear all button
-- `src/DOMAIN/notifications/notifications/NotificationCenter.types.ts` - Type definitions
-- `src/DOMAIN/notifications/notifications/NotificationCenter.stories.tsx` - Storybook stories
-- `src/DOMAIN/notifications/notifications/useNotificationCenter.tsx` - Convenience hook
-- `src/DOMAIN/notifications/notifications/index.ts` - Barrel exports
+- `src/DOMAIN/notifications/NotificationCenter.tsx` - Main compound export
+- `src/DOMAIN/notifications/NotificationCenter.Provider.tsx` - State provider
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` - Side drawer panel
+- `src/DOMAIN/notifications/NotificationCenter.Trigger.tsx` - Open button
+- `src/DOMAIN/notifications/NotificationCenter.List.tsx` - List container
+- `src/DOMAIN/notifications/NotificationCenter.Item.tsx` - Notification item
+- `src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx` - Group header
+- `src/DOMAIN/notifications/NotificationCenter.DismissAll.tsx` - Clear all button
+- `src/DOMAIN/notifications/NotificationCenter.types.ts` - Type definitions
+- `src/DOMAIN/notifications/NotificationCenter.stories.tsx` - Storybook stories
+- `src/DOMAIN/notifications/useNotificationCenter.tsx` - Convenience hook
+- `src/DOMAIN/notifications/index.ts` - Barrel exports
 
 **Total Files:** 12 files
 
@@ -237,7 +237,7 @@ NotificationCenter = {
 
 ### Export Points
 
-**From `src/DOMAIN/notifications/notifications/index.ts`:**
+**From `src/DOMAIN/notifications/index.ts`:**
 - Compound component: `NotificationCenter`
 - Individual components: `NotificationCenterDismissAll`, `NotificationCenterGroupHeader`, `NotificationCenterItem`, `NotificationCenterList`, `NotificationCenterPanel`, `NotificationCenterProvider`, `NotificationCenterTrigger`
 - Hooks: `useNotificationCenterContext`, `useNotificationCenter`
@@ -245,7 +245,7 @@ NotificationCenter = {
 - Props types: `NotificationCenterDismissAllProps`, `NotificationCenterGroupHeaderProps`, `NotificationCenterItemProps`, `NotificationCenterListProps`, `NotificationCenterPanelProps`, `NotificationCenterProviderProps`, `NotificationCenterTriggerProps`
 
 **From `src/index.ts`:**
-- All exports from `src/DOMAIN/notifications/notifications/index.ts` are re-exported
+- All exports from `src/DOMAIN/notifications/index.ts` are re-exported
 - Component is publicly available
 
 ### Lock Status Check

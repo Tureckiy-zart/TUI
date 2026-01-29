@@ -52,7 +52,7 @@
 **Exported Name:** `CardBase`  
 **Layer:** PATTERNS (Extension layer)  
 **Semantic Role:** Layout composition primitive for card structures  
-**Location:** `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`  
+**Location:** `src/PATTERNS/cards/CardBase/CardBase.tsx`  
 **Date:** 2025-12-27 (First Pass), 2026-01-01 (Second Pass)  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -146,25 +146,25 @@ If changes are required and validated:
 
 ### Implementation Files
 
-- **Main Component:** `src/PATTERNS/cards/cards/CardBase/CardBase.tsx` (113 lines)
+- **Main Component:** `src/PATTERNS/cards/CardBase/CardBase.tsx` (113 lines)
   - Contains: CardBase (root), CardBaseImageWrapper, CardBaseContentWrapper, CardBaseFooterWrapper
-- **Types:** `src/PATTERNS/cards/cards/CardBase/CardBase.types.ts` (82 lines)
+- **Types:** `src/PATTERNS/cards/CardBase/CardBase.types.ts` (82 lines)
   - Types: CardBaseSize, CardBaseVariant, CardBaseProps, CardBaseImageWrapperProps, CardBaseContentWrapperProps, CardBaseFooterWrapperProps
-- **Variants:** `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` (100 lines)
+- **Variants:** `src/PATTERNS/cards/CardBase/CardBase.variants.ts` (100 lines)
   - CVAs: cardBaseVariants, cardBaseImageVariants, cardBaseContentVariants, cardBaseFooterVariants
-- **Barrel Export:** `src/PATTERNS/cards/cards/CardBase/index.ts` (27 lines)
+- **Barrel Export:** `src/PATTERNS/cards/CardBase/index.ts` (27 lines)
 - **Root Export:** NOT exported from `src/index.ts` (internal-only)
 
 ### Storybook Files
 
-- **Stories:** `src/PATTERNS/cards/cards/CardBase/CardBase.stories.tsx` (updated)
+- **Stories:** `src/PATTERNS/cards/CardBase/CardBase.stories.tsx` (updated)
   - Stories: Default, Small, Elevated, SmallElevated, Matrix, SizesGallery, LayoutWrappers
   - ✅ Canonical stories: Matrix (required), SizesGallery (required), States (not required - non-interactive)
   - Story title: "Legacy Patterns/Cards/CardBase"
 
 ### Test Files
 
-- ✅ **Unit Tests:** `src/PATTERNS/cards/cards/CardBase/CardBase.test.tsx` (created)
+- ✅ **Unit Tests:** `src/PATTERNS/cards/CardBase/CardBase.test.tsx` (created)
   - Comprehensive test coverage: API Contract, Sizes, Variants, Subcomponents, Composition
 - ⚠️ **Type Tests:** Not required (component is Extension layer, not Foundation)
 
@@ -187,10 +187,10 @@ If changes are required and validated:
 - `cardBaseFooterVariants` (CVA function)
 
 **Export Hierarchy:**
-1. `src/PATTERNS/cards/cards/CardBase/CardBase.tsx` → exports components
-2. `src/PATTERNS/cards/cards/CardBase/CardBase.types.ts` → exports types
-3. `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` → exports CVAs
-4. `src/PATTERNS/cards/cards/CardBase/index.ts` → barrel re-exports all
+1. `src/PATTERNS/cards/CardBase/CardBase.tsx` → exports components
+2. `src/PATTERNS/cards/CardBase/CardBase.types.ts` → exports types
+3. `src/PATTERNS/cards/CardBase/CardBase.variants.ts` → exports CVAs
+4. `src/PATTERNS/cards/CardBase/index.ts` → barrel re-exports all
 5. `src/index.ts` → NOT exported (internal-only per EXTENSION_STATE.md)
 
 ### External Dependencies
@@ -486,7 +486,7 @@ interface CardBaseFooterWrapperProps extends React.HTMLAttributes<HTMLDivElement
 **Prevention Rule:** Explicitly forbid new variants/sizes. Only allow canonical mappings to GlobalSize scale and InteractiveVariant/SurfaceVariant dictionaries. Document any size/variant mapping decisions explicitly.
 
 ### Risk 2: Cursor renames/moves files
-**Prevention Rule:** Explicitly forbid file moves or renames. Only allow refactoring within existing files. Component must remain in `src/PATTERNS/cards/cards/CardBase/` directory.
+**Prevention Rule:** Explicitly forbid file moves or renames. Only allow refactoring within existing files. Component must remain in `src/PATTERNS/cards/CardBase/` directory.
 
 ### Risk 3: Placeholder tests/stories
 **Prevention Rule:** Require comprehensive test coverage (public behavior, edge cases, all variants/sizes). Require canonical stories per VARIANTS_SIZE_CANON.md (Matrix if size AND variant, States if interactive, SizesGallery if size prop). Verify against requirements before marking complete.
@@ -984,8 +984,8 @@ The component is considered "closed" only when:
 
 ### CHECK_FILE_REALITY — File Reality Verification
 ✅ **PASS** - All file mentions correspond to actual repository state
-- Tests: Created in STEP 10 (`src/PATTERNS/cards/cards/CardBase/CardBase.test.tsx`)
-- Stories: Updated in STEP 10 (`src/PATTERNS/cards/cards/CardBase/CardBase.stories.tsx`)
+- Tests: Created in STEP 10 (`src/PATTERNS/cards/CardBase/CardBase.test.tsx`)
+- Stories: Updated in STEP 10 (`src/PATTERNS/cards/CardBase/CardBase.stories.tsx`)
 - All component files exist at documented paths
 - All exports match actual exports
 
@@ -1049,7 +1049,7 @@ The component is considered "closed" only when:
 - Pipeline: Pipeline 18A (Steps 0-12 complete)
 - Audit Report: `docs/reports/audit/CARDBASE_BASELINE_REPORT.md`
 - Lock Type: PROCESS_LOCK (Component is in PATTERNS layer, not Foundation lock)
-- Path corrected: `src/components/cards/CardBase/CardBase.tsx` → `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+- Path corrected: `src/components/cards/CardBase/CardBase.tsx` → `src/PATTERNS/cards/CardBase/CardBase.tsx`
 
 ### ARCHITECTURE_LOCK.md
 **Status:** ✅ Updated  

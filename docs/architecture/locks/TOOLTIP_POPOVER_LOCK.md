@@ -57,11 +57,11 @@ The following Overlay components are **LOCKED** and **IMMUTABLE**:
 
 ### 3. HoverCard Component
 - **Files:**
-  - `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx`
-  - `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx`
-  - `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx`
-  - `src/PATTERNS/menus/menus/hover-card/HoverCard.test.tsx`
-- **Stories:** `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx`
+  - `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx`
+  - `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx`
+  - `src/PATTERNS/menus/hover-card/HoverCardContent.tsx`
+  - `src/PATTERNS/menus/hover-card/HoverCard.test.tsx`
+- **Stories:** `src/PATTERNS/menus/hover-card/HoverCard.stories.tsx`
 - **Status:** ✅ **PROCESS LOCKED** + ✅ **Pipeline 18A Complete**
 - **Lock Date:** 2025-12-21
 - **Pipeline 18A Completion:** 2025-12-27

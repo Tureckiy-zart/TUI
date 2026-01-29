@@ -254,7 +254,7 @@ Use Box components with flex-related props (if available) or document that Flex 
 
 ### H5-004: NotificationCenter.Panel — Header layout via flex
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`  
 **Lines:** 243-260  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** MAJOR  
@@ -299,7 +299,7 @@ Replace with Row component:
 
 ### H5-005: NotificationCenter.Panel — Content area layout via flex
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`  
 **Lines:** 263-267  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** MINOR  
@@ -335,7 +335,7 @@ Empty state could use Stack with `align="center"` and `justify="center"`:
 
 ### H5-006: NotificationCenter.Item — Content layout via flex
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.Item.tsx`  
 **Lines:** 128, 138  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** MAJOR  
@@ -374,7 +374,7 @@ Use Row component for horizontal layout:
 
 ### H5-007: VenueCard — Metadata layout via flex
 
-**File:** `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`  
+**File:** `src/PATTERNS/cards/VenueCard/VenueCard.tsx`  
 **Lines:** 196, 217  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** MAJOR  
@@ -421,7 +421,7 @@ Replace with Stack and Row:
 
 ### H5-008: FeatureSection — Grid layout via utility classes
 
-**File:** `src/DOMAIN/sections/sections/FeatureSection.tsx`  
+**File:** `src/DOMAIN/sections/FeatureSection.tsx`  
 **Lines:** 75  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** CRITICAL  
@@ -453,7 +453,7 @@ Replace with Grid component:
 
 ### H5-009: CTASection — Grid and flex layouts via utility classes
 
-**File:** `src/DOMAIN/sections/sections/CTASection.tsx`  
+**File:** `src/DOMAIN/sections/CTASection.tsx`  
 **Lines:** 94-102, 113-118  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** CRITICAL  
@@ -504,7 +504,7 @@ Replace with Foundation components:
 
 ### H5-010: HeroSection — Grid and flex layouts via utility classes
 
-**File:** `src/DOMAIN/sections/sections/HeroSection.tsx`  
+**File:** `src/DOMAIN/sections/HeroSection.tsx`  
 **Lines:** 57-63, 66, 78  
 **Pattern:** H5 (DOM-Driven Layout Intent)  
 **Risk:** CRITICAL  
@@ -602,7 +602,7 @@ Replace with Foundation components:
 
 ### Task 1: Migrate Section Components to Foundation Layouts
 **Priority:** HIGH  
-**Scope:** `src/DOMAIN/sections/sections/*.tsx`  
+**Scope:** `src/DOMAIN/sections/*.tsx`  
 **Findings:** H5-008, H5-009, H5-010  
 **Effort:** Medium (3 components)
 
@@ -613,7 +613,7 @@ Replace grid/flex utility classes with Grid, Stack, Row, Container components in
 
 ### Task 2: Migrate Card Components Internal Layouts
 **Priority:** MEDIUM  
-**Scope:** `src/PATTERNS/cards/cards/*/`  
+**Scope:** `src/PATTERNS/cards/*/`  
 **Findings:** H5-007  
 **Effort:** Low (1 component, minor changes)
 
@@ -621,7 +621,7 @@ Replace flex utility classes with Stack/Row in VenueCard metadata and footer sec
 
 ### Task 3: Migrate Notification Components Layouts
 **Priority:** MEDIUM  
-**Scope:** `src/DOMAIN/notifications/notifications/*.tsx`  
+**Scope:** `src/DOMAIN/notifications/*.tsx`  
 **Findings:** H5-004, H5-005, H5-006  
 **Effort:** Medium (2 components)
 

@@ -510,8 +510,8 @@ export const LinkWithCustomVariant = React.forwardRef<
   - ArtistCard: Removed `artistCardGenresVariants` from exports
   - TicketCard: Variants already removed (no action needed)
 - **Files Modified:**
-  - `src/PATTERNS/cards/cards/VenueCard/index.ts`
-  - `src/PATTERNS/cards/cards/ArtistCard/index.ts`
+  - `src/PATTERNS/cards/VenueCard/index.ts`
+  - `src/PATTERNS/cards/ArtistCard/index.ts`
 - **Result:** 4 unused variants removed from exports
 
 #### ✅ STEP 3: Replace Hardcoded Values with Tokens
@@ -519,7 +519,7 @@ export const LinkWithCustomVariant = React.forwardRef<
 - **ProfileCard:** Already using `shadow="md"` and `size="md"` props (no changes needed)
 - **PromoCard:** Replaced `font-semibold` with `TEXT_TOKENS.fontWeight.semibold` in `promoCardCtaButtonVariants`
 - **Files Modified:**
-  - `src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts`
+  - `src/PATTERNS/cards/PromoCard/PromoCard.variants.ts`
 - **Result:** All hardcoded values replaced with tokens
 
 ### Verification

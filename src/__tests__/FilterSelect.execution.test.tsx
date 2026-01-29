@@ -7,7 +7,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { FilterSelect } from "@/PATTERNS/filters/filters/FilterSelect";
+import { FilterSelect } from "@/PATTERNS/filters/FilterSelect";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const optionsWithCount = [

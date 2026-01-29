@@ -6,8 +6,8 @@
 import { render } from "@testing-library/react";
 import { it } from "vitest";
 
-import { HoverCardContent } from "@/PATTERNS/menus/menus/hover-card/HoverCardContent";
-import { HoverCardRoot } from "@/PATTERNS/menus/menus/hover-card/HoverCardRoot";
+import { HoverCardContent } from "@/PATTERNS/menus/hover-card/HoverCardContent";
+import { HoverCardRoot } from "@/PATTERNS/menus/hover-card/HoverCardRoot";
 
 it("mounts HoverCardContent", () => {
   render(

@@ -1106,7 +1106,7 @@ All BLOCKERS must be fixed. String parsing logic is non-blocking but can be impr
 - `src/COMPOSITION/layout/layout.types.ts` - SurfaceVariant type updated (deprecated, for backward compatibility)
 
 **Files with BREAKING CHANGES (will need separate updates):**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` - uses old variant names
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` - uses old variant names
 - `src/PATTERNS/states/EmptyState/EmptyState.tsx` - uses old variant names
 - These files will need to be updated separately (out of scope for this refactor)
 

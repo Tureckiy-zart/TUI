@@ -78,11 +78,11 @@ Updated error message to be more specific:
 ### 3. Code Fixes Applied
 
 **Files fixed:**
-1. `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts` - line 3
+1. `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts` - line 3
 2. `src/PATTERNS/tables/SimpleTable/Table.tsx` - lines 24, 25 (tokenCVA and cn)
-3. `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` - line 3
-4. `src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts` - line 3
-5. `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` - line 3
+3. `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` - line 3
+4. `src/PATTERNS/cards/PromoCard/PromoCard.variants.ts` - line 3
+5. `src/PATTERNS/cards/CardBase/CardBase.variants.ts` - line 3
 
 **Change pattern:**
 ```typescript
@@ -115,11 +115,11 @@ Added new section "Foundation Runtime Utilities" with:
 ### Before Resolution
 
 **Files with incorrect utility imports from `@/FOUNDATION/lib/**`:**
-- `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts` - tokenCVA
+- `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts` - tokenCVA
 - `src/PATTERNS/tables/SimpleTable/Table.tsx` - tokenCVA, cn
-- `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` - tokenCVA
-- `src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts` - tokenCVA
-- `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` - tokenCVA
+- `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` - tokenCVA
+- `src/PATTERNS/cards/PromoCard/PromoCard.variants.ts` - tokenCVA
+- `src/PATTERNS/cards/CardBase/CardBase.variants.ts` - tokenCVA
 
 **ESLint Configuration:**
 - Rule blocked `@/FOUNDATION/lib/**` but lacked anti-oscillation comments
@@ -146,16 +146,16 @@ Added new section "Foundation Runtime Utilities" with:
 **Files with Correct Imports:**
 - All consumer files (DOMAIN/PATTERNS) use `@/index` for `tokenCVA` and `cn`
 - Zero occurrences of utility imports from `@/FOUNDATION/lib/**` in consumer code
-- `src/DOMAIN/sections/EventCard/EventCard.variants.ts` - Already correct (uses `@/index`)
+- `src/PATTERNS/cards/EventCard/EventCard.variants.ts` - Already correct (uses `@/index`)
 
 ### Files Modified
 
 1. **Modified:** `eslint.config.mjs` (added anti-oscillation comments and updated message)
-2. **Modified:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts` (fixed import)
+2. **Modified:** `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts` (fixed import)
 3. **Modified:** `src/PATTERNS/tables/SimpleTable/Table.tsx` (fixed imports)
-4. **Modified:** `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` (fixed import)
-5. **Modified:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts` (fixed import)
-6. **Modified:** `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` (fixed import)
+4. **Modified:** `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` (fixed import)
+5. **Modified:** `src/PATTERNS/cards/PromoCard/PromoCard.variants.ts` (fixed import)
+6. **Modified:** `src/PATTERNS/cards/CardBase/CardBase.variants.ts` (fixed import)
 7. **Modified:** `docs/architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md` (added Foundation Runtime Utilities section)
 
 ---

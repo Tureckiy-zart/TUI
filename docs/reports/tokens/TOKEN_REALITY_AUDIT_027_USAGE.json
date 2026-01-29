@@ -41,8 +41,8 @@
       "files": [
         "src/PRIMITIVES/Text/Text.tsx",
         "src/PRIMITIVES/Heading/Heading.tsx",
-        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts",
-        "src/DOMAIN/sections/EventCard/EventCard.variants.ts"
+        "src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts",
+        "src/PATTERNS/cards/EventCard/EventCard.variants.ts"
       ],
       "category": "very_high_usage",
       "usage_type": "direct_imports"
@@ -54,9 +54,9 @@
       "composition_usage": 1,
       "files": [
         "src/PRIMITIVES/Icon/Icon.tsx",
-        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx",
-        "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
-        "src/DOMAIN/sections/EventCard/EventCard.tsx"
+        "src/PATTERNS/cards/CategoryCard/CategoryCard.tsx",
+        "src/PATTERNS/cards/ArtistCard/ArtistCard.tsx",
+        "src/PATTERNS/cards/EventCard/EventCard.tsx"
       ],
       "category": "high_usage",
       "usage_type": "direct_imports"
@@ -81,10 +81,10 @@
       "consumer_usage": 205,
       "composition_usage": 0,
       "files": [
-        "src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts",
-        "src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts",
-        "src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx",
-        "src/DOMAIN/sections/EventCard/EventCard.variants.ts"
+        "src/PATTERNS/cards/CardBase/CardBase.variants.ts",
+        "src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts",
+        "src/PATTERNS/cards/ArtistCard/ArtistCard.tsx",
+        "src/PATTERNS/cards/EventCard/EventCard.variants.ts"
       ],
       "category": "very_high_usage",
       "usage_type": "direct_imports"
@@ -144,9 +144,9 @@
       "consumer_usage": 45,
       "composition_usage": 0,
       "files": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Panel.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx"
       ],
       "category": "medium_usage",
       "usage_type": "direct_imports"
@@ -202,28 +202,28 @@
     "total_detected": 50,
     "examples": [
       {
-        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "file": "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
         "line": 138,
         "pattern": "className=\"text-sm font-semibold text-[hsl(var(--tm-text-primary))]\"",
         "issue": "Raw Tailwind classes instead of TEXT_TOKENS",
         "suggested_token": "TEXT_TOKENS.fontSize.sm + TEXT_TOKENS.fontWeight.semibold"
       },
       {
-        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
+        "file": "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
         "line": 143,
         "pattern": "className=\"text-sm text-[hsl(var(--tm-text-primary))]/80\"",
         "issue": "Raw Tailwind classes with opacity instead of token",
         "suggested_token": "TEXT_TOKENS.fontSize.sm + semantic color token"
       },
       {
-        "file": "src/DOMAIN/sections/sections/HeroSection.tsx",
+        "file": "src/DOMAIN/sections/HeroSection.tsx",
         "line": 90,
         "pattern": "className=\"w-full max-w-full overflow-hidden rounded-lg\"",
         "issue": "Raw Tailwind classes for layout/radius",
         "suggested_token": "Layout tokens + radius tokens"
       },
       {
-        "file": "src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx",
+        "file": "src/DOMAIN/notifications/NotificationCenter.Trigger.tsx",
         "line": 55,
         "pattern": "className=\"relative\"",
         "issue": "Raw Tailwind utility class",

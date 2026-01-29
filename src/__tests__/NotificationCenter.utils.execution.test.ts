@@ -8,7 +8,7 @@ import { expect, it } from "vitest";
 import {
   getChannelFromVariant,
   getVariantFromChannel,
-} from "@/DOMAIN/notifications/notifications/NotificationCenter.utils";
+} from "@/DOMAIN/notifications/NotificationCenter.utils";
 
 it("executes getChannelFromVariant", () => {
   expect(getChannelFromVariant()).toBe("info");

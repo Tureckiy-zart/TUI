@@ -7,8 +7,8 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { it, vi } from "vitest";
 
-import { NotificationCenterPanel } from "@/DOMAIN/notifications/notifications/NotificationCenter.Panel";
-import { NotificationCenterProvider } from "@/DOMAIN/notifications/notifications/NotificationCenter.Provider";
+import { NotificationCenterPanel } from "@/DOMAIN/notifications/NotificationCenter.Panel";
+import { NotificationCenterProvider } from "@/DOMAIN/notifications/NotificationCenter.Provider";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const onClose = vi.fn();

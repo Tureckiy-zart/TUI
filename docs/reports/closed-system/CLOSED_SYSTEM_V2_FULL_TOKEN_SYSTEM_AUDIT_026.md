@@ -87,7 +87,7 @@ All acceptance criteria are met. No P0/P1 violations requiring architecture chan
 
 - Audit 024 S5 reported no token bypass; spot-check of production DOMAIN/PATTERNS confirms token-based usage.
 - Raw `px`/hex/rgba: only in comments (e.g. `.variants` "maps to semanticSpacing.md (16px)") or in excluded stories/themes. No raw values in production component code.
-- `style={{}}`: [PriceRangeSlider](../../../src/PATTERNS/filters/filters/PriceRangeSlider.tsx) uses dynamic `style` for slider positioning (percentage). Acceptable per 024 S4 (dynamic layout calculations). [Progress](../../../src/PRIMITIVES/Progress/Progress.tsx) uses `width: ${percentage}%` — acceptable. Other `style` usage is in stories (excluded).
+- `style={{}}`: [PriceRangeSlider](../../../src/PATTERNS/filters/PriceRangeSlider.tsx) uses dynamic `style` for slider positioning (percentage). Acceptable per 024 S4 (dynamic layout calculations). [Progress](../../../src/PRIMITIVES/Progress/Progress.tsx) uses `width: ${percentage}%` — acceptable. Other `style` usage is in stories (excluded).
 
 **Status:** **PASS**  
 **Violations:** 0  
@@ -106,9 +106,9 @@ All acceptance criteria are met. No P0/P1 violations requiring architecture chan
 
 - **Public API usage:** DOMAIN 24 files, PATTERNS 50 files use `@/index` or `@tenerife.music/ui` for components/utils (counts include production; stories/tests excluded for guard).
 - **Token imports:** 0 imports of Foundation component tokens from `@/index` in DOMAIN/PATTERNS. All token usage in consumer layers uses `@/FOUNDATION/tokens/components/**`.
-- **Deep imports in production:** None from `@/PRIMITIVES`, `@/COMPOSITION`, or `@/FOUNDATION` in DOMAIN/PATTERNS production code except `@/FOUNDATION/tokens/components/**`. Deep imports in `.test` / `.stories` (e.g. [HeroSection.test](../../../src/DOMAIN/sections/sections/HeroSection.test.tsx), [NotificationCenter.stories](../../../src/DOMAIN/notifications/notifications/NotificationCenter.stories.tsx)) are excluded by consumer-import-guard.
+- **Deep imports in production:** None from `@/PRIMITIVES`, `@/COMPOSITION`, or `@/FOUNDATION` in DOMAIN/PATTERNS production code except `@/FOUNDATION/tokens/components/**`. Deep imports in `.test` / `.stories` (e.g. [HeroSection.test](../../../src/DOMAIN/sections/HeroSection.test.tsx), [NotificationCenter.stories](../../../src/DOMAIN/notifications/NotificationCenter.stories.tsx)) are excluded by consumer-import-guard.
 - **SimpleTable:** [SimpleTable/Table.tsx](../../../src/PATTERNS/tables/SimpleTable/Table.tsx) imports `cn`, `tokenCVA` from `@/index` and `SIMPLETABLE_TOKENS` from `@/FOUNDATION/tokens/components/simple-table`. No `@/FOUNDATION/lib/**` usage; migration completed.
-- **GRADIENT_TOKENS:** [EventCard.variants](../../../src/DOMAIN/sections/EventCard/EventCard.variants.ts) and [PromoCard](../../../src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx) import `GRADIENT_TOKENS` from `@/FOUNDATION/tokens/gradients`. **RESOLVED:** Enforcement gap closed via TUI_CSV2_FOLLOWUP_GRADIENT_ENFORCEMENT_028. ESLint patterns now block all gradient import variants (extension-less and deep paths). ESLint correctly flags these imports as violations.
+- **GRADIENT_TOKENS:** [EventCard.variants](../../../src/PATTERNS/cards/EventCard/EventCard.variants.ts) and [PromoCard](../../../src/PATTERNS/cards/PromoCard/PromoCard.tsx) import `GRADIENT_TOKENS` from `@/FOUNDATION/tokens/gradients`. **RESOLVED:** Enforcement gap closed via TUI_CSV2_FOLLOWUP_GRADIENT_ENFORCEMENT_028. ESLint patterns now block all gradient import variants (extension-less and deep paths). ESLint correctly flags these imports as violations.
 - **ESLint:** `eslint` run on DOMAIN/PATTERNS production files (excluding stories/tests) now correctly flags gradient imports. `no-restricted-imports` errors reported for gradient token imports.
 
 **Status:** **PASS** (resolved via TUI_CSV2_FOLLOWUP_GRADIENT_ENFORCEMENT_028)  

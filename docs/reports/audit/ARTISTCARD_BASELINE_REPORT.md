@@ -51,7 +51,7 @@
 **Exported Name:** `ArtistCard`  
 **Layer:** PATTERNS (Extension layer)  
 **Semantic Role:** Domain-specific card component for displaying artist information  
-**Location:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`  
+**Location:** `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -70,20 +70,20 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx` (235 lines)
+- **Main Component:** `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx` (235 lines)
   - Contains: ArtistCard component (forwardRef pattern)
   - Uses CardBase for layout composition
   - Uses DOMAIN_TOKENS and ARTIST_TOKENS for styling
   - Runtime validation for required props (name, followersLabel, playsLabel)
-- **Types:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.types.ts` (51 lines)
+- **Types:** `src/PATTERNS/cards/ArtistCard/ArtistCard.types.ts` (51 lines)
   - Types: ArtistCardSize, ArtistCardVariant, ArtistCardProps
   - ArtistCardSize: `"sm" | "md"` (canonical vocabulary)
   - ArtistCardVariant: `"default" | "elevated"` (canonical vocabulary)
-- **Variants:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts` (206 lines)
+- **Variants:** `src/PATTERNS/cards/ArtistCard/ArtistCard.variants.ts` (206 lines)
   - CVAs: artistCardVariants, artistCardBadgeVariants, artistCardBadgeSurfaceVariants, artistCardImageOverlayVariants, artistCardImageTransformVariants, artistCardMetadataVariants, artistCardMetadataItemVariants, artistCardMetadataIconVariants, artistCardFooterBorderVariants
   - Uses `cva` from `class-variance-authority` (not `tokenCVA`)
   - All variants use token-based values from DOMAIN_TOKENS, ARTIST_TOKENS, TEXT_TOKENS, ICON_TOKENS, MOTION_TOKENS
-- **Barrel Export:** `src/PATTERNS/cards/cards/ArtistCard/index.ts` (20 lines)
+- **Barrel Export:** `src/PATTERNS/cards/ArtistCard/index.ts` (20 lines)
   - Exports: ArtistCard (component), ArtistCardProps, ArtistCardSize, ArtistCardVariant (types), all variant functions
 
 ### Storybook Files
@@ -115,10 +115,10 @@
 - `artistCardMetadataIconVariants` (CVA function)
 
 **Export Hierarchy:**
-1. `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx` → exports component
-2. `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.types.ts` → exports types
-3. `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts` → exports CVAs
-4. `src/PATTERNS/cards/cards/ArtistCard/index.ts` → barrel re-exports all
+1. `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx` → exports component
+2. `src/PATTERNS/cards/ArtistCard/ArtistCard.types.ts` → exports types
+3. `src/PATTERNS/cards/ArtistCard/ArtistCard.variants.ts` → exports CVAs
+4. `src/PATTERNS/cards/ArtistCard/index.ts` → barrel re-exports all
 5. ⚠️ NOT exported from `src/index.ts` (internal PATTERNS component)
 
 ### External Dependencies
@@ -136,7 +136,7 @@
 - `@/FOUNDATION/tokens/components/icon` → ICON_TOKENS
 - `@/FOUNDATION/tokens/components/motion` → MOTION_TOKENS
 - `@/FOUNDATION/tokens/components/text` → TEXT_TOKENS
-- `@/PATTERNS/cards/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
+- `@/PATTERNS/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
 - `@/PRIMITIVES/Heading` → Heading
 - `@/PRIMITIVES/Icon` → Icon
 - `@/PRIMITIVES/Link` → Link
@@ -209,11 +209,11 @@ ArtistCard: "<propName>" prop is required and cannot be empty
 ### Similar Components (for Pattern Alignment)
 
 **Reference Components:**
-- `VenueCard` (`src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`)
+- `VenueCard` (`src/PATTERNS/cards/VenueCard/VenueCard.tsx`)
   - Similar structure: CardBase, badge, image, content, footer
   - Similar size/variant mapping
   - Uses `validateRequiredString` helper function
-- `EventCard` (`src/DOMAIN/sections/EventCard/EventCard.tsx`)
+- `EventCard` (`src/PATTERNS/cards/EventCard/EventCard.tsx`)
   - Similar structure: CardBase, badge, image, content, footer
   - Similar size/variant mapping
   - Different domain props but similar layout pattern
@@ -924,7 +924,7 @@ validateRequiredString(playsLabel, "playsLabel", "ArtistCard");
 
 **Tests Created:**
 
-✅ **Test File:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.test.tsx`
+✅ **Test File:** `src/PATTERNS/cards/ArtistCard/ArtistCard.test.tsx`
 
 **Test Coverage:**
 
@@ -977,7 +977,7 @@ validateRequiredString(playsLabel, "playsLabel", "ArtistCard");
 
 **Stories Created:**
 
-✅ **Story File:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.stories.tsx`
+✅ **Story File:** `src/PATTERNS/cards/ArtistCard/ArtistCard.stories.tsx`
 
 **Story Coverage:**
 

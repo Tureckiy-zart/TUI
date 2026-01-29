@@ -12,7 +12,7 @@ import {
   CardBaseContentWrapper,
   CardBaseFooterWrapper,
   CardBaseImageWrapper,
-} from "@/PATTERNS/cards/cards/CardBase";
+} from "@/PATTERNS/cards/CardBase";
 
 import type { VenueCardProps, VenueCardSize, VenueCardVariant } from "./VenueCard.types";
 import {

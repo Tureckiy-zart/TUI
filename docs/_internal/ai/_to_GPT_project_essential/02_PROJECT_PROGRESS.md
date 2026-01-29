@@ -443,7 +443,7 @@ The following Extension layer components have successfully completed Pipeline 18
      - React.FC replaced with explicit function signature
    - **Quality:** Comprehensive tests (15 test cases), 4 Storybook stories (including Accessibility)
 
-4. **FilterBar** - `src/PATTERNS/filters/filters/FilterBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete + FINALIZATION, 2025-12-27)
+4. **FilterBar** - `src/PATTERNS/filters/FilterBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete + FINALIZATION, 2025-12-27)
    - **Layer:** PATTERNS (Extension layer)
    - **Type:** Fully controlled filter orchestration component (composes multiple filter controls)
    - **Status:** PROCESS LOCKED — pure UI component, no mock logic
@@ -577,7 +577,7 @@ The following Extension layer components have successfully completed Pipeline 18
    - **Test Coverage:** Comprehensive (Skeleton.test.tsx - 20+ test cases)
    - **Storybook Coverage:** Compliant (all variants demonstrated, realistic usage examples)
 9. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
-10. **CardBase** - `src/PATTERNS/cards/cards/CardBase/CardBase.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+10. **CardBase** - `src/PATTERNS/cards/CardBase/CardBase.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
 11. **EmptyState** - `src/PATTERNS/states/EmptyState/EmptyState.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
     - **Layer:** PATTERNS (Extension layer)
     - **Refactored:** Subcomponent attachment pattern optimized (74% code reduction), type consistency improved (EmptyStateIconSize type used)
@@ -1757,7 +1757,7 @@ Formally finalized the Foundation Component Lock Sweep after all verification st
    - ✅ See `docs/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details
 
 4. **MIGRATION_12D - PATTERNS Popover Removal**
-   - ✅ Removed PATTERNS/menus/menus/popover custom implementation
+   - ✅ Removed PATTERNS/menus/popover custom implementation
    - ✅ HoverCard now uses canonical Radix Popover from COMPOSITION/overlays
    - ✅ Single canonical Popover implementation (Radix-based)
 
@@ -1768,7 +1768,7 @@ Formally finalized the Foundation Component Lock Sweep after all verification st
    - ✅ Standardized naming: canonical hooks use camelCase
 
 6. **ContextMenu Consolidation**
-   - ✅ Removed PATTERNS/menus/menus/context-menu custom implementation
+   - ✅ Removed PATTERNS/menus/context-menu custom implementation
    - ✅ Only canonical Radix-based ContextMenu exists (COMPOSITION/overlays/ContextMenu, locked Foundation component)
 
 **Architectural State:**
@@ -3463,7 +3463,7 @@ _No tasks in progress currently._
 - **Date Completed:** 2026-01-01
 - **Summary:** ProfileCard component completed full Pipeline 18A (Component Review & Improvement Pipeline). Component refactored with size/variant props, Avatar component integration, forwardRef pattern migration, comprehensive tests and Storybook stories created, full A11Y compliance verified. Component is PROCESS LOCKED and ready for production use.
 - **Key Accomplishments:**
-  - ✅ Refactored existing ProfileCard component in `src/DOMAIN/auth/auth/ProfileCard.tsx`
+  - ✅ Refactored existing ProfileCard component in `src/DOMAIN/auth/ProfileCard.tsx`
   - ✅ Added size prop (`sm | md | lg`) with default `md`
   - ✅ Added variant prop (`default | elevated`) with default `default`
   - ✅ Migrated to forwardRef pattern for ref forwarding
@@ -3487,10 +3487,10 @@ _No tasks in progress currently._
   - Uses Heading (h3) for name
   - Uses Text component for email
 - **Files Modified:**
-  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Complete refactor applied
+  - `src/DOMAIN/auth/ProfileCard.tsx` - Complete refactor applied
 - **Files Created:**
-  - `src/DOMAIN/auth/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
-  - `src/DOMAIN/auth/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
+  - `src/DOMAIN/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
+  - `src/DOMAIN/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
   - `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` - Complete audit report
 - **Component Status:**
   - ✅ **PROCESS LOCKED** - Pipeline 18A complete, all quality gates passed
@@ -3600,13 +3600,13 @@ _No tasks in progress currently._
 - **Layer:** DOMAIN / PATTERNS
 - **Summary:** Формально закрыт Phase 1 упрощения доменных карточек и стабилизированы все доменные карточки. API, ответственности и архитектурные границы заморожены.
 - **Components Locked:**
-  - EventCard (`src/DOMAIN/sections/EventCard/`)
-  - ProfileCard (`src/DOMAIN/auth/auth/ProfileCard.tsx`)
-  - VenueCard (`src/PATTERNS/cards/cards/VenueCard/`)
-  - ArtistCard (`src/PATTERNS/cards/cards/ArtistCard/`)
-  - TicketCard (`src/PATTERNS/cards/cards/TicketCard/`)
-  - CategoryCard (`src/PATTERNS/cards/cards/CategoryCard/`)
-  - PromoCard (`src/PATTERNS/cards/cards/PromoCard/`)
+  - EventCard (`src/PATTERNS/cards/EventCard/`)
+  - ProfileCard (`src/DOMAIN/auth/ProfileCard.tsx`)
+  - VenueCard (`src/PATTERNS/cards/VenueCard/`)
+  - ArtistCard (`src/PATTERNS/cards/ArtistCard/`)
+  - TicketCard (`src/PATTERNS/cards/TicketCard/`)
+  - CategoryCard (`src/PATTERNS/cards/CategoryCard/`)
+  - PromoCard (`src/PATTERNS/cards/PromoCard/`)
 - **Phase 1 Completion:**
   - ✅ LinkWithCustomVariant извлечен в shared utility (`src/COMPOSITION/layout/LinkWithCustomVariant.tsx`)
   - ✅ Неиспользуемые варианты удалены (4 варианта: VenueCard - 3, ArtistCard - 1)
@@ -3888,13 +3888,13 @@ _No tasks in progress currently._
   - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md` - Simplification decisions
 - **Files Modified:**
   - `src/COMPOSITION/layout/index.ts` - Added LinkWithCustomVariant export
-  - `src/DOMAIN/sections/EventCard/EventCard.tsx` - Uses shared LinkWithCustomVariant
-  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx` - Uses shared LinkWithCustomVariant
-  - `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx` - Uses shared LinkWithCustomVariant, fixed font-semibold
-  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Fixed hardcoded shadow-md and p-md
-  - `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` - Removed 3 unused variants
-  - `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts` - Removed 1 unused variant
-  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts` - Removed 2 unused variants
+  - `src/PATTERNS/cards/EventCard/EventCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/TicketCard/TicketCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/PromoCard/PromoCard.tsx` - Uses shared LinkWithCustomVariant, fixed font-semibold
+  - `src/DOMAIN/auth/ProfileCard.tsx` - Fixed hardcoded shadow-md and p-md
+  - `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` - Removed 3 unused variants
+  - `src/PATTERNS/cards/ArtistCard/ArtistCard.variants.ts` - Removed 1 unused variant
+  - `src/PATTERNS/cards/TicketCard/TicketCard.variants.ts` - Removed 2 unused variants
 - **Audit Documents:**
   - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md` - Complete inventory of all 7 cards
   - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md` - Detailed duplication analysis
@@ -4545,7 +4545,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **CardBase** - Pipeline 18A Complete (2025-12-27), Second Pass Complete (2026-01-01)
   - Component: CardBase
   - Type: Extension Layer Primitive - Layout Composition
-  - Location: `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+  - Location: `src/PATTERNS/cards/CardBase/CardBase.tsx`
   - Second Pass: Joint analysis with Card component (2026-01-01) confirmed architectural separation is correct. No changes required. Component remains PROCESS LOCKED.
 
 - ⏳ **Card** - Pipeline 18A Analysis Complete (2026-01-01), FIX Phase Pending
@@ -4563,7 +4563,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **HoverCard** - Pipeline 18A Complete (2025-12-27)
   - Component: HoverCard
   - Type: Extension Layer Pattern - Menus
-  - Location: `src/PATTERNS/menus/menus/hover-card/`
+  - Location: `src/PATTERNS/menus/hover-card/`
   - Audit Report: `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
   - Status: ✅ PROCESS LOCKED
   - Pipeline: Pipeline 18A (Steps 0-12 complete)
@@ -4595,7 +4595,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **NotificationCenter** - Pipeline 18A Complete (2025-12-27)
   - Component: NotificationCenter
   - Type: Extension Layer Composition - Domain Component
-  - Location: `src/DOMAIN/notifications/notifications/`
+  - Location: `src/DOMAIN/notifications/`
   - Audit Report: `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md`
   - Status: ✅ PROCESS LOCKED
   - Lock Date: 2025-12-27
@@ -4980,7 +4980,7 @@ Successfully canonicalized ADR_overlay_panel_not_card across architecture, contr
    - Link to ADR_overlay_panel_not_card
 
 4. **Inline Architectural Guard in Code** ✅
-   - Added inline architectural comment to `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+   - Added inline architectural comment to `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
    - Top-level comment explains Panel semantics
    - Explicit "MUST NOT be converted to Card/CardBase"
    - Direct path reference to ADR file
@@ -5002,7 +5002,7 @@ Successfully canonicalized ADR_overlay_panel_not_card across architecture, contr
 - `docs/architecture/ARCHITECTURE_DOCUMENTS_AUDIT.md` - Added ADR entry
 - `docs/architecture/FOUNDATION_CONTRACT.md` - Added forbidden pattern rule
 - `src/COMPOSITION/layout/Card/README.md` - Created with reverse reference
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` - Added inline guard
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` - Added inline guard
 - `docs/architecture/PATTERNS_OVERLAY.md` - Created overlay pattern documentation
 - `docs/PROJECT_PROGRESS.md` - Recorded canonicalization
 

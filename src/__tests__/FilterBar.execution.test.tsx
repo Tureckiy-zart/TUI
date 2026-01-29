@@ -7,8 +7,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { FilterBar } from "@/PATTERNS/filters/filters/FilterBar";
-import type { FilterManager } from "@/PATTERNS/filters/filters/types";
+import { FilterBar } from "@/PATTERNS/filters/FilterBar";
+import type { FilterManager } from "@/PATTERNS/filters/types";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const sortOptions = [

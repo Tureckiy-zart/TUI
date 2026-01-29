@@ -107,9 +107,9 @@ Added prominent comments explaining:
 ### Before Resolution
 
 **Files with incorrect token imports from `@/index`:**
-- `src/DOMAIN/sections/EventCard/EventCard.variants.ts` - CARD_TOKENS, DOMAIN_TOKENS, GRADIENT_TOKENS, TEXT_TOKENS
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx` - NOTIFICATION_TOKENS
-- `src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx` - NOTIFICATION_TOKENS
+- `src/PATTERNS/cards/EventCard/EventCard.variants.ts` - CARD_TOKENS, DOMAIN_TOKENS, GRADIENT_TOKENS, TEXT_TOKENS
+- `src/DOMAIN/notifications/NotificationCenter.Item.tsx` - NOTIFICATION_TOKENS
+- `src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx` - NOTIFICATION_TOKENS
 - Multiple card variant files importing tokens from `@/index`
 
 **ESLint Configuration:**
@@ -137,7 +137,7 @@ Added prominent comments explaining:
 **Files with Correct Imports:**
 - `src/PATTERNS/tables/table/*.tsx` - All use `@/FOUNDATION/tokens/components/table`
 - `src/PATTERNS/lists/Timeline/Timeline.tsx` - Uses `@/FOUNDATION/tokens/components/timeline`
-- `src/PATTERNS/cards/cards/CardBase/CardBase.variants.ts` - Uses `@/FOUNDATION/tokens/components/domain`
+- `src/PATTERNS/cards/CardBase/CardBase.variants.ts` - Uses `@/FOUNDATION/tokens/components/domain`
 
 ### Files Modified
 

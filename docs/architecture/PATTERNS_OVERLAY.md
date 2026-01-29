@@ -133,7 +133,7 @@ This is a **canonical architectural rule** established by [ADR_overlay_panel_not
 
 ### NotificationCenter.Panel
 
-**Location:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+**Location:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
 
 **Structure:**
 - Portal + Backdrop + Panel container

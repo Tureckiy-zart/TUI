@@ -18,3 +18,5 @@ export type {
   CardBaseSize,
   CardBaseVariant,
 } from "./CardBase/CardBase.types";
+export type { EventCardLayout, EventCardProps, EventCardSize, EventCardVariant } from "./EventCard";
+export { EventCard } from "./EventCard";

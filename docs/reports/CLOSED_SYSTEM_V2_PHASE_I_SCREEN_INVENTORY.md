@@ -33,7 +33,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
 ### High Priority (CRITICAL violations or simple components)
 
 #### 1. LoginForm.tsx
-- **Path:** `src/DOMAIN/auth/auth/LoginForm.tsx`
+- **Path:** `src/DOMAIN/auth/LoginForm.tsx`
 - **Violations:** 
   - V4: 1 (raw HTML `div` with `space-y-md`)
 - **Complexity:** Low
@@ -41,7 +41,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
 - **Migration Notes:** Simple form with utility-based spacing wrapper. Replace `<div className={cn("space-y-md", className)}>` with `<Stack spacing="md">`.
 
 #### 2. RegisterForm.tsx
-- **Path:** `src/DOMAIN/auth/auth/RegisterForm.tsx`
+- **Path:** `src/DOMAIN/auth/RegisterForm.tsx`
 - **Violations:**
   - V4: 1 (raw HTML `div` with `space-y-md`)
 - **Complexity:** Low
@@ -49,21 +49,21 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
 - **Migration Notes:** Similar to LoginForm. Replace utility wrapper with Stack.
 
 #### 3. Dashboard.tsx
-- **Path:** `src/DOMAIN/admin/admin/Dashboard.tsx`
+- **Path:** `src/DOMAIN/admin/Dashboard.tsx`
 - **Violations:** 0 (no violations detected)
 - **Complexity:** Low
 - **Dependencies:** None
 - **Migration Notes:** Uses Card component correctly. May need visual review for layout patterns.
 
 #### 4. UserManagement.tsx
-- **Path:** `src/DOMAIN/admin/admin/UserManagement.tsx`
+- **Path:** `src/DOMAIN/admin/UserManagement.tsx`
 - **Violations:** 0 (no violations detected)
 - **Complexity:** Low
 - **Dependencies:** None
 - **Migration Notes:** Uses Card component correctly. May need visual review for layout patterns.
 
 #### 5. EventCard.tsx
-- **Path:** `src/DOMAIN/sections/EventCard/EventCard.tsx`
+- **Path:** `src/PATTERNS/cards/EventCard/EventCard.tsx`
 - **Violations:**
   - **V1 (CRITICAL):** 1 (className on Icon component)
   - **V3 (MAJOR):** 1 (utility classes on wrapper)
@@ -80,7 +80,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
 ### Medium Priority (MAJOR violations, moderate complexity)
 
 #### 6. HeroSection.tsx
-- **Path:** `src/DOMAIN/sections/sections/HeroSection.tsx`
+- **Path:** `src/DOMAIN/sections/HeroSection.tsx`
 - **Violations:**
   - **V4 (MAJOR):** 5 (raw HTML `div` and `section` elements)
 - **Complexity:** Medium
@@ -92,7 +92,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
   - Replace flex utility wrappers with Stack/Row
 
 #### 7. FeatureSection.tsx
-- **Path:** `src/DOMAIN/sections/sections/FeatureSection.tsx`
+- **Path:** `src/DOMAIN/sections/FeatureSection.tsx`
 - **Violations:**
   - **V4 (MAJOR):** 4 (raw HTML `div` and `section` elements)
 - **Complexity:** Medium
@@ -104,7 +104,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
   - Replace utility wrapper divs with Stack/Box
 
 #### 8. CTASection.tsx
-- **Path:** `src/DOMAIN/sections/sections/CTASection.tsx`
+- **Path:** `src/DOMAIN/sections/CTASection.tsx`
 - **Violations:**
   - **V4 (MAJOR):** 4 (raw HTML `div` and `section` elements)
 - **Complexity:** Medium
@@ -115,7 +115,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
   - Replace flex utility classes with Row/Stack
 
 #### 9. ArticlesSection.tsx
-- **Path:** `src/DOMAIN/sections/sections/ArticlesSection.tsx`
+- **Path:** `src/DOMAIN/sections/ArticlesSection.tsx`
 - **Violations:**
   - **V3 (MAJOR):** 1 (utility classes on wrapper)
   - **V4 (MAJOR):** 3 (raw HTML `div` elements)
@@ -126,14 +126,14 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
   - Replace raw HTML divs with Foundation components
 
 #### 10. TrendingSection.tsx
-- **Path:** `src/DOMAIN/sections/sections/TrendingSection.tsx`
+- **Path:** `src/DOMAIN/sections/TrendingSection.tsx`
 - **Violations:** 0 (no violations detected)
 - **Complexity:** Low
 - **Dependencies:** None
 - **Migration Notes:** Uses Card component. May need visual review.
 
 #### 11. ProfileCard.tsx
-- **Path:** `src/DOMAIN/auth/auth/ProfileCard.tsx`
+- **Path:** `src/DOMAIN/auth/ProfileCard.tsx`
 - **Violations:** 0 (no violations detected)
 - **Complexity:** Low
 - **Dependencies:** None
@@ -156,7 +156,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
   - Many divs used for layout composition - replace with Foundation layout components
 
 #### 13. NotificationCenter.* (10 files)
-- **Path:** `src/DOMAIN/notifications/notifications/`
+- **Path:** `src/DOMAIN/notifications/`
 - **Violations:**
   - **V5 (MAJOR):** 2 (prop smuggling in DismissAll.tsx and Trigger.tsx)
 - **Complexity:** Medium-High
@@ -179,7 +179,7 @@ This document provides a complete inventory of product screens in `src/DOMAIN/` 
 - useNotificationCenter.tsx
 
 #### 14. LanguageSelector.tsx
-- **Path:** `src/DOMAIN/controls/LanguageSelector/LanguageSelector.tsx`
+- **Path:** `src/COMPOSITION/controls/LanguageSelector/LanguageSelector.tsx`
 - **Violations:** 0 (no violations detected)
 - **Complexity:** Low
 - **Dependencies:** None

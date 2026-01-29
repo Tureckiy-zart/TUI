@@ -5,42 +5,58 @@ import * as React from "react";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
-import { Box, Heading, Icon, Link, resolveComponentAnimations, Text } from "@/index";
+import { IconArrowRight } from "@/icons";
+import {
+  Box,
+  GRADIENT_TOKENS,
+  Heading,
+  Icon,
+  Link,
+  LinkWithCustomVariant,
+  resolveComponentAnimations,
+  Text,
+} from "@/index";
 import {
   CardBase,
   CardBaseContentWrapper,
+  CardBaseFooterWrapper,
   CardBaseImageWrapper,
-} from "@/PATTERNS/cards/cards/CardBase";
+} from "@/PATTERNS/cards/CardBase";
 
-import type { CategoryCardProps, CategoryCardVariant } from "./CategoryCard.types";
+import type { PromoCardProps, PromoCardSize, PromoCardVariant } from "./PromoCard.types";
 import {
-  categoryCardBadgeSurfaceVariants,
-  categoryCardBadgeVariants,
-} from "./CategoryCard.variants";
+  promoCardBadgeSurfaceVariants,
+  promoCardBadgeVariants,
+  promoCardCtaButtonIconVariants,
+  promoCardCtaButtonVariants,
+} from "./PromoCard.variants";
 
 /**
- * CategoryCard Component
+ * PromoCard Component
  *
- * Domain-specific card component for displaying category information.
+ * Domain-specific card component for displaying promotional content.
  * Uses CardBase for layout and DOMAIN_TOKENS for all styling.
+ * CTA button uses DOMAIN_TOKENS.cta.button tokens for styling.
  *
  * @example
  * ```tsx
- * <CategoryCard
- *   title="Jazz"
- *   description="Explore jazz events"
- *   href="/categories/jazz"
+ * <PromoCard
+ *   title="Special Offer"
+ *   description="Get 20% off on all tickets"
+ *   ctaLabel="Learn More"
+ *   ctaUrl="/promo"
  * />
  * ```
  */
-export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
+export const PromoCard = React.forwardRef<HTMLDivElement, PromoCardProps>(
   (
     {
       title,
       description,
       imageUrl,
       href,
+      ctaUrl,
+      ctaLabel,
       featured = false,
       showImage = true,
       featuredBadgeText,
@@ -60,13 +76,14 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
     });
 
     // Determine variant: use explicit variant prop or derive from featured
-    const cardVariant: CategoryCardVariant = variant || (featured ? "elevated" : "default");
+    // Map featured boolean to elevated variant for backward compatibility
+    const cardVariant: PromoCardVariant = variant || (featured ? "elevated" : "default");
 
-    // Map CategoryCardSize to CardBaseSize: "sm" -> "sm", "md" -> "md" (direct mapping)
-    const cardBaseSize: "sm" | "md" = size || "md";
+    // Use PromoCard sizes directly (now aligned with CardBase sizes: sm | md)
+    const cardBaseSize: PromoCardSize = (size || "md") as PromoCardSize;
 
-    // Map CategoryCardVariant to CardBaseVariant: "default" -> "default", "elevated" -> "elevated" (direct mapping)
-    const cardBaseVariant: "default" | "elevated" = cardVariant;
+    // Use PromoCard variants directly (now aligned with CardBase variants: default | elevated)
+    const cardBaseVariant: PromoCardVariant = cardVariant;
 
     return (
       <Box {...animationProps}>
@@ -78,9 +95,9 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
           {...props}
         >
           {/* Featured Badge */}
-          {featured && featuredBadgeText && (
-            <Box className={categoryCardBadgeVariants({ size })}>
-              <Box className={categoryCardBadgeSurfaceVariants({ variant: "elevated" })}>
+          {(featured || cardVariant === "elevated") && featuredBadgeText && (
+            <Box className={promoCardBadgeVariants({ size: cardBaseSize })}>
+              <Box className={promoCardBadgeSurfaceVariants({ variant: "elevated" })}>
                 {featuredBadgeText}
               </Box>
             </Box>
@@ -92,7 +109,7 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
               <Box
                 className={cn(
                   "relative h-full w-full overflow-hidden",
-                  DOMAIN_TOKENS.image.placeholder.gradient,
+                  GRADIENT_TOKENS.surface.elevated,
                 )}
               >
                 {imageUrl ? (
@@ -108,16 +125,14 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
                 ) : (
                   <Box className="flex h-full w-full items-center justify-center">
                     <Box className={ICON_TOKENS.sizes["4xl"]}>
-                      <Icon name="info" color="muted" aria-hidden="true" />
+                      <Icon name="info" size="xl" color="muted" aria-hidden="true" />
                     </Box>
                   </Box>
                 )}
                 {/* Image Overlay on Hover */}
                 <Box
                   className={cn(
-                    "absolute inset-0 opacity-0 group-hover:opacity-100",
-                    MOTION_TOKENS.transition.opacity,
-                    MOTION_TOKENS.duration.normal,
+                    "absolute inset-0 opacity-0 transition-opacity duration-normal group-hover:opacity-100",
                     DOMAIN_TOKENS.image.overlay.gradient,
                   )}
                 />
@@ -145,10 +160,35 @@ export const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
               </Text>
             )}
           </CardBaseContentWrapper>
+
+          {/* Footer Section */}
+          <CardBaseFooterWrapper size={cardBaseSize}>
+            <Box className="w-full">
+              {ctaUrl && (
+                <LinkWithCustomVariant
+                  href={ctaUrl}
+                  customClassName={promoCardCtaButtonVariants({ size: cardBaseSize })}
+                >
+                  {ctaLabel}
+                  <IconArrowRight
+                    className={promoCardCtaButtonIconVariants({ size: cardBaseSize })}
+                  />
+                </LinkWithCustomVariant>
+              )}
+              {!ctaUrl && (
+                <Box className={cn("w-full", promoCardCtaButtonVariants({ size: cardBaseSize }))}>
+                  {ctaLabel}
+                  <IconArrowRight
+                    className={promoCardCtaButtonIconVariants({ size: cardBaseSize })}
+                  />
+                </Box>
+              )}
+            </Box>
+          </CardBaseFooterWrapper>
         </CardBase>
       </Box>
     );
   },
 );
 
-CategoryCard.displayName = "CategoryCard";
+PromoCard.displayName = "PromoCard";

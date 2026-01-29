@@ -389,7 +389,7 @@ This audit establishes and locks the canonical Public API surface for Tenerife U
 
 #### 3.6 Notification System (DOMAIN/notifications)
 
-**Source:** `src/DOMAIN/notifications/notifications`
+**Source:** `src/DOMAIN/notifications`
 
 | Component | Exports | Layer | Status |
 |-----------|---------|-------|--------|
@@ -399,7 +399,7 @@ This audit establishes and locks the canonical Public API surface for Tenerife U
 
 #### 3.7 Menu System (PATTERNS/menus)
 
-**Source:** `src/PATTERNS/menus/menus`
+**Source:** `src/PATTERNS/menus`
 
 | Component | Exports | Layer | Status |
 |-----------|---------|-------|--------|

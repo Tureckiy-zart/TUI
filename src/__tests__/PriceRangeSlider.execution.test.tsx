@@ -8,7 +8,7 @@ import { renderHook, act } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/filters/PriceRangeSlider";
+import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/PriceRangeSlider";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const requiredProps = {

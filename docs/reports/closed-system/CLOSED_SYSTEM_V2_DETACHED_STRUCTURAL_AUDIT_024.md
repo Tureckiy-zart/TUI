@@ -96,7 +96,7 @@ This report documents the results of a detached structural audit conducted to id
 **Examples:**
 
 1. **DOMAIN layer violations:**
-   - `src/DOMAIN/sections/sections/TrendingSection.tsx:5-8`
+   - `src/DOMAIN/sections/TrendingSection.tsx:5-8`
      ```typescript
      import { Card, CardBody } from "@/COMPOSITION/layout/Card";
      import { cn } from "@/FOUNDATION/lib/utils";
@@ -104,7 +104,7 @@ This report documents the results of a detached structural audit conducted to id
      import { Text } from "@/PRIMITIVES/Text";
      ```
 
-   - `src/DOMAIN/auth/auth/ProfileCard.tsx:5-9`
+   - `src/DOMAIN/auth/ProfileCard.tsx:5-9`
      ```typescript
      import { Avatar } from "@/COMPOSITION/controls/Avatar";
      import { Card, CardBody } from "@/COMPOSITION/layout/Card";
@@ -113,7 +113,7 @@ This report documents the results of a detached structural audit conducted to id
      import { Text } from "@/PRIMITIVES/Text";
      ```
 
-   - `src/DOMAIN/admin/admin/Dashboard.tsx:5-8`
+   - `src/DOMAIN/admin/Dashboard.tsx:5-8`
      ```typescript
      import { Card, CardBody } from "@/COMPOSITION/layout/Card";
      import { cn } from "@/FOUNDATION/lib/utils";
@@ -122,13 +122,13 @@ This report documents the results of a detached structural audit conducted to id
      ```
 
 2. **PATTERNS layer violations:**
-   - `src/PATTERNS/filters/filters/DateRangePicker.tsx:7-8`
+   - `src/PATTERNS/filters/DateRangePicker.tsx:7-8`
      ```typescript
      import { Box } from "@/COMPOSITION/layout";
      import { Button } from "@/PRIMITIVES/Button";
      ```
 
-   - `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx:5-20`
+   - `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx:5-20`
      ```typescript
      import { Box } from "@/COMPOSITION/layout";
      import { resolveComponentAnimations } from "@/COMPOSITION/motion/animation/utils";
@@ -175,13 +175,13 @@ This report documents the results of a detached structural audit conducted to id
 
 **Analysis:**
 
-1. **HoverCardTrigger (`src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx`):**
+1. **HoverCardTrigger (`src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx`):**
    - Uses `Slot` from `@radix-ui/react-slot` and `asChild` prop
    - This is a PATTERNS component, not consumer code (DOMAIN)
    - `asChild` is used for composition pattern, not to bypass Foundation API
    - No Foundation components receive DOM-props through this pattern
 
-2. **FilterSelect (`src/PATTERNS/filters/filters/FilterSelect.tsx:30`):**
+2. **FilterSelect (`src/PATTERNS/filters/FilterSelect.tsx:30`):**
    - Uses `asChild` on `SelectPrimitive.Icon` (Radix primitive, not Foundation)
    - This is a PATTERNS component, not consumer code
    - No Foundation components affected
@@ -210,7 +210,7 @@ This report documents the results of a detached structural audit conducted to id
 
 **Analysis:**
 
-1. **PriceRangeSlider (`src/PATTERNS/filters/filters/PriceRangeSlider.tsx:209-212`):**
+1. **PriceRangeSlider (`src/PATTERNS/filters/PriceRangeSlider.tsx:209-212`):**
    ```tsx
    style={{
      left: `${((minSliderValue - min) / (max - min)) * 100}%`,

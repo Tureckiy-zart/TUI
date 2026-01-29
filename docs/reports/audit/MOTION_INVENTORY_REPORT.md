@@ -152,8 +152,8 @@ This report provides a comprehensive inventory of all motion-related code patter
 - **Mechanism:** Animation prop with string value (`"fadeInUp"`)
 - **Status:** Needs review - verify if `fadeInUp` is a token-based animation or custom
 
-#### EventCard (`src/DOMAIN/sections/EventCard/EventCard.tsx`)
-- **File:** `src/DOMAIN/sections/EventCard/EventCard.tsx:116`
+#### EventCard (`src/PATTERNS/cards/EventCard/EventCard.tsx`)
+- **File:** `src/PATTERNS/cards/EventCard/EventCard.tsx:116`
 - **Motion Usage:** `animation: animation?.animation || "fadeInUp"`
 - **Domain:** Enter/Exit
 - **Compliance:** ⚠️ **C - Component-level custom** (needs verification)

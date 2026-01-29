@@ -51,7 +51,7 @@
 **Exported Name:** `CategoryCard`  
 **Layer:** PATTERNS (Extension layer - domain-specific card component)  
 **Semantic Role:** Domain-specific card component for displaying category information  
-**Location:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`  
+**Location:** `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -69,17 +69,17 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx` (163 lines)
+- **Main Component:** `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx` (163 lines)
   - Contains: CategoryCard component (forwardRef pattern)
   - Uses CardBase for layout composition
   - Uses DOMAIN_TOKENS, ICON_TOKENS, MOTION_TOKENS for styling
   - Wrapped in Box component for animation support
-- **Types:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.types.ts` (43 lines)
+- **Types:** `src/PATTERNS/cards/CategoryCard/CategoryCard.types.ts` (43 lines)
   - Types: CategoryCardSize, CategoryCardVariant, CategoryCardProps
-- **Variants:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts` (58 lines)
+- **Variants:** `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts` (58 lines)
   - CVAs: categoryCardBadgeVariants, categoryCardBadgeSurfaceVariants
   - Uses `cva` from `class-variance-authority` (not `tokenCVA`)
-- **Barrel Export:** `src/PATTERNS/cards/cards/CategoryCard/index.ts` (13 lines)
+- **Barrel Export:** `src/PATTERNS/cards/CategoryCard/index.ts` (13 lines)
 - **Root Export:** NOT exported from `src/index.ts` (not in public API)
 
 ### Storybook Files
@@ -102,10 +102,10 @@
 - `CategoryCardVariant` (type: `"default" | "featured"`)
 
 **Export Hierarchy:**
-1. `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx` → exports component
-2. `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.types.ts` → exports types
-3. `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts` → exports CVAs (not exported)
-4. `src/PATTERNS/cards/cards/CategoryCard/index.ts` → barrel re-exports component and types
+1. `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx` → exports component
+2. `src/PATTERNS/cards/CategoryCard/CategoryCard.types.ts` → exports types
+3. `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts` → exports CVAs (not exported)
+4. `src/PATTERNS/cards/CategoryCard/index.ts` → barrel re-exports component and types
 5. `src/index.ts` → NOT exported (not in public API)
 
 ### External Dependencies
@@ -122,7 +122,7 @@
 - `@/FOUNDATION/tokens/components/domain` → DOMAIN_TOKENS
 - `@/FOUNDATION/tokens/components/icon` → ICON_TOKENS
 - `@/FOUNDATION/tokens/components/motion` → MOTION_TOKENS
-- `@/PATTERNS/cards/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseImageWrapper
+- `@/PATTERNS/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseImageWrapper
 - `@/PRIMITIVES/Heading` → Heading
 - `@/PRIMITIVES/Icon` → Icon
 - `@/PRIMITIVES/Link` → Link
@@ -804,9 +804,9 @@ The component is considered "closed" only when:
 - `CategoryCard.tsx` - Updated size default, variant derivation, and mapping logic
 
 **Artifacts:**
-- Modified: `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.variants.ts`
-- Modified: `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.types.ts`
-- Modified: `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`
+- Modified: `src/PATTERNS/cards/CategoryCard/CategoryCard.variants.ts`
+- Modified: `src/PATTERNS/cards/CategoryCard/CategoryCard.types.ts`
+- Modified: `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`
 
 **Deferred:**
 - None (all FIX-BLOCKERS applied)
@@ -850,8 +850,8 @@ The component is considered "closed" only when:
 - ✅ **No Placeholder Content:** All tests and stories are comprehensive, not placeholders
 
 **Changes:**
-- Created: `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.test.tsx`
-- Created: `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.stories.tsx`
+- Created: `src/PATTERNS/cards/CategoryCard/CategoryCard.test.tsx`
+- Created: `src/PATTERNS/cards/CategoryCard/CategoryCard.stories.tsx`
 
 **Artifacts:**
 - `CategoryCard.test.tsx` - Comprehensive test suite (27 test cases)

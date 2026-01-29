@@ -64,35 +64,35 @@ Formally freezes the results of Phase I (Product Scope Migration) and prevents a
 All screens listed in `CLOSED_SYSTEM_V2_PHASE_I_SCREEN_INVENTORY.md` (14 screens):
 
 **High Priority (5 screens):**
-1. `src/DOMAIN/auth/auth/LoginForm.tsx`
-2. `src/DOMAIN/auth/auth/RegisterForm.tsx`
-3. `src/DOMAIN/admin/admin/Dashboard.tsx`
-4. `src/DOMAIN/admin/admin/UserManagement.tsx`
-5. `src/DOMAIN/sections/EventCard/EventCard.tsx`
+1. `src/DOMAIN/auth/LoginForm.tsx`
+2. `src/DOMAIN/auth/RegisterForm.tsx`
+3. `src/DOMAIN/admin/Dashboard.tsx`
+4. `src/DOMAIN/admin/UserManagement.tsx`
+5. `src/PATTERNS/cards/EventCard/EventCard.tsx`
 
 **Medium Priority (5 screens):**
-6. `src/DOMAIN/sections/sections/HeroSection.tsx`
-7. `src/DOMAIN/sections/sections/FeatureSection.tsx`
-8. `src/DOMAIN/sections/sections/CTASection.tsx`
-9. `src/DOMAIN/sections/sections/ArticlesSection.tsx`
-10. `src/DOMAIN/sections/sections/TrendingSection.tsx`
+6. `src/DOMAIN/sections/HeroSection.tsx`
+7. `src/DOMAIN/sections/FeatureSection.tsx`
+8. `src/DOMAIN/sections/CTASection.tsx`
+9. `src/DOMAIN/sections/ArticlesSection.tsx`
+10. `src/DOMAIN/sections/TrendingSection.tsx`
 
 **Low Priority (4 screens/groups):**
 11. `src/DOMAIN/section-builder/SectionBuilder.tsx`
-12. `src/DOMAIN/notifications/notifications/NotificationCenter.*` (10 files)
-13. `src/DOMAIN/auth/auth/ProfileCard.tsx`
-14. `src/DOMAIN/controls/LanguageSelector/LanguageSelector.tsx`
+12. `src/DOMAIN/notifications/NotificationCenter.*` (10 files)
+13. `src/DOMAIN/auth/ProfileCard.tsx`
+14. `src/COMPOSITION/controls/LanguageSelector/LanguageSelector.tsx`
 
 **Product-Level Components:**
 - All components in `src/DOMAIN/` that use Foundation components
 - All components that were migrated to canonical patterns during Phase I
 
 **Phase I.1 Fixes (Prop-Spread):**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.DismissAll.tsx` — Fixed prop smuggling with explicit type assertion
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx` — Fixed prop smuggling with explicit type assertion
+- `src/DOMAIN/notifications/NotificationCenter.DismissAll.tsx` — Fixed prop smuggling with explicit type assertion
+- `src/DOMAIN/notifications/NotificationCenter.Trigger.tsx` — Fixed prop smuggling with explicit type assertion
 
 **Phase I.2 Fixes (V1_CLASSNAME_ON_FOUNDATION):**
-- `src/DOMAIN/sections/EventCard/EventCard.tsx` — Removed `className` from Icon component (line 147)
+- `src/PATTERNS/cards/EventCard/EventCard.tsx` — Removed `className` from Icon component (line 147)
 
 **Canonical Patterns:**
 - **Wrapper First Pattern:** Use Box/Inline/Stack/Row/Grid/Container/Section as wrappers instead of raw HTML div/section/span

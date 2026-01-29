@@ -49,7 +49,7 @@
 **Exported Name:** `FilterBar`, `FilterBarCompact`  
 **Layer:** PATTERNS (Business/UI patterns layer)  
 **Semantic Role:** PATTERN_FILTER_ORCHESTRATION  
-**Location:** `src/PATTERNS/filters/filters/FilterBar.tsx`  
+**Location:** `src/PATTERNS/filters/FilterBar.tsx`  
 **Date:** 2025-12-27  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -60,13 +60,13 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/PATTERNS/filters/filters/FilterBar.tsx` (321 lines)
+- **Main Component:** `src/PATTERNS/filters/FilterBar.tsx` (321 lines)
 - **Barrel Export:** Not present (no `index.ts` in directory)
 - **Root Export:** Not exported from `src/index.ts`
 
 ### Storybook Files
 
-- **Stories:** `src/PATTERNS/filters/filters/FilterBar.stories.tsx` (112 lines)
+- **Stories:** `src/PATTERNS/filters/FilterBar.stories.tsx` (112 lines)
   - Stories: Default, SearchOnly, WithoutPriceRange, Compact
   - Quality Gate: Needs evaluation against VARIANTS_SIZE_CANON.md
 
@@ -83,7 +83,7 @@
 - `FilterBarProps` (interface)
 
 **Export Hierarchy:**
-1. `src/PATTERNS/filters/filters/FilterBar.tsx` → exports FilterBar, FilterBarCompact, FilterBarProps
+1. `src/PATTERNS/filters/FilterBar.tsx` → exports FilterBar, FilterBarCompact, FilterBarProps
 2. `src/PATTERNS/index.ts` → Not exported (component not in PATTERNS barrel)
 3. `src/index.ts` → Not exported (component not in root exports)
 
@@ -185,7 +185,7 @@ export interface FilterBarProps {
 
 ### Mock Hook Dependency
 
-**File:** `src/PATTERNS/filters/filters/types.ts`
+**File:** `src/PATTERNS/filters/types.ts`
 
 **Implementation:** `useFilterManager` is a mock hook that:
 - Logs console.warn about being a mock implementation
@@ -203,7 +203,7 @@ export interface FilterBarProps {
 - Line 1067: `29. **FilterBar** - `src/components/filters/FilterBar.tsx`
 - Status: RESTRICTED
 - Rule: DO NOT USE
-- ⚠️ Path mismatch: Documented path is `src/components/filters/FilterBar.tsx`, actual path is `src/PATTERNS/filters/filters/FilterBar.tsx`
+- ⚠️ Path mismatch: Documented path is `src/components/filters/FilterBar.tsx`, actual path is `src/PATTERNS/filters/FilterBar.tsx`
 
 **ARCHITECTURE_LOCK.md:** FilterBar not explicitly mentioned
 
@@ -492,7 +492,7 @@ export interface FilterBarProps {
 **Prevention:** Explicitly forbid adding variants/sizes unless required by existing API. FilterBar does not have size/variant props, so no new size/variant props should be added.
 
 ### Risk 2: Cursor renames/moves files
-**Prevention:** Explicitly forbid file renames/moves unless explicitly required by the step. FilterBar.tsx must remain at `src/PATTERNS/filters/filters/FilterBar.tsx`.
+**Prevention:** Explicitly forbid file renames/moves unless explicitly required by the step. FilterBar.tsx must remain at `src/PATTERNS/filters/FilterBar.tsx`.
 
 ### Risk 3: Placeholder stories/tests
 **Prevention:** Require comprehensive test coverage and Storybook stories (Matrix/States if applicable). Current stories are basic and may need enhancement.
@@ -983,7 +983,7 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
 **Blocking:** No
 
 **Notes:**
-- ✅ Test file created: `src/PATTERNS/filters/filters/FilterBar.test.tsx`
+- ✅ Test file created: `src/PATTERNS/filters/FilterBar.test.tsx`
 - ✅ Tests cover public behavior (rendering, conditional rendering, prop validation, callbacks)
 - ✅ Tests cover edge cases (empty categories, single filter enabled, empty props)
 - ✅ All 19 tests pass
@@ -1022,7 +1022,7 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
 - ✅ Tests verify error conditions (prop validation)
 
 **Changes:**
-- Created test file: `src/PATTERNS/filters/filters/FilterBar.test.tsx`
+- Created test file: `src/PATTERNS/filters/FilterBar.test.tsx`
 - Added 19 tests covering: API contract, prop validation, conditional rendering, callbacks, edge cases, FilterBarCompact
 
 **Deferred:**
@@ -1104,7 +1104,7 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
 
 1. **Lock Status Consistency:** ✅ PASSED
    - Component is PATTERNS layer (not Foundation/Extension)
-   - EXTENSION_STATE.md path corrected (was `src/components/filters/FilterBar.tsx`, now `src/PATTERNS/filters/filters/FilterBar.tsx`)
+   - EXTENSION_STATE.md path corrected (was `src/components/filters/FilterBar.tsx`, now `src/PATTERNS/filters/FilterBar.tsx`)
    - Status remains RESTRICTED (DO NOT USE) - component not yet ready for production use
 
 2. **Baseline BLOCKER Resolution Traceability:** ✅ PASSED
@@ -1118,9 +1118,9 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
    - Component is compliant with all system standards
 
 4. **File Reality Verification:** ✅ PASSED
-   - Implementation file: `src/PATTERNS/filters/filters/FilterBar.tsx` exists
-   - Test file: `src/PATTERNS/filters/filters/FilterBar.test.tsx` exists (created in STEP 10)
-   - Stories file: `src/PATTERNS/filters/filters/FilterBar.stories.tsx` exists
+   - Implementation file: `src/PATTERNS/filters/FilterBar.tsx` exists
+   - Test file: `src/PATTERNS/filters/FilterBar.test.tsx` exists (created in STEP 10)
+   - Stories file: `src/PATTERNS/filters/FilterBar.stories.tsx` exists
    - All files match report documentation
 
 5. **Outcome/Changes Logic Consistency:** ✅ PASSED
@@ -1140,7 +1140,7 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
 **Lock Propagation:**
 
 1. **EXTENSION_STATE.md:** ✅ Updated
-   - Path corrected: `src/components/filters/FilterBar.tsx` → `src/PATTERNS/filters/filters/FilterBar.tsx`
+   - Path corrected: `src/components/filters/FilterBar.tsx` → `src/PATTERNS/filters/FilterBar.tsx`
    - Status remains RESTRICTED (component not yet ready for production use)
    - Note added: Path corrected (2025-12-27, Pipeline 18A audit)
 
@@ -1163,7 +1163,7 @@ FilterBar is a reusable UI pattern component that orchestrates multiple filter c
 - ✅ **Status: PROCESS LOCKED** (component is now pure UI)
 
 **Changes:**
-- Updated EXTENSION_STATE.md: Corrected FilterBar path from `src/components/filters/FilterBar.tsx` to `src/PATTERNS/filters/filters/FilterBar.tsx`
+- Updated EXTENSION_STATE.md: Corrected FilterBar path from `src/components/filters/FilterBar.tsx` to `src/PATTERNS/filters/FilterBar.tsx`
 - **FINALIZATION (2025-12-27):** Removed mock `useFilterManager` hook, converted to fully controlled component via `filterManager` prop
 
 **Deferred:**

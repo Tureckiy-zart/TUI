@@ -15,7 +15,7 @@
 
 ### 1. NotificationCenterList
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.List.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.List.tsx`  
 **Finding ID:** #1  
 **Classification:** **A) MUST migrate**  
 **Priority:** High
@@ -36,7 +36,7 @@
 
 ### 2. NotificationCenterItem
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.Item.tsx`  
 **Finding ID:** #2  
 **Classification:** **A) MUST migrate**  
 **Priority:** High

@@ -702,7 +702,7 @@ export {
   type NotificationVariant,
   useNotificationCenter,
   useNotificationCenterContext,
-} from "./DOMAIN/notifications/notifications";
+} from "./DOMAIN/notifications";
 
 // ============================================================================
 // MENU SYSTEM
@@ -716,7 +716,7 @@ export {
   type HoverCardRootProps,
   HoverCardTrigger,
   type HoverCardTriggerProps,
-} from "./PATTERNS/menus/menus";
+} from "./PATTERNS/menus";
 
 // ContextMenu components
 export {

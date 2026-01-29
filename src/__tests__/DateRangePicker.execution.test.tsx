@@ -8,7 +8,7 @@ import { renderHook, act } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/filters/DateRangePicker";
+import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/DateRangePicker";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const requiredProps = {

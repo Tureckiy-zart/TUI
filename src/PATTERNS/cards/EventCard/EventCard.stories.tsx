@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { EventCard } from "./EventCard";
 import type { EventCardSize, EventCardVariant } from "./EventCard.types";
@@ -9,14 +9,14 @@ const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800&h=500&fit=crop";
 
 const meta: Meta<typeof EventCard> = {
-  title: "UI / Domain / EventCard",
+  title: "UI / Patterns / Cards / EventCard",
   component: EventCard,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Domain-specific card component for displaying event information. Uses CardBase for layout and CARD_TOKENS + DOMAIN_TOKENS for all styling. All visual values come from tokens - no hardcoded Tailwind visual classes.",
+          "Card component for displaying event information. Uses CardBase for layout and CARD_TOKENS + DOMAIN_TOKENS for all styling. All visual values come from tokens - no hardcoded Tailwind visual classes.",
       },
     },
   },

@@ -7,7 +7,7 @@ import { act, fireEvent, render, renderHook, screen } from "@testing-library/rea
 import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { SearchInput, useSearch } from "@/PATTERNS/filters/filters/SearchInput";
+import { SearchInput, useSearch } from "@/PATTERNS/filters/SearchInput";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const wrapper = ({ children }: { children: React.ReactNode }) =>

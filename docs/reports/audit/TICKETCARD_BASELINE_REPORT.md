@@ -50,7 +50,7 @@
 **Exported Name:** `TicketCard`  
 **Layer:** PATTERNS (Extension layer)  
 **Semantic Role:** Domain-specific card component for displaying ticket information for Event/Artist/Venue context  
-**Location:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`  
+**Location:** `src/PATTERNS/cards/TicketCard/TicketCard.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -69,16 +69,16 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx` (299 lines)
+- **Main Component:** `src/PATTERNS/cards/TicketCard/TicketCard.tsx` (299 lines)
   - Contains: TicketCard component (forwardRef pattern)
   - Uses CardBase for layout composition
   - Uses DOMAIN_TOKENS for styling
-- **Types:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.types.ts` (61 lines)
+- **Types:** `src/PATTERNS/cards/TicketCard/TicketCard.types.ts` (61 lines)
   - Types: TicketCardSize, TicketCardVariant, TicketAvailability, TicketCardProps
-- **Variants:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts` (287 lines)
+- **Variants:** `src/PATTERNS/cards/TicketCard/TicketCard.variants.ts` (287 lines)
   - CVAs: ticketCardVariants, ticketCardBadgeVariants, ticketCardBadgeSurfaceVariants, ticketCardDateVariants, ticketCardDescriptionVariants, ticketCardPriceCapacityContainerVariants, ticketCardPriceVariants, ticketCardAvailabilityVariants, ticketCardFooterVariants, ticketCardPurchaseButtonVariants, ticketCardPurchaseButtonIconVariants, ticketCardImageOverlayVariants, ticketCardImageTransformVariants
   - Uses `cva` from `class-variance-authority` (not `tokenCVA`)
-- **Barrel Export:** `src/PATTERNS/cards/cards/TicketCard/index.ts` (14 lines)
+- **Barrel Export:** `src/PATTERNS/cards/TicketCard/index.ts` (14 lines)
 - **Root Export:** NOT exported from `src/index.ts` (not in public API)
 
 ### Storybook Files
@@ -101,10 +101,10 @@
 - `TicketAvailability` (type: `"available" | "sold_out" | "available_soon"`)
 
 **Export Hierarchy:**
-1. `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx` → exports component
-2. `src/PATTERNS/cards/cards/TicketCard/TicketCard.types.ts` → exports types
-3. `src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts` → exports CVAs (not exported)
-4. `src/PATTERNS/cards/cards/TicketCard/index.ts` → barrel re-exports component and types
+1. `src/PATTERNS/cards/TicketCard/TicketCard.tsx` → exports component
+2. `src/PATTERNS/cards/TicketCard/TicketCard.types.ts` → exports types
+3. `src/PATTERNS/cards/TicketCard/TicketCard.variants.ts` → exports CVAs (not exported)
+4. `src/PATTERNS/cards/TicketCard/index.ts` → barrel re-exports component and types
 5. `src/index.ts` → NOT exported (not in public API)
 
 ### External Dependencies
@@ -121,7 +121,7 @@
 - `@/FOUNDATION/tokens/components/icon` → ICON_TOKENS
 - `@/FOUNDATION/tokens/components/motion` → MOTION_TOKENS
 - `@/FOUNDATION/tokens/components/text` → TEXT_TOKENS
-- `@/PATTERNS/cards/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
+- `@/PATTERNS/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
 - `@/PRIMITIVES/Heading` → Heading
 - `@/PRIMITIVES/Icon` → Icon
 - `@/PRIMITIVES/Link` → Link

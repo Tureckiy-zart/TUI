@@ -28,9 +28,9 @@ This report documents the structural refactoring of Tooltip, Popover, and HoverC
 
 1. `src/COMPOSITION/overlays/Tooltip.tsx` - Extracted offset resolution
 2. `src/COMPOSITION/overlays/Popover.tsx` - Extracted offset resolution
-3. `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx` - Simplified conditionals
-4. `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx` - Improved event handlers
-5. `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx` - Improved event handlers
+3. `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx` - Simplified conditionals
+4. `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx` - Improved event handlers
+5. `src/PATTERNS/menus/hover-card/HoverCardContent.tsx` - Improved event handlers
 
 ### Files Created
 
@@ -411,19 +411,19 @@ React.useEffect(() => {
    - Fixed import sorting
    - Reduced from 141 to ~133 lines
 
-3. `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx`
+3. `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx`
    - Extracted `clearAllTimeouts()` helper
    - Extracted `updateState()` helper
    - Simplified `handleOpenChange()` logic
    - Improved cleanup effect
    - Increased from 175 to ~185 lines (but much clearer)
 
-4. `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx`
+4. `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx`
    - Standardized event handler structure
    - Improved code consistency
    - No line count change, but improved quality
 
-5. `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx`
+5. `src/PATTERNS/menus/hover-card/HoverCardContent.tsx`
    - Aligned event handler structure with Trigger
    - Improved code consistency
    - No line count change, but improved quality

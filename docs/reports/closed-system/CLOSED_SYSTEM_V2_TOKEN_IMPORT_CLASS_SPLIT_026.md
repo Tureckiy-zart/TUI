@@ -30,7 +30,7 @@ GRADIENT_TOKENS was caught between two mutually exclusive ESLint rules:
 
 ### Evidence of Conflict
 
-**File:** `src/DOMAIN/sections/EventCard/EventCard.variants.ts` (line 6)
+**File:** `src/PATTERNS/cards/EventCard/EventCard.variants.ts` (line 6)
 
 **Before Resolution:**
 ```typescript
@@ -151,7 +151,7 @@ const FORBIDDEN_TOKEN_NAMES = new Set([
 
 **ESLint Output for `EventCard.variants.ts`:**
 ```
-/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/DOMAIN/sections/EventCard/EventCard.variants.ts
+/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/EventCard/EventCard.variants.ts
   6:1   error  '@/FOUNDATION/tokens/gradients' import is restricted from being used by a pattern. Deep imports are forbidden. Use public API via '@/index'...  no-restricted-imports
   7:10  error  Token 'GRADIENT_TOKENS' must NOT be imported from '@/index'. Import directly from '@/FOUNDATION/tokens/components/**' instead...  tenerife-ui-architecture/no-token-imports-from-index
 ```
@@ -162,7 +162,7 @@ const FORBIDDEN_TOKEN_NAMES = new Set([
 
 **ESLint Output for `EventCard.variants.ts`:**
 ```
-/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/DOMAIN/sections/EventCard/EventCard.variants.ts
+/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PATTERNS/cards/EventCard/EventCard.variants.ts
   (no errors for GRADIENT_TOKENS import from @/index)
 ```
 

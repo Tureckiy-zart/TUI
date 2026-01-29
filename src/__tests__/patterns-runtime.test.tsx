@@ -8,10 +8,10 @@ import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
-import { FilterSelect } from "@/PATTERNS/filters/filters/FilterSelect";
-import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/filters/DateRangePicker";
-import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/filters/PriceRangeSlider";
-import { SearchFilters } from "@/PATTERNS/filters/filters/SearchFilters";
+import { FilterSelect } from "@/PATTERNS/filters/FilterSelect";
+import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/DateRangePicker";
+import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/PriceRangeSlider";
+import { SearchFilters } from "@/PATTERNS/filters/SearchFilters";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +19,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/PATTERNS/menus/menus/NavigationMenu";
+} from "@/PATTERNS/menus/NavigationMenu";
 import { ConsentBanner } from "@/PATTERNS/states/ConsentBanner/ConsentBanner";
 import { DomainSkeleton } from "@/PATTERNS/states/LoadingState/DomainSkeleton/Skeleton";
 import { EventCardSkeleton } from "@/PATTERNS/states/LoadingState/EventCardSkeleton/EventCardSkeleton";

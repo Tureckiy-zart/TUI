@@ -15,8 +15,8 @@
       "family": "components",
       "component": "NotificationCenter",
       "consumers": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.GroupHeader.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.GroupHeader.tsx"
       ],
       "rationale": "NotificationCenter uses raw Tailwind classes (text-sm, font-semibold, text-xs) and raw CSS variable references (text-[hsl(var(--tm-text-primary))]) instead of TEXT_TOKENS. This creates inconsistency and makes theme changes harder.",
       "examples": [
@@ -41,8 +41,8 @@
       "family": "layout",
       "component": "HeroSection, NotificationCenter",
       "consumers": [
-        "src/DOMAIN/sections/sections/HeroSection.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx"
+        "src/DOMAIN/sections/HeroSection.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.Panel.tsx"
       ],
       "rationale": "Components use raw Tailwind classes for common layout patterns (w-full, max-w-full, overflow-hidden, rounded-lg) instead of layout tokens. This creates inconsistency and makes responsive design harder.",
       "examples": [
@@ -67,7 +67,7 @@
       "family": "colors",
       "component": "NotificationCenter",
       "consumers": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Trigger.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Trigger.tsx"
       ],
       "rationale": "NotificationCenter uses raw CSS variable references (bg-[hsl(var(--tm-destructive))], text-[hsl(var(--tm-destructive-foreground))]) for badge colors instead of semantic color tokens.",
       "examples": [
@@ -90,7 +90,7 @@
       "family": "types",
       "component": "HeroSection",
       "consumers": [
-        "src/DOMAIN/sections/sections/HeroSection.tsx"
+        "src/DOMAIN/sections/HeroSection.tsx"
       ],
       "rationale": "HeroSection uses raw Tailwind class (max-w-3xl) for max-width constraint. There's no responsive token union for max-width constraints in layout components.",
       "examples": [
@@ -113,7 +113,7 @@
       "family": "spacing",
       "component": "NotificationCenter",
       "consumers": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx"
       ],
       "rationale": "NotificationCenter uses raw Tailwind class (mt-sm) for action button margin. While semanticSpacing.sm exists, the component uses raw class instead of token.",
       "examples": [
@@ -136,8 +136,8 @@
       "family": "components",
       "component": "NotificationCenter",
       "consumers": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx",
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx",
+        "src/DOMAIN/notifications/NotificationCenter.Panel.tsx"
       ],
       "rationale": "NotificationCenter uses raw Tailwind classes (h-4 w-4, h-5 w-5) for icon sizes instead of ICON_TOKENS.sizes.",
       "examples": [
@@ -161,7 +161,7 @@
       "family": "spacing",
       "component": "NotificationCenter",
       "consumers": [
-        "src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx"
+        "src/DOMAIN/notifications/NotificationCenter.Item.tsx"
       ],
       "rationale": "NotificationCenter uses raw Tailwind class (space-y-xs) for vertical spacing between notification content elements. While semanticSpacing.xs exists, the component uses raw class instead of token.",
       "examples": [
