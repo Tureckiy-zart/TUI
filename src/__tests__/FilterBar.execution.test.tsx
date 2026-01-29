@@ -7,9 +7,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
+import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 import { FilterBar } from "@/PATTERNS/filters/FilterBar";
 import type { FilterManager } from "@/PATTERNS/filters/types";
-import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
 
 const sortOptions = [
   { value: "date", label: "Date" },

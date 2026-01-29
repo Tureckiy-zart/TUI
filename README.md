@@ -1,16 +1,16 @@
 # 🌴 TUI
 
 **Token-driven UI architecture for long-living React products**
-Strict. Predictable. Built for system-level consistency.
+Predictable. Built for system-level consistency.
 
-![Release](https://img.shields.io/badge/release-v2.3.0-blue?style=for-the-badge)
-![npm version](https://img.shields.io/badge/npm-v2.3.0-blue?style=for-the-badge)
+![Release](https://img.shields.io/badge/release-v2.3.1-blue?style=for-the-badge)
+![npm version](https://img.shields.io/badge/npm-v2.3.1-blue?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18+-blue?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Current Release:** [v2.3.0](CHANGELOG.md#230) (npm)  
+**Current Release:** [v2.3.1](CHANGELOG.md#231) (npm)  
 **Next Release:** [Unreleased] — See [CHANGELOG](CHANGELOG.md#unreleased)
 
 <p align="center">
@@ -30,8 +30,7 @@ Strict. Predictable. Built for system-level consistency.
 
 TUI is **not a beginner-friendly UI library**.
 
-This system is intentionally built for developers and teams who value
-**architectural consistency, long-term scalability, and system-level thinking**
+Built for teams who value **architectural consistency** and **long-term scalability**
 over quick experimentation or visual convenience.
 
 ### This library is for you if:
@@ -39,7 +38,6 @@ over quick experimentation or visual convenience.
 - You build **long-living products**, not throwaway interfaces
 - You want to **prevent design entropy**, not fight it later
 - You prefer **strict rules over flexible chaos**
-- You see constraints as a **feature**, not a limitation
 - You are comfortable trading short-term DX for long-term maintainability
 
 ### This library is NOT for you if:
@@ -53,11 +51,8 @@ over quick experimentation or visual convenience.
 
 - **Tokens are the single source of truth**
 - **The Foundation layer is locked and immutable**
-- **Design decisions must be explicit and centralized**
-- **Constraints exist to protect the system — even from its author**
 
-If the system feels strict, uncomfortable, or limiting at first —
-that means it is working as intended.
+If the system feels strict or limiting — that means it is working as intended.
 
 ---
 
@@ -93,7 +88,7 @@ import { Button } from "@tenerife.music/ui";
 export default function App() {
   return (
     <ThemeProvider defaultMode="night">
-      <Button variant="default">Click me</Button>
+      <Button variant="primary">Click me</Button>
     </ThemeProvider>
   );
 }
@@ -125,99 +120,38 @@ but this is optional.
 
 ## 📚 Documentation
 
-| Document                 | Description                             | Link                                                                                   |
-| ------------------------ | --------------------------------------- | -------------------------------------------------------------------------------------- |
-| **Architecture Context** | Single source of truth (IMMUTABLE)      | [docs/ARCHITECTURE_CONTEXT.md](docs/ARCHITECTURE_CONTEXT.md)                           |
-| **Foundation Lock**      | Authoritative source of truth           | [docs/architecture/FOUNDATION_LOCK.md](docs/architecture/FOUNDATION_LOCK.md)           |
-| **Architecture Lock**    | Canonical architectural constraints     | [docs/architecture/ARCHITECTURE_LOCK.md](docs/architecture/ARCHITECTURE_LOCK.md)       |
-| **A11Y Lock**            | Accessibility system lock (WCAG 2.1 AA) | [docs/architecture/locks/A11Y_LOCK.md](docs/architecture/locks/A11Y_LOCK.md)           |
-| **Tokens Overview**      | Design token structure and philosophy   | [docs/reference/TOKENS_OVERVIEW.md](docs/reference/TOKENS_OVERVIEW.md)                 |
-| **Theme System**         | Theme architecture and tooling          | [docs/theming/THEME_SYSTEM_ARCHITECTURE.md](docs/theming/THEME_SYSTEM_ARCHITECTURE.md) |
-| **API Reference**        | Public API documentation                | [docs/reference/API_REFERENCE.md](docs/reference/API_REFERENCE.md)                     |
-| **Components Inventory** | Complete component list                 | [docs/reference/COMPONENTS_INVENTORY.md](docs/reference/COMPONENTS_INVENTORY.md)       |
-| **Documentation Hub**    | Complete documentation index            | [docs/README.md](docs/README.md)                                                       |
-| Storybook                | Component examples and contracts        | Run `pnpm storybook` locally                                                           |
+### Public Docs
 
-### Development Resources
+| Document                 | Description                           | Link                                                                             |
+| ------------------------ | ------------------------------------- | -------------------------------------------------------------------------------- |
+| **Getting Started**      | Integration and setup guide           | [docs/reference/INTEGRATION_GUIDE.md](docs/reference/INTEGRATION_GUIDE.md)       |
+| **API Reference**        | Public API documentation              | [docs/reference/API_REFERENCE.md](docs/reference/API_REFERENCE.md)               |
+| **Tokens Overview**      | Design token structure and philosophy | [docs/reference/TOKENS_OVERVIEW.md](docs/reference/TOKENS_OVERVIEW.md)           |
+| **Components Inventory** | Complete component list               | [docs/reference/COMPONENTS_INVENTORY.md](docs/reference/COMPONENTS_INVENTORY.md) |
+| **Documentation Hub**    | Complete documentation index          | [docs/README.md](docs/README.md)                                                 |
 
-- **Component Creation**: [Extension Component Creation Checklist](docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md)
-  - **CLI Generator**: Use `pnpm component:generate -- <ComponentName> [--category <category>]` to generate component scaffold
-  - See checklist for complete process and requirements
-- **Component Refactoring**: [Component Refactoring Pipeline (18A)](docs/workflows/foundation/FOUNDATION_STEP_PIPELINE.md)
-  - **Canonical process** for reviewing, improving, and validating existing components
-  - Mandatory 12-step pipeline (STEP 0-11) for Foundation and Extension components
-  - See pipeline for complete refactoring process and requirements
-- **Component Examples**: [Extension Component Examples](docs/reference/EXTENSION_COMPONENT_EXAMPLES.md)
-- **Component Needs**: [Component Needs Inventory](docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md)
-- **Feedback Process**: [Usage Feedback Process](docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md)
+Storybook is used as an internal visual contract and can be run locally.
+
+### Advanced Architecture
+
+- **Architecture Context**: [docs/ARCHITECTURE_CONTEXT.md](docs/ARCHITECTURE_CONTEXT.md)
+- **Foundation Lock**: [docs/architecture/FOUNDATION_LOCK.md](docs/architecture/FOUNDATION_LOCK.md)
+- **Architecture Lock**: [docs/architecture/ARCHITECTURE_LOCK.md](docs/architecture/ARCHITECTURE_LOCK.md)
+- **A11Y Lock**: [docs/architecture/locks/A11Y_LOCK.md](docs/architecture/locks/A11Y_LOCK.md)
 
 ---
 
-## 🏗 Architecture Overview
+## 🏗 Architecture (High-level)
 
-TenerifeUI uses a **5-layer architecture** with strict boundaries:
+TUI is built on a strict multi-layer architecture:
 
-### Foundation Layer (Locked & Closed)
+- Foundation — locked tokens & primitives
+- Primitives — atomic UI building blocks
+- Composition — layout & interaction orchestration
+- Patterns — reusable UI patterns
+- Domain — product-specific components
 
-**Status:** ✅ **LOCKED** (Foundation Closed - 2026-01-02)  
-**Purpose:** Tokens and theme system only
-
-The Foundation layer is **immutable** and **closed**. All Foundation Authority Contracts are **LOCKED**.
-
-**Reference:** [FOUNDATION_LOCK.md](docs/architecture/FOUNDATION_LOCK.md)
-
-### Primitives Layer (Locked)
-
-**Status:** ✅ **CANONICAL**  
-**Purpose:** Atomic UI components, no orchestration
-
-**Location:** `src/PRIMITIVES/`
-
-**Examples:**
-
-- Button, Input, Textarea, Checkbox, Radio, Switch
-- Badge, Alert, Heading, Text, Icon, Image
-- Progress, Skeleton, Divider, Field, Label, Link
-
-**Rule:** PRIMITIVES **MUST NOT** contain orchestration logic or overlay infrastructure.
-
-### Composition Layer (Canonical)
-
-**Status:** ✅ **CANONICAL**  
-**Purpose:** Layout, overlays, interaction orchestration
-
-**Location:** `src/COMPOSITION/`
-
-**Sub-layers:**
-
-- `COMPOSITION/overlays/` - All overlay components (Modal, Popover, ContextMenu, Toast, Dialog, Tooltip)
-- `COMPOSITION/layout/` - Layout components (Card, Flex, Grid, Stack, Container, Section)
-- `COMPOSITION/navigation/` - Navigation components (Tabs, Breadcrumbs, Pagination)
-- `COMPOSITION/controls/` - Control components (Select)
-
-**Rule:** All overlays **MUST** live in COMPOSITION layer only.
-
-### Patterns Layer (Canonical)
-
-**Status:** ✅ **CANONICAL**  
-**Purpose:** Business/UI patterns (no overlays)
-
-**Location:** `src/PATTERNS/`
-
-**Examples:**
-
-- Cards, Lists, Tables, Filters, Menus, States
-
-**Rule:** PATTERNS **MUST NOT** define overlay primitives or overlay infrastructure.
-
-### Domain Layer (Canonical)
-
-**Status:** ✅ **CANONICAL**  
-**Purpose:** App-specific sections
-
-**Location:** `src/DOMAIN/`
-
-**Reference:** [ARCHITECTURE_STATE.md](docs/architecture/ARCHITECTURE_STATE.md) for complete layer definitions
+→ Full architecture: [docs/ARCHITECTURE_CONTEXT.md](docs/ARCHITECTURE_CONTEXT.md)
 
 ---
 
@@ -235,45 +169,17 @@ Tokens are **immutable contracts**, not convenience variables.
 
 ---
 
-## 🎨 Theme Tooling
+## 🎨 Theming
 
-TUI provides **build-time CLI tooling** for generating and validating themes.
-
-**Theme Tooling is a build-time compiler, not a runtime system.**
-
-- **Theme Generator** (`pnpm theme:generate`) — creates Theme Contract v1 compliant themes
-- **Theme Validator** (`pnpm theme:validate`) — validates themes against contract
-- **Parity Checker** (`pnpm theme:parity-check`) — ensures token consistency
-
-**Key Points:**
-
-- Themes are generated at **build time**, not runtime
-- All themes live in `src/themes/` (canonical path)
-- Validation is **mandatory** — invalid themes cannot be committed (CI enforced)
-- UI library **never generates themes** — it only consumes pre-generated CSS
-
-**Quick Start:**
-
-```bash
-# Generate a theme
-pnpm theme:generate -- --palette my-brand --base-color "210 40% 50%" --modes light,dark
-
-# Validate themes
-pnpm theme:validate -- src/themes/*.css
-```
-
-**Documentation:**
-
-- [Theme System — Contract & Tooling](tools/theme-contract/README.md) - **Complete guide** (start here)
-- [Theme Generator](tools/theme-generator/README.md) - Generator documentation
-- [Theme Validator](tools/theme-validator/README.md) - Validator documentation
+TUI consumes pre-generated themes.
+Theme authoring and validation tooling is documented separately: [tools/theme-contract/README.md](tools/theme-contract/README.md).
 
 ---
 
-## 🧩 Domain-Specific Components
+## 🧩 Product-Specific Extensions
 
-The following components are **used internally** in Tenerife Music projects
-and are **not generic UI primitives**:
+The following components exist as product-level extensions
+and are not intended as generic UI primitives:
 
 - EventCard
 - VenueCard
@@ -281,8 +187,9 @@ and are **not generic UI primitives**:
 - TicketCard
 - PromoCard
 
-> These components are tightly coupled to specific product domains
-> and are documented for reference, not as reusable primitives.
+> These components are tightly coupled to specific product domains,
+> are not part of the public API, and are documented for reference only.
+> Use `Card`, `Grid`, and other public components to build custom layouts.
 
 ---
 
@@ -314,29 +221,7 @@ npm view @tenerife.music/ui versions --json
 
 See [CHANGELOG Version Canon Rules](CHANGELOG.md#version-canon-rules) and [Release Process](docs/RELEASE_PROCESS.md) for details.
 
-### Creating New Components
-
-To create a new Extension component:
-
-1. **Check Component Needs**: Review [Component Needs Inventory](docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) to ensure the component is needed
-2. **Use CLI Generator**: Run `pnpm component:generate -- <ComponentName> [--category <category>]`
-3. **Follow Checklist**: Complete all items in [Extension Component Creation Checklist](docs/workflows/tasks/COMPONENT_CREATION_CHECKLIST.md)
-4. **Reference Examples**: Use [Extension Component Examples](docs/reference/EXTENSION_COMPONENT_EXAMPLES.md) as patterns
-
-### Requesting Components
-
-To request a new component:
-
-1. **Create GitHub Issue**: Use the [Component Request template](.github/ISSUE_TEMPLATE/component-request.md) (if available)
-2. **Provide Use Case**: Describe the specific use case and frequency of need
-3. **Document Workaround**: Explain current solution and pain points
-4. **Wait for Review**: Requests are reviewed according to project governance (see [Feedback Collection Process](docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md))
-
-### Development Tools
-
-- **Component Analysis**: `pnpm component:analyze` - Analyzes codebase for component patterns
-- **Feedback Collection**: `pnpm feedback:collect` - Collects and analyzes usage feedback
-- **Component Generator**: `pnpm component:generate -- <Name> [--category <category>]` - Generates component scaffold
+Contributing & internal workflows → see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 

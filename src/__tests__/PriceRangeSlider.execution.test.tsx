@@ -3,13 +3,12 @@
  * Renders, min/max input change, range slider change, clear; tests usePriceRange hook.
  */
 
-import { fireEvent, render } from "@testing-library/react";
-import { renderHook, act } from "@testing-library/react";
+import { act, fireEvent, render, renderHook } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/PriceRangeSlider";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
+import { PriceRangeSlider, usePriceRange } from "@/PATTERNS/filters/PriceRangeSlider";
 
 const requiredProps = {
   min: 0,

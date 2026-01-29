@@ -3,13 +3,12 @@
  * Mounts, opens popover, selects date, clear, close; tests useDateRange hook.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import { renderHook, act } from "@testing-library/react";
+import { act, fireEvent, render, renderHook, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/DateRangePicker";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
+import { DateRangePicker, useDateRange } from "@/PATTERNS/filters/DateRangePicker";
 
 const requiredProps = {
   value: { from: undefined, to: undefined } as { from: Date | undefined; to: Date | undefined },

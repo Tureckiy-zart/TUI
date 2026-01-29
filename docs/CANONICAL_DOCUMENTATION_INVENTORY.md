@@ -1,8 +1,8 @@
 # Canonical Documentation Inventory
 
-**Date:** 2026-01-17
+**Date:** 2026-01-29
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 59 (50 existing + 9 Closed System v2 canonical documents)  
+**Total Canonical Documents:** 64 (55 existing + 9 Closed System v2 canonical documents)  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
 
 ---
@@ -22,7 +22,7 @@ This document provides a complete inventory of canonical documentation files. Th
 
 ### Total Count
 
-**50 canonical documents** are currently present in `docs/`.
+**64 canonical documents** are currently present in `docs/`.
 
 ### Post-Archive State
 
@@ -196,6 +196,11 @@ These documents provide API and integration references.
 
 | Path | Description | Status |
 |------|-------------|--------|
+| `docs/reference/DX_OVERVIEW.md` | Developer experience - Entry point for usage and how-to (Foundation, Layout, Typography, Token guides) | **ACTIVE** |
+| `docs/reference/FOUNDATION_USAGE_GUIDE.md` | Foundation usage guide - How to use Foundation components without bypasses | **ACTIVE** |
+| `docs/reference/LAYOUT_USAGE_GUIDE.md` | Layout usage guide - Grid, Section, Stack, Row usage instead of raw flex/grid | **ACTIVE** |
+| `docs/reference/TYPOGRAPHY_USAGE_GUIDE.md` | Typography usage guide - Semantic vs presentational Text usage | **ACTIVE** |
+| `docs/reference/TOKEN_USAGE_GUIDE.md` | Token usage guide - How to choose tokens without raw utilities | **ACTIVE** |
 | `docs/reference/API_REFERENCE.md` | Public API reference - API reference | **ACTIVE** |
 | `docs/reference/TOKENS_EXPORT_REFERENCE.md` | Design tokens export reference - API reference | **ACTIVE** |
 | `docs/reference/TOKENS_OVERVIEW.md` | Token map overview - API reference | **ACTIVE** |
@@ -203,7 +208,7 @@ These documents provide API and integration references.
 | `docs/reference/INTEGRATION_GUIDE.md` | UI integration guide - Integration reference | **ACTIVE** |
 | `docs/reference/COMPONENT_EXAMPLES.md` | Extension component examples and patterns - Reference examples for Extension components | **ACTIVE** |
 
-**Total:** 6 files
+**Total:** 11 files
 
 ---
 
@@ -290,6 +295,11 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback collection process |
 | `docs/workflows/tasks/FEEDBACK_REVIEW_PROCESS.md` | Library Maturity | Reference (ACTIVE) | Feedback review process |
 | `docs/workflows/tasks/COMPONENT_USAGE_TRACKING.md` | Library Maturity | Reference (ACTIVE) | Usage tracking |
+| `docs/reference/DX_OVERVIEW.md` | Reference | Reference (ACTIVE) | DX entry point - usage and how-to |
+| `docs/reference/FOUNDATION_USAGE_GUIDE.md` | Reference | Reference (ACTIVE) | Foundation usage guide |
+| `docs/reference/LAYOUT_USAGE_GUIDE.md` | Reference | Reference (ACTIVE) | Layout usage guide |
+| `docs/reference/TYPOGRAPHY_USAGE_GUIDE.md` | Reference | Reference (ACTIVE) | Typography usage guide |
+| `docs/reference/TOKEN_USAGE_GUIDE.md` | Reference | Reference (ACTIVE) | Token usage guide |
 | `docs/reference/API_REFERENCE.md` | Reference | Reference (ACTIVE) | API reference |
 | `docs/reference/TOKENS_EXPORT_REFERENCE.md` | Reference | Reference (ACTIVE) | Tokens export |
 | `docs/reference/TOKENS_OVERVIEW.md` | Reference | Reference (ACTIVE) | Token map |
@@ -317,7 +327,7 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase E: Lock declaration |
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase F: Lock declaration |
 
-**Total:** 59 files (50 existing + 9 Closed System v2 canonical documents)
+**Total:** 64 files (55 existing + 9 Closed System v2 canonical documents)
 
 ---
 
