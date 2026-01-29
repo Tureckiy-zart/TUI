@@ -279,6 +279,16 @@ The following documents are **NOT** part of the canonical set and are marked as 
 
 ---
 
+## Developer Experience (Usage)
+
+For **usage and how-to** (how to use Foundation components, layout, typography, and tokens in code), start here:
+
+- [DX_OVERVIEW.md](../../reference/DX_OVERVIEW.md) — Entry point for usage and how-to; links to Foundation, Layout, Typography, and Token usage guides.
+
+Architecture and formal rules remain in this Canon Index and in Lock documents; the DX overview and usage guides do not define or change them.
+
+---
+
 ## Related Documents
 
 ### Architecture Context

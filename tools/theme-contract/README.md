@@ -1,5 +1,7 @@
 # Theme System — Contract & Tooling
 
+**Last Updated:** 2026-01-29
+
 This repository provides a **production-grade theme system** built around a **strict theme contract**, **CLI tooling**, and **CI enforcement**.
 
 It is designed for **long-living UI platforms**, white-label products, and client-safe theming.
@@ -17,6 +19,8 @@ It is designed for **long-living UI platforms**, white-label products, and clien
 - **No bypass flags exist** — validation cannot be skipped
 
 This system enforces Theme Contract v1 compliance through CLI tooling and CI gates. The UI runtime has zero theme generation logic.
+
+**Path clarification:** The rule "all themes in `src/EXTENSIONS/themes/`" applies to **generated CSS theme files** (output of the Theme Generator). The **runtime theme registry** and TypeScript theme configs (e.g. default, dark, brand) live in `src/themes/` and are separate from the generated CSS output.
 
 ---
 

@@ -1,5 +1,6 @@
 # UI Integration Guide
 
+**Last Updated:** 2026-01-29  
 **Purpose:** Guide for integrating Tenerife UI components into your project and replacing manual Tailwind usage.
 
 ---
@@ -47,46 +48,23 @@ The `Grid` component provides a fully token-compliant replacement for manual Tai
 
 ### Common Patterns
 
-#### Event Cards Grid
+#### Cards Grid (public API)
 
 ```tsx
-// ✅ Recommended: Use Grid component
-import { Grid, EventCard } from "@tenerife.music/ui";
+// ✅ Recommended: Use Grid with Card from the public API
+import { Grid, Card, CardHeader, CardBody } from "@tenerife.music/ui";
 
 <Grid cols={1} md={2} lg={3} gap={6}>
-  {events.map((event) => (
-    <EventCard
-      key={event.id}
-      event={event}
-      featured={event.featured}
-      showImage={true}
-      getTicketsLabel="Get Tickets"
-      trendingBadgeText="Trending"
-    />
+  {items.map((item) => (
+    <Card key={item.id}>
+      <CardHeader>{item.title}</CardHeader>
+      <CardBody>{item.content}</CardBody>
+    </Card>
   ))}
-</Grid>;
+</Grid>
 ```
 
-#### Venue Cards Grid
-
-```tsx
-// ✅ Recommended: Use Grid component
-import { Grid, VenueCard } from "@tenerife.music/ui";
-
-<Grid cols={1} md={2} lg={3} gap={6}>
-  {venues.map((venue) => (
-    <VenueCard
-      key={venue.id}
-      venue={venue}
-      featured={venue.popular}
-      showImage={true}
-      eventsLabel="Events"
-      popularBadgeText="Popular"
-      capacityLabel="Capacity"
-    />
-  ))}
-</Grid>;
-```
+> **Note:** Domain-specific card components (EventCard, VenueCard, etc.) are used internally in Tenerife Music products and are not exported from the main package. Use `Card`, `Grid`, and other public components to build custom layouts.
 
 #### Responsive Layout
 

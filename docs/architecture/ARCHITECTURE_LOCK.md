@@ -2,7 +2,7 @@
 
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
+**Last Updated:** 2026-01-29 (Public API cleanup: remove legacy useToast export)
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -1979,7 +1979,7 @@ New functionality must be built as **extensions** that compose foundation compon
 **Status:** ✅ **LOCKED** (Foundation CLOSED, Foundation Lock Sweep FINALIZED, Public API LOCKED)  
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
+**Last Updated:** 2026-01-29 (Public API cleanup: remove legacy useToast export)
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable, Foundation Lock Sweep finalized, Public API is locked)
 
