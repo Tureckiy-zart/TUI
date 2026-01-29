@@ -20,7 +20,7 @@ import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / A11Y / Overlay Contracts",
+  title: "Composition / A11Y / Overlay Contracts",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

@@ -2,7 +2,7 @@
 import { Alert, ALERT_VARIANTS, type AlertVariant } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "UI / Primitives / Alert",
+  title: "Primitives / Alert",
   component: Alert,
   parameters: {
     layout: "padded",

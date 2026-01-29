@@ -3,7 +3,7 @@ import * as React from "react";
 import { Pagination } from "./Pagination";
 
 const meta: Meta<typeof Pagination.Root> = {
-  title: "UI / Composition / Navigation / Pagination",
+  title: "Composition / Navigation / Pagination",
   component: Pagination.Root,
   parameters: {
     layout: "padded",

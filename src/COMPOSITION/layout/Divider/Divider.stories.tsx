@@ -2,7 +2,7 @@
 import { Divider } from "./Divider";
 
 const meta: Meta<typeof Divider> = {
-  title: "UI / Composition / Layout / Divider",
+  title: "Composition / Layout / Divider",
   component: Divider,
   parameters: {
     layout: "padded",

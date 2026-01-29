@@ -21,7 +21,7 @@ import { Link } from "@/PRIMITIVES/Link";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Focus / Overview",
+  title: "Composition / Motion / Focus / Overview",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

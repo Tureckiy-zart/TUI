@@ -8,7 +8,7 @@ import { AlertCircle, HelpCircle, Info } from "lucide-react";
 import { TooltipProvider, TooltipWrapper } from "./Tooltip";
 
 const meta: Meta<typeof TooltipWrapper> = {
-  title: "UI / Composition / Overlays / Tooltip",
+  title: "Composition / Overlays / Tooltip",
   component: TooltipWrapper,
   parameters: {
     layout: "centered",

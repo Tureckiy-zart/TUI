@@ -10,7 +10,7 @@ import { Drawer } from "./Drawer";
 import type { DrawerSize } from "./Drawer.types";
 
 const meta: Meta<typeof Drawer> = {
-  title: "UI / Composition / Drawer",
+  title: "Composition / Drawer",
   component: Drawer,
   parameters: {
     layout: "centered",

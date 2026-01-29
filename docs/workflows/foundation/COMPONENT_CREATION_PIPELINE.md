@@ -331,9 +331,9 @@ This step answers the question:
 
 ### Reference
 
-* [Extension Canonical State](./EXTENSION_STATE.md) — Single source of truth for Extension components
-* [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation layer lock status
-* [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension layer boundaries
+* [Extension Canonical State](../../architecture/EXTENSION_STATE.md) — Single source of truth for Extension components
+* [Foundation Lock](../../architecture/FOUNDATION_LOCK.md) — Foundation layer lock status
+* [Extension Authority Contract](../../architecture/EXTENSION_AUTHORITY.md) — Extension layer boundaries
 
 ---
 
@@ -458,7 +458,7 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
   - Document Motion GAP resolution: ADD MOTION, NO MOTION BY DESIGN, or DEFERRED (unlocked only)
   - If ADD MOTION: List which motion domains apply and which motion tokens/presets will be used
   - If NO MOTION BY DESIGN: Document explicit justification for absence of motion
-  - Reference: [Motion Authority](./MOTION_AUTHORITY.md) — Motion GAP Rule
+  - Reference: [Motion Authority](../../architecture/MOTION_AUTHORITY.md) — Motion GAP Rule
 * **Motion requirements document:**
   - List motion domains that apply (Enter/Exit, Hover, Press/Tap, Focus/Keyboard, Expand/Collapse, Toast/Dialog, Loading/Progress)
   - Document motion tokens/presets to be used (e.g., `.tm-motion-fade-in`, `transitions.fast`, `animations.spin`)
@@ -471,7 +471,7 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
   - For form inputs: Document label association requirement (htmlFor/aria-labelledby)
   - For modal overlays: Document aria-labelledby requirement (via title)
   - Document semantic role requirements (native element preferred, role attribute if needed)
-  - Reference: [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules
+  - Reference: [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules
 * **Focus behavior evaluation (MANDATORY for interactive components):**
   - Evaluate if component is modal overlay (MUST trap focus)
   - Evaluate if component is non-modal overlay (MUST NOT trap focus)
@@ -479,13 +479,13 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
   - Evaluate if component is composite control (needs roving tabindex)
   - Document tab order requirements (DOM order = navigation order)
   - Document focus-visible styling requirements
-  - Reference: [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules
+  - Reference: [Focus Authority](../../architecture/FOCUS_AUTHORITY.md) — Focus navigation rules
 * **Loading state evaluation (if applicable):**
   - Evaluate if component needs loading state (prop/variant)
   - Document loading state blocking requirements (pointer blocked, keyboard focus allowed)
   - Document loading indicator requirements (aria-busy, visual indicator)
   - Document loading state token requirements (if applicable)
-  - Reference: [Input Authority](./INPUT_AUTHORITY.md) — Loading state blocking rules
+  - Reference: [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Loading state blocking rules
 
 ### Blocking Condition
 
@@ -537,17 +537,17 @@ All C2 artifacts MUST be documented in **ONE** of the following locations:
 
 ### Reference
 
-* [Token Authority](./TOKEN_AUTHORITY.md) — Token system structure and domain hierarchy
-* [Authority Navigation](./AUTHORITY_NAVIGATION.md) — Map of all Authority Contracts
-* [Spacing Authority](./SPACING_AUTHORITY.md) — Spacing tokens
-* [Radius Authority](./RADIUS_AUTHORITY.md) — Border radius tokens
-* [Typography Authority](./TYPOGRAPHY_AUTHORITY.md) — Typography tokens
-* [Motion Authority](./MOTION_AUTHORITY.md) — Motion tokens
-* [Elevation Authority](./ELEVATION_AUTHORITY.md) — Elevation tokens
-* [State Authority](./STATE_AUTHORITY.md) — State representation
-* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
-* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
-* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
+* [Token Authority](../../architecture/TOKEN_AUTHORITY.md) — Token system structure and domain hierarchy
+* [Authority Navigation](../../architecture/AUTHORITY_NAVIGATION.md) — Map of all Authority Contracts
+* [Spacing Authority](../../architecture/SPACING_AUTHORITY.md) — Spacing tokens
+* [Radius Authority](../../architecture/RADIUS_AUTHORITY.md) — Border radius tokens
+* [Typography Authority](../../architecture/TYPOGRAPHY_AUTHORITY.md) — Typography tokens
+* [Motion Authority](../../architecture/MOTION_AUTHORITY.md) — Motion tokens
+* [Elevation Authority](../../architecture/ELEVATION_AUTHORITY.md) — Elevation tokens
+* [State Authority](../../architecture/STATE_AUTHORITY.md) — State representation
+* [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](../../architecture/FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -627,7 +627,7 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
   - MUST include all mandatory mapping keys (heightToken, paddingXToken, paddingYToken, textToken, radiusToken, gapToken, iconSizeToken, minWidthToken, hitAreaToken, maxWidthToken)
   - MUST use token references only (no raw values)
   - MUST document supported sizes subset
-  - Reference: [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) for template and requirements
+  - Reference: [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) for template and requirements
 * **Prop descriptions and JSDoc examples:**
   - Each prop MUST have JSDoc comment
   - At least 1 usage example per prop
@@ -638,13 +638,13 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
   - For icon-only buttons: Document aria-label prop requirement
   - For form inputs: Document label association (htmlFor/aria-labelledby)
   - For modal overlays: Document aria-labelledby requirement (via title)
-  - Reference: [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules
+  - Reference: [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules
 * **Input contract (if interactive component):**
   - Document keyboard parity requirements (every pointer interaction MUST have keyboard equivalent)
   - Document Enter/Space semantics (component-type specific)
   - Document disabled state blocking (MUST block all activation events)
   - Document loading state blocking (if loading state implemented)
-  - Reference: [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules
+  - Reference: [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Input interaction rules
 * **Error state design (if component can fail):**
   - Document error state representation (visual, ARIA, props)
   - Document error recovery patterns (user actions, retry mechanisms)
@@ -704,12 +704,12 @@ All C3 artifacts MUST be documented in **ONE** of the following locations:
 ### Reference
 
 * [Typing Standard](../reference/TYPING_STANDARD.md) — **MANDATORY** architectural standard for public API typing (explicit union types, no CVA-derived types)
-* [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
-* [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract and template
-* [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension API rules
-* [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation Enforcement rules
-* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
-* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
+* [Variants & Size Canon Authority](../../architecture/VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
+* [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract and template
+* [Extension Authority Contract](../../architecture/EXTENSION_AUTHORITY.md) — Extension API rules
+* [Foundation Lock](../../architecture/FOUNDATION_LOCK.md) — Foundation Enforcement rules
+* [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -802,6 +802,7 @@ This step answers the question:
 * ✅ Use `Responsive<T>` where needed
 * ✅ Use CSS variables via token system
 * ✅ Follow CVA pattern for variants (if applicable) — **MUST follow CVA_CANONICAL_STYLE** (variants inline, no intermediate objects, `satisfies Record<>` constraints)
+* ✅ **CVA type selection:** Use `tokenCVA` for components with token-driven axes (variant, size, state); `cva` is allowed only for components with boolean/presentational flags only (document rationale if using `cva`). See [Component Refactoring Pipeline (18A)](./COMPONENT_REFACTORING_PIPELINE.md) STEP 5 — CVA Usage Decision Matrix.
 * ✅ Implement state handling (if applicable)
 * ✅ **Apply motion tokens/presets** — Use motion tokens (`.tm-motion-*` utilities, `transitions.*`, `animations.*`) where motion is required (per C2 Motion GAP evaluation)
 * ✅ **Implement reduced motion support** — Ensure all motion respects `prefers-reduced-motion` preferences
@@ -830,7 +831,7 @@ This step answers the question:
   - Variants defined inline within CVA config (no intermediate objects)
   - Variant maps use `satisfies Record<VariantType, string>` constraints
   - No dynamic construction or conditional logic inside CVA config
-  - Reference: [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern
+  - Reference: [CVA Canonical Style](../../architecture/CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern
 * State handling implementation (if applicable)
 * Motion implementation (if motion required per C2):
   - Motion tokens/presets applied (`.tm-motion-*` utilities or motion tokens)
@@ -882,8 +883,8 @@ This step answers the question:
 
 * [Token Mapping Design (C2)](#c2--token-mapping-design) — Token requirements
 * [API Design & Contract (C3)](#c3--api-design--contract-definition) — Public API contract
-* [Motion Authority](./MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, motion presets
-* [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern (variants inline, `satisfies Record<>` constraints)
+* [Motion Authority](../../architecture/MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, motion presets
+* [CVA Canonical Style](../../architecture/CVA_CANONICAL_STYLE.md) — **MANDATORY** CVA structure pattern (variants inline, `satisfies Record<>` constraints)
 
 ---
 
@@ -1010,9 +1011,9 @@ This step answers the question:
 
 ### Reference
 
-* [Extension Canonical State](./EXTENSION_STATE.md) — Foundation components available for composition
-* [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension composition rules
-* [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation component status
+* [Extension Canonical State](../../architecture/EXTENSION_STATE.md) — Foundation components available for composition
+* [Extension Authority Contract](../../architecture/EXTENSION_AUTHORITY.md) — Extension composition rules
+* [Foundation Lock](../../architecture/FOUNDATION_LOCK.md) — Foundation component status
 * TypeScript strict mode compliance required
 * Project code style and conventions followed
 
@@ -1120,8 +1121,8 @@ This step answers the question:
 ### Reference
 
 * [Storybook Stories Quality Standard](../reference/STORYBOOK_STORIES_STANDARD.md) — **MANDATORY** quality standard for all Storybook stories (title structure, naming, documentation, layout, argTypes)
-* [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Matrix and States story requirements
-* [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Sizes Gallery and Long Content story requirements
+* [Variants & Size Canon Authority](../../architecture/VARIANTS_SIZE_CANON.md) — Matrix and States story requirements
+* [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) — Sizes Gallery and Long Content story requirements
 
 ---
 
@@ -1261,9 +1262,9 @@ This step answers the question:
 ### Reference
 
 * [Component Creation Checklist](../workflows/tasks/COMPONENT_CREATION_CHECKLIST.md) — Test coverage requirements
-* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
-* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
-* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
+* [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](../../architecture/FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
 
 ---
 
@@ -1346,8 +1347,8 @@ This step answers the question:
 ### Reference
 
 * [Token Mapping Design (C2)](#c2--token-mapping-design) — Original token requirements
-* [Authority Navigation](./AUTHORITY_NAVIGATION.md) — All Authority Contracts
-* [Motion Authority](./MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, forbidden patterns, motion presets
+* [Authority Navigation](../../architecture/AUTHORITY_NAVIGATION.md) — All Authority Contracts
+* [Motion Authority](../../architecture/MOTION_AUTHORITY.md) — Motion token rules, Motion GAP evaluation, forbidden patterns, motion presets
 
 ---
 
@@ -1419,7 +1420,7 @@ This step answers the question:
 
 ### Reference
 
-* [Extension Canonical State](./EXTENSION_STATE.md) — Extension component registry
+* [Extension Canonical State](../../architecture/EXTENSION_STATE.md) — Extension component registry
 * [Project Progress](../PROJECT_PROGRESS.md) — Project tracking
 
 ---
@@ -1891,26 +1892,26 @@ This Component Creation Pipeline **REQUIRES** a continuous creation report to tr
 
 ### Authority Contracts
 
-* [Authority Navigation](./AUTHORITY_NAVIGATION.md) — Map of all Authority Contracts
-* [Extension Authority Contract](./EXTENSION_AUTHORITY.md) — Extension layer boundaries
-* [Spacing Authority](./SPACING_AUTHORITY.md) — Spacing tokens
-* [Radius Authority](./RADIUS_AUTHORITY.md) — Border radius tokens
-* [Typography Authority](./TYPOGRAPHY_AUTHORITY.md) — Typography tokens
-* [Motion Authority](./MOTION_AUTHORITY.md) — Motion tokens
-* [Elevation Authority](./ELEVATION_AUTHORITY.md) — Elevation tokens
-* [State Authority](./STATE_AUTHORITY.md) — State representation
-* [A11Y Authority](./A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
-* [Focus Authority](./FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
-* [Input Authority](./INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
-* [Variants & Size Canon Authority](./VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
-* [Size Mapping Spec Authority](./SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract
-* [CVA Canonical Style](./CVA_CANONICAL_STYLE.md) — Mandatory CVA structure pattern
+* [Authority Navigation](../../architecture/AUTHORITY_NAVIGATION.md) — Map of all Authority Contracts
+* [Extension Authority Contract](../../architecture/EXTENSION_AUTHORITY.md) — Extension layer boundaries
+* [Spacing Authority](../../architecture/SPACING_AUTHORITY.md) — Spacing tokens
+* [Radius Authority](../../architecture/RADIUS_AUTHORITY.md) — Border radius tokens
+* [Typography Authority](../../architecture/TYPOGRAPHY_AUTHORITY.md) — Typography tokens
+* [Motion Authority](../../architecture/MOTION_AUTHORITY.md) — Motion tokens
+* [Elevation Authority](../../architecture/ELEVATION_AUTHORITY.md) — Elevation tokens
+* [State Authority](../../architecture/STATE_AUTHORITY.md) — State representation
+* [A11Y Authority](../../architecture/A11Y_AUTHORITY.md) — Accessibility rules (accessible names, ARIA contracts, semantic roles)
+* [Focus Authority](../../architecture/FOCUS_AUTHORITY.md) — Focus navigation rules (trap, restore, roving tabindex, tab order)
+* [Input Authority](../../architecture/INPUT_AUTHORITY.md) — Input interaction rules (keyboard parity, Enter/Space semantics, state blocking)
+* [Variants & Size Canon Authority](../../architecture/VARIANTS_SIZE_CANON.md) — Global size scale and variant naming dictionary
+* [Size Mapping Spec Authority](../../architecture/SIZE_MAPPING_SPEC.md) — Size-to-token mapping contract
+* [CVA Canonical Style](../../architecture/CVA_CANONICAL_STYLE.md) — Mandatory CVA structure pattern
 
 ### Lock & State Documents
 
-* [Foundation Lock](./FOUNDATION_LOCK.md) — Foundation layer lock status
-* [Extension Canonical State](./EXTENSION_STATE.md) — Extension component registry
-* [Architecture Lock](./ARCHITECTURE_LOCK.md) — Architectural decisions
+* [Foundation Lock](../../architecture/FOUNDATION_LOCK.md) — Foundation layer lock status
+* [Extension Canonical State](../../architecture/EXTENSION_STATE.md) — Extension component registry
+* [Architecture Lock](../../architecture/ARCHITECTURE_LOCK.md) — Architectural decisions
 
 ### Process Documents
 

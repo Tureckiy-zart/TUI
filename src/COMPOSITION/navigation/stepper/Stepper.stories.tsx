@@ -2,7 +2,7 @@
 import { Stepper, type StepperStep } from "./Stepper";
 
 const meta: Meta<typeof Stepper.Root> = {
-  title: "UI / Composition / Navigation / Stepper",
+  title: "Composition / Navigation / Stepper",
   component: Stepper.Root,
   parameters: {
     layout: "padded",

@@ -18,7 +18,7 @@ import { Input } from "@/PRIMITIVES/Input";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Focus / Order Playground",
+  title: "Composition / Motion / Focus / Order Playground",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

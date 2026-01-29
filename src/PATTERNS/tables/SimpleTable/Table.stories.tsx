@@ -2,7 +2,7 @@
 import { Table } from "./Table";
 
 const meta: Meta<typeof Table> = {
-  title: "UI / Patterns / Tables / SimpleTable",
+  title: "Patterns / Tables / SimpleTable",
   component: Table,
   parameters: {
     layout: "padded",

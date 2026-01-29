@@ -2,7 +2,7 @@
 import { NavSeparator } from "./NavSeparator";
 
 const meta: Meta<typeof NavSeparator> = {
-  title: "UI / Composition / Navigation / NavSeparator",
+  title: "Composition / Navigation / NavSeparator",
   component: NavSeparator,
   parameters: {
     layout: "padded",

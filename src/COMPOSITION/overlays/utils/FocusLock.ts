@@ -185,6 +185,9 @@ export function useFocusLock({
       // after DOM updates and component unmounting is complete
       // This works better in test environments than immediate focus
       setTimeout(() => {
+        // Skip focus restoration when document is unavailable (e.g. after test teardown, SSR)
+        if (typeof document === "undefined" || !document.body) return;
+
         // Try returnFocusRef first (use captured value from effect execution)
         if (returnFocusElement) {
           // Verify element is still in DOM before focusing

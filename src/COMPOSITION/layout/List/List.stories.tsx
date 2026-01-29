@@ -25,7 +25,7 @@ import { ListItem } from "../ListItem/ListItem";
  */
 
 const meta: Meta<typeof List> = {
-  title: "UI / Composition / Layout / List",
+  title: "Composition / Layout / List",
   component: List,
   parameters: {
     layout: "padded",

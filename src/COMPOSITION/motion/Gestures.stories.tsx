@@ -13,7 +13,7 @@ import { useSwipe } from "@/FOUNDATION/theme/motion/gestures";
 import { Button } from "@/PRIMITIVES/Button";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Gestures",
+  title: "Composition / Motion / Gestures",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

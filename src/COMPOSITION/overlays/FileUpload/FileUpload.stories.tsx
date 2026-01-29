@@ -12,7 +12,7 @@ import type { FileUploadError } from "./FileUpload.types";
  * Reference: STORYBOOK_STORIES_STANDARD.md
  */
 const meta: Meta<typeof FileUpload> = {
-  title: "UI / Composition / FileUpload",
+  title: "Composition / FileUpload",
   component: FileUpload,
   parameters: {
     layout: "padded",

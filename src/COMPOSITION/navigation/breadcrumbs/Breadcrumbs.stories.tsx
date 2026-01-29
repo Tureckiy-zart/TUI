@@ -2,7 +2,7 @@
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs";
 
 const meta: Meta<typeof Breadcrumbs.Root> = {
-  title: "UI / Composition / Navigation / Breadcrumbs",
+  title: "Composition / Navigation / Breadcrumbs",
   component: Breadcrumbs.Root,
   parameters: {
     layout: "padded",

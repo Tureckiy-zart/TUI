@@ -68,6 +68,11 @@ The following components have been **formally locked** after successful audit an
 - **Tooltip** (`src/COMPOSITION/overlays/Tooltip/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 - **Modal** (`src/COMPOSITION/overlays/Modal/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 
+#### Extension Carousel
+
+- **Carousel** (`src/COMPOSITION/carousel/Carousel/`) — ✅ **PROCESS LOCKED** (2026-01-29)
+  - Compound API: Root, Track, Slide, Prev, Next, Indicators (no Controls wrapper). Prev/Next composed inside Track. See EXTENSION_STATE.md §3.2.
+
 ### Lock Rules
 
 **Public API:**
@@ -576,6 +581,16 @@ The following Extension layer components have successfully completed Pipeline 18
    - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
    - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
 
+1b. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, API simplification TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types (no CarouselControls)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+
 2. **Table** - `src/PATTERNS/tables/table/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
    - **Layer:** PATTERNS (Extension layer)
    - **Type:** Interactive table component with sorting, expansion, and selection capabilities
@@ -945,6 +960,14 @@ The following Composition layer components have successfully completed Pipeline 
      - Compound component pattern: Modal.Root, Modal.Trigger, Modal.Content, Modal.Header, Modal.Title, Modal.Description, Modal.Footer, Modal.Close
    - **Quality:** 16 tests, 24 stories (canonical: States, SizesGallery, LongContent)
 
+5. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+
 **Note:** Foundation layer is **UNLOCKED** for active construction. Foundation Authorities remain LOCKED and IMMUTABLE. Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 ---
@@ -1059,6 +1082,18 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Test Coverage:** 32 tests (comprehensive)
    - **Storybook Coverage:** 11 stories (all use cases demonstrated)
    - **Exports:** `Field`, `FieldProps`, `FieldLabelProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`
+
+4. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004)
+   - **Lock Date:** 2026-01-29
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Component Type:** Extension compound carousel (batteries-included)
+   - **Layer:** COMPOSITION (carousel)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
 
 ### Extension Component Lock Rules
 
@@ -5067,6 +5102,26 @@ _Upgrade Layer (U1-U6, U9-U13) and subsequent layers pending. See master_tasks.j
   - **Exports:** `Footer`, `FooterProps`
   - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
   - **Registered:** ✅ EXTENSION_STATE.md updated, src/COMPOSITION/layout/index.ts export added
+
+### Carousel Component (2026-01-29)
+
+- ✅ **Carousel Component Created**
+  - **Date:** 2026-01-29
+  - **Pipeline:** Component Creation Pipeline (C0–C10 complete)
+  - **Location:** `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+  - **Type:** Extension Layer Composite — compound carousel (batteries-included)
+  - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track (no Controls wrapper).
+  - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
+  - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal)
+  - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
+  - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+  - **Registered:** ✅ EXTENSION_STATE.md §3.2, src/index.ts export added
+
+- ✅ **Carousel API Simplification (TUI_EXT_CAROUSEL_FIX_004)**
+  - **Date:** 2026-01-29
+  - **Change:** Carousel.Controls removed from public API; Prev/Next composed directly inside Carousel.Track
+  - **Exports:** No CarouselControls / CarouselControlsProps; Carousel, CarouselIndicators, CarouselNext, CarouselPrev and related types only
+  - **Lock:** ✅ PROCESS LOCKED in EXTENSION_STATE.md §3.2; added to PROJECT_PROGRESS Lock Scope (Extension Carousel)
 
 - ✅ **Navbar** - Layout Extension Layer Lock Complete (2026-01-01)
   - Component: Navbar

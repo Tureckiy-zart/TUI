@@ -9,7 +9,7 @@ const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop";
 
 const meta: Meta<typeof VenueCard> = {
-  title: "UI / Patterns / Cards / VenueCard",
+  title: "Patterns / Cards / VenueCard",
   component: VenueCard,
   parameters: {
     layout: "centered",

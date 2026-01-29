@@ -6,7 +6,7 @@ import { ArtistCard } from "./ArtistCard";
 import type { ArtistCardSize, ArtistCardVariant } from "./ArtistCard.types";
 
 const meta: Meta<typeof ArtistCard> = {
-  title: "UI / Patterns / Cards / ArtistCard",
+  title: "Patterns / Cards / ArtistCard",
   component: ArtistCard,
   parameters: {
     layout: "centered",

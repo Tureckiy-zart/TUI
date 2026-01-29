@@ -3,7 +3,7 @@ import { Box } from "../Box";
 import { Row } from "./Row";
 
 const meta: Meta<typeof Row> = {
-  title: "UI / Composition / Layout / Row",
+  title: "Composition / Layout / Row",
   component: Row,
   parameters: {
     layout: "padded",

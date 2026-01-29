@@ -8,7 +8,7 @@ import { Label } from "@/PRIMITIVES/Label";
 import { ErrorText } from "./ErrorText";
 
 const meta: Meta<typeof ErrorText> = {
-  title: "UI / Primitives / ErrorText",
+  title: "Primitives / ErrorText",
   component: ErrorText,
   parameters: {
     layout: "padded",

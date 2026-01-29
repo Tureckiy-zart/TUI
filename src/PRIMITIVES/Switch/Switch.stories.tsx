@@ -6,7 +6,7 @@ import * as React from "react";
 import { Switch } from "./Switch";
 
 const meta: Meta<typeof Switch> = {
-  title: "UI / Primitives / Switch",
+  title: "Primitives / Switch",
   component: Switch,
   parameters: {
     layout: "centered",

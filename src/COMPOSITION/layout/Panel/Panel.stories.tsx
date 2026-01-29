@@ -5,7 +5,7 @@ import { Stack } from "../Stack";
 import { Panel } from "./Panel";
 
 const meta: Meta<typeof Panel> = {
-  title: "UI / Composition / Layout / Panel",
+  title: "Composition / Layout / Panel",
   component: Panel,
   parameters: {
     layout: "padded",

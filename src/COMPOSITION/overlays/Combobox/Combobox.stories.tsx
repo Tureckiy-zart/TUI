@@ -19,7 +19,7 @@ import type { ComboboxOption } from "./Combobox";
  * - A11Y compliant (role="combobox", aria-expanded, aria-autocomplete)
  */
 const meta = {
-  title: "UI / Composition / Overlays / Combobox",
+  title: "Composition / Overlays / Combobox",
   component: Combobox,
   parameters: {
     layout: "centered",

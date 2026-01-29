@@ -2,7 +2,7 @@
 import { Card } from "./Card";
 
 const meta: Meta<typeof Card> = {
-  title: "UI / Composition / Layout / Card",
+  title: "Composition / Layout / Card",
   component: Card,
   parameters: {
     layout: "padded",

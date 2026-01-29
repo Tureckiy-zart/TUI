@@ -2,7 +2,7 @@
 import { Surface } from "./Surface";
 
 const meta: Meta<typeof Surface> = {
-  title: "UI / Composition / Layout / Surface",
+  title: "Composition / Layout / Surface",
   component: Surface,
   parameters: {
     layout: "padded",

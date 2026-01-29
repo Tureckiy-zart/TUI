@@ -28,7 +28,7 @@ import { Link } from "./Link";
  */
 
 const meta: Meta<typeof Link> = {
-  title: "UI / Primitives / Link",
+  title: "Primitives / Link",
   component: Link,
   parameters: {
     layout: "centered",

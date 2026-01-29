@@ -5,7 +5,7 @@ import { NextLinkAdapter } from "./NextLinkAdapter";
 // Mock the NextLink behavior for Storybook to avoid errors
 // In a real app this would be real next/link
 const meta: Meta<typeof NextLinkAdapter> = {
-  title: "UI / Extensions / NextLinkAdapter",
+  title: "Extensions / NextLinkAdapter",
   component: NextLinkAdapter,
   tags: ["autodocs"],
   argTypes: {

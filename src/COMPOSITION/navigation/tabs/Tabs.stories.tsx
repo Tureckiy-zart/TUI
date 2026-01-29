@@ -7,7 +7,7 @@ import * as React from "react";
 import { Tabs } from "./Tabs";
 
 const meta: Meta<typeof Tabs.Root> = {
-  title: "UI / Composition / Navigation / Tabs",
+  title: "Composition / Navigation / Tabs",
   component: Tabs.Root,
   parameters: {
     layout: "padded",

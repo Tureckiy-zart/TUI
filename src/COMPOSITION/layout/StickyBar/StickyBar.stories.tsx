@@ -3,7 +3,7 @@ import { Stack } from "../Stack";
 import { StickyBar } from "./StickyBar";
 
 const meta: Meta<typeof StickyBar> = {
-  title: "UI / Composition / Layout / StickyBar",
+  title: "Composition / Layout / StickyBar",
   component: StickyBar,
   parameters: {
     layout: "fullscreen",

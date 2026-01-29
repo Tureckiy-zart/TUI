@@ -21,7 +21,7 @@ import type { MultiSelectOption } from "./MultiSelect";
  * MultiSelect component meta configuration
  */
 const meta: Meta<typeof MultiSelect> = {
-  title: "UI / Composition / Controls / MultiSelect",
+  title: "Composition / Controls / MultiSelect",
   component: MultiSelect,
   parameters: {
     layout: "centered",
