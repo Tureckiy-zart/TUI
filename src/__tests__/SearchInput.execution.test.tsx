@@ -7,8 +7,8 @@ import { act, fireEvent, render, renderHook, screen } from "@testing-library/rea
 import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { SearchInput, useSearch } from "@/PATTERNS/filters/SearchInput";
 import { ThemeProvider } from "@/FOUNDATION/theme/ThemeProvider";
+import { SearchInput, useSearch } from "@/PATTERNS/filters/SearchInput";
 
 const wrapper = ({ children }: { children: React.ReactNode }) =>
   React.createElement(ThemeProvider, { defaultTheme: "default", children });

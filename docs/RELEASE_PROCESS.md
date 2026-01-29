@@ -1,6 +1,6 @@
 # Release Process
 
-**Last Updated:** 2026-01-02  
+**Last Updated:** 2026-01-29  
 **Purpose:** Step-by-step guide for publishing releases with automated version canon enforcement
 
 ---

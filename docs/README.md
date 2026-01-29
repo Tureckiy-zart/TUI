@@ -1,6 +1,6 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-29  
 **Purpose:** Central documentation hub for the TUI component library  
 **Canonical List:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
 
@@ -132,6 +132,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Reference Documentation
 
+- [reference/DX_OVERVIEW.md](./reference/DX_OVERVIEW.md) - **Developer experience (DX)** - Entry point for usage and how-to (Foundation, Layout, Typography, Token guides)
 - [reference/API_REFERENCE.md](./reference/API_REFERENCE.md) - Public API reference
 - [reference/TOKENS_EXPORT_REFERENCE.md](./reference/TOKENS_EXPORT_REFERENCE.md) - Design tokens export reference
 - [reference/TOKENS_OVERVIEW.md](./reference/TOKENS_OVERVIEW.md) - Token map overview
@@ -318,7 +319,7 @@ For questions about documentation:
 
 ---
 
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-29  
 **Documentation Version:** 3.2  
 **Canonical Documents:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`  
 **Archive Status:** Isolated (excluded from git and canonical information)

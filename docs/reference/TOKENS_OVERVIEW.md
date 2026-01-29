@@ -1,6 +1,6 @@
 # Tenerife UI - Token System Map Overview
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2026-01-29  
 **Purpose:** Complete reference for the token-driven architecture of Tenerife UI
 
 ---
@@ -19,7 +19,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ## Foundation Tokens
 
-### 1. Spacing Tokens (`src/tokens/spacing.ts`)
+### 1. Spacing Tokens (`src/FOUNDATION/tokens/spacing.ts`)
 
 **Base System:** 8px grid
 
@@ -67,7 +67,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ---
 
-### 2. Typography Tokens (`src/tokens/typography.ts`)
+### 2. Typography Tokens (`src/FOUNDATION/tokens/typography.ts`)
 
 **Font Families:**
 
@@ -130,7 +130,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ---
 
-### 3. Color Tokens (`src/tokens/colors.ts`)
+### 3. Color Tokens (`src/FOUNDATION/tokens/colors.ts`)
 
 **Color Scales (HSL format):**
 
@@ -188,7 +188,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ---
 
-### 4. Shadow Tokens (`src/tokens/shadows.ts`)
+### 4. Shadow Tokens (`src/FOUNDATION/tokens/shadows.ts`)
 
 **Elevation Shadows:**
 
@@ -226,7 +226,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ---
 
-### 5. Radius Tokens (`src/tokens/radius.ts`)
+### 5. Radius Tokens (`src/FOUNDATION/tokens/radius.ts`)
 
 **Foundation Scale:**
 
@@ -260,7 +260,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ---
 
-### 6. Motion Tokens (`src/tokens/motion.ts`)
+### 6. Motion Tokens (`src/FOUNDATION/tokens/motion.ts`)
 
 **Durations:**
 
@@ -312,7 +312,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 Component tokens map foundation tokens to component-specific usage patterns.
 
-### Button Tokens (`src/tokens/components/button.ts`)
+### Button Tokens (`src/FOUNDATION/tokens/components/button.ts`)
 
 **Maps to:**
 
@@ -331,7 +331,7 @@ import { BUTTON_TOKENS } from "@/tokens/components/button";
 // Font size: text-xs (sm), text-sm (md, lg)
 ```
 
-### Input Tokens (`src/tokens/components/input.ts`)
+### Input Tokens (`src/FOUNDATION/tokens/components/input.ts`)
 
 **Maps to:**
 
@@ -350,7 +350,7 @@ import { INPUT_TOKENS } from "@/tokens/components/input";
 // Font size: text-sm (sm), text-base (md, lg)
 ```
 
-### Text Tokens (`src/tokens/components/text.ts`)
+### Text Tokens (`src/FOUNDATION/tokens/components/text.ts`)
 
 **Maps to:**
 
@@ -500,28 +500,28 @@ Tokens automatically adapt to theme mode (day/night):
 
 **Foundation Tokens:**
 
-- `src/tokens/colors.ts`
-- `src/tokens/typography.ts`
-- `src/tokens/spacing.ts`
-- `src/tokens/shadows.ts`
-- `src/tokens/radius.ts`
-- `src/tokens/motion.ts`
+- `src/FOUNDATION/tokens/colors.ts`
+- `src/FOUNDATION/tokens/typography.ts`
+- `src/FOUNDATION/tokens/spacing.ts`
+- `src/FOUNDATION/tokens/shadows.ts`
+- `src/FOUNDATION/tokens/radius.ts`
+- `src/FOUNDATION/tokens/motion.ts`
 
 **Component Tokens:**
 
-- `src/tokens/components/button.ts`
-- `src/tokens/components/input.ts`
-- `src/tokens/components/text.ts`
-- `src/tokens/components/alert.ts`
-- `src/tokens/components/card.ts`
-- `src/tokens/components/surface.ts`
-- `src/tokens/components/section.ts`
-- `src/tokens/components/overlay.ts`
-- `src/tokens/components/toast.ts`
+- `src/FOUNDATION/tokens/components/button.ts`
+- `src/FOUNDATION/tokens/components/input.ts`
+- `src/FOUNDATION/tokens/components/text.ts`
+- `src/FOUNDATION/tokens/components/alert.ts`
+- `src/FOUNDATION/tokens/components/card.ts`
+- `src/FOUNDATION/tokens/components/surface.ts`
+- `src/FOUNDATION/tokens/components/section.ts`
+- `src/FOUNDATION/tokens/components/overlay.ts`
+- `src/FOUNDATION/tokens/components/toast.ts`
 
 **All tokens exported via:**
 
-- `src/tokens/index.ts` → `export * from "./colors"` etc.
+- `src/FOUNDATION/tokens/index.ts` → `export * from "./colors"` etc.
 - Available in public API: `import { primaryColors, accentColors, spacing, semanticSpacing } from "@tenerife.music/ui"`
 
 ---
@@ -546,5 +546,5 @@ Tokens automatically adapt to theme mode (day/night):
 
 ---
 
-**Last Updated:** 2025-12-16  
+**Last Updated:** 2026-01-29  
 **Version:** 1.0.0

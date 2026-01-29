@@ -29,6 +29,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - (none)
 
+## [2.3.1] - 2026-01-29
+
+### Changed
+
+- Documentation aligned with project state: README Button example (variant), TOKENS_OVERVIEW paths (src/FOUNDATION/tokens), API_REFERENCE version and Button variants, INTEGRATION_GUIDE and README domain components (internal, not exported), theme-contract README path clarification.
+
+### Fixed
+
+- (none)
+
 ## [2.3.0] - 2026-01-29
 
 ### Added
