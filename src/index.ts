@@ -250,6 +250,9 @@ export {
   typographyCSSVariables,
 } from "./FOUNDATION/tokens";
 
+// Token union types
+export type { ResponsiveAspectRatio, ResponsiveDelay } from "./FOUNDATION/tokens";
+
 // ============================================================================
 // UI COMPONENTS
 // ============================================================================
@@ -505,6 +508,7 @@ export {
   type InlineProps,
   Inset,
   type InsetProps,
+  LinkWithCustomVariant,
   List,
   type ListAs,
   ListItem,
@@ -517,12 +521,20 @@ export {
   type NavbarProps,
   Panel,
   type PanelProps,
+  type ResponsiveAlignment,
+  type ResponsiveColor,
+  type ResponsiveColumns,
+  type ResponsiveJustify,
+  type ResponsiveRadius,
+  type ResponsiveRows,
+  type ResponsiveSpacing,
   Row,
   type RowProps,
   SidebarLayout,
   type SidebarLayoutProps,
   type SidebarPosition,
   type SidebarWidth,
+  type SpacingValue,
   Stack,
   type StackProps,
   StickyBar,
@@ -690,7 +702,7 @@ export {
   type NotificationVariant,
   useNotificationCenter,
   useNotificationCenterContext,
-} from "./DOMAIN/notifications/notifications";
+} from "./DOMAIN/notifications";
 
 // ============================================================================
 // MENU SYSTEM
@@ -704,7 +716,7 @@ export {
   type HoverCardRootProps,
   HoverCardTrigger,
   type HoverCardTriggerProps,
-} from "./PATTERNS/menus/menus";
+} from "./PATTERNS/menus";
 
 // ContextMenu components
 export {
@@ -874,3 +886,59 @@ export {
   IconSuccess,
   IconWarning,
 } from "./icons";
+
+// ============================================================================
+// UTILITIES
+// ============================================================================
+// Utility functions for date formatting and general utilities
+// Note: cn is a runtime utility and must NOT be exported from @/index.
+// Runtime utilities must be imported directly from @/FOUNDATION/lib/utils.
+// See TUNG-028: Lock Index Is Public-Only (Import Invariant v2)
+export {
+  debounce,
+  formatDate,
+  formatDateTime,
+  formatTime,
+  generateId,
+  throttle,
+} from "./FOUNDATION/lib/utils";
+
+// Responsive prop utilities
+export {
+  getBaseValue,
+  getDelayMs,
+  getDurationMs,
+  getRadiusCSSVar,
+} from "./FOUNDATION/lib/responsive-props";
+
+// Note: tokenCVA is a runtime utility and must NOT be exported from @/index.
+// Runtime utilities must be imported directly from @/FOUNDATION/lib/token-cva.
+// See TUNG-028: Lock Index Is Public-Only (Import Invariant v2)
+
+// Overlay utilities
+export { useFocusLock } from "./COMPOSITION/overlays/utils/FocusLock";
+
+// Motion utilities
+export { useSwipe } from "./FOUNDATION/theme/motion/gestures";
+
+// ============================================================================
+// ANIMATION UTILITIES
+// ============================================================================
+// Animation utilities for component animations
+export type { ComponentAnimationConfig } from "./COMPOSITION/motion/animation/types";
+export { resolveComponentAnimations } from "./COMPOSITION/motion/animation/utils";
+
+// ============================================================================
+// ADDITIONAL TOKENS
+// ============================================================================
+// Additional component tokens not exported via main token barrel
+export { ARTIST_TOKENS } from "./FOUNDATION/tokens/components/artist";
+export { DATA_LIST_TOKENS } from "./FOUNDATION/tokens/components/data-list";
+export { DOMAIN_TOKENS } from "./FOUNDATION/tokens/components/domain";
+export { EMPTY_STATE_TOKENS } from "./FOUNDATION/tokens/components/empty-state";
+export { FILE_UPLOAD_TOKENS } from "./FOUNDATION/tokens/components/file-upload";
+export { SIMPLETABLE_TOKENS } from "./FOUNDATION/tokens/components/simple-table";
+export { SPINNER_TOKENS } from "./FOUNDATION/tokens/components/spinner";
+export { TABLE_TOKENS } from "./FOUNDATION/tokens/components/table";
+export { TIMELINE_TOKENS } from "./FOUNDATION/tokens/components/timeline";
+export { GRADIENT_TOKENS } from "./FOUNDATION/tokens/gradients";

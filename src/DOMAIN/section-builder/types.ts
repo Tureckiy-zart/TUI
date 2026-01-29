@@ -9,16 +9,16 @@
 import type * as React from "react";
 
 import type {
+  ComponentAnimationConfig,
   ResponsiveAlignment,
+  ResponsiveAspectRatio,
   ResponsiveColor,
   ResponsiveColumns,
   ResponsiveJustify,
   ResponsiveRadius,
   ResponsiveRows,
   ResponsiveSpacing,
-} from "@/COMPOSITION/layout/layout.types";
-import type { ComponentAnimationConfig } from "@/COMPOSITION/motion/animation/types";
-import type { ResponsiveAspectRatio } from "@/FOUNDATION/tokens/types";
+} from "@/index";
 
 /**
  * Supported layout types for sections
@@ -27,9 +27,9 @@ export type SectionLayoutType = "split" | "grid" | "stacked";
 
 /**
  * Surface background variants
- * Derived from surfaceColors tokens from tokens/colors.ts
+ * Derived from surfaceColors tokens from public API
  */
-export type SurfaceVariant = keyof typeof import("@/FOUNDATION/tokens/colors").surfaceColors.day;
+export type SurfaceVariant = keyof typeof import("@/index").surfaceColors.day;
 
 /**
  * Background configuration

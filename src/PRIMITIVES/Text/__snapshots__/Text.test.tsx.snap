@@ -16,7 +16,7 @@ exports[`Text > Snapshot > matches snapshot for large bold text 1`] = `
 </span>
 `;
 
-exports[`Text > Snapshot > matches snapshot for muted tone 1`] = `
+exports[`Text > Snapshot > matches snapshot for muted color 1`] = `
 <span
   class="text-[hsl(var(--tm-text-primary))] text-base font-normal text-[hsl(var(--tm-text-muted))]"
 >

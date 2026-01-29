@@ -117,6 +117,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { SPINNER_TOKENS } from "@/FOUNDATION/tokens/components/spinner";
 import { Text } from "@/PRIMITIVES/Text/Text";
 
+import { Box } from "../../layout/Box";
 import { Stack } from "../../layout/Stack/Stack";
 
 /**
@@ -342,7 +343,7 @@ function renderCircleVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div
+    <Box
       className={cn(
         spinnerCircleVariants({
           size,
@@ -378,9 +379,9 @@ function renderDotsVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("flex items-center", dotGap)}>
+    <Box className={cn("flex items-center", dotGap)}>
       {[0, 1, 2].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             dotSize,
@@ -404,7 +405,7 @@ function renderDotsVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -422,9 +423,9 @@ function renderBounceVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("flex items-center", dotGap)}>
+    <Box className={cn("flex items-center", dotGap)}>
       {[0, 1, 2].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             dotSize,
@@ -447,7 +448,7 @@ function renderBounceVariant(
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -466,7 +467,7 @@ function renderLinearVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div
+    <Box
       className={cn(
         trackWidth,
         trackHeight,
@@ -476,7 +477,7 @@ function renderLinearVariant(
         "relative",
       )}
     >
-      <div
+      <Box
         className={cn(
           "absolute",
           "top-0",
@@ -500,7 +501,7 @@ function renderLinearVariant(
           }
         }}
       />
-    </div>
+    </Box>
   );
 }
 
@@ -515,9 +516,9 @@ function renderBarsVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("flex items-end", gap)}>
+    <Box className={cn("flex items-end", gap)}>
       {[0, 1, 2, 3].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             barWidth,
@@ -540,7 +541,7 @@ function renderBarsVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -557,7 +558,7 @@ function renderPulseVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div
+    <Box
       className={cn(
         sizeClass,
         SPINNER_TOKENS.radius,
@@ -589,9 +590,9 @@ function renderWaveVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("flex items-center", gap)}>
+    <Box className={cn("flex items-center", gap)}>
       {[0, 1, 2, 3, 4].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             dotSize,
@@ -613,7 +614,7 @@ function renderWaveVariant(size: SpinnerSize, tone: SpinnerTone, easing: Spinner
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -643,7 +644,7 @@ function renderOrbitVariant(
   const radius = orbitRadiusMap[size];
 
   return (
-    <div
+    <Box
       className={cn(
         "relative",
         containerSize,
@@ -661,7 +662,7 @@ function renderOrbitVariant(
         const y = Math.sin(angle) * radius;
 
         return (
-          <div
+          <Box
             key={index}
             className={cn("absolute", "top-1/2", "left-1/2", dotSize, SPINNER_TOKENS.radius)}
             style={{
@@ -678,7 +679,7 @@ function renderOrbitVariant(
           />
         );
       })}
-    </div>
+    </Box>
   );
 }
 
@@ -697,9 +698,9 @@ function renderBarsHorizontalVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("flex items-center", gap)}>
+    <Box className={cn("flex items-center", gap)}>
       {[0, 1, 2, 3].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             barWidth,
@@ -722,7 +723,7 @@ function renderBarsHorizontalVariant(
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -739,9 +740,9 @@ function renderRippleVariant(
   const easingValue = SPINNER_TOKENS.easing[easing];
 
   return (
-    <div className={cn("relative", circleSize)}>
+    <Box className={cn("relative", circleSize)}>
       {[0, 1, 2].map((index) => (
-        <div
+        <Box
           key={index}
           className={cn(
             "absolute",
@@ -767,7 +768,7 @@ function renderRippleVariant(
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
@@ -855,18 +856,18 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
     };
 
     // Spinner element
-    const spinnerElement = <div aria-hidden={hasLabel ? "true" : undefined}>{renderSpinner()}</div>;
+    const spinnerElement = <Box aria-hidden={hasLabel ? "true" : undefined}>{renderSpinner()}</Box>;
 
     // If no label, return spinner only
     if (!hasLabel) {
       return (
-        <div
+        <Box
           ref={(el) => {
             // Apply ref from parent
             if (typeof ref === "function") {
-              ref(el);
-            } else if (ref) {
-              (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+              ref(el as HTMLDivElement | null);
+            } else if (ref && "current" in ref) {
+              (ref as { current: HTMLDivElement | null }).current = el as HTMLDivElement | null;
             }
           }}
           role="status"
@@ -875,7 +876,7 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           {...props}
         >
           {spinnerElement}
-        </div>
+        </Box>
       );
     }
 
@@ -885,13 +886,13 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
     const shouldReverse = effectiveLabelPosition === "top" || effectiveLabelPosition === "left";
 
     return (
-      <div
+      <Box
         ref={(el) => {
           // Apply ref from parent
           if (typeof ref === "function") {
-            ref(el);
-          } else if (ref) {
-            (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+            ref(el as HTMLDivElement | null);
+          } else if (ref && "current" in ref) {
+            (ref as { current: HTMLDivElement | null }).current = el as HTMLDivElement | null;
           }
         }}
         role="status"
@@ -902,7 +903,7 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
         <Stack direction={stackDirection} spacing={labelGap} align="center">
           {shouldReverse ? (
             <>
-              <Text size={labelTextSize} tone="muted">
+              <Text size={labelTextSize} typographyRole="meta" color="muted">
                 {label}
               </Text>
               {spinnerElement}
@@ -910,13 +911,13 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           ) : (
             <>
               {spinnerElement}
-              <Text size={labelTextSize} tone="muted">
+              <Text size={labelTextSize} typographyRole="meta" color="muted">
                 {label}
               </Text>
             </>
           )}
         </Stack>
-      </div>
+      </Box>
     );
   },
 );

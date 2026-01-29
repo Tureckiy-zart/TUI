@@ -41,27 +41,46 @@
  *
  * @example
  * ```tsx
+ * // Basic row
  * <Row spacing="md" align="center">
  *   <Box>Item 1</Box>
  *   <Box>Item 2</Box>
+ * </Row>
+ *
+ * // Row with wrap
+ * <Row spacing="md" wrap>
+ *   <Box>Item 1</Box>
+ *   <Box>Item 2</Box>
+ *   <Box>Item 3</Box>
  * </Row>
  * ```
  */
 
 import * as React from "react";
 
+import { cn } from "@/FOUNDATION/lib/utils";
+
 import { Stack, type StackProps } from "../Stack";
 
 export interface RowProps extends Omit<StackProps, "direction"> {
-  // Row inherits all Stack props except direction (always horizontal)
+  /**
+   * Whether items should wrap to next line
+   * @default false
+   */
+  wrap?: boolean;
 }
 
 /**
  * Row component - semantic alias for Stack with horizontal direction
  */
-const Row = React.forwardRef<HTMLDivElement, RowProps>((props, ref) => {
-  return <Stack ref={ref} direction="horizontal" {...props} />;
-});
+const Row = React.forwardRef<HTMLDivElement, RowProps>(
+  ({ wrap = false, className, ...props }, ref) => {
+    const wrapClass = wrap ? "flex-wrap" : "flex-nowrap";
+    return (
+      <Stack ref={ref} direction="horizontal" className={cn(wrapClass, className)} {...props} />
+    );
+  },
+);
 
 Row.displayName = "Row";
 

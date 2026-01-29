@@ -1,10 +1,11 @@
+import { Box } from "@/COMPOSITION/layout/Box";
 import { Card, CardBody, CardHeader } from "@/COMPOSITION/layout/Card";
 import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Bell, Settings, User } from "lucide-react";
 import { PopoverWrapper } from "./Popover";
 
@@ -350,7 +351,9 @@ export const NotificationsMenu: Story = {
     >
       <Button variant="outline" iconOnly>
         <Bell className="h-4 w-4" />
-        <Badge className="absolute -right-1 -top-1 h-5 w-5 text-xs">3</Badge>
+        <Box className="absolute -right-1 -top-1 h-5 w-5 text-xs">
+          <Badge>3</Badge>
+        </Box>
       </Button>
     </PopoverWrapper>
   ),

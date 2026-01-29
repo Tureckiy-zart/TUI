@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Focus Overview - Governance Showcase
  *
  * Demonstrates keyboard-only navigation patterns across the design system.
@@ -64,7 +64,7 @@ export const TabOrderDemo: Story = {
           <Box>
             <Heading level={2}>Tab Order Demonstration</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Press Tab to navigate. Focus should follow DOM order (1 to 2 to 3 to 4 to 5).
               </Text>
             </Box>
@@ -112,7 +112,9 @@ export const FocusVisibleDemo: Story = {
           <Box>
             <Heading level={2}>Focus-Visible Demonstration</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Focus rings appear on keyboard navigation, not mouse clicks.</Text>
+              <Text typographyRole="meta" color="muted">
+                Focus rings appear on keyboard navigation, not mouse clicks.
+              </Text>
             </Box>
           </Box>
 
@@ -169,7 +171,7 @@ export const RovingTabindexDemo: Story = {
           <Box>
             <Heading level={2}>Roving Tabindex Demonstration</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Tab enters the group, arrow keys navigate, Tab exits the group.
               </Text>
             </Box>
@@ -269,7 +271,7 @@ export const KeyboardParityDemo: Story = {
           <Box>
             <Heading level={2}>Keyboard Parity Requirements</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Interactive elements MUST be keyboard accessible. Click count: {clickCount}
               </Text>
             </Box>
@@ -310,7 +312,7 @@ export const CompleteNavigationDemo: Story = {
           <Box>
             <Heading level={2}>Complete Navigation Example</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Navigate through multiple sections using Tab. Modal demonstrates focus trap.
               </Text>
             </Box>

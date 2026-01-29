@@ -117,10 +117,12 @@ import type {
   SpacingValue,
 } from "../layout.types";
 
+export type BoxElement = keyof React.JSX.IntrinsicElements;
+
 /**
  * Box component props
  */
-export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+export type BoxProps<E extends BoxElement = "div"> = {
   /**
    * Render as different HTML element
    * @example
@@ -130,7 +132,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * <Box as="aside">Sidebar content</Box>
    */
-  as?: keyof React.JSX.IntrinsicElements;
+  as?: E;
 
   /**
    * Padding horizontal (left + right)
@@ -314,7 +316,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * <Box bg={{ base: "background", md: "card" }}>Content</Box>
    */
   bg?: ResponsiveColor;
-}
+} & Omit<React.ComponentPropsWithoutRef<E>, "as">;
 
 /**
  * Get base value from responsive value
@@ -336,7 +338,7 @@ function shadowToClass(value: ShadowValue | undefined): string | undefined {
 /**
  * Box component
  */
-const Box = React.forwardRef<HTMLDivElement, BoxProps>(
+const BoxComponent = React.forwardRef<HTMLElement, BoxProps>(
   (
     {
       as: Component = "div",
@@ -411,13 +413,21 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       className,
     );
 
-    const ComponentAny = Component as any;
+    const ComponentAny = Component as React.ElementType;
     const finalStyle =
       Object.keys(inlineStyles).length > 0 || style ? { ...inlineStyles, ...style } : undefined;
 
     return <ComponentAny ref={ref} className={classes} style={finalStyle} {...props} />;
   },
 );
+
+BoxComponent.displayName = "Box";
+
+const Box = BoxComponent as typeof BoxComponent & {
+  <E extends BoxElement = "div">(
+    props: BoxProps<E> & { ref?: React.Ref<HTMLElement> },
+  ): React.ReactElement;
+};
 
 Box.displayName = "Box";
 

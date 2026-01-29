@@ -60,9 +60,13 @@ export const minimalBrand: BrandPackage = {
         // Subtle semantic colors
         semanticColorsDay: {
           success: "140 30% 45%", // Muted green
+          successForeground: "0 0% 100%",
           info: "210 30% 50%", // Muted blue
+          infoForeground: "0 0% 100%",
           warning: "40 30% 50%", // Muted orange
+          warningForeground: "0 0% 9%",
           error: "0 40% 55%", // Muted red
+          errorForeground: "0 0% 100%",
         },
         // Typography overrides - lighter and smaller
         typography: {
@@ -186,9 +190,13 @@ export const minimalBrand: BrandPackage = {
         // Subtle semantic colors for night
         semanticColorsNight: {
           success: "140 30% 50%", // Muted green
+          successForeground: "0 0% 100%",
           info: "210 30% 55%", // Muted blue
+          infoForeground: "0 0% 100%",
           warning: "40 30% 55%", // Muted orange
+          warningForeground: "0 0% 100%",
           error: "0 40% 60%", // Muted red
+          errorForeground: "0 0% 100%",
         },
         // Typography overrides - same as day
         typography: {

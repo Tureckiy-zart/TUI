@@ -8,10 +8,9 @@
 
 import * as React from "react";
 
-import type { SpacingValue } from "@/COMPOSITION";
-import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DATA_LIST_TOKENS } from "@/FOUNDATION/tokens/components/data-list";
+import { getBaseValue, type SpacingValue } from "@/index";
 
 import type { DataListItemProps as DataListItemPropsType } from "./DataList.types";
 

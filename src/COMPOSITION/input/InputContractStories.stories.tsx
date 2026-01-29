@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Input Contract Stories - Governance Showcase
  *
  * Demonstrates input interaction contracts across the design system.
@@ -73,7 +73,7 @@ export const KeyboardParityDemo: Story = {
           <Box>
             <Heading level={2}>Keyboard Parity Demonstration</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 All interactive components MUST be keyboard accessible. Use Tab to focus, then
                 Enter/Space to activate.
               </Text>
@@ -156,7 +156,7 @@ export const EnterSpaceSemantics: Story = {
           <Box>
             <Heading level={2}>Enter/Space Semantics by Component Type</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Enter and Space keys have different meanings depending on component type.
               </Text>
             </Box>
@@ -270,7 +270,7 @@ export const DisabledStateBlocking: Story = {
           <Box>
             <Heading level={2}>Disabled State Blocks All Interactions</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Disabled components MUST NOT respond to pointer or keyboard interactions.
               </Text>
             </Box>
@@ -367,7 +367,7 @@ export const LoadingStateBehavior: Story = {
           <Box>
             <Heading level={2}>Loading State Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Loading state blocks pointer interactions but MAY allow keyboard focus for
                 accessibility.
               </Text>
@@ -391,7 +391,7 @@ export const LoadingStateBehavior: Story = {
                   {isLoading ? "Loading..." : "Click to Load"}
                 </Button>
                 <Box mt={2}>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Note: Loading state is not yet fully implemented in Button component. This
                     demonstrates expected behavior.
                   </Text>
@@ -426,7 +426,7 @@ export const ReadonlyStateBehavior: Story = {
           <Box>
             <Heading level={2}>Readonly State Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Readonly inputs block value changes but allow focus and text selection.
               </Text>
             </Box>
@@ -442,7 +442,7 @@ export const ReadonlyStateBehavior: Story = {
                 </Box>
                 <Input value="This text cannot be edited" readOnly data-testid="input-readonly" />
                 <Box mt={1}>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Try to edit: Cannot change value. Try to select: Can select text.
                   </Text>
                 </Box>
@@ -460,7 +460,7 @@ export const ReadonlyStateBehavior: Story = {
                   data-testid="textarea-readonly"
                 />
                 <Box mt={1}>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Try to edit: Cannot change value. Try to select: Can select text.
                   </Text>
                 </Box>
@@ -474,7 +474,7 @@ export const ReadonlyStateBehavior: Story = {
                 </Box>
                 <Input value="This text is disabled" disabled />
                 <Box mt={1}>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Compare: Disabled blocks focus, Readonly allows focus.
                   </Text>
                 </Box>
@@ -530,7 +530,7 @@ export const DoubleTriggerPrevention: Story = {
           <Box>
             <Heading level={2}>Double Trigger Prevention</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Components should prevent accidental double-clicks and double-submits.
               </Text>
             </Box>
@@ -574,7 +574,7 @@ export const DoubleTriggerPrevention: Story = {
                   </Label>
                 </Box>
                 <Box mt={1}>
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     Note: Toggle components prevent rapid state changes through controlled state.
                   </Text>
                 </Box>
@@ -608,7 +608,7 @@ export const InputGAPGallery: Story = {
           <Box>
             <Heading level={2}>Input GAP Gallery</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 This gallery demonstrates intentional Input GAPs (ACCEPTABLE only). Currently, no
                 Input GAPs have been identified - all components demonstrate correct behavior.
               </Text>

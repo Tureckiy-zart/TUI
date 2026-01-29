@@ -110,7 +110,7 @@ export const Matrix: Story = {
                     size={size}
                     shape={shape}
                   />
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -157,7 +157,7 @@ export const States: Story = {
                 size="lg"
                 status={status}
               />
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {label}
               </Text>
             </Stack>
@@ -206,7 +206,7 @@ export const SizesGallery: Story = {
                     alt="John Doe"
                     size={size}
                   />
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -220,7 +220,7 @@ export const SizesGallery: Story = {
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
                   <Avatar alt="John Doe" size={size} />
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -234,7 +234,7 @@ export const SizesGallery: Story = {
               {sizes.map((size) => (
                 <Stack key={size} spacing="sm" align="center">
                   <Avatar alt="User" fallback="?" size={size} />
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -253,7 +253,7 @@ export const SizesGallery: Story = {
                     size={size}
                     status="online"
                   />
-                  <Text size="sm" tone="muted">
+                  <Text size="sm" typographyRole="meta" color="muted">
                     {size}
                   </Text>
                 </Stack>
@@ -291,28 +291,28 @@ export const FallbackStates: Story = {
             alt="John Doe"
             size="lg"
           />
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             With Image
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Alice Brown" size="lg" />
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             Initials (AB)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="Bob" size="lg" />
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             Single Initial (B)
           </Text>
         </Stack>
 
         <Stack spacing="sm" align="center">
           <Avatar alt="User" fallback="?" size="lg" />
-          <Text size="sm" tone="muted">
+          <Text size="sm" typographyRole="meta" color="muted">
             Custom Fallback
           </Text>
         </Stack>
@@ -366,7 +366,7 @@ export const AccessibilityDemo: Story = {
         className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
       >
         <Heading level={4}>Without Status</Heading>
-        <Text size="sm" tone="muted">
+        <Text size="sm" typographyRole="meta" color="muted">
           aria-label: "John Doe"
         </Text>
         <Avatar
@@ -381,7 +381,7 @@ export const AccessibilityDemo: Story = {
         className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
       >
         <Heading level={4}>With Status: Online</Heading>
-        <Text size="sm" tone="muted">
+        <Text size="sm" typographyRole="meta" color="muted">
           aria-label: "Jane Smith (online)"
         </Text>
         <Avatar
@@ -397,7 +397,7 @@ export const AccessibilityDemo: Story = {
         className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
       >
         <Heading level={4}>With Status: Busy</Heading>
-        <Text size="sm" tone="muted">
+        <Text size="sm" typographyRole="meta" color="muted">
           aria-label: "Bob Wilson (busy)"
         </Text>
         <Avatar alt="Bob Wilson" size="lg" status="busy" />
@@ -408,7 +408,7 @@ export const AccessibilityDemo: Story = {
         className="rounded-lg border border-[hsl(var(--tm-border-default))] bg-[hsl(var(--tm-muted))]/30 p-6"
       >
         <Heading level={4}>With Status: Offline</Heading>
-        <Text size="sm" tone="muted">
+        <Text size="sm" typographyRole="meta" color="muted">
           aria-label: "Carol White (offline)"
         </Text>
         <Avatar alt="Carol White" size="lg" status="offline" />
@@ -440,8 +440,10 @@ export const UserProfileCard: Story = {
         />
         <Stack spacing="xs" align="center">
           <Heading level={4}>John Doe</Heading>
-          <Text tone="muted">Senior Software Engineer</Text>
-          <Text size="sm" tone="muted">
+          <Text typographyRole="meta" color="muted">
+            Senior Software Engineer
+          </Text>
+          <Text size="sm" typographyRole="meta" color="muted">
             San Francisco, CA
           </Text>
         </Stack>
@@ -475,7 +477,7 @@ export const CommentSection: Story = {
           <Stack spacing="xs" className="flex-1">
             <div className="flex items-center gap-2">
               <Text weight="medium">{item.name}</Text>
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {item.time}
               </Text>
             </div>
@@ -657,7 +659,7 @@ export const TeamMembersGrid: Story = {
             <Avatar alt={member.name} size="lg" status={member.status} />
             <Stack spacing="xs" align="center">
               <Text weight="medium">{member.name}</Text>
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 {member.role}
               </Text>
             </Stack>

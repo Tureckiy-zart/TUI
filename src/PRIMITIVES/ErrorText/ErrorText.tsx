@@ -3,6 +3,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
+import { Box } from "@/COMPOSITION/layout";
 import { Text } from "@/PRIMITIVES/Text";
 
 /**
@@ -66,11 +67,19 @@ const ErrorText = React.forwardRef<HTMLParagraphElement, ErrorTextProps>(
 
     // Default: render as p element
     return (
-      <p ref={ref} role="alert" aria-live="polite" id={id} className={baseClasses} {...props}>
+      <Box
+        ref={ref}
+        as="p"
+        role="alert"
+        aria-live="polite"
+        id={id}
+        className={baseClasses}
+        {...props}
+      >
         <Text size="sm" as="span">
           {children}
         </Text>
-      </p>
+      </Box>
     );
   },
 );

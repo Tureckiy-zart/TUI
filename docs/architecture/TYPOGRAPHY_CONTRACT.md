@@ -527,6 +527,7 @@ All semantic text roles are defined in `textStyles` object in `src/FOUNDATION/to
 
 - `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - LOCKED Typography Authority (complementary)
 - `docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md` - Typography Color Policy v1 (CANON)
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md` - Typography Semantics Canon (semantic vs presentational usage rules)
 - `docs/architecture/SPACING_AUTHORITY.md` - Spacing Authority (baseline unit source)
 - `docs/architecture/A11Y_AUTHORITY.md` - A11Y Authority (accessibility rules)
 - `src/FOUNDATION/tokens/typography.ts` - Typography token definitions with role policy

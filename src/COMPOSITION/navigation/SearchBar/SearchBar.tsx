@@ -43,7 +43,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
-import { SearchInput } from "@/PATTERNS/filters/filters/SearchInput";
+import { SearchInput } from "@/PATTERNS/filters/SearchInput";
 import { Button } from "@/PRIMITIVES/Button";
 
 export interface SearchBarProps {

@@ -74,17 +74,17 @@
 - Variants: `promoCardBadgeVariants`, `promoCardBadgeSurfaceVariants`, `promoCardCtaButtonVariants`, `promoCardCtaButtonIconVariants`
 
 **Layer Classification:** PATTERNS / cards (Domain-specific Extension)  
-**Location:** `src/PATTERNS/cards/cards/PromoCard/`
+**Location:** `src/PATTERNS/cards/PromoCard/`
 
 **Component Role (Preliminary):** Domain-specific card component for displaying promotional content. Uses CardBase for layout composition and handles promo-specific presentation logic (featured badges, CTA buttons, image display). Supports animation and hover effects.
 
 ### Source Files
 
 **Implementation Files:**
-- `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx` (188 lines)
-- `src/PATTERNS/cards/cards/PromoCard/PromoCard.types.ts` (46 lines)
-- `src/PATTERNS/cards/cards/PromoCard/PromoCard.variants.ts` (95 lines)
-- `src/PATTERNS/cards/cards/PromoCard/index.ts` (8 lines)
+- `src/PATTERNS/cards/PromoCard/PromoCard.tsx` (188 lines)
+- `src/PATTERNS/cards/PromoCard/PromoCard.types.ts` (46 lines)
+- `src/PATTERNS/cards/PromoCard/PromoCard.variants.ts` (95 lines)
+- `src/PATTERNS/cards/PromoCard/index.ts` (8 lines)
 
 **Storybook Files:**
 - ❌ **MISSING** - No `PromoCard.stories.tsx` found
@@ -109,7 +109,7 @@
     - `GRADIENT_TOKENS.surface.elevated`
 
 **Export Points:**
-- ✅ Exported from `src/PATTERNS/cards/cards/PromoCard/index.ts` (barrel export)
+- ✅ Exported from `src/PATTERNS/cards/PromoCard/index.ts` (barrel export)
 - ❌ **NOT EXPORTED** from main library (`src/index.ts`) - PromoCard not found in main exports
 
 ### External Dependencies
@@ -125,7 +125,7 @@
 - `@/FOUNDATION/tokens/components/icon` - `ICON_TOKENS`
 - `@/FOUNDATION/tokens/components/text` - `TEXT_TOKENS`
 - `@/FOUNDATION/tokens/gradients` - `GRADIENT_TOKENS`
-- `@/PATTERNS/cards/cards/CardBase` - `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
+- `@/PATTERNS/cards/CardBase` - `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
 - `@/PRIMITIVES/Heading` - `Heading`
 - `@/PRIMITIVES/Icon` - `Icon`
 - `@/PRIMITIVES/Link` - `Link`
@@ -426,9 +426,9 @@ export type PromoCardVariant = "default" | "featured";
 ### Pattern Comparison
 
 **Compared Components:**
-- VenueCard (`src/PATTERNS/cards/cards/VenueCard/`) - Recently completed Pipeline 18A
-- EventCard (`src/PATTERNS/cards/cards/EventCard/`) - Recently completed Pipeline 18A
-- CardBase (`src/PATTERNS/cards/cards/CardBase/`) - Foundation layout component
+- VenueCard (`src/PATTERNS/cards/VenueCard/`) - Recently completed Pipeline 18A
+- EventCard (`src/PATTERNS/cards/EventCard/`) - Recently completed Pipeline 18A
+- CardBase (`src/PATTERNS/cards/CardBase/`) - Foundation layout component
 
 ### Alignment Analysis
 
@@ -1028,7 +1028,7 @@ export type PromoCardVariant = "default" | "featured";
 
 ### Test Coverage
 
-**Test File Created:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.test.tsx`
+**Test File Created:** `src/PATTERNS/cards/PromoCard/PromoCard.test.tsx`
 
 **Test Coverage:**
 ✅ **API Contract Tests:**
@@ -1078,7 +1078,7 @@ export type PromoCardVariant = "default" | "featured";
 
 ### Storybook Coverage
 
-**Story File Created:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.stories.tsx`
+**Story File Created:** `src/PATTERNS/cards/PromoCard/PromoCard.stories.tsx`
 
 **Required Stories (per VARIANTS_SIZE_CANON.md):**
 ✅ **Matrix Story** - All variants × all sizes (REQUIRED)
@@ -1282,7 +1282,7 @@ export type PromoCardVariant = "default" | "featured";
 
 **ARCHITECTURE_LOCK.md Updated:**
 ✅ PromoCard added to PROCESS LOCKED components table
-- Location: `src/PATTERNS/cards/cards/PromoCard/`
+- Location: `src/PATTERNS/cards/PromoCard/`
 - Status: ✅ **PROCESS LOCKED**
 - Lock Date: 2026-01-01
 - Audit Report: `docs/reports/audit/PROMOCARD_BASELINE_REPORT.md`

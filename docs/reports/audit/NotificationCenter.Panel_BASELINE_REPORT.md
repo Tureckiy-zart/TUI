@@ -49,7 +49,7 @@
 **Exported Name:** `NotificationCenterPanel`  
 **Layer:** COMPOSITION / OVERLAY (Domain component)  
 **Semantic Role:** OVERLAY_CONTAINER_PANEL  
-**Location:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`  
+**Location:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -60,8 +60,8 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` (281 lines)
-- **Barrel Export:** `src/DOMAIN/notifications/notifications/NotificationCenter.tsx` (exports Panel as `NotificationCenter.Panel`)
+- **Main Component:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` (281 lines)
+- **Barrel Export:** `src/DOMAIN/notifications/NotificationCenter.tsx` (exports Panel as `NotificationCenter.Panel`)
 - **Related Components:**
   - `NotificationCenter.List.tsx` (list container)
   - `NotificationCenter.GroupHeader.tsx` (group section header)
@@ -72,13 +72,13 @@
 
 ### Storybook Files
 
-- **Stories:** `src/DOMAIN/notifications/notifications/NotificationCenter.stories.tsx` (443 lines)
+- **Stories:** `src/DOMAIN/notifications/NotificationCenter.stories.tsx` (443 lines)
   - Stories: Default, MultiChannel, Grouping, Stacking, DismissAll, PersistentHistory, A11y, SizesGallery, LongContent
   - Panel-specific stories demonstrate: width variants (sm/md/lg), empty state, grouping, keyboard interaction
 
 ### Test Files
 
-- **Unit Tests:** `src/DOMAIN/notifications/notifications/NotificationCenter.test.tsx` (677 lines)
+- **Unit Tests:** `src/DOMAIN/notifications/NotificationCenter.test.tsx` (677 lines)
   - Panel tests: open/close behavior, keyboard interaction (ESC), focus management, width variants, empty state
   - Accessibility tests: axe checks for Panel component
   - Total Panel-related tests: ~10 tests
@@ -90,8 +90,8 @@
 - `NotificationCenterPanelProps` (interface)
 
 **Export Hierarchy:**
-1. `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` → exports NotificationCenterPanel, NotificationCenterPanelProps
-2. `src/DOMAIN/notifications/notifications/NotificationCenter.tsx` → re-exports as `NotificationCenter.Panel`
+1. `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` → exports NotificationCenterPanel, NotificationCenterPanelProps
+2. `src/DOMAIN/notifications/NotificationCenter.tsx` → re-exports as `NotificationCenter.Panel`
 
 ### External Dependencies
 

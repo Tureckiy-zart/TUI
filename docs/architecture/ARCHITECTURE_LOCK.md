@@ -270,13 +270,13 @@ The following Extension layer components have successfully completed Pipeline 18
 | **IconGallery** | `src/COMPOSITION/utilities/IconGallery/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/ICONGALLERY_BASELINE_REPORT.md` |
 | **Inline** | `src/COMPOSITION/layout/Inline/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/INLINE_BASELINE_REPORT.md` |
 | **EmptyState** | `src/PATTERNS/states/EmptyState/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/EMPTYSTATE_BASELINE_REPORT.md` |
-| **NotificationCenter** | `src/DOMAIN/notifications/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
+| **NotificationCenter** | `src/DOMAIN/notifications/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md` |
 | **Alert** | `src/PRIMITIVES/Alert/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/ALERT_BASELINE_REPORT.md` |
-| **CardBase** | `src/PATTERNS/cards/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 (Second Pass: 2026-01-01) | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
-| **VenueCard** | `src/PATTERNS/cards/cards/VenueCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/VENUECARD_BASELINE_REPORT.md` |
-| **PromoCard** | `src/PATTERNS/cards/cards/PromoCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROMOCARD_BASELINE_REPORT.md` |
-| **FilterBar** | `src/PATTERNS/filters/filters/FilterBar/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md` |
-| **HoverCard** | `src/PATTERNS/menus/menus/hover-card/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md` |
+| **CardBase** | `src/PATTERNS/cards/CardBase/` | ✅ **PROCESS LOCKED** | 2025-12-27 (Second Pass: 2026-01-01) | `docs/reports/audit/CARDBASE_BASELINE_REPORT.md` |
+| **VenueCard** | `src/PATTERNS/cards/VenueCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/VENUECARD_BASELINE_REPORT.md` |
+| **PromoCard** | `src/PATTERNS/cards/PromoCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROMOCARD_BASELINE_REPORT.md` |
+| **FilterBar** | `src/PATTERNS/filters/FilterBar/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/FILTERBAR_BASELINE_REPORT.md` |
+| **HoverCard** | `src/PATTERNS/menus/hover-card/` | ✅ **PROCESS LOCKED** | 2025-12-27 | `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md` |
 | **NavRoot** | `src/COMPOSITION/navigation/NavRoot/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVROOT_BASELINE_REPORT.md` |
 | **NavLink** | `src/PRIMITIVES/NavLink/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/NAVLINK_BASELINE_REPORT.md` |
 | **SegmentedControl** | `src/COMPOSITION/navigation/segmented-control/` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/SEGMENTEDCONTROL_BASELINE_REPORT.md` |
@@ -287,13 +287,13 @@ The following Extension layer components have successfully completed Pipeline 18
 | **Field** | `src/PRIMITIVES/Field/` | ✅ **COMPOSITION READY** | 2025-12-27 | `docs/reports/audit/FIELD_BASELINE_REPORT.md` |
 | **Popover** | `src/COMPOSITION/overlays/Popover.tsx` | ✅ **PROCESS LOCKED** | 2025-12-26 | `docs/reports/audit/POPOVER_BASELINE_REPORT.md` |
 | **NextLinkAdapter** | `src/EXTENSIONS/next/NextLinkAdapter.tsx` | ✅ **PROCESS LOCKED** | 2025-12-25 | `docs/reports/audit/NEXTLINKADAPTER_BASELINE_REPORT.md` |
-| **EventCard** | `src/DOMAIN/sections/EventCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/EVENTCARD_BASELINE_REPORT.md` |
-| **CategoryCard** | `src/PATTERNS/cards/cards/CategoryCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/CATEGORYCARD_BASELINE_REPORT.md` |
-| **ProfileCard** | `src/DOMAIN/auth/auth/ProfileCard.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` |
+| **EventCard** | `src/PATTERNS/cards/EventCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/EVENTCARD_BASELINE_REPORT.md` |
+| **CategoryCard** | `src/PATTERNS/cards/CategoryCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/CATEGORYCARD_BASELINE_REPORT.md` |
+| **ProfileCard** | `src/DOMAIN/auth/ProfileCard.tsx` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` |
 | **VisuallyHidden** | `src/COMPOSITION/a11y/VisuallyHidden/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/VISUALLYHIDDEN_BASELINE_REPORT.md` |
 | **FocusTrap** | `src/COMPOSITION/focus/FocusTrap/` | ✅ **PROCESS LOCKED** | 2026-01-02 | `docs/reports/audit/FOCUSTRAP_BASELINE_REPORT.md` |
-| **ArtistCard** | `src/PATTERNS/cards/cards/ArtistCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/ARTISTCARD_BASELINE_REPORT.md` |
-| **TicketCard** | `src/PATTERNS/cards/cards/TicketCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/TICKETCARD_BASELINE_REPORT.md` |
+| **ArtistCard** | `src/PATTERNS/cards/ArtistCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/ARTISTCARD_BASELINE_REPORT.md` |
+| **TicketCard** | `src/PATTERNS/cards/TicketCard/` | ✅ **PROCESS LOCKED** | 2026-01-01 | `docs/reports/audit/TICKETCARD_BASELINE_REPORT.md` |
 
 ---
 
@@ -1550,6 +1550,7 @@ Any structural changes require explicit unlock procedure:
 - **[Final Foundation Lock](./FOUNDATION_LOCK.md)** - 🔒 **Authoritative Foundation lock document** (single source of truth)
 - **[Token System](./TOKEN_AUTHORITY.md)** - 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** - Radix UI and Token Union rules
+- **[Closed System v2 Canon Documentation Lock](./closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
 - **Component Guidelines** — Component development guidelines (archived; file no longer available)
 - **[Cursor UI Rules](./ASSISTANT_DEVELOPMENT_RULES.md)** - Cursor AI development rules
 - **Token Domains Final Report** — Final token domain verification (FINAL VERDICT: OK) (archived; file no longer available)

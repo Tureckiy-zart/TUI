@@ -2,8 +2,7 @@
 
 import * as React from "react";
 
-import { Stack } from "@/COMPOSITION/layout";
-import { cn } from "@/FOUNDATION/lib/utils";
+import { Box, Stack } from "@/COMPOSITION/layout";
 import { Label } from "@/PRIMITIVES/Label";
 import { Text } from "@/PRIMITIVES/Text";
 
@@ -24,17 +23,21 @@ import { Text } from "@/PRIMITIVES/Text";
  * </Field>
  * ```
  */
-export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
+  children: React.ReactNode;
+}
 
-const Field = React.forwardRef<HTMLDivElement, FieldProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Stack ref={ref} spacing="sm" className={cn(className)} {...props}>
-        {children}
-      </Stack>
-    );
-  },
-);
+const Field = React.forwardRef<HTMLDivElement, FieldProps>(({ children, ...props }, ref) => {
+  // className and style are forbidden from public API - only token-based className is used
+  return (
+    <Stack ref={ref} spacing="sm" {...props}>
+      {children}
+    </Stack>
+  );
+});
 Field.displayName = "Field";
 
 /**
@@ -50,10 +53,62 @@ Field.displayName = "Field";
  */
 export interface FieldLabelProps extends React.ComponentProps<typeof Label> {}
 
-const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>((props, ref) => {
-  // className is forbidden on Foundation components - FieldLabel passes props directly to Label
-  return <Label ref={ref} {...props} />;
-});
+const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
+  (
+    {
+      children,
+      htmlFor,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      onClick,
+      onFocus,
+      onBlur,
+      onMouseDown,
+      onMouseUp,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-required": ariaRequired,
+      "aria-invalid": ariaInvalid,
+      required,
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <Label
+        ref={ref}
+        htmlFor={htmlFor}
+        id={id}
+        title={title}
+        role={role}
+        dir={dir}
+        lang={lang}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-required={ariaRequired}
+        aria-invalid={ariaInvalid}
+        required={required}
+        {...props}
+      >
+        {children}
+      </Label>
+    );
+  },
+);
 FieldLabel.displayName = "FieldLabel";
 
 /**
@@ -69,14 +124,20 @@ FieldLabel.displayName = "FieldLabel";
  * </Field.Control>
  * ```
  */
-export interface FieldControlProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldControlProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
+  children: React.ReactNode;
+}
 
 const FieldControl = React.forwardRef<HTMLDivElement, FieldControlProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ children, ...props }, ref) => {
+    // className and style are forbidden from public API - only token-based className is used
     return (
-      <div ref={ref} className={cn(className)} {...props}>
+      <Box ref={ref} {...props}>
         {children}
-      </div>
+      </Box>
     );
   },
 );
@@ -95,10 +156,62 @@ FieldControl.displayName = "FieldControl";
  */
 export interface FieldDescriptionProps extends React.ComponentProps<typeof Text> {}
 
-const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>((props, ref) => {
-  // className is forbidden on Foundation components - FieldDescription uses only token-driven props
-  return <Text ref={ref} size="sm" typographyRole="meta" color="muted" {...props} />;
-});
+const FieldDescription = React.forwardRef<HTMLSpanElement, FieldDescriptionProps>(
+  (
+    {
+      children,
+      as,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+      ...textProps
+    },
+    ref,
+  ) => {
+    const domProps = {
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+    const element = as ?? "span";
+
+    return (
+      <Box as={element} ref={ref as React.Ref<HTMLDivElement>} {...domProps}>
+        <Text as="span" size="sm" typographyRole="meta" color="muted" {...textProps}>
+          {children}
+        </Text>
+      </Box>
+    );
+  },
+);
 FieldDescription.displayName = "FieldDescription";
 
 /**
@@ -120,16 +233,66 @@ FieldDescription.displayName = "FieldDescription";
 export interface FieldErrorProps extends React.ComponentProps<typeof Text> {}
 
 const FieldError = React.forwardRef<HTMLSpanElement, FieldErrorProps>(
-  ({ children, ...props }, ref) => {
+  (
+    {
+      children,
+      as,
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+      ...textProps
+    },
+    ref,
+  ) => {
     // Wrapper span applies destructive color via className (Composition layer pattern).
     // Text component (Foundation) cannot accept className, so wrapper is used.
     // This pattern respects Foundation Enforcement while allowing Composition flexibility.
+    const domProps = {
+      id,
+      title,
+      role,
+      dir,
+      lang,
+      tabIndex,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+    const element = as ?? "span";
+
     return (
-      <span ref={ref} className="text-[hsl(var(--tm-destructive))]">
-        <Text size="sm" {...props}>
+      <Box
+        as={element}
+        ref={ref as React.Ref<HTMLDivElement>}
+        className="text-[hsl(var(--tm-destructive))]"
+        {...domProps}
+      >
+        <Text as="span" size="sm" {...textProps}>
           {children}
         </Text>
-      </span>
+      </Box>
     );
   },
 );

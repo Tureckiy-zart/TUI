@@ -144,7 +144,7 @@ export interface PortalProps {
 ### Usage in Codebase
 
 **Direct Usage:**
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` (line 17)
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` (line 17)
 - `src/COMPOSITION/overlays/Drawer/Drawer.tsx` (line 28)
 
 **Related Components:**

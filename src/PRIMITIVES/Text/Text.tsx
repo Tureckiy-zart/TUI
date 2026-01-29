@@ -128,7 +128,6 @@ export type TextAsElement = "span" | "p" | "label" | "strong" | "em";
  */
 const DEFAULT_SIZE = "md" as const;
 const DEFAULT_WEIGHT = "normal" as const;
-const DEFAULT_TONE = "default" as const;
 
 const textVariants = tokenCVA({
   base: "text-[hsl(var(--tm-text-primary))]",
@@ -146,10 +145,6 @@ const textVariants = tokenCVA({
       semibold: TEXT_TOKENS.fontWeight.semibold,
       bold: TEXT_TOKENS.fontWeight.bold,
     } satisfies Record<TextWeight, string>,
-    tone: {
-      default: "",
-      muted: "text-[hsl(var(--tm-text-muted))]",
-    } satisfies Record<TextTone, string>,
     // Role-based color variant (enforced via TypeScript generic)
     color: {
       primary: TEXT_COLOR_CLASSES.primary,
@@ -167,7 +162,6 @@ const textVariants = tokenCVA({
   defaultVariants: {
     size: DEFAULT_SIZE,
     weight: DEFAULT_WEIGHT,
-    tone: DEFAULT_TONE,
   },
 });
 
@@ -198,28 +192,19 @@ export interface TextProps<R extends TypographyRole = TypographyRole> extends Om
    * Only tokens allowed for the specified typographyRole are valid
    */
   color?: AllowedTextForRole<R>;
-  /**
-   * Text color tone (default, muted)
-   * @deprecated Use typographyRole + color props instead. This is kept for backward compatibility.
-   */
-  tone?: TextTone;
+  // tone prop removed - use typographyRole + color instead
+  // Migration: tone="default" → typographyRole="body" + color="primary" (or omit color for default)
+  // Migration: tone="muted" → typographyRole="meta" + color="muted"
 }
 
 const TextComponent = React.forwardRef<HTMLElement, TextProps<any>>(
-  ({ as = "span", size, weight, typographyRole: _typographyRole, color, tone, ...props }, ref) => {
+  ({ as = "span", size, weight, typographyRole: _typographyRole, color, ...props }, ref) => {
     const Component = as as TextAsElement;
     // className and style are forbidden from public API - only CVA output is used
     // typographyRole is used only for TypeScript type enforcement, not in runtime
+    // tone prop removed - use typographyRole + color instead
 
-    // Priority: color (role-based) > tone (deprecated)
-    // If color is provided, use it; otherwise fall back to tone
-    let colorVariant: { color?: TextToken } | { tone?: TextTone } | undefined;
-    if (color) {
-      colorVariant = { color };
-    } else if (tone) {
-      colorVariant = { tone };
-    }
-
+    const colorVariant = color ? { color } : undefined;
     const className = textVariants({ size, weight, ...colorVariant });
 
     return <Component ref={ref as any} className={className} {...props} />;

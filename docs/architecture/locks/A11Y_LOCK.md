@@ -314,6 +314,8 @@ Any modification to locked A11Y System components requires:
 
 ## 🔗 Related Documents
 
+- **[Closed System v2 Canon Documentation Lock](../closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
+
 ### Authority Documents
 - [A11Y_AUTHORITY.md](../A11Y_AUTHORITY.md) - A11Y Authority Contract
 - [FOCUS_AUTHORITY.md](../FOCUS_AUTHORITY.md) - Focus navigation mechanics

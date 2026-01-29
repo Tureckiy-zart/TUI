@@ -10,7 +10,7 @@ import * as React from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
 import { TABLE_TOKENS } from "@/FOUNDATION/tokens/components/table";
-import { Skeleton } from "@/PRIMITIVES/Skeleton";
+import { Box, Skeleton } from "@/index";
 
 import type { TableLoadingStateProps } from "./Table.types";
 
@@ -27,7 +27,9 @@ const TableLoadingState = React.forwardRef<HTMLTableRowElement, TableLoadingStat
           <tr key={index} ref={index === 0 ? ref : undefined} className={cn(className)} {...props}>
             {Array.from({ length: colSpan }).map((_, cellIndex) => (
               <td key={cellIndex} className={TABLE_TOKENS.loading.cellPadding}>
-                <Skeleton variant="text" className={TABLE_TOKENS.loading.skeletonWidth} />
+                <Box className={TABLE_TOKENS.loading.skeletonWidth}>
+                  <Skeleton variant="text" />
+                </Box>
               </td>
             ))}
           </tr>

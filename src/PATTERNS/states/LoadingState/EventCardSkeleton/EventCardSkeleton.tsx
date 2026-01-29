@@ -5,7 +5,7 @@ import React from "react";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { DATA_TOKENS } from "@/FOUNDATION/tokens/components/data";
 import { DOMAIN_TOKENS } from "@/FOUNDATION/tokens/components/domain";
-import { Skeleton } from "@/PRIMITIVES/Skeleton";
+import { Box, Skeleton } from "@/index";
 
 export interface EventCardSkeletonProps {
   className?: string;
@@ -23,24 +23,28 @@ export const EventCardSkeleton: React.FC<EventCardSkeletonProps> = ({ className 
       )}
     >
       <div className={cn("flex flex-col", DOMAIN_TOKENS.skeleton.content.gap)}>
-        <Skeleton
-          className={cn(DOMAIN_TOKENS.skeleton.image.height, DATA_TOKENS.skeleton.width.full)}
-        />
-        <Skeleton
+        <Box className={cn(DOMAIN_TOKENS.skeleton.image.height, DATA_TOKENS.skeleton.width.full)}>
+          <Skeleton />
+        </Box>
+        <Box
           className={cn(
             DOMAIN_TOKENS.skeleton.badge.height,
             DOMAIN_TOKENS.skeleton.content.width.threeQuarters,
           )}
-        />
-        <Skeleton
-          className={cn(DATA_TOKENS.skeleton.height.text, DATA_TOKENS.skeleton.width.full)}
-        />
-        <Skeleton
+        >
+          <Skeleton />
+        </Box>
+        <Box className={cn(DATA_TOKENS.skeleton.height.text, DATA_TOKENS.skeleton.width.full)}>
+          <Skeleton />
+        </Box>
+        <Box
           className={cn(
             DATA_TOKENS.skeleton.height.text,
             DOMAIN_TOKENS.skeleton.content.width.half,
           )}
-        />
+        >
+          <Skeleton />
+        </Box>
       </div>
     </div>
   );

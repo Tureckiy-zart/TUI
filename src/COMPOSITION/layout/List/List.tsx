@@ -177,15 +177,14 @@ const List = React.forwardRef<HTMLElement, ListProps>(
         }, [])
       : children;
 
-    // Compose Stack as base container
     return (
       <Stack
-        ref={ref as React.Ref<HTMLDivElement>}
+        ref={ref as React.Ref<HTMLElement>}
         as={as}
         direction="vertical"
         spacing={gap}
         role={as === "div" ? "list" : undefined}
-        {...(props as React.HTMLAttributes<HTMLDivElement>)}
+        {...props}
       >
         {content}
       </Stack>

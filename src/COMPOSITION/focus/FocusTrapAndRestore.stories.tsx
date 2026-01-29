@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Focus Trap and Restore - Governance Showcase
  *
  * Demonstrates focus trap and focus restore behavior for modal overlays.
@@ -68,7 +68,7 @@ export const ModalFocusTrap: Story = {
           <Box>
             <Heading level={2}>Modal Focus Trap</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Open Modal and Tab through elements. Focus stays trapped inside.
               </Text>
             </Box>
@@ -150,7 +150,9 @@ export const FocusRestoreDemo: Story = {
           <Box>
             <Heading level={2}>Focus Restore on Close</Heading>
             <Box className="mt-2">
-              <Text tone="muted">After closing Modal, focus returns to the trigger button.</Text>
+              <Text typographyRole="meta" color="muted">
+                After closing Modal, focus returns to the trigger button.
+              </Text>
             </Box>
             <Box className="mt-1">
               <Text size="sm">
@@ -224,7 +226,7 @@ export const DialogFocusBehavior: Story = {
           <Box>
             <Heading level={2}>Dialog Focus Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Dialog uses Modal internally - same focus trap and restore behavior.
               </Text>
             </Box>
@@ -296,7 +298,7 @@ export const DrawerFocusBehavior: Story = {
           <Box>
             <Heading level={2}>Drawer Focus Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Drawer uses custom useFocusLock hook for focus management. Demonstrates focus trap,
                 restore, and focus-visible compliance (GAP-3 fixed).
               </Text>
@@ -379,7 +381,9 @@ export const PopoverNoTrap: Story = {
           <Box>
             <Heading level={2}>Popover - No Focus Trap (By Design)</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Popover is non-modal. Tab can leave popover to page content.</Text>
+              <Text typographyRole="meta" color="muted">
+                Popover is non-modal. Tab can leave popover to page content.
+              </Text>
             </Box>
           </Box>
 
@@ -433,7 +437,9 @@ export const EscapeKeyBehavior: Story = {
           <Box>
             <Heading level={2}>Escape Key Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Press Escape to close overlay and restore focus to trigger.</Text>
+              <Text typographyRole="meta" color="muted">
+                Press Escape to close overlay and restore focus to trigger.
+              </Text>
             </Box>
           </Box>
 

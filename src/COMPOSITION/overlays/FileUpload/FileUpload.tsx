@@ -148,31 +148,31 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
     }, [file]);
 
     return (
-      <div className={cn(fileUploadPreviewVariants({ size }), "tm-motion-fade-in")}>
+      <Box className={cn(fileUploadPreviewVariants({ size }), "tm-motion-fade-in")}>
         {/* Thumbnail or Icon */}
-        <div className={fileUploadThumbnailVariants({ size })}>
+        <Box className={fileUploadThumbnailVariants({ size })}>
           {previewUrl ? (
             <img src={previewUrl} alt={file.name} className="size-full object-cover" />
           ) : (
-            <div className="flex size-full items-center justify-center">
-              <Text size="xs" tone="muted">
+            <Box className="flex size-full items-center justify-center">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {file.name.split(".").pop()?.toUpperCase()}
               </Text>
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
 
         {/* File Info */}
-        <div className="min-w-0 flex-1">
+        <Box className="min-w-0 flex-1">
           <Box className="truncate">
             <Text size={size === "lg" ? "sm" : "xs"} weight="medium">
               {file.name}
             </Text>
           </Box>
-          <Text size="xs" tone="muted">
+          <Text size="xs" typographyRole="meta" color="muted">
             {formatBytes(file.size)}
           </Text>
-        </div>
+        </Box>
 
         {/* Remove Button */}
         <Box className="flex-shrink-0">
@@ -200,7 +200,7 @@ const FilePreviewItem = React.memo<FilePreviewItemProps>(
             </svg>
           </Button>
         </Box>
-      </div>
+      </Box>
     );
   },
 );
@@ -404,9 +404,9 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
     );
 
     return (
-      <div ref={ref} className={cn(className)} style={style} {...props}>
+      <Box ref={ref} className={cn(className)} style={style} {...props}>
         {/* Dropzone */}
-        <div
+        <Box
           className={cn(
             fileUploadDropzoneVariants({
               variant,
@@ -458,21 +458,21 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           })()}
 
           {/* Text */}
-          <div className="text-center">
+          <Box className="text-center">
             <Text size={size === "lg" ? "md" : "sm"} weight="medium">
               {isDragActive ? "Drop files here" : "Drop files or click to browse"}
             </Text>
             {accept && (
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Accepted: {accept}
               </Text>
             )}
             {maxSize && (
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Max size: {formatBytes(maxSize)}
               </Text>
             )}
-          </div>
+          </Box>
 
           {/* Hidden file input */}
           <input
@@ -485,7 +485,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             className="hidden"
             aria-hidden="true"
           />
-        </div>
+        </Box>
 
         {/* Error Message */}
         {errorMessage && (
@@ -511,7 +511,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             ))}
           </List>
         )}
-      </div>
+      </Box>
     );
   },
 );

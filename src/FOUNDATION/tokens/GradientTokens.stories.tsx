@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /**
  * Gradient Tokens Storybook Gallery
@@ -132,7 +132,7 @@ function GradientCard({
       className="flex flex-col gap-sm border border-[hsl(var(--tm-border-default))]"
     >
       <Box className="font-mono">
-        <Text size="xs" tone="muted">
+        <Text size="xs" typographyRole="meta" color="muted">
           {name}
         </Text>
       </Box>
@@ -360,7 +360,7 @@ function GradientCard({
         />
       )}
       {description && (
-        <Text size="xs" tone="muted">
+        <Text size="xs" typographyRole="meta" color="muted">
           {description}
         </Text>
       )}
@@ -388,7 +388,9 @@ function CategorySection({
         <Box className="mb-xs">
           <Heading level={3}>{title}</Heading>
         </Box>
-        <Text tone="muted">{description}</Text>
+        <Text typographyRole="meta" color="muted">
+          {description}
+        </Text>
       </Box>
       <Grid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} gap="md">
         {gradients.map((gradient) => (
@@ -647,7 +649,7 @@ export const Default: Story = {
           <Box className="mb-sm">
             <Heading level={1}>Gradient Tokens Gallery</Heading>
           </Box>
-          <Text tone="muted" size="lg">
+          <Text typographyRole="meta" color="muted" size="lg">
             Visual catalog of all 33 gradient tokens organized by category. All gradients use
             token-based colors for consistency and theme compatibility.
           </Text>
@@ -739,7 +741,7 @@ export const ByCategory: Story = {
           <Box className="mb-sm">
             <Heading level={1}>Gradients by Category</Heading>
           </Box>
-          <Text tone="muted" size="lg">
+          <Text typographyRole="meta" color="muted" size="lg">
             Explore gradients organized by their semantic purpose and use cases.
           </Text>
         </Box>
@@ -856,7 +858,7 @@ export const UsageExamples: Story = {
           <Box className="mb-sm">
             <Heading level={1}>Usage Examples</Heading>
           </Box>
-          <Text tone="muted" size="lg">
+          <Text typographyRole="meta" color="muted" size="lg">
             Real-world examples of gradient usage in common UI patterns.
           </Text>
         </Box>
@@ -871,7 +873,9 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Hero Section</Heading>
-            <Text tone="muted">Brand gradient used in hero section background</Text>
+            <Text typographyRole="meta" color="muted">
+              Brand gradient used in hero section background
+            </Text>
             <Box px="xl" py="xl" radius="lg" className={GRADIENT_TOKENS.brand.primary}>
               <Box className="text-white">
                 <Heading level={2}>Welcome to Tenerife Music</Heading>
@@ -881,7 +885,7 @@ export const UsageExamples: Story = {
               </Box>
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.brand.primary}
               </Text>
             </Box>
@@ -898,7 +902,9 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Gradient Text</Heading>
-            <Text tone="muted">Text gradient applied to headings and featured text</Text>
+            <Text typographyRole="meta" color="muted">
+              Text gradient applied to headings and featured text
+            </Text>
             <Box px="md" py="md">
               <Box className={GRADIENT_TOKENS.text.brand}>
                 <Heading level={2}>Featured Event</Heading>
@@ -908,7 +914,7 @@ export const UsageExamples: Story = {
               </Box>
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.text.brand}
               </Text>
             </Box>
@@ -925,7 +931,9 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Image Overlay</Heading>
-            <Text tone="muted">Dark overlay gradient for text readability over images</Text>
+            <Text typographyRole="meta" color="muted">
+              Dark overlay gradient for text readability over images
+            </Text>
             <Box
               className="relative min-h-[200px] overflow-hidden rounded-lg"
               style={{
@@ -943,7 +951,7 @@ export const UsageExamples: Story = {
               </Box>
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.overlay.dark}
               </Text>
             </Box>
@@ -960,7 +968,9 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Featured Badge</Heading>
-            <Text tone="muted">Semantic gradient used for status badges</Text>
+            <Text typographyRole="meta" color="muted">
+              Semantic gradient used for status badges
+            </Text>
             <Box className="flex flex-wrap gap-md">
               <Box
                 px="sm"
@@ -988,7 +998,7 @@ export const UsageExamples: Story = {
               </Box>
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.semantic.success} / {GRADIENT_TOKENS.brand.featured}
               </Text>
             </Box>
@@ -1005,14 +1015,16 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Skeleton Loading</Heading>
-            <Text tone="muted">Shimmer gradient for skeleton loading states</Text>
+            <Text typographyRole="meta" color="muted">
+              Shimmer gradient for skeleton loading states
+            </Text>
             <Box className="space-y-md">
               <Box className={`${GRADIENT_TOKENS.skeleton.shimmer} h-4 rounded`} />
               <Box className={`${GRADIENT_TOKENS.skeleton.shimmer} h-4 w-3/4 rounded`} />
               <Box className={`${GRADIENT_TOKENS.skeleton.shimmer} h-4 w-1/2 rounded`} />
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.skeleton.shimmer}
               </Text>
             </Box>
@@ -1029,7 +1041,9 @@ export const UsageExamples: Story = {
         >
           <Stack direction="vertical" spacing="md">
             <Heading level={3}>Glassmorphism</Heading>
-            <Text tone="muted">Frosted glass effect using glass gradients</Text>
+            <Text typographyRole="meta" color="muted">
+              Frosted glass effect using glass gradients
+            </Text>
             <Box
               className="relative min-h-[150px] overflow-hidden rounded-lg"
               style={{
@@ -1048,7 +1062,7 @@ export const UsageExamples: Story = {
               </Box>
             </Box>
             <Box className="font-mono">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 {GRADIENT_TOKENS.glass.frost}
               </Text>
             </Box>

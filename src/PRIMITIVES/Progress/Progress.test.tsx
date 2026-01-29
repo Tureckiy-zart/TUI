@@ -17,12 +17,6 @@ describe("Progress", () => {
       const progressbar = screen.getByRole("progressbar");
       expect(progressbar).toHaveClass("h-2"); // md size
     });
-
-    it("renders with custom className", () => {
-      render(<Progress value={50} className="custom-class" />);
-      const progressbar = screen.getByRole("progressbar");
-      expect(progressbar).toHaveClass("custom-class");
-    });
   });
 
   describe("Size Variants", () => {

@@ -28,7 +28,7 @@ describe("HelperText", () => {
       // Size is applied via Text component's CVA classes
     });
 
-    it("applies default tone (muted)", () => {
+    it("applies default color (muted)", () => {
       const { container } = renderWithTheme(<HelperText>Muted helper text</HelperText>);
       const paragraph = container.querySelector("p");
       expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]");
@@ -98,9 +98,11 @@ describe("HelperText", () => {
       // Size override is applied via Text component
     });
 
-    it("allows tone override", () => {
+    it("allows color override", () => {
       const { container } = renderWithTheme(
-        <HelperText tone="default">Default tone helper text</HelperText>,
+        <HelperText typographyRole="body" color="primary">
+          Primary color helper text
+        </HelperText>,
       );
       const paragraph = container.querySelector("p");
       expect(paragraph).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
@@ -122,8 +124,8 @@ describe("HelperText", () => {
       // Default size is applied via Text component
     });
 
-    it("uses tone='muted' as default", () => {
-      const { container } = renderWithTheme(<HelperText>Default tone helper text</HelperText>);
+    it("uses typographyRole='meta' and color='muted' as default", () => {
+      const { container } = renderWithTheme(<HelperText>Default color helper text</HelperText>);
       const paragraph = container.querySelector("p");
       expect(paragraph).toHaveClass("text-[hsl(var(--tm-text-muted))]");
     });

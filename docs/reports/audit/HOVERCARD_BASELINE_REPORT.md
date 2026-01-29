@@ -45,7 +45,7 @@
 - Types: `HoverCardRootProps`, `HoverCardContentProps`, `HoverCardTriggerProps`
 
 **Layer Classification:** PATTERNS (menus)  
-**Location:** `src/PATTERNS/menus/menus/hover-card/`
+**Location:** `src/PATTERNS/menus/hover-card/`
 
 **Lock Status:** ✅ LOCKED (2025-12-21)  
 **Lock Check:** Component is listed in `EXTENSION_STATE.md` and `TOOLTIP_POPOVER_LOCK.md` as LOCKED. Lock policy applies: [TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md](../../workflows/policies/TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md)
@@ -53,21 +53,21 @@
 ### Source Files
 
 **Implementation Files:**
-- `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx` (174 lines)
-- `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx` (68 lines)
-- `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx` (81 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx` (174 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardContent.tsx` (68 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx` (81 lines)
 
 **Storybook Files:**
-- `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx` (341 lines)
+- `src/PATTERNS/menus/hover-card/HoverCard.stories.tsx` (341 lines)
 
 **Test Files:**
 - ❌ **MISSING** - No test file exists
 
 **Export Files:**
-- `src/PATTERNS/menus/menus/hover-card/index.ts` (9 lines)
+- `src/PATTERNS/menus/hover-card/index.ts` (9 lines)
 
 **Export Points:**
-- `src/PATTERNS/menus/menus/hover-card/index.ts` (barrel export)
+- `src/PATTERNS/menus/hover-card/index.ts` (barrel export)
 - `src/index.ts` (root export, lines 548-557)
 
 ### External Dependencies
@@ -733,8 +733,8 @@ HoverCardContent delegates all styling to PopoverContent. This is an intentional
 - ✅ Usage examples retained for DX
 
 **Changes:**
-- Created `src/PATTERNS/menus/menus/hover-card/HoverCard.test.tsx` (test file)
-- Updated `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx` (added Matrix, States, SizesGallery, LongContent stories)
+- Created `src/PATTERNS/menus/hover-card/HoverCard.test.tsx` (test file)
+- Updated `src/PATTERNS/menus/hover-card/HoverCard.stories.tsx` (added Matrix, States, SizesGallery, LongContent stories)
 - Updated story title from "Legacy Patterns/Menus/HoverCard" to "Patterns/Menus/HoverCard"
 
 **Deferred:** None

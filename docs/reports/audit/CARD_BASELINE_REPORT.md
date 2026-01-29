@@ -107,7 +107,7 @@ This document tracks the Foundation Step Pipeline (18A) execution for the **Card
 
 **CardBase Relationship:**
 - CardBase (PATTERNS layer) is **PROCESS LOCKED** (2025-12-27, Second Pass: 2026-01-01)
-- CardBase is in `src/PATTERNS/cards/cards/CardBase/`
+- CardBase is in `src/PATTERNS/cards/CardBase/`
 - Joint analysis confirmed architectural separation - CardBase (PATTERNS, specialized patterns) vs Card (COMPOSITION, generic layouts)
 - Different purposes, different layers, no architectural violation
 - **Rule:** Card MUST NOT be merged with CardBase, MUST NOT be moved to PATTERNS layer
@@ -340,7 +340,7 @@ CARD_TOKENS = {
 ### Relationship with CardBase
 
 **CardBase (PATTERNS layer):**
-- Location: `src/PATTERNS/cards/cards/CardBase/`
+- Location: `src/PATTERNS/cards/CardBase/`
 - Status: ✅ **PROCESS LOCKED** (2025-12-27, Second Pass: 2026-01-01)
 - Architecture: CVA-based (tokenCVA), variant-driven (default/elevated), size-based (sm/md)
 - Purpose: Specialized card layout patterns for domain-specific cards (EventCard, VenueCard, etc.)
@@ -603,7 +603,7 @@ className={cn("items-center", className)}
 - Architecture: No CVA, direct token usage, size-based defaults
 
 **CardBase Component Role:**
-- Location: `src/PATTERNS/cards/cards/CardBase/`
+- Location: `src/PATTERNS/cards/CardBase/`
 - Layer: PATTERNS (specialized patterns layer)
 - Status: ✅ PROCESS LOCKED (2025-12-27, Second Pass: 2026-01-01)
 - Purpose: Specialized card layout patterns for domain-specific cards (EventCard, VenueCard, etc.)

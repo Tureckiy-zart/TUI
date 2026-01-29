@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { cn } from "@/FOUNDATION/lib/utils";
 import { BADGE_TOKENS } from "@/FOUNDATION/tokens/components/badge";
 
 /**
@@ -46,7 +45,10 @@ const badgeVariants = tokenCVA({
   },
 });
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BadgeProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
   /**
    * Badge variant style
    * @default "primary"
@@ -54,8 +56,9 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: BadgeVariant;
 }
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+function Badge({ variant, ...props }: BadgeProps) {
+  // className and style are forbidden from public API - only CVA output is used
+  return <div className={badgeVariants({ variant })} {...props} />;
 }
 
 export { Badge, badgeVariants };

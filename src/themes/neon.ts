@@ -58,9 +58,13 @@ export const neonBrand: BrandPackage = {
         // Semantic colors with neon accents
         semanticColorsDay: {
           success: "145 80% 45%", // Neon green
+          successForeground: "0 0% 100%",
           info: "180 100% 45%", // Neon cyan
+          infoForeground: "0 0% 100%",
           warning: "60 100% 55%", // Neon yellow
+          warningForeground: "0 0% 9%",
           error: "0 100% 60%", // Bright red
+          errorForeground: "0 0% 100%",
         },
         // Typography overrides - bolder and larger
         typography: {
@@ -189,9 +193,13 @@ export const neonBrand: BrandPackage = {
         // Semantic colors with neon accents for night
         semanticColorsNight: {
           success: "145 75% 50%", // Neon green
+          successForeground: "0 0% 100%",
           info: "180 100% 50%", // Neon cyan
+          infoForeground: "0 0% 100%",
           warning: "60 100% 60%", // Neon yellow
+          warningForeground: "0 0% 100%",
           error: "0 100% 65%", // Bright red
+          errorForeground: "0 0% 100%",
         },
         // Typography overrides - same as day
         typography: {

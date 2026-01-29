@@ -1,0 +1,83 @@
+{
+  "audit_date": "2026-01-28",
+  "scope": {
+    "scanned_directory": "src",
+    "files_scanned": 469,
+    "total_violations": 5
+  },
+  "violations": [
+    {
+      "violation_class": "V4_RAW_HTML_REPLACEMENT",
+      "count": 4,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "MAJOR": 4,
+        "MINOR": 0,
+        "INFO": 0
+      },
+      "affected_files": [
+        "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/EXTENSIONS/next/NextLinkAdapter.tsx",
+        "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/NavLink/NavLink.tsx"
+      ],
+      "confidence": "HIGH",
+      "findings": [
+        {
+          "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/EXTENSIONS/next/NextLinkAdapter.tsx",
+          "line": 125,
+          "column": 25,
+          "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/EXTENSIONS/next/NextLinkAdapter.tsx",
+          "line": 129,
+          "column": 26,
+          "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/NavLink/NavLink.tsx",
+          "line": 103,
+          "column": 23,
+          "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        },
+        {
+          "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/NavLink/NavLink.tsx",
+          "line": 107,
+          "column": 24,
+          "message": "Raw HTML tag 'span' should be replaced with Foundation component (Text)",
+          "severity": "MAJOR",
+          "confidence": "HIGH"
+        }
+      ]
+    },
+    {
+      "violation_class": "V5_PROP_SMUGGLING",
+      "count": 1,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "MAJOR": 1,
+        "MINOR": 0,
+        "INFO": 0
+      },
+      "affected_files": [
+        "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/Field/Field.tsx"
+      ],
+      "confidence": "MEDIUM",
+      "findings": [
+        {
+          "file": "/home/tureckiy/Projects/TenerifeMusic/tenerife-ui/src/PRIMITIVES/Field/Field.tsx",
+          "line": 104,
+          "column": 28,
+          "message": "Untyped prop spread 'props' into Foundation component 'Label'",
+          "severity": "MAJOR",
+          "confidence": "MEDIUM"
+        }
+      ]
+    }
+  ]
+}

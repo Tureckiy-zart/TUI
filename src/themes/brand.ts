@@ -39,12 +39,16 @@ export const brandTheme: ThemeOverride = {
   // Override semantic colors for day mode - brand-aligned colors
   semanticColorsDay: {
     success: "145 75% 40%", // Brand-aligned green
+    successForeground: "0 0% 100%",
     info: "210 75% 50%", // Brand primary blue
+    infoForeground: "0 0% 100%",
   },
 
   // Override semantic colors for night mode
   semanticColorsNight: {
     success: "145 70% 48%", // Brighter brand green
+    successForeground: "0 0% 100%",
     info: "210 75% 55%", // Brighter brand blue
+    infoForeground: "0 0% 100%",
   },
 };

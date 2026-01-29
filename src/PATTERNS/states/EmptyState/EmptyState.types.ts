@@ -6,6 +6,8 @@
 
 import type { ReactNode } from "react";
 
+import type { EmptyStateIconSize } from "@/FOUNDATION/tokens/components/empty-state";
+
 /**
  * EmptyState root component props
  */
@@ -15,8 +17,6 @@ export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   id?: string;
 }
-
-import type { EmptyStateIconSize } from "@/FOUNDATION/tokens/components/empty-state";
 
 /**
  * EmptyState Icon component props

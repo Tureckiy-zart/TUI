@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Motion GAP - Governance Showcase
  *
  * Educational showcase demonstrating the Motion GAP concept through visual examples.
@@ -56,7 +56,7 @@ export const Overview: Story = {
           <Box>
             <Heading level={1}>Motion GAP Governance</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Understanding when motion is required, when it's optional, and when it's forbidden.
               </Text>
             </Box>
@@ -72,7 +72,7 @@ export const Overview: Story = {
                 </Text>
               </Box>
               <Box className="mt-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   GAP is a diagnostic signal, not an automatic defect. It represents a design
                   decision point that must be consciously evaluated and resolved.
                 </Text>
@@ -198,7 +198,7 @@ export const UnresolvedGAP: Story = {
           <Box>
             <Heading level={1}>Example: Unresolved GAP (no temporal feedback)</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Notice the abrupt appearance/disappearance - this is a Motion GAP. The component
                 changes state without providing temporal feedback to the user.
               </Text>
@@ -208,7 +208,7 @@ export const UnresolvedGAP: Story = {
           <Box className="rounded-lg border-2 border-error/30 bg-error/5 p-md">
             <Stack spacing={4}>
               <Box>
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   This expand/collapse component changes visibility state but has NO motion classes
                   applied.
                 </Text>
@@ -227,7 +227,7 @@ export const UnresolvedGAP: Story = {
                       sudden state change creates a jarring user experience and represents a Motion
                       GAP.
                     </Text>
-                    <Text size="sm" tone="muted">
+                    <Text size="sm" typographyRole="meta" color="muted">
                       Motion GAP identified: Visibility change without temporal feedback.
                     </Text>
                   </Stack>
@@ -266,7 +266,7 @@ export const ResolvedWithMotion: Story = {
           <Box>
             <Heading level={1}> GAP resolved: motion communicates change</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Same component with canonical motion preset applied. The state change is now
                 communicated smoothly through temporal feedback.
               </Text>
@@ -276,7 +276,7 @@ export const ResolvedWithMotion: Story = {
           <Box className="rounded-lg border-2 border-success/30 bg-success/5 p-md">
             <Stack spacing={4}>
               <Box>
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   This expand/collapse component uses canonical motion preset{" "}
                   <code className="rounded bg-[hsl(var(--tm-muted))] px-1 py-0.5 text-xs">
                     tm-motion-fade-scale
@@ -302,7 +302,7 @@ export const ResolvedWithMotion: Story = {
                       provides clear temporal feedback, making the state change obvious and
                       pleasant.
                     </Text>
-                    <Text size="sm" tone="muted">
+                    <Text size="sm" typographyRole="meta" color="muted">
                       Motion GAP resolved: ADD MOTION - Canonical preset applied.
                     </Text>
                   </Stack>
@@ -321,7 +321,7 @@ export const ResolvedWithMotion: Story = {
               </Text>
             </Box>
             <Box className="mt-2">
-              <Text size="xs" tone="muted">
+              <Text size="xs" typographyRole="meta" color="muted">
                 Note: All motion presets automatically respect reduced motion preferences via CSS
                 variables.
               </Text>
@@ -345,7 +345,7 @@ export const NoMotionByDesign: Story = {
           <Box>
             <Heading level={1}>Example: No motion by design (not a GAP)</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Structural components don't change state, so motion is not applicable. This is an
                 intentional absence, not a Motion GAP.
               </Text>
@@ -355,7 +355,7 @@ export const NoMotionByDesign: Story = {
           <Box className="rounded-lg border-2 border-info/30 bg-info/5 p-md">
             <Stack spacing={6}>
               <Box>
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   The following components are structural/layout elements. They don't change state
                   or position, so motion is not applicable.
                 </Text>

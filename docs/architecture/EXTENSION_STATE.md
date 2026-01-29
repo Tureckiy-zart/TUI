@@ -1149,7 +1149,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
     - DropdownMenu removed; Dropdown component remains active in COMPOSITION/overlays
     - See `docs_archive/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` (archived)
 
-35. **HoverCard** - `src/PATTERNS/menus/menus/hover-card/`
+35. **HoverCard** - `src/PATTERNS/menus/hover-card/`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
     - **Rule:** DO NOT modify, extend, or create alternatives
     - **Lock Report:** `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
@@ -1542,7 +1542,7 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
 
 ### Data Display Primitives
 
-44. **CardBase** - `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+44. **CardBase** - `src/PATTERNS/cards/CardBase/CardBase.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, Second Pass Complete)
     - **Lock Date:** 2025-12-27
     - **Second Pass Date:** 2026-01-01
@@ -1612,7 +1612,7 @@ Higher-level component compositions that combine multiple Extension Layer compon
 
 ### Notification System
 
-1. **NotificationCenter** - `src/DOMAIN/notifications/notifications/NotificationCenter.tsx`
+1. **NotificationCenter** - `src/DOMAIN/notifications/NotificationCenter.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
    - **Lock Date:** 2025-12-27
    - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -1773,7 +1773,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 ### PROCESS LOCKED - Filter Components
 
-29. **FilterBar** - `src/PATTERNS/filters/filters/FilterBar.tsx`
+29. **FilterBar** - `src/PATTERNS/filters/FilterBar.tsx`
     - **Status:** ✅ PROCESS LOCKED (Pipeline 18A Complete, FINALIZATION 2025-12-27)
     - **Rule:** USE — fully controlled component via `filterManager` prop
     - **Note:** Mock logic removed, converted to pure UI component (2025-12-27, FINALIZATION task)
@@ -1869,7 +1869,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
-39. **ProfileCard** - `src/DOMAIN/auth/auth/ProfileCard.tsx`
+39. **ProfileCard** - `src/DOMAIN/auth/ProfileCard.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete: 2026-01-01)
     - **Rule:** Ready for use
     - **Audit Report:** `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md`
@@ -1910,7 +1910,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 
 ### DO NOT USE - Control Components
 
-47. **LanguageSelector** - `src/components/controls/LanguageSelector.tsx`
+47. **LanguageSelector** - `src/COMPOSITION/controls/LanguageSelector/LanguageSelector.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE
 
@@ -1957,7 +1957,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Rule:** DO NOT USE - Product/domain-specific components are not canonical UI primitives
     - **Note:** Use `CardBase` for building custom card components
 
-56. **ArtistCard** - `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`
+56. **ArtistCard** - `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
     - **Lock Date:** 2026-01-01
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -1966,7 +1966,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Rule:** Domain-specific card component for displaying artist information. Uses CardBase for layout composition.
     - **Note:** Component completed Pipeline 18A (Steps 0-12). All architectural requirements met. Locked via TUNG_DOMAIN_CARDS_STABILITY_LOCK. Internal PATTERNS component (not exported from `src/index.ts`).
 
-57. **CategoryCard** - `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`
+57. **CategoryCard** - `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
     - **Audit Report:** `docs/reports/audit/CATEGORYCARD_BASELINE_REPORT.md`
     - **Rule:** Domain-specific card component for displaying category information. Uses CardBase for layout composition.
@@ -1977,7 +1977,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Rule:** DO NOT USE - Product/domain-specific components are not canonical UI primitives
     - **Note:** Use `CardBase` for building custom card components
 
-59. **TicketCard** - `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`
+59. **TicketCard** - `src/PATTERNS/cards/TicketCard/TicketCard.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2026-01-01)
     - **Lock Date:** 2026-01-01
     - **Pipeline:** Pipeline 18A (Steps 0-12 complete)
@@ -1986,7 +1986,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
     - **Rule:** Domain-specific card component for displaying ticket information for Event/Artist/Venue context. Uses CardBase for layout composition.
     - **Note:** Component completed Pipeline 18A (Steps 0-12). All architectural requirements met. Locked via TUNG_DOMAIN_CARDS_STABILITY_LOCK. Internal PATTERNS component (not exported from `src/index.ts`).
 
-60. **VenueCard** - `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`
+60. **VenueCard** - `src/PATTERNS/cards/VenueCard/VenueCard.tsx`
     - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
     - **Lock Date:** 2026-01-01
     - **Audit Report:** `docs/reports/audit/VENUECARD_BASELINE_REPORT.md`

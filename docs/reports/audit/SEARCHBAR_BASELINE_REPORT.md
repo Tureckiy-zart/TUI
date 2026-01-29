@@ -130,7 +130,7 @@ This document tracks the complete Foundation Step Pipeline (18A) execution for t
 - `@/FOUNDATION/lib/utils` (cn utility for className merging)
 
 **Internal Dependencies (Pattern Components):**
-- `@/PATTERNS/filters/filters/SearchInput` (SearchInput component - base search input)
+- `@/PATTERNS/filters/SearchInput` (SearchInput component - base search input)
 
 ### Current Public Props (Snapshot)
 
@@ -592,7 +592,7 @@ export interface SearchBarProps {
 
 **Dependencies:**
 - Foundation: `@/PRIMITIVES/Button`, `@/FOUNDATION/lib/utils`
-- Patterns: `@/PATTERNS/filters/filters/SearchInput`
+- Patterns: `@/PATTERNS/filters/SearchInput`
 
 **Public API:**
 - 5 props total (1 required, 4 optional)
@@ -863,7 +863,7 @@ SearchBar is a COMPOSITION layer navigation component that provides a search inp
 - **Similarity:** Both handle keyboard navigation and suggestion filtering
 - **Assessment:** SearchBar has distinct role, not duplicating Combobox functionality
 
-**SearchInput** (`src/PATTERNS/filters/filters/SearchInput.tsx`):
+**SearchInput** (`src/PATTERNS/filters/SearchInput.tsx`):
 - **Role:** PATTERN_FILTER_SEARCH_INPUT
 - **Difference:** SearchInput is base input component, SearchBar adds autocomplete suggestions
 - **Relationship:** SearchBar composes SearchInput (proper composition)

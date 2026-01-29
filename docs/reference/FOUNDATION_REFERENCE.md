@@ -283,6 +283,37 @@ Foundation Component Reports must follow the canonical format defined in:
 
 ---
 
+## Runtime Utilities
+
+### Import Guidelines
+
+| Utility    | Import from                          |
+|----------- |--------------------------------------|
+| tokenCVA   | @/FOUNDATION/lib/token-cva            |
+| cn         | @/FOUNDATION/lib/utils                |
+
+⚠️ Do not import runtime utilities from `@/index`.
+
+### Allowed Imports from `@/index`
+
+The `@/index` entrypoint is the **public UI API** of the system.
+
+**Allowed imports from `@/index` in DOMAIN/PATTERNS:**
+- UI components (e.g., `Box`, `Button`, `Text`, `Skeleton`)
+- Layout and composition components
+- Public types that do not create runtime dependencies
+
+**Forbidden imports from `@/index`:**
+- Runtime utilities (`tokenCVA`, `cn`, animation helpers)
+- Foundation internals
+- Any value that participates in runtime evaluation or token resolution
+
+This clarification prevents automated refactors from incorrectly replacing valid UI imports and causing architectural drift.
+
+**Reference:** See [FOUNDATION_LOCK.md](../architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028) and [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](../architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) for complete details.
+
+---
+
 ## Related Documents
 
 **Canonical Lifecycle:**
@@ -308,7 +339,7 @@ Foundation Component Reports must follow the canonical format defined in:
 **Status:** ✅ ACTIVE  
 **Version:** 1.0  
 **Date Created:**    
-**Last Updated:**    
+**Last Updated:** 2026-01-28 (Runtime Utilities section - TUNG-028)    
 **Classification:** Reference Documentation (Evolvable)
 
 **This document provides reference only. The authoritative lifecycle definition is in `docs/architecture/FOUNDATION_LOCK_OPERATING_RULES.md` — Section 10.**

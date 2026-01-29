@@ -25,49 +25,49 @@ This document provides a complete inventory of all components that exhibit Card-
 ## 1. Domain Cards (STABLE - DO NOT MODIFY)
 
 ### 1.1 EventCard
-**Path:** `src/DOMAIN/sections/EventCard/EventCard.tsx`  
+**Path:** `src/PATTERNS/cards/EventCard/EventCard.tsx`  
 **Layer:** DOMAIN  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays event information (title, date, venue, price, tickets)
 
 ### 1.2 VenueCard
-**Path:** `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`  
+**Path:** `src/PATTERNS/cards/VenueCard/VenueCard.tsx`  
 **Layer:** PATTERNS  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays venue information (name, location, events count, capacity)
 
 ### 1.3 ArtistCard
-**Path:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`  
+**Path:** `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`  
 **Layer:** PATTERNS  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays artist information (name, genres, followers, plays)
 
 ### 1.4 TicketCard
-**Path:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`  
+**Path:** `src/PATTERNS/cards/TicketCard/TicketCard.tsx`  
 **Layer:** PATTERNS  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays ticket information (event, date, price, availability, purchase button)
 
 ### 1.5 CategoryCard
-**Path:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`  
+**Path:** `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`  
 **Layer:** PATTERNS  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays category information (title, description, image)
 
 ### 1.6 PromoCard
-**Path:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx`  
+**Path:** `src/PATTERNS/cards/PromoCard/PromoCard.tsx`  
 **Layer:** PATTERNS  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses CardBase  
 **Responsibility:** Displays promotional content (title, description, CTA button)
 
 ### 1.7 ProfileCard
-**Path:** `src/DOMAIN/auth/auth/ProfileCard.tsx`  
+**Path:** `src/DOMAIN/auth/ProfileCard.tsx`  
 **Layer:** DOMAIN  
 **Status:** ✅ STABLE (Phase 1 completed)  
 **Card-like Structure:** ✅ Uses Card (COMPOSITION)  
@@ -78,7 +78,7 @@ This document provides a complete inventory of all components that exhibit Card-
 ## 2. Foundation/Locked Components (DO NOT MODIFY)
 
 ### 2.1 CardBase
-**Path:** `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`  
+**Path:** `src/PATTERNS/cards/CardBase/CardBase.tsx`  
 **Layer:** PATTERNS  
 **Status:** 🔒 PROCESS LOCKED (2025-12-27, Second Pass: 2026-01-01)  
 **Card-like Structure:** ✅ Foundation card component  
@@ -103,7 +103,7 @@ This document provides a complete inventory of all components that exhibit Card-
 ## 3. Pseudo-Cards (Components behaving like Cards but not named as such)
 
 ### 3.1 NotificationCenter.Panel
-**Path:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`  
+**Path:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`  
 **Layer:** DOMAIN  
 **Status:** ⚠️ PSEUDO_CARD CANDIDATE  
 **Card-like Structure:** ✅ Uses Surface with border, radius, shadow, padding  
@@ -127,7 +127,7 @@ This document provides a complete inventory of all components that exhibit Card-
 ## 4. Sections Using Cards (NOT Cards themselves)
 
 ### 4.1 FeatureSection
-**Path:** `src/DOMAIN/sections/sections/FeatureSection.tsx`  
+**Path:** `src/DOMAIN/sections/FeatureSection.tsx`  
 **Layer:** DOMAIN  
 **Status:** ✅ NOT_A_CARD  
 **Card-like Structure:** Uses Card component internally  
@@ -136,7 +136,7 @@ This document provides a complete inventory of all components that exhibit Card-
 **Analysis:** This is a section component, not a card. It uses Card components to display individual features, but the component itself is a section layout.
 
 ### 4.2 TrendingSection
-**Path:** `src/DOMAIN/sections/sections/TrendingSection.tsx`  
+**Path:** `src/DOMAIN/sections/TrendingSection.tsx`  
 **Layer:** DOMAIN  
 **Status:** ✅ NOT_A_CARD  
 **Card-like Structure:** Uses Card component internally  
@@ -171,7 +171,7 @@ This document provides a complete inventory of all components that exhibit Card-
 ## 6. Menu Components (NOT Cards)
 
 ### 6.1 HoverCard
-**Path:** `src/PATTERNS/menus/menus/hover-card/`  
+**Path:** `src/PATTERNS/menus/hover-card/`  
 **Layer:** PATTERNS  
 **Status:** ✅ NOT_A_CARD  
 **Card-like Structure:** Wraps PopoverContent (which may have card-like styling)  
