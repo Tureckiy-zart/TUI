@@ -94,10 +94,10 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
         background: "linear-gradient(to right, hsl(var(--tm-primary)), hsl(var(--tm-accent)))",
       }}
     >
-      <div className="mx-auto max-w-4xl text-center">
+      <Box className="mx-auto max-w-4xl text-center">
         <Heading level={1}>Tenerife Music Platform</Heading>
         <Text size="xl">Discover amazing music events in Tenerife</Text>
-        <div className="grid grid-cols-1 gap-lg md:grid-cols-2">
+        <Box className="grid grid-cols-1 gap-lg md:grid-cols-2">
           <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
             <CardBody className="p-lg">
               <Heading level={3}>{dayLabel}</Heading>
@@ -110,8 +110,8 @@ export const ModeHero: React.FC<ModeHeroProps> = ({
               <Text>{nightDescription}</Text>
             </CardBody>
           </Card>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -737,7 +737,7 @@ Comprehensive codebase scan for alternative Input implementations, aliases, wrap
 
 #### ✅ COMPLIANT — Pattern Components Composing Input
 
-**SearchInput** (`src/PATTERNS/filters/filters/SearchInput.tsx`)
+**SearchInput** (`src/PATTERNS/filters/SearchInput.tsx`)
 - **Classification:** Pattern component (not a primitive alternative)
 - **Implementation:** Composes `Input` component internally
 - **Status:** ✅ COMPLIANT — Uses canonical Input, not an alternative
@@ -756,7 +756,7 @@ Comprehensive codebase scan for alternative Input implementations, aliases, wrap
   ```
 - **Note:** SearchInput is a pattern component that adds search-specific behavior (debouncing, clear button) on top of Input. It correctly composes Input rather than replacing it.
 
-**PriceRangeSlider** (`src/PATTERNS/filters/filters/PriceRangeSlider.tsx`)
+**PriceRangeSlider** (`src/PATTERNS/filters/PriceRangeSlider.tsx`)
 - **Classification:** Pattern component (not a primitive alternative)
 - **Implementation:** Uses `Input` for text number inputs, uses native `<input type="range">` for sliders
 - **Status:** ✅ COMPLIANT — Uses canonical Input for text inputs, native range for sliders (Input doesn't support type="range")

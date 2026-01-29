@@ -103,7 +103,7 @@ This document provides a prioritized roadmap for developing components needed to
   - **Lock Date:** 2025-12-27
   - **Key Decisions:** Presentational component (display-only, no interactive states), React.FC replaced with explicit function, token-only styling (TIMELINE_TOKENS), semantic HTML (`<ol>`, `<li>` with `role="list"`), accessibility (ARIA attributes, `aria-hidden="true"` on decorative elements), no CVA required (no size/variant props per Decision Matrix)
 - CardBase ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
-  - **Location:** `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+  - **Location:** `src/PATTERNS/cards/CardBase/CardBase.tsx`
   - **Audit Report:** `docs/reports/audit/CARDBASE_BASELINE_REPORT.md`
   - **Lock Date:** 2025-12-27
   - **Key Decisions:** CVA migrated (cva → tokenCVA), size/variant props aligned with canonical dictionaries (GlobalSize: sm/md, SurfaceVariant: default/elevated), type constraints added (satisfies Record<Type, string>), component-specific token file created, canonical Storybook stories (Matrix, SizesGallery), comprehensive tests
@@ -115,7 +115,7 @@ This document provides a prioritized roadmap for developing components needed to
 
 **Notifications:**
 - NotificationCenter ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
-  - **Location:** `src/DOMAIN/notifications/notifications/`
+  - **Location:** `src/DOMAIN/notifications/`
   - **Audit Report:** `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md`
   - **Lock Date:** 2025-12-27
   - **Key Decisions:** Compound component pattern maintained (Provider, Panel, Trigger, List, Item, GroupHeader, DismissAll), utility functions extracted (`NotificationCenter.utils.ts`), channel method pattern extracted (reduced duplication), panel width prop restricted to overlay size scale (sm | md | lg only), no CVA structures (Decision Matrix RULE 2 applies), token compliance via NOTIFICATION_TOKENS, comprehensive tests and Storybook stories (SizesGallery, LongContent added)

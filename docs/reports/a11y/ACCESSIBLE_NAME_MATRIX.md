@@ -450,7 +450,7 @@ This report documents the accessible name patterns for all interactive component
 #### FilterBar
 
 **Component:** `FilterBar`  
-**Location:** `src/PATTERNS/filters/filters/FilterBar.tsx`
+**Location:** `src/PATTERNS/filters/FilterBar.tsx`
 
 **Accessible Name Sources:**
 1. ✅ **Text content (children)** - For filter labels

@@ -28,7 +28,7 @@ This report documents all findings of list-like rendering patterns across `src/D
 
 ### 1. NotificationCenterList
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.List.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.List.tsx`  
 **Lines:** 32-48  
 **Pattern:** Uses `Stack` directly instead of canonical `List`  
 **Context:** Vertical list container for notifications
@@ -59,7 +59,7 @@ export const NotificationCenterList = React.forwardRef<
 
 ### 2. NotificationCenterItem
 
-**File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`  
+**File:** `src/DOMAIN/notifications/NotificationCenter.Item.tsx`  
 **Lines:** 107-172  
 **Pattern:** Uses direct `<li>` element instead of canonical `ListItem`  
 **Context:** Individual notification item in a list

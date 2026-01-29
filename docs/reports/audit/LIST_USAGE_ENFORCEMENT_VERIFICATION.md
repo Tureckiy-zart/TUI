@@ -13,13 +13,13 @@ All vertical lists in the codebase have been successfully migrated to use canoni
 ### Completed Migrations
 
 #### 1. NotificationCenterList ✅
-- **File:** `src/DOMAIN/notifications/notifications/NotificationCenter.List.tsx`
+- **File:** `src/DOMAIN/notifications/NotificationCenter.List.tsx`
 - **Change:** Replaced `Stack` with canonical `List` component
 - **Status:** ✅ Complete
 - **Verification:** Uses `List` with `as="ul"` and `gap="sm"`
 
 #### 2. NotificationCenterItem ✅
-- **File:** `src/DOMAIN/notifications/notifications/NotificationCenter.Item.tsx`
+- **File:** `src/DOMAIN/notifications/NotificationCenter.Item.tsx`
 - **Change:** Replaced direct `<li>` with canonical `ListItem` component
 - **Status:** ✅ Complete
 - **Verification:** Uses `ListItem` with `as="li"` and `interactive={!!onClick}`

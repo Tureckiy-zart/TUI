@@ -72,8 +72,8 @@ All three documents work together to ensure complete typography governance.
 
 **Tertiary Text Token:**
 - `tertiary` - Lowest emphasis text token for meta-only usage
-- Day mode: Light gray (`0 0% 65%`)
-- Night mode: Darker gray (`240 5% 50%`)
+- Day mode: Light gray (`0 0% 42%`) - adjusted for WCAG AA contrast (4.5:1) on all light surfaces
+- Night mode: Darker gray (`240 5% 53%`) - adjusted for WCAG AA contrast (4.5:1) on dark elevated surfaces
 - **Usage:** Meta text only (helper, placeholder, metadata)
 
 **Muted Text Token:**
@@ -328,6 +328,7 @@ const isAllowed = typographyRolePolicy.body.allowedText.includes("primary");
 
 - `docs/architecture/TYPOGRAPHY_AUTHORITY.md` - LOCKED Typography Authority (complementary)
 - `docs/architecture/TYPOGRAPHY_CONTRACT.md` - Typography Foundation Contract (complementary)
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md` - Typography Semantics Canon (semantic vs presentational usage rules)
 - `docs/architecture/A11Y_AUTHORITY.md` - A11Y Authority (disabled policy source)
 - `src/FOUNDATION/tokens/typography.ts` - Typography token definitions with role policy
 - `src/FOUNDATION/tokens/colors.ts` - Color token definitions (textColors, disabledColors)

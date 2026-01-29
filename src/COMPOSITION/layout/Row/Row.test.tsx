@@ -86,4 +86,64 @@ describe("Row component", () => {
     expect(row).toHaveClass("flex-row");
     expect(row).not.toHaveClass("flex-col");
   });
+
+  describe("wrap prop", () => {
+    it("should apply flex-nowrap by default", () => {
+      const { container } = render(<Row>Content</Row>);
+      expect(container.firstChild).toHaveClass("flex-nowrap");
+      expect(container.firstChild).not.toHaveClass("flex-wrap");
+    });
+
+    it("should apply flex-wrap when wrap is true", () => {
+      const { container } = render(<Row wrap>Content</Row>);
+      expect(container.firstChild).toHaveClass("flex-wrap");
+      expect(container.firstChild).not.toHaveClass("flex-nowrap");
+    });
+
+    it("should apply flex-nowrap when wrap is false", () => {
+      const { container } = render(<Row wrap={false}>Content</Row>);
+      expect(container.firstChild).toHaveClass("flex-nowrap");
+      expect(container.firstChild).not.toHaveClass("flex-wrap");
+    });
+
+    it("should work with spacing prop", () => {
+      const { container } = render(
+        <Row wrap spacing="md">
+          Content
+        </Row>,
+      );
+      const row = container.firstChild as HTMLElement;
+      expect(row).toHaveClass("flex-wrap");
+      expect(row).toHaveStyle({ gap: "var(--spacing-md)" });
+    });
+
+    it("should work with align prop", () => {
+      const { container } = render(
+        <Row wrap align="center">
+          Content
+        </Row>,
+      );
+      expect(container.firstChild).toHaveClass("flex-wrap", "items-center");
+    });
+
+    it("should work with justify prop", () => {
+      const { container } = render(
+        <Row wrap justify="between">
+          Content
+        </Row>,
+      );
+      expect(container.firstChild).toHaveClass("flex-wrap", "justify-between");
+    });
+
+    it("should work with all props together", () => {
+      const { container } = render(
+        <Row wrap spacing="lg" align="center" justify="between">
+          Content
+        </Row>,
+      );
+      const row = container.firstChild as HTMLElement;
+      expect(row).toHaveClass("flex-wrap", "items-center", "justify-between");
+      expect(row).toHaveStyle({ gap: "var(--spacing-lg)" });
+    });
+  });
 });

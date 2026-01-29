@@ -2402,7 +2402,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 #### 3.3.1 Cards
 
-##### ArtistCard (`src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`)
+##### ArtistCard (`src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [ARTISTCARD_BASELINE_REPORT.md](./audit/ARTISTCARD_BASELINE_REPORT.md)
@@ -2436,7 +2436,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### CategoryCard (`src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`)
+##### CategoryCard (`src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [CATEGORYCARD_BASELINE_REPORT.md](./audit/CATEGORYCARD_BASELINE_REPORT.md)
@@ -2470,7 +2470,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### PromoCard (`src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx`)
+##### PromoCard (`src/PATTERNS/cards/PromoCard/PromoCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [PROMOCARD_BASELINE_REPORT.md](./audit/PROMOCARD_BASELINE_REPORT.md)
@@ -2504,7 +2504,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### TicketCard (`src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`)
+##### TicketCard (`src/PATTERNS/cards/TicketCard/TicketCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [TICKETCARD_BASELINE_REPORT.md](./audit/TICKETCARD_BASELINE_REPORT.md)
@@ -2538,7 +2538,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### VenueCard (`src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`)
+##### VenueCard (`src/PATTERNS/cards/VenueCard/VenueCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [VENUECARD_BASELINE_REPORT.md](./audit/VENUECARD_BASELINE_REPORT.md)
@@ -2572,7 +2572,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### CardBase (`src/PATTERNS/cards/cards/CardBase/CardBase.tsx`)
+##### CardBase (`src/PATTERNS/cards/CardBase/CardBase.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [CARDBASE_BASELINE_REPORT.md](./audit/CARDBASE_BASELINE_REPORT.md)
@@ -2608,7 +2608,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 #### 3.3.2 Filters
 
-##### FilterBar (`src/PATTERNS/filters/filters/FilterBar.tsx`)
+##### FilterBar (`src/PATTERNS/filters/FilterBar.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [FILTERBAR_BASELINE_REPORT.md](./audit/FILTERBAR_BASELINE_REPORT.md)
@@ -2818,7 +2818,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 #### 3.3.5 Menus
 
-##### HoverCard (`src/PATTERNS/menus/menus/hover-card/`)
+##### HoverCard (`src/PATTERNS/menus/hover-card/`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [HOVERCARD_BASELINE_REPORT.md](./audit/HOVERCARD_BASELINE_REPORT.md)
@@ -2892,7 +2892,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 **Total Components:** ~15
 
-#### NotificationCenter (`src/DOMAIN/notifications/notifications/NotificationCenter.tsx`)
+#### NotificationCenter (`src/DOMAIN/notifications/NotificationCenter.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [NOTIFICATIONCENTER_BASELINE_REPORT.md](./audit/NOTIFICATIONCENTER_BASELINE_REPORT.md)
@@ -2926,7 +2926,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### NotificationCenter.Panel (`src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`)
+##### NotificationCenter.Panel (`src/DOMAIN/notifications/NotificationCenter.Panel.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [NotificationCenter.Panel_BASELINE_REPORT.md](./audit/NotificationCenter.Panel_BASELINE_REPORT.md)
@@ -2960,7 +2960,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### EventCard (`src/DOMAIN/sections/EventCard/EventCard.tsx`)
+##### EventCard (`src/PATTERNS/cards/EventCard/EventCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [EVENTCARD_BASELINE_REPORT.md](./audit/EVENTCARD_BASELINE_REPORT.md)
@@ -2994,7 +2994,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### ProfileCard (`src/DOMAIN/auth/auth/ProfileCard.tsx`)
+##### ProfileCard (`src/DOMAIN/auth/ProfileCard.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** [PROFILECARD_BASELINE_REPORT.md](./audit/PROFILECARD_BASELINE_REPORT.md)
@@ -3028,7 +3028,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### LoginForm (`src/DOMAIN/auth/auth/LoginForm.tsx`)
+##### LoginForm (`src/DOMAIN/auth/LoginForm.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** *(No baseline report found)*
@@ -3062,7 +3062,7 @@ The audit evaluates each component against the following WCAG 2.1 Level AA crite
 
 ---
 
-##### RegisterForm (`src/DOMAIN/auth/auth/RegisterForm.tsx`)
+##### RegisterForm (`src/DOMAIN/auth/RegisterForm.tsx`)
 
 **Status:** ✅ OK  
 **Baseline Report:** *(No baseline report found)*

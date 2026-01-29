@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-17
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 50  
+**Total Canonical Documents:** 59 (50 existing + 9 Closed System v2 canonical documents)  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
 
 ---
@@ -100,6 +100,36 @@ These documents define architecture rules, locks, and development guidelines.
 | `docs/architecture/TOOLING_DECISIONS.md` | Tooling decisions and rationale - Tooling reference | **ACTIVE** |
 
 **Total:** 9 files
+
+---
+
+### Closed System v2 Documentation
+
+**Status:** ✅ **CANONICAL** - Closed System v2 is finalized and locked (Phase F complete)
+
+| Path | Description | Status |
+|------|-------------|--------|
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md` | Canonical index - Single source of truth for Closed System v2 documentation | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md` | Phase A: Problem definition, violation classes, sources of errors | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md` | Phase B: Architecture principles, boundary model, governance constraints | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md` | Phase C1: Mechanism categories, responsibility boundaries, impact surfaces | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md` | Phase C2: Principle-to-mechanism traceability, risk coverage | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_READINESS_GATES.md` | Phase C3: Readiness validation, phase transition authorization | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_D_LOCK.md` | Phase D: Lock declaration (API / Types / Enforcement / Runtime) | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md` | Phase E: Lock declaration (COMPOSITION Migration) | **CANONICAL** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md` | Phase F: Lock declaration (Extension Layer Adoption) | **CANONICAL** |
+
+**Supporting Reports (SUPPORTING precedence, FORBIDDEN mutation):**
+
+| Path | Description | Status |
+|------|-------------|--------|
+| `docs/reports/closed-system/PHASE_D_COMPLETION_REPORT.md` | Phase D completion verification and validation | **SUPPORTING** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_COMPOSITION_MIGRATION_REPORT.md` | Phase E migration completion report | **SUPPORTING** |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_EXTENSION_ADOPTION_REPORT.md` | Phase F adoption completion report | **SUPPORTING** |
+
+**Total:** 9 canonical documents + 3 supporting reports = 12 files
+
+**Note:** All D1-D4 subphase reports in `docs/reports/closed-system/` are **DEPRECATED** and marked as non-canonical. See [CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) for complete deprecation policy.
 
 ---
 
@@ -277,8 +307,17 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/workflows/foundation/templates/FOUNDATION_STEP_TUNG_TEMPLATE.json` | TUNG System | Reference (ACTIVE) | JSON Step Template |
 | `docs/workflows/example_task_master.json` | TUNG System | Reference (ACTIVE) | Master Task Example |
 | `docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md` | Workflow | Reference (ACTIVE) | Step-by-step pipeline |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md` | Closed System v2 | Canonical (CANONICAL) | Canonical index - Single source of truth |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md` | Closed System v2 | Canonical (CANONICAL) | Phase A: Problem definition |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md` | Closed System v2 | Canonical (CANONICAL) | Phase B: Architecture model |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_MECHANISM_CATEGORIES.md` | Closed System v2 | Canonical (CANONICAL) | Phase C1: Mechanism categories |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PRINCIPLE_TO_MECHANISM_MAPPING.md` | Closed System v2 | Canonical (CANONICAL) | Phase C2: Principle-to-mechanism mapping |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_READINESS_GATES.md` | Closed System v2 | Canonical (CANONICAL) | Phase C3: Readiness gates |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_D_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase D: Lock declaration |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase E: Lock declaration |
+| `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase F: Lock declaration |
 
-**Total:** 50 files
+**Total:** 59 files (50 existing + 9 Closed System v2 canonical documents)
 
 ---
 
@@ -303,6 +342,6 @@ These documents serve as entry points, track progress, or document the documenta
 
 ---
 
-**Last Updated:** 2026-01-17  
-**Inventory Version:** 1.2  
-**Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06, TUNG_SYSTEM_INTEGRATION
+**Last Updated:** 2026-01-26  
+**Inventory Version:** 1.3  
+**Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06, TUNG_SYSTEM_INTEGRATION, TUI_CSV2_CANONICALIZATION_011

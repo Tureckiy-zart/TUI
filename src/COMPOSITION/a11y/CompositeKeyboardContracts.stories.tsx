@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Composite Keyboard Contracts
  *
  * Demonstrates keyboard navigation contracts for composite controls (Tabs, Select, Menu).
@@ -60,7 +60,7 @@ export const TabsKeyboard: Story = {
           <Box>
             <Heading level={2}>Tabs Keyboard Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Tabs use roving tabindex pattern. Only active tab is tabbable. Arrow keys navigate
                 between tabs.
               </Text>
@@ -114,7 +114,7 @@ export const SelectKeyboard: Story = {
           <Box>
             <Heading level={2}>Select Keyboard Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Select uses combobox pattern. Arrow keys navigate options. Enter selects. Escape
                 closes.
               </Text>
@@ -162,7 +162,7 @@ export const RadioGroupKeyboard: Story = {
           <Box>
             <Heading level={2}>Radio Group Keyboard Contract</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 RadioGroup uses roving tabindex pattern. Only selected radio is tabbable. Arrow keys
                 navigate and select.
               </Text>
@@ -171,7 +171,7 @@ export const RadioGroupKeyboard: Story = {
 
           <Box className="rounded-lg border border-[hsl(var(--tm-border-default))] p-md">
             <Stack spacing={4}>
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 Start with Option 1 selected. Use Arrow keys to move focus and selection.
               </Text>
               <RadioGroup value={value} onValueChange={setValue} orientation="vertical">
@@ -188,7 +188,7 @@ export const RadioGroupKeyboard: Story = {
                   <span id="radio-kb-3">Option 3</span>
                 </label>
               </RadioGroup>
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 Selected: {value ?? "none"}
               </Text>
             </Stack>
@@ -218,7 +218,7 @@ export const RovingTabindexReference: Story = {
           <Box>
             <Heading level={2}>Roving Tabindex Pattern</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Roving tabindex ensures only one item in a composite control is tabbable at a time.
                 Arrow keys move focus and update tabindex.
               </Text>

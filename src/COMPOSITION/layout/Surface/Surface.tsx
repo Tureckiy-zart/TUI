@@ -79,7 +79,7 @@ import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { SURFACE_TOKENS } from "@/FOUNDATION/tokens/components/surface";
 
-import { Box, type BoxProps } from "../Box";
+import { Box, type BoxElement, type BoxProps } from "../Box";
 import type { ResponsiveRadius, ResponsiveSpacing } from "../layout.types";
 
 /**
@@ -103,7 +103,10 @@ const surfaceVariants = tokenCVA({
   },
 });
 
-export interface SurfaceProps extends Omit<BoxProps, "bg" | "shadow" | "radius" | "p"> {
+export type SurfaceProps<E extends BoxElement = "div"> = Omit<
+  BoxProps<E>,
+  "bg" | "shadow" | "radius" | "p"
+> & {
   /**
    * Surface variant (canonical SurfaceVariant dictionary)
    */
@@ -120,12 +123,12 @@ export interface SurfaceProps extends Omit<BoxProps, "bg" | "shadow" | "radius" 
    * Overrides default variant radius
    */
   radius?: ResponsiveRadius;
-}
+};
 
 /**
  * Surface component - elevation variant container
  */
-const Surface = React.forwardRef<HTMLDivElement, SurfaceProps>(
+const SurfaceComponent = React.forwardRef<HTMLElement, SurfaceProps>(
   ({ variant = "default", p, radius, className, ...props }, ref) => {
     // Get default padding and radius from variant if not provided
     // Extract token name from class string (e.g., "p-md" -> "md")
@@ -151,6 +154,14 @@ const Surface = React.forwardRef<HTMLDivElement, SurfaceProps>(
     );
   },
 );
+
+SurfaceComponent.displayName = "Surface";
+
+const Surface = SurfaceComponent as typeof SurfaceComponent & {
+  <E extends BoxElement = "div">(
+    props: SurfaceProps<E> & { ref?: React.Ref<HTMLElement> },
+  ): React.ReactElement;
+};
 
 Surface.displayName = "Surface";
 

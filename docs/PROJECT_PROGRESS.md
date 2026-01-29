@@ -212,6 +212,182 @@ The Public API canon for Tenerife UI has been established and locked. `src/index
 
 ---
 
+## Closed System v2 — Stable & Main Project Clearance
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-27  
+**Completion Date:** 2026-01-27  
+**Task ID:** TUI_CSV2_BLOCK_10_FINAL_STOP_LINE_AND_RELEASE_CLEARANCE
+
+### Summary
+
+- Master task **TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023** is **CLOSED**.
+- **Closed System v2** is declared **STABLE** (архитектурно завершён).
+- The **@tenerife.music/ui** library is **cleared for use in the main project** without additional architectural checks for Closed System v2 compliance.
+
+### Key Results
+
+- ✅ **Repo-wide audit (V1–V5):** 0 violations after fixes
+- ✅ **Detached structural audit (S1–S6):** S2-001 fixed (deep imports eliminated in production code)
+- ✅ **Boundary model:** Enforced and documented
+- ✅ **Deep imports:** Eliminated in consumer code (DOMAIN, PATTERNS)
+- ✅ **DOM-boundary:** Canonized and documented
+- ✅ **System Closure:** Document created and registered as canonical
+- ✅ **STOP LINE:** Fixed and validated
+- ✅ **ESLint import guard:** Installed as post-closure safety net
+
+### System Status
+
+**Closed System v2 is STABLE and CLOSED.**
+
+- ✅ Architecture is locked and immutable
+- ✅ Boundary model is enforced
+- ✅ Public API is the sole sanctioned import surface
+- ✅ All violations have been resolved
+
+**Change Control Policy:**
+- Any future changes require a new audit cycle
+- Modifications must pass through formal audit processes
+- Ad-hoc changes that bypass architectural constraints are forbidden
+
+### References
+
+**Canonical Architecture Documents:**
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — System closure rationale and change control policy
+- [CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) — Canonical documentation index
+
+**Audit Reports:**
+- [CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md](./reports/closed-system/CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md) — Repo-wide audit (V1–V5, STOP LINE)
+- [CLOSED_SYSTEM_V2_DETACHED_STRUCTURAL_AUDIT_024.md](./reports/closed-system/CLOSED_SYSTEM_V2_DETACHED_STRUCTURAL_AUDIT_024.md) — Structural audit (S1–S6)
+
+**Enforcement:**
+- [CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md](./architecture/closed-system/CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md) — ESLint guard rules
+
+**Task Tracking:**
+- Master task: `.cursor/tasks/master/master_tasks_TOKEN_CLEANING.json`
+- Consumer summary: [CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json](./reports/CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json)
+
+**Exit condition:** Closed System v2 formally closed and cleared for main project usage; next focus is main project implementation.
+
+---
+
+## Closed System v2 — Post-Closure Stabilization Tasks
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Completion Date:** 2026-01-28
+
+### Summary
+
+Additional stabilization tasks completed after initial closure to resolve import oscillation issues, normalize token usage, and establish final architectural locks.
+
+### Completed Tasks
+
+#### TUI_CSV2_IMPORT_OSCILLATION_ROOT_CAUSE_001
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+
+- ✅ Resolved import oscillation between `@/index` and `@/FOUNDATION/tokens/components/**`
+- ✅ Created ESLint rule `no-token-imports-from-index` to enforce canonical import pattern
+- ✅ Added anti-oscillation protection in ESLint configuration
+- ✅ Eliminated runtime cycles and order-dependent initialization failures
+
+#### TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+
+- ✅ Resolved conflict between ESLint rules for token imports
+- ✅ Introduced clear class split: Component Tokens vs Foundation Tokens
+- ✅ Component Tokens: Must import from `@/FOUNDATION/tokens/components/**` (forbidden from `@/index`)
+- ✅ Foundation Tokens: Must import from `@/index` (forbidden as deep-imports)
+- ✅ Each class now has exactly one valid import path, eliminating oscillation
+
+#### TUNG-028: Runtime Utilities Are Private
+**Status:** ✅ **LOCKED**  
+**Date:** 2026-01-28  
+**Lock Document:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+
+- ✅ Runtime utilities (`tokenCVA`, `cn`) declared private Foundation implementation details
+- ✅ Removed runtime utilities from `@/index` exports
+- ✅ Created ESLint rule `no-runtime-utils-from-index` to enforce direct imports
+- ✅ Runtime utilities must be imported from `@/FOUNDATION/lib/*` (forbidden from `@/index`)
+- ✅ Locked in FOUNDATION_LOCK.md as architectural invariant
+- ✅ Clarified allowed imports from `@/index`: UI components (Box, Button, Text, Skeleton) are allowed in DOMAIN/PATTERNS, while runtime utilities are forbidden. This prevents automated refactors from incorrectly replacing valid UI imports.
+
+#### TUI_CSV2_FOUNDATION_RUNTIME_UTILITIES_ENFORCEMENT_027
+**Status:** ✅ **RESOLVED_AND_LOCKED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+
+- ✅ Eliminated import oscillation for Foundation Runtime Utilities
+- ✅ Canonized runtime utilities import pattern
+- ✅ Protected from deep imports in consumer code
+
+#### TOKEN_REALITY_AUDIT_027
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Reports:**
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
+- [TOKEN_REALITY_AUDIT_027_CANON_BINDING.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_CANON_BINDING.md)
+- [TOKEN_REALITY_AUDIT_027_QUALITY.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_QUALITY.md)
+
+- ✅ Comprehensive audit of token usage across codebase
+- ✅ Identified gaps in token usage (7 ALLOWED gaps documented)
+- ✅ Created inventory and usage reports
+- ✅ Established canonical binding for token system
+
+#### TUI_CSV2_FULL_TOKEN_SYSTEM_AUDIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+
+- ✅ Full token system audit completed
+- ✅ Verified token coverage and usage patterns
+- ✅ Documented token system state
+
+#### TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+
+- ✅ Normalized token usage in consumer files
+- ✅ Replaced raw utility classes with token props and Foundation API
+- ✅ Closed all 7 ALLOWED gaps from TOKEN_REALITY_AUDIT_027
+- ✅ Replaced raw Tailwind classes with Text, Heading, Box, Stack, Row, Container components
+- ✅ Ensured compliance with Typography Semantics Canon
+
+### New ESLint Rules
+
+- ✅ **`no-token-imports-from-index`** — Enforces direct imports for component tokens
+- ✅ **`no-runtime-utils-from-index`** — Enforces direct imports for runtime utilities
+
+### Key Results
+
+- ✅ **Import Oscillation:** Eliminated through explicit ESLint enforcement
+- ✅ **Token Import Classes:** Clear split established (Component Tokens vs Foundation Tokens)
+- ✅ **Runtime Utilities:** Locked as private Foundation details
+- ✅ **Token Usage:** Normalized across all consumer files
+- ✅ **Architectural Locks:** Finalized in FOUNDATION_LOCK.md
+
+### References
+
+**Architecture Documents:**
+- [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+- [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) — Public Index Boundary
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — Runtime Utilities Boundary
+
+**Audit Reports:**
+- [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+- [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+- [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+- [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+- [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
+
+---
+
 ## ⚠️ UI Foundation Unlock Status
 
 **Status:** ⚠️ **FOUNDATION UNLOCKED (Active Construction)**  
@@ -443,7 +619,7 @@ The following Extension layer components have successfully completed Pipeline 18
      - React.FC replaced with explicit function signature
    - **Quality:** Comprehensive tests (15 test cases), 4 Storybook stories (including Accessibility)
 
-4. **FilterBar** - `src/PATTERNS/filters/filters/FilterBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete + FINALIZATION, 2025-12-27)
+4. **FilterBar** - `src/PATTERNS/filters/FilterBar.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete + FINALIZATION, 2025-12-27)
    - **Layer:** PATTERNS (Extension layer)
    - **Type:** Fully controlled filter orchestration component (composes multiple filter controls)
    - **Status:** PROCESS LOCKED — pure UI component, no mock logic
@@ -577,7 +753,7 @@ The following Extension layer components have successfully completed Pipeline 18
    - **Test Coverage:** Comprehensive (Skeleton.test.tsx - 20+ test cases)
    - **Storybook Coverage:** Compliant (all variants demonstrated, realistic usage examples)
 9. **Stepper** - `src/COMPOSITION/navigation/stepper/Stepper.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
-10. **CardBase** - `src/PATTERNS/cards/cards/CardBase/CardBase.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
+10. **CardBase** - `src/PATTERNS/cards/CardBase/CardBase.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
 11. **EmptyState** - `src/PATTERNS/states/EmptyState/EmptyState.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-27)
     - **Layer:** PATTERNS (Extension layer)
     - **Refactored:** Subcomponent attachment pattern optimized (74% code reduction), type consistency improved (EmptyStateIconSize type used)
@@ -1757,7 +1933,7 @@ Formally finalized the Foundation Component Lock Sweep after all verification st
    - ✅ See `docs/migrations/MIGRATION_12C_DROPDOWN_TOKENS_REMOVAL_REPORT.md` for details
 
 4. **MIGRATION_12D - PATTERNS Popover Removal**
-   - ✅ Removed PATTERNS/menus/menus/popover custom implementation
+   - ✅ Removed PATTERNS/menus/popover custom implementation
    - ✅ HoverCard now uses canonical Radix Popover from COMPOSITION/overlays
    - ✅ Single canonical Popover implementation (Radix-based)
 
@@ -1768,7 +1944,7 @@ Formally finalized the Foundation Component Lock Sweep after all verification st
    - ✅ Standardized naming: canonical hooks use camelCase
 
 6. **ContextMenu Consolidation**
-   - ✅ Removed PATTERNS/menus/menus/context-menu custom implementation
+   - ✅ Removed PATTERNS/menus/context-menu custom implementation
    - ✅ Only canonical Radix-based ContextMenu exists (COMPOSITION/overlays/ContextMenu, locked Foundation component)
 
 **Architectural State:**
@@ -3463,7 +3639,7 @@ _No tasks in progress currently._
 - **Date Completed:** 2026-01-01
 - **Summary:** ProfileCard component completed full Pipeline 18A (Component Review & Improvement Pipeline). Component refactored with size/variant props, Avatar component integration, forwardRef pattern migration, comprehensive tests and Storybook stories created, full A11Y compliance verified. Component is PROCESS LOCKED and ready for production use.
 - **Key Accomplishments:**
-  - ✅ Refactored existing ProfileCard component in `src/DOMAIN/auth/auth/ProfileCard.tsx`
+  - ✅ Refactored existing ProfileCard component in `src/DOMAIN/auth/ProfileCard.tsx`
   - ✅ Added size prop (`sm | md | lg`) with default `md`
   - ✅ Added variant prop (`default | elevated`) with default `default`
   - ✅ Migrated to forwardRef pattern for ref forwarding
@@ -3487,10 +3663,10 @@ _No tasks in progress currently._
   - Uses Heading (h3) for name
   - Uses Text component for email
 - **Files Modified:**
-  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Complete refactor applied
+  - `src/DOMAIN/auth/ProfileCard.tsx` - Complete refactor applied
 - **Files Created:**
-  - `src/DOMAIN/auth/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
-  - `src/DOMAIN/auth/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
+  - `src/DOMAIN/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
+  - `src/DOMAIN/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
   - `docs/reports/audit/PROFILECARD_BASELINE_REPORT.md` - Complete audit report
 - **Component Status:**
   - ✅ **PROCESS LOCKED** - Pipeline 18A complete, all quality gates passed
@@ -3600,13 +3776,13 @@ _No tasks in progress currently._
 - **Layer:** DOMAIN / PATTERNS
 - **Summary:** Формально закрыт Phase 1 упрощения доменных карточек и стабилизированы все доменные карточки. API, ответственности и архитектурные границы заморожены.
 - **Components Locked:**
-  - EventCard (`src/DOMAIN/sections/EventCard/`)
-  - ProfileCard (`src/DOMAIN/auth/auth/ProfileCard.tsx`)
-  - VenueCard (`src/PATTERNS/cards/cards/VenueCard/`)
-  - ArtistCard (`src/PATTERNS/cards/cards/ArtistCard/`)
-  - TicketCard (`src/PATTERNS/cards/cards/TicketCard/`)
-  - CategoryCard (`src/PATTERNS/cards/cards/CategoryCard/`)
-  - PromoCard (`src/PATTERNS/cards/cards/PromoCard/`)
+  - EventCard (`src/PATTERNS/cards/EventCard/`)
+  - ProfileCard (`src/DOMAIN/auth/ProfileCard.tsx`)
+  - VenueCard (`src/PATTERNS/cards/VenueCard/`)
+  - ArtistCard (`src/PATTERNS/cards/ArtistCard/`)
+  - TicketCard (`src/PATTERNS/cards/TicketCard/`)
+  - CategoryCard (`src/PATTERNS/cards/CategoryCard/`)
+  - PromoCard (`src/PATTERNS/cards/PromoCard/`)
 - **Phase 1 Completion:**
   - ✅ LinkWithCustomVariant извлечен в shared utility (`src/COMPOSITION/layout/LinkWithCustomVariant.tsx`)
   - ✅ Неиспользуемые варианты удалены (4 варианта: VenueCard - 3, ArtistCard - 1)
@@ -3888,13 +4064,13 @@ _No tasks in progress currently._
   - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md` - Simplification decisions
 - **Files Modified:**
   - `src/COMPOSITION/layout/index.ts` - Added LinkWithCustomVariant export
-  - `src/DOMAIN/sections/EventCard/EventCard.tsx` - Uses shared LinkWithCustomVariant
-  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx` - Uses shared LinkWithCustomVariant
-  - `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx` - Uses shared LinkWithCustomVariant, fixed font-semibold
-  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Fixed hardcoded shadow-md and p-md
-  - `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` - Removed 3 unused variants
-  - `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.variants.ts` - Removed 1 unused variant
-  - `src/PATTERNS/cards/cards/TicketCard/TicketCard.variants.ts` - Removed 2 unused variants
+  - `src/PATTERNS/cards/EventCard/EventCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/TicketCard/TicketCard.tsx` - Uses shared LinkWithCustomVariant
+  - `src/PATTERNS/cards/PromoCard/PromoCard.tsx` - Uses shared LinkWithCustomVariant, fixed font-semibold
+  - `src/DOMAIN/auth/ProfileCard.tsx` - Fixed hardcoded shadow-md and p-md
+  - `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` - Removed 3 unused variants
+  - `src/PATTERNS/cards/ArtistCard/ArtistCard.variants.ts` - Removed 1 unused variant
+  - `src/PATTERNS/cards/TicketCard/TicketCard.variants.ts` - Removed 2 unused variants
 - **Audit Documents:**
   - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md` - Complete inventory of all 7 cards
   - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md` - Detailed duplication analysis
@@ -4545,7 +4721,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **CardBase** - Pipeline 18A Complete (2025-12-27), Second Pass Complete (2026-01-01)
   - Component: CardBase
   - Type: Extension Layer Primitive - Layout Composition
-  - Location: `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`
+  - Location: `src/PATTERNS/cards/CardBase/CardBase.tsx`
   - Second Pass: Joint analysis with Card component (2026-01-01) confirmed architectural separation is correct. No changes required. Component remains PROCESS LOCKED.
 
 - ⏳ **Card** - Pipeline 18A Analysis Complete (2026-01-01), FIX Phase Pending
@@ -4563,7 +4739,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **HoverCard** - Pipeline 18A Complete (2025-12-27)
   - Component: HoverCard
   - Type: Extension Layer Pattern - Menus
-  - Location: `src/PATTERNS/menus/menus/hover-card/`
+  - Location: `src/PATTERNS/menus/hover-card/`
   - Audit Report: `docs/reports/audit/HOVERCARD_BASELINE_REPORT.md`
   - Status: ✅ PROCESS LOCKED
   - Pipeline: Pipeline 18A (Steps 0-12 complete)
@@ -4595,7 +4771,7 @@ The following components are **explicitly excluded** from this lock:
 - ✅ **NotificationCenter** - Pipeline 18A Complete (2025-12-27)
   - Component: NotificationCenter
   - Type: Extension Layer Composition - Domain Component
-  - Location: `src/DOMAIN/notifications/notifications/`
+  - Location: `src/DOMAIN/notifications/`
   - Audit Report: `docs/reports/audit/NOTIFICATIONCENTER_BASELINE_REPORT.md`
   - Status: ✅ PROCESS LOCKED
   - Lock Date: 2025-12-27
@@ -4980,7 +5156,7 @@ Successfully canonicalized ADR_overlay_panel_not_card across architecture, contr
    - Link to ADR_overlay_panel_not_card
 
 4. **Inline Architectural Guard in Code** ✅
-   - Added inline architectural comment to `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+   - Added inline architectural comment to `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
    - Top-level comment explains Panel semantics
    - Explicit "MUST NOT be converted to Card/CardBase"
    - Direct path reference to ADR file
@@ -5002,7 +5178,7 @@ Successfully canonicalized ADR_overlay_panel_not_card across architecture, contr
 - `docs/architecture/ARCHITECTURE_DOCUMENTS_AUDIT.md` - Added ADR entry
 - `docs/architecture/FOUNDATION_CONTRACT.md` - Added forbidden pattern rule
 - `src/COMPOSITION/layout/Card/README.md` - Created with reverse reference
-- `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx` - Added inline guard
+- `src/DOMAIN/notifications/NotificationCenter.Panel.tsx` - Added inline guard
 - `docs/architecture/PATTERNS_OVERLAY.md` - Created overlay pattern documentation
 - `docs/PROJECT_PROGRESS.md` - Recorded canonicalization
 

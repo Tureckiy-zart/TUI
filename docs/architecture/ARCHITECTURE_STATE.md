@@ -92,7 +92,7 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 **Status:** ✅ **CANONICAL** - Single implementation
 
 **Removed:**
-- ❌ `PATTERNS/menus/menus/popover/` - REMOVED (MIGRATION_12D)
+- ❌ `PATTERNS/menus/popover/` - REMOVED (MIGRATION_12D)
 
 **Usage:**
 - ✅ HoverCard uses `COMPOSITION/overlays/Popover` (Radix-based)
@@ -116,7 +116,7 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 **Status:** ✅ **CANONICAL** - Single implementation
 
 **Removed:**
-- ❌ `PATTERNS/menus/menus/context-menu/` - REMOVED
+- ❌ `PATTERNS/menus/context-menu/` - REMOVED
 
 **Rule:** ContextMenu **MUST** be imported from `COMPOSITION/overlays/ContextMenu` only.
 
@@ -152,7 +152,7 @@ This document **OFFICIALLY LOCKS** the current UI architecture as **CANONICAL**.
 - ❌ `PRIMITIVES/Card/` - REMOVED (MIGRATION_12A)
 
 **Pattern Layer:**
-- ✅ `PATTERNS/cards/cards/CardBase/CardBase.tsx` - Domain-specific card pattern (valid)
+- ✅ `PATTERNS/cards/CardBase/CardBase.tsx` - Domain-specific card pattern (valid)
 
 **Rule:** Card primitive **MUST** be imported from `COMPOSITION/layout/Card` only. Legacy PRIMITIVES/Card **MUST NOT** be reintroduced.
 

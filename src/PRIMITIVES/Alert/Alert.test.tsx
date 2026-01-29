@@ -111,25 +111,6 @@ describe("Alert", () => {
     });
   });
 
-  describe("Custom className", () => {
-    it("applies custom className", () => {
-      const { container } = renderWithTheme(<Alert className="custom-alert">Alert</Alert>);
-      const alert = container.querySelector('[role="alert"]');
-      expect(alert).toHaveClass("custom-alert");
-    });
-
-    it("merges custom className with variant classes", () => {
-      const { container } = renderWithTheme(
-        <Alert variant="primary" className="custom-alert">
-          Alert
-        </Alert>,
-      );
-      const alert = container.querySelector('[role="alert"]');
-      expect(alert).toHaveClass("custom-alert");
-      expect(alert).toHaveClass("bg-[hsl(var(--tm-primary))]/10");
-    });
-  });
-
   describe("Snapshot", () => {
     it("matches snapshot for default variant", () => {
       const { container } = renderWithTheme(<Alert>Default Alert</Alert>);

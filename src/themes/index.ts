@@ -66,6 +66,7 @@ export const themes = {
   dark: () => import("./dark").then((m) => m.darkTheme),
   brand: () => import("./brand").then((m) => m.brandTheme),
   "--help": () => import("./--help").then((m) => m.helpTheme),
+  "dark-blue": () => import("./dark-blue").then((m) => m.darkBlueTheme),
 } as const;
 
 /**

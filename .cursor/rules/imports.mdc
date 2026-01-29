@@ -1,0 +1,55 @@
+---
+alwaysApply: true
+title: Import Hygiene Rules
+version: 1.0
+status: Active
+owner: Cursor AI
+priority: High
+scope: Global
+language: en
+last_updated: 2026-01-28
+---
+
+# Import Hygiene Rules (Canonical)
+
+## Purpose
+
+This document defines **mandatory import classification rules** for Cursor / AI
+when working with imports from `@/index` entrypoint.
+
+These rules exist to prevent:
+- Automatic refactoring of valid UI component imports
+- Import oscillation between `@/index` and deep imports
+- Violation of public API boundaries
+
+Compliance is mandatory.
+
+---
+
+## Rule: @/index import classification (LOCKED)
+
+The `@/index` entrypoint is the **public UI API**.
+
+### Allowed imports from `@/index`
+Cursor MUST NOT refactor or replace the following imports:
+
+- UI components (Box, Button, Text, Skeleton, etc.)
+- Layout / composition components
+- Public UI types that do NOT create runtime evaluation
+
+These imports are CANONICAL and VALID inside:
+- src/DOMAIN/**
+- src/PATTERNS/**
+
+### Forbidden imports from `@/index`
+Cursor MUST refactor and report an error if it finds:
+
+- Runtime utilities (cn, tokenCVA)
+- Animation helpers
+- Any value involved in runtime logic or token resolution
+- Foundation internals
+
+### Important
+Cursor MUST NOT perform bulk import rewrites.
+Only replace imports that are explicitly forbidden above.
+If classification is unclear — STOP and ASK.

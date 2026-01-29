@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Focus GAP Gallery - Governance Showcase
  *
  * Demonstrates all ACCEPTABLE Focus GAPs in the design system.
@@ -71,7 +71,9 @@ export const Overview: Story = {
           <Box>
             <Heading level={1}>Focus GAP Gallery</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Demonstrating intentional, documented focus behavior gaps.</Text>
+              <Text typographyRole="meta" color="muted">
+                Demonstrating intentional, documented focus behavior gaps.
+              </Text>
             </Box>
           </Box>
 
@@ -136,7 +138,7 @@ export const GAP1_PopoverNonModal: Story = {
           <Box>
             <Heading level={2}>GAP-1: Popover Non-Modal Behavior</Heading>
             <Box className="mt-2">
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 Popover does NOT trap focus. This is intentional for non-modal overlays.
               </Text>
             </Box>
@@ -156,7 +158,7 @@ export const GAP1_PopoverNonModal: Story = {
                     <Button variant="outline" size="sm">
                       3. Button inside popover
                     </Button>
-                    <Text size="xs" tone="muted">
+                    <Text size="xs" typographyRole="meta" color="muted">
                       Tab again to leave popover...
                     </Text>
                   </Stack>
@@ -210,7 +212,7 @@ export const GAP2_ToastTabOrder: Story = {
             <Box>
               <Heading level={2}>GAP-2: Toast Tab Order Insertion</Heading>
               <Box className="mt-2">
-                <Text tone="muted">
+                <Text typographyRole="meta" color="muted">
                   When Toast appears, its interactive elements enter the tab order.
                 </Text>
               </Box>
@@ -285,7 +287,9 @@ export const GAP4_StepperReadOnly: Story = {
           <Box>
             <Heading level={2}>GAP-4: Stepper Non-Interactive Steps</Heading>
             <Box className="mt-2">
-              <Text tone="muted">Step indicators are read-only. Tab skips over them.</Text>
+              <Text typographyRole="meta" color="muted">
+                Step indicators are read-only. Tab skips over them.
+              </Text>
             </Box>
           </Box>
 
@@ -297,7 +301,7 @@ export const GAP4_StepperReadOnly: Story = {
                 <Stepper steps={steps} activeStep={activeStep} />
               </Box>
 
-              <Text size="sm" tone="muted">
+              <Text size="sm" typographyRole="meta" color="muted">
                 Notice: Tab jumps from "Button Before" directly to buttons below. Step indicators
                 (circles) are not in tab order.
               </Text>
@@ -367,7 +371,9 @@ export const Summary: Story = {
           <Box>
             <Heading level={2}>Focus GAP Summary</Heading>
             <Box className="mt-2">
-              <Text tone="muted">All ACCEPTABLE Focus GAPs in the Tenerife UI design system.</Text>
+              <Text typographyRole="meta" color="muted">
+                All ACCEPTABLE Focus GAPs in the Tenerife UI design system.
+              </Text>
             </Box>
           </Box>
 

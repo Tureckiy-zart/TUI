@@ -91,6 +91,21 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 
 ---
 
+## Closed System v2 Invariants
+
+### DOM Boundary Invariant
+
+Closed System v2 defines a fixed set of DOM-boundary components.
+Direct DOM access outside this set is forbidden and enforced.
+
+See: [docs/architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md](./architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md)
+
+### System Closure
+
+Closed System v2 is architecturally closed to prevent bypass, drift, and coupling problems. All modifications to the system must pass through formal audit processes. The system closure ensures that expression surface is fixed, boundaries are enforced, and deterministic behavior is preserved.
+
+See: [docs/architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — System closure rationale and change control policy
+
 ## 1. Project Identity
 
 ### What TenerifeUI Is

@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Text } from "@/PRIMITIVES/Text";
 import { Stack } from "../Stack";
@@ -168,7 +168,7 @@ export const FormSection: Story = {
         <Text size="lg" weight="semibold">
           Form Section
         </Text>
-        <Text tone="muted">
+        <Text typographyRole="meta" color="muted">
           Panel is perfect for grouping form fields and related content without implying
           interactivity.
         </Text>
@@ -216,19 +216,19 @@ export const SettingsPanel: Story = {
         <div className="space-y-sm">
           <div className="flex items-center justify-between">
             <Text>Notification preferences</Text>
-            <Text tone="muted" size="sm">
+            <Text typographyRole="meta" color="muted" size="sm">
               Enabled
             </Text>
           </div>
           <div className="flex items-center justify-between">
             <Text>Dark mode</Text>
-            <Text tone="muted" size="sm">
+            <Text typographyRole="meta" color="muted" size="sm">
               Auto
             </Text>
           </div>
           <div className="flex items-center justify-between">
             <Text>Language</Text>
-            <Text tone="muted" size="sm">
+            <Text typographyRole="meta" color="muted" size="sm">
               English
             </Text>
           </div>
@@ -251,7 +251,7 @@ export const GroupedContent: Story = {
       <Panel tone="default" padding="md" radius="md">
         <Stack direction="vertical" spacing="sm">
           <Text weight="semibold">Grouped Content Section</Text>
-          <Text tone="muted" size="sm">
+          <Text typographyRole="meta" color="muted" size="sm">
             Panel provides semantic grouping for related content without the structure of Card.
           </Text>
         </Stack>
@@ -259,7 +259,7 @@ export const GroupedContent: Story = {
       <Panel tone="muted" padding="md" radius="md">
         <Stack direction="vertical" spacing="sm">
           <Text weight="semibold">Another Group</Text>
-          <Text tone="muted" size="sm">
+          <Text typographyRole="meta" color="muted" size="sm">
             Multiple panels can be used to organize content sections.
           </Text>
         </Stack>

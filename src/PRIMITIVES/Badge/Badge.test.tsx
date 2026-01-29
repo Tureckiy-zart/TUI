@@ -13,12 +13,6 @@ describe("Badge component", () => {
       expect(element).toHaveTextContent("Default Badge");
     });
 
-    it("should render with custom className", () => {
-      const { container } = render(<Badge className="custom-class">Badge</Badge>);
-      const element = container.firstChild as HTMLElement;
-      expect(element).toHaveClass("custom-class");
-    });
-
     it("should render with children", () => {
       render(<Badge>Test Badge</Badge>);
       expect(screen.getByText("Test Badge")).toBeInTheDocument();
@@ -163,13 +157,12 @@ describe("Badge component", () => {
 
       variants.forEach((variant) => {
         const { container } = render(
-          <Badge variant={variant} className="custom" data-testid={`badge-${variant}`}>
+          <Badge variant={variant} data-testid={`badge-${variant}`}>
             {variant}
           </Badge>,
         );
         const element = container.firstChild as HTMLElement;
         expect(element).toBeInTheDocument();
-        expect(element).toHaveClass("custom");
         expect(element).toHaveAttribute("data-testid", `badge-${variant}`);
       });
     });

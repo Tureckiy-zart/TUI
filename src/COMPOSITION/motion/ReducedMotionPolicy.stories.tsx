@@ -1,11 +1,11 @@
-﻿/**
+/**
  * Reduced Motion Policy - Audit Dashboard
  *
  * Demonstrates reduced motion support and proves motion disables correctly.
  * This story serves as the canonical visual checker for accessibility compliance.
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useRef, useState } from "react";
 
 import { Box, Flex, Stack } from "@/COMPOSITION/layout";
@@ -146,7 +146,7 @@ export const Simulation: Story = {
           <Box>
             <Heading level={1}>Reduced Motion Policy</Heading>
             <Box>
-              <Text tone="muted">
+              <Text typographyRole="meta" color="muted">
                 All motion respects user preferences for reduced motion. Toggle the switch to
                 simulate prefers-reduced-motion.
               </Text>
@@ -165,7 +165,7 @@ export const Simulation: Story = {
                 aria-label="Simulate Reduced Motion"
               />
               <Box className={reducedMotion ? "text-warning" : undefined}>
-                <Text tone={reducedMotion ? undefined : "muted"}>
+                <Text typographyRole="meta" color={reducedMotion ? "primary" : "muted"}>
                   {reducedMotion
                     ? "Reduced motion enabled - animations are instant"
                     : "Normal motion - animations play as designed"}
@@ -182,7 +182,7 @@ export const Simulation: Story = {
             <Box>
               <Heading level={2}>Fade Animation</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   When reduced motion is enabled, fade animations become instant (opacity changes
                   immediately).
                 </Text>
@@ -197,7 +197,7 @@ export const Simulation: Story = {
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
-                <Text size="xs" tone="muted">
+                <Text size="xs" typographyRole="meta" color="muted">
                   Duration:{" "}
                   {reducedMotion
                     ? "0ms (instant)"
@@ -210,7 +210,7 @@ export const Simulation: Story = {
             <Box>
               <Heading level={2}>Scale Animation</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   When reduced motion is enabled, scale animations become instant (no scaling
                   transition).
                 </Text>
@@ -225,7 +225,7 @@ export const Simulation: Story = {
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
-                <Text size="xs" tone="muted">
+                <Text size="xs" typographyRole="meta" color="muted">
                   Duration:{" "}
                   {reducedMotion
                     ? "0ms (instant)"
@@ -238,7 +238,7 @@ export const Simulation: Story = {
             <Box>
               <Heading level={2}>Slide Animation</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   When reduced motion is enabled, slide animations become instant (no translation
                   transition).
                 </Text>
@@ -253,7 +253,7 @@ export const Simulation: Story = {
                 </AnimatedBox>
               </Box>
               <Box className="mt-2">
-                <Text size="xs" tone="muted">
+                <Text size="xs" typographyRole="meta" color="muted">
                   Duration:{" "}
                   {reducedMotion
                     ? "0ms (instant)"
@@ -266,7 +266,7 @@ export const Simulation: Story = {
             <Box>
               <Heading level={2}>Hover Effect</Heading>
               <Box className="mb-4">
-                <Text size="sm" tone="muted">
+                <Text size="sm" typographyRole="meta" color="muted">
                   When reduced motion is enabled, hover transitions become instant (no transform
                   transition).
                 </Text>
@@ -278,7 +278,7 @@ export const Simulation: Story = {
                 />
               </Box>
               <Box className="mt-2">
-                <Text size="xs" tone="muted">
+                <Text size="xs" typographyRole="meta" color="muted">
                   Hover transition: {reducedMotion ? "0ms (instant)" : "150ms (fast)"}
                 </Text>
               </Box>

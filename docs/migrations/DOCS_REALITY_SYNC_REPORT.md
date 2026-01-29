@@ -75,7 +75,7 @@ src/
 **Popover:**
 - ✅ Single implementation: `src/COMPOSITION/overlays/Popover.tsx`
 - ✅ Radix-based (`@radix-ui/react-popover`)
-- ✅ HoverCard uses it: `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx` imports from `@/COMPOSITION/overlays/Popover`
+- ✅ HoverCard uses it: `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx` imports from `@/COMPOSITION/overlays/Popover`
 - ❌ No PATTERNS popover exists
 
 **ContextMenu:**
@@ -91,7 +91,7 @@ src/
 **Card:**
 - ✅ Canonical: `src/COMPOSITION/layout/Card/`
 - ❌ Legacy: `src/PRIMITIVES/Card/` does NOT exist
-- ✅ Pattern layer: `src/PATTERNS/cards/cards/CardBase/` exists (valid)
+- ✅ Pattern layer: `src/PATTERNS/cards/CardBase/` exists (valid)
 
 **Toast Hooks:**
 - ✅ `src/hooks/useToast.ts` - Local state implementation

@@ -72,6 +72,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
+import { Box } from "../Box";
 import { Container } from "../Container";
 import { Flex } from "../Flex";
 import { Stack } from "../Stack";
@@ -151,14 +152,14 @@ const PageHeader = React.forwardRef<HTMLElement, PageHeaderProps>(
                 </Heading>
               )}
               {hasDescription && (
-                <Text size="md" tone="muted">
+                <Text size="md" typographyRole="meta" color="muted">
                   {description}
                 </Text>
               )}
             </Stack>
 
             {/* Right side: Actions */}
-            {hasActions && <div className="flex items-start">{actions}</div>}
+            {hasActions && <Box className="flex items-start">{actions}</Box>}
           </Flex>
         </Container>
       </Component>

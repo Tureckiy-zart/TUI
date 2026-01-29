@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 import { Box } from "@/COMPOSITION/layout";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { Drawer } from "./Drawer";
 import type { DrawerSize } from "./Drawer.types";
@@ -130,7 +130,7 @@ export const Default: Story = {
             <Heading level={3} id="drawer-title">
               Drawer Title
             </Heading>
-            <Text size="sm" tone="muted">
+            <Text size="sm" typographyRole="meta" color="muted">
               This is a drawer description
             </Text>
           </Drawer.Header>
@@ -359,7 +359,7 @@ export const LongContent: Story = {
             <Heading level={3} id="long-content-title">
               Long Content Drawer
             </Heading>
-            <Text size="sm" tone="muted">
+            <Text size="sm" typographyRole="meta" color="muted">
               This drawer demonstrates proper handling of long content with token-based padding and
               scrolling.
             </Text>
@@ -497,7 +497,7 @@ export const SettingsDrawer: Story = {
             <Heading level={3} id="settings-drawer-title">
               Settings
             </Heading>
-            <Text size="sm" tone="muted">
+            <Text size="sm" typographyRole="meta" color="muted">
               Manage your account settings and preferences
             </Text>
           </Drawer.Header>

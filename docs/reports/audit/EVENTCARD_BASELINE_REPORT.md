@@ -50,7 +50,7 @@
 **Exported Name:** `EventCard`  
 **Layer:** DOMAIN (Extension layer)  
 **Semantic Role:** Domain-specific card component for displaying event information  
-**Location:** `src/DOMAIN/sections/EventCard/EventCard.tsx`  
+**Location:** `src/PATTERNS/cards/EventCard/EventCard.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -67,16 +67,16 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/DOMAIN/sections/EventCard/EventCard.tsx` (241 lines)
+- **Main Component:** `src/PATTERNS/cards/EventCard/EventCard.tsx` (241 lines)
   - Contains: EventCard component (forwardRef pattern)
   - Uses CardBase for layout composition
   - Uses DOMAIN_TOKENS and CARD_TOKENS for styling
-- **Types:** `src/DOMAIN/sections/EventCard/EventCard.types.ts` (66 lines)
+- **Types:** `src/PATTERNS/cards/EventCard/EventCard.types.ts` (66 lines)
   - Types: EventCardSize, EventCardLayout, EventCardVariant, EventCardProps
-- **Variants:** `src/DOMAIN/sections/EventCard/EventCard.variants.ts` (227 lines)
+- **Variants:** `src/PATTERNS/cards/EventCard/EventCard.variants.ts` (227 lines)
   - CVAs: eventCardVariants, eventCardBadgeVariants, eventCardBadgeSurfaceVariants, eventCardMetadataVariants, eventCardMetadataItemVariants, eventCardMetadataIconVariants, eventCardFooterVariants, eventCardTicketButtonVariants, eventCardTicketButtonIconVariants, eventCardPriceVariants
   - Uses `cva` from `class-variance-authority` (not `tokenCVA`)
-- **Barrel Export:** `src/DOMAIN/sections/EventCard/index.ts` (26 lines)
+- **Barrel Export:** `src/PATTERNS/cards/EventCard/index.ts` (26 lines)
 - **Root Export:** Exported from `src/index.ts` (public API)
 
 ### Storybook Files
@@ -110,10 +110,10 @@
 - `eventCardTicketButtonIconVariants` (CVA function)
 
 **Export Hierarchy:**
-1. `src/DOMAIN/sections/EventCard/EventCard.tsx` → exports component
-2. `src/DOMAIN/sections/EventCard/EventCard.types.ts` → exports types
-3. `src/DOMAIN/sections/EventCard/EventCard.variants.ts` → exports CVAs
-4. `src/DOMAIN/sections/EventCard/index.ts` → barrel re-exports all
+1. `src/PATTERNS/cards/EventCard/EventCard.tsx` → exports component
+2. `src/PATTERNS/cards/EventCard/EventCard.types.ts` → exports types
+3. `src/PATTERNS/cards/EventCard/EventCard.variants.ts` → exports CVAs
+4. `src/PATTERNS/cards/EventCard/index.ts` → barrel re-exports all
 5. `src/index.ts` → exports EventCard (public API)
 
 ### External Dependencies
@@ -131,7 +131,7 @@
 - `@/FOUNDATION/tokens/components/card` → CARD_TOKENS
 - `@/FOUNDATION/tokens/components/text` → TEXT_TOKENS
 - `@/FOUNDATION/tokens/gradients` → GRADIENT_TOKENS
-- `@/PATTERNS/cards/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
+- `@/PATTERNS/cards/CardBase` → CardBase, CardBaseContentWrapper, CardBaseFooterWrapper, CardBaseImageWrapper
 - `@/PRIMITIVES/Heading` → Heading
 - `@/PRIMITIVES/Icon` → Icon
 - `@/PRIMITIVES/Link` → Link

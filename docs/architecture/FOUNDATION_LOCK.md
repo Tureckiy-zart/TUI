@@ -1,8 +1,8 @@
 # ? Foundation Lock Status (Finalized)
 
-**Version:** 1.31  
+**Version:** 1.32  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Canon alignment with Foundation finalization)  
+**Last Updated:** 2026-01-28 (Runtime Utilities Lock - TUNG-028)  
 **Status:** ? **LOCKED (Foundation Closed)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -1398,6 +1398,36 @@ Any token system modifications require:
 
 ---
 
+## 🔒 LOCK: Runtime Utilities Are Private (TUNG-028)
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Runtime utilities (`tokenCVA`, `cn`) import boundaries  
+**Task:** TUNG-028
+
+**Invariant**  
+Runtime utilities (`tokenCVA`, `cn`) are **private Foundation implementation details**.
+
+**Rules**
+- MUST NOT be imported from `@/index`
+- MUST NOT be exported via `@/index`
+- MUST be imported directly from:
+  - `@/FOUNDATION/lib/token-cva`
+  - `@/FOUNDATION/lib/utils`
+
+**Rationale**
+- Prevent SSR / test runtime cycles
+- Keep `@/index` as public API only
+- Avoid import oscillation and auto-rewrites
+
+**Enforcement**
+- ESLint rule: `no-runtime-utils-from-index`
+- Scope: `DOMAIN/**`, `PATTERNS/**`
+
+**Status**: LOCKED  
+**Introduced by**: TUNG-028
+
+---
+
 ## 🔒 TYPOGRAPHY (FULL LOCK)
 
 **Status:** ✅ **LOCKED (ENFORCED)**
@@ -2137,6 +2167,7 @@ If Authority modifications are required in the future:
 - **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
 - **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[Architecture Lock](./ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
+- **[Closed System v2 Canon Documentation Lock](./closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
 - **[Token System](./TOKEN_AUTHORITY.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
 - **Component Guidelines** — Component development guidelines (archived; file no longer available)

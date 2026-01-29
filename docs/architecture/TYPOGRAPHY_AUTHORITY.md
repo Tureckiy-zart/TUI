@@ -457,6 +457,7 @@ Any Typography Authority modifications require:
 - `docs/architecture/INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md` - Interactive size scale (separate from typography scale)
 - `docs/architecture/FOUNDATION_LOCK.md` - Foundation lock status (Typography Authority Lock Status section)
 - `docs/architecture/TOKEN_AUTHORITY.md` - Token system documentation
+- `docs/architecture/closed-system/CLOSED_SYSTEM_V2_TYPOGRAPHY_SEMANTICS_CANON.md` - Typography Semantics Canon (semantic vs presentational usage rules)
 
 **Note:** Typography scale (`xs`, `sm`, `md`, `lg`, `xl`) is SEPARATE from interactive size scale (`sm`, `md`, `lg`). See [Interactive Size Scale Authority Contract](./INTERACTIVE_SIZE_SCALE_AUTHORITY_CONTRACT.md) for interactive component sizing rules.
 

@@ -51,7 +51,7 @@
 **Exported Name:** `ProfileCard`  
 **Layer:** DOMAIN (Extension layer - domain-specific card component)  
 **Semantic Role:** Domain-specific card component for displaying user profile information (name, email, avatar)  
-**Location:** `src/DOMAIN/auth/auth/ProfileCard.tsx`  
+**Location:** `src/DOMAIN/auth/ProfileCard.tsx`  
 **Date:** 2026-01-01  
 **Operator:** AI Assistant  
 **Assistant:** Cursor AI
@@ -69,7 +69,7 @@
 
 ### Implementation Files
 
-- **Main Component:** `src/DOMAIN/auth/auth/ProfileCard.tsx` (37 lines)
+- **Main Component:** `src/DOMAIN/auth/ProfileCard.tsx` (37 lines)
   - Contains: ProfileCard component (React.FC pattern)
   - Uses Card and CardBody from COMPOSITION layer
   - Uses Heading and Text from PRIMITIVES layer
@@ -91,7 +91,7 @@
 ### Export Points
 
 **Component Exports:**
-- `ProfileCard` (component) - exported from `src/DOMAIN/auth/auth/ProfileCard.tsx`
+- `ProfileCard` (component) - exported from `src/DOMAIN/auth/ProfileCard.tsx`
 - `ProfileCardProps` (interface) - NOT exported (internal only)
 
 **Public API:**
@@ -174,9 +174,9 @@ interface ProfileCardProps {
 ### Related Components
 
 **Similar Domain Cards:**
-- `CategoryCard` - `src/PATTERNS/cards/cards/CategoryCard/` (uses CardBase)
-- `EventCard` - `src/DOMAIN/sections/EventCard/` (uses CardBase)
-- `VenueCard` - `src/PATTERNS/cards/cards/VenueCard/` (uses CardBase)
+- `CategoryCard` - `src/PATTERNS/cards/CategoryCard/` (uses CardBase)
+- `EventCard` - `src/PATTERNS/cards/EventCard/` (uses CardBase)
+- `VenueCard` - `src/PATTERNS/cards/VenueCard/` (uses CardBase)
 
 **Note:** ProfileCard uses Card (COMPOSITION) directly, not CardBase pattern like other domain cards.
 
@@ -960,7 +960,7 @@ After completing STEP 0-7 analysis, the following refactoring is required to bri
 **Refactor Scope:**
 
 - **Files to Modify:**
-  - `src/DOMAIN/auth/auth/ProfileCard.tsx` - Main component file
+  - `src/DOMAIN/auth/ProfileCard.tsx` - Main component file
 
 - **Files to Create:**
   - None (types can be in same file or separate file)
@@ -1060,7 +1060,7 @@ After completing STEP 0-7 analysis, the following refactoring is required to bri
 
 **Files Modified:**
 
-- `src/DOMAIN/auth/auth/ProfileCard.tsx` - Complete refactor applied
+- `src/DOMAIN/auth/ProfileCard.tsx` - Complete refactor applied
 
 **Files Created:**
 
@@ -1068,7 +1068,7 @@ After completing STEP 0-7 analysis, the following refactoring is required to bri
 
 ### Changes
 
-- Refactored `src/DOMAIN/auth/auth/ProfileCard.tsx`:
+- Refactored `src/DOMAIN/auth/ProfileCard.tsx`:
   - Removed unused `cn` import
   - Added `size` and `variant` props with defaults
   - Migrated to forwardRef pattern
@@ -1144,8 +1144,8 @@ After completing STEP 0-7 analysis, the following refactoring is required to bri
 
 ### Changes
 
-- Created: `src/DOMAIN/auth/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
-- Created: `src/DOMAIN/auth/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
+- Created: `src/DOMAIN/auth/ProfileCard.test.tsx` - Comprehensive test suite (25+ test cases)
+- Created: `src/DOMAIN/auth/ProfileCard.stories.tsx` - Canonical Storybook stories (6 stories)
 
 ### Deferred
 

@@ -71,6 +71,7 @@
 import { Check, ChevronDown, X } from "lucide-react";
 import * as React from "react";
 
+import { Box } from "@/COMPOSITION/layout";
 import { Popover, PopoverContent, PopoverTrigger } from "@/COMPOSITION/overlays/Popover";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
@@ -272,6 +273,202 @@ export function ComboboxRoot({
 }
 
 // ============================================================================
+// COMBOBOX INPUT HELPERS
+// ============================================================================
+
+/**
+ * Hook for managing keyboard navigation in ComboboxInput
+ */
+interface KeyboardNavigationParams {
+  disabled: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  highlightedIndex: number;
+  setHighlightedIndex: (index: number) => void;
+  filteredOptions: ComboboxOption[];
+  allOptions: ComboboxOption[];
+  onSelect: (value: string) => void;
+}
+
+function useComboboxKeyboardNavigation(params: KeyboardNavigationParams) {
+  const {
+    disabled,
+    open,
+    setOpen,
+    highlightedIndex,
+    setHighlightedIndex,
+    filteredOptions,
+    allOptions,
+    onSelect,
+  } = params;
+
+  const handleKeyDown = React.useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (disabled) return;
+
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          if (!open) {
+            setOpen(true);
+          } else {
+            const availableOptions = filteredOptions.length > 0 ? filteredOptions : allOptions;
+            if (availableOptions.length > 0) {
+              if (highlightedIndex === -1) {
+                setHighlightedIndex(0);
+              } else if (highlightedIndex < availableOptions.length - 1) {
+                setHighlightedIndex(highlightedIndex + 1);
+              }
+            }
+          }
+          break;
+
+        case "ArrowUp":
+          e.preventDefault();
+          if (open && highlightedIndex > 0) {
+            setHighlightedIndex(highlightedIndex - 1);
+          }
+          break;
+
+        case "Enter":
+          e.preventDefault();
+          if (open) {
+            const availableOptions = filteredOptions.length > 0 ? filteredOptions : allOptions;
+            if (highlightedIndex >= 0 && highlightedIndex < availableOptions.length) {
+              const option = availableOptions[highlightedIndex];
+              if (option && !option.disabled) {
+                onSelect(option.value);
+              }
+            }
+          }
+          break;
+
+        case "Escape":
+          e.preventDefault();
+          setOpen(false);
+          setHighlightedIndex(-1);
+          break;
+
+        default:
+          break;
+      }
+    },
+    [
+      disabled,
+      open,
+      setOpen,
+      highlightedIndex,
+      setHighlightedIndex,
+      filteredOptions,
+      allOptions,
+      onSelect,
+    ],
+  );
+
+  return handleKeyDown;
+}
+
+/**
+ * Hook for managing input effects
+ */
+function useComboboxInputEffects(
+  open: boolean,
+  setHighlightedIndex: (index: number) => void,
+  filteredOptions: ComboboxOption[],
+) {
+  // Reset highlightedIndex when dropdown closes
+  const prevOpenRef = React.useRef(open);
+  React.useEffect(() => {
+    if (!open && prevOpenRef.current) {
+      setHighlightedIndex(-1);
+    }
+    prevOpenRef.current = open;
+  }, [open, setHighlightedIndex]);
+
+  // Track filteredOptions length for async updates
+  const prevFilteredOptionsLengthRef = React.useRef(filteredOptions.length);
+  React.useEffect(() => {
+    prevFilteredOptionsLengthRef.current = filteredOptions.length;
+  }, [filteredOptions.length]);
+}
+
+/**
+ * Multi-select tags component
+ */
+interface MultiSelectTagsProps {
+  value: string[];
+  filteredOptions: ComboboxOption[];
+  onRemoveTag: (value: string) => void;
+}
+
+function MultiSelectTags({ value, filteredOptions, onRemoveTag }: MultiSelectTagsProps) {
+  if (value.length === 0) return null;
+
+  return (
+    <Box className="flex flex-wrap gap-1">
+      {value.map((v) => {
+        const option = filteredOptions.find((opt) => opt.value === v);
+        const label = option?.label || v;
+        return (
+          <span
+            key={v}
+            className={cn(
+              "inline-flex items-center gap-1 rounded-sm px-2 py-0.5",
+              INPUT_TOKENS.variant.primary.background,
+              INPUT_TOKENS.variant.primary.text,
+            )}
+          >
+            <span className="text-xs">{label}</span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemoveTag(v);
+              }}
+              className="hover:opacity-70"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          </span>
+        );
+      })}
+    </Box>
+  );
+}
+
+/**
+ * Input icons component
+ */
+interface InputIconsProps {
+  multiple: boolean;
+  value: string | string[];
+  open: boolean;
+  onClear: () => void;
+}
+
+function InputIcons({ multiple, value, open, onClear }: InputIconsProps) {
+  return (
+    <Box className="flex items-center gap-1">
+      {!multiple && typeof value === "string" && value && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClear();
+          }}
+          className="hover:opacity-70"
+        >
+          <X className="h-4 w-4 opacity-50" />
+        </button>
+      )}
+      <ChevronDown
+        className={cn("h-4 w-4 opacity-50 transition-transform", open && "rotate-180 transform")}
+      />
+    </Box>
+  );
+}
+
+// ============================================================================
 // COMBOBOX INPUT
 // ============================================================================
 
@@ -290,7 +487,41 @@ export interface ComboboxInputProps extends Omit<
  */
 export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputProps>(
   (
-    { placeholder, disabled, "aria-invalid": ariaInvalid, "aria-label": ariaLabel, ...props },
+    {
+      placeholder,
+      disabled,
+      id,
+      name,
+      autoComplete,
+      autoFocus,
+      readOnly,
+      required,
+      onBlur,
+      onFocus,
+      onClick,
+      onMouseDown,
+      onMouseUp,
+      onKeyUp,
+      onKeyPress,
+      onInput,
+      enterKeyHint,
+      inputMode,
+      maxLength,
+      minLength,
+      pattern,
+      form,
+      tabIndex,
+      title,
+      dir,
+      lang,
+      spellCheck,
+      "aria-invalid": ariaInvalid,
+      "aria-label": ariaLabel,
+      "aria-describedby": ariaDescribedBy,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-required": ariaRequired,
+      "aria-errormessage": ariaErrorMessage,
+    },
     ref,
   ) => {
     const {
@@ -311,130 +542,67 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
     const inputRef = React.useRef<HTMLInputElement>(null);
     React.useImperativeHandle(ref, () => inputRef.current!);
 
-    // Reset highlightedIndex when dropdown closes
-    const prevOpenRef = React.useRef(open);
-    React.useEffect(() => {
-      if (!open && prevOpenRef.current) {
-        // Reset when closing
+    useComboboxInputEffects(open, setHighlightedIndex, filteredOptions);
+
+    const handleInputChange = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        setInputValue(newValue);
+        if (!open) {
+          setOpen(true);
+        }
         setHighlightedIndex(-1);
-      }
-      prevOpenRef.current = open;
-    }, [open, setHighlightedIndex]);
+      },
+      [setInputValue, open, setOpen, setHighlightedIndex],
+    );
 
-    // Set highlightedIndex to 0 when filteredOptions become available after dropdown opens
-    // This handles the async update of filteredOptions
-    const prevFilteredOptionsLengthRef = React.useRef(filteredOptions.length);
-    React.useEffect(() => {
-      if (
-        open &&
-        filteredOptions.length > 0 &&
-        prevFilteredOptionsLengthRef.current === 0 &&
-        highlightedIndex === -1
-      ) {
-        // FilteredOptions just became available - don't auto-set, let keyboard handle it
-        // But if user presses ArrowDown, it will work now
-      }
-      prevFilteredOptionsLengthRef.current = filteredOptions.length;
-    }, [open, filteredOptions.length, highlightedIndex]);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value;
-      setInputValue(newValue);
-      if (!open) {
-        setOpen(true);
-      }
-      setHighlightedIndex(-1);
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (disabled) return;
-
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault();
-          if (!open) {
-            setOpen(true);
-            // Wait for next render cycle for filteredOptions to be available
-            // Then next ArrowDown will set highlightedIndex
-          } else {
-            // Use filteredOptions if available, otherwise fall back to allOptions
-            const availableOptions = filteredOptions.length > 0 ? filteredOptions : allOptions;
-            if (availableOptions.length > 0) {
-              if (highlightedIndex === -1) {
-                // First navigation after opening - set to first option
-                setHighlightedIndex(0);
-              } else if (highlightedIndex < availableOptions.length - 1) {
-                // Move to next option
-                setHighlightedIndex(highlightedIndex + 1);
-              }
-            }
-          }
-          break;
-
-        case "ArrowUp":
-          e.preventDefault();
-          if (open && highlightedIndex > 0) {
-            setHighlightedIndex(highlightedIndex - 1);
-          }
-          break;
-
-        case "Enter":
-          e.preventDefault();
-          if (open) {
-            // Use filteredOptions if available, otherwise fall back to allOptions
-            const availableOptions = filteredOptions.length > 0 ? filteredOptions : allOptions;
-            if (highlightedIndex >= 0 && highlightedIndex < availableOptions.length) {
-              const option = availableOptions[highlightedIndex];
-              if (option && !option.disabled) {
-                handleSelect(option.value);
-              }
-            }
-          }
-          break;
-
-        case "Escape":
-          e.preventDefault();
+    const handleSelect = React.useCallback(
+      (optionValue: string) => {
+        if (multiple) {
+          const currentValues = Array.isArray(value) ? value : [];
+          const newValues = currentValues.includes(optionValue)
+            ? currentValues.filter((v) => v !== optionValue)
+            : [...currentValues, optionValue];
+          onValueChange?.(newValues);
+        } else {
+          onValueChange?.(optionValue);
           setOpen(false);
-          setHighlightedIndex(-1);
-          break;
+          setInputValue("");
+        }
+      },
+      [multiple, value, onValueChange, setOpen, setInputValue],
+    );
 
-        default:
-          break;
-      }
-    };
+    const handleRemoveTag = React.useCallback(
+      (tagValue: string) => {
+        if (multiple && Array.isArray(value)) {
+          const newValues = value.filter((v) => v !== tagValue);
+          onValueChange?.(newValues);
+        }
+      },
+      [multiple, value, onValueChange],
+    );
 
-    const handleSelect = (optionValue: string) => {
-      if (multiple) {
-        const currentValues = Array.isArray(value) ? value : [];
-        const newValues = currentValues.includes(optionValue)
-          ? currentValues.filter((v) => v !== optionValue)
-          : [...currentValues, optionValue];
-        onValueChange?.(newValues);
-      } else {
-        onValueChange?.(optionValue);
-        setOpen(false);
-        setInputValue("");
-      }
-    };
-
-    const handleRemoveTag = (tagValue: string) => {
-      if (multiple && Array.isArray(value)) {
-        const newValues = value.filter((v) => v !== tagValue);
-        onValueChange?.(newValues);
-      }
-    };
-
-    const handleClear = () => {
+    const handleClear = React.useCallback(() => {
       if (!multiple && typeof value === "string" && value) {
         onValueChange?.("");
         setInputValue("");
       }
-    };
+    }, [multiple, value, onValueChange, setInputValue]);
 
-    // Display selected values for single-select
+    const handleKeyDown = useComboboxKeyboardNavigation({
+      disabled: disabled ?? false,
+      open,
+      setOpen,
+      highlightedIndex,
+      setHighlightedIndex,
+      filteredOptions,
+      allOptions,
+      onSelect: handleSelect,
+    });
+
     const displayValue = React.useMemo(() => {
       if (!multiple && typeof value === "string" && value && !inputValue) {
-        // Find option label for selected value (use allOptions, not filteredOptions)
         const selectedOption = allOptions.find((opt) => opt.value === value);
         return selectedOption?.label || value;
       }
@@ -442,9 +610,9 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
     }, [multiple, value, inputValue, allOptions]);
 
     return (
-      <div className="relative">
+      <Box className="relative">
         <PopoverTrigger asChild>
-          <div
+          <Box
             className={cn(
               "relative flex items-center gap-1",
               size === "sm" && INPUT_TOKENS.padding.horizontal.sm,
@@ -452,90 +620,73 @@ export const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputPro
               size === "lg" && INPUT_TOKENS.padding.horizontal.lg,
             )}
           >
-            {/* Multi-select tags */}
-            {multiple && Array.isArray(value) && value.length > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {value.map((v) => {
-                  const option = filteredOptions.find((opt) => opt.value === v);
-                  const label = option?.label || v;
-                  return (
-                    <span
-                      key={v}
-                      className={cn(
-                        "inline-flex items-center gap-1 rounded-sm px-2 py-0.5",
-                        INPUT_TOKENS.variant.primary.background,
-                        INPUT_TOKENS.variant.primary.text,
-                      )}
-                    >
-                      <span className="text-xs">{label}</span>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRemoveTag(v);
-                        }}
-                        className="hover:opacity-70"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </span>
-                  );
-                })}
-              </div>
+            {multiple && Array.isArray(value) && (
+              <MultiSelectTags
+                value={value}
+                filteredOptions={filteredOptions}
+                onRemoveTag={handleRemoveTag}
+              />
             )}
 
-            {/* Input field */}
-            <Input
-              ref={inputRef}
-              size={size}
-              value={displayValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              placeholder={placeholder}
-              disabled={disabled}
-              aria-invalid={ariaInvalid}
-              aria-label={ariaLabel}
-              role="combobox"
-              aria-expanded={open}
-              aria-autocomplete="list"
-              aria-controls="combobox-list"
-              aria-activedescendant={
-                highlightedIndex >= 0 ? `combobox-option-${highlightedIndex}` : undefined
-              }
+            <Box
               className={cn(
                 "min-w-[120px] flex-1 border-none focus-visible:ring-0 focus-visible:ring-offset-0",
                 INPUT_TOKENS.icon.paddingRight,
               )}
-              {...props}
-            />
-
-            {/* Icons container */}
-            <div className="flex items-center gap-1">
-              {/* Clear icon for single-select with value */}
-              {!multiple && typeof value === "string" && value && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleClear();
-                  }}
-                  className="hover:opacity-70"
-                >
-                  <X className="h-4 w-4 opacity-50" />
-                </button>
-              )}
-
-              {/* Chevron icon */}
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 opacity-50 transition-transform",
-                  open && "rotate-180 transform",
-                )}
+            >
+              <Input
+                ref={inputRef}
+                size={size}
+                value={displayValue}
+                onChange={handleInputChange}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                onClick={onClick}
+                onMouseDown={onMouseDown}
+                onMouseUp={onMouseUp}
+                onKeyDown={handleKeyDown}
+                onKeyUp={onKeyUp}
+                onKeyPress={onKeyPress}
+                onInput={onInput}
+                placeholder={placeholder}
+                disabled={disabled}
+                id={id}
+                name={name}
+                autoComplete={autoComplete}
+                autoFocus={autoFocus}
+                readOnly={readOnly}
+                required={required}
+                enterKeyHint={enterKeyHint}
+                inputMode={inputMode}
+                maxLength={maxLength}
+                minLength={minLength}
+                pattern={pattern}
+                form={form}
+                tabIndex={tabIndex}
+                title={title}
+                dir={dir}
+                lang={lang}
+                spellCheck={spellCheck}
+                aria-invalid={ariaInvalid}
+                aria-label={ariaLabel}
+                aria-describedby={ariaDescribedBy}
+                aria-labelledby={ariaLabelledBy}
+                aria-required={ariaRequired}
+                aria-errormessage={ariaErrorMessage}
+                role="combobox"
+                aria-expanded={open}
+                aria-autocomplete="list"
+                aria-controls="combobox-list"
+                aria-activedescendant={
+                  highlightedIndex >= 0 ? `combobox-option-${highlightedIndex}` : undefined
+                }
               />
-            </div>
-          </div>
+            </Box>
+
+            <InputIcons multiple={multiple} value={value} open={open} onClear={handleClear} />
+          </Box>
         </PopoverTrigger>
-      </div>
+      </Box>
     );
   },
 );
@@ -634,14 +785,14 @@ export function ComboboxList({
       )}
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
-      <div id="combobox-list" role="listbox" className="max-h-[300px] overflow-y-auto p-1">
+      <Box id="combobox-list" role="listbox" className="max-h-[300px] overflow-y-auto p-1">
         {loading && (
-          <div className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">Loading...</div>
+          <Box className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">Loading...</Box>
         )}
         {!loading && filteredOptions.length === 0 && (
-          <div className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">
+          <Box className="p-4 text-center text-sm text-[hsl(var(--tm-text-muted))]">
             {emptyMessage}
-          </div>
+          </Box>
         )}
         {!loading && filteredOptions.length > 0 && (
           <>
@@ -651,7 +802,7 @@ export function ComboboxList({
               const label = option.label || option.value;
 
               return (
-                <div
+                <Box
                   key={option.value}
                   id={`combobox-option-${index}`}
                   role="option"
@@ -672,7 +823,7 @@ export function ComboboxList({
                   onMouseEnter={() => setHighlightedIndex(index)}
                 >
                   {multiple && (
-                    <div
+                    <Box
                       className={cn(
                         "flex h-4 w-4 items-center justify-center rounded-sm border",
                         selected &&
@@ -680,16 +831,16 @@ export function ComboboxList({
                       )}
                     >
                       {selected && <Check className="h-3 w-3" />}
-                    </div>
+                    </Box>
                   )}
                   <span className="flex-1">{label}</span>
                   {!multiple && selected && <Check className="h-4 w-4" />}
-                </div>
+                </Box>
               );
             })}
           </>
         )}
-      </div>
+      </Box>
     </PopoverContent>
   );
 }

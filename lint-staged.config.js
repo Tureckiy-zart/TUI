@@ -17,9 +17,8 @@ export default {
   // Validates against Theme Contract v1
   "src/FOUNDATION/tokens/themes/**/*.css": ["prettier --write", "pnpm theme:validate --"],
 
-  // Theme TypeScript files: Theme validation
-  // Note: These also get prettier/eslint from the generic TS rule above
-  "src/themes/*.ts": ["pnpm theme:validate --"],
+  // src/themes/*.ts are runtime configs (ThemeOverride) and barrels, not Theme Contract v1
+  // definitions; theme:validate is for CSS/TS files with --tm- token objects (see tools/theme-validator).
 
   // Extension themes (legacy root location): Prettier + Theme validation
   "themes/**/*.css": ["prettier --write", "pnpm theme:validate --"],

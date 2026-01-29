@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { Button } from "@/PRIMITIVES/Button";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { Portal } from "./Portal";
 

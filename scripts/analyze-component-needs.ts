@@ -68,7 +68,6 @@ const EXCLUDE_DIRS = [
   "coverage",
   "storybook-static",
   ".storybook",
-  "docs-app",
   "docs_archive",
 ];
 

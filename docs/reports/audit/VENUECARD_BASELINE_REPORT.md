@@ -72,17 +72,17 @@
 - Variants: `venueCardVariants`, `venueCardBadgeVariants`, `venueCardFooterBorderVariants`, `venueCardImageOverlayVariants`, `venueCardImagePlaceholderVariants`, `venueCardImageTransformVariants`, `venueCardMetadataRowVariants`
 
 **Layer Classification:** PATTERNS / cards (Domain-specific Extension)  
-**Location:** `src/PATTERNS/cards/cards/VenueCard/`
+**Location:** `src/PATTERNS/cards/VenueCard/`
 
 **Component Role (Preliminary):** Domain-specific venue card component that displays venue information (name, description, location, capacity, events count) using CardBase layout foundation. Supports featured variant with badge, image display, and animation support.
 
 ### Source Files
 
 **Implementation Files:**
-- `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx` (248 lines)
-- `src/PATTERNS/cards/cards/VenueCard/VenueCard.types.ts` (50 lines)
-- `src/PATTERNS/cards/cards/VenueCard/VenueCard.variants.ts` (163 lines)
-- `src/PATTERNS/cards/cards/VenueCard/index.ts` (18 lines)
+- `src/PATTERNS/cards/VenueCard/VenueCard.tsx` (248 lines)
+- `src/PATTERNS/cards/VenueCard/VenueCard.types.ts` (50 lines)
+- `src/PATTERNS/cards/VenueCard/VenueCard.variants.ts` (163 lines)
+- `src/PATTERNS/cards/VenueCard/index.ts` (18 lines)
 
 **Storybook Files:**
 - ❌ **MISSING** - No `VenueCard.stories.tsx` found
@@ -109,7 +109,7 @@
     - `MOTION_TOKENS.duration.*` (normal, slow)
 
 **Export Points:**
-- ✅ Exported from `src/PATTERNS/cards/cards/VenueCard/index.ts` (barrel export)
+- ✅ Exported from `src/PATTERNS/cards/VenueCard/index.ts` (barrel export)
 - ❓ Need to verify main library export (`src/index.ts`)
 
 ### External Dependencies
@@ -125,7 +125,7 @@
 - `@/FOUNDATION/tokens/components/icon` - `ICON_TOKENS`
 - `@/FOUNDATION/tokens/components/text` - `TEXT_TOKENS`
 - `@/FOUNDATION/tokens/components/motion` - `MOTION_TOKENS`
-- `@/PATTERNS/cards/cards/CardBase` - `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
+- `@/PATTERNS/cards/CardBase` - `CardBase`, `CardBaseContentWrapper`, `CardBaseFooterWrapper`, `CardBaseImageWrapper`
 - `@/PRIMITIVES/Heading` - `Heading`
 - `@/PRIMITIVES/Icon` - `Icon`
 - `@/PRIMITIVES/Link` - `Link`
@@ -410,9 +410,9 @@ export type VenueCardVariant = "default" | "featured";
 ### Pattern Comparison
 
 **Compared Components:**
-- ArtistCard (`src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`)
-- TicketCard (`src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`)
-- CardBase (`src/PATTERNS/cards/cards/CardBase/CardBase.tsx`)
+- ArtistCard (`src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`)
+- TicketCard (`src/PATTERNS/cards/TicketCard/TicketCard.tsx`)
+- CardBase (`src/PATTERNS/cards/CardBase/CardBase.tsx`)
 
 ### Alignment Analysis
 

@@ -31,10 +31,10 @@ CSS-in-JS/object lineHeight literals were found in theme/token definition files 
 ## Section B: Tailwind leading usages
 
 `leading-*` class usages (17 total matches):
-- `src/PATTERNS/filters/filters/FilterBar.tsx:25`
-- `src/PATTERNS/filters/filters/FilterSelect.tsx:171`
-- `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx:30`
-- `src/PATTERNS/menus/menus/hover-card/HoverCard.stories.tsx:59`
+- `src/PATTERNS/filters/FilterBar.tsx:25`
+- `src/PATTERNS/filters/FilterSelect.tsx:171`
+- `src/PATTERNS/menus/hover-card/HoverCard.stories.tsx:30`
+- `src/PATTERNS/menus/hover-card/HoverCard.stories.tsx:59`
 - `src/COMPOSITION/overlays/Popover.stories.tsx:26`
 - `src/COMPOSITION/overlays/Popover.stories.tsx:42`
 - `src/FOUNDATION/tokens/components/text.ts:53-58` (token mapping to leading-*)

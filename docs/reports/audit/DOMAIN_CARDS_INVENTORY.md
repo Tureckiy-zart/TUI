@@ -17,7 +17,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 1. EventCard
 
-**Path:** `src/DOMAIN/sections/EventCard/EventCard.tsx`  
+**Path:** `src/PATTERNS/cards/EventCard/EventCard.tsx`  
 **Layer:** DOMAIN  
 **Status:** Uses CardBase ✅
 
@@ -91,7 +91,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 2. ProfileCard
 
-**Path:** `src/DOMAIN/auth/auth/ProfileCard.tsx`  
+**Path:** `src/DOMAIN/auth/ProfileCard.tsx`  
 **Layer:** DOMAIN  
 **Status:** Uses Card (COMPOSITION) ✅
 
@@ -141,7 +141,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 3. VenueCard
 
-**Path:** `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`  
+**Path:** `src/PATTERNS/cards/VenueCard/VenueCard.tsx`  
 **Layer:** PATTERNS (domain-specific)  
 **Status:** Uses CardBase ✅
 
@@ -220,7 +220,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 4. ArtistCard
 
-**Path:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`  
+**Path:** `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`  
 **Layer:** PATTERNS (domain-specific)  
 **Status:** Uses CardBase ✅
 
@@ -300,7 +300,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 5. TicketCard
 
-**Path:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`  
+**Path:** `src/PATTERNS/cards/TicketCard/TicketCard.tsx`  
 **Layer:** PATTERNS (domain-specific)  
 **Status:** Uses CardBase ✅
 
@@ -396,7 +396,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 6. CategoryCard
 
-**Path:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`  
+**Path:** `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`  
 **Layer:** PATTERNS (domain-specific)  
 **Status:** Uses CardBase ✅
 
@@ -455,7 +455,7 @@ This document provides a complete inventory of all domain-level Card components,
 
 ## 7. PromoCard
 
-**Path:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx`  
+**Path:** `src/PATTERNS/cards/PromoCard/PromoCard.tsx`  
 **Layer:** PATTERNS (domain-specific)  
 **Status:** Uses CardBase ✅
 

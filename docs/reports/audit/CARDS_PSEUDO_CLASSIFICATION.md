@@ -46,37 +46,37 @@
 ### DOMAIN_CARD (7 components)
 
 #### 1. EventCard
-**Path:** `src/DOMAIN/sections/EventCard/EventCard.tsx`  
+**Path:** `src/PATTERNS/cards/EventCard/EventCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Event business entity with domain-specific props (title, date, venue, price, tickets) and unique domain logic (badge positioning, metadata rows, ticket button).
 
 #### 2. VenueCard
-**Path:** `src/PATTERNS/cards/cards/VenueCard/VenueCard.tsx`  
+**Path:** `src/PATTERNS/cards/VenueCard/VenueCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Venue business entity with domain-specific props (name, location, events count, capacity) and unique domain logic (popular badge, location metadata, events/capacity footer).
 
 #### 3. ArtistCard
-**Path:** `src/PATTERNS/cards/cards/ArtistCard/ArtistCard.tsx`  
+**Path:** `src/PATTERNS/cards/ArtistCard/ArtistCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Artist business entity with domain-specific props (name, genres, followers, plays) and unique domain logic (popular badge, genres display, followers/plays metadata).
 
 #### 4. TicketCard
-**Path:** `src/PATTERNS/cards/cards/TicketCard/TicketCard.tsx`  
+**Path:** `src/PATTERNS/cards/TicketCard/TicketCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Ticket business entity with domain-specific props (event, date, price, availability) and unique domain logic (VIP/discount badges, availability states, purchase button).
 
 #### 5. CategoryCard
-**Path:** `src/PATTERNS/cards/cards/CategoryCard/CategoryCard.tsx`  
+**Path:** `src/PATTERNS/cards/CategoryCard/CategoryCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Category business entity with domain-specific props (title, description, image) and unique domain logic (featured badge, image overlay).
 
 #### 6. PromoCard
-**Path:** `src/PATTERNS/cards/cards/PromoCard/PromoCard.tsx`  
+**Path:** `src/PATTERNS/cards/PromoCard/PromoCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents Promotional content business entity with domain-specific props (title, description, CTA) and unique domain logic (featured badge, CTA button with domain tokens).
 
 #### 7. ProfileCard
-**Path:** `src/DOMAIN/auth/auth/ProfileCard.tsx`  
+**Path:** `src/DOMAIN/auth/ProfileCard.tsx`  
 **Classification:** ✅ **DOMAIN_CARD**  
 **Justification:** Represents User Profile business entity with domain-specific props (name, email, avatar) and unique domain logic (profile validation, avatar placeholder).
 
@@ -93,7 +93,7 @@
 ### PSEUDO_CARD (1 component)
 
 #### 1. NotificationCenter.Panel
-**Path:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`  
+**Path:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`  
 **Classification:** ⚠️ **PSEUDO_CARD**  
 **Justification:** Uses Surface component with border, radius, shadow, padding (card-like structure) but is named as Panel, not Card. Serves as side drawer panel, not a card component.
 
@@ -136,7 +136,7 @@
 ### NOT_A_CARD (7 components)
 
 #### 1. CardBase
-**Path:** `src/PATTERNS/cards/cards/CardBase/CardBase.tsx`  
+**Path:** `src/PATTERNS/cards/CardBase/CardBase.tsx`  
 **Classification:** ✅ **NOT_A_CARD**  
 **Justification:** Foundation component (LOCKED). Base layout pattern for domain cards, not a card itself.
 
@@ -151,12 +151,12 @@
 **Justification:** Foundation component (LOCKED). Surface elevation variant container, not a card.
 
 #### 4. FeatureSection
-**Path:** `src/DOMAIN/sections/sections/FeatureSection.tsx`  
+**Path:** `src/DOMAIN/sections/FeatureSection.tsx`  
 **Classification:** ✅ **NOT_A_CARD**  
 **Justification:** Section component that uses Card components internally. It is a layout section, not a card component itself.
 
 #### 5. TrendingSection
-**Path:** `src/DOMAIN/sections/sections/TrendingSection.tsx`  
+**Path:** `src/DOMAIN/sections/TrendingSection.tsx`  
 **Classification:** ✅ **NOT_A_CARD**  
 **Justification:** Section component that uses Card component internally. It is a layout section, not a card component itself.
 
@@ -171,7 +171,7 @@
 **Justification:** Loading skeleton component for VenueCard. Mimics card structure for loading states but is not a card component.
 
 #### 8. HoverCard
-**Path:** `src/PATTERNS/menus/menus/hover-card/`  
+**Path:** `src/PATTERNS/menus/hover-card/`  
 **Classification:** ✅ **NOT_A_CARD**  
 **Justification:** Menu component (Popover wrapper) for hover-triggered content. The name "Card" is misleading - it's a menu component, not a card component.
 

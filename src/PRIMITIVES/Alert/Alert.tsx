@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
-import { cn } from "@/FOUNDATION/lib/utils";
 import { ALERT_TOKENS } from "@/FOUNDATION/tokens/components/alert";
 
 /**
@@ -36,7 +35,10 @@ const alertVariants = tokenCVA({
   },
 });
 
-export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AlertProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "className" | "style"
+> {
   /**
    * Alert variant style
    * @default "default"
@@ -44,18 +46,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: AlertVariant;
 }
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        role="alert"
-        className={cn(alertVariants({ variant }), className)}
-        {...props}
-      />
-    );
-  },
-);
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({ variant, ...props }, ref) => {
+  // className and style are forbidden from public API - only CVA output is used
+  return <div ref={ref} role="alert" className={alertVariants({ variant })} {...props} />;
+});
 Alert.displayName = "Alert";
 
 export { Alert, alertVariants };

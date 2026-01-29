@@ -120,7 +120,7 @@ Panel fills the semantic gap between Box and Card:
     <div className="space-y-sm">
       <div className="flex items-center justify-between">
         <Text>Notification preferences</Text>
-        <Text tone="muted" size="sm">Enabled</Text>
+        <Text typographyRole="meta" color="muted" size="sm">Enabled</Text>
       </div>
     </div>
   </Stack>

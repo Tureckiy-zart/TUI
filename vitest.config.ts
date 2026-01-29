@@ -9,6 +9,8 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
+    // Coverage runs are significantly slower; keep tests meaningful but avoid false timeouts.
+    testTimeout: 30_000,
     include: [
       "src/**/*.{test,spec}.{ts,tsx}",
       "eslint-rules/**/*.{test,spec}.{ts,tsx}",
@@ -20,23 +22,30 @@ export default defineConfig({
     },
     coverage: {
       provider: "v8",
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "html", "lcov"],
       exclude: [
-        "node_modules/",
+        "**/node_modules/**",
         "dist/",
         "**/*.stories.{ts,tsx}",
         "**/*.test.{ts,tsx}",
         "**/*.spec.{ts,tsx}",
-        "src/index.ts",
+        // --- Canonical coverage exceptions ---
+        "**/index.tпs",
+        "**/*.index.ts",
+        // Internal test harness (not part of public library surface)
+        "src/test/**",
+        // Pure token definition files (documented in docs/reports/COVERAGE_EXCEPTIONS.md)
+        "src/FOUNDATION/tokens/**",
+        // Static theme exports (documented in docs/reports/COVERAGE_EXCEPTIONS.md)
+        "src/themes/*.ts",
         ".storybook/",
         "storybook-static/",
       ],
       thresholds: {
-        // Will be increased as more tests are added
-        branches: 0,
-        functions: 0,
-        lines: 0,
-        statements: 0,
+        branches: 95,
+        functions: 99,
+        lines: 99,
+        statements: 99,
       },
     },
   },

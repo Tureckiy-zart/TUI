@@ -17,9 +17,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Note:** To add entries for future releases, add them under this [Unreleased] section. When a version is published to npm, move the entry to a versioned section with the exact npm publish date.
 
+### Added
+
+- (none)
+
+### Changed
+
+- (none)
+
+### Fixed
+
+- (none)
+
+## [2.3.0] - 2026-01-29
+
+### Added
+
+- **Runtime Utilities Lock (TUNG-028):** Runtime utilities (`tokenCVA`, `cn`) are now locked as private Foundation implementation details. They must be imported directly from `@/FOUNDATION/lib/*` and are forbidden from `@/index` exports.
+- **ESLint Rules:** Added `no-token-imports-from-index` and `no-runtime-utils-from-index` rules to enforce canonical import patterns and prevent import oscillation.
+- **Token Import Class Split:** Introduced clear distinction between Component Tokens (must import from `@/FOUNDATION/tokens/components/**`) and Foundation Tokens (must import from `@/index`), eliminating contradictory enforcement.
+- **Index Import Clarification:** Explicitly documented allowed imports from `@/index` in DOMAIN/PATTERNS: UI components (Box, Button, Text, Skeleton) are allowed, while runtime utilities are forbidden. This prevents automated refactors from incorrectly replacing valid UI imports.
+- **Execution tests:** Added and extended execution tests for coverage (DateRangePicker, FilterBar, FilterSelect, PriceRangeSlider, SearchInput, hooks provider harness, motion observer, foundation/hooks/themes runtime smoke).
+
 ### Changed
 
 - Calibration: textColors.day.muted for AA on elevated surfaces
+- **Import Patterns:** Normalized token usage across all consumer files (DOMAIN, PATTERNS), replacing raw utility classes with token props and Foundation API components.
+- **Token Usage:** Closed all 7 ALLOWED gaps from TOKEN_REALITY_AUDIT_027, replacing raw Tailwind classes with Text, Heading, Box, Stack, Row, Container components.
+- **Public Index Boundary:** `@/index` is now explicitly public-only and must NOT export runtime utilities or internal helpers.
+- **Index public API test:** Execution test no longer imports `FOUNDATION/index` or `EXTENSIONS/index` barrel files (barrels removed).
+
+### Fixed
+
+- **Import Oscillation:** Resolved import oscillation between `@/index` and `@/FOUNDATION/tokens/components/**` through explicit ESLint enforcement.
+- **Runtime Cycles:** Eliminated runtime cycles and order-dependent initialization failures by enforcing direct token imports.
+- **Token Import Conflicts:** Resolved conflict between ESLint rules for token imports by introducing token class split.
 
 ## [2.1.1] - 2026-01-24
 

@@ -57,7 +57,8 @@
     },
 
     /* Output */
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "."
   },
   "include": ["src/**/*", "eslint-rules/**/*", "tailwind.safelist.ts", "tailwind.config.ts"],
   "exclude": [

@@ -43,7 +43,7 @@
 | Separator | `src/COMPOSITION/controls/Separator/` | composite | 2025-12-25 |
 | RangeSlider | `src/COMPOSITION/controls/RangeSlider/` | composite | 2025-12-25 |
 | Timeline | `src/PATTERNS/lists/Timeline/` | pattern | 2025-12-27 |
-| HoverCard | `src/PATTERNS/menus/menus/hover-card/` | pattern | 2025-12-27 |
+| HoverCard | `src/PATTERNS/menus/hover-card/` | pattern | 2025-12-27 |
 | Dialog | `src/COMPOSITION/overlays/Dialog.tsx` | overlay | 2025-12-27 |
 | Portal | `src/COMPOSITION/overlays/Portal.tsx` | overlay | 2025-12-27 |
 | Tooltip | `src/COMPOSITION/overlays/Tooltip.tsx` | overlay | 2025-12-25 |

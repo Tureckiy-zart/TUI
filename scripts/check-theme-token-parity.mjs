@@ -7,8 +7,9 @@
  * Compares token sets against the canonical registry in required-tokens.ts.
  *
  * Checks themes in:
- * - src/FOUNDATION/tokens/themes/**\/*.css (Foundation themes)
- * - src/EXTENSIONS/themes/**\/*.css (Extension themes)
+ * - src/EXTENSIONS/themes/**\/*.css (Extension themes — canonical output per ARCHITECTURE_LOCK)
+ *
+ * Note: src/FOUNDATION/tokens/themes/ is not used; generated themes go only to EXTENSIONS/themes/.
  *
  * Usage:
  *   node scripts/check-theme-token-parity.mjs
@@ -29,11 +30,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const repoRoot = join(__dirname, "..");
 
-// Theme directories to check
-const THEME_DIRECTORIES = [
-  { path: "src/FOUNDATION/tokens/themes", label: "Foundation" },
-  { path: "src/EXTENSIONS/themes", label: "Extension" },
-];
+// Theme directories to check (canonical: EXTENSIONS/themes per ARCHITECTURE_LOCK)
+const THEME_DIRECTORIES = [{ path: "src/EXTENSIONS/themes", label: "Extension" }];
 
 // Import required tokens registry
 const requiredTokensPath = join(repoRoot, "src/FOUNDATION/tokens/required-tokens.ts");
@@ -85,11 +83,6 @@ function findCSSFiles(dirPath, files = []) {
     if (stat.isDirectory()) {
       findCSSFiles(fullPath, files);
     } else if (stat.isFile() && extname(entry) === ".css") {
-      // For Foundation themes, only check theme.*.css files
-      // For Extension themes, check all CSS files
-      if (dirPath.includes("FOUNDATION") && !entry.startsWith("theme.")) {
-        continue;
-      }
       files.push(fullPath);
     }
   }
@@ -128,11 +121,8 @@ for (const dir of THEME_DIRECTORIES) {
 }
 
 if (!foundAnyThemes) {
-  console.warn("\n⚠️  No theme CSS files found in any location.");
-  console.log("   Theme files should be in:");
-  for (const dir of THEME_DIRECTORIES) {
-    console.log(`   - ${dir.path}/`);
-  }
+  console.warn("\n⚠️  No theme CSS files found.");
+  console.log("   Generated theme CSS should be in: src/EXTENSIONS/themes/");
   process.exit(0); // Not an error if themes don't exist yet
 }
 

@@ -35,6 +35,20 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Closed System Compliance
+        run: |
+          echo "🔍 Running Closed System v2 Compliance Check..."
+          pnpm audit:consumer-violations src/ || exit_code=$?
+          if [ ${exit_code:-0} -ne 0 ]; then
+            echo ""
+            echo "❌ Closed System Compliance FAILED"
+            echo "   CRITICAL/ERROR violations detected in consumer code"
+            echo "   See: docs/architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md"
+            exit 1
+          fi
+          echo ""
+          echo "✅ Closed System Compliance PASSED"
+
       - name: Prettier Check
         run: pnpm format:check
 

@@ -32,11 +32,7 @@ export interface ProgressProps {
    * @default "md"
    */
   size?: ProgressSize;
-
-  /**
-   * Additional CSS classes (Extension layer allows className)
-   */
-  className?: string;
+  // className removed - Foundation Enforcement compliance
 }
 
 /**
@@ -79,7 +75,8 @@ export const progressVariants = tokenCVA({
  * ```
  */
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ value, max = 100, size = "md", className }, ref) => {
+  ({ value, max = 100, size = "md" }, ref) => {
+    // className and style are forbidden from public API - only token-based className is used
     // Calculate percentage and clamp to 0-100 range
     const percentage = Math.min(100, Math.max(0, (value / max) * 100));
     const effectiveSize = size || "md";
@@ -91,7 +88,7 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
-        className={cn(progressVariants({ size }), PROGRESS_TOKENS.track.bg, className)}
+        className={cn(progressVariants({ size }), PROGRESS_TOKENS.track.bg)}
       >
         <div
           className={cn(

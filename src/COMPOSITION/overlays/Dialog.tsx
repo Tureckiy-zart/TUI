@@ -82,6 +82,15 @@ export interface DialogProps extends React.ComponentPropsWithoutRef<typeof Modal
  * **Note:** This component is a semantic wrapper over Modal.Root and Modal.Content.
  * It provides Dialog-specific subcomponents but uses the new Radix-based Modal internally.
  */
+type DialogHeaderChildProps = { children?: React.ReactNode };
+
+function getDisplayName(node: React.ReactNode): string | undefined {
+  if (!React.isValidElement(node)) return undefined;
+  const elementType = node.type;
+  if (typeof elementType === "string") return elementType;
+  return (elementType as { displayName?: string }).displayName;
+}
+
 const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, ...props }) => {
   const titleIdRef = React.useId();
   const descriptionIdRef = React.useId();
@@ -89,64 +98,59 @@ const DialogRoot: React.FC<DialogProps> = ({ titleId, descriptionId, children, .
   const finalTitleId = titleId || titleIdRef;
   const finalDescriptionId = descriptionId || descriptionIdRef;
 
-  // Collect titleId and descriptionId from children to pass to Modal.Content
+  let hasDialogTitle = false;
   let actualTitleId: string | undefined;
   let actualDescriptionId: string | undefined;
-  let hasDialogTitle = false;
 
   // First pass: check for DialogTitle in children (before processing)
   React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child)) {
-      const childDisplayName = (child.type as any)?.displayName;
-      if (childDisplayName === "DialogTitle") {
-        hasDialogTitle = true;
-        actualTitleId = finalTitleId;
-      }
-      if (childDisplayName === "DialogHeader") {
-        React.Children.forEach((child as any).props.children, (grandchild: any) => {
-          if (React.isValidElement(grandchild)) {
-            const grandchildDisplayName = (grandchild.type as any)?.displayName;
-            if (grandchildDisplayName === "DialogTitle") {
-              hasDialogTitle = true;
-              actualTitleId = finalTitleId;
-            }
-            if (grandchildDisplayName === "DialogDescription") {
-              actualDescriptionId = finalDescriptionId;
-            }
-          }
-        });
-      }
+    const childDisplayName = getDisplayName(child);
+    if (!childDisplayName) return;
+    if (childDisplayName === "DialogTitle") {
+      hasDialogTitle = true;
+      actualTitleId = finalTitleId;
+    }
+    if (childDisplayName === "DialogHeader" && React.isValidElement(child)) {
+      const headerChildren = (child as React.ReactElement<DialogHeaderChildProps>).props.children;
+      React.Children.forEach(headerChildren, (grandchild) => {
+        const grandchildDisplayName = getDisplayName(grandchild);
+        if (!grandchildDisplayName) return;
+        if (grandchildDisplayName === "DialogTitle") {
+          hasDialogTitle = true;
+          actualTitleId = finalTitleId;
+        }
+        if (grandchildDisplayName === "DialogDescription") {
+          actualDescriptionId = finalDescriptionId;
+        }
+      });
     }
   });
 
   const processedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      // Check by displayName since forwardRef components don't work with ===
-      const childDisplayName = (child.type as any)?.displayName;
-      // Pass titleId/descriptionId to DialogHeader
-      if (childDisplayName === "DialogHeader") {
-        return React.cloneElement(child as React.ReactElement<any>, {
-          titleId: finalTitleId,
-          descriptionId: finalDescriptionId,
-        });
-      }
-      // For standalone DialogTitle or DialogDescription
-      if (childDisplayName === "DialogTitle") {
-        hasDialogTitle = true;
-        actualTitleId = finalTitleId;
-        return React.cloneElement(child as React.ReactElement<any>, {
-          titleId: finalTitleId,
-        });
-      }
-      if (childDisplayName === "DialogDescription") {
-        actualDescriptionId = finalDescriptionId;
-        return React.cloneElement(child as React.ReactElement<any>, {
-          descriptionId: finalDescriptionId,
-        });
-      }
+    const childDisplayName = getDisplayName(child);
+    if (!childDisplayName || !React.isValidElement(child)) return child;
+    if (childDisplayName === "DialogHeader") {
+      return React.cloneElement(child as React.ReactElement<DialogHeaderProps>, {
+        titleId: finalTitleId,
+        descriptionId: finalDescriptionId,
+      });
+    }
+    if (childDisplayName === "DialogTitle") {
+      hasDialogTitle = true;
+      actualTitleId = finalTitleId;
+      return React.cloneElement(child as React.ReactElement<DialogTitleProps>, {
+        titleId: finalTitleId,
+      });
+    }
+    if (childDisplayName === "DialogDescription") {
+      actualDescriptionId = finalDescriptionId;
+      return React.cloneElement(child as React.ReactElement<DialogDescriptionProps>, {
+        descriptionId: finalDescriptionId,
+      });
     }
     return child;
   });
+
   if (!hasDialogTitle) {
     actualTitleId = finalTitleId;
   }
@@ -190,21 +194,17 @@ const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
         {...props}
       >
         {React.Children.map(children, (child) => {
-          if (React.isValidElement(child)) {
-            // Check by displayName since forwardRef components don't work with ===
-            const childDisplayName = (child.type as any)?.displayName;
-            // Pass titleId to DialogTitle if present
-            if (childDisplayName === "DialogTitle" && titleId) {
-              return React.cloneElement(child as React.ReactElement<any>, {
-                titleId: titleId,
-              });
-            }
-            // Pass descriptionId to DialogDescription if present
-            if (childDisplayName === "DialogDescription" && descriptionId) {
-              return React.cloneElement(child as React.ReactElement<any>, {
-                descriptionId: descriptionId,
-              });
-            }
+          const childDisplayName = getDisplayName(child);
+          if (!childDisplayName || !React.isValidElement(child)) return child;
+          if (childDisplayName === "DialogTitle" && titleId) {
+            return React.cloneElement(child as React.ReactElement<DialogTitleProps>, {
+              titleId: titleId,
+            });
+          }
+          if (childDisplayName === "DialogDescription" && descriptionId) {
+            return React.cloneElement(child as React.ReactElement<DialogDescriptionProps>, {
+              descriptionId: descriptionId,
+            });
           }
           return child;
         })}
@@ -226,10 +226,60 @@ export interface DialogTitleProps extends Omit<
 }
 
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ titleId, children, ...props }, ref) => {
+  (
+    {
+      titleId,
+      children,
+      role,
+      tabIndex,
+      title,
+      dir,
+      lang,
+      onClick,
+      onMouseDown,
+      onMouseUp,
+      onMouseEnter,
+      onMouseLeave,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    },
+    ref,
+  ) => {
+    const domProps = {
+      id: titleId,
+      role,
+      tabIndex,
+      title,
+      dir,
+      lang,
+      onClick,
+      onMouseDown,
+      onMouseUp,
+      onMouseEnter,
+      onMouseLeave,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-describedby": ariaDescribedBy,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      "aria-busy": ariaBusy,
+    };
+
     return (
       <DialogPrimitive.Title asChild>
-        <Heading ref={ref} as="h2" level={4} weight="semibold" id={titleId} {...props}>
+        <Heading as="h2" level={4} weight="semibold" ref={ref} {...domProps}>
           {children}
         </Heading>
       </DialogPrimitive.Title>

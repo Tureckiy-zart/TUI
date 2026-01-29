@@ -20,7 +20,7 @@ This document records the architectural decision that **Overlay Panel components
 
 During component refactoring and architecture reviews, questions arise about whether overlay panels should use Card or CardBase components for their structure. This decision clarifies the semantic distinction and prevents architectural drift.
 
-**Example Component:** `NotificationCenter.Panel` (`src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`)
+**Example Component:** `NotificationCenter.Panel` (`src/DOMAIN/notifications/NotificationCenter.Panel.tsx`)
 
 ---
 
@@ -171,7 +171,7 @@ Card components are responsible for:
 
 ### NotificationCenter.Panel
 
-**Location:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+**Location:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
 
 **Structure:**
 - Portal + Backdrop + Panel container
@@ -226,7 +226,7 @@ Card components are responsible for:
 ## References
 
 - **Baseline Report:** `docs/reports/audit/NotificationCenter.Panel_BASELINE_REPORT.md`
-- **Component:** `src/DOMAIN/notifications/notifications/NotificationCenter.Panel.tsx`
+- **Component:** `src/DOMAIN/notifications/NotificationCenter.Panel.tsx`
 - **Card Component:** `src/COMPOSITION/layout/Card/Card.tsx`
 - **Surface Component:** `src/COMPOSITION/layout/Surface/Surface.tsx`
 

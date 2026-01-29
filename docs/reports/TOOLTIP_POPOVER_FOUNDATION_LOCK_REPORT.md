@@ -222,10 +222,10 @@ Popover is not exported from any public entry point. It exists as an internal co
 
 ### File Locations
 
-- **Root Component**: `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx`
-- **Trigger Component**: `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx`
-- **Content Component**: `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx`
-- **Barrel Export**: `src/PATTERNS/menus/menus/hover-card/index.ts`
+- **Root Component**: `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx`
+- **Trigger Component**: `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx`
+- **Content Component**: `src/PATTERNS/menus/hover-card/HoverCardContent.tsx`
+- **Barrel Export**: `src/PATTERNS/menus/hover-card/index.ts`
 - **Test Files**: None found
 
 ### Technology Stack
@@ -241,12 +241,12 @@ Popover is not exported from any public entry point. It exists as an internal co
 ### Layer Classification
 
 - **Layer**: Extension
-- **Directory**: `src/PATTERNS/menus/menus/hover-card/`
+- **Directory**: `src/PATTERNS/menus/hover-card/`
 - **Classification**: PATTERNS = Extension layer (per architecture documentation)
 
 ### Exports
 
-From `src/PATTERNS/menus/menus/hover-card/index.ts`:
+From `src/PATTERNS/menus/hover-card/index.ts`:
 
 ```typescript
 export { HoverCardContent, type HoverCardContentProps } from "./HoverCardContent";
@@ -258,7 +258,7 @@ export { HoverCardTrigger, type HoverCardTriggerProps } from "./HoverCardTrigger
 
 **Status**: Public API  
 **Exported from `src/index.ts`**: Yes (lines 499-505)  
-**Exported from `src/PATTERNS/menus/menus/index.ts`**: Yes (lines 9-17)
+**Exported from `src/PATTERNS/menus/index.ts`**: Yes (lines 9-17)
 
 HoverCard is part of the public API and is exported from the main library index.
 
@@ -420,7 +420,7 @@ POPOVER_TOKENS = {
 | ------------------- | ---------- | -------------------------------------- | ----------------------------- |
 | Tooltip             | Extension  | `src/COMPOSITION/overlays/`            | COMPOSITION = Extension layer |
 | Popover             | Extension  | `src/COMPOSITION/overlays/`            | COMPOSITION = Extension layer |
-| HoverCard           | Extension  | `src/PATTERNS/menus/menus/hover-card/` | PATTERNS = Extension layer    |
+| HoverCard           | Extension  | `src/PATTERNS/menus/hover-card/` | PATTERNS = Extension layer    |
 | Tooltip Tokens      | Foundation | `src/FOUNDATION/tokens/components/`    | FOUNDATION = Foundation layer |
 | Popover Tokens      | Foundation | `src/FOUNDATION/tokens/components/`    | FOUNDATION = Foundation layer |
 | Positioning Utility | Extension  | `src/COMPOSITION/overlays/utils/`      | COMPOSITION = Extension layer |
@@ -573,9 +573,9 @@ HoverCard
 
 - `src/COMPOSITION/overlays/Tooltip.tsx` (153 lines)
 - `src/COMPOSITION/overlays/Popover.tsx` (141 lines)
-- `src/PATTERNS/menus/menus/hover-card/HoverCardRoot.tsx` (175 lines)
-- `src/PATTERNS/menus/menus/hover-card/HoverCardTrigger.tsx` (80 lines)
-- `src/PATTERNS/menus/menus/hover-card/HoverCardContent.tsx` (62 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardRoot.tsx` (175 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardTrigger.tsx` (80 lines)
+- `src/PATTERNS/menus/hover-card/HoverCardContent.tsx` (62 lines)
 
 ### Storybook Files
 
@@ -593,8 +593,8 @@ HoverCard
 
 ### Barrel Export Files
 
-- `src/PATTERNS/menus/menus/hover-card/index.ts` (10 lines)
-- `src/PATTERNS/menus/menus/index.ts` (18 lines)
+- `src/PATTERNS/menus/hover-card/index.ts` (10 lines)
+- `src/PATTERNS/menus/index.ts` (18 lines)
 
 ### Test Files
 

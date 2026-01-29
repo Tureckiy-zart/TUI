@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
@@ -9,7 +9,7 @@ const meta: Meta<typeof Text> = {
     docs: {
       description: {
         component:
-          "Text component for general-purpose text. Supports 5 sizes (xs, sm, md, lg, xl), 4 weights, tone variants, and polymorphic `as` prop for semantic HTML elements. Uses sans-serif font family.\n\n" +
+          "Text component for general-purpose text. Supports 5 sizes (xs, sm, md, lg, xl), 4 weights, typographyRole + color props for semantic text styling, and polymorphic `as` prop for semantic HTML elements. Uses sans-serif font family.\n\n" +
           "**Note:** This is a low-level text component. For typography system overview, see `Compositions/Typography`. For semantic typography components (Heading, Body, Caption, etc.), see `Components/Typography/`.",
       },
     },
@@ -34,13 +34,31 @@ const meta: Meta<typeof Text> = {
         defaultValue: { summary: "normal" },
       },
     },
-    tone: {
+    typographyRole: {
       control: { type: "select" },
-      options: ["default", "muted"],
-      description: "Text color tone",
+      options: ["body", "meta", "label", "caption", "display", "h1", "h2", "h3", "h4", "h5", "h6"],
+      description: "Typography role for semantic text styling",
       table: {
-        type: { summary: "default | muted" },
-        defaultValue: { summary: "default" },
+        type: { summary: "TypographyRole" },
+      },
+    },
+    color: {
+      control: { type: "select" },
+      options: [
+        "primary",
+        "secondary",
+        "muted",
+        "tertiary",
+        "inverse",
+        "disabled",
+        "success",
+        "warning",
+        "error",
+        "info",
+      ],
+      description: "Text color token (enforced by typographyRole)",
+      table: {
+        type: { summary: "TextToken" },
       },
     },
     as: {
@@ -88,11 +106,15 @@ export const AllWeights: Story = {
   ),
 };
 
-export const Tone: Story = {
+export const ColorVariants: Story = {
   render: () => (
     <div className="space-y-md">
-      <Text tone="default">Default Text</Text>
-      <Text tone="muted">Muted Text</Text>
+      <Text typographyRole="body" color="primary">
+        Primary Text
+      </Text>
+      <Text typographyRole="meta" color="muted">
+        Muted Text
+      </Text>
     </div>
   ),
 };
@@ -115,7 +137,7 @@ export const CombinedProps: Story = {
       <Text size="lg" weight="bold">
         Large Bold Text
       </Text>
-      <Text size="sm" weight="medium" tone="muted">
+      <Text size="sm" weight="medium" typographyRole="meta" color="muted">
         Small Medium Muted Text
       </Text>
       <Text size="xl" weight="semibold">
@@ -132,7 +154,7 @@ export const UsageExamples: Story = {
         <Text size="lg" weight="semibold">
           Section Title
         </Text>
-        <Text size="md" tone="muted">
+        <Text size="md" typographyRole="meta" color="muted">
           This is supporting text that provides additional context or description.
         </Text>
       </div>
@@ -140,7 +162,7 @@ export const UsageExamples: Story = {
         <Text size="sm" weight="medium">
           Label Text
         </Text>
-        <Text size="xs" tone="muted">
+        <Text size="xs" typographyRole="meta" color="muted">
           Helper text or additional information.
         </Text>
       </div>
@@ -186,16 +208,16 @@ export const Matrix: Story = {
         <div className="border-t pt-lg">
           <div className="mb-md">
             <Text size="lg" weight="bold">
-              Tone Variants
+              Color Variants
             </Text>
           </div>
           <div className="space-y-sm">
             {sizes.map((size) => (
               <div key={size} className="flex gap-lg">
-                <Text size={size} tone="default">
-                  Default foreground
+                <Text size={size} typographyRole="body" color="primary">
+                  Primary foreground
                 </Text>
-                <Text size={size} tone="muted">
+                <Text size={size} typographyRole="meta" color="muted">
                   Muted foreground
                 </Text>
               </div>
@@ -224,7 +246,9 @@ export const States: Story = {
             Muted Tone
           </Text>
         </div>
-        <Text tone="muted">This is text in muted/secondary foreground color.</Text>
+        <Text typographyRole="meta" color="muted">
+          This is text in muted/secondary foreground color.
+        </Text>
       </div>
       <div>
         <div className="mb-xs">
@@ -233,16 +257,16 @@ export const States: Story = {
           </Text>
         </div>
         <div className="space-y-xs">
-          <Text weight="normal" tone="default">
-            Normal weight, default color
+          <Text weight="normal" typographyRole="body" color="primary">
+            Normal weight, primary color
           </Text>
-          <Text weight="normal" tone="muted">
+          <Text weight="normal" typographyRole="meta" color="muted">
             Normal weight, muted color
           </Text>
-          <Text weight="bold" tone="default">
-            Bold weight, default color
+          <Text weight="bold" typographyRole="body" color="primary">
+            Bold weight, primary color
           </Text>
-          <Text weight="bold" tone="muted">
+          <Text weight="bold" typographyRole="meta" color="muted">
             Bold weight, muted color
           </Text>
         </div>

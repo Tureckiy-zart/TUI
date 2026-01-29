@@ -1,5 +1,6 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import { Box } from "@/COMPOSITION/layout/Box";
 import { Skeleton } from "./Skeleton";
 
 const meta: Meta<typeof Skeleton> = {
@@ -58,10 +59,18 @@ export const Inline: Story = {
   render: (args) => (
     <div className="space-y-2">
       <p>
-        Loading <Skeleton {...args} className="w-20" /> content
+        Loading{" "}
+        <Box as="span" className="inline-block w-20">
+          <Skeleton {...args} />
+        </Box>{" "}
+        content
       </p>
       <p>
-        Another <Skeleton {...args} className="w-32" /> example
+        Another{" "}
+        <Box as="span" className="inline-block w-32">
+          <Skeleton {...args} />
+        </Box>{" "}
+        example
       </p>
     </div>
   ),
@@ -103,14 +112,22 @@ export const AllVariants: Story = {
       <div className="space-y-2">
         <h3 className="text-sm font-semibold">Text Variant</h3>
         <Skeleton variant="text" />
-        <Skeleton variant="text" className="w-3/4" />
-        <Skeleton variant="text" className="w-1/2" />
+        <Box className="w-3/4">
+          <Skeleton variant="text" />
+        </Box>
+        <Box className="w-1/2">
+          <Skeleton variant="text" />
+        </Box>
       </div>
 
       <div className="space-y-2">
         <h3 className="text-sm font-semibold">Inline Variant</h3>
         <p>
-          Loading <Skeleton variant="inline" className="w-20" /> content inline
+          Loading{" "}
+          <Box as="span" className="inline-block w-20">
+            <Skeleton variant="inline" />
+          </Box>{" "}
+          content inline
         </p>
       </div>
 
@@ -145,15 +162,21 @@ export const CardLoading: Story = {
       <div className="flex items-center gap-4">
         <Skeleton variant="circle" />
         <div className="flex-1 space-y-2">
-          <Skeleton variant="text" className="w-3/4" />
-          <Skeleton variant="text" className="w-1/2" />
+          <Box className="w-3/4">
+            <Skeleton variant="text" />
+          </Box>
+          <Box className="w-1/2">
+            <Skeleton variant="text" />
+          </Box>
         </div>
       </div>
       <Skeleton variant="block" />
       <div className="space-y-2">
         <Skeleton variant="text" />
         <Skeleton variant="text" />
-        <Skeleton variant="text" className="w-5/6" />
+        <Box className="w-5/6">
+          <Skeleton variant="text" />
+        </Box>
       </div>
     </div>
   ),
@@ -169,8 +192,12 @@ export const ListLoading: Story = {
         <div key={i} className="flex items-center gap-4">
           <Skeleton variant="circle" />
           <div className="flex-1 space-y-2">
-            <Skeleton variant="text" className="w-3/4" />
-            <Skeleton variant="text" className="w-1/2" />
+            <Box className="w-3/4">
+              <Skeleton variant="text" />
+            </Box>
+            <Box className="w-1/2">
+              <Skeleton variant="text" />
+            </Box>
           </div>
         </div>
       ))}
