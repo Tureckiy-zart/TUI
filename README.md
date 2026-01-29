@@ -3,18 +3,18 @@
 **Token-driven UI architecture for long-living React products**
 Strict. Predictable. Built for system-level consistency.
 
-![Release](https://img.shields.io/github/v/tag/Tureckiy-zart/tenerife-ui?style=for-the-badge&sort=semver)
-![npm version](https://img.shields.io/npm/v/@tenerife.music/ui?style=for-the-badge)
+![Release](https://img.shields.io/badge/release-v2.3.0-blue?style=for-the-badge)
+![npm version](https://img.shields.io/badge/npm-v2.3.0-blue?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18+-blue?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38b2ac?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Current Release:** [v2.1.1](CHANGELOG.md#211) (npm)  
+**Current Release:** [v2.3.0](CHANGELOG.md#230) (npm)  
 **Next Release:** [Unreleased] — See [CHANGELOG](CHANGELOG.md#unreleased)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Tureckiy-zart/tenerife-ui/main/.github/banner.png" width="100%" alt="TUI Banner" />
+  <img src=".github/banner.png" width="100%" alt="TUI Banner" />
 </p>
 
 <p align="center">

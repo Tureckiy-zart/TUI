@@ -66,8 +66,7 @@ describe("Motion / Observer Execution Coverage", () => {
       // Create a mock element
       const mockElement = document.createElement("div");
       if (result.current.ref.current === null) {
-        // @ts-expect-error - ref is a RefObject, but we're testing execution
-        result.current.ref.current = mockElement;
+        (result.current.ref as { current: HTMLElement | null }).current = mockElement;
       }
 
       expect(result.current.ref).toBeDefined();
@@ -146,14 +145,8 @@ describe("Motion / Observer Execution Coverage", () => {
 
     it("should execute with animation config", () => {
       const result = resolveComponentAnimations({
-        enter: {
-          duration: "fast",
-          easing: "ease-in-out",
-        },
-        exit: {
-          duration: "slow",
-          easing: "ease-out",
-        },
+        animation: "fadeIn",
+        hoverAnimation: "hoverLift",
       });
 
       expect(result).toBeDefined();
@@ -162,20 +155,18 @@ describe("Motion / Observer Execution Coverage", () => {
 
     it("should handle partial animation config", () => {
       const result = resolveComponentAnimations({
-        enter: {
-          duration: "medium",
-        },
+        animation: "fadeInUp",
       });
 
       expect(result).toBeDefined();
     });
 
     it("should handle different duration values", () => {
-      const durations = ["fast", "medium", "slow"] as const;
+      const presets = ["fadeIn", "fadeInUp", "slideInUp"] as const;
 
-      for (const duration of durations) {
+      for (const animation of presets) {
         const result = resolveComponentAnimations({
-          enter: { duration },
+          animation,
         });
 
         expect(result).toBeDefined();

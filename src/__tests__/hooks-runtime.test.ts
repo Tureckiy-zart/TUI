@@ -10,14 +10,22 @@
  * @block BLOCK_03_HOOKS_PROVIDER_HARNESS
  */
 
-import { renderHook, act } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useModal } from "@/hooks/useModal";
-import { useLocalToast } from "@/hooks/useToast";
-import { useGlobalToast } from "@/hooks/useGlobalToast";
+import { toast as toastImperative, useGlobalToast } from "@/hooks/useGlobalToast";
+import { useModal, useModalManager } from "@/hooks/useModal";
+import { useLocalToast, useToastManager } from "@/hooks/useToast";
 
 describe("Hooks Runtime Coverage", () => {
+  beforeEach(() => {
+    vi.useRealTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   describe("useModal", () => {
     it("should return correct shape and callable API", () => {
       const { result } = renderHook(() => useModal(false));
@@ -74,6 +82,36 @@ describe("Hooks Runtime Coverage", () => {
     });
   });
 
+  describe("useModalManager", () => {
+    it("should manage multiple modals by id", () => {
+      const { result } = renderHook(() => useModalManager());
+
+      expect(result.current.isModalOpen("a")).toBe(false);
+      expect(result.current.getModalData("a")).toBeUndefined();
+
+      act(() => {
+        result.current.openModal("a", { payload: 1 });
+      });
+
+      expect(result.current.isModalOpen("a")).toBe(true);
+      expect(result.current.getModalData("a")).toEqual({ payload: 1 });
+
+      act(() => {
+        result.current.toggleModal("a");
+      });
+
+      expect(result.current.isModalOpen("a")).toBe(false);
+      expect(result.current.getModalData("a")).toEqual({ payload: 1 });
+
+      act(() => {
+        result.current.closeModal("a");
+      });
+
+      expect(result.current.isModalOpen("a")).toBe(false);
+      expect(result.current.getModalData("a")).toBeUndefined();
+    });
+  });
+
   describe("useLocalToast (useToast)", () => {
     it("should return correct shape and callable API", () => {
       const { result } = renderHook(() => useLocalToast());
@@ -100,8 +138,8 @@ describe("Hooks Runtime Coverage", () => {
       expect(toastId!).toBeDefined();
       expect(typeof toastId!).toBe("string");
       expect(result.current.toasts.length).toBe(1);
-      expect(result.current.toasts[0].type).toBe("success");
-      expect(result.current.toasts[0].title).toBe("Test Toast");
+      expect(result.current.toasts[0]?.type).toBe("success");
+      expect(result.current.toasts[0]?.title).toBe("Test Toast");
     });
 
     it("should handle dismiss action", () => {
@@ -159,6 +197,90 @@ describe("Hooks Runtime Coverage", () => {
         "info",
       ]);
     });
+
+    it("should auto-dismiss after resolved duration", () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useLocalToast());
+
+      act(() => {
+        result.current.toast({
+          type: "success",
+          title: "Auto",
+          // Use default duration (5000ms)
+        });
+      });
+
+      expect(result.current.toasts.length).toBe(1);
+
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+
+      expect(result.current.toasts.length).toBe(0);
+    });
+
+    it("should not schedule auto-dismiss when duration resolves to 0", () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useLocalToast());
+
+      act(() => {
+        result.current.toast({
+          type: "info",
+          title: "No auto-dismiss",
+          duration: "0ms" as any,
+        });
+      });
+
+      expect(result.current.toasts.length).toBe(1);
+
+      act(() => {
+        vi.runOnlyPendingTimers();
+      });
+
+      // Still present because durationMs === 0
+      expect(result.current.toasts.length).toBe(1);
+    });
+  });
+
+  describe("useToastManager", () => {
+    it("should create, update, and dismiss toasts", () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useToastManager());
+
+      let id: string;
+      act(() => {
+        id = result.current.toast({ type: "success", title: "T1" });
+      });
+
+      expect(result.current.toasts.length).toBe(1);
+      expect(result.current.toasts[0]?.id).toBe(id!);
+
+      act(() => {
+        result.current.updateToast(id!, { title: "Updated", description: "D" });
+      });
+
+      expect(result.current.toasts[0]?.title).toBe("Updated");
+      expect(result.current.toasts[0]?.description).toBe("D");
+
+      act(() => {
+        result.current.dismiss(id!);
+      });
+
+      expect(result.current.toasts.length).toBe(0);
+
+      act(() => {
+        result.current.toast({ type: "info", title: "A" });
+        result.current.toast({ type: "warning", title: "B" });
+      });
+
+      expect(result.current.toasts.length).toBe(2);
+
+      act(() => {
+        result.current.dismissAll();
+      });
+
+      expect(result.current.toasts.length).toBe(0);
+    });
   });
 
   describe("useGlobalToast", () => {
@@ -195,7 +317,7 @@ describe("Hooks Runtime Coverage", () => {
       let toastId: string;
       act(() => {
         toastId = result.current.toast({
-          variant: "info",
+          variant: "default",
           title: "Test",
         });
       });
@@ -231,11 +353,37 @@ describe("Hooks Runtime Coverage", () => {
         result.current.toast({ variant: "success", title: "Success" });
         result.current.toast({ variant: "error", title: "Error" });
         result.current.toast({ variant: "warning", title: "Warning" });
-        result.current.toast({ variant: "info", title: "Info" });
+        result.current.toast({ variant: "default", title: "Default" });
       });
 
       // Verify function executed
       expect(typeof result.current.toast).toBe("function");
+    });
+
+    it("should support imperative toast() and auto-dismiss path", () => {
+      vi.useFakeTimers();
+
+      const { result } = renderHook(() => useGlobalToast());
+
+      act(() => {
+        result.current.dismissAll();
+      });
+
+      expect(result.current.toasts.length).toBe(0);
+
+      let id: string;
+      act(() => {
+        id = toastImperative({ variant: "success", title: "Imperative" } as any);
+      });
+
+      expect(typeof id!).toBe("string");
+      expect(result.current.toasts.length).toBe(1);
+
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+
+      expect(result.current.toasts.length).toBe(0);
     });
   });
 
