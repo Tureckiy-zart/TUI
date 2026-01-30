@@ -14,7 +14,7 @@ import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Motion Overview",
+  title: "Composition / Motion / Motion Overview",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

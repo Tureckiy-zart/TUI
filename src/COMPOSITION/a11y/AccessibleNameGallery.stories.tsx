@@ -22,7 +22,7 @@ import { Radio } from "@/PRIMITIVES/Radio";
 import { Switch } from "@/PRIMITIVES/Switch";
 
 const meta: Meta = {
-  title: "UI / Composition / A11Y / Accessible Name Gallery",
+  title: "Composition / A11Y / Accessible Name Gallery",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

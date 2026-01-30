@@ -6,7 +6,7 @@ import * as React from "react";
 import { SearchBar } from "./SearchBar";
 
 const meta: Meta<typeof SearchBar> = {
-  title: "UI / Composition / Navigation / SearchBar",
+  title: "Composition / Navigation / SearchBar",
   component: SearchBar,
   parameters: {
     layout: "padded",

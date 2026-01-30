@@ -11,7 +11,7 @@ import {
 import type { CardBaseSize, CardBaseVariant } from "./CardBase.types";
 
 const meta: Meta<typeof CardBase> = {
-  title: "UI / Patterns / Cards / CardBase",
+  title: "Patterns / Cards / CardBase",
   component: CardBase,
   parameters: {
     layout: "centered",

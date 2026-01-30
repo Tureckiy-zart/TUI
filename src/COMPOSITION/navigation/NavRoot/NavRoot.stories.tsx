@@ -2,7 +2,7 @@
 import { NavRoot } from "./NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
-  title: "UI / Composition / Navigation / NavRoot",
+  title: "Composition / Navigation / NavRoot",
   component: NavRoot,
   parameters: {
     layout: "padded",

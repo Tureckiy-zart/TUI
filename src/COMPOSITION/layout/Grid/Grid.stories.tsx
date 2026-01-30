@@ -5,7 +5,7 @@ import { Grid } from "./Grid";
 const cardItemStyle = { color: "hsl(var(--tm-text-primary))" };
 
 const meta: Meta<typeof Grid> = {
-  title: "UI / Composition / Layout / Grid",
+  title: "Composition / Layout / Grid",
   component: Grid,
   parameters: {
     layout: "padded",

@@ -3,7 +3,7 @@ import { Box } from "../Box";
 import { Column } from "./Column";
 
 const meta: Meta<typeof Column> = {
-  title: "UI / Composition / Layout / Column",
+  title: "Composition / Layout / Column",
   component: Column,
   parameters: {
     layout: "padded",

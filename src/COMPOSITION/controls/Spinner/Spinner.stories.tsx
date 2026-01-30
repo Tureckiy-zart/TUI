@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Spinner,
   type SpinnerEasing,
@@ -9,7 +9,7 @@ import {
 } from "./Spinner";
 
 const meta: Meta<typeof Spinner> = {
-  title: "composite/Spinner",
+  title: "Composition / Controls / Spinner",
   component: Spinner,
   parameters: {
     layout: "padded",

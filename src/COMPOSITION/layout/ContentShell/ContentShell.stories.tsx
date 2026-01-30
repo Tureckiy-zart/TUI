@@ -6,7 +6,7 @@ import { Section } from "../Section";
 import { ContentShell } from "./ContentShell";
 
 const meta: Meta<typeof ContentShell> = {
-  title: "UI / Composition / Layout / ContentShell",
+  title: "Composition / Layout / ContentShell",
   component: ContentShell,
   parameters: {
     layout: "fullscreen",

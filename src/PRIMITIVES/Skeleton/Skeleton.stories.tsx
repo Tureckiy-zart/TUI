@@ -4,7 +4,7 @@ import { Box } from "@/COMPOSITION/layout/Box";
 import { Skeleton } from "./Skeleton";
 
 const meta: Meta<typeof Skeleton> = {
-  title: "UI / Primitives / Skeleton",
+  title: "Primitives / Skeleton",
   component: Skeleton,
   tags: ["autodocs"],
   parameters: {

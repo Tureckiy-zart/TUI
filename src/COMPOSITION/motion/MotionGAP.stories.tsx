@@ -16,7 +16,7 @@ import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / GAP",
+  title: "Composition / Motion / GAP",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

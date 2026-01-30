@@ -6,7 +6,7 @@ import { Copy, Edit, MoreVertical, Share, Trash2 } from "lucide-react";
 import { Menu } from "./Menu";
 
 const meta: Meta<typeof Menu.Root> = {
-  title: "UI / Composition / Navigation / Menu",
+  title: "Composition / Navigation / Menu",
   component: Menu.Root,
   parameters: {
     layout: "centered",

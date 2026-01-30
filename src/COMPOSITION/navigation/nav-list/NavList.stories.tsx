@@ -3,7 +3,7 @@
 import { NavList } from "./NavList";
 
 const meta: Meta<typeof NavList> = {
-  title: "UI / Composition / Navigation / NavList",
+  title: "Composition / Navigation / NavList",
   component: NavList,
   parameters: {
     layout: "padded",

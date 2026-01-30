@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
-  title: "UI / Primitives / Text",
+  title: "Primitives / Text",
   component: Text,
   parameters: {
     layout: "padded",

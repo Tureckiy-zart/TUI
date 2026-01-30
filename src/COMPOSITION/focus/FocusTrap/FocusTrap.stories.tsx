@@ -18,7 +18,7 @@ import { Text } from "@/PRIMITIVES/Text";
 import { FocusTrap } from "./FocusTrap";
 
 const meta: Meta<typeof FocusTrap> = {
-  title: "UI / Composition / Focus / FocusTrap",
+  title: "Composition / Focus / FocusTrap",
   component: FocusTrap,
   tags: ["autodocs"],
   parameters: {

@@ -6,7 +6,7 @@ import { CategoryCard } from "./CategoryCard";
 import type { CategoryCardSize, CategoryCardVariant } from "./CategoryCard.types";
 
 const meta: Meta<typeof CategoryCard> = {
-  title: "UI / Patterns / Cards / CategoryCard",
+  title: "Patterns / Cards / CategoryCard",
   component: CategoryCard,
   parameters: {
     layout: "centered",

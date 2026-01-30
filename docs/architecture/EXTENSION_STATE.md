@@ -1,7 +1,7 @@
 # TUI Extension Layer - Canonical State
 
 **Date:** 2025-12-27  
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-29  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -117,6 +117,24 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Storybook Coverage:** Compliant (Default, SizesGallery, States, LongContent, 5 use case stories)
    - **Motion Compliance:** ✅ (MOTION_TOKENS.transitionPreset.colors, reduced motion supported)
    - **Exports:** `MultiSelect`, `MultiSelectProps`, `MultiSelectOption`, `MultiSelectSize`
+
+3.2. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, API simplification TUI_EXT_CAROUSEL_FIX_004)
+   - **Lock Date:** 2026-01-29
+   - **Creation Date:** 2026-01-29
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Task ID:** TUI_EXT_CAROUSEL_001, TUI_EXT_CAROUSEL_FIX_004
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Component Type:** Extension Layer Composite — compound carousel (batteries-included)
+   - **Purpose:** Production-grade carousel/slider with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed directly inside Track (no Controls wrapper). No visual props in public API; internal tokens only (carousel.tokens.ts).
+   - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
+   - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal; spacing, state semantic tokens)
+   - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
+   - **Test Coverage:** Comprehensive (Carousel.test.tsx — rendering, interactions, keyboard, controlled, A11Y, Prev/Next inside track)
+   - **Storybook Coverage:** Default, Orientation, Looping, Controlled, CustomControls, LongContent
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, `CarouselRootProps`, `CarouselOrientation`, and related types (no CarouselControls)
 
 4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)

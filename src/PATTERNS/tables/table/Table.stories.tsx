@@ -16,7 +16,7 @@ import {
 } from "./index";
 
 const meta: Meta<typeof Table> = {
-  title: "UI / Patterns / Tables / Table",
+  title: "Patterns / Tables / Table",
   component: Table,
   tags: ["autodocs"],
   parameters: {

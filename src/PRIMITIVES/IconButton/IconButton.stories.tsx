@@ -27,7 +27,7 @@ import { IconButton } from "./IconButton";
  */
 
 const meta: Meta<typeof IconButton> = {
-  title: "UI / Primitives / IconButton",
+  title: "Primitives / IconButton",
   component: IconButton,
   parameters: {
     layout: "centered",

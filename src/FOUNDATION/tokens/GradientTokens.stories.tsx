@@ -17,7 +17,7 @@ import { Text } from "@/PRIMITIVES/Text";
 import { GRADIENT_TOKENS } from "./gradients";
 
 const meta: Meta = {
-  title: "UI / Foundation / Tokens / Gradient Tokens",
+  title: "Foundation / Tokens / Gradient Tokens",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

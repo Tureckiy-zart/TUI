@@ -358,6 +358,21 @@ export {
   type MultiSelectSize,
 } from "./COMPOSITION/controls/MultiSelect/MultiSelect.index";
 
+// Carousel component (Extension, compound, batteries-included)
+export {
+  Carousel,
+  CarouselIndicators,
+  type CarouselIndicatorsProps,
+  CarouselNext,
+  type CarouselNextProps,
+  type CarouselOrientation,
+  CarouselPrev,
+  type CarouselPrevProps,
+  type CarouselRootProps,
+  type CarouselSlideProps,
+  type CarouselTrackProps,
+} from "./COMPOSITION/carousel";
+
 // Avatar component (Radix-based, token-driven)
 export {
   Avatar,

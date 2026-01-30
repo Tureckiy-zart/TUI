@@ -6,7 +6,7 @@ import { useState } from "react";
 import { NotificationCenter, NotificationCenterProvider, useNotificationCenter } from "./";
 
 const meta: Meta<typeof NotificationCenterProvider> = {
-  title: "UI / Domain / NotificationCenter",
+  title: "Domain / NotificationCenter",
   component: NotificationCenterProvider,
   parameters: {
     layout: "centered",

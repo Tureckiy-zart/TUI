@@ -33,7 +33,7 @@ import { Checkbox } from "./Checkbox";
  */
 
 const meta: Meta<typeof Checkbox> = {
-  title: "UI / Primitives / Checkbox",
+  title: "Primitives / Checkbox",
   component: Checkbox,
   parameters: {
     layout: "centered",

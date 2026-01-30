@@ -28,7 +28,7 @@ import { Input } from "@/PRIMITIVES/Input";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Focus / GAP Gallery",
+  title: "Composition / Motion / Focus / GAP Gallery",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

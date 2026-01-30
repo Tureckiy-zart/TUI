@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Accordion } from "./Accordion";
 
 const meta: Meta<typeof Accordion.Root> = {
-  title: "UI / Composition / Accordion",
+  title: "Composition / Accordion",
   component: Accordion.Root,
   parameters: {
     layout: "padded",

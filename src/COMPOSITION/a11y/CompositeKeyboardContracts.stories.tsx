@@ -19,7 +19,7 @@ import { Radio, RadioGroup } from "@/PRIMITIVES/Radio";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / A11Y / Composite Keyboard Contracts",
+  title: "Composition / A11Y / Composite Keyboard Contracts",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

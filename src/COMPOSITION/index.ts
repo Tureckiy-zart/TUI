@@ -4,6 +4,7 @@
  * All composition-level components (layout, overlays, navigation).
  */
 
+export * from "./carousel/Carousel/Carousel.index";
 export * from "./controls";
 export * from "./layout";
 export * from "./navigation";

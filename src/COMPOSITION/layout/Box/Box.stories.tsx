@@ -2,7 +2,7 @@
 import { Box } from "./Box";
 
 const meta: Meta<typeof Box> = {
-  title: "UI / Composition / Layout / Box",
+  title: "Composition / Layout / Box",
   component: Box,
   parameters: {
     layout: "padded",

@@ -10,7 +10,7 @@ import { Bell, Settings, User } from "lucide-react";
 import { PopoverWrapper } from "./Popover";
 
 const meta: Meta<typeof PopoverWrapper> = {
-  title: "UI / Composition / Overlays / Popover",
+  title: "Composition / Overlays / Popover",
   component: PopoverWrapper,
   parameters: {
     layout: "centered",

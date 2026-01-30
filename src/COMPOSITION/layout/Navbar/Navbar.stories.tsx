@@ -9,7 +9,7 @@ import { StickyBar } from "../StickyBar/StickyBar";
 import { Navbar } from "./Navbar";
 
 const meta: Meta<typeof Navbar> = {
-  title: "UI / Composition / Layout / Navbar",
+  title: "Composition / Layout / Navbar",
   component: Navbar,
   parameters: {
     layout: "padded",
