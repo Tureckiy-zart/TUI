@@ -1,6 +1,6 @@
 # Release Process
 
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2025-02-01  
 **Purpose:** Step-by-step guide for publishing releases with automated version canon enforcement
 
 ---
@@ -22,15 +22,23 @@
 
 ---
 
+> 🔒 **CI-ONLY PUBLISH**
+>
+> **`npm publish` is forbidden locally.** Publication happens only in GitHub Actions CI.
+> Local scripts are for preparation and validation only.
+
+---
+
 ## Overview
 
-This project uses an automated release flow that ensures npm publish, git tags, and CHANGELOG are always synchronized. The system enforces Version Canon Rules by design, preventing version drift and manual errors.
+This project uses a **CI-only release flow** that ensures npm publish (with provenance), git tags, and CHANGELOG are always synchronized. The system enforces Version Canon Rules by design, preventing version drift and manual errors.
 
 **Key Principles:**
 - npm registry is the single source of truth for published versions
 - CHANGELOG explains releases, it does not define them
 - git tags must exist for every npm-published version
 - [Unreleased] is the only draft area
+- **Publish is CI-only:** GitHub Actions performs `npm publish --provenance` on tag push
 
 ---
 
@@ -40,11 +48,23 @@ This project uses an automated release flow that ensures npm publish, git tags, 
 # 1. Update package.json version manually
 # Edit package.json: "version": "X.Y.Z"
 
-# 2. Run release script
-pnpm release
+# 2. Pre-release validation
+pnpm release:check
 
-# That's it! The script handles everything.
+# 3. Prepare CHANGELOG (move [Unreleased] to version section)
+pnpm release:prepare
+
+# 4. Commit and push
+git add package.json CHANGELOG.md
+git commit -m "chore: prepare release X.Y.Z"
+
+# 5. Create and push tag (triggers CI publish)
+git tag -a "vX.Y.Z" -m "Release vX.Y.Z"
+git push origin main
+git push origin vX.Y.Z
 ```
+
+CI will then: validate, build, publish to npm (with provenance), and run post-release verification.
 
 ---
 
@@ -91,28 +111,42 @@ Manually update the version in `package.json`:
 - `MINOR` for new features (backward compatible)
 - `PATCH` for bug fixes (backward compatible)
 
-### Step 3: Run Release Script
+### Step 3: Run Local Release Preparation
 
 ```bash
-pnpm release
+# Pre-release validation (fail fast on errors)
+pnpm release:check
+
+# Prepare CHANGELOG (move [Unreleased] to version section)
+pnpm release:prepare
 ```
 
-This single command will:
-1. ✅ Validate version canon (fail fast on errors)
-2. ✅ Prepare CHANGELOG (move [Unreleased] to version section)
-3. ✅ Build and test
-4. ✅ Publish to npm
-5. ✅ Update CHANGELOG date (from npm publish time)
-6. ✅ Create git tag
-7. ✅ Push git tag
-8. ✅ Verify release
+### Step 4: Commit, Tag, and Push
 
-### Step 4: Verify Release
+```bash
+git add package.json CHANGELOG.md
+git commit -m "chore: prepare release X.Y.Z"
 
-The script automatically verifies:
+# Create tag
+git tag -a "vX.Y.Z" -m "Release vX.Y.Z"
+
+# Push branch and tag (tag push triggers CI publish)
+git push origin main
+git push origin vX.Y.Z
+```
+
+### Step 5: CI Publishes and Verifies
+
+GitHub Actions (triggered by tag push) will:
+1. ✅ Validate package (`pnpm validate`)
+2. ✅ Build package
+3. ✅ Publish to npm with provenance (`npm publish --provenance`)
+4. ✅ Run post-release verification (`release-verify.js`)
+
+Post-release verification checks:
 - Version exists in npm registry
 - Git tag exists locally and remotely
-- CHANGELOG date matches npm publish date
+- CHANGELOG date matches npm publish date (when applicable)
 - CHANGELOG ordering is correct
 - [Unreleased] section is empty
 
@@ -122,18 +156,20 @@ If verification fails, see [Troubleshooting](#troubleshooting) below.
 
 ## Individual Scripts
 
-You can also run individual scripts for testing or debugging:
+Local scripts for preparation and validation:
 
 ```bash
-# Pre-release validation only
+# Pre-release validation (run before preparing release)
 pnpm release:check
 
-# Prepare CHANGELOG only (without publishing)
+# Prepare CHANGELOG (move [Unreleased] to version section)
 pnpm release:prepare
 
-# Post-release verification only
+# Post-release verification (runs in CI after publish; can be run locally for debugging)
 pnpm release:verify
 ```
+
+**Note:** `release:verify` is intended for CI (runs automatically after `npm publish` in GitHub Actions). Locally it is optional and mainly useful for debugging.
 
 ---
 
@@ -178,8 +214,9 @@ git tag -d vX.Y.Z
 # Delete remote tag (if pushed)
 git push origin --delete vX.Y.Z
 
-# Then run release again
-pnpm release
+# Then create and push tag again to trigger CI
+git tag -a "vX.Y.Z" -m "Release vX.Y.Z"
+git push origin vX.Y.Z
 ```
 
 ---
@@ -343,43 +380,36 @@ This release process enforces the Version Canon Rules defined in `CHANGELOG.md`:
 
 ## Troubleshooting
 
-### Release Script Fails at Build Step
+### CI Fails at Build or Validate Step
 
 **Check:**
-- All tests pass: `pnpm test`
+- All tests pass locally: `pnpm test`
 - TypeScript compiles: `pnpm typecheck`
 - Build succeeds: `pnpm build`
+- Validation passes: `pnpm validate`
 
-**Fix:** Resolve build/test errors before retrying release
+**Fix:** Resolve build/test errors locally, commit fixes, then re-push the tag or delete and recreate it
 
-### Release Script Fails at npm Publish
+### CI Fails at npm Publish
 
 **Check:**
-- You're logged in: `npm whoami`
-- You have 2FA enabled (required for scoped packages)
-- You have publish permissions
+- `NPM_TOKEN` secret is configured in GitHub repository settings
+- Token has publish permissions for `@tenerife.music/ui`
+- Token has 2FA / automation token type (required for scoped packages)
 
 **Fix:**
-```bash
-# Login to npm
-npm login
-
-# Verify authentication
-npm whoami
-
-# Retry release
-pnpm release
-```
+- Update `NPM_TOKEN` in GitHub Settings → Secrets and variables → Actions
+- Re-run the failed workflow or push the tag again
 
 ### CHANGELOG Date Doesn't Match npm Date
 
 **Check:**
-- Wait a few seconds after npm publish (npm API may have slight delay)
+- Wait a few seconds after CI publish (npm API may have slight delay)
 - Verify npm date: `npm view @tenerife.music/ui@X.Y.Z time --json`
 
 **Fix:**
 - Manually update CHANGELOG date to match npm publish date
-- Commit the change
+- Commit and push the change
 
 ### Git Tag Push Fails
 
@@ -395,6 +425,8 @@ git push origin vX.Y.Z
 # Verify tag exists remotely
 git ls-remote --tags origin vX.Y.Z
 ```
+
+Note: Tag push triggers the CI release workflow. Without tag push, no publish occurs.
 
 ---
 
