@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { axeCheck, renderWithTheme } from "@/test/test-utils";
 
@@ -193,6 +193,176 @@ describe("Carousel", () => {
       );
       const results = await axeCheck(container);
       expect(results.violations).toHaveLength(0);
+    });
+  });
+
+  describe("Simple API", () => {
+    describe("Rendering", () => {
+      it("renders slides from items prop", () => {
+        render(
+          <Carousel
+            items={[
+              <div key="1">Slide 1</div>,
+              <div key="2">Slide 2</div>,
+              <div key="3">Slide 3</div>,
+            ]}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        expect(screen.getByText("Slide 1")).toBeInTheDocument();
+        expect(screen.getByText("Slide 2")).toBeInTheDocument();
+        expect(screen.getByText("Slide 3")).toBeInTheDocument();
+      });
+
+      it("throws error when items is empty array", () => {
+        expect(() => {
+          render(<Carousel items={[]} ariaLabel="Empty carousel" />);
+        }).toThrow("[Carousel] `items` prop must be a non-empty array");
+      });
+
+      it("renders with default controls inside", () => {
+        render(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        const track = document.querySelector("[data-carousel-track]");
+        expect(track).toBeInTheDocument();
+        const prevBtn = screen.getByRole("button", { name: /previous slide/i });
+        const nextBtn = screen.getByRole("button", { name: /next slide/i });
+        expect(track).toContainElement(prevBtn);
+        expect(track).toContainElement(nextBtn);
+      });
+
+      it("renders controls outside when specified", () => {
+        render(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            controls="outside"
+            ariaLabel="Simple carousel"
+          />,
+        );
+        const track = document.querySelector("[data-carousel-track]");
+        expect(track).toBeInTheDocument();
+        const prevBtn = screen.getByRole("button", { name: /previous slide/i });
+        const nextBtn = screen.getByRole("button", { name: /next slide/i });
+        expect(track).not.toContainElement(prevBtn);
+        expect(track).not.toContainElement(nextBtn);
+      });
+
+      it("hides controls when controls='none'", () => {
+        render(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            controls="none"
+            ariaLabel="Simple carousel"
+          />,
+        );
+        expect(screen.queryByRole("button", { name: /previous slide/i })).not.toBeInTheDocument();
+        expect(screen.queryByRole("button", { name: /next slide/i })).not.toBeInTheDocument();
+      });
+
+      it("renders indicators by default", () => {
+        render(
+          <Carousel
+            items={[
+              <div key="1">Slide 1</div>,
+              <div key="2">Slide 2</div>,
+              <div key="3">Slide 3</div>,
+            ]}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        const tablist = screen.getByRole("tablist", { name: /slide navigation/i });
+        expect(tablist).toBeInTheDocument();
+        const tabs = within(tablist).getAllByRole("tab");
+        expect(tabs).toHaveLength(3);
+      });
+
+      it("hides indicators when indicators='none'", () => {
+        render(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            indicators="none"
+            ariaLabel="Simple carousel"
+          />,
+        );
+        expect(
+          screen.queryByRole("tablist", { name: /slide navigation/i }),
+        ).not.toBeInTheDocument();
+      });
+
+      it("calls renderSlide when provided", () => {
+        const renderSlide = vi.fn((_item, index) => <div key={index}>Custom {index}</div>);
+        render(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            renderSlide={renderSlide}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        expect(renderSlide).toHaveBeenCalledTimes(2);
+        expect(renderSlide).toHaveBeenCalledWith(expect.anything(), 0);
+        expect(renderSlide).toHaveBeenCalledWith(expect.anything(), 1);
+        expect(screen.getByText("Custom 0")).toBeInTheDocument();
+        expect(screen.getByText("Custom 1")).toBeInTheDocument();
+      });
+    });
+
+    describe("Interactions", () => {
+      it("Next button advances slide", async () => {
+        const user = userEvent.setup();
+        render(
+          <Carousel
+            items={[
+              <div key="1">Slide 1</div>,
+              <div key="2">Slide 2</div>,
+              <div key="3">Slide 3</div>,
+            ]}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        const nextBtn = screen.getByRole("button", { name: /next slide/i });
+        await user.click(nextBtn);
+        const tablist = screen.getByRole("tablist", { name: /slide navigation/i });
+        const tabs = within(tablist).getAllByRole("tab");
+        expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+      });
+
+      it("Prev button goes to previous slide", async () => {
+        const user = userEvent.setup();
+        render(
+          <Carousel
+            items={[
+              <div key="1">Slide 1</div>,
+              <div key="2">Slide 2</div>,
+              <div key="3">Slide 3</div>,
+            ]}
+            ariaLabel="Simple carousel"
+          />,
+        );
+        const nextBtn = screen.getByRole("button", { name: /next slide/i });
+        await user.click(nextBtn);
+        const prevBtn = screen.getByRole("button", { name: /previous slide/i });
+        await user.click(prevBtn);
+        const tablist = screen.getByRole("tablist", { name: /slide navigation/i });
+        const tabs = within(tablist).getAllByRole("tab");
+        expect(tabs[0]).toHaveAttribute("aria-selected", "true");
+      });
+    });
+
+    describe("Accessibility", () => {
+      it("passes axe when rendered with Simple API", async () => {
+        const { container } = renderWithTheme(
+          <Carousel
+            items={[<div key="1">Slide 1</div>, <div key="2">Slide 2</div>]}
+            ariaLabel="A11y simple carousel"
+          />,
+        );
+        const results = await axeCheck(container);
+        expect(results.violations).toHaveLength(0);
+      });
     });
   });
 });

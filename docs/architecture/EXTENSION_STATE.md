@@ -1,7 +1,7 @@
 # TUI Extension Layer - Canonical State
 
 **Date:** 2025-12-27  
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2026-01-31  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -65,7 +65,9 @@ The following components form the foundation of the UI system. Foundation layer 
 - ? Documentation updates are allowed when they do not alter behavior
 - ? Type safety improvements are allowed only with unlock approval
 - ? New Foundation components without unlock
-- ? Breaking API changes without unlock`r`n`r`n### Locked Components
+- ? Breaking API changes without unlock
+
+### Locked Components
 
 1. **Modal** - `src/COMPOSITION/overlays/Modal/Modal.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
@@ -128,6 +130,7 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
    - **Component Type:** Extension Layer Composite — compound carousel (batteries-included)
    - **Purpose:** Production-grade carousel/slider with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed directly inside Track (no Controls wrapper). No visual props in public API; internal tokens only (carousel.tokens.ts).
+   - **API policy:** Simple API explicitly forbidden (compound-only; decision fixed at lock).
    - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
    - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal; spacing, state semantic tokens)
    - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
@@ -215,6 +218,102 @@ The following components form the foundation of the UI system. Foundation layer 
 The following components are **ALLOWED** for use. They are exported via `src/index.ts` and form the Extension Layer.
 
 **Note:** Some Extension components may be **LOCKED** after completing their audit and locking procedures. Locked Extension components are immutable and cannot be modified without explicit unlock approval.
+
+### Extension Capabilities LOCKED (Phase L)
+
+1. **HeroMedia** - `src/COMPOSITION/hero/HeroMedia/`
+   - **Status:** ✅ **LOCKED** (Phase L — Overlay + HeroMedia)
+   - **Lock Date:** 2026-01-30
+   - **Task ID:** TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001
+   - **Lock Type:** Extension-level capability lock (Phase L)
+   - **Component Type:** Extension Layer Composite — hero media and overlay composition
+   - **Purpose:** Canonical entry point for hero blocks combining media (image, video, carousel) with overlay content. Structure, accessibility, and layering per HEROMEDIA_CANON.md. Uses OverlaySlot for overlay positioning; overlay responsibility delegated to OverlaySlot (no internal overlay positioning).
+   - **Canon:** [HEROMEDIA_CANON.md](./extension/HEROMEDIA_CANON.md)
+   - **Rule:** Modifications only via new Phase L audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `HeroMedia`, `HeroMedia.Media`, `HeroMedia.Overlay`, and related types
+
+2. **OverlaySlot** - `src/COMPOSITION/overlay/OverlaySlot/`
+   - **Status:** ✅ **LOCKED** (Phase L — Overlay + HeroMedia)
+   - **Lock Date:** 2026-01-31
+   - **Task ID:** TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001
+   - **Lock Type:** Extension-level capability lock (Phase L)
+   - **Component Type:** Extension Layer — overlay positioning primitive
+   - **Purpose:** Single source of truth for overlay positioning; compound API Root/Anchor/Item; non-interactive. OverlaySlot is the only allowed place for raw overlay positioning logic; consumer code must not implement raw positioning.
+   - **Canon:** [OVERLAYSLOT_CANON.md](./extension/OVERLAYSLOT_CANON.md)
+   - **Rules (lock_declaration):** OverlaySlot MUST NOT implement product-specific logic; MUST remain non-interactive; MUST be single source of truth for overlay positioning; No Simple API.
+   - **Rule:** Modifications only via new Phase L audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `OverlaySlot`, `OverlaySlot.Root`, `OverlaySlot.Anchor`, `OverlaySlot.Item`, and related types
+
+3. **ResponsiveVisibility** - `src/COMPOSITION/responsive/ResponsiveVisibility/`
+   - **Status:** ✅ **CANONICAL** (Extension capability — Responsive visibility)
+   - **Lock Date:** 2026-01-31
+   - **Task ID (Phase L):** TUI_PHASE_L_RESPONSIVE_VISIBILITY_001
+   - **Task ID (Canon):** TUI_CANON_RESPONSIVE_VISIBILITY_001
+   - **Lock Type:** Extension-level capability lock (CANON)
+   - **Component Type:** Extension Layer — responsive visibility (show/hide by breakpoint)
+   - **Purpose:** Canonical entry point for show/hide by breakpoint without className, without raw Tailwind, without consumer media queries. Compound API Root/From/Below/Only; non-matching slots do not render. SSR: render nothing until mount; after hydration render matching slot only.
+   - **Canon:** [RESPONSIVE_VISIBILITY_CANON.md](./extension/RESPONSIVE_VISIBILITY_CANON.md)
+   - **Lock:** [RESPONSIVE_VISIBILITY_LOCK.md](./locks/RESPONSIVE_VISIBILITY_LOCK.md)
+   - **Rules (lock_declaration):** Consumer MUST NOT implement raw breakpoint visibility via className or Tailwind; ResponsiveVisibility is the single allowed surface. No prop-level visibility on Layout or Foundation components.
+   - **Rule:** Modifications only via Phase L / CANON audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `ResponsiveVisibility`, `ResponsiveVisibility.Root`, `ResponsiveVisibility.From`, `ResponsiveVisibility.Below`, `ResponsiveVisibility.Only`, and related types (`ResponsiveVisibilityRootProps`, `ResponsiveVisibilityFromProps`, `ResponsiveVisibilityBelowProps`, `ResponsiveVisibilityOnlyProps`, `Breakpoint`)
+   - **Phase L.3 (2026-02-01):** Implementation complete — sealed public exports, dev-only runtime nesting guard (Root inside Root), strengthened tests (nesting, Only(2xl)=From(2xl), SSR), etalon usage via `HeaderComposition` (layout).
+
+   ### Usage Policy
+
+   ResponsiveVisibility is the **canonical and preferred mechanism** for breakpoint-based visibility control inside Extension-level Composition and Pattern blocks. **Application: composition level only; not inside primitives or atoms.**
+
+   The following rules apply:
+
+   - ResponsiveVisibility **MUST** be used for mobile/desktop (or breakpoint-based) visibility switching inside Extension/Composition blocks.
+   - Ad-hoc responsive visibility logic inside these blocks is **NOT ALLOWED**, including:
+     - raw media queries,
+     - custom `useMediaQuery` hooks,
+     - Tailwind visibility utilities (e.g. `hidden`, `block`, `md:*`, `lg:hidden`),
+     - conditional rendering based on `window.innerWidth` or similar runtime checks,
+     - duplicate visibility logic alongside ResponsiveVisibility.
+   - This policy applies to **new code and modifications** after Phase L lock; existing code is not retroactively invalidated.
+
+   ResponsiveVisibility is **not a layout primitive** and must not be used to replace Layout or Foundation responsibilities.
+
+4. **SurfaceElevation** — capability (Phase L.3 implementation complete)
+   - **Status:** ✅ **CANONICAL** (Extension capability — Surface elevation semantics)
+   - **Lock Date:** 2026-01-31
+   - **Task ID (Phase L):** TUI_PHASE_L_SURFACE_ELEVATION_DESIGN_001
+   - **Task ID (Phase L.3):** TUI_PHASE_L3_SURFACE_ELEVATION_IMPLEMENTATION_001
+   - **Task ID (Canon):** TUI_CANON_SURFACE_ELEVATION_AND_INVERSE_TYPOGRAPHY_001
+   - **Lock Type:** Extension-level capability lock (CANON)
+   - **Component Type:** Extension Layer — surface elevation semantics (semantic context)
+   - **Purpose:** Canonical declaration of "elevated surface" at composition level; only existing [ELEVATION_AUTHORITY.md](./ELEVATION_AUTHORITY.md) tokens. Not all Cards are elevated; no component gains elevation by type alone.
+   - **Canon:** [SURFACE_ELEVATION_CANON.md](./extension/SURFACE_ELEVATION_CANON.md)
+   - **Lock:** [SURFACE_ELEVATION_LOCK.md](./locks/SURFACE_ELEVATION_LOCK.md)
+   - **Rules (lock_declaration):** Consumer MUST NOT implement raw box-shadow, ad-hoc z-index, or elevation logic outside SurfaceElevation; SurfaceElevation is the single allowed surface for elevated surface context. No prop-level elevation context on Layout or Foundation components.
+   - **Rule:** Modifications only via Phase L / CANON audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `SurfaceElevation`, `SurfaceElevation.Root`, `useSurfaceElevation`, `SurfaceElevationRootProps`, `SurfaceElevationLevel`, `SurfaceElevationCompositionReference`, `SurfaceElevationCompositionReferenceProps`
+   - **Phase L.3 (2026-02-01):** Implementation complete — context + visual effect via existing tokens only; SurfaceElevation.Root sets context only (no styles); useSurfaceElevation() for compositions; dev-only nesting guard; tests (nesting dev/prod, context propagation, SSR-safe, unaffected component); etalon SurfaceElevationCompositionReference (Root + Card with shadow from context); stories Basic, LevelMd, LevelSm, SurfaceElevationCompositionReferenceStory.
+
+   ### Usage Policy (SurfaceElevation)
+
+   SurfaceElevation applies **only at composition level** (overlay panels, cards as surface containers, modals/panels, banners). **Application: composition level only; not inside primitives or atoms.** Raw box-shadow, ad-hoc z-index, or elevation logic outside SurfaceElevation is **NOT ALLOWED**. Foundation and Layout components MUST NOT expose elevation context props.
+
+5. **InverseTypography** — capability (Phase L.3 implementation complete)
+   - **Status:** ✅ **CANONICAL** (Extension capability — Inverse typography semantics)
+   - **Lock Date:** 2026-01-31
+   - **Task ID (Phase L):** TUI_PHASE_L_INVERSE_TYPOGRAPHY_DESIGN_001
+   - **Task ID (Canon):** TUI_CANON_SURFACE_ELEVATION_AND_INVERSE_TYPOGRAPHY_001
+   - **Lock Type:** Extension-level capability lock (CANON)
+   - **Component Type:** Extension Layer — inverse typography semantics (semantic context)
+   - **Purpose:** Canonical declaration of "inverse text context" at composition level; only [TYPOGRAPHY_COLOR_POLICY_v1.md](./typography/TYPOGRAPHY_COLOR_POLICY_v1.md). No nested inverse contexts; background suitability is composition owner responsibility.
+   - **Canon:** [INVERSE_TYPOGRAPHY_CANON.md](./extension/INVERSE_TYPOGRAPHY_CANON.md)
+   - **Lock:** [INVERSE_TYPOGRAPHY_LOCK.md](./locks/INVERSE_TYPOGRAPHY_LOCK.md)
+   - **Rules (lock_declaration):** Consumer MUST NOT implement manual color overrides or inverse logic outside InverseTypography; InverseTypography is the single allowed surface for inverse text context. No prop-level inverse context on Layout or Foundation components.
+   - **Rule:** Modifications only via Phase L / CANON audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `InverseTypography`, `InverseTypography.Root`, `InverseTypographyRootProps`
+   - **Phase L.3 (2026-02-01):** Implementation complete — sealed public exports, dev-only runtime nesting guard (Root inside Root), tests (nesting dev/prod, context, SSR-safe), etalon usage via HeroCompositionReference (hero composition); story HeroCompositionReference in InverseTypography.stories. Visual effect: Text and Heading read InverseTypography context and switch to inverse token inside Root (no new props or API).
+
+   ### Usage Policy (InverseTypography)
+
+   InverseTypography applies **only at composition level** where background is dark or media (Hero overlays, headers on dark, banners over media). **Application: composition level only; not inside primitives or atoms.** Manual color overrides or inverse logic outside InverseTypography is **NOT ALLOWED**. Foundation and Layout components MUST NOT expose inverse context props.
 
 ### Visual Components
 

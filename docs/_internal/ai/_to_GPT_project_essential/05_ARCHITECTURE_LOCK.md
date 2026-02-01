@@ -2,7 +2,7 @@
 
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
+**Last Updated:** 2026-01-29 (Public API cleanup: remove legacy useToast export)
 **Status:** ✅ LOCKED (Foundation CLOSED)  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL
@@ -1550,6 +1550,7 @@ Any structural changes require explicit unlock procedure:
 - **[Final Foundation Lock](./FOUNDATION_LOCK.md)** - 🔒 **Authoritative Foundation lock document** (single source of truth)
 - **[Token System](./TOKEN_AUTHORITY.md)** - 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** - Radix UI and Token Union rules
+- **[Closed System v2 Canon Documentation Lock](./closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
 - **Component Guidelines** — Component development guidelines (archived; file no longer available)
 - **[Cursor UI Rules](./ASSISTANT_DEVELOPMENT_RULES.md)** - Cursor AI development rules
 - **Token Domains Final Report** — Final token domain verification (FINAL VERDICT: OK) (archived; file no longer available)
@@ -1978,7 +1979,7 @@ New functionality must be built as **extensions** that compose foundation compon
 **Status:** ✅ **LOCKED** (Foundation CLOSED, Foundation Lock Sweep FINALIZED, Public API LOCKED)  
 **Version:** 1.9  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Public API cleanup: remove legacy useToast export)
+**Last Updated:** 2026-01-29 (Public API cleanup: remove legacy useToast export)
 **Priority:** CRITICAL  
 **Next Review:** Never (foundation is immutable, Foundation Lock Sweep finalized, Public API is locked)
 

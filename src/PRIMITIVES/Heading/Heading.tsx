@@ -50,6 +50,7 @@
 
 import * as React from "react";
 
+import { InverseTypographyContext } from "@/COMPOSITION/inverse-typography/InverseTypography/InverseTypography";
 import { tokenCVA, type VariantProps } from "@/FOUNDATION/lib/token-cva";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 
@@ -217,6 +218,7 @@ const headingVariants = tokenCVA({
     color: {
       primary: "",
       secondary: "text-[hsl(var(--tm-text-secondary))]",
+      inverse: "text-[hsl(var(--tm-text-inverse))]",
     },
   },
   compoundVariants: generateWeightVariants(),
@@ -238,19 +240,24 @@ const headingVariants = tokenCVA({
 export interface HeadingProps
   extends
     Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style" | "color">,
-    VariantProps<typeof headingVariants> {
+    Omit<VariantProps<typeof headingVariants>, "color"> {
+  /** Text color (inverse applied automatically inside InverseTypography.Root) */
+  color?: "primary" | "secondary";
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ level = 1, weight, color, as, children, ...props }, ref) => {
     const Component = (as || `h${level}`) as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+    const isInverse = React.useContext(InverseTypographyContext);
+    const effectiveColor = isInverse ? "inverse" : (color ?? "primary");
 
-    // Token enforcement: className and style are forbidden from public API - only CVA output is used
-    // All typography values come from TEXT_TOKENS (Typography Authority)
-    // All colors come from semantic tokens (Color Authority)
     return (
-      <Component ref={ref} className={headingVariants({ level, weight, color })} {...props}>
+      <Component
+        ref={ref}
+        className={headingVariants({ level, weight, color: effectiveColor })}
+        {...props}
+      >
         {children}
       </Component>
     );

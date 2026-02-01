@@ -94,6 +94,32 @@ The following are **implementation details** and **NOT part of the public API**:
 
 **Critical Distinction:** Foundation components **DO NOT** accept `className` and `style` props in their TypeScript interfaces. All Foundation components use `Omit<HTMLAttributes<...>, "className" | "style">` to exclude these props from the public API. This enforcement is **APPLIED** and **LOCKED**.
 
+### Public Index Boundary
+
+`@/index` is a **public API surface only**.
+
+It MUST NOT expose:
+- runtime utilities
+- internal helpers
+- implementation-level functions
+
+Runtime utilities (e.g. `tokenCVA`, `cn`) are explicitly excluded.
+See: FOUNDATION_LOCK.md — Runtime Utilities Are Private (TUNG-028).
+
+**Allowed imports from `@/index` in DOMAIN/PATTERNS:**
+- UI components (e.g., `Box`, `Button`, `Text`, `Skeleton`)
+- Layout and composition components
+- Public types that do not create runtime dependencies
+
+**Forbidden imports from `@/index`:**
+- Runtime utilities (`tokenCVA`, `cn`, animation helpers)
+- Foundation internals
+- Any value that participates in runtime evaluation or token resolution
+
+This clarification prevents automated refactors from incorrectly replacing valid UI imports and causing architectural drift.
+
+**Reference:** See [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) for complete details on allowed and forbidden imports from `@/index`.
+
 ---
 
 ## Forbidden Extension Mechanisms
@@ -341,7 +367,7 @@ This contract works in conjunction with:
 **Status:** ✅ **FINAL / APPLIED**  
 **Version:** 1.0  
 **Date Created:**    
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2026-01-28 (Public Index Boundary - TUNG-028)  
 **Priority:** CRITICAL  
 **Enforcement:** ✅ LOCKED (Phase 3 & 4 Complete)  
 **Next Review:** NEVER (Foundation enforcement is immutable unless unlock procedure is executed)

@@ -33,6 +33,11 @@ export const CAROUSEL_TOKENS = {
   /** Indicators container: gap between dots */
   indicators: {
     gap: "gap-xs",
+    /** Placement variants */
+    placement: {
+      bottom: "",
+      overlay: "absolute bottom-md left-0 right-0 z-10",
+    },
   },
   /** Indicator dot: active vs inactive (semantic tokens) */
   indicator: {

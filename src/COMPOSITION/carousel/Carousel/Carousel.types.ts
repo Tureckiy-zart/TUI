@@ -24,6 +24,10 @@ export interface CarouselRootProps extends Omit<
   controls?: boolean;
   /** Whether to show indicator dots (default: true when Indicators slot used) */
   indicators?: boolean;
+  /** Whether to automatically advance slides */
+  autoplay?: boolean;
+  /** Delay between autoplay advances in milliseconds */
+  autoplayDelay?: number;
   children?: React.ReactNode;
   /** Accessibility: region label */
   "aria-label"?: string;
@@ -66,5 +70,27 @@ export interface CarouselIndicatorsProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "className" | "style"
 > {
+  /** Placement of indicators relative to carousel content */
+  placement?: "bottom" | "overlay";
   children?: never;
+}
+
+/** Simple API props for Carousel component */
+export interface CarouselProps {
+  /** Slides content */
+  items: React.ReactNode[];
+  /** Layout */
+  orientation?: CarouselOrientation;
+  /** Controls visibility & placement */
+  controls?: "none" | "inside" | "outside";
+  /** Indicators visibility & placement */
+  indicators?: "none" | "bottom" | "overlay";
+  /** Behavior */
+  loop?: boolean;
+  autoplay?: boolean;
+  autoplayDelay?: number;
+  /** Accessibility */
+  ariaLabel?: string;
+  /** Advanced escape hatch */
+  renderSlide?: (item: React.ReactNode, index: number) => React.ReactNode;
 }

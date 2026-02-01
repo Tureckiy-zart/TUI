@@ -2,8 +2,8 @@
 
 **Package:** `@tenerife.music/ui`  
 **Layer:** Extension / Architecture  
-**Phase:** L.1 — Extension Layer Capability Design  
-**Status:** Design-only (no implementation)  
+**Phase:** L (closed)  
+**Status:** Phase L complete — CANONICAL  
 **Date Created:** 2026-01-29  
 **Task ID:** TUI_CSV2_PHASE_L1_EXTENSION_CAPABILITY_DESIGN_031
 
@@ -28,9 +28,9 @@ This document defines and locks the list of **allowed product-capabilities** tha
 - ESLint or enforcement changes
 - Product-specific theming or breaking changes to existing pages
 
-**Design Constraint:** This is a **design-only document**. No TypeScript types, no implementation details. Focus is on capability inventory, classification, and traceability to audits.
+**Design Constraint:** Capability inventory, classification, and traceability to audits. Phase L capabilities (ResponsiveVisibility, InverseTypography, SurfaceElevation, HeroMedia, OverlaySlot) are **implemented and CANONICAL** per [PHASE_L_CLOSURE_SUMMARY.md](../../reports/PHASE_L_CLOSURE_SUMMARY.md).
 
-**Relationship to Phase L.2:** This document is the single input for Phase L.2 — Extension API Design. All capabilities listed here are candidates for API design in L.2; non-goals and prohibitions must not be relaxed there.
+**Relationship to Phase L:** Phase L is closed. ResponsiveVisibility, InverseTypography, and SurfaceElevation are implemented with CANON + LOCK complete. Non-goals and prohibitions remain in force.
 
 ---
 
@@ -45,7 +45,7 @@ Capabilities are grouped by class. Each capability is realisable only within the
 | **Hero background / media support**         | Extension components that provide hero sections with background media (image/video) using Box/Stack and existing layout tokens; no Foundation changes.             |
 | **Hero carousel capability**                 | Extension-level carousel or slide composition for hero content; composes Foundation layout and primitives; behaviour and visibility implemented in Extension only.  |
 | **Overlay positioning (badge/icon over content)** | Positioning of badges, icons, or labels over content via Extension composition (e.g. Box with position tokens); overlay semantics and layout stay in Extension; Foundation Surface/Box used as building blocks. |
-| **Responsive visibility (show/hide)**         | Show/hide behaviour by breakpoint implemented in Extension (e.g. wrapper components or composition patterns using existing layout/tokens); no new layout primitives. |
+| **Responsive visibility (show/hide)**         | Show/hide behaviour by breakpoint implemented in Extension at composition level only (e.g. Header/AppShell); not inside primitives or atoms. Single canonical surface; no Tailwind visibility, media queries, or JS breakpoint hooks in consumer code. See [RESPONSIVE_VISIBILITY_CANON.md](RESPONSIVE_VISIBILITY_CANON.md). |
 
 ### Visual
 
@@ -66,6 +66,17 @@ Capabilities are grouped by class. Each capability is realisable only within the
 | Capability                                       | Description                                                                                                                                                     |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Scroll-aware navigation behaviour (extension-only)** | Navigation behaviour that reacts to scroll (e.g. sticky header, visibility toggles) implemented entirely in Extension; uses Foundation layout and primitives; no Foundation API changes. |
+
+### Implementation Traceability (Phase L)
+
+| Capability                       | Realised by   | Canon / Reference                                      |
+| -------------------------------- | ------------- | ------------------------------------------------------ |
+| Hero background / media support  | **HeroMedia** | [HEROMEDIA_CANON.md](HEROMEDIA_CANON.md)               |
+| Hero carousel capability         | **HeroMedia** (composes Carousel) | [HEROMEDIA_CANON.md](HEROMEDIA_CANON.md)        |
+| Overlay positioning (badge/icon over content) | **OverlaySlot** | [OVERLAYSLOT_CANON.md](OVERLAYSLOT_CANON.md) |
+| Responsive visibility (show/hide)            | **ResponsiveVisibility** | [RESPONSIVE_VISIBILITY_CANON.md](RESPONSIVE_VISIBILITY_CANON.md) |
+| Surface elevation / shadow semantics         | **SurfaceElevation** (capability) | [SURFACE_ELEVATION_CANON.md](SURFACE_ELEVATION_CANON.md) |
+| Inverse heading semantics                    | **InverseTypography** (capability) | [INVERSE_TYPOGRAPHY_CANON.md](INVERSE_TYPOGRAPHY_CANON.md) |
 
 ---
 
@@ -154,13 +165,16 @@ Phase L.1 is complete and ready for Phase L.2 (Extension API Design) when all of
 ## Related Documents
 
 - [EXTENSION_AUTHORITY.md](../EXTENSION_AUTHORITY.md) — Extension boundary contract
+- [HEROMEDIA_CANON.md](HEROMEDIA_CANON.md) — HeroMedia canonical capability definition (Hero background/media, Hero carousel)
+- [OVERLAYSLOT_CANON.md](OVERLAYSLOT_CANON.md) — OverlaySlot canonical capability definition (Overlay positioning)
 - [CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md](../closed-system/CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md) — Enforcement guards
 - [CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md](../closed-system/CLOSED_SYSTEM_V2_LAYOUT_CAPABILITY_MAP.md) — Layout capability map (Foundation/COMPOSITION)
 - [TOKEN_REALITY_AUDIT_027.md](../../reports/tokens/TOKEN_REALITY_AUDIT_027.md) — Token usage and gap analysis
 - [DOCUMENTATION_CANON_LOCK.md](../DOCUMENTATION_CANON_LOCK.md) — Documentation structure (extension/ canonical placement)
+- [PHASE_L_CLOSURE_SUMMARY.md](../../reports/PHASE_L_CLOSURE_SUMMARY.md) — Phase L closure; ResponsiveVisibility, InverseTypography, SurfaceElevation implemented
 
 ---
 
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2026-02-01  
 **Task ID:** TUI_CSV2_PHASE_L1_EXTENSION_CAPABILITY_DESIGN_031  
-**Status:** Design-only complete — Ready for Phase L.2 (Extension API Design)
+**Status:** Phase L complete — CANONICAL (ResponsiveVisibility, InverseTypography, SurfaceElevation implemented)

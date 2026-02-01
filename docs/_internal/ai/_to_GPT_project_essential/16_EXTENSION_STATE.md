@@ -1,7 +1,7 @@
 # TUI Extension Layer - Canonical State
 
 **Date:** 2025-12-27  
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-31  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -118,6 +118,25 @@ The following components form the foundation of the UI system. Foundation layer 
    - **Motion Compliance:** ✅ (MOTION_TOKENS.transitionPreset.colors, reduced motion supported)
    - **Exports:** `MultiSelect`, `MultiSelectProps`, `MultiSelectOption`, `MultiSelectSize`
 
+3.2. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, API simplification TUI_EXT_CAROUSEL_FIX_004)
+   - **Lock Date:** 2026-01-29
+   - **Creation Date:** 2026-01-29
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Task ID:** TUI_EXT_CAROUSEL_001, TUI_EXT_CAROUSEL_FIX_004
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Component Type:** Extension Layer Composite — compound carousel (batteries-included)
+   - **Purpose:** Production-grade carousel/slider with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed directly inside Track (no Controls wrapper). No visual props in public API; internal tokens only (carousel.tokens.ts).
+   - **API policy:** Simple API explicitly forbidden (compound-only; decision fixed at lock).
+   - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
+   - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal; spacing, state semantic tokens)
+   - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
+   - **Test Coverage:** Comprehensive (Carousel.test.tsx — rendering, interactions, keyboard, controlled, A11Y, Prev/Next inside track)
+   - **Storybook Coverage:** Default, Orientation, Looping, Controlled, CustomControls, LongContent
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, `CarouselRootProps`, `CarouselOrientation`, and related types (no CarouselControls)
+
 4. **ContextMenu** - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
    - **Status:** ✅ **PROCESS LOCKED** (Pipeline 18A Complete)
    - **Lock Date:** 2025-12-25
@@ -197,6 +216,31 @@ The following components form the foundation of the UI system. Foundation layer 
 The following components are **ALLOWED** for use. They are exported via `src/index.ts` and form the Extension Layer.
 
 **Note:** Some Extension components may be **LOCKED** after completing their audit and locking procedures. Locked Extension components are immutable and cannot be modified without explicit unlock approval.
+
+### Extension Capabilities LOCKED (Phase L)
+
+1. **HeroMedia** - `src/COMPOSITION/hero/HeroMedia/`
+   - **Status:** ✅ **LOCKED** (Phase L — Overlay + HeroMedia)
+   - **Lock Date:** 2026-01-30
+   - **Task ID:** TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001
+   - **Lock Type:** Extension-level capability lock (Phase L)
+   - **Component Type:** Extension Layer Composite — hero media and overlay composition
+   - **Purpose:** Canonical entry point for hero blocks combining media (image, video, carousel) with overlay content. Structure, accessibility, and layering per HEROMEDIA_CANON.md. Uses OverlaySlot for overlay positioning; overlay responsibility delegated to OverlaySlot (no internal overlay positioning).
+   - **Canon:** [HEROMEDIA_CANON.md](./extension/HEROMEDIA_CANON.md)
+   - **Rule:** Modifications only via new Phase L audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `HeroMedia`, `HeroMedia.Media`, `HeroMedia.Overlay`, and related types
+
+2. **OverlaySlot** - `src/COMPOSITION/overlay/OverlaySlot/`
+   - **Status:** ✅ **LOCKED** (Phase L — Overlay + HeroMedia)
+   - **Lock Date:** 2026-01-31
+   - **Task ID:** TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001
+   - **Lock Type:** Extension-level capability lock (Phase L)
+   - **Component Type:** Extension Layer — overlay positioning primitive
+   - **Purpose:** Single source of truth for overlay positioning; compound API Root/Anchor/Item; non-interactive. OverlaySlot is the only allowed place for raw overlay positioning logic; consumer code must not implement raw positioning.
+   - **Canon:** [OVERLAYSLOT_CANON.md](./extension/OVERLAYSLOT_CANON.md)
+   - **Rules (lock_declaration):** OverlaySlot MUST NOT implement product-specific logic; MUST remain non-interactive; MUST be single source of truth for overlay positioning; No Simple API.
+   - **Rule:** Modifications only via new Phase L audit; hotfixes require explicit LOCK exception per TUNG policy.
+   - **Exports:** `OverlaySlot`, `OverlaySlot.Root`, `OverlaySlot.Anchor`, `OverlaySlot.Item`, and related types
 
 ### Visual Components
 
