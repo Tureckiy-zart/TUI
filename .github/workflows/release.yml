@@ -1,4 +1,4 @@
-name: Release
+name: Release — Build & Publish to npm
 
 on:
   push:
@@ -7,44 +7,46 @@ on:
 
 permissions:
   contents: read
-  id-token: write # 🔥 ОБЯЗАТЕЛЬНО для npm provenance
+  id-token: write
 
 jobs:
   release:
     name: Build & Publish to npm
     runs-on: ubuntu-latest
+    environment: npm-release
 
     steps:
+      # 1️⃣ Checkout source at tag
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      # 2️⃣ Setup Node.js (npm registry auth handled here)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org/
-          cache: pnpm
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      # 3️⃣ Enable Corepack (pnpm)
+      - name: Enable Corepack
+        run: corepack enable
 
+      # 4️⃣ Install dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 🔒 Quality gate — ты уже это используешь, оставляем
-      - name: Validate package
-        run: pnpm validate
-
+      # 5️⃣ Build package
       - name: Build package
         run: pnpm build
 
-      # 🚀 КЛЮЧЕВОЙ ШАГ
+      # 6️⃣ Publish to npm with provenance
       - name: Publish package to npm (with provenance)
         run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # 7️⃣ Post-release verification (canon guard)
       - name: Post-release verification
         run: node scripts/release-verify.js
