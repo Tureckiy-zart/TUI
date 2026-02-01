@@ -184,8 +184,9 @@ function hasDescriptionInChildren(children: React.ReactNode): boolean {
 }
 
 /**
- * Check if Modal.Title component exists in children
- * Recursively searches through React children to find Title component
+ * Check if Modal.Title or Dialog.Title component exists in children
+ * Recursively searches through React children to find Title component.
+ * Recognizes both Radix DialogPrimitive.Title and our DialogTitle (Dialog composition).
  */
 function hasTitleInChildren(children: React.ReactNode): boolean {
   let hasTitle = false;
@@ -197,7 +198,7 @@ function hasTitleInChildren(children: React.ReactNode): boolean {
       const childType = child.type as any;
       const displayName = childType?.displayName || childType?.name;
 
-      if (displayName === DialogPrimitive.Title.displayName) {
+      if (displayName === DialogPrimitive.Title.displayName || displayName === "DialogTitle") {
         hasTitle = true;
         return;
       }

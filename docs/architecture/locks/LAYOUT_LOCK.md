@@ -25,7 +25,7 @@ This document **formally locks** the Layout Primitives component system and Exte
 The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 
 ### 1. Box Component
-- **File:** `src/components/layout/Box.tsx`
+- **File:** `src/COMPOSITION/layout/Box/Box.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Box`, `BoxProps`
@@ -35,7 +35,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 2. Stack Component
-- **File:** `src/components/layout/Stack.tsx`
+- **File:** `src/COMPOSITION/layout/Stack/Stack.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Stack`, `StackProps`
@@ -45,7 +45,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 3. Column Component
-- **File:** `src/components/layout/Column.tsx`
+- **File:** `src/COMPOSITION/layout/Column/Column.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Column`, `ColumnProps`
@@ -55,7 +55,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 4. Row Component
-- **File:** `src/components/layout/Row.tsx`
+- **File:** `src/COMPOSITION/layout/Row/Row.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Row`, `RowProps`
@@ -65,7 +65,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 5. Container Component
-- **File:** `src/components/layout/Container.tsx`
+- **File:** `src/COMPOSITION/layout/Container/Container.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Container`, `ContainerProps`
@@ -75,7 +75,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 6. Flex Component
-- **File:** `src/components/layout/Flex.tsx`
+- **File:** `src/COMPOSITION/layout/Flex/Flex.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Flex`, `FlexProps`
@@ -85,7 +85,7 @@ The following Layout Primitives components are **LOCKED** and **IMMUTABLE**:
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 7. Grid Component
-- **File:** `src/components/layout/Grid.tsx`
+- **File:** `src/COMPOSITION/layout/Grid/Grid.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Grid`, `GridProps`

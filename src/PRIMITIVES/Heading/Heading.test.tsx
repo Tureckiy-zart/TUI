@@ -1,6 +1,7 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { InverseTypography } from "@/COMPOSITION/inverse-typography/InverseTypography/InverseTypography";
 import { renderWithTheme } from "@/test/test-utils";
 
 import { Heading } from "./Heading";
@@ -116,6 +117,24 @@ describe("Heading", () => {
       const { container } = renderWithTheme(<Heading level={2}>Normal Heading</Heading>);
       const heading = container.querySelector("h2");
       expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-secondary))]");
+    });
+  });
+
+  describe("InverseTypography context", () => {
+    it("uses primary when outside InverseTypography.Root", () => {
+      const { container } = renderWithTheme(<Heading level={2}>Outside inverse</Heading>);
+      const heading = container.querySelector("h2");
+      expect(heading).not.toHaveClass("text-[hsl(var(--tm-text-inverse))]");
+    });
+
+    it("uses inverse token when inside InverseTypography.Root", () => {
+      const { container } = renderWithTheme(
+        <InverseTypography.Root>
+          <Heading level={2}>Inside inverse</Heading>
+        </InverseTypography.Root>,
+      );
+      const heading = container.querySelector("h2");
+      expect(heading).toHaveClass("text-[hsl(var(--tm-text-inverse))]");
     });
   });
 

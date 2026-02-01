@@ -29,16 +29,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - (none)
 
-## [2.31.0] - 2026-01-29
+## [2.4.0] - 2026-02-01
 
 ### Added
 
-- **Carousel (Extension):** Compound carousel component (Root, Track, Slide, Controls, Prev, Next, Indicators). Batteries-included; compound-only API; no variant/size/visual props. Canonical Storybook: Default, Orientation, Looping, Controlled, CustomControls, LongContent with argTypes and disabled state props in Controls panel.
-- **Carousel Prev/Next:** Disabled state at first/last slide when `loop={false}` for clear UX at boundaries.
+- **ResponsiveVisibility (Extension):**
+  - Canonical composition-level capability for breakpoint-based visibility.
+  - Public API: `ResponsiveVisibility.Root`, `From`, `Below`, `Only`.
+  - Explicitly forbidden patterns: Tailwind visibility utilities, CSS media queries in consumer code, JS breakpoint hooks, and duplicate visibility logic.
+  - Dev-only runtime guards for invalid nesting (no runtime detection of Foundation/Layout by design).
+  - Canonical etalon composition: `HeaderComposition`.
+  - CANON, LOCK, EXTENSION_STATE, FOUNDATION_LOCK, and capability map fully synchronized.
+
+- **SurfaceElevation (Extension):**
+  - Semantic elevation context using existing elevation tokens from `ELEVATION_AUTHORITY`.
+  - Context-only capability; does not render styles directly.
+  - Visual elevation applied by elevation-aware components (e.g. Card).
+  - Negative tests ensure non-elevation-aware components remain unaffected.
+  - Canonical etalon composition: `SurfaceElevationCompositionReference`.
 
 ### Changed
 
-- (none)
+- **InverseTypography (Extension):**
+  - Activated visual behavior for existing typography primitives (`Text`, `Heading`) via `InverseTypography` context.
+  - Uses existing typography color tokens from `TYPOGRAPHY_COLOR_POLICY_v1`.
+  - `InverseTypography.Root` remains context-only (no direct rendering).
+  - No new props, variants, tokens, or public API added.
+  - Canonical etalon composition: `HeroCompositionReference`.
 
 ### Fixed
 

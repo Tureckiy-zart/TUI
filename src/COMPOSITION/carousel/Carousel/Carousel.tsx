@@ -63,12 +63,23 @@ import {
   CAROUSEL_DEFAULT_INDEX,
   CAROUSEL_DEFAULT_LOOP,
   CAROUSEL_DEFAULT_ORIENTATION,
+  CAROUSEL_SIMPLE_DEFAULT_AUTOPLAY,
+  CAROUSEL_SIMPLE_DEFAULT_AUTOPLAY_DELAY,
+  CAROUSEL_SIMPLE_DEFAULT_CONTROLS,
+  CAROUSEL_SIMPLE_DEFAULT_INDICATORS,
+  CAROUSEL_SIMPLE_DEFAULT_LOOP,
+  CAROUSEL_SIMPLE_DEFAULT_ORIENTATION,
 } from "./Carousel.constants";
 import { CarouselProvider, useCarouselContext } from "./Carousel.context";
 import { CarouselNext, CarouselPrev } from "./Carousel.controls";
 import { CarouselIndicators } from "./Carousel.indicators";
 import { CAROUSEL_TOKENS } from "./carousel.tokens";
-import type { CarouselRootProps, CarouselSlideProps, CarouselTrackProps } from "./Carousel.types";
+import type {
+  CarouselProps,
+  CarouselRootProps,
+  CarouselSlideProps,
+  CarouselTrackProps,
+} from "./Carousel.types";
 import { getNextIndex, getPrevIndex } from "./Carousel.utils";
 
 export { CarouselNext, CarouselPrev } from "./Carousel.controls";
@@ -88,6 +99,8 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, CarouselRootProps>(
       loop = CAROUSEL_DEFAULT_LOOP,
       controls = true,
       indicators = true,
+      autoplay = false,
+      autoplayDelay = CAROUSEL_SIMPLE_DEFAULT_AUTOPLAY_DELAY,
       children,
       "aria-label": ariaLabel,
       onKeyDown,
@@ -101,6 +114,12 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, CarouselRootProps>(
     const isControlled = controlledIndex !== undefined;
     const index = isControlled ? controlledIndex! : uncontrolledIndex;
 
+    // Ref to track current index for autoplay
+    const indexRef = React.useRef(index);
+    React.useEffect(() => {
+      indexRef.current = index;
+    }, [index]);
+
     const setIndex = React.useCallback(
       (next: number) => {
         if (!isControlled) setUncontrolled(next);
@@ -108,6 +127,19 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, CarouselRootProps>(
       },
       [isControlled, onIndexChange],
     );
+
+    // Autoplay logic
+    React.useEffect(() => {
+      if (!autoplay || totalSlides <= 1) return;
+
+      const intervalId = setInterval(() => {
+        setIndex(getNextIndex(indexRef.current, totalSlides, loop));
+      }, autoplayDelay);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, [autoplay, autoplayDelay, totalSlides, loop, setIndex]);
 
     const handleKeyDown = React.useCallback(
       (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -154,6 +186,7 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, CarouselRootProps>(
           onKeyDown={handleKeyDown}
           tabIndex={0}
           data-carousel-root
+          className={cn("relative")}
           {...props}
         >
           {children}
@@ -251,6 +284,85 @@ const CarouselTrack = React.forwardRef<HTMLDivElement, CarouselTrackProps>(
 CarouselTrack.displayName = "CarouselTrack";
 
 // ---------------------------------------------------------------------------
+// Simple API Component
+// ---------------------------------------------------------------------------
+
+/**
+ * Simple Public API for Carousel component.
+ *
+ * Provides a convenient, declarative interface for common carousel usage patterns,
+ * improving developer experience without breaking or replacing the compound API.
+ *
+ * Internally composes the compound API components (Root, Track, Slide, Prev, Next, Indicators).
+ *
+ * @see docs/architecture/extension/CAROUSEL_SIMPLE_API_CANON.md
+ */
+const CarouselSimple = React.forwardRef<HTMLDivElement, CarouselProps>(
+  (
+    {
+      items,
+      orientation = CAROUSEL_SIMPLE_DEFAULT_ORIENTATION,
+      controls = CAROUSEL_SIMPLE_DEFAULT_CONTROLS,
+      indicators = CAROUSEL_SIMPLE_DEFAULT_INDICATORS,
+      loop = CAROUSEL_SIMPLE_DEFAULT_LOOP,
+      autoplay = CAROUSEL_SIMPLE_DEFAULT_AUTOPLAY,
+      autoplayDelay = CAROUSEL_SIMPLE_DEFAULT_AUTOPLAY_DELAY,
+      ariaLabel,
+      renderSlide,
+      ...props
+    },
+    ref,
+  ) => {
+    // Runtime validation: items must be a non-empty array
+    if (!Array.isArray(items) || items.length === 0) {
+      throw new Error(
+        `[Carousel] \`items\` prop must be a non-empty array. Received: ${JSON.stringify(items)}`,
+      );
+    }
+
+    const trackChildren = items.map((item, index) => (
+      <CarouselSlide key={index}>{renderSlide ? renderSlide(item, index) : item}</CarouselSlide>
+    ));
+
+    const controlsInside = controls === "inside";
+    const controlsOutside = controls === "outside";
+
+    if (controlsInside) {
+      trackChildren.push(
+        <CarouselPrev key="prev" aria-label="Previous slide" />,
+        <CarouselNext key="next" aria-label="Next slide" />,
+      );
+    }
+
+    return (
+      <CarouselRoot
+        ref={ref}
+        orientation={orientation}
+        loop={loop}
+        autoplay={autoplay}
+        autoplayDelay={autoplayDelay}
+        controls={controls !== "none"}
+        indicators={indicators !== "none"}
+        aria-label={ariaLabel}
+        {...props}
+      >
+        <CarouselTrack>{trackChildren}</CarouselTrack>
+        {controlsOutside && (
+          <>
+            <CarouselPrev aria-label="Previous slide" />
+            <CarouselNext aria-label="Next slide" />
+          </>
+        )}
+        {indicators !== "none" && (
+          <CarouselIndicators placement={indicators === "overlay" ? "overlay" : "bottom"} />
+        )}
+      </CarouselRoot>
+    );
+  },
+);
+CarouselSimple.displayName = "Carousel";
+
+// ---------------------------------------------------------------------------
 // Compound export
 // ---------------------------------------------------------------------------
 
@@ -259,16 +371,17 @@ export type {
   CarouselNextProps,
   CarouselOrientation,
   CarouselPrevProps,
+  CarouselProps,
   CarouselRootProps,
   CarouselSlideProps,
   CarouselTrackProps,
 } from "./Carousel.types";
 
-export const Carousel = {
+export const Carousel = Object.assign(CarouselSimple, {
   Root: CarouselRoot,
   Track: CarouselTrack,
   Slide: CarouselSlide,
   Prev: CarouselPrev,
   Next: CarouselNext,
   Indicators: CarouselIndicators,
-};
+});

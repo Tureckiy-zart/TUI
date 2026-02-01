@@ -3,18 +3,14 @@
  * Re-export from Carousel component folder.
  */
 
-export type {
-  CarouselIndicatorsProps,
-  CarouselNextProps,
-  CarouselOrientation,
-  CarouselPrevProps,
-  CarouselRootProps,
-  CarouselSlideProps,
-  CarouselTrackProps,
-} from "./Carousel/Carousel.index";
 export {
   Carousel,
-  CarouselIndicators,
-  CarouselNext,
-  CarouselPrev,
+  type CarouselIndicatorsProps,
+  type CarouselNextProps,
+  type CarouselOrientation,
+  type CarouselPrevProps,
+  type CarouselProps,
+  type CarouselRootProps,
+  type CarouselSlideProps,
+  type CarouselTrackProps,
 } from "./Carousel/Carousel.index";

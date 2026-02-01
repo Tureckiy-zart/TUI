@@ -23,7 +23,7 @@ import type { CarouselIndicatorsProps } from "./Carousel.types";
 
 /** Dot indicators; each dot is a button with aria-label "Slide N" */
 export const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndicatorsProps>(
-  (props, ref) => {
+  ({ placement = "bottom", ...props }, ref) => {
     const { index, setIndex, totalSlides, showIndicators } = useCarouselContext();
 
     if (!showIndicators || totalSlides <= 0) return null;
@@ -31,7 +31,11 @@ export const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndic
     return (
       <div
         ref={ref}
-        className={cn(CAROUSEL_TOKENS.indicators.gap, "flex items-center justify-center")}
+        className={cn(
+          CAROUSEL_TOKENS.indicators.gap,
+          "flex items-center justify-center",
+          CAROUSEL_TOKENS.indicators.placement[placement],
+        )}
         data-carousel-indicators
         role="tablist"
         aria-label="Slide navigation"

@@ -1,0 +1,51 @@
+"use client";
+
+/**
+ * OverlaySlot.Anchor — base content (single anchor); exactly one per Root.
+ *
+ * @see docs/architecture/extension/OVERLAYSLOT_CANON.md
+ */
+
+import * as React from "react";
+
+import { useOverlaySlotContext } from "./OverlaySlot.context";
+import type { OverlaySlotAnchorProps } from "./OverlaySlot.types";
+
+const OverlaySlotAnchor = React.forwardRef<HTMLDivElement, OverlaySlotAnchorProps>(
+  ({ children, ...rest }, ref) => {
+    const { registerAnchor, unregisterAnchor } = useOverlaySlotContext();
+    const allowed = React.useRef<boolean | null>(null);
+
+    if (allowed.current === null) {
+      allowed.current = registerAnchor();
+    }
+
+    React.useEffect(() => {
+      if (!allowed.current) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error(
+            "[OverlaySlot] Exactly one Anchor allowed per Root. See OVERLAYSLOT_CANON.md.",
+          );
+        }
+      }
+      return () => {
+        unregisterAnchor();
+        allowed.current = null;
+      };
+    }, [unregisterAnchor]);
+
+    if (!allowed.current) {
+      return null;
+    }
+
+    return (
+      <div ref={ref} data-overlayslot-anchor {...rest}>
+        {children}
+      </div>
+    );
+  },
+);
+
+OverlaySlotAnchor.displayName = "OverlaySlotAnchor";
+
+export { OverlaySlotAnchor };

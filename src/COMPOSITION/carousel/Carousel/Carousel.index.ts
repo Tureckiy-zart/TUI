@@ -1,10 +1,11 @@
-export type {
-  CarouselIndicatorsProps,
-  CarouselNextProps,
-  CarouselOrientation,
-  CarouselPrevProps,
-  CarouselRootProps,
-  CarouselSlideProps,
-  CarouselTrackProps,
+export {
+  Carousel,
+  type CarouselIndicatorsProps,
+  type CarouselNextProps,
+  type CarouselOrientation,
+  type CarouselPrevProps,
+  type CarouselProps,
+  type CarouselRootProps,
+  type CarouselSlideProps,
+  type CarouselTrackProps,
 } from "./Carousel";
-export { Carousel, CarouselIndicators, CarouselNext, CarouselPrev } from "./Carousel";
