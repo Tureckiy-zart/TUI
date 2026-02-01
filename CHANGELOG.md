@@ -1,3 +1,11 @@
+## [3.0.2](https://github.com/Tureckiy-zart/TUI/compare/v3.0.1...v3.0.2) (2026-02-01)
+
+### Bug Fixes
+
+- **release:** grant permissions for build attestation ([734887d](https://github.com/Tureckiy-zart/TUI/commit/734887dbc886b98fe4e66ee34b250b964bc016f0))
+- **release:** stabilize release pipeline ([ac7d706](https://github.com/Tureckiy-zart/TUI/commit/ac7d7065d5d4674377e351e8a99fdf862d8857fb))
+- **release:** stabilize release pipeline ([6049cfe](https://github.com/Tureckiy-zart/TUI/commit/6049cfe09b9c62c49bb77627ea4c6d6919d9aaac))
+
 ## [3.0.1](https://github.com/Tureckiy-zart/TUI/compare/v3.0.0...v3.0.1) (2026-02-01)
 
 ### Bug Fixes
