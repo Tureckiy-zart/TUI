@@ -245,15 +245,15 @@
       "type": "color"
     },
     "color.text.secondary": {
-      "value": "#6b6b6b",
+      "value": "#616161",
       "type": "color"
     },
     "color.text.tertiary": {
-      "value": "#a6a6a6",
+      "value": "#6b6b6b",
       "type": "color"
     },
     "color.text.muted": {
-      "value": "#6b6b6b",
+      "value": "#666666",
       "type": "color"
     },
     "color.text.inverse": {
@@ -783,15 +783,15 @@
       "type": "color"
     },
     "color.text.secondary": {
-      "value": "#a1a1a1",
+      "value": "#afafaf",
       "type": "color"
     },
     "color.text.tertiary": {
-      "value": "#797979",
+      "value": "#818181",
       "type": "color"
     },
     "color.text.muted": {
-      "value": "#a1a1a1",
+      "value": "#8f8f8f",
       "type": "color"
     },
     "color.text.inverse": {
