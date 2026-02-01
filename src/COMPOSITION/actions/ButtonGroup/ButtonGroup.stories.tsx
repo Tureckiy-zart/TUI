@@ -26,7 +26,7 @@ import { ButtonGroup } from "./ButtonGroup";
  */
 
 const meta: Meta<typeof ButtonGroup> = {
-  title: "UI / Composition / Actions / ButtonGroup",
+  title: "Composition / Actions / ButtonGroup",
   component: ButtonGroup,
   parameters: {
     layout: "padded",

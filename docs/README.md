@@ -79,6 +79,11 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 - [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) - Extension layer boundary contract (ACTIVE)
 
+### Extension Layer (architecture/extension/)
+
+- [EXTENSION_CAPABILITY_MAP.md](./architecture/extension/EXTENSION_CAPABILITY_MAP.md) - Extension Layer capability map (Hero, overlay, layout capabilities)
+- [HEROMEDIA_CANON.md](./architecture/extension/HEROMEDIA_CANON.md) - HeroMedia canonical capability definition (design-locked)
+
 ### Authority Navigation
 
 - [AUTHORITY_NAVIGATION.md](./architecture/AUTHORITY_NAVIGATION.md) - Navigation map for Authority system
@@ -110,11 +115,21 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 ### Component Locks
 
-- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives and Extension Layout components lock
-- [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
+- [architecture/locks/A11Y_LOCK.md](./architecture/locks/A11Y_LOCK.md) - A11Y system lock (accessibility, contrast, WCAG 2.1 AA)
+- [architecture/locks/BUTTON_LINK_LOCK.md](./architecture/locks/BUTTON_LINK_LOCK.md) - Button, IconButton, Link Foundation lock
+- [architecture/locks/CAROUSEL_LOCK.md](./architecture/locks/CAROUSEL_LOCK.md) - Carousel Extension lock
 - [architecture/locks/FOCUS_LOCK.v1.1.md](./architecture/locks/FOCUS_LOCK.v1.1.md) - Focus system lock
-- [architecture/locks/A11Y_LOCK.md](./architecture/locks/A11Y_LOCK.md) - A11Y system lock
+- [architecture/locks/HEROMEDIA_LOCK.md](./architecture/locks/HEROMEDIA_LOCK.md) - HeroMedia Extension lock (Phase L)
 - [architecture/locks/INPUT_LOCK.md](./architecture/locks/INPUT_LOCK.md) - Input system lock
+- [architecture/locks/LAYOUT_LOCK.md](./architecture/locks/LAYOUT_LOCK.md) - Layout primitives and Extension Layout components lock
+- [architecture/locks/MODAL_CONTEXTMENU_TOAST_LOCK.md](./architecture/locks/MODAL_CONTEXTMENU_TOAST_LOCK.md) - Modal, ContextMenu, Toast Foundation overlays lock
+- [architecture/locks/MOTION_LOCK.md](./architecture/locks/MOTION_LOCK.md) - Motion system lock (tokens, presets)
+- [architecture/locks/OVERLAYSLOT_LOCK.md](./architecture/locks/OVERLAYSLOT_LOCK.md) - OverlaySlot Extension lock (Phase L)
+- [architecture/locks/RUNTIME_UTILITIES_LOCK.md](./architecture/locks/RUNTIME_UTILITIES_LOCK.md) - Runtime utilities lock (tokenCVA, cn - TUNG-028)
+- [architecture/locks/SELECT_LOCK.md](./architecture/locks/SELECT_LOCK.md) - Select Foundation lock
+- [architecture/locks/TABS_LOCK.md](./architecture/locks/TABS_LOCK.md) - Tabs Foundation lock
+- [architecture/locks/TEXT_LOCK.md](./architecture/locks/TEXT_LOCK.md) - Text/typography components lock
+- [architecture/locks/TOOLTIP_POPOVER_LOCK.md](./architecture/locks/TOOLTIP_POPOVER_LOCK.md) - Tooltip, Popover, HoverCard lock
 
 ### Progress & Project Management
 
@@ -160,7 +175,7 @@ This directory contains canonical and supporting documentation. The canonical li
 ```
 docs/
 ├── architecture/            # LAW documents: Authority Contracts, Architecture Rules, Locks
-│   ├── locks/              # Component lock documents (2 files)
+│   ├── locks/              # Component lock documents (15 files)
 │   ├── *_AUTHORITY.md      # Foundation Authority Contracts (LOCKED)
 │   ├── EXTENSION_AUTHORITY.md  # Extension boundary contract
 │   ├── FOUNDATION_LOCK.md  # Foundation lock status (source of truth)

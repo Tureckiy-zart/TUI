@@ -324,7 +324,7 @@ Any modification to locked A11Y System components requires:
 
 ### Audit & Reports
 - [TUNG_A11Y_SYSTEM_V1.md](../../reports/TUNG_A11Y_SYSTEM_V1.md) - A11Y System Audit Report
-- [TUNG_A11Y_SYSTEM_V1_verify.md](../../reports/TUNG_A11Y_SYSTEM_V1_verify.md) - Verification Report
+- [TUNG_A11Y_SYSTEM_V1_verify.md](../../reports/archive/TUNG_A11Y_SYSTEM_V1_verify.md) - Verification Report (archived)
 - [A11Y_CONTRAST_CLOSURE_REPORT.md](../../reports/a11y/A11Y_CONTRAST_CLOSURE_REPORT.md) - A11Y Contrast Closure Report
 - [CONTRAST_SCRIPT_NOTES.md](../../reports/a11y/CONTRAST_SCRIPT_NOTES.md) - Contrast Script Alignment Documentation
 

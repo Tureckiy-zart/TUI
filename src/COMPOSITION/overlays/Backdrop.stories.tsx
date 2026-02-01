@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Backdrop } from "./Backdrop";
 
 const meta: Meta<typeof Backdrop> = {
-  title: "UI / Composition / Overlays / Backdrop",
+  title: "Composition / Overlays / Backdrop",
   component: Backdrop,
   parameters: {
     layout: "centered",

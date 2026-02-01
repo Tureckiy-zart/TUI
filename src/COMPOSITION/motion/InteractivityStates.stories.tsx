@@ -19,7 +19,7 @@ import { Switch } from "@/PRIMITIVES/Switch";
 import { Text } from "@/PRIMITIVES/Text";
 
 const meta: Meta = {
-  title: "UI / Composition / Motion / Interactivity States",
+  title: "Composition / Motion / Interactivity States",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

@@ -5,7 +5,7 @@ import { Stack } from "./Stack";
 const cardItemStyle = { color: "hsl(var(--tm-text-primary))" };
 
 const meta: Meta<typeof Stack> = {
-  title: "UI / Composition / Layout / Stack",
+  title: "Composition / Layout / Stack",
   component: Stack,
   parameters: {
     layout: "padded",

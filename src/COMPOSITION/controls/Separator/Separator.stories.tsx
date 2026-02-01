@@ -2,7 +2,7 @@
 import { Separator } from "./Separator";
 
 const meta: Meta<typeof Separator> = {
-  title: "UI / Composition / Controls / Separator",
+  title: "Composition / Controls / Separator",
   component: Separator,
   parameters: {
     layout: "padded",

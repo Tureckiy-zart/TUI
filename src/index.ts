@@ -358,6 +358,66 @@ export {
   type MultiSelectSize,
 } from "./COMPOSITION/controls/MultiSelect/MultiSelect.index";
 
+// Carousel component (Extension, compound, batteries-included)
+export {
+  Carousel,
+  type CarouselIndicatorsProps,
+  type CarouselNextProps,
+  type CarouselOrientation,
+  type CarouselPrevProps,
+  type CarouselProps,
+  type CarouselRootProps,
+  type CarouselSlideProps,
+  type CarouselTrackProps,
+} from "./COMPOSITION/carousel";
+
+// HeroMedia component (Extension, hero media + overlay)
+export {
+  HeroMedia,
+  type HeroMediaAspect,
+  type HeroMediaMediaProps,
+  type HeroMediaOverlayAlign,
+  type HeroMediaOverlayPosition,
+  type HeroMediaOverlayProps,
+  type HeroMediaRootProps,
+  type HeroMediaSize,
+  type HeroMediaType,
+} from "./COMPOSITION/hero";
+
+// OverlaySlot component (Extension, overlay positioning over anchor)
+export {
+  OverlaySlot,
+  type OverlaySlotAnchorProps,
+  type OverlaySlotItemProps,
+  type OverlaySlotPosition,
+  type OverlaySlotRootProps,
+} from "./COMPOSITION/overlay";
+
+// ResponsiveVisibility component (Extension, show/hide by breakpoint)
+export {
+  ResponsiveVisibility,
+  type ResponsiveVisibilityBelowProps,
+  type ResponsiveVisibilityFromProps,
+  type ResponsiveVisibilityOnlyProps,
+  type ResponsiveVisibilityRootProps,
+} from "./COMPOSITION/responsive";
+
+// InverseTypography component (Extension, inverse text context at composition level)
+export {
+  InverseTypography,
+  type InverseTypographyRootProps,
+} from "./COMPOSITION/inverse-typography";
+
+// SurfaceElevation component (Extension, elevated surface context at composition level)
+export {
+  SurfaceElevation,
+  SurfaceElevationCompositionReference,
+  type SurfaceElevationCompositionReferenceProps,
+  type SurfaceElevationLevel,
+  type SurfaceElevationRootProps,
+  useSurfaceElevation,
+} from "./COMPOSITION/surface-elevation";
+
 // Avatar component (Radix-based, token-driven)
 export {
   Avatar,

@@ -11,7 +11,7 @@ import * as React from "react";
 import { Chip } from "./Chip";
 
 const meta: Meta<typeof Chip> = {
-  title: "UI / Composition / Overlays / Chip",
+  title: "Composition / Overlays / Chip",
   component: Chip,
   parameters: {
     layout: "centered",

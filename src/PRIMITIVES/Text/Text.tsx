@@ -46,6 +46,7 @@
 
 import * as React from "react";
 
+import { InverseTypographyContext } from "@/COMPOSITION/inverse-typography/InverseTypography/InverseTypography";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
 import type { AllowedTextForRole, TextToken, TypographyRole } from "@/FOUNDATION/tokens/typography";
@@ -200,11 +201,10 @@ export interface TextProps<R extends TypographyRole = TypographyRole> extends Om
 const TextComponent = React.forwardRef<HTMLElement, TextProps<any>>(
   ({ as = "span", size, weight, typographyRole: _typographyRole, color, ...props }, ref) => {
     const Component = as as TextAsElement;
-    // className and style are forbidden from public API - only CVA output is used
-    // typographyRole is used only for TypeScript type enforcement, not in runtime
-    // tone prop removed - use typographyRole + color instead
-
-    const colorVariant = color ? { color } : undefined;
+    const isInverse = React.useContext(InverseTypographyContext);
+    // Inside InverseTypography.Root, switch to inverse token; no new props
+    const effectiveColor = isInverse ? "inverse" : color;
+    const colorVariant = effectiveColor ? { color: effectiveColor } : undefined;
     const className = textVariants({ size, weight, ...colorVariant });
 
     return <Component ref={ref as any} className={className} {...props} />;

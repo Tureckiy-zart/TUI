@@ -68,6 +68,30 @@ The following components have been **formally locked** after successful audit an
 - **Tooltip** (`src/COMPOSITION/overlays/Tooltip/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 - **Modal** (`src/COMPOSITION/overlays/Modal/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 
+#### Extension Carousel
+
+- **Carousel** (`src/COMPOSITION/carousel/Carousel/`) — ✅ **PROCESS LOCKED** (2026-01-29)
+  - Compound API: Root, Track, Slide, Prev, Next, Indicators (no Controls wrapper). Prev/Next composed inside Track. See EXTENSION_STATE.md §3.2.
+
+#### Extension Phase L — Overlay + HeroMedia
+
+- **HeroMedia** (`src/COMPOSITION/hero/HeroMedia/`) — ✅ **LOCKED** (Phase L — 2026-01-31)
+  - Compound API: Root, Media, Overlay. Overlay delegated to OverlaySlot. Task: TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001. See EXTENSION_STATE.md § Extension Capabilities LOCKED (Phase L).
+- **OverlaySlot** (`src/COMPOSITION/overlay/OverlaySlot/`) — ✅ **LOCKED** (Phase L — 2026-01-31)
+  - Compound API: Root, Anchor, Item. Single source of truth for overlay positioning; non-interactive. Task: TUNG_LOCK_PHASE_L_OVERLAY_HEROMEDIA_001. See EXTENSION_STATE.md § Extension Capabilities LOCKED (Phase L).
+- **ResponsiveVisibility** (`src/COMPOSITION/responsive/ResponsiveVisibility/`) — ✅ **Phase L.3 implementation complete** (2026-02-01)
+  - Sealed exports (Public API only per RESPONSIVE_VISIBILITY_EXTENSION_API.md), dev-only runtime nesting guard (Root inside Root), tests (nesting, Only(2xl)=From(2xl), SSR safety), HeaderComposition etalon. See EXTENSION_STATE.md § Extension Capabilities LOCKED (Phase L).
+- **HeaderComposition** (`src/COMPOSITION/layout/HeaderComposition/`) — ✅ **Etalon** (2026-02-01)
+  - Reference composition for ResponsiveVisibility at Header/AppShell level. ResponsiveVisibility.Root + Below(md)/From(md) with Navbar, NavRoot, NavList, Menu. No Tailwind visibility, no media queries, no breakpoint hooks. See docs/reports/HEADER_COMPOSITION_INTENT.md.
+- **InverseTypography** (`src/COMPOSITION/inverse-typography/InverseTypography/`) — ✅ **Phase L.3 implementation complete** (2026-02-01)
+  - Sealed exports (public API only), dev-only runtime nesting guard (Root inside Root), tests (nesting dev/prod, context, SSR-safe), etalon HeroCompositionReference (hero composition); story HeroCompositionReference in InverseTypography.stories. Phase L.3 InverseTypography visual effect complete — Text and Heading switch to inverse token inside InverseTypography.Root; no new API. See EXTENSION_STATE.md § Extension Capabilities LOCKED (Phase L).
+- **HeroCompositionReference** (`src/COMPOSITION/hero/HeroCompositionReference/`) — ✅ **Etalon** (2026-02-01)
+  - Reference composition for InverseTypography at hero overlay level. HeroMedia.Root + Media + Overlay; InverseTypography.Root wraps overlay subtree only. Structure-only; no new tokens. Story: HeroCompositionReference in InverseTypography.stories.
+- **SurfaceElevation** (`src/COMPOSITION/surface-elevation/SurfaceElevation/`) — ✅ **Phase L.3 implementation complete** (2026-02-01)
+  - Context + visual effect via existing elevation tokens only. SurfaceElevation.Root (elevation level prop); useSurfaceElevation() hook; no styles rendered by SurfaceElevation. Dev-only nesting guard; tests (nesting dev/prod, context, SSR, unaffected). Etalon SurfaceElevationCompositionReference. See EXTENSION_STATE.md § Extension Capabilities LOCKED (Phase L).
+- **SurfaceElevationCompositionReference** (`src/COMPOSITION/surface-elevation/SurfaceElevationCompositionReference/`) — ✅ **Etalon** (2026-02-01)
+  - Reference composition for SurfaceElevation at composition level. SurfaceElevation.Root + Card with shadow from useSurfaceElevation(). Visual effect via existing tokens only. Story: SurfaceElevationCompositionReferenceStory in SurfaceElevation.stories.
+
 ### Lock Rules
 
 **Public API:**
@@ -576,6 +600,16 @@ The following Extension layer components have successfully completed Pipeline 18
    - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
    - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
 
+1b. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, API simplification TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types (no CarouselControls)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+
 2. **Table** - `src/PATTERNS/tables/table/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
    - **Layer:** PATTERNS (Extension layer)
    - **Type:** Interactive table component with sorting, expansion, and selection capabilities
@@ -945,6 +979,14 @@ The following Composition layer components have successfully completed Pipeline 
      - Compound component pattern: Modal.Root, Modal.Trigger, Modal.Content, Modal.Header, Modal.Title, Modal.Description, Modal.Footer, Modal.Close
    - **Quality:** 16 tests, 24 stories (canonical: States, SizesGallery, LongContent)
 
+5. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+
 **Note:** Foundation layer is **UNLOCKED** for active construction. Foundation Authorities remain LOCKED and IMMUTABLE. Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 ---
@@ -1059,6 +1101,18 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Test Coverage:** 32 tests (comprehensive)
    - **Storybook Coverage:** 11 stories (all use cases demonstrated)
    - **Exports:** `Field`, `FieldProps`, `FieldLabelProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`
+
+4. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004)
+   - **Lock Date:** 2026-01-29
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Component Type:** Extension compound carousel (batteries-included)
+   - **Layer:** COMPOSITION (carousel)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
 
 ### Extension Component Lock Rules
 
@@ -5068,6 +5122,26 @@ _Upgrade Layer (U1-U6, U9-U13) and subsequent layers pending. See master_tasks.j
   - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
   - **Registered:** ✅ EXTENSION_STATE.md updated, src/COMPOSITION/layout/index.ts export added
 
+### Carousel Component (2026-01-29)
+
+- ✅ **Carousel Component Created**
+  - **Date:** 2026-01-29
+  - **Pipeline:** Component Creation Pipeline (C0–C10 complete)
+  - **Location:** `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+  - **Type:** Extension Layer Composite — compound carousel (batteries-included)
+  - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track (no Controls wrapper).
+  - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
+  - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal)
+  - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
+  - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+  - **Registered:** ✅ EXTENSION_STATE.md §3.2, src/index.ts export added
+
+- ✅ **Carousel API Simplification (TUI_EXT_CAROUSEL_FIX_004)**
+  - **Date:** 2026-01-29
+  - **Change:** Carousel.Controls removed from public API; Prev/Next composed directly inside Carousel.Track
+  - **Exports:** No CarouselControls / CarouselControlsProps; Carousel, CarouselIndicators, CarouselNext, CarouselPrev and related types only
+  - **Lock:** ✅ PROCESS LOCKED in EXTENSION_STATE.md §3.2; added to PROJECT_PROGRESS Lock Scope (Extension Carousel)
+
 - ✅ **Navbar** - Layout Extension Layer Lock Complete (2026-01-01)
   - Component: Navbar
   - Type: Extension Layer Layout Component - Navigation Container
@@ -5330,6 +5404,61 @@ Formally locked the project file structure canon after resolving documentation m
 - ✅ CI/CD systems - All automated verification systems
 
 **Reference:** See `docs/architecture/ARCHITECTURE_LOCK.md` - File Structure Canon Lock section for complete lock rules and unlock procedure.
+
+---
+
+## TUI_CANON_PHASE_L_FINAL_SYNC_001 - Phase L Canonical Sync & Finalization
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-02-01  
+**Type:** Documentation (Phase L)  
+**Priority:** P0  
+**Task ID:** TUI_CANON_PHASE_L_FINAL_SYNC_001
+
+### Summary
+
+Synchronized and finalized all canonical documentation affected by Phase L implementation (ResponsiveVisibility, InverseTypography, SurfaceElevation) before release v2.4.0. Documentation-only task; no code changes.
+
+### Completed Tasks
+
+1. **INVERSE_TYPOGRAPHY_LOCK.md** ✅
+   - Replaced "Locked Capability" with "Locked Components"; added Location, Exports, Phase L.3 implementation complete
+   - Added PHASE_L_CLOSURE_SUMMARY to Related Documents
+
+2. **SURFACE_ELEVATION_LOCK.md** ✅
+   - Same sync: Locked Components with Location, Exports, Phase L.3
+   - Added PHASE_L_CLOSURE_SUMMARY to Related Documents
+
+3. **EXTENSION_CAPABILITY_MAP.md** ✅
+   - Updated Phase (L.1 → L closed), Status (Design-only → Phase L complete — CANONICAL)
+   - Updated Design Constraint and footer; added PHASE_L_CLOSURE_SUMMARY to Related Documents
+
+4. **INVERSE_TYPOGRAPHY_INTENT.md** ✅
+   - Status: design-only → Phase L.3 implementation complete; Implementation Deferred → Complete
+
+5. **SURFACE_ELEVATION_INTENT.md** ✅
+   - Same status updates; Implementation Deferred → Complete
+
+6. **HEADER_COMPOSITION_INTENT.md** ✅
+   - Status: reference composition implemented; Follow-up: HeaderComposition etalon
+
+### Files Modified
+
+- `docs/architecture/locks/INVERSE_TYPOGRAPHY_LOCK.md`
+- `docs/architecture/locks/SURFACE_ELEVATION_LOCK.md`
+- `docs/architecture/extension/EXTENSION_CAPABILITY_MAP.md`
+- `docs/reports/INVERSE_TYPOGRAPHY_INTENT.md`
+- `docs/reports/SURFACE_ELEVATION_INTENT.md`
+- `docs/reports/HEADER_COMPOSITION_INTENT.md`
+
+### Master Task Status
+
+**Master Task Status:** Updated to `completed` in `.cursor/tasks/master/master_tasks.json`
+
+### References
+
+- [PHASE_L_CLOSURE_SUMMARY.md](./reports/PHASE_L_CLOSURE_SUMMARY.md)
+- [EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md)
 
 ---
 

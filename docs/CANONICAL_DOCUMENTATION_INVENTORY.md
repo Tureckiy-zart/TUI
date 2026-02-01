@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-29
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 64 (55 existing + 9 Closed System v2 canonical documents)  
+**Total Canonical Documents:** 69 (55 existing + 9 Closed System v2 + 5 Extension Layer canonical documents)  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
 
 ---
@@ -22,7 +22,7 @@ This document provides a complete inventory of canonical documentation files. Th
 
 ### Total Count
 
-**64 canonical documents** are currently present in `docs/`.
+**66 canonical documents** are currently present in `docs/`.
 
 ### Post-Archive State
 
@@ -141,8 +141,25 @@ These documents define lock status for specific component categories.
 |------|-------------|--------|
 | `docs/architecture/locks/LAYOUT_LOCK.md` | Layout primitives and Extension Layout components lock - Component lock document | **LOCKED** |
 | `docs/architecture/locks/TEXT_LOCK.md` | Text/typography components lock - Component lock document | **LOCKED** |
+| `docs/architecture/locks/RESPONSIVE_VISIBILITY_LOCK.md` | ResponsiveVisibility Extension lock (Phase L) | **LOCKED** |
 
-**Total:** 2 files
+**Total:** 3 files
+
+---
+
+### Extension Layer (architecture/extension/)
+
+These documents define Extension Layer capability map and canonical capability definitions (boundary rules).
+
+| Path | Description | Status |
+|------|-------------|--------|
+| `docs/architecture/extension/EXTENSION_CAPABILITY_MAP.md` | Extension Layer capability map (Hero, overlay, layout capabilities) | **ACTIVE** |
+| `docs/architecture/extension/HEROMEDIA_CANON.md` | HeroMedia canonical capability definition (design-locked API, composition, layering) | **CANONICAL** |
+| `docs/architecture/extension/OVERLAYSLOT_CANON.md` | OverlaySlot canonical capability definition (design-locked API, overlay positioning) | **CANONICAL** |
+| `docs/architecture/extension/RESPONSIVE_VISIBILITY_CANON.md` | ResponsiveVisibility canonical capability definition (show/hide by breakpoint) | **CANONICAL** |
+| `docs/architecture/extension/RESPONSIVE_VISIBILITY_EXTENSION_API.md` | ResponsiveVisibility Extension API specification (implementation-ready) | **CANONICAL** |
+
+**Total:** 5 files
 
 ---
 
@@ -288,6 +305,12 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/architecture/TOOLING_DECISIONS.md` | Architecture Rules | Reference (ACTIVE) | Tooling decisions |
 | `docs/architecture/locks/LAYOUT_LOCK.md` | Component Lock | Lock (LOCKED) | Layout lock |
 | `docs/architecture/locks/TEXT_LOCK.md` | Component Lock | Lock (LOCKED) | Text lock |
+| `docs/architecture/locks/RESPONSIVE_VISIBILITY_LOCK.md` | Component Lock | Lock (LOCKED) | ResponsiveVisibility Extension lock |
+| `docs/architecture/extension/EXTENSION_CAPABILITY_MAP.md` | Extension Layer | Reference (ACTIVE) | Extension capability map |
+| `docs/architecture/extension/HEROMEDIA_CANON.md` | Extension Layer | Canonical (CANONICAL) | HeroMedia capability definition |
+| `docs/architecture/extension/OVERLAYSLOT_CANON.md` | Extension Layer | Canonical (CANONICAL) | OverlaySlot capability definition |
+| `docs/architecture/extension/RESPONSIVE_VISIBILITY_CANON.md` | Extension Layer | Canonical (CANONICAL) | ResponsiveVisibility capability definition |
+| `docs/architecture/extension/RESPONSIVE_VISIBILITY_EXTENSION_API.md` | Extension Layer | Canonical (CANONICAL) | ResponsiveVisibility Extension API specification |
 | `docs/PROJECT_PROGRESS.md` | Progress & Management | Reference (ACTIVE) | Progress tracking |
 | `docs/workflows/tasks/TASK_INDEX.md` | Progress & Management | Reference (ACTIVE) | Task index |
 | `docs/workflows/tasks/COMPONENT_NEEDS_INVENTORY.md` | Library Maturity | Reference (ACTIVE) | Component needs tracking |
@@ -327,7 +350,7 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase E: Lock declaration |
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase F: Lock declaration |
 
-**Total:** 64 files (55 existing + 9 Closed System v2 canonical documents)
+**Total:** 69 files (55 existing + 9 Closed System v2 + 5 Extension Layer / Phase L documents)
 
 ---
 

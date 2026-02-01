@@ -4,7 +4,7 @@ import { Stack } from "../Stack";
 import { Container } from "./Container";
 
 const meta: Meta<typeof Container> = {
-  title: "UI / Composition / Layout / Container",
+  title: "Composition / Layout / Container",
   component: Container,
   parameters: {
     layout: "fullscreen",

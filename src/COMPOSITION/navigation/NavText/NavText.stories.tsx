@@ -2,7 +2,7 @@
 import { NavText } from "./NavText";
 
 const meta: Meta<typeof NavText> = {
-  title: "UI / Composition / Navigation / NavText",
+  title: "Composition / Navigation / NavText",
   component: NavText,
   parameters: {
     layout: "padded",

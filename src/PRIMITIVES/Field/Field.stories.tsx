@@ -28,7 +28,7 @@ import { Field } from "./Field";
  */
 
 const meta: Meta<typeof Field> = {
-  title: "UI / Primitives / Field",
+  title: "Primitives / Field",
   component: Field,
   parameters: {
     layout: "centered",

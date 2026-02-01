@@ -2,7 +2,7 @@
 import { Heading } from "./Heading";
 
 const meta: Meta<typeof Heading> = {
-  title: "UI / Primitives / Heading",
+  title: "Primitives / Heading",
   component: Heading,
   parameters: {
     layout: "padded",

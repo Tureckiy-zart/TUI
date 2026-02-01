@@ -17,7 +17,7 @@ import { FormGroup } from "./FormGroup";
  */
 
 const meta: Meta<typeof FormGroup> = {
-  title: "UI / Primitives / FormGroup",
+  title: "Primitives / FormGroup",
   component: FormGroup,
   parameters: {
     layout: "centered",

@@ -21,7 +21,7 @@ import { HelperText } from "./HelperText";
  */
 
 const meta: Meta<typeof HelperText> = {
-  title: "UI / Primitives / HelperText",
+  title: "Primitives / HelperText",
   component: HelperText,
   parameters: {
     layout: "centered",

@@ -75,6 +75,12 @@ export { Spacer, type SpacerOrientation, type SpacerProps } from "./Spacer";
 // Navbar
 export { Navbar, type NavbarProps } from "./Navbar";
 
+// HeaderComposition (ResponsiveVisibility etalon: mobile/desktop header branching)
+export {
+  HeaderComposition,
+  type HeaderCompositionProps,
+} from "./HeaderComposition/HeaderComposition.index";
+
 // LinkWithCustomVariant
 export { LinkWithCustomVariant } from "./LinkWithCustomVariant";
 

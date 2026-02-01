@@ -37,9 +37,9 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 **Purpose:** Contains canonical and supporting documentation. The canonical list is maintained in `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`.
 
 **Rules:**
-- �?: Canonical documents are defined by `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
-- �?: Non-canonical documents may exist in `docs/` but are not authoritative
-- �?? Historical reports, audits, and deprecated docs SHOULD be archived
+- ??: Canonical documents are defined by `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
+- ??: Non-canonical documents may exist in `docs/` but are not authoritative
+- ??? Historical reports, audits, and deprecated docs SHOULD be archived
 ### `docs/architecture/`
 
 **Purpose:** Authority Contracts, Architecture Rules, Locks, and architectural guidelines
@@ -53,12 +53,13 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Tooling decisions (`TOOLING_DECISIONS.md`)
 - Authority Navigation (`AUTHORITY_NAVIGATION.md`)
 - `locks/` subdirectory - Component-specific locks
+- `extension/` subdirectory - Extension Layer capability map and boundary rules
 
 **Rules:**
-- ✅ Authority Contracts MUST be in this folder
-- ✅ Architecture locks and rules MUST be in this folder
-- ✅ Component locks MUST be in `architecture/locks/` subdirectory
-- ❌ Reference documentation MUST NOT be in this folder
+- ? Authority Contracts MUST be in this folder
+- ? Architecture locks and rules MUST be in this folder
+- ? Component locks MUST be in `architecture/locks/` subdirectory
+- ? Reference documentation MUST NOT be in this folder
 
 ### `docs/reference/`
 
@@ -75,10 +76,10 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Foundation reference (`FOUNDATION_REFERENCE.md`)
 
 **Rules:**
-- ✅ Developer-facing reference material ONLY
-- ✅ API documentation and integration guides
-- ✅ Typing standards and structural conventions
-- ❌ Architecture rules MUST NOT be in this folder
+- ? Developer-facing reference material ONLY
+- ? API documentation and integration guides
+- ? Typing standards and structural conventions
+- ? Architecture rules MUST NOT be in this folder
 
 ### `docs/theming/`
 
@@ -94,29 +95,70 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - `scripts/check-theme-token-parity.mjs` - Token parity checker (validates all theme files define same token set)
 
 **Token System Rules:**
-- ✅ All semantic tokens use `--tm-` prefix (Tenerife Music brand)
-- ✅ Foreground tokens use `-foreground` suffix (canonical, not `-fg`)
-- ✅ All themes must define identical token set (token parity requirement)
-- ✅ Components consume semantic tokens only (`--tm-bg`, `--tm-fg`, `--tm-primary`, etc.)
-- ✅ Foundation components must not branch on theme state (use semantic tokens only)
-- ✅ Legacy tokens derive from canonical tokens (one-way compat mapping)
+- ? All semantic tokens use `--tm-` prefix (Tenerife Music brand)
+- ? Foreground tokens use `-foreground` suffix (canonical, not `-fg`)
+- ? All themes must define identical token set (token parity requirement)
+- ? Components consume semantic tokens only (`--tm-bg`, `--tm-fg`, `--tm-primary`, etc.)
+- ? Foundation components must not branch on theme state (use semantic tokens only)
+- ? Legacy tokens derive from canonical tokens (one-way compat mapping)
 
 **Rules:**
-- ✅ Theme system documentation and architecture decisions ONLY
-- ✅ Token naming ADRs and migration guides
-- ❌ Component-specific theme usage MUST be in `reference/`
-- ❌ Architecture rules MUST NOT be in this folder
+- ? Theme system documentation and architecture decisions ONLY
+- ? Token naming ADRs and migration guides
+- ? Component-specific theme usage MUST be in `reference/`
+- ? Architecture rules MUST NOT be in this folder
 
 ### `docs/architecture/locks/`
 
 **Purpose:** Component-specific locks
 
 **Contains:**
-- Component category locks (`LAYOUT_LOCK.md`, `TEXT_LOCK.md`)
+- `A11Y_LOCK.md` - A11Y system lock (accessibility, contrast, WCAG 2.1 AA)
+- `BUTTON_LINK_LOCK.md` - Button, IconButton, Link Foundation lock
+- `CAROUSEL_LOCK.md` - Carousel Extension lock
+- `FOCUS_LOCK.v1.1.md` - Focus system lock
+- `HEROMEDIA_LOCK.md` - HeroMedia Extension lock (Phase L)
+- `INPUT_LOCK.md` - Input system lock
+- `LAYOUT_LOCK.md` - Layout primitives and Extension Layout components lock
+- `MODAL_CONTEXTMENU_TOAST_LOCK.md` - Modal, ContextMenu, Toast Foundation overlays lock
+- `MOTION_LOCK.md` - Motion system lock (tokens, presets)
+- `OVERLAYSLOT_LOCK.md` - OverlaySlot Extension lock (Phase L)
+- `RESPONSIVE_VISIBILITY_LOCK.md` - ResponsiveVisibility Extension lock (Phase L)
+- `RUNTIME_UTILITIES_LOCK.md` - Runtime utilities lock (tokenCVA, cn - TUNG-028)
+- `SELECT_LOCK.md` - Select Foundation lock
+- `TABS_LOCK.md` - Tabs Foundation lock
+- `TEXT_LOCK.md` - Text/typography components lock
+- `TOOLTIP_POPOVER_LOCK.md` - Tooltip, Popover, HoverCard lock
 
 **Rules:**
-- ✅ Component-specific locks ONLY
-- ❌ General architecture locks MUST be in `docs/architecture/` (parent directory)
+- ? Component-specific locks ONLY
+- ? General architecture locks MUST be in `docs/architecture/` (parent directory)
+
+### `docs/architecture/extension/`
+
+**Purpose:** Extension Layer architecture ? capability map and boundary rules
+
+**Contains:**
+- Extension capability map (`EXTENSION_CAPABILITY_MAP.md`)
+- HeroMedia canonical capability definition (`HEROMEDIA_CANON.md`)
+- OverlaySlot canonical capability definition (`OVERLAYSLOT_CANON.md`)
+- ResponsiveVisibility canonical capability definition (`RESPONSIVE_VISIBILITY_CANON.md`)
+- ResponsiveVisibility Extension API specification (`RESPONSIVE_VISIBILITY_EXTENSION_API.md`)
+
+**Rules:**
+- ? Extension Layer architecture documents ONLY (capability map, boundary rules)
+- ? Reference documentation or audit reports MUST NOT be in this folder
+- ? General architecture rules live in `docs/architecture/` (parent directory)
+
+**Extension-Level Capability Locks (Phase L):**
+
+The following Extension capabilities are architecturally LOCKED. Modifications only via new Phase L audit; hotfixes require explicit LOCK exception per TUNG policy.
+
+| Capability | Layer    | Status            | Canon              |
+| ---------- | -------- | ------------------ | ------------------ |
+| HeroMedia  | Extension | LOCKED (Phase L ? Overlay + HeroMedia) | HEROMEDIA_CANON.md |
+| OverlaySlot | Extension | LOCKED (Phase L ? Overlay + HeroMedia) | OVERLAYSLOT_CANON.md |
+| ResponsiveVisibility | Extension | LOCKED (Phase L) | RESPONSIVE_VISIBILITY_CANON.md |
 
 ### `docs/workflows/`
 
@@ -128,12 +170,12 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - `policies/` - Process policies and guard rules (`TUNG_LOCKED_COMPONENT_CHANGE_GUARD.md`, `NO_DUPLICATION_POLICY.md`, `ESLINT_AUTOFIX_POLICY.md`, etc.)
 
 **Rules:**
-- ✅ Process definitions and workflows
-- ✅ Component creation workflows (Component Creation Pipeline C0-C10)
-- ✅ Component refactoring workflows (Component Refactoring Pipeline 18A)
-- ✅ Checklists and task management
-- ✅ Process policies and guard rules
-- ❌ Architecture rules MUST NOT be in this folder
+- ? Process definitions and workflows
+- ? Component creation workflows (Component Creation Pipeline C0-C10)
+- ? Component refactoring workflows (Component Refactoring Pipeline 18A)
+- ? Checklists and task management
+- ? Process policies and guard rules
+- ? Architecture rules MUST NOT be in this folder
 
 ### `docs/governance/`
 
@@ -144,8 +186,8 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - `reviews/` - Governance review reports
 
 **Rules:**
-- ✅ Governance processes and reviews
-- ❌ Should NOT be part of primary reading route for architecture understanding
+- ? Governance processes and reviews
+- ? Should NOT be part of primary reading route for architecture understanding
 
 ### `docs/reports/`
 
@@ -157,10 +199,10 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - `creation/` - Component creation reports (Component Creation Pipeline C0-C10 completion reports)
 
 **Rules:**
-- ✅ Historical reports and audits
-- ✅ Component refactoring reports (Pipeline 18A STEP 0-12 audit reports in `audit/` subdirectory)
-- ✅ Component creation reports (Component Creation Pipeline C0-C10 completion reports in `creation/` subdirectory)
-- ❌ Should NOT be part of primary reading route
+- ? Historical reports and audits
+- ? Component refactoring reports (Pipeline 18A STEP 0-12 audit reports in `audit/` subdirectory)
+- ? Component creation reports (Component Creation Pipeline C0-C10 completion reports in `creation/` subdirectory)
+- ? Should NOT be part of primary reading route
 
 ### `docs/migrations/`
 
@@ -170,8 +212,8 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Migration reports and historical migration context
 
 **Rules:**
-- ✅ Migration documentation for historical reference
-- ❌ Should NOT be part of primary reading route
+- ? Migration documentation for historical reference
+- ? Should NOT be part of primary reading route
 
 ### `docs/_internal/`
 
@@ -184,8 +226,8 @@ The current folder structure is **canonical** and **fixed**. All documentation m
   - `_to_GPT_project_essential/` - Essential GPT project documentation
 
 **Rules:**
-- ✅ AI-specific context and documentation
-- ❌ Should NOT be part of primary reading route
+- ? AI-specific context and documentation
+- ? Should NOT be part of primary reading route
 
 ### Root-Level Files: `docs/*.md`
 
@@ -202,9 +244,9 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - CI/CD overview (`CI_CD_OVERVIEW.md`)
 
 **Rules:**
-- ✅ High-level entry points and orientation
-- ✅ Project-wide status and progress
-- ❌ Detailed architecture rules MUST be in subfolders
+- ? High-level entry points and orientation
+- ? Project-wide status and progress
+- ? Detailed architecture rules MUST be in subfolders
 
 ### `docs_archive/`
 
@@ -218,10 +260,10 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - assistant task results and experimental documents
 
 **Rules:**
-- ❌ **NEVER** use `docs_archive/` as source of truth
-- ❌ **NEVER** reference archived documents for canonical rules
-- ❌ **NEVER** use archived documents for assistant context
-- ✅ **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
+- ? **NEVER** use `docs_archive/` as source of truth
+- ? **NEVER** reference archived documents for canonical rules
+- ? **NEVER** use archived documents for assistant context
+- ? **ONLY** consult `docs_archive/` for historical reference (if explicitly requested)
 
 ---
 
@@ -229,7 +271,7 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 
 **Status:** **ACTIVE**    
 **Baseline Date:** 2025-12-19 (Structure freeze date - structure remains frozen)  
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-31  
 **Purpose:** Prevent structural drift and ensure all documentation changes respect canonical organization
 
 ### Freeze Declaration
@@ -241,6 +283,7 @@ The current structure of `docs/` directory is **CANONICAL** and **controlled**. 
 1. **`docs/architecture/`** - Authority Contracts, Architecture Rules, Locks, and architectural guidelines
    - **Purpose:** Contains immutable LAW documents and active GUIDE documents
    - **Boundary:** Architecture rules and authority contracts ONLY
+   - **Contains:** `closed-system/`, `locks/`, `extension/` (Extension Layer capability map and boundary rules), `decisions/`, `rendering/`, `typography/` subdirectories
    - **Forbidden:** Reference documentation, reports, or service documents
 
 2. **`docs/reference/`** - API references, integration guides, typing standards, and usage examples
@@ -320,12 +363,12 @@ The current structure of `docs/` directory is **CANONICAL** and **controlled**. 
 
 **Disallowed Without Update:**
 
-- ❌ Creating new top-level directories in `docs/`
-- ❌ Moving documents between top-level directories
-- ❌ Placing reader-facing documents in `_internal/`
-- ❌ Placing architecture rules in `reference/`
-- ❌ Placing reference documentation in `architecture/`
-- ❌ Any structural change without first updating this lock document
+- ? Creating new top-level directories in `docs/`
+- ? Moving documents between top-level directories
+- ? Placing reader-facing documents in `_internal/`
+- ? Placing architecture rules in `reference/`
+- ? Placing reference documentation in `architecture/`
+- ? Any structural change without first updating this lock document
 
 ### Enforcement Rules
 
@@ -355,10 +398,10 @@ This document (`DOCUMENTATION_CANON_LOCK.md`) is the **single source of truth** 
 
 **All structural questions must be resolved by reference to this document.**
 
-- ✅ If a directory is listed here → it is canonical
-- ❌ If a directory is not listed here → it is non-canonical
-- ✅ If a document's placement is described here → it is correct
-- ❌ If a document's placement contradicts this document → it is incorrect
+- ? If a directory is listed here ? it is canonical
+- ? If a directory is not listed here ? it is non-canonical
+- ? If a document's placement is described here ? it is correct
+- ? If a document's placement contradicts this document ? it is incorrect
 
 **No structural change can be made unconsciously.** All changes must pass through this lock document.
 
@@ -370,7 +413,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 
 ### Core Principles
 
-1. **One semantic meaning → one canonical name pattern**
+1. **One semantic meaning ? one canonical name pattern**
 2. **Names reflect meaning, not history**
 3. **Avoid internal abbreviations** (TUI, internal, etc.) unless semantically meaningful
 4. **Standardize case** (UPPERCASE for consistency)
@@ -390,10 +433,10 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `ARCHITECTURE_STATE.md` - Architecture state
 
 **Forbidden:**
-- ❌ `INTERNAL_*` (internal detail)
-- ❌ `FINAL_*` (historical marker)
-- ❌ `CANONICAL_*` (redundant with context)
-- ❌ `UI_*` prefix (redundant, all architecture is UI)
+- ? `INTERNAL_*` (internal detail)
+- ? `FINAL_*` (historical marker)
+- ? `CANONICAL_*` (redundant with context)
+- ? `UI_*` prefix (redundant, all architecture is UI)
 
 #### Authority Contracts
 
@@ -410,15 +453,15 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `STATE_MATRIX.md` - Part of state authority system (matrix is clear)
 
 **Forbidden:**
-- ❌ `*_AUTHORITY_CONTRACT.md` (CONTRACT redundant with AUTHORITY)
-- ❌ `TOKEN_AUTHORITY.md` (should be `TOKEN_AUTHORITY.md`)
+- ? `*_AUTHORITY_CONTRACT.md` (CONTRACT redundant with AUTHORITY)
+- ? `TOKEN_AUTHORITY.md` (should be `TOKEN_AUTHORITY.md`)
 
 #### Authority Navigation
 
 **Pattern:** `AUTHORITY_NAVIGATION.md`
 
 **Forbidden:**
-- ❌ `AUTHORITY_NAVIGATION.md` (MAP is implementation detail)
+- ? `AUTHORITY_NAVIGATION.md` (MAP is implementation detail)
 
 #### Architecture Rules & Extension Guidelines
 
@@ -430,8 +473,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `LINTING_STANDARD.md`
 
 **Forbidden:**
-- ❌ `ARCHITECTURE_RULES.md` (UI_ prefix redundant)
-- ❌ `EXTENSION_STATE.md` (CANONICAL redundant)
+- ? `ARCHITECTURE_RULES.md` (UI_ prefix redundant)
+- ? `EXTENSION_STATE.md` (CANONICAL redundant)
 
 #### AI/Assistant Behavior Rules
 
@@ -442,8 +485,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `ASSISTANT_DEVELOPMENT_RULES.md`
 
 **Forbidden:**
-- ❌ `ASSISTANT_RULES.md` (TUI_ internal abbreviation, CURSOR tool-specific)
-- ❌ `ASSISTANT_DEVELOPMENT_RULES.md` (CURSOR tool-specific, UI redundant)
+- ? `ASSISTANT_RULES.md` (TUI_ internal abbreviation, CURSOR tool-specific)
+- ? `ASSISTANT_DEVELOPMENT_RULES.md` (CURSOR tool-specific, UI redundant)
 
 #### Component Locks
 
@@ -454,15 +497,15 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `TEXT_LOCK.md`
 
 **Rules:**
-- ✅ Already follows standard pattern
-- ✅ Category names must be clear
+- ? Already follows standard pattern
+- ? Category names must be clear
 
 #### Progress & Task Management
 
 **Pattern:** `PROJECT_PROGRESS.md` or `TASK_INDEX.md`
 
 **Forbidden:**
-- ❌ `master_task_index.md` (master_ is historical prefix)
+- ? `master_task_index.md` (master_ is historical prefix)
 
 #### Library Maturity & Growth Processes
 
@@ -478,8 +521,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `COMPONENT_USAGE_TRACKING.md`
 
 **Forbidden:**
-- ❌ `EXTENSION_COMPONENT_CREATION_CHECKLIST.md` (EXTENSION_ prefix redundant)
-- ❌ `USAGE_FEEDBACK_PROCESS.md` (should be `FEEDBACK_COLLECTION_PROCESS.md`)
+- ? `EXTENSION_COMPONENT_CREATION_CHECKLIST.md` (EXTENSION_ prefix redundant)
+- ? `USAGE_FEEDBACK_PROCESS.md` (should be `FEEDBACK_COLLECTION_PROCESS.md`)
 
 #### Reference Documentation
 
@@ -494,12 +537,12 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `COMPONENT_EXAMPLES.md`
 
 **Forbidden:**
-- ❌ `public-api.md` (lowercase, no REFERENCE suffix)
-- ❌ `design_tokens_export.md` (lowercase, no REFERENCE suffix)
-- ❌ `token-map-overview.md` (lowercase, hyphen instead of underscore)
-- ❌ `UI_COMPONENTS_INVENTORY.md` (UI_ prefix redundant)
-- ❌ `UI_INTEGRATION.md` (UI_ redundant, should be GUIDE)
-- ❌ `EXTENSION_COMPONENT_EXAMPLES.md` (EXTENSION_ prefix redundant)
+- ? `public-api.md` (lowercase, no REFERENCE suffix)
+- ? `design_tokens_export.md` (lowercase, no REFERENCE suffix)
+- ? `token-map-overview.md` (lowercase, hyphen instead of underscore)
+- ? `UI_COMPONENTS_INVENTORY.md` (UI_ prefix redundant)
+- ? `UI_INTEGRATION.md` (UI_ redundant, should be GUIDE)
+- ? `EXTENSION_COMPONENT_EXAMPLES.md` (EXTENSION_ prefix redundant)
 
 #### Tooling & Standards
 
@@ -511,7 +554,7 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `TOOLING_DECISIONS.md`
 
 **Forbidden:**
-- ❌ `LINTING_STANDARD.md` (should be STANDARD, not RULES)
+- ? `LINTING_STANDARD.md` (should be STANDARD, not RULES)
 
 #### Entry Points & Orientation
 
@@ -523,8 +566,8 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `PROJECT_ORIENTATION.md`
 
 **Forbidden:**
-- ❌ `README_GPT.md` (GPT is tool-specific, should be ASSISTANT)
-- ❌ `PROJECT_ORIENTATION.md` (CANONICAL redundant)
+- ? `README_GPT.md` (GPT is tool-specific, should be ASSISTANT)
+- ? `PROJECT_ORIENTATION.md` (CANONICAL redundant)
 
 #### Exceptions & Special Cases
 
@@ -535,15 +578,15 @@ Naming rules are **mandatory** and **strictly enforced**. All documentation must
 - `CI_CD_OVERVIEW.md`
 
 **Forbidden:**
-- ❌ `gradient_exceptions.md` (lowercase)
-- ❌ `CI_CD_OVERVIEW.md` (hyphen instead of underscore)
+- ? `gradient_exceptions.md` (lowercase)
+- ? `CI_CD_OVERVIEW.md` (hyphen instead of underscore)
 
 ### Case Standardization
 
-- ✅ **UPPERCASE** for all canonical document names
-- ❌ **lowercase** forbidden (except standard `README.md`)
-- ✅ **Underscores** for word separation (`CI_CD_OVERVIEW.md`)
-- ❌ **Hyphens** forbidden (`CI_CD_OVERVIEW.md` → `CI_CD_OVERVIEW.md`)
+- ? **UPPERCASE** for all canonical document names
+- ? **lowercase** forbidden (except standard `README.md`)
+- ? **Underscores** for word separation (`CI_CD_OVERVIEW.md`)
+- ? **Hyphens** forbidden (`CI_CD_OVERVIEW.md` ? `CI_CD_OVERVIEW.md`)
 
 ### Forbidden Patterns Summary
 
@@ -593,7 +636,7 @@ All canonical documents are classified into four roles: **LAW**, **GUIDE**, **RE
 16. `docs/architecture/locks/LAYOUT_LOCK.md` - LOCKED
 17. `docs/architecture/locks/TEXT_LOCK.md` - LOCKED
 
-**Change Policy:** ❌ **FORBIDDEN** - LAW documents are immutable
+**Change Policy:** ? **FORBIDDEN** - LAW documents are immutable
 
 ### GUIDE (Active Development Guidelines)
 
@@ -623,7 +666,7 @@ All canonical documents are classified into four roles: **LAW**, **GUIDE**, **RE
 14. `docs/reference/GRADIENT_EXCEPTIONS.md` - Documented exceptions
 15. `docs/CI_CD_OVERVIEW.md` - CI/CD overview
 
-**Change Policy:** ✅ **ALLOWED** with architectural review
+**Change Policy:** ? **ALLOWED** with architectural review
 
 ### REFERENCE (API and Integration Documentation)
 
@@ -647,7 +690,7 @@ All canonical documents are classified into four roles: **LAW**, **GUIDE**, **RE
 
 **Note:** Theme system token documentation (architecture, naming decisions, migration) is in `docs/theming/`, not `reference/`. Token registry (`src/FOUNDATION/tokens/required-tokens.ts`) and parity checker (`scripts/check-theme-token-parity.mjs`) are implementation artifacts.
 
-**Change Policy:** ✅ **ALLOWED** for accuracy updates and API changes
+**Change Policy:** ? **ALLOWED** for accuracy updates and API changes
 
 ### META (Documentation About Documentation)
 
@@ -670,7 +713,7 @@ All canonical documents are classified into four roles: **LAW**, **GUIDE**, **RE
 6. `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Documentation inventory
 7. `docs/architecture/DOCUMENTATION_CANON_LOCK.md` - This document
 
-**Change Policy:** ✅ **ALLOWED** for inventory updates and progress tracking
+**Change Policy:** ? **ALLOWED** for inventory updates and progress tracking
 
 **Note:** `docs/architecture/CANONICAL_STATE_FINAL.md` is **ARCHIVED** and not counted in the canonical documents.
 
@@ -683,12 +726,12 @@ Changes to the documentation system are **strictly controlled**. This section de
 ### Adding New Canonical Documents
 
 **Requirements:**
-1. ✅ **Architectural decision required** - New documents must be justified architecturally
-2. ✅ **Must follow naming rules** - Name must match mandatory pattern for semantic group
-3. ✅ **Must be assigned to correct folder** - Placement must match folder purpose
-4. ✅ **Must be classified into role** - Document must be LAW/GUIDE/REFERENCE/META
-5. ✅ **Must be added to inventory** - `CANONICAL_DOCUMENTATION_INVENTORY.md` must be updated
-6. ✅ **Must update this document** - If adding new folder or pattern, update this lock document
+1. ? **Architectural decision required** - New documents must be justified architecturally
+2. ? **Must follow naming rules** - Name must match mandatory pattern for semantic group
+3. ? **Must be assigned to correct folder** - Placement must match folder purpose
+4. ? **Must be classified into role** - Document must be LAW/GUIDE/REFERENCE/META
+5. ? **Must be added to inventory** - `CANONICAL_DOCUMENTATION_INVENTORY.md` must be updated
+6. ? **Must update this document** - If adding new folder or pattern, update this lock document
 
 **Process:**
 1. Propose new document with architectural justification
@@ -702,7 +745,7 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 #### LAW Documents
 
-**Policy:** ❌ **FORBIDDEN**
+**Policy:** ? **FORBIDDEN**
 
 **Rationale:** LAW documents are immutable. They define locked architectural rules that cannot change.
 
@@ -710,13 +753,13 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 #### GUIDE Documents
 
-**Policy:** ✅ **ALLOWED** with architectural review
+**Policy:** ? **ALLOWED** with architectural review
 
 **Requirements:**
-1. ✅ Changes must maintain architectural compliance
-2. ✅ Changes must be reviewed for consistency
-3. ✅ Changes must not violate LAW documents
-4. ✅ Changes must update related documents if needed
+1. ? Changes must maintain architectural compliance
+2. ? Changes must be reviewed for consistency
+3. ? Changes must not violate LAW documents
+4. ? Changes must update related documents if needed
 
 **Process:**
 1. Propose change with architectural justification
@@ -726,12 +769,12 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 #### REFERENCE Documents
 
-**Policy:** ✅ **ALLOWED** for accuracy updates and API changes
+**Policy:** ? **ALLOWED** for accuracy updates and API changes
 
 **Requirements:**
-1. ✅ Updates must reflect actual API/implementation
-2. ✅ Updates must maintain accuracy
-3. ✅ Updates must not introduce architectural rules (use GUIDE for that)
+1. ? Updates must reflect actual API/implementation
+2. ? Updates must maintain accuracy
+3. ? Updates must not introduce architectural rules (use GUIDE for that)
 
 **Process:**
 1. Update document to reflect current state
@@ -740,12 +783,12 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 #### META Documents
 
-**Policy:** ✅ **ALLOWED** for inventory updates and progress tracking
+**Policy:** ? **ALLOWED** for inventory updates and progress tracking
 
 **Requirements:**
-1. ✅ Updates must reflect current state
-2. ✅ Inventory updates must be complete
-3. ✅ Progress tracking must be accurate
+1. ? Updates must reflect current state
+2. ? Inventory updates must be complete
+3. ? Progress tracking must be accurate
 
 **Process:**
 1. Update document with current information
@@ -754,14 +797,14 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 ### Renaming Documents
 
-**Policy:** ❌ **FORBIDDEN** without architectural decision
+**Policy:** ? **FORBIDDEN** without architectural decision
 
 **Requirements:**
-1. ✅ Architectural decision required
-2. ✅ Must update all links (especially `.cursor/rules/*.mdc` files)
-3. ✅ Must update `CANONICAL_DOCUMENTATION_INVENTORY.md`
-4. ✅ Must update this document if naming pattern changes
-5. ✅ Must verify no broken links
+1. ? Architectural decision required
+2. ? Must update all links (especially `.cursor/rules/*.mdc` files)
+3. ? Must update `CANONICAL_DOCUMENTATION_INVENTORY.md`
+4. ? Must update this document if naming pattern changes
+5. ? Must verify no broken links
 
 **Process:**
 1. Propose rename with architectural justification
@@ -773,13 +816,13 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 ### Moving Documents
 
-**Policy:** ❌ **FORBIDDEN** without architectural decision
+**Policy:** ? **FORBIDDEN** without architectural decision
 
 **Requirements:**
-1. ✅ Architectural decision required
-2. ✅ Must update all links
-3. ✅ Must verify folder placement matches purpose
-4. ✅ Must update `CANONICAL_DOCUMENTATION_INVENTORY.md`
+1. ? Architectural decision required
+2. ? Must update all links
+3. ? Must verify folder placement matches purpose
+4. ? Must update `CANONICAL_DOCUMENTATION_INVENTORY.md`
 
 **Process:**
 1. Propose move with architectural justification
@@ -790,13 +833,13 @@ Changes to the documentation system are **strictly controlled**. This section de
 
 ### Deleting Documents
 
-**Policy:** ❌ **FORBIDDEN** (archive instead)
+**Policy:** ? **FORBIDDEN** (archive instead)
 
 **Requirements:**
-1. ✅ Documents must be archived, not deleted
-2. ✅ Move to `docs_archive/` if deprecated
-3. ✅ Update `CANONICAL_DOCUMENTATION_INVENTORY.md` to mark as archived
-4. ✅ Update all references to point to replacement or archive
+1. ? Documents must be archived, not deleted
+2. ? Move to `docs_archive/` if deprecated
+3. ? Update `CANONICAL_DOCUMENTATION_INVENTORY.md` to mark as archived
+4. ? Update all references to point to replacement or archive
 
 **Process:**
 1. Identify replacement document (if any)
@@ -814,19 +857,19 @@ This documentation canon is **mandatory** and **strictly enforced**.
 ### Assistant Requirements
 
 Assistants **MUST**:
-- ✅ Follow this canon when creating or modifying documentation
-- ✅ Refuse tasks that violate naming rules
-- ✅ Refuse tasks that violate folder structure
-- ✅ Refuse tasks that modify LAW documents
-- ✅ Verify compliance before creating new documentation
-- ✅ Reference this document when documentation questions arise
+- ? Follow this canon when creating or modifying documentation
+- ? Refuse tasks that violate naming rules
+- ? Refuse tasks that violate folder structure
+- ? Refuse tasks that modify LAW documents
+- ? Verify compliance before creating new documentation
+- ? Reference this document when documentation questions arise
 
 Assistants **MUST NOT**:
-- ❌ Create documentation that violates naming rules
-- ❌ Place documentation in wrong folders
-- ❌ Modify LAW documents
-- ❌ Rename or move documents without architectural decision
-- ❌ Create duplicate documentation
+- ? Create documentation that violates naming rules
+- ? Place documentation in wrong folders
+- ? Modify LAW documents
+- ? Rename or move documents without architectural decision
+- ? Create duplicate documentation
 
 ### Violation Handling
 
@@ -841,12 +884,12 @@ Assistants **MUST NOT**:
 ### Verification
 
 Before completing any documentation task, verify:
-- ✅ Naming follows canonical pattern
-- ✅ Folder placement is correct
-- ✅ Document role is classified
-- ✅ Inventory is updated (if adding/modifying)
-- ✅ All links are valid (if renaming/moving)
-- ✅ No LAW documents are modified
+- ? Naming follows canonical pattern
+- ? Folder placement is correct
+- ? Document role is classified
+- ? Inventory is updated (if adding/modifying)
+- ? All links are valid (if renaming/moving)
+- ? No LAW documents are modified
 
 ---
 
@@ -872,7 +915,7 @@ This document defines the documentation system as canonical:
 
 ---
 
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-31  
 **Status:** **ACTIVE**    
 **Related Documents:**
 - `docs/CANONICAL_DOCUMENTATION_INVENTORY.md` - Complete inventory of canonical documents

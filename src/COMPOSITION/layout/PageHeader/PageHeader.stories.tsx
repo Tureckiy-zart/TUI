@@ -3,7 +3,7 @@ import { Button } from "@/PRIMITIVES/Button";
 import { PageHeader } from "./PageHeader";
 
 const meta: Meta<typeof PageHeader> = {
-  title: "UI / Composition / Layout / PageHeader",
+  title: "Composition / Layout / PageHeader",
   component: PageHeader,
   parameters: {
     layout: "padded",

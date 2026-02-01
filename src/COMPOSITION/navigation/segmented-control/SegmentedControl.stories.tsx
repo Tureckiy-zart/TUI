@@ -3,7 +3,7 @@ import * as React from "react";
 import { SegmentedControl } from "./SegmentedControl";
 
 const meta: Meta<typeof SegmentedControl.Root> = {
-  title: "UI / Composition / Navigation / SegmentedControl",
+  title: "Composition / Navigation / SegmentedControl",
   component: SegmentedControl.Root,
   parameters: {
     layout: "padded",

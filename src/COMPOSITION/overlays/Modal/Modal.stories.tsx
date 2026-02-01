@@ -117,7 +117,7 @@ function StoryRow({ children }: { children: React.ReactNode }) {
 }
 
 const meta: Meta<typeof Modal.Root> = {
-  title: "UI / Composition / Overlays / Modal",
+  title: "Composition / Overlays / Modal",
   component: Modal.Root,
   parameters: {
     layout: "centered",

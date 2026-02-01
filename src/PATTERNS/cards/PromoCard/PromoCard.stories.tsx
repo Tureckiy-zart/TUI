@@ -6,7 +6,7 @@ import { PromoCard } from "./PromoCard";
 import type { PromoCardSize, PromoCardVariant } from "./PromoCard.types";
 
 const meta: Meta<typeof PromoCard> = {
-  title: "UI / Patterns / Cards / PromoCard",
+  title: "Patterns / Cards / PromoCard",
   component: PromoCard,
   parameters: {
     layout: "centered",

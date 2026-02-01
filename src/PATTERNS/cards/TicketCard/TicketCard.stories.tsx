@@ -9,7 +9,7 @@ const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd0?w=800&h=500&fit=crop";
 
 const meta: Meta<typeof TicketCard> = {
-  title: "UI / Patterns / Cards / TicketCard",
+  title: "Patterns / Cards / TicketCard",
   component: TicketCard,
   parameters: {
     layout: "centered",

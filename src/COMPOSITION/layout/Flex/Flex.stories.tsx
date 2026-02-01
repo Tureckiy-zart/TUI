@@ -5,7 +5,7 @@ import { Flex } from "./Flex";
 const cardItemStyle = { color: "hsl(var(--tm-text-primary))" };
 
 const meta: Meta<typeof Flex> = {
-  title: "UI / Composition / Layout / Flex",
+  title: "Composition / Layout / Flex",
   component: Flex,
   parameters: {
     layout: "padded",

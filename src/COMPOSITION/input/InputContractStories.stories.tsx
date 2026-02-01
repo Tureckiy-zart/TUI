@@ -25,7 +25,7 @@ import { Text } from "@/PRIMITIVES/Text";
 import { Textarea } from "@/PRIMITIVES/Textarea";
 
 const meta: Meta = {
-  title: "UI / Composition / Input / Contract Stories",
+  title: "Composition / Input / Contract Stories",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

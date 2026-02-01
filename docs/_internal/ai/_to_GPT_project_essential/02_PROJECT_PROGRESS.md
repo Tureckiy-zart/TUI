@@ -68,6 +68,11 @@ The following components have been **formally locked** after successful audit an
 - **Tooltip** (`src/COMPOSITION/overlays/Tooltip/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 - **Modal** (`src/COMPOSITION/overlays/Modal/`) — ✅ **PROCESS LOCKED** (2025-12-25)
 
+#### Extension Carousel
+
+- **Carousel** (`src/COMPOSITION/carousel/Carousel/`) — ✅ **PROCESS LOCKED** (2026-01-29)
+  - Compound API: Root, Track, Slide, Prev, Next, Indicators (no Controls wrapper). Prev/Next composed inside Track. See EXTENSION_STATE.md §3.2.
+
 ### Lock Rules
 
 **Public API:**
@@ -209,6 +214,182 @@ The Public API canon for Tenerife UI has been established and locked. `src/index
 **Lock Status:** ✅ **LOCKED** (2026-01-02)
 
 **This lock applies to humans and AI agents. Public API canon is a hard contract for consumers and maintainers.**
+
+---
+
+## Closed System v2 — Stable & Main Project Clearance
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-27  
+**Completion Date:** 2026-01-27  
+**Task ID:** TUI_CSV2_BLOCK_10_FINAL_STOP_LINE_AND_RELEASE_CLEARANCE
+
+### Summary
+
+- Master task **TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023** is **CLOSED**.
+- **Closed System v2** is declared **STABLE** (архитектурно завершён).
+- The **@tenerife.music/ui** library is **cleared for use in the main project** without additional architectural checks for Closed System v2 compliance.
+
+### Key Results
+
+- ✅ **Repo-wide audit (V1–V5):** 0 violations after fixes
+- ✅ **Detached structural audit (S1–S6):** S2-001 fixed (deep imports eliminated in production code)
+- ✅ **Boundary model:** Enforced and documented
+- ✅ **Deep imports:** Eliminated in consumer code (DOMAIN, PATTERNS)
+- ✅ **DOM-boundary:** Canonized and documented
+- ✅ **System Closure:** Document created and registered as canonical
+- ✅ **STOP LINE:** Fixed and validated
+- ✅ **ESLint import guard:** Installed as post-closure safety net
+
+### System Status
+
+**Closed System v2 is STABLE and CLOSED.**
+
+- ✅ Architecture is locked and immutable
+- ✅ Boundary model is enforced
+- ✅ Public API is the sole sanctioned import surface
+- ✅ All violations have been resolved
+
+**Change Control Policy:**
+- Any future changes require a new audit cycle
+- Modifications must pass through formal audit processes
+- Ad-hoc changes that bypass architectural constraints are forbidden
+
+### References
+
+**Canonical Architecture Documents:**
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — System closure rationale and change control policy
+- [CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) — Canonical documentation index
+
+**Audit Reports:**
+- [CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md](./reports/closed-system/CLOSED_SYSTEM_V2_DEEP_RESEARCH_REPO_AUDIT_023.md) — Repo-wide audit (V1–V5, STOP LINE)
+- [CLOSED_SYSTEM_V2_DETACHED_STRUCTURAL_AUDIT_024.md](./reports/closed-system/CLOSED_SYSTEM_V2_DETACHED_STRUCTURAL_AUDIT_024.md) — Structural audit (S1–S6)
+
+**Enforcement:**
+- [CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md](./architecture/closed-system/CLOSED_SYSTEM_V2_ENFORCEMENT_GUARDS.md) — ESLint guard rules
+
+**Task Tracking:**
+- Master task: `.cursor/tasks/master/master_tasks_TOKEN_CLEANING.json`
+- Consumer summary: [CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json](./reports/CLOSED_SYSTEM_V2_CONSUMER_VIOLATION_AUDIT_SUMMARY.json)
+
+**Exit condition:** Closed System v2 formally closed and cleared for main project usage; next focus is main project implementation.
+
+---
+
+## Closed System v2 — Post-Closure Stabilization Tasks
+
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Completion Date:** 2026-01-28
+
+### Summary
+
+Additional stabilization tasks completed after initial closure to resolve import oscillation issues, normalize token usage, and establish final architectural locks.
+
+### Completed Tasks
+
+#### TUI_CSV2_IMPORT_OSCILLATION_ROOT_CAUSE_001
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+
+- ✅ Resolved import oscillation between `@/index` and `@/FOUNDATION/tokens/components/**`
+- ✅ Created ESLint rule `no-token-imports-from-index` to enforce canonical import pattern
+- ✅ Added anti-oscillation protection in ESLint configuration
+- ✅ Eliminated runtime cycles and order-dependent initialization failures
+
+#### TUI_CSV2_TOKEN_IMPORT_CLASS_SPLIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+
+- ✅ Resolved conflict between ESLint rules for token imports
+- ✅ Introduced clear class split: Component Tokens vs Foundation Tokens
+- ✅ Component Tokens: Must import from `@/FOUNDATION/tokens/components/**` (forbidden from `@/index`)
+- ✅ Foundation Tokens: Must import from `@/index` (forbidden as deep-imports)
+- ✅ Each class now has exactly one valid import path, eliminating oscillation
+
+#### TUNG-028: Runtime Utilities Are Private
+**Status:** ✅ **LOCKED**  
+**Date:** 2026-01-28  
+**Lock Document:** [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+
+- ✅ Runtime utilities (`tokenCVA`, `cn`) declared private Foundation implementation details
+- ✅ Removed runtime utilities from `@/index` exports
+- ✅ Created ESLint rule `no-runtime-utils-from-index` to enforce direct imports
+- ✅ Runtime utilities must be imported from `@/FOUNDATION/lib/*` (forbidden from `@/index`)
+- ✅ Locked in FOUNDATION_LOCK.md as architectural invariant
+- ✅ Clarified allowed imports from `@/index`: UI components (Box, Button, Text, Skeleton) are allowed in DOMAIN/PATTERNS, while runtime utilities are forbidden. This prevents automated refactors from incorrectly replacing valid UI imports.
+
+#### TUI_CSV2_FOUNDATION_RUNTIME_UTILITIES_ENFORCEMENT_027
+**Status:** ✅ **RESOLVED_AND_LOCKED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+
+- ✅ Eliminated import oscillation for Foundation Runtime Utilities
+- ✅ Canonized runtime utilities import pattern
+- ✅ Protected from deep imports in consumer code
+
+#### TOKEN_REALITY_AUDIT_027
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Reports:**
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
+- [TOKEN_REALITY_AUDIT_027_CANON_BINDING.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_CANON_BINDING.md)
+- [TOKEN_REALITY_AUDIT_027_QUALITY.md](./reports/tokens/TOKEN_REALITY_AUDIT_027_QUALITY.md)
+
+- ✅ Comprehensive audit of token usage across codebase
+- ✅ Identified gaps in token usage (7 ALLOWED gaps documented)
+- ✅ Created inventory and usage reports
+- ✅ Established canonical binding for token system
+
+#### TUI_CSV2_FULL_TOKEN_SYSTEM_AUDIT_026
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+
+- ✅ Full token system audit completed
+- ✅ Verified token coverage and usage patterns
+- ✅ Documented token system state
+
+#### TUI_CSV2_PHASE_J2_TOKEN_USAGE_NORMALIZATION_029
+**Status:** ✅ **COMPLETED**  
+**Date:** 2026-01-28  
+**Report:** [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+
+- ✅ Normalized token usage in consumer files
+- ✅ Replaced raw utility classes with token props and Foundation API
+- ✅ Closed all 7 ALLOWED gaps from TOKEN_REALITY_AUDIT_027
+- ✅ Replaced raw Tailwind classes with Text, Heading, Box, Stack, Row, Container components
+- ✅ Ensured compliance with Typography Semantics Canon
+
+### New ESLint Rules
+
+- ✅ **`no-token-imports-from-index`** — Enforces direct imports for component tokens
+- ✅ **`no-runtime-utils-from-index`** — Enforces direct imports for runtime utilities
+
+### Key Results
+
+- ✅ **Import Oscillation:** Eliminated through explicit ESLint enforcement
+- ✅ **Token Import Classes:** Clear split established (Component Tokens vs Foundation Tokens)
+- ✅ **Runtime Utilities:** Locked as private Foundation details
+- ✅ **Token Usage:** Normalized across all consumer files
+- ✅ **Architectural Locks:** Finalized in FOUNDATION_LOCK.md
+
+### References
+
+**Architecture Documents:**
+- [FOUNDATION_LOCK.md](./architecture/FOUNDATION_LOCK.md) — Runtime Utilities Are Private (TUNG-028)
+- [FOUNDATION_CONTRACT.md](./architecture/FOUNDATION_CONTRACT.md) — Public Index Boundary
+- [CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — Runtime Utilities Boundary
+
+**Audit Reports:**
+- [CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md](./reports/closed-system/CLOSED_SYSTEM_V2_IMPORT_OSCILLATION_RESOLUTION_025.md)
+- [CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_TOKEN_IMPORT_CLASS_SPLIT_026.md)
+- [CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md](./reports/closed-system/CLOSED_SYSTEM_V2_FOUNDATION_RUNTIME_UTILITIES_027.md)
+- [CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md](./reports/closed-system/CLOSED_SYSTEM_V2_FULL_TOKEN_SYSTEM_AUDIT_026.md)
+- [CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md](./reports/closed-system/CLOSED_SYSTEM_V2_PHASE_J2_COMPLETION_029.md)
+- [TOKEN_REALITY_AUDIT_027.md](./reports/tokens/TOKEN_REALITY_AUDIT_027.md)
 
 ---
 
@@ -399,6 +580,16 @@ The following Extension layer components have successfully completed Pipeline 18
    - **Creation Report:** `docs/reports/creation/Drawer_CREATION_REPORT.md`
    - Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`, `drawerVariants`
    - Types: `DrawerProps`, `DrawerPosition`, `DrawerSize`, `DrawerBackdropVariant`, `DrawerBodyProps`, `DrawerFooterProps`, `DrawerHeaderProps`
+
+1b. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, API simplification TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types (no CarouselControls)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
 
 2. **Table** - `src/PATTERNS/tables/table/Table.tsx` — ✅ **PROCESS LOCKED** (Pipeline 18A Complete, 2025-12-26)
    - **Layer:** PATTERNS (Extension layer)
@@ -769,6 +960,14 @@ The following Composition layer components have successfully completed Pipeline 
      - Compound component pattern: Modal.Root, Modal.Trigger, Modal.Content, Modal.Header, Modal.Title, Modal.Description, Modal.Footer, Modal.Close
    - **Quality:** 16 tests, 24 stories (canonical: States, SizesGallery, LongContent)
 
+5. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx` — ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004, 2026-01-29)
+   - **Layer:** COMPOSITION (carousel)
+   - **Type:** Extension compound carousel (batteries-included)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
+
 **Note:** Foundation layer is **UNLOCKED** for active construction. Foundation Authorities remain LOCKED and IMMUTABLE. Foundation layer components can be added, refactored, or adjusted to reach canonical form.
 
 ---
@@ -883,6 +1082,18 @@ The following Extension Layer components are **LOCKED** and **IMMUTABLE** after 
    - **Test Coverage:** 32 tests (comprehensive)
    - **Storybook Coverage:** 11 stories (all use cases demonstrated)
    - **Exports:** `Field`, `FieldProps`, `FieldLabelProps`, `FieldControlProps`, `FieldDescriptionProps`, `FieldErrorProps`
+
+4. **Carousel** - `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+   - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline Complete, TUI_EXT_CAROUSEL_FIX_004)
+   - **Lock Date:** 2026-01-29
+   - **Pipeline:** Component Creation Pipeline (C0–C10 complete); FIX_004 (Controls removed from public API)
+   - **Component Type:** Extension compound carousel (batteries-included)
+   - **Layer:** COMPOSITION (carousel)
+   - **Purpose:** Compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track.
+   - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+   - **Lock Type:** PROCESS_LOCK (Component is in COMPOSITION layer, not Foundation lock)
+   - **Exports:** `Carousel`, `CarouselIndicators`, `CarouselNext`, `CarouselPrev`, and related types
+   - **Rule:** Future structural or API modifications require re-entry into Pipeline 18A or explicit unlock procedure.
 
 ### Extension Component Lock Rules
 
@@ -4891,6 +5102,26 @@ _Upgrade Layer (U1-U6, U9-U13) and subsequent layers pending. See master_tasks.j
   - **Exports:** `Footer`, `FooterProps`
   - **Creation Report:** `docs/reports/creation/Footer_CREATION_REPORT.md`
   - **Registered:** ✅ EXTENSION_STATE.md updated, src/COMPOSITION/layout/index.ts export added
+
+### Carousel Component (2026-01-29)
+
+- ✅ **Carousel Component Created**
+  - **Date:** 2026-01-29
+  - **Pipeline:** Component Creation Pipeline (C0–C10 complete)
+  - **Location:** `src/COMPOSITION/carousel/Carousel/Carousel.tsx`
+  - **Type:** Extension Layer Composite — compound carousel (batteries-included)
+  - **Purpose:** Production carousel with compound-only API; Root, Track, Slide, Prev, Next, Indicators. Prev/Next composed inside Track (no Controls wrapper).
+  - **Foundation Composition:** Uses Button from PRIMITIVES for Prev/Next
+  - **Token Compliance:** ✅ 100% (CAROUSEL_TOKENS internal)
+  - **Accessibility:** region, aria-roledescription="carousel", aria-live="polite", keyboard ArrowLeft/Right, Prev/Next aria-label, indicators tablist
+  - **Creation Report:** `docs/reports/creation/Carousel_CREATION_REPORT.md`
+  - **Registered:** ✅ EXTENSION_STATE.md §3.2, src/index.ts export added
+
+- ✅ **Carousel API Simplification (TUI_EXT_CAROUSEL_FIX_004)**
+  - **Date:** 2026-01-29
+  - **Change:** Carousel.Controls removed from public API; Prev/Next composed directly inside Carousel.Track
+  - **Exports:** No CarouselControls / CarouselControlsProps; Carousel, CarouselIndicators, CarouselNext, CarouselPrev and related types only
+  - **Lock:** ✅ PROCESS LOCKED in EXTENSION_STATE.md §3.2; added to PROJECT_PROGRESS Lock Scope (Extension Carousel)
 
 - ✅ **Navbar** - Layout Extension Layer Lock Complete (2026-01-01)
   - Component: Navbar

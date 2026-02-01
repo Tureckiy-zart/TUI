@@ -2,7 +2,7 @@
 import { VisuallyHidden } from "./VisuallyHidden";
 
 const meta: Meta<typeof VisuallyHidden> = {
-  title: "UI / Composition / VisuallyHidden",
+  title: "Composition / VisuallyHidden",
   component: VisuallyHidden,
   parameters: {
     layout: "centered",

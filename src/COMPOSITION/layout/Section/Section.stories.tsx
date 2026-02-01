@@ -4,7 +4,7 @@ import { Container } from "../Container";
 import { Section } from "./Section";
 
 const meta: Meta<typeof Section> = {
-  title: "UI / Composition / Layout / Section",
+  title: "Composition / Layout / Section",
   component: Section,
   parameters: {
     layout: "padded",

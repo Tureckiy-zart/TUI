@@ -3,7 +3,7 @@ import { Box } from "../Box";
 import { SidebarLayout } from "./SidebarLayout";
 
 const meta: Meta<typeof SidebarLayout> = {
-  title: "UI / Composition / Layout / SidebarLayout",
+  title: "Composition / Layout / SidebarLayout",
   component: SidebarLayout,
   parameters: {
     layout: "padded",

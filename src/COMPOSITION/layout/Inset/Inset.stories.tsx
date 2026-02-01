@@ -4,7 +4,7 @@ import { Stack } from "../Stack";
 import { Inset } from "./Inset";
 
 const meta: Meta<typeof Inset> = {
-  title: "UI / Composition / Layout / Inset",
+  title: "Composition / Layout / Inset",
   component: Inset,
   parameters: {
     layout: "centered",

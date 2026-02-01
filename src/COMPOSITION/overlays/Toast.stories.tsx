@@ -17,7 +17,7 @@ import { useGlobalToast } from "@/hooks/useGlobalToast";
 import { useLocalToast } from "@/hooks/useLocalToast";
 
 const meta: Meta<typeof ToastRoot> = {
-  title: "UI / Composition / Overlays / Toast",
+  title: "Composition / Overlays / Toast",
   component: ToastRoot,
   parameters: {
     layout: "centered",

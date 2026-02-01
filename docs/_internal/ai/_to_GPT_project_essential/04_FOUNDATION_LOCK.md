@@ -1,8 +1,8 @@
 # ? Foundation Lock Status (Finalized)
 
-**Version:** 1.31  
+**Version:** 1.32  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-17 (Canon alignment with Foundation finalization)  
+**Last Updated:** 2026-01-29 (Runtime Utilities Lock - TUNG-028)  
 **Status:** ? **LOCKED (Foundation Closed)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -38,6 +38,10 @@ This document **tracks the Foundation layer status** of `@tenerife.music/ui`. Th
 **This document is the authoritative source of truth** for the Foundation layer architecture. Foundation is closed and may be modified only through explicit unlock procedure.
 
 **Foundation layer is finalized; any changes require explicit unlock procedure.**
+
+**Typography Font Supply Note:** Font delivery is **out of Foundation scope**. Fonts are consumer-owned;
+Foundation typography must remain valid with system fallbacks. Any change to this rule requires a new
+Foundation contract.
 
 ---
 
@@ -1348,6 +1352,146 @@ Any token system modifications require:
 
 ---
 
+## 🔒 TM-Only Runtime Lock
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Runtime CSS variable model, theme injection, token runtime contract  
+**Authority:** REQUIRED_THEME_TOKENS (`src/FOUNDATION/tokens/required-tokens.ts`)
+
+**Verification:** `docs/reports/TM_ONLY_RUNTIME_VERIFICATION_003.md`  
+**Runtime Evidence:**  
+- `docs/reports/runtime-css-vars.snapshot.txt` (Day)  
+- `docs/reports/runtime-css-vars.night.snapshot.txt` (Night)  
+- `docs/reports/runtime-css-vars.check.txt` (legacy/missing/empty verification)  
+- `docs/reports/runtime-css-vars.diff.txt` (Day ↔ Night diff)  
+- `docs/reports/a11y-contrast.output.txt` (A11Y contrast stdout+stderr)
+
+**Accepted A11Y Exception:** `night:button.destructive.disabled` (contrast 4.39:1, see `docs/architecture/locks/A11Y_LOCK.md`)
+
+**Enforcement:** ESLint rule `tm/no-legacy-css-vars` (P0, error, **ENFORCED_STRICT**)
+**Detection Contract:** только реальные `var(--x)` usage для цветов; unknown prefix suffix → error without autofix
+**Scope Clarification:** strict tm-only enforcement применяется **только к color vars**. Non-color vars (spacing/radius/layout/radix/implementation) временно разрешены и не являются каноничными.
+
+### Rules (Binding)
+
+1. **Единственный допустимый runtime contract:** `--tm-*`
+2. **REQUIRED_THEME_TOKENS = runtime truth** (полный и единственный список обязательных color/runtime токенов)
+3. **Запрещены legacy vars** (`--background`, `--muted`, `--destructive`, `--surface-*`, `--text-*`, `--border`, `--input`, `--ring`, и аналоги)
+4. **Запрещены alias bridge и fallback mapping** (любые параллельные token-каналы)
+5. **Изменения runtime tokens** допускаются только через новый TUNG + verification + lock update
+
+### Locked Subjects
+
+- Runtime CSS variable model
+- Theme injection (`applyMode.ts`)
+- `colors.ts` adapter contract (tm-only)
+- Global CSS token usage (tm-only)
+
+### Color Token Re-lock (Calibration)
+
+**Status:** ✅ **LOCKED (RE-LOCKED)**  
+**Scope:** colors / a11y  
+**Reason:** WCAG 2.1 AA alignment after secondary + disabled calibration  
+**TUNG:** TUI_TOKENS_COLOR_021, TUI_TOKENS_COLOR_022, TUI_TOKENS_COLOR_023, TUI_TOKENS_A11Y_024  
+**Lock task:** TUI_TOKENS_LOCK_025  
+**Statement:** Color token calibration completed. All A11Y contrast checks pass without exceptions.
+
+---
+
+## 🔒 LOCK: Runtime Utilities Are Private (TUNG-028)
+
+**Status:** ✅ **LOCKED**  
+**Scope:** Runtime utilities (`tokenCVA`, `cn`) import boundaries  
+**Task:** TUNG-028
+
+**Invariant**  
+Runtime utilities (`tokenCVA`, `cn`) are **private Foundation implementation details**.
+
+**Rules**
+- MUST NOT be imported from `@/index`
+- MUST NOT be exported via `@/index`
+- MUST be imported directly from:
+  - `@/FOUNDATION/lib/token-cva`
+  - `@/FOUNDATION/lib/utils`
+
+**Rationale**
+- Prevent SSR / test runtime cycles
+- Keep `@/index` as public API only
+- Avoid import oscillation and auto-rewrites
+
+**Enforcement**
+- ESLint rule: `no-runtime-utils-from-index`
+- Scope: `DOMAIN/**`, `PATTERNS/**`
+
+**Status**: LOCKED  
+**Introduced by**: TUNG-028
+
+---
+
+## 🔒 TYPOGRAPHY (FULL LOCK)
+
+**Status:** ✅ **LOCKED (ENFORCED)**
+
+**Scope:**
+- Typography tokens: `src/FOUNDATION/tokens/typography.ts` (fontSizes, lineHeights, letterSpacings, fontFamilies, textStyles)
+- Text color roles (TYPOGRAPHY_COLOR_POLICY_v1)
+- Line-height and rhythm (TYPOGRAPHY_RHYTHM_POLICY_v1)
+- Paragraph spacing (container-applied, not on text components)
+- Components (API locked): Text, Heading, and any future text-primitive
+
+**Authority:**
+- `docs/architecture/typography/TYPOGRAPHY_COLOR_POLICY_v1.md`
+- `docs/architecture/typography/TYPOGRAPHY_RHYTHM_POLICY_v1.md`
+
+**Tasks (TUNG):**
+- TUI_FOUNDATION_TYPOGRAPHY_COLOR_POLICY_V1_020
+- TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_001, TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_POLICY_V1_002
+- TUI_FOUNDATION_TYPOGRAPHY_RHYTHM_ENFORCEMENT_V1_003
+  - 003A: line-height enforcement
+  - 003B: leading-* enforcement
+  - 003C: paragraph margin enforcement
+
+**Rules (Binding) — Color:**
+1. Text colors must use canonical roles (`primary`, `secondary`, `tertiary`, `muted`, `inverse`, `disabled`, `status`)
+2. Status colors are restricted to explicit status messaging only
+3. Readable roles forbid muted/tertiary (use `secondary` or `meta`)
+4. No arbitrary text colors (no custom CSS vars or raw colors)
+5. Text and Heading do not accept arbitrary colors; only semantic color roles; inline `style.color` is forbidden
+
+**Rules (Binding) — Rhythm:**
+1. Line-height must use canonical tokens (`none`, `tight`, `snug`, `normal`, `relaxed`, `loose`)
+2. Each typography role has a canonical line-height (defined in rhythm policy)
+3. Raw line-height values are forbidden (no numeric values, rem/px values, or inline styles)
+4. No per-component line-height decisions (line-height comes from role policy)
+5. Rhythm is token-defined only (no theme overrides, no component overrides)
+6. No inline or Tailwind rhythm overrides on text components
+7. Paragraph rhythm is container-applied via role context (e.g. Box, Stack), not directly on text components
+8. Text and Heading do not accept `margin`, `gap`, `leading`, or custom `lineHeight` props; TextProps and HeadingProps do not expose `lineHeight`, `leading`, or `margin`
+
+**Rationale:**
+- Typography color and rhythm are part of visual hierarchy, vertical rhythm, and accessibility
+- Color and line-height selection must be a consequence of role, not an ad-hoc decision
+- Consistent vertical rhythm requires role-based line-height and container-applied paragraph spacing
+
+**Enforcement:**
+- ESLint: `typography-color-policy`, `typography-rhythm-policy`, `no-raw-line-height`, `no-raw-line-height-scale`, `no-leading-tailwind`, `no-text-margin-spacing`
+- Type system: `typographyRhythmPolicy` in `src/FOUNDATION/tokens/typography.ts`; Text and Heading derive line-height from `textStyles` (role-based)
+- Component API: Text and Heading restrictions (no `lineHeight`, `leading`, `margin`, `style.color`, `style.lineHeight`)
+
+**Forbidden (no exceptions):**
+- Any changes to: fontSizes, lineHeights, letterSpacings; allowed color roles; Text/Heading behavior; ESLint rule permissions
+- `style={{ color }}`, `style={{ lineHeight }}`
+- Tailwind `leading-*` on typography
+- margin-top / margin-bottom on text components
+- Any "exceptions for a specific case"
+
+**Allowed (only via Foundation TUNG):**
+- New text size, new line-height, new color role — only via new TUNG, with policy + enforcement update; no hotfixes
+
+**Change Control:** Any modification requires a new Foundation TUNG.
+
+---
+
 ## 🔒 Interaction Authority Lock Status
 
 **Status:** ✅ **LOCKED**  
@@ -2023,6 +2167,7 @@ If Authority modifications are required in the future:
 - **[Foundation Component Scope](./FOUNDATION_COMPONENT_SCOPE.md)** — 🔒 **FINAL/APPLIED** Foundation component scope and inclusion criteria
 - **[Foundation Lock Operating Rules](./FOUNDATION_LOCK_OPERATING_RULES.md)** — 13-step lifecycle includes mandatory enforcement verification (Steps 7.5 and 7.6)
 - **[Architecture Lock](./ARCHITECTURE_LOCK.md)** — Detailed architecture rules and guidelines
+- **[Closed System v2 Canon Documentation Lock](./closed-system/CLOSED_SYSTEM_V2_CANON_DOCS_LOCK.md)** — Canon documentation lock declaration (canonical documentation is LOCKED and IMMUTABLE)
 - **[Token System](./TOKEN_AUTHORITY.md)** — 🔒 **LOCKED** Token system documentation
 - **[UI Architecture Rules](./ARCHITECTURE_RULES.md)** — Radix UI and Token Union rules
 - **Component Guidelines** — Component development guidelines (archived; file no longer available)
@@ -2420,5 +2565,3 @@ New functionality must be built as **Extensions** that compose Foundation compon
 **Priority:** CRITICAL  
 **Architecture Phase:** FOUNDATION **COMPLETE**
 **Next Review:** **NEVER** (Foundation is immutable)
-
-

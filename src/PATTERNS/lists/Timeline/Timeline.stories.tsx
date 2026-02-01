@@ -2,7 +2,7 @@
 import { Timeline } from "./Timeline";
 
 const meta: Meta<typeof Timeline> = {
-  title: "UI / Patterns / Lists / Timeline",
+  title: "Patterns / Lists / Timeline",
   component: Timeline,
   parameters: {
     layout: "padded",

@@ -6,7 +6,7 @@ import { ProfileCard } from "./ProfileCard";
 import type { ProfileCardSize, ProfileCardVariant } from "./ProfileCard";
 
 const meta: Meta<typeof ProfileCard> = {
-  title: "UI / Domain / Auth / ProfileCard",
+  title: "Domain / Auth / ProfileCard",
   component: ProfileCard,
   parameters: {
     layout: "centered",
