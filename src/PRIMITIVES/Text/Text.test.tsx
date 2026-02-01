@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import * as React from "react";
 import { describe, expect, it, vi } from "vitest";
 
+import { InverseTypography } from "@/COMPOSITION/inverse-typography/InverseTypography/InverseTypography";
 import { renderWithTheme } from "@/test/test-utils";
 
 import { Text } from "./Text";
@@ -105,6 +106,36 @@ describe("Text", () => {
       const { container } = renderWithTheme(<Text>Default Text</Text>);
       const text = container.querySelector("span");
       expect(text).not.toHaveClass("text-[hsl(var(--tm-text-muted))]");
+    });
+  });
+
+  describe("InverseTypography context", () => {
+    it("uses primary (default) when outside InverseTypography.Root", () => {
+      const { container } = renderWithTheme(<Text>Outside inverse</Text>);
+      const text = container.querySelector("span");
+      expect(text).not.toHaveClass("text-[hsl(var(--tm-text-inverse))]");
+    });
+
+    it("uses inverse token when inside InverseTypography.Root without color prop", () => {
+      const { container } = renderWithTheme(
+        <InverseTypography.Root>
+          <Text>Inside inverse</Text>
+        </InverseTypography.Root>,
+      );
+      const text = container.querySelector("span");
+      expect(text).toHaveClass("text-[hsl(var(--tm-text-inverse))]");
+    });
+
+    it("uses inverse token when inside InverseTypography.Root with explicit color=inverse", () => {
+      const { container } = renderWithTheme(
+        <InverseTypography.Root>
+          <Text typographyRole="display" color="inverse">
+            Display inverse
+          </Text>
+        </InverseTypography.Root>,
+      );
+      const text = container.querySelector("span");
+      expect(text).toHaveClass("text-[hsl(var(--tm-text-inverse))]");
     });
   });
 

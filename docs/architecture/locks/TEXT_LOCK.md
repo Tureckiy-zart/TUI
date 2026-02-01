@@ -21,49 +21,49 @@ This document **formally locks** the Text / Typography component system of `@ten
 The following Typography components are **LOCKED** and **IMMUTABLE**:
 
 ### 1. Text Component
-- **File:** `src/components/ui/text.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Text`, `TextProps`, `TextSize`, `TextWeight`, `textVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 2. Heading Component
-- **File:** `src/components/ui/heading.tsx`
+- **File:** `src/PRIMITIVES/Heading/Heading.tsx`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Heading`, `HeadingProps`, `headingVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 3. Body Component
-- **File:** `src/components/ui/body.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx` (Body variant)
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Body`, `BodyProps`, `bodyVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 4. Caption Component
-- **File:** `src/components/ui/caption.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx` (Caption variant)
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Caption`, `CaptionProps`, `captionVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 5. Code Component
-- **File:** `src/components/ui/code.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx` (Code variant)
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Code`, `CodeProps`, `codeVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 6. Display Component
-- **File:** `src/components/ui/display.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx` (Display variant)
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Display`, `DisplayProps`, `displayVariants`
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 7. Lead Component
-- **File:** `src/components/ui/lead.tsx`
+- **File:** `src/PRIMITIVES/Text/Text.tsx` (Lead variant)
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `Lead`, `LeadProps`, `leadVariants`
@@ -76,7 +76,7 @@ The following Typography components are **LOCKED** and **IMMUTABLE**:
 The following token domains are **LOCKED** as part of the Text / Typography lock:
 
 ### TEXT_TOKENS
-- **File:** `src/tokens/components/text.ts`
+- **File:** `src/FOUNDATION/tokens/components/text.ts`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `TEXT_TOKENS`, `TextFontSize`, `TextFontWeight`, `TextLineHeight`, `TextLetterSpacing`
@@ -84,7 +84,7 @@ The following token domains are **LOCKED** as part of the Text / Typography lock
 - **Scope:** Typography utilities (fontSize, fontWeight, lineHeight, letterSpacing)
 
 ### CODE_TOKENS
-- **File:** `src/tokens/components/code.ts`
+- **File:** `src/FOUNDATION/tokens/components/code.ts`
 - **Status:** ✅ **LOCKED**
 - **Lock Date:** 2025-12-15
 - **Exports:** `CODE_TOKENS`, `CodeBackground`, `CodeRadius`

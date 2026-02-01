@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Date Created:** 2025-12-13  
-**Last Updated:** 2026-01-17  
+**Last Updated:** 2026-01-29  
 **Status:** ✅ **IMMUTABLE**  
 **Priority:** **CRITICAL**  
 **Layer:** META / ARCHITECTURE / AI_CONTEXT
@@ -90,6 +90,21 @@ This document is the **single, authoritative source of truth** for TenerifeUI ar
 
 
 ---
+
+## Closed System v2 Invariants
+
+### DOM Boundary Invariant
+
+Closed System v2 defines a fixed set of DOM-boundary components.
+Direct DOM access outside this set is forbidden and enforced.
+
+See: [docs/architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md](./architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md)
+
+### System Closure
+
+Closed System v2 is architecturally closed to prevent bypass, drift, and coupling problems. All modifications to the system must pass through formal audit processes. The system closure ensures that expression surface is fixed, boundaries are enforced, and deterministic behavior is preserved.
+
+See: [docs/architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) — System closure rationale and change control policy
 
 ## 1. Project Identity
 
@@ -1179,6 +1194,14 @@ export const ConfirmDialog = ({ onConfirm, onCancel, ... }) => {
 
 **Rationale:** Foundation provides stable infrastructure that cannot change. Extensions provide flexible domain functionality that can evolve.
 
+### Component Token Coverage
+
+- **Decision Snapshot:**
+  [`FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md`](./architecture/FOUNDATION_COMPONENT_TOKEN_COVERAGE_DECISION_SNAPSHOT.md)
+
+This snapshot records the accepted interpretation of component token coverage in the FOUNDATION layer, including intentional tokenless components and optional token boundaries.
+No code changes were made as a result of this decision.
+
 ---
 
 ## 10. Non-Goals
@@ -1567,5 +1590,3 @@ This document is the **single source of truth** for TenerifeUI architecture. How
   - Established 12-section structure covering all architectural aspects
   - Created authoritative, declarative rules for AI and human maintainers
   - Replaced fragmented documentation with single source of truth
-
-

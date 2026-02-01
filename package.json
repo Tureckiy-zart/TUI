@@ -1,6 +1,6 @@
 {
   "name": "@tenerife.music/ui",
-  "version": "2.31.0",
+  "version": "2.4.0",
   "private": false,
   "packageManager": "pnpm@10.26.0",
   "type": "module",
@@ -95,6 +95,7 @@
     "safelist:generate": "tsx scripts/generateTailwindSafelist.ts",
     "verify:interaction-authority": "node scripts/verify-interaction-authority.mjs",
     "governance:review": "node scripts/governance-review.mjs",
+    "docs:full-tree": "node scripts/docs-full-tree-report.mjs",
     "check:next-document": "node scripts/check-next-document-imports.mjs",
     "component:generate": "tsx scripts/generate-extension-component.ts",
     "component:analyze": "tsx scripts/analyze-component-needs.ts",
