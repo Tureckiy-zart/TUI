@@ -23,11 +23,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tureckiy-zart/tenerife-ui.git"
+    "url": "https://github.com/Tureckiy-zart/TUI.git"
   },
-  "homepage": "https://github.com/Tureckiy-zart/tenerife-ui#readme",
+  "homepage": "https://github.com/Tureckiy-zart/TUI#readme",
   "bugs": {
-    "url": "https://github.com/Tureckiy-zart/tenerife-ui/issues"
+    "url": "https://github.com/Tureckiy-zart/TUI/issues"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
