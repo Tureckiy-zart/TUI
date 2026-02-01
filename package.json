@@ -76,7 +76,6 @@
     "release:check": "node scripts/release-check.js",
     "release:prepare": "node scripts/release-prepare.js",
     "release:verify": "node scripts/release-verify.js",
-    "prepublishOnly": "pnpm clean && pnpm build && pnpm typecheck",
     "theme:create": "tsx scripts/theme-cli.ts create",
     "theme:generate": "tsx tools/theme-generator/bin/theme-generate.ts",
     "theme:validate": "tsx tools/theme-validator/bin/theme-validate.ts",
@@ -225,6 +224,5 @@
       "import": "./dist/extensions/next/index.mjs",
       "require": "./dist/extensions/next/index.cjs"
     }
-  },
-  "version": "3.0.1"
+  }
 }

@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const COMPONENTS_DIR = join(__dirname, "../src");
-const GRADIENT_EXCEPTIONS_FILE = join(__dirname, "../docs/ui/gradient_exceptions.md");
+const GRADIENT_EXCEPTIONS_FILE = join(__dirname, "../docs/reference/GRADIENT_EXCEPTIONS.md");
 
 /**
  * Validation result
@@ -369,7 +369,7 @@ function main() {
 
   if (hasErrors) {
     console.error("❌ Consistency check failed. Fix errors above.");
-    console.error("\n💡 Tip: Add unauthorized gradients to docs/ui/gradient_exceptions.md");
+    console.error("\n💡 Tip: Add unauthorized gradients to docs/reference/GRADIENT_EXCEPTIONS.md");
     process.exit(1);
   }
 
