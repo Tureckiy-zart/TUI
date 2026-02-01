@@ -58,10 +58,11 @@ const HeroMediaMedia = React.forwardRef<HTMLDivElement, HeroMediaMediaProps>(
       };
     }, [registerMedia, unregisterMedia, type]);
 
-    if (allowed !== true) {
+    if (allowed === false) {
       return null;
     }
 
+    /* allowed === null: render optimistically so children mount in tree order before effect runs */
     if (type === "image") {
       if (process.env.NODE_ENV !== "production") {
         const altTrimmed = typeof alt === "string" ? alt.trim() : "";

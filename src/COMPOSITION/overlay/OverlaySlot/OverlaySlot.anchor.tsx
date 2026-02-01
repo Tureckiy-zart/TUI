@@ -29,10 +29,11 @@ const OverlaySlotAnchor = React.forwardRef<HTMLDivElement, OverlaySlotAnchorProp
       };
     }, [registerAnchor, unregisterAnchor]);
 
-    if (allowed !== true) {
+    if (allowed === false) {
       return null;
     }
 
+    /* allowed === null: render optimistically so children mount in tree order before effect runs */
     return (
       <div ref={ref} data-overlayslot-anchor {...rest}>
         {children}
