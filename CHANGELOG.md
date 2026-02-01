@@ -1,3 +1,9 @@
+## [3.0.1](https://github.com/Tureckiy-zart/TUI/compare/v3.0.0...v3.0.1) (2026-02-01)
+
+### Bug Fixes
+
+- **release:** add build attestation ([ed32f27](https://github.com/Tureckiy-zart/TUI/commit/ed32f271875bdb9106e6f970329828a13be97b8d))
+
 ## [3.0.0](https://github.com/Tureckiy-zart/TUI/compare/v2.0.6...v3.0.0) (2026-02-01)
 
 ### ⚠ BREAKING CHANGES
