@@ -225,5 +225,6 @@
       "import": "./dist/extensions/next/index.mjs",
       "require": "./dist/extensions/next/index.cjs"
     }
-  }
+  },
+  "version": "3.0.0"
 }

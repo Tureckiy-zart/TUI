@@ -1,3 +1,54 @@
+## [3.0.0](https://github.com/Tureckiy-zart/TUI/compare/v2.0.6...v3.0.0) (2026-02-01)
+
+### ⚠ BREAKING CHANGES
+
+- **ci:** Release process now uses npm Trusted Publisher (OIDC) instead of npm tokens
+
+* Remove legacy workflows: test-npm-token.yml and release.yml
+* Canonize semantic-release job in ci.yml with OIDC support
+  - Add environment: npm-release
+  - Add permissions: id-token: write, contents: write
+  - Add registry-url and scope to setup-node
+  - Remove NPM_TOKEN dependency
+  - Update actions to @v4
+  - Add corepack enable for pnpm
+* Update release.config.cjs: change branches to ["main"]
+* Delete tag v2.4.0 (will be recreated by semantic-release)
+
+This change eliminates npm token management and enables provenance attestation.
+
+Co-authored-by: Cursor <cursoragent@cursor.com>
+
+- **a11y:** None
+
+### Features
+
+- **a11y:** implement WCAG AA compliance and enhance UX patterns ([8703648](https://github.com/Tureckiy-zart/TUI/commit/870364807714610252f0c03503fc1adf009f80d2))
+- **ci:** simplify CI to single source of truth with deterministic releases ([c68323c](https://github.com/Tureckiy-zart/TUI/commit/c68323caaca31b0ad1a32d83b5006aca0b0cb2e3))
+- enforce Typography Color Policy v1 via TypeScript and ESLint ([9b75090](https://github.com/Tureckiy-zart/TUI/commit/9b750900c89bafd7c616691e9507f6a2a01a8fff))
+- finalize OIDC-based release pipeline ([74f6b38](https://github.com/Tureckiy-zart/TUI/commit/74f6b38f77a24828c20bb0b40dc63fee52cdaedc))
+- finalize OIDC-based release pipeline ([c9753bb](https://github.com/Tureckiy-zart/TUI/commit/c9753bb0a5dceec7b2aaf35389500102f5194b00))
+- **ui:** enable public npm release via OIDC ([d52a130](https://github.com/Tureckiy-zart/TUI/commit/d52a130b0995320b34143620e02683a7e4d78cc2))
+- **ui:** public release after OIDC migration ([288ddaf](https://github.com/Tureckiy-zart/TUI/commit/288ddaf8e6d5907d73689a179c39a169fa0b75e1))
+
+### Bug Fixes
+
+- **a11y:** improve contrast for destructive button disabled state ([3e9a50d](https://github.com/Tureckiy-zart/TUI/commit/3e9a50df266e401777c27fce9e8dc57066ae6854))
+- add fallback dialog titles and normalize muted text tokens ([6af4526](https://github.com/Tureckiy-zart/TUI/commit/6af45262e61c773baa2cb7e11b267ddc4d814989))
+- **ci:** add missing pnpm install step in quality workflow ([a50f9aa](https://github.com/Tureckiy-zart/TUI/commit/a50f9aa3fcaf1ded27525733e89bd327437e89fb))
+- **ci:** migrate to OIDC-based release with semantic-release ([150abec](https://github.com/Tureckiy-zart/TUI/commit/150abecf53dd13519a683055991979b1d14a2319))
+- **eslint-rules:** resolve TS errors in no-leading-tailwind and no-text-margin-spacing ([cd75c74](https://github.com/Tureckiy-zart/TUI/commit/cd75c7414e5f040cfc711e2356a61487a1124d64))
+- **eslint:** handle undefined value.raw in template literals ([87e9fcf](https://github.com/Tureckiy-zart/TUI/commit/87e9fcf168155bd832cc8c8d0cec88f1debecb94))
+- **foundation:** enforce typography rhythm constraints ([dd3165d](https://github.com/Tureckiy-zart/TUI/commit/dd3165d0860c9e35abdddff4997a3a0bb25d1371))
+- **foundation:** finalize Typography Color Policy v1 canon & lock ([fd9985a](https://github.com/Tureckiy-zart/TUI/commit/fd9985a0855c194e1153689480dea3bc551e5bcd))
+- lin script ([4785c47](https://github.com/Tureckiy-zart/TUI/commit/4785c4791cbaaf7dfdd7d33ac6f95f757cb1d643))
+- **release:** enable pnpm via corepack ([585c6ec](https://github.com/Tureckiy-zart/TUI/commit/585c6ecdce8b758ebbb16b1e332d01a2ccc797e2))
+- remove className from Foundation components in Avatar story ([8ebc997](https://github.com/Tureckiy-zart/TUI/commit/8ebc99757a0d7944d33c7fa406a78199f16db2e9))
+- **storybook:** improve visual styling and accessibility in stories ([4d4739a](https://github.com/Tureckiy-zart/TUI/commit/4d4739a7b80c16bcf0da8a34162c3fd015ae512b))
+- **tests:** update token-based class expectations ([9928159](https://github.com/Tureckiy-zart/TUI/commit/992815952d21db4965451155c67b3a6a96ebe366))
+- **toast:** remove legacy useToast export and add hook stories ([c18328c](https://github.com/Tureckiy-zart/TUI/commit/c18328c9386a26c0b0e2f659c61b17c7a8997d5e))
+- trigger public release ([5e4e52d](https://github.com/Tureckiy-zart/TUI/commit/5e4e52d76072eeb8592f64b4645847a1223188be))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
