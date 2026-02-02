@@ -1,3 +1,9 @@
+## [3.0.3](https://github.com/Tureckiy-zart/TUI/compare/v3.0.2...v3.0.3) (2026-02-02)
+
+### Bug Fixes
+
+- trigger npm publish ([95a0a7b](https://github.com/Tureckiy-zart/TUI/commit/95a0a7b7241b016f4caa1aa39bfdc20bfc74b8cd))
+
 ## [3.0.2](https://github.com/Tureckiy-zart/TUI/compare/v3.0.1...v3.0.2) (2026-02-01)
 
 ### Bug Fixes
