@@ -5,7 +5,7 @@ module.exports = {
     ["@semantic-release/commit-analyzer", { preset: "conventionalcommits" }],
     ["@semantic-release/release-notes-generator", { preset: "conventionalcommits" }],
     ["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],
-    ["@semantic-release/npm", { npmPublish: false }],
+    ["@semantic-release/npm", { npmPublish: true }],
     [
       "@semantic-release/github",
       {
