@@ -393,13 +393,14 @@ This release process enforces the Version Canon Rules defined in `CHANGELOG.md`:
 ### CI Fails at npm Publish
 
 **Check:**
-- `NPM_TOKEN` secret is configured in GitHub repository settings
-- Token has publish permissions for `@tenerife.music/ui`
-- Token has 2FA / automation token type (required for scoped packages)
+- OIDC Trusted Publisher is configured for the package on npmjs.com
+- GitHub environment `npm-release` exists and has `id-token: write` permission
+- Workflow job has `permissions: id-token: write`
 
 **Fix:**
-- Update `NPM_TOKEN` in GitHub Settings → Secrets and variables → Actions
-- Re-run the failed workflow or push the tag again
+- Configure Trusted Publisher in npm package settings (Organization/User → Package → Trusted Publishers)
+- Ensure GitHub environment `npm-release` is set up with required permissions
+- Re-run the failed workflow or push to main again
 
 ### CHANGELOG Date Doesn't Match npm Date
 

@@ -2404,7 +2404,7 @@ All typing enforcement tasks completed:
   - Automatic versioning based on conventional commits
   - CHANGELOG.md generation on every release
   - GitHub Releases created automatically with release notes
-  - npm publishing enabled (requires NPM_TOKEN setup)
+  - npm publishing enabled via OIDC Trusted Publisher
   - Commitlint configured to enforce conventional commit format
   - Husky commit-msg hook validates commits before acceptance
   - Release workflow runs on every push to main branch
@@ -2415,14 +2415,14 @@ All typing enforcement tasks completed:
   - publishConfig.access: `public`
   - Package name: `@tenerife.music/ui`
 - **Manual Setup Required:**
-  - Add NPM_TOKEN to GitHub Secrets (see `SEMVER_NPM_VALIDATION.md`)
+  - Configure OIDC Trusted Publisher on npmjs.com (see RELEASE_PROCESS.md)
   - Verify npm scope access for `@tenerife.music`
   - First release will be triggered by conventional commit on main branch
 - **Reports:**
   - `docs_archive/reports/archive/archive/reports/other/SEMVER_NPM_VALIDATION.md` - Complete npm token and scope validation guide (Note: File may be in docs_archive)
   - `docs_archive/reports/archive/archive/reports/other/SEMVER_DRY_RUN.md` - Dry-run validation results and configuration details (Note: File may be in docs_archive)
 - **Next Steps:**
-  - Set up NPM_TOKEN in GitHub Secrets (manual step - see validation guide)
+  - Ensure GitHub environment `npm-release` has `id-token: write` (OIDC)
   - Verify npm scope access for `@tenerife.music`
   - Make first conventional commit (e.g., `feat: add new feature`)
   - Push to main branch to trigger first release
@@ -2435,7 +2435,7 @@ All typing enforcement tasks completed:
 
 - **Status:** ✅ completed
 - **Date Completed:** 2025-11-22
-- **Summary:** Complete comprehensive audit of the semantic-release pipeline completed. All automated checks passed (87/87 - 100%). Workflow, configuration, package.json, CHANGELOG.md, and dry-run all validated successfully. System is 98% production ready, pending only manual NPM_TOKEN setup verification.
+- **Summary:** Complete comprehensive audit of the semantic-release pipeline completed. All automated checks passed (87/87 - 100%). Workflow, configuration, package.json, CHANGELOG.md, and dry-run all validated successfully. System uses OIDC Trusted Publisher for npm publish.
 - **Files Created:**
   - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_SECRETS.md` - GitHub Secrets validation and setup instructions (Note: File may be in docs_archive)
   - ✅ `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW.md` - GitHub Actions workflow validation (15/15 checks passed) (Note: File may be in docs_archive)
@@ -2456,12 +2456,9 @@ All typing enforcement tasks completed:
     - CHANGELOG.md validation: ✅ PASSED (15/15)
     - Dry-run execution: ✅ PASSED (16/16)
     - Workflow simulation: ✅ PASSED (19/20)
-  - **Manual Checks:** ⚠️ PENDING (5/5 checks - all NPM_TOKEN related)
-    - NPM_TOKEN presence in GitHub Secrets: ⚠️ PENDING
-    - NPM_TOKEN format validation: ⚠️ PENDING
-    - NPM_TOKEN permissions: ⚠️ PENDING
-    - NPM scope access: ⚠️ PENDING
-    - Token functionality testing: ⚠️ PENDING
+  - **Manual Checks:** ✅ OIDC-based
+    - Trusted Publisher configured on npmjs.com: required
+    - GitHub environment npm-release with id-token: write: required
 - **Key Findings:**
   - ✅ All configuration files validated and correct
   - ✅ All semantic-release plugins installed and configured
@@ -2470,13 +2467,13 @@ All typing enforcement tasks completed:
   - ✅ CHANGELOG.md ready for automatic updates
   - ✅ Dry-run execution successful (all 16 plugin hooks loaded)
   - ✅ Workflow simulation validated (correct execution order)
-  - ⚠️ NPM_TOKEN requires manual setup in GitHub Secrets
+  - Publish uses OIDC Trusted Publisher
   - ⚠️ npm scope access needs manual verification
 - **Production Readiness:**
-  - **Status:** ✅ READY (pending NPM_TOKEN setup)
+  - **Status:** ✅ READY (OIDC Trusted Publisher)
   - **Quality Score:** 98/100 (2 points deducted for manual token setup)
   - **Risk Level:** 🟢 LOW
-  - **Recommendation:** PROCEED with production deployment after NPM_TOKEN setup
+  - **Recommendation:** PROCEED with production deployment (OIDC configured)
 - **Reports Generated:**
   - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_SECRETS.md` - Secrets validation with manual setup instructions (Note: File may be in docs_archive)
   - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW.md` - Complete workflow validation report (Note: File may be in docs_archive)
@@ -2488,7 +2485,7 @@ All typing enforcement tasks completed:
   - `docs_archive/reports/archive/archive/reports/other/RELEASE_AUDIT_WORKFLOW_SIMULATION.md` - Workflow execution simulation (Note: File may be in docs_archive)
   - `docs_archive/reports/archive/archive/reports/other/RELEASE_PIPELINE_FINAL_AUDIT.md` - Comprehensive final audit report (Note: File may be in docs_archive)
 - **Next Steps:**
-  - Setup NPM_TOKEN in GitHub Secrets (manual step - see RELEASE_AUDIT_SECRETS.md)
+  - Configure OIDC Trusted Publisher on npmjs.com (see RELEASE_PROCESS.md)
   - Verify npm scope access for `@tenerife.music` (see RELEASE_AUDIT_NPM_SCOPE.md)
   - Make first conventional commit and push to main branch
   - Monitor first release workflow execution

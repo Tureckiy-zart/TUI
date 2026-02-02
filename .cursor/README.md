@@ -50,8 +50,7 @@ Configuration includes:
 │       └── [various project subtasks]
 │
 ├── scripts/                           # Automation scripts
-│   ├── type_enforcement.sh            # Type checking
-│   └── verify_npm_token.sh            # npm token verification
+│   └── type_enforcement.sh            # Type checking
 │
 └── examples/                          # Configuration examples
     ├── CURSOR_SETUP_TASK.md           # Cursor setup document

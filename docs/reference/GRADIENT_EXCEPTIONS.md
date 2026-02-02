@@ -1,14 +1,14 @@
 # Gradient Exceptions List
 
 **Purpose:** Historical reference for gradient usage in Tenerife UI components.  
-**Last Updated:** 2025-12-18  
+**Last Updated:** 2025-02-01  
 **Status:** ✅ **FORMALIZED** - Gradients are now token-based
 
 ---
 
 ## ⚠️ Status Change: Gradients Formalized
 
-**As of 2025-12-18**, all gradients have been **formalized as foundation tokens** in `src/FOUNDATION/tokens/gradients.ts`.
+**As of 2025-02-01**, all gradients have been **formalized as foundation tokens** in `src/FOUNDATION/tokens/gradients.ts`.
 
 **Migration Status:**
 - ✅ All gradients now use `GRADIENT_TOKENS` from foundation tokens
@@ -47,14 +47,14 @@ Gradients are used sparingly in Tenerife UI to maintain brand consistency while 
 
 - **Component:** `EventCard`
 - **Usage:** Featured event badge text gradient
-- **Location:** `src/components/cards/EventCard.tsx`
+- **Location:** `src/PATTERNS/cards/EventCard/`
 - **Rationale:** Creates vibrant text effect for trending/featured badges
 
 #### `bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent`
 
 - **Component:** `EventCard`
 - **Usage:** Button text gradient
-- **Location:** `src/components/cards/EventCard.tsx`
+- **Location:** `src/PATTERNS/cards/EventCard/`
 - **Rationale:** Premium button text effect
 
 ---
@@ -65,35 +65,35 @@ Gradients are used sparingly in Tenerife UI to maintain brand consistency while 
 
 - **Component:** `ModeHero`
 - **Usage:** Hero section background gradient
-- **Location:** `src/components/layout/ModeHero.tsx`
+- **Location:** `src/COMPOSITION/layout/ModeHero/ModeHero.tsx`
 - **Rationale:** Primary hero background for day/night mode showcase
 
 #### `bg-gradient-to-r from-accent-500 to-primary-600`
 
 - **Component:** `EventCard`
 - **Usage:** Featured badge background
-- **Location:** `src/components/cards/EventCard.tsx`
+- **Location:** `src/PATTERNS/cards/EventCard/`
 - **Rationale:** Vibrant badge background for featured events
 
 #### `bg-gradient-to-r from-accent to-primary`
 
 - **Component:** `VenueCard`
 - **Usage:** Featured badge background
-- **Location:** `src/components/cards/VenueCard.tsx`
+- **Location:** `src/PATTERNS/cards/VenueCard/`
 - **Rationale:** Premium badge background for popular venues
 
 #### `bg-gradient-to-br from-surface-elevated1 to-surface-elevated2`
 
 - **Component:** `EventCard`
-- **Usage:** Image placeholder background
-- **Location:** `src/components/cards/EventCard.tsx`
+- **Usage:** Image placeholder background (historical; now unified to surface.muted)
+- **Location:** `src/PATTERNS/cards/EventCard/`
 - **Rationale:** Subtle surface gradient for image placeholders
 
 #### `bg-gradient-to-br from-muted to-muted/50`
 
 - **Component:** `VenueCard`
 - **Usage:** Image placeholder background
-- **Location:** `src/components/cards/VenueCard.tsx`
+- **Location:** `src/PATTERNS/cards/VenueCard/`
 - **Rationale:** Subtle muted gradient for image placeholders
 
 ---
@@ -104,7 +104,7 @@ Gradients are used sparingly in Tenerife UI to maintain brand consistency while 
 
 - **Component:** `EventCard`, `VenueCard`
 - **Usage:** Image overlay for hover effects
-- **Location:** `src/components/cards/EventCard.tsx`, `src/components/cards/VenueCard.tsx`
+- **Location:** `src/PATTERNS/cards/EventCard/`, `src/PATTERNS/cards/VenueCard/`
 - **Rationale:** Dark overlay gradient for image hover states
 
 ---
@@ -186,7 +186,7 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 ### ModeHero
 
-- **✅ Formalized:** `GRADIENT_TOKENS.brand.primary`
+- **✅ Formalized:** Visual equivalent of `GRADIENT_TOKENS.brand.primary`; implemented via inline `style` (not token reference).
 - **Token Reference:** `src/FOUNDATION/tokens/gradients.ts`
 - **Purpose:** Brand identity hero background
 - **No other gradients allowed**
@@ -195,7 +195,7 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 - **✅ Formalized:**
   - Badge: `GRADIENT_TOKENS.brand.featured` (via `DOMAIN_TOKENS.badges.surface.featured`)
-  - Placeholder: `GRADIENT_TOKENS.surface.elevated` (via `DOMAIN_TOKENS.image.placeholder.gradient`)
+  - Placeholder: `GRADIENT_TOKENS.surface.muted` (via `DOMAIN_TOKENS.image.placeholder.gradient`; shared for all cards)
   - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
   - Text: `GRADIENT_TOKENS.text.brand`
 
@@ -203,6 +203,33 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 - **✅ Formalized:**
   - Badge: `GRADIENT_TOKENS.brand.reversed` (via `DOMAIN_TOKENS.badges.surface.featured`)
+  - Placeholder: `GRADIENT_TOKENS.surface.muted` (via `DOMAIN_TOKENS.image.placeholder.gradient`)
+  - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
+
+### ArtistCard
+
+- **✅ Formalized:**
+  - Badge: `GRADIENT_TOKENS.brand.featured` (via `DOMAIN_TOKENS.badges.surface.featured`)
+  - Placeholder: `GRADIENT_TOKENS.surface.muted` (via `DOMAIN_TOKENS.image.placeholder.gradient`)
+  - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
+
+### TicketCard
+
+- **✅ Formalized:**
+  - Badge: `GRADIENT_TOKENS.brand.featured` (via `DOMAIN_TOKENS.badges.surface.featured`)
+  - Placeholder: `GRADIENT_TOKENS.surface.muted` (via `DOMAIN_TOKENS.image.placeholder.gradient`)
+  - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
+
+### PromoCard
+
+- **✅ Formalized:**
+  - Badge: `GRADIENT_TOKENS.brand.featured` (via `DOMAIN_TOKENS.badges.surface.featured`)
+  - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
+
+### CategoryCard
+
+- **✅ Formalized:**
+  - Badge: `GRADIENT_TOKENS.brand.featured` (via `DOMAIN_TOKENS.badges.surface.featured`)
   - Placeholder: `GRADIENT_TOKENS.surface.muted` (via `DOMAIN_TOKENS.image.placeholder.gradient`)
   - Overlay: `GRADIENT_TOKENS.overlay.dark` (via `DOMAIN_TOKENS.image.overlay.gradient`)
 
@@ -236,5 +263,5 @@ The following gradient patterns are **NOT allowed** and should be flagged:
 
 **Status:** ✅ **FORMALIZED** - Gradients are now token-based  
 **Version:** 2.0.0  
-**Last Updated:** 2025-12-18  
-**Migration Date:** 2025-12-18
+**Last Updated:** 2025-02-01  
+**Migration Date:** 2025-02-01

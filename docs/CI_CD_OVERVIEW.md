@@ -6,47 +6,16 @@ This document describes the **complete CI/CD pipeline structure** for the Teneri
 
 # 📁 1. General CI/CD Structure
 
-The library uses **7 independent pipelines**, each responsible for its own area:
+The library uses **2 workflows** as single source of truth:
 
-1. **Quality Checks** — code quality checks, testing, and accessibility (lint, tests, a11y).
-2. **Full CI/CD** — complete pipeline for main branch (quality, build, storybook, release).
-3. **Chromatic Visual Tests** — visual regression testing for components.
-4. **Release (manual)** — manual semantic-release → npm publish.
-5. **Storybook Deploy** — Storybook publication to GitHub Pages.
-6. **Test NPM Token** — debugging tool for NPM_TOKEN verification.
-7. **Component Request Triage** — automated triage and validation of component requests.
+1. **Full CI/CD** — complete pipeline for main branch (quality, build, storybook, semantic-release, npm publish via OIDC).
+2. **Chromatic Visual Tests** — visual regression testing for components (informational).
 
-These pipelines work independently and should NOT be combined.
+Publish uses **OIDC Trusted Publisher** only. No token-based auth.
 
 ---
 
-# 🟦 2. Quality Checks Pipeline
-
-**File:** `.github/workflows/quality.yml`
-
-**Triggers:**
-
-- push: `main`, `develop`, `feature/**`
-- pull_request → `main`, `develop`
-
-### 🔍 What it does:
-
-- 🧹 Lint (ESLint) — via `scripts/lint-ci.sh` and `pnpm lint:check`
-- 🧪 Unit tests — `pnpm test`
-- ♿ Accessibility tests — `pnpm ci:a11y`
-- 📤 Upload lint artifacts (lint-report.md, prettier logs)
-
-### 🎯 Purpose:
-
-Ensure that code **passes linting, tests, and accessibility checks** on all development branches.
-
-### 📝 Note:
-
-Quality does not build the library or deploy Storybook — it only checks code quality. For full verification, use `ci.yml` on the main branch.
-
----
-
-# 🟨 3. Full CI/CD Pipeline
+# 🟨 2. Full CI/CD Pipeline
 
 **File:** `.github/workflows/ci.yml`
 
@@ -74,20 +43,20 @@ Quality does not build the library or deploy Storybook — it only checks code q
 - **Blocking status:** Информационная проверка, не блокирует PR
 
 **Job: release** (depends on quality + build, main branch only)
-- 📦 Semantic Release — `npx semantic-release`
-- 🚀 Automatic npm publication (if there are new commits for release)
+- 📦 Semantic Release — `npx semantic-release` (prepares version, changelog, git tag, GitHub Release; npm publish disabled)
+- 🚀 Publish to npm (OIDC) — `npm publish --provenance --access public` (OIDC Trusted Publisher)
 
 ### 🎯 Purpose:
 
-Provide **complete CI/CD cycle for main branch**: quality checks, build, testing on different Node.js versions, Storybook build, and automatic publication when release commits are present.
+Provide **complete CI/CD cycle for main branch**: quality checks, build, Storybook, and automatic publication via OIDC when release commits are present.
 
 ### 📝 Note:
 
-This is the main pipeline for the main branch. The release job runs automatically only if semantic-release determines there are commits for release.
+This is the main pipeline for the main branch. Publish uses OIDC Trusted Publisher. Ensure GitHub environment `npm-release` has `id-token: write` permission.
 
 ---
 
-# 🟣 4. Chromatic Visual Tests Pipeline
+# 🟣 3. Chromatic Visual Tests Pipeline
 
 **File:** `.github/workflows/chromatic.yml`
 
@@ -112,119 +81,7 @@ Uses Chromatic for visual testing. Requires `CHROMATIC_PROJECT_TOKEN` in GitHub 
 
 ---
 
-# 🟩 5. Release Pipeline (manual semantic-release)
-
-**File:** `.github/workflows/release.yml`
-
-**Triggers:**
-
-- ❗️ _Manual only_ via "Run Workflow" (`workflow_dispatch`).
-
-### 🔍 What it does:
-
-- Installs PNPM and Node.js 22
-- Runs accessibility suite — `pnpm ci:a11y`
-- Configures NPM token
-- Runs `semantic-release` (npm publish + git tag + GitHub Release)
-
-### 🎯 Purpose:
-
-Allow manual library version releases **without manually changing version in package.json**.
-
-### 🔥 semantic-release automatically:
-
-- determines new version from commit messages
-- generates changelog
-- creates GitHub Release
-- publishes to npm
-
-### 📝 Note:
-
-Alternative to automatic release in `ci.yml`. Used for manual control of the release process.
-
----
-
-# 🟪 6. Storybook Deploy Pipeline
-
-**File:** `.github/workflows/storybook-deploy.yml`
-
-**Triggers:**
-
-- push → `main`
-- manually (`workflow_dispatch`)
-
-### 🔍 What it does:
-
-- builds Storybook (`storybook-static`)
-- uploads artifact
-- publishes to GitHub Pages via Pages API
-
-### 🎯 Purpose:
-
-Maintain a **live online version of Storybook** as documentation for designers and developers.
-
-### 🌐 Deployment URL:
-
-- generated via GitHub Pages environment.
-
----
-
-# 🟧 7. Test NPM Token (Manual Diagnostics)
-
-**File:** `.github/workflows/test-npm-token.yml`
-
-**Triggers:**
-
-- manually (`workflow_dispatch`)
-- automatically on push to `main` (only if the workflow file itself is changed)
-
-### 🔍 What it does:
-
-- checks for `NPM_TOKEN` in GitHub Secrets
-- verifies token format (must start with `npm_`)
-- performs dry-run publish (does not publish real package)
-- checks package existence on npm
-- runs `semantic-release --dry-run`
-
-### 🎯 Purpose:
-
-**Verify NPM token functionality** to avoid release failures.
-
-### 📝 Note:
-
-This workflow is NOT part of the main CI — it's a developer tool for diagnosing npm token issues.
-
----
-
-# 🟪 8. Component Request Triage Pipeline
-
-**File:** `.github/workflows/component-request-triage.yml`
-
-**Triggers:**
-
-- issues: opened, labeled (when `component-request` label is applied)
-- workflow_dispatch (manual)
-
-### 🔍 What it does:
-
-- Validates component request issues
-- Adds informative comment to issue with links to:
-  - Component Needs Inventory
-  - Extension Authority Contract
-  - Feedback Review Process
-- Provides review schedule information (monthly reviews, high priority immediate review)
-
-### 🎯 Purpose:
-
-Automated triage and validation of component requests to ensure proper process is followed. Helps maintain controlled library growth by ensuring all component requests go through the proper evaluation process.
-
-### 📝 Note:
-
-This workflow is part of the Library Maturity Growth System. See [Component Needs Inventory](./workflows/tasks/COMPONENT_NEEDS_INVENTORY.md) and [Usage Feedback Process](./workflows/tasks/FEEDBACK_COLLECTION_PROCESS.md) for details.
-
----
-
-# 🧩 8. Local CI for Developers
+# 🧩 4. Local CI for Developers
 
 **File:** `scripts/ci-local.sh`
 
@@ -250,7 +107,7 @@ Have **100% identical CI** as in GitHub Actions, but locally. Allows checking al
 
 ---
 
-# 🛠 9. Husky Hooks
+# 🛠 5. Husky Hooks
 
 **Purpose:** prevent low-quality code from entering the repository.
 
@@ -274,7 +131,7 @@ Have **100% identical CI** as in GitHub Actions, but locally. Allows checking al
 
 ---
 
-# 🧱 10. General Pipeline Architecture
+# 🧱 6. General Pipeline Architecture
 
 ```
            ┌──────────────────────┐
@@ -282,41 +139,26 @@ Have **100% identical CI** as in GitHub Actions, but locally. Allows checking al
            └─────────┬────────────┘
                      │
         ┌────────────▼──────────────┐
-        │     QUALITY PIPELINE      │
-        │  (main/develop/feature)   │
-        │  lint / test / a11y       │
+        │      FULL CI/CD PIPELINE  │
+        │  (main / PR to main)      │
+        │  quality (matrix)         │
+        │  → build                  │
+        │  → storybook              │
+        │  → release (main only)    │
+        │    • semantic-release     │
+        │    • npm publish (OIDC)   │
         └────────────┬──────────────┘
                      │
-         (main only) ▼
-        ┌────────────────────────────┐
-        │      FULL CI/CD PIPELINE   │
-        │  quality (matrix)          │
-        │  → build                   │
-        │  → storybook               │
-        │  → release (auto if needed)│
-        └────────────┬───────────────┘
-                     │
          ┌───────────▼──────────────┐
-         │ STORYBOOK DEPLOY PIPELINE│
-         │   deploy to GitHub Pages │
-         └──────────────────────────┘
-
-         ┌──────────────────────────┐
          │  CHROMATIC VISUAL TESTS  │
          │  (PR to main/develop)    │
+         │  [Informational]         │
          └──────────────────────────┘
-
-         ┌──────────────────────────┐
-         │ COMPONENT REQUEST TRIAGE │
-         │  (issues with label)     │
-         └──────────────────────────┘
-
-Manual: RELEASE, TEST-NPM-TOKEN
 ```
 
 ---
 
-# 🔒 11. Blocking vs Informational Checks
+# 🔒 7. Blocking vs Informational Checks
 
 CI checks явно разделены на **blocking** (блокирующие PR) и **informational** (информационные, не блокирующие).
 
@@ -356,27 +198,23 @@ CI checks явно разделены на **blocking** (блокирующие 
 
 ---
 
-# 🏁 12. Summary
+# 🏁 8. Summary
 
-The library's CI/CD systems are separated by purpose:
+The library uses 2 workflows:
 
-| Workflow                    | Purpose                    | Automatic        | Executes                     | Blocking Status |
-| --------------------------- | -------------------------- | ---------------- | ---------------------------- | --------------- |
-| **Quality**                 | Quality checks             | ✔                | lint, tests, a11y            | ✅ Blocking     |
-| **Full CI/CD**              | Full pipeline              | ✔ (main)         | quality (matrix), build, storybook, release | ✅ Blocking (Node 20.x) |
-| **Chromatic**               | Visual tests               | ✔ (PR/main)      | visual regression tests      | ℹ️ Informational |
-| **Release**                 | npm publication            | ❌ (manual)      | semantic-release             | Main only       |
-| **Storybook Deploy**        | Online documentation       | ✔ (main)         | GitHub Pages                 | ℹ️ Informational |
-| **Test NPM Token**          | Token diagnostics          | ❌ (manual)      | dry-run publish              | N/A             |
-| **Component Request Triage** | Component request handling | ✔ (issues)       | Issue validation, comments   | ℹ️ Informational |
+| Workflow       | Purpose           | Automatic     | Executes                                    | Blocking Status |
+| -------------- | ----------------- | ------------- | ------------------------------------------- | --------------- |
+| **Full CI/CD** | Complete pipeline | ✔ (main/PR)   | quality (matrix), build, storybook, release  | ✅ Blocking     |
+| **Chromatic**  | Visual tests      | ✔ (PR/main)   | visual regression tests                     | ℹ️ Informational |
+
+**Publish:** OIDC Trusted Publisher only. Environment `npm-release` with `id-token: write`.
 
 This ensures:
 
 - stability
 - predictability
-- security of npm publications
+- OIDC-based npm publication (no long-lived tokens)
 - development convenience
-- professional CI/CD level
 
 ---
 
