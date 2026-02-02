@@ -1,3 +1,9 @@
+## [3.0.4](https://github.com/Tureckiy-zart/TUI/compare/v3.0.3...v3.0.4) (2026-02-02)
+
+### Bug Fixes
+
+- retry npm publish after release commit ([3aa4510](https://github.com/Tureckiy-zart/TUI/commit/3aa451017228633df9fdfd8bcfa4f02d1ab68715))
+
 ## [3.0.3](https://github.com/Tureckiy-zart/TUI/compare/v3.0.2...v3.0.3) (2026-02-02)
 
 ### Bug Fixes
