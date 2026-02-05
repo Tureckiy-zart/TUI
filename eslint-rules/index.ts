@@ -8,6 +8,7 @@
 import { noAdHocLists } from "./no-ad-hoc-lists";
 import { noClassNameOnFoundation } from "./no-classname-on-foundation";
 import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
+import { uiRequirePropsContract } from "./ui-require-props-contract";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
 import { noDeepImportsFromUi } from "./no-deep-imports-from-ui";
 import { noInlineStyleOnUiComponents } from "./no-inline-style-on-ui-components";
@@ -65,6 +66,7 @@ export default {
     "no-utility-classes-near-foundation": noUtilityClassesNearFoundation,
     "no-raw-html-when-foundation-exists": noRawHtmlWhenFoundationExists,
     "no-inline-style-on-ui-components": noInlineStyleOnUiComponents,
+    "ui-require-props-contract": uiRequirePropsContract,
     // Foundation Token Import Hygiene
     "no-token-imports-from-index": noTokenImportsFromIndex,
     // Foundation Runtime Utilities Import Hygiene

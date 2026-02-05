@@ -7,6 +7,7 @@
 export * from "./AspectRatio";
 export * from "./Avatar";
 export * from "./LanguageSelector";
+export * from "./MultiSelect/MultiSelect.index";
 export * from "./Select";
 export * from "./Separator";
 export {
