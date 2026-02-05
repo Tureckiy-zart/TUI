@@ -1,3 +1,4 @@
+/* eslint-disable max-depth */
 /**
  * ESLint Rule: no-utility-classes-near-foundation
  *
@@ -12,6 +13,7 @@
  */
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+
 import { isConsumerCode } from "./utils/consumer-code-detection";
 import { FoundationImportTracker } from "./utils/import-tracking";
 import { hasTailwindUtilities } from "./utils/tailwind-utilities";
@@ -28,7 +30,7 @@ function containsFoundationComponent(
   function checkNode(child: TSESTree.JSXChild): boolean {
     if (child.type === TSESTree.AST_NODE_TYPES.JSXElement) {
       const element = child;
-      const name = element.openingElement.name;
+      const { name } = element.openingElement;
 
       if (name.type === TSESTree.AST_NODE_TYPES.JSXIdentifier) {
         // Check if this is a Foundation component
@@ -45,7 +47,7 @@ function containsFoundationComponent(
       }
     } else if (child.type === TSESTree.AST_NODE_TYPES.JSXExpressionContainer) {
       // Check expression containers (e.g., {condition && <Button />})
-      const expression = child.expression;
+      const { expression } = child;
       if (expression.type === TSESTree.AST_NODE_TYPES.JSXElement) {
         return checkNode(expression);
       }
@@ -131,8 +133,8 @@ export const noUtilityClassesNearFoundation = ESLintUtils.RuleCreator(
       },
 
       JSXElement(node) {
-        const openingElement = node.openingElement;
-        const name = openingElement.name;
+        const { openingElement } = node;
+        const { name } = openingElement;
 
         // Only check HTML elements (not React components)
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;

@@ -163,10 +163,7 @@ export type SpinnerEasing = "linear" | "ease-in" | "ease-out" | "ease-in-out";
 /**
  * Spinner component props
  */
-export interface SpinnerProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "className" | "style"
-> {
+export interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Visual style variant (circle/dots/bounce/linear/bars/pulse/wave/orbit/bars-horizontal/ripple)
    * @default "circle"

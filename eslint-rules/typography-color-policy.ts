@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function, max-depth */
 /**
  * ESLint Rule: typography-color-policy
  *
@@ -53,8 +54,10 @@ const READABLE_ROLES = ["body", "body-sm", "body-xs", "caption", "label", "label
 const ROLE_PATTERNS = [
   // textStyles.role
   /textStyles\.(display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)/g,
-  // role="..." in JSX
-  /role=["'](display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)["']/g,
+  // typographyRole="..." in JSX
+  /typographyRole=["'](display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)["']/g,
+  // data-typography-role="..." in JSX (optional escape hatch)
+  /data-typography-role=["'](display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status)["']/g,
   // className with role indicators
   /(?:className|class)=["'][^"']*\b(text-(?:display|h[1-6]|body(?:-sm|-xs)?|label(?:-sm)?|caption|meta|status))\b/g,
 ];
@@ -304,7 +307,7 @@ export default createRule<Options, MessageIds>({
 
             if (colorValue) {
               // Check if this is a Text/Heading component or has typography role context
-              const parent = node.parent;
+              const { parent } = node;
               if (parent?.type === "JSXOpeningElement") {
                 const parentName =
                   parent.name.type === "JSXIdentifier" ? parent.name.name : undefined;

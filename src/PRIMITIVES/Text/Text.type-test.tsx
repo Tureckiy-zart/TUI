@@ -9,15 +9,13 @@
 
 import type { TextProps } from "./Text";
 
-// Test that className is not in TextProps
+// Test that className is allowed in TextProps
 type TestClassName = "className" extends keyof TextProps ? true : false;
-// @ts-expect-error — className must not be in TextProps
 const _testClassName: TestClassName = true;
 void _testClassName;
 
-// Test that style is not in TextProps
+// Test that style is allowed in TextProps
 type TestStyle = "style" extends keyof TextProps ? true : false;
-// @ts-expect-error — style must not be in TextProps
 const _testStyle: TestStyle = true;
 void _testStyle;
 

@@ -49,7 +49,12 @@ import * as React from "react";
 import { InverseTypographyContext } from "@/COMPOSITION/inverse-typography/InverseTypography/InverseTypography";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { TEXT_TOKENS } from "@/FOUNDATION/tokens/components/text";
-import type { AllowedTextForRole, TextToken, TypographyRole } from "@/FOUNDATION/tokens/typography";
+import {
+  type AllowedTextForRole,
+  isAllowedTextToken,
+  type TextToken,
+  type TypographyRole,
+} from "@/FOUNDATION/tokens/typography";
 
 /**
  * Text size values (internal - used for type derivation only)
@@ -172,10 +177,9 @@ const textVariants = tokenCVA({
  * @public
  * @template R - Typography role (extends TypographyRole)
  */
-export interface TextProps<R extends TypographyRole = TypographyRole> extends Omit<
-  React.HTMLAttributes<HTMLSpanElement>,
-  "className" | "style"
-> {
+export interface TextProps<
+  R extends TypographyRole = TypographyRole,
+> extends React.HTMLAttributes<HTMLSpanElement> {
   /** HTML element to render (span, p, label, strong, em) */
   as?: TextAsElement;
   /** Typography size scale (xs, sm, md, lg, xl) */
@@ -204,6 +208,16 @@ const TextComponent = React.forwardRef<HTMLElement, TextProps<any>>(
     const isInverse = React.useContext(InverseTypographyContext);
     // Inside InverseTypography.Root, switch to inverse token; no new props
     const effectiveColor = isInverse ? "inverse" : color;
+    if (
+      process.env.NODE_ENV === "development" &&
+      _typographyRole &&
+      effectiveColor &&
+      !isAllowedTextToken(_typographyRole, effectiveColor)
+    ) {
+      console.warn(
+        `[Text] typographyRole="${_typographyRole}" does not allow color="${effectiveColor}".`,
+      );
+    }
     const colorVariant = effectiveColor ? { color: effectiveColor } : undefined;
     const className = textVariants({ size, weight, ...colorVariant });
 

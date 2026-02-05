@@ -3,6 +3,7 @@
  */
 
 import { RuleTester } from "@typescript-eslint/rule-tester";
+import path from "path";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noRawHtmlWhenFoundationExists } from "../no-raw-html-when-foundation-exists";
@@ -45,7 +46,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <p>Content</p>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Using Foundation component
       {
@@ -55,7 +56,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <Text>Content</Text>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Raw HTML elements without Foundation alternatives
       {
@@ -76,7 +77,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
     ],
     invalid: [
@@ -88,7 +89,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <p>Content</p>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",
@@ -103,7 +104,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <button onClick={() => {}}>Click</button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",
@@ -118,7 +119,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <a href="/">Link</a>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",
@@ -133,7 +134,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <input type="text" />;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",
@@ -148,7 +149,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             return <textarea />;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",
@@ -168,7 +169,7 @@ describe("no-raw-html-when-foundation-exists", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noRawHtmlWhenFoundationExists",

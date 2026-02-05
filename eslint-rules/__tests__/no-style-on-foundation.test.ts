@@ -3,6 +3,7 @@
  */
 
 import { RuleTester } from "@typescript-eslint/rule-tester";
+import path from "path";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noStyleOnFoundation } from "../no-style-on-foundation";
@@ -49,7 +50,7 @@ describe("no-style-on-foundation", () => {
             return <Button>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Non-Foundation component
       {
@@ -59,7 +60,7 @@ describe("no-style-on-foundation", () => {
             return <CustomComponent style={{ color: "red" }}>Content</CustomComponent>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Local Button component not imported from UI entry
       {
@@ -69,7 +70,7 @@ describe("no-style-on-foundation", () => {
             return <Button style={{ color: "red" }}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
     ],
     invalid: [
@@ -81,7 +82,7 @@ describe("no-style-on-foundation", () => {
             return <Button style={{ color: "red" }}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noStyleOnFoundation",
@@ -96,7 +97,7 @@ describe("no-style-on-foundation", () => {
             return <Button style={{ color: "red" }}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noStyleOnFoundation",
@@ -111,7 +112,7 @@ describe("no-style-on-foundation", () => {
             return <Button style={{ color: "red" }}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noStyleOnFoundation",
@@ -132,7 +133,7 @@ describe("no-style-on-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noStyleOnFoundation",

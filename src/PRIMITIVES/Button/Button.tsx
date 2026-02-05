@@ -255,10 +255,31 @@ export type ButtonSize = "sm" | "md" | "lg";
  * @rule className prop cannot override color classes (tokenCVA validation in dev mode)
  * @rule Button is fully token-based - no raw Tailwind colors allowed
  */
-export interface ButtonProps extends Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "className" | "style"
-> {
+type ButtonBaseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+type ButtonIconOnlyA11y =
+  | { "aria-label": string; "aria-labelledby"?: string }
+  | { "aria-label"?: string; "aria-labelledby": string };
+
+type ButtonIconOnlyProps = {
+  iconOnly: true;
+} & ButtonIconOnlyA11y;
+
+type ButtonNonIconOnlyProps = {
+  iconOnly?: false;
+};
+
+type ButtonAsChildProps = {
+  asChild: true;
+  children: React.ReactElement;
+};
+
+type ButtonNotAsChildProps = {
+  asChild?: false;
+  children?: React.ReactNode;
+};
+
+type ButtonVariantProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   /**
@@ -273,11 +294,14 @@ export interface ButtonProps extends Omit<
    * </Button>
    * ```
    */
-  iconOnly?: boolean;
-  asChild?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-}
+};
+
+export type ButtonProps = ButtonBaseProps &
+  ButtonVariantProps &
+  (ButtonAsChildProps | ButtonNotAsChildProps) &
+  ((ButtonIconOnlyProps & { asChild?: false }) | (ButtonNonIconOnlyProps & { asChild?: boolean }));
 
 /**
  * Button Component Implementation
@@ -322,13 +346,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ? buttonIconOnlyVariants({ variant, size })
       : buttonVariants({ variant, size });
 
-    // iconOnly rendering: children-first resolution (children ?? leftIcon ?? rightIcon)
-    // This ensures icon passed as children (Storybook pattern) renders correctly
-    const iconNode = iconOnly ? (children ?? leftIcon ?? rightIcon) : null;
+    if (process.env.NODE_ENV !== "production") {
+      if (iconOnly && !props["aria-label"] && !props["aria-labelledby"]) {
+        console.warn(
+          "[Button] iconOnly requires an accessible label. Provide aria-label or aria-labelledby.",
+        );
+      }
+      if (iconOnly && asChild) {
+        console.warn(
+          "[Button] iconOnly with asChild expects the child element to render only the icon.",
+        );
+      }
+    }
 
     // When asChild is true and icons are provided, we need to clone the child element
     // and add icons inside it, so Slot applies props to the correct element (the child, not a wrapper span)
-    if (asChild && (leftIcon || rightIcon)) {
+    if (asChild) {
       if (!React.isValidElement(children)) {
         // If children is not a valid React element, fall back to regular button behavior
         const Comp = "button";
@@ -347,32 +380,35 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       const childProps = children.props as React.HTMLAttributes<HTMLElement> & {
         children?: React.ReactNode;
       };
-      const clonedChild = React.cloneElement(children, {
-        className: cn(finalClassName, childProps.className),
-        ...props,
-        children: (
+      const iconOnlyNode = iconOnly ? (childProps.children ?? leftIcon ?? rightIcon) : null;
+
+      let newChildren: React.ReactNode;
+
+      if (iconOnly) {
+        newChildren = iconOnlyNode ? renderIcon(iconOnlyNode) : null;
+      } else {
+        newChildren = (
           <>
             {renderIcon(leftIcon)}
             {childProps.children}
             {renderIcon(rightIcon)}
           </>
-        ),
+        );
+      }
+
+      const clonedChild = React.cloneElement(children, {
+        className: cn(finalClassName, childProps.className),
+        ...props,
+        children: newChildren,
       } as React.HTMLAttributes<HTMLElement>);
 
       return <Slot ref={ref}>{clonedChild}</Slot>;
     }
-
-    // Regular button or asChild without icons
-    if (asChild) {
-      // When asChild is true without icons, Slot needs a single child element
-      return (
-        <Slot className={finalClassName} ref={ref} {...props}>
-          {children}
-        </Slot>
-      );
-    }
     // Regular button or iconOnly button
     if (iconOnly) {
+      // iconOnly rendering: children-first resolution (children ?? leftIcon ?? rightIcon)
+      // This ensures icon passed as children (Storybook pattern) renders correctly
+      const iconNode = children ?? leftIcon ?? rightIcon;
       // iconOnly: Render icon node (children-first resolution) with icon wrapper
       return (
         <button className={finalClassName} ref={ref} {...props}>

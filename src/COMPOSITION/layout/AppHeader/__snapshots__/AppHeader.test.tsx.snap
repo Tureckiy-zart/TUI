@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AppHeader > renders sticky position 1`] = `
+<div
+  class="w-full sticky top-0 bg-[hsl(var(--tm-surface-base))]"
+  style="z-index: 20;"
+>
+  <div
+    style="padding: var(--spacing-md);"
+  >
+    <nav
+      aria-label="Primary navigation"
+      class="w-full"
+      style="padding-left: var(--spacing-md); padding-right: var(--spacing-md); padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm);"
+    >
+      <div
+        class="flex flex-row items-center justify-between w-full"
+      >
+        <div
+          class="flex items-center"
+        >
+          Brand
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+`;

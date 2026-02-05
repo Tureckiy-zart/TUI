@@ -65,10 +65,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 
 import type { ResponsiveSpacing, SpacingValue } from "../layout.types";
 
-export interface InlineProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "className" | "style"
-> {
+export interface InlineProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Spacing between inline items - token-based (xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl)
    * This is the canonical prop for spacing.

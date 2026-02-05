@@ -47,12 +47,12 @@ function isFoundationComponent(filePath: string): boolean {
  * Check if a type reference is React.*HTMLAttributes
  */
 function isReactHtmlAttributes(typeNode: TSESTree.TSTypeReference): boolean {
-  const typeName = typeNode.typeName;
+  const { typeName } = typeNode;
 
   // Check for React.HTMLAttributes, React.ButtonHTMLAttributes, etc.
   if (typeName.type === "TSQualifiedName") {
-    const left = typeName.left;
-    const right = typeName.right;
+    const { left } = typeName;
+    const { right } = typeName;
 
     if (left.type === "Identifier" && left.name === "React") {
       if (right.type === "Identifier") {
@@ -81,7 +81,7 @@ function isOmitWithExclusions(typeNode: TSESTree.TypeNode): boolean {
     return false;
   }
 
-  const typeName = typeNode.typeName;
+  const { typeName } = typeNode;
   if (typeName.type !== "Identifier" || typeName.name !== "Omit") {
     return false;
   }
@@ -117,7 +117,7 @@ function isOmitWithExclusions(typeNode: TSESTree.TypeNode): boolean {
     if (member.type !== "TSLiteralType") {
       return false;
     }
-    const literal = member.literal;
+    const { literal } = member;
     if (literal.type === "Literal" && typeof literal.value === "string") {
       return literal.value === "className";
     }
@@ -127,7 +127,7 @@ function isOmitWithExclusions(typeNode: TSESTree.TypeNode): boolean {
     if (member.type !== "TSLiteralType") {
       return false;
     }
-    const literal = member.literal;
+    const { literal } = member;
     if (literal.type === "Literal" && typeof literal.value === "string") {
       return literal.value === "style";
     }
@@ -187,7 +187,7 @@ export default createRule<Options, MessageIds>({
           }
 
           // Check if it's an Omit type
-          const typeName = typeRef.typeName;
+          const { typeName } = typeRef;
           if (typeName && typeName.type === "Identifier" && typeName.name === "Omit") {
             // Check if Omit properly excludes className and style
             if (!isOmitWithExclusions(typeRef)) {

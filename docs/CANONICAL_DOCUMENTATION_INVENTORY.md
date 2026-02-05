@@ -223,6 +223,7 @@ These documents provide API and integration references.
 | `docs/reference/TOKENS_OVERVIEW.md` | Token map overview - API reference | **ACTIVE** |
 | `docs/reference/COMPONENTS_INVENTORY.md` | UI components inventory - Reference documentation | **ACTIVE** |
 | `docs/reference/INTEGRATION_GUIDE.md` | UI integration guide - Integration reference | **ACTIVE** |
+| `docs/reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md` | ThemeParams CSP nonce + ESLint source-root detection - Tooling/infrastructure reference | **ACTIVE** |
 | `docs/reference/COMPONENT_EXAMPLES.md` | Extension component examples and patterns - Reference examples for Extension components | **ACTIVE** |
 
 **Total:** 11 files

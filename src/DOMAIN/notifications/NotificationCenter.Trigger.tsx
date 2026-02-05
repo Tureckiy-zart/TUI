@@ -12,13 +12,13 @@ import * as React from "react";
 
 import { cn } from "@/FOUNDATION/lib/utils";
 import { ICON_TOKENS } from "@/FOUNDATION/tokens/components/icon";
-import { Box, Button, Text } from "@/index";
+import { Box, Button, type ButtonProps, Text } from "@/index";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
 export interface NotificationCenterTriggerProps extends Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "className" | "style"
+  ButtonProps,
+  "children" | "iconOnly" | "variant" | "size" | "leftIcon" | "rightIcon" | "asChild"
 > {
   /**
    * Callback when trigger is clicked

@@ -9,15 +9,13 @@
 
 import type { InputProps } from "./Input.types";
 
-// Test that className is not in InputProps
+// Test that className is allowed in InputProps
 type TestClassName = "className" extends keyof InputProps ? true : false;
-// @ts-expect-error — className must not be in InputProps
 const _testClassName: TestClassName = true;
 void _testClassName;
 
-// Test that style is not in InputProps
+// Test that style is allowed in InputProps
 type TestStyle = "style" extends keyof InputProps ? true : false;
-// @ts-expect-error — style must not be in InputProps
 const _testStyle: TestStyle = true;
 void _testStyle;
 

@@ -248,10 +248,9 @@ describe("Dialog", () => {
   });
   describe("Typing", () => {
     it("does not accept className or style on DialogTitle", () => {
-      // @ts-expect-error DialogTitle forbids className to protect Foundation Heading.
-      <DialogTitle className="forbidden-class">Forbidden</DialogTitle>;
-      // @ts-expect-error DialogTitle forbids style to protect Foundation Heading.
-      <DialogTitle style={{ color: "red" }}>Forbidden</DialogTitle>;
+      // DialogTitle allows className and style now (controlled via Lint)
+      <DialogTitle className="allowed-class">Allowed</DialogTitle>;
+      <DialogTitle style={{ color: "red" }}>Allowed</DialogTitle>;
       expect(true).toBe(true);
     });
   });

@@ -239,7 +239,7 @@ const headingVariants = tokenCVA({
  */
 export interface HeadingProps
   extends
-    Omit<React.HTMLAttributes<HTMLHeadingElement>, "className" | "style" | "color">,
+    Omit<React.HTMLAttributes<HTMLHeadingElement>, "color">,
     Omit<VariantProps<typeof headingVariants>, "color"> {
   /** Text color (inverse applied automatically inside InverseTypography.Root) */
   color?: "primary" | "secondary";

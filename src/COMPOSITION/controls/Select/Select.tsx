@@ -31,8 +31,7 @@
  * - TypeScript enforces valid size values at compile time
  *
  * className and style props:
- * - className and style are forbidden from public API - only CVA output and token-based classes are used
- * - Foundation Enforcement is FINAL/APPLIED and LOCKED
+ * - Component styling is token-driven via CVA; consumer enforcement is handled by lint guards
  *
  * @see docs/architecture/INTERACTION_AUTHORITY_CONTRACT.md
  * @see docs/architecture/STATE_AUTHORITY_CONTRACT.md
@@ -107,7 +106,7 @@ SelectRoot.displayName = SelectPrimitive.Root.displayName;
 
 export interface SelectTriggerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
-  "className" | "style" | "size" | "variant" | "width"
+  "size" | "variant" | "width"
 > {
   /**
    * Invalid state - uses aria-invalid
@@ -139,9 +138,8 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 // SELECT VALUE
 // ============================================================================
 
-export interface SelectValueProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value>,
-  "className" | "style"
+export interface SelectValueProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Value
 > {}
 
 const SelectValue = React.forwardRef<HTMLSpanElement, SelectValueProps>(({ ...props }, ref) => {
@@ -164,9 +162,8 @@ SelectValue.displayName = SelectPrimitive.Value.displayName;
 // SELECT ICON
 // ============================================================================
 
-export interface SelectIconProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Icon>,
-  "className" | "style"
+export interface SelectIconProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Icon
 > {}
 
 const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(({ ...props }, ref) => {
@@ -194,7 +191,7 @@ SelectIcon.displayName = SelectPrimitive.Icon.displayName;
 
 export interface SelectContentProps extends Omit<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>,
-  "className" | "style" | "sideOffset" | "alignOffset"
+  "sideOffset" | "alignOffset"
 > {
   /**
    * Side offset - token-based
@@ -245,9 +242,8 @@ SelectContent.displayName = SelectPrimitive.Content.displayName;
 // SELECT VIEWPORT
 // ============================================================================
 
-export interface SelectViewportProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport>,
-  "className" | "style"
+export interface SelectViewportProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Viewport
 > {}
 
 const SelectViewport = React.forwardRef<HTMLDivElement, SelectViewportProps>(
@@ -271,9 +267,8 @@ SelectViewport.displayName = SelectPrimitive.Viewport.displayName;
 // SELECT ITEM
 // ============================================================================
 
-export interface SelectItemProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>,
-  "className" | "style"
+export interface SelectItemProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Item
 > {}
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -305,9 +300,8 @@ SelectItem.displayName = SelectPrimitive.Item.displayName;
 // SELECT ITEM TEXT
 // ============================================================================
 
-export interface SelectItemTextProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemText>,
-  "className" | "style"
+export interface SelectItemTextProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.ItemText
 > {}
 
 const SelectItemText = React.forwardRef<HTMLSpanElement, SelectItemTextProps>(
@@ -321,9 +315,8 @@ SelectItemText.displayName = SelectPrimitive.ItemText.displayName;
 // SELECT ITEM INDICATOR
 // ============================================================================
 
-export interface SelectItemIndicatorProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator>,
-  "className" | "style"
+export interface SelectItemIndicatorProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.ItemIndicator
 > {}
 
 const SelectItemIndicator = React.forwardRef<HTMLSpanElement, SelectItemIndicatorProps>(
@@ -341,9 +334,8 @@ SelectItemIndicator.displayName = SelectPrimitive.ItemIndicator.displayName;
 // SELECT SEPARATOR
 // ============================================================================
 
-export interface SelectSeparatorProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>,
-  "className" | "style"
+export interface SelectSeparatorProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Separator
 > {}
 
 const SelectSeparator = React.forwardRef<HTMLDivElement, SelectSeparatorProps>(
@@ -367,9 +359,8 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 // SELECT GROUP
 // ============================================================================
 
-export interface SelectGroupProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group>,
-  "className" | "style"
+export interface SelectGroupProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Group
 > {}
 
 const SelectGroup = React.forwardRef<HTMLDivElement, SelectGroupProps>(({ ...props }, ref) => {
@@ -381,9 +372,8 @@ SelectGroup.displayName = SelectPrimitive.Group.displayName;
 // SELECT LABEL
 // ============================================================================
 
-export interface SelectLabelProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>,
-  "className" | "style"
+export interface SelectLabelProps extends React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Label
 > {}
 
 const SelectLabel = React.forwardRef<HTMLDivElement, SelectLabelProps>(({ ...props }, ref) => {

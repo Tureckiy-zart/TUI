@@ -1,3 +1,28 @@
+## [Unreleased]
+
+### Features
+
+- TBD
+
+### Bug Fixes
+
+- TBD
+
+## [3.1.0](https://github.com/Tureckiy-zart/TUI/compare/v3.0.4...v3.1.0) (2026-02-05)
+
+### Features
+
+- add AppHeader component with stories/tests/snapshots
+- add SectionState component with stories/tests
+- add Next extension helpers (ThemeParams, theme-server)
+- add consumer guard rules for UI components (no-classname/no-inline-style)
+- add unit tests for consumer-scope detection
+
+### Bug Fixes
+
+- harden consumer-scope detection and import tracking
+- consolidate ESLint rules into eslint-rules/ and update config references
+
 ## [3.0.4](https://github.com/Tureckiy-zart/TUI/compare/v3.0.3...v3.0.4) (2026-02-02)
 
 ### Bug Fixes
