@@ -24,6 +24,22 @@ Predictable. Built for system-level consistency.
   </strong>
 </p>
 
+> ⚠️ **Work in Progress / Experimental**
+>
+> `@tenerife.music/ui` is under active development and provided **as is**, without any guarantees of stability.
+>
+> - Public API may change without prior notice
+> - Breaking changes may occur even in minor or patch releases
+> - Component behavior, tokens, and internal contracts may change in non-obvious ways
+> - Documentation may temporarily lag behind implementation
+>
+> **Use at your own risk**, especially in production environments.
+
+> **Versioning note**
+>
+> Semantic versioning reflects release coordination, **not API stability**.
+> Minor and patch releases may include breaking changes.
+
 ---
 
 ## 🧭 Architectural Manifest
@@ -53,6 +69,11 @@ over quick experimentation or visual convenience.
 - **The Foundation layer is locked and immutable**
 
 If the system feels strict or limiting — that means it is working as intended.
+
+**Public API contract**
+
+Only exports from the root entry `@tenerife.music/ui` are considered public.
+Deep imports are forbidden and may break without notice.
 
 ---
 

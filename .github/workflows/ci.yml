@@ -15,7 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
+    env:
+      CI: true
+      HUSKY: 0
+
     steps:
+      - name: Disable git hooks in CI
+        run: |
+          git config --global core.hooksPath /dev/null
+
       - name: Checkout
         uses: actions/checkout@v4
 
