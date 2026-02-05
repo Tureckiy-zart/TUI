@@ -13,6 +13,7 @@ export * from "./Inline";
 export * from "./Inset/Inset";
 export * from "./List/List.index";
 export * from "./ListItem/ListItem.index";
+export * from "./ModeHero";
 export * from "./Panel/Panel.index";
 export * from "./Row";
 export * from "./Stack";
@@ -32,6 +33,7 @@ export {
 
 // Section
 export { Section, type SectionProps } from "./Section/Section";
+export { SectionState, type SectionStateProps } from "./SectionState/SectionState.index";
 
 // Footer
 export { Footer, type FooterProps } from "./Footer";
@@ -74,6 +76,19 @@ export { Spacer, type SpacerOrientation, type SpacerProps } from "./Spacer";
 
 // Navbar
 export { Navbar, type NavbarProps } from "./Navbar";
+
+// AppHeader
+export {
+  AppHeader,
+  type AppHeaderActionsProps,
+  type AppHeaderAppearance,
+  type AppHeaderBrandProps,
+  type AppHeaderDivider,
+  type AppHeaderElevation,
+  type AppHeaderNavProps,
+  type AppHeaderPosition,
+  type AppHeaderProps,
+} from "./AppHeader/AppHeader";
 
 // HeaderComposition (ResponsiveVisibility etalon: mobile/desktop header branching)
 export {

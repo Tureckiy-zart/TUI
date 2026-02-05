@@ -9,7 +9,7 @@ export interface LanguageOption {
   label: string;
 }
 
-interface LanguageSelectorProps {
+export interface LanguageSelectorProps {
   ariaLabel: string;
   dataTestId: string;
   className?: string;
