@@ -1,46 +1,38 @@
-name: Chromatic Visual Tests
+name: UI Tests (Chromatic)
 
 on:
+  workflow_dispatch:
   pull_request:
-    branches: [main, develop]
-  push:
-    branches: [main]
+    types: [opened, synchronize, reopened, labeled]
 
 jobs:
   chromatic:
-    name: Chromatic Visual Tests [Informational]
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+       contains(github.event.pull_request.labels.*.name, 'ui-tests'))
+
     runs-on: ubuntu-latest
-    continue-on-error: true # Don't block PR if Chromatic fails
-    permissions:
-      contents: read
-      pull-requests: write
+
+    env:
+      HAS_CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Required for Chromatic to detect base commit
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.26.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Run Chromatic
-        uses: chromaui/action@v1
-        with:
-          # Note: CHROMATIC_PROJECT_TOKEN must be configured in GitHub Secrets
-          # Settings > Secrets and variables > Actions > New repository secret
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: build-storybook
-          exitZeroOnChanges: true # Don't fail on visual changes, just report them
-          onlyChanged: true
-          exitOnceUploaded: false
+        if: env.HAS_CHROMATIC_TOKEN != ''
+        run: |
+          npx chromatic \
+            --project-token="$HAS_CHROMATIC_TOKEN" \
+            --exit-zero-on-changes
