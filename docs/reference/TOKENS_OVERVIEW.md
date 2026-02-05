@@ -1,7 +1,7 @@
 # Tenerife UI - Token System Map Overview
 
-**Last Updated:** 2026-01-29  
-**Purpose:** Complete reference for the token-driven architecture of Tenerife UI
+**Last Updated:** 2026-02-05  
+**Purpose:** Reference for the token-driven architecture of Tenerife UI.
 
 ---
 
@@ -13,7 +13,7 @@ Tenerife UI uses a three-layer token system:
 2. **Component Tokens** - Component-specific mappings to foundation tokens
 3. **Semantic Tokens** - Theme-aware tokens (primary, secondary, accent, destructive)
 
-All tokens are designed to work seamlessly with the theme system (day/night modes) and Tailwind CSS integration.
+All tokens are designed to work with the theme system (day/night modes) and Tailwind CSS integration.
 
 ---
 
@@ -21,22 +21,27 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 ### 1. Spacing Tokens (`src/FOUNDATION/tokens/spacing.ts`)
 
-**Base System:** 8px grid
+**Base System:** 8px grid (with fine-grain half/quarter steps)
 
-**Foundation Scale:**
+**Foundation Scale (selected):**
 
 - `0` → `0`
 - `px` → `1px`
 - `0.5` → `0.125rem` (4px)
 - `1` → `0.25rem` (4px)
-- `2` → `0.5rem` (8px) - **Base unit**
-- `4` → `1rem` (16px) - **2× base**
-- `6` → `1.5rem` (24px) - **3× base**
-- `8` → `2rem` (32px) - **4× base**
-- `12` → `3rem` (48px) - **6× base**
-- `16` → `4rem` (64px) - **8× base**
-- `20` → `5rem` (80px) - **10× base**
-- `24` → `6rem` (96px) - **12× base**
+- `1.5` → `0.375rem` (6px)
+- `2` → `0.5rem` (8px)
+- `2.5` → `0.625rem` (10px)
+- `3` → `0.75rem` (12px)
+- `3.5` → `0.875rem` (14px)
+- `4` → `1rem` (16px)
+- `5` → `1.25rem` (20px)
+- `6` → `1.5rem` (24px)
+- `8` → `2rem` (32px)
+- `12` → `3rem` (48px)
+- `16` → `4rem` (64px)
+- `20` → `5rem` (80px)
+- `24` → `6rem` (96px)
 - Extended up to `96` → `24rem` (384px)
 
 **Semantic Spacing:**
@@ -50,6 +55,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 - `3xl` → `spacing[16]` (64px)
 - `4xl` → `spacing[20]` (80px)
 - `5xl` → `spacing[24]` (96px)
+- `none` → `spacing[0]` (0)
 
 **Layout Spacing:**
 
@@ -62,8 +68,8 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 **CSS Variables:**
 
 - `--spacing-{key}` - Base spacing values
-- `--spacing-semantic-{size}` - Semantic spacing tokens
-- `--spacing-{layout}-{size}` - Layout spacing tokens
+- `--spacing-{semantic}` - Semantic spacing tokens
+- `--layout-{group}-{size}` - Layout spacing tokens
 
 ---
 
@@ -71,7 +77,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **Font Families:**
 
-- `sans` → Inter (primary), with fallbacks
+- `sans` → Inter (primary) + fallbacks
 - `satoshi` → Satoshi (optional)
 - `display` → Clash Display (headings/hero)
 - `serif` → System serif stack
@@ -79,16 +85,19 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **Fluid Type Scale (uses clamp()):**
 
-- `xs` → `clamp(0.75rem, 0.7rem + 0.125vw, 0.875rem)` (12px-14px)
-- `sm` → `clamp(0.875rem, 0.8rem + 0.25vw, 1rem)` (14px-16px)
-- `base` → `clamp(1rem, 0.95rem + 0.25vw, 1.125rem)` (16px-18px)
-- `lg` → `clamp(1.125rem, 1rem + 0.5vw, 1.5rem)` (18px-24px)
-- `xl` → `clamp(1.5rem, 1.25rem + 1vw, 2rem)` (24px-32px)
-- `2xl` → `clamp(2rem, 1.5rem + 2vw, 3rem)` (32px-48px)
-- `3xl` → `clamp(2.5rem, 2rem + 2.5vw, 4rem)` (40px-64px)
-- `4xl` → `clamp(3rem, 2.5rem + 2.5vw, 5rem)` (48px-80px)
-- `5xl` → `clamp(3.5rem, 3rem + 2.5vw, 6rem)` (56px-96px)
-- `6xl` → `clamp(4rem, 3.5rem + 2.5vw, 7rem)` (64px-112px)
+- `xs` → `clamp(0.75rem, 0.7rem + 0.125vw, 0.875rem)`
+- `sm` → `clamp(0.875rem, 0.8rem + 0.25vw, 1rem)`
+- `base` → `clamp(1rem, 0.95rem + 0.25vw, 1.125rem)`
+- `lg` → `clamp(1.125rem, 1rem + 0.5vw, 1.25rem)`
+- `xl` → `clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)`
+- `2xl` → `clamp(1.5rem, 1.25rem + 1.25vw, 2rem)`
+- `3xl` → `clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem)`
+- `4xl` → `clamp(2.25rem, 1.75rem + 2.5vw, 3rem)`
+- `5xl` → `clamp(3rem, 2rem + 5vw, 4rem)`
+- `6xl` → `clamp(3.75rem, 2.5rem + 6.25vw, 5rem)`
+- `7xl` → `clamp(4.5rem, 3rem + 7.5vw, 6rem)`
+- `8xl` → `clamp(6rem, 4rem + 10vw, 8rem)`
+- `9xl` → `clamp(8rem, 5rem + 15vw, 12rem)`
 
 **Font Weights:**
 
@@ -122,11 +131,11 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **CSS Variables:**
 
-- `--font-family-{name}` - Font family stacks
-- `--font-size-{size}` - Font sizes
-- `--font-weight-{weight}` - Font weights
-- `--line-height-{height}` - Line heights
-- `--letter-spacing-{spacing}` - Letter spacing
+- `--font-family-{name}`
+- `--font-size-{size}`
+- `--font-weight-{weight}`
+- `--line-height-{height}`
+- `--letter-spacing-{spacing}`
 
 ---
 
@@ -134,7 +143,7 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **Color Scales (HSL format):**
 
-- Primary (Midnight Blues): `50` (lightest) → `950` (darkest)
+- Primary (Midnight Blues): `50` → `950`
 - Accent (Purples): `50` → `950`
 - Secondary (Refined Cyan): `50` → `950`
 
@@ -142,17 +151,17 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **Day Mode:**
 
-- `primary` → Secondary 500 (Tenerife brand)
+- `primary` → Secondary 500
 - `accent` → Accent 600
 - `background` → White (`0 0% 100%`)
 - `foreground` → Almost black (`0 0% 9%`)
 - `border` → Light gray (`0 0% 89.8%`)
 - `muted` → Muted gray
-- `destructive` → Red/error
+- `destructive` → Error red
 
 **Night Mode:**
 
-- `primary` → Accent 600 (better contrast)
+- `primary` → Accent 600
 - `accent` → Accent 600
 - `background` → Dark (`240 10% 3.9%`)
 - `foreground` → Light gray (`0 0% 89.8%`)
@@ -160,20 +169,16 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 - `muted` → Muted gray
 - `destructive` → Error red
 
-**Surface Colors (Elevation levels):**
+**Surface Colors:**
 
 - `base` → Base surface
-- `elevated1-3` → Elevated surfaces (day: lighter, night: darker)
+- `elevated1-3` → Elevated surfaces
 - `overlay` → Overlay surfaces
 - `glass` → Glass effect surface
 
 **Text Colors:**
 
-- `primary` → Primary text color
-- `secondary` → Secondary text color
-- `tertiary` → Tertiary text color
-- `muted` → Muted text color
-- `inverse` → Inverse text color (for dark/light backgrounds)
+- `primary`, `secondary`, `tertiary`, `muted`, `inverse`
 
 **CSS Variables:**
 
@@ -184,7 +189,11 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 - `--tm-accent`, `--tm-accent-foreground`
 - `--surface-{level}`
 - `--text-{type}`
-- `--tm-status-{type}` (success, error, warning, info)
+- `--tm-status-{type}`
+
+**Other Color Utilities:**
+
+- `UI_COLORS` (canonical UI color map)
 
 ---
 
@@ -192,359 +201,61 @@ All tokens are designed to work seamlessly with the theme system (day/night mode
 
 **Elevation Shadows:**
 
-- `none` → No shadow
-- `xs` → Subtle elevation (`0 1px 2px`)
-- `sm` → Small elevation (`0 1px 3px, 0 1px 2px`)
-- `md` → Medium elevation (`0 4px 6px, 0 2px 4px`)
-- `lg` → Large elevation (`0 10px 15px, 0 4px 6px`)
-- `xl` → Extra large elevation (`0 20px 25px, 0 8px 10px`)
-- `2xl` → Maximum elevation (`0 25px 50px`)
+- `none`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`
 
 **Colored Shadows:**
 
-- `primary-{size}` → Primary colored shadows (xs, sm, md, lg, xl, 2xl)
-- `accent-{size}` → Accent colored shadows (xs, sm, md, lg, xl, 2xl)
+- `primaryColoredShadows`, `accentColoredShadows`
 
-**Glow Effects:**
+**Effects:**
 
-- `glow-primary-{intensity}` → Primary glow (subtle, medium, strong)
-- `glow-accent-{intensity}` → Accent glow (subtle, medium, strong)
-
-**Focus Rings:**
-
-- `focus-ring-default` → Default focus ring
-- `focus-ring-primary` → Primary focus ring
-- `focus-ring-accent` → Accent focus ring
-
-**CSS Variables:**
-
-- `--shadow-elevation-{level}`
-- `--shadow-primary-{size}`
-- `--shadow-accent-{size}`
-- `--shadow-glow-{color}-{intensity}`
-- `--shadow-focus-ring-{variant}`
+- `glowEffects`, `focusRings`
 
 ---
 
 ### 5. Radius Tokens (`src/FOUNDATION/tokens/radius.ts`)
 
-**Foundation Scale:**
-
-- `none` → `0`
-- `xs` → `0.125rem` (2px)
-- `sm` → `0.25rem` (4px) - Base unit
-- `md` → `0.375rem` (6px)
-- `lg` → `0.5rem` (8px)
-- `xl` → `0.75rem` (12px)
-- `2xl` → `1rem` (16px)
-- `3xl` → `1.5rem` (24px)
-- `full` → `9999px` (circular)
-
-**Component Standards:**
-
-- `button` → sm/md/lg/pill
-- `card` → sm/md/lg/xl
-- `input` → sm/md/lg
-- `badge` → sm/md/lg/pill
-- `avatar` → full/square
-- `modal` → sm/md/lg/xl
-- `tooltip` → sm/md
-- `toast` → sm/md/lg
-- `chip` → sm/md/lg/pill
-- `image` → none/sm/md/lg/xl/full
-
-**CSS Variables:**
-
-- `--radius-{size}`
-- `--radius-{component}`
+- `borderRadius` (none → full)
+- `componentRadius` (component standards)
 
 ---
 
 ### 6. Motion Tokens (`src/FOUNDATION/tokens/motion.ts`)
 
-**Durations:**
-
-- `instant` → 0ms
-- `fast` → 150ms
-- `normal` → 300ms (default)
-- `slow` → 500ms
-- `slower` → 700ms
-- `slowest` → 1000ms
-- Granular: `75`, `100`, `200`, `250`, `400`, `600`, `800` ms
-
-**Easing Functions:**
-
-- `linear` → Linear
-- `ease-in` → Accelerate
-- `ease-out` → Decelerate (recommended for most UI)
-- `ease-in-out` → Accelerate and decelerate
-- `bounce` → Bounce effect
-- `elastic` → Elastic effect
-- Material Design easings available
-
-**Transitions:**
-
-- Pre-configured combinations: `fast`, `normal`, `slow` + easing variants
-- Examples: `fast-out`, `normal-in-out`, `slow-in`
-
-**Keyframes:**
-
-- `fade` → Fade in/out
-- `slide` → Slide animations (up, down, left, right)
-- `scale` → Scale animations
-- `spin` → Rotation
-- `pulse` → Pulse effect
-- `bounce` → Bounce animation
-- `ping` → Ping effect
-- `shake` → Shake animation
-
-**CSS Variables:**
-
-- `--duration-{name}`
-- `--easing-{name}`
-- `--transition-{name}`
-
-**See also:** [Motion Animations Working Guide](./MOTION_ANIMATIONS_GUIDE.md) for practical implementation details, troubleshooting, and common pitfalls when working with motion animations.
+- `motionDurations`, `motionEasings`, `motionTransitions`
+- `motionFade`, `motionScale`, `motionSlide`, `motionCombined`
+- `motionReducedMotion`, `motionTransitionProperty`
 
 ---
 
 ## Component Tokens
 
-Component tokens map foundation tokens to component-specific usage patterns.
+Component token maps provide standardized styling for components:
 
-### Button Tokens (`src/FOUNDATION/tokens/components/button.ts`)
+- `ALERT_TOKENS`, `BUTTON_TOKENS`, `CARD_TOKENS`, `CHECKBOX_TOKENS`, `DATA_TOKENS`
+- `INPUT_TOKENS`, `MENU_TOKENS`, `MOTION_TOKENS`, `NAVIGATION_TOKENS`, `NOTIFICATION_TOKENS`
+- `OVERLAY_TOKENS`, `PANEL_TOKENS`, `POPOVER_TOKENS`, `RADIO_TOKENS`, `SECTION_TOKENS`, `SELECT_TOKENS`
+- `SURFACE_TOKENS`, `SWITCH_TOKENS`, `TEXT_TOKENS`, `TOAST_TOKENS`, `TOOLTIP_TOKENS`, `ICON_TOKENS`
 
-**Maps to:**
+Additional token groups exported from the main entry point:
 
-- `spacing` → padding (horizontal: sm/md/lg, vertical: xs/sm)
-- `typography` → fontSize (xs/sm), fontWeight
-- `radius` → borderRadius (md)
-- `shadows` → shadow (sm/default, primary)
-
-**Usage:**
-
-```typescript
-import { BUTTON_TOKENS } from "@/tokens/components/button";
-
-// Height tokens: h-8 (sm), h-9 (md), h-10 (lg)
-// Padding: px-sm, px-md, px-lg (horizontal), py-xs, py-sm (vertical)
-// Font size: text-xs (sm), text-sm (md, lg)
-```
-
-### Input Tokens (`src/FOUNDATION/tokens/components/input.ts`)
-
-**Maps to:**
-
-- `spacing` → padding (horizontal: sm, vertical: xs), gap
-- `typography` → fontSize (sm/base)
-- `radius` → borderRadius (md)
-- `shadows` → shadow (sm)
-
-**Usage:**
-
-```typescript
-import { INPUT_TOKENS } from "@/tokens/components/input";
-
-// Height: h-8 (sm), h-9 (md), h-10 (lg)
-// Padding: px-sm, py-xs
-// Font size: text-sm (sm), text-base (md, lg)
-```
-
-### Text Tokens (`src/FOUNDATION/tokens/components/text.ts`)
-
-**Maps to:**
-
-- `typography` → fontSize (xs/sm/md/lg/xl), fontWeight, lineHeight, letterSpacing
-
-**Usage:**
-
-```typescript
-import { TEXT_TOKENS } from "@/tokens/components/text";
-
-// Font sizes: text-xs, text-sm, text-base, text-lg, text-xl
-// Weights: font-normal, font-medium, font-semibold, font-bold
-```
+- `ARTIST_TOKENS`, `DATA_LIST_TOKENS`, `DOMAIN_TOKENS`, `EMPTY_STATE_TOKENS`, `FILE_UPLOAD_TOKENS`
+- `SIMPLETABLE_TOKENS`, `SPINNER_TOKENS`, `TABLE_TOKENS`, `TIMELINE_TOKENS`, `GRADIENT_TOKENS`
 
 ---
 
-## Semantic Tokens
+## Token Utilities & CSS Variable Exports
 
-Semantic tokens provide theme-aware, meaning-based tokens.
-
-### Color Semantic Tokens
-
-**Primary:**
-
-- `--tm-primary` → Mode-aware primary color
-- `--tm-primary-foreground` → Contrasting foreground
-
-**Secondary:**
-
-- `--tm-secondary` → Mode-aware secondary color
-- `--tm-secondary-foreground` → Contrasting foreground
-
-**Accent:**
-
-- `--tm-accent` → Mode-aware accent color
-- `--tm-accent-foreground` → Contrasting foreground
-
-**Destructive:**
-
-- `--destructive` → Error/destructive color
-- `--destructive-foreground` → Contrasting foreground
-
-**Muted:**
-
-- `--muted` → Muted background
-- `--muted-foreground` → Muted text
+- `allCSSVariables`, `allCSSVariablesCSS`, `generateCSSVariablesCSS`, `tokenSystemSummary`
+- `colorCSSVariables`, `spacingCSSVariables`, `typographyCSSVariables`
+- `radiusCSSVariables`, `shadowCSSVariables`, `motionCSSVariables`
+- `fontSizeWithMd` (typography scale with `md` alias)
 
 ---
 
-## Token Usage in Components
+## Token Export Entry Points
 
-### Example: Button Component
+- `@tenerife.music/ui` (full export surface)
+- `@tenerife.music/ui/tokens` (tokens only)
 
-```typescript
-import { cva } from "class-variance-authority";
-import { BUTTON_TOKENS } from "@/tokens/components/button";
-
-const buttonVariants = cva(
-  // Base classes using tokens
-  `${BUTTON_TOKENS.radius} ${BUTTON_TOKENS.shadow.default}`,
-  {
-    variants: {
-      size: {
-        sm: `${BUTTON_TOKENS.height.sm} ${BUTTON_TOKENS.padding.horizontal.sm} ${BUTTON_TOKENS.fontSize.sm}`,
-        md: `${BUTTON_TOKENS.height.md} ${BUTTON_TOKENS.padding.horizontal.md} ${BUTTON_TOKENS.fontSize.md}`,
-        lg: `${BUTTON_TOKENS.height.lg} ${BUTTON_TOKENS.padding.horizontal.lg} ${BUTTON_TOKENS.fontSize.lg}`,
-      },
-    },
-  },
-);
-```
-
-### Example: Using CSS Variables
-
-```css
-.button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-elevation-sm);
-  background: hsl(var(--tm-primary));
-  color: hsl(var(--tm-primary-foreground));
-}
-```
-
----
-
-## Tailwind Integration
-
-All tokens are mapped to Tailwind theme:
-
-**Colors:**
-
-```typescript
-// tailwind.config.ts
-import { tailwindThemeColors } from "@tenerife.music/ui/tokens";
-
-theme: {
-  extend: {
-    colors: tailwindThemeColors,
-  }
-}
-```
-
-**Spacing:**
-
-```typescript
-import { tailwindSpacingConfig } from "@tenerife.music/ui/tokens";
-
-theme: {
-  extend: {
-    spacing: tailwindSpacingConfig.spacing,
-  }
-}
-```
-
-**Other tokens similarly integrated via preset:**
-
-- Typography → fontFamily, fontSize, fontWeight, lineHeight, letterSpacing
-- Shadows → boxShadow, ringWidth, ringColor
-- Radius → borderRadius
-- Motion → transitionDuration, transitionTimingFunction, keyframes, animation
-
----
-
-## Theme System Integration
-
-Tokens automatically adapt to theme mode (day/night):
-
-1. CSS variables are set via `ThemeProvider`
-2. Variables switch values based on `data-mode` attribute
-3. Components use CSS variables, not hardcoded values
-4. Tailwind classes resolve to CSS variables
-
-**Example:**
-
-```typescript
-// Day mode
---tm-primary: 173 100% 37%; // Secondary 500 (Tenerife brand)
-
-// Night mode
---tm-primary: 259 60% 50%; // Accent 600 (better contrast)
-```
-
----
-
-## Token Export Structure
-
-**Foundation Tokens:**
-
-- `src/FOUNDATION/tokens/colors.ts`
-- `src/FOUNDATION/tokens/typography.ts`
-- `src/FOUNDATION/tokens/spacing.ts`
-- `src/FOUNDATION/tokens/shadows.ts`
-- `src/FOUNDATION/tokens/radius.ts`
-- `src/FOUNDATION/tokens/motion.ts`
-
-**Component Tokens:**
-
-- `src/FOUNDATION/tokens/components/button.ts`
-- `src/FOUNDATION/tokens/components/input.ts`
-- `src/FOUNDATION/tokens/components/text.ts`
-- `src/FOUNDATION/tokens/components/alert.ts`
-- `src/FOUNDATION/tokens/components/card.ts`
-- `src/FOUNDATION/tokens/components/surface.ts`
-- `src/FOUNDATION/tokens/components/section.ts`
-- `src/FOUNDATION/tokens/components/overlay.ts`
-- `src/FOUNDATION/tokens/components/toast.ts`
-
-**All tokens exported via:**
-
-- `src/FOUNDATION/tokens/index.ts` → `export * from "./colors"` etc.
-- Available in public API: `import { primaryColors, accentColors, spacing, semanticSpacing } from "@tenerife.music/ui"`
-
----
-
-## Best Practices
-
-1. **Always use tokens** - Never hardcode spacing, colors, or other values
-2. **Use semantic tokens** - Prefer `primary` over specific color values
-3. **Component tokens first** - Use component tokens when available
-4. **Foundation tokens** - Use for custom components or layouts
-5. **CSS variables** - Use in custom CSS when needed
-6. **Tailwind classes** - Prefer Tailwind utility classes mapped to tokens
-
----
-
-## TODO: Future Enhancements
-
-- [ ] Icon system tokens (size, spacing)
-- [ ] A11y hardening tokens (focus indicators, contrast ratios)
-- [ ] Responsive breakpoint tokens
-- [ ] Animation presets for common patterns
-
----
-
-**Last Updated:** 2026-01-29  
-**Version:** 1.0.0
+For the full list of exported tokens and types, see `src/FOUNDATION/tokens/index.ts`.

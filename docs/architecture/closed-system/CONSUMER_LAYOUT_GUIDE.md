@@ -3,6 +3,7 @@
 Status: Normative  
 Audience: Consumer / Product Code  
 Scope: Usage of @tenerife.music/ui
+Last Updated: 2026-02-05
 
 ---
 
