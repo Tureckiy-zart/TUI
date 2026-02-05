@@ -317,6 +317,7 @@ export default [
       "tenerife-ui-architecture/no-link-aschild": "error",
       // Prevent Foundation components from extending HTMLAttributes without Omit
       "tenerife-ui-architecture/no-foundation-open-htmlattributes": "error",
+      "tenerife-ui-architecture/no-deep-imports-from-ui": "error",
 
       // ═══════════════════════════════════════════════════════════
       // LIST USAGE ENFORCEMENT - CANONICAL COMPONENTS

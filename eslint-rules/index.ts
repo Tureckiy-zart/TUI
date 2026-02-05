@@ -9,6 +9,7 @@ import { noAdHocLists } from "./no-ad-hoc-lists";
 import { noClassNameOnFoundation } from "./no-classname-on-foundation";
 import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
+import { noDeepImportsFromUi } from "./no-deep-imports-from-ui";
 import { noInlineStyleOnUiComponents } from "./no-inline-style-on-ui-components";
 import noInteractiveWithoutKeyboard from "./no-interactive-without-keyboard";
 import noLeadingTailwind from "./no-leading-tailwind";
@@ -38,6 +39,7 @@ export default {
     "no-raw-tailwind-colors": noRawTailwindColors,
     "no-foundation-classname-style": noFoundationClassnameStyle,
     "no-foundation-open-htmlattributes": noFoundationOpenHtmlAttributes,
+    "no-deep-imports-from-ui": noDeepImportsFromUi,
     "no-link-aschild": noLinkAsChild,
     "no-raw-font-size-scale": noRawFontSizeScale,
     "no-raw-line-height-scale": noRawLineHeightScale,
