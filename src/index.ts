@@ -430,6 +430,9 @@ export {
   type AvatarStatus,
 } from "./COMPOSITION/controls/Avatar";
 
+// LanguageSelector component (composition control)
+export { LanguageSelector, type LanguageSelectorProps } from "./COMPOSITION/controls";
+
 // Modal component (Radix-based, token-driven)
 export {
   Modal,
@@ -548,6 +551,15 @@ export { FocusTrap, type FocusTrapProps } from "./COMPOSITION/focus/FocusTrap/Fo
 // ============================================================================
 // Layout primitives (token-based, no raw values)
 export {
+  AppHeader,
+  type AppHeaderActionsProps,
+  type AppHeaderAppearance,
+  type AppHeaderBrandProps,
+  type AppHeaderDivider,
+  type AppHeaderElevation,
+  type AppHeaderNavProps,
+  type AppHeaderPosition,
+  type AppHeaderProps,
   Box,
   type BoxProps,
   type CollapseBreakpoint,
@@ -562,8 +574,12 @@ export {
   dividerVariants,
   Flex,
   type FlexProps,
+  Footer,
+  type FooterProps,
   Grid,
   type GridProps,
+  HeaderComposition,
+  type HeaderCompositionProps,
   Inline,
   type InlineProps,
   Inset,
@@ -577,6 +593,8 @@ export {
   type ListItemProps,
   listItemVariants,
   type ListProps,
+  ModeHero,
+  type ModeHeroProps,
   Navbar,
   type NavbarProps,
   Panel,
@@ -590,10 +608,15 @@ export {
   type ResponsiveSpacing,
   Row,
   type RowProps,
+  SectionState,
+  type SectionStateProps,
   SidebarLayout,
   type SidebarLayoutProps,
   type SidebarPosition,
   type SidebarWidth,
+  Spacer,
+  type SpacerOrientation,
+  type SpacerProps,
   type SpacingValue,
   Stack,
   type StackProps,
@@ -660,6 +683,20 @@ export {
   DialogRoot,
   DialogTitle,
   type DialogTitleProps,
+  Drawer,
+  type DrawerBackdropVariant,
+  DrawerBody,
+  type DrawerBodyProps,
+  DrawerFooter,
+  type DrawerFooterProps,
+  DrawerHeader,
+  type DrawerHeaderProps,
+  type DrawerPosition,
+  type DrawerProps,
+  type DrawerSize,
+  drawerVariants,
+  ModalContext,
+  ModalProvider,
   Portal,
   type PortalProps,
   Toast,
@@ -673,6 +710,8 @@ export {
   type ToastProviderProps,
   ToastViewport,
   type ToastViewportProps,
+  useModalContext,
+  withModal,
 } from "./COMPOSITION/overlays";
 
 // Canonical toast hooks (preferred over deprecated useToast)
@@ -900,6 +939,8 @@ export {
   type PaginationNextProps,
   type PaginationPrevProps,
   type PaginationRootProps,
+  SearchBar,
+  type SearchBarProps,
   SegmentedControl,
   type SegmentedControlItemProps,
   segmentedControlItemVariants,

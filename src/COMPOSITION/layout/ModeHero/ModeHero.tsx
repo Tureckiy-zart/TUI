@@ -56,7 +56,7 @@ import { cn } from "@/FOUNDATION/lib/utils";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
-interface ModeHeroProps {
+export interface ModeHeroProps {
   dayLabel: string;
   nightLabel: string;
   dayDescription: string;

@@ -12,20 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1️⃣ Устанавливаем pnpm (БЕЗ version!)
-      - name: Setup pnpm (from packageManager)
-        uses: pnpm/action-setup@v4
-
-      # 2️⃣ Node + pnpm cache
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-          cache: "pnpm"
 
-      # 3️⃣ На всякий случай (норм по канону)
       - name: Enable Corepack
-        run: corepack enable
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.26.0 --activate
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
