@@ -589,6 +589,8 @@ export default [
       "tenerife-ui-architecture/no-runtime-utils-from-index": "error",
       // Disallow inline style on UI components imported from @tenerife.music/ui
       "tenerife-ui-architecture/no-inline-style-on-ui-components": "error",
+      // Enforce required a11y/test props for UI components from @tenerife.music/ui
+      "tenerife-ui-architecture/ui-require-props-contract": "error",
       "no-restricted-imports": [
         "error",
         {
