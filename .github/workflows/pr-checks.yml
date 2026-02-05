@@ -7,18 +7,27 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
           cache: "pnpm"
 
-      - run: corepack enable
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - uses: pnpm/action-setup@v4
+      - name: Lint
+        run: pnpm run lint
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
-      - run: pnpm run test
+      - name: Test
+        run: pnpm run test

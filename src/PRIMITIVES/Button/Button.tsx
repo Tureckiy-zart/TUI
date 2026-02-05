@@ -397,8 +397,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
 
       const clonedChild = React.cloneElement(children, {
-        className: cn(finalClassName, childProps.className),
         ...props,
+        className: cn(finalClassName, childProps.className, props.className),
         children: newChildren,
       } as React.HTMLAttributes<HTMLElement>);
 
@@ -411,14 +411,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       const iconNode = children ?? leftIcon ?? rightIcon;
       // iconOnly: Render icon node (children-first resolution) with icon wrapper
       return (
-        <button className={finalClassName} ref={ref} {...props}>
+        <button {...props} className={cn(finalClassName, props.className)} ref={ref}>
           {iconNode ? renderIcon(iconNode) : null}
         </button>
       );
     }
     // Regular button with icons
     return (
-      <button className={finalClassName} ref={ref} {...props}>
+      <button {...props} className={cn(finalClassName, props.className)} ref={ref}>
         {renderIcon(leftIcon)}
         {children}
         {renderIcon(rightIcon)}
