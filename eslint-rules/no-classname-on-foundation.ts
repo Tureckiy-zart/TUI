@@ -11,6 +11,7 @@
  */
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+
 import { isConsumerCode } from "./utils/consumer-code-detection";
 import { FoundationImportTracker } from "./utils/import-tracking";
 
@@ -54,7 +55,7 @@ export const noClassNameOnFoundation = ESLintUtils.RuleCreator(
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
 

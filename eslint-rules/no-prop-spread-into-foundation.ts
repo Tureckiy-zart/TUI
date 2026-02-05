@@ -12,6 +12,7 @@
  */
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+
 import { isConsumerCode } from "./utils/consumer-code-detection";
 import { FoundationImportTracker } from "./utils/import-tracking";
 
@@ -37,7 +38,7 @@ function isExplicitlyTypedProps(name: string, foundationComponents: Set<string>)
 
   // Check if name is exactly a Foundation component name + "Props"
   for (const component of foundationComponents) {
-    if (lowerName === component.toLowerCase() + "props") {
+    if (lowerName === `${component.toLowerCase()}props`) {
       return true;
     }
   }
@@ -84,7 +85,7 @@ export const noPropSpreadIntoFoundation = ESLintUtils.RuleCreator(
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
 
@@ -97,7 +98,7 @@ export const noPropSpreadIntoFoundation = ESLintUtils.RuleCreator(
         for (const attr of node.attributes) {
           if (attr.type !== TSESTree.AST_NODE_TYPES.JSXSpreadAttribute) continue;
 
-          const argument = attr.argument;
+          const { argument } = attr;
 
           // Check if spread is from an identifier (variable)
           if (argument.type === TSESTree.AST_NODE_TYPES.Identifier) {

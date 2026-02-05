@@ -3,6 +3,7 @@
  */
 
 import { RuleTester } from "@typescript-eslint/rule-tester";
+import path from "path";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noPropSpreadIntoFoundation } from "../no-prop-spread-into-foundation";
@@ -51,7 +52,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...buttonProps}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Explicitly typed props (ButtonProps variable name)
       {
@@ -62,7 +63,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...ButtonProps}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Direct object spread (explicit props)
       {
@@ -72,7 +73,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...{ variant: "primary" }}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Non-Foundation component
       {
@@ -83,7 +84,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <CustomComponent {...props}>Content</CustomComponent>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Text component with textProps
       {
@@ -94,7 +95,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Text {...textProps}>Text</Text>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
     ],
     invalid: [
@@ -107,7 +108,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...props}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noPropSpreadIntoFoundation",
@@ -122,7 +123,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...rest}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noPropSpreadIntoFoundation",
@@ -138,7 +139,7 @@ describe("no-prop-spread-into-foundation", () => {
             return <Button {...otherProps}>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noPropSpreadIntoFoundation",
@@ -160,7 +161,7 @@ describe("no-prop-spread-into-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noPropSpreadIntoFoundation",

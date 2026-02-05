@@ -1,0 +1,182 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.16 [39m[90m/home/tureckiy/Projects/TUI[39m
+
+ [32m✓[39m eslint-rules/__tests__/consumer-code-detection.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 360[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-raw-line-height.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 774[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-inline-style-on-ui-components.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 907[2mms[22m[39m
+ [31m❯[39m eslint-rules/__tests__/no-style-on-foundation.test.ts [2m([22m[2m9 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1196[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function InternalComponent() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        [32m 262[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export default {
+            component: Button,
+          };
+          export const Story = () => <Button style={{ color: "red" }}>Click</Button>;
+        [32m 116[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function Consumer() {
+            return <Button>Click</Button>;
+          }
+        [32m 115[2mms[22m[39m
+         [32m✓[39m 
+          import { CustomComponent } from "./local-component";
+          export function Consumer() {
+            return <CustomComponent style={{ color: "red" }}>Content</CustomComponent>;
+          }
+        [32m 113[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "./local-button";
+          export function Consumer() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        [32m 111[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function Consumer() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        [32m 120[2mms[22m[39m
+[31m         [31m×[31m 
+          import { Button } from "@tenerife.music/ui/components/Button";
+          export function Consumer() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        [39m[32m 125[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife/ui";
+          export function Consumer() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        [32m 114[2mms[22m[39m
+         [32m✓[39m 
+          import { Button, Text, Input } from "@tenerife.music/ui";
+          export function Consumer() {
+            return (
+              <>
+                <Button style={{ color: "red" }}>Click</Button>
+                <Text style={{ fontSize: "16px" }}>Text</Text>
+                <Input style={{ width: "100%" }} />
+              </>
+            );
+          }
+        [32m 114[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/typography-color-policy.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1136[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-foundation-classname-style.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1237[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-prop-spread-into-foundation.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1400[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-raw-html-when-foundation-exists.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1401[2mms[22m[39m
+ [31m❯[39m eslint-rules/__tests__/no-classname-on-foundation.test.ts [2m([22m[2m10 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1244[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function InternalComponent() {
+            return <Button className="internal-style">Click</Button>;
+          }
+        [32m 202[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export default {
+            component: Button,
+          };
+          export const Story = () => <Button className="story-style">Click</Button>;
+        [32m 118[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function Consumer() {
+            return <Button>Click</Button>;
+          }
+        [32m 112[2mms[22m[39m
+         [32m✓[39m 
+          import { CustomComponent } from "./local-component";
+          export function Consumer() {
+            return <CustomComponent className="custom">Content</CustomComponent>;
+          }
+        [32m 110[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "./local-button";
+          export function Consumer() {
+            return <Button className="local">Click</Button>;
+          }
+        [32m 113[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui/components/Button";
+          export function Consumer() {
+            return <Button>Click</Button>;
+          }
+        [32m 109[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife.music/ui";
+          export function Consumer() {
+            return <Button className="forbidden">Click</Button>;
+          }
+        [32m 116[2mms[22m[39m
+[31m         [31m×[31m 
+          import { Button } from "@tenerife.music/ui/components/Button";
+          export function Consumer() {
+            return <Button className="forbidden">Click</Button>;
+          }
+        [39m[32m 120[2mms[22m[39m
+         [32m✓[39m 
+          import { Button } from "@tenerife/ui";
+          export function Consumer() {
+            return <Button className="forbidden">Click</Button>;
+          }
+        [32m 128[2mms[22m[39m
+         [32m✓[39m 
+          import { Button, Text, Input } from "@tenerife.music/ui";
+          export function Consumer() {
+            return (
+              <>
+                <Button className="forbidden">Click</Button>
+                <Text className="forbidden">Text</Text>
+                <Input className="forbidden" />
+              </>
+            );
+          }
+        [32m 112[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-utility-classes-near-foundation.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1233[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-legacy-css-vars.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 2021[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/typography-rhythm-policy.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 1954[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-leading-tailwind.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 2055[2mms[22m[39m
+ [32m✓[39m eslint-rules/__tests__/no-text-margin-spacing.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 2619[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m eslint-rules/__tests__/no-classname-on-foundation.test.ts[2m > [22mno-classname-on-foundation[2m > [22mno-classname-on-foundation[2m > [22minvalid[2m > [22m
+          import { Button } from "@tenerife.music/ui/components/Button";
+          export function Consumer() {
+            return <Button className="forbidden">Click</Button>;
+          }
+        
+[41m[1m FAIL [22m[49m eslint-rules/__tests__/no-style-on-foundation.test.ts[2m > [22mno-style-on-foundation[2m > [22mno-style-on-foundation[2m > [22minvalid[2m > [22m
+          import { Button } from "@tenerife.music/ui/components/Button";
+          export function Consumer() {
+            return <Button style={{ color: "red" }}>Click</Button>;
+          }
+        
+[31m[1mAssertionError[22m: Should have 1 error but had 0: []
+
+0 !== 1
+[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 0[39m
+
+[90m [2m❯[22m RuleTester.#testInvalidTemplate node_modules/.pnpm/@typescript-eslint+rule-tester@8.51.0_eslint@9.39.2_jiti@1.21.7__typescript@5.9.3/node_modules/@typescript-eslint/rule-tester/dist/RuleTester.js:[2m689:35[22m[39m
+[90m [2m❯[22m node_modules/.pnpm/@typescript-eslint+rule-tester@8.51.0_eslint@9.39.2_jiti@1.21.7__typescript@5.9.3/node_modules/@typescript-eslint/rule-tester/dist/RuleTester.js:[2m431:58[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m12 passed[39m[22m[90m (14)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m156 passed[39m[22m[90m (158)[39m
+[2m   Start at [22m 10:49:54
+[2m   Duration [22m 7.43s[2m (transform 2.23s, setup 10.18s, import 35.05s, tests 19.54s, environment 20.47s)[22m
+

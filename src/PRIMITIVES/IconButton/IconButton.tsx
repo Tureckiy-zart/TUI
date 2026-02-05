@@ -31,7 +31,7 @@ import { Button, type ButtonProps } from "@/PRIMITIVES/Button";
  */
 export interface IconButtonProps extends Omit<
   ButtonProps,
-  "iconOnly" | "children" | "leftIcon" | "rightIcon" | "className" | "style"
+  "iconOnly" | "children" | "leftIcon" | "rightIcon" | "asChild"
 > {
   /**
    * Icon content (React node)

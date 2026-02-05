@@ -46,6 +46,14 @@ The following documents constitute the **complete and final** canonical set for 
 | [CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md](./CLOSED_SYSTEM_V2_CANONICAL_FIX_PATTERNS.md) | J.1 | Canonical fix patterns registry, Wrapper First, Token Props | ✅ CANONICAL |
 | [DOM_BOUNDARY_COMPONENTS.md](./DOM_BOUNDARY_COMPONENTS.md) | J.1 | Fixed DOM-boundary component list and invariants | ✅ CANONICAL |
 
+### Consumer / Usage Guides
+
+**Location:** `docs/architecture/closed-system/`
+
+| Document | Phase | Description | Status |
+|----------|-------|-------------|--------|
+| [CONSUMER_LAYOUT_GUIDE.md](./CONSUMER_LAYOUT_GUIDE.md) | J.1 | Normative consumer layout rules and className/style prohibition | ✅ CANONICAL |
+
 ### Phase Lock Declarations
 
 **Location:** `docs/architecture/closed-system/`
@@ -57,7 +65,7 @@ The following documents constitute the **complete and final** canonical set for 
 | [CLOSED_SYSTEM_V2_PHASE_F_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_F_LOCK.md) | F | Phase F lock declaration (Extension Layer Adoption) | ✅ CANONICAL |
 | [CLOSED_SYSTEM_V2_PHASE_I_LOCK.md](./CLOSED_SYSTEM_V2_PHASE_I_LOCK.md) | I | Phase I lock declaration (Product Scope Migration - Screens) | ✅ CANONICAL |
 
-**Total Canonical Documents:** 14 files
+**Total Canonical Documents:** 15 files
 
 ---
 

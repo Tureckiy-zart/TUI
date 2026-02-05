@@ -10,8 +10,12 @@
  * Usage: npm run lint:rules
  */
 
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import prettierConfig from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
+
+const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
@@ -29,6 +33,7 @@ export default [
       parserOptions: {
         // Non-type-aware linting for rule files
         // Rules are configuration code, not application code
+        tsconfigRootDir,
         ecmaVersion: "latest",
         sourceType: "module",
       },

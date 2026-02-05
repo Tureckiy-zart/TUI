@@ -111,7 +111,7 @@ export const requireFocusVisible = ESLintUtils.RuleCreator(
 
       // Also check cn(), clsx(), classNames() calls
       CallExpression(node) {
-        const callee = node.callee;
+        const { callee } = node;
 
         // Check if it's cn, clsx, or classNames call
         if (callee.type !== TSESTree.AST_NODE_TYPES.Identifier) return;

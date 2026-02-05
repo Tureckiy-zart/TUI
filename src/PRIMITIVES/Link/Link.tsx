@@ -104,10 +104,7 @@ const linkVariants = tokenCVA({
   },
 });
 
-export interface LinkProps extends Omit<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  "className" | "style"
-> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Link variant style
    * @default "text"

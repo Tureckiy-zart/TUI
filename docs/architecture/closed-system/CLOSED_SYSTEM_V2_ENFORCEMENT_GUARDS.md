@@ -85,7 +85,8 @@ These guards are **enforcement mechanisms**, not architectural definitions:
 - ❌ **Not Source of Truth:** Canonical architecture documents are the source of truth
 - ✅ **Enforcement Only:** These rules make violations explicit and prevent bypasses
 
-**Reference:** For architectural authority, see [CLOSED_SYSTEM_V2_CANON_INDEX.md](./CLOSED_SYSTEM_V2_CANON_INDEX.md)
+**Reference:** For architectural authority, see [CLOSED_SYSTEM_V2_CANON_INDEX.md](./CLOSED_SYSTEM_V2_CANON_INDEX.md)  
+**Reference:** Consumer usage rationale is defined in [CONSUMER_LAYOUT_GUIDE.md](./CONSUMER_LAYOUT_GUIDE.md)
 
 ---
 

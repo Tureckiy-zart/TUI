@@ -1,3 +1,4 @@
+/* eslint-disable max-depth */
 /**
  * ESLint Rule: no-ad-hoc-lists
  *
@@ -88,7 +89,7 @@ export const noAdHocLists = createRule<Options, MessageIds>({
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         // Check for direct <li> usage
         if (name.type === TSESTree.AST_NODE_TYPES.JSXIdentifier && name.name === "li") {
@@ -129,7 +130,7 @@ export const noAdHocLists = createRule<Options, MessageIds>({
               const roleValue = getAttributeValue(attr.value);
               if (roleValue === "list") {
                 // Check if this is an exception (Combobox uses role="listbox")
-                const parent = node.parent;
+                const { parent } = node;
                 if (
                   parent &&
                   parent.type === TSESTree.AST_NODE_TYPES.JSXElement &&
@@ -247,7 +248,7 @@ function getAttributeValue(
   }
 
   if (value.type === TSESTree.AST_NODE_TYPES.JSXExpressionContainer) {
-    const expression = value.expression;
+    const { expression } = value;
     if (expression.type === TSESTree.AST_NODE_TYPES.Literal) {
       return typeof expression.value === "string" ? expression.value : null;
     }

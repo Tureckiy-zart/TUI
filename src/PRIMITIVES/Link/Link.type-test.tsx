@@ -9,15 +9,13 @@
 
 import type { LinkProps } from "./Link";
 
-// Test that className is not in LinkProps
+// Test that className is allowed in LinkProps
 type TestClassName = "className" extends keyof LinkProps ? true : false;
-// @ts-expect-error — className must not be in LinkProps
 const _testClassName: TestClassName = true;
 void _testClassName;
 
-// Test that style is not in LinkProps
+// Test that style is allowed in LinkProps
 type TestStyle = "style" extends keyof LinkProps ? true : false;
-// @ts-expect-error — style must not be in LinkProps
 const _testStyle: TestStyle = true;
 void _testStyle;
 

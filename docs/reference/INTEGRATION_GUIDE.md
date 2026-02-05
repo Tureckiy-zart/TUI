@@ -3,6 +3,8 @@
 **Last Updated:** 2026-01-29  
 **Purpose:** Guide for integrating Tenerife UI components into your project and replacing manual Tailwind usage.
 
+See also: [ThemeParams CSP & ESLint Env](./THEMEPARAMS_CSP_AND_ESLINT_ENV.md) — FOUC prevention, CSP nonce handling, ESLint source-root detection.
+
 ---
 
 ## Grid Component Integration

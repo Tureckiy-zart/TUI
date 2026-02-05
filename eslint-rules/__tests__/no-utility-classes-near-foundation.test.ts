@@ -3,6 +3,7 @@
  */
 
 import { RuleTester } from "@typescript-eslint/rule-tester";
+import path from "path";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noUtilityClassesNearFoundation } from "../no-utility-classes-near-foundation";
@@ -58,7 +59,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Wrapper with non-utility classes
       {
@@ -72,7 +73,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Utility classes on element without Foundation components
       {
@@ -85,7 +86,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Foundation component with utility classes (not a wrapper)
       {
@@ -95,7 +96,7 @@ describe("no-utility-classes-near-foundation", () => {
             return <Button>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
     ],
     invalid: [
@@ -111,7 +112,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noUtilityClassesNearFoundation",
@@ -130,7 +131,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noUtilityClassesNearFoundation",
@@ -150,7 +151,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noUtilityClassesNearFoundation",
@@ -171,7 +172,7 @@ describe("no-utility-classes-near-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noUtilityClassesNearFoundation",

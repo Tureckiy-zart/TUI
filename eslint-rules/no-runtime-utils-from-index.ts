@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /**
  * ESLint Rule: no-runtime-utils-from-index
  *

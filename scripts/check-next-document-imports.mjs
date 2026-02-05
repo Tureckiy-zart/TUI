@@ -144,80 +144,80 @@ let hasErrors = false;
 
 const documentImportPatterns = [
   {
-    pattern: "from [\"']next/document[\"']",
+    pattern: "from\\s+[\"']next/document[\"']",
     description: "Direct import from 'next/document'",
   },
   {
-    pattern: "require.*next/document",
+    pattern: "require\\(\\s*[\"']next/document[\"']\\s*\\)",
     description: "require() import from 'next/document'",
   },
   {
-    pattern: "import.*Html.*from.*next/document",
+    pattern: "import\\s+\\{[^}]*\\bHtml\\b[^}]*\\}\\s+from\\s+[\"']next/document[\"']",
     description: "Import of Html component from next/document",
   },
   {
-    pattern: "import.*Head.*from.*next/document",
+    pattern: "import\\s+\\{[^}]*\\bHead\\b[^}]*\\}\\s+from\\s+[\"']next/document[\"']",
     description: "Import of Head component from next/document",
   },
   {
-    pattern: "import.*Main.*from.*next/document",
+    pattern: "import\\s+\\{[^}]*\\bMain\\b[^}]*\\}\\s+from\\s+[\"']next/document[\"']",
     description: "Import of Main component from next/document",
   },
   {
-    pattern: "import.*NextScript.*from.*next/document",
+    pattern: "import\\s+\\{[^}]*\\bNextScript\\b[^}]*\\}\\s+from\\s+[\"']next/document[\"']",
     description: "Import of NextScript component from next/document",
   },
 ];
 
 const headImportPatterns = [
   {
-    pattern: "from [\"']next/head[\"']",
+    pattern: "from\\s+[\"']next/head[\"']",
     description: "Direct import from 'next/head'",
   },
   {
-    pattern: "require.*next/head",
+    pattern: "require\\(\\s*[\"']next/head[\"']\\s*\\)",
     description: "require() import from 'next/head'",
   },
   {
-    pattern: "import.*Head.*from.*next/head",
+    pattern: "import\\s+\\{[^}]*\\bHead\\b[^}]*\\}\\s+from\\s+[\"']next/head[\"']",
     description: "Import of Head component from next/head",
   },
 ];
 
 const routerImportPatterns = [
   {
-    pattern: "from [\"']next/router[\"']",
+    pattern: "from\\s+[\"']next/router[\"']",
     description: "Direct import from 'next/router'",
   },
   {
-    pattern: "require.*next/router",
+    pattern: "require\\(\\s*[\"']next/router[\"']\\s*\\)",
     description: "require() import from 'next/router'",
   },
   {
-    pattern: "import.*useRouter.*from.*next/router",
+    pattern: "import\\s+\\{[^}]*\\buseRouter\\b[^}]*\\}\\s+from\\s+[\"']next/router[\"']",
     description: "Import of useRouter hook from next/router",
   },
   {
-    pattern: "import.*withRouter.*from.*next/router",
+    pattern: "import\\s+\\{[^}]*\\bwithRouter\\b[^}]*\\}\\s+from\\s+[\"']next/router[\"']",
     description: "Import of withRouter HOC from next/router",
   },
   {
-    pattern: "import.*Router.*from.*next/router",
+    pattern: "import\\s+\\{[^}]*\\bRouter\\b[^}]*\\}\\s+from\\s+[\"']next/router[\"']",
     description: "Import of Router from next/router",
   },
 ];
 
 const dynamicImportPatterns = [
   {
-    pattern: "import.*next/document",
+    pattern: "import\\(\\s*[\"']next/document[\"']\\s*\\)",
     description: "Dynamic import() from 'next/document'",
   },
   {
-    pattern: "import.*next/head",
+    pattern: "import\\(\\s*[\"']next/head[\"']\\s*\\)",
     description: "Dynamic import() from 'next/head'",
   },
   {
-    pattern: "import.*next/router",
+    pattern: "import\\(\\s*[\"']next/router[\"']\\s*\\)",
     description: "Dynamic import() from 'next/router'",
   },
 ];

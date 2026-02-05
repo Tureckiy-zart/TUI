@@ -51,7 +51,7 @@ export const noFoundationClassnameStyle = ESLintUtils.RuleCreator(
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
 

@@ -106,6 +106,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 
 - [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) - **Canonical index** - Single source of truth for Closed System v2 documentation
 - [architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md](./architecture/closed-system/CLOSED_SYSTEM_V2_SYSTEM_CLOSURE.md) - **Why the system is closed** - System closure rationale, problem classes prevented, change control policy
+- [architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md](./architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md) - **Consumer Layout Guide** - Normative consumer usage rules (no className/style on UI components)
 - [architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md](./architecture/closed-system/DOM_BOUNDARY_COMPONENTS.md) - **DOM boundary** - Fixed DOM-boundary component list (canonical)
 - [architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANONICAL_PROBLEM_DEFINITION.md) - Phase A: Problem definition
 - [architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md](./architecture/closed-system/CLOSED_SYSTEM_V2_ARCHITECTURE_MODEL.md) - Phase B: Architecture model and principles
@@ -153,6 +154,7 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/TOKENS_OVERVIEW.md](./reference/TOKENS_OVERVIEW.md) - Token map overview
 - [reference/COMPONENTS_INVENTORY.md](./reference/COMPONENTS_INVENTORY.md) - UI components inventory
 - [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
+- [reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md](./reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md) - Tooling/infrastructure: FOUC prevention, CSP nonce, ESLint source-root detection
 - [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
 - [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
 - [reference/MOTION_ANIMATIONS_GUIDE.md](./reference/MOTION_ANIMATIONS_GUIDE.md) - Motion animations working guide (implementation, troubleshooting, common pitfalls)
@@ -218,6 +220,7 @@ docs/
 3. **Consult Authority Contracts:** [architecture/AUTHORITY_NAVIGATION.md](./architecture/AUTHORITY_NAVIGATION.md) for navigation
 4. **Verify component status:** [architecture/EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md)
 5. **Closed System v2:** [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) - Canonical documentation index
+6. **Consumer Layout Guide:** [architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md](./architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md) - Normative consumer usage rules
 
 ### For Developers
 
@@ -255,7 +258,7 @@ See [EXTENSION_AUTHORITY.md](./architecture/EXTENSION_AUTHORITY.md) for Extensio
 
 Closed System v2 is the architectural model that ensures system closure across Foundation, COMPOSITION, and Extension layers. All phases (A-F) are **COMPLETE** and **LOCKED**.
 
-See [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) for complete canonical documentation.
+See [architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md](./architecture/closed-system/CLOSED_SYSTEM_V2_CANON_INDEX.md) for complete canonical documentation. Consumer usage rules live in [architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md](./architecture/closed-system/CONSUMER_LAYOUT_GUIDE.md).
 
 ---
 
