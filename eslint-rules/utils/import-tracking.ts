@@ -3,6 +3,7 @@
  */
 
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/utils";
+
 import { isPublicUiEntry } from "./consumer-code-detection";
 import { isFoundationComponent } from "./foundation-component-list";
 
@@ -21,8 +22,11 @@ export class FoundationImportTracker {
     if (typeof source !== "string") return;
     if (!isPublicUiEntry(source)) return;
 
+    const isTypeOnly = node.importKind === "type";
+
     for (const spec of node.specifiers) {
       if (spec.type === AST_NODE_TYPES.ImportSpecifier) {
+        if (spec.importKind === "type" || isTypeOnly) continue;
         // spec.imported can be Identifier or StringLiteral
         if (spec.imported.type === AST_NODE_TYPES.Identifier) {
           const importedName = spec.imported.name;
@@ -32,13 +36,6 @@ export class FoundationImportTracker {
           if (isFoundationComponent(importedName)) {
             this.foundationImports.add(localName);
           }
-        }
-      } else if (spec.type === AST_NODE_TYPES.ImportDefaultSpecifier) {
-        // Handle default imports - check if the module name suggests Foundation
-        // This is less precise but covers cases like `import Button from "@tenerife.music/ui/components/Button"`
-        const localName = spec.local.name;
-        if (isFoundationComponent(localName)) {
-          this.foundationImports.add(localName);
         }
       }
     }
@@ -63,5 +60,54 @@ export class FoundationImportTracker {
    */
   clear(): void {
     this.foundationImports.clear();
+  }
+}
+
+/**
+ * Track UI component imports from public UI entry
+ */
+export class UIImportTracker {
+  private namedImports = new Set<string>();
+
+  /**
+   * Process an import declaration and track UI components (named/default/namespace)
+   */
+  processImport(node: TSESTree.ImportDeclaration): void {
+    const source = node.source.value;
+
+    if (typeof source !== "string") return;
+    if (!isPublicUiEntry(source)) return;
+
+    const isTypeOnly = node.importKind === "type";
+
+    for (const spec of node.specifiers) {
+      if (spec.type === AST_NODE_TYPES.ImportSpecifier) {
+        if (spec.importKind === "type" || isTypeOnly) continue;
+        if (spec.imported.type !== AST_NODE_TYPES.Identifier) continue;
+        if (isFoundationComponent(spec.imported.name)) continue;
+        this.namedImports.add(spec.local.name);
+      }
+    }
+  }
+
+  /**
+   * Check if a name is a tracked UI component import
+   */
+  isUiImport(name: string): boolean {
+    return this.namedImports.has(name);
+  }
+
+  /**
+   * Check if a name is a tracked namespace import (e.g., UI.Box)
+   */
+  isNamespaceImport(_name: string): boolean {
+    return false;
+  }
+
+  /**
+   * Clear tracked imports
+   */
+  clear(): void {
+    this.namedImports.clear();
   }
 }

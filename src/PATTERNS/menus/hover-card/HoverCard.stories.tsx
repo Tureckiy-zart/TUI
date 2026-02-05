@@ -309,7 +309,7 @@ export const WithNotifications: Story = {
     <HoverCardRoot>
       <HoverCardTrigger>
         <div className="relative">
-          <Button variant="outline" iconOnly>
+          <Button variant="outline" iconOnly aria-label="Notifications">
             <Bell className="h-4 w-4" />
             <Box className="absolute -right-1 -top-1 h-5 w-5 text-xs">
               <Badge>3</Badge>

@@ -9,15 +9,13 @@
 
 import type { ButtonProps, ButtonSize } from "./Button";
 
-// Test that className is not in ButtonProps
+// Test that className is allowed in ButtonProps
 type TestClassName = "className" extends keyof ButtonProps ? true : false;
-// @ts-expect-error — className must not be in ButtonProps
 const _testClassName: TestClassName = true;
 void _testClassName;
 
-// Test that style is not in ButtonProps
+// Test that style is allowed in ButtonProps
 type TestStyle = "style" extends keyof ButtonProps ? true : false;
-// @ts-expect-error — style must not be in ButtonProps
 const _testStyle: TestStyle = true;
 void _testStyle;
 

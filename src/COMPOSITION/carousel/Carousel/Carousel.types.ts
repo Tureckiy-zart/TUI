@@ -1,15 +1,12 @@
 /**
- * Carousel public types — compound-only API, no visual props
+ * Carousel public types — compound-only API, no visual props by default
  */
 
 /** Orientation of the carousel */
 export type CarouselOrientation = "horizontal" | "vertical";
 
 /** CarouselRoot props (behavioral only; no variant, size, theme, gap, padding, background, items) */
-export interface CarouselRootProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "children" | "className" | "style"
-> {
+export interface CarouselRootProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   /** Controlled current slide index (0-based) */
   index?: number;
   /** Default slide index when uncontrolled */
@@ -34,42 +31,27 @@ export interface CarouselRootProps extends Omit<
 }
 
 /** CarouselTrack: scrollable container; no visual props in public API */
-export interface CarouselTrackProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "className" | "style"
-> {
+export interface CarouselTrackProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
 /** CarouselSlide: single slide; no visual props */
-export interface CarouselSlideProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "className" | "style"
-> {
+export interface CarouselSlideProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
 /** CarouselPrev: previous slide button (batteries-included) */
-export interface CarouselPrevProps extends Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "className" | "style"
-> {
+export interface CarouselPrevProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
 /** CarouselNext: next slide button (batteries-included) */
-export interface CarouselNextProps extends Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "className" | "style"
-> {
+export interface CarouselNextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
 /** CarouselIndicators: dot indicators (batteries-included) */
-export interface CarouselIndicatorsProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "className" | "style"
-> {
+export interface CarouselIndicatorsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Placement of indicators relative to carousel content */
   placement?: "bottom" | "overlay";
   children?: never;

@@ -1,5 +1,7 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import storybook from "eslint-plugin-storybook";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import prettierConfig from "eslint-config-prettier";
 import reactPlugin from "eslint-plugin-react";
@@ -8,6 +10,8 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 import tenerifeUiArchitecture from "./eslint-rules/loader.mjs";
+
+const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
@@ -33,7 +37,7 @@ export default [
       "scripts/**",
       "tools/**", // Build-time tools (theme-generator, etc.)
       "playwright/**", // Playwright test files - configuration and test code
-      "eslint-rules/**", // ESLint rule files - configuration, not source code
+      "eslint-rules/**", // Ignored per user request
       "**/legacy/**", // Legacy files are excluded from token compliance
     ],
   },
@@ -68,6 +72,7 @@ export default [
       parserOptions: {
         projectService: true,
         allowDefaultProject: true,
+        tsconfigRootDir,
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
@@ -114,11 +119,11 @@ export default [
       "@typescript-eslint/no-unused-vars": "off",
 
       // ═══════════════════════════════════════════════════════════
-      // КОНСОЛЬ И ОТЛАДКА
+      // CONSOLE AND DEBUGGING
       // ═══════════════════════════════════════════════════════════
 
-      // console методы разрешены (log, info, debug, warn, error)
-      // Только предупреждение для напоминания убрать из production
+      // console methods allowed (log, info, debug, warn, error)
+      // Warning only, prevents production crashes while reminding to clean up
       "no-console": [
         "warn",
         {
@@ -312,6 +317,7 @@ export default [
       "tenerife-ui-architecture/no-link-aschild": "error",
       // Prevent Foundation components from extending HTMLAttributes without Omit
       "tenerife-ui-architecture/no-foundation-open-htmlattributes": "error",
+      "tenerife-ui-architecture/no-deep-imports-from-ui": "error",
 
       // ═══════════════════════════════════════════════════════════
       // LIST USAGE ENFORCEMENT - CANONICAL COMPONENTS
@@ -466,6 +472,7 @@ export default [
       parserOptions: {
         projectService: true,
         allowDefaultProject: true,
+        tsconfigRootDir,
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
@@ -506,6 +513,7 @@ export default [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
+        tsconfigRootDir,
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
@@ -563,7 +571,13 @@ export default [
     // DO NOT silence this rule with disable comments.
     // The direct import path is the correct, canonical solution.
     name: "consumer-import-guard",
-    files: ["src/DOMAIN/**/*.{ts,tsx}", "src/PATTERNS/**/*.{ts,tsx}"],
+    files: [
+      "src/DOMAIN/**/*.{ts,tsx}",
+      "src/PATTERNS/**/*.{ts,tsx}",
+      "src/FEATURES/**/*.{ts,tsx}",
+      "src/PAGES/**/*.{ts,tsx}",
+      "src/pages/**/*.{ts,tsx}",
+    ],
     ignores: ["**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
     rules: {
       // Explicitly forbid Foundation component token imports from @/index
@@ -573,6 +587,8 @@ export default [
       // Runtime utilities must be imported directly from @/FOUNDATION/lib/* to avoid runtime cycles
       // This enforces that @/index is public-only and runtime utilities bypass the barrel export
       "tenerife-ui-architecture/no-runtime-utils-from-index": "error",
+      // Disallow inline style on UI components imported from @tenerife.music/ui
+      "tenerife-ui-architecture/no-inline-style-on-ui-components": "error",
       "no-restricted-imports": [
         "error",
         {

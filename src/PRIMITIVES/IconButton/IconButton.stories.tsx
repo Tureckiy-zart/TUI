@@ -70,13 +70,6 @@ const meta: Meta<typeof IconButton> = {
       control: { type: "text" },
       description: "ARIA label for accessibility (required)",
     },
-    asChild: {
-      control: false,
-      description: "Render as child element (Radix Slot) - internal use only",
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 

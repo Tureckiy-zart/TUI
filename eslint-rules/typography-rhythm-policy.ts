@@ -216,7 +216,7 @@ export default createRule<Options, MessageIds>({
 
               if (!lineHeightValue) continue;
 
-              const parent = node.parent;
+              const { parent } = node;
               if (parent?.type !== "JSXOpeningElement") continue;
               const parentName =
                 parent.name.type === "JSXIdentifier" ? parent.name.name : undefined;
@@ -402,7 +402,7 @@ export default createRule<Options, MessageIds>({
 });
 
 function isNonTypographyJsxStyleLiteral(node: TSESTree.Literal): boolean {
-  const parent = node.parent;
+  const { parent } = node;
   if (!parent || parent.type !== "Property") return false;
   if (parent.key.type !== "Identifier" || parent.key.name !== "lineHeight") return false;
   const objectExpr = parent.parent;
@@ -414,7 +414,7 @@ function isNonTypographyJsxStyleLiteral(node: TSESTree.Literal): boolean {
   if (jsxAttr.name.type !== "JSXIdentifier" || jsxAttr.name.name !== "style") return false;
   const jsxOpening = jsxAttr.parent;
   if (!jsxOpening || jsxOpening.type !== "JSXOpeningElement") return false;
-  const name = jsxOpening.name;
+  const { name } = jsxOpening;
   if (name.type !== "JSXIdentifier") return false;
   return name.name !== "Text" && name.name !== "Heading";
 }

@@ -12,6 +12,7 @@
  */
 
 import { ESLintUtils, TSESTree } from "@typescript-eslint/utils";
+
 import { isConsumerCode } from "./utils/consumer-code-detection";
 import {
   getFoundationAlternatives,
@@ -73,7 +74,7 @@ export const noRawHtmlWhenFoundationExists = ESLintUtils.RuleCreator(
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         // Only check HTML elements (lowercase identifiers)
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;

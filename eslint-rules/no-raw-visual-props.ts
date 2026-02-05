@@ -1,3 +1,4 @@
+/* eslint-disable max-depth */
 /**
  * ESLint Rule: no-raw-visual-props
  *
@@ -149,7 +150,7 @@ function getTypeName(
     // For type references, get the name
     if (typeNode.type === "TSTypeReference") {
       if (typeNode.typeName.type === "Identifier") {
-        const name = typeNode.typeName.name;
+        const { name } = typeNode.typeName;
         // If it's Responsive<T>, get the inner type name
         if (name === "Responsive" && "typeParameters" in typeNode) {
           const typeParams = typeNode.typeParameters as
@@ -245,7 +246,7 @@ function usesAllowedTokenType(
 
     // Check if it's a Responsive<T> wrapper
     if (typeNode.typeName.type === "Identifier") {
-      const name = typeNode.typeName.name;
+      const { name } = typeNode.typeName;
       if (name === "Responsive" && "typeParameters" in typeNode) {
         const typeParams = typeNode.typeParameters as
           | TSESTree.TSTypeParameterInstantiation

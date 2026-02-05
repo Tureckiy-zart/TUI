@@ -9,6 +9,8 @@ import { noAdHocLists } from "./no-ad-hoc-lists";
 import { noClassNameOnFoundation } from "./no-classname-on-foundation";
 import { noFoundationClassnameStyle } from "./no-foundation-classname-style";
 import noFoundationOpenHtmlAttributes from "./no-foundation-open-htmlattributes";
+import { noDeepImportsFromUi } from "./no-deep-imports-from-ui";
+import { noInlineStyleOnUiComponents } from "./no-inline-style-on-ui-components";
 import noInteractiveWithoutKeyboard from "./no-interactive-without-keyboard";
 import noLeadingTailwind from "./no-leading-tailwind";
 import noLegacyCssVars from "./no-legacy-css-vars";
@@ -37,6 +39,7 @@ export default {
     "no-raw-tailwind-colors": noRawTailwindColors,
     "no-foundation-classname-style": noFoundationClassnameStyle,
     "no-foundation-open-htmlattributes": noFoundationOpenHtmlAttributes,
+    "no-deep-imports-from-ui": noDeepImportsFromUi,
     "no-link-aschild": noLinkAsChild,
     "no-raw-font-size-scale": noRawFontSizeScale,
     "no-raw-line-height-scale": noRawLineHeightScale,
@@ -56,11 +59,12 @@ export default {
     "no-leading-tailwind": noLeadingTailwind,
     "no-text-margin-spacing": noTextMarginSpacing,
     // Closed System v2 Consumer Guards
-    "tui/no-classname-on-foundation": noClassNameOnFoundation,
-    "tui/no-style-on-foundation": noStyleOnFoundation,
-    "tui/no-prop-spread-into-foundation": noPropSpreadIntoFoundation,
-    "tui/no-utility-classes-near-foundation": noUtilityClassesNearFoundation,
-    "tui/no-raw-html-when-foundation-exists": noRawHtmlWhenFoundationExists,
+    "no-classname-on-foundation": noClassNameOnFoundation,
+    "no-style-on-foundation": noStyleOnFoundation,
+    "no-prop-spread-into-foundation": noPropSpreadIntoFoundation,
+    "no-utility-classes-near-foundation": noUtilityClassesNearFoundation,
+    "no-raw-html-when-foundation-exists": noRawHtmlWhenFoundationExists,
+    "no-inline-style-on-ui-components": noInlineStyleOnUiComponents,
     // Foundation Token Import Hygiene
     "no-token-imports-from-index": noTokenImportsFromIndex,
     // Foundation Runtime Utilities Import Hygiene

@@ -255,7 +255,7 @@ export default createRule<Options, MessageIds>({
       },
       TemplateLiteral: checkTemplateLiteral,
       JSXAttribute(node) {
-        const value = node.value;
+        const { value } = node;
         if (value && value.type === "Literal" && typeof value.value === "string") {
           reportForbidden(context, node, value.value);
         }

@@ -70,10 +70,7 @@ import * as React from "react";
 // Types
 // ============================================================================
 
-export interface NavListProps extends Omit<
-  React.OlHTMLAttributes<HTMLOListElement>,
-  "className" | "style"
-> {
+export interface NavListProps extends React.OlHTMLAttributes<HTMLOListElement> {
   /**
    * HTML element to render
    * @default 'ol'

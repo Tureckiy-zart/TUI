@@ -51,7 +51,7 @@ export const noInteractiveWithoutKeyboard = ESLintUtils.RuleCreator(
 
     return {
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         // Only check div/span elements
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;

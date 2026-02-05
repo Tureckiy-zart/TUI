@@ -9,13 +9,13 @@
 
 import * as React from "react";
 
-import { Button } from "@/index";
+import { Button, type ButtonProps } from "@/index";
 
 import { useNotificationCenterContext } from "./NotificationCenter.Provider";
 
 export interface NotificationCenterDismissAllProps extends Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "className" | "style"
+  ButtonProps,
+  "children" | "iconOnly" | "variant" | "size" | "leftIcon" | "rightIcon" | "asChild"
 > {
   /**
    * Show confirmation before clearing

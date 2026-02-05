@@ -218,10 +218,7 @@ DialogHeader.displayName = "DialogHeader";
 /**
  * Dialog Title - h2 with aria-labelledby
  */
-export interface DialogTitleProps extends Omit<
-  React.HTMLAttributes<HTMLHeadingElement>,
-  "className" | "style" | "color"
-> {
+export interface DialogTitleProps extends Omit<React.HTMLAttributes<HTMLHeadingElement>, "color"> {
   titleId?: string;
 }
 

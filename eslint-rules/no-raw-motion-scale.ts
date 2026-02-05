@@ -1,3 +1,4 @@
+/* eslint-disable max-depth */
 /**
  * ESLint Rule: no-raw-motion-scale
  *
@@ -188,7 +189,7 @@ export default createRule<Options, MessageIds>({
      */
     function checkTemplateLiteral(node: TSESTree.TemplateLiteral): void {
       // Skip if this is inside a JSX attribute (handled by JSXAttribute handler)
-      const parent = node.parent;
+      const { parent } = node;
       if (
         parent &&
         parent.type === "JSXExpressionContainer" &&

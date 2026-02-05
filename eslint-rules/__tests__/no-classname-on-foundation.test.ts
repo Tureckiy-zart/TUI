@@ -3,6 +3,7 @@
  */
 
 import { RuleTester } from "@typescript-eslint/rule-tester";
+import path from "path";
 import tseslint from "typescript-eslint";
 import { describe } from "vitest";
 import { noClassNameOnFoundation } from "../no-classname-on-foundation";
@@ -49,7 +50,7 @@ describe("no-classname-on-foundation", () => {
             return <Button>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Non-Foundation component
       {
@@ -59,7 +60,7 @@ describe("no-classname-on-foundation", () => {
             return <CustomComponent className="custom">Content</CustomComponent>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Local Button component not imported from UI entry
       {
@@ -69,7 +70,7 @@ describe("no-classname-on-foundation", () => {
             return <Button className="local">Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
       // ✅ Deep import without className
       {
@@ -79,7 +80,7 @@ describe("no-classname-on-foundation", () => {
             return <Button>Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
       },
     ],
     invalid: [
@@ -91,7 +92,7 @@ describe("no-classname-on-foundation", () => {
             return <Button className="forbidden">Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noClassNameOnFoundation",
@@ -106,7 +107,7 @@ describe("no-classname-on-foundation", () => {
             return <Button className="forbidden">Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noClassNameOnFoundation",
@@ -121,7 +122,7 @@ describe("no-classname-on-foundation", () => {
             return <Button className="forbidden">Click</Button>;
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noClassNameOnFoundation",
@@ -142,7 +143,7 @@ describe("no-classname-on-foundation", () => {
             );
           }
         `,
-        filename: "/app/src/Consumer.tsx",
+        filename: path.join(process.cwd(), "apps/web/src/Consumer.tsx"),
         errors: [
           {
             messageId: "noClassNameOnFoundation",

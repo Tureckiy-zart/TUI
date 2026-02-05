@@ -9,15 +9,13 @@
 
 import type { HeadingProps } from "./Heading";
 
-// Test that className is not in HeadingProps
+// Test that className is allowed in HeadingProps
 type TestClassName = "className" extends keyof HeadingProps ? true : false;
-// @ts-expect-error — className must not be in HeadingProps
 const _testClassName: TestClassName = true;
 void _testClassName;
 
-// Test that style is not in HeadingProps
+// Test that style is allowed in HeadingProps
 type TestStyle = "style" extends keyof HeadingProps ? true : false;
-// @ts-expect-error — style must not be in HeadingProps
 const _testStyle: TestStyle = true;
 void _testStyle;
 

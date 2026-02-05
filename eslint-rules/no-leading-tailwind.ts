@@ -97,7 +97,7 @@ export default createRule<Options, MessageIds>({
       },
 
       JSXOpeningElement(node) {
-        const name = node.name;
+        const { name } = node;
 
         if (name.type !== TSESTree.AST_NODE_TYPES.JSXIdentifier) return;
 
@@ -236,7 +236,7 @@ function resolveIdentifierString(
     if (variable) {
       for (const def of variable.defs) {
         if (def.type !== "Variable" || def.node.type !== "VariableDeclarator") continue;
-        const init = def.node.init;
+        const { init } = def.node;
         if (!init) continue;
         if (init.type === TSESTree.AST_NODE_TYPES.Literal && typeof init.value === "string") {
           return init.value;
