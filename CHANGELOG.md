@@ -1,3 +1,9 @@
+## [3.1.0](https://github.com/Tureckiy-zart/TUI/compare/v3.0.4...v3.1.0) (2026-02-05)
+
+### Features
+
+* enforce eslint boundaries for UI imports ([#98](https://github.com/Tureckiy-zart/TUI/issues/98)) ([66ae7ba](https://github.com/Tureckiy-zart/TUI/commit/66ae7bac0e42205088eb161a82558bfd0efa62ec))
+
 ## [Unreleased]
 
 ### Features

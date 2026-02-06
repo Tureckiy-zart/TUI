@@ -1,6 +1,6 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2026-02-05  
 **Purpose:** Central documentation hub for the TUI component library  
 **Canonical List:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
 
