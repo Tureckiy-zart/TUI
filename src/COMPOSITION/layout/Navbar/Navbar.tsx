@@ -111,6 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <Box
       as="nav"
+      data-semantic-guard="allow"
       px="md"
       py="sm"
       className={cn("w-full", className)}

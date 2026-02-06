@@ -158,3 +158,6 @@ docs/backup_*/
 playwright-report/
 test-results/
 .playwright/
+
+# Scratchpad
+scratch/ui-repro-next

@@ -102,6 +102,7 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as React from "react";
 
+import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MENU_TOKENS } from "@/FOUNDATION/tokens/components/menu";
@@ -211,6 +212,7 @@ export interface MenuTriggerProps extends Omit<
   "children"
 > {
   children?: React.ReactNode;
+  asChild?: boolean;
 }
 
 /**
@@ -218,10 +220,22 @@ export interface MenuTriggerProps extends Omit<
  * Radix handles click behavior automatically
  */
 const MenuTrigger = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Trigger>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Trigger>,
   MenuTriggerProps
->(({ className, ...props }, ref) => {
-  return <DropdownMenuPrimitive.Trigger ref={ref} className={cn(className)} {...props} />;
+>(({ className, asChild, children, ...props }, ref) => {
+  const resolvedAsChild = resolveAsChild(asChild, children);
+  warnIfExplicitAsChildFalse("Menu.Trigger", asChild, children);
+
+  return (
+    <DropdownMenuPrimitive.Trigger
+      ref={ref}
+      className={cn(className)}
+      asChild={resolvedAsChild}
+      {...props}
+    >
+      {children}
+    </DropdownMenuPrimitive.Trigger>
+  );
 });
 MenuTrigger.displayName = DropdownMenuPrimitive.Trigger.displayName;
 
@@ -245,7 +259,7 @@ export interface MenuContentProps extends Omit<
  * Wrapper around Radix DropdownMenu Content with token-based styling.
  */
 const MenuContent = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Content>,
   MenuContentProps
 >(({ className, padding = "md", ...props }, ref) => {
   return (
@@ -290,7 +304,7 @@ export interface MenuItemProps extends Omit<
  * Wrapper around Radix DropdownMenu Item with token-based styling.
  */
 const MenuItem = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Item>,
   MenuItemProps
 >(({ className, padding = "md", height = "md", ...props }, ref) => {
   return (
@@ -329,7 +343,7 @@ export interface MenuSeparatorProps extends Omit<
  * Wrapper around Radix DropdownMenu Separator with token-based styling.
  */
 const MenuSeparator = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Separator>,
   MenuSeparatorProps
 >(({ className, margin = "sm", ...props }, ref) => {
   return (
@@ -359,7 +373,7 @@ export type MenuGroupProps = React.ComponentPropsWithoutRef<typeof DropdownMenuP
  * Grouping is logical, minimal styling needed.
  */
 const MenuGroup = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Group>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Group>,
   MenuGroupProps
 >(({ className, ...props }, ref) => {
   return <DropdownMenuPrimitive.Group ref={ref} className={cn(className)} {...props} />;
@@ -386,7 +400,7 @@ export interface MenuLabelProps extends Omit<
  * Wrapper around Radix DropdownMenu Label with token-based styling.
  */
 const MenuLabel = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Label>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Label>,
   MenuLabelProps
 >(({ className, padding = "md", ...props }, ref) => {
   return (

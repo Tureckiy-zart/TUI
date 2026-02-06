@@ -1,6 +1,6 @@
 # 📚 TUI Documentation
 
-**Last Updated:** 2026-02-05  
+**Last Updated:** 2026-02-06  
 **Purpose:** Central documentation hub for the TUI component library  
 **Canonical List:** See `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
 
@@ -156,6 +156,10 @@ All Foundation Authority Contracts are **LOCKED** and **IMMUTABLE**. **Foundatio
 - [reference/INTEGRATION_GUIDE.md](./reference/INTEGRATION_GUIDE.md) - UI integration guide
 - [reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md](./reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md) - Tooling/infrastructure: FOUC prevention, CSP nonce, ESLint source-root detection
 - [reference/COMPONENT_EXAMPLES.md](./reference/COMPONENT_EXAMPLES.md) - Extension component examples and patterns
+- [canon/RUNTIME_GUARDS_CANON.md](./canon/RUNTIME_GUARDS_CANON.md) - Runtime guards canon (TS ≠ source of truth)
+- [canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md](./canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md) - Trigger asChild safe-by-default
+- [canon/CANONICAL_COMPOSITION_ENFORCEMENT.md](./canon/CANONICAL_COMPOSITION_ENFORCEMENT.md) - Canonical composition DEV enforcement
+- [canon/CLASSNAME_POLICY_PLAN.md](./canon/CLASSNAME_POLICY_PLAN.md) - className policy plan (zones + escape hatch)
 - [reference/TYPING_STANDARD.md](./reference/TYPING_STANDARD.md) - Typing standards
 - [reference/MOTION_ANIMATIONS_GUIDE.md](./reference/MOTION_ANIMATIONS_GUIDE.md) - Motion animations working guide (implementation, troubleshooting, common pitfalls)
 - [reference/GRADIENT_EXCEPTIONS.md](./reference/GRADIENT_EXCEPTIONS.md) - Gradient exceptions documentation

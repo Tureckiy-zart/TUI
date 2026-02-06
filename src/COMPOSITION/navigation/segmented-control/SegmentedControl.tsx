@@ -79,6 +79,7 @@
 
 import * as React from "react";
 
+import { safeFallback } from "@/COMPOSITION/utils/runtime-guards";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MOTION_TOKENS } from "@/FOUNDATION/tokens/components/motion";
@@ -234,11 +235,21 @@ interface SegmentedControlContextValue {
 const SegmentedControlContext = React.createContext<SegmentedControlContextValue | undefined>(
   undefined,
 );
+const SEGMENTED_CONTROL_FALLBACK: SegmentedControlContextValue = {
+  value: "",
+  onValueChange: () => {},
+  name: "",
+  orientation: "horizontal",
+  size: "md",
+};
 
 function useSegmentedControlContext() {
   const context = React.useContext(SegmentedControlContext);
   if (!context) {
-    throw new Error("SegmentedControl components must be used within SegmentedControl.Root");
+    return safeFallback(
+      SEGMENTED_CONTROL_FALLBACK,
+      "SegmentedControl components must be used within SegmentedControl.Root",
+    );
   }
   return context;
 }

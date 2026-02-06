@@ -45,6 +45,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import * as React from "react";
 
+import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
 import { getBaseValue, getSpacingPx } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -112,10 +113,15 @@ export interface SelectTriggerProps extends Omit<
    * Invalid state - uses aria-invalid
    */
   "aria-invalid"?: boolean;
+  asChild?: boolean;
+  children?: React.ReactNode;
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ "aria-invalid": ariaInvalid, ...props }, ref) => {
+  ({ "aria-invalid": ariaInvalid, asChild, children, ...props }, ref) => {
+    const resolvedAsChild = resolveAsChild(asChild, children);
+    warnIfExplicitAsChildFalse("Select.Trigger", asChild, children);
+
     return (
       <SelectPrimitive.Trigger
         ref={ref}
@@ -127,8 +133,11 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
           "data-[state=open]:border-[hsl(var(--tm-focus-ring))]",
           "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
         )}
+        asChild={resolvedAsChild}
         {...props}
-      />
+      >
+        {children}
+      </SelectPrimitive.Trigger>
     );
   },
 );

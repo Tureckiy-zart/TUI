@@ -73,6 +73,7 @@ import * as React from "react";
 
 import { Box } from "@/COMPOSITION/layout";
 import { Popover, PopoverContent, PopoverTrigger } from "@/COMPOSITION/overlays/Popover";
+import { safeFallback } from "@/COMPOSITION/utils/runtime-guards";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { INPUT_TOKENS } from "@/FOUNDATION/tokens/components/input";
 import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
@@ -131,11 +132,27 @@ interface ComboboxContextValue {
 }
 
 const ComboboxContext = React.createContext<ComboboxContextValue | null>(null);
+const COMBOBOX_FALLBACK: ComboboxContextValue = {
+  value: "",
+  multiple: false,
+  onValueChange: undefined,
+  inputValue: "",
+  setInputValue: () => {},
+  open: false,
+  setOpen: () => {},
+  highlightedIndex: -1,
+  setHighlightedIndex: () => {},
+  filteredOptions: [],
+  setFilteredOptions: () => {},
+  allOptions: [],
+  setAllOptions: () => {},
+  size: "md",
+};
 
 function useComboboxContext() {
   const context = React.useContext(ComboboxContext);
   if (!context) {
-    throw new Error("Combobox components must be used within ComboboxRoot");
+    return safeFallback(COMBOBOX_FALLBACK, "Combobox components must be used within ComboboxRoot");
   }
   return context;
 }

@@ -62,6 +62,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 
+import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
 import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -78,7 +79,27 @@ const TooltipProvider = TooltipPrimitive.Provider;
 
 const Tooltip = TooltipPrimitive.Root;
 
-const TooltipTrigger = TooltipPrimitive.Trigger;
+export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<
+  typeof TooltipPrimitive.Trigger
+> {
+  asChild?: boolean;
+  children?: React.ReactNode;
+}
+
+const TooltipTrigger = React.forwardRef<
+  React.ComponentRef<typeof TooltipPrimitive.Trigger>,
+  TooltipTriggerProps
+>(({ asChild, children, ...props }, ref) => {
+  const resolvedAsChild = resolveAsChild(asChild, children);
+  warnIfExplicitAsChildFalse("Tooltip.Trigger", asChild, children);
+
+  return (
+    <TooltipPrimitive.Trigger ref={ref} asChild={resolvedAsChild} {...props}>
+      {children}
+    </TooltipPrimitive.Trigger>
+  );
+});
+TooltipTrigger.displayName = TooltipPrimitive.Trigger.displayName;
 
 /**
  * Tooltip variant type - Explicit union (not derived from CVA)

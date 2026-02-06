@@ -124,6 +124,7 @@ import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import * as React from "react";
 
+import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -283,6 +284,7 @@ export interface ContextMenuTriggerProps extends Omit<
   "children"
 > {
   children?: React.ReactNode;
+  asChild?: boolean;
 }
 
 /**
@@ -290,10 +292,22 @@ export interface ContextMenuTriggerProps extends Omit<
  * Radix handles right-click behavior automatically
  */
 const ContextMenuTrigger = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Trigger>,
+  React.ComponentRef<typeof ContextMenuPrimitive.Trigger>,
   ContextMenuTriggerProps
->(({ className, ...props }, ref) => {
-  return <ContextMenuPrimitive.Trigger ref={ref} className={cn(className)} {...props} />;
+>(({ className, asChild, children, ...props }, ref) => {
+  const resolvedAsChild = resolveAsChild(asChild, children);
+  warnIfExplicitAsChildFalse("ContextMenu.Trigger", asChild, children);
+
+  return (
+    <ContextMenuPrimitive.Trigger
+      ref={ref}
+      className={cn(className)}
+      asChild={resolvedAsChild}
+      {...props}
+    >
+      {children}
+    </ContextMenuPrimitive.Trigger>
+  );
 });
 ContextMenuTrigger.displayName = ContextMenuPrimitive.Trigger.displayName;
 
@@ -332,7 +346,7 @@ export interface ContextMenuContentProps extends Omit<
  * Wrapper around Radix ContextMenu Content with token-based styling.
  */
 const ContextMenuContent = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Content>,
+  React.ComponentRef<typeof ContextMenuPrimitive.Content>,
   ContextMenuContentProps
 >(({ className, size = "md", width, padding, radius, surface, ...props }, ref) => {
   const baseSize = getBaseValue(size) ?? "md";
@@ -419,7 +433,7 @@ export interface ContextMenuItemProps extends Omit<
  * Wrapper around Radix ContextMenu Item with token-based styling.
  */
 const ContextMenuItem = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Item>,
+  React.ComponentRef<typeof ContextMenuPrimitive.Item>,
   ContextMenuItemProps
 >(({ className, size, tone = "neutral", gap, inset, ...props }, ref) => {
   const baseSize = useContextMenuSize(size);
@@ -474,7 +488,7 @@ export interface ContextMenuCheckboxItemProps extends Omit<
  * Wrapper around Radix ContextMenu CheckboxItem with token-based styling.
  */
 const ContextMenuCheckboxItem = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
+  React.ComponentRef<typeof ContextMenuPrimitive.CheckboxItem>,
   ContextMenuCheckboxItemProps
 >(({ className, size, tone = "neutral", gap, children, ...props }, ref) => {
   const baseSize = useContextMenuSize(size);
@@ -523,7 +537,7 @@ export interface ContextMenuRadioGroupProps extends Omit<
  * Wrapper around Radix ContextMenu RadioGroup.
  */
 const ContextMenuRadioGroup = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.RadioGroup>,
+  React.ComponentRef<typeof ContextMenuPrimitive.RadioGroup>,
   ContextMenuRadioGroupProps
 >(({ className, ...props }, ref) => {
   return <ContextMenuPrimitive.RadioGroup ref={ref} className={cn(className)} {...props} />;
@@ -558,7 +572,7 @@ export interface ContextMenuRadioItemProps extends Omit<
  * Wrapper around Radix ContextMenu RadioItem with token-based styling.
  */
 const ContextMenuRadioItem = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.RadioItem>,
+  React.ComponentRef<typeof ContextMenuPrimitive.RadioItem>,
   ContextMenuRadioItemProps
 >(({ className, size, tone = "neutral", gap, children, ...props }, ref) => {
   const baseSize = useContextMenuSize(size);
@@ -606,7 +620,7 @@ export interface ContextMenuSeparatorProps extends React.ComponentPropsWithoutRe
  * Wrapper around Radix ContextMenu Separator with token-based styling.
  */
 const ContextMenuSeparator = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Separator>,
+  React.ComponentRef<typeof ContextMenuPrimitive.Separator>,
   ContextMenuSeparatorProps
 >(({ className, ...props }, ref) => {
   return (
@@ -642,7 +656,7 @@ export interface ContextMenuLabelProps extends Omit<
  * Wrapper around Radix ContextMenu Label with token-based styling.
  */
 const ContextMenuLabel = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Label>,
+  React.ComponentRef<typeof ContextMenuPrimitive.Label>,
   ContextMenuLabelProps
 >(({ className, padding, ...props }, ref) => {
   const basePadding = padding ? getBaseValue(padding) : undefined;
@@ -712,7 +726,7 @@ export interface ContextMenuSubTriggerProps extends Omit<
  * Wrapper around Radix ContextMenu SubTrigger with token-based styling.
  */
 const ContextMenuSubTrigger = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,
+  React.ComponentRef<typeof ContextMenuPrimitive.SubTrigger>,
   ContextMenuSubTriggerProps
 >(({ className, size, tone = "neutral", gap, children, ...props }, ref) => {
   const baseSize = useContextMenuSize(size);
@@ -776,7 +790,7 @@ export interface ContextMenuSubContentProps extends Omit<
  * Wrapper around Radix ContextMenu SubContent with token-based styling.
  */
 const ContextMenuSubContent = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
+  React.ComponentRef<typeof ContextMenuPrimitive.SubContent>,
   ContextMenuSubContentProps
 >(({ className, size, width, padding, radius, surface, ...props }, ref) => {
   // SubContent can inherit from parent Content or use its own size

@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-29
 **Status:** ✅ Complete  
-**Total Canonical Documents:** 69 (55 existing + 9 Closed System v2 + 5 Extension Layer canonical documents)  
+**Total Canonical Documents:** 73 (59 existing + 9 Closed System v2 + 5 Extension Layer canonical documents)  
 **Post-Archive State:** This inventory reflects the documentation state after archive restructure (DOCS_ARCHIVE_RESTRUCTURE_001) and Library Maturity Growth System implementation
 
 ---
@@ -22,7 +22,7 @@ This document provides a complete inventory of canonical documentation files. Th
 
 ### Total Count
 
-**66 canonical documents** are currently present in `docs/`.
+**73 canonical documents** are currently present in `docs/`.
 
 ### Post-Archive State
 
@@ -79,7 +79,7 @@ Foundation Authority Contracts define immutable rules for the design system. All
 |------|-------------|--------|
 | `docs/architecture/AUTHORITY_NAVIGATION.md` | Navigation map for Authority system - mental model | **ACTIVE** |
 
-**Total:** 1 file
+**Total:** 2 files
 
 ---
 
@@ -225,8 +225,12 @@ These documents provide API and integration references.
 | `docs/reference/INTEGRATION_GUIDE.md` | UI integration guide - Integration reference | **ACTIVE** |
 | `docs/reference/THEMEPARAMS_CSP_AND_ESLINT_ENV.md` | ThemeParams CSP nonce + ESLint source-root detection - Tooling/infrastructure reference | **ACTIVE** |
 | `docs/reference/COMPONENT_EXAMPLES.md` | Extension component examples and patterns - Reference examples for Extension components | **ACTIVE** |
+| `docs/canon/RUNTIME_GUARDS_CANON.md` | Runtime guards canon - TS is not source of truth; DEV-only runtime guards | **ACTIVE** |
+| `docs/canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md` | Trigger asChild safe-by-default - Overlay trigger composition rules | **ACTIVE** |
+| `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md` | Canonical composition enforcement - DEV warnings in control points | **ACTIVE** |
+| `docs/canon/CLASSNAME_POLICY_PLAN.md` | className policy plan - Zones and escape hatch (policy only) | **ACTIVE** |
 
-**Total:** 11 files
+**Total:** 15 files
 
 ---
 
@@ -330,6 +334,10 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/reference/COMPONENTS_INVENTORY.md` | Reference | Reference (ACTIVE) | Components inventory |
 | `docs/reference/INTEGRATION_GUIDE.md` | Reference | Reference (ACTIVE) | Integration guide |
 | `docs/reference/COMPONENT_EXAMPLES.md` | Reference | Reference (ACTIVE) | Component examples |
+| `docs/canon/RUNTIME_GUARDS_CANON.md` | Reference | Reference (ACTIVE) | Runtime guards canon (TS ≠ source of truth) |
+| `docs/canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md` | Reference | Reference (ACTIVE) | Trigger asChild safe-by-default |
+| `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md` | Reference | Reference (ACTIVE) | Canonical composition DEV enforcement |
+| `docs/canon/CLASSNAME_POLICY_PLAN.md` | Reference | Reference (ACTIVE) | className policy plan (zones + escape hatch) |
 | `docs/reference/TYPING_STANDARD.md` | Structure & Standards | Reference (ACTIVE) | Typing standard |
 | `docs/reference/GRADIENT_EXCEPTIONS.md` | UI Exceptions | Reference (ACTIVE) | Gradient exceptions |
 | `docs/CI_CD_OVERVIEW.md` | CI/CD | Reference (ACTIVE) | CI/CD overview |
@@ -351,7 +359,7 @@ These documents serve as entry points, track progress, or document the documenta
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_E_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase E: Lock declaration |
 | `docs/architecture/closed-system/CLOSED_SYSTEM_V2_PHASE_F_LOCK.md` | Closed System v2 | Canonical (CANONICAL) | Phase F: Lock declaration |
 
-**Total:** 69 files (55 existing + 9 Closed System v2 + 5 Extension Layer / Phase L documents)
+**Total:** 73 files (59 existing + 9 Closed System v2 + 5 Extension Layer / Phase L documents)
 
 ---
 
@@ -376,6 +384,6 @@ These documents serve as entry points, track progress, or document the documenta
 
 ---
 
-**Last Updated:** 2026-01-26  
+**Last Updated:** 2026-02-06  
 **Inventory Version:** 1.3  
 **Related Tasks:** DOCS_ARCHIVE_RESTRUCTURE_001, TUNG_LIBRARY_MATURITY_PLAN_06, TUNG_SYSTEM_INTEGRATION, TUI_CSV2_CANONICALIZATION_011

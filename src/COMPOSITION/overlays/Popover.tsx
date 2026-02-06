@@ -54,6 +54,7 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as React from "react";
 
+import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
@@ -63,7 +64,27 @@ import { resolveAlignOffset, resolveSideOffset } from "./utils/offset-resolution
 
 const Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Trigger
+> {
+  asChild?: boolean;
+  children?: React.ReactNode;
+}
+
+const PopoverTrigger = React.forwardRef<
+  React.ComponentRef<typeof PopoverPrimitive.Trigger>,
+  PopoverTriggerProps
+>(({ asChild, children, ...props }, ref) => {
+  const resolvedAsChild = resolveAsChild(asChild, children);
+  warnIfExplicitAsChildFalse("Popover.Trigger", asChild, children);
+
+  return (
+    <PopoverPrimitive.Trigger ref={ref} asChild={resolvedAsChild} {...props}>
+      {children}
+    </PopoverPrimitive.Trigger>
+  );
+});
+PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
 
 const PopoverAnchor = PopoverPrimitive.Anchor;
 

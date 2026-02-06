@@ -16,6 +16,7 @@ import { Divider } from "@/COMPOSITION/layout/Divider/Divider";
 import { Navbar } from "@/COMPOSITION/layout/Navbar/Navbar";
 import { StickyBar, type StickyBarTone } from "@/COMPOSITION/layout/StickyBar/StickyBar";
 import { SurfaceElevation } from "@/COMPOSITION/surface-elevation/SurfaceElevation/SurfaceElevation";
+import { devWarnOnce, isDev } from "@/COMPOSITION/utils/runtime-guards";
 
 // ----------------------------------------------------------------------------
 // Slot Sub-components
@@ -106,11 +107,12 @@ export const AppHeader: AppHeaderComponent = ({
   children,
 }: AppHeaderProps) => {
   if (
-    process.env.NODE_ENV === "development" &&
+    isDev() &&
     position === "static" &&
     (elevation === "auto" || divider === "auto" || appearance === "solid-to-glass")
   ) {
-    console.warn(
+    devWarnOnce(
+      "AppHeader:sticky-required",
       "[AppHeader] 'auto' elevation/divider and 'solid-to-glass' appearance require position='sticky' to react to scroll.",
     );
   }
@@ -180,8 +182,9 @@ export const AppHeader: AppHeaderComponent = ({
       actionsCount += 1;
       return;
     }
-    if (process.env.NODE_ENV === "development") {
-      console.warn(
+    if (isDev()) {
+      devWarnOnce(
+        `AppHeader:invalid-child:${typeof type === "string" ? type : (type as any).displayName || "Unknown"}`,
         `[AppHeader] Invalid child detected: <${
           typeof type === "string" ? type : (type as any).displayName || "Unknown"
         } />. Only AppHeader.Brand, AppHeader.Nav, and AppHeader.Actions are allowed.`,
@@ -191,10 +194,22 @@ export const AppHeader: AppHeaderComponent = ({
 
   React.Children.forEach(children, consumeChild);
 
-  if (process.env.NODE_ENV === "development") {
-    if (brandCount > 1) console.warn("[AppHeader] Multiple AppHeader.Brand slots detected.");
-    if (navCount > 1) console.warn("[AppHeader] Multiple AppHeader.Nav slots detected.");
-    if (actionsCount > 1) console.warn("[AppHeader] Multiple AppHeader.Actions slots detected.");
+  if (isDev()) {
+    if (brandCount > 1) {
+      devWarnOnce(
+        "AppHeader:multiple-brand",
+        "[AppHeader] Multiple AppHeader.Brand slots detected.",
+      );
+    }
+    if (navCount > 1) {
+      devWarnOnce("AppHeader:multiple-nav", "[AppHeader] Multiple AppHeader.Nav slots detected.");
+    }
+    if (actionsCount > 1) {
+      devWarnOnce(
+        "AppHeader:multiple-actions",
+        "[AppHeader] Multiple AppHeader.Actions slots detected.",
+      );
+    }
   }
 
   const navbarContent = <Navbar left={brandNode} center={navNode} right={actionsNode} />;
@@ -227,7 +242,7 @@ export const AppHeader: AppHeaderComponent = ({
 
   return (
     <SurfaceElevation.Root elevation="none">
-      <Box as="header" bg="background">
+      <Box as="header" bg="background" data-semantic-guard="allow">
         {navbarContent}
         {showDivider && <Divider tone="border" />}
       </Box>
