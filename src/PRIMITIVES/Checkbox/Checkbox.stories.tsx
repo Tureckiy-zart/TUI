@@ -1,7 +1,7 @@
 "use client";
 
 import { IconCheck } from "@/icons";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
 import { Checkbox } from "./Checkbox";

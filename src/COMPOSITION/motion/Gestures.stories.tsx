@@ -4,7 +4,7 @@
  * Demonstrates swipe gesture detection for dismissible components.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { X } from "lucide-react";
 import * as React from "react";
 

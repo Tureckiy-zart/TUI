@@ -1,7 +1,7 @@
 ﻿"use client";
 import { Card } from "@/COMPOSITION/layout/Card";
 import { Stack } from "@/COMPOSITION/layout/Stack";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Link } from "./Link";
 
 /**

@@ -1,6 +1,6 @@
 ﻿import { Button } from "@/PRIMITIVES/Button";
 import { Link } from "@/PRIMITIVES/Link";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Container } from "../Container";
 import { ContentShell } from "../ContentShell/ContentShell";
 import { PageHeader } from "../PageHeader";

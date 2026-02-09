@@ -4,7 +4,7 @@
  * Comprehensive stories demonstrating all TAS features, presets, and accessibility.
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useRef, useState } from "react";
 
 import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";

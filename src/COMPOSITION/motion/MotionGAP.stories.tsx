@@ -7,7 +7,7 @@
  * Reference: docs/architecture/MOTION_AUTHORITY.md#motion-gap
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import { Box, Container, Section, Stack } from "@/COMPOSITION/layout";

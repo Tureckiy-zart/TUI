@@ -5,7 +5,7 @@
  * This story serves as the canonical visual checker for interactivity feedback.
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Slider } from "@/COMPOSITION/controls/Slider";
 import { Box, Flex, Grid, Stack } from "@/COMPOSITION/layout";

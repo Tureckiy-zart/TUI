@@ -7,12 +7,12 @@
  * Reference: docs/architecture/FOCUS_AUTHORITY.md (Rules F-TRAP-*, F-REST-*)
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useRef, useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
-import { Dialog } from "@/COMPOSITION/overlays/Dialog";
 import { Drawer } from "@/COMPOSITION/overlays";
+import { Dialog } from "@/COMPOSITION/overlays/Dialog";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { PopoverWrapper } from "@/COMPOSITION/overlays/Popover";
 import { Button } from "@/PRIMITIVES/Button";

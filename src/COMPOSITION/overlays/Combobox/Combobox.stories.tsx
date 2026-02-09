@@ -1,8 +1,8 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
-import { Combobox } from "./Combobox";
 import type { ComboboxOption } from "./Combobox";
+import { Combobox } from "./Combobox";
 
 /**
  * # Combobox

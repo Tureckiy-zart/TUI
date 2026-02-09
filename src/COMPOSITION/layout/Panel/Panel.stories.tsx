@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Text } from "@/PRIMITIVES/Text";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { Stack } from "../Stack";
 import { Panel } from "./Panel";
 

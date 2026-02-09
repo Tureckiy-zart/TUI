@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Grid } from "./Grid";
 
 // Helper style for card items with proper text color

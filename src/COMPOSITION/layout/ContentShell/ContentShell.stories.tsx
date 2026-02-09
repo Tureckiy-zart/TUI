@@ -1,5 +1,5 @@
 ﻿import { Button } from "@/PRIMITIVES/Button";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Container } from "../Container";
 import { PageHeader } from "../PageHeader";
 import { Section } from "../Section";

@@ -6,7 +6,7 @@
  * Demonstrates Chip component in all its modes and use cases.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Chip } from "./Chip";
 

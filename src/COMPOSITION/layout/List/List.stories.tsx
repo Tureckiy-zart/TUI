@@ -1,9 +1,9 @@
 ﻿"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { List } from "./List";
 import { ListItem } from "../ListItem/ListItem";
+import { List } from "./List";
 
 /**
  * List Storybook

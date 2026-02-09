@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { ArtistCard } from "./ArtistCard";
 import type { ArtistCardSize, ArtistCardVariant } from "./ArtistCard.types";

@@ -8,11 +8,11 @@
  * Focus mechanics: docs/architecture/FOCUS_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
-import { Box, Stack } from "@/COMPOSITION/layout";
 import { Select } from "@/COMPOSITION/controls/Select";
+import { Box, Stack } from "@/COMPOSITION/layout";
 import { Tabs } from "@/COMPOSITION/navigation/tabs";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Radio, RadioGroup } from "@/PRIMITIVES/Radio";

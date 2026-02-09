@@ -3,23 +3,22 @@ import { Badge } from "@/PRIMITIVES/Badge";
 import { Button } from "@/PRIMITIVES/Button";
 import { Input } from "@/PRIMITIVES/Input";
 import { Label } from "@/PRIMITIVES/Label";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AlertCircle, HelpCircle, Info } from "lucide-react";
-import { TooltipProvider, TooltipWrapper } from "./Tooltip";
+import { TooltipWrapper } from "./Tooltip";
 
 const meta: Meta<typeof TooltipWrapper> = {
   title: "Composition / Overlays / Tooltip",
   component: TooltipWrapper,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "TooltipWrapper wires TooltipProvider internally. Tooltip Root is safe-by-default; only add TooltipProvider when you need a shared provider scope.",
+      },
+    },
   },
-  decorators: [
-    (Story) => (
-      <TooltipProvider>
-        <Story />
-      </TooltipProvider>
-    ),
-  ],
 };
 
 export default meta;

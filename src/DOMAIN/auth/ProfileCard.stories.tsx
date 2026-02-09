@@ -1,9 +1,9 @@
 "use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { ProfileCard } from "./ProfileCard";
 import type { ProfileCardSize, ProfileCardVariant } from "./ProfileCard";
+import { ProfileCard } from "./ProfileCard";
 
 const meta: Meta<typeof ProfileCard> = {
   title: "Domain / Auth / ProfileCard",

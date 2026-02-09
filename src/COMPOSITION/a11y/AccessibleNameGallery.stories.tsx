@@ -7,7 +7,7 @@
  * Reference: docs/architecture/A11Y_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
 import { Field } from "@/PRIMITIVES/Field";
