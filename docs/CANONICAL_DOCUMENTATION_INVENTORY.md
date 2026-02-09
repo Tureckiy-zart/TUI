@@ -213,6 +213,9 @@ These documents provide API and integration references.
 
 | Path | Description | Status |
 |------|-------------|--------|
+| `docs/canon/CLASSNAME_INLINESTYLE_GOVERNANCE.md` | className / inline style governance - Canonical outcome and constraints | **ACTIVE** |
+| `docs/canon/BOX_CONTRACT.md` | Box contract - Escape hatch boundaries for className and inline style | **ACTIVE** |
+| `docs/canon/RADIX_PROVIDER_EXCEPTIONS.md` | Radix Provider exceptions - Tooltip as the only Provider-required component | **ACTIVE** |
 | `docs/reference/DX_OVERVIEW.md` | Developer experience - Entry point for usage and how-to (Foundation, Layout, Typography, Token guides) | **ACTIVE** |
 | `docs/reference/FOUNDATION_USAGE_GUIDE.md` | Foundation usage guide - How to use Foundation components without bypasses | **ACTIVE** |
 | `docs/reference/LAYOUT_USAGE_GUIDE.md` | Layout usage guide - Grid, Section, Stack, Row usage instead of raw flex/grid | **ACTIVE** |
@@ -230,7 +233,7 @@ These documents provide API and integration references.
 | `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md` | Canonical composition enforcement - DEV warnings in control points | **ACTIVE** |
 | `docs/canon/CLASSNAME_POLICY_PLAN.md` | className policy plan - Zones and escape hatch (policy only) | **ACTIVE** |
 
-**Total:** 15 files
+**Total:** 16 files
 
 ---
 
@@ -283,6 +286,9 @@ These documents serve as entry points, track progress, or document the documenta
 
 | File Path | Category | Status | Notes |
 |-----------|----------|--------|-------|
+| `docs/canon/CLASSNAME_INLINESTYLE_GOVERNANCE.md` | Reference | Reference (ACTIVE) | className/inline style governance - canonical |
+| `docs/canon/BOX_CONTRACT.md` | Reference | Reference (ACTIVE) | Box contract - escape hatch |
+| `docs/canon/RADIX_PROVIDER_EXCEPTIONS.md` | Reference | Reference (ACTIVE) | Radix Provider exceptions - Tooltip only |
 | `docs/ARCHITECTURE_CONTEXT.md` | Primary Entry Point | Canonical (IMMUTABLE) | Single source of truth |
 | `docs/architecture/FOUNDATION_LOCK.md` | Primary Entry Point | Authority (LOCKED) | Foundation lock status |
 | `docs/PROJECT_ORIENTATION.md` | Primary Entry Point | Canonical (ACTIVE) | Project orientation |

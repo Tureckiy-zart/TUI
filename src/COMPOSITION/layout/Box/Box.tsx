@@ -100,6 +100,7 @@
 import * as React from "react";
 
 import { warnOnForbiddenSemanticElement } from "@/COMPOSITION/utils/runtime-guards";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import {
   getBaseValue as getBaseValueUtil,
   getColorCSSVar,
@@ -392,6 +393,14 @@ const BoxComponent = React.forwardRef<HTMLElement, BoxProps>(
         ["nav", "header", "footer", "main"],
         semanticMessage,
       );
+    }
+    if (process.env.NODE_ENV !== "production") {
+      trackClassStyleUsage({
+        component: "Box",
+        zone: "Composition",
+        className,
+        style,
+      });
     }
 
     // Get base values for CSS variables

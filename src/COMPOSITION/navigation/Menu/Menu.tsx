@@ -103,6 +103,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as React from "react";
 
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { MENU_TOKENS } from "@/FOUNDATION/tokens/components/menu";
@@ -225,6 +226,14 @@ const MenuTrigger = React.forwardRef<
 >(({ className, asChild, children, ...props }, ref) => {
   const resolvedAsChild = resolveAsChild(asChild, children);
   warnIfExplicitAsChildFalse("Menu.Trigger", asChild, children);
+  if (process.env.NODE_ENV !== "production") {
+    trackClassStyleUsage({
+      component: "Menu.Trigger",
+      zone: "Composition",
+      className,
+      style: (props as { style?: unknown }).style,
+    });
+  }
 
   return (
     <DropdownMenuPrimitive.Trigger

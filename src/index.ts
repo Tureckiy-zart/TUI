@@ -260,7 +260,7 @@ export type { ResponsiveAspectRatio, ResponsiveDelay } from "./FOUNDATION/tokens
 export { Button, type ButtonProps } from "./PRIMITIVES/Button";
 
 // ButtonGroup component (composition component for grouping buttons)
-export { ButtonGroup, type ButtonGroupProps,useButtonGroupContext } from "./COMPOSITION/actions";
+export { ButtonGroup, type ButtonGroupProps, useButtonGroupContext } from "./COMPOSITION/actions";
 
 // IconButton component (thin wrapper over Button with iconOnly={true})
 export { IconButton, type IconButtonProps } from "./PRIMITIVES/IconButton";
@@ -319,7 +319,7 @@ export {
 } from "./COMPOSITION/overlays/Chip";
 
 // Typography components (CVA-based, token-driven)
-export { Heading, type HeadingProps,headingVariants } from "./PRIMITIVES/Heading";
+export { Heading, type HeadingProps, headingVariants } from "./PRIMITIVES/Heading";
 
 // Select component (Radix-based, token-driven)
 export {
@@ -480,7 +480,7 @@ export {
   type SliderSize,
   type SliderVariant,
 } from "./COMPOSITION/controls/Slider";
-export { Checkbox, type CheckboxProps,checkboxVariants } from "./PRIMITIVES/Checkbox";
+export { Checkbox, type CheckboxProps, checkboxVariants } from "./PRIMITIVES/Checkbox";
 export { ErrorText, type ErrorTextProps } from "./PRIMITIVES/ErrorText";
 export {
   Field,
@@ -491,7 +491,7 @@ export {
   type FieldProps,
 } from "./PRIMITIVES/Field";
 export { FormGroup, type FormGroupProps } from "./PRIMITIVES/FormGroup";
-export { Input, type InputProps,inputVariants } from "./PRIMITIVES/Input";
+export { Input, type InputProps, inputVariants } from "./PRIMITIVES/Input";
 export { Label, type LabelProps } from "./PRIMITIVES/Label";
 export {
   Radio,
@@ -501,7 +501,7 @@ export {
   radioVariants,
 } from "./PRIMITIVES/Radio";
 export { Switch, type SwitchProps } from "./PRIMITIVES/Switch";
-export { Textarea, type TextareaProps,textareaVariants } from "./PRIMITIVES/Textarea";
+export { Textarea, type TextareaProps, textareaVariants } from "./PRIMITIVES/Textarea";
 
 // Skeleton component (token-driven)
 export {
@@ -966,7 +966,7 @@ export {
 // ICON SYSTEM
 // ============================================================================
 // Icon component and icon registry
-export { Icon, type IconProps,iconVariants } from "./PRIMITIVES/Icon";
+export { Icon, type IconProps, iconVariants } from "./PRIMITIVES/Icon";
 
 // Icon registry exports (tree-shakeable)
 export {

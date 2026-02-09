@@ -102,6 +102,7 @@ import * as React from "react";
 
 import { VisuallyHidden } from "@/COMPOSITION/a11y/VisuallyHidden";
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -277,6 +278,14 @@ const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>(
   ({ className, asChild, children, ...props }, ref) => {
     const resolvedAsChild = resolveAsChild(asChild, children);
     warnIfExplicitAsChildFalse("Modal.Trigger", asChild, children);
+    if (process.env.NODE_ENV !== "production") {
+      trackClassStyleUsage({
+        component: "Modal.Trigger",
+        zone: "Composition",
+        className,
+        style: (props as { style?: unknown }).style,
+      });
+    }
 
     return (
       <DialogPrimitive.Trigger ref={ref} className={className} asChild={resolvedAsChild} {...props}>

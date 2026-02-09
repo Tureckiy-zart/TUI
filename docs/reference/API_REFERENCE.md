@@ -133,6 +133,7 @@ Component-level types and variant constants are also exported; see `src/index.ts
 - Modal utilities: `ModalContext`, `ModalProvider`, `useModalContext`, `withModal`
 - Portals & backdrops: `Portal`, `Backdrop`
 - Popovers & tooltips: `Popover` (and subcomponents), `Tooltip` (and subcomponents)
+Tooltip Root is safe-by-default and wires a provider internally; use `TooltipProvider` only when you need a shared provider scope.
 - Dropdowns: `Dropdown` (and subcomponents)
 - Menus: `ContextMenu` (and subcomponents), `HoverCard` (and subcomponents)
 - Combobox: `Combobox` (and subcomponents)

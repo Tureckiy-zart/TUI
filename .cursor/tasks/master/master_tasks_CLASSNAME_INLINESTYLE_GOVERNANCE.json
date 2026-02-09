@@ -1,0 +1,484 @@
+{
+  "id": "TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001",
+  "version": "1.0.0",
+  "name": "Tenerife UI — className & inline style governance (DEV-warn, zonal model, no API break)",
+  "type": "master",
+  "status": "in_progress",
+  "priority": "critical",
+  "progress": 21,
+  "assigned_to": "Codex",
+
+  "objective": "Закрыть все вопросы по className и inline styles без ломки API: ввести зональную модель (Foundation/Composition/Domain), описать каноническую политику допустимости, выполнить инвентаризацию фактического использования, и добавить строго DEV-only warnings в ограниченных точках реального контроля. Никаких PROD-изменений поведения. Никаких запретов className. Никаких рефакторов без отдельной задачи.",
+
+  "impact": [
+    "Снижение архитектурных обходов токенов и Foundation-примитивов",
+    "Прозрачная, управляемая свобода для пользователей библиотеки",
+    "Предсказуемые DEV-сигналы (warnings) без PROD-побочек",
+    "Уменьшение DX-хаоса: где можно className/style, где нельзя",
+    "База для будущих deprecation и постепенной миграции без ломки"
+  ],
+
+  "success_metrics": [
+    "Есть каноническая политика className и inline style (docs/canon), согласованная с существующим каноном",
+    "PUBLIC_EXPORTS_INVENTORY размечён по зонам (Foundation/Composition/Domain) без изменения публичного API",
+    "Есть объективные отчёты использования className и style по репозиторию",
+    "DEV-only warnings добавлены только в точках реального контроля и не меняют PROD-поведение",
+    "Нет новых runtime-guards вне допустимых зон (as/asChild/slots) и нет auto-DOM replacement"
+  ],
+
+  "risks": [
+    "Слишком широкие предупреждения создадут шум и раздражение",
+    "Ошибочная классификация зон сломает доверие к документации",
+    "Неправильная формулировка политики будет выглядеть как скрытый запрет className",
+    "Попытка «улучшить» визуал/компоненты может случайно зацепить закрытый канон runtime-safety"
+  ],
+
+  "rollback_strategy": [
+    "Все изменения вести отдельными коммитами по задачам, чтобы можно было откатить точечно",
+    "DEV-warnings реализовывать как минимальные добавки; при необходимости понизить до doc-only без кода",
+    "Никаких изменений runtime поведения в PROD — это сохраняет обратную совместимость",
+    "Если политика вызывает спор — фиксируем как 'draft' без enforcement и откатываем предупреждения"
+  ],
+
+  "timeline": {
+    "week_1": "Инвентаризация + зональная модель + каноническая политика (doc-first)",
+    "week_2": "DEV-only предупреждения (минимальный набор, только точки контроля) + финальная консолидация"
+  },
+
+  "dependencies": [
+    "Канон runtime-safety и canonical composition enforcement уже закрыт и НЕ трогаем",
+    "Существуют канонические документы: docs/canon/RUNTIME_GUARDS_CANON.md, TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md, CANONICAL_COMPOSITION_ENFORCEMENT.md, CLASSNAME_POLICY_PLAN.md, PUBLIC_EXPORTS_INVENTORY.md",
+    "Нельзя вводить запреты className или inline style — только управляемая политика и DEV-warn там, где есть контроль"
+  ],
+
+  "out_of_scope": [
+    "Запрещать className (eslint-error, throw, build fail) — запрещено в рамках этой задачи",
+    "Любые PROD-only проверки, логика, side-effects — запрещено",
+    "Любой рефактор существующих компонентов/страниц без отдельной задачи — запрещено",
+    "Автоматическая замена DOM, codemods, автопереписывание className → tokens — запрещено",
+    "Расширение TS-типов ради семантики — запрещено"
+  ],
+
+  "labels": ["tui", "governance", "classname", "inline-style", "dev-warn", "no-breaking"],
+
+  "blocks": [
+    {
+      "id": "BLOCK_01",
+      "name": "Freeze & Orientation (Doc-first baseline)",
+      "description": "Зафиксировать baseline и правила выполнения, чтобы Codex не трогал закрытый канон и не делал скрытых изменений.",
+      "tasks": [
+        {
+          "id": "T01",
+          "name": "Baseline Snapshot + Scope Lock",
+          "description": "Создать snapshot текущего состояния, перечислить закрытый канон (что НЕ трогаем), и определить boundaries для этой мастер-задачи. Никаких изменений кода в этом таске.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_01/T01.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "done",
+          "progress": 100,
+          "comment": "Выполнено; baseline и scope lock зафиксированы в каноническом документе governance.",
+          "updated_at": "2026-02-09",
+          "issues": [],
+          "labels": ["baseline", "scope", "doc-first"],
+
+          "completion_criteria": [
+            "Создан отчёт с перечнем закрытого канона и границами задачи",
+            "Список файлов/зон, которые нельзя изменять, указан явно"
+          ],
+          "acceptance_criteria": [
+            "В отчёте есть раздел 'LOCKED: do not touch' с перечислением канонических документов и принципов",
+            "Нет ни одного изменения в кодовой базе в рамках T01",
+            "Отчёт сохранён в указанной папке отчётов"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_02",
+      "name": "Zonal Model (Foundation / Composition / Domain)",
+      "description": "Декларативно размечаем публичные экспорты по зонам. Это база для политики className/style.",
+      "tasks": [
+        {
+          "id": "T02",
+          "name": "Define Zonal Taxonomy (canonical definitions)",
+          "description": "Определить зональную модель (Foundation/Composition/Domain): что означает каждая зона и какие ожидания по стилям, включая className и inline style. Никаких enforcement, только определения.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_02/T02.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "done",
+          "progress": 100,
+          "comment": "Выполнено; зональная модель и ожидания зафиксированы в governance-каноне.",
+          "updated_at": "2026-02-09",
+          "issues": [],
+          "labels": ["canon", "zones"],
+
+          "completion_criteria": [
+            "Подготовлен канонический текст зональных определений",
+            "Указана связь зон с className и inline style (допустимость)"
+          ],
+          "acceptance_criteria": [
+            "Текст не вводит запретов и не меняет канон runtime-safety",
+            "Есть явные примеры: допустимо/нежелательно/опасно",
+            "Файл(ы) создан(ы) или обновлён(ы) в docs/canon (реально, не в отчёте)",
+            "Есть отчёт о выполнении в папке отчётов"
+          ]
+        },
+        {
+          "id": "T03",
+          "name": "Tag PUBLIC_EXPORTS_INVENTORY by Zone",
+          "description": "Разметить PUBLIC_EXPORTS_INVENTORY.md: каждый публичный экспорт получает зону (Foundation/Composition/Domain) и короткую пометку по className/style ожиданиям (allowed / discouraged / restricted).",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_02/T03.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "done",
+          "progress": 100,
+          "comment": "Выполнено; публичные экспорты размечены по зонам в governance-каноне.",
+          "updated_at": "2026-02-09",
+          "issues": [],
+          "labels": ["exports", "zones", "doc"],
+
+          "completion_criteria": [
+            "PUBLIC_EXPORTS_INVENTORY размечён по зонам",
+            "Появились пометки по стилевой политике на уровне экспортов"
+          ],
+          "acceptance_criteria": [
+            "Ни один экспорт не остался без зоны",
+            "Пометки не вводят запрет className — только guidance",
+            "Файл реально обновлён в docs/canon, а не в отчёте",
+            "Есть отчёт (diff summary + rationale) в папке отчётов"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_03",
+      "name": "className Inventory & Risk Map",
+      "description": "Объективно фиксируем текущее использование className и классифицируем по рискам и зонам.",
+      "tasks": [
+        {
+          "id": "T04",
+          "name": "Repo-wide className Inventory Report",
+          "description": "Собрать инвентарь использования className по репозиторию: где, сколько, в каких зонах, и какие паттерны (layout/spacing/colors/typography/positioning/utility-mix). Никаких правок кода.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_03/T04.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Только анализ и отчёт. Без enforcement и без рефакторов.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["audit", "classname"],
+
+          "completion_criteria": [
+            "Создан полный список мест использования className (с путями файлов)",
+            "Каждому случаю присвоен тип использования (layout/spacing/colors/etc.)",
+            "Сформирована сводная статистика"
+          ],
+          "acceptance_criteria": [
+            "Отчёт включает таблицу: file → component → zone → class usage type → risk level",
+            "В отчёте выделены TOP-20 самых рискованных мест",
+            "Нет предложений «запретить className»",
+            "Отчёт сохранён в папке отчётов"
+          ]
+        },
+        {
+          "id": "T05",
+          "name": "Define className Risk Levels (canonical rubric)",
+          "description": "Сформировать каноническую рубрику уровней риска className: SAFE / CAUTION / RISKY. Привязать к зонам и типам использования (layout vs colors etc.).",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_03/T05.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Это guidance для DEV-warn и будущей миграции, не запрет.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["canon", "rubric"],
+
+          "completion_criteria": [
+            "Есть понятная шкала риска",
+            "Есть правила применения шкалы к зонам"
+          ],
+          "acceptance_criteria": [
+            "Рубрика оформлена как реальный канонический документ или раздел в CLASSNAME_POLICY_PLAN.md",
+            "Формулировки не создают запретов и не меняют runtime-safety канон",
+            "Есть отчёт в папке отчётов"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_04",
+      "name": "Inline style Inventory & Policy",
+      "description": "Отдельно инвентаризируем inline styles и определяем допустимые формы (например, только CSS vars) по зонам.",
+      "tasks": [
+        {
+          "id": "T06",
+          "name": "Repo-wide inline style Inventory Report",
+          "description": "Собрать инвентарь inline styles по репозиторию: style={{...}}, style=, и любые прямые CSS-in-JS style overrides. Разметить по зонам и рискам. Никаких правок кода.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_04/T06.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Только анализ. Без изменений поведения.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["audit", "inline-style"],
+
+          "completion_criteria": [
+            "Собран список мест inline style с путями файлов",
+            "Типизированы случаи: css-vars-only / hardcoded values / layout overrides"
+          ],
+          "acceptance_criteria": [
+            "Отчёт включает таблицу: file → component → zone → style type → risk level",
+            "Выделены места с hardcoded values как отдельный риск",
+            "Отчёт сохранён в папке отчётов"
+          ]
+        },
+        {
+          "id": "T07",
+          "name": "Inline style Policy (canonical)",
+          "description": "Сформировать политику inline style: где допустим (например, только CSS vars), где discouraged, где restricted. Привязать к зонам. Без запретов и без enforcement в PROD.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_04/T07.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Документ должен быть совместим с каноном: DEV-only сигналы, без PROD логики.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["canon", "policy", "inline-style"],
+
+          "completion_criteria": [
+            "Политика описана и согласована с зональной моделью",
+            "Явно описаны разрешённые паттерны (css-vars-only и т.п.)"
+          ],
+          "acceptance_criteria": [
+            "Политика оформлена как реальный канонический документ/раздел в docs/canon",
+            "Не вводит запрет className и не ломает существующих потребителей",
+            "Есть примеры: good/bad и объяснение почему",
+            "Есть отчёт в папке отчётов"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_05",
+      "name": "DEV-only Warnings (minimal, control-points only)",
+      "description": "Добавляем DEV-warn только там, где библиотека реально контролирует композицию/поведение. Никаких warnings повсюду, чтобы не создать шум.",
+      "tasks": [
+        {
+          "id": "T08",
+          "name": "Select Control Points for className/style warnings",
+          "description": "Определить минимальный список компонентов-контрольных точек (например: Box/Stack/Flex/Grid/Container, NavRoot, AppHeader) где допустимо добавить DEV-warn по className/style в соответствии с уже существующим каноном enforcement. Никакого кода в этом таске — только список и rationale.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_05/T08.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Нельзя расширять enforcement за пределы точек контроля. Нельзя делать throw. Только warn.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["dev-warn", "control-points"],
+
+          "completion_criteria": [
+            "Список контрольных точек составлен",
+            "Для каждой точки описано: что предупреждаем и почему именно здесь есть контроль"
+          ],
+          "acceptance_criteria": [
+            "Список короткий (минимальный), а не попытка покрыть всё",
+            "Rationale явно ссылается на CANONICAL_COMPOSITION_ENFORCEMENT и CLASSNAME_POLICY_PLAN (по смыслу)",
+            "Есть отчёт в папке отчётов"
+          ]
+        },
+        {
+          "id": "T09",
+          "name": "Implement DEV-warn for risky className patterns (control points only)",
+          "description": "Реализовать DEV-only предупреждения в выбранных контрольных точках: предупреждать только RISKY случаи по рубрике (например: className содержит layout/spacing/colors utilities там, где должен быть token/prop). Никаких запретов, никаких errors, никаких PROD изменений.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_05/T09.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Warn-only. DEV-only. Никакого runtime контроля за пределами допустимых точек.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["dev-warn", "classname"],
+
+          "completion_criteria": [
+            "DEV-warn добавлены в выбранные точки",
+            "В PROD нет отличий поведения",
+            "Сообщения предупреждений понятные и actionable"
+          ],
+          "acceptance_criteria": [
+            "Есть тесты: DEV показывает warn, PROD не показывает и не меняет output",
+            "Warn’ы не триггерятся на SAFE кейсах, чтобы не создавать шум",
+            "Нет throw и нет новых guard’ов вне канона",
+            "Есть отчёт с примерами сообщений и местами, где warn срабатывает"
+          ]
+        },
+        {
+          "id": "T10",
+          "name": "Implement DEV-warn for inline style misuse (control points only)",
+          "description": "Реализовать DEV-only предупреждения по inline style для запрещённых/рискованных паттернов (например hardcoded values вместо CSS vars) только в контрольных точках. Без запретов, без PROD-логики.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_05/T10.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Фокус: сигнализировать misuse, не блокировать пользователей.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["dev-warn", "inline-style"],
+
+          "completion_criteria": [
+            "DEV-warn добавлены для inline style misuse в контрольных точках",
+            "Проверки не меняют PROD output"
+          ],
+          "acceptance_criteria": [
+            "Есть тесты DEV/PROD (warn only in DEV)",
+            "Warn формулирует альтернативу: 'prefer CSS variables / tokens / props'",
+            "Нет попытки переписать/автозаменить DOM",
+            "Есть отчёт в папке отчётов"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_06",
+      "name": "Documentation Lock + Consumer Guidance",
+      "description": "Финализируем канон по className/style, обновляем навигацию по канону, добавляем короткие consumer-guides без расширения правил.",
+      "tasks": [
+        {
+          "id": "T11",
+          "name": "Finalize CLASSNAME_POLICY_PLAN.md (canonical lock)",
+          "description": "Собрать все решения: zonal модель, risk rubric, className policy, inline style policy — и финализировать CLASSNAME_POLICY_PLAN.md так, чтобы он стал единой точкой истины. Обновить канонический inventory/навигацию документов при необходимости.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_06/T11.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Документ — нормативный. Реальные файлы, не отчёты.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["canon", "docs"],
+
+          "completion_criteria": [
+            "CLASSNAME_POLICY_PLAN.md отражает финальное согласованное состояние",
+            "Док-структура логична и ссылается на zonal модель и rubrics"
+          ],
+          "acceptance_criteria": [
+            "Документ не вводит запретов, не меняет runtime-safety канон и не добавляет PROD enforcement",
+            "Есть секции: 'Allowed', 'Discouraged (DEV-warn)', 'Restricted (DEV-warn at control points)'",
+            "Обновлены канонические индексы/инвентари документов при необходимости",
+            "Есть отчёт с перечнем изменений"
+          ]
+        },
+        {
+          "id": "T12",
+          "name": "Release Gate Checklist for className/style (non-blocking)",
+          "description": "Создать минимальный non-blocking checklist для релиза/PR: что проверять по className/style governance (без CI-fail). Это процессный документ (docs).",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_06/T12.md",
+          "priority": "medium",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Не делаем build-fail. Только guidance/checklist.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["process", "release-gate"],
+
+          "completion_criteria": [
+            "Есть чеклист, связанный с каноном и зонами",
+            "Он применим без автоматизации"
+          ],
+          "acceptance_criteria": [
+            "Чеклист короткий (10–15 пунктов максимум) и actionable",
+            "Явно указано: 'non-blocking' и 'DEV-only warnings'",
+            "Есть отчёт о добавлении документа"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "BLOCK_07",
+      "name": "Final Verification (Noise control, DEV-only guarantee)",
+      "description": "Финальная проверка: warnings не шумят, в PROD нет изменений, политика понятна.",
+      "tasks": [
+        {
+          "id": "T13",
+          "name": "Noise Audit for DEV-warnings",
+          "description": "Проверить уровень шума от новых DEV-warn: определить, где они срабатывают в репозитории, и убедиться, что это именно RISKY случаи (а не нормальные). При необходимости — сузить условия warning (без расширения).",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_07/T13.md",
+          "priority": "high",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Цель: минимально достаточный сигнал, не спам.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["dev-warn", "noise-control"],
+
+          "completion_criteria": [
+            "Сформирован список мест, где warn срабатывает",
+            "Warn срабатывает преимущественно на RISKY местах"
+          ],
+          "acceptance_criteria": [
+            "Есть отчёт: сколько warn и где",
+            "Если warn слишком много — предложены корректировки условий (и применены, если это не расширение scope)",
+            "Нет изменений PROD поведения"
+          ]
+        },
+        {
+          "id": "T14",
+          "name": "PROD Parity Check",
+          "description": "Подтвердить, что новые изменения (policy docs + DEV-warn) не влияют на PROD output: отсутствие логов/side-effects/изменений рендера. Проверка тестами и кратким отчётом.",
+          "path": ".cursor/tasks/subtasks/TUI_MASTER_CLASSNAME_INLINESTYLE_GOVERNANCE_001/BLOCK_07/T14.md",
+          "priority": "critical",
+          "assigned_to": "Codex",
+          "status": "pending",
+          "progress": 0,
+          "comment": "Это принципиальный gate: ноль PROD-изменений.",
+          "updated_at": "",
+          "issues": [],
+          "labels": ["prod-parity", "safe-by-default"],
+
+          "completion_criteria": [
+            "Подтверждено отсутствие PROD-эффектов",
+            "DEV-only ограничения соблюдены"
+          ],
+          "acceptance_criteria": [
+            "Есть доказательство: тесты/скрипты/лог-вывод (без воды)",
+            "Ни один DEV-warn не попадает в PROD",
+            "Есть финальный отчёт PASS/FAIL"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "reporting_rules": {
+    "mandatory": true,
+    "base_path": "docs/reports/classname-inline-style-governance/",
+    "per_task_folder": true,
+    "each_task_must_contain": [
+      "current_state.md",
+      "findings.md",
+      "decisions.md",
+      "actions_taken.md",
+      "open_questions.md",
+      "status.md"
+    ],
+    "status_schema": {
+      "fields_required": ["task_id", "status", "date", "summary", "next_step"],
+      "allowed_status": ["pending", "in_progress", "blocked", "done", "failed"]
+    }
+  }
+}

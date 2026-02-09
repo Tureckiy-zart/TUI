@@ -65,12 +65,23 @@
 
 **Tooltip**
 ```tsx
+// ✅ Safe by default (Tooltip provides its own provider)
 <Tooltip>
   <TooltipTrigger>
     <Button>Hover me</Button>
   </TooltipTrigger>
   <TooltipContent>Tooltip content</TooltipContent>
 </Tooltip>
+
+// ✅ If you already have a provider higher in the tree
+<TooltipProvider>
+  <Tooltip withProvider={false}>
+    <TooltipTrigger>
+      <Button>Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>Tooltip content</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
 
 **Modal**

@@ -25,13 +25,16 @@ export interface LabelProps extends Omit<
 }
 
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ required, children, ...props }, ref) => (
-    // className and style are forbidden from public API - only token-based className is used
-    <LabelPrimitive.Root ref={ref} className={labelClassName} {...props}>
-      {children}
-      {required && <span className={cn(FORM_TOKENS.label.requiredMark, "ml-xs")}>*</span>}
-    </LabelPrimitive.Root>
-  ),
+  ({ required, children, htmlFor, ...props }, ref) => {
+    const safeHtmlFor = typeof htmlFor === "string" ? htmlFor : undefined;
+    return (
+      // className and style are forbidden from public API - only token-based className is used
+      <LabelPrimitive.Root ref={ref} className={labelClassName} htmlFor={safeHtmlFor} {...props}>
+        {children}
+        {required && <span className={cn(FORM_TOKENS.label.requiredMark, "ml-xs")}>*</span>}
+      </LabelPrimitive.Root>
+    );
+  },
 );
 Label.displayName = LabelPrimitive.Root.displayName;
 

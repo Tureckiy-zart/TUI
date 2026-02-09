@@ -23,8 +23,17 @@
 
 **Tooltip trigger (correct)**
 ```tsx
+// Safe by default (Tooltip provides its own provider)
+<Tooltip>
+  <TooltipTrigger>
+    <Button>Info</Button>
+  </TooltipTrigger>
+  <TooltipContent>Details</TooltipContent>
+</Tooltip>
+
+// If you already have a provider higher in the tree
 <TooltipProvider>
-  <Tooltip>
+  <Tooltip withProvider={false}>
     <TooltipTrigger>
       <Button>Info</Button>
     </TooltipTrigger>

@@ -1,25 +1,253 @@
-# Public Exports Inventory
+# ClassName & Inline Style Governance
 
-**Source of truth:** `src/index.ts` + `package.json` exports map.
+## 1. Context and Current State
+- Runtime-safety and canonical composition enforcement are closed and active only in DEV.
+- In PROD, these mechanisms do not affect behavior (no-op).
+- The className policy exists as a plan and is not finalized.
+- PUBLIC_EXPORTS_INVENTORY is the source for future zonal tagging.
 
-Total named exports: **794**
+Confirmed Facts (Canon):
+- DEV-only runtime guards and composition enforcement are described in canonical documents:
+  - `docs/canon/RUNTIME_GUARDS_CANON.md`
+  - `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md`
+  - `docs/canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md`
+- These mechanisms do not change PROD behavior.
+- The className policy document exists as a plan and contains no code:
+  - `docs/canon/CLASSNAME_POLICY_PLAN.md`
+- The canonical Box contract fixes the escape hatch role and className/style boundaries:
+  - `docs/canon/BOX_CONTRACT.md`
+- The Radix Provider exceptions canon fixes Tooltip as the only Provider-required runtime case:
+  - `docs/canon/RADIX_PROVIDER_EXCEPTIONS.md`
+- The public exports inventory is the source of truth for future zonal tagging:
+  - `docs/canon/PUBLIC_EXPORTS_INVENTORY.md`
 
-## Entrypoints
-- `.` (root)
-- `./styles`
-- `./preset`
-- `./tokens`
-- `./theme`
-- `./extensions/next`
+## 2. Locked Scope and Constraints
+### LOCKED SCOPE — Forbidden to Change
+**1) Runtime-safety and canonical composition enforcement (DEV-only mechanisms)**
+- It is forbidden to change any rules, mechanisms, or their sources. Canon is closed.
+- Canon:
+  - `docs/canon/RUNTIME_GUARDS_CANON.md`
+  - `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md`
+  - `docs/canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md`
+- Why closed: Canonical documents fix DEV-only behavior and control points; PROD equivalent must remain no-op.
+- Related sources (locked by canon):
+  - `src/COMPOSITION/utils/runtime-guards.ts`
+  - `src/COMPOSITION/overlays/ModalProvider/ModalProvider.tsx`
+  - `src/DOMAIN/notifications/NotificationCenter.Provider.tsx`
+  - `src/COMPOSITION/layout/Box/Box.tsx`
+  - `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx`
+  - `src/COMPOSITION/layout/AppHeader/AppHeader.tsx`
+  - `src/COMPOSITION/utils/trigger-as-child.ts`
+  - `src/COMPOSITION/overlays/Popover.tsx`
+  - `src/COMPOSITION/overlays/Tooltip.tsx`
+  - `src/COMPOSITION/overlays/Modal/Modal.tsx`
+  - `src/COMPOSITION/navigation/Menu/Menu.tsx`
+  - `src/COMPOSITION/controls/Select/Select.tsx`
+  - `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx`
 
-## Deprecated
-No deprecated exports marked in `src/index.ts`.
+**2) Foundation and Authority locks**
+- It is forbidden to change the Foundation layer and Authority contracts without an unlock procedure.
+- Canon:
+  - `docs/architecture/FOUNDATION_LOCK.md`
+  - `docs/architecture/LAYOUT_AUTHORITY.md`
+- Why closed: Foundation is marked as LOCKED; Authority contracts are IMMUTABLE and require explicit unlock.
 
-## Types
+**3) Documentation Canon**
+- It is forbidden to change the canonical structure, canon index, and canonical documents.
+- Canon:
+  - `docs/architecture/DOCUMENTATION_CANON_LOCK.md`
+  - `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
+  - Documents in `docs/canon/`:
+    - `docs/canon/RUNTIME_GUARDS_CANON.md`
+    - `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md`
+    - `docs/canon/TRIGGER_ASCHILD_SAFE_BY_DEFAULT.md`
+    - `docs/canon/CLASSNAME_POLICY_PLAN.md`
+    - `docs/canon/BOX_CONTRACT.md`
+    - `docs/canon/PUBLIC_EXPORTS_INVENTORY.md`
+- Why closed: The structure and list of canon are the source of truth and are not subject to change within governance.
+
+### ALLOWED SCOPE — What is Permitted
+**Allowed:**
+- Inventory and audit of `className` usage.
+- Inventory and audit of inline `style` usage.
+- Documentation and reports in `docs/reports/...`.
+- Discussion of the DEV-warn concept in future tasks (without implementation).
+- DEV-only telemetry at control points without PROD effects (separate task T06).
+
+**Forbidden even within allowed scope:**
+- Any code changes affecting PROD behavior.
+- Any new runtime guards.
+- Any behavioral changes in PROD.
+- Any changes to canonical documents without a separate canonical task.
+- Any enforcement logic (lint/throw/auto-blocks).
+- Any refactoring or auto-rewriting of className/style.
+
+## 3. Observations and Conclusions
+- No significant findings. The material is for fixing boundaries and the declarative model.
+
+## 4. Decisions Made
+- All documentation on className/inline style governance is consolidated in one document.
+- DEV-only className/style telemetry is allowed as a separate task (T06) without PROD effect.
+- Zonal definitions are fixed as guidance without prohibitions.
+
+## 5. Zonal Model (Foundation / Composition / Domain)
+### Zone 1 — Foundation
+**Definition:** Fundamental primitives, tokens, and base components defining canonical behavior and visual ground rules.
+
+**Zone Goal:** Stability and uniformity; absence of product specificity.
+
+**Abstraction Level:** Basic building blocks.
+
+**Examples (non-exhaustive):** Button, Text, Input, List, ListItem, tokens, and base types.
+
+### Zone 2 — Composition
+**Definition:** Components that compositionally assemble Foundation primitives into repeatable architectural structures (layout/structure/slots) without being product logic.
+
+**Zone Goal:** Managed composition and structure semantics without domain decisions.
+
+**Abstraction Level:** Structural and compositional patterns.
+
+**Examples (non-exhaustive):** Stack, Box, Container, AppHeader, NavRoot, overlay primitives.
+
+### Zone 3 — Domain
+**Definition:** Domain, product, or feature-specific components where flexibility is allowed for UX and business tasks.
+
+**Zone Goal:** Adaptation to product scenarios while maintaining compatibility with base rules.
+
+**Abstraction Level:** Product UI logic and scenarios.
+
+**Examples (non-exhaustive):** DomainCard, BillingSummary, ProfileHeader (if they exist in the product part).
+
+## 6. Expectations for className and inline styles
+### Zone 1 — Foundation
+- **className:** discouraged / risky.
+- **inline style:** discouraged / risky, especially with hardcoded values.
+- **Why:** To preserve canonical semantics and consistency of base primitives.
+
+### Zone 2 — Composition
+- **className:** allowed in limited cases; discouraged for layout/spacing override; risky when bypassing canonical primitives.
+- **inline style:** discouraged; preference for CSS vars and built-in composition capabilities.
+- **Why:** To not blur the boundaries of compositional responsibility and not create hidden variations.
+
+### Zone 3 — Domain
+- **className:** allowed; risky with systematic bypass of tokens and canonical primitives.
+- **inline style:** allowed when using CSS vars; risky with hardcoded values.
+- **Why:** The zone allows flexibility but must maintain basic consistency with the token system.
+
+### Container sizing guidelines
+Container is a layout boundary, not a content-aware component.
+Choosing `maxWidth` is the responsibility of the consumer and depends on layout intent.
+
+Recommended guidelines:
+- Text / editorial sections: use Container `maxWidth="md"` or `maxWidth="lg"`.
+- Feature grids / cards: use Container `maxWidth="xl"`, `maxWidth="2xl"`, or `maxWidth="6xl"`.
+- Marketing / landing layouts: use Container `maxWidth="6xl"`.
+
+Using a narrow Container (for example `maxWidth="lg"`) for multi-column grids results in narrow cards and aggressive line wrapping. This is expected behavior, not a bug.
+
+## 7. Edge Cases and Escape Hatches
+### Compound components
+- The zone is defined by the root component.
+- Slots and subcomponents inherit the root zone.
+
+### Wrappers / Adapters
+- Classify by purpose.
+- If a wrapper does not add domain logic and only assembles Foundation, it is Composition.
+
+### Escape-hatch attributes
+- Mentioned as an edge case.
+- Not proposed as a mechanism within governance.
+
+### Ambiguous components
+- Zone selection criteria: source of responsibility.
+- If a component is responsible for layout/structure, it is Composition.
+- If a component expresses product logic and scenario, it is Domain.
+
+## 8. Open Questions
+No open questions. Cycle closed.
+
+## 9. Governance Outcome
+- No enforcement for className and inline style is planned.
+- Box is the only conscious escape hatch in the Composition layer.
+- Further changes are allowed only with new data (e.g., new telemetry or formal owner request).
+
+## 10. Status and Next Steps
+**T01 — Baseline & Scope Lock**
+- `task_id`: TUI_CG_T01_BASELINE_SCOPE_LOCK
+- `status`: done
+- `date`: 2026-02-06
+- `summary`: Baseline scope lock report created, no code changes.
+- `next_step`: TUI_CG_T02_DEFINE_ZONAL_MODEL
+
+**T02 — Define Zonal Model**
+- `task_id`: TUI_CG_T02_DEFINE_ZONAL_MODEL
+- `status`: done
+- `date`: 2026-02-08
+- `summary`: Zonal model defined declaratively, without enforcement or code changes.
+- `next_step`: TUI_CG_T03_TAG_PUBLIC_EXPORTS_BY_ZONE
+
+**T03 — Tag Public Exports by Zone**
+- `task_id`: TUI_CG_T03_TAG_PUBLIC_EXPORTS_BY_ZONE
+- `status`: done
+- `date`: 2026-02-08
+- `summary`: Public exports tagged by zone in one document.
+- `next_step`: TUI_CG_T04_DEFINE_DEV_WARN_STRATEGY
+
+**T04 — Define DEV-only Warning Strategy**
+- `task_id`: TUI_CG_T04_DEFINE_DEV_WARN_STRATEGY
+- `status`: done
+- `date`: 2026-02-08
+- `summary`: DEV-only warning strategy defined, without code changes.
+- `next_step`: None
+
+**T05 — Enforcement Decision Matrix**
+- `task_id`: TUI_CG_T05_ENFORCEMENT_DECISION_MATRIX
+- `status`: done
+- `date`: 2026-02-08
+- `summary`: Decision matrix for enforcement conditions fixed in a separate document.
+- `next_step`: TUI_CG_T06_DEV_VISIBILITY_TELEMETRY
+
+**T06 — DEV Visibility & Telemetry**
+- `task_id`: TUI_CG_T06_DEV_VISIBILITY_TELEMETRY
+- `status`: done
+- `date`: 2026-02-09
+- `summary`: DEV-only className/style telemetry implemented at control points, without PROD effects.
+- `next_step`: TUI_CG_T07_COLLECT_REAL_TELEMETRY_SNAPSHOT
+
+**T07 — Collect Real Telemetry Snapshot**
+- `task_id`: TUI_CG_T07_COLLECT_REAL_TELEMETRY_SNAPSHOT
+- `status`: done
+- `date`: 2026-02-09
+- `summary`: Real telemetry snapshot from Storybook recorded in a separate report.
+- `next_step`: TUI_CG_T08_BOX_CONTRACT_DOCUMENTATION
+
+**T08 — Box Contract Documentation**
+- `task_id`: TUI_CG_T08_BOX_CONTRACT_DOCUMENTATION
+- `status`: done
+- `date`: 2026-02-09
+- `summary`: Canonical Box contract consolidated, links added to canon and governance.
+- `next_step`: None
+
+**T09 — Governance Wrap-Up**
+- `task_id`: TUI_CG_T09_GOVERNANCE_WRAP_UP
+- `status`: done
+- `date`: 2026-02-09
+- `summary`: Governance cycle closed without enforcement; final outcome fixed.
+- `next_step`: None (requires new signal/data)
+
+**Overall next_step:** None (requires new signal/data)
+
+---
+
+**Policy:** SINGLE_SOURCE_OF_TRUTH — all further changes to className/inline style governance are made only in this document.
+
+## 11. Zonal Tagging of Public Exports
+### Foundation Exports
+#### Types
 - Breakpoint — `./types/responsive`
 - Responsive — `./types/responsive`
 
-## Tokens
+#### Tokens
 - accentColors — `./FOUNDATION/tokens`
 - baseColors — `./FOUNDATION/tokens`
 - chartColors — `./FOUNDATION/tokens`
@@ -234,7 +462,7 @@ No deprecated exports marked in `src/index.ts`.
 - TIMELINE_TOKENS — `./FOUNDATION/tokens/components/timeline`
 - GRADIENT_TOKENS — `./FOUNDATION/tokens/gradients`
 
-## Primitives
+#### Primitives
 - Button — `./PRIMITIVES/Button`
 - type ButtonProps — `./PRIMITIVES/Button`
 - IconButton — `./PRIMITIVES/IconButton`
@@ -305,12 +533,28 @@ No deprecated exports marked in `src/index.ts`.
 - iconVariants — `./PRIMITIVES/Icon`
 - type IconProps — `./PRIMITIVES/Icon`
 
-## Composition / Actions
+#### Foundation Utils
+- debounce — `./FOUNDATION/lib/utils`
+- formatDate — `./FOUNDATION/lib/utils`
+- formatDateTime — `./FOUNDATION/lib/utils`
+- formatTime — `./FOUNDATION/lib/utils`
+- generateId — `./FOUNDATION/lib/utils`
+- throttle — `./FOUNDATION/lib/utils`
+- getBaseValue — `./FOUNDATION/lib/responsive-props`
+- getDelayMs — `./FOUNDATION/lib/responsive-props`
+- getDurationMs — `./FOUNDATION/lib/responsive-props`
+- getRadiusCSSVar — `./FOUNDATION/lib/responsive-props`
+
+#### Foundation Motion
+- useSwipe — `./FOUNDATION/theme/motion/gestures`
+
+### Composition Exports
+#### Composition / Actions
 - ButtonGroup — `./COMPOSITION/actions`
 - useButtonGroupContext — `./COMPOSITION/actions`
 - type ButtonGroupProps — `./COMPOSITION/actions`
 
-## Composition / Overlays
+#### Composition / Overlays
 - Chip — `./COMPOSITION/overlays/Chip`
 - CHIP_RADIUS_VALUES — `./COMPOSITION/overlays/Chip`
 - CHIP_VARIANTS — `./COMPOSITION/overlays/Chip`
@@ -461,7 +705,7 @@ No deprecated exports marked in `src/index.ts`.
 - type ContextMenuTriggerProps — `./COMPOSITION/overlays`
 - useFocusLock — `./COMPOSITION/overlays/utils/FocusLock`
 
-## Composition / Controls
+#### Composition / Controls
 - Select — `./COMPOSITION/controls/Select`
 - SelectContent — `./COMPOSITION/controls/Select`
 - SelectGroup — `./COMPOSITION/controls/Select`
@@ -524,7 +768,7 @@ No deprecated exports marked in `src/index.ts`.
 - type SpinnerTone — `./COMPOSITION/controls/Spinner/Spinner`
 - type SpinnerVariant — `./COMPOSITION/controls/Spinner/Spinner`
 
-## Composition / Carousel
+#### Composition / Carousel
 - Carousel — `./COMPOSITION/carousel`
 - type CarouselIndicatorsProps — `./COMPOSITION/carousel`
 - type CarouselNextProps — `./COMPOSITION/carousel`
@@ -535,7 +779,7 @@ No deprecated exports marked in `src/index.ts`.
 - type CarouselSlideProps — `./COMPOSITION/carousel`
 - type CarouselTrackProps — `./COMPOSITION/carousel`
 
-## Composition / Hero
+#### Composition / Hero
 - HeroMedia — `./COMPOSITION/hero`
 - type HeroMediaAspect — `./COMPOSITION/hero`
 - type HeroMediaMediaProps — `./COMPOSITION/hero`
@@ -546,25 +790,25 @@ No deprecated exports marked in `src/index.ts`.
 - type HeroMediaSize — `./COMPOSITION/hero`
 - type HeroMediaType — `./COMPOSITION/hero`
 
-## Composition / OverlaySlot
+#### Composition / OverlaySlot
 - OverlaySlot — `./COMPOSITION/overlay`
 - type OverlaySlotAnchorProps — `./COMPOSITION/overlay`
 - type OverlaySlotItemProps — `./COMPOSITION/overlay`
 - type OverlaySlotPosition — `./COMPOSITION/overlay`
 - type OverlaySlotRootProps — `./COMPOSITION/overlay`
 
-## Composition / Responsive
+#### Composition / Responsive
 - ResponsiveVisibility — `./COMPOSITION/responsive`
 - type ResponsiveVisibilityBelowProps — `./COMPOSITION/responsive`
 - type ResponsiveVisibilityFromProps — `./COMPOSITION/responsive`
 - type ResponsiveVisibilityOnlyProps — `./COMPOSITION/responsive`
 - type ResponsiveVisibilityRootProps — `./COMPOSITION/responsive`
 
-## Composition / InverseTypography
+#### Composition / InverseTypography
 - InverseTypography — `./COMPOSITION/inverse-typography`
 - type InverseTypographyRootProps — `./COMPOSITION/inverse-typography`
 
-## Composition / SurfaceElevation
+#### Composition / SurfaceElevation
 - SurfaceElevation — `./COMPOSITION/surface-elevation`
 - SurfaceElevationCompositionReference — `./COMPOSITION/surface-elevation`
 - useSurfaceElevation — `./COMPOSITION/surface-elevation`
@@ -572,17 +816,17 @@ No deprecated exports marked in `src/index.ts`.
 - type SurfaceElevationLevel — `./COMPOSITION/surface-elevation`
 - type SurfaceElevationRootProps — `./COMPOSITION/surface-elevation`
 
-## Composition / A11y
+#### Composition / A11y
 - VisuallyHidden — `./COMPOSITION/a11y/VisuallyHidden`
 - type VisuallyHiddenProps — `./COMPOSITION/a11y/VisuallyHidden`
 
-## Composition / Focus
+#### Composition / Focus
 - FocusTrap — `./COMPOSITION/focus/FocusTrap/FocusTrap.index`
 - type FocusTrapProps — `./COMPOSITION/focus/FocusTrap/FocusTrap.index`
 
-## Composition / Layout
+#### Composition / Layout
 - AppHeader — `./COMPOSITION/layout`
-- Box — `./COMPOSITION/layout` (Has documented escape hatch contract, see `docs/canon/BOX_CONTRACT.md`)
+- Box — `./COMPOSITION/layout`
 - Column — `./COMPOSITION/layout`
 - Container — `./COMPOSITION/layout`
 - Divider — `./COMPOSITION/layout`
@@ -676,36 +920,11 @@ No deprecated exports marked in `src/index.ts`.
 - type PageHeaderProps — `./COMPOSITION/layout`
 - type SectionProps — `./COMPOSITION/layout`
 
-## Hooks
+#### Hooks
 - useGlobalToast — `./hooks/useGlobalToast`
 - useLocalToast — `./hooks/useToast`
 
-## Domain
-- NotificationCenter — `./DOMAIN/notifications`
-- NotificationCenterDismissAll — `./DOMAIN/notifications`
-- NotificationCenterGroupHeader — `./DOMAIN/notifications`
-- NotificationCenterItem — `./DOMAIN/notifications`
-- NotificationCenterList — `./DOMAIN/notifications`
-- NotificationCenterPanel — `./DOMAIN/notifications`
-- NotificationCenterProvider — `./DOMAIN/notifications`
-- NotificationCenterTrigger — `./DOMAIN/notifications`
-- useNotificationCenter — `./DOMAIN/notifications`
-- useNotificationCenterContext — `./DOMAIN/notifications`
-- type GroupByFunction — `./DOMAIN/notifications`
-- type NotificationCenterDismissAllProps — `./DOMAIN/notifications`
-- type NotificationCenterGroupHeaderProps — `./DOMAIN/notifications`
-- type NotificationCenterItemProps — `./DOMAIN/notifications`
-- type NotificationCenterListProps — `./DOMAIN/notifications`
-- type NotificationCenterPanelProps — `./DOMAIN/notifications`
-- type NotificationCenterProviderProps — `./DOMAIN/notifications`
-- type NotificationCenterTriggerProps — `./DOMAIN/notifications`
-- type NotificationChannel — `./DOMAIN/notifications`
-- type NotificationContextType — `./DOMAIN/notifications`
-- type NotificationData — `./DOMAIN/notifications`
-- type NotificationOptions — `./DOMAIN/notifications`
-- type NotificationVariant — `./DOMAIN/notifications`
-
-## Patterns
+#### Patterns
 - HoverCardContent — `./PATTERNS/menus`
 - HoverCardRoot — `./PATTERNS/menus`
 - HoverCardTrigger — `./PATTERNS/menus`
@@ -758,7 +977,7 @@ No deprecated exports marked in `src/index.ts`.
 - type TableRowProps — `./PATTERNS`
 - type TableSortIconProps — `./PATTERNS`
 
-## Composition / Navigation
+#### Composition / Navigation
 - Breadcrumbs — `./COMPOSITION/navigation`
 - Menu — `./COMPOSITION/navigation`
 - MenuContent — `./COMPOSITION/navigation`
@@ -817,7 +1036,7 @@ No deprecated exports marked in `src/index.ts`.
 - type TabsRootProps — `./COMPOSITION/navigation`
 - type TabsTriggerProps — `./COMPOSITION/navigation`
 
-## Icons
+#### Icons
 - IconArrowRight — `./icons`
 - IconCalendar — `./icons`
 - IconCheck — `./icons`
@@ -835,24 +1054,90 @@ No deprecated exports marked in `src/index.ts`.
 - type IconProps as IconComponentProps — `./icons`
 - type IconName — `./icons`
 
-## Foundation Utils
-- debounce — `./FOUNDATION/lib/utils`
-- formatDate — `./FOUNDATION/lib/utils`
-- formatDateTime — `./FOUNDATION/lib/utils`
-- formatTime — `./FOUNDATION/lib/utils`
-- generateId — `./FOUNDATION/lib/utils`
-- throttle — `./FOUNDATION/lib/utils`
-- getBaseValue — `./FOUNDATION/lib/responsive-props`
-- getDelayMs — `./FOUNDATION/lib/responsive-props`
-- getDurationMs — `./FOUNDATION/lib/responsive-props`
-- getRadiusCSSVar — `./FOUNDATION/lib/responsive-props`
-
-## Composition / Utils
+#### Composition / Utils
 - safeFallback — `./COMPOSITION/utils/runtime-guards`
 
-## Foundation Motion
-- useSwipe — `./FOUNDATION/theme/motion/gestures`
-
-## Composition / Motion
+#### Composition / Motion
 - ComponentAnimationConfig — `./COMPOSITION/motion/animation/types`
 - resolveComponentAnimations — `./COMPOSITION/motion/animation/utils`
+
+### Domain Exports
+#### Domain
+- NotificationCenter — `./DOMAIN/notifications`
+- NotificationCenterDismissAll — `./DOMAIN/notifications`
+- NotificationCenterGroupHeader — `./DOMAIN/notifications`
+- NotificationCenterItem — `./DOMAIN/notifications`
+- NotificationCenterList — `./DOMAIN/notifications`
+- NotificationCenterPanel — `./DOMAIN/notifications`
+- NotificationCenterProvider — `./DOMAIN/notifications`
+- NotificationCenterTrigger — `./DOMAIN/notifications`
+- useNotificationCenter — `./DOMAIN/notifications`
+- useNotificationCenterContext — `./DOMAIN/notifications`
+- type GroupByFunction — `./DOMAIN/notifications`
+- type NotificationCenterDismissAllProps — `./DOMAIN/notifications`
+- type NotificationCenterGroupHeaderProps — `./DOMAIN/notifications`
+- type NotificationCenterItemProps — `./DOMAIN/notifications`
+- type NotificationCenterListProps — `./DOMAIN/notifications`
+- type NotificationCenterPanelProps — `./DOMAIN/notifications`
+- type NotificationCenterProviderProps — `./DOMAIN/notifications`
+- type NotificationCenterTriggerProps — `./DOMAIN/notifications`
+- type NotificationChannel — `./DOMAIN/notifications`
+- type NotificationContextType — `./DOMAIN/notifications`
+- type NotificationData — `./DOMAIN/notifications`
+- type NotificationOptions — `./DOMAIN/notifications`
+- type NotificationVariant — `./DOMAIN/notifications`
+
+### Unclear / Needs Decision
+- Нет.
+
+
+## 11. DEV Warning Strategy
+
+### 11.1 Warning Matrix
+
+| Zone | className violations | inline style violations |
+| --- | --- | --- |
+| Foundation | warn | warn |
+| Composition | warn | warn |
+| Domain | no-op | no-op |
+
+**ViolationType (категории, без enforcement):**
+- `className`:
+  - layout/spacing utilities override
+  - typography/color utilities override
+  - positioning/stacking overrides
+  - token bypass (не токенные значения)
+- `inline style`:
+  - hardcoded values (цвета/размеры/spacing)
+  - layout overrides (position, display, flex/grid)
+  - typography overrides (font/line-height)
+  - non-CSS-var values
+
+### 11.2 Responsibility Boundaries
+**Предупреждения допустимы только в точках контроля:**
+- `as` (семантический контроль)
+- `asChild`
+- strict slots
+- controlled DOM / контролируемые внутренние обёртки
+
+**Источник канона для контрольных точек:**
+- `docs/canon/RUNTIME_GUARDS_CANON.md`
+- `docs/canon/CANONICAL_COMPOSITION_ENFORCEMENT.md`
+
+### 11.3 Warning Semantics
+- DEV-only, диагностические, не блокируют работу.
+- Не требуют немедленного исправления.
+- Не меняют поведение в PROD.
+- Не являются enforcement или запретом.
+
+### 11.4 Canonical Warning Messages
+- **Foundation / className**
+  - "[TUI DEV WARN] className в зоне Foundation: обнаружено использование в контрольной точке. Рекомендуется использовать канонические props/токены. Зона: Foundation."
+- **Foundation / inline style**
+  - "[TUI DEV WARN] inline style в зоне Foundation: обнаружены значения вне CSS vars/токенов. Рекомендуется использовать токены. Зона: Foundation."
+- **Composition / className**
+  - "[TUI DEV WARN] className в зоне Composition: обнаружено обходное оформление структуры/spacing. Рекомендуется использовать канонические примитивы. Зона: Composition."
+- **Composition / inline style**
+  - "[TUI DEV WARN] inline style в зоне Composition: предпочтительны CSS vars и props композиции. Зона: Composition."
+
+**Примечание:** явных запретов нет, только guidance.

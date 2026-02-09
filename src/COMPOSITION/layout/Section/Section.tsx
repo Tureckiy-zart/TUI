@@ -52,6 +52,7 @@
  * - Grid layout component → Section uses Stack internally, not Grid
  * - Variant-driven component → Section is structural, not variant-driven
  * - Nested inside Panel → Section is page-level, Panel is page-internal
+ * - Compound component → Section does NOT provide subcomponents (use composition with Box)
  */
 
 import * as React from "react";

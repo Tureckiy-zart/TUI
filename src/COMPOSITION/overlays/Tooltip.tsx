@@ -63,6 +63,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { getBaseValue, getDurationMs } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -76,8 +77,37 @@ import type {
 import { resolveAlignOffset, resolveSideOffset } from "./utils/offset-resolution";
 
 const TooltipProvider = TooltipPrimitive.Provider;
+const TooltipRootPrimitive = TooltipPrimitive.Root;
 
-const Tooltip = TooltipPrimitive.Root;
+export interface TooltipRootProps extends React.ComponentPropsWithoutRef<
+  typeof TooltipPrimitive.Root
+> {
+  /**
+   * Wrap Tooltip root with TooltipProvider to prevent missing provider errors.
+   * Set to false if you already have a TooltipProvider higher in the tree.
+   * @default true
+   */
+  withProvider?: boolean;
+  /**
+   * Props forwarded to TooltipProvider when withProvider is true.
+   */
+  providerProps?: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>;
+}
+
+/**
+ * Tooltip Root (safe by default)
+ * Wraps TooltipProvider unless explicitly disabled.
+ */
+const TooltipRoot = ({ withProvider = true, providerProps, ...props }: TooltipRootProps) => {
+  if (withProvider) {
+    return (
+      <TooltipProvider {...providerProps}>
+        <TooltipRootPrimitive {...props} />
+      </TooltipProvider>
+    );
+  }
+  return <TooltipRootPrimitive {...props} />;
+};
 
 export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<
   typeof TooltipPrimitive.Trigger
@@ -92,6 +122,14 @@ const TooltipTrigger = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   const resolvedAsChild = resolveAsChild(asChild, children);
   warnIfExplicitAsChildFalse("Tooltip.Trigger", asChild, children);
+  if (process.env.NODE_ENV !== "production") {
+    trackClassStyleUsage({
+      component: "Tooltip.Trigger",
+      zone: "Composition",
+      className: (props as { className?: unknown }).className,
+      style: (props as { style?: unknown }).style,
+    });
+  }
 
   return (
     <TooltipPrimitive.Trigger ref={ref} asChild={resolvedAsChild} {...props}>
@@ -284,7 +322,7 @@ export function TooltipWrapper({
 
   return (
     <TooltipProvider delayDuration={delayDurationMs} skipDelayDuration={skipDelayDurationMs}>
-      <Tooltip open={open} onOpenChange={onOpenChange}>
+      <TooltipRootPrimitive open={open} onOpenChange={onOpenChange}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent
           variant={variant}
@@ -295,10 +333,19 @@ export function TooltipWrapper({
         >
           {content}
         </TooltipContent>
-      </Tooltip>
+      </TooltipRootPrimitive>
     </TooltipProvider>
   );
 }
 
-export { Tooltip, TooltipContent, tooltipContentVariants, TooltipProvider, TooltipTrigger };
+const Tooltip = TooltipRoot;
+
+export {
+  Tooltip,
+  TooltipContent,
+  tooltipContentVariants,
+  TooltipProvider,
+  TooltipRoot,
+  TooltipTrigger,
+};
 export type { TooltipVariant };

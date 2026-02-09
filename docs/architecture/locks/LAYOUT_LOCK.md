@@ -2,7 +2,7 @@
 
 **Version:** 2.0  
 **Date Created:** 2025-12-15  
-**Last Updated:** 2026-01-01 (Extension Layout Components Lock)  
+**Last Updated:** 2026-02-09 (Section documentation sync)  
 **Status:** ✅ **LOCKED** - IMMUTABLE  
 **Layer:** UI / EXTENSION / LOCKED  
 **Priority:** CRITICAL
@@ -314,7 +314,8 @@ The following Extension Layout components are **LOCKED** and **IMMUTABLE** after
 - **Exports:** `Section`, `SectionProps`
 - **Role:** Page-level block container for vertical page rhythm
 - **Responsibility:** Vertical padding (spaceY) and spacing between content blocks (spacing), delegates to Stack
-- **Does NOT provide:** px/py/padding props, grid layout, variant-driven behavior
+- **Does NOT provide:** px/py/padding props, grid layout, variant-driven behavior, compound subcomponents
+- **Usage Note:** Section is composition-only; structure is defined by the consumer (e.g., `Box as="header"` / `Box as="footer"`).
 - **Rule:** DO NOT modify, extend, or create alternatives
 
 ### 15. SidebarLayout
@@ -431,4 +432,3 @@ All future work must respect this lock. Layout Primitives components are **read-
 **Last Updated:** 2026-01-01 (Extension Layout Components Lock)  
 **Priority:** CRITICAL  
 **Next Review:** Never (components are immutable)
-

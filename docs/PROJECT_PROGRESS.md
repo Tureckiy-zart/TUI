@@ -26,7 +26,7 @@ Architecture modifications require explicit unlock procedure.
 
 ### Overview
 
-Финализация и заморозка всех завершенных UI компонентов после полной базовой валидации и архитектурных аудитов. UI component system is stable and ready for product-level development.
+Finalization and freezing of all completed UI components after full baseline validation and architectural audits. UI component system is stable and ready for product-level development.
 
 ### Lock Scope
 
@@ -246,7 +246,7 @@ The Public API canon for Tenerife UI has been established and locked. `src/index
 ### Summary
 
 - Master task **TUI_MASTER_CSV2_REPO_AUDIT_AND_FIX_023** is **CLOSED**.
-- **Closed System v2** is declared **STABLE** (архитектурно завершён).
+- **Closed System v2** is declared **STABLE** (architecturally complete).
 - The **@tenerife.music/ui** library is **cleared for use in the main project** without additional architectural checks for Closed System v2 compliance.
 
 ### Key Results
@@ -3825,7 +3825,7 @@ _No tasks in progress currently._
 - **Status:** ✅ completed
 - **Date Completed:** 2026-01-01
 - **Layer:** DOMAIN / PATTERNS
-- **Summary:** Формально закрыт Phase 1 упрощения доменных карточек и стабилизированы все доменные карточки. API, ответственности и архитектурные границы заморожены.
+- **Summary:** Phase 1 of Domain Card simplification is formally closed, and all domain cards are stabilized. APIs, responsibilities, and architectural boundaries are frozen.
 - **Components Locked:**
   - EventCard (`src/PATTERNS/cards/EventCard/`)
   - ProfileCard (`src/DOMAIN/auth/ProfileCard.tsx`)
@@ -3835,32 +3835,32 @@ _No tasks in progress currently._
   - CategoryCard (`src/PATTERNS/cards/CategoryCard/`)
   - PromoCard (`src/PATTERNS/cards/PromoCard/`)
 - **Phase 1 Completion:**
-  - ✅ LinkWithCustomVariant извлечен в shared utility (`src/COMPOSITION/layout/LinkWithCustomVariant.tsx`)
-  - ✅ Неиспользуемые варианты удалены (4 варианта: VenueCard - 3, ArtistCard - 1)
-  - ✅ Хардкод значения заменены на токены (PromoCard: font-semibold → TEXT_TOKENS.fontWeight.semibold)
+  - ✅ LinkWithCustomVariant extracted to shared utility (`src/COMPOSITION/layout/LinkWithCustomVariant.tsx`)
+  - ✅ Unused variants removed (4 variants: VenueCard - 3, ArtistCard - 1)
+  - ✅ Hardcoded values replaced with tokens (PromoCard: font-semibold → TEXT_TOKENS.fontWeight.semibold)
 - **Stability Rules:**
-  - API заморожен (no breaking changes)
-  - Варианты и размеры заморожены (no new variants/sizes)
-  - Архитектурные границы заморожены (no layout primitives inside cards)
-  - CardBase API заморожен (no changes)
-- **Phase 2 Status:** DEFERRED (не планируется в ближайшее время)
+  - API frozen (no breaking changes)
+  - Variants and sizes frozen (no new variants/sizes)
+  - Architectural boundaries frozen (no layout primitives inside cards)
+  - CardBase API frozen (no changes)
+- **Phase 2 Status:** DEFERRED (not planned in the near future)
 - **Allowed Changes:**
-  - Исправления багов без визуальных изменений
-  - Обновления токенов, если они не влияют на семантику
-  - Внутренние рефакторы с нулевым изменением API и поведения
+  - Bug fixes without visual changes
+  - Token updates, if they do not affect semantics
+  - Internal refactors with zero API or behavior changes
 - **Forbidden Changes:**
-  - Новые доменные карточки без явного TUNG
-  - Новые варианты или размеры для существующих карточек
-  - Изменения API CardBase
-  - Layout примитивы внутри доменных карточек
-  - Архитектурные изменения без процедуры разблокировки
+  - New domain cards without explicit TUNG
+  - New variants or sizes for existing cards
+  - CardBase API changes
+  - Layout primitives inside domain cards
+  - Architectural changes without unlock procedure
 - **Reference Documents:**
   - `docs/reports/audit/DOMAIN_CARDS_INVENTORY.md`
   - `docs/reports/audit/DOMAIN_CARDS_DUPLICATION_MAP.md`
   - `docs/reports/audit/DOMAIN_CARDS_DECISIONS.md`
 - **Next Steps:**
-  - Переход к следующему UI домену (Lists / Tables / Navigation)
-  - Доменные карточки считаются стабильными и готовы к использованию
+  - Transition to the next UI domain (Lists / Tables / Navigation)
+  - Domain cards are considered stable and ready for use
 
 ---
 
@@ -4870,11 +4870,11 @@ The following components are **explicitly excluded** from this lock:
   - Audit Report: `docs/reports/audit/LAYOUT_LAYER_HARD_CODE_REVIEW.md`
   - Status: ✅ LOCKED (Layout Extension Layer Lock, 2026-01-01)
   - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-01-01)
-  - Features: Body-level layout wrapper для структурирования основного контента страницы с опциональной навигацией. Позволяет собирать экраны из ContentShell → PageHeader → Section.
+  - Features: Body-level layout wrapper for structuring main page content with optional navigation. Allows assembling screens from ContentShell → PageHeader → Section.
   - Foundation Composition: N/A (uses layout primitives: Container, Stack)
   - Token Compliance: ✅ 100% (ResponsiveSpacing for contentPadding)
   - Key Characteristics: Semantic `<main>` element, optional navigation (nav prop), token-based contentPadding (ResponsiveSpacing), uses Container and Stack internally
-  - Use Cases: Структурирование страниц приложения, объединение навигации и контента, создание консистентной структуры экранов
+  - Use Cases: Structuring application pages, unifying navigation and content, creating consistent screen structures
   - API Reference: `docs/architecture/LAYOUT_API_RESOLUTION.md` (Resolution 4: ContentShell Responsibility)
   - Exports: `ContentShell`, `ContentShellProps`
   - Types: `ContentShellProps`
@@ -5456,6 +5456,60 @@ Synchronized and finalized all canonical documentation affected by Phase L imple
 
 - [PHASE_L_CLOSURE_SUMMARY.md](./reports/PHASE_L_CLOSURE_SUMMARY.md)
 - [EXTENSION_STATE.md](./architecture/EXTENSION_STATE.md)
+
+---
+
+## TUI_CG_T05–T08 - className / inline style governance (Telemetry + Box Contract)
+
+**Status:** ✅ **COMPLETED** (Closed via T09. No enforcement planned, only documentation boundaries)  
+**Date:** 2026-02-09  
+**Type:** Documentation + DEV-only telemetry  
+**Priority:** P0  
+**Task IDs:** TUI_CG_T05_ENFORCEMENT_DECISION_MATRIX, TUI_CG_T06_DEV_VISIBILITY_TELEMETRY, TUI_CG_T07_COLLECT_REAL_TELEMETRY_SNAPSHOT, TUI_CG_T08_BOX_CONTRACT_DOCUMENTATION
+
+### Summary
+
+Decisions on potential enforcement (T05) have been locked, DEV-only telemetry for className/style usage at control points (T06) has been implemented, a real Storybook snapshot (T07) has been collected, and the canonical Box contract has been consolidated as a conscious escape hatch (T08). PROD behavior remains unchanged.
+
+### Completed Tasks
+
+1. **T05 Enforcement Decision Matrix** ✅
+   - Decision matrix document created: `docs/reports/classname-inline-style-governance/T05_enforcement_decision_matrix.md`.
+
+2. **T06 DEV Telemetry (className/style)** ✅
+   - Added DEV-only helper `src/DEV/classname-telemetry.ts`.
+   - Connected control points in Box, NavRoot, overlays, and triggers.
+
+3. **T07 Real Telemetry Snapshot** ✅
+   - Storybook snapshot recorded in `docs/reports/classname-inline-style-governance/T07_real_telemetry_snapshot.md`.
+
+4. **T08 Box Contract (Canonical)** ✅
+   - Created `docs/canon/BOX_CONTRACT.md`.
+   - Link added to governance document and `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`.
+
+### Files Modified
+
+- `src/DEV/classname-telemetry.ts` - DEV-only telemetry helper
+- `src/COMPOSITION/layout/Box/Box.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/navigation/NavRoot/NavRoot.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/overlays/Modal/Modal.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/overlays/Popover.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/overlays/Tooltip.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/overlays/ContextMenu/ContextMenu.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/navigation/Menu/Menu.tsx` - telemetry hook (DEV-only)
+- `src/COMPOSITION/controls/Select/Select.tsx` - telemetry hook (DEV-only)
+- `src/PRIMITIVES/Label/Label.tsx` - htmlFor guard fix (DEV warning)
+- `src/COMPOSITION/navigation/NavRoot/NavRoot.stories.tsx` - docs HTML fix
+- `docs/canon/CLASSNAME_INLINESTYLE_GOVERNANCE.md` - governance canonical source + Box contract reference
+- `docs/reports/classname-inline-style-governance/T05_enforcement_decision_matrix.md`
+- `docs/reports/classname-inline-style-governance/T06_dev_telemetry.md`
+- `docs/reports/classname-inline-style-governance/T07_real_telemetry_snapshot.md`
+- `docs/canon/BOX_CONTRACT.md`
+- `docs/CANONICAL_DOCUMENTATION_INVENTORY.md`
+
+### Status
+
+✅ **COMPLETE** (2026-02-09) - Governance documentation and telemetry baseline complete. No PROD behavior changes.
 
 ---
 

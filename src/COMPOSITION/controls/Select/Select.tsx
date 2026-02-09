@@ -46,6 +46,7 @@ import { Check, ChevronDown } from "lucide-react";
 import * as React from "react";
 
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { getBaseValue, getSpacingPx } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -121,6 +122,14 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ "aria-invalid": ariaInvalid, asChild, children, ...props }, ref) => {
     const resolvedAsChild = resolveAsChild(asChild, children);
     warnIfExplicitAsChildFalse("Select.Trigger", asChild, children);
+    if (process.env.NODE_ENV !== "production") {
+      trackClassStyleUsage({
+        component: "Select.Trigger",
+        zone: "Composition",
+        className: (props as { className?: unknown }).className,
+        style: (props as { style?: unknown }).style,
+      });
+    }
 
     return (
       <SelectPrimitive.Trigger

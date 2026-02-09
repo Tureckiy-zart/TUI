@@ -3,8 +3,8 @@
 **Purpose:** This document defines explicit allowed and forbidden usage scenarios for closely related components to prevent semantic overlap and ensure clear usage boundaries.
 
 **Status:** FROZEN - No overlap allowed without audit  
-**Date:** 2026-01-02  
-**Audit Reference:** `docs/reports/audit/QUICK_AUDIT_NAV_SURFACE.md`
+**Date:** 2026-02-09  
+**Audit Reference:** `docs/reports/audit/QUICK_AUDIT_NAV_SURFACE.md` (re-verified 2026-02-09)
 
 **Related Documents:**
 - [NAVIGATION_CANON.md](./NAVIGATION_CANON.md) - Navigation system architecture (Navbar zones, responsive rules, composition)
@@ -196,6 +196,8 @@ Section is a page-level block container for vertical page rhythm, providing sema
 </Section>
 ```
 
+**Note:** Using a narrow Container (for example `maxWidth="lg"`) for multi-column grids will produce narrow cards and aggressive line wrapping. This is expected behavior. See `docs/canon/CLASSNAME_INLINESTYLE_GOVERNANCE.md` (Container sizing guidelines).
+
 ---
 
 ## Decision Matrix
@@ -239,4 +241,3 @@ No semantic overlap is allowed between these components without explicit audit. 
 
 **Last Audit:** 2026-01-02  
 **Audit Report:** `docs/reports/audit/QUICK_AUDIT_NAV_SURFACE.md`
-

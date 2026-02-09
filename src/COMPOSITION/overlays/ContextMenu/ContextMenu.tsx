@@ -125,6 +125,7 @@ import { Check, ChevronRight, Circle } from "lucide-react";
 import * as React from "react";
 
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { getBaseValue } from "@/FOUNDATION/lib/responsive-props";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
@@ -297,6 +298,14 @@ const ContextMenuTrigger = React.forwardRef<
 >(({ className, asChild, children, ...props }, ref) => {
   const resolvedAsChild = resolveAsChild(asChild, children);
   warnIfExplicitAsChildFalse("ContextMenu.Trigger", asChild, children);
+  if (process.env.NODE_ENV !== "production") {
+    trackClassStyleUsage({
+      component: "ContextMenu.Trigger",
+      zone: "Composition",
+      className,
+      style: (props as { style?: unknown }).style,
+    });
+  }
 
   return (
     <ContextMenuPrimitive.Trigger

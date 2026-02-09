@@ -55,6 +55,7 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as React from "react";
 
 import { resolveAsChild, warnIfExplicitAsChildFalse } from "@/COMPOSITION/utils/trigger-as-child";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import { tokenCVA } from "@/FOUNDATION/lib/token-cva";
 import { cn } from "@/FOUNDATION/lib/utils";
 import { POPOVER_TOKENS } from "@/FOUNDATION/tokens/components/popover";
@@ -77,6 +78,14 @@ const PopoverTrigger = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   const resolvedAsChild = resolveAsChild(asChild, children);
   warnIfExplicitAsChildFalse("Popover.Trigger", asChild, children);
+  if (process.env.NODE_ENV !== "production") {
+    trackClassStyleUsage({
+      component: "Popover.Trigger",
+      zone: "Composition",
+      className: (props as { className?: unknown }).className,
+      style: (props as { style?: unknown }).style,
+    });
+  }
 
   return (
     <PopoverPrimitive.Trigger ref={ref} asChild={resolvedAsChild} {...props}>
