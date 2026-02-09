@@ -8,7 +8,7 @@ import {
   EmptyStateDescription,
   EmptyStateIcon,
   EmptyStateTitle,
-} from "./index";
+} from ".";
 
 const meta: Meta<typeof EmptyState> = {
   title: "Patterns / States / EmptyState",

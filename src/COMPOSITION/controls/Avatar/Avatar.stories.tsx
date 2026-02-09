@@ -2,7 +2,7 @@ import { Stack } from "@/COMPOSITION/layout/Stack";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar, AvatarGroup, type AvatarShape, type AvatarSize } from "./Avatar.index";
+import { Avatar, AvatarGroup, type AvatarShape, type AvatarSize } from ".";
 
 const meta: Meta<typeof Avatar> = {
   title: "Composition / Controls / Avatar",

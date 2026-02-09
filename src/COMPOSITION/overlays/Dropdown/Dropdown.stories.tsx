@@ -234,7 +234,6 @@ export const Matrix: Story = {
  * Reference: VARIANTS_SIZE_CANON.md
  */
 export const States: Story = {
-  name: "States",
   render: () => {
     return (
       <div className="space-y-lg">

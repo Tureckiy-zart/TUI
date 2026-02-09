@@ -52,7 +52,6 @@ type Story = StoryObj;
  * Tabs Keyboard Contract
  */
 export const TabsKeyboard: Story = {
-  name: "Tabs Keyboard",
   render: function TabsKeyboardStory() {
     return (
       <Box className="p-lg">
@@ -104,7 +103,6 @@ export const TabsKeyboard: Story = {
  * Select Keyboard Contract
  */
 export const SelectKeyboard: Story = {
-  name: "Select Keyboard",
   render: function SelectKeyboardStory() {
     const [value, setValue] = useState<string>("option1");
 
@@ -152,7 +150,6 @@ export const SelectKeyboard: Story = {
  * RadioGroup Keyboard Contract
  */
 export const RadioGroupKeyboard: Story = {
-  name: "Radio Group Keyboard",
   render: function RadioGroupKeyboardStory() {
     const [value, setValue] = useState<string | undefined>(undefined);
 

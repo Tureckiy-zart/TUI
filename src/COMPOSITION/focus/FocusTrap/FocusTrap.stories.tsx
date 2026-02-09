@@ -99,7 +99,6 @@ type Story = StoryObj<typeof FocusTrap>;
  * Default story - Basic focus trap usage
  */
 export const Default: Story = {
-  name: "Default",
   render: function DefaultStory() {
     return (
       <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
@@ -133,7 +132,6 @@ export const Default: Story = {
  * States story - Demonstrates active/inactive states
  */
 export const States: Story = {
-  name: "States",
   render: function StatesStory() {
     const [active, setActive] = useState(true);
 
@@ -171,7 +169,6 @@ export const States: Story = {
  * Use case: FocusTrap with initial focus
  */
 export const WithInitialFocus: Story = {
-  name: "With Initial Focus",
   render: function WithInitialFocusStory() {
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -207,7 +204,6 @@ export const WithInitialFocus: Story = {
  * Use case: FocusTrap with Escape handler
  */
 export const WithEscapeHandler: Story = {
-  name: "With Escape Handler",
   render: function WithEscapeHandlerStory() {
     const [isOpen, setIsOpen] = useState(true);
 
@@ -251,7 +247,6 @@ export const WithEscapeHandler: Story = {
  * Use case: FocusTrap without loop
  */
 export const WithoutLoop: Story = {
-  name: "Without Loop",
   render: function WithoutLoopStory() {
     return (
       <Box px={4} py={4} className="border border-[hsl(var(--tm-border-default))]">
@@ -285,7 +280,6 @@ export const WithoutLoop: Story = {
  * Use case: FocusTrap in Modal-like scenario
  */
 export const ModalScenario: Story = {
-  name: "Modal Scenario",
   render: function ModalScenarioStory() {
     const [isOpen, setIsOpen] = useState(false);
     const closeButtonRef = useRef<HTMLButtonElement>(null);

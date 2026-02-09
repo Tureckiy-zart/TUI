@@ -31,7 +31,7 @@ export {
   type BreadcrumbsItemProps,
   type BreadcrumbsRootProps,
   type BreadcrumbsSeparatorProps,
-} from "./breadcrumbs/index";
+} from "./breadcrumbs";
 
 // Pagination
 export {
@@ -41,7 +41,7 @@ export {
   type PaginationNextProps,
   type PaginationPrevProps,
   type PaginationRootProps,
-} from "./pagination/index";
+} from "./pagination";
 
 // Stepper
 export {
@@ -64,10 +64,10 @@ export { NavItem, type NavItemProps, NavRoot, type NavRootProps } from "./primit
 export { NavList, type NavListProps } from "./nav-list";
 
 // NavText (standalone component)
-export { NavText, type NavTextProps } from "./NavText/NavText";
+export { NavText, type NavTextProps } from "./NavText";
 
 // NavSeparator (standalone component)
-export { NavSeparator, type NavSeparatorProps } from "./NavSeparator/NavSeparator";
+export { NavSeparator, type NavSeparatorProps } from "./NavSeparator";
 
 // Menu
 export {
@@ -86,4 +86,4 @@ export {
   type MenuSeparatorProps,
   MenuTrigger,
   type MenuTriggerProps,
-} from "./Menu/Menu.index";
+} from "./Menu";

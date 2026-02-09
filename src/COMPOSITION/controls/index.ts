@@ -6,8 +6,9 @@
 
 export * from "./AspectRatio";
 export * from "./Avatar";
+export * from "./Image";
 export * from "./LanguageSelector";
-export * from "./MultiSelect/MultiSelect.index";
+export * from "./MultiSelect";
 export * from "./Select";
 export * from "./Separator";
 export {
@@ -18,4 +19,4 @@ export {
   type SpinnerSize,
   type SpinnerTone,
   type SpinnerVariant,
-} from "./Spinner/Spinner";
+} from "./Spinner";

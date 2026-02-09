@@ -13,7 +13,7 @@ import * as React from "react";
 
 import { InverseTypography } from "@/COMPOSITION/inverse-typography";
 
-import { HeroMedia } from "../HeroMedia/HeroMedia.index";
+import { HeroMedia } from "../HeroMedia";
 
 export interface HeroCompositionReferenceProps {
   /** Optional aria-label for the hero region. */

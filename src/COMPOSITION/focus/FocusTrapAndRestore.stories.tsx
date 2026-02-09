@@ -58,7 +58,6 @@ type Story = StoryObj;
  * Demonstrates focus containment within Modal
  */
 export const ModalFocusTrap: Story = {
-  name: "Modal Focus Trap",
   render: function ModalFocusTrapStory() {
     const [isOpen, setIsOpen] = useState(false);
 

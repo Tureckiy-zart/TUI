@@ -43,6 +43,7 @@ This document **formally locks** the Carousel Extension component of `@tenerife.
 - Prev/Next composed directly inside Track
 - No visual props in public API; internal tokens only (carousel.tokens.ts)
 - Foundation Composition: Uses Button from PRIMITIVES for Prev/Next
+- Single-viewport carousel only; multi-card rail/Scroller is a separate pattern and out of scope
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Version:** 1.32  
 **Date Created:** 2025-12-12  
-**Last Updated:** 2026-01-29 (Runtime Utilities Lock - TUNG-028)  
+**Last Updated:** 2026-02-05 (Runtime Utilities Lock - TUNG-028)  
 **Status:** ? **LOCKED (Foundation Closed)**  
 **Layer:** UI / ARCHITECTURE  
 **Priority:** CRITICAL  
@@ -948,6 +948,9 @@ All 21 Foundation components have been verified and confirmed as locked. The Fou
 - ❌ **FORBIDDEN:** Extensions that duplicate Foundation functionality
 - ❌ **FORBIDDEN:** Extensions that bypass Foundation components
 - ❌ **FORBIDDEN:** Extensions named after Foundation components (e.g., `SimpleModal`, `BasicTabs`)
+- ❌ **FORBIDDEN:** Adding prop-level breakpoint visibility (e.g. `visibleFrom`, `hideBelow`) to Foundation or Layout components. Breakpoint-based show/hide belongs to Extension only — see [ResponsiveVisibility CANON](./extension/RESPONSIVE_VISIBILITY_CANON.md) and [ResponsiveVisibility LOCK](./locks/RESPONSIVE_VISIBILITY_LOCK.md).
+- ❌ **FORBIDDEN:** Adding prop-level or context-level "elevated surface" / elevation-by-context to Foundation or Layout components. Elevation surface context belongs to Extension only — see [SurfaceElevation CANON](./extension/SURFACE_ELEVATION_CANON.md) and [SurfaceElevation LOCK](./locks/SURFACE_ELEVATION_LOCK.md).
+- ❌ **FORBIDDEN:** Adding prop-level or context-level "inverse typography" / inverse-by-context to Foundation or Layout components. Inverse text context belongs to Extension only — see [InverseTypography CANON](./extension/INVERSE_TYPOGRAPHY_CANON.md) and [InverseTypography LOCK](./locks/INVERSE_TYPOGRAPHY_LOCK.md).
 
 **Rationale:** Clear separation ensures Foundation stability and Extension flexibility.
 
@@ -1264,6 +1267,8 @@ If Interactive Size Scale Authority modifications are needed:
 
 **Status:** ✅ **OPEN** (Extension development is allowed)  
 **Authority Contract:** [Extension Authority Contract](./EXTENSION_AUTHORITY.md)
+
+**Extension-owned capabilities (not in Foundation):** Breakpoint-based visibility (show/hide by viewport) is an Extension capability only; Foundation and Layout MUST NOT expose visibility-by-breakpoint props — see [RESPONSIVE_VISIBILITY_CANON.md](./extension/RESPONSIVE_VISIBILITY_CANON.md). Inverse typography and elevation surface context are Extension capabilities only; Foundation and Layout MUST NOT expose inverse context or elevation context props — see [INVERSE_TYPOGRAPHY_CANON.md](./extension/INVERSE_TYPOGRAPHY_CANON.md) and [SURFACE_ELEVATION_CANON.md](./extension/SURFACE_ELEVATION_CANON.md).
 
 The Extension layer is **OPEN** for development. All Extension components must:
 

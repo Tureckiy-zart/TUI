@@ -82,15 +82,21 @@ Confirmed Facts (Canon):
 - Any enforcement logic (lint/throw/auto-blocks).
 - Any refactoring or auto-rewriting of className/style.
 
-## 3. Observations and Conclusions
+## 3. DX Observations
+- There is no Foundation-level Image/Media primitive in the system today.
+- In doc-aware consumer work, the only reliable universal media element is plain `<img>`; HeroMedia can be non-obvious to assemble and its runtime behavior is not a drop-in replacement for a generic image element without explicit guidance.
+- HeroMedia is an Extension/Composition capability for hero blocks (media + overlay) and must not be treated as a general-purpose Image primitive.
+- Inline styles on `<img>` (and pairing with `AspectRatio` for layout stability) are an accepted, pragmatic escape hatch while a Foundation Image primitive is absent.
+
+## 4. Observations and Conclusions
 - No significant findings. The material is for fixing boundaries and the declarative model.
 
-## 4. Decisions Made
+## 5. Decisions Made
 - All documentation on className/inline style governance is consolidated in one document.
 - DEV-only className/style telemetry is allowed as a separate task (T06) without PROD effect.
 - Zonal definitions are fixed as guidance without prohibitions.
 
-## 5. Zonal Model (Foundation / Composition / Domain)
+## 6. Zonal Model (Foundation / Composition / Domain)
 ### Zone 1 — Foundation
 **Definition:** Fundamental primitives, tokens, and base components defining canonical behavior and visual ground rules.
 
@@ -118,7 +124,7 @@ Confirmed Facts (Canon):
 
 **Examples (non-exhaustive):** DomainCard, BillingSummary, ProfileHeader (if they exist in the product part).
 
-## 6. Expectations for className and inline styles
+## 7. Expectations for className and inline styles
 ### Zone 1 — Foundation
 - **className:** discouraged / risky.
 - **inline style:** discouraged / risky, especially with hardcoded values.
@@ -145,7 +151,7 @@ Recommended guidelines:
 
 Using a narrow Container (for example `maxWidth="lg"`) for multi-column grids results in narrow cards and aggressive line wrapping. This is expected behavior, not a bug.
 
-## 7. Edge Cases and Escape Hatches
+## 8. Edge Cases and Escape Hatches
 ### Compound components
 - The zone is defined by the root component.
 - Slots and subcomponents inherit the root zone.
@@ -163,15 +169,15 @@ Using a narrow Container (for example `maxWidth="lg"`) for multi-column grids re
 - If a component is responsible for layout/structure, it is Composition.
 - If a component expresses product logic and scenario, it is Domain.
 
-## 8. Open Questions
+## 9. Open Questions
 No open questions. Cycle closed.
 
-## 9. Governance Outcome
+## 10. Governance Outcome
 - No enforcement for className and inline style is planned.
 - Box is the only conscious escape hatch in the Composition layer.
 - Further changes are allowed only with new data (e.g., new telemetry or formal owner request).
 
-## 10. Status and Next Steps
+## 11. Status and Next Steps
 **T01 — Baseline & Scope Lock**
 - `task_id`: TUI_CG_T01_BASELINE_SCOPE_LOCK
 - `status`: done

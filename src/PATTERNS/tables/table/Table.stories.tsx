@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableLoadingState,
   TableRow,
-} from "./index";
+} from ".";
 
 const meta: Meta<typeof Table> = {
   title: "Patterns / Tables / Table",

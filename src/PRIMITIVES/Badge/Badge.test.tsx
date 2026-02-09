@@ -17,6 +17,14 @@ describe("Badge component", () => {
       render(<Badge>Test Badge</Badge>);
       expect(screen.getByText("Test Badge")).toBeInTheDocument();
     });
+
+    it("uses inline sizing by default", () => {
+      const { container } = render(<Badge>Inline</Badge>);
+      const element = container.firstChild as HTMLElement;
+      expect(element).toHaveClass("inline-flex");
+      expect(element).toHaveClass("w-fit");
+      expect(element).toHaveClass("h-fit");
+    });
   });
 
   describe("Variants", () => {

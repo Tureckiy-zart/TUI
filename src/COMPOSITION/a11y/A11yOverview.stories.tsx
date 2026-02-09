@@ -57,7 +57,6 @@ type Story = StoryObj;
  * Demonstrates correct semantic element usage
  */
 export const SemanticRoles: Story = {
-  name: "Semantic Roles",
   render: function SemanticRolesStory() {
     return (
       <Box className="p-lg">
@@ -132,7 +131,6 @@ export const SemanticRoles: Story = {
  * Demonstrates keyboard-only operability
  */
 export const KeyboardOnly: Story = {
-  name: "Keyboard Only",
   render: function KeyboardOnlyStory() {
     return (
       <Box className="p-lg">

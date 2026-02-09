@@ -67,9 +67,9 @@ import * as React from "react";
 import { ListItem } from "@/COMPOSITION/layout";
 
 // Import NavSeparator from standalone component
-import { NavSeparator, type NavSeparatorProps } from "../NavSeparator/NavSeparator";
+import { NavSeparator, type NavSeparatorProps } from "../NavSeparator";
 // Import NavText from standalone component
-import { NavText, type NavTextProps } from "../NavText/NavText";
+import { NavText, type NavTextProps } from "../NavText";
 
 // ============================================================================
 // Types

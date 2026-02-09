@@ -10,11 +10,11 @@ export * from "./Container";
 export * from "./Flex";
 export * from "./Grid";
 export * from "./Inline";
-export * from "./Inset/Inset";
-export * from "./List/List.index";
-export * from "./ListItem/ListItem.index";
+export * from "./Inset";
+export * from "./List";
+export * from "./ListItem";
 export * from "./ModeHero";
-export * from "./Panel/Panel.index";
+export * from "./Panel";
 export * from "./Row";
 export * from "./Stack";
 export * from "./Surface";
@@ -32,8 +32,8 @@ export {
 } from "./Card";
 
 // Section
-export { Section, type SectionProps } from "./Section/Section";
-export { SectionState, type SectionStateProps } from "./SectionState/SectionState.index";
+export { Section, type SectionProps } from "./Section";
+export { SectionState, type SectionStateProps } from "./SectionState";
 
 // Footer
 export { Footer, type FooterProps } from "./Footer";
@@ -42,7 +42,7 @@ export { Footer, type FooterProps } from "./Footer";
 export { PageHeader, type PageHeaderProps } from "./PageHeader";
 
 // ContentShell
-export { ContentShell, type ContentShellProps } from "./ContentShell/ContentShell";
+export { ContentShell, type ContentShellProps } from "./ContentShell";
 
 // SidebarLayout
 export {
@@ -60,7 +60,7 @@ export {
   type DividerProps,
   type DividerTone,
   dividerVariants,
-} from "./Divider/Divider";
+} from "./Divider";
 
 // StickyBar
 export {
@@ -69,7 +69,7 @@ export {
   type StickyBarProps,
   type StickyBarTone,
   stickyBarVariants,
-} from "./StickyBar/StickyBar";
+} from "./StickyBar";
 
 // Spacer
 export { Spacer, type SpacerOrientation, type SpacerProps } from "./Spacer";
@@ -88,13 +88,10 @@ export {
   type AppHeaderNavProps,
   type AppHeaderPosition,
   type AppHeaderProps,
-} from "./AppHeader/AppHeader";
+} from "./AppHeader";
 
 // HeaderComposition (ResponsiveVisibility etalon: mobile/desktop header branching)
-export {
-  HeaderComposition,
-  type HeaderCompositionProps,
-} from "./HeaderComposition/HeaderComposition.index";
+export { HeaderComposition, type HeaderCompositionProps } from "./HeaderComposition";
 
 // LinkWithCustomVariant
 export { LinkWithCustomVariant } from "./LinkWithCustomVariant";

@@ -2,4 +2,4 @@
  * ButtonGroup Component Re-export
  */
 
-export * from "./ButtonGroup.index";
+export * from "./ButtonGroup";

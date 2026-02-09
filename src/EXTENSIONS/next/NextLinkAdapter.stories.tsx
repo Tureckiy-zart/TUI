@@ -284,7 +284,7 @@ export const SizesGallery: Story = {
             <div className="flex flex-col gap-4">
               {contentVariations.map((variation) => (
                 <div key={variation.label} className="flex items-center gap-4">
-                  <div className="w-40 text-sm text-gray-600">{variation.label}</div>
+                  <div className="w-40 text-sm text-muted-foreground">{variation.label}</div>
                   <NextLinkAdapter
                     href={`/${size}/${variation.label}`}
                     size={size}

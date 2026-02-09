@@ -356,7 +356,7 @@ export {
   type MultiSelectOption,
   type MultiSelectProps,
   type MultiSelectSize,
-} from "./COMPOSITION/controls/MultiSelect/MultiSelect.index";
+} from "./COMPOSITION/controls/MultiSelect";
 
 // Carousel component (Extension, compound, batteries-included)
 export {
@@ -465,7 +465,7 @@ export {
   type FileUploadProps,
   type FileUploadSize,
   type FileUploadVariant,
-} from "./COMPOSITION/overlays/FileUpload/index";
+} from "./COMPOSITION/overlays/FileUpload";
 
 // Form components (CVA-based, token-driven)
 export {
@@ -529,6 +529,14 @@ export {
   type AspectRatioProps,
 } from "./COMPOSITION/controls/AspectRatio";
 
+// Image component (token-driven)
+export {
+  Image,
+  type ImageFit,
+  type ImageProps,
+  type ImageRadius,
+} from "./COMPOSITION/controls/Image";
+
 // Spinner component (visual feedback, loading indicator)
 export {
   Spinner,
@@ -538,13 +546,13 @@ export {
   type SpinnerSize,
   type SpinnerTone,
   type SpinnerVariant,
-} from "./COMPOSITION/controls/Spinner/Spinner";
+} from "./COMPOSITION/controls/Spinner";
 
 // VisuallyHidden component (DX/A11y utility, non-visual)
 export { VisuallyHidden, type VisuallyHiddenProps } from "./COMPOSITION/a11y/VisuallyHidden";
 
 // FocusTrap component (focus containment utility)
-export { FocusTrap, type FocusTrapProps } from "./COMPOSITION/focus/FocusTrap/FocusTrap.index";
+export { FocusTrap, type FocusTrapProps } from "./COMPOSITION/focus/FocusTrap";
 
 // ============================================================================
 // LAYOUT PRIMITIVES

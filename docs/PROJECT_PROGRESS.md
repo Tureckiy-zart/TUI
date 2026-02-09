@@ -4612,6 +4612,30 @@ The following components are **explicitly excluded** from this lock:
   - Types: `ChipVariant` (`primary | secondary | accent | outline | ghost | destructive`), `ChipRadius` (`sm | md | lg | pill`)
   - Date Completed: 2025-12-28
 
+### Image Component (2026-02-09)
+
+- ✅ **Image** - Component Creation Pipeline C0-C10 (Complete, 2026-02-09)
+  - Component: Image
+  - Type: Extension Layer Primitive - Media
+  - Category: controls (primitive)
+  - Location: `src/COMPOSITION/controls/Image/Image.tsx`
+  - Status: ✅ **CREATED** (Component Creation Pipeline C0-C10 Complete)
+  - Pipeline: Component Creation Pipeline (C0-C10 complete, 2026-02-09)
+  - Creation Report: `docs/reports/creation/Image_CREATION_REPORT.md`
+  - Features:
+    - Native `<img>` rendering with explicit object-fit union (`cover | contain | fill | none | scale-down`)
+    - Optional `fill` mode for AspectRatio composition (absolute inset)
+    - Token-driven radius (`none | sm | md | lg | xl | full`)
+    - Optional fallback slot rendered on load error
+    - Inline by default (no full-width stretch unless parent defines it)
+  - Use Cases: Card/hero media, thumbnails, content imagery, stable AspectRatio composition
+  - Token Compliance: ✅ 100% (no raw sizes/colors/motion in component implementation)
+  - Key Artifacts:
+    - Component: `Image.tsx`
+    - Stories: `Image.stories.tsx` (Default, WithAspectRatio, FitMatrix, FallbackOrError, RadiusShowcase)
+    - Tests: `Image.test.tsx` (rendering, fallback behavior, fit mapping, fill classes, a11y)
+  - Exports: `Image`, `ImageProps`, `ImageFit`, `ImageRadius`
+
 ### Drawer Component (2025-12-28)
 
 - ✅ **Drawer** - Component Creation Pipeline C0-C10 (Complete, 2025-12-28)

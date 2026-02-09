@@ -3,8 +3,8 @@ import * as React from "react";
 
 import { Card } from "@/COMPOSITION/layout";
 
-import { SurfaceElevationCompositionReference } from "../SurfaceElevationCompositionReference/SurfaceElevationCompositionReference.index";
-import { SurfaceElevation, useSurfaceElevation } from "./SurfaceElevation.index";
+import { SurfaceElevationCompositionReference } from "../SurfaceElevationCompositionReference";
+import { SurfaceElevation, useSurfaceElevation } from "./SurfaceElevation";
 
 const meta = {
   title: "Extensions/SurfaceElevation",

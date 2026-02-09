@@ -363,7 +363,6 @@ export const GAP4_StepperReadOnly: Story = {
  * Summary - All GAPs at a glance
  */
 export const Summary: Story = {
-  name: "Summary",
   render: function SummaryStory() {
     return (
       <Box className="p-lg">

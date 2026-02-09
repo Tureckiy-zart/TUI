@@ -190,7 +190,6 @@ export const CustomDelay: Story = {
 };
 
 export const KeyboardAccessibility: Story = {
-  name: "Keyboard Accessibility",
   render: () => (
     <div className="space-y-md">
       <p className="text-sm text-[hsl(var(--tm-text-muted))]">
@@ -223,7 +222,6 @@ export const KeyboardAccessibility: Story = {
 };
 
 export const States: Story = {
-  name: "States",
   render: () => (
     <div className="space-y-lg">
       <div className="space-y-md">

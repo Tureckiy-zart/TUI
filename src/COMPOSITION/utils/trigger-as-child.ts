@@ -4,7 +4,27 @@ export function resolveAsChild(asChild: boolean | undefined, children: React.Rea
   if (typeof asChild === "boolean") {
     return asChild;
   }
-  return React.isValidElement(children);
+  // Default to false unless the child is a native DOM element or a ref-forwarding component.
+  // This avoids implicitly enabling asChild for fragments or non-ref-forwarding components.
+  if (!React.isValidElement(children)) return false;
+
+  if (children.type === React.Fragment) return false;
+
+  if (typeof children.type === "string") return true;
+
+  const forwardRefSymbol = Symbol.for("react.forward_ref");
+  const memoSymbol = Symbol.for("react.memo");
+
+  // forwardRef components
+  if ((children.type as any)?.$$typeof === forwardRefSymbol) return true;
+
+  // memo(forwardRef(...)) components
+  if ((children.type as any)?.$$typeof === memoSymbol) {
+    const inner = (children.type as any).type;
+    if (inner?.$$typeof === forwardRefSymbol) return true;
+  }
+
+  return false;
 }
 
 export function warnIfExplicitAsChildFalse(

@@ -2,7 +2,7 @@
 import { NavItem, NavList, NavSeparator, NavText } from "./Navigation";
 
 // NavRoot is now a standalone component
-import { NavRoot } from "../NavRoot/NavRoot";
+import { NavRoot } from "../NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
   title: "Composition / Navigation / Primitives",

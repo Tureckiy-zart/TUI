@@ -55,7 +55,6 @@ type Story = StoryObj;
  * Modal Labeling Contract
  */
 export const ModalLabeling: Story = {
-  name: "Modal Labeling",
   render: function ModalLabelingStory() {
     const [open, setOpen] = useState(false);
     const titleId = "modal-title-demo";
@@ -120,7 +119,6 @@ export const ModalLabeling: Story = {
  * Dialog Labeling Contract
  */
 export const DialogLabeling: Story = {
-  name: "Dialog Labeling",
   render: function DialogLabelingStory() {
     const [open, setOpen] = useState(false);
 

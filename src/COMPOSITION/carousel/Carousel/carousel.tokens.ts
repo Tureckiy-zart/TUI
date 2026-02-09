@@ -35,7 +35,7 @@ export const CAROUSEL_TOKENS = {
     gap: "gap-xs",
     /** Placement variants */
     placement: {
-      bottom: "",
+      bottom: "mt-sm",
       overlay: "absolute bottom-md left-0 right-0 z-10",
     },
   },

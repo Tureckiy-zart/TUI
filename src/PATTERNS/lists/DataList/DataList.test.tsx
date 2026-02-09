@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import { renderWithTheme } from "@/test/test-utils";
 
-import { DataList, DataListItem, DataListLabel, DataListRoot, DataListValue } from "./index";
+import { DataList, DataListItem, DataListLabel, DataListRoot, DataListValue } from ".";
 
 describe("DataList", () => {
   describe("Rendering", () => {

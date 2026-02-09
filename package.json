@@ -41,7 +41,7 @@
   },
   "scripts": {
     "format": "prettier . --write",
-    "lint:fix": "bash ./scripts/lint-local.sh",
+    "lint:fix": "pnpm run exports:fix && bash ./scripts/lint-local.sh",
     "lint:strict": "eslint . --ext .ts,.tsx --max-warnings=0 --ignore-pattern '**/*.stories.*' --ignore-pattern '.storybook/**' --ignore-pattern 'storybook-static/**' --ignore-pattern 'docs/**' --ignore-pattern '.cursor/**' --ignore-pattern 'docs_archive/**'",
     "typecheck": "tsc --noEmit && tsc --noEmit --project tsconfig.vite.json",
     "test": "vitest run",
@@ -63,6 +63,7 @@
     "test:focus": "playwright test --config=playwright/playwright.config.ts",
     "a11y:contrast": "tsx scripts/a11y-contrast-check.js",
     "typography:contrast-check": "node scripts/typography-contrast-check.js",
+    "exports:fix": "eslint . --ext .ts,.tsx --fix --ignore-pattern \"**/*.stories.*\" --ignore-pattern \".storybook/**\" --ignore-pattern \"storybook-static/**\" --ignore-pattern \"docs/**\" --ignore-pattern \".cursor/**\" --ignore-pattern \"docs_archive/**\"",
     "lint": "bash -c 'start=$(date +%s); echo \"lint старт\"; eslint . --ext .ts,.tsx --fix --ignore-pattern \"**/*.stories.*\" --ignore-pattern \".storybook/**\" --ignore-pattern \"storybook-static/**\" --ignore-pattern \"docs/**\" --ignore-pattern \".cursor/**\" --ignore-pattern \"docs_archive/**\"; status=$?; end=$(date +%s); echo \"lint time: $((end-start))s\"; if [ $status -eq 0 ]; then echo \"lint PASS\"; else echo \"lint FAIL\"; fi; exit $status'",
     "lint:check": "bash -c 'start=$(date +%s); echo \"lint:check старт\"; eslint . --ext .ts,.tsx --ignore-pattern \"**/*.stories.*\" --ignore-pattern \".storybook/**\" --ignore-pattern \"storybook-static/**\" --ignore-pattern \"docs/**\" --ignore-pattern \".cursor/**\" --ignore-pattern \"docs_archive/**\"; status=$?; end=$(date +%s); echo \"lint:check time: $((end-start))s\"; if [ $status -eq 0 ]; then echo \"lint:check PASS\"; else echo \"lint:check FAIL\"; fi; exit $status'",
     "lint:ci": "bash ./scripts/lint-ci.sh",

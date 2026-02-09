@@ -53,7 +53,6 @@ type Story = StoryObj;
  * Shows which element is currently focused
  */
 export const FocusTracker: Story = {
-  name: "Focus Tracker",
   render: function FocusTrackerStory() {
     const [focusedElement, setFocusedElement] = useState<string>("None");
     const [focusHistory, setFocusHistory] = useState<string[]>([]);

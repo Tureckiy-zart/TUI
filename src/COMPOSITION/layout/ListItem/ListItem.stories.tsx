@@ -2,7 +2,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { List } from "../List/List";
+import { List } from "../List";
 import { ListItem } from "./ListItem";
 
 /**

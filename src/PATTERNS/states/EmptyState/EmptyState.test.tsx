@@ -15,7 +15,7 @@ import {
   EmptyStateDescription,
   EmptyStateIcon,
   EmptyStateTitle,
-} from "./index";
+} from ".";
 
 describe("EmptyState", () => {
   describe("Rendering", () => {
