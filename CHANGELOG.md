@@ -1,3 +1,9 @@
+## [3.2.0](https://github.com/Tureckiy-zart/TUI/compare/v3.1.0...v3.2.0) (2026-02-10)
+
+### Features
+
+* runtime guards, composition enforcement and canon docs (v3.2.0) ([c26d9d7](https://github.com/Tureckiy-zart/TUI/commit/c26d9d7f9b68c273d062f7d76c58b1f9e4609dae))
+
 ## [3.1.0](https://github.com/Tureckiy-zart/TUI/compare/v3.0.4...v3.1.0) (2026-02-05)
 
 ### Features
