@@ -2,4 +2,4 @@
  * Inverse typography composition — InverseTypography and related exports.
  */
 
-export * from "./InverseTypography/InverseTypography.index";
+export * from "./InverseTypography";

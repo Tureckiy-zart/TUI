@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { NavSeparator } from "./NavSeparator";
 
 const meta: Meta<typeof NavSeparator> = {

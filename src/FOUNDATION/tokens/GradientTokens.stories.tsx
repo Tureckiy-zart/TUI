@@ -7,7 +7,7 @@
  * This gallery helps developers discover, understand, and use gradient tokens effectively.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
 import { Box, Grid, Stack } from "@/COMPOSITION/layout";

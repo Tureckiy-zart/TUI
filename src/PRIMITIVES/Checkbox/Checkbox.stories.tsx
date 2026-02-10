@@ -1,7 +1,7 @@
 "use client";
 
 import { IconCheck } from "@/icons";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
 import { Checkbox } from "./Checkbox";
@@ -562,7 +562,7 @@ export const CustomIcons: Story = {
           <label className="flex cursor-pointer items-center gap-sm">
             <Checkbox
               checked
-              icon={<IconCheck className="size-3 text-blue-600" />}
+              icon={<IconCheck className="size-3 text-[hsl(var(--tm-primary))]" />}
               aria-labelledby="custom-icon-label-1"
             />
             <span id="custom-icon-label-1">Custom blue check icon</span>
@@ -586,7 +586,10 @@ export const CustomIcons: Story = {
             <Checkbox
               indeterminate
               indeterminateIcon={
-                <span className="block h-0.5 w-2 rounded-sm bg-purple-600" aria-hidden="true" />
+                <span
+                  className="block h-0.5 w-2 rounded-sm bg-[hsl(var(--tm-primary))]"
+                  aria-hidden="true"
+                />
               }
               aria-labelledby="custom-indeterminate-label-1"
             />

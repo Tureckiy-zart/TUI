@@ -1,8 +1,10 @@
 ﻿"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
+import { useGlobalToast } from "@/hooks/useGlobalToast";
+import { useLocalToast } from "@/hooks/useLocalToast";
 import {
   ToastAction,
   ToastClose,
@@ -13,8 +15,6 @@ import {
 } from "./Toast";
 import { ToastProvider } from "./ToastProvider";
 import { ToastViewport } from "./ToastViewport";
-import { useGlobalToast } from "@/hooks/useGlobalToast";
-import { useLocalToast } from "@/hooks/useLocalToast";
 
 const meta: Meta<typeof ToastRoot> = {
   title: "Composition / Overlays / Toast",

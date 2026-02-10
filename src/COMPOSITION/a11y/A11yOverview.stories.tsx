@@ -7,7 +7,7 @@
  * Reference: docs/architecture/A11Y_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
 import { Button } from "@/PRIMITIVES/Button";
@@ -57,7 +57,6 @@ type Story = StoryObj;
  * Demonstrates correct semantic element usage
  */
 export const SemanticRoles: Story = {
-  name: "Semantic Roles",
   render: function SemanticRolesStory() {
     return (
       <Box className="p-lg">
@@ -132,7 +131,6 @@ export const SemanticRoles: Story = {
  * Demonstrates keyboard-only operability
  */
 export const KeyboardOnly: Story = {
-  name: "Keyboard Only",
   render: function KeyboardOnlyStory() {
     return (
       <Box className="p-lg">

@@ -1,0 +1,480 @@
+{
+  "task": "TUI_110_MASTER_PRODUCTION_CLEANUP_V2",
+  "version": "2.0",
+  "layer": "META",
+  "description": "Production-level cleanup of Tenerife UI: restore interactivity validity (SSR/hydration), enforce safe-by-default, fix architecture boundaries (Extension/Radix/deep-imports), and align usage/docs. Driven by evidence from TUI_110_T01 + TUI_110_T02 + ARCH_IMPORT_AUDIT.",
+  "progress_percent": 96,
+  "completion_summary": [
+    "TUI_110_T10: canon docs created for runtime guards, trigger asChild, composition enforcement, and className policy.",
+    "Canonical inventory + README updated to link new canon pages.",
+    "No code or behavior changes; docs only."
+  ],
+  "prerequisites": {
+    "must_have_completed": [
+      "TUI_110_T01_BASELINE_SNAPSHOT",
+      "TUI_110_T02_DX_OBSERVATION_REPORT"
+    ],
+    "must_be_ready": true,
+    "readiness_report": "docs/reports/TUI_110/TUI_110_T01_BASELINE_SNAPSHOT.md"
+  },
+  "global_rules": [
+    "Every subtask MUST write a report file under a single folder: docs/reports/TUI_110/ (in the repo where it runs).",
+    "Every report MUST include: date/time, executed commands, changed files list, before/after evidence, remaining unknowns.",
+    "No 'drive-by refactor'. Only changes required by the task scope.",
+    "If a task changes library behavior/API, it MUST add/adjust tests + docs + migration notes in the same task."
+  ],
+  "streams": {
+    "PET_PROJECT": {
+      "repo": "scratch/ui-repro-next (consumer repro app)",
+      "reports_dir": "scratch/ui-repro-next/docs/reports/TUI_110/"
+    },
+    "LIB_REPO": {
+      "repo": "TUI (library repository)",
+      "reports_dir": "docs/reports/TUI_110/"
+    }
+  },
+  "milestones": [
+    {
+      "id": "M1_BLOCKERS_INTERACTIVITY",
+      "goal": "No nested interactive DOM from canonical usage; no hydration mismatch; baseline repro page interactive in real browser.",
+      "exit_criteria": [
+        "Repro SSR HTML contains no <button> inside <button> for Menu/Popover/Tooltip/Modal triggers.",
+        "Next dev console shows no hydration mismatch caused by invalid nesting on the repro page.",
+        "Manual click/keyboard interactions confirmed for Menu/Popover/Tooltip/Modal/Select in a real browser."
+      ]
+    },
+    {
+      "id": "M2_SAFE_BY_DEFAULT",
+      "goal": "Library does not hard-crash in dev for missing props; errors are surfaced safely and predictably.",
+      "exit_criteria": [
+        "Required-prop enforcement does not throw unhandled errors during normal render paths.",
+        "Safe fallback behavior exists OR dev-only warnings with clear guidance exist (as per contract)."
+      ]
+    },
+    {
+      "id": "M3_ARCHITECTURE_BOUNDARIES",
+      "goal": "Extension/ Foundation separation and import boundaries comply with Authority docs and audit findings.",
+      "exit_criteria": [
+        "No Extension components live inside locked Foundation folders.",
+        "Extension code does not import Radix primitives directly (unless explicitly allowed by Authority).",
+        "No deep internal imports bypass public API (no @/FOUNDATION/*, @/PRIMITIVES/*, etc. from Extension)."
+      ]
+    },
+    {
+      "id": "M4_STYLE_GOVERNANCE",
+      "goal": "No raw Tailwind/className leakage in library where tokenized props are required; consumer examples use library primitives correctly.",
+      "exit_criteria": [
+        "Lint barrier prevents forbidden props/patterns (className/raw tailwind in governed areas, forbidden shorthands if banned, etc.).",
+        "Docs/examples show canonical Box/Stack usage for layout instead of ad-hoc div wrappers."
+      ]
+    }
+  ],
+  "subtasks": [
+    {
+      "task": "TUI_110_T03_MANUAL_INTERACTIVITY_VERIFY",
+      "version": "1.0",
+      "layer": "1",
+      "run_in": "PET_PROJECT",
+      "status": "done",
+      "description": "Manually verify that Menu/Popover/Tooltip/Modal/Select interactions actually work in a real browser (since Playwright headless is blocked by pointer-events intercept). Capture evidence (screenshots + console logs + minimal DOM after interaction).",
+      "steps": [
+        {
+          "title": "Run dev server",
+          "actions": [
+            "pnpm install",
+            "pnpm dev",
+            "Open /repro (or the repro surface page)"
+          ],
+          "expectation": "Repro page loads without crashes."
+        },
+        {
+          "title": "Manual interaction matrix",
+          "actions": [
+            "Click Menu trigger → confirm open state",
+            "Open Popover → confirm content visible",
+            "Hover/Focus Tooltip → confirm visible",
+            "Open Modal/Drawer → confirm visible + focus trap",
+            "Open Select → confirm options list renders"
+          ],
+          "expectation": "Each component visibly transitions to open state and is keyboard accessible."
+        },
+        {
+          "title": "Evidence capture",
+          "actions": [
+            "Save screenshots for each open state",
+            "Copy console logs (no hydration errors)",
+            "Capture DOM excerpt AFTER open state for at least Modal + Popover"
+          ],
+          "expectation": "Evidence is reproducible and stored in report."
+        }
+      ],
+      "success_criteria": [
+        "Report created with interaction matrix + evidence.",
+        "Confirms which failures are REAL library issues vs headless artifact."
+      ],
+      "post_actions": [
+        "If failures are real: proceed to TUI_110_T04_TRIGGER_ASCHILD_FIX (LIB).",
+        "If failures are only headless: proceed to M1 exit + continue."
+      ]
+    },
+    {
+      "task": "TUI_110_T04_TRIGGER_ASCHILD_FIX",
+      "version": "1.0",
+      "layer": "1",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Fix nested <button> / hydration failures by making Trigger components safe for composition with <Button>. Implement canonical asChild behavior (or alternative safe pattern) for MenuTrigger/PopoverTrigger/TooltipTrigger/Modal.Trigger.",
+      "scope": [
+        "MenuTrigger, PopoverTrigger, TooltipTrigger, Modal.Trigger",
+        "Related docs + examples",
+        "Tests (SSR snapshot or DOM assertion) preventing regression"
+      ],
+      "steps": [
+        {
+          "title": "Decide canonical composition contract",
+          "actions": [
+            "Pick ONE: (A) triggers default to asChild when child is a single element OR (B) provide explicit *ButtonTrigger components OR (C) enforce that Trigger renders non-button element by default."
+          ],
+          "expectation": "Chosen approach documented in report with rationale."
+        },
+        {
+          "title": "Implement fix",
+          "actions": [
+            "Update Trigger implementation(s) accordingly",
+            "Update typing so it matches rendered element/ref correctly",
+            "Update internal usage and any affected components"
+          ],
+          "expectation": "No nested interactive elements when composing Trigger + Button."
+        },
+        {
+          "title": "Add regression tests",
+          "actions": [
+            "Add SSR/DOM test that fails if <button> contains nested <button> for canonical usage",
+            "Add at least one runtime integration test per overlay"
+          ],
+          "expectation": "Tests fail on old behavior and pass on new."
+        },
+        {
+          "title": "Update docs + migration note",
+          "actions": [
+            "Document canonical pattern",
+            "If breaking change: add MIGRATION snippet"
+          ],
+          "expectation": "Consumer knows the correct usage without guessing."
+        }
+      ],
+      "success_criteria": [
+        "Repro SSR HTML shows no nested <button> for Menu/Popover/Tooltip/Modal trigger composition.",
+        "No hydration mismatch from invalid nesting in Next repro.",
+        "Tests added and passing."
+      ],
+      "post_actions": [
+        "Proceed to TUI_110_T05_SAFE_BY_DEFAULT_RUNTIME_GUARDS"
+      ]
+    },
+    {
+      "task": "TUI_110_T05_SAFE_BY_DEFAULT_RUNTIME_GUARDS",
+      "version": "1.0",
+      "layer": "2",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Replace hard runtime throws for missing required props (in dev render paths) with safe-by-default behavior: dev warnings + fallbacks OR controlled error boundary pattern. Target components observed in baseline (LanguageSelector, SearchFilters, FilterSelect, ConsentBanner, ModeHero, etc.).",
+      "steps": [
+        {
+          "title": "Inventory of runtime throws (governed list)",
+          "actions": [
+            "List all 'throw new Error' that can occur during render for public components",
+            "Categorize: (A) developer misuse (can warn), (B) truly fatal (must be guarded), (C) internal invariant"
+          ],
+          "expectation": "Clear list with decisions per item."
+        },
+        {
+          "title": "Implement safe-by-default strategy",
+          "actions": [
+            "Replace render-throws with: console.warn + fallback UI/strings OR no-op rendering",
+            "Keep strictness where appropriate but avoid hard-crash from simple omissions"
+          ],
+          "expectation": "Library doesn't kill the whole app for a missing label."
+        },
+        {
+          "title": "Add tests + docs",
+          "actions": [
+            "Add tests proving no unhandled throw occurs on missing optional-ish props",
+            "Document required props clearly in docs/TS"
+          ],
+          "expectation": "Behavior is intentional and enforced."
+        }
+      ],
+      "success_criteria": [
+        "No public component throws during normal render for missing labels/placeholders; instead warns/fallbacks.",
+        "Docs/TS clarify required/optional fields."
+      ],
+      "post_actions": [
+        "Proceed to TUI_110_T06_SELECT_API_CANON"
+      ]
+    },
+    {
+      "task": "TUI_110_T06_SELECT_API_CANON",
+      "version": "1.0",
+      "layer": "2",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Resolve Select DX ambiguity: ensure there is a single obvious canonical usage. Either provide a default <Select/> component wrapper OR make compound API discoverable and impossible to misuse silently.",
+      "steps": [
+        {
+          "title": "Choose API strategy",
+          "actions": [
+            "Option A: export Select as component + attach subcomponents (Select.Root, Select.Trigger...)",
+            "Option B: keep object-only but add explicit docs + runtime/dev error messaging + typed helpers"
+          ],
+          "expectation": "Decision written with pros/cons."
+        },
+        {
+          "title": "Implement and update consumer examples",
+          "actions": [
+            "Implement chosen strategy",
+            "Update docs + storybook + examples",
+            "Ensure no naive JSX usage trap remains"
+          ],
+          "expectation": "A new user can use Select correctly without reading source."
+        }
+      ],
+      "success_criteria": [
+        "No confusing dual path; docs and types guide the correct usage.",
+        "Repro app uses the canonical Select pattern."
+      ]
+    },
+    {
+      "task": "TUI_110_T07_APPHEADER_COMPOSITION_ENFORCEMENT",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "description": "Fix or clarify AppHeader composition contract: either relax contract safely OR provide canonical building blocks to avoid consumer 'Container inside AppHeader' warnings.",
+      "steps": [
+        {
+          "title": "Contract decision",
+          "actions": [
+            "Decide whether AppHeader should accept layout wrappers (Container/Flex) or enforce strict slots",
+            "If strict: provide explicit AppHeader.Shell / AppHeader.Row primitives"
+          ],
+          "expectation": "Consumer can build header without warnings and without div soup."
+        }
+      ],
+      "success_criteria": [
+        "No dev warning in canonical usage path.",
+        "Docs show the only supported structure."
+      ]
+    },
+    {
+      "task": "TUI_110_T07_CANONICAL_COMPOSITION_ENFORCEMENT",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Add DEV-only warnings to enforce canonical composition via as/asChild and slot boundaries (Box, NavRoot, AppHeader). No new components.",
+      "steps": [
+        {
+          "title": "Add DEV-only warnings",
+          "actions": [
+            "Warn when Box uses raw semantic tags (nav/header/footer/main)",
+            "Warn when NavRoot asChild uses <nav>",
+            "Keep AppHeader slot validation warnings non-spammy"
+          ],
+          "expectation": "Misuse is visible in DEV without breaking PROD."
+        },
+        {
+          "title": "Add tests + report",
+          "actions": [
+            "Add negative/positive warning tests",
+            "Document enforcement rules and scope"
+          ],
+          "expectation": "Behavior is covered and documented."
+        }
+      ],
+      "success_criteria": [
+        "DEV warnings fire for forbidden semantic usage via as/asChild.",
+        "Canonical usage produces no warnings.",
+        "PROD behavior unchanged."
+      ]
+    },
+    {
+      "task": "TUI_110_T08_RUNTIME_GUARDS_CANON",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Lock canonical runtime-guards: semantic enforcement uses runtime string extraction only; TS is not a source of truth.",
+      "steps": [
+        {
+          "title": "Canonize runtime-guards",
+          "actions": [
+            "Add header comment: TS ≠ source of truth",
+            "Align warnOnForbiddenSemanticElement to runtime-only inputs"
+          ],
+          "expectation": "Guards are DEV-only and runtime-string based."
+        },
+        {
+          "title": "Add proof tests",
+          "actions": [
+            "Add tests verifying runtime string path and PROD no-op"
+          ],
+          "expectation": "Canonical behavior is covered."
+        }
+      ],
+      "success_criteria": [
+        "Semantic guards rely only on runtime string extraction.",
+        "TS types are not expanded for semantics.",
+        "DEV-only warnings; PROD no-op."
+      ]
+    },
+    {
+      "task": "TUI_110_T09_PUBLIC_EXPORTS_INVENTORY",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Create an authoritative inventory of all public exports (no API changes).",
+      "steps": [
+        {
+          "title": "Scan entrypoints",
+          "actions": [
+            "Enumerate package.json export entrypoints",
+            "List all named exports from src/index.ts"
+          ],
+          "expectation": "Inventory covers the full public surface."
+        },
+        {
+          "title": "Document",
+          "actions": [
+            "Write docs/canon/PUBLIC_EXPORTS_INVENTORY.md"
+          ],
+          "expectation": "Single source of truth for public exports."
+        }
+      ],
+      "success_criteria": [
+        "All public exports are listed in one document.",
+        "No code changes to the API surface."
+      ]
+    },
+    {
+      "task": "TUI_110_T09_DOCS_SYNC_AFTER_GUARDS_AND_COMPOSITION",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Sync canonical documentation with implemented guards, safe-by-default behavior, and composition enforcement.",
+      "steps": [
+        {
+          "title": "Update or create canon pages",
+          "actions": [
+            "Runtime guards canon (TS ≠ source of truth)",
+            "Trigger asChild safe-by-default",
+            "Canonical composition DEV enforcement",
+            "className policy plan (zones + escape hatch)"
+          ],
+          "expectation": "Docs reflect current implementation; no behavior changes."
+        },
+        {
+          "title": "Update canon navigation",
+          "actions": [
+            "Add new pages to canonical inventory and README reference index"
+          ],
+          "expectation": "Canon navigation links are complete."
+        }
+      ],
+      "success_criteria": [
+        "Docs align with current guard behavior and composition enforcement.",
+        "Canon inventory and indexes link new pages.",
+        "No code changes to components or runtime behavior."
+      ]
+    },
+    {
+      "task": "TUI_110_T10_CREATE_CANON_DOCS_FOR_GUARDS_AND_COMPOSITION",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "status": "done",
+      "description": "Create canonical guard/composition docs under docs/canon and update indexes.",
+      "steps": [
+        {
+          "title": "Create canon docs",
+          "actions": [
+            "runtime-guards canon",
+            "trigger asChild safe-by-default",
+            "canonical composition enforcement",
+            "className policy plan"
+          ],
+          "expectation": "Docs exist as real files in git."
+        },
+        {
+          "title": "Update indexes",
+          "actions": [
+            "Add new pages to canonical inventory and README links"
+          ],
+          "expectation": "Canon navigation includes new docs."
+        }
+      ],
+      "success_criteria": [
+        "Four canonical docs exist and are linked in inventory/README.",
+        "No code changes to guards or components."
+      ]
+    },
+    {
+      "task": "TUI_110_T08_ARCH_IMPORT_REMEDIATION_PLAN",
+      "version": "1.0",
+      "layer": "3",
+      "run_in": "LIB_REPO",
+      "description": "Turn ARCH_IMPORT_AUDIT findings into an actionable remediation plan with a minimal-move strategy (phased relocations + public API cleanups) without breaking locks.",
+      "steps": [
+        {
+          "title": "Confirm audit claims in code",
+          "actions": [
+            "Verify which components are extension but placed in Foundation/locked dirs",
+            "Find all Radix imports in extension code",
+            "Find deep internal imports bypassing public API"
+          ],
+          "expectation": "Evidence list with exact file paths."
+        },
+        {
+          "title": "Phased plan",
+          "actions": [
+            "Define Phase A: public re-export paths to eliminate deep imports",
+            "Define Phase B: move extension components to correct directories",
+            "Define Phase C: eliminate Radix in Extension (introduce Foundation wrappers if needed)"
+          ],
+          "expectation": "Plan does not violate existing locks; includes migration notes."
+        }
+      ],
+      "success_criteria": [
+        "Plan is specific enough to implement as sequential TUNGs.",
+        "Each phase has clear acceptance criteria + rollback notes."
+      ]
+    },
+    {
+      "task": "TUI_110_T09_LINT_BARRIERS_GOVERNANCE",
+      "version": "1.0",
+      "layer": "4",
+      "run_in": "LIB_REPO",
+      "description": "Add lint barriers so agents physically cannot introduce forbidden patterns: raw className/tailwind in governed layers, forbidden shorthand props, deep imports, etc.",
+      "steps": [
+        {
+          "title": "Ruleset implementation",
+          "actions": [
+            "ESLint rule(s) / custom rule(s) to block patterns",
+            "Apply to src/ with scoped overrides where necessary"
+          ],
+          "expectation": "Violations fail CI locally."
+        }
+      ],
+      "success_criteria": [
+        "Attempting to add forbidden patterns causes lint failure.",
+        "Docs mention the rules + how to fix violations."
+      ]
+    }
+  ],
+  "outputs": [
+    "A complete set of reports under docs/reports/TUI_110/ across PET and LIB repos.",
+    "Passing regression tests for trigger nesting + safe-by-default behavior.",
+    "Canonical docs for Trigger composition, Select usage, AppHeader composition."
+  ]
+}

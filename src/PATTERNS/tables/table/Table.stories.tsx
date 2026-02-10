@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 
 import { Button } from "@/PRIMITIVES/Button";
@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableLoadingState,
   TableRow,
-} from "./index";
+} from ".";
 
 const meta: Meta<typeof Table> = {
   title: "Patterns / Tables / Table",

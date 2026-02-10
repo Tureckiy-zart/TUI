@@ -36,7 +36,7 @@ export const CHIP_TOKENS = {
    * Layout tokens
    * Base layout utilities for chip component
    */
-  layout: "inline-flex items-center gap-xs", // Base layout with gap for icon/remove button
+  layout: "inline-flex items-center gap-xs w-fit h-fit", // Base layout with gap for icon/remove button (fit content, avoid stretch)
 
   /**
    * Chip padding

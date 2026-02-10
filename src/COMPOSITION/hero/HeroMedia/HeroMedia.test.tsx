@@ -178,5 +178,17 @@ describe("HeroMedia", () => {
         "[HeroMedia] Video media requires a poster URL per HEROMEDIA_CANON (accessibility).",
       );
     });
+
+    it("warns when root contains invalid children", () => {
+      render(
+        <HeroMedia.Root ariaLabel="Hero">
+          <HeroMedia.Media type="image" src="/img.jpg" alt="Hero" />
+          <div>Invalid child</div>
+        </HeroMedia.Root>,
+      );
+      expect(console.warn).toHaveBeenCalledWith(
+        "[HeroMedia] Children must be HeroMedia.Media or HeroMedia.Overlay. Other children are rendered but are not supported by the contract.",
+      );
+    });
   });
 });

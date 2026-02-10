@@ -5,7 +5,7 @@
 export {
   HeroCompositionReference,
   type HeroCompositionReferenceProps,
-} from "./HeroCompositionReference/HeroCompositionReference.index";
+} from "./HeroCompositionReference";
 export {
   HeroMedia,
   type HeroMediaAspect,
@@ -16,4 +16,4 @@ export {
   type HeroMediaRootProps,
   type HeroMediaSize,
   type HeroMediaType,
-} from "./HeroMedia/HeroMedia.index";
+} from "./HeroMedia";

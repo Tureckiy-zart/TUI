@@ -118,7 +118,7 @@ import { SPINNER_TOKENS } from "@/FOUNDATION/tokens/components/spinner";
 import { Text } from "@/PRIMITIVES/Text/Text";
 
 import { Box } from "../../layout/Box";
-import { Stack } from "../../layout/Stack/Stack";
+import { Stack } from "../../layout/Stack";
 
 /**
  * Spinner size type

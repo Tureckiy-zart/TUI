@@ -2,4 +2,5 @@
  * ListItem Component Export
  */
 
-export { ListItem, type ListItemProps } from "./ListItem";
+export type { ListItemAlign, ListItemAs, ListItemProps } from "./ListItem";
+export { ListItem, listItemVariants } from "./ListItem";

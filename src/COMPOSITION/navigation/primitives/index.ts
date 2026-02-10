@@ -4,4 +4,4 @@ export { NavItem, type NavItemProps, NavList, type NavListProps } from "./Naviga
 export { NavRoot, type NavRootProps } from "../NavRoot";
 
 // NavText is now a standalone component
-export { NavText, type NavTextProps } from "../NavText/NavText";
+export { NavText, type NavTextProps } from "../NavText";

@@ -7,7 +7,7 @@
  * Reference: docs/architecture/INPUT_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useRef, useState } from "react";
 
 import { Select } from "@/COMPOSITION/controls/Select";
@@ -61,7 +61,6 @@ type Story = StoryObj;
  * Demonstrates keyboard parity requirements for all interactive components
  */
 export const KeyboardParityDemo: Story = {
-  name: "Keyboard Parity",
   render: function KeyboardParityDemoStory() {
     const [buttonCount, setButtonCount] = useState(0);
     const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -144,7 +143,6 @@ export const KeyboardParityDemo: Story = {
  * Demonstrates Enter/Space key behavior by component type
  */
 export const EnterSpaceSemantics: Story = {
-  name: "Enter/Space Semantics",
   render: function EnterSpaceSemanticsStory() {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -262,7 +260,6 @@ export const EnterSpaceSemantics: Story = {
  * Demonstrates disabled state blocks all interactions
  */
 export const DisabledStateBlocking: Story = {
-  name: "Disabled State Blocking",
   render: function DisabledStateBlockingStory() {
     return (
       <Box className="p-lg">
@@ -352,7 +349,6 @@ export const DisabledStateBlocking: Story = {
  * Demonstrates loading state blocks pointer but may allow keyboard focus
  */
 export const LoadingStateBehavior: Story = {
-  name: "Loading State Behavior",
   render: function LoadingStateBehaviorStory() {
     const [isLoading, setIsLoading] = useState(false);
 
@@ -418,7 +414,6 @@ export const LoadingStateBehavior: Story = {
  * Demonstrates readonly state blocks changes but allows focus/selection
  */
 export const ReadonlyStateBehavior: Story = {
-  name: "Readonly State Behavior",
   render: function ReadonlyStateBehaviorStory() {
     return (
       <Box className="p-lg">
@@ -500,7 +495,6 @@ export const ReadonlyStateBehavior: Story = {
  * Demonstrates prevention of accidental double-clicks and double-submits
  */
 export const DoubleTriggerPrevention: Story = {
-  name: "Double Trigger Prevention",
   render: function DoubleTriggerPreventionStory() {
     const [submitCount, setSubmitCount] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -600,7 +594,6 @@ export const DoubleTriggerPrevention: Story = {
  * Demonstrates intentional Input GAPs (ACCEPTABLE only)
  */
 export const InputGAPGallery: Story = {
-  name: "Input GAP Gallery",
   render: function InputGAPGalleryStory() {
     return (
       <Box className="p-lg">

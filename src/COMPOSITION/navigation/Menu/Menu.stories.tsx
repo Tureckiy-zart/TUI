@@ -1,6 +1,6 @@
 "use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Copy, Edit, MoreVertical, Share, Trash2 } from "lucide-react";
 
 import { Menu } from "./Menu";

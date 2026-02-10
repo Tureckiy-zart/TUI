@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Stack } from "./Stack";
 
 // Helper style for card items with proper text color

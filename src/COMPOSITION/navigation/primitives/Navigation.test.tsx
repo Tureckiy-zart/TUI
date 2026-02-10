@@ -8,7 +8,7 @@ import { renderWithTheme } from "../../../test/test-utils";
 import { NavItem, NavList, NavSeparator, NavText } from "./Navigation";
 
 // NavRoot is now a standalone component
-import { NavRoot } from "../NavRoot/NavRoot";
+import { NavRoot } from "../NavRoot";
 
 describe("Navigation Primitives", () => {
   describe("NavRoot", () => {

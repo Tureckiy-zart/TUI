@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box } from "../Box";
 import { Container } from "../Container";
 import { Section } from "./Section";
@@ -11,7 +11,7 @@ const meta: Meta<typeof Section> = {
     docs: {
       description: {
         component:
-          "Section is a token-driven layout component for page/landing layout composition. It provides vertical padding for sections and spacing for content blocks. Uses Stack internally for layout composition.",
+          "Section is a token-driven layout component for page/landing layout composition. It provides vertical padding for sections and spacing for content blocks. Uses Stack internally for layout composition. Section does not provide subcomponents; internal structure is defined by the consumer via composition.",
       },
     },
   },
@@ -70,6 +70,32 @@ export const Default: Story = {
     docs: {
       description: {
         story: "Default Section with medium vertical padding and no spacing between content blocks",
+      },
+    },
+  },
+};
+
+/**
+ * Composition-only usage (no subcomponents).
+ */
+export const CompositionBlocks: Story = {
+  render: () => (
+    <Section spacing="lg" spaceY="md">
+      <Box as="header" px="md" py="md" bg="muted" radius="md">
+        Header block
+      </Box>
+      <Box px="md" py="md" bg="muted" radius="md">
+        Body block
+      </Box>
+      <Box as="footer" px="md" py="md" bg="muted" radius="md">
+        Footer block
+      </Box>
+    </Section>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Section is composition-only. Use Box with semantic tags to define structure.",
       },
     },
   },

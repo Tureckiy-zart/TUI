@@ -113,7 +113,22 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 **Purpose:** Component-specific locks
 
 **Contains:**
-- Component category locks (`LAYOUT_LOCK.md`, `TEXT_LOCK.md`)
+- `A11Y_LOCK.md` - A11Y system lock (accessibility, contrast, WCAG 2.1 AA)
+- `BUTTON_LINK_LOCK.md` - Button, IconButton, Link Foundation lock
+- `CAROUSEL_LOCK.md` - Carousel Extension lock
+- `FOCUS_LOCK.v1.1.md` - Focus system lock
+- `HEROMEDIA_LOCK.md` - HeroMedia Extension lock (Phase L)
+- `INPUT_LOCK.md` - Input system lock
+- `LAYOUT_LOCK.md` - Layout primitives and Extension Layout components lock
+- `MODAL_CONTEXTMENU_TOAST_LOCK.md` - Modal, ContextMenu, Toast Foundation overlays lock
+- `MOTION_LOCK.md` - Motion system lock (tokens, presets)
+- `OVERLAYSLOT_LOCK.md` - OverlaySlot Extension lock (Phase L)
+- `RESPONSIVE_VISIBILITY_LOCK.md` - ResponsiveVisibility Extension lock (Phase L)
+- `RUNTIME_UTILITIES_LOCK.md` - Runtime utilities lock (tokenCVA, cn - TUNG-028)
+- `SELECT_LOCK.md` - Select Foundation lock
+- `TABS_LOCK.md` - Tabs Foundation lock
+- `TEXT_LOCK.md` - Text/typography components lock
+- `TOOLTIP_POPOVER_LOCK.md` - Tooltip, Popover, HoverCard lock
 
 **Rules:**
 - ? Component-specific locks ONLY
@@ -127,6 +142,8 @@ The current folder structure is **canonical** and **fixed**. All documentation m
 - Extension capability map (`EXTENSION_CAPABILITY_MAP.md`)
 - HeroMedia canonical capability definition (`HEROMEDIA_CANON.md`)
 - OverlaySlot canonical capability definition (`OVERLAYSLOT_CANON.md`)
+- ResponsiveVisibility canonical capability definition (`RESPONSIVE_VISIBILITY_CANON.md`)
+- ResponsiveVisibility Extension API specification (`RESPONSIVE_VISIBILITY_EXTENSION_API.md`)
 
 **Rules:**
 - ? Extension Layer architecture documents ONLY (capability map, boundary rules)
@@ -139,8 +156,9 @@ The following Extension capabilities are architecturally LOCKED. Modifications o
 
 | Capability | Layer    | Status            | Canon              |
 | ---------- | -------- | ------------------ | ------------------ |
-| HeroMedia  | Extension | LOCKED (Phase L — Overlay + HeroMedia) | HEROMEDIA_CANON.md |
-| OverlaySlot | Extension | LOCKED (Phase L — Overlay + HeroMedia) | OVERLAYSLOT_CANON.md |
+| HeroMedia  | Extension | LOCKED (Phase L ? Overlay + HeroMedia) | HEROMEDIA_CANON.md |
+| OverlaySlot | Extension | LOCKED (Phase L ? Overlay + HeroMedia) | OVERLAYSLOT_CANON.md |
+| ResponsiveVisibility | Extension | LOCKED (Phase L) | RESPONSIVE_VISIBILITY_CANON.md |
 
 ### `docs/workflows/`
 

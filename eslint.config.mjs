@@ -25,7 +25,8 @@ export default [
       "coverage/**",
       ".storybook/**",
       "storybook-static/**",
-      ".next/**",
+      "**/.next/**",
+      "scratch/**/.next/**",
       "docs/**",
       ".cursor/**", // Cursor IDE configuration files
       "docs_archive/**",

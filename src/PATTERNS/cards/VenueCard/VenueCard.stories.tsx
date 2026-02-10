@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { VenueCard } from "./VenueCard";
 import type { VenueCardSize, VenueCardVariant } from "./VenueCard.types";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ASPECT_RATIO_PRESETS, AspectRatio } from "./AspectRatio";
 
 const meta: Meta<typeof AspectRatio> = {

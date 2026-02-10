@@ -1,8 +1,8 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { NavItem, NavList, NavSeparator, NavText } from "./Navigation";
 
 // NavRoot is now a standalone component
-import { NavRoot } from "../NavRoot/NavRoot";
+import { NavRoot } from "../NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
   title: "Composition / Navigation / Primitives",

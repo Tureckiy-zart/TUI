@@ -99,6 +99,8 @@
 
 import * as React from "react";
 
+import { warnOnForbiddenSemanticElement } from "@/COMPOSITION/utils/runtime-guards";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
 import {
   getBaseValue as getBaseValueUtil,
   getColorCSSVar,
@@ -316,6 +318,10 @@ export type BoxProps<E extends BoxElement = "div"> = {
    * <Box bg={{ base: "background", md: "card" }}>Content</Box>
    */
   bg?: ResponsiveColor;
+  /**
+   * Internal: suppress semantic enforcement warnings for canonical wrappers.
+   */
+  "data-semantic-guard"?: "allow";
 } & Omit<React.ComponentPropsWithoutRef<E>, "as">;
 
 /**
@@ -360,6 +366,43 @@ const BoxComponent = React.forwardRef<HTMLElement, BoxProps>(
     },
     ref,
   ) => {
+    const asTag: string | undefined = typeof Component === "string" ? Component : undefined;
+    const dataSemanticGuard = props["data-semantic-guard"];
+    let semanticMessage: string | undefined;
+    switch (asTag) {
+      case "nav":
+        semanticMessage = "Use NavRoot instead of raw <nav>.";
+        break;
+      case "header":
+        semanticMessage = "Use AppHeader instead of raw <header>.";
+        break;
+      case "footer":
+        semanticMessage = "Use Footer instead of raw <footer>.";
+        break;
+      case "main":
+        semanticMessage = "Avoid raw <main> via Box. Use composition-level layout instead.";
+        break;
+      default:
+        semanticMessage = undefined;
+    }
+
+    if (dataSemanticGuard !== "allow") {
+      warnOnForbiddenSemanticElement(
+        "Box",
+        asTag,
+        ["nav", "header", "footer", "main"],
+        semanticMessage,
+      );
+    }
+    if (process.env.NODE_ENV !== "production") {
+      trackClassStyleUsage({
+        component: "Box",
+        zone: "Composition",
+        className,
+        style,
+      });
+    }
+
     // Get base values for CSS variables
     const pxValue = getBaseValue<SpacingValue>(px);
     const pyValue = getBaseValue<SpacingValue>(py);

@@ -62,6 +62,20 @@ const HeroMediaRoot = React.forwardRef<HTMLDivElement, HeroMediaRootProps>(
 
     const ratio = aspect !== "auto" ? HEROMEDIA_ASPECT_RATIOS[aspect] : undefined;
     const childArray = React.Children.toArray(children);
+    if (process.env.NODE_ENV !== "production") {
+      const invalidChildren = childArray.filter((child) => {
+        if (child === null || child === undefined || typeof child === "boolean") return false;
+        if (React.isValidElement(child)) {
+          return child.type !== HeroMediaMedia && child.type !== HeroMediaOverlay;
+        }
+        return true;
+      });
+      if (invalidChildren.length > 0) {
+        console.warn(
+          "[HeroMedia] Children must be HeroMedia.Media or HeroMedia.Overlay. Other children are rendered but are not supported by the contract.",
+        );
+      }
+    }
     const mediaIndex = childArray.findIndex(
       (c) => React.isValidElement(c) && c.type === HeroMediaMedia,
     );

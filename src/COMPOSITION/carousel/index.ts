@@ -13,4 +13,4 @@ export {
   type CarouselRootProps,
   type CarouselSlideProps,
   type CarouselTrackProps,
-} from "./Carousel/Carousel.index";
+} from "./Carousel";

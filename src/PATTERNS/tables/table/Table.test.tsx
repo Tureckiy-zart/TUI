@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableLoadingState,
   TableRow,
-} from "./index";
+} from ".";
 
 describe("Table", () => {
   const sampleData = [

@@ -17,7 +17,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { List } from "./List";
-import { ListItem } from "../ListItem/ListItem";
+import { ListItem } from "../ListItem";
 
 describe("List", () => {
   describe("Rendering", () => {

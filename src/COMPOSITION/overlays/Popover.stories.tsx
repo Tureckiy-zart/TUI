@@ -360,7 +360,6 @@ export const NotificationsMenu: Story = {
 };
 
 export const KeyboardAccessibility: Story = {
-  name: "Keyboard Accessibility",
   render: () => (
     <div className="space-y-md">
       <p className="text-sm text-[hsl(var(--tm-text-muted))]">

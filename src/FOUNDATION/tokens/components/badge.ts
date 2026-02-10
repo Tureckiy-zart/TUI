@@ -34,7 +34,7 @@ export const BADGE_TOKENS = {
    * Layout tokens
    * Base layout utilities for badge component
    */
-  layout: "inline-flex items-center", // Base layout for badge container
+  layout: "inline-flex items-center w-fit h-fit", // Base layout for badge container (fit content, avoid stretch)
 
   /**
    * Badge padding

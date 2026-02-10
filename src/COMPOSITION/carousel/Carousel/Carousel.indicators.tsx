@@ -33,7 +33,7 @@ export const CarouselIndicators = React.forwardRef<HTMLDivElement, CarouselIndic
         ref={ref}
         className={cn(
           CAROUSEL_TOKENS.indicators.gap,
-          "flex items-center justify-center",
+          "mx-auto flex items-center justify-center px-sm",
           CAROUSEL_TOKENS.indicators.placement[placement],
         )}
         data-carousel-indicators

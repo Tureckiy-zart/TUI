@@ -62,6 +62,9 @@ export const TABS_TOKENS = {
    * Tabs list tokens
    */
   list: {
+    container: {
+      layout: "relative overflow-hidden",
+    },
     gap: {
       xs: "gap-xs", // 4px (0.25rem)
       sm: "gap-sm", // 8px (0.5rem)

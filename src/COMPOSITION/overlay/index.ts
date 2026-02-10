@@ -10,4 +10,4 @@ export {
   type OverlaySlotItemProps,
   type OverlaySlotPosition,
   type OverlaySlotRootProps,
-} from "./OverlaySlot/OverlaySlot.index";
+} from "./OverlaySlot";

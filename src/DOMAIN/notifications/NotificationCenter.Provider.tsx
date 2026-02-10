@@ -10,7 +10,7 @@
 
 import * as React from "react";
 
-import { getDelayMs } from "@/index";
+import { getDelayMs, safeFallback } from "@/index";
 
 import type {
   GroupByFunction,
@@ -250,7 +250,20 @@ export function NotificationCenterProvider({
 export function useNotificationCenterContext(): NotificationContextType {
   const context = React.useContext(NotificationContext);
   if (context === undefined) {
-    throw new Error(
+    return safeFallback<NotificationContextType>(
+      {
+        push: () => "",
+        remove: () => {},
+        clearAll: () => {},
+        clearChannel: () => {},
+        groupBy: () => ({}),
+        getHistory: () => [],
+        getByChannel: () => [],
+        getAll: () => [],
+        markAsRead: () => {},
+        markAllAsRead: () => {},
+        getUnreadCount: () => 0,
+      },
       "useNotificationCenterContext must be used within a NotificationCenterProvider",
     );
   }

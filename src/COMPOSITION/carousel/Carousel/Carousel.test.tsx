@@ -62,6 +62,13 @@ describe("Carousel", () => {
       const tabs = within(tablist).getAllByRole("tab");
       expect(tabs).toHaveLength(3);
     });
+
+    it("centers indicators by default", () => {
+      renderDefaultCarousel();
+      const tablist = screen.getByRole("tablist", { name: /slide navigation/i });
+      expect(tablist).toHaveClass("mx-auto");
+      expect(tablist).toHaveClass("justify-center");
+    });
   });
 
   describe("Orientation", () => {

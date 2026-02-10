@@ -11,6 +11,7 @@ exports[`AppHeader > renders sticky position 1`] = `
     <nav
       aria-label="Primary navigation"
       class="w-full"
+      data-semantic-guard="allow"
       style="padding-left: var(--spacing-md); padding-right: var(--spacing-md); padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm);"
     >
       <div

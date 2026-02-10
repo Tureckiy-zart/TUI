@@ -1,5 +1,5 @@
 import { Link } from "@/PRIMITIVES/Link";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import { Footer } from "./Footer";
 

@@ -38,6 +38,7 @@
 import * as React from "react";
 import { createContext, type ReactNode, useContext } from "react";
 
+import { safeFallback } from "@/COMPOSITION/utils/runtime-guards";
 import { useModalManager } from "@/hooks/useModal";
 
 interface ModalContextType {
@@ -63,7 +64,16 @@ export function ModalProvider({ children }: ModalProviderProps) {
 export function useModalContext() {
   const context = useContext(ModalContext);
   if (context === undefined) {
-    throw new Error("useModalContext must be used within a ModalProvider");
+    return safeFallback<ModalContextType>(
+      {
+        openModal: () => {},
+        closeModal: () => {},
+        toggleModal: () => {},
+        isModalOpen: () => false,
+        getModalData: () => undefined,
+      },
+      "useModalContext must be used within a ModalProvider",
+    );
   }
   return context;
 }

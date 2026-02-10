@@ -90,6 +90,20 @@ describe("Tabs", () => {
       );
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
     });
+
+    it("applies containment layout to TabsList", () => {
+      renderWithTheme(
+        <Tabs.Root defaultValue="tab1">
+          <Tabs.List data-testid="tabs-list">
+            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>,
+      );
+
+      const list = screen.getByTestId("tabs-list");
+      expect(list).toHaveClass("relative");
+      expect(list).toHaveClass("overflow-hidden");
+    });
   });
 
   describe("Variants", () => {

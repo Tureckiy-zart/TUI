@@ -7,7 +7,7 @@
  * Reference: docs/architecture/A11Y_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
 import { Field } from "@/PRIMITIVES/Field";
@@ -54,7 +54,6 @@ type Story = StoryObj;
  * Button Accessible Names
  */
 export const ButtonNames: Story = {
-  name: "Button Names",
   render: function ButtonNamesStory() {
     return (
       <Box className="p-lg">
@@ -118,7 +117,6 @@ export const ButtonNames: Story = {
  * Form Input Accessible Names
  */
 export const FormInputNames: Story = {
-  name: "Form Input Names",
   render: function FormInputNamesStory() {
     return (
       <Box className="p-lg">
@@ -219,7 +217,6 @@ export const FormInputNames: Story = {
  * Custom Control Accessible Names
  */
 export const CustomControlNames: Story = {
-  name: "Custom Control Names",
   render: function CustomControlNamesStory() {
     return (
       <Box className="p-lg">

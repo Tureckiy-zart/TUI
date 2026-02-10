@@ -75,7 +75,7 @@ import * as React from "react";
 
 import type { SpacingToken } from "@/FOUNDATION/tokens/types";
 
-import { Divider, type DividerTone } from "../Divider/Divider";
+import { Divider, type DividerTone } from "../Divider";
 import { Stack } from "../Stack";
 
 /**

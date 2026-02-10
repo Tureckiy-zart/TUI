@@ -8,12 +8,12 @@
  * Focus mechanics: docs/architecture/FOCUS_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
-import { Dialog } from "@/COMPOSITION/overlays/Dialog";
 import { Drawer } from "@/COMPOSITION/overlays";
+import { Dialog } from "@/COMPOSITION/overlays/Dialog";
 import { Modal } from "@/COMPOSITION/overlays/Modal";
 import { Button } from "@/PRIMITIVES/Button";
 import { Heading } from "@/PRIMITIVES/Heading";
@@ -55,7 +55,6 @@ type Story = StoryObj;
  * Modal Labeling Contract
  */
 export const ModalLabeling: Story = {
-  name: "Modal Labeling",
   render: function ModalLabelingStory() {
     const [open, setOpen] = useState(false);
     const titleId = "modal-title-demo";
@@ -120,7 +119,6 @@ export const ModalLabeling: Story = {
  * Dialog Labeling Contract
  */
 export const DialogLabeling: Story = {
-  name: "Dialog Labeling",
   render: function DialogLabelingStory() {
     const [open, setOpen] = useState(false);
 

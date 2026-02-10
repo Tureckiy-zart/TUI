@@ -7,7 +7,7 @@
  * Reference: docs/architecture/FOCUS_AUTHORITY.md (Rules T-ORD-*)
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
@@ -53,7 +53,6 @@ type Story = StoryObj;
  * Shows which element is currently focused
  */
 export const FocusTracker: Story = {
-  name: "Focus Tracker",
   render: function FocusTrackerStory() {
     const [focusedElement, setFocusedElement] = useState<string>("None");
     const [focusHistory, setFocusHistory] = useState<string[]>([]);

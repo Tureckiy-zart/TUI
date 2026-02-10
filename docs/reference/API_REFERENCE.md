@@ -1,8 +1,8 @@
 # Tenerife UI Library - Public API Reference
 
 **Version:** 3.1.0 
-**Last Updated:** 2026-02-05  
-**Canonical Sync Date:** 2026-02-05
+**Last Updated:** 2026-02-09  
+**Canonical Sync Date:** 2026-02-09
 
 This document describes the public API surface of `@tenerife.music/ui`.
 
@@ -118,6 +118,7 @@ Component-level types and variant constants are also exported; see `src/index.ts
 - `Link`, `NavLink`, `Badge`, `Alert`, `Chip`
 - `Input`, `Textarea`, `Select` (plus Select subcomponents), `Checkbox`, `Radio`, `RadioGroup`, `Switch`, `Label`, `Field`, `FormGroup`
 - `Progress`, `Skeleton`, `Separator`, `AspectRatio`, `Spinner`
+- `Image`
 - `Icon` and icon registry exports
 - `VisuallyHidden`, `FocusTrap`
 
@@ -133,6 +134,7 @@ Component-level types and variant constants are also exported; see `src/index.ts
 - Modal utilities: `ModalContext`, `ModalProvider`, `useModalContext`, `withModal`
 - Portals & backdrops: `Portal`, `Backdrop`
 - Popovers & tooltips: `Popover` (and subcomponents), `Tooltip` (and subcomponents)
+Tooltip Root is safe-by-default and wires a provider internally; use `TooltipProvider` only when you need a shared provider scope.
 - Dropdowns: `Dropdown` (and subcomponents)
 - Menus: `ContextMenu` (and subcomponents), `HoverCard` (and subcomponents)
 - Combobox: `Combobox` (and subcomponents)
@@ -173,6 +175,20 @@ Component-level types and variant constants are also exported; see `src/index.ts
 - `RangeSlider`, `Slider`
 
 ---
+
+## Usage Notes
+
+- **Badge / Chip inline by default:** `Badge` and `Chip` are `inline-flex` by default. If they appear full-width, it is caused by the parent layout (e.g., `CardHeader` uses `Stack` with `align="stretch"`). Use `Row` or set `align="start"` on the parent to keep badges sized to content.
+- **Badge contract:** Badge is inline-level and must never be treated as a full-width block. See `docs/reference/components/BADGE.md`.
+- **Carousel indicators centering:** `Carousel.Indicators` are centered by default when rendered as a sibling to `Carousel.Track` (or via the simple API). Avoid placing indicators inside a shrinking `Row` with Prev/Next; instead, render indicators as their own sibling to Track so the container spans the carousel width.
+- **Carousel card-mode:** The current Carousel is a single-viewport slider (one slide visible at a time). Multi-card “rail” layouts are not supported by the current API and should be treated as a separate pattern.
+
+### Image
+
+- **Inline by default:** `Image` does not stretch to full width unless its parent or `fill` behavior defines it. Use layout primitives (`Row`, `Column`, `Container`, `Grid`) to control sizing.
+- **Center / constrain:** Wrap in `Container` (set `maxWidth`) and/or use `Row` with `justify="center"` to center images without forcing full-width.
+- **AspectRatio composition:** Use `<AspectRatio><Image ... fill /></AspectRatio>` for stable media sizing. Do NOT place text/content inside `AspectRatio`; place text outside using `Surface`, `Section`, or `Column`.
+- **No invented Stack:** If you need vertical layout in examples, use `Column` or other existing layout primitives.
 
 ## Utilities
 

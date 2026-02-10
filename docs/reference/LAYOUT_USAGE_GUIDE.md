@@ -31,25 +31,27 @@ This guide maps **layout intent to component and props**. It does not define new
 
 ## Section — Content Block Spacing
 
-**Use when:** You have header, body, and/or footer slots and need consistent spacing between them. Do not use `mb-lg`, `mt-lg`, or other margin utilities between slots.
+**Use when:** You have header, body, and/or footer blocks and need consistent spacing between them. Do not use `mb-lg`, `mt-lg`, or other margin utilities between blocks.
 
 **Canonical pattern:** Section with `spacing` (and optionally `spaceY`) for block spacing.
 
 ```tsx
-import { Section, Text, Button } from "@tenerife.music/ui";
+import { Box, Section, Text, Button } from "@tenerife.music/ui";
 
 <Section spacing="lg" spaceY="md">
-  <Section.Header>
+  <Box as="header">
     <Text size="lg">Title</Text>
-  </Section.Header>
-  <Section.Body>
+  </Box>
+  <Box>
     Content here.
-  </Section.Body>
-  <Section.Footer>
+  </Box>
+  <Box as="footer">
     <Button variant="primary">Submit</Button>
-  </Section.Footer>
+  </Box>
 </Section>
 ```
+
+**Note:** Section does not provide subcomponents. Internal structure is defined by the consumer via composition (e.g., Box with `as="header"`, `as="footer"`).
 
 **Token mapping:** Utility spacing like `mb-lg` / `mt-lg` → Section `spacing="lg"` (or `md`, `xl`, etc. from the spacing scale).
 
@@ -139,6 +141,30 @@ import { Grid, Card } from "@tenerife.music/ui";
 ```
 
 **Source:** Layout Capability Map (H5-008, H5-009, H5-010), Grid Component API Verification.
+
+---
+
+## Container — Width Constraint
+
+**Use when:** You need a width boundary and horizontal padding for page content. Container is a layout boundary, not a content-aware component.
+
+**Guidelines:**
+- Text / editorial sections: use `maxWidth="md"` or `maxWidth="lg"`.
+- Feature grids / cards: use `maxWidth="xl"`, `maxWidth="2xl"`, or `maxWidth="6xl"`.
+- Marketing / landing layouts: use `maxWidth="6xl"`.
+
+**Note:** Using a narrow Container (for example `maxWidth="lg"`) for multi-column grids will produce narrow cards and aggressive line wrapping. This is expected behavior.
+
+**Canonical pattern:**
+```tsx
+import { Container, Stack } from "@tenerife.music/ui";
+
+<Container maxWidth="xl">
+  <Stack gap="lg">...</Stack>
+</Container>
+```
+
+**Source:** Layout Authority (Container width constraint) and className/inline style governance guidelines.
 
 ---
 

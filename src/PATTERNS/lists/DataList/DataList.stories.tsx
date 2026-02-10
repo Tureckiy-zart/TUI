@@ -4,7 +4,7 @@ import { Stack } from "@/COMPOSITION/layout";
 import { Heading } from "@/PRIMITIVES/Heading";
 import { Text } from "@/PRIMITIVES/Text";
 
-import { DataListItem, DataListLabel, DataListRoot, DataListValue } from "./index";
+import { DataListItem, DataListLabel, DataListRoot, DataListValue } from ".";
 
 const meta: Meta<typeof DataListRoot> = {
   title: "Patterns / Lists / DataList",

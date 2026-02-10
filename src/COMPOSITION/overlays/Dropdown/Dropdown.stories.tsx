@@ -1,6 +1,6 @@
 "use client";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Copy, Edit, Share, Trash2 } from "lucide-react";
 
 import { Button } from "@/PRIMITIVES/Button";
@@ -234,7 +234,6 @@ export const Matrix: Story = {
  * Reference: VARIANTS_SIZE_CANON.md
  */
 export const States: Story = {
-  name: "States",
   render: () => {
     return (
       <div className="space-y-lg">

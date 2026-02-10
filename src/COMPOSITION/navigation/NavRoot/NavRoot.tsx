@@ -3,6 +3,9 @@
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
+import { warnOnForbiddenSemanticElement } from "@/COMPOSITION/utils/runtime-guards";
+import { trackClassStyleUsage } from "@/DEV/classname-telemetry";
+
 /**
  * NavRoot Component Props
  *
@@ -94,6 +97,28 @@ export interface NavRootProps extends React.HTMLAttributes<HTMLElement> {
  */
 const NavRoot = React.forwardRef<HTMLElement, NavRootProps>(
   ({ "aria-label": ariaLabel, asChild = false, children, ...props }, ref) => {
+    if (process.env.NODE_ENV !== "production") {
+      trackClassStyleUsage({
+        component: "NavRoot",
+        zone: "Composition",
+        className: props.className,
+        style: props.style,
+      });
+    }
+    const childTag =
+      React.isValidElement(children) && typeof children.type === "string"
+        ? children.type
+        : undefined;
+
+    if (asChild) {
+      warnOnForbiddenSemanticElement(
+        "NavRoot",
+        childTag,
+        ["nav"],
+        "NavRoot already renders <nav>. Do not nest raw <nav>.",
+      );
+    }
+
     if (asChild) {
       return (
         <Slot aria-label={ariaLabel} {...props}>

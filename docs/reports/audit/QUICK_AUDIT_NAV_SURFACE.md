@@ -1,7 +1,7 @@
 # Quick Audit: Navigation Overlays & Surface Containers
 
 **Task ID:** TUI_QUICK_AUDIT_NAV_SURFACE  
-**Date:** 2026-01-02  
+**Date:** 2026-02-09  
 **Mode:** DOCS (Documentation only, no refactoring)  
 **Priority:** P0
 
@@ -15,6 +15,7 @@ This audit verifies and freezes correct usage boundaries between closely related
 
 **Status:** ✅ **VERIFIED**  
 **Outcome:** All boundaries verified, no violations found, usage matrix confirmed up-to-date
+**Re-verified:** Section composition-only wording and Container note are consistent with current documentation
 
 **Audit Type:** Re-audit (verification of previously established boundaries)
 
@@ -257,7 +258,7 @@ No semantic overlap is allowed between these components without explicit audit. 
 - Menu vs Dropdown vs ContextMenu (NAVIGATION_OVERLAYS)
 - Panel vs Section (SURFACE_CONTAINERS)
 
-**Last Audit:** 2026-01-02  
+**Last Audit:** 2026-02-09  
 **Next Audit Required:** When new overlapping components are proposed
 
 ---
@@ -284,7 +285,7 @@ No semantic overlap is allowed between these components without explicit audit. 
 
 ## Audit Completion
 
-**Date:** 2026-01-02  
+**Date:** 2026-02-09  
 **Status:** ✅ **VERIFIED**  
 **Mode:** DOCS (Documentation verification, no refactoring)  
 **Audit Type:** Re-audit (verification of previously established boundaries)  
@@ -299,6 +300,7 @@ No semantic overlap is allowed between these components without explicit audit. 
 - ✅ No violations found in codebase
 - ✅ Usage matrix confirmed accurate
 - ✅ Nesting rules correctly documented and followed
+ - ✅ Section composition-only wording verified in `docs/reference/LAYOUT_USAGE_GUIDE.md` and `src/COMPOSITION/layout/Section/Section.tsx`
+ - ✅ Container sizing note verified in `docs/reference/COMPONENT_USAGE_MATRIX.md` and `docs/canon/CLASSNAME_INLINESTYLE_GOVERNANCE.md`
 
 **Next Steps:** None - boundaries are frozen, verified, and documented. No further action required until new overlapping components are proposed.
-

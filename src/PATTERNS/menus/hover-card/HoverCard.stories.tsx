@@ -365,7 +365,6 @@ export const WithNotifications: Story = {
  * Shows all variants × all sizes grid
  */
 export const Matrix: Story = {
-  name: "Matrix",
   render: () => {
     const variants: Array<
       "primary" | "secondary" | "accent" | "outline" | "ghost" | "link" | "destructive"
@@ -451,7 +450,6 @@ export const Matrix: Story = {
  * Shows all variants × all sizes × all states
  */
 export const States: Story = {
-  name: "States",
   render: () => (
     <div className="space-y-lg">
       <div className="space-y-md">

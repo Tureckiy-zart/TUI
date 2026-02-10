@@ -41,6 +41,7 @@ Category-to-folder mapping:
 - `Portal` (Extension), `Backdrop` (Extension)
 - `Popover` (Extension) (and subcomponents)
 - `Tooltip` (Extension) (and subcomponents)
+Tooltip Root is safe-by-default and wires a provider internally; use `TooltipProvider` only when you need a shared provider scope.
 - `Dropdown` (Extension) (and subcomponents)
 - `ContextMenu` (Foundation) (and subcomponents)
 - `HoverCard` (Extension) (and subcomponents)

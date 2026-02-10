@@ -7,8 +7,8 @@ export {
   type SurfaceElevationLevel,
   type SurfaceElevationRootProps,
   useSurfaceElevation,
-} from "./SurfaceElevation/SurfaceElevation.index";
+} from "./SurfaceElevation";
 export {
   SurfaceElevationCompositionReference,
   type SurfaceElevationCompositionReferenceProps,
-} from "./SurfaceElevationCompositionReference/SurfaceElevationCompositionReference.index";
+} from "./SurfaceElevationCompositionReference";

@@ -7,7 +7,7 @@
  * Reference: docs/reports/audit/FOCUS_GAPS.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";
@@ -363,7 +363,6 @@ export const GAP4_StepperReadOnly: Story = {
  * Summary - All GAPs at a glance
  */
 export const Summary: Story = {
-  name: "Summary",
   render: function SummaryStory() {
     return (
       <Box className="p-lg">

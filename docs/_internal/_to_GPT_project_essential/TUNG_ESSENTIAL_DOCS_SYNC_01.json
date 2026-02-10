@@ -13,12 +13,12 @@
     "Essential files are manually selected for GPT project understanding",
     "Source files may change over time",
     "File selection should adapt to changes in documentation structure",
-    "20 files must be kept in sync (exactly 20 docs, no README)"
+    "19 files must be kept in sync (exactly 19 docs, no README)"
   ],
   "constraints": [
     "Do NOT modify source files",
     "Do NOT change file selection logic without explicit instruction",
-    "Do NOT add files beyond the 20-file limit",
+    "Do NOT add files beyond the 19-file limit",
     "Do NOT include Cursor/AI operational rules (only architectural documents)"
   ],
   "tasks": [
@@ -141,12 +141,6 @@
           "target": "_to_GPT_project_essential/17_FOUNDATION_CONTRACT.md",
           "priority": "CRITICAL",
           "reason": "Foundation component contract and Foundation Enforcement (FINAL/APPLIED)"
-        },
-        {
-          "source": "docs/workflows/foundation/COMPONENT_REFACTORING_PIPELINE.md",
-          "target": "_to_GPT_project_essential/18_COMPONENT_REFACTORING_PIPELINE.md",
-          "priority": "CRITICAL",
-          "reason": "Foundation component lifecycle pipeline (13-step process for Foundation components)"
         },
         {
           "source": "docs/architecture/DOCUMENTATION_CANON_LOCK.md",
@@ -306,7 +300,7 @@
   "reference_documents": {
     "source_directory": "docs/",
     "target_directory": "_to_GPT_project_essential/",
-    "file_count": 20
+    "file_count": 19
   },
   "labels": [
     "documentation",

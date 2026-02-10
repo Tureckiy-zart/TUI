@@ -158,7 +158,7 @@ import { Grid, Flex, Stack, Container, Section } from "@tenerife.music/ui";
 <Grid cols={3} gap={4}>...</Grid>
 <Flex direction="row" gap={4} justify="between">...</Flex>
 <Stack direction="column" gap={3}>...</Stack>
-<Container size="md">...</Container>
+<Container maxWidth="md">...</Container>
 <Section tone="default">...</Section>
 ```
 

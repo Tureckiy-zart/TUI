@@ -14,7 +14,7 @@ import * as React from "react";
 
 import { Card } from "@/COMPOSITION/layout";
 
-import { SurfaceElevation, useSurfaceElevation } from "../SurfaceElevation/SurfaceElevation.index";
+import { SurfaceElevation, useSurfaceElevation } from "../SurfaceElevation";
 import type { SurfaceElevationLevel } from "../SurfaceElevation/SurfaceElevation.types";
 
 export interface SurfaceElevationCompositionReferenceProps {

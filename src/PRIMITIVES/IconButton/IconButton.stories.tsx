@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { IconCheck, IconClose, IconMenu, IconSearch } from "@/icons";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { IconButton } from "./IconButton";
 
 /**

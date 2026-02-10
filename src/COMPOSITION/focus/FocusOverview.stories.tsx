@@ -7,7 +7,7 @@
  * Reference: docs/architecture/FOCUS_AUTHORITY.md
  */
 "use client";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import { Box, Stack } from "@/COMPOSITION/layout";

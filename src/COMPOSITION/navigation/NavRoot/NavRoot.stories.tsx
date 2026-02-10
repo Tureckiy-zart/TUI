@@ -1,4 +1,4 @@
-﻿import type { Meta, StoryObj } from "@storybook/react";
+﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { NavRoot } from "./NavRoot";
 
 const meta: Meta<typeof NavRoot> = {
@@ -9,7 +9,7 @@ const meta: Meta<typeof NavRoot> = {
     docs: {
       description: {
         component:
-          "Pure semantic navigation boundary component with zero logic. Renders a <nav> element with required aria-label for accessibility. Provides a semantic wrapper that enforces accessibility while remaining a pure composition wrapper with no assumptions about navigation structure or styling.",
+          "Pure semantic navigation boundary component with zero logic. Renders a &lt;nav&gt; element with required aria-label for accessibility. Provides a semantic wrapper that enforces accessibility while remaining a pure composition wrapper with no assumptions about navigation structure or styling.",
       },
     },
   },

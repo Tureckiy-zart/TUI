@@ -173,7 +173,7 @@ const renderIconWrapper = (icon: React.ReactNode): React.ReactElement => {
 // ============================================================================
 
 const tabsListVariants = tokenCVA({
-  base: `inline-flex items-center justify-center outline-none data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col`,
+  base: `inline-flex items-center justify-center outline-none data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col ${TABS_TOKENS.list.container.layout}`,
   variants: {
     size: {
       sm: `${TABS_TOKENS.size.sm.list.gap} ${TABS_TOKENS.size.sm.list.padding}`,

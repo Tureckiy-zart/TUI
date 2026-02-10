@@ -1,7 +1,7 @@
 # TUI Extension Layer - Canonical State
 
 **Date:** 2025-12-27  
-**Last Updated:** 2026-01-31  
+**Last Updated:** 2026-02-09  
 **Status:** CANONICAL - SINGLE SOURCE OF TRUTH  
 **Authority:** This document overrides all other sources including file existence, Storybook stories, historical usage, and documentation.
 
@@ -665,6 +665,24 @@ The following components are **ALLOWED** for use. They are exported via `src/ind
       - Token-compliant: 100% token-based implementation (CHIP_TOKENS)
     - **Use Cases:** Tags with deletion, filter chips, multi-select options, clickable categories, display-only status indicators
     - Exports: `Chip`, `ChipProps`, `ChipVariant`, `ChipRadius`, `CHIP_VARIANTS`, `CHIP_RADIUS_VALUES`, `chipVariants`
+
+30. **Image** - `src/COMPOSITION/controls/Image/Image.tsx`
+    - **Status:** ✅ **PROCESS LOCKED** (Component Creation Pipeline C0-C10 Complete, 2026-02-09)
+    - **Lock Date:** 2026-02-09
+    - **Pipeline:** Component Creation Pipeline (C0-C10 complete)
+    - **Creation Report:** `docs/reports/creation/Image_CREATION_REPORT.md`
+    - **Lock Doc:** `docs/architecture/locks/IMAGE_LOCK.md`
+    - **Type:** Extension Layer Primitive - Media
+    - **Category:** controls (primitive)
+    - **Purpose:** Token-driven image primitive with explicit layout contract and safe fallback handling
+    - **Key Characteristics:**
+      - Native `<img>` rendering with explicit object-fit union (`cover | contain | fill | none | scale-down`)
+      - Optional `fill` mode for AspectRatio composition (absolute inset)
+      - Token-driven radius (`none | sm | md | lg | xl | full`)
+      - Fallback slot rendered on load error (optional)
+      - Inline by default (no full-width stretch unless parent defines it)
+    - **Use Cases:** Card/hero media, thumbnails, content imagery, consistent AspectRatio composition
+    - **Exports:** `Image`, `ImageProps`, `ImageFit`, `ImageRadius`
 
 ### Layout Components
 
@@ -1974,7 +1992,7 @@ The following components exist in the codebase but are **RESTRICTED** and **MUST
 36. **Image** - `src/PRIMITIVES/Image/Image.tsx`
     - **Status:** RESTRICTED
     - **Rule:** DO NOT USE - RESTRICTED per API decision (TUI_API_DECISION_PRIMITIVES_EXPORT)
-    - **Rationale:** Domain-specific concerns (skeleton loading, fallback handling) belong in application code, not design system; violates token-driven architecture; image optimization is application-specific
+    - **Rationale:** Legacy primitive path (non-existent in repo). Use Extension `Image` in `src/COMPOSITION/controls/Image/` instead.
 
 ### DO NOT USE - Auth Components
 
@@ -2332,4 +2350,3 @@ This document is **FINAL**. Any changes to this canonical state require explicit
 ---
 
 **End of Canonical State Document**
-
